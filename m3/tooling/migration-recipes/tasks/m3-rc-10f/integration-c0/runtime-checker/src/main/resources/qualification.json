@@ -1,0 +1,73 @@
+{
+  "compositionOrdersSHA256": "2274874cb3dc034215a4a534b1860d3672b1cff8303758c3e13bb294111089a8",
+  "compositionYamlSHA256": "67f214cb2fabb4b79ed269f6e0cb9933d2670102cb788f916b1f7819fd809198",
+  "counts": {
+    "additions": 0,
+    "families": 1,
+    "initialRefusals": 17,
+    "mixedStates": 8,
+    "orderedCompositions": 2,
+    "postScanRefusals": 6,
+    "pureAdditionInputs": 0,
+    "replacements": 3,
+    "targets": 3
+  },
+  "families": [
+    {
+      "crate": "rf0-rfc",
+      "id": "Rfc",
+      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/rf0-rfc/manifest.tsv",
+      "manifestSHA256": "d86481ecdcf2c1fcd771738bf52c28020752e7f09e27790f174bde256b13eb63",
+      "namedRecipe": "com.synexia.m3.Rf0Rfc",
+      "targets": [
+        {
+          "afterBytes": 48860,
+          "afterSHA256": "9407d72859629ff18b1b22796368bda50c9d4e588072aea541c36d44b8bb7dc6",
+          "beforeBytes": 48850,
+          "beforeSHA256": "c9eb51298f2a6a7a1798051c24074cd7f23a8e0805ed6d50420ff3bcd12cacb4",
+          "operation": "REPLACE",
+          "path": "m3/runtime-integration/check-m3string-invariants.py"
+        },
+        {
+          "afterBytes": 778,
+          "afterSHA256": "6d1f13d20bca007ab2d0b358fdee7bf4bdc1d1e6003a87cb9451b5e7c2975194",
+          "beforeBytes": 778,
+          "beforeSHA256": "c0af7bc99ace3f9dcc5e0e9085d9bac66eeb1a497b2153a54bb11ca250916c14",
+          "operation": "REPLACE",
+          "path": "m3/runtime-integration/fix-root-ascii-case/manifest.json"
+        },
+        {
+          "afterBytes": 79672,
+          "afterSHA256": "13e26f49dac9f82ee8a01e828ead985a9896fcea195a27556741a88ea43ba74c",
+          "beforeBytes": 79659,
+          "beforeSHA256": "dab4ded7bc1558a151376bc3b882403f22138981377249d85114fa9186cb7657",
+          "operation": "REPLACE",
+          "path": "m3/tooling/image-gates/current-c0.json"
+        }
+      ],
+      "yamlPath": "META-INF/rewrite/rf0-rfc.yml",
+      "yamlSHA256": "2ab4b2231c8f23d4bacdc7da0bdc385f15a109ffac815db7b3f9431dd35d5f06"
+    }
+  ],
+  "orders": [
+    {
+      "families": [
+        "Rfc"
+      ],
+      "id": "Forward",
+      "recipe": "com.synexia.m3.Rf0Forward"
+    },
+    {
+      "families": [
+        "Rfc"
+      ],
+      "id": "Reverse",
+      "recipe": "com.synexia.m3.Rf0Reverse"
+    }
+  ],
+  "ownerSHA256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+  "schema": "synexia.rf0.qualification/1",
+  "sourceCommit": "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c",
+  "targetCommit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "targetTree": "491bbd80a51483d0710fc12c1bad3a037b385ba0"
+}

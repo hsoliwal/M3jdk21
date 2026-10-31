@@ -1,0 +1,2 @@
+# path	before-sha256	after-sha256	template
+src/java.base/share/classes/java/lang/MIndexString.java	88f4d3b3b04e41c34f171a38f30a320af91561ba72fa89a35750e1da7b9854c1	1399b110a329f39ee1c40df2d9bb9af216d0e512a343b5fcf641fb67b39a3c87	MIndexString.java.txt

@@ -1,0 +1,563 @@
+{
+  "schema": 1,
+  "donor_commit": "289e32f130c9c8e4a1cf0edc1066327d699393bf",
+  "target_module": "jdk.m3fs",
+  "target_artifact": "com.m3:m3-fs:0.1.0-SNAPSHOT",
+  "target_package": "com.m3.fs",
+  "notes": [
+    "This is a source adaptation map, not a test-pass manifest.",
+    "Multiple exact donor helper contracts converge into bounded receiver format decoders; no external Synexia runtime dependency remains.",
+    "New receiver correctness tests and helpers without donor source atoms are owned by the receiver and appear in the canonical recipe postimage."
+  ],
+  "mappings": [
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3ContentId.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3ContentId.java"
+      ],
+      "adaptation": "Retain format/API value semantics; metadata owner internals use primitive/array columns and public API views where applicable."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3DirectoryContentStore.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3DirectoryContentStore.java"
+      ],
+      "adaptation": "Retain content-addressed publication and mapped storage, use raw ID helper paths and checked durable directory/file flushes."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3FileManifest.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3FileManifest.java",
+        "m3/fs/src/main/java/com/m3/fs/M3RefTable.java",
+        "m3/fs/src/main/java/com/m3/fs/M3IdPairs.java",
+        "m3/fs/src/main/java/com/m3/fs/M3Columns.java"
+      ],
+      "adaptation": "Retain format/API value semantics; metadata owner internals use primitive/array columns and public API views where applicable."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3FileSystemStore.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3FileSystemStore.java",
+        "m3/fs/src/main/java/com/m3/fs/M3ColdFileImage.java",
+        "m3/fs/src/main/java/com/m3/fs/M3FileSourceFactsImage.java"
+      ],
+      "adaptation": "Retain content-addressed generation store; durable atomic HEAD CAS; close cold token-range hashing dependencies with bounded raw-byte streaming and format validators."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3FsPrecomputeBundle.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3FsPrecomputeBundle.java",
+        "m3/fs/src/main/java/com/m3/fs/M3PreparedByteSegments.java",
+        "m3/fs/src/main/java/com/m3/fs/M3PreparedBytePatternMachine.java"
+      ],
+      "adaptation": "Flatten mapped lane metadata and identities; accept JDK-owned primitive prepared-state interfaces rather than an external GPU runtime dependency."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3FsPrecomputeCatalog.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3FsPrecomputeCatalog.java",
+        "m3/fs/src/main/java/com/m3/fs/M3Columns.java"
+      ],
+      "adaptation": "Retain format/API value semantics; metadata owner internals use primitive/array columns and public API views where applicable."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3FsPrecomputeWriter.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3FsPrecomputeWriter.java"
+      ],
+      "adaptation": "Preserve canonical prepared-state lane encodings and write primitive inputs without retained per-lane reference graphs."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3GenerationRoot.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3GenerationRoot.java",
+        "m3/fs/src/main/java/com/m3/fs/M3IdTable.java",
+        "m3/fs/src/main/java/com/m3/fs/M3Columns.java"
+      ],
+      "adaptation": "Retain format/API value semantics; metadata owner internals use primitive/array columns and public API views where applicable."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3MappedObject.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3MappedObject.java"
+      ],
+      "adaptation": "Retain mapped image and raw ID/kind columns; materialize public ObjectRef/ContentId only in reference()."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3NativeContent.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3NativeContent.java"
+      ],
+      "adaptation": "Reuse FS native loader; retain native direct-byte/UTF16 primitives, fix position/endian and REQUIRED dispatch semantics."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3ObjectKind.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3ObjectKind.java"
+      ],
+      "adaptation": "Retain format/API value semantics; metadata owner internals use primitive/array columns and public API views where applicable."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3ObjectRef.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3ObjectRef.java"
+      ],
+      "adaptation": "Retain format/API value semantics; metadata owner internals use primitive/array columns and public API views where applicable."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3PrecomputeCache.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3PrecomputeCache.java"
+      ],
+      "adaptation": "Retain cache publication and lookup contracts through packed IDs and raw result decoding; durable create-only publication."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3PrecomputeKey.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3PrecomputeKey.java",
+        "m3/fs/src/main/java/com/m3/fs/M3IdPairs.java",
+        "m3/fs/src/main/java/com/m3/fs/M3Columns.java"
+      ],
+      "adaptation": "Retain format/API value semantics; metadata owner internals use primitive/array columns and public API views where applicable."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3PrecomputeResult.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3PrecomputeResult.java"
+      ],
+      "adaptation": "Retain format/API value semantics; metadata owner internals use primitive/array columns and public API views where applicable."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/MIndexFileSystem.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3FS.java",
+        "m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java"
+      ],
+      "adaptation": "Retain native filesystem facade capabilities; primitive directory columns replace retained per-entry Stat/DirEntry graphs. Add atomic replacement, metadata, sparse, checked-inode I/O and atomic no-replace rename bindings qualified separately."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/MIndexFsFeature.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3FsFeature.java"
+      ],
+      "adaptation": "Retain original semantic feature identities; append native implemented and tested capabilities."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/MIndexFsMIndexImage.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3FsIndexImage.java"
+      ],
+      "adaptation": "Preserve native image format using frozen UTF16 and token-identity array lanes. Public CharSequence input replaces external runtime MIndexString ownership."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/MIndexFsNative.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3FsNative.java"
+      ],
+      "adaptation": "Rename JNI owner and native loader to M3JDK21 package; preserve donor methods and bind qualified native extensions."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/fs/MIndexSnapshotStore.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3SnapshotStore.java",
+        "m3/fs/src/main/java/com/m3/fs/M3FsProgress.java"
+      ],
+      "adaptation": "Preserve durable snapshot store format and locking; retain UUID identity as two longs and callback progress through JDK functions."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FileSystemStoreHeadGenerationPrecomputeTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FileSystemStoreHeadGenerationPrecomputeTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FsCatalogVarargsCompatibilityTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsCatalogVarargsCompatibilityTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FsCompactAsciiDfaTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsCompactAsciiDfaTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FsGpuPipelineMappedSetTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsGpuPipelineMappedSetTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FsMappedBundleViewTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsMappedBundleViewTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FsPrecomputeBundleTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsPrecomputeBundleTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FsPrecomputePipelineManifestTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsPrecomputePipelineManifestTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3FsPreparedSearchStateTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsPreparedSearchStateTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3GenerationRootDirectoryIndexTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3GenerationRootDirectoryIndexTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3GpuGrepSegmentsRuntimeTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3GpuGrepSegmentsRuntimeTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3MIndexFileTokenRangeSha256Test.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3MIndexFileTokenRangeSha256Test.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3MappedStorageChecks.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3MappedStorageChecks.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3MappedStorageTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3MappedStorageTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3PrecomputeBundleTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3PrecomputeBundleTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/M3SegmentedUtf16FsTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3SegmentedUtf16FsTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFileSystemNativeTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FSNativeTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFileSystemScrubTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FSScrubTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsFeatureTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsFeatureTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsHotPathSelfTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsHotPathSelfTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsHotPathTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsHotPathTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsIndexedSelfTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsIndexedSelfTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsIndexedTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsIndexedTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsNativeSemanticTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsNativeSemanticTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsReadSnapshotSelfTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsReadSnapshotSelfTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsSnapshotViewSelfTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsSnapshotViewSelfTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsSnapshotViewTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsSnapshotViewTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexFsSparseFeatureTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3FsSparseFeatureTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/java/com/synexia/indexstring/fs/MIndexSnapshotStoreSelfTest.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/java/com/m3/fs/M3SnapshotStoreSelfTest.java"
+      ],
+      "adaptation": "Retained test intent adapted to M3JDK21 package and local primitive fixtures; current execution receipts are separately recorded."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/test/resources/m3-fs-safevarargs/M3FsPrecomputeCatalog.java"
+      ],
+      "targets": [
+        "m3/fs/src/test/resources/m3-fs-safevarargs/M3FsPrecomputeCatalog.java"
+      ],
+      "adaptation": "Exact sealed 12,460-byte old catalogue fixture remains byte-for-byte unchanged; isolated test compilation translates only its package in memory."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/verification/m3fs/M3FileSystemSelfTest.java"
+      ],
+      "targets": [],
+      "adaptation": "Inspected historical qualification reference only. This legacy Synexia harness is not a receiver production source or a fresh-run evidence claim."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/verification/mindexfs-hotpath/verify.sh"
+      ],
+      "targets": [],
+      "adaptation": "Inspected historical qualification reference only. This legacy Synexia harness is not a receiver production source or a fresh-run evidence claim."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/verification/mindexfs-indexed-operations/verify.sh"
+      ],
+      "targets": [],
+      "adaptation": "Inspected historical qualification reference only. This legacy Synexia harness is not a receiver production source or a fresh-run evidence claim."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/verification/mindexfs-read-snapshots/verify.sh"
+      ],
+      "targets": [],
+      "adaptation": "Inspected historical qualification reference only. This legacy Synexia harness is not a receiver production source or a fresh-run evidence claim."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileImage.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MappedMIndexFile.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenKind.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexId.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexStringHash.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3ColdFileImage.java",
+        "m3/fs/src/main/java/com/m3/fs/M3FileSystemStore.java"
+      ],
+      "adaptation": "Converge exact SMFILE01 shape, immutable raw token identity and language/fingerprint validation into a read-only column decoder. Do not import the external IndexResolver, mapped-file runtime owner, mutable lexicon, or a second String/index engine."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFactsImage.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileAttributes.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileByteFacts.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileByteFactsSnapshot.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFacts.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFactsSnapshot.java",
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFactsKey.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3FileSourceFactsImage.java",
+        "m3/fs/src/main/java/com/m3/fs/M3FileSystemStore.java"
+      ],
+      "adaptation": "Converge SMFSA001 checksum/geometry, before/after attribute equality, raw-ID/size, semantic fingerprint, byte facts and offset validation into one read-only decoder. Preserve exact format acceptance and original raw-byte token ranges through bounded primitive offset arrays; public snapshot object graphs are not recreated internally."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenRange.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3FileTokenRange.java"
+      ],
+      "adaptation": "Rename public immutable half-open token-range value. Range objects are public API inputs/results only."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenRangeSha256.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3FileTokenRangeSha256.java"
+      ],
+      "adaptation": "Rename public range-digest result value; internal result storage is packed raw digest bytes and scalar arrays."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3FsRegexImage.java"
+      ],
+      "adaptation": "Extract the frozen native regex image, semantics and validation contract only. The general donor compiler is not copied. Native-supported execution consumes the existing image plane; exact Pattern fallback runs on the target JDK and non-JDK semantics require an explicit authoritative fallback."
+    },
+    {
+      "donors": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringBitOps.java"
+      ],
+      "targets": [
+        "m3/fs/src/main/java/com/m3/fs/M3FsIndexImage.java"
+      ],
+      "adaptation": "Reuse the exact UTF16 presence-signature primitive relevant to persisted FS text images, without importing the external MIndexString runtime owner."
+    }
+  ]
+}

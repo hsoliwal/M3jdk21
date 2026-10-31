@@ -1,0 +1,48 @@
+{
+  "schema": "M3JDK21_CANONICAL_OWNER_RECEIPT_V1",
+  "mapping_id": "m3.collections.evicting-queue.owner-naming",
+  "product": "M3JDK21 standalone integrated Java 21 SDK",
+  "legacy_owner": {
+    "class": "com.m3.collections.guava.M3EvictingQueue",
+    "path": "m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java",
+    "sha256": "3fb021a20b4c356283f2b8444647333a4399e9b00528a2bf519787e602dd1166",
+    "serial_version_uid": 0,
+    "disposition": "byte-for-byte frozen public Serializable compatibility owner"
+  },
+  "canonical_owner": {
+    "class": "com.m3.collections.queue.M3EvictingQueue",
+    "path": "m3/collections/implementations/evicting-queue/src/main/java/com/m3/collections/queue/M3EvictingQueue.java",
+    "sha256": "77ba9ea62487377c2cab36d147e38bbd5f4cfc9ca03dd68b4a614a851c168317",
+    "serial_version_uid": 0,
+    "disposition": "additive first-party proving candidate; not installed java.base"
+  },
+  "recipe": {
+    "repo": "hsoliwal/com.synexia",
+    "id": "com.synexia.rewrite.M3Jdk21EvictingQueueCanonicalOwner",
+    "engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "crate": "m3jdk21-evicting-queue-canonical-owner",
+    "requirement": "ABSENT target + exact legacy preimage + LST parse + fixed point and drift refusal"
+  },
+  "local_proof": {
+    "java_version": "17.0.20",
+    "strict_compile": "PASS",
+    "behavioral_transcript": "PASS",
+    "public_methods": "PASS",
+    "old_new_binary_stream": "PASS after descriptor substitution",
+    "normalized_stream_sha256": "5d5f5014f1b4cdb3a1003a4af7fd513f5cbf29d5cd6033bd1e4f6d95f1a080cf"
+  },
+  "pending": [
+    "Hosted Java21 Maven and public naming workflows",
+    "Synexia OpenRewrite Java21 replay",
+    "Repo-wide import, reflection, service, JNI and client closure",
+    "Installed SDK/HotSpot jtreg and performance admission"
+  ],
+  "note": "No vendor API renamed; old type is retained unchanged. The exact duplicated body is a temporary compatibility migration, not an approved permanent second collection implementation.",
+  "authority_map": {
+    "path": "m3/docs/name-mapping.json",
+    "git_blob_sha1": "fbdde4dc25d9b63d1f6bde9cd48169debe4bdf7b",
+    "proposal_status": "review-only additive target; downstream INTERNAL_MOVE still QUEUED"
+  },
+  "product_pr": "https://github.com/hsoliwal/M3jdk21/pull/1886",
+  "recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/13228"
+}

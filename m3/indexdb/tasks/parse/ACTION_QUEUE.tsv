@@ -1,0 +1,7 @@
+priority	owner	state	exit
+P0	this_DB_packet	VERIFY	DB tests, actual recipe tests, source restore receipts and unchanged99gate
+P0	m3/indexdb	OPEN	Durability/concurrent-writer/schema/paging and resource-budget proofs are separate from blob integrity
+P1	existing_partial_AST_owners	OPEN	Parser/build/classpath identity, invalidation, lossless edit rehydration and cross-JVM persistence
+P1	existing_backport_queue	OPEN	Compatible JEP/non-JEP implementation plus exact JDK build/jtreg proof
+P1	existing_framework_templates	OPEN	OrdinaryJava21 application capabilities; no replacement-JDK prerequisite
+P1	canonical_source_reconciliation	OPEN	Merged history must be checked against actual source content before any completion claim

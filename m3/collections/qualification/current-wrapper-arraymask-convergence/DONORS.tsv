@@ -1,0 +1,8 @@
+target	product_pr	product_head	canonical_synexia	donor_license	post_git_blob
+src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java	current convergence	integration	current convergence recipe	GPL-2.0-only WITH Classpath-exception-2.0	50cdaedb8a4d5b09191e40ff3c5c05e130a87afc
+src/java.base/share/classes/java/util/CollectionViews.java	#1891	98f2bc1d58cb40eb7c17870dfbde0ae9e2f3be77	#13244	JDK owner terms	8840da98c37e2af8da36c63f2cacd6bdaf1cb0a8
+m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	#2033	a30222665fb10321c7ffdbd55fc154a70c804924	#13672	Apache-2.0 OR EPL-2.0	45ad6df3a51e83c67dc70de7c7acd82bec2305d3
+m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java	#2036	87601c7903800e3767b783cbb7aba1aac9bc937d	#13698	product source terms	2b010396590ab85a4fa38ea54d9277875371a7f2
+m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java	#2038	5cebab580264724093bb80876caeca962c2ce0f5	#13704	Apache-2.0 OR EPL-2.0	472e02d96401e04fd22637a7e412ccaed2abd0c6
+m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java	#2024	e15ac4c8cf1e0dfb255a32066709860a84a5c23b	#13635	product source terms	3c0d4b1629545d54c7519216618ce1a32990f327
+m3/collections/src/main/java/com/m3/collections/M3NativeFiveLibrarySdk.java	#2012	1924a2484772ab756df0ab1970c0c73cfe1353a1	#13607/#13625	product source terms	ed42a45f330b9b99272349644c3796174e81404a

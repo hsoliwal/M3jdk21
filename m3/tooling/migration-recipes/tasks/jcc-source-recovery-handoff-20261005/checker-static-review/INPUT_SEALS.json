@@ -1,0 +1,166 @@
+{
+  "all_stable_between_reads": true,
+  "inputs": [
+    {
+      "bytes": 4,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+      "sha256": "823a8864668594f33fd21b51f42c08643d90be2f0d903653175047f5d0298e6c"
+    },
+    {
+      "bytes": 22,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+      "sha256": "7eb80c376a9681170665f5c0d8b86214e9b44aa6f1d08690a83b26aeba536f3c"
+    },
+    {
+      "bytes": 42548,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/PUBLICATION_MANIFEST.json",
+      "sha256": "7facad2750623bdfb10b16bdcfb9b8b508d94297fd3b9d90f7a37f6a19694a6d"
+    },
+    {
+      "bytes": 88510,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/PUBLICATION_MANIFEST.json",
+      "sha256": "590f2f8d9c021d8f416e1f8682f1cac83f795967e9f1e0d3980a2bc4144ac815"
+    },
+    {
+      "bytes": 16423,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/docs/jcc-source-handoff.md",
+      "sha256": "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0"
+    },
+    {
+      "bytes": 236215,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/docs/name-mapping.json",
+      "sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3"
+    },
+    {
+      "bytes": 107597,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "sha256": "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12"
+    },
+    {
+      "bytes": 92103,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef"
+    },
+    {
+      "bytes": 83448,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/FINAL_SOURCE_INPUTS_V3.json",
+      "sha256": "df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5"
+    },
+    {
+      "bytes": 40725,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/check_references_v3.py",
+      "sha256": "521c18944616fe46a3e347860c25a7283e1b74674c594e40996c787e01e96b81"
+    },
+    {
+      "bytes": 951,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/custody-output-subreview/FILE_SEALS.json",
+      "sha256": "9f0a00ac64a73aeed9ff8b480190c4ec06174a3f8107c47070a492f449f22843"
+    },
+    {
+      "bytes": 1457,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/custody-output-subreview/INPUT_SEALS.json",
+      "sha256": "ae513e9a5acbc1fb76bf6741618c7ceb9f30126441332f60c581d7dc922bcecb"
+    },
+    {
+      "bytes": 6397,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/custody-output-subreview/REVIEW.md",
+      "sha256": "50b226e31a609a30ee644790f84e8966234a8a4f163b5a1084f94ce7b7554711"
+    },
+    {
+      "bytes": 374,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/custody-output-subreview/WRITE_SURFACE.json",
+      "sha256": "72cd8ccf7e4ee74be62760c1359f94cb2e1601f56cb1aef9b2e4a3a0165e8613"
+    },
+    {
+      "bytes": 470167,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/current-context/CONTEXT_REFERENCES.json",
+      "sha256": "fbc460874aeb04a688ad0ed9b47ad8e3f3b37f88af09d0f32ecfeedc2827fbed"
+    },
+    {
+      "bytes": 60890,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/ADDITIONAL_RECEIPTS.json",
+      "sha256": "30cc1c07b3aac8f1a6662c494c0cbbc76c22bc6a4fdbcbb04770236fd2384907"
+    },
+    {
+      "bytes": 260154,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-final-evidence/CUSTODY_EVIDENCE_INDEX.json",
+      "sha256": "8e478debeac87c46d01d57cf1038b2195005f9f6af249b25d97f1074ef26b38b"
+    },
+    {
+      "bytes": 6004,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/custody-v3-proposal/LOCAL_EXPECTATIONS.json",
+      "sha256": "548b98ef8531b369f4c378bfdebf681e514a5b46da15bcf32db9ab491a7ce8d5"
+    },
+    {
+      "bytes": 251524,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after00-name-mapping.json.txt",
+      "sha256": "eb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e"
+    },
+    {
+      "bytes": 29680,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after01-jcc-source-handoff.md.txt",
+      "sha256": "d5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d"
+    },
+    {
+      "bytes": 167811,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after02-source-destination-bindings.json.txt",
+      "sha256": "f8b27e3582eb494af2c8dd47225976f974be6edc2f6c26313975064d48739497"
+    },
+    {
+      "bytes": 107597,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after03-root-coverage-obligations.tsv.txt",
+      "sha256": "1c4eedbf3f155bac469693da312c577d26999e7776ca1f85870f6cce125f1e35"
+    },
+    {
+      "bytes": 236215,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before00-name-mapping.json.txt",
+      "sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3"
+    },
+    {
+      "bytes": 16423,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before01-jcc-source-handoff.md.txt",
+      "sha256": "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0"
+    },
+    {
+      "bytes": 92103,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before02-source-destination-bindings.json.txt",
+      "sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef"
+    },
+    {
+      "bytes": 107597,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before03-root-coverage-obligations.tsv.txt",
+      "sha256": "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12"
+    },
+    {
+      "bytes": 3390,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/plan.json",
+      "sha256": "272a4b6a2f6d39a0d7baf2d4a104d671125fe471a2a3351cd321315e6be5d499"
+    },
+    {
+      "bytes": 2151,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/reference-audit-draft-v3/READINESS_T01.json",
+      "sha256": "7d238a9c1a4b42ae12811fe85b8d2e66e0aeacdd8e982a3aa16ccd1e82c30561"
+    },
+    {
+      "bytes": 13664,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/run_verification_v3.py",
+      "sha256": "496e1877914e15f4342111c37020a2d58790038516b62872680427e585b21f50"
+    },
+    {
+      "bytes": 70709,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/ROOT_ACCOUNTING.json",
+      "sha256": "55610f52b7b1e01ee15999969cc385616ff2e43f734e589ff61c750c5ab3c845"
+    },
+    {
+      "bytes": 419637,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/SOURCE_FIELDS_AND_PROOFS.json",
+      "sha256": "7b5e197da5e2645efb87345e2abf92dcd8071993ff308c8fa0bca0511d00c52e"
+    },
+    {
+      "bytes": 119981,
+      "path": "/workspace/scratch/c0bcaa06df78/m3-mastery/inventory/final-integration/build-declarations/root-pom.xml",
+      "sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab"
+    }
+  ],
+  "schema": "jcc-e4-reference-checker-static-inputs/1"
+}

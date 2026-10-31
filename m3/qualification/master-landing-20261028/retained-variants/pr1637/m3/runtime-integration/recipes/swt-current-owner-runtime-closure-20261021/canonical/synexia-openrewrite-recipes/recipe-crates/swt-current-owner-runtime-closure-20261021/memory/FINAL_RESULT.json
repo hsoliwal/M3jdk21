@@ -1,0 +1,50 @@
+{
+  "schema": "SWT_CURRENT_OWNER_CORRECTION_MEMORY_FINAL/1",
+  "status": "PASS",
+  "profile": "swt-current-owner-runtime-closure-20261021/1.0",
+  "event_count": 3,
+  "events": [
+    "a67a979a5c8b70422ebb3ae1de5b1ba13e4569de0d68740f4ab570f929b9d0af",
+    "c8b07c26085cc710f66c25bb22c82d601814643e2bf4e391410c015967f73a5d",
+    "cdbed0ea1d2dbe333043c8ea9328f27a0354ccb620f2d531a4e96989e12e1d3b"
+  ],
+  "conformance_checks": 129,
+  "control_cases": 32,
+  "actual_event_integrity_checks": 3,
+  "unique_event_artifacts_verified": 25,
+  "admission": "PENDING",
+  "profile_receipt": {
+    "path": "memory/PROFILE.md",
+    "sha256": "0b3625642acfcacb5fd96c867ace58c43ba6e5ac4d3176a2c3a55e7a04486f4e"
+  },
+  "retrieval": {
+    "path": "memory/LESSONS.md",
+    "sha256": "404b262ebcf676951801a69131b5cbdeac7ef8a18aaefe8796e457b0aee5e621"
+  },
+  "index": {
+    "path": "memory/INDEX.json",
+    "sha256": "867d6dfe8087aae442408653795221bcece9afbb2383ba65eddb6fd54d4f2fc4"
+  },
+  "helper_lineage": {
+    "path": "memory/HELPER_LINEAGE.json",
+    "sha256": "f249b0a6bb57663b5109869e01a6c30be20ee0416cc3031839fa48e1e067c320"
+  },
+  "profile_conformance": {
+    "path": "proof/memory-conformance-001/RESULT.json",
+    "sha256": "4cecba20e8faa6c807eb6682afd6c73de0e1c8fab30363a39a750866fd6b0a84"
+  },
+  "event_integrity": {
+    "path": "proof/memory-integrity-001/RESULT.json",
+    "sha256": "ddff5489e50878ce79b90f1371d81213b1f3ba3a6623ced44e2f5c5df327e33c"
+  },
+  "new_canonical_recipe_sdk": {
+    "path": "proof/sdk-001-offline/RESULT.json",
+    "sha256": "a950522f8342e90af73568ae052eca44f776d377a57e4a392477ec5ea95a5098"
+  },
+  "actual_emitted_receiver": {
+    "path": "proof/receiver-runtime-001/RESULT.json",
+    "sha256": "54a0a9db3849ee73273e61b344009eea3bf4acacba4bc45b6c2ad8170398f285"
+  },
+  "qualified_sdk_source_inputs_unchanged": true,
+  "scope": "Independent closed-profile conformance and immutable evidence integrity. Runtime proof remains the actual owning receipts; no product or hosted admission is granted."
+}

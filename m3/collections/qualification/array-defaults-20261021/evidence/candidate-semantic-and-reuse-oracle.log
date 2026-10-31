@@ -1,0 +1,1 @@
+{"schema":"m3.sorted-batch-oracle.v1","status":"PASS","mode":"expect-reuse","seed":"0x4d334c4c42415443","batch_calls":17395,"exhaustive_cases":16128,"mixed_steps":5000,"invalid_calls":407,"callback_cases":5,"reuse_checks":16774,"growth_checks":621,"assertions":1878160}

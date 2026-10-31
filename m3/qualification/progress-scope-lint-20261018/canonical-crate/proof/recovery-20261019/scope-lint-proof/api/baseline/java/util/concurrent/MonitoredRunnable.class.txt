@@ -1,0 +1,4 @@
+public interface java.util.concurrent.MonitoredRunnable extends java.lang.Runnable {
+  public abstract void runMonitored(java.util.concurrent.ProgressMonitor);
+  public default void run();
+}

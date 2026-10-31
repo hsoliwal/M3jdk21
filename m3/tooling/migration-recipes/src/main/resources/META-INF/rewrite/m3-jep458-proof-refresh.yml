@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.Jep458ProofRefresh
+displayName: Refresh JEP 458 current-master proof
+description: >
+  Source-sealed proof-only refresh for the already-materialized JEP 458 packet.
+  Product source remains owned by M3Jep458BackportRecipe.
+recipeList:
+  - com.m3.rewrite.backport.M3Jep458ProofRefreshRecipe

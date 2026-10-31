@@ -1,0 +1,15 @@
+key	value
+product	hsoliwal/M3jdk21
+product_base	065e3626aac2de62d2f531aec3bed2fca533c9f9
+canonical_recipe_commit	f530b310ae87c34a21e55b53a37b7fed4143d360
+canonical_recipe_repository	hsoliwal/com.synexia
+canonical_crate	synexia-openrewrite-recipes/recipes/keyed-api-20261015/collections-array-masks-20261020
+mode	apply_candidate_for_review
+workers	1
+shards	1
+public_api	LOCKED
+external_behavior	LOCKED
+verify_order	diff,source_lint,compile,tests,runtime
+new_runtime_layer	NONE
+merge	NOT_EXECUTED
+receiving_phase_advance	NONE

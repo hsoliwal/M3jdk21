@@ -1,0 +1,3 @@
+module	descriptor_source	result
+org.slf4j	published	JMOD
+org.xerial.sqlitejdbc	published	JMOD

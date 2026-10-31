@@ -1,0 +1,1289 @@
+{
+  "schema": "M3_INTEGRATED_RECOVERY_SDK_ATTEMPT/1",
+  "task": "m3-integrated-refinement-20261021",
+  "status": "PASS",
+  "scope": "source-replay-only",
+  "dependency_lane": "offline-cached-artifacts",
+  "full_source_vendored_reactor": "NOT_RUN",
+  "receiving_runtime_gates": "SEPARATE",
+  "started_at": "2026-10-21T01:36:45.721265+00:00",
+  "duration_seconds": "80.385",
+  "exit_code": 0,
+  "timed_out": false,
+  "command": [
+    "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-f",
+    "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/pom.xml",
+    "-Dmaven.repo.local=/tmp/m3-build-m2",
+    "-Dparser.classpath=/workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-01/resource-classes:/workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-01/framework-classes:/workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-plus-core-02/core-runtime-classes:/tmp/m3-resource-m2/com/m3/m3-collections/0.1.0-SNAPSHOT/m3-collections-0.1.0-SNAPSHOT.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.core.runtime/3.35.0/org.eclipse.core.runtime-3.35.0.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.osgi/3.24.300/org.eclipse.osgi-3.24.300.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.equinox.common/3.21.0/org.eclipse.equinox.common-3.21.0.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.core.jobs/3.15.900/org.eclipse.core.jobs-3.15.900.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.equinox.preferences/3.12.100/org.eclipse.equinox.preferences-3.12.100.jar:/tmp/m3-resource-m2/org/osgi/org.osgi.service.prefs/1.1.2/org.osgi.service.prefs-1.1.2.jar:/tmp/m3-resource-m2/org/osgi/osgi.annotation/8.0.1/osgi.annotation-8.0.1.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.core.contenttype/3.9.900/org.eclipse.core.contenttype-3.9.900.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.equinox.app/1.7.600/org.eclipse.equinox.app-1.7.600.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.core.resources/3.24.0/org.eclipse.core.resources-3.24.0.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.core.expressions/3.9.600/org.eclipse.core.expressions-3.9.600.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.core.filesystem/1.11.400/org.eclipse.core.filesystem-1.11.400.jar:/tmp/m3-resource-m2/net/java/dev/jna/jna-platform/5.18.1/jna-platform-5.18.1.jar:/tmp/m3-resource-m2/net/java/dev/jna/jna/5.18.1/jna-5.18.1.jar:/tmp/m3-resource-m2/org/eclipse/platform/org.eclipse.equinox.registry/3.12.600/org.eclipse.equinox.registry-3.12.600.jar:/tmp/m3-resource-m2/org/osgi/org.osgi.framework/1.10.0/org.osgi.framework-1.10.0.jar:/tmp/m3-resource-m2/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/tmp/m3-resource-m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/tmp/m3-resource-m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/tmp/m3-resource-m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/tmp/m3-resource-m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/tmp/m3-resource-m2/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/tmp/m3-resource-m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/tmp/m3-resource-m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar",
+    "-o",
+    "test"
+  ],
+  "cwd": "/workspace/scratch/206049dfb270/synexia",
+  "java_release_sha256": "e5a4248b028f6ecd6d43fb1a57fff0f900ef62e026501e95875a60b0cf904338",
+  "source_inputs_unchanged": true,
+  "compiled_parser_dependencies_unchanged": true,
+  "suites": [
+    {
+      "name": "com.synexia.rewrite.M3IntegratedRefinementRecipeTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "78.079"
+    },
+    {
+      "name": "com.synexia.rewrite.memory.M3CorrectionMemoryConformanceTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.134"
+    }
+  ],
+  "counts": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "artifacts": [
+    {
+      "path": "PARSER_DEPENDENCIES.json",
+      "sha256": "8b3b24f11b557f4c2c5b08921e598299c1bfe3cda0c9d68b99b1f03a34c81cb1",
+      "bytes": 106503
+    },
+    {
+      "path": "PARSER_DEPENDENCIES_AFTER.json",
+      "sha256": "8b3b24f11b557f4c2c5b08921e598299c1bfe3cda0c9d68b99b1f03a34c81cb1",
+      "bytes": 106503
+    },
+    {
+      "path": "SOURCE_INPUTS.json",
+      "sha256": "e2e4ea43e11df0b54be9fd441c68e1dfb13926b88c0f7163c9c2dc75db76e3da",
+      "bytes": 35920
+    },
+    {
+      "path": "SOURCE_INPUTS_AFTER.json",
+      "sha256": "e2e4ea43e11df0b54be9fd441c68e1dfb13926b88c0f7163c9c2dc75db76e3da",
+      "bytes": 35920
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/SOURCE_SEALS.json",
+      "sha256": "b931ab0a97eb0b5b708f549c2ee79c321ee3ad62d8c27c1f1cb23006c964bc68",
+      "bytes": 20087
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/apply_receiver.py",
+      "sha256": "4547d44e180aba8678a86df1d4c562316c3c0a32c936f1df248d075397132c56",
+      "bytes": 7338
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/attribution/DependencyCustody.java",
+      "sha256": "5c361bdc80b6d3e3e65d32a71c60e51a54aa2761e96cf0080091c6489536436f",
+      "bytes": 723
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/attribution/expected-methods.txt",
+      "sha256": "642ce0b6f79cfab0a7a1e48e78a6b7666dfcf11e079c30256e58b4de1d526df4",
+      "bytes": 403
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/phases.tsv",
+      "sha256": "acea35f501bf3366557f0be28110f4654b22d60346e8caeca363b8362923bc2c",
+      "bytes": 2072
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/pom.xml",
+      "sha256": "934fb8b8fdad025d77f41166306de9f1148fd786a81db811da85b301c6af0bd1",
+      "bytes": 4045
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/.github/workflows/m3-collections.yml",
+      "sha256": "ff90dcce42c80cc940878c8c5dcde0a14a8def69d08dbc7aadb174b9ad2bb649",
+      "bytes": 7464
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/.github/workflows/m3-eclipse-framework-forward-20261017.yml",
+      "sha256": "f99b655ed4ab286724723ee855fc497b7a63287ab9e8bf79adf3b2389077f77d",
+      "bytes": 5067
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/.github/workflows/m3-object-progress-candidate.yml",
+      "sha256": "1b28049139575d9587ad48f72d5dfd5f2be89dd4027f3945daaa628c6bcb80eb",
+      "bytes": 1203
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "sha256": "f6a76836d96bc6d41033ce94b0aa760fd5f68ebcb903396bb5f6eb1618d0931a",
+      "bytes": 11623
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "sha256": "d13c5c5db3e07e5c66f8857f2c74e07d2ba60babb7d2529bd397e61894881fd0",
+      "bytes": 4764
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
+      "bytes": 31807
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "sha256": "d6f1f6f1ffb2ad2ef43f97426f05d8e4ab202dcec5b51bcc4a3151003d2837b7",
+      "bytes": 14233
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/pom.xml",
+      "sha256": "6dea6636a98ea1e2a12e3c7ab542a3bd16e19a015a08e8a2239f9bf87e034f91",
+      "bytes": 2966
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseBundleSnapshot.java",
+      "sha256": "361cd096ce70bcea50080351f20c06cf989502eb62fe489b0a13faed93c63bea",
+      "bytes": 2710
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseExtensionSnapshot.java",
+      "sha256": "4bfab762951ed0770dd95dfcb85db2fece0051d656e5bc2cf87ea95ef32d3963",
+      "bytes": 2699
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseIndexedSnapshot.java",
+      "sha256": "fd7527ce9d29e7fc15447421607e2cec5f4fc511248dd206874b7026b6757313",
+      "bytes": 3020
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java",
+      "sha256": "94fc5f6ac7d87439758e8dc6544754e0a77ebbff52d36bbb8ae18a6447aa555c",
+      "bytes": 3602
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java",
+      "sha256": "f2ad7045a07c6905d2f540e9863851fc7ae95b04d867a11f8e4927c13f0a71c4",
+      "bytes": 2909
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeServices.java",
+      "sha256": "f892959825f72a922ea377052f67a436221c0aa854738149b8c3fe0f0b76baea",
+      "bytes": 501
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java",
+      "sha256": "2805f91b08f95e42f3fb9e0e6390de3174e5bf71fc761bc09210bb9ca9b6d781",
+      "bytes": 4071
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseFrameworkSnapshotsTest.java",
+      "sha256": "cafda481d205e514d3ceb2187f2219301379b7075113e7b6e72946b012384a51",
+      "bytes": 7884
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java",
+      "sha256": "e7026e6b0b56aa71aa6a0e617a29ccf8df603d3656ed6ae6966c9662d3b6167d",
+      "bytes": 3128
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/tooling/module-packs/collections/build.py",
+      "sha256": "115bbc8d7bf48b25c81228797efb36ad0463fc535a8ff5be134c61ecb38c0934",
+      "bytes": 10293
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+      "sha256": "7ecd6418dcd4097ca23b3382c4d87d18ed2a02bc8df2a503421c23793fcfd10b",
+      "bytes": 1838
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/m3-integrated-refinement-20261021-049/.github/workflows/m3-eclipse-framework-forward-20261017.yml",
+      "sha256": "dbceffdfba2dbaee03e71d6d84ad3f9302620201cf86e20ff0f925dc745ff16a",
+      "bytes": 6244
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/preimages/src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java",
+      "sha256": "3a914503908cd93c321c356f215eb3e022a064c1c124331d0dd2edb429bdd7a5",
+      "bytes": 9732
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/prepare_packet.py",
+      "sha256": "dcdefc9ff189c05f10c7e9f82122b9d70d1bdd0e7fb8cf9c721695e046df407c",
+      "bytes": 6927
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/qualify.py",
+      "sha256": "cf391b32516c288a75c35acf3017e6adeee80c583b832075265c42347ebf53a8",
+      "bytes": 9709
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java",
+      "sha256": "962c606476db666f95d87c56c2bb9b147da42e7e4ab9551b84182a0897eda774",
+      "bytes": 31463
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/memory/M3CorrectionMemoryConformanceTest.java",
+      "sha256": "38327efb177b551b609d472941eb2a8da18721d329a37dc41e2e7ac28ab095fb",
+      "bytes": 462
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/memory/M3RecoveryMemory.java",
+      "sha256": "e6352756fca8abcea531761b2f32eb76a9e98bf3f259950d558ccc46072a0c32",
+      "bytes": 17824
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/memory/M3RecoveryMemoryTest.java",
+      "sha256": "4406ab706ba83c9dcd8618358477c6fd9094108c00bc62dd10735c4d181702b1",
+      "bytes": 11573
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/com/synexia/rewrite/sealed/SealHash.java",
+      "sha256": "17910b8b92573d6673be22b1d79d3db81c2c65fdff02251b0d4b8defd5b7373a",
+      "bytes": 1859
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/verify_sources.py",
+      "sha256": "134c0914bf4673b3504386a7d1a5ea90c52fe4e9ed2c430400dd824457b8df8c",
+      "bytes": 2324
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "bytes": 1052
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+      "bytes": 31505
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+      "bytes": 19983
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579",
+      "bytes": 8268
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-integrated-refinement-20261021.yml",
+      "sha256": "e78fcd6ac7b037e62ba14813070fa7f507ca73f313b21efa04ce5063c8daabba",
+      "bytes": 5680
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-009/manifest.tsv",
+      "sha256": "b3b1c69c3f55989c81edabe4bdddaead6c0dc3e917681e1a2168af38858b7ece",
+      "bytes": 211
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-009/postimage.java.txt",
+      "sha256": "a451daf423f7ffc382b8fb3df835bec8c9524354cf45a56751e60d67e9b75679",
+      "bytes": 1628
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-010/manifest.tsv",
+      "sha256": "2f79deb02bd61c61a21c52fc4890addbf19cd7778c1991122ceb6741f5615068",
+      "bytes": 214
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-010/postimage.java.txt",
+      "sha256": "5812c70fa0d6260666441d83e5834e051f762d160ceeafaca1d84f151ab811d8",
+      "bytes": 3144
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-012/manifest.tsv",
+      "sha256": "2855484c169eb0fad2ea47e39573e2af9d3005ece8eb4dcf5933a9df6dd50e3b",
+      "bytes": 225
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-012/postimage.java.txt",
+      "sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c",
+      "bytes": 4997
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-013/manifest.tsv",
+      "sha256": "32be08c8a398e2d450526cf3d263d2fda533875af3bdaebe0b9c833e56ff5fbe",
+      "bytes": 218
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-013/postimage.java.txt",
+      "sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
+      "bytes": 32255
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-014/manifest.tsv",
+      "sha256": "84146857fce155da1f5322d693b7cbb6e4fe053b11ae60f70b36b45f0f18ce3e",
+      "bytes": 224
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-014/postimage.java.txt",
+      "sha256": "0e2f79235ef54db17a09f8df597eb97d289962deec2be4a021186309346d4af4",
+      "bytes": 14587
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-015/manifest.tsv",
+      "sha256": "b84a096aabacd5f4f52d1f1c871d0d0a141d442aba7308e4ecc36c64da528dd4",
+      "bytes": 182
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-015/postimage.java.txt",
+      "sha256": "a1cf85feec6621af519dc03d86389945527f7c6544947a28ce49ac2328db8773",
+      "bytes": 6592
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-016/manifest.tsv",
+      "sha256": "e45cb6f8bbe0937d64cace174bb83ee0a7fdbe7222fc60a7fee10959a80ee45f",
+      "bytes": 178
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-016/postimage.java.txt",
+      "sha256": "294b4a465a3189f8115210b626a9a44dcb19e53f6e73ddf98395bdc13a11a488",
+      "bytes": 440
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-017/manifest.tsv",
+      "sha256": "95325a0f6f91f51595989ee8d3bb4f46da627b05d4c0187689b68d7c63111c39",
+      "bytes": 171
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-017/postimage.java.txt",
+      "sha256": "3c75fcccb7c0392d926c3ce671ea4ad35d3e4a3d3abca7f3cf6ec2e2a4bf8c11",
+      "bytes": 11611
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-018/manifest.tsv",
+      "sha256": "51825d0159108d62ff1c6dd29e77effa1acab9b4fb46d53947593b33161bcbb1",
+      "bytes": 167
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-018/postimage.java.txt",
+      "sha256": "cda5d9e02c7ebe868c0d1a40ee994c478d21137f6cde6f27c53922f29cacd4a6",
+      "bytes": 354
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-021/manifest.tsv",
+      "sha256": "97c9c08b1df29f75781130be89d9cd7a9bb4cf40dad1f65d6affb57fd1a2f472",
+      "bytes": 179
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-021/postimage.java.txt",
+      "sha256": "dc7e2cc6243291c362e135311ca2e50fb9d445db4f0c72cee5508d770526b6dd",
+      "bytes": 4104
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-022/manifest.tsv",
+      "sha256": "3944918f06962d41906961c51eec1848d538d4580ddae86f98aeabdc18542a03",
+      "bytes": 171
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-022/postimage.java.txt",
+      "sha256": "a9cdf65296a3841a5bdeab909fd24f6f3bbe60773f5d3070c2091a710a00b5a7",
+      "bytes": 5174
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-023/manifest.tsv",
+      "sha256": "1da69a141cfa9a7dbd38ed66db91d8ee6019cc1e93affe7e82258a3427e63bcd",
+      "bytes": 183
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-023/postimage.java.txt",
+      "sha256": "89ea9107defabe8f35a3ee8bc5d8559f79c6a13c90e1fa7cbbbf65f3d1c6724f",
+      "bytes": 4196
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-024/manifest.tsv",
+      "sha256": "3145058fccb73da7a6e71ba677ddb8b45580c0e9623cb274c7d86ae42ca07142",
+      "bytes": 188
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-024/postimage.java.txt",
+      "sha256": "9897ba5f3f5cf6dae226844ccf56baed776fd552fa0ca74877a3923ee774e1b7",
+      "bytes": 6769
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-025/manifest.tsv",
+      "sha256": "7a2b147cc633291c0dba900616ab485315a1fe958da420ba6857eac237c45eb3",
+      "bytes": 175
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-025/postimage.java.txt",
+      "sha256": "e12bdc3c08aec2d886a403d6f342de3ac0b35a0e063409ad43ae0c8784de19e5",
+      "bytes": 5237
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-029/manifest.tsv",
+      "sha256": "f5de9068382bcd6131ade096211582d4827053fd40a87758c9b29b1fccfa5796",
+      "bytes": 238
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-029/postimage.java.txt",
+      "sha256": "361cd096ce70bcea50080351f20c06cf989502eb62fe489b0a13faed93c63bea",
+      "bytes": 2710
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-030/manifest.tsv",
+      "sha256": "5543cd08e477c39f83f33c84c21f2cf78c9c6d2d4c11777cac21b4e42af01f0a",
+      "bytes": 241
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-030/postimage.java.txt",
+      "sha256": "4bfab762951ed0770dd95dfcb85db2fece0051d656e5bc2cf87ea95ef32d3963",
+      "bytes": 2699
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-031/manifest.tsv",
+      "sha256": "78f5531fec0d42321bb9217d019267361762c3ec522100c266c911b39f17782a",
+      "bytes": 239
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-031/postimage.java.txt",
+      "sha256": "fd7527ce9d29e7fc15447421607e2cec5f4fc511248dd206874b7026b6757313",
+      "bytes": 3020
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-032/manifest.tsv",
+      "sha256": "48d519f1fc126489eccf1b607a72c1d3314ba4217c2b7177c35d3eb1f04119ee",
+      "bytes": 245
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-032/postimage.java.txt",
+      "sha256": "6ef8f327a6ed4c7c41be81168778008af094e5b74fb04ba50d893856c9e482ff",
+      "bytes": 12393
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-033/manifest.tsv",
+      "sha256": "0188a8072bd197f402530642dafac7e67c5d66b7b970e537bb2283bb1a3acde9",
+      "bytes": 240
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-033/postimage.java.txt",
+      "sha256": "f2ad7045a07c6905d2f540e9863851fc7ae95b04d867a11f8e4927c13f0a71c4",
+      "bytes": 2909
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-034/manifest.tsv",
+      "sha256": "d4b7ecdd354680ed2f3a6cbcf67ef1d545b188a5a247bf6e83ba955c889d626b",
+      "bytes": 239
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-034/postimage.java.txt",
+      "sha256": "f892959825f72a922ea377052f67a436221c0aa854738149b8c3fe0f0b76baea",
+      "bytes": 501
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-035/manifest.tsv",
+      "sha256": "0d5429dec0912c26dc1eb5cc550ce5c00822189dca307d59f79883498055a95b",
+      "bytes": 244
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-035/postimage.java.txt",
+      "sha256": "2805f91b08f95e42f3fb9e0e6390de3174e5bf71fc761bc09210bb9ca9b6d781",
+      "bytes": 4071
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-036/manifest.tsv",
+      "sha256": "17d563a400a82a783df9dffff7fa35143ec311ec6e8fa9e121680435797e0d3e",
+      "bytes": 246
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-036/postimage.java.txt",
+      "sha256": "cafda481d205e514d3ceb2187f2219301379b7075113e7b6e72946b012384a51",
+      "bytes": 7884
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-037/manifest.tsv",
+      "sha256": "fbfc688413488c8b88bd13c60cf7da69a70faaa6280267bcb50c5f987926418b",
+      "bytes": 192
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-037/postimage.java.txt",
+      "sha256": "db172e1dd23313bd34ef0752a2d79156e06a37825498ac1d26e0f43db705c39a",
+      "bytes": 17594
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-038/manifest.tsv",
+      "sha256": "a95be09f62357a53fa251d2634a1b0d59509b14b0836b7f444aec6933d4edb8f",
+      "bytes": 244
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-038/postimage.java.txt",
+      "sha256": "e7026e6b0b56aa71aa6a0e617a29ccf8df603d3656ed6ae6966c9662d3b6167d",
+      "bytes": 3128
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-042/manifest.tsv",
+      "sha256": "3623cf02c96b6e01b944fafc8ab4153970350a6de4e80758f454a6dd6634e74c",
+      "bytes": 183
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-042/postimage.java.txt",
+      "sha256": "32881654d117127b11be68a2511a0d5860a3032f0e7ca1ada0332c7f648e0c90",
+      "bytes": 6118
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-047/manifest.tsv",
+      "sha256": "e17e0fbe35f2fe699e7531a7e69832d7a2c0f9a7f8408db9f91a028b2d4f99ef",
+      "bytes": 228
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-047/postimage.java.txt",
+      "sha256": "97ada5bb138bcf47b5ac8b168c36a5ff17936acf64e83c4e7f3a7151b279cd3d",
+      "bytes": 15916
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-048/manifest.tsv",
+      "sha256": "25a36eda3517bba93e484d5320a4be18ebbb9ec00c21f4208cd183bddf79ec88",
+      "bytes": 158
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-integrated-refinement-20261021-048/postimage.java.txt",
+      "sha256": "07e0d48234769058b425c01777bfadce3af4bb1633d1ba66e78605fd12d9c480",
+      "bytes": 24510
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/manifest.tsv",
+      "sha256": "b8d0fefc178afa64442b84bc08ea066d4973d23cd9d505bcbd80ab1a35d8d954",
+      "bytes": 181
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-001/postimage.txt",
+      "sha256": "8efc148837d892ccbc146da1bbc5ab34542051986da08b28d6c8695170f4740e",
+      "bytes": 7596
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-002/manifest.tsv",
+      "sha256": "60c4f434181e73a07c4837f1efaf84264731db17d128fb170ac6de90da90de22",
+      "bytes": 204
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-002/postimage.txt",
+      "sha256": "dbceffdfba2dbaee03e71d6d84ad3f9302620201cf86e20ff0f925dc745ff16a",
+      "bytes": 6244
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-003/manifest.tsv",
+      "sha256": "92741dc763002f4b72745555d79edf88fb7680e1afe205a25bb65d90a2dc5d16",
+      "bytes": 195
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-003/postimage.txt",
+      "sha256": "4a0fc4a163514ffabae67cf480f2abbc49ce38ceecbdd8685e5aad3714d60cc9",
+      "bytes": 5720
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-004/manifest.tsv",
+      "sha256": "c68fc9d093ffe8d9c93f1ea71bcad678c4f7ec2e290351b854a04a71d1bb0cb0",
+      "bytes": 151
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-004/postimage.txt",
+      "sha256": "bd3df31ad31d399fff42bbaaaf74cfd9961f84072cba993f15b9b08dafc55da3",
+      "bytes": 5440
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-005/manifest.tsv",
+      "sha256": "fdb85d8e8c51eb5fbef342a6058b4c0f3a457d888cb4bc2dbb9c7e89d1d996d4",
+      "bytes": 148
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-005/postimage.txt",
+      "sha256": "9b0d1f536c206f5bb9578ddb97ff012482f620c6bfd218cf5d9d958adca20eb8",
+      "bytes": 4274
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-006/manifest.tsv",
+      "sha256": "b178901d4d77869b87b21531d6f6123f9df22e8a655b10dad1c147cd18d7949b",
+      "bytes": 206
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-006/postimage.txt",
+      "sha256": "2ad6ff2d74671a9888c64c94e998eaf979c9ba49cdea85fd24a841f661b84aff",
+      "bytes": 11673
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-007/manifest.tsv",
+      "sha256": "f037c76dc7e2751649622e1fefe1c80d337741ac11880091182ab23fd281eeac",
+      "bytes": 153
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-007/postimage.txt",
+      "sha256": "f5f513a0f65e2847767e65766daa39b3b5b33b88ff8376faf1248df01f7e224d",
+      "bytes": 6734
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/manifest.tsv",
+      "sha256": "7183fd419556b598371f38717badb80814fb6957cb4d4ffb0f5e2bc940a9bfd9",
+      "bytes": 164
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-008/postimage.txt",
+      "sha256": "fd332ea4fc69bba91989e53ef3f4eb4a45fe74666cc206fd31c8fcd4b222271e",
+      "bytes": 157483
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-011/manifest.tsv",
+      "sha256": "caa53d4b6707c055f46f8ee8d3a3d53de8ab44e1b9c5cf2f78482b7c780dc143",
+      "bytes": 153
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-011/postimage.txt",
+      "sha256": "5e0daa896d8e104df5341d5d6c9e6283ea122b293d537f9c59cb4f97bd2fd05f",
+      "bytes": 10414
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-019/manifest.tsv",
+      "sha256": "8064cec338eacdae8a2bbe2bdc4e434a7a3a202b8a498b5e39cb2bec9f871574",
+      "bytes": 155
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-019/postimage.txt",
+      "sha256": "097aa0453736d6b3d13272a5d12e3562a25ec26cc56a5154cbc01195a0cb2ef2",
+      "bytes": 3498
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-020/manifest.tsv",
+      "sha256": "959ce1182224a6874fcba2ed59425ab83d3f58afd1a5ed8971ec445443148e14",
+      "bytes": 152
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-020/postimage.txt",
+      "sha256": "b7c7c07a300ed7e2d83aacdc48c9af30eaf89e1c4d61a2bd42d32ab316f3cadd",
+      "bytes": 6635
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-026/manifest.tsv",
+      "sha256": "aaf1d1b7fec9641016b1269938fcfc8992d11fb189d2d3fed52c8a928cd1c364",
+      "bytes": 173
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-026/postimage.txt",
+      "sha256": "6dea6636a98ea1e2a12e3c7ab542a3bd16e19a015a08e8a2239f9bf87e034f91",
+      "bytes": 2966
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-027/manifest.tsv",
+      "sha256": "56699bfe01b4b963f2211947b371f4201730e718f0521a3f850260e77972557d",
+      "bytes": 156
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-027/postimage.txt",
+      "sha256": "40977e98f0d556cfb2730da4b526ede005412aed774c10adcb29456f865a872b",
+      "bytes": 4527
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-028/manifest.tsv",
+      "sha256": "f1c9419985d404d0c1c284563b480550a388744fb68782ef3793d7cf7bbf6505",
+      "bytes": 156
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-028/postimage.txt",
+      "sha256": "4cd4ea93da4e1e4cf5930faab3f6476227dc6552629d54500eb6a276a6adcf82",
+      "bytes": 6942
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-039/manifest.tsv",
+      "sha256": "af41b5424f3b2a45b33e27cd987a76adc0ef68cd8c59a18a0a43b859c8851370",
+      "bytes": 151
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-039/postimage.txt",
+      "sha256": "470eb027d5842680262d15c56b17b9a78591e713fc0fc4ba9ac89a0aa50629f0",
+      "bytes": 3286
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-040/manifest.tsv",
+      "sha256": "d449cf3d904d5f5162d23599ca84686da12c1f09f478e907671a061501297293",
+      "bytes": 147
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-040/postimage.txt",
+      "sha256": "a0962ac611bbb03f5c2d5038acf1b1ed2b1871fe7a82fabb3264423c7a819431",
+      "bytes": 7214
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-041/manifest.tsv",
+      "sha256": "19fda2ef3e7e7dcb9f420c20ce40d0815ae10481ceeb775b3287a65d2370a0bc",
+      "bytes": 153
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-041/postimage.txt",
+      "sha256": "813d1c2d6e2641673fd741a1b1231c7b34b20c411439c1fea8f29e0d70c1471d",
+      "bytes": 4524
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-043/manifest.tsv",
+      "sha256": "9e0f11bb1e4a0f67a6ea537a1dab697fc9514995712590ce010299ca96011ee6",
+      "bytes": 147
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-043/postimage.txt",
+      "sha256": "635c8de8abb48adb1263518f837e4820a4dc5dad7c6c3b8aaefb4548e8094c0e",
+      "bytes": 12994
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-044/manifest.tsv",
+      "sha256": "b4b4c5922c2475365951b231154c1fbb4707d9257c93cd14128366c0f36e5163",
+      "bytes": 189
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-044/postimage.txt",
+      "sha256": "0c0ee4048a141da30e8fe101e613c2fa18e91f6cef81ef027ceb5eb9606ce33b",
+      "bytes": 14308
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-045/manifest.tsv",
+      "sha256": "3f54c972b7d0de151f4966e4e5109165903f144feb2a3519b2cbb9d89b4cf360",
+      "bytes": 147
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-045/postimage.txt",
+      "sha256": "ea7d21754b16f2512952f028ef849a49eea0e350cf64579b1a4cea727bf33f68",
+      "bytes": 4722
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-046/manifest.tsv",
+      "sha256": "b2152eac47c50fa5210b3a093f2d4932de5a43c0663263ab5a51b6ae7bb357ec",
+      "bytes": 214
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-046/postimage.txt",
+      "sha256": "19c8ac41b3f25e43a7053d6a8a24cb2256806200b0ab64f58e83ada246ccea76",
+      "bytes": 2113
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-049/manifest.tsv",
+      "sha256": "691517211a4f046dc13b36661e38ae12781c89703a70b6ece2e3ce7a78539022",
+      "bytes": 204
+    },
+    {
+      "path": "inputs/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-integrated-refinement-20261021-049/postimage.txt",
+      "sha256": "d808a06805622896a543c48b60aa400caa087d699db83dfe158be1487ca9980d",
+      "bytes": 6567
+    },
+    {
+      "path": "maven.log",
+      "sha256": "fc82065385fdb1c1fad70e0855839f7b836d41f0ae08d978a55aa1b70a986393",
+      "bytes": 2698
+    },
+    {
+      "path": "named-recipe.yml",
+      "sha256": "e78fcd6ac7b037e62ba14813070fa7f507ca73f313b21efa04ce5063c8daabba",
+      "bytes": 5680
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-001.tsv",
+      "sha256": "5398c9ba267fccbb9ed45b497dad51259040b39e93712099b154f4cb0c3a74da",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-002.tsv",
+      "sha256": "e71db567a4a74f46c5b5f6372a25e578afdd12c73f1f0b938dcb99c09276df7f",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-003.tsv",
+      "sha256": "c0752c45372ad7d6fcd85412673f93cb3ccc453d37e72dca949781c384f58814",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-004.tsv",
+      "sha256": "62e7a570743c4326fcda9766482a8c54e4e9244e1d641be8a87e744d9f221de9",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-005.tsv",
+      "sha256": "84ff0069654923c0dca6f0926dd7763a6a3942a530911651af59b56a58eb02bb",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-006.tsv",
+      "sha256": "188403fc64c277d08a42c49aafc31628a368244b330c6efe07fe1a13c16b85fb",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-007.tsv",
+      "sha256": "563af3eafcb3577b831bd6af2c9c2a081e63db0f20510e30baf62c860c78f290",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-008.tsv",
+      "sha256": "6080230bf6a3b45b1aac3f5e6decbda414f54fb868ddaeb3132920c84997a81d",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-009.tsv",
+      "sha256": "43d0a5bb45a0f7a4c6c5e2d37f7bbe445a3d277c594998e7e0ef7d63fbf5d656",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-010.tsv",
+      "sha256": "5c233e846cfc3866c8826b4b18bc25cf757b7c864d0fcdcee9b89962201caaee",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-011.tsv",
+      "sha256": "4ff8b69b08fca61582231212519a87e297ba9b44bd8171cc2ec38f9eed3d8600",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-012.tsv",
+      "sha256": "35abc3a8a9c77a341494d82cbc9513cab3aa0324addd4226cc378341cbf8f34c",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-013.tsv",
+      "sha256": "4b450f6514252b96152a252e16f6a4a2bf85e0f6aa7b085bb4e05f3476a4923d",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-014.tsv",
+      "sha256": "e8d29699d71cd8161f4e618c4212e344fcec211e66365d3ad30b89ac16835ae6",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-015.tsv",
+      "sha256": "3599885f530abf1938943d3420cd054bf84063ed87bd65de5db031e3edfb815a",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-016.tsv",
+      "sha256": "308d3135aca8d2d6a51bea9cf2a80d978777e118afd6c1d76c8327d3449563d0",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-017.tsv",
+      "sha256": "2a1868f4dad771a1945fd89c14d1d43b796f8df539566f450f3e099dcc8611a9",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-018.tsv",
+      "sha256": "d9d579a5257ce1f705f2730978177327513987e5f001f86b22310ae1474b8523",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-019.tsv",
+      "sha256": "9339937d6a572d67627ab7b681031542993ab9e5fa0d0701e3bf345bd7c369ad",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-020.tsv",
+      "sha256": "59e8e5e24403817cbe3d0ce16151213598c0b0d7e986d90cce4bacff28f92fb1",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-021.tsv",
+      "sha256": "2753df582f442fb198a20c16c100fd9b79b7d55bb9b9c8db8a496fab3ac3c2e4",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-022.tsv",
+      "sha256": "b3fbfe5d4029838169f87a06495cec503ae65a7a3e84ff7c53dea941ca0fc3d7",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-023.tsv",
+      "sha256": "03b71c0d28699b283a677ee7bcf33f59872cc21bf33464a047de4e6cf4025a4a",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-024.tsv",
+      "sha256": "165c910adc322c86c8b690dd38fbf93afe8bd6e56a5c7fe7dc2e1ec09f754295",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-025.tsv",
+      "sha256": "3ee02d4737eef060be565c3ff31e393307505c5db3db782b18c4eef01df690f2",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-026.tsv",
+      "sha256": "41b542d1ead6a79e164d6d860e72fd959c47b1a467d30133552bdaf42c3178da",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-027.tsv",
+      "sha256": "31493d3953a8cee99d9b28d1c800b3d43d821caf9579e0b410f77f84f38557c6",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-028.tsv",
+      "sha256": "677b357881b21a1fbd71210779e2c5f510cf2536bbc930297ff944e106f319ff",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-029.tsv",
+      "sha256": "a8fa33fa60ccf7839be0599cfb03d4be51e0f58d086ff6604f156f047888ce2d",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-030.tsv",
+      "sha256": "61ab7c5d2acd9e51870de3aa7dc4bce7d9ac1592cb8250bc3c54b27d54814966",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-031.tsv",
+      "sha256": "788116e58bef55cd814b2a37830ab995d05333cff72431b788b7e01e0716cf6b",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-032.tsv",
+      "sha256": "51df7b272838ceef099e6a720ceddb097480cb573c1197338dc64342c498e897",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-033.tsv",
+      "sha256": "d0ca581fa22cf4f65b631948d30c5b167421610f3121c0208efbbf9292fe6db5",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-034.tsv",
+      "sha256": "b053fddab52af8bedbdd367c6da8b5c79016c9de9677e342eec5d7483833cb67",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-035.tsv",
+      "sha256": "eef6eb1b4ead9fc98f0afde47a012cfaf7e3701ea28147ead7441b83edc974b3",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-036.tsv",
+      "sha256": "028659cf05d716597de293ac54222bf70c990cbac840b974984978f29e298d55",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-037.tsv",
+      "sha256": "a5e250d0129213d6068881e5a52e519a70c2b26a161fdf2b339c2ea781b31d07",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-038.tsv",
+      "sha256": "48d4888519ab1a6e32720a7aa7dd70e538ef7cb75bb3073ce9dd6ff18cbfb415",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-039.tsv",
+      "sha256": "3b2d2d96fb7d4c3fc38651edd6a9770491cb81da5d33e5e2af85d178d77c1914",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-040.tsv",
+      "sha256": "8eb8c2097256017d64b7a81cd7192c19207e9c2b7611d3cf47a35b5c2fbaf7f9",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-041.tsv",
+      "sha256": "8d2c32d88a9c2e5ace56825ad502705b87d52a20c9b7ccc871ed0399f0e8fcc3",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-042.tsv",
+      "sha256": "ed3a54ba641c173bdde9508d9e8979ebf5fe6f67a8e9f7592816648fd3eb7737",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-043.tsv",
+      "sha256": "4713c5619d3df4c38967172305a3d9ec1104533c5e36bae53ea9f0366b1115c1",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-044.tsv",
+      "sha256": "e84cdb3d6f67181c975e8d0797a612769062faf54e29c69a23c7333ad7693259",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-045.tsv",
+      "sha256": "8f92ce24e9794df5a8c94bfcb7b930d47a9b7aa9a7013a8422041e749a295a89",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-046.tsv",
+      "sha256": "ab860303e1cd51c00e7129e77ec460efe34eae814b658d877532d58507c05340",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-047.tsv",
+      "sha256": "077c5887583a4e7ab6a139b0ae7abe17f0dfbb43cdae8e2dadbd84fc394bac40",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-048.tsv",
+      "sha256": "74cad6d43dd9965ed8458acc69600f17e29af9dd501b7cc004c3e9aa0131a9e3",
+      "bytes": 439
+    },
+    {
+      "path": "phase-receipts/m3-integrated-refinement-20261021-049.tsv",
+      "sha256": "dd0c3971b12e6c0d40cf8a2e379b5f03cad84950a3af8e9e684621df0e98d32e",
+      "bytes": 439
+    },
+    {
+      "path": "proof-status.tsv",
+      "sha256": "ae862521cf971b5ab9e211475541c90f21af1a22c0efc08f3de601b9a46e709f",
+      "bytes": 90
+    },
+    {
+      "path": "receiver/.github/workflows/m3-collections.yml",
+      "sha256": "8efc148837d892ccbc146da1bbc5ab34542051986da08b28d6c8695170f4740e",
+      "bytes": 7596
+    },
+    {
+      "path": "receiver/.github/workflows/m3-eclipse-framework-forward-20261017.yml",
+      "sha256": "d808a06805622896a543c48b60aa400caa087d699db83dfe158be1487ca9980d",
+      "bytes": 6567
+    },
+    {
+      "path": "receiver/.github/workflows/m3-object-progress-candidate.yml",
+      "sha256": "4a0fc4a163514ffabae67cf480f2abbc49ce38ceecbdd8685e5aad3714d60cc9",
+      "bytes": 5720
+    },
+    {
+      "path": "receiver/m3/collections/algorithm-catalog/masked-sort-fusion-20261021.tsv",
+      "sha256": "bd3df31ad31d399fff42bbaaaf74cfd9961f84072cba993f15b9b08dafc55da3",
+      "bytes": 5440
+    },
+    {
+      "path": "receiver/m3/collections/algorithm-catalog/resource-change-20261021.tsv",
+      "sha256": "9b0d1f536c206f5bb9578ddb97ff012482f620c6bfd218cf5d9d958adca20eb8",
+      "bytes": 4274
+    },
+    {
+      "path": "receiver/m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "sha256": "2ad6ff2d74671a9888c64c94e998eaf979c9ba49cdea85fd24a841f661b84aff",
+      "bytes": 11673
+    },
+    {
+      "path": "receiver/m3/collections/qualification/masked-sort-fusion-20261021/README.md",
+      "sha256": "f5f513a0f65e2847767e65766daa39b3b5b33b88ff8376faf1248df01f7e224d",
+      "bytes": 6734
+    },
+    {
+      "path": "receiver/m3/collections/qualification/masked-sort-fusion-20261021/SOURCE_IDENTITY.json",
+      "sha256": "fd332ea4fc69bba91989e53ef3f4eb4a45fe74666cc206fd31c8fcd4b222271e",
+      "bytes": 157483
+    },
+    {
+      "path": "receiver/m3/collections/qualification/masked-sort-fusion-20261021/src/test/java/com/m3/collections/M3CollectionSurfaceProbe.java",
+      "sha256": "a451daf423f7ffc382b8fb3df835bec8c9524354cf45a56751e60d67e9b75679",
+      "bytes": 1628
+    },
+    {
+      "path": "receiver/m3/collections/qualification/masked-sort-fusion-20261021/src/test/java/com/m3/collections/M3MaskedSortAllocationProbe.java",
+      "sha256": "5812c70fa0d6260666441d83e5834e051f762d160ceeafaca1d84f151ab811d8",
+      "bytes": 3144
+    },
+    {
+      "path": "receiver/m3/collections/qualification/masked-sort-fusion-20261021/verify.py",
+      "sha256": "5e0daa896d8e104df5341d5d6c9e6283ea122b293d537f9c59cb4f97bd2fd05f",
+      "bytes": 10414
+    },
+    {
+      "path": "receiver/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c",
+      "bytes": 4997
+    },
+    {
+      "path": "receiver/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
+      "bytes": 32255
+    },
+    {
+      "path": "receiver/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "sha256": "0e2f79235ef54db17a09f8df597eb97d289962deec2be4a021186309346d4af4",
+      "bytes": 14587
+    },
+    {
+      "path": "receiver/m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationContract.java",
+      "sha256": "a1cf85feec6621af519dc03d86389945527f7c6544947a28ce49ac2328db8773",
+      "bytes": 6592
+    },
+    {
+      "path": "receiver/m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationTest.java",
+      "sha256": "294b4a465a3189f8115210b626a9a44dcb19e53f6e73ddf98395bdc13a11a488",
+      "bytes": 440
+    },
+    {
+      "path": "receiver/m3/collections/src/test/java/com/m3/collections/M3MaskedSortFusionContract.java",
+      "sha256": "3c75fcccb7c0392d926c3ce671ea4ad35d3e4a3d3abca7f3cf6ec2e2a4bf8c11",
+      "bytes": 11611
+    },
+    {
+      "path": "receiver/m3/collections/src/test/java/com/m3/collections/M3MaskedSortFusionTest.java",
+      "sha256": "cda5d9e02c7ebe868c0d1a40ee994c478d21137f6cde6f27c53922f29cacd4a6",
+      "bytes": 354
+    },
+    {
+      "path": "receiver/m3/eclipse/core-runtime/algorithm-catalog/jobs-executor-20261021.tsv",
+      "sha256": "097aa0453736d6b3d13272a5d12e3562a25ec26cc56a5154cbc01195a0cb2ef2",
+      "bytes": 3498
+    },
+    {
+      "path": "receiver/m3/eclipse/core-runtime/qualification/M3_ECLIPSE_JOBS_20261021.md",
+      "sha256": "b7c7c07a300ed7e2d83aacdc48c9af30eaf89e1c4d61a2bd42d32ab316f3cadd",
+      "bytes": 6635
+    },
+    {
+      "path": "receiver/m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobScheduler.java",
+      "sha256": "dc7e2cc6243291c362e135311ca2e50fb9d445db4f0c72cee5508d770526b6dd",
+      "bytes": 4104
+    },
+    {
+      "path": "receiver/m3/eclipse/core-runtime/src/main/java/com/m3/eclipse/runtime/M3EclipseJobs.java",
+      "sha256": "a9cdf65296a3841a5bdeab909fd24f6f3bbe60773f5d3070c2091a710a00b5a7",
+      "bytes": 5174
+    },
+    {
+      "path": "receiver/m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobSchedulerTest.java",
+      "sha256": "89ea9107defabe8f35a3ee8bc5d8559f79c6a13c90e1fa7cbbbf65f3d1c6724f",
+      "bytes": 4196
+    },
+    {
+      "path": "receiver/m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobsCompatibilityTest.java",
+      "sha256": "9897ba5f3f5cf6dae226844ccf56baed776fd552fa0ca74877a3923ee774e1b7",
+      "bytes": 6769
+    },
+    {
+      "path": "receiver/m3/eclipse/core-runtime/src/test/java/com/m3/eclipse/runtime/M3EclipseJobsTest.java",
+      "sha256": "e12bdc3c08aec2d886a403d6f342de3ac0b35a0e063409ad43ae0c8784de19e5",
+      "bytes": 5237
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/pom.xml",
+      "sha256": "6dea6636a98ea1e2a12e3c7ab542a3bd16e19a015a08e8a2239f9bf87e034f91",
+      "bytes": 2966
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/qualification/resource-change-20261021/README.md",
+      "sha256": "40977e98f0d556cfb2730da4b526ede005412aed774c10adcb29456f865a872b",
+      "bytes": 4527
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/qualification/resource-change-20261021/verify.py",
+      "sha256": "4cd4ea93da4e1e4cf5930faab3f6476227dc6552629d54500eb6a276a6adcf82",
+      "bytes": 6942
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseBundleSnapshot.java",
+      "sha256": "361cd096ce70bcea50080351f20c06cf989502eb62fe489b0a13faed93c63bea",
+      "bytes": 2710
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseExtensionSnapshot.java",
+      "sha256": "4bfab762951ed0770dd95dfcb85db2fece0051d656e5bc2cf87ea95ef32d3963",
+      "bytes": 2699
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseIndexedSnapshot.java",
+      "sha256": "fd7527ce9d29e7fc15447421607e2cec5f4fc511248dd206874b7026b6757313",
+      "bytes": 3020
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseResourceDeltaSnapshot.java",
+      "sha256": "6ef8f327a6ed4c7c41be81168778008af094e5b74fb04ba50d893856c9e482ff",
+      "bytes": 12393
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java",
+      "sha256": "f2ad7045a07c6905d2f540e9863851fc7ae95b04d867a11f8e4927c13f0a71c4",
+      "bytes": 2909
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeServices.java",
+      "sha256": "f892959825f72a922ea377052f67a436221c0aa854738149b8c3fe0f0b76baea",
+      "bytes": 501
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseDeltaIdentitySetTest.java",
+      "sha256": "2805f91b08f95e42f3fb9e0e6390de3174e5bf71fc761bc09210bb9ca9b6d781",
+      "bytes": 4071
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseFrameworkSnapshotsTest.java",
+      "sha256": "cafda481d205e514d3ceb2187f2219301379b7075113e7b6e72946b012384a51",
+      "bytes": 7884
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseResourceChangeSnapshotTest.java",
+      "sha256": "db172e1dd23313bd34ef0752a2d79156e06a37825498ac1d26e0f43db705c39a",
+      "bytes": 17594
+    },
+    {
+      "path": "receiver/m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java",
+      "sha256": "e7026e6b0b56aa71aa6a0e617a29ccf8df603d3656ed6ae6966c9662d3b6167d",
+      "bytes": 3128
+    },
+    {
+      "path": "receiver/m3/runtime-integration/scheduled-progress-20261021/CATALOGUE.tsv",
+      "sha256": "470eb027d5842680262d15c56b17b9a78591e713fc0fc4ba9ac89a0aa50629f0",
+      "bytes": 3286
+    },
+    {
+      "path": "receiver/m3/runtime-integration/scheduled-progress-20261021/README.md",
+      "sha256": "a0962ac611bbb03f5c2d5038acf1b1ed2b1871fe7a82fabb3264423c7a819431",
+      "bytes": 7214
+    },
+    {
+      "path": "receiver/m3/runtime-integration/scheduled-progress-20261021/SOURCE_PIN.json",
+      "sha256": "813d1c2d6e2641673fd741a1b1231c7b34b20c411439c1fea8f29e0d70c1471d",
+      "bytes": 4524
+    },
+    {
+      "path": "receiver/m3/runtime-integration/scheduled-progress-20261021/src/test/java/LegacyScheduledClient.java",
+      "sha256": "32881654d117127b11be68a2511a0d5860a3032f0e7ca1ada0332c7f648e0c90",
+      "bytes": 6118
+    },
+    {
+      "path": "receiver/m3/runtime-integration/scheduled-progress-20261021/verify.py",
+      "sha256": "635c8de8abb48adb1263518f837e4820a4dc5dad7c6c3b8aaefb4548e8094c0e",
+      "bytes": 12994
+    },
+    {
+      "path": "receiver/m3/tooling/module-packs/collections/build.py",
+      "sha256": "0c0ee4048a141da30e8fe101e613c2fa18e91f6cef81ef027ceb5eb9606ce33b",
+      "bytes": 14308
+    },
+    {
+      "path": "receiver/m3/tooling/module-packs/collections/tests/test_native_abi.py",
+      "sha256": "ea7d21754b16f2512952f028ef849a49eea0e350cf64579b1a4cea727bf33f68",
+      "bytes": 4722
+    },
+    {
+      "path": "receiver/m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+      "sha256": "19c8ac41b3f25e43a7053d6a8a24cb2256806200b0ab64f58e83ada246ccea76",
+      "bytes": 2113
+    },
+    {
+      "path": "receiver/src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java",
+      "sha256": "97ada5bb138bcf47b5ac8b168c36a5ff17936acf64e83c4e7f3a7151b279cd3d",
+      "bytes": 15916
+    },
+    {
+      "path": "receiver/test/jdk/java/util/concurrent/ProgressJob/M3ScheduledProgress.java",
+      "sha256": "07e0d48234769058b425c01777bfadce3af4bb1633d1ba66e78605fd12d9c480",
+      "bytes": 24510
+    },
+    {
+      "path": "recipe-proof.tsv",
+      "sha256": "1f5779a485799559070baba0b541eede0d261b7e052bd9f42209469069d51690",
+      "bytes": 6904
+    },
+    {
+      "path": "surefire-reports/TEST-com.synexia.rewrite.M3IntegratedRefinementRecipeTest.xml",
+      "sha256": "2437192a95dbe9f09f60fd074fb0bdf384049f7b53abc213ac635368f298d729",
+      "bytes": 15233
+    },
+    {
+      "path": "surefire-reports/TEST-com.synexia.rewrite.memory.M3CorrectionMemoryConformanceTest.xml",
+      "sha256": "7f1155d8d31a5da5d176d358e545636a75aa28c038ac55c798e3af37ba8199fb",
+      "bytes": 15187
+    },
+    {
+      "path": "surefire-reports/com.synexia.rewrite.M3IntegratedRefinementRecipeTest.txt",
+      "sha256": "edc9aec6f337b750df9e73ccca93fc350464d7eabf234e59a1d23a468171e2b9",
+      "bytes": 354
+    },
+    {
+      "path": "surefire-reports/com.synexia.rewrite.memory.M3CorrectionMemoryConformanceTest.txt",
+      "sha256": "c796cae8521ac0e1e4a7ac196cdc6f8cfca09ab04a9a5a93212986dc1c7dfa30",
+      "bytes": 370
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "M3JDK21_PARALLEL_BULK_BRIDGE_SOURCE_LOCK_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_pr": 10711,
+  "canonical_recipe_revision": "c85f35bec40ae891f622a99858e218dd8c1f953f",
+  "canonical_recipe": "com.synexia.rewrite.M3Jdk21ParallelBulkBridgeRecipe",
+  "target_recipe": "com.m3.rewrite.backport.M3ParallelBulkBridgeReceiverRecipe",
+  "tornado_repository": "hsoliwal/synexia-tornadovm",
+  "tornado_pr": 7,
+  "runtime_dependency_in_java_base": "NONE",
+  "target_scope": "m3/ports/parallel-bulk",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "target_state": "CANDIDATE_REQUIRES_ACTUAL_SOURCE_TEST",
+  "promotion_authority": false
+}

@@ -1,0 +1,41 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+name: M3 state mask histogram Java21 JNI source proof
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java'
+      - 'm3/collections/src/main/native/collections/m3_state_mask_histogram.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3StateMaskHistogram*'
+      - 'm3/collections/recipe/state-mask-histogram-20261017/**'
+      - 'm3/collections/qualification/array-mask-successor-20261019/**'
+      - 'm3/collections/algorithm-catalog/state-mask-histogram-20261017.tsv'
+      - '.github/workflows/m3-state-mask-histogram-20261017.yml'
+  push:
+    branches: [master]
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java'
+      - 'm3/collections/src/main/native/collections/m3_state_mask_histogram.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3StateMaskHistogram*'
+  workflow_dispatch:
+jobs:
+  java-jni-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact-source Java21 / C17 / JNI proof
+        shell: bash
+        run: bash m3/collections/recipe/state-mask-histogram-20261017/verify.sh
+  owning-module:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Owning module JUnit acceptance
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3StateMaskHistogramTest test

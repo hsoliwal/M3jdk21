@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "source_kind": "ACTUAL_SDK_EMITTED_CURRENT_SEVEN",
+  "java_image": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/image",
+  "module": "com.m3.collections",
+  "module_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate/main-classes",
+  "native": "REAL_REQUIRED_CHECKED_JNI_UBSAN",
+  "commands": 9,
+  "source_receipt_sha256": "a455f76b03b37a00f00046f98b43b8f1e8acd9adfff4fe827648afbd868a9f08"
+}

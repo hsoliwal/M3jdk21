@@ -1,0 +1,6 @@
+path	sha256	git_blob	mode	pr	note
+.github/workflows/m3-array-mask-current-20261025.yml	049dbc5ef187af9217fcb234cbef0872aba5e7e6e8abb458c9d24835f3d663b1	512915b7cc772f58ab7e83cd7fd300affbf06609	100644	1938	PR version, not live
+m3/arrays/pom.xml	12b02965bdb4058068885e5acd109334d0f1f827ea2176e3d3e111db320a65e7	668fab1d24bbebd407ed920664487db848db464e	100644	1938	PR version, not live
+m3/collections/qualification/array-mask-current-20261025/RECEIVER_RECEIPT.json	17178278e1aca667e86d4f748d1ac6b477322eb930a17ccb3318fe8e2ee87cce	0eee96afcb0e9561ab7f575f59c279073d0d82d8	100644	1938	PR version, not live
+m3/collections/src/main/java/com/m3/collections/M3ArrayList.java	2168db105fe700ea1a8022ad362ee41d8f181180deba8404ea87d9c70f46d134	b1135dc23d04d4654cedab2e8b62684e1e7d4471	100644	1938	PR version, not live
+m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java	aadabb968ad9d9483d02aa67a353d9a6fec402d90c9522325342a8ca8d1d07f1	e87326da9e8d59e36cd84fd1413a0f55087200aa	100644	1938	PR version, not live

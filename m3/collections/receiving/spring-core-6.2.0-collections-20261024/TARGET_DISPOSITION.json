@@ -1,0 +1,8 @@
+{
+  "schema": "m3.collections.target-disposition.v1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "metadataLicense": "Apache-2.0",
+  "targetDisposition": "slice source and tests only; outside the M3 reactor; no runtime admission",
+  "arrayNativeStorage": "CompositeIterator registered iterators become an array on first traversal",
+  "receivingSequenceAdvanced": false
+}

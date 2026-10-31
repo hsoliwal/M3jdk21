@@ -1,0 +1,25 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "path": "m3/core/src/com/m3/text/StorageIdentity.java",
+    "ref": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+    "encoding": "base64"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "LyogQ29weXJpZ2h0IDIwMjYgSGl0ZXNoIFNvbGl3YWwgPGhzb2xpd2FsQGdt\nYWlsLmNvbT4KICogU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEFwYWNoZS0y\nLjAKICovCnBhY2thZ2UgY29tLm0zLnRleHQ7CgppbXBvcnQgamF2YS51dGls\nLk9iamVjdHM7CmltcG9ydCBqYXZhLnV0aWwuVVVJRDsKCi8qKiBTdGFibGUg\nb3duZXJzaGlwIGlkZW50aXR5LCBuZXZlciBhIHJldXNhYmxlIGNhY2hlLXNs\nb3QgYWRkcmVzcy4gKi8KcHVibGljIHJlY29yZCBTdG9yYWdlSWRlbnRpdHko\nVVVJRCBvd25lciwgbG9uZyBnZW5lcmF0aW9uLCBsb25nIHJlY29yZCkgewog\nICAgcHVibGljIFN0b3JhZ2VJZGVudGl0eSB7CiAgICAgICAgT2JqZWN0cy5y\nZXF1aXJlTm9uTnVsbChvd25lcik7CiAgICAgICAgaWYgKGdlbmVyYXRpb24g\nPD0gMCB8fCByZWNvcmQgPD0gMCkgdGhyb3cgbmV3IElsbGVnYWxBcmd1bWVu\ndEV4Y2VwdGlvbigibm9ucG9zaXRpdmUgaWRlbnRpdHkiKTsKICAgIH0KfQo=\n",
+      "encoding": "base64",
+      "sha": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "display_url": "https://github.com/hsoliwal/M3jdk21/blob/d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2/m3/core/src/com/m3/text/StorageIdentity.java",
+      "display_title": "StorageIdentity.java"
+    },
+    "isError": false
+  }
+}
+

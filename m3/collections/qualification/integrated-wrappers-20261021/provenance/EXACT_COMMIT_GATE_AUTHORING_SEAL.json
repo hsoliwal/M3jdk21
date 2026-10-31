@@ -1,0 +1,97 @@
+{
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "schema": "m3.integrated.collections.exact-commit-gate-authoring.v2",
+  "status": "SOURCE_REVIEWED_READY_FOR_COORDINATOR_EXECUTION",
+  "plan": {
+    "path": "design/provenance/EXACT_COMMIT_GATE_PLAN.md",
+    "bytes": 4299,
+    "sha256": "cdc5e26afb095a084c08615725de28f938706272c6f160c33f281c69f5cb3049",
+    "written_before_adapter": true
+  },
+  "adapter": {
+    "path": "design/provenance/run_exact_commit_gate.py",
+    "bytes": 28613,
+    "sha256": "19c0dbcaaac41e8cb0bbb1a1d13b69a52cfdcbd70157be43d161ea24a1fa8e4d"
+  },
+  "plan_addendum": {
+    "path": "design/provenance/EXACT_COMMIT_GATE_PLAN_ADDENDUM.md",
+    "bytes": 2139,
+    "sha256": "7089b5277e6f7019d577067a806542f165d8d175320e7c7ab02f920d60745086",
+    "written_before_unsigned_offset_correction": true
+  },
+  "preserved_initial_encoding_failure": {
+    "source_path": "design/provenance/history/run_exact_commit_gate_initial_signature_encoding.py",
+    "source_bytes": 28104,
+    "source_sha256": "46e9d8e256a28bb4eac96d54a9b7cc14e56a339e61403f9f93bdca5eefaef41c",
+    "receipt_path": "qualification/GIT_OBJECT_ENCODING_INITIAL_FAILURE.json",
+    "receipt_sha256": "fee60d9308e75a639276952a63e449148c8f504e24c514da305c358b49e4dc1f",
+    "diagnostic_input_sha256": "e6482567991e92a1c152a64d1ddc37c5a3ef0db39d430ec19c49c4a3f52805a4",
+    "scope": "Coordinator pure encode_commit call on actual Git API metadata; no Git command or provenance CLI.",
+    "expected_base_sha": "408373f4101fdca2fb3625bec8af1234e5fd3e26",
+    "initial_reconstructed_sha": "bc8f2ee0b736319ac2fae1b806bc4c79f6ac4f15",
+    "correction": "Preserve the terminal signature LF as a final space-prefixed gpgsig continuation. The signed-encoding correction removed only the two-line terminal-empty-signature-line pop. The coordinator matched this representation to the expected Git SHA before requesting the correction."
+  },
+  "preserved_unsigned_encoding_failure": {
+    "source_path": "design/provenance/history/run_exact_commit_gate_unsigned_utc_only.py",
+    "source_bytes": 28032,
+    "source_sha256": "c8c5e29fcce5d434dc69f54b4550911bc330e5c58f202a3d0e5569654c139392",
+    "receipt_path": "qualification/GIT_OBJECT_ENCODING_UNSIGNED_FAILURE.json",
+    "receipt_sha256": "accbe7deaf5e1a6fa782f715459dad2fa3fe443f958a2d8730ef7cc0918b669f",
+    "expected_documentation_commit_sha": "47238a91be57bb30b28548c2380887db8ac7ab98",
+    "correction": "Try only +0000 and the signed base's observed +0530 independently for author and committer, retaining the two message alternatives and requiring exactly one complete raw commit SHA match.",
+    "superseded_authoring_seal_path": "design/provenance/history/EXACT_COMMIT_GATE_AUTHORING_SEAL_SIGNED_ONLY.json",
+    "superseded_authoring_seal_sha256": "1c432beabb6ae07b6b02f82ed86fde1d34365629788766de3c90a16f412a6969"
+  },
+  "coordinator_actual_object_encoding_check": {
+    "path": "qualification/PRE_PUBLICATION_GIT_OBJECT_CHECK.json",
+    "bytes": 844,
+    "sha256": "310bd5c89f4342c7797a415b515079f2bc61c5b7c4fdb0e011fd70ef7fe1cdc8",
+    "status": "PASS",
+    "source_sha256": "19c0dbcaaac41e8cb0bbb1a1d13b69a52cfdcbd70157be43d161ea24a1fa8e4d",
+    "commits": 2,
+    "trees": 23,
+    "scope": "Pure exact reconstruction of actual Git API objects; no Git command, provenance CLI, product test or remote publication."
+  },
+  "unchanged_authorities": [
+    {
+      "path": "input/syn/scripts/legal/check_m3_provenance.py",
+      "bytes": 17842,
+      "sha256": "55e8183c58e4bf3608355e650e3be18609feab70f7baa75c935716b396d24900",
+      "git_blob": "35e0a467530d8cf0fdde220884326b21fe632eaf"
+    },
+    {
+      "path": "input/syn/docs/M3-SCALE/provenance/m3-provenance-policy.json",
+      "bytes": 2002,
+      "sha256": "4a3bbc60b2960774058c8a822999e8668239c9192571633480463d47d31381dc",
+      "git_blob": "62ac0cf317d07782ae67b632923edef97b4641a5"
+    },
+    {
+      "path": "input/syn/LICENSE",
+      "bytes": 11558,
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "git_blob": "29f81d812f3e768fa89638d1f72920dbfd1413a8",
+      "line_endings": "Exact pinned CRLF bytes preserved"
+    }
+  ],
+  "review": {
+    "author": "/root/pending_work_audit",
+    "independent_reviewer": "/root/wrapper_inventory",
+    "independent_reviewed_source_sha256": "c8c5e29fcce5d434dc69f54b4550911bc330e5c58f202a3d0e5569654c139392",
+    "independent_result": "No remaining source-review blocker found.",
+    "independent_review_scope": "Complete signed-corrected source before the separately frozen bounded unsigned-offset delta.",
+    "coordinator_final_delta_reviewed_source_sha256": "19c0dbcaaac41e8cb0bbb1a1d13b69a52cfdcbd70157be43d161ea24a1fa8e4d",
+    "coordinator_final_delta_result": "Bounded unsigned delta reviewed and exact signed/unsigned objects verified; concrete encoding risk resolved for the observed inputs.",
+    "reviewed_contract": "Exact commit/tree reconstruction; complete A/M tree delta; explicit commit resolution and unique merge-base; pinned unchanged authorities; committed source byte binding; ledger-inclusive exact provenance output comparison; fresh output and retained failure logs.",
+    "reviewer_executed_adapter_git_checker_compilers_or_tests": false
+  },
+  "execution_boundary": {
+    "author_executed_adapter": false,
+    "author_executed_git_or_provenance_gate": false,
+    "full_exact_commit_gate_executed_at_authoring_seal": false,
+    "next_actor": "/root",
+    "required_inputs": "Final Syn-only manifest including ledger and documentation/registry delta; actual base, docs/intermediate and head commits with every commit root tree, differing subtree closure and unchanged authority ancestor chains.",
+    "receipt_requirement": "Only a successful later RECEIPT.json can establish the actual committed changed-file provenance result."
+  },
+  "scope": "Publication-only partial object checkout around the unchanged checker. No recipe engine, product mutation, remote publication, signature-trust, full-clone, full-build or product-acceptance claim."
+}

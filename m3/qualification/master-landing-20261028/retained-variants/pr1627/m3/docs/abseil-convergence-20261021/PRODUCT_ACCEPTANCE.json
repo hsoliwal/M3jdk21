@@ -1,0 +1,255 @@
+{
+  "schema": "M3_ABSEIL_COMBINED_PRODUCT_ACCEPTANCE_V1",
+  "status": "PASS_BOUNDED_GATES_WITH_EXPLICIT_LIMITS",
+  "source_commit_authority": "SOURCE_RECEIPT.json",
+  "local_verification_checkpoint": {
+    "commit": "04e4ffe97d27d4044bb0eccd0bb0d576916b7458",
+    "head_at_start": "04e4ffe97d27d4044bb0eccd0bb0d576916b7458",
+    "role": "Exact-byte verification checkpoint; this record does not assert remote publication",
+    "tree": "0f76d7aaf0f677dee0e48955a292d13eaf5db96e"
+  },
+  "source_build": {
+    "base": "2779aba3f98f31c324be43f731be7914e1a05935",
+    "string_parent": "a317ebdfbdaa3a21b9a959057764a44386e1996e",
+    "command": [
+      "make",
+      "images",
+      "JOBS=6"
+    ],
+    "exit": 0,
+    "platform": "Linux x86_64",
+    "configuration": "release/server/headless, C1+C2, warnings-as-errors, bundled freetype",
+    "cds_archives_created": [
+      "CDS",
+      "CDS-NOCOOPS"
+    ],
+    "runtime_patch_used": false
+  },
+  "product_files": [
+    {
+      "path": "bin/java",
+      "bytes": 16320,
+      "sha256": "9ba0f5589d43a11e34cacf024cbbe2f25a03e4d06d635851a1b6f8f1e3a15e1c"
+    },
+    {
+      "path": "bin/javac",
+      "bytes": 16416,
+      "sha256": "ce2bcdb091e9d202888d367b5c6b58680446a73d7d56bf55c33a60bddd952101"
+    },
+    {
+      "path": "lib/server/libjvm.so",
+      "bytes": 26473064,
+      "sha256": "b8e5ea84bc26c25233a60b62bb45d2e83b23ad564473255191dee0627aee9a33"
+    },
+    {
+      "path": "lib/modules",
+      "bytes": 143309092,
+      "sha256": "c9074e0d1e515bb74ab6c7eb460e511ff244b39d9e00c60330d5e7740fae56b3"
+    },
+    {
+      "path": "release",
+      "bytes": 1223,
+      "sha256": "e16f19836f08a332728861f838c6bd01a3edab4373ab5f20757911c7e18f5eed"
+    }
+  ],
+  "public_collection_fixtures": [
+    {
+      "checks": 77,
+      "label": "default-bootstrap",
+      "status": "PASS"
+    },
+    {
+      "allocation_scope": "Existing single workload observation, not a general performance claim",
+      "checks": 14700,
+      "label": "default-contract",
+      "status": "PASS",
+      "warm_allocation_observation_bytes": 0
+    },
+    {
+      "checks": 1828,
+      "label": "default-refinement",
+      "status": "PASS"
+    },
+    {
+      "checks": 540,
+      "label": "default-identity",
+      "status": "PASS"
+    },
+    {
+      "checks": 2,
+      "label": "default-saturation",
+      "status": "PASS"
+    },
+    {
+      "checks": 77,
+      "label": "interpreter-bootstrap",
+      "status": "PASS"
+    },
+    {
+      "checks": 1828,
+      "label": "interpreter-refinement",
+      "status": "PASS"
+    },
+    {
+      "checks": 540,
+      "label": "interpreter-identity",
+      "status": "PASS"
+    }
+  ],
+  "public_collection_runtime_patch_module": false,
+  "module": {
+    "all_reported_java_home_values_match_product": true,
+    "executed": 477,
+    "full_report": "MODULE_REPORT.json",
+    "nonpassing": [
+      {
+        "class": "com.m3.collections.M3FilteredSplitsMaskSpansTest",
+        "message": null,
+        "method": "allNativeBackendsAreRequiredByTheFullLane",
+        "status": "skipped",
+        "text": "org.opentest4j.TestAbortedException: Assumption failed: all-native qualification is an explicit, isolated lane\n\tat org.junit.jupiter.api.Assumptions.throwAssumptionFailed(Assumptions.java:316)\n\tat org.junit.jupiter.api.Assumptions.assumeTrue(Assumptions.java:115)\n\tat com.m3.collections.M3FilteredSplitsMaskSpansTest.allNativeBackendsAreRequiredByTheFullLane(M3FilteredSplitsMaskSpansTest.java:15)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1597)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1597)\n"
+      },
+      {
+        "class": "com.m3.collections.M3FilteredSplitsMaskSpansTest",
+        "message": null,
+        "method": "maskSpanCheckedJniOracle",
+        "status": "skipped",
+        "text": "org.opentest4j.TestAbortedException: Assumption failed: native proof requires the explicit checked-JNI runner\n\tat org.junit.jupiter.api.Assumptions.throwAssumptionFailed(Assumptions.java:316)\n\tat org.junit.jupiter.api.Assumptions.assumeTrue(Assumptions.java:115)\n\tat com.m3.collections.M3FilteredSplitsMaskSpansTest.maskSpanCheckedJniOracle(M3FilteredSplitsMaskSpansTest.java:10)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1597)\n\tat java.base/java.util.ArrayList.forEach(ArrayList.java:1597)\n"
+      }
+    ],
+    "source_built_junit_coordinate": "5.10.2-m3-source-1",
+    "suite_count": 142,
+    "totals": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 2,
+      "tests": 479
+    }
+  },
+  "native_checked_jni": {
+    "actual_production_library": {
+      "bytes": 20648,
+      "sha256": "9e53bd36a4da8a94d21e092cbfdafcf04a54d273af4a5a3adffa7a3061af3a91"
+    },
+    "checks": 8438,
+    "java_home": "/tmp/m3-abseil-product-24da37cb2993/images/jdk",
+    "status": "PASS"
+  },
+  "native_ubsan": {
+    "environment_overrides": {
+      "UBSAN_OPTIONS": "print_stacktrace=1:halt_on_error=1"
+    },
+    "executable": {
+      "bytes": 62640,
+      "sha256": "2ffd7e44c51584d7064d608ac286e64d9addf88ff9259e8f3cb0e467d54a47e1"
+    },
+    "exports": 4,
+    "second_state_pass_drift_retained": true,
+    "status": "PASS",
+    "zero_payload_reads": true
+  },
+  "string": {
+    "public_comparison_checks_per_mode": 120923,
+    "public_prefix_checks_per_mode": 3747,
+    "modes": [
+      "default",
+      "-XX:-CompactStrings",
+      "-Xint"
+    ],
+    "path_cursor_checks_per_mode": 1746792,
+    "path_cursor_scenarios_per_mode": 35914,
+    "path_cursor_modes": [
+      "JIT",
+      "-Xint"
+    ],
+    "path_cursor_patch": "Test fixture only; product runtime implementations are not patched",
+    "all_commands_pass": true
+  },
+  "source_host": {
+    "rewrite_version": "8.60.0",
+    "installed_framework_pack_version": "8.17.1 unchanged",
+    "pom_sha256": "9f8c5d977811bd06051443bad13f7ab0c57e327f59e24dcf47cf938461e87d42",
+    "sdk_harness_sha256": "2a225b850f9f86c9f953a456a597e3fb87fca01cb4be6e20deee273e34ba9d7f",
+    "qualified_datasets": [
+      "abseil-adapter-20261021",
+      "abseil-string-20261021",
+      "abseil-views-20261021",
+      "abseil-catalogue-20261021",
+      "abseil-receipt-20261021",
+      "abseil-parser-20261021",
+      "abseil-identity-20261021",
+      "abseil-idmeta-20261021"
+    ],
+    "sdk_tests_per_dataset": 5,
+    "preparation_tests_per_dataset": 12,
+    "receiver_cases": {
+      "abseil-string-20261021": 16,
+      "other_task_datasets": 15
+    },
+    "fresh_receipt_fixture_datasets": 5,
+    "receipt_contract_tests": 17
+  },
+  "policy": {
+    "full_borrow": "PASS:32 families SOURCE_PIN_ONLY completion=false",
+    "string_phase": "FAIL: String successor chain length drift, reproduced unchanged at exact baseline",
+    "phase_advanced": false
+  },
+  "contract_disclosures": [
+    "Existing public/protected signatures of refined owners retain verified parity.",
+    "java.util.CollectionViews is an additive historical API proposal; public API and target core license admission remain open.",
+    "Two explicit inherited endpoint overrides change declared-method reflection.",
+    "Recorded defects are explicit behavioral repairs, not equivalence claims to defective observations."
+  ],
+  "limits": [
+    "Finite owning-module tests with two explicit native-lane skips; not all native providers.",
+    "The checked-JNI fixture exercises the actual changed compactor shared library only.",
+    "The UBSan executable uses an instrumented JNI function table and is not a real JVM; the checked-JNI run is the separate real JVM evidence.",
+    "The com.m3 proving-ground module is independently built with this product JDK; this does not establish its installation as a product module or universal java.util replacement.",
+    "The existing com.m3.collections.M3CollectionViews identity defects remain outside this repair.",
+    "No receiving-phase advancement, full jtreg, GC/JMM/CDS/JVMTI, retained-heap or native/process-memory qualification is claimed.",
+    "Finite fixtures do not establish full jtreg, JMM, GC, CDS, JVMTI, retained-heap, native/process-memory, or general comparative performance qualification.",
+    "Identity provenance is limited to the explicit known JDK owners and wrappers; custom equality policies and automatic synchronization are not inferred.",
+    "The independent com.m3.collections.M3CollectionViews identity defects remain excluded.",
+    "CollectionViewsContract --native and its historical RunSearchJni provider are NOT_RUN.",
+    "The additive java.util.CollectionViews API and its Apache-origin java.base source retain the separate public-API and target-license review gates.",
+    "No receiving phase is advanced; the pre-existing String successor-chain policy failure is not repaired or overridden by these fixtures.",
+    "Selected artifact hashes identify this run's image; source-built lineage also requires the separate recipe reception and product build receipts."
+  ],
+  "evidence": [
+    {
+      "canonical_task_relative_path": "evidence/followup/collection-product/public-run-01/RECEIPT.json",
+      "sha256": "2a68af28dfadc1dd77ced7beb8656a17b507c35344f6ddeb8b744f0488f07df5",
+      "bytes": 26142
+    },
+    {
+      "canonical_task_relative_path": "evidence/followup/collection-product/module-native-run-01/RECEIPT.json",
+      "sha256": "5e5fc7f01c6aee7e2a85cc70906c8ef18da9dc85b5e64523ffada31f06c60098",
+      "bytes": 186990
+    },
+    {
+      "canonical_task_relative_path": "evidence/followup/string-product-final/RECEIPT.json",
+      "sha256": "f6fc00d75391b06126d7434039f921b644bc420db98b237aa25443a9e6a6ee27",
+      "bytes": 9216
+    },
+    {
+      "canonical_task_relative_path": "evidence/sdk-r2/QUALIFICATION.json",
+      "sha256": "207330de798520e552027826d1577e8deac1b04f7ce94a1563619f2d30aea121",
+      "bytes": 38632
+    },
+    {
+      "canonical_task_relative_path": "evidence/sdk-r2/receipt-contracts/receipt-fixtures.log",
+      "sha256": "92648fead01098c2f54b3addbf5a4743e924bb6f3a061ddce22997cf4f0eddc2",
+      "bytes": 2507
+    },
+    {
+      "canonical_task_relative_path": "evidence/followup/collection-build.log",
+      "sha256": "0fe808654a2c52ae0d9b40b16442be70977c0eaf4f8f55050845f798c7d9ac85",
+      "bytes": 2488
+    },
+    {
+      "canonical_task_relative_path": "evidence/followup/fixture-baseline/DIAGNOSIS.json",
+      "sha256": "5c59160161d09c0983627ca15267a3060cfeecab05493b7ab25a75e01b9b9fae",
+      "bytes": 9064
+    }
+  ]
+}

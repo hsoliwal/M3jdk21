@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.CapabilityContractQualifications20261021
+displayName: Record proposed M3JDK21 capability qualifications
+description: Preserve the ten user-proposed capability families and their required qualification conditions as hash-pinned contract data.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: capability-contracts-20261021

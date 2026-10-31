@@ -1,0 +1,70 @@
+name: M3 Synexia intake policy
+
+on:
+  push:
+    branches:
+      - master
+      - "m3/**"
+    paths:
+      - "ADDITIONAL_LICENSE_INFO"
+      - "m3/docs/m3jdk21-porting-invariant.md"
+      - "m3/docs/name-mapping.json"
+      - "m3/docs/synexia-intake-policy.tsv"
+      - "m3/docs/synexia-direct-copy-review.tsv"
+      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - "m3/runtime-integration/verify-synexia-intake.py"
+      - "m3/tooling/migration-recipes/**"
+      - ".github/workflows/m3-synexia-intake-policy.yml"
+  pull_request:
+    paths:
+      - "ADDITIONAL_LICENSE_INFO"
+      - "m3/docs/m3jdk21-porting-invariant.md"
+      - "m3/docs/name-mapping.json"
+      - "m3/docs/synexia-intake-policy.tsv"
+      - "m3/docs/synexia-direct-copy-review.tsv"
+      - "m3/runtime-integration/FOSS_REUSE_DECISION.tsv"
+      - "m3/runtime-integration/verify-synexia-intake.py"
+      - "m3/tooling/migration-recipes/**"
+      - ".github/workflows/m3-synexia-intake-policy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - name: Fetch exact workflow head
+        shell: bash
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3             "https://codeload.github.com/${GITHUB_REPOSITORY}/tar.gz/${HEAD_SHA}"             -o "$RUNNER_TEMP/repo.tar.gz"
+          mkdir -p "$RUNNER_TEMP/repo"
+          tar -xzf "$RUNNER_TEMP/repo.tar.gz" -C "$RUNNER_TEMP/repo" --strip-components=1
+          printf 'REPO=%s\n' "$RUNNER_TEMP/repo" >> "$GITHUB_ENV"
+
+      - name: Verify Synexia intake and direct-copy review inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "$REPO/m3/runtime-integration/verify-synexia-intake.py" --repo "$REPO"
+
+      - name: Prepare pinned JDK 21
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3             'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz'             -o "$RUNNER_TEMP/jdk21.tar.gz"
+          printf '%s  %s\n'             '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6'             "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
+          printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
+          printf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
+
+      - name: Prove exact OpenRewrite crate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/pom.xml"             -Dtest=SynexiaIntakePolicyRecipeTest test

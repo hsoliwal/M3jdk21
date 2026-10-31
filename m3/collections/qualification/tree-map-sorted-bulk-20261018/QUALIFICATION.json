@@ -1,0 +1,98 @@
+{
+  "schema": "m3-sorted-bulk-qualification/v1",
+  "status": "PASS_FINITE_ATOM_QUALIFICATION_SOURCE_REVIEW_CLEAN",
+  "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "production_blobs": {
+    "M3TreeMap": {
+      "before": "8a85b86c027bc031ef096ad94de2747b8fd28f9c",
+      "after": "8d0690dd904df04cf087de7a7dc64107cf475210",
+      "sha256": "dd68608ede7486b6e49ec4e458f692278f1ce062b856d16fd0d68c075543c774",
+      "bytes": 26659
+    },
+    "M3SlotMap": {
+      "before": "a7d20300717661c26897f0b69e1e5a83400a62ad",
+      "after": "9e4d7588d5bd527f3988ca4d46d79f31132630c7",
+      "sha256": "7fc1605ab79272b216be615c262b3a8f2f8a4cc117928ad1b3b857e2c67e6feb",
+      "bytes": 11065
+    }
+  },
+  "java": "21.0.9+7-LTS-338",
+  "strict_compilation": {
+    "sources": 130,
+    "status": "PASS_STRICT_COMPOSED_CORE130",
+    "changed_owner_classfiles_equal_to_executed_proof": [
+      "M3TreeMap$Tree.class",
+      "M3TreeMap.class",
+      "M3SlotMap$1.class",
+      "M3SlotMap$2.class",
+      "M3SlotMap$3.class",
+      "M3SlotMap$4.class",
+      "M3SlotMap$LiveEntry.class",
+      "M3SlotMap.class"
+    ]
+  },
+  "public_api": {
+    "status": "PASS_PUBLIC_API_EQUAL",
+    "signature_rows": 88,
+    "includes": [
+      "methods",
+      "constructors",
+      "generic metadata",
+      "bridge and default flags",
+      "annotations"
+    ]
+  },
+  "behavior": {
+    "status": "PASS_113_FROZEN_BEHAVIOR_SCENARIOS",
+    "scenarios": 113,
+    "checks": 257312,
+    "invariant_calls": 1873,
+    "expected_observations_sha256": "4f2e09f686f46224e45ae7a09b252aa942f5e2130b3e36e566e341c2cd6255d8",
+    "oracle_frozen_before_candidate": true,
+    "source_blind_fixture_sha256": "b9d99b42ba8763ba294d7472642f59cdf9ec5aa0864b132fef23fbb7cd04d0e4",
+    "ancillary_linked_map": "PASS",
+    "M3HashMap": "UNAVAILABLE_NO_PASS",
+    "provider_loads": 0,
+    "native_CRUD": false
+  },
+  "recipe": {
+    "per_file_serial": true,
+    "forward": true,
+    "fixed_point": true,
+    "exact_inverse": true,
+    "inverse_fixed_point": true,
+    "stale_preimage_refused": true,
+    "application_order": [
+      "M3SlotMap",
+      "M3TreeMap"
+    ],
+    "inverse_order": [
+      "M3TreeMap",
+      "M3SlotMap"
+    ],
+    "intermediate_compile_public_api": "PASS_SERIAL_FIRST_FILE_COMPILES_PUBLIC_API_EQUAL"
+  },
+  "local_evidence_pins": {
+    "strict_core_receipt": "63844f6566ac974854dd061ad2983e62195f397e377b1d5dac07f6967fef724a",
+    "public_api_receipt": "076ca99061177ace85cf0eb743db7590be478ce45ce3d62d465d43753b2a68e8",
+    "behavior_receipt": "5a478d310beaa93e55787555727ccb6134b69ce6427c3957f7052d17183d9a02",
+    "intermediate_stage1_receipt": "9bbf30b6a1a0d1ef56211c8ff051e0bf5d7613137fac3c37aded9c9f1151201f"
+  },
+  "limits": [
+    "Finite atom qualification, not all five-library collection contracts",
+    "No full Maven or hosted-CI success claim",
+    "No throughput benchmark",
+    "No new JNI implementation or native CRUD",
+    "Full Eclipse TreeSortedMap owned storage and serialization remain open"
+  ],
+  "review": {
+    "engine": "codex",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "helper_exit": 0,
+    "actionable_findings": 0,
+    "report_sha256": "2aaded0335b70de43f2754618f2edde23cfdd86663ddffd8b9cbafd424aa55e4",
+    "scope": "Two production owners, exact recipe and frozen supporting evidence; subsequent qualification metadata and README order correction independently checked",
+    "not_a_runtime_proof": true
+  }
+}

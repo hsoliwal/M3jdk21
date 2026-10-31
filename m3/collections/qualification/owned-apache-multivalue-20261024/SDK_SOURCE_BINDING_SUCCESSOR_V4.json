@@ -1,0 +1,184 @@
+{
+ "schema": "M3_QUALIFIED_SOURCE_BINDING_SUCCESSOR_V4",
+ "baseCommit": "b35759a36ecdfc299855a5e53b4d1a05f9f3884d",
+ "scope": "Effective input qualification only: the sealed v3 receipt and verifier stay byte-exact history; successor rows re-pin the three D1 counter bodies and the owners master changed after the v3 seal; the counter differential test, the size bench and the v2-to-v3 recipe manifest are pinned as added inputs.",
+ "predecessor": {
+  "path": "m3/collections/qualification/owned-apache-multivalue-20261018/SDK_SOURCE_BINDING_SUCCESSOR_V3.json",
+  "bytes": 4649,
+  "sha256": "18a5bbbe10e3a97c01d7b3d55277a3e3dabc7ed4666ee00f1d7fb094ae8653d7",
+  "gitBlob": "25b06cde14971ad7c8bf67e28ca2b729b36a11a4"
+ },
+ "predecessorVerifier": {
+  "path": "m3/collections/qualification/owned-apache-multivalue-20261018/verify_source_binding_successor_v3.py",
+  "bytes": 5889,
+  "sha256": "c883d21bed6d2276006d41a22dd9df4d91ed3832d6a2bfdf460fa018ad6ff20e",
+  "gitBlob": "cd96d7749bb101cf9ef2c8de65e05a570ee894db"
+ },
+ "successors": [
+  {
+   "path": "m3/collections/implementations/apache/src/main/java/com/m3/collections/apache/M3AbstractListValuedMap.java",
+   "reason": "D1: incremental value and logical-key counters (v2 -> v3 recipe apache-multivalue-v2-to-v3)",
+   "before": {
+    "bytes": 8715,
+    "sha256": "bdd6051aecad2ff0a2c2ce7b788aeae51331e5dcef2d5c9f38270520bcdfbfc1",
+    "gitBlob": "f611496efd2a70355e2938b582fb6ef0d0f1e67d"
+   },
+   "after": {
+    "bytes": 20447,
+    "sha256": "61d0beffcf4d61a679f2e8c0c5dd036d287bc93c423654a9b58060680e380d8a",
+    "gitBlob": "89ae2d67b96aa4a5dc7b4ff29c512e79ba859b00"
+   }
+  },
+  {
+   "path": "m3/collections/implementations/apache/src/main/java/com/m3/collections/apache/M3AbstractMultiValuedMap.java",
+   "reason": "D1: incremental value and logical-key counters (v2 -> v3 recipe apache-multivalue-v2-to-v3)",
+   "before": {
+    "bytes": 33602,
+    "sha256": "455e4a5cd4974be4bc9f52aef362a3fe9993802806d3b8fa6b31d2954f322ed8",
+    "gitBlob": "2dbacc1339827c0476423744fa0b87e8bb1fc9f7"
+   },
+   "after": {
+    "bytes": 44516,
+    "sha256": "6665505b613cfd00207ff90f0c64873f77a9742edced14b57f9e1f6383b45d4c",
+    "gitBlob": "1bb83f16cd51eba74c040bf7a314769a63bcaf12"
+   }
+  },
+  {
+   "path": "m3/collections/implementations/apache/src/main/java/com/m3/collections/apache/M3AbstractSetValuedMap.java",
+   "reason": "D1: incremental value and logical-key counters (v2 -> v3 recipe apache-multivalue-v2-to-v3)",
+   "before": {
+    "bytes": 4278,
+    "sha256": "b6d1c925716f44578706b5a5786f23ecab1eba652a8c6dea5f02fdf67695fcbd",
+    "gitBlob": "75704d2810584be823503c9153417582cec3e50f"
+   },
+   "after": {
+    "bytes": 4396,
+    "sha256": "4c4db74c8571d5155ae2a4d2d92431407a62b0bdecacb38c03bc1bcdf076565b",
+    "gitBlob": "e7be081e8430dcdd0c818d25e9579f77526e295d"
+   }
+  },
+  {
+   "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+   "reason": "changed on master after the v3 seal (last change 104f2f46ced 2026-10-24); re-pinned as found, per decision B2",
+   "before": {
+    "bytes": 10039,
+    "sha256": "ae1092d66bb27e18c0f435d9dc148bd0f46fbc33f9731d9e2d2194142ccc3d32",
+    "gitBlob": "250905f67429fbedfb4d6f652ea6e90a516cb59c"
+   },
+   "after": {
+    "bytes": 12423,
+    "sha256": "884c9078022f64eb3c1f4aa8c306d852521be6089164c7e99b08e17c318d8282",
+    "gitBlob": "c43ca5578521b8f0a2ab1305f5d4becdeabc772e"
+   }
+  },
+  {
+   "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java",
+   "reason": "changed on master after the v3 seal (last change 104f2f46ced 2026-10-24); re-pinned as found, per decision B2",
+   "before": {
+    "bytes": 7807,
+    "sha256": "f805ff3b86349480dd575840326eb015e5626b5eb4f0f61deccc73f83e9e1452",
+    "gitBlob": "4f3a64d070b361cd6a25269184370a7ab486c0a5"
+   },
+   "after": {
+    "bytes": 9485,
+    "sha256": "3c12ebe71f2314472858b407f6951360c49ba81b26c4c04c325e9845553a0708",
+    "gitBlob": "9242f3853e353057d360975388c5671c6c67be49"
+   }
+  },
+  {
+   "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+   "reason": "changed on master after the v3 seal (last change 104f2f46ced 2026-10-24); re-pinned as found, per decision B2",
+   "before": {
+    "bytes": 12568,
+    "sha256": "af78b910c1639030286023696da693890be5163cd0ffe6befef68748ff9450bc",
+    "gitBlob": "5def05aad11dbe3ab7bebe27a3c11b5d241c9a7a"
+   },
+   "after": {
+    "bytes": 25743,
+    "sha256": "0b6398e423e1a436aba20169f8bc62d4aa1a9be85ff9f9e09faa0c434743fa6b",
+    "gitBlob": "9060424b921bac10dc382ba277a3aa840ea59529"
+   }
+  },
+  {
+   "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedMultiValueMap.java",
+   "reason": "changed on master after the v3 seal (last change b4616950bff 2026-10-18); re-pinned as found, per decision B2",
+   "before": {
+    "bytes": 15368,
+    "sha256": "0acfd80aee31b670b2dc0fa104d43b068ada2bd37781738170efdc7560f6fa82",
+    "gitBlob": "9035b651c5aab1f5850009372e2432ef196efc79"
+   },
+   "after": {
+    "bytes": 18558,
+    "sha256": "f8ded6a6303a035ec23a9484070fa660e3cd0af309818d4a8356792ff37d3aad",
+    "gitBlob": "d96674e4a99416a48247485f0ce4eba533677be0"
+   }
+  },
+  {
+   "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedTable.java",
+   "reason": "changed on master after the v3 seal (last change 104f2f46ced 2026-10-24); re-pinned as found, per decision B2",
+   "before": {
+    "bytes": 20810,
+    "sha256": "9b87cefcc65e295afe516a1d007e3b5acbc87a8035e1f55223d1b2558cf7858c",
+    "gitBlob": "5dc062e138b273382b4f161fb4c9869d90558390"
+   },
+   "after": {
+    "bytes": 22578,
+    "sha256": "fdff6ba0d02e89f2f3e6cd80966d367b8f435dff696888eee34b47e5cdfc6b14",
+    "gitBlob": "6f5d209b898be5e77d855bb5791809de8fb60510"
+   }
+  },
+  {
+   "path": "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java",
+   "reason": "changed on master after the v3 seal (last change 104f2f46ced 2026-10-24); re-pinned as found, per decision B2",
+   "before": {
+    "bytes": 9008,
+    "sha256": "f865b006888f1d4554b51cf69e7f4d6bac67458982f957f9151af0b4f09eaec8",
+    "gitBlob": "5dbc2ec9317c79d801bb4c312f2c0b7ffad6ffbd"
+   },
+   "after": {
+    "bytes": 9470,
+    "sha256": "8aa30b4b23c638b53f5fe9e6f895bb3205a51af1df0bf2afdefb38d4c21ab090",
+    "gitBlob": "327a56f12e09ae82ea0d0f10bdcf3a0628f1636f"
+   }
+  },
+  {
+   "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+   "reason": "changed on master after the v3 seal (last change 52a279e78a2 2026-10-21); re-pinned as found, per decision B2",
+   "before": {
+    "bytes": 11744,
+    "sha256": "cb8e8c66e07cc4651e95a0c28ad834d2c9de48df34dc90c6d7da68443f1da531",
+    "gitBlob": "a073e64cb12c59eb81247421cf3efe0628004142"
+   },
+   "after": {
+    "bytes": 21506,
+    "sha256": "c1e6205563921072f7ac86be79862e4e16c69cdf5951057331d4ca8a83025052",
+    "gitBlob": "bedd442346de5b7dd9d5f1965c510950e0c45ea1"
+   }
+  }
+ ],
+ "added": [
+  {
+   "path": "m3/collections/implementations/apache/src/test/java/com/m3/collections/apache/M3MultiValuedMapCounterDifferentialTest.java",
+   "bytes": 17228,
+   "sha256": "982a2eb799c8faa846d7528a14d215078cf0e18ae8fa700b9eec69c66aad4ef2",
+   "gitBlob": "0cb0253885cd7261962c8eb9d7c281b89275422b"
+  },
+  {
+   "path": "m3/collections/implementations/apache/src/jmh/java/com/m3/collections/apache/M3MultiValuedSizeBench.java",
+   "bytes": 3772,
+   "sha256": "2050b6c7fa7411513f5d370f43b588cef212eb568597d3201c1e12c2f3d17ef3",
+   "gitBlob": "7cb4416713df15bd8c339f2287f63718b0fc9562"
+  }
+ ],
+ "recipe": {
+  "path": "m3/collections/recipe/owned-apache-multivalue-20261024/src/main/resources/com/synexia/rewrite/hash-pinned-java/apache-multivalue-v2-to-v3/manifest.tsv",
+  "bytes": 1054,
+  "sha256": "9aeb000a95f9f4bdcdf5b55c1b7d4017d87dbab6d577947da5e7c995494bf441",
+  "gitBlob": "c4452e99dfd309105a82d375dc3c5bee8d76e9dc"
+ },
+ "limits": [
+  "Source custody only: Java compilation, the contract self-tests, the counter differential test and the recipe tests are separate proofs",
+  "Drift successors record master bytes as found; they do not re-qualify the behaviour of those owners",
+  "The exact additive SDK check of v3 is replaced by: every v3 added factory declared once and no fewer public static declarations"
+ ]
+}

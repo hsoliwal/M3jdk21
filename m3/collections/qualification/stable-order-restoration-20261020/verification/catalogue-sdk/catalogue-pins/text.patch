@@ -1,0 +1,153 @@
+diff --git a/m3/collections/algorithm-catalog/stable-order-restoration-20261020/SOURCE_PINS.json b/m3/collections/algorithm-catalog/stable-order-restoration-20261020/SOURCE_PINS.json
+new file mode 100644
+index 0000000..46ec51b
+--- /dev/null
++++ b/m3/collections/algorithm-catalog/stable-order-restoration-20261020/SOURCE_PINS.json
+@@ -0,0 +1,147 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++{
++  "target_revision": "95d0266ff15ae1f11876cce7360b155ef33a1862",
++  "collections_tree": "985d672bf250aa090b2399d626f0e3e1b541135d",
++  "canonical_published_recipe": "528aaf79cfae79c5dbfe7c307340329d320e8c44",
++  "canonical_current_pin": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
++  "canonical_current_manifest_status": "404; exact published handoff retained",
++  "production_selected": [
++    {
++      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
++      "before_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
++      "after_sha256": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e"
++    }
++  ],
++  "retained_owner_pins": [
++    {
++      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
++      "git_blob": "10c4d16cc9cd62d36f22646988718422caa2311e",
++      "sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
++      "bytes": 19677,
++      "decision": "RETAIN_CURRENT_NO_PROPOSED_SOURCE_CHANGE"
++    },
++    {
++      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
++      "git_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
++      "sha256": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
++      "bytes": 6433,
++      "decision": "RETAIN_CURRENT_NO_PROPOSED_SOURCE_CHANGE"
++    },
++    {
++      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
++      "git_blob": "15024c40ba9b92fd50fb7823ecfa9543aba22be1",
++      "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
++      "bytes": 16830,
++      "decision": "RETAIN_CURRENT_NO_PROPOSED_SOURCE_CHANGE"
++    },
++    {
++      "path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
++      "git_blob": "821876dfb56d836a0ae23e4bc16a391fd7f97ef2",
++      "sha256": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
++      "bytes": 3458,
++      "decision": "RETAIN_CURRENT_NO_PROPOSED_SOURCE_CHANGE"
++    }
++  ],
++  "discovery_sha256": "145547bd412ec5e3e1ffe6e45b9ade39a0a05bab1d43c7b8ad0c11b065f1c256",
++  "decision_status": "SELECTED_ATOM_QUALIFIED_FOR_SCOPED_GENERATED_JAVA_AND_CURRENT_JNI",
++  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
++  "spdx_license_identifier": "Apache-2.0",
++  "current_replay_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020",
++  "admitted_java_outputs": {
++    "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e",
++    "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94",
++    "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowResourceProbe.java": "d711aa55378fe89dc263a2de6fe90449ab690e9759d27906a9389f9a0434fdba",
++    "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java": "75f32c3f515783fff233992a3144f867fa9bc767d481ba1d2db05b996895ad40"
++  },
++  "summary_target_path": "m3/collections/qualification/stable-order-restoration-20261020/RESULTS.json",
++  "qualification_receipts": {
++    "verification/sdk/RESULTS.json": {
++      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/sdk/RESULTS.json",
++      "sha256": "5e4d2fa1eab5702d65a1b6d44ca1a1d099d34e8e5620c85a4439a11c4d6823a1"
++    },
++    "verification/generated/RESULTS.json": {
++      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/generated/RESULTS.json",
++      "sha256": "48ea94ba750af3acb228c2c854458149a08b0f5d7ea1bae99191eaa3d18014b4"
++    },
++    "verification/GENERATED_COMPARISON.json": {
++      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/GENERATED_COMPARISON.json",
++      "sha256": "44378db2d3d6dae5e6c5686f8b1174dd013ce519e1a58d7339775606575f9e12"
++    },
++    "verification/native-final/RESULTS.json": {
++      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/native-final/RESULTS.json",
++      "sha256": "10b0a99ab1651259a12398e1cce64f8906adfd10ef037dac4aefd0558d2cc263"
++    },
++    "verification/retained-wrappers/RESULTS.json": {
++      "target_path": "m3/collections/qualification/stable-order-restoration-20261020/verification/retained-wrappers/RESULTS.json",
++      "sha256": "0009f9e99b53878dd0a22e38d4b81175d16fd5e65d594d5941030d2d868834fd"
++    }
++  },
++  "fresh_wrapper_review": {
++    "status": "RETAINED_READONLY_POLICY_PASS_WITH_PRESERVED_KNOWN_FAILURES",
++    "policy_junit": {
++      "aborted": 0,
++      "failed": 0,
++      "found": 1,
++      "skipped": 0,
++      "started": 1,
++      "successful": 1
++    },
++    "standalone_counts": {
++      "executed": 9,
++      "passed": 5,
++      "retained_known_failures": 4
++    },
++    "current_known_findings": [
++      "Comparator-owned IllegalArgumentException is swallowed in the bounded read-only map witness. Both comparator-failure and the original default readonly mode stop at that first failure; their later mutable-set assertion is not reached.",
++      "The ordinary read-only iterator retains the indexed callback path and exceeds the original linear-work oracle: 787456 predicate calls for a 1024-element backing list. There is no traversal speed claim.",
++      "The ordinary read-only iterator does not detect the backing mutation in the original fail-fast witness. Later assertions in that mode are not reached."
++    ],
++    "interior_null_disposition": "PASS 6 original checks; supersedes historical pending-null reproduction only for current fixture/revision; historical record retained",
++    "bounded_navigation": "bounded-map 64 and bounded-set 64 original checks PASS; comparator-owned exception witness remains failing"
++  },
++  "fresh_wrapper_owner_pins": [
++    {
++      "bytes": 19677,
++      "git_blob": "10c4d16cc9cd62d36f22646988718422caa2311e",
++      "sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
++      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
++      "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
++    },
++    {
++      "bytes": 31807,
++      "git_blob": "1a31827cd6274b5ad8eb62f3a5ce0e5e0667478f",
++      "sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
++      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
++      "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
++    },
++    {
++      "bytes": 25720,
++      "git_blob": "37b669dfe22a3b6be9e68aa59f9dd94e96fc3d49",
++      "sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178",
++      "target_path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
++      "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
++    },
++    {
++      "bytes": 4051,
++      "git_blob": "2fe08d8728732e5f53e75d9feb34c9c6ffc74a8d",
++      "sha256": "9257ce0c9c95e3afef20624631ba048aa3d60ef53a1189cd2bbabc07da2bba2f",
++      "target_path": "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
++      "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
++    }
++  ],
++  "native_proof_scope": {
++    "status": "PASS",
++    "runtime_checks": 14,
++    "real_jvm_runs": 12,
++    "instrumented_c_fixtures": 2,
++    "abi_symbols": 12,
++    "native_source_changes": false,
++    "unchanged_compactor_fixture_support_sources": 10,
++    "support_classes_disjoint": true,
++    "prior_compile_failure_retained": true
++  },
++  "performance_receipt": "verification/GENERATED_COMPARISON.json",
++  "diagnostic_history": "verification/DIAGNOSTIC_COMPARISON.json retained separately; current README uses generated samples",
++  "receiving_phase": "STRING unchanged",
++  "whole_module_or_five_provider_compatibility": "NOT_CLAIMED",
++  "source_built_m3jdk21": "NOT_RUN"
++}

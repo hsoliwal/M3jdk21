@@ -94,7 +94,7 @@ bool vmIntrinsics::preserves_state(vmIntrinsics::ID id) {
   case vmIntrinsics::_dpow:
   case vmIntrinsics::_Preconditions_checkIndex:
   case vmIntrinsics::_Preconditions_checkLongIndex:
-  case vmIntrinsics::_Reference_get:
+  case vmIntrinsics::_Reference_get0:
   case vmIntrinsics::_Continuation_doYield:
   case vmIntrinsics::_updateCRC32:
   case vmIntrinsics::_updateBytesCRC32:
@@ -203,6 +203,54 @@ int vmIntrinsics::predicates_needed(vmIntrinsics::ID id) {
 bool vmIntrinsics::disabled_by_jvm_flags(vmIntrinsics::ID id) {
   assert(id != vmIntrinsics::_none, "must be a VM intrinsic");
 
+  // Stage-2 M3 Strings may carry segmented backing while String.value is only
+  // a compatibility sentinel. Until each String intrinsic has a segment-aware
+  // lowering, fail closed and execute the Java implementations.
+  if (UseM3StringStorage) {
+    switch (id) {
+    case vmIntrinsics::_String_String:
+    case vmIntrinsics::_compressStringC:
+    case vmIntrinsics::_compressStringB:
+    case vmIntrinsics::_inflateStringC:
+    case vmIntrinsics::_inflateStringB:
+    case vmIntrinsics::_toBytesStringU:
+    case vmIntrinsics::_getCharsStringU:
+    case vmIntrinsics::_getCharStringU:
+    case vmIntrinsics::_putCharStringU:
+    case vmIntrinsics::_compareToL:
+    case vmIntrinsics::_compareToU:
+    case vmIntrinsics::_compareToLU:
+    case vmIntrinsics::_compareToUL:
+    case vmIntrinsics::_indexOfL:
+    case vmIntrinsics::_indexOfU:
+    case vmIntrinsics::_indexOfUL:
+    case vmIntrinsics::_indexOfIL:
+    case vmIntrinsics::_indexOfIU:
+    case vmIntrinsics::_indexOfIUL:
+    case vmIntrinsics::_indexOfU_char:
+    case vmIntrinsics::_indexOfL_char:
+    case vmIntrinsics::_equalsL:
+    case vmIntrinsics::_equalsU:
+    case vmIntrinsics::_StringBuilder_void:
+    case vmIntrinsics::_StringBuilder_int:
+    case vmIntrinsics::_StringBuilder_String:
+    case vmIntrinsics::_StringBuilder_append_char:
+    case vmIntrinsics::_StringBuilder_append_int:
+    case vmIntrinsics::_StringBuilder_append_String:
+    case vmIntrinsics::_StringBuilder_toString:
+    case vmIntrinsics::_StringBuffer_void:
+    case vmIntrinsics::_StringBuffer_int:
+    case vmIntrinsics::_StringBuffer_String:
+    case vmIntrinsics::_StringBuffer_append_char:
+    case vmIntrinsics::_StringBuffer_append_int:
+    case vmIntrinsics::_StringBuffer_append_String:
+    case vmIntrinsics::_StringBuffer_toString:
+      return true;
+    default:
+      break;
+    }
+  }
+
   // -XX:-InlineNatives disables nearly all intrinsics except the ones listed in
   // the following switch statement.
   if (!InlineNatives) {
@@ -238,7 +286,7 @@ bool vmIntrinsics::disabled_by_jvm_flags(vmIntrinsics::ID id) {
     case vmIntrinsics::_storeFence:
     case vmIntrinsics::_fullFence:
     case vmIntrinsics::_countPositives:
-    case vmIntrinsics::_Reference_get:
+    case vmIntrinsics::_Reference_get0:
     case vmIntrinsics::_Continuation_doYield:
     case vmIntrinsics::_Continuation_enterSpecial:
       break;
@@ -472,6 +520,7 @@ bool vmIntrinsics::disabled_by_jvm_flags(vmIntrinsics::ID id) {
   case vmIntrinsics::_sha5_implCompress:
     if (!UseSHA512Intrinsics) return true;
     break;
+  case vmIntrinsics::_double_keccak:
   case vmIntrinsics::_sha3_implCompress:
     if (!UseSHA3Intrinsics) return true;
     break;
@@ -483,6 +532,22 @@ bool vmIntrinsics::disabled_by_jvm_flags(vmIntrinsics::ID id) {
     break;
   case vmIntrinsics::_chacha20Block:
     if (!UseChaCha20Intrinsics) return true;
+    break;
+  case vmIntrinsics::_kyberNtt:
+  case vmIntrinsics::_kyberInverseNtt:
+  case vmIntrinsics::_kyberNttMult:
+  case vmIntrinsics::_kyberAddPoly_2:
+  case vmIntrinsics::_kyberAddPoly_3:
+  case vmIntrinsics::_kyber12To16:
+  case vmIntrinsics::_kyberBarrettReduce:
+    if (!UseKyberIntrinsics) return true;
+    break;
+  case vmIntrinsics::_dilithiumAlmostNtt:
+  case vmIntrinsics::_dilithiumAlmostInverseNtt:
+  case vmIntrinsics::_dilithiumNttMult:
+  case vmIntrinsics::_dilithiumMontMulByConstant:
+  case vmIntrinsics::_dilithiumDecomposePoly:
+    if (!UseDilithiumIntrinsics) return true;
     break;
   case vmIntrinsics::_base64_encodeBlock:
   case vmIntrinsics::_base64_decodeBlock:

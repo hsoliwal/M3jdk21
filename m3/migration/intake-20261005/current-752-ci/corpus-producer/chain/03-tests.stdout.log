@@ -1,0 +1,28 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------< com.synexia.verification:m3-ci-752-corpus >--------------
+[INFO] Building Pinned A3 corpus regex recipe qualification 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-cli) @ m3-ci-752-corpus ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.CicRecipeTest
+CIC_JAVAP_API_EQUAL a515f99e9c3537a6a90d2047a2a84cb0194fedb211a673b03d07f42310f49766
+CIC_CORPUS_VERIFIED baselineFixtures=48 candidateFixtures=48 baselineHostileFailures=24 candidateValid=48 crlf=24 modern=24
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.655 s -- in com.synexia.rewrite.CicRecipeTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  8.739 s
+[INFO] Finished at: 2026-10-05T16:46:32Z
+[INFO] ------------------------------------------------------------------------

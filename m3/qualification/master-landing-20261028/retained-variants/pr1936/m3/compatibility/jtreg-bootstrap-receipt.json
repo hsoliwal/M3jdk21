@@ -1,0 +1,101 @@
+{
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "active_receiving_phase": "STRING",
+  "phase_advanced": false,
+  "source": {
+    "actual_built_local_head": "f038b4bf696daae189412bfb4af0848728c5f8ff",
+    "actual_tree": "7d4f8b8c86c9c4261d086e596e62f1c7b5881f2d",
+    "public_equal_tree_commit": "fea80d76998e7de693c3b1db82eaa50466159475"
+  },
+  "transport": "Passive result-only receipt; reusable recipes, fixtures, and execution machinery remain exclusively in Synexia. This file excludes its own transport-qualification hash; receiving evidence binds it externally.",
+  "schema": "M3_JTREG_BOOTSTRAP_RECEIPT_V1",
+  "status": "LOCAL_SELECTED_QUALIFICATION_PASS_HOSTED_PENDING",
+  "canonical_recipe": {
+    "name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "dataset": "m3-jtreg-bootstrap-v2-20261026",
+    "historical_basis": "367ef7fe883f4a1427dafcadb3ad8312500814a2",
+    "compiled_code_revision_at_invocation": "UNPUBLISHED_AT_INVOCATION",
+    "input_dataset_revision_at_invocation": "UNPUBLISHED_AT_INVOCATION",
+    "corrected_text_owner_sha256": "e778a00e7f139092b4f493263f2e1e97ef01eadc6ed2bafdec01f4abafae9101",
+    "SDK_qualification_sha256": "731ef5f6b06e4decea2280f97aa84b4db82fbf0c098cff4ff4eb78381be832da",
+    "actual_tests": [
+      5,
+      10,
+      9
+    ],
+    "actual_receiver_check_apply_replay": [
+      5,
+      5,
+      0
+    ]
+  },
+  "target_postimages": [
+    {
+      "path": ".github/actions/get-jtreg/action.yml",
+      "before": "6f6d9096b4640f210aa89f7bc4b05bbc8e8de5869383de67a36eb915a4b5ebd0",
+      "after_sha256": "f014aa31a1b19bca05086634c0321552dc3087f8955f1a5d987000a5b44c9f21",
+      "after_git_blob": "69097582e171e971224960507860bfbe0312041c"
+    },
+    {
+      "path": ".github/actions/get-jtreg/archive.paths",
+      "before": "ABSENT",
+      "after_sha256": "c299b367ff19920f312b39ccfd07f492f4a8337cea3f112b13effc796558fabd",
+      "after_git_blob": "61339c7544dbb19de7f8fb2ef9bbf8fab4245687"
+    },
+    {
+      "path": ".github/actions/get-jtreg/toolchain.sha256",
+      "before": "ABSENT",
+      "after_sha256": "9399739dcb83b9537af3dea3116cb9913b7940f9060f76660a1227e629ea3540",
+      "after_git_blob": "4241c5c9b965f2f7e305b0dfdcf210254fa8406f"
+    },
+    {
+      "path": ".github/workflows/m3-jep485-stream-gatherers.yml",
+      "before": "4a2ec5974b37380c3e76b81e319199ae864583ccb92446ea282dcf9720a78b5f",
+      "after_sha256": "e709d382d8a2ad40bee6e5f90dc9ffcfe8bc4e5995068a300d1ca015c50c4482",
+      "after_git_blob": "2d4701b51a411a68bde0c677c7b56bf91db384e4"
+    },
+    {
+      "path": "make/conf/github-actions.conf",
+      "before": "09c15edec773bde6cea66d293b6717b826da2a1bca1328d045b541d3acaaff4a",
+      "after_sha256": "5d083fc4f91ad42e5d29eb813265b64445242e5a5dd9e28c585135e0d930c66a",
+      "after_git_blob": "cd92b15ec6678de4fdf72c47e6f8c6021787d6c9"
+    }
+  ],
+  "toolchain": {
+    "distribution": "Shipilev maintainer portable jtreg build; not an official exact-source build",
+    "reported_version": "jtreg 7.2-dev+0",
+    "archive_sha256": "80e43818c3323af53cc4fab989f9710af3d60cfe1c596b943ad2179224c9d21c",
+    "publisher_SHA1": "c774234a82521186a112a9362bd71dbb6e120fba",
+    "jtreg_jar_sha256": "c88f06e4f1500a8f4a42a146c1f55b92e0ac5a5805e2596031ce7c38424c8d26",
+    "JTHarness": "6.0-ea-b24",
+    "JUnit": "1.9.2",
+    "TestNG": "7.3.0",
+    "dependency_version_digests_compared_to_upstream_7_2": true,
+    "archive_entries": 31,
+    "payload_files": 21,
+    "archive_path_and_payload_hashes_verified_before_install": true
+  },
+  "behavior": {
+    "existing_composite_output": "path=jtreg/installed",
+    "existing_consumers_reviewed": 9,
+    "new_workflows_or_triggers": false,
+    "configure_supplies_with_jtreg": true,
+    "actual_Linux_origin_install_and_refusals": true,
+    "selected_jtreg_files": 24,
+    "configured_make_test_Gatherer_files": 8,
+    "configured_make_test_JUnit_cases": 644,
+    "initial_missing_test_helper_refusal_retained": true,
+    "configured_make_test_exit_after_exact_tracked_helper_hydration": 0
+  },
+  "rights": {
+    "upstream_action_and_config": "Existing GPL-2.0-only WITH Classpath-exception-2.0 notices retained.",
+    "existing_custom_workflow": "GPL-2.0-only under the target default; no new Classpath exception inferred.",
+    "new_factual_manifests": "Hash and archive path facts; no donor payload copied into these manifests."
+  },
+  "limits": [
+    "Actual execution is Linux only; other consumer OS contracts were reviewed, not executed here.",
+    "No final hosted CI pass, full jtreg, JCK, provider-family or cross-platform completion is asserted.",
+    "Initial G-epoch Maven refusal remains immutable; V2 qualifies corrected unpublished code and data separately."
+  ]
+}

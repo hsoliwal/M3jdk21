@@ -1,0 +1,186 @@
+{
+  "schema": "M3_CURSOR_IMPLEMENTATION_EVIDENCE_INDEX_V1",
+  "license": {
+    "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+    "SPDX-License-Identifier": "Apache-2.0"
+  },
+  "selected_implementation": "Candidate3: retain the original five cursor fields; cache the complete visible scalar interval in both directions. Do not retain tuple traversal paths in this M3 cursor.",
+  "baseline_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "baseline_m3_git_blob": "e3bffdb11669a80a8fe8e1ba127b23fb7efc3c1e",
+  "final_m3_git_blob": "e53f62018eaf8e5dbf9cc85969bf3828e6950712",
+  "final_m3_sha256": "7d3afcfb6565325e822acdf70532817526e95641be89ad192711570549535580",
+  "test_sha256": "8989a34dd9295a11f9af8c14f4c47062bb1f5cd1573ec0a86c6cce82714420bc",
+  "benchmark_sha256": "bfb53263c24edc292788f8852109477714b1db1fdd4af8691a77cbb3bb631ba2",
+  "runner_sha256": "8ea3fb522542f0430e4714294636065446710923305852dcd5a110e6e1c72b69",
+  "contracts": {
+    "baseline": {
+      "status": "PASS",
+      "source_sha256": "fad8274a84532ce29bd2b2fbdcb62474cfce32a6fb8eee89b885e5a611ea46f0",
+      "source_git_blob": "e3bffdb11669a80a8fe8e1ba127b23fb7efc3c1e",
+      "receipt_sha256": "a808c06fd363ed63e1eba892f46d8e20c9aa1d869bb1f036dad6a6de0ece53f5",
+      "default_and_interpreter": {
+        "test-default.log": "M3_PATH_CURSOR_PASS checks=1746792 scenarios=35914 actual_owners=true simulated_owners=false string_admission_tested=false hotspot_jni_integration_tested=false",
+        "test-interpreter.log": "M3_PATH_CURSOR_PASS checks=1746792 scenarios=35914 actual_owners=true simulated_owners=false string_admission_tested=false hotspot_jni_integration_tested=false"
+      }
+    },
+    "candidate1": {
+      "status": "PASS",
+      "source_sha256": "afe36b227aa9e97792df0b8857248be0415edb52a52c7f1ae53e67169ee1d213",
+      "source_git_blob": "caf174ac652f058fd46364e690d4ef73ec2559da",
+      "receipt_sha256": "c000cd9126db605748ff097540a7dec1ac0826bf088d66582109154ba9d38f45",
+      "default_and_interpreter": {
+        "test-default.log": "M3_PATH_CURSOR_PASS checks=1746792 scenarios=35914 actual_owners=true simulated_owners=false string_admission_tested=false hotspot_jni_integration_tested=false",
+        "test-interpreter.log": "M3_PATH_CURSOR_PASS checks=1746792 scenarios=35914 actual_owners=true simulated_owners=false string_admission_tested=false hotspot_jni_integration_tested=false"
+      }
+    },
+    "candidate2": {
+      "status": "PASS",
+      "source_sha256": "4ec5f0db768c512e89c7e73355ed91458655ff535f15d59aa9cf878706456871",
+      "source_git_blob": "655e5e153ff93ac3f483d48979e14aca0e075b64",
+      "receipt_sha256": "66d33f3914b9070a1c3e5f653e67fcecb034008e80083eb93587b963c5f13ccd",
+      "default_and_interpreter": {
+        "test-default.log": "M3_PATH_CURSOR_PASS checks=1746792 scenarios=35914 actual_owners=true simulated_owners=false string_admission_tested=false hotspot_jni_integration_tested=false",
+        "test-interpreter.log": "M3_PATH_CURSOR_PASS checks=1746792 scenarios=35914 actual_owners=true simulated_owners=false string_admission_tested=false hotspot_jni_integration_tested=false"
+      }
+    },
+    "candidate3": {
+      "status": "PASS",
+      "source_sha256": "7d3afcfb6565325e822acdf70532817526e95641be89ad192711570549535580",
+      "source_git_blob": "e53f62018eaf8e5dbf9cc85969bf3828e6950712",
+      "receipt_sha256": "0df5ee15952f6bb61392d23f42837deb3974ee93a96330e369b2e51025ab7313",
+      "default_and_interpreter": {
+        "test-default.log": "M3_PATH_CURSOR_PASS checks=1746792 scenarios=35914 actual_owners=true simulated_owners=false string_admission_tested=false hotspot_jni_integration_tested=false",
+        "test-interpreter.log": "M3_PATH_CURSOR_PASS checks=1746792 scenarios=35914 actual_owners=true simulated_owners=false string_admission_tested=false hotspot_jni_integration_tested=false"
+      }
+    }
+  },
+  "performance": {
+    "measurement_status": "All 42 cases and exact checksums completed",
+    "non_regression_established": false,
+    "regressions_observed": true,
+    "final_all_42_allocation_medians_equal_to_baseline": true,
+    "selection_rationale": "The final source bounds M3 cursor allocation and state complexity while reducing repeated reverse resolution inside a scalar interval. It is not selected on a claim of universal elapsed-time improvement.",
+    "comparison_file": "analysis/cursor-ab-final.json",
+    "single_candidate_jvm_and_retained_earlier_baseline": true,
+    "within_jvm_samples_retained": true,
+    "cross_process_confidence_intervals": false,
+    "negative_findings": "Final reused atom forward/random and several unit/forward/shared/random medians are slower; fresh first-read and fresh-pass results are mixed. Candidate1/2 paths have stronger sequential gains but added allocation and material mixed-matrix regressions. Isolated candidate2 compound regressions do not reproduce; no compiler-causality conclusion is established.",
+    "native_bytes_per_fixture": 16384,
+    "added_native_bytes_by_cursor": 0,
+    "compound_leaf_payload_locality": "Every compound fixture is made of real views over one actual 16,384-byte atom. It does not measure physically scattered native leaf allocations.",
+    "heap_and_rss_interpretation": "Heap samples and process max RSS include the JVM, oracle/fixture construction, compilation and GC; they are not retained owner-size measurements."
+  },
+  "history": {
+    "baseline-1": "Original test before max-coordinate case; 4/9/32 benchmark and older SPDX header. Kept verbatim.",
+    "baseline-2": "Original test before max-coordinate case; final benchmark source; 4/9/32 samples. Kept verbatim.",
+    "baseline-final-contract": "Final 8989a34 test including max-coordinate case; default and interpreter pass. Its actual class outputs also supply the retained 8/11/64 baseline.",
+    "candidate-1": "Eager retained directional path; source afe36b...; actual contracts and original/repeated measurements retained. Not the selected runtime.",
+    "candidate2": "Adaptive retained path; source 4ec5f...; actual contracts, 42-case matrix and isolated compiler diagnostic retained. Not the selected runtime.",
+    "candidate3": "Final small full-window source 7d3af...; exact contracts and 42-case matrix, no additional optional diagnostics.",
+    "candidate4": "Combined SDK emission changes canonical MIndex allocation bounds; all three M3 target files equal candidate3 bytes."
+  },
+  "scope": {
+    "actual_m3_sources_and_owners": true,
+    "extracted_runtime_methods": false,
+    "simulated_owners": false,
+    "stock_java_21_vm": true,
+    "modified_public_String_class_loaded": false,
+    "public_String_admission_tested": false,
+    "matched_HotSpot_JNI_integration_tested": false,
+    "public_substring_behavior_changed": false,
+    "UTF16_unpaired_surrogate_contract_preserved": true,
+    "all_M3_or_MIndex_families_validated_by_this_package": false
+  },
+  "bundles": [
+    {
+      "bundle": "raw/baseline-1.json",
+      "entries": 10,
+      "original_bytes": 115238
+    },
+    {
+      "bundle": "raw/baseline-2.json",
+      "entries": 10,
+      "original_bytes": 115478
+    },
+    {
+      "bundle": "raw/baseline-final-contract.json",
+      "entries": 7,
+      "original_bytes": 90118
+    },
+    {
+      "bundle": "raw/candidate-1.json",
+      "entries": 10,
+      "original_bytes": 115984
+    },
+    {
+      "bundle": "raw/bench-repeat.json",
+      "entries": 7,
+      "original_bytes": 131063
+    },
+    {
+      "bundle": "raw/candidate2-actual-contract.json",
+      "entries": 7,
+      "original_bytes": 89733
+    },
+    {
+      "bundle": "raw/candidate2-benchmark.json",
+      "entries": 4,
+      "original_bytes": 61612
+    },
+    {
+      "bundle": "raw/candidate3-actual-contract.json",
+      "entries": 7,
+      "original_bytes": 89733
+    },
+    {
+      "bundle": "raw/candidate3-benchmark.json",
+      "entries": 3,
+      "original_bytes": 28852
+    },
+    {
+      "bundle": "raw/diagnostic-control.json",
+      "entries": 2,
+      "original_bytes": 13102
+    },
+    {
+      "bundle": "raw/diagnostic-baseline-atom-16384-forward.json",
+      "entries": 3,
+      "original_bytes": 216324
+    },
+    {
+      "bundle": "raw/diagnostic-baseline-atom-16384-random.json",
+      "entries": 3,
+      "original_bytes": 203269
+    },
+    {
+      "bundle": "raw/diagnostic-baseline-balanced-64-16384-forward.json",
+      "entries": 3,
+      "original_bytes": 212522
+    },
+    {
+      "bundle": "raw/diagnostic-baseline-balanced-64-16384-random.json",
+      "entries": 3,
+      "original_bytes": 239574
+    },
+    {
+      "bundle": "raw/diagnostic-candidate2-atom-16384-forward.json",
+      "entries": 3,
+      "original_bytes": 223651
+    },
+    {
+      "bundle": "raw/diagnostic-candidate2-atom-16384-random.json",
+      "entries": 3,
+      "original_bytes": 198552
+    },
+    {
+      "bundle": "raw/diagnostic-candidate2-balanced-64-16384-forward.json",
+      "entries": 3,
+      "original_bytes": 239465
+    },
+    {
+      "bundle": "raw/diagnostic-candidate2-balanced-64-16384-random.json",
+      "entries": 3,
+      "original_bytes": 265353
+    }
+  ]
+}

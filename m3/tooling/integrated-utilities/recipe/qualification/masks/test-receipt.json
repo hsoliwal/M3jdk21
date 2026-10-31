@@ -1,0 +1,83 @@
+[
+  {
+    "label": "differential",
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xms32m",
+      "-Xmx128m",
+      "-Xcheck:jni",
+      "--patch-module",
+      "java.base=/dev/shm/m3jdk21-work/mask-candidates/qualification/classes",
+      "-Xlog:jni+resolve=debug:file=/dev/shm/m3jdk21-work/mask-candidates/qualification/differential-jni.log",
+      "-Dtest.m3.masks.native.library=/tmp/m3jdk21-integrated-native/libM3CollectionMasksQualification.so",
+      "java.util.M3CollectionMasksTest",
+      "full"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.3800010681152344,
+    "output": "M3CollectionMasksTest PASS cases=50132 selectors=4 mode=full nativeRequested=false\n",
+    "native_resolution": [
+      "[0.163s][debug][jni,resolve] [Dynamic-linking native method java.util.M3CollectionMasks.selected0 ... JNI]"
+    ]
+  },
+  {
+    "label": "consumer-java",
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xms32m",
+      "-Xmx128m",
+      "-Xcheck:jni",
+      "--patch-module",
+      "java.base=/dev/shm/m3jdk21-work/mask-candidates/qualification/classes",
+      "-Xlog:jni+resolve=debug:file=/dev/shm/m3jdk21-work/mask-candidates/qualification/consumer-java-jni.log",
+      "-Dtest.m3.masks.native.library=/tmp/m3jdk21-integrated-native/libM3CollectionMasksQualification.so",
+      "java.util.M3CollectionMasksTest",
+      "consumer"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.31255650520324707,
+    "output": "M3CollectionMasksTest PASS cases=12533 selectors=1 mode=consumer nativeRequested=false\n",
+    "native_resolution": []
+  },
+  {
+    "label": "consumer-native",
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xms32m",
+      "-Xmx128m",
+      "-Xcheck:jni",
+      "--patch-module",
+      "java.base=/dev/shm/m3jdk21-work/mask-candidates/qualification/classes",
+      "-Xlog:jni+resolve=debug:file=/dev/shm/m3jdk21-work/mask-candidates/qualification/consumer-native-jni.log",
+      "-Djdk.m3.collectionMasks.native=true",
+      "-Dtest.m3.masks.native.library=/tmp/m3jdk21-integrated-native/libM3CollectionMasksQualification.so",
+      "java.util.M3CollectionMasksTest",
+      "consumer"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.4331047534942627,
+    "output": "M3CollectionMasksTest PASS cases=12533 selectors=1 mode=consumer nativeRequested=true\n",
+    "native_resolution": [
+      "[0.157s][debug][jni,resolve] [Dynamic-linking native method java.util.M3CollectionMasks.selected0 ... JNI]"
+    ]
+  },
+  {
+    "label": "consumer-fallback",
+    "command": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xms32m",
+      "-Xmx128m",
+      "-Xcheck:jni",
+      "--patch-module",
+      "java.base=/dev/shm/m3jdk21-work/mask-candidates/qualification/classes",
+      "-Xlog:jni+resolve=debug:file=/dev/shm/m3jdk21-work/mask-candidates/qualification/consumer-fallback-jni.log",
+      "-Djdk.m3.collectionMasks.native=true",
+      "java.util.M3CollectionMasksTest",
+      "consumer"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.3132667541503906,
+    "output": "M3CollectionMasksTest PASS cases=12533 selectors=1 mode=consumer nativeRequested=true\n",
+    "native_resolution": []
+  }
+]

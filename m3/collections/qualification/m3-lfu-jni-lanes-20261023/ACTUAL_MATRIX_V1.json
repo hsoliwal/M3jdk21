@@ -1,0 +1,79 @@
+{
+  "SDK_failures_errors_skips": 0,
+  "SDK_tests": 5,
+  "candidate_SHA256": "4c9956096b1d92cfe9ba2db5293104e38d622c4273c3ab491345925a7779a417",
+  "checks": 197325,
+  "current_DLL_SHA256": "8daf087344d1a54e99beccb664cd1d542abb8006421a368909ce3221a71f4144",
+  "current_engine": "Synexia4170473b trio595ab8c4/9a6c54f4/962d37d6; isolated offline8.17.1 SDKhost, fullreactor pending",
+  "expected_RED_JVMs": 1,
+  "formal_review": "NO_VERDICT; source advisory only",
+  "fresh_positive_or_fault_JVMs": 6,
+  "full_goal": "ACTIVE_UNFINISHED",
+  "known_counterexample": "Existing clock Long.MAX_VALUE with occupied stamps0 andMAX-1 wraps touched stamp toLong.MIN_VALUE; observed before AND after. Not fixed or admitted as correct LFU behavior. Fix in next serial same-owner recipe pass before APIprojection integration.",
+  "native_mode_checks_each": 98602,
+  "pending": [
+    "zero-minimum stamp wrap",
+    "LFU APIprojection ownership/liveness",
+    "nth-allocation failure",
+    "full reactor/jtreg/installed image/C++20",
+    "full API family superset/Unicode/concurrency/serialization",
+    "BOTH regex scope"
+  ],
+  "phases": [
+    {
+      "SHA256": "f1741a0181b3021ac601378e5ca49c5bb850678f850c84f540cd7c453ca67147",
+      "checks": null,
+      "phase": "compile-before"
+    },
+    {
+      "SHA256": "82f401f85425b41008605d5a8d788368b7bf0e5b896d2ab51c9f7529d11b58ad",
+      "checks": null,
+      "phase": "red-java-allocation"
+    },
+    {
+      "SHA256": "5537823cd47835fbaa0e7231e2d256327786aea0031fff0af32aecd6599c0a5d",
+      "checks": 98602,
+      "phase": "baseline-native"
+    },
+    {
+      "SHA256": "855f28afefb946eb8fd986b405b90e54e40642907eecb267bf98b6c7cbad9f55",
+      "checks": null,
+      "phase": "sdk"
+    },
+    {
+      "SHA256": "711fa2845442d12f14310904fe15e1bd9390c1ae0aeb6c93688ce82a800e041f",
+      "checks": null,
+      "phase": "compile-after"
+    },
+    {
+      "SHA256": "92400b135dcc16ab068593b0aaf1414990ad2a938aca86fbe217f5cba2b222c5",
+      "checks": 98602,
+      "phase": "after-native"
+    },
+    {
+      "SHA256": "60b218ccb567cf6e9a9a5c08032e72860c6dfcf00b32160eeefd219340dc1910",
+      "checks": 24,
+      "phase": "negative-unloaded"
+    },
+    {
+      "SHA256": "a73212707eb06e147431104b78458bcae2fda2debbad1d1457d08c15f13ce378",
+      "checks": 31,
+      "phase": "after-silent"
+    },
+    {
+      "SHA256": "6924a7ec715851db3648e8a712570d8089469f7d61b21b9c69c66b854cf54cf5",
+      "checks": 35,
+      "phase": "after-pending"
+    },
+    {
+      "SHA256": "c2568a0de0577e6ef42ceb885dab265add06cd50f5b6ed92af9817cf8af97093",
+      "checks": 31,
+      "phase": "after-legacy"
+    }
+  ],
+  "production_scope": "Only five constructor array assignments; all remaining bytes and APIs preserved",
+  "schema": "M3_LFU_NATIVE_LANES_MATRIX_V1",
+  "status": "CONSTRUCTOR_ARRAY_PATH_QUALIFIED_EXISTING_CLOCK_BUG_OPEN",
+  "storage": "ACTIVE105MiB/headroom65536/reserves;5completedMapproofinputs byte-preserved in3localarchives+canonicalGit; raw results/logs/seals/classes untouched",
+  "trace": "51204e91d697be7f16e38e3470869fffb2e2520bb5eb9ce0e78c90e8d165edd9"
+}

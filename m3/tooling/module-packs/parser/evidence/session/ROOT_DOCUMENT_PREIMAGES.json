@@ -1,0 +1,21 @@
+{
+  "schema": "M3_PARSER_ROOT_PREIMAGES_V1",
+  "recorded_at": "2026-10-18T05:44:00.222732+00:00",
+  "files": [
+    {
+      "path": "/workspace/scratch/a0f19f379302/M3jdk21/m3/tooling/module-packs/parser/DESIGN.md",
+      "bytes": 4837,
+      "sha256": "e01426caf3985fc829c9c025b80aaf68c5c085caea3010f6570ba2bea0965ff0"
+    },
+    {
+      "path": "/workspace/scratch/a0f19f379302/M3jdk21/m3/tooling/module-packs/parser/CHANGE_CONTEXT.json",
+      "bytes": 1037,
+      "sha256": "3e134edf55ec85b1f27f4a4ec941bffcadd6779d81bcc60badd568bedfa2a1c6"
+    },
+    {
+      "path": "/workspace/scratch/a0f19f379302/M3jdk21/m3/tooling/module-packs/parser/FOSS_REUSE_DECISIONS.tsv",
+      "bytes": 1059,
+      "sha256": "d490b1157f9256da890ec4f7aba82adf0651b23b336641f9e23ceea23c3dffc3"
+    }
+  ]
+}

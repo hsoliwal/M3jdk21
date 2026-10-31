@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.JccMergeMappingRecoveryV04
+displayName: Bind current JCC source owners while preserving receiving history
+description: Replays four exact reviewed current mapping images through the retained text owner, preserving all mapping policy, historical lineage, and blocked source and destination acceptance states.
+tags:
+  - m3
+  - jdk21
+  - hash-pinned
+  - candidate-only
+  - fail-closed
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: jcc-merge-recovery-20261006-mapping-v04

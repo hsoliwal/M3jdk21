@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/tmp/m3-cursor-tools/jdk-21.0.12.1+1/bin/javac",
+    "--release",
+    "21",
+    "-d",
+    "/workspace/scratch/a20ebe6f78bb/continuation/portable-clean/oracle-classes",
+    "/workspace/scratch/a20ebe6f78bb/Synexia/synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/oracle/CanonicalPutAllCalibration3.java",
+    "/workspace/scratch/a20ebe6f78bb/Synexia/synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/oracle/EmptyRootLookupOracle.java"
+  ],
+  "cwd": "/workspace/scratch/a20ebe6f78bb/continuation/clean-after",
+  "jdk": "/tmp/m3-cursor-tools/jdk-21.0.12.1+1"
+}

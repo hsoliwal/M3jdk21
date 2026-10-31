@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, 2022, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2013, 2026, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -1572,6 +1572,13 @@ abstract class GaloisCounterMode extends CipherSpi {
                 len += buffer.remaining();
             }
 
+            // Check that input data is long enough to fit the expected tag.
+            if (len < 0) {
+                throw new AEADBadTagException("Input data too short to " +
+                    "contain an expected tag length of " + tagLenBytes +
+                    "bytes");
+            }
+
             checkDataLength(len);
 
             // Verify dst is large enough
@@ -1635,8 +1642,9 @@ abstract class GaloisCounterMode extends CipherSpi {
                         NIO_ACCESS.acquireSession(dst);
                         try {
                             Unsafe.getUnsafe().setMemory(
-                                ((DirectBuffer)dst).address(),
-                                len + dst.position(), (byte) 0);
+                                ((DirectBuffer)dst).address()
+                                    + dst.position(),
+                                len, (byte) 0);
                         } finally {
                             NIO_ACCESS.releaseSession(dst);
                         }

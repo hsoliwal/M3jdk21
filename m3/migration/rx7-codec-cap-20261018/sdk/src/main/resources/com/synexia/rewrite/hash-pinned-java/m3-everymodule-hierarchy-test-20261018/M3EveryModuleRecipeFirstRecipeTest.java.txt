@@ -1,0 +1,47 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.rewrite;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+
+import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.openrewrite.Recipe;
+
+class M3EveryModuleRecipeFirstRecipeTest {
+
+    @Test
+    void inventoryIsReadOnlyAndComposesExistingOwners() {
+        M3EveryModuleAtomPatternInventoryRecipe recipe =
+                new M3EveryModuleAtomPatternInventoryRecipe();
+
+        List<Recipe> children = recipe.getRecipeList();
+
+        assertEquals(2, children.size());
+        assertInstanceOf(M3HierarchicalAtomPatternRecipe.class, children.get(0));
+        assertInstanceOf(M3RepositoryAtomizePatternizeRecipe.class,
+                children.get(0).getRecipeList().get(3));
+        assertInstanceOf(M3DonorMavenizedAtomPatternRecipe.class, children.get(1));
+        assertFalse(recipe.mutationAuthority());
+        assertFalse(recipe.sourceCopyAuthority());
+        assertFalse(recipe.promotionAuthority());
+        assertEquals(1, recipe.maxCycles());
+    }
+
+    @Test
+    void taskLaneAdmitsThenInventoriesThenPlans() {
+        M3EveryModuleRecipeFirstTaskRecipe recipe =
+                new M3EveryModuleRecipeFirstTaskRecipe();
+
+        List<Recipe> children = recipe.getRecipeList();
+
+        assertEquals(3, children.size());
+        assertInstanceOf(M3LlmTaskAdmissionRecipe.class, children.get(0));
+        assertInstanceOf(M3EveryModuleAtomPatternInventoryRecipe.class, children.get(1));
+        assertInstanceOf(M3LlmRecipeFirstRecipe.class, children.get(2));
+        assertFalse(recipe.directTargetFileMutationAuthority());
+        assertFalse(recipe.donorSourceCopyAuthority());
+        assertEquals(1, recipe.maxCycles());
+    }
+}

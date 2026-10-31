@@ -1,0 +1,129 @@
+{
+  "schema": "synexia.coding-agent.catalogue-validation.v1",
+  "status": "PASS_METADATA_AND_SOURCE_BINDINGS_ONLY",
+  "bindings": 101,
+  "upstream_recipes": 87,
+  "mechanical_entries": 6,
+  "existing_check_fix_actions": 8,
+  "requirements": 417,
+  "categories": 31,
+  "bound_requirement_candidates": 105,
+  "unbound_requirements": 312,
+  "source_pins": 109,
+  "dag_shapes": 8,
+  "YAML_examples": 4,
+  "YAML_and_Maven_execution": false,
+  "source_implementation_generated": false,
+  "storage_protection": "ACTIVE",
+  "files": [
+    {
+      "path": "CUSTODY.json",
+      "bytes": 613,
+      "sha256": "6229ca610d6442339a3012b021abb62b77c8797819c195652e3bbf08f559cc02",
+      "git_blob": "d48838490075021d5ad9c80a2c5691fbe5510f61"
+    },
+    {
+      "path": "FOSS_REUSE_DECISION.tsv",
+      "bytes": 1673,
+      "sha256": "f476dcd42c37a6c120110c57217ebbde26fe2653b01f301f9404c8b046e4f4e3",
+      "git_blob": "b6dfb032cccd8e8ad5f86284a0404f8010c50c9b"
+    },
+    {
+      "path": "MAVEN_INVOCATION.json",
+      "bytes": 1853,
+      "sha256": "7d898de7bbbdb4131dda46870b8a09121b7a2ed14f40ea3bc471c954b3f7fe08",
+      "git_blob": "8c91f7ed2b7c7e4607d7a75dc1e50f122aa937ad"
+    },
+    {
+      "path": "PREPARATION_VALIDATION.json",
+      "bytes": 3594,
+      "sha256": "cddfb8412820a99828e884834b882425ee81bedc2cc9d221578db11d9d4cf2ab",
+      "git_blob": "abd3e1c3d1606f522b11ac2c64c6ef589325540d"
+    },
+    {
+      "path": "PROGRAMMING_REQUIREMENTS.json",
+      "bytes": 214677,
+      "sha256": "3d35c3b08fd0ca56bec8304bb8f894e86ebb8af79efc768616ed43df6d05886d",
+      "git_blob": "88be62d2890cee546cfdefbebc69f123c80025e0"
+    },
+    {
+      "path": "PROGRAMMING_REQUIREMENTS.tsv",
+      "bytes": 130823,
+      "sha256": "70abb3596bfa5c0db9fef40c3de77b43dac009651b565916d874b951b82882f8",
+      "git_blob": "062234a1826a96746509dcf0bc6e01d906971dd3"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3705,
+      "sha256": "78e0ad8c1cb80e838e38a14d2d43579a62a92bbfc81f9a82534442e92ab8296d",
+      "git_blob": "742af6f3dbaa0b1ce50f801490df1c7c49ecc7bd"
+    },
+    {
+      "path": "RECIPE_BINDINGS.json",
+      "bytes": 253199,
+      "sha256": "792302330f8c2cd33041be6d0e2354621c72f954d6c0f2e65ca780125a21f4f1",
+      "git_blob": "9f3eca18c3e5c5f95e1b7ae990858900bb25a2fa"
+    },
+    {
+      "path": "RECIPE_BINDINGS.tsv",
+      "bytes": 122291,
+      "sha256": "eb016ad179881c2c74c3f3a66f055ad34fd46a4939756c6ff6f8a56242ddf2ab",
+      "git_blob": "b60c13292282a93070b84fc6deae88e65e79e6c9"
+    },
+    {
+      "path": "RECIPE_DAG_SHAPES.json",
+      "bytes": 15346,
+      "sha256": "d867849e9233a92ad56c056100cb13b571bb80c856e640df4422b9e9d7745d31",
+      "git_blob": "61738abba8b1f1b83faac81039ad400c17421441"
+    },
+    {
+      "path": "REGEX_CONTRACT.json",
+      "bytes": 2110,
+      "sha256": "967d677392097fa042831931d57c9808b30afbf8ca818adf3078e4568e77d4a5",
+      "git_blob": "baa6f140d7b2e39176dd02f1b606a6937bc4dee4"
+    },
+    {
+      "path": "SCOPE_CONTRACT.json",
+      "bytes": 2995,
+      "sha256": "81df0c956ed594f17c28e15a9f8b5aee0d563d4c4a7669b002cde6a461b5a905",
+      "git_blob": "021e554f27245f661e0396ce7d18377b6208ce7b"
+    },
+    {
+      "path": "SCOPED_RECIPE_EXAMPLES.yml",
+      "bytes": 2335,
+      "sha256": "68afc4d77f7f44a4988bc4339723cfb13d704540977f9de986ff75c9e13839ac",
+      "git_blob": "8a958c6ed1a5c7f2be1b3e208c4acff3412845b2"
+    },
+    {
+      "path": "SELECTION_EXAMPLES.json",
+      "bytes": 1731,
+      "sha256": "dc478a2207615994f242d8c8ce5346c4a3ce0be1332d2c16f16cfae5cdf33a0f",
+      "git_blob": "e35f8e2cb99a9d8066b64dcb940f14fd0460b940"
+    },
+    {
+      "path": "SOURCE_PINS.json",
+      "bytes": 67533,
+      "sha256": "d5e57994ab2a68826e5d0e0e1061486435cd31733645523f541db88c6a8898fe",
+      "git_blob": "e892ecc563b4b7038abbca3fe3e2e1041b9c670e"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "bytes": 928,
+      "sha256": "e5e41c1bf09b6a6224e5a9cb9e68ddfbf7c43f388c3c1b05c91689bb2c9829bb",
+      "git_blob": "99c7764aab81b0784c153f366d5fe47294dd1302"
+    }
+  ],
+  "reviewed_corrections": [
+    "Mechanical leaf/API source completeness",
+    "Raw annotation string value",
+    "Maven pipeline requirement no longer misbound to perfection unit tests",
+    "Per-binding regex options, held experimental multiselect",
+    "Mechanical fixed boolean configuration and raw entry IDs",
+    "Explicit delete/rename/file-attribute effects and input/output selector roles",
+    "Lifecycle phases distinguished from filesystem effect permissions",
+    "Pinned YAML loader/declarative framework",
+    "Exact-one promotion existing-parser boundary",
+    "Parsed Java fixture/type-attribution prerequisites"
+  ],
+  "preparation_validation_sha256": "cddfb8412820a99828e884834b882425ee81bedc2cc9d221578db11d9d4cf2ab"
+}

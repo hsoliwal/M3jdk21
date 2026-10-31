@@ -1,0 +1,329 @@
+{
+  "schema": "m3-a3-code-string-repair-execution/1",
+  "status": "PASS",
+  "started_at": "2026-10-06T05:30:05.412413+00:00",
+  "proof_inputs": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/PROOF_INPUTS.json",
+    "bytes": 7929,
+    "sha256": "eec303dd93aa75dccb4af78fdec2828079641b66aaab9c92c499790666629eea",
+    "git_blob": "30775ba6c56bd521281b34b3db018f9dddd98164"
+  },
+  "recipe_crate": "a3-code-string-repair-20261006",
+  "library_versions": {
+    "rewrite": "8.17.1",
+    "junit": "5.10.2",
+    "jdk": "21+35",
+    "maven": "3.9.9"
+  },
+  "original_tests_unchanged": true,
+  "canonical_owners_unchanged": true,
+  "broad_runtime_native_admission": false,
+  "proof_process": {
+    "argv": [
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/apache-maven-3.9.9/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/cache",
+      "-Dm3.a3.repair.materialized=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/materialized",
+      "-f",
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/proof-workspace/m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006/verification/pom.xml",
+      "test"
+    ],
+    "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/proof-workspace",
+    "start_utc": "2026-10-06T05:30:05.412546+00:00",
+    "java_home": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/jdk-21+35",
+    "finish_utc": "2026-10-06T05:30:10.557869+00:00",
+    "exit_code": 0,
+    "log": {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/01-canonical-recipe.log",
+      "bytes": 2434,
+      "sha256": "e8e93d3e3d775ab8b7bb2e21b8bf15dd5a863a7bb09a5128cd1fee7748067fbc",
+      "git_blob": "21e6e6f52d965aeff01ef931a25d7ceac8012c46"
+    }
+  },
+  "proof_junit": [
+    {
+      "identity": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/proof-workspace/m3/tooling/migration-recipes/tasks/a3-code-string-repair-20261006/verification/target/surefire-reports/TEST-com.m3.rewrite.backport.A3CodeStringRepairTest.xml",
+        "bytes": 23707,
+        "sha256": "8b515d9d641aaa1f92b6935549deb4c2d5690e2cfb6610f366f07edd9ba197f0",
+        "git_blob": "5eb86f68037334b0cda8de48c587050e3a7f84c0"
+      },
+      "attributes": {
+        "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+        "version": "3.0",
+        "name": "com.m3.rewrite.backport.A3CodeStringRepairTest",
+        "time": "1.445",
+        "tests": "9",
+        "errors": "0",
+        "skipped": "0",
+        "failures": "0"
+      },
+      "methods": [
+        {
+          "attributes": {
+            "name": "allDriftedTargetsRefuseWithoutPartialOutputs",
+            "classname": "com.m3.rewrite.backport.A3CodeStringRepairTest",
+            "time": "0.162"
+          },
+          "problems": []
+        },
+        {
+          "attributes": {
+            "name": "retainedOwnerProducesExactlyThreeOutputsAndPreservesIdentityAtFixedPoint",
+            "classname": "com.m3.rewrite.backport.A3CodeStringRepairTest",
+            "time": "0.048"
+          },
+          "problems": []
+        },
+        {
+          "attributes": {
+            "name": "namedMavenEntryAndSerializedOwnerProduceTheSameOutputs",
+            "classname": "com.m3.rewrite.backport.A3CodeStringRepairTest",
+            "time": "0.812"
+          },
+          "problems": []
+        },
+        {
+          "attributes": {
+            "name": "allMissingTargetsRefuseWithoutPartialOutputs",
+            "classname": "com.m3.rewrite.backport.A3CodeStringRepairTest",
+            "time": "0.007"
+          },
+          "problems": []
+        },
+        {
+          "attributes": {
+            "name": "changedAfterScanTargetsRefuse",
+            "classname": "com.m3.rewrite.backport.A3CodeStringRepairTest",
+            "time": "0.005"
+          },
+          "problems": []
+        },
+        {
+          "attributes": {
+            "name": "everyBeforeAfterCombinationConvergesToTheSameThreeBoundFiles",
+            "classname": "com.m3.rewrite.backport.A3CodeStringRepairTest",
+            "time": "0.027"
+          },
+          "problems": []
+        },
+        {
+          "attributes": {
+            "name": "duplicateTargetsRefuseEvenWhenBothCopiesAreAdmittedImages",
+            "classname": "com.m3.rewrite.backport.A3CodeStringRepairTest",
+            "time": "0.009"
+          },
+          "problems": []
+        },
+        {
+          "attributes": {
+            "name": "manifestAdmitsOnlyTheThreeExactCurrentPreimagesAndExpectedOutputs",
+            "classname": "com.m3.rewrite.backport.A3CodeStringRepairTest",
+            "time": "0.001"
+          },
+          "problems": []
+        },
+        {
+          "attributes": {
+            "name": "onlyNestedQuoteEscapesAndTheirManifestHashChange",
+            "classname": "com.m3.rewrite.backport.A3CodeStringRepairTest",
+            "time": "0.34"
+          },
+          "problems": []
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/materialized/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+      "bytes": 7516,
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada",
+      "git_blob": "85f132217c82e67a599bde5f22a4c5a348e120ce",
+      "repository_path": "m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+      "expected_before_git_blob": "bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33",
+      "origin": "ACTUAL_CANONICAL_OPENREWRITE_RESULT"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/materialized/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "bytes": 7516,
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada",
+      "git_blob": "85f132217c82e67a599bde5f22a4c5a348e120ce",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "expected_before_git_blob": "bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33",
+      "origin": "ACTUAL_CANONICAL_OPENREWRITE_RESULT"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/materialized/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "bytes": 658,
+      "sha256": "e92d3c16a897a02084ca749d092a02402c2f1d0225bcb9c8755c0304f838dabd",
+      "git_blob": "6e01de6e3fee61707edb6dfca073d0a9a839ad60",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "expected_before_git_blob": "f18bdb2c7808e88dc2692e58acafbdfbc854b7e5",
+      "origin": "ACTUAL_CANONICAL_OPENREWRITE_RESULT"
+    }
+  ],
+  "javac_process": {
+    "argv": [
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/jdk-21+35/bin/javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-encoding",
+      "UTF-8",
+      "-d",
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/compiled",
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/materialized/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java"
+    ],
+    "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/materialized",
+    "start_utc": "2026-10-06T05:30:10.559721+00:00",
+    "java_home": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/jdk-21+35",
+    "finish_utc": "2026-10-06T05:30:11.131381+00:00",
+    "exit_code": 0,
+    "log": {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/02-actual-produced-javac.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    }
+  },
+  "compiled_classes": [
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/compiled/com/m3/a3/A3RegexMatrix$Matrix.class",
+      "bytes": 2502,
+      "sha256": "6557fe372a7018f08604adf01d01931b9a2800597c3dd0ee78b45ca175b6e6ca",
+      "git_blob": "2bef40835036dd50dc3fdca6b54c70f8338d708c"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/compiled/com/m3/a3/A3RegexMatrix$Prepared.class",
+      "bytes": 1580,
+      "sha256": "9d2edccdbafa5e307c0a22965fd31dcdf4ebfa91a01294d3f4c21709d67a8a8c",
+      "git_blob": "b5a13300ab1eb196a5a797d791b40871b0621724"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/compiled/com/m3/a3/A3RegexMatrix$Signal.class",
+      "bytes": 2002,
+      "sha256": "c0f872ec4edbd93009d85d7dc51035877f19ed7e1b4de1f29db68cb1e1d9d2db",
+      "git_blob": "ffa2fcdd16b1263b6ca23806865630899bba8b71"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/compiled/com/m3/a3/A3RegexMatrix.class",
+      "bytes": 6199,
+      "sha256": "b577777482369563c1ee03ac65a247c4a8cfadacd4762ff00ae9d32fb5e727d5",
+      "git_blob": "580edb729dea70214540e9256f9e56e7396a548c"
+    }
+  ],
+  "behavior_inputs": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/BEHAVIOR_INPUTS.json",
+    "bytes": 12798,
+    "sha256": "d08bcd55933a053f3f24cd3e00a837f4b5105e5b81bf5c4891de62b3c009c6cb",
+    "git_blob": "f6b3e57a23e30fa7d956b78cac5ff031c397b53b"
+  },
+  "original_behavior_process": {
+    "argv": [
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/apache-maven-3.9.9/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/cache",
+      "-f",
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml",
+      "test"
+    ],
+    "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace",
+    "start_utc": "2026-10-06T05:30:11.136955+00:00",
+    "java_home": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/jdk-21+35",
+    "finish_utc": "2026-10-06T05:30:17.179277+00:00",
+    "exit_code": 0,
+    "log": {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/03-original-a3-behavior.log",
+      "bytes": 2456,
+      "sha256": "af8c6483f9edf2fcd1d387eaa8d6f86f1e4ace0c253bf99fcb9b044d3c291967",
+      "git_blob": "7544446576938c7a744bb80168ab86d86024679f"
+    }
+  },
+  "original_behavior_junit": [
+    {
+      "identity": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/target/surefire-reports/TEST-com.m3.rewrite.M3A3RegexMemoryLabDeliveryRecipeTest.xml",
+        "bytes": 22266,
+        "sha256": "e52010faf8621a0c1fb4a228e560ad208177cc7cac8003accf610e223b55ef30",
+        "git_blob": "59b9d1831d7cea318ba4c190a85bc039de9b417f"
+      },
+      "attributes": {
+        "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+        "version": "3.0",
+        "name": "com.m3.rewrite.M3A3RegexMemoryLabDeliveryRecipeTest",
+        "time": "2.953",
+        "tests": "2",
+        "errors": "0",
+        "skipped": "0",
+        "failures": "0"
+      },
+      "methods": [
+        {
+          "attributes": {
+            "name": "declarativeRecipeBindsExactHashPinnedJavaCrate",
+            "classname": "com.m3.rewrite.M3A3RegexMemoryLabDeliveryRecipeTest",
+            "time": "0.001"
+          },
+          "problems": []
+        },
+        {
+          "attributes": {
+            "name": "exactCurrentA3PreimagesAdvanceRegexMemoryLabAndReachFixedPoint",
+            "classname": "com.m3.rewrite.M3A3RegexMemoryLabDeliveryRecipeTest",
+            "time": "2.951"
+          },
+          "problems": []
+        }
+      ]
+    },
+    {
+      "identity": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/target/surefire-reports/TEST-com.m3.rewrite.M3A3RegexMemoryWorkflowRecipeTest.xml",
+        "bytes": 22518,
+        "sha256": "ba6e47dbb6db66e9c694960f72a4a8fe7440fd0072e95500d67680506b849962",
+        "git_blob": "a645e64492dc8e3dddf6010498ff380009b449ea"
+      },
+      "attributes": {
+        "{http://www.w3.org/2001/XMLSchema-instance}noNamespaceSchemaLocation": "https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd",
+        "version": "3.0",
+        "name": "com.m3.rewrite.M3A3RegexMemoryWorkflowRecipeTest",
+        "time": "0.156",
+        "tests": "2",
+        "errors": "0",
+        "skipped": "0",
+        "failures": "0"
+      },
+      "methods": [
+        {
+          "attributes": {
+            "name": "exactCurrentTextPreimagesAdvanceRegexMemoryGateAndReplayAtFixedPoint",
+            "classname": "com.m3.rewrite.M3A3RegexMemoryWorkflowRecipeTest",
+            "time": "0.133"
+          },
+          "problems": []
+        },
+        {
+          "attributes": {
+            "name": "declarativeRecipeBindsExactTextCrate",
+            "classname": "com.m3.rewrite.M3A3RegexMemoryWorkflowRecipeTest",
+            "time": "0.001"
+          },
+          "problems": []
+        }
+      ]
+    }
+  ],
+  "original_methods_passed": 4,
+  "proof_methods_passed": 9,
+  "recipe_outputs": 3,
+  "fixed_point_changes": 0,
+  "refusal_cases": 12,
+  "mixed_state_combinations": 8,
+  "finish_utc": "2026-10-06T05:30:17.180279+00:00",
+  "proof_inputs_unchanged_after": 15
+}

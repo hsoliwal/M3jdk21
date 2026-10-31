@@ -1,0 +1,11 @@
+source	git_blob	bytes_or_rows	meaning
+Claude correction-sites summary	59726c8633935cd32fe8f786559efad51710f3b8	3733 site rows in 12 forks	2026-10-20 grep plus caller classification and bounded model review
+Claude CORRECTION_SITES.tsv	24f6a4e097031581e000ae5a928acafd04ff2c33	1496821 bytes	stable per-line historical permalinks and classified candidates
+Claude FINAL_PASS_MODEL_LISTENER.tsv	dad149227c03df63f933d23f9c1a29e18b73dab3	180 reviewed listeners 131 delta defect candidates	contract-specific remediation decision
+Claude UI_THREAD_SITES.tsv	fc38053ab790c289ba9132659bd8cd697e9b6d7e	3235 candidates 174 abuse classification	thread-affinity and blocking review not automatically proven defects
+M3JDK21 baseline	5eeb841168ed420085223806fefcfca8d1b6b3ca	current inventoried source epoch	master before this scoped receiving effort
+Synexia inspected source epoch	072d6dd0e8f5bfa8bc264d0b99455de0725094a6	canonical recipe source epoch	append-only develop
+M3WindowPlan current original	de534edb6fcd76ca188b1c61a2d30b7be47c98da	6211 source chars	original M3 indexed window owner
+Synexia existing Maven/OpenRewrite engine	98138cb6734ad86e3f77b8722fa5ff459842e841	M3HashPinnedJavaSnapshotRecipe.java	must execute original recipe and retain fixed-point refusal evidence
+Synexia publication base	32bd9b17239c0fb1cdea3f4749496144c5b8c0f0	actual recipe-first branch parent	current source snapshot is branch-specific
+M3JDK21 receiving base	c831c4a77f0e3e10aac94178217efda882ba4be5	actual target branch parent	owner preimage blob confirmed unchanged

@@ -1,0 +1,9 @@
+key	value
+patterns	37
+inputs	1565
+shapes	3
+workers	4
+char_shape_pairs	173715
+utf8_operations	231176
+re2_divergent_rows	0
+jdk_divergent_rows	11

@@ -1,0 +1,9 @@
+{
+  "schema": "M3_NLP_COPIER_HELPER_LINEAGE/1",
+  "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+  "source_path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/receiver-001/runner.py",
+  "source_sha256": "4fc14187d5dd9e49850dae6f26a3f19af4a77809edef350bc149a434217472b2",
+  "after_path": "provenance/qualification-tools/qualify_copier.py",
+  "after_sha256": "bb631ad21dc4e23ef132334af5b63eb2e1875511d14bb960e037a1f37b502df5",
+  "adaptation": "Task paths and existing m3 destination root for symbolic refusal; same preflight/first apply/fixed point and four negative cases, no target repository writes."
+}

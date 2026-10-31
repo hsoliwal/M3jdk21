@@ -1,0 +1,247 @@
+{
+  "archive_merge_commit": "a1c76693ecc11f0e84e3cf8d7df8afb7803b18bf",
+  "build_tool_sha256": "21c3a18dfe6556d97f34660017dc8cc751d5e2fc0691cd552bc109fe4437090a",
+  "compatibility": {
+    "existing_protected_copy_constructors": "Both retained",
+    "indexed_subSequence": "Existing covariant M3File view retained",
+    "limits_selection": "withLimits or JsonFactory-plus-limits constructor",
+    "null_JsonFactory_constructor": "Existing new M3ObjectMapper(null) remains unambiguous",
+    "readBytes_Path_Charset_int": "Distinct encoded-byte ceiling",
+    "read_Path_Charset_int": "Existing UTF-16 ceiling retained",
+    "test_only_module_flags": "Management counters and ParserBase retained-cursor reflection; no additional production reads or opens"
+  },
+  "datasets": [
+    {
+      "actual_receiver_fixed_point_changes": 0,
+      "dataset_tree_sha256": "f4737d316e642164c1579766cb1f09166a0db6d933932d1f6fd2c195ff029013",
+      "name": "pr1289-current-20261029",
+      "receiver_contract_cases": 9,
+      "sdk_errors": 0,
+      "sdk_failures": 0,
+      "sdk_inputs_sha256": "12d88ec1e1c1efdf18f21926f888e4dc56c68719c3947ba3127ca25c118b2212",
+      "sdk_results_sha256": "64b277abf3f4cc0a8ea81bff446eece6df23ce465b5eda1d544cfaa47d22a328",
+      "sdk_skipped": 0,
+      "sdk_tests": 5
+    },
+    {
+      "actual_receiver_fixed_point_changes": 0,
+      "dataset_tree_sha256": "9a8996ec94251825205a253c4d9449025d2ad79c1ae7a9e248dc3fef4add339c",
+      "name": "pr1289-gates-20261029",
+      "receiver_contract_cases": 9,
+      "sdk_errors": 0,
+      "sdk_failures": 0,
+      "sdk_inputs_sha256": "e9fdd49978e70043d8c56ea83dbe4e06bb7ecc842b06403af9b123fde729895d",
+      "sdk_results_sha256": "38e6b8e3d7e25ab8dcde17b0baa0d618a8f82b271cced603c25d69de80576b86",
+      "sdk_skipped": 0,
+      "sdk_tests": 5
+    }
+  ],
+  "gates": {
+    "current_baseline_contracts_unchanged": 6,
+    "current_baseline_reported_checks": 21906,
+    "existing_compiler_bridge": {
+      "extended_checks_each": 161,
+      "host_log_sha256": "76ea4a12a429bc25dc85c02983ad36224e81dca766f1f6612b5124ba48b3932c",
+      "linked_log_sha256": "37cb7cfebf6f48e291643b347f7b6cc16833223b45841b4438ded21c9c7ec76e",
+      "modules": [
+        "com.fasterxml.jackson.annotation",
+        "com.fasterxml.jackson.core",
+        "com.fasterxml.jackson.databind",
+        "jdk.m3.jackson",
+        "jdk.m3.jackson.compiler"
+      ],
+      "status": "PASS"
+    },
+    "host_contracts": {
+      "contracts": {
+        "jdk.m3.jackson.JacksonContract": {
+          "checks": 299,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.JacksonStreamingContract": {
+          "checks": 962,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.M3ASTCoreReceiptContract": {
+          "checks": 24,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.M3ASTPatternCoreReceiptContract": {
+          "checks": 10,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.M3FileContract": {
+          "checks": 20595,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.M3SourceFactsContract": {
+          "checks": 16,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.tests.M3ASTBindingContract": {
+          "checks": 457,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.tests.M3ASTTokenPatternContract": {
+          "checks": 34,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.tests.M3JacksonCoexistenceContract": {
+          "checks": 30,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.tests.M3JacksonContract": {
+          "checks": 839,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.tests.M3TokenRegexContract": {
+          "checks": 197,
+          "status": "PASS"
+        }
+      },
+      "entrypoints": 11,
+      "reported_checks": 23463
+    },
+    "jmods": [
+      "com.fasterxml.jackson.annotation.jmod",
+      "com.fasterxml.jackson.core.jmod",
+      "com.fasterxml.jackson.databind.jmod",
+      "jdk.m3.jackson.jmod"
+    ],
+    "linked_contracts": {
+      "contracts": {
+        "jdk.m3.jackson.JacksonContract": {
+          "checks": 299,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.JacksonStreamingContract": {
+          "checks": 962,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.M3ASTCoreReceiptContract": {
+          "checks": 24,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.M3ASTPatternCoreReceiptContract": {
+          "checks": 10,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.M3FileContract": {
+          "checks": 20595,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.M3SourceFactsContract": {
+          "checks": 16,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.tests.M3ASTBindingContract": {
+          "checks": 457,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.tests.M3ASTTokenPatternContract": {
+          "checks": 34,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.tests.M3JacksonCoexistenceContract": {
+          "checks": 30,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.tests.M3JacksonContract": {
+          "checks": 839,
+          "status": "PASS"
+        },
+        "jdk.m3.jackson.tests.M3TokenRegexContract": {
+          "checks": 197,
+          "status": "PASS"
+        }
+      },
+      "entrypoints": 11,
+      "reported_checks": 23463
+    },
+    "linked_image": "PASS",
+    "public_api": {
+      "public_classes": 13,
+      "public_protected_declarations_retained": 180,
+      "removed": []
+    },
+    "runtime_library_inputs": "VENDORED_SOURCE_ONLY",
+    "source_lint": "PASS",
+    "source_vendor_builds": 4,
+    "strict_java21_adapter_compile": "PASS",
+    "strict_java21_contract_compile": "PASS"
+  },
+  "jmod_sha256": {
+    "com.fasterxml.jackson.annotation.jmod": "ed939135135ecb6fd87b6ffe0977df7dc5a1cb67f6bb1185fec2390aa7f9d704",
+    "com.fasterxml.jackson.core.jmod": "25e33155973d0a8128699b97680233b6dfb26783442cbdca3af6bd7f664c80f1",
+    "com.fasterxml.jackson.databind.jmod": "81342ee3ea58b6b6701caf491f2c343cd64614a8a5a07d2a3649cd359b0ba283",
+    "jdk.m3.jackson.jmod": "15e9427b1ef617f63741d6327fb84c72b59339082c7612dc077928c40c6d781e"
+  },
+  "limitations": {
+    "100MiB_and_performance": "NOT_RUN",
+    "M3_VM_flag_on_off": "NOT_RUN: unavailable on the selected stock JDK21",
+    "cross_platform": "Linux amd64 only",
+    "full_JDK_jtreg": "NOT_RUN",
+    "global_phase_readiness": "NOT_CLAIMED",
+    "upstream_Jackson_suite": "NOT_RERUN_IN_THIS_RECOVERY"
+  },
+  "original_head": "5ec89ae530defe1c7df70e9b3ffd985b9e21f293",
+  "original_pr": 1289,
+  "purpose": "Deliver archived JSON AST/parser/datatype integration in the active indexed Jackson module while preserving existing APIs and contract families.",
+  "receipt_identity": {
+    "api_result_sha256": "440bedac85e92f03cc69fffc7a76d0a367a986e9e95cca76fe9faab010c6a273",
+    "compiler_result_sha256": "6a2e6039db1416cd37add9fc7a1116b68f590dfc226f7e01addc7488760691aa",
+    "product_result_sha256": "c455fd84665f46ab12ae86e108fa04b41315a25868f7f7999e2254fe3636f457",
+    "source_build_sha256": "0a3b6bdc9699a681a0e867de3b53ad9b5c6c009b60469711f4a4d464c4d451c0"
+  },
+  "receiving_baseline": "649a735e23a79a4df46e6c61bfcd2fadf156d90d",
+  "recipe": {
+    "canonical_source_pin": "192eb86b7ba87fd93ba5c4701a31ed65d224a876",
+    "engine_modified_by_recovery": false,
+    "existing_owner": "synexia-openrewrite-recipes/recipes/m3-jackson-jmod-20261018",
+    "materialization": "Actual OpenRewrite SDK Results, admitted by the existing receiver",
+    "name": "com.synexia.m3jdk.JacksonJmod20261018",
+    "repository": "hsoliwal/com.synexia"
+  },
+  "schema": "M3_JACKSON_PR1289_ACTIVE_RECOVERY_ACCEPTANCE_V1",
+  "source_built_jar_sha256": {
+    "com.fasterxml.jackson.annotation": "da3fe2c484b80af77d79bfac7ba9af54b9fd0bf1b2502fdc0fa48d99e6bbdeb2",
+    "com.fasterxml.jackson.core": "f208766fddb1a140dcbe208afe6908df8b5d7c2c20e6eebcdcfa658e3c262f76",
+    "com.fasterxml.jackson.databind": "faa33c41196bae0cda6cb6e18e7089ad6f49ef6a5bc51c6bb0dfd823c42a1a14",
+    "jdk.m3.jackson": "fcebc8acd479102127c2b6e8c8647d015e6df843cc9a1862de7b8a77a7f9b6f3"
+  },
+  "source_inputs": {
+    "src/main/java/jdk/m3/jackson/M3AST.java": "875e08aecc924ce2e15537bc0cfb4425345263f2a5e2ec36ba61e557cfb6f763",
+    "src/main/java/jdk/m3/jackson/M3ASTAtom.java": "f8a16ec5d9712b20a936b20613469e071e70c1c0c14bdb39a388a149516bbbca",
+    "src/main/java/jdk/m3/jackson/M3ASTBuilder.java": "905f771f86aa632c73d6d1dac672b9fddca763a6c4885c663684ade36bc83265",
+    "src/main/java/jdk/m3/jackson/M3ASTParser.java": "b794e7e253a90269642a717cb30befc2cdd4bfd6ee26622023241cc035422e6f",
+    "src/main/java/jdk/m3/jackson/M3ASTPool.java": "6ab5528031f87004f8546525eddd7d566f3204b5334d956f4d2c134fa04f4ffe",
+    "src/main/java/jdk/m3/jackson/M3ASTTokenPattern.java": "b47b80a67e81771091dd3f9d11e4ebdba53c4aaf1d7a6aa2202381dbb14da706",
+    "src/main/java/jdk/m3/jackson/M3Binding.java": "94ba13f9e06dd72d1591b1501d173c4f944169d9cd0411500f1f16fe8c69f7e0",
+    "src/main/java/jdk/m3/jackson/M3File.java": "0f7ebe5434d0b89f2e3027a1553d96903c7b8dc97d1eb5f8eef48b737ab14178",
+    "src/main/java/jdk/m3/jackson/M3FileTokenStore.java": "7f9a52e51b7a45c458a40399f8316676431a84b717a7e7ea29b26140fe4c1151",
+    "src/main/java/jdk/m3/jackson/M3JacksonModule.java": "35c4c88123895bb24c530491c7ff30b7a211305be9ade5edf4787378621e39ac",
+    "src/main/java/jdk/m3/jackson/M3JsonCodec.java": "cabb6003c8ab5fb57460ebcc54f31972aa4f48663f67589b743c4c311b306dc6",
+    "src/main/java/jdk/m3/jackson/M3JsonLimits.java": "5c22e0e714a306c99de9a0720125b6576e2bfb53a63f8d9aefc4bff350fbf369",
+    "src/main/java/jdk/m3/jackson/M3ObjectMapper.java": "cbd0dc0b347f6f96de0c2332908eb4576ff43a954e5f78b16e62961b77031c80",
+    "src/main/java/jdk/m3/jackson/M3SourceHash.java": "8033de0466c95fda8377f4152c2526e00885ff1aa5075ef3b650c61503bcf7ee",
+    "src/main/java/jdk/m3/jackson/M3TokenRegex.java": "418bae27b8f2b4e8d74ef60082d2a7d7bc70e6e344e03495f3c5212a79c4b315",
+    "src/main/java/module-info.java": "55f63f561b3a7e3136e42d15615a491a9cf166cf82f4b72ddcb7f9e88d711d5a",
+    "src/test/java/jdk/m3/jackson/JacksonContract.java": "e3f70398beb626b05b7c96908f4377acd8c1e36403cf97da0bd7823e496541dc",
+    "src/test/java/jdk/m3/jackson/JacksonStreamingContract.java": "4a35bd791c4e3a524773d162404d1a76ec9b331c27eb74626b8d925067bcfaf5",
+    "src/test/java/jdk/m3/jackson/M3ASTCoreReceiptContract.java": "60874e1fa7199b8703825192cba3f80536741b89cb49dcbd12a05c6af8970926",
+    "src/test/java/jdk/m3/jackson/M3ASTPatternCoreReceiptContract.java": "3c65b59918eccd174a46ecb6e18e822d4184fbb29844f276722e3314b25a2eda",
+    "src/test/java/jdk/m3/jackson/M3FileContract.java": "46d16214fa592617a8ea2fa5f99c5e0380d247127b82dd179b0cd6648ab5cb1c",
+    "src/test/java/jdk/m3/jackson/M3SourceFactsContract.java": "07733f8f05abeb54f463915f7b241c67266e8c69bfcf4c4da79b7635bfcb0239",
+    "src/test/java/jdk/m3/jackson/tests/M3ASTBindingContract.java": "dfaa11770fcdab8246e93d6d4c1ade5e29ac408a03f28efb7f545cbc0ca2b55f",
+    "src/test/java/jdk/m3/jackson/tests/M3ASTTokenPatternContract.java": "ea71b4f122e53bce0e33a667f833bc2a69058f40d7e34f4574de5f3b49670119",
+    "src/test/java/jdk/m3/jackson/tests/M3ASTTokenRegex100MiB.java": "4a0390c02c802850a4c19cdd0e8df76474ae08a9ee120f05269f533d7c5f190b",
+    "src/test/java/jdk/m3/jackson/tests/M3JacksonCoexistenceContract.java": "703114af525f090a98ff727ecc70005e33856a5bddfc741ce6576364d00534f6",
+    "src/test/java/jdk/m3/jackson/tests/M3JacksonContract.java": "1e0f082c25aec5d542e2297a505407fbd442b55a9a815e0ad2df5795415c261c",
+    "src/test/java/jdk/m3/jackson/tests/M3JacksonResourceProbe.java": "f98b6a1edbe59ce767a1c31dff19223547a7137bfbb097e9bb143300b4dbec83",
+    "src/test/java/jdk/m3/jackson/tests/M3Json100MiBAcceptance.java": "f038d4a52393139f1c179ee775819cfd544b79ee67a6e386a8447650ecfb57d5",
+    "src/test/java/jdk/m3/jackson/tests/M3LargeJsonAcceptance.java": "388aa5b9e1c6c933a969d2270cde33f38fb6d5c41dc96d5c7fbea963ff307210",
+    "src/test/java/jdk/m3/jackson/tests/M3TokenRegexContract.java": "0179937e0add3d4bfcb8c8253826774ce410fbe8e3378078c93693c229c6205c"
+  },
+  "source_lock_sha256": "a1c253b045c0996c436f44f305a3aba77ad1272ff90e3e1f04799fe90d78e008",
+  "status": "PASS"
+}

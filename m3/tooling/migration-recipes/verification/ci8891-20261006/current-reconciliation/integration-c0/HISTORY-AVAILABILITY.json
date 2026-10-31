@@ -1,0 +1,2492 @@
+{
+  "census": {
+    "bytes": 1130063,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/workspace-survival-v2/MAPPED591-EXACT-AVAILABILITY.json",
+    "sha256": "f2c3a1944ae30433588efed1d2327386a7f32bb5c0fe35a4298eab8112254935"
+  },
+  "historicalFullDeliveryClaimed": false,
+  "historicalMapping": {
+    "bytes": 563861,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/CURRENT-MAPPED-INPUTS-v4.json",
+    "sha256": "8becee2dfc7fc81c6a3c7d914519404a3d85b0c957810538838bb3be0e15ec5f"
+  },
+  "meaning": [
+    "UNAVAILABLE means no exact body was found in the stated workspace census; it does not assert absence from remote repositories or other storage.",
+    "Exact surviving copies do not recreate missing proof runs, compiled artifacts, archives or complete historical delivery.",
+    "The new checkpoint must contain complete fresh task/proof files selected by its own final physical manifest. Historical identities listed here are provenance-only."
+  ],
+  "missingQualificationRecreated": false,
+  "observedCounts": {
+    "EXACT_ALTERNATE_AVAILABLE": 326,
+    "EXACT_ORIGINAL_AVAILABLE": 41,
+    "UNAVAILABLE": 224
+  },
+  "schema": "m3.integration-c0.historical-availability/1",
+  "status": "OBSERVED_WORKSPACE_AVAILABILITY_NOT_A_DELIVERY_CLAIM",
+  "unavailableRows": [
+    {
+      "expected": {
+        "bytes": 5409,
+        "gitBlob": "a844ceb8be2b0b1f7d4081cfadf7f110a755ae54",
+        "mode": "100644",
+        "sha256": "8fbd7610359c7609d516cb4a635c9e970b2f2b3fec6cfa841cde704f8e74c6a3"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/README.md",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/README.md",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 3694,
+        "gitBlob": "08f5b521f87027564fa42b589843ad7ce9e9b496",
+        "mode": "100644",
+        "sha256": "3f71356f6fd4bf7fc9f0172cb8d4feae9a73177f10853d1f589fc4151b2c2b88"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/pom.xml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/pom.xml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 39956,
+        "gitBlob": "883b0fb4056930685cb992c8299daee4079adf37",
+        "mode": "100644",
+        "sha256": "8c9443dbd3242682b833537bc719c2259184091ff975ecf25b39a10dab5e3c75"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/proof.py",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/proof.py",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 310,
+        "gitBlob": "6bc35ac12d469259be0505338769daeb65f687bf",
+        "mode": "100644",
+        "sha256": "7365451bffff4d0ab4cf9a0f5bc5b7ccc20693cb305ab4f60209362978bd63fc"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/META-INF/rewrite/ci8891-cib.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/META-INF/rewrite/ci8891-cib.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 310,
+        "gitBlob": "a5fb0e52b3c5b72fb6915e0aa7e5f1c4810f9266",
+        "mode": "100644",
+        "sha256": "763dfe8d6c29e265d975d879efebac43473c1baa39e57ed877784579120e052f"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/META-INF/rewrite/ci8891-ciw.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/META-INF/rewrite/ci8891-ciw.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 310,
+        "gitBlob": "41f723c9f24c5e0f5d49a0967fc98807c8ebeb5e",
+        "mode": "100644",
+        "sha256": "6b1e450e7cef10325d1cacf9366e8f23d101a305351f266e7e8a8f6a6d7dc6cf"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/META-INF/rewrite/ci8891-dag.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/META-INF/rewrite/ci8891-dag.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 310,
+        "gitBlob": "393d14300d1c737fbeda66245cde1ee2e4dfadab",
+        "mode": "100644",
+        "sha256": "30165c321918f6ee57217c3074b5f922a6b1ca70c0f47715f092bc648b3bc9f9"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/META-INF/rewrite/ci8891-jgr.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/META-INF/rewrite/ci8891-jgr.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 310,
+        "gitBlob": "47408d70b9ed7da5adab0382abd6e1d89f2a8e9d",
+        "mode": "100644",
+        "sha256": "feb839591fc05da7eba3d1dbba663e5140c57b57abce76578f28185905c3bbc6"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/META-INF/rewrite/ci8891-nul.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/META-INF/rewrite/ci8891-nul.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 754,
+        "gitBlob": "dc092f4ea3c230610639c810e4ff12e1f8ad7dad",
+        "mode": "100644",
+        "sha256": "31faff61ce679f282fcf28934190431e1fbefb93f5088f115b37db651033bddc"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/META-INF/rewrite/ci8891-orders.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/META-INF/rewrite/ci8891-orders.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 374,
+        "gitBlob": "b6e94c1883d4df553f93dd30f9b0745cdd21b2d4",
+        "mode": "100644",
+        "sha256": "9ddb6eb1dbc4b618f0cd3817ed5f03f4eecd7202dead3e762f640a93c82456e2"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-cib/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-cib/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 529,
+        "gitBlob": "103318c0ddbbb9c4c5ebd1c12aaca11486f98357",
+        "mode": "100644",
+        "sha256": "556d7744fc7af55e1ef7ee66012872f40633daf0afb030657bb06fcfa1bb8587"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-ciw/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-ciw/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 454,
+        "gitBlob": "b8b044c216c1dd2d26e5fedee4b60e37a5286870",
+        "mode": "100644",
+        "sha256": "72b69c270555a7b60b0b2bb77288c3dbe29764388afb014914ac2f12d646b374"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-dag/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-dag/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 365,
+        "gitBlob": "a084a7e2719d6a54f32683d3f487e750ccde9ce8",
+        "mode": "100644",
+        "sha256": "8711c8c61fc49207d502a4dfd22dd4a39cd775623fe861c5447f67b6fb6dca80"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-nul/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-nul/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 843,
+        "gitBlob": "6d861eccadc79b9c0b78d36a213e8f8a533cb1e3",
+        "mode": "100644",
+        "sha256": "bfd8788b490f4f6f4f1d7f81b36ad680d400d90da29c370d4ead8ba1b553fac9"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/composition-orders.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/composition-orders.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 7368,
+        "gitBlob": "c835bcaad5957edc178471d689afe714f462ce95",
+        "mode": "100644",
+        "sha256": "6ec61d0158d7af2b7fe264aade7e06ec0892a031e50da64eeaaa2cb5af8562b3"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/src/main/resources/qualification.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/src/main/resources/qualification.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 29969,
+        "gitBlob": "15ebd8cb68798acd8c42a592ba3146e89161c617",
+        "mode": "100644",
+        "sha256": "dd97de482091632ff50b5c56c979bf4ea61d1c6f841c12fd1237b1899ac509ab"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-ci-8891/src/test/java/com/synexia/rewrite/Ci8891RecipeTest.java",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-8891/src/test/java/com/synexia/rewrite/Ci8891RecipeTest.java",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 5047,
+        "gitBlob": "eab7cebd611ff607a6e7c2ee2aef69bc75d9b56e",
+        "mode": "100644",
+        "sha256": "76334305c99cbbcf9412d7948c58622baeba385693c79ffe25a2092ceef584a7"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-pc-8891/README.md",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-pc-8891/README.md",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 3789,
+        "gitBlob": "ccfc0741f2f11470af21ecfb63862dc177451f7e",
+        "mode": "100644",
+        "sha256": "0f0ef4075406b22d06e52c0a58d2558f21120eefda1c641cda4f4126013aa72a"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-pc-8891/pom.xml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-pc-8891/pom.xml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 40297,
+        "gitBlob": "e2b70fb559962bf480208686f87f2cf69e3364bd",
+        "mode": "100644",
+        "sha256": "88f68ea29019d2756efb9b20c6e33de1fbbb6ca908b897d752938d38751b3f45"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-pc-8891/proof.py",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-pc-8891/proof.py",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 320,
+        "gitBlob": "d60d948f48de523aad47be845faa874b8802048f",
+        "mode": "100644",
+        "sha256": "a00799a651e0ef48285b508eb7cd675e023d2e50f177fad51f55abf785670ccf"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-pc-8891/src/main/resources/META-INF/rewrite/ci8891-dgc.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-pc-8891/src/main/resources/META-INF/rewrite/ci8891-dgc.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 320,
+        "gitBlob": "7d32c46894d162e596d4ac188cfa928d96dc1be1",
+        "mode": "100644",
+        "sha256": "4893e15e1d9a774aa8cb12f6ecc030c1e5616506dd92b04559fe8c19d9a167f6"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-pc-8891/src/main/resources/META-INF/rewrite/ci8891-pcd.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-pc-8891/src/main/resources/META-INF/rewrite/ci8891-pcd.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 320,
+        "gitBlob": "1c1873cefe083266d0a29c898d9a01b9f6885edd",
+        "mode": "100644",
+        "sha256": "9317fbcb44a8a026c7d6b40d553be65927adbdeeb19404618fc3962db44403a4"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-pc-8891/src/main/resources/META-INF/rewrite/ci8891-pco.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-pc-8891/src/main/resources/META-INF/rewrite/ci8891-pco.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 320,
+        "gitBlob": "51fd20be39da2bf7b76f6d7beae896b58eddf518",
+        "mode": "100644",
+        "sha256": "38d04b63807281318020f895c1946e58d96329905e9500496bfe849b114a80ec"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-pc-8891/src/main/resources/META-INF/rewrite/ci8891-pcw.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-pc-8891/src/main/resources/META-INF/rewrite/ci8891-pcw.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 710,
+        "gitBlob": "51deb5149add37d17f17a370da7a6f9348ae7106",
+        "mode": "100644",
+        "sha256": "3e731951da04c4ddf1f2d3c4a2be9a71fed188a3105b27b6b9beea496a434d32"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-pc-8891/src/main/resources/META-INF/rewrite/pc8891-orders.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-pc-8891/src/main/resources/META-INF/rewrite/pc8891-orders.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1627,
+        "gitBlob": "22d069139d95213a090599569f64cf06a761788b",
+        "mode": "100644",
+        "sha256": "7786a8c7c5c675b811b6b317ad2d78250a651a59aa8efe3b3bf5602fcc70e4e7"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-pc-8891/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-dgc/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-pc-8891/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ci8891-dgc/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 787,
+        "gitBlob": "7b787e62cfadcdef05b2201cffbeccb377c5e8f1",
+        "mode": "100644",
+        "sha256": "34eefcb28395c6909b5d49f51136485a34927375a83590c913942d96e5cee37e"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-pc-8891/src/main/resources/composition-orders.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-pc-8891/src/main/resources/composition-orders.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 8536,
+        "gitBlob": "9b0943368c91b8fa12c9c6d47dadbf164071c6ea",
+        "mode": "100644",
+        "sha256": "472739c214ea2c895bf9cba48ba8ab04c3f80dde9096df1fb4327e360479602d"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-pc-8891/src/main/resources/qualification.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-pc-8891/src/main/resources/qualification.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 30683,
+        "gitBlob": "d252bf5071e234b71e7f14b9d5e176cc56aff8ee",
+        "mode": "100644",
+        "sha256": "f7c2dda025d61e1bb53f0dc636bc7f3bfb13b2d95a463ac73d32f836523fc5e5"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-pc-8891/src/test/java/com/synexia/rewrite/Pc8891RecipeTest.java",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-pc-8891/src/test/java/com/synexia/rewrite/Pc8891RecipeTest.java",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 4277,
+        "gitBlob": "820d76fa700f4927cf86abc249b7092516c27049",
+        "mode": "100644",
+        "sha256": "99812e192db9315afbaa19cf418c5af6ab3d3cba15ce06eef6e432acc4a78710"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/README.md",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/README.md",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 2083,
+        "gitBlob": "48d879ee3991e1541744e6d9e9965f5078312000",
+        "mode": "100644",
+        "sha256": "161876bc5a93c42c217395973b6a3d71b8bc91748262f002f619bde52d08f003"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/RECONSTRUCT.md",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/RECONSTRUCT.md",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 3776,
+        "gitBlob": "624a201845a989c497a1acef7369c51bacce0460",
+        "mode": "100644",
+        "sha256": "4408f4298f8b309b2f9f59bc6d8afffda14026818f66ea3a2a42893b48dcd834"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/pom.xml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/pom.xml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 42196,
+        "gitBlob": "df35ba002544045caec8dd0da37fbf6204eff505",
+        "mode": "100644",
+        "sha256": "39d5d6c73c80837d43e0cdba2c96bf6dea413ff3b176ade46c334e1114b5e52c"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/proof.py",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/proof.py",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "98638d33822b6501c3f129630bb157e2e389b765",
+        "mode": "100644",
+        "sha256": "02975937939ddaa0d5a5e06fbe5e6ab5d77f76e185ded2af289100016c4cf5bf"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-cia.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-cia.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "6815620dbfe292b79ed8e327432e0462323538be",
+        "mode": "100644",
+        "sha256": "94d794a15d90aaea413fc9927baeb96f35441e01f8c9c7a4bd3a859733ae8126"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-cic.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-cic.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "508df6fad8819bac3b09fe1bfb0b10419b7de050",
+        "mode": "100644",
+        "sha256": "c3ca77a28f5e0338f041960ea632ec69b57eef64fcac6d1590166ed516602dfa"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-cor.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-cor.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "99d8e70503a3fea69acf0dcd5df999a39659eac0",
+        "mode": "100644",
+        "sha256": "15a0cf2d303a642105eecc6973020f63062425610273aba9d89a9885b3cd9d79"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-hct.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-hct.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "66b95db0c0b66325a29353ab9f55dcad7727ce04",
+        "mode": "100644",
+        "sha256": "809ed43bc9b8092ffc90fd447a8705a8ffde6878a6a707c4bcaadd5ba5735ece"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-hts.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-hts.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "c10e19931236cea747a99650cb9da0fcddab81b9",
+        "mode": "100644",
+        "sha256": "fc38d7c090e7d753c8d82c48fb8df1b033c8389c43f38870a59557c83e27c3cc"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-mem.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-mem.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "00368fd06fa406a31beda51d3c74da52d4f1cee4",
+        "mode": "100644",
+        "sha256": "f5ade3346f5ae9aba0547d60446dcb6715fbe88eee5551f78763b72124aadc3d"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-nul.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-nul.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 886,
+        "gitBlob": "53962a95d5be63cad7144a483ed77e5790f6c39f",
+        "mode": "100644",
+        "sha256": "761953b61fd23c5b408efb297d9e5f6c5f5eeaeba9439be2fe23dd36ad14ae89"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-orders.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/src/main/resources/META-INF/rewrite/rc10f-orders.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 231,
+        "gitBlob": "f2128748fec3125ce74f6ed86e6decdc86997f66",
+        "mode": "100644",
+        "sha256": "c7402b92a34ed1f779dea6d75686d2f8776f208442497c7a5fb80860400077c1"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/rc10f-cor/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/rc10f-cor/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 740,
+        "gitBlob": "af1d60cde09601aa8271900baf0ba5fba0030775",
+        "mode": "100644",
+        "sha256": "fc80474505fdcdd1ad93763eca90d88484a6d9d1ebc0753f91eac894f9c1ae03"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/rc10f-mem/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/rc10f-mem/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 959,
+        "gitBlob": "75de2f87df68273073ee1f9b1e746ef6af6f9108",
+        "mode": "100644",
+        "sha256": "d0519d905aa6f1217b884542cb8a0d32c216e76a5161880c320dafa567d55fec"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/src/main/resources/composition-orders.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/src/main/resources/composition-orders.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 11772,
+        "gitBlob": "94d969f6c1a8d4422137c10e23116ab25b69cb0a",
+        "mode": "100644",
+        "sha256": "7c0e29f8d5d4d32d266a90e54ea01195810ad358a9a8fbd732e64b55252e3e91"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/src/main/resources/qualification.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/src/main/resources/qualification.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 31018,
+        "gitBlob": "30b4037698c05cf7ba1e577fc61c0f0c69249770",
+        "mode": "100644",
+        "sha256": "da0d86ec86b43ef8351a81a7a6e86a1f4f55c6bea3079801c5122ea78a0901d3"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/src/test/java/com/synexia/rewrite/Rc10fRecipeTest.java",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/src/test/java/com/synexia/rewrite/Rc10fRecipeTest.java",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 47900,
+        "gitBlob": "be7ccb51def915a0938f04e5dffe4263c5438c88",
+        "mode": "100644",
+        "sha256": "36230421a481af9363f29b79c4eb1a083ac4a24626c5ac5a782c9eae8b9a7083"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/BUNDLE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/BUNDLE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 846992,
+        "gitBlob": "89bc8fc2ae9f0a997d166a1d11de91864e414a8e",
+        "mode": "100644",
+        "sha256": "4efa2937f548b8bf6cbf7c1fa294399f58ad6daa9822b2941be4eb74bbcdebe8"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/INPUT-CLOSURE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/INPUT-CLOSURE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 324450,
+        "gitBlob": "8b512e8a5a95ce2ca7ce98d1452a8ac658632cd0",
+        "mode": "100644",
+        "sha256": "8ccde035a56334354b2fe0fb1be8e6f912efd33124a2127315d74c0ff3fda726"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/OUTPUT.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/OUTPUT.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 44568,
+        "gitBlob": "00e9cd7d757f864764a4686f41df84b834795117",
+        "mode": "100644",
+        "sha256": "4a5dd12715c235fa065b9f076cbef2b73d1a8abbe766a687bd1b85c8ecee7c2b"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/PACKAGE-PLAN.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/PACKAGE-PLAN.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1311,
+        "gitBlob": "b8d97734679d2db523c059a20de25a25ae72e998",
+        "mode": "100644",
+        "sha256": "38aee0bd89c5f46973a824be0bc59e67484cf6cbebf1c0318acbc59683b754c9"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/PACKAGE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/PACKAGE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 95258,
+        "gitBlob": "8a916e0acc9ba3014a6dfd4952e310c36ffac735",
+        "mode": "100644",
+        "sha256": "d06f6c153060c9a262b55c48cc8e36229e3363beba15758746b2c06d0411874d"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/PATHS-0001.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/PATHS-0001.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 401744,
+        "gitBlob": "6e9e7d8960866fe52f5ddb387ef617b44815d0a0",
+        "mode": "100644",
+        "sha256": "e4930ab734fce77a96f5ff1776904b422661b309b39f366a63cbc8e3848b342e"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/PRODUCER-RESULT.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/PRODUCER-RESULT.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 71925,
+        "gitBlob": "5c419971980777da7c40ce4836a30f276cb26c42",
+        "mode": "100644",
+        "sha256": "ee9033c5ec1f825883847e9d7d4040e4d207ed7a63a93e30410dc7bebb16ee57"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/PROJECT-READINESS.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/PROJECT-READINESS.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 72441,
+        "gitBlob": "b864948ae1cd6d1d335709a66eaf776cfcfaadfb",
+        "mode": "100644",
+        "sha256": "6ce1c0f3bf1d6204ca061799bda4b821660d00abe094027d1bf82fc7ed6dd5ff"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/PROJECT-READY.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/PROJECT-READY.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 16003,
+        "gitBlob": "a7249ae790d574fa3d99546ce9de05c61949023b",
+        "mode": "100644",
+        "sha256": "556357427dbf6cef0246c7de7db8ef47660bc16c1ae23e74d87895c47b17592e"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/QUALIFIED.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/QUALIFIED.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 4014,
+        "gitBlob": "c087971fe44cc7ded3a50fe7f1d5c0f3cbe62456",
+        "mode": "100644",
+        "sha256": "48bd34dd7749f54148f290ccc020337eb469d6777bd95c4c7b17b3c664f51161"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/RC10F-README.md",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/RC10F-README.md",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 827,
+        "gitBlob": "cb470d0b46a716bc34f82c3972b80d0d39bc0172",
+        "mode": "100644",
+        "sha256": "6820f12650f56119be9dde79fc3aecbde2f77e501d3eba096e6bbde1f9c6b16d"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/READBACK-ATTEMPT-v1.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/READBACK-ATTEMPT-v1.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 128667,
+        "gitBlob": "4916b25c98c2c558cd9c9c92588b0bc86a27c5b3",
+        "mode": "100644",
+        "sha256": "c2727e9ef8d21fabfd018c418ae5aa239869eb0e8fe63781abc68e8a089cb32a"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/READBACK.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/READBACK.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 70646,
+        "gitBlob": "3af4d1283eb5fee6ef8309b3741b38467d3d80de",
+        "mode": "100644",
+        "sha256": "1a12a239934aaeb9b89ad2088f9f983e3f480aca9476e53ba91b2cfb6bf25ce7"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/TASK-MAPPING.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/TASK-MAPPING.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 4956,
+        "gitBlob": "3d255f008f54d3cc5552fb543d79aa8a587eff10",
+        "mode": "100644",
+        "sha256": "e763c1e92f7a70348ae62396ee2d59f2efcdabc3e67a36d3c5362ce957f2d7ae"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/finish_package.py",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/finish_package.py",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 5014,
+        "gitBlob": "3b08b7c5d64dfd25192f2b5cbf233a263d7d11f2",
+        "mode": "100644",
+        "sha256": "02e2e8244edc7bc0cc70871cbb5f6c214177c668bfb2d3837c3ce2079a9e1bb5"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/finish_package_v2.py",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/finish_package_v2.py",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 924078,
+        "gitBlob": "66d6dd092c59bc7d75d7b99802ec8f07227756b9",
+        "mode": "100644",
+        "sha256": "cb31c887cf7a8b5b6033195c128e20ad951546356b4a8b2710fe25609355778d"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/part-0001.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/part-0001.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 256054,
+        "gitBlob": "4e863eb010c8ce4851f4298efe2a2dd3c216ce9d",
+        "mode": "100644",
+        "sha256": "97e9db5d8527db44ef14cf647220e7d664650d64cc599905b55e6ae89f283ffb"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/part-0002.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/part-0002.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 3497,
+        "gitBlob": "6ee7422c6ff0e9ef3a87b152c02b7faaa5d1127b",
+        "mode": "100644",
+        "sha256": "cc8c78f97183e739faf362faf87839eca138e411bd67604ca4b416627ec712ce"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/AUTHORING-LINEAGE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/AUTHORING-LINEAGE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 40762,
+        "gitBlob": "36df9908080e58d3f6dec49d770ada2ce6b11af3",
+        "mode": "100644",
+        "sha256": "e6503245b1b8c17a6bcad4bf798771def34bd7bb5a3eaa2641136b25eafddec1"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/BUNDLE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/BUNDLE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 5376,
+        "gitBlob": "9295868cff25175790087250e7f3ce887bb25f87",
+        "mode": "100644",
+        "sha256": "36160290a6af8e3212e48e22069545e51fe4fcb4f7422b45dd46e08e4e66bd02"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/CI8891-README.md",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/CI8891-README.md",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1811479,
+        "gitBlob": "12fa8ee4ccf6b6da490ac3ae2d760e4e14e3b3e4",
+        "mode": "100644",
+        "sha256": "beecf66d42580b78d59d2d4d105669ae612f27a8d86fcb77fc1b8b38f176f93a"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/INPUT-CLOSURE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/INPUT-CLOSURE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 135431,
+        "gitBlob": "ff791d2acedbc65be05d87e787d90c6aca1ad8d5",
+        "mode": "100644",
+        "sha256": "61420d05231fa91efa43d4680101e78e9dfc7a17b84d103a2edc31e1aa9b8112"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/OUTPUT.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/OUTPUT.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 36954,
+        "gitBlob": "ee2a85e071554d6036846287634717d7dbd7c2f2",
+        "mode": "100644",
+        "sha256": "de90944c5f8ec59f7a497533cc5076ab6fe542e74dcb78de91c232828428bc47"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/PACKAGE-PLAN.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/PACKAGE-PLAN.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1385,
+        "gitBlob": "14a62407a6f25ded6dc6ec660df563873020611b",
+        "mode": "100644",
+        "sha256": "ce226a2bfcb26aee500ef1fe2f80d2dc7b4ec2146f52cac508c4dc8dbd3b6511"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/PACKAGE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/PACKAGE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 154141,
+        "gitBlob": "ad2b15c346f98234434d7539c56862f8fb9dac5d",
+        "mode": "100644",
+        "sha256": "81ba6a1f9ef4dafe65c4410070efcf744c0c81922a8ad4ea5f87a6bb71741bbf"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/PATHS-0001.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/PATHS-0001.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 25775,
+        "gitBlob": "e35d9e9eff462ba78adee2e2fd9b72a4f75c7ef2",
+        "mode": "100644",
+        "sha256": "284f63a8dd40959fef080a384f672179aa8c6be215151f596041d58bb7d6aec1"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/PRIOR-BUNDLE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/PRIOR-BUNDLE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 8414,
+        "gitBlob": "0af45f9567ff4aa5e00348c86537a8099ab0c428",
+        "mode": "100644",
+        "sha256": "446ab2e9dc000c138cf51e938d26eca60e8eb121606357ad28321a412e889e80"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/PRIOR-PORTABLE-MANIFEST.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/PRIOR-PORTABLE-MANIFEST.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 175531,
+        "gitBlob": "944faedaa1462e9d18244510eb42f578edc7be47",
+        "mode": "100644",
+        "sha256": "7a62396cc962ad491e745cf1d070835786f6dcb9d09b064789486dc4182bd81d"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/PRODUCER-RESULT.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/PRODUCER-RESULT.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 8549,
+        "gitBlob": "d9c148d9b39ea9101418b3aed3e4afc1201c7be7",
+        "mode": "100644",
+        "sha256": "f2f24d3cc6792fbaa368d8c3fe00c151c433ab5ef72c4d2c9dda44baf445f8c0"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/PYTHON-RESULT.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/PYTHON-RESULT.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 19945,
+        "gitBlob": "31f2a0ddddc5b87cead7ee453c0de063cf3360b8",
+        "mode": "100644",
+        "sha256": "766a403891dba860c33956628ed38ce1e4d8352f12a27d7aa8cbfe7d6d475df8"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/QUALIFIED-v2.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/QUALIFIED-v2.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 3778,
+        "gitBlob": "2b57f2a783c970bb85af504ba143eacd116d84d9",
+        "mode": "100644",
+        "sha256": "841a129fe2190f1837c00694bf4d599e06b9a8e76ea8734bb91a83eb20043fe0"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/QUALIFIED-v2.md",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/QUALIFIED-v2.md",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 232726,
+        "gitBlob": "01d796c1f0c2e88d8808fdc33688dad1ef5af535",
+        "mode": "100644",
+        "sha256": "ef75e33f2cac9650b5685f1a732b33cb108c9c72dce8ac42fec0ef0dbc32f827"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/READBACK.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/READBACK.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 34447,
+        "gitBlob": "d21c81cdaf032f4ac80b4950f1d8725e72d65fc7",
+        "mode": "100644",
+        "sha256": "88f5f4b69911661eded31e858fc0e1f4b726789c983be6d3c458da2f692836df"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/TASK-MAPPING.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/TASK-MAPPING.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 922997,
+        "gitBlob": "a54efbbfeaeb72caa2f87dd2abf32a187d615acf",
+        "mode": "100644",
+        "sha256": "6342ec0cd7c02bef4de99c0117f696ddad7a5cd20b3c41b0ac305a5f68a1444a"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/part-0001.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/part-0001.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 922405,
+        "gitBlob": "5324385c3badc421b2f194d04b92892d8fbe5203",
+        "mode": "100644",
+        "sha256": "c27bde2b687e3185ffafc3c9636a84377cfdb1d566894406c81d4cb4f5346fb1"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/part-0002.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/part-0002.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 80641,
+        "gitBlob": "3917390e5f159846dd75ffb1a30569ae50d040e4",
+        "mode": "100644",
+        "sha256": "feb5effab35af160f2c026e58fe6a90bbd21a2c967e5eae0154df8abe1b0f622"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/initial/part-0003.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/initial/part-0003.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 2980,
+        "gitBlob": "42ed5eb7170245bdf4a9070b63b133379cbc222b",
+        "mode": "100644",
+        "sha256": "20d9d248f556350e1eb613d306255fc94dc511c6046c1eb19d1c0917fbf84066"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/AUTHORING-LINEAGE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/AUTHORING-LINEAGE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 78056,
+        "gitBlob": "8cc48f6c69bcce49251268de482b25d57dde0c84",
+        "mode": "100644",
+        "sha256": "65bdac85ff9fb6143e6cbac024197145854a8162fbee3648df364afa2a5f2e4f"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/BUNDLE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/BUNDLE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 10072,
+        "gitBlob": "b9fecc395f8dd101ca46e873d1952e02a87c234d",
+        "mode": "100644",
+        "sha256": "b9fbbef3e889b338026a462eae8989f33773118902dacf88eee9fabd13b04d7a"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/INITIAL-PORTABLE-MANIFEST.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/INITIAL-PORTABLE-MANIFEST.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 827196,
+        "gitBlob": "592c5169ec8d65a6e0bb9f0c24019db84eea96a3",
+        "mode": "100644",
+        "sha256": "c0a586681def8ccaaed1d036a3f2172176fb8c1c7091e538ee9d408343e9d0af"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/INPUT-CLOSURE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/INPUT-CLOSURE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 145355,
+        "gitBlob": "5425539da6ef9cd70088b3e5d97139a0e0472a01",
+        "mode": "100644",
+        "sha256": "4a404757a5154e3ac3d03d0a87d7b8116af94985848408737f3b162e10de6ee4"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/OUTPUT.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/OUTPUT.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 74144,
+        "gitBlob": "621e9138f271d97e737c4ce277b8107432ff07ca",
+        "mode": "100644",
+        "sha256": "7d07bdb977d0447fd4b7adc7797705447e55f753c78df74c4a9d36bb19a8e071"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/PACKAGE-PLAN.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/PACKAGE-PLAN.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1352,
+        "gitBlob": "bbcd1572c478ca2f6c5cb264aa2dff3cc7da2016",
+        "mode": "100644",
+        "sha256": "e1d2683ee75af4c09f2eacdbd09caad3c21f79a207c6c2a99d1f7109c7c17427"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/PACKAGE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/PACKAGE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 132387,
+        "gitBlob": "8fe3b5a00c4c8b79871033756bcd4489989d5c52",
+        "mode": "100644",
+        "sha256": "9ff3071d9bb9dd079a24a2c953e494fbd6227e47a6b9c7b8afafb0b31c88c9a2"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/PATHS-0001.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/PATHS-0001.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 2649,
+        "gitBlob": "f37da3cba02215a0a71faffdab9e767a568b4da0",
+        "mode": "100644",
+        "sha256": "c3a2af0122986637153cda30a91a1a4252a342d1e071ad7cb806c60e13091bf8"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/PC8891-README.md",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/PC8891-README.md",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 29044,
+        "gitBlob": "bc36856646bb8dd6619ab218f7b64f3ea835e0ee",
+        "mode": "100644",
+        "sha256": "21cf57964ab3ae4cb520871118ad4109555f2ca74f3274c592778a9f653994e3"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/PRIOR-PC-BUNDLE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/PRIOR-PC-BUNDLE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 8896,
+        "gitBlob": "cfc85e1ba8a71de0a2a489659976f39e209ad03e",
+        "mode": "100644",
+        "sha256": "91ae037009824cf83224225b14b3fa49aa40054c5438a5fc1ec650ea3949d482"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/PRIOR-PC-PORTABLE-MANIFEST.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/PRIOR-PC-PORTABLE-MANIFEST.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 183153,
+        "gitBlob": "b2721cbdab808a6dc9729f31ef5f86c905ce4455",
+        "mode": "100644",
+        "sha256": "ddeecd1467717a0c09e9cf517477eda9a58a70f311e38274b12117ece54d67ce"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/PRODUCER-RESULT.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/PRODUCER-RESULT.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 39406,
+        "gitBlob": "401e184e9707e12fc7e336c92af48b416d7c7d6f",
+        "mode": "100644",
+        "sha256": "033e11cbb35f9552ee29f65b5970807b6cfd2af9860cef49e099d77ac8550926"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/QUALIFIED.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/QUALIFIED.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 3723,
+        "gitBlob": "8c64d9d6840e00a3eddeccc50931a2bcb36d0442",
+        "mode": "100644",
+        "sha256": "915e2770880cbf59cd0055bf5427ecbb221130b7e8c528daa98f51ae1fb67f81"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/QUALIFIED.md",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/QUALIFIED.md",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 568,
+        "gitBlob": "6105f91eba23f8eea900b0d8f68ebd6f6742a0d7",
+        "mode": "100644",
+        "sha256": "f937241eb3b26cb91054867acf8f2fb284de53513493684fd736037e86ef7724"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/READBACK.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/READBACK.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 37317,
+        "gitBlob": "602e04f92fab530a6863363382787a5e5a7954c2",
+        "mode": "100644",
+        "sha256": "d952667b8ee3387d2b1e5b849ad61136dbe6fe597700477387baca62278e26ab"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/TASK-MAPPING.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/TASK-MAPPING.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 825687,
+        "gitBlob": "ec24ca6fcb8623c9eb2243e4e46dbf0b511bbdbd",
+        "mode": "100644",
+        "sha256": "2b2eb9a6ab191a03eba8605129062014e53c07518e7dd03cb8ae3a5606862238"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/part-0001.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/part-0001.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 205435,
+        "gitBlob": "c5aa05e76c1d8f8d04654df7a176f47cf0544148",
+        "mode": "100644",
+        "sha256": "40575946010b25c87f0894a4152ff880906262eab4cae08eb6868c16fdff06a5"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/pc/part-0002.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/pc/part-0002.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 3763,
+        "gitBlob": "6cda8768eed797a77bebbc7740d2cff414ddc54d",
+        "mode": "100644",
+        "sha256": "4ca8956fc97dd482dea0ebf86260c2bef0fc00df31924caf439012443ecc3502"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-followup/README.md",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-followup/README.md",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 3768,
+        "gitBlob": "f0fbcea849c74264583c6c687a69b183686f32f6",
+        "mode": "100644",
+        "sha256": "c18641025f78bb0084b20b59156a23ea7236e5ffd3b21557632fd9041fccf904"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-followup/pom.xml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-followup/pom.xml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 40230,
+        "gitBlob": "96aa8e1b416c147c51226eb171bb411797942ca9",
+        "mode": "100644",
+        "sha256": "f45c2fa544364945b5d1112a8697b88a8d3434c936d75193f24c8bb3c7961611"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-followup/proof.py",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-followup/proof.py",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "a0b0933245cf02f76061be9fadb0b9577a859263",
+        "mode": "100644",
+        "sha256": "19a84436bdade0aee1a3b6addd5128cf94cc35df3f438a146e7592f3875c2b4d"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/META-INF/rewrite/ir10f-amr.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/META-INF/rewrite/ir10f-amr.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "0d7c6a4f4b6b6f8c5afcca53859b3f077b77de27",
+        "mode": "100644",
+        "sha256": "8b5dda0ba7b5e99506fc73228b8038768f26a916f128cdb2812e848f8e817fc8"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/META-INF/rewrite/ir10f-gat.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/META-INF/rewrite/ir10f-gat.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 654,
+        "gitBlob": "f5ab08faa2f6ed770eee40ec5c5218b2873e94bf",
+        "mode": "100644",
+        "sha256": "c2ade00467dc1456fa88138146cfd6f65dc66a93d5ada2f0c5b07d755fc23c75"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/META-INF/rewrite/ir10f-orders.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/META-INF/rewrite/ir10f-orders.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "d3ffd1350b8d13f75cfabb85f14b176b1d4d3a03",
+        "mode": "100644",
+        "sha256": "f0608bbb89c7eeb9026fa26114bb14da8719f8956a86a3f573cfc730453a9975"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/META-INF/rewrite/ir10f-scp.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/META-INF/rewrite/ir10f-scp.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1222,
+        "gitBlob": "d1339b23b1b42f3f9b3df5f2ce1237990d232530",
+        "mode": "100644",
+        "sha256": "07a652275a3b2ca5b664de53a89ca0247e7d3eaa8c4dac54e091e66d7e28841a"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ir10f-amr/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ir10f-amr/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 276,
+        "gitBlob": "c4121853a7979aecf30fe94b19d2c33205ec2bf1",
+        "mode": "100644",
+        "sha256": "83a9bf5bb43c8af0db788e384bcd52def2fda1651b9dad44bf49ac137a2e1e6e"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ir10f-gat/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ir10f-gat/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1089,
+        "gitBlob": "a617179bcbf4ba2a0ca44eacd24ebd09bcb75ac8",
+        "mode": "100644",
+        "sha256": "28e9142f03ee9948b10b370daf2001941c8c1371d33ec3985ac8f70fe84679a2"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ir10f-scp/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/ir10f-scp/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 726,
+        "gitBlob": "ea55b82adc3224b11f231edaf5a7c7aea6da368f",
+        "mode": "100644",
+        "sha256": "5bd56587af77fb37c03ce05aec64c2c1e5cf1cf6304e15402bbd3cab03de5394"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/composition-orders.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/composition-orders.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 5586,
+        "gitBlob": "4318cc8ba2f3b44aa329bd4ed0d9f7e0caef69bf",
+        "mode": "100644",
+        "sha256": "fc0e359fc3b622919eca0780c84d412a69c1911d4870868900fbfe13b2bbfece"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/qualification.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-followup/src/main/resources/qualification.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 30548,
+        "gitBlob": "40a235627e7f35ab8c2986356ad85cd7b066d44b",
+        "mode": "100644",
+        "sha256": "3c2eee744dbcd7a869ab17f44350085e43a4ffad113d5815f31a21ace2112432"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-followup/src/test/java/com/synexia/rewrite/Ir10fRecipeTest.java",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-followup/src/test/java/com/synexia/rewrite/Ir10fRecipeTest.java",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 33631,
+        "gitBlob": "368a53217c8b101367bab32b185924475bd3af08",
+        "mode": "100644",
+        "sha256": "4aa726696588d751da9cd952ce291a613dda46a4c30a010d405da6fc11e554e5"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/BUNDLE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/BUNDLE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 772964,
+        "gitBlob": "c66cea4b7191ab1d5200c3a39db79eb996911942",
+        "mode": "100644",
+        "sha256": "300f59e22dd1a17744826cb511d7def2c6c31694ca3dadab4f339e9bf46095b6"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/INPUT-CLOSURE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/INPUT-CLOSURE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 2906,
+        "gitBlob": "f7730038974b2c80365915ffed2f194ebebceff0",
+        "mode": "100644",
+        "sha256": "d602feb457f994c72ad3a0438c82f4710b6dd42bcbe81a3598546d8e0214a1f2"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/IR10F-README.md",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/IR10F-README.md",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 74318,
+        "gitBlob": "15fedac72822c5eada9ef78a97229eef7f569999",
+        "mode": "100644",
+        "sha256": "fc07d2051294906051c2afd57015757d4ad261b6c8111ad5a565f8abfec9e502"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/OUTPUT.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/OUTPUT.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 30528,
+        "gitBlob": "0231796b4aae9b9eb28b7e40ccd67a0d57443560",
+        "mode": "100644",
+        "sha256": "a4d45ab76ef689f28cfd76c7d01aa3a21b1427fa2c9282dc27b0e0a452b0de46"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/PACKAGE-PLAN-v2.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/PACKAGE-PLAN-v2.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 29971,
+        "gitBlob": "d25f07aa5b8d2ccb5143de25bbe58f49599b4b99",
+        "mode": "100644",
+        "sha256": "8c52dea1654bed7974e472d90298c7a2b0c98931cebe917cbbd4fbff6f686650"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/PACKAGE-PLAN.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/PACKAGE-PLAN.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1345,
+        "gitBlob": "7e0171b79dda432f874ea75d319e6a1266691102",
+        "mode": "100644",
+        "sha256": "e9edd509a13b7a2ad1bfa57c763ea16a9e0b5c2960ef5a57395a14b90ef2c48e"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/PACKAGE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/PACKAGE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 59931,
+        "gitBlob": "592157df0dc63dea41fdf604ed63064f16399db4",
+        "mode": "100644",
+        "sha256": "17ee8edcc8aa38a785aa808b84443ce6db37f2565236f8b823eaf2594960c616"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/PATHS-0001.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/PATHS-0001.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 94230,
+        "gitBlob": "0ca3fa8c3c0de177be48591a47feeb9784dbad94",
+        "mode": "100644",
+        "sha256": "1fb3986a2b3594656ccb58ec92d08e49776c2cb2150d29547d2bfee3a3349680"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/PRODUCER-RESULT.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/PRODUCER-RESULT.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 40590,
+        "gitBlob": "63e48d017556b327e5b4c4cc4fb347755916a70f",
+        "mode": "100644",
+        "sha256": "cb2a225e0f65a1b811ea26748ef7f75b3f79d2d71d20b19250533a13f48254bd"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/PROJECT-READINESS.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/PROJECT-READINESS.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 41099,
+        "gitBlob": "ddb01a0df90b1f49675e9f80636ba030d40a17db",
+        "mode": "100644",
+        "sha256": "1eb162d5cd70260c01de64a397d54126f8b128f6dd09b213b0a166642a0dbd59"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/PROJECT-READY.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/PROJECT-READY.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 8104,
+        "gitBlob": "3ebe69d30451036f08c3645e4ca57808854e99d5",
+        "mode": "100644",
+        "sha256": "15578318cf774d1f396df3dd7804dbac8345640518cf5ca30a37fccfe46984dd"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/QUALIFIED.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/QUALIFIED.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 80493,
+        "gitBlob": "49e5e1697f657eebe5b546c65f0a0e99e570facf",
+        "mode": "100644",
+        "sha256": "bc96b7d8a986c95d76560f08e42e63e797df82aec53069eb97e4013fec79b157"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/READBACK.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/READBACK.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 39548,
+        "gitBlob": "507650a98abc71de288f5ca1d4aa4e8dec033738",
+        "mode": "100644",
+        "sha256": "e9d29996b53778d8a2d5f862e54a9addfcd4e19f22e459d62321fd31d2307096"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/TASK-MAPPING.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/TASK-MAPPING.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 947572,
+        "gitBlob": "ce66d89c060654c79e8ace6a7ba1c3e061fcc8b5",
+        "mode": "100644",
+        "sha256": "3cd263095f8ffb5a98095b523f24bdd238eaadc2a7c1068e5029209dcbd40f81"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/part-0001.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/part-0001.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 141067,
+        "gitBlob": "796e6ca1fafbdd2de07ec2dbd7dbbd0883798b51",
+        "mode": "100644",
+        "sha256": "562919eef53cbb5761bf0e5b912cd532fb277d0709817765e77475793d391d73"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/part-0002.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/integration-followup/part-0002.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 2209,
+        "gitBlob": "d470e101eca12262451df6f9c8a8c648e9f0ff3c",
+        "mode": "100644",
+        "sha256": "29b6907b4dba3eea6bc2568d19bfd19c97dbab715b11f4ba9e84fbdacc9003e7"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/README.md",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/README.md",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 3758,
+        "gitBlob": "210d802817acf3002038e06440accd2b1bc543b7",
+        "mode": "100644",
+        "sha256": "69332120ecef3f6914acab1e8cd8e7c2fb7a195b07ccdc5bb6598230a7d276e7"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/pom.xml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/pom.xml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 41589,
+        "gitBlob": "c0e3065699c658a52b0e0d9a4f6279af9b9b5632",
+        "mode": "100644",
+        "sha256": "465840090d2507e11e0e927008999be400a9a8389e7987197762ebe91543e113"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/proof.py",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/proof.py",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "54131d6f12868e7d31d370b604d7fdcd71990e09",
+        "mode": "100644",
+        "sha256": "e2eff05a28ed28624ed12eac9e2945e814edc309dbd4ca05ec64f8d8f7b221da"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-adc.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-adc.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "04fab16656747ce4cc4febe2b5b054207baefea3",
+        "mode": "100644",
+        "sha256": "ae1631c2929aaccee789bec0c98369459df9f0e61aeecb16db787f84ba7e1cdb"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-alp.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-alp.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "978444340e7fddcf37d4087974e723c83941dc35",
+        "mode": "100644",
+        "sha256": "f6524d460c2a38a14be214369211ffed89308c862a0ce77fb3803d4070a47111"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-amt.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-amt.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "65eabc3882dd63b15705f52127ba964af61d0c73",
+        "mode": "100644",
+        "sha256": "6f42edf4790812b82c9af378dc9eac01aa94278a1860cf4e7fdeea6c66118ab9"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-arx.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-arx.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "af470e3a4b52549d45914babf428c32487c2eb8e",
+        "mode": "100644",
+        "sha256": "66bd3874abc32c40ca1d926247b20b77fa389bbfb5eab00ef89d34d984f746b3"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-cor.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-cor.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "2b5d4ef94927e8029a090f02d98cda24fab09cd5",
+        "mode": "100644",
+        "sha256": "1631c65b807417a4f882bd6ef3c455cce5505a5e420de3e6961dc2f0ad4aac3d"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-fnd.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-fnd.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "8e823e591fe162679571ccbd487bcdf2fdd53103",
+        "mode": "100644",
+        "sha256": "0b70977e2c7b8d3d4815c2a8a8f4512f515efa9a58b5fd57e9fe75b8ab9feedc"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-gdp.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-gdp.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "940f50ed70bc5b885216860f9733b525393553a3",
+        "mode": "100644",
+        "sha256": "83cb01089f0f84c9eb331641fbd2b5d966654320d1485c8107734d6fd2b5ad55"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-gte.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-gte.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "04b57a93bba26c94e43d19205a3b5ca489621bc7",
+        "mode": "100644",
+        "sha256": "5ebd30c799fdf4bb5cd35c21a0b277d12e572ec14a3f6b7c605d071619a694ce"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-ipr.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-ipr.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "4aaed97a026a5e3efc462b84a5b7a64a577d1f45",
+        "mode": "100644",
+        "sha256": "afb02fd7bbc946c52fb625c08941e37d37ed151e8cd6f2102c4a55a2385bc700"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-jmx.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-jmx.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "0ddad72e130d895c8de2d5d4d039cdc6e7b0a928",
+        "mode": "100644",
+        "sha256": "6e2b9fc5a88ba7918cba59c81147747aef159532c8de1f707a16ee808e1b4ce5"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-jpk.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-jpk.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "cc9d6674342c102cdd867b7bfacf2c564f9de479",
+        "mode": "100644",
+        "sha256": "ae465b0205bafe6cf2cc79fc58f37c04a18f788aa4b7862b635c2cb1ebd17ace"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-jrc.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-jrc.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "b51dc50656b77eeea671b00f1270a5519416a793",
+        "mode": "100644",
+        "sha256": "15fa68a7bb093f4acd8d3e8ca8c12100e9bc9b56ffffeec2bf647078d5ab5af2"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-jsc.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-jsc.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "a7b0f178719e23ac746fc9870ba3658c50603bf5",
+        "mode": "100644",
+        "sha256": "b9488fbb9b1206a0f8d9086fef5d3a469995d47fbe1a5012da62ec5782d0156b"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lbt.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lbt.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "bba4dfd5d17fea17ddede52d4337d40dbed28d7d",
+        "mode": "100644",
+        "sha256": "c2269d85c9f11a319b959dc3c024e671602add57ad3db54474cecc8a6144808b"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lcp.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lcp.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "01919a68370d98c2f3cf90dce987387072cc4a85",
+        "mode": "100644",
+        "sha256": "a73bfc96cd1aa2b1dc17e9c3d07c31a0568ad1c8192d229a0b231c6987f2070e"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lct.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lct.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "37b163de60ce39b8db27742477dd6573853457e8",
+        "mode": "100644",
+        "sha256": "98dcaaee56831b999aa8aa15ef601112f84ff6d2f0c483c41232f27ed760f084"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lfb.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lfb.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "442400a861e43b8df222ddf2fe8476f7bf671daf",
+        "mode": "100644",
+        "sha256": "4835d73d4cf8c7c01196a6e942302134da3142f106557c4b3fd41005e0e41b67"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lgv.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lgv.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "c7131bcae4b42e68355e8c3b602f999fa279a4f7",
+        "mode": "100644",
+        "sha256": "b0cbd91e2139644c5137af66babbd938a38434eadc7a305d849a5463556ada1e"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lix.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lix.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "9b5bf83755661ff84049a0aaf9ea31ab92318a67",
+        "mode": "100644",
+        "sha256": "719a38f6754b32db50e9f73aec7495180dd8c22817bf05b72f5ea9ce0bd37b95"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-ljt.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-ljt.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "f22f5f50f7a57084eb6b23b44bf39e4d18c6a959",
+        "mode": "100644",
+        "sha256": "c25ac02d70b15eb480ac6fd23de938978f740b656c579254f8ce46dd02f7e81a"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-llg.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-llg.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "c012641b0d0afac22a1062c16a3e74a2ef95bd69",
+        "mode": "100644",
+        "sha256": "9af2209c8d957a89a13100fc9fc50abe3e6ea66e3ca81071a858c529170ac3a3"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lmp.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lmp.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "96a78dbcb983f2ab4bd05d75e67fb3b825a7561b",
+        "mode": "100644",
+        "sha256": "445c00b7281c6deb6533f69a8cfafc4df25424c40d2bcbc667fd338b26d89716"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lni.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lni.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "69e0f1d268733403b8eb4045d788e0900419204b",
+        "mode": "100644",
+        "sha256": "cc03b352daf4c619bd27802b86b53abc5491a0c78e9804fb921899ed58ecc81e"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lpr.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-lpr.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "7a807e21cfbc9c136dfa78c95b61d87df1523067",
+        "mode": "100644",
+        "sha256": "9103d1e830c76443ed551321414c7bfb819a98fc2cc0d2ba4c5207b27c1e4919"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-ltq.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-ltq.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 2314,
+        "gitBlob": "bcf7d4ddaa6ca8be76883418f3f2928129cf0c42",
+        "mode": "100644",
+        "sha256": "03e894a4bab83dc11644d007e1304e139b08beca83934dbc4bb36141c68d29fe"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-orders.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-orders.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "d09efb00c6dfe7d2a9610f7f0098994046ba3d31",
+        "mode": "100644",
+        "sha256": "ec5345326663a85e58ee994e0d92c6bb4f71e37a5e0261848e3a54016b3e24cb"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-rcp.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-rcp.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "bfdf31a1860f4102c62d988a5005dd1b2701da91",
+        "mode": "100644",
+        "sha256": "37c6c1400170376e7d5c6e3563d6db95703c31fb272359ac3a0f43b929143cfa"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-rim.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-rim.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "a23785e7dfcb4bbb847027fb68ff1bdf920dd5d6",
+        "mode": "100644",
+        "sha256": "e52d6caad7b4c77c70d9ec509559ed90cca675d12e15e50db0f06d92b2a04755"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-vpm.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-vpm.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "7b602f986ebd4750752f51d9fbe827d37dc92509",
+        "mode": "100644",
+        "sha256": "0d23d33c7602068a98eb1c5be9d34665215b793837b13c6d7e2e12b24af8a963"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-vrc.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-vrc.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "c1cc2e25288412035fc21685a0851bc0145bd799",
+        "mode": "100644",
+        "sha256": "3de97607fe71b45fe517af0503d203d288bf096f9075f5ff5dc559a463eb6689"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-wfc.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-wfc.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "3a2109e925b8d5bdfe04d419cabab8bd4837eb9f",
+        "mode": "100644",
+        "sha256": "efac6d38c8ef6ede3b5519971f09b588baba64de1c0ef920514bd2237fd0571f"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-wrf.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-wrf.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 311,
+        "gitBlob": "a6cfafd5cec66e1db5f15e4afb4c741162b2fa10",
+        "mode": "100644",
+        "sha256": "c4ed14b6b9cd1bd942858a2aa1a80d1dbed517a0c20a551547625d056a9a2055"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-wro.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/META-INF/rewrite/br875-wro.yml",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 708,
+        "gitBlob": "ed06b08212788f0b8aa751bc6f994a877ee3e1bd",
+        "mode": "100644",
+        "sha256": "1dc1661f55b1b66e764fe2dd33912e13c1b160cbe023ac8573ebf798ef10370e"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-adc/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-adc/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1196,
+        "gitBlob": "d87af0312e9d50546602a1410a0c03d8b565a63a",
+        "mode": "100644",
+        "sha256": "e229a24910074a505408b65eeb1f7777320986d90109aca80d6e16dca35c9e76"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-alp/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-alp/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1026,
+        "gitBlob": "f3244169102b5494380c93b0ea3e8f0e39d06c6f",
+        "mode": "100644",
+        "sha256": "fb0d7f012113be2c7384a34f79e519b633718121da1935d46e4453fd164cffa9"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-amt/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-amt/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1217,
+        "gitBlob": "6f0edf042b61ae501c39b02699821b33987ef6bf",
+        "mode": "100644",
+        "sha256": "e0d7f98f031b316394b234622579687dc1d25d3b3126e0c2445da02a119589d0"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-arx/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-arx/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 231,
+        "gitBlob": "a0649d2d3d058546bd97b9b869b2c5d77b4714c2",
+        "mode": "100644",
+        "sha256": "3dbbd9358e1a22c43f3b2b859974ac693c123342e29806b1bff2be43a270b9fe"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-cor/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-cor/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 578,
+        "gitBlob": "f762950e6b3a346c6a6b7d12a2e4259c572128c4",
+        "mode": "100644",
+        "sha256": "720bfbbdb0d12bf88544dd9bb329c6eb987e8c67671962d8aa10d7ad81fdb0df"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-fnd/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-fnd/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 979,
+        "gitBlob": "c983fe0ad8ae11483ea47a3155ed6f7e9b928036",
+        "mode": "100644",
+        "sha256": "086b7986e421e7c80d28a2f61d9664b614bb25fe232281bedfefdd41473af476"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-gdp/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-gdp/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 634,
+        "gitBlob": "18bea9921391eddf4122cde4b95ec6661a956ff2",
+        "mode": "100644",
+        "sha256": "49cc5867de7b3e55e3532558606cfcb13bd06b256d36314de3d668d630650e17"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-gte/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-gte/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 126,
+        "gitBlob": "6d65dfefad954713143eaee0c148ed01eeed8060",
+        "mode": "100644",
+        "sha256": "caa68576a994442ea21cbef99a730932a461816fc843dbb86e4220f7b361f098"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-ipr/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-ipr/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 423,
+        "gitBlob": "1913f010d379e4e9d5897f9b16f85e19346ef8a9",
+        "mode": "100644",
+        "sha256": "2d2c9ddebce69995a9899fe35d875c8be9c5bbf7c6474048b6a88045eef8730c"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-jmx/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-jmx/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 836,
+        "gitBlob": "8da8871ba2fe7e15fa87f4d6be778673f9a07c0d",
+        "mode": "100644",
+        "sha256": "3adcd97abf6e173251d5fd86735f81f317ec267b7782144e3da9beff31e61f96"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-jpk/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-jpk/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1470,
+        "gitBlob": "4999a9be0f5039af69d1161b5a8e8e56f0e9ede8",
+        "mode": "100644",
+        "sha256": "0f9a70c225d2036294ab603174245656dc3fffeacfffab57db3757702961e2cb"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-jrc/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-jrc/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 650,
+        "gitBlob": "bad3aaac11407c3049fe7c9a94ff0bb13a180a76",
+        "mode": "100644",
+        "sha256": "7b109a5e058008fbee70c5cb46dbde0335312ed810c2f3dcd3f9f32fbd07494c"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-jsc/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-jsc/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 341,
+        "gitBlob": "28bb1894f9ff67b040fbde024d73e05ec3662ce9",
+        "mode": "100644",
+        "sha256": "6e480de54053fd757cecbbe4dc1e40cfa638ad458efd03009f83f4c53ca655b7"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lbt/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lbt/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1015,
+        "gitBlob": "08ad3a415048f7a6a0456e5de16266b562d82394",
+        "mode": "100644",
+        "sha256": "17ed2b836a84a7422536d7f0c7464cbca4f74db0fa168e600df512663960ebac"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lcp/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lcp/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 634,
+        "gitBlob": "4a0868a00419105d0e61a427248d15f623c42ec9",
+        "mode": "100644",
+        "sha256": "d61daf37f1514e05912df85b6be73f970d0ad1f13aa19aed7a73fbe6de55c86f"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lct/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lct/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 656,
+        "gitBlob": "557a63c46d1ff1cb32411169b50ab68e3bf108d6",
+        "mode": "100644",
+        "sha256": "d67ebe73b9c102e81fbcc14eb7ea638ab31c099bbc8634159333c5f2a6ad9f39"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lfb/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lfb/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 893,
+        "gitBlob": "451ad4f5498786b6e699cbc3481a41f5a286eec4",
+        "mode": "100644",
+        "sha256": "3402c1d324c39e213767a79c45303321a940f1c1aa53c387d0090bec348fa0ce"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lgv/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lgv/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1055,
+        "gitBlob": "4f9e042d6197f65ec0d4459a9182414ae8c89114",
+        "mode": "100644",
+        "sha256": "73f661741817d2ceb02a08771f71a3453adc46b30f8e50cc84d815f4a6b4dea9"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lix/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lix/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1008,
+        "gitBlob": "97788fea737c3dec22818caa53ebb503b72da879",
+        "mode": "100644",
+        "sha256": "18f01482e109fefa4e4d9c69a651136bf1b59e6d532de52c113ecc1b180aad2e"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-ljt/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-ljt/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 782,
+        "gitBlob": "bbd889fb12fa88df506c6dcea3aa1131607600a5",
+        "mode": "100644",
+        "sha256": "974caafd7946e3920bbc136f1e85784e00a96f8ab81052f1b09ef6a11c7a08b5"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-llg/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-llg/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 999,
+        "gitBlob": "953cdd95b157c0ef3e1c939d9aa5c80f15f06b6d",
+        "mode": "100644",
+        "sha256": "682ee8b9198643de574b52863419c47937a2af04fbd9d740e6d2b361b325e608"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lmp/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lmp/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1000,
+        "gitBlob": "8c834d3d8c98fd6e70d08c6bed5dc26af1500cbe",
+        "mode": "100644",
+        "sha256": "7a275624ae6e88435443b405d3c34f48fc987390c18001fbc47e5dadeafb382d"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lni/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lni/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 756,
+        "gitBlob": "bf4a89e56457f4a4ed60503300195d53b1683182",
+        "mode": "100644",
+        "sha256": "4d940a0da1c4bd0100a93d77a4035dca73a9b59e546b7ff91671ac703120556e"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lpr/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-lpr/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 808,
+        "gitBlob": "d2c14c71e9f6673a5d2632d2570c11ff864d0fc5",
+        "mode": "100644",
+        "sha256": "7c669cc1fa1344c3bc47518dde5d51bcdeb594d178a70e4ddf56a00d75031e20"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-ltq/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-ltq/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1119,
+        "gitBlob": "d318eda93fcd322a36258f8ab311d13f19a2c9d9",
+        "mode": "100644",
+        "sha256": "834310602ed6fd7032daeb339bce513c04695a8bec2cbc58c1900b04cade4a91"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-rcp/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-rcp/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 970,
+        "gitBlob": "337ce15186d6479a6f6cc39f0a315da6e2b11f4b",
+        "mode": "100644",
+        "sha256": "3bb72ef030c9314a84de07f0f9ca8696c33bedcb5ef414a7150b20c3817e3588"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-rim/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-rim/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 598,
+        "gitBlob": "622a3d22882372d943c885d2b845c27df2538465",
+        "mode": "100644",
+        "sha256": "8a0b1cc6913250370e5ec724876f270b01da80c3a060ec7d66f7fe6b07bbd2d7"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-vpm/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-vpm/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 691,
+        "gitBlob": "a7b2ea71d4f4a24c7ea8631734b92f69963da9da",
+        "mode": "100644",
+        "sha256": "64ee61c5460513b0d2e13be1407ae368f22528c8b6dba9ffc23ceb978acda9fe"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-vrc/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-vrc/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 460,
+        "gitBlob": "434829503bf4c3d49e5a0e7ae4164a7cc6d3722f",
+        "mode": "100644",
+        "sha256": "2d7f1190bf7f9085ae6d69a8e8d698e0760d6663d036ca22cdb879a97795ccdc"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-wfc/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-wfc/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1336,
+        "gitBlob": "cebaeffa608f07c52fc743fffea663f2d95f2127",
+        "mode": "100644",
+        "sha256": "4617916958eeba11d247e7993a245a3185b7ced18a6ad00e178afad70a1ee958"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-wrf/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-wrf/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1332,
+        "gitBlob": "81aaba4799a101238d6ab1ce17bc7c403f067998",
+        "mode": "100644",
+        "sha256": "018bc7d7ad2c11e7a284ef8adc77299f884237a0d4c0e2fadc7c0cc92b2bcda8"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-wro/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/br875-wro/manifest.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 2433,
+        "gitBlob": "873e33ca2bae9dc097b576bdd2e7ccb6094d0456",
+        "mode": "100644",
+        "sha256": "50d9c4ec8560e924ecc4cc1ea23ebab4ec5208c664e6a02d42d482a9676f6cb1"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/composition-orders.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/composition-orders.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 61284,
+        "gitBlob": "60a51cd7e16bcd07765912606bc9a4b4c78e59eb",
+        "mode": "100644",
+        "sha256": "de9651e21c0d5f69227db9316effe060c8bc2ce82e856bd77e78e14beafad452"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/qualification.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/main/resources/qualification.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 34904,
+        "gitBlob": "ec664ab0505a9e7a29392935c19faffc72d945ab",
+        "mode": "100644",
+        "sha256": "0ec32de6063a26ea40b37370099c19698aa260ac531fc1ab24abbe4d21f42fc6"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/src/test/java/com/synexia/rewrite/Br875RecipeTest.java",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/src/test/java/com/synexia/rewrite/Br875RecipeTest.java",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 3520,
+        "gitBlob": "5632924f8d77b093bdb6b2b7d1a30a4e804434f3",
+        "mode": "100644",
+        "sha256": "d6ad556cc5b3e5c89042f0889f640d82a7d8406e543a64a311d89c9f776caba4"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/BR875-README.md",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/BR875-README.md",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 255502,
+        "gitBlob": "a34676979c3159d7356f2c71156577db0337e8f8",
+        "mode": "100644",
+        "sha256": "6d5a613d7bd9afd09fb5db610b29ccd50127f76d27d340ecd0f2c036fe2843b6"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/BUNDLE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/BUNDLE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 247395,
+        "gitBlob": "d70750f716dbdc66e7d80e3970ecfe1b70184ba1",
+        "mode": "100644",
+        "sha256": "36f6e11506b4b57a5575f72e3e3d018eaf4690e0725401e6f65cdc5c0bfb358e"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/PACKAGE-PLAN-v2.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/PACKAGE-PLAN-v2.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 166367,
+        "gitBlob": "466609c2e4bd2932734f1151d9e1f2fe67a4cabe",
+        "mode": "100644",
+        "sha256": "01664c3d6b74439a1bee86eeb6cec724e5d7b6dfed8e2356bd7b9e3d1f910dc1"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/PACKAGE-PLAN.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/PACKAGE-PLAN.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1222,
+        "gitBlob": "e4065cb3115afad3c6407996d842a93bc81ce325",
+        "mode": "100644",
+        "sha256": "17380d97463a0daf681002dcceea7cf092c2efca131f0412eea6203361b76608"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/PACKAGE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/PACKAGE.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 245614,
+        "gitBlob": "05bd0c345f243aa7274b1ff13dc5fcfd736c928c",
+        "mode": "100644",
+        "sha256": "9fe801e662d5952dbe099dc0d96148717d5e4050f4ee5221cea8f91eb72cf293"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/PATHS-0001.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/PATHS-0001.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 115145,
+        "gitBlob": "8831fdd81061970d0b7c3b356f112c3350ab9325",
+        "mode": "100644",
+        "sha256": "ac215156b38974ff6c58b730a67a505d2e1530ae11187db2824e5fb3ab2931ab"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/PATHS-0002.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/PATHS-0002.tsv",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 272500,
+        "gitBlob": "6da7b667bf52eb797a47ab811a7cb2ae49413c94",
+        "mode": "100644",
+        "sha256": "a2b5bad82f61fd282f42707b81a8a2662cf3be41ba890fbb50296ab301e76ad4"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/PROJECT-READINESS.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/PROJECT-READINESS.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 273008,
+        "gitBlob": "c5b80df5feede1614a7782d840c2261dfd915b27",
+        "mode": "100644",
+        "sha256": "7d509beff7b53b2df5a913d3a5f4115a55219fc0bbc41624a0a87733298b7f81"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/PROJECT-READY.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/PROJECT-READY.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 85701,
+        "gitBlob": "631d67561e7b91be6e5eef25f0dd1d9fd7ca0a09",
+        "mode": "100644",
+        "sha256": "3bd4fcb883e2a1fcb461324c8e873b20f999ecf431e22bc1a24415d2468eec8b"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/QUALIFIED.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/QUALIFIED.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 478589,
+        "gitBlob": "5cfeeaf634696f2760e0e20cfbc954c72899c11b",
+        "mode": "100644",
+        "sha256": "e8fd4b10fcfd187ea7b8cc417d8687ad3ba1ec214ad32620a79d7312688d6636"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/READBACK.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/READBACK.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 271266,
+        "gitBlob": "be4b1a4b62cd53abb9879b384d4acfc4bc6774ad",
+        "mode": "100644",
+        "sha256": "25378c0eebf223e64a7299fe017a76ff50ae97ca53384f315e698e2c2193379a"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/TASK-MAPPING.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/TASK-MAPPING.json",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 902160,
+        "gitBlob": "8af5c061b9adbf3d3f59eac99828ba3cc1b99c4c",
+        "mode": "100644",
+        "sha256": "ecf3afdfcc2f66c3e19f8a42e59a4a5373e6e57c1fe25bd734b447c9daac7059"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0001.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0001.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 964535,
+        "gitBlob": "a8e6c74e9546c19e514a1022b38c6c3616b9b0fe",
+        "mode": "100644",
+        "sha256": "c5ded16e710f54aff8f04c844194ca44024526af35a722c424a384e729d3d935"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0002.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0002.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 961672,
+        "gitBlob": "aa55f3c629e2422de1a78543080f8812dc78699e",
+        "mode": "100644",
+        "sha256": "62ef72a7a3532909b58df160c34ca3ee1d2fd33dc88da5a8a737462515a403bc"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0003.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0003.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 976386,
+        "gitBlob": "173a27ef21acbd5a021ca653fb264b046d82a40c",
+        "mode": "100644",
+        "sha256": "f35108cdf0cad2e94f529e4e2617c33a9e5c58f2aef2b3c17e1ffd35f6bab897"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0004.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0004.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1003524,
+        "gitBlob": "b8274d3a731f57e19e1b07b3c6e0669e0413d0a2",
+        "mode": "100644",
+        "sha256": "a3586af4b710e92b16149a0e48680a727aee792b71539728c350d8a049e293a1"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0005.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0005.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 993593,
+        "gitBlob": "289b0acb980f2faf2391ffda9ab850bf70889e6f",
+        "mode": "100644",
+        "sha256": "837ae4d478916ffc94dff0b557f913dbe716cef3846ef16b54cb7dc9ec07134d"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0006.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0006.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 982756,
+        "gitBlob": "92a420cb22355d476993adadbd540da5f6cbacdc",
+        "mode": "100644",
+        "sha256": "2609800ed9f75e4ba4c9ec1354e9888c328af242e4ee1d482d0a85e6a94de0b4"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0007.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0007.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 920942,
+        "gitBlob": "5ba90f08740d2c40e6fd639e73351962d704760c",
+        "mode": "100644",
+        "sha256": "6b70ee43cd571f74f76888572dba971ef2b133a59929f50cd1c74539fdf70ee7"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0008.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0008.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 967987,
+        "gitBlob": "bc75812d50a7e9e934d904c3c9bd8990887f5b41",
+        "mode": "100644",
+        "sha256": "75e6cca2a0ddb6a035fc938a1858e3de24f93e1e13495fd07fd9e6f1cc797d40"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0009.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0009.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 998956,
+        "gitBlob": "0a57dbcec224e8f69a4b9da15df63cb913e6bcaa",
+        "mode": "100644",
+        "sha256": "5bd992cb4a002350d6f2b91ea5552c14f2d8b8c1abd0dcf66bd22054f3f32c76"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0010.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0010.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 679754,
+        "gitBlob": "3b138973b1f5b0e02d0e37025fd6e579d376883a",
+        "mode": "100644",
+        "sha256": "9303b7b7ea632d951a4ec89d12c02b75a104fdbb81222742d880cb109e138665"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0011.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci8891-20261006/current-reconciliation/bridge-875/part-0011.tar.gz",
+      "state": "UNAVAILABLE"
+    },
+    {
+      "expected": {
+        "bytes": 1743,
+        "gitBlob": "d9548f65ff00049ac045a14f288cc489a887921a",
+        "mode": "100644",
+        "sha256": "a95bd4bc88bd6f5be193d110e31f1fb9cbdca4ab8b28690db9a3ddbca4b2b8dd"
+      },
+      "receivingPath": "m3/tooling/migration-recipes/tasks/m3-rc-10f/bridge-875/RECONSTRUCT.md",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/bridge-875/RECONSTRUCT.md",
+      "state": "UNAVAILABLE"
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "schema": "m3-wrapper-final-receiving-acceptance/v1",
+  "status": "PASS_SCOPED_ACTUAL_RECEIVER_PUBLICATION_PIN_EXTERNAL",
+  "receiver_repository": "hsoliwal/M3JDK21",
+  "receiver_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "original_r2_sealing_baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "original_r2_seal_unchanged": true,
+  "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "reusable_recipe_owner": "hsoliwal/com.synexia/synexia-openrewrite-recipes",
+  "scope": {
+    "runtime_source_files": 7,
+    "test_source_files": 22,
+    "runtime_and_test_targets": 29,
+    "verification_text_targets": 3,
+    "full_source_manifest_rows": 337,
+    "preimage_module_inputs": 313,
+    "received_module_inputs": 335,
+    "maven_junit_tests": 255,
+    "whole_repository_completion": false
+  },
+  "source_review": {
+    "path": "FINAL_RECEIVING_FILE_REVIEW.tsv",
+    "sha256": "f1dd64a810e74f139db5c7d021bb1f5d82623501dff95f47ae6a0042fb62f602"
+  },
+  "source_closure": {
+    "path": "runtime-proof/received/SOURCE_MANIFEST.json",
+    "sha256": "90ec8c484c8ca68f1381133a0979ef88f4975dd4c46ced480db7a87d21b0a98e"
+  },
+  "actual_sdk_and_receivers": {
+    "path": "runtime-proof/SDK_ACCEPTANCE.json",
+    "sha256": "a9e03d0c1b71cad87b7c26c2f6e348850b96ed6349b3d02e8df515852f07fd37"
+  },
+  "runtime": {
+    "path": "runtime-proof/received/RECEIPT.json",
+    "sha256": "bf9bbd87748c76d0b2da931bc1246114eea49118e5b2ecc3cd5d2bf19aedc568"
+  },
+  "maven_module": {
+    "path": "runtime-proof/received/MAVEN_TESTS.json",
+    "sha256": "38ebfc01f45f617bcda0e41a7a866650a3fd0b4f11636e9b734c0b2d89e89b20"
+  },
+  "public_api": {
+    "status": "EXISTING_API_RETAINED",
+    "removed_or_changed": 0,
+    "added_types": 0,
+    "additions": [
+      {
+        "class": "com.m3.collections.M3FilteredNavigableSet",
+        "member": "public E removeFirst(); descriptor: ()Ljava/lang/Object;"
+      },
+      {
+        "class": "com.m3.collections.M3FilteredNavigableSet",
+        "member": "public E removeLast(); descriptor: ()Ljava/lang/Object;"
+      },
+      {
+        "class": "com.m3.collections.M3IndexPathMasks",
+        "member": "public static long[] selectLong(long[], int[], int[][], int[], int[], int, int, int, com.m3.collections.M3IndexPathMasks$Backend); descriptor: ([J[I[[I[I[IIIILcom/m3/collections/M3IndexPathMasks$Backend;)[J"
+      },
+      {
+        "class": "com.m3.collections.M3LongIndexProjection",
+        "member": "public com.m3.collections.M3LongIndexProjection filteredPathMasks(int[][], int[], int[], int, int, int, com.m3.collections.M3IndexPathMasks$Backend); descriptor: ([[I[I[IIIILcom/m3/collections/M3IndexPathMasks$Backend;)Lcom/m3/collections/M3LongIndexProjection;"
+      }
+    ],
+    "receipt": {
+      "path": "runtime-proof/received/API_COMPARISON.json",
+      "sha256": "f96c743cf930a1303b5881ed443190fd002d2638922ca273da6408a9b80f4bbe"
+    }
+  },
+  "jni": {
+    "status": "PASS_C17_UBSAN_HEADERS_EXPORTS_AND_CHECKED_RUNTIME",
+    "retained_int_entry_point": true,
+    "added_long_entry_point": true,
+    "receipt": {
+      "path": "runtime-proof/received/JNI_ABI.json",
+      "sha256": "23648186cf818bdd389f3b9b950b48dfc8f4240fde5825f413eb83edc5350fc9"
+    },
+    "scope": "Two recorded Linux libraries; all preimage prototypes retained. No other-platform or native-speed claim."
+  },
+  "actual_long_facade": {
+    "path": "runtime-proof/long-selftest/actual-long-selftest.json",
+    "sha256": "d655bdf6b73a4c9d29cefd55e7b0cca095db5c4e5ad94f1a8a7928feaf9fd649"
+  },
+  "allocation": {
+    "status": "PASS_NARROW_ALLOCATION_OBSERVATION",
+    "metric": "JVM-reported invoking-thread allocated bytes",
+    "baseline_bytes_per_operation": 262064,
+    "receiver_bytes_per_operation": 131048,
+    "difference_bytes_per_operation": 131016,
+    "reduction_percent": 49.993894621161246,
+    "receipt": {
+      "path": "runtime-proof/performance/RESULTS.json",
+      "sha256": "af6d762f4d6235cb6db2dbed75c61e9cc4cffd175596081d0d4bd5c922b28a61"
+    },
+    "scope": "Existing sortedDescending proof on a 32750-entry already-sorted slice; 3 fresh JVMs per lane, 3 samples of 100 operations per JVM; allocation only."
+  },
+  "historical_donation_guard": {
+    "full_verifier_status": "NOT_EXECUTED",
+    "exact_junit_1_12_2_status": "NOT_EXECUTED",
+    "manifest_seal": "PASS",
+    "static_admission": "REFUSAL_IN_BOTH_BASELINE_AND_RECEIVER",
+    "declared_rows": 113,
+    "baseline_source_drifts": 14,
+    "baseline_undeclared_java": 185,
+    "receiver_source_drifts": 15,
+    "receiver_undeclared_java": 207,
+    "guard_unchanged": true,
+    "receipt": {
+      "path": "runtime-proof/historical/HISTORICAL_DONATION_PREFLIGHT.json",
+      "sha256": "720db0fb379d84279abf54ad14acf067ea17bdf8eaca1bec71e9b1198bc26c60"
+    },
+    "interpretation": "Scoped runtime success does not replace or pass the unchanged historical donation verifier."
+  },
+  "canonical_immutable_pin": {
+    "status": "EXTERNALLY_BOUND_AT_PUBLICATION",
+    "path": "m3/collections/verification/wrapper-convergence-20261018/SOURCE_PIN.json",
+    "included_in_core_packet": false,
+    "reason": "The final immutable canonical commit is recorded outside its own content to avoid a self-referential hash."
+  },
+  "historical_candidate_metadata": {
+    "path": "history/candidate-56-20261018/INVENTORY.json",
+    "sha256": "3762881c33ed3d0b67399cee60eb614ff8ff1378e40274da8207f4224b10bf15"
+  },
+  "rejected_initial_dataset": "m3jdk21-wrappers-20261018",
+  "rejected_initial_source_remains_rejected": true,
+  "limitations": [
+    "Bounded navigation enhancement admits only reviewed exact owners and JDK-owned views; opaque decorators and subclasses retain their original range path.",
+    "Existing public APIs retained; the four classified additions are explicit and are not reported as byte-identical API surface.",
+    "No whole SDK, full JDK image, jtreg/JCK, arbitrary concurrency/serialization or other-platform qualification.",
+    "Allocation evidence does not establish elapsed-time, CPU, JNI, retained-heap, GC or broad collection performance improvement.",
+    "Historical full verifier and exact JUnit 1.12.2 remain unexecuted; static historical admission refuses both trees."
+  ]
+}

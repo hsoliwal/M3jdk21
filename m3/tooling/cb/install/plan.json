@@ -1,0 +1,141 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "m3-cb",
+  "outputs": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java",
+      "before": null,
+      "after": {
+        "resource": "M3Boundary.java.txt",
+        "sha256": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CB.java",
+      "before": null,
+      "after": {
+        "resource": "M3CB.java.txt",
+        "sha256": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CI.java",
+      "before": null,
+      "after": {
+        "resource": "M3CI.java.txt",
+        "sha256": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Class.java",
+      "before": null,
+      "after": {
+        "resource": "M3Class.java.txt",
+        "sha256": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java",
+      "before": null,
+      "after": {
+        "resource": "M3ClassFlags.java.txt",
+        "sha256": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java",
+      "before": null,
+      "after": {
+        "resource": "M3Constructor.java.txt",
+        "sha256": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "before": null,
+      "after": {
+        "resource": "M3Descriptor.java.txt",
+        "sha256": "df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Field.java",
+      "before": null,
+      "after": {
+        "resource": "M3Field.java.txt",
+        "sha256": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Member.java",
+      "before": null,
+      "after": {
+        "resource": "M3Member.java.txt",
+        "sha256": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java",
+      "before": null,
+      "after": {
+        "resource": "M3MemberFlags.java.txt",
+        "sha256": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java",
+      "before": null,
+      "after": {
+        "resource": "M3MemberKind.java.txt",
+        "sha256": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Method.java",
+      "before": null,
+      "after": {
+        "resource": "M3Method.java.txt",
+        "sha256": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3PC.java",
+      "before": null,
+      "after": {
+        "resource": "M3PC.java.txt",
+        "sha256": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java",
+      "before": null,
+      "after": {
+        "resource": "M3RecordComponent.java.txt",
+        "sha256": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "b96894a77e5c310addbda72b248ab56fedf8ceb24e5de81fe6e5d090982a4abc"
+    },
+    {
+      "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java",
+      "sha256": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462"
+    },
+    {
+      "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java",
+      "sha256": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3VI.java",
+      "sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Release.java",
+      "sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb"
+    }
+  ],
+  "plan_sha256": "8d3ac592633e2408b254102b61573d54d07a5e525596ed57c2aaed0dc83fcfa4"
+}

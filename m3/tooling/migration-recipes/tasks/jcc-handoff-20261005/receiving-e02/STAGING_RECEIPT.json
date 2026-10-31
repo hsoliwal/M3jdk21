@@ -1,0 +1,91 @@
+{
+  "repository": "hsoliwal/M3jdk21",
+  "destination_pin": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+  "status": "STAGED_NOT_EXECUTED",
+  "scope": "candidate tooling development only",
+  "source_export_admitted": false,
+  "jdk_acceptance": false,
+  "inherited_module_coverage_gate": "NOT_EXECUTED_BY_FOCUSED_FIXTURE",
+  "inputs": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+      "role": "retained_destination_owner",
+      "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
+      "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
+      "bytes": 7151,
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/sources/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+      "role": "retained_destination_owner",
+      "sha256": "8384244946df1f840406aaf71438b4f0dba311dfd7eba7b421a064d63c31bf3b",
+      "git_blob_sha1": "94ff41d9a298b671749a69bd8bc7b32005ebf877",
+      "bytes": 3058,
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/sources/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+      "role": "retained_destination_owner",
+      "sha256": "2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69",
+      "git_blob_sha1": "6b3b8a126cca230526c66adba36f53f5f9f49f5b",
+      "bytes": 2700,
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/sources/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java",
+      "role": "retained_destination_owner",
+      "sha256": "496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c",
+      "git_blob_sha1": "4954825bdb4b5193c59f24ec66f95d2bd3fc8658",
+      "bytes": 3073,
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/sources/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
+      "role": "retained_destination_owner",
+      "sha256": "ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534",
+      "git_blob_sha1": "a1a745a4ea8617937d8ecbb61eb17973dac0948f",
+      "bytes": 1341,
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/sources/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
+      "role": "retained_destination_owner",
+      "sha256": "c2a204144a4ff7fe2f4abfa151a744e7114961b83b7f006e019e595f4569e238",
+      "git_blob_sha1": "341b55a500964906d15c88ccef9f3e05f2a1c025",
+      "bytes": 4517,
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/sources/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java",
+      "role": "original_candidate_tooling_fixture",
+      "sha256": "b034673ea218515cc12ab0b4173eabf06732f29e8a456be45b5ba0d00489ab39",
+      "bytes": 15860
+    },
+    {
+      "path": "m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml",
+      "role": "original_candidate_tooling_fixture",
+      "sha256": "fda1ac1823bf912f10d975659dc1bfe7f89573d1581af3a7bfa7e45d99a70ba2",
+      "bytes": 3152
+    }
+  ],
+  "contracts": [
+    "original two-file project; four private scalar-int leaves including one unmarked existing atom",
+    "113 input pairs: 81 edge combinations and 32 deterministically seeded pairs",
+    "A, P, AP, PA schedules with fresh factory/parser/context; every intermediate and quiet second sweep compile via unchanged MemJava",
+    "AP and PA equal; A and P distinct as required by retained owners",
+    "actual convergence composite compared with declared child sequence, fresh replay and reversed project enumeration",
+    "frozen original and independent arithmetic oracle; null/string-null/empty/unicode/code-looking opaque string observations",
+    "source/member surface preservation and class-state isolation",
+    "negative malformed Java, arithmetic mutation and opaque-string mutation must be rejected"
+  ],
+  "epoch": 2,
+  "prior_epoch": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate-authoring/receiving-fixture",
+  "concrete_gap": "Epoch1 compared descending order with unspecified Map.of iteration; distinct orders were not guaranteed.",
+  "change": "Assert exact distinct ascending and descending key orders; apply fresh composite to both and independently compile/observe both results.",
+  "evidence": {
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate-authoring/receiving-fixture/STAGING_RECEIPT.json": "63d605d6c4ef4d4468cc92265177ec333870392413f5c5337b5d9e907009ebaf",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate-authoring/receiving-fixture/VERIFICATION_RECEIPT.json": "85785bc2ff3d8265e04df7cec4852a93e100fabbda15c13d81253b6b28b380d1",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate-authoring/receiving-fixture/epoch2/CORPUS_CONTRACT.md": "40cec6db1b58dd19a0eaaaaf51396202db496188b755233883ec871f909d1a84",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate-authoring/receiving-fixture/epoch2/revision.diff": "2f35d7e9ef58679375485ba1c7c966ba6e4cf7bfe710e870a2fdc6844d8d1140"
+  }
+}

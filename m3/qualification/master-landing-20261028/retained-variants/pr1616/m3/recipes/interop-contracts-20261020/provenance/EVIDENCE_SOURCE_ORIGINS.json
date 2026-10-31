@@ -1,0 +1,215 @@
+{
+  "schema": "m3-interop-evidence-source-origins-v1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "prepared_by": "/root/correction_memory/interop_semantics",
+  "prepared_utc": "2026-10-20T15:00:10.505315+00:00",
+  "status": "EXACT_SOURCE_BYTES_VERIFIED_READ_ONLY",
+  "scope": "Finite origin map for ten copied M3 owner evidence paths; this is provenance metadata and does not add runtime generation or qualify target behavior.",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-interop-contracts-20261020",
+  "local_path_base": "canonical crate root",
+  "comparison_method": "Read packed file bytes and git show <source_revision>:<source_path>; require exact equality, compute SHA-256 and Git blob SHA-1 independently. Compare the earlier 2779 source revision separately.",
+  "sources": [
+    {
+      "local_path": "evidence/interop-correction/apache-review/M3ApacheBag.java",
+      "source_url": "https://github.com/hsoliwal/M3JDK21",
+      "source_repository": "hsoliwal/M3JDK21",
+      "source_revision": "d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97",
+      "source_path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java",
+      "source_blob_url": "https://github.com/hsoliwal/M3JDK21/blob/d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97/m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java",
+      "git_blob": "86473e61bf886a28ca3a40010b6bd25f5f34cdb0",
+      "sha256": "5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f",
+      "license_id": "Apache-2.0",
+      "classification": "PRESERVED_HISTORY",
+      "disposition": "EXACT_TARGET_OWNER_EVIDENCE_CUSTODY",
+      "prior_source_comparison": {
+        "source_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+        "git_blob": "86473e61bf886a28ca3a40010b6bd25f5f34cdb0",
+        "sha256": "5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f",
+        "matches_copied_bytes": true
+      }
+    },
+    {
+      "local_path": "evidence/interop-correction/independent/M3SpringArrayMultiValueMap.java",
+      "source_url": "https://github.com/hsoliwal/M3JDK21",
+      "source_repository": "hsoliwal/M3JDK21",
+      "source_revision": "d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97",
+      "source_path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringArrayMultiValueMap.java",
+      "source_blob_url": "https://github.com/hsoliwal/M3JDK21/blob/d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97/m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringArrayMultiValueMap.java",
+      "git_blob": "47c6517b81a2091c48c88a03fc53533a9eb9ee9f",
+      "sha256": "8062247a92ee9dc90d313b715ba9158e47c53b3e7848508a5fdd54ddaaaecb96",
+      "license_id": "Apache-2.0",
+      "classification": "PRESERVED_HISTORY",
+      "disposition": "EXACT_TARGET_OWNER_EVIDENCE_CUSTODY",
+      "prior_source_comparison": {
+        "source_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+        "git_blob": "47c6517b81a2091c48c88a03fc53533a9eb9ee9f",
+        "sha256": "8062247a92ee9dc90d313b715ba9158e47c53b3e7848508a5fdd54ddaaaecb96",
+        "matches_copied_bytes": true
+      }
+    },
+    {
+      "local_path": "evidence/interop-correction/owner-sources/M3ApacheBag.java.txt",
+      "source_url": "https://github.com/hsoliwal/M3JDK21",
+      "source_repository": "hsoliwal/M3JDK21",
+      "source_revision": "d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97",
+      "source_path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java",
+      "source_blob_url": "https://github.com/hsoliwal/M3JDK21/blob/d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97/m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java",
+      "git_blob": "86473e61bf886a28ca3a40010b6bd25f5f34cdb0",
+      "sha256": "5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f",
+      "license_id": "Apache-2.0",
+      "classification": "PRESERVED_HISTORY",
+      "disposition": "EXACT_TARGET_OWNER_EVIDENCE_CUSTODY",
+      "prior_source_comparison": {
+        "source_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+        "git_blob": "86473e61bf886a28ca3a40010b6bd25f5f34cdb0",
+        "sha256": "5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f",
+        "matches_copied_bytes": true
+      }
+    },
+    {
+      "local_path": "evidence/interop-correction/owner-sources/M3ArrayifiedIndexOps.java.txt",
+      "source_url": "https://github.com/hsoliwal/M3JDK21",
+      "source_repository": "hsoliwal/M3JDK21",
+      "source_revision": "d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97",
+      "source_path": "m3/collections/src/main/java/com/m3/collections/M3ArrayifiedIndexOps.java",
+      "source_blob_url": "https://github.com/hsoliwal/M3JDK21/blob/d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97/m3/collections/src/main/java/com/m3/collections/M3ArrayifiedIndexOps.java",
+      "git_blob": "26c8f2fa2645d94fbf1b5561321b74b09dded877",
+      "sha256": "42b3d760c9dfcf30eba72da193159e0ac6bd7ee06a3de292b132f49bd955ea77",
+      "license_id": "Apache-2.0",
+      "classification": "PRESERVED_HISTORY",
+      "disposition": "EXACT_TARGET_OWNER_EVIDENCE_CUSTODY",
+      "prior_source_comparison": {
+        "source_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+        "git_blob": "26c8f2fa2645d94fbf1b5561321b74b09dded877",
+        "sha256": "42b3d760c9dfcf30eba72da193159e0ac6bd7ee06a3de292b132f49bd955ea77",
+        "matches_copied_bytes": true
+      }
+    },
+    {
+      "local_path": "evidence/interop-correction/owner-sources/M3FiveLibraryIndexViews.java.txt",
+      "source_url": "https://github.com/hsoliwal/M3JDK21",
+      "source_repository": "hsoliwal/M3JDK21",
+      "source_revision": "d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97",
+      "source_path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveLibraryIndexViews.java",
+      "source_blob_url": "https://github.com/hsoliwal/M3JDK21/blob/d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97/m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveLibraryIndexViews.java",
+      "git_blob": "0860613ac5e567c17791f8aea49f84eda1e48537",
+      "sha256": "06b7a8ee9064eea7c25254d6b604962e9753f265dd18575fdd219110fc6eca84",
+      "license_id": "Apache-2.0",
+      "classification": "PRESERVED_HISTORY",
+      "disposition": "EXACT_TARGET_OWNER_EVIDENCE_CUSTODY",
+      "prior_source_comparison": {
+        "source_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+        "git_blob": "0860613ac5e567c17791f8aea49f84eda1e48537",
+        "sha256": "06b7a8ee9064eea7c25254d6b604962e9753f265dd18575fdd219110fc6eca84",
+        "matches_copied_bytes": true
+      }
+    },
+    {
+      "local_path": "evidence/interop-correction/owner-sources/M3IndexMaskCompactor.java.txt",
+      "source_url": "https://github.com/hsoliwal/M3JDK21",
+      "source_repository": "hsoliwal/M3JDK21",
+      "source_revision": "d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97",
+      "source_path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "source_blob_url": "https://github.com/hsoliwal/M3JDK21/blob/d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "git_blob": "daea60beeb202d9e996f9a018fe5974738a43523",
+      "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924",
+      "license_id": "Apache-2.0",
+      "classification": "PRESERVED_HISTORY",
+      "disposition": "EXACT_TARGET_OWNER_EVIDENCE_CUSTODY",
+      "prior_source_comparison": {
+        "source_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+        "git_blob": "b81b069fb4815f0c78b17119390d7b204f6179d1",
+        "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
+        "matches_copied_bytes": false
+      }
+    },
+    {
+      "local_path": "evidence/interop-correction/owner-sources/M3IndexPathMasks.java.txt",
+      "source_url": "https://github.com/hsoliwal/M3JDK21",
+      "source_repository": "hsoliwal/M3JDK21",
+      "source_revision": "d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97",
+      "source_path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "source_blob_url": "https://github.com/hsoliwal/M3JDK21/blob/d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "git_blob": "1e77b2027aa008aa8aebfeaf4b00a5bb89e5b7bf",
+      "sha256": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577",
+      "license_id": "Apache-2.0",
+      "classification": "PRESERVED_HISTORY",
+      "disposition": "EXACT_TARGET_OWNER_EVIDENCE_CUSTODY",
+      "prior_source_comparison": {
+        "source_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+        "git_blob": "1e77b2027aa008aa8aebfeaf4b00a5bb89e5b7bf",
+        "sha256": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577",
+        "matches_copied_bytes": true
+      }
+    },
+    {
+      "local_path": "evidence/interop-correction/owner-sources/M3LibraryBindings.java.txt",
+      "source_url": "https://github.com/hsoliwal/M3JDK21",
+      "source_repository": "hsoliwal/M3JDK21",
+      "source_revision": "d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97",
+      "source_path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryBindings.java",
+      "source_blob_url": "https://github.com/hsoliwal/M3JDK21/blob/d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97/m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryBindings.java",
+      "git_blob": "3bf06079cbd113b59057272eca47ae08a4030805",
+      "sha256": "46e13c91b108ccb886fa14c6df4a363488f12a35d4fef55c78fee51ac789edcd",
+      "license_id": "Apache-2.0",
+      "classification": "PRESERVED_HISTORY",
+      "disposition": "EXACT_TARGET_OWNER_EVIDENCE_CUSTODY",
+      "prior_source_comparison": {
+        "source_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+        "git_blob": "3bf06079cbd113b59057272eca47ae08a4030805",
+        "sha256": "46e13c91b108ccb886fa14c6df4a363488f12a35d4fef55c78fee51ac789edcd",
+        "matches_copied_bytes": true
+      }
+    },
+    {
+      "local_path": "evidence/interop-correction/owner-sources/M3LibraryCollections.java.txt",
+      "source_url": "https://github.com/hsoliwal/M3JDK21",
+      "source_repository": "hsoliwal/M3JDK21",
+      "source_revision": "d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97",
+      "source_path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java",
+      "source_blob_url": "https://github.com/hsoliwal/M3JDK21/blob/d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97/m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java",
+      "git_blob": "f915c3f62553dd3ee2cbd19339de4773ee759612",
+      "sha256": "bdd58a73f64875bc7f523901f72be318d1c9a63bab1a98f01d07d38597733b02",
+      "license_id": "Apache-2.0",
+      "classification": "PRESERVED_HISTORY",
+      "disposition": "EXACT_TARGET_OWNER_EVIDENCE_CUSTODY",
+      "prior_source_comparison": {
+        "source_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+        "git_blob": "f915c3f62553dd3ee2cbd19339de4773ee759612",
+        "sha256": "bdd58a73f64875bc7f523901f72be318d1c9a63bab1a98f01d07d38597733b02",
+        "matches_copied_bytes": true
+      }
+    },
+    {
+      "local_path": "evidence/interop-correction/owner-sources/M3SpringArrayMultiValueMap.java.txt",
+      "source_url": "https://github.com/hsoliwal/M3JDK21",
+      "source_repository": "hsoliwal/M3JDK21",
+      "source_revision": "d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97",
+      "source_path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringArrayMultiValueMap.java",
+      "source_blob_url": "https://github.com/hsoliwal/M3JDK21/blob/d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97/m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringArrayMultiValueMap.java",
+      "git_blob": "47c6517b81a2091c48c88a03fc53533a9eb9ee9f",
+      "sha256": "8062247a92ee9dc90d313b715ba9158e47c53b3e7848508a5fdd54ddaaaecb96",
+      "license_id": "Apache-2.0",
+      "classification": "PRESERVED_HISTORY",
+      "disposition": "EXACT_TARGET_OWNER_EVIDENCE_CUSTODY",
+      "prior_source_comparison": {
+        "source_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+        "git_blob": "47c6517b81a2091c48c88a03fc53533a9eb9ee9f",
+        "sha256": "8062247a92ee9dc90d313b715ba9158e47c53b3e7848508a5fdd54ddaaaecb96",
+        "matches_copied_bytes": true
+      }
+    }
+  ],
+  "comparison_summary": {
+    "copied_paths": 10,
+    "matching_selected_revision": 10,
+    "prior_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+    "matching_prior_revision": 9,
+    "differing_prior_paths": [
+      "evidence/interop-correction/owner-sources/M3IndexMaskCompactor.java.txt"
+    ],
+    "M3IndexMaskCompactor_distinction": "The retained owner is received product commit d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97, SHA-256 13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924. Earlier 2779 has SHA-256 ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c and cannot be used as the exact origin for this copied owner."
+  },
+  "usage": "For each listed local_path, check the actual publication bytes against git_blob and sha256 before the generic evidence branch, then preserve the listed source_url, source_revision, source_path, license_id, classification and disposition. This map does not cover donor Spring disassembly, whose separate pinned donor branch remains required."
+}

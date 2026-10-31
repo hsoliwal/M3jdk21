@@ -1,0 +1,15 @@
+{
+  "startedUtc": "2026-10-07T06:50:00.461880+00:00",
+  "completedUtc": "2026-10-07T06:50:02.725518+00:00",
+  "argv": [
+    "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin/mvn.cmd",
+    "-o",
+    "-B",
+    "-f",
+    "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\pom-ast-full-oracle.xml",
+    "verify"
+  ],
+  "exitCode": 0,
+  "elapsedSeconds": 2.266,
+  "logSha256": "971617e863e698e0cef5f4dfd7059b8876fb46aaad34507c440c909845d3e603"
+}

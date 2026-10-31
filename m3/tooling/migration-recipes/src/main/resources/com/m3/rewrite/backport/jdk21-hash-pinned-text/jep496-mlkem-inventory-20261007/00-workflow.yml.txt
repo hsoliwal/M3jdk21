@@ -1,0 +1,196 @@
+name: M3 JEP 496 ML-KEM inventory
+
+on:
+  push:
+    branches:
+      - "m3/jep496-mlkem-inventory-20261007"
+    paths:
+      - "m3/backports/recipes/jep-496-mlkem/**"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/test_file_delta_inventory.py"
+      - "m3/tooling/migration-recipes/**"
+      - ".github/workflows/m3-jep496-mlkem-inventory.yml"
+  pull_request:
+    paths:
+      - "m3/backports/recipes/jep-496-mlkem/**"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/test_file_delta_inventory.py"
+      - "m3/tooling/migration-recipes/**"
+      - ".github/workflows/m3-jep496-mlkem-inventory.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory-and-file-atoms:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Prove source-sealed inventory recipe and fixed point
+        run: >
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3Jep496MlKemInventoryRecipeTest
+          -Dsurefire.failIfNoSpecifiedTests=false test
+
+      - name: Fetch exact implementation and JDK24 GA donor states
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/upstream-jdk"
+          git -C "$RUNNER_TEMP/upstream-jdk" init -q
+          git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch \
+            --filter=blob:none --no-tags origin \
+            "13987b4244614d594dc8f94c288eddb6239a066f" \
+            "8b98f958dc1afedc02b9d9c98089d6cb1ca3a5b7" \
+            "8c2b4f62714f26ab3bc4808c734502af632a1eef" \
+            "6705a9255d28f351950e7fbca9d05e73942a4e27"
+          printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+
+      - name: Verify implementation denominator and JDK24 GA path state
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv
+          import os
+          import subprocess
+          from pathlib import Path
+
+          repo = Path(os.environ["UPSTREAM"])
+          packet = Path("m3/backports/recipes/jep-496-mlkem")
+          impl = "13987b4244614d594dc8f94c288eddb6239a066f"
+          ga = "6705a9255d28f351950e7fbca9d05e73942a4e27"
+
+          actual = subprocess.check_output(
+              ["git", "-C", str(repo), "diff-tree", "--no-commit-id", "--name-only", "-r", impl],
+              text=True,
+          ).splitlines()
+
+          with (packet / "GA_PATH_STATE.tsv").open(encoding="utf-8", newline="") as handle:
+              rows = list(csv.DictReader(handle, delimiter="\t"))
+
+          expected = [row["path"] for row in rows]
+          if len(rows) != 10 or sorted(actual) != sorted(expected):
+              raise SystemExit(
+                  f"JEP496 denominator drift actual={len(actual)} expected={len(rows)}"
+              )
+
+          absent = 0
+          for row in rows:
+              path = row["path"]
+              impl_blob = subprocess.check_output(
+                  ["git", "-C", str(repo), "rev-parse", f"{impl}:{path}"],
+                  text=True,
+              ).strip()
+              if impl_blob != row["implementation_blob"]:
+                  raise SystemExit(f"implementation blob drift: {path}")
+
+              probe = subprocess.run(
+                  ["git", "-C", str(repo), "cat-file", "-e", f"{ga}:{path}"],
+                  stdout=subprocess.DEVNULL,
+                  stderr=subprocess.DEVNULL,
+              )
+              if row["jdk24_ga_status"] == "ABSENT_AT_GA":
+                  if probe.returncode == 0:
+                      raise SystemExit(f"expected absent at GA: {path}")
+                  absent += 1
+                  continue
+              if probe.returncode != 0:
+                  raise SystemExit(f"missing GA path: {path}")
+              ga_blob = subprocess.check_output(
+                  ["git", "-C", str(repo), "rev-parse", f"{ga}:{path}"],
+                  text=True,
+              ).strip()
+              if ga_blob != row["jdk24_ga_blob"]:
+                  raise SystemExit(f"GA blob drift: {path}")
+
+          if absent != 2:
+              raise SystemExit(f"expected two implementation-only ACVP rows, got {absent}")
+
+          materialize = [
+              line.strip()
+              for line in (packet / "MATERIALIZE_PATHS.txt").read_text(encoding="utf-8").splitlines()
+              if line.strip()
+          ]
+          if len(materialize) != 8:
+              raise SystemExit(f"expected eight released-state materialization paths, got {len(materialize)}")
+          present = {row["path"] for row in rows if row["jdk24_ga_status"] == "PRESENT"}
+          if set(materialize) != present:
+              raise SystemExit("materialization path set does not equal released surviving path set")
+
+          print("JEP496_IMPLEMENTATION_PATHS=10")
+          print("JEP496_GA_PRESENT=8")
+          print("JEP496_GA_ABSENT=2")
+          PY
+
+      - name: Unit-test whole-tree comparator and FILE-crate generator
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd m3/backports
+          python3 -m unittest -v \
+            test_file_delta_inventory.py \
+            test_generate_recipe_crates.py
+
+      - name: Generate one source-sealed FILE atom per JDK24-GA surviving path
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/jep496
+          python3 m3/backports/generate_recipe_crates.py \
+            --repo "$UPSTREAM" \
+            --release 24 \
+            --paths-file m3/backports/recipes/jep-496-mlkem/MATERIALIZE_PATHS.txt \
+            --crate-size 1 \
+            --include-native \
+            --include-text \
+            --out target/jep496/file-atoms
+
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          root = Path("target/jep496/file-atoms")
+          with (root / "CRATES.tsv").open(encoding="utf-8", newline="") as handle:
+              crates = list(csv.DictReader(handle, delimiter="\t"))
+          with (root / "EXCLUSIONS.tsv").open(encoding="utf-8", newline="") as handle:
+              exclusions = list(csv.DictReader(handle, delimiter="\t"))
+
+          generated = sum(int(row["target_count"]) for row in crates)
+          if generated + len(exclusions) != 8:
+              raise SystemExit(
+                  f"JEP496 FILE atom accounting mismatch generated={generated} exclusions={len(exclusions)}"
+              )
+          print(f"JEP496_FILE_ATOMS={generated}")
+          print(f"JEP496_EXCLUSIONS={len(exclusions)}")
+          PY
+
+      - name: Verify repository backport substrate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/backports/pom.xml verify
+
+      - name: Upload JEP496 inventory and generated FILE atoms
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jep496-mlkem-file-atoms-${{ github.run_id }}
+          path: target/jep496
+          if-no-files-found: error
+          retention-days: 30

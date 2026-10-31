@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: Apache-2.0 OR EPL-2.0
+# Leaf E5: the forks' stream-superset bridges (package com.synexia.m3.<lib>) move into the interop module and build
+# against the donor packages interop/pom.xml compiles with (not the relocated com.m3.collections.<lib> receives).
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.interop.ProviderStreamsToInterop20261024
+displayName: Provider stream bridges into com.m3.collections.interop
+description: Moves M3GuavaStreams, M3CommonsStreams (renamed M3ApacheStreams), M3EclipseStreams and M3SpringStreams with their tests into com.m3.collections.interop and retargets relocated Commons and Eclipse imports to the donor packages.
+recipeList:
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.m3.collections.apache
+      newPackageName: org.apache.commons.collections4
+      recursive: true
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.m3.collections.eclipse.api
+      newPackageName: org.eclipse.collections.api
+      recursive: true
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.m3.collections.eclipse.impl
+      newPackageName: org.eclipse.collections.impl
+      recursive: true
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.synexia.m3.guava
+      newPackageName: com.m3.collections.interop
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.synexia.m3.commons
+      newPackageName: com.m3.collections.interop
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.synexia.m3.eclipse
+      newPackageName: com.m3.collections.interop
+  - org.openrewrite.java.ChangePackage:
+      oldPackageName: com.synexia.m3.spring
+      newPackageName: com.m3.collections.interop
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: com.m3.collections.interop.M3CommonsStreams
+      newFullyQualifiedTypeName: com.m3.collections.interop.M3ApacheStreams
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: com.m3.collections.interop.M3CommonsStreamsTest
+      newFullyQualifiedTypeName: com.m3.collections.interop.M3ApacheStreamsTest

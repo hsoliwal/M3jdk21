@@ -1,0 +1,70 @@
+{
+  "actualRootReadback": {
+    "bytes": 29660,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/ROOT-READBACK.json",
+    "sha256": "6b10497060ad4f2413890a4f5cffef11150d7a2160116a6c92d0cae591a4a6c9"
+  },
+  "actualStatus": "PRIMARY_ONLY_STOP",
+  "actualTerminal": {
+    "bytes": 32991,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/RESULT.json",
+    "sha256": "fcbf7e041a1465babc525f4a7c9743a5d4f57cb43a1c4bd065d3e90fbdcd1a51"
+  },
+  "all129PriorSelectionRowsUnchanged": true,
+  "all75TerminalReferencesSelectedExactly": true,
+  "archiveOperationsExecuted": false,
+  "consumerQualified": false,
+  "fiveHistoricalMaterializationFilesIncluded": true,
+  "helperInputs": [
+    {
+      "bytes": 13165,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/prepare_package.py",
+      "sha256": "8ccbea077946cb7cb8a01cf7473799433235b34467c9bfa4eabbf135af3ea95f"
+    },
+    {
+      "bytes": 9154,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/finish_package.py",
+      "sha256": "88acbc1aa271f0d40b73ae35469fbbcf1f56846d912a756e4477babae724b629"
+    },
+    {
+      "bytes": 1860,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/reconstruct.py",
+      "sha256": "c6a6a9af02b79506084e1b477b3b46f60614f5370424135452ed397cca2e40f7"
+    },
+    {
+      "bytes": 13982,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/AUTHORING-PLAN.json",
+      "sha256": "d6122560a9f8b8b7a033f8cde3b27427299cbd08fac8237def6ee311028eaf40"
+    }
+  ],
+  "observedBooleans": {
+    "allAdmittedGroupsQualified": false,
+    "bridgeGroupQualified": false,
+    "canonicalProductionApplied": false,
+    "canonicalPromotionAuthorized": false,
+    "consumerQualified": false,
+    "fullOpenJdkBuildQualified": false,
+    "fullReceiverQualified": false,
+    "hostedWorkflowExecuted": false,
+    "jep458BlockedSpecificationObserved": false,
+    "jep458HostedWorkflowQualified": false,
+    "jep458ProjectionQualified": false,
+    "materializedInputsQualified": false,
+    "positiveCliGroupsQualified": false,
+    "preparedInputFixedPointObserved": true,
+    "primaryGroupQualified": false,
+    "strictCanonicalAdmission": false,
+    "testsCountedOnlyFromActualReports": true
+  },
+  "proofGatesExecuted": false,
+  "schema": "synexia.fc0.terminal-selection-readback/1",
+  "selectedBytes": 24920510,
+  "selectedFiles": 139,
+  "selection": {
+    "bytes": 45711,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/receiving-selection-v3/RECEIVING-SELECTION.json",
+    "sha256": "6483d4a75236aaa6f4231bd3c509c14de950a75f03537e565170138a1f0e70cb"
+  },
+  "selectorExecuted": false,
+  "status": "EXACT_SELECTED_METADATA_REHASHED_NOT_PACKAGED"
+}

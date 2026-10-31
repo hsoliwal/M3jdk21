@@ -1,0 +1,189 @@
+{
+  "status": "PASS_STATIC_CAPTURE_PROFILE_AND_EVENT_INTEGRITY",
+  "recorded_utc": "2026-10-20T14:01:28Z",
+  "scope": "One-off static memory authoring/validation; no target sources modified; no source qualification tests rerun.",
+  "events": 16,
+  "checks": [
+    {
+      "name": "all_32_controls_six_character_lowercase_escapes",
+      "status": "PASS"
+    },
+    {
+      "name": "quote_backslash_solidus",
+      "status": "PASS"
+    },
+    {
+      "name": "unicode_scalars_emitted_without_normalization",
+      "status": "PASS"
+    },
+    {
+      "name": "high_surrogate_refused",
+      "status": "PASS"
+    },
+    {
+      "name": "low_surrogate_refused",
+      "status": "PASS"
+    },
+    {
+      "name": "signed_integer_limits",
+      "status": "PASS"
+    },
+    {
+      "name": "integer_underflow",
+      "status": "PASS"
+    },
+    {
+      "name": "integer_overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "float",
+      "status": "PASS"
+    },
+    {
+      "name": "nan",
+      "status": "PASS"
+    },
+    {
+      "name": "infinity",
+      "status": "PASS"
+    },
+    {
+      "name": "sorted_recursive_ascii_keys",
+      "status": "PASS"
+    },
+    {
+      "name": "non_ascii_schema_keys",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM01_FILTERED_DONOR_LIMIT_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM02_FILTERED_PROVIDER_FIX_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM03_READONLY_SORTED_ENDPOINTS_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM04_STABLE_RUN_REVERSAL_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM05_SHARED_JAVA_JNI_MASKS_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM06_PROGRESS_NESTED_ROLLBACK_FAILURE_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM07_PROGRESS_REENTRANCY_FIX_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM08_OSGI_SERVICE_LIFETIME_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM09_LAUNCHER_ROOT_AND_RECEIPT_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM10_CACHED_COMPILER_FALSE_GREEN_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM11_FRESH_BUILD_AND_EARLY_REFUSAL_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM12_SDK_BINARY_INPUT_REFUSAL_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM13_FROZEN_SDK_INPUT_PASS_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM14_JDK_THRESHOLD_COST_REJECTION_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM15_JDK_ORACLE_ONLY_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "RCM16_FULL_IMAGE_ENVIRONMENT_HOLD_canonical_digest_and_links",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown_top_level_field_refused",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown_nested_field_refused",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown_schema_version_refused",
+      "status": "PASS"
+    },
+    {
+      "name": "missing_parent_refused",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate_parent_refused",
+      "status": "PASS"
+    },
+    {
+      "name": "unsorted_parent_set_refused",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate_supersedes_refused",
+      "status": "PASS"
+    },
+    {
+      "name": "drifted_artifact_refused",
+      "status": "PASS"
+    }
+  ],
+  "check_count": 37,
+  "source_input_manifest": {
+    "path": "evidence/sdk-execution/generated/SDK_INPUTS.tsv",
+    "sha256": "787225b83b4b334f50b406147c2005645d24de4afb55e86547697b68b6ed9e1f",
+    "status": "EXACT",
+    "purpose": "SHA-256 of exact-byte SDK input closure manifest; binds all executable recipe inputs"
+  },
+  "event_sha256": [
+    "8a92d05b5d693816afb7eac69b31024f8bd61abc38cc3624d6cac09c7531cb74",
+    "27a51ab0ba0ce99429286bac8c679c540f2edca2ab09de504c39c4da7e2a3a15",
+    "5f75789dfe7019246ed573d2ba012410540a0f41a16103e51f8b98c0b8ce951d",
+    "798594cd28aa73f1fd22b50457895a0b12ed183d99bb2873c891393a32a5af9e",
+    "a07dbfed3c4a0a89a384ada50b030898945f3be8ae507b3e04a651f285d9fa69",
+    "87a5a359ef131f5e03c92d22c020d606e3d8e36a51a5e4d2e569ebf421f7015e",
+    "adb6b3b90099c8cfae087d1b6c01ed165d913a2e2a864467486e4673a04fdf71",
+    "94204130d30f027e62d74b5a93dcc62515e8262adf4bb86bcc89568221013176",
+    "11de8f4d6fea13593f0fbf6f6aef11c3f95ca1fdbfda52b18508a4d09241e25e",
+    "30d50af737f1d6283fae7b1c8f2ed60ae1df60552ac0c8975658857c5948a8a7",
+    "248b27ae9bd9bded6eeb07a26888272225a1f9a56d2484c46af6d3c386f3a2d8",
+    "a2b6d13dc15855d1e86f5f23acc8321c7855b9e531daa6d47a09d76e3d1feb8c",
+    "1232adc1d8d02cdd92c7b54a2d97de0ec1bd4f6a2b09c8137b40568f0eeda26f",
+    "41c549612c20b6eec1410e95cb2912ae8d27f9fef362baf68bdb9cef4ea12284",
+    "b3fcb66cd50a032149e1e19289ec3fcb824e7b179c526f9f07ef3853c88f23ea",
+    "ce3036af044cdf11ff3435fa8b263dd7f9a4411467b32edd5993e9446c156d0e"
+  ],
+  "recipe_memory_tsv_sha256": "7306c8aaec57fb543bc188e0859793be8326578405a75f5421578a576a9845b6",
+  "publication_commit": null,
+  "target_receiving_qualification": "PENDING_AT_CAPTURE",
+  "limitations": [
+    "No generic runtime serializer or memory service added.",
+    "Historical uncommitted correction times/recipe versions not retained are UNKNOWN.",
+    "No full-image/phase admission."
+  ]
+}

@@ -1,0 +1,4 @@
+$ ["/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/freshbase-image-proof/pack/image/bin/java", "-Xcheck:jni", "--add-modules", "jdk.m3.collections,com.m3.collections", "--add-reads", "jdk.m3.collections=com.m3.collections", "--patch-module", "jdk.m3.collections=/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/freshbase-image-proof/image-contracts", "-m", "jdk.m3.collections/jdk.m3.collections.M3FilteredViewsContract"]
+PASS M3_FILTERED_VIEWS checks=123500 randomized=750
+
+EXIT 0

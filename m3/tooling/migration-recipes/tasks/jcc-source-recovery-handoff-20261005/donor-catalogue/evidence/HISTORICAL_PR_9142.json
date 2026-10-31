@@ -1,0 +1,59 @@
+{
+  "repository": "hsoliwal/com.synexia",
+  "pull_request": 9142,
+  "url": "https://github.com/hsoliwal/com.synexia/pull/9142",
+  "title": "M3: catalogue donor categories and bind executed search/regex coverage",
+  "state": "closed",
+  "merged": true,
+  "merged_at": "2026-10-05T07:32:44Z",
+  "merge_commit": "ab77ae5c13a302318e5b4fc97e2f980591234450",
+  "head_commit": "36609e4a8719859b46e540f85013c1126a5e3bc2",
+  "head_branch": "aix/jcc-donor-catalogue-20261005",
+  "base_branch": "aix/javac-convergence-20261005",
+  "base_observed_commit": "1123430085af1ad886a35efb8cd5354709d5bb4f",
+  "changed_files": 6,
+  "files": [
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/README.md",
+      "status": "modified",
+      "git_blob": "37a4e9583c419aca53d45b16af201f55638c87f4",
+      "additions": 8,
+      "deletions": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/AUTHORING_RECEIPT.json",
+      "status": "added",
+      "git_blob": "0f024cef89a998670da06f390f14234e0948250c",
+      "additions": 94,
+      "deletions": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/DONOR_CATALOGUE.md",
+      "status": "added",
+      "git_blob": "d5ff11d9ba0135dbb30d87cb0c0d0e4eab2d5dcc",
+      "additions": 66,
+      "deletions": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/EXECUTED_TEST_MAPPING.md",
+      "status": "added",
+      "git_blob": "64e307ac4e3847696d0609bd53031881f0787c76",
+      "additions": 69,
+      "deletions": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/INTEGRATION.md",
+      "status": "added",
+      "git_blob": "4e8b4b266ad2356d4e063ac0015df97c7b5467d3",
+      "additions": 32,
+      "deletions": 0
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/donor_catalogue.json",
+      "status": "added",
+      "git_blob": "d663dc4c8c13968edfffe0258a1b6ccc927434fb",
+      "additions": 1127,
+      "deletions": 0
+    }
+  ]
+}

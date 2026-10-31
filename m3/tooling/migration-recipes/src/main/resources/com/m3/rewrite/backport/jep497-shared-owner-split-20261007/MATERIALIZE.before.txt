@@ -1,0 +1,7 @@
+src/java.base/share/classes/java/security/spec/NamedParameterSpec.java
+src/java.base/share/classes/sun/security/provider/ML_DSA.java
+src/java.base/share/classes/sun/security/provider/ML_DSA_Impls.java
+src/java.base/share/classes/sun/security/provider/SunEntries.java
+src/java.base/share/classes/sun/security/util/KnownOIDs.java
+test/jdk/sun/security/provider/all/Deterministic.java
+test/micro/org/openjdk/bench/java/security/MLDSA.java

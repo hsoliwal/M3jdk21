@@ -1,0 +1,37 @@
+{
+  "commands": [
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/select/receipt.json",
+      "bytes": 1591,
+      "sha256": "6b0d5f03dc6dbfca71b6ded418030ddcf267a3c6187fe9cfeca0bad2a34c770c"
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/pack/receipt.json",
+      "bytes": 1454,
+      "sha256": "b32bdbe59e0b72c23d0e76acd8b45864d4437a09e0530a590e3cf5bc8923e980"
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/verify/receipt.json",
+      "bytes": 1173,
+      "sha256": "4af01550538d0e5b5069dff567bbacbd6f97a4d1c49ffc5c449a7faea7f288ab"
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/extract/receipt.json",
+      "bytes": 1321,
+      "sha256": "91dbf5dec038c5d9e9481d62eaffd76067e367cf4b7749db2dcd14d5880b32c4"
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/finish/receipt.json",
+      "bytes": 997,
+      "sha256": "08fbb1d149ed18e3431da007f9a19ecfbeee234a93ade9627e67abf4c0024f3c"
+    }
+  ],
+  "completed": 5,
+  "allSucceeded": true,
+  "commandPlan": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/terminal-selection-v1/COMMANDS.json",
+    "bytes": 9708,
+    "sha256": "bddb69bd75ad241b12314cdbdfc4fd48fb7b575316fab70f32de4a24ff353a74"
+  },
+  "proofGatesReexecuted": false
+}

@@ -1,0 +1,42 @@
+{
+  "classification_limit": "Name categories and lexical source signals are routing aids; they do not prove storage or behavior. Existing SDK dispositions are copied unchanged.",
+  "explicit_paths": [
+    "m3/collections/implementations/apache-patricia-trie/src/main/java/com/m3/collections/apache/M3PatriciaTrie.java",
+    "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+    "src/java.base/share/classes/java/lang/M3FrozenLexiconIndex.java",
+    "src/java.base/share/classes/java/lang/String.java",
+    "src/java.base/share/classes/java/util/Arrays.java",
+    "src/java.base/share/classes/java/util/Collections.java",
+    "src/java.base/share/classes/java/util/HashMap.java",
+    "src/java.base/share/classes/java/util/HashSet.java",
+    "src/java.base/share/classes/java/util/IdentityHashMap.java",
+    "src/java.base/share/classes/java/util/ImmutableCollections.java",
+    "src/java.base/share/classes/java/util/LinkedHashMap.java",
+    "src/java.base/share/classes/java/util/LinkedHashSet.java",
+    "src/java.base/share/classes/java/util/TreeMap.java",
+    "src/java.base/share/classes/java/util/TreeSet.java",
+    "src/java.base/share/classes/java/util/WeakHashMap.java",
+    "src/java.base/share/classes/java/util/concurrent/ConcurrentHashMap.java",
+    "src/java.base/share/classes/java/util/concurrent/ConcurrentSkipListMap.java",
+    "src/java.base/share/classes/java/util/concurrent/ConcurrentSkipListSet.java"
+  ],
+  "family_count": 104,
+  "family_source_path": "m3/collections/src/main/resources/com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv",
+  "family_source_sha256": "e986838120c2558a145c6b16942475c8f5ff885b166526d635ef9c10360d8313",
+  "full_repository_inventory": false,
+  "output_sha256": {
+    "OWNER_INVENTORY.tsv": "4f63d60b24a3ee691efc421cd3daec96bdd6362a01a5dd1ab063f22bef19e009",
+    "SDK_FAMILY_INVENTORY.tsv": "3639009a698c811b249cb6e15142f1847ffc3b207f8ef82f62ac80e09b93ed16"
+  },
+  "owner_count": 312,
+  "reads_git_blobs_only": true,
+  "revision": "18213fe70c66567fdfc6ba6f669909e7e9251663",
+  "schema": "M3_STRING_KEY_INVENTORY_V1",
+  "source_repository": "hsoliwal/M3JDK21",
+  "source_roots": [
+    "m3/collections/src/main/java/com/m3/collections",
+    "m3/collections/implementations/commons-collections-4.5.0/src/main/java/com/m3/collections/apache/trie",
+    "src/java.base/share/classes/java/lang"
+  ],
+  "writes_source_repository": false
+}

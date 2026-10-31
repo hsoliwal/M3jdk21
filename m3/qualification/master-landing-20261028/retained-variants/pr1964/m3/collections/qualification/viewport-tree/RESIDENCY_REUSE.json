@@ -1,0 +1,72 @@
+{
+  "schema": "M3JDK21_TREE_RESIDENCY_REUSE_REVIEW_V1",
+  "source": {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+    "base_commit": "75e2bfe3d934bae1535243542b2417570b2bea24",
+    "before_git_blob": "65ab293a00da1092243f7f1904771c5a0cc60a44",
+    "after_sdk_git_blob": "6026f2eaee317bb2fe3bcaacb3f6d2c51a3b23b3",
+    "before_sha256": "bf6fb2f1d5f1c86ee51a94ad7a058537b092d256dc6fa583cbd712e7800b2944",
+    "after_sha256": "a2f376f25df0a20286d75b77c06d022c7e9488f9fc63c61caf12301512817821"
+  },
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "pr": 12855,
+    "dataset": "vpt-residency-reuse-20261026",
+    "named_recipe": "com.synexia.m3.ViewportResidencyReuse20261026",
+    "exact_engines": {
+      "M3HashPinnedJavaSnapshotRecipe": "98138cb6734ad86e3f77b8722fa5ff459842e841",
+      "M3HashPinnedTextSnapshotRecipe": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+      "M3ScopeInference": "9174dd681f0d75b5086fc19904a71524a03972dc",
+      "M3EditScope": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db"
+    },
+    "original_junit_git_blob": "e69993797978f800a4d1b01b55093dc8dde16514",
+    "original_receiver_git_blob": "d7f5cda465d8f473f4969d4db15d717af1391745"
+  },
+  "local_sdk": {
+    "jdk": "21.0.12.1",
+    "maven": "3.9.9",
+    "openrewrite": "8.17.1",
+    "genuine_java21_parser_sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+    "canonical_engine_and_test_sources": "EXACT",
+    "build_pom": "ISOLATED_PROOF_HARNESS_NOT_BYTE_IDENTICAL_TO_COMMITTED_CANONICAL_POM",
+    "real_logging_dependency": "slf4j-api:2.0.9 instead of uncached slf4j-simple:2.0.13",
+    "JUnit": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "actual_JCompilationUnit_results": 1,
+    "original_python_receiver": "EXACT",
+    "receiver_checks": 1,
+    "receiver_applies": 1,
+    "receiver_replays": 0,
+    "source_drifts_and_missing_duplicate_refusals": "PASS",
+    "maven_log_sha256": "1a86b164738b77c9575fe91c93aad7846bd0c91e98ce19b0f84555ca0384c611",
+    "junit_report_sha256": "3b8c8bbbfe9d737ae52497b9a94d17601e8075c5a654fd347337aa9133652714"
+  },
+  "independent_java21": {
+    "original_owner": "M3TreeWindowPlan",
+    "dependency_scope": "FROZEN_GENUINE_20261022_23_CLASSES_NOT_FULL_CURRENT_REACTOR",
+    "strict_javac": "--release 21 -Xlint:all -Werror PASS",
+    "frames": 4096,
+    "checks_per_execution": 517637,
+    "candidate_and_original_root": "7badddcd5e80495e",
+    "normal_interpreted_match": true,
+    "warmed_cycles": 10000,
+    "resident_rows": 128,
+    "original_thread_allocated_bytes": 15840000,
+    "candidate_thread_allocated_bytes": 0,
+    "interpretation": "BOUNDED_ISOLATED_THREAD_ALLOCATION_NOT_FULL_APP_RSS_FPS_OR_GC"
+  },
+  "not_run": [
+    "hosted_exact_canonical_pom",
+    "full_current_collection_reactor",
+    "JDK_HotSpot_jtreg",
+    "actual_SWT_Nebula_GEF_RWT_rendering",
+    "Win32_Cocoa_Android",
+    "accessibility_IME",
+    "representative_latency_RSS"
+  ],
+  "status": "DRAFT_NOT_MERGE_READY"
+}

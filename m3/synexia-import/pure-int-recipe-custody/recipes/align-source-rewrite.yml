@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.custody.AlignSourceBuiltRewrite
+displayName: Align Synexia custody with source-built OpenRewrite
+description: >-
+  The canonical source-built vendor publishes rewrite-core, rewrite-java and
+  rewrite-java-21 as 8.17.1-m3-source-1. Align only the custody module's
+  OpenRewrite version property without changing other dependencies or its API.
+recipeList:
+  - org.openrewrite.maven.ChangePropertyValue:
+      key: openrewrite.version
+      newValue: 8.17.1-m3-source-1
+      addIfMissing: false

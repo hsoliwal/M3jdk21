@@ -1,0 +1,95 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 typed signals stable primitive TopK Java21
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3SignalColumns.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3SignalTopK.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3SignalTopK*.java'
+      - 'm3/collections/qualification/typed-signal-topk-20261022/**'
+      - '.github/workflows/m3-typed-signal-topk-20261022.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  strict-original-owner-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Source checkout/diff hygiene
+        run: git diff --check origin/m3/typed-signal-compiler-image-20261022...HEAD
+      - name: Compile the actual Java21 M3 signal columns and TopK
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-topk"
+          mkdir -p "$out"
+          javac --release 21 -proc:none -Xlint:all -Werror -d "$out" \
+            m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java \
+            m3/collections/src/main/java/com/m3/collections/M3SignalTopK.java \
+            m3/collections/src/test/java/com/m3/collections/M3SignalTopKSelfTest.java
+          java -cp "$out" com.m3.collections.M3SignalTopKSelfTest
+  original-module-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Build source-vendored original JUnit 5.10.2-m3-source-1 and its exact Maven reactor dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py
+          python3 m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py
+          # Preserve original source-vendored Jupiter and Surefire Launcher artifacts.
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
+            -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2 \
+            -am -DskipTests install
+          python3 m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py \
+            m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar
+          python3 m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py \
+            m3/vendor/third_party/junit-platform-launcher-1.10.2/target/junit-platform-launcher-1.10.2-m3-source-1.jar
+      - name: Build unchanged M3 array substrate before current collections JUnit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install
+      - name: Owning M3JDK21 collection JUnit suites
+        run: >
+          mvn -B -ntp -f m3/collections/pom.xml
+          -Dtest=M3SignalTopKTest,M3SignalColumnsTest,M3SignalDimensionsTest
+          test
+
+  portable-qualified-junit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Explicitly isolated JUnit 5.11.4 against ACTUAL product Java owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp \
+            -f m3/collections/qualification/typed-signal-topk-20261022/pom.xml \
+            -Dtest=M3SignalTopKTest,M3SignalColumnsTest test
+      - name: Scope limitation
+        run: |
+          echo "ALTERNATE_JUNIT: ordinary test-only JUnit 5.11.4 for original sources."
+          echo "Original m3/collections/pom.xml customized JUnit fork remains required and unresolved."
+          echo "This job does not certify custom-JUnit compatibility or installed M3JDK21."

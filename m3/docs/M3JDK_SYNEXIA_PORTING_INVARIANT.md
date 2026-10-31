@@ -1,0 +1,127 @@
+# M3JDK Synexia Porting Invariant
+
+Status: canonical M3JDK engineering policy.
+
+## Authority split
+
+**Synexia is the experimental convergence workspace. M3JDK is the canonical target.**
+
+Synexia may aggressively explore MIndex/MatIndex layouts, JNI kernels, search indexes,
+precompute images, collections, compiler recipes and algorithm donors. An implementation being
+useful or passing inside Synexia does **not** make its package name, API, storage model, native ABI,
+or object graph part of M3JDK.
+
+M3JDK receives capabilities only through an explicit adaptation packet.
+
+## Mandatory rule for every LLM/source-changing task
+
+Every source-changing LLM task must have a Maven/OpenRewrite recipe identity and a content-addressed
+recipe crate. Work on the recipe and its proof until the resulting postimages are correct. Direct
+per-file edits may be useful while exploring, but they are not canonical delivery unless the exact
+postimages are owned by the recipe and replay reaches a fixed point.
+
+Acceptance authority is mechanical:
+
+1. exact source/preimage identity;
+2. parser/round-trip custody;
+3. compiler success;
+4. unchanged public/internal contract unless change is explicitly authorized;
+5. JUnit/differential behavior;
+6. atomization/reconstruction where applicable;
+7. Java/JNI differential parity for native lanes;
+8. bounded permutation/combination and multipass convergence for transformations;
+9. deterministic content roots;
+10. rollback/revert path.
+
+An LLM may propose recipes, signals, precomputations, donor adaptations and counterexamples. It may
+not convert a failed compiler/test/contract/native gate into a pass.
+
+## Naming
+
+Synexia names are donor names, not target ABI.
+
+Target naming follows M3JDK ownership:
+
+- String-family runtime: `M3String*`.
+- Indexed/internal String-adjacent structures: `M3Index*` only when indexed identity is an actual
+  target contract.
+- General target-owned implementation types: concise `M3*`.
+- Never mechanically rename `MIndex*` or `MatIndex*` to `M3*` without a per-type semantic map.
+- Never preserve a Synexia package merely because the source implementation was borrowed.
+
+`MIndexString -> M3String` is a proven naming/ownership pattern, not a blanket textual rename rule.
+
+## Promotion ladder
+
+Capabilities move through explicit stages:
+
+    Synexia experiment
+      -> M3JDK isolated port (m3/ports/*)
+      -> target-owned differential/parity proof
+      -> concrete JDK-internal consumer
+      -> java.base/bootstrap/JDK replacement only after dedicated compatibility + memory + CPU gates
+
+Skipping stages requires a separately reviewed proof packet; it is never inferred from similarity.
+
+## Precompute rule
+
+Precompute is separated by authority:
+
+- exact immutable facts may prune or answer only what their proof contract establishes;
+- lower bounds may reject only when mathematically safe;
+- SimHash/MinHash/fuzzy/code-likeness signals rank candidates only;
+- regex shape analysis is candidate specialization only;
+- JDK `Pattern`/Matcher remains regex authority until a replacement proves each operation and
+  mutable matcher state;
+- compiler/tests remain Java transformation authority.
+
+Do not put large corpus indexes, pairwise matrices, fuzzy graphs or search-service state inside
+`java.lang.String`. Keep them in target-owned sidecars/services and promote only bounded facts that
+have a concrete runtime consumer.
+
+## Collections rule
+
+Collections are migrated one concrete semantic owner at a time. There is no universal
+`M3Collection` replacement.
+
+For every JDK collection record and prove:
+
+- ordering and encounter order;
+- null rules;
+- equality/identity semantics;
+- iterator/spliterator behavior;
+- backed views;
+- callback/reentrancy semantics;
+- serialization/clone/protected hooks;
+- concurrency and memory-model guarantees;
+- complexity and retained-memory effects.
+
+M3 primitive/reference lanes may replace storage nodes only behind that membrane. A smaller internal
+representation is not accepted if it changes public or supported internal behavior.
+
+## Scope discipline
+
+Default transformation scope is the smallest sealed contract boundary, normally FILE. Promotion to
+PACKAGE, MODULE, PROJECT or repository scope must be caused by an observed contract dependency and
+must be recorded in the recipe packet. Independent files/atoms may fan out in parallel; canonical
+promotion/fan-in remains serial and proof-gated.
+
+## Donors
+
+Reuse existing Synexia/M3 implementations first. External FOSS and challenge repositories may
+provide algorithms, test shapes and design evidence only under explicit provenance/license review.
+
+LeetCode, HackerRank and GeeksforGeeks are category/problem-shape sources for adversarial and
+boundary fixtures. Do not copy challenge/editorial bodies merely to enlarge coverage.
+
+## Develop/master history
+
+Preserve ancestry. Do not rebase the historical convergence branch to manufacture a cleaner story.
+Forward-merge moving bases, retain source provenance and keep failed/intermediate evidence when it
+materially explains the accepted design.
+
+## Completion language
+
+Use scoped states such as PROPOSED, IMPLEMENTED, VERIFIED_SCOPED, PORT_CANDIDATE and PROMOTED.
+Never call a family “complete” because one benchmark/test passed. Whole-JDK completion requires
+per-owner closure and repository/JDK gates.

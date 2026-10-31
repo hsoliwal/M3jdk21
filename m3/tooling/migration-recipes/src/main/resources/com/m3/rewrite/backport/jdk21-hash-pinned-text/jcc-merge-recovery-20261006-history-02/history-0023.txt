@@ -1,0 +1,27 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/com.synexia",
+    "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+    "ref": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+    "encoding": "base64"
+  },
+  "result": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "cGFja2FnZSBmaXh0dXJlOwovL++/vSgK\n",
+        "encoding": "base64",
+        "sha": "24cdc62e634934527d551324c2449bcf951b5589",
+        "display_url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+        "display_title": "Dependency.java.txt"
+      },
+      "isError": false
+    }
+  }
+}

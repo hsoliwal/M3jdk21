@@ -1,0 +1,8 @@
+priority	packet	status	required_exit
+P0	COMMUNITY-1	IMPLEMENTED_STANDALONE_VERIFIED	Execute Maven/OpenRewrite/JUnit and reach configured99% line/branch gate without exclusions
+P0	COMMUNITY-2	ASSEMBLER_IMPLEMENTED_ARTIFACTS_PENDING	Pin actual JavaFX21 modules/checksums/provenance; run real native image fixture with display
+P0	COMMUNITY-3	NOT_COMPLETED	Reconcile every backport candidate with dependency closure and actual M3JDK21 build/jtreg/runtime proof
+P1	COMMUNITY-4-diagnostics	LOCAL_IMAGE_PROVEN	Repeat image checks against accepted M3JDK21-produced JMODs
+P1	COMMUNITY-4-Spring-Synexia	NOT_IMPLEMENTED_IN_THIS_PACKET	Pin selected application dependencies; implement recipe-owned application smoke tests
+P1	distribution-release	NOT_ADMITTED	Per-platform image/native/application receipts; component license/source obligations and update ownership
+P2	snapshot-duplicate-review	RETAIN	Identical reactor POM afterimage is an intentional recipe fixture; no automatic deletion

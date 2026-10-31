@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.PoolBounds
+displayName: M3JDK21 string pool bounds with back-pressure and flat refusal
+description: >-
+  M3StringPool caps the native bytes its VM-local scalar lane retains (-Dm3.string.pool.maxBytes,
+  default Runtime.maxMemory() as MaxDirectMemorySize): bytes are reserved before allocation and
+  released through the local reference queue; a budget miss takes the java.nio.Bits.reserveMemory
+  route (drain, reference processing, one GC, bounded back-off) and then refuses with null so the
+  String stays flat, never throwing. Canonical tuple retention is capped
+  (-Dm3.string.pool.maxTuples, default 1,048,576); a lexicon failure is reported once; a flat
+  String.replace target drives the search without entering the pool. Every composition takes its
+  flat path on refusal. Java step: M3StringPool, M3String, StringConcatHelper, the jtreg proof;
+  text step: String.java (Javadoc the pinned Java parser cannot parse). Stacks on crate
+  m3-equality-gates (its postimages are these preimages).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-pool-bounds
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-pool-bounds

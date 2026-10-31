@@ -1,0 +1,4 @@
+src/main/java/com/m3/a3/A3Lab.java	f68fb01640e7bee16e67af34ff986006a8ebebca3c13e9088296540f844b2200	c212736f000836cb782a5ff81fd2de48e67d36ea4b3bd53cf7743c4aadbfdaf6	A3Lab.java.after
+src/main/java/com/m3/a3/A3MemoryCompiler.java	ABSENT	9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697	A3MemoryCompiler.java.after
+src/main/java/com/m3/a3/A3RegexMatrix.java	ABSENT	f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404	A3RegexMatrix.java.after
+src/test/java/com/m3/a3/A3LabTest.java	225efc2885ba8c002d036ecf70b4dd8a13b646debc74afeb031b0fce624d3f18	351eeac06154189e79f3d139336437d5911da5721c9a95a779ebd5d511997d9c	A3LabTest.java.after

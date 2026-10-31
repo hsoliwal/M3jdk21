@@ -1,0 +1,29 @@
+{
+  "schema": "m3-synexia-receiver-receipt-v1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_pr": 9850,
+  "source_branch": "m3/string-builder-range-bulk-recipe-20261008",
+  "source_recipe": "com.synexia.rewrite.M3Jdk21StringBuilderRangeBulk",
+  "source_task_crate": "synexia-m3-recipe/task-crates/m3jdk21-string-builder-range-bulk-20261008.yaml",
+  "donor_commit": "b9d35ce3c3c266fb3641352a07903563a3a86b81",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_branch": "m3/string-builder-range-bulk-receiver-20261008",
+  "target_preimage_sha256": "9a502392c96175e025bbd992fd15482ef2cf0ee4a2ca083a293d5fd41e6448ce",
+  "target_postimage_sha256": "a5e7213ca951fab21d6db842804a8abd79e90f924ec672de6c4c455cdebb47d5",
+  "runtime_dependency_on_synexia": false,
+  "semantic_rules": [
+    "prepared range facts only",
+    "never force a range fact scan",
+    "prepared Latin1 range may bulk-copy into a Latin1 builder",
+    "cold range retains the existing late-inflation scan",
+    "non-Latin1 range still inflates to UTF16",
+    "M3 bulk lane never materializes String.value"
+  ],
+  "verification": {
+    "source_checker": "m3/runtime-integration/check-m3string-builder-range-bulk.py",
+    "jtreg": "test/jdk/java/lang/String/M3StringBuilderRangeBulkTest.java",
+    "jdk_build": "NOT_RUN",
+    "jtreg_run": "NOT_RUN",
+    "synexia_maven_recipe_test": "NOT_RUN"
+  }
+}

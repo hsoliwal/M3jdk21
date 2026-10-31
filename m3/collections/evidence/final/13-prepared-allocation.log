@@ -1,0 +1,9 @@
+$ ['/workspace/scratch/b37f6ba1283f/synexia-continuation/toolchain/jdk-21.0.12.1+1/bin/java', '-Xbatch', '-cp', '/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/target/classes:/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/target/test-classes', 'PreparedLaneAllocationProbe']
+prepared trial=0 bytes=0
+prepared trial=1 bytes=0
+prepared trial=2 bytes=0
+prepared trial=3 bytes=0
+prepared trial=4 bytes=0
+allocation PASS; applies only to this prepared loop/JVM, not streams or page growth
+
+EXIT=0

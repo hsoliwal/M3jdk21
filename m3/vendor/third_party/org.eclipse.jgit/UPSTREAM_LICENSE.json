@@ -1,0 +1,8 @@
+{
+  "artifact": "org.eclipse.jgit-5.13.3.202401111512-r",
+  "origin": "https://raw.githubusercontent.com/eclipse-jgit/jgit/v5.13.3.202401111512-r/LICENSE",
+  "file": "UPSTREAM_LICENSE.txt",
+  "sha256": "10f5ea95859c008c924854e945ef92e49088ba9abb8c818b525b80d960170cf8",
+  "bytes": 1716,
+  "caveat": "EXACT_TAG v5.13.3.202401111512-r (GitHub mirror of the Eclipse JGit repository)"
+}

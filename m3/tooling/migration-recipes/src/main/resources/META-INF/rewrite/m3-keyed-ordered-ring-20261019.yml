@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.KeyedOrderRing20261019
+displayName: M3JDK21 keyed stream bounded array/mask completion
+description: >
+  Replays one sealed Java 21 behavioral atom through the reusable hash-pinned
+  OpenRewrite snapshot recipe. Requires the exact preimage; preserves all
+  public API contracts and refuses source drift or missing inputs.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: keyed-ordered-ring-20261019
+      lst: false

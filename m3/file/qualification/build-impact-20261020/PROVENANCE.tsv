@@ -1,0 +1,7 @@
+artifact	origin	license	evidence
+M3File.java	hsoliwal/M3JDK21/m3/file existing canonical owner	Apache-2.0	Original NIO identity reused unchanged
+M3FileDeltaLedger.java	hsoliwal/M3JDK21#1568	Apache-2.0	Exact source SHA-256 2ec9e2074851e8641279f32fbd569c13bd2851a7d41ee5be0ef9ae152264eaae
+M3FileBuildImpact.java	hsoliwal/com.synexia#12582 generated target candidate	Apache-2.0	SHA-256 b8fda14938d05bef146af0176861d1e3c3946c73e18a38fdfce4f7758b581ce4
+M3FileBuildImpactContract.java	hsoliwal/com.synexia#12582 generated target candidate	Apache-2.0	SHA-256 4ee656c026fd40e26ec9aa73c26da77dfd07eb084c236bdadf97c7f83369cd89
+OpenRewrite engine	Synexia canonical M3HashPinnedJavaSnapshotRecipe	Apache-2.0	Reused, not forked
+LeetCode HackerRank GeeksforGeeks	Algorithm taxonomy only	No copied source	Catalogue decisions

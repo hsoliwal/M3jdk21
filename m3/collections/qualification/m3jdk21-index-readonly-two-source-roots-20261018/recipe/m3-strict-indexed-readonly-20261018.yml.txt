@@ -1,0 +1,64 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 strict immutable indexed snapshots Java JNI
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/qualification/m3jdk21-index-readonly-20261018/**'
+      - 'm3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopProof.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopTest.java'
+      - '.github/workflows/m3-strict-indexed-readonly-20261018.yml'
+  workflow_dispatch:
+jobs:
+  strict-immutable-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact canonical recipe output hashes and source identity
+        run: |
+          set -eu
+          Q=m3/collections/qualification/m3jdk21-index-readonly-20261018/recipe
+          awk -F '\t' '{print $3 "  " $1}' "$Q/manifest.tsv" | sha256sum -c -
+          awk -F '\t' -v q="$Q" '{print $3 "  " q "/" $4}' "$Q/manifest.tsv" | sha256sum -c -
+          cmp "$Q/M3ObjectIndexSnapshot.java.txt" m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java
+          cmp "$Q/M3IndexedListSnapshot.java.txt" m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
+      - name: Strict Java21 actual owner compile and direct immutable tests
+        run: |
+          set -eu
+          PKG=m3/collections/src/main/java/com/m3/collections
+          TST=m3/collections/src/test/java/com/m3/collections
+          OUT="$RUNNER_TEMP/m3-index-readonly/classes"
+          mkdir -p "$OUT"
+          javac --release 21 -proc:none -Xlint:all,-serial -Werror \
+            -sourcepath m3/collections/src/main/java:m3/collections/src/test/java -d "$OUT" \
+            "$PKG/M3IndexedListSnapshot.java" "$PKG/M3ObjectIndexSnapshot.java" \
+            "$TST/M3IndexedReadOnlyNoopProof.java" \
+            "$TST/M3IndexedSnapshotPositionProof.java"
+          java -cp "$OUT" com.m3.collections.M3IndexedReadOnlyNoopProof
+          java -cp "$OUT" com.m3.collections.M3IndexedSnapshotPositionProof
+      - name: Preserve original C17 JNI mask-selector and Java object-position parity
+        run: |
+          set -eu
+          OUT="$RUNNER_TEMP/m3-index-readonly/classes"
+          BIN="$RUNNER_TEMP/m3-index-readonly/native"
+          mkdir -p "$BIN"
+          cc -std=c17 -O1 -g -Wall -Wextra -Werror -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=all \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_index_mask_compactor.c \
+            -o "$BIN/libm3_collections_mask.so"
+          java -Xcheck:jni -Djava.library.path="$BIN" -cp "$OUT" \
+            com.m3.collections.M3IndexedReadOnlyNoopProof
+          java -Xcheck:jni -Djava.library.path="$BIN" -cp "$OUT" \
+            com.m3.collections.M3IndexedSnapshotPositionProof --native
+      - name: Install exact source-vendored JUnit closure
+        run: >
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml
+          -pl junit-jupiter-5.10.2 -am -DskipTests install
+      - name: Full original owning Maven JUnit test for new contract
+        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3IndexedReadOnlyNoopTest test

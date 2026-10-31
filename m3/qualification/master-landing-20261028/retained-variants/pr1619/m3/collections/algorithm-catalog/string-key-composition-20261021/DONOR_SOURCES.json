@@ -1,0 +1,128 @@
+{
+  "schema": "M3_STRING_KEY_DONOR_SOURCES_V1",
+  "primary_sources": [
+    {
+      "id": "LC-HASH",
+      "url": "https://leetcode.com/problems/design-hashmap/",
+      "reviewed": "2026-10-21",
+      "rights": "REFERENCE_ONLY; no source-copy grant relied upon",
+      "observation": "Bounded integer-key put/get/remove challenge; -1 miss sentinel differs from generic Java Map null and equality semantics.",
+      "decision": "Category and adversarial operations only; no statement/editorial/submission bodies copied."
+    },
+    {
+      "id": "LC-TRIE",
+      "url": "https://leetcode.com/problems/implement-trie-prefix-tree/",
+      "reviewed": "2026-10-21",
+      "rights": "REFERENCE_ONLY",
+      "observation": "Exact versus prefix membership challenge restricted to lowercase English and nonempty inputs.",
+      "decision": "Useful operation distinction; insufficient for empty keys, Unicode, live views and M3 owner lifetimes."
+    },
+    {
+      "id": "HR-COUNT",
+      "url": "https://www.hackerrank.com/challenges/ctci-ransom-note/problem",
+      "reviewed": "2026-10-21",
+      "rights": "REFERENCE_ONLY",
+      "observation": "Case-sensitive whole-word multiplicity; repeated and missing keys distinguish bag from set semantics.",
+      "decision": "Counting taxonomy and test dimensions only."
+    },
+    {
+      "id": "GFG-HASH",
+      "url": "https://www.geeksforgeeks.org/dsa/hashing-data-structure/",
+      "reviewed": "2026-10-21",
+      "rights": "REFERENCE_ONLY",
+      "observation": "Catalogues collision handling, membership, duplicates and frequency categories.",
+      "decision": "No article complexity claim substitutes target cost measurement; no sample implementation copied."
+    },
+    {
+      "id": "GFG-TRIE",
+      "url": "https://www.geeksforgeeks.org/dsa/trie-insert-and-search/",
+      "reviewed": "2026-10-21",
+      "rights": "REFERENCE_ONLY",
+      "observation": "Insertion,exact search and prefix search with terminal state; example storage has per-node objects and fixed alphabet.",
+      "decision": "Reject that literal layout for M3; retain category and edge-case distinctions."
+    },
+    {
+      "id": "ABSEIL-CORD",
+      "url": "https://github.com/abseil/abseil-cpp/blob/22dd800ead4104f3a1fdb64d27dbde822826ca8d/absl/strings/internal/cord_rep_btree_reader.h",
+      "revision": "22dd800ead4104f3a1fdb64d27dbde822826ca8d",
+      "rights": "Apache-2.0 upstream; pattern reference only",
+      "observation": "Existing canonical Abseil-convergence catalogue reviewed sequential piece traversal.",
+      "decision": "Reuse current M3 cursor; no copied C++ source and no second rope owner."
+    },
+    {
+      "id": "ABSEIL-SWISS",
+      "url": "https://github.com/abseil/abseil-cpp/blob/22dd800ead4104f3a1fdb64d27dbde822826ca8d/absl/container/internal/hashtable_control_bytes.h",
+      "revision": "22dd800ead4104f3a1fdb64d27dbde822826ca8d",
+      "rights": "Apache-2.0 upstream; reference only",
+      "observation": "Control metadata and fingerprints nominate candidates before equality.",
+      "decision": "Preserve M3 state encoding and exact equality; no generic map replacement admitted."
+    },
+    {
+      "id": "ABSEIL-BTREE",
+      "url": "https://github.com/abseil/abseil-cpp/blob/22dd800ead4104f3a1fdb64d27dbde822826ca8d/absl/container/btree_set.h",
+      "revision": "22dd800ead4104f3a1fdb64d27dbde822826ca8d",
+      "rights": "Apache-2.0 upstream; reference only",
+      "observation": "Dense ordered storage is already catalogued against M3 sorted owners.",
+      "decision": "C++ movement and iterator rules do not establish Java view contracts."
+    },
+    {
+      "id": "LUCENE-BYTES",
+      "url": "https://github.com/apache/lucene/blob/main/lucene/core/src/java/org/apache/lucene/util/BytesRefHash.java",
+      "git_blob": "d0dc8befe9d5d6867e52240ccec42d16de793ea8",
+      "rights": "Apache project source; reference-only in this task; no source imported",
+      "observation": "Primitive IDs,offset arrays and pooled byte storage; hash bits reject candidates before byte equality.",
+      "decision": "Review dictionary/index pattern; do not adopt flat byte pool as another retained spelling store. URL is mutable; exact inspected Git blob is recorded."
+    },
+    {
+      "id": "CONCURRENT-RADIX",
+      "url": "https://github.com/npgall/concurrent-trees/blob/master/code/src/main/java/com/googlecode/concurrenttrees/radix/ConcurrentRadixTree.java",
+      "git_blob": "7f745c8d266fc5fd996256692040d99c5f3992cb",
+      "rights": "REFERENCE_ONLY; no redistribution grant asserted for this source snapshot",
+      "observation": "Exact/prefix search distinguishes a query ending inside an edge; read-mostly concurrency with write lock.",
+      "decision": "Use semantic categories only; node storage and lock policy are not adopted."
+    },
+    {
+      "id": "ECLIPSE",
+      "url": "https://eclipse.dev/collections/",
+      "reviewed": "2026-10-21",
+      "rights": "REFERENCE_ONLY documentation",
+      "observation": "Primitive maps, bags, multimaps, bimaps and rich operations expand coverage beyond hash maps.",
+      "decision": "Retain existing SDK family vocabulary; no declaration establishes provider substitution."
+    },
+    {
+      "id": "VIEW-1659",
+      "url": "https://github.com/hsoliwal/M3jdk21/pull/1659",
+      "revision": "12b16ff9dcf5a2ff4cbd99dfc58b616ae5f76cbe",
+      "rights": "Apache-2.0 notices retained",
+      "observation": "Existing sorted-owner and stored-representative defect repair.",
+      "decision": "Receive only reviewed atoms via source-sealed recipe; preserve unrelated current owner bytes."
+    },
+    {
+      "id": "NATIVE-WINDOW",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/18213fe70c66567fdfc6ba6f669909e7e9251663/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "revision": "18213fe70c66567fdfc6ba6f669909e7e9251663",
+      "rights": "Existing M3 first-party owner; preserve target file rights",
+      "observation": "Current array/offset/mask owner provides enclosing admitted span pattern.",
+      "decision": "Adapt to existing native row-selection owner; parity and fault tests required."
+    },
+    {
+      "id": "APACHE-TRIE",
+      "url": "https://github.com/hsoliwal/M3jdk21/tree/18213fe70c66567fdfc6ba6f669909e7e9251663/m3/collections/implementations/commons-collections-4.5.0/src/main/java/com/m3/collections/apache/trie",
+      "revision": "18213fe70c66567fdfc6ba6f669909e7e9251663",
+      "rights": "Apache-2.0 upstream notices retained; reference only in this pass",
+      "observation": "Operational relocated Patricia provider retains TrieEntry nodes; StringKeyAnalyzer uses logical chars.",
+      "decision": "Keep as behavioral oracle; do not report array-native M3Patricia scaffold as installed."
+    }
+  ],
+  "discovery_order": [
+    "existing-canonical-catalogue",
+    "existing-target-source",
+    "LeetCode",
+    "HackerRank",
+    "GeeksforGeeks",
+    "pinned-GitHub-donor-comparison"
+  ],
+  "challenge_payloads_copied": false,
+  "external_source_imported": false,
+  "note": "Existing licensed target/Synexia atoms reused; external alternatives remain reference-only unless explicitly admitted with separate evidence."
+}

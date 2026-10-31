@@ -1,0 +1,91 @@
+{
+  "activeCanonicalChanges": 0,
+  "historicalAvailability": {
+    "bytes": 119267,
+    "path": "../HISTORY-AVAILABILITY.json",
+    "sha256": "02a922e8b1cbddd611f5d2b494085062c6e7f2e65ef1b51fbe811e434c2296e5"
+  },
+  "historyMeaning": "The original workspace census remains literal history; absent historical executions are not recreated. Original published 338, 97 and 72 cohorts remain byte-for-byte unchanged.",
+  "latestHeadIntegrationClaimed": false,
+  "m3Parent": {
+    "commit": "c91ababf8e7f54125be7b58c7267f49233446e45",
+    "pr": "https://github.com/hsoliwal/M3jdk21/pull/237",
+    "tree": "89c777422d73ec46ab2f733ea367f7ad04c51a02"
+  },
+  "originalPairedMaps": [
+    {
+      "bytes": 297967,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/integration-c0-final-v2/FINAL-PAIRED-FILES.json",
+      "sha256": "bb815cfcf64ac5298fa857355b8caccb5ebda6c76e2803906d8c92ac9578a2a8"
+    },
+    {
+      "bytes": 79199,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/FINAL-PAIRED-FILES.json",
+      "sha256": "5cde38612911bdaf74b1ec4dfb857f7f1f747eccf42f72aa55e5458c48df71f2"
+    },
+    {
+      "bytes": 56546,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/FINAL-PAIRED-FILES.json",
+      "sha256": "d7a416f075158f767d5fdba2aa634ae1a43737be25346b493e367c4104aa85e9"
+    }
+  ],
+  "preservedPairedFiles": 507,
+  "publicationCheckBodies": [
+    {
+      "disposition": "BODY_IN_CURRENT_PUBLICATION",
+      "input": {
+        "bytes": 3725,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/source-check-v1/RESULT.json",
+        "sha256": "fb5c655d4e2d547dfab392fe6c5437602f4003e2619dbf9d1a159f29d8fc6662"
+      },
+      "path": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/source-check-v1/RESULT.json"
+    },
+    {
+      "disposition": "BODY_IN_CURRENT_PUBLICATION",
+      "input": {
+        "bytes": 30821,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/RESULT.json",
+        "sha256": "54b5e2d881c3b072f80ca75ad4f09933c2883dbeaf4541ed7eabc28ebf877a0a"
+      },
+      "path": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/m3-check-v2/RESULT.json"
+    },
+    {
+      "disposition": "BODY_IN_CURRENT_PUBLICATION",
+      "input": {
+        "bytes": 1347,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/root-check-execution-v1/m3/receipt.json",
+        "sha256": "fd4dffac5c2610f8946212d082ca5effcd7ffd74e8f8ab1267c13f7ab5b1d273"
+      },
+      "path": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/root-check-execution-v1/m3/receipt.json"
+    },
+    {
+      "disposition": "BODY_IN_CURRENT_PUBLICATION",
+      "input": {
+        "bytes": 1344,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/root-check-execution-v1/m3/stderr",
+        "sha256": "0acab43041dc05470e0b4428395ea32dfa211da2c5b2172bcdb5ea83b57fc9e5"
+      },
+      "path": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/root-check-execution-v1/m3/stderr"
+    },
+    {
+      "disposition": "BODY_IN_CURRENT_PUBLICATION",
+      "input": {
+        "bytes": 0,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/root-check-execution-v1/m3/stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "path": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/runtime-checker/publication-parent/string-c0/root-check-execution-v1/m3/stdout"
+    }
+  ],
+  "publicationReceipt": {
+    "bytes": 1143,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/PUBLISHED.json",
+    "sha256": "4146e7b77cc83a7a10ada105975ac7130ddf098e3610b41b56c9b30a277222c0"
+  },
+  "schema": "m3.composed.parent-checkpoint/1",
+  "sourceParent": {
+    "commit": "b21badee0035a06f75714f16b1b7f02474e2973f",
+    "pr": "https://github.com/hsoliwal/com.synexia/pull/9520",
+    "tree": "2350ac5bb6a891771335784f3498bb120bd20bf9"
+  }
+}

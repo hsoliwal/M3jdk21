@@ -1,0 +1,13 @@
+a
+and
+backing
+byte
+character
+immutable
+join
+local
+pool
+shared
+string
+the
+word

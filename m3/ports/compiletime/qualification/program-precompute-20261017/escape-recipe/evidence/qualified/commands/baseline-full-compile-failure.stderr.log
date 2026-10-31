@@ -1,0 +1,5 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:ActiveProcessorCount=2
+/tmp/m3-program-escape-qualified-v4/baseline/m3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteralHarvester.java:75: error: variable destination is already defined in method main(String[])
+        Path destination = out.toAbsolutePath().normalize();
+             ^
+1 error

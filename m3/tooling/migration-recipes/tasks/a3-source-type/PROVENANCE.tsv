@@ -1,0 +1,6 @@
+item	identity	role
+recipe-before	d92844ab899f6a1023d1b76b9e3543823ed701ee	Fully read exact parent owner
+recipe-after	519e25f2e80927d2d5950f59bbf2de049fa94727	Typed-assignment candidate
+test-before	fd07a5848e7e41b9e00890c43928c7c315f67bc1	Fully read existing test
+test-after	3bb0d8b680b200e7ff2613896692cf0d9548f844	Retained tests with metadata assertions
+failure	https://github.com/hsoliwal/M3jdk21/actions/runs/37212552006/job/111466504051	Exact parent failed production compilation before tests

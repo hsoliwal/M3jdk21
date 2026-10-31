@@ -1,0 +1,51 @@
+{
+  "schema": "M3_PUBLICATION_TARGET_RECHECK_V1",
+  "date": "2026-10-21",
+  "repository": "hsoliwal/M3jdk21",
+  "prepared_base": "065e3626aac2de62d2f531aec3bed2fca533c9f9",
+  "inspected_target_head": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "inspected_root_tree": "91924b99946e1fb26c2447a332c59d997ff3baa9",
+  "ahead_by": 31,
+  "behind_by": 0,
+  "scope": "target-collections",
+  "actual_prepared_payload_paths": 403,
+  "counts": {
+    "total": 403,
+    "changes": {
+      "ADD": 402,
+      "MODIFY": 1
+    },
+    "drift": {
+      "UNCHANGED_PREIMAGE": 403
+    }
+  },
+  "path_seals": {
+    "path": "PATH_SEALS.tsv",
+    "sha256": "78903eb4a34c93249e6a093e29be2022c57f484cfd7ec9d9492b68eeea8919b7"
+  },
+  "method": "Complete nontruncated bounded Git trees, anchored in the two root trees; unchanged blob/mode or unchanged proven absence for every actual prepared payload destination. The capped 300-file compare response was not used as complete overlap evidence.",
+  "integration": "Apply exact payload entries additively onto the current publication base; preserve unrelated intervening fleet files. Recheck moving heads before each integration.",
+  "root_agents_blob": "9cf0dc67aeb62237fb54c49b03586f3ae39bcc79",
+  "porting_invariant_blob": "291eec22b13d01baecf2c3acef24c3749e19cc24",
+  "mop_memory_specification_blob": "c9386f423cd810aa77379b980ed52153d2090ffb",
+  "active_qualification_phase": "STRING",
+  "phase_advanced": false,
+  "full_source_built_m3jdk21": "NOT_RUN_BY_THIS_RECHECK",
+  "full_maven_sdk": "NOT_RUN_BY_THIS_RECHECK",
+  "new_native_runtime_qualification": "NOT_RUN_BY_THIS_RECHECK",
+  "hosted_ci": "NOT_ESTABLISHED_BY_THIS_RECHECK",
+  "canonical_identity_not_asserted_by_this_read_only_record": true,
+  "remote_mutations_by_reviewer": false,
+  "modified_production_owner": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+  "unchanged_owner_preimage": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+  "fresh_collection_java_jni_tests": "NOT_RUN_BY_THIS_RECHECK",
+  "retained_fleet_work": [
+    "M3ArrayList",
+    "M3LinkedHashMap",
+    "M3CollectionSdkCatalog",
+    "M3ProgressMonitor",
+    "M3ShadowStreams",
+    "M3LongIndexPathBudget",
+    "pcollections and newer qualification/tests"
+  ]
+}

@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 original JNI sorted-difference LeetCode proof
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongDifferenceContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongDifferenceTest.java'
+      - '.github/workflows/m3-rank-difference-jni-java21.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  original-jni-rank-difference:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Bind exact original PR head and generated source postimages
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '5aa4d2c8cc8683a08ab20625c8763cac6c1fd9c6'
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = '716189db70586d221f63dc647d692951d77094cf'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '25a228e37629490a18fe395f4c51df4f76296701'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongDifferenceContract.java)" = '22ebb243b0fbad16daa1972dadc1d2cbce5e41dc'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongDifferenceTest.java)" = '74591bf6eb38b640b6603fb2c33b6e0167dc5d6b'
+      - name: Strict Java 21 original rank owner compilation
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir="$RUNNER_TEMP/m3-difference"
+          mkdir -p "$dir/classes" "$dir/native"
+          base=m3/collections/src/main/java/com/m3/collections
+          testsrc=m3/collections/src/test/java/com/m3/collections
+          javac --release 21 -Xlint:all -Werror -d "$dir/classes" \
+            "$base/M3LongCollection.java" "$base/M3LongIterator.java" \
+            "$base/M3LaneSearch.java" "$base/M3LongRankBatchNative.java" \
+            "$base/M3LongRankIndex.java" "$testsrc/M3LongDifferenceContract.java"
+      - name: Compile original JNI m3rankbatch provider with strict C17 and UBSan
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir="$RUNNER_TEMP/m3-difference"
+          cc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$dir/native/libm3rankbatch.so"
+      - name: Differential Java fallback, JNI and interpreter parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir="$RUNNER_TEMP/m3-difference"
+          java -Dm3.collections.rank.native=false -cp "$dir/classes" \
+            com.m3.collections.M3LongDifferenceContract | tee "$dir/java.txt"
+          java -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Dm3.collections.all.native.required=true \
+            -Djava.library.path="$dir/native" -cp "$dir/classes" \
+            com.m3.collections.M3LongDifferenceContract | tee "$dir/native.txt"
+          java -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Dm3.collections.all.native.required=true \
+            -Djava.library.path="$dir/native" -cp "$dir/classes" \
+            com.m3.collections.M3LongDifferenceContract | tee "$dir/native-interpreted.txt"
+          grep -Fxq 'PASS JNI_DIFFERENCE_2215_350 checks=36707 native=false' "$dir/java.txt"
+          grep -Fxq 'PASS JNI_DIFFERENCE_2215_350 checks=55060 native=true' "$dir/native.txt"
+          cmp "$dir/native.txt" "$dir/native-interpreted.txt"
+      - name: Preserve exact-head JNI comparison receipts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-difference-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-difference/*.txt
+          if-no-files-found: warn
+          retention-days: 14

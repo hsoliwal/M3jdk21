@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.packs.Version
+displayName: Repair Java21 archive version admission
+description: Reuse the existing Java snapshot adapter at the module-packs/kernel execution root. Correct the non-preview header policy and add the independent archive/JVM corpus without changing public declarations.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: pack-version

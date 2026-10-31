@@ -1,0 +1,16 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.text.FindAndReplace"
+contributors:
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 87
+- name: "Nick McKinney"
+  email: "mckinneynicholas@gmail.com"
+  lineCount: 46
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 18
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 6

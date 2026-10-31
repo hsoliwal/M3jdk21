@@ -1,0 +1,149 @@
+{
+  "canonical_final_commit": "8d465b3383b5b3a16cc43af5372e7c21d69cd42e",
+  "canonical_final_tree": "7d92a0415bee9c2d776a4442c6b8678bff9cf619",
+  "dataset_count": 6,
+  "datasets": [
+    {
+      "after_sha256": "e4ffa9331e6dfb74cd91391c4cdc9b9cc8fa1f359e79b6f98f4ccb962b1f6fd9",
+      "before_sha256": "ABSENT",
+      "id": "m3-set-null-oracle-20261018",
+      "manifest_git_blob": "30b1a9547ac7bfece7af043f1e2e797e2b49bcb2",
+      "manifest_sha256": "011dd4e769f9beee710ecf32e33fc1b6477d3dbd86ee9c22218c81453f83609c",
+      "replay_results": 0,
+      "sdk_receipt_sha256": "1bd69df3fc51bea3670ed5aed316062d2d3af4ced2a6c6328207b5080c5a0e23",
+      "sdk_results": 1,
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullContract.java"
+    },
+    {
+      "after_sha256": "ba0af20ac2ebc21a88c5283484e02106a656838f85a6568ea15b6268e8aa9c80",
+      "before_sha256": "ABSENT",
+      "id": "m3-set-null-junit-20261018",
+      "manifest_git_blob": "39a66c450b024987126449d7babcdf24c9112496",
+      "manifest_sha256": "55d42a9ccdc7d4c5f1416d70803b15bcf37b66e0d68a9d8606b2803a48f5a7ca",
+      "replay_results": 0,
+      "sdk_receipt_sha256": "92b7a52fdff2d2e0b730bdf26506c42ccfe872afc7ce9201e6ebd5774f4d5be3",
+      "sdk_results": 1,
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullTest.java"
+    },
+    {
+      "after_sha256": "3c5528cb59b86a5905c42c4c7e1dd4923772bdb5e2f4918c94466d809ad3344b",
+      "before_sha256": "ABSENT",
+      "id": "m3-mask-oracle-20261018",
+      "manifest_git_blob": "4b3f00d2dcf563ec31e0a03e5becfa9586dc962a",
+      "manifest_sha256": "7872cd8dc592027ce87644df34c400897f7a4f37d38ea72b9d90dc15ec34f920",
+      "replay_results": 0,
+      "sdk_receipt_sha256": "d4482f77e1d156058d5e6208912203a9fd47668d69ea5a198673476206e2f926",
+      "sdk_results": 1,
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasContract.java"
+    },
+    {
+      "after_sha256": "21524ab83d436650d247964f54ad659bcee754d279e81be2450fc22142e989c3",
+      "before_sha256": "ABSENT",
+      "id": "m3-mask-junit-20261018",
+      "manifest_git_blob": "89fd225dbf8ae486d4c0f733e080961fe8e84876",
+      "manifest_sha256": "40c730473a92d29ad77addf51a8d7bae75e01decf16978c8236811130c040c31",
+      "replay_results": 0,
+      "sdk_receipt_sha256": "8cd6422936a7626280cca9c819fade94ec4e4e2cbc0d02bbe49919a28ce3f4f4",
+      "sdk_results": 1,
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasTest.java"
+    },
+    {
+      "after_sha256": "3f4c6ec67e0dacf16efaa0d22a1b649790b00c81e4c4f9cd8564851ffef4769b",
+      "before_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+      "id": "m3-readonly-set-null-20261018",
+      "manifest_git_blob": "e3b88148a0d261ff15bdc1d23d1358ff6afc535b",
+      "manifest_sha256": "42972edae494d1d19f42e05218b90b58122908c7e1fe6c8a42006779f02da017",
+      "replay_results": 0,
+      "sdk_receipt_sha256": "9f3720568304fcd00552312e487841be7a056d6131d2e7c866433b39035541f4",
+      "sdk_results": 1,
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java"
+    },
+    {
+      "after_sha256": "772c6edbf3781fcebc373e6ad79d82770112e91eab811b5883d92650dcdfd947",
+      "before_sha256": "4d1c782345de46c31e24b4822f58c431903c7b951b6a15641c88e055271f971e",
+      "id": "m3-path-mask-alias-20261018",
+      "manifest_git_blob": "c3e4a938494f7527a927b9b415de8c408528c29b",
+      "manifest_sha256": "2328c0e733f51a20e4af04ab48d86b34fab918e31fcf3c5b47a94c6e86c629fc",
+      "replay_results": 0,
+      "sdk_receipt_sha256": "314cefb4b881cd0507864270d57305832b06e9e2ca831b81a18c4852e03d536b",
+      "sdk_results": 1,
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java"
+    }
+  ],
+  "dependency_manifest_sha256": "47496cd0b7b6a571357c09e40fabf94f9bc8b49f3b8e6d6d46b63af85a957837",
+  "engine_source_exported": false,
+  "exact_before_after_bytes": "PASS",
+  "executed_source_hashes_manifest_sha256": "e1fc00c20645dd5532e2a06e36bd5d2fdaaf292331cc8b727448603c1fe5b441",
+  "junit_prerequisite": "org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1; genuine source-built dependency, not a stub",
+  "named_discovery": "PASS",
+  "named_recipe": "com.synexia.rewrite.m3.NavigationMask20261018",
+  "original_receiver_log_sha256": "65f5422eb25b7906d0584cb943b361aa06112cdae1ff97b63e55948d3809ca75",
+  "original_test_log_sha256": "88648987dd08e5c140036548af9bd11969a1ea1b4787759596b1c17a63294441",
+  "original_test_report_sha256": "0e96a6ee3f8465a191af6584a5a31537b1aefb4072026becc86054c1eee531ad",
+  "partial_states_tested": 64,
+  "projection": "METADATA_ONLY_FROM_REAL_SDK_QUALIFICATION",
+  "public_runtime_dependency_added": false,
+  "published_executed_input_identity": {
+    "binding": "Final publication preserves the exact executed inputs; SDK execution preceded the publication commit.",
+    "published_task_manifest_sha256": "4f6e0c1a340e5595609f558915b7381c1008d26866a65dd76aee0f3efb23152c",
+    "status": "PASS",
+    "unchanged_executed_inputs": 32
+  },
+  "real_sdk": true,
+  "refusal_cases_exercised": [
+    "drift",
+    "missing input",
+    "occupied additive target",
+    "non-Java input",
+    "duplicate inputs"
+  ],
+  "sdk_version": "8.17.1",
+  "selected_public_dependency_identities": [
+    {
+      "bytes": "3392625",
+      "cache_path": "org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar",
+      "sha256": "d7c07f91ab085a39bf1b40d7f2a7796a52619aaeefeca1481435e685aa663efa"
+    },
+    {
+      "bytes": "1613246",
+      "cache_path": "org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar",
+      "sha256": "32a3b27c0eafeb44c776500ae1378efdfb79d490a6afd7b58be07c6c0d6c55ff"
+    },
+    {
+      "bytes": "109302",
+      "cache_path": "org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.jar",
+      "sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4"
+    }
+  ],
+  "semantic_admission": "ONLY_TWO_PRODUCTION_OWNERS_AND_FOUR_FIXTURES; rejected generic navigation excluded",
+  "serial_and_reversed_results_equal": "PASS",
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "spdx_license_identifier": "Apache-2.0",
+  "test_methods": [
+    {
+      "name": "driftMissingOccupiedNonJavaAndDuplicateInputsRefuse",
+      "status": "PASS"
+    },
+    {
+      "name": "all64PartialApplicationStatesConverge",
+      "status": "PASS"
+    },
+    {
+      "name": "serialAndReversedIndependentDatasetsHaveIdenticalResults",
+      "status": "PASS"
+    },
+    {
+      "name": "exactResultsFixedPointAndNamedDiscovery",
+      "status": "PASS"
+    }
+  ],
+  "test_result": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "status": "PASS",
+    "tests": 4
+  },
+  "total_first_application_results": 6,
+  "total_second_application_results": 0
+}

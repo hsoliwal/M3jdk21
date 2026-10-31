@@ -1,0 +1,43 @@
+{
+  "schema": "M3_MASK_WINDOW_RECEIVER_20261017",
+  "sourceRepository": "hsoliwal/com.synexia",
+  "sourceRevision": "eaba5869004e320845edb652a73b8f9f2085d305",
+  "sourcePullRequest": 12120,
+  "recipe": "com.synexia.m3jdk.MaskWindowSparse20261017",
+  "sourceCrate": "synexia-openrewrite-recipes/recipe-crates/m3-mask-window-sparse-20261017",
+  "targetBaseline": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "outputs": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "before": "cc3584e7ba4bafc98f154e7f63560334d472e7c03bd04688860642cc9f87bc19",
+      "after": "dfaaf7b0d0c4f46657474eadb6f216dd68e920e327e153a0242ffe7ae6efbd9c",
+      "beforeBlob": "e2f223274a2fb6006c0e8541621e9a1b16904566",
+      "afterBlob": "1b3947d55dbd11df2d8ea331584431e64052b2c8"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "before": "ff30f4bc08ae2839daf8f01a9dfe31e6433f2ab0f2f36aa7ac6051c53591b56c",
+      "after": "ddf23e3dab10bc2315ca4a8def699b0ee29ed3c8f457b7a13b7ab93cc1ddbff3",
+      "beforeBlob": "dcd7a96039e29cd8aa47963f235bb7394df023b4",
+      "afterBlob": "6ccf6f10a2945be3631d0493da74b09070dca415"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowSparseContract.java",
+      "before": "ABSENT",
+      "after": "4972f1e06aecc9608a1d1fcb1d464a0057f8b9c4e7cfae958e4b01cddd1fd582",
+      "beforeBlob": "ABSENT",
+      "afterBlob": "376bc9504fefc3505ac08a3a4d42818cf36f7eb3"
+    },
+    {
+      "path": "m3/collections/src/test/native/m3_mask_window_regions.c",
+      "before": "ABSENT",
+      "after": "ac09456844268b592475d9da1e6eee6f154e741c893167cf21d675010580deab",
+      "beforeBlob": "ABSENT",
+      "afterBlob": "52d4e5b20fade6ab7aa3f63d5d92a6b210e437bd"
+    }
+  ],
+  "license": "Apache-2.0",
+  "runtimeDependencyOnSynexia": false,
+  "phase": "STRING remains active; independent collection proving increment only",
+  "coverage": "Selected two production owners and their Java/native regression witnesses; not full SDK coverage"
+}

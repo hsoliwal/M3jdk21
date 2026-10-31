@@ -1,0 +1,5 @@
+path	sha256	git_blob	mode	pr	note
+.github/workflows/m3-identity-rank-20261021.yml	d65563bebea3246325fc8bf83522689d78ab10f83d2c20e25a7c0d5a5206f95d	8c72747278b903d30b454885689269b6fd775d76	100644	1775	PR version, not live
+m3/collections/algorithm-catalogue/arraymask-superset-20261021.tsv	f6b38aff8d850cc2d8458fa604754b6cb05579df67d69f6c03591c83356300f3	d7d18e452077f1b340f195226c4b05f16fc2b0da	100644	1775	PR version, not live
+m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java	fa2caa272b1915b6949f5776ebf4c2554503d18a62a32faefdcc487bd903d30b	5ae88ff2ac1612859a854ab7b13646896e723f2f	100644	1775	PR version, not live
+m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java	56f1e5e32506d9cd20755cf893f5af2f22b072150334401b08286e3919d54704	124772b757a8398730eb212811a866983bc3cd8a	100644	1775	PR version, not live

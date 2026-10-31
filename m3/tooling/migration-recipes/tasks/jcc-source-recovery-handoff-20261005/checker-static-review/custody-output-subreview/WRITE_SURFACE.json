@@ -1,0 +1,15 @@
+{
+  "method": "Static AST only; checker not imported or executed",
+  "writes": [
+    {
+      "line": 566,
+      "expression": "out.mkdir()"
+    },
+    {
+      "line": 568,
+      "expression": "path.write_text(json.dumps(result, indent=2) + '\\n')"
+    }
+  ],
+  "fixed_output": "successor-e04/reference-audit-v3/REFERENCE_AUDIT.json",
+  "no_owner_or_network_imports": true
+}

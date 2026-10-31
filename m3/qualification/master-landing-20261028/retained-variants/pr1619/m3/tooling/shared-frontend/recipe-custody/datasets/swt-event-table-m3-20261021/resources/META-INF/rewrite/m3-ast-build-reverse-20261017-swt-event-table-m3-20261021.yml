@@ -1,0 +1,10 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.AstBuildReverse20261017
+displayName: Rewrite original SWT EventTable into lean M3 indexed array semantics
+description: >-
+  Source-sealed single original Eclipse EventTable Java owner. Replace
+  full-capacity listener scans with one primitive high-water coordinate while
+  preserving nested dispatch, SWT.None, callbacks and the EPL original API.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ast-build-reverse-20261017-swt-event-table-m3-20261021

@@ -1,0 +1,20 @@
+{
+  "actual_image": "/workspace/scratch/87fb3604f641/m3-implementation/M3jdk21/build/m3-p0/jdk",
+  "java_sha256": "76e09ce124093dc9647a2625af88ad008431bebae0e2ab130717b023b07486c6",
+  "libjvm_sha256": "6cc5cb8b0dcce16fda91db158034c51b7eaa55baae7c75e7aa08923689bbdeb2",
+  "fixture_class_sha256": "0e181d1c8a11fede139be92733419548149af65a7928c918454801d7526f447e",
+  "results": [
+    {
+      "mode": "normal",
+      "exit": 0,
+      "stdout": "PASS M3ObjectBaseVtableContract adapters arrays virtuals waits platform virtual"
+    },
+    {
+      "mode": "int",
+      "exit": 0,
+      "stdout": "PASS M3ObjectBaseVtableContract adapters arrays virtuals waits platform virtual"
+    }
+  ],
+  "runtime_patch": false,
+  "full_image_build_and_CDS": "separate parent integration receipt"
+}

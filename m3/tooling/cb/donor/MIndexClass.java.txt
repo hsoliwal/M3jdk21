@@ -1,0 +1,477 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.mindex.classindex;
+
+import com.synexia.mindex.MIndexString;
+import java.io.InputStream;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
+import java.net.URL;
+import java.security.ProtectionDomain;
+import java.util.Objects;
+import java.util.Optional;
+
+/** Two-field immutable class view over one frozen MIndexClassIndex row. */
+public final class MIndexClass {
+    private final MIndexClassIndex owner;
+    private final int row;
+
+    MIndexClass(MIndexClassIndex owner, int row) {
+        this.owner = Objects.requireNonNull(owner, "owner");
+        this.row = Objects.checkIndex(row, owner.size());
+    }
+
+    public MIndexClassIndex owner() {
+        return owner;
+    }
+
+    public int row() {
+        return row;
+    }
+
+    public int loaderSpaceId() {
+        return owner.loaderSpaceId(row);
+    }
+
+    public MIndexString name() {
+        return owner.binaryName(row);
+    }
+
+    public String getName() {
+        return name().toString();
+    }
+
+    public MIndexString simpleName() {
+        return owner.simpleName(row);
+    }
+
+    public String getSimpleName() {
+        return simpleName().toString();
+    }
+
+    public Optional<MIndexString> canonicalName() {
+        return owner.canonicalName(row);
+    }
+
+    public String getCanonicalName() {
+        return canonicalName().map(Object::toString).orElse(null);
+    }
+
+    public MIndexString packageName() {
+        return owner.packageName(row);
+    }
+
+    public String getPackageName() {
+        return packageName().toString();
+    }
+
+    public Optional<MIndexString> moduleName() {
+        return owner.moduleName(row);
+    }
+
+    public MIndexString typeName() {
+        return owner.typeName(row);
+    }
+
+    public String getTypeName() {
+        return typeName().toString();
+    }
+
+    public int modifiers() {
+        return owner.modifiers(row);
+    }
+
+    public int getModifiers() {
+        return modifiers();
+    }
+
+    public int flags() {
+        return owner.flags(row);
+    }
+
+    public boolean hasFlag(int flag) {
+        return (flags() & flag) != 0;
+    }
+
+    public boolean isInterface() { return hasFlag(MIndexClassFlags.INTERFACE); }
+    public boolean isEnum() { return hasFlag(MIndexClassFlags.ENUM); }
+    public boolean isAnnotation() { return hasFlag(MIndexClassFlags.ANNOTATION); }
+    public boolean isRecord() { return hasFlag(MIndexClassFlags.RECORD); }
+    public boolean isArray() { return hasFlag(MIndexClassFlags.ARRAY); }
+    public boolean isPrimitive() { return hasFlag(MIndexClassFlags.PRIMITIVE); }
+    public boolean isSealed() { return hasFlag(MIndexClassFlags.SEALED); }
+    public boolean isHidden() { return hasFlag(MIndexClassFlags.HIDDEN); }
+    public boolean isSynthetic() { return hasFlag(MIndexClassFlags.SYNTHETIC); }
+    public boolean isAnonymousClass() { return hasFlag(MIndexClassFlags.ANONYMOUS); }
+    public boolean isLocalClass() { return hasFlag(MIndexClassFlags.LOCAL); }
+    public boolean isMemberClass() { return hasFlag(MIndexClassFlags.MEMBER); }
+
+    public Optional<MIndexClass> superclass() {
+        int superRow = owner.superclassRow(row);
+        return superRow < 0 ? Optional.empty() : Optional.of(owner.classAt(superRow));
+    }
+
+    public MIndexClass getSuperclass() {
+        return superclass().orElse(null);
+    }
+
+    public Optional<MIndexClass> componentType() {
+        int componentRow = owner.componentTypeRow(row);
+        return componentRow < 0 ? Optional.empty() : Optional.of(owner.classAt(componentRow));
+    }
+
+    public MIndexClass getComponentType() {
+        return componentType().orElse(null);
+    }
+
+    public Optional<MIndexClass> nestHost() {
+        int hostRow = owner.nestHostRow(row);
+        return hostRow < 0 ? Optional.empty() : Optional.of(owner.classAt(hostRow));
+    }
+
+    public MIndexClass getNestHost() {
+        return nestHost().orElse(this);
+    }
+
+    public Optional<MIndexClass> declaringClass() {
+        int declaringRow = owner.declaringClassRow(row);
+        return declaringRow < 0 ? Optional.empty() : Optional.of(owner.classAt(declaringRow));
+    }
+
+    public MIndexClass getDeclaringClass() {
+        return declaringClass().orElse(null);
+    }
+
+    public Optional<MIndexClass> enclosingClass() {
+        int enclosingRow = owner.enclosingClassRow(row);
+        return enclosingRow < 0 ? Optional.empty() : Optional.of(owner.classAt(enclosingRow));
+    }
+
+    public MIndexClass getEnclosingClass() {
+        return enclosingClass().orElse(null);
+    }
+
+    public int interfaceCount() {
+        return owner.interfaceCount(row);
+    }
+
+    public MIndexClass interfaceAt(int ordinal) {
+        return owner.classAt(owner.interfaceRow(row, ordinal));
+    }
+
+    public MIndexClass[] getInterfaces() {
+        MIndexClass[] result = new MIndexClass[interfaceCount()];
+        for (int i = 0; i < result.length; i++) result[i] = interfaceAt(i);
+        return result;
+    }
+
+    public int directSubtypeCount() {
+        return owner.directSubtypeCount(row);
+    }
+
+    public MIndexClass directSubtypeAt(int ordinal) {
+        return owner.classAt(owner.directSubtypeRow(row, ordinal));
+    }
+
+    public int supertypeCount() {
+        return owner.supertypeCount(row);
+    }
+
+    public MIndexClass supertypeAt(int ordinal) {
+        return owner.classAt(owner.supertypeRow(row, ordinal));
+    }
+
+    public boolean isAssignableFrom(MIndexClass candidate) {
+        Objects.requireNonNull(candidate, "candidate");
+        if (candidate.owner != owner) {
+            throw new IllegalArgumentException("classes belong to different MIndexClassIndex snapshots");
+        }
+        return owner.isAssignableFrom(row, candidate.row);
+    }
+
+    public int annotationCount() {
+        return owner.classAnnotationCount(row);
+    }
+
+    public MIndexString annotationTypeNameAt(int ordinal) {
+        return owner.classAnnotationTypeName(row, ordinal);
+    }
+
+    public int permittedSubclassCount() {
+        return owner.permittedSubclassCount(row);
+    }
+
+    public MIndexString permittedSubclassNameAt(int ordinal) {
+        return owner.permittedSubclassName(row, ordinal);
+    }
+
+    public int memberCount() {
+        return owner.memberCount(row);
+    }
+
+    public MIndexMember memberAt(int ordinal) {
+        return owner.memberAt(row, ordinal);
+    }
+
+    public MIndexField[] getDeclaredFields() {
+        int[] rows = owner.memberRows(row, MIndexMemberKind.FIELD);
+        MIndexField[] result = new MIndexField[rows.length];
+        for (int i = 0; i < rows.length; i++) result[i] = new MIndexField(owner, rows[i]);
+        return result;
+    }
+
+    public MIndexMethod[] getDeclaredMethods() {
+        int[] rows = owner.memberRows(row, MIndexMemberKind.METHOD);
+        MIndexMethod[] result = new MIndexMethod[rows.length];
+        for (int i = 0; i < rows.length; i++) result[i] = new MIndexMethod(owner, rows[i]);
+        return result;
+    }
+
+    public MIndexConstructor[] getDeclaredConstructors() {
+        int[] rows = owner.memberRows(row, MIndexMemberKind.CONSTRUCTOR);
+        MIndexConstructor[] result = new MIndexConstructor[rows.length];
+        for (int i = 0; i < rows.length; i++) result[i] = new MIndexConstructor(owner, rows[i]);
+        return result;
+    }
+
+    public MIndexRecordComponent[] getRecordComponents() {
+        if (!isRecord()) return null;
+        int[] rows = owner.memberRows(row, MIndexMemberKind.RECORD_COMPONENT);
+        MIndexRecordComponent[] result = new MIndexRecordComponent[rows.length];
+        for (int i = 0; i < rows.length; i++) result[i] = new MIndexRecordComponent(owner, rows[i]);
+        return result;
+    }
+
+    public MIndexClass[] getDeclaredClasses() {
+        int[] rows = owner.declaredClassRows(row);
+        MIndexClass[] result = new MIndexClass[rows.length];
+        for (int i = 0; i < rows.length; i++) result[i] = owner.classAt(rows[i]);
+        return result;
+    }
+
+    public MIndexClass[] getNestMembers() {
+        int[] rows = owner.nestMemberRows(row);
+        MIndexClass[] result = new MIndexClass[rows.length];
+        for (int i = 0; i < rows.length; i++) result[i] = owner.classAt(rows[i]);
+        return result;
+    }
+
+    public MIndexClass[] getPermittedSubclasses() {
+        if (!isSealed()) return null;
+        int[] rows = owner.permittedSubclassRows(row);
+        MIndexClass[] result = new MIndexClass[rows.length];
+        for (int i = 0; i < rows.length; i++) result[i] = owner.classAt(rows[i]);
+        return result;
+    }
+
+    public int[] memberRows(CharSequence name) {
+        return owner.memberRows(row, name);
+    }
+
+    public long structuralHash64() {
+        return owner.structuralHash64(row);
+    }
+
+    public Optional<Class<?>> tryClass() {
+        return owner.boundary().classAt(row);
+    }
+
+    public Class<?> toClass() {
+        return tryClass().orElseThrow(
+                () -> new IllegalStateException("JVM class boundary is no longer live for row " + row));
+    }
+
+    /** JVM boundary operation; compact/detached snapshots deliberately cannot satisfy it. */
+    public boolean isInstance(Object value) {
+        return toClass().isInstance(value);
+    }
+
+    /** JVM boundary operation matching Class.cast semantics. */
+    public Object cast(Object value) {
+        return toClass().cast(value);
+    }
+
+    public ClassLoader getClassLoader() { return toClass().getClassLoader(); }
+    public Module getModule() { return toClass().getModule(); }
+    public Package getPackage() { return toClass().getPackage(); }
+    public ProtectionDomain getProtectionDomain() { return toClass().getProtectionDomain(); }
+    public boolean desiredAssertionStatus() { return toClass().desiredAssertionStatus(); }
+    public URL getResource(String name) { return toClass().getResource(name); }
+    public InputStream getResourceAsStream(String name) { return toClass().getResourceAsStream(name); }
+    public Object[] getSigners() { return toClass().getSigners(); }
+    public Type getGenericSuperclass() { return toClass().getGenericSuperclass(); }
+    public Type[] getGenericInterfaces() { return toClass().getGenericInterfaces(); }
+    public TypeVariable<?>[] getTypeParameters() { return toClass().getTypeParameters(); }
+
+    public boolean isAnnotationPresent(Class<? extends Annotation> annotationClass) {
+        return toClass().isAnnotationPresent(annotationClass);
+    }
+
+    public <A extends Annotation> A getAnnotation(Class<A> annotationClass) {
+        return toClass().getAnnotation(annotationClass);
+    }
+
+    public Annotation[] getAnnotations() { return toClass().getAnnotations(); }
+    public Annotation[] getDeclaredAnnotations() { return toClass().getDeclaredAnnotations(); }
+
+    public <A extends Annotation> A[] getAnnotationsByType(Class<A> annotationClass) {
+        return toClass().getAnnotationsByType(annotationClass);
+    }
+
+    public <A extends Annotation> A getDeclaredAnnotation(Class<A> annotationClass) {
+        return toClass().getDeclaredAnnotation(annotationClass);
+    }
+
+    public <A extends Annotation> A[] getDeclaredAnnotationsByType(Class<A> annotationClass) {
+        return toClass().getDeclaredAnnotationsByType(annotationClass);
+    }
+
+    public MIndexField getDeclaredField(String name) throws NoSuchFieldException {
+        Objects.requireNonNull(name, "name");
+        for (int memberRow : owner.memberRows(row, name)) {
+            if (owner.memberKind(memberRow) == MIndexMemberKind.FIELD) {
+                return new MIndexField(owner, memberRow);
+            }
+        }
+        throw new NoSuchFieldException(getName() + "." + name);
+    }
+
+    public MIndexMethod getDeclaredMethod(String name, Class<?>... parameterTypes)
+            throws NoSuchMethodException {
+        Method method =
+                toClass().getDeclaredMethod(
+                        Objects.requireNonNull(name, "name"),
+                        Objects.requireNonNull(parameterTypes, "parameterTypes"));
+        return methodView(method);
+    }
+
+    public MIndexConstructor getDeclaredConstructor(Class<?>... parameterTypes)
+            throws NoSuchMethodException {
+        Constructor<?> constructor =
+                toClass().getDeclaredConstructor(
+                        Objects.requireNonNull(parameterTypes, "parameterTypes"));
+        return constructorView(constructor);
+    }
+
+    public MIndexField getField(String name) throws NoSuchFieldException {
+        return fieldView(toClass().getField(Objects.requireNonNull(name, "name")));
+    }
+
+    public MIndexMethod getMethod(String name, Class<?>... parameterTypes)
+            throws NoSuchMethodException {
+        return methodView(
+                toClass().getMethod(
+                        Objects.requireNonNull(name, "name"),
+                        Objects.requireNonNull(parameterTypes, "parameterTypes")));
+    }
+
+    public MIndexConstructor getConstructor(Class<?>... parameterTypes)
+            throws NoSuchMethodException {
+        return constructorView(
+                toClass().getConstructor(
+                        Objects.requireNonNull(parameterTypes, "parameterTypes")));
+    }
+
+    public MIndexField[] getFields() {
+        Field[] fields = toClass().getFields();
+        MIndexField[] result = new MIndexField[fields.length];
+        for (int i = 0; i < fields.length; i++) result[i] = fieldView(fields[i]);
+        return result;
+    }
+
+    public MIndexMethod[] getMethods() {
+        Method[] methods = toClass().getMethods();
+        MIndexMethod[] result = new MIndexMethod[methods.length];
+        for (int i = 0; i < methods.length; i++) result[i] = methodView(methods[i]);
+        return result;
+    }
+
+    public MIndexConstructor[] getConstructors() {
+        Constructor<?>[] constructors = toClass().getConstructors();
+        MIndexConstructor[] result = new MIndexConstructor[constructors.length];
+        for (int i = 0; i < constructors.length; i++) {
+            result[i] = constructorView(constructors[i]);
+        }
+        return result;
+    }
+
+    private MIndexField fieldView(Field field) {
+        MIndexClass declaring =
+                owner.fromClass(field.getDeclaringClass())
+                        .orElseThrow(
+                                () ->
+                                        new IllegalStateException(
+                                                "declaring class is outside MIndexClass snapshot: "
+                                                        + field.getDeclaringClass().getName()));
+        int memberRow =
+                owner.memberRow(
+                        declaring.row(),
+                        MIndexMemberKind.FIELD,
+                        field.getName(),
+                        MIndexJvmDescriptor.field(field));
+        if (memberRow < 0) {
+            throw new IllegalStateException("indexed field metadata is missing: " + field);
+        }
+        return new MIndexField(owner, memberRow);
+    }
+
+    private MIndexMethod methodView(Method method) {
+        MIndexClass declaring =
+                owner.fromClass(method.getDeclaringClass())
+                        .orElseThrow(
+                                () ->
+                                        new IllegalStateException(
+                                                "declaring class is outside MIndexClass snapshot: "
+                                                        + method.getDeclaringClass().getName()));
+        int memberRow =
+                owner.memberRow(
+                        declaring.row(),
+                        MIndexMemberKind.METHOD,
+                        method.getName(),
+                        MIndexJvmDescriptor.method(method));
+        if (memberRow < 0) {
+            throw new IllegalStateException("indexed method metadata is missing: " + method);
+        }
+        return new MIndexMethod(owner, memberRow);
+    }
+
+    private MIndexConstructor constructorView(Constructor<?> constructor) {
+        MIndexClass declaring =
+                owner.fromClass(constructor.getDeclaringClass())
+                        .orElseThrow(
+                                () ->
+                                        new IllegalStateException(
+                                                "declaring class is outside MIndexClass snapshot: "
+                                                        + constructor.getDeclaringClass().getName()));
+        int memberRow =
+                owner.memberRow(
+                        declaring.row(),
+                        MIndexMemberKind.CONSTRUCTOR,
+                        constructor.getName(),
+                        MIndexJvmDescriptor.constructor(constructor));
+        if (memberRow < 0) {
+            throw new IllegalStateException(
+                    "indexed constructor metadata is missing: " + constructor);
+        }
+        return new MIndexConstructor(owner, memberRow);
+    }
+
+    @Override
+    public String toString() {
+        return name().toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * System.identityHashCode(owner) + row;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || other instanceof MIndexClass that && owner == that.owner && row == that.row;
+    }
+}

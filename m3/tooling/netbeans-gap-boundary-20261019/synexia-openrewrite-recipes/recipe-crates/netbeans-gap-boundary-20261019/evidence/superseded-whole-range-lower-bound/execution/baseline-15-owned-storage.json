@@ -1,0 +1,20 @@
+{
+  "command": [
+    "java",
+    "-Xmx256m",
+    "-Djava.awt.headless=true",
+    "-javaagent:/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/memory-agent.jar",
+    "--add-opens",
+    "java.desktop/javax.swing.text=ALL-UNNAMED",
+    "--patch-module",
+    "java.desktop=/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/baseline/classes:/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/baseline/test-classes",
+    "-cp",
+    "/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/memory",
+    "GapStorageMemory"
+  ],
+  "exit": 0,
+  "log_sha256": "fb5cdf0fa036845860a91cc58dcacd487855cfc55cc97f881adff9b9ea9dac57",
+  "user_seconds": 0.645701,
+  "system_seconds": 0.041409999999999995,
+  "max_rss_kib_linux": 83664
+}

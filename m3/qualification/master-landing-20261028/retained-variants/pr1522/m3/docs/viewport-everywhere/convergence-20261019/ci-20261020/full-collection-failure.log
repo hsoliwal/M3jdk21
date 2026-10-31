@@ -1,0 +1,1066 @@
+﻿2026-10-20T02:11:45.9324138Z Current runner version: '2.337.0'
+2026-10-20T02:11:45.9355017Z ##[group]Runner Image Provisioner
+2026-10-20T02:11:45.9356255Z Hosted Compute Agent
+2026-10-20T02:11:45.9356980Z Version: 20261012.601
+2026-10-20T02:11:45.9357888Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+2026-10-20T02:11:45.9358863Z Build Date: 2026-10-12T17:48:21Z
+2026-10-20T02:11:45.9359744Z Worker ID: {67c15c67-7c84-4249-abe3-5d846a1146c1}
+2026-10-20T02:11:45.9360744Z Region: eastus
+2026-10-20T02:11:45.9361609Z Cloud: Azure
+2026-10-20T02:11:45.9362351Z ##[endgroup]
+2026-10-20T02:11:45.9364023Z ##[group]Operating System
+2026-10-20T02:11:45.9364781Z Ubuntu
+2026-10-20T02:11:45.9365556Z 22.04.5
+2026-10-20T02:11:45.9366220Z LTS
+2026-10-20T02:11:45.9366984Z ##[endgroup]
+2026-10-20T02:11:45.9367674Z ##[group]Runner Image
+2026-10-20T02:11:45.9368446Z Image: ubuntu-22.04
+2026-10-20T02:11:45.9369184Z Version: 20261012.322.1
+2026-10-20T02:11:45.9371150Z Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20261012.322/images/ubuntu/Ubuntu2204-Readme.md
+2026-10-20T02:11:45.9373213Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20261012.322
+2026-10-20T02:11:45.9374490Z ##[endgroup]
+2026-10-20T02:11:45.9375960Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T02:11:45.9378524Z Contents: read
+2026-10-20T02:11:45.9379255Z Metadata: read
+2026-10-20T02:11:45.9379950Z ##[endgroup]
+2026-10-20T02:11:45.9383156Z Secret source: Actions
+2026-10-20T02:11:45.9384320Z Cache mode: write
+2026-10-20T02:11:45.9385703Z Prepare workflow directory
+2026-10-20T02:11:45.9760710Z Prepare all required actions
+2026-10-20T02:11:45.9816235Z Getting action download info
+2026-10-20T02:11:46.1393573Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-20T02:11:46.2337822Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-20T02:11:46.4622024Z Complete job name: Full collection Java and JNI at exact head
+2026-10-20T02:11:46.5342115Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-10-20T02:11:46.5343029Z with:
+2026-10-20T02:11:46.5343459Z   ref: 066b7a15c29388f3444ab3cf0550ecf1df698c6d
+2026-10-20T02:11:46.5343990Z   persist-credentials: false
+2026-10-20T02:11:46.5344445Z   repository: hsoliwal/M3jdk21
+2026-10-20T02:11:46.5347820Z   token: ***
+2026-10-20T02:11:46.5348193Z   ssh-strict: true
+2026-10-20T02:11:46.5348575Z   ssh-user: git
+2026-10-20T02:11:46.5348942Z   clean: true
+2026-10-20T02:11:46.5349328Z   sparse-checkout-cone-mode: true
+2026-10-20T02:11:46.5349780Z   fetch-depth: 1
+2026-10-20T02:11:46.5350146Z   fetch-tags: false
+2026-10-20T02:11:46.5350532Z   show-progress: true
+2026-10-20T02:11:46.5351043Z   lfs: false
+2026-10-20T02:11:46.5351405Z   submodules: false
+2026-10-20T02:11:46.5351785Z   set-safe-directory: true
+2026-10-20T02:11:46.5352214Z   allow-unsafe-pr-checkout: false
+2026-10-20T02:11:46.5352882Z ##[endgroup]
+2026-10-20T02:11:46.6232759Z Syncing repository: hsoliwal/M3jdk21
+2026-10-20T02:11:46.6234447Z ##[group]Getting Git version info
+2026-10-20T02:11:46.6235046Z Working directory is '/home/runner/work/M3jdk21/M3jdk21'
+2026-10-20T02:11:46.6235896Z [command]/usr/bin/git version
+2026-10-20T02:11:46.6261806Z git version 2.55.0
+2026-10-20T02:11:46.6279847Z ##[endgroup]
+2026-10-20T02:11:46.6293824Z Temporarily overriding HOME='/home/runner/work/_temp/fcbd0e81-f6b0-480c-b0ad-408a8d046ec1' before making global git config changes
+2026-10-20T02:11:46.6295917Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T02:11:46.6298320Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/M3jdk21/M3jdk21
+2026-10-20T02:11:46.6336104Z Deleting the contents of '/home/runner/work/M3jdk21/M3jdk21'
+2026-10-20T02:11:46.6342741Z ##[group]Initializing the repository
+2026-10-20T02:11:46.6344277Z [command]/usr/bin/git init /home/runner/work/M3jdk21/M3jdk21
+2026-10-20T02:11:46.6463103Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T02:11:46.6467442Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T02:11:46.6469501Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T02:11:46.6470493Z hint: call:
+2026-10-20T02:11:46.6470990Z hint:
+2026-10-20T02:11:46.6471512Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T02:11:46.6472046Z hint:
+2026-10-20T02:11:46.6472552Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T02:11:46.6473508Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T02:11:46.6474540Z hint:
+2026-10-20T02:11:46.6475132Z hint: 	git branch -m <name>
+2026-10-20T02:11:46.6475822Z hint:
+2026-10-20T02:11:46.6476461Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T02:11:46.6477336Z Initialized empty Git repository in /home/runner/work/M3jdk21/M3jdk21/.git/
+2026-10-20T02:11:46.6478967Z [command]/usr/bin/git remote add origin https://github.com/hsoliwal/M3jdk21
+2026-10-20T02:11:46.6534492Z ##[endgroup]
+2026-10-20T02:11:46.6535715Z ##[group]Disabling automatic garbage collection
+2026-10-20T02:11:46.6538940Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T02:11:46.6571569Z ##[endgroup]
+2026-10-20T02:11:46.6572188Z ##[group]Setting up auth
+2026-10-20T02:11:46.6578327Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T02:11:46.6609703Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T02:11:46.6999239Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T02:11:46.7050706Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T02:11:46.7269967Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T02:11:46.7304825Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T02:11:46.7530190Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T02:11:46.7570216Z ##[endgroup]
+2026-10-20T02:11:46.7571143Z ##[group]Fetching the repository
+2026-10-20T02:11:46.7577399Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 066b7a15c29388f3444ab3cf0550ecf1df698c6d
+2026-10-20T02:12:17.2935513Z From https://github.com/hsoliwal/M3jdk21
+2026-10-20T02:12:17.2936282Z  * branch                066b7a15c29388f3444ab3cf0550ecf1df698c6d -> FETCH_HEAD
+2026-10-20T02:12:17.2948765Z ##[endgroup]
+2026-10-20T02:12:17.2949438Z ##[group]Determining the checkout info
+2026-10-20T02:12:17.2949949Z ##[endgroup]
+2026-10-20T02:12:17.2950342Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T02:12:17.3014387Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T02:12:17.3039461Z ##[group]Checking out the ref
+2026-10-20T02:12:17.3044268Z [command]/usr/bin/git checkout --progress --force 066b7a15c29388f3444ab3cf0550ecf1df698c6d
+2026-10-20T02:12:18.5223816Z Updating files:  12% (14372/119146)
+2026-10-20T02:12:18.6346675Z Updating files:  13% (15489/119146)
+2026-10-20T02:12:18.7764231Z Updating files:  14% (16681/119146)
+2026-10-20T02:12:19.0267984Z Updating files:  15% (17872/119146)
+2026-10-20T02:12:19.0924507Z Updating files:  16% (19064/119146)
+2026-10-20T02:12:19.1742332Z Updating files:  17% (20255/119146)
+2026-10-20T02:12:19.2744939Z Updating files:  18% (21447/119146)
+2026-10-20T02:12:19.3486406Z Updating files:  19% (22638/119146)
+2026-10-20T02:12:19.4136514Z Updating files:  20% (23830/119146)
+2026-10-20T02:12:19.4180670Z Updating files:  21% (25021/119146)
+2026-10-20T02:12:19.4922668Z Updating files:  21% (25074/119146)
+2026-10-20T02:12:19.5437129Z Updating files:  22% (26213/119146)
+2026-10-20T02:12:19.6031190Z Updating files:  23% (27404/119146)
+2026-10-20T02:12:19.6672459Z Updating files:  24% (28596/119146)
+2026-10-20T02:12:19.7316115Z Updating files:  25% (29787/119146)
+2026-10-20T02:12:19.8403205Z Updating files:  26% (30978/119146)
+2026-10-20T02:12:19.8842814Z Updating files:  27% (32170/119146)
+2026-10-20T02:12:19.9255542Z Updating files:  28% (33361/119146)
+2026-10-20T02:12:19.9822265Z Updating files:  29% (34553/119146)
+2026-10-20T02:12:20.0288879Z Updating files:  30% (35744/119146)
+2026-10-20T02:12:20.0688868Z Updating files:  31% (36936/119146)
+2026-10-20T02:12:20.1444476Z Updating files:  32% (38127/119146)
+2026-10-20T02:12:20.2137242Z Updating files:  33% (39319/119146)
+2026-10-20T02:12:20.2940066Z Updating files:  34% (40510/119146)
+2026-10-20T02:12:20.3702845Z Updating files:  35% (41702/119146)
+2026-10-20T02:12:20.4182301Z Updating files:  36% (42893/119146)
+2026-10-20T02:12:20.4303467Z Updating files:  36% (43801/119146)
+2026-10-20T02:12:20.5004396Z Updating files:  37% (44085/119146)
+2026-10-20T02:12:20.5636546Z Updating files:  38% (45276/119146)
+2026-10-20T02:12:20.6226364Z Updating files:  39% (46467/119146)
+2026-10-20T02:12:20.6921589Z Updating files:  40% (47659/119146)
+2026-10-20T02:12:20.7543724Z Updating files:  41% (48850/119146)
+2026-10-20T02:12:21.0915375Z Updating files:  42% (50042/119146)
+2026-10-20T02:12:21.2854124Z Updating files:  43% (51233/119146)
+2026-10-20T02:12:21.3707017Z Updating files:  44% (52425/119146)
+2026-10-20T02:12:21.4183209Z Updating files:  45% (53616/119146)
+2026-10-20T02:12:21.4684875Z Updating files:  45% (54141/119146)
+2026-10-20T02:12:21.5446851Z Updating files:  46% (54808/119146)
+2026-10-20T02:12:21.6319933Z Updating files:  47% (55999/119146)
+2026-10-20T02:12:21.7243899Z Updating files:  48% (57191/119146)
+2026-10-20T02:12:21.8130153Z Updating files:  49% (58382/119146)
+2026-10-20T02:12:21.9013986Z Updating files:  50% (59573/119146)
+2026-10-20T02:12:22.0007402Z Updating files:  51% (60765/119146)
+2026-10-20T02:12:22.0815321Z Updating files:  52% (61956/119146)
+2026-10-20T02:12:22.1628488Z Updating files:  53% (63148/119146)
+2026-10-20T02:12:22.2539072Z Updating files:  54% (64339/119146)
+2026-10-20T02:12:22.3442859Z Updating files:  55% (65531/119146)
+2026-10-20T02:12:22.4182904Z Updating files:  56% (66722/119146)
+2026-10-20T02:12:22.4238729Z Updating files:  56% (67826/119146)
+2026-10-20T02:12:22.4976352Z Updating files:  57% (67914/119146)
+2026-10-20T02:12:22.5791552Z Updating files:  58% (69105/119146)
+2026-10-20T02:12:22.6737602Z Updating files:  59% (70297/119146)
+2026-10-20T02:12:22.7359264Z Updating files:  60% (71488/119146)
+2026-10-20T02:12:22.8666477Z Updating files:  61% (72680/119146)
+2026-10-20T02:12:22.9342394Z Updating files:  62% (73871/119146)
+2026-10-20T02:12:23.0034632Z Updating files:  63% (75062/119146)
+2026-10-20T02:12:23.0686726Z Updating files:  64% (76254/119146)
+2026-10-20T02:12:23.1274078Z Updating files:  65% (77445/119146)
+2026-10-20T02:12:23.1860540Z Updating files:  66% (78637/119146)
+2026-10-20T02:12:23.2418248Z Updating files:  67% (79828/119146)
+2026-10-20T02:12:23.3020810Z Updating files:  68% (81020/119146)
+2026-10-20T02:12:23.3719615Z Updating files:  69% (82211/119146)
+2026-10-20T02:12:23.7631340Z Updating files:  70% (83403/119146)
+2026-10-20T02:12:23.8202899Z Updating files:  70% (83556/119146)
+2026-10-20T02:12:23.8839827Z Updating files:  71% (84594/119146)
+2026-10-20T02:12:23.9451443Z Updating files:  72% (85786/119146)
+2026-10-20T02:12:23.9983804Z Updating files:  73% (86977/119146)
+2026-10-20T02:12:24.0576740Z Updating files:  74% (88169/119146)
+2026-10-20T02:12:24.5429054Z Updating files:  75% (89360/119146)
+2026-10-20T02:12:24.5560363Z Updating files:  75% (90340/119146)
+2026-10-20T02:12:24.6090571Z Updating files:  76% (90551/119146)
+2026-10-20T02:12:24.6701162Z Updating files:  77% (91743/119146)
+2026-10-20T02:12:24.7324408Z Updating files:  78% (92934/119146)
+2026-10-20T02:12:24.7920332Z Updating files:  79% (94126/119146)
+2026-10-20T02:12:24.8741129Z Updating files:  80% (95317/119146)
+2026-10-20T02:12:24.9440506Z Updating files:  81% (96509/119146)
+2026-10-20T02:12:25.0095814Z Updating files:  82% (97700/119146)
+2026-10-20T02:12:25.4814866Z Updating files:  83% (98892/119146)
+2026-10-20T02:12:25.5366869Z Updating files:  83% (98908/119146)
+2026-10-20T02:12:25.6110004Z Updating files:  84% (100083/119146)
+2026-10-20T02:12:25.6791986Z Updating files:  85% (101275/119146)
+2026-10-20T02:12:25.7404198Z Updating files:  86% (102466/119146)
+2026-10-20T02:12:26.1971600Z Updating files:  87% (103658/119146)
+2026-10-20T02:12:26.2671381Z Updating files:  88% (104849/119146)
+2026-10-20T02:12:26.3353544Z Updating files:  89% (106040/119146)
+2026-10-20T02:12:26.4185836Z Updating files:  90% (107232/119146)
+2026-10-20T02:12:26.5148305Z Updating files:  90% (107849/119146)
+2026-10-20T02:12:26.5873674Z Updating files:  91% (108423/119146)
+2026-10-20T02:12:26.6524847Z Updating files:  92% (109615/119146)
+2026-10-20T02:12:27.0837223Z Updating files:  93% (110806/119146)
+2026-10-20T02:12:27.1320562Z Updating files:  94% (111998/119146)
+2026-10-20T02:12:27.1840183Z Updating files:  95% (113189/119146)
+2026-10-20T02:12:27.2285594Z Updating files:  96% (114381/119146)
+2026-10-20T02:12:27.2762943Z Updating files:  97% (115572/119146)
+2026-10-20T02:12:27.3514289Z Updating files:  98% (116764/119146)
+2026-10-20T02:12:27.4175507Z Updating files:  99% (117955/119146)
+2026-10-20T02:12:27.4176015Z Updating files: 100% (119146/119146)
+2026-10-20T02:12:27.4176382Z Updating files: 100% (119146/119146), done.
+2026-10-20T02:12:27.5617344Z Note: switching to '066b7a15c29388f3444ab3cf0550ecf1df698c6d'.
+2026-10-20T02:12:27.5617946Z 
+2026-10-20T02:12:27.5618637Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-20T02:12:27.5619504Z changes and commit them, and you can discard any commits you make in this
+2026-10-20T02:12:27.5620427Z state without impacting any branches by switching back to a branch.
+2026-10-20T02:12:27.5620801Z 
+2026-10-20T02:12:27.5621221Z If you want to create a new branch to retain commits you create, you may
+2026-10-20T02:12:27.5621811Z do so (now or later) by using -c with the switch command. Example:
+2026-10-20T02:12:27.5622128Z 
+2026-10-20T02:12:27.5622266Z   git switch -c <new-branch-name>
+2026-10-20T02:12:27.5622479Z 
+2026-10-20T02:12:27.5622607Z Or undo this operation with:
+2026-10-20T02:12:27.5622802Z 
+2026-10-20T02:12:27.5622912Z   git switch -
+2026-10-20T02:12:27.5623071Z 
+2026-10-20T02:12:27.5623327Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-20T02:12:27.5623701Z 
+2026-10-20T02:12:27.5623982Z HEAD is now at 066b7a15c Pin canonical recipe proof mirror and current receiving evidence
+2026-10-20T02:12:27.5771850Z ##[endgroup]
+2026-10-20T02:12:27.5816429Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T02:12:27.5844142Z 066b7a15c29388f3444ab3cf0550ecf1df698c6d
+2026-10-20T02:12:27.5853437Z ##[group]Removing auth
+2026-10-20T02:12:27.5856514Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T02:12:27.5888315Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T02:12:27.6344859Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T02:12:27.6364629Z http.https://github.com/.extraheader
+2026-10-20T02:12:27.6371194Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-20T02:12:27.6432065Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T02:12:27.6869347Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T02:12:27.6902066Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T02:12:27.7341865Z ##[endgroup]
+2026-10-20T02:12:27.7530273Z ##[group]Run test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+2026-10-20T02:12:27.7530690Z [36;1mtest "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"[0m
+2026-10-20T02:12:27.7899884Z shell: /usr/bin/bash -e {0}
+2026-10-20T02:12:27.7900127Z env:
+2026-10-20T02:12:27.7900373Z   EXPECTED_HEAD: 066b7a15c29388f3444ab3cf0550ecf1df698c6d
+2026-10-20T02:12:27.7900640Z ##[endgroup]
+2026-10-20T02:12:27.8060978Z ##[group]Run curl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz' -o "$RUNNER_TEMP/m3-jdk21.tar.gz"
+2026-10-20T02:12:27.8062203Z [36;1mcurl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz' -o "$RUNNER_TEMP/m3-jdk21.tar.gz"[0m
+2026-10-20T02:12:27.8063149Z [36;1mprintf '%s  %s\n' 'ce79869e1307ed8ee1e2baa86a412b1eb5b75d10a01006d788a6f968bcfaee94' "$RUNNER_TEMP/m3-jdk21.tar.gz" | sha256sum --check -[0m
+2026-10-20T02:12:27.8063687Z [36;1mtar -xzf "$RUNNER_TEMP/m3-jdk21.tar.gz" -C "$RUNNER_TEMP"[0m
+2026-10-20T02:12:27.8064040Z [36;1mprintf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1" >> "$GITHUB_ENV"[0m
+2026-10-20T02:12:27.8064394Z [36;1mprintf '%s\n' "$RUNNER_TEMP/jdk-21.0.12.1+1/bin" >> "$GITHUB_PATH"[0m
+2026-10-20T02:12:27.8129869Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T02:12:27.8130163Z ##[endgroup]
+2026-10-20T02:12:27.8271589Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2026-10-20T02:12:27.8272178Z                                  Dload  Upload   Total   Spent    Left  Speed
+2026-10-20T02:12:27.8272479Z 
+2026-10-20T02:12:27.8613233Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-10-20T02:12:27.8613780Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-10-20T02:12:28.4464710Z 
+2026-10-20T02:12:29.1734631Z  37  197M   37 74.8M    0     0   120M      0  0:00:01 --:--:--  0:00:01  120M
+2026-10-20T02:12:29.1735146Z 100  197M  100  197M    0     0   146M      0  0:00:01  0:00:01 --:--:--  169M
+2026-10-20T02:12:29.7486323Z /home/runner/work/_temp/m3-jdk21.tar.gz: OK
+2026-10-20T02:12:32.1192274Z ##[group]Run python3 m3/collections/qualification/full-java-jni-20261018/verify.py
+2026-10-20T02:12:32.1193057Z [36;1mpython3 m3/collections/qualification/full-java-jni-20261018/verify.py[0m
+2026-10-20T02:12:32.1267212Z shell: /usr/bin/bash -e {0}
+2026-10-20T02:12:32.1267446Z env:
+2026-10-20T02:12:32.1267654Z   JAVA_HOME: /home/runner/work/_temp/jdk-21.0.12.1+1
+2026-10-20T02:12:32.1267953Z   EXPECTED_HEAD: 066b7a15c29388f3444ab3cf0550ecf1df698c6d
+2026-10-20T02:12:32.1268202Z ##[endgroup]
+2026-10-20T02:12:32.1652676Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/apiguardian-api/verify_source.py
+2026-10-20T02:12:32.1893077Z {"coordinate": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1", "exact_files": 6, "exact_production_files": 1, "sources_jar_sha256": "277a7a4315412817beb6655b324dc7276621e95ebff00b8bf65e17a27b685e2d"}
+2026-10-20T02:12:32.1931590Z + mvn -B -ntp -f /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/apiguardian-api/pom.xml -DskipTests install
+2026-10-20T02:12:35.7251295Z [INFO] Scanning for projects...
+2026-10-20T02:12:35.7671140Z [INFO] 
+2026-10-20T02:12:35.7671842Z [INFO] ------------------< org.apiguardian:apiguardian-api >-------------------
+2026-10-20T02:12:35.7672664Z [INFO] Building apiguardian-api 1.1.2 - unchanged upstream source build for M3jdk21 1.1.2-m3-source-1
+2026-10-20T02:12:35.7673354Z [INFO]   from pom.xml
+2026-10-20T02:12:35.7673933Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-20T02:12:36.9010468Z [INFO] Loaded 24145 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+2026-10-20T02:12:38.0721773Z [INFO] 
+2026-10-20T02:12:38.0722248Z [INFO] --- resources:3.5.0:resources (default-resources) @ apiguardian-api ---
+2026-10-20T02:12:38.5811469Z [INFO] Copying 1 resource from src/main/resources/META-INF to target/classes/META-INF/third-party/apiguardian-api
+2026-10-20T02:12:38.5838120Z [INFO] Copying 1 resource from src/main/resources to target/classes
+2026-10-20T02:12:38.5858758Z [INFO] Copying 2 resources from . to target/classes/META-INF/third-party/apiguardian-api
+2026-10-20T02:12:38.5859417Z [INFO] 
+2026-10-20T02:12:38.5859842Z [INFO] --- compiler:3.15.0:compile (default-compile) @ apiguardian-api ---
+2026-10-20T02:12:39.0659073Z [INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+2026-10-20T02:12:39.4601491Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:12:39.4655417Z [INFO] Compiling 1 source file with javac [debug release 8] to target/classes
+2026-10-20T02:12:39.7652392Z [INFO] 
+2026-10-20T02:12:39.7653380Z [INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ apiguardian-api ---
+2026-10-20T02:12:39.7904690Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:12:39.7910810Z [INFO] Compiling 1 source file with javac [debug release 9] to target/classes
+2026-10-20T02:12:39.8349216Z [INFO] 
+2026-10-20T02:12:39.8359196Z [INFO] --- resources:3.5.0:testResources (default-testResources) @ apiguardian-api ---
+2026-10-20T02:12:39.8379484Z [INFO] skip non existing resourceDirectory /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/apiguardian-api/src/test/resources
+2026-10-20T02:12:39.8380368Z [INFO] 
+2026-10-20T02:12:39.8382134Z [INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ apiguardian-api ---
+2026-10-20T02:12:39.8471808Z [INFO] No sources to compile
+2026-10-20T02:12:39.8501604Z [INFO] 
+2026-10-20T02:12:39.8532023Z [INFO] --- surefire:3.5.6:test (default-test) @ apiguardian-api ---
+2026-10-20T02:12:40.2562335Z [INFO] Tests are skipped.
+2026-10-20T02:12:40.2592750Z [INFO] 
+2026-10-20T02:12:40.2616279Z [INFO] --- jar:3.5.0:jar (default-jar) @ apiguardian-api ---
+2026-10-20T02:12:40.9452750Z [INFO] Building jar: /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/apiguardian-api/target/apiguardian-api-1.1.2-m3-source-1.jar
+2026-10-20T02:12:41.0202407Z [INFO] 
+2026-10-20T02:12:41.0232969Z [INFO] --- install:3.2.0:install (default-install) @ apiguardian-api ---
+2026-10-20T02:12:41.2130099Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/apiguardian-api/pom.xml to /home/runner/.m2/repository/org/apiguardian/apiguardian-api/1.1.2-m3-source-1/apiguardian-api-1.1.2-m3-source-1.pom
+2026-10-20T02:12:41.2163027Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/apiguardian-api/target/apiguardian-api-1.1.2-m3-source-1.jar to /home/runner/.m2/repository/org/apiguardian/apiguardian-api/1.1.2-m3-source-1/apiguardian-api-1.1.2-m3-source-1.jar
+2026-10-20T02:12:41.2197918Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:41.2236302Z [INFO] BUILD SUCCESS
+2026-10-20T02:12:41.2256445Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:41.2258571Z [INFO] Total time:  5.664 s
+2026-10-20T02:12:41.2258945Z [INFO] Finished at: 2026-10-20T02:12:41Z
+2026-10-20T02:12:41.2259617Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:41.3267427Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/apiguardian-api/verify_source.py /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/apiguardian-api/target/apiguardian-api-1.1.2-m3-source-1.jar
+2026-10-20T02:12:41.3494755Z {"artifact_sha256": "e14eb872d401436e108ccb6e6954adf641acb2884cce26fcfce9c90f10b1fa09", "coordinate": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1", "exact_files": 6, "exact_production_files": 1, "sources_jar_sha256": "277a7a4315412817beb6655b324dc7276621e95ebff00b8bf65e17a27b685e2d"}
+2026-10-20T02:12:41.3529934Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/opentest4j/verify_source.py
+2026-10-20T02:12:41.3752495Z {"coordinate": "org.opentest4j:opentest4j:1.3.0-m3-source-1", "exact_files": 16, "exact_production_files": 8, "sources_jar_sha256": "724a24e3a68267d5ebac9411389a15638a71e50c62448ffa58f59c34d5c1ebb2"}
+2026-10-20T02:12:41.3786756Z + mvn -B -ntp -f /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/opentest4j/pom.xml -DskipTests install
+2026-10-20T02:12:42.4564758Z [INFO] Scanning for projects...
+2026-10-20T02:12:42.5042140Z [INFO] 
+2026-10-20T02:12:42.5042808Z [INFO] ---------------------< org.opentest4j:opentest4j >----------------------
+2026-10-20T02:12:42.5044580Z [INFO] Building opentest4j 1.3.0 - unchanged upstream source build for M3jdk21 1.3.0-m3-source-1
+2026-10-20T02:12:42.5045605Z [INFO]   from pom.xml
+2026-10-20T02:12:42.5046457Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-20T02:12:42.5955201Z [INFO] Loaded 24145 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+2026-10-20T02:12:43.3116560Z [INFO] 
+2026-10-20T02:12:43.3117377Z [INFO] --- resources:3.5.0:resources (default-resources) @ opentest4j ---
+2026-10-20T02:12:43.4366442Z [INFO] Copying 2 resources from src/main/resources to target/classes
+2026-10-20T02:12:43.4392439Z [INFO] Copying 3 resources from . to target/classes/META-INF/third-party/opentest4j
+2026-10-20T02:12:43.4408115Z [INFO] 
+2026-10-20T02:12:43.4411685Z [INFO] --- compiler:3.15.0:compile (default-compile) @ opentest4j ---
+2026-10-20T02:12:43.4876903Z [INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+2026-10-20T02:12:43.9525746Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:12:43.9597768Z [INFO] Compiling 8 source files with javac [debug release 8] to target/classes
+2026-10-20T02:12:44.4432986Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/opentest4j/src/main/java/org/opentest4j/AssertionFailedError.java:[88,21] possible 'this' escape before subclass is fully initialized
+2026-10-20T02:12:44.4434124Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/opentest4j/src/main/java/org/opentest4j/AssertionFailedError.java:[110,34] previous possible 'this' escape happens here via invocation
+2026-10-20T02:12:44.4435888Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/opentest4j/src/main/java/org/opentest4j/AssertionFailedError.java:[102,21] possible 'this' escape before subclass is fully initialized
+2026-10-20T02:12:44.4437246Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/opentest4j/src/main/java/org/opentest4j/AssertionFailedError.java:[110,34] previous possible 'this' escape happens here via invocation
+2026-10-20T02:12:44.4438472Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/opentest4j/src/main/java/org/opentest4j/MultipleFailuresError.java:[40,39] non-transient instance field of a serializable class declared with a non-serializable type
+2026-10-20T02:12:44.4439520Z [INFO] 
+2026-10-20T02:12:44.4444011Z [INFO] --- resources:3.5.0:testResources (default-testResources) @ opentest4j ---
+2026-10-20T02:12:44.4512278Z [INFO] skip non existing resourceDirectory /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/opentest4j/src/test/resources
+2026-10-20T02:12:44.4518028Z [INFO] 
+2026-10-20T02:12:44.4519789Z [INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ opentest4j ---
+2026-10-20T02:12:44.4542405Z [INFO] No sources to compile
+2026-10-20T02:12:44.4543059Z [INFO] 
+2026-10-20T02:12:44.4543625Z [INFO] --- surefire:3.5.6:test (default-test) @ opentest4j ---
+2026-10-20T02:12:44.5447630Z [INFO] Tests are skipped.
+2026-10-20T02:12:44.5457358Z [INFO] 
+2026-10-20T02:12:44.5471218Z [INFO] --- jar:3.5.0:jar (default-jar) @ opentest4j ---
+2026-10-20T02:12:44.7512465Z [INFO] Building jar: /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/opentest4j/target/opentest4j-1.3.0-m3-source-1.jar
+2026-10-20T02:12:44.8000012Z [INFO] 
+2026-10-20T02:12:44.8026812Z [INFO] --- moditect:1.2.2.Final:add-module-info (add-module-info-root) @ opentest4j ---
+2026-10-20T02:12:45.0792786Z [WARNING]  Parameter 'version' is read-only, must not be used in configuration
+2026-10-20T02:12:45.2107444Z [INFO] 
+2026-10-20T02:12:45.2127678Z [INFO] --- install:3.2.0:install (default-install) @ opentest4j ---
+2026-10-20T02:12:45.2422217Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/opentest4j/pom.xml to /home/runner/.m2/repository/org/opentest4j/opentest4j/1.3.0-m3-source-1/opentest4j-1.3.0-m3-source-1.pom
+2026-10-20T02:12:45.2442881Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/opentest4j/target/opentest4j-1.3.0-m3-source-1.jar to /home/runner/.m2/repository/org/opentest4j/opentest4j/1.3.0-m3-source-1/opentest4j-1.3.0-m3-source-1.jar
+2026-10-20T02:12:45.2486030Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:45.2488739Z [INFO] BUILD SUCCESS
+2026-10-20T02:12:45.2489332Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:45.2490053Z [INFO] Total time:  2.825 s
+2026-10-20T02:12:45.2490545Z [INFO] Finished at: 2026-10-20T02:12:45Z
+2026-10-20T02:12:45.2491457Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:45.4248574Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/opentest4j/verify_source.py /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/opentest4j/target/opentest4j-1.3.0-m3-source-1.jar
+2026-10-20T02:12:45.4477144Z {"artifact_sha256": "33282d72e428f31d7a233fe0b0b36829bd3818107f1fdd23203fae7b62256846", "coordinate": "org.opentest4j:opentest4j:1.3.0-m3-source-1", "exact_files": 16, "exact_production_files": 8, "sources_jar_sha256": "724a24e3a68267d5ebac9411389a15638a71e50c62448ffa58f59c34d5c1ebb2"}
+2026-10-20T02:12:45.4511244Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/verify_source.py
+2026-10-20T02:12:45.4811280Z {"coordinate": "com.univocity:univocity-parsers:2.9.1-m3-source-1", "exact_files": 221, "exact_production_files": 216, "sources_jar_sha256": "484a48fa4a9587a47893f4a332cbe09c2902091b7a647c5d04258a46166c891b"}
+2026-10-20T02:12:45.4848150Z + mvn -B -ntp -f /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/pom.xml -DskipTests install
+2026-10-20T02:12:46.5487862Z [INFO] Scanning for projects...
+2026-10-20T02:12:46.5993840Z [INFO] 
+2026-10-20T02:12:46.5994612Z [INFO] ------------------< com.univocity:univocity-parsers >-------------------
+2026-10-20T02:12:46.5995662Z [INFO] Building univocity-parsers 2.9.1 - unchanged upstream source build for M3jdk21 2.9.1-m3-source-1
+2026-10-20T02:12:46.5996461Z [INFO]   from pom.xml
+2026-10-20T02:12:46.5997154Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-20T02:12:46.7184969Z [INFO] Loaded 24145 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+2026-10-20T02:12:46.8682097Z [INFO] 
+2026-10-20T02:12:46.8695260Z [INFO] --- resources:3.5.0:resources (default-resources) @ univocity-parsers ---
+2026-10-20T02:12:46.9934861Z [INFO] skip non existing resourceDirectory /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/resources
+2026-10-20T02:12:46.9982312Z [INFO] Copying 3 resources from . to target/classes/META-INF/third-party/univocity-parsers
+2026-10-20T02:12:47.0008663Z [INFO] 
+2026-10-20T02:12:47.0009680Z [INFO] --- compiler:3.15.0:compile (default-compile) @ univocity-parsers ---
+2026-10-20T02:12:47.0363209Z [INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+2026-10-20T02:12:47.8786770Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:12:47.8864513Z [INFO] Compiling 216 source files with javac [debug release 8] to target/classes
+2026-10-20T02:12:50.1890223Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/Copy.java:[75,9] found raw type: java.lang.Class
+2026-10-20T02:12:50.1891902Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.1893301Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/Nested.java:[38,9] found raw type: java.lang.Class
+2026-10-20T02:12:50.1899850Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.1906077Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/Validate.java:[84,25] found raw type: com.univocity.parsers.conversions.Validator
+2026-10-20T02:12:50.1907785Z   missing type arguments for generic class com.univocity.parsers.conversions.Validator<T>
+2026-10-20T02:12:50.1909376Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[93,66] found raw type: java.lang.Class
+2026-10-20T02:12:50.1910808Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.1912582Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[93,23] found raw type: com.univocity.parsers.conversions.EnumConversion
+2026-10-20T02:12:50.1914325Z   missing type arguments for generic class com.univocity.parsers.conversions.EnumConversion<T>
+2026-10-20T02:12:50.1915896Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[94,17] found raw type: java.lang.Enum
+2026-10-20T02:12:50.1917316Z   missing type arguments for generic class java.lang.Enum<E>
+2026-10-20T02:12:50.1918983Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[94,76] unchecked method invocation: method valueOf in class java.lang.Enum is applied to given types
+2026-10-20T02:12:50.1920676Z   required: java.lang.Class<T>,java.lang.String
+2026-10-20T02:12:50.1921413Z   found:    java.lang.Class,java.lang.String
+2026-10-20T02:12:50.1923027Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[94,77] unchecked conversion
+2026-10-20T02:12:50.1924330Z   required: java.lang.Class<T>
+2026-10-20T02:12:50.1924822Z   found:    java.lang.Class
+2026-10-20T02:12:50.1926225Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[95,28] found raw type: com.univocity.parsers.conversions.EnumConversion
+2026-10-20T02:12:50.1927982Z   missing type arguments for generic class com.univocity.parsers.conversions.EnumConversion<T>
+2026-10-20T02:12:50.1931027Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[95,24] unchecked call to EnumConversion(java.lang.Class<T>,T,java.lang.String,java.lang.String,com.univocity.parsers.conversions.EnumSelector...) as a member of the raw type com.univocity.parsers.conversions.EnumConversion
+2026-10-20T02:12:50.1934420Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[296,41] found raw type: java.lang.Class
+2026-10-20T02:12:50.1951742Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.1953535Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[297,45] unchecked call to isAssignableFrom(java.lang.Class<?>) as a member of the raw type java.lang.Class
+2026-10-20T02:12:50.1956354Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[301,25] found raw type: java.lang.reflect.Constructor
+2026-10-20T02:12:50.1957946Z   missing type arguments for generic class java.lang.reflect.Constructor<T>
+2026-10-20T02:12:50.1959366Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[302,59] unchecked cast
+2026-10-20T02:12:50.1960619Z   required: T
+2026-10-20T02:12:50.1961202Z   found:    java.lang.Object
+2026-10-20T02:12:50.1962459Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[726,33] found raw type: java.lang.Class
+2026-10-20T02:12:50.1963850Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.1965269Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[757,64] found raw type: java.lang.Class
+2026-10-20T02:12:50.1966664Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.1968093Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[788,65] found raw type: java.lang.Class
+2026-10-20T02:12:50.1969532Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.1971075Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[875,17] found raw type: java.lang.Class
+2026-10-20T02:12:50.1972529Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.1973925Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[961,17] found raw type: java.lang.Class
+2026-10-20T02:12:50.1975347Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.1976883Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[996,36] unchecked cast
+2026-10-20T02:12:50.1978142Z   required: A
+2026-10-20T02:12:50.1978617Z   found:    java.lang.annotation.Annotation
+2026-10-20T02:12:50.1979953Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1017,41] found raw type: java.lang.Class
+2026-10-20T02:12:50.1981458Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.1982906Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1033,41] found raw type: java.lang.Class
+2026-10-20T02:12:50.1984376Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.1986518Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1034,95] unchecked method invocation: method findAnnotationMethodType in class com.univocity.parsers.annotations.helpers.AnnotationHelper is applied to given types
+2026-10-20T02:12:50.1988812Z   required: java.lang.Class<? extends java.lang.annotation.Annotation>,java.lang.String
+2026-10-20T02:12:50.1989639Z   found:    java.lang.Class,java.lang.String
+2026-10-20T02:12:50.1991105Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1034,96] unchecked conversion
+2026-10-20T02:12:50.1992980Z   required: java.lang.Class<? extends java.lang.annotation.Annotation>
+2026-10-20T02:12:50.1995727Z   found:    java.lang.Class
+2026-10-20T02:12:50.1997673Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1044,75] unchecked method invocation: method findAnnotation in class com.univocity.parsers.annotations.helpers.AnnotationHelper is applied to given types
+2026-10-20T02:12:50.2000254Z   required: java.lang.reflect.AnnotatedElement,java.lang.Class<A>,java.util.Set<java.lang.annotation.Annotation>,java.util.Stack<java.lang.annotation.Annotation>
+2026-10-20T02:12:50.2002234Z   found:    java.lang.reflect.AnnotatedElement,java.lang.Class,java.util.HashSet<java.lang.annotation.Annotation>,java.util.Stack<java.lang.annotation.Annotation>
+2026-10-20T02:12:50.2004224Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1044,94] unchecked conversion
+2026-10-20T02:12:50.2005547Z   required: java.lang.Class<A>
+2026-10-20T02:12:50.2006052Z   found:    java.lang.Class
+2026-10-20T02:12:50.2007224Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1044,75] unchecked cast
+2026-10-20T02:12:50.2008436Z   required: A
+2026-10-20T02:12:50.2008892Z   found:    java.lang.Object
+2026-10-20T02:12:50.2010105Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1082,44] unchecked cast
+2026-10-20T02:12:50.2011464Z   required: A
+2026-10-20T02:12:50.2011950Z   found:    java.lang.annotation.Annotation
+2026-10-20T02:12:50.2013457Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1099,34] found raw type: java.lang.Class
+2026-10-20T02:12:50.2014876Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.2016276Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1099,79] found raw type: java.lang.Class
+2026-10-20T02:12:50.2017732Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.2019542Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1100,34] found raw type: java.lang.Class
+2026-10-20T02:12:50.2021122Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.2022511Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1100,77] found raw type: java.lang.Class
+2026-10-20T02:12:50.2023951Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.2025373Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1103,17] found raw type: java.lang.Class
+2026-10-20T02:12:50.2026823Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.2028298Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationHelper.java:[1154,61] found raw type: java.lang.Class
+2026-10-20T02:12:50.2029739Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.2031189Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/conversions/EnumConversion.java:[182,40] found raw type: java.util.Map
+2026-10-20T02:12:50.2032532Z   missing type arguments for generic class java.util.Map<K,V>
+2026-10-20T02:12:50.2034019Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/conversions/EnumConversion.java:[255,68] unchecked cast
+2026-10-20T02:12:50.2035203Z   required: T
+2026-10-20T02:12:50.2035637Z   found:    java.lang.Object
+2026-10-20T02:12:50.2036828Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationRegistry.java:[67,28] unchecked cast
+2026-10-20T02:12:50.2038064Z   required: T
+2026-10-20T02:12:50.2038484Z   found:    java.lang.Object
+2026-10-20T02:12:50.2039742Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationRegistry.java:[125,33] found raw type: java.lang.Class
+2026-10-20T02:12:50.2041299Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.2042703Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/AnnotationRegistry.java:[126,33] found raw type: java.lang.Class
+2026-10-20T02:12:50.2044353Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.2045858Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/FieldMapping.java:[32,23] found raw type: java.lang.Class
+2026-10-20T02:12:50.2047264Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.2048599Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/FieldMapping.java:[43,17] found raw type: java.lang.Class
+2026-10-20T02:12:50.2049940Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.2051420Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/FieldMapping.java:[67,17] found raw type: java.lang.Class
+2026-10-20T02:12:50.2052838Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.2054717Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/annotations/helpers/FieldMapping.java:[300,58] unchecked call to isAssignableFrom(java.lang.Class<?>) as a member of the raw type java.lang.Class
+2026-10-20T02:12:50.2057147Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/ArgumentUtils.java:[48,48] Possible heap pollution from parameterized vararg type T
+2026-10-20T02:12:50.2059326Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/ArgumentUtils.java:[64,47] Possible heap pollution from parameterized vararg type T
+2026-10-20T02:12:50.2061374Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/ArgumentUtils.java:[530,27] unchecked cast
+2026-10-20T02:12:50.2062500Z   required: T
+2026-10-20T02:12:50.2062927Z   found:    java.lang.Throwable
+2026-10-20T02:12:50.2064002Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/ArgumentUtils.java:[572,60] unchecked cast
+2026-10-20T02:12:50.2065129Z   required: T[]
+2026-10-20T02:12:50.2065599Z   found:    java.lang.Object
+2026-10-20T02:12:50.2067006Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[61,19] found raw type: com.univocity.parsers.common.processor.core.Processor
+2026-10-20T02:12:50.2068821Z   missing type arguments for generic class com.univocity.parsers.common.processor.core.Processor<T>
+2026-10-20T02:12:50.2070581Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[64,23] found raw type: com.univocity.parsers.common.ProcessorErrorHandler
+2026-10-20T02:12:50.2072677Z   missing type arguments for generic class com.univocity.parsers.common.ProcessorErrorHandler<T>
+2026-10-20T02:12:50.2074642Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[283,41] unchecked call to processStarted(T) as a member of the raw type com.univocity.parsers.common.processor.core.Processor
+2026-10-20T02:12:50.2077229Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[288,25] found raw type: com.univocity.parsers.common.processor.core.Processor
+2026-10-20T02:12:50.2079039Z   missing type arguments for generic class com.univocity.parsers.common.processor.core.Processor<T>
+2026-10-20T02:12:50.2081152Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[446,71] unchecked call to processEnded(T) as a member of the raw type com.univocity.parsers.common.processor.core.Processor
+2026-10-20T02:12:50.2083935Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[716,33] unchecked method invocation: method process in class com.univocity.parsers.common.Internal is applied to given types
+2026-10-20T02:12:50.2086135Z   required: java.lang.String[],com.univocity.parsers.common.processor.core.Processor<C>,C,com.univocity.parsers.common.ProcessorErrorHandler<C>
+2026-10-20T02:12:50.2088263Z   found:    java.lang.String[],com.univocity.parsers.common.processor.core.Processor,com.univocity.parsers.common.ParsingContext,com.univocity.parsers.common.ProcessorErrorHandler
+2026-10-20T02:12:50.2090470Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[716,39] unchecked conversion
+2026-10-20T02:12:50.2092063Z   required: com.univocity.parsers.common.processor.core.Processor<C>
+2026-10-20T02:12:50.2092910Z   found:    com.univocity.parsers.common.processor.core.Processor
+2026-10-20T02:12:50.2094459Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[716,59] unchecked conversion
+2026-10-20T02:12:50.2095815Z   required: com.univocity.parsers.common.ProcessorErrorHandler<C>
+2026-10-20T02:12:50.2096616Z   found:    com.univocity.parsers.common.ProcessorErrorHandler
+2026-10-20T02:12:50.2098161Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/iterators/ParserIterator.java:[32,25] found raw type: com.univocity.parsers.common.AbstractParser
+2026-10-20T02:12:50.2099840Z   missing type arguments for generic class com.univocity.parsers.common.AbstractParser<T>
+2026-10-20T02:12:50.2101620Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/iterators/ParserIterator.java:[39,34] found raw type: com.univocity.parsers.common.AbstractParser
+2026-10-20T02:12:50.2103270Z   missing type arguments for generic class com.univocity.parsers.common.AbstractParser<T>
+2026-10-20T02:12:50.2104908Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/iterators/RowIterator.java:[30,28] found raw type: com.univocity.parsers.common.AbstractParser
+2026-10-20T02:12:50.2106624Z   missing type arguments for generic class com.univocity.parsers.common.AbstractParser<T>
+2026-10-20T02:12:50.2108323Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/iterators/RecordIterator.java:[31,31] found raw type: com.univocity.parsers.common.AbstractParser
+2026-10-20T02:12:50.2110218Z   missing type arguments for generic class com.univocity.parsers.common.AbstractParser<T>
+2026-10-20T02:12:50.2111999Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractParser.java:[91,48] possible 'this' escape before subclass is fully initialized
+2026-10-20T02:12:50.2114336Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[229,44] non-varargs call of varargs method with inexact argument type for last parameter;
+2026-10-20T02:12:50.2115833Z   cast to java.lang.String for a varargs call
+2026-10-20T02:12:50.2116533Z   cast to java.lang.String[] for a non-varargs call and to suppress this warning
+2026-10-20T02:12:50.2118047Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[426,57] Possible heap pollution from parameterized vararg type T
+2026-10-20T02:12:50.2120147Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[517,72] unchecked conversion
+2026-10-20T02:12:50.2121629Z   required: com.univocity.parsers.common.ProcessorErrorHandler<T>
+2026-10-20T02:12:50.2122454Z   found:    com.univocity.parsers.common.ProcessorErrorHandler
+2026-10-20T02:12:50.2123751Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[517,111] unchecked cast
+2026-10-20T02:12:50.2125112Z   required: com.univocity.parsers.common.ProcessorErrorHandler<T>
+2026-10-20T02:12:50.2126228Z   found:    com.univocity.parsers.common.ProcessorErrorHandler<capture#1 of ? extends com.univocity.parsers.common.Context>
+2026-10-20T02:12:50.2128021Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[690,19] found raw type: com.univocity.parsers.common.CommonSettings
+2026-10-20T02:12:50.2129664Z   missing type arguments for generic class com.univocity.parsers.common.CommonSettings<F>
+2026-10-20T02:12:50.2131562Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[692,25] found raw type: com.univocity.parsers.common.CommonSettings
+2026-10-20T02:12:50.2133196Z   missing type arguments for generic class com.univocity.parsers.common.CommonSettings<F>
+2026-10-20T02:12:50.2135035Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[694,36] unchecked assignment to variable format as member of raw type com.univocity.parsers.common.CommonSettings
+2026-10-20T02:12:50.2137457Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[712,19] found raw type: com.univocity.parsers.common.CommonSettings
+2026-10-20T02:12:50.2139066Z   missing type arguments for generic class com.univocity.parsers.common.CommonSettings<F>
+2026-10-20T02:12:50.2140529Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonParserSettings.java:[183,45] unchecked conversion
+2026-10-20T02:12:50.2142047Z   required: com.univocity.parsers.common.processor.core.Processor<T>
+2026-10-20T02:12:50.2142871Z   found:    com.univocity.parsers.common.processor.core.Processor
+2026-10-20T02:12:50.2144238Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonParserSettings.java:[185,39] unchecked cast
+2026-10-20T02:12:50.2145586Z   required: com.univocity.parsers.common.processor.core.Processor<T>
+2026-10-20T02:12:50.2146719Z   found:    com.univocity.parsers.common.processor.core.Processor<capture#2 of ? extends com.univocity.parsers.common.Context>
+2026-10-20T02:12:50.2148850Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonParserSettings.java:[421,25] found raw type: java.lang.Class
+2026-10-20T02:12:50.2150331Z   missing type arguments for generic class java.lang.Class<T>
+2026-10-20T02:12:50.2152094Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonParserSettings.java:[472,19] found raw type: com.univocity.parsers.common.CommonParserSettings
+2026-10-20T02:12:50.2153904Z   missing type arguments for generic class com.univocity.parsers.common.CommonParserSettings<F>
+2026-10-20T02:12:50.2155652Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonParserSettings.java:[477,19] found raw type: com.univocity.parsers.common.CommonParserSettings
+2026-10-20T02:12:50.2157414Z   missing type arguments for generic class com.univocity.parsers.common.CommonParserSettings<F>
+2026-10-20T02:12:50.2159074Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/CommonSettings.java:[86,26] possible 'this' escape before subclass is fully initialized
+2026-10-20T02:12:50.2161360Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/ParserOutput.java:[126,42] possible 'this' escape before subclass is fully initialized
+2026-10-20T02:12:50.2163589Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/TextParsingException.java:[43,27] possible 'this' escape before subclass is fully initialized
+2026-10-20T02:12:50.2165796Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/record/Record.java:[1222,63] Possible heap pollution from parameterized vararg type T
+2026-10-20T02:12:50.2167928Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/record/Record.java:[1253,71] Possible heap pollution from parameterized vararg type T
+2026-10-20T02:12:50.2170226Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/record/Record.java:[1288,69] Possible heap pollution from parameterized vararg type T
+2026-10-20T02:12:50.2172457Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/record/Record.java:[1325,77] Possible heap pollution from parameterized vararg type T
+2026-10-20T02:12:50.2174945Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[74,37] Possible heap pollution from parameterized vararg type T
+2026-10-20T02:12:50.2177078Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[88,37] Possible heap pollution from parameterized vararg type T
+2026-10-20T02:12:50.2179199Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[140,40] Possible heap pollution from parameterized vararg type T
+2026-10-20T02:12:50.2181472Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[178,25] found raw type: com.univocity.parsers.common.fields.FieldSet
+2026-10-20T02:12:50.2183168Z   missing type arguments for generic class com.univocity.parsers.common.fields.FieldSet<T>
+2026-10-20T02:12:50.2185007Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[179,28] unchecked assignment to variable fields as member of raw type com.univocity.parsers.common.fields.FieldSet
+2026-10-20T02:12:50.2187909Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[182,36] unchecked assignment to variable wrappedFieldSets as member of raw type com.univocity.parsers.common.fields.FieldSet
+2026-10-20T02:12:50.2190385Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[184,65] unchecked call to add(E) as a member of the raw type java.util.List
+2026-10-20T02:12:50.2192554Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[187,32] unchecked conversion
+2026-10-20T02:12:50.2193820Z   required: com.univocity.parsers.common.fields.FieldSet<T>
+2026-10-20T02:12:50.2194540Z   found:    com.univocity.parsers.common.fields.FieldSet
+2026-10-20T02:12:50.2196030Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/fields/FieldSet.java:[56,52] possible 'this' escape before subclass is fully initialized
+2026-10-20T02:12:50.2224983Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/DataProcessingException.java:[268,41] found raw type: com.univocity.parsers.common.ProcessorErrorHandler
+2026-10-20T02:12:50.2226451Z   missing type arguments for generic class com.univocity.parsers.common.ProcessorErrorHandler<T>
+2026-10-20T02:12:50.2228242Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/DataProcessingException.java:[35,26] non-transient instance field of a serializable class declared with an array having a non-serializable base component type java.lang.Object
+2026-10-20T02:12:50.2231127Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/DataProcessingException.java:[36,24] non-transient instance field of a serializable class declared with a non-serializable type
+2026-10-20T02:12:50.2234080Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/DataProcessingException.java:[37,37] non-transient instance field of a serializable class declared with a non-serializable type
+2026-10-20T02:12:50.2236860Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java:[1773,40] unchecked method invocation: method writeRowToString in class com.univocity.parsers.common.AbstractWriter is applied to given types
+2026-10-20T02:12:50.2238733Z   required: java.util.Map<K,java.lang.String>,java.util.Map<K,?>
+2026-10-20T02:12:50.2239394Z   found:    <nulltype>,java.util.Map
+2026-10-20T02:12:50.2240544Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java:[1773,47] unchecked conversion
+2026-10-20T02:12:50.2241906Z   required: java.util.Map<K,?>
+2026-10-20T02:12:50.2242397Z   found:    java.util.Map
+2026-10-20T02:12:50.2244061Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java:[1784,25] unchecked method invocation: method writeRow in class com.univocity.parsers.common.AbstractWriter is applied to given types
+2026-10-20T02:12:50.2245868Z   required: java.util.Map<K,java.lang.String>,java.util.Map<K,?>
+2026-10-20T02:12:50.2246511Z   found:    <nulltype>,java.util.Map
+2026-10-20T02:12:50.2247659Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java:[1784,32] unchecked conversion
+2026-10-20T02:12:50.2249090Z   required: java.util.Map<K,?>
+2026-10-20T02:12:50.2249570Z   found:    java.util.Map
+2026-10-20T02:12:50.2250750Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java:[1920,25] found raw type: java.util.Iterator
+2026-10-20T02:12:50.2252268Z   missing type arguments for generic class java.util.Iterator<E>
+2026-10-20T02:12:50.2253614Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java:[1920,52] found raw type: java.util.Iterator
+2026-10-20T02:12:50.2254989Z   missing type arguments for generic class java.util.Iterator<E>
+2026-10-20T02:12:50.2256855Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java:[1960,70] unchecked method invocation: method processRecord in class com.univocity.parsers.common.AbstractWriter is applied to given types
+2026-10-20T02:12:50.2258738Z   required: java.util.Map<K,java.lang.String>,java.util.Map<K,?>
+2026-10-20T02:12:50.2259391Z   found:    java.util.Map,java.util.Map
+2026-10-20T02:12:50.2260766Z [INFO] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/routine/AbstractRoutines.java: Some input files additionally use or override a deprecated API.
+2026-10-20T02:12:50.2262995Z [INFO] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/main/java/com/univocity/parsers/common/AbstractWriter.java: Some input files additionally use unchecked or unsafe operations.
+2026-10-20T02:12:50.2264216Z [INFO] 
+2026-10-20T02:12:50.2264797Z [INFO] --- resources:3.5.0:testResources (default-testResources) @ univocity-parsers ---
+2026-10-20T02:12:50.2265883Z [INFO] skip non existing resourceDirectory /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/src/test/resources
+2026-10-20T02:12:50.2266790Z [INFO] 
+2026-10-20T02:12:50.2267438Z [INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ univocity-parsers ---
+2026-10-20T02:12:50.2268172Z [INFO] No sources to compile
+2026-10-20T02:12:50.2268598Z [INFO] 
+2026-10-20T02:12:50.2269122Z [INFO] --- surefire:3.5.6:test (default-test) @ univocity-parsers ---
+2026-10-20T02:12:50.3398395Z [INFO] Tests are skipped.
+2026-10-20T02:12:50.3401407Z [INFO] 
+2026-10-20T02:12:50.3402190Z [INFO] --- jar:3.5.0:jar (default-jar) @ univocity-parsers ---
+2026-10-20T02:12:50.5813029Z [INFO] Building jar: /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/target/univocity-parsers-2.9.1-m3-source-1.jar
+2026-10-20T02:12:50.6435878Z [INFO] 
+2026-10-20T02:12:50.6442157Z [INFO] --- install:3.2.0:install (default-install) @ univocity-parsers ---
+2026-10-20T02:12:50.6793095Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/pom.xml to /home/runner/.m2/repository/com/univocity/univocity-parsers/2.9.1-m3-source-1/univocity-parsers-2.9.1-m3-source-1.pom
+2026-10-20T02:12:50.6795608Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/target/univocity-parsers-2.9.1-m3-source-1.jar to /home/runner/.m2/repository/com/univocity/univocity-parsers/2.9.1-m3-source-1/univocity-parsers-2.9.1-m3-source-1.jar
+2026-10-20T02:12:50.6844183Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:50.6844829Z [INFO] BUILD SUCCESS
+2026-10-20T02:12:50.6845410Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:50.6847531Z [INFO] Total time:  4.167 s
+2026-10-20T02:12:50.6849102Z [INFO] Finished at: 2026-10-20T02:12:50Z
+2026-10-20T02:12:50.6849775Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:50.7218899Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/verify_source.py /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/univocity-parsers/target/univocity-parsers-2.9.1-m3-source-1.jar
+2026-10-20T02:12:50.7546089Z {"artifact_sha256": "4312222550ec99e6366f5da67bb1c6fb689d70390a16334f9f743e4708bb0fa1", "coordinate": "com.univocity:univocity-parsers:2.9.1-m3-source-1", "exact_files": 221, "exact_production_files": 216, "sources_jar_sha256": "484a48fa4a9587a47893f4a332cbe09c2902091b7a647c5d04258a46166c891b"}
+2026-10-20T02:12:50.7597302Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/verify_source.py
+2026-10-20T02:12:50.7841554Z {"coordinate": "org.junit.platform:junit-platform-commons:1.10.2-m3-source-1", "exact_files": 50, "exact_production_files": 41, "sources_jar_sha256": "e1435cf8f4843619a16c2c1393d39a5170db1376af048a76cdcd7bf9aad72ad6"}
+2026-10-20T02:12:50.7882028Z + mvn -B -ntp -f /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/pom.xml -DskipTests install
+2026-10-20T02:12:51.8387836Z [INFO] Scanning for projects...
+2026-10-20T02:12:51.8836502Z [INFO] 
+2026-10-20T02:12:51.8837088Z [INFO] -------------< org.junit.platform:junit-platform-commons >--------------
+2026-10-20T02:12:51.8838408Z [INFO] Building junit-platform-commons 1.10.2 - unchanged upstream source build for M3jdk21 1.10.2-m3-source-1
+2026-10-20T02:12:51.8839100Z [INFO]   from pom.xml
+2026-10-20T02:12:51.8839681Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-20T02:12:52.0043351Z [INFO] Loaded 24145 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+2026-10-20T02:12:52.1664396Z [INFO] 
+2026-10-20T02:12:52.1665094Z [INFO] --- resources:3.5.0:resources (default-resources) @ junit-platform-commons ---
+2026-10-20T02:12:52.2922279Z [INFO] Copying 2 resources from src/main/resources to target/classes
+2026-10-20T02:12:52.2945023Z [INFO] Copying 3 resources from . to target/classes/META-INF/third-party/junit-platform-commons-1.10.2
+2026-10-20T02:12:52.2960204Z [INFO] 
+2026-10-20T02:12:52.2969516Z [INFO] --- compiler:3.15.0:compile (default-compile) @ junit-platform-commons ---
+2026-10-20T02:12:52.3247281Z [INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+2026-10-20T02:12:53.1128278Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:12:53.1188701Z [INFO] Compiling 41 source files with javac [debug release 8] to target/classes
+2026-10-20T02:12:54.3234512Z [INFO] 
+2026-10-20T02:12:54.3304568Z [INFO] --- compiler:3.15.0:compile (multi-release-9) @ junit-platform-commons ---
+2026-10-20T02:12:54.3313389Z [INFO] Recompiling the module because of changed dependency.
+2026-10-20T02:12:54.3342366Z [INFO] Compiling 1 source file with javac [debug release 9] to target/classes/META-INF/versions/9
+2026-10-20T02:12:54.4342920Z [INFO] 
+2026-10-20T02:12:54.4344002Z [INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ junit-platform-commons ---
+2026-10-20T02:12:54.4682184Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:12:54.4683354Z [INFO] Compiling 1 source file with javac [debug release 9 module-path] to target/classes
+2026-10-20T02:12:54.5232765Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[25,42] module not found: org.junit.jupiter.api
+2026-10-20T02:12:54.5242175Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[26,42] module not found: org.junit.jupiter.engine
+2026-10-20T02:12:54.5244023Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[27,42] module not found: org.junit.jupiter.migrationsupport
+2026-10-20T02:12:54.5245888Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[28,42] module not found: org.junit.jupiter.params
+2026-10-20T02:12:54.5247934Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[29,43] module not found: org.junit.platform.console
+2026-10-20T02:12:54.5249588Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[30,43] module not found: org.junit.platform.engine
+2026-10-20T02:12:54.5251280Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[31,43] module not found: org.junit.platform.launcher
+2026-10-20T02:12:54.5252924Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[32,43] module not found: org.junit.platform.reporting
+2026-10-20T02:12:54.5254516Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[33,43] module not found: org.junit.platform.runner
+2026-10-20T02:12:54.5256207Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[34,49] module not found: org.junit.platform.suite.api
+2026-10-20T02:12:54.5257868Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[35,49] module not found: org.junit.platform.suite.engine
+2026-10-20T02:12:54.5259512Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[36,43] module not found: org.junit.platform.testkit
+2026-10-20T02:12:54.5261322Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[37,42] module not found: org.junit.vintage.engine
+2026-10-20T02:12:54.5262991Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[40,42] module not found: org.junit.jupiter.api
+2026-10-20T02:12:54.5264659Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[41,42] module not found: org.junit.jupiter.engine
+2026-10-20T02:12:54.5266660Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[42,42] module not found: org.junit.jupiter.migrationsupport
+2026-10-20T02:12:54.5268438Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[43,42] module not found: org.junit.jupiter.params
+2026-10-20T02:12:54.5270119Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[44,43] module not found: org.junit.platform.console
+2026-10-20T02:12:54.5302268Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[45,43] module not found: org.junit.platform.engine
+2026-10-20T02:12:54.5304041Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[46,43] module not found: org.junit.platform.launcher
+2026-10-20T02:12:54.5305846Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[47,43] module not found: org.junit.platform.reporting
+2026-10-20T02:12:54.5307641Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[48,43] module not found: org.junit.platform.runner
+2026-10-20T02:12:54.5309425Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[49,49] module not found: org.junit.platform.suite.api
+2026-10-20T02:12:54.5311589Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[50,49] module not found: org.junit.platform.suite.commons
+2026-10-20T02:12:54.5313342Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[51,49] module not found: org.junit.platform.suite.engine
+2026-10-20T02:12:54.5315096Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[52,43] module not found: org.junit.platform.testkit
+2026-10-20T02:12:54.5316775Z [WARNING] /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/main/descriptor/root/module-info.java:[53,42] module not found: org.junit.vintage.engine
+2026-10-20T02:12:54.5317778Z [INFO] 
+2026-10-20T02:12:54.5318286Z [INFO] --- resources:3.5.0:testResources (default-testResources) @ junit-platform-commons ---
+2026-10-20T02:12:54.5319400Z [INFO] skip non existing resourceDirectory /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/src/test/resources
+2026-10-20T02:12:54.5320247Z [INFO] 
+2026-10-20T02:12:54.5320717Z [INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-platform-commons ---
+2026-10-20T02:12:54.5321442Z [INFO] No sources to compile
+2026-10-20T02:12:54.5321746Z [INFO] 
+2026-10-20T02:12:54.5322128Z [INFO] --- surefire:3.5.6:test (default-test) @ junit-platform-commons ---
+2026-10-20T02:12:54.6216627Z [INFO] Tests are skipped.
+2026-10-20T02:12:54.6241863Z [INFO] 
+2026-10-20T02:12:54.6271953Z [INFO] --- jar:3.5.0:jar (default-jar) @ junit-platform-commons ---
+2026-10-20T02:12:54.8312664Z [INFO] Building jar: /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/target/junit-platform-commons-1.10.2-m3-source-1.jar
+2026-10-20T02:12:54.9142233Z [INFO] 
+2026-10-20T02:12:54.9143571Z [INFO] --- install:3.2.0:install (default-install) @ junit-platform-commons ---
+2026-10-20T02:12:54.9470301Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/pom.xml to /home/runner/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2-m3-source-1/junit-platform-commons-1.10.2-m3-source-1.pom
+2026-10-20T02:12:54.9511266Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/target/junit-platform-commons-1.10.2-m3-source-1.jar to /home/runner/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2-m3-source-1/junit-platform-commons-1.10.2-m3-source-1.jar
+2026-10-20T02:12:54.9545542Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:54.9546265Z [INFO] BUILD SUCCESS
+2026-10-20T02:12:54.9546893Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:54.9548506Z [INFO] Total time:  3.148 s
+2026-10-20T02:12:54.9550113Z [INFO] Finished at: 2026-10-20T02:12:54Z
+2026-10-20T02:12:54.9552877Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:54.9951105Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/verify_source.py /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-commons-1.10.2/target/junit-platform-commons-1.10.2-m3-source-1.jar
+2026-10-20T02:12:55.0192859Z {"artifact_sha256": "b70b79847873054d6de2cedfdbecd6b2e202f044429b4757317d97aae9c260eb", "coordinate": "org.junit.platform:junit-platform-commons:1.10.2-m3-source-1", "exact_files": 50, "exact_production_files": 41, "sources_jar_sha256": "e1435cf8f4843619a16c2c1393d39a5170db1376af048a76cdcd7bf9aad72ad6"}
+2026-10-20T02:12:55.0228385Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py
+2026-10-20T02:12:55.0473692Z {"coordinate": "org.junit.platform:junit-platform-engine:1.10.2-m3-source-1", "exact_files": 104, "exact_production_files": 97, "sources_jar_sha256": "17ac74964fcd82c57130623afe72a99105ca107fc96cb53f169b3a8c9c444c83"}
+2026-10-20T02:12:55.0508595Z + mvn -B -ntp -f /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/pom.xml -DskipTests install
+2026-10-20T02:12:56.0938108Z [INFO] Scanning for projects...
+2026-10-20T02:12:56.1403234Z [INFO] 
+2026-10-20T02:12:56.1403943Z [INFO] --------------< org.junit.platform:junit-platform-engine >--------------
+2026-10-20T02:12:56.1405925Z [INFO] Building junit-platform-engine 1.10.2 - unchanged upstream source build for M3jdk21 1.10.2-m3-source-1
+2026-10-20T02:12:56.1406602Z [INFO]   from pom.xml
+2026-10-20T02:12:56.1407351Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-20T02:12:56.2633423Z [INFO] Loaded 24145 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+2026-10-20T02:12:56.4330032Z [INFO] 
+2026-10-20T02:12:56.4358196Z [INFO] --- resources:3.5.0:resources (default-resources) @ junit-platform-engine ---
+2026-10-20T02:12:56.5412594Z [INFO] Copying 2 resources from src/main/resources to target/classes
+2026-10-20T02:12:56.5442469Z [INFO] Copying 3 resources from . to target/classes/META-INF/third-party/junit-platform-engine-1.10.2
+2026-10-20T02:12:56.5471698Z [INFO] 
+2026-10-20T02:12:56.5472281Z [INFO] --- compiler:3.15.0:compile (default-compile) @ junit-platform-engine ---
+2026-10-20T02:12:56.5692387Z [INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+2026-10-20T02:12:57.5278463Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:12:57.5334679Z [INFO] Compiling 97 source files with javac [debug release 8] to target/classes
+2026-10-20T02:12:59.0709592Z [INFO] 
+2026-10-20T02:12:59.0716253Z [INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ junit-platform-engine ---
+2026-10-20T02:12:59.1044875Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:12:59.1079412Z [INFO] Compiling 1 source file with javac [debug release 9 module-path] to target/classes
+2026-10-20T02:12:59.1973091Z [INFO] 
+2026-10-20T02:12:59.1974067Z [INFO] --- resources:3.5.0:testResources (default-testResources) @ junit-platform-engine ---
+2026-10-20T02:12:59.2037888Z [INFO] skip non existing resourceDirectory /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/src/test/resources
+2026-10-20T02:12:59.2041977Z [INFO] 
+2026-10-20T02:12:59.2042681Z [INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-platform-engine ---
+2026-10-20T02:12:59.2086228Z [INFO] No sources to compile
+2026-10-20T02:12:59.2111255Z [INFO] 
+2026-10-20T02:12:59.2111841Z [INFO] --- surefire:3.5.6:test (default-test) @ junit-platform-engine ---
+2026-10-20T02:12:59.3169044Z [INFO] Tests are skipped.
+2026-10-20T02:12:59.3170381Z [INFO] 
+2026-10-20T02:12:59.3171197Z [INFO] --- jar:3.5.0:jar (default-jar) @ junit-platform-engine ---
+2026-10-20T02:12:59.5692581Z [INFO] Building jar: /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/target/junit-platform-engine-1.10.2-m3-source-1.jar
+2026-10-20T02:12:59.7428192Z [INFO] 
+2026-10-20T02:12:59.7428794Z [INFO] --- install:3.2.0:install (default-install) @ junit-platform-engine ---
+2026-10-20T02:12:59.8101846Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/pom.xml to /home/runner/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2-m3-source-1/junit-platform-engine-1.10.2-m3-source-1.pom
+2026-10-20T02:12:59.8139548Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/target/junit-platform-engine-1.10.2-m3-source-1.jar to /home/runner/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2-m3-source-1/junit-platform-engine-1.10.2-m3-source-1.jar
+2026-10-20T02:12:59.8264151Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:59.8275795Z [INFO] BUILD SUCCESS
+2026-10-20T02:12:59.8277626Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:59.8278340Z [INFO] Total time:  3.771 s
+2026-10-20T02:12:59.8278797Z [INFO] Finished at: 2026-10-20T02:12:59Z
+2026-10-20T02:12:59.8279370Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:12:59.9959325Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-platform-engine-1.10.2/target/junit-platform-engine-1.10.2-m3-source-1.jar
+2026-10-20T02:13:00.0229348Z {"artifact_sha256": "211dc7db8f0f3063dc2360c65a6f8184c07fea09446a74cf3859af4ff8e70b77", "coordinate": "org.junit.platform:junit-platform-engine:1.10.2-m3-source-1", "exact_files": 104, "exact_production_files": 97, "sources_jar_sha256": "17ac74964fcd82c57130623afe72a99105ca107fc96cb53f169b3a8c9c444c83"}
+2026-10-20T02:13:00.0268672Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/verify_source.py
+2026-10-20T02:13:00.0541172Z {"coordinate": "org.junit.jupiter:junit-jupiter-api:5.10.2-m3-source-1", "exact_files": 157, "exact_production_files": 148, "sources_jar_sha256": "551e054c2e84b79d087f0410c8e6e3dd3e83ae54129593380d48550da441b5ef"}
+2026-10-20T02:13:00.0579585Z + mvn -B -ntp -f /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/pom.xml -DskipTests install
+2026-10-20T02:13:01.1668671Z [INFO] Scanning for projects...
+2026-10-20T02:13:01.2212151Z [INFO] 
+2026-10-20T02:13:01.2218259Z [INFO] ----------------< org.junit.jupiter:junit-jupiter-api >-----------------
+2026-10-20T02:13:01.2218793Z [INFO] Building junit-jupiter-api 5.10.2 - unchanged upstream source build for M3jdk21 5.10.2-m3-source-1
+2026-10-20T02:13:01.2219186Z [INFO]   from pom.xml
+2026-10-20T02:13:01.2219442Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-20T02:13:01.3511529Z [INFO] Loaded 24145 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+2026-10-20T02:13:02.3499670Z [INFO] 
+2026-10-20T02:13:02.3500177Z [INFO] --- kotlin:1.8.22:compile (kotlin-compile) @ junit-jupiter-api ---
+2026-10-20T02:13:02.4784902Z [INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+2026-10-20T02:13:03.1801555Z [INFO] Loaded 74 auto-discovered prefixes for remote repository apache-snapshots (prefixes-apache-snapshots.txt)
+2026-10-20T02:13:07.6439857Z [WARNING] Language version 1.3 is deprecated and its support will be removed in a future version of Kotlin
+2026-10-20T02:13:07.6444496Z [INFO] 
+2026-10-20T02:13:07.6445892Z [INFO] --- resources:3.5.0:resources (default-resources) @ junit-jupiter-api ---
+2026-10-20T02:13:07.7111973Z [INFO] Copying 3 resources from src/main/resources to target/classes
+2026-10-20T02:13:07.7141939Z [INFO] Copying 3 resources from . to target/classes/META-INF/third-party/junit-jupiter-api-5.10.2
+2026-10-20T02:13:07.7149488Z [INFO] 
+2026-10-20T02:13:07.7150425Z [INFO] --- compiler:3.15.0:compile (default-compile) @ junit-jupiter-api ---
+2026-10-20T02:13:07.8093941Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:13:07.8149821Z [INFO] Compiling 148 source files with javac [debug release 8] to target/classes
+2026-10-20T02:13:09.3267817Z [INFO] 
+2026-10-20T02:13:09.3268643Z [INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ junit-jupiter-api ---
+2026-10-20T02:13:09.3672135Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:13:09.3702542Z [INFO] Compiling 1 source file with javac [debug release 9 module-path] to target/classes
+2026-10-20T02:13:09.4392208Z [INFO] 
+2026-10-20T02:13:09.4410275Z [INFO] --- resources:3.5.0:testResources (default-testResources) @ junit-jupiter-api ---
+2026-10-20T02:13:09.4472145Z [INFO] skip non existing resourceDirectory /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/src/test/resources
+2026-10-20T02:13:09.4501374Z [INFO] 
+2026-10-20T02:13:09.4531587Z [INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-jupiter-api ---
+2026-10-20T02:13:09.4564182Z [INFO] No sources to compile
+2026-10-20T02:13:09.4591442Z [INFO] 
+2026-10-20T02:13:09.4665177Z [INFO] --- surefire:3.5.6:test (default-test) @ junit-jupiter-api ---
+2026-10-20T02:13:09.5732078Z [INFO] Tests are skipped.
+2026-10-20T02:13:09.5791737Z [INFO] 
+2026-10-20T02:13:09.5792181Z [INFO] --- jar:3.5.0:jar (default-jar) @ junit-jupiter-api ---
+2026-10-20T02:13:09.7972668Z [INFO] Building jar: /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/target/junit-jupiter-api-5.10.2-m3-source-1.jar
+2026-10-20T02:13:09.9042590Z [INFO] 
+2026-10-20T02:13:09.9043217Z [INFO] --- install:3.2.0:install (default-install) @ junit-jupiter-api ---
+2026-10-20T02:13:09.9348865Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/pom.xml to /home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2-m3-source-1/junit-jupiter-api-5.10.2-m3-source-1.pom
+2026-10-20T02:13:09.9359232Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/target/junit-jupiter-api-5.10.2-m3-source-1.jar to /home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2-m3-source-1/junit-jupiter-api-5.10.2-m3-source-1.jar
+2026-10-20T02:13:09.9432125Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:09.9434575Z [INFO] BUILD SUCCESS
+2026-10-20T02:13:09.9448231Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:09.9457320Z [INFO] Total time:  8.806 s
+2026-10-20T02:13:09.9457847Z [INFO] Finished at: 2026-10-20T02:13:09Z
+2026-10-20T02:13:09.9458463Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:09.9870466Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/verify_source.py /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-api-5.10.2/target/junit-jupiter-api-5.10.2-m3-source-1.jar
+2026-10-20T02:13:10.0162968Z {"artifact_sha256": "c01652b67d7df5ffd6e77a90e9dff9a0ca6935db6cfabe4777bc714d3ef6e58e", "coordinate": "org.junit.jupiter:junit-jupiter-api:5.10.2-m3-source-1", "exact_files": 157, "exact_production_files": 148, "sources_jar_sha256": "551e054c2e84b79d087f0410c8e6e3dd3e83ae54129593380d48550da441b5ef"}
+2026-10-20T02:13:10.0203158Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/verify_source.py
+2026-10-20T02:13:10.0445260Z {"coordinate": "org.junit.jupiter:junit-jupiter-params:5.10.2-m3-source-1", "exact_files": 70, "exact_production_files": 60, "sources_jar_sha256": "532dce2ef436152405567ea75f076dc908c4d21641224ecc53913c9f09bfb131"}
+2026-10-20T02:13:10.0480454Z + mvn -B -ntp -f /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/pom.xml -DskipTests install
+2026-10-20T02:13:11.1125356Z [INFO] Scanning for projects...
+2026-10-20T02:13:11.1584422Z [INFO] 
+2026-10-20T02:13:11.1585221Z [INFO] ---------------< org.junit.jupiter:junit-jupiter-params >---------------
+2026-10-20T02:13:11.1586289Z [INFO] Building junit-jupiter-params 5.10.2 - unchanged upstream source build for M3jdk21 5.10.2-m3-source-1
+2026-10-20T02:13:11.1587059Z [INFO]   from pom.xml
+2026-10-20T02:13:11.1587895Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-20T02:13:11.2487805Z [INFO] Loaded 24145 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+2026-10-20T02:13:11.8507010Z [INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+2026-10-20T02:13:12.3912025Z [INFO] 
+2026-10-20T02:13:12.3912599Z [INFO] --- kotlin:1.8.22:compile (kotlin-compile) @ junit-jupiter-params ---
+2026-10-20T02:13:12.4236923Z [INFO] Loaded 74 auto-discovered prefixes for remote repository apache-snapshots (prefixes-apache-snapshots.txt)
+2026-10-20T02:13:15.4347990Z [WARNING] Language version 1.3 is deprecated and its support will be removed in a future version of Kotlin
+2026-10-20T02:13:15.4353609Z [INFO] 
+2026-10-20T02:13:15.4354831Z [INFO] --- resources:3.5.0:resources (default-resources) @ junit-jupiter-params ---
+2026-10-20T02:13:15.5143225Z [INFO] Copying 4 resources from src/main/resources to target/classes
+2026-10-20T02:13:15.5177003Z [INFO] Copying 3 resources from . to target/classes/META-INF/third-party/junit-jupiter-params-5.10.2
+2026-10-20T02:13:15.5193650Z [INFO] 
+2026-10-20T02:13:15.5194138Z [INFO] --- compiler:3.15.0:compile (default-compile) @ junit-jupiter-params ---
+2026-10-20T02:13:15.6164218Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:13:15.6224150Z [INFO] Compiling 60 source files with javac [debug release 8] to target/classes
+2026-10-20T02:13:16.6944959Z [INFO] 
+2026-10-20T02:13:16.6946022Z [INFO] --- resources:3.5.0:testResources (default-testResources) @ junit-jupiter-params ---
+2026-10-20T02:13:16.6999208Z [INFO] skip non existing resourceDirectory /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/src/test/resources
+2026-10-20T02:13:16.7000482Z [INFO] 
+2026-10-20T02:13:16.7001325Z [INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-jupiter-params ---
+2026-10-20T02:13:16.7039538Z [INFO] No sources to compile
+2026-10-20T02:13:16.7042641Z [INFO] 
+2026-10-20T02:13:16.7043317Z [INFO] --- surefire:3.5.6:test (default-test) @ junit-jupiter-params ---
+2026-10-20T02:13:16.8035616Z [INFO] Tests are skipped.
+2026-10-20T02:13:16.8066086Z [INFO] 
+2026-10-20T02:13:16.8075125Z [INFO] --- jar:3.5.0:jar (default-jar) @ junit-jupiter-params ---
+2026-10-20T02:13:17.0202442Z [INFO] Building jar: /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1.jar
+2026-10-20T02:13:17.0780382Z [INFO] 
+2026-10-20T02:13:17.0802923Z [INFO] --- shade:3.6.0:shade (default) @ junit-jupiter-params ---
+2026-10-20T02:13:17.5689048Z [INFO] Loaded 50 auto-discovered prefixes for remote repository ow2-snapshot (prefixes-ow2-snapshot.txt)
+2026-10-20T02:13:18.1520779Z [INFO] Including com.univocity:univocity-parsers:jar:2.9.1-m3-source-1 in the shaded jar.
+2026-10-20T02:13:18.1521850Z [INFO] Excluding org.apiguardian:apiguardian-api:jar:1.1.2-m3-source-1 from the shaded jar.
+2026-10-20T02:13:18.1523084Z [INFO] Excluding org.junit.jupiter:junit-jupiter-api:jar:5.10.2-m3-source-1 from the shaded jar.
+2026-10-20T02:13:18.1523951Z [INFO] Excluding org.opentest4j:opentest4j:jar:1.3.0-m3-source-1 from the shaded jar.
+2026-10-20T02:13:18.1524770Z [INFO] Excluding org.junit.platform:junit-platform-commons:jar:1.10.2-m3-source-1 from the shaded jar.
+2026-10-20T02:13:18.1525942Z [INFO] Dependency-reduced POM written at: /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/dependency-reduced-pom.xml
+2026-10-20T02:13:18.4763570Z [WARNING] junit-jupiter-params-5.10.2-m3-source-1.jar, univocity-parsers-2.9.1-m3-source-1.jar define 1 overlapping resource: 
+2026-10-20T02:13:18.4802259Z [WARNING]   - META-INF/MANIFEST.MF
+2026-10-20T02:13:18.4834348Z [WARNING] maven-shade-plugin has detected that some files are
+2026-10-20T02:13:18.4881950Z [WARNING] present in two or more JARs. When this happens, only one
+2026-10-20T02:13:18.4895661Z [WARNING] single version of the file is copied to the uber jar.
+2026-10-20T02:13:18.4921901Z [WARNING] Usually this is not harmful and you can skip these warnings,
+2026-10-20T02:13:18.4922422Z [WARNING] otherwise try to manually exclude artifacts based on
+2026-10-20T02:13:18.4922886Z [WARNING] mvn dependency:tree -Ddetail=true and the above output.
+2026-10-20T02:13:18.4923453Z [WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+2026-10-20T02:13:18.4923958Z [INFO] Replacing original artifact with shaded artifact.
+2026-10-20T02:13:18.4925451Z [INFO] Replacing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1.jar with /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1-shaded.jar
+2026-10-20T02:13:18.4927475Z [INFO] 
+2026-10-20T02:13:18.4927971Z [INFO] --- moditect:1.2.2.Final:add-module-info (add-module-info-root) @ junit-jupiter-params ---
+2026-10-20T02:13:18.5048794Z [WARNING]  Parameter 'version' is read-only, must not be used in configuration
+2026-10-20T02:13:18.7758810Z [INFO] 
+2026-10-20T02:13:18.7759318Z [INFO] --- install:3.2.0:install (default-install) @ junit-jupiter-params ---
+2026-10-20T02:13:18.8037999Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/dependency-reduced-pom.xml to /home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2-m3-source-1/junit-jupiter-params-5.10.2-m3-source-1.pom
+2026-10-20T02:13:18.8045040Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1.jar to /home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2-m3-source-1/junit-jupiter-params-5.10.2-m3-source-1.jar
+2026-10-20T02:13:18.8091171Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:18.8097944Z [INFO] BUILD SUCCESS
+2026-10-20T02:13:18.8103551Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:18.8105003Z [INFO] Total time:  7.729 s
+2026-10-20T02:13:18.8105309Z [INFO] Finished at: 2026-10-20T02:13:18Z
+2026-10-20T02:13:18.8105724Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:18.8442372Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/verify_source.py /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1.jar
+2026-10-20T02:13:18.8710046Z {"artifact_sha256": "c9c7116abf8696ca3745bf93ca718b9f2b5fb3a88473928375b0ed001e90db28", "coordinate": "org.junit.jupiter:junit-jupiter-params:5.10.2-m3-source-1", "exact_files": 70, "exact_production_files": 60, "sources_jar_sha256": "532dce2ef436152405567ea75f076dc908c4d21641224ecc53913c9f09bfb131"}
+2026-10-20T02:13:18.8751462Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/verify_source.py
+2026-10-20T02:13:18.9004074Z {"coordinate": "org.junit.jupiter:junit-jupiter-engine:5.10.2-m3-source-1", "exact_files": 108, "exact_production_files": 100, "sources_jar_sha256": "00ffb37a2d4a1f5ab224c4cf44b2d050b3d132ca650e9c4251605daf9cd6da9b"}
+2026-10-20T02:13:18.9037790Z + mvn -B -ntp -f /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/pom.xml -DskipTests install
+2026-10-20T02:13:19.9401521Z [INFO] Scanning for projects...
+2026-10-20T02:13:19.9892662Z [INFO] 
+2026-10-20T02:13:19.9893355Z [INFO] ---------------< org.junit.jupiter:junit-jupiter-engine >---------------
+2026-10-20T02:13:19.9895516Z [INFO] Building junit-jupiter-engine 5.10.2 - unchanged upstream source build for M3jdk21 5.10.2-m3-source-1
+2026-10-20T02:13:19.9896461Z [INFO]   from pom.xml
+2026-10-20T02:13:19.9897369Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-20T02:13:20.0852472Z [INFO] Loaded 24145 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+2026-10-20T02:13:20.2327111Z [INFO] 
+2026-10-20T02:13:20.2327912Z [INFO] --- resources:3.5.0:resources (default-resources) @ junit-jupiter-engine ---
+2026-10-20T02:13:20.3342230Z [INFO] Copying 3 resources from src/main/resources to target/classes
+2026-10-20T02:13:20.3372266Z [INFO] Copying 3 resources from . to target/classes/META-INF/third-party/junit-jupiter-engine-5.10.2
+2026-10-20T02:13:20.3382503Z [INFO] 
+2026-10-20T02:13:20.3383299Z [INFO] --- compiler:3.15.0:compile (default-compile) @ junit-jupiter-engine ---
+2026-10-20T02:13:20.3672892Z [INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+2026-10-20T02:13:21.1867374Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:13:21.1936605Z [INFO] Compiling 100 source files with javac [debug release 8] to target/classes
+2026-10-20T02:13:22.8688929Z [INFO] 
+2026-10-20T02:13:22.8695947Z [INFO] --- compiler:3.15.0:compile (module-descriptor-root) @ junit-jupiter-engine ---
+2026-10-20T02:13:22.9079346Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:13:22.9109972Z [INFO] Compiling 1 source file with javac [debug release 9 module-path] to target/classes
+2026-10-20T02:13:22.9799678Z [INFO] 
+2026-10-20T02:13:22.9800715Z [INFO] --- resources:3.5.0:testResources (default-testResources) @ junit-jupiter-engine ---
+2026-10-20T02:13:22.9841559Z [INFO] skip non existing resourceDirectory /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/src/test/resources
+2026-10-20T02:13:22.9871943Z [INFO] 
+2026-10-20T02:13:22.9901762Z [INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-jupiter-engine ---
+2026-10-20T02:13:22.9909241Z [INFO] No sources to compile
+2026-10-20T02:13:22.9910041Z [INFO] 
+2026-10-20T02:13:22.9910736Z [INFO] --- surefire:3.5.6:test (default-test) @ junit-jupiter-engine ---
+2026-10-20T02:13:23.0942791Z [INFO] Tests are skipped.
+2026-10-20T02:13:23.0954504Z [INFO] 
+2026-10-20T02:13:23.0955350Z [INFO] --- jar:3.5.0:jar (default-jar) @ junit-jupiter-engine ---
+2026-10-20T02:13:23.2922959Z [INFO] Building jar: /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/target/junit-jupiter-engine-5.10.2-m3-source-1.jar
+2026-10-20T02:13:23.3987939Z [INFO] 
+2026-10-20T02:13:23.3999087Z [INFO] --- install:3.2.0:install (default-install) @ junit-jupiter-engine ---
+2026-10-20T02:13:23.4376461Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/pom.xml to /home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2-m3-source-1/junit-jupiter-engine-5.10.2-m3-source-1.pom
+2026-10-20T02:13:23.4379071Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/target/junit-jupiter-engine-5.10.2-m3-source-1.jar to /home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2-m3-source-1/junit-jupiter-engine-5.10.2-m3-source-1.jar
+2026-10-20T02:13:23.4426989Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:23.4427793Z [INFO] BUILD SUCCESS
+2026-10-20T02:13:23.4428612Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:23.4430094Z [INFO] Total time:  3.536 s
+2026-10-20T02:13:23.4432315Z [INFO] Finished at: 2026-10-20T02:13:23Z
+2026-10-20T02:13:23.4432985Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:23.4814508Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/verify_source.py /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-engine-5.10.2/target/junit-jupiter-engine-5.10.2-m3-source-1.jar
+2026-10-20T02:13:23.5093924Z {"artifact_sha256": "df2630074edb398fe707bbe5ccac28c4fb806220e993ad9079896697d5db5042", "coordinate": "org.junit.jupiter:junit-jupiter-engine:5.10.2-m3-source-1", "exact_files": 108, "exact_production_files": 100, "sources_jar_sha256": "00ffb37a2d4a1f5ab224c4cf44b2d050b3d132ca650e9c4251605daf9cd6da9b"}
+2026-10-20T02:13:23.5136997Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py
+2026-10-20T02:13:23.5363663Z {"coordinate": "org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1", "exact_files": 6, "exact_production_files": 1, "sources_jar_sha256": "bd628b06b83b0d8830b53747b7f466beebca12d4808f117660ac06e47af99d1c"}
+2026-10-20T02:13:23.5403572Z + mvn -B -ntp -f /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/pom.xml -DskipTests install
+2026-10-20T02:13:24.5872753Z [INFO] Scanning for projects...
+2026-10-20T02:13:24.6401335Z [INFO] 
+2026-10-20T02:13:24.6402006Z [INFO] ------------------< org.junit.jupiter:junit-jupiter >-------------------
+2026-10-20T02:13:24.6403152Z [INFO] Building junit-jupiter 5.10.2 - unchanged upstream source build for M3jdk21 5.10.2-m3-source-1
+2026-10-20T02:13:24.6404142Z [INFO]   from pom.xml
+2026-10-20T02:13:24.6405061Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-20T02:13:24.7523764Z [INFO] Loaded 24145 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+2026-10-20T02:13:24.9220470Z [INFO] 
+2026-10-20T02:13:24.9252167Z [INFO] --- resources:3.5.0:resources (default-resources) @ junit-jupiter ---
+2026-10-20T02:13:25.0341268Z [INFO] Copying 2 resources from src/main/resources to target/classes
+2026-10-20T02:13:25.0387899Z [INFO] Copying 3 resources from . to target/classes/META-INF/third-party/junit-jupiter-5.10.2
+2026-10-20T02:13:25.0408515Z [INFO] 
+2026-10-20T02:13:25.0415013Z [INFO] --- compiler:3.15.0:compile (default-compile) @ junit-jupiter ---
+2026-10-20T02:13:25.0659038Z [INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+2026-10-20T02:13:25.9208431Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:13:25.9281398Z [INFO] Compiling 1 source file with javac [debug release 9 module-path] to target/classes
+2026-10-20T02:13:26.2017320Z [INFO] 
+2026-10-20T02:13:26.2018208Z [INFO] --- resources:3.5.0:testResources (default-testResources) @ junit-jupiter ---
+2026-10-20T02:13:26.2059189Z [INFO] skip non existing resourceDirectory /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/src/test/resources
+2026-10-20T02:13:26.2091610Z [INFO] 
+2026-10-20T02:13:26.2121965Z [INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ junit-jupiter ---
+2026-10-20T02:13:26.2131531Z [INFO] No sources to compile
+2026-10-20T02:13:26.2151452Z [INFO] 
+2026-10-20T02:13:26.2177614Z [INFO] --- surefire:3.5.6:test (default-test) @ junit-jupiter ---
+2026-10-20T02:13:26.3352440Z [INFO] Tests are skipped.
+2026-10-20T02:13:26.3371733Z [INFO] 
+2026-10-20T02:13:26.3386567Z [INFO] --- jar:3.5.0:jar (default-jar) @ junit-jupiter ---
+2026-10-20T02:13:26.5407970Z [INFO] Building jar: /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar
+2026-10-20T02:13:26.6032608Z [INFO] 
+2026-10-20T02:13:26.6033497Z [INFO] --- install:3.2.0:install (default-install) @ junit-jupiter ---
+2026-10-20T02:13:26.6352177Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/pom.xml to /home/runner/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2-m3-source-1/junit-jupiter-5.10.2-m3-source-1.pom
+2026-10-20T02:13:26.6369847Z [INFO] Installing /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar to /home/runner/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2-m3-source-1/junit-jupiter-5.10.2-m3-source-1.jar
+2026-10-20T02:13:26.6420130Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:26.6424277Z [INFO] BUILD SUCCESS
+2026-10-20T02:13:26.6425062Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:26.6426571Z [INFO] Total time:  2.091 s
+2026-10-20T02:13:26.6427125Z [INFO] Finished at: 2026-10-20T02:13:26Z
+2026-10-20T02:13:26.6427734Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:26.6782966Z + python3 /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py /home/runner/work/M3jdk21/M3jdk21/m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar
+2026-10-20T02:13:26.7016353Z {"artifact_sha256": "b27d0ec675616b5970e8665a08c16978c351f36bf458b1accc1462cbd9d81a27", "coordinate": "org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1", "exact_files": 6, "exact_production_files": 1, "sources_jar_sha256": "bd628b06b83b0d8830b53747b7f466beebca12d4808f117660ac06e47af99d1c"}
+2026-10-20T02:13:26.7092219Z + /home/runner/work/_temp/jdk-21.0.12.1+1/bin/javac --release 21 -Xlint:all,-module -Werror -Xpkginfo:always -h /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -d /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/classes @/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/main.args
+2026-10-20T02:13:30.4991337Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3IndexMaskCompactor.h -c /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/main/native/collections/m3_index_mask_compactor.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_index_mask_compactor.c.o
+2026-10-20T02:13:30.7875188Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3IndexMaskWindow.h -c /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/main/native/collections/m3_index_mask_window.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_index_mask_window.c.o
+2026-10-20T02:13:30.9353640Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -shared /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_index_mask_compactor.c.o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_index_mask_window.c.o -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/libm3_collections_mask.so
+2026-10-20T02:13:30.9663353Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3IndexPathMasks.h -c /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/main/native/collections/m3_index_path_masks.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_index_path_masks.c.o
+2026-10-20T02:13:31.0319138Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -shared /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_index_path_masks.c.o -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/libm3_collections_pathmask.so
+2026-10-20T02:13:31.0479783Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3LongIndexPathMasksJNI.h -c /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_long_index_path_masks_jni.c.o
+2026-10-20T02:13:31.1495913Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -shared /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_long_index_path_masks_jni.c.o -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/libm3_collections_long_path_masks.so
+2026-10-20T02:13:31.1661641Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3LongAddressKernel.h -c /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/main/native/collections/m3_long_address_kernel.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_long_address_kernel.c.o
+2026-10-20T02:13:31.2208465Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -shared /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_long_address_kernel.c.o -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/libm3_collections_address.so
+2026-10-20T02:13:31.2368579Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3SpanIndex.h -c /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/main/native/collections/m3_span_index_jni.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_span_index_jni.c.o
+2026-10-20T02:13:31.2872053Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -shared /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_span_index_jni.c.o -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/libm3_collections_span.so
+2026-10-20T02:13:31.3031426Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3StateMaskHistogram.h -c /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/main/native/collections/m3_state_mask_histogram.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_state_mask_histogram.c.o
+2026-10-20T02:13:31.3707168Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -shared /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_state_mask_histogram.c.o -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/libm3_collections_statehist.so
+2026-10-20T02:13:31.3871970Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3LongRankBatchNative.h -c /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_long_rank_batch_jni.c.o
+2026-10-20T02:13:31.4290291Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -shared /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_long_rank_batch_jni.c.o -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/libm3rankbatch.so
+2026-10-20T02:13:31.4450997Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3SignalOrderNative.h -c /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/main/native/collections/m3_signal_order_jni.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_signal_order_jni.c.o
+2026-10-20T02:13:31.5429381Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -shared /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_signal_order_jni.c.o -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/libm3signalorder.so
+2026-10-20T02:13:31.5587263Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3ResidencyStateMaskIndex.h -c /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/main/native/collections/m3_residency_state_mask.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_residency_state_mask.c.o
+2026-10-20T02:13:31.6327305Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -shared /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/m3_residency_state_mask.c.o -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/libm3_residency_state_mask.so
+2026-10-20T02:13:31.6485104Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -fPIC -include /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3BitLane28.h -c /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/main/native/collections/segmented_bit_lane.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/segmented_bit_lane.c.o
+2026-10-20T02:13:31.7044832Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -shared /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/segmented_bit_lane.c.o -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/libm3bitlane.so
+2026-10-20T02:13:31.7209492Z + /home/runner/work/_temp/jdk-21.0.12.1+1/bin/javac --release 21 -Xlint:all,-module -Werror -cp /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/classes -h /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -d /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/fixture-classes /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/test/java/com/m3/collections/M3BitLaneJumpProof.java
+2026-10-20T02:13:32.4728710Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers -shared -fPIC -include /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers/com_m3_collections_M3BitLaneJumpProof.h /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/test/native/m3_bitlane_jump_jni.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/libm3_bitlane_jump_test.so
+2026-10-20T02:13:32.5420154Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/main/native/collections/m3_index_mask_window.c /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/test/native/m3_mask_window_spans.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/spans
+2026-10-20T02:13:32.7510515Z + /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/spans
+2026-10-20T02:13:32.7534655Z JNI_SPANS_PASS single=1/128 dense_limit1=1/128 cross_chunk=130/300 faults=3
+2026-10-20T02:13:32.7538916Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/main/native/collections/m3_index_mask_window.c /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/test/native/m3_mask_window_regions.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/regions
+2026-10-20T02:13:32.9116381Z + /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/regions
+2026-10-20T02:13:32.9130984Z PASS JNI region work: rejected=0/8 row reads; sparse=1/8; contradictory=0; all=1
+2026-10-20T02:13:32.9134153Z + cc -std=c17 -Wall -Wextra -Werror -fsanitize=undefined -fno-sanitize-recover=undefined -O2 -I/home/runner/work/_temp/jdk-21.0.12.1+1/include -I/home/runner/work/_temp/jdk-21.0.12.1+1/include/linux -I/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/headers /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/main/native/collections/m3_long_address_kernel.c /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/test/native/m3_gather_spans.c -o /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/gather-spans
+2026-10-20T02:13:33.1308841Z + /home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/native/gather-spans
+2026-10-20T02:13:33.1698317Z M3_GATHER_SPANS_PASS checks=11015420 two_spans=0 scratch_bytes=3072
+2026-10-20T02:13:33.1703106Z + mvn -B -ntp -f /home/runner/work/M3jdk21/M3jdk21/m3/collections/pom.xml -DargLine=-Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/missing -Dm3.mask.spans.native.required=false -Dm3.collections.all.native.required=false -DfailIfNoTests=true verify
+2026-10-20T02:13:34.2588856Z [INFO] Scanning for projects...
+2026-10-20T02:13:34.3087559Z [INFO] 
+2026-10-20T02:13:34.3088287Z [INFO] -----------------------< com.m3:m3-collections >------------------------
+2026-10-20T02:13:34.3089119Z [INFO] Building M3 collection lanes 0.1.0-SNAPSHOT
+2026-10-20T02:13:34.3089784Z [INFO]   from pom.xml
+2026-10-20T02:13:34.3090312Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-20T02:13:34.4205373Z [INFO] Loaded 24145 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+2026-10-20T02:13:34.9101612Z [INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots.txt)
+2026-10-20T02:13:35.9192061Z [INFO] 
+2026-10-20T02:13:35.9193058Z [INFO] --- resources:3.3.1:resources (default-resources) @ m3-collections ---
+2026-10-20T02:13:36.5059553Z [INFO] Copying 7 resources from  to target/classes/META-INF
+2026-10-20T02:13:36.5099410Z [INFO] 
+2026-10-20T02:13:36.5099936Z [INFO] --- compiler:3.13.0:compile (default-compile) @ m3-collections ---
+2026-10-20T02:13:36.8947884Z [INFO] Recompiling the module because of changed source code.
+2026-10-20T02:13:36.9019146Z [INFO] Compiling 268 source files with javac [debug release 21] to target/classes
+2026-10-20T02:13:40.2439128Z [INFO] JDK-8318913 workaround: patched module-info.class requires version from [21.0.12.1] to [21] on 1 JDK modules [java.base]
+2026-10-20T02:13:40.2517179Z [INFO] 
+2026-10-20T02:13:40.2543883Z [INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-collections ---
+2026-10-20T02:13:40.2574634Z [INFO] skip non existing resourceDirectory /home/runner/work/M3jdk21/M3jdk21/m3/collections/src/test/resources
+2026-10-20T02:13:40.2605324Z [INFO] 
+2026-10-20T02:13:40.2612506Z [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-collections ---
+2026-10-20T02:13:40.2791097Z [INFO] Recompiling the module because of changed dependency.
+2026-10-20T02:13:40.2801695Z [INFO] Compiling 264 source files with javac [debug release 21] to target/test-classes
+2026-10-20T02:13:44.1141982Z [INFO] 
+2026-10-20T02:13:44.1172190Z [INFO] --- surefire:3.2.5:test (default-test) @ m3-collections ---
+2026-10-20T02:13:45.0722379Z [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+2026-10-20T02:13:45.4362784Z [WARNING] The POM for org.junit.platform:junit-platform-launcher:jar:1.10.2-m3-source-1 is missing, no dependency information available
+2026-10-20T02:13:45.4863703Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:45.4864196Z [ERROR] BUILD FAILURE
+2026-10-20T02:13:45.4864597Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:45.4865079Z [INFO] Total time:  11.261 s
+2026-10-20T02:13:45.4866607Z [INFO] Finished at: 2026-10-20T02:13:45Z
+2026-10-20T02:13:45.4867025Z [INFO] ------------------------------------------------------------------------
+2026-10-20T02:13:45.4877641Z [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project m3-collections: The following artifacts could not be resolved: org.junit.platform:junit-platform-launcher:jar:1.10.2-m3-source-1 (absent): Could not find artifact org.junit.platform:junit-platform-launcher:jar:1.10.2-m3-source-1 in central (https://repo.maven.apache.org/maven2) -> [Help 1]
+2026-10-20T02:13:45.4881056Z [ERROR] 
+2026-10-20T02:13:45.4882396Z [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+2026-10-20T02:13:45.4883207Z [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+2026-10-20T02:13:45.4883802Z [ERROR] 
+2026-10-20T02:13:45.4884456Z [ERROR] For more information about the errors and possible solutions, please read the following articles:
+2026-10-20T02:13:45.4885428Z [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+2026-10-20T02:13:45.8609883Z Traceback (most recent call last):
+2026-10-20T02:13:45.8611165Z   File "/home/runner/work/M3jdk21/M3jdk21/m3/collections/qualification/full-java-jni-20261018/verify.py", line 187, in <module>
+2026-10-20T02:13:45.8611844Z     if __name__ == '__main__': main()
+2026-10-20T02:13:45.8612495Z   File "/home/runner/work/M3jdk21/M3jdk21/m3/collections/qualification/full-java-jni-20261018/verify.py", line 135, in main
+2026-10-20T02:13:45.8613128Z     maven(MODULE / 'pom.xml', '-DargLine=' + ' '.join(vm), '-DfailIfNoTests=true', 'verify')
+2026-10-20T02:13:45.8613683Z   File "/home/runner/work/M3jdk21/M3jdk21/m3/collections/qualification/full-java-jni-20261018/verify.py", line 48, in maven
+2026-10-20T02:13:45.8614126Z     run(command + ['-f', pom, *args])
+2026-10-20T02:13:45.8614562Z   File "/home/runner/work/M3jdk21/M3jdk21/m3/collections/qualification/full-java-jni-20261018/verify.py", line 39, in run
+2026-10-20T02:13:45.8615043Z     subprocess.run(list(map(str, args)), cwd=ROOT, check=True)
+2026-10-20T02:13:45.8615362Z   File "/usr/lib/python3.10/subprocess.py", line 526, in run
+2026-10-20T02:13:45.8616669Z     raise CalledProcessError(retcode, process.args,
+2026-10-20T02:13:45.8618574Z subprocess.CalledProcessError: Command '['mvn', '-B', '-ntp', '-f', '/home/runner/work/M3jdk21/M3jdk21/m3/collections/pom.xml', '-DargLine=-Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Djava.library.path=/home/runner/work/M3jdk21/M3jdk21/m3/collections/target/full-java-jni/missing -Dm3.mask.spans.native.required=false -Dm3.collections.all.native.required=false', '-DfailIfNoTests=true', 'verify']' returned non-zero exit status 1.
+2026-10-20T02:13:45.8736080Z ##[error]Process completed with exit code 1.
+2026-10-20T02:13:45.8819447Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+2026-10-20T02:13:45.8819915Z with:
+2026-10-20T02:13:45.8820326Z   name: full-collection-java-jni-066b7a15c29388f3444ab3cf0550ecf1df698c6d
+2026-10-20T02:13:45.8821554Z   path: m3/collections/target/full-java-jni/PROOF.json
+m3/collections/target/full-java-jni/java-reports/
+m3/collections/target/full-java-jni/native-reports/
+m3/collections/target/surefire-reports/
+
+2026-10-20T02:13:45.8822307Z   if-no-files-found: warn
+2026-10-20T02:13:45.8822738Z   compression-level: 6
+2026-10-20T02:13:45.8823040Z   overwrite: false
+2026-10-20T02:13:45.8823357Z   include-hidden-files: false
+2026-10-20T02:13:45.8823733Z env:
+2026-10-20T02:13:45.8824058Z   JAVA_HOME: /home/runner/work/_temp/jdk-21.0.12.1+1
+2026-10-20T02:13:45.8824451Z ##[endgroup]
+2026-10-20T02:13:46.0359720Z (node:3217) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-20T02:13:46.0360649Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T02:13:46.0405560Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-10-20T02:13:46.0408135Z The least common ancestor is /home/runner/work/M3jdk21/M3jdk21/m3/collections/target. This will be the root directory of the artifact
+2026-10-20T02:13:46.0424220Z ##[warning]No files were found with the provided path: m3/collections/target/full-java-jni/PROOF.json
+m3/collections/target/full-java-jni/java-reports/
+m3/collections/target/full-java-jni/native-reports/
+m3/collections/target/surefire-reports/. No artifacts will be uploaded.
+2026-10-20T02:13:46.0633193Z Post job cleanup.
+2026-10-20T02:13:46.1421518Z [command]/usr/bin/git version
+2026-10-20T02:13:46.1491770Z git version 2.55.0
+2026-10-20T02:13:46.1522995Z Temporarily overriding HOME='/home/runner/work/_temp/70b3eba0-5db9-469f-a1da-0f4a0a37393e' before making global git config changes
+2026-10-20T02:13:46.1524089Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T02:13:46.1527124Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/M3jdk21/M3jdk21
+2026-10-20T02:13:46.1571981Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T02:13:46.1612473Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T02:13:46.2122535Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T02:13:46.2170428Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T02:13:46.2650366Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T02:13:46.2688354Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T02:13:46.3485796Z Cleaning up orphan processes
+2026-10-20T02:13:46.3891207Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -1,0 +1,16 @@
+[
+  {
+    "tested-versions": [
+      "1.0"
+    ],
+    "metadata-version": "1.0"
+  },
+  {
+    "tested-versions": [
+      "1.1"
+    ],
+    "metadata-version": "1.1",
+    "latest": true,
+    "override": true
+  }
+]

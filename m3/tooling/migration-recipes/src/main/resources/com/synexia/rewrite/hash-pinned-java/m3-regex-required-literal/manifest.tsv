@@ -1,0 +1,4 @@
+# path	before_sha256	after_sha256	resource
+m3/ports/precompute/src/test/java/com/m3/precompute/M3PatternQueryDifferential.java	ABSENT	975d7960d3c87fe5c5ca1158dba2195dfed1b808356b4f65738860f6f4e95a02	00-M3PatternQueryDifferential.java.txt
+src/java.base/share/classes/java/util/regex/M3PatternQuery.java	ABSENT	5712e094926b90f3be5356dea999e9d5dc2d13e0f1fb5082e943f8c0a2d5575f	01-M3PatternQuery.java.txt
+test/jdk/java/util/regex/M3PatternQueryTest.java	ABSENT	f842f38d63d0d438ca8019a816d1bc2080c8102f4385adf0bef1707389118931	02-M3PatternQueryTest.java.txt

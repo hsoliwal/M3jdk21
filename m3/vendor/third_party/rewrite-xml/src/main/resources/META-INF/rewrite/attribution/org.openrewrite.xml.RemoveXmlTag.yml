@@ -1,0 +1,16 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.xml.RemoveXmlTag"
+contributors:
+- name: "Mark Brophy"
+  email: "36955467+m-brophy@users.noreply.github.com"
+  lineCount: 51
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 11
+- name: "Nick McKinney"
+  email: "mckinneynicholas@gmail.com"
+  lineCount: 1
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 1

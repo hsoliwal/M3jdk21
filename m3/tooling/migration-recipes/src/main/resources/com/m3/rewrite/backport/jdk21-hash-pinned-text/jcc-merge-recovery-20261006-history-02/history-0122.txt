@@ -1,0 +1,327 @@
+{
+  "schema": "jcc-e04-custody-v3-static-checks/1",
+  "scope": "Independent source/JSON/hash/AST inspection only; no candidate imports/functions/mains/gates or remote calls.",
+  "readiness_file_identities_verified": 52,
+  "staged_evidence_files": 35,
+  "staged_evidence_bytes": 1858597,
+  "all_staged_copies_equal_originals_and_declarations": true,
+  "canonical_unique_receiving_targets_without_ancestor_collision": true,
+  "raw_input_unique_hash_bound_dependencies_carried": 21,
+  "creation_captures_equal_inline_objects": 4,
+  "required_direct_production": 4,
+  "required_direct_nul": 2,
+  "invalid_utf8_exact_exceptions": 2,
+  "optional_direct_allowed_distinct_union": 21,
+  "exceptions_excluded_from_direct_union": true,
+  "old_reviewed_entrypoints_byte_exact": true,
+  "additive_diffs_match_recorded_proposals": true,
+  "prior_review_seals": [
+    {
+      "path": "work/m3jdk21-current/successor-e04/derivation-static-review/FILE_SEALS.json",
+      "files_verified": 21,
+      "bytes": 4988,
+      "sha256": "d7358b6c30ea0306248e35f36fc3b1a8aba22b02a95e0d76882c3d1b97eb07aa",
+      "git_blob_sha1": "bd56c5b82d28eb43ef343a27679e621eb460d5e7",
+      "mode": "100644"
+    },
+    {
+      "path": "work/m3jdk21-current/successor-e04/derivation-static-review/revision02/FILE_SEALS.json",
+      "files_verified": 10,
+      "bytes": 2301,
+      "sha256": "8ec211daffcfe3472c2fe66d7cecd9e49c4362102c5876092da09d4f38d87bab",
+      "git_blob_sha1": "0b9db4aac1ca3b8793be5ede0bbe74974f691e4a",
+      "mode": "100644"
+    }
+  ],
+  "candidate_AST_only": true,
+  "input_state": "UNBOUND",
+  "complete_remotely_inspectable_custody_claim": false,
+  "pending_final_evidence": [
+    "Actual PUBLISHED_CUSTODY_VERIFIED receipt and its final verification invocation",
+    "Actual final fixture read-call objects, with exact provenance to source publisher readback",
+    "Selected final tree/path evidence or precise receipt-bound local classification",
+    "Final receiving custody index that distinguishes carried original bytes, any exact structured-subobject extraction and explicitly omitted local-only receipt dependencies"
+  ],
+  "copied_evidence": [
+    {
+      "snapshot": "inputs/staged-evidence/verify_publication_v3.py",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/verify_publication_v3.py",
+      "bytes": 13831,
+      "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
+      "git_blob_sha1": "c5efacc8212e97a74770db0c70bcbd80d24ec232",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw_custody_v3.py",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw_custody_v3.py",
+      "bytes": 12912,
+      "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
+      "git_blob_sha1": "25a836990c02625c79f44492eb43b7ffca13b07f",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/audit_base.py",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/audit_base.py",
+      "bytes": 8839,
+      "sha256": "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b",
+      "git_blob_sha1": "f5ef1f4e6d01276e151fd81b98851e3c4759f25b",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/prepare_publication.py",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/prepare_publication.py",
+      "bytes": 15683,
+      "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
+      "git_blob_sha1": "6b32bbff9f9221ddf8c5c4f3eb10ee27bed7d70a",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/verify_publication.py",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/verify_publication.py",
+      "bytes": 9623,
+      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
+      "git_blob_sha1": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/BASE_TREE_MODEL.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/BASE_TREE_MODEL.json",
+      "bytes": 1372743,
+      "sha256": "877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80",
+      "git_blob_sha1": "6ee3c1bfd76dc5c0abdba031f163a3d38294f5e9",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/PROTOCOL.md",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/PROTOCOL.md",
+      "bytes": 4406,
+      "sha256": "cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5",
+      "git_blob_sha1": "0cf763bcef6fc836cb345360893c1874f5781eb9",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/CUSTODY_INPUT.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/CUSTODY_INPUT.json",
+      "bytes": 14641,
+      "sha256": "22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df",
+      "git_blob_sha1": "aab1f868d992a08d865918b3cef7a99fdf299173",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
+      "bytes": 1542,
+      "sha256": "074e9dcec6275f05bc8ac93d6d92e36b5adaeaa4c6503ace2dbf047b49916705",
+      "git_blob_sha1": "98e64dd614928ae710eb03e66d0dacce1be8b132",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/PROBE_EXECUTION.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/PROBE_EXECUTION.json",
+      "bytes": 670,
+      "sha256": "90c9f648768fde6d74bc416d5a52076c7b29581a5df42e21f80da62e983a9be6",
+      "git_blob_sha1": "7fa37f2114d172ad33e0f43e5c0b46af6c7ec099",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/epoch-01/transport/INDEX.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/transport/INDEX.json",
+      "bytes": 35655,
+      "sha256": "dce1e97079aeb3ad9edbdf9f814b3ccaeebfd0053c9d2b4b79ff841632c0736d",
+      "git_blob_sha1": "99c698756eedc88f650d4495f56827639cfb01f0",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/RAW_READBACK_FAILURE_OBSERVATION.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/RAW_READBACK_FAILURE_OBSERVATION.json",
+      "bytes": 6519,
+      "sha256": "224b3baa99e71c846cc96319c0a829eec3521d75f68731332ac2fa59fa214112",
+      "git_blob_sha1": "3f6b147b1ec5e1576b20f5a57c694dd305e31823",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/RAW_VERIFICATION_TREE_PLAN.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/RAW_VERIFICATION_TREE_PLAN.json",
+      "bytes": 95189,
+      "sha256": "00fa5b9e4e99621ed6b5aac3c0da4c6506f82e921a3da42fdd4645285653e319",
+      "git_blob_sha1": "27c92ae8d02f1fc6fc3f19a74a5982601d142179",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/verification-file-reads.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/verification-file-reads.json",
+      "bytes": 5076,
+      "sha256": "5f992ea5fa2a618093909b3ba7b063a8972de84f2af4b00ed44b323597538a87",
+      "git_blob_sha1": "805234c233d3bb741a35ced6c80d15f13da35a6c",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json",
+      "bytes": 1893,
+      "sha256": "d6a876dffdb48da7271d85966ac7d9cd684e4b89ecc3548e79a5dc8ef55be637",
+      "git_blob_sha1": "c4da2406762041b4822bd147b0788e2697a16b42",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json",
+      "bytes": 6735,
+      "sha256": "e60253446c2741c41d127b379f3b9f56506442a0476ea377ab9de43f4ef98701",
+      "git_blob_sha1": "7ada47a165dfbc77a522ae63aed44997e15cfcde",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json",
+      "bytes": 1941,
+      "sha256": "bf6ecda1e1cd2d3a0fe726b39e1b1fb924fb9dd9e6bff7fb311cec53a69da76b",
+      "git_blob_sha1": "e9ba220b40280b21d05ca7af17dbe66d41ff095a",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json",
+      "bytes": 37747,
+      "sha256": "87897d5da6389eb5421cf083436ea9dba28921fc7c46fcec185c336677476023",
+      "git_blob_sha1": "6cff29e51e8136b30913643aceabcc558b115704",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json",
+      "bytes": 1947,
+      "sha256": "bc4a2014f1bde8d775d57d3a3f3e31f441e933a1dec4116df3a1fd92a64ed1bb",
+      "git_blob_sha1": "73ab6ba3e52f55ea66d321aa5c5144003aec3681",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json",
+      "bytes": 3351,
+      "sha256": "bbbbe2668c25e80d6e53d7c59a4a020fac5ee12f41daed2c665d52c7de1211ac",
+      "git_blob_sha1": "8009e93f4947f9cf30153efc916fdb8f84d224cb",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json",
+      "bytes": 1893,
+      "sha256": "400fa13aa4dce4c38c9af8c98d252c1fab164119e26d623e18d01f9e36d6a127",
+      "git_blob_sha1": "2de74dd7e10ad63136226488b4943d7620a85a46",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json",
+      "bytes": 1943,
+      "sha256": "878c3f9a33326df4d91935336962565b2d644e694e51b2aca9f7a47010044324",
+      "git_blob_sha1": "890aee4ab25bf18cedf01c20e4d4876ecfefa0f7",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json",
+      "bytes": 4779,
+      "sha256": "cc07ab6028915303903199aa027d19e27aa96d1d60d16231bf04ea24eb74ec6f",
+      "git_blob_sha1": "9f18b295f501b724ef22555e9ddced2f215217b5",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json",
+      "bytes": 1951,
+      "sha256": "7f438bf36e2a306ffd396d10d6c1e23164f4456ce85b0d06a23b020183682bd1",
+      "git_blob_sha1": "c7ce23a1c241b337cbf935d55ae51b5fa7af2a67",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json",
+      "bytes": 1897,
+      "sha256": "05a12fcdcba2cbb33d7f26c823c1ec77e712b206b0513ad69971affda5dc24f6",
+      "git_blob_sha1": "e42dcd7434d48dc88cb2181847e43623b3b2f647",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
+      "bytes": 167271,
+      "sha256": "f6852b552a509cd63b6f3622a21124215fb4c584d9b0b35fb4fd66dc6631f5d3",
+      "git_blob_sha1": "4a6439ecc558aa0fb82f410f7f1aeffe30d5a4ae",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json",
+      "bytes": 1911,
+      "sha256": "0e3ba46f0ff549937802d41bcd60f36e7a1d2221744d7fed2bac7c3b14a290ba",
+      "git_blob_sha1": "2575e4b9cc0ccbea2975e0b968cc021802ab2d26",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json",
+      "bytes": 1885,
+      "sha256": "4371692b6dc8fafe9355b12f4dd9a7ef3dbda4f38d4a4b262fc7d7e536ebedd2",
+      "git_blob_sha1": "acfe765a53a420a5b8384677622f354f4d4a4060",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json",
+      "bytes": 17675,
+      "sha256": "31f6229cce694b49b0e30cb34791f0b4df696b933965637241dd5b053f751b04",
+      "git_blob_sha1": "c3ab72cb6bba321b6dd99f2fd741a04cf087a211",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json",
+      "bytes": 1885,
+      "sha256": "4df921e09958f15fd17261bfbb5f9b948b4382afed7890b4568be4444594c7d3",
+      "git_blob_sha1": "b135e69a8207ea1523591995a68ed4f03f4d849e",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json",
+      "bytes": 1891,
+      "sha256": "6f3742c4822492686a14cf87ba0697e05fa3082cecbe958772e2b97200c60225",
+      "git_blob_sha1": "aaf510fa17d33ae025302b34ecc5975c20a302f9",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/create-call-0.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/create-call-0.json",
+      "bytes": 748,
+      "sha256": "b8a32d3afbab09a54e0783bcd9c30784f52c2f354df1963ce0fdabeb1977b366",
+      "git_blob_sha1": "2d14689c274dc122940b3f890da15d2c842453e8",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/create-call-1.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/create-call-1.json",
+      "bytes": 586,
+      "sha256": "5b7ac8ba077d2b3ee8c3cf6853ade48ea8e568f97d8f98d4f18d46ff7835423b",
+      "git_blob_sha1": "601f586d75d0980d283de686bc2f8a48b39dc02f",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/create-call-2.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/create-call-2.json",
+      "bytes": 728,
+      "sha256": "cfe40a28577457759a7bd1ba588d069c4a7a8c7e2f8edff631e48598f8f6c64d",
+      "git_blob_sha1": "885d1e60d4cc571839679cabcf43fbc68629f641",
+      "mode": "100644"
+    },
+    {
+      "snapshot": "inputs/staged-evidence/raw-custody-v3/create-call-3.json",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/create-call-3.json",
+      "bytes": 611,
+      "sha256": "354b7b50af7d013a23870acbd24603e32c9f248bd4ca2ba86c4ea7e489064b79",
+      "git_blob_sha1": "de4a4eeff25c14055515986c6627961603271e6e",
+      "mode": "100644"
+    }
+  ]
+}

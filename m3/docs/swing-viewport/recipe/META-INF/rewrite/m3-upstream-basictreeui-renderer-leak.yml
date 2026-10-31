@@ -1,0 +1,21 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.M3UpstreamBasicTreeUIRendererLeak
+displayName: BasicTreeUI drops the previous renderer component before measuring the next (JDK-6507038, upstream port)
+description: >-
+  Upstream port of JDK-6507038 (openjdk/jdk PR 17458, commit e8ceb7189be79f2a5a7a4d13fe2d93e2c494abce, fixed in
+  JDK 23; m3/docs/swing-viewport/UPSTREAM_PORTS.tsv). BasicTreeUI.NodeDimensionsHandler.getNodeDimensions added
+  every renderer component to the CellRendererPane and removed them only when the UI changed, so a renderer that
+  returns a new component per call leaked them all. The pane is emptied before each add, as upstream does. The
+  stock comment on the add stays in place. Unconditional. Applied by M3PerFileApply; a second pass must report
+  UNCHANGED.
+recipeList:
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.plaf.basic.BasicTreeUI$NodeDimensionsHandler, javax.swing.plaf.basic.BasicTreeUI.NodeDimensionsHandler]
+      methodName: getNodeDimensions
+      parameterCount: 5
+      anchor: "rendererPane.add(aComponent);"
+      position: BEFORE
+      statements: "                    // Upstream JDK-6507038: remove the previously added components to prevent\n                    // a leak, then add the component the renderer returned now\n                    rendererPane.removeAll();"

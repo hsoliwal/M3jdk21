@@ -1,0 +1,8 @@
+tests/classes/
+tests/*.so
+tests/*.bin
+tests/*.m3lex
+tests/shared-owner/
+# The raw allocation files include harness diagnostics; publish normalized
+# allocation-summary.json and the original text log, keeping raw files local.
+tests/allocation-*.json

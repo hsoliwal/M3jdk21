@@ -1,0 +1,8 @@
+{
+  "artifact": "univocity-parsers-2.9.1",
+  "origin": "https://raw.githubusercontent.com/uniVocity/univocity-parsers/v2.9.1/LICENSE-2.0.html",
+  "file": "UPSTREAM_LICENSE.html",
+  "sha256": "904caa501dd16f6326b70b7bf47f567fb2c69891879e986300014000a1d36508",
+  "bytes": 10998,
+  "caveat": "EXACT_TAG; upstream ships the Apache-2.0 text as LICENSE-2.0.html"
+}

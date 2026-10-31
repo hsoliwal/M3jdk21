@@ -1,0 +1,42 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "m3-jni",
+  "target_base": "3ec445df10a3e8fc74aa983181f0700ac7bfbcad",
+  "scope": "MULTI_MODULE",
+  "outputs": [
+    {
+      "path": "src/hotspot/share/prims/jni.cpp",
+      "before": {
+        "resource": "jni.cpp.before",
+        "sha256": "95f131c664bf993f457d3ea53bdfe0850f842d82c5a42644a979d724580522f4"
+      },
+      "after": {
+        "resource": "jni.cpp.after",
+        "sha256": "95adc8ea2a9035e65b613a7fb4131f8629bc90f81b70008895a77c1e396b05f9"
+      }
+    },
+    {
+      "path": "test/jdk/jdk/internal/mindex/cb/libM3JNINull.c",
+      "before": null,
+      "after": {
+        "resource": "libM3JNINull.c.after",
+        "sha256": "471076651477273d831ea7cbfe25120aa7a8af6397c9611b0247e5c7c6b9702e"
+      }
+    },
+    {
+      "path": "test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java",
+      "before": null,
+      "after": {
+        "resource": "JNINull.java.after",
+        "sha256": "440e56c06fce9c7bfd37025fa3684afe715b4d9d2cfbca33c4bb9d7b084d1281"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    }
+  ],
+  "plan_sha256": "10c638657847095c095a99fc5f2ca7737633e681167d338a8c556a8a5d542978"
+}

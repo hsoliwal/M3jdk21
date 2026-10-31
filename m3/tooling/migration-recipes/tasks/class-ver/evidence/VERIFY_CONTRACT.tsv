@@ -1,0 +1,7 @@
+order	gate	required
+1	exact diff and source seals	true
+2	lint and syntax	true
+3	Java21 compiler	true
+4	real ClassVerTest and complete Maven/JUnit/JaCoCo gates	true; not replaceable by standalone checks
+5	archive/VM and image integration	true; local experiments separately labelled
+6	full modified-JDK build/jtreg and programme admission	true; no full completion claim

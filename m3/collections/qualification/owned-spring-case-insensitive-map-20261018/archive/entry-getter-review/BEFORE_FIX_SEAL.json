@@ -1,0 +1,18 @@
+{
+  "schema": "spring-caller-entry-getter-before-fix-v1",
+  "ownerSHA256": "f79257c02e899ca2e51b900d3272a7265b18c72f120a29bb95f9d52e908e8084",
+  "fixtureSHA256": "c98c0a55be337139d03ffc457d326e36776f8e5c2a63dc4c91cd9ed87e7a7779",
+  "fossSHA256": "2345ef22cd87c3d000f7b72c4a785f7d7101e20a76b8366e94281f7b2dc39f9a",
+  "fixtureCases": 9,
+  "semantics": "Stable Map.Entry getters with recorded calls and explicit getValue failure; no retained-entry lifecycle/reference identity assertion",
+  "storage": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 26182213632,
+    "logical_bytes": 44728682,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  }
+}

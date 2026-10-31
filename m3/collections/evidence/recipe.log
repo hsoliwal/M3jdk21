@@ -1,0 +1,43 @@
+$ ['env', 'JAVA_HOME=/workspace/scratch/b37f6ba1283f/synexia-continuation/toolchain/jdk-21.0.12.1+1', '/workspace/scratch/b37f6ba1283f/synexia-continuation/toolchain/apache-maven-3.9.9/bin/mvn', '-B', '-ntp', '-o', '-Dmaven.repo.local=/workspace/scratch/b37f6ba1283f/synexia-continuation/dependencies/m2', '-f', 'm3/collections/recipe/pom.xml', 'test']
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------< com.synexia.verification:m3-collection-lane-recipe-proof >------
+[INFO] Building m3-collection-lane-recipe-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-collection-lane-recipe-proof ---
+[INFO] Copying 23 resources from ../../tooling/migration-recipes/src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-collection-lane-recipe-proof ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 2 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-collection-lane-recipe-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/recipe/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-collection-lane-recipe-proof ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-collection-lane-recipe-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.SegmentedLaneRecipeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.183 s -- in com.synexia.rewrite.SegmentedLaneRecipeTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.089 s
+[INFO] Finished at: 2026-10-02T04:16:13Z
+[INFO] ------------------------------------------------------------------------
+
+EXIT=0

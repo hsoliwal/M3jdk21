@@ -1,0 +1,563 @@
+{
+  "scope": "focused_runtime_closure; independent owning-module and whole-JDK gates remain",
+  "production_java_units": 134,
+  "test_source_units": 61,
+  "compiled_native_sources": 3,
+  "junit": {
+    "java": {
+      "tests": 45,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "native": {
+      "tests": 45,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "runs": [
+    {
+      "name": "java-version",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-version"
+      ],
+      "exit_code": 0,
+      "seconds": 0.069,
+      "log": "java-version.log"
+    },
+    {
+      "name": "compile-pathmask",
+      "command": [
+        "gcc",
+        "-std=c17",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-O2",
+        "-fPIC",
+        "-shared",
+        "-I/tmp/jdk-21.0.12.1+1/include",
+        "-I/tmp/jdk-21.0.12.1+1/include/linux",
+        "-o",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib/libm3_collections_pathmask.so",
+        "/workspace/scratch/6b6041146177/M3JDK21/m3/collections/src/main/native/collections/m3_index_path_masks.c"
+      ],
+      "exit_code": 0,
+      "seconds": 0.232,
+      "log": "compile-pathmask.log"
+    },
+    {
+      "name": "compile-mask",
+      "command": [
+        "gcc",
+        "-std=c17",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-pedantic",
+        "-O2",
+        "-fPIC",
+        "-shared",
+        "-I/tmp/jdk-21.0.12.1+1/include",
+        "-I/tmp/jdk-21.0.12.1+1/include/linux",
+        "-o",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib/libm3_collections_mask.so",
+        "/workspace/scratch/6b6041146177/M3JDK21/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "/workspace/scratch/6b6041146177/M3JDK21/m3/collections/src/main/native/collections/m3_index_mask_window.c"
+      ],
+      "exit_code": 0,
+      "seconds": 0.651,
+      "log": "compile-mask.log"
+    },
+    {
+      "name": "java-junit",
+      "command": [
+        "/tmp/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-f",
+        "/workspace/scratch/6b6041146177/M3JDK21/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml",
+        "-Dm3.target=/workspace/scratch/6b6041146177/M3JDK21",
+        "-Dm3.runtime.output=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java",
+        "-Dm3.native.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-o",
+        "-Dmaven.repo.local=/tmp/m3-parser-m2",
+        "test"
+      ],
+      "exit_code": 0,
+      "seconds": 99.523,
+      "log": "java-junit.log"
+    },
+    {
+      "name": "java-0-M3IndexMaskCompactorSelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes",
+        "com.m3.collections.M3IndexMaskCompactorSelfTest"
+      ],
+      "exit_code": 0,
+      "seconds": 1.86,
+      "log": "java-0-M3IndexMaskCompactorSelfTest.log"
+    },
+    {
+      "name": "java-1-M3IndexMaskWindowSelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes",
+        "com.m3.collections.M3IndexMaskWindowSelfTest"
+      ],
+      "exit_code": 0,
+      "seconds": 1.232,
+      "log": "java-1-M3IndexMaskWindowSelfTest.log"
+    },
+    {
+      "name": "java-2-M3IndexMaskWindowRecoverySelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes",
+        "com.m3.collections.M3IndexMaskWindowRecoverySelfTest"
+      ],
+      "exit_code": 0,
+      "seconds": 4.131,
+      "log": "java-2-M3IndexMaskWindowRecoverySelfTest.log"
+    },
+    {
+      "name": "java-3-M3IndexPathMasksSelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes",
+        "com.m3.collections.M3IndexPathMasksSelfTest"
+      ],
+      "exit_code": 0,
+      "seconds": 0.36,
+      "log": "java-3-M3IndexPathMasksSelfTest.log"
+    },
+    {
+      "name": "java-4-M3IndexPathMaskWindowSelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes",
+        "com.m3.collections.M3IndexPathMaskWindowSelfTest"
+      ],
+      "exit_code": 0,
+      "seconds": 0.427,
+      "log": "java-4-M3IndexPathMaskWindowSelfTest.log"
+    },
+    {
+      "name": "java-5-M3BudgetedMaskWindowContract",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes",
+        "com.m3.collections.M3BudgetedMaskWindowContract"
+      ],
+      "exit_code": 0,
+      "seconds": 3.968,
+      "log": "java-5-M3BudgetedMaskWindowContract.log"
+    },
+    {
+      "name": "java-6-M3MaskWindowSparseContract",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes",
+        "com.m3.collections.M3MaskWindowSparseContract",
+        "missing"
+      ],
+      "exit_code": 0,
+      "seconds": 2.984,
+      "log": "java-6-M3MaskWindowSparseContract.log"
+    },
+    {
+      "name": "java-7-M3NativeIndexRangeSelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes",
+        "com.m3.collections.M3NativeIndexRangeSelfTest",
+        "none"
+      ],
+      "exit_code": 0,
+      "seconds": 4.421,
+      "log": "java-7-M3NativeIndexRangeSelfTest.log"
+    },
+    {
+      "name": "java-8-M3ZeroMaskArrayFastPathProof",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes",
+        "com.m3.collections.M3ZeroMaskArrayFastPathProof"
+      ],
+      "exit_code": 0,
+      "seconds": 2.102,
+      "log": "java-8-M3ZeroMaskArrayFastPathProof.log"
+    },
+    {
+      "name": "java-9-M3IndexPathMasksAliasContract",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes",
+        "com.m3.collections.M3IndexPathMasksAliasContract"
+      ],
+      "exit_code": 0,
+      "seconds": 0.752,
+      "log": "java-9-M3IndexPathMasksAliasContract.log"
+    },
+    {
+      "name": "java-10-M3IndexPathRankSelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes",
+        "com.m3.collections.M3IndexPathRankSelfTest"
+      ],
+      "exit_code": 0,
+      "seconds": 0.936,
+      "log": "java-10-M3IndexPathRankSelfTest.log"
+    },
+    {
+      "name": "java-11-M3LongIndexPathMasksSelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes",
+        "com.m3.collections.M3LongIndexPathMasksSelfTest"
+      ],
+      "exit_code": 0,
+      "seconds": 1.684,
+      "log": "java-11-M3LongIndexPathMasksSelfTest.log"
+    },
+    {
+      "name": "java-12-M3BudgetedMaskWindowContract",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes",
+        "com.m3.collections.M3BudgetedMaskWindowContract",
+        "--missing"
+      ],
+      "exit_code": 0,
+      "seconds": 0.694,
+      "log": "java-12-M3BudgetedMaskWindowContract.log"
+    },
+    {
+      "name": "small-stack-wrapper-depth",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-Xss256k",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes",
+        "com.m3.collections.M3FilteredNavigationReconciliationContract",
+        "depth"
+      ],
+      "exit_code": 0,
+      "seconds": 2.718,
+      "log": "small-stack-wrapper-depth.log"
+    },
+    {
+      "name": "native-junit",
+      "command": [
+        "/tmp/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-f",
+        "/workspace/scratch/6b6041146177/M3JDK21/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml",
+        "-Dm3.target=/workspace/scratch/6b6041146177/M3JDK21",
+        "-Dm3.runtime.output=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native",
+        "-Dm3.native.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+        "-o",
+        "-Dmaven.repo.local=/tmp/m3-parser-m2",
+        "test"
+      ],
+      "exit_code": 0,
+      "seconds": 104.972,
+      "log": "native-junit.log"
+    },
+    {
+      "name": "native-0-M3IndexMaskCompactorSelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/test-classes",
+        "com.m3.collections.M3IndexMaskCompactorSelfTest",
+        "--native"
+      ],
+      "exit_code": 0,
+      "seconds": 1.519,
+      "log": "native-0-M3IndexMaskCompactorSelfTest.log"
+    },
+    {
+      "name": "native-1-M3IndexMaskWindowSelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/test-classes",
+        "com.m3.collections.M3IndexMaskWindowSelfTest",
+        "--native"
+      ],
+      "exit_code": 0,
+      "seconds": 3.188,
+      "log": "native-1-M3IndexMaskWindowSelfTest.log"
+    },
+    {
+      "name": "native-2-M3IndexMaskWindowRecoverySelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/test-classes",
+        "com.m3.collections.M3IndexMaskWindowRecoverySelfTest",
+        "--native"
+      ],
+      "exit_code": 0,
+      "seconds": 1.362,
+      "log": "native-2-M3IndexMaskWindowRecoverySelfTest.log"
+    },
+    {
+      "name": "native-3-M3IndexPathMasksSelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/test-classes",
+        "com.m3.collections.M3IndexPathMasksSelfTest",
+        "--native"
+      ],
+      "exit_code": 0,
+      "seconds": 4.961,
+      "log": "native-3-M3IndexPathMasksSelfTest.log"
+    },
+    {
+      "name": "native-4-M3IndexPathMaskWindowSelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/test-classes",
+        "com.m3.collections.M3IndexPathMaskWindowSelfTest",
+        "--native"
+      ],
+      "exit_code": 0,
+      "seconds": 3.183,
+      "log": "native-4-M3IndexPathMaskWindowSelfTest.log"
+    },
+    {
+      "name": "native-5-M3BudgetedMaskWindowContract",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/test-classes",
+        "com.m3.collections.M3BudgetedMaskWindowContract",
+        "--native"
+      ],
+      "exit_code": 0,
+      "seconds": 4.578,
+      "log": "native-5-M3BudgetedMaskWindowContract.log"
+    },
+    {
+      "name": "native-6-M3MaskWindowSparseContract",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/test-classes",
+        "com.m3.collections.M3MaskWindowSparseContract",
+        "native"
+      ],
+      "exit_code": 0,
+      "seconds": 10.05,
+      "log": "native-6-M3MaskWindowSparseContract.log"
+    },
+    {
+      "name": "native-7-M3NativeIndexRangeSelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/test-classes",
+        "com.m3.collections.M3NativeIndexRangeSelfTest",
+        "native"
+      ],
+      "exit_code": 0,
+      "seconds": 5.768,
+      "log": "native-7-M3NativeIndexRangeSelfTest.log"
+    },
+    {
+      "name": "native-8-M3ZeroMaskArrayFastPathProof",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/test-classes",
+        "com.m3.collections.M3ZeroMaskArrayFastPathProof"
+      ],
+      "exit_code": 0,
+      "seconds": 3.109,
+      "log": "native-8-M3ZeroMaskArrayFastPathProof.log"
+    },
+    {
+      "name": "native-9-M3IndexPathMasksAliasContract",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/test-classes",
+        "com.m3.collections.M3IndexPathMasksAliasContract",
+        "--native"
+      ],
+      "exit_code": 0,
+      "seconds": 0.988,
+      "log": "native-9-M3IndexPathMasksAliasContract.log"
+    },
+    {
+      "name": "native-10-M3IndexPathRankNativeSelfTest",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/test-classes",
+        "com.m3.collections.M3IndexPathRankNativeSelfTest"
+      ],
+      "exit_code": 0,
+      "seconds": 0.707,
+      "log": "native-10-M3IndexPathRankNativeSelfTest.log"
+    },
+    {
+      "name": "native-11-M3MaskNativeParityProof",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/test-classes",
+        "com.m3.collections.M3MaskNativeParityProof"
+      ],
+      "exit_code": 0,
+      "seconds": 1.056,
+      "log": "native-11-M3MaskNativeParityProof.log"
+    },
+    {
+      "name": "native-12-M3MaskDenseSelectionProof",
+      "command": [
+        "/tmp/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-Xcheck:jni",
+        "-Xmx512m",
+        "-Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+        "-cp",
+        "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/test-classes",
+        "com.m3.collections.M3MaskDenseSelectionProof"
+      ],
+      "exit_code": 0,
+      "seconds": 3.013,
+      "log": "native-12-M3MaskDenseSelectionProof.log"
+    }
+  ],
+  "inputs_unchanged": true,
+  "native_required_executed": true
+}

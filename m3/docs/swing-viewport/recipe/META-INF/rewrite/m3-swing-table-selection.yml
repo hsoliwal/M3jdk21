@@ -1,0 +1,31 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.M3SwingTableSortManagerSelection
+displayName: JTable's SortManager restores the right selection with a row filter (JDK-8366188, JDK-6727200)
+description: >-
+  Two defects of JTable.SortManager, the selection cache JTable keeps while a RowSorter is set
+  (m3/docs/swing-viewport/UPSTREAM_DEFECTS.tsv D5, D6). D5, JDK-8366188: with a filter that hides rows, the
+  selection is kept in model terms after a sorter event and shifted on an insert with
+  DefaultListSelectionModel.insertIndexInterval(start, length, true), which selects the new indices when the
+  index at the insertion point is selected; the inserted model rows are now deselected right after the shift,
+  with the cache's lead and anchor restored. D6, JDK-6727200: a table change that does not re-sort (an update)
+  caches the selection in lastModelSelection, which only a re-sort consumed; the stale cache then won over the
+  current selection at the next sorter event with a filter. processChange now drops it at its end (when the
+  sorter changed, restoreSelection already did). Unconditional, like the JDK-8299722 fix. Applied by
+  M3PerFileApply; a second pass must report UNCHANGED.
+recipeList:
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable$SortManager, javax.swing.JTable.SortManager]
+      methodName: cacheSelection
+      parameterCount: 2
+      anchor: "modelSelection.insertIndexInterval(change.startModelIndex,"
+      position: AFTER
+      statements: "                    // M3 (JDK-8366188): rows the model inserted are new rows, never selected;\n                    // insertIndexInterval selects them when the row at the insertion point was.\n                    if (modelSelection.isSelectedIndex(change.startModelIndex)) {\n                        int lead = modelSelection.getLeadSelectionIndex();\n                        int anchor = modelSelection.getAnchorSelectionIndex();\n                        modelSelection.removeSelectionInterval(change.startModelIndex,\n                                                               change.endModelIndex);\n                        SwingUtilities2.setLeadAnchorWithoutSelection(\n                                modelSelection, lead, anchor);\n                    }"
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.JTable$SortManager, javax.swing.JTable.SortManager]
+      methodName: processChange
+      parameterCount: 3
+      position: METHOD_END
+      statements: "            // M3 (JDK-6727200): the cache belongs to this change; without a re-sort it is not\n            // restored and must not be restored by a later sorter event.\n            lastModelSelection = null;"

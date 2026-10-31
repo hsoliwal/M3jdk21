@@ -1,0 +1,226 @@
+{
+  "schema": "M3_COMBINED_QUALIFIED_RECEIVING_V1",
+  "source_head_before_evidence": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+  "source_tree_before_evidence": "51246136763bff28b9fcc5daf01c884ae05bca7c",
+  "target_repository": "hsoliwal/M3JDK21",
+  "datasets": [
+    {
+      "dataset": "m3-budget-window-20261018",
+      "input_head": "6e07ef024e30c6151e5bdae77b07f3bc48b08b13",
+      "check": {
+        "dataset": "m3-budget-window-20261018",
+        "targets": 2,
+        "changes": 2,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-budget-window-20261018",
+        "targets": 2,
+        "changes": 2,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-budget-window-20261018",
+        "targets": 2,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "output_head": "c75fbbb7ae12367f4036ac081840d47c5448dee8"
+    },
+    {
+      "dataset": "m3-combined-manifest-20261018",
+      "input_head": "ab6cc64eddd17ea81242bf58a7a19cb130a58c77",
+      "qualified_crate": "/dev/shm/m3-collections-manifest-successor/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "check": {
+        "dataset": "m3-combined-manifest-20261018",
+        "targets": 2,
+        "changes": 2,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-combined-manifest-20261018",
+        "targets": 2,
+        "changes": 2,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-combined-manifest-20261018",
+        "targets": 2,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "output_head": "2015360812e3daf07c5e6d1e647c2fb76165e0c6"
+    },
+    {
+      "dataset": "m3-entry-membership-20261018",
+      "input_head": "6b38300fc5c0803dd6eb57b6d8faefd207b8219a",
+      "check": {
+        "dataset": "m3-entry-membership-20261018",
+        "targets": 2,
+        "changes": 2,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-entry-membership-20261018",
+        "targets": 2,
+        "changes": 2,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-entry-membership-20261018",
+        "targets": 2,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "output_head": "a689a0db577fbdd17c2698bfd45d58ff37f89faa"
+    },
+    {
+      "dataset": "m3-recipe-path-api-20261018",
+      "input_head": "d9127c0d3059d2b1075b87f9ff216cbb5467a07d",
+      "qualified_crate": "/dev/shm/m3-sdk-actual-20261018-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "check": {
+        "dataset": "m3-recipe-path-api-20261018",
+        "targets": 1,
+        "changes": 1,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-recipe-path-api-20261018",
+        "targets": 1,
+        "changes": 1,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-recipe-path-api-20261018",
+        "targets": 1,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "output_head": "00cda43c3a1d2402ee3bac3dd22f8c2ced1407ee"
+    },
+    {
+      "dataset": "m3-regex-facts-v2-20261018",
+      "input_head": "2015360812e3daf07c5e6d1e647c2fb76165e0c6",
+      "qualified_crate": "/dev/shm/m3-parser-reuse-f8287/final/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "check": {
+        "dataset": "m3-regex-facts-v2-20261018",
+        "targets": 6,
+        "changes": 6,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-regex-facts-v2-20261018",
+        "targets": 6,
+        "changes": 6,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-regex-facts-v2-20261018",
+        "targets": 6,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "output_head": "6810811a4e2ebf9f2a2f67571a8b326dd5041813"
+    },
+    {
+      "dataset": "m3-tq-current-epoch-20261018",
+      "input_head": "00cda43c3a1d2402ee3bac3dd22f8c2ced1407ee",
+      "qualified_crate": "/dev/shm/m3-sdk-actual-20261018-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "check": {
+        "dataset": "m3-tq-current-epoch-20261018",
+        "targets": 14,
+        "changes": 14,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-tq-current-epoch-20261018",
+        "targets": 14,
+        "changes": 14,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-tq-current-epoch-20261018",
+        "targets": 14,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "output_head": "9beda328fc839489fee6f888e62244487c8481bd"
+    },
+    {
+      "dataset": "m3-tq-guard-proof-20261018",
+      "input_head": "0e2cd8d9d68dd2af0ef340e8a1a90ac6de7a5cd4",
+      "qualified_crate": "/workspace/scratch/f8287c652798/combine/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "check": {
+        "dataset": "m3-tq-guard-proof-20261018",
+        "targets": 4,
+        "changes": 4,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-tq-guard-proof-20261018",
+        "targets": 4,
+        "changes": 4,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-tq-guard-proof-20261018",
+        "targets": 4,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "output_head": "ab6cc64eddd17ea81242bf58a7a19cb130a58c77"
+    },
+    {
+      "dataset": "m3jdk21-tq-bootstrap-20261018",
+      "input_head": "1fe7f19603b260186bfa8df1f4f06d891a0f2427",
+      "qualified_crate": "/dev/shm/m3-sdk-actual-20261018-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "check": {
+        "dataset": "m3jdk21-tq-bootstrap-20261018",
+        "targets": 12,
+        "changes": 12,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3jdk21-tq-bootstrap-20261018",
+        "targets": 12,
+        "changes": 12,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3jdk21-tq-bootstrap-20261018",
+        "targets": 12,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "output_head": "b40f42c469aad55d60d43ebc5297c80858a1c515"
+    }
+  ],
+  "actual_sdk_datasets": 8,
+  "serial_target_applications": 43,
+  "claim": "Each replay was zero at its receiving stage; later qualified successors may intentionally supersede those postimages.",
+  "promotion_authority": false
+}

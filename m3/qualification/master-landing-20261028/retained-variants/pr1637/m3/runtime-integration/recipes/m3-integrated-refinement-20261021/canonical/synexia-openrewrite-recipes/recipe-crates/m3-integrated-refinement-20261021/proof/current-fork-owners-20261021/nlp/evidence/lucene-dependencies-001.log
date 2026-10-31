@@ -1,0 +1,15 @@
+["/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn", "-B", "-ntp", "-s", "/workspace/scratch/206049dfb270/canonical-work/maven-proxy-settings.xml", "-Dmaven.repo.local=/tmp/m3-build-m2", "-f", "/workspace/scratch/206049dfb270/nlp-work/forks/lucene/.m3/current-jmods/dependencies.xml", "org.apache.maven.plugins:maven-dependency-plugin:3.8.1:copy-dependencies", "-DincludeScope=runtime", "-DoutputDirectory=/workspace/scratch/206049dfb270/nlp-work/dependencies/lucene"]
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------< com.m3.currentforks:lucene-jdk21-jmod-dependencies >---------
+[INFO] Building lucene-jdk21-jmod-dependencies 20261018
+[INFO]   from dependencies.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- dependency:3.8.1:copy-dependencies (default-cli) @ lucene-jdk21-jmod-dependencies ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.688 s
+[INFO] Finished at: 2026-10-21T03:09:22+01:00
+[INFO] ------------------------------------------------------------------------

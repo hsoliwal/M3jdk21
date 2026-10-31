@@ -1,0 +1,481 @@
+{
+  "schema_version": 1,
+  "id": "m3-collection-wrapper-convergence-20261018",
+  "authored_date_utc": "2026-10-18",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0 for this original catalogue; referenced source grants remain per file",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-collection-wrapper-convergence-20261018",
+  "canonical_current_recipe_revision": null,
+  "canonical_current_recipe_status": "PENDING_ROOT_QUALIFICATION_AND_PUBLICATION",
+  "receiving_repository": "hsoliwal/M3jdk21",
+  "receiving_baseline": "0d73745d7203123533dce8f8fb264ba2746f6d2d",
+  "candidate_origin": "UNCOMMITTED_LOCAL_CANDIDATE_NO_RECIPE_OR_RECEIPT_PRESENT_IN_TASK",
+  "source_checked_locally": true,
+  "execution_status": "PENDING_CURRENT_RECIPE_AND_TARGET_EXECUTION",
+  "scope": {
+    "runtime_source_files": 6,
+    "test_source_files": 20,
+    "whole_sdk_completion": false,
+    "current_test_case_count": null,
+    "current_benchmarks": null
+  },
+  "frozen_inventory": {
+    "file": "FROZEN_INPUT_INVENTORY.json",
+    "sha256": "4dcac6aa3ff06b9e385ae76696dd28c9b3cd67fbe02b84c94f7ec3e6848da578",
+    "captured_utc": "2026-10-18T04:45:19.094817+00:00",
+    "note": "Exact original freeze preserved, including uncommitted origin; it is not a recipe output receipt"
+  },
+  "historical_readme": {
+    "file": "HISTORICAL_README.md",
+    "sha256": "e0fad4f4c7af9f34026a158dc7316ff1e6f342df2b6c939ed3c67ca34026ae1a",
+    "status": "INHERITED_CLAIMS_PRESERVED_NOT_PROMOTED",
+    "overrides": "This provenance and README govern current claims; historical #1204/72580 sources not checked in this pass"
+  },
+  "catalogue_inputs": [
+    {
+      "path": "m3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/0d73745d7203123533dce8f8fb264ba2746f6d2d/m3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv",
+      "sha256": "e9d721fd062fe291f695a9dc39de2f4d90a725a49432cde5017ccac644c910cd",
+      "bytes": 15104,
+      "evidence": "LOCAL_BASELINE_CATALOGUE_READ",
+      "note": "Inherited row assertions retain their original evidence status; no wholesale fresh donor audit implied"
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/index-path-masks-20261017.tsv",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/0d73745d7203123533dce8f8fb264ba2746f6d2d/m3/collections/algorithm-catalog/index-path-masks-20261017.tsv",
+      "sha256": "4faebe839f3b2e3f61e43c05865d28f7de793a1f0eb051d96597d7c05e2960b6",
+      "bytes": 3418,
+      "evidence": "LOCAL_BASELINE_CATALOGUE_READ",
+      "note": "Inherited row assertions retain their original evidence status; no wholesale fresh donor audit implied"
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/order-statistics.tsv",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/0d73745d7203123533dce8f8fb264ba2746f6d2d/m3/collections/algorithm-catalog/order-statistics.tsv",
+      "sha256": "e3ef7ab080a37b43f350607810d02ad219514ca4594e49302b1889b24a0b0318",
+      "bytes": 3062,
+      "evidence": "LOCAL_BASELINE_CATALOGUE_READ",
+      "note": "Inherited row assertions retain their original evidence status; no wholesale fresh donor audit implied"
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/mask-window-sparse-20261017.tsv",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/0d73745d7203123533dce8f8fb264ba2746f6d2d/m3/collections/algorithm-catalog/mask-window-sparse-20261017.tsv",
+      "sha256": "70e16c59bd7464fc9ecc23dcb07e9c098bce253437b5f96656d815831c7eb4c5",
+      "bytes": 2178,
+      "evidence": "LOCAL_BASELINE_CATALOGUE_READ",
+      "note": "Inherited row assertions retain their original evidence status; no wholesale fresh donor audit implied"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "CURRENT_M3_BASE",
+      "url": "https://github.com/hsoliwal/M3jdk21/tree/0d73745d7203123533dce8f8fb264ba2746f6d2d",
+      "revision": "0d73745d7203123533dce8f8fb264ba2746f6d2d",
+      "evidence": "LOCAL_CHECKOUT_HEAD_AND_SIX_PREIMAGE_BYTES_CHECKED",
+      "rights": "Per-file notices; six runtime owners carry first-party Apache-2.0",
+      "scope": "Existing six runtime owners and 20 absent test paths; source identity is not execution proof"
+    },
+    {
+      "source_id": "JDK_NAV_API",
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/NavigableSet.html",
+      "revision": "Java SE 21 documentation; read 2026-10-18",
+      "evidence": "PRIMARY_DOCUMENT_READ",
+      "rights": "Reference only; no source or prose body copied",
+      "scope": "Relational navigation, null result ambiguity, bounded view endpoint exceptions"
+    },
+    {
+      "source_id": "JDK_COMPARATOR_API",
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html",
+      "revision": "Java SE 21 documentation; read 2026-10-18",
+      "evidence": "PRIMARY_DOCUMENT_READ",
+      "rights": "Reference only; no source or prose body copied",
+      "scope": "Comparator total-order obligations and optional null support; null need not be an extreme"
+    },
+    {
+      "source_id": "JDK_TREE_MAP",
+      "url": "https://github.com/openjdk/jdk21u/blob/bb6b279495ceff8442dbd0225756b92d466d5309/src/java.base/share/classes/java/util/TreeMap.java",
+      "revision": "bb6b279495ceff8442dbd0225756b92d466d5309",
+      "git_blob_sha1": "a91a56a5900c8acb8d268eac16744abf7cad1134",
+      "evidence": "GITHUB_SOURCE_AND_LICENSE_HEADER_READ",
+      "rights": "GPL-2.0-only WITH Classpath-exception-2.0; reference only",
+      "scope": "NavigableSubMap absCeiling/absHigher/absFloor/absLower; entry absence separate from null key"
+    },
+    {
+      "source_id": "GUAVA_SETS_33_4_8",
+      "url": "https://github.com/google/guava/blob/f06690fa3e874f65515e8fd338a74d636e2c792f/guava/src/com/google/common/collect/Sets.java",
+      "revision": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+      "tag": "v33.4.8",
+      "git_blob_sha1": "92525b9b4af3bd8710e5b17e4b507f316ffa43fb",
+      "evidence": "TAG_RESOLVED_AND_SOURCE_LICENSE_HEADER_READ",
+      "rights": "Apache-2.0; reference only, no source body copied",
+      "scope": "FilteredNavigableSet iterator scans and headSet/tailSet query narrowing; latter not safe for every bounded query"
+    },
+    {
+      "source_id": "GUAVA_FILTER_API",
+      "url": "https://guava.dev/releases/33.4.8-jre/api/docs/com/google/common/collect/Sets.html",
+      "revision": "33.4.8-jre; read 2026-10-18",
+      "evidence": "PRIMARY_DOCUMENT_READ",
+      "rights": "Reference only; upstream Apache-2.0 code not imported",
+      "scope": "Live visibility, rejected writes, iterator remove restriction, distinct serialization/concurrency behavior"
+    },
+    {
+      "source_id": "JNI21",
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/specs/jni/functions.html",
+      "revision": "Java SE 21 specification; read 2026-10-18",
+      "evidence": "PRIMARY_SPECIFICATION_READ",
+      "rights": "Reference only; no specification body copied",
+      "scope": "Primitive region APIs, exception checks, local-reference ownership, native array type matching"
+    },
+    {
+      "source_id": "JLS21_BITS",
+      "url": "https://docs.oracle.com/javase/specs/jls/se21/html/jls-15.html#jls-15.22.1",
+      "revision": "Java SE 21 specification; read 2026-10-18",
+      "evidence": "PRIMARY_SPECIFICATION_READ",
+      "rights": "Reference only; no specification body copied",
+      "scope": "Full-width integer bitwise operations; model for required and forbidden mask intersection"
+    },
+    {
+      "source_id": "LC34",
+      "url": "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/",
+      "revision": "Problem 34; read 2026-10-18; website is not a commit-pinned code donor",
+      "evidence": "PRIMARY_PROBLEM_PAGE_READ",
+      "rights": "PROBLEM_REFERENCE_ONLY; no editorial, submission or problem body copied",
+      "scope": "Duplicate-aware lower/upper bound category; no comparator, null or live view equivalence"
+    },
+    {
+      "source_id": "LC27",
+      "url": "https://leetcode.com/problems/remove-element/",
+      "revision": "Problem 27; read 2026-10-18; website is not a commit-pinned code donor",
+      "evidence": "PRIMARY_PROBLEM_PAGE_READ",
+      "rights": "PROBLEM_REFERENCE_ONLY; no solution or problem body copied",
+      "scope": "Compaction category; challenge permits reordering, M3 path encounter order does not"
+    },
+    {
+      "source_id": "HR_LOWER",
+      "url": "https://www.hackerrank.com/challenges/cpp-lower-bound/problem",
+      "revision": "Lower Bound-STL; read 2026-10-18",
+      "evidence": "PRIMARY_PROBLEM_PAGE_READ",
+      "rights": "PROBLEM_REFERENCE_ONLY; no solution or problem body copied",
+      "scope": "Repeated lower-bound queries and first duplicates; problem promises an answer, target must also cover absence"
+    },
+    {
+      "source_id": "HR_BITS",
+      "url": "https://www.hackerrank.com/challenges/java-bitset/problem",
+      "revision": "Java BitSet; read 2026-10-18",
+      "evidence": "PRIMARY_PROBLEM_PAGE_READ",
+      "rights": "PROBLEM_REFERENCE_ONLY; no solution or problem body copied",
+      "scope": "Bit-state operation categories; no row-ID width, JNI, stage or owner-lifetime contract"
+    },
+    {
+      "source_id": "GFG_LOWER",
+      "url": "https://www.geeksforgeeks.org/problems/implement-lower-bound/1",
+      "revision": "Implement Lower Bound; read 2026-10-18",
+      "evidence": "PRIMARY_PROBLEM_PAGE_READ",
+      "rights": "PROBLEM_REFERENCE_ONLY; no article, solution or problem body copied",
+      "scope": "Lower-bound result n for absence; useful index sentinel distinct from payload"
+    },
+    {
+      "source_id": "HISTORICAL_1204",
+      "url": "https://github.com/hsoliwal/M3JDK21/pull/1204",
+      "revision": "claimed head dab450b91928c0e6cc835a783c6b6b1805f70e8b",
+      "evidence": "INHERITED_README_CLAIM_NOT_SOURCE_CHECKED_IN_THIS_CATALOGUE_PASS",
+      "rights": "No new grant inferred; historical per-file notices require source review",
+      "scope": "Claimed compatible wrapper atoms; neither ancestry nor inherited prose proves current code or qualification"
+    },
+    {
+      "source_id": "HISTORICAL_CANONICAL",
+      "url": "https://github.com/hsoliwal/com.synexia/commit/72580cf231dc025965370933f099e914ddc407be",
+      "revision": "72580cf231dc025965370933f099e914ddc407be",
+      "evidence": "INHERITED_README_CLAIM_NOT_SOURCE_CHECKED_IN_THIS_CATALOGUE_PASS",
+      "rights": "No source import admitted by this record",
+      "scope": "Claimed canonical delivery related to #1204; no recipe execution attributed to the recovered local candidate"
+    }
+  ],
+  "recipe_boundary": {
+    "engine": "Existing canonical Synexia Maven/OpenRewrite Java/text snapshot machinery; root owns exact selection and execution",
+    "new_engine_created": false,
+    "claim_of_actual_sdk_execution": false,
+    "required_receipts": [
+      "exact preimages/postimages",
+      "actual SDK execution",
+      "serial per-file application",
+      "fixed point and drift/refusal",
+      "public API/native ABI comparison",
+      "original module and Java/JNI runtime contracts",
+      "receiving source readback"
+    ]
+  },
+  "licensing_boundary": {
+    "challenge_code_copied": false,
+    "external_implementation_bodies_copied_by_catalogue_task": false,
+    "jdk_guava_source_use": "Reference and contract comparison only",
+    "historical_grants_reverified": false
+  },
+  "publication_boundary": "Documentation is prepared as recipe candidates. Target receipt and source-bound canonical handoff required; no phase promotion or universal compatibility inferred.",
+  "frozen_candidate_files": [
+    {
+      "path": "candidates/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "bytes": 4854,
+      "sha256": "3302f213fd0b47ca43331da86236c7a8df3e8855ffd4712c123e986693e5ba27",
+      "git_blob_sha1": "9c61e182e96c129e161fdd179d38eb1aac35c48b",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "baseline_sha256": "d70bcdd969aa688ed0a498ce3503684fee2b0ecc9eb11348160e7befa1a7cfe0",
+      "baseline_git_blob_sha1": "ccf65b212b756fe2147b68d3c1d6655e87bb3103",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "bytes": 39501,
+      "sha256": "d5b841ff61d7269454fe136e7a1bf10ace25d9d6a3a516137e48a779c6c63201",
+      "git_blob_sha1": "bd5dcda2789022e89b121efccdda98d6c293a0f4",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "baseline_sha256": "4a109baf88457d625fa8fc259ee8e7908340f5436cfea77dc5ac554924045b8d",
+      "baseline_git_blob_sha1": "8fd0ffbb506e962ab1525f702bf2e42938afeaee",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "bytes": 20485,
+      "sha256": "e91152a0bb34178995835266ff7c52ae22d87ec6324d171415aed28e293794d1",
+      "git_blob_sha1": "850d0892724262f46922b3210f39677067d20d05",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "baseline_sha256": "4d1c782345de46c31e24b4822f58c431903c7b951b6a15641c88e055271f971e",
+      "baseline_git_blob_sha1": "ef0fac5c1e71f8493baab365c8af64bb22cb6171",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "bytes": 12116,
+      "sha256": "17137b236421ad3ad4f079acc0ba98a10ad4d419b717abd1f9192f42b18260a8",
+      "git_blob_sha1": "c1f66b068f9966d77693059a76dbfb988da8b878",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "baseline_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "baseline_git_blob_sha1": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "bytes": 24276,
+      "sha256": "51188863415920856a0f5e69ea8a54735e8502d7c0bcf8ca42fcf3a84bf1c6ec",
+      "git_blob_sha1": "a2776432100346e0c06d640c805dcd0ce4fc16e8",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "baseline_sha256": "ff73119862556f307cc3e6af918336793faae0c2575f2cedda34b4890ba916b0",
+      "baseline_git_blob_sha1": "067f17f48c407ad8fe4351b4ebff9b8284f423e9",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/main/native/collections/m3_index_path_masks.c",
+      "bytes": 7144,
+      "sha256": "1480656507ad1c0cb425904e9e73b94c207a64f8eac961461d383265fcfce121",
+      "git_blob_sha1": "2e6ef68d829bd7a5ae6e4fa2292bdb2adeb4df96",
+      "target_path": "m3/collections/src/main/native/collections/m3_index_path_masks.c",
+      "baseline_sha256": "3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb",
+      "baseline_git_blob_sha1": "086b49293257fd17cc7fbd1ebbb98460aa677e35",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java",
+      "bytes": 10170,
+      "sha256": "aa60ff7da36d3e70cd51ee5eed5350ee23d7c6ddac54f63e3a166a817e14b3d0",
+      "git_blob_sha1": "f3c89e8a85e7e322ee8b3712ad8db91a69a66fac",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionSelfTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionTest.java",
+      "bytes": 501,
+      "sha256": "46fb2cdf27829984581db5a6cdd6d2fb243cbf183742afafa5b2003d0ff5dce6",
+      "git_blob_sha1": "37a2e0fe50687df6917a0ac0f105d491b2446974",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3DeepReadOnlyCollectionTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundarySelfTest.java",
+      "bytes": 16051,
+      "sha256": "06ca1bc4f818218156f6f9dedadced0f45eff165470e4c93f8938b8103ee9d2f",
+      "git_blob_sha1": "8c178bff039bf57d078a4fcab8051b3099162f89",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundarySelfTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundaryTest.java",
+      "bytes": 710,
+      "sha256": "84a9a87ab9101da250f504f8f0ae9d99baa6106dcb090dd3c3a90f776c4b82f9",
+      "git_blob_sha1": "a7c3ad1c6c4687808c20f2ebc30fd78b887fe6f9",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationBoundaryTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3IndexPathImpossibleStageSelfTest.java",
+      "bytes": 10286,
+      "sha256": "27ee8c3942e18a6fada7e4fad1cd66f163aa6eccb01d8f99cfe6c3e3bd5ecf3a",
+      "git_blob_sha1": "005140a6c47099cf716a93d5d6169b8fee0a8e71",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathImpossibleStageSelfTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3IndexPathImpossibleStageTest.java",
+      "bytes": 431,
+      "sha256": "61f686be147e9b940dee3c3b385f6fea0c20deb3c81c03972aae3d10dea572b1",
+      "git_blob_sha1": "dae2c45f3111f07462f5fbb7c0effe162e68717b",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathImpossibleStageTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3IndexPathMaskAliasSelfTest.java",
+      "bytes": 3783,
+      "sha256": "0b4cc8de0c702db168f4ff0ea236950000c3453aad8d49da45d010964c4417e7",
+      "git_blob_sha1": "a8e54c82a7a6ad293e7bcf46fb6bfc1c4bc216d7",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMaskAliasSelfTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksLongSelfTest.java",
+      "bytes": 9085,
+      "sha256": "36bc8afd1da83e2b4b60d928016e42c20eba0fa376dc9a2a59eb1acc9e0f5dec",
+      "git_blob_sha1": "ecf08d7ab533f6ec93d905d5f08bdafef0f35678",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksLongSelfTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksLongTest.java",
+      "bytes": 393,
+      "sha256": "53e4f8b8efd81cbaaf7b6cd49efe67ac627607910e5bfced41a2a71d24f7f63b",
+      "git_blob_sha1": "7de14feaa5c25298ad1999b71e93e94d7ddf4663",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksLongTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroStagesSelfTest.java",
+      "bytes": 9556,
+      "sha256": "3e53be1799c78795cb5bc45ba0b3857116464566eda05b65a7a6d0649e97d303",
+      "git_blob_sha1": "2e7a37dc5796a997467cada47a6db18aa08ea3c5",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroStagesSelfTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroStagesTest.java",
+      "bytes": 431,
+      "sha256": "9bcfb70ef5a5553031f44bca89ac372799ee3330c7d9adf134117f165189ea6b",
+      "git_blob_sha1": "441b9e65062a37bbc3a520191049cddfc143d293",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroStagesTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroWindowSelfTest.java",
+      "bytes": 16212,
+      "sha256": "250cfb09472d8b71b1b936987b7944c37fc6252c3a2789a615220f55f7c0c243",
+      "git_blob_sha1": "86d9d2e58cc16b26db968d166497adabd86f5cfe",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroWindowSelfTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroWindowTest.java",
+      "bytes": 425,
+      "sha256": "b2f06d23a69e2928ca8465010a99089f38852f6ecda3a8bd954178da7d856db8",
+      "git_blob_sha1": "896555d2cc0ca453232ae68bcb47e1b3a0779e57",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathZeroWindowTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionPathMasksTest.java",
+      "bytes": 8891,
+      "sha256": "239c6662ba7f91c786df60a9faa19633844b20408c972f88f381a7a241a49847",
+      "git_blob_sha1": "87b3e32250d40de6b8d36a67ef5f8809b2f656e6",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionPathMasksTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3OrderWindowProof.java",
+      "bytes": 17595,
+      "sha256": "633ad8b6e70b211efc1917daea6277b38632359f9442120396fbeb187e663cf0",
+      "git_blob_sha1": "f3ef7c3ff2adbf360d2711c0344d87277e152b85",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3OrderWindowProof.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3OrderWindowTest.java",
+      "bytes": 290,
+      "sha256": "6b91d025a4e9701659f906f3fc649ba947cf734769764b13db7682e5d75d6030",
+      "git_blob_sha1": "b3e3e13fc2c0c29e1c48a19bc58b931003717a84",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3OrderWindowTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundarySelfTest.java",
+      "bytes": 19087,
+      "sha256": "3c2836df74ef09f844f845dbb7f0cd0d179787254d994fa98168d93f3c1e30d4",
+      "git_blob_sha1": "4827525f701e696f537205c86a6ee067d13ecc9a",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundarySelfTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundaryTest.java",
+      "bytes": 618,
+      "sha256": "5dace1d4f7e86a98af7b817be6594063c63083a1b7f6f37ad47f192d74eae632",
+      "git_blob_sha1": "c6590b6a539768f2ddf8d3b102577dd13ce13c4e",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3ReadOnlyViewBoundaryTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceSelfTest.java",
+      "bytes": 8066,
+      "sha256": "74486558694c8c4c8687231959f11deb0fdee8b12f0f7a6583c7b9c5c88f4eec",
+      "git_blob_sha1": "eaca8cf76d596ac2e6376e2dbd607fa04377ff91",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceSelfTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    },
+    {
+      "path": "candidates/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java",
+      "bytes": 742,
+      "sha256": "5ddaf76d0fe4573e705dbda9748d605c6eef434f6fe66f7334e617ab81631050",
+      "git_blob_sha1": "49b42e773a0d2ce7a95f6cbc725097058b1e0dcb",
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java",
+      "baseline_sha256": "ABSENT",
+      "changed": true
+    }
+  ],
+  "source_checked_locally_note": "The 26 initial frozen candidate hashes and six baseline hashes were checked before a later independent counterexample rejected the initial M3FilteredViews fallback. These are not corrected postimage seals.",
+  "initial_candidate_disposition": "REJECTED_BOUNDED_FALLBACK_EXCEPTION_DEMAND",
+  "corrected_candidate_status": "ROOT_AND_COLLECTIONS_AGENT_CORRECTING_CANONICAL_CANDIDATES; EXACT_CORRECTED_PROOF_PENDING",
+  "rejection_record": "REJECTED_CANDIDATES.json",
+  "rejected_candidate_evidence": [
+    {
+      "path": "counterexamples/M3ComparatorFailureProbe.java.txt",
+      "sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+      "bytes": 1989,
+      "evidence_kind": "PROTECTED_PROBE_SOURCE_AS_TEXT"
+    },
+    {
+      "path": "counterexamples/comparator-exception-baseline.log",
+      "sha256": "5408289657af586b76932a48e56c35f1bf487f7d123f7141412f9b9ada0146fb",
+      "bytes": 381,
+      "evidence_kind": "BASELINE_OBSERVATION"
+    },
+    {
+      "path": "counterexamples/comparator-exception-candidate.log",
+      "sha256": "7e5de942403a256ce83c150a87eb38cc580c89f86dd8e7ae521ef0946ce66e6b",
+      "bytes": 375,
+      "evidence_kind": "REJECTED_INITIAL_CANDIDATE_OBSERVATION"
+    }
+  ]
+}

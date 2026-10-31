@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "baseline_doc_warnings": 121,
+  "owners": 12,
+  "serial_owner_passes": 12,
+  "remaining_doc_warnings": 0,
+  "remaining_flow_try_warnings": 2,
+  "strict_flags_retained": [
+    "-g:none",
+    "-XDrawDiagnostics",
+    "-Xmaxwarns",
+    "1000",
+    "-Xlint:all",
+    "-Werror",
+    "-Xdoclint:all/protected",
+    "--patch-module",
+    "java.base=/workspace/scratch/87fb3604f641/m3-implementation/collections-lane/synexia/synexia-openrewrite-recipes/recipes/m3-java-base-doclint-20261018/target/doclint-proof/src"
+  ],
+  "remaining_warning_recipe": "M3ProgressScopeLintRecipe",
+  "javac_sha256": "55859b80e7a9c4c4736be19ad3addeb35112ca6d17a30c4e0e116afc0a499bdb",
+  "passes": [
+    {
+      "pass": 0,
+      "owner": null,
+      "doc_warnings": 121,
+      "try_warnings": 0,
+      "returncode": 1
+    },
+    {
+      "pass": 1,
+      "owner": "java/lang/Runnable.java",
+      "doc_warnings": 119,
+      "try_warnings": 0,
+      "returncode": 1
+    },
+    {
+      "pass": 2,
+      "owner": "java/util/Strings.java",
+      "doc_warnings": 47,
+      "try_warnings": 0,
+      "returncode": 1
+    },
+    {
+      "pass": 3,
+      "owner": "java/util/concurrent/Callable.java",
+      "doc_warnings": 44,
+      "try_warnings": 0,
+      "returncode": 1
+    },
+    {
+      "pass": 4,
+      "owner": "java/util/concurrent/Executor.java",
+      "doc_warnings": 41,
+      "try_warnings": 0,
+      "returncode": 1
+    },
+    {
+      "pass": 5,
+      "owner": "java/util/concurrent/ExecutorService.java",
+      "doc_warnings": 34,
+      "try_warnings": 0,
+      "returncode": 1
+    },
+    {
+      "pass": 6,
+      "owner": "java/util/concurrent/MonitoredCallable.java",
+      "doc_warnings": 31,
+      "try_warnings": 0,
+      "returncode": 1
+    },
+    {
+      "pass": 7,
+      "owner": "java/util/concurrent/MonitoredRunnable.java",
+      "doc_warnings": 30,
+      "try_warnings": 0,
+      "returncode": 1
+    },
+    {
+      "pass": 8,
+      "owner": "java/util/concurrent/ProgressMonitor.java",
+      "doc_warnings": 17,
+      "try_warnings": 0,
+      "returncode": 1
+    },
+    {
+      "pass": 9,
+      "owner": "java/util/concurrent/ProgressMonitors.java",
+      "doc_warnings": 7,
+      "try_warnings": 0,
+      "returncode": 1
+    },
+    {
+      "pass": 10,
+      "owner": "java/util/function/Consumer.java",
+      "doc_warnings": 5,
+      "try_warnings": 0,
+      "returncode": 1
+    },
+    {
+      "pass": 11,
+      "owner": "java/util/function/Function.java",
+      "doc_warnings": 2,
+      "try_warnings": 0,
+      "returncode": 1
+    },
+    {
+      "pass": 12,
+      "owner": "java/util/function/Supplier.java",
+      "doc_warnings": 0,
+      "try_warnings": 2,
+      "returncode": 1
+    }
+  ]
+}

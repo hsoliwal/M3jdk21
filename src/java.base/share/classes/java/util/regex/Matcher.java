@@ -38,6 +38,8 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import jdk.internal.mindex.M3TQ;
+
 /**
  * An engine that performs match operations on a {@linkplain
  * java.lang.CharSequence character sequence} by interpreting a {@link Pattern}.
@@ -143,6 +145,17 @@ public final class Matcher implements MatchResult {
      * The original string being matched.
      */
     CharSequence text;
+
+    private static final int M3_TQ_MAX_UTF16_UNITS = 32_768;
+    private int m3TqFactsFrom = -1;
+    private int m3TqFactsTo = -1;
+    private M3TQ.Facts m3TqFacts;
+    // The Pattern-compiled monotone plan needs only a Boolean region verdict;
+    // retain it across find() calls on the same immutable String and query.
+    private M3TQ m3TqScanQuery;
+    private int m3TqScanFrom = -1;
+    private int m3TqScanTo = -1;
+    private boolean m3TqScanAllowed;
 
     /**
      * Matcher state used by the last node. NOANCHOR is used when a
@@ -274,13 +287,40 @@ public final class Matcher implements MatchResult {
      * @since 1.5
      */
     public MatchResult toMatchResult() {
-        String capturedText = hasMatch()
-                ? text.subSequence(first, last).toString()
-                : null;
+        int minStart;
+        String capturedText;
+        if (hasMatch()) {
+            minStart = minStart();
+            capturedText = text.subSequence(minStart, maxEnd()).toString();
+        } else {
+            minStart = -1;
+            capturedText = null;
+        }
         return new ImmutableMatchResult(first, last, groupCount(),
                 groups.clone(), capturedText,
-                namedGroups()
-        );
+                namedGroups(), minStart);
+    }
+
+    private int minStart() {
+        int r = text.length();
+        for (int group = 0; group <= groupCount(); ++group) {
+            int start = groups[group * 2];
+            if (start >= 0) {
+                r = Math.min(r, start);
+            }
+        }
+        return r;
+    }
+
+    private int maxEnd() {
+        int r = 0;
+        for (int group = 0; group <= groupCount(); ++group) {
+            int end = groups[group * 2 + 1];
+            if (end >= 0) {
+                r = Math.max(r, end);
+            }
+        }
+        return r;
     }
 
     private static class ImmutableMatchResult implements MatchResult {
@@ -290,16 +330,18 @@ public final class Matcher implements MatchResult {
         private final int[] groups;
         private final String text;
         private final Map<String, Integer> namedGroups;
+        private final int minStart;
 
         ImmutableMatchResult(int first, int last, int groupCount,
                              int[] groups, String text,
-                             Map<String, Integer> namedGroups) {
+                             Map<String, Integer> namedGroups, int minStart) {
             this.first = first;
             this.last = last;
             this.groupCount = groupCount;
             this.groups = groups;
             this.text = text;
             this.namedGroups = namedGroups;
+            this.minStart = minStart;
         }
 
         @Override
@@ -345,7 +387,7 @@ public final class Matcher implements MatchResult {
             checkGroup(group);
             if ((groups[group * 2] == -1) || (groups[group * 2 + 1] == -1))
                 return null;
-            return text.substring(groups[group * 2] - first, groups[group * 2 + 1] - first);
+            return text.substring(groups[group * 2] - minStart, groups[group * 2 + 1] - minStart);
         }
 
         @Override
@@ -428,6 +470,9 @@ public final class Matcher implements MatchResult {
                 localsPos[i].clear();
         }
         lastAppendPosition = 0;
+        // Derived facts are not match state. Keep them for the same immutable input;
+        // m3TqAllowsSearch checks the exact region before reuse. reset(input) invalidates
+        // before changing text, so no second input reference is needed for cache identity.
         from = 0;
         to = getTextLength();
         modCount++;
@@ -449,6 +494,14 @@ public final class Matcher implements MatchResult {
      * @return  This matcher
      */
     public Matcher reset(CharSequence input) {
+        if (input != text) {
+            m3TqFacts = null;
+            m3TqFactsFrom = -1;
+            m3TqFactsTo = -1;
+            m3TqScanQuery = null;
+            m3TqScanFrom = -1;
+            m3TqScanTo = -1;
+        }
         text = input;
         return reset();
     }
@@ -1722,6 +1775,69 @@ public final class Matcher implements MatchResult {
      * calls to the search methods start at a new "soft" boundary which is
      * the end of the previous match.
      */
+    private boolean m3TqAllowsSearch() {
+        M3TQ query = parentPattern.m3Tq;
+        if (query == null || !query.hasConstraints() || !(text instanceof String)) {
+            return true;
+        }
+        int regionLength = to - this.from;
+        if (regionLength < 0 || regionLength > M3_TQ_MAX_UTF16_UNITS) {
+            return true;
+        }
+
+        M3TQ.Facts facts = m3TqFacts;
+        if (facts != null && m3TqFactsFrom == this.from && m3TqFactsTo == to) {
+            return query.testPrecomputed(facts);
+        }
+        // Preserve the established reusable facts contract for Pattern.LITERAL:
+        // literals can share one precomputed region index across changing queries.
+        if (query.hasScanPlan() && (parentPattern.flags() & Pattern.LITERAL) == 0) {
+            if (m3TqScanQuery == query
+                    && m3TqScanFrom == this.from
+                    && m3TqScanTo == to) {
+                return m3TqScanAllowed;
+            }
+            try {
+                jdk.internal.access.JavaLangAccess access =
+                        jdk.internal.access.SharedSecrets.getJavaLangAccess();
+                java.util.function.LongPredicate prepared = access == null
+                        ? null : access.stringM3TrigramFacts((String) text);
+                if (prepared == null) {
+                    boolean allowed = query.testScanning(
+                            text, this.from, to, M3_TQ_MAX_UTF16_UNITS);
+                    m3TqScanFrom = this.from;
+                    m3TqScanTo = to;
+                    m3TqScanQuery = query;
+                    m3TqScanAllowed = allowed;
+                    return allowed;
+                }
+                // Prepared owner signals already have an established regional
+                // verification/facts cache. Keep that cache and its reuse contract.
+            } catch (OutOfMemoryError unavailable) {
+                return true;
+            }
+        }
+        if (facts == null
+                || m3TqFactsFrom != this.from
+                || m3TqFactsTo != to) {
+            try {
+                jdk.internal.access.JavaLangAccess access =
+                        jdk.internal.access.SharedSecrets.getJavaLangAccess();
+                java.util.function.LongPredicate prepared = access == null
+                        ? null : access.stringM3TrigramFacts((String) text);
+                if (prepared != null && !query.test(prepared)) return false;
+                facts = M3TQ.precompute(text, this.from, to, M3_TQ_MAX_UTF16_UNITS);
+            } catch (OutOfMemoryError unavailable) {
+                // Candidate precompute must never add a new failure mode to Matcher.find().
+                return true;
+            }
+            m3TqFactsFrom = this.from;
+            m3TqFactsTo = to;
+            m3TqFacts = facts;
+        }
+        return query.testPrecomputed(facts);
+    }
+
     boolean search(int from) {
         this.hitEnd = false;
         this.requireEnd = false;
@@ -1735,6 +1851,15 @@ public final class Matcher implements MatchResult {
                 localsPos[i].clear();
         }
         acceptMode = NOANCHOR;
+        if (!m3TqAllowsSearch()) {
+            // Literal Start/BnM search reaches the end on failure. Preserve the observable
+            // Matcher state while skipping the exact engine only when absence is proven.
+            this.hitEnd = true;
+            this.first = -1;
+            this.oldLast = this.last;
+            this.modCount++;
+            return false;
+        }
         boolean result = parentPattern.root.match(this, from, text);
         if (!result)
             this.first = -1;

@@ -1,0 +1,38 @@
+{
+  "schema": "m3.source-recipe-candidate/1",
+  "state": "PROPOSED_NOT_SDK_QUALIFIED",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "e35f7fbe22b2a44c702467b387c982269ef8b01e",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12318",
+  "canonical_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-entry-membership-20261018",
+  "target_baseline": "70cf60e0165f9617424097243ae97f5c0b8b86a3",
+  "parent_product_pr": 1294,
+  "recipe_executed": false,
+  "qualified_receiver_executed": false,
+  "tests_executed": false,
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "before_sha256": "e61f94f0262878726b5c7255ebc3aa655a7808c4d1544a8bd0ee3fd1bc49f1a7",
+      "proposed_sha256": "cf2c5d4abad0da36d9af5d4ccde3890ca087a1590aaf0c07548023d5d2716bb7",
+      "mode": "0644"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredEntryMembershipTest.java",
+      "before_sha256": "ABSENT",
+      "proposed_sha256": "3c776b3be495088e908ac88b8430c89332221de87960feb77f774924fa89cf4d",
+      "mode": "0644"
+    }
+  ],
+  "jni_abi_changed": false,
+  "promotion_authority": false,
+  "pending": [
+    "baseline red/green reproduction",
+    "strict Java21 compilation and actual Maven/OpenRewrite SDK qualification",
+    "qualified receiving and fixed point",
+    "target collection tests",
+    "existing source-custody reconciliation for changed postimages"
+  ]
+}

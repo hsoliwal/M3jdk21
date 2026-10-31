@@ -1,0 +1,155 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "event": "3e877856e3f14207fece0d3f69c627ef420480da61a94b4210b4504ef5fc7616",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/test-classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "com.synexia.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/3e877856e3f14207fece0d3f69c627ef420480da61a94b4210b4504ef5fc7616.json",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-001/event-001.log",
+        "sha256": "23e723ebc35ee770884bde06c98c9563e21d27cd16c34a5840334c81fad7a66d"
+      }
+    },
+    {
+      "event": "115767aa323e2ea6db2f6de6b13641157abc0f68ef45bbcfeeaeabc7e84698dd",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/test-classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "com.synexia.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/115767aa323e2ea6db2f6de6b13641157abc0f68ef45bbcfeeaeabc7e84698dd.json",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-001/event-002.log",
+        "sha256": "9adb75973442657dfe8d97e18312951f48b54fc1ce6a2960632950a171527c44"
+      }
+    },
+    {
+      "event": "9f00fe04f180f10e0c2f0ba247d676add86c7afee28a11065a7f0fe69238b01d",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/test-classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "com.synexia.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/9f00fe04f180f10e0c2f0ba247d676add86c7afee28a11065a7f0fe69238b01d.json",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-001/event-003.log",
+        "sha256": "2e435f5f605f53d412233b16f28df22bff692e47acdc450fe412faf0397e7c61"
+      }
+    },
+    {
+      "event": "7b087f5faa490efcdc3b783cd86ca790c87e4fd00b6a4580e5754f5cad84ac5b",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/test-classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "com.synexia.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/7b087f5faa490efcdc3b783cd86ca790c87e4fd00b6a4580e5754f5cad84ac5b.json",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-001/event-004.log",
+        "sha256": "01dbfde1a06c4336f65e3f505db9b46ede4f68cb5ee7c6082ffdc1bd32d65e31"
+      }
+    },
+    {
+      "event": "d3f3be895c7fa277090fb372a22564b989448ea42b55be0aa3c16f5b7df37086",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/test-classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "com.synexia.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/d3f3be895c7fa277090fb372a22564b989448ea42b55be0aa3c16f5b7df37086.json",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-001/event-005.log",
+        "sha256": "2aecf141bbd06d3f9993c127ed10ee2ef8c4603876bcbc91b5f0bc26fe1b70eb"
+      }
+    }
+  ],
+  "unique_event_artifacts_verified": 55,
+  "artifact_hashes": {
+    "proof/bootstrap-003/runner.py": "5f666604d20071d941583f8dd7b4506aaedef86ce89eec82374695b3e6e59f02",
+    "proof/bootstrap-001/runner.py": "1ca232a8d6d0b251e1c62675a73244899ca6206ddccb32563e287db5e00f607b",
+    "proof/bootstrap-002/runner.py": "063978a31759acf2210bc2a3c294d9676c5d24a2451e14c388374b25d41f96b6",
+    "proof/bootstrap-environment/maven-proxy-settings.xml": "ed786afd8b3c7e5844ffec65e522ff93437d67832f5276e524927125d29b50a3",
+    "proof/bootstrap-environment/SOURCE_MANIFEST_PROXY.json": "f0c07e5e6e6ac9e0a1b26765fc0cd370643552a0a5840d86919a0f99cfc6c4cb",
+    "proof/bootstrap-environment/SOURCE_MANIFEST_BEFORE.json": "097f7178773b483d318a7d4d2b69006323f22125a624900591132c9b6df8c8bb",
+    "proof/bootstrap-001/RESULT.json": "d53b38d9b13c1aa7698f163fa58b37d0562e5bc11b0e3f10a730b63f1d2d2975",
+    "proof/bootstrap-001/maven.log": "f3ef2d31dfd7ae49e1c86cb0ccc6b473bc896faf5d692c03327a18af33304c77",
+    "proof/bootstrap-002/RESULT.json": "3c635b696ef702b49af07ffa9a527f8b7cbc01b57b5f654aa583db286595dd58",
+    "proof/bootstrap-002/maven.log": "e8ef6fb122afa5f9988369bc585fc9a76fdbc944de00f89721eea72fb4f2518a",
+    "proof/bootstrap-003/RESULT.json": "0449a586a2665dbb32508a8cc547bb5ed2df655836653eb1c57dd997fa8ce609",
+    "proof/bootstrap-003/maven.log": "6945a49efc73cc0151938b48d4dc227088379d88229636b756a8276bd7ee17f5",
+    "proof/bootstrap-004/runner.py": "639b0ad5bcbb30e97d46d73c63fe68f514eecbade55fb5414204b1f9d2f0c848",
+    "proof/bootstrap-environment/SOURCE_MANIFEST_AFTER.json": "59a3ecacc2d790dacfea271c1c5ee84f5138660f451dc70b0e345a301b1cf011",
+    "proof/bootstrap-004/RESULT.json": "19d0f864ed152134f1beba3a891569da06f7c0c047aa42a968a769786d4e5146",
+    "proof/bootstrap-004/maven.log": "351ab258b2aa410682d9eaee5dfe20570e5ea6c044dd03a580f8bf51a5a5ba51",
+    "proof/sdk-002-offline/inputs/synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-integrated-refinement-20261021.yml": "38322956c1323590ca0751f00b8f9ac3c2c11c261647010f57b56ee8139a2e0f",
+    "proof/target-observations-001/collections/CORRECTION_OBSERVATIONS.json": "839834b32df0442925140a49fb8de89bd8742cd58a437ac9986e6405ad7da748",
+    "proof/target-observations-001/collections/evidence/BASELINE_ENDPOINT_PRIVATE.log": "996881961667ddf64daec46c8af81a53aba0b2d5d0b6af9fb0eb64b03f221ff9",
+    "proof/target-observations-001/collections/evidence/BASELINE_ENDPOINT_FACADE.log": "1573f5f40170680a3219157ed0bee411a0d30e2014c9c21ff04fc915041e3b54",
+    "proof/target-observations-001/collections/evidence/BASELINE_MASKED_SORT_JAVA.log": "3ea0517db985a4ba1e863c92ff6863b4a76aadcd2dc3396e1b619aa1aa015582",
+    "proof/target-observations-001/collections/evidence/BASELINE_ALLOCATION_JAVA.log": "95948a932663fafc0a43056ab038de5c93ff70782157d61b2d5f716aa6c67c3c",
+    "proof/target-observations-001/collections/evidence/BASELINE_PACK_HYDRATED.log": "de06f709023c0c8a5cd1534c54e41e57374eee3904f3a6e9009d45f957333f9d",
+    "proof/target-observations-001/collections/baseline/pack/native-symbols.log": "a1d61f611350d03c87b8eb45c40b66170d9de955f6bf84beadaaf6b9f11ab242",
+    "proof/target-observations-001/collections/evidence/CANDIDATE_ABI_REFUSALS.log": "4813f0bdbc5a4864283aec3b8233fd2aeb0e919dfd7e177d97efa84b40e12ca2",
+    "proof/target-observations-001/collections/evidence/initial-missing-source-launcher/BASELINE_OWNING_MAVEN.log": "6e259f013ed936361b128cba47ba56e07dfcc532a2a026624139fb9dc5f1f532",
+    "proof/target-observations-001/collections/evidence/BASELINE_LAUNCHER_SOURCE_REFUSAL.log": "56535ba73ec40a9d55ff1a6298247e5ae45fc802d97bb14ede99ec3318264be0",
+    "proof/target-observations-001/collections/evidence/LAUNCHER_SOURCE_COMPARISON.json": "1e5771655825b63a3b6bf748dc641a8e245317b7cc45fb39985d7d3a5da7fdab",
+    "proof/target-observations-001/collections/evidence/initial-direct-dns-refusal/BUILD_apiguardian-api.log": "b905696c1ff23328bf9b9d656c07bc9f0e1018f82792d1f2c33e7b5830e89d2c",
+    "proof/target-observations-001/collections/evidence/initial-proxy-trust-refusal/BUILD_apiguardian-api.log": "b8e8371390d4b10fcf405ab5c4b46b9bce1beb14e05e5bc12372aff8d98d70a0",
+    "proof/target-observations-001/collections/evidence/SOURCE_DEPENDENCY_BUILD.json": "998180164fb65feb7f7e77381caa1b295beab3ecb7b0c370fc82cd7430d36515",
+    "proof/sdk-001/RESULT.json": "839c14e212df675403786636e7806c5b227847aaace6f55a11a8e1891532211c",
+    "proof/sdk-002-offline/RESULT.json": "be10089f40c3b8b1e5da9c0233c8bbd4ab5f2c19e05dfc6756e4f49c5b4ce888",
+    "proof/target-observations-001/SOURCE_AFTER.json": "3def0b27469c426872bb0399764b5498fb0e1e6209cb0acbac8195a1ba7d6982",
+    "proof/target-observations-001/SOURCE_BEFORE.json": "cd98585ded7fe5b198e12b5c57dd9dad234fadfd3da96aedc786bc992329771d",
+    "proof/sdk-002-offline/maven.log": "1aa44bc2cb3e77e792f3109716214127123c4258fc9de4c5aa5676afed3f0d89",
+    "proof/target-observations-001/scheduling/history/authoring-proof-01/test/jdk/java/util/concurrent/ProgressJob/M3ScheduledProgress.java": "a57df3b673802259ae630eb083dcd1f3feb3e6c32d832afadcda4cb8370f2dd2",
+    "proof/target-observations-001/scheduling/history/authoring-proof-01/MEMORY_EVENT.json": "abf58265fa7d9e7efbcf8cf2e994453f4393bebd59c46ebcf140d341cc7e63a5",
+    "proof/sdk-002-offline/receiver/test/jdk/java/util/concurrent/ProgressJob/M3ScheduledProgress.java": "07e0d48234769058b425c01777bfadce3af4bb1633d1ba66e78605fd12d9c480",
+    "proof/target-observations-001/scheduling/authoring-proof-01/RESULT.json": "7d494a0ad27a9491a292bbcde573dd831b5b5a5eb62a50c1ea6b76dd5fb8da92",
+    "proof/target-observations-001/scheduling/authoring-proof-01/mixed-candidate-M3ScheduledProgress.stderr.log": "c226aa78ff1aebf46cee12ae71a55ab7b829535c85bd37d57dbdf2291ddf39b6",
+    "proof/target-observations-001/scheduling/emitted-target-proof-01/RESULT.json": "d3d012bf73991c9b1bd1dfcd5f2227cd02e090dc199b0bfc43b217e108cda1d8",
+    "proof/target-observations-001/scheduling/emitted-target-proof-01/mixed-candidate-M3ScheduledProgress.stdout.log": "f7c16424b11709eb295acb65cbb51d009befb6a321302b978701814509f251fd",
+    "proof/target-observations-001/eclipse/ECLIPSE_DONOR_CORRECTION.diff": "0b7837df5183d97028648a392538a521eb06d63388ed09b064ba921df1a2ed66",
+    "proof/target-observations-001/eclipse/ECLIPSE_API_COMPARISON.json": "81d91b1c76df978a6c82f4fa977e9eb6d4e87d252f502dff85482316ba95003c",
+    "proof/target-observations-001/eclipse/eclipse-contract-donor-01/RESULT.json": "8f376b6bca15d672d8f06fca66b0fcc2e77139e42933f27824bdcdfc517c243b",
+    "proof/target-observations-001/eclipse/eclipse-contract-donor-01/src/test/java/com/m3/eclipse/runtime/M3EclipseJobsCompatibilityTest.java": "9897ba5f3f5cf6dae226844ccf56baed776fd552fa0ca74877a3923ee774e1b7",
+    "proof/target-observations-001/eclipse/eclipse-contract-candidate-02/RESULT.json": "1f6b8e28de7a10c0a8dee6afd3a747be169e6fd8943080d9c2651d11a4bf4fce",
+    "proof/target-observations-001/eclipse/eclipse-current-candidate-03/RESULT.json": "7584ff1ca7865cb05f3200d33283c3c5f71ad81c7fec23d0de2e8297c161921b",
+    "proof/target-observations-001/eclipse/eclipse-evaluation/RESULT.json": "7c8219f905f060bed732a86cabff10d3e086c11e56a4311c32fe081956948510",
+    "proof/target-observations-001/eclipse/eclipse-evaluation/maven-original-donor.log": "2954b2e87319baf5e864136157ca178b5c6fa27e6ce2c01b1a6e980ef360c030",
+    "proof/target-observations-001/eclipse/ECLIPSE_EXECUTED_COMMANDS.json": "8cc7bab000a851f222caa4cdbbc020d9d8608ac76b37c4e13176037d56ecd403",
+    "proof/target-observations-001/eclipse/eclipse-contract-donor-01/maven.log": "1b6e0c8d7ebfde301d6b127a1bc7d66c0c793f07bcb1644c0f02e1e38074f275",
+    "proof/target-observations-001/eclipse/eclipse-contract-candidate-02/maven.log": "f4b07fb672d88529a5ca80ed6ff8f5c1f17d7800ffc06e669e284b49c7596f5b",
+    "proof/target-observations-001/eclipse/eclipse-current-candidate-03/maven.log": "cbeeeae9fca6dc11abb02fb57e88807215985bc1085d720aaebda8769768e184"
+  },
+  "admission": "PENDING",
+  "scope": "actual canonical event bytes, schema, artifact and recursive parent integrity; not product admission"
+}

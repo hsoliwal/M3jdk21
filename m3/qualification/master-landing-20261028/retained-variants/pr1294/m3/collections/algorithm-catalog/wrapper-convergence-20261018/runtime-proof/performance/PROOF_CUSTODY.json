@@ -1,0 +1,16 @@
+{
+  "source_sha256": "633ad8b6e70b211efc1917daea6277b38632359f9442120396fbeb187e663cf0",
+  "compiled_against_both_actual_closures": true,
+  "generated_bytecode_equal": true,
+  "same_runtime_proof_bytecode_for_both_lanes": true,
+  "proof_classes": {
+    "com/m3/collections/M3OrderWindowProof$1Member.class": {
+      "sha256": "f1c4d7ac4e33ca683cf62c9d91bcef3054f2f335cd6f0d664ae318d02c7f5979",
+      "bytes": 1463
+    },
+    "com/m3/collections/M3OrderWindowProof.class": {
+      "sha256": "22b1ba1056400cb2c71dc8cd8354d17a456c45ce18c7fa40eed2b4fa96d2a828",
+      "bytes": 20111
+    }
+  }
+}

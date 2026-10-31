@@ -1,0 +1,23 @@
+{
+  "schema": "M3_FULL_TOOL_SOURCE_1",
+  "tool": "Apache Lucene OpenNLP integration",
+  "artifact": "lucene-analysis-opennlp",
+  "module": "org.apache.lucene.analysis.opennlp",
+  "version": "fork-d1b7235f1ba1",
+  "upstream_repository": "hsoliwal/lucene",
+  "upstream_commit": "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e",
+  "upstream_path": "lucene/analysis/opennlp",
+  "java_files": 20,
+  "unique_original_files": 25,
+  "source_modifications": "NONE; exact production Java/resources from the named fork; paths follow existing M3 donor layout.",
+  "metadata": "SOURCE_FILES.json binds all original bytes including LICENSE/NOTICE; this is one module from the named fork, not a backport of all Lucene main.",
+  "compile_release": 21,
+  "qualified_dependencies": {
+    "org.apache.lucene.core": "9.10.0",
+    "org.apache.lucene.analysis.common": "9.10.0",
+    "org.apache.opennlp.tools": "2.4.0",
+    "org.slf4j": "2.0.12"
+  },
+  "license": "Retain original Apache LICENSE/NOTICE and embedded third-party notices; no blanket relicensing.",
+  "test_authority": "Exact source --release21 compile and nine-library-JMOD link passed. Synthetic local sentence/token model training, reload and actual OpenNLPTokenizer term/offset/sentence parity passed across 207 composite split positions. Full current-fork Gradle/JDK25 and all other model suites remain pending."
+}

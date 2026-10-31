@@ -1,0 +1,3 @@
+schema	donor_revision	donor_path	donor_blob	target_owner	target_member	adaptation	license	scope
+M3_SHORTSTRING_ATOM_MAP_V1	383d2d17d5d1942673976db34cda3695991ca422	src/main/java/org/tools4j/shortstring/StringLengths.java	9549a7a5558f0f8b81d2f8978fdb13244a6f3b8a	com.m3.text.M3NumberSpace	DECIMAL_MAXIMA;decimalLength(int)	bounded decimal threshold sizing	MIT	0..10000 numeric vocabulary construction
+M3_SHORTSTRING_ATOM_MAP_V1	383d2d17d5d1942673976db34cda3695991ca422	src/main/java/org/tools4j/shortstring/NumericCodec.java	03a807ab25bd1e5ed36e1089deae3bf30071438a	com.m3.text.M3NumberSpace	<init>()	direct decimal digit emission	MIT	0..10000 numeric vocabulary construction

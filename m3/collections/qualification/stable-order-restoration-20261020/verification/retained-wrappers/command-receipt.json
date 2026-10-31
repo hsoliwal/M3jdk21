@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "python3",
+    "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/run_retained_wrappers.py"
+  ],
+  "cwd": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers",
+  "driver_sha256": "d5d77b7ec024ec42e00060512a2d22df283ea62be8b553e31ac2b688ede000f0",
+  "exit_code": 0,
+  "finished_at": "2026-10-20T11:32:18.420075+00:00",
+  "runner_log_sha256": "d32fdad90a7d970692d96b8ab7eb0864eb0e476fc92c280b93d8e9ab0abde268",
+  "scope": "Fresh bounded execution; historical fixture and production owner bytes unchanged.",
+  "started_at": "2026-10-20T11:32:15.430560+00:00"
+}

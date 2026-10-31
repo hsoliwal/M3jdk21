@@ -1,0 +1,3 @@
+# path	before	after	template
+src/hotspot/share/prims/jni.cpp	95f131c664bf993f457d3ea53bdfe0850f842d82c5a42644a979d724580522f4	95adc8ea2a9035e65b613a7fb4131f8629bc90f81b70008895a77c1e396b05f9	jni.cpp.txt
+test/jdk/jdk/internal/mindex/cb/libM3JNINull.c	ABSENT	471076651477273d831ea7cbfe25120aa7a8af6397c9611b0247e5c7c6b9702e	libM3JNINull.c.txt

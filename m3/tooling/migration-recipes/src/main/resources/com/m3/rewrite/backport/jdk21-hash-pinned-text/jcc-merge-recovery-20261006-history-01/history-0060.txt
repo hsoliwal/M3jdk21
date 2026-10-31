@@ -1,0 +1,355 @@
+{
+  "scope": "Actual additive E3 metadata recipe/installer validation; no source-export, receiver-behavior rerun, full-module coverage or JDK/JNI acceptance.",
+  "source_publication_commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+  "destination_preimage_commit": "df06cdee5a8526f573b3ad89622824d0b49e2f25",
+  "plan_sha256": "af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e",
+  "runs": [
+    {
+      "id": "01-check-E2-preimages",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/migration/recipe.py",
+        "check",
+        "--plan",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
+        "--root",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+      "started_utc": "2026-10-05T11:57:37.008040+00:00",
+      "expected_exit_code": 0,
+      "ended_utc": "2026-10-05T11:57:37.052787+00:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/01-check-E2-preimages.stdout.log",
+        "bytes": 177,
+        "sha256": "aa93e0784744196e9b44871f3e2b99491d354ac0cc5c7100a1b03529539db74d",
+        "git_blob_sha1": "3371200c48d1064d1b2923a9b63db4ffaee4447b",
+        "mode": "0o644"
+      },
+      "stderr": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/01-check-E2-preimages.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "mode": "0o644"
+      }
+    },
+    {
+      "id": "02-actual-text-recipe-maven",
+      "command": [
+        "/workspace/scratch/877d9513c002/toolchains/apache-maven-3.9.12/bin/mvn",
+        "-B",
+        "-ntp",
+        "-o",
+        "-s",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/empty-maven-settings.xml",
+        "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2",
+        "-f",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml",
+        "clean",
+        "verify"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+      "started_utc": "2026-10-05T11:57:37.053295+00:00",
+      "expected_exit_code": 0,
+      "ended_utc": "2026-10-05T11:57:41.840890+00:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/02-actual-text-recipe-maven.stdout.log",
+        "bytes": 2629,
+        "sha256": "5b2544383f9ed80a58a994df641093034aaee8f61b2826322739fcc7bb2d1097",
+        "git_blob_sha1": "f7c7fb493f9a6a2d7b43565232878e0b5bcb523b",
+        "mode": "0o644"
+      },
+      "stderr": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/02-actual-text-recipe-maven.stderr.log",
+        "bytes": 210,
+        "sha256": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55",
+        "git_blob_sha1": "16fe39932aaeac0592dbd6b686f9089bec9c28ac",
+        "mode": "0o644"
+      }
+    },
+    {
+      "id": "03-actual-packet-contract",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/migration/test/test_jcc_source_final_handoff_packet.py"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+      "started_utc": "2026-10-05T11:57:41.841825+00:00",
+      "expected_exit_code": 0,
+      "ended_utc": "2026-10-05T11:57:43.036496+00:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/03-actual-packet-contract.stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "mode": "0o644"
+      },
+      "stderr": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/03-actual-packet-contract.stderr.log",
+        "bytes": 1252,
+        "sha256": "c1a8b249dcfa0c56577194cc2a9f85502fb3c817c13301d27a56c72672bed7ef",
+        "git_blob_sha1": "fb14d43525190960a7e428b26c6392ee994e6952",
+        "mode": "0o644"
+      }
+    },
+    {
+      "id": "04-apply",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/migration/recipe.py",
+        "apply",
+        "--plan",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
+        "--root",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+      "started_utc": "2026-10-05T11:57:43.036993+00:00",
+      "expected_exit_code": 0,
+      "ended_utc": "2026-10-05T11:57:43.081985+00:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/04-apply.stdout.log",
+        "bytes": 176,
+        "sha256": "56d4fe6c67f912938f3ad0dbcec218e9138e7f9ed0140827d9f6e5b9b5ff40b2",
+        "git_blob_sha1": "8d5385bcaa353e92dd66c8d0541f7f0c2a0c8796",
+        "mode": "0o644"
+      },
+      "stderr": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/04-apply.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "mode": "0o644"
+      }
+    },
+    {
+      "id": "05-apply-fixed-point",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/migration/recipe.py",
+        "apply",
+        "--plan",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
+        "--root",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+      "started_utc": "2026-10-05T11:57:43.082456+00:00",
+      "expected_exit_code": 0,
+      "ended_utc": "2026-10-05T11:57:43.125316+00:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/05-apply-fixed-point.stdout.log",
+        "bytes": 176,
+        "sha256": "427546e0d791d91055d48136e425e7a2e8713deb058c1e51b7d99769e827ab3c",
+        "git_blob_sha1": "5ffc8a9ee3fc75b74c135d185936a92a8561d501",
+        "mode": "0o644"
+      },
+      "stderr": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/05-apply-fixed-point.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "mode": "0o644"
+      }
+    },
+    {
+      "id": "06-rollback",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/migration/recipe.py",
+        "rollback",
+        "--plan",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
+        "--root",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+      "started_utc": "2026-10-05T11:57:43.125776+00:00",
+      "expected_exit_code": 0,
+      "ended_utc": "2026-10-05T11:57:43.167901+00:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/06-rollback.stdout.log",
+        "bytes": 177,
+        "sha256": "8055b81e0631c5495af9c11ec3f345b0a5a67cc11ba47462c55a37e42f823eec",
+        "git_blob_sha1": "93f78a22a29523e281aeb869a59d55a2ab260562",
+        "mode": "0o644"
+      },
+      "stderr": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/06-rollback.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "mode": "0o644"
+      }
+    },
+    {
+      "id": "07-replay",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/migration/recipe.py",
+        "apply",
+        "--plan",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
+        "--root",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+      "started_utc": "2026-10-05T11:57:43.168340+00:00",
+      "expected_exit_code": 0,
+      "ended_utc": "2026-10-05T11:57:43.212415+00:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/07-replay.stdout.log",
+        "bytes": 176,
+        "sha256": "56d4fe6c67f912938f3ad0dbcec218e9138e7f9ed0140827d9f6e5b9b5ff40b2",
+        "git_blob_sha1": "8d5385bcaa353e92dd66c8d0541f7f0c2a0c8796",
+        "mode": "0o644"
+      },
+      "stderr": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/07-replay.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "mode": "0o644"
+      }
+    },
+    {
+      "id": "08-check-final",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/migration/recipe.py",
+        "check",
+        "--plan",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
+        "--root",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+      "started_utc": "2026-10-05T11:57:43.212827+00:00",
+      "expected_exit_code": 0,
+      "ended_utc": "2026-10-05T11:57:43.252702+00:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/08-check-final.stdout.log",
+        "bytes": 176,
+        "sha256": "427546e0d791d91055d48136e425e7a2e8713deb058c1e51b7d99769e827ab3c",
+        "git_blob_sha1": "5ffc8a9ee3fc75b74c135d185936a92a8561d501",
+        "mode": "0o644"
+      },
+      "stderr": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/08-check-final.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "mode": "0o644"
+      }
+    },
+    {
+      "id": "09-whole-map-validate",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/migration/migration.py",
+        "validate",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+        "--previous",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before00-name-mapping.json.txt"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+      "started_utc": "2026-10-05T11:57:43.253151+00:00",
+      "expected_exit_code": 0,
+      "ended_utc": "2026-10-05T11:57:43.530976+00:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/09-whole-map-validate.stdout.log",
+        "bytes": 47,
+        "sha256": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b",
+        "git_blob_sha1": "407ff20445c228580201d3d921ccfc1ec401a7f7",
+        "mode": "0o644"
+      },
+      "stderr": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/09-whole-map-validate.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+        "mode": "0o644"
+      }
+    },
+    {
+      "id": "10-completion-remains-blocked",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/migration/migration.py",
+        "complete",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+        "--previous",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before00-name-mapping.json.txt"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+      "started_utc": "2026-10-05T11:57:43.531396+00:00",
+      "expected_exit_code": 2,
+      "ended_utc": "2026-10-05T11:57:43.760878+00:00",
+      "exit_code": 2,
+      "stdout": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/10-completion-remains-blocked.stdout.log",
+        "bytes": 47,
+        "sha256": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b",
+        "git_blob_sha1": "407ff20445c228580201d3d921ccfc1ec401a7f7",
+        "mode": "0o644"
+      },
+      "stderr": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/10-completion-remains-blocked.stderr.log",
+        "bytes": 6109,
+        "sha256": "c4a5d6a265b1a39ec6254fe71bc9e58cd55a7658d9ea6d18ccff4cba24687b25",
+        "git_blob_sha1": "097e1a5588bcbff34ce3ae0153d2652b3e224808",
+        "mode": "0o644"
+      }
+    }
+  ],
+  "inputs": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/inputs.json",
+    "bytes": 95340,
+    "sha256": "da48340c83e26dd478078dc5195e000b99666f54663361c1773827acdbd46416",
+    "git_blob_sha1": "7814104de55ea9742edd79e2addfdc16df8c0c17",
+    "mode": "0o644"
+  },
+  "all_fixed_inputs_unchanged": true,
+  "four_outputs_equal_sealed_afterimages": true,
+  "java_suite": {
+    "name": "com.m3.rewrite.backport.JccSourceFinalHandoffTest",
+    "tests": "11",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.942"
+  },
+  "java_xml": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/JccSourceFinalHandoffTest.xml",
+    "bytes": 16129,
+    "sha256": "e33dd229900b9614a77e9187b9ac04e024f2250c73c74a625dfe53fba093be85",
+    "git_blob_sha1": "bb99298fd2c7a1819682f73b0d0ed8d93715de09",
+    "mode": "0o644"
+  },
+  "python_tests": 6,
+  "python_refusal_checks": 132,
+  "python_count_basis": "Successful six-test actual packet contract with required four outputs/seven guards: (8 preimage cases +14 guard cases +14 mixed cases +4 changed postimages +4 missing postimages) times three modes.",
+  "source_export_admitted": false,
+  "owning_module_gate": "NOT_EXECUTED; preserved E2 acquisition/frontier and 99% gate remain",
+  "receiver_behavior_rerun": false,
+  "jdk_acceptance": false,
+  "remote_writes": false,
+  "environment_scope": "Explicit PATH/JAVA_HOME/UTF-8/Python dependency path; existing HOME/TMPDIR preserved if present. No implicit Java/Maven options inherited; empty explicit user settings and offline repository.",
+  "toolchain": {
+    "jdk": "/workspace/scratch/877d9513c002/toolchains/jdk-21.0.2",
+    "maven": "/workspace/scratch/877d9513c002/toolchains/apache-maven-3.9.12/bin/mvn",
+    "offline_repository": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2",
+    "python": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3"
+  }
+}

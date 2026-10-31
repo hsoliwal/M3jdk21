@@ -1,0 +1,2 @@
+schema	canonical_repo	canonical_pr	canonical_ref	canonical_head_at_intake	engine	status
+M3_ECLIPSE_PROGRESS_RECIPE_V1	hsoliwal/com.synexia	12135	recipe/eclipse-m3-progress-forward-20261017	cf6a79e42f637f6a9cb2ee9cdf58df58c06cfeea	M3HashPinnedJavaSnapshotRecipe	DRAFT_UNQUALIFIED

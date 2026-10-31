@@ -1,0 +1,32 @@
+{
+  "schema": "M3_NLP_PREPARATION_REFUSAL/1",
+  "status": "FAIL",
+  "invocation": [
+    "python3",
+    "-B",
+    "synexia/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/prepare_packet.py",
+    "M3jdk21",
+    "nlp-work/source-lock-correction/HANDOFF.json"
+  ],
+  "cwd": "/workspace/scratch/206049dfb270",
+  "captured_after_execution_from_exact_tool_call": true,
+  "exit_code": 1,
+  "signature": "ValueError: receiving preimage drift: m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
+  "new_canonical_postimages_emitted": false,
+  "observed_source_states": [
+    {
+      "path": "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "worktree_exists": true,
+      "actual_worktree_sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d",
+      "git_show_exit": 128,
+      "exact_2779_sha256": null
+    },
+    {
+      "path": "m3/tooling/module-packs/nlp-search/current-source-lock.json",
+      "worktree_exists": true,
+      "actual_worktree_sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
+      "git_show_exit": 0,
+      "exact_2779_sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5"
+    }
+  ]
+}

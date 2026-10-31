@@ -1,0 +1,11 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.AstBuildReverse20261017
+displayName: Receive original javac node facts into the existing M3AST primitive index
+description: >-
+  Preserve the one-original-javac-parse generation, derive bounded primitive node
+  facts without retaining compiler nodes and qualify original source/binary contracts.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ast-build-reverse-20261017-m3-javac-index-20261020
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-ast-build-reverse-20261017-m3-javac-index-20261020

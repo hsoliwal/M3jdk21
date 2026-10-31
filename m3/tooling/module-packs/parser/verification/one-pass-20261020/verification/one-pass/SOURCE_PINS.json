@@ -1,0 +1,42 @@
+{
+  "files": [
+    {
+      "bytes": 8049,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/README.md",
+      "sha256": "edc6ecfa76d3ad85126aa539960cfc30a7024adce18b73247d87a015a928296c"
+    },
+    {
+      "bytes": 17746,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/run_proof.py",
+      "sha256": "3797a7f421fbd78bd53cdb442fd503189294f26f12ed7a0d0b0b0cfd5e4af853"
+    },
+    {
+      "bytes": 331,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/src/module-info.java",
+      "sha256": "ba5b55b48e5563dcfc645123b17437014496fdb5a4dc4c8cd4e32d031cf85c30"
+    },
+    {
+      "bytes": 37776,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/src/proof/OnePassProof.java",
+      "sha256": "811866311b38c376a45c82ca5c1765100f29e688124d02657e3cec0d0f3c373f"
+    },
+    {
+      "bytes": 3078,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/CORRECTION.json",
+      "sha256": "b4d97973e5a066ab5961a5dabbd9a030ab15676a291b7ab4b2867b650aa94e4b"
+    },
+    {
+      "bytes": 1976,
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/INVOCATION.json",
+      "sha256": "5c8f849cd08cb3466a0da0eb0ba34c5eb300738dcb6ce18f1209ccbc9a62fbeb"
+    }
+  ],
+  "final_result": {
+    "bytes": 18672,
+    "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/one-pass-final/RESULTS.json",
+    "sha256": "9903f6f97515baf46705a83fdda9b55ce5dd5206a727aeb961f08c93fca8d7a0"
+  },
+  "frozen_at_utc": "2026-10-20T14:07:40.666364+00:00",
+  "schema": "M3_ONE_PASS_HARNESS_SOURCE_PINS_V1",
+  "status": "FROZEN_AFTER_ACTUAL_IMAGE_PASS"
+}

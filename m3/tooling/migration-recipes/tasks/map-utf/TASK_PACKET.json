@@ -1,0 +1,78 @@
+{
+  "task_packet": "active",
+  "source_doc": "m3/tooling/migration-recipes/tasks/map-utf/DESIGN.md",
+  "invariant_id": "M3_TEXT_PROJECTION_PARITY",
+  "base_commit": "3a433416ae7981301844682896e5aefc6f0f8901",
+  "run": {
+    "mode": "apply",
+    "profile": "bounded-local",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "targets": {
+    "files": [
+      "src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java",
+      "test/jdk/java/lang/String/MapFactsTest.java",
+      "test/jdk/java/lang/String/MapUtfTest.java",
+      "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/map-facts.yml",
+      "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/map-utf.yml",
+      "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-map-{guard,facts,utf}/**",
+      "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/map-{guard,facts,utf}/**",
+      "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/MapFactsRecipeTest.java",
+      "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/MapUtfRecipeTest.java",
+      "m3/tooling/migration-recipes/tasks/map-facts/verify.sh",
+      "m3/tooling/migration-recipes/tasks/map-facts/inputs.sha256",
+      "m3/tooling/migration-recipes/tasks/map-utf/**",
+      ".github/workflows/mindex-string-backing.yml"
+    ],
+    "recovered_packet": "MapFacts",
+    "reconcile": [
+      "MapGuard final images",
+      "MapFacts final images",
+      "existing mapped-backing workflow and verification seals"
+    ],
+    "pattern_note": "Brace groups enumerate three exact recipe directories; they are not permission to edit other crates."
+  },
+  "invariant_locks": {
+    "PUBLIC_API": "LOCKED",
+    "VALID_FORMAT": "LOCKED",
+    "EXISTING_TESTS": "LOCKED",
+    "POM_AND_COVERAGE": "LOCKED",
+    "CANONICAL_BRANCH": "READ_ONLY"
+  },
+  "allowed_delta": [
+    "private validation",
+    "source-sealed recipe configuration",
+    "additive tests",
+    "existing workflow test selection",
+    "evidence"
+  ],
+  "forbidden": [
+    "root/master/develop writes",
+    "rebase/squash/force",
+    "product String.class patch onto stock VM",
+    "fabricated execution",
+    "replace owners"
+  ],
+  "verify_order": [
+    "diff",
+    "static/lint",
+    "compile",
+    "tests",
+    "runtime"
+  ],
+  "output_contract": [
+    "STATUS.tsv",
+    "FINAL_REPORT.md",
+    "RUN_CONTEXT.tsv",
+    "PROVENANCE.tsv",
+    "VERIFY_CONTRACT.tsv",
+    "OUTPUT_CONTRACT.tsv"
+  ],
+  "stop_conditions": [
+    "unmatched source",
+    "unexpected mutation",
+    "failed required gate blocks promotion"
+  ]
+}

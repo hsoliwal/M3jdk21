@@ -1,0 +1,626 @@
+{
+  "schema": "m3-source-blind-reused-sdk-qualification/v1",
+  "source_contents_read": false,
+  "new_fixtures": false,
+  "scope": "finite SDK compile/API88/entry132/bulk113/exhaustive map and set corpus",
+  "performance_admission": false,
+  "full_eclipse_owner_admission": false,
+  "status": "PASS_REUSED_STRICT_API88_ENTRY132_BULK113_EXHAUSTIVE",
+  "public_api_rows": 88,
+  "public_api_sha256": "2a825e4b56bb2bf030cdcebd47588bea1c73121637a1e547097c925b47693743",
+  "entry_digest": "a6d0de0b5d74beb8cbefd5c99be759882c36ad85841f9d52cf4e5ba66932d84b",
+  "bulk_digest": "4f2e09f686f46224e45ae7a09b252aa942f5e2130b3e36e566e341c2cd6255d8",
+  "property": {
+    "classification": "SOURCE_AWARE_PUBLIC_PROPERTY_PROOF",
+    "oracle": false,
+    "permutations": 5040,
+    "scenarios": 15165,
+    "randomOperations": 98304,
+    "trackedUpdates": 294322,
+    "checks": 1438195,
+    "invariantCalls": 238593,
+    "setCovered": true,
+    "expectedDigest": "c04bba433f2bf19c0851d8a5cba874315ec258b47b4a447f026f7e32b6a1c8e5",
+    "nativeExecuted": false
+  },
+  "inputs": {
+    "candidate_opaque_source": {
+      "path": "m3-tree-lookup-validation-20261018/src/main/java/com/m3/collections/M3TreeMap.java",
+      "bytes": 27724,
+      "sha256": "21dc9a2eed607c55b1ff4d49ffef5e19b3bac43b591b62e13191791cabbc3b41",
+      "git_blob": "5115084463d3cb4e229f33e905899cf15316b268"
+    },
+    "candidate_admission": {
+      "path": "m3-tree-lookup-validation-20261018/BEFORE_IMPLEMENTATION.json",
+      "bytes": 1938,
+      "sha256": "d0887bb9c4945a3574d3483949c36c1efd70c2cd8f4f1d646fdf47c4360f98c3",
+      "git_blob": "015c153c78788e89451c605d47c4b550013b7170"
+    },
+    "candidate_foss": {
+      "path": "m3-tree-lookup-validation-20261018/FOSS_REUSE_DECISION.tsv",
+      "bytes": 866,
+      "sha256": "a38420e1a1e5e68bff41539d1ba5704dd896605091032f4249e4045352536521",
+      "git_blob": "1551392510a096d8fd026adff6b616d2f6ed24c8"
+    },
+    "candidate_recipe_metadata": {
+      "path": "m3-tree-lookup-validation-20261018/TRANSFORMATION_RECIPE.json",
+      "bytes": 614,
+      "sha256": "1ab74725a9d92215f608e62e04e71e3b9a927a3fb0300e78af80a4bcc848dfa6",
+      "git_blob": "c76af76185eba30510672a59a8c034cba7a7476b"
+    },
+    "fixtures": {
+      "api": {
+        "path": "m3-tree-map-linear-bulk-load-20261018/TreeBulkPublicApi.java",
+        "bytes": 1335,
+        "sha256": "b7f4d9ea7f217d3ed794c3e77e61f5dbab8ef2dce7e82bf1e3130749f0b868d2",
+        "git_blob": "cb5d092cadf5060b688fd48042c6a832a6800ac1"
+      },
+      "entry": {
+        "path": "eclipse-tree-full-contract-v2-20261018/TreeMapLookupEntryProof.java",
+        "bytes": 7389,
+        "sha256": "bb780f79bf22bafb48495014854fed92e9bf75227e756922451ae473bdcfddfa",
+        "git_blob": "a0f5888e747ed40aebc90bd98d80009d39bd620f"
+      },
+      "bulk": {
+        "path": "m3-tree-map-linear-bulk-load-20261018/proof/M3TreeMapSortedBulkProof.java",
+        "bytes": 26408,
+        "sha256": "b9d99b42ba8763ba294d7472642f59cdf9ec5aa0864b132fef23fbb7cd04d0e4",
+        "git_blob": "e57a0bdf93c683b71af6ec53b2ee60fdf5b9dcba"
+      },
+      "property": {
+        "path": "m3-avl-growth-frontier-proof-20261018/AvlGrowthFrontierProof.java",
+        "bytes": 11465,
+        "sha256": "19fa6026f3367d57dd009107635d20997632a64af6d161878f4a31075b13e1a4",
+        "git_blob": "cfa7d4499c59e866bd3f170783e291951c67422f"
+      }
+    },
+    "property_frozen_oracle": {
+      "path": "m3-avl-insertion-frontier-20261018/qualification-property-v1/FROZEN_ORACLE_V1.json",
+      "bytes": 3155,
+      "sha256": "c12ce53570aeb576438fc7df2a72397afb0875040b9d35cad57f85ed6da91c2a",
+      "git_blob": "f9bdd525dc778af744b26de4ac97b4e213e1afd3"
+    },
+    "runner": {
+      "path": "guava-minmax-priority-queue/public-stage-v1/m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/run.py",
+      "bytes": 18203,
+      "sha256": "815464a4b2b759a3b7d5e47ca82d6ed6d09fa5eddacb0e24fcf5ee6646796679",
+      "git_blob": "d196b84e01ff375c63e52bd7a05e591797982385"
+    },
+    "classpaths": {
+      "v5": {
+        "path": "spring-case-insensitive-map/current-base-runtime-v5/core130-classes",
+        "count": 304,
+        "bytes": 1089537,
+        "ordered_path_size_sha256_set": "7e97d3ee62b5a51e5c9e7ad34cf6a898caa9c73cbaf35efd5ebd91fa895621a5"
+      },
+      "protocol": {
+        "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes",
+        "count": 12,
+        "bytes": 68110,
+        "ordered_path_size_sha256_set": "1c1417e15722441777537ec619eddd52f3b84e0d17ee17248e82e243da679996",
+        "classes": [
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3OrderedSlotMap$SetView.class",
+            "bytes": 2273,
+            "sha256": "c97da3cefb99feac4efb99178228ec5b952c93b29092bc537fc9f714a2ecd6e6",
+            "git_blob": "c5eded404213f1c3aaff25c99fb0596fa165e9f4",
+            "relative_path": "com/m3/collections/M3OrderedSlotMap$SetView.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3OrderedSlotMap$View.class",
+            "bytes": 4407,
+            "sha256": "65308c0a0db095fe7346f7e14c0122c5f96c542799a13731b7294f631628b219",
+            "git_blob": "d796ff8f61a160c124e414879755786b21a61b8f",
+            "relative_path": "com/m3/collections/M3OrderedSlotMap$View.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3OrderedSlotMap.class",
+            "bytes": 2303,
+            "sha256": "cdcd57ab2d115fae9ffc07232a1264beaafb55ed2e48b00e8b44b810db3cb5d7",
+            "git_blob": "48da4821ec84775529564f27e044e3b62e84ff7e",
+            "relative_path": "com/m3/collections/M3OrderedSlotMap.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3SlotMap$1.class",
+            "bytes": 2193,
+            "sha256": "f07f1b51a5f0a161b190870dfc0dff0f40a9ddd91b5cb0da1e3640558ff98601",
+            "git_blob": "bed7ec391af7488dcf9078d5243dc362eecd9120",
+            "relative_path": "com/m3/collections/M3SlotMap$1.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3SlotMap$2.class",
+            "bytes": 1517,
+            "sha256": "bf3c0a04e05ce3f50394a501caa20d57ffc9960ffd567ce5fcdabe6e80c46662",
+            "git_blob": "1e2cbf7c5fa9179a2d7898ce543987b76b1e3b13",
+            "relative_path": "com/m3/collections/M3SlotMap$2.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3SlotMap$3.class",
+            "bytes": 1286,
+            "sha256": "21dceb1ddea152611469435ef175f67a23c9d52f894e13bf6027ce40f7e402b3",
+            "git_blob": "07299cd1c1c183d081647830bbe75297fbd3cc39",
+            "relative_path": "com/m3/collections/M3SlotMap$3.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3SlotMap$4.class",
+            "bytes": 1970,
+            "sha256": "83535ab3c1932e6b2735f064beedbbdf62cdb01602a577cb266e8cd3dcbc4028",
+            "git_blob": "b348be6696b421174118d48c6a319889898820ec",
+            "relative_path": "com/m3/collections/M3SlotMap$4.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3SlotMap$LiveEntry.class",
+            "bytes": 3186,
+            "sha256": "4676c32d200aef57c4cb679a0adee2a66a9e995cb3b9243642c542e13c804af6",
+            "git_blob": "f37665c2a73cb762d7889106142f685143e8a8d1",
+            "relative_path": "com/m3/collections/M3SlotMap$LiveEntry.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3SlotMap.class",
+            "bytes": 10592,
+            "sha256": "de46d59b9221f9208449d9167aafd0d176878d6e4eeed38f51416c5000c5e2f1",
+            "git_blob": "af63226bcf02a5b8394de30db5fc41bc319b41be",
+            "relative_path": "com/m3/collections/M3SlotMap.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3TreeMap$Tree.class",
+            "bytes": 9798,
+            "sha256": "9f41f0a4a1167a24a5ecaba61c443d64c9b7ddca50af4aff672f2eee6dc7a998",
+            "git_blob": "6832e154d780cf21384f93e2aa7bc25d5f82b59a",
+            "relative_path": "com/m3/collections/M3TreeMap$Tree.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/com/m3/collections/M3TreeMap.class",
+            "bytes": 24100,
+            "sha256": "4b2a9850470aff2cba223df4539a4d25b576ddb3711b3ba8db384a2673e8623d",
+            "git_blob": "5e4c7b36caa8da5dafe3adf7209ae3d40cb167d4",
+            "relative_path": "com/m3/collections/M3TreeMap.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-compile-v1/classes/TreeBulkPublicApi.class",
+            "bytes": 4485,
+            "sha256": "c70bb7e59f723b1d56148ae99132cc135fb0fa627f0aec90a1f982537a282993",
+            "git_blob": "06224c148bbadee89c35bf5dca832f9cbd1083c1",
+            "relative_path": "TreeBulkPublicApi.class"
+          }
+        ]
+      },
+      "entry132": {
+        "path": "m3-tree-map-entry-protocol-20261018/qualification-entry-proof-v1/classes",
+        "count": 5,
+        "bytes": 17357,
+        "ordered_path_size_sha256_set": "083f0ad8b437644eb5b44b0060c6090089f53025dfa183e36ca726893dfd79d0",
+        "classes": [
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-entry-proof-v1/classes/TreeMapLookupEntryProof$Blocked.class",
+            "bytes": 409,
+            "sha256": "f4379372e33eb94ce2541ed25e5ee9d0d7d00ff7249de9f1c6a4b95b453c8581",
+            "git_blob": "2b582e708f68da42a1078fc499867e93393d0f36",
+            "relative_path": "TreeMapLookupEntryProof$Blocked.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-entry-proof-v1/classes/TreeMapLookupEntryProof$F.class",
+            "bytes": 1923,
+            "sha256": "22a9ab9bf421a000b0c66ea84902de87841f45db22b9342df2eb880febd66a36",
+            "git_blob": "e7e2e788f56e48d33440643a71a30c9b5ee5f84e",
+            "relative_path": "TreeMapLookupEntryProof$F.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-entry-proof-v1/classes/TreeMapLookupEntryProof$Gate.class",
+            "bytes": 1014,
+            "sha256": "8441153df4d054cdb74be2f531e41380bfe4b316c512d48c016096dc4519f2db",
+            "git_blob": "44ea2d157869078e17058b5d9bc49bf49f3c3653",
+            "relative_path": "TreeMapLookupEntryProof$Gate.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-entry-proof-v1/classes/TreeMapLookupEntryProof$Scenario.class",
+            "bytes": 381,
+            "sha256": "0ae252de587f991c0bf925a75f76a4651df22b64ec0ec1350a7c9e0ee46e2410",
+            "git_blob": "eef12d0411df33019dcce23b35893aefefb7d974",
+            "relative_path": "TreeMapLookupEntryProof$Scenario.class"
+          },
+          {
+            "path": "m3-tree-map-entry-protocol-20261018/qualification-entry-proof-v1/classes/TreeMapLookupEntryProof.class",
+            "bytes": 13630,
+            "sha256": "e1496fbb1b6e4a5a701e12c8e6ce157c9a880df0b27e348b1bf5465a06d53097",
+            "git_blob": "6ec8762b461620bc12fe1693bf6e3a39312bd000",
+            "relative_path": "TreeMapLookupEntryProof.class"
+          }
+        ]
+      },
+      "bulk113": {
+        "path": "m3-tree-map-linear-bulk-load-20261018/qualification-proof-v2/classes",
+        "count": 7,
+        "bytes": 37626,
+        "ordered_path_size_sha256_set": "9c3ef0e55e8250086b6507361d3a97deb51ee12b4f9b0256ec531fb7777728f9",
+        "classes": [
+          {
+            "path": "m3-tree-map-linear-bulk-load-20261018/qualification-proof-v2/classes/M3TreeMapSortedBulkProof$Action.class",
+            "bytes": 310,
+            "sha256": "387337e6636913218f2507d88c81969a0e48cb1d3f8c236d0710db5acab8103d",
+            "git_blob": "198f6d06e37baf0f85e6092290eb2cc34cd82786",
+            "relative_path": "M3TreeMapSortedBulkProof$Action.class"
+          },
+          {
+            "path": "m3-tree-map-linear-bulk-load-20261018/qualification-proof-v2/classes/M3TreeMapSortedBulkProof$Box.class",
+            "bytes": 1038,
+            "sha256": "5a350277dfc3ce4ae13c0313076009a076fd67225656360e37948fb378f9f40d",
+            "git_blob": "af68c9f71369b4c081010ebb00fb034e27152626",
+            "relative_path": "M3TreeMapSortedBulkProof$Box.class"
+          },
+          {
+            "path": "m3-tree-map-linear-bulk-load-20261018/qualification-proof-v2/classes/M3TreeMapSortedBulkProof$ComparatorBlocked.class",
+            "bytes": 443,
+            "sha256": "0bba158b08f691702b6fea41470e717700a62417657f87507e077aa4d10ebae7",
+            "git_blob": "a36aca979adec081cde93b5a8f30fd3d66895d2b",
+            "relative_path": "M3TreeMapSortedBulkProof$ComparatorBlocked.class"
+          },
+          {
+            "path": "m3-tree-map-linear-bulk-load-20261018/qualification-proof-v2/classes/M3TreeMapSortedBulkProof$Factory.class",
+            "bytes": 6139,
+            "sha256": "b7c8cf302f020b5bee16b108178ba78584d76efc5a18aafdc9bfb9a5f4586010",
+            "git_blob": "de642418de445d6224759b64bdab3f248c0703e7",
+            "relative_path": "M3TreeMapSortedBulkProof$Factory.class"
+          },
+          {
+            "path": "m3-tree-map-linear-bulk-load-20261018/qualification-proof-v2/classes/M3TreeMapSortedBulkProof$GateComparator.class",
+            "bytes": 1210,
+            "sha256": "62e4e4f1c219b403704c04af0be8db4dee5fd443f201fbd5a245d341ce3d0faf",
+            "git_blob": "8f8d9e339d4ebffb2e7064aedc804202e5350d40",
+            "relative_path": "M3TreeMapSortedBulkProof$GateComparator.class"
+          },
+          {
+            "path": "m3-tree-map-linear-bulk-load-20261018/qualification-proof-v2/classes/M3TreeMapSortedBulkProof$ReportingMap.class",
+            "bytes": 1017,
+            "sha256": "fa054e2d115904ce7875c04dcaa39f3bfdf23be73ff4648f7ba06c0093127789",
+            "git_blob": "aefbb5594780c0325c960056326efc87c98a2541",
+            "relative_path": "M3TreeMapSortedBulkProof$ReportingMap.class"
+          },
+          {
+            "path": "m3-tree-map-linear-bulk-load-20261018/qualification-proof-v2/classes/M3TreeMapSortedBulkProof.class",
+            "bytes": 27469,
+            "sha256": "3a018afa5730ae80d6ba4c5cce811ab47cb42de03321b2f5fe3c288720e188c2",
+            "git_blob": "d7ff1453c84979bfae5e94c27f3c8acc0acceeb3",
+            "relative_path": "M3TreeMapSortedBulkProof.class"
+          }
+        ]
+      },
+      "property": {
+        "path": "m3-avl-insertion-frontier-20261018/qualification-property-v1/classes",
+        "count": 5,
+        "bytes": 25891,
+        "ordered_path_size_sha256_set": "9c0cc764d19669d01c4715209f67165c3055417729cc5d337246cc4d2a77ff47",
+        "classes": [
+          {
+            "path": "m3-avl-insertion-frontier-20261018/qualification-property-v1/classes/AvlGrowthFrontierProof$F.class",
+            "bytes": 2885,
+            "sha256": "8a30e9a0fef0c8b15784967106ea47fedd9a11cb9ede42601c7ccafe24c6b765",
+            "git_blob": "e53822883d36d3ca1b2ffa010cbaca8df18dbfd8",
+            "relative_path": "AvlGrowthFrontierProof$F.class"
+          },
+          {
+            "path": "m3-avl-insertion-frontier-20261018/qualification-property-v1/classes/AvlGrowthFrontierProof$M.class",
+            "bytes": 3303,
+            "sha256": "873309daa2cfe276d007c46eb38cd68f33d4407918faf2781ccbfead63646b63",
+            "git_blob": "672a1a46c45e2649ec2eaceeb15289dcd54f8ba0",
+            "relative_path": "AvlGrowthFrontierProof$M.class"
+          },
+          {
+            "path": "m3-avl-insertion-frontier-20261018/qualification-property-v1/classes/AvlGrowthFrontierProof$Op.class",
+            "bytes": 248,
+            "sha256": "eaccabcd78797a97b3d97d0a5dc25fdc09a9da75b89999e5ba8e430f6def75bf",
+            "git_blob": "51db8fb96b9f885ecad13620fb5e3f43f3195763",
+            "relative_path": "AvlGrowthFrontierProof$Op.class"
+          },
+          {
+            "path": "m3-avl-insertion-frontier-20261018/qualification-property-v1/classes/AvlGrowthFrontierProof$S.class",
+            "bytes": 2500,
+            "sha256": "b5e77c4170781e687dd36333aac42a03829c09bcd5c083ff59eb94c4d92731a2",
+            "git_blob": "80a8bcdba5a5078cd72f13f1a2034a8f1a71353e",
+            "relative_path": "AvlGrowthFrontierProof$S.class"
+          },
+          {
+            "path": "m3-avl-insertion-frontier-20261018/qualification-property-v1/classes/AvlGrowthFrontierProof.class",
+            "bytes": 16955,
+            "sha256": "bba4a77b3f81269e6f25cdd8ba471f0bffb0b33d5de3e01669b4f24522af586e",
+            "git_blob": "c9f94016210051e83df68a31fbd2d3c5182e26af",
+            "relative_path": "AvlGrowthFrontierProof.class"
+          }
+        ]
+      }
+    }
+  },
+  "inputs_unchanged": true,
+  "candidate_classes": {
+    "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/classes",
+    "count": 2,
+    "bytes": 34113,
+    "ordered_path_size_sha256_set": "f511fd73e98d10d463f60571c636ad491ec181752b5a87277298446e2c1075d6",
+    "classes": [
+      {
+        "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/classes/com/m3/collections/M3TreeMap$Tree.class",
+        "bytes": 9998,
+        "sha256": "27507b79d19bfe489ec4020d1486f948b9d7bb7d1150577899bd58628847d56b",
+        "git_blob": "f21515651ec8fa5619e30986776a1b5d3f6588e5",
+        "relative_path": "com/m3/collections/M3TreeMap$Tree.class"
+      },
+      {
+        "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/classes/com/m3/collections/M3TreeMap.class",
+        "bytes": 24115,
+        "sha256": "fc892c7f11adaa14e369733bf526e8a4bb81f9b4ab3329f5bc048a72bf6036d6",
+        "git_blob": "a5ac6230ae327dc90868c0df99e8c63bfa5084aa",
+        "relative_path": "com/m3/collections/M3TreeMap.class"
+      }
+    ]
+  },
+  "commands": [
+    {
+      "label": "strict-selected-treemap",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+        "-J-Xmx128m",
+        "-J-XX:ActiveProcessorCount=2",
+        "-J-XX:-UsePerfData",
+        "-J-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-J-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\home",
+        "--release",
+        "21",
+        "-g",
+        "-proc:none",
+        "-Xlint:all,-module",
+        "-Werror",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
+        "-sourcepath",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\empty-sourcepath",
+        "-d",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\classes",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\src\\main\\java\\com\\m3\\collections\\M3TreeMap.java"
+      ],
+      "returncode": 0,
+      "reason": "completed",
+      "pid": 36392,
+      "capturedBytes": 0,
+      "combinedLogLimitBytes": 65536,
+      "capacityChecks": 7,
+      "readerThreadsJoined": true,
+      "treeContainment": "Windows kill-on-close job with stdin-gated command",
+      "elapsedSeconds": 1.063,
+      "stdout": {
+        "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/strict-selected-treemap.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      },
+      "stderr": {
+        "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/strict-selected-treemap.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      }
+    },
+    {
+      "label": "reference-api88",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xms128m",
+        "-Xmx128m",
+        "-Xss512k",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\home",
+        "-Djava.library.path=S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\absent-native",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
+        "TreeBulkPublicApi"
+      ],
+      "returncode": 0,
+      "reason": "completed",
+      "pid": 50724,
+      "capturedBytes": 9153,
+      "combinedLogLimitBytes": 65536,
+      "capacityChecks": 4,
+      "readerThreadsJoined": true,
+      "treeContainment": "Windows kill-on-close job with stdin-gated command",
+      "elapsedSeconds": 0.281,
+      "stdout": {
+        "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/reference-api88.stdout",
+        "bytes": 9153,
+        "sha256": "2a825e4b56bb2bf030cdcebd47588bea1c73121637a1e547097c925b47693743",
+        "git_blob": "be57f5eabec0d80598276e4cb5223cd96e189692"
+      },
+      "stderr": {
+        "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/reference-api88.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      }
+    },
+    {
+      "label": "candidate-api88",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xms128m",
+        "-Xmx128m",
+        "-Xss512k",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\home",
+        "-Djava.library.path=S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\absent-native",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
+        "TreeBulkPublicApi"
+      ],
+      "returncode": 0,
+      "reason": "completed",
+      "pid": 35652,
+      "capturedBytes": 9153,
+      "combinedLogLimitBytes": 65536,
+      "capacityChecks": 4,
+      "readerThreadsJoined": true,
+      "treeContainment": "Windows kill-on-close job with stdin-gated command",
+      "elapsedSeconds": 0.266,
+      "stdout": {
+        "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/candidate-api88.stdout",
+        "bytes": 9153,
+        "sha256": "2a825e4b56bb2bf030cdcebd47588bea1c73121637a1e547097c925b47693743",
+        "git_blob": "be57f5eabec0d80598276e4cb5223cd96e189692"
+      },
+      "stderr": {
+        "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/candidate-api88.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      }
+    },
+    {
+      "label": "frozen-entry132",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xms128m",
+        "-Xmx128m",
+        "-Xss512k",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\home",
+        "-Djava.library.path=S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\absent-native",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-entry-proof-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
+        "TreeMapLookupEntryProof",
+        "com.m3.collections.M3TreeMap"
+      ],
+      "returncode": 0,
+      "reason": "completed",
+      "pid": 15412,
+      "capturedBytes": 1892,
+      "combinedLogLimitBytes": 65536,
+      "capacityChecks": 4,
+      "readerThreadsJoined": true,
+      "treeContainment": "Windows kill-on-close job with stdin-gated command",
+      "elapsedSeconds": 0.266,
+      "stdout": {
+        "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/frozen-entry132.stdout",
+        "bytes": 1892,
+        "sha256": "7d0e3e4b091112f7d433549f89cb2d557f6abd1873fea1c88344511483d0de64",
+        "git_blob": "16c294dd0101a84581c45fb22af2cd580c14ea88"
+      },
+      "stderr": {
+        "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/frozen-entry132.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      }
+    },
+    {
+      "label": "frozen-bulk113",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xms128m",
+        "-Xmx128m",
+        "-Xss512k",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\home",
+        "-Djava.library.path=S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\absent-native",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-linear-bulk-load-20261018\\qualification-proof-v2\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
+        "M3TreeMapSortedBulkProof",
+        "com.m3.collections.M3TreeMap"
+      ],
+      "returncode": 0,
+      "reason": "completed",
+      "pid": 55916,
+      "capturedBytes": 524,
+      "combinedLogLimitBytes": 65536,
+      "capacityChecks": 7,
+      "readerThreadsJoined": true,
+      "treeContainment": "Windows kill-on-close job with stdin-gated command",
+      "elapsedSeconds": 1.047,
+      "stdout": {
+        "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/frozen-bulk113.stdout",
+        "bytes": 524,
+        "sha256": "a2b21db2cc073a5d4364d06d02ab44127967a63a28b32baf95a6b99daf682999",
+        "git_blob": "792b60ba62be59fd6894db5446cbc8d783075cff"
+      },
+      "stderr": {
+        "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/frozen-bulk113.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      }
+    },
+    {
+      "label": "frozen-avl-permutation-random",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xms128m",
+        "-Xmx256m",
+        "-Xss1m",
+        "-XX:+UseSerialGC",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\m3-collections-next-20261018\\temp",
+        "-Duser.home=S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\home",
+        "-DexpectedDigest=c04bba433f2bf19c0851d8a5cba874315ec258b47b4a447f026f7e32b6a1c8e5",
+        "-cp",
+        "S:\\codex-work\\m3-collections-next-20261018\\m3-avl-insertion-frontier-20261018\\qualification-property-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-lookup-validation-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\m3-tree-map-entry-protocol-20261018\\qualification-compile-v1\\classes;S:\\codex-work\\m3-collections-next-20261018\\spring-case-insensitive-map\\current-base-runtime-v5\\core130-classes",
+        "AvlGrowthFrontierProof",
+        "com.m3.collections.M3TreeMap",
+        "com.m3.collections.M3TreeSet"
+      ],
+      "returncode": 0,
+      "reason": "completed",
+      "pid": 27316,
+      "capturedBytes": 325,
+      "combinedLogLimitBytes": 65536,
+      "capacityChecks": 8,
+      "readerThreadsJoined": true,
+      "treeContainment": "Windows kill-on-close job with stdin-gated command",
+      "elapsedSeconds": 1.297,
+      "stdout": {
+        "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/frozen-avl-permutation-random.stdout",
+        "bytes": 325,
+        "sha256": "f18b9f7d2d9b931bd03f296001b8c459b83530ef47c612188c990aa8dd3b6740",
+        "git_blob": "fb8b85cad4ff685a3daf387698c597fbfe39a8a7"
+      },
+      "stderr": {
+        "path": "m3-tree-lookup-validation-20261018/qualification-compile-v1/frozen-avl-permutation-random.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+      }
+    }
+  ],
+  "gate_before": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 25496023040,
+    "logical_bytes": 529955173,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  },
+  "gate_after": {
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "free_bytes": 25495908352,
+    "logical_bytes": 530012900,
+    "cap_bytes": 536870912,
+    "reserve_bytes": 8589934592,
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\",
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE"
+  },
+  "task_bytes_before_receipt": 98732,
+  "cap_bytes": 196608,
+  "launcher": {
+    "path": "m3-tree-lookup-validation-20261018/qualify_reused_v1.py",
+    "bytes": 11088,
+    "sha256": "cb6a65171245ee0bb9923bb15a7c1eb494ca29facf2b7259e9c14a0bd1300499",
+    "git_blob": "4e37b3e751054bdb5b9388d5ecaadd88ffd709b2"
+  }
+}

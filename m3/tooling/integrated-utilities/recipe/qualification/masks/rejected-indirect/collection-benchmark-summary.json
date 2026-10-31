@@ -1,0 +1,463 @@
+{
+  "schema": 1,
+  "probe": "complete filteredSortedSnapshot versus captured ArrayList/removeIf/List.sort/unmodifiableList",
+  "evidence_kind": "PATCHED_STOCK_JDK_21_WITH_SEPARATELY_COMPILED_PRODUCTION_C",
+  "method": {
+    "jvm_processes_per_variant": 1,
+    "measured_rounds_per_workload": 5,
+    "warmup_target_ms": 300,
+    "warmup_max_batches": 64,
+    "input_record_creation_in_timed_region": false,
+    "capturing_filtering_sorting_and_output_allocation_in_timed_region": true,
+    "results_escape": true,
+    "all_semantic_preflight_before_output": true,
+    "jdk": "21.0.12.1+1-LTS",
+    "xmx": "128m",
+    "jni_checking_during_timing": false,
+    "native_resolution_confirmed": true
+  },
+  "metadata": {
+    "baseline": {
+      "schema": 1,
+      "probe": "M3CollectionViews.filteredSortedSnapshot.complete-call",
+      "java": "21.0.12.1+1-LTS",
+      "arch": "amd64",
+      "semantic_workloads": 6,
+      "semantic_preflight": "PASSED",
+      "sparse_fraction": "1/16",
+      "dense_fraction": "3/4",
+      "rank_groups": 32,
+      "warmup_target_millis": 300,
+      "warmup_max_batches": 64,
+      "cpu_supported": true,
+      "allocation_supported": true,
+      "native_requested": false
+    },
+    "integrated-java": {
+      "schema": 1,
+      "probe": "M3CollectionViews.filteredSortedSnapshot.complete-call",
+      "java": "21.0.12.1+1-LTS",
+      "arch": "amd64",
+      "semantic_workloads": 6,
+      "semantic_preflight": "PASSED",
+      "sparse_fraction": "1/16",
+      "dense_fraction": "3/4",
+      "rank_groups": 32,
+      "warmup_target_millis": 300,
+      "warmup_max_batches": 64,
+      "cpu_supported": true,
+      "allocation_supported": true,
+      "native_requested": false
+    },
+    "integrated-native": {
+      "schema": 1,
+      "probe": "M3CollectionViews.filteredSortedSnapshot.complete-call",
+      "java": "21.0.12.1+1-LTS",
+      "arch": "amd64",
+      "semantic_workloads": 6,
+      "semantic_preflight": "PASSED",
+      "sparse_fraction": "1/16",
+      "dense_fraction": "3/4",
+      "rank_groups": 32,
+      "warmup_target_millis": 300,
+      "warmup_max_batches": 64,
+      "cpu_supported": true,
+      "allocation_supported": true,
+      "native_requested": true
+    }
+  },
+  "process_resources": {
+    "baseline": {
+      "maximum_resident_set_kib": 91292
+    },
+    "integrated-java": {
+      "maximum_resident_set_kib": 94572
+    },
+    "integrated-native": {
+      "maximum_resident_set_kib": 84352
+    }
+  },
+  "workloads": [
+    {
+      "n": 65,
+      "density": "sparse",
+      "variants": {
+        "baseline": {
+          "cpu_ns_per_call": {
+            "median": 1706.512,
+            "minimum": 434.184,
+            "maximum": 3002.555
+          },
+          "wall_ns_per_call": {
+            "median": 1705.047,
+            "minimum": 432.822,
+            "maximum": 3072.066
+          },
+          "allocated_bytes_per_call": {
+            "median": 352.0,
+            "minimum": 352.0,
+            "maximum": 352.015
+          }
+        },
+        "integrated-java": {
+          "cpu_ns_per_call": {
+            "median": 632.616,
+            "minimum": 507.221,
+            "maximum": 3876.257
+          },
+          "wall_ns_per_call": {
+            "median": 722.153,
+            "minimum": 511.116,
+            "maximum": 4003.796
+          },
+          "allocated_bytes_per_call": {
+            "median": 536.0,
+            "minimum": 536.0,
+            "maximum": 536.015
+          }
+        },
+        "integrated-native": {
+          "cpu_ns_per_call": {
+            "median": 1008.598,
+            "minimum": 807.232,
+            "maximum": 1333.787
+          },
+          "wall_ns_per_call": {
+            "median": 1126.991,
+            "minimum": 805.931,
+            "maximum": 1710.316
+          },
+          "allocated_bytes_per_call": {
+            "median": 536.0,
+            "minimum": 536.0,
+            "maximum": 536.015
+          }
+        }
+      },
+      "selected": 5,
+      "iterations_per_round": 10000,
+      "integrated_java_to_baseline_cpu_ratio": 0.37070703282484974,
+      "integrated_java_to_baseline_allocation_ratio": 1.5227272727272727,
+      "integrated_native_to_java_cpu_ratio": 1.5943289452053062
+    },
+    {
+      "n": 65,
+      "density": "dense",
+      "variants": {
+        "baseline": {
+          "cpu_ns_per_call": {
+            "median": 3001.494,
+            "minimum": 2190.97,
+            "maximum": 3595.145
+          },
+          "wall_ns_per_call": {
+            "median": 3017.297,
+            "minimum": 2189.232,
+            "maximum": 3992.643
+          },
+          "allocated_bytes_per_call": {
+            "median": 624.0,
+            "minimum": 624.0,
+            "maximum": 624.0
+          }
+        },
+        "integrated-java": {
+          "cpu_ns_per_call": {
+            "median": 1229.59,
+            "minimum": 1143.181,
+            "maximum": 1362.334
+          },
+          "wall_ns_per_call": {
+            "median": 1250.794,
+            "minimum": 1172.063,
+            "maximum": 1463.501
+          },
+          "allocated_bytes_per_call": {
+            "median": 1240.0,
+            "minimum": 1240.0,
+            "maximum": 1240.0
+          }
+        },
+        "integrated-native": {
+          "cpu_ns_per_call": {
+            "median": 2718.196,
+            "minimum": 2609.231,
+            "maximum": 2769.608
+          },
+          "wall_ns_per_call": {
+            "median": 2857.287,
+            "minimum": 2743.082,
+            "maximum": 2869.931
+          },
+          "allocated_bytes_per_call": {
+            "median": 1240.0,
+            "minimum": 1240.0,
+            "maximum": 1240.0
+          }
+        }
+      },
+      "selected": 49,
+      "iterations_per_round": 10000,
+      "integrated_java_to_baseline_cpu_ratio": 0.409659322990484,
+      "integrated_java_to_baseline_allocation_ratio": 1.9871794871794872,
+      "integrated_native_to_java_cpu_ratio": 2.2106523312648934
+    },
+    {
+      "n": 1024,
+      "density": "sparse",
+      "variants": {
+        "baseline": {
+          "cpu_ns_per_call": {
+            "median": 7775.383,
+            "minimum": 6393.153,
+            "maximum": 19314.708
+          },
+          "wall_ns_per_call": {
+            "median": 7771.794,
+            "minimum": 6384.493,
+            "maximum": 19304.879
+          },
+          "allocated_bytes_per_call": {
+            "median": 5504.0,
+            "minimum": 5504.0,
+            "maximum": 5504.0
+          }
+        },
+        "integrated-java": {
+          "cpu_ns_per_call": {
+            "median": 24529.99,
+            "minimum": 5139.9,
+            "maximum": 81847.135
+          },
+          "wall_ns_per_call": {
+            "median": 26815.278,
+            "minimum": 5132.066,
+            "maximum": 81888.596
+          },
+          "allocated_bytes_per_call": {
+            "median": 5408.0,
+            "minimum": 5408.0,
+            "maximum": 5408.0
+          }
+        },
+        "integrated-native": {
+          "cpu_ns_per_call": {
+            "median": 6194.385,
+            "minimum": 3231.294,
+            "maximum": 25969.999
+          },
+          "wall_ns_per_call": {
+            "median": 7747.729,
+            "minimum": 3220.977,
+            "maximum": 26006.666
+          },
+          "allocated_bytes_per_call": {
+            "median": 5408.0,
+            "minimum": 5408.0,
+            "maximum": 5408.0
+          }
+        }
+      },
+      "selected": 64,
+      "iterations_per_round": 1464,
+      "integrated_java_to_baseline_cpu_ratio": 3.154827228446496,
+      "integrated_java_to_baseline_allocation_ratio": 0.9825581395348837,
+      "integrated_native_to_java_cpu_ratio": 0.2525229321332785
+    },
+    {
+      "n": 1024,
+      "density": "dense",
+      "variants": {
+        "baseline": {
+          "cpu_ns_per_call": {
+            "median": 43358.81,
+            "minimum": 38894.161,
+            "maximum": 53514.156
+          },
+          "wall_ns_per_call": {
+            "median": 43394.643,
+            "minimum": 39643.329,
+            "maximum": 56660.421
+          },
+          "allocated_bytes_per_call": {
+            "median": 7568.0,
+            "minimum": 7568.0,
+            "maximum": 7568.0
+          }
+        },
+        "integrated-java": {
+          "cpu_ns_per_call": {
+            "median": 63918.545,
+            "minimum": 56995.854,
+            "maximum": 66229.367
+          },
+          "wall_ns_per_call": {
+            "median": 65295.96,
+            "minimum": 58450.217,
+            "maximum": 69219.863
+          },
+          "allocated_bytes_per_call": {
+            "median": 16672.0,
+            "minimum": 16672.0,
+            "maximum": 16672.0
+          }
+        },
+        "integrated-native": {
+          "cpu_ns_per_call": {
+            "median": 57994.543,
+            "minimum": 50359.4,
+            "maximum": 66647.865
+          },
+          "wall_ns_per_call": {
+            "median": 62441.627,
+            "minimum": 51063.048,
+            "maximum": 67666.149
+          },
+          "allocated_bytes_per_call": {
+            "median": 16672.0,
+            "minimum": 16672.0,
+            "maximum": 16672.0
+          }
+        }
+      },
+      "selected": 768,
+      "iterations_per_round": 1464,
+      "integrated_java_to_baseline_cpu_ratio": 1.4741766436855623,
+      "integrated_java_to_baseline_allocation_ratio": 2.2029598308668077,
+      "integrated_native_to_java_cpu_ratio": 0.9073195111058927
+    },
+    {
+      "n": 65536,
+      "density": "sparse",
+      "variants": {
+        "baseline": {
+          "cpu_ns_per_call": {
+            "median": 763098.273,
+            "minimum": 588037.273,
+            "maximum": 837851.273
+          },
+          "wall_ns_per_call": {
+            "median": 763129.227,
+            "minimum": 588213.182,
+            "maximum": 895032.818
+          },
+          "allocated_bytes_per_call": {
+            "median": 286112.0,
+            "minimum": 286112.0,
+            "maximum": 286112.0
+          }
+        },
+        "integrated-java": {
+          "cpu_ns_per_call": {
+            "median": 637069.045,
+            "minimum": 586115.318,
+            "maximum": 873665.182
+          },
+          "wall_ns_per_call": {
+            "median": 659689.5,
+            "minimum": 632769.545,
+            "maximum": 872784.545
+          },
+          "allocated_bytes_per_call": {
+            "median": 336032.0,
+            "minimum": 336032.0,
+            "maximum": 336032.0
+          }
+        },
+        "integrated-native": {
+          "cpu_ns_per_call": {
+            "median": 437508.0,
+            "minimum": 364973.136,
+            "maximum": 452833.773
+          },
+          "wall_ns_per_call": {
+            "median": 437039.136,
+            "minimum": 364223.227,
+            "maximum": 490715.545
+          },
+          "allocated_bytes_per_call": {
+            "median": 336032.0,
+            "minimum": 336032.0,
+            "maximum": 336032.0
+          }
+        }
+      },
+      "selected": 4096,
+      "iterations_per_round": 22,
+      "integrated_java_to_baseline_cpu_ratio": 0.8348453502528108,
+      "integrated_java_to_baseline_allocation_ratio": 1.1744771278380495,
+      "integrated_native_to_java_cpu_ratio": 0.6867513080940857
+    },
+    {
+      "n": 65536,
+      "density": "dense",
+      "variants": {
+        "baseline": {
+          "cpu_ns_per_call": {
+            "median": 6067983.091,
+            "minimum": 5562030.909,
+            "maximum": 7472871.5
+          },
+          "wall_ns_per_call": {
+            "median": 6071901.636,
+            "minimum": 5561100.227,
+            "maximum": 7470485.455
+          },
+          "allocated_bytes_per_call": {
+            "median": 531936.0,
+            "minimum": 531936.0,
+            "maximum": 531936.0
+          }
+        },
+        "integrated-java": {
+          "cpu_ns_per_call": {
+            "median": 8810682.727,
+            "minimum": 8610338.955,
+            "maximum": 9214406.591
+          },
+          "wall_ns_per_call": {
+            "median": 8994450.591,
+            "minimum": 8636466.091,
+            "maximum": 9320460.455
+          },
+          "allocated_bytes_per_call": {
+            "median": 1056928.0,
+            "minimum": 1056928.0,
+            "maximum": 1056928.0
+          }
+        },
+        "integrated-native": {
+          "cpu_ns_per_call": {
+            "median": 6459504.182,
+            "minimum": 5372077.818,
+            "maximum": 8655084.091
+          },
+          "wall_ns_per_call": {
+            "median": 6568037.091,
+            "minimum": 5535961.182,
+            "maximum": 8724490.0
+          },
+          "allocated_bytes_per_call": {
+            "median": 1056928.0,
+            "minimum": 1056928.0,
+            "maximum": 1056928.0
+          }
+        }
+      },
+      "selected": 49152,
+      "iterations_per_round": 22,
+      "integrated_java_to_baseline_cpu_ratio": 1.4519952667745495,
+      "integrated_java_to_baseline_allocation_ratio": 1.9869457979907357,
+      "integrated_native_to_java_cpu_ratio": 0.7331445680372869
+    }
+  ],
+  "decision": "JAVA_DEFAULT_UNCHANGED; regressions retained explicitly, no global speedup or native threshold conclusion",
+  "warmup_refinement": "Pilot n1024 sparse native dropped from37us to2.7us during measurement; bounded300ms shape-specific warmup added. Pilot preserved in collection-initial-warmup. Final data still one JVM/variant.",
+  "limitations": [
+    "One JVM per backend and bounded warmup, no multiple forks or significance analysis",
+    "Median CPU includes current-thread work, not GC/other compiler threads; wall samples retain scheduling noise",
+    "Process RSS includes VM, inputs, compiled code and GC; not retained-output size or a leak proof",
+    "Only scrambled integer-rank records, ArrayList source, two selection densities and three sizes",
+    "Full M3JDK21 image/jtreg and Windows/macOS/native portability are pending"
+  ]
+}

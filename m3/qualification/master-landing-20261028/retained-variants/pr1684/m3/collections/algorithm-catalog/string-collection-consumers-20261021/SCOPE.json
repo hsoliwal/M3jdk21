@@ -1,0 +1,17 @@
+{
+  "baseline": "a4415af418a9b0f21a06cd5801d238577fbb6eb7",
+  "matrix_rows": 78,
+  "bounded_source_files": 654,
+  "textual_callsite_index_rows": 1569,
+  "scan_roots": [
+    "src/java.base/share/classes/java/util/",
+    "m3/collections/src/main/java/com/m3/collections/"
+  ],
+  "limits": [
+    "Text index is not a closed program call graph",
+    "A reachable String operation is eligibility, not measured end-to-end benefit",
+    "No bootstrap or flattened String path benefit asserted",
+    "No runtime edits to listed consumer owners except selected primitive projection atom",
+    "No whole-provider or scaffold implementation claim"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "schema": "M3JDK21_SYNEXIA_LONG_LINKED_HASH_SET_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-long-linked-hash-set-20261008",
+    "pullRequest": 9869,
+    "commit": "83971fca8e4",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.LongLinkedHashSet",
+    "crate": "m3-long-linked-hash-set",
+    "fossReuseDecisionRow": "collections.donor.common.collections",
+    "donors": [
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/DenseOrderedSet.java",
+        "blob": "20e9aec1",
+        "developCommit": "296323958b1",
+        "target": "com.m3.collections.M3LongLinkedHashSet",
+        "mechanics": "previous/next link lanes with first/last endpoints, O(1) unlink, stable slots"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongOrderedSet.java",
+        "blob": "6156e5d4",
+        "developCommit": "296323958b1",
+        "target": "com.m3.collections.M3LongLinkedHashSet",
+        "mechanics": "insertion-ordered primitive-long set contract"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+        "target": "com.m3.collections.M3LongLinkedHashSet",
+        "mechanics": "open-addressed long table: probing, byte occupancy, growth and compaction"
+      }
+    ],
+    "license": "Apache-2.0 first-party",
+    "disposition": "ADAPT: link lanes indexed by table slot, rehash re-inserts in encounter order, java.util.LinkedHashSet SequencedSet surface added (addFirst/addLast move a present key, first/last/removeFirst/removeLast, toReversedArray); C1 UNREACHABLE confirmed (donors import only java.*)"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "c9b07049c57ecdf43175f5885e11998918416a00",
+    "owners": [
+      "com.m3.collections.M3LongLinkedHashSet"
+    ],
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLinkedHashSet.java",
+      "before": "ABSENT",
+      "after": "a482cb444e757b8cd2a9a71a46b0cdb0accbe2a60c636a76b84adf9a63c2feef",
+      "resource": "00-M3LongLinkedHashSet.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongLinkedHashSetTest.java",
+      "before": "ABSENT",
+      "after": "f33e703397f639a47228e450a2c587bcea47e9c5d0b347099d91a9c91fa047ec",
+      "resource": "01-M3LongLinkedHashSetTest.java.txt"
+    }
+  ],
+  "gates": {
+    "m3CollectionsModuleCompile": "PASS_WINDOWS mvn -o -B -f m3/collections/pom.xml (-Xlint:all,-module -Werror via pom)",
+    "m3CollectionsModuleTests": "PASS_WINDOWS 120/120 (M3LongLinkedHashSetTest 3: 40,000-operation differential vs LinkedHashSet<Long> incl. SequencedSet moves, order and reversed-order snapshots, growth and compaction; mvn log sha256 8896d848cce99c9fd559f481a6a9ed5bbe029e7891964276c89f54e347c6f8ef)",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3LongLinkedHashSetRecipeTest 2/2 (mvn log sha256 d53acbbf2a6d05122b52a815e81963a0ed99d524ca5d73acb4ea8c2699fdbb42)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "jdkBuildJtregRuntime": "PENDING_LINUX",
+    "ci": "PENDING_CI; the installed-collections job refuses new owners until a successor qualification packet exists (canonical receiving lane #421/#9849)"
+  },
+  "semanticDecisions": [
+    "every long is a legal key (byte occupancy lane, no sentinel); no per-element node; link lanes are int slot indexes",
+    "add/addLast append; addFirst prepends; a present key is moved, as java.util.LinkedHashSet's SequencedSet methods do",
+    "removal unlinks in O(1) and marks a tombstone; compaction keeps the table size and re-links in encounter order; growth doubles and re-links in encounter order",
+    "first/last/removeFirst/removeLast throw NoSuchElementException on an empty set; the iterator is fail-fast",
+    "not a java.util.Set: primitive M3LongCollection surface only"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "status": "ROOT_ACCEPTED_SMALL_MECHANICAL_DELTA_CPU_REVIEW_NO_ADDITIONAL_MODEL_RUN",
+  "skill": "C:/Users/hsoliwal/.codex/skills/autoreview/SKILL.md",
+  "triggerQuote": "after non-trivial code edits, before final/commit/ship",
+  "rootDecision": "Qualifier1token+strict fixture correction is small auditable delta, no new model review required. Root already CPU-audited exact qualifier. No additional unit/review run.",
+  "projectionReviewDoesNotCoverThisDelta": true,
+  "newStructuredReviewClaimed": false,
+  "modelInvocations": 0,
+  "diffPath": "IMPORTER_FIX_RECIPE_V3.diff",
+  "diffSha256": "1631ebdeb3b6aa78782c9a8abda60595517edc2eba74d8e7ada3ddce6043b811",
+  "owners": 3,
+  "productionChangedLines": {
+    "removed": 1,
+    "added": 1
+  },
+  "testChangedLines": {
+    "removed": 2,
+    "added": 3
+  },
+  "changes": [
+    {
+      "path": "m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaImportPlan.java",
+      "delta": "Qualify existing outer static root helper, resolving record accessor name collision",
+      "publicApiOrAlgorithmChange": false,
+      "proof": "Existing strict6-owner compile after retained exact compile failure"
+    },
+    {
+      "path": "m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java",
+      "delta": "Encode YAML fixture as UTF-8 bytes and mirror canonical source/target family paths",
+      "assertionChanges": false,
+      "proof": "Original ADD/M3_RECIPE assertions retained; all7cases passed"
+    },
+    {
+      "path": "m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java",
+      "delta": "Create source after source-failure assertions, before absent-target-root assertion",
+      "assertionChanges": false,
+      "publicFailureOrderingChange": false,
+      "proof": "Original exception expectations retained; all7cases passed"
+    }
+  ],
+  "allOriginalThreeUnitClassesPassed": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "receipt": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\FINAL_JUNIT_PROOF.json",
+    "sha256": "315b3b737d2e22d84983b6e8440de58f7cc62d7272704b1910507594588f9eee"
+  },
+  "noAssertionsRemovedOrWeakened": true,
+  "scopeExpansion": false
+}

@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "target_repository": "hsoliwal/M3jdk21",
+  "parent_pr": 1435,
+  "target_preimage_revision": "2717d156ad2aba73dfdfcfc6a58b59a82371798e",
+  "canonical_recipe": "com.synexia.m3.CollectionDense20261019",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019",
+  "source_handoff": "m3/runtime-integration/collection-dense-20261019/SYNEXIA_HANDOFF.json",
+  "runtime_dependency": false,
+  "new_public_api": false,
+  "receiving_sequence_advanced": false,
+  "status": "QUALIFIED_SCOPED_CANDIDATE_FULL_IMAGE_PENDING",
+  "owners": [
+    {
+      "owner": "java.util.M3CollectionViews",
+      "public_api": "existing java.util.Collections factories",
+      "atom": "snapshot all-selected capture reuse"
+    },
+    {
+      "owner": "java.util.M3CollectionMasks",
+      "public_api": "package-private, no new public API",
+      "atom": "full-range index decoding with count-drift check"
+    },
+    {
+      "owner": "src/java.base/share/native/libjava/M3CollectionMasks.c",
+      "public_api": "unchanged Java_java_util_M3CollectionMasks_selected0",
+      "atom": "bounded full-range output fill"
+    }
+  ],
+  "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+  "tooling_license": "Apache-2.0",
+  "pending": [
+    "full product image",
+    "full jtreg/tier/platform gates",
+    "global ordered phase promotion",
+    "whole SDK/Eclipse/library coverage"
+  ]
+}

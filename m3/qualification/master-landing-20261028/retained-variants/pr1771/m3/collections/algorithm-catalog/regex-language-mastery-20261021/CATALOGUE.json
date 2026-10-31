@@ -1,0 +1,440 @@
+{
+  "baseline": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+  "candidate_capabilities": [
+    {
+      "id": "m3.regex.common-class-precompute",
+      "license": "Existing GPL-2.0-only WITH Classpath-exception-2.0 headers retained; first-party product implementation, no donor code copy.",
+      "sources": [
+        {
+          "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+          "fingerprint": null,
+          "git_blob_sha1": "14fc79e035ac7c8fe610b0fc9191ba428b683133",
+          "module": "java.base",
+          "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+          "repo": "hsoliwal/M3JDK21",
+          "revision_role": "pinned",
+          "sha256": "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a",
+          "signatures": [],
+          "symbol": "java.lang.M3StringFacts"
+        },
+        {
+          "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+          "fingerprint": null,
+          "git_blob_sha1": "acdf089b702410188b220dcb6f08b9666b539ddf",
+          "module": "java.base",
+          "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+          "repo": "hsoliwal/M3JDK21",
+          "revision_role": "pinned",
+          "sha256": "69ebbcbd716f673af9fe282b8ab72f7b7de7961d7c43d69f534267c31a04a39f",
+          "signatures": [],
+          "symbol": "java.lang.M3StringRegexDp"
+        }
+      ],
+      "status": "pending",
+      "targets": [
+        {
+          "commit": null,
+          "fingerprint": null,
+          "git_blob_sha1": "bd4d7878ceb9d3c74f8f012c05cac4aff392a128",
+          "module": "java.base",
+          "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+          "repo": "hsoliwal/M3JDK21",
+          "revision_role": "candidate",
+          "sha256": "0cc1b4726cb2637b184184a60c75964180d58790530101fcf46900f74f1dc72a",
+          "signatures": [],
+          "symbol": "java.lang.M3StringFacts"
+        },
+        {
+          "commit": null,
+          "fingerprint": null,
+          "git_blob_sha1": "9bfcdd972e704ef88ef5fdfe3112576aba99f3cd",
+          "module": "java.base",
+          "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+          "repo": "hsoliwal/M3JDK21",
+          "revision_role": "candidate",
+          "sha256": "faa373f77eef1d2dd3457bfe8c5d65d2dff819bb606e00f7c269e7b08a37cf25",
+          "signatures": [],
+          "symbol": "java.lang.M3StringRegexDp"
+        }
+      ]
+    },
+    {
+      "id": "m3.regex.pattern-boolean-unicode",
+      "license": "Existing GPL-2.0-only WITH Classpath-exception-2.0 header retained; first-party product refinement, no challenge or donor implementation copy.",
+      "sources": [
+        {
+          "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+          "fingerprint": null,
+          "git_blob_sha1": "2eb4ca854b6ef35d57d7a2599c97c3024ff81296",
+          "module": "java.base",
+          "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+          "repo": "hsoliwal/M3JDK21",
+          "revision_role": "pinned",
+          "sha256": "b471add6421a394fb59a15b2fe9a7cac21a9c4c438d754996f961f43bb811531",
+          "signatures": [],
+          "symbol": "java.util.regex.M3PatternQuery"
+        }
+      ],
+      "status": "pending",
+      "targets": [
+        {
+          "commit": null,
+          "fingerprint": null,
+          "git_blob_sha1": "33eeccc2ecdffa2b7ffdf7c11533caa232c2672b",
+          "module": "java.base",
+          "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+          "repo": "hsoliwal/M3JDK21",
+          "revision_role": "candidate",
+          "sha256": "190d541c497c344ba5015f38edadf6d6fb359e10010afbb88729905e04b1c1d7",
+          "signatures": [],
+          "symbol": "java.util.regex.M3PatternQuery"
+        }
+      ]
+    },
+    {
+      "id": "m3.token.regex-occurrence-reuse",
+      "license": "Existing Apache-2.0 component notice retained; separate admitted component identity is not relabeled as GPL merely because the file resides under java.base.",
+      "sources": [
+        {
+          "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+          "fingerprint": null,
+          "git_blob_sha1": "325cb8d5c133a3b66d710c9e09cfff7802d9b66b",
+          "module": "java.base",
+          "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java",
+          "repo": "hsoliwal/M3JDK21",
+          "revision_role": "pinned",
+          "sha256": "0ed768ba1672780790c55b4e64ac28b9c702740ba5a03484805e68b4d8725a10",
+          "signatures": [],
+          "symbol": "jdk.internal.mindex.M3TokenPredicateCache"
+        }
+      ],
+      "status": "pending",
+      "targets": [
+        {
+          "commit": null,
+          "fingerprint": null,
+          "git_blob_sha1": "ddd25bf0b749934b7173b7c6ebb3b93378261ce6",
+          "module": "java.base",
+          "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java",
+          "repo": "hsoliwal/M3JDK21",
+          "revision_role": "candidate",
+          "sha256": "1aa4e472110c2ca9432efc68cf7bea09c22ade8af670017fa4fe473bebfade88",
+          "signatures": [],
+          "symbol": "jdk.internal.mindex.M3TokenPredicateCache"
+        }
+      ]
+    },
+    {
+      "id": "m3.collections.indexed-array-growth-atomicity",
+      "license": "Existing GPL-2.0-only WITH Classpath-exception-2.0 SPDX notice retained; independently expressed first-party transactional publication, no donor adaptation.",
+      "sources": [
+        {
+          "commit": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+          "fingerprint": null,
+          "git_blob_sha1": "2ce544751b8783f76d66aaab9e9fecbde01fb6ed",
+          "module": "java.base",
+          "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+          "repo": "hsoliwal/M3JDK21",
+          "revision_role": "pinned",
+          "sha256": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61",
+          "signatures": [],
+          "symbol": "jdk.internal.m3.M3IndexedArray"
+        }
+      ],
+      "status": "pending",
+      "targets": [
+        {
+          "commit": null,
+          "fingerprint": null,
+          "git_blob_sha1": "93b8e8513f9e28c3493df58a685ca25014439886",
+          "module": "java.base",
+          "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+          "repo": "hsoliwal/M3JDK21",
+          "revision_role": "candidate",
+          "sha256": "e5b9b0cafa6edb66697783250271fa165c9ccee7ccbf661b7b23843e7e1d7a43",
+          "signatures": [],
+          "symbol": "jdk.internal.m3.M3IndexedArray"
+        }
+      ]
+    }
+  ],
+  "category_mapping": [
+    {
+      "decision": "CATEGORY_ONLY_NO_SOURCE_IMPORT",
+      "gfg": {
+        "contract": "Restricted dot/postfix-star matching problem.",
+        "url": "https://www.geeksforgeeks.org/dsa/implementing-regular-expression-matching/"
+      },
+      "hackerrank": {
+        "contract": "Repetition syntax exercise; does not establish complete Java Pattern semantics.",
+        "url": "https://www.hackerrank.com/challenges/matching-zero-or-more-repetitions/problem"
+      },
+      "id": "restricted-full-regex",
+      "leetcode": {
+        "contract": "Whole match over a small lowercase domain with dot and postfix star, with valid-star inputs.",
+        "url": "https://leetcode.com/problems/regular-expression-matching/"
+      },
+      "mismatch": "No general Unicode, flags, captures, syntax-error or backreference contract; not a replacement for Pattern.",
+      "owner": "java.lang.M3StringRegexDp; java.util.regex.Pattern"
+    },
+    {
+      "decision": "REFUSED_CONTRACT_SUBSTITUTION",
+      "gfg": {
+        "contract": "Postfix-star regex grammar differs from wildcard star.",
+        "url": "https://www.geeksforgeeks.org/dsa/implementing-regular-expression-matching/"
+      },
+      "hackerrank": {
+        "contract": "Regex dot has a separate line-terminator contract.",
+        "url": "https://www.hackerrank.com/challenges/matching-anything-but-new-line/problem"
+      },
+      "id": "wildcard-distinct-grammar",
+      "leetcode": {
+        "contract": "Question mark consumes one character and star consumes any sequence; whole-input wildcard match.",
+        "url": "https://leetcode.com/problems/wildcard-matching/"
+      },
+      "mismatch": "Wildcard star and postfix repetition are not interchangeable; category similarity confers no rewrite authority.",
+      "owner": "java.util.regex.Pattern (no wildcard grammar substitution)"
+    },
+    {
+      "decision": "CATEGORY_ONLY_NO_SOURCE_IMPORT",
+      "gfg": {
+        "contract": "Report all matching positions with prefix preprocessing.",
+        "url": "https://www.geeksforgeeks.org/dsa/kmp-algorithm-for-pattern-searching/"
+      },
+      "hackerrank": {
+        "contract": "Count case-sensitive occurrences, including the overlap shape.",
+        "url": "https://www.hackerrank.com/challenges/find-a-string/problem"
+      },
+      "id": "literal-first-count-all",
+      "leetcode": {
+        "contract": "First index or minus one; nonempty lowercase inputs.",
+        "url": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/"
+      },
+      "mismatch": "First result, occurrence count and all-result list are different outputs; existing segmented UTF-16, empty, null, fromIndex and overlap semantics remain authoritative.",
+      "owner": "Existing String literal-search owners; no new implementation admitted"
+    },
+    {
+      "decision": "CATEGORY_ONLY_NO_SOURCE_IMPORT",
+      "gfg": {
+        "contract": "All occurrences of multiple literal patterns.",
+        "url": "https://www.geeksforgeeks.org/dsa/aho-corasick-algorithm-pattern-searching/"
+      },
+      "hackerrank": {
+        "contract": "Weighted, range-selected gene occurrences, including duplicate genes.",
+        "url": "https://www.hackerrank.com/challenges/determining-dna-health/problem"
+      },
+      "id": "dictionary-multiword-search",
+      "leetcode": {
+        "contract": "Boolean segmentation using reusable dictionary words.",
+        "url": "https://leetcode.com/problems/word-break/"
+      },
+      "mismatch": "Segmentation and weighted range aggregation require additional state and output contracts beyond literal multi-pattern occurrence discovery.",
+      "owner": "No product multiword owner admitted by this change"
+    },
+    {
+      "decision": "CATEGORY_ONLY_NO_SOURCE_IMPORT",
+      "gfg": {
+        "contract": "Restricted grammar does not establish class tables or Unicode case folding.",
+        "url": "https://www.geeksforgeeks.org/dsa/implementing-regular-expression-matching/"
+      },
+      "hackerrank": {
+        "contract": "Position-specific class membership in a fixed-length pattern.",
+        "url": "https://www.hackerrank.com/challenges/matching-specific-characters/problem"
+      },
+      "id": "character-classes-and-runs",
+      "leetcode": {
+        "contract": "Restricted matching is a category starting point, not character-class coverage.",
+        "url": "https://leetcode.com/problems/regular-expression-matching/"
+      },
+      "mismatch": "Position-specific classes, whole-string uniform runs, UTF-16 length and Unicode properties are separate predicates; no unsupported popularity or frequency ranking is inferred.",
+      "owner": "java.lang.M3StringFacts; java.lang.M3StringRegexDp; java.util.regex.M3PatternQuery"
+    },
+    {
+      "decision": "CATEGORY_ONLY_NO_SOURCE_IMPORT",
+      "gfg": {
+        "contract": "Restricted matching is insufficient for stateful Matcher observations.",
+        "url": "https://www.geeksforgeeks.org/dsa/implementing-regular-expression-matching/"
+      },
+      "hackerrank": {
+        "contract": "Backreference category; official search metadata retrieved, direct page returned 404 during review.",
+        "url": "https://www.hackerrank.com/challenges/matching-same-text-again-again/problem"
+      },
+      "id": "general-pattern-state-and-context",
+      "leetcode": {
+        "contract": "Narrow grammar is insufficient as a general Java regex oracle.",
+        "url": "https://leetcode.com/problems/regular-expression-matching/"
+      },
+      "mismatch": "Keep exact input/flags/operation/capture/UTF-16/error behavior; occurrence-result caching must bind immutable owner context. A finite corpus and length bound do not prove universal equivalence or backtracking time limits.",
+      "owner": "java.util.regex.M3PatternQuery; jdk.internal.mindex.M3TokenPredicateCache; original Matcher"
+    },
+    {
+      "decision": "REFUSED_CONTRACT_SUBSTITUTION",
+      "gfg": {
+        "contract": "Recognize one input under a restricted grammar.",
+        "url": "https://www.geeksforgeeks.org/dsa/implementing-regular-expression-matching/"
+      },
+      "hackerrank": {
+        "contract": "Count all accepted strings of a given length over a restricted alphabet.",
+        "url": "https://www.hackerrank.com/challenges/count-strings/problem"
+      },
+      "id": "language-counting-is-not-recognition",
+      "leetcode": {
+        "contract": "Recognize one supplied input.",
+        "url": "https://leetcode.com/problems/regular-expression-matching/"
+      },
+      "mismatch": "Language cardinality requires a separate counting contract; recognition evidence cannot establish it.",
+      "owner": "No counting owner admitted"
+    }
+  ],
+  "category_mapping_order": [
+    "LeetCode",
+    "HackerRank",
+    "GeeksforGeeks"
+  ],
+  "challenge_solution_code_copied": false,
+  "donors": [
+    {
+      "admission": "REFUSED_DROP_IN_IMPLEMENTATION",
+      "copied_into_product": false,
+      "evaluated": true,
+      "id": "thealgorithms-kmp",
+      "license": {
+        "git_blob": "f6bcf04e7773b3bfca7a30836672dc7322e38944",
+        "path": "LICENSE",
+        "repository": "TheAlgorithms/Java",
+        "revision": "d9b86d1992b8bd4cadbd832822c792628117e69d",
+        "sha256": "d8499582b215ce90b33be4736260b1bb2e2dc312f71c1b29d19b8fc6d2dcdc3f",
+        "url": "https://github.com/TheAlgorithms/Java/blob/d9b86d1992b8bd4cadbd832822c792628117e69d/LICENSE"
+      },
+      "license_id": "MIT",
+      "license_review": "REFERENCE_ELIGIBLE_WITH_NOTICE_RETENTION",
+      "reason": "Returns boxed all-match indices and builds prefix storage per call; null or empty needle produces an empty list. This does not satisfy String first-index/fromIndex/empty-needle contracts or establish a product replacement.",
+      "source": {
+        "git_blob": "0317abe6f39a80ca656b85b7964d5a84292ae4cf",
+        "path": "src/main/java/com/thealgorithms/strings/KMP.java",
+        "repository": "TheAlgorithms/Java",
+        "revision": "d9b86d1992b8bd4cadbd832822c792628117e69d",
+        "sha256": "2b7b74597b3246e29ff751dfae3399b833fe7ae6b3367a1fd959e9c7c18a2816",
+        "url": "https://github.com/TheAlgorithms/Java/blob/d9b86d1992b8bd4cadbd832822c792628117e69d/src/main/java/com/thealgorithms/strings/KMP.java"
+      }
+    },
+    {
+      "admission": "REFUSED_OWNER_REPLACEMENT",
+      "copied_into_product": false,
+      "evaluated": true,
+      "id": "thealgorithms-aho-corasick",
+      "license": {
+        "git_blob": "f6bcf04e7773b3bfca7a30836672dc7322e38944",
+        "path": "LICENSE",
+        "repository": "TheAlgorithms/Java",
+        "revision": "d9b86d1992b8bd4cadbd832822c792628117e69d",
+        "sha256": "d8499582b215ce90b33be4736260b1bb2e2dc312f71c1b29d19b8fc6d2dcdc3f",
+        "url": "https://github.com/TheAlgorithms/Java/blob/d9b86d1992b8bd4cadbd832822c792628117e69d/LICENSE"
+      },
+      "license_id": "MIT",
+      "license_review": "REFERENCE_ELIGIBLE_WITH_NOTICE_RETENTION",
+      "reason": "Node maps, retained caller pattern array and string-keyed output require their own identity, mutation and duplicate-result contract. No product owner replacement is qualified; no donor bug is asserted.",
+      "source": {
+        "git_blob": "a68d0823a00dc9e2754f4188616ff76aa4cd252d",
+        "path": "src/main/java/com/thealgorithms/strings/AhoCorasick.java",
+        "repository": "TheAlgorithms/Java",
+        "revision": "d9b86d1992b8bd4cadbd832822c792628117e69d",
+        "sha256": "f2f5e09b0f982959885ffd2639980f3aaf94261b4b0e064fab4b70f1179b60c1",
+        "url": "https://github.com/TheAlgorithms/Java/blob/d9b86d1992b8bd4cadbd832822c792628117e69d/src/main/java/com/thealgorithms/strings/AhoCorasick.java"
+      }
+    },
+    {
+      "admission": "REFERENCE_ONLY_FILTER",
+      "copied_into_product": false,
+      "evaluated": true,
+      "id": "thealgorithms-rabin-karp",
+      "license": {
+        "git_blob": "f6bcf04e7773b3bfca7a30836672dc7322e38944",
+        "path": "LICENSE",
+        "repository": "TheAlgorithms/Java",
+        "revision": "d9b86d1992b8bd4cadbd832822c792628117e69d",
+        "sha256": "d8499582b215ce90b33be4736260b1bb2e2dc312f71c1b29d19b8fc6d2dcdc3f",
+        "url": "https://github.com/TheAlgorithms/Java/blob/d9b86d1992b8bd4cadbd832822c792628117e69d/LICENSE"
+      },
+      "license_id": "MIT",
+      "license_review": "REFERENCE_ELIGIBLE_WITH_NOTICE_RETENTION",
+      "reason": "Hash hits require exact character verification; default modulus 101 and boxed output do not establish a product performance improvement. Null/empty behavior differs from incumbent search.",
+      "source": {
+        "git_blob": "be17f87c3656d2bf3ebc96b60f513335af56ec67",
+        "path": "src/main/java/com/thealgorithms/strings/RabinKarp.java",
+        "repository": "TheAlgorithms/Java",
+        "revision": "d9b86d1992b8bd4cadbd832822c792628117e69d",
+        "sha256": "81b4681fec3506d071bc3f16833a53b49dbef3ebec2b8be5c314d43d20862f8d",
+        "url": "https://github.com/TheAlgorithms/Java/blob/d9b86d1992b8bd4cadbd832822c792628117e69d/src/main/java/com/thealgorithms/strings/RabinKarp.java"
+      }
+    },
+    {
+      "admission": "REFUSED_JAVA_PATTERN_REPLACEMENT_OR_ORACLE",
+      "copied_into_product": false,
+      "evaluated": true,
+      "id": "re2j-pattern",
+      "license": {
+        "git_blob": "b620ae68fe332112e50d1fc5da4a32cd6191681a",
+        "path": "LICENSE",
+        "repository": "google/re2j",
+        "revision": "951a6159fdc0a4931593c70442926f86031edf40",
+        "sha256": "26a6133577cc8e48d7c002ac4d4a554786e7c0e1732e10f2db205e5e494c411b",
+        "url": "https://github.com/google/re2j/blob/951a6159fdc0a4931593c70442926f86031edf40/LICENSE"
+      },
+      "license_id": "BSD-3-Clause",
+      "license_review": "REFERENCE_ELIGIBLE_WITH_NOTICE_RETENTION",
+      "readme": {
+        "git_blob": "31802f5aaf8a75af8d3c89fba6c071d090b5912b",
+        "path": "README.md",
+        "repository": "google/re2j",
+        "revision": "951a6159fdc0a4931593c70442926f86031edf40",
+        "sha256": "9b29c611a8164234ba43a149efbfc78139c6e3e1e57449f9ccae4a7f9b481c6b",
+        "url": "https://github.com/google/re2j/blob/951a6159fdc0a4931593c70442926f86031edf40/README.md"
+      },
+      "reason": "Own README documents non-drop-in behavior including backreferences, flags, Matcher region/bounds/state APIs, character classes and exception details. Linear automaton architecture is reference material only.",
+      "source": {
+        "git_blob": "dfe1bf1809386524046373185fe212543ce3d19d",
+        "path": "java/com/google/re2j/Pattern.java",
+        "repository": "google/re2j",
+        "revision": "951a6159fdc0a4931593c70442926f86031edf40",
+        "sha256": "1b98dfb91581757be82dec2e14b6ba97a97f03d833bdf40eabdb3489e00063c2",
+        "url": "https://github.com/google/re2j/blob/951a6159fdc0a4931593c70442926f86031edf40/java/com/google/re2j/Pattern.java"
+      }
+    },
+    {
+      "admission": "REFUSED_IMPLEMENTATION_IMPORT",
+      "copied_into_product": false,
+      "evaluated": true,
+      "id": "doocs-editorials",
+      "license": {
+        "git_blob": "3b7b82d0da2db857eda1a798dbd908ea136f07b5",
+        "path": "LICENSE",
+        "repository": "doocs/leetcode",
+        "revision": "5f6429aec9a7fc90b29c984246b617aad7394b2a",
+        "sha256": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297",
+        "url": "https://github.com/doocs/leetcode/blob/5f6429aec9a7fc90b29c984246b617aad7394b2a/LICENSE"
+      },
+      "license_id": "CC-BY-SA-4.0",
+      "license_review": "NO_IMPLEMENTATION_IMPORT_ADMITTED; any adaptation requires separate artifact-level redistribution review",
+      "reason": "Only license was inspected; no challenge solution or editorial was imported. Different redistribution obligations require a separate review before any code admission.",
+      "source": {
+        "git_blob": "3b7b82d0da2db857eda1a798dbd908ea136f07b5",
+        "path": "LICENSE",
+        "repository": "doocs/leetcode",
+        "revision": "5f6429aec9a7fc90b29c984246b617aad7394b2a",
+        "sha256": "7abe19ec9bb73b36141b999b861d24ad855e808bafe0f81e84cce28556f6c297",
+        "url": "https://github.com/doocs/leetcode/blob/5f6429aec9a7fc90b29c984246b617aad7394b2a/LICENSE"
+      }
+    }
+  ],
+  "external_implementation_code_admitted": false,
+  "family_completion": false,
+  "java_pattern_spec": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/regex/Pattern.html",
+  "phase": "STRING_QUALIFICATION",
+  "private_source_body_exported": false,
+  "repository": "hsoliwal/M3JDK21",
+  "repository_completion": false,
+  "runtime_execution_claim": "No runtime execution is claimed by this catalogue. Exact current-product receipts must be assessed separately.",
+  "schema": "M3_PRODUCT_ALGORITHM_CATALOGUE_REVIEW_V1",
+  "source_categories_are_frequency_ranking": false
+}

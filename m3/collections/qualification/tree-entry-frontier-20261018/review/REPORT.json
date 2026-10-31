@@ -1,0 +1,6 @@
+{
+  "findings": [],
+  "overall_correctness": "patch is correct",
+  "overall_explanation": "The entry projection uses revision, slot-occupancy, and canonical-key identity guards before taking the comparator-free fast path, while preserving key-based fallback after structural changes. Empty unbounded comparator-backed lookups now return absence without suppressing validation required by natural-order or bounded views. The AVL insertion optimization compares the pre-update height with the post-rotation subtree root and is enabled only for insertion; deletion retains the full upward walk. The accompanying recipes are pinned, reversible, fixed-point-safe, stale-input-refusing, and serially composable. No actionable defect was found in the production or support-file deltas.",
+  "overall_confidence": 0.98
+}

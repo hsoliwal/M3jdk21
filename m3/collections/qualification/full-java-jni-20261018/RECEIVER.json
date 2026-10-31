@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "source": "hsoliwal/com.synexia",
+  "recipe_pr": 12311,
+  "recipe": "com.synexia.m3.FullJavaJni20261018",
+  "target_baseline": "0c24884dcf5b836a80c1732ec8b31315721f8988",
+  "targets": [
+    "m3/collections",
+    "m3/vendor/third_party source-JUnit closure",
+    ".github/workflows/m3-collections.yml"
+  ],
+  "public_names": "unchanged; no new runtime class or JNI product symbol",
+  "implementation": "Existing source dependency closure and owning Maven lifecycle; all existing collection JNI backends qualified together",
+  "canonical_ownership": "Synexia owns reusable recipe/templates; target owns product and receiving qualification",
+  "license": "Apache-2.0 integration; per-module third-party rights retained",
+  "status": "DRAFT_PENDING_HOSTED_EXACT_HEAD",
+  "recipe_commit": "c0878df6b96b6b295ea2654d375cbb1e315ab430",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-full-java-jni-20261018",
+  "source_hashes": [
+    {
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java",
+      "before_sha256": "a0a750d78d9d05669f8bb4194f7780e6189005afb0e62f5927a6bccd22716b48",
+      "after_sha256": "46471955d786e65772734a9287e55c52b11b2d20ac2f9ee26003849bff5585f6",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-full-java-jni-20261018/m3__collections__src__test__java__com__m3__collections__M3FilteredSplitsMaskSpansTest.java.txt"
+    },
+    {
+      "target_path": "m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsContract.java",
+      "before_sha256": "372a5be9ccd7bba8aae5083e63aaca59805f4b8ed17aca5854f6ea387aa49190",
+      "after_sha256": "3a637ad272bd46336384df01be4e6aae8cb8b4027b441ac57ec359e9fd0c3815",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-full-java-jni-20261018/m3__collections__src__test__java__com__m3__collections__M3SignalDimensionsContract.java.txt"
+    },
+    {
+      "target_path": ".github/workflows/m3-collections.yml",
+      "before_sha256": "559240531a32d95b9fd76a7b0533a58e1be86d5ff4bb0e12e6db821cde28f1d0",
+      "after_sha256": "ff90dcce42c80cc940878c8c5dcde0a14a8def69d08dbc7aadb174b9ad2bb649",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-full-java-jni-20261018/.github__workflows__m3-collections.yml.txt"
+    },
+    {
+      "target_path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "f8ee55c920a19a150e7d42535c587d4889e1260141e30bd7bc08a410647986fc",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-full-java-jni-20261018/m3__collections__qualification__full-java-jni-20261018__verify.py.txt"
+    },
+    {
+      "target_path": "m3/vendor/third_party/apiguardian-api/PROVENANCE.json",
+      "before_sha256": "c03045650d5e792b926dc56c738e52946fb44ff1cc212fbb8c2e61e223802429",
+      "after_sha256": "8e1396bcf3bb9065824ba2b9db4aab03d2b4e9bf09c9209c0eb6cc0198effa58",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-full-java-jni-20261018/m3__vendor__third_party__apiguardian-api__PROVENANCE.json.txt"
+    },
+    {
+      "target_path": "m3/vendor/third_party/apiguardian-api/pom.xml",
+      "before_sha256": "0d6c98a7e1d59844d3c64ed1e4c59381c5a46834f2731375a7a6c9642ca62091",
+      "after_sha256": "54521e57cf458017c20682a31ad1a4dc1fa08b2847f8fa79091566dc748404d6",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-full-java-jni-20261018/m3__vendor__third_party__apiguardian-api__pom.xml.txt"
+    },
+    {
+      "target_path": "m3/vendor/third_party/apiguardian-api/verify_source.py",
+      "before_sha256": "130f5a0377e3c87f3d116a8de0a9eea02b4c65429bf71f2c8ccde7d1a55b7a4b",
+      "after_sha256": "8166b5a9f62367a00ebf90807ba56a1f0118d6fc1cab71fff43d0c7b3ce8e875",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-full-java-jni-20261018/m3__vendor__third_party__apiguardian-api__verify_source.py.txt"
+    },
+    {
+      "target_path": "m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py",
+      "before_sha256": "e6980df7e72c9f516ec9e6a0fd0caff21ef80b8b70038a994cdb7ad0b2edb205",
+      "after_sha256": "2fd7297f2651f0b57fa28d7b411602de5589554c19875f2159b84617eb3c4a24",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-full-java-jni-20261018/m3__vendor__third_party__junit-jupiter-5.10.2__verify_source.py.txt"
+    },
+    {
+      "target_path": "m3/vendor/third_party/junit-jupiter-api-5.10.2/verify_source.py",
+      "before_sha256": "841ef6d6ffde7c923368b66eca22d84119fc6058ccb3de711bcb5854bec54a0e",
+      "after_sha256": "ac6edc1c414abaf625a9b7ffd9ad4a7d4b1c1eaf49730a35538d142a61252f46",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-full-java-jni-20261018/m3__vendor__third_party__junit-jupiter-api-5.10.2__verify_source.py.txt"
+    },
+    {
+      "target_path": "m3/vendor/third_party/junit-jupiter-engine-5.10.2/verify_source.py",
+      "before_sha256": "d916b253795ef44453c2ad8c17702d4fedbe39b6bbd05540ce0ad69a26638730",
+      "after_sha256": "1b5eb19be3cbee70e6f0efb14d6c88dcfb61cf4c3234e706f1c97d11efcbf85c",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-full-java-jni-20261018/m3__vendor__third_party__junit-jupiter-engine-5.10.2__verify_source.py.txt"
+    },
+    {
+      "target_path": "m3/vendor/third_party/junit-jupiter-params-5.10.2/verify_source.py",
+      "before_sha256": "e09067ef9d4fe30fe753d97922c62651242039f5659181dd2a56dbc5e7aab60a",
+      "after_sha256": "715118480c34ef8d07f43bdc03e848ff9719172a077f102a4054deb55f0654f9",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-full-java-jni-20261018/m3__vendor__third_party__junit-jupiter-params-5.10.2__verify_source.py.txt"
+    },
+    {
+      "target_path": "m3/vendor/third_party/junit-platform-commons-1.10.2/verify_source.py",
+      "before_sha256": "77653e9824a67e3436b01035bc66c1a37f597dcb8755de2b28e8df32b642c9e6",
+      "after_sha256": "b6d0f1aea10bfd7fecdc22ab8ba61505eb312ba0f6fe5f5edd8441320778fdaf",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-full-java-jni-20261018/m3__vendor__third_party__junit-platform-commons-1.10.2__verify_source.py.txt"
+    },
+    {
+      "target_path": "m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py",
+      "before_sha256": "16561d05bbb62671077f7e1cdcdf2125859b33aff2f4357c0b3b2fcfce381139",
+      "after_sha256": "f34c7f9ed6b8809920419fc7a3dc715c309f12575f730b3ec354873088e29318",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-full-java-jni-20261018/m3__vendor__third_party__junit-platform-engine-1.10.2__verify_source.py.txt"
+    },
+    {
+      "target_path": "m3/vendor/third_party/opentest4j/verify_source.py",
+      "before_sha256": "1ce4478e363193345dc9bcada6003190050cd30ebbaf78cf3aae6462aacedffb",
+      "after_sha256": "b1e440965b1b9c7d3ab767be7fc1eba48965736a83a091c7aeb31332a5d01542",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-full-java-jni-20261018/m3__vendor__third_party__opentest4j__verify_source.py.txt"
+    },
+    {
+      "target_path": "m3/vendor/third_party/univocity-parsers/verify_source.py",
+      "before_sha256": "ccda49fc1a22f7e504c017f25fce4cf4140065ce1743bbdea86701b2040ab4f4",
+      "after_sha256": "436e34c43641ec5acb1e1c224621cd420a9175f0e9f0b9b74219a45cd1e0ccd5",
+      "canonical_template": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-full-java-jni-20261018/m3__vendor__third_party__univocity-parsers__verify_source.py.txt"
+    }
+  ]
+}

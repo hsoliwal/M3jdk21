@@ -1,0 +1,62 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 superset JNI viewport page and frame
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/c/m3maskviewport.c'
+      - 'm3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3MaskViewportPageContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3ViewportFrameContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3ViewportUnionContract.java'
+      - 'm3/collections/qualification/viewport-superset-20261021/**'
+      - '.github/workflows/m3-viewport-superset-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java-jni-superset:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile original Java21 owners with strict diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-union"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3-union" \
+            m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java \
+            m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java \
+            m3/collections/src/test/java/com/m3/collections/M3MaskViewportPageContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3ViewportFrameContract.java \
+            m3/collections/src/test/java/com/m3/collections/M3ViewportUnionContract.java
+          java -cp "$RUNNER_TEMP/m3-union" com.m3.collections.M3MaskViewportPageContract
+          java -cp "$RUNNER_TEMP/m3-union" com.m3.collections.M3ViewportFrameContract
+      - name: Compile C17 and verify all original/native exports
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -Wall -Wextra -Wconversion -Wshadow -Wpedantic -Werror \
+            -O2 -fPIC -shared -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/c/m3maskviewport.c \
+            -o "$RUNNER_TEMP/m3-union/libm3viewportunion.so"
+          for symbol in project projectPage projectFramePage; do
+            nm -D --defined-only "$RUNNER_TEMP/m3-union/libm3viewportunion.so" |
+              grep -F "Java_com_m3_collections_M3MaskViewportNative_${symbol}"
+          done
+      - name: Run both original contracts and cross-export JNI parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          LIB="$RUNNER_TEMP/m3-union/libm3viewportunion.so"
+          java -Xcheck:jni -Dm3.native.path="$LIB" \
+            -cp "$RUNNER_TEMP/m3-union" com.m3.collections.M3MaskViewportPageContract --native
+          java -Xcheck:jni -Dm3.native.path="$LIB" \
+            -cp "$RUNNER_TEMP/m3-union" com.m3.collections.M3ViewportFrameContract --native
+          java -Xcheck:jni -Dm3.native.path="$LIB" \
+            -cp "$RUNNER_TEMP/m3-union" com.m3.collections.M3ViewportUnionContract

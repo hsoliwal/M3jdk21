@@ -1,0 +1,9 @@
+{
+  "scope": "Observed v03 compiled-source message while old test-class bytes and old line numbers were reused; fresh520-file input workspace for v04 excludes all generated target files.",
+  "v03_input_sha256": "8e860233439dd985fbab3058ac7e80514b643319f13ff46db0586cbbe9ef7a39",
+  "v02_v03_test_class_sha256": "5ebcbfa54c5f3b7bfe53b73b91db5c4bf4a55992af49453978fa37facda85ad9",
+  "test_class_mtime_utc": "2026-10-06T04:28:42.582637Z",
+  "source_mtime_utc": "2026-10-06T04:29:54.465010Z",
+  "root_cause": "UNRESOLVED",
+  "changed_recipe_or_test_inputs": false
+}

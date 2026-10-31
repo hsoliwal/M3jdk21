@@ -1,0 +1,104 @@
+{
+  "schema": "M3_SOURCE_INDEX_OWNER_ADAPTER_1",
+  "canonical_recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "canonical_owner": "hsoliwal/com.synexia/synexia-openrewrite-recipes/crates/m3-nlp-search",
+  "copyright": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_revision": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "disposition": "New first-party integration adapter over existing owners, no donor parser, compiler, file store or text payload owner is substituted.",
+  "candidates": [
+    {
+      "candidate": "module-info.java",
+      "sha256": "e821a724c7e3f25c49dfc06d9809742650b9c0e45987d456688f1b2bc8f7c0c9",
+      "target": "m3/tooling/module-packs/nlp-search/frontend/src/main/java/module-info.java",
+      "target_before": "ABSENT"
+    },
+    {
+      "candidate": "M3SourceIndex.java",
+      "sha256": "47e3083aca86032e172618e80c2ac2053a76af5c55758b65ed6e0ae76ffece30",
+      "target": "m3/tooling/module-packs/nlp-search/frontend/src/main/java/org/m3jdk/tools/search/M3SourceIndex.java",
+      "target_before": "ABSENT"
+    }
+  ],
+  "fixture": {
+    "source": "../../fixtures/frontend/M3SourceIndexProbe.java",
+    "sha256": "3e5033d4f4c3455069787095effefa4cc3f112284349c4768fcd89080931f830",
+    "target": "m3/tooling/module-packs/nlp-search/fixtures/frontend/src/test/java/M3SourceIndexProbe.java",
+    "target_before": "ABSENT",
+    "test_main": "org.m3jdk.tools.search.probe.M3SourceIndexProbe"
+  },
+  "existing_compiler_owners": [
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+      "path": "src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java",
+      "sha256": "6a8bccb501a516cca779e71e24ef814ca40825faf92fed744e48f65ad4c1d854"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+      "path": "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java",
+      "sha256": "845c70bdc5e77a62282417889dc77bf466fd0c0005f72112e86faf27ec616399"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+      "path": "src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java",
+      "sha256": "129e8c19ef328185c45465b9c8bf9baee43bb24be54842b69833c52e3e6f3dcb"
+    },
+    {
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+      "path": "src/jdk.compiler/share/classes/module-info.java",
+      "sha256": "ae52d1734570fee7404aeb68b65ef86ea23ad322b72ff0b137c9039c71aafb09"
+    }
+  ],
+  "dependencies": [
+    {
+      "owner": "complete M3File family",
+      "module": "org.m3jdk.file",
+      "package": "com.m3.file",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_revision": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+      "receipt": "../file/FILE_PORT_MAP.json",
+      "closure": "../file/BUILD_CONTRACT.json",
+      "boundary": "M3FileStreamIndexer.codeLike / M3FileTokenizer.codeLike -> M3File.asM3String metadata-only M3FileText; resolver owns admitted public java.lang.String atoms"
+    },
+    {
+      "owner": "Lucene 9.10.0 plus bounded fork donor backport",
+      "module": "org.apache.lucene.core",
+      "source_repository": "hsoliwal/lucene",
+      "source_revision": "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e",
+      "receipt": "../lucene/PROVENANCE.json",
+      "boundary": "M3TextReaders.reader(CharSequence) -> existing Analyzer/IndexWriter/FSDirectory/DirectoryReader; existing QueryParser; UTF-8 term format owned by Lucene"
+    },
+    {
+      "owner": "OpenNLP Tools 2.4.0 plus bounded fork donor backport",
+      "module": "org.apache.opennlp.tools",
+      "source_repository": "hsoliwal/opennlp",
+      "source_revision": "368337311ad94b665fd178f8d3ced005a73b2370",
+      "receipt": "../opennlp/PROVENANCE.json",
+      "boundary": "M3Tokenizers.simpleSpans(CharSequence,Runnable) supplies actual simple-tokenizer UTF-16 coordinates; original singleton configuration remains authoritative"
+    },
+    {
+      "owner": "public java.lang.String / package-private java.lang.M3String",
+      "module": "java.base",
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "sha256": "fad8274a84532ce29bd2b2fbdcb62474cfce32a6fb8eee89b885e5a611ea46f0",
+      "boundary": "Use public String/CharSequence. Do not expose or replace package-private M3String. The existing javac retained-source String bridge remains the owner of its source seal."
+    }
+  ],
+  "contracts": [
+    "Register per-compilation M3AST.Consumer before parsing; use the actual callback Unit and event-scoped Projection cache.",
+    "Retain no Unit, javac tree, Trees, Element, compiler Context/task or global projection cache in the consumer.",
+    "Source URI and SHA-256 cover the compiler exact big-endian UTF-16 code units, including unpaired surrogates; source identity is not type/classpath equivalence.",
+    "Physical UTF-8 inputs are admitted through full M3File before javac sees the stable snapshot; subsequent disk edits do not change that parse.",
+    "The text index uses the caller analyzer through borrowed M3File reader; the token index uses exact OpenNLP spans with positions and UTF-16 offsets.",
+    "Only token-format scratch and Lucene UTF-8 terms are materialized by the adapter; no complete source text is stored in the index.",
+    "The API does not close or commit the caller writer/resolver. CLI disable-commit-on-close enforces all-input parse publication and rollback on syntax failure.",
+    "Cancellation is cooperative and preserves thread interruption; compiler ownership closes failed sessions."
+  ],
+  "qualification_receipt": "../../fixtures/frontend/QUALIFICATION.json",
+  "proof_scope": "Actual compiler hook and named full-library modules on a stock String/HotSpot proof image; no claim of native M3String enablement or full product JMOD CI until root recipe/package gates run."
+}

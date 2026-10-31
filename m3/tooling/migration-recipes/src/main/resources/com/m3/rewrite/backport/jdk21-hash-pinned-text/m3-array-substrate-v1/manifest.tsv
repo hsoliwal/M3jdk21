@@ -1,0 +1,16 @@
+# path	before_sha256	after_sha256	resource
+.github/workflows/m3-array-substrate.yml	ABSENT	a0cb19afe9c348c733492d519978f53dd10be102f6cef8f8ec43ecf9bfb093a6	00-workflow.yml.txt
+m3/arrays/LICENSE	ABSENT	cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30	01-LICENSE.txt
+m3/arrays/NOTICE	ABSENT	3beea6e055b4100d2a036f3ce1d98b6ace11c4d2f14524e219b42f1908c234cd	02-NOTICE.txt
+m3/arrays/README.md	ABSENT	4ad256de07008aba705eb99e8c15b4f796c692200513fde31729879e755c66af	03-README.md.txt
+m3/arrays/pom.xml	ABSENT	a8d57a03b7a4161f7e70e669ace3695e6c7f39df7a2120446e67494ddfd1ebca	04-pom.xml.txt
+m3/arrays/provenance.json	ABSENT	8b8d9cc733e51e73c71da3468c7dd5f7610a96b8448211e8cd5ea5c6d95c11f1	05-provenance.json.txt
+m3/arrays/src/main/native/CMakeLists.txt	ABSENT	16a47b1494259d37063c1286d8c29f631777cfe3ba44db0cf4847f73fd925a9c	06-CMakeLists.txt.txt
+m3/arrays/src/main/native/include/m3_arrays.h	ABSENT	f2eec872591c7af40c13af75012fb20efb8376cdb29209c9e8151fd9775d758d	07-m3_arrays.h.txt
+m3/arrays/src/main/native/m3_arrays.c	ABSENT	0c7be7f8176ca235c40d88aad2cefab15e7ce7363d7fc648bafba4fdb535695d	08-m3_arrays.c.txt
+m3/arrays/src/main/native/m3_arrays_jni.c	ABSENT	d5dd8f71a86e5f527941886a5358eeec5596a0f6a5735c82db8c10b72a129d1a	09-m3_arrays_jni.c.txt
+m3/arrays/src/main/native/tests/m3_arrays_checks.c	ABSENT	2ed94ea3ded2f9907bcfc11717a5832890b9fea8adbec3b001b719d40507ec7c	10-m3_arrays_checks.c.txt
+m3/docs/m3jdk21-porting-invariant.md	054a022471cecad91adcdc5efa0f7e1ee6e2f024e8d42254d2e5ca070134cdb5	ff13c71dbd067185fe435412861d48ada6480e3f19111b3d0ca55c7e68150db0	11-m3jdk21-porting-invariant.md.txt
+m3/docs/name-mapping.json	bf18229cd5f8a0b36559f3becca71fdeec86080da50187fc6a6e27cb84794203	0d67fbe08a9df4b39aabed5e3e9af36f62157ebd87533a7b520b68b00f5d681d	12-name-mapping.json.txt
+m3/docs/synexia-array-port-map.tsv	ABSENT	f28fe26ad880d5527b68c3f804b4689615a753b515bd7ce989ba224bd37a2632	13-synexia-array-port-map.tsv.txt
+m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-array-substrate.yml	ABSENT	c6034934682bdaaefd9a5a6e26c993a3c5b2656287cc569eb0c2e83a824e6640	14-m3-array-substrate.yml.txt

@@ -1,0 +1,14 @@
+field	value
+schema	M3_SYNEXIA_WORKFLOW_STRUCTURE_RECEIVER_V1
+source_repository	hsoliwal/com.synexia
+source_commit	0f0f9965092955c15f5c32f5eb102137fd0dbf8e
+source_path	synexia-code-convergence/tools/WorkflowStructureCheck.java
+source_git_blob	f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7
+receiver_path	m3/tooling/validators/WorkflowStructureCheck.java
+receiver_git_blob	f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7
+license	Apache-2.0
+canonical_owner	SYNEXIA
+receiver_role	M3JDK21_AUTHORING_PROOF_TOOL
+runtime_dependency	false
+mutation_authority	false
+promotion_authority	false

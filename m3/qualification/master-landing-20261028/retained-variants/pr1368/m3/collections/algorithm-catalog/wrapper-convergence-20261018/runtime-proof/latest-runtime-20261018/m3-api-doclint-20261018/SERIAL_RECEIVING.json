@@ -1,0 +1,27 @@
+{
+  "dataset": "m3-api-doclint-20261018",
+  "input_head": "edd96c2a0fc2fb41486ca8ed1afa4712ac4b6723",
+  "qualified_crate": "/dev/shm/m3-doclint-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "check": {
+    "dataset": "m3-api-doclint-20261018",
+    "targets": 12,
+    "changes": 12,
+    "mode": "check",
+    "actual_sdk_results": true
+  },
+  "apply": {
+    "dataset": "m3-api-doclint-20261018",
+    "targets": 12,
+    "changes": 12,
+    "mode": "apply",
+    "actual_sdk_results": true
+  },
+  "replay": {
+    "dataset": "m3-api-doclint-20261018",
+    "targets": 12,
+    "changes": 0,
+    "mode": "apply",
+    "actual_sdk_results": true
+  },
+  "output_head": "242e43eb18cbe2613990baedb5dbb5440c3956f6"
+}

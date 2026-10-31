@@ -1,0 +1,152 @@
+{
+  "schema": "M3_COLLECTION_VIEWS_CONTINUATION_V1",
+  "receiving_base": "477ae612ef1a7f3b5f069456153a482989d60c4f",
+  "canonical_recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "canonical_dataset": "collection-final-20261021",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12609",
+  "correction_memory_head": "29bfb0317568e5ed00b7280b81350114b6035d9f3db50fac89606fbba5c785e9",
+  "source_sha256": {
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java": "bad3171e5467243bf94fe9408da99ccc7406f8d4821b5f6312e7129c91693f25",
+    "m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveIndexView.java": "29e2482c5c944e011b07d6d6dfd10c13bb5fb8c2523274cdb267e7f5558b93be",
+    "m3/tooling/module-packs/collections/build.py": "b4f34c3a8741bccbdaa915bcf81420fe5456612d944f591f55e09a0e9ff78f48",
+    "m3/tooling/module-packs/collections/test_build.py": "53dab9e8fb11fffc6e9a3adbd38f06e627d901111ae6df3fa49723109b4dd0e2",
+    "m3/tooling/module-packs/collections/src/test/java/com/m3/util/M3PrimitiveSelectionWordContract.java": "b45639be9ade2838df6030f83fe0326463ae68b05691f22d11aa2a4013d9768e",
+    "m3/tooling/module-packs/collections/src/test/java/jdk/m3/collections/M3CollectionsPackTest.java": "65c61a02cf02c530710b08d0081675f1ff05d1bdf197946047ae34c1a3bf527a",
+    "m3/collections/src/test/java/com/m3/collections/M3MaskNativeParityProof.java": "53a953eda24971ebfa3425b60993050eebbf24c2ec8ec1da2cad0b4326ffadd9",
+    "m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py": "87f6525bc0fea8fa11ba05cbac2538ca67f4e620351c8b7f14360d5e6e4e67cd"
+  },
+  "public_api_and_generated_jni_header": "UNCHANGED",
+  "read_only_regression_repair": {
+    "baseline_failures": 218,
+    "final_failures": 0,
+    "reconciliation_checks": 154239
+  },
+  "pack": {
+    "status": "PASS",
+    "modules": [
+      "com.m3.collections",
+      "jdk.m3.collections"
+    ],
+    "existing_collection_source_files": 268,
+    "optional_projection_source_files": 7,
+    "native_symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+    "native_symbols": [
+      "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative"
+    ],
+    "generated_header_sha256": "2c9ee704fe1128ca05a7ff38b6844ad178fd79c03fef0aa24fe9605778f46c81",
+    "execution_modes": [
+      "mixed",
+      "interpreted"
+    ],
+    "contract_mains_per_mode_and_runtime": 15,
+    "native_sha256": "67c5796c8cb3ca54c34653328308d6b0cc107c0429e6d87456cce488f1268344",
+    "linked_native_sha256": "e3f6073a13f56ec4b87fff4c03f25bdfad232a085e8b5e2fe4b26b28fa070a74",
+    "native_packaging_transform": "objcopy --strip-debug reference; exact linked byte parity",
+    "native_required_on_host_and_image": true,
+    "jdk_home": "/workspace/scratch/23cc26ca85ef/M3jdk21/build/linux-x86_64-server-release/images/jdk",
+    "toolchain_release_sha256": "ab2ef3e66980c33923f4b85bcb19bb6ef2ab4bc40af4b96cf63bd9301ca7863f",
+    "host_platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "scope": "Linux optional source modules and actual JNI/JMOD linked-image proof; toolchain provenance is identified separately; no java.util family receiving promotion"
+  },
+  "owning_full_java_jni": {
+    "status": "PASS_OWNING_COLLECTION_JAVA_AND_JNI",
+    "java_sources": 268,
+    "test_sources": 254,
+    "junit": {
+      "java": {
+        "tests": 465,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 2
+      },
+      "native": {
+        "tests": 465,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "native_libraries": [
+      "m3_collections_address",
+      "m3_collections_long_path_masks",
+      "m3_collections_mask",
+      "m3_collections_pathmask",
+      "m3_collections_span",
+      "m3_collections_statehist",
+      "m3_residency_state_mask",
+      "m3bitlane",
+      "m3rankbatch",
+      "m3signalorder"
+    ],
+    "explicit_native_contracts": [
+      "M3MaskWindowSparseContract",
+      "M3BudgetedMaskWindowContract",
+      "M3IndexMaskWindowSelfTest",
+      "M3IndexMaskWindowRecoverySelfTest",
+      "M3IndexMaskCompactorSelfTest",
+      "M3IndexPathMasksSelfTest",
+      "M3LongIndexPathMasksJNISelfTest",
+      "M3LongAddressBoundedSelfTest",
+      "M3IndexPathMaskWindowSelfTest",
+      "M3IndexPathRankNativeSelfTest",
+      "M3NativeIndexRangeSelfTest",
+      "M3ObjectStateSlots28SelfTest",
+      "M3IndexedTableSelfTest",
+      "M3BagRankIndexSelfTest",
+      "M3SdkRecoverySelfTest",
+      "M3SignalOrderContract",
+      "M3SignalDimensionsNativeContract",
+      "M3ResidencyStateMaskProof",
+      "M3BitLaneJumpProof"
+    ],
+    "native": "generated headers; C17 strict; fatal UBSan; actual -Xcheck:jni",
+    "jar_sha256": "d327556a96c3fa0795aa7c7da58b112235a024e55bfc1fd0ad7087d792733fab",
+    "runtime_modules": "java.base"
+  },
+  "module_pack_junit": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "resources": {
+    "workload": "N=65536; three JVM forks; 300 warmups and measured calls; lane/state",
+    "baseline_allocated_bytes_per_call": [
+      262208,
+      327744,
+      262192
+    ],
+    "final_allocated_bytes_per_call": [
+      8256,
+      73792,
+      32
+    ],
+    "selectivity": [
+      "none",
+      "quarter",
+      "all"
+    ],
+    "cpu": "3-24 percent slower median thread CPU on these workloads; not a universal speedup",
+    "retained_all_selected_payload_bytes": {
+      "baseline": 17039360,
+      "final": 262144,
+      "scope": "root plus 64 views; row payload only, excluding object headers and store lanes"
+    }
+  },
+  "global_phase": "STRING",
+  "remaining": [
+    "five-provider family replacement",
+    "all-parser qualification",
+    "cross-platform JNI/GC/JIT matrices",
+    "full jtreg",
+    "universal automatic MOP capture"
+  ]
+}

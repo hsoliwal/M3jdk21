@@ -1,0 +1,250 @@
+{
+  "activeOwnerChanges": 0,
+  "canonicalOutputPublication": false,
+  "history": {
+    "earlierCensusRows": 591,
+    "ledger": {
+      "bytes": 119267,
+      "path": "HISTORY-AVAILABILITY.json",
+      "sha256": "02a922e8b1cbddd611f5d2b494085062c6e7f2e65ef1b51fbe811e434c2296e5"
+    },
+    "meaning": "Unavailable is a statement about the recorded workspace census, not remote absence. Later recovered or freshly qualified bodies do not recreate missing historical receipts.",
+    "oldFullDeliveryClaimed": false,
+    "unavailableInEarlierCensus": 224
+  },
+  "metadataBoundary": {
+    "absolutePaths": "Original receipt paths are retained custody identifiers. They are not download links; use PROJECT-READY and SOURCE-CLOSURE for archive locations.",
+    "finalPhysicalManifests": "External per-repository manifests cover the full physical selection, including this envelope, without self-reference.",
+    "thisEnvelopeQualifiedAsProjectInput": false
+  },
+  "package": {
+    "archiveIndex": {
+      "bytes": 371638,
+      "path": "bundle/BUNDLE.json",
+      "sha256": "0626f191c1c55f1b28ae57ed243c284a16bb83f431c46a19bc6def74944ae89a"
+    },
+    "archiveOnlyProjectFiles": 2,
+    "artifactExcludedCount": 1603,
+    "executionPublishedPath": "execution/RESULT.json",
+    "executionResult": {
+      "bytes": 1801,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/RESULT.json",
+      "sha256": "33e27243b21a09c366f085d90dfe3394ead50dfba1ca517e8f1c6e1025fe651d"
+    },
+    "flatQualifiedProjectFiles": 290,
+    "hermetic": false,
+    "initialPairedCohort": {
+      "bytes": 284740,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/PAIRED-FILES.json",
+      "sha256": "a6337844eed4805a3f3071a51cbc6bf595f55f3bf324ece96044ef1e94fc0a9c"
+    },
+    "initialPhysicalFiles": 318,
+    "projectLogicalFiles": 292,
+    "projectReady": {
+      "bytes": 183583,
+      "path": "PROJECT-READY.json",
+      "sha256": "907fa5bdb42220f0d77335692bc28a7908b2c5f63f513ea5f98e13c33ea9d1ae"
+    },
+    "readback": {
+      "bytes": 984903,
+      "path": "READBACK.json",
+      "sha256": "73cbb8815c580a5eb8583e3d38ba2b40b30458455f8a6c5bd928caf9cb3a19d3"
+    },
+    "sealedInputBodiesIncluded": 1059,
+    "sealedInputIdentityOnly": 1584,
+    "sealedInputReferences": 2643,
+    "selectedLogicalBodies": 2873,
+    "status": "PASS_PACKAGE_VERIFY_EXTRACT_AND_READBACK"
+  },
+  "physicalCohorts": {
+    "envelopeSelfHashes": "Only the external final per-repository manifest binds these three explanatory bodies; no self-reference.",
+    "execution17": {
+      "manifestCustody": {
+        "bytes": 12995,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/EXECUTION-MAPPING.json",
+        "sha256": "e87f8215b7ede84b2dd24bfd105be04f7c209a11dcfa649936287aef2e7ee95a"
+      },
+      "rows": [
+        {
+          "bytes": 1054690,
+          "gitBlob": "7f0d2b60ac6dc9a738d43a50e2ba681301bc6a12",
+          "mode": "100644",
+          "path": "PACKAGE-SPEC.json",
+          "sha256": "a9124171aa9417d38be38ab8e634f41135126fb4650cce188c071d137c37a1e0"
+        },
+        {
+          "bytes": 284740,
+          "gitBlob": "430e153e7c6d9856565b798bd9fe4359b310f480",
+          "mode": "100644",
+          "path": "PAIRED-FILES.json",
+          "sha256": "a6337844eed4805a3f3071a51cbc6bf595f55f3bf324ece96044ef1e94fc0a9c"
+        },
+        {
+          "bytes": 3012,
+          "gitBlob": "2f43d3a39b0f89f142e8b33f8f2cf43d67ae078a",
+          "mode": "100644",
+          "path": "execution/COMMAND.json",
+          "sha256": "13f18298ec8594e6c70c8f632cd7184ad8f971dbde6b4c8a265632e565d5cd64"
+        },
+        {
+          "bytes": 1801,
+          "gitBlob": "4d3ecb4acf5ef06d880fe96f577d64ac8ba38716",
+          "mode": "100644",
+          "path": "execution/RESULT.json",
+          "sha256": "33e27243b21a09c366f085d90dfe3394ead50dfba1ca517e8f1c6e1025fe651d"
+        },
+        {
+          "bytes": 2041,
+          "gitBlob": "d073849b7c7ce5354652d69155086661780324f6",
+          "mode": "100644",
+          "path": "execution/extract.json",
+          "sha256": "c7e8bdf603ff112623f7a43c991eecb6425f7ee9be8a0ad91e3cb0ce00f8f8aa"
+        },
+        {
+          "bytes": 0,
+          "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "mode": "100644",
+          "path": "execution/extract.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 770,
+          "gitBlob": "e1f793d680dfe69bb2da8e7be6d204c079a35ba7",
+          "mode": "100644",
+          "path": "execution/extract.stdout.log",
+          "sha256": "36a16e499021fd7bf1e92eb8e8a2dd048e382d6acf42c426fc6a851c36337721"
+        },
+        {
+          "bytes": 1641,
+          "gitBlob": "094145ad581aa085823b520d0aac6d9d79e87ea6",
+          "mode": "100644",
+          "path": "execution/pack.json",
+          "sha256": "07a504cf806e1a22e5928fa3001fcedd77ebef6e229f1ac05376e15aa36f1a44"
+        },
+        {
+          "bytes": 0,
+          "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "mode": "100644",
+          "path": "execution/pack.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 467,
+          "gitBlob": "75f537ed6f27ef135a7cbc8ef6a137fa50d85a71",
+          "mode": "100644",
+          "path": "execution/pack.stdout.log",
+          "sha256": "32a0969911bd1baf2a1469cbc32a3ce24307459df3b7660a594118e702b5289d"
+        },
+        {
+          "bytes": 1992,
+          "gitBlob": "a4820c1c586a353ee43f119c67865bdfe042d35f",
+          "mode": "100644",
+          "path": "execution/readback.json",
+          "sha256": "73f754fc88220e2ec709fe481d485f3ad042a8f9e625900be99931c2c133b2b2"
+        },
+        {
+          "bytes": 0,
+          "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "mode": "100644",
+          "path": "execution/readback.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 1075,
+          "gitBlob": "267de6474ea0202ebcc828e6859f441417e8204f",
+          "mode": "100644",
+          "path": "execution/readback.stdout.log",
+          "sha256": "fdea0292e1d30d7912db8ee9c4c998131b775ad35f7c485da3300f3fab4c09db"
+        },
+        {
+          "bytes": 1634,
+          "gitBlob": "f0acf920fa2bca913070eba9bde9f1af306d870a",
+          "mode": "100644",
+          "path": "execution/verify.json",
+          "sha256": "9ddb0ddbf2b0bd1ec544fede9ff28173a0a1f5bacc0fbfac99c863385d3cc16f"
+        },
+        {
+          "bytes": 0,
+          "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "mode": "100644",
+          "path": "execution/verify.stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 771,
+          "gitBlob": "29fcd045156670eb2020d5e5ffcf1ea23c0d7114",
+          "mode": "100644",
+          "path": "execution/verify.stdout.log",
+          "sha256": "debe899151d56426da623d80931d222a5c39c20e0c44c2efd8fa1bb4b7595334"
+        },
+        {
+          "bytes": 2579,
+          "gitBlob": "20aad35554abcf879fd794c778acdb29a4fbb90a",
+          "mode": "100644",
+          "path": "reviews/package-static-review.json",
+          "sha256": "de63493a1b6b4ddbfc743ffc768eb015bfed9a847520014f3ded9c2635530c9a"
+        }
+      ]
+    },
+    "explanatoryEnvelope3": [
+      "CURRENT-DELIVERY.json",
+      "CURRENT-DELIVERY.md",
+      "HISTORY-AVAILABILITY.json"
+    ],
+    "initial318": {
+      "manifest": "PAIRED-FILES.json",
+      "rows": 318,
+      "sha256": "a6337844eed4805a3f3071a51cbc6bf595f55f3bf324ece96044ef1e94fc0a9c"
+    },
+    "totalPhysicalRows": 338
+  },
+  "producer": {
+    "add": 74,
+    "families": 36,
+    "junit": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 42
+    },
+    "note": "Actual source/runtime producer qualification. Does not qualify receiving modules, JDK product runtime, or hosted workflows.",
+    "orderedSuccessfulGates": 4,
+    "outputs": 143,
+    "replace": 69,
+    "result": {
+      "bytes": 100068,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/evidence/producer-v2/RESULT.json",
+      "sha256": "6fabdebabaef7e3c5fb1988e4fe3c8b87c59cd6066ff443a57e3285cf78e8d08"
+    },
+    "resultArchiveLogicalPath": "ic0/trials/producer-v2/RESULT.json",
+    "status": "PASS_FOCUSED_PRODUCER"
+  },
+  "receiving": {
+    "note": "The fresh producer and package are the admission evidence for this task-only draft. Any separate receiving run must be reported with its own actual result; no successful receiving, current-head integration, full JDK/runtime, or hosted-workflow claim is made here.",
+    "qualifiedByThisCheckpoint": false,
+    "receivingResultUsedForAdmission": false,
+    "staticWiringFindings": [
+      {
+        "executedFailureClaimed": false,
+        "finding": "The default strict sealed-install check requires the historical 24-file after state, including the 52-row mapping at SHA prefix33504527. Fresh output uses an87-row mapping at SHA prefixcf6a7580, preserving52 and adding35 pending rows. A separate explicit current-context profile is being prepared; full workflow wiring remains pending.",
+        "owner": "m3/tooling/tq-sync/verify-plan.py"
+      }
+    ],
+    "withdrawnStaticFinding": {
+      "correction": "The workflow reads m3/backports/JEP_CATALOGUE.tsv, whose index4 value is candidate. CANDIDATE_UNVERIFIED/PENDING_CI belongs to distinct m3/tooling/recipe-catalogue.tsv. No JEP485 mismatch was established and no execution failure is claimed.",
+      "finding": "Alleged JEP485 workflow catalogue mismatch"
+    }
+  },
+  "reconstruction": {
+    "entry": "reconstruct.py",
+    "flatMirrorMavenReady": false,
+    "instructions": "README.md",
+    "laterExecutionIsOriginalReceipt": false,
+    "preservePOMAndRawFixtures": true,
+    "qualifiedProjectLogicalRoot": "ic0/project/"
+  },
+  "schema": "m3.ic0.current-delivery/1",
+  "scope": "TASK_AND_EVIDENCE_ONLY_DRAFT_CHECKPOINT",
+  "sourceCommit": "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c",
+  "targetCommit": "c0a14387009aefc7d62bd3268055d526e04f9074"
+}

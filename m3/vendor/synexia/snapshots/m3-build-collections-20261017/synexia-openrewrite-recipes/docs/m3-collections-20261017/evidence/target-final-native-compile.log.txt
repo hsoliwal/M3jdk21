@@ -1,0 +1,3 @@
+$ ["cc", "-std=c17", "-O2", "-fPIC", "-shared", "-Wall", "-Wextra", "-Werror", "-I/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/include", "-I/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/include/linux", "-include", "/workspace/scratch/4f99f40718f0/m3-implementation/checkouts/M3jdk21/m3/tooling/module-packs/collections/target/m3-collections-image/headers/com_m3_collections_M3IndexMaskCompactor.h", "-o", "/workspace/scratch/4f99f40718f0/m3-implementation/checkouts/M3jdk21/m3/tooling/module-packs/collections/target/m3-collections-image/native/libm3_collections_mask.so", "/workspace/scratch/4f99f40718f0/m3-implementation/checkouts/M3jdk21/m3/collections/src/main/native/collections/m3_index_mask_compactor.c"]
+
+EXIT 0

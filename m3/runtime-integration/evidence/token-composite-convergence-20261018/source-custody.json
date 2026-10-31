@@ -1,0 +1,120 @@
+{
+  "schema": "M3JDK21_CANONICAL_RECIPE_PUBLICATION_V1",
+  "recipe": "com.synexia.rewrite.M3Jdk21TokenCompositeConvergenceRecipe",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "a0a22f0a5554e19de46b27775b0eeb70fdea6c6a",
+  "canonical_recipe_path": "synexia-openrewrite-recipes/recipes/m3jdk21-token-composite-convergence-20261018",
+  "canonical_evidence_url": "https://github.com/hsoliwal/com.synexia/blob/a0a22f0a5554e19de46b27775b0eeb70fdea6c6a/synexia-openrewrite-recipes/recipes/m3jdk21-token-composite-convergence-20261018/VALIDATION.md",
+  "receiver_parent": "3e1a0b7b7d2498a62550861a6a5a9bd88a2314d7",
+  "manifest_sha256": "61e9d13e3ecb5c29db6d8c46426ddbd6f907860060b9e5729a5792a482bfe589",
+  "output_root_sha256": "50700d0ded09333e2caecd53aa071e58b26e3feca3d866aa93e6b375f3951b1b",
+  "generated_source_count": 16,
+  "generated_sources": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "sha256": "020fa3073eb2de0df88ea32fec4159e800c1b5582e4fa705202e2326dfbb5d07",
+      "source_kind": "JAVA"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSortedEdgesContract.java",
+      "sha256": "3aebf194ff869376957c76b8db9f5381b57f747ac0ecf20fbfb642f9ecb3c877",
+      "source_kind": "JAVA"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSortedEdgesTest.java",
+      "sha256": "3068db3f66befd07e45dce84832fac3454fc2b7557bef907c1eaf0df1454e8ce",
+      "source_kind": "JAVA"
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-regex-lexical-nfa-20261018.json",
+      "sha256": "628daba4deaaea5be439812c9b86a636bb0ed32e801383a1f5fdde77f2dccd17",
+      "source_kind": "TEXT"
+    },
+    {
+      "path": "m3/docs/regex-token-composite-convergence-20261018.md",
+      "sha256": "b12e9369cf72a8b553ec50f326bab73a03ba9d22abef9723a70dcd9fc0eecbb4",
+      "source_kind": "TEXT"
+    },
+    {
+      "path": "m3/runtime-integration/check-m3rx7-convergence.sh",
+      "sha256": "3563cf01a3e6e49615be653a02620a41fca0c6a98d61515912b207bbb3891a84",
+      "source_kind": "TEXT"
+    },
+    {
+      "path": "m3/runtime-integration/check-m3rx7-transition-native.sh",
+      "sha256": "551224b42e467068949ced3def93f7daae3bb73ee1ed42ddfedce6261f434483",
+      "source_kind": "TEXT"
+    },
+    {
+      "path": "m3/runtime-integration/check-m3rx7-v7-image-codec.sh",
+      "sha256": "019f99675b0fb423d724d0d4de69b436102e492ea9aaa10c82cde4fd50ea33c8",
+      "source_kind": "TEXT"
+    },
+    {
+      "path": "m3/runtime-integration/check-m3rx7-v7-receiver.sh",
+      "sha256": "016a6015e1e3093f4bbe6264ae6411e90c36c72a945514aba82efad609ca634b",
+      "source_kind": "TEXT"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3RX7.java",
+      "sha256": "3005574994ae3ea854f15469a40d68057b0eae709323a042285e463c2871ad98",
+      "source_kind": "JAVA"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3RX7Transitions.java",
+      "sha256": "0b513cce6893fb697e7784d2556a9081b5b391abf20008493f1ba35de7a0ff9e",
+      "source_kind": "JAVA"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3RX7.c",
+      "sha256": "f2e92b0be3af9f97bc427620f5740a28431629a8e3c8f19fc5356dbaa03261b9",
+      "source_kind": "TEXT"
+    },
+    {
+      "path": "test/jdk/jdk/internal/mindex/M3RX7LexicalContract.java",
+      "sha256": "a35e5931d99cf5a001658fc6858f64eb2a7017317662508efae7603c195d51b0",
+      "source_kind": "JAVA"
+    },
+    {
+      "path": "test/jdk/jdk/internal/mindex/M3RX7NativeBootstrap.java",
+      "sha256": "d232e79ed29b46d33baa8f1ccad761d8257773fb3d0dac37bdfff5a234e6fc9e",
+      "source_kind": "JAVA"
+    },
+    {
+      "path": "test/jdk/jdk/internal/mindex/M3RX7NativeBoundaryContract.java",
+      "sha256": "262ea8751c35b33f3750177aa64757cdf0e2a09a8e1f63f9b77b69f5c3df1588",
+      "source_kind": "JAVA"
+    },
+    {
+      "path": "test/jdk/jdk/internal/mindex/M3RX7TransitionCompositionContract.java",
+      "sha256": "47db03a1018382f966525fcb74c6465726ba4bc4ab7d1b959b055388cfa6aaf5",
+      "source_kind": "JAVA"
+    }
+  ],
+  "receipts": [
+    {
+      "path": "sdk-replay.json",
+      "sha256": "4841bd86725f31265d37fc8131c16c2b268f6543da2bb47fa61574a9a3984810",
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/a0a22f0a5554e19de46b27775b0eeb70fdea6c6a/synexia-openrewrite-recipes/recipes/m3jdk21-token-composite-convergence-20261018/evidence/sdk-replay.json"
+    },
+    {
+      "path": "sdk-receiver-fixed-point.json",
+      "sha256": "f878e54adb07c3a86f3ce5c925161aa7341eb6b8eb45750114fd4804b605e828",
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/a0a22f0a5554e19de46b27775b0eeb70fdea6c6a/synexia-openrewrite-recipes/recipes/m3jdk21-token-composite-convergence-20261018/evidence/sdk-receiver-fixed-point.json"
+    },
+    {
+      "path": "receiver-host.json",
+      "sha256": "f5583e7bb0dff9dbb80e8b8045afc2b2c09a3ba9d5916bf4257a9c885a9741bd",
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/a0a22f0a5554e19de46b27775b0eeb70fdea6c6a/synexia-openrewrite-recipes/recipes/m3jdk21-token-composite-convergence-20261018/evidence/receiver-host.json"
+    },
+    {
+      "path": "receiver-host.log",
+      "sha256": "f04cf3861cb315e9e67398e0ce56e5381bf826e3767fa951325b9e08401a9103",
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/a0a22f0a5554e19de46b27775b0eeb70fdea6c6a/synexia-openrewrite-recipes/recipes/m3jdk21-token-composite-convergence-20261018/evidence/receiver-host.log"
+    }
+  ],
+  "source_built_synexia_sdk_reactor": "NOT_RUN",
+  "source_built_m3jdk21": "NOT_RUN",
+  "actual_jtreg": "NOT_RUN",
+  "disposition": "DRAFT_COMPONENT_QUALIFIED_FULL_RUNTIME_HOLD"
+}

@@ -1,0 +1,93 @@
+{
+  "schema": "jcc-e04-local-v3-custody-expectations/1",
+  "state": "UNBOUND_AWAITING_ACTUAL_V3_SCHEMA_AND_PUBLICATION",
+  "source_output_commit": null,
+  "source_output_root": null,
+  "source_ref": null,
+  "source_pr": null,
+  "source_manifest": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/publication/FINAL_MANIFEST.json",
+    "bytes": 2651088,
+    "sha256": "9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328",
+    "git_blob_sha1": "8b87e4320079b69393a01387f11ccda15a273509"
+  },
+  "expected_status": "PUBLISHED_CUSTODY_VERIFIED",
+  "expected_schema": "jcc-source-recovery-publication/1",
+  "mandatory_direct_production_bodies": [
+    {
+      "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "bytes": 48120,
+      "sha256": "83dad41fa4ce50b70f1e2e6800241b69b5136807902fd2fc6a6d024024894ac4",
+      "git_blob_sha1": "baa84c13b7fd330eab6b1832dab1b4b523bfd8ce",
+      "mode": "100644"
+    },
+    {
+      "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+      "bytes": 33076,
+      "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
+      "git_blob_sha1": "074dd60249893e4c606e68823fdebf191f98f269",
+      "mode": "100644"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "bytes": 23211,
+      "sha256": "adee46f08cd93edb1f97c30be904d0b686cc6426f56c1fae0ee6d670693526df",
+      "git_blob_sha1": "dad21d3e762dabdfeb71f2d8815c25b401079994",
+      "mode": "100644"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+      "bytes": 8493,
+      "sha256": "d825d59df9ca7839ad06af2fd5c6ae386ce373f24eecc9184d23d1fe3261d8b1",
+      "git_blob_sha1": "0d3aed858efcc450cf24822567f4ee605e84a18d",
+      "mode": "100644"
+    }
+  ],
+  "mandatory_direct_NUL_fixture_bodies": [
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
+      "bytes": 126,
+      "sha256": "88b78c08bf896f77b97603f99bad089c19330ca2816edb1c240a84799cb8bfa0",
+      "git_blob_sha1": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d",
+      "mode": "100644"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-nul/Dependency.java.txt",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-nul/Dependency.java.txt",
+      "bytes": 110,
+      "sha256": "ba285f4d77b3be32b02839f15a09246410cba23120d8f36a244992fcf03510a6",
+      "git_blob_sha1": "fb1c29bba17633d2de5d53d924ec210965374c37",
+      "mode": "100644"
+    }
+  ],
+  "exact_content_addressed_invalid_utf8_exceptions": [
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+      "bytes": 4,
+      "sha256": "823a8864668594f33fd21b51f42c08643d90be2f0d903653175047f5d0298e6c",
+      "git_blob_sha1": "59b4ec83f687499a54f15695b9b246599f9579d7",
+      "mode": "100644"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+      "bytes": 22,
+      "sha256": "7eb80c376a9681170665f5c0d8b86214e9b44aa6f1d08690a83b26aeba536f3c",
+      "git_blob_sha1": "24cdc62e634934527d551324c2449bcf951b5589",
+      "mode": "100644"
+    }
+  ],
+  "expected_counts": {
+    "direct_production": 4,
+    "direct_NUL": 2,
+    "direct_total": 6,
+    "content_addressed_invalid_utf8": 2
+  },
+  "scope": "Exact local expected identities only. Receipt field layout, actual remote evidence and admission still pending; no publication verified or body method asserted as executed."
+}

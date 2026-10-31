@@ -1,0 +1,12 @@
+item	state	evidence	limit
+base	PINNED	87590cb96fb0e2dc0f88fae8e01957f7179cd255	current master at map start
+mapper	IMPLEMENTED	path_map.py	evidence-only
+mapper_tests	IMPLEMENTED	test_path_map.py	hosted execution pending
+expected_source_count	LOCKED	241	from merged JEP484 inventory
+expected_donor_count	LOCKED	245	161 public +84 internal
+expected_direct_descendants	LOCKED	238	mechanical normalized mapping
+expected_unmapped	LOCKED	3	typed residue
+expected_added	LOCKED	7	new donor paths
+expected_ambiguous	LOCKED	0	fail if nonzero
+mutation_authority	false	-	no source change
+promotion_authority	false	-	no API admission

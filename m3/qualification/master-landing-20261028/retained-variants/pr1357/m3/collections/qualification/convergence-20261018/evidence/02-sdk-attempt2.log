@@ -1,0 +1,19 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --< com.synexia.verification:m3-collections-contract-refinement-recipe-proof >--
+[INFO] Building m3-collections-contract-refinement-recipe-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.539 s
+[INFO] Finished at: 2026-10-18T15:54:27+04:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal on project m3-collections-contract-refinement-recipe-proof: Could not resolve dependencies for project com.synexia.verification:m3-collections-contract-refinement-recipe-proof:jar:1: Failed to collect dependencies at org.slf4j:slf4j-simple:jar:2.0.13: Failed to read artifact descriptor for org.slf4j:slf4j-simple:jar:2.0.13: The following artifacts could not be resolved: org.slf4j:slf4j-simple:pom:2.0.13 (absent): Could not transfer artifact org.slf4j:slf4j-simple:pom:2.0.13 from/to central (https://repo.maven.apache.org/maven2): Network is unreachable -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/DependencyResolutionException

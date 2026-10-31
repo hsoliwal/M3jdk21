@@ -1,0 +1,242 @@
+{
+  "schema": 1,
+  "execution": "ACTUAL_OPENREWRITE_SDK_PRODUCTION_DATASET",
+  "baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "manifest_sha256": "a7ea777197248e5430680dd599004ca815b881890bf7a746cb156ad79950301d",
+  "manifest_targets": 483,
+  "actual_changed_results": 33,
+  "unchanged_keep_targets": 450,
+  "exact_baseline_input_files_rechecked": 454,
+  "actual_second_sdk_run_changes": 0,
+  "actual_result_receipt": "qualification/recipe/RECIPE_RESULTS-1.json",
+  "actual_result_receipt_sha256": "cb0b1c569a13a30f04ee3ad10b0e5694cc9d01960b24b1080869cc4a3b484dd8",
+  "result_and_template_hashes_independently_rechecked": true,
+  "input_deck_rechecked_after_sdk_execution": true,
+  "sdk_tests": [
+    {
+      "name": "com.synexia.rewrite.EngineCustodyTest",
+      "tests": "1",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "cases": [
+        {
+          "name": "existingEngineSourcesRemainByteExact",
+          "class": "com.synexia.rewrite.EngineCustodyTest"
+        }
+      ]
+    },
+    {
+      "name": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest",
+      "tests": "15",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "cases": [
+        {
+          "name": "actualSdkRefusesDuplicateTarget",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        },
+        {
+          "name": "checkModeUsesActualSdkAndRequiresFixedPoint",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        },
+        {
+          "name": "actualSdkRefusesOccupiedAbsentTarget",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        },
+        {
+          "name": "actualSdkProducesExactJavaNativeAndMetadataPostimages",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        },
+        {
+          "name": "actualSdkRefusesDrift",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        },
+        {
+          "name": "runnerRefusalLeavesNoOutputDirectory",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        },
+        {
+          "name": "actualSdkAcceptsEveryMixedPrePostState",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        },
+        {
+          "name": "unrelatedSourceIsNotAResult",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        },
+        {
+          "name": "namedYamlRecipeUsesExistingEngine",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        },
+        {
+          "name": "actualSdkCancellationCannotAdmitOutput",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        },
+        {
+          "name": "actualSecondSdkRunIsFixedPoint",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        },
+        {
+          "name": "actualSdkRunnerEmitsOnlyIntoFreshDisjointDirectory",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        },
+        {
+          "name": "runnerCancellationBeforeEmissionLeavesNoOutputDirectory",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        },
+        {
+          "name": "outputSymlinkAncestorIntoSourceIsRefusedBeforeCreation",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        },
+        {
+          "name": "actualSdkRefusesMissingRequiredOwner",
+          "class": "com.synexia.rewrite.IntegratedUtilitiesRecipeTest"
+        }
+      ]
+    }
+  ],
+  "source_and_fixture_seals": [
+    {
+      "path": "src/main/java/com/synexia/rewrite/IntegratedUtilitiesRunner.java",
+      "sha256": "2fc68d51cf0631124daa79f9c59f816242915a984a776e880ed2727ab0a0a590"
+    },
+    {
+      "path": "src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+    },
+    {
+      "path": "src/main/java/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+    },
+    {
+      "path": "src/main/java/com/synexia/rewrite/M3IntegratedUtilitiesRecipe.java",
+      "sha256": "2bf8f3f4dd6f22056eb3e908febbae4f40aca1a30bbd5a1540d13603eb20b80c"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/EngineCustodyTest.java",
+      "sha256": "9ef9c985b84a6bc7e48bbc7da7fd16b586877251d855f5e734375b99dc9733f9"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/IntegratedUtilitiesRecipeTest.java",
+      "sha256": "375198a7ce53b5255f5f7085fb567c9295e8269d05d74c20c21e8618ad480e2f"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/before/README.md",
+      "sha256": "71053e04d49df9410c6f294dace1abec9d3f42651e2ef92b966b11387972fc77"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/before/native/kernel.c",
+      "sha256": "e502f6b59bddb52d3b1e94a8dba0226df9450efe44986f1ae5fa469984bf9d08"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/before/src/example/Owner.java",
+      "sha256": "bf2d0b1e70e3bca5b994303b3ce639fab618f96e07e3bb33b6ef0637043a8c88"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/manifest.tsv",
+      "sha256": "2ac43a824fe4cd8c91c30525eb0e9530ac0b90dcd837643eb0f39a46c6b3a50f"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/templates/docs/coverage.json",
+      "sha256": "5c899d8e16da16b696f97b60dd5f6e13d1edd122d61e17b0045f0f5ca1581612"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/templates/native/kernel.c",
+      "sha256": "db6170686210709f73bcdb4f6c3d3b9ad55a9ee5f01e788b01a8cb80de6d9e07"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/templates/src/example/Added.java",
+      "sha256": "1984ceb87c81037eb4f72a880a1f79b54d9a9f986bafe0c9ac627016ca7a7090"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/integrated-utilities-fixture/templates/src/example/Owner.java",
+      "sha256": "87b68169e0269925785f2d2453fb8c73fb193aef5c6509b81d186133170c4c67"
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "e9c468164b598c968db91a1e75496f9530a5917df59ba046959d033319bc7293"
+    },
+    {
+      "path": "ENGINE_PROVENANCE.json",
+      "sha256": "dcbfa2198dcaf5230592c4208a50710c53767c2eb9ec3030edbdbee6c97dbb64"
+    }
+  ],
+  "executed_class_seals_not_binary_publication": [
+    {
+      "path_at_execution": "target/classes/com/synexia/rewrite/IntegratedUtilitiesRunner.class",
+      "sha256": "418788ebd665c6266d2d645c34696b653b2b4e72a39bedc89991d835a45e157d"
+    },
+    {
+      "path_at_execution": "target/classes/com/synexia/rewrite/M3GpuToolJoinManifest$Payload.class",
+      "sha256": "840e06113d9f7c37e6a4e5491177e8f95ac1d596f10260fa5732f0aaee75c1d2"
+    },
+    {
+      "path_at_execution": "target/classes/com/synexia/rewrite/M3GpuToolJoinManifest$Resources.class",
+      "sha256": "7d7599b108861f66170896cdc47c20585537d90c69bb16587dd0e1e6a0cd41a7"
+    },
+    {
+      "path_at_execution": "target/classes/com/synexia/rewrite/M3GpuToolJoinManifest$Scan.class",
+      "sha256": "405b572cf789c0dcace16f11071f64993ae30b5cdbd2f0d81e90c5baab6e7a7a"
+    },
+    {
+      "path_at_execution": "target/classes/com/synexia/rewrite/M3GpuToolJoinManifest$Target.class",
+      "sha256": "59b9ff1352c13e2ca14eeb4640f6bfb2c7bc824a8e16e7e8ff5f7201a8c1eca0"
+    },
+    {
+      "path_at_execution": "target/classes/com/synexia/rewrite/M3GpuToolJoinManifest.class",
+      "sha256": "510d6124146fa1e57f0f61a523ff348d69e07b99263b2c604b95dae461f4a6f8"
+    },
+    {
+      "path_at_execution": "target/classes/com/synexia/rewrite/M3GpuToolJoinRecipe$1.class",
+      "sha256": "01f226c4a5c206e9130aaecf408a429e999f1a68a553ead0e051cf2830edba2b"
+    },
+    {
+      "path_at_execution": "target/classes/com/synexia/rewrite/M3GpuToolJoinRecipe$2.class",
+      "sha256": "99a0c378cc410d224c7bd337feb855d92fdb498bd1ebf61431a203ccc673b422"
+    },
+    {
+      "path_at_execution": "target/classes/com/synexia/rewrite/M3GpuToolJoinRecipe$Inventory.class",
+      "sha256": "f4271bef87d15e31de0cd375d1140183828813ec59be4418fa47ace3c795657e"
+    },
+    {
+      "path_at_execution": "target/classes/com/synexia/rewrite/M3GpuToolJoinRecipe$Target.class",
+      "sha256": "bed3025778b0ac6282b16af5c5c6b1eeb30139a3907318f4dcd0c8564f25e4f3"
+    },
+    {
+      "path_at_execution": "target/classes/com/synexia/rewrite/M3GpuToolJoinRecipe.class",
+      "sha256": "0c5397dc7869edb558419bab4c6cbd9f5e77ae2c6f31ede18d25a800b8136462"
+    },
+    {
+      "path_at_execution": "target/classes/com/synexia/rewrite/M3IntegratedUtilitiesRecipe.class",
+      "sha256": "e62f3ce13aab6c3bb110a7282d8116a280c9f86067fc1ee9ad892910b7e1837f"
+    }
+  ],
+  "maven_log": "qualification/recipe/maven-production-sdk-run-1.log",
+  "maven_log_sha256": "2d87203f01dbaab3b8c03fa72267dd01120ef5e3193291ed6df7a2d57444d4bb",
+  "source_deck": "/dev/shm/m3jdk21-work/integrated-sdk-baseline-1",
+  "fresh_output": "/dev/shm/m3jdk21-work/integrated-sdk-output-1",
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "-B",
+    "-ntp",
+    "-s",
+    "/tmp/m3-toolchain/settings.xml",
+    "-f",
+    "/dev/shm/m3jdk21-work/recipe-candidates/pom.xml",
+    "test",
+    "exec:java",
+    "-Dexec.mainClass=com.synexia.rewrite.IntegratedUtilitiesRunner",
+    "-Dexec.args=--emit /dev/shm/m3jdk21-work/integrated-sdk-baseline-1 /dev/shm/m3jdk21-work/integrated-sdk-output-1"
+  ],
+  "environment_overrides": {
+    "JAVA_HOME": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+    "JAVA_TOOL_OPTIONS": "-Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts",
+    "PATH_prefix": "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin:/tmp/m3-toolchain/apache-maven-3.9.11/bin"
+  },
+  "product_checkout_mutated_by_this_runner": false,
+  "java_and_native_runtime_qualified_by_recipe": false,
+  "full_product_image_qualified": false,
+  "performance_qualified": false,
+  "receiving_sequence_advanced": false
+}

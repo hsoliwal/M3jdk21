@@ -1,0 +1,4 @@
+schema	donor	capability	receiver	path	disposition
+AST_SCOPED_FILE_OWNER_V1	synexia-mindex/runtime/com.synexia.mindex.ast.MIndexASTLeafIndex	file/project/module-scoped fact ownership	M3ASTLeafIndex	m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java	INDEPENDENT_COMPILETIME_EVIDENCE_ONLY
+AST_SCOPED_FILE_OWNER_V1	com.synexia.rewrite.M3ASTScopedFileIdentityJdk2120261017	source-sealed Maven/OpenRewrite Java candidate	M3ASTLeafIndexSelfTest	m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java	EXACT_SOURCE_RECEIVER_DRAFT
+AST_SCOPED_FILE_OWNER_V1	M3IndexPathMasks / M3ObjectStateSlots28	precomputed mask + generation-safe physical slot selection	existing m3/collections owners	none	NO_DUPLICATE_JNI_OR_COLLECTION_BACKEND

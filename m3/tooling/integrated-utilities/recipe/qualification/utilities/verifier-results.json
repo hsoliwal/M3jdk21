@@ -1,0 +1,136 @@
+{
+  "scope": "ISOLATED_JAVA_21_PATCH_MODULE_CONTRACTS",
+  "full_fork_image": "PENDING",
+  "commands": [
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-version"
+      ],
+      "exit_code": 0,
+      "output": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)\n"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "-J-Xmx256m",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/source",
+        "-d",
+        "/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/classes",
+        "/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/source/java/io/IOUtils.java",
+        "/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/source/java/util/stream/Streams.java",
+        "/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/source/java/lang/reflect/Reflection.java",
+        "/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/source/java/util/Strings.java"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "-J-Xmx256m",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/classes",
+        "-d",
+        "/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/tests",
+        "/dev/shm/m3jdk21-work/utility-candidates/postimages/test/jdk/java/io/IOUtils/IOUtilsTest.java",
+        "/dev/shm/m3jdk21-work/utility-candidates/postimages/test/jdk/java/util/stream/Streams/StreamsTest.java",
+        "/dev/shm/m3jdk21-work/utility-candidates/postimages/test/jdk/java/lang/reflect/Reflection/ReflectionTest.java"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/classes",
+        "-cp",
+        "/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/tests",
+        "IOUtilsTest"
+      ],
+      "exit_code": 0,
+      "output": "IOUtilsTest checks=2196\n"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/classes",
+        "-cp",
+        "/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/tests",
+        "StreamsTest"
+      ],
+      "exit_code": 0,
+      "output": "StreamsTest checks=181\n"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/classes",
+        "-cp",
+        "/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/tests",
+        "ReflectionTest"
+      ],
+      "exit_code": 0,
+      "output": "ReflectionTest checks=74\n"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xint",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/classes",
+        "-cp",
+        "/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/tests",
+        "IOUtilsTest"
+      ],
+      "exit_code": 0,
+      "output": "IOUtilsTest checks=2196\n"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xint",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/classes",
+        "-cp",
+        "/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/tests",
+        "StreamsTest"
+      ],
+      "exit_code": 0,
+      "output": "StreamsTest checks=181\n"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xint",
+        "--patch-module",
+        "java.base=/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/classes",
+        "-cp",
+        "/dev/shm/m3jdk21-work/utility-candidates/build/m3-integrated-utilities-zvh08psj/tests",
+        "ReflectionTest"
+      ],
+      "exit_code": 0,
+      "output": "ReflectionTest checks=74\n"
+    }
+  ],
+  "source_sha256": {
+    "src/java.base/share/classes/java/io/IOUtils.java": "d93e16b7e1c594039ff479b4d5a2ef973e55596b1df574608cf108692edd8623",
+    "src/java.base/share/classes/java/util/stream/Streams.java": "d0726fb7f8615fed0d3c9747f62750569506242b1cc32c806bae0f3c64816355",
+    "src/java.base/share/classes/java/lang/reflect/Reflection.java": "54b08b0396cd8e749093ae55f74eb5db1b5844605cc5610705471275b5b92883",
+    "src/java.base/share/classes/java/util/Strings.java": "b62532d9b0c77bc5edc07ea87daf58706e68ce4084ec228919d5cf0c28847270",
+    "test/jdk/java/io/IOUtils/IOUtilsTest.java": "93642831a11cf08a3b157aebe82bce2f91613369e2bcbc778fd5def1826cf018",
+    "test/jdk/java/util/stream/Streams/StreamsTest.java": "1e2ff81d43c458e62cf5d3fae03c963be525db7e9948cc4d5e3fe910a98ae967",
+    "test/jdk/java/lang/reflect/Reflection/ReflectionTest.java": "4243e53aa979ecc9ff7ff453293dbcd20fde28bdb60bc955674d9967d740aaa8"
+  },
+  "status": "PASSED"
+}

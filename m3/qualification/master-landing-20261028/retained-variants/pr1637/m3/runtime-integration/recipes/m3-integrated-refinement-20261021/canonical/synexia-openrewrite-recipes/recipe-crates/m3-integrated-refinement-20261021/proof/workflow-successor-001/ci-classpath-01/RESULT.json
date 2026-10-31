@@ -1,0 +1,19 @@
+{
+  "status": "CONFIRMED_CI_CLASSPATH_FAILURE",
+  "exit_code": 1,
+  "tests": 2,
+  "failures": [
+    {
+      "test": "com.synexia.rewrite.M3IntegratedRefinementRecipeTest.",
+      "type": "org.opentest4j.AssertionFailedError",
+      "message": "missing actual owner attribution: com.m3.eclipse.runtime.M3EclipseProgressMonitor#borrowed; resolved methods: [com.m3.collections.M3FilteredViews#filter, com.m3.eclipse.framework.M3EclipseResourceDeltaSnapshot#capture, com.m3.eclipse.framework.M3EclipseResourceDeltaSnapshot#size] ==> expected: <true> but was: <false>"
+    }
+  ],
+  "errors": 0,
+  "skipped": 0,
+  "input_receipt_sha256": "8b3b3085183ec1b6a85b9486b8f4af422823da72c569dec9a074fcabcbc8eee3",
+  "all_frozen_source_class_jar_readbacks_unchanged": true,
+  "log_sha256": "e07b8017c52827c16c1af9bc6efa1d0f51dc21a8f21dea0090e426e8eb74e13a",
+  "target_sources_modified": false,
+  "finding": "Existing framework workflow omits the actual core-runtime progress facade classes required by its sealed attribution probe. M3ProgressMonitor and Eclipse JobManager dependencies are present; failure is the missing facade owner."
+}

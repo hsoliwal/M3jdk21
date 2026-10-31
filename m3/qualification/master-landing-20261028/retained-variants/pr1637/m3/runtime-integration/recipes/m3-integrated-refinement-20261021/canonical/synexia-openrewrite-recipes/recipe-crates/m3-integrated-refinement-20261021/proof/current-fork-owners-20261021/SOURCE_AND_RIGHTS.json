@@ -1,0 +1,54 @@
+{
+  "schema": "M3_CURRENT_FORK_OWNER_EVIDENCE_RIGHTS/1",
+  "stage": "current-fork-owners-20261021",
+  "first_party": "Apache-2.0; new task evidence/navigation by Hitesh Soliwal and Contributors to the Synexia Project",
+  "source_custody": "Exact immutable source/hash intake receipts retain original path, revision, bytes and notices; generated logs and manifests describe bounded executed evidence.",
+  "nlp_forks": [
+    {
+      "repository": "hsoliwal/opennlp",
+      "revision": "8b647d1d389736952e43fb46865c874747f7acde",
+      "license": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/forks/opennlp/LICENSE",
+        "sha256": "670826f9a15f2c3ca50a0381d9f05551f2b0d7e1c939241d32143b7480788d26"
+      },
+      "notice": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/forks/opennlp/NOTICE",
+        "sha256": "1272b1c6e5cd932e5741abf992bb1cbf66da01d9fbe8e6e10c1bed1bba24b6fb"
+      }
+    },
+    {
+      "repository": "hsoliwal/lucene",
+      "revision": "873b6167603c69101d626ddffd8d733340300fea",
+      "license": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/forks/lucene/LICENSE.txt",
+        "sha256": "7c8714cc3ad0f446c01973cc694ccdb9abc388388fbbe7a22b968157dfe34aa4"
+      },
+      "notice": {
+        "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/nlp/forks/lucene/NOTICE.txt",
+        "sha256": "543e5afa0e450739bcf59829f901333c73a42a3a8261a905ef8dfc690896dbb0"
+      }
+    }
+  ],
+  "swt_rights": {
+    "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021/swt/RIGHTS_INTAKE.json",
+    "sha256": "cdee2a900975d411885588ce7ba56bb3cbb1671e4ff3133204facf40018c0cef"
+  },
+  "correction_rights": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/provenance/SOURCE_AND_RIGHTS.json",
+      "sha256": "67555856f433a784f66865a5ed11f0e6d0229cacdc42de5cd391d1901619a115"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/provenance/SOURCE_AND_RIGHTS.json",
+      "sha256": "c16fc3301334af0805be9549a3f90ea98611e33000969286ba3b104d0e19cae9"
+    }
+  ],
+  "swt_fixture_clarification": "The broad frozen fixture note is narrowed by exact headers: All* suites remain EPL-2.0; dual wording applies only to geometry/differential files carrying it; received recipe/POM tooling is Apache-2.0. SLF4J API license is MIT. No relicensing.",
+  "authorization": "The user explicitly authorized implementation and PRs for M3JDK21 and reuse of Synexia components. This is existing licensed source/array/source-lock/build-runtime maintenance; public receiving mirrors are within that instruction. Canonical disclosure follows this bounded approved task.",
+  "claims_not_made": [
+    "No patent status or priority assertion",
+    "No source-built claim for cached external archives",
+    "No full-product, native-platform, performance or hosted admission",
+    "No binary/model/runtime payload redistribution by this evidence packet"
+  ]
+}

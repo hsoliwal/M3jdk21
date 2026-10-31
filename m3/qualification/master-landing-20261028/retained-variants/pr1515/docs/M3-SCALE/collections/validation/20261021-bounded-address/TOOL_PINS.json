@@ -1,0 +1,470 @@
+{
+  "schema": "synexia.data.address.public-static-tool-pins.v1",
+  "platform": "Windows x86-64",
+  "tool_roots": {
+    "gcc": "MinGW-w64 GCC15.2.0 installation",
+    "jdk": "JDK21 installation"
+  },
+  "files": [
+    {
+      "root": "gcc",
+      "path": "bin/gcc.exe",
+      "bytes": 3020288,
+      "sha256": "690d171db384af0f69002374a7fc4755128ee82c688d22818bd981f869a65890",
+      "PE_import_names": [
+        "KERNEL32.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll",
+        "api-ms-win-crt-utility-l1-1-0.dll",
+        "libwinpthread-1.dll"
+      ]
+    },
+    {
+      "root": "gcc",
+      "path": "libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1.exe",
+      "bytes": 41556480,
+      "sha256": "59c37bed08c45b5cc5162ae843475b00c8325e51ef875e095276e8cf37b932e3",
+      "PE_import_names": [
+        "KERNEL32.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll",
+        "api-ms-win-crt-utility-l1-1-0.dll",
+        "libwinpthread-1.dll"
+      ]
+    },
+    {
+      "root": "gcc",
+      "path": "libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe",
+      "bytes": 2171904,
+      "sha256": "8139e53f61a0b81779dc8ad9534bf2b93989c02f58cc1258326ee12658810bf5",
+      "PE_import_names": [
+        "KERNEL32.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll",
+        "api-ms-win-crt-utility-l1-1-0.dll",
+        "libwinpthread-1.dll"
+      ]
+    },
+    {
+      "root": "gcc",
+      "path": "bin/as.exe",
+      "bytes": 1960448,
+      "sha256": "5e1a093518848dd42c445f8d985d904c4723e6bf0a2c52d543fb853357ef0bc3",
+      "PE_import_names": [
+        "KERNEL32.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll",
+        "api-ms-win-crt-utility-l1-1-0.dll",
+        "libwinpthread-1.dll"
+      ]
+    },
+    {
+      "root": "gcc",
+      "path": "bin/ld.exe",
+      "bytes": 1927168,
+      "sha256": "755e3e1b73205fe543177eb50d912e6ef91fb2aa6b89dc62e704b157455078fc",
+      "PE_import_names": [
+        "KERNEL32.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll",
+        "api-ms-win-crt-utility-l1-1-0.dll",
+        "libwinpthread-1.dll"
+      ]
+    },
+    {
+      "root": "gcc",
+      "path": "bin/objdump.exe",
+      "bytes": 2622464,
+      "sha256": "26f516ba532bd2e2db9cfa109bc74f1ae3761fd115b36db23f09a086171d0766",
+      "PE_import_names": [
+        "KERNEL32.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll",
+        "api-ms-win-crt-utility-l1-1-0.dll",
+        "libwinpthread-1.dll"
+      ]
+    },
+    {
+      "root": "gcc",
+      "path": "bin/libwinpthread-1.dll",
+      "bytes": 57344,
+      "sha256": "7882d1b093714ccdfaf4e0789a8177920a2b812609949dcbcf7937c5618132d8",
+      "PE_import_names": [
+        "KERNEL32.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll"
+      ]
+    },
+    {
+      "root": "gcc",
+      "path": "bin/libgcc_s_seh-1.dll",
+      "bytes": 140800,
+      "sha256": "cf371c6aba2f71b2b95ebbfac8528ec9ccdd082efef2cbac498d56ffb2bb763c",
+      "PE_import_names": [
+        "KERNEL32.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "libwinpthread-1.dll"
+      ]
+    },
+    {
+      "root": "gcc",
+      "path": "bin/libstdc++-6.dll",
+      "bytes": 2320384,
+      "sha256": "3f17805de1ee74a71a0924f0b3e7ceccfa196ec7e96ea6be492ff96ae6950f2f",
+      "PE_import_names": [
+        "KERNEL32.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-private-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll",
+        "api-ms-win-crt-utility-l1-1-0.dll",
+        "libgcc_s_seh-1.dll",
+        "libwinpthread-1.dll"
+      ]
+    },
+    {
+      "root": "gcc",
+      "path": "lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o",
+      "bytes": 690,
+      "sha256": "e6001e03ffd44bb4b2fda556dbc1dc94e0f613254e40392c653e4aa13dcc084e"
+    },
+    {
+      "root": "gcc",
+      "path": "lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o",
+      "bytes": 891,
+      "sha256": "bd0bff8dd9f1eb4a01d8d351fdad19f4ea56b9c8d609130af392326688d3cdf3"
+    },
+    {
+      "root": "gcc",
+      "path": "lib/gcc/x86_64-w64-mingw32/15.2.0/libgcc.a",
+      "bytes": 6765052,
+      "sha256": "e5e0a24a413f8a719a2e47bc31b8de5d7cd74ca4f4b632eccbc89a1a88993360"
+    },
+    {
+      "root": "gcc",
+      "path": "lib/gcc/x86_64-w64-mingw32/15.2.0/libgcc_eh.a",
+      "bytes": 56668,
+      "sha256": "177866bd0a568c9df34863c1de1226ba4a097fe6f9efc1e40fd8a0f43a9846ac"
+    },
+    {
+      "root": "gcc",
+      "path": "x86_64-w64-mingw32/lib/dllcrt2.o",
+      "bytes": 4361,
+      "sha256": "ea68744ed35a3208775f05e258536fac02f8b224f9ef0bbca841707ff7ac8074"
+    },
+    {
+      "root": "gcc",
+      "path": "x86_64-w64-mingw32/lib/libmingw32.a",
+      "bytes": 40772,
+      "sha256": "019f48b1335229614fed9ea23f7bda0bd7fbf4d6051ebe0340fdd2f5259eeb40"
+    },
+    {
+      "root": "gcc",
+      "path": "x86_64-w64-mingw32/lib/libmingwex.a",
+      "bytes": 472294,
+      "sha256": "3718164cb28ea74d22932a8d0ce9f7b7cf952e19a8c280b341f3e7ae50445ecc"
+    },
+    {
+      "root": "gcc",
+      "path": "x86_64-w64-mingw32/lib/libmoldname.a",
+      "bytes": 516,
+      "sha256": "d97cc4a0f94494c21bf762f100ab3df73b901d3ec6f4ceda62b6cc6819818b65"
+    },
+    {
+      "root": "gcc",
+      "path": "x86_64-w64-mingw32/lib/libmsvcrt.a",
+      "bytes": 2067676,
+      "sha256": "32c29febc6a7370d20842b081d99f08a2370243955b7df49644dcf6cd56d93af"
+    },
+    {
+      "root": "gcc",
+      "path": "x86_64-w64-mingw32/lib/libkernel32.a",
+      "bytes": 1371942,
+      "sha256": "74b9127afa8a82b6df95c7b40ba87886a03d833734769c388f0f42de8b9837b2"
+    },
+    {
+      "root": "gcc",
+      "path": "x86_64-w64-mingw32/lib/libadvapi32.a",
+      "bytes": 694266,
+      "sha256": "6e252e1d794ccc975b189a5b3401dad4e1bb39d567d699f647d5d1791d4d4fe0"
+    },
+    {
+      "root": "gcc",
+      "path": "x86_64-w64-mingw32/lib/libshell32.a",
+      "bytes": 306596,
+      "sha256": "d37b47aef68e5e53ce33a5c08b209a99cd23f93fb32bf6e38014f36725bbefdd"
+    },
+    {
+      "root": "gcc",
+      "path": "x86_64-w64-mingw32/lib/libuser32.a",
+      "bytes": 756526,
+      "sha256": "67630b55e54113f5b81280f93ce3a8919a80e40ef8be8104397e9ac360a60a41"
+    },
+    {
+      "root": "gcc",
+      "path": "x86_64-w64-mingw32/lib/libpthread.a",
+      "bytes": 78024,
+      "sha256": "317bb6efb250e9a1c6496d748574ae29395d86eec05a62c6a03167f961b929bd"
+    },
+    {
+      "root": "jdk",
+      "path": "bin/java.exe",
+      "bytes": 54440,
+      "sha256": "d27c1a75edf380963c430232e93340eab4bd3694044976cff85421bf163b876c",
+      "PE_import_names": [
+        "KERNEL32.dll",
+        "VCRUNTIME140.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "jli.dll"
+      ]
+    },
+    {
+      "root": "jdk",
+      "path": "bin/javac.exe",
+      "bytes": 23720,
+      "sha256": "8a1d32f529ba4d01940194e3b06d14aff828e5d47f5f374ec88c81902fc3456f",
+      "PE_import_names": [
+        "KERNEL32.dll",
+        "VCRUNTIME140.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-locale-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "jli.dll"
+      ]
+    },
+    {
+      "root": "jdk",
+      "path": "bin/jli.dll",
+      "bytes": 91816,
+      "sha256": "33b86e462d579a01e8304bf1d1b0503c8fbe84a0f0eb25cc50f5150c65de495b",
+      "PE_import_names": [
+        "ADVAPI32.dll",
+        "COMCTL32.dll",
+        "KERNEL32.dll",
+        "USER32.dll",
+        "VCRUNTIME140.dll",
+        "VERSION.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll"
+      ]
+    },
+    {
+      "root": "jdk",
+      "path": "bin/java.dll",
+      "bytes": 121000,
+      "sha256": "4d948daf1b3be2c71d97d0bcc2610d6d10737269c9801d0f6647922627a4da6b",
+      "PE_import_names": [
+        "ADVAPI32.dll",
+        "KERNEL32.dll",
+        "VCRUNTIME140.dll",
+        "VERSION.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "jvm.dll"
+      ]
+    },
+    {
+      "root": "jdk",
+      "path": "bin/server/jvm.dll",
+      "bytes": 13374632,
+      "sha256": "d7111507268cba181af4d25565a664d54c5b53cff47f73e483744f706d9505ee",
+      "PE_import_names": [
+        "ADVAPI32.dll",
+        "KERNEL32.dll",
+        "POWRPROF.dll",
+        "USER32.dll",
+        "VCRUNTIME140.dll",
+        "VCRUNTIME140_1.dll",
+        "VERSION.dll",
+        "WINMM.dll",
+        "WS2_32.dll",
+        "api-ms-win-crt-convert-l1-1-0.dll",
+        "api-ms-win-crt-environment-l1-1-0.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-math-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "api-ms-win-crt-time-l1-1-0.dll",
+        "api-ms-win-crt-utility-l1-1-0.dll"
+      ]
+    },
+    {
+      "root": "jdk",
+      "path": "bin/jimage.dll",
+      "bytes": 33448,
+      "sha256": "b9d5e1e13c04126743eac0d46946d8eacd7f690473ec07234e061a5d226f9346",
+      "PE_import_names": [
+        "KERNEL32.dll",
+        "VCRUNTIME140.dll",
+        "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "jvm.dll"
+      ]
+    },
+    {
+      "root": "jdk",
+      "path": "bin/zip.dll",
+      "bytes": 89256,
+      "sha256": "fc87e553ea3ad1ac14c9538d623876674fd109d40c43ebbc7a9b01f4864c3971",
+      "PE_import_names": [
+        "KERNEL32.dll",
+        "VCRUNTIME140.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-stdio-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "java.dll",
+        "jvm.dll"
+      ]
+    },
+    {
+      "root": "jdk",
+      "path": "bin/verify.dll",
+      "bytes": 54952,
+      "sha256": "c13c08bf18b6d780618eb7cbb0aea33f3df258a191a6c2fd79380c8930aabf21",
+      "PE_import_names": [
+        "KERNEL32.dll",
+        "VCRUNTIME140.dll",
+        "api-ms-win-crt-heap-l1-1-0.dll",
+        "api-ms-win-crt-runtime-l1-1-0.dll",
+        "api-ms-win-crt-string-l1-1-0.dll",
+        "jvm.dll"
+      ]
+    },
+    {
+      "root": "jdk",
+      "path": "include/jni.h",
+      "bytes": 75021,
+      "sha256": "7c11817ffadcb8cb03d433aa9835e88e0d084300c66023de122d7b8aeee9f01d"
+    },
+    {
+      "root": "jdk",
+      "path": "include/win32/jni_md.h",
+      "bytes": 583,
+      "sha256": "a0d17d1d5dda93f81d723dcec4b9b0f47c8a5f9d2a1164f3fb3f9a882bb3cd34"
+    },
+    {
+      "root": "jdk",
+      "path": "lib/modules",
+      "bytes": 138252462,
+      "sha256": "3f407b6247e6025c69b1668f7358f163ad2c29c282d80bde2199527fb5b0bb6d"
+    },
+    {
+      "root": "jdk",
+      "path": "release",
+      "bytes": 1282,
+      "sha256": "8387c31dfd5b853ec8b58a0c3b08b2ad6abed2d40d1aba46d125f8a2420d1c14"
+    },
+    {
+      "root": "jdk",
+      "path": "bin/vcruntime140.dll",
+      "bytes": 109440,
+      "sha256": "69320f278d90efaaeb67e2a1b55e5b0543883125834c812c8d9c39676e0494fc"
+    },
+    {
+      "root": "jdk",
+      "path": "bin/vcruntime140_1.dll",
+      "bytes": 49560,
+      "sha256": "6fd366a691ed68430bcd0a3de3d8d19a0cb2102952bfc140bbef4354ed082c47"
+    }
+  ],
+  "python_launcher": {
+    "name": "Python312/python.exe",
+    "bytes": 103704,
+    "sha256": "737a7e3b71e3578f8432acc7dd88c452e593622c544bc13da4789d69c63da5ae"
+  },
+  "scope": "Static in-place candidate graph plus PE import names. These are not a full OS DLL closure or per-child loaded-image/cwd observations."
+}

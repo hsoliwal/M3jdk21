@@ -1,0 +1,4 @@
+m3	poms_oracle=51	poms_recipe=51	identical=51	different=0	rows_oracle=176	rows_recipe=176	rows_bytes_equal=True	oracle_rows_sha256=1497eeeac28d7ec7	recipe_rows_sha256=1497eeeac28d7ec7
+synexia	poms_oracle=10	poms_recipe=10	identical=10	different=0	rows_oracle=181	rows_recipe=181	rows_bytes_equal=True	oracle_rows_sha256=bba76d7e014d76cd	recipe_rows_sha256=bba76d7e014d76cd
+m3-preswitch	poms_oracle=51	poms_recipe=51	identical=51	different=0	rows_oracle=176	rows_recipe=176	rows_bytes_equal=True	oracle_rows_sha256=7c5e8411177ff21e	recipe_rows_sha256=7c5e8411177ff21e
+synexia-preswitch	poms_oracle=10	poms_recipe=10	identical=10	different=0	rows_oracle=178	rows_recipe=178	rows_bytes_equal=True	oracle_rows_sha256=b9022d5c53425db0	recipe_rows_sha256=b9022d5c53425db0

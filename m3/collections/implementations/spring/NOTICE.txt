@@ -1,0 +1,43 @@
+Spring Framework protocol adaptation
+Copyright 2002-2024 the original author or authors.
+LinkedMultiValueMap protocol portions: Copyright 2002-2020 the original author or authors.
+Owned M3 adaptation copyright 2026 Hitesh Soliwal and contributors.
+Apache License, Version 2.0; original Spring headers are retained in both source files.
+
+Donor: spring-projects/spring-framework 6.2.0 at
+5024bb72279188f1d0dcfe19e8abdd4bdb9887c8.
+MultiValueMapAdapter: 4c7c2f1d133cccef1eab060524a71cd3de4b45a9.
+MultiToSingleValueMapAdapter: 959a69b843ed0a0d5ce393b90ea7b4348d2df67e.
+LinkedMultiValueMap: 8faf71ea1ce0e705e84a04dfaaca82c03cc30241.
+MultiValueMap API: 262601a5a4aec430eb066a23b5571b7ffd80f8dd.
+
+Sealed first-party storage owners (unchanged):
+M3LinkedHashMap: ade59880b8c9b2bee1b32ae67ca9d29b7382d998.
+M3ArrayList: 250905f67429fbedfb4d6f652ea6e90a516cb59c.
+Main storage is an owned M3 directory plus M3ArrayList objects for lists it creates.
+Caller-supplied lists and shallow-copy/clone lists retain object aliases.
+deepCopy makes a distinct modifiable M3ArrayList for each mapping.
+
+Preserved protocol choices:
+- Basic map/views, putIfAbsent and forEach dispatch to the owned M3 directory.
+  compute/merge/replaceAll retain Map default dispatch.
+- asSingleValueMap returns a fresh owned live view with cached scalar collection views
+  and immutable entry snapshots; get adapts null/empty lists, while iterators and
+  forEach read list index zero and retain donor failure behavior.
+- Scalar-view equals examines first values; hashCode and toString use the raw
+  list-valued target map, retaining the pinned provider's observable quirk.
+- A private serializable one-element Object[] AbstractList/RandomAccess body is the
+  small uncovered delta: structural/set mutations unsupported; empty addAll false;
+  removeIf and replaceAll throw before callbacks, including null callbacks; sort
+  performs no callback. This follows root actual spring-preimage-01 observations.
+  No JDK/GPL singleton implementation source is copied.
+- M3 serialization has its own UID1/count/key/list envelope and validates count/value
+  types while preserving ObjectOutputStream graph aliases. No Spring wire/class
+  identity or concrete ArrayList capacity/revision/serialization identity is claimed.
+- Selective forEach delegation preserves the current Spring adapter backed by M3:
+  structural insertion reports the M3 immediate-revision callback trace/CME. The
+  concrete LinkedMultiValueMap linked-chain trace differs; root classified it as an
+  explicit structural-callback trace boundary after an actual runtime discriminator.
+The independent bodies do not subclass or instantiate Spring implementation helpers.
+Published adapters and sealed storage-owner signatures remain unchanged.
+Actual provider qualification belongs to the root-run oracle and source-byte receipts.

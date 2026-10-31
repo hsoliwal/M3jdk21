@@ -1,0 +1,95 @@
+{
+  "status": "FAIL_RETAINED_DONOR_COUNTEREXAMPLE",
+  "exit_code": 1,
+  "tests": 21,
+  "failures": 2,
+  "errors": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "name": "com.m3.eclipse.runtime.M3EclipseJobSchedulerTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.117"
+    },
+    {
+      "name": "com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest",
+      "tests": "4",
+      "failures": "2",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.021"
+    },
+    {
+      "name": "com.m3.eclipse.runtime.M3EclipseJobsTest",
+      "tests": "7",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.015"
+    },
+    {
+      "name": "com.m3.eclipse.runtime.M3EclipseProgressMonitorTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.006"
+    }
+  ],
+  "failure_fingerprints": [
+    {
+      "stage": "JAVA21_REAL_ECLIPSE_JUNIT",
+      "kind": "org.opentest4j.AssertionFailedError",
+      "test": "com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest.eclipseCancellationExceptionMatchesNativeJob",
+      "signature": "standard Eclipse OperationCanceledException must retain native CANCEL status ==> expected: <8> but was: <4>"
+    },
+    {
+      "stage": "JAVA21_REAL_ECLIPSE_JUNIT",
+      "kind": "org.opentest4j.AssertionFailedError",
+      "test": "com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest.synchronousEclipseCancellationIsNotAnError",
+      "signature": "runNow must recognize the Eclipse task cancellation signal ==> expected: <Status CANCEL: unknown code=1 > but was: <Status ERROR: com.m3.eclipse.runtime code=0 M3 task failed: synchronous cancellation org.eclipse.core.runtime.OperationCanceledException>"
+    }
+  ],
+  "frozen_inputs_sha256": "737097a025a14db8aec0dc52df7438d18d9a1a773ede889d99c490ef3a1f7485",
+  "all_input_readbacks_match": true,
+  "original_source_or_test_changes": 0,
+  "memory_event": "Real Eclipse Job and runNow cancellation diverge because donor catches OperationCanceledException as generic Exception. The native rule exclusion and never-started cancellation tests pass. Correction is confined to recognizing the Eclipse cancellation signal in the donor runNow catch; original failing evidence stays frozen.",
+  "report_files": [
+    {
+      "path": "target/surefire-reports/TEST-com.m3.eclipse.runtime.M3EclipseJobSchedulerTest.xml",
+      "sha256": "f5c778c0eaed8eeaa438b6610eb12486340a1a2c7f0bc091a2e82ecca5c461e9"
+    },
+    {
+      "path": "target/surefire-reports/TEST-com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest.xml",
+      "sha256": "3714f414dc7b8698a35df85d0aeb3b24061536b2b83c9c651ce77faba34224a8"
+    },
+    {
+      "path": "target/surefire-reports/TEST-com.m3.eclipse.runtime.M3EclipseJobsTest.xml",
+      "sha256": "2c0f20d7a1beb6eddac2257a084a57193765505a43a0fab37d1556159cb8895f"
+    },
+    {
+      "path": "target/surefire-reports/TEST-com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.xml",
+      "sha256": "a59ee028a5ac6a7f0392c76642badba7b9b3c844fdf972c8bd71d2d32c969288"
+    },
+    {
+      "path": "target/surefire-reports/com.m3.eclipse.runtime.M3EclipseJobSchedulerTest.txt",
+      "sha256": "fddfed7d5f6c526c239dbeac35840f7365b3f40fa6ba08747858906f16def53b"
+    },
+    {
+      "path": "target/surefire-reports/com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest.txt",
+      "sha256": "a54d9c383d75ae9115700e9d0bcf3b368cca5622d0127b8a684c4448d40fe161"
+    },
+    {
+      "path": "target/surefire-reports/com.m3.eclipse.runtime.M3EclipseJobsTest.txt",
+      "sha256": "37052f096b3aaab141b0485ce090de31a0440976eb07a65bbd57e4c6fe9bd948"
+    },
+    {
+      "path": "target/surefire-reports/com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.txt",
+      "sha256": "3df0ba0a9eb24663cd9c3dc2d592ad5d98f936e764c1b2f15638268ade096c59"
+    }
+  ],
+  "log_sha256": "1b6e0c8d7ebfde301d6b127a1bc7d66c0c793f07bcb1644c0f02e1e38074f275"
+}

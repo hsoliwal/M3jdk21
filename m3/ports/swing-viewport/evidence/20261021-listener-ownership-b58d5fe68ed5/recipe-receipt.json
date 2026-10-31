@@ -1,0 +1,268 @@
+{
+  "schema": "M3_MOP_TARGET_RECEIPT_V1",
+  "task": "mop-continuation-20261021",
+  "component": "swing",
+  "dataset": "swing-binding-20261021",
+  "phase": "STRING_QUALIFICATION",
+  "status": "FINITE_SDK_AND_RECEIVER_QUALIFIED",
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "qualified_source_baseline": "de5e0d18fa602c902b6164c6941938f6b2b6275d",
+    "publication_parent": "a62eacad46b51ce757ded74579f1ad2aabc4d638",
+    "before_hashes_are_qualified_source_preconditions": true
+  },
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "visibility": "private",
+    "commit": "b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5",
+    "pull_request": "https://github.com/hsoliwal/com.synexia/pull/12772",
+    "recipe": "com.synexia.m3jdk.AstBuildReverse20261017",
+    "qualified_engine_input_revision": "a78f94f5f6377b108effdbde3ce492eec4f53d5e"
+  },
+  "outputs": [
+    {
+      "path": "m3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3ViewportBinding.java",
+      "before_sha256": "94101f8fe12a9dc4d5856fc3aff1006fbbd5722cbca17b7cede65b3d5a669b21",
+      "after_sha256": "3f1de78a3128d0aeba6ca0c13efb40e4c90a7cf04df54e5a00f063624bcffffe",
+      "mode": "100644",
+      "bytes": 3012,
+      "git_blob": "ed19d6f1117f92fa2ae23b39c955e54cb376c45b"
+    },
+    {
+      "path": "m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3ViewportBindingTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "74d05c09aaad9090fc79218dbdcbcd1a83dd45f5d0db7e96519fee164e7e13e5",
+      "mode": "100644",
+      "bytes": 10168,
+      "git_blob": "552078d296b9b8cf2c9d8932c205774391c6fa6c"
+    }
+  ],
+  "artifacts": {
+    "publication_scope": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/enhancements/mop-continuation-20261021/PUBLICATION_SCOPE.json",
+      "sha256": "73ba341ab938a3f61d3706a4424ed55df69b57a8bc1b19d6e938cb6fb78047a4",
+      "bytes": 2265,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/enhancements/mop-continuation-20261021/PUBLICATION_SCOPE.json"
+    },
+    "dataset": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/DATASET.json",
+      "sha256": "d9283c44404b484981dc4c75ae1e934bdde07e91d0367b5b76fc076f67ecc3e5",
+      "bytes": 754,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/DATASET.json"
+    },
+    "modes": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/MODES.tsv",
+      "sha256": "1353e73feab6fb40ef83f0fe612951899b060cfb3f31179b5bd55149232a7b4d",
+      "bytes": 180,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/MODES.tsv"
+    },
+    "effective_engine": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/ENGINE_EFFECTIVE.tsv",
+      "sha256": "cfabbbf3804e852a62ea1ba00fb2f63028752d18b217144401b6bee5fb7be0ee",
+      "bytes": 747,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/ENGINE_EFFECTIVE.tsv"
+    },
+    "sdk_inputs": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/sdk/SDK_INPUTS.tsv",
+      "sha256": "7e290e29a567f65aff0a92e088974135bf1d2ffe69f059d794a2142ac1115d53",
+      "bytes": 2503,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/sdk/SDK_INPUTS.tsv"
+    },
+    "sdk_results": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/sdk/SDK_RESULTS.tsv",
+      "sha256": "2e92b3a01df80bc90f7dcf1f9bbfc30c7511ccd8c759badc64bb04f8fa0ece5a",
+      "bytes": 432,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/sdk/SDK_RESULTS.tsv"
+    },
+    "qualification": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/QUALIFICATION.json",
+      "sha256": "dd2dac7e48798380e9d230799fddb4a449c96300dd25717aa4256c079507206c",
+      "bytes": 2601,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/QUALIFICATION.json"
+    },
+    "runtime_evidence": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/preparation/evidence/received-qualification/QUALIFICATION.json",
+      "sha256": "42bfd126212ff5b96e8bf6e9228728c94206d4d6761507c926102f14d9988834",
+      "bytes": 1685,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/preparation/evidence/received-qualification/QUALIFICATION.json"
+    },
+    "strict_memory": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/memory/mop-continuation-20261021/RECIPE_MEMORY.tsv",
+      "sha256": "528a652d1d0726eba793304061dd6a80c7bdc03d9d488450afe05debcef8b9d7",
+      "bytes": 7140,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/memory/mop-continuation-20261021/RECIPE_MEMORY.tsv"
+    },
+    "correction_patch": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/sdk/combined.patch",
+      "sha256": "2e5965337334eabf7f94ca3f5913d3c009c5ddcbbbb7a689b0fbb3c72cc7b1a8",
+      "bytes": 12776,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/sdk/combined.patch"
+    },
+    "guard": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/0002-M3ViewportBindingTest.java.txt",
+      "sha256": "74d05c09aaad9090fc79218dbdcbcd1a83dd45f5d0db7e96519fee164e7e13e5",
+      "bytes": 10168,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/0002-M3ViewportBindingTest.java.txt"
+    },
+    "memory_proof": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/M3_RECIPE_PROOF.tsv",
+      "sha256": "97c981902cbd2419f1aa15f5d3a4adfc5a70c5a60c7968f1307089762ea7c79f",
+      "bytes": 231,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/M3_RECIPE_PROOF.tsv"
+    },
+    "memory_admission": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/memory/mop-continuation-20261021/swing-binding-20261021.json",
+      "sha256": "b785a78d38d727e77ed146d7b275113913452c61dd920fc435800f4ed6e588a7",
+      "bytes": 2460,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/memory/mop-continuation-20261021/swing-binding-20261021.json"
+    },
+    "sdk_test_report": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/sdk/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "sha256": "651e44d1d2530e0257063db9921d261411d9e23abcd638fb9909b91ade98a780",
+      "bytes": 18848,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/sdk/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+    },
+    "receiver_apply": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/sdk/receiver-apply.log",
+      "sha256": "4e4b96bb46306ee6a40e3fed9f94816b241541c7cf2502b0e593434c45c0eee4",
+      "bytes": 138,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/sdk/receiver-apply.log"
+    },
+    "receiver_fixed_point": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/sdk/receiver-fixed-point.log",
+      "sha256": "3ea2147ad42bd761fe75c794aed0d3ca0f2374e4d79801e972bdd2545a839345",
+      "bytes": 138,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/sdk/receiver-fixed-point.log"
+    }
+  },
+  "recipe_input_seals": [
+    {
+      "sdk_input": "crate/ENGINE_SOURCES.tsv",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/ENGINE_SOURCES.tsv",
+      "sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e"
+    },
+    {
+      "sdk_input": "crate/datasets/swing-binding-20261021/DATASET.json",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/DATASET.json",
+      "sha256": "d9283c44404b484981dc4c75ae1e934bdde07e91d0367b5b76fc076f67ecc3e5"
+    },
+    {
+      "sdk_input": "crate/datasets/swing-binding-20261021/ENGINE_EFFECTIVE.tsv",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/ENGINE_EFFECTIVE.tsv",
+      "sha256": "cfabbbf3804e852a62ea1ba00fb2f63028752d18b217144401b6bee5fb7be0ee"
+    },
+    {
+      "sdk_input": "crate/datasets/swing-binding-20261021/MODES.tsv",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/MODES.tsv",
+      "sha256": "1353e73feab6fb40ef83f0fe612951899b060cfb3f31179b5bd55149232a7b4d"
+    },
+    {
+      "sdk_input": "crate/datasets/swing-binding-20261021/resources/META-INF/rewrite/m3-ast-build-reverse-20261017-swing-binding-20261021.yml",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/resources/META-INF/rewrite/m3-ast-build-reverse-20261017-swing-binding-20261021.yml",
+      "sha256": "b4c48b33e9bd926199a8e813411865faafe45b05f8fe7694bdc0f9af4b7cef02"
+    },
+    {
+      "sdk_input": "crate/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/0001-M3ViewportBinding.java.txt",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/0001-M3ViewportBinding.java.txt",
+      "sha256": "3f1de78a3128d0aeba6ca0c13efb40e4c90a7cf04df54e5a00f063624bcffffe"
+    },
+    {
+      "sdk_input": "crate/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/0002-M3ViewportBindingTest.java.txt",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/0002-M3ViewportBindingTest.java.txt",
+      "sha256": "74d05c09aaad9090fc79218dbdcbcd1a83dd45f5d0db7e96519fee164e7e13e5"
+    },
+    {
+      "sdk_input": "crate/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/manifest.tsv",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/manifest.tsv",
+      "sha256": "85a4bfcb529c1a00fb92bd88113e43eff47345110ab4a886053d608c2c3d7e37"
+    },
+    {
+      "sdk_input": "crate/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/pre/0001-M3ViewportBinding.java.txt",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/pre/0001-M3ViewportBinding.java.txt",
+      "sha256": "94101f8fe12a9dc4d5856fc3aff1006fbbd5722cbca17b7cede65b3d5a669b21"
+    },
+    {
+      "sdk_input": "crate/pom.xml",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/pom.xml",
+      "sha256": "56567ab0175c47dbbada68bec8fe0fd9bbe027d6174c5cefef695a0b7283d448"
+    },
+    {
+      "sdk_input": "crate/prepare.py",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/prepare.py",
+      "sha256": "4a585b670e5d9defab8e7d63d6fc80508321d0b0e750a15b667cbe6ee14eefc4"
+    },
+    {
+      "sdk_input": "crate/receive.py",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/receive.py",
+      "sha256": "5d9df3c2623c21c43ade4cbfcbe459026af3983e1d2b21018397dc12e775898a"
+    },
+    {
+      "sdk_input": "crate/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
+    },
+    {
+      "sdk_input": "owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    },
+    {
+      "sdk_input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "595ab8c4314de4f84708b3ec081fbef375e534787e5684ee98131ee16ab397b8"
+    },
+    {
+      "sdk_input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "c4517401a7defd94ecc621bb2c19773bd6672c8fa3ee965c1ad37a63718bd92a"
+    },
+    {
+      "sdk_input": "owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+    }
+  ],
+  "sdk": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "receiver": {
+    "actual_sdk_results": true,
+    "apply_changes": 2,
+    "fixed_point_changes": 0,
+    "received_bytes_match_sdk_output_hashes": true
+  },
+  "runtime": {
+    "baseline_failures": 7,
+    "baseline_frozen_tests": 10,
+    "desktop_proof_assertions_per_variant": 20,
+    "native_ui": "NOT_RUN",
+    "original_module_maven_pom": "NOT_RUN; pinned custom JUnit coordinate unchanged",
+    "original_tests": 17,
+    "public_protected_api": "UNCHANGED",
+    "received_tests": 27
+  },
+  "admitted_correction": {
+    "correction": "SELF@synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/swing-binding-20261021/sdk/combined.patch#2e5965337334eabf7f94ca3f5913d3c009c5ddcbbbb7a689b0fbb3c72cc7b1a8",
+    "guard": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-binding-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-binding-20261021/0002-M3ViewportBindingTest.java.txt",
+    "utc": "2026-10-21T06:50:19.748338Z",
+    "trigger": "ui/lifecycle/listener-ownership",
+    "lesson": "Record which direct viewport owns a listener and detach that registration on reparenting or removal. Preserve the original same-parent remove/add refresh: eliminating it changes listener dispatch order. Retain hidden deferral, showing geometry, EDT behavior and unrelated listeners; no new public disposal API is needed.",
+    "admission_implementation_sha256": "d26260c27d1ac4f4789fc130a400ebc198d85b65f75bdcaa43e670d91fb2e976"
+  },
+  "limits": [
+    "No full source-built M3JDK21 image, jtreg/JCK or cross-platform qualification.",
+    "No new JNI declarations or native implementation change; scoped native-backed I/O is not a native-engine gate.",
+    "No performance claim or phase promotion; retain STRING_QUALIFICATION."
+  ],
+  "unrun_broader_gates": {
+    "full_sdk_reactor": true,
+    "full_source_built_jdk_image": true,
+    "jtreg_or_jck": true,
+    "cross_platform": true,
+    "m3fs_native_engine": true
+  },
+  "payload_verification_scope": "Local received bytes, canonical input seals, SDK test/receiver records, and strict memory/proof bindings checked. Publication-parent source admission and remote commit verification are performed by the publisher; this generator makes no network or Git calls."
+}

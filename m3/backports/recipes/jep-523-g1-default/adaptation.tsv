@@ -1,0 +1,16 @@
+field	value
+jep	523
+issue	JDK-8383856
+upstream_commit	86637704fd01493ddb57e455dbd1e35e4798237d
+upstream_parent	50deb1712c62b64937a996e8d025b32d400a2ba8
+product_path	src/hotspot/share/gc/shared/gcConfig.cpp
+test_path	test/hotspot/jtreg/gc/arguments/TestSelectDefaultGC.java
+product_strategy	VERBATIM_LOGIC_MINIMAL_JDK21_CONTEXT
+test_strategy	JDK21_EXISTING_TEST_ADAPTED_TO_NEW_DEFAULT_POLICY
+java_language_change	false
+classfile_change	false
+public_java_api_change	false
+explicit_gc_options_preserved	true
+g1_excluded_fallback_preserved	true
+promotion_authority	false
+status	CANDIDATE_ADAPTED_UNVERIFIED

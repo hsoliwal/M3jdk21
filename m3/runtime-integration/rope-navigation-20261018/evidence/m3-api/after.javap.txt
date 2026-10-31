@@ -1,0 +1,458 @@
+Compiled from "M3String.java"
+final class java.lang.M3String$CharsSpliterator implements java.util.Spliterator$OfInt {
+  public java.util.Spliterator$OfInt trySplit();
+    descriptor: ()Ljava/util/Spliterator$OfInt;
+
+  public boolean tryAdvance(java.util.function.IntConsumer);
+    descriptor: (Ljava/util/function/IntConsumer;)Z
+
+  public void forEachRemaining(java.util.function.IntConsumer);
+    descriptor: (Ljava/util/function/IntConsumer;)V
+
+  public long estimateSize();
+    descriptor: ()J
+
+  public int characteristics();
+    descriptor: ()I
+
+  public void forEachRemaining(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)V
+
+  public boolean tryAdvance(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public java.util.Spliterator$OfPrimitive trySplit();
+    descriptor: ()Ljava/util/Spliterator$OfPrimitive;
+
+  public java.util.Spliterator trySplit();
+    descriptor: ()Ljava/util/Spliterator;
+}
+Compiled from "M3String.java"
+final class java.lang.M3String$CodePointsSpliterator implements java.util.Spliterator$OfInt {
+  public java.util.Spliterator$OfInt trySplit();
+    descriptor: ()Ljava/util/Spliterator$OfInt;
+
+  public boolean tryAdvance(java.util.function.IntConsumer);
+    descriptor: (Ljava/util/function/IntConsumer;)Z
+
+  public void forEachRemaining(java.util.function.IntConsumer);
+    descriptor: (Ljava/util/function/IntConsumer;)V
+
+  public long estimateSize();
+    descriptor: ()J
+
+  public int characteristics();
+    descriptor: ()I
+
+  public void forEachRemaining(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)V
+
+  public boolean tryAdvance(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public java.util.Spliterator$OfPrimitive trySplit();
+    descriptor: ()Ljava/util/Spliterator$OfPrimitive;
+
+  public java.util.Spliterator trySplit();
+    descriptor: ()Ljava/util/Spliterator;
+}
+Compiled from "M3String.java"
+final class java.lang.M3String$CodeUnitCursor {
+}
+Compiled from "M3String.java"
+final class java.lang.M3String implements java.lang.CharSequence {
+  public int length();
+    descriptor: ()I
+
+  public char charAt(int);
+    descriptor: (I)C
+
+  public java.lang.M3String subSequence(int, int);
+    descriptor: (II)Ljava/lang/M3String;
+
+  public java.lang.CharSequence subSequence(int, int);
+    descriptor: (II)Ljava/lang/CharSequence;
+}
+Compiled from "M3StringAffixPrecompute.java"
+final class java.lang.M3StringAffixPrecompute$Range extends java.lang.Record {
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public int from();
+    descriptor: ()I
+
+  public int to();
+    descriptor: ()I
+}
+Compiled from "M3StringAffixPrecompute.java"
+final class java.lang.M3StringAffixPrecompute {
+}
+Compiled from "M3StringAtom.java"
+final class java.lang.M3StringAtom extends java.lang.M3StringOwner {
+}
+Compiled from "M3StringCodePointPrecompute.java"
+final class java.lang.M3StringCodePointPrecompute$Entry {
+}
+Compiled from "M3StringCodePointPrecompute.java"
+final class java.lang.M3StringCodePointPrecompute$Geometry {
+}
+Compiled from "M3StringCodePointPrecompute.java"
+final class java.lang.M3StringCodePointPrecompute {
+}
+Compiled from "M3StringFacts.java"
+final class java.lang.M3StringFacts {
+}
+Compiled from "M3StringOwner.java"
+final class java.lang.M3StringOwner$RangeFact {
+}
+Compiled from "M3StringOwner.java"
+abstract class java.lang.M3StringOwner {
+}
+Compiled from "M3StringPool.java"
+final class java.lang.M3StringPool$Fingerprint extends java.lang.Record {
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public byte coder();
+    descriptor: ()B
+
+  public int byteLength();
+    descriptor: ()I
+
+  public long hash64();
+    descriptor: ()J
+}
+Compiled from "M3StringPool.java"
+final class java.lang.M3StringPool$LeafCursor {
+}
+Compiled from "M3StringPool.java"
+final class java.lang.M3StringPool$Lexicon {
+}
+Compiled from "M3StringPool.java"
+final class java.lang.M3StringPool$LocalBucket {
+}
+Compiled from "M3StringPool.java"
+final class java.lang.M3StringPool$LocalRef extends java.lang.ref.WeakReference<java.lang.M3StringAtom> {
+}
+Compiled from "M3StringPool.java"
+final class java.lang.M3StringPool$TupleBucket {
+}
+Compiled from "M3StringPool.java"
+final class java.lang.M3StringPool$TupleRef extends java.lang.ref.WeakReference<java.lang.M3StringTuple> {
+}
+Compiled from "M3StringPool.java"
+final class java.lang.M3StringPool {
+}
+Compiled from "M3StringPositionPrecompute.java"
+final class java.lang.M3StringPositionPrecompute$Blocks {
+}
+Compiled from "M3StringPositionPrecompute.java"
+final class java.lang.M3StringPositionPrecompute$Entry {
+}
+Compiled from "M3StringPositionPrecompute.java"
+final class java.lang.M3StringPositionPrecompute$ExactBlock {
+}
+Compiled from "M3StringPositionPrecompute.java"
+final class java.lang.M3StringPositionPrecompute {
+}
+Compiled from "M3StringPrecomputeBridge.java"
+final class java.lang.M3StringPrecomputeBridge {
+}
+Compiled from "M3StringProjection.java"
+final class java.lang.M3StringProjection$Bitmap implements java.lang.M3StringProjection$Geometry {
+  public java.lang.M3StringProjection$Kind kind();
+    descriptor: ()Ljava/lang/M3StringProjection$Kind;
+
+  public int length();
+    descriptor: ()I
+
+  public int sourceIndexAt(int);
+    descriptor: (I)I
+
+  public void copy(java.lang.CharSequence, int, int, char[], int);
+    descriptor: (Ljava/lang/CharSequence;II[CI)V
+}
+Compiled from "M3StringProjection.java"
+interface java.lang.M3StringProjection$Geometry {
+  public abstract int length();
+    descriptor: ()I
+
+  public abstract java.lang.M3StringProjection$Kind kind();
+    descriptor: ()Ljava/lang/M3StringProjection$Kind;
+
+  public abstract int sourceIndexAt(int);
+    descriptor: (I)I
+
+  public abstract void copy(java.lang.CharSequence, int, int, char[], int);
+    descriptor: (Ljava/lang/CharSequence;II[CI)V
+}
+Compiled from "M3StringProjection.java"
+final class java.lang.M3StringProjection$Kind extends java.lang.Enum<java.lang.M3StringProjection$Kind> {
+  public static final java.lang.M3StringProjection$Kind EMPTY;
+    descriptor: Ljava/lang/M3StringProjection$Kind;
+  public static final java.lang.M3StringProjection$Kind IDENTITY;
+    descriptor: Ljava/lang/M3StringProjection$Kind;
+  public static final java.lang.M3StringProjection$Kind RANGE;
+    descriptor: Ljava/lang/M3StringProjection$Kind;
+  public static final java.lang.M3StringProjection$Kind RUNS;
+    descriptor: Ljava/lang/M3StringProjection$Kind;
+  public static final java.lang.M3StringProjection$Kind BITMAP;
+    descriptor: Ljava/lang/M3StringProjection$Kind;
+  public static java.lang.M3StringProjection$Kind[] values();
+    descriptor: ()[Ljava/lang/M3StringProjection$Kind;
+
+  public static java.lang.M3StringProjection$Kind valueOf(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/M3StringProjection$Kind;
+}
+Compiled from "M3StringProjection.java"
+final class java.lang.M3StringProjection$LiteralPlan {
+}
+Compiled from "M3StringProjection.java"
+final class java.lang.M3StringProjection$Range extends java.lang.Record implements java.lang.M3StringProjection$Geometry {
+  public int sourceIndexAt(int);
+    descriptor: (I)I
+
+  public void copy(java.lang.CharSequence, int, int, char[], int);
+    descriptor: (Ljava/lang/CharSequence;II[CI)V
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public java.lang.M3StringProjection$Kind kind();
+    descriptor: ()Ljava/lang/M3StringProjection$Kind;
+
+  public int start();
+    descriptor: ()I
+
+  public int length();
+    descriptor: ()I
+}
+Compiled from "M3StringProjection.java"
+final class java.lang.M3StringProjection$Runs implements java.lang.M3StringProjection$Geometry {
+  public java.lang.M3StringProjection$Kind kind();
+    descriptor: ()Ljava/lang/M3StringProjection$Kind;
+
+  public int length();
+    descriptor: ()I
+
+  public int sourceIndexAt(int);
+    descriptor: (I)I
+
+  public void copy(java.lang.CharSequence, int, int, char[], int);
+    descriptor: (Ljava/lang/CharSequence;II[CI)V
+}
+Compiled from "M3StringProjection.java"
+final class java.lang.M3StringProjection implements java.lang.CharSequence {
+  public int length();
+    descriptor: ()I
+
+  public char charAt(int);
+    descriptor: (I)C
+
+  public java.lang.M3StringProjection subSequence(int, int);
+    descriptor: (II)Ljava/lang/M3StringProjection;
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.CharSequence subSequence(int, int);
+    descriptor: (II)Ljava/lang/CharSequence;
+}
+Compiled from "M3StringRegexDp.java"
+final class java.lang.M3StringRegexDp$Effect extends java.lang.Record {
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public java.lang.ref.WeakReference<java.lang.M3StringOwner> owner();
+    descriptor: ()Ljava/lang/ref/WeakReference;
+
+  public long coordinate();
+    descriptor: ()J
+
+  public java.lang.M3StringRegexDp$Plan plan();
+    descriptor: ()Ljava/lang/M3StringRegexDp$Plan;
+
+  public long incoming();
+    descriptor: ()J
+
+  public long outgoing();
+    descriptor: ()J
+}
+Compiled from "M3StringRegexDp.java"
+final class java.lang.M3StringRegexDp$Plan {
+}
+Compiled from "M3StringRegexDp.java"
+final class java.lang.M3StringRegexDp$Tables {
+}
+Compiled from "M3StringRegexDp.java"
+final class java.lang.M3StringRegexDp {
+}
+Compiled from "M3StringRegexRowPrecompute.java"
+final class java.lang.M3StringRegexRowPrecompute$Prepared {
+}
+Compiled from "M3StringRegexRowPrecompute.java"
+final class java.lang.M3StringRegexRowPrecompute$Shape extends java.lang.Enum<java.lang.M3StringRegexRowPrecompute$Shape> {
+  public static final java.lang.M3StringRegexRowPrecompute$Shape GENERIC;
+    descriptor: Ljava/lang/M3StringRegexRowPrecompute$Shape;
+  public static final java.lang.M3StringRegexRowPrecompute$Shape EXACT_LITERAL;
+    descriptor: Ljava/lang/M3StringRegexRowPrecompute$Shape;
+  public static final java.lang.M3StringRegexRowPrecompute$Shape PREFIX_LITERAL;
+    descriptor: Ljava/lang/M3StringRegexRowPrecompute$Shape;
+  public static final java.lang.M3StringRegexRowPrecompute$Shape SUFFIX_LITERAL;
+    descriptor: Ljava/lang/M3StringRegexRowPrecompute$Shape;
+  public static final java.lang.M3StringRegexRowPrecompute$Shape CONTAINS_LITERAL;
+    descriptor: Ljava/lang/M3StringRegexRowPrecompute$Shape;
+  public static java.lang.M3StringRegexRowPrecompute$Shape[] values();
+    descriptor: ()[Ljava/lang/M3StringRegexRowPrecompute$Shape;
+
+  public static java.lang.M3StringRegexRowPrecompute$Shape valueOf(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/M3StringRegexRowPrecompute$Shape;
+}
+Compiled from "M3StringRegexRowPrecompute.java"
+final class java.lang.M3StringRegexRowPrecompute {
+}
+Compiled from "M3StringRepresentationPlan.java"
+final class java.lang.M3StringRepresentationPlan$Kind extends java.lang.Enum<java.lang.M3StringRepresentationPlan$Kind> {
+  public static final java.lang.M3StringRepresentationPlan$Kind EMPTY;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind SCALAR;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind LATIN1;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind UTF16;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind SHARED_LEXICON;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind LOCAL_ATOM;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind RANGE;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind SUBSTRING;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind TUPLE;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind BALANCED_DAG;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind REPEAT;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind RUNS;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind BITMAP;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind MASKED;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind SPARSE_EDITS;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind REPLACEMENT;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind CASE_MASK;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind REVERSE_CURSOR;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind FORWARD_CURSOR;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind COMPILED_LITERAL;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind REGEX_EFFECT;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind PREFIX_INDEX;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind SUFFIX_INDEX;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind TOKENIZED;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind CODE_POINT;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static final java.lang.M3StringRepresentationPlan$Kind MAPPED;
+    descriptor: Ljava/lang/M3StringRepresentationPlan$Kind;
+  public static java.lang.M3StringRepresentationPlan$Kind[] values();
+    descriptor: ()[Ljava/lang/M3StringRepresentationPlan$Kind;
+
+  public static java.lang.M3StringRepresentationPlan$Kind valueOf(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/M3StringRepresentationPlan$Kind;
+}
+Compiled from "M3StringRepresentationPlan.java"
+final class java.lang.M3StringRepresentationPlan$Selection extends java.lang.Record {
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public java.lang.M3StringRepresentationPlan$Kind kind();
+    descriptor: ()Ljava/lang/M3StringRepresentationPlan$Kind;
+
+  public int visibleLength();
+    descriptor: ()I
+
+  public int firstSourceIndex();
+    descriptor: ()I
+
+  public int lastSourceIndex();
+    descriptor: ()I
+
+  public int runs();
+    descriptor: ()I
+
+  public long metadataBytes();
+    descriptor: ()J
+}
+Compiled from "M3StringRepresentationPlan.java"
+final class java.lang.M3StringRepresentationPlan {
+}
+Compiled from "M3StringSearchPrecompute.java"
+final class java.lang.M3StringSearchPrecompute$CursorCharSequence implements java.lang.CharSequence {
+  public int length();
+    descriptor: ()I
+
+  public char charAt(int);
+    descriptor: (I)C
+
+  public java.lang.CharSequence subSequence(int, int);
+    descriptor: (II)Ljava/lang/CharSequence;
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+}
+Compiled from "M3StringSearchPrecompute.java"
+final class java.lang.M3StringSearchPrecompute$Entry {
+}
+Compiled from "M3StringSearchPrecompute.java"
+final class java.lang.M3StringSearchPrecompute$Plan {
+}
+Compiled from "M3StringSearchPrecompute.java"
+final class java.lang.M3StringSearchPrecompute$SourceEntry {
+}
+Compiled from "M3StringSearchPrecompute.java"
+final class java.lang.M3StringSearchPrecompute {
+}
+Compiled from "M3StringTuple.java"
+final class java.lang.M3StringTuple extends java.lang.M3StringOwner {
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "M3_AST_PLUGIN_SELECTION_RUNTIME_RECEIPT_V1",
+  "status": "PASS",
+  "inputs": {
+    "schema": "M3_AST_PLUGIN_SELECTION_IMAGE_TEST_V1",
+    "image_build_receipt": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/BUILD_RECEIPT.json",
+    "image_build_receipt_sha256": "4195b08a5a5ebde1ef0325c6d9eb49abfaacc4674160f999aab3926461d61827",
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/test/langtools/tools/javac/m3/M3ASTPluginSelectionTest.java",
+    "source_sha256": "34efbf105a3a3c7f37a6d67d11e480abd7c4ef84bef1992892613c94b28625b7",
+    "image": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/candidate/image",
+    "compiler_sha256": "55859b80e7a9c4c4736be19ad3addeb35112ca6d17a30c4e0e116afc0a499bdb",
+    "java_sha256": "2a207f5e7d075afa01d97f8048389a64432a44c4a5af0f5e77d6e286ec5f401d",
+    "modules_sha256": "bea61bf4bf15cc270e23764db6ad70e86b5b4092ca05ebc5bca57a23d2b157f7"
+  },
+  "compile_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "runtime_log_sha256": "e5cfa5977608bf177434ff06ae2f7711d3f436fb4505f60a97a50dc2dbc72b48",
+  "output": "M3_AST_PLUGIN_SELECTION checks=462 cases=24\n",
+  "classfiles": [
+    {
+      "path": "M3ASTPluginSelectionTest$ForeignTask.class",
+      "sha256": "be5b6061d589ecfeddd21256c4bc0a0c0b8fd5c9b9aa46d4a40c3206c351a1db"
+    },
+    {
+      "path": "M3ASTPluginSelectionTest$Input.class",
+      "sha256": "1c4536e58118cbd04df6678e2160939546c32013a8c5727c55f39f4707fe4409"
+    },
+    {
+      "path": "M3ASTPluginSelectionTest.class",
+      "sha256": "e35e34cbe00496fd9425965da1049a505ac058e1d1e9bc0ada2374c4432ca3be"
+    }
+  ]
+}

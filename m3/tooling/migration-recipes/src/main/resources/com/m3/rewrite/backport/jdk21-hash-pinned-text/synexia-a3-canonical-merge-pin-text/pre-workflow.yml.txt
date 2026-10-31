@@ -1,0 +1,85 @@
+name: M3 A3 portable mastery gate Java 21
+
+on:
+  push:
+    branches:
+      - 'm3/a3-portable-mastery-gate-20261007'
+    paths:
+      - 'm3/tooling/a3/**'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-*.yml'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/synexia-a3-*/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/synexia-a3-*/**'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3A3*.java'
+      - '.github/workflows/m3-a3-portable-mastery-gate-java21.yml'
+  pull_request:
+    paths:
+      - 'm3/tooling/a3/**'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-*.yml'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/synexia-a3-*/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/synexia-a3-*/**'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3A3*.java'
+      - '.github/workflows/m3-a3-portable-mastery-gate-java21.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout M3JDK21 candidate
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Checkout exact Synexia canonical-owner candidate
+        uses: actions/checkout@v5
+        with:
+          repository: hsoliwal/com.synexia
+          ref: 3357736011d1d3e3173433d1a8bdb2795f71599e
+          path: _synexia
+          fetch-depth: 1
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: 1 diff hygiene
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check "$BASE_SHA...HEAD"
+
+      - name: 2 build exact Synexia slim A3 artifact
+        run: >
+          mvn -B -ntp
+          -f _synexia/synexia-openrewrite-recipes/pom-jdk-a3-export.xml
+          clean install
+
+      - name: 3 prove receiver authority and mastery-gate recipes
+        run: >
+          mvn -B -ntp
+          -f m3/pom.xml
+          -pl tooling/migration-recipes
+          -Dtest=M3A3ReceiverMainAuthorityRecipeTest,M3A3SynexiaReceiverAuthorityTest,M3A3PortableMasteryGateRecipeTest
+          -Dsurefire.failIfNoSpecifiedTests=false
+          test
+
+      - name: 4 compile and test A3 mastery receiver
+        run: >
+          mvn -B -ntp
+          -f m3/pom.xml
+          -pl tooling/a3
+          -am
+          -Dtest=A3RecipeHomeTest,A3MasteryTest,A3ApplyTest
+          -Dsurefire.failIfNoSpecifiedTests=false
+          test

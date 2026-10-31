@@ -1,0 +1,2 @@
+phase	kind	targets	manifest_sha256	before_root	after_root	missing_refusals	drift_refusals	duplicate_refusal	fixed_point	mixed	order	repeat	decoys	workers	cycles
+m3-maven4-effective-20261021-004	text	1	0ad64ff6bdcf4f4bc4631efc8b4a3861196cfd811c19fc55f0737e074bd3b7ce	e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855	2265294ff64c2fcbf98f951714e58b989ed3711d6ce51037a67aecabe8b8fb4e	0	1	PASS	PASS	PASS	PASS	PASS	PASS	2	1

@@ -1,0 +1,22 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.yaml.ChangeValue"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 52
+- name: "traceyyoshima"
+  email: "tracey.yoshima@gmail.com"
+  lineCount: 9
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 5
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 5
+- name: "Mike Solomon"
+  email: "mike@moderne.io"
+  lineCount: 3
+- name: "Aaron Gershman"
+  email: "5619476+aegershman@users.noreply.github.com"
+  lineCount: 2

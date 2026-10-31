@@ -1,0 +1,11 @@
+# Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3NativeGenericDequePriority20261018
+displayName: Generate native GC-traced M3 ArrayDeque and PriorityQueue from immutable source templates
+description: >-
+  Source-sealed additive Java21 M3 dynamic-array, physical index and byte-mask
+  collection owners with generated JDK differential and JNI-consumer oracle.
+  All four targets must be absent before installation; no vendor adapters.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-native-generic-deque-priority-20261018

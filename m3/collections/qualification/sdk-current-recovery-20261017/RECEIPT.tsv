@@ -1,0 +1,5 @@
+m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java	9a51f5edad8fd58ec9a7cc4dcd17cec23117de1eba486ba1b7a4c631acd8eff0	233f3c1229d3baa9721507aac4dcf793ea12c80456b1897c90eef606d2ba19df	M3CollectionSdk.java.txt
+m3/collections/src/main/java/com/m3/collections/M3IndexPartitions.java	ABSENT	2a00103d91c5a5236be6fa863cc85538af827d9aae57fa6eb7e55052f3f2524d	M3IndexPartitions.java.txt
+m3/collections/src/main/java/com/m3/collections/M3LongBag.java	ABSENT	636cf505cca2f0d0bbfdd93c815717c21b0edba9344b245cc58f3fd27dc2faed	M3LongBag.java.txt
+m3/collections/src/test/java/com/m3/collections/M3SdkRecoverySelfTest.java	ABSENT	f60ce5e7c505df49de50fc8358b494d30901e49c97490200543b42c231a4f5f7	M3SdkRecoverySelfTest.java.txt
+m3/collections/src/test/java/com/m3/collections/M3SdkRecoveryTest.java	ABSENT	e8c2a8450d92ef164830d5d48c5f3e001c6f0b0d519aa75fbd40fbf0ba93a317	M3SdkRecoveryTest.java.txt

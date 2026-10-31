@@ -1,0 +1,21 @@
+{
+  "schema": "M3_NATIVE_API_ADAPTATIONS_V1",
+  "files": [
+    {
+      "path": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/AbstractCompiler.java",
+      "donor_git_blob": "0ad85235b422be92d38008a11f0ba869fc55ef23",
+      "before_sha256": "ee0632d98b2bb01378554e6203453b3d43506300d123bb58cd449ba3f8ba78b2",
+      "after_sha256": "95af03bbede80ce5a48cb86293865b81d17211216ef783bb8257a0ab7319ac3b",
+      "license": "MIT AND Apache-2.0",
+      "change": "additive caller-admitted compilation workset; default timestamp analysis preserved; admitted missing-source preflight and exception-safe worker shutdown"
+    },
+    {
+      "path": "upstream/maven-native-api/src/main/java/org/codehaus/mojo/natives/compiler/CompilerConfiguration.java",
+      "donor_git_blob": "6a92164fa2a9765037b2ce1a261bec918959f020",
+      "before_sha256": "47bdf0f6b68213ff7b629edec0d7f0c3095db5473bacd7fab5909ba94b68f8d3",
+      "after_sha256": "560bfd2a66cabd197f6ddcd4370168b67be2b671e6e5e06769611c5d001f5ef2",
+      "license": "MIT AND Apache-2.0",
+      "change": "additive caller-admitted compilation workset; default timestamp analysis preserved"
+    }
+  ]
+}

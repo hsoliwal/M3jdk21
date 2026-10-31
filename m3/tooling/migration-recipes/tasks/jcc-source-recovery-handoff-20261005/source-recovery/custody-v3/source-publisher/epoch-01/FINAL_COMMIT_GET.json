@@ -1,0 +1,25 @@
+{
+  "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "{\"sha\":\"0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\",\"node_id\":\"C_kwDOQ2icstoAKDBjNTNiNGYxZGZlNjZjN2VmZjA1YzgwNDdiOGZjNjgxZDI2ZmVjYjg\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/commits/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\",\"html_url\":\"https://github.com/hsoliwal/com.synexia/commit/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\",\"author\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-05T16:57:14Z\"},\"committer\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-05T16:57:14Z\"},\"tree\":{\"sha\":\"0361e4a07b77a01df170523033fef01c4052ddc5\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/trees/0361e4a07b77a01df170523033fef01c4052ddc5\"},\"message\":\"Recover JCC recipe payload and fix bounded Java contract framing\\n\\nRestore 1,039 exact artifacts absent from the be92 merge and materialize four current production updates through pinned recipes. Preserve the finite Java/JNI outcomes, historical failed trials, and blocked upstream qualification.\\n\\nSource manifest: 9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328\",\"parents\":[{\"sha\":\"be92c62ece9023b5c33676716a1076d00e26120a\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/commits/be92c62ece9023b5c33676716a1076d00e26120a\",\"html_url\":\"https://github.com/hsoliwal/com.synexia/commit/be92c62ece9023b5c33676716a1076d00e26120a\"}],\"verification\":{\"verified\":false,\"reason\":\"unsigned\",\"signature\":null,\"payload\":null,\"verified_at\":null}}",
+      "title": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "modified_date": null,
+      "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "display_title": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "structuredContent": {
+        "title": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "content": "{\"sha\":\"0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\",\"node_id\":\"C_kwDOQ2icstoAKDBjNTNiNGYxZGZlNjZjN2VmZjA1YzgwNDdiOGZjNjgxZDI2ZmVjYjg\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/commits/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\",\"html_url\":\"https://github.com/hsoliwal/com.synexia/commit/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\",\"author\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-05T16:57:14Z\"},\"committer\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-05T16:57:14Z\"},\"tree\":{\"sha\":\"0361e4a07b77a01df170523033fef01c4052ddc5\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/trees/0361e4a07b77a01df170523033fef01c4052ddc5\"},\"message\":\"Recover JCC recipe payload and fix bounded Java contract framing\\n\\nRestore 1,039 exact artifacts absent from the be92 merge and materialize four current production updates through pinned recipes. Preserve the finite Java/JNI outcomes, historical failed trials, and blocked upstream qualification.\\n\\nSource manifest: 9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328\",\"parents\":[{\"sha\":\"be92c62ece9023b5c33676716a1076d00e26120a\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/commits/be92c62ece9023b5c33676716a1076d00e26120a\",\"html_url\":\"https://github.com/hsoliwal/com.synexia/commit/be92c62ece9023b5c33676716a1076d00e26120a\"}],\"verification\":{\"verified\":false,\"reason\":\"unsigned\",\"signature\":null,\"payload\":null,\"verified_at\":null}}",
+        "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8"
+      }
+    },
+    "isError": false
+  }
+}

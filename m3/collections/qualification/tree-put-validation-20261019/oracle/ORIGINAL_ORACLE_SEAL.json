@@ -1,0 +1,79 @@
+{
+  "M3SourceOrClassInspected": false,
+  "boundedAdmission": "Diagnostics only; later checker must report incumbent/candidate preservation separately from JDK parity",
+  "boundedDiagnosticCases": 6,
+  "boundedOutcomeCounts": {
+    "return": 4,
+    "throw": 2
+  },
+  "candidateExecuted": false,
+  "cases": 36,
+  "classification": "JDK_PUBLIC_API_ORIGINAL_FIRST_CALIBRATION",
+  "commands": [
+    {
+      "capacityChecks": 6,
+      "capturedBytes": 0,
+      "combinedLogLimitBytes": 8192,
+      "elapsedSeconds": 0.781,
+      "pid": 35220,
+      "readerThreadsJoined": true,
+      "reason": "completed",
+      "returncode": 0,
+      "treeContainment": "Windows kill-on-close job with stdin-gated command"
+    },
+    {
+      "capacityChecks": 4,
+      "capturedBytes": 14880,
+      "combinedLogLimitBytes": 32768,
+      "elapsedSeconds": 0.266,
+      "pid": 30284,
+      "readerThreadsJoined": true,
+      "reason": "completed",
+      "returncode": 0,
+      "treeContainment": "Windows kill-on-close job with stdin-gated command"
+    }
+  ],
+  "markerIdentityTrueCount": 6,
+  "messages": "Full raw messages captured without normalization",
+  "originalInputs": {
+    "bytes": 2698,
+    "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\ORIGINAL_INPUTS.json",
+    "sha256": "a82a56fbc2e1bc5b79c3a3b7b8ee0488eeaf583a25e220533dee5ff068a9a919"
+  },
+  "originalTrace": {
+    "bytes": 14880,
+    "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\original.stdout",
+    "sha256": "f4a8e975f1ffc2ca07950b01904fa51f52ec2b2eef4a349fd498ba8220a87587"
+  },
+  "providerHeader": {
+    "bootstrap": true,
+    "casesPlanned": 36,
+    "kind": "header",
+    "module": "java.base",
+    "provider": "java.util.TreeMap",
+    "runtime": "21.0.9+7-LTS-338"
+  },
+  "rootOutcomeCounts": {
+    "return": 18,
+    "throw": 12
+  },
+  "rootTargetCases": 30,
+  "schema": "synexia.jdk21-map-put.original-oracle.v1",
+  "status": "FROZEN_JDK21_ORIGINAL_36_CASES",
+  "stderr": {
+    "bytes": 0,
+    "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\original.stderr",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "storageAfter": {
+    "C_build_lane": "HELD",
+    "K_temp_lane": "UNAVAILABLE",
+    "cap_bytes": 536870912,
+    "free_bytes": 22595878912,
+    "logical_bytes": 533136256,
+    "reserve_bytes": 8589934592,
+    "root": "S:\\codex-work\\m3-collections-next-20261018",
+    "verified_child_temp": "S:\\codex-work\\m3-collections-next-20261018\\temp\\"
+  },
+  "unitBytesBeforeSeal": 70637
+}

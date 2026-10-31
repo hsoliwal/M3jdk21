@@ -1,0 +1,157 @@
+{
+  "schema": "M3_NETBEANS_CONVERGENCE_QUALIFICATION_V1",
+  "status": "SCOPED_JAVA_JNI_OWNER_PROOFS_PASS_FULL_SOURCE_IMAGE_PENDING",
+  "qualification_baseline": "df532e779056dbec203dde20030657c3d144f5b5",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_path": "synexia-openrewrite-recipes/recipes/netbeans-convergence-20261020",
+  "final_custody_and_publication_receipt": "evidence/FINAL_RESULT.json in the canonical commit pinned by the receiving PR",
+  "collections": {
+    "status": "PASS",
+    "production_java_sources": 268,
+    "test_sources": 260,
+    "junit_java": {
+      "tests": 468,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 3
+    },
+    "junit_native": {
+      "tests": 468,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "java_skip_disposition": "Three native-required tests are intentionally skipped with native mode disabled; the same 468-test native run has zero skips",
+    "native_libraries": 10,
+    "explicit_native_contracts": 22,
+    "native_policy": "C17 -Wall -Wextra -Werror, fatal UBSan, generated JNI headers and actual -Xcheck:jni",
+    "window_observation_roots": {
+      "java": "e15c399b7be3d8c0fbd38bc6e2cd4c63b93bb0b95d1272bce9acdcc7bec5445b",
+      "native": "e15c399b7be3d8c0fbd38bc6e2cd4c63b93bb0b95d1272bce9acdcc7bec5445b"
+    },
+    "receipt": {
+      "canonical_path": "evidence/collections/owning-final/receipt.json",
+      "sha256": "f12628734f7778ef263b4c806c440a04727ea9adfcc44d0d8e386d7f138317f3"
+    },
+    "source_and_dependency_seals": {
+      "canonical_path": "evidence/collections/owning-final/PROOF.json",
+      "sha256": "5cf401758934273a3fbdcd9b54b9c8afb47288fa694227967e229d51c82fd2f8"
+    },
+    "public_protected_api": "Three changed owners and their exposed Order enum match baseline exactly",
+    "api_and_finite_resources": {
+      "canonical_path": "evidence/collections/api-resource/FINAL_RESULT.json",
+      "sha256": "761b846a27209be25671fb74fd5acdfb45d186eebded71319c94b26b2b1777e4"
+    },
+    "mutation_baseline": "Frozen proof fails on the original cursor with missing ConcurrentModificationException before mutation; candidate passes the owning run"
+  },
+  "sorted_set": {
+    "status": "PASS_ACTUAL_SOURCE_PATCH",
+    "checks": 1031319,
+    "original_source_result": "EXPECTED_FAILURE split comparator lost",
+    "public_protected_api_equal": true,
+    "receipt": {
+      "canonical_path": "evidence/collections/sorted-set/receipt.json",
+      "sha256": "0b3761b9b60df5c989b01bb573ac8a030b287e8f55d2160a5c089d6e317e1597"
+    },
+    "scope": "Actual target SortedSet and unchanged ReverseOrderSortedSetView source patched into Java 21; not a full source-built JDK image"
+  },
+  "parser": {
+    "status": "PASS",
+    "checks_per_complete_contract_suite": 1990308,
+    "policy_vectors": 524288,
+    "policy_checks": 1933403,
+    "public_protected_api_owners": 6,
+    "public_protected_api_equal": true,
+    "receipt": {
+      "canonical_path": "parsing/execution/FINAL_RESULT.json",
+      "sha256": "f55621af13446bc9c428f1376d7496153efdefd23cb9479e8178db6e4badc2e3"
+    },
+    "scope": "Source-compiled jdk.compiler patch, parser JAR/JMOD and linked image on supplied Java 21; not a full source-built JDK image"
+  },
+  "filesystem": {
+    "status": "PASS",
+    "strict_java_sources": 52,
+    "junit": {
+      "tests": 110,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "native_ctest": {
+      "suites": 12,
+      "failed": 0
+    },
+    "linked_identity_probe_checks": 9,
+    "public_protected_api_classes": 17,
+    "same_binary_before_candidate_tests": 9,
+    "finite_resource_samples_per_mode": 30,
+    "receipt": {
+      "canonical_path": "storage/evidence/owning-fs-20261020-01/QUALIFICATION.md",
+      "sha256": "e9c9ed4444a50acbcb4043f24d3fc7820f36c484be697b88d36fc449c0b7d355"
+    },
+    "source_seals": {
+      "canonical_path": "storage/evidence/FINAL_STORAGE_SEALS.json",
+      "sha256": "f9d80c56ecc32e3d28351f09fd1b2854e5ada7303289fc634525f69ffbf4d992"
+    },
+    "resource_evidence": {
+      "canonical_path": "storage/evidence/owning-fs-20261020-01/07-page-proof-receipts/page-proof.json",
+      "sha256": "7c7e226bc55c4346cf8aed950336d23ebeb023a68afa3adf6a80d2ee44e7dad5"
+    },
+    "scope": "Existing M3FS/JNI/SQLite owning package and jlink runtime; prebuilt Java 21 base, not full modified JDK"
+  },
+  "authoritative_build_models": {
+    "status": "PASS",
+    "frozen_cases": 10,
+    "assertions": 321,
+    "baseline_repair_counterexamples": 9,
+    "valid_case_assertions": 308,
+    "public_protected_api_equal": true,
+    "actual_jdt_maven_groovy_checks": 18,
+    "actual_kotlin_psi_nodes": 33,
+    "actual_gradle": {
+      "projects": 2,
+      "tasks": 45,
+      "nodes": 47
+    },
+    "receipt": {
+      "canonical_path": "buildmodels/evidence/FINAL_RESULT.json",
+      "sha256": "dd7218a554bcb962ce4e45367d2de8dd3cfe05ea4082fbee4abb3a9c4b1a6e86"
+    },
+    "scope": "Frozen API-shape budget fixtures and separate original-provider executions; no arbitrary provider-work or full source-qualified reactor claim"
+  },
+  "source_qualified_launcher": {
+    "status": "PASS",
+    "receipt": {
+      "canonical_path": "evidence/dependencies/launcher/receipt.json",
+      "sha256": "9ab2a475c5019086b33022e0c90f3b5200b244c26e741a2fabf2ea2184c98f11"
+    },
+    "scope": "Source inventory, existing -m3-source-1 build/install and packaged provenance/legal checks"
+  },
+  "full_source_image": {
+    "status": "RESOURCE_GUARD_STOP",
+    "strict_configure": "PASS",
+    "warnings_as_errors": true,
+    "image_built": false,
+    "free_bytes_at_guard": 353423360,
+    "controlled_make_exit": 2,
+    "receipt": {
+      "canonical_path": "buildmodels/evidence/full-source-image/receipt.json",
+      "sha256": "839602c34163d1aae000fa303e8be1b01ab79fdde00e2e32dd87b0c881481499"
+    },
+    "stop": {
+      "canonical_path": "buildmodels/evidence/full-source-image/retry-stop.json",
+      "sha256": "8c9a2886088f17ac6797782160162c9d1640fe1fb6f001423f02fe33b3356d68"
+    },
+    "reason": "Actual strict source compilation stopped to preserve the workspace disk reserve; no source/compiler diagnostic before the controlled retry stop"
+  },
+  "performance_scope": "Complexity and finite allocation/CPU observations are in the linked receipts; no universal speed, zero-allocation, GC or cross-platform claim",
+  "remaining_gates": [
+    "Completed source-built integrated M3JDK21 image",
+    "Applicable full jtreg/tier and additional-platform gates",
+    "Required hosted checks on published commits",
+    "Full source-qualified Synexia reactor if required by integration policy"
+  ],
+  "receiving_phase": "String",
+  "receiving_phase_advanced": false,
+  "pull_request_disposition": "DRAFT_PENDING_FULL_IMAGE_AND_REQUIRED_HOSTED_GATES"
+}

@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+    "-ea",
+    "-Xmx512m",
+    "-XX:ActiveProcessorCount=2",
+    "-XX:-UsePerfData",
+    "-cp",
+    "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+    "com.synexia.rewrite.memory.M3RecoveryMemory",
+    "publish",
+    "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/draft-002.json",
+    "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021",
+    "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/memory/events"
+  ],
+  "cwd": "/workspace/scratch/206049dfb270",
+  "captured_before_execution": true
+}

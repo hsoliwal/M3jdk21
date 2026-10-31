@@ -1,0 +1,33 @@
+{
+  "commit": "fbc7775c462f5b023d8db54c9a73d7ec17d53300",
+  "descriptors": [
+    {
+      "release": "11",
+      "sha256": "35e54a5eb753dfa48e603a4d3f1bfe7f3111debdab62c3c06077e4b64678269a",
+      "upstream_path": "src/main/java11/module-info.java",
+      "url": "https://raw.githubusercontent.com/jhy/jsoup/fbc7775c462f5b023d8db54c9a73d7ec17d53300/src/main/java11/module-info.java"
+    }
+  ],
+  "donor": "jsoup-1.23.2",
+  "files": [
+    {
+      "class": "org/jsoup/helper/HttpClientExecutor",
+      "release": "11",
+      "sha256": "c74ce30cbb8dd1531136fcdb7531d7bfd3b9eab2aff85f71be6d75bb945e33a5",
+      "upstream_path": "src/main/java11/org/jsoup/helper/HttpClientExecutor.java",
+      "url": "https://raw.githubusercontent.com/jhy/jsoup/fbc7775c462f5b023d8db54c9a73d7ec17d53300/src/main/java11/org/jsoup/helper/HttpClientExecutor.java"
+    },
+    {
+      "class": "org/jsoup/helper/RequestAuthHandler",
+      "release": "11",
+      "sha256": "9121ad786b1a91d5b2914545e984781e13b63079c7372b249420b7d9fbe75c38",
+      "upstream_path": "src/main/java11/org/jsoup/helper/RequestAuthHandler.java",
+      "url": "https://raw.githubusercontent.com/jhy/jsoup/fbc7775c462f5b023d8db54c9a73d7ec17d53300/src/main/java11/org/jsoup/helper/RequestAuthHandler.java"
+    }
+  ],
+  "not_reproduced": [],
+  "published_jar": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\jsoup\\jsoup\\1.23.2\\jsoup-1.23.2.jar",
+  "published_jar_sha256": "e9d8c856856680427f096d156f02a414289985c930998fcb519ce5be39b42003",
+  "repository": "github:jhy/jsoup",
+  "tag": "jsoup-1.23.2"
+}

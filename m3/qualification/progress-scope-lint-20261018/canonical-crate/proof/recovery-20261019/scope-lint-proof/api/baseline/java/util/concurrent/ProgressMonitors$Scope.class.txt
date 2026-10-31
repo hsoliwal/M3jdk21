@@ -1,0 +1,3 @@
+public final class java.util.concurrent.ProgressMonitors$Scope implements java.lang.AutoCloseable {
+  public void close();
+}

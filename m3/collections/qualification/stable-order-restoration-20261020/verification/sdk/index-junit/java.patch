@@ -1,0 +1,21 @@
+diff --git a/m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java b/m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java
+new file mode 100644
+index 0000000..40fd2c8
+--- /dev/null
++++ b/m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java
+@@ -0,0 +1,15 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++// SPDX-License-Identifier: Apache-2.0
++package com.m3.collections;
++
++import org.junit.jupiter.api.Test;
++
++/** Runs the frozen projection/window oracle against the actual available owner backend. */
++class M3IndexOrderWindowTest {
++    @Test
++    void stablePhysicalOrderAndMaskWindowContracts() throws Exception {
++        M3IndexOrderWindowContract.main(new String[] {
++            M3IndexMaskCompactor.nativeAvailable() ? "--native" : "--java"
++        });
++    }
++}

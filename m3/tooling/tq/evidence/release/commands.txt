@@ -1,0 +1,2 @@
+JAVA_HOME=<Temurin-21.0.8+9> PATH=$JAVA_HOME/bin:$PATH
+Maven 3.9.9: mvn -o -B -ntp -Dmaven.repo.local=<san-maven-cache> -f m3/tooling/tq/pom.xml verify

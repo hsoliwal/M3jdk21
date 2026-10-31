@@ -1,0 +1,13 @@
+[
+  "m3/runtime-integration/integrated-utilities/README.md",
+  "m3/runtime-integration/integrated-utilities/behavioral-atoms.json",
+  "m3/runtime-integration/integrated-utilities/contract-catalogue.json",
+  "m3/runtime-integration/integrated-utilities/verify.py",
+  "src/java.base/share/classes/java/io/IOUtils.java",
+  "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+  "src/java.base/share/classes/java/util/Strings.java",
+  "src/java.base/share/classes/java/util/stream/Streams.java",
+  "test/jdk/java/io/IOUtils/IOUtilsTest.java",
+  "test/jdk/java/lang/reflect/Reflection/ReflectionTest.java",
+  "test/jdk/java/util/stream/Streams/StreamsTest.java"
+]

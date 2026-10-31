@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3FileBuildImpact20261020
+displayName: M3JDK21 native file, AST and reactor impact CSR propagation
+description: >-
+  Hash-sealed Java LST generation of a native M3JDK21 parent-owned
+  physical-slot file and reactor dependency impact planes with fail-closed tests.
+  Completeness remains with javac/M3AST/JDT, Maven and Gradle use only verified facts.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-file-build-impact-20261020

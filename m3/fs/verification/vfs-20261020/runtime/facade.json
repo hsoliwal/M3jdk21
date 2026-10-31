@@ -1,0 +1,20 @@
+{
+  "command": [
+    "python3",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/authored/facade/verification/run_behavior.py",
+    "--classes",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-final/classes"
+  ],
+  "exit_code": 0,
+  "production_classes": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-final/classes",
+  "generated_source_hashes_match_frozen": true,
+  "compile_owned": false,
+  "production_class_sha256": {
+    "MFile": "28dbcb15314bc49d675ea8f5e836766512f674bc8e6a569fd46d26ec4aeae364",
+    "MFiles": "d6d975d896fd77e23ed2be84792e955da5ca9c7fdeed80351918aa04d4e14e42",
+    "MFileContent": "b565ac72e7dbba4c49107c1f3897c4cd45011d5fa18a5fea612ec45363bfdb98",
+    "MFileStreams": "7e344536332912d155d738acd7d27a07f182173570c5b8ea58edd771a021ae6b",
+    "MFileObservation": "6c6f264432bb6ec38f6a9697bd0f79582cd1ab87b6f54091e9a3a82c80ce04a3",
+    "MFileChangeSource": "2ca1897d8fbe6a6f08f6095699c65478a83a07cc363dc79ef26a0a766cfafd56"
+  }
+}

@@ -1,0 +1,59 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 merged recipe atom preservation
+
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - 'm3/collections/**'
+      - 'm3/tooling/migration-recipes/**'
+      - 'm3/history/**'
+      - 'm3/docs/synexia-m3jdk21-source-successions.tsv'
+      - '.github/workflows/**'
+  push:
+    branches:
+      - master
+      - m3/restore-merged-atoms-ci-20261022
+    paths:
+      - 'm3/file/**'
+      - 'm3/collections/**'
+      - 'm3/tooling/migration-recipes/**'
+      - 'm3/history/**'
+      - 'm3/docs/synexia-m3jdk21-source-successions.tsv'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  require-merged-sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Exercise missing, drifted and forged-recipe negative oracles
+        run: python3 -m unittest discover -s m3/history -p 'test_merged_atoms_preservation_20261022.py' -v
+      - name: Reject disappearing merged product atoms
+        run: python3 m3/history/verify-merged-atoms-preservation-20261022.py --root .
+      - name: Verify unchanged historical receipts and exactly reviewed successor
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s m3/history -p 'test_synexia_handoff.py' -v
+          python3 m3/history/verify_synexia_handoff.py --root .
+      - name: Reject new transformation recipe sources in the downstream product
+        if: github.event_name == 'pull_request'
+        shell: bash
+        env:
+          M3_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin "$M3_BASE_SHA"
+          git diff --diff-filter=A --name-only "$M3_BASE_SHA" HEAD > "$RUNNER_TEMP/m3-new-paths.txt"
+          if grep -E '(^m3/recipes/|^m3/tooling/migration-recipes/|/recipe(s)?/)' "$RUNNER_TEMP/m3-new-paths.txt"; then
+            echo 'ERROR: executable transformation recipes belong in hsoliwal/com.synexia, not M3JDK21'
+            exit 1
+          fi

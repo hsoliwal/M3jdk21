@@ -1,0 +1,111 @@
+{
+  "schema": "m3-fenwick-geometry-ci-receiving-v1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "2a4e310b3976a8368fd8e131534d9b3654ddc5a3",
+  "canonical_proof": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/fenwick-serial-receiving-20261027/QUALIFICATION.json",
+  "proof_sha256": "0d16d5d1179312bb5ed458285a8bfb2ac04174e7ae6b2f826884469a78305dc5",
+  "target_preimage_revision": "f188c04c1cf369a577b555d5c6006b86a14acc58",
+  "datasets": [
+    {
+      "dataset": "vpt-fenwick-ci-20261027",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "results": 2,
+      "receiver_check_apply_replay": [
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "dataset": "vpt-fenwick-base-20261027",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "results": 1,
+      "receiver_check_apply_replay": [
+        1,
+        1,
+        0
+      ]
+    }
+  ],
+  "received_outputs": [
+    {
+      "path": ".github/workflows/m3-sparse-viewport-geometry.yml",
+      "pre_git_blob": "5280431fb75caf397245bc88b15bc02db9098b02",
+      "post_git_blob": "bc5a1a4e0e2d3ec2049caf2cf360c0a64c1ec30c",
+      "sha256": "844b2f1dddff6de42b76ecf0317203804b24f77263a19cf0dc81a09e1c6aac6d"
+    },
+    {
+      "path": "m3/collections/viewport-proof/fixtures/M3FenwickInverseTest.txt",
+      "pre_git_blob": "ABSENT",
+      "post_git_blob": "dafa004fcbe3fe9e4183f830b2f1159e3c40591f",
+      "sha256": "e00949e10b699f0ff93094906eee694df734471656835e3dfa73b0295deaad26"
+    }
+  ],
+  "product_java_blob_preserved": "ba6b2ebd0fac9f737deb28bce9385fff07164997",
+  "local_target_qualification": {
+    "old_source": [
+      10,
+      3,
+      0,
+      0
+    ],
+    "geometry_fixed": [
+      10,
+      0,
+      0,
+      0
+    ],
+    "optimized": [
+      10,
+      0,
+      0,
+      0
+    ],
+    "received_mixed": [
+      12,
+      0,
+      0,
+      0
+    ],
+    "received_interpreted": [
+      12,
+      0,
+      0,
+      0
+    ],
+    "descriptor_parity": true,
+    "optimized_documented_class_sha256": "bed4c564473d35fd8f1eeb1330239ab190e88c3b68d4920f762d30ea09c3ee67",
+    "compiled_inverse_gate": "PASS"
+  },
+  "toolchain": {
+    "java": "Temurin 21.0.8+9",
+    "maven": "3.9.9",
+    "openrewrite": "8.17.1",
+    "canonical_pom_git_blob": "332b6ca5fae4dec7980d953e8a6f01f5dd8a5419",
+    "pom_substitutions": [],
+    "cache_files_verified": 1297,
+    "java21_parser_jar_sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4"
+  },
+  "limitations": [
+    "Exact essential sources reconstructed from Git blobs, not a complete repository checkout",
+    "Canonical contract-profile Python suite and full Synexia reactor not run",
+    "Existing push workflow 40469847686 pending with zero jobs at initial inspection; not a hosted pass",
+    "No current source-built JDK, HotSpot, jtreg or native SWT/Nebula/GEF/RWT lifecycle/rendering proof",
+    "No new native execution, cross-platform, accessibility, IME or resource/performance claim"
+  ],
+  "verification_recoveries": {
+    "count": 29,
+    "aggregation_failure": "25-compiled-and-junit-oracle: local wrong helper-name predicate",
+    "resumed_from": "26-compiled-oracle-resume: exact canonical workflow verifier",
+    "junit_replayed_for_aggregation_fix": false,
+    "custody_failure": "28-final-custody rejected a truncated compile log",
+    "custody_recovery": "29-custody-resume: original captured compiler output recovered into separate file; exact recorded SHA256 verified; truncated file retained; cause unknown"
+  },
+  "status": "RECEIVED_LOCAL_QUALIFIED_HOSTED_PENDING"
+}

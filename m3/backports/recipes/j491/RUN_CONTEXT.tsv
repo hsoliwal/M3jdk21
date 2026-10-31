@@ -1,0 +1,11 @@
+key	value
+repository	hsoliwal/M3jdk21
+branch	m3/j491-materialization-substrate-20261006
+branch_base	c0a14387009aefc7d62bd3268055d526e04f9074
+upstream_parent	8a2a75e56de4497da48f43b3be3eb71bf3ef75ab
+upstream_commit	78b80150e009745b8f28d36c3836f18ad0ca921f
+path_count	246
+scope_floor	MULTI_MODULE
+architectures	aarch64;arm;ppc;riscv;s390;x86;zero
+mode	candidate materialization only
+target_mutation	false

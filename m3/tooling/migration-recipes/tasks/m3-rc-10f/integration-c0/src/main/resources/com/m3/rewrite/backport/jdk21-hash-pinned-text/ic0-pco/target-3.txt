@@ -1,0 +1,56 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.tooling.dag;
+
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.Map;
+
+/** Opt-in bounded collection validation/projection; never executes or promotes recipes. */
+public final class M3PacketCollectionMain {
+    private M3PacketCollectionMain() {}
+
+    public static void main(String[] args) throws Exception {
+        boolean validate = args.length == 2 && args[0].equals("validate");
+        boolean project = args.length == 3 && args[0].equals("project");
+        if (!validate && !project) {
+            throw new IllegalArgumentException(
+                    "usage: M3PacketCollectionMain validate <collection.tsv>"
+                            + " | project <collection.tsv> <fresh-output-dir>");
+        }
+        M3BackportPacketCollection collection = M3PacketCollectionLoader.load(Path.of(args[1]));
+        M3RecipeDag dag = M3PacketDagComposer.composeCollection(collection);
+        String root = M3DagSemanticRoot.of(dag);
+        if (project) {
+            Path output = Path.of(args[2]).toAbsolutePath().normalize();
+            if (Files.exists(output, LinkOption.NOFOLLOW_LINKS)) {
+                if (!Files.isDirectory(output, LinkOption.NOFOLLOW_LINKS)) {
+                    throw new IllegalArgumentException("fresh collection projection directory required");
+                }
+                try (var members = Files.list(output)) {
+                    if (members.findAny().isPresent()) {
+                        throw new IllegalArgumentException("empty collection projection directory required");
+                    }
+                }
+            }
+            Map<M3DagProjectionFormat, M3DagProjection> projections =
+                    M3DagProjector.all(dag, collection.collectionId());
+            Files.createDirectories(output);
+            for (M3DagProjection projection : projections.values()) {
+                Files.writeString(output.resolve(projection.fileName()), projection.content(), StandardOpenOption.CREATE_NEW);
+            }
+            Files.writeString(output.resolve("projection.tsv"),
+                    "packet_id\tdag_root\tnodes\n" + collection.collectionId() + "\t" + root
+                            + "\t" + dag.size() + "\n", StandardOpenOption.CREATE_NEW);
+            Files.writeString(output.resolve("atom-evidence.tsv"),
+                    "collection_id\tdescriptor_sha256\tatoms\tedges\n"
+                            + collection.collectionId() + "\t" + collection.descriptorSHA256()
+                            + "\t" + collection.atoms().size() + "\t" + collection.edgeCount() + "\n", StandardOpenOption.CREATE_NEW);
+        }
+        System.out.println("M3_PACKET_COLLECTION_OK collection=" + collection.collectionId()
+                + " atoms=" + collection.atoms().size() + " edges=" + collection.edgeCount()
+                + " partitions=" + collection.packets().size() + " joins=" + collection.joins().size()
+                + " dagRoot=" + root + " descriptorSHA256=" + collection.descriptorSHA256());
+    }
+}

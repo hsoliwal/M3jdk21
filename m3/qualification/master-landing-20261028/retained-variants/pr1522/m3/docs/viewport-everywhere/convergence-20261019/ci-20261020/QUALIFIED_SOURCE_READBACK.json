@@ -1,0 +1,1709 @@
+{
+  "status": "PASS_PUBLISHED_SOURCE_AND_MIRROR_INTEGRITY",
+  "recorded_utc": "2026-10-20 02:29:21 UTC",
+  "repository": "hsoliwal/M3JDK21",
+  "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/1522",
+  "head": "066b7a15c29388f3444ab3cf0550ecf1df698c6d",
+  "tree": "150a17d1c838dc15deea4e5e2e11ed127cdd6d6d",
+  "qualified_base": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+  "canonical_source_pin": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+  "canonical_tree": "c8b4bcb1507fa603ce79508f0c7f5862c6424a15",
+  "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+  "counts": {
+    "manifest_targets": 60,
+    "changed_targets": 21,
+    "kept_targets": 39,
+    "fresh_replacement_preimages": 9,
+    "new_targets": 12,
+    "raw_postimages_and_helpers_and_document": 63,
+    "exact_canonical_mirrors": 88,
+    "helpers": 2,
+    "all_pr_files": 122,
+    "source_commit_files": 21,
+    "design_commit_files": 1,
+    "proof_and_metadata_commit_files": 100,
+    "unintended_paths": 0,
+    "deleted_paths": 0,
+    "renamed_paths": 0
+  },
+  "guard_readback": [
+    {
+      "path": "m3/collections/LICENSE",
+      "before": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "after": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/NETBEANS-NOTICE.txt",
+      "before": "88b6f1f16df90583111f75cb4cda5e3431b8797e59f09d2dd299e0ee1de9fa54",
+      "after": "88b6f1f16df90583111f75cb4cda5e3431b8797e59f09d2dd299e0ee1de9fa54",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "d20476671148b88a11fc43ea254ad4e230cfedd5",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/NOTICE",
+      "before": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
+      "after": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "c35cf82657474282058afc7ffbcb98c46fd865e3",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/SYNEXIA-DONATION-NOTICE.txt",
+      "before": "8b99e55314dface1175cf4c9a0f5d23d699920877b838b54e657c65dd8f25556",
+      "after": "8b99e55314dface1175cf4c9a0f5d23d699920877b838b54e657c65dd8f25556",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "dba49be9546695ec85f0f05fc073752e9950a95a",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/collection-refinement-20261019.tsv",
+      "before": "ABSENT",
+      "after": "6d38b641b5b1ffed72bbf29f2614fc0a059ec3724e143e75be037d1fdd79e280",
+      "preimage_method": "ADDED_IN_COMPLETE_QUALIFIED_BASE_TO_HEAD_DELTA",
+      "before_git_blob": null,
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/pom.xml",
+      "before": "7308f1db65883601ab9645b4d824178773d1a815fe9b644f2ae59f5513867573",
+      "after": "7308f1db65883601ab9645b4d824178773d1a815fe9b644f2ae59f5513867573",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "2e9dd0126296be03531c2d7fcb008cb4b1186a91",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "before": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
+      "after": "0705a74fd33a269dd9c1c3dd6a62c328c91a28727f31ffca63d1ce1fc8e63a39",
+      "preimage_method": "FRESH_RAW_QUALIFIED_BASE_SHA256",
+      "before_git_blob": "1a31827cd6274b5ad8eb62f3a5ce0e5e0667478f",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "before": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
+      "after": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "b81b069fb4815f0c78b17119390d7b204f6179d1",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "before": "9853795729a821c6d9c113ff169ebff5705a53affb6fbab5caefffc13104d6b1",
+      "after": "9853795729a821c6d9c113ff169ebff5705a53affb6fbab5caefffc13104d6b1",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "0be72190789c7248a3093480b23b0c119a3243a4",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "before": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577",
+      "after": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "1e77b2027aa008aa8aebfeaf4b00a5bb89e5b7bf",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "before": "d6f1f6f1ffb2ad2ef43f97426f05d8e4ab202dcec5b51bcc4a3151003d2837b7",
+      "after": "ff3d8802a77311de3e89094f34bb8b01df42e13cc74c96531b8801c7e08f5cc4",
+      "preimage_method": "FRESH_RAW_QUALIFIED_BASE_SHA256",
+      "before_git_blob": "217700023c2a6456a505b07b311290f8da8c02e2",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3KeyedParallelismPlan.java",
+      "before": "2ae09fa6cf13acc02baaa3002959dba39f3cf171bf321427fb62261072759e4a",
+      "after": "240b8ab627a969eedeb63a0735068e5b9b45391c1cc355845c871e8afa5a50bb",
+      "preimage_method": "FRESH_RAW_QUALIFIED_BASE_SHA256",
+      "before_git_blob": "f48930e2c0b8cc767340e96ea2175d5e070ddaaf",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedList.java",
+      "before": "eced7e331873875ae59fa6238257004dd0639c4ebf6ad8291ec9bd8e9d735798",
+      "after": "bcbbb5ec4fa976b2c7b3ee3b9fa2130e254875323de0f4adfa6f4de32bc53267",
+      "preimage_method": "FRESH_RAW_QUALIFIED_BASE_SHA256",
+      "before_git_blob": "cc3764b135731e02ed91dbbe60dda587b17e10a5",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "before": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+      "after": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "before": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "after": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
+      "preimage_method": "FRESH_RAW_QUALIFIED_BASE_SHA256",
+      "before_git_blob": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+      "before": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
+      "after": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "44778a63d99c5b1f99adee536b954a4ebb8c64f3",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java",
+      "before": "3e1145fdb6968bf40b369d56c932daf110d6b26c15b0cb6cf29309eff43dfaf9",
+      "after": "3e1145fdb6968bf40b369d56c932daf110d6b26c15b0cb6cf29309eff43dfaf9",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "e2cff159750d9b7f45cd438a8d517aff8d5bff43",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectStream.java",
+      "before": "ec122336995de5bc4df66af7814ce5d3529f2c6bae8bbff84d2bdeb302afd99e",
+      "after": "ec122336995de5bc4df66af7814ce5d3529f2c6bae8bbff84d2bdeb302afd99e",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "82cc77e25b01a3fc27469594606950c1ad2c8372",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java",
+      "before": "487a54917cbae6ec9802ca75aa04edc1a99dc0b6e9ed2a294b06dca6054c1af3",
+      "after": "1a7754c2413822ff7fa85362be0859b726951944410a874bb9116c8758237946",
+      "preimage_method": "FRESH_RAW_QUALIFIED_BASE_SHA256",
+      "before_git_blob": "2c70b653b38c467998de97c0f84e4c0cdfdda6c8",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3RowIndex.java",
+      "before": "80841d1bc93b49819f8fa0f0cb357aef9a16017f7e0007fbab8269ccaa8729cd",
+      "after": "80841d1bc93b49819f8fa0f0cb357aef9a16017f7e0007fbab8269ccaa8729cd",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "f337eed262b817edb5c460b0a0df8338517a8518",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3RowTree.java",
+      "before": "11e448e0f92eb751f8399affda3e5f4d95a5a8856e7719eb69446e35fa037233",
+      "after": "96067f630bcf3288c69410151759fa738fd5968daccf68cd1aed2aeade38fc7b",
+      "preimage_method": "FRESH_RAW_QUALIFIED_BASE_SHA256",
+      "before_git_blob": "5f6ea21614dd532bbfecabcc505bffa53255c4f3",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3RowTreeItem.java",
+      "before": "a88a03137ec4f36a23c7aa0ebdd1472a1ef5fcd025950a929ff0cc999ff3aaf4",
+      "after": "a88a03137ec4f36a23c7aa0ebdd1472a1ef5fcd025950a929ff0cc999ff3aaf4",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "607497c4292f802130a0ecef87a2781ba0b1315a",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java",
+      "before": "6219f44775b4c20c6caa6d541ce0b1f54892d3c9529391addb517b15fe0f464c",
+      "after": "6219f44775b4c20c6caa6d541ce0b1f54892d3c9529391addb517b15fe0f464c",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "b945fd98cef1ea03e30131e1460c507cd90119c9",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+      "before": "94941ecd803a93db5bbe036c1cea6f936eefaaf5a5864929e93422901e4c09d5",
+      "after": "94941ecd803a93db5bbe036c1cea6f936eefaaf5a5864929e93422901e4c09d5",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "894e273ee0744be8590bac08a791790cc7c66b6f",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+      "before": "9257ce0c9c95e3afef20624631ba048aa3d60ef53a1189cd2bbabc07da2bba2f",
+      "after": "9257ce0c9c95e3afef20624631ba048aa3d60ef53a1189cd2bbabc07da2bba2f",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "2fe08d8728732e5f53e75d9feb34c9c6ffc74a8d",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3WarmHeapGrowth.java",
+      "before": "011fda776ea1b3c03020f7792ee5e5d59c9759441e293e7e6b2be5aacfec1c23",
+      "after": "011fda776ea1b3c03020f7792ee5e5d59c9759441e293e7e6b2be5aacfec1c23",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "36ed94e4f6237e6e3a9d18f5da9d0d87bf36a1e5",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java",
+      "before": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
+      "after": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "de534edb6fcd76ca188b1c61a2d30b7be47c98da",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "before": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+      "after": "63bc3b753ab5ec65ca67649c96f067127401f2c36b2d7dd76cf2b77a292c1e5b",
+      "preimage_method": "FRESH_RAW_QUALIFIED_BASE_SHA256",
+      "before_git_blob": "15024c40ba9b92fd50fb7823ecfa9543aba22be1",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "before": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
+      "after": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_path_masks.c",
+      "before": "3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb",
+      "after": "3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "086b49293257fd17cc7fbd1ebbb98460aa677e35",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+      "before": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
+      "after": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "821876dfb56d836a0ae23e4bc16a391fd7f97ef2",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3CollectionRefinementTest.java",
+      "before": "ABSENT",
+      "after": "8fa6adf18f4ef7788b75c5544916a4c8269aebb715023905715c43614e17b2bf",
+      "preimage_method": "ADDED_IN_COMPLETE_QUALIFIED_BASE_TO_HEAD_DELTA",
+      "before_git_blob": null,
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredMergedSequencedContract.java",
+      "before": "d3a9405586bcfe1e2dbdb8c5aea6882d2f518b10a59e4da53c70b706b77ec700",
+      "after": "d3a9405586bcfe1e2dbdb8c5aea6882d2f518b10a59e4da53c70b706b77ec700",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "3dd297afa09fca7dc5f2be4628dfee040bab643d",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredMergedSequencedTest.java",
+      "before": "14f22c91b64f0d107067b6715c98479f1b39ba04d38eea774d223948fdedb388",
+      "after": "14f22c91b64f0d107067b6715c98479f1b39ba04d38eea774d223948fdedb388",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "b727cd160516dc38949a26fde71168749c4af67e",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3GenericFilteredTerminalProof.java",
+      "before": "ABSENT",
+      "after": "4a8ab09708970a302cec61c8956c51bc12f857f67950ff044f881d1ae9000081",
+      "preimage_method": "ADDED_IN_COMPLETE_QUALIFIED_BASE_TO_HEAD_DELTA",
+      "before_git_blob": null,
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java",
+      "before": "ba21551a5b2d4ecd57fae17842fdc05371c2eb7433b584ee6eba5b2e0ba676d0",
+      "after": "ba21551a5b2d4ecd57fae17842fdc05371c2eb7433b584ee6eba5b2e0ba676d0",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "d7fac9775d25379935b69cebcb2f281361a2819b",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3KeyedOrderRingContract.java",
+      "before": "9ded22e819e8ce1a80090c2449ee80c04b40f13b538bf882f40a300122ae6e79",
+      "after": "9ded22e819e8ce1a80090c2449ee80c04b40f13b538bf882f40a300122ae6e79",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "a38a2db643ac32bcb71250ac12d3821d578c8a4b",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3KeyedOrderRingTest.java",
+      "before": "2f3d4463827b2d8c97694e4a2c754e8946d9e22704f03f5895d7b930e75f7b69",
+      "after": "2f3d4463827b2d8c97694e4a2c754e8946d9e22704f03f5895d7b930e75f7b69",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "16c941e82df75e940c0424ee2bee89a1f4bcb7c6",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionContract.java",
+      "before": "6e1568e4172fa18420f9eef7910d695f536055cb46f72af1343f0b3c19505e87",
+      "after": "6e1568e4172fa18420f9eef7910d695f536055cb46f72af1343f0b3c19505e87",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "70156f66429646c4ce924faae047670379f3b20f",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionTest.java",
+      "before": "ae8db832599985506b2790bc96a595b6a6470abc09b377a5fb961679ed8419df",
+      "after": "ae8db832599985506b2790bc96a595b6a6470abc09b377a5fb961679ed8419df",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "51a9a4469f1439c6223590568e9498ae831a5d56",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismConvergenceTest.java",
+      "before": "ABSENT",
+      "after": "32d45929f4c9fbcdb135bcd414de533959b255803b32ae6e8bd24b5f8863c41e",
+      "preimage_method": "ADDED_IN_COMPLETE_QUALIFIED_BASE_TO_HEAD_DELTA",
+      "before_git_blob": null,
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapSelfTest.java",
+      "before": "b61d390196173ef0d4f99a86d0569f0542f9805d639a29eff4035140f6cf10ea",
+      "after": "b61d390196173ef0d4f99a86d0569f0542f9805d639a29eff4035140f6cf10ea",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "9f076ba1d21747e412904b2042510b0ca1e460cd",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LinkedClearContract.java",
+      "before": "91415e534cdbdbf08516a8db74ca9541c478cc54874a5202636bb6717ab60acf",
+      "after": "83e26a50cc6e1084b72d64baeb9941eb224611911d57fb5f4f756b24b9231f3f",
+      "preimage_method": "FRESH_RAW_QUALIFIED_BASE_SHA256",
+      "before_git_blob": "8613db4f70c7200eabf07e4b5eecc56499e79e4d",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LinkedListClearRangeProof.java",
+      "before": "ABSENT",
+      "after": "853e854453c50872ffaa5c0ee2e962e0ba275a210d3c85039adfb6a83f1aeb94",
+      "preimage_method": "ADDED_IN_COMPLETE_QUALIFIED_BASE_TO_HEAD_DELTA",
+      "before_git_blob": null,
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LinkedListSparseClearProbe.java",
+      "before": "ABSENT",
+      "after": "516a362c5a03ce8d04b6781b5c01e55bbbc9e34ed8b2c77ac5096a590c0931a1",
+      "preimage_method": "ADDED_IN_COMPLETE_QUALIFIED_BASE_TO_HEAD_DELTA",
+      "before_git_blob": null,
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongProjectionOrderConvergenceTest.java",
+      "before": "ABSENT",
+      "after": "c01869b9265cb74f4b819abe0e6d97b0fadd375ab3f3f6fd666a7a524ba4b042",
+      "preimage_method": "ADDED_IN_COMPLETE_QUALIFIED_BASE_TO_HEAD_DELTA",
+      "before_git_blob": null,
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java",
+      "before": "338d443ef01b118377940397b447b083af9a5a73c8bd8a001005b08efd5a9666",
+      "after": "338d443ef01b118377940397b447b083af9a5a73c8bd8a001005b08efd5a9666",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "9e64f4c57ab840b0da744bcff43b9f703fe033f8",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PackedPredicateSelectionProof.java",
+      "before": "ABSENT",
+      "after": "bde737247c44997faf244850792993e2f5a265ec7201051df3f343f71d61072b",
+      "preimage_method": "ADDED_IN_COMPLETE_QUALIFIED_BASE_TO_HEAD_DELTA",
+      "before_git_blob": null,
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotProof.java",
+      "before": "af3ef8b3a696b84cf098556f8b92f2538532a2c555e617a91f0716bc4f437812",
+      "after": "af3ef8b3a696b84cf098556f8b92f2538532a2c555e617a91f0716bc4f437812",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "3b2d4277500da38f74335aa162064aaf5a14cdb5",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotTest.java",
+      "before": "812bac31a2fc6b5aed2fffec58032823e20c2ad2d3289cc4ff0ca85c022bb6e8",
+      "after": "812bac31a2fc6b5aed2fffec58032823e20c2ad2d3289cc4ff0ca85c022bb6e8",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "09dbe9c3d52bd96f2d98c9d634e1327878d70579",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PrimitiveSequenceCountProof.java",
+      "before": "ABSENT",
+      "after": "999e24457f295d466faac6f59b171dffd123e0ae34df1d1c65820a59af24e640",
+      "preimage_method": "ADDED_IN_COMPLETE_QUALIFIED_BASE_TO_HEAD_DELTA",
+      "before_git_blob": null,
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ProjectionRefinementProbe.java",
+      "before": "ABSENT",
+      "after": "f3c44e00f608aba01171e7ce781a233949686034cb621254ade6af8ebf3bbc54",
+      "preimage_method": "ADDED_IN_COMPLETE_QUALIFIED_BASE_TO_HEAD_DELTA",
+      "before_git_blob": null,
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorContract.java",
+      "before": "549ae933049b3f3925036cf0c188aaf0affea95ecf5c7d6e05c1ee1426325381",
+      "after": "549ae933049b3f3925036cf0c188aaf0affea95ecf5c7d6e05c1ee1426325381",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "ba4b96a53d5a16fa9cfe8312dbfb03af16c7bb5f",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SnapshotSortIsolationProof.java",
+      "before": "ABSENT",
+      "after": "bd657895fc23c7f62623b047fa3cb84b85b1e58c5538fc696424ad2c77c9545d",
+      "preimage_method": "ADDED_IN_COMPLETE_QUALIFIED_BASE_TO_HEAD_DELTA",
+      "before_git_blob": null,
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StrictFilteredSequencedContract.java",
+      "before": "e7d66bd8bbfa6eb78f33186d9b7814a333c95ffa468d18d892fce3054bc60207",
+      "after": "e7d66bd8bbfa6eb78f33186d9b7814a333c95ffa468d18d892fce3054bc60207",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "bbe5742df9142538eb2d757a0ad8bdfcf6b8a2d4",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StrictFilteredSequencedTest.java",
+      "before": "ff511e81630a3185079db9c1790961a0bfb9c0983007f5e531568764456ec54a",
+      "after": "ff511e81630a3185079db9c1790961a0bfb9c0983007f5e531568764456ec54a",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "2cccec78a561364ec1c915b47d56d118a8cf94d4",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ViewportPlanProof.java",
+      "before": "2bb907914a4f23a5e6c6ee420bedfee277d9f427722bbb914de33edffa92ff85",
+      "after": "2bb907914a4f23a5e6c6ee420bedfee277d9f427722bbb914de33edffa92ff85",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "b53a9cd97c5ca152aaceab90dd44e7564fc27ccc",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ViewportReceivingTest.java",
+      "before": "47984f6a749acd9cdf774f7a3a0596aea96834b09260655c6e3db3aa9369056f",
+      "after": "47984f6a749acd9cdf774f7a3a0596aea96834b09260655c6e3db3aa9369056f",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "5387552e5100a29d69ae76a9bc9eacb501e1926a",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ViewportTreeProof.java",
+      "before": "e1f4ecb44d5865376f50b0c2aa3361aa3ecbf134db73bcaad0a587b8a2604172",
+      "after": "e1f4ecb44d5865376f50b0c2aa3361aa3ecbf134db73bcaad0a587b8a2604172",
+      "preimage_method": "RAW_HEAD_SHA256_PLUS_COMPLETE_UNCHANGED_PR_DELTA",
+      "before_git_blob": "364a0de87b2fd45eefdef8aa6b1aee04ebfccc75",
+      "status": "MATCH"
+    },
+    {
+      "path": "m3/collections/src/test/native/m3_mask_empty_regions.c",
+      "before": "ABSENT",
+      "after": "df25153fedbbec1b7834bbd731edd2e9b1c20ce70fdee1de2e1b4a0745237274",
+      "preimage_method": "ADDED_IN_COMPLETE_QUALIFIED_BASE_TO_HEAD_DELTA",
+      "before_git_blob": null,
+      "status": "MATCH"
+    }
+  ],
+  "raw_readback": [
+    {
+      "path": "m3/collections/LICENSE",
+      "kind": "guard",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "bytes": 11358
+    },
+    {
+      "path": "m3/collections/NETBEANS-NOTICE.txt",
+      "kind": "guard",
+      "sha256": "88b6f1f16df90583111f75cb4cda5e3431b8797e59f09d2dd299e0ee1de9fa54",
+      "git_blob": "d20476671148b88a11fc43ea254ad4e230cfedd5",
+      "bytes": 1028
+    },
+    {
+      "path": "m3/collections/NOTICE",
+      "kind": "guard",
+      "sha256": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
+      "git_blob": "c35cf82657474282058afc7ffbcb98c46fd865e3",
+      "bytes": 423
+    },
+    {
+      "path": "m3/collections/SYNEXIA-DONATION-NOTICE.txt",
+      "kind": "guard",
+      "sha256": "8b99e55314dface1175cf4c9a0f5d23d699920877b838b54e657c65dd8f25556",
+      "git_blob": "dba49be9546695ec85f0f05fc073752e9950a95a",
+      "bytes": 1831
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/collection-refinement-20261019.tsv",
+      "kind": "guard",
+      "sha256": "6d38b641b5b1ffed72bbf29f2614fc0a059ec3724e143e75be037d1fdd79e280",
+      "git_blob": "9c08f3347399c14bdb1a0c094f883e7d0aeda275",
+      "bytes": 74781
+    },
+    {
+      "path": "m3/collections/pom.xml",
+      "kind": "guard",
+      "sha256": "7308f1db65883601ab9645b4d824178773d1a815fe9b644f2ae59f5513867573",
+      "git_blob": "2e9dd0126296be03531c2d7fcb008cb4b1186a91",
+      "bytes": 11969
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "kind": "guard",
+      "sha256": "0705a74fd33a269dd9c1c3dd6a62c328c91a28727f31ffca63d1ce1fc8e63a39",
+      "git_blob": "d299c9dc3853481e4595018e4057cf5777a9c3dc",
+      "bytes": 32288
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "kind": "guard",
+      "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
+      "git_blob": "b81b069fb4815f0c78b17119390d7b204f6179d1",
+      "bytes": 18371
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "kind": "guard",
+      "sha256": "9853795729a821c6d9c113ff169ebff5705a53affb6fbab5caefffc13104d6b1",
+      "git_blob": "0be72190789c7248a3093480b23b0c119a3243a4",
+      "bytes": 9264
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "kind": "guard",
+      "sha256": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577",
+      "git_blob": "1e77b2027aa008aa8aebfeaf4b00a5bb89e5b7bf",
+      "bytes": 13942
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "kind": "guard",
+      "sha256": "ff3d8802a77311de3e89094f34bb8b01df42e13cc74c96531b8801c7e08f5cc4",
+      "git_blob": "2caf4faf78ea20ccb41de9a61b08790855b4edd4",
+      "bytes": 15539
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3KeyedParallelismPlan.java",
+      "kind": "guard",
+      "sha256": "240b8ab627a969eedeb63a0735068e5b9b45391c1cc355845c871e8afa5a50bb",
+      "git_blob": "e800b5e3f3a11476302a3c18a964f2186664d8ef",
+      "bytes": 11559
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LinkedList.java",
+      "kind": "guard",
+      "sha256": "bcbbb5ec4fa976b2c7b3ee3b9fa2130e254875323de0f4adfa6f4de32bc53267",
+      "git_blob": "3bdfb1e3d9e92698033b6aee38821fec57eecc41",
+      "bytes": 14599
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "kind": "guard",
+      "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+      "git_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66",
+      "bytes": 5865
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "kind": "guard",
+      "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
+      "git_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
+      "bytes": 9493
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+      "kind": "guard",
+      "sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
+      "git_blob": "44778a63d99c5b1f99adee536b954a4ebb8c64f3",
+      "bytes": 554
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java",
+      "kind": "guard",
+      "sha256": "3e1145fdb6968bf40b369d56c932daf110d6b26c15b0cb6cf29309eff43dfaf9",
+      "git_blob": "e2cff159750d9b7f45cd438a8d517aff8d5bff43",
+      "bytes": 15747
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectStream.java",
+      "kind": "guard",
+      "sha256": "ec122336995de5bc4df66af7814ce5d3529f2c6bae8bbff84d2bdeb302afd99e",
+      "git_blob": "82cc77e25b01a3fc27469594606950c1ad2c8372",
+      "bytes": 27260
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java",
+      "kind": "guard",
+      "sha256": "1a7754c2413822ff7fa85362be0859b726951944410a874bb9116c8758237946",
+      "git_blob": "37a142b8a015fdf6dfcab4cff50fa73f58907990",
+      "bytes": 17590
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3RowIndex.java",
+      "kind": "guard",
+      "sha256": "80841d1bc93b49819f8fa0f0cb357aef9a16017f7e0007fbab8269ccaa8729cd",
+      "git_blob": "f337eed262b817edb5c460b0a0df8338517a8518",
+      "bytes": 2284
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3RowTree.java",
+      "kind": "guard",
+      "sha256": "96067f630bcf3288c69410151759fa738fd5968daccf68cd1aed2aeade38fc7b",
+      "git_blob": "8dd1abae1624ec2b740143d2c36a03a9b1e7b8bd",
+      "bytes": 15384
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3RowTreeItem.java",
+      "kind": "guard",
+      "sha256": "a88a03137ec4f36a23c7aa0ebdd1472a1ef5fcd025950a929ff0cc999ff3aaf4",
+      "git_blob": "607497c4292f802130a0ecef87a2781ba0b1315a",
+      "bytes": 990
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java",
+      "kind": "guard",
+      "sha256": "6219f44775b4c20c6caa6d541ce0b1f54892d3c9529391addb517b15fe0f464c",
+      "git_blob": "b945fd98cef1ea03e30131e1460c507cd90119c9",
+      "bytes": 1268
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+      "kind": "guard",
+      "sha256": "94941ecd803a93db5bbe036c1cea6f936eefaaf5a5864929e93422901e4c09d5",
+      "git_blob": "894e273ee0744be8590bac08a791790cc7c66b6f",
+      "bytes": 11992
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+      "kind": "guard",
+      "sha256": "9257ce0c9c95e3afef20624631ba048aa3d60ef53a1189cd2bbabc07da2bba2f",
+      "git_blob": "2fe08d8728732e5f53e75d9feb34c9c6ffc74a8d",
+      "bytes": 4051
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3WarmHeapGrowth.java",
+      "kind": "guard",
+      "sha256": "011fda776ea1b3c03020f7792ee5e5d59c9759441e293e7e6b2be5aacfec1c23",
+      "git_blob": "36ed94e4f6237e6e3a9d18f5da9d0d87bf36a1e5",
+      "bytes": 4042
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java",
+      "kind": "guard",
+      "sha256": "5a4d7bbd92429d2e3daf8c3a857abfd79189bbf1fc9450915f9ca89d8742421e",
+      "git_blob": "de534edb6fcd76ca188b1c61a2d30b7be47c98da",
+      "bytes": 6211
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "kind": "guard",
+      "sha256": "63bc3b753ab5ec65ca67649c96f067127401f2c36b2d7dd76cf2b77a292c1e5b",
+      "git_blob": "8486355cbf46d429af3d68adf17db3f1d308354c",
+      "bytes": 17859
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "kind": "guard",
+      "sha256": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
+      "git_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
+      "bytes": 6433
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_path_masks.c",
+      "kind": "guard",
+      "sha256": "3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb",
+      "git_blob": "086b49293257fd17cc7fbd1ebbb98460aa677e35",
+      "bytes": 5772
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+      "kind": "guard",
+      "sha256": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
+      "git_blob": "821876dfb56d836a0ae23e4bc16a391fd7f97ef2",
+      "bytes": 3458
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3CollectionRefinementTest.java",
+      "kind": "guard",
+      "sha256": "8fa6adf18f4ef7788b75c5544916a4c8269aebb715023905715c43614e17b2bf",
+      "git_blob": "257451818b916e6d1a482f678fbd7d66f1de5ecd",
+      "bytes": 1069
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredMergedSequencedContract.java",
+      "kind": "guard",
+      "sha256": "d3a9405586bcfe1e2dbdb8c5aea6882d2f518b10a59e4da53c70b706b77ec700",
+      "git_blob": "3dd297afa09fca7dc5f2be4628dfee040bab643d",
+      "bytes": 12612
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredMergedSequencedTest.java",
+      "kind": "guard",
+      "sha256": "14f22c91b64f0d107067b6715c98479f1b39ba04d38eea774d223948fdedb388",
+      "git_blob": "b727cd160516dc38949a26fde71168749c4af67e",
+      "bytes": 339
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3GenericFilteredTerminalProof.java",
+      "kind": "guard",
+      "sha256": "4a8ab09708970a302cec61c8956c51bc12f857f67950ff044f881d1ae9000081",
+      "git_blob": "30368bd67183f4c7b1a08eb624027aa29a16f02f",
+      "bytes": 16797
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java",
+      "kind": "guard",
+      "sha256": "ba21551a5b2d4ecd57fae17842fdc05371c2eb7433b584ee6eba5b2e0ba676d0",
+      "git_blob": "d7fac9775d25379935b69cebcb2f281361a2819b",
+      "bytes": 8471
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3KeyedOrderRingContract.java",
+      "kind": "guard",
+      "sha256": "9ded22e819e8ce1a80090c2449ee80c04b40f13b538bf882f40a300122ae6e79",
+      "git_blob": "a38a2db643ac32bcb71250ac12d3821d578c8a4b",
+      "bytes": 6351
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3KeyedOrderRingTest.java",
+      "kind": "guard",
+      "sha256": "2f3d4463827b2d8c97694e4a2c754e8946d9e22704f03f5895d7b930e75f7b69",
+      "git_blob": "16c941e82df75e940c0424ee2bee89a1f4bcb7c6",
+      "bytes": 348
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionContract.java",
+      "kind": "guard",
+      "sha256": "6e1568e4172fa18420f9eef7910d695f536055cb46f72af1343f0b3c19505e87",
+      "git_blob": "70156f66429646c4ce924faae047670379f3b20f",
+      "bytes": 8170
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionTest.java",
+      "kind": "guard",
+      "sha256": "ae8db832599985506b2790bc96a595b6a6470abc09b377a5fb961679ed8419df",
+      "git_blob": "51a9a4469f1439c6223590568e9498ae831a5d56",
+      "bytes": 378
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismConvergenceTest.java",
+      "kind": "guard",
+      "sha256": "32d45929f4c9fbcdb135bcd414de533959b255803b32ae6e8bd24b5f8863c41e",
+      "git_blob": "2756efa51e88a1e5078beddf9b61508d32bfaef8",
+      "bytes": 17033
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapSelfTest.java",
+      "kind": "guard",
+      "sha256": "b61d390196173ef0d4f99a86d0569f0542f9805d639a29eff4035140f6cf10ea",
+      "git_blob": "9f076ba1d21747e412904b2042510b0ca1e460cd",
+      "bytes": 18625
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LinkedClearContract.java",
+      "kind": "guard",
+      "sha256": "83e26a50cc6e1084b72d64baeb9941eb224611911d57fb5f4f756b24b9231f3f",
+      "git_blob": "48c2e387d0778f29e0f0ee4a4eef6d6137500167",
+      "bytes": 9649
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LinkedListClearRangeProof.java",
+      "kind": "guard",
+      "sha256": "853e854453c50872ffaa5c0ee2e962e0ba275a210d3c85039adfb6a83f1aeb94",
+      "git_blob": "6b2ce48187ea7d252fbb1d9978b36e90159f69c6",
+      "bytes": 11080
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LinkedListSparseClearProbe.java",
+      "kind": "guard",
+      "sha256": "516a362c5a03ce8d04b6781b5c01e55bbbc9e34ed8b2c77ac5096a590c0931a1",
+      "git_blob": "d551b143fe7268da8ad19cbb1d5d69d7119446c8",
+      "bytes": 5831
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongProjectionOrderConvergenceTest.java",
+      "kind": "guard",
+      "sha256": "c01869b9265cb74f4b819abe0e6d97b0fadd375ab3f3f6fd666a7a524ba4b042",
+      "git_blob": "c207a92017a4c964061253212606f64d9c7ffd27",
+      "bytes": 464
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java",
+      "kind": "guard",
+      "sha256": "338d443ef01b118377940397b447b083af9a5a73c8bd8a001005b08efd5a9666",
+      "git_blob": "9e64f4c57ab840b0da744bcff43b9f703fe033f8",
+      "bytes": 9053
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PackedPredicateSelectionProof.java",
+      "kind": "guard",
+      "sha256": "bde737247c44997faf244850792993e2f5a265ec7201051df3f343f71d61072b",
+      "git_blob": "9399d16fa42ce60ead2ca01468a82b2a0c2d1aa9",
+      "bytes": 20934
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotProof.java",
+      "kind": "guard",
+      "sha256": "af3ef8b3a696b84cf098556f8b92f2538532a2c555e617a91f0716bc4f437812",
+      "git_blob": "3b2d4277500da38f74335aa162064aaf5a14cdb5",
+      "bytes": 8209
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotTest.java",
+      "kind": "guard",
+      "sha256": "812bac31a2fc6b5aed2fffec58032823e20c2ad2d3289cc4ff0ca85c022bb6e8",
+      "git_blob": "09dbe9c3d52bd96f2d98c9d634e1327878d70579",
+      "bytes": 675
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PrimitiveSequenceCountProof.java",
+      "kind": "guard",
+      "sha256": "999e24457f295d466faac6f59b171dffd123e0ae34df1d1c65820a59af24e640",
+      "git_blob": "aacf5b501461728b9cb05d9939461103cd5324ec",
+      "bytes": 9490
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ProjectionRefinementProbe.java",
+      "kind": "guard",
+      "sha256": "f3c44e00f608aba01171e7ce781a233949686034cb621254ade6af8ebf3bbc54",
+      "git_blob": "515fa0a01cb9e00cbc914714df6835f5eaa3ed5e",
+      "bytes": 9789
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorContract.java",
+      "kind": "guard",
+      "sha256": "549ae933049b3f3925036cf0c188aaf0affea95ecf5c7d6e05c1ee1426325381",
+      "git_blob": "ba4b96a53d5a16fa9cfe8312dbfb03af16c7bb5f",
+      "bytes": 6497
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SnapshotSortIsolationProof.java",
+      "kind": "guard",
+      "sha256": "bd657895fc23c7f62623b047fa3cb84b85b1e58c5538fc696424ad2c77c9545d",
+      "git_blob": "68584f7698f4c309d94278663060cbcc55a6d98a",
+      "bytes": 7764
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StrictFilteredSequencedContract.java",
+      "kind": "guard",
+      "sha256": "e7d66bd8bbfa6eb78f33186d9b7814a333c95ffa468d18d892fce3054bc60207",
+      "git_blob": "bbe5742df9142538eb2d757a0ad8bdfcf6b8a2d4",
+      "bytes": 7630
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StrictFilteredSequencedTest.java",
+      "kind": "guard",
+      "sha256": "ff511e81630a3185079db9c1790961a0bfb9c0983007f5e531568764456ec54a",
+      "git_blob": "2cccec78a561364ec1c915b47d56d118a8cf94d4",
+      "bytes": 344
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ViewportPlanProof.java",
+      "kind": "guard",
+      "sha256": "2bb907914a4f23a5e6c6ee420bedfee277d9f427722bbb914de33edffa92ff85",
+      "git_blob": "b53a9cd97c5ca152aaceab90dd44e7564fc27ccc",
+      "bytes": 3487
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ViewportReceivingTest.java",
+      "kind": "guard",
+      "sha256": "47984f6a749acd9cdf774f7a3a0596aea96834b09260655c6e3db3aa9369056f",
+      "git_blob": "5387552e5100a29d69ae76a9bc9eacb501e1926a",
+      "bytes": 448
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ViewportTreeProof.java",
+      "kind": "guard",
+      "sha256": "e1f4ecb44d5865376f50b0c2aa3361aa3ecbf134db73bcaad0a587b8a2604172",
+      "git_blob": "364a0de87b2fd45eefdef8aa6b1aee04ebfccc75",
+      "bytes": 9446
+    },
+    {
+      "path": "m3/collections/src/test/native/m3_mask_empty_regions.c",
+      "kind": "guard",
+      "sha256": "df25153fedbbec1b7834bbd731edd2e9b1c20ce70fdee1de2e1b4a0745237274",
+      "git_blob": "5b3e171856bda16c0590a7fa5f2dc086095461f5",
+      "bytes": 22555
+    },
+    {
+      "path": "m3/collections/qualification/collection-refinement-20261019/verify.py",
+      "kind": "helper",
+      "sha256": "fd40d196efbb462243eba6b43d9e78ebc4162c9e2b0f13beeafac804ae8c228e",
+      "git_blob": "f03c70f863525f8fb1276ffbd5f7044c9bd4450c",
+      "bytes": 25575
+    },
+    {
+      "path": "m3/collections/qualification/collection-refinement-20261019/probe-plan.json",
+      "kind": "helper",
+      "sha256": "91b07ee6bec984b2229eaaa1041662e4d93a72a3e222b5111277d6c5da9e7a39",
+      "git_blob": "a6617a5cc9283611260d76dea9e8f139a593712f",
+      "bytes": 3237
+    },
+    {
+      "path": "m3/docs/viewport-everywhere/convergence-20261019/RECEIVING.md",
+      "kind": "documentation",
+      "sha256": "3ddd8f9e24dcff888448ea8225f63d2a6727e473b49ba20eadc0fae8a76e13a1",
+      "git_blob": "fcaae7df0d2966e3f7df829cdc7cce32c4245bbd",
+      "bytes": 7432
+    }
+  ],
+  "mirror_readback": [
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/LICENSE",
+      "canonical_path": "LICENSE",
+      "git_blob": "29f81d812f3e768fa89638d1f72920dbfd1413a8",
+      "mode": "100644",
+      "bytes": 11558,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/NOTICE",
+      "canonical_path": "NOTICE",
+      "git_blob": "97bb5d49f8bd3bc573c19afe4ea2392a3d02704e",
+      "mode": "100644",
+      "bytes": 17628,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/proof/M3CollectionRefinementRecipeProof.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/proof/M3CollectionRefinementRecipeProof.java",
+      "git_blob": "2ae650d816a2f9cd13fa7d819e2076e1304c3b81",
+      "mode": "100644",
+      "bytes": 13453,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/LICENSE",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/LICENSE",
+      "git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "mode": "100644",
+      "bytes": 11358,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/NETBEANS-NOTICE.txt",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/NETBEANS-NOTICE.txt",
+      "git_blob": "d20476671148b88a11fc43ea254ad4e230cfedd5",
+      "mode": "100644",
+      "bytes": 1028,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/NOTICE",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/NOTICE",
+      "git_blob": "c35cf82657474282058afc7ffbcb98c46fd865e3",
+      "mode": "100644",
+      "bytes": 423,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/pom.xml",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/pom.xml",
+      "git_blob": "2e9dd0126296be03531c2d7fcb008cb4b1186a91",
+      "mode": "100644",
+      "bytes": 11969,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "git_blob": "1a31827cd6274b5ad8eb62f3a5ce0e5e0667478f",
+      "mode": "100644",
+      "bytes": 31807,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "git_blob": "217700023c2a6456a505b07b311290f8da8c02e2",
+      "mode": "100644",
+      "bytes": 14233,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "git_blob": "b81b069fb4815f0c78b17119390d7b204f6179d1",
+      "mode": "100644",
+      "bytes": 18371,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "git_blob": "0be72190789c7248a3093480b23b0c119a3243a4",
+      "mode": "100644",
+      "bytes": 9264,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "git_blob": "1e77b2027aa008aa8aebfeaf4b00a5bb89e5b7bf",
+      "mode": "100644",
+      "bytes": 13942,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3KeyedParallelismPlan.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3KeyedParallelismPlan.java",
+      "git_blob": "f48930e2c0b8cc767340e96ea2175d5e070ddaaf",
+      "mode": "100644",
+      "bytes": 11490,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3LinkedList.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3LinkedList.java",
+      "git_blob": "cc3764b135731e02ed91dbbe60dda587b17e10a5",
+      "mode": "100644",
+      "bytes": 14310,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "git_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66",
+      "mode": "100644",
+      "bytes": 5865,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "git_blob": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+      "mode": "100644",
+      "bytes": 8421,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
+      "git_blob": "44778a63d99c5b1f99adee536b954a4ebb8c64f3",
+      "mode": "100644",
+      "bytes": 554,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java",
+      "git_blob": "e2cff159750d9b7f45cd438a8d517aff8d5bff43",
+      "mode": "100644",
+      "bytes": 15747,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3ObjectStream.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3ObjectStream.java",
+      "git_blob": "82cc77e25b01a3fc27469594606950c1ad2c8372",
+      "mode": "100644",
+      "bytes": 27260,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java",
+      "git_blob": "2c70b653b38c467998de97c0f84e4c0cdfdda6c8",
+      "mode": "100644",
+      "bytes": 17415,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3RowIndex.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3RowIndex.java",
+      "git_blob": "f337eed262b817edb5c460b0a0df8338517a8518",
+      "mode": "100644",
+      "bytes": 2284,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3RowTree.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3RowTree.java",
+      "git_blob": "5f6ea21614dd532bbfecabcc505bffa53255c4f3",
+      "mode": "100644",
+      "bytes": 15700,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3RowTreeItem.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3RowTreeItem.java",
+      "git_blob": "607497c4292f802130a0ecef87a2781ba0b1315a",
+      "mode": "100644",
+      "bytes": 990,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java",
+      "git_blob": "b945fd98cef1ea03e30131e1460c507cd90119c9",
+      "mode": "100644",
+      "bytes": 1268,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+      "git_blob": "894e273ee0744be8590bac08a791790cc7c66b6f",
+      "mode": "100644",
+      "bytes": 11992,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+      "git_blob": "2fe08d8728732e5f53e75d9feb34c9c6ffc74a8d",
+      "mode": "100644",
+      "bytes": 4051,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3WarmHeapGrowth.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3WarmHeapGrowth.java",
+      "git_blob": "36ed94e4f6237e6e3a9d18f5da9d0d87bf36a1e5",
+      "mode": "100644",
+      "bytes": 4042,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/java/com/m3/collections/M3WindowPlan.java",
+      "git_blob": "de534edb6fcd76ca188b1c61a2d30b7be47c98da",
+      "mode": "100644",
+      "bytes": 6211,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "git_blob": "15024c40ba9b92fd50fb7823ecfa9543aba22be1",
+      "mode": "100644",
+      "bytes": 16830,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "git_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e",
+      "mode": "100644",
+      "bytes": 6433,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/native/collections/m3_index_path_masks.c",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/native/collections/m3_index_path_masks.c",
+      "git_blob": "086b49293257fd17cc7fbd1ebbb98460aa677e35",
+      "mode": "100644",
+      "bytes": 5772,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+      "git_blob": "821876dfb56d836a0ae23e4bc16a391fd7f97ef2",
+      "mode": "100644",
+      "bytes": 3458,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3FilteredMergedSequencedContract.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3FilteredMergedSequencedContract.java",
+      "git_blob": "3dd297afa09fca7dc5f2be4628dfee040bab643d",
+      "mode": "100644",
+      "bytes": 12612,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3FilteredMergedSequencedTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3FilteredMergedSequencedTest.java",
+      "git_blob": "b727cd160516dc38949a26fde71168749c4af67e",
+      "mode": "100644",
+      "bytes": 339,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3IndexedMultiValueOccurrenceSelfTest.java",
+      "git_blob": "d7fac9775d25379935b69cebcb2f281361a2819b",
+      "mode": "100644",
+      "bytes": 8471,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3KeyedOrderRingContract.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3KeyedOrderRingContract.java",
+      "git_blob": "a38a2db643ac32bcb71250ac12d3821d578c8a4b",
+      "mode": "100644",
+      "bytes": 6351,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3KeyedOrderRingTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3KeyedOrderRingTest.java",
+      "git_blob": "16c941e82df75e940c0424ee2bee89a1f4bcb7c6",
+      "mode": "100644",
+      "bytes": 348,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionContract.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionContract.java",
+      "git_blob": "70156f66429646c4ce924faae047670379f3b20f",
+      "mode": "100644",
+      "bytes": 8170,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismAdmissionTest.java",
+      "git_blob": "51a9a4469f1439c6223590568e9498ae831a5d56",
+      "mode": "100644",
+      "bytes": 378,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapSelfTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3LazyTreeMapSelfTest.java",
+      "git_blob": "9f076ba1d21747e412904b2042510b0ca1e460cd",
+      "mode": "100644",
+      "bytes": 18625,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3LinkedClearContract.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3LinkedClearContract.java",
+      "git_blob": "8613db4f70c7200eabf07e4b5eecc56499e79e4d",
+      "mode": "100644",
+      "bytes": 9527,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3NoRetainedStructuralEntryTest.java",
+      "git_blob": "9e64f4c57ab840b0da744bcff43b9f703fe033f8",
+      "mode": "100644",
+      "bytes": 9053,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotProof.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotProof.java",
+      "git_blob": "3b2d4277500da38f74335aa162064aaf5a14cdb5",
+      "mode": "100644",
+      "bytes": 8209,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotTest.java",
+      "git_blob": "09dbe9c3d52bd96f2d98c9d634e1327878d70579",
+      "mode": "100644",
+      "bytes": 675,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorContract.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorContract.java",
+      "git_blob": "ba4b96a53d5a16fa9cfe8312dbfb03af16c7bb5f",
+      "mode": "100644",
+      "bytes": 6497,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3StrictFilteredSequencedContract.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3StrictFilteredSequencedContract.java",
+      "git_blob": "bbe5742df9142538eb2d757a0ad8bdfcf6b8a2d4",
+      "mode": "100644",
+      "bytes": 7630,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3StrictFilteredSequencedTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3StrictFilteredSequencedTest.java",
+      "git_blob": "2cccec78a561364ec1c915b47d56d118a8cf94d4",
+      "mode": "100644",
+      "bytes": 344,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3ViewportPlanProof.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3ViewportPlanProof.java",
+      "git_blob": "b53a9cd97c5ca152aaceab90dd44e7564fc27ccc",
+      "mode": "100644",
+      "bytes": 3487,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3ViewportReceivingTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3ViewportReceivingTest.java",
+      "git_blob": "5387552e5100a29d69ae76a9bc9eacb501e1926a",
+      "mode": "100644",
+      "bytes": 448,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3ViewportTreeProof.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/src/test/java/com/m3/collections/M3ViewportTreeProof.java",
+      "git_blob": "364a0de87b2fd45eefdef8aa6b1aee04ebfccc75",
+      "mode": "100644",
+      "bytes": 9446,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/SYNEXIA-DONATION-NOTICE.txt",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/before/m3/collections/SYNEXIA-DONATION-NOTICE.txt",
+      "git_blob": "dba49be9546695ec85f0f05fc073752e9950a95a",
+      "mode": "100644",
+      "bytes": 1831,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/COMPOSITION.json",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/COMPOSITION.json",
+      "git_blob": "93cc7a4f07252165ee71463922376c99931988b7",
+      "mode": "100644",
+      "bytes": 6862,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/COMPOSITION.json.license",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/COMPOSITION.json.license",
+      "git_blob": "3a92b70ca01aa4bc5b01d0fc8e11634b03ad8da7",
+      "mode": "100644",
+      "bytes": 209,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/pom.xml",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/pom.xml",
+      "git_blob": "1a7cee0cab23737b9141c18a8cb1996ce981e074",
+      "mode": "100644",
+      "bytes": 3865,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/README.md",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/README.md",
+      "git_blob": "2bb630e060106b0c171f68b8e82f2f2eb0d3c39f",
+      "mode": "100644",
+      "bytes": 2048,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/README.md.license",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/current-master/README.md.license",
+      "git_blob": "4d7dcb894874c0b16b8c3a82027ef406eaab721f",
+      "mode": "100644",
+      "bytes": 209,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/proof/verify_all_native.py",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/proof/verify_all_native.py",
+      "git_blob": "9b31917331c27105c45c63889d5ca7c71ddef929",
+      "mode": "100644",
+      "bytes": 7835,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CurrentMasterConvergence20261019.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CurrentMasterConvergence20261019.java",
+      "git_blob": "54f4d0e9a7b01e6db7e596822519e39fcdec0161",
+      "mode": "100644",
+      "bytes": 783,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CurrentMasterConvergence20261019.java.license",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CurrentMasterConvergence20261019.java.license",
+      "git_blob": "f46f337c7028785b645d9de2aab217927d8fddd2",
+      "mode": "100644",
+      "bytes": 209,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "git_blob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "mode": "100644",
+      "bytes": 10964,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "git_blob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "mode": "100644",
+      "bytes": 5187,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-collection-refinement-20261019/templates/probe-plan.json.txt",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-collection-refinement-20261019/templates/probe-plan.json.txt",
+      "git_blob": "a6617a5cc9283611260d76dea9e8f139a593712f",
+      "mode": "100644",
+      "bytes": 3237,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-collection-refinement-20261019/templates/verify.py.txt",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-collection-refinement-20261019/templates/verify.py.txt",
+      "git_blob": "f03c70f863525f8fb1276ffbd5f7044c9bd4450c",
+      "mode": "100644",
+      "bytes": 25575,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/manifest.tsv",
+      "git_blob": "32617340ce118d80199a3fd426cacc2948beedbb",
+      "mode": "100644",
+      "bytes": 13432,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/manifest.tsv.license",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/manifest.tsv.license",
+      "git_blob": "93fd0e91e07d3a506c9ebc5c084039436c63796a",
+      "mode": "100644",
+      "bytes": 209,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/algorithm-catalog/collection-refinement-20261019.tsv",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/algorithm-catalog/collection-refinement-20261019.tsv",
+      "git_blob": "9c08f3347399c14bdb1a0c094f883e7d0aeda275",
+      "mode": "100644",
+      "bytes": 74781,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "git_blob": "d299c9dc3853481e4595018e4057cf5777a9c3dc",
+      "mode": "100644",
+      "bytes": 32288,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "git_blob": "2caf4faf78ea20ccb41de9a61b08790855b4edd4",
+      "mode": "100644",
+      "bytes": 15539,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3KeyedParallelismPlan.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3KeyedParallelismPlan.java",
+      "git_blob": "e800b5e3f3a11476302a3c18a964f2186664d8ef",
+      "mode": "100644",
+      "bytes": 11559,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3LinkedList.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3LinkedList.java",
+      "git_blob": "3bdfb1e3d9e92698033b6aee38821fec57eecc41",
+      "mode": "100644",
+      "bytes": 14599,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "git_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
+      "mode": "100644",
+      "bytes": 9493,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java",
+      "git_blob": "37a142b8a015fdf6dfcab4cff50fa73f58907990",
+      "mode": "100644",
+      "bytes": 17590,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3RowTree.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/java/com/m3/collections/M3RowTree.java",
+      "git_blob": "8dd1abae1624ec2b740143d2c36a03a9b1e7b8bd",
+      "mode": "100644",
+      "bytes": 15384,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "git_blob": "8486355cbf46d429af3d68adf17db3f1d308354c",
+      "mode": "100644",
+      "bytes": 17859,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3CollectionRefinementTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3CollectionRefinementTest.java",
+      "git_blob": "257451818b916e6d1a482f678fbd7d66f1de5ecd",
+      "mode": "100644",
+      "bytes": 1069,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3GenericFilteredTerminalProof.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3GenericFilteredTerminalProof.java",
+      "git_blob": "30368bd67183f4c7b1a08eb624027aa29a16f02f",
+      "mode": "100644",
+      "bytes": 16797,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismConvergenceTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3KeyedParallelismConvergenceTest.java",
+      "git_blob": "2756efa51e88a1e5078beddf9b61508d32bfaef8",
+      "mode": "100644",
+      "bytes": 17033,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3LinkedClearContract.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3LinkedClearContract.java",
+      "git_blob": "48c2e387d0778f29e0f0ee4a4eef6d6137500167",
+      "mode": "100644",
+      "bytes": 9649,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3LinkedListClearRangeProof.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3LinkedListClearRangeProof.java",
+      "git_blob": "6b2ce48187ea7d252fbb1d9978b36e90159f69c6",
+      "mode": "100644",
+      "bytes": 11080,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3LinkedListSparseClearProbe.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3LinkedListSparseClearProbe.java",
+      "git_blob": "d551b143fe7268da8ad19cbb1d5d69d7119446c8",
+      "mode": "100644",
+      "bytes": 5831,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3LongProjectionOrderConvergenceTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3LongProjectionOrderConvergenceTest.java",
+      "git_blob": "c207a92017a4c964061253212606f64d9c7ffd27",
+      "mode": "100644",
+      "bytes": 464,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3PackedPredicateSelectionProof.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3PackedPredicateSelectionProof.java",
+      "git_blob": "9399d16fa42ce60ead2ca01468a82b2a0c2d1aa9",
+      "mode": "100644",
+      "bytes": 20934,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3PrimitiveSequenceCountProof.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3PrimitiveSequenceCountProof.java",
+      "git_blob": "aacf5b501461728b9cb05d9939461103cd5324ec",
+      "mode": "100644",
+      "bytes": 9490,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3ProjectionRefinementProbe.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3ProjectionRefinementProbe.java",
+      "git_blob": "515fa0a01cb9e00cbc914714df6835f5eaa3ed5e",
+      "mode": "100644",
+      "bytes": 9789,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3SnapshotSortIsolationProof.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/java/com/m3/collections/M3SnapshotSortIsolationProof.java",
+      "git_blob": "68584f7698f4c309d94278663060cbcc55a6d98a",
+      "mode": "100644",
+      "bytes": 7764,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/native/m3_mask_empty_regions.c",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-current-master-convergence-20261019/templates/m3/collections/src/test/native/m3_mask_empty_regions.c",
+      "git_blob": "5b3e171856bda16c0590a7fa5f2dc086095461f5",
+      "mode": "100644",
+      "bytes": 22555,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-current-master-convergence-20261019.yml",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-current-master-convergence-20261019.yml",
+      "git_blob": "f5874ea3a567f846ae8138f691d456da0be299e4",
+      "mode": "100644",
+      "bytes": 417,
+      "status": "EXACT"
+    },
+    {
+      "target": "m3/tooling/migration-recipes/viewport-convergence-20261019/synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3CurrentMasterConvergence20261019Test.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3CurrentMasterConvergence20261019Test.java",
+      "git_blob": "017e5818eb66d62d8b507b635fc8f284b99efdb9",
+      "mode": "100644",
+      "bytes": 8577,
+      "status": "EXACT"
+    }
+  ],
+  "pr_file_status_counts": {
+    "added": 113,
+    "modified": 9
+  },
+  "source_metadata_separation": "One design commit, one exact 21-target source/proof commit, then 100 added proof/metadata files; final commit has no runtime-source edits.",
+  "main_index": {
+    "path": "m3/docs/name-mapping.json",
+    "status": "UNCHANGED_FROM_QUALIFIED_BASE",
+    "git_blob": "a7008bc04536586218da76e823bf570d50cec526",
+    "bytes": 451339
+  },
+  "master_drift": {
+    "head": "df532e779056dbec203dde20030657c3d144f5b5",
+    "commits": 39,
+    "files": 17,
+    "overlap": [],
+    "status": "SOURCE_SCOPE_ONLY_NOT_FRESH_RUNTIME_EXECUTION"
+  },
+  "ci": {
+    "status": "NOT_GREEN",
+    "receipt": "CI_READBACK.json",
+    "sha256": "e805f2d10409188d6bf73f3ff0834e90ebd3adc99912846f0b8018ba5dba9c30",
+    "counts": {
+      "completed/skipped": 11,
+      "queued/null": 2,
+      "completed/failure": 75,
+      "completed/success": 11
+    }
+  },
+  "execution": {
+    "local_tests": 0,
+    "local_compilers": 0,
+    "workflow_reruns": 0,
+    "remote_mutations": 0
+  },
+  "limitations": [
+    "Readback verifies publication custody; prior canonical qualification receipts retain their original source epoch.",
+    "No installed JDK, jtreg/JCK, Android/iOS host, SWT/Skija runtime or phase promotion.",
+    "Only two of the failed CI jobs were attributed from logs; all other failures remain unclassified."
+  ],
+  "input_sha256": {
+    "ADMISSION.json": "8a2d5baf5c5168b654e7fe6d88ac83319b4875b0f7b908115e9c64d3320884f7",
+    "TREE_READBACK.json": "55eeceb3f20b4b1aa852f64c984448a49f9a3472d43e8b7d2f9edbf5801c8f09",
+    "PR_READBACK.json": "d131a48adaf8324266012c6ee2002ab3f08bff5f66ddc30ef3faa10427bfb085",
+    "FETCHED_FILE_INDEX.json": "8028740d8ebe3c3f397bb52d70ac15b7a7d125b7abafe8b9df02f4a2857bbb9f",
+    "BASELINE_REPLACEMENT_INPUTS.json": "da4df846adc39b5a15af26e221072295edd77be42ffcfa459d24b709e0a6cb90",
+    "FRESH_REMOTE_OBSERVATIONS.json": "9fd2dbd8532cc6116b747ce96e1c013b31048a52fb18822f4fd3812ffdd342db",
+    "READBACK_ATTEMPT01.json": "77e5792cd35a8031df13022f57d3b53f7c332005135670e23bb3267ecfcdccdd"
+  }
+}

@@ -1,0 +1,2 @@
+MOP_MEMORY_CHECK PASS digest=daa18e6b24cc48d0594eaea3db028a821fb555a831f0c4c10a2b9cdedc829452 admission=PENDING
+MOP_RCM_CONFORMANCE PASS checks=129 controlCases=32 profile=swt-current-owner-runtime-closure-20261021/1.0

@@ -1,0 +1,98 @@
+{
+  "status": "READY_FOR_RECEIVING_CI_COMMIT_NOT_EXECUTED",
+  "path": ".github/workflows/m3-physical-state-superset-20261019.yml",
+  "finding": "This workflow checks out the PR merge and compiles/runs current owners. Its historical exact additive-postimage pin became stale after a qualified private Java predicate/count refinement.",
+  "decision": "Advance only the M3IndexedListSnapshot literal to the qualified receiver postimage and record the canonical manifest authority. Preserve all six exact checks, unknown-source refusal, both direct Java proof mains, C17 strict build and both native-required proof invocations.",
+  "historical_baseline": "217700023c2a6456a505b07b311290f8da8c02e2 remains an immutable preimage fixture at canonical74d5; the current-owner workflow is not used to relabel it.",
+  "canonical_source_pin": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+  "manifest_sha256": "5bb24c679cea5b4d6daddd870323401466419f90ad105a845efe94352e708819",
+  "all_six_source_pins": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "previous_expected_git_blob": "217700023c2a6456a505b07b311290f8da8c02e2",
+      "receiving_expected_git_blob": "2caf4faf78ea20ccb41de9a61b08790855b4edd4",
+      "published_066b_git_blob": "2caf4faf78ea20ccb41de9a61b08790855b4edd4",
+      "status": "EXACT_RECEIVER_POSTIMAGE"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java",
+      "previous_expected_git_blob": "e2cff159750d9b7f45cd438a8d517aff8d5bff43",
+      "receiving_expected_git_blob": "e2cff159750d9b7f45cd438a8d517aff8d5bff43",
+      "published_066b_git_blob": "e2cff159750d9b7f45cd438a8d517aff8d5bff43",
+      "status": "EXACT_RECEIVER_POSTIMAGE"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMaskSelfTest.java",
+      "previous_expected_git_blob": "01945ebc69137affa7ab3ef708fcbb0cd95a5c24",
+      "receiving_expected_git_blob": "01945ebc69137affa7ab3ef708fcbb0cd95a5c24",
+      "published_066b_git_blob": "01945ebc69137affa7ab3ef708fcbb0cd95a5c24",
+      "status": "EXACT_RECEIVER_POSTIMAGE"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMaskTest.java",
+      "previous_expected_git_blob": "10931f3f8316b3cecd0f27cbf25e468175022b19",
+      "receiving_expected_git_blob": "10931f3f8316b3cecd0f27cbf25e468175022b19",
+      "published_066b_git_blob": "10931f3f8316b3cecd0f27cbf25e468175022b19",
+      "status": "EXACT_RECEIVER_POSTIMAGE"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotProof.java",
+      "previous_expected_git_blob": "3b2d4277500da38f74335aa162064aaf5a14cdb5",
+      "receiving_expected_git_blob": "3b2d4277500da38f74335aa162064aaf5a14cdb5",
+      "published_066b_git_blob": "3b2d4277500da38f74335aa162064aaf5a14cdb5",
+      "status": "EXACT_RECEIVER_POSTIMAGE"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PhysicalStateSnapshotTest.java",
+      "previous_expected_git_blob": "09dbe9c3d52bd96f2d98c9d634e1327878d70579",
+      "receiving_expected_git_blob": "09dbe9c3d52bd96f2d98c9d634e1327878d70579",
+      "published_066b_git_blob": "09dbe9c3d52bd96f2d98c9d634e1327878d70579",
+      "status": "EXACT_RECEIVER_POSTIMAGE"
+    }
+  ],
+  "qualified_evidence": {
+    "path": "synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/viewport-convergence/evidence/current-foundation-validation/attempt02/RECEIPT.json",
+    "sha256": "01c2b1d6078b2b4a8cd45a54ce81f4a07122e541a500995f2bfdfb595cc7f7b3",
+    "physical_proof": {
+      "sha256": "9174fa71d39499cfce9de491c80d5626bb7f4bd4285c0a10bd3b963e26ab6fcb",
+      "status": "BYTE_EQUAL",
+      "stdout": "PASS M3PhysicalStateSnapshotProof assertions=13578 backend=JAVA"
+    },
+    "selected_api_descriptors": {
+      "owners": [
+        "M3FilteredViews",
+        "M3LinkedList",
+        "M3PrimitiveFilteredSequences",
+        "M3IndexedListSnapshot",
+        "M3KeyedParallelismPlan",
+        "M3LongIndexProjection",
+        "M3LongIndexProjection$Order",
+        "M3RowTree",
+        "M3WindowPlan"
+      ],
+      "sha256": "f05cd445debce9c85e4829d9b406b14cdebd60e191900b6d545d964a5bd0bb25",
+      "status": "BYTE_EQUAL"
+    }
+  },
+  "file": {
+    "path": ".github/workflows/m3-physical-state-superset-20261019.yml",
+    "mode": "100644",
+    "before_git_blob": "ee83df7c18ef17fd87dfb2fda80eb7c309e93325",
+    "before_sha256": "82c67c9c64d80a7b79d70a3c4a502f1d1a727923da8ab84152c4bf0098531538",
+    "after_git_blob": "e5e410cf86efe51c638e3d53df50a61d5f61d80e",
+    "after_sha256": "f780dd319e1d7f666473433caa1c2a4426f3cee549b7c95a5c7f25104393f0f5",
+    "source_epoch": "066b7a15c29388f3444ab3cf0550ecf1df698c6d"
+  },
+  "validation": {
+    "method": "Exact one-line replacement with reversible substitution; all six resulting Git pins match published066b raw readbacks.",
+    "runtime_executions": 0,
+    "remote_mutations": 0
+  },
+  "excluded_changes": [
+    "No runtime Java/JNI edits",
+    "No test assertion removal",
+    "No Maven/JUnit version or POM edits",
+    "No source-pin wildcard or skip",
+    "No installed/mobile/JCK promotion"
+  ]
+}

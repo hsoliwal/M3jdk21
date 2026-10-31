@@ -1,0 +1,19 @@
+{
+  "candidate_materialization": "ALL_SUPPLIED_MANIFEST_INPUTS_VALIDATED",
+  "resolver": "com.m3.tools.modulepack.M3ModuleGraph",
+  "roots": [
+    "java.se",
+    "jdk.m3fs",
+    "jdk.unsupported",
+    "jdk.zipfs"
+  ],
+  "selected_vendored_modules": [
+    "commons.logging",
+    "jdk.m3fs",
+    "org.apache.commons.codec",
+    "org.apache.commons.compress",
+    "org.apache.commons.io",
+    "org.apache.commons.lang3"
+  ],
+  "supplied_candidates": 6
+}

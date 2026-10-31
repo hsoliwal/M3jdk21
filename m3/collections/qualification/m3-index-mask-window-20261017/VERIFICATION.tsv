@@ -1,0 +1,12 @@
+gate	status	evidence	qualifier
+Java21 javac -proc:none -Xlint:all -Werror	PASS	local execution 2026-10-17; M3IndexMaskWindow and standalone selftest compiled	ABI-matching local baseline shim, not full installed repository module
+Java standalone deterministic masks/arrays	PASS	PASS M3_INDEX_MASK_WINDOW checks=15298 native=false	2048 seeded mixed-order trials plus boundary/deep-sparse/invalid-input tests
+C11 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic	PASS	local GCC build of new native translation unit	new C source only; original target C source not rebuilt locally
+Native-loaded differential	PASS	PASS M3_INDEX_MASK_WINDOW checks=30596 native=true	local ABI shim and actual new JNI exported symbol; two backends per scenario
+UndefinedBehaviorSanitizer JNI	PASS	PASS M3_INDEX_MASK_WINDOW checks=30596 native=true	compiled new JNI translation unit with -fsanitize=undefined
+SHA256 recipe template fixture replay	PASS	PASS INDEX_MASK_WINDOW_RECIPE targets=4 changes=0 fixed_point=ok drift=refused	byte-exact postimages checked, scratch first/second pass and tamper refusal
+Maven JUnit application	NOT_RUN	Maven command unavailable in sandbox	must execute on exact PR head
+Maven OpenRewrite SDK	NOT_RUN	Maven command unavailable in sandbox	actual class-backed Scanner/Recipe.run not established by hash proof
+Whole M3JDK21 java.base / native reactor	NOT_RUN	no checkout/build image	preexisting API contracts left untouched
+Installed JDK image package / jtreg	NOT_RUN	no installed target image	additive module receiver only
+Performance / SWT UI	NOT_RUN	no trustworthy benchmark or native UI suite	no speedup/GUI claim

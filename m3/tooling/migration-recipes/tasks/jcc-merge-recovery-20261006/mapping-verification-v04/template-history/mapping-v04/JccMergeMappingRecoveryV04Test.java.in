@@ -1,0 +1,868 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.rewrite.backport;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.UUID;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.openrewrite.Checksum;
+import org.openrewrite.FileAttributes;
+import org.openrewrite.InMemoryExecutionContext;
+import org.openrewrite.Recipe;
+import org.openrewrite.RecipeSerializer;
+import org.openrewrite.SourceFile;
+import org.openrewrite.config.Environment;
+import org.openrewrite.internal.InMemoryLargeSourceSet;
+import org.openrewrite.marker.BuildMetadata;
+import org.openrewrite.marker.RecipesThatMadeChanges;
+import org.openrewrite.text.PlainText;
+
+/**
+ * Exact current mapping recovery through the retained text owner.
+ * The unresolved template must be bound to an actual verified publication before execution.
+ * This finite metadata proof grants no source-export or rebuilt-JDK acceptance authority.
+ */
+final class JccMergeMappingRecoveryV04Test {
+    private static final String CRATE = "jcc-merge-recovery-20261006-mapping-v04";
+    private static final String ROOT = "/com/m3/rewrite/backport/jdk21-hash-pinned-text/" + CRATE + "/";
+    private static final String SUMMARY = "/com/m3/rewrite/backport/" + CRATE + "/publication-input-summary.json";
+    private static final String HISTORY = "/com/m3/rewrite/backport/jdk21-hash-pinned-text/"
+            + "jcc-merge-recovery-20261006-history-01/";
+    private static final String LAB = "synexia.jcc-recipe-laboratory";
+    private static final String JNI = "synexia.jcc-java-jni-regression";
+    private static final Set<String> JCC_IDS = Set.of(LAB, JNI);
+    private static final String IOP = "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/"
+            + "M3IopPatternMechanicalPasses.java";
+    private static final String DESTINATION = "09075810b55229662329a158923287e8a7118f86";
+    private static final String DESTINATION_ROOT = "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52";
+    private static final String INPUT_EPOCH_SHA256 = "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70";
+    private static final String SOURCE_HISTORY = "becb01f90bda8302b25592c3705fc35c7a250676";
+    private static final String RECEIVER_HISTORY = "946fd922c1d878e3f32309c83d132057a7ef8451";
+    private static final String TEXT_OWNER = "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/"
+            + "M3Jdk21HashPinnedTextSnapshotRecipe.java";
+    private static final String TEXT_OWNER_SHA256 = "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6";
+    private static final String PRIOR_MAP_SHA256 = "eb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e";
+    private static final String PRIOR_BINDINGS_SHA256 = "f8b27e3582eb494af2c8dd47225976f974be6edc2f6c26313975064d48739497";
+    private static final String SOURCE_COMMIT = "__UNRESOLVED_ACTUAL_SOURCE_COMMIT__";
+    private static final String SOURCE_ROOT_TREE = "__UNRESOLVED_ACTUAL_SOURCE_ROOT_TREE__";
+    private static final String SOURCE_INPUT_SHA256 = "__UNRESOLVED_ACTUAL_SOURCE_INPUT_SHA256__";
+    private static final String SUMMARY_SHA256 = "__UNRESOLVED_ACTUAL_PUBLICATION_SUMMARY_SHA256__";
+    private static final String MANIFEST_SHA256 = "__UNRESOLVED_ACTUAL_MAPPING_MANIFEST_SHA256__";
+    private static final String PLAN_SHA256 = "__UNRESOLVED_ACTUAL_MAPPING_PLAN_SHA256__";
+    private static final String PLAN_FILE_SHA256 = "__UNRESOLVED_ACTUAL_MAPPING_PLAN_FILE_SHA256__";
+    private static final ObjectMapper JSON = new ObjectMapper();
+
+    private record Target(String path, String before, String after, String beforeHash, String afterHash) {}
+    private record Guard(String path, String hash) {}
+    // Resource numbering follows bind_mapping.PATHS; manifest and plan order is tested separately.
+    private static final List<Target> TARGETS = List.of(
+            new Target("m3/docs/name-mapping.json", "before-00.txt", "after-00.txt",
+                    "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1",
+                    "__UNRESOLVED_ACTUAL_AFTER_00_SHA256__"),
+            new Target("m3/docs/jcc-source-handoff.md", "before-01.txt", "after-01.txt",
+                    "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+                    "__UNRESOLVED_ACTUAL_AFTER_01_SHA256__"),
+            new Target("m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+                    "before-02.txt", "after-02.txt",
+                    "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+                    "__UNRESOLVED_ACTUAL_AFTER_02_SHA256__"),
+            new Target("m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+                    "before-03.txt", "after-03.txt",
+                    "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+                    "__UNRESOLVED_ACTUAL_AFTER_03_SHA256__"));
+    private static final List<Guard> GUARDS = List.of(
+            new Guard("m3/docs/name-mapping.schema.json", "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"),
+            new Guard("m3/migration/migration.py", "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"),
+            new Guard("m3/migration/recipe.py", "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"),
+            new Guard(TEXT_OWNER, TEXT_OWNER_SHA256),
+            new Guard("m3/tooling/migration-recipes/pom.xml", "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"),
+            new Guard("src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+                    "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"),
+            new Guard("m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/"
+                    + "jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+                    "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1"));
+
+    @BeforeAll
+    static void requireResolvedActualPublicationAndSealedInputs() throws IOException {
+        assertOid(SOURCE_COMMIT);
+        assertOid(SOURCE_ROOT_TREE);
+        assertNotEquals(SOURCE_HISTORY, SOURCE_COMMIT, "Historical publication cannot bind current repairs");
+        for (String pin : List.of(SOURCE_INPUT_SHA256, SUMMARY_SHA256, MANIFEST_SHA256,
+                PLAN_SHA256, PLAN_FILE_SHA256)) assertSha(pin);
+        JsonNode packet = publication();
+        assertEquals("m3-jcc-source-publication-verification-summary/1", packet.path("schema").asText());
+        assertEquals("m3-jcc-source-publication-input/1", packet.path("source_input_schema").asText());
+        assertEquals(SOURCE_INPUT_SHA256, packet.path("source_input_sha256").asText());
+        assertEquals(INPUT_EPOCH_SHA256, packet.path("receiving_input_epoch_sha256").asText());
+        assertEquals(DESTINATION, packet.path("receiving_commit").asText());
+        assertEquals(DESTINATION_ROOT, packet.path("receiving_root_tree").asText());
+        assertBoolean(packet.path("fixture"), false);
+        assertEquals("hsoliwal/com.synexia", packet.path("repository").asText());
+        assertEquals(SOURCE_COMMIT, packet.path("commit").asText());
+        assertEquals(SOURCE_ROOT_TREE, packet.path("root_tree").asText());
+        assertTrue(packet.path("ref").asText().startsWith("refs/heads/"));
+        assertEquals("current-five-owner-repair-publication", packet.path("scope").asText());
+        assertEquals("ACTUAL_GITHUB_READBACK_VERIFIED", packet.path("publication_state").asText());
+        for (String key : List.of("publication_receipt_sha256", "commit_readback_sha256",
+                "root_readback_sha256", "ref_readback_sha256")) assertSha(packet.path(key).asText());
+        assertEquals(SOURCE_COMMIT, packet.path("commit_readback").path("sha").asText());
+        assertEquals(SOURCE_ROOT_TREE, packet.path("commit_readback").path("tree").path("sha").asText());
+        assertEquals(packet.path("ref"), packet.path("ref_readback").path("ref"));
+        assertEquals(SOURCE_COMMIT, packet.path("ref_readback").path("object").path("sha").asText());
+        assertEquals(SOURCE_ROOT_TREE, packet.path("root_readback").path("sha").asText());
+        assertBoolean(packet.path("root_readback").path("truncated"), false);
+        assertFalse(nodes(packet.path("root_readback").path("tree")).isEmpty());
+        assertTrue(packet.findValues("content_base64").isEmpty(), "Summary must not embed source bodies");
+        assertBoolean(packet.path("source_export_admitted"), false);
+        assertBoolean(packet.path("destination_gates_passed"), false);
+        assertFalse(nodes(packet.path("execution_reports")).isEmpty());
+        for (JsonNode report : packet.path("execution_reports")) {
+            assertTrue(M3Jdk21HashPinnedTextSnapshotRecipe.jdkTextPath(report.path("path").asText()));
+            assertSha(report.path("sha256").asText());
+            assertFalse(report.path("scope").asText().isBlank());
+        }
+        for (Target target : TARGETS) {
+            assertSha(target.afterHash());
+            assertNotEquals(target.beforeHash(), target.afterHash());
+            assertEquals(target.beforeHash(), hash(resource(target.before())));
+            assertEquals(target.afterHash(), hash(resource(target.after())));
+        }
+        assertEquals(PRIOR_MAP_SHA256, hash(classpath(HISTORY + "history-0014.txt")));
+        assertEquals(PRIOR_BINDINGS_SHA256, hash(classpath(HISTORY + "history-0016.txt")));
+    }
+
+    @Test
+    void manifestAndPlanSealExactlyFourCurrentImagesAndAllExistingGuards() throws IOException {
+        String manifest = resource("manifest.tsv");
+        assertEquals(MANIFEST_SHA256, hash(manifest));
+        assertTrue(manifest.endsWith("\n"));
+        var sorted = new TreeMap<String, Target>();
+        for (Target target : TARGETS) assertNull(sorted.put(target.path(), target));
+        var expectedLines = new ArrayList<String>();
+        for (Target target : sorted.values()) expectedLines.add(target.path() + "\t" + target.beforeHash()
+                + "\t" + target.afterHash() + "\t" + target.after());
+        assertEquals(expectedLines, manifest.lines().toList());
+
+        String planText = resource("plan.json");
+        assertEquals(PLAN_FILE_SHA256, hash(planText));
+        JsonNode plan = JSON.readTree(planText);
+        assertEquals("m3.sealed-install/1", plan.path("schema").asText());
+        assertEquals("com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/" + CRATE,
+                plan.path("recipe_id").asText());
+        assertEquals(1, plan.path("version").asInt());
+        assertEquals(SOURCE_COMMIT, plan.path("source_commit").asText());
+        assertEquals(DESTINATION, plan.path("destination_base").asText());
+        assertEquals(PLAN_SHA256, plan.path("plan_sha256").asText());
+        assertEquals("Exact current 20-owner mapping metadata; source and destination acceptance remain blocked",
+                plan.path("scope").asText());
+        var outputs = nodes(plan.path("outputs"));
+        assertEquals(4, outputs.size());
+        int index = 0;
+        for (Target target : sorted.values()) {
+            JsonNode output = outputs.get(index++);
+            assertEquals(Set.of("path", "before", "after"), keys(output));
+            assertEquals(target.path(), output.path("path").asText());
+            assertEquals(Set.of("resource", "sha256"), keys(output.path("before")));
+            assertEquals(Set.of("resource", "sha256"), keys(output.path("after")));
+            assertEquals(target.before(), output.path("before").path("resource").asText());
+            assertEquals(target.beforeHash(), output.path("before").path("sha256").asText());
+            assertEquals(target.after(), output.path("after").path("resource").asText());
+            assertEquals(target.afterHash(), output.path("after").path("sha256").asText());
+        }
+        var guards = nodes(plan.path("guards"));
+        assertEquals(7, guards.size());
+        for (int i = 0; i < GUARDS.size(); i++) {
+            assertEquals(Set.of("path", "sha256"), keys(guards.get(i)));
+            assertEquals(GUARDS.get(i).path(), guards.get(i).path("path").asText());
+            assertEquals(GUARDS.get(i).hash(), guards.get(i).path("sha256").asText());
+        }
+    }
+
+    @Test
+    void retainedOwnerProducesExactlyFourOutputsAndPreservesPlainTextIdentity() throws IOException {
+        var before = beforeSources();
+        var metadata = new BuildMetadata(UUID.fromString("e2bc909f-3979-4b5f-ac73-4e9e741c6993"),
+                Map.of("m3-mapping-verification", "original-marker-must-survive"));
+        var timestamp = ZonedDateTime.parse("2026-10-06T00:00:00Z");
+        for (int i = 0; i < before.size(); i++) {
+            SourceFile original = before.get(i);
+            SourceFile enriched = original.withMarkers(original.getMarkers().add(metadata));
+            enriched = enriched.withFileAttributes(new FileAttributes(timestamp, timestamp, timestamp,
+                            true, true, false, original.printAll().getBytes(StandardCharsets.UTF_8).length))
+                    .withCharset(StandardCharsets.UTF_8)
+                    .withCharsetBomMarked(false)
+                    .withChecksum(Checksum.fromHex("SHA-256", hash(original.printAll())));
+            before.set(i, enriched);
+        }
+        SourceFile sentinel = text("unrelated/mapping-sentinel.txt", "preserve unrelated bytes\n");
+        before.add(sentinel);
+        var errors = new ArrayList<Throwable>();
+        var run = recipe().run(new InMemoryLargeSourceSet(before), new InMemoryExecutionContext(errors::add), 1);
+        assertTrue(errors.isEmpty(), errors.toString());
+        var changes = run.getChangeset().getAllResults();
+        assertEquals(4, changes.size());
+        var materialized = new TreeMap<String, String>();
+        var after = new ArrayList<SourceFile>();
+        for (var change : changes) {
+            SourceFile old = assertInstanceOf(PlainText.class, change.getBefore());
+            SourceFile next = assertInstanceOf(PlainText.class, change.getAfter());
+            assertEquals(old.getId(), next.getId());
+            assertEquals(old.getSourcePath(), next.getSourcePath());
+            assertEquals(old.getMarkers(), next.getMarkers().removeByType(RecipesThatMadeChanges.class));
+            assertEquals(metadata, next.getMarkers().findFirst(BuildMetadata.class).orElseThrow());
+            var provenance = next.getMarkers().findAll(RecipesThatMadeChanges.class);
+            assertEquals(1, provenance.size());
+            assertEquals(1, provenance.get(0).getRecipes().size());
+            var stack = provenance.get(0).getRecipes().iterator().next();
+            assertEquals(1, stack.size());
+            assertEquals(CRATE, assertInstanceOf(M3Jdk21HashPinnedTextSnapshotRecipe.class,
+                    stack.get(0)).getCrateName());
+            assertEquals(old.getCharset(), next.getCharset());
+            assertEquals(old.isCharsetBomMarked(), next.isCharsetBomMarked());
+            assertNotNull(old.getFileAttributes());
+            assertEquals(old.getFileAttributes(), next.getFileAttributes());
+            assertNotNull(old.getChecksum());
+            assertNull(next.getChecksum(), "A changed image must not retain the preimage checksum");
+            assertNull(materialized.put(normalized(next), next.printAll()));
+            after.add(next);
+        }
+        assertEquals(expectedAfter(), materialized);
+        after.add(sentinel);
+        assertNoChanges(after);
+        assertEquals("preserve unrelated bytes\n", sentinel.printAll());
+
+        // Only actual Result values reach this optional receipt directory.
+        String directory = System.getProperty("m3.mapping.materialized");
+        if (directory != null && !directory.isBlank()) {
+            for (var entry : materialized.entrySet()) {
+                Path output = Path.of(directory).resolve(entry.getKey());
+                Files.createDirectories(output.getParent());
+                Files.writeString(output, entry.getValue(), StandardCharsets.UTF_8,
+                        StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
+            }
+        }
+    }
+
+    @Test
+    void freshPostimageInputsAreFixedAndEachMixedInputConvergesOnce() throws IOException {
+        var fresh = new ArrayList<SourceFile>();
+        for (Target target : TARGETS) fresh.add(text(target.path(), resource(target.after())));
+        assertNoChanges(fresh);
+        for (Target pending : TARGETS) {
+            var mixed = new ArrayList<SourceFile>();
+            for (Target target : TARGETS) mixed.add(text(target.path(), resource(
+                    target == pending ? target.before() : target.after())));
+            var errors = new ArrayList<Throwable>();
+            var run = recipe().run(new InMemoryLargeSourceSet(mixed), new InMemoryExecutionContext(errors::add), 1);
+            assertTrue(errors.isEmpty(), errors.toString());
+            var results = run.getChangeset().getAllResults();
+            assertEquals(1, results.size());
+            SourceFile after = assertInstanceOf(PlainText.class, results.get(0).getAfter());
+            assertEquals(pending.path(), normalized(after));
+            assertEquals(resource(pending.after()), after.printAll());
+        }
+    }
+
+    @Test
+    void namedEntryAndSerializedOwnerProduceTheSameFourImages() throws IOException {
+        var serializer = new RecipeSerializer();
+        var restored = assertInstanceOf(M3Jdk21HashPinnedTextSnapshotRecipe.class,
+                serializer.read(serializer.write(recipe())));
+        assertEquals(CRATE, restored.getCrateName());
+        Recipe named = Environment.builder().scanYamlResources().build()
+                .activateRecipes("com.m3.rewrite.backport.JccMergeMappingRecoveryV04");
+        for (Recipe entry : List.of(restored, named)) {
+            var errors = new ArrayList<Throwable>();
+            var run = entry.run(new InMemoryLargeSourceSet(beforeSources()),
+                    new InMemoryExecutionContext(errors::add), 1);
+            assertTrue(errors.isEmpty(), errors.toString());
+            var actual = new TreeMap<String, String>();
+            var changes = run.getChangeset().getAllResults();
+            assertEquals(4, changes.size());
+            for (var change : changes) {
+                assertInstanceOf(PlainText.class, change.getBefore());
+                SourceFile after = assertInstanceOf(PlainText.class, change.getAfter());
+                assertNull(actual.put(normalized(after), after.printAll()));
+            }
+            assertEquals(expectedAfter(), actual);
+        }
+    }
+
+    @Test
+    void everyMissingCurrentTargetRefusesWithoutPartialResults() throws IOException {
+        for (Target target : TARGETS) {
+            var input = beforeSources();
+            assertTrue(input.removeIf(source -> normalized(source).equals(target.path())));
+            reject(input, "required JDK21 text source missing: " + target.path());
+        }
+    }
+
+    @Test
+    void everyDriftedCurrentTargetRefusesWithoutPartialResults() throws IOException {
+        for (Target target : TARGETS) {
+            var input = beforeSources();
+            assertTrue(input.removeIf(source -> normalized(source).equals(target.path())));
+            input.add(text(target.path(), resource(target.before()) + "external drift\n"));
+            reject(input, "source drift: " + target.path());
+        }
+    }
+
+    @Test
+    void everyDuplicateTargetRefusesEvenWhenBothImagesAreAdmitted() throws IOException {
+        for (Target target : TARGETS) {
+            for (String duplicate : List.of(target.before(), target.after())) {
+                var input = beforeSources();
+                input.add(text(target.path(), resource(duplicate)));
+                reject(input, "duplicate target: " + target.path());
+            }
+        }
+    }
+
+    @Test
+    void everyAdmittedImageSwapAfterScanRefuses() throws IOException {
+        for (Target target : TARGETS) {
+            var owner = recipe();
+            var context = new InMemoryExecutionContext(failure -> {
+                throw new AssertionError("Unexpected scan failure", failure);
+            });
+            var inventory = owner.getInitialValue(context);
+            var scanner = owner.getScanner(inventory);
+            for (SourceFile source : beforeSources()) scanner.visit(source, context);
+            assertTrue(owner.generate(inventory, context).isEmpty());
+            var visitor = owner.getVisitor(inventory);
+            SourceFile swapped = text(target.path(), resource(target.after()));
+            RuntimeException failure = assertThrows(RuntimeException.class, () -> visitor.visit(swapped, context));
+            assertTrue(messages(failure).contains("JDK21 text target changed after scan: " + target.path()));
+            assertEquals(resource(target.after()), swapped.printAll());
+        }
+    }
+
+    @Test
+    void ordered55RecordsAndEveryGlobalPolicyAndNonJccRecordArePreserved() throws IOException {
+        JsonNode before = json("before-00.txt");
+        JsonNode after = json("after-00.txt");
+        assertEquals(keys(before), keys(after));
+        for (String key : keys(before)) if (!key.equals("migration")) assertEquals(before.get(key), after.get(key), key);
+        assertEquals(keys(before.path("migration")), keys(after.path("migration")));
+        for (String key : keys(before.path("migration"))) if (!key.equals("records"))
+            assertEquals(before.path("migration").get(key), after.path("migration").get(key), key);
+        var oldRecords = nodes(before.path("migration").path("records"));
+        var newRecords = nodes(after.path("migration").path("records"));
+        var ids = newRecords.stream().map(row -> row.path("id").asText()).toList();
+        assertEquals(55, ids.size());
+        assertEquals(55, new HashSet<>(ids).size());
+        assertEquals(oldRecords.stream().map(row -> row.path("id").asText()).toList(), ids);
+        var oldOther = oldRecords.stream().filter(row -> !JCC_IDS.contains(row.path("id").asText())).toList();
+        var newOther = newRecords.stream().filter(row -> !JCC_IDS.contains(row.path("id").asText())).toList();
+        assertEquals(53, oldOther.size());
+        assertEquals(oldOther, newOther);
+        assertEquals(34, nodes(after.path("mappings")).size());
+        assertEquals(20, nodes(after.path("migration").path("gates")).size());
+        for (String key : List.of("policy", "precompute_port_map", "precompute_scope_rule",
+                "donor_artifact_policy", "porting_invariant", "family_name_mapping")) {
+            assertNotNull(before.get(key), key);
+            assertEquals(before.get(key), after.get(key), key);
+        }
+    }
+
+    @Test
+    void current14LaboratoryAnd6JniOwnersMatchActualReadbacksAndRemainBlocked() throws IOException {
+        var before = byId(jccRecords(json("before-00.txt")));
+        var prior = byId(jccRecords(priorMap()));
+        var after = byId(jccRecords(json("after-00.txt")));
+        JsonNode packet = publication();
+        List<JsonNode> components = nodes(packet.path("source_components"));
+        assertEquals(1, components.size());
+        JsonNode component = components.get(0);
+        assertEquals(Set.of("kind", "repository", "commit", "path", "module", "bytes", "sha256",
+                "git_blob_sha1", "readback_verified", "readback_sha256"), keys(component));
+        assertEquals("module-pom-compile-edge", component.path("kind").asText());
+        assertEquals("hsoliwal/com.synexia", component.path("repository").asText());
+        assertEquals(SOURCE_COMMIT, component.path("commit").asText());
+        assertEquals("synexia-openrewrite-recipes/pom.xml", component.path("path").asText());
+        assertEquals("synexia-openrewrite-recipes", component.path("module").asText());
+        assertTrue(component.path("bytes").isIntegralNumber());
+        assertEquals(203000L, component.path("bytes").longValue());
+        assertEquals("7846d9447016ab714a4d1c82d7f3814efa7a94049cb99bb59ba09f6f6d8c7a80",
+                component.path("sha256").asText());
+        assertEquals("1a1c0cc8017b9ce9eadd6eba7e2ead3400a2266f", component.path("git_blob_sha1").asText());
+        assertBoolean(component.path("readback_verified"), true);
+        assertSha(component.path("readback_sha256").asText());
+        var artifacts = byPath(nodes(packet.path("artifacts")));
+        assertEquals(20, artifacts.size());
+        var expectedPaths = new HashSet<String>();
+        var mutable = Set.of("sources", "lineage", "status", "source_state", "tests", "reason", "recipe", "sync", "observation");
+        for (String id : List.of(LAB, JNI)) {
+            JsonNode old = before.get(id);
+            JsonNode current = after.get(id);
+            assertEquals(keys(old), keys(current));
+            for (String key : keys(old)) if (!mutable.contains(key)) assertEquals(old.get(key), current.get(key), id + "/" + key);
+            assertEquals("blocked", current.path("status").asText());
+            assertEquals("partial", current.path("source_state").asText());
+            assertTrue(nodes(current.path("tests")).isEmpty());
+            assertEquals(TEXT_OWNER, current.path("recipe").path("path").asText());
+            assertEquals(TEXT_OWNER_SHA256, current.path("recipe").path("sha256").asText());
+            assertEquals("com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/" + CRATE,
+                    current.path("recipe").path("id").asText());
+            assertEquals(SOURCE_COMMIT, current.path("sync").path("source_revision").asText());
+            assertEquals(DESTINATION, current.path("sync").path("target_revision").asText());
+            assertEquals(keys(old.path("sync")), keys(current.path("sync")));
+            for (String key : keys(old.path("sync"))) if (!Set.of("source_revision", "target_revision", "pending").contains(key))
+                assertEquals(old.path("sync").get(key), current.path("sync").get(key));
+            assertFalse(nodes(current.path("sync").path("pending")).isEmpty());
+
+            var historical = nodes(prior.get(id).path("sources"));
+            var sourceOrder = new ArrayList<>(historical.stream().map(row -> row.path("path").asText()).toList());
+            if (id.equals(LAB)) sourceOrder.add(IOP);
+            assertEquals(id.equals(LAB) ? 14 : 6, sourceOrder.size());
+            assertEquals(sourceOrder, nodes(current.path("sources")).stream().map(row -> row.path("path").asText()).toList());
+            var originalByPath = byPath(historical);
+            var expectedSources = JSON.createArrayNode();
+            for (String path : sourceOrder) {
+                assertTrue(expectedPaths.add(path));
+                JsonNode artifact = artifacts.get(path);
+                assertNotNull(artifact, path);
+                assertEquals(id, artifact.path("capability_id").asText());
+                assertEquals("hsoliwal/com.synexia", artifact.path("repository").asText());
+                assertEquals(SOURCE_COMMIT, artifact.path("commit").asText());
+                assertBoolean(artifact.path("readback_verified"), true);
+                assertSha(artifact.path("readback_sha256").asText());
+                assertSha(artifact.path("sha256").asText());
+                assertOid(artifact.path("git_blob_sha1").asText());
+                assertTrue(artifact.path("bytes").isIntegralNumber());
+                assertTrue(artifact.path("bytes").longValue() > 0);
+                JsonNode earlier = originalByPath.get(path);
+                String module = earlier == null ? "synexia-openrewrite-recipes" : earlier.path("module").asText();
+                String symbol = earlier == null ? "com.synexia.rewrite.M3IopPatternMechanicalPasses" : earlier.path("symbol").asText();
+                assertEquals(module, artifact.path("module").asText());
+                assertEquals(symbol, artifact.path("symbol").asText());
+                var expected = JSON.createObjectNode();
+                expected.put("repo", "hsoliwal/com.synexia").put("commit", SOURCE_COMMIT).put("module", module)
+                        .put("path", path).put("symbol", symbol);
+                expected.set("signatures", earlier == null ? JSON.createArrayNode() : earlier.path("signatures"));
+                expected.put("sha256", artifact.path("sha256").asText()).put("git_blob_sha1", artifact.path("git_blob_sha1").asText())
+                        .putNull("fingerprint").put("revision_role", "pinned").put("tracking_ref", packet.path("ref").asText());
+                expectedSources.add(expected);
+            }
+            assertEquals(expectedSources, current.path("sources"));
+        }
+        assertEquals(artifacts.keySet(), expectedPaths);
+        assertEquals(IOP, after.get(LAB).path("sources").get(13).path("path").asText());
+        var concatenated = JSON.createArrayNode();
+        for (JsonNode record : jccRecords(json("after-00.txt"))) for (JsonNode source : record.path("sources")) concatenated.add(source);
+        assertEquals(concatenated, json("after-02.txt").path("source_artifacts"));
+    }
+
+    @Test
+    void everyHistoricalSourceTargetAndBindingEpochSurvivesUnchanged() throws IOException {
+        var currentRecords = jccRecords(json("before-00.txt"));
+        var priorRecords = jccRecords(priorMap());
+        var current = byId(currentRecords);
+        var prior = byId(priorRecords);
+        var after = byId(jccRecords(json("after-00.txt")));
+        for (String id : List.of(LAB, JNI)) {
+            for (String kind : List.of("sources", "targets")) {
+                String previous = "previous_" + kind;
+                var expected = new LinkedHashSet<JsonNode>();
+                expected.addAll(nodes(current.get(id).path("lineage").path(previous)));
+                expected.addAll(nodes(current.get(id).path(kind)));
+                expected.addAll(nodes(prior.get(id).path("lineage").path(previous)));
+                expected.addAll(nodes(prior.get(id).path(kind)));
+                assertEquals(new ArrayList<>(expected), nodes(after.get(id).path("lineage").path(previous)), id + "/" + previous);
+            }
+            var supersedes = new LinkedHashSet<>(nodes(current.get(id).path("lineage").path("supersedes")));
+            supersedes.addAll(nodes(prior.get(id).path("lineage").path("supersedes")));
+            assertEquals(new ArrayList<>(supersedes), nodes(after.get(id).path("lineage").path("supersedes")));
+        }
+        JsonNode bindings = json("after-02.txt");
+        var epochs = nodes(bindings.path("merge_recovery").path("historical_epochs"));
+        assertEquals(2, epochs.size());
+        assertEquals(currentRecords, nodes(epochs.get(0).path("records")));
+        assertEquals(priorRecords, nodes(epochs.get(1).path("records")));
+        assertEquals(hash(resource("before-02.txt")), epochs.get(0).path("binding_sha256").asText());
+        assertEquals(PRIOR_BINDINGS_SHA256, epochs.get(1).path("binding_sha256").asText());
+        assertEquals("0b8dc32b9e8a616b7b7141bbdd88722839dc64bc", epochs.get(0).path("source_commit").asText());
+        assertEquals("0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8", epochs.get(1).path("source_commit").asText());
+        JsonNode oldBindings = JSON.readTree(classpath(HISTORY + "history-0016.txt"));
+        assertEquals(oldBindings.path("source_execution"), epochs.get(1).path("source_execution"));
+        assertEquals(oldBindings.path("source_publication"), epochs.get(1).path("source_publication"));
+        assertEquals("m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/"
+                + "jcc-source-recovery-handoff-20261005/after02-source-destination-bindings.json.txt",
+                epochs.get(1).path("binding_resource").asText());
+        JsonNode recovery = bindings.path("merge_recovery");
+        assertEquals(SOURCE_HISTORY, recovery.path("source_history_publication").asText());
+        assertEquals(RECEIVER_HISTORY, recovery.path("receiving_history_publication").asText());
+        assertEquals(443, recovery.path("restored_historical_files").asInt());
+        assertEquals("0483f79ae51dd578c2e4fec1b8431bd51b59b469", recovery.path("historical_receiving_source").asText());
+        assertEquals("4990edbf4ba4afaa14e0ba2d7613331c31e21e9e", recovery.path("donor_catalogue_history").path("source_commit").asText());
+        assertEquals(DESTINATION, recovery.path("current_input").asText());
+        assertEquals(DESTINATION_ROOT, recovery.path("current_input_root").asText());
+        assertEquals("m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-input-epoch-v04.json",
+                recovery.path("current_input_epoch").asText());
+        assertEquals(INPUT_EPOCH_SHA256, recovery.path("current_input_epoch_sha256").asText());
+        JsonNode qualifiedInput = recovery.path("previous_qualified_input");
+        assertEquals(Set.of("commit", "root_tree", "input_epoch_sha256", "publication_manifest_sha256", "scope"),
+                keys(qualifiedInput));
+        assertEquals("c0a14387009aefc7d62bd3268055d526e04f9074", qualifiedInput.path("commit").asText());
+        assertEquals("491bbd80a51483d0710fc12c1bad3a037b385ba0", qualifiedInput.path("root_tree").asText());
+        assertEquals("027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee",
+                qualifiedInput.path("input_epoch_sha256").asText());
+        assertEquals("2f816b0f0606257ca0c1746a0a30d54b96562a4b28ba0351429c006c6baf4d92",
+                qualifiedInput.path("publication_manifest_sha256").asText());
+        assertEquals("Actual V03 recipe: 13 JUnit methods, four Result outputs, 28 installer refusals, six packaging refusals and canonical PASS completion=INCOMPLETE against C0; preserved evidence is not qualification of the new 090758 input.",
+                qualifiedInput.path("scope").asText());
+        JsonNode intermediateInput = recovery.path("intermediate_reviewed_input");
+        assertEquals(Set.of("commit", "root_tree", "input_epoch_sha256", "scope"), keys(intermediateInput));
+        assertEquals("d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2", intermediateInput.path("commit").asText());
+        assertEquals("0812573f02908d8078d13f5f49346865cdf1c0e0", intermediateInput.path("root_tree").asText());
+        assertEquals("fb413e58be72aaffa1e91149479ac159c6d4b961101eed4ab10f1c99df0b6711",
+                intermediateInput.path("input_epoch_sha256").asText());
+        assertEquals("Prior 52-record fixture and inherited TQ validation failures retained; current TQ record is preserved from exact C0 input.",
+                intermediateInput.path("scope").asText());
+        JsonNode earlierInput = recovery.path("earlier_reviewed_input");
+        assertEquals("87590cb96fb0e2dc0f88fae8e01957f7179cd255", earlierInput.path("commit").asText());
+        assertEquals(47, earlierInput.path("ordered_records").asInt());
+        assertEquals(45, earlierInput.path("non_jcc_records").asInt());
+        assertEquals(17, earlierInput.path("top_level_mappings").asInt());
+        assertEquals(20, earlierInput.path("gates").asInt());
+        assertEquals(53, recovery.path("non_jcc_records_preserved").asInt());
+        assertEquals(nodes(json("before-00.txt").path("migration").path("records")).stream()
+                .map(row -> row.path("id").asText()).toList(),
+                nodes(recovery.path("current_record_ids")).stream().map(JsonNode::asText).toList());
+    }
+
+    @Test
+    void coverageAccountsForEveryActualRootObjectAndAllPomDeclarations() throws IOException {
+        JsonNode packet = publication();
+        var entries = byPath(nodes(packet.path("root_readback").path("tree")));
+        assertEquals(SOURCE_ROOT_TREE, gitRootTree(new ArrayList<>(entries.values())));
+        JsonNode pom = packet.path("root_pom");
+        assertSha(pom.path("sha256").asText());
+        assertOid(pom.path("git_blob_sha1").asText());
+        assertTrue(pom.path("bytes").isIntegralNumber() && pom.path("bytes").longValue() > 0);
+        assertNotNull(entries.get("pom.xml"));
+        assertEquals("blob", entries.get("pom.xml").path("type").asText());
+        assertEquals(pom.path("git_blob_sha1"), entries.get("pom.xml").path("sha"));
+        var declarations = nodes(pom.path("module_declarations"));
+        String coverage = resource("after-03.txt");
+        assertTrue(coverage.endsWith("\n"));
+        var rows = coverage.lines().toList();
+        var columns = List.of("source_commit", "source_tree", "root_path", "object_type", "mode", "object_id",
+                "root_pom_declarations", "declaration_contexts", "source_known", "source_tested", "mapping_reviewed",
+                "coverage_obligation", "partial_capability_records", "export_admitted", "destination_materialized",
+                "destination_gates", "read_back_delivered");
+        assertEquals(String.join("\t", columns), rows.get(0));
+        assertEquals(entries.size() + 1, rows.size());
+        var seen = new ArrayList<String>();
+        for (String line : rows.subList(1, rows.size())) {
+            String[] cells = line.split("\t", -1);
+            assertEquals(17, cells.length);
+            String path = cells[2];
+            seen.add(path);
+            JsonNode entry = entries.get(path);
+            assertNotNull(entry, path);
+            assertEquals(SOURCE_COMMIT, cells[0]);
+            assertEquals(SOURCE_ROOT_TREE, cells[1]);
+            assertEquals(entry.path("type").asText(), cells[3]);
+            assertEquals(entry.path("mode").asText(), cells[4]);
+            assertEquals(entry.path("sha").asText(), cells[5]);
+            var nominated = declarations.stream().filter(row -> firstPart(row.path("path").asText()).equals(path)).toList();
+            assertEquals(String.join(";", nominated.stream().map(row -> row.path("path").asText()).toList()), cells[6]);
+            assertEquals(String.join(";", nominated.stream().map(row -> row.path("context").asText()).toList()), cells[7]);
+            assertEquals("ROOT_OBJECT_BOUND", cells[8]);
+            assertEquals("NOT_ESTABLISHED_FOR_ROOT_UNIT", cells[9]);
+            assertEquals("UNREVIEWED_ROOT_UNIT", cells[10]);
+            assertEquals("family.entire-source-closure", cells[11]);
+            var related = new TreeSet<String>();
+            for (JsonNode artifact : packet.path("artifacts")) if (firstPart(artifact.path("path").asText()).equals(path))
+                related.add(artifact.path("capability_id").asText());
+            assertEquals(String.join(";", related), cells[12]);
+            assertEquals("false", cells[13]);
+            assertEquals("false", cells[14]);
+            assertEquals("NOT_RUN_FOR_ROOT_UNIT", cells[15]);
+            assertEquals("false", cells[16]);
+        }
+        assertEquals(new ArrayList<>(entries.keySet()), seen);
+        JsonNode accounting = json("after-02.txt").path("source_root_accounting");
+        assertEquals(entries.size(), accounting.path("root_entries").asInt());
+        for (var type : Map.of("tree", "root_trees", "blob", "root_blobs", "commit", "root_gitlinks").entrySet())
+            assertEquals(entries.values().stream().filter(row -> row.path("type").asText().equals(type.getKey())).count(),
+                    accounting.path(type.getValue()).asLong());
+        var modules = new HashSet<String>();
+        var direct = new HashSet<String>();
+        var nested = new HashSet<String>();
+        var nestedRoots = new HashSet<String>();
+        var allRoots = new HashSet<String>();
+        for (JsonNode declaration : declarations) {
+            String module = declaration.path("path").asText();
+            assertTrue(M3Jdk21HashPinnedTextSnapshotRecipe.jdkTextPath(module));
+            assertTrue(declaration.path("context").asText().equals("project")
+                    || declaration.path("context").asText().startsWith("profile:"));
+            modules.add(module);
+            allRoots.add(firstPart(module));
+            if (module.contains("/")) { nested.add(module); nestedRoots.add(firstPart(module)); }
+            else direct.add(module);
+        }
+        assertEquals(declarations.size(), accounting.path("root_pom_module_declarations").asInt());
+        assertEquals(modules.size(), accounting.path("distinct_module_paths").asInt());
+        assertEquals(direct.size(), accounting.path("direct_root_modules").asInt());
+        assertEquals(nested.size(), accounting.path("nested_module_paths").asInt());
+        assertEquals(nestedRoots.size(), accounting.path("root_trees_with_nested_modules").asInt());
+        assertEquals(nestedRoots.stream().filter(direct::contains).count(), accounting.path("nested_containers_also_direct_modules").asLong());
+        assertEquals(allRoots.size(), accounting.path("distinct_root_trees_referenced").asInt());
+        assertEquals(pom.path("sha256"), accounting.path("root_pom_sha256"));
+        assertEquals(pom.path("git_blob_sha1"), accounting.path("root_pom_git_blob"));
+        assertEquals(TARGETS.get(3).path(), accounting.path("coverage_receipt_path").asText());
+        assertEquals(hash(coverage), accounting.path("coverage_receipt_sha256").asText());
+        assertNotNull(accounting.get("whole_repository_file_count"));
+        assertTrue(accounting.get("whole_repository_file_count").isNull());
+        assertBoolean(accounting.path("semantic_dependency_closure_complete"), false);
+    }
+
+    @Test
+    void bindingsAndEarlierProsePreserveGateRequirementsWithoutAcceptancePromotion() throws IOException {
+        JsonNode before = json("before-02.txt");
+        JsonNode after = json("after-02.txt");
+        JsonNode packet = publication();
+        var changed = Set.of("source_commit", "source_root_tree", "destination_commit", "destination_root_tree",
+                "canonical_map_preimage_sha256", "source_acquisition_receipt_sha256", "source_acquisition_scope",
+                "source_root_receipt_sha256", "source_root_accounting", "source_artifacts", "acceptance");
+        for (String key : keys(before)) if (!changed.contains(key)) assertEquals(before.get(key), after.get(key), key);
+        var expectedKeys = new HashSet<>(keys(before));
+        expectedKeys.addAll(Set.of("source_publication", "source_execution", "merge_recovery", "source_build_components"));
+        assertEquals(expectedKeys, keys(after));
+        assertEquals(SOURCE_COMMIT, after.path("source_commit").asText());
+        assertEquals(SOURCE_ROOT_TREE, after.path("source_root_tree").asText());
+        assertEquals(DESTINATION, after.path("destination_commit").asText());
+        assertEquals(DESTINATION_ROOT, after.path("destination_root_tree").asText());
+        assertEquals(hash(resource("before-00.txt")), after.path("canonical_map_preimage_sha256").asText());
+        assertEquals(SOURCE_INPUT_SHA256, after.path("source_acquisition_receipt_sha256").asText());
+        assertEquals(packet.path("root_readback_sha256"), after.path("source_root_receipt_sha256"));
+        assertEquals(Set.of("source_export_admitted", "destination_materialized", "destination_gates_passed", "remote_read_back_delivered"),
+                keys(after.path("acceptance")));
+        for (JsonNode value : after.path("acceptance")) assertBoolean(value, false);
+        assertEquals(before.path("destination_gate_records_preserved"), after.path("destination_gate_records_preserved"));
+        assertEquals(20, nodes(after.path("destination_gate_records_preserved")).size());
+        var expectedPublication = JSON.createObjectNode();
+        for (String key : List.of("commit", "root_tree", "ref", "publication_state", "publication_receipt_sha256", "scope"))
+            expectedPublication.set(key, packet.path(key));
+        expectedPublication.put("source_gate_or_export_authority_granted", false);
+        assertEquals(expectedPublication, after.path("source_publication"));
+        assertEquals(packet.path("source_components"), after.path("source_build_components"));
+        assertEquals(packet.path("execution_reports"), after.path("source_execution").path("reports"));
+        assertEquals(packet.path("execution_summary"), after.path("source_execution").path("summary"));
+        assertBoolean(after.path("source_execution").path("source_export_admitted"), false);
+        assertBoolean(after.path("source_execution").path("destination_gates_passed"), false);
+        assertEquals("m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/source-publication-input-v04.json",
+                after.path("merge_recovery").path("source_publication_input").asText());
+        String earlier = resource("before-01.txt");
+        String prose = resource("after-01.txt");
+        assertTrue(prose.startsWith("# Current JCC receiving recovery, 2026-10-06\n\n"));
+        assertTrue(prose.endsWith(earlier));
+        assertTrue(prose.contains("`" + SOURCE_COMMIT + "`"));
+        assertTrue(prose.contains("`" + SOURCE_ROOT_TREE + "`"));
+        assertTrue(prose.contains("`" + packet.path("ref").asText() + "`"));
+        assertFalse(prose.contains("UNPUBLISHABLE SYNTHETIC FIXTURE OUTPUT"));
+    }
+
+    private static void assertNoChanges(List<SourceFile> sources) {
+        var errors = new ArrayList<Throwable>();
+        var run = recipe().run(new InMemoryLargeSourceSet(sources), new InMemoryExecutionContext(errors::add), 1);
+        assertTrue(errors.isEmpty(), errors.toString());
+        assertTrue(run.getChangeset().getAllResults().isEmpty());
+    }
+
+    private static void reject(List<SourceFile> sources, String reason) {
+        var beforeText = sources.stream().map(SourceFile::printAll).toList();
+        var beforeIds = sources.stream().map(SourceFile::getId).toList();
+        var beforeMarkers = sources.stream().map(SourceFile::getMarkers).toList();
+        var errors = new ArrayList<Throwable>();
+        try {
+            var run = recipe().run(new InMemoryLargeSourceSet(sources), new InMemoryExecutionContext(errors::add), 1);
+            assertTrue(run.getChangeset().getAllResults().isEmpty(), "Refusal must not emit partial results");
+        } catch (RuntimeException failure) {
+            errors.add(failure);
+        }
+        assertFalse(errors.isEmpty(), reason);
+        assertTrue(errors.stream().anyMatch(failure -> messages(failure).contains(reason)), errors.toString());
+        assertEquals(beforeText, sources.stream().map(SourceFile::printAll).toList());
+        assertEquals(beforeIds, sources.stream().map(SourceFile::getId).toList());
+        assertEquals(beforeMarkers, sources.stream().map(SourceFile::getMarkers).toList());
+    }
+
+    private static String messages(Throwable failure) {
+        var text = new StringBuilder();
+        for (int depth = 0; failure != null && depth < 32; depth++, failure = failure.getCause())
+            text.append(failure.getMessage()).append('\n');
+        return text.toString();
+    }
+
+    private static ArrayList<SourceFile> beforeSources() throws IOException {
+        var sources = new ArrayList<SourceFile>();
+        for (Target target : TARGETS) sources.add(text(target.path(), resource(target.before())));
+        return sources;
+    }
+
+    private static Map<String, String> expectedAfter() throws IOException {
+        var result = new TreeMap<String, String>();
+        for (Target target : TARGETS) assertNull(result.put(target.path(), resource(target.after())));
+        return result;
+    }
+
+    private static PlainText text(String path, String value) {
+        return PlainText.builder().sourcePath(Path.of(path)).text(value).build();
+    }
+
+    private static M3Jdk21HashPinnedTextSnapshotRecipe recipe() {
+        return new M3Jdk21HashPinnedTextSnapshotRecipe(CRATE);
+    }
+
+    private static String normalized(SourceFile source) {
+        return source.getSourcePath().toString().replace('\\', '/');
+    }
+
+    private static JsonNode publication() throws IOException {
+        String text = classpath(SUMMARY);
+        assertEquals(SUMMARY_SHA256, hash(text));
+        return JSON.readTree(text);
+    }
+
+    private static JsonNode json(String name) throws IOException {
+        return JSON.readTree(resource(name));
+    }
+
+    private static JsonNode priorMap() throws IOException {
+        return JSON.readTree(classpath(HISTORY + "history-0014.txt"));
+    }
+
+    private static String resource(String name) throws IOException {
+        return classpath(ROOT + name);
+    }
+
+    private static String classpath(String name) throws IOException {
+        try (var input = JccMergeMappingRecoveryV04Test.class.getResourceAsStream(name)) {
+            assertNotNull(input, name);
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+        }
+    }
+
+    private static Set<String> keys(JsonNode object) {
+        assertTrue(object.isObject(), object.toString());
+        var keys = new HashSet<String>();
+        object.fieldNames().forEachRemaining(keys::add);
+        return keys;
+    }
+
+    private static List<JsonNode> nodes(JsonNode array) {
+        assertTrue(array.isArray(), array.toString());
+        var values = new ArrayList<JsonNode>();
+        array.forEach(values::add);
+        return values;
+    }
+
+    private static List<JsonNode> jccRecords(JsonNode map) {
+        var records = nodes(map.path("migration").path("records")).stream()
+                .filter(row -> JCC_IDS.contains(row.path("id").asText())).toList();
+        assertEquals(2, records.size());
+        return records;
+    }
+
+    private static Map<String, JsonNode> byId(List<JsonNode> rows) {
+        return indexed(rows, "id");
+    }
+
+    private static Map<String, JsonNode> byPath(List<JsonNode> rows) {
+        return indexed(rows, "path");
+    }
+
+    private static Map<String, JsonNode> indexed(List<JsonNode> rows, String key) {
+        var result = new TreeMap<String, JsonNode>();
+        for (JsonNode row : rows) {
+            assertTrue(row.path(key).isTextual());
+            assertNull(result.put(row.path(key).asText(), row), "Duplicate " + key);
+        }
+        return result;
+    }
+
+    private static String firstPart(String path) {
+        return path.split("/", 2)[0];
+    }
+
+    private static void assertBoolean(JsonNode value, boolean expected) {
+        assertTrue(value.isBoolean(), "Required explicit boolean: " + value);
+        assertEquals(expected, value.booleanValue());
+    }
+
+    private static void assertSha(String value) {
+        assertTrue(value.matches("[0-9a-f]{64}"), "Unresolved or invalid SHA-256: " + value);
+    }
+
+    private static void assertOid(String value) {
+        assertTrue(value.matches("[0-9a-f]{40}"), "Unresolved or invalid Git identity: " + value);
+        assertNotEquals("0".repeat(40), value);
+    }
+
+    private static String hash(String value) {
+        return M3Jdk21HashPinnedTextSnapshotRecipe.sha256(value);
+    }
+
+    private static String gitRootTree(List<JsonNode> entries) {
+        entries.sort((a, b) -> Arrays.compareUnsigned(gitSortKey(a), gitSortKey(b)));
+        var body = new ByteArrayOutputStream();
+        for (JsonNode entry : entries) {
+            String path = entry.path("path").asText();
+            String type = entry.path("type").asText();
+            String mode = entry.path("mode").asText();
+            String sha = entry.path("sha").asText();
+            assertTrue(M3Jdk21HashPinnedTextSnapshotRecipe.jdkTextPath(path) && !path.contains("/"));
+            assertTrue((type.equals("tree") && mode.equals("040000"))
+                    || (type.equals("blob") && Set.of("100644", "100755", "120000").contains(mode))
+                    || (type.equals("commit") && mode.equals("160000")));
+            assertOid(sha);
+            body.writeBytes(((mode.equals("040000") ? "40000" : mode) + " " + path).getBytes(StandardCharsets.UTF_8));
+            body.write(0);
+            body.writeBytes(HexFormat.of().parseHex(sha));
+        }
+        try {
+            var digest = MessageDigest.getInstance("SHA-1");
+            digest.update(("tree " + body.size() + "\0").getBytes(StandardCharsets.UTF_8));
+            return HexFormat.of().formatHex(digest.digest(body.toByteArray()));
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new ExceptionInInitializerError(impossible);
+        }
+    }
+
+    private static byte[] gitSortKey(JsonNode entry) {
+        return (entry.path("path").asText() + (entry.path("type").asText().equals("tree") ? "/" : ""))
+                .getBytes(StandardCharsets.UTF_8);
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "M3_ROUTINE_MAINTENANCE_DISCLOSURE_CLASSIFICATION/1",
+  "authoring_base": "e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07",
+  "publication_base": "ad85831eda771cbd050124c806b45c050e545984",
+  "authorization": "The user explicitly requested implementation and PRs for M3JDK21 and reuse of existing Synexia recipe components; this record applies only to that reviewed task and its exact source/evidence mirror.",
+  "classification": "ROUTINE_LICENSED_CONTRACT_MAINTENANCE",
+  "technical_scope": [
+    "Existing array/mask and filtered-wrapper contracts",
+    "Existing JNI packaging/export closure without changed C algorithms",
+    "Additive Java scheduler defaults using existing progress owners",
+    "Existing Eclipse resource and Jobs integration contracts",
+    "Qualified existing SWT integer-geometry proposal, separately scoped and not installed"
+  ],
+  "source_scope": "Existing licensed M3/OpenJDK/Eclipse/Synexia owners and pinned donors; original notices and licenses retained. New task receipts document actual current execution.",
+  "private_canonical_custody": "Canonical Synexia remains private. Copying the reviewed canonical task evidence and existing recipe sources into the user-authorized target mirror is within the explicit implementation/PR instruction. This is not permission to disclose unrelated private material.",
+  "patent_claims": "None. No novelty, patent status, legal priority, exclusivity or legal opinion is asserted.",
+  "publication_state_at_recording": "UNCOMMITTED_LOCAL_REVIEW_PACKET; root publisher records actual commits/branches/PRs separately.",
+  "admission": "DRAFT; hosted CI, full source-vendored reactor and required broader admission remain separate gates."
+}

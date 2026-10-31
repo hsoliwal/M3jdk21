@@ -1,0 +1,11 @@
+JarIndex-Version: 1.0
+
+gizmo-1.0.11.Final-sources.jar
+META-INF
+META-INF/maven
+META-INF/maven/io.quarkus.gizmo
+META-INF/maven/io.quarkus.gizmo/gizmo
+io
+io/quarkus
+io/quarkus/gizmo
+

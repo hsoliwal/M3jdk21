@@ -1,0 +1,103 @@
+{
+  "objects": [
+    {
+      "bytes": 3540,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/SOURCE_QUALIFIED_COMMIT.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/eb54e3d37fba4e12d7984f830c3eec2dadf03a7b8e3e733e6cb52b258df3d0c7.json",
+      "sha256": "eb54e3d37fba4e12d7984f830c3eec2dadf03a7b8e3e733e6cb52b258df3d0c7"
+    },
+    {
+      "bytes": 1874,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/SOURCE_QUALIFIED_REF_READBACK.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/90a0b2ec021bb7efab42c526c527b9a6e3a04a0ddc2ec081fa8ed730fcf7bde1.json",
+      "sha256": "90a0b2ec021bb7efab42c526c527b9a6e3a04a0ddc2ec081fa8ed730fcf7bde1"
+    },
+    {
+      "bytes": 168321,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/source-final-readbacks/00.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/d891ca1144a3cecc4ba6b7f9d7b69a28e0ae9ce9145ee92c15fd2bd7f292ea14.json",
+      "sha256": "d891ca1144a3cecc4ba6b7f9d7b69a28e0ae9ce9145ee92c15fd2bd7f292ea14"
+    },
+    {
+      "bytes": 45648,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/SOURCE_QUALIFIED_PR_READBACK.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/2cf0828a6f8f328914bd42c141e786ccbed3f9686e2b24594360fdd8f4c97f46.json",
+      "sha256": "2cf0828a6f8f328914bd42c141e786ccbed3f9686e2b24594360fdd8f4c97f46"
+    },
+    {
+      "bytes": 67426,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/ACTUAL_FINAL_SOURCE_MEMBERSHIP.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/fcb41a8f07f58ca040cf4bcbd5a0c5f681e98f0b16c93b92722b4c878a1cfe5f.json",
+      "sha256": "fcb41a8f07f58ca040cf4bcbd5a0c5f681e98f0b16c93b92722b4c878a1cfe5f"
+    },
+    {
+      "bytes": 2802,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/ACTUAL_FINAL_MERKLE_VERIFICATION.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/5f580f21b410deac5306d87fbbded0243a2ff737c7fe0ba663033992ac49ca95.json",
+      "sha256": "5f580f21b410deac5306d87fbbded0243a2ff737c7fe0ba663033992ac49ca95"
+    },
+    {
+      "bytes": 7764,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/ACTUAL_V04_CHANGED_BODY_VERIFICATION.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/b07687c1a9573d5b05f9d3ebab9cc5dffa118c94033301f7617ef41da3334904.json",
+      "sha256": "b07687c1a9573d5b05f9d3ebab9cc5dffa118c94033301f7617ef41da3334904"
+    },
+    {
+      "bytes": 61777,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/source_body_2a79148c50889767a9ac75116a3ddb6a4b96f33f.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/3a1ceae0d6d47e337d47b016837d3a215ea1642e37d8f93745b672b4a2ae02ef.json",
+      "sha256": "3a1ceae0d6d47e337d47b016837d3a215ea1642e37d8f93745b672b4a2ae02ef"
+    },
+    {
+      "bytes": 14930,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/source_body_2cd0b6ec34ea12a5443f5c8959360c9e7c9e5908.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/b4ddde65dfaadb406823f5648ead8e1bb0516d5699a49875cc37edc833889b16.json",
+      "sha256": "b4ddde65dfaadb406823f5648ead8e1bb0516d5699a49875cc37edc833889b16"
+    },
+    {
+      "bytes": 709661,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf.json",
+      "sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf"
+    },
+    {
+      "bytes": 763300,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/ACTUAL_REMAINING_OWNER_BODY_READBACKS.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679.json",
+      "sha256": "15ef17390241752b365ec05f381cbd73e5a5f5e4b8073c81d2d266341806a679"
+    },
+    {
+      "bytes": 2943,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/source_body_b4081310a343cbd067c7deb5e907031598e82536.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/cc86c85556a9fc1f40135e53dbf3006f0beb09dc7c398789ddf90621db738621.json",
+      "sha256": "cc86c85556a9fc1f40135e53dbf3006f0beb09dc7c398789ddf90621db738621"
+    },
+    {
+      "bytes": 21641,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/source_body_108514ff8960adc20c9fd88d4fd01ba55cc2f3c8.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/88abbfae7fb52368fbd7c750a243aef63126b96bb88275460fde970bb4b87cef.json",
+      "sha256": "88abbfae7fb52368fbd7c750a243aef63126b96bb88275460fde970bb4b87cef"
+    },
+    {
+      "bytes": 38889,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/source-final-readbacks/01.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/8a78c34d930c043b0d60dd862fc39516c04cc1341c9df309320a3e1509fafbc1.json",
+      "sha256": "8a78c34d930c043b0d60dd862fc39516c04cc1341c9df309320a3e1509fafbc1"
+    },
+    {
+      "bytes": 588056,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/source-final-readbacks/02.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/7ad0a1d3297b15bd90b54faebc7d0fe1bc5c31f7b981afdf35162f3179b0515d.json",
+      "sha256": "7ad0a1d3297b15bd90b54faebc7d0fe1bc5c31f7b981afdf35162f3179b0515d"
+    },
+    {
+      "bytes": 4173,
+      "original_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/publication/source-final-readbacks/03.json",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/source-publication-custody/objects/e65efc7c623c8b0a51572abcb0444523a6be92ebb3dddaed8df6419e50d1679f.json",
+      "sha256": "e65efc7c623c8b0a51572abcb0444523a6be92ebb3dddaed8df6419e50d1679f"
+    }
+  ],
+  "publication_receipt_sha256": "a6250754c30fc2b3d901eb668217b0dad4c09847bbdc559f66ab715c135c5884",
+  "schema": "m3-jcc-source-custody-path-index/1",
+  "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2"
+}

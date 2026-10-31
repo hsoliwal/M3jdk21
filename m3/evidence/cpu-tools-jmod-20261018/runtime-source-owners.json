@@ -1,0 +1,25 @@
+{
+  "target_baseline": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "source_image_release_source": "git:4b24824c3aa0+",
+  "claim": "Three key API implementation source files match the target baseline; not a clean whole-JDK rebuild at target HEAD. Actual binary hashes are retained separately.",
+  "owners": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "target_baseline_sha256": "fad8274a84532ce29bd2b2fbdcb62474cfce32a6fb8eee89b885e5a611ea46f0",
+      "runtime_checkout_sha256": "fad8274a84532ce29bd2b2fbdcb62474cfce32a6fb8eee89b885e5a611ea46f0",
+      "same_source_bytes": true
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "target_baseline_sha256": "abd9604058045fd77cb5985a14f56487726b823f468990d5dc4277d6391de0cd",
+      "runtime_checkout_sha256": "abd9604058045fd77cb5985a14f56487726b823f468990d5dc4277d6391de0cd",
+      "same_source_bytes": true
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java",
+      "target_baseline_sha256": "6a8bccb501a516cca779e71e24ef814ca40825faf92fed744e48f65ad4c1d854",
+      "runtime_checkout_sha256": "6a8bccb501a516cca779e71e24ef814ca40825faf92fed744e48f65ad4c1d854",
+      "same_source_bytes": true
+    }
+  ]
+}

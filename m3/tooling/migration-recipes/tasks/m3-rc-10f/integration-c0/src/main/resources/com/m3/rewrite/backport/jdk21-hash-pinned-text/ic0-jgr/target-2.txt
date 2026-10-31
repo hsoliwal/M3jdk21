@@ -1,0 +1,26 @@
+{
+  "schema": "m3.ga-path-reconciliation/1",
+  "baseline_ref": "jdk-21+35",
+  "baseline_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
+  "release": 23,
+  "catalogue_sha256": "8fb3e050eba335b609170716bba1effe8e118b33e91e2e0bcd85bb4417213838",
+  "declared_paths": 251,
+  "donor_ref": "jdk-23+37",
+  "donor_commit": "9ad2e63f176364b96a827af80055e7db4b61fc9a",
+  "implementation_commit": "0a58cffe88ba823e71fcdcca64b784ed04ca5398",
+  "implementation_parent": "39a55e97799b5328da85aaa66c8d23175b305691",
+  "entries": [
+    {
+      "path": "test/langtools/tools/javac/processing/model/util/elements/TestGetDocComments.java",
+      "disposition": "RENAMED_PREIMAGE_ALREADY_SELECTED",
+      "transition_commit": "0a58cffe88ba823e71fcdcca64b784ed04ca5398",
+      "transition_parent": "39a55e97799b5328da85aaa66c8d23175b305691",
+      "before_blob": "25a41b3420540d6c72e0833e8c12f1a5a65bcd72",
+      "before_mode": "100644",
+      "replacement_path": "test/langtools/tools/javac/processing/model/util/elements/TestGetDocComment_Block.java",
+      "transition_after_blob": "972766eb160db60f69dc38073bea3c905c60c753",
+      "ga_blob": "972766eb160db60f69dc38073bea3c905c60c753",
+      "after_mode": "100644"
+    }
+  ]
+}

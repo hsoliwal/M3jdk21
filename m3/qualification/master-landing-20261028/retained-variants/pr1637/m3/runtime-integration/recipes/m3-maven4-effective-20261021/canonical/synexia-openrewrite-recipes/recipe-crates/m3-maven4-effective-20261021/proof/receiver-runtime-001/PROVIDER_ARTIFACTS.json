@@ -1,0 +1,542 @@
+[
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/target/maven-impl-4.1.0-SNAPSHOT.jar",
+    "bytes": 680985,
+    "sha256": "38266135af7df04f8d343f5d2d91e3f0b2b5eaa6a5fa5c6299f0c1694129bb5f",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-core/target/maven-api-core-4.1.0-SNAPSHOT.jar",
+    "bytes": 240750,
+    "sha256": "6716ede6494305e98831257a03928faaa66193375e75bf9ee4c779b8b6b41662",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/maven-api-plugin-4.1.0-SNAPSHOT.jar",
+    "bytes": 67596,
+    "sha256": "14f0c73eb4edcb9f1d97ebef0575c95a721e036af3cacaea850688d5275bb3b7",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-spi/target/maven-api-spi-4.1.0-SNAPSHOT.jar",
+    "bytes": 31688,
+    "sha256": "b7a5b3edd9bb8465bdc083a2e204729e158250ad8bdef5f687e88a4bf7e3ec77",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-metadata/target/maven-api-metadata-4.1.0-SNAPSHOT.jar",
+    "bytes": 33846,
+    "sha256": "caec90d66998241c9301594879e7ec240fa1303139a4cf497ed22fcc26b3d4b8",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-xml/target/maven-api-xml-4.1.0-SNAPSHOT.jar",
+    "bytes": 29149,
+    "sha256": "17e6b90dd1811873538fab9cdaa93d7e73a62512a6b69981bd45f6e9b31dc97d",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-toolchain/target/maven-api-toolchain-4.1.0-SNAPSHOT.jar",
+    "bytes": 34333,
+    "sha256": "f98e4342092c3ac85b73d2f0d50348e4991930d1a2e2bc411671ca52c2c60dbb",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-di/target/maven-api-di-4.1.0-SNAPSHOT.jar",
+    "bytes": 17623,
+    "sha256": "8fdabda9874c9ec066a032c56f7bf3c6df2b3c62fa7610aa9a34da180d24040e",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-annotations/target/maven-api-annotations-4.1.0-SNAPSHOT.jar",
+    "bytes": 13771,
+    "sha256": "bf5d6e1aaa53218e448ec11b284fe37eb15e0c06ff401ceba415e309a3772c61",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/maven-api-model-4.1.0-SNAPSHOT.jar",
+    "bytes": 212924,
+    "sha256": "1fa70917c771c63df2822de3a6be4789134e1d06c6903c023145ebef003ec262",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-settings/target/maven-api-settings-4.1.0-SNAPSHOT.jar",
+    "bytes": 76293,
+    "sha256": "00d52a7960ae6f561045116c630a7fadfa9484f12486580903dd6566fcca537c",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/target/maven-di-4.1.0-SNAPSHOT.jar",
+    "bytes": 67706,
+    "sha256": "b7ac11f6b29fd58f17807bbabe39bdaee53531dec68512fee86bd668fa969e72",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/maven-support-4.1.0-SNAPSHOT.jar",
+    "bytes": 310618,
+    "sha256": "c87d618a3cc58cc07c58b0369ee829a02eb0ad82e29fda33a99de96ff409db22",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-api/2.0.24/maven-resolver-api-2.0.24.jar",
+    "bytes": 189112,
+    "sha256": "1ec0c3370158fd631dc3dcfc8b8f24041e6081f34f329dab1b8fe75c1007ca33",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-spi/2.0.24/maven-resolver-spi-2.0.24.jar",
+    "bytes": 87720,
+    "sha256": "c2e3e1075b49cfa9fcb14f36398ff3d8808b5aba189f4a5bcda1b0fe1aceb11e",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar",
+    "bytes": 313604,
+    "sha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-util/2.0.24/maven-resolver-util-2.0.24.jar",
+    "bytes": 286900,
+    "sha256": "3fb490e1799f18aa22a05babdc57a74a3a1020c924890865a4cab7a7a34cd286",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/impl/maven-xml/target/maven-xml-4.1.0-SNAPSHOT.jar",
+    "bytes": 41745,
+    "sha256": "85292c10fc5f397cd049e54b50257be8517d8a3534911637f7b8bb302e062369",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/tmp/m3-build-m2/com/fasterxml/woodstox/woodstox-core/7.3.0/woodstox-core-7.3.0.jar",
+    "bytes": 1626149,
+    "sha256": "246cb4845991ab52196ef90ee8a361164512b5cc7ec0547c9fab8f3db75f2679",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/codehaus/woodstox/stax2-api/4.3.2/stax2-api-4.3.2.jar",
+    "bytes": 196095,
+    "sha256": "7fd6d60212696fb5d6dc422c2a1c8fb82c088d66dd7e4f30738d5d7606eabcd1",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/slf4j/slf4j-api/2.0.20/slf4j-api-2.0.20.jar",
+    "bytes": 70255,
+    "sha256": "7e1446499b359675d8aabe6af2de86b85e72ae8a2a932c0b40d0e5ba57097439",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-impl/2.0.24/maven-resolver-impl-2.0.24.jar",
+    "bytes": 445926,
+    "sha256": "1be79f951f68764ecdd46f651c008287e2e925763cd51fa97a33d7d8b9b97bd0",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-named-locks/2.0.24/maven-resolver-named-locks-2.0.24.jar",
+    "bytes": 45693,
+    "sha256": "227d2bb177b914c0cedca190ba021b48986dcd66634b3774dfd0656e45e9c4d5",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-connector-basic/2.0.24/maven-resolver-connector-basic-2.0.24.jar",
+    "bytes": 41881,
+    "sha256": "90686efd19999cf9eb6c1dfe06be550d090702c2e47a3ec3a29a876b5b120509",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/codehaus/plexus/plexus-sec-dispatcher/4.2.0/plexus-sec-dispatcher-4.2.0.jar",
+    "bytes": 78340,
+    "sha256": "49bcc4b481e24f38199e338e850562040acc6a34e120d734bd119c9c8c10a2fb",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/junit/jupiter/junit-jupiter-api/6.1.3/junit-jupiter-api-6.1.3.jar",
+    "bytes": 312568,
+    "sha256": "555d6cf20fa1710884dd01b86cc5785397ba73e21ada2d4b784f5f1a14dcafc4",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar",
+    "bytes": 14304,
+    "sha256": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/junit/platform/junit-platform-commons/6.1.3/junit-platform-commons-6.1.3.jar",
+    "bytes": 175869,
+    "sha256": "a4774ae923c109544034aeae7c762cf017fbcdd1342403ba90e0921984b608c3",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+    "bytes": 6806,
+    "sha256": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar",
+    "bytes": 3819,
+    "sha256": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/junit/jupiter/junit-jupiter-params/6.1.3/junit-jupiter-params-6.1.3.jar",
+    "bytes": 303149,
+    "sha256": "05c51cedba2c06a9770707391e006cee825876937dea580b94a265ce145d4939",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/impl/maven-logging/target/maven-logging-4.1.0-SNAPSHOT.jar",
+    "bytes": 29724,
+    "sha256": "53ba0bccb9c4294bbc28075c576a8d68ae4c7c429543ba01840d8317558bc4a4",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/target/maven-jline-4.1.0-SNAPSHOT.jar",
+    "bytes": 21509,
+    "sha256": "7129fb97e01d8beeeb4e8b764984a92259ef717ed3cfa57c75c1a6e5a0ca716f",
+    "origin": "pinned Maven fork source build"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/jline/jline-reader/4.4.8/jline-reader-4.4.8.jar",
+    "bytes": 196995,
+    "sha256": "e7b290a93586d0a44fdc216290824a402c03f257eb8f662bb32c5ab7db552686",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/jline/jline-style/4.4.8/jline-style-4.4.8.jar",
+    "bytes": 20791,
+    "sha256": "47451c2566414e30de84d3261f98fd41ee582f3435e185cd53baa0cdd95a66e1",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/jline/jline-builtins/4.4.8/jline-builtins-4.4.8.jar",
+    "bytes": 349259,
+    "sha256": "0dd2f4273f52492288689711d28470004f0bbb07ab44f02d302dcf36148dcedb",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/jline/jline-console/4.4.8/jline-console-4.4.8.jar",
+    "bytes": 185954,
+    "sha256": "4fd07fe129841680901f63938f29f52e1d94df8700cf7828362358a68b1f4d2a",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/jline/jline-shell/4.4.8/jline-shell-4.4.8.jar",
+    "bytes": 121508,
+    "sha256": "27f4e6911241e6a4094628bd01decdaef0f74eaa65f0b6949966f16aac65737e",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/jline/jline-console-ui/4.4.8/jline-console-ui-4.4.8.jar",
+    "bytes": 75494,
+    "sha256": "be3e0be52b31645b7624bd4bce3019463feb0952468157b0a21980cc9889ce5c",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/jline/jline-terminal/4.4.8/jline-terminal-4.4.8.jar",
+    "bytes": 434666,
+    "sha256": "04eeba70db2eaef85a6c9e2a2413667833730189fd2359540ac4e9d8902becb1",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/jline/jline-native/4.4.8/jline-native-4.4.8.jar",
+    "bytes": 218858,
+    "sha256": "606dcaa307c04080ad0d18fc150b078d84c2b7933e893434c7d7004c72ddfffc",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/jline/jline-terminal-jni/4.4.8/jline-terminal-jni-4.4.8.jar",
+    "bytes": 39935,
+    "sha256": "7b129a86bb2608eb4b3f342445a42e17c5d1a274296cda84f6cc92bbbd2abf91",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/jline/jansi-core/4.4.8/jansi-core-4.4.8.jar",
+    "bytes": 48983,
+    "sha256": "1b615614159c6cbee14727ae2942ed2af34b49372e0a154ff4109a550030a882",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/mockito/mockito-core/5.24.0/mockito-core-5.24.0.jar",
+    "bytes": 728768,
+    "sha256": "97a1f835ad84075255aa37809e4379eff541273c02c6201cbad49bd5950932cd",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/net/bytebuddy/byte-buddy/1.18.14/byte-buddy-1.18.14.jar",
+    "bytes": 4658001,
+    "sha256": "b7f2b2f111c6ddc09d3d9718ca5895dde16217bb4e5f2d2a6eb571f274909a82",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/net/bytebuddy/byte-buddy-agent/1.17.7/byte-buddy-agent-1.17.7.jar",
+    "bytes": 366248,
+    "sha256": "a9ba887dca252ad61b7d5153294f34e6f3bdf4b2736b04373d13615a695fc0ff",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/objenesis/objenesis/3.3/objenesis-3.3.jar",
+    "bytes": 49423,
+    "sha256": "02dfd0b0439a5591e35b708ed2f5474eb0948f53abf74637e959b8e4ef69bfeb",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/mockito/mockito-junit-jupiter/5.24.0/mockito-junit-jupiter-5.24.0.jar",
+    "bytes": 9428,
+    "sha256": "904d4ba9769284739dd720eceffe3792a67e9c0e78d8a50ad46925283386e048",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-transport-file/2.0.24/maven-resolver-transport-file-2.0.24.jar",
+    "bytes": 18648,
+    "sha256": "91121fd03ae8cbd08599aedf6dc2c58119b2d7cc6f3b6f9cdc78562ab6536de3",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-transport-apache/2.0.24/maven-resolver-transport-apache-2.0.24.jar",
+    "bytes": 61468,
+    "sha256": "87d5e2321b424bb6b67afa04ffde5297fd3fffb03f23b636fddacad77a6f17b8",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14.jar",
+    "bytes": 785639,
+    "sha256": "c8bc7e1c51a6d4ce72f40d2ebbabf1c4b68bfe76e732104b04381b493478e9d6",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.jar",
+    "bytes": 327891,
+    "sha256": "6c9b3dd142a09dc468e23ad39aad6f75a0f2b85125104469f026e52a474e464f",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/commons-codec/commons-codec/1.22.1/commons-codec-1.22.1.jar",
+    "bytes": 422738,
+    "sha256": "78a5d732fbd715e2d10bd7150d2f8030bae57267f8aacc5c88f642cb6c2e5d3f",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/slf4j/jcl-over-slf4j/2.0.19/jcl-over-slf4j-2.0.19.jar",
+    "bytes": 21307,
+    "sha256": "efc3848f79638d9fa74ccbae3fd18c8735dcc0127b393ae53dce638827f8a2f3",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/com/google/jimfs/jimfs/1.3.2/jimfs-1.3.2.jar",
+    "bytes": 214793,
+    "sha256": "30f4c0d36508d794b0107286eae7a43e9ad8ad593148002acac941196f619c59",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/com/google/guava/guava/33.7.2-jre/guava-33.7.2-jre.jar",
+    "bytes": 3057659,
+    "sha256": "b530942257fb935f8b2cfaa5f8eb5bd59c555fd8e8d01b8ce98912e077ea606c",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar",
+    "bytes": 10763,
+    "sha256": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar",
+    "bytes": 552986,
+    "sha256": "dc0eaf2bbf0036a70b60798c785d6e03a9daf06b68b8edb0f1ba9eb3421baeb3",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar",
+    "bytes": 78146,
+    "sha256": "df26cc58f235f477db07f753ba5a3ab243ebe5789d9f89ecf68dd62ea9a66c28",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar",
+    "bytes": 2213560,
+    "sha256": "1e56d7b058d28b65abd256b8458e3885b674c1d588fa43cd7d1cbb9c7ef2b308",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/openjdk/jmh/jmh-generator-annprocess/1.37/jmh-generator-annprocess-1.37.jar",
+    "bytes": 30881,
+    "sha256": "6a5604b5b804e0daca1145df1077609321687734a8b49387e49f10557c186c77",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/xmlunit/xmlunit-core/2.14.0/xmlunit-core-2.14.0.jar",
+    "bytes": 179911,
+    "sha256": "93f975e2bb1e35db5a88c687e7899fd850e7c6d883a2afa011adcd7a671eb724",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/maven/maven-model-builder/3.9.11/maven-model-builder-3.9.11.jar",
+    "bytes": 208642,
+    "sha256": "c4c72accdcd848332c1a37995610a6a369d49fdaabc43e85f0022a5b77de3ba7",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/codehaus/plexus/plexus-interpolation/1.28/plexus-interpolation-1.28.jar",
+    "bytes": 87143,
+    "sha256": "ab2a8715570438a2e4164d85ad3e8d489eabc38ea5093c2eb8ab7f58403535b5",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/javax/inject/javax.inject/1/javax.inject-1.jar",
+    "bytes": 2497,
+    "sha256": "91c77044a50c481636c32d916fd89c9118a72195390452c81065080f957de7ff",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/maven/maven-model/3.9.11/maven-model-3.9.11.jar",
+    "bytes": 217939,
+    "sha256": "163aa596f976264384efeb50b4cb8a806086fd64a9b755ad1f69195fed3998ad",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/codehaus/plexus/plexus-utils/3.6.0/plexus-utils-3.6.0.jar",
+    "bytes": 271773,
+    "sha256": "27ef130e32c236090e408fb5498d94cb9ea26d14070fb1c8985d607b62d098d1",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/maven/maven-artifact/3.9.11/maven-artifact-3.9.11.jar",
+    "bytes": 58821,
+    "sha256": "0bfd1c121f907642344311d81e4dfd93eba6c24dc712cc0aeae273eb22833022",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/apache/maven/maven-builder-support/3.9.11/maven-builder-support-3.9.11.jar",
+    "bytes": 14351,
+    "sha256": "5b1de1560ec19c4c69a655f986455888f3a0bcc3c160cac1f1edb87de3825f77",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/sisu/org.eclipse.sisu.inject/0.9.0.M4/org.eclipse.sisu.inject-0.9.0.M4.jar",
+    "bytes": 305040,
+    "sha256": "1cbd7a965a5e2a9ea823bab311962a4e5aa5c240705bdbad5a52b40ffdfa1004",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/ow2/asm/asm/9.8/asm-9.8.jar",
+    "bytes": 126113,
+    "sha256": "876eab6a83daecad5ca67eb9fcabb063c97b5aeb8cf1fca7a989ecde17522051",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/jdt/org.eclipse.jdt.core/3.40.0/org.eclipse.jdt.core-3.40.0.jar",
+    "bytes": 4364499,
+    "sha256": "aa9cd22885bd514b18b5eee7a2b3ef8a06e1d83b2adcc4148dc2c31ef81c0525",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.resources/3.22.0/org.eclipse.core.resources-3.22.0.jar",
+    "bytes": 958356,
+    "sha256": "366789a319a4c6c911e0f1a5777ff3bad712139fb795e4ced89ed79aa45444c2",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.expressions/3.9.400/org.eclipse.core.expressions-3.9.400.jar",
+    "bytes": 97692,
+    "sha256": "2d8ef98092c1260b6b7743c762a4b1cc4b1679f8fbbb94e1d254d91ca232bd49",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/net/java/dev/jna/jna/5.15.0/jna-5.15.0.jar",
+    "bytes": 2001532,
+    "sha256": "a564158d28ab5127fc6a958028ed54279fe0999662c46425b6a3b09a2a52094d",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.osgi/3.22.0/org.eclipse.osgi-3.22.0.jar",
+    "bytes": 1561635,
+    "sha256": "e73e2ed1110f18e663dbe6a86048df586ee4d2ad70c38af726a1b5df0fb9f87a",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.runtime/3.32.0/org.eclipse.core.runtime-3.32.0.jar",
+    "bytes": 83094,
+    "sha256": "faf6b6584b82420609a20f7bf18cbe67c890a7d3b69b6158110e9d3c38fb36cc",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.common/3.19.200/org.eclipse.equinox.common-3.19.200.jar",
+    "bytes": 163349,
+    "sha256": "e7d5c60fde47984fb4f0e17ad572792e9f852e49973570fd92c3d72b08136d0f",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.jobs/3.15.400/org.eclipse.core.jobs-3.15.400.jar",
+    "bytes": 120226,
+    "sha256": "2be3d118c967756858c612d834cc121393e6c2743e83f1559fd3ae867a82d7b9",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.registry/3.12.200/org.eclipse.equinox.registry-3.12.200.jar",
+    "bytes": 206026,
+    "sha256": "2a80f6dcb1bfc594e8653db59ef6843b8ae17909759303687779dafa9b29a5d6",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.preferences/3.11.200/org.eclipse.equinox.preferences-3.11.200.jar",
+    "bytes": 129758,
+    "sha256": "80bbf8d76313b0136ee95fa883fc16f958a52bec453bb9b4c794ab24dbde8097",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/osgi/org.osgi.service.prefs/1.1.2/org.osgi.service.prefs-1.1.2.jar",
+    "bytes": 20165,
+    "sha256": "43c7c870710e363405d422da653cce0d798a4537f76e4930f79bceadd3a55345",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/osgi/osgi.annotation/8.0.1/osgi.annotation-8.0.1.jar",
+    "bytes": 36875,
+    "sha256": "a0e8a4c362bd3600812f37b0ea45fba966c7bc049d01fed56a09ecc74082759e",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.contenttype/3.9.600/org.eclipse.core.contenttype-3.9.600.jar",
+    "bytes": 107445,
+    "sha256": "d8a2974f5ec3d7cfb8e3e177aa7303babed0a1565dbe5416084a751044255002",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.app/1.7.200/org.eclipse.equinox.app-1.7.200.jar",
+    "bytes": 95771,
+    "sha256": "4584f6a46013aa3ecaf5b1ac67ac6e1bdc5ce7ba89ce61d857047cff30bd92f4",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.filesystem/1.11.100/org.eclipse.core.filesystem-1.11.100.jar",
+    "bytes": 79012,
+    "sha256": "e97dced18aac77726d8fce40c5a398146a995af7cf8caec1f7fc4a8afbc7a810",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/net/java/dev/jna/jna-platform/5.15.0/jna-platform-5.15.0.jar",
+    "bytes": 1376668,
+    "sha256": "18b7f6e7d34ce89309a6d9052ae1a987e8e64057e2f683e01e50f2f2b59cd153",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.text/3.14.200/org.eclipse.text-3.14.200.jar",
+    "bytes": 360816,
+    "sha256": "312e5e1c013f109b9e1c0d77e9611bb7a9567d0f2a079ce1bd851c043085713e",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.commands/3.12.200/org.eclipse.core.commands-3.12.200.jar",
+    "bytes": 122116,
+    "sha256": "ed66bd24d74e7b3aacd2e6f1cfe4087690b579a409fae7b8c57fb2cb9df46cf4",
+    "origin": "cached external dependency"
+  },
+  {
+    "path": "/tmp/m3-build-m2/org/eclipse/jdt/ecj/3.40.0/ecj-3.40.0.jar",
+    "bytes": 3312549,
+    "sha256": "05cc22a24e7982970f63a405fc6c820bc80b806f27f3c5a6236fc475f8f7152b",
+    "origin": "cached external dependency"
+  }
+]

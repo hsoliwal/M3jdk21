@@ -1,0 +1,42 @@
+--- actual2779/m3/core/test/com/m3/text/M3BigStringSelfTest.java
++++ canonical12347-immutable-head/m3/core/test/com/m3/text/M3BigStringSelfTest.java
+@@ -13,6 +13,7 @@
+ 
+     public static void main(String[] args) throws Exception {
+         compositionAndRanges();
++        streamingAndM3PieceInterop();
+         summariesAndUnicodeBoundaries();
+         literalSearchAndRegex();
+         randomizedTreeAndRangeParity();
+@@ -35,6 +36,31 @@
+         eq(0L, ab.subSequence(1, 4).indexOf("bc", 0), "range-relative search");
+         eq("abcdef", append(ab), "appendTo without flatten path");
+         eq("", M3BigString.concat(M3BigString.of(""), M3BigString.of()).flatten(), "empty concat");
++    }
++
++    private static void streamingAndM3PieceInterop() {
++        M3BigString value = M3BigString.of("A", "\uD83D", "\uDE00", "\uD800", "B");
++        eq(5L, value.codeUnits().count(), "lazy long code-unit stream count");
++        eq(4L, value.codePoints().count(), "cross-chunk code-point stream count");
++        StringBuilder points = new StringBuilder();
++        value.codePoints().forEachOrdered(codePoint ->
++                points.appendCodePoint(Math.toIntExact(codePoint)));
++        eq("A\uD83D\uDE00\uD800B", points.toString(),
++                "code-point stream merges pairs and retains unpaired surrogates");
++
++        LocalM3Arena arena = new LocalM3Arena();
++        M3StringPiece first = arena.copyLatin1(new byte[] {'a', 'b'});
++        M3StringPiece second = arena.copyUtf16(new char[] {'c', '\uD83D', '\uDE00'});
++        M3StringPiece joined = M3StringPiece.join(first, second);
++        M3BigString pieceBacked = M3BigString.of(joined, "tail");
++        eq("abc\uD83D\uDE00tail", pieceBacked.flatten(),
++                "existing M3StringPiece can be a non-flattened rope chunk");
++        eq("c\uD83D\uDE00t", pieceBacked.subSequence(2, 6).flatten(),
++                "range spans inner piece and next rope chunk");
++        eq(3L, pieceBacked.indexOf("\uD83D\uDE00t", 0),
++                "literal search through existing M3 piece and rope boundary");
++        eq(8L, pieceBacked.summary().codePointCount(),
++                "summary reuses immutable M3 piece code-point semantics");
+     }
+ 
+     private static void summariesAndUnicodeBoundaries() {

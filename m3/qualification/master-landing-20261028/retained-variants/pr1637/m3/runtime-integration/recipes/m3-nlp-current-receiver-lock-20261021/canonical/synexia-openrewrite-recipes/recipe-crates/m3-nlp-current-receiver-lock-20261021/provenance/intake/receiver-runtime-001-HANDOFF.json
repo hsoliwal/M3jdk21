@@ -1,0 +1,326 @@
+[
+  {
+    "bytes": 3748,
+    "relative_path": "FINAL_RECEIVER_QUALIFICATION.json",
+    "sha256": "38781b148a4f46623481a6e10b04c71407608ede27ad6925ddd905436419fe41",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/FINAL_RECEIVER_QUALIFICATION.json"
+  },
+  {
+    "bytes": 2979999,
+    "relative_path": "combined-receiver-001-receipts/INPUTS.json",
+    "sha256": "7534037b5b101aa988c387d7a3f67cd65052191765d5548c8c0b64c17a376c84",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001-receipts/INPUTS.json"
+  },
+  {
+    "bytes": 20750,
+    "relative_path": "combined-receiver-001-receipts/INSTALLED_ARTIFACTS.json",
+    "sha256": "19289dc7efb3fbca55613246d379c615c069aeb9312eaf7b658e9028a108a718",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001-receipts/INSTALLED_ARTIFACTS.json"
+  },
+  {
+    "bytes": 2979999,
+    "relative_path": "combined-receiver-001-receipts/READBACK.json",
+    "sha256": "7534037b5b101aa988c387d7a3f67cd65052191765d5548c8c0b64c17a376c84",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001-receipts/READBACK.json"
+  },
+  {
+    "bytes": 5329,
+    "relative_path": "combined-receiver-001-receipts/RESULT.json",
+    "sha256": "38c71b8c4f6fb632f2352873cbd2578be7cf1f1383cdf34d64f4fce9e5c0cee1",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001-receipts/RESULT.json"
+  },
+  {
+    "bytes": 146,
+    "relative_path": "combined-receiver-001-receipts/command.log",
+    "sha256": "4c5e3d9cecaabdb0552118f2fc78a68e63bec81d4da95a7eba419752ca463265",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001-receipts/command.log"
+  },
+  {
+    "bytes": 25804,
+    "relative_path": "combined-receiver-001/BUILD_REPORT.json",
+    "sha256": "968255577fc25dfb0805b5f93ebf367f3db8279d22f5128911bf5e61a29caf4b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/BUILD_REPORT.json"
+  },
+  {
+    "bytes": 51,
+    "relative_path": "combined-receiver-001/DESCRIPTORS.tsv",
+    "sha256": "815c13462921dbb3a75d638c701c85a5422591176e0cf0380e264b81ce7ee41b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/DESCRIPTORS.tsv"
+  },
+  {
+    "bytes": 11936,
+    "relative_path": "combined-receiver-001/IMAGE.tsv",
+    "sha256": "fbc9a28b3f4bb6b0472de08ff0686c269f9f83939e91b31046baa626552daad7",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/IMAGE.tsv"
+  },
+  {
+    "bytes": 203,
+    "relative_path": "combined-receiver-001/ModelSourceProbe.log",
+    "sha256": "fe3d8bb0c8c0d05f2228491b2a128efb1cd0704795667a9c28e176fa80a60fbe",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/ModelSourceProbe.log"
+  },
+  {
+    "bytes": 161,
+    "relative_path": "combined-receiver-001/SourceFactsProbe.log",
+    "sha256": "6eeb026ba8840f1621b75251e18650f453583aa9e3c27151d1dc6c7979074623",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/SourceFactsProbe.log"
+  },
+  {
+    "bytes": 820,
+    "relative_path": "combined-receiver-001/SourceIntegrationProbe.log",
+    "sha256": "964f21a78bae9541657cacc2ad09e89185873b171abec035728d1b304f259b39",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/SourceIntegrationProbe.log"
+  },
+  {
+    "bytes": 82,
+    "relative_path": "combined-receiver-001/com.m3.text-compile.log",
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/com.m3.text-compile.log"
+  },
+  {
+    "bytes": 82,
+    "relative_path": "combined-receiver-001/com.m3.text-descriptor.log",
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/com.m3.text-descriptor.log"
+  },
+  {
+    "bytes": 2380,
+    "relative_path": "combined-receiver-001/com.m3.text.sources",
+    "sha256": "23ca297f7a635936917d3fd619236fce100af8de7e4ece3e79e66c96e9eacc3a",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/com.m3.text.sources"
+  },
+  {
+    "bytes": 82,
+    "relative_path": "combined-receiver-001/jdk.m3.compiletime-compile.log",
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/jdk.m3.compiletime-compile.log"
+  },
+  {
+    "bytes": 82,
+    "relative_path": "combined-receiver-001/jdk.m3.compiletime-descriptor.log",
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/jdk.m3.compiletime-descriptor.log"
+  },
+  {
+    "bytes": 16004,
+    "relative_path": "combined-receiver-001/jdk.m3.compiletime.sources",
+    "sha256": "724ac51187910e66289fdc52eef8a184774a8998e1128d67dd0acff3bf870c84",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/jdk.m3.compiletime.sources"
+  },
+  {
+    "bytes": 82,
+    "relative_path": "combined-receiver-001/jdk.m3.nlp.search-compile.log",
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/jdk.m3.nlp.search-compile.log"
+  },
+  {
+    "bytes": 82,
+    "relative_path": "combined-receiver-001/jdk.m3.nlp.search-descriptor.log",
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/jdk.m3.nlp.search-descriptor.log"
+  },
+  {
+    "bytes": 412,
+    "relative_path": "combined-receiver-001/jdk.m3.nlp.search.sources",
+    "sha256": "9603e22f4b6306e40f21dfa0bf0265012809975e24968685d5937d2a4f15ce50",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/jdk.m3.nlp.search.sources"
+  },
+  {
+    "bytes": 1817,
+    "relative_path": "combined-receiver-001/lucene-build.log",
+    "sha256": "2e582cada0bcd214f666c22d617ee1fad3dfa3641f1cd6586d82ddf5d2e88eb7",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene-build.log"
+  },
+  {
+    "bytes": 23844,
+    "relative_path": "combined-receiver-001/lucene/BUILD_REPORT.json",
+    "sha256": "5499ae62a75d4ba6f7ac66289c26fad829b23493af9c9b4317eca3e922e8594e",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/BUILD_REPORT.json"
+  },
+  {
+    "bytes": 1558,
+    "relative_path": "combined-receiver-001/lucene/dependency-descriptors/SDK_RECEIPT.json",
+    "sha256": "54391771b22a5fbcf0acd459d7eb69a78dae0f5cd027aad78cf562afa774d911",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/dependency-descriptors/SDK_RECEIPT.json"
+  },
+  {
+    "bytes": 150,
+    "relative_path": "combined-receiver-001/lucene/logs/contract-test-compile.log",
+    "sha256": "6fb24fc6b6be0c40dc9b0a764a75903e1c71c03c2ae75a0066da0cc1eb9c664e",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/logs/contract-test-compile.log"
+  },
+  {
+    "bytes": 376,
+    "relative_path": "combined-receiver-001/lucene/logs/descriptor-recipe.log",
+    "sha256": "1563e2a39488dd21df12835ccd6e9d656efdd41dce5da6741283eb7d3ef0be82",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/logs/descriptor-recipe.log"
+  },
+  {
+    "bytes": 230,
+    "relative_path": "combined-receiver-001/lucene/logs/jmod-pack.log",
+    "sha256": "5f2c3fedde509d2259b2333de7ca7c938638de89812ff999f8a271cff6f35016",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/logs/jmod-pack.log"
+  },
+  {
+    "bytes": 223,
+    "relative_path": "combined-receiver-001/lucene/logs/linked-image-Jdk21ExpressionsCheck.log",
+    "sha256": "f4c9eb21142b98acce668d356976ea47af56e3c226229d5cc06311a8664314d5",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/logs/linked-image-Jdk21ExpressionsCheck.log"
+  },
+  {
+    "bytes": 494,
+    "relative_path": "combined-receiver-001/lucene/logs/linked-image-Jdk21ProviderCheck.log",
+    "sha256": "d8b33d5eb1d007c3328aa22e54ac05c413c19889fb467debbf6e93ae3273fdbb",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/logs/linked-image-Jdk21ProviderCheck.log"
+  },
+  {
+    "bytes": 534,
+    "relative_path": "combined-receiver-001/lucene/logs/linked-image-M3LuceneJmodCheck.log",
+    "sha256": "6dcfecff132979c109382c69b6c9e917917eb98ca90189b27912a87ebf77e1fc",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/logs/linked-image-M3LuceneJmodCheck.log"
+  },
+  {
+    "bytes": 223,
+    "relative_path": "combined-receiver-001/lucene/logs/module-path-Jdk21ExpressionsCheck.log",
+    "sha256": "f4c9eb21142b98acce668d356976ea47af56e3c226229d5cc06311a8664314d5",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/logs/module-path-Jdk21ExpressionsCheck.log"
+  },
+  {
+    "bytes": 173,
+    "relative_path": "combined-receiver-001/lucene/logs/module-path-Jdk21ProviderCheck.log",
+    "sha256": "a862a09c1193f27493fb411723b577ddb92efb859603b3ca7ddf8f17be0b40f3",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/logs/module-path-Jdk21ProviderCheck.log"
+  },
+  {
+    "bytes": 213,
+    "relative_path": "combined-receiver-001/lucene/logs/module-path-M3LuceneJmodCheck.log",
+    "sha256": "34073304d490fa2d958d3b84ab1cd5f7d81c3db998a2dddbfc2ba99ee3601039",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/logs/module-path-M3LuceneJmodCheck.log"
+  },
+  {
+    "bytes": 380,
+    "relative_path": "combined-receiver-001/lucene/logs/source-recipe.log",
+    "sha256": "4d338e3113bec0713f41fa262c9d4046e410b1ea534b5ffbd318fcca7719f710",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/logs/source-recipe.log"
+  },
+  {
+    "bytes": 28187,
+    "relative_path": "combined-receiver-001/lucene/source-overlay/SDK_RECEIPT.json",
+    "sha256": "9ee28a39487781ca451a79c6283bf065ac6ffa4b6996642acb24f4a2716cd081",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/source-overlay/SDK_RECEIPT.json"
+  },
+  {
+    "bytes": 3465,
+    "relative_path": "combined-receiver-001/modules.txt",
+    "sha256": "eb8270b0cef4590c1d75fff7ebe26fe42dcb955009ce1db4472d8d805e7b31fd",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/modules.txt"
+  },
+  {
+    "bytes": 123,
+    "relative_path": "combined-receiver-001/opennlp-build.log",
+    "sha256": "18228c4064901f198fa201098dd847b8561c6458bbadae89d84084c05ef2d28b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp-build.log"
+  },
+  {
+    "bytes": 5990,
+    "relative_path": "combined-receiver-001/opennlp-cli.log",
+    "sha256": "77e1d45a8d11f83f7e071af0f090545cfe76d947125356e621b5180e7029ebd8",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp-cli.log"
+  },
+  {
+    "bytes": 111966,
+    "relative_path": "combined-receiver-001/opennlp/BUILD.json",
+    "sha256": "e8b0b44892254fa9fdd5051a9de63dd7020684dccb1809460f4d643faa13b642",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp/BUILD.json"
+  },
+  {
+    "bytes": 169,
+    "relative_path": "combined-receiver-001/opennlp/CoreProbe.log",
+    "sha256": "6f70387b9586ff4cbdac2522993162a42f33784196aa53863df8abb234622698",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp/CoreProbe.log"
+  },
+  {
+    "bytes": 106,
+    "relative_path": "combined-receiver-001/opennlp/CustomProviderProbe.log",
+    "sha256": "a90d7ad27c7a6f1dd0a1d2a8967bf069ea6862b242244102e6f8cc1c6ff1ce0d",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp/CustomProviderProbe.log"
+  },
+  {
+    "bytes": 128,
+    "relative_path": "combined-receiver-001/opennlp/ExtensionProbe.log",
+    "sha256": "2170eae54ea21d80fe3e9aa2e0ee8b7b3566b9575453e842084f3b4d199ab956",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp/ExtensionProbe.log"
+  },
+  {
+    "bytes": 136,
+    "relative_path": "combined-receiver-001/opennlp/ImmutableTextProbe.log",
+    "sha256": "4c322230b3a49002110826163bd3289d4217cbce460d6a002a7a6b38648f3756",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp/ImmutableTextProbe.log"
+  },
+  {
+    "bytes": 5990,
+    "relative_path": "combined-receiver-001/opennlp/cli.log",
+    "sha256": "77e1d45a8d11f83f7e071af0f090545cfe76d947125356e621b5180e7029ebd8",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp/cli.log"
+  },
+  {
+    "bytes": 302,
+    "relative_path": "combined-receiver-001/opennlp/core-compile.log",
+    "sha256": "e34607bc8ea047c0f647a2fec975de49b526b4797569e8d7058ee6cd236efa8b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp/core-compile.log"
+  },
+  {
+    "bytes": 82,
+    "relative_path": "combined-receiver-001/opennlp/morfologik-compile.log",
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp/morfologik-compile.log"
+  },
+  {
+    "bytes": 82,
+    "relative_path": "combined-receiver-001/opennlp/spellcheck-compile.log",
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp/spellcheck-compile.log"
+  },
+  {
+    "bytes": 358,
+    "relative_path": "combined-receiver-001/opennlp/test-compile.log",
+    "sha256": "db9aa475ed209c72b70496456cd9cc84cbe1831a40164159a3290a698c7587d9",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp/test-compile.log"
+  },
+  {
+    "bytes": 82,
+    "relative_path": "combined-receiver-001/opennlp/uima-compile.log",
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp/uima-compile.log"
+  },
+  {
+    "bytes": 82,
+    "relative_path": "combined-receiver-001/opennlp/validate-modules.log",
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp/validate-modules.log"
+  },
+  {
+    "bytes": 66,
+    "relative_path": "combined-receiver-001/opennlp/verification.log",
+    "sha256": "4630d8224b60cf6132dbdc099149d9a0a9fbe3937ba1a1f7aa84f72d2a35df03",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/opennlp/verification.log"
+  },
+  {
+    "bytes": 223,
+    "relative_path": "combined-receiver-001/pack.log",
+    "sha256": "ad0795ce62f32f395edec3ede2156fc7224ac036b28ce663b1dcb5b3311b7c55",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/pack.log"
+  },
+  {
+    "bytes": 82,
+    "relative_path": "combined-receiver-001/probe-compile.log",
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/probe-compile.log"
+  },
+  {
+    "bytes": 82,
+    "relative_path": "combined-receiver-001/validate-modules.log",
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b",
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/validate-modules.log"
+  }
+]

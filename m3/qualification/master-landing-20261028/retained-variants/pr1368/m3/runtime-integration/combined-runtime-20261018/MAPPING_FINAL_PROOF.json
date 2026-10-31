@@ -1,0 +1,116 @@
+{
+  "schema": "M3_MAPPING_CURRENT_CUSTODY_FINAL_PROOF_V1",
+  "canonical_datasets": [
+    {
+      "dataset": "m3-mapping-custody-v2-20261018",
+      "sdk_tests": 5,
+      "input_sealing_cases": 8,
+      "receiver_cases": 9,
+      "targets": 75,
+      "dataset_SHA256SUMS_sha256": "403a3587e57e4f4592840810d73bf2720a5a4c907aa76d54881bb8e2ed87f6b4",
+      "SDK_INPUTS_sha256": "43171b3f77c87eb454720ff3cc242264d0938e1c56aab3dc375a744f6b0cf5fe",
+      "SDK_RESULTS_sha256": "a02b99c6eff17299296e1e8245591f5d7fa58a1c3cefed299349e86d28f9898b",
+      "junit_xml_sha256": "88406ff4783efc656c052da779b6073dc159b95f24bee04194add604541bc3fc"
+    },
+    {
+      "dataset": "m3-map-sparse-guard-20261018",
+      "sdk_tests": 5,
+      "input_sealing_cases": 8,
+      "receiver_cases": 9,
+      "targets": 1,
+      "dataset_SHA256SUMS_sha256": "f5ea666f00b4637c6383d925fcaf62c4c7ceb595cb21f16e031fe33e3dd331b0",
+      "SDK_INPUTS_sha256": "b1e2240f91149224e2738d70234d81469ed2b6e3df08213c7f933260d1828db2",
+      "SDK_RESULTS_sha256": "c97929cd6bf63b4dab1309770c5c4b35fdd7e31b42ed92d4604804366737463a",
+      "junit_xml_sha256": "cfdad58d0ea7ec102f60dd6cf6021fce3cf1377313ed8ee05f882f0035bf277c"
+    },
+    {
+      "dataset": "m3-map-sparse-inputs-20261018",
+      "sdk_tests": 5,
+      "input_sealing_cases": 8,
+      "receiver_cases": 9,
+      "targets": 7,
+      "dataset_SHA256SUMS_sha256": "1d3f221698bddb04852959197094421bfd71743f6b1f9f4d8c4276b137b816d8",
+      "SDK_INPUTS_sha256": "68cdc702969e4d3e10892b1132df653577973e4291b777a0004dc7bf935a463e",
+      "SDK_RESULTS_sha256": "1c1aa263da816df2c0b7b6870c16c5d85ac03c63ca715e2cfad709624dfd42c2",
+      "junit_xml_sha256": "2afca34c430e7302316e1d1bd44836aa14ac47feef5361ca08d34be2e4def8ce"
+    }
+  ],
+  "source_baseline": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+  "qualified_sparse_test_epoch": "225c488f9b39d4534fe19cd2d72be1130875fb10",
+  "stage_one_SDK_output_chain": [
+    75,
+    1,
+    7
+  ],
+  "final_existing_sealed_outputs": 54,
+  "final_sealed_plan_sha256": "8d1dd2d5440e917ddfaa99c38939b2ae3f8b05ed3f2111dd5289351158dd6b24",
+  "final_files_are_direct_B_results": false,
+  "final_runtime_Java_native_outputs": 0,
+  "actual_final_sealed_apply": 54,
+  "actual_final_sealed_replay": 0,
+  "actual_final_sealed_rollback": 54,
+  "actual_final_sealed_rollback_replay": 0,
+  "no_write_refusal_controls": 4,
+  "fresh_TQ_tests": 21,
+  "fresh_Sync_tests": 3,
+  "TQ_exact_generated_custody_unmodified_verifier": "PASS",
+  "Sync_exact_generated_custody_unmodified_verifier": "PASS",
+  "full_migration_validator_with_previous_lineage": "PASS zeroerrors",
+  "record_ids_statuses_unchanged": 56,
+  "gates_unchanged": 20,
+  "coverage_unchanged": true,
+  "complete_phase_exit": 2,
+  "complete_phase_refusals_unchanged": 147,
+  "source_guard_count": 18,
+  "old75_nonplan_payloads_frozen": 74,
+  "legacy52_fixture_proof": "Preserved separately; never claimed as current source admission after sparseannotationfix",
+  "current_source_closure_sha256": "470a3e303fb1e56474afe37521483b9a14f638f9f4e8aa6fd4719df88a3609f6",
+  "current_source_paths": 148,
+  "raw_target_archives": [
+    {
+      "path": "evidence/current-tq-target.tar.gz",
+      "bytes": 2911216,
+      "sha256": "a1db4d7e2b6aacf5766559c8e82c83b6245d3752d51c21f342d912141b7fbf29",
+      "junit": {
+        "tests": 21,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "path": "evidence/current-sync-target.tar.gz",
+      "bytes": 1182240,
+      "sha256": "8e7639eb4e8a0714d2ea3a420ef1f37039248abdc12a176997a0c7f7aed76d8a",
+      "junit": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "actual_matched_image_sparse": "PASS at225c, prior metadata compile failure retained; runtime src/make unchanged",
+  "wider_image_and_family_scope": "Independent bounded runtime receipts do not promote family/coverage/performance/platform gates",
+  "root_readonly_admission": "before54/writes0 at225c, root not mutated by this agent",
+  "whitespace_check": "Final54 and all3 new datasets: gitdiff--no-index --check EMPTY diagnostics; exit1 denotes ordinary differences",
+  "promotion_authority": false,
+  "actual_root_receiving": {
+    "head": "243cf1cbfa4dc6cf13a9c9744dde536ee2f6f8cd",
+    "SDK_intermediate_chain": [
+      75,
+      1,
+      7
+    ],
+    "final_sealed_writes": 54,
+    "final_sealed_replay": 0,
+    "all54_postimage_hashes_verified": true,
+    "root_tested_source_paths_match": 148,
+    "root_TQ_custody_exit": 0,
+    "root_Sync_custody_exit": 0,
+    "root_migration_validate_exit": 0,
+    "root_migration_complete_exit": 2,
+    "unchanged_complete_obligations": 147,
+    "evidence": "evidence/root-243cf1cb/"
+  }
+}

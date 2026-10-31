@@ -1,0 +1,16 @@
+[
+  {
+    "name": "M3LongIndexProjection.java",
+    "git_blob": "52790dde304fbc2b695bf32d7e2a0faf2d6b9490",
+    "sha256": "3569c0a8ffd94c6e91b87b9316bbaf20583f7dd56810a7bee57a81c8a9975a8d",
+    "bytes": 10762,
+    "mode": "UNCHANGED_ACTUAL_PRODUCT_SOURCE"
+  },
+  {
+    "name": "M3LongAddressKernel.java",
+    "git_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66",
+    "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d",
+    "bytes": 5865,
+    "mode": "UNCHANGED_ACTUAL_PRODUCT_SOURCE"
+  }
+]

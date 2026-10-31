@@ -1,0 +1,95 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------< com.synexia.verification:existing-stacked-recipe-proof >-------
+[INFO] Building existing-stacked-recipe-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ existing-stacked-recipe-proof ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ existing-stacked-recipe-proof ---
+[INFO] Copying 5 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ existing-stacked-recipe-proof ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 2 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ existing-stacked-recipe-proof ---
+[INFO] Copying 4 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ existing-stacked-recipe-proof ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ existing-stacked-recipe-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipeTest
+[ERROR] Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.460 s <<< FAILURE! -- in com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipeTest
+[ERROR] com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipeTest.replacesBothPinnedOwnersGeneratesSharedCursorAndReachesFixedPoint -- Time elapsed: 2.059 s <<< ERROR!
+java.lang.IllegalStateException: preimage drift src/java.base/share/classes/java/lang/M3StringPool.java actual=15231ee5a2c48153550c700f98722e15c0f4451c; preimage drift src/java.base/share/classes/java/lang/M3StringTokenRegex.java actual=ad87db7ed0f7e0490b46245782ec64185fb457d7
+	at com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipe.prepare(M3StringLeafCursorConvergenceRecipe.java:114)
+	at com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipe.generate(M3StringLeafCursorConvergenceRecipe.java:83)
+	at com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipe.generate(M3StringLeafCursorConvergenceRecipe.java:30)
+	at org.openrewrite.ScanningRecipe.generate(ScanningRecipe.java:63)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipeTest.replacesBothPinnedOwnersGeneratesSharedCursorAndReachesFixedPoint(M3StringLeafCursorConvergenceRecipeTest.java:51)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running com.m3.rewrite.backport.M3FileByteEventFactRecipeTest
+[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.429 s <<< FAILURE! -- in com.m3.rewrite.backport.M3FileByteEventFactRecipeTest
+[ERROR] com.m3.rewrite.backport.M3FileByteEventFactRecipeTest.preservesDefensivePayloadAndRemovesProgressCloneThenReachesFixedPoint -- Time elapsed: 0.427 s <<< ERROR!
+java.lang.IllegalStateException: preimage drift m3/ports/file/src/main/java/com/m3/file/M3FileStreamEvents.java; preimage drift m3/ports/file/src/main/java/com/m3/file/M3FileStreamTasks.java
+	at com.m3.rewrite.backport.M3FileByteEventFactRecipe.prepare(M3FileByteEventFactRecipe.java:92)
+	at com.m3.rewrite.backport.M3FileByteEventFactRecipe.generate(M3FileByteEventFactRecipe.java:71)
+	at com.m3.rewrite.backport.M3FileByteEventFactRecipe.generate(M3FileByteEventFactRecipe.java:24)
+	at org.openrewrite.ScanningRecipe.generate(ScanningRecipe.java:63)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.m3.rewrite.backport.M3FileByteEventFactRecipeTest.preservesDefensivePayloadAndRemovesProgressCloneThenReachesFixedPoint(M3FileByteEventFactRecipeTest.java:57)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   M3FileByteEventFactRecipeTest.preservesDefensivePayloadAndRemovesProgressCloneThenReachesFixedPoint:57 » IllegalState preimage drift m3/ports/file/src/main/java/com/m3/file/M3FileStreamEvents.java; preimage drift m3/ports/file/src/main/java/com/m3/file/M3FileStreamTasks.java
+[ERROR]   M3StringLeafCursorConvergenceRecipeTest.replacesBothPinnedOwnersGeneratesSharedCursorAndReachesFixedPoint:51 » IllegalState preimage drift src/java.base/share/classes/java/lang/M3StringPool.java actual=15231ee5a2c48153550c700f98722e15c0f4451c; preimage drift src/java.base/share/classes/java/lang/M3StringTokenRegex.java actual=ad87db7ed0f7e0490b46245782ec64185fb457d7
+[INFO] 
+[ERROR] Tests run: 3, Failures: 0, Errors: 2, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.857 s
+[INFO] Finished at: 2026-10-21T10:29:28+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project existing-stacked-recipe-proof: 
+[ERROR] 
+[ERROR] Please refer to /workspace/scratch/01c7abe99733/ci-concurrency/stack-repair/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Implementation-Version: 3.55.1
+Implementation-URL: https://checkerframework.org
+Bundle-License: MIT
+

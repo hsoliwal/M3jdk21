@@ -1,0 +1,226 @@
+{
+  "schema": "m3-gcc-exact-pin-acquisition-audit/1",
+  "generated_at": "2026-10-06T04:08:47.306246+00:00",
+  "status": "EXACT_PIN_ACQUISITION_UNPROVEN_SNAPSHOT_METADATA_TRANSPORT_BLOCKED",
+  "repository": "hsoliwal/M3jdk21",
+  "failing_commit": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+  "failing_job": "https://github.com/hsoliwal/M3jdk21/actions/runs/37355594879/job/111917562555",
+  "executed_runner": {
+    "os": "Ubuntu 22.04.5 LTS",
+    "image": "ubuntu-22.04",
+    "image_version": "20260927.309.1",
+    "apt_version": "2.4.14"
+  },
+  "requested_version": "10.4.0-4ubuntu1~22.04",
+  "current_workflows": [
+    {
+      "path": ".github/workflows/build-linux.yml",
+      "bytes": 5195,
+      "sha256": "db21647bdf5228850f5b3b5608f46b0d7de12fc53f4a775021ca21fa4a11c07a",
+      "git_blob": "1f6823c2be45535d268217ee4c65af95ebcdce3b",
+      "b71_to_87590_tree_identity_unchanged": true
+    },
+    {
+      "path": ".github/workflows/main.yml",
+      "bytes": 14517,
+      "sha256": "6caf401e349de95b37041524a598aa0174c8511d216bbc7932a7fd9d0d997039",
+      "git_blob": "04cea1293ee2ce11cf1b0f9e6f98d57ef8447118",
+      "b71_to_87590_tree_identity_unchanged": true
+    }
+  ],
+  "current_tree": {
+    "commit": "87590cb96fb0e2dc0f88fae8e01957f7179cd255",
+    "github_tree": "cdcb741ace04fcd361d6fef59090b6912cbbb89c",
+    "capture": {
+      "path": "receiving-merge-audit/calls/current_refresh_github_tree.json",
+      "bytes": 30108,
+      "sha256": "e245ce94a52bf1cc38e43568ef122164e519deef0efb7c759c98bcfdaf30b813"
+    }
+  },
+  "historical_source_record": {
+    "version": "10.4.0-4ubuntu1~22.04",
+    "suite_label": "jammy-proposed",
+    "entry_date": "2022-07-19",
+    "changelog_line": 188,
+    "archive": {
+      "path": "gcc-acquisition-audit/gcc-10_10.5.0-1ubuntu1~22.04.3.debian.tar.xz",
+      "bytes": 602416,
+      "sha256": "1d78f0939f984920a952a56421be768351774229e8940d458377223a4451972f"
+    },
+    "descriptor": {
+      "path": "gcc-acquisition-audit/gcc-10_10.5.0-1ubuntu1~22.04.3.dsc",
+      "bytes": 22275,
+      "sha256": "33cf0ff38703aa5559cb81c9ce84e7f62dc07ec3706d97869e993021537b1d02"
+    },
+    "archive_sha256_matches_descriptor": true,
+    "descriptor_pgp_signature_verified": false,
+    "scope": "Official HTTPS source artifact records a Jammy backport; it is not a current signed binary index or install proof."
+  },
+  "pool_observations": [
+    {
+      "path": "current-gcc10-pool.html",
+      "deb_entries": 742,
+      "exact_pin_entries": [],
+      "scope": "Complete retrieved HTML pool listing; this does not prove absence from snapshot service."
+    },
+    {
+      "path": "old-releases-gcc10-pool.html",
+      "deb_entries": 2259,
+      "exact_pin_entries": [],
+      "scope": "Complete retrieved HTML pool listing; this does not prove absence from snapshot service."
+    }
+  ],
+  "snapshot_attempt": {
+    "candidate_timestamp": "20230302T030400Z",
+    "timestamp_qualified": false,
+    "metadata_calls": [
+      {
+        "name": "jammy-updates-InRelease",
+        "url": "https://snapshot.ubuntu.com/ubuntu/20230302T030400Z/dists/jammy-updates/InRelease",
+        "started_at": "2026-10-06T04:03:39.503610+00:00",
+        "ended_at": "2026-10-06T04:03:54.513341+00:00",
+        "argv": [
+          "curl",
+          "--location",
+          "--proto",
+          "=https",
+          "--max-redirs",
+          "3",
+          "--max-time",
+          "45",
+          "--connect-timeout",
+          "15",
+          "--silent",
+          "--show-error",
+          "--dump-header",
+          "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/gcc-acquisition-audit/jammy-updates-InRelease.headers",
+          "--output",
+          "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/gcc-acquisition-audit/jammy-updates-InRelease",
+          "--write-out",
+          "%{http_code}\n%{url_effective}\n%{size_download}\n",
+          "https://snapshot.ubuntu.com/ubuntu/20230302T030400Z/dists/jammy-updates/InRelease"
+        ],
+        "exit_code": 28,
+        "transfer": "000\nhttps://snapshot.ubuntu.com/ubuntu/20230302T030400Z/dists/jammy-updates/InRelease\n0\n",
+        "stderr": "curl: (28) Proxy CONNECT aborted due to timeout\n",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "jammy-updates-universe-amd64-Packages.xz",
+        "url": "https://snapshot.ubuntu.com/ubuntu/20230302T030400Z/dists/jammy-updates/universe/binary-amd64/Packages.xz",
+        "started_at": "2026-10-06T04:03:39.503408+00:00",
+        "ended_at": "2026-10-06T04:03:54.513952+00:00",
+        "argv": [
+          "curl",
+          "--location",
+          "--proto",
+          "=https",
+          "--max-redirs",
+          "3",
+          "--max-time",
+          "45",
+          "--connect-timeout",
+          "15",
+          "--silent",
+          "--show-error",
+          "--dump-header",
+          "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/gcc-acquisition-audit/jammy-updates-universe-amd64-Packages.xz.headers",
+          "--output",
+          "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/gcc-acquisition-audit/jammy-updates-universe-amd64-Packages.xz",
+          "--write-out",
+          "%{http_code}\n%{url_effective}\n%{size_download}\n",
+          "https://snapshot.ubuntu.com/ubuntu/20230302T030400Z/dists/jammy-updates/universe/binary-amd64/Packages.xz"
+        ],
+        "exit_code": 28,
+        "transfer": "000\nhttps://snapshot.ubuntu.com/ubuntu/20230302T030400Z/dists/jammy-updates/universe/binary-amd64/Packages.xz\n0\n",
+        "stderr": "curl: (28) Proxy CONNECT aborted due to timeout\n",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "jammy-security-InRelease",
+        "url": "https://snapshot.ubuntu.com/ubuntu/20230302T030400Z/dists/jammy-security/InRelease",
+        "started_at": "2026-10-06T04:03:39.504307+00:00",
+        "ended_at": "2026-10-06T04:03:54.513846+00:00",
+        "argv": [
+          "curl",
+          "--location",
+          "--proto",
+          "=https",
+          "--max-redirs",
+          "3",
+          "--max-time",
+          "45",
+          "--connect-timeout",
+          "15",
+          "--silent",
+          "--show-error",
+          "--dump-header",
+          "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/gcc-acquisition-audit/jammy-security-InRelease.headers",
+          "--output",
+          "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/gcc-acquisition-audit/jammy-security-InRelease",
+          "--write-out",
+          "%{http_code}\n%{url_effective}\n%{size_download}\n",
+          "https://snapshot.ubuntu.com/ubuntu/20230302T030400Z/dists/jammy-security/InRelease"
+        ],
+        "exit_code": 28,
+        "transfer": "000\nhttps://snapshot.ubuntu.com/ubuntu/20230302T030400Z/dists/jammy-security/InRelease\n0\n",
+        "stderr": "curl: (28) Proxy CONNECT aborted due to timeout\n",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "jammy-security-universe-amd64-Packages.xz",
+        "url": "https://snapshot.ubuntu.com/ubuntu/20230302T030400Z/dists/jammy-security/universe/binary-amd64/Packages.xz",
+        "started_at": "2026-10-06T04:03:39.504724+00:00",
+        "ended_at": "2026-10-06T04:03:54.513027+00:00",
+        "argv": [
+          "curl",
+          "--location",
+          "--proto",
+          "=https",
+          "--max-redirs",
+          "3",
+          "--max-time",
+          "45",
+          "--connect-timeout",
+          "15",
+          "--silent",
+          "--show-error",
+          "--dump-header",
+          "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/gcc-acquisition-audit/jammy-security-universe-amd64-Packages.xz.headers",
+          "--output",
+          "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/gcc-acquisition-audit/jammy-security-universe-amd64-Packages.xz",
+          "--write-out",
+          "%{http_code}\n%{url_effective}\n%{size_download}\n",
+          "https://snapshot.ubuntu.com/ubuntu/20230302T030400Z/dists/jammy-security/universe/binary-amd64/Packages.xz"
+        ],
+        "exit_code": 28,
+        "transfer": "000\nhttps://snapshot.ubuntu.com/ubuntu/20230302T030400Z/dists/jammy-security/universe/binary-amd64/Packages.xz\n0\n",
+        "stderr": "curl: (28) Proxy CONNECT aborted due to timeout\n",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "acquired_index_count": 0,
+    "acquired_exact_deb_count": 0,
+    "failure": "Each curl metadata request exited 28: Proxy CONNECT aborted due to timeout; HTTP 000 and zero body bytes.",
+    "web_metadata_lookup": "The exact jammy-updates InRelease and uncompressed Packages URLs were also inaccessible via the web tool; no signed index was captured."
+  },
+  "preserved_obligations": [
+    "Acquire an official snapshot InRelease plus Packages indices containing the exact gcc-10 and g++-10 pin, with archive-key signature and index hash verification.",
+    "Acquire each exact .deb and its package dependency closure; verify package size/SHA256 against the signed index before installing anything.",
+    "Qualify native amd64 first; qualify multilib/i386 and the separate 10.4.0-4ubuntu1~22.04cross1 cross-compiler pin independently.",
+    "Materialize any acquisition fix through the existing canonical hash-pinned text recipe, preserving compiler versions and build/test steps.",
+    "Run the installation, Configure, Build and required native/JDK tests on the declared Jammy runner; this audit executes none of these."
+  ],
+  "actions_not_taken": [
+    "No package installed",
+    "No build executed",
+    "No workflow authored or edited",
+    "No GitHub mutation",
+    "No version substituted",
+    "No Launchpad or changelogs robots restriction retried or bypassed"
+  ]
+}

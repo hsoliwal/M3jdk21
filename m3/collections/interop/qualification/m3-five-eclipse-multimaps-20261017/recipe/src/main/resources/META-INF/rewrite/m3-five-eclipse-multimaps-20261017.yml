@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# Preserve upstream JDK/Guava/Eclipse/Spring/Apache ABI names; only new M3-owned Eclipse adapters are installed.
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FiveLibraryEclipseMultimaps20261017
+displayName: Eclipse rich list/set multimaps over canonical M3 parallel-array indexed owners
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-five-eclipse-multimaps-20261017
+      lst: true

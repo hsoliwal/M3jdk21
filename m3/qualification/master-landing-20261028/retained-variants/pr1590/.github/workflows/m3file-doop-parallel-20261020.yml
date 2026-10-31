@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 original M3FileTree bounded selected parallelism
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - 'm3/tooling/shared-frontend/recipe-custody/datasets/m3-file-parallel-20261020/**'
+      - '.github/workflows/m3file-doop-parallel-20261020.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-doop-parallel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Strict original com.m3.file and bounded parallel JUnit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/file/pom.xml \
+            -Dtest=M3FileParallelTest test
+      - name: Existing canonical OpenRewrite SDK exact multi-pass and refusal
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+          mvn -B -ntp -f "$root/pom.xml" -Pcontract \
+            -Dm3.dataset=m3-file-parallel-20261020 \
+            "-Drecipe.owner.root=$root/sdk-owner" verify
+          python3 "$root/receive.py" \
+            --dataset m3-file-parallel-20261020 \
+            --recipe-owner "$root/sdk-owner" --target "$PWD" --check

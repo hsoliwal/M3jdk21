@@ -1,0 +1,2 @@
+MOP_MEMORY_CHECK PASS digest=6acc7a24d1a49e7541b049dfe3ece6f8635a559e35f79729b24621d276ddfbb2 admission=PENDING
+MOP_RCM_CONFORMANCE PASS checks=129 controlCases=32 profile=m3-nlp-current-receiver-lock-20261021/1.0

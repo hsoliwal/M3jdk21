@@ -1,0 +1,2 @@
+artifact	version	jar	module	requires	disposition
+jdk.m3.parser	1	/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/jdk.m3.parser.jar	jdk.m3.parser	jdk.compiler	JMOD

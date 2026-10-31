@@ -1,0 +1,111 @@
+{
+  "schema": "M3_TOKEN_CONVERGENCE_20261018",
+  "target_base": "c71bc6e93bcec6c470665cba487ab64e507ebdd9",
+  "canonical_base": "5bd512f6ea12a92ba4cb294c3394c86319fad119",
+  "donor_target": "3e1a0b7b7d2498a62550861a6a5a9bd88a2314d7",
+  "donor_canonical": "710588f0ca8ad1c2b0d6d9536f16aa881078b647",
+  "datasets": [
+    "token-donor-20261018",
+    "token-mask-final-20261018"
+  ],
+  "source_targets": 4,
+  "sdk_per_dataset": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "sealing_cases": 8,
+  "receiver_cases_per_dataset": 9,
+  "original_checks": 36020,
+  "java_boundary_checks": 903440,
+  "native_checks_per_mode": 903641,
+  "native_modes": [
+    "Xcheck:jni+fatal_UBSan",
+    "Xint+Xcheck:jni+fatal_UBSan"
+  ],
+  "final_replay_changes": 0,
+  "api_descriptors": "EXACT_DONOR_EQUAL",
+  "jni_header": "EXACT_DONOR_EQUAL",
+  "jtreg": {
+    "status": "PASS",
+    "tests": 2,
+    "mode": "host Java21 patch-module; complete TEST.ROOT and support files; not source-built modified JDK"
+  },
+  "lineage": "PASS_32_FAMILIES_NO_PROMOTION",
+  "resources": {
+    "candidate": {
+      "samples": [
+        {
+          "preparations": 1000,
+          "states": 64,
+          "tokens": 1025,
+          "cpuNs": 415920150,
+          "wallNs": 432020239,
+          "allocatedBytes": 173936312,
+          "retainedPrimitiveBytes": 139904
+        },
+        {
+          "preparations": 1000,
+          "states": 64,
+          "tokens": 1025,
+          "cpuNs": 320840007,
+          "wallNs": 330126031,
+          "allocatedBytes": 173936312,
+          "retainedPrimitiveBytes": 139904
+        },
+        {
+          "preparations": 1000,
+          "states": 64,
+          "tokens": 1025,
+          "cpuNs": 317637889,
+          "wallNs": 321195575,
+          "allocatedBytes": 173936312,
+          "retainedPrimitiveBytes": 139904
+        }
+      ],
+      "median_thread_cpu_ns": 320840007
+    },
+    "donor": {
+      "samples": [
+        {
+          "preparations": 1000,
+          "states": 64,
+          "tokens": 1025,
+          "cpuNs": 469489119,
+          "wallNs": 473847791,
+          "allocatedBytes": 173936312,
+          "retainedPrimitiveBytes": 139904
+        },
+        {
+          "preparations": 1000,
+          "states": 64,
+          "tokens": 1025,
+          "cpuNs": 418874507,
+          "wallNs": 429076897,
+          "allocatedBytes": 173936312,
+          "retainedPrimitiveBytes": 139904
+        },
+        {
+          "preparations": 1000,
+          "states": 64,
+          "tokens": 1025,
+          "cpuNs": 348264829,
+          "wallNs": 355288646,
+          "allocatedBytes": 173936312,
+          "retainedPrimitiveBytes": 139904
+        }
+      ],
+      "median_thread_cpu_ns": 418874507
+    }
+  },
+  "open_gates": [
+    "source-built modified JDK/libjava",
+    "full JDK/HotSpot/GC/CDS regression matrix",
+    "non-Linux platforms",
+    "full Synexia reactor",
+    "hosted CI",
+    "typed-token predicates/captures/lexical+symbol-aware rewrite",
+    "three preexisting collection standalone failures"
+  ]
+}

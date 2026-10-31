@@ -1,0 +1,5 @@
+destination	donor	original_sha	change	license
+m3/collections/src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java	M3ObjectResidency.parentBits, state and M3IndexMaskCompactor	Existing master blobs d3132cdc31d450926d29f7c4f9d3c47d03ad2363 and 240bbfb62ca949bfbd8abb0061cccad6630f7888	New standalone opt-in 64-bit parent state adapter, no source owner changed	Apache-2.0 first-party
+m3/collections/src/main/native/collections/m3_residency_state_mask.c	Existing M3IndexMaskCompactor JNI Region APIs	Existing owned C17 mask JNI implementation	New exact bounded native Region read kernel, no Java object references or new GC roots	Apache-2.0 first-party
+m3/collections/src/test/java/com/m3/collections/M3ResidencyStateMaskProof.java	JDK21 Java reference ArrayList/BitSet logic	New test oracle	Seeded 1600 rounds + signed offset + lifecycle/retirement + Java/JNI fingerprint	Apache-2.0 first-party
+m3/collections/src/test/java/com/m3/collections/M3ResidencyStateMaskTest.java	M3JDK21 existing JUnit tests	New JUnit bridge	Runs exact Java-only regression in module CI	Apache-2.0 first-party

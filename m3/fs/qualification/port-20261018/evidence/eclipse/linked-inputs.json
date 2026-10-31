@@ -1,0 +1,65 @@
+{
+  "phase": "FULL_BACKEND_STAGING_ACCEPTANCE",
+  "mode": "linked",
+  "started_utc": "2026-10-19T01:39:36.428596+00:00",
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "-ntp",
+    "-o",
+    "-s",
+    "/tmp/m3fs-eclipse-work/settings.xml",
+    "-Dmaven.repo.local=/tmp/m3fs-eclipse-work/m2",
+    "-f",
+    "/tmp/m3fs-eclipse-work/postimage/m3/eclipse/filesystem/pom.xml",
+    "-Djvm=/tmp/m3fs-native-work/runtime-final-qualification/image/bin/java",
+    "-Dm3.eclipse.vmOptions=--add-modules=jdk.m3fs",
+    "-Dm3fs.native=required",
+    "clean",
+    "verify"
+  ],
+  "cleared_environment_families": [
+    "LD_*",
+    "DYLD_*"
+  ],
+  "cleared_environment_names": [
+    "CLASSPATH",
+    "JAVA_OPTS",
+    "JAVA_TOOL_OPTIONS",
+    "JDK_JAVA_OPTIONS",
+    "MAVEN_ARGS",
+    "MAVEN_EXT_CLASS_PATH",
+    "MAVEN_OPTS",
+    "_JAVA_OPTIONS"
+  ],
+  "present_environment_keys_removed": [],
+  "JAVA_HOME": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+  "MAVEN_SKIP_RC": "1",
+  "native_override": false,
+  "input_sha256": {
+    "/tmp/m3fs-eclipse-work/m2/com/m3/m3-fs/0.1.0-SNAPSHOT/m3-fs-0.1.0-SNAPSHOT.jar": "d26696e0b79b81cbc51d8c07e0e19c574111e6603b930c15006a01c8d8c69970",
+    "/tmp/m3fs-native-work/runtime-final-qualification/image/bin/java": "2a207f5e7d075afa01d97f8048389a64432a44c4a5af0f5e77d6e286ec5f401d",
+    "/tmp/m3fs-native-work/runtime-final-qualification/image/lib/modules": "227fbc3f7b4acf7399b8befb7ff6b953f1d7cf31b6e53a2a4765a5af42917483",
+    "/tmp/m3fs-native-work/runtime-final-qualification/image/lib/libm3fs.so": "856c1d9bb8ea084970f73b811c3a7a91f2d89921538080ef01e7dfad0111a7a6",
+    "/tmp/m3fs-native-work/runtime-final-qualification/image/lib/libsqlite3.so.0": "2e6eef9a727f081f0d453b4e5e6cbd8b9ef8b6f86cbf7681cbad444d3b0b55c8"
+  },
+  "source_sha256": {
+    "m3/eclipse/filesystem/README.md": "2c425ab6eae55c6a2b4851d51c38a3d127c88877e2b910113dd15d9b830913fb",
+    "m3/eclipse/filesystem/osgi/MANIFEST.MF": "0036c4971ec731ee04e8e6f48548570d2506bb739b1cc2ae354fe71d50e3435f",
+    "m3/eclipse/filesystem/osgi/TEST-MANIFEST.MF": "9a0d1611f8707d596d2a98e2e7f64b72720c11ce45a46157775d3a50b3e0540e",
+    "m3/eclipse/filesystem/pom.xml": "6d4a89f8bdbb32ba87bb3d1e803de350b9e14474a369cafe100e5aba6ce0c271",
+    "m3/eclipse/filesystem/src/main/java/com/m3/eclipse/filesystem/M3EclipseActivator.java": "60723a27ba55745b93649bb49c21fd186674cdda71820e7354cb927bef063085",
+    "m3/eclipse/filesystem/src/main/java/com/m3/eclipse/filesystem/M3EclipseFileStore.java": "308188cd75b590996a552a42de493d98cb38b6e9161c7ae140dc8d54fd3d5757",
+    "m3/eclipse/filesystem/src/main/java/com/m3/eclipse/filesystem/M3EclipseFileSystem.java": "ef0f328a2f34c2d2961280333cab2a487886d2a157810ed862b6a1ecd854e01b",
+    "m3/eclipse/filesystem/src/main/java/com/m3/eclipse/filesystem/M3Mounts.java": "a5ae919ec1dc513e79beb9d13051e3f1e6845cea3b177ad5cdcde234c3ed11d3",
+    "m3/eclipse/filesystem/src/main/java/com/m3/eclipse/filesystem/M3Paths.java": "832db79becea5b5e9da22fffb2ab203fcca230d91578e3904c546ac9c55831db",
+    "m3/eclipse/filesystem/src/main/java/com/m3/eclipse/filesystem/M3Streams.java": "ada55988de8fbb3732e99b009efd81aaeea71a68e4a526f568354f7af5d60e6e",
+    "m3/eclipse/filesystem/src/main/resources/plugin.xml": "05f451b3f5f6f4843eae8e15891016aea3d3f01847116393902b141e556e1f03",
+    "m3/eclipse/filesystem/src/test/java/com/m3/eclipse/filesystem/M3EclipseFileSystemTest.java": "8def3d952445e2d64bb251c5857962a49455e5f103cb3880c87ff7dc849819c2",
+    "m3/eclipse/filesystem/src/test/java/com/m3/eclipse/filesystem/it/M3WorkspaceScenario.java": "f5f95252f6f1307d8ffc5c07bb23c236e91dc4059b4f7a51362396f840c0f61c",
+    "m3/eclipse/filesystem/src/test/java/com/m3/eclipse/filesystem/launcher/M3ResourcesIT.java": "6b0cd1670123f0a7222fff209cb02a74a2fc9fb180a83fcc03adafb2cde1360e",
+    "m3/fs/README.md": "b89de894adc3e81acc698902b5881e769dce593ed5d1dbcc7a4a95dc89f31f44",
+    "m3/fs/qualification/port-20261018/CAPABILITIES.md": "53ea9ab072cc9ccf1d4ed09b869d66f846dbd6dbb081efd023a69e3e9136659a"
+  },
+  "receipt_schema": "m3.fs.eclipse.full-backend-staging.v1",
+  "original_receipt_sha256": "23cb9bd57a69c909fdea33fc3c77ef6d9949b486502752ba29d25e890e175aca"
+}

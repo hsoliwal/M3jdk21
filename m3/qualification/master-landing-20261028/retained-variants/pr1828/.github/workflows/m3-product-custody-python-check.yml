@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 JDK product custody merged contracts
+
+on:
+  pull_request:
+    paths:
+      - 'm3/compatibility/check_public_names.py'
+      - 'm3/compatibility/test_public_names.py'
+      - 'm3/docs/public-naming.md'
+      - '.github/workflows/m3-product-custody-python-check.yml'
+  push:
+    branches:
+      - 'converge/m3-product-custody-1820-1822-20261022'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Diff whitespace and syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check HEAD^ HEAD
+          python -m py_compile m3/compatibility/check_public_names.py m3/compatibility/test_public_names.py
+      - name: Original and combined source-guard contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python m3/compatibility/test_public_names.py -v

@@ -1,0 +1,280 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Synexia contributors
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.collections.apache;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Random;
+import java.util.SequencedSet;
+import java.util.Set;
+import org.apache.commons.collections4.ListValuedMap;
+import org.apache.commons.collections4.MapIterator;
+import org.apache.commons.collections4.MultiSet;
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.commons.collections4.multimap.ArrayListValuedLinkedHashMap;
+import org.apache.commons.collections4.multimap.LinkedHashSetValuedLinkedHashMap;
+
+/** Oracle differential operations and separate independent laws; no reflection into storage. */
+public final class M3MultiValuedMapSelfTest {
+    private static long checks, paired, randomOperations, lawChecks;
+    private static final String[] KEYS={null,"a","b","c","Aa","BB","AaAa","BBBB","last"};
+    private static final String[] VALUES={null,"x","y","z","Aa","BB","duplicate","last"};
+    private M3MultiValuedMapSelfTest() { }
+    @FunctionalInterface private interface Action { Object run() throws Exception; }
+    private record Failure(String type) { }
+    private static Object result(Action action) {
+        try { return normalize(action.run()); }
+        catch (Exception failure) { return new Failure(failure.getClass().getName()); }
+    }
+    private static Object normalize(Object value) {
+        if (value instanceof MultiValuedMap<?,?> map) return state(map);
+        if (value instanceof Map.Entry<?,?> e) return Arrays.asList(e.getKey(),normalize(e.getValue()));
+        if (value instanceof Collection<?> c) {
+            ArrayList<Object> items=new ArrayList<>();
+            for(Object item:c) items.add(normalize(item));
+            return items;
+        }
+        if (value instanceof Map<?,?> map) {
+            ArrayList<Object> items=new ArrayList<>();
+            for(Map.Entry<?,?> e:map.entrySet()) items.add(normalize(e));
+            return items;
+        }
+        if (value instanceof Object[] array) return normalize(Arrays.asList(array));
+        return value;
+    }
+    private static Object state(MultiValuedMap<?,?> map) {
+        return Arrays.asList(map.size(),map.isEmpty(),normalize(map.asMap()),
+                normalize(map.keySet()),normalize(map.entries()),normalize(map.values()),normalize(map.keys()));
+    }
+    private static void check(boolean condition,String where) {
+        checks++; if(!condition) throw new AssertionError(where);
+    }
+    private static void equal(Object expected,Object actual,String where) {
+        check(Objects.equals(expected,actual),where+" expected="+expected+" actual="+actual);
+    }
+    private static void laws(MultiValuedMap<String,String> map,String where) {
+        int groups=0,pairs=0;
+        for(Map.Entry<String,Collection<String>> e:map.asMap().entrySet()) {
+            check(!e.getValue().isEmpty(),where+" asMap nonempty");lawChecks++;
+            pairs+=e.getValue().size();groups++;
+            equal(e.getValue().size(),map.keys().getCount(e.getKey()),where+" count");lawChecks++;
+            check(map.containsKey(e.getKey()),where+" key presence");lawChecks++;
+        }
+        equal(pairs,map.size(),where+" pair count");lawChecks++;
+        equal(groups,map.keySet().size(),where+" group count");lawChecks++;
+        equal(pairs==0,map.isEmpty(),where+" emptiness");lawChecks++;
+        equal(pairs,new ArrayList<>(map.entries()).size(),where+" entries");lawChecks++;
+        equal(pairs,new ArrayList<>(map.values()).size(),where+" values");lawChecks++;
+        equal(pairs,new ArrayList<>(map.keys()).size(),where+" repeated keys");lawChecks++;
+        for(String key:KEYS) {
+            check(map.get(key).containsAll(Collections.emptyList()),where+" containsAll empty");lawChecks++;
+            equal(new Failure(NullPointerException.class.getName()),
+                    result(()->map.get(key).containsAll(null)),where+" containsAll null");lawChecks++;
+            check(map.containsKey(key)==!map.get(key).isEmpty(),where+" logical key presence");lawChecks++;
+        }
+    }
+    private static void pair(MultiValuedMap<String,String> oracle,MultiValuedMap<String,String> owned,
+            Action reference,Action candidate,String where) {
+        equal(result(reference),result(candidate),where+" return/exception");
+        equal(state(oracle),state(owned),where+" contents/order");
+        equal(oracle.hashCode(),owned.hashCode(),where+" hash");
+        equal(oracle.toString(),owned.toString(),where+" string");
+        check(oracle.equals(owned)&&owned.equals(oracle),where+" symmetric map equality");
+        paired++;
+        laws(owned,where);
+    }
+    private static Object operation(MultiValuedMap<String,String> map,boolean list,int op,
+            String key,String value,String other) {
+        Collection<String> group=map.get(key);
+        return switch(op) {
+            case 0 -> map.put(key,value);
+            case 1 -> map.putAll(key,Arrays.asList(value,other));
+            case 2 -> group.add(value);
+            case 3 -> group.addAll(Arrays.asList(value,other));
+            case 4 -> map.removeMapping(key,value);
+            case 5 -> map.remove(key);
+            case 6 -> map.asMap().remove(key);
+            case 7 -> map.keySet().remove(key);
+            case 8 -> group.remove(value);
+            case 9 -> group.removeAll(Arrays.asList(value,other));
+            case 10 -> group.retainAll(Arrays.asList(value,other));
+            case 11 -> { group.clear(); yield "void"; }
+            case 12 -> map.values().remove(value);
+            case 13 -> map.entries().remove(new AbstractMap.SimpleImmutableEntry<>(key,value));
+            case 14 -> {
+                Iterator<String> it=group.iterator();
+                if(!it.hasNext()) yield false;
+                it.next(); it.hasNext(); it.remove(); yield true;
+            }
+            case 15 -> group.removeIf(v->Objects.equals(v,value));
+            case 16 -> {
+                if(!list) yield map.put(key,value);
+                List<String> values=(List<String>)group;
+                values.add(values.size()/2,value); yield "void";
+            }
+            case 17 -> {
+                if(!list) yield group.add(value);
+                List<String> values=(List<String>)group;
+                if(values.isEmpty()) yield false;
+                yield values.set(values.size()/2,value);
+            }
+            case 18 -> {
+                if(!list) yield group.remove(value);
+                List<String> values=(List<String>)group;
+                if(values.isEmpty()) yield false;
+                yield values.remove(values.size()/2);
+            }
+            case 19 -> {
+                if(!list) yield group.add(other);
+                List<String> values=(List<String>)group;
+                ListIterator<String> it=values.listIterator(values.size());
+                it.add(value);
+                equal(value,it.previous(),"local listIterator previous");
+                it.set(other);
+                yield "void";
+            }
+            case 20 -> {
+                if(!list) yield map.containsMapping(key,value);
+                List<String> values=(List<String>)group;
+                if(values.size()<2) yield false;
+                // Keep one value so the ordinary oracle corpus never asks to emulate empty-directory bugs.
+                values.subList(0,values.size()-1).clear(); yield true;
+            }
+            case 21 -> {
+                MapIterator<String,String> it=map.mapIterator();
+                if(!it.hasNext()) yield false;
+                List<String> current=Arrays.asList(it.next(),it.getValue());
+                it.hasNext(); it.remove(); yield current;
+            }
+            case 22 -> map.asMap().entrySet().remove(
+                    new AbstractMap.SimpleImmutableEntry<>(key,list ? Arrays.asList(value,other) :
+                            new java.util.LinkedHashSet<>(Arrays.asList(value,other))));
+            case 23 -> {
+                Map<String,String> input=new java.util.LinkedHashMap<>();
+                input.put(key,value); input.put("copy",other);
+                yield map.putAll(input);
+            }
+            case 24 -> map.containsMapping(key,value);
+            case 25 -> map.containsValue(value);
+            case 26 -> group.toArray(new String[group.size()+1]);
+            case 27 -> {
+                if(map.size()>24) { map.clear(); yield true; }
+                yield false;
+            }
+            default -> throw new AssertionError("operation domain");
+        };
+    }
+    private static void random(boolean list,long seed) {
+        MultiValuedMap<String,String> oracle=list?new ArrayListValuedLinkedHashMap<>():new LinkedHashSetValuedLinkedHashMap<>();
+        MultiValuedMap<String,String> owned=list?new M3ListValuedMap<>():new M3SetValuedMap<>();
+        Random random=new Random(seed);
+        for(int i=0;i<5000;i++) {
+            int op=random.nextInt(28);
+            String key=KEYS[random.nextInt(KEYS.length)];
+            String value=VALUES[random.nextInt(VALUES.length)],other=VALUES[random.nextInt(VALUES.length)];
+            String where=(list?"list":"set")+"/random/"+i+"/op"+op;
+            pair(oracle,owned,()->operation(oracle,list,op,key,value,other),
+                    ()->operation(owned,list,op,key,value,other),where);
+            randomOperations++;
+        }
+    }
+    private static Object roundTrip(Object value) throws Exception {
+        ByteArrayOutputStream bytes=new ByteArrayOutputStream();
+        try(ObjectOutputStream out=new ObjectOutputStream(bytes)) { out.writeObject(value); }
+        try(ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(bytes.toByteArray()))) {
+            return in.readObject();
+        }
+    }
+    private static void ownershipLaws(boolean list) throws Exception {
+        MultiValuedMap<String,String> map=list?new M3ListValuedMap<>():new M3SetValuedMap<>();
+        Collection<String> descriptor=map.get("a");
+        equal(false,descriptor.addAll(Collections.emptyList()),"absent empty addition");
+        laws(map,"absent empty addition");
+        equal(new Failure(NullPointerException.class.getName()),result(()->map.get("b").addAll(null)),
+                "absent null addition");
+        laws(map,"absent null addition");
+        descriptor.addAll(Arrays.asList("x",null,"y","x"));
+        Object copy=roundTrip(map);
+        check(copy instanceof Serializable,"outer serializable");
+        equal(state(map),state((MultiValuedMap<?,?>)copy),"outer own roundtrip");
+        Collection<String> removed=map.remove("a");
+        check(removed instanceof Serializable && removed instanceof Cloneable,"raw group markers");
+        equal(normalize(removed),normalize(roundTrip(removed)),"detached group roundtrip");
+        removed.add("detached");check(map.isEmpty(),"detached group independent");
+        descriptor.add("reattached");check(map.containsMapping("a","reattached"),"descriptor reattaches");
+        if(list) {
+            List<String> raw=((ListValuedMap<String,String>)map).get("a").subList(0,1);
+            raw.clear();laws(map,"raw subList vacuum");
+            check(map.asMap().get("a")==null && !map.keySet().contains("a"),"logical absent alias");
+            raw.add("live-again");
+            check(map.containsMapping("a","live-again"),"raw alias refills same owner");
+            laws(map,"raw alias refill");
+        } else {
+            M3LinkedHashSetGroup<String> raw=(M3LinkedHashSetGroup<String>)removed;
+            M3LinkedHashSetGroup<String> cloned=raw.clone();
+            equal(normalize(raw),normalize(cloned),"set clone contents/order");
+            cloned.add("clone-only");check(!raw.contains("clone-only"),"set clone storage independent");
+            SequencedSet<String> reverse=raw.reversed();
+            check(reverse.reversed()==raw,"set reverse original identity");
+            equal(raw.getLast(),reverse.getFirst(),"reverse endpoint");
+            reverse.addFirst("reverse-first");equal("reverse-first",raw.getLast(),"reverse addFirst relink");
+        }
+        equal(new Failure(UnsupportedOperationException.class.getName()),
+                result(()->map.keys().removeIf(null)),"unconditional read-only null refusal");
+        MultiSet<String> keys=map.keys();
+        check(keys instanceof Serializable && keys instanceof org.apache.commons.collections4.Unmodifiable,
+                "counted view markers");
+        equal(new Failure(java.io.NotSerializableException.class.getName()),result(()->roundTrip(keys)),
+                "counted view donor backing serialization refusal");
+        MultiSet.Entry<String> zero=new MultiSet.Entry<>() {
+            @Override public String getElement() { return "zero-count-absent"; }
+            @Override public int getCount() { return 0; }
+        };
+        MultiValuedMap<String,String> oracle=list?new ArrayListValuedLinkedHashMap<>():new LinkedHashSetValuedLinkedHashMap<>();
+        boolean oracleContains=oracle.keys().entrySet().contains(zero);
+        boolean ownedContains=keys.entrySet().contains(zero);
+        System.out.println("{\"discriminator\":\"zero-count-entrySet-membership\",\"list\":"+list+
+                ",\"oracleContains\":"+oracleContains+",\"ownedContains\":"+ownedContains+"}");
+        check(!ownedContains,"zero-count absent entry is not a Set member");
+    }
+    private static void nullBulkQueryLaws() {
+        boolean admitted=true;
+        for(boolean list:List.of(true,false)) {
+            MultiValuedMap<String,String> oracle=list?new ArrayListValuedLinkedHashMap<>():new LinkedHashSetValuedLinkedHashMap<>();
+            MultiValuedMap<String,String> owned=list?new M3ListValuedMap<>():new M3SetValuedMap<>();
+            Object expected=new Failure(NullPointerException.class.getName());
+            Object oracleRemove=result(()->oracle.get("absent").removeAll(null));
+            Object oracleRetain=result(()->oracle.get("absent").retainAll(null));
+            Object ownedRemove=result(()->owned.get("absent").removeAll(null));
+            Object ownedRetain=result(()->owned.get("absent").retainAll(null));
+            System.out.println("{\"discriminator\":\"absent-bulk-null-validation\",\"list\":"+list+
+                    ",\"oracleRemove\":\""+oracleRemove+"\",\"oracleRetain\":\""+oracleRetain+
+                    "\",\"ownedRemove\":\""+ownedRemove+"\",\"ownedRetain\":\""+ownedRetain+"\"}");
+            admitted&=Objects.equals(expected,ownedRemove)&&Objects.equals(expected,ownedRetain);
+        }
+        check(admitted,"absent removeAll/retainAll null must reject null Collection arguments");
+    }
+    public static void main(String[] args) throws Exception {
+        if(args.length!=0) throw new IllegalArgumentException("fixed corpus");
+        nullBulkQueryLaws();
+        random(true,0x4d334c495354L);random(false,0x4d33534554L);
+        ownershipLaws(true);ownershipLaws(false);
+        System.out.println("{\"suite\":\"M3_OWNED_APACHE_MULTIVALUED_MAP\",\"checks\":"+checks+
+                ",\"pairedOperations\":"+paired+",\"randomOperations\":"+randomOperations+
+                ",\"independentLawChecks\":"+lawChecks+",\"ownedFailures\":0,"+
+                "\"scope\":\"10000 canonical-reference random ops; own wire; no complete concrete epoch, subclass, performance or malformed-stream parity\"}");
+    }
+}

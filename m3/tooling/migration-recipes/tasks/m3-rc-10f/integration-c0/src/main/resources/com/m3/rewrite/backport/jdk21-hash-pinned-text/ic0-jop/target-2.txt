@@ -1,0 +1,2 @@
+jep	classification	default_java21	scope	contract	promotion_authority
+485	OPT_IN_SE_API_EXTENSION	NO	LIBRARY_API	EXPLICIT_CONTRACT_CHANGE	false

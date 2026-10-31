@@ -1,0 +1,70 @@
+{
+  "schema": "M3_NATIVE_FORK_FAMILY_QUALIFICATION_V1",
+  "status": "QUALIFIED_NATIVE_FORK_PUBLISHED_DRAFT_REVIEW_PENDING",
+  "catalogue": {
+    "repository": "hsoliwal/M3jdk21",
+    "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "path": "m3/collections/qualification/m3-sdk-families-20261017/FAMILY_CATALOG.tsv",
+    "git_blob": "160aa9dae22852b3cdc5838db50105426373dcd0",
+    "main_catalogue_bytes_changed": false,
+    "main_catalogue_rows_preserved": 107,
+    "original_first_row": {
+      "upstream_fqcn": "com.google.common.collect.ArrayListMultimap",
+      "vendor": "GUAVA",
+      "existing_m3_owner": "-",
+      "proposed_m3_role_NOT_IMPLEMENTED": "M3ListMultimap",
+      "disposition": "PENDING",
+      "semantic_contract": "guava-mutable-list-multimap"
+    }
+  },
+  "native_fork": {
+    "repository": "hsoliwal/guava",
+    "compatible_baseline": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+    "compatible_upstream_version": "33.4.8-jre",
+    "module": "m3-jre21",
+    "coordinate": "com.google.guava:guava:33.4.8-m3-java21",
+    "public_owner": "com.google.common.collect.ArrayListMultimap",
+    "private_storage_owners": [
+      "com.m3.collections.M3LinkedHashMap",
+      "com.m3.collections.M3ArrayList"
+    ],
+    "feature_commit": "14ea57431688b9a6e9d424edb85d846aefdc7fff",
+    "preserved_fork_master": "dfd9dca629d44faf71846b1f85acd38556f4854d",
+    "proposed_M3ListMultimap_alias_implemented": false,
+    "pull_request": "https://github.com/hsoliwal/guava/pull/4",
+    "baseline_branch": "m3/guava-33.4.8-jre-baseline"
+  },
+  "qualified_sources": {
+    "ArrayListMultimap.java": "99fac9baecd0e94464fb57f0656b172ea6c781f754a2024bb271c42ecf2df02d",
+    "M3LinkedHashMap.java": "1fc47dea385248f67ed2dad3612e793a4ef039418015c2f724ccfbff79d3dd87",
+    "M3ArrayList.java": "ef4648fc115b6ddc8173af77f08c249330d7fa5a8159adc8490ea9310945d17d"
+  },
+  "qualification": {
+    "final_report_sha256": "fbb9211f4cf05907b8ea6d7d6a1a6bc9903147a925af89b5c7328c6d7acd518b",
+    "final_artifact_sha256": "84050590fa79bd8e6c40bb30cdfa33dad96ac96c0f77645f5723088863e066eb",
+    "unchanged_upstream_suite": {
+      "tests": 6064,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "native_package_suite": {
+      "tests": 6068,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "canonical_and_receiver_focus_tests": 12,
+    "existing_interop_tests": 23,
+    "differential_steps": 1600,
+    "differential_digest": "ddd0ee8efe253ce82d94cc1ec4de67064c3de7c257685f6e0c8b3acfa6fc9dce",
+    "public_protected_abi_byte_identical": true,
+    "cross_jvm_serialization": "PASS_BOTH_DIRECTIONS_INCLUDING_SELF_VALUES",
+    "classpath_and_modulepath": "PASS",
+    "embedded_maven_variant_metadata": "PASS",
+    "original_jpms_identity_and_version": "com.google.common@33.4.8-jre"
+  },
+  "scope": "Companion qualification for the first native Guava family only; no main catalogue status transition and no claim for other collection families.",
+  "review": "Draft review and hosted CI remain pending.",
+  "canonical_recipes": "https://github.com/hsoliwal/com.synexia/pull/12305"
+}

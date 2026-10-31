@@ -1,0 +1,142 @@
+[
+  {
+    "name": "sdk-post-admission-0",
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/tmp/m3-program-private/synexia-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017/receive.py",
+      "--crate",
+      "/tmp/m3-program-private/synexia-openrewrite-recipes/recipe-crates/m3-program-escape-precompute-20261017",
+      "--target",
+      "/tmp/m3-program-latest-receiving",
+      "--check"
+    ],
+    "exit": 0,
+    "classification": "COMPLETED",
+    "seconds": 0.05721229299888364
+  },
+  {
+    "name": "java-version",
+    "argv": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-version"
+    ],
+    "exit": 0,
+    "classification": "COMPLETED",
+    "seconds": 0.027946011003223248
+  },
+  {
+    "name": "receiving-head",
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "exit": 0,
+    "classification": "COMPLETED",
+    "seconds": 0.002643073003127938
+  },
+  {
+    "name": "receiving-source-tree",
+    "argv": [
+      "git",
+      "ls-tree",
+      "-r",
+      "-z",
+      "--full-tree",
+      "e913ab89056657eca4009678cfe9a657c020e79b",
+      "--",
+      "m3/vendor/third_party/asm-9.6/src/main/java",
+      "m3/vendor/third_party/asm-tree/src/main/java",
+      "m3/vendor/third_party/asm-analysis/src/main/java",
+      "m3/ports/precompute/src/main/java",
+      "m3/ports/compiletime/src/main/java",
+      "m3/ports/compiletime/src/test/java"
+    ],
+    "exit": 0,
+    "classification": "COMPLETED",
+    "seconds": 0.003753873003006447
+  },
+  {
+    "name": "current-vendored-asm",
+    "argv": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+      "--release",
+      "8",
+      "-proc:none",
+      "-d",
+      "/tmp/m3-program-latest-compiletime/asm-classes",
+      "@/tmp/m3-program-latest-compiletime/asm.args"
+    ],
+    "exit": 0,
+    "classification": "COMPLETED",
+    "seconds": 1.9696399119966372
+  },
+  {
+    "name": "strict-current-port-and-tests",
+    "argv": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all,-module",
+      "-Werror",
+      "-cp",
+      "/tmp/m3-program-latest-compiletime/asm-classes:/tmp/m3-toolchain/junit-platform-console-standalone-1.12.2.jar",
+      "-d",
+      "/tmp/m3-program-latest-compiletime/classes",
+      "@/tmp/m3-program-latest-compiletime/ports.args"
+    ],
+    "exit": 0,
+    "classification": "COMPLETED",
+    "seconds": 2.3900379910010088
+  },
+  {
+    "name": "current-port-junit",
+    "argv": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xmx512m",
+      "--add-opens",
+      "java.base/java.util.regex=ALL-UNNAMED",
+      "-jar",
+      "/tmp/m3-toolchain/junit-platform-console-standalone-1.12.2.jar",
+      "execute",
+      "--disable-banner",
+      "--class-path",
+      "/tmp/m3-program-latest-compiletime/classes:/tmp/m3-program-latest-compiletime/asm-classes",
+      "--scan-class-path",
+      "--include-package",
+      "com.m3.compiletime",
+      "--fail-if-no-tests",
+      "--reports-dir",
+      "/tmp/m3-program-latest-compiletime/junit-reports"
+    ],
+    "exit": 0,
+    "classification": "COMPLETED",
+    "seconds": 1.5574378890014486
+  },
+  {
+    "name": "current-ast-leaf-selftest",
+    "argv": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xmx512m",
+      "-ea",
+      "-cp",
+      "/tmp/m3-program-latest-compiletime/classes:/tmp/m3-program-latest-compiletime/asm-classes",
+      "com.m3.compiletime.M3ASTLeafIndexSelfTest"
+    ],
+    "exit": 0,
+    "classification": "COMPLETED",
+    "seconds": 0.4667872529971646
+  },
+  {
+    "name": "receiving-head-after",
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "exit": 0,
+    "classification": "COMPLETED",
+    "seconds": 0.002654440999322105
+  }
+]

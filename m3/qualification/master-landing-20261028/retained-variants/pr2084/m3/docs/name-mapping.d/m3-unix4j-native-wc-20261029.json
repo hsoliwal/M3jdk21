@@ -1,0 +1,17 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Additive native wc leaf in the existing text-tools pack; module-info, java.base and the existing mkfifo0 JNI contract are unchanged.",
+  "mappings": [
+    {
+      "source": "tools4j/unix4j :: org.unix4j.unix.wc.CounterType, Counters; org.unix4j.util.StringUtil.splitLines (semantics only)",
+      "source_commit": "0a127602907978efbff7ea297bd553274ba70a8e",
+      "target": "m3/tooling/module-packs/text-tools/src/jdk.m3.text/jdk/m3/text/Wc.java : jdk.m3.text.Wc; native/m3textio.c : Java_jdk_m3_text_WcNative_count0, Java_jdk_m3_text_WcNative_countLines0",
+      "status": "leaf 1: stock JDK 21 javac, Linux gcc and Windows mingw builds, -Xcheck:jni differential against Unix4j 0.6 (scripts/verify-wc-native.sh); M3 image build.py and jtreg not run",
+      "recipe": "template-first whitespace table: native/generator/M3TextioWhitespaceTableGenerator.java -> native/m3textio_whitespace.h (fixed point checked)",
+      "target_rule": "Same libm3textio; packed int[] lanes (com.m3.collections HOLD in FOSS_REUSE_DECISION.tsv); M3String leaf feed is leaf 1b (docs/LEAF_1B_M3STRING_ACCESSOR.md)",
+      "category": "unix4j wc: lines, words (Character.isWhitespace per UTF-16 unit), chars (UTF-16 units incl. endings)",
+      "license": "Apache-2.0 first-party code; Unix4j MIT notice in legal/NOTICE.txt and the C file header; Unix4j jars are a test oracle only",
+      "gates": "oracle-jars, generator-fixed-point, atoms-hash-anchors, ledger-columns, javac, gcc-linux, nm-jni-symbols, selftest-xcheck-jni, discriminator-unsatisfied-link, discriminator-table-flip, gcc-mingw-windows, selftest-windows-xcheck-jni"
+    }
+  ]
+}

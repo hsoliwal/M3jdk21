@@ -1,0 +1,9 @@
+path	sha256	git_blob	mode	pr	note
+m3/fs/native/src/m3fs_jni.c	0fd6f744dfd30cf3b25ff726ce768ae8e71adcfbe5ae2db99ddf26f70435168d	e63128f8c26c0f556d89a81789b5a54731191d26	100644	1843	PR version, not live
+m3/fs/src/main/java/com/m3/fs/M3FS.java	97a8b6580157c8b235ca1c7c9b42957636d57f3d97490226ee04d99a26448468	69162f305e9d6457a1d98c1d7e4cc70cc0618c70	100644	1843	PR version, not live
+m3/fs/src/main/java/com/m3/fs/M3FsNative.java	946c46caf0316c89bcefd03d6ddb2ba97613abed2670c0fa23128dd5a635a0b0	637d015e0017f4fe5d2d34eaec8125a2540351a3	100644	1843	PR version, not live
+m3/fs/src/main/java/com/m3/fs/M3FsStatBatch.java	87d16dd2993af818002104036ac2c8232a116ecb15327fbbda450e331b9db0d8	f7ceb982ebd0007fd9abadd71d9b280d0baedb07	100644	1843	PR version, not live
+m3/fs/src/test/java/com/m3/fs/M3FsStatBatchTest.java	87cd36ddb08ba5a8be31feb35f7f0e94ecb3e5211b2b8a0b266b770dc7fe21a5	589395873bc095f1eb89c8a12a0b6f241e4a2c5a	100644	1843	PR version, not live
+m3/qualification/m3fs-native-stat-forward-20261022/GATES.tsv	d6f2eb79790d454e6acc2f136d19eb3e0ed8332f6dc6934ae319e0fda6f6e03b	32d6bd4d13ab62e806b37ca6e14bc7f11009217c	100644	1843	PR version, not live
+m3/qualification/m3fs-native-stat-forward-20261022/README.md	8d9e0f136839645ea5afff20ea9f03857f5178479044b18432eb1ebc7bba78ab	865c951880fbe0d1f6bfdf13e1852ad56ca5b270	100644	1843	PR version, not live
+m3/qualification/m3fs-native-stat-forward-20261022/RECEIVED_DONORS.tsv	ca7c5bdd066fdca6b502f564c5d9e0d86b1c06e4e9e5aab10dc8e87775b5137a	3f79ab52cb8d3631c68a1beeedc2d28d3dbed52c	100644	1843	PR version, not live

@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ImmediateShortString
+displayName: M3JDK21 immediate short Strings (third canonical M3String owner kind)
+description: >-
+  Adds java.lang.M3StringImmediate: the whole text of a short String packed into one long
+  (LATIN1 x7 and IDENT x10 profiles, canonical choice, so equal packed values mean equal text).
+  M3StringPool admits it after the lexicon lookup on all four intern paths (no native payload,
+  no bucket, no reservation; opt out with -Dm3.string.immediate=false). M3StringOwner permits it,
+  the canonical tuple leaf walker and the regex DP accept it, M3String.contentEquals compares
+  packed values. HotSpot registers the class, the packed offset, and decodes the same layout in
+  java_lang_M3String::char_at and copy_owner_chars (JNI shadows). Ships M3StringImmediateTest.
+  TARGET_OWNED_PORT postimages; the five HotSpot classfile files are carried as text.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-immediate-string
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-immediate-string

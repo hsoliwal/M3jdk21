@@ -1,0 +1,2147 @@
+{
+  "canonical_commit": "c4ae7e361c9253aaced47e843549a06e505d924d",
+  "canonical_packet": {
+    "manifests": {
+      "java": {
+        "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/manifest.tsv",
+        "git_blob_sha1": "87cd9db97b6f98d66c64645237635687ce7a33e9",
+        "sha256": "bb80f7c9918ee159b837dde21fefcc7ae6d51936780f5427ae92921d86174313"
+      },
+      "text": {
+        "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/manifest.tsv",
+        "git_blob_sha1": "26760f0e2fb4de392f6a367e11664511de89d92d",
+        "sha256": "81672ad528821d82e7ea8570b7725e92656f9593dba9a79d7adaa98bc7fb2431"
+      }
+    },
+    "recipe_yaml": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-nlp-search-integration-20261018.yml",
+      "git_blob_sha1": "a4e6a5105eccc7313e3d698ed97c400f452c979b",
+      "sha256": "f450cae79c165347cf533aa602bb75793fdbe5aface19d6311ccee4490fada65"
+    },
+    "target_base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+    "target_count": 145,
+    "targets": {
+      "canonical_path": "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/TARGETS.json",
+      "git_blob_sha1": "f16649d90ee4d2312704aba843c419808e251749",
+      "sha256": "a940be05378c72f2a42cd9666923f1dc6be293089e33a1a693b775b24faf276c"
+    }
+  },
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_sdk_owners": {
+    "M3EditScope.java": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "git_blob_sha1": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "receiver_path": "m3/tooling/shared-frontend/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    },
+    "M3HashPinnedJavaSnapshotRecipe.java": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "git_blob_sha1": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40",
+      "receiver_path": "m3/tooling/shared-frontend/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625"
+    },
+    "M3HashPinnedTextSnapshotRecipe.java": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "git_blob_sha1": "9d0788d3717e017d58345c5c3e62022c2915a3c8",
+      "receiver_path": "m3/tooling/shared-frontend/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
+    },
+    "M3ScopeInference.java": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "git_blob_sha1": "d24729950508857280ea1b56d4e930f05137ec85",
+      "receiver_path": "m3/tooling/shared-frontend/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
+    }
+  },
+  "canonical_tree": "0590780ae47aafeb4d4841c3f6638f51e4dfd7d0",
+  "historical_sdk_ledger": {
+    "git_blob_sha1": "00c19297059a851e185bfaefe2368ec8b793b94d",
+    "mutation": "NONE",
+    "path": "m3/tooling/jmod-recipes/RECEIVED_SDK_JMOD_BLOBS.tsv",
+    "rows": 52,
+    "sha256": "ddb6c8b6709ddd844e8235ac679511429e0af1925c205e323a500230036d9f4f",
+    "source_commit": "3c7f331a65e31fdbe4c198d79c7bfcb4c226cda2"
+  },
+  "inventory_authority": "Caller-supplied API-confirmed commit/tree filemap; every consumed local blob is checked against both published digests.",
+  "licenses": {
+    "m3/tooling/module-packs/nlp-search/LICENSE.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0015-LICENSE.txt.txt",
+      "git_blob_sha1": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "m3/tooling/module-packs/nlp-search/NOTICE.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0018-NOTICE.txt.txt",
+      "git_blob_sha1": "f8716de469446ffc8e16f76dee3006f5fb946347",
+      "sha256": "9173bdddfa84d5730ad33adac20a1fbbdc92bc37182ff69588a9cbdc19e8e7c7"
+    }
+  },
+  "mirrored_a_resources": {
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/META-INF/rewrite/m3-nlp-search-integration-20261018.yml": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-nlp-search-integration-20261018.yml",
+      "git_blob_sha1": "a4e6a5105eccc7313e3d698ed97c400f452c979b",
+      "sha256": "f450cae79c165347cf533aa602bb75793fdbe5aface19d6311ccee4490fada65"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0000-M3ByteFile.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0000-M3ByteFile.java.txt",
+      "git_blob_sha1": "6ed9fc12154925af8e2faf26878c79e9a57308a5",
+      "sha256": "5802d8a6d2e141d398bff309f5b4dc3fa1714be202ab0c84ca0bb5e2e2e1a20b"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0001-M3ByteFileStreamIndexer.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0001-M3ByteFileStreamIndexer.java.txt",
+      "git_blob_sha1": "415a1c2cbc0eb7a737cd635e5d87812a7bdd32ad",
+      "sha256": "d08fa7ac79648c2194a00a30002d2d3c0d7301b27964b6816e3d21b575b703e4"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0002-M3CharacterFlags.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0002-M3CharacterFlags.java.txt",
+      "git_blob_sha1": "1dba64298a52dc1b9dbb1f3a64fdf02ab45f0841",
+      "sha256": "97d4876e230328215484788a6335dcbf1677b8bd4ef8958f553722e305b12af3"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0003-M3ChildProgressMonitor.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0003-M3ChildProgressMonitor.java.txt",
+      "git_blob_sha1": "56be8ea465add3dd956d8892fb4e7fab264f8554",
+      "sha256": "23b0ffdc4fcde86e6c39d02e3a1cc916310432881b32cb181b3a3d8912cf45c6"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0004-M3File.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0004-M3File.java.txt",
+      "git_blob_sha1": "e4e869c727e91389d43d33fbd19ae455714cfab9",
+      "sha256": "dbda0676b4bcaec25b86321094086958c8c055ce38ed60a890b3fcd1a0cca5db"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0005-M3FileAttributeOrder.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0005-M3FileAttributeOrder.java.txt",
+      "git_blob_sha1": "4c765e130b4ac790bf80ae0d3127870860b08510",
+      "sha256": "6873496979babdaa3bf21f0a49a458088c13f71e61b95c1e5fcdf976d7b5069b"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0006-M3FileAttributes.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0006-M3FileAttributes.java.txt",
+      "git_blob_sha1": "4d0892c40bdfdee43055352bfbc53663dc2def52",
+      "sha256": "ac6016c43ace8760a36d213be2329661ef19e1fb4dbab2b27eacdb975f57214a"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0007-M3FileBuilder.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0007-M3FileBuilder.java.txt",
+      "git_blob_sha1": "32da0db3a7d824a1ba50d3e9dee3c32785002819",
+      "sha256": "ef7146cac4d4bceb7f586f363ac77b32d1ea113520e35197898b597966082366"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0008-M3FileByteFacts.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0008-M3FileByteFacts.java.txt",
+      "git_blob_sha1": "31aa8a3889723b2332eb67188a39ce23c5f64751",
+      "sha256": "3d74c4e871861382eaaa5c111e12af944e0358935d62057a1b3e0b2256e05108"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0009-M3FileByteFactsSnapshot.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0009-M3FileByteFactsSnapshot.java.txt",
+      "git_blob_sha1": "376483bd9c1dc124776b3f0ae5dacaea2a329ba5",
+      "sha256": "6e3704889b9efbd4eefb4f64f47c7c22d5df61945c2707ac008571585e13dbf2"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0010-M3FileCharsetEncoding.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0010-M3FileCharsetEncoding.java.txt",
+      "git_blob_sha1": "55892563f6f4348dd7dd515299500a9386ffc576",
+      "sha256": "78b4657bb2e0852e34ef4c126bf6024c30510769bff67c3fe13151bde620e6f5"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0011-M3FileCoordinates.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0011-M3FileCoordinates.java.txt",
+      "git_blob_sha1": "8077a0c1045f61abb07f09f103c731bb8c34fdf8",
+      "sha256": "ce2f5f2f11b2ccd431a89a872131e5c4a8c8f7d60fefbdc4b29a4116288184af"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0012-M3FileDictionary.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0012-M3FileDictionary.java.txt",
+      "git_blob_sha1": "4497f33734c5716f9a1d21a900b8f153f1fd6a29",
+      "sha256": "2c4d8af76163520fce7d3086017837fe9aac957439ccedce15c6bff85821396c"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0013-M3FileEventReader.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0013-M3FileEventReader.java.txt",
+      "git_blob_sha1": "c923568d7562edee00c0ccfd8cc5850cd0b1f695",
+      "sha256": "de6dedc02ed5e10dea6f182ad9c8d093064200249e1f449ff7e90c5b131dceb0"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0014-M3FileEventSnapshotCollector.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0014-M3FileEventSnapshotCollector.java.txt",
+      "git_blob_sha1": "313a40402898d704ad3c51d8a2593980b9473546",
+      "sha256": "8f392c8c9415adbb42de2f2721ff9212cacf911bbc8170fbe40c2a72d6214c17"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0015-M3FileEventWriter.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0015-M3FileEventWriter.java.txt",
+      "git_blob_sha1": "c5170587221f1413d5e3616aed3a0b613f198759",
+      "sha256": "33001a32c9298631c9fe316be131d9c51702067c53246ca51386f296392ded67"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0016-M3FileFrequencyIndex.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0016-M3FileFrequencyIndex.java.txt",
+      "git_blob_sha1": "1248b40e80869882fc090433e7815dbbc00ac771",
+      "sha256": "777e5316502c25d46cb2267cfdcb8e770cb5ae8e32c0f595691983767b3677ae"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0017-M3FileHash.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0017-M3FileHash.java.txt",
+      "git_blob_sha1": "fd5b43e8bc54a311c0873d3d78ddda1e9e0fc1c9",
+      "sha256": "ebe4b1f3d045ef8ce7243a2ce1342ad09638ab026260dfd0cd3f22ebd8eb36e7"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0018-M3FileId.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0018-M3FileId.java.txt",
+      "git_blob_sha1": "8e7d4c876a0d93091a44e016260659b0b9aade62",
+      "sha256": "d4ed91e4a590583f75749c1d8c6db2764e3f77991f936880210d5e119515e553"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0019-M3FileImage.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0019-M3FileImage.java.txt",
+      "git_blob_sha1": "47600f264a3922e9e3fdb78c8138782a35d400b4",
+      "sha256": "cf38a7b795d0f006a382ee8e6344b6ce80b656c1f1760a6fa484337a1f51c350"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0020-M3FileKindIndex.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0020-M3FileKindIndex.java.txt",
+      "git_blob_sha1": "16bbcae801796b3bef0e64abf73e2e23197693c2",
+      "sha256": "7651e0d8e57540b06971e58785e4e551c88b84e619f96b6ec246fbdbefb4fa28"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0021-M3FileLexicon.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0021-M3FileLexicon.java.txt",
+      "git_blob_sha1": "aaed93706de36619b2aeeebfec82805e600c7808",
+      "sha256": "90f594ad46ba757152041afaa76146b84b6ceba26444ca48cd4df642a702cbfe"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0022-M3FileLexiconSnapshot.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0022-M3FileLexiconSnapshot.java.txt",
+      "git_blob_sha1": "2758a8c12916dda89532df93ca05796d2ccc2600",
+      "sha256": "c449cf3b762653121164d2608db878a9484581f8874d7d48c6a01aa05c3b1baa"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0023-M3FileMultiPattern.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0023-M3FileMultiPattern.java.txt",
+      "git_blob_sha1": "b79faec3739b09b4e6c87f40143e68602b6742f7",
+      "sha256": "96ec474d6201650e0c9e03a13ddcaa552cb03bf336f2427eed0830a1780edd56"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0024-M3FileNative.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0024-M3FileNative.java.txt",
+      "git_blob_sha1": "9026acbb70e1d39758ff6f81c5bea49c2e943465",
+      "sha256": "75f39895c56665508e3895e34873cda3bcde98339161574be790322f9e2152fd"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0025-M3FilePattern.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0025-M3FilePattern.java.txt",
+      "git_blob_sha1": "af56ac4c56ed07d913eb1a66ff3f95db8255efc4",
+      "sha256": "97e492d33184406af9e7d6c5f00800c94d919cebd85247219275731bb932686b"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0026-M3FilePrimitiveSnapshot.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0026-M3FilePrimitiveSnapshot.java.txt",
+      "git_blob_sha1": "3aacf13417661138885daac76d994b3aca3a7302",
+      "sha256": "ea9a2e4903c054cde989a04a1e665918a5aff343c5147a58f84d2e8c020e57a9"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0027-M3FileProjection.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0027-M3FileProjection.java.txt",
+      "git_blob_sha1": "0c34fd1a0872cba216adba33fae2046c1105e9d5",
+      "sha256": "3a352ce013d1870e05c9243bfc1803bbd8cda032fe2800874349f768a59b6227"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0028-M3FileProjectionSnapshot.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0028-M3FileProjectionSnapshot.java.txt",
+      "git_blob_sha1": "6f8e163e760e4d93f26e72839f171cf0eed4c5fa",
+      "sha256": "b7095dfe70862a1687df6dbed44cf94e6af612402b000195fd4ebf5eca23cffc"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0029-M3FileRangeFingerprint.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0029-M3FileRangeFingerprint.java.txt",
+      "git_blob_sha1": "6f7fe2f2281a28535355bff16f236a586c239d23",
+      "sha256": "77413007f75e1e7d5926d5b6a616acabd33441970dfc078888baed5c3d700924"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0030-M3FileResolver.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0030-M3FileResolver.java.txt",
+      "git_blob_sha1": "fab4cadd94df3fbbed9f42a9c9ec6171b3853dbd",
+      "sha256": "dccf95442e334a581f87a5c25aeb6d8fba025d404900d4eca828090eae18be2a"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0031-M3FileRollingIndex.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0031-M3FileRollingIndex.java.txt",
+      "git_blob_sha1": "46da4cf798fd28a1aa8d003973f579f7909cb4d1",
+      "sha256": "06baaaa7e3d9780ad05fb0360891db4836abe2081ad8a90ff854ab2809bc1762"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0032-M3FileSnapshot.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0032-M3FileSnapshot.java.txt",
+      "git_blob_sha1": "e73ca1b6967cfb844fd1484f2215ee7f14d62963",
+      "sha256": "d9063ce6e1830c7d4c6af880d96953bd95892a454f51afbebdee15f8f5da50e0"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0033-M3FileSnapshotCodec.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0033-M3FileSnapshotCodec.java.txt",
+      "git_blob_sha1": "6edfd5fbe1a99b1f404636cefe14aea664ea3fb9",
+      "sha256": "f49015eff03910c7ff53902e34bc85086ee72f7d2c69e0f26d7c17ab05cccbd2"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0034-M3FileSourceFacts.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0034-M3FileSourceFacts.java.txt",
+      "git_blob_sha1": "b3b4e2fb2f1d89183dc979bc9fd4e5b8e899dc80",
+      "sha256": "e17b3a07e931bb36d17549e7b462fff877df531d44456e08760216674daa1668"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0035-M3FileSourceFactsImage.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0035-M3FileSourceFactsImage.java.txt",
+      "git_blob_sha1": "ab2851b142bfa2cdf12720126156868f3fea78cc",
+      "sha256": "5a7c08ac201d4f8ba6a931fd50151f3e6bd9258e0288ae03acd832394ad0c19b"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0036-M3FileSourceFactsKey.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0036-M3FileSourceFactsKey.java.txt",
+      "git_blob_sha1": "0479c83d1b0b74b2decd70fdeb31685ade99f3f2",
+      "sha256": "30833dade63e4c340dbc5d4bf485d0fe769aaa24591c101c72c85d05157097f6"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0037-M3FileSourceFactsSnapshot.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0037-M3FileSourceFactsSnapshot.java.txt",
+      "git_blob_sha1": "d9cdc1cab66515dc9834a54fb99df8bbecf073b5",
+      "sha256": "0dd3f268b91cc85621affa71796b99699a83d4953207acb7880a7577f0704b1b"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0038-M3FileSourceFactsStore.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0038-M3FileSourceFactsStore.java.txt",
+      "git_blob_sha1": "9044073db92857522323549ce685b6545468160a",
+      "sha256": "c9c74e942b2ea9bd22dd82b51010ba3a1279120737862387613d0592fe1ce898"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0039-M3FileSpan.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0039-M3FileSpan.java.txt",
+      "git_blob_sha1": "d0e9c9e14a8583b0ec223a6b55a0b2f001e9fb04",
+      "sha256": "6b3754cad78cdaf584822a0c49cb08b31edddf5b8da62ce0c4c6ee4e1985798e"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0040-M3FileSpanSnapshot.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0040-M3FileSpanSnapshot.java.txt",
+      "git_blob_sha1": "36c7fa4f473a32e4ec37187e059667830ff6b9c8",
+      "sha256": "9139ed2f528fa5531a2635edb6e786b124e1801828e0cfc0475cb954ec1526b5"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0041-M3FileStreamEvents.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0041-M3FileStreamEvents.java.txt",
+      "git_blob_sha1": "a8a9e03383b6c1e44c2c7ce3cc33f4e923d5310e",
+      "sha256": "7bbd948c17209a739d7a5077cafcad1eecc0cfc9e13b5d60b3a184f2360704ab"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0042-M3FileStreamIndexer.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0042-M3FileStreamIndexer.java.txt",
+      "git_blob_sha1": "7251d00109f0c972d7c0657c19014de61c8cde42",
+      "sha256": "364f0598976b6634d0a4994c8fd243425c3d16599b1362b91b0dbe0446360e79"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0043-M3FileText.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0043-M3FileText.java.txt",
+      "git_blob_sha1": "65a2701e465c99bf5e21756ef033750f2751824c",
+      "sha256": "49d4baaa759bd9b27eabd47cc0fa999c57146e97c60db931ba52bad4e8f4216d"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0044-M3FileTextBuilder.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0044-M3FileTextBuilder.java.txt",
+      "git_blob_sha1": "e3917fbcb224a959a21a114c0f36b967cddb59f6",
+      "sha256": "7c44526d83dbe53c557859438578a6d41fadc24308c0661d76625f9a5f276659"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0045-M3FileTextPool.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0045-M3FileTextPool.java.txt",
+      "git_blob_sha1": "288d178224f924aee10eeb5013d15a4c9fa06949",
+      "sha256": "b46c6dbb235b1e4cf01f5545684ec2d94e65d5aebf6b7838d5539d7ab265fc30"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0046-M3FileTextRef.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0046-M3FileTextRef.java.txt",
+      "git_blob_sha1": "ad952b46a5260e643ff56bb59550d6264901ac38",
+      "sha256": "2b1ca23d5f46c82b7f4488f971efe42d6706ce4ee44fe44f301e37ddfea73cbe"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0047-M3FileTextTokenizer.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0047-M3FileTextTokenizer.java.txt",
+      "git_blob_sha1": "dfe243f320250a99c5a75f5ff32d16839b1388a5",
+      "sha256": "460fbfe4398a070349656b83c1f368aa51365e9699c99174788bcafe261bd90f"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0048-M3FileTokenKind.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0048-M3FileTokenKind.java.txt",
+      "git_blob_sha1": "97784c182681a96e65306c1d577577d65aa00afd",
+      "sha256": "bf561ee119ffd3397a5d3bd91fad8fae40085413516cc27e457f31df53f36443"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0049-M3FileTokenRange.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0049-M3FileTokenRange.java.txt",
+      "git_blob_sha1": "4ef732bf4a55152132195f9a2a9f9ecf02bb3da9",
+      "sha256": "62374896dfd50b702acb0abbcfba1a2ef69d171d85a4938001af88bbf40607f2"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0050-M3FileTokenRangeSha256.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0050-M3FileTokenRangeSha256.java.txt",
+      "git_blob_sha1": "cd462aa80308c6fe2da001c22e6b725cd493fb53",
+      "sha256": "58369250a00e5c1b9e34d1d2817de351e9a3a6ce499827685320ee8ac358fa02"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0051-M3FileTokenStore.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0051-M3FileTokenStore.java.txt",
+      "git_blob_sha1": "884430b650941fb3865c052f0f7a3850108071f7",
+      "sha256": "ce3759fcd0439318a29b250c3a281839d4cbd4202e1f38981227408ed02cfa74"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0052-M3FileTokenizer.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0052-M3FileTokenizer.java.txt",
+      "git_blob_sha1": "5af3d2425cdec01e6e6c73b93bf5097886058eca",
+      "sha256": "f028a11bf59a3d47c09be71f4fec7c0b408652b3f97d339583b0d76df1d6b69d"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0053-M3FileUniverseEventReader.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0053-M3FileUniverseEventReader.java.txt",
+      "git_blob_sha1": "482c36282b259aa728c0c3178f3f1ce51b9d851c",
+      "sha256": "f0d4c372fe31ee6efc4bd02a52f5d11720a64f5154092fb5f3ea109fd10d3ae2"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0054-M3FileUniverseEventWriter.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0054-M3FileUniverseEventWriter.java.txt",
+      "git_blob_sha1": "497e34f3b5a0c0064e0a750ebba3290aa8ef0aff",
+      "sha256": "8da2f7dd9b01fd4eb12629fca0b162c7066cc9cbce5e3c02922231ebc520affc"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0055-M3FileUniversePlan.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0055-M3FileUniversePlan.java.txt",
+      "git_blob_sha1": "e12a0e9f40a5d6cb4b480781e1c83453bb610765",
+      "sha256": "83cd132c58dfa7f2f137e9f119aee2a4f9b04b29c119ea64d884fa8089cafb84"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0056-M3FileUniverseSnapshot.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0056-M3FileUniverseSnapshot.java.txt",
+      "git_blob_sha1": "698a792e58bda31a8ad37f1a112d184d56d535ac",
+      "sha256": "994993e2060fdc2f1b877ad3671d461c66f28bf06417535fb35f314c32839215"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0057-M3FileUniverseSnapshotImage.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0057-M3FileUniverseSnapshotImage.java.txt",
+      "git_blob_sha1": "23c28717d1071c88c6c766d0a2e38bd0455b3210",
+      "sha256": "ff73466f54d0981a4cab9f2fd90d24636ea96fc4d633f650351b2cbe7ea1ec8d"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0058-M3FileUniverseTokenIndex.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0058-M3FileUniverseTokenIndex.java.txt",
+      "git_blob_sha1": "66ed149570071b8388ee59acd0b3c1d72184d7f4",
+      "sha256": "e626f28040f9d36d1beb3d6d66329ee0efac2923b37d30d8993c852716fde58f"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0059-M3FileUniverseTokenIndexImage.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0059-M3FileUniverseTokenIndexImage.java.txt",
+      "git_blob_sha1": "98bd1638a5351ed67ba76b5f61b9d1090377f3c1",
+      "sha256": "1fbabc11a8a832678a9332756494aa17c7098f57791b24d4add9d621b83561aa"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0060-M3FileUniverseTokenRangeSha256.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0060-M3FileUniverseTokenRangeSha256.java.txt",
+      "git_blob_sha1": "292a71f28c0a975e73160b32accaed4d4348bdf9",
+      "sha256": "ce007cb21172bb0ad20799e1a7e9572ae7508f81e982b44cc3a926b6d2180d56"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0061-M3FileUniverseTokenSpan.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0061-M3FileUniverseTokenSpan.java.txt",
+      "git_blob_sha1": "dbb6b2957f8e12e2b93b9917506cd415fcece716",
+      "sha256": "0654c95138e0246cbdd617e967ec6b7d54b32f41a3fdd6b09003dc1c60780125"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0062-M3Hash256.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0062-M3Hash256.java.txt",
+      "git_blob_sha1": "1d5b091dcc7249567ecfd118751d504e85bf84f9",
+      "sha256": "14191c32a0e7fe5bda27c00f61fe20e0186366ef3b94f89959245f3f5c34c0ab"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0063-M3JniLibraryLoader.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0063-M3JniLibraryLoader.java.txt",
+      "git_blob_sha1": "8f7d0f11ad5207c96777baae566c93f7dc5ade42",
+      "sha256": "613def6113f8101dc31d7b956e73b05b7bbe63b903eadcd385dedeb7e7da9536"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0064-M3JsonStructuralNative.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0064-M3JsonStructuralNative.java.txt",
+      "git_blob_sha1": "fc9d5a17f59e37fe6570c6640a659cb95f317e53",
+      "sha256": "5510d99a7068b87db686775a401a2f9f95f1abc980392c9fc695d9c1985adf6a"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0065-M3LongLookup.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0065-M3LongLookup.java.txt",
+      "git_blob_sha1": "14efac2fb242a52fc8346131432402bedc9b0ceb",
+      "sha256": "c17a20e2d06d2a3e977933cc6573111c897b5aecfb1988ef708873f598a47a02"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0066-M3NativeLibrarySpec.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0066-M3NativeLibrarySpec.java.txt",
+      "git_blob_sha1": "b471d942156142ea9efd238b265870b0aad07e33",
+      "sha256": "9eef35d68d5d79745d7f60f10120f09205699833e0f9fa967e5c9b5fc13e6744"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0067-M3PageableTree.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0067-M3PageableTree.java.txt",
+      "git_blob_sha1": "3087436b73131b74278724c34db6908bd64752a6",
+      "sha256": "17ae996cffab497f44b9aeb0262a7c5e1e8236420e35c51a0696b5918c75a9ad"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0068-M3PageableTreeCursor.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0068-M3PageableTreeCursor.java.txt",
+      "git_blob_sha1": "dd176ca10f4cf5c1ee269b339f6156016fe4a509",
+      "sha256": "60960320a4e37f31f95dadf1d63c5badad4851243e34b8995c214c39c64320f3"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0069-M3Progress.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0069-M3Progress.java.txt",
+      "git_blob_sha1": "933d4b2134ec59eeace722c13b1ae8b369e31fe3",
+      "sha256": "28818ae132655e930f5347f6aa53433e57d5f57836358e1e9a5370289dea73c6"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0070-M3ProgressCalculations.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0070-M3ProgressCalculations.java.txt",
+      "git_blob_sha1": "5e16c6c86d645616f23ef6260c0b4c6a851ecdaa",
+      "sha256": "6df6d1b10eb0c2c9465357155518093bd322a2cd4c1b667d61403a6a599ca354"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0071-M3ProgressChild.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0071-M3ProgressChild.java.txt",
+      "git_blob_sha1": "312ecd05a002c923bb6eeb43192bd14e4cb22ab1",
+      "sha256": "28d62e89796e60805e9e46f8dfa7ea5bb038e99579296f586a164567e09bf9ec"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0072-M3ProgressMonitor.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0072-M3ProgressMonitor.java.txt",
+      "git_blob_sha1": "41ae56507e3bcb307c8a5460645626d29e2e3aae",
+      "sha256": "9dec6ae3ca9968785d3f8e47a209abe3e09fa5e62798243bfe0fc9708e2087a2"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0073-M3ProgressSnapshot.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0073-M3ProgressSnapshot.java.txt",
+      "git_blob_sha1": "53e20e20ec7ec65c93252b84a2bb39282bfe800a",
+      "sha256": "5deca622172f899f1f6484b3bdc831747227d8c80590ef42422158f2722d7710"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0074-M3ProgressState.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0074-M3ProgressState.java.txt",
+      "git_blob_sha1": "9731dcce6dfc603feb05707b0526256b8e3e7e02",
+      "sha256": "d529b5f4834a1ac3b0afc7ff0bf4ddd4f39999c9da42049c24c845e4c2d852cb"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0075-M3TextFacts.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0075-M3TextFacts.java.txt",
+      "git_blob_sha1": "48dd5008676dcd69ccbe586b701268b14fc1eeba",
+      "sha256": "b159bfeba6db1c6132537bd60c1c4918d652a3094a076b3edd37ac434bcf6147"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0076-M3TextMetrics.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0076-M3TextMetrics.java.txt",
+      "git_blob_sha1": "0ab5eec9223d379fe21fbe3d9614d5571ce62501",
+      "sha256": "1b1507dad30f90e6c6ba4822388e57cda52e42e86ce31d7727b94c4d3eb0f81e"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0077-MappedM3File.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0077-MappedM3File.java.txt",
+      "git_blob_sha1": "0744079789f292b6b50f78b9a3d3872de6235d53",
+      "sha256": "c3b6d79eb17b38a7f22d5a0e1a2451323115f8c396c2d6a96bddd55d4bf0ac6c"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0078-M3JsonStructuralIndex.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0078-M3JsonStructuralIndex.java.txt",
+      "git_blob_sha1": "10ebf3f91e35063ec9a1c3fdd6d0e601c6eaccb4",
+      "sha256": "387060daf4fe5efb1593563abfb910a6b48e75562a188c210fa012bf8d266cc5"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0079-module-info.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0079-module-info.java.txt",
+      "git_blob_sha1": "fe643da6d40056b42f7a61bcac5ce1767405fab5",
+      "sha256": "666eab9e594255f227064ae1ddaf26b572ed5456e2c4f59dcd9294c3bf5d7690"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0080-M3ModuleDescriptorApply.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0080-M3ModuleDescriptorApply.java.txt",
+      "git_blob_sha1": "f291bedcb4be3f890d9361fec4d7265e84518def",
+      "sha256": "dabeb8bcc46f768d6cb07b458216cbddd7cac1e68cd3f47a024bd975c67e4501"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0081-M3ModuleDescriptorRecipeTest.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0081-M3ModuleDescriptorRecipeTest.java.txt",
+      "git_blob_sha1": "6a2e25b6a7387538bad0d3786dcb24e38c513e61",
+      "sha256": "11bee86696d328ec7ade96c84d60fdc64617cedfd8e5bdc326906f287e05b34f"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0082-M3FileAlgorithmTest.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0082-M3FileAlgorithmTest.java.txt",
+      "git_blob_sha1": "c131e41454a207923154f1757aae78b26b3a6e18",
+      "sha256": "46adc42cc548c0029295275ef478107d9a928cfc7f727389e312451a817c953a"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0083-M3FileByteFactsPrimitiveSnapshotProof.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0083-M3FileByteFactsPrimitiveSnapshotProof.java.txt",
+      "git_blob_sha1": "6d3ce1c6bfb286763ffc77623adf878fa8941989",
+      "sha256": "bcaa39d1423b3cf2c3323bb9b70f2137bb9e25b7c6a9f236edffd4b19c2a1808"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0084-M3FileCharsetProbe.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0084-M3FileCharsetProbe.java.txt",
+      "git_blob_sha1": "764f9256b339de05f74981fb4a246d314ab52571",
+      "sha256": "71405c535d4e9c3acc589308acec0c8ff19b4d480c516f3b396d888181873bb6"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0085-M3FileDetachedTextViewsProof.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0085-M3FileDetachedTextViewsProof.java.txt",
+      "git_blob_sha1": "eb550492df0f6cb15390213b8259ce7a21485de5",
+      "sha256": "69bd4f17b26033df761fec849f035fc33d831c37cd80f5e1ca4ea4e11d5c4eeb"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0086-M3FileEventReaderRehydrateProof.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0086-M3FileEventReaderRehydrateProof.java.txt",
+      "git_blob_sha1": "f5d956c6fc034dd5ad3dd82b40df605617c893d0",
+      "sha256": "3643bff8420c100fbb38f94a48e1efc725031ae678539f770eda8a37ca171913"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0087-M3FileImageAtomicPublicationProof.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0087-M3FileImageAtomicPublicationProof.java.txt",
+      "git_blob_sha1": "4457a1d223293674986fc5ffd17e4dc8510ec248",
+      "sha256": "88e5e9c040c6ce970260f036f097cf07a8807102d9034500a79ba2a1208071c7"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0088-M3FileJsonProbe.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0088-M3FileJsonProbe.java.txt",
+      "git_blob_sha1": "3bdde6c8ccf6a460c628a101bd18d6d2c15dfbbb",
+      "sha256": "4edaa7d9bcf8b91120827b7f6bdb892cf6a50823f6335590d826724735570ab8"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0089-M3FileMappedProjectionSnapshotProof.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0089-M3FileMappedProjectionSnapshotProof.java.txt",
+      "git_blob_sha1": "12f4bfb8dbf3620ac49f23bc4bc1e0fe4f3e4826",
+      "sha256": "f7cab11b2e6543406ad6043e03b39836473f1e4a05275de846adcc9ba51a4ab0"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0090-M3FileMappedSourceFactsProof.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0090-M3FileMappedSourceFactsProof.java.txt",
+      "git_blob_sha1": "1f1c9cf816876c6caa515fc66808e132e45065c4",
+      "sha256": "7f3c17903159d9d551645c16778d19b4418509f7f444b282fcf59f3daaf8066d"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0091-M3FilePortProbe.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0091-M3FilePortProbe.java.txt",
+      "git_blob_sha1": "13f1af723ab7ace41741039a4f64659ae5796020",
+      "sha256": "ac08fec4229bf1028f86d9fb87622e37174513cd8549f9a51a950ebb62bcbb10"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0092-M3FileProbeAssertions.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0092-M3FileProbeAssertions.java.txt",
+      "git_blob_sha1": "3cdb1c9b374b7839cb4f444689c86ca9b4462dc8",
+      "sha256": "ec0e2707d251b19c20a6a1c2375e24b38adab95838d50c0a76650be0dbdfe41e"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0093-M3FileRollingPrecomputeProof.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0093-M3FileRollingPrecomputeProof.java.txt",
+      "git_blob_sha1": "80ffee989ee1633a9cc778a04461da9d038c371f",
+      "sha256": "d80b18d58bd26aa1bfb02c0dc8ba7fe107f264e84769bd6e2908cacd7931b56a"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0094-M3FileSnapshotCodecProof.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0094-M3FileSnapshotCodecProof.java.txt",
+      "git_blob_sha1": "60eaed2eda9bb97e65082c6314cfdfb48fea4676",
+      "sha256": "4463b297b5491f0e8817982bc96d00aa7570a4e5a823d347f6f479e19c5f197b"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0095-M3FileSourceFactsStoreSinglePublicationProof.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0095-M3FileSourceFactsStoreSinglePublicationProof.java.txt",
+      "git_blob_sha1": "70e8b0d382a897f044d7b6b7d7563674459dde41",
+      "sha256": "de721b35d3b344d027d227515942b27ddfaf0c9bc396d0afc5a8ae8459fabb1a"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0096-M3FileTest.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0096-M3FileTest.java.txt",
+      "git_blob_sha1": "46006acf7b1608c73a6ce740f61269a9f148b159",
+      "sha256": "61d81f2149e733f97ee2eb45b468aa781eb47f4992317bcdadd18b1329263250"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0097-M3FileTokenRangeDigestProof.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0097-M3FileTokenRangeDigestProof.java.txt",
+      "git_blob_sha1": "ee5838e8704f45aaaaea95ea506641c0cf4d312d",
+      "sha256": "c88cbdec847e8509270d03630520c2b8bca02212ab67bca8a6733cfb1ab072f6"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0098-M3FileUniverseSnapshotImageProof.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0098-M3FileUniverseSnapshotImageProof.java.txt",
+      "git_blob_sha1": "26374391863a6a346eb2bccd2efdb01b70d52e6b",
+      "sha256": "88d3070cdc2c8255d73ef81252ba1f497e6f4ad7f1279d4f2581285e5ca4d549"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0099-M3SourceIndexProbe.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0099-M3SourceIndexProbe.java.txt",
+      "git_blob_sha1": "86c31dd9d879b4e1e4b26be26b19e2a20bb24c57",
+      "sha256": "3e5033d4f4c3455069787095effefa4cc3f112284349c4768fcd89080931f830"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0100-M3LuceneContractProbe.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0100-M3LuceneContractProbe.java.txt",
+      "git_blob_sha1": "f4a1e5f4f792837a57cadfc74bd234407126a57e",
+      "sha256": "99a58ff9f8a55f6d47139584ec57e870900ba8f58e59a8786e8b0744e4cae189"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0101-M3ReaderBaselineCheck.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0101-M3ReaderBaselineCheck.java.txt",
+      "git_blob_sha1": "ba7c8d55027ca821f7d3d5a42362dc01b4fe4f9c",
+      "sha256": "60bffbe8962dc9786b4938fdfea9dd896d112bebcc941d6f782764f7f3d7ce5f"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0102-M3ReaderCompatibilityProbe.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0102-M3ReaderCompatibilityProbe.java.txt",
+      "git_blob_sha1": "ec91d501de577e71f3d875056982df211494944c",
+      "sha256": "ba08e2a72c85f5f547d8362300e748dcead0441650f2c92ca3418ac2c3f7f35f"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0103-M3TextReadersCheck.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0103-M3TextReadersCheck.java.txt",
+      "git_blob_sha1": "a7e957262bb34d4704e78eb7bd690c5815a2c806",
+      "sha256": "18d08c1719adca20889b3668ee7e43ac4d4867667f4cf713695328ea1e0627b4"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0104-OpenNlpM3Probe.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0104-OpenNlpM3Probe.java.txt",
+      "git_blob_sha1": "3e67c55bcf0c88be9aa928d3c67d8aead76b012a",
+      "sha256": "37e41dd3f75e122ee3698c2ce9e276e757c372b7dffa8742ef823f40d4e871a4"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0105-RemoveRecordedModuleHashes.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0105-RemoveRecordedModuleHashes.java.txt",
+      "git_blob_sha1": "d10abfba2ef7611a531399efb0a02364d88c7c4d",
+      "sha256": "a9cc9cdc39201e53c56befbcb4548b2a437719f2ca3945d1db2ce29e0a5c3783"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0106-module-info.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0106-module-info.java.txt",
+      "git_blob_sha1": "020e5315e22fd15a3cab881a1e89db44a5204afc",
+      "sha256": "e821a724c7e3f25c49dfc06d9809742650b9c0e45987d456688f1b2bc8f7c0c9"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0107-M3SourceIndex.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0107-M3SourceIndex.java.txt",
+      "git_blob_sha1": "627727a3f467a98037007f869b309a7fd83a2d40",
+      "sha256": "47e3083aca86032e172618e80c2ac2053a76af5c55758b65ed6e0ae76ffece30"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0108-M3NlpSearchIntegrationTest.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0108-M3NlpSearchIntegrationTest.java.txt",
+      "git_blob_sha1": "89b2590a4ffd0654bfbfbc987d6b07d73bd78caf",
+      "sha256": "04f63847360b295e62c7b4c0176e0926911cf1a313a28ab17e4031bb0de7fa6e"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0109-CharArrayMap.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0109-CharArrayMap.java.txt",
+      "git_blob_sha1": "718f60f1a4159ac130326835e3ff23a91865d74d",
+      "sha256": "8b8ca85def4bb9c48a49e531e8edbd8d14f77dc05d6a1a54d829e714657c1fdb"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0110-M3TextReaders.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0110-M3TextReaders.java.txt",
+      "git_blob_sha1": "5368641c7bb8f724437a769fbf36bd6abc287662",
+      "sha256": "4c2e5843829487c5be8163fa0817178b8887a1c4199e9b382c88bc726c01daf0"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0111-ReusableStringReader.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0111-ReusableStringReader.java.txt",
+      "git_blob_sha1": "dc451fbd6de2a47317bb883425637410a8c55e90",
+      "sha256": "76378fdbded3a1e0ef33775add5f9e9c6c764de9703f048bb4e3e3883d82a53f"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0112-BertNormalization.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0112-BertNormalization.java.txt",
+      "git_blob_sha1": "e970d85da81b44c2266cb12a3261b57cc503c9da",
+      "sha256": "606e52bcc9a5c9c100388b73bdac1bb0f1ac42f59fffb04258676aebe262e392"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0113-M3Tokenizers.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0113-M3Tokenizers.java.txt",
+      "git_blob_sha1": "f83cda0ff7da665b4ee2cb1a6cbaab1b07fae397",
+      "sha256": "de3823ba8f4a53a7a628e8532d557e3af04a4a852b0302518cc4603ed2fae8c5"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0114-MappedText.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0114-MappedText.java.txt",
+      "git_blob_sha1": "62b0ba91ff7fe47bd8878579fb86e273e7afab8f",
+      "sha256": "8cc4e34a9ed60040cb38fb60753b274812190b65392f61c107a4aba8538a2a3e"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0115-SimpleTokenizer.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0115-SimpleTokenizer.java.txt",
+      "git_blob_sha1": "02d170a9f165bc7d5b5f08ff0d9a3e4d9d50961e",
+      "sha256": "ef86045b9fd965accd9140e95ce67f96e6f8e88b9d2cc968d9806d9691ca7890"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0116-SubwordPiece.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0116-SubwordPiece.java.txt",
+      "git_blob_sha1": "4ffefa6e47c2920ba2c7e127a75c3a32321a3e49",
+      "sha256": "ade91a596849ab24c7e07b8e604c0d572f5e4439794a823a24b56559a9dde089"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0117-SubwordTokenizer.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0117-SubwordTokenizer.java.txt",
+      "git_blob_sha1": "2ef3b0634785eab97908008aae36764b43b1b6e4",
+      "sha256": "c50cf2a12a86bb593d400fc1b712be98fa69fca17242f8cfdae2b1433f5b47c8"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0118-WordpieceChecks.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0118-WordpieceChecks.java.txt",
+      "git_blob_sha1": "e24b67bbe6ec5ae493849357ff0bccbb45f9bdd0",
+      "sha256": "5863d81247faa1f77cb7e2c920ade78f37aa60cfc4a6ee03a77a0bd815b01572"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0119-WordpieceEncoder.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0119-WordpieceEncoder.java.txt",
+      "git_blob_sha1": "ca877e04a1f1fd50b0c5a5fd0d54d178f649df30",
+      "sha256": "a4bde6e011c346eed7a175de7071efe3d4999d450a182eb20503a092419555da"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/before-0080-M3ModuleDescriptorApply.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/before-0080-M3ModuleDescriptorApply.java.txt",
+      "git_blob_sha1": "0c35f76c65cb009bfda0a7594a79005b457767b4",
+      "sha256": "6927291e8629b7de0ffebfb51ddad4f9da3b371b0536574230383aef17124baf"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/before-0081-M3ModuleDescriptorRecipeTest.java.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/before-0081-M3ModuleDescriptorRecipeTest.java.txt",
+      "git_blob_sha1": "a84e9add5ad5dcc30800c707e918a2593cc70cdb",
+      "sha256": "62f1bc378a968495b7c0249e122272d7a5e19524c31f08876ae6c91770c709f5"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/manifest.tsv": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/manifest.tsv",
+      "git_blob_sha1": "87cd9db97b6f98d66c64645237635687ce7a33e9",
+      "sha256": "bb80f7c9918ee159b837dde21fefcc7ae6d51936780f5427ae92921d86174313"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0000-m3sdk-jmod-receiver.yml.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0000-m3sdk-jmod-receiver.yml.txt",
+      "git_blob_sha1": "a851288903ef6c573df13e1387ed3cbec41332d9",
+      "sha256": "796ada46f86d5a11b9eaf6904f0fd3a2b3e472991bad9ba69cf1b9b683906485"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0001-m3-file-nlp-search.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0001-m3-file-nlp-search.json.txt",
+      "git_blob_sha1": "e31cbff39f816b4429cace2ebbbb416bf86e74ec",
+      "sha256": "ac74fd38d51dbd2e83804871a692125e415328a7538b82434bcd1b7a68fac4b4"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0002-name-mapping.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0002-name-mapping.json.txt",
+      "git_blob_sha1": "406e95b080d340c55155da5cc9b609dd8ccf9df9",
+      "sha256": "a49d904b9afc464b4ab85420c0033d0708bd14354abf44773d872a4706e0f82d"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0003-m3_file_jni.c.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0003-m3_file_jni.c.txt",
+      "git_blob_sha1": "1aa4a67ec68c2be94b8aa66281eae9e4803a9fb7",
+      "sha256": "07f00a28d052687edbe90165f0090da8cf1ba1011e7f93364c588b2b9322479a"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0004-m3_json_signal_jni.c.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0004-m3_json_signal_jni.c.txt",
+      "git_blob_sha1": "38e502aacbd78ba66125d5a76a1aa1cf4b2af79c",
+      "sha256": "5e15872f9ab3c7c7d2ea41e9a67b6fe9c5cfd1dda6387adc3ab6e372d6409697"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0005-m3_text_metrics_jni.c.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0005-m3_text_metrics_jni.c.txt",
+      "git_blob_sha1": "12ee28e535bf2e5ce6803d8dc708f049ee11783a",
+      "sha256": "00e4d58f4af904f9f5087929d66ba417f787a1c505579b3a90efbdd4361d70ce"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0006-COMPILER_SOURCES.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0006-COMPILER_SOURCES.json.txt",
+      "git_blob_sha1": "d16dec67c33b259d8ecbb5e08704f43faa0aa13e",
+      "sha256": "d9ac52fc679a266035f1a84c7f15f9db067d2cfeb2808506b25dec301d609749"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0007-COMPLETE_SOURCE_INVENTORY.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0007-COMPLETE_SOURCE_INVENTORY.json.txt",
+      "git_blob_sha1": "c77df108c67a2fb66ab4a50b6a265e6234a3ae34",
+      "sha256": "f077962ce7abe6aec7bf34e14736c1266429b18a911b147db32b73e8c904051e"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0008-FILE_API_PARITY.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0008-FILE_API_PARITY.json.txt",
+      "git_blob_sha1": "32b37340a430d9fc6c65dcaca4ef7a25758339e4",
+      "sha256": "8295009993e55feeb7f1b8173018e5a21b1815fc409dabec04e042d30e3ca711"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0009-FILE_PORT_MAP.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0009-FILE_PORT_MAP.json.txt",
+      "git_blob_sha1": "df42758caebc63e1d59154fe119a2d015546c296",
+      "sha256": "e3eb2199e6e6a045043534bbc9471feb1837c78c7edd0e62bd0675e64d07865d"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0010-FILE_PROBES.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0010-FILE_PROBES.json.txt",
+      "git_blob_sha1": "d7b2cf5583bf7d3fe9dc3313876d2a1ca8a439ea",
+      "sha256": "d88b15fbc98c25b1a3ca70e6611abdf1641151672ad5522de5b92593e407c06a"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0011-FRONTEND_PROBES.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0011-FRONTEND_PROBES.json.txt",
+      "git_blob_sha1": "d01660d8771619a8145e049c7a3fe30c87020568",
+      "sha256": "adfba62f416c84f9d74ec533e53954c73ad110333780d5ba3aa0afbea329a06e"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0012-FRONTEND_PROVENANCE.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0012-FRONTEND_PROVENANCE.json.txt",
+      "git_blob_sha1": "51ff3739f1784a70d524123e2a4a1685678b0448",
+      "sha256": "24b33550f4de2028900c63740ecf5e3bb582ea517bb640e58cb6cb124944d24a"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0013-INPUTS.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0013-INPUTS.json.txt",
+      "git_blob_sha1": "6e25f2e3830e2179ef1e44b22b48e8cd5b359abf",
+      "sha256": "663ac5691243bc9e17f05f244730027cdd24472bec9727505d2571def4f33879"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0014-JSON_CLOSURE_PROVENANCE.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0014-JSON_CLOSURE_PROVENANCE.json.txt",
+      "git_blob_sha1": "075a99c8120f349fc90998b20b219546e144ba36",
+      "sha256": "ec720b682f1e459763c85b93577c7897449d0558191fee8652931ea30dfd9da5"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0015-LICENSE.txt.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0015-LICENSE.txt.txt",
+      "git_blob_sha1": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0016-LUCENE_PROVENANCE.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0016-LUCENE_PROVENANCE.json.txt",
+      "git_blob_sha1": "40a66b9970fc1082668b631759ad55614a756b14",
+      "sha256": "f4e39191726c753d006b463eab50ec0b243cd7aa2c26167a143608e17d33476a"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0017-NATIVE_MAPPED_PROVENANCE.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0017-NATIVE_MAPPED_PROVENANCE.json.txt",
+      "git_blob_sha1": "839eb98c99bd4d65c3af519dc104d9fa88344e52",
+      "sha256": "2a4412de9bc0ae088ca4df059c7175db22484545ee2b5712e3a59bd92e078d5c"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0018-NOTICE.txt.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0018-NOTICE.txt.txt",
+      "git_blob_sha1": "f8716de469446ffc8e16f76dee3006f5fb946347",
+      "sha256": "9173bdddfa84d5730ad33adac20a1fbbdc92bc37182ff69588a9cbdc19e8e7c7"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0019-OPENNLP_PROVENANCE.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0019-OPENNLP_PROVENANCE.json.txt",
+      "git_blob_sha1": "c5ce6854c46fd21721fa8b6ffd85e49fbe04c0e6",
+      "sha256": "751265f4507ace1c4cbc52b482bc1741e40710ab5df719a4e647239dc37ba3e8"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0020-README.md.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0020-README.md.txt",
+      "git_blob_sha1": "a085daa272560439289da9b42c1fb41c5de30a4a",
+      "sha256": "39482b29b6b9599aeb10f21b73fa1ce8a3c12743fb0d791167ed4dd75b5cd30c"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0021-SOURCE_REF.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0021-SOURCE_REF.json.txt",
+      "git_blob_sha1": "80267e3b73591904df4c8d386c79740d785cc2ff",
+      "sha256": "d5bb2bbc2ddd121814cd2b69caba6c88b0aa01578d3da39f34fd20890717efcf"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0022-build.py.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0022-build.py.txt",
+      "git_blob_sha1": "b678f5f1b29e2daea3f5591bb9620416008ae434",
+      "sha256": "6fa229598b91f78d5b98c89872bd274ee596659c5c7b42def8f63dcdf2e34934"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0023-compiler_source_proof.py.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0023-compiler_source_proof.py.txt",
+      "git_blob_sha1": "2bac037f316c0c16f2c05311731b2a5a3d90936d",
+      "sha256": "a52331c73f625eb4f1c1cffd1ccbe13979826b045b3638096786dd7d07d19250"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0024-OVERLAY_LOCK.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0024-OVERLAY_LOCK.json.txt",
+      "git_blob_sha1": "47034c05eacd1094e19a18baf2fe318128fc4c63",
+      "sha256": "b6ec8e64969bc10157b6a868d1a8da5c12d61bb211878922fe56881c1daee032"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0000-m3sdk-jmod-receiver.yml.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0000-m3sdk-jmod-receiver.yml.txt",
+      "git_blob_sha1": "0d6f194a3d07f74f7b0bd924f36b2a2d4515382b",
+      "sha256": "b283a9734172305e2375c4961b4fdf0d34161801d19141d2e735115d17e340e0"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0002-name-mapping.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0002-name-mapping.json.txt",
+      "git_blob_sha1": "4f5911d625090913d85f9cf41b1ead1694dffade",
+      "sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0020-README.md.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0020-README.md.txt",
+      "git_blob_sha1": "8e32d4e658e999d755101bf74045fe6193ec68d8",
+      "sha256": "0c27021d845e113c8777f9d1d1f73ec03d3498b4fd6148a64024556563de3e28"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0021-SOURCE_REF.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0021-SOURCE_REF.json.txt",
+      "git_blob_sha1": "37827c8f3093c39a14043cc1673ce1dad050ee3c",
+      "sha256": "5518e71f8195caeae914d0a001846b4087ce2c22811b9ad786e87efd1184134a"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0022-build.py.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0022-build.py.txt",
+      "git_blob_sha1": "4e4f0b1ef923c71bba8340936874e9bb2e7183c8",
+      "sha256": "e4564fd658e935fcc6d96aa009b36011c3b5345ed38cdbfd11b69ecef9618c82"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0024-OVERLAY_LOCK.json.txt": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0024-OVERLAY_LOCK.json.txt",
+      "git_blob_sha1": "3db790232c6805f437c1a98da23db43c6be54ab2",
+      "sha256": "e4d3accbdc8d41c47495905da6329b1aadc082fd0a24d4e154c6d95a2a84965d"
+    },
+    "m3/tooling/module-packs/nlp-search/recipe-custody/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/manifest.tsv": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/manifest.tsv",
+      "git_blob_sha1": "26760f0e2fb4de392f6a367e11664511de89d92d",
+      "sha256": "81672ad528821d82e7ea8570b7725e92656f9593dba9a79d7adaa98bc7fb2431"
+    }
+  },
+  "packet_id": "m3-nlp-search-custody-20261018",
+  "prerequisite_packet_id": "m3-nlp-search-integration-20261018",
+  "proof_pom": {
+    "canonical_path": "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/custody/pom.xml.txt",
+    "git_blob_sha1": "ed3bb84183bf74b9446705e461172bdc0d9ec640",
+    "receiver_path": "m3/tooling/module-packs/nlp-search/recipe-custody/pom.xml",
+    "sha256": "4f9856294dbb35bb9187af89a2f7be405d445ac323506424d4b144721af1f4bd"
+  },
+  "proof_runner": {
+    "canonical_path": "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/src/test/java/com/synexia/rewrite/M3NlpSearchIntegrationTest.java",
+    "git_blob_sha1": "89b2590a4ffd0654bfbfbc987d6b07d73bd78caf",
+    "receiver_path": "m3/tooling/module-packs/nlp-search/recipe-custody/src/test/java/com/synexia/rewrite/M3NlpSearchIntegrationTest.java",
+    "resource": {
+      "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0108-M3NlpSearchIntegrationTest.java.txt",
+      "git_blob_sha1": "89b2590a4ffd0654bfbfbc987d6b07d73bd78caf",
+      "sha256": "04f63847360b295e62c7b4c0176e0926911cf1a313a28ab17e4031bb0de7fa6e"
+    },
+    "sha256": "04f63847360b295e62c7b4c0176e0926911cf1a313a28ab17e4031bb0de7fa6e"
+  },
+  "published_inventory_sha256": "d525c63dcbf3369a01716f8b5610f0e27a8928842661f9ee1177257759534908",
+  "recursion_boundary": "Only committed A resources are mirrored. B resources and this receipt are not inputs to their own mirror. The receiving proof mirror replays A.",
+  "schema": "M3_NLP_SEARCH_INTEGRATION_CUSTODY_1",
+  "source_file_correspondence": {
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/TARGETS.json": {
+      "git_blob_sha1": "f16649d90ee4d2312704aba843c419808e251749",
+      "sha256": "a940be05378c72f2a42cd9666923f1dc6be293089e33a1a693b775b24faf276c"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/COMPILER_SOURCES.json.txt": {
+      "git_blob_sha1": "d16dec67c33b259d8ecbb5e08704f43faa0aa13e",
+      "sha256": "d9ac52fc679a266035f1a84c7f15f9db067d2cfeb2808506b25dec301d609749"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/FILE_PROBES.json.txt": {
+      "git_blob_sha1": "d7b2cf5583bf7d3fe9dc3313876d2a1ca8a439ea",
+      "sha256": "d88b15fbc98c25b1a3ca70e6611abdf1641151672ad5522de5b92593e407c06a"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/FRONTEND_PROBES.json.txt": {
+      "git_blob_sha1": "d01660d8771619a8145e049c7a3fe30c87020568",
+      "sha256": "adfba62f416c84f9d74ec533e53954c73ad110333780d5ba3aa0afbea329a06e"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/INPUTS.json.txt": {
+      "git_blob_sha1": "6e25f2e3830e2179ef1e44b22b48e8cd5b359abf",
+      "sha256": "663ac5691243bc9e17f05f244730027cdd24472bec9727505d2571def4f33879"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/LICENSE.txt.txt": {
+      "git_blob_sha1": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/M3ModuleDescriptorApply.java.txt": {
+      "git_blob_sha1": "f291bedcb4be3f890d9361fec4d7265e84518def",
+      "sha256": "dabeb8bcc46f768d6cb07b458216cbddd7cac1e68cd3f47a024bd975c67e4501"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/M3ModuleDescriptorRecipeTest.java.txt": {
+      "git_blob_sha1": "6a2e25b6a7387538bad0d3786dcb24e38c513e61",
+      "sha256": "11bee86696d328ec7ade96c84d60fdc64617cedfd8e5bdc326906f287e05b34f"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/NOTICE.txt.txt": {
+      "git_blob_sha1": "f8716de469446ffc8e16f76dee3006f5fb946347",
+      "sha256": "9173bdddfa84d5730ad33adac20a1fbbdc92bc37182ff69588a9cbdc19e8e7c7"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/OVERLAY_LOCK.json.txt": {
+      "git_blob_sha1": "47034c05eacd1094e19a18baf2fe318128fc4c63",
+      "sha256": "b6ec8e64969bc10157b6a868d1a8da5c12d61bb211878922fe56881c1daee032"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/README.md.txt": {
+      "git_blob_sha1": "a085daa272560439289da9b42c1fb41c5de30a4a",
+      "sha256": "39482b29b6b9599aeb10f21b73fa1ce8a3c12743fb0d791167ed4dd75b5cd30c"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/RemoveRecordedModuleHashes.java.txt": {
+      "git_blob_sha1": "d10abfba2ef7611a531399efb0a02364d88c7c4d",
+      "sha256": "a9cc9cdc39201e53c56befbcb4548b2a437719f2ca3945d1db2ce29e0a5c3783"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/SOURCE_REF.json.txt": {
+      "git_blob_sha1": "80267e3b73591904df4c8d386c79740d785cc2ff",
+      "sha256": "d5bb2bbc2ddd121814cd2b69caba6c88b0aa01578d3da39f34fd20890717efcf"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/build.py.txt": {
+      "git_blob_sha1": "b678f5f1b29e2daea3f5591bb9620416008ae434",
+      "sha256": "6fa229598b91f78d5b98c89872bd274ee596659c5c7b42def8f63dcdf2e34934"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/compiler_source_proof.py.txt": {
+      "git_blob_sha1": "2bac037f316c0c16f2c05311731b2a5a3d90936d",
+      "sha256": "a52331c73f625eb4f1c1cffd1ccbe13979826b045b3638096786dd7d07d19250"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/m3-file-nlp-search.json.txt": {
+      "git_blob_sha1": "e31cbff39f816b4429cace2ebbbb416bf86e74ec",
+      "sha256": "ac74fd38d51dbd2e83804871a692125e415328a7538b82434bcd1b7a68fac4b4"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/m3sdk-jmod-receiver.yml.txt": {
+      "git_blob_sha1": "a851288903ef6c573df13e1387ed3cbec41332d9",
+      "sha256": "796ada46f86d5a11b9eaf6904f0fd3a2b3e472991bad9ba69cf1b9b683906485"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/name-mapping.json.txt": {
+      "git_blob_sha1": "406e95b080d340c55155da5cc9b609dd8ccf9df9",
+      "sha256": "a49d904b9afc464b4ab85420c0033d0708bd14354abf44773d872a4706e0f82d"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/test_verify_sdk_receiver.py.txt": {
+      "git_blob_sha1": "9e996dba7f7ab308cbe6c02504a4060ced7fba75",
+      "sha256": "3861e52f0712f388eb7a0e9bce142347dddfe74a50afbc7b701fbee253f97e45"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/verify_sdk_receiver.py.txt": {
+      "git_blob_sha1": "926455a0e3248da5e3c45ff74b634b5b1208b107",
+      "sha256": "f1fc59dfa97660cdc52f61fa247f8587c489a6dc0ad6cda92c1f41249986ff34"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/custody/pom.xml.txt": {
+      "git_blob_sha1": "ed3bb84183bf74b9446705e461172bdc0d9ec640",
+      "sha256": "4f9856294dbb35bb9187af89a2f7be405d445ac323506424d4b144721af1f4bd"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/COMPLETE_SOURCE_INVENTORY.json": {
+      "git_blob_sha1": "c77df108c67a2fb66ab4a50b6a265e6234a3ae34",
+      "sha256": "f077962ce7abe6aec7bf34e14736c1266429b18a911b147db32b73e8c904051e"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/FILE_API_PARITY.json": {
+      "git_blob_sha1": "32b37340a430d9fc6c65dcaca4ef7a25758339e4",
+      "sha256": "8295009993e55feeb7f1b8173018e5a21b1815fc409dabec04e042d30e3ca711"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/FILE_PORT_MAP.json": {
+      "git_blob_sha1": "df42758caebc63e1d59154fe119a2d015546c296",
+      "sha256": "e3eb2199e6e6a045043534bbc9471feb1837c78c7edd0e62bd0675e64d07865d"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/JSON_CLOSURE_PROVENANCE.json": {
+      "git_blob_sha1": "075a99c8120f349fc90998b20b219546e144ba36",
+      "sha256": "ec720b682f1e459763c85b93577c7897449d0558191fee8652931ea30dfd9da5"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/NATIVE_MAPPED_PROVENANCE.json": {
+      "git_blob_sha1": "839eb98c99bd4d65c3af519dc104d9fa88344e52",
+      "sha256": "2a4412de9bc0ae088ca4df059c7175db22484545ee2b5712e3a59bd92e078d5c"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3ByteFile.java.txt": {
+      "git_blob_sha1": "6ed9fc12154925af8e2faf26878c79e9a57308a5",
+      "sha256": "5802d8a6d2e141d398bff309f5b4dc3fa1714be202ab0c84ca0bb5e2e2e1a20b"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3ByteFileStreamIndexer.java.txt": {
+      "git_blob_sha1": "415a1c2cbc0eb7a737cd635e5d87812a7bdd32ad",
+      "sha256": "d08fa7ac79648c2194a00a30002d2d3c0d7301b27964b6816e3d21b575b703e4"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3CharacterFlags.java.txt": {
+      "git_blob_sha1": "1dba64298a52dc1b9dbb1f3a64fdf02ab45f0841",
+      "sha256": "97d4876e230328215484788a6335dcbf1677b8bd4ef8958f553722e305b12af3"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3ChildProgressMonitor.java.txt": {
+      "git_blob_sha1": "56be8ea465add3dd956d8892fb4e7fab264f8554",
+      "sha256": "23b0ffdc4fcde86e6c39d02e3a1cc916310432881b32cb181b3a3d8912cf45c6"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3File.java.txt": {
+      "git_blob_sha1": "e4e869c727e91389d43d33fbd19ae455714cfab9",
+      "sha256": "dbda0676b4bcaec25b86321094086958c8c055ce38ed60a890b3fcd1a0cca5db"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileAttributeOrder.java.txt": {
+      "git_blob_sha1": "4c765e130b4ac790bf80ae0d3127870860b08510",
+      "sha256": "6873496979babdaa3bf21f0a49a458088c13f71e61b95c1e5fcdf976d7b5069b"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileAttributes.java.txt": {
+      "git_blob_sha1": "4d0892c40bdfdee43055352bfbc53663dc2def52",
+      "sha256": "ac6016c43ace8760a36d213be2329661ef19e1fb4dbab2b27eacdb975f57214a"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileBuilder.java.txt": {
+      "git_blob_sha1": "32da0db3a7d824a1ba50d3e9dee3c32785002819",
+      "sha256": "ef7146cac4d4bceb7f586f363ac77b32d1ea113520e35197898b597966082366"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileByteFacts.java.txt": {
+      "git_blob_sha1": "31aa8a3889723b2332eb67188a39ce23c5f64751",
+      "sha256": "3d74c4e871861382eaaa5c111e12af944e0358935d62057a1b3e0b2256e05108"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileByteFactsSnapshot.java.txt": {
+      "git_blob_sha1": "376483bd9c1dc124776b3f0ae5dacaea2a329ba5",
+      "sha256": "6e3704889b9efbd4eefb4f64f47c7c22d5df61945c2707ac008571585e13dbf2"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileCharsetEncoding.java.txt": {
+      "git_blob_sha1": "55892563f6f4348dd7dd515299500a9386ffc576",
+      "sha256": "78b4657bb2e0852e34ef4c126bf6024c30510769bff67c3fe13151bde620e6f5"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileCoordinates.java.txt": {
+      "git_blob_sha1": "8077a0c1045f61abb07f09f103c731bb8c34fdf8",
+      "sha256": "ce2f5f2f11b2ccd431a89a872131e5c4a8c8f7d60fefbdc4b29a4116288184af"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileDictionary.java.txt": {
+      "git_blob_sha1": "4497f33734c5716f9a1d21a900b8f153f1fd6a29",
+      "sha256": "2c4d8af76163520fce7d3086017837fe9aac957439ccedce15c6bff85821396c"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileEventReader.java.txt": {
+      "git_blob_sha1": "c923568d7562edee00c0ccfd8cc5850cd0b1f695",
+      "sha256": "de6dedc02ed5e10dea6f182ad9c8d093064200249e1f449ff7e90c5b131dceb0"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileEventSnapshotCollector.java.txt": {
+      "git_blob_sha1": "313a40402898d704ad3c51d8a2593980b9473546",
+      "sha256": "8f392c8c9415adbb42de2f2721ff9212cacf911bbc8170fbe40c2a72d6214c17"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileEventWriter.java.txt": {
+      "git_blob_sha1": "c5170587221f1413d5e3616aed3a0b613f198759",
+      "sha256": "33001a32c9298631c9fe316be131d9c51702067c53246ca51386f296392ded67"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileFrequencyIndex.java.txt": {
+      "git_blob_sha1": "1248b40e80869882fc090433e7815dbbc00ac771",
+      "sha256": "777e5316502c25d46cb2267cfdcb8e770cb5ae8e32c0f595691983767b3677ae"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileHash.java.txt": {
+      "git_blob_sha1": "fd5b43e8bc54a311c0873d3d78ddda1e9e0fc1c9",
+      "sha256": "ebe4b1f3d045ef8ce7243a2ce1342ad09638ab026260dfd0cd3f22ebd8eb36e7"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileId.java.txt": {
+      "git_blob_sha1": "8e7d4c876a0d93091a44e016260659b0b9aade62",
+      "sha256": "d4ed91e4a590583f75749c1d8c6db2764e3f77991f936880210d5e119515e553"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileImage.java.txt": {
+      "git_blob_sha1": "47600f264a3922e9e3fdb78c8138782a35d400b4",
+      "sha256": "cf38a7b795d0f006a382ee8e6344b6ce80b656c1f1760a6fa484337a1f51c350"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileKindIndex.java.txt": {
+      "git_blob_sha1": "16bbcae801796b3bef0e64abf73e2e23197693c2",
+      "sha256": "7651e0d8e57540b06971e58785e4e551c88b84e619f96b6ec246fbdbefb4fa28"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileLexicon.java.txt": {
+      "git_blob_sha1": "aaed93706de36619b2aeeebfec82805e600c7808",
+      "sha256": "90f594ad46ba757152041afaa76146b84b6ceba26444ca48cd4df642a702cbfe"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileLexiconSnapshot.java.txt": {
+      "git_blob_sha1": "2758a8c12916dda89532df93ca05796d2ccc2600",
+      "sha256": "c449cf3b762653121164d2608db878a9484581f8874d7d48c6a01aa05c3b1baa"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileMultiPattern.java.txt": {
+      "git_blob_sha1": "b79faec3739b09b4e6c87f40143e68602b6742f7",
+      "sha256": "96ec474d6201650e0c9e03a13ddcaa552cb03bf336f2427eed0830a1780edd56"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileNative.java.txt": {
+      "git_blob_sha1": "9026acbb70e1d39758ff6f81c5bea49c2e943465",
+      "sha256": "75f39895c56665508e3895e34873cda3bcde98339161574be790322f9e2152fd"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FilePattern.java.txt": {
+      "git_blob_sha1": "af56ac4c56ed07d913eb1a66ff3f95db8255efc4",
+      "sha256": "97e492d33184406af9e7d6c5f00800c94d919cebd85247219275731bb932686b"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FilePrimitiveSnapshot.java.txt": {
+      "git_blob_sha1": "3aacf13417661138885daac76d994b3aca3a7302",
+      "sha256": "ea9a2e4903c054cde989a04a1e665918a5aff343c5147a58f84d2e8c020e57a9"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileProjection.java.txt": {
+      "git_blob_sha1": "0c34fd1a0872cba216adba33fae2046c1105e9d5",
+      "sha256": "3a352ce013d1870e05c9243bfc1803bbd8cda032fe2800874349f768a59b6227"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileProjectionSnapshot.java.txt": {
+      "git_blob_sha1": "6f8e163e760e4d93f26e72839f171cf0eed4c5fa",
+      "sha256": "b7095dfe70862a1687df6dbed44cf94e6af612402b000195fd4ebf5eca23cffc"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileRangeFingerprint.java.txt": {
+      "git_blob_sha1": "6f7fe2f2281a28535355bff16f236a586c239d23",
+      "sha256": "77413007f75e1e7d5926d5b6a616acabd33441970dfc078888baed5c3d700924"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileResolver.java.txt": {
+      "git_blob_sha1": "fab4cadd94df3fbbed9f42a9c9ec6171b3853dbd",
+      "sha256": "dccf95442e334a581f87a5c25aeb6d8fba025d404900d4eca828090eae18be2a"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileRollingIndex.java.txt": {
+      "git_blob_sha1": "46da4cf798fd28a1aa8d003973f579f7909cb4d1",
+      "sha256": "06baaaa7e3d9780ad05fb0360891db4836abe2081ad8a90ff854ab2809bc1762"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileSnapshot.java.txt": {
+      "git_blob_sha1": "e73ca1b6967cfb844fd1484f2215ee7f14d62963",
+      "sha256": "d9063ce6e1830c7d4c6af880d96953bd95892a454f51afbebdee15f8f5da50e0"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileSnapshotCodec.java.txt": {
+      "git_blob_sha1": "6edfd5fbe1a99b1f404636cefe14aea664ea3fb9",
+      "sha256": "f49015eff03910c7ff53902e34bc85086ee72f7d2c69e0f26d7c17ab05cccbd2"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileSourceFacts.java.txt": {
+      "git_blob_sha1": "b3b4e2fb2f1d89183dc979bc9fd4e5b8e899dc80",
+      "sha256": "e17b3a07e931bb36d17549e7b462fff877df531d44456e08760216674daa1668"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileSourceFactsImage.java.txt": {
+      "git_blob_sha1": "ab2851b142bfa2cdf12720126156868f3fea78cc",
+      "sha256": "5a7c08ac201d4f8ba6a931fd50151f3e6bd9258e0288ae03acd832394ad0c19b"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileSourceFactsKey.java.txt": {
+      "git_blob_sha1": "0479c83d1b0b74b2decd70fdeb31685ade99f3f2",
+      "sha256": "30833dade63e4c340dbc5d4bf485d0fe769aaa24591c101c72c85d05157097f6"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileSourceFactsSnapshot.java.txt": {
+      "git_blob_sha1": "d9cdc1cab66515dc9834a54fb99df8bbecf073b5",
+      "sha256": "0dd3f268b91cc85621affa71796b99699a83d4953207acb7880a7577f0704b1b"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileSourceFactsStore.java.txt": {
+      "git_blob_sha1": "9044073db92857522323549ce685b6545468160a",
+      "sha256": "c9c74e942b2ea9bd22dd82b51010ba3a1279120737862387613d0592fe1ce898"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileSpan.java.txt": {
+      "git_blob_sha1": "d0e9c9e14a8583b0ec223a6b55a0b2f001e9fb04",
+      "sha256": "6b3754cad78cdaf584822a0c49cb08b31edddf5b8da62ce0c4c6ee4e1985798e"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileSpanSnapshot.java.txt": {
+      "git_blob_sha1": "36c7fa4f473a32e4ec37187e059667830ff6b9c8",
+      "sha256": "9139ed2f528fa5531a2635edb6e786b124e1801828e0cfc0475cb954ec1526b5"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileStreamEvents.java.txt": {
+      "git_blob_sha1": "a8a9e03383b6c1e44c2c7ce3cc33f4e923d5310e",
+      "sha256": "7bbd948c17209a739d7a5077cafcad1eecc0cfc9e13b5d60b3a184f2360704ab"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileStreamIndexer.java.txt": {
+      "git_blob_sha1": "7251d00109f0c972d7c0657c19014de61c8cde42",
+      "sha256": "364f0598976b6634d0a4994c8fd243425c3d16599b1362b91b0dbe0446360e79"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileText.java.txt": {
+      "git_blob_sha1": "65a2701e465c99bf5e21756ef033750f2751824c",
+      "sha256": "49d4baaa759bd9b27eabd47cc0fa999c57146e97c60db931ba52bad4e8f4216d"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileTextBuilder.java.txt": {
+      "git_blob_sha1": "e3917fbcb224a959a21a114c0f36b967cddb59f6",
+      "sha256": "7c44526d83dbe53c557859438578a6d41fadc24308c0661d76625f9a5f276659"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileTextPool.java.txt": {
+      "git_blob_sha1": "288d178224f924aee10eeb5013d15a4c9fa06949",
+      "sha256": "b46c6dbb235b1e4cf01f5545684ec2d94e65d5aebf6b7838d5539d7ab265fc30"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileTextRef.java.txt": {
+      "git_blob_sha1": "ad952b46a5260e643ff56bb59550d6264901ac38",
+      "sha256": "2b1ca23d5f46c82b7f4488f971efe42d6706ce4ee44fe44f301e37ddfea73cbe"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileTextTokenizer.java.txt": {
+      "git_blob_sha1": "dfe243f320250a99c5a75f5ff32d16839b1388a5",
+      "sha256": "460fbfe4398a070349656b83c1f368aa51365e9699c99174788bcafe261bd90f"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileTokenKind.java.txt": {
+      "git_blob_sha1": "97784c182681a96e65306c1d577577d65aa00afd",
+      "sha256": "bf561ee119ffd3397a5d3bd91fad8fae40085413516cc27e457f31df53f36443"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileTokenRange.java.txt": {
+      "git_blob_sha1": "4ef732bf4a55152132195f9a2a9f9ecf02bb3da9",
+      "sha256": "62374896dfd50b702acb0abbcfba1a2ef69d171d85a4938001af88bbf40607f2"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileTokenRangeSha256.java.txt": {
+      "git_blob_sha1": "cd462aa80308c6fe2da001c22e6b725cd493fb53",
+      "sha256": "58369250a00e5c1b9e34d1d2817de351e9a3a6ce499827685320ee8ac358fa02"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileTokenStore.java.txt": {
+      "git_blob_sha1": "884430b650941fb3865c052f0f7a3850108071f7",
+      "sha256": "ce3759fcd0439318a29b250c3a281839d4cbd4202e1f38981227408ed02cfa74"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileTokenizer.java.txt": {
+      "git_blob_sha1": "5af3d2425cdec01e6e6c73b93bf5097886058eca",
+      "sha256": "f028a11bf59a3d47c09be71f4fec7c0b408652b3f97d339583b0d76df1d6b69d"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileUniverseEventReader.java.txt": {
+      "git_blob_sha1": "482c36282b259aa728c0c3178f3f1ce51b9d851c",
+      "sha256": "f0d4c372fe31ee6efc4bd02a52f5d11720a64f5154092fb5f3ea109fd10d3ae2"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileUniverseEventWriter.java.txt": {
+      "git_blob_sha1": "497e34f3b5a0c0064e0a750ebba3290aa8ef0aff",
+      "sha256": "8da2f7dd9b01fd4eb12629fca0b162c7066cc9cbce5e3c02922231ebc520affc"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileUniversePlan.java.txt": {
+      "git_blob_sha1": "e12a0e9f40a5d6cb4b480781e1c83453bb610765",
+      "sha256": "83cd132c58dfa7f2f137e9f119aee2a4f9b04b29c119ea64d884fa8089cafb84"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileUniverseSnapshot.java.txt": {
+      "git_blob_sha1": "698a792e58bda31a8ad37f1a112d184d56d535ac",
+      "sha256": "994993e2060fdc2f1b877ad3671d461c66f28bf06417535fb35f314c32839215"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileUniverseSnapshotImage.java.txt": {
+      "git_blob_sha1": "23c28717d1071c88c6c766d0a2e38bd0455b3210",
+      "sha256": "ff73466f54d0981a4cab9f2fd90d24636ea96fc4d633f650351b2cbe7ea1ec8d"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileUniverseTokenIndex.java.txt": {
+      "git_blob_sha1": "66ed149570071b8388ee59acd0b3c1d72184d7f4",
+      "sha256": "e626f28040f9d36d1beb3d6d66329ee0efac2923b37d30d8993c852716fde58f"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileUniverseTokenIndexImage.java.txt": {
+      "git_blob_sha1": "98bd1638a5351ed67ba76b5f61b9d1090377f3c1",
+      "sha256": "1fbabc11a8a832678a9332756494aa17c7098f57791b24d4add9d621b83561aa"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileUniverseTokenRangeSha256.java.txt": {
+      "git_blob_sha1": "292a71f28c0a975e73160b32accaed4d4348bdf9",
+      "sha256": "ce007cb21172bb0ad20799e1a7e9572ae7508f81e982b44cc3a926b6d2180d56"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3FileUniverseTokenSpan.java.txt": {
+      "git_blob_sha1": "dbb6b2957f8e12e2b93b9917506cd415fcece716",
+      "sha256": "0654c95138e0246cbdd617e967ec6b7d54b32f41a3fdd6b09003dc1c60780125"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3Hash256.java.txt": {
+      "git_blob_sha1": "1d5b091dcc7249567ecfd118751d504e85bf84f9",
+      "sha256": "14191c32a0e7fe5bda27c00f61fe20e0186366ef3b94f89959245f3f5c34c0ab"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3JniLibraryLoader.java.txt": {
+      "git_blob_sha1": "8f7d0f11ad5207c96777baae566c93f7dc5ade42",
+      "sha256": "613def6113f8101dc31d7b956e73b05b7bbe63b903eadcd385dedeb7e7da9536"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3JsonStructuralNative.java.txt": {
+      "git_blob_sha1": "fc9d5a17f59e37fe6570c6640a659cb95f317e53",
+      "sha256": "5510d99a7068b87db686775a401a2f9f95f1abc980392c9fc695d9c1985adf6a"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3LongLookup.java.txt": {
+      "git_blob_sha1": "14efac2fb242a52fc8346131432402bedc9b0ceb",
+      "sha256": "c17a20e2d06d2a3e977933cc6573111c897b5aecfb1988ef708873f598a47a02"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3NativeLibrarySpec.java.txt": {
+      "git_blob_sha1": "b471d942156142ea9efd238b265870b0aad07e33",
+      "sha256": "9eef35d68d5d79745d7f60f10120f09205699833e0f9fa967e5c9b5fc13e6744"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3PageableTree.java.txt": {
+      "git_blob_sha1": "3087436b73131b74278724c34db6908bd64752a6",
+      "sha256": "17ae996cffab497f44b9aeb0262a7c5e1e8236420e35c51a0696b5918c75a9ad"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3PageableTreeCursor.java.txt": {
+      "git_blob_sha1": "dd176ca10f4cf5c1ee269b339f6156016fe4a509",
+      "sha256": "60960320a4e37f31f95dadf1d63c5badad4851243e34b8995c214c39c64320f3"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3Progress.java.txt": {
+      "git_blob_sha1": "933d4b2134ec59eeace722c13b1ae8b369e31fe3",
+      "sha256": "28818ae132655e930f5347f6aa53433e57d5f57836358e1e9a5370289dea73c6"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3ProgressCalculations.java.txt": {
+      "git_blob_sha1": "5e16c6c86d645616f23ef6260c0b4c6a851ecdaa",
+      "sha256": "6df6d1b10eb0c2c9465357155518093bd322a2cd4c1b667d61403a6a599ca354"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3ProgressChild.java.txt": {
+      "git_blob_sha1": "312ecd05a002c923bb6eeb43192bd14e4cb22ab1",
+      "sha256": "28d62e89796e60805e9e46f8dfa7ea5bb038e99579296f586a164567e09bf9ec"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3ProgressMonitor.java.txt": {
+      "git_blob_sha1": "41ae56507e3bcb307c8a5460645626d29e2e3aae",
+      "sha256": "9dec6ae3ca9968785d3f8e47a209abe3e09fa5e62798243bfe0fc9708e2087a2"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3ProgressSnapshot.java.txt": {
+      "git_blob_sha1": "53e20e20ec7ec65c93252b84a2bb39282bfe800a",
+      "sha256": "5deca622172f899f1f6484b3bdc831747227d8c80590ef42422158f2722d7710"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3ProgressState.java.txt": {
+      "git_blob_sha1": "9731dcce6dfc603feb05707b0526256b8e3e7e02",
+      "sha256": "d529b5f4834a1ac3b0afc7ff0bf4ddd4f39999c9da42049c24c845e4c2d852cb"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3TextFacts.java.txt": {
+      "git_blob_sha1": "48dd5008676dcd69ccbe586b701268b14fc1eeba",
+      "sha256": "b159bfeba6db1c6132537bd60c1c4918d652a3094a076b3edd37ac434bcf6147"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/M3TextMetrics.java.txt": {
+      "git_blob_sha1": "0ab5eec9223d379fe21fbe3d9614d5571ce62501",
+      "sha256": "1b1507dad30f90e6c6ba4822388e57cda52e42e86ce31d7727b94c4d3eb0f81e"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/MappedM3File.java.txt": {
+      "git_blob_sha1": "0744079789f292b6b50f78b9a3d3872de6235d53",
+      "sha256": "c3b6d79eb17b38a7f22d5a0e1a2451323115f8c396c2d6a96bddd55d4bf0ac6c"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/com/m3/file/json/M3JsonStructuralIndex.java.txt": {
+      "git_blob_sha1": "10ebf3f91e35063ec9a1c3fdd6d0e601c6eaccb4",
+      "sha256": "387060daf4fe5efb1593563abfb910a6b48e75562a188c210fa012bf8d266cc5"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/java/module-info.java.txt": {
+      "git_blob_sha1": "fe643da6d40056b42f7a61bcac5ce1767405fab5",
+      "sha256": "666eab9e594255f227064ae1ddaf26b572ed5456e2c4f59dcd9294c3bf5d7690"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/native/m3_file_jni.c.txt": {
+      "git_blob_sha1": "1aa4a67ec68c2be94b8aa66281eae9e4803a9fb7",
+      "sha256": "07f00a28d052687edbe90165f0090da8cf1ba1011e7f93364c588b2b9322479a"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/native/m3_json_signal_jni.c.txt": {
+      "git_blob_sha1": "38e502aacbd78ba66125d5a76a1aa1cf4b2af79c",
+      "sha256": "5e15872f9ab3c7c7d2ea41e9a67b6fe9c5cfd1dda6387adc3ab6e372d6409697"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/file/native/m3_text_metrics_jni.c.txt": {
+      "git_blob_sha1": "12ee28e535bf2e5ce6803d8dc708f049ee11783a",
+      "sha256": "00e4d58f4af904f9f5087929d66ba417f787a1c505579b3a90efbdd4361d70ce"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/frontend/M3SourceIndex.java": {
+      "git_blob_sha1": "627727a3f467a98037007f869b309a7fd83a2d40",
+      "sha256": "47e3083aca86032e172618e80c2ac2053a76af5c55758b65ed6e0ae76ffece30"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/frontend/PROVENANCE.json": {
+      "git_blob_sha1": "51ff3739f1784a70d524123e2a4a1685678b0448",
+      "sha256": "24b33550f4de2028900c63740ecf5e3bb582ea517bb640e58cb6cb124944d24a"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/frontend/module-info.java": {
+      "git_blob_sha1": "020e5315e22fd15a3cab881a1e89db44a5204afc",
+      "sha256": "e821a724c7e3f25c49dfc06d9809742650b9c0e45987d456688f1b2bc8f7c0c9"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/lucene/CharArrayMap.java": {
+      "git_blob_sha1": "718f60f1a4159ac130326835e3ff23a91865d74d",
+      "sha256": "8b8ca85def4bb9c48a49e531e8edbd8d14f77dc05d6a1a54d829e714657c1fdb"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/lucene/M3TextReaders.java": {
+      "git_blob_sha1": "5368641c7bb8f724437a769fbf36bd6abc287662",
+      "sha256": "4c2e5843829487c5be8163fa0817178b8887a1c4199e9b382c88bc726c01daf0"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/lucene/PROVENANCE.json": {
+      "git_blob_sha1": "40a66b9970fc1082668b631759ad55614a756b14",
+      "sha256": "f4e39191726c753d006b463eab50ec0b243cd7aa2c26167a143608e17d33476a"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/lucene/ReusableStringReader.java": {
+      "git_blob_sha1": "dc451fbd6de2a47317bb883425637410a8c55e90",
+      "sha256": "76378fdbded3a1e0ef33775add5f9e9c6c764de9703f048bb4e3e3883d82a53f"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/opennlp/BertNormalization.java.txt": {
+      "git_blob_sha1": "e970d85da81b44c2266cb12a3261b57cc503c9da",
+      "sha256": "606e52bcc9a5c9c100388b73bdac1bb0f1ac42f59fffb04258676aebe262e392"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/opennlp/M3Tokenizers.java.txt": {
+      "git_blob_sha1": "f83cda0ff7da665b4ee2cb1a6cbaab1b07fae397",
+      "sha256": "de3823ba8f4a53a7a628e8532d557e3af04a4a852b0302518cc4603ed2fae8c5"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/opennlp/MappedText.java.txt": {
+      "git_blob_sha1": "62b0ba91ff7fe47bd8878579fb86e273e7afab8f",
+      "sha256": "8cc4e34a9ed60040cb38fb60753b274812190b65392f61c107a4aba8538a2a3e"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/opennlp/PROVENANCE.json": {
+      "git_blob_sha1": "c5ce6854c46fd21721fa8b6ffd85e49fbe04c0e6",
+      "sha256": "751265f4507ace1c4cbc52b482bc1741e40710ab5df719a4e647239dc37ba3e8"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/opennlp/SimpleTokenizer.java.txt": {
+      "git_blob_sha1": "02d170a9f165bc7d5b5f08ff0d9a3e4d9d50961e",
+      "sha256": "ef86045b9fd965accd9140e95ce67f96e6f8e88b9d2cc968d9806d9691ca7890"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/opennlp/SubwordPiece.java.txt": {
+      "git_blob_sha1": "4ffefa6e47c2920ba2c7e127a75c3a32321a3e49",
+      "sha256": "ade91a596849ab24c7e07b8e604c0d572f5e4439794a823a24b56559a9dde089"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/opennlp/SubwordTokenizer.java.txt": {
+      "git_blob_sha1": "2ef3b0634785eab97908008aae36764b43b1b6e4",
+      "sha256": "c50cf2a12a86bb593d400fc1b712be98fa69fca17242f8cfdae2b1433f5b47c8"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/opennlp/WordpieceChecks.java.txt": {
+      "git_blob_sha1": "e24b67bbe6ec5ae493849357ff0bccbb45f9bdd0",
+      "sha256": "5863d81247faa1f77cb7e2c920ade78f37aa60cfc4a6ee03a77a0bd815b01572"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/opennlp/WordpieceEncoder.java.txt": {
+      "git_blob_sha1": "ca877e04a1f1fd50b0c5a5fd0d54d178f649df30",
+      "sha256": "a4bde6e011c346eed7a175de7071efe3d4999d450a182eb20503a092419555da"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileAlgorithmTest.java": {
+      "git_blob_sha1": "c131e41454a207923154f1757aae78b26b3a6e18",
+      "sha256": "46adc42cc548c0029295275ef478107d9a928cfc7f727389e312451a817c953a"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileByteFactsPrimitiveSnapshotProof.java": {
+      "git_blob_sha1": "6d3ce1c6bfb286763ffc77623adf878fa8941989",
+      "sha256": "bcaa39d1423b3cf2c3323bb9b70f2137bb9e25b7c6a9f236edffd4b19c2a1808"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileCharsetProbe.java": {
+      "git_blob_sha1": "764f9256b339de05f74981fb4a246d314ab52571",
+      "sha256": "71405c535d4e9c3acc589308acec0c8ff19b4d480c516f3b396d888181873bb6"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileDetachedTextViewsProof.java": {
+      "git_blob_sha1": "eb550492df0f6cb15390213b8259ce7a21485de5",
+      "sha256": "69bd4f17b26033df761fec849f035fc33d831c37cd80f5e1ca4ea4e11d5c4eeb"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileEventReaderRehydrateProof.java": {
+      "git_blob_sha1": "f5d956c6fc034dd5ad3dd82b40df605617c893d0",
+      "sha256": "3643bff8420c100fbb38f94a48e1efc725031ae678539f770eda8a37ca171913"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileImageAtomicPublicationProof.java": {
+      "git_blob_sha1": "4457a1d223293674986fc5ffd17e4dc8510ec248",
+      "sha256": "88e5e9c040c6ce970260f036f097cf07a8807102d9034500a79ba2a1208071c7"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileJsonProbe.java": {
+      "git_blob_sha1": "3bdde6c8ccf6a460c628a101bd18d6d2c15dfbbb",
+      "sha256": "4edaa7d9bcf8b91120827b7f6bdb892cf6a50823f6335590d826724735570ab8"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileMappedProjectionSnapshotProof.java": {
+      "git_blob_sha1": "12f4bfb8dbf3620ac49f23bc4bc1e0fe4f3e4826",
+      "sha256": "f7cab11b2e6543406ad6043e03b39836473f1e4a05275de846adcc9ba51a4ab0"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileMappedSourceFactsProof.java": {
+      "git_blob_sha1": "1f1c9cf816876c6caa515fc66808e132e45065c4",
+      "sha256": "7f3c17903159d9d551645c16778d19b4418509f7f444b282fcf59f3daaf8066d"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FilePortProbe.java": {
+      "git_blob_sha1": "13f1af723ab7ace41741039a4f64659ae5796020",
+      "sha256": "ac08fec4229bf1028f86d9fb87622e37174513cd8549f9a51a950ebb62bcbb10"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileProbeAssertions.java": {
+      "git_blob_sha1": "3cdb1c9b374b7839cb4f444689c86ca9b4462dc8",
+      "sha256": "ec0e2707d251b19c20a6a1c2375e24b38adab95838d50c0a76650be0dbdfe41e"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileRollingPrecomputeProof.java": {
+      "git_blob_sha1": "80ffee989ee1633a9cc778a04461da9d038c371f",
+      "sha256": "d80b18d58bd26aa1bfb02c0dc8ba7fe107f264e84769bd6e2908cacd7931b56a"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileSnapshotCodecProof.java": {
+      "git_blob_sha1": "60eaed2eda9bb97e65082c6314cfdfb48fea4676",
+      "sha256": "4463b297b5491f0e8817982bc96d00aa7570a4e5a823d347f6f479e19c5f197b"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileSourceFactsStoreSinglePublicationProof.java": {
+      "git_blob_sha1": "70e8b0d382a897f044d7b6b7d7563674459dde41",
+      "sha256": "de721b35d3b344d027d227515942b27ddfaf0c9bc396d0afc5a8ae8459fabb1a"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileTest.java": {
+      "git_blob_sha1": "46006acf7b1608c73a6ce740f61269a9f148b159",
+      "sha256": "61d81f2149e733f97ee2eb45b468aa781eb47f4992317bcdadd18b1329263250"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileTokenRangeDigestProof.java": {
+      "git_blob_sha1": "ee5838e8704f45aaaaea95ea506641c0cf4d312d",
+      "sha256": "c88cbdec847e8509270d03630520c2b8bca02212ab67bca8a6733cfb1ab072f6"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/file/src/test/java/com/m3/file/M3FileUniverseSnapshotImageProof.java": {
+      "git_blob_sha1": "26374391863a6a346eb2bccd2efdb01b70d52e6b",
+      "sha256": "88d3070cdc2c8255d73ef81252ba1f497e6f4ad7f1279d4f2581285e5ca4d549"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/frontend/M3SourceIndexProbe.java": {
+      "git_blob_sha1": "86c31dd9d879b4e1e4b26be26b19e2a20bb24c57",
+      "sha256": "3e5033d4f4c3455069787095effefa4cc3f112284349c4768fcd89080931f830"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/lucene/M3LuceneContractProbe.java": {
+      "git_blob_sha1": "f4a1e5f4f792837a57cadfc74bd234407126a57e",
+      "sha256": "99a58ff9f8a55f6d47139584ec57e870900ba8f58e59a8786e8b0744e4cae189"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/lucene/M3ReaderBaselineCheck.java": {
+      "git_blob_sha1": "ba7c8d55027ca821f7d3d5a42362dc01b4fe4f9c",
+      "sha256": "60bffbe8962dc9786b4938fdfea9dd896d112bebcc941d6f782764f7f3d7ce5f"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/lucene/M3ReaderCompatibilityProbe.java": {
+      "git_blob_sha1": "ec91d501de577e71f3d875056982df211494944c",
+      "sha256": "ba08e2a72c85f5f547d8362300e748dcead0441650f2c92ca3418ac2c3f7f35f"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/lucene/M3TextReadersCheck.java": {
+      "git_blob_sha1": "a7e957262bb34d4704e78eb7bd690c5815a2c806",
+      "sha256": "18d08c1719adca20889b3668ee7e43ac4d4867667f4cf713695328ea1e0627b4"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/fixtures/opennlp/OpenNlpM3Probe.java": {
+      "git_blob_sha1": "3e67c55bcf0c88be9aa928d3c67d8aead76b012a",
+      "sha256": "37e41dd3f75e122ee3698c2ce9e276e757c372b7dffa8742ef823f40d4e871a4"
+    },
+    "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/src/test/java/com/synexia/rewrite/M3NlpSearchIntegrationTest.java": {
+      "git_blob_sha1": "89b2590a4ffd0654bfbfbc987d6b07d73bd78caf",
+      "sha256": "04f63847360b295e62c7b4c0176e0926911cf1a313a28ab17e4031bb0de7fa6e"
+    },
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java": {
+      "git_blob_sha1": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    },
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java": {
+      "git_blob_sha1": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40",
+      "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625"
+    },
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java": {
+      "git_blob_sha1": "9d0788d3717e017d58345c5c3e62022c2915a3c8",
+      "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
+    },
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java": {
+      "git_blob_sha1": "d24729950508857280ea1b56d4e930f05137ec85",
+      "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-nlp-search-integration-20261018.yml": {
+      "git_blob_sha1": "a4e6a5105eccc7313e3d698ed97c400f452c979b",
+      "sha256": "f450cae79c165347cf533aa602bb75793fdbe5aface19d6311ccee4490fada65"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0000-M3ByteFile.java.txt": {
+      "git_blob_sha1": "6ed9fc12154925af8e2faf26878c79e9a57308a5",
+      "sha256": "5802d8a6d2e141d398bff309f5b4dc3fa1714be202ab0c84ca0bb5e2e2e1a20b"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0001-M3ByteFileStreamIndexer.java.txt": {
+      "git_blob_sha1": "415a1c2cbc0eb7a737cd635e5d87812a7bdd32ad",
+      "sha256": "d08fa7ac79648c2194a00a30002d2d3c0d7301b27964b6816e3d21b575b703e4"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0002-M3CharacterFlags.java.txt": {
+      "git_blob_sha1": "1dba64298a52dc1b9dbb1f3a64fdf02ab45f0841",
+      "sha256": "97d4876e230328215484788a6335dcbf1677b8bd4ef8958f553722e305b12af3"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0003-M3ChildProgressMonitor.java.txt": {
+      "git_blob_sha1": "56be8ea465add3dd956d8892fb4e7fab264f8554",
+      "sha256": "23b0ffdc4fcde86e6c39d02e3a1cc916310432881b32cb181b3a3d8912cf45c6"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0004-M3File.java.txt": {
+      "git_blob_sha1": "e4e869c727e91389d43d33fbd19ae455714cfab9",
+      "sha256": "dbda0676b4bcaec25b86321094086958c8c055ce38ed60a890b3fcd1a0cca5db"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0005-M3FileAttributeOrder.java.txt": {
+      "git_blob_sha1": "4c765e130b4ac790bf80ae0d3127870860b08510",
+      "sha256": "6873496979babdaa3bf21f0a49a458088c13f71e61b95c1e5fcdf976d7b5069b"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0006-M3FileAttributes.java.txt": {
+      "git_blob_sha1": "4d0892c40bdfdee43055352bfbc53663dc2def52",
+      "sha256": "ac6016c43ace8760a36d213be2329661ef19e1fb4dbab2b27eacdb975f57214a"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0007-M3FileBuilder.java.txt": {
+      "git_blob_sha1": "32da0db3a7d824a1ba50d3e9dee3c32785002819",
+      "sha256": "ef7146cac4d4bceb7f586f363ac77b32d1ea113520e35197898b597966082366"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0008-M3FileByteFacts.java.txt": {
+      "git_blob_sha1": "31aa8a3889723b2332eb67188a39ce23c5f64751",
+      "sha256": "3d74c4e871861382eaaa5c111e12af944e0358935d62057a1b3e0b2256e05108"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0009-M3FileByteFactsSnapshot.java.txt": {
+      "git_blob_sha1": "376483bd9c1dc124776b3f0ae5dacaea2a329ba5",
+      "sha256": "6e3704889b9efbd4eefb4f64f47c7c22d5df61945c2707ac008571585e13dbf2"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0010-M3FileCharsetEncoding.java.txt": {
+      "git_blob_sha1": "55892563f6f4348dd7dd515299500a9386ffc576",
+      "sha256": "78b4657bb2e0852e34ef4c126bf6024c30510769bff67c3fe13151bde620e6f5"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0011-M3FileCoordinates.java.txt": {
+      "git_blob_sha1": "8077a0c1045f61abb07f09f103c731bb8c34fdf8",
+      "sha256": "ce2f5f2f11b2ccd431a89a872131e5c4a8c8f7d60fefbdc4b29a4116288184af"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0012-M3FileDictionary.java.txt": {
+      "git_blob_sha1": "4497f33734c5716f9a1d21a900b8f153f1fd6a29",
+      "sha256": "2c4d8af76163520fce7d3086017837fe9aac957439ccedce15c6bff85821396c"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0013-M3FileEventReader.java.txt": {
+      "git_blob_sha1": "c923568d7562edee00c0ccfd8cc5850cd0b1f695",
+      "sha256": "de6dedc02ed5e10dea6f182ad9c8d093064200249e1f449ff7e90c5b131dceb0"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0014-M3FileEventSnapshotCollector.java.txt": {
+      "git_blob_sha1": "313a40402898d704ad3c51d8a2593980b9473546",
+      "sha256": "8f392c8c9415adbb42de2f2721ff9212cacf911bbc8170fbe40c2a72d6214c17"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0015-M3FileEventWriter.java.txt": {
+      "git_blob_sha1": "c5170587221f1413d5e3616aed3a0b613f198759",
+      "sha256": "33001a32c9298631c9fe316be131d9c51702067c53246ca51386f296392ded67"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0016-M3FileFrequencyIndex.java.txt": {
+      "git_blob_sha1": "1248b40e80869882fc090433e7815dbbc00ac771",
+      "sha256": "777e5316502c25d46cb2267cfdcb8e770cb5ae8e32c0f595691983767b3677ae"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0017-M3FileHash.java.txt": {
+      "git_blob_sha1": "fd5b43e8bc54a311c0873d3d78ddda1e9e0fc1c9",
+      "sha256": "ebe4b1f3d045ef8ce7243a2ce1342ad09638ab026260dfd0cd3f22ebd8eb36e7"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0018-M3FileId.java.txt": {
+      "git_blob_sha1": "8e7d4c876a0d93091a44e016260659b0b9aade62",
+      "sha256": "d4ed91e4a590583f75749c1d8c6db2764e3f77991f936880210d5e119515e553"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0019-M3FileImage.java.txt": {
+      "git_blob_sha1": "47600f264a3922e9e3fdb78c8138782a35d400b4",
+      "sha256": "cf38a7b795d0f006a382ee8e6344b6ce80b656c1f1760a6fa484337a1f51c350"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0020-M3FileKindIndex.java.txt": {
+      "git_blob_sha1": "16bbcae801796b3bef0e64abf73e2e23197693c2",
+      "sha256": "7651e0d8e57540b06971e58785e4e551c88b84e619f96b6ec246fbdbefb4fa28"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0021-M3FileLexicon.java.txt": {
+      "git_blob_sha1": "aaed93706de36619b2aeeebfec82805e600c7808",
+      "sha256": "90f594ad46ba757152041afaa76146b84b6ceba26444ca48cd4df642a702cbfe"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0022-M3FileLexiconSnapshot.java.txt": {
+      "git_blob_sha1": "2758a8c12916dda89532df93ca05796d2ccc2600",
+      "sha256": "c449cf3b762653121164d2608db878a9484581f8874d7d48c6a01aa05c3b1baa"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0023-M3FileMultiPattern.java.txt": {
+      "git_blob_sha1": "b79faec3739b09b4e6c87f40143e68602b6742f7",
+      "sha256": "96ec474d6201650e0c9e03a13ddcaa552cb03bf336f2427eed0830a1780edd56"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0024-M3FileNative.java.txt": {
+      "git_blob_sha1": "9026acbb70e1d39758ff6f81c5bea49c2e943465",
+      "sha256": "75f39895c56665508e3895e34873cda3bcde98339161574be790322f9e2152fd"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0025-M3FilePattern.java.txt": {
+      "git_blob_sha1": "af56ac4c56ed07d913eb1a66ff3f95db8255efc4",
+      "sha256": "97e492d33184406af9e7d6c5f00800c94d919cebd85247219275731bb932686b"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0026-M3FilePrimitiveSnapshot.java.txt": {
+      "git_blob_sha1": "3aacf13417661138885daac76d994b3aca3a7302",
+      "sha256": "ea9a2e4903c054cde989a04a1e665918a5aff343c5147a58f84d2e8c020e57a9"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0027-M3FileProjection.java.txt": {
+      "git_blob_sha1": "0c34fd1a0872cba216adba33fae2046c1105e9d5",
+      "sha256": "3a352ce013d1870e05c9243bfc1803bbd8cda032fe2800874349f768a59b6227"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0028-M3FileProjectionSnapshot.java.txt": {
+      "git_blob_sha1": "6f8e163e760e4d93f26e72839f171cf0eed4c5fa",
+      "sha256": "b7095dfe70862a1687df6dbed44cf94e6af612402b000195fd4ebf5eca23cffc"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0029-M3FileRangeFingerprint.java.txt": {
+      "git_blob_sha1": "6f7fe2f2281a28535355bff16f236a586c239d23",
+      "sha256": "77413007f75e1e7d5926d5b6a616acabd33441970dfc078888baed5c3d700924"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0030-M3FileResolver.java.txt": {
+      "git_blob_sha1": "fab4cadd94df3fbbed9f42a9c9ec6171b3853dbd",
+      "sha256": "dccf95442e334a581f87a5c25aeb6d8fba025d404900d4eca828090eae18be2a"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0031-M3FileRollingIndex.java.txt": {
+      "git_blob_sha1": "46da4cf798fd28a1aa8d003973f579f7909cb4d1",
+      "sha256": "06baaaa7e3d9780ad05fb0360891db4836abe2081ad8a90ff854ab2809bc1762"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0032-M3FileSnapshot.java.txt": {
+      "git_blob_sha1": "e73ca1b6967cfb844fd1484f2215ee7f14d62963",
+      "sha256": "d9063ce6e1830c7d4c6af880d96953bd95892a454f51afbebdee15f8f5da50e0"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0033-M3FileSnapshotCodec.java.txt": {
+      "git_blob_sha1": "6edfd5fbe1a99b1f404636cefe14aea664ea3fb9",
+      "sha256": "f49015eff03910c7ff53902e34bc85086ee72f7d2c69e0f26d7c17ab05cccbd2"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0034-M3FileSourceFacts.java.txt": {
+      "git_blob_sha1": "b3b4e2fb2f1d89183dc979bc9fd4e5b8e899dc80",
+      "sha256": "e17b3a07e931bb36d17549e7b462fff877df531d44456e08760216674daa1668"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0035-M3FileSourceFactsImage.java.txt": {
+      "git_blob_sha1": "ab2851b142bfa2cdf12720126156868f3fea78cc",
+      "sha256": "5a7c08ac201d4f8ba6a931fd50151f3e6bd9258e0288ae03acd832394ad0c19b"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0036-M3FileSourceFactsKey.java.txt": {
+      "git_blob_sha1": "0479c83d1b0b74b2decd70fdeb31685ade99f3f2",
+      "sha256": "30833dade63e4c340dbc5d4bf485d0fe769aaa24591c101c72c85d05157097f6"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0037-M3FileSourceFactsSnapshot.java.txt": {
+      "git_blob_sha1": "d9cdc1cab66515dc9834a54fb99df8bbecf073b5",
+      "sha256": "0dd3f268b91cc85621affa71796b99699a83d4953207acb7880a7577f0704b1b"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0038-M3FileSourceFactsStore.java.txt": {
+      "git_blob_sha1": "9044073db92857522323549ce685b6545468160a",
+      "sha256": "c9c74e942b2ea9bd22dd82b51010ba3a1279120737862387613d0592fe1ce898"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0039-M3FileSpan.java.txt": {
+      "git_blob_sha1": "d0e9c9e14a8583b0ec223a6b55a0b2f001e9fb04",
+      "sha256": "6b3754cad78cdaf584822a0c49cb08b31edddf5b8da62ce0c4c6ee4e1985798e"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0040-M3FileSpanSnapshot.java.txt": {
+      "git_blob_sha1": "36c7fa4f473a32e4ec37187e059667830ff6b9c8",
+      "sha256": "9139ed2f528fa5531a2635edb6e786b124e1801828e0cfc0475cb954ec1526b5"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0041-M3FileStreamEvents.java.txt": {
+      "git_blob_sha1": "a8a9e03383b6c1e44c2c7ce3cc33f4e923d5310e",
+      "sha256": "7bbd948c17209a739d7a5077cafcad1eecc0cfc9e13b5d60b3a184f2360704ab"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0042-M3FileStreamIndexer.java.txt": {
+      "git_blob_sha1": "7251d00109f0c972d7c0657c19014de61c8cde42",
+      "sha256": "364f0598976b6634d0a4994c8fd243425c3d16599b1362b91b0dbe0446360e79"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0043-M3FileText.java.txt": {
+      "git_blob_sha1": "65a2701e465c99bf5e21756ef033750f2751824c",
+      "sha256": "49d4baaa759bd9b27eabd47cc0fa999c57146e97c60db931ba52bad4e8f4216d"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0044-M3FileTextBuilder.java.txt": {
+      "git_blob_sha1": "e3917fbcb224a959a21a114c0f36b967cddb59f6",
+      "sha256": "7c44526d83dbe53c557859438578a6d41fadc24308c0661d76625f9a5f276659"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0045-M3FileTextPool.java.txt": {
+      "git_blob_sha1": "288d178224f924aee10eeb5013d15a4c9fa06949",
+      "sha256": "b46c6dbb235b1e4cf01f5545684ec2d94e65d5aebf6b7838d5539d7ab265fc30"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0046-M3FileTextRef.java.txt": {
+      "git_blob_sha1": "ad952b46a5260e643ff56bb59550d6264901ac38",
+      "sha256": "2b1ca23d5f46c82b7f4488f971efe42d6706ce4ee44fe44f301e37ddfea73cbe"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0047-M3FileTextTokenizer.java.txt": {
+      "git_blob_sha1": "dfe243f320250a99c5a75f5ff32d16839b1388a5",
+      "sha256": "460fbfe4398a070349656b83c1f368aa51365e9699c99174788bcafe261bd90f"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0048-M3FileTokenKind.java.txt": {
+      "git_blob_sha1": "97784c182681a96e65306c1d577577d65aa00afd",
+      "sha256": "bf561ee119ffd3397a5d3bd91fad8fae40085413516cc27e457f31df53f36443"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0049-M3FileTokenRange.java.txt": {
+      "git_blob_sha1": "4ef732bf4a55152132195f9a2a9f9ecf02bb3da9",
+      "sha256": "62374896dfd50b702acb0abbcfba1a2ef69d171d85a4938001af88bbf40607f2"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0050-M3FileTokenRangeSha256.java.txt": {
+      "git_blob_sha1": "cd462aa80308c6fe2da001c22e6b725cd493fb53",
+      "sha256": "58369250a00e5c1b9e34d1d2817de351e9a3a6ce499827685320ee8ac358fa02"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0051-M3FileTokenStore.java.txt": {
+      "git_blob_sha1": "884430b650941fb3865c052f0f7a3850108071f7",
+      "sha256": "ce3759fcd0439318a29b250c3a281839d4cbd4202e1f38981227408ed02cfa74"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0052-M3FileTokenizer.java.txt": {
+      "git_blob_sha1": "5af3d2425cdec01e6e6c73b93bf5097886058eca",
+      "sha256": "f028a11bf59a3d47c09be71f4fec7c0b408652b3f97d339583b0d76df1d6b69d"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0053-M3FileUniverseEventReader.java.txt": {
+      "git_blob_sha1": "482c36282b259aa728c0c3178f3f1ce51b9d851c",
+      "sha256": "f0d4c372fe31ee6efc4bd02a52f5d11720a64f5154092fb5f3ea109fd10d3ae2"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0054-M3FileUniverseEventWriter.java.txt": {
+      "git_blob_sha1": "497e34f3b5a0c0064e0a750ebba3290aa8ef0aff",
+      "sha256": "8da2f7dd9b01fd4eb12629fca0b162c7066cc9cbce5e3c02922231ebc520affc"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0055-M3FileUniversePlan.java.txt": {
+      "git_blob_sha1": "e12a0e9f40a5d6cb4b480781e1c83453bb610765",
+      "sha256": "83cd132c58dfa7f2f137e9f119aee2a4f9b04b29c119ea64d884fa8089cafb84"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0056-M3FileUniverseSnapshot.java.txt": {
+      "git_blob_sha1": "698a792e58bda31a8ad37f1a112d184d56d535ac",
+      "sha256": "994993e2060fdc2f1b877ad3671d461c66f28bf06417535fb35f314c32839215"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0057-M3FileUniverseSnapshotImage.java.txt": {
+      "git_blob_sha1": "23c28717d1071c88c6c766d0a2e38bd0455b3210",
+      "sha256": "ff73466f54d0981a4cab9f2fd90d24636ea96fc4d633f650351b2cbe7ea1ec8d"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0058-M3FileUniverseTokenIndex.java.txt": {
+      "git_blob_sha1": "66ed149570071b8388ee59acd0b3c1d72184d7f4",
+      "sha256": "e626f28040f9d36d1beb3d6d66329ee0efac2923b37d30d8993c852716fde58f"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0059-M3FileUniverseTokenIndexImage.java.txt": {
+      "git_blob_sha1": "98bd1638a5351ed67ba76b5f61b9d1090377f3c1",
+      "sha256": "1fbabc11a8a832678a9332756494aa17c7098f57791b24d4add9d621b83561aa"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0060-M3FileUniverseTokenRangeSha256.java.txt": {
+      "git_blob_sha1": "292a71f28c0a975e73160b32accaed4d4348bdf9",
+      "sha256": "ce007cb21172bb0ad20799e1a7e9572ae7508f81e982b44cc3a926b6d2180d56"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0061-M3FileUniverseTokenSpan.java.txt": {
+      "git_blob_sha1": "dbb6b2957f8e12e2b93b9917506cd415fcece716",
+      "sha256": "0654c95138e0246cbdd617e967ec6b7d54b32f41a3fdd6b09003dc1c60780125"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0062-M3Hash256.java.txt": {
+      "git_blob_sha1": "1d5b091dcc7249567ecfd118751d504e85bf84f9",
+      "sha256": "14191c32a0e7fe5bda27c00f61fe20e0186366ef3b94f89959245f3f5c34c0ab"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0063-M3JniLibraryLoader.java.txt": {
+      "git_blob_sha1": "8f7d0f11ad5207c96777baae566c93f7dc5ade42",
+      "sha256": "613def6113f8101dc31d7b956e73b05b7bbe63b903eadcd385dedeb7e7da9536"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0064-M3JsonStructuralNative.java.txt": {
+      "git_blob_sha1": "fc9d5a17f59e37fe6570c6640a659cb95f317e53",
+      "sha256": "5510d99a7068b87db686775a401a2f9f95f1abc980392c9fc695d9c1985adf6a"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0065-M3LongLookup.java.txt": {
+      "git_blob_sha1": "14efac2fb242a52fc8346131432402bedc9b0ceb",
+      "sha256": "c17a20e2d06d2a3e977933cc6573111c897b5aecfb1988ef708873f598a47a02"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0066-M3NativeLibrarySpec.java.txt": {
+      "git_blob_sha1": "b471d942156142ea9efd238b265870b0aad07e33",
+      "sha256": "9eef35d68d5d79745d7f60f10120f09205699833e0f9fa967e5c9b5fc13e6744"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0067-M3PageableTree.java.txt": {
+      "git_blob_sha1": "3087436b73131b74278724c34db6908bd64752a6",
+      "sha256": "17ae996cffab497f44b9aeb0262a7c5e1e8236420e35c51a0696b5918c75a9ad"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0068-M3PageableTreeCursor.java.txt": {
+      "git_blob_sha1": "dd176ca10f4cf5c1ee269b339f6156016fe4a509",
+      "sha256": "60960320a4e37f31f95dadf1d63c5badad4851243e34b8995c214c39c64320f3"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0069-M3Progress.java.txt": {
+      "git_blob_sha1": "933d4b2134ec59eeace722c13b1ae8b369e31fe3",
+      "sha256": "28818ae132655e930f5347f6aa53433e57d5f57836358e1e9a5370289dea73c6"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0070-M3ProgressCalculations.java.txt": {
+      "git_blob_sha1": "5e16c6c86d645616f23ef6260c0b4c6a851ecdaa",
+      "sha256": "6df6d1b10eb0c2c9465357155518093bd322a2cd4c1b667d61403a6a599ca354"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0071-M3ProgressChild.java.txt": {
+      "git_blob_sha1": "312ecd05a002c923bb6eeb43192bd14e4cb22ab1",
+      "sha256": "28d62e89796e60805e9e46f8dfa7ea5bb038e99579296f586a164567e09bf9ec"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0072-M3ProgressMonitor.java.txt": {
+      "git_blob_sha1": "41ae56507e3bcb307c8a5460645626d29e2e3aae",
+      "sha256": "9dec6ae3ca9968785d3f8e47a209abe3e09fa5e62798243bfe0fc9708e2087a2"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0073-M3ProgressSnapshot.java.txt": {
+      "git_blob_sha1": "53e20e20ec7ec65c93252b84a2bb39282bfe800a",
+      "sha256": "5deca622172f899f1f6484b3bdc831747227d8c80590ef42422158f2722d7710"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0074-M3ProgressState.java.txt": {
+      "git_blob_sha1": "9731dcce6dfc603feb05707b0526256b8e3e7e02",
+      "sha256": "d529b5f4834a1ac3b0afc7ff0bf4ddd4f39999c9da42049c24c845e4c2d852cb"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0075-M3TextFacts.java.txt": {
+      "git_blob_sha1": "48dd5008676dcd69ccbe586b701268b14fc1eeba",
+      "sha256": "b159bfeba6db1c6132537bd60c1c4918d652a3094a076b3edd37ac434bcf6147"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0076-M3TextMetrics.java.txt": {
+      "git_blob_sha1": "0ab5eec9223d379fe21fbe3d9614d5571ce62501",
+      "sha256": "1b1507dad30f90e6c6ba4822388e57cda52e42e86ce31d7727b94c4d3eb0f81e"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0077-MappedM3File.java.txt": {
+      "git_blob_sha1": "0744079789f292b6b50f78b9a3d3872de6235d53",
+      "sha256": "c3b6d79eb17b38a7f22d5a0e1a2451323115f8c396c2d6a96bddd55d4bf0ac6c"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0078-M3JsonStructuralIndex.java.txt": {
+      "git_blob_sha1": "10ebf3f91e35063ec9a1c3fdd6d0e601c6eaccb4",
+      "sha256": "387060daf4fe5efb1593563abfb910a6b48e75562a188c210fa012bf8d266cc5"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0079-module-info.java.txt": {
+      "git_blob_sha1": "fe643da6d40056b42f7a61bcac5ce1767405fab5",
+      "sha256": "666eab9e594255f227064ae1ddaf26b572ed5456e2c4f59dcd9294c3bf5d7690"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0080-M3ModuleDescriptorApply.java.txt": {
+      "git_blob_sha1": "f291bedcb4be3f890d9361fec4d7265e84518def",
+      "sha256": "dabeb8bcc46f768d6cb07b458216cbddd7cac1e68cd3f47a024bd975c67e4501"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0081-M3ModuleDescriptorRecipeTest.java.txt": {
+      "git_blob_sha1": "6a2e25b6a7387538bad0d3786dcb24e38c513e61",
+      "sha256": "11bee86696d328ec7ade96c84d60fdc64617cedfd8e5bdc326906f287e05b34f"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0082-M3FileAlgorithmTest.java.txt": {
+      "git_blob_sha1": "c131e41454a207923154f1757aae78b26b3a6e18",
+      "sha256": "46adc42cc548c0029295275ef478107d9a928cfc7f727389e312451a817c953a"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0083-M3FileByteFactsPrimitiveSnapshotProof.java.txt": {
+      "git_blob_sha1": "6d3ce1c6bfb286763ffc77623adf878fa8941989",
+      "sha256": "bcaa39d1423b3cf2c3323bb9b70f2137bb9e25b7c6a9f236edffd4b19c2a1808"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0084-M3FileCharsetProbe.java.txt": {
+      "git_blob_sha1": "764f9256b339de05f74981fb4a246d314ab52571",
+      "sha256": "71405c535d4e9c3acc589308acec0c8ff19b4d480c516f3b396d888181873bb6"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0085-M3FileDetachedTextViewsProof.java.txt": {
+      "git_blob_sha1": "eb550492df0f6cb15390213b8259ce7a21485de5",
+      "sha256": "69bd4f17b26033df761fec849f035fc33d831c37cd80f5e1ca4ea4e11d5c4eeb"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0086-M3FileEventReaderRehydrateProof.java.txt": {
+      "git_blob_sha1": "f5d956c6fc034dd5ad3dd82b40df605617c893d0",
+      "sha256": "3643bff8420c100fbb38f94a48e1efc725031ae678539f770eda8a37ca171913"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0087-M3FileImageAtomicPublicationProof.java.txt": {
+      "git_blob_sha1": "4457a1d223293674986fc5ffd17e4dc8510ec248",
+      "sha256": "88e5e9c040c6ce970260f036f097cf07a8807102d9034500a79ba2a1208071c7"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0088-M3FileJsonProbe.java.txt": {
+      "git_blob_sha1": "3bdde6c8ccf6a460c628a101bd18d6d2c15dfbbb",
+      "sha256": "4edaa7d9bcf8b91120827b7f6bdb892cf6a50823f6335590d826724735570ab8"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0089-M3FileMappedProjectionSnapshotProof.java.txt": {
+      "git_blob_sha1": "12f4bfb8dbf3620ac49f23bc4bc1e0fe4f3e4826",
+      "sha256": "f7cab11b2e6543406ad6043e03b39836473f1e4a05275de846adcc9ba51a4ab0"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0090-M3FileMappedSourceFactsProof.java.txt": {
+      "git_blob_sha1": "1f1c9cf816876c6caa515fc66808e132e45065c4",
+      "sha256": "7f3c17903159d9d551645c16778d19b4418509f7f444b282fcf59f3daaf8066d"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0091-M3FilePortProbe.java.txt": {
+      "git_blob_sha1": "13f1af723ab7ace41741039a4f64659ae5796020",
+      "sha256": "ac08fec4229bf1028f86d9fb87622e37174513cd8549f9a51a950ebb62bcbb10"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0092-M3FileProbeAssertions.java.txt": {
+      "git_blob_sha1": "3cdb1c9b374b7839cb4f444689c86ca9b4462dc8",
+      "sha256": "ec0e2707d251b19c20a6a1c2375e24b38adab95838d50c0a76650be0dbdfe41e"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0093-M3FileRollingPrecomputeProof.java.txt": {
+      "git_blob_sha1": "80ffee989ee1633a9cc778a04461da9d038c371f",
+      "sha256": "d80b18d58bd26aa1bfb02c0dc8ba7fe107f264e84769bd6e2908cacd7931b56a"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0094-M3FileSnapshotCodecProof.java.txt": {
+      "git_blob_sha1": "60eaed2eda9bb97e65082c6314cfdfb48fea4676",
+      "sha256": "4463b297b5491f0e8817982bc96d00aa7570a4e5a823d347f6f479e19c5f197b"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0095-M3FileSourceFactsStoreSinglePublicationProof.java.txt": {
+      "git_blob_sha1": "70e8b0d382a897f044d7b6b7d7563674459dde41",
+      "sha256": "de721b35d3b344d027d227515942b27ddfaf0c9bc396d0afc5a8ae8459fabb1a"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0096-M3FileTest.java.txt": {
+      "git_blob_sha1": "46006acf7b1608c73a6ce740f61269a9f148b159",
+      "sha256": "61d81f2149e733f97ee2eb45b468aa781eb47f4992317bcdadd18b1329263250"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0097-M3FileTokenRangeDigestProof.java.txt": {
+      "git_blob_sha1": "ee5838e8704f45aaaaea95ea506641c0cf4d312d",
+      "sha256": "c88cbdec847e8509270d03630520c2b8bca02212ab67bca8a6733cfb1ab072f6"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0098-M3FileUniverseSnapshotImageProof.java.txt": {
+      "git_blob_sha1": "26374391863a6a346eb2bccd2efdb01b70d52e6b",
+      "sha256": "88d3070cdc2c8255d73ef81252ba1f497e6f4ad7f1279d4f2581285e5ca4d549"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0099-M3SourceIndexProbe.java.txt": {
+      "git_blob_sha1": "86c31dd9d879b4e1e4b26be26b19e2a20bb24c57",
+      "sha256": "3e5033d4f4c3455069787095effefa4cc3f112284349c4768fcd89080931f830"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0100-M3LuceneContractProbe.java.txt": {
+      "git_blob_sha1": "f4a1e5f4f792837a57cadfc74bd234407126a57e",
+      "sha256": "99a58ff9f8a55f6d47139584ec57e870900ba8f58e59a8786e8b0744e4cae189"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0101-M3ReaderBaselineCheck.java.txt": {
+      "git_blob_sha1": "ba7c8d55027ca821f7d3d5a42362dc01b4fe4f9c",
+      "sha256": "60bffbe8962dc9786b4938fdfea9dd896d112bebcc941d6f782764f7f3d7ce5f"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0102-M3ReaderCompatibilityProbe.java.txt": {
+      "git_blob_sha1": "ec91d501de577e71f3d875056982df211494944c",
+      "sha256": "ba08e2a72c85f5f547d8362300e748dcead0441650f2c92ca3418ac2c3f7f35f"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0103-M3TextReadersCheck.java.txt": {
+      "git_blob_sha1": "a7e957262bb34d4704e78eb7bd690c5815a2c806",
+      "sha256": "18d08c1719adca20889b3668ee7e43ac4d4867667f4cf713695328ea1e0627b4"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0104-OpenNlpM3Probe.java.txt": {
+      "git_blob_sha1": "3e67c55bcf0c88be9aa928d3c67d8aead76b012a",
+      "sha256": "37e41dd3f75e122ee3698c2ce9e276e757c372b7dffa8742ef823f40d4e871a4"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0105-RemoveRecordedModuleHashes.java.txt": {
+      "git_blob_sha1": "d10abfba2ef7611a531399efb0a02364d88c7c4d",
+      "sha256": "a9cc9cdc39201e53c56befbcb4548b2a437719f2ca3945d1db2ce29e0a5c3783"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0106-module-info.java.txt": {
+      "git_blob_sha1": "020e5315e22fd15a3cab881a1e89db44a5204afc",
+      "sha256": "e821a724c7e3f25c49dfc06d9809742650b9c0e45987d456688f1b2bc8f7c0c9"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0107-M3SourceIndex.java.txt": {
+      "git_blob_sha1": "627727a3f467a98037007f869b309a7fd83a2d40",
+      "sha256": "47e3083aca86032e172618e80c2ac2053a76af5c55758b65ed6e0ae76ffece30"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0108-M3NlpSearchIntegrationTest.java.txt": {
+      "git_blob_sha1": "89b2590a4ffd0654bfbfbc987d6b07d73bd78caf",
+      "sha256": "04f63847360b295e62c7b4c0176e0926911cf1a313a28ab17e4031bb0de7fa6e"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0109-CharArrayMap.java.txt": {
+      "git_blob_sha1": "718f60f1a4159ac130326835e3ff23a91865d74d",
+      "sha256": "8b8ca85def4bb9c48a49e531e8edbd8d14f77dc05d6a1a54d829e714657c1fdb"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0110-M3TextReaders.java.txt": {
+      "git_blob_sha1": "5368641c7bb8f724437a769fbf36bd6abc287662",
+      "sha256": "4c2e5843829487c5be8163fa0817178b8887a1c4199e9b382c88bc726c01daf0"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0111-ReusableStringReader.java.txt": {
+      "git_blob_sha1": "dc451fbd6de2a47317bb883425637410a8c55e90",
+      "sha256": "76378fdbded3a1e0ef33775add5f9e9c6c764de9703f048bb4e3e3883d82a53f"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0112-BertNormalization.java.txt": {
+      "git_blob_sha1": "e970d85da81b44c2266cb12a3261b57cc503c9da",
+      "sha256": "606e52bcc9a5c9c100388b73bdac1bb0f1ac42f59fffb04258676aebe262e392"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0113-M3Tokenizers.java.txt": {
+      "git_blob_sha1": "f83cda0ff7da665b4ee2cb1a6cbaab1b07fae397",
+      "sha256": "de3823ba8f4a53a7a628e8532d557e3af04a4a852b0302518cc4603ed2fae8c5"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0114-MappedText.java.txt": {
+      "git_blob_sha1": "62b0ba91ff7fe47bd8878579fb86e273e7afab8f",
+      "sha256": "8cc4e34a9ed60040cb38fb60753b274812190b65392f61c107a4aba8538a2a3e"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0115-SimpleTokenizer.java.txt": {
+      "git_blob_sha1": "02d170a9f165bc7d5b5f08ff0d9a3e4d9d50961e",
+      "sha256": "ef86045b9fd965accd9140e95ce67f96e6f8e88b9d2cc968d9806d9691ca7890"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0116-SubwordPiece.java.txt": {
+      "git_blob_sha1": "4ffefa6e47c2920ba2c7e127a75c3a32321a3e49",
+      "sha256": "ade91a596849ab24c7e07b8e604c0d572f5e4439794a823a24b56559a9dde089"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0117-SubwordTokenizer.java.txt": {
+      "git_blob_sha1": "2ef3b0634785eab97908008aae36764b43b1b6e4",
+      "sha256": "c50cf2a12a86bb593d400fc1b712be98fa69fca17242f8cfdae2b1433f5b47c8"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0118-WordpieceChecks.java.txt": {
+      "git_blob_sha1": "e24b67bbe6ec5ae493849357ff0bccbb45f9bdd0",
+      "sha256": "5863d81247faa1f77cb7e2c920ade78f37aa60cfc4a6ee03a77a0bd815b01572"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0119-WordpieceEncoder.java.txt": {
+      "git_blob_sha1": "ca877e04a1f1fd50b0c5a5fd0d54d178f649df30",
+      "sha256": "a4bde6e011c346eed7a175de7071efe3d4999d450a182eb20503a092419555da"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/before-0080-M3ModuleDescriptorApply.java.txt": {
+      "git_blob_sha1": "0c35f76c65cb009bfda0a7594a79005b457767b4",
+      "sha256": "6927291e8629b7de0ffebfb51ddad4f9da3b371b0536574230383aef17124baf"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/before-0081-M3ModuleDescriptorRecipeTest.java.txt": {
+      "git_blob_sha1": "a84e9add5ad5dcc30800c707e918a2593cc70cdb",
+      "sha256": "62f1bc378a968495b7c0249e122272d7a5e19524c31f08876ae6c91770c709f5"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/manifest.tsv": {
+      "git_blob_sha1": "87cd9db97b6f98d66c64645237635687ce7a33e9",
+      "sha256": "bb80f7c9918ee159b837dde21fefcc7ae6d51936780f5427ae92921d86174313"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0000-m3sdk-jmod-receiver.yml.txt": {
+      "git_blob_sha1": "a851288903ef6c573df13e1387ed3cbec41332d9",
+      "sha256": "796ada46f86d5a11b9eaf6904f0fd3a2b3e472991bad9ba69cf1b9b683906485"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0001-m3-file-nlp-search.json.txt": {
+      "git_blob_sha1": "e31cbff39f816b4429cace2ebbbb416bf86e74ec",
+      "sha256": "ac74fd38d51dbd2e83804871a692125e415328a7538b82434bcd1b7a68fac4b4"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0002-name-mapping.json.txt": {
+      "git_blob_sha1": "406e95b080d340c55155da5cc9b609dd8ccf9df9",
+      "sha256": "a49d904b9afc464b4ab85420c0033d0708bd14354abf44773d872a4706e0f82d"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0003-m3_file_jni.c.txt": {
+      "git_blob_sha1": "1aa4a67ec68c2be94b8aa66281eae9e4803a9fb7",
+      "sha256": "07f00a28d052687edbe90165f0090da8cf1ba1011e7f93364c588b2b9322479a"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0004-m3_json_signal_jni.c.txt": {
+      "git_blob_sha1": "38e502aacbd78ba66125d5a76a1aa1cf4b2af79c",
+      "sha256": "5e15872f9ab3c7c7d2ea41e9a67b6fe9c5cfd1dda6387adc3ab6e372d6409697"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0005-m3_text_metrics_jni.c.txt": {
+      "git_blob_sha1": "12ee28e535bf2e5ce6803d8dc708f049ee11783a",
+      "sha256": "00e4d58f4af904f9f5087929d66ba417f787a1c505579b3a90efbdd4361d70ce"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0006-COMPILER_SOURCES.json.txt": {
+      "git_blob_sha1": "d16dec67c33b259d8ecbb5e08704f43faa0aa13e",
+      "sha256": "d9ac52fc679a266035f1a84c7f15f9db067d2cfeb2808506b25dec301d609749"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0007-COMPLETE_SOURCE_INVENTORY.json.txt": {
+      "git_blob_sha1": "c77df108c67a2fb66ab4a50b6a265e6234a3ae34",
+      "sha256": "f077962ce7abe6aec7bf34e14736c1266429b18a911b147db32b73e8c904051e"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0008-FILE_API_PARITY.json.txt": {
+      "git_blob_sha1": "32b37340a430d9fc6c65dcaca4ef7a25758339e4",
+      "sha256": "8295009993e55feeb7f1b8173018e5a21b1815fc409dabec04e042d30e3ca711"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0009-FILE_PORT_MAP.json.txt": {
+      "git_blob_sha1": "df42758caebc63e1d59154fe119a2d015546c296",
+      "sha256": "e3eb2199e6e6a045043534bbc9471feb1837c78c7edd0e62bd0675e64d07865d"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0010-FILE_PROBES.json.txt": {
+      "git_blob_sha1": "d7b2cf5583bf7d3fe9dc3313876d2a1ca8a439ea",
+      "sha256": "d88b15fbc98c25b1a3ca70e6611abdf1641151672ad5522de5b92593e407c06a"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0011-FRONTEND_PROBES.json.txt": {
+      "git_blob_sha1": "d01660d8771619a8145e049c7a3fe30c87020568",
+      "sha256": "adfba62f416c84f9d74ec533e53954c73ad110333780d5ba3aa0afbea329a06e"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0012-FRONTEND_PROVENANCE.json.txt": {
+      "git_blob_sha1": "51ff3739f1784a70d524123e2a4a1685678b0448",
+      "sha256": "24b33550f4de2028900c63740ecf5e3bb582ea517bb640e58cb6cb124944d24a"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0013-INPUTS.json.txt": {
+      "git_blob_sha1": "6e25f2e3830e2179ef1e44b22b48e8cd5b359abf",
+      "sha256": "663ac5691243bc9e17f05f244730027cdd24472bec9727505d2571def4f33879"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0014-JSON_CLOSURE_PROVENANCE.json.txt": {
+      "git_blob_sha1": "075a99c8120f349fc90998b20b219546e144ba36",
+      "sha256": "ec720b682f1e459763c85b93577c7897449d0558191fee8652931ea30dfd9da5"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0015-LICENSE.txt.txt": {
+      "git_blob_sha1": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0016-LUCENE_PROVENANCE.json.txt": {
+      "git_blob_sha1": "40a66b9970fc1082668b631759ad55614a756b14",
+      "sha256": "f4e39191726c753d006b463eab50ec0b243cd7aa2c26167a143608e17d33476a"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0017-NATIVE_MAPPED_PROVENANCE.json.txt": {
+      "git_blob_sha1": "839eb98c99bd4d65c3af519dc104d9fa88344e52",
+      "sha256": "2a4412de9bc0ae088ca4df059c7175db22484545ee2b5712e3a59bd92e078d5c"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0018-NOTICE.txt.txt": {
+      "git_blob_sha1": "f8716de469446ffc8e16f76dee3006f5fb946347",
+      "sha256": "9173bdddfa84d5730ad33adac20a1fbbdc92bc37182ff69588a9cbdc19e8e7c7"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0019-OPENNLP_PROVENANCE.json.txt": {
+      "git_blob_sha1": "c5ce6854c46fd21721fa8b6ffd85e49fbe04c0e6",
+      "sha256": "751265f4507ace1c4cbc52b482bc1741e40710ab5df719a4e647239dc37ba3e8"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0020-README.md.txt": {
+      "git_blob_sha1": "a085daa272560439289da9b42c1fb41c5de30a4a",
+      "sha256": "39482b29b6b9599aeb10f21b73fa1ce8a3c12743fb0d791167ed4dd75b5cd30c"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0021-SOURCE_REF.json.txt": {
+      "git_blob_sha1": "80267e3b73591904df4c8d386c79740d785cc2ff",
+      "sha256": "d5bb2bbc2ddd121814cd2b69caba6c88b0aa01578d3da39f34fd20890717efcf"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0022-build.py.txt": {
+      "git_blob_sha1": "b678f5f1b29e2daea3f5591bb9620416008ae434",
+      "sha256": "6fa229598b91f78d5b98c89872bd274ee596659c5c7b42def8f63dcdf2e34934"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0023-compiler_source_proof.py.txt": {
+      "git_blob_sha1": "2bac037f316c0c16f2c05311731b2a5a3d90936d",
+      "sha256": "a52331c73f625eb4f1c1cffd1ccbe13979826b045b3638096786dd7d07d19250"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/0024-OVERLAY_LOCK.json.txt": {
+      "git_blob_sha1": "47034c05eacd1094e19a18baf2fe318128fc4c63",
+      "sha256": "b6ec8e64969bc10157b6a868d1a8da5c12d61bb211878922fe56881c1daee032"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0000-m3sdk-jmod-receiver.yml.txt": {
+      "git_blob_sha1": "0d6f194a3d07f74f7b0bd924f36b2a2d4515382b",
+      "sha256": "b283a9734172305e2375c4961b4fdf0d34161801d19141d2e735115d17e340e0"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0002-name-mapping.json.txt": {
+      "git_blob_sha1": "4f5911d625090913d85f9cf41b1ead1694dffade",
+      "sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0020-README.md.txt": {
+      "git_blob_sha1": "8e32d4e658e999d755101bf74045fe6193ec68d8",
+      "sha256": "0c27021d845e113c8777f9d1d1f73ec03d3498b4fd6148a64024556563de3e28"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0021-SOURCE_REF.json.txt": {
+      "git_blob_sha1": "37827c8f3093c39a14043cc1673ce1dad050ee3c",
+      "sha256": "5518e71f8195caeae914d0a001846b4087ce2c22811b9ad786e87efd1184134a"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0022-build.py.txt": {
+      "git_blob_sha1": "4e4f0b1ef923c71bba8340936874e9bb2e7183c8",
+      "sha256": "e4564fd658e935fcc6d96aa009b36011c3b5345ed38cdbfd11b69ecef9618c82"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/before-0024-OVERLAY_LOCK.json.txt": {
+      "git_blob_sha1": "3db790232c6805f437c1a98da23db43c6be54ab2",
+      "sha256": "e4d3accbdc8d41c47495905da6329b1aadc082fd0a24d4e154c6d95a2a84965d"
+    },
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-nlp-search-integration-20261018/manifest.tsv": {
+      "git_blob_sha1": "26760f0e2fb4de392f6a367e11664511de89d92d",
+      "sha256": "81672ad528821d82e7ea8570b7725e92656f9593dba9a79d7adaa98bc7fb2431"
+    }
+  },
+  "verifier_derivation": {
+    "base_source": {
+      "canonical_path": "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/verify_sdk_receiver.py.txt",
+      "git_blob_sha1": "926455a0e3248da5e3c45ff74b634b5b1208b107",
+      "sha256": "f1fc59dfa97660cdc52f61fa247f8587c489a6dc0ad6cda92c1f41249986ff34"
+    },
+    "new_successors": {
+      "m3/tooling/jmod-recipes/src/main/java/com/m3/rewrite/jmod/M3ModuleDescriptorApply.java": {
+        "canonical_commit": "c4ae7e361c9253aaced47e843549a06e505d924d",
+        "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0080-M3ModuleDescriptorApply.java.txt",
+        "git_blob": "f291bedcb4be3f890d9361fec4d7265e84518def",
+        "predecessor_git_blob": "0c35f76c65cb009bfda0a7594a79005b457767b4"
+      },
+      "m3/tooling/jmod-recipes/src/test/java/com/m3/rewrite/jmod/M3ModuleDescriptorRecipeTest.java": {
+        "canonical_commit": "c4ae7e361c9253aaced47e843549a06e505d924d",
+        "canonical_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-nlp-search-integration-20261018/0081-M3ModuleDescriptorRecipeTest.java.txt",
+        "git_blob": "6a2e25b6a7387538bad0d3786dcb24e38c513e61",
+        "predecessor_git_blob": "a84e9add5ad5dcc30800c707e918a2593cc70cdb"
+      }
+    },
+    "preservation": "Relative to the recorded A base_source, only SUCCESSORS and SUCCESSOR_COMMITS receive two new literal entries; existing entries, previous packager successor, fallback commit and verifier body are unchanged. The receiver also acquires A's already-qualified packager mapping and ancestry fields. Its 52-row ledger is never rewritten.",
+    "tests_source": {
+      "canonical_path": "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018/candidates/control/test_verify_sdk_receiver.py.txt",
+      "git_blob_sha1": "9e996dba7f7ab308cbe6c02504a4060ced7fba75",
+      "sha256": "3861e52f0712f388eb7a0e9bce142347dddfe74a50afbc7b701fbee253f97e45"
+    }
+  }
+}

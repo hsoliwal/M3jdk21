@@ -1,0 +1,25 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "mappings": [
+    {
+      "source": "Synexia canonical recipe com.synexia.m3jdk.EclipseStructures20261021.collections; existing M3JDK21 PR1603 first-party sorted overrides",
+      "target": "com.m3.collections.M3FilteredViews; com.m3.collections.M3MutableFilteredViews",
+      "module": "m3/collections",
+      "status": "Scoped collection proving-ground source refinement; actual receiver and target evidence attached by the canonical recipe packet",
+      "recipe": "com.synexia.m3jdk.EclipseStructures20261021.collections",
+      "target_rule": "Preserve live owner identity, provider names, successful predicate/comparator/cursor traces and private storage. Separate range creation from cursor creation so cursor IAE retains its identity. Reuse strict read-only sorted/reverse methods without replacing current split ordering. Comparator IAE during range construction remains outside this repair.",
+      "license": "Copyright 2026 Hitesh Soliwal and contributors; Apache-2.0 independent m3 module; OpenJDK rights unchanged",
+      "gates": "Exact source hashes, real OpenRewrite SDK refusal/fixed-point, Java21 behavior and descriptors, original collection Maven suite, actual target receiving. Whole integrated image, all provider families and global String-first stage promotion remain separate."
+    },
+    {
+      "source": "Existing M3SignalOrder Java/JNI histogram and row planes; Apache Spark RadixSort@7fe2f5ed8f5052ffb417e3e9bc69e37a73684fea uniform-byte concept only",
+      "target": "com.m3.collections.M3SignalOrder; Java_com_m3_collections_M3SignalOrderNative_sort0",
+      "module": "m3/collections",
+      "status": "Scoped stable primitive ordering refinement; unchanged public owner and native symbol",
+      "recipe": "com.synexia.m3jdk.EclipseStructures20261021.collections",
+      "target_rule": "Skip histogram-proven uniform-byte identity passes. Java restores caller lanes after odd active-pass parity; JNI exports its existing current buffers. Retain allocation schedule, key/mask projection, stable row association and GC-traced source ownership. No Unsafe donor body, retained per-entry store or new native symbol.",
+      "license": "Copyright 2026 Hitesh Soliwal and contributors; Apache-2.0 first-party implementation; Spark source is evidence only",
+      "gates": "All256 active-byte subsets, special double values and masks, checked JNI, UBSan, generated header/export equality, original Maven suite and recorded CPU/allocation/process measurements. Native allocation-failure injection, other platforms and installed SDK image remain separate."
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "schema": "m3-catalogue-text-packaging-correction/v1",
+  "status": "CORRECTED_DELIVERY_CANDIDATES_PENDING_ACTUAL_SDK",
+  "rejected_dataset": "m3jdk21-wrap-catalog-20261018",
+  "failed_targets": 314,
+  "original_acceptance_freeze_sha256": "667d1f0d7db87012b8a2d6b994dd86325bd45b493305050b2211b8cc0ed29448",
+  "actual_sdk_result": {
+    "status": "BUILD_FAILURE",
+    "tests": 5,
+    "failures": 0,
+    "errors": 4,
+    "skipped": 0,
+    "exception": "java.lang.IllegalStateException: invalid hash-pinned text manifest row",
+    "observed_stage": "textPath admission before target-count check",
+    "post_sdk_sealer_receiver_goals": "NOT_EXECUTED"
+  },
+  "observed_cause": "Metadata .log, .args and .h delivery paths are outside the unchanged structured-text suffix domain; metadata headers are not native-source-root targets.",
+  "source_inspected_additional_limit": {
+    "maximum_targets_per_text_recipe": 256,
+    "previous_target_count": 314,
+    "classification": "SOURCE_INSPECTED_NOT_AN_OBSERVED_SECOND_EXECUTION_FAILURE",
+    "reason": "The actual v1 run refused a manifest row before reaching the unchanged target-count guard."
+  },
+  "engine_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+  "engine_sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
+  "allowed_structured_suffixes": [
+    ".py",
+    ".sh",
+    ".json",
+    ".md",
+    ".txt",
+    ".tsv",
+    ".yml",
+    ".yaml",
+    ".xml",
+    ".properties",
+    ".gradle",
+    ".gradle.kts"
+  ],
+  "renamed_delivery_paths": 161,
+  "runtime_source_edits": 0,
+  "engine_harness_edits": 0,
+  "source_manifest_sha256_unchanged": "90ec8c484c8ca68f1381133a0979ef88f4975dd4c46ced480db7a87d21b0a98e",
+  "runtime_receipt_sha256_unchanged": "bf9bbd87748c76d0b2da931bc1246114eea49118e5b2ecc3cd5d2bf19aedc568",
+  "corrected_datasets": [
+    "m3jdk21-wrap-evidence-20261018",
+    "m3jdk21-wrap-catalog2-20261018"
+  ],
+  "partition_rule": "runtime-proof/ paths go to wrap-evidence; all remaining catalogue paths go to wrap-catalog2",
+  "partition_manifest": "DELIVERY_PARTITIONS.json",
+  "path_mapping": "DELIVERY_PATHS.json",
+  "failure_evidence": [
+    {
+      "delivered_path": "history/catalogue-delivery-v1/ACCEPTANCE_FREEZE.json",
+      "sha256": "667d1f0d7db87012b8a2d6b994dd86325bd45b493305050b2211b8cc0ed29448",
+      "origin": "audit/collections-navigation-correction/final/CATALOGUE_ACCEPTANCE_FREEZE.json"
+    },
+    {
+      "delivered_path": "history/catalogue-delivery-v1/SEAL_RECEIPT.json",
+      "sha256": "45e2340c971c625851f489efa61570f4e192467fb746760ff73febe8a613c782",
+      "origin": "qualification/wrappers/catalogue-seal.json"
+    },
+    {
+      "delivered_path": "history/catalogue-delivery-v1/SDK_MAVEN.log.txt",
+      "sha256": "1a46228e2458621f1e21a3cdd0d962cb90f257741a91bceff482ee2a13fa89ad",
+      "origin": "qualification/wrappers/catalogue-recipe-maven.log"
+    },
+    {
+      "delivered_path": "history/catalogue-delivery-v1/SDK_FAILURE.xml",
+      "sha256": "9db18d4a54629dfd97e5c46322c02472dcb99ef83898da843485aac0d89df723",
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrap-catalog-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+    },
+    {
+      "delivered_path": "history/catalogue-delivery-v1/DATASET.json",
+      "sha256": "2de631902ebb47ac2eec1afc1a0a58ebf206dd02ef2889e44856838684796212",
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/DATASET.json"
+    },
+    {
+      "delivered_path": "history/catalogue-delivery-v1/MODES.tsv",
+      "sha256": "adfb16bf09dcd3b6ffc3a9c3a5a5c2f5891724ccab0d16bf7534eacf15d2b168",
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/MODES.tsv"
+    },
+    {
+      "delivered_path": "history/catalogue-delivery-v1/ENGINE_EFFECTIVE.tsv",
+      "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/ENGINE_EFFECTIVE.tsv"
+    },
+    {
+      "delivered_path": "history/catalogue-delivery-v1/manifest.tsv",
+      "sha256": "575fa6a49a303e7ebbf0c7800776641286cb67c70b2bc86e52db09c540131017",
+      "origin": "com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-wrap-catalog-20261018/manifest.tsv"
+    }
+  ],
+  "unchanged_failed_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-wrap-catalog-20261018",
+  "previous_payload_reconstruction": "history/catalogue-delivery-v1/V1_PAYLOAD_MAPPING.json",
+  "next_authority": "Parent must seal and run both existing TEXT datasets serially; static packaging admission is not an SDK qualification pass.",
+  "immutable_evidence_payload_edits": 0,
+  "current_authored_summary_reference_updates": true
+}

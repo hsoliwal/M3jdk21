@@ -1,0 +1,25 @@
+{
+  "source": {
+    "number": 9285,
+    "url": "https://github.com/hsoliwal/com.synexia/pull/9285",
+    "state": "open",
+    "draft": true,
+    "head": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+    "base": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+    "mergeable": false,
+    "mergeable_state": "dirty",
+    "changed_files": 1058
+  },
+  "prior_receiving": {
+    "number": 139,
+    "url": "https://github.com/hsoliwal/M3jdk21/pull/139",
+    "state": "closed",
+    "merged": true,
+    "merged_at": "2026-10-05T10:43:48Z",
+    "merge_commit_sha": "8131f535300c005afd27443d0281ede11198522f",
+    "head": "df06cdee5a8526f573b3ad89622824d0b49e2f25",
+    "base": "fc6dedcb84e8eb9f95689d4e9ff9d1614775b529"
+  },
+  "successor_branch": "aix/jcc-source-final-handoff-20261005",
+  "source_qualification_unchanged": true
+}

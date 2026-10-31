@@ -1,0 +1,10 @@
+da785c7f8ee7da67797e3c591d70e388564d460a933fd47fa93d17959255e957  m3/tooling/migration-recipes/tasks/map-facts/inputs.sha256
+8170d024277ab990e709bec1be2e404c1c71d1bd071adccad510335d6b0a1b55  m3/tooling/migration-recipes/tasks/map-facts/verify.sh
+1e7edb5b44096e7e62d5d73f0d28e30e9f573c02cbebd46117af6bc65c199407  m3/tooling/migration-recipes/tasks/map-guard/verify.sh
+293c1662b7f59f9b80d9a3d5d811b53edc8a372e09ea1e64d17eec9e5c30ca07  m3/tooling/migration-recipes/tasks/map-utf/verify.sh
+323bca7d4452e3e58f5c5941b586c33825becc2593b853b51df86db9d820e25b  src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java
+880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f  src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java
+95916a7687bf3dcf2bb39a7d0859a023d0796b58a3ac25318e6a813595f531b0  test/jdk/java/lang/String/MIndexMappedStringBackingTest.java
+c5d856acc3fa5b7b636894d1dd18b087c1d8e1a450fcbef0821e87b969d185c2  test/jdk/java/lang/String/MapFactsTest.java
+620e1ccd61d9f8675a18ce74eb307b5a02f75fad6c535e17e42661ef3409185a  test/jdk/java/lang/String/MapGuardTest.java
+56df66547663793a8eeec761480fbd9c7cffa441a3db70b3ae9aa700cb28e051  test/jdk/java/lang/String/MapUtfTest.java

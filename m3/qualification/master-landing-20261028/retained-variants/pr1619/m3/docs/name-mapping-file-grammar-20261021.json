@@ -1,0 +1,15 @@
+{
+  "status": "CANDIDATE_HOLD_NOT_ADMITTED",
+  "productBase": "d7b9e65241b717a387b25234df4cf21531f07d9f",
+  "canonicalRecipe": "com.synexia.m3.FileGrammar20261021",
+  "canonicalRevision": "3dacf226b2026cb5bc033311b811d192a855b5f3",
+  "globalReceivingPhaseAdvanced": false,
+  "mappingDisposition": "Scoped candidate fragment; canonical aggregate mapping admission remains pending actual SDK/product gates.",
+  "entries": [
+    {"capability":"single-read structural paragraphs","target":"com.m3.file.M3Grammar","owner":"m3/file","mode":"INDEPENDENT_APACHE_MODULE","status":"COMPONENT_TESTED_SDK_NOT_RUN"},
+    {"capability":"immutable paragraph offset/index/mask views","target":"com.m3.file.M3Paragraphs","owner":"m3/file","mode":"INDEPENDENT_APACHE_MODULE","status":"COMPONENT_TESTED_SDK_NOT_RUN"},
+    {"capability":"bounded parallel admission","target":"com.m3.file.M3FileTaskWindow","owner":"m3/file","mode":"INDEPENDENT_APACHE_MODULE","status":"COMPONENT_TESTED_FULL_OWNER_NOT_RUN"},
+    {"capability":"cancelled task lifetime accounting","target":"java.util.concurrent.ThreadPerTaskExecutor","donor":"openjdk/jdk@af3f5d852e5dd0191548bdc477546b5b343d1276","mode":"TARGET_OWNED_PORT","license":"GPL-2.0-only WITH Classpath-exception-2.0","status":"COMPONENT_TESTED_FULL_IMAGE_NOT_RUN"},
+    {"capability":"JNI mask selection","target":"jdk.internal.m3.M3IndexMaskWindow","action":"REUSE_UNCHANGED","status":"FINITE_NATIVE_PARITY_TESTED_FULL_IMAGE_NOT_RUN"}
+  ]
+}

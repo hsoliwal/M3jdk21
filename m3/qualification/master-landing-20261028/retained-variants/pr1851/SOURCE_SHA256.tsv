@@ -1,0 +1,7 @@
+path	sha256	git_blob	mode	pr	note
+m3/fs/qualification/reusable-range-scratch-20261022/GATES.tsv	88e257d48e9bdb864a9e5f220db6a71519bcdeef18bd20cda40dce1eca5a3744	b12943b5bea5cb09e3491f926468fa3809ce3d1d	100644	1851	PR version, not live
+m3/fs/qualification/reusable-range-scratch-20261022/README.md	5bcfecf71349742aec0f76ffe35c18458387aacf68d737924d7836aa1f124028	584cf41034b6bf35cec5236cc0a39d822bd93e98	100644	1851	PR version, not live
+m3/fs/qualification/reusable-range-scratch-20261022/RECEIVED_DONORS.tsv	6d35ff8a023ad26ba098bb60e563fb8840dec75c1827b6a110296fe3f3df39ba	ac332486333e2f61a8f3235e4dd68d84d589a0c3	100644	1851	PR version, not live
+m3/fs/qualification/reusable-range-scratch-20261022/verify_received_blobs.py	8fa93844bdbae2c8c47638a7b2b2a01d30978a0fb85056f94f18f11a22e9845b	cd2324e3488dbbb75920f2eaf9d33c7f578e56dc	100644	1851	PR version, not live
+m3/fs/src/main/java/com/m3/fs/MFileStreams.java	f7d19ae443a31c1ea5c6b7ba44457cea3dc178a86fe526eb37e800a76f0209c4	025129c5bf53611d178ea0335ea90bc793fd0d4c	100644	1851	PR version, not live
+m3/fs/src/test/java/com/m3/fs/MFileRangeTransferTest.java	37c236277bc3585cc5904799b693357c2dbb181086cc1c278586a104997cdac0	e26ef472657cdfafc2e70ab6bcb4c6c753f248c1	100644	1851	PR version, not live

@@ -1,0 +1,709 @@
+{
+  "scope": "selected-source M3JDK21 receiving subset stacked on native PR #1642",
+  "repository": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository",
+  "base_revision": "6d9bad615851f346e3062e3034ccd74cbe2776af",
+  "source_ancestor_revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+  "recipe_proof_sha256": "688e24e3c80dfa2ea64bc6cfbb952291b3eeb5898a3cd8a6e20d2565513cecfe",
+  "receiver_root": "759d990c9a943e42e9cb399ccd92b4a13ddc3feee07ba462b3645f0d5ad81ae6",
+  "driver_sha256": "75e18f05c9bd4c5073ef4620bc2dad03f59a52a4dc789b1e82bea7a308b82a77",
+  "copier_sha256": "ffbe6545ed75a96a534814ab6c6705a79be555aec28bf97f9db5dbf038c88720",
+  "preimage_custody_sha256": "174d90a5c27a6478c9dc703386b9cc159a7021b6fba68900437e84d0d59d918e",
+  "qualification_manifest_sha256": "f97d250bc8a2eda0e46808935ce56ee200344a175ac44d0e1532e7c88b9a0112",
+  "external_fixture": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/tests/M3FilteredRangeFailureContract.java",
+  "launcher": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/verification/collections/ReceivingJUnitRunner.java",
+  "compiled_product_source_paths": [
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+    "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+    "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+    "m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationContract.java",
+    "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java",
+    "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java",
+    "m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomContract.java",
+    "m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomTest.java"
+  ],
+  "excluded_native_source_paths": [
+    "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+    "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+    "m3/collections/src/test/java/com/m3/collections/M3IndexMaskRangeNativeTest.java",
+    "m3/collections/src/test/java/com/m3/collections/M3MaskPositionAtomsTest.java",
+    "m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.java"
+  ],
+  "inputs": [
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/preimage-custody.json",
+      "bytes": 9700,
+      "sha256": "174d90a5c27a6478c9dc703386b9cc159a7021b6fba68900437e84d0d59d918e"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "bytes": 19677,
+      "sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "bytes": 32353,
+      "sha256": "4209587c4cc43537e1ce0d7b316d1824a4de0f25154fef1a87cbe7e9ae9871ea"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "bytes": 18371,
+      "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "bytes": 25720,
+      "sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+      "bytes": 4051,
+      "sha256": "9257ce0c9c95e3afef20624631ba048aa3d60ef53a1189cd2bbabc07da2bba2f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 17359,
+      "sha256": "58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository/m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationContract.java",
+      "bytes": 10127,
+      "sha256": "f37ead5e6647b1f0ec7cf0d0723c2662508d1991bf0c967b298f2be737fd7c8d"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository/m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java",
+      "bytes": 24121,
+      "sha256": "2cde685da95319bca841ae3c95fb73e3ea4776177a78046d96b79033545dfc2d"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository/m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomContract.java",
+      "bytes": 12741,
+      "sha256": "cea097e4b1cf67a3cd2d8fdd4df5f29751db7d767daf785732c350003acede29"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository/m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomTest.java",
+      "bytes": 596,
+      "sha256": "c16fa40bc6768618df372d8d43936f5761d3375c35dfeeb9da15b84dc4fcb44d"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository/m3/collections/src/test/java/com/m3/collections/M3IndexMaskRangeNativeTest.java",
+      "bytes": 6815,
+      "sha256": "01cca6f8506da8120978892182071b2d3be631bebf5011fa112602524c532619"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository/m3/collections/src/test/java/com/m3/collections/M3MaskPositionAtomsTest.java",
+      "bytes": 8624,
+      "sha256": "53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository/m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.java",
+      "bytes": 1830,
+      "sha256": "89c35701322381e4d958bf6344e2357988c4ad97ce1a0dd42a9a3f698a205c7f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/m3-runtime-wrappers/repository/m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java",
+      "bytes": 19318,
+      "sha256": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/toolchains/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+      "bytes": 6806,
+      "sha256": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/toolchains/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar",
+      "bytes": 210956,
+      "sha256": "afff77c186cd317275803872fa5133aa801fd6ac40bd91c78a6cf8009b4b17cc"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/toolchains/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar",
+      "bytes": 244690,
+      "sha256": "b6df35da750a546ae932376f11b3c0df841f0c90c7cb2944cd39adb432886e4b"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/toolchains/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+      "bytes": 106232,
+      "sha256": "b56a5ec000a479df4973b18bba24c98fe0db8faa14c8907d3ef451d8c71fd8ae"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/toolchains/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar",
+      "bytes": 204821,
+      "sha256": "905cba9b4998ccc29d1239085a7fb1fe0e28024d7526152356d810edec0a49a3"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/toolchains/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar",
+      "bytes": 183814,
+      "sha256": "aed4f42fb90ada9b347c231f13656fc09121ba20dab6dc646a6bd9d4da31e4aa"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/continuation/toolchains/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar",
+      "bytes": 14304,
+      "sha256": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/TARGETS.json",
+      "bytes": 1348,
+      "sha256": "4507907e05eb0ce4db04351c9d08a2e644f92639fc502836d4d4114e099aa775"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/apply_receiver.py",
+      "bytes": 9911,
+      "sha256": "ffbe6545ed75a96a534814ab6c6705a79be555aec28bf97f9db5dbf038c88720"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/atom-chains.tsv",
+      "bytes": 259,
+      "sha256": "6859e0617885e9c9714f07dc1de22410a41e7daa8051dc9fb732e44a3434bad3"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/phases.tsv",
+      "bytes": 197,
+      "sha256": "bef3cbd92c3ebdfae1d928c2e6ee5f9334520a0e2d3c354ee84c977379242d54"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/pom.xml",
+      "bytes": 3831,
+      "sha256": "fffe09cfd95b913530a1ed3f581e4ff4c60aaf50ef021ea5ca1249de0d9b2f19"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/preimages/m3-filtered-first-visible-runtime-20261021-map-atom/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "bytes": 32306,
+      "sha256": "51990295a000434ac163eb364b2a24ba691e8bbb127092358e49d1ca60a90374"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/preimages/m3-filtered-first-visible-runtime-20261021-set-atom/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "bytes": 32139,
+      "sha256": "fb1f4da6cbfcaf27385bad58eb810f22b1f8f5577b73bd04fc8c06c871c5035c"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/preimages/m3-filtered-first-visible-runtime-20261021-wrapper-owner/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "bytes": 32139,
+      "sha256": "fb1f4da6cbfcaf27385bad58eb810f22b1f8f5577b73bd04fc8c06c871c5035c"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/FILES.json",
+      "bytes": 13089,
+      "sha256": "f97d250bc8a2eda0e46808935ce56ee200344a175ac44d0e1532e7c88b9a0112"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/INDEPENDENT_REVIEW.json",
+      "bytes": 1038,
+      "sha256": "4cc6d328038cfa4899ce9a3c2bf1bcf4e9f7f68cc822e328d992481bcf37d371"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/INVENTORY.md",
+      "bytes": 3043,
+      "sha256": "029089c80de35df842239ddfb53b9889aabae90909a346d1bbe79b629beda1a3"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/baseline/M3FilteredViews.java",
+      "bytes": 32139,
+      "sha256": "fb1f4da6cbfcaf27385bad58eb810f22b1f8f5577b73bd04fc8c06c871c5035c"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/candidate/M3FilteredViews.java",
+      "bytes": 32353,
+      "sha256": "4209587c4cc43537e1ce0d7b316d1824a4de0f25154fef1a87cbe7e9ae9871ea"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/commands.json",
+      "bytes": 29219,
+      "sha256": "7927c6fc96ac3b30d5840b165846336a482907bb3e0f1feb0bc943926b8ab9bc"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/comparisons.json",
+      "bytes": 14507,
+      "sha256": "ccce91fb5a5c56e4fe9e2775592af96f4a5f3a0bd0f3c22960d3d945c3361a0d"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-api.log",
+      "bytes": 851,
+      "sha256": "0607cca38d4bef8fd4fe504a750876f28408ec44bbf72227af6604fd5976150e"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-bounded.log",
+      "bytes": 49,
+      "sha256": "67e84f9b418741a613573c1361226626fb54e9824734ab8629b429898b53415f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-first-visible.log",
+      "bytes": 118,
+      "sha256": "5bae7f48c447d01dd35af73abd072de3cfd84bd636227c88d7bd31e8f8cc0b09"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-navigation-depth.log",
+      "bytes": 65,
+      "sha256": "0bfc1fe7d3be06cc706733d841c94f936f2e8658f6e830aa63a93c57136b770b"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-navigation-entries.log",
+      "bytes": 73,
+      "sha256": "ae7267776113426543a2f70dc9931f346ed2703e80165802c412142e2034ecc0"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-navigation-navigation.log",
+      "bytes": 78,
+      "sha256": "0abea2b41557d1c18c94442d9be88d432fbe2351c399c8b6ca298d8ad068c8b4"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-navigation-readonly.log",
+      "bytes": 70,
+      "sha256": "c386eef0a9665c006146444a69ef824180ffecc578d90f1b7c8080102735a807"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-navigation-tape.log",
+      "bytes": 89,
+      "sha256": "71aa3af0468a06b3fedd6f76a1eb14fcb2ff0ec8b42ac719f512cdb509af8a5f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-open-comparator-origin.log",
+      "bytes": 526,
+      "sha256": "baf6c5ccd95f661dfaadad26a8070590ec4e8d54c80a8c056f31ffb0cde15bed"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-range-controls.log",
+      "bytes": 51,
+      "sha256": "36cc4388a39b1ec28fed4f22e0ee8b7bff1c6d91cd6369e8615f0933f6ccf4b3"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-range-late.log",
+      "bytes": 2079,
+      "sha256": "88bdc8c6daff2def9e3704653a5d3dcec9178c5e4eba5af23b577957a7c9a881"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-range-normal.log",
+      "bytes": 105,
+      "sha256": "2bfff1a2989754770f36a2e1e3b00d2f7e21b56ed20b11dfc8b51d92d710ab4f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/baseline-range-real.log",
+      "bytes": 626,
+      "sha256": "a8f38a03f6109a69970be5eb6e2441199cdc9fe3bfb3dcc0ad8d54ad4fbb8001"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/candidate-api.log",
+      "bytes": 851,
+      "sha256": "0607cca38d4bef8fd4fe504a750876f28408ec44bbf72227af6604fd5976150e"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/candidate-bounded.log",
+      "bytes": 49,
+      "sha256": "67e84f9b418741a613573c1361226626fb54e9824734ab8629b429898b53415f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/candidate-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/candidate-first-visible.log",
+      "bytes": 118,
+      "sha256": "5bae7f48c447d01dd35af73abd072de3cfd84bd636227c88d7bd31e8f8cc0b09"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/candidate-navigation-depth.log",
+      "bytes": 65,
+      "sha256": "0bfc1fe7d3be06cc706733d841c94f936f2e8658f6e830aa63a93c57136b770b"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/candidate-navigation-entries.log",
+      "bytes": 73,
+      "sha256": "ae7267776113426543a2f70dc9931f346ed2703e80165802c412142e2034ecc0"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/candidate-navigation-navigation.log",
+      "bytes": 78,
+      "sha256": "0abea2b41557d1c18c94442d9be88d432fbe2351c399c8b6ca298d8ad068c8b4"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/candidate-navigation-readonly.log",
+      "bytes": 70,
+      "sha256": "c386eef0a9665c006146444a69ef824180ffecc578d90f1b7c8080102735a807"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/candidate-navigation-tape.log",
+      "bytes": 89,
+      "sha256": "71aa3af0468a06b3fedd6f76a1eb14fcb2ff0ec8b42ac719f512cdb509af8a5f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/candidate-open-comparator-origin.log",
+      "bytes": 526,
+      "sha256": "baf6c5ccd95f661dfaadad26a8070590ec4e8d54c80a8c056f31ffb0cde15bed"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/candidate-range-controls.log",
+      "bytes": 51,
+      "sha256": "36cc4388a39b1ec28fed4f22e0ee8b7bff1c6d91cd6369e8615f0933f6ccf4b3"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/candidate-range-late.log",
+      "bytes": 2079,
+      "sha256": "88bdc8c6daff2def9e3704653a5d3dcec9178c5e4eba5af23b577957a7c9a881"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/candidate-range-normal.log",
+      "bytes": 105,
+      "sha256": "2bfff1a2989754770f36a2e1e3b00d2f7e21b56ed20b11dfc8b51d92d710ab4f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/candidate-range-real.log",
+      "bytes": 626,
+      "sha256": "a8f38a03f6109a69970be5eb6e2441199cdc9fe3bfb3dcc0ad8d54ad4fbb8001"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/java-version.log",
+      "bytes": 205,
+      "sha256": "5b4412738541184e84f6b2d7520d4f4a7c2a455f60650491464c61adcbbbdeb0"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/javac-version.log",
+      "bytes": 16,
+      "sha256": "2df6b9c76e710158266aeaae8f3578eaed8ddd747a2272483506ad9a8a5e644a"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/set-stage-api.log",
+      "bytes": 851,
+      "sha256": "0607cca38d4bef8fd4fe504a750876f28408ec44bbf72227af6604fd5976150e"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/set-stage-bounded.log",
+      "bytes": 49,
+      "sha256": "67e84f9b418741a613573c1361226626fb54e9824734ab8629b429898b53415f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/set-stage-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/set-stage-first-visible.log",
+      "bytes": 118,
+      "sha256": "5bae7f48c447d01dd35af73abd072de3cfd84bd636227c88d7bd31e8f8cc0b09"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/set-stage-navigation-depth.log",
+      "bytes": 65,
+      "sha256": "0bfc1fe7d3be06cc706733d841c94f936f2e8658f6e830aa63a93c57136b770b"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/set-stage-navigation-entries.log",
+      "bytes": 73,
+      "sha256": "ae7267776113426543a2f70dc9931f346ed2703e80165802c412142e2034ecc0"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/set-stage-navigation-navigation.log",
+      "bytes": 78,
+      "sha256": "0abea2b41557d1c18c94442d9be88d432fbe2351c399c8b6ca298d8ad068c8b4"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/set-stage-navigation-readonly.log",
+      "bytes": 70,
+      "sha256": "c386eef0a9665c006146444a69ef824180ffecc578d90f1b7c8080102735a807"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/set-stage-navigation-tape.log",
+      "bytes": 89,
+      "sha256": "71aa3af0468a06b3fedd6f76a1eb14fcb2ff0ec8b42ac719f512cdb509af8a5f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/set-stage-open-comparator-origin.log",
+      "bytes": 526,
+      "sha256": "baf6c5ccd95f661dfaadad26a8070590ec4e8d54c80a8c056f31ffb0cde15bed"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/set-stage-range-controls.log",
+      "bytes": 51,
+      "sha256": "36cc4388a39b1ec28fed4f22e0ee8b7bff1c6d91cd6369e8615f0933f6ccf4b3"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/set-stage-range-late.log",
+      "bytes": 2079,
+      "sha256": "88bdc8c6daff2def9e3704653a5d3dcec9178c5e4eba5af23b577957a7c9a881"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/set-stage-range-normal.log",
+      "bytes": 105,
+      "sha256": "2bfff1a2989754770f36a2e1e3b00d2f7e21b56ed20b11dfc8b51d92d710ab4f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/logs/set-stage-range-real.log",
+      "bytes": 626,
+      "sha256": "a8f38a03f6109a69970be5eb6e2441199cdc9fe3bfb3dcc0ad8d54ad4fbb8001"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/results.json",
+      "bytes": 635,
+      "sha256": "275770822abb8985e09a99f435f1e0958d03db5463eb1ba7d95cc7a46d6c0cd7"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/evidence/sources.json",
+      "bytes": 1784,
+      "sha256": "fdf1214f6ec6e79aea49e8a9cf2618bcec2c7dc18c1ab69c57637cc778efdd62"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/fixture-pins.json",
+      "bytes": 3067,
+      "sha256": "ad247d0ff52c725e32e00dfc9574cd1c28c71d7fcbd2d49ea18c189d19b04706"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/junit/M3FirstVisibleAtomTest.java",
+      "bytes": 596,
+      "sha256": "c16fa40bc6768618df372d8d43936f5761d3375c35dfeeb9da15b84dc4fcb44d"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-api.log",
+      "bytes": 851,
+      "sha256": "0607cca38d4bef8fd4fe504a750876f28408ec44bbf72227af6604fd5976150e"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-bounded.log",
+      "bytes": 49,
+      "sha256": "67e84f9b418741a613573c1361226626fb54e9824734ab8629b429898b53415f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-navigation-depth.log",
+      "bytes": 65,
+      "sha256": "0bfc1fe7d3be06cc706733d841c94f936f2e8658f6e830aa63a93c57136b770b"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-navigation-entries.log",
+      "bytes": 73,
+      "sha256": "ae7267776113426543a2f70dc9931f346ed2703e80165802c412142e2034ecc0"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-navigation-navigation.log",
+      "bytes": 78,
+      "sha256": "0abea2b41557d1c18c94442d9be88d432fbe2351c399c8b6ca298d8ad068c8b4"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-navigation-readonly.log",
+      "bytes": 70,
+      "sha256": "c386eef0a9665c006146444a69ef824180ffecc578d90f1b7c8080102735a807"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-navigation-tape.log",
+      "bytes": 89,
+      "sha256": "71aa3af0468a06b3fedd6f76a1eb14fcb2ff0ec8b42ac719f512cdb509af8a5f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-open-comparator-origin.log",
+      "bytes": 526,
+      "sha256": "baf6c5ccd95f661dfaadad26a8070590ec4e8d54c80a8c056f31ffb0cde15bed"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-range-controls.log",
+      "bytes": 51,
+      "sha256": "36cc4388a39b1ec28fed4f22e0ee8b7bff1c6d91cd6369e8615f0933f6ccf4b3"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-range-late.log",
+      "bytes": 2079,
+      "sha256": "88bdc8c6daff2def9e3704653a5d3dcec9178c5e4eba5af23b577957a7c9a881"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-range-normal.log",
+      "bytes": 105,
+      "sha256": "2bfff1a2989754770f36a2e1e3b00d2f7e21b56ed20b11dfc8b51d92d710ab4f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/receipts/baseline-range-real.log",
+      "bytes": 626,
+      "sha256": "a8f38a03f6109a69970be5eb6e2441199cdc9fe3bfb3dcc0ad8d54ad4fbb8001"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/set-stage/M3FilteredViews.java",
+      "bytes": 32306,
+      "sha256": "51990295a000434ac163eb364b2a24ba691e8bbb127092358e49d1ca60a90374"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/shared/M3FilteredLists.java",
+      "bytes": 19677,
+      "sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/shared/M3MutableFilteredViews.java",
+      "bytes": 25720,
+      "sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/shared/M3SlotSpliterators.java",
+      "bytes": 4051,
+      "sha256": "9257ce0c9c95e3afef20624631ba048aa3d60ef53a1189cd2bbabc07da2bba2f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/tests/M3BoundedFilteredNavigationContract.java",
+      "bytes": 10127,
+      "sha256": "f37ead5e6647b1f0ec7cf0d0723c2662508d1991bf0c967b298f2be737fd7c8d"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/tests/M3FilteredNavigationReconciliationContract.java",
+      "bytes": 24121,
+      "sha256": "2cde685da95319bca841ae3c95fb73e3ea4776177a78046d96b79033545dfc2d"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/tests/M3FilteredRangeFailureContract.java",
+      "bytes": 14694,
+      "sha256": "98bfd65802b946f3f7916d667598c97e06f6fe72781823dd7467b649494a992d"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/tests/M3FirstVisibleAtomContract.java",
+      "bytes": 12741,
+      "sha256": "cea097e4b1cf67a3cd2d8fdd4df5f29751db7d767daf785732c350003acede29"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/tests/M3WrapperConvergenceContract.java",
+      "bytes": 19318,
+      "sha256": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/qualification/collections/verify.py",
+      "bytes": 7148,
+      "sha256": "c61386c957b9a2b6a7214847d5cbaa31f46526511041d34bc93d3d9008e0f1ee"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/src/test/java/com/synexia/rewrite/M3FilteredFirstVisibleRuntimeRecipeTest.java",
+      "bytes": 35264,
+      "sha256": "cacb6da4905d3fa601aec6875808bc5967552cd5131eb1f49d9c6adfc708e1b3"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/target/named-recipe.yml",
+      "bytes": 676,
+      "sha256": "2c9dcac09fcc7456a41cf01c4369b7406b86b85dc8d3e7e249b62f2ee70e114c"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/target/phase-receipts/m3-filtered-first-visible-runtime-20261021-map-atom.tsv",
+      "bytes": 453,
+      "sha256": "3bba549dcee82220bf5422eae59254c1526f782017cd42a50c6565a876d65c9c"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/target/phase-receipts/m3-filtered-first-visible-runtime-20261021-selection-probe.tsv",
+      "bytes": 460,
+      "sha256": "cb5253a09ec8afda1b68e7b4ba23845f8c6cbf98feb2104ee6b8b54ca7a0c3e4"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/target/phase-receipts/m3-filtered-first-visible-runtime-20261021-selection-test.tsv",
+      "bytes": 459,
+      "sha256": "28166b537cc4bc05563a53a0a185dea4858b556d2911849c5e732ef17d316479"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/target/phase-receipts/m3-filtered-first-visible-runtime-20261021-set-atom.tsv",
+      "bytes": 453,
+      "sha256": "5f34f0bb7bc4228dddb42a39ed15d5fdd8145008faa6deb0e739e4af9f9d0582"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/target/phase-receipts/m3-filtered-first-visible-runtime-20261021-wrapper-owner.tsv",
+      "bytes": 458,
+      "sha256": "879837dc7ebdb0d82bd216def8f7c4ed4207c209218cb545a4f24d20d105cdd6"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/target/proof-status.tsv",
+      "bytes": 90,
+      "sha256": "28553c429fe9863294985dd8691c49057e8c2b2a2d092ad9023ab562e5caedac"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/target/receiver/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "bytes": 32353,
+      "sha256": "4209587c4cc43537e1ce0d7b316d1824a4de0f25154fef1a87cbe7e9ae9871ea"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/target/receiver/m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomContract.java",
+      "bytes": 12741,
+      "sha256": "cea097e4b1cf67a3cd2d8fdd4df5f29751db7d767daf785732c350003acede29"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/target/receiver/m3/collections/src/test/java/com/m3/collections/M3FirstVisibleAtomTest.java",
+      "bytes": 596,
+      "sha256": "c16fa40bc6768618df372d8d43936f5761d3375c35dfeeb9da15b84dc4fcb44d"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/target/recipe-proof.tsv",
+      "bytes": 1925,
+      "sha256": "688e24e3c80dfa2ea64bc6cfbb952291b3eeb5898a3cd8a6e20d2565513cecfe"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/verification/collections/ReceivingJUnitRunner.java",
+      "bytes": 1505,
+      "sha256": "5a13137e385cb6a04ed2c7f130b5ff6436268d2973a93ae1349d091af2efbe5c"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/recipe-crates/m3-filtered-first-visible-runtime-20261021/verification/collections/evidence/inputs.json",
+      "bytes": 3348,
+      "sha256": "2f0ebb7adf0f22979fedff62190cb28f412da5ed87837a2c9c142b1191554cb1"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "bytes": 1052,
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "bytes": 31505,
+      "sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "bytes": 19983,
+      "sha256": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "bytes": 8268,
+      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-map-atom/M3FilteredViews.java.txt",
+      "bytes": 32353,
+      "sha256": "4209587c4cc43537e1ce0d7b316d1824a4de0f25154fef1a87cbe7e9ae9871ea"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-map-atom/manifest.tsv",
+      "bytes": 262,
+      "sha256": "b9ea04241564e5122997a977bc21771e6b4741d7e325504995cac1b82feb8e3b"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-selection-probe/M3FirstVisibleAtomContract.java.txt",
+      "bytes": 12741,
+      "sha256": "cea097e4b1cf67a3cd2d8fdd4df5f29751db7d767daf785732c350003acede29"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-selection-probe/manifest.tsv",
+      "bytes": 226,
+      "sha256": "db035cf67284c1350f836cc605f12893edbc4c03881ee05623f3159a5f7abbf2"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-selection-test/M3FirstVisibleAtomTest.java.txt",
+      "bytes": 596,
+      "sha256": "c16fa40bc6768618df372d8d43936f5761d3375c35dfeeb9da15b84dc4fcb44d"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-selection-test/manifest.tsv",
+      "bytes": 218,
+      "sha256": "dcd3d1c5f2b05ada0a0ae2ba1ce5dde087287cffee4689456eb6bae1b8315f6f"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-set-atom/M3FilteredViews.java.txt",
+      "bytes": 32306,
+      "sha256": "51990295a000434ac163eb364b2a24ba691e8bbb127092358e49d1ca60a90374"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-set-atom/manifest.tsv",
+      "bytes": 262,
+      "sha256": "cf686523a9f56f487c748b18da20574c80b940319acfd3669001cd2a4a96d660"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-wrapper-owner/M3FilteredViews.java.txt",
+      "bytes": 32353,
+      "sha256": "4209587c4cc43537e1ce0d7b316d1824a4de0f25154fef1a87cbe7e9ae9871ea"
+    },
+    {
+      "path": "/workspace/scratch/213cc9f26139/synexia/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-filtered-first-visible-runtime-20261021-wrapper-owner/manifest.tsv",
+      "bytes": 262,
+      "sha256": "194ef432bf8c3d9d5f5bf990cbadea4ca316c598e1a475bdabd2621da0395e83"
+    }
+  ]
+}

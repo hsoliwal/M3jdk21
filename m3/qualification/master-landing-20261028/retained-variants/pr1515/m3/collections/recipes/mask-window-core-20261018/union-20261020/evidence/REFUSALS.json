@@ -1,0 +1,37 @@
+[
+  {
+    "case": "source-drift",
+    "exitCode": 1,
+    "targetBytesUnchanged": true
+  },
+  {
+    "case": "keep-drift",
+    "exitCode": 1,
+    "targetBytesUnchanged": true
+  },
+  {
+    "case": "missing-source",
+    "exitCode": 1,
+    "targetBytesUnchanged": true
+  },
+  {
+    "case": "template-drift",
+    "exitCode": 1,
+    "targetBytesUnchanged": true
+  },
+  {
+    "case": "duplicate-manifest",
+    "exitCode": 1,
+    "targetBytesUnchanged": true
+  },
+  {
+    "case": "symlink-source",
+    "exitCode": 1,
+    "targetBytesUnchanged": true
+  },
+  {
+    "case": "symlink-ancestor",
+    "exitCode": 1,
+    "targetBytesUnchanged": true
+  }
+]

@@ -1,0 +1,10 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.M3Jdk21PrimitiveCollectionsReceiverV1
+displayName: Receive Synexia M3JDK21 primitive collections v1
+description: >-
+  Thin M3JDK21 receiver for exact Apache-2.0 Synexia primitive-collection postimages.
+  Synexia owns the reusable recipe; M3JDK21 owns runtime qualification and promotion.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-primitive-collections-v1

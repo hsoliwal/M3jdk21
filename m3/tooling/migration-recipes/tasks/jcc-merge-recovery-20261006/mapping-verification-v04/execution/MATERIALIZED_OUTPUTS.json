@@ -1,0 +1,36 @@
+{
+  "destination_input": "09075810b55229662329a158923287e8a7118f86",
+  "files": [
+    {
+      "bytes": 355729,
+      "git_blob": "99894f94301810820d049c2a1a791e24f0387628",
+      "origin": "actual OpenRewrite Result afterimage",
+      "path": "m3/docs/name-mapping.json",
+      "sha256": "cf84929db27261fceb704e2b9b3ebfca212dcea6a8f61acff099104118342645"
+    },
+    {
+      "bytes": 18828,
+      "git_blob": "c2d2cf856514384a4bd552eb3eb0ea04bf516c15",
+      "origin": "actual OpenRewrite Result afterimage",
+      "path": "m3/docs/jcc-source-handoff.md",
+      "sha256": "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc"
+    },
+    {
+      "bytes": 256194,
+      "git_blob": "f60c1eb5d33c0203fb3baa42a741aee3979e3c36",
+      "origin": "actual OpenRewrite Result afterimage",
+      "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "sha256": "73b3b5bd60eff1c1a904bd96517309067a9a93832060b63fa19c0c826e10630d"
+    },
+    {
+      "bytes": 108212,
+      "git_blob": "10ba51ea38869ca61d23cbf99ee980d4ace8b732",
+      "origin": "actual OpenRewrite Result afterimage",
+      "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "sha256": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c"
+    }
+  ],
+  "schema": "m3-jcc-materialized-mapping/2",
+  "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+  "status": "PASS"
+}

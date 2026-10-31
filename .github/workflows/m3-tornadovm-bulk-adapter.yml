@@ -1,0 +1,96 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+name: M3 TornadoVM Bulk Adapter
+
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/tornadovm-bulk/**'
+      - 'm3/vendor/tornadovm/**'
+      - 'm3/runtime-integration/tornado/**'
+      - 'm3/build-tornado.sh'
+      - 'm3/pom.xml'
+      - 'm3/compatibility/synexia-tornadovm-bulk-adapter-20261009.tsv'
+      - 'm3/docs/name-mapping.json'
+      - 'm3/tooling/recipe-catalogue.tsv'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3TornadoBulkAdapter*.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3TornadoBulkAdapter*.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-tornadovm-bulk-adapter/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tornadovm-bulk-adapter/**'
+      - 'm3/tooling/migration-recipes/tasks/tornadovm-bulk-adapter/**'
+      - '.github/workflows/m3-tornadovm-bulk-adapter.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  recipe-receiver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Install source-built rewrite and JUnit 5.10.2 toolchain
+        run: >
+          mvn -B -ntp -f m3/vendor/third_party/pom.xml
+          -pl rewrite-java-21,rewrite-test,junit-jupiter-5.10.2,junit-platform-launcher-1.10.2
+          -am -DskipTests install
+      - name: Check source-built OpenRewrite coordinates
+        run: python3 -S m3/synexia-import/pure-int-recipe-custody/verify-source-rewrite-coordinate.py
+      - name: Install bounded Synexia recipe custody
+        run: bash m3/synexia-import/pure-int-recipe-custody/install.sh "$PWD"
+      - name: Receiver and mapping recipe tests
+        run: >
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3TornadoBulkAdapterPortRecipeTest,M3TornadoBulkAdapterMappingRecipeTest,M3BulkSchedulerProviderRecoveryRecipeTest,M3BulkSchedulerRecoveryNameMappingRecipeTest,M3TornadoProviderUpgradeReceiverRecipeTest
+          test
+      # Historical receiver unit tests remain above. The successor canonical
+      # Synexia recipe supplies the current SDK/refusal/fixed-point receipt.
+
+  integrated-opencl:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Install CPU OpenCL device
+        run: sudo apt-get update && sudo apt-get install -y pocl-opencl-icd ocl-icd-opencl-dev
+      - name: Build and seal the existing source-owned JUnit test support
+        run: >-
+          python3 -B m3/runtime-integration/tornado/build_junit_support.py
+          --repo-root "$GITHUB_WORKSPACE"
+          --jdk-home "$JAVA_HOME" --maven "$(command -v mvn)"
+          --maven-repo "$HOME/.m2/repository"
+          --out "$RUNNER_TEMP/m3-tornado-junit" --resolve-build-tools
+      - name: Lint integration and build source modules, tests and installed image
+        env:
+          POCL_MAX_PTHREAD_COUNT: '4'
+        run: >-
+          bash m3/build-tornado.sh
+          --jdk-home "$JAVA_HOME" --maven "$(command -v mvn)"
+          --maven-repo "$HOME/.m2/repository"
+          --junit-lock "$RUNNER_TEMP/m3-tornado-junit/JUNIT_LOCK.json"
+          --backend opencl --out "$RUNNER_TEMP/m3-tornado-proof"
+          --allow-bootstrap-jdk --require-device --resolve-build-tools --phase all
+      - name: Preserve exact commands, logs and admission scope
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-tornado-opencl-proof
+          path: |
+            ${{ runner.temp }}/m3-tornado-proof
+            ${{ runner.temp }}/m3-tornado-junit
+          if-no-files-found: error

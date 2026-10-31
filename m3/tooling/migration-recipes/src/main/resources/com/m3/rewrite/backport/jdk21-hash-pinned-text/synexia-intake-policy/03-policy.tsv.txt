@@ -1,0 +1,7 @@
+mode	source_license	target_scope	source_copy	runtime_dependency	required_evidence	disposition
+EXTERNAL_RECIPE_TOOL	Apache-2.0	m3/tooling/**	ALLOW_IN_TOOLING_ONLY	NO	pinned source + recipe hash + fixed-point/drift proof	ADMITTED
+INDEPENDENT_APACHE_MODULE	Apache-2.0	m3/** independent module	ALLOW_WITH_NOTICES	NO	LICENSE/NOTICE + module boundary + build/test proof	ADMITTED
+DATA_OR_METADATA_EXPORT	source-specific	m3/** data/image/sidecar	NO_SOURCE_CODE	NONE	source license + immutable revision + schema/hash/verifier	ADMITTED
+TARGET_OWNED_PORT	Apache-2.0	src/** GPL/OpenJDK owner	NO_DIRECT_COPY	NO	Synexia lineage + target preimage/postimage + target tests + behavior proof	ADMITTED
+EXPLICIT_RELICENSE_PORT	target-compatible	src/** GPL/OpenJDK owner	ALLOW_IF_PROVEN	NO	all rightsholder authority + target-compatible license/header + provenance	REVIEW_REQUIRED
+EXISTING_DIRECT_COPY_REVIEW	Apache-2.0	src/** GPL/OpenJDK owner	HISTORICAL	NO	exact mapping row + target-compatible relicense or target-owned reimplementation	REVIEW_REQUIRED

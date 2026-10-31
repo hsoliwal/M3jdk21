@@ -1,0 +1,45 @@
+--- a/.github/workflows/m3-foundation.yml
++++ b/.github/workflows/m3-foundation.yml
+@@ -22,6 +22,8 @@
+           printf '%s  %s\n' '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
+           tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
+           echo "M3_JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
++          printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
++          printf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
+       - name: Verify layered source-bound recipes
+         run: |
+           python3 m3/runtime-integration/char-array-copy/recipe/apply.py --check
+@@ -34,7 +36,10 @@
+           trap - EXIT
+           python3 m3/runtime-integration/char-array-copy/recipe/apply.py --check
+       - name: Verify OpenRewrite convergence DAG
+-        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
++        run: |
++          java -version
++          mvn -version
++          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+       - name: Build and exercise immutable foundation
+         run: ./m3/build.sh
+       - name: Compare pinned Synexia content and range contract
+--- a/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
++++ b/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
+@@ -94,7 +94,7 @@
+                             output.put(
+                                     after.getSourcePath()
+                                             .toString()
+-                                            .replace('\', '/'),
++                                            .replace('\\', '/'),
+                                     after.printAll());
+                         });
+         return output;
+--- a/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
++++ b/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
+@@ -97,7 +97,7 @@
+                             output.put(
+                                     after.getSourcePath()
+                                             .toString()
+-                                            .replace('\', '/'),
++                                            .replace('\\', '/'),
+                                     after.printAll());
+                         });
+         return output;

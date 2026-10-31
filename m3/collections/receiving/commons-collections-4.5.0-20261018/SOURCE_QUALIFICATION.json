@@ -1,0 +1,70 @@
+{
+  "schema": "m3-commons-namespace-source-qualification-v1",
+  "originalRepository": "apache/commons-collections",
+  "originalCommit": "7f7fb0244abc940a2e9dd28b67508c0483a58c3e",
+  "originalRevisionNote": "Preserves the exact pinned 4.5.0 RC preparation revision; no silent retagging.",
+  "namespace": {
+    "source": "org.apache.commons.collections4",
+    "target": "com.m3.collections.apache"
+  },
+  "sourceFiles": 904,
+  "mainJava": 359,
+  "testJava": 300,
+  "sourceTree": "85d65d12644db9eb41ea4749262120f9a606a9de",
+  "allFileTransport": "PASS: every path/mode/blob; 668 literal text files,182 rewritten fixtures,54 unchanged-content files including2 artwork blobs",
+  "textQualification": "720 inverse/fixed-point checks;1097 protected spans",
+  "fixtureQualification": {
+    "count": 182,
+    "typedNameSlots": 578,
+    "dotted": 496,
+    "slash": 82,
+    "storedUIDAndOpaqueBytes": "Preserved; does not prove Java deserialization compatibility",
+    "runtime": "OPEN: four missing test/helper classes affect nine fixtures; no filtered runtime subset executed",
+    "proxyDiscriminator": "V4 malformed positive rejected and preserved; V5 narrow observer correction qualified with actual JDK21 ObjectOutputStream/ObjectInputStream proxy state, dispatch, trailing sentinel and EOF;19 discriminators pass. Original malformed witness now rejected.",
+    "actualFixtureProxyDescriptors": 0,
+    "proxyQualificationSHA256": "e7d3f489a6c3607af7e0bc34663b6d05572284b481fc6a121b59732606210041"
+  },
+  "mainCompilation": {
+    "baseline": "JDK21 javac --release8; no provider Commons JAR or external dependency needed",
+    "sources": 359,
+    "classes": 594,
+    "classBytes": 2002380,
+    "major": 52,
+    "warnings": 340,
+    "printedWarnings": 100,
+    "failedPriorAttempt": "source/target8 on JDK21 exposed SequencedCollection/SequencedMap signature conflicts; seven errors and326partial classes preserved",
+    "classPath": "Only successful release8 output; failed partial classes excluded",
+    "receiptSHA256": "3e98fa24ab63e0409b226def3e44970303ab21457952eb1012bbc68bf8b030ce"
+  },
+  "review": {
+    "engine": "Codex default",
+    "exitCode": 1,
+    "findings": 2,
+    "acceptedActionable": 0,
+    "reportSHA256": "8f8051adf8a7d74dc4413d982bafbe40df061aa851acaa7a19a9e4d14003a72a",
+    "adjudicationSHA256": "9547d016372343a4be705e991b81fafec1d94dcdd6519a8df0de544ad60f2c05",
+    "dispositions": [
+      "Synthetic flattened native-witness layout is review support only; this PR does not ship it as a checkout workflow. Actual native proof ran qualified original/mapped paths.",
+      "Actual bounded_process sets a nonzero-exit reason and raises ChildFailure; reviewer claim that nonzero can return as completed is contradicted by the code. Actual native commands all exited0."
+    ]
+  },
+  "fullDonorTests": "OPEN",
+  "targetOwnedBuildAndRelease": "OPEN; original Maven GAVs retained as donor provenance",
+  "arrayIndexMaskAndJNI": "OPEN",
+  "configSuccessor": {
+    "changed": "Sole POM only; all659Java/182fixtures unchanged",
+    "defaults": "maven.install.skip=true; maven.deploy.skip=true; explicitly overridable",
+    "inheritance": "Actual commons-parent81/Apache33 root/profile/install/deploy/execution declarations audited; both inherited plugin3.1.2 property contracts confirmed; no explicit conflicting false",
+    "proofSHA256": "6034f9d583c48158ab77d85f5eff25ea432f59324460f70d50cb4b46df8b041c",
+    "MavenExecution": "Not run",
+    "review": {
+      "result": "PASS: helper exited0; findings[]",
+      "engine": "Codex gpt-5.6-sol/high",
+      "target": "e75d48c61e1dda0f8b9ce426020552a9c82ba61a",
+      "scope": "Final14GuavaPOM/oneCommonsPOM default publication guards, both helper export exclusions and exact supporting recipes; no full Maven/runtime/release admission",
+      "reportSHA256": "9a7cfa2f3c91fac1b903824b5ea6e9fc8f3e6a87f1eb35156eb7acf54f61e1e9",
+      "commandReceiptSHA256": "608f13ce394b995d35fcea25ba44cb40e1158339bb87518ad9fb5c76f2ef1ead",
+      "elapsedSeconds": 38.968
+    }
+  }
+}

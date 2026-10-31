@@ -1,0 +1,505 @@
+[
+  {
+    "label": "compile-ownership-probe",
+    "command": [
+      "/tmp/m3jdk21-tools/jdk-21.0.12.1+1/bin/javac",
+      "--release",
+      "21",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/ownership-probe",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/LinkedM3SdkOwnership.java"
+    ],
+    "exit": 0,
+    "seconds": 0.6161872419979773,
+    "timed_out": false,
+    "log": "logs/compile-ownership-probe.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "source-sdk-generated-headers",
+    "command": [
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk/bin/javac",
+      "--release",
+      "21",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/jars/com.m3.collections.jar",
+      "-h",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/generated-headers",
+      "-d",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/header-classes",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3BitLane28.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasksJNI.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java"
+    ],
+    "exit": 0,
+    "seconds": 0.9686382530016999,
+    "timed_out": false,
+    "log": "logs/source-sdk-generated-headers.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "pack001",
+    "command": [
+      "python3",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/m3/tooling/jmod-recipes/tools/jmod_pack.py",
+      "--jdk-home",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk",
+      "--image-tsv",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/INPUT_JMOD_IMAGE.tsv",
+      "--manifest",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/EMPTY_DESCRIPTOR_MANIFEST.tsv",
+      "--layer-root",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21",
+      "--out",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001",
+      "--legal-notices",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/legal",
+      "--native-library",
+      "com.m3.collections=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/native-release",
+      "--add-modules",
+      "java.se,jdk.management,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps",
+      "--date",
+      "2026-01-01T00:00:00Z"
+    ],
+    "exit": 0,
+    "seconds": 3.94509605499843,
+    "timed_out": false,
+    "log": "logs/pack001.log",
+    "sha256": "de06e9b9feea8cf36389ddeea4997c4bcfb50992ca457a7d7d844711bbad9baf"
+  },
+  {
+    "label": "image-validate",
+    "command": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/bin/java",
+      "--validate-modules"
+    ],
+    "exit": 0,
+    "seconds": 0.11504770200190251,
+    "timed_out": false,
+    "log": "logs/image-validate.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "image-modules",
+    "command": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/bin/java",
+      "--list-modules"
+    ],
+    "exit": 0,
+    "seconds": 0.11433799199949135,
+    "timed_out": false,
+    "log": "logs/image-modules.log",
+    "sha256": "62e0383a6a33bae287c6f183f398cfc688b2d892f46af635d04864911bf42078"
+  },
+  {
+    "label": "module-descriptor",
+    "command": [
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk/bin/jmod",
+      "describe",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/jmods/com.m3.collections.jmod"
+    ],
+    "exit": 0,
+    "seconds": 0.11871588499707286,
+    "timed_out": false,
+    "log": "logs/module-descriptor.log",
+    "sha256": "b3c7fd92a5eb1053bb962187573ecf3d35a59cee84ab94cacbd860d8b04ef314"
+  },
+  {
+    "label": "image-inventory",
+    "command": [
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk/bin/jimage",
+      "list",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/modules"
+    ],
+    "exit": 0,
+    "seconds": 0.3648446330007573,
+    "timed_out": false,
+    "log": "logs/image-inventory.log",
+    "sha256": "11a6f9e5563b7d28d01b4ad782ab1911ff8e349ca732a674660065c8c4026ca1"
+  },
+  {
+    "label": "native-symbols-m3_collections_address",
+    "command": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3_collections_address.so"
+    ],
+    "exit": 0,
+    "seconds": 0.0036839620006503537,
+    "timed_out": false,
+    "log": "logs/native-symbols-m3_collections_address.log",
+    "sha256": "fb6b40789a4a5c4d57b3c9ed4e9f432e10e93bb456599ed53d3434343cf0539e"
+  },
+  {
+    "label": "native-symbols-m3_collections_long_path_masks",
+    "command": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3_collections_long_path_masks.so"
+    ],
+    "exit": 0,
+    "seconds": 0.0076100500009488314,
+    "timed_out": false,
+    "log": "logs/native-symbols-m3_collections_long_path_masks.log",
+    "sha256": "6f40e1992e6e086be48c008651566d4d3332652eef5abe7d3722394aadee9cf7"
+  },
+  {
+    "label": "native-symbols-m3_collections_mask",
+    "command": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3_collections_mask.so"
+    ],
+    "exit": 0,
+    "seconds": 0.003639455000666203,
+    "timed_out": false,
+    "log": "logs/native-symbols-m3_collections_mask.log",
+    "sha256": "cd8c339b042885b8b830a428beb05dbca5db8005cb7ad39a52cf2668dacd6bcc"
+  },
+  {
+    "label": "native-symbols-m3_collections_pathmask",
+    "command": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3_collections_pathmask.so"
+    ],
+    "exit": 0,
+    "seconds": 0.003549357999872882,
+    "timed_out": false,
+    "log": "logs/native-symbols-m3_collections_pathmask.log",
+    "sha256": "a747ef7f72e8cce9935ffa72ff997f6bdb82ae7809defb762184392846bc799a"
+  },
+  {
+    "label": "native-symbols-m3_collections_span",
+    "command": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3_collections_span.so"
+    ],
+    "exit": 0,
+    "seconds": 0.0036053129988431465,
+    "timed_out": false,
+    "log": "logs/native-symbols-m3_collections_span.log",
+    "sha256": "9c48c21540ef80afd837042dac8474f40cda10a7867fcb69a469943c92429528"
+  },
+  {
+    "label": "native-symbols-m3_collections_statehist",
+    "command": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3_collections_statehist.so"
+    ],
+    "exit": 0,
+    "seconds": 0.0034873250006057788,
+    "timed_out": false,
+    "log": "logs/native-symbols-m3_collections_statehist.log",
+    "sha256": "4dd7bc733e4f571af22858fd6c4c53060c17098d29950a91376118ebaee300ae"
+  },
+  {
+    "label": "native-symbols-m3_residency_state_mask",
+    "command": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3_residency_state_mask.so"
+    ],
+    "exit": 0,
+    "seconds": 0.0034852020035032183,
+    "timed_out": false,
+    "log": "logs/native-symbols-m3_residency_state_mask.log",
+    "sha256": "66423c9659342709a537587f0a3edcb94bd387d88b54f8658455e5a030f99f1b"
+  },
+  {
+    "label": "native-symbols-m3bitlane",
+    "command": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3bitlane.so"
+    ],
+    "exit": 0,
+    "seconds": 0.0035578719980549067,
+    "timed_out": false,
+    "log": "logs/native-symbols-m3bitlane.log",
+    "sha256": "d724030e5351e99bf79f539917db82c17a0020f25a07faf8bbfb90d7905dcdea"
+  },
+  {
+    "label": "native-symbols-m3rankbatch",
+    "command": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3rankbatch.so"
+    ],
+    "exit": 0,
+    "seconds": 0.0035823990001517814,
+    "timed_out": false,
+    "log": "logs/native-symbols-m3rankbatch.log",
+    "sha256": "927651b046125ee8f9ed0bc0688ed6bde946faa8c841a5aa2cffa1071cf2df32"
+  },
+  {
+    "label": "native-symbols-m3signalorder",
+    "command": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib/libm3signalorder.so"
+    ],
+    "exit": 0,
+    "seconds": 0.0035470849979901686,
+    "timed_out": false,
+    "log": "logs/native-symbols-m3signalorder.log",
+    "sha256": "97bed3d1cd7fd5369180d9961aa55752d5194ea34474a98b4adf047cb535f857"
+  },
+  {
+    "label": "installed-ownership",
+    "command": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/bin/java",
+      "-Xshare:off",
+      "--add-modules",
+      "com.m3.collections,jdk.management",
+      "-cp",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/ownership-probe",
+      "LinkedM3SdkOwnership",
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image"
+    ],
+    "exit": 0,
+    "seconds": 0.11401389199818368,
+    "timed_out": false,
+    "log": "logs/installed-ownership.log",
+    "sha256": "3401259a7e419ebddeaad608caf7708663416db67a999a8ddc09ff4943ca32c1"
+  },
+  {
+    "label": "filtered-donor-proof",
+    "command": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/bin/java",
+      "-ea",
+      "-Xmx768m",
+      "-XX:ActiveProcessorCount=2",
+      "-Xcheck:jni",
+      "-Xshare:off",
+      "--add-modules=com.m3.collections,jdk.management",
+      "--patch-module=com.m3.collections=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/test-classes",
+      "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+      "--add-opens=com.m3.collections/com.m3.collections=ALL-UNNAMED",
+      "--add-opens=java.base/java.lang=com.m3.collections,ALL-UNNAMED",
+      "-Djava.library.path=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib",
+      "-Dm3.collections.rank.native=true",
+      "-Dm3.collections.signal.native=true",
+      "-Dm3.mask.spans.native.required=true",
+      "-Dm3.collections.all.native.required=true",
+      "-Xlog:class+load=info:file=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/logs/filtered-donor-proof-classes.log",
+      "-Xlog:library=info:file=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/logs/filtered-donor-proof-libraries.log",
+      "--module",
+      "com.m3.collections/com.m3.collections.M3FilteredComparatorRepresentativeProof"
+    ],
+    "exit": 0,
+    "seconds": 0.1648549509991426,
+    "timed_out": false,
+    "log": "logs/filtered-donor-proof.log",
+    "sha256": "5758099caaadd25d26570b7b430ee857f8d4692bfe983e9af7d88754188d2de6"
+  },
+  {
+    "label": "filtered-expanded-contract",
+    "command": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/bin/java",
+      "-ea",
+      "-Xmx768m",
+      "-XX:ActiveProcessorCount=2",
+      "-Xcheck:jni",
+      "-Xshare:off",
+      "--add-modules=com.m3.collections,jdk.management",
+      "--patch-module=com.m3.collections=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/test-classes",
+      "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+      "--add-opens=com.m3.collections/com.m3.collections=ALL-UNNAMED",
+      "--add-opens=java.base/java.lang=com.m3.collections,ALL-UNNAMED",
+      "-Djava.library.path=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib",
+      "-Dm3.collections.rank.native=true",
+      "-Dm3.collections.signal.native=true",
+      "-Dm3.mask.spans.native.required=true",
+      "-Dm3.collections.all.native.required=true",
+      "-Xlog:class+load=info:file=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/logs/filtered-expanded-contract-classes.log",
+      "-Xlog:library=info:file=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/logs/filtered-expanded-contract-libraries.log",
+      "--module",
+      "com.m3.collections/com.m3.collections.M3FilteredSortedRepresentativeContract"
+    ],
+    "exit": 0,
+    "seconds": 0.16431088899844326,
+    "timed_out": false,
+    "log": "logs/filtered-expanded-contract.log",
+    "sha256": "522d7b04b8bda40cd7e75e80e7722af97419a9e4201a12000095c4602f8f5634"
+  },
+  {
+    "label": "filtered-cursor-trace",
+    "command": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/bin/java",
+      "-ea",
+      "-Xmx768m",
+      "-XX:ActiveProcessorCount=2",
+      "-Xcheck:jni",
+      "-Xshare:off",
+      "--add-modules=com.m3.collections,jdk.management",
+      "--patch-module=com.m3.collections=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/test-classes",
+      "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+      "--add-opens=com.m3.collections/com.m3.collections=ALL-UNNAMED",
+      "--add-opens=java.base/java.lang=com.m3.collections,ALL-UNNAMED",
+      "-Djava.library.path=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib",
+      "-Dm3.collections.rank.native=true",
+      "-Dm3.collections.signal.native=true",
+      "-Dm3.mask.spans.native.required=true",
+      "-Dm3.collections.all.native.required=true",
+      "-Xlog:class+load=info:file=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/logs/filtered-cursor-trace-classes.log",
+      "-Xlog:library=info:file=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/logs/filtered-cursor-trace-libraries.log",
+      "--module",
+      "com.m3.collections/com.m3.collections.M3FilteredCursorExceptionContract",
+      "trace"
+    ],
+    "exit": 0,
+    "seconds": 0.26589058700119494,
+    "timed_out": false,
+    "log": "logs/filtered-cursor-trace.log",
+    "sha256": "eaccb21ece654f8b108cb4775b848fa12b6451415cec3c90330d74c8712282c8"
+  },
+  {
+    "label": "tree-composed-compact",
+    "command": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/bin/java",
+      "-ea",
+      "-Xmx768m",
+      "-XX:ActiveProcessorCount=2",
+      "-Xcheck:jni",
+      "-Xshare:off",
+      "--add-modules=com.m3.collections,jdk.management",
+      "--patch-module=com.m3.collections=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/test-classes",
+      "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+      "--add-opens=com.m3.collections/com.m3.collections=ALL-UNNAMED",
+      "--add-opens=java.base/java.lang=com.m3.collections,ALL-UNNAMED",
+      "-Djava.library.path=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib",
+      "-Dm3.collections.rank.native=true",
+      "-Dm3.collections.signal.native=true",
+      "-Dm3.mask.spans.native.required=true",
+      "-Dm3.collections.all.native.required=true",
+      "-Xint",
+      "-XX:+UnlockExperimentalVMOptions",
+      "-XX:+UseM3StringStorage",
+      "-Xlog:class+load=info:file=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/logs/tree-composed-compact-classes.log",
+      "-Xlog:library=info:file=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/logs/tree-composed-compact-libraries.log",
+      "--module",
+      "com.m3.collections/com.m3.collections.M3StringTreeConsumerContract",
+      "requireM3"
+    ],
+    "exit": 0,
+    "seconds": 5.378523113999108,
+    "timed_out": false,
+    "log": "logs/tree-composed-compact.log",
+    "sha256": "271a491b5f76705ae9902e02655aa80eb5f08c879e55f3e0e15672e8dbea64f3"
+  },
+  {
+    "label": "tree-composed-wide",
+    "command": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/bin/java",
+      "-ea",
+      "-Xmx768m",
+      "-XX:ActiveProcessorCount=2",
+      "-Xcheck:jni",
+      "-Xshare:off",
+      "--add-modules=com.m3.collections,jdk.management",
+      "--patch-module=com.m3.collections=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/test-classes",
+      "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+      "--add-opens=com.m3.collections/com.m3.collections=ALL-UNNAMED",
+      "--add-opens=java.base/java.lang=com.m3.collections,ALL-UNNAMED",
+      "-Djava.library.path=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib",
+      "-Dm3.collections.rank.native=true",
+      "-Dm3.collections.signal.native=true",
+      "-Dm3.mask.spans.native.required=true",
+      "-Dm3.collections.all.native.required=true",
+      "-Xint",
+      "-XX:+UnlockExperimentalVMOptions",
+      "-XX:+UseM3StringStorage",
+      "-XX:-CompactStrings",
+      "-Xlog:class+load=info:file=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/logs/tree-composed-wide-classes.log",
+      "-Xlog:library=info:file=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/logs/tree-composed-wide-libraries.log",
+      "--module",
+      "com.m3.collections/com.m3.collections.M3StringTreeConsumerContract",
+      "requireM3"
+    ],
+    "exit": 0,
+    "seconds": 6.437446643998555,
+    "timed_out": false,
+    "log": "logs/tree-composed-wide.log",
+    "sha256": "271a491b5f76705ae9902e02655aa80eb5f08c879e55f3e0e15672e8dbea64f3"
+  },
+  {
+    "label": "mask-compactor-native",
+    "command": [
+      "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/bin/java",
+      "-ea",
+      "-Xmx768m",
+      "-XX:ActiveProcessorCount=2",
+      "-Xcheck:jni",
+      "-Xshare:off",
+      "--add-modules=com.m3.collections,jdk.management",
+      "--patch-module=com.m3.collections=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/test-classes",
+      "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+      "--add-opens=com.m3.collections/com.m3.collections=ALL-UNNAMED",
+      "--add-opens=java.base/java.lang=com.m3.collections,ALL-UNNAMED",
+      "-Djava.library.path=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib",
+      "-Dm3.collections.rank.native=true",
+      "-Dm3.collections.signal.native=true",
+      "-Dm3.mask.spans.native.required=true",
+      "-Dm3.collections.all.native.required=true",
+      "-Xlog:class+load=info:file=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/logs/mask-compactor-native-classes.log",
+      "-Xlog:library=info:file=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/logs/mask-compactor-native-libraries.log",
+      "--module",
+      "com.m3.collections/com.m3.collections.M3MaskCompactorSpanContract",
+      "native"
+    ],
+    "exit": 0,
+    "seconds": 0.414767849000782,
+    "timed_out": false,
+    "log": "logs/mask-compactor-native.log",
+    "sha256": "635379c7f49e5fb6227648043f8d91241a907c50e99f0bbaf3339c535f07228e"
+  },
+  {
+    "label": "linked-junit",
+    "command": [
+      "/tmp/m3jdk21-tools/apache-maven-3.9.9/bin/mvn",
+      "-o",
+      "-B",
+      "-ntp",
+      "-s",
+      "/tmp/m3jdk21-tools/settings.xml",
+      "-Dmaven.repo.local=/tmp/m3jdk21-tools/m2",
+      "-f",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/m3/collections/pom.xml",
+      "-Djvm=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/bin/java",
+      "-DargLine=-ea -Xmx768m -XX:ActiveProcessorCount=2 -Xcheck:jni -Xshare:off --add-modules=com.m3.collections,jdk.management --patch-module=com.m3.collections=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/test-classes --add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management --add-opens=com.m3.collections/com.m3.collections=ALL-UNNAMED --add-opens=java.base/java.lang=com.m3.collections,ALL-UNNAMED -Djava.library.path=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib -Dm3.collections.rank.native=true -Dm3.collections.signal.native=true -Dm3.mask.spans.native.required=true -Dm3.collections.all.native.required=true -Xlog:class+load=info:file=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/logs/linked-junit-classes-%p.log -Xlog:library=info:file=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/logs/linked-junit-libraries-%p.log",
+      "-Dsurefire.reportNameSuffix=linked-string-keys-001",
+      "-DfailIfNoTests=true",
+      "surefire:test"
+    ],
+    "exit": 0,
+    "seconds": 58.96214793499894,
+    "timed_out": false,
+    "log": "logs/linked-junit.log",
+    "sha256": "29d34dc4eae8961c5f636e30f74a4f319f2a276d78dcfa41f5fa6b5f4ffddcce"
+  }
+]

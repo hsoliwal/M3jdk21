@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.OwnedGuavaHashBiMap20261017
+displayName: Receive the owned M3 Guava API BiMap and its scoped contract oracles
+description: Installs three exact hash-qualified Java sources from absent targets or their fixed-point postimages. Qualification covers canonical-object common protocol and dense inverse force-put invariants; full provider parity is excluded.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: owned-guava-hash-bimap
+      lst: false

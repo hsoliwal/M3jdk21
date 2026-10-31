@@ -1,0 +1,2718 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "source_epoch": {
+    "name": "E2",
+    "repository": "hsoliwal/M3jdk21",
+    "source_base": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+    "E1_target_commit": "f35342202149b98465bb4e9e6be807eb0cf3f762",
+    "E1_canonical_commit": "0ee3e62241cb1252f2d018a33969f64e66c2b2fe",
+    "aggregate_changed_paths_relative_to_base": 55,
+    "receiving_paths_over_E1": [
+      "test/jdk/java/lang/String/M3StringPoolMetadataBoundsTest.java",
+      "m3/runtime-integration/check-m3string-concat-reference-dag.py",
+      "m3/runtime-integration/recipe/manifest.json",
+      "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java",
+      "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java",
+      "src/java.base/share/classes/java/lang/M3StringPool.java",
+      "test/jdk/java/lang/String/M3StringCanonicalDagTest.java"
+    ],
+    "source_seal_sha256": "00882b5e2c1dbb162aff9fdabdf98a226757919b288621ab219902d2b4609275",
+    "source_seal_format": "SHA-256 of sorted SOURCE55 row objects serialized as JSON with sorted keys and compact separators",
+    "all_55_actual_receiver_bytes_verified": true,
+    "final_publication_commit": null,
+    "publication_binding": "Final canonical and target publication commits are pending at this frozen evidence checkpoint. The enclosing SOURCE_RECEIPT.json supplies their later binding to these exact source seals.",
+    "image_scope": "Rebuilt source image, not --patch-module runtime classes. Native test libraries are the selected JNI fixture libraries passed through jtreg -nativepath."
+  },
+  "aggregate_status": "FAILED_WITH_TWO_INHERITED_LIMITATIONS",
+  "harness_exit": 2,
+  "harness_exit_provenance": "executing parent confirmed direct tool completion",
+  "test_counts": {
+    "Passed": 26,
+    "Failed": 2
+  },
+  "action_counts": {
+    "build": 69,
+    "compile": 30,
+    "main": 67
+  },
+  "action_result_counts": {
+    "Passed": 164,
+    "Failed": 2
+  },
+  "main_result_counts": {
+    "Passed": 65,
+    "Failed": 2
+  },
+  "timeout_or_other_errors": 0,
+  "selected_tests_unchanged_from_E1": true,
+  "scope": "All 67 separately recorded stdout/stderr pairs retained; build/compile actions have no such captured blocks. E1 packet remains unchanged.",
+  "E1_to_E2": [
+    {
+      "test": "java/io/StringReader/M3NativeStringIoTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 4,
+      "E2_main_actions": 4
+    },
+    {
+      "test": "java/lang/String/M3StringCanonicalDagTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 1,
+      "E2_main_actions": 2
+    },
+    {
+      "test": "java/lang/String/M3StringCharArrayCompositionTest.java",
+      "E1": "Failed. Execution failed: `main' threw exception: java.lang.NoSuchMethodException: java.lang.M3String.admitArrays([[C)",
+      "E2": "Failed. Execution failed: `main' threw exception: java.lang.NoSuchMethodException: java.lang.M3String.admitArrays([[C)",
+      "E1_main_actions": 1,
+      "E2_main_actions": 1
+    },
+    {
+      "test": "java/lang/String/M3StringCodePointBoundsTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 4,
+      "E2_main_actions": 4
+    },
+    {
+      "test": "java/lang/String/M3StringCompositeComparisonTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 3,
+      "E2_main_actions": 3
+    },
+    {
+      "test": "java/lang/String/M3StringCompositePrefixCursorTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 2,
+      "E2_main_actions": 2
+    },
+    {
+      "test": "java/lang/String/M3StringConcatLengthOverflowTest.java",
+      "E1": "Error. Program `<M3JDK21>/build/m3-composed-release/images/jdk/bin/java' timed out (timeout set to 480000ms, elapsed time including timeout handling was 480122ms).",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 1,
+      "E2_main_actions": 2
+    },
+    {
+      "test": "java/lang/String/M3StringConcatReferenceDagTest.java",
+      "E1": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: null toString conversion",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 1,
+      "E2_main_actions": 1
+    },
+    {
+      "test": "java/lang/String/M3StringCriticalBulkTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 4,
+      "E2_main_actions": 4
+    },
+    {
+      "test": "java/lang/String/M3StringJniShadowLifetimeTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 2,
+      "E2_main_actions": 2
+    },
+    {
+      "test": "java/lang/String/M3StringLeafCursorCanonicalTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 1,
+      "E2_main_actions": 1
+    },
+    {
+      "test": "java/lang/String/M3StringModifiedUtf8DpTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 1,
+      "E2_main_actions": 1
+    },
+    {
+      "test": "java/lang/String/M3StringNativePublicationFailureTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 2,
+      "E2_main_actions": 2
+    },
+    {
+      "test": "java/lang/String/M3StringOwnerRangeLifetimeTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 8,
+      "E2_main_actions": 8
+    },
+    {
+      "test": "java/lang/String/M3StringPathCursorTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 2,
+      "E2_main_actions": 2
+    },
+    {
+      "test": "java/lang/String/M3StringPoolBoundsTest.java",
+      "E1": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: a refused admission leaves the accounting untouched",
+      "E2": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: a refused admission leaves the accounting untouched",
+      "E1_main_actions": 2,
+      "E2_main_actions": 2
+    },
+    {
+      "test": "java/lang/String/M3StringPoolMetadataBoundsTest.java",
+      "E1": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Latin-1 admission refused",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 1,
+      "E2_main_actions": 3
+    },
+    {
+      "test": "java/lang/String/M3StringRegexNativeBridgeTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 3,
+      "E2_main_actions": 3
+    },
+    {
+      "test": "java/lang/String/M3StringTuplePublicationFailureTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 4,
+      "E2_main_actions": 4
+    },
+    {
+      "test": "java/lang/String/M3StringUtf16DifferentialTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 2,
+      "E2_main_actions": 2
+    },
+    {
+      "test": "java/util/CollectionViews/BootstrapViewsTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 1,
+      "E2_main_actions": 1
+    },
+    {
+      "test": "java/util/CollectionViews/CollectionViewsCoreContract.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 1,
+      "E2_main_actions": 1
+    },
+    {
+      "test": "java/util/CollectionViews/CollectionViewsCowBulkTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 1,
+      "E2_main_actions": 1
+    },
+    {
+      "test": "java/util/CollectionViews/CollectionViewsIdentityContract.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 1,
+      "E2_main_actions": 1
+    },
+    {
+      "test": "java/util/CollectionViews/CollectionViewsIdentityTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 1,
+      "E2_main_actions": 1
+    },
+    {
+      "test": "java/util/CollectionViews/CollectionViewsRefinement.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 2,
+      "E2_main_actions": 2
+    },
+    {
+      "test": "jdk/internal/m3/M3IndexMaskWindowIntegrationTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 3,
+      "E2_main_actions": 3
+    },
+    {
+      "test": "jdk/internal/m3/M3IndexMaskWindowJniTest.java",
+      "E1": "Passed. Execution successful",
+      "E2": "Passed. Execution successful",
+      "E1_main_actions": 4,
+      "E2_main_actions": 4
+    }
+  ],
+  "tests": [
+    {
+      "test": "java/io/StringReader/M3NativeStringIoTest.java",
+      "source": {
+        "path": "test/jdk/java/io/StringReader/M3NativeStringIoTest.java",
+        "sha256": "b52ff730aeb9dc711ccd3163af5091d62f92784c9f8d8471c4225deaac0b78fa",
+        "git_blob": "d6458ada88af968305ef58c01e8c3072f964a8c7",
+        "bytes": 29399,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "3150580ee689eb582e58f3fb1440aa9277cdeb3676a617064725507637abab0c",
+      "raw_jtr_bytes": 23359,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "6261 0:00:06.261",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3NativeStringIoTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3NativeStringIoTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:27 IST 2026\nTest directory:\n  compile: M3NativeStringIoTest\nfinished: Wed Oct 21 08:44:29 IST 2026\nelapsed time (seconds): 1.404\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 1.404
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/io/StringReader/M3NativeStringIoTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/io/StringReader/M3NativeStringIoTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:27 IST 2026\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.access=ALL-UNNAMED\nMode: agentvm\nfinished: Wed Oct 21 08:44:29 IST 2026\nelapsed time (seconds): 1.4\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 1.4
+        },
+        {
+          "kind": "main",
+          "command": "main -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3NativeStringIoTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3NativeStringIoTest\nreason: User specified action: run main/othervm -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3NativeStringIoTest \nstarted: Wed Oct 21 08:44:29 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.access=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:29 IST 2026\nelapsed time (seconds): 0.241\n",
+          "stdout": "M3NativeStringIoTest reconstructed: 1079257 checks; cursors=0; contractsOnly=false\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.241
+        },
+        {
+          "kind": "build",
+          "command": "build M3NativeStringIoTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3NativeStringIoTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:29 IST 2026\nfinished: Wed Oct 21 08:44:29 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3NativeStringIoTest requireCursor",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3NativeStringIoTest requireCursor\nreason: User specified action: run main/othervm -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3NativeStringIoTest requireCursor \nstarted: Wed Oct 21 08:44:29 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.access=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:30 IST 2026\nelapsed time (seconds): 1.4\n",
+          "stdout": "M3NativeStringIoTest reconstructed: 1282596 checks; cursors=16; contractsOnly=false\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 1.4
+        },
+        {
+          "kind": "build",
+          "command": "build M3NativeStringIoTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3NativeStringIoTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:30 IST 2026\nfinished: Wed Oct 21 08:44:30 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3NativeStringIoTest requireCursor",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3NativeStringIoTest requireCursor\nreason: User specified action: run main/othervm -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3NativeStringIoTest requireCursor \nstarted: Wed Oct 21 08:44:30 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.access=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:32 IST 2026\nelapsed time (seconds): 1.591\n",
+          "stdout": "M3NativeStringIoTest reconstructed: 1282596 checks; cursors=16; contractsOnly=false\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 1.591
+        },
+        {
+          "kind": "build",
+          "command": "build M3NativeStringIoTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3NativeStringIoTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:32 IST 2026\nfinished: Wed Oct 21 08:44:32 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xint -Xmx128m -XX:+UseSerialGC -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3NativeStringIoTest requireCursor",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xint -Xmx128m -XX:+UseSerialGC -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3NativeStringIoTest requireCursor\nreason: User specified action: run main/othervm -Xint -Xmx128m -XX:+UseSerialGC -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3NativeStringIoTest requireCursor \nstarted: Wed Oct 21 08:44:32 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.access=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:34 IST 2026\nelapsed time (seconds): 1.558\n",
+          "stdout": "M3NativeStringIoTest reconstructed: 1282596 checks; cursors=16; contractsOnly=false\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 1.558
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringCanonicalDagTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringCanonicalDagTest.java",
+        "sha256": "ce58fbed5fb3608d625059d32b565bba80ca1bfa7ed556bdaa4d86ad03454c95",
+        "git_blob": "e8397842a00620c47bdae4c9f48b3165fe345315",
+        "bytes": 9637,
+        "provenance": "received receive-coordinate21"
+      },
+      "raw_jtr_sha256": "1319b8421f2346f335c7b7caf3a802259e4bbb0e2edc703b1fc910c13822c637",
+      "raw_jtr_bytes": 13278,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "2949 0:00:02.949",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringCanonicalDagTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCanonicalDagTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:27 IST 2026\nTest directory:\n  compile: M3StringCanonicalDagTest\nfinished: Wed Oct 21 08:44:28 IST 2026\nelapsed time (seconds): 1.006\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 1.006
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringCanonicalDagTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringCanonicalDagTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:27 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:44:28 IST 2026\nelapsed time (seconds): 1.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 1.0
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCanonicalDagTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCanonicalDagTest\nreason: User specified action: run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCanonicalDagTest \nstarted: Wed Oct 21 08:44:28 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:29 IST 2026\nelapsed time (seconds): 0.986\n",
+          "stdout": "M3_STRING_CANONICAL_DAG_PASS checks=59 height=12\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.986
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringCanonicalDagTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCanonicalDagTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:29 IST 2026\nfinished: Wed Oct 21 08:44:29 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCanonicalDagTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCanonicalDagTest\nreason: User specified action: run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCanonicalDagTest \nstarted: Wed Oct 21 08:44:29 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:30 IST 2026\nelapsed time (seconds): 0.891\n",
+          "stdout": "M3_STRING_CANONICAL_DAG_PASS checks=59 height=12\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.891
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringCharArrayCompositionTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringCharArrayCompositionTest.java",
+        "sha256": "a45436df17611c96e0c8c0057f89d1ecbf3553d6f1a3669e948f8aaebc87f046",
+        "git_blob": "57cea18b1e6599286b74c075c5ec31489f84ce48",
+        "bytes": 7688,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "dc66eeee202f736a7962104e593ddab9d5e53f988d4764b80e2dee1f93f63733",
+      "raw_jtr_bytes": 10627,
+      "status": "Failed. Execution failed: `main' threw exception: java.lang.NoSuchMethodException: java.lang.M3String.admitArrays([[C)",
+      "status_class": "Failed",
+      "elapsed_recorded": "505 0:00:00.505",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringCharArrayCompositionTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCharArrayCompositionTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:30 IST 2026\nTest directory:\n  compile: M3StringCharArrayCompositionTest\nfinished: Wed Oct 21 08:44:30 IST 2026\nelapsed time (seconds): 0.29\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.29
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringCharArrayCompositionTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringCharArrayCompositionTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:30 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:44:30 IST 2026\nelapsed time (seconds): 0.289\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.289
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCharArrayCompositionTest",
+          "status": "Failed. Execution failed: `main' threw exception: java.lang.NoSuchMethodException: java.lang.M3String.admitArrays([[C)",
+          "status_class": "Failed",
+          "messages": "command: main --add-opens java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCharArrayCompositionTest\nreason: User specified action: run main/othervm --add-opens java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCharArrayCompositionTest \nstarted: Wed Oct 21 08:44:30 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:31 IST 2026\nelapsed time (seconds): 0.213\n",
+          "stdout": "",
+          "stderr": "java.lang.NoSuchMethodException: java.lang.M3String.admitArrays([[C)\n\tat java.base/java.lang.Class.getDeclaredMethod(Class.java:2848)\n\tat M3StringCharArrayCompositionTest.method(M3StringCharArrayCompositionTest.java:31)\n\tat M3StringCharArrayCompositionTest.main(M3StringCharArrayCompositionTest.java:90)\n\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat com.sun.javatest.regtest.agent.MainWrapper$MainTask.run(MainWrapper.java:138)\n\tat java.base/java.lang.Thread.run(Thread.java:1583)\n\nJavaTest Message: Test threw exception: java.lang.NoSuchMethodException: java.lang.M3String.admitArrays([[C)\nJavaTest Message: shutting down test\n\nSTATUS:Failed.`main' threw exception: java.lang.NoSuchMethodException: java.lang.M3String.admitArrays([[C)\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.213
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringCodePointBoundsTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringCodePointBoundsTest.java",
+        "sha256": "4c6936ded44cae6f209e9c93660f334fb2d3f44f3822ff03a9806dbfe1f55c4e",
+        "git_blob": "5c3f3598361b2045c5bad0b06ca06f0d98b6409a",
+        "bytes": 7359,
+        "provenance": "unchanged frozen E1 changed postimage"
+      },
+      "raw_jtr_sha256": "789bd7d78c24099d758fa8c7515556105013c30ca3e9b4ad0960d00e252ce8be",
+      "raw_jtr_bytes": 23239,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "1195 0:00:01.195",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringCodePointBoundsTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCodePointBoundsTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:31 IST 2026\nTest directory:\n  compile: M3StringCodePointBoundsTest\nfinished: Wed Oct 21 08:44:31 IST 2026\nelapsed time (seconds): 0.182\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.182
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringCodePointBoundsTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringCodePointBoundsTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:31 IST 2026\nAdditional options from @modules: --add-modules java.base\nMode: agentvm\nfinished: Wed Oct 21 08:44:31 IST 2026\nelapsed time (seconds): 0.182\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.182
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringCodePointBoundsTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringCodePointBoundsTest\nreason: User specified action: run main/othervm -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringCodePointBoundsTest \nstarted: Wed Oct 21 08:44:31 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:31 IST 2026\nelapsed time (seconds): 0.175\n",
+          "stdout": "M3_STRING_CODEPOINT_BOUNDS_PASS checks=39 malformed=12 valid=5 requireM3=false\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.175
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringCodePointBoundsTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCodePointBoundsTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:31 IST 2026\nfinished: Wed Oct 21 08:44:31 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -XX:-CompactStrings M3StringCodePointBoundsTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -XX:-CompactStrings M3StringCodePointBoundsTest\nreason: User specified action: run main/othervm -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -XX:-CompactStrings M3StringCodePointBoundsTest \nstarted: Wed Oct 21 08:44:31 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:31 IST 2026\nelapsed time (seconds): 0.217\n",
+          "stdout": "M3_STRING_CODEPOINT_BOUNDS_PASS checks=39 malformed=12 valid=5 requireM3=false\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.217
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringCodePointBoundsTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCodePointBoundsTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:31 IST 2026\nfinished: Wed Oct 21 08:44:31 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCodePointBoundsTest requireM3",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCodePointBoundsTest requireM3\nreason: User specified action: run main/othervm -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCodePointBoundsTest requireM3 \nstarted: Wed Oct 21 08:44:31 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:32 IST 2026\nelapsed time (seconds): 0.292\n",
+          "stdout": "M3_STRING_CODEPOINT_BOUNDS_PASS checks=43 malformed=12 valid=5 requireM3=true\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.292
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringCodePointBoundsTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCodePointBoundsTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:32 IST 2026\nfinished: Wed Oct 21 08:44:32 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCodePointBoundsTest requireM3",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCodePointBoundsTest requireM3\nreason: User specified action: run main/othervm -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCodePointBoundsTest requireM3 \nstarted: Wed Oct 21 08:44:32 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:32 IST 2026\nelapsed time (seconds): 0.324\n",
+          "stdout": "M3_STRING_CODEPOINT_BOUNDS_PASS checks=43 malformed=12 valid=5 requireM3=true\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.324
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringCompositeComparisonTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringCompositeComparisonTest.java",
+        "sha256": "35da6dbc7cb4e355b787f1b556aecafcfabc8326cea0adb868f865190143c97f",
+        "git_blob": "439e067eff1cabd60017a80ac9e24e6c4160d56c",
+        "bytes": 12707,
+        "provenance": "unchanged frozen E1 changed postimage"
+      },
+      "raw_jtr_sha256": "e4836f36e35e6e9f52d87f75f4dddad347bc8744432e76978c3cebf5708f6d95",
+      "raw_jtr_bytes": 17522,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "11065 0:00:11.065",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringCompositeComparisonTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCompositeComparisonTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:32 IST 2026\nTest directory:\n  compile: M3StringCompositeComparisonTest\nfinished: Wed Oct 21 08:44:32 IST 2026\nelapsed time (seconds): 0.112\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.112
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringCompositeComparisonTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringCompositeComparisonTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:32 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:44:32 IST 2026\nelapsed time (seconds): 0.111\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.111
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCompositeComparisonTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCompositeComparisonTest\nreason: User specified action: run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCompositeComparisonTest \nstarted: Wed Oct 21 08:44:32 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:35 IST 2026\nelapsed time (seconds): 3.41\n",
+          "stdout": "M3_STRING_COMPOSITE_COMPARISON_PASS checks=120923\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 3.41
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringCompositeComparisonTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCompositeComparisonTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:35 IST 2026\nfinished: Wed Oct 21 08:44:35 IST 2026\nelapsed time (seconds): 0.001\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.001
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCompositeComparisonTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCompositeComparisonTest\nreason: User specified action: run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCompositeComparisonTest \nstarted: Wed Oct 21 08:44:35 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:39 IST 2026\nelapsed time (seconds): 3.488\n",
+          "stdout": "M3_STRING_COMPOSITE_COMPARISON_PASS checks=120923\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 3.488
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringCompositeComparisonTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCompositeComparisonTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:39 IST 2026\nfinished: Wed Oct 21 08:44:39 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xint M3StringCompositeComparisonTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xint M3StringCompositeComparisonTest\nreason: User specified action: run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xint M3StringCompositeComparisonTest \nstarted: Wed Oct 21 08:44:39 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:43 IST 2026\nelapsed time (seconds): 4.052\n",
+          "stdout": "M3_STRING_COMPOSITE_COMPARISON_PASS checks=120923\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 4.052
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringCompositePrefixCursorTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java",
+        "sha256": "df5be156775200b0883dbfa390ee61eb281724863ea95563948aefb51ce232c6",
+        "git_blob": "7f49bc24cf64e8562d17948e31d7e891a39d88c4",
+        "bytes": 7886,
+        "provenance": "unchanged frozen E1 changed postimage"
+      },
+      "raw_jtr_sha256": "8e831dd34284269ae6665959518cb3714494d7cae373eb97a5ca9a9217a442ad",
+      "raw_jtr_bytes": 13623,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "4342 0:00:04.342",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringCompositePrefixCursorTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCompositePrefixCursorTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:34 IST 2026\nTest directory:\n  compile: M3StringCompositePrefixCursorTest\nfinished: Wed Oct 21 08:44:34 IST 2026\nelapsed time (seconds): 0.126\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.126
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:34 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:44:34 IST 2026\nelapsed time (seconds): 0.125\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.125
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCompositePrefixCursorTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCompositePrefixCursorTest\nreason: User specified action: run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCompositePrefixCursorTest \nstarted: Wed Oct 21 08:44:34 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:36 IST 2026\nelapsed time (seconds): 2.109\n",
+          "stdout": "M3_STRING_COMPOSITE_PREFIX_CURSOR_PASS checks=3747\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 2.109
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringCompositePrefixCursorTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCompositePrefixCursorTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:36 IST 2026\nfinished: Wed Oct 21 08:44:36 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCompositePrefixCursorTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCompositePrefixCursorTest\nreason: User specified action: run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCompositePrefixCursorTest \nstarted: Wed Oct 21 08:44:36 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:38 IST 2026\nelapsed time (seconds): 2.089\n",
+          "stdout": "M3_STRING_COMPOSITE_PREFIX_CURSOR_PASS checks=3747\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 2.089
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringConcatLengthOverflowTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java",
+        "sha256": "a07590946ce9330772bb30a21dc35f1f1da0b87b671fdcf30c8630db33a91ac3",
+        "git_blob": "9584076244e2de107d9851d61b77cfb9f730717f",
+        "bytes": 12018,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "da0414fbeafb0bd045ce907f8002093aecc62b5e462f509686fd34f34777a804",
+      "raw_jtr_bytes": 13682,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "738 0:00:00.738",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringConcatLengthOverflowTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringConcatLengthOverflowTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:38 IST 2026\nTest directory:\n  compile: M3StringConcatLengthOverflowTest\nfinished: Wed Oct 21 08:44:38 IST 2026\nelapsed time (seconds): 0.186\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.186
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:38 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:44:38 IST 2026\nelapsed time (seconds): 0.185\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.185
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xmx512m M3StringConcatLengthOverflowTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xmx512m M3StringConcatLengthOverflowTest\nreason: User specified action: run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xmx512m M3StringConcatLengthOverflowTest \nstarted: Wed Oct 21 08:44:38 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:38 IST 2026\nelapsed time (seconds): 0.282\n",
+          "stdout": "M3_STRING_CONCAT_LENGTH_OVERFLOW_PASS|checks=111\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.282
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringConcatLengthOverflowTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringConcatLengthOverflowTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:38 IST 2026\nfinished: Wed Oct 21 08:44:38 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -Xmx512m M3StringConcatLengthOverflowTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -Xmx512m M3StringConcatLengthOverflowTest\nreason: User specified action: run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -Xmx512m M3StringConcatLengthOverflowTest \nstarted: Wed Oct 21 08:44:38 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:39 IST 2026\nelapsed time (seconds): 0.268\n",
+          "stdout": "M3_STRING_CONCAT_LENGTH_OVERFLOW_PASS|checks=111\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.268
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringConcatReferenceDagTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java",
+        "sha256": "053c69bd70909731e6509d06f6b29d31a24e2fb669a57f82bf22587e44e839c0",
+        "git_blob": "387173005a0f1e8ef9a7e026b5b12d2d64d436d4",
+        "bytes": 6913,
+        "provenance": "received receive-concat21"
+      },
+      "raw_jtr_sha256": "98be412a2a4b9fc7550f5f7f93354f7fb21adfcfbf9c68288b1c628c155c8b96",
+      "raw_jtr_bytes": 9489,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "761 0:00:00.761",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringConcatReferenceDagTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringConcatReferenceDagTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:39 IST 2026\nTest directory:\n  compile: M3StringConcatReferenceDagTest\nfinished: Wed Oct 21 08:44:39 IST 2026\nelapsed time (seconds): 0.166\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.166
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:39 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:44:39 IST 2026\nelapsed time (seconds): 0.165\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.165
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringConcatReferenceDagTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringConcatReferenceDagTest\nreason: User specified action: run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringConcatReferenceDagTest \nstarted: Wed Oct 21 08:44:39 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:39 IST 2026\nelapsed time (seconds): 0.593\n",
+          "stdout": "M3_STRING_CONCAT_REFERENCE_DAG_PASS|checks=23|height=10\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.593
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringCriticalBulkTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringCriticalBulkTest.java",
+        "sha256": "97c1372bb36098af26777651c7048207ec1216070aea5ca2128b608baddf382b",
+        "git_blob": "cbdfad28ca10e8233689c631d83302cfb0d540fa",
+        "bytes": 13866,
+        "provenance": "unchanged frozen E1 changed postimage"
+      },
+      "raw_jtr_sha256": "faef1daa18386a4ed2d389fde8b17ca432c0385ad0fcd479daf35473a67a5430",
+      "raw_jtr_bytes": 27748,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "6238 0:00:06.238",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringRegexNativeBridgeTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringRegexNativeBridgeTest\nreason: User specified action: run build M3StringRegexNativeBridgeTest \nstarted: Wed Oct 21 08:44:39 IST 2026\nTest directory:\n  compile: M3StringRegexNativeBridgeTest\nfinished: Wed Oct 21 08:44:40 IST 2026\nelapsed time (seconds): 0.114\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.114
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:39 IST 2026\nAdditional options from @modules: --add-modules java.base\nMode: agentvm\nfinished: Wed Oct 21 08:44:40 IST 2026\nelapsed time (seconds): 0.114\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.114
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringCriticalBulkTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCriticalBulkTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:40 IST 2026\nTest directory:\n  compile: M3StringCriticalBulkTest\nfinished: Wed Oct 21 08:44:40 IST 2026\nelapsed time (seconds): 0.18\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.18
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringCriticalBulkTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringCriticalBulkTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:40 IST 2026\nAdditional options from @modules: --add-modules java.base\nMode: agentvm\nfinished: Wed Oct 21 08:44:40 IST 2026\nelapsed time (seconds): 0.179\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.179
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringCriticalBulkTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringCriticalBulkTest\nreason: User specified action: run main/native/othervm -Xmx128m -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringCriticalBulkTest \nstarted: Wed Oct 21 08:44:40 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:40 IST 2026\nelapsed time (seconds): 0.601\n",
+          "stdout": "M3_STRING_CRITICAL_BULK_PASS checks=1262 fixtures=180 m3Fixtures=0 nativeAtomFixtures=0\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.601
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringCriticalBulkTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCriticalBulkTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:40 IST 2026\nfinished: Wed Oct 21 08:44:40 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCriticalBulkTest requireM3",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCriticalBulkTest requireM3\nreason: User specified action: run main/native/othervm -Xmx128m -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCriticalBulkTest requireM3 \nstarted: Wed Oct 21 08:44:40 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:42 IST 2026\nelapsed time (seconds): 1.648\n",
+          "stdout": "M3_STRING_CRITICAL_BULK_PASS checks=3047 fixtures=184 m3Fixtures=175 nativeAtomFixtures=76\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 1.648
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringCriticalBulkTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCriticalBulkTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:42 IST 2026\nfinished: Wed Oct 21 08:44:42 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCriticalBulkTest requireM3",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCriticalBulkTest requireM3\nreason: User specified action: run main/native/othervm -Xmx128m -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCriticalBulkTest requireM3 \nstarted: Wed Oct 21 08:44:42 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:44 IST 2026\nelapsed time (seconds): 2.022\n",
+          "stdout": "M3_STRING_CRITICAL_BULK_PASS checks=3047 fixtures=184 m3Fixtures=175 nativeAtomFixtures=82\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 2.022
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringCriticalBulkTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringCriticalBulkTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:44 IST 2026\nfinished: Wed Oct 21 08:44:44 IST 2026\nelapsed time (seconds): 0.001\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.001
+        },
+        {
+          "kind": "main",
+          "command": "main -Xint -Xmx128m -XX:+UseSerialGC -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCriticalBulkTest requireM3",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xint -Xmx128m -XX:+UseSerialGC -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCriticalBulkTest requireM3\nreason: User specified action: run main/native/othervm -Xint -Xmx128m -XX:+UseSerialGC -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCriticalBulkTest requireM3 \nstarted: Wed Oct 21 08:44:44 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:46 IST 2026\nelapsed time (seconds): 1.669\n",
+          "stdout": "M3_STRING_CRITICAL_BULK_PASS checks=3047 fixtures=184 m3Fixtures=175 nativeAtomFixtures=76\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 1.669
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringJniShadowLifetimeTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringJniShadowLifetimeTest.java",
+        "sha256": "0e335df88a6871a29244fb0c0f4f24c09dbc0da2a2c5731689bad52b47b4ac23",
+        "git_blob": "137f07cf1a53ce9e6f5472e9c4e4de507b0394b1",
+        "bytes": 5581,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "f35b78a6c6bdb0a6352edfd577e30ef624937d027efa7cb3155e315b2a2b33aa",
+      "raw_jtr_bytes": 13485,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "877 0:00:00.877",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringJniShadowLifetimeTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringJniShadowLifetimeTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:43 IST 2026\nTest directory:\n  compile: M3StringJniShadowLifetimeTest\nfinished: Wed Oct 21 08:44:43 IST 2026\nelapsed time (seconds): 0.163\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.163
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringJniShadowLifetimeTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringJniShadowLifetimeTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:43 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:44:43 IST 2026\nelapsed time (seconds): 0.159\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.159
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringJniShadowLifetimeTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringJniShadowLifetimeTest\nreason: User specified action: run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringJniShadowLifetimeTest \nstarted: Wed Oct 21 08:44:43 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:43 IST 2026\nelapsed time (seconds): 0.34\n",
+          "stdout": "M3_STRING_JNI_SHADOW_LIFETIME_PASS|checks=51\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.34
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringJniShadowLifetimeTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringJniShadowLifetimeTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:43 IST 2026\nfinished: Wed Oct 21 08:44:43 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringJniShadowLifetimeTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringJniShadowLifetimeTest\nreason: User specified action: run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringJniShadowLifetimeTest \nstarted: Wed Oct 21 08:44:43 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:44 IST 2026\nelapsed time (seconds): 0.371\n",
+          "stdout": "M3_STRING_JNI_SHADOW_LIFETIME_PASS|checks=51\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.371
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringLeafCursorCanonicalTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringLeafCursorCanonicalTest.java",
+        "sha256": "8892ad50b51cd77595433dc42d2694d9e05d6359cbeafb79501a03e1c11b982a",
+        "git_blob": "e61909f7696638d1ffc78fb50ce920fd7a1b0da3",
+        "bytes": 5743,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "b71bf1cf203dfc560549fed5cffca123df64e20f1cd4d7c89f643d334fb5c924",
+      "raw_jtr_bytes": 9585,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "730 0:00:00.730",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringLeafCursorCanonicalTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringLeafCursorCanonicalTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:44 IST 2026\nTest directory:\n  compile: M3StringLeafCursorCanonicalTest\nfinished: Wed Oct 21 08:44:44 IST 2026\nelapsed time (seconds): 0.132\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.132
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringLeafCursorCanonicalTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringLeafCursorCanonicalTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:44 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:44:44 IST 2026\nelapsed time (seconds): 0.131\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.131
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringLeafCursorCanonicalTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringLeafCursorCanonicalTest\nreason: User specified action: run main/othervm -Xmx128m --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringLeafCursorCanonicalTest \nstarted: Wed Oct 21 08:44:44 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:45 IST 2026\nelapsed time (seconds): 0.595\n",
+          "stdout": "M3_LEAF_CURSOR_JTREG checks=29771 oracleOnly=false PASS\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.595
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringModifiedUtf8DpTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringModifiedUtf8DpTest.java",
+        "sha256": "7a28373c8eab0d2f0d2e0b49391b2f68885146bae621f7521d9b54710659daf7",
+        "git_blob": "9483f006b04b81d71d37e849c36ac86525bd14aa",
+        "bytes": 9009,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "021703f1dca18454e4b7391ff0f9cb93cd1f6fae9804bb1afeefe183f8780e50",
+      "raw_jtr_bytes": 9578,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "5067 0:00:05.067",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringModifiedUtf8DpTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringModifiedUtf8DpTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:45 IST 2026\nTest directory:\n  compile: M3StringModifiedUtf8DpTest\nfinished: Wed Oct 21 08:44:45 IST 2026\nelapsed time (seconds): 0.171\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.171
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringModifiedUtf8DpTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringModifiedUtf8DpTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:45 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:44:45 IST 2026\nelapsed time (seconds): 0.17\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.17
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringModifiedUtf8DpTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringModifiedUtf8DpTest\nreason: User specified action: run main/native/othervm -Xmx128m --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringModifiedUtf8DpTest \nstarted: Wed Oct 21 08:44:45 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:50 IST 2026\nelapsed time (seconds): 4.894\n",
+          "stdout": "M3_MUTF8_DP_JNI_PASS cases=16122 assertions=242452 maxHeap=134217728\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 4.894
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringNativePublicationFailureTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringNativePublicationFailureTest.java",
+        "sha256": "264666f587d4b5cd99a0d17da66f7833df40b49e4f52aafb4112fcbfc4b16ed1",
+        "git_blob": "71a2fd4447967a22db7fa32aef4312042d6f49a6",
+        "bytes": 10184,
+        "provenance": "unchanged frozen E1 changed postimage"
+      },
+      "raw_jtr_sha256": "552f5e79c654a0664f7b9caec41a3b98fcf27a4d804f76fc41300de6d7b744a5",
+      "raw_jtr_bytes": 14276,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "832 0:00:00.832",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringNativePublicationFailureTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringNativePublicationFailureTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:46 IST 2026\nTest directory:\n  compile: M3StringNativePublicationFailureTest\nfinished: Wed Oct 21 08:44:46 IST 2026\nelapsed time (seconds): 0.167\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.167
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringNativePublicationFailureTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringNativePublicationFailureTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:46 IST 2026\nAdditional options from @modules: --add-modules java.base\nMode: agentvm\nfinished: Wed Oct 21 08:44:46 IST 2026\nelapsed time (seconds): 0.165\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.165
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringNativePublicationFailureTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringNativePublicationFailureTest\nreason: User specified action: run main/othervm -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringNativePublicationFailureTest \nstarted: Wed Oct 21 08:44:46 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:46 IST 2026\nelapsed time (seconds): 0.342\n",
+          "stdout": "M3_STRING_NATIVE_PUBLICATION_FAILURE_PASS checks=40\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.342
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringNativePublicationFailureTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringNativePublicationFailureTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:46 IST 2026\nfinished: Wed Oct 21 08:44:46 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -XX:-CompactStrings M3StringNativePublicationFailureTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -XX:-CompactStrings M3StringNativePublicationFailureTest\nreason: User specified action: run main/othervm -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -XX:-CompactStrings M3StringNativePublicationFailureTest \nstarted: Wed Oct 21 08:44:46 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:47 IST 2026\nelapsed time (seconds): 0.321\n",
+          "stdout": "M3_STRING_NATIVE_PUBLICATION_FAILURE_PASS checks=40\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.321
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringOwnerRangeLifetimeTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringOwnerRangeLifetimeTest.java",
+        "sha256": "ef6925781fc8d7f41fbce18b4b3e7817cf99c84bbe2f7bc78f4cd65e52adb6d0",
+        "git_blob": "83666ccc567c4316c1d543b58d499903109ad164",
+        "bytes": 29194,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "a1d138c600125d9d0a463368cf302d37c4199a7c0cf944c5b52cb3ea94d06a80",
+      "raw_jtr_bytes": 40188,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "91736 0:01:31.736",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringOwnerRangeLifetimeTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:47 IST 2026\nTest directory:\n  compile: M3StringOwnerRangeLifetimeTest\nfinished: Wed Oct 21 08:44:47 IST 2026\nelapsed time (seconds): 0.219\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.219
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringOwnerRangeLifetimeTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringOwnerRangeLifetimeTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:47 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:44:47 IST 2026\nelapsed time (seconds): 0.219\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.219
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringOwnerRangeLifetimeTest\nreason: User specified action: run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringOwnerRangeLifetimeTest \nstarted: Wed Oct 21 08:44:47 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:44:58 IST 2026\nelapsed time (seconds): 11.17\n",
+          "stdout": "M3_STRING_NATIVE_LAST_USE_STRESS_PASS|cases=3584|warmupCases=896|admissionProbes=68|completedReaderEpochs=56|completedPressureEpochs=56|regressionOnly=true\nM3_STRING_OWNER_RANGE_LIFETIME_PASS|checks=10930677\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 11.17
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringOwnerRangeLifetimeTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:58 IST 2026\nfinished: Wed Oct 21 08:44:58 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringOwnerRangeLifetimeTest\nreason: User specified action: run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringOwnerRangeLifetimeTest \nstarted: Wed Oct 21 08:44:58 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:45:10 IST 2026\nelapsed time (seconds): 12.089\n",
+          "stdout": "M3_STRING_NATIVE_LAST_USE_STRESS_PASS|cases=3584|warmupCases=896|admissionProbes=68|completedReaderEpochs=56|completedPressureEpochs=56|regressionOnly=true\nM3_STRING_OWNER_RANGE_LIFETIME_PASS|checks=10930677\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 12.089
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringOwnerRangeLifetimeTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:10 IST 2026\nfinished: Wed Oct 21 08:45:10 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xmx128m -Xint M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xmx128m -Xint M3StringOwnerRangeLifetimeTest\nreason: User specified action: run main/othervm/timeout=90 --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xmx128m -Xint M3StringOwnerRangeLifetimeTest \nstarted: Wed Oct 21 08:45:10 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:45:21 IST 2026\nelapsed time (seconds): 10.823\n",
+          "stdout": "M3_STRING_NATIVE_LAST_USE_STRESS_PASS|cases=3584|warmupCases=896|admissionProbes=68|completedReaderEpochs=56|completedPressureEpochs=56|regressionOnly=true\nM3_STRING_OWNER_RANGE_LIFETIME_PASS|checks=10930677\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 10.823
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringOwnerRangeLifetimeTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:21 IST 2026\nfinished: Wed Oct 21 08:45:21 IST 2026\nelapsed time (seconds): 0.001\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.001
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -Xmx128m -Xint M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -Xmx128m -Xint M3StringOwnerRangeLifetimeTest\nreason: User specified action: run main/othervm/timeout=90 --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -Xmx128m -Xint M3StringOwnerRangeLifetimeTest \nstarted: Wed Oct 21 08:45:21 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:45:33 IST 2026\nelapsed time (seconds): 12.52\n",
+          "stdout": "M3_STRING_NATIVE_LAST_USE_STRESS_PASS|cases=3584|warmupCases=896|admissionProbes=68|completedReaderEpochs=56|completedPressureEpochs=56|regressionOnly=true\nM3_STRING_OWNER_RANGE_LIFETIME_PASS|checks=10930677\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 12.52
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringOwnerRangeLifetimeTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:33 IST 2026\nfinished: Wed Oct 21 08:45:33 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xmx128m -XX:TieredStopAtLevel=1 -XX:CompileThreshold=100 -Xbatch M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xmx128m -XX:TieredStopAtLevel=1 -XX:CompileThreshold=100 -Xbatch M3StringOwnerRangeLifetimeTest\nreason: User specified action: run main/othervm/timeout=90 --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xmx128m -XX:TieredStopAtLevel=1 -XX:CompileThreshold=100 -Xbatch M3StringOwnerRangeLifetimeTest \nstarted: Wed Oct 21 08:45:33 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:45:44 IST 2026\nelapsed time (seconds): 10.902\n",
+          "stdout": "M3_STRING_NATIVE_LAST_USE_STRESS_PASS|cases=3584|warmupCases=896|admissionProbes=68|completedReaderEpochs=56|completedPressureEpochs=56|regressionOnly=true\nM3_STRING_OWNER_RANGE_LIFETIME_PASS|checks=10930677\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 10.902
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringOwnerRangeLifetimeTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:44 IST 2026\nfinished: Wed Oct 21 08:45:44 IST 2026\nelapsed time (seconds): 0.001\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.001
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -Xmx128m -XX:TieredStopAtLevel=1 -XX:CompileThreshold=100 -Xbatch M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -Xmx128m -XX:TieredStopAtLevel=1 -XX:CompileThreshold=100 -Xbatch M3StringOwnerRangeLifetimeTest\nreason: User specified action: run main/othervm/timeout=90 --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -Xmx128m -XX:TieredStopAtLevel=1 -XX:CompileThreshold=100 -Xbatch M3StringOwnerRangeLifetimeTest \nstarted: Wed Oct 21 08:45:44 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:45:56 IST 2026\nelapsed time (seconds): 11.97\n",
+          "stdout": "M3_STRING_NATIVE_LAST_USE_STRESS_PASS|cases=3584|warmupCases=896|admissionProbes=68|completedReaderEpochs=56|completedPressureEpochs=56|regressionOnly=true\nM3_STRING_OWNER_RANGE_LIFETIME_PASS|checks=10930677\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 11.97
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringOwnerRangeLifetimeTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:56 IST 2026\nfinished: Wed Oct 21 08:45:56 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xmx128m -XX:-TieredCompilation -XX:CompileThreshold=100 -Xbatch M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xmx128m -XX:-TieredCompilation -XX:CompileThreshold=100 -Xbatch M3StringOwnerRangeLifetimeTest\nreason: User specified action: run main/othervm/timeout=90 --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xmx128m -XX:-TieredCompilation -XX:CompileThreshold=100 -Xbatch M3StringOwnerRangeLifetimeTest \nstarted: Wed Oct 21 08:45:56 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:46:07 IST 2026\nelapsed time (seconds): 10.608\n",
+          "stdout": "M3_STRING_NATIVE_LAST_USE_STRESS_PASS|cases=3584|warmupCases=896|admissionProbes=68|completedReaderEpochs=56|completedPressureEpochs=56|regressionOnly=true\nM3_STRING_OWNER_RANGE_LIFETIME_PASS|checks=10930677\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 10.608
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringOwnerRangeLifetimeTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:46:07 IST 2026\nfinished: Wed Oct 21 08:46:07 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -Xmx128m -XX:-TieredCompilation -XX:CompileThreshold=100 -Xbatch M3StringOwnerRangeLifetimeTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -Xmx128m -XX:-TieredCompilation -XX:CompileThreshold=100 -Xbatch M3StringOwnerRangeLifetimeTest\nreason: User specified action: run main/othervm/timeout=90 --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings -Xmx128m -XX:-TieredCompilation -XX:CompileThreshold=100 -Xbatch M3StringOwnerRangeLifetimeTest \nstarted: Wed Oct 21 08:46:07 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:46:18 IST 2026\nelapsed time (seconds): 11.43\n",
+          "stdout": "M3_STRING_NATIVE_LAST_USE_STRESS_PASS|cases=3584|warmupCases=896|admissionProbes=68|completedReaderEpochs=56|completedPressureEpochs=56|regressionOnly=true\nM3_STRING_OWNER_RANGE_LIFETIME_PASS|checks=10930677\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 11.43
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringPathCursorTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringPathCursorTest.java",
+        "sha256": "8989a34dd9295a11f9af8c14f4c47062bb1f5cd1573ec0a86c6cce82714420bc",
+        "git_blob": "0d1dc25517ec2d80ad92d36d418f83cb1c46e075",
+        "bytes": 24177,
+        "provenance": "unchanged frozen E1 changed postimage"
+      },
+      "raw_jtr_sha256": "8a88c3bdda4c91d547b2c0e32820755e208d0965ea5f0f6a5a88894cb611163e",
+      "raw_jtr_bytes": 15227,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "5402 0:00:05.402",
+      "actions": [
+        {
+          "kind": "compile",
+          "command": "compile --patch-module java.base=<M3JDK21>/test/jdk/java/lang/String <M3JDK21>/test/jdk/java/lang/String/M3StringPathCursorTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile --patch-module java.base=<M3JDK21>/test/jdk/java/lang/String <M3JDK21>/test/jdk/java/lang/String/M3StringPathCursorTest.java\nreason: User specified action: run compile --patch-module java.base=${test.src} M3StringPathCursorTest.java \nstarted: Wed Oct 21 08:44:50 IST 2026\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.misc=ALL-UNNAMED\nMode: agentvm\nfinished: Wed Oct 21 08:44:50 IST 2026\nelapsed time (seconds): 0.253\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.253
+        },
+        {
+          "kind": "build",
+          "command": "build java.lang.M3StringPathCursorTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build java.lang.M3StringPathCursorTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:50 IST 2026\nfinished: Wed Oct 21 08:44:50 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m --patch-module java.base=<WORK>/evidence/jtreg-work-e2/classes/1/java/lang/String/M3StringPathCursorTest.d java.lang.M3StringPathCursorTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m --patch-module java.base=<WORK>/evidence/jtreg-work-e2/classes/1/java/lang/String/M3StringPathCursorTest.d java.lang.M3StringPathCursorTest\nreason: User specified action: run main/othervm -Xmx128m --patch-module java.base=${test.classes} java.lang.M3StringPathCursorTest \nstarted: Wed Oct 21 08:44:50 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.misc=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:51 IST 2026\nelapsed time (seconds): 0.885\n",
+          "stdout": "M3_PATH_CURSOR_PASS checks=1746792 scenarios=35914 actual_owners=true simulated_owners=false string_admission_tested=false hotspot_jni_integration_tested=false\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.885
+        },
+        {
+          "kind": "build",
+          "command": "build java.lang.M3StringPathCursorTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build java.lang.M3StringPathCursorTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:51 IST 2026\nfinished: Wed Oct 21 08:44:51 IST 2026\nelapsed time (seconds): 0.001\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.001
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -Xint --patch-module java.base=<WORK>/evidence/jtreg-work-e2/classes/1/java/lang/String/M3StringPathCursorTest.d java.lang.M3StringPathCursorTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -Xint --patch-module java.base=<WORK>/evidence/jtreg-work-e2/classes/1/java/lang/String/M3StringPathCursorTest.d java.lang.M3StringPathCursorTest\nreason: User specified action: run main/othervm -Xmx128m -Xint --patch-module java.base=${test.classes} java.lang.M3StringPathCursorTest \nstarted: Wed Oct 21 08:44:51 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.misc=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:55 IST 2026\nelapsed time (seconds): 4.258\n",
+          "stdout": "M3_PATH_CURSOR_PASS checks=1746792 scenarios=35914 actual_owners=true simulated_owners=false string_admission_tested=false hotspot_jni_integration_tested=false\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 4.258
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringPoolBoundsTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringPoolBoundsTest.java",
+        "sha256": "7b45bad08d4ca21a904d69dd9b18f8e84b533ddacbaaf58052a09365411dd539",
+        "git_blob": "9e1d9b371aac24d91c0e7bcae696bb4eb130db66",
+        "bytes": 23843,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "ef9902b8f39650f766394a4fe919193ebd7efeaa1dce0d85a89f0d3e165bbe41",
+      "raw_jtr_bytes": 16038,
+      "status": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: a refused admission leaves the accounting untouched",
+      "status_class": "Failed",
+      "elapsed_recorded": "5537 0:00:05.537",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringPoolBoundsTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringPoolBoundsTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:55 IST 2026\nTest directory:\n  compile: M3StringPoolBoundsTest\nfinished: Wed Oct 21 08:44:55 IST 2026\nelapsed time (seconds): 0.176\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.176
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringPoolBoundsTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringPoolBoundsTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:44:55 IST 2026\nAdditional options from @modules: --add-modules java.base --add-exports java.base/java.lang=ALL-UNNAMED\nMode: agentvm\nfinished: Wed Oct 21 08:44:55 IST 2026\nelapsed time (seconds): 0.175\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.175
+        },
+        {
+          "kind": "main",
+          "command": "main -Dm3.string.pool.maxBytes=16777216 -Dm3.string.pool.maxTuples=64 M3StringPoolBoundsTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Dm3.string.pool.maxBytes=16777216 -Dm3.string.pool.maxTuples=64 M3StringPoolBoundsTest\nreason: User specified action: run main/othervm -Dm3.string.pool.maxBytes=16777216 -Dm3.string.pool.maxTuples=64 M3StringPoolBoundsTest \nstarted: Wed Oct 21 08:44:55 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:44:56 IST 2026\nelapsed time (seconds): 1.219\n",
+          "stdout": "refusal: GC-assisted cycle refused after 122 ms\nM3StringPoolBoundsTest checks=204 flagOn=false maxBytes=16777216 maxTuples=64\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 1.219
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringPoolBoundsTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringPoolBoundsTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:44:56 IST 2026\nfinished: Wed Oct 21 08:44:56 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Dm3.string.pool.maxBytes=16777216 -Dm3.string.pool.maxTuples=64 -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringPoolBoundsTest",
+          "status": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: a refused admission leaves the accounting untouched",
+          "status_class": "Failed",
+          "messages": "command: main -Dm3.string.pool.maxBytes=16777216 -Dm3.string.pool.maxTuples=64 -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringPoolBoundsTest\nreason: User specified action: run main/othervm -Dm3.string.pool.maxBytes=16777216 -Dm3.string.pool.maxTuples=64 -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringPoolBoundsTest \nstarted: Wed Oct 21 08:44:56 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:45:01 IST 2026\nelapsed time (seconds): 4.139\n",
+          "stdout": "",
+          "stderr": "java.lang.AssertionError: a refused admission leaves the accounting untouched\n\tat M3StringPoolBoundsTest.check(M3StringPoolBoundsTest.java:460)\n\tat M3StringPoolBoundsTest.refusal(M3StringPoolBoundsTest.java:167)\n\tat M3StringPoolBoundsTest.main(M3StringPoolBoundsTest.java:66)\n\tat java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:580)\n\tat com.sun.javatest.regtest.agent.MainWrapper$MainTask.run(MainWrapper.java:138)\n\tat java.base/java.lang.Thread.run(Thread.java:1583)\n\nJavaTest Message: Test threw exception: java.lang.AssertionError: a refused admission leaves the accounting untouched\nJavaTest Message: shutting down test\n\nSTATUS:Failed.`main' threw exception: java.lang.AssertionError: a refused admission leaves the accounting untouched\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 4.139
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringPoolMetadataBoundsTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringPoolMetadataBoundsTest.java",
+        "sha256": "1ead247d909137f295633f488f8db0849f405cfed75a87ba4f3779ab67ff9180",
+        "git_blob": "9e1ead9b40b373ce2ee2967e68a072ae43cc8fa9",
+        "bytes": 6242,
+        "provenance": "received receive-budget21"
+      },
+      "raw_jtr_sha256": "68b1d9a532f51e12f30a10d943f2bce73e469b90d78b3cfb4be3705fce31b4b1",
+      "raw_jtr_bytes": 19416,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "1002 0:00:01.002",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringPoolMetadataBoundsTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringPoolMetadataBoundsTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:01 IST 2026\nTest directory:\n  compile: M3StringPoolMetadataBoundsTest\nfinished: Wed Oct 21 08:45:01 IST 2026\nelapsed time (seconds): 0.071\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.071
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringPoolMetadataBoundsTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringPoolMetadataBoundsTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:45:01 IST 2026\nAdditional options from @modules: --add-modules java.base --add-exports java.base/java.lang=ALL-UNNAMED\nMode: agentvm\nfinished: Wed Oct 21 08:45:01 IST 2026\nelapsed time (seconds): 0.07\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.07
+        },
+        {
+          "kind": "main",
+          "command": "main -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 M3StringPoolMetadataBoundsTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 M3StringPoolMetadataBoundsTest\nreason: User specified action: run main/othervm -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 M3StringPoolMetadataBoundsTest \nstarted: Wed Oct 21 08:45:01 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:45:01 IST 2026\nelapsed time (seconds): 0.3\n",
+          "stdout": "M3StringPoolMetadataBoundsTest checks=6660\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.3
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringPoolMetadataBoundsTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringPoolMetadataBoundsTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:01 IST 2026\nfinished: Wed Oct 21 08:45:01 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 -Dm3.string.immediate=false M3StringPoolMetadataBoundsTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 -Dm3.string.immediate=false M3StringPoolMetadataBoundsTest\nreason: User specified action: run main/othervm -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 -Dm3.string.immediate=false M3StringPoolMetadataBoundsTest \nstarted: Wed Oct 21 08:45:01 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:45:01 IST 2026\nelapsed time (seconds): 0.272\n",
+          "stdout": "M3StringPoolMetadataBoundsTest checks=6660\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.272
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringPoolMetadataBoundsTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringPoolMetadataBoundsTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:01 IST 2026\nfinished: Wed Oct 21 08:45:01 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 -XX:-CompactStrings M3StringPoolMetadataBoundsTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 -XX:-CompactStrings M3StringPoolMetadataBoundsTest\nreason: User specified action: run main/othervm -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxBytes=0 -Dm3.string.pool.maxTuples=0 -XX:-CompactStrings M3StringPoolMetadataBoundsTest \nstarted: Wed Oct 21 08:45:01 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:45:02 IST 2026\nelapsed time (seconds): 0.356\n",
+          "stdout": "M3StringPoolMetadataBoundsTest checks=6660\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.356
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringRegexNativeBridgeTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java",
+        "sha256": "27c4588e04d1ab87edc8504dc2b5cef1c842206c71d9ec76e2b23d3cdcd3454d",
+        "git_blob": "52ecbe9d2bbb6c0d0f78c872dd152727f65cb641",
+        "bytes": 3814,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "4520737e5380cb8febb31976d52973c04af99e4dcbf2f202eec0eb8e4a093d8d",
+      "raw_jtr_bytes": 16552,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "5992 0:00:05.992",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringRegexNativeBridgeTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringRegexNativeBridgeTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:02 IST 2026\nTest directory:\n  compile: M3StringRegexNativeBridgeTest\nfinished: Wed Oct 21 08:45:02 IST 2026\nelapsed time (seconds): 0.065\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.065
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:45:02 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:45:02 IST 2026\nelapsed time (seconds): 0.064\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.064
+        },
+        {
+          "kind": "main",
+          "command": "main -Xcheck:jni M3StringRegexNativeBridgeTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xcheck:jni M3StringRegexNativeBridgeTest\nreason: User specified action: run main/native/othervm -Xcheck:jni M3StringRegexNativeBridgeTest \nstarted: Wed Oct 21 08:45:02 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:45:02 IST 2026\nelapsed time (seconds): 0.408\n",
+          "stdout": "M3_STRING_REGEX_NATIVE_BRIDGE_PASS checks=39845\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.408
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringRegexNativeBridgeTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringRegexNativeBridgeTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:02 IST 2026\nfinished: Wed Oct 21 08:45:02 IST 2026\nelapsed time (seconds): 0.001\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.001
+        },
+        {
+          "kind": "main",
+          "command": "main -Xint -Xcheck:jni M3StringRegexNativeBridgeTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xint -Xcheck:jni M3StringRegexNativeBridgeTest\nreason: User specified action: run main/native/othervm -Xint -Xcheck:jni M3StringRegexNativeBridgeTest \nstarted: Wed Oct 21 08:45:02 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:45:04 IST 2026\nelapsed time (seconds): 2.214\n",
+          "stdout": "M3_STRING_REGEX_NATIVE_BRIDGE_PASS checks=39845\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 2.214
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringRegexNativeBridgeTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringRegexNativeBridgeTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:04 IST 2026\nfinished: Wed Oct 21 08:45:04 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xcheck:jni M3StringRegexNativeBridgeTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xcheck:jni M3StringRegexNativeBridgeTest\nreason: User specified action: run main/native/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xcheck:jni M3StringRegexNativeBridgeTest \nstarted: Wed Oct 21 08:45:04 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:45:08 IST 2026\nelapsed time (seconds): 3.302\n",
+          "stdout": "M3_STRING_REGEX_NATIVE_BRIDGE_PASS checks=39845\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 3.302
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringTuplePublicationFailureTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringTuplePublicationFailureTest.java",
+        "sha256": "36c36637b50dd14c45666125bd2b371ed9ac6cd56649a9aa4a616e46b36045f8",
+        "git_blob": "bccf1bcfae701bfcb227e637d5269313b979973b",
+        "bytes": 9686,
+        "provenance": "unchanged frozen E1 changed postimage"
+      },
+      "raw_jtr_sha256": "0ecaf654a1503c9e94f5f90d5503bbf2363464257f78c902aa17eeee574e55b5",
+      "raw_jtr_bytes": 22989,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "964 0:00:00.964",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringTuplePublicationFailureTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringTuplePublicationFailureTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:08 IST 2026\nTest directory:\n  compile: M3StringTuplePublicationFailureTest\nfinished: Wed Oct 21 08:45:08 IST 2026\nelapsed time (seconds): 0.07\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.07
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringTuplePublicationFailureTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringTuplePublicationFailureTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:45:08 IST 2026\nAdditional options from @modules: --add-modules java.base\nMode: agentvm\nfinished: Wed Oct 21 08:45:08 IST 2026\nelapsed time (seconds): 0.069\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.069
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringTuplePublicationFailureTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringTuplePublicationFailureTest\nreason: User specified action: run main/othervm -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage M3StringTuplePublicationFailureTest \nstarted: Wed Oct 21 08:45:08 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:45:08 IST 2026\nelapsed time (seconds): 0.268\n",
+          "stdout": "M3_STRING_TUPLE_PUBLICATION_FAILURE_PASS checks=102 noRetention=false\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.268
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringTuplePublicationFailureTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringTuplePublicationFailureTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:08 IST 2026\nfinished: Wed Oct 21 08:45:08 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -XX:-CompactStrings M3StringTuplePublicationFailureTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -XX:-CompactStrings M3StringTuplePublicationFailureTest\nreason: User specified action: run main/othervm -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -XX:-CompactStrings M3StringTuplePublicationFailureTest \nstarted: Wed Oct 21 08:45:08 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:45:08 IST 2026\nelapsed time (seconds): 0.224\n",
+          "stdout": "M3_STRING_TUPLE_PUBLICATION_FAILURE_PASS checks=102 noRetention=false\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.224
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringTuplePublicationFailureTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringTuplePublicationFailureTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:08 IST 2026\nfinished: Wed Oct 21 08:45:08 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxTuples=0 M3StringTuplePublicationFailureTest noRetention",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxTuples=0 M3StringTuplePublicationFailureTest noRetention\nreason: User specified action: run main/othervm -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -Dm3.string.pool.maxTuples=0 M3StringTuplePublicationFailureTest noRetention \nstarted: Wed Oct 21 08:45:08 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:45:08 IST 2026\nelapsed time (seconds): 0.207\n",
+          "stdout": "M3_STRING_TUPLE_PUBLICATION_FAILURE_PASS checks=98 noRetention=true\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.207
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringTuplePublicationFailureTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringTuplePublicationFailureTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:08 IST 2026\nfinished: Wed Oct 21 08:45:08 IST 2026\nelapsed time (seconds): 0.001\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.001
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -XX:-CompactStrings -Dm3.string.pool.maxTuples=0 M3StringTuplePublicationFailureTest noRetention",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -XX:-CompactStrings -Dm3.string.pool.maxTuples=0 M3StringTuplePublicationFailureTest noRetention\nreason: User specified action: run main/othervm -Xmx128m -XX:+UnlockExperimentalVMOptions -XX:-UseM3StringStorage -XX:-CompactStrings -Dm3.string.pool.maxTuples=0 M3StringTuplePublicationFailureTest noRetention \nstarted: Wed Oct 21 08:45:08 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-opens java.base/java.lang=ALL-UNNAMED\nfinished: Wed Oct 21 08:45:09 IST 2026\nelapsed time (seconds): 0.19\n",
+          "stdout": "M3_STRING_TUPLE_PUBLICATION_FAILURE_PASS checks=98 noRetention=true\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.19
+        }
+      ]
+    },
+    {
+      "test": "java/lang/String/M3StringUtf16DifferentialTest.java",
+      "source": {
+        "path": "test/jdk/java/lang/String/M3StringUtf16DifferentialTest.java",
+        "sha256": "dac351e5e6431e04e5ccdcf4257b97b8f3dd8a808c8514d48e872b0ca1a31fd5",
+        "git_blob": "6ee8d8bba969579512e2af88e283642c2d6dd26d",
+        "bytes": 6818,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "2f13360286bc8b95c0b8748ea3ebcba6d309446c5b18511630d712d861504666",
+      "raw_jtr_bytes": 17438,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "34679 0:00:34.679",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3StringUtf16DifferentialCorpus",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringUtf16DifferentialCorpus\nreason: User specified action: run build M3StringUtf16DifferentialCorpus \nstarted: Wed Oct 21 08:45:09 IST 2026\nTest directory:\n  compile: M3StringUtf16DifferentialCorpus\nfinished: Wed Oct 21 08:45:09 IST 2026\nelapsed time (seconds): 0.025\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.025
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringUtf16DifferentialCorpus.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringUtf16DifferentialCorpus.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:45:09 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:45:09 IST 2026\nelapsed time (seconds): 0.024\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.024
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringUtf16DifferentialTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3StringUtf16DifferentialTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:09 IST 2026\nTest directory:\n  compile: M3StringUtf16DifferentialTest\nfinished: Wed Oct 21 08:45:09 IST 2026\nelapsed time (seconds): 0.177\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.177
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/lang/String/M3StringUtf16DifferentialTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/lang/String/M3StringUtf16DifferentialTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:45:09 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:45:09 IST 2026\nelapsed time (seconds): 0.177\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.177
+        },
+        {
+          "kind": "main",
+          "command": "main M3StringUtf16DifferentialTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main M3StringUtf16DifferentialTest\nreason: User specified action: run main M3StringUtf16DifferentialTest \nstarted: Wed Oct 21 08:45:09 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:45:10 IST 2026\nelapsed time (seconds): 0.76\n",
+          "stdout": "M3_STRING_UTF16_DIFFERENTIAL_PASS|values=524|checks=436112\n",
+          "stderr": "\nJavaTest Message: Test complete.\n\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.76
+        },
+        {
+          "kind": "build",
+          "command": "build M3StringUtf16DifferentialTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3StringUtf16DifferentialTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:10 IST 2026\nfinished: Wed Oct 21 08:45:10 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringUtf16DifferentialTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringUtf16DifferentialTest\nreason: User specified action: run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringUtf16DifferentialTest \nstarted: Wed Oct 21 08:45:10 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:45:43 IST 2026\nelapsed time (seconds): 33.716\n",
+          "stdout": "M3_STRING_UTF16_DIFFERENTIAL_PASS|values=524|checks=436112\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 33.716
+        }
+      ]
+    },
+    {
+      "test": "java/util/CollectionViews/BootstrapViewsTest.java",
+      "source": {
+        "path": "test/jdk/java/util/CollectionViews/BootstrapViewsTest.java",
+        "sha256": "a36b48eee0924abd57ce1a356d26ce4e8c6516170e65478cd42cb2d09fbd8a75",
+        "git_blob": "381dce4756f42cea485bbca7afa856536145f9b4",
+        "bytes": 3103,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "4a48929c7707d1f719f59949742803b244a249df697ebd3f37c59f22c4719abd",
+      "raw_jtr_bytes": 9698,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "181 0:00:00.181",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build BootstrapViewsTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build BootstrapViewsTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:46:00 IST 2026\nTest directory:\n  compile: BootstrapViewsTest\nfinished: Wed Oct 21 08:46:01 IST 2026\nelapsed time (seconds): 0.133\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.133
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/util/CollectionViews/BootstrapViewsTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/util/CollectionViews/BootstrapViewsTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:46:00 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:46:01 IST 2026\nelapsed time (seconds): 0.132\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.132
+        },
+        {
+          "kind": "main",
+          "command": "main BootstrapViewsTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main BootstrapViewsTest\nreason: User specified action: run main BootstrapViewsTest \nstarted: Wed Oct 21 08:46:01 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:46:01 IST 2026\nelapsed time (seconds): 0.047\n",
+          "stdout": "BootstrapViewsTest checks=77 module=java.base loader=bootstrap PASS\n",
+          "stderr": "\nJavaTest Message: Test complete.\n\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.047
+        }
+      ]
+    },
+    {
+      "test": "java/util/CollectionViews/CollectionViewsCoreContract.java",
+      "source": {
+        "path": "test/jdk/java/util/CollectionViews/CollectionViewsCoreContract.java",
+        "sha256": "3060640c56a40eb15a90c20150e3e5ef55aea96af5dab45c53fcba301e929208",
+        "git_blob": "bea898aa61d5a251e22418bd6c1a733a030dcbcd",
+        "bytes": 17357,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "bb8262f1051b3ba22da445e909ed56f2f05555edcbd47b2f3baa794b6821bf80",
+      "raw_jtr_bytes": 10047,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "678 0:00:00.678",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build CollectionViewsCoreContract",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build CollectionViewsCoreContract\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:46:01 IST 2026\nTest directory:\n  compile: CollectionViewsCoreContract\nfinished: Wed Oct 21 08:46:01 IST 2026\nelapsed time (seconds): 0.267\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.267
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/util/CollectionViews/CollectionViewsCoreContract.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/util/CollectionViews/CollectionViewsCoreContract.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:46:01 IST 2026\nAdditional options from @modules: --add-modules java.base,jdk.management\nMode: agentvm\nfinished: Wed Oct 21 08:46:01 IST 2026\nelapsed time (seconds): 0.267\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.267
+        },
+        {
+          "kind": "main",
+          "command": "main -Xss256k CollectionViewsCoreContract",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xss256k CollectionViewsCoreContract\nreason: User specified action: run main/othervm -Xss256k CollectionViewsCoreContract \nstarted: Wed Oct 21 08:46:01 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base,jdk.management --add-opens java.base/java.util=ALL-UNNAMED\nfinished: Wed Oct 21 08:46:01 IST 2026\nelapsed time (seconds): 0.402\n",
+          "stdout": "warm_predicate_tests=100000 depth=64 allocated_bytes=0\nCollectionViewsCoreContract methods=10 checks=14694 baseline=false PASS\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.402
+        }
+      ]
+    },
+    {
+      "test": "java/util/CollectionViews/CollectionViewsCowBulkTest.java",
+      "source": {
+        "path": "test/jdk/java/util/CollectionViews/CollectionViewsCowBulkTest.java",
+        "sha256": "f95a9a35f6b6ed1f25d2e6e5d14a0df7a5bedaa36b4c346f92be53208769da0d",
+        "git_blob": "15ce73d64cfda63f456104e7a08b02f093d62f64",
+        "bytes": 12450,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "3e12865206bb3a5ac00f83c2a3e9649756c49dfbfda1ac64e76ab155221308d3",
+      "raw_jtr_bytes": 9901,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "183 0:00:00.183",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build CollectionViewsCowBulkTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build CollectionViewsCowBulkTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:46:01 IST 2026\nTest directory:\n  compile: CollectionViewsCowBulkTest\nfinished: Wed Oct 21 08:46:01 IST 2026\nelapsed time (seconds): 0.14\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.14
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/util/CollectionViews/CollectionViewsCowBulkTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/util/CollectionViews/CollectionViewsCowBulkTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:46:01 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:46:01 IST 2026\nelapsed time (seconds): 0.139\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.139
+        },
+        {
+          "kind": "main",
+          "command": "main CollectionViewsCowBulkTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main CollectionViewsCowBulkTest\nreason: User specified action: run main CollectionViewsCowBulkTest \nstarted: Wed Oct 21 08:46:01 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:46:01 IST 2026\nelapsed time (seconds): 0.042\n",
+          "stdout": "CollectionViewsCowBulkTest PASS checks=120\n",
+          "stderr": "\nJavaTest Message: Test complete.\n\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.042
+        }
+      ]
+    },
+    {
+      "test": "java/util/CollectionViews/CollectionViewsIdentityContract.java",
+      "source": {
+        "path": "test/jdk/java/util/CollectionViews/CollectionViewsIdentityContract.java",
+        "sha256": "e332147bc9f559f63fa4d5f0909c58e5416f3a20e4992da8ab13d6fba100fd7f",
+        "git_blob": "66210ee42af7e3134ee3053c43918c346da01a8a",
+        "bytes": 28758,
+        "provenance": "unchanged frozen E1 changed postimage"
+      },
+      "raw_jtr_sha256": "c3edc2716b5a96d12ac9e8bfdd4a47c1066919dd1ab18c801d80a9b387f467f7",
+      "raw_jtr_bytes": 10060,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "192 0:00:00.192",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build CollectionViewsIdentityContract",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build CollectionViewsIdentityContract\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:46:01 IST 2026\nTest directory:\n  compile: CollectionViewsIdentityContract\nfinished: Wed Oct 21 08:46:02 IST 2026\nelapsed time (seconds): 0.121\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.121
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/util/CollectionViews/CollectionViewsIdentityContract.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/util/CollectionViews/CollectionViewsIdentityContract.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:46:01 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:46:02 IST 2026\nelapsed time (seconds): 0.12\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.12
+        },
+        {
+          "kind": "main",
+          "command": "main CollectionViewsIdentityContract",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main CollectionViewsIdentityContract\nreason: User specified action: run main CollectionViewsIdentityContract \nstarted: Wed Oct 21 08:46:02 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:46:02 IST 2026\nelapsed time (seconds): 0.07\n",
+          "stdout": "CollectionViewsIdentityContract mode=all: 540 checks passed\n",
+          "stderr": "\nJavaTest Message: Test complete.\n\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.07
+        }
+      ]
+    },
+    {
+      "test": "java/util/CollectionViews/CollectionViewsIdentityTest.java",
+      "source": {
+        "path": "test/jdk/java/util/CollectionViews/CollectionViewsIdentityTest.java",
+        "sha256": "246c2eb27e26310a7ced850f55bb443c08456c557eba6da1686a07f998f87a36",
+        "git_blob": "ecc23746a57dd8b55bf90dd7a17b79c9629cb78f",
+        "bytes": 9688,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "02ea4a7a285ae08c4392915152f64450c31986cb4e2f37382cc6181ee0854193",
+      "raw_jtr_bytes": 9933,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "144 0:00:00.144",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build CollectionViewsIdentityTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build CollectionViewsIdentityTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:46:02 IST 2026\nTest directory:\n  compile: CollectionViewsIdentityTest\nfinished: Wed Oct 21 08:46:02 IST 2026\nelapsed time (seconds): 0.083\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.083
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/util/CollectionViews/CollectionViewsIdentityTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/util/CollectionViews/CollectionViewsIdentityTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:46:02 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:46:02 IST 2026\nelapsed time (seconds): 0.082\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.082
+        },
+        {
+          "kind": "main",
+          "command": "main CollectionViewsIdentityTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main CollectionViewsIdentityTest\nreason: User specified action: run main CollectionViewsIdentityTest \nstarted: Wed Oct 21 08:46:02 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:46:02 IST 2026\nelapsed time (seconds): 0.06\n",
+          "stdout": "CollectionViewsIdentityTest: 46 checks passed\n",
+          "stderr": "\nJavaTest Message: Test complete.\n\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.06
+        }
+      ]
+    },
+    {
+      "test": "java/util/CollectionViews/CollectionViewsRefinement.java",
+      "source": {
+        "path": "test/jdk/java/util/CollectionViews/CollectionViewsRefinement.java",
+        "sha256": "16b8cbd6f1fe1287435284e3680a6c2b603f3fdabb17806cc61ea409d03425a7",
+        "git_blob": "95b7e36eaaed993a4427e3ecc4eb9aa77cc1859b",
+        "bytes": 7770,
+        "provenance": "unchanged frozen E1 changed postimage"
+      },
+      "raw_jtr_sha256": "a85ecb04e9ac229445dd59633e48eb35810be0ee5453bca3d04eebb8e995541a",
+      "raw_jtr_bytes": 13376,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "1756 0:00:01.756",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build CollectionViewsRefinement",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build CollectionViewsRefinement\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:46:02 IST 2026\nTest directory:\n  compile: CollectionViewsRefinement\nfinished: Wed Oct 21 08:46:02 IST 2026\nelapsed time (seconds): 0.13\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.13
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/java/util/CollectionViews/CollectionViewsRefinement.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/java/util/CollectionViews/CollectionViewsRefinement.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:46:02 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:46:02 IST 2026\nelapsed time (seconds): 0.13\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.13
+        },
+        {
+          "kind": "main",
+          "command": "main CollectionViewsRefinement",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main CollectionViewsRefinement\nreason: User specified action: run main CollectionViewsRefinement \nstarted: Wed Oct 21 08:46:02 IST 2026\nMode: agentvm\nfinished: Wed Oct 21 08:46:02 IST 2026\nelapsed time (seconds): 0.064\n",
+          "stdout": "PASS CollectionViewsRefinement mode=all checks=1828\n",
+          "stderr": "\nJavaTest Message: Test complete.\n\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.064
+        },
+        {
+          "kind": "build",
+          "command": "build CollectionViewsRefinement",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build CollectionViewsRefinement\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:46:02 IST 2026\nfinished: Wed Oct 21 08:46:02 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main CollectionViewsRefinement size",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main CollectionViewsRefinement size\nreason: User specified action: run main/othervm CollectionViewsRefinement size \nstarted: Wed Oct 21 08:46:02 IST 2026\nMode: othervm [/othervm specified]\nfinished: Wed Oct 21 08:46:04 IST 2026\nelapsed time (seconds): 1.561\n",
+          "stdout": "PASS CollectionViewsRefinement mode=size checks=2\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 1.561
+        }
+      ]
+    },
+    {
+      "test": "jdk/internal/m3/M3IndexMaskWindowIntegrationTest.java",
+      "source": {
+        "path": "test/jdk/jdk/internal/m3/M3IndexMaskWindowIntegrationTest.java",
+        "sha256": "0490a6c7523f5fd1e49c30d3f89c504647b13ea119408fb23bb646f2237cd992",
+        "git_blob": "1f64e145a7b0fdf6019c6cf3961100bf57bfaaf9",
+        "bytes": 16161,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "0b5288d3f916a911848473abdb21108fbaacede63a4368fcc32f527717eec4d5",
+      "raw_jtr_bytes": 18616,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "14132 0:00:14.132",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3IndexMaskWindowIntegrationTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3IndexMaskWindowIntegrationTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:43 IST 2026\nTest directory:\n  compile: M3IndexMaskWindowIntegrationTest\nfinished: Wed Oct 21 08:45:43 IST 2026\nelapsed time (seconds): 0.079\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.079
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/jdk/internal/m3/M3IndexMaskWindowIntegrationTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/jdk/internal/m3/M3IndexMaskWindowIntegrationTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:45:43 IST 2026\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.m3=ALL-UNNAMED\nMode: agentvm\nfinished: Wed Oct 21 08:45:43 IST 2026\nelapsed time (seconds): 0.079\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.079
+        },
+        {
+          "kind": "main",
+          "command": "main -Xint M3IndexMaskWindowIntegrationTest java",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xint M3IndexMaskWindowIntegrationTest java\nreason: User specified action: run main/othervm -Xint M3IndexMaskWindowIntegrationTest java \nstarted: Wed Oct 21 08:45:43 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.m3=ALL-UNNAMED\nfinished: Wed Oct 21 08:45:50 IST 2026\nelapsed time (seconds): 6.717\n",
+          "stdout": "MASK_WINDOW_OWNER module=java.base loader=null resource=jrt:/java.base/jdk/internal/m3/M3IndexMaskWindow.class\nMASK_WINDOW_INTEGRATION_PASS mode=java checks=141723\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 6.717
+        },
+        {
+          "kind": "build",
+          "command": "build M3IndexMaskWindowIntegrationTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3IndexMaskWindowIntegrationTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:50 IST 2026\nfinished: Wed Oct 21 08:45:50 IST 2026\nelapsed time (seconds): 0.001\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.001
+        },
+        {
+          "kind": "main",
+          "command": "main -Xcheck:jni -Xint --add-opens=java.base/jdk.internal.m3=ALL-UNNAMED M3IndexMaskWindowIntegrationTest native",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xcheck:jni -Xint --add-opens=java.base/jdk.internal.m3=ALL-UNNAMED M3IndexMaskWindowIntegrationTest native\nreason: User specified action: run main/othervm -Xcheck:jni -Xint --add-opens=java.base/jdk.internal.m3=ALL-UNNAMED M3IndexMaskWindowIntegrationTest native \nstarted: Wed Oct 21 08:45:50 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.m3=ALL-UNNAMED\nfinished: Wed Oct 21 08:45:57 IST 2026\nelapsed time (seconds): 6.837\n",
+          "stdout": "MASK_WINDOW_OWNER module=java.base loader=null resource=jrt:/java.base/jdk/internal/m3/M3IndexMaskWindow.class\nMASK_WINDOW_INTEGRATION_PASS mode=native checks=141778\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 6.837
+        },
+        {
+          "kind": "build",
+          "command": "build M3IndexMaskWindowIntegrationTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3IndexMaskWindowIntegrationTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:57 IST 2026\nfinished: Wed Oct 21 08:45:57 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xcheck:jni -Xmixed --add-opens=java.base/jdk.internal.m3=ALL-UNNAMED M3IndexMaskWindowIntegrationTest native",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xcheck:jni -Xmixed --add-opens=java.base/jdk.internal.m3=ALL-UNNAMED M3IndexMaskWindowIntegrationTest native\nreason: User specified action: run main/othervm -Xcheck:jni -Xmixed --add-opens=java.base/jdk.internal.m3=ALL-UNNAMED M3IndexMaskWindowIntegrationTest native \nstarted: Wed Oct 21 08:45:57 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.m3=ALL-UNNAMED\nfinished: Wed Oct 21 08:45:57 IST 2026\nelapsed time (seconds): 0.489\n",
+          "stdout": "MASK_WINDOW_OWNER module=java.base loader=null resource=jrt:/java.base/jdk/internal/m3/M3IndexMaskWindow.class\nMASK_WINDOW_INTEGRATION_PASS mode=native checks=141778\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.489
+        }
+      ]
+    },
+    {
+      "test": "jdk/internal/m3/M3IndexMaskWindowJniTest.java",
+      "source": {
+        "path": "test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java",
+        "sha256": "2490b6752d453daa7f7c4eb7d565ae2894a1236fd0ebaecac637f3230ffb5d8c",
+        "git_blob": "be0e32fae65fb535e2854231d966d9f85a81a031",
+        "bytes": 2918,
+        "provenance": "unchanged exact target parent blob"
+      },
+      "raw_jtr_sha256": "28cbfaeb59bca712db6192af3da5d13e42205c1a5a8b8c992de464362429c27b",
+      "raw_jtr_bytes": 20920,
+      "status": "Passed. Execution successful",
+      "status_class": "Passed",
+      "elapsed_recorded": "3040 0:00:03.040",
+      "actions": [
+        {
+          "kind": "build",
+          "command": "build M3IndexMaskWindowJniTest",
+          "status": "Passed. Build successful",
+          "status_class": "Passed",
+          "messages": "command: build M3IndexMaskWindowJniTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:57 IST 2026\nTest directory:\n  compile: M3IndexMaskWindowJniTest\nfinished: Wed Oct 21 08:45:57 IST 2026\nelapsed time (seconds): 0.034\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.034
+        },
+        {
+          "kind": "compile",
+          "command": "compile <M3JDK21>/test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java",
+          "status": "Passed. Compilation successful",
+          "status_class": "Passed",
+          "messages": "command: compile <M3JDK21>/test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java\nreason: .class file out of date or does not exist\nstarted: Wed Oct 21 08:45:57 IST 2026\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.m3=ALL-UNNAMED\nMode: agentvm\nfinished: Wed Oct 21 08:45:57 IST 2026\nelapsed time (seconds): 0.033\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.033
+        },
+        {
+          "kind": "main",
+          "command": "main -Xint M3IndexMaskWindowJniTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xint M3IndexMaskWindowJniTest\nreason: User specified action: run main/othervm -Xint M3IndexMaskWindowJniTest \nstarted: Wed Oct 21 08:45:57 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.m3=ALL-UNNAMED\nfinished: Wed Oct 21 08:45:59 IST 2026\nelapsed time (seconds): 1.266\n",
+          "stdout": "MASK_SPANS_PASS cases=12000 backend=JAVA\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 1.266
+        },
+        {
+          "kind": "build",
+          "command": "build M3IndexMaskWindowJniTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3IndexMaskWindowJniTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:45:59 IST 2026\nfinished: Wed Oct 21 08:45:59 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xint M3IndexMaskWindowJniTest native",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xint M3IndexMaskWindowJniTest native\nreason: User specified action: run main/othervm -Xint M3IndexMaskWindowJniTest native \nstarted: Wed Oct 21 08:45:59 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.m3=ALL-UNNAMED\nfinished: Wed Oct 21 08:46:00 IST 2026\nelapsed time (seconds): 1.285\n",
+          "stdout": "MASK_SPANS_PASS cases=12000 backend=NATIVE_REQUIRED\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 1.285
+        },
+        {
+          "kind": "build",
+          "command": "build M3IndexMaskWindowJniTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3IndexMaskWindowJniTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:46:00 IST 2026\nfinished: Wed Oct 21 08:46:00 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmixed M3IndexMaskWindowJniTest",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmixed M3IndexMaskWindowJniTest\nreason: User specified action: run main/othervm -Xmixed M3IndexMaskWindowJniTest \nstarted: Wed Oct 21 08:46:00 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.m3=ALL-UNNAMED\nfinished: Wed Oct 21 08:46:00 IST 2026\nelapsed time (seconds): 0.288\n",
+          "stdout": "MASK_SPANS_PASS cases=12000 backend=JAVA\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.288
+        },
+        {
+          "kind": "build",
+          "command": "build M3IndexMaskWindowJniTest",
+          "status": "Passed. All files up to date",
+          "status_class": "Passed",
+          "messages": "command: build M3IndexMaskWindowJniTest\nreason: Named class compiled on demand\nstarted: Wed Oct 21 08:46:00 IST 2026\nfinished: Wed Oct 21 08:46:00 IST 2026\nelapsed time (seconds): 0.0\n",
+          "stdout": "",
+          "stderr": "",
+          "stdout_recorded": false,
+          "stderr_recorded": false,
+          "elapsed_seconds": 0.0
+        },
+        {
+          "kind": "main",
+          "command": "main -Xmixed M3IndexMaskWindowJniTest native",
+          "status": "Passed. Execution successful",
+          "status_class": "Passed",
+          "messages": "command: main -Xmixed M3IndexMaskWindowJniTest native\nreason: User specified action: run main/othervm -Xmixed M3IndexMaskWindowJniTest native \nstarted: Wed Oct 21 08:46:00 IST 2026\nMode: othervm [/othervm specified]\nAdditional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.m3=ALL-UNNAMED\nfinished: Wed Oct 21 08:46:00 IST 2026\nelapsed time (seconds): 0.16\n",
+          "stdout": "MASK_SPANS_PASS cases=12000 backend=NATIVE_REQUIRED\n",
+          "stderr": "STATUS:Passed.\n",
+          "stdout_recorded": true,
+          "stderr_recorded": true,
+          "elapsed_seconds": 0.16
+        }
+      ]
+    }
+  ]
+}

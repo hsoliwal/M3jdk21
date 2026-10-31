@@ -1,0 +1,28 @@
+{
+  "scope": "Explicit proxy and existing OS truststore; actual focused tooling test-compile passed",
+  "artifacts": [
+    {
+      "path": "proof/bootstrap-004/runner.py",
+      "sha256": "639b0ad5bcbb30e97d46d73c63fe68f514eecbade55fb5414204b1f9d2f0c848"
+    },
+    {
+      "path": "proof/bootstrap-environment/maven-proxy-settings.xml",
+      "sha256": "ed786afd8b3c7e5844ffec65e522ff93437d67832f5276e524927125d29b50a3"
+    },
+    {
+      "path": "proof/bootstrap-environment/pom.xml",
+      "sha256": "934fb8b8fdad025d77f41166306de9f1148fd786a81db811da85b301c6af0bd1"
+    },
+    {
+      "path": "proof/bootstrap-environment/TOOLCHAIN.json",
+      "sha256": "2134bf2523fe5c8abb13b6ecc1b03483932d9bbfbb554b029236917183330d50"
+    }
+  ],
+  "truststore": {
+    "path": "/etc/ssl/certs/java/cacerts",
+    "sha256_after_run": "e02ad0a38b4d905e859e8bc417fb3060a5038c9acbe922c6c8c10ff780affe25"
+  },
+  "unknowns": [
+    "Truststore bytes were hashed after the successful run, not by the original runner."
+  ]
+}

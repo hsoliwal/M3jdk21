@@ -1,0 +1,20 @@
+{
+  "gate": "ACTUAL_EXISTING_SDK_CONTRACT",
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/tmp/m3-maven-repository",
+    "-Dm3.dataset=m3jdk21-long-bridge-20261018",
+    "-Pcontract",
+    "verify"
+  ],
+  "cwd": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "JAVA_HOME": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+  "exit_code": 0,
+  "seconds": 18.203,
+  "log": "sdk-maven.log",
+  "sha256": "a96cf9ff9f5bbfe6b2680343030cde79e8ccb1f54770a9462b5bddff8c3f2d9c",
+  "dataset": "m3jdk21-long-bridge-20261018"
+}

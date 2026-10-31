@@ -1,0 +1,6 @@
+$ ["/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java","-ea","-Dm3.parser.test.work=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/consumer-work/test-M3CrossFrontendContract","--patch-module","jdk.compiler=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/compiler-patch","--module-path","/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/modules","--add-modules","jdk.m3.parser","-cp","/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/test-classes","jdk.m3.parser.test.M3CrossFrontendContract"]
+[Fatal Error] :1:10: DOCTYPE is disallowed when the feature "http://apache.org/xml/features/disallow-doctype-decl" set to true.
+[Fatal Error] :1:15: The element type "a" must be terminated by the matching end-tag "</a>".
+M3_AST_MULTIFRONTEND_PASS checks=12071
+
+EXIT 0

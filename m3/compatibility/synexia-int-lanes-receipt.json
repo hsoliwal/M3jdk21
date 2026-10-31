@@ -1,0 +1,118 @@
+{
+  "schema": "M3JDK21_SYNEXIA_INT_LANES_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-int-lanes-20261007",
+    "pullRequest": 9805,
+    "commit": "01e474e3b46",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.IntLanes",
+    "crate": "m3-int-lanes",
+    "donors": [
+      {
+        "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntHashSet.java",
+        "blob": "7ad80e21",
+        "target": "com.m3.collections.M3IntHashSet"
+      },
+      {
+        "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntIntHashMap.java",
+        "blob": "c5ec1b82",
+        "target": "com.m3.collections.M3IntIntHashMap"
+      },
+      {
+        "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntMinHeap.java",
+        "blob": "cc6c819e",
+        "target": "com.m3.collections.M3IntPriorityQueue"
+      }
+    ],
+    "license": "Apache-2.0 first-party (headers: com.synexia#9796)",
+    "disposition": "ADAPT: donor mechanics kept, DenseHash helper inlined, API renamed to the JDK/M3 shape, modCount added"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "c9b07049c57ecdf43175f5885e11998918416a00",
+    "owners": [
+      "com.m3.collections.M3IntHashSet",
+      "com.m3.collections.M3IntIntHashMap",
+      "com.m3.collections.M3IntPriorityQueue",
+      "com.m3.collections.M3IntCollection",
+      "com.m3.collections.M3IntIterator",
+      "com.m3.collections.M3IntIntConsumer"
+    ],
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntCollection.java",
+      "before": "ABSENT",
+      "after": "2b489fd313a90881a5da424f4664e37842dbf244178e5a5b1c780c9639c70f81",
+      "resource": "00-M3IntCollection.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntHashSet.java",
+      "before": "ABSENT",
+      "after": "5f28ee01edbbafd12b8ea12d69aa523585685cc8c70b3c8ccff0be1e45353429",
+      "resource": "01-M3IntHashSet.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIntConsumer.java",
+      "before": "ABSENT",
+      "after": "d7673d25fc4bb59e6b66336b2bfc86da00415100e213b7b26aea61fb4a00f484",
+      "resource": "02-M3IntIntConsumer.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java",
+      "before": "ABSENT",
+      "after": "09bb75b166db75286aed1283e9e2f39fc6341fa0333b3ec7190bff0b0d52b899",
+      "resource": "03-M3IntIntHashMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntIterator.java",
+      "before": "ABSENT",
+      "after": "a7b8772e974a793eef8212281340a38cec651edc983e6cad47f725c43d022e63",
+      "resource": "04-M3IntIterator.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntPriorityQueue.java",
+      "before": "ABSENT",
+      "after": "71f6dcf76eeab67a78c902efbcd3a781931c49477656f84659245c9c8fd75d59",
+      "resource": "05-M3IntPriorityQueue.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IntLanesTest.java",
+      "before": "ABSENT",
+      "after": "0ddd123adba9511aac147c3fce715734ec5080395d7dd681ca89f95fb2ca0c4d",
+      "resource": "06-M3IntLanesTest.java.txt"
+    }
+  ],
+  "gates": {
+    "m3CollectionsModuleCompile": "PASS_WINDOWS mvn -o -B -f m3/collections/pom.xml test (-Xlint:all,-module -Werror via pom) on master c9b07049c5 + int lanes",
+    "m3CollectionsModuleTests": "PASS_WINDOWS 123/123 (21 classes incl. M3IntLanesTest; mvn log sha256 f1919f4f1611c9831e3f0edb3e6303740da249a49133dded7193bca57e7ae471)",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3IntLanesRecipeTest 2/2",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "jdkBuildJtregRuntime": "PENDING_LINUX",
+    "ci": "PENDING_CI (M3 collection contracts workflow on the pull request)"
+  },
+  "semanticDecisions": [
+    "zero-sentinel key lanes with separate zero tracking (donor) rather than the long lane's byte occupancy: every int legal, no occupancy lane",
+    "backward-shift deletion (no tombstones)",
+    "fail-fast modCount added to match the long lanes",
+    "B4/B5 combined into one crate; B4 'into the JDK' remains BLOCKED_ON STRING + ARRAYS receipts"
+  ],
+  "reapplication": {
+    "of": "hsoliwal/M3jdk21#402",
+    "mergeCommit": "200f8d9ff8b",
+    "finding": "the #402 merge commit (parents bac0108267, 062733f443) changed zero files; branch head d11db2d3d2 is not an ancestor of master; none of the seven targets existed on master",
+    "reappliedOnto": "c9b07049c57ecdf43175f5885e11998918416a00",
+    "cherryPicked": [
+      "e2cf915688",
+      "062733f443"
+    ],
+    "conflictResolved": "m3/collections/JDK_FAMILY_MAP.tsv: master's EnumMap/EnumSet row kept, the three int rows appended",
+    "targetsUnchanged": true
+  }
+}

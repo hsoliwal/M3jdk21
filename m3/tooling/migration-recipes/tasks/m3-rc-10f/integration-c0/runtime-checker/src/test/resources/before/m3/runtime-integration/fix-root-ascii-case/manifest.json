@@ -1,0 +1,15 @@
+{
+  "base_commit": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
+  "patch_sha256": "6304b8d19e720e99f029add1fd3d01daaa4339eccd39732f4da387480e4d685e",
+  "engine_sha256": "e2941c8efb9f65a886d2e6d70ef0a60efb3b74440a253c8b60da71e02b622eb0",
+  "files": {
+    "src/java.base/share/classes/java/lang/String.java": {
+      "before": "5073d46fdf8b6d5c473c497d31e362cfb51115b29dde459583691b4875542d26",
+      "after": "b35c642045ab22b185ed228c8fcef62383f8eafdaca09fe7268c807f68936d12"
+    }
+  },
+  "verification_files": {
+    "test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java": "1fd4c8d856e7de971c874936ef8561167041cd3c087e6ad8796d3225cc6087dc",
+    "m3/runtime-integration/check-m3string-invariants.py": "7b6c2a0978c11269507089a9b1dd46c186094886238aad21eec7639943fcf9ae"
+  }
+}

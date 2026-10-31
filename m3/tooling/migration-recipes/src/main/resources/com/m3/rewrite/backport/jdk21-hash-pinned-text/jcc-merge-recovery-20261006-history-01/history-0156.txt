@@ -1,0 +1,51 @@
+{
+  "actual_audit_sha256": "5867bffd36e65f2fd755921d0dbf9981a006bc0e38134b2d0e4e6830030900ea",
+  "actual_receiving_receipt_sha256": "1f4ac9825d975520a04b7dc5ac1b282d96be32601c7abe2b0cfb676b0ff2df09",
+  "checker_or_project_executed_by_reviewer": false,
+  "context_and_fixture_paths_linked_to_freeze": 529,
+  "copied_receipts_linked_to_origin_binding_and_freeze": 134,
+  "destination_basis_counts": {
+    "E4_ACTUAL_MATERIALIZED_AFTERIMAGE": 4,
+    "EXACT_E4_SOURCE_RECOVERY_RECEIPT_COPY": 134,
+    "PINNED_CURRENT_INPUT_RECEIPT_COPY": 10,
+    "PINNED_DA958_ACQUISITION": 25,
+    "PRESERVED_PUBLISHED_E2_PAYLOAD": 9
+  },
+  "destination_occurrences_linked": 182,
+  "distinct_destination_paths": 170,
+  "e2_preserved_identity_links": 56,
+  "e3_preserved_identity_links": 89,
+  "four_before_resources_and_actual_afterimages_compared": true,
+  "freeze_sha256": "6367c7d343ece1f1547e4db7873180f4dfae6dda83212edadf0564e0a93bc341",
+  "frozen_body_rereads_by_this_review": false,
+  "frozen_groups": {
+    "external_source_and_proof_inputs": 617,
+    "fixed_inputs": 391
+  },
+  "frozen_identity_group_mode_record_comparisons": 1008,
+  "limits": "Actual full1008-input/current-runtime review is a separate sealed input. This review compares audit identities and groups with its exact freeze and directly checks four installed outputs. Pending donor documentation and final publication manifest are outside this audit.",
+  "pending_donor_supplement_included": false,
+  "proof_identities_linked": 55,
+  "reviewer_only_attempts": [
+    {
+      "observation": "Proof-occurrence records intentionally omit mode; first collector incorrectly required that field and stopped with KeyError. No owner code or report emitted.",
+      "resolution": "Compare all proof byte/Git identities to exact source authority and frozen record; every1008 frozen mode remains explicitly compared."
+    },
+    {
+      "observation": "Second collector assumed reference labels were globally unique; blocked_record.observation intentionally labels three different paths. No owner code or report emitted.",
+      "resolution": "Require182 unique(reference,path) pairs and170 distinct paths; retain180 unique labels and the actual repeated label explicitly."
+    }
+  ],
+  "root_declarations": 201,
+  "root_objects": 343,
+  "schema": "jcc-e4-reference-audit-executed-relationships/1",
+  "separate_execution_review_sha256": "1fa3be68d87d495a6458b778061d9bd670db574cc702e3f0ad9f00f64f392361",
+  "shared_reference_label": {
+    "blocked_record.observation": 3
+  },
+  "source_identities_linked": 19,
+  "source_publication_reverified": false,
+  "status": "PASS_REFERENCE_AUDIT_CONSISTENCY_REVIEW",
+  "unique_reference_labels": 180,
+  "unique_reference_path_pairs": 182
+}

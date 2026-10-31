@@ -1,0 +1,104 @@
+{
+  "schema": "M3JDK21_SYNEXIA_ENUM_MAP_ADAPTIVE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-enum-map-adaptive-20261008",
+    "pullRequest": 9856,
+    "commit": "e425d28636d",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.EnumMapAdaptive",
+    "crate": "m3-enum-map-adaptive",
+    "fossReuseDecisionRow": "collections.donor.primitives",
+    "donors": [
+      {
+        "path": "synexia-primitives/src/main/java/com/synexia/primitives/AdaptiveEnumPrimitiveMap.java",
+        "blob": "d5b56584",
+        "blobCommit": "b1b66529904 (header-only delta over 8ce54c12 at 433deb3dbac)",
+        "target": "com.m3.collections.M3AdaptiveEnumLongMap",
+        "mechanics": "byte-cost switch rule, sparse-to-direct migration on insertion, compact re-choice, directSwitchSize search"
+      },
+      {
+        "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntLongHashMap.java",
+        "blob": "538b997d",
+        "blobCommit": "b1b66529904 (header-only delta over fb7419a4 at f0c95fbf20e)",
+        "target": "com.m3.collections.M3IntLongHashMap",
+        "mechanics": "zero-sentinel linear probing, zero-key side slot, backward-shift deletion"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3EnumLongMap.java",
+        "receipt": "m3/compatibility/synexia-enum-long-map-receipt.json",
+        "target": "com.m3.collections.M3AdaptiveEnumLongMap",
+        "mechanics": "dense backing and key contract"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java",
+        "receipt": "m3/compatibility/synexia-int-lanes-receipt.json (re-applied in #427)",
+        "target": "com.m3.collections.M3IntLongHashMap",
+        "mechanics": "M3 shape: inlined DenseHash, modCount fail-fast, M3IntIterator keys"
+      }
+    ],
+    "license": "Apache-2.0 first-party",
+    "disposition": "ADAPT: PrimitiveKind value lane becomes the single long lane; sparse backing is the new M3IntLongHashMap (payloadBytesFor publishes the sizing rule), dense backing is M3EnumLongMap; ordinal iteration order kept in both modes (donor sparse mode is slot order)"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "c9b07049c5 + hsoliwal/M3jdk21#427 (b2095ba8ff, int lanes re-applied; provides M3IntIterator)",
+    "owners": [
+      "com.m3.collections.M3AdaptiveEnumLongMap",
+      "com.m3.collections.M3IntLongHashMap",
+      "com.m3.collections.M3IntLongConsumer"
+    ],
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3AdaptiveEnumLongMap.java",
+      "before": "ABSENT",
+      "after": "79cac12007699fb2983853af40c27e9b00d2475390d9d1f36c245ddfe7b317d3",
+      "resource": "00-M3AdaptiveEnumLongMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntLongConsumer.java",
+      "before": "ABSENT",
+      "after": "523534ffb1824ffbdd7ac4f1dce04e9688f3f8a9b7ce637796100070df645b92",
+      "resource": "01-M3IntLongConsumer.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IntLongHashMap.java",
+      "before": "ABSENT",
+      "after": "43df8c19ca96e4da9715547ed3e2b2bd1751c26c3dc0b56af7dcfa8d1ce5cddf",
+      "resource": "02-M3IntLongHashMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3AdaptiveEnumLongMapTest.java",
+      "before": "ABSENT",
+      "after": "7c86957b387dd1afa83384b1fbf05ff1c5d0807bb3255f31ffcd9dfd4b5ec140",
+      "resource": "03-M3AdaptiveEnumLongMapTest.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IntLongHashMapTest.java",
+      "before": "ABSENT",
+      "after": "59fbd569f900826bead33b3297528aedc94f22b24366039cfd41d584a527ff17",
+      "resource": "04-M3IntLongHashMapTest.java.txt"
+    }
+  ],
+  "gates": {
+    "m3CollectionsModuleCompile": "PASS_WINDOWS mvn -o -B -f m3/collections/pom.xml (75 main + 27 test sources, -Xlint:all,-module -Werror via pom)",
+    "m3CollectionsModuleTests": "PASS_WINDOWS 130/130 (23 classes; M3AdaptiveEnumLongMapTest 5 incl. differential vs java.util.EnumMap across sparse-to-dense migration and compact; M3IntLongHashMapTest 2 vs java.util.HashMap<Integer,Long>; mvn log sha256 ce8eb07263994976d7a22050be239fe2725ba5159a2ebb1365af8e8cf67549c0)",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3EnumMapAdaptiveRecipeTest 2/2 (mvn log sha256 46beb7b400269e0dbe10100bd21af046b1b7fe4e0a6a114004cff5085f85c6f1)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "jdkBuildJtregRuntime": "PENDING_LINUX",
+    "ci": "PENDING_CI; the installed-collections job refuses every new owner until a successor qualification packet is produced through the canonical receiving recipe lane (as M3jdk21#421 / com.synexia#9849 do for M3EnumSet)"
+  },
+  "semanticDecisions": [
+    "switch rule compares retained primitive bytes: n mappings stay sparse while M3IntLongHashMap.payloadBytesFor(max(1,n)) < dense payload (values + presence words); directSwitchSize() is the smallest n for which the dense lane is chosen (21 for a 70-constant enum, 0 for a 3-constant enum)",
+    "insertion migrates sparse-to-dense when size+1 reaches the switch; removal and clear never migrate; compact() re-applies the rule in both directions and shrinks a sparse table",
+    "ordinal iteration order in both modes: sparse traversal probes ordinals 0..keyCapacity-1 (allocation-free); forEach/keys in sparse mode take one enum universe copy per call instead of retaining it",
+    "key contract as M3EnumLongMap: put(null) NullPointerException, foreign constant ClassCastException on put/putIfAbsent/getAsLong, absent on containsKey/getOrDefault/remove/removeKey; expectedSize outside 0..keyCapacity is IllegalArgumentException",
+    "retained fields: Class, int domainSize, the active M3IntLongHashMap or M3EnumLongMap (the other null); no per-mapping object"
+  ]
+}

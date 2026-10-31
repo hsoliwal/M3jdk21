@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+    "--release",
+    "21",
+    "-Xlint:all",
+    "-Werror",
+    "-d",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/proof/candidate-m3jdk21/classes",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3ChildProgressMonitor.java",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3DefaultProgressMonitor.java",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3Progress.java",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3ProgressAdapters.java",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3ProgressMonitor.java",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3ProgressScope.java",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3ProgressState.java",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/main/java/com/m3/collections/M3SystemProgress.java",
+    "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/receiver/m3jdk21/m3/collections/src/test/java/com/m3/collections/M3ProgressAdaptersPercentageSelfTest.java"
+  ],
+  "exit": 0,
+  "seconds": 1.157881
+}

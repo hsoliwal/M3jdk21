@@ -1,0 +1,34 @@
+// SPDX-License-Identifier: Apache-2.0
+// Reviewed release-21 descriptor; original automatic-module exports/openness retained.
+open module com.ibm.icu {
+    requires java.desktop;
+    requires java.logging;
+    requires java.xml;
+
+    requires transitive java.compiler;
+    requires transitive jdk.compiler;
+    requires transitive jdk.javadoc;
+
+    exports com.ibm.icu.dev.tool.docs;
+    exports com.ibm.icu.impl;
+    exports com.ibm.icu.impl.breakiter;
+    exports com.ibm.icu.impl.coll;
+    exports com.ibm.icu.impl.data;
+    exports com.ibm.icu.impl.duration;
+    exports com.ibm.icu.impl.duration.impl;
+    exports com.ibm.icu.impl.locale;
+    exports com.ibm.icu.impl.number;
+    exports com.ibm.icu.impl.number.parse;
+    exports com.ibm.icu.impl.number.range;
+    exports com.ibm.icu.impl.personname;
+    exports com.ibm.icu.impl.text;
+    exports com.ibm.icu.impl.units;
+    exports com.ibm.icu.lang;
+    exports com.ibm.icu.math;
+    exports com.ibm.icu.message2;
+    exports com.ibm.icu.number;
+    exports com.ibm.icu.segmenter;
+    exports com.ibm.icu.text;
+    exports com.ibm.icu.util;
+
+}

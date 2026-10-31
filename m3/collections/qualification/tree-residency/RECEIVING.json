@@ -1,0 +1,105 @@
+{
+  "schema": "M3JDK21_TREE_VIEWPORT_SERIAL_JAVA_RECEIVING_V1",
+  "product": "M3JDK21",
+  "source": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+  "baseline_commit": "175c7ed1056005e5a686e3189f601c8ed4f406bb",
+  "original_blob": "65ab293a00da1092243f7f1904771c5a0cc60a44",
+  "original_sha256": "bf6fb2f1d5f1c86ee51a94ad7a058537b092d256dc6fa583cbd712e7800b2944",
+  "final_received_blob": "9725e48f7850b107b8b968527827eb5fde5b1fe6",
+  "final_sha256": "be77b8dd08c7a498355bc8793932039a00a0f523e206e47f116b7a6b10635082",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "pull_request": 12855,
+    "receipt_commit": "9bf7218eb373ba095d41f936fdec0e2c810bd4a6",
+    "receipt_path": "synexia-openrewrite-recipes/qualification/tree-residency-20261026/EXECUTION.json",
+    "recipes": [
+      {
+        "name": "com.synexia.m3.ViewportResidencyReuse20261026",
+        "dataset": "vpt-residency-reuse-20261026",
+        "before_blob": "65ab293a00da1092243f7f1904771c5a0cc60a44",
+        "after_blob": "6026f2eaee317bb2fe3bcaacb3f6d2c51a3b23b3"
+      },
+      {
+        "name": "com.synexia.m3.ViewportTreeClosure20261026",
+        "dataset": "vpt-tree-closure-20261026",
+        "before_blob": "6026f2eaee317bb2fe3bcaacb3f6d2c51a3b23b3",
+        "after_blob": "9725e48f7850b107b8b968527827eb5fde5b1fe6"
+      }
+    ],
+    "owner": "M3HashPinnedJavaSnapshotRecipe",
+    "owner_git_blob": "98138cb6734ad86e3f77b8722fa5ff459842e841",
+    "original_receiver_git_blob": "d7f5cda465d8f473f4969d4db15d717af1391745",
+    "original_test_git_blob": "e69993797978f800a4d1b01b55093dc8dde16514"
+  },
+  "local_qualification": {
+    "parser": "org.openrewrite:rewrite-java-21:8.17.1",
+    "parser_jar_sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+    "first_sdk_junit": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "second_sdk_junit": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "real_result_per_recipe": 1,
+    "original_receiver_per_recipe": {
+      "precheck_changes": 1,
+      "apply_changes": 1,
+      "fixed_point_replay_changes": 0,
+      "source_drift_refused": true
+    },
+    "independent_regression": {
+      "original_junit_tests": 4,
+      "original_expected_failures": 3,
+      "received_junit_tests": 4,
+      "received_failures": 0
+    },
+    "warmed_thread_allocation": {
+      "cycles": 10000,
+      "rows": 128,
+      "original_bytes": 15840000,
+      "received_bytes": 0,
+      "interpretation": "isolated warmed plan/commit thread allocation; not system RSS or measured frame time"
+    },
+    "finite_tree_JNI": {
+      "frames": 1024,
+      "checks_per_run": 417171,
+      "baseline_and_received_equal": true,
+      "java_and_checked_JNI_equal": true,
+      "ubsan_fatal": true,
+      "root": "79e90d00d243eaf1303ea975ea65384765e4bdcf7fc3bd40a0930a16fac93e03",
+      "supporting_sources": "frozen earlier 20261022 TreeTopology/TreeProjection fixtures; NOT a live SWT/GTK renderer"
+    },
+    "public_protected_descriptors_unchanged": true,
+    "historical_full_tree_fixture": {
+      "baseline_tests": 10,
+      "baseline_failures": 4,
+      "received_tests": 10,
+      "received_failures": 4,
+      "interpretation": "pre-hint frozen projection fixture failures shared by both; not a passing full suite"
+    },
+    "evidence_zip_sha256": "fd51e6a15b8e9b0f90e87e9513d014d776956c55f02bdde2cb753457ec2f9a1e"
+  },
+  "qualification_limitation": "Actual canonical Java recipe engines, JUnit source, prepare.py, receive.py, authentic Java21 parser and exact pre/post source blobs matched. The isolated Maven host POM and SLF4J binding were locally reconstructed rather than byte-identical to the committed Synexia Maven host; this is NOT an exact full Synexia checkout build.",
+  "product_native_and_java_abi": {
+    "public_descriptors_changed": false,
+    "JNI_symbols_changed": false,
+    "wrappers_added": false,
+    "new_payload_model_added": false
+  },
+  "pending": {
+    "current_master_full_module_tests": "NOT_YET_RUN",
+    "M3JDK21_HotSpot_jtreg": "NOT_RUN",
+    "actual_SWT_Nebula_GEF_RWT_widget_lifecycle": "NOT_RUN",
+    "Win32_Cocoa_Android": "NOT_RUN",
+    "accessibility_IME": "NOT_RUN",
+    "application_RSS_GC_FPS": "NOT_MEASURED",
+    "merge": "BLOCKED_PENDING_INDEPENDENT_GATES"
+  },
+  "source_receiving_scope": "ONE_EXISTING_JAVA_OWNER_AND_STABLE_PROVENANCE_RECEIPT"
+}

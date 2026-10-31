@@ -1,0 +1,1097 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "base_image_epoch": {
+    "name": "E1",
+    "target_repository": "hsoliwal/M3jdk21",
+    "target_commit": "f35342202149b98465bb4e9e6be807eb0cf3f762",
+    "target_tree": "1f86f1244e4d2c218a3dc29bc101cfbdf89339fc",
+    "target_pr": "https://github.com/hsoliwal/M3jdk21/pull/1657",
+    "target_parent": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+    "target_changed_files": 49,
+    "canonical_repository": "hsoliwal/com.synexia",
+    "canonical_commit": "0ee3e62241cb1252f2d018a33969f64e66c2b2fe",
+    "canonical_tree": "aa4434b052ef8541275cabad86eaf298cd27532c",
+    "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12680",
+    "binding": "E1 source-built image was built from the frozen 49-file target postimages over the named parent; publication commit names that exact source tree. Receiving patches below are separate experiments and are not part of this E1 image."
+  },
+  "scope": "Separate receiving candidates; none changes the original E1 aggregate.",
+  "nullable_concat": {
+    "scope": "source-built installed image plus isolated candidate Factory patch",
+    "product_image_modified": false,
+    "source_pins": {
+      "donor_repository": "hsoliwal/com.synexia",
+      "donor_pr": 12315,
+      "donor_source_core": "a7e7bbdc7a69fbee615ea04d47321956f0abf35a",
+      "receiver_repository": "hsoliwal/M3jdk21",
+      "receiver_pr": 1306,
+      "receiver_revision": "f69cd976823a78cda227315fa1380013584bb053",
+      "source_kind": "exact existing recipe postimages, current target preimages match donor preimages",
+      "files": [
+        {
+          "path": "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java",
+          "before_sha256": "0bdcf30e2e090545d41e80566ca2b60d50d3a1c3e80e3dc849f1a22ecc3e11b8",
+          "after_sha256": "732c410330a1137aace06d3b20e0e8a86899b4fe98f15c738d588102383c4052"
+        },
+        {
+          "path": "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java",
+          "before_sha256": "e4624f56a93d68cd04337e39ed2cd3896867149908f287d5839ddff9b965ae95",
+          "after_sha256": "053c69bd70909731e6509d06f6b29d31a24e2fb669a57f82bf22587e44e839c0"
+        }
+      ]
+    },
+    "results": [
+      {
+        "name": "compile-candidate-factory",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/javac",
+          "-Xlint:all",
+          "-Werror",
+          "--patch-module",
+          "java.base=<WORK>/candidates/string/concat-after/src/java.base/share/classes",
+          "-d",
+          "<WORK>/candidates/string/concat-proof/out/patch",
+          "<WORK>/candidates/string/concat-after/src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "required_output": [],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/compile-candidate-factory.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/compile-candidate-factory.log",
+          "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_bytes": 0,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "output": ""
+        }
+      },
+      {
+        "name": "compile-candidate-tests",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/javac",
+          "-Xlint:all",
+          "-Werror",
+          "-d",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "<WORK>/candidates/string/concat-after/test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java",
+          "<WORK>/candidates/string/concat-proof/fixtures/M3StringNullableConcatProbe.java"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "required_output": [],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/compile-candidate-tests.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/compile-candidate-tests.log",
+          "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_bytes": 0,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "output": ""
+        }
+      },
+      {
+        "name": "baseline-dag-compact",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:+UseM3StringStorage",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringConcatReferenceDagTest"
+        ],
+        "expected_exit": 1,
+        "actual_exit": 1,
+        "required_output": [
+          "java.lang.AssertionError: null toString conversion"
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/baseline-dag-compact.log",
+        "log_sha256": "9fb077a4cde126f1acdde0b383813a62551f48b421119c833595f7bc5f90955c",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/baseline-dag-compact.log",
+          "raw_sha256": "9fb077a4cde126f1acdde0b383813a62551f48b421119c833595f7bc5f90955c",
+          "raw_bytes": 240,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "9fb077a4cde126f1acdde0b383813a62551f48b421119c833595f7bc5f90955c",
+          "output": "Exception in thread \"main\" java.lang.AssertionError: null toString conversion\n\tat M3StringConcatReferenceDagTest.check(M3StringConcatReferenceDagTest.java:154)\n\tat M3StringConcatReferenceDagTest.main(M3StringConcatReferenceDagTest.java:47)\n"
+        }
+      },
+      {
+        "name": "baseline-nullable-disabled-compact",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-UseM3StringStorage",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringNullableConcatProbe"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "required_output": [
+          "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=16"
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/baseline-nullable-disabled-compact.log",
+        "log_sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/baseline-nullable-disabled-compact.log",
+          "raw_sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+          "raw_bytes": 47,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+          "output": "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=16\n"
+        }
+      },
+      {
+        "name": "baseline-nullable-admitted-compact",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:+UseM3StringStorage",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringNullableConcatProbe",
+          "admitted"
+        ],
+        "expected_exit": 1,
+        "actual_exit": 1,
+        "required_output": [
+          "java.lang.AssertionError: typed String null:",
+          "actual=left-long--right-long"
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/baseline-nullable-admitted-compact.log",
+        "log_sha256": "9de6262f402e25f0e0c9eeb0638baf83560c8913960fe4c2dc33f8536aa41eb0",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/baseline-nullable-admitted-compact.log",
+          "raw_sha256": "9de6262f402e25f0e0c9eeb0638baf83560c8913960fe4c2dc33f8536aa41eb0",
+          "raw_bytes": 360,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "9de6262f402e25f0e0c9eeb0638baf83560c8913960fe4c2dc33f8536aa41eb0",
+          "output": "Exception in thread \"main\" java.lang.AssertionError: typed String null: expected=left-long-null-right-long actual=left-long--right-long\n\tat M3StringNullableConcatProbe.check(M3StringNullableConcatProbe.java:103)\n\tat M3StringNullableConcatProbe.same(M3StringNullableConcatProbe.java:98)\n\tat M3StringNullableConcatProbe.main(M3StringNullableConcatProbe.java:20)\n"
+        }
+      },
+      {
+        "name": "baseline-nullable-refused-compact",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:+UseM3StringStorage",
+          "-Dm3.string.immediate=false",
+          "-Dm3.string.pool.maxBytes=0",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringNullableConcatProbe",
+          "refused"
+        ],
+        "expected_exit": 1,
+        "actual_exit": 1,
+        "required_output": [
+          "java.lang.NullPointerException"
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/baseline-nullable-refused-compact.log",
+        "log_sha256": "43585d01a09ce25e835693fb14dd64aae53d806f8c6a9044eb68002475b1f85a",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/baseline-nullable-refused-compact.log",
+          "raw_sha256": "43585d01a09ce25e835693fb14dd64aae53d806f8c6a9044eb68002475b1f85a",
+          "raw_bytes": 505,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "43585d01a09ce25e835693fb14dd64aae53d806f8c6a9044eb68002475b1f85a",
+          "output": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"String.length()\" because \"value\" is null\n\tat java.base/java.lang.StringConcatHelper.mix(StringConcatHelper.java:123)\n\tat java.base/java.lang.StringConcatHelper.flatConcat(StringConcatHelper.java:480)\n\tat java.base/java.lang.StringConcatHelper.m3Concat(StringConcatHelper.java:459)\n\tat M3StringNullableConcatProbe.single(M3StringNullableConcatProbe.java:72)\n\tat M3StringNullableConcatProbe.main(M3StringNullableConcatProbe.java:20)\n"
+        }
+      },
+      {
+        "name": "candidate-dag-compact",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "--patch-module",
+          "java.base=<WORK>/candidates/string/concat-proof/out/patch",
+          "-XX:+UseM3StringStorage",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringConcatReferenceDagTest"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "required_output": [
+          "M3_STRING_CONCAT_REFERENCE_DAG_PASS|checks=23|height="
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/candidate-dag-compact.log",
+        "log_sha256": "e452b0f644518ec88fe769c00247c7bf1b087b3fb23ff2ec44d74588eda10df6",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/candidate-dag-compact.log",
+          "raw_sha256": "e452b0f644518ec88fe769c00247c7bf1b087b3fb23ff2ec44d74588eda10df6",
+          "raw_bytes": 56,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "e452b0f644518ec88fe769c00247c7bf1b087b3fb23ff2ec44d74588eda10df6",
+          "output": "M3_STRING_CONCAT_REFERENCE_DAG_PASS|checks=23|height=10\n"
+        }
+      },
+      {
+        "name": "candidate-nullable-disabled-compact",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "--patch-module",
+          "java.base=<WORK>/candidates/string/concat-proof/out/patch",
+          "-XX:-UseM3StringStorage",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringNullableConcatProbe"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "required_output": [
+          "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=16"
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/candidate-nullable-disabled-compact.log",
+        "log_sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/candidate-nullable-disabled-compact.log",
+          "raw_sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+          "raw_bytes": 47,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+          "output": "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=16\n"
+        }
+      },
+      {
+        "name": "candidate-nullable-admitted-compact",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "--patch-module",
+          "java.base=<WORK>/candidates/string/concat-proof/out/patch",
+          "-XX:+UseM3StringStorage",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringNullableConcatProbe",
+          "admitted"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "required_output": [
+          "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=17"
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/candidate-nullable-admitted-compact.log",
+        "log_sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/candidate-nullable-admitted-compact.log",
+          "raw_sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+          "raw_bytes": 47,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+          "output": "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=17\n"
+        }
+      },
+      {
+        "name": "candidate-nullable-refused-compact",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "--patch-module",
+          "java.base=<WORK>/candidates/string/concat-proof/out/patch",
+          "-XX:+UseM3StringStorage",
+          "-Dm3.string.immediate=false",
+          "-Dm3.string.pool.maxBytes=0",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringNullableConcatProbe",
+          "refused"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "required_output": [
+          "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=17"
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/candidate-nullable-refused-compact.log",
+        "log_sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/candidate-nullable-refused-compact.log",
+          "raw_sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+          "raw_bytes": 47,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+          "output": "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=17\n"
+        }
+      },
+      {
+        "name": "baseline-dag-utf16",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-CompactStrings",
+          "-XX:+UseM3StringStorage",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringConcatReferenceDagTest"
+        ],
+        "expected_exit": 1,
+        "actual_exit": 1,
+        "required_output": [
+          "java.lang.AssertionError: null toString conversion"
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/baseline-dag-utf16.log",
+        "log_sha256": "9fb077a4cde126f1acdde0b383813a62551f48b421119c833595f7bc5f90955c",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/baseline-dag-utf16.log",
+          "raw_sha256": "9fb077a4cde126f1acdde0b383813a62551f48b421119c833595f7bc5f90955c",
+          "raw_bytes": 240,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "9fb077a4cde126f1acdde0b383813a62551f48b421119c833595f7bc5f90955c",
+          "output": "Exception in thread \"main\" java.lang.AssertionError: null toString conversion\n\tat M3StringConcatReferenceDagTest.check(M3StringConcatReferenceDagTest.java:154)\n\tat M3StringConcatReferenceDagTest.main(M3StringConcatReferenceDagTest.java:47)\n"
+        }
+      },
+      {
+        "name": "baseline-nullable-disabled-utf16",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-CompactStrings",
+          "-XX:-UseM3StringStorage",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringNullableConcatProbe"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "required_output": [
+          "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=16"
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/baseline-nullable-disabled-utf16.log",
+        "log_sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/baseline-nullable-disabled-utf16.log",
+          "raw_sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+          "raw_bytes": 47,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+          "output": "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=16\n"
+        }
+      },
+      {
+        "name": "baseline-nullable-admitted-utf16",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-CompactStrings",
+          "-XX:+UseM3StringStorage",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringNullableConcatProbe",
+          "admitted"
+        ],
+        "expected_exit": 1,
+        "actual_exit": 1,
+        "required_output": [
+          "java.lang.AssertionError: typed String null:",
+          "actual=left-long--right-long"
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/baseline-nullable-admitted-utf16.log",
+        "log_sha256": "9de6262f402e25f0e0c9eeb0638baf83560c8913960fe4c2dc33f8536aa41eb0",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/baseline-nullable-admitted-utf16.log",
+          "raw_sha256": "9de6262f402e25f0e0c9eeb0638baf83560c8913960fe4c2dc33f8536aa41eb0",
+          "raw_bytes": 360,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "9de6262f402e25f0e0c9eeb0638baf83560c8913960fe4c2dc33f8536aa41eb0",
+          "output": "Exception in thread \"main\" java.lang.AssertionError: typed String null: expected=left-long-null-right-long actual=left-long--right-long\n\tat M3StringNullableConcatProbe.check(M3StringNullableConcatProbe.java:103)\n\tat M3StringNullableConcatProbe.same(M3StringNullableConcatProbe.java:98)\n\tat M3StringNullableConcatProbe.main(M3StringNullableConcatProbe.java:20)\n"
+        }
+      },
+      {
+        "name": "baseline-nullable-refused-utf16",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-CompactStrings",
+          "-XX:+UseM3StringStorage",
+          "-Dm3.string.immediate=false",
+          "-Dm3.string.pool.maxBytes=0",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringNullableConcatProbe",
+          "refused"
+        ],
+        "expected_exit": 1,
+        "actual_exit": 1,
+        "required_output": [
+          "java.lang.NullPointerException"
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/baseline-nullable-refused-utf16.log",
+        "log_sha256": "43585d01a09ce25e835693fb14dd64aae53d806f8c6a9044eb68002475b1f85a",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/baseline-nullable-refused-utf16.log",
+          "raw_sha256": "43585d01a09ce25e835693fb14dd64aae53d806f8c6a9044eb68002475b1f85a",
+          "raw_bytes": 505,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "43585d01a09ce25e835693fb14dd64aae53d806f8c6a9044eb68002475b1f85a",
+          "output": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"String.length()\" because \"value\" is null\n\tat java.base/java.lang.StringConcatHelper.mix(StringConcatHelper.java:123)\n\tat java.base/java.lang.StringConcatHelper.flatConcat(StringConcatHelper.java:480)\n\tat java.base/java.lang.StringConcatHelper.m3Concat(StringConcatHelper.java:459)\n\tat M3StringNullableConcatProbe.single(M3StringNullableConcatProbe.java:72)\n\tat M3StringNullableConcatProbe.main(M3StringNullableConcatProbe.java:20)\n"
+        }
+      },
+      {
+        "name": "candidate-dag-utf16",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-CompactStrings",
+          "--patch-module",
+          "java.base=<WORK>/candidates/string/concat-proof/out/patch",
+          "-XX:+UseM3StringStorage",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringConcatReferenceDagTest"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "required_output": [
+          "M3_STRING_CONCAT_REFERENCE_DAG_PASS|checks=23|height="
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/candidate-dag-utf16.log",
+        "log_sha256": "e452b0f644518ec88fe769c00247c7bf1b087b3fb23ff2ec44d74588eda10df6",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/candidate-dag-utf16.log",
+          "raw_sha256": "e452b0f644518ec88fe769c00247c7bf1b087b3fb23ff2ec44d74588eda10df6",
+          "raw_bytes": 56,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "e452b0f644518ec88fe769c00247c7bf1b087b3fb23ff2ec44d74588eda10df6",
+          "output": "M3_STRING_CONCAT_REFERENCE_DAG_PASS|checks=23|height=10\n"
+        }
+      },
+      {
+        "name": "candidate-nullable-disabled-utf16",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-CompactStrings",
+          "--patch-module",
+          "java.base=<WORK>/candidates/string/concat-proof/out/patch",
+          "-XX:-UseM3StringStorage",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringNullableConcatProbe"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "required_output": [
+          "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=16"
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/candidate-nullable-disabled-utf16.log",
+        "log_sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/candidate-nullable-disabled-utf16.log",
+          "raw_sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+          "raw_bytes": 47,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+          "output": "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=16\n"
+        }
+      },
+      {
+        "name": "candidate-nullable-admitted-utf16",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-CompactStrings",
+          "--patch-module",
+          "java.base=<WORK>/candidates/string/concat-proof/out/patch",
+          "-XX:+UseM3StringStorage",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringNullableConcatProbe",
+          "admitted"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "required_output": [
+          "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=17"
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/candidate-nullable-admitted-utf16.log",
+        "log_sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/candidate-nullable-admitted-utf16.log",
+          "raw_sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+          "raw_bytes": 47,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+          "output": "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=17\n"
+        }
+      },
+      {
+        "name": "candidate-nullable-refused-utf16",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-CompactStrings",
+          "--patch-module",
+          "java.base=<WORK>/candidates/string/concat-proof/out/patch",
+          "-XX:+UseM3StringStorage",
+          "-Dm3.string.immediate=false",
+          "-Dm3.string.pool.maxBytes=0",
+          "-cp",
+          "<WORK>/candidates/string/concat-proof/out/classes",
+          "M3StringNullableConcatProbe",
+          "refused"
+        ],
+        "expected_exit": 0,
+        "actual_exit": 0,
+        "required_output": [
+          "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=17"
+        ],
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-proof/out/candidate-nullable-refused-utf16.log",
+        "log_sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+        "capture": {
+          "input": "work/candidates/string/concat-proof/out/candidate-nullable-refused-utf16.log",
+          "raw_sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+          "raw_bytes": 47,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+          "output": "M3_STRING_NULLABLE_CONCAT_PROBE_PASS|checks=17\n"
+        }
+      }
+    ],
+    "input_evidence_sha256": "30d03003cdb723c61f3b8aece5b45134c97d59fabfc9b545d5ec3507f7231928",
+    "interpretation": "Two successful strict compilation commands, six expected failing baseline runtime commands, two passing baseline M3-disabled commands, and eight passing candidate runtime commands. All 18 matched their declared expectations. Expected baseline failures are not harness authoring failures.",
+    "proof_fixture": {
+      "packet_path": "M3StringNullableConcatProbe.java",
+      "sha256": "4ebc9766db609be395291e5c083d9b8e1c2fd7ed5d1c27938cd134c034076588"
+    }
+  },
+  "nullable_gate": {
+    "scope": "copied exact current source; source gate only, behavior proof is separate concat-proof",
+    "results": [
+      {
+        "name": "baseline",
+        "command": [
+          "python3",
+          "<WORK>/candidates/string/concat-gate-proof/baseline/m3/runtime-integration/check-m3string-concat-reference-dag.py"
+        ],
+        "expected_exit": 1,
+        "exit": 1,
+        "required_token": "nullable_reference_conversion_bypass",
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-gate-proof/baseline.log",
+        "log_sha256": "08fc84d4e5c9ac22466e4d8c20111cc16b2c701b71717a4b449aaa09f2ade1d5",
+        "capture": {
+          "input": "work/candidates/string/concat-gate-proof/baseline.log",
+          "raw_sha256": "08fc84d4e5c9ac22466e4d8c20111cc16b2c701b71717a4b449aaa09f2ade1d5",
+          "raw_bytes": 68,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "08fc84d4e5c9ac22466e4d8c20111cc16b2c701b71717a4b449aaa09f2ade1d5",
+          "output": "M3_STRING_CONCAT_RECEIVER_FAIL|nullable_reference_conversion_bypass\n"
+        }
+      },
+      {
+        "name": "candidate",
+        "command": [
+          "python3",
+          "<WORK>/candidates/string/concat-gate-proof/candidate/m3/runtime-integration/check-m3string-concat-reference-dag.py"
+        ],
+        "expected_exit": 0,
+        "exit": 0,
+        "required_token": "M3_STRING_CONCAT_REFERENCE_DAG_PASS",
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-gate-proof/candidate.log",
+        "log_sha256": "3ba4380bca0c24aef2002ead0c359fc8d5858b927e6d7b3f99490399f0f393fd",
+        "capture": {
+          "input": "work/candidates/string/concat-gate-proof/candidate.log",
+          "raw_sha256": "3ba4380bca0c24aef2002ead0c359fc8d5858b927e6d7b3f99490399f0f393fd",
+          "raw_bytes": 128,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "3ba4380bca0c24aef2002ead0c359fc8d5858b927e6d7b3f99490399f0f393fd",
+          "output": "M3_STRING_CONCAT_REFERENCE_DAG_PASS|m3append=true|budget_fallback=true|typed_stringify=true|no_staging=true|balanced_owner=true\n"
+        }
+      },
+      {
+        "name": "mutant-helper-argument",
+        "command": [
+          "python3",
+          "<WORK>/candidates/string/concat-gate-proof/mutant-helper-argument/m3/runtime-integration/check-m3string-concat-reference-dag.py"
+        ],
+        "expected_exit": 1,
+        "exit": 1,
+        "required_token": "missing_or_out_of_order=result = m3Append(result, args[index]);",
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-gate-proof/mutant-helper-argument.log",
+        "log_sha256": "bc1b1a55acd9d1088e370a379583cb31527c47f221fc7a13ef68273d6f33c99e",
+        "capture": {
+          "input": "work/candidates/string/concat-gate-proof/mutant-helper-argument.log",
+          "raw_sha256": "bc1b1a55acd9d1088e370a379583cb31527c47f221fc7a13ef68273d6f33c99e",
+          "raw_bytes": 95,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "bc1b1a55acd9d1088e370a379583cb31527c47f221fc7a13ef68273d6f33c99e",
+          "output": "M3_STRING_CONCAT_RECEIVER_FAIL|missing_or_out_of_order=result = m3Append(result, args[index]);\n"
+        }
+      },
+      {
+        "name": "mutant-primitive-gateway",
+        "command": [
+          "python3",
+          "<WORK>/candidates/string/concat-gate-proof/mutant-primitive-gateway/m3/runtime-integration/check-m3string-concat-reference-dag.py"
+        ],
+        "expected_exit": 1,
+        "exit": 1,
+        "required_token": "stringifier=return stringValueOf(type);",
+        "matched": true,
+        "log": "<WORK>/candidates/string/concat-gate-proof/mutant-primitive-gateway.log",
+        "log_sha256": "2cd561848c3e443435a6324af321f4cb0987eec9a8c7cc71b7b1b5ea05b56d6d",
+        "capture": {
+          "input": "work/candidates/string/concat-gate-proof/mutant-primitive-gateway.log",
+          "raw_sha256": "2cd561848c3e443435a6324af321f4cb0987eec9a8c7cc71b7b1b5ea05b56d6d",
+          "raw_bytes": 71,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "2cd561848c3e443435a6324af321f4cb0987eec9a8c7cc71b7b1b5ea05b56d6d",
+          "output": "M3_STRING_CONCAT_RECEIVER_FAIL|stringifier=return stringValueOf(type);\n"
+        }
+      }
+    ],
+    "input_evidence_sha256": "7d706126105c585d56ae24239a9331d976089b48b7a06757bc9508b7d4220063",
+    "interpretation": "Four source-only gate checks: reject old nullable bypass, accept corrected Factory, reject helper-argument mutation, reject primitive-gateway mutation. This is separate from behavioral JVM evidence.",
+    "source_pins": {
+      "path": "m3/runtime-integration/check-m3string-concat-reference-dag.py",
+      "before_sha256": "9fd82a96ad813f11c90e593c8cd3b93feae9d5658a7b7b68ca48e95f035b19fa",
+      "after_sha256": "4fff9f78297b91a63c401e9fd9994de6ed643207661bb58fd099d0870e073ec2"
+    },
+    "corrected_receiving_gate_confirmation": {
+      "capture": {
+        "input": "work/evidence/receiving-concat-source-gate.log",
+        "raw_sha256": "3ba4380bca0c24aef2002ead0c359fc8d5858b927e6d7b3f99490399f0f393fd",
+        "raw_bytes": 128,
+        "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+        "normalized_sha256": "3ba4380bca0c24aef2002ead0c359fc8d5858b927e6d7b3f99490399f0f393fd",
+        "output": "M3_STRING_CONCAT_REFERENCE_DAG_PASS|m3append=true|budget_fallback=true|typed_stringify=true|no_staging=true|balanced_owner=true\n"
+      },
+      "interpretation": "PASS from the corrected receiving gate on the accepted successor source. The four-case proof separately preserves expected baseline nullable-bypass rejection and two mutant rejections. This result does not change the original failed E1 jtreg aggregate."
+    }
+  },
+  "tuple_coordinate_semantics": {
+    "scope": "actual installed image; isolated candidate Pool class patch; expanded collision/coordinate contract fixture",
+    "test_before": "0075a3d497d1dba5b8ce0f167b1b67ea58121eeec0338c951b76f5dda2a3a1fd",
+    "test_after": "ce58fbed5fb3608d625059d32b565bba80ca1bfa7ed556bdaa4d86ad03454c95",
+    "results": [
+      {
+        "name": "compile",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/javac",
+          "-Xlint:all",
+          "-Werror",
+          "-d",
+          "<WORK>/candidates/tuple-coordinate/fixture-proof/classes",
+          "<WORK>/candidates/tuple-coordinate/post/test/jdk/java/lang/String/M3StringCanonicalDagTest.java"
+        ],
+        "exit": 0,
+        "expected_exit": 0,
+        "required_token": null,
+        "matched": true,
+        "log": "<WORK>/candidates/tuple-coordinate/fixture-proof/compile.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "capture": {
+          "input": "work/candidates/tuple-coordinate/fixture-proof/compile.log",
+          "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "raw_bytes": 0,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "output": ""
+        }
+      },
+      {
+        "name": "baseline-compact",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:+UseM3StringStorage",
+          "-cp",
+          "<WORK>/candidates/tuple-coordinate/fixture-proof/classes",
+          "M3StringCanonicalDagTest"
+        ],
+        "exit": 0,
+        "expected_exit": 0,
+        "required_token": "M3_STRING_CANONICAL_DAG_PASS checks=",
+        "matched": true,
+        "log": "<WORK>/candidates/tuple-coordinate/fixture-proof/baseline-compact.log",
+        "sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+        "capture": {
+          "input": "work/candidates/tuple-coordinate/fixture-proof/baseline-compact.log",
+          "raw_sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+          "raw_bytes": 49,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+          "output": "M3_STRING_CANONICAL_DAG_PASS checks=59 height=12\n"
+        }
+      },
+      {
+        "name": "candidate-compact",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:+UseM3StringStorage",
+          "--patch-module",
+          "java.base=<WORK>/candidates/tuple-coordinate/classes",
+          "-cp",
+          "<WORK>/candidates/tuple-coordinate/fixture-proof/classes",
+          "M3StringCanonicalDagTest"
+        ],
+        "exit": 0,
+        "expected_exit": 0,
+        "required_token": "M3_STRING_CANONICAL_DAG_PASS checks=",
+        "matched": true,
+        "log": "<WORK>/candidates/tuple-coordinate/fixture-proof/candidate-compact.log",
+        "sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+        "capture": {
+          "input": "work/candidates/tuple-coordinate/fixture-proof/candidate-compact.log",
+          "raw_sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+          "raw_bytes": 49,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+          "output": "M3_STRING_CANONICAL_DAG_PASS checks=59 height=12\n"
+        }
+      },
+      {
+        "name": "baseline-utf16",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:+UseM3StringStorage",
+          "-XX:-CompactStrings",
+          "-cp",
+          "<WORK>/candidates/tuple-coordinate/fixture-proof/classes",
+          "M3StringCanonicalDagTest"
+        ],
+        "exit": 0,
+        "expected_exit": 0,
+        "required_token": "M3_STRING_CANONICAL_DAG_PASS checks=",
+        "matched": true,
+        "log": "<WORK>/candidates/tuple-coordinate/fixture-proof/baseline-utf16.log",
+        "sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+        "capture": {
+          "input": "work/candidates/tuple-coordinate/fixture-proof/baseline-utf16.log",
+          "raw_sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+          "raw_bytes": 49,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+          "output": "M3_STRING_CANONICAL_DAG_PASS checks=59 height=12\n"
+        }
+      },
+      {
+        "name": "candidate-utf16",
+        "command": [
+          "<M3JDK21>/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:+UseM3StringStorage",
+          "-XX:-CompactStrings",
+          "--patch-module",
+          "java.base=<WORK>/candidates/tuple-coordinate/classes",
+          "-cp",
+          "<WORK>/candidates/tuple-coordinate/fixture-proof/classes",
+          "M3StringCanonicalDagTest"
+        ],
+        "exit": 0,
+        "expected_exit": 0,
+        "required_token": "M3_STRING_CANONICAL_DAG_PASS checks=",
+        "matched": true,
+        "log": "<WORK>/candidates/tuple-coordinate/fixture-proof/candidate-utf16.log",
+        "sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+        "capture": {
+          "input": "work/candidates/tuple-coordinate/fixture-proof/candidate-utf16.log",
+          "raw_sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+          "raw_bytes": 49,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+          "output": "M3_STRING_CANONICAL_DAG_PASS checks=59 height=12\n"
+        }
+      }
+    ],
+    "input_evidence_sha256": "14fbbc601fa45214e35ac3cdfe08382d12c51b55e8040aa918f1dbf6694ba89f",
+    "interpretation": "One strict fixture compilation and four semantic runs, each 59 checks, height 12: baseline and candidate in both compact modes. Baseline passes intentionally: this guards preserved coordinate and collision semantics; it is not a speed measurement.",
+    "runtime_source_pins": [
+      {
+        "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+        "before": "d220d44887baf1054fece7d75e7e10b2ea8b787ea32e3280a06bd43f4758b675",
+        "after": "a4fe0b9327d48748083d92e6212f306bc8e039a76ed437afd6ecee57b903aa6e"
+      }
+    ],
+    "fixture_source_pins": {
+      "path": "test/jdk/java/lang/String/M3StringCanonicalDagTest.java",
+      "before": "0075a3d497d1dba5b8ce0f167b1b67ea58121eeec0338c951b76f5dda2a3a1fd",
+      "after": "ce58fbed5fb3608d625059d32b565bba80ca1bfa7ed556bdaa4d86ad03454c95"
+    }
+  },
+  "tuple_coordinate_overflow": {
+    "scope": "E1 installed image with isolated Pool class patch, default CompactStrings only; original unchanged overflow test.",
+    "actual_exit": 0,
+    "exit_provenance": "direct execution session 79161 confirmed by executing parent agent",
+    "checks": 111,
+    "elapsed_seconds": null,
+    "capture": {
+      "input": "work/evidence/tuple-coordinate-overflow-candidate.log",
+      "raw_sha256": "60313c3da01903d89bb94afc9b832da81bc7a311cd8939c2e9049800da948371",
+      "raw_bytes": 49,
+      "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+      "normalized_sha256": "60313c3da01903d89bb94afc9b832da81bc7a311cd8939c2e9049800da948371",
+      "output": "M3_STRING_CONCAT_LENGTH_OVERFLOW_PASS|checks=111\n"
+    },
+    "limitation": "Candidate elapsed time was not recorded. The original E1 jtreg run timed out at 480 seconds, but no numerical speedup or full rebuilt-image success is claimed.",
+    "argv_relative_to_work": [
+      "M3jdk21/build/m3-composed-release/images/jdk/bin/java",
+      "--patch-module",
+      "java.base=candidates/tuple-coordinate/classes",
+      "--add-opens=java.base/java.lang=ALL-UNNAMED",
+      "-XX:+UnlockExperimentalVMOptions",
+      "-XX:+UseM3StringStorage",
+      "-Xmx512m",
+      "-cp",
+      "evidence/jtreg-work/classes/0/java/lang/String/M3StringConcatLengthOverflowTest.d",
+      "M3StringConcatLengthOverflowTest"
+    ],
+    "working_directory": "<WORK>"
+  },
+  "direct_execution_record": {
+    "schema": "M3_RECEIVING_DIRECT_EXECUTION_V1",
+    "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+    "license": "Apache-2.0",
+    "source_epoch": "M3JDK21 f35342202149b98465bb4e9e6be807eb0cf3f762",
+    "execution_record": "Commands copied from executed root tool calls and exit completions; no fabricated timings; relative paths normalize the shared work directory",
+    "runs": [
+      {
+        "name": "native-budget-default",
+        "argv_relative_to_work": [
+          "M3jdk21/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-Dm3.string.pool.maxBytes=0",
+          "-Dm3.string.pool.maxTuples=0",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-UseM3StringStorage",
+          "-cp",
+          "candidates/native-budget-fixture/classes",
+          "M3StringPoolMetadataBoundsTest"
+        ],
+        "exit": 0,
+        "exit_evidence": "direct exec/write_stdin tool completion; no wall-time claim",
+        "stdout": "M3StringPoolMetadataBoundsTest checks=6660\n",
+        "log_sha256": "c47025af21e3c08c6bcb21143071be54b956b1a6e2dad8a14a51767c7dca09b8",
+        "scope": "installed E1 image with changed external test fixture; production classes unpatched"
+      },
+      {
+        "name": "native-budget-disabled",
+        "argv_relative_to_work": [
+          "M3jdk21/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-Dm3.string.pool.maxBytes=0",
+          "-Dm3.string.pool.maxTuples=0",
+          "-Dm3.string.immediate=false",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-UseM3StringStorage",
+          "-cp",
+          "candidates/native-budget-fixture/classes",
+          "M3StringPoolMetadataBoundsTest"
+        ],
+        "exit": 0,
+        "exit_evidence": "direct exec/write_stdin tool completion; no wall-time claim",
+        "stdout": "M3StringPoolMetadataBoundsTest checks=6660\n",
+        "log_sha256": "c47025af21e3c08c6bcb21143071be54b956b1a6e2dad8a14a51767c7dca09b8",
+        "scope": "installed E1 image with changed external test fixture; production classes unpatched"
+      },
+      {
+        "name": "native-budget-noncompact",
+        "argv_relative_to_work": [
+          "M3jdk21/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-Dm3.string.pool.maxBytes=0",
+          "-Dm3.string.pool.maxTuples=0",
+          "-XX:-CompactStrings",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-UseM3StringStorage",
+          "-cp",
+          "candidates/native-budget-fixture/classes",
+          "M3StringPoolMetadataBoundsTest"
+        ],
+        "exit": 0,
+        "exit_evidence": "direct exec/write_stdin tool completion; no wall-time claim",
+        "stdout": "M3StringPoolMetadataBoundsTest checks=6660\n",
+        "log_sha256": "c47025af21e3c08c6bcb21143071be54b956b1a6e2dad8a14a51767c7dca09b8",
+        "scope": "installed E1 image with changed external test fixture; production classes unpatched"
+      },
+      {
+        "name": "tuple-coordinate-overflow-candidate",
+        "argv_relative_to_work": [
+          "M3jdk21/build/m3-composed-release/images/jdk/bin/java",
+          "--patch-module",
+          "java.base=candidates/tuple-coordinate/classes",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:+UseM3StringStorage",
+          "-Xmx512m",
+          "-cp",
+          "evidence/jtreg-work/classes/0/java/lang/String/M3StringConcatLengthOverflowTest.d",
+          "M3StringConcatLengthOverflowTest"
+        ],
+        "exit": 0,
+        "exit_evidence": "direct exec session79161 completed exit0; no wall-time claim",
+        "stdout": "M3_STRING_CONCAT_LENGTH_OVERFLOW_PASS|checks=111\n",
+        "log_sha256": "60313c3da01903d89bb94afc9b832da81bc7a311cd8939c2e9049800da948371",
+        "scope": "installed E1 image with isolated candidate Pool class patch; default CompactStrings; original unchanged overflow test"
+      }
+    ],
+    "original_overflow_jtr": {
+      "path": "evidence/jtreg-work/java/lang/String/M3StringConcatLengthOverflowTest.jtr",
+      "sha256": "bf8614713604210d9750843d65f229b07a928d9dfbd5098d4130577dc43cbdb6",
+      "status": "Error: timeout after480seconds; original input/image unpatched"
+    }
+  },
+  "native_budget_fixture": {
+    "scope": "Test-only correction selecting 32-byte source payloads beyond both immediate packing profiles; preserves refusal/bucket/count assertions.",
+    "source_pins": [
+      {
+        "path": "test/jdk/java/lang/String/M3StringPoolMetadataBoundsTest.java",
+        "before": "21523bf18d83f7f94f4941ff4d039814eb09c4d89c91df3b27b20cb22099481b",
+        "after": "1ead247d909137f295633f488f8db0849f405cfed75a87ba4f3779ab67ff9180"
+      }
+    ],
+    "compilation": {
+      "flags": [
+        "-Xlint:all",
+        "-Werror"
+      ],
+      "provenance": "reported by executing parent; no standalone compilation log was retained in this packet"
+    },
+    "runs": [
+      {
+        "name": "default",
+        "argv_relative_to_work": [
+          "M3jdk21/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-Dm3.string.pool.maxBytes=0",
+          "-Dm3.string.pool.maxTuples=0",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-UseM3StringStorage",
+          "-cp",
+          "candidates/native-budget-fixture/classes",
+          "M3StringPoolMetadataBoundsTest"
+        ],
+        "working_directory": "<WORK>",
+        "actual_exit": 0,
+        "exit_provenance": "direct exec/write_stdin tool completion; no wall-time claim",
+        "checks": 6660,
+        "capture": {
+          "input": "work/evidence/native-budget-fixture-default.log",
+          "raw_sha256": "c47025af21e3c08c6bcb21143071be54b956b1a6e2dad8a14a51767c7dca09b8",
+          "raw_bytes": 43,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "c47025af21e3c08c6bcb21143071be54b956b1a6e2dad8a14a51767c7dca09b8",
+          "output": "M3StringPoolMetadataBoundsTest checks=6660\n"
+        }
+      },
+      {
+        "name": "disabled",
+        "argv_relative_to_work": [
+          "M3jdk21/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-Dm3.string.pool.maxBytes=0",
+          "-Dm3.string.pool.maxTuples=0",
+          "-Dm3.string.immediate=false",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-UseM3StringStorage",
+          "-cp",
+          "candidates/native-budget-fixture/classes",
+          "M3StringPoolMetadataBoundsTest"
+        ],
+        "working_directory": "<WORK>",
+        "actual_exit": 0,
+        "exit_provenance": "direct exec/write_stdin tool completion; no wall-time claim",
+        "checks": 6660,
+        "capture": {
+          "input": "work/evidence/native-budget-fixture-disabled.log",
+          "raw_sha256": "c47025af21e3c08c6bcb21143071be54b956b1a6e2dad8a14a51767c7dca09b8",
+          "raw_bytes": 43,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "c47025af21e3c08c6bcb21143071be54b956b1a6e2dad8a14a51767c7dca09b8",
+          "output": "M3StringPoolMetadataBoundsTest checks=6660\n"
+        }
+      },
+      {
+        "name": "noncompact",
+        "argv_relative_to_work": [
+          "M3jdk21/build/m3-composed-release/images/jdk/bin/java",
+          "--add-opens=java.base/java.lang=ALL-UNNAMED",
+          "-Dm3.string.pool.maxBytes=0",
+          "-Dm3.string.pool.maxTuples=0",
+          "-XX:-CompactStrings",
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:-UseM3StringStorage",
+          "-cp",
+          "candidates/native-budget-fixture/classes",
+          "M3StringPoolMetadataBoundsTest"
+        ],
+        "working_directory": "<WORK>",
+        "actual_exit": 0,
+        "exit_provenance": "direct exec/write_stdin tool completion; no wall-time claim",
+        "checks": 6660,
+        "capture": {
+          "input": "work/evidence/native-budget-fixture-noncompact.log",
+          "raw_sha256": "c47025af21e3c08c6bcb21143071be54b956b1a6e2dad8a14a51767c7dca09b8",
+          "raw_bytes": 43,
+          "stream_capture": "combined stdout/stderr; separate streams were not recorded",
+          "normalized_sha256": "c47025af21e3c08c6bcb21143071be54b956b1a6e2dad8a14a51767c7dca09b8",
+          "output": "M3StringPoolMetadataBoundsTest checks=6660\n"
+        }
+      }
+    ]
+  },
+  "nullable_manifest_update": {
+    "source_pins": {
+      "path": "m3/runtime-integration/recipe/manifest.json",
+      "before_sha256": "b44b3740eefe6780a11f31291b2f3f446231365ea3c441844fe4d9aa5fe0b462",
+      "after_sha256": "416f8c17500afd1d9d2d2e3a7a85e300cf9807fbac7ead514b9c48cf0494e4e5",
+      "retained_file_entries": 66,
+      "scope": "only append exact Factory successor; retain all existing entries and source/history pins"
+    },
+    "proof": {
+      "files_retained": 66,
+      "unrelated_rows_unchanged": 65,
+      "history_top_level_unchanged": true,
+      "factory_original_before_after_unchanged": true,
+      "only_new_successor": "732c410330a1137aace06d3b20e0e8a86899b4fe98f15c738d588102383c4052",
+      "existing_mutf8_fanin_before_after": "PASS"
+    }
+  },
+  "final_rebuilt_image_receipt": "E2 pending; a later evidence checkpoint must report its own aggregate."
+}

@@ -1,0 +1,447 @@
+{
+  "schema": "SYNEXIA_M3_COMBINED_SDK_EXECUTION_V1",
+  "canonical_source_ref": "a5ecf38c81bcd9f7695e6e6fc9adba33080a6837",
+  "receiving_origin": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+  "baseline_binding": "Each dataset below has its exact baseline_ref and file preimage hashes.",
+  "engine_changes": false,
+  "dataset_order": [
+    "combine-string21",
+    "combine-collections21",
+    "combine-ownership21",
+    "combine-views-final21",
+    "combine-tuple21",
+    "combine-codepoint21",
+    "combine-addendum21",
+    "combine-composed21"
+  ],
+  "datasets": [
+    {
+      "dataset": "combine-string21",
+      "baseline_ref": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+      "status": "PASSED",
+      "kind": "SDK_EXECUTION",
+      "targets": 15,
+      "java_targets": 6,
+      "text_targets": 9,
+      "command": "mvn -B -ntp -Dm3.dataset=combine-string21 -Drecipe.owner.root=<canonical-module> -Pcontract verify",
+      "toolchain": {
+        "java.version": "21.0.12.1",
+        "java.vendor": "Eclipse Adoptium",
+        "os.name": "Linux",
+        "os.arch": "amd64"
+      },
+      "sdk_tests": [
+        {
+          "name": "driftMissingDuplicateAndWrongRepresentationRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "4.823"
+        },
+        {
+          "name": "qualifiedSdkResultsAreRetained",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "4.258"
+        },
+        {
+          "name": "postScanChangesRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "11.265"
+        },
+        {
+          "name": "mixedPreimagesAndPostimages",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "13.451"
+        },
+        {
+          "name": "exactReplayFixedPointAndInputOrder",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "8.473"
+        }
+      ],
+      "preparation_tests": 12,
+      "receiver_contract_cases": 16,
+      "raw_sdk_report_sha256": "b94df7389afb2c53a192c5a3063c643ac6a165431769828e350e09158f48d9ae",
+      "raw_sdk_report_publication": "Hash retained; raw environment/system-property report stays local. Named test report, Maven log and exact input/result bindings are published.",
+      "sdk_inputs_sha256": "c8bb7d11dac527ec4c72d04d700cf02a94ecfe57c1fdc08ca4650a4e866f734c",
+      "sdk_results_sha256": "c6eccba6a268a020b3cc139ccc504d1c0a1674bae3f2086012f17304a0befe49",
+      "maven_log_sha256": "d4a5cc08818b6946f846d730e34be6e911d466c3bf0cebb8888d1652c575f276",
+      "receiver_receipt_sha256": "20084ccfeb99c2eaf44e8d2d5d7b26bf4fd745c56df012b5680e50d2735172bc",
+      "product_behavior": "SEPARATE_RECEIVING_PRODUCT_GATES",
+      "actual_product_receiver": "PRODUCT_RECEIVER.json"
+    },
+    {
+      "dataset": "combine-collections21",
+      "baseline_ref": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+      "status": "PASSED",
+      "kind": "SDK_EXECUTION",
+      "targets": 13,
+      "java_targets": 10,
+      "text_targets": 3,
+      "command": "mvn -B -ntp -Dm3.dataset=combine-collections21 -Drecipe.owner.root=<canonical-module> -Pcontract verify",
+      "toolchain": {
+        "java.version": "21.0.12.1",
+        "java.vendor": "Eclipse Adoptium",
+        "os.name": "Linux",
+        "os.arch": "amd64"
+      },
+      "sdk_tests": [
+        {
+          "name": "driftMissingDuplicateAndWrongRepresentationRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "6.354"
+        },
+        {
+          "name": "qualifiedSdkResultsAreRetained",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "6.666"
+        },
+        {
+          "name": "postScanChangesRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "27.791"
+        },
+        {
+          "name": "mixedPreimagesAndPostimages",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "30.803"
+        },
+        {
+          "name": "exactReplayFixedPointAndInputOrder",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "11.96"
+        }
+      ],
+      "preparation_tests": 12,
+      "receiver_contract_cases": 15,
+      "raw_sdk_report_sha256": "f65ada493961e6a86027c35d2dd06152c89f3e39882450ecb77c89772ed86f9f",
+      "raw_sdk_report_publication": "Hash retained; raw environment/system-property report stays local. Named test report, Maven log and exact input/result bindings are published.",
+      "sdk_inputs_sha256": "928d270f2fbc189f12b0b5a3bb51e10a72a380fabb88d1e4e86d45b4bd22916e",
+      "sdk_results_sha256": "5ad09a68e59bef2dda8aa9f5e9f521d7ffa90a4c321676e9e280db5c25e50cea",
+      "maven_log_sha256": "6e3eb462b0078fa75c66c99beabf0cbcb4e136acea69232189e14d6a23774ebf",
+      "receiver_receipt_sha256": "8d3a8b503247455cbd523b0b70200a0e4f009d8f254b9b0d8927e6edbd4c9ca0",
+      "product_behavior": "SEPARATE_RECEIVING_PRODUCT_GATES",
+      "actual_product_receiver": "PRODUCT_RECEIVER.json"
+    },
+    {
+      "dataset": "combine-ownership21",
+      "baseline_ref": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+      "status": "PASSED",
+      "kind": "SDK_EXECUTION",
+      "targets": 5,
+      "java_targets": 4,
+      "text_targets": 1,
+      "command": "mvn -B -ntp -Dm3.dataset=combine-ownership21 -Drecipe.owner.root=<canonical-module> -Pcontract verify",
+      "toolchain": {
+        "java.version": "21.0.12.1",
+        "java.vendor": "Eclipse Adoptium",
+        "os.name": "Linux",
+        "os.arch": "amd64"
+      },
+      "sdk_tests": [
+        {
+          "name": "driftMissingDuplicateAndWrongRepresentationRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "3.917"
+        },
+        {
+          "name": "qualifiedSdkResultsAreRetained",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "2.925"
+        },
+        {
+          "name": "postScanChangesRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "5.649"
+        },
+        {
+          "name": "mixedPreimagesAndPostimages",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "5.133"
+        },
+        {
+          "name": "exactReplayFixedPointAndInputOrder",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "5.561"
+        }
+      ],
+      "preparation_tests": 12,
+      "receiver_contract_cases": 15,
+      "raw_sdk_report_sha256": "01f89e4f49eeef084f13ca4002b335dddfe7acc776e8af14e2ba0b73edc35aac",
+      "raw_sdk_report_publication": "Hash retained; raw environment/system-property report stays local. Named test report, Maven log and exact input/result bindings are published.",
+      "sdk_inputs_sha256": "bfdfb53cfaa2cdea19e85e274bdb75d707647ab4d46fcabdd947cfcf140125bc",
+      "sdk_results_sha256": "26d8309d94634b523ac70fcd3b9347cd45ca50802315be1478fe2787ce97764a",
+      "maven_log_sha256": "bad9317f6cb397e0055445174a7e75c8777b1e8374146087da8b4cddc503a065",
+      "receiver_receipt_sha256": "a18c1cad47c518e0ad13b4b5bcaf996549af8c3beb08cbabb738e5e5dfa82adc",
+      "product_behavior": "SEPARATE_RECEIVING_PRODUCT_GATES",
+      "actual_product_receiver": "PRODUCT_RECEIVER.json"
+    },
+    {
+      "dataset": "combine-views-final21",
+      "baseline_ref": "a115db5d8d9a53c20bf6f6880286a967a80a8dda + canonical combine-string21, combine-collections21, combine-ownership21 (per-file preimages verified)",
+      "status": "PASSED",
+      "kind": "SDK_EXECUTION",
+      "targets": 13,
+      "java_targets": 11,
+      "text_targets": 2,
+      "command": "mvn -B -ntp -Dm3.dataset=combine-views-final21 -Drecipe.owner.root=<canonical-module> -Pcontract verify",
+      "toolchain": {
+        "java.version": "21.0.12.1",
+        "java.vendor": "Eclipse Adoptium",
+        "os.name": "Linux",
+        "os.arch": "amd64"
+      },
+      "sdk_tests": [
+        {
+          "name": "driftMissingDuplicateAndWrongRepresentationRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "9.597"
+        },
+        {
+          "name": "qualifiedSdkResultsAreRetained",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "7.92"
+        },
+        {
+          "name": "postScanChangesRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "42.238"
+        },
+        {
+          "name": "mixedPreimagesAndPostimages",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "40.993"
+        },
+        {
+          "name": "exactReplayFixedPointAndInputOrder",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "15.559"
+        }
+      ],
+      "preparation_tests": 12,
+      "receiver_contract_cases": 15,
+      "raw_sdk_report_sha256": "fb9c6080ac3d48060ae8f2390b8e6a8d0ba8f1fc271a827753024305dcc0671c",
+      "raw_sdk_report_publication": "Hash retained; raw environment/system-property report stays local. Named test report, Maven log and exact input/result bindings are published.",
+      "sdk_inputs_sha256": "44fbd0d4ad6ee80ec5ab7ea89ffb3ab72970e67750a2fdd14ff5b1853e8763df",
+      "sdk_results_sha256": "8bf9a83b3f633e70d27c6d8babef0d57b5610c20a9213e1454170da87952813f",
+      "maven_log_sha256": "a28e9a0be8a8ab7ddf12043b8691264a2b32f1349561c9fce7c8ab292ab6365d",
+      "receiver_receipt_sha256": "260af0fab06564bb6fba99876c5e4f95959c4e0f66fc157021c64e2b6764419e",
+      "product_behavior": "SEPARATE_RECEIVING_PRODUCT_GATES",
+      "actual_product_receiver": "PRODUCT_RECEIVER.json"
+    },
+    {
+      "dataset": "combine-tuple21",
+      "baseline_ref": "a115db5d8d9a53c20bf6f6880286a967a80a8dda + received combine-ownership21 (exact current Pool preimage; disjoint received stages outside this two-file scope)",
+      "status": "PASSED",
+      "kind": "SDK_EXECUTION",
+      "targets": 2,
+      "java_targets": 2,
+      "text_targets": 0,
+      "command": "mvn -B -ntp -Dm3.dataset=combine-tuple21 -Drecipe.owner.root=<canonical-module> -Pcontract verify",
+      "toolchain": {
+        "java.version": "21.0.12.1",
+        "java.vendor": "Eclipse Adoptium",
+        "os.name": "Linux",
+        "os.arch": "amd64"
+      },
+      "sdk_tests": [
+        {
+          "name": "driftMissingDuplicateAndWrongRepresentationRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "3.197"
+        },
+        {
+          "name": "qualifiedSdkResultsAreRetained",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "2.539"
+        },
+        {
+          "name": "postScanChangesRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "2.215"
+        },
+        {
+          "name": "mixedPreimagesAndPostimages",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "1.655"
+        },
+        {
+          "name": "exactReplayFixedPointAndInputOrder",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "3.524"
+        }
+      ],
+      "preparation_tests": 12,
+      "receiver_contract_cases": 15,
+      "raw_sdk_report_sha256": "223f73019d4d72d4cea05c92fa1e604b718b351743f32ebf5f1e1b6170897405",
+      "raw_sdk_report_publication": "Hash retained; raw environment/system-property report stays local. Named test report, Maven log and exact input/result bindings are published.",
+      "sdk_inputs_sha256": "cb0af527154c24c365acd6634239e764523c2dbc1d504ed3bbcb06cbab605f5d",
+      "sdk_results_sha256": "3caf21d2ab4102fa0c5b80680f8192a0d15b950395b2e8b5b04740c4dc68656b",
+      "maven_log_sha256": "c183842021b4d721679a9247ab858471345100a1e414a7f5a9113a5d482089c8",
+      "receiver_receipt_sha256": "acd0620973c594d32ee6dc2e3d9bdc88d17c6b583bca65e0d823f3f4bdb64244",
+      "product_behavior": "SEPARATE_RECEIVING_PRODUCT_GATES",
+      "actual_product_receiver": "PRODUCT_RECEIVER.json"
+    },
+    {
+      "dataset": "combine-codepoint21",
+      "baseline_ref": "a115db5d8d9a53c20bf6f6880286a967a80a8dda + received combine-ownership21 (exact current Atom preimage; disjoint received stages outside this two-file scope)",
+      "status": "PASSED",
+      "kind": "SDK_EXECUTION",
+      "targets": 2,
+      "java_targets": 2,
+      "text_targets": 0,
+      "command": "mvn -B -ntp -Dm3.dataset=combine-codepoint21 -Drecipe.owner.root=<canonical-module> -Pcontract verify",
+      "toolchain": {
+        "java.version": "21.0.12.1",
+        "java.vendor": "Eclipse Adoptium",
+        "os.name": "Linux",
+        "os.arch": "amd64"
+      },
+      "sdk_tests": [
+        {
+          "name": "driftMissingDuplicateAndWrongRepresentationRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "3.452"
+        },
+        {
+          "name": "qualifiedSdkResultsAreRetained",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "2.683"
+        },
+        {
+          "name": "postScanChangesRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "2.043"
+        },
+        {
+          "name": "mixedPreimagesAndPostimages",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "1.738"
+        },
+        {
+          "name": "exactReplayFixedPointAndInputOrder",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "4.598"
+        }
+      ],
+      "preparation_tests": 12,
+      "receiver_contract_cases": 15,
+      "raw_sdk_report_sha256": "f1925e5e729f272cbb2d86f3b7d8751b73d939643f3868f1bb34e57d139a38fc",
+      "raw_sdk_report_publication": "Hash retained; raw environment/system-property report stays local. Named test report, Maven log and exact input/result bindings are published.",
+      "sdk_inputs_sha256": "b6a3563fb3730b38230b1da6805af097f2e955f0125e13e215ba0830f9e2e62f",
+      "sdk_results_sha256": "18691bc3a986b02497968fd51325303aa7ff735634efd68a4e26b68a4760e55c",
+      "maven_log_sha256": "f2ba17d8f3218d541d953eb4f122d0a47a7cc61deee3b2e2752981b9646d66f2",
+      "receiver_receipt_sha256": "6edc1d8f9c3a4bd3c1e6b98d00dc07656e15b1bf60e27a557905c7c89f39a962",
+      "product_behavior": "SEPARATE_RECEIVING_PRODUCT_GATES",
+      "actual_product_receiver": "PRODUCT_RECEIVER.json"
+    },
+    {
+      "dataset": "combine-addendum21",
+      "baseline_ref": "a115db5d8d9a53c20bf6f6880286a967a80a8dda + received combine-ownership21 (exact current critical-bulk fixture preimage and ABSENT ownership note)",
+      "status": "PASSED",
+      "kind": "SDK_EXECUTION",
+      "targets": 2,
+      "java_targets": 1,
+      "text_targets": 1,
+      "command": "mvn -B -ntp -Dm3.dataset=combine-addendum21 -Drecipe.owner.root=<canonical-module> -Pcontract verify",
+      "toolchain": {
+        "java.version": "21.0.12.1",
+        "java.vendor": "Eclipse Adoptium",
+        "os.name": "Linux",
+        "os.arch": "amd64"
+      },
+      "sdk_tests": [
+        {
+          "name": "driftMissingDuplicateAndWrongRepresentationRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "3.557"
+        },
+        {
+          "name": "qualifiedSdkResultsAreRetained",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "2.003"
+        },
+        {
+          "name": "postScanChangesRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "0.748"
+        },
+        {
+          "name": "mixedPreimagesAndPostimages",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "0.479"
+        },
+        {
+          "name": "exactReplayFixedPointAndInputOrder",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "2.703"
+        }
+      ],
+      "preparation_tests": 12,
+      "receiver_contract_cases": 15,
+      "raw_sdk_report_sha256": "1806eb81146f530e013b4a676047e1091f9244e0bd48b6fca5fa8fad00eb895d",
+      "raw_sdk_report_publication": "Hash retained; raw environment/system-property report stays local. Named test report, Maven log and exact input/result bindings are published.",
+      "sdk_inputs_sha256": "8111632129f4ed69355605f246097cf8f48277288e51bebc0b317230670b6e8e",
+      "sdk_results_sha256": "367e51f65d4bb56f03fdcf1fe99ec06c54477cdaabdf138a9978cca64a99b99b",
+      "maven_log_sha256": "2d93904ada28a4a6877cb0005c920efc8604a47ec1b7335cc0f65389a26c90b8",
+      "receiver_receipt_sha256": "10488078894dff9070c19aea55da1eea485fad6909920dcfefa5d9ab42022b61",
+      "product_behavior": "SEPARATE_RECEIVING_PRODUCT_GATES",
+      "actual_product_receiver": "PRODUCT_RECEIVER.json"
+    },
+    {
+      "dataset": "combine-composed21",
+      "baseline_ref": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+      "status": "PASSED",
+      "kind": "SDK_EXECUTION",
+      "targets": 49,
+      "java_targets": 33,
+      "text_targets": 16,
+      "command": "mvn -B -ntp -Dm3.dataset=combine-composed21 -Drecipe.owner.root=<canonical-module> -Pcontract verify",
+      "toolchain": {
+        "java.version": "21.0.12.1",
+        "java.vendor": "Eclipse Adoptium",
+        "os.name": "Linux",
+        "os.arch": "amd64"
+      },
+      "sdk_tests": [
+        {
+          "name": "driftMissingDuplicateAndWrongRepresentationRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "40.041"
+        },
+        {
+          "name": "qualifiedSdkResultsAreRetained",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "26.578"
+        },
+        {
+          "name": "postScanChangesRefuse",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "305.491"
+        },
+        {
+          "name": "mixedPreimagesAndPostimages",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "314.117"
+        },
+        {
+          "name": "exactReplayFixedPointAndInputOrder",
+          "classname": "com.synexia.rewrite.M3TaskRecipeTest",
+          "time": "41.388"
+        }
+      ],
+      "preparation_tests": 12,
+      "receiver_contract_cases": 16,
+      "raw_sdk_report_sha256": "afa3491eb6c91a2c2682ac1f8967da53eabd9761691dbe35de563430746a39b6",
+      "raw_sdk_report_publication": "Hash retained; raw environment/system-property report stays local. Named test report, Maven log and exact input/result bindings are published.",
+      "sdk_inputs_sha256": "77b018c5f447470d9598c94736fe92a826c9773b023bd38511735d3c97d6aa1c",
+      "sdk_results_sha256": "b0b8e1e30d18abef22612be7543a3dcf0daaf100db43602ad5d23c62a1337022",
+      "maven_log_sha256": "5dbc70b668405d6f1acb0bf0072b8bd57ede76738e490872438829851f066c80",
+      "receiver_receipt_sha256": "d68d7d7c4d700a3278efd4d91b2782877c69e56713ef9860d4c72e1b9f92cdb9",
+      "product_behavior": "SEPARATE_RECEIVING_PRODUCT_GATES",
+      "actual_product_receiver": "PRODUCT_RECEIVER.json"
+    }
+  ],
+  "limits": [
+    "Product tests remain separate from SDK source transformation proof.",
+    "This is a minimal canonical source closure, not a full Synexia reactor execution."
+  ]
+}

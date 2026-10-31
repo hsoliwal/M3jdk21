@@ -1,0 +1,4 @@
+.github/workflows/m3-filtered-bounded-current-20261018.yml	a1c5cfec888ef0026015a1e593656d7e7f1b78461913f42cc1f44ee2c05e3d90	ced5c2d7a3d042fc85b2eb78eecf48192193507c3c958c0526263cf4ebe7dff0	0001-m3-filtered-bounded-current-20261018.yml.txt
+m3/collections/qualification/m3-filtered-navigation-20261018/README.md	ABSENT	1404043870abe3d6582653302d8b7d22628d162dd8b662a5a8afc3172bb0f3fb	0002-README.md.txt
+m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml	ABSENT	c8a9d47d33eba3efb07aaf031b75bf38f61645ac6f0fbc9d182493825d1266e3	0003-pom.xml.txt
+m3/collections/qualification/m3-filtered-navigation-20261018/runtime/verify.py	ABSENT	de8992d562b1038c8745df63f2dc41fd4b0160159983d454b1f7ecb597dfcc47	0004-verify.py.txt

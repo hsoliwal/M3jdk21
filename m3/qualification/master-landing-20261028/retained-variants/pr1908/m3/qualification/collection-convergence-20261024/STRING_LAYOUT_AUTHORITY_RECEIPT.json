@@ -1,0 +1,66 @@
+{
+  "schema": "M3JDK21_STRING_LAYOUT_AUTHORITY_RECEIPT_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "recipe_id": "m3-string-layout-authority-20261027",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "255ac163ac604fd966c9e70b1f3059a350a44e72",
+  "canonical_tree": "6d1a9bb9aa0d15757fbbb295e8c51d06b5d8c353",
+  "canonical_recipe": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+  "canonical_evidence_path": "synexia-openrewrite-recipes/recipes/m3-string-layout-authority-20261027/EVIDENCE.json",
+  "product_parent": "8c385f4a7bc1e3e2fa5232a0a11842e15dd0dc9b",
+  "scope": "M3String direct-member source layout gate and regression tests",
+  "effect": "Existing Java21 compiler-backed parser remains authoritative; redundant whole-file M3String array scan removed; four other owners and all later checks preserved",
+  "execution": {
+    "openrewrite": "8.17.1",
+    "sdk_tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "mixed_states": 8,
+    "source_orders": 2,
+    "fixed_point": true,
+    "drift_missing_duplicate_refusal": true
+  },
+  "receiving_tests": {
+    "python_layout": 9,
+    "compiler_acceptance_cases": 55,
+    "compiler_refusal_cases": 38,
+    "successor_python": 35,
+    "overflow_refusal_python": 10,
+    "name_contract": "PASS",
+    "source_phase": "PASS promotion=false"
+  },
+  "remaining": {
+    "full_string_source_gate": "FAIL: unchanged obsolete inner LeafCursor requirement",
+    "full_borrow_ancestry": "ENVIRONMENT_REFUSAL: depth-one checkout",
+    "installed_image_jni_jtreg": "NOT_RUN in source-only pass",
+    "full_reactor": "NOT_RUN partial canonical overlay",
+    "jck": "NOT_RUN"
+  },
+  "independent_review": "PASS_SCOPED; no findings",
+  "canonical_provenance": {
+    "members": 35,
+    "prior_members_preserved": 34,
+    "changed_paths": 41,
+    "violations": 0
+  },
+  "runtime_api_jni_changes": false,
+  "phase_promotion": false,
+  "full_programme_complete": false,
+  "artifact_policy": "Executed receiving source/tests and data-only evidence; canonical recipes/fixtures/catalogue/improvement memory remain private",
+  "executed_targets": [
+    {
+      "path": "m3/runtime-integration/check-m3string-invariants.py",
+      "before_sha256": "5ae66e43164c7e962c6d8ba73456b9f652431187cc103bc27387a51dd9302594",
+      "after_sha256": "3d25f4bf318edfec3916c966bf0bd386d3c182ca3ca6aff6cb6b00116bf5b904",
+      "destination": "product"
+    },
+    {
+      "path": "m3/runtime-integration/test_string_layout.py",
+      "before_sha256": "1eb253a2d5350af9f8d6ace012ac2628f1908615e2eb32edf837d9f41aba14fb",
+      "after_sha256": "fd2cc6cb22ab0c2b4b93b4089d073a9dd33449b78f12da3e4af994dafcf7116f",
+      "destination": "product"
+    }
+  ],
+  "canonical_manifest_sha256": "eacd92d725c0a67da0084d112d5379551875ed8a17cf58780c6d2f7bcf4277ff"
+}

@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "bb46fe59932b1c3af2a44f803743c3aba7990224"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java\t8384244946df1f840406aaf71438b4f0dba311dfd7eba7b421a064d63c31bf3b\t4f6c17a035e64106f172b488fded9b565d1af48d6a8ecbd4700b3ff0cc2cd1e1\tafter-atom.java.txt\nsrc/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java\t2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69\tb831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f\tafter-pattern.java.txt\n"
+    },
+    "isError": false
+  }
+}

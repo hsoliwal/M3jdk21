@@ -1,0 +1,13 @@
+# Existing sealed recipe application proof
+
+Executed the unchanged `com.synexia.rewrite.SealReplay <check|apply> <source-root> <resource-directory>` CLI from the existing canonical packet against six isolated source images on Windows/JDK21. All 16 actions passed their exact contracts: 15 exit0 plus required source-drift refusal exit1. The CLI compiled strictly with two unchanged JDK-only helper sources.
+
+The baseline check reported three changes; apply installed exact pinned Java/C/proof templates; fresh check and repeat apply reported zero. Three separate partial-state images each needed exactly one Java, C or proof change, then checked at a fixed point. Every operation still guarded all five manifest paths, including two KEEP owners. These are narrow write sets, not a new file/folder selector. Source drift was refused before any write; all four existing bytes stayed identical and the absent proof stayed absent.
+
+PLAN.json and INVENTORY.json are frozen prelaunch inputs. Their PREPARED_NOT_RUN/authorization fields describe preparation; RESULT.json is the distinct executed outcome. INVENTORY lists the original local 38-file freeze, not this public package or final mutable images. SOURCE_INVENTORY binds the unchanged two helpers/resources, baseline preimages and five already Java/JNI-qualified current postimages. PLAN argv contains local absolute K paths and requires fresh qualified materialization before another execution; completed local attempts must not be replayed.
+
+The exact product source is fd493c1d9dac8cdf462351c35d588fe9299b7e34; baseline a7b83b8dff260cf415016fd7ed5617cc01f028cb; canonical Synexia packet f188e2af9117f0a0126b70aec3f87bb4489cbf42. The packet directory Git tree is 34febf76a5471c984bb255daafbe9f5bb468f2c5, not a commit. Successful postimages equal the sources qualified by the previous Windows Java/JNI proof. No product worktree was modified and no Java/C/test/POM implementation was authored for this proof; the existing proof template was materialized in isolated images.
+
+All 16 native jobs were assigned/resumed/terminal, active0, handle-closed and free of cleanup/supervisor errors. The owned JVM lock was released after durable results. Logs combine stdout/stderr; separate stream claims are not made. The kernel preflights the whole batch and uses per-file atomic replacement; no cross-file rollback guarantee is inferred.
+
+This proves this fixed-manifest CLI contract. OpenRewrite/Maven SDK application, general scope algebra/DAG dispatch, full owning-module and installed M3JDK21 runtime, JCK/jtreg, platform matrix, performance and sibling-JNI union remain separate pending gates. STRING receiving phase is unchanged. Storage protection remains ACTIVE.

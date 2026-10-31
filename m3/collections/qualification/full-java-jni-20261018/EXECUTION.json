@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "status": "PASS_LOCAL_OWNING_MODULE_JAVA_JNI_AND_JAR",
+  "baseline": "0c24884dcf5b836a80c1732ec8b31315721f8988",
+  "local_worktree_dirty_during_run": true,
+  "proof_source_bytes_verified": true,
+  "recipe": {
+    "name": "com.synexia.m3.FullJavaJni20261018",
+    "junit_tests": 3,
+    "failures": 0,
+    "fixed_point": "PASS",
+    "named_composition": "PASS",
+    "permutation_repeat_width_two": "PASS",
+    "drift_missing_occupied_duplicate": "REFUSED",
+    "targets": 15,
+    "java_targets": 2,
+    "text_targets": 13
+  },
+  "source_verifier_behavior_checks": 36,
+  "module": {
+    "java_sources": 134,
+    "test_sources": 161,
+    "junit": {
+      "java": {
+        "tests": 236,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 2
+      },
+      "native": {
+        "tests": 236,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "jar_sha256": "7d4c1b5e92300cf16c39a60c903f7c514cec9af79ceda0da0f6d9c9a6a0fa4a7",
+    "jar_classes": 321,
+    "runtime_modules": "java.base",
+    "native_libraries": [
+      "m3_collections_address",
+      "m3_collections_mask",
+      "m3_collections_pathmask",
+      "m3_collections_span",
+      "m3_collections_statehist",
+      "m3_residency_state_mask",
+      "m3bitlane",
+      "m3rankbatch",
+      "m3signalorder"
+    ],
+    "explicit_native_contracts": [
+      "M3MaskWindowSparseContract",
+      "M3BudgetedMaskWindowContract",
+      "M3IndexMaskWindowSelfTest",
+      "M3IndexMaskWindowRecoverySelfTest",
+      "M3IndexMaskCompactorSelfTest",
+      "M3IndexPathMasksSelfTest",
+      "M3IndexPathMaskWindowSelfTest",
+      "M3IndexPathRankNativeSelfTest",
+      "M3NativeIndexRangeSelfTest",
+      "M3ObjectStateSlots28SelfTest",
+      "M3IndexedTableSelfTest",
+      "M3BagRankIndexSelfTest",
+      "M3SdkRecoverySelfTest",
+      "M3SignalOrderContract",
+      "M3SignalDimensionsNativeContract",
+      "M3ResidencyStateMaskProof",
+      "M3BitLaneJumpProof"
+    ],
+    "source_dependencies": {
+      "apiguardian-api": {
+        "provenance_sha256": "8e1396bcf3bb9065824ba2b9db4aab03d2b4e9bf09c9209c0eb6cc0198effa58",
+        "jar_sha256": "422783263820d15858ccb591de60bda6dfad2907d6ab7f8f473e8302fdcabd12"
+      },
+      "opentest4j": {
+        "provenance_sha256": "80f1b151283659911db971c9de37bb262c5107014ab5527178288a9ba59d101c",
+        "jar_sha256": "d57d7b0a33886eaff06ae1d5472a040e258d752a4fc8968941b2319bff2ed5c8"
+      },
+      "univocity-parsers": {
+        "provenance_sha256": "44e70f89c7a241a65c05f8d5956e1d1301e48292de18b7b32fdb01699c4dd6f7",
+        "jar_sha256": "beb180e03c9fd335f43e5e991fa25ed42832f68be96ad4dc3a1a2170b72f3ced"
+      },
+      "junit-platform-commons-1.10.2": {
+        "provenance_sha256": "122eb73e35664bd56635ea2f5fb81bea474a9537ff7453d3ae0703a15e62698a",
+        "jar_sha256": "23508de55c3cfd8500fc724300fe7160ff43cd5da168b0a7a03ac1a315dd96d9"
+      },
+      "junit-platform-engine-1.10.2": {
+        "provenance_sha256": "93c618264cefd8b473973a6a4bc87baa2a83b55adeca2555c47a94989096ae1f",
+        "jar_sha256": "18cba7020087e3cf9455ae8e76cb2e885cbfb7d5760b03bd05e263275f39b9cd"
+      },
+      "junit-jupiter-api-5.10.2": {
+        "provenance_sha256": "ec5564e4cdace0c8a0fe173f3502eef24ed8e4989dd49db8086b7c9295a301e4",
+        "jar_sha256": "0f44f2d3d9b4ad59cb58b47ff69a7f3bb57bf3217b1671e8bc90f9ef2836b4d7"
+      },
+      "junit-jupiter-params-5.10.2": {
+        "provenance_sha256": "038f44693e10fb9267e130284a4c257418a24277f2d1c14f8dbacf0681f072f0",
+        "jar_sha256": "e27106e50117a17750dfb386ea150e5d62d2d7eb828149ae87106bd8c3ed85ad"
+      },
+      "junit-jupiter-engine-5.10.2": {
+        "provenance_sha256": "fefbe8ed4151302e6a98da3b154a6c7ec58c29206466ddae1cb848e6744a18fb",
+        "jar_sha256": "eee708be35a2badf6d3f9b7adb308e6df05d1497231095b57f050d336d483e21"
+      },
+      "junit-jupiter-5.10.2": {
+        "provenance_sha256": "8ccf4180e433160d923d076ff63fb9f6440d71ff3a522422ea338b0d979714ba",
+        "jar_sha256": "4f6090a07cfc2e4136da1bcd0b68cf3640d3b99acb7289b1c1f38207ad65e0b2"
+      }
+    }
+  },
+  "native": "C17 strict, generated JNI headers, fatal UBSan, real -Xcheck:jni; nine product libraries and separate test-only bitmap bridge",
+  "hosted": "PENDING_ACTUAL_EXACT_HEAD_EXECUTION",
+  "scope": "Current independent m3/collections Linux/JDK21 module. No JDK receiving-phase, optional provider artifact or 19396-template acceptance."
+}

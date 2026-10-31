@@ -1,0 +1,9 @@
+atom_id	owner	symbol	visibility	pattern	iop_role	contract_boundary	authority_scope	proof_owner
+M3_JEP485_API_GATHERER_V1	src/java.base/share/classes/java/util/stream/Gatherer.java	Gatherer<T,A,R>	public	EXTENSION_POINT	Stream.GathererContract	PUBLIC_API	LIBRARY_API	GathererAPITest
+M3_JEP485_API_GATHERERS_V1	src/java.base/share/classes/java/util/stream/Gatherers.java	Gatherers	public	FACTORY_LIBRARY	Stream.PredefinedGatherers	PUBLIC_API	LIBRARY_API	GatherersFoldTest
+M3_JEP485_STREAM_METHOD_V1	src/java.base/share/classes/java/util/stream/Stream.java	gather(Gatherer)	public-default	EXTENSION_POINT	Stream.IntermediateOperation	PUBLIC_API	LIBRARY_API	GathererAPITest
+M3_JEP485_PIPELINE_V1	src/java.base/share/classes/java/util/stream/GathererOp.java	GathererOp	package-private	PIPELINE_STAGE	Stream.StatefulIntermediateOperation	BEHAVIOR	MODULE	GathererTest
+M3_JEP485_PIPELINE_HOOKS_V1	src/java.base/share/classes/java/util/stream/AbstractPipeline.java	pipeline hooks	package-private/protected	TEMPLATE_METHOD	Stream.PipelineInfrastructure	BEHAVIOR	MODULE	GathererShortCircuitTest
+M3_JEP485_REFERENCE_PIPELINE_V1	src/java.base/share/classes/java/util/stream/ReferencePipeline.java	gather/fused collect/flatMap	package-private/public	PIPELINE_STAGE	Stream.ReferencePipeline	BEHAVIOR	MODULE	GathererTest
+M3_JEP485_MAP_CONCURRENT_V1	src/java.base/share/classes/java/util/stream/Gatherers.java	mapConcurrent	public	VIRTUAL_THREAD_TASK_WINDOW	Stream.ConcurrentGatherer	PUBLIC_API	LIBRARY_API	GatherersMapConcurrentTest
+M3_JEP485_RECIPE_V1	m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipe.java	M3Jep485StreamGatherersBackportRecipe	public	RECIPE_FIRST	MutationAuthority.ExactSnapshot	EXPLICIT_CONTRACT_CHANGE	LIBRARY_API	M3Jep485StreamGatherersBackportRecipeTest

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2026, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -53,6 +53,7 @@
 #include "runtime/mutexLocker.hpp"
 #include "runtime/safepointVerifiers.hpp"
 #include "runtime/timerTrace.hpp"
+#include "runtime/trimNativeHeap.hpp"
 #include "services/diagnosticCommand.hpp"
 #include "utilities/concurrentHashTable.inline.hpp"
 #include "utilities/concurrentHashTableTasks.inline.hpp"
@@ -138,14 +139,20 @@ class StringTableConfig : public StackObj {
       return 0;
     }
     *is_dead = false;
+    if (!_alt_hash) {
+      // The canonical Java hash is already exact for M3 owner+coordinate Strings.
+      // Avoid allocating a temporary UTF-16 shadow on the ordinary StringTable path.
+      return java_lang_String::hash_code_noupdate(val_oop);
+    }
+
     ResourceMark rm;
-    // All String oops are hashed as unicode
+    // Alternate halfsiphash is defined over UTF-16 units and still needs the unicode view.
     int length;
     jchar* chars = java_lang_String::as_unicode_string_or_null(val_oop, length);
     if (chars != nullptr) {
-      return hash_string(chars, length, _alt_hash);
+      return hash_string(chars, length, true);
     }
-    vm_exit_out_of_memory(length, OOM_MALLOC_ERROR, "get hash from oop");
+    vm_exit_out_of_memory(length, OOM_MALLOC_ERROR, "get alternate hash from oop");
     return 0;
   }
   // We use default allocation/deallocation but counted
@@ -175,11 +182,9 @@ class StringTableLookupJchar : StackObj {
   uintx get_hash() const {
     return _hash;
   }
-  bool equals(WeakHandle* value, bool* is_dead) {
+  bool equals(WeakHandle* value) {
     oop val_oop = value->peek();
     if (val_oop == nullptr) {
-      // dead oop, mark this hash dead for cleaning
-      *is_dead = true;
       return false;
     }
     bool equals = java_lang_String::equals(val_oop, _str, _len);
@@ -189,6 +194,10 @@ class StringTableLookupJchar : StackObj {
     // Need to resolve weak handle and Handleize through possible safepoint.
      _found = Handle(_thread, value->resolve());
     return true;
+  }
+  bool is_dead(WeakHandle* value) {
+    oop val_oop = value->peek();
+    return val_oop == nullptr;
   }
 };
 
@@ -207,11 +216,9 @@ class StringTableLookupOop : public StackObj {
     return _hash;
   }
 
-  bool equals(WeakHandle* value, bool* is_dead) {
+  bool equals(WeakHandle* value) {
     oop val_oop = value->peek();
     if (val_oop == nullptr) {
-      // dead oop, mark this hash dead for cleaning
-      *is_dead = true;
       return false;
     }
     bool equals = java_lang_String::equals(_find(), val_oop);
@@ -221,6 +228,11 @@ class StringTableLookupOop : public StackObj {
     // Need to resolve weak handle and Handleize through possible safepoint.
     _found = Handle(_thread, value->resolve());
     return true;
+  }
+
+  bool is_dead(WeakHandle* value) {
+    oop val_oop = value->peek();
+    return val_oop == nullptr;
   }
 };
 
@@ -449,6 +461,10 @@ struct StringTableDeleteCheck : StackObj {
 };
 
 void StringTable::clean_dead_entries(JavaThread* jt) {
+  // BulkDeleteTask::prepare() may take ConcurrentHashTableResize_lock (nosafepoint-2).
+  // When NativeHeapTrimmer is enabled, SuspendMark may take NativeHeapTrimmer::_lock (nosafepoint).
+  // Take SuspendMark first to keep lock order and avoid deadlock.
+  NativeHeapTrimmer::SuspendMark sm("stringtable");
   StringTableHash::BulkDeleteTask bdt(_local_table);
   if (!bdt.prepare(jt)) {
     return;
@@ -598,7 +614,9 @@ static size_t literal_size(oop obj) {
 
   if (obj->klass() == vmClasses::String_klass()) {
     // This may overcount if String.value arrays are shared.
-    word_size += java_lang_String::value(obj)->size();
+    typeArrayOop bytes = java_lang_String::value(obj);
+    if (bytes != nullptr) word_size += bytes->size();
+    // Segmented descendants are shared and intentionally excluded here.
   }
 
   return word_size * HeapWordSize;
@@ -687,25 +705,13 @@ size_t StringTable::verify_and_compare_entries() {
 }
 
 static void print_string(Thread* current, outputStream* st, oop s) {
-  typeArrayOop value     = java_lang_String::value_no_keepalive(s);
-  int          length    = java_lang_String::length(s);
-  bool         is_latin1 = java_lang_String::is_latin1(s);
-
+  int length = java_lang_String::length(s);
   if (length <= 0) {
     st->print("%d: ", length);
   } else {
     ResourceMark rm(current);
-    int utf8_length = length;
-    char* utf8_string;
-
-    if (!is_latin1) {
-      jchar* chars = value->char_at_addr(0);
-      utf8_string = UNICODE::as_utf8(chars, utf8_length);
-    } else {
-      jbyte* bytes = value->byte_at_addr(0);
-      utf8_string = UNICODE::as_utf8(bytes, utf8_length);
-    }
-
+    int utf8_length;
+    char* utf8_string = java_lang_String::as_utf8_string(s, utf8_length);
     st->print("%d: ", utf8_length);
     HashtableTextDump::put_utf8(st, utf8_string, utf8_length);
   }

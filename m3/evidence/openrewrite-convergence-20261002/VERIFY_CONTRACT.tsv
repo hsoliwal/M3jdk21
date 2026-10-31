@@ -1,0 +1,8 @@
+order	gate	required	observed
+1	diff	yes	PASS
+2	lint/static-analysis	yes	NOT_REACHED_CI_PRE_JOB
+3	compile Java21	yes	NOT_REACHED_CI_PRE_JOB
+4	JUnit recipe proof	yes	NOT_REACHED_CI_PRE_JOB
+5	JaCoCo 99 percent line/branch	yes	NOT_REACHED_CI_PRE_JOB
+6	runtime equivalence fixture	yes	NOT_REACHED_CI_PRE_JOB
+7	repository-wide apply	after gates	BLOCKED

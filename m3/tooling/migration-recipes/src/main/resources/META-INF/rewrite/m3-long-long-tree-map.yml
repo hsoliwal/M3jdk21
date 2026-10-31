@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.LongLongTreeMap
+displayName: M3JDK21 M3LongLongTreeMap proving-ground owner
+description: >-
+  Adds com.m3.collections.M3LongLongTreeMap, an ordered primitive long-to-long map on two sorted
+  parallel key/value lanes with no per-entry node, and its M3LongLongSortedMap contract: binary
+  search plus arraycopy updates, one-pass sorted batch merge, 1.5x growth and explicit compaction,
+  adapted from the first-party Synexia donor PackedLongLongSortedMap under the LongLongSortedMap
+  contract, with the java.util.TreeMap NavigableMap-shaped navigation and poll surface and its
+  differential test. Proving ground only (wave 2 of the COLLECTIONS family); no java.util type is
+  replaced.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-long-long-tree-map

@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/module-packs/nlp-search/current_forks.py", line 252, in <module>
+    main()
+  File "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/module-packs/nlp-search/current_forks.py", line 248, in main
+    build(parser.parse_args())
+  File "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/module-packs/nlp-search/current_forks.py", line 175, in build
+    lock = verify_receiver(root)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/module-packs/nlp-search/current_forks.py", line 49, in verify_receiver
+    raise ValueError("receiver source drift: " + relative)
+ValueError: receiver source drift: m3/core/src/com/m3/text/M3GvasLiteralImage.java

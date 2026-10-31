@@ -1,0 +1,353 @@
+{
+  "format": "m3-stable-order-java-qualification-1",
+  "label": "baseline",
+  "status": "PASS",
+  "scope": "Four actual production owners; five existing JUnit entrypoints, projection self-test, missing-native oracle, unchanged sort resource probe",
+  "production": [
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java",
+      "sha256": "9853795729a821c6d9c113ff169ebff5705a53affb6fbab5caefffc13104d6b1"
+    }
+  ],
+  "proof_sources": [
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionSelfTest.java",
+      "sha256": "e611a47ae6362c7dc86557db99593b9242ea4cf3e94169138c4b4a45208e48cd"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionMaskOffsetProof.java",
+      "sha256": "1d554f7e18523f363279e0670abc572a3f430b0a8db65850aaf57e82b15e309a"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionMaskOffsetTest.java",
+      "sha256": "e3401ec86e0ac9d227039983e93ca00ca4fe2bd59330deb1911ec2388b51f37f"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3LongAddressKernelSelfTest.java",
+      "sha256": "250b900897c8ca5829b033f643c88420bf0526a597426f27195c497d79cdddfa"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3LongAddressKernelTest.java",
+      "sha256": "ffc5a62d913a7b6d0fdceea7c4f479cb17486cd7babc2b14600bf033d099f057"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowSelfTest.java",
+      "sha256": "4b63050b62de64aacd89a4ec744d0ed489e95a05fbfad2167783105f3e30c9f6"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowTest.java",
+      "sha256": "7bc19b1d266016a0a76c8a6186be573c1e698c704ab1d56407b1717b19fc4823"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowRecoverySelfTest.java",
+      "sha256": "fb5d6b2baddeb5a48b00b4082eb109b298624e5988430d78fc3c932cf4c382d9"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowRecoveryTest.java",
+      "sha256": "adf6909182c6f44fa143c7734d894b642789dfdfb99ab1d1b2ada53b665a1da5"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/proof-src/com/m3/collections/M3IndexOrderWindowContract.java",
+      "sha256": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/proof-src/com/m3/collections/M3IndexOrderWindowResourceProbe.java",
+      "sha256": "d711aa55378fe89dc263a2de6fe90449ab690e9759d27906a9389f9a0434fdba"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/proof-src/com/m3/collections/M3IndexOrderWindowTest.java",
+      "sha256": "75f32c3f515783fff233992a3144f867fa9bc767d481ba1d2db05b996895ad40"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/ProjectionJUnitRunner.java",
+      "sha256": "a60365fbb878781d87b7d7b325a5636023acf3952a6c7d52dc6d1c9f528fee12"
+    }
+  ],
+  "junit_jars": [
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar",
+      "sha256": "afff77c186cd317275803872fa5133aa801fd6ac40bd91c78a6cf8009b4b17cc"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar",
+      "sha256": "b6df35da750a546ae932376f11b3c0df841f0c90c7cb2944cd39adb432886e4b"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar",
+      "sha256": "aed4f42fb90ada9b347c231f13656fc09121ba20dab6dc646a6bd9d4da31e4aa"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar",
+      "sha256": "905cba9b4998ccc29d1239085a7fb1fe0e28024d7526152356d810edec0a49a3"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+      "sha256": "b56a5ec000a479df4973b18bba24c98fe0db8faa14c8907d3ef451d8c71fd8ae"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar",
+      "sha256": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+      "sha256": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38"
+    }
+  ],
+  "commands": [
+    {
+      "name": "java-version",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-version"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.02718298499894445,
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/java-version.stdout.log",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/java-version.stderr.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "5b4412738541184e84f6b2d7520d4f4a7c2a455f60650491464c61adcbbbdeb0"
+    },
+    {
+      "name": "production-javac",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.9153190009965328,
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/production-javac.stdout.log",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/production-javac.stderr.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "proof-javac",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+        "-d",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/proof-classes",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionSelfTest.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionMaskOffsetProof.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3LongIndexProjectionMaskOffsetTest.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3LongAddressKernelSelfTest.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3LongAddressKernelTest.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowSelfTest.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowTest.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowRecoverySelfTest.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/test/java/com/m3/collections/M3IndexMaskWindowRecoveryTest.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/proof-src/com/m3/collections/M3IndexOrderWindowContract.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/proof-src/com/m3/collections/M3IndexOrderWindowResourceProbe.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/proof-src/com/m3/collections/M3IndexOrderWindowTest.java",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/ProjectionJUnitRunner.java"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.2254998799980967,
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/proof-javac.stdout.log",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/proof-javac.stderr.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "public-protected-api",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javap",
+        "-protected",
+        "-s",
+        "-classpath",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes",
+        "com.m3.collections.M3LongIndexProjection",
+        "com.m3.collections.M3LongAddressKernel",
+        "com.m3.collections.M3IndexMaskCompactor",
+        "com.m3.collections.M3IndexMaskWindow",
+        "com.m3.collections.M3LongIndexProjection$Order",
+        "com.m3.collections.M3IndexMaskCompactor$Backend"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.1903646899991145,
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/public-protected-api.stdout.log",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/public-protected-api.stderr.log",
+      "stdout_sha256": "39c1da7f0234160a93c42948e8618e37f9ab813d34f5e5f6e625bb487d85d682",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "junit",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-XX:-UsePerfData",
+        "-Xmx768m",
+        "-Xcheck:jni",
+        "-Djava.library.path=/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/no-native",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/proof-classes:/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+        "ProjectionJUnitRunner",
+        "com.m3.collections.M3LongAddressKernelTest",
+        "com.m3.collections.M3LongIndexProjectionMaskOffsetTest",
+        "com.m3.collections.M3IndexMaskWindowTest",
+        "com.m3.collections.M3IndexMaskWindowRecoveryTest",
+        "com.m3.collections.M3IndexOrderWindowTest"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 2.2546113149983285,
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/junit.stdout.log",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/junit.stderr.log",
+      "stdout_sha256": "6fbf4f3e6a65fe59cf66a9f5f3a7b8f9b10bd5d126788b1e5f161ec149eb05bd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "projection-self-test",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-XX:-UsePerfData",
+        "-Xmx768m",
+        "-Xcheck:jni",
+        "-Djava.library.path=/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/no-native",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/proof-classes:/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+        "com.m3.collections.M3LongIndexProjectionSelfTest"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.07966550900164293,
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/projection-self-test.stdout.log",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/projection-self-test.stderr.log",
+      "stdout_sha256": "9b11783f24c40fde1d11b33318d5a86c9e59b4f74993fda9ce50e9b022f23fc0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "missing-native",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-XX:-UsePerfData",
+        "-Xmx768m",
+        "-Xcheck:jni",
+        "-Djava.library.path=/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/no-native",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/proof-classes:/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+        "com.m3.collections.M3IndexOrderWindowContract",
+        "--missing"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.04578710999703617,
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/missing-native.stdout.log",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/missing-native.stderr.log",
+      "stdout_sha256": "5e1913b2426409685992e45bc3298d685321bb0108305331000b0a9ba7fa34f5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "resource-sort",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-XX:-UsePerfData",
+        "-Xms128m",
+        "-Xmx768m",
+        "-Djava.library.path=/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/no-native",
+        "-cp",
+        "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/proof-classes:/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+        "com.m3.collections.M3IndexOrderWindowResourceProbe",
+        "sort",
+        "32768",
+        "100"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.3842604260025837,
+      "stdout": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/resource-sort.stdout.log",
+      "stderr": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/resource-sort.stderr.log",
+      "stdout_sha256": "8d5e521c234aabdf10b776e39ae19be48d6df4691387bc18e0d5c6586c2e9ebd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "finite_observation_sha256": "e15c399b7be3d8c0fbd38bc6e2cd4c63b93bb0b95d1272bce9acdcc7bec5445b",
+  "sort_samples": [
+    {
+      "case": "known-direction-reversal",
+      "sample": "0",
+      "units": "32750",
+      "operations": "100",
+      "wall_ns": "62256207",
+      "thread_cpu_ns": "60532741",
+      "process_cpu_ns": "60000000",
+      "allocated_bytes": "26208304",
+      "heap_after_requested_gc_before": "2186448",
+      "heap_after_requested_gc_after": "2188408",
+      "heap_after_requested_gc_delta": "1960",
+      "rss_kib": "72324",
+      "rss_delta_kib": "9488",
+      "vmhwm_kib": "72324",
+      "direct_buffer_bytes": "8192",
+      "mapped_buffer_bytes": "0",
+      "sink": "0"
+    },
+    {
+      "case": "known-direction-reversal",
+      "sample": "1",
+      "units": "32750",
+      "operations": "100",
+      "wall_ns": "56981777",
+      "thread_cpu_ns": "57242035",
+      "process_cpu_ns": "60000000",
+      "allocated_bytes": "26207984",
+      "heap_after_requested_gc_before": "2324656",
+      "heap_after_requested_gc_after": "2324688",
+      "heap_after_requested_gc_delta": "32",
+      "rss_kib": "75440",
+      "rss_delta_kib": "2188",
+      "vmhwm_kib": "75440",
+      "direct_buffer_bytes": "8192",
+      "mapped_buffer_bytes": "0",
+      "sink": "0"
+    },
+    {
+      "case": "known-direction-reversal",
+      "sample": "2",
+      "units": "32750",
+      "operations": "100",
+      "wall_ns": "55912702",
+      "thread_cpu_ns": "56081150",
+      "process_cpu_ns": "60000000",
+      "allocated_bytes": "26207984",
+      "heap_after_requested_gc_before": "2324656",
+      "heap_after_requested_gc_after": "2324688",
+      "heap_after_requested_gc_delta": "32",
+      "rss_kib": "75476",
+      "rss_delta_kib": "20",
+      "vmhwm_kib": "75476",
+      "direct_buffer_bytes": "8192",
+      "mapped_buffer_bytes": "0",
+      "sink": "0"
+    }
+  ],
+  "tests_successful": 5,
+  "production_classes": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/classes",
+  "proof_classes": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/proof-classes",
+  "resource_limits": [
+    "Three samples from one unchanged finite workload; timing is observational",
+    "RSS and requested-GC heap are whole-process observations, not retained-storage promises",
+    "No recipe admission, product-wide compatibility or receiving-phase advancement is claimed"
+  ]
+}

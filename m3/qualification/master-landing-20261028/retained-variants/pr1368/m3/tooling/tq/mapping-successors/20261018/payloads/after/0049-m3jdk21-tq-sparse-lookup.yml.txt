@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3Jdk21TqSparseLookup
+displayName: Bound sparse prepared trigram containment work
+description: Apply reviewed adaptive metadata lookup and its finite semantic probe to the exact M3JDK21 preimage.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-tq-sparse-lookup

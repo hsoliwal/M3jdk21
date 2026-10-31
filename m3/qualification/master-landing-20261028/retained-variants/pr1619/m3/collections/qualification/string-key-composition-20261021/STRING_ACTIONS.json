@@ -1,0 +1,166 @@
+[
+  {
+    "label": "fresh-java-version",
+    "command": [
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk/bin/java",
+      "-version"
+    ],
+    "cwd": "/workspace/scratch/122ce7bf56c1/m3jdk21",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 0.025648314000136452,
+    "log": "/workspace/scratch/122ce7bf56c1/evidence/string/fresh-image-20261021T043259Z/fresh-java-version.log",
+    "environment": {
+      "JAVA_HOME": "/tmp/m3jdk21-tools/jdk-21.0.12.1+1",
+      "JTREG_JAVA": "/tmp/m3jdk21-tools/jdk-21.0.12.1+1/bin/java"
+    },
+    "removed_ambient_options": [
+      "JAVA_TOOL_OPTIONS",
+      "JDK_JAVA_OPTIONS",
+      "_JAVA_OPTIONS",
+      "CLASSPATH"
+    ]
+  },
+  {
+    "label": "fresh-javac-version",
+    "command": [
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk/bin/javac",
+      "-version"
+    ],
+    "cwd": "/workspace/scratch/122ce7bf56c1/m3jdk21",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 0.13151487299910514,
+    "log": "/workspace/scratch/122ce7bf56c1/evidence/string/fresh-image-20261021T043259Z/fresh-javac-version.log",
+    "environment": {
+      "JAVA_HOME": "/tmp/m3jdk21-tools/jdk-21.0.12.1+1",
+      "JTREG_JAVA": "/tmp/m3jdk21-tools/jdk-21.0.12.1+1/bin/java"
+    },
+    "removed_ambient_options": [
+      "JAVA_TOOL_OPTIONS",
+      "JDK_JAVA_OPTIONS",
+      "_JAVA_OPTIONS",
+      "CLASSPATH"
+    ]
+  },
+  {
+    "label": "m3-declared-manifests",
+    "command": [
+      "/tmp/m3jdk21-tools/jdk-21.0.12.1+1/bin/java",
+      "-Xmx256m",
+      "-jar",
+      "/tmp/m3io-toolchains/jtreg-7.3.1/jtreg/lib/jtreg.jar",
+      "-jdk:/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk",
+      "-compilejdk:/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk",
+      "-othervm",
+      "-conc:1",
+      "-timeoutFactor:1",
+      "-verbose:summary",
+      "-w:/workspace/scratch/122ce7bf56c1/evidence/string/fresh-image-20261021T043259Z/m3-declared-manifests-work",
+      "-r:/workspace/scratch/122ce7bf56c1/evidence/string/fresh-image-20261021T043259Z/m3-declared-manifests-report",
+      "-javaoption:-Xmx256m",
+      "-javaoption:-Xcheck:jni",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/M3StringKeyedCollectionsTest.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/M3StringCompositeComparisonTest.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/M3StringMixedEqualityGatesTest.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/M3StringLeafCursorCanonicalTest.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/M3StringUtf16DifferentialTest.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/M3StringFactsCompositionTest.java"
+    ],
+    "cwd": "/workspace/scratch/122ce7bf56c1/m3jdk21",
+    "exit": 2,
+    "timed_out": false,
+    "elapsed_seconds": 71.10666630299966,
+    "log": "/workspace/scratch/122ce7bf56c1/evidence/string/fresh-image-20261021T043259Z/m3-declared-manifests.log",
+    "environment": {
+      "JAVA_HOME": "/tmp/m3jdk21-tools/jdk-21.0.12.1+1",
+      "JTREG_JAVA": "/tmp/m3jdk21-tools/jdk-21.0.12.1+1/bin/java"
+    },
+    "removed_ambient_options": [
+      "JAVA_TOOL_OPTIONS",
+      "JDK_JAVA_OPTIONS",
+      "_JAVA_OPTIONS",
+      "CLASSPATH"
+    ]
+  },
+  {
+    "label": "m3-compact-off-supplement",
+    "command": [
+      "/tmp/m3jdk21-tools/jdk-21.0.12.1+1/bin/java",
+      "-Xmx256m",
+      "-jar",
+      "/tmp/m3io-toolchains/jtreg-7.3.1/jtreg/lib/jtreg.jar",
+      "-jdk:/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk",
+      "-compilejdk:/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk",
+      "-othervm",
+      "-conc:1",
+      "-timeoutFactor:1",
+      "-verbose:summary",
+      "-w:/workspace/scratch/122ce7bf56c1/evidence/string/fresh-image-20261021T043259Z/m3-compact-off-supplement-work",
+      "-r:/workspace/scratch/122ce7bf56c1/evidence/string/fresh-image-20261021T043259Z/m3-compact-off-supplement-report",
+      "-javaoption:-Xmx256m",
+      "-javaoption:-Xcheck:jni",
+      "-javaoption:-XX:-CompactStrings",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/M3StringMixedEqualityGatesTest.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/M3StringLeafCursorCanonicalTest.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/M3StringUtf16DifferentialTest.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/M3StringFactsCompositionTest.java"
+    ],
+    "cwd": "/workspace/scratch/122ce7bf56c1/m3jdk21",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 56.85678961400117,
+    "log": "/workspace/scratch/122ce7bf56c1/evidence/string/fresh-image-20261021T043259Z/m3-compact-off-supplement.log",
+    "environment": {
+      "JAVA_HOME": "/tmp/m3jdk21-tools/jdk-21.0.12.1+1",
+      "JTREG_JAVA": "/tmp/m3jdk21-tools/jdk-21.0.12.1+1/bin/java"
+    },
+    "removed_ambient_options": [
+      "JAVA_TOOL_OPTIONS",
+      "JDK_JAVA_OPTIONS",
+      "_JAVA_OPTIONS",
+      "CLASSPATH"
+    ]
+  },
+  {
+    "label": "stock-m3-disabled",
+    "command": [
+      "/tmp/m3jdk21-tools/jdk-21.0.12.1+1/bin/java",
+      "-Xmx256m",
+      "-jar",
+      "/tmp/m3io-toolchains/jtreg-7.3.1/jtreg/lib/jtreg.jar",
+      "-jdk:/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk",
+      "-compilejdk:/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk",
+      "-othervm",
+      "-conc:1",
+      "-timeoutFactor:1",
+      "-verbose:summary",
+      "-w:/workspace/scratch/122ce7bf56c1/evidence/string/fresh-image-20261021T043259Z/stock-m3-disabled-work",
+      "-r:/workspace/scratch/122ce7bf56c1/evidence/string/fresh-image-20261021T043259Z/stock-m3-disabled-report",
+      "-javaoption:-Xmx256m",
+      "-javaoption:-Xcheck:jni",
+      "-javaoption:-XX:+UnlockExperimentalVMOptions",
+      "-javaoption:-XX:-UseM3StringStorage",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/HashCode.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/CompactString/Equals.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/CompactString/CompareTo.java",
+      "/workspace/scratch/122ce7bf56c1/m3jdk21/test/jdk/java/lang/String/CompactString/StartsWith.java"
+    ],
+    "cwd": "/workspace/scratch/122ce7bf56c1/m3jdk21",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 12.689388683000288,
+    "log": "/workspace/scratch/122ce7bf56c1/evidence/string/fresh-image-20261021T043259Z/stock-m3-disabled.log",
+    "environment": {
+      "JAVA_HOME": "/tmp/m3jdk21-tools/jdk-21.0.12.1+1",
+      "JTREG_JAVA": "/tmp/m3jdk21-tools/jdk-21.0.12.1+1/bin/java"
+    },
+    "removed_ambient_options": [
+      "JAVA_TOOL_OPTIONS",
+      "JDK_JAVA_OPTIONS",
+      "_JAVA_OPTIONS",
+      "CLASSPATH"
+    ]
+  }
+]

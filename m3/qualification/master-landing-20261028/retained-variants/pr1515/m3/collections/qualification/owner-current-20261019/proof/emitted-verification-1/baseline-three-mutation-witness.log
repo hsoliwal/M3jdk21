@@ -1,0 +1,4 @@
+mutation=remove jdk=Observation[failure=java.util.ConcurrentModificationException, values=[6, 2, 4]] filtered=Observation[failure=NONE, values=[2, 4]]
+mutation=set jdk=Observation[failure=java.util.ConcurrentModificationException, values=[6, 2, 4]] filtered=Observation[failure=NONE, values=[80, 2, 4]]
+mutation=add jdk=Observation[failure=java.util.ConcurrentModificationException, values=[6, 2, 4]] filtered=Observation[failure=NONE, values=[6, 80, 2, 4]]
+MUTATION_WITNESS_PASS expectedBroken=true mismatches=3

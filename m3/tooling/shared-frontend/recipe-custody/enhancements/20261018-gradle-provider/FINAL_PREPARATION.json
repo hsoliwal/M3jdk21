@@ -1,0 +1,27 @@
+{
+  "schema": "M3_GRADLE_PROVIDER_FINAL_PREPARATION_V1",
+  "recorded_utc": "2026-10-18T13:22:32.235344+00:00",
+  "dataset": "gradle-provider-20261018",
+  "frozen_input_files": 16,
+  "reason": "The unchanged prepare helper derives a template basename containing $, but the unchanged TextSnapshotRecipe permits $ in Java service target paths and restricts template references to [A-Za-z0-9_.-]+.",
+  "preparation_command_receipt": "logs/21-seal-effective-selection.json",
+  "normalization_command_receipt": "logs/21b-template-normalization.json",
+  "original_template": "0008-com.sun.source.util.M3AST$Consumer.txt",
+  "admitted_template": "0008-M3AST-Consumer.txt",
+  "original_template_retained": true,
+  "retained_original_role": "Unreferenced exact prepare output included and hashed in the successful SDK_INPUTS.tsv; it is not selected by the text recipe manifest.",
+  "manifest_pre_sha256": "acccea90975efca7baea828f54705a74afb3afb82baa94dc49afd2cd287cfe5a",
+  "manifest_post_sha256": "1caf3e4c3a78b26e2d24e06261759018910f20ab5c70c43209d94f232bdb29fa",
+  "target": "m3/tooling/module-packs/build-support/gradle-provider/src/test/resources/META-INF/services/com.sun.source.util.M3AST$Consumer",
+  "target_content_sha256": "61e75cf6961c585fec7c2a20d0fc35280c991989c0d06bb269abc04a74603553",
+  "source_content_changes": 0,
+  "engine_changes": 0,
+  "receiving_source_hand_edits": 0,
+  "normalizer_sha256": "85422aaf31a0a2f1a6af4c4fb52f56a26f9c6aa0a39bdbdbd2fe56c6c911e8c6",
+  "reproduction": [
+    "Run the unchanged prepare.py with the exact arguments recorded by logs/21-seal-effective-selection.json.",
+    "Run normalize_service_template.py, which copies the service template bytes to the admitted basename, retains the prepare-produced original as an unreferenced input, and changes only the selected manifest row fourth field.",
+    "Verify the recorded pre/post manifest hashes and unchanged service-target content hash before running the unchanged SDK harness."
+  ],
+  "historical_note": "Earlier helper versions attempted to remove the original template. The final observed qualified dataset and SDK_INPUTS.tsv contain both identical resources. The replay helper now explicitly retains the original, matching those frozen successful inputs exactly."
+}

@@ -1,0 +1,93 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 native superset / exact Git-tree custody
+on:
+  pull_request:
+    paths:
+      - 'm3/runtime-integration/convergence-20261020/**'
+      - 'm3/tooling/shared-frontend/recipe-custody/datasets/m3-convergence-20261020/**'
+      - '.github/workflows/m3-convergence-superset-20261020.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  source-tree-and-recipe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          # A read-only partial clone still has Git trees and parents; no 1GB blob checkout needed.
+          filter: blob:none
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Refuse overwritten parents, path overlap or unreviewed target changes
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s m3/runtime-integration/convergence-20261020 -p 'test_verify_superset.py' -v
+          python3 m3/runtime-integration/convergence-20261020/verify_superset.py --repository . --merged HEAD
+      - name: Qualify canonical M3 OpenRewrite text receipt source
+        run: |
+          set -euo pipefail
+          root="$PWD/m3/tooling/shared-frontend/recipe-custody"
+          mvn -B -ntp -f "$root/pom.xml" \
+             -Dm3.dataset=m3-convergence-20261020 \
+             "-Drecipe.owner.root=$root/sdk-owner" -Pcontract verify
+          python3 "$root/receive.py" --crate "$root" \
+             --dataset m3-convergence-20261020 \
+             --recipe-owner "$root/sdk-owner" --target "$PWD" --check
+  focused-java21-owners:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java
+            m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java
+            m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTScopeDispatchProof.java
+            src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java
+            src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
+            test/jdk/jdk/internal/m3/M3IndexedArrayTest.java
+            test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java
+            test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Validate original AST scope owners
+        run: |
+          set -euo pipefail
+          mkdir -p out/scope
+          javac --release 21 -proc:none -Xlint:all -Werror -d out/scope \
+            m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java \
+            m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java \
+            m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTScopeDispatchProof.java
+          java -cp out/scope com.m3.compiletime.M3ASTLeafIndexSelfTest
+          java -cp out/scope com.m3.compiletime.M3ASTScopeDispatchProof
+      - name: Validate original JDK java.base state-mask and view contracts
+        run: |
+          set -euo pipefail
+          mkdir -p out/java-base out/java-tests
+          javac -Xlint:all,-serial -Werror --patch-module java.base=src/java.base/share/classes \
+            -d out/java-base \
+            src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java \
+            src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java
+          javac -Xlint:all,-serial -Werror --patch-module java.base=out/java-base \
+            --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
+            -d out/java-tests \
+            test/jdk/jdk/internal/m3/M3IndexedArrayTest.java \
+            test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java \
+            test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java
+          for test in M3IndexedArrayTest M3IndexedViewEpochTest M3StateMaskedIndexedViewTest; do
+            java --patch-module java.base=out/java-base --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
+              -cp out/java-tests "$test"
+          done

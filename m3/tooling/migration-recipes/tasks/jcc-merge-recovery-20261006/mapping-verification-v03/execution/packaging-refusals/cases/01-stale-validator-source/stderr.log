@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/package_mapping.py", line 278, in <module>
+    main()
+  File "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/package_mapping.py", line 77, in main
+    assert binding["source_commit"] == source["commit"] and binding["source_root_tree"] == source["root_tree"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

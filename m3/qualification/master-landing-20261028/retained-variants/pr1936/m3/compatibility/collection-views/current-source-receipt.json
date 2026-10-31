@@ -1,0 +1,92 @@
+{
+  "schema": "M3_COLLECTIONVIEWS_CURRENT_SOURCE_SUCCESSOR_V1",
+  "owner": {
+    "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+    "gitBlob": "3f2c3eecb6a0c239025ac7051b5bd4f3e6953605",
+    "sha256": "1c811f4473088c46e39e9621eb27380806e420fe09062072e413d48af78059c0",
+    "sourceCommit": "df6d055de1bcdddc6b8a01afab500f4f497e6cb3"
+  },
+  "supersededCurrentOwnerSeals": [
+    {
+      "gate": "m3/compatibility/collection-views/verify.sh",
+      "sha256": "6759e1c605be7c52c3471767879cfa4aec7751e220699f6af49a43ba0902660b"
+    },
+    {
+      "gate": "m3/runtime-integration/stored-occurrence-20261021/verify.sh",
+      "gitBlob": "b3d21d61844f070df99b0289e514eff350a3f6e7",
+      "sha256": "c3da7a7f33b7a90058a8b033b6df65df6b56409495567253e836b50dd985bc40"
+    }
+  ],
+  "historicalPreimage": {
+    "sha256": "a6ea3101c0573d33808b5a25262e4bf26d72d2a8882ee544cfbbe3e693f7145d",
+    "gitBlob": "2ff7ec57ab93c8bd118ceb320fd76aae1c0e7d66",
+    "role": "UNCHANGED_OLD_RED_AND_ABI_PREIMAGE"
+  },
+  "batchRegression": {
+    "path": "test/jdk/java/util/CollectionViews/CollectionViewsBatchAdmissionTest.java",
+    "sha256": "96904ca4643c5dff2ff1cb9b51223e6dd21e4c2dde4a73ca9d6d56f372bd2c61",
+    "role": "EXISTING_RETAINED_OWNER_REGRESSION"
+  },
+  "scope": "Only the exact currently received CollectionViews owner; historical current-owner seals are passive lineage, never alternate acceptance. All existing old-red/ABI/contract commands retained.",
+  "qualification": {
+    "actualCurrentSourceAndInstalledSdk": "PASS_SCOPED_23_COMMANDS",
+    "canonicalMavenRecipeAndReceiver": "PASS_FOR_TWO_SHELL_TARGETS",
+    "metadataReceiptTransport": "BOUND_EXTERNALLY_BY_SEPARATE_RECIPE_LEAF",
+    "SDK_tests": 5,
+    "sealing_tests": 10,
+    "receiver_cases": 9,
+    "source_and_installed_oracle_checks_per_mode": 736018,
+    "oracle_modes_each": [
+      "default",
+      "interpreter",
+      "c1",
+      "c2"
+    ],
+    "contract_checks_each": 14700,
+    "bootstrap_checks_each": 77,
+    "batch_checks_each": 67,
+    "foreign_owner_refusals_before_compiler": 2,
+    "native_fixture_queries_each": 1027,
+    "native_fixture_modes": [
+      "C17",
+      "UBSan",
+      "XcheckJNI",
+      "SerialGC"
+    ],
+    "phaseAdvanced": false,
+    "allCiPassed": false,
+    "evidenceTask": "ci-seal-followup-20261026"
+  },
+  "canonical_recipe": {
+    "name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "code_revision": "4b5338ac4be741908d29c87983281cc45314c904",
+    "dataset": "m3-ci-seals-20261026",
+    "dataset_revision_at_invocation": "UNPUBLISHED_AT_INVOCATION",
+    "input_manifest_sha256": "436aa508b2464eb1a668873f46cb8bb5d29f604bf8cf5310308b9f54f10453c9",
+    "sdk_qualification_sha256": "93163ae5b1e34697dd9dd78da1123d0f97de2f1ae4861a2adb19d901691c60a4",
+    "SDK_INPUTS_sha256": "f48e0414a765133af9475696f5e0420e696d2e973f7bcecc026be5ec8f7787b8",
+    "SDK_RESULTS_sha256": "c04c8ce84212ea65b6ec88641de9781495d2a30dab833486f206fa9e743c5e44"
+  },
+  "receiving": {
+    "local_commit": "334c3d15c272fe36368217097fd4c6f5c24fcf69",
+    "api_commit": "8a1ac97ba038033145f18a642e76a4e6dced1362",
+    "tree": "8a88233376836150338e363c5a68a6c03b67f39a",
+    "initial_sequence": {
+      "check": 2,
+      "apply": 2,
+      "replay": 0,
+      "custody": "Reconstructed from completed assertion flow before root status-observer failure; raw first sequence stdout was not durably captured."
+    },
+    "fresh_recovery_sequence": {
+      "check": 0,
+      "replay": 0
+    },
+    "actual_receipt_sha256": "f238ee2a53d4a1064c40f8d252effcd00b5120b3099e08828bdccdc13d8beab8",
+    "root_orchestration_failure_history_retained": true,
+    "production_source_changed": false
+  },
+  "installed_image_witness": {
+    "scope": "Existing installed SDK used for the source-seal successor qualification; later regex SDK acceptance is separately recorded.",
+    "lib_modules_sha256": "305f0acb1f731b3691ac53f7160f94d1d445d4dc39988c7ff0491e34c89797ce"
+  }
+}

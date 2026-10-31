@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.AstGeneralSourceFacts20261019
+displayName: M3AST unnamed/unclassified source fact admission
+description: Replay two pinned Java 21 sources through the existing M3 OpenRewrite scanning owner.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ast-general-source-20261019

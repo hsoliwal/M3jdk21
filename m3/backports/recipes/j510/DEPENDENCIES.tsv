@@ -1,0 +1,10 @@
+dependency	current_m3jdk21	j510_use	action
+javax.crypto.Mac	PRESENT	HKDF HMAC primitive	REUSE
+javax.crypto.spec.SecretKeySpec	PRESENT	PRK/output key construction	REUSE
+JavaxCryptoSpecAccess.clearSecretKeySpec	PRESENT	clear HKDF PRK intermediate	REUSE
+SharedSecrets.getJavaxCryptoSpecAccess	PRESENT	secret cleanup bridge	REUSE
+Provider service infrastructure	PRESENT	KDF engine/provider selection	EXTEND_ENGINE_TYPE
+SunJCE	PRESENT	HKDF-SHA256/384/512 provider	ADD_REGISTRATIONS
+PreviewFeature KDF entry	NOT_REQUIRED_FINAL	preview predecessor only	DO_NOT_IMPORT
+jdk.crypto.cryptoki preview participation	CURRENT_TREE_AUTHORITY	final graduation cleanup upstream	DO_NOT_OVERRIDE
+JDK25 ML-KEM SunJCE info	NOT_PRESENT	unrelated donor context	DO_NOT_IMPORT

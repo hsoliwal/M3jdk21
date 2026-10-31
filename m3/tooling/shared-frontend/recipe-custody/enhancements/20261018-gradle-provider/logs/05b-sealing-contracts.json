@@ -1,0 +1,14 @@
+{
+  "label": "05b-sealing-contracts",
+  "command": [
+    "python3",
+    "contract/test_prepare.py"
+  ],
+  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+  "jdk": "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1",
+  "previous": "04b-authoring-tests",
+  "started_utc": "2026-10-18T12:55:16.462186+00:00",
+  "finished_utc": "2026-10-18T12:55:16.537819+00:00",
+  "exit_code": 0,
+  "log_sha256": "316558a93ba028238bcd514bbec8a07c6b5122f2fa8e4ce8499b5d85bc6111f8"
+}

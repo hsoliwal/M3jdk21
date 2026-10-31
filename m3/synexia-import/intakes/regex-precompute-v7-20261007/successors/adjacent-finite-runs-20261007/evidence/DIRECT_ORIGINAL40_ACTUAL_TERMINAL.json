@@ -1,0 +1,1202 @@
+{
+  "schema": "m3-regex-correction02-original40-actual-terminal/v1",
+  "status": "ACTUAL_REPLAY3_0_0_TWO_DRIFT_REFUSALS_STRICT_COMPILE_AND_ORIGINAL40_PASS",
+  "commandPlan": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/CORRECTION02_COMMAND_PLAN_01.json",
+    "bytes": 128063,
+    "sha256": "77f91e6d7ea621c8ded0ae30aac841b8f84da7d0010b7bbe1603af535ce5d837"
+  },
+  "nativeManifest": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_NATIVE_COMMANDS_02_V2.json",
+    "bytes": 83456,
+    "sha256": "aa4eecf1e1a36241bc2b3e2a7ac520122a092dc64756797b64f0ce1ec43a4aee"
+  },
+  "actualReplayTerminal": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/CORRECTION02_REPLAY_ACTUAL_TERMINAL_01.json",
+    "bytes": 11210,
+    "sha256": "91113eb3bff24a1868ae6603daf778c82e62f7240d632d2c6dbd1aa577ce7669"
+  },
+  "actualTestClassReceipt": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/CORRECTION02_TEST_CLASS_ARTIFACTS_01.json",
+    "bytes": 16134,
+    "sha256": "e266184e472f4d301bec397e3b5c412d688e4c2fbb5f400ee019fb677a65c7c5"
+  },
+  "stages": [
+    {
+      "name": "replayApplyThreeTargets",
+      "actualNativeTerminal": {
+        "chunk": "e7c4e7",
+        "exitCode": 0,
+        "elapsedSeconds": 0.3722035,
+        "liveSession": false
+      },
+      "wrapper": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_1_replayApplyThreeTargets.cmd",
+        "bytes": 2820,
+        "sha256": "6bb14c5f25a7ee95ec380422d0457ed71a6217f4bf6fcf806f53fdcddc968af1"
+      },
+      "nativeArgv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms16m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\scratch",
+        "-cp",
+        "K:/codex-work/m3-synexia-full-family-invariant-20261007/target/replay-classes",
+        "com.synexia.rewrite.Replay",
+        "--apply",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\receiving-snapshot",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\templates"
+      ],
+      "nativeLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_1_replayApplyThreeTargets.log",
+        "bytes": 828,
+        "sha256": "bff4f713da18960ca3a7d0295a405554d2a8a2cae669758ea07c81340df0f92e"
+      },
+      "nativeExit": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_1_replayApplyThreeTargets.exit.txt",
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+      },
+      "nativePreflight": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_1_replayApplyThreeTargets.preflight.json",
+        "bytes": 758,
+        "sha256": "79083fc5e5d9f4870c44e58bcd3f92fff1bba3762ab4843f32b0b0973b4b3bf6"
+      },
+      "nativePreflightLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_1_replayApplyThreeTargets.preflight.log",
+        "bytes": 305,
+        "sha256": "9af5f43f8a3f484697ddb10b68f6394d3cb0df075a040c08268e3f0c893691ee"
+      }
+    },
+    {
+      "name": "replayCheckFixedpoint",
+      "actualNativeTerminal": {
+        "chunk": "2a4994",
+        "exitCode": 0,
+        "elapsedSeconds": 0.204194,
+        "liveSession": false
+      },
+      "wrapper": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_2_replayCheckFixedpoint.cmd",
+        "bytes": 2804,
+        "sha256": "5480023fa1f47e1dea7d2f0320f00451d6b5eef418bb5bad0caaee6e4aa4a1db"
+      },
+      "nativeArgv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms16m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\scratch",
+        "-cp",
+        "K:/codex-work/m3-synexia-full-family-invariant-20261007/target/replay-classes",
+        "com.synexia.rewrite.Replay",
+        "--check",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\receiving-snapshot",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\templates"
+      ],
+      "nativeLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_2_replayCheckFixedpoint.log",
+        "bytes": 177,
+        "sha256": "d90f2fe2aea0aa2a5cbcdae28331b7f9822cce70ee42686c4045aeaa8cffc382"
+      },
+      "nativeExit": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_2_replayCheckFixedpoint.exit.txt",
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+      },
+      "nativePreflight": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_2_replayCheckFixedpoint.preflight.json",
+        "bytes": 756,
+        "sha256": "93ccb65acc9b5199396af31140d4af89ae7aea67cdb2efa59aeaa5ea3a1ab4f7"
+      },
+      "nativePreflightLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_2_replayCheckFixedpoint.preflight.log",
+        "bytes": 303,
+        "sha256": "ddf1a44e8637c70149684e700884ea00a485a59281e8ae69c47dee68f84924f3"
+      }
+    },
+    {
+      "name": "replaySecondApplyFixedpoint",
+      "actualNativeTerminal": {
+        "chunk": "49454c",
+        "exitCode": 0,
+        "elapsedSeconds": 0.3887388,
+        "liveSession": false
+      },
+      "wrapper": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_3_replaySecondApplyFixedpoint.cmd",
+        "bytes": 2891,
+        "sha256": "bae506236ca234ce0d1a1451faf73f005fef0856234585576305d285f7d6303e"
+      },
+      "nativeArgv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms16m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\scratch",
+        "-cp",
+        "K:/codex-work/m3-synexia-full-family-invariant-20261007/target/replay-classes",
+        "com.synexia.rewrite.Replay",
+        "--apply",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\receiving-snapshot",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\templates"
+      ],
+      "nativeLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_3_replaySecondApplyFixedpoint.log",
+        "bytes": 176,
+        "sha256": "35168195e2633dc9d393178155e8cb1bdfe9f8c056eaf9b098aa536698d04343"
+      },
+      "nativeExit": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_3_replaySecondApplyFixedpoint.exit.txt",
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+      },
+      "nativePreflight": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_3_replaySecondApplyFixedpoint.preflight.json",
+        "bytes": 762,
+        "sha256": "f90e97a8af2b3b87ef3153cee35e9e436b00fa3e233dc92d3e55a07516abcd37"
+      },
+      "nativePreflightLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_3_replaySecondApplyFixedpoint.preflight.log",
+        "bytes": 311,
+        "sha256": "0018f463683fa14a26018ba70b7e151e3dfd2c255164fcb3a65364a2095540d6"
+      }
+    },
+    {
+      "name": "driftProgramRefusal",
+      "actualNativeTerminal": {
+        "chunk": "f0e10c",
+        "exitCode": 1,
+        "elapsedSeconds": 0.1648216,
+        "liveSession": false
+      },
+      "wrapper": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_4_driftProgramRefusal.cmd",
+        "bytes": 2828,
+        "sha256": "04f71748ac5f760d8f3fe6143ee9de609b6d6239b4080bec0a1b87f25623e843"
+      },
+      "nativeArgv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms16m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\scratch",
+        "-cp",
+        "K:/codex-work/m3-synexia-full-family-invariant-20261007/target/replay-classes",
+        "com.synexia.rewrite.Replay",
+        "--apply",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\driftProgramRefusal",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\templates"
+      ],
+      "nativeLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_4_driftProgramRefusal.log",
+        "bytes": 469,
+        "sha256": "c0d8977755c0aabe5163046a66f6f879a1030279a13d61deeae482d94431ce7e"
+      },
+      "nativeExit": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_4_driftProgramRefusal.exit.txt",
+        "bytes": 3,
+        "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+      },
+      "nativePreflight": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_4_driftProgramRefusal.preflight.json",
+        "bytes": 754,
+        "sha256": "eea7e239a3a0cb6ab6601224fcb7b15c7f0d373f4416f0a0b6201d8b4e782793"
+      },
+      "nativePreflightLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_4_driftProgramRefusal.preflight.log",
+        "bytes": 303,
+        "sha256": "ea852ba1ea8e04de34f8a2c6252c62e9ada1c235994a09a2c9305e90f1dd801a"
+      }
+    },
+    {
+      "name": "driftProgramTestRefusal",
+      "actualNativeTerminal": {
+        "chunk": "8d703f",
+        "exitCode": 1,
+        "elapsedSeconds": 0.1567539,
+        "liveSession": false
+      },
+      "wrapper": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_5_driftProgramTestRefusal.cmd",
+        "bytes": 2864,
+        "sha256": "14a3bd664499fe8d362f147f6325d07b9ef84f97bbece2884a94d16189e9238b"
+      },
+      "nativeArgv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms16m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\scratch",
+        "-cp",
+        "K:/codex-work/m3-synexia-full-family-invariant-20261007/target/replay-classes",
+        "com.synexia.rewrite.Replay",
+        "--apply",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\driftProgramTestRefusal",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\templates"
+      ],
+      "nativeLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_5_driftProgramTestRefusal.log",
+        "bytes": 473,
+        "sha256": "8d1050000039ef3f665ecc02971133100e9fbde399b89f22c487db90ae6cf600"
+      },
+      "nativeExit": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_5_driftProgramTestRefusal.exit.txt",
+        "bytes": 3,
+        "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+      },
+      "nativePreflight": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_5_driftProgramTestRefusal.preflight.json",
+        "bytes": 758,
+        "sha256": "a7ba56a89d79f6311b2e2ea855696df56f7a22f060a7561913ac671dba0e0033"
+      },
+      "nativePreflightLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_5_driftProgramTestRefusal.preflight.log",
+        "bytes": 307,
+        "sha256": "75907577b5b4f46001ff848aeef08b6943cc1940e7ddb4191e037a603c0bb002"
+      }
+    },
+    {
+      "name": "compileTwoCorrectedTestOwners",
+      "actualNativeTerminal": {
+        "chunk": "24de64",
+        "exitCode": 0,
+        "elapsedSeconds": 1.1824993,
+        "liveSession": false
+      },
+      "wrapper": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_6_compileTwoCorrectedTestOwners.cmd",
+        "bytes": 2702,
+        "sha256": "099bbb70e4ac291c6eafaeccbca90c89cdfe041da1f5fc7d9529760d73e4f954"
+      },
+      "nativeArgv": [
+        "C:/Program Files/Java/jdk-21/bin/javac.exe",
+        "-J-Xmx256m",
+        "-J-XX:ActiveProcessorCount=2",
+        "-J-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\scratch",
+        "--release",
+        "21",
+        "-encoding",
+        "UTF-8",
+        "-proc:none",
+        "-implicit:none",
+        "-Xlint:all",
+        "-Werror",
+        "-sourcepath",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\empty-sourcepath",
+        "-classpath",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\test-classes;K:\\codex-work\\m3-regex-dependency-closure-successor-p0-20261007\\target\\dependency-classes;K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes;K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\target\\classes;C:\\Users\\hsoliwal\\.m2\\repository\\com\\synexia\\synexia-cop\\1.0.0-SNAPSHOT\\synexia-cop-1.0.0-SNAPSHOT.jar;K:\\codex-work\\m3-regex-dependency-closure-successor-p0-20261007\\target\\sealed-host-without-successor-explicit-owner-families.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\re2j\\re2j\\1.8-synexia-source-1\\re2j-1.8-synexia-source-1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.15.1\\commons-io-2.15.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.14.0\\commons-lang3-3.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-gradle\\8.17.1\\rewrite-gradle-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-groovy\\8.17.1\\rewrite-groovy-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\groovy\\groovy\\3.0.20\\groovy-3.0.20.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-hcl\\8.17.1\\rewrite-hcl-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-json\\8.17.1\\rewrite-json-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-maven\\8.17.1\\rewrite-maven-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\github\\ben-manes\\caffeine\\caffeine\\2.9.3\\caffeine-2.9.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\checkerframework\\checker-qual\\3.19.0\\checker-qual-3.19.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.10.0\\error_prone_annotations-2.10.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\dev\\failsafe\\failsafe\\3.3.2\\failsafe-3.3.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-xml\\2.16.1\\jackson-dataformat-xml-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\woodstox\\stax2-api\\4.2.1\\stax2-api-4.2.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\woodstox\\woodstox-core\\6.5.1\\woodstox-core-6.5.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-jaxb-annotations\\2.16.1\\jackson-module-jaxb-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\jakarta\\xml\\bind\\jakarta.xml.bind-api\\2.3.3\\jakarta.xml.bind-api-2.3.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\jakarta\\activation\\jakarta.activation-api\\1.2.2\\jakarta.activation-api-1.2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jdk8\\2.16.1\\jackson-datatype-jdk8-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-properties\\8.17.1\\rewrite-properties-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-protobuf\\8.17.1\\rewrite-protobuf-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.42\\lombok-1.18.42.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.22.1\\commons-codec-1.22.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+        "-d",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\test-classes",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\receiving-snapshot\\synexia-indexstring\\src\\test\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQueryTest.java",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\receiving-snapshot\\synexia-indexstring\\src\\test\\java\\com\\synexia\\indexstring\\MIndexRegexProgramTest.java"
+      ],
+      "nativeLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_6_compileTwoCorrectedTestOwners.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "nativeExit": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_6_compileTwoCorrectedTestOwners.exit.txt",
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+      },
+      "nativePreflight": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_6_compileTwoCorrectedTestOwners.preflight.json",
+        "bytes": 764,
+        "sha256": "7283af5c3c01f4a5d9013c57d9ca80946e69c06bde2cf5d78e26199d9bf4f361"
+      },
+      "nativePreflightLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_6_compileTwoCorrectedTestOwners.preflight.log",
+        "bytes": 313,
+        "sha256": "2c552cac521f9b4a5e62e2daf401ec8a56fea4bf895aad52dbb16d6be755a57a"
+      }
+    },
+    {
+      "name": "executeTrigramQueryTests",
+      "actualNativeTerminal": {
+        "chunk": "28a9e1",
+        "exitCode": 0,
+        "elapsedSeconds": 1.1136739,
+        "liveSession": false
+      },
+      "wrapper": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_7_executeTrigramQueryTests.cmd",
+        "bytes": 9203,
+        "sha256": "5db7160ded70e9dd1597ec39dfea7f5604a62a9eea3c3373444634257a8c3e09"
+      },
+      "nativeArgv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\scratch",
+        "-jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+        "execute",
+        "--class-path",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\test-classes;K:\\codex-work\\m3-regex-dependency-closure-successor-p0-20261007\\target\\dependency-classes;K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes;K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\target\\classes;C:\\Users\\hsoliwal\\.m2\\repository\\com\\synexia\\synexia-cop\\1.0.0-SNAPSHOT\\synexia-cop-1.0.0-SNAPSHOT.jar;K:\\codex-work\\m3-regex-dependency-closure-successor-p0-20261007\\target\\sealed-host-without-successor-explicit-owner-families.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\re2j\\re2j\\1.8-synexia-source-1\\re2j-1.8-synexia-source-1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.15.1\\commons-io-2.15.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.14.0\\commons-lang3-3.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-gradle\\8.17.1\\rewrite-gradle-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-groovy\\8.17.1\\rewrite-groovy-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\groovy\\groovy\\3.0.20\\groovy-3.0.20.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-hcl\\8.17.1\\rewrite-hcl-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-json\\8.17.1\\rewrite-json-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-maven\\8.17.1\\rewrite-maven-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\github\\ben-manes\\caffeine\\caffeine\\2.9.3\\caffeine-2.9.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\checkerframework\\checker-qual\\3.19.0\\checker-qual-3.19.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.10.0\\error_prone_annotations-2.10.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\dev\\failsafe\\failsafe\\3.3.2\\failsafe-3.3.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-xml\\2.16.1\\jackson-dataformat-xml-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\woodstox\\stax2-api\\4.2.1\\stax2-api-4.2.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\woodstox\\woodstox-core\\6.5.1\\woodstox-core-6.5.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-jaxb-annotations\\2.16.1\\jackson-module-jaxb-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\jakarta\\xml\\bind\\jakarta.xml.bind-api\\2.3.3\\jakarta.xml.bind-api-2.3.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\jakarta\\activation\\jakarta.activation-api\\1.2.2\\jakarta.activation-api-1.2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jdk8\\2.16.1\\jackson-datatype-jdk8-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-properties\\8.17.1\\rewrite-properties-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-protobuf\\8.17.1\\rewrite-protobuf-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.42\\lombok-1.18.42.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.22.1\\commons-codec-1.22.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+        "--fail-if-no-tests",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--details=tree",
+        "--reports-dir",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\reports\\executeTrigramQueryTests",
+        "--select-class",
+        "com.synexia.indexstring.MIndexRegexTrigramQueryTest"
+      ],
+      "nativeLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_7_executeTrigramQueryTests.log",
+        "bytes": 1148,
+        "sha256": "2f6dd0d9d9c2c6907c718627df5f15b545fa12768dcde0fb195638326b485289"
+      },
+      "nativeExit": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_7_executeTrigramQueryTests.exit.txt",
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+      },
+      "nativePreflight": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_7_executeTrigramQueryTests.preflight.json",
+        "bytes": 890,
+        "sha256": "949077f1b5382dd85fbacd556624ba4e02df2f0cb55ce3441d3c561f30c56250"
+      },
+      "nativePreflightLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_7_executeTrigramQueryTests.preflight.log",
+        "bytes": 308,
+        "sha256": "1057dfa8c6ef8e67f737be23ae7f64e4e551ac6415b944fe8c4300b8272ae58a"
+      }
+    },
+    {
+      "name": "executeProgramTests",
+      "actualNativeTerminal": {
+        "chunk": "ef9aa2",
+        "exitCode": 0,
+        "elapsedSeconds": 1.6390574,
+        "liveSession": false
+      },
+      "wrapper": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_8_executeProgramTests.cmd",
+        "bytes": 9153,
+        "sha256": "78fabdc83cb67e81324f238fbe88f4bdbef328b6cf924f85299de194de926a0d"
+      },
+      "nativeArgv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\scratch",
+        "-jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+        "execute",
+        "--class-path",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\test-classes;K:\\codex-work\\m3-regex-dependency-closure-successor-p0-20261007\\target\\dependency-classes;K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes;K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\target\\classes;C:\\Users\\hsoliwal\\.m2\\repository\\com\\synexia\\synexia-cop\\1.0.0-SNAPSHOT\\synexia-cop-1.0.0-SNAPSHOT.jar;K:\\codex-work\\m3-regex-dependency-closure-successor-p0-20261007\\target\\sealed-host-without-successor-explicit-owner-families.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\re2j\\re2j\\1.8-synexia-source-1\\re2j-1.8-synexia-source-1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.15.1\\commons-io-2.15.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.14.0\\commons-lang3-3.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-gradle\\8.17.1\\rewrite-gradle-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-groovy\\8.17.1\\rewrite-groovy-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\groovy\\groovy\\3.0.20\\groovy-3.0.20.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-hcl\\8.17.1\\rewrite-hcl-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-json\\8.17.1\\rewrite-json-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-maven\\8.17.1\\rewrite-maven-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\github\\ben-manes\\caffeine\\caffeine\\2.9.3\\caffeine-2.9.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\checkerframework\\checker-qual\\3.19.0\\checker-qual-3.19.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.10.0\\error_prone_annotations-2.10.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\dev\\failsafe\\failsafe\\3.3.2\\failsafe-3.3.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-xml\\2.16.1\\jackson-dataformat-xml-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\woodstox\\stax2-api\\4.2.1\\stax2-api-4.2.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\woodstox\\woodstox-core\\6.5.1\\woodstox-core-6.5.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-jaxb-annotations\\2.16.1\\jackson-module-jaxb-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\jakarta\\xml\\bind\\jakarta.xml.bind-api\\2.3.3\\jakarta.xml.bind-api-2.3.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\jakarta\\activation\\jakarta.activation-api\\1.2.2\\jakarta.activation-api-1.2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jdk8\\2.16.1\\jackson-datatype-jdk8-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-properties\\8.17.1\\rewrite-properties-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-protobuf\\8.17.1\\rewrite-protobuf-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.42\\lombok-1.18.42.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.22.1\\commons-codec-1.22.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+        "--fail-if-no-tests",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--details=tree",
+        "--reports-dir",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\reports\\executeProgramTests",
+        "--select-class",
+        "com.synexia.indexstring.MIndexRegexProgramTest"
+      ],
+      "nativeLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_8_executeProgramTests.log",
+        "bytes": 2699,
+        "sha256": "02ad8674d99fee8837fc46f94994115bb930e22e4a500dbcb202428af596928b"
+      },
+      "nativeExit": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_8_executeProgramTests.exit.txt",
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+      },
+      "nativePreflight": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_8_executeProgramTests.preflight.json",
+        "bytes": 886,
+        "sha256": "90f26987d98ae3404ca1f2439b3dedfcba7cc68137459e0e7aa5d9d519ece419"
+      },
+      "nativePreflightLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_8_executeProgramTests.preflight.log",
+        "bytes": 303,
+        "sha256": "92fd21ee706b2442a2cb18663d55bcd352e7e28be70b4bee0c2f2ed416a34885"
+      }
+    },
+    {
+      "name": "executePrecomputeGateTests",
+      "actualNativeTerminal": {
+        "chunk": "eeae25",
+        "exitCode": 0,
+        "elapsedSeconds": 0.7328859,
+        "liveSession": false
+      },
+      "wrapper": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_9_executePrecomputeGateTests.cmd",
+        "bytes": 9223,
+        "sha256": "a2eb974d82de28fb4112ba40f039f493d1a6e13669ca20a4fd4bc77f1f869545"
+      },
+      "nativeArgv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\scratch",
+        "-jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+        "execute",
+        "--class-path",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\test-classes;K:\\codex-work\\m3-regex-dependency-closure-successor-p0-20261007\\target\\dependency-classes;K:\\codex-work\\m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007\\target\\classes;K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\target\\classes;C:\\Users\\hsoliwal\\.m2\\repository\\com\\synexia\\synexia-cop\\1.0.0-SNAPSHOT\\synexia-cop-1.0.0-SNAPSHOT.jar;K:\\codex-work\\m3-regex-dependency-closure-successor-p0-20261007\\target\\sealed-host-without-successor-explicit-owner-families.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\re2j\\re2j\\1.8-synexia-source-1\\re2j-1.8-synexia-source-1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\2.0.13\\slf4j-api-2.0.13.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jetbrains\\annotations\\24.1.0\\annotations-24.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-core\\8.17.1\\rewrite-core-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-databind\\2.16.1\\jackson-databind-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-core\\2.16.1\\jackson-core-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-smile\\2.16.1\\jackson-dataformat-smile-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-parameter-names\\2.16.1\\jackson-module-parameter-names-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jsr310\\2.16.1\\jackson-datatype-jsr310-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\tools\\java-object-diff\\1.0.1\\java-object-diff-1.0.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\quarkus\\gizmo\\gizmo\\1.0.11.Final\\gizmo-1.0.11.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jboss\\jandex\\2.4.2.Final\\jandex-2.4.2.Final.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna-platform\\5.14.0\\jna-platform-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\net\\java\\dev\\jna\\jna\\5.14.0\\jna-5.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-compress\\1.26.0\\commons-compress-1.26.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.15.1\\commons-io-2.15.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\micrometer\\micrometer-core\\1.9.17\\micrometer-core-1.9.17.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\hdrhistogram\\HdrHistogram\\2.1.12\\HdrHistogram-2.1.12.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\latencyutils\\LatencyUtils\\2.0.3\\LatencyUtils-2.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\classgraph\\classgraph\\4.8.165\\classgraph-4.8.165.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\yaml\\snakeyaml\\2.2\\snakeyaml-2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java\\8.17.1\\rewrite-java-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\core\\jackson-annotations\\2.16.1\\jackson-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\antlr\\antlr4-runtime\\4.11.1\\antlr4-runtime-4.11.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-lang3\\3.14.0\\commons-lang3-3.14.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-text\\1.11.0\\commons-text-1.11.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\xerial\\snappy\\snappy-java\\1.1.10.5\\snappy-java-1.1.10.5.jar;C:\\Users\\hsoliwal\\.m2\\repository\\io\\github\\fastfilter\\fastfilter\\1.0.2\\fastfilter-1.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.6\\asm-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-util\\9.6\\asm-util-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.6\\asm-tree-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-analysis\\9.6\\asm-analysis-9.6.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-java-21\\8.17.1\\rewrite-java-21-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-gradle\\8.17.1\\rewrite-gradle-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-groovy\\8.17.1\\rewrite-groovy-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\groovy\\groovy\\3.0.20\\groovy-3.0.20.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-hcl\\8.17.1\\rewrite-hcl-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-json\\8.17.1\\rewrite-json-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-maven\\8.17.1\\rewrite-maven-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\github\\ben-manes\\caffeine\\caffeine\\2.9.3\\caffeine-2.9.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\checkerframework\\checker-qual\\3.19.0\\checker-qual-3.19.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.10.0\\error_prone_annotations-2.10.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\dev\\failsafe\\failsafe\\3.3.2\\failsafe-3.3.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\dataformat\\jackson-dataformat-xml\\2.16.1\\jackson-dataformat-xml-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\woodstox\\stax2-api\\4.2.1\\stax2-api-4.2.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\woodstox\\woodstox-core\\6.5.1\\woodstox-core-6.5.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\module\\jackson-module-jaxb-annotations\\2.16.1\\jackson-module-jaxb-annotations-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\jakarta\\xml\\bind\\jakarta.xml.bind-api\\2.3.3\\jakarta.xml.bind-api-2.3.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\jakarta\\activation\\jakarta.activation-api\\1.2.2\\jakarta.activation-api-1.2.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\fasterxml\\jackson\\datatype\\jackson-datatype-jdk8\\2.16.1\\jackson-datatype-jdk8-2.16.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-properties\\8.17.1\\rewrite-properties-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-protobuf\\8.17.1\\rewrite-protobuf-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-xml\\8.17.1\\rewrite-xml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\openrewrite\\rewrite-yaml\\8.17.1\\rewrite-yaml-8.17.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\projectlombok\\lombok\\1.18.42\\lombok-1.18.42.jar;C:\\Users\\hsoliwal\\.m2\\repository\\commons-codec\\commons-codec\\1.22.1\\commons-codec-1.22.1.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+        "--fail-if-no-tests",
+        "--disable-banner",
+        "--disable-ansi-colors",
+        "--details=tree",
+        "--reports-dir",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\reports\\executePrecomputeGateTests",
+        "--select-class",
+        "com.synexia.indexstring.MIndexRegexPrecomputeGateTest"
+      ],
+      "nativeLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_9_executePrecomputeGateTests.log",
+        "bytes": 851,
+        "sha256": "8d2f69517192dd66f1bbf88b256eaacf8899d7ad68191b2591b63db9c12f5b4d"
+      },
+      "nativeExit": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_9_executePrecomputeGateTests.exit.txt",
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+      },
+      "nativePreflight": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_9_executePrecomputeGateTests.preflight.json",
+        "bytes": 892,
+        "sha256": "f2721242eef5c13ce150aa520913c22c6a39955ae901ebc8242d5486ec1680ab"
+      },
+      "nativePreflightLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_9_executePrecomputeGateTests.preflight.log",
+        "bytes": 310,
+        "sha256": "a6c373c915dad83959d52eba5850c02f7ea9ade91f92862026578626eb097b30"
+      }
+    }
+  ],
+  "JUnit": {
+    "tests": 40,
+    "passed": 40,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "aborted": 0,
+    "suites": [
+      {
+        "name": "executeTrigramQueryTests",
+        "originalOracleSource": {
+          "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/templates/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexTrigramQueryTest.java.txt",
+          "bytes": 10991,
+          "sha256": "31beb29f0d02e68d55a072fae75e49264f9b9a4c9a5780a995aba4b32ebc6428"
+        },
+        "tests": 8,
+        "passed": 8,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0,
+        "aborted": 0,
+        "exactOriginalMethodSet": true,
+        "reports": [
+          {
+            "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/reports/executeTrigramQueryTests/TEST-junit-jupiter.xml",
+            "bytes": 16319,
+            "sha256": "75411472a5b8adb2330405733ef412dc12de5d6f80acde8851c59722ef828564",
+            "counts": {
+              "tests": 8,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0
+            },
+            "identities": [
+              {
+                "class": "com.synexia.indexstring.MIndexRegexTrigramQueryTest",
+                "method": "finiteRunBudgetAndEmptyBranchesNeverRejectAnAuthoritativeFind()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexTrigramQueryTest",
+                "method": "queryNeverRejectsARealFindForSupportedCorpus()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexTrigramQueryTest",
+                "method": "finiteRunRecoveryKeepsExistingModeAndSurrogateRefusals()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexTrigramQueryTest",
+                "method": "exactAlternativesAndSmallClassesProduceUsefulQueries()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexTrigramQueryTest",
+                "method": "extractsConservativeBooleanTrigramStructureFromNativeRegexAst()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexTrigramQueryTest",
+                "method": "adjacentFiniteRunsRetainTheQuotedCandidateStructure()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexTrigramQueryTest",
+                "method": "finiteDomainPlanPrunesDistinctSpellingsBeforeAuthoritativeVerification()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexTrigramQueryTest",
+                "method": "forcedNativeSparseAndPreservesHybridRegexResults()"
+              }
+            ]
+          },
+          {
+            "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/reports/executeTrigramQueryTests/TEST-junit-platform-suite.xml",
+            "bytes": 12843,
+            "sha256": "4d27b2d0f41a9de48270db8f9f2ccfc9d40a570adc9ae5492b68223b877aacd9",
+            "counts": {
+              "tests": 0,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0
+            },
+            "identities": []
+          },
+          {
+            "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/reports/executeTrigramQueryTests/TEST-junit-vintage.xml",
+            "bytes": 12818,
+            "sha256": "f27972c2fda35fd38e111f3d4eb169b91b969ceb671879b65129a49f7b5ae6cb",
+            "counts": {
+              "tests": 0,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0
+            },
+            "identities": []
+          }
+        ]
+      },
+      {
+        "name": "executeProgramTests",
+        "originalOracleSource": {
+          "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/regression-tests/MIndexRegexProgramTest.java",
+          "bytes": 38736,
+          "sha256": "8035418d2855b191594921c5fa6bdf701bfb051379cdf54d67e399218657c01a"
+        },
+        "tests": 28,
+        "passed": 28,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0,
+        "aborted": 0,
+        "exactOriginalMethodSet": true,
+        "reports": [
+          {
+            "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/reports/executeProgramTests/TEST-junit-jupiter.xml",
+            "bytes": 24667,
+            "sha256": "342fa56a659cce057e9396d0bf00481ef6dbb77662fba87537d2149c0bfc6c18",
+            "counts": {
+              "tests": 28,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0
+            },
+            "identities": [
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "re2PosixClassesLowerToPrimitiveAsciiRanges()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "lazyQuantifiersAndQuotedLiteralsStayNativeForBooleanTruth()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "asciiSubsetTransitionsUseDirectAddressRamTableWithoutChangingTruth()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "mindexStringMatchesPreservesJdkSemanticsWithoutRequiringStringInputCopy()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "precomputedBitKernelsPreserveBooleanSemantics()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "whitespaceClassesPreserveRe2AndJdkVerticalTabDifference()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "bmpCharacterClassesUsePagedDirectAddressMasks()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "re2WordBoundariesUseNativeAsciiBoundaryMath()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "resolverFamiliesExposeConsistentPrecomputedRegexFacts()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "boundedAsciiDfaPreservesAllBooleanOperationsAndFallsBackForBmp()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "jdkSubsetIsDifferentiallyEquivalentForBooleanOperations()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "hybridUsesNativeBackendForNoCaptureSubsetAndRe2ForCaptures()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "astPresenceProofIsConservativeAcrossRegexAlgebra()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "bitKernelPrecomputationIsSparseBoundedAndAssertionsUseDynamicClosure()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "supplementaryInputDelegatesOnlyWhenAnAtomCanConsumeSurrogateUnits()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "unsupportedOrSemanticallyDifferentSyntaxDelegatesInsteadOfApproximating()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "regexImageRoundTripRebuildsDfaSubsetAndBmpAccelerators()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "compilationHonorsProgressCancellation()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "frozenAndMappedAsciiFactsDriveCompactDfaWithoutChangingTruth()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "astPresenceAlgebraCoversGroupedMandatoryText()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "requiredCharacterClassFactsAreConservativeAcrossRegexAlgebra()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "imageRestoreHonorsProgressCancellation()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "acceptedSubsetIsDifferentiallyEquivalentAcrossGeneratedCorpus()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "reusableWorkspaceDoesNotLeakStateAcrossInputs()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "plannerProvenLiteralsProduceSafePrecomputedPresenceGate()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "exactResolverClassFactsRejectBeforeCharacterReads()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "lexiconPresenceGateRejectsBeforeCharacterReads()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexProgramTest",
+                "method": "primitiveProgramMatchesRegularSubsetWithPrimitiveState()"
+              }
+            ]
+          },
+          {
+            "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/reports/executeProgramTests/TEST-junit-platform-suite.xml",
+            "bytes": 12829,
+            "sha256": "00d6a9d819f136c2d1c2d9645e63019fa5098808243905d187080949c7c9dc9d",
+            "counts": {
+              "tests": 0,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0
+            },
+            "identities": []
+          },
+          {
+            "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/reports/executeProgramTests/TEST-junit-vintage.xml",
+            "bytes": 12812,
+            "sha256": "2dc5a725b90f2f93105ae581b13ce8ff259d8f0afe4a1ca549bca3f1bca1ad62",
+            "counts": {
+              "tests": 0,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0
+            },
+            "identities": []
+          }
+        ]
+      },
+      {
+        "name": "executePrecomputeGateTests",
+        "originalOracleSource": {
+          "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/regression-tests/MIndexRegexPrecomputeGateTest.java",
+          "bytes": 5475,
+          "sha256": "6f520a29e29e41b4538c80b3ccf1028b435b4b503ed3f9b6ed793bf0b7c51c66"
+        },
+        "tests": 4,
+        "passed": 4,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0,
+        "aborted": 0,
+        "exactOriginalMethodSet": true,
+        "reports": [
+          {
+            "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/reports/executePrecomputeGateTests/TEST-junit-jupiter.xml",
+            "bytes": 14535,
+            "sha256": "3e647c296304fbe87b02b047b664604cc14bbd2eb377ebb5d02d8e40aaeec58e",
+            "counts": {
+              "tests": 4,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0
+            },
+            "identities": [
+              {
+                "class": "com.synexia.indexstring.MIndexRegexPrecomputeGateTest",
+                "method": "literalLengthAndUnsafeLanguageFeaturesRemainConservative()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexPrecomputeGateTest",
+                "method": "onePreparedIndexedFactSetFansOutAcrossRegexBackendsWithoutFalseNegatives()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexPrecomputeGateTest",
+                "method": "maximumLengthIsUsedOnlyForCompleteMatches()"
+              },
+              {
+                "class": "com.synexia.indexstring.MIndexRegexPrecomputeGateTest",
+                "method": "gateInputsAreExplicitAndDefensive()"
+              }
+            ]
+          },
+          {
+            "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/reports/executePrecomputeGateTests/TEST-junit-platform-suite.xml",
+            "bytes": 12847,
+            "sha256": "480b683444db187ba3f9d025265284ad7b5a76dbef3e8f74a96527962371dc9c",
+            "counts": {
+              "tests": 0,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0
+            },
+            "identities": []
+          },
+          {
+            "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/reports/executePrecomputeGateTests/TEST-junit-vintage.xml",
+            "bytes": 12826,
+            "sha256": "f32a8741497e579b8516852725b5fe6e2976ce4ae66101dd8a61c46efac9aa17",
+            "counts": {
+              "tests": 0,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 0
+            },
+            "identities": []
+          }
+        ]
+      }
+    ]
+  },
+  "sourceSeals": [
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/receiving-snapshot/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+      "bytes": 141730,
+      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/receiving-snapshot/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexTrigramQueryTest.java",
+      "bytes": 11007,
+      "sha256": "bae0950fd49e10eaada3d8e9e61a9b99dd251357f3952bbd867e134f77ef2225"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/receiving-snapshot/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexProgramTest.java",
+      "bytes": 39322,
+      "sha256": "5c185acb76ef6de2a79eebec30a6b156fa982c7283cb0f4d0ef96840ce1a9dd6"
+    }
+  ],
+  "templateSeals": [
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/templates/manifest.tsv",
+      "bytes": 920,
+      "sha256": "b216c0da004d17de55196d12c6b8b7f5de79bb386a3a96f1b68c47d607bef871"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/templates/base-revision.txt",
+      "bytes": 42,
+      "sha256": "9f15b57d9720c9591aa1725d397bc366f5b7319c56a818220eb751d76657d403"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/templates/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java.txt",
+      "bytes": 141730,
+      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/templates/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexTrigramQueryTest.java.txt",
+      "bytes": 11007,
+      "sha256": "bae0950fd49e10eaada3d8e9e61a9b99dd251357f3952bbd867e134f77ef2225"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/templates/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexProgramTest.java.txt",
+      "bytes": 39322,
+      "sha256": "5c185acb76ef6de2a79eebec30a6b156fa982c7283cb0f4d0ef96840ce1a9dd6"
+    }
+  ],
+  "productionClassReceipt": {
+    "path": "K:/codex-work/m3-v7-ast-publication-20261007/REGEX_SUCCESSOR_01_PRODUCTION_CLASS_ARTIFACTS.json",
+    "bytes": 15971,
+    "sha256": "e67e7e3c0d70fa9643730df1d9efe26d3f6cf3563569ceedcd2a1d4a6d5e0073"
+  },
+  "reusedProductionClasses": 46,
+  "reusedHelperClasses": 29,
+  "reusedFixtureClasses": 58,
+  "newCompiledTestSources": 2,
+  "newCompiledTestClasses": 4,
+  "unchangedGateClassReused": 1,
+  "allNegativeInputBytesUnchanged": true,
+  "exactOriginalMethodIdentities": true,
+  "retainedFailureTerminals": [
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/BASELINE_ACTUAL_TERMINAL_01.json",
+      "bytes": 15279,
+      "sha256": "5ee95a773f6cc28f1c25bd836f6b8283a923eacbb3aa6508406287f504b9be81"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/CORRECTED_ORIGINAL40_ACTUAL_TERMINAL_01.json",
+      "bytes": 29115,
+      "sha256": "67ba190d24bddc889a128a1533db1506e7b048759180d0ab7d8bc59757de90fb"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/program3-baseline-01/PROGRAM3_BASELINE_ACTUAL_TERMINAL_01.json",
+      "bytes": 17989,
+      "sha256": "7f49c0f21ef7b8b7e94a5d32c597aaee964b74606e2a1efae8d4f882d7b9f186"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/CORRECTION02_NATIVE01_ACTUAL_PARTIAL_RESOURCE_REFUSAL_01.json",
+      "bytes": 14481,
+      "sha256": "a2b0bf767b7aac8a1392ff502b11704791c2bcd3bf5d7cd6a08fab4cb4596788"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CPU_NATIVE02_DRAFT_LOCATION_MISMATCH_01.json",
+      "bytes": 5513,
+      "sha256": "66f8a82e7a289b271fd1a5973d5268802e80b5131fe597a42e2d89e0ff8f65b8"
+    }
+  ],
+  "retainedFailureEvidenceChecked": [
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/BASELINE_COMMAND_PLAN.json",
+      "sha256": "45e81ccd2fa93534ca5a92904ea53e32dfa400c8f5bd8c3f8840536b9188a52a"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/native-preparation-01/REGEX_BASELINE_01_NATIVE_COMMANDS.json",
+      "sha256": "09c7df1802d0072f97b2c6afb83418bbd89dc243a2b59d0bbd86154d85d1d300"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/BASELINE_PRODUCTION_CLASS_ARTIFACTS_01.json",
+      "sha256": "6e90ba4f9a3ec67b364af180b039a41b71e507db400f039b49b2e59670cef434"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/native-preparation-01/REGEX_BASELINE_01_2_executeBaselineOriginalFailingMethod.preflight.json",
+      "sha256": "d1fd2080fb60becc84abec9b9fdbfe458d5e63a030220d5736ebb7eaa58f5dbd"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/native-preparation-01/REGEX_BASELINE_01_2_executeBaselineOriginalFailingMethod.log",
+      "sha256": "5871cd94c58b18a922982be55243818cbb41951d7791535e3e5a17ba99e8aefc"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/native-preparation-01/REGEX_BASELINE_01_2_executeBaselineOriginalFailingMethod.exit.txt",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-dependency-closure-successor-p0-20261007/native-preparation-02/DEPENDENCY_SUCCESSOR_02_3_executeTrigramQueryTests.log",
+      "sha256": "c54eb4c19b795ca96baf43a5199031acef157f96bb0d87578bdb79d1f5103d52"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/target/reports/baseline-failing-method/TEST-junit-jupiter.xml",
+      "sha256": "a56290db3f277924616ab127711e0777d56385e7142debd4ae99488fdf5ef14a"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/target/reports/baseline-failing-method/TEST-junit-platform-suite.xml",
+      "sha256": "3bf583047432b45c3e585dd099967fdd520476e13010735882e64b93c46bebef"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/target/reports/baseline-failing-method/TEST-junit-vintage.xml",
+      "sha256": "4527fce434e8917ac328ee23e6bbadb3f79d1b548edd9abcac3c50ec31fca512"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-dependency-closure-successor-p0-20261007/TEST_CLASS_ARTIFACTS_01.json",
+      "sha256": "d917404793bfd862d25cba1187b285bf27adffdd7bb811acd5134c12c11e8dbb"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexRegexTrigramQuery.java",
+      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexRegexProgramImageCodec.java",
+      "sha256": "09f4ef3d52a432b5a46bd784a91728352d121241dca9ab010df7a06f38d01dc7"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexRegexAcceleratedImage.java",
+      "sha256": "c5d761d364c68ee588091c7258334afb8120125c1638c14c8151c37587360608"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexCompactAsciiDfaImage.java",
+      "sha256": "31f4fd022eba03828d5ddc9d7dec0ab3dc978b3397d305f8b7655957e6a15269"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-dependency-closure-successor-p0-20261007/target/sealed-host-without-successor-explicit-owner-families.jar",
+      "sha256": "b79ad3c52f5c0622f643c5f18280cebda42f097f15c6f95a7fc40a2e8c762133",
+      "entry": "com/synexia/indexstring/MIndexHybridRegex.class"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-dependency-closure-successor-p0-20261007/target/sealed-host-without-successor-explicit-owner-families.jar",
+      "sha256": "ffca0c40aa1a188c2bdc28c1caf2f13669073703a23b4eca88ad58b99a9e14bc",
+      "entry": "com/synexia/indexstring/MIndexHybridRegexPlan.class"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-dependency-closure-successor-p0-20261007/target/sealed-host-without-successor-explicit-owner-families.jar",
+      "sha256": "4b809a12770129cf3c288bc5d095e6ed014ff5fce2e7875d3c85a3304f93bcbd",
+      "entry": "com/synexia/indexstring/MIndexRegexMatch.class"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/CORRECTED_ORIGINAL40_COMMAND_PLAN.json",
+      "sha256": "cf73571e75fd95abf7805a1a2976d144be63aefbb5e9dc89e6510ea1f6e4a3e1"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/native-preparation-01/CORRECTED_ORIGINAL40_01_NATIVE_COMMANDS.json",
+      "sha256": "f3d9cbde7f9a660754a142047f9b528d693d206f6c29e9be95af03e3a9d35709"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/CORRECTED_TEST_CLASS_ARTIFACTS_01.json",
+      "sha256": "8d5614e5bbaeee06c5cb1f42478ab29564266b65ddea4e8ccb6d97a7b9c50d39"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/native-preparation-01/CORRECTED_ORIGINAL40_01_2_executeTrigramQueryTests.log",
+      "sha256": "6efe878cad18fffafd0fcf1629351d7c3a15059bc31af031b99966c35666b613"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/native-preparation-01/CORRECTED_ORIGINAL40_01_2_executeTrigramQueryTests.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/native-preparation-01/CORRECTED_ORIGINAL40_01_2_executeTrigramQueryTests.preflight.json",
+      "sha256": "9fa973960bae7fadbf997093e023811c8b07108b75808eaa274454327b33f2c6"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/target/reports/executeTrigramQueryTests/TEST-junit-jupiter.xml",
+      "sha256": "19d79dbf730ce210a3624dc2cdcdb4a9e6d47b4eb0be1e1e5c068904fb5eb588"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/target/reports/executeTrigramQueryTests/TEST-junit-platform-suite.xml",
+      "sha256": "25a26faa7ee3fd04957b53058db291ac5dd87cb4f29148c72d05cd19cfdf27af"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/target/reports/executeTrigramQueryTests/TEST-junit-vintage.xml",
+      "sha256": "2ac911cd81f81cab7b004a95689b8c256ee0c894747771ae9efabd7816c8377d"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/native-preparation-01/CORRECTED_ORIGINAL40_01_3_executeProgramTests.log",
+      "sha256": "544637a83424d8caa0cf3c493007b89c901ce7968920add07d4f89877622a159"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/native-preparation-01/CORRECTED_ORIGINAL40_01_3_executeProgramTests.exit.txt",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/native-preparation-01/CORRECTED_ORIGINAL40_01_3_executeProgramTests.preflight.json",
+      "sha256": "46740260b3ac46d62029d12b425089e308d5e2c7ff3b63eee5d50a9680649146"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/target/reports/executeProgramTests/TEST-junit-jupiter.xml",
+      "sha256": "3c227d49cb9a98381a248721d5a4a0c9c2035e36279e69c147b70ab606e40c0b"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/target/reports/executeProgramTests/TEST-junit-platform-suite.xml",
+      "sha256": "7da4f0bf1f2dee22293bfaed17e81f61f94c8840ce270fb5693a3f2f7c80281b"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/target/reports/executeProgramTests/TEST-junit-vintage.xml",
+      "sha256": "788f6f7c837d1d50e90a3beab2d112f5d40b84c4bd3353103c98bcb9973a3a1e"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/target/reports/executeProgramTests/TEST-junit-jupiter.xml",
+      "sha256": "3c227d49cb9a98381a248721d5a4a0c9c2035e36279e69c147b70ab606e40c0b"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/target/reports/executeProgramTests/TEST-junit-jupiter.xml",
+      "sha256": "3c227d49cb9a98381a248721d5a4a0c9c2035e36279e69c147b70ab606e40c0b"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/target/reports/executeProgramTests/TEST-junit-jupiter.xml",
+      "sha256": "3c227d49cb9a98381a248721d5a4a0c9c2035e36279e69c147b70ab606e40c0b"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/regression-tests/MIndexRegexProgramTest.java",
+      "sha256": "8035418d2855b191594921c5fa6bdf701bfb051379cdf54d67e399218657c01a"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/program3-baseline-01/PROGRAM3_BASELINE_COMMAND_PLAN_01.json",
+      "sha256": "0dc44e86aea682251fba5d7bb703d64008cc4c5ba224c66ea99e38ba9cc6ca04"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/program3-baseline-01/PROGRAM3_BASELINE_NATIVE_COMMAND_01.json",
+      "sha256": "7219aa864faa07380fc3023a8d0b80f17a82c72edef0d35ae9a75c421b05892b"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/program3-baseline-01/PROGRAM3_BASELINE_01_1_executeThreeOriginalFailingMethods.preflight.json",
+      "sha256": "174310c70527e6a9b7399ef59b69ca945b459fe0011e84c691c8c718101d1c56"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/program3-baseline-01/PROGRAM3_BASELINE_01_1_executeThreeOriginalFailingMethods.log",
+      "sha256": "6a7ef250841d8923277b0d8892cc0afcfc76a60668fe3e67c113ebc4040caba6"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/program3-baseline-01/PROGRAM3_BASELINE_01_1_executeThreeOriginalFailingMethods.exit.txt",
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/program3-baseline-01/target/reports/baseline-three-methods/TEST-junit-jupiter.xml",
+      "sha256": "2621aff605d56d6a906c31d5dd3fad23b4e7d8b81701a4550b63300912ee55dd"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/program3-baseline-01/target/reports/baseline-three-methods/TEST-junit-platform-suite.xml",
+      "sha256": "d6c6fc69eacca0d3b5fd0a9d5b8f74eefdc32ac79d02d58280f4a9e37b201c05"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/program3-baseline-01/target/reports/baseline-three-methods/TEST-junit-vintage.xml",
+      "sha256": "b01a4354a161a1e556f4c51c22fd5eda9e856ba63cdb62138565eb8ffc5202ac"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-01/CORRECTED_ORIGINAL40_ACTUAL_TERMINAL_01.json",
+      "sha256": "67ba190d24bddc889a128a1533db1506e7b048759180d0ab7d8bc59757de90fb"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/BASELINE_PRODUCTION_CLASS_ARTIFACTS_01.json",
+      "sha256": "6e90ba4f9a3ec67b364af180b039a41b71e507db400f039b49b2e59670cef434"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/regression-tests/MIndexRegexProgramTest.java",
+      "sha256": "8035418d2855b191594921c5fa6bdf701bfb051379cdf54d67e399218657c01a"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/source/MIndexRegexProgram.java",
+      "sha256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexRegexTrigramQuery.java",
+      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexRegexProgramImageCodec.java",
+      "sha256": "09f4ef3d52a432b5a46bd784a91728352d121241dca9ab010df7a06f38d01dc7"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexRegexAcceleratedImage.java",
+      "sha256": "c5d761d364c68ee588091c7258334afb8120125c1638c14c8151c37587360608"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/source/MIndexCompactAsciiDfaImage.java",
+      "sha256": "31f4fd022eba03828d5ddc9d7dec0ab3dc978b3397d305f8b7655957e6a15269"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-adjacent-finite-runs-source-proof-preparation-p0-20261007/regression-tests/MIndexRegexProgramTest.java",
+      "sha256": "8035418d2855b191594921c5fa6bdf701bfb051379cdf54d67e399218657c01a"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/program3-baseline-01/ACTUAL_BASELINE3_TERMINAL_FOSS_REUSE_DECISION.tsv",
+      "sha256": "757a6610dfeeb3e088a16ccca24d33424e1d9f000f15246fe1fd57cfebf46224"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/CORRECTION02_COMMAND_PLAN_01.json",
+      "sha256": "77f91e6d7ea621c8ded0ae30aac841b8f84da7d0010b7bbe1603af535ce5d837"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_NATIVE_COMMANDS_01.json",
+      "sha256": "cd8e19828679966b178d6d319bf4aa2e6f4f26c9631bba600cf022edf46b6705"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_1_replayApplyThreeTargets.log",
+      "sha256": "bff4f713da18960ca3a7d0295a405554d2a8a2cae669758ea07c81340df0f92e"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_1_replayApplyThreeTargets.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_1_replayApplyThreeTargets.preflight.json",
+      "sha256": "79083fc5e5d9f4870c44e58bcd3f92fff1bba3762ab4843f32b0b0973b4b3bf6"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_1_replayApplyThreeTargets.preflight.log",
+      "sha256": "9af5f43f8a3f484697ddb10b68f6394d3cb0df075a040c08268e3f0c893691ee"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_2_replayCheckFixedpoint.log",
+      "sha256": "d90f2fe2aea0aa2a5cbcdae28331b7f9822cce70ee42686c4045aeaa8cffc382"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_2_replayCheckFixedpoint.exit.txt",
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_2_replayCheckFixedpoint.preflight.json",
+      "sha256": "93ccb65acc9b5199396af31140d4af89ae7aea67cdb2efa59aeaa5ea3a1ab4f7"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_2_replayCheckFixedpoint.preflight.log",
+      "sha256": "ddf1a44e8637c70149684e700884ea00a485a59281e8ae69c47dee68f84924f3"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_3_replaySecondApplyFixedpoint.preflight.json",
+      "sha256": "0a41e65dbc8bb1268380f8ee9cbc439e0a77370fe9569ae7baf867096bb674f6"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_3_replaySecondApplyFixedpoint.preflight.log",
+      "sha256": "e7bda7ebf273ffecf9a21bf49ac919b7aac0fc80bd00f5866cd40aab68250db3"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_NATIVE_COMMANDS_02.json",
+      "sha256": "51610d09d95463240a1611fe8a92501e5dc16ecff91977b8b9fded9af8637d05"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_NATIVE02_READINESS_SEAL_01.json",
+      "sha256": "9388509814a4462a98464004c7ae9ae7f6fdc036120e87ac35a4bc4194e8ebb6"
+    }
+  ],
+  "rootCpuReviewDisposition": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/CORRECTION02_ROOT_CPU_REVIEW_DISPOSITION_01.json",
+    "bytes": 2688,
+    "sha256": "b9b72da1cb5f4c1110161cd1787d89ca0e3e4a5e80d06440212a1a55aa1844ae"
+  },
+  "priorReviewScope": "Exact unchanged productionProgram4e217 only; new fixture model review not claimed.",
+  "conditionalJniMethodPreserved": true,
+  "nativeQualification": "NOT_CLAIMED",
+  "broaderColdWarmRuntimeSourceClosureAndP0": "OPEN",
+  "noLiveCheckoutEdits": true,
+  "productionRecompile": false,
+  "helperRecompile": false,
+  "JVMInvocationsBySealer": 0,
+  "reviewerInvocations": 0,
+  "fossDecision": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/ACTUAL40_FOSS_REUSE_DECISION.tsv",
+    "bytes": 710,
+    "sha256": "94e79004b6c203e599c5c7941030406c7b5495431f86d7e685606bd892ea5218"
+  },
+  "sealingAdapter": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/seal_correction02_actual40_cpu.py",
+    "bytes": 9093,
+    "sha256": "19a1800b936c2d8da22c368451b3f31ca2e81c4e54ea8a7b9847392db8df8e80"
+  }
+}

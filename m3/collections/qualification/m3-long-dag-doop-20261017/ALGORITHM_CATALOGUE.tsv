@@ -1,0 +1,14 @@
+category	candidate	provenance	license	complexity	contract_evaluation	decision
+LAZY_PRIMITIVE_FILTER	M3LongFilteredView	M3jdk21@970a34350ebdf6a3f1c5ff5acc8445d0f3515f55	Apache-2.0	O(N) evaluation + O(1) cursor	Existing read-only live primitive view; late traversal and no payload copy	REUSE
+SORTED_PRIMITIVE_VIEW	M3LongSortedViews	M3jdk21@970a34350ebdf6a3f1c5ff5acc8445d0f3515f55	Apache-2.0	Sorted backing navigation cost	Reuse original sorted set filter; do not substitute a sorted snapshot for a live range view	REUSE
+BOUNDED_SORT	JDK Arrays.sort(long[]) / LongStream.sorted	OpenJDK21 java.base	GPL-2.0-with-classpath-exception	O(N log N) time + O(N) bounded array	Use sorted snapshot only within explicit maxElements; source stays untouched	SELECTED
+DISTINCT_HASH	M3LongHashSet	M3jdk21@970a34350ebdf6a3f1c5ff5acc8445d0f3515f55	Apache-2.0	O(N) expected and O(D) key state	Existing primitive hash owner, no boxed per-row hash nodes; enforce maxDistinct	REUSE
+DAG_COMPOSITION	JDK LongStream.concat	OpenJDK21 java.base	GPL-2.0-with-classpath-exception	O(N) traversal plus DAG nodes	Two logical branches over same parent may re-traverse; no retained payload	SELECTED
+VIRTUAL_ACCUMULATOR	M3LongDag + ObjLongConsumer	new M3JDK21 source	Apache-2.0	O(N) time + client state	Each evaluation creates separate seed; no implicit associative reorder	SELECTED
+VIRTUAL_COLLECTOR_TEE	M3VirtualCollector<Pair> / JDK Collectors.teeing	JDK21 java.util.stream	GPL-2.0-with-classpath-exception	O(N) shared traversal	Two collectors share exact same DAG and process every value once; result finish after drain	SELECTED
+JNI_FILTER_MASK	M3IndexMaskCompactor	M3jdk21@970a34350ebdf6a3f1c5ff5acc8445d0f3515f55	Apache-2.0	O(N) scanned primitive mask	Retain existing optional JNI, JAVA default and explicit native request; no callback across JNI	KEEP
+GOF_ADAPTER	Eclipse Collections primitive bags/lists	github.com/eclipse-collections/eclipse-collections	EPL-1.0 OR EDL-1.0	varies	Donor API taxonomy; no source copied; check actual license prior to adapting	REFERENCE_ONLY
+GOF_DECORATOR	Guava Iterables.filter	github.com/google/guava	Apache-2.0	O(N) scan	Lazy wrapper donor; null and live mutation semantics differ	REFERENCE_ONLY
+DAG_SCANNING	LeetCode 207 Course Schedule	https://leetcode.com/problems/course-schedule/	REFERENCE_ONLY	O(V+E) topological traversal	Cycle/branch-shape inspiration only; immutable M3 plan construction is acyclic	CATEGORY_REFERENCE
+TREE_BFS	HackerRank BFS Shortest Reach	https://www.hackerrank.com/challenges/bfsshortreach/problem	REFERENCE_ONLY	O(V+E)	Depth stress and iterative traversal problems; no solution code copied	CATEGORY_REFERENCE
+TOPOLOGICAL_SORT	GeeksforGeeks Topological Sorting	https://www.geeksforgeeks.org/topological-sorting/	REFERENCE_ONLY	O(V+E)	Candidate for future DAG planning; current graph has only pure ordered concatenation/fan-in	CATEGORY_REFERENCE

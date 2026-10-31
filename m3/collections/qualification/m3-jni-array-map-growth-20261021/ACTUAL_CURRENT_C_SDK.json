@@ -1,0 +1,55 @@
+{
+  "actual_source": {
+    "bytes": 6349,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\actual-sdk-v1\\src\\main\\native\\m3_arrays_jni.c",
+    "sha256": "da4ba8620a190e07f08446d4a1cc6081d860dcd6d98f94ab2633b87643ddcfb7"
+  },
+  "candidate_git_blob": "5c11ec1f5db5dd25c05233f3ad9c5a38631c4b2f",
+  "canonical_engines": [
+    {
+      "bytes": 16480,
+      "copied_byte_exact": true,
+      "donor_path": "C:\\m3-work-c\\wt\\synexia-visibility-gate\\synexia-openrewrite-recipes\\src\\main\\java\\com\\synexia\\rewrite\\M3HashPinnedTextSnapshotRecipe.java",
+      "git_blob": "5ba8b897b07283920f6f5dcada5238568db0feb6",
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\native-recipe-v1\\engine-src\\com\\synexia\\rewrite\\M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "5bb309bd9e53760ea8f310bcacbf77fdc9668068a781e21cd88fb9cd9ec418a1"
+    }
+  ],
+  "closeout_note": "Actual SDK succeeded. Initial controller failed afterward on metadata-key mismatch; CPU-only closeout verified XML/source/terminal/seal and all17 referenced pins. No SDK replay.",
+  "current_revision": "51259ccbdc9b17dc7a76a68730acd92f8b278525",
+  "errors": 0,
+  "failures": 0,
+  "formal_review": "NO_VERDICT",
+  "full_goal": "UNFINISHED",
+  "global_slot_admission": false,
+  "input_seal": {
+    "bytes": 5760,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\seals\\current-native-composition-v1-sdk-1.json",
+    "sha256": "bae7a7bba7e28457800d35b2011b92323866f733162c286f7e93cc31b1669eed"
+  },
+  "marker": {
+    "bytes": 195,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\actual-sdk-v1\\actual-recipe-results.tsv",
+    "sha256": "5ab1a2fe624ec9e5852595ca0fb9cde3aa11fd7be8ff1d3afc8055f1a8ac6724"
+  },
+  "native_compilation_runtime_and_installed_distribution": "PENDING_CURRENT_COMPOSED_SOURCE",
+  "prepared": {
+    "bytes": 10714,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\PREPARED_QUALIFICATION.json",
+    "sha256": "a984a70352958438a04923201e052b0cea5014d28f116abcaa8894c4aae77bf8"
+  },
+  "report": {
+    "bytes": 16708,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\sdk-output-v1\\surefire-reports\\TEST-com.synexia.rewrite.M3JniBackingNativeRecipeTest.xml",
+    "sha256": "59b1fe85c22096197205bffb10e02fa1913a17f0dc65300a49216c55d1c6fb77"
+  },
+  "schema": "M3_CURRENT_ARRAY_COMPOSITION_ACTUAL_SDK_V1",
+  "skips": 0,
+  "status": "SDK_QUALIFIED_CURRENT_SOURCE_ONLY",
+  "terminal_receipt": {
+    "bytes": 4745,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\current-native-composition-v1-sdk-1.json",
+    "sha256": "b40ac15c1db07acbbc4f8b6d7e26c6ae8c476795aad6c0188fb9273f395f0d54"
+  },
+  "tests": 5
+}

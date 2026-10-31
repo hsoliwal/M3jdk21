@@ -1,0 +1,238 @@
+{
+  "schema": "M3_JDK_INTEGRATED_UTILITY_CONTRACTS_V1",
+  "target_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "module": "java.base",
+  "integration": "DIRECT_EXISTING_JDK_PACKAGES_NO_COMPANION_SDK",
+  "target_license": "GPL-2.0-only WITH Classpath-exception-2.0",
+  "first_party_attribution": "Copyright 2026 Hitesh Soliwal and contributors",
+  "recipe_policy": "CANONICAL_SYNEXIA_MAVEN_OPENREWRITE_EXACT_PREIMAGE_POSTIMAGE_FIXED_POINT_DRIFT_REFUSAL",
+  "third_party_source_copy": false,
+  "sources": [
+    {
+      "repository": "hsoliwal/M3JDK21",
+      "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "path": "src/java.base/share/classes/java/io/InputStream.java",
+      "git_blob": "736b6ebd90435cdbaada40b8982e1f53b14281f1",
+      "sha256": "3f2a8698a8e1dd61500508ecd1c6fec873744699aa2d447bb33ec00ce0f26d1d",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "use": "EXISTING_JDK_OWNER_REUSE_OR_BEHAVIOR_REFERENCE"
+    },
+    {
+      "repository": "hsoliwal/M3JDK21",
+      "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "path": "src/java.base/share/classes/java/io/Reader.java",
+      "git_blob": "b29a8c05f970bfc7d7455b8f079aeda440f4a908",
+      "sha256": "bf7281a2a05e67bad28b9d3e536cf165a3127efd4ddf50d5963b138dbe6b8df9",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "use": "EXISTING_JDK_OWNER_REUSE_OR_BEHAVIOR_REFERENCE"
+    },
+    {
+      "repository": "hsoliwal/M3JDK21",
+      "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "path": "src/java.base/share/classes/java/io/DataInputStream.java",
+      "git_blob": "7192b30d5f2b2419cfc7e91ccb32dba82894eaff",
+      "sha256": "e39c5e0a2d3720af8f14cb29721fde86e95c09ea841372869af10555d11cac5f",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "use": "EXISTING_JDK_OWNER_REUSE_OR_BEHAVIOR_REFERENCE"
+    },
+    {
+      "repository": "hsoliwal/M3JDK21",
+      "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "path": "src/java.base/share/classes/java/util/Arrays.java",
+      "git_blob": "9d1034e6fef6c8ecf9fe4b5b4032fbd2622fc79b",
+      "sha256": "fb63f716ddcf750357d2c5747896336b45ad343eb4d3c2de329f3212c6bf49ec",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "use": "EXISTING_JDK_OWNER_REUSE_OR_BEHAVIOR_REFERENCE"
+    },
+    {
+      "repository": "hsoliwal/M3JDK21",
+      "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "path": "src/java.base/share/classes/java/util/Spliterators.java",
+      "git_blob": "c047d96ab49072caefdc9c949e5c75d8b92d4fba",
+      "sha256": "7363a624984c81e6a8c0a7ac72e43e360c86f6c92f3ccc9a55c87d43ca987066",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "use": "EXISTING_JDK_OWNER_REUSE_OR_BEHAVIOR_REFERENCE"
+    },
+    {
+      "repository": "hsoliwal/M3JDK21",
+      "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "git_blob": "1b2d7e5c98cd7db229b00cdd80e5a43f078e93e2",
+      "sha256": "8b385ad8883b73423c90a2c3132700f3669dfe145916a8c38a4a93702ff379de",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "use": "EXISTING_JDK_OWNER_REUSE_OR_BEHAVIOR_REFERENCE"
+    },
+    {
+      "repository": "hsoliwal/M3JDK21",
+      "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "path": "src/java.base/share/classes/java/util/stream/StreamSupport.java",
+      "git_blob": "9a1820cca281106b0be68efb42f40024e89c4a31",
+      "sha256": "5460d4c1f98d9c576c398336f0295cd88fd30f6a23ce6fa48cc9cfe64a714b79",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "use": "EXISTING_JDK_OWNER_REUSE_OR_BEHAVIOR_REFERENCE"
+    },
+    {
+      "repository": "hsoliwal/M3JDK21",
+      "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "path": "src/java.base/share/classes/java/lang/Class.java",
+      "git_blob": "ddc5a55f0b2f51809d00e7b9985668a53740e006",
+      "sha256": "ddf752a34f5a1cb15ffd0e288afa5eef3499c97e0406cb14e4365de69e66bd4a",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "use": "EXISTING_JDK_OWNER_REUSE_OR_BEHAVIOR_REFERENCE"
+    },
+    {
+      "repository": "hsoliwal/M3JDK21",
+      "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "path": "src/java.base/share/classes/java/lang/reflect/AnnotatedElement.java",
+      "git_blob": "ef5b962be93c270e8f701bb638a875759c72b859",
+      "sha256": "a42d5e6cfa6fd8c98977130180d6961db5257096d7fc9298929f0cdf33c17dc0",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "use": "EXISTING_JDK_OWNER_REUSE_OR_BEHAVIOR_REFERENCE"
+    },
+    {
+      "repository": "hsoliwal/M3JDK21",
+      "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "path": "src/java.base/share/classes/java/lang/reflect/Executable.java",
+      "git_blob": "dcf4bfafe2547677981f383995dfe4871c4ef749",
+      "sha256": "dc960ebf721fc08d2561873922afdbb9e6d7c2ff3279f6a59da29dac7d17e31c",
+      "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "use": "EXISTING_JDK_OWNER_REUSE_OR_BEHAVIOR_REFERENCE"
+    }
+  ],
+  "categories": [
+    {
+      "category": "IO/byte-and-character-transfer",
+      "owner": "java.io.IOUtils",
+      "algorithms": [
+        "existing transferTo dispatch",
+        "bounded buffer loop",
+        "short-read accumulation",
+        "exact skip with scalar progress fallback",
+        "Arrays.mismatch"
+      ],
+      "selection": "Retain specialized JDK transfer dispatch for unbounded copies; use bounded primitive arrays only when a range limit or cross-stream comparison requires it. Reuse existing skipNBytes and String encoding/decoding owners.",
+      "complexity": "O(n) element processing; bounded copy at most 8192 scratch elements, equality two 8192-element buffers; full-read caller array is reused; decoding/encoding deliberately materializes O(n) data.",
+      "alternatives": [
+        {
+          "candidate": "InputStream.transferTo and Reader.transferTo",
+          "disposition": "REUSE",
+          "reason": "Canonical owner preserves optimized subclass dispatch; it does not itself expose bounded range transfer."
+        },
+        {
+          "candidate": "Apache Commons IO API family",
+          "disposition": "EVIDENCE_ONLY",
+          "reason": "Conventional naming and resource/transfer problem categories only; no Apache implementation text copied into GPL product sources."
+        },
+        {
+          "candidate": "single-element loops for complete copy/comparison",
+          "disposition": "REJECT",
+          "reason": "Unnecessary per-element virtual calls; preserve bounded buffering and intrinsic-capable Arrays.mismatch."
+        }
+      ],
+      "public_operation_count": 16
+    },
+    {
+      "category": "STREAMS/source-adaptation-and-pairing",
+      "owner": "java.util.stream.Streams",
+      "algorithms": [
+        "existing source spliterators",
+        "Spliterators unknown-size iterator batching",
+        "Enumeration.asIterator",
+        "unsplittable pair traversal",
+        "existing composedClose"
+      ],
+      "selection": "Extend the pre-existing Streams owner in place. Preserve iterable metadata; keep zip serial at the source so stateful one-shot input traversal has a simple bounded contract, with close exception composition reused exactly.",
+      "complexity": "Iterable factory O(1) except source spliterator construction; iterator adaptation O(1) persistent utility state with existing optional parallel batching; zip O(min(n,m)) pairing and O(1) persistent pairing state.",
+      "alternatives": [
+        {
+          "candidate": "existing StreamSupport, Spliterators, and Streams.composedClose",
+          "disposition": "REUSE",
+          "reason": "Already own pipeline construction, source adaptation, and close failure semantics."
+        },
+        {
+          "candidate": "parallel splitting zip with independently indexed inputs",
+          "disposition": "PENDING",
+          "reason": "Requires additional split-boundary, resource, and unsized-input evidence; not needed for the stated serial pair contract."
+        },
+        {
+          "candidate": "Guava Streams utility family",
+          "disposition": "EVIDENCE_ONLY",
+          "reason": "Public shape reference only; no Apache implementation text copied."
+        }
+      ],
+      "public_operation_count": 6
+    },
+    {
+      "category": "REFLECTION/type-and-metadata-inspection",
+      "owner": "java.lang.reflect.Reflection",
+      "algorithms": [
+        "lazy superclass iteration",
+        "breadth-first interface closure",
+        "identity cycle detection",
+        "bounded iterative generic-array resolution",
+        "existing annotation/executable accessors"
+      ],
+      "selection": "Reuse Class and reflection metadata owners without changing access state. Resolve only concrete raw types, retain unresolved Type evidence, and bound generic-array traversal by the JVM array dimension limit.",
+      "complexity": "Hierarchy O(h) lazy traversal; interface closure O(V+E) traversal and O(V+E) temporary queue/snapshot storage; raw generic-array resolution O(d) with d <= 255 and identity-cycle detection; metadata streams retain existing owner snapshots.",
+      "alternatives": [
+        {
+          "candidate": "Class, AnnotatedElement, ParameterizedType, Executable APIs",
+          "disposition": "REUSE",
+          "reason": "Canonical type identity, annotation presence, generic signatures, and resolution exceptions remain authoritative."
+        },
+        {
+          "candidate": "naive Method.invoke / getDeclared* bootstrap utility wrappers",
+          "disposition": "REJECT",
+          "reason": "Caller-sensitive behavior could replace the original caller with java.base; a separate proven caller-context forwarding atom is required."
+        },
+        {
+          "candidate": "Spring/Commons reflection utilities",
+          "disposition": "EVIDENCE_ONLY",
+          "reason": "Problem taxonomy only; their access-enabling or exception-translation policies are not imported."
+        }
+      ],
+      "public_operation_count": 12
+    },
+    {
+      "category": "STRINGS/documentation-contract",
+      "owner": "java.util.Strings.isNullOrBlank",
+      "algorithms": [
+        "unchanged Character.isWhitespace code-point traversal"
+      ],
+      "selection": "Correct the misleading Javadoc from no-whitespace to all-whitespace; keep the source method body byte-for-byte unchanged.",
+      "complexity": "No implementation or resource change.",
+      "public_operation_count": 0
+    }
+  ],
+  "qualified_scope": "ISOLATED_STOCK_JAVA_21_PATCH_MODULE",
+  "tests": [
+    {
+      "class": "IOUtilsTest",
+      "checks_per_mode": 2196
+    },
+    {
+      "class": "StreamsTest",
+      "checks_per_mode": 181
+    },
+    {
+      "class": "ReflectionTest",
+      "checks_per_mode": 74
+    }
+  ],
+  "modes": [
+    "mixed",
+    "interpreter"
+  ],
+  "total_checks": 4902,
+  "benchmark_claim": "NONE; asymptotic and ownership analysis recorded; quantitative performance acceptance pending",
+  "pending": [
+    "canonical recipe execution against target and fixed point/refusal receipts",
+    "full fork image build",
+    "wider java.io/java.util.stream/java.lang.reflect jtreg suites",
+    "C1/C2 and other platforms",
+    "CPU/retained-heap/native-process-memory benchmarks",
+    "ordered receiving phase gates"
+  ],
+  "family_completion": false,
+  "repository_completion": false
+}

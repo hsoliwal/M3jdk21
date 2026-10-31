@@ -1,0 +1,55 @@
+-------------------------------------------------------------------------------
+Test set: com.m3.rewrite.backport.JccMergeRecoveryTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 1.990 s <<< FAILURE! -- in com.m3.rewrite.backport.JccMergeRecoveryTest
+com.m3.rewrite.backport.JccMergeRecoveryTest.historicalConflictsAndDuplicateTargetsCannotPublishPartialHistory -- Time elapsed: 0.164 s <<< ERROR!
+java.lang.IllegalStateException: source drift: m3/migration/test/test_jcc_source_final_handoff_packet.py
+	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.requireAdmissible(M3Jdk21HashPinnedTextSnapshotRecipe.java:212)
+	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.generate(M3Jdk21HashPinnedTextSnapshotRecipe.java:142)
+	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.generate(M3Jdk21HashPinnedTextSnapshotRecipe.java:37)
+	at org.openrewrite.ScanningRecipe.generate(ScanningRecipe.java:63)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.m3.rewrite.backport.JccMergeRecoveryTest.reject(JccMergeRecoveryTest.java:243)
+	at com.m3.rewrite.backport.JccMergeRecoveryTest.historicalConflictsAndDuplicateTargetsCannotPublishPartialHistory(JccMergeRecoveryTest.java:172)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.m3.rewrite.backport.JccMergeRecoveryTest.existingRecipeProduces449ExactOutputsAndFreshReplayMakesNoChanges -- Time elapsed: 0.231 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <Markers(id=af9e669a-83f5-4c7b-b338-b74f2f4ccb6c, markers=[])> but was: <Markers(id=af9e669a-83f5-4c7b-b338-b74f2f4ccb6c, markers=[RecipesThatMadeChanges(id=b686c8ee-f2b1-40b6-b3dc-35e523da16c4, recipes=[[com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe@3cceba25]])])>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+	at com.m3.rewrite.backport.JccMergeRecoveryTest.existingRecipeProduces449ExactOutputsAndFreshReplayMakesNoChanges(JccMergeRecoveryTest.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+com.m3.rewrite.backport.JccMergeRecoveryTest.everyCurrentMissingOrDriftedInputRefusesWithoutPartialUpdates -- Time elapsed: 0.116 s <<< ERROR!
+java.lang.IllegalStateException: required JDK21 text source missing: .github/workflows/m3-retained-capability-audit.yml
+	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.requireAdmissible(M3Jdk21HashPinnedTextSnapshotRecipe.java:208)
+	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.generate(M3Jdk21HashPinnedTextSnapshotRecipe.java:142)
+	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.generate(M3Jdk21HashPinnedTextSnapshotRecipe.java:37)
+	at org.openrewrite.ScanningRecipe.generate(ScanningRecipe.java:63)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.m3.rewrite.backport.JccMergeRecoveryTest.reject(JccMergeRecoveryTest.java:243)
+	at com.m3.rewrite.backport.JccMergeRecoveryTest.everyCurrentMissingOrDriftedInputRefusesWithoutPartialUpdates(JccMergeRecoveryTest.java:161)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

@@ -1,0 +1,15 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "note": "Optional Jackson receiving module only. No global String/array/collection/AST phase promotion or full-family parity claim.",
+  "source_commit": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+  "target_baseline": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "mappings": [
+    {"source":"com.fasterxml.jackson.databind.ObjectMapper 2.19.2","target":"com.fasterxml.jackson.databind.ObjectMapper","status":"unchanged-original-module","target_rule":"Complete source-built annotations/core/databind JMODs; opt-in jdk.m3.jackson provider adds M3AST binding"},
+    {"source":"MIndexString family text boundary","target":"java.lang.String backed by existing internal java.lang.M3String on M3JDK","status":"existing-target-owner-reused","target_rule":"Retain public String; no new String payload class or Synexia runtime dependency. Stock JDK qualification cannot attest M3String internals"},
+    {"source":"com.synexia.mindex.compiler.ast.M3File and M3FileSourceFacts","target":"jdk.m3.jackson.M3File and M3SourceHash","status":"optional-snapshot-atoms-adapted","target_rule":"Bounded file bytes, strict Charset decoder, immutable exact UTF-16 source and distinct byte/source SHA-256; exclude compiler attribution"},
+    {"source":"com.synexia.indexstring.file.MIndexFile","target":"jdk.m3.jackson.M3File exact decoded-text input boundary","status":"partial-boundary-only","target_rule":"Token lexicon, postings, line/offset mappings, codecs, search and full M3File family remain excluded; no whole-file equivalence"},
+    {"source":"com.synexia.mindex.MIndexAST/MIndexASTAtom/MIndexASTBuilder/MIndexASTPool","target":"jdk.m3.jackson.M3AST/M3ASTAtom/M3ASTBuilder/M3ASTPool","status":"optional-json-receiver-adapted","target_rule":"Preserve primitive lanes and exact ordered hash-consing; explicit per-document sealed pool, document String coordinates and receiving UTF-16 hash domain. No compiler-API or source-occurrence equivalence"}
+  ]
+}

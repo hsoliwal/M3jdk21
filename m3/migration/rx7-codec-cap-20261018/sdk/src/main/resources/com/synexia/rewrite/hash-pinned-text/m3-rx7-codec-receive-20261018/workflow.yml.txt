@@ -1,0 +1,146 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# Adapted from provider supervisor f04b6bfc76e5a671968a478f44cf13268c04e5e9.
+name: M3RX7 v7 Image Codec Receiver
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3RX7.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3RX7Image.java'
+      - 'src/java.base/share/classes/jdk/internal/mindex/M3RX7Codec.java'
+      - 'test/jdk/java/util/regex/M3RX7Test.java'
+      - 'test/jdk/java/util/regex/M3RX7CodecTest.java'
+      - 'test/jdk/java/util/regex/M3RX7CodecBoundsTest.java'
+      - 'm3/docs/name-mapping.d/m3-regex-v7-image-codec.json'
+      - 'm3/migration/rx7-codec-cap-20261018/**'
+      - 'm3/migration/rx7-codec-receive-20261018/**'
+      - 'm3/runtime-integration/check-m3rx7-v7-image-codec.sh'
+      - '.github/workflows/m3rx7-v7-image-codec-20261014.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  standalone-java21:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      M3_PROOF_NAME: m3-rx7-cap-${{ github.run_id }}-${{ github.run_attempt }}
+      JAVA_TOOL_OPTIONS: ''
+      JDK_JAVA_OPTIONS: ''
+      _JAVA_OPTIONS: ''
+      JAVA_OPTS: ''
+      MAVEN_OPTS: ''
+      MAVEN_ARGS: ''
+      MAVEN_CONFIG: ''
+      CLASSPATH: ''
+    steps:
+      - name: Reserve storage and select preinstalled tools
+        id: preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -I -S -B - <<'PY'
+          import os,pathlib,re,shutil,stat
+          reserve,cap=8*1024**3,512*1024**2
+          def need(ok,message):
+           if not ok:raise SystemExit(message)
+          def no_links(path):
+           need(path.is_absolute() and path==pathlib.Path(os.path.normpath(path)),"absolute normalized runner path required")
+           for item in (path,*path.parents):need(not item.is_symlink(),"runner path symlink refused")
+          runner=pathlib.Path(os.environ["RUNNER_TEMP"])
+          workspace=pathlib.Path(os.environ["GITHUB_WORKSPACE"])
+          for base in (runner,workspace):
+           no_links(base);need(base.is_dir(),"runner storage missing")
+           usage=os.statvfs(base)
+           need(usage.f_bavail*usage.f_frsize>=reserve+cap,"HOLD_STORAGE: 8GiB after512MiB required")
+          label=os.environ["M3_PROOF_NAME"]
+          need(re.fullmatch(r"m3-rx7-cap-[0-9]+-[0-9]+",label) is not None,"invalid owned run label")
+          root=runner/label;source=workspace/"m3-rx7-cap-source"
+          need(not root.exists() and not source.exists(),"owned output/source paths must be fresh")
+          cache=pathlib.Path(os.environ["RUNNER_TOOL_CACHE"])
+          no_links(cache);need(cache.is_dir(),"preinstalled tool cache missing")
+          javas=[]
+          for version in (cache/"Java_Temurin-Hotspot_jdk").glob("21.*"):
+           home=version/"x64"
+           if re.fullmatch(r"21\.\d+\.\d+-\d+(?:\.\d+)*",version.name) and (version/"x64.complete").is_file() and all(os.access(home/"bin"/name,os.X_OK) for name in ("java","javac")):
+            javas.append(home.resolve())
+          need(bool(javas),"HOLD_TOOLCHAIN: preinstalled Temurin21 required; no setup/download fallback")
+          java=sorted(javas,key=lambda p:tuple(int(x) for x in re.findall(r"\d+",p.parent.name)))[-1]
+          mvn=shutil.which("mvn")
+          need(mvn is not None,"HOLD_TOOLCHAIN: preinstalled Maven required; no install fallback")
+          maven=pathlib.Path(mvn).resolve();no_links(java);no_links(maven)
+          need(maven.is_file() and os.access(maven,os.X_OK),"existing Maven unavailable")
+          memory={}
+          with open("/proc/meminfo","rt",encoding="ascii") as stream:
+           for line in stream:
+            if line.startswith("MemAvailable:"):memory["available"]=int(line.split()[1])*1024
+          available=memory.get("available",0)
+          maximum=pathlib.Path("/sys/fs/cgroup/memory.max");current=pathlib.Path("/sys/fs/cgroup/memory.current")
+          if maximum.is_file() and current.is_file():
+           value=maximum.read_text(encoding="ascii").strip()
+           if value!="max":available=min(available,int(value)-int(current.read_text(encoding="ascii").strip()))
+          need(available>=1536*1024**2,"HOLD_MEMORY: 1536MiB host/cgroup headroom required")
+          for directory in ("home/.m2","m2","tmp","cache","config","data"):
+           (root/directory).mkdir(parents=True,exist_ok=False)
+          settings='<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"/>\n'
+          for name in ("settings.xml","global-settings.xml"):
+           (root/"home/.m2"/name).write_text(settings,encoding="utf-8")
+          values={"M3_PROOF_ROOT":str(root),"M3_SOURCE_ROOT":str(source),"HOME":str(root/"home"),
+           "USERPROFILE":str(root/"home"),"MAVEN_USER_HOME":str(root/"home/.m2"),
+           "TMPDIR":str(root/"tmp"),"TEMP":str(root/"tmp"),"TMP":str(root/"tmp"),
+           "XDG_CACHE_HOME":str(root/"cache"),"XDG_CONFIG_HOME":str(root/"config"),"XDG_DATA_HOME":str(root/"data")}
+          with open(os.environ["GITHUB_ENV"],"a",encoding="utf-8") as stream:
+           for key,value in values.items():
+            need("\n" not in value and "\r" not in value,"unsafe environment path")
+            stream.write(key+"="+value+"\n")
+          with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as stream:
+           stream.write("java="+str(java)+"\nmaven="+str(maven)+"\n")
+          print("RX7 preflight: reserve/toolchain/memory gates admitted; no execution qualification")
+          PY
+      - name: Narrow exact candidate-head checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: m3-rx7-cap-source
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          fetch-tags: false
+          lfs: false
+          submodules: false
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /.gitattributes
+            /.github/workflows/m3rx7-v7-image-codec-20261014.yml
+            /m3/docs/name-mapping.d/m3-regex-v7-image-codec.json
+            /m3/migration/rx7-codec-cap-20261018/
+            /m3/migration/rx7-codec-receive-20261018/
+            /m3/runtime-integration/check-m3rx7-v7-image-codec.sh
+            /src/java.base/share/classes/jdk/internal/mindex/M3RX7.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3RX7Image.java
+            /src/java.base/share/classes/jdk/internal/mindex/M3RX7Codec.java
+            /test/jdk/java/util/regex/M3RX7Test.java
+            /test/jdk/java/util/regex/M3RX7CodecTest.java
+            /test/jdk/java/util/regex/M3RX7CodecBoundsTest.java
+      - name: Qualify actual recipe results and bounded-heap witness
+        shell: bash
+        env:
+          M3_JAVA_HOME: ${{ steps.preflight.outputs.java }}
+          M3_MAVEN: ${{ steps.preflight.outputs.maven }}
+          EXPECTED_SOURCE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          GIT_OPTIONAL_LOCKS: '0'
+          GIT_NO_LAZY_FETCH: '1'
+          GIT_TERMINAL_PROMPT: '0'
+          GCM_INTERACTIVE: never
+        run: |
+          set -euo pipefail
+          sh "$M3_SOURCE_ROOT/m3/runtime-integration/check-m3rx7-v7-image-codec.sh"
+      - name: Retain closed two-MiB proof
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-rx7-codec-cap-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-rx7-cap-${{ github.run_id }}-${{ github.run_attempt }}/proof/
+          include-hidden-files: false
+          compression-level: 0
+          retention-days: 90
+          if-no-files-found: error

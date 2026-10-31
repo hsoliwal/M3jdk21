@@ -1,0 +1,7 @@
+path	sha256	git_blob	mode	pr	note
+.github/workflows/m3-jdk21-java-base-mask-20261023.yml	d811f48266b2e6d7319f6deb97417997109e012f88dfd374e08d6258209e5717	cd424b20ee9305665fae2452befcd9dee8c0fbc2	100644	1873	PR version, not live
+m3/collections/qualification/java-base-mask-20261023/README.md	a92d86f763a58e5446dd086dfd1fd2b41a513b75d879574cc5312875c41b968a	70e735b361c9c59ae87e656cf5a73e18f32502c9	100644	1873	PR version, not live
+m3/collections/qualification/java-base-mask-20261023/verify.sh	8895a488dca5d995bf64591203c0561a97fc84851f675c058e372b06b543dab6	7b3af09badb3f9c1a9a2d971aceb3bace2185d7e	100644	1873	PR version, not live
+src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java	812bbae89c04a8b1e812126b751dcc7801216439acb6a9f581e78174bb662f0c	e6ca59d8ae7fba700765e670dd5ec7d8dd84bc8d	100644	1873	PR version, not live
+test/jdk/java/util/ArrayList/M3ArrayListVectorRemoveIfContract.java	a052467c860c523e7f3880c9d083f323d552ce43384f267365de275ba11e7b70	c760bb2ba03f6ad2b587834abd9abbb602ac1ae9	100644	1873	PR version, not live
+test/jdk/java/util/ArrayList/M3CollectionMaskCompactorContract.java	e93d8e7fa0195accc89595c7aaa628e04645b4f6c3cf3131bfd1323c2e41361a	066eb1b6a636b38c56bc007d1a83eeb6793ddf40	100644	1873	PR version, not live

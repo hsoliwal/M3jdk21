@@ -1,0 +1,323 @@
+{
+  "schema": "independent-v3-custody-source-and-actual-input-admission/v1",
+  "status": "ADMITTED_T02_FOR_PROBE_AND_SUBSEQUENT_CONDITIONAL_PUBLICATION",
+  "helper_sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
+  "verifier_sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
+  "custody_input_sha256": "22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df",
+  "protocol_sha256": "cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5",
+  "manifest_sha256": "9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328",
+  "source_snapshots": [
+    {
+      "source": "raw_custody_v3.py",
+      "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/raw_custody_v3.py",
+      "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
+      "bytes": 12912
+    },
+    {
+      "source": "verify_publication_v3.py",
+      "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/verify_publication_v3.py",
+      "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
+      "bytes": 13831
+    },
+    {
+      "source": "verify_publication.py",
+      "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/verify_publication.py",
+      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
+      "bytes": 9623
+    },
+    {
+      "source": "audit_base.py",
+      "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/audit_base.py",
+      "sha256": "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b",
+      "bytes": 8839
+    },
+    {
+      "source": "prepare_publication.py",
+      "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/prepare_publication.py",
+      "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
+      "bytes": 15683
+    },
+    {
+      "source": "raw-custody-v3/PROTOCOL.md",
+      "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/raw-custody-v3/PROTOCOL.md",
+      "sha256": "cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5",
+      "bytes": 4406
+    },
+    {
+      "source": "raw-custody-v3/draft-T01/raw_custody_v3.py",
+      "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py",
+      "sha256": "a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b",
+      "bytes": 12671
+    },
+    {
+      "source": "raw-custody-v3/draft-T01/verify_publication_v3.py",
+      "copy": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py",
+      "sha256": "7138709c360728c17c701391f303a02e21e6e1334b29bc3f67f6c9702f7440f4",
+      "bytes": 13831
+    }
+  ],
+  "python_files_ast_parsed_without_execution": 7,
+  "original_unexecuted_T01_preserved": true,
+  "two_review_corrections_present": [
+    "commit original wrapper body equality",
+    "original leaf path symlink check before resolve"
+  ],
+  "actual_creation_calls": [
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
+      "git_blob": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d",
+      "bytes": 126,
+      "sha256": "88b78c08bf896f77b97603f99bad089c19330ca2816edb1c240a84799cb8bfa0",
+      "actual_request_local_index_bytes_equal": true,
+      "actual_returned_sha_matches": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+      "git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
+      "bytes": 4,
+      "sha256": "823a8864668594f33fd21b51f42c08643d90be2f0d903653175047f5d0298e6c",
+      "actual_request_local_index_bytes_equal": true,
+      "actual_returned_sha_matches": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-nul/Dependency.java.txt",
+      "git_blob": "fb1c29bba17633d2de5d53d924ec210965374c37",
+      "bytes": 110,
+      "sha256": "ba285f4d77b3be32b02839f15a09246410cba23120d8f36a244992fcf03510a6",
+      "actual_request_local_index_bytes_equal": true,
+      "actual_returned_sha_matches": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+      "git_blob": "24cdc62e634934527d551324c2449bcf951b5589",
+      "bytes": 22,
+      "sha256": "7eb80c376a9681170665f5c0d8b86214e9b44aa6f1d08690a83b26aeba536f3c",
+      "actual_request_local_index_bytes_equal": true,
+      "actual_returned_sha_matches": true
+    }
+  ],
+  "verification_tree_reads": [
+    {
+      "git_tree": "0b445a9f02146e1ef34f499ae801d0f9001b6313",
+      "entries": 1,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "d6a876dffdb48da7271d85966ac7d9cd684e4b89ecc3548e79a5dc8ef55be637"
+    },
+    {
+      "git_tree": "1f7ac77c503cb40df683a7831d94b0c6a381b811",
+      "entries": 11,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "e60253446c2741c41d127b379f3b9f56506442a0476ea377ab9de43f4ef98701"
+    },
+    {
+      "git_tree": "1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a",
+      "entries": 1,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "bf6ecda1e1cd2d3a0fe726b39e1b1fb924fb9dd9e6bff7fb311cec53a69da76b"
+    },
+    {
+      "git_tree": "2e1ea5ea0076af3e2947a20dcddf8b306249d46c",
+      "entries": 70,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "87897d5da6389eb5421cf083436ea9dba28921fc7c46fcec185c336677476023"
+    },
+    {
+      "git_tree": "7de7c1ae7d22f70481a6dc0c5e81e3de73423e70",
+      "entries": 1,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "bc4a2014f1bde8d775d57d3a3f3e31f441e933a1dec4116df3a1fd92a64ed1bb"
+    },
+    {
+      "git_tree": "8582ac8a6a16142f1ee2b8151085238304fb7aa3",
+      "entries": 4,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "bbbbe2668c25e80d6e53d7c59a4a020fac5ee12f41daed2c665d52c7de1211ac"
+    },
+    {
+      "git_tree": "894e5ba1d9e4e747a308d05f7acb254614f3fe0c",
+      "entries": 1,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "400fa13aa4dce4c38c9af8c98d252c1fab164119e26d623e18d01f9e36d6a127"
+    },
+    {
+      "git_tree": "89e0c45dbf11305c45c0574ab73486c66a8fe7b2",
+      "entries": 1,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "878c3f9a33326df4d91935336962565b2d644e694e51b2aca9f7a47010044324"
+    },
+    {
+      "git_tree": "8de0927ad179c1a668e215fde234824f0b302797",
+      "entries": 7,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "cc07ab6028915303903199aa027d19e27aa96d1d60d16231bf04ea24eb74ec6f"
+    },
+    {
+      "git_tree": "9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10",
+      "entries": 1,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "7f438bf36e2a306ffd396d10d6c1e23164f4456ce85b0d06a23b020183682bd1"
+    },
+    {
+      "git_tree": "aee49a1388a9853f238d6360549181611d8168c4",
+      "entries": 1,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "05a12fcdcba2cbb33d7f26c823c1ec77e712b206b0513ad69971affda5dc24f6"
+    },
+    {
+      "git_tree": "bf2b8fe43cda47f0c6363c8d376f61419e647e4d",
+      "entries": 343,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "f6852b552a509cd63b6f3622a21124215fb4c584d9b0b35fb4fd66dc6631f5d3"
+    },
+    {
+      "git_tree": "cac95ee10acb1ef18280347dcee30e626ff0e2b2",
+      "entries": 1,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "0e3ba46f0ff549937802d41bcd60f36e7a1d2221744d7fed2bac7c3b14a290ba"
+    },
+    {
+      "git_tree": "d7bce8c8d93693af06d95f1121257d65ca7d9f19",
+      "entries": 1,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "4371692b6dc8fafe9355b12f4dd9a7ef3dbda4f38d4a4b262fc7d7e536ebedd2"
+    },
+    {
+      "git_tree": "de28521cc91ed2316af7806f04d933543a3e3637",
+      "entries": 34,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "31f6229cce694b49b0e30cb34791f0b4df696b933965637241dd5b053f751b04"
+    },
+    {
+      "git_tree": "e6cb4eaa71784811361312b305d2723cf886ac1e",
+      "entries": 1,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "4df921e09958f15fd17261bfbb5f9b948b4382afed7890b4568be4444594c7d3"
+    },
+    {
+      "git_tree": "fa58808396946d716c50398bc880a9bc570148db",
+      "entries": 1,
+      "complete": true,
+      "independent_tree_hash_equal": true,
+      "actual_entries_equal_planned": true,
+      "response_file_sha256": "6f3742c4822492686a14cf87ba0697e05fa3082cecbe958772e2b97200c60225"
+    }
+  ],
+  "verification_memberships": [
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
+      "mode": "100644",
+      "git_blob": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d",
+      "bytes": 126
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+      "mode": "100644",
+      "git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
+      "bytes": 4
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-nul/Dependency.java.txt",
+      "mode": "100644",
+      "git_blob": "fb1c29bba17633d2de5d53d924ec210965374c37",
+      "bytes": 110
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+      "mode": "100644",
+      "git_blob": "24cdc62e634934527d551324c2449bcf951b5589",
+      "bytes": 22
+    }
+  ],
+  "verification_file_reads": [
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
+      "reported_git_blob": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d",
+      "expected_bytes": 126,
+      "returned_bytes": 126,
+      "raw_body_readback": true,
+      "returned_bytes_git_blob": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d",
+      "returned_sha256": "88b78c08bf896f77b97603f99bad089c19330ca2816edb1c240a84799cb8bfa0",
+      "identity_only_exception": false
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+      "reported_git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
+      "expected_bytes": 4,
+      "returned_bytes": 6,
+      "raw_body_readback": false,
+      "returned_bytes_git_blob": "e7899a723174a98aabfe18ddbd3178156a00f92f",
+      "returned_sha256": "ab8fcdea4db1c99df632d5e63c8ab9a490708cb86e924b088e16394daf96a7dd",
+      "identity_only_exception": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-nul/Dependency.java.txt",
+      "reported_git_blob": "fb1c29bba17633d2de5d53d924ec210965374c37",
+      "expected_bytes": 110,
+      "returned_bytes": 110,
+      "raw_body_readback": true,
+      "returned_bytes_git_blob": "fb1c29bba17633d2de5d53d924ec210965374c37",
+      "returned_sha256": "ba285f4d77b3be32b02839f15a09246410cba23120d8f36a244992fcf03510a6",
+      "identity_only_exception": false
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+      "reported_git_blob": "24cdc62e634934527d551324c2449bcf951b5589",
+      "expected_bytes": 22,
+      "returned_bytes": 24,
+      "raw_body_readback": false,
+      "returned_bytes_git_blob": "31688252123d4c15ad8ecdc64faec82078105ce8",
+      "returned_sha256": "827ab3d1098463b89d95de61ba5b35caf7c837e6b69f7f3a3a28607d4c8a783f",
+      "identity_only_exception": true
+    }
+  ],
+  "verification_commit": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+  "verification_tree": "bf2b8fe43cda47f0c6363c8d376f61419e647e4d",
+  "verification_parent": "be92c62ece9023b5c33676716a1076d00e26120a",
+  "parsed_commit_equals_actual_wrapper": true,
+  "required_direct_final_bodies": 6,
+  "required_identity_only_final_bodies": 2,
+  "helper_or_verifier_executed_by_reviewer": false,
+  "project_executions": 0,
+  "remote_actions": 0,
+  "current_raw_probe_helper_execution_claimed": false,
+  "final_payload_or_branch_execution_claimed": false,
+  "stable_read_inputs": 37,
+  "limits": [
+    "Actual GitHub call authenticity and chronological branch ordering remain root-owned evidence.",
+    "Two raw remote byte arrays and their remote SHA-256 are not recovered; local/request identities are bound through Git object identity and immutable tree membership.",
+    "Standalone probe uses the frozen inspected helper modules; full V3 pins them before imports. No full process attestation is claimed.",
+    "Prior failed raw readback, source BLOCKED status and export/destination limits remain unchanged."
+  ]
+}

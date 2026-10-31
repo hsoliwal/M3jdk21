@@ -1,0 +1,16 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.search.FindCommitters"
+contributors:
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 54
+- name: "Knut Wannheden"
+  email: "knut@moderne.io"
+  lineCount: 27
+- name: "Peter Streef"
+  email: "peter@moderne.io"
+  lineCount: 14
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 1

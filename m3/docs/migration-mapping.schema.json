@@ -1,0 +1,380 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Proposed M3 migration mapping record",
+  "description": "Documentation schema only. No validator or complete mapping is implemented by this file.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "illustrativeOnly",
+    "id",
+    "family",
+    "status",
+    "source",
+    "target",
+    "relationship",
+    "contracts",
+    "dependencies",
+    "materializationBoundaries",
+    "recipe",
+    "evidence",
+    "enhancements",
+    "lastReviewedSourceCommit",
+    "blockers",
+    "review"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "illustrativeOnly": {
+      "type": "boolean"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "family": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "discovered",
+        "contract-reviewed",
+        "proposed",
+        "implemented",
+        "verified",
+        "accepted",
+        "blocked",
+        "deferred",
+        "drifted",
+        "needs-review"
+      ]
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "target": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/target"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "relationship": {
+      "enum": [
+        "facade",
+        "adapter",
+        "relocation",
+        "split",
+        "consolidation",
+        "retained-dependency",
+        "deferred"
+      ]
+    },
+    "contracts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "required": [
+        "owner",
+        "identityDomain",
+        "coordinateSystem",
+        "compatibility"
+      ]
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "materializationBoundaries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recipe": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "inputHashes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outputHashes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "replay": {
+          "type": "string"
+        },
+        "rollback": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "gate",
+          "state",
+          "sourceCommit",
+          "targetCommit",
+          "artifact"
+        ],
+        "properties": {
+          "gate": {
+            "type": "string"
+          },
+          "state": {
+            "enum": [
+              "passed",
+              "failed",
+              "blocked",
+              "not-run",
+              "not-applicable"
+            ]
+          },
+          "sourceCommit": {
+            "$ref": "#/$defs/nullableCommit"
+          },
+          "targetCommit": {
+            "$ref": "#/$defs/nullableCommit"
+          },
+          "artifact": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mode": {
+            "type": "string"
+          },
+          "environment": {
+            "type": "string"
+          },
+          "command": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "enhancements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "sourceCommit",
+          "disposition",
+          "targetCommit",
+          "reason"
+        ],
+        "properties": {
+          "sourceCommit": {
+            "$ref": "#/$defs/commit"
+          },
+          "disposition": {
+            "enum": [
+              "ported",
+              "deferred",
+              "rejected",
+              "not-applicable",
+              "needs-review"
+            ]
+          },
+          "targetCommit": {
+            "$ref": "#/$defs/nullableCommit"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "pullRequest": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "lastReviewedSourceCommit": {
+      "$ref": "#/$defs/nullableCommit"
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "review": {
+      "type": "object",
+      "required": [
+        "decision",
+        "reviewer",
+        "provenance"
+      ],
+      "properties": {
+        "decision": {
+          "type": "string"
+        },
+        "reviewer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "provenance": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "nullableCommit": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/commit"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "repository",
+        "commit",
+        "files"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string"
+        },
+        "commit": {
+          "$ref": "#/$defs/commit"
+        },
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "path",
+              "blobSha",
+              "symbols"
+            ],
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "blobSha": {
+                "$ref": "#/$defs/nullableCommit"
+              },
+              "symbols": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "target": {
+      "type": "object",
+      "required": [
+        "repository",
+        "proposed",
+        "commit",
+        "module",
+        "paths",
+        "symbols"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string"
+        },
+        "proposed": {
+          "type": "boolean"
+        },
+        "commit": {
+          "$ref": "#/$defs/nullableCommit"
+        },
+        "module": {
+          "type": "string"
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "symbols": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "illustrativeOnly": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "enum": [
+              "discovered",
+              "contract-reviewed",
+              "proposed",
+              "blocked",
+              "deferred"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

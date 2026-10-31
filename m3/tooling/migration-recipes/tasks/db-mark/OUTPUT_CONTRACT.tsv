@@ -1,0 +1,10 @@
+artifact	purpose
+DESIGN.md	Metadata preservation and scheduler provenance contract
+TASK_PACKET.json	Scope/locks/stop conditions
+STATUS.tsv	Observed versus candidate states
+RUN_CONTEXT.tsv	Exact preimage and runtime context
+PROVENANCE.tsv	Verified source and report identities
+VERIFY_CONTRACT.tsv	Independent gates
+OUTPUT_CONTRACT.tsv	This manifest
+ACTION_QUEUE.tsv	Observed remaining failures
+FINAL_REPORT.md	Bounded change and executed results

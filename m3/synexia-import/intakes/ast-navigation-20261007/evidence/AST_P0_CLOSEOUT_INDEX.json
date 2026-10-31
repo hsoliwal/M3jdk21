@@ -1,0 +1,116 @@
+{
+  "schema": 1,
+  "closedUtc": "2026-10-07T06:52:04.369324+00:00",
+  "status": "P0_BOUNDED_AST_ORIGINAL_ORACLE_AND_EXACT_BYTE_IMPORT_PROOFS_COMPLETE_FULL_RECEIVING_REMAINS_OPEN",
+  "priorOneTestProofSha256": "60f392a969382ea4ac94cc033dcaa6adbc06489e48bc473ba96ceac15f363302",
+  "fullOriginalOracleProofSha256": "915ad7f0dbd01aeef01fae3448baa3911fb0ac1e757e197a9306e1dae658489c",
+  "astImporterProofSha256": "9c5c2c846afce4fbb00e6f1325c13557d0965614fe5dcb50a022273529edb0ca",
+  "terminalParentImporterPacketProof": {
+    "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\PACKET_AND_COMPILER_PROOF.json",
+    "sha256": "ca682bf148fee99cc6c09e6b2034265e2f7e0ec84ea7c1ecaddb34bf07fb994e"
+  },
+  "files": [
+    {
+      "path": "AST_CLOSEOUT_PREFLIGHT.json",
+      "sha256": "96b1ab0ef9fdfe883e9956fef8830d63ff475a364cd8ca6e1338eeaf1db357be",
+      "bytes": 1618
+    },
+    {
+      "path": "AST_FULL_ORACLE_COMMANDS.json",
+      "sha256": "6e8d82ea796d9bc4db9a6762b7f4614247ee1a4bfc51ce96734ff8ed6a73485e",
+      "bytes": 17921
+    },
+    {
+      "path": "pom-ast-full-oracle.xml",
+      "sha256": "67c568c3df99e51ee55d3785e872d704c999af9f3d7989ea736d434945267c05",
+      "bytes": 7581
+    },
+    {
+      "path": "AST_FULL_ORIGINAL_ORACLE_PROOF.json",
+      "sha256": "915ad7f0dbd01aeef01fae3448baa3911fb0ac1e757e197a9306e1dae658489c",
+      "bytes": 3174
+    },
+    {
+      "path": "AST_IMPORTER_COMMANDS.json",
+      "sha256": "72bd9132a220f2605e15ef220e7062abb676048d9d769443affa7276b4eb036e",
+      "bytes": 9445
+    },
+    {
+      "path": "AST_IMPORTER_COMMANDS_V2.json",
+      "sha256": "662448df1a2ce851789788cf483f0b6dd7e79cefc91e83ba26a59d461e033e53",
+      "bytes": 10137
+    },
+    {
+      "path": "AST_IMPORTER_QUALIFICATION_PROOF.json",
+      "sha256": "9c5c2c846afce4fbb00e6f1325c13557d0965614fe5dcb50a022273529edb0ca",
+      "bytes": 13093
+    },
+    {
+      "path": "AST_NAVIGATION_ORACLE_PROOF.json",
+      "sha256": "60f392a969382ea4ac94cc033dcaa6adbc06489e48bc473ba96ceac15f363302",
+      "bytes": 15077
+    },
+    {
+      "path": "SOURCE_CUSTODY_V2.json",
+      "sha256": "e1f47293f073df14b524102ccc53cb1ac8a765f3c0d6430cfc7574ca914dbdfe",
+      "bytes": 36822
+    },
+    {
+      "path": "AST_EXPORT_PREPARATION.json",
+      "sha256": "318d4a74f6063c3685bc7404f63975a926f3cff3e5648e1aa1429a96fc2427a2",
+      "bytes": 1300
+    },
+    {
+      "path": "export-ast.tsv",
+      "sha256": "860eade0c05a175373e3f96a19150de03f4865efdfcf077af5d5a52d15a471b7",
+      "bytes": 15240
+    },
+    {
+      "path": "AST_IMPORTER_FOSS_REUSE_DECISION.tsv",
+      "sha256": "d39f4aae975f67e9e22fdd69b89b7badb14aa3faa37ece20f631424806933c26",
+      "bytes": 640
+    },
+    {
+      "path": "AST_IMPORTER_PRE_GENERATION_GATE.json",
+      "sha256": "4abf2833024ca2e483718ef9552e54c6251ab983e3ab42c5042ad01070e6e013",
+      "bytes": 639
+    },
+    {
+      "path": "AST_ORACLE_MAVEN_FOSS_REUSE_DECISION.tsv",
+      "sha256": "769463926eb77b9dd1d6676f2f8117c4be705cd7c3eb9026ce41e48a20c11873",
+      "bytes": 558
+    }
+  ],
+  "executed": {
+    "originalAstTestMethods": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "newCompilation": false,
+    "actualImporterCliCases": 8,
+    "manifestPayloads": 44,
+    "productionOwners": 37,
+    "originalTests": 5,
+    "licenseNoticeFiles": 2,
+    "secondApplyHashSizeMtimeFixedPoint": true,
+    "refusalCases": [
+      "source hash drift",
+      "target byte drift",
+      "framed root drift",
+      "canonical family mismatch"
+    ],
+    "existingSiblingAndLicenseNoticePreserved": true
+  },
+  "qualificationLimits": [
+    "Four AST oracle methods ran over 41 previously strict-compiled classes plus sealed 2440-class inherited host and original dependencies; not source-complete target build",
+    "Exact source byte receiving candidate is isolated K target fixture; no GitHub publication or actual target consumer wiring inferred",
+    "Cold-image authenticated navigation geometry and valid-checksum wrong-geometry refusal not executed",
+    "Cache/edit/resident lifecycle original test classes not executed in this batch",
+    "Importer three-class21-test original fixture failure correction belongs to separate donor lane; no admission here",
+    "Four weighted-index collection payloads remain outside AST export because canonical receiver family policy did not classify their path",
+    "JNI/native dispatch/provider, regex runtime completeness, full reactor/platform/performance gates remain open"
+  ],
+  "jvmLane": "RELEASED_TO_ROOT_BOTH_BATCHES_TERMINAL",
+  "taskRootBytesObserved": 5670846,
+  "firstPartyLicense": "Apache-2.0 original LICENSE/NOTICE bytes retained, Copyright 2026 Hitesh Soliwal and contributors; no OpenJDK/third-party relicensing"
+}

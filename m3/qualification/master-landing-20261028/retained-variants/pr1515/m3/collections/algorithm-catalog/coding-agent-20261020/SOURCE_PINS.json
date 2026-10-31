@@ -1,0 +1,1189 @@
+{
+  "schema": "synexia.coding-agent.recipe-source-pins.v1",
+  "files": [
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/FindSourceFiles.java",
+      "git_blob": "82a040bc9d808e40923224fe050d866c616f20a8",
+      "bytes": 2784,
+      "sha256": "d8c3374951541432246d740dfad3ed2a0a5c246205aad1ec4d37dcaaed8e5d3e",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/FindSourceFiles.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/DeleteSourceFiles.java",
+      "git_blob": "10ce9d270181c65121c97b540397a3c9a92f2fc3",
+      "bytes": 2072,
+      "sha256": "2d171c0dc623607ea0d550a1df416798e03d03997e3bc546d4efed0bade46167",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/DeleteSourceFiles.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/RenameFile.java",
+      "git_blob": "acb84e9f55c412b327438536227f346cf971a69a",
+      "bytes": 2361,
+      "sha256": "a57998a2c5ca45d51ff12ac40d262f863e39514d2f2a898a49fbb38aa5f73f5c",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/RenameFile.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/SetFilePermissions.java",
+      "git_blob": "c302deadde5e53212c681b6b051c75a6362099eb",
+      "bytes": 3020,
+      "sha256": "a59f83fff238e0cea75f135eed5da3d28d880a89ed629a60a6d071b256d484d7",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/SetFilePermissions.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/FindParseFailures.java",
+      "git_blob": "399c8ed67f87a15b38721ecccc5f7302048c8855",
+      "bytes": 4111,
+      "sha256": "386acf65bea79ef3b14b46cc67ca5d47a7f628b95142d9c4d683eaa0d754ef15",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/FindParseFailures.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/FindCollidingSourceFiles.java",
+      "git_blob": "f3ddc3b942ed8caff6e1fcae581cd3614078bf66",
+      "bytes": 3552,
+      "sha256": "227d2c31a2fb9f754d7a9af749d40dd6cfb79c3622233306ecb740c4a38ba84d",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/FindCollidingSourceFiles.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/FindGitProvenance.java",
+      "git_blob": "e3c57e5d8cae59a32095d14cb8565e15f903e09f",
+      "bytes": 2904,
+      "sha256": "019e987a4c58d72ec133d1690fc7c92a1df1c3160bdcddd79735a9b4572b9139",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/FindGitProvenance.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/text/Find.java",
+      "git_blob": "90c97c7ca6524e8c9d2875c886fa9837673eebdb",
+      "bytes": 6275,
+      "sha256": "6bd2d4e51a91824390c3a44d62b9f85f61a73a9a044ccce485b9fa85927c2ea5",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/text/Find.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/text/FindMultiselect.java",
+      "git_blob": "5a96a03b720a8d0ab3634dcd1026ccb1aa5975db",
+      "bytes": 6598,
+      "sha256": "135d1df1b32a1ef331120294559d1eb4cd902b70d9b19958a3cd3d7c8d65964a",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/text/FindMultiselect.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/text/FindAndReplace.java",
+      "git_blob": "a24333a90943786185f52d7e733c15d5b1d0a572",
+      "bytes": 6921,
+      "sha256": "b2ca9434d337492a3e6221647ae46887f58d16699d003f23fdc3a9f6917f71cf",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/text/FindAndReplace.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/text/CreateTextFile.java",
+      "git_blob": "46a675afecf6069ccbb589373c99bbfcbeccf79e",
+      "bytes": 4035,
+      "sha256": "84dbef7206254ab5053b449d4e1047d36edb1e4902ce507e9156dab1d22528ff",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/text/CreateTextFile.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/text/AppendToTextFile.java",
+      "git_blob": "9666a17f3255c75fef9c2d7c238c4e17501e975e",
+      "bytes": 6561,
+      "sha256": "aaae9be054da948424f90304c075ef2fcde5163cf40a965b56abade924e54614",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/text/AppendToTextFile.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/text/EndOfLineAtEndOfFile.java",
+      "git_blob": "52f2bff55016093e8fd373dcd0c32c0726ef4ec8",
+      "bytes": 2446,
+      "sha256": "b3796a9ced034ef3148bc52a683c9b03f7fb7e16f0b21516e67f1b62ae1b60d6",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/text/EndOfLineAtEndOfFile.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/ChangeType.java",
+      "git_blob": "e037a700dc6b3070589f5cf512121faba585c868",
+      "bytes": 32074,
+      "sha256": "b777e88104bfb58f5279d34fc6cae0abf24e68503c46ebe409b25d2a1817739e",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/ChangeType.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/ChangePackage.java",
+      "git_blob": "fc53843f64733fc244e277298861abea5d870b43",
+      "bytes": 15970,
+      "sha256": "7b8d951963b7dc72ede94fc644ce9d1152004d987f78e32a28471945613400fe",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/ChangePackage.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/ChangeMethodName.java",
+      "git_blob": "c302cd7ae41948dcdde3243095ffa573ac8d8867",
+      "bytes": 6946,
+      "sha256": "c97a7e9bb8a19fb5045b3c539ea93804bb987973cf97d0ed885349bf989a7767",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/ChangeMethodName.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/ChangeMethodAccessLevel.java",
+      "git_blob": "10ecc850b7253b70adaf63f6dec906825085dbcd",
+      "bytes": 3129,
+      "sha256": "f8484b57f665d651590f2fd1ac389743884c68d8a5cf394fd591431a83f39aa4",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/ChangeMethodAccessLevel.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/ChangeMethodTargetToStatic.java",
+      "git_blob": "b79e71ccdb4debf0f13412315cec454455f44a99",
+      "bytes": 7534,
+      "sha256": "824c2cbe7f81f9e9b91ad8a6f1d718f4779a0c73aeb8f06071e0e9065044b6cb",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/ChangeMethodTargetToStatic.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/ChangeMethodTargetToVariable.java",
+      "git_blob": "4dbf501fa0adf44a79cc30fb5ee265a9b651f23e",
+      "bytes": 4617,
+      "sha256": "c72b4d5ab3739c3d0f18975157324f098ae3336a3da47b4007bc7b0c3e9b2eb5",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/ChangeMethodTargetToVariable.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/DeleteMethodArgument.java",
+      "git_blob": "2fd26e665561a8a5badb96be95a4390183c1a2b2",
+      "bytes": 4996,
+      "sha256": "319df26afce765743cb4b40ab43491073125535ab9b11ba5d803c7a914736dfa",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/DeleteMethodArgument.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/ReorderMethodArguments.java",
+      "git_blob": "a13bf2fb8e9ecfb2cefa7f6aaf4ba447bc42639f",
+      "bytes": 10251,
+      "sha256": "89f1ce3fb0fe88d8e4670736b7c695649ed91cf96ec1293148c45a6df57ea019",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/ReorderMethodArguments.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/ChangeStaticFieldToMethod.java",
+      "git_blob": "be4578b7445f993979aed6f7a7fd9c9c69e1e12d",
+      "bytes": 7359,
+      "sha256": "b921be00280f29e6d89782fe244b8fe2570a6a3b953db773c026b78ffa7d7c8a",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/ChangeStaticFieldToMethod.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/AddOrUpdateAnnotationAttribute.java",
+      "git_blob": "01e94c4ef0498b17c7e38f83e7f5e05ae169f240",
+      "bytes": 8667,
+      "sha256": "8f51ed940b5eabee01be9d97123e4f54a271526f9621bfa60e5184bf915c5cc9",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/AddOrUpdateAnnotationAttribute.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/ChangeAnnotationAttributeName.java",
+      "git_blob": "7b97826135582c5b73326e9d33ba0587f5fe3917",
+      "bytes": 4079,
+      "sha256": "5e34587c5e94df294f14616b6b13002002f83791c62f11c3b8d9f8d097d2d618",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/ChangeAnnotationAttributeName.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/RemoveAnnotation.java",
+      "git_blob": "ef04d532c4a44561bf96186e92c86f92ee399d98",
+      "bytes": 1474,
+      "sha256": "0f288e147fd86f461bf02fe8c78c3b21b2741fbb9c98338d4e9eff095e5d8e1b",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/RemoveAnnotation.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/RemoveAnnotationAttribute.java",
+      "git_blob": "50348636c545543a5129a281b38f8b126bf44046",
+      "bytes": 3976,
+      "sha256": "8a2d8776f9a582a48c5f73c53885baa0e9db6ddc61db4ac376420ddee12add7b",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/RemoveAnnotationAttribute.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/ExtractInterface.java",
+      "git_blob": "c6b7c78a2ba3f02ae6a41381ba7191ae1792ac36",
+      "bytes": 7103,
+      "sha256": "2664b6018f62f156fa729e18918cc33c0bf843c65838d6fb311fd79bbe4d2fe5",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/ExtractInterface.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/ImplementInterface.java",
+      "git_blob": "01b0eb344f0516e6ca44f8fa85a45a9c718cb9af",
+      "bytes": 4671,
+      "sha256": "b9001d622e2137abc78d37149040d45c5dec4055e4205ca2cf686d390d432c6f",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/ImplementInterface.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/DeimplementInterface.java",
+      "git_blob": "7abacb14477a92c27ff74935a9804c6df88c0d77",
+      "bytes": 1738,
+      "sha256": "593c91544d369c0d1ec058d088d56ab54bc7c61e9350ec1981507b26efb3bdda",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/DeimplementInterface.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/OrderImports.java",
+      "git_blob": "107f843fc26c19ecaa4e203c34fbc9d9126f7f19",
+      "bytes": 4359,
+      "sha256": "1dcf45baddb15d889410f629199bbcdec5fbba986f6695526276724d1663c7e2",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/OrderImports.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/RemoveUnusedImports.java",
+      "git_blob": "dc04cb11d4fa6c4cccd369a6a02a9fed1e41f156",
+      "bytes": 20638,
+      "sha256": "2104c51a8da093b4fcf758b01d37db17bf55fce6777f1ae8697d6034169ed20c",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/RemoveUnusedImports.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/AddLicenseHeader.java",
+      "git_blob": "6a07c3cf66a6b5009168ce80da63563ca6534fdf",
+      "bytes": 3775,
+      "sha256": "295ab6c66755a8da4cae64efb6d60cc6d22523144874d835571198c00ca355c1",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/AddLicenseHeader.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/ChangeLiteral.java",
+      "git_blob": "1ce8ea633f79089a26072f8a1b29fda256b59869",
+      "bytes": 3651,
+      "sha256": "59907087de35abcfe341e067189724313ff7e937e227dfe19416a16e332b8f28",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/ChangeLiteral.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/ChangeFieldName.java",
+      "git_blob": "84b4e943d08ec82f5e8de0d9509f91d8ca1edef0",
+      "bytes": 3348,
+      "sha256": "9bbbfa7670752f98caea39151717a240d41cf3874ee33d76a645685df42cb9ff",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/ChangeFieldName.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/search/FindTypes.java",
+      "git_blob": "008e02952ec9e8981ecc11e3293934cdc6a1ecc0",
+      "bytes": 7154,
+      "sha256": "6831878fcd7703fd202441b62953b958a336e9715e3f15006a494b125b198eb9",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/search/FindTypes.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/search/FindMethods.java",
+      "git_blob": "46e8feb509914e70eb74c1921b4c7040934afde9",
+      "bytes": 8861,
+      "sha256": "5b844486a16f240342d991c43a36fe1b5f92803304f8ed7ae84fb0c02e72a3bc",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/search/FindMethods.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/search/FindAnnotations.java",
+      "git_blob": "eb505921ca6b1f9b410633222f7a09a364e12cad",
+      "bytes": 4710,
+      "sha256": "7f38e0bfd90481905d73f2bcff103fd96a749b712f6482501a7bb146bc473798",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/search/FindAnnotations.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/search/FindComments.java",
+      "git_blob": "2ccd12a5b305a98f8850f24efe6afa6ce220d93a",
+      "bytes": 4042,
+      "sha256": "08920f31e6688833de1ea5c5d934d9d3168e1f6d9b85e16c44044104b3def1eb",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/search/FindComments.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/search/FindFields.java",
+      "git_blob": "05630a03f2331b07ed8863960db9c693dd75c6cf",
+      "bytes": 6135,
+      "sha256": "c8f5efe10cad05264bfaa64e93bd91da23f0fa6a974363b4b588b0c593c2a696",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/search/FindFields.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/search/FindImplementations.java",
+      "git_blob": "f6afb055a50a7c9a52cd7a19a5d7f840b1de0b7a",
+      "bytes": 2385,
+      "sha256": "40dad1655d2deebdb438ef300c1a7062c3706d590c699e1adb5f100e26c29615",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/search/FindImplementations.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/search/FindLiterals.java",
+      "git_blob": "9a28bf2ef60202c00c37ed878a84c921b36284a6",
+      "bytes": 2956,
+      "sha256": "74b6d872683e301ca49544a69586929eae4f7acafd1d5a6395c32198c8d3cd05",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/search/FindLiterals.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/search/FindImports.java",
+      "git_blob": "87552eda45d7cfd01e17eab0cb90753a113870f7",
+      "bytes": 2722,
+      "sha256": "493e81ae89e99a68ca2ea227a5b3ef2f82e8c31a6789985cf18d5cd07c190ccd",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/search/FindImports.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/search/FindDeprecatedUses.java",
+      "git_blob": "1c302df83771736b62178be0623ef9df92454dc6",
+      "bytes": 2649,
+      "sha256": "c7982a9b3393a2445080f483e6d452c9b989c31030f5909c3118c4f63f3f2ccd",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/search/FindDeprecatedUses.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/search/FindMissingTypes.java",
+      "git_blob": "ee1cd5a163e77c4a46f57e3afa8bc7de1a7fc97a",
+      "bytes": 16166,
+      "sha256": "d295dfbada6f364c2dc0dd350a22696ca4b133ea4ee95e351da6f25434eb5e80",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/search/FindMissingTypes.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/search/HasSourceSet.java",
+      "git_blob": "12df03ddb23b19d345abde6618624534608a1b26",
+      "bytes": 2473,
+      "sha256": "bf0746d8201f34193b6c58f4a2516ecb9503926447f608346f101da2f2ca43a1",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/search/HasSourceSet.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/format/AutoFormat.java",
+      "git_blob": "69cfd33780e16fd22859b61b31e4e8682c1d692d",
+      "bytes": 1188,
+      "sha256": "9fea089415afe3999d5fef06f682aaa01eef44ea854536ea805bf63c9f9468b4",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/format/AutoFormat.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-java/src/main/java/org/openrewrite/java/format/RemoveTrailingWhitespace.java",
+      "git_blob": "0e5d3e10644104b103fe81ab6f2185c9147d7f1b",
+      "bytes": 1206,
+      "sha256": "f3d3e3a8c2abbcd44811b5af9ca4435c76612cce404dc52830641251460e2fd5",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-java/src/main/java/org/openrewrite/java/format/RemoveTrailingWhitespace.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/AddDependency.java",
+      "git_blob": "85c4e9a6ae873467c611f0606f3881f8fa9e9ff4",
+      "bytes": 10312,
+      "sha256": "40d0949ebc4d51113ed401de3c689ebcac4386c3a5b7fb315420f3202395c90b",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/AddDependency.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/RemoveDependency.java",
+      "git_blob": "d1f99b9a93525841041c0e0bc8a6e6dc9ea49704",
+      "bytes": 3310,
+      "sha256": "e5daf1d156c5ede4a3b47e72a1ad8da220759bc32b191b9c725d2ac497913de9",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/RemoveDependency.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/UpgradeDependencyVersion.java",
+      "git_blob": "765cc12f16643b4cc18d7681d097ccc563c2d899",
+      "bytes": 19777,
+      "sha256": "abf29fd41b3373011742cc6f3d005a8040adf90b43290ce5cbfbd1a17226453d",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/UpgradeDependencyVersion.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/ChangeDependencyGroupIdAndArtifactId.java",
+      "git_blob": "ac0227ec140490e2198a7616af8d5c750ca8b77a",
+      "bytes": 13656,
+      "sha256": "4342eb78173be2822e972c3c5ffc39ce27118ea3d4a860aac6d3cf8deafdb0c6",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/ChangeDependencyGroupIdAndArtifactId.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/ChangeDependencyScope.java",
+      "git_blob": "19bbd0871701e04bf68fdd35541930f66118a42f",
+      "bytes": 3779,
+      "sha256": "5af0a48c99452fc7cd1cbb89d1c00059365b597cf9dbd916014278e38cc25c37",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/ChangeDependencyScope.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/ExcludeDependency.java",
+      "git_blob": "0e5517254f3c3dfb8992daa6bd9fe7780177b348",
+      "bytes": 5843,
+      "sha256": "0b118783da8e1d2f3c95a0c441e69c2cb79b21d2e499ade44779ec8037fd7a9d",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/ExcludeDependency.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/AddManagedDependency.java",
+      "git_blob": "5d5e365d694900a615f04bb323da9c56d4ffad01",
+      "bytes": 10991,
+      "sha256": "c9362a8c41e2675e650ee59417dc274109f1854ded630c687710902346f733aa",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/AddManagedDependency.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/RemoveManagedDependency.java",
+      "git_blob": "7a20c9d6ace4a8a6d0af61d5bf59e70ec6fbf3ac",
+      "bytes": 3490,
+      "sha256": "63188dc6f612a42527cad7388b161131b77d452b2da58d0c75bc0b9824e74ebc",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/RemoveManagedDependency.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/AddPlugin.java",
+      "git_blob": "4da7f898e4774291e6543298ec22b34e099dc4ed",
+      "bytes": 7441,
+      "sha256": "a508704b7941401eec5689d2cfa50f9e1db075d0abfc267a782f30e661226de5",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/AddPlugin.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/RemovePlugin.java",
+      "git_blob": "35e8430e1b84ba3648133962d45de913c92cc7b7",
+      "bytes": 2401,
+      "sha256": "93f6f7efbbfb12d25033fd7f3e20fc60b6d9bea891c435154b12843521ee7978",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/RemovePlugin.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/UpgradePluginVersion.java",
+      "git_blob": "577a425fd399094c6ec873c459af26d3c07d8a75",
+      "bytes": 9408,
+      "sha256": "03dbbbcf9ed1cc23e4106e7770cbbe1a0534d28f4f36b25d65eb8434452103dd",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/UpgradePluginVersion.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/ChangePluginConfiguration.java",
+      "git_blob": "2e8ae470ae7c70a511d697fdcbb4aa4738312810",
+      "bytes": 4216,
+      "sha256": "4b6ac73a814ba9b3350b17e4d8a47adebc12526ed91981f7db87dced98756674",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/ChangePluginConfiguration.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/ChangePluginExecutions.java",
+      "git_blob": "41d48f80ffb4593d69d172176ce9a0d75af83082",
+      "bytes": 4215,
+      "sha256": "30f8abcb598936664bea64e2d68930c0e45693d09c1a6605ddaa8fc3fe385035",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/ChangePluginExecutions.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/AddProperty.java",
+      "git_blob": "2347b0d3da2f9e2a44b7ff0b45da06660064dd24",
+      "bytes": 4999,
+      "sha256": "ef2514391d6c9c3065c5cb10c2bcf762595ea908233f5e28b508dd99fa76ae38",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/AddProperty.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/ChangePropertyValue.java",
+      "git_blob": "03af69482705099755b876c4fe53aa58a337ea20",
+      "bytes": 4163,
+      "sha256": "b9d6213f5e519e65a5e3286bea5a021cad67f12a5b8f558cbba974afcfcb6653",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/ChangePropertyValue.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/RenamePropertyKey.java",
+      "git_blob": "b516b7ca556b768ab2ff8baebc7aa90c7c2e9652",
+      "bytes": 2828,
+      "sha256": "d8e2c05723d2ba679d9d97299fb7f4c815448607b4164525a32ba1e9fed6d73f",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/RenamePropertyKey.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/RemoveProperty.java",
+      "git_blob": "15e3e27dbd0f517895aa11b99ba6480b85f202ce",
+      "bytes": 1988,
+      "sha256": "cadc11273219b3b11d828afbead123db92fcb2f6830750cda7325e3e8441698a",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/RemoveProperty.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/UpgradeParentVersion.java",
+      "git_blob": "f712269e7e7df24e3968852382cef4cb686731ac",
+      "bytes": 3689,
+      "sha256": "aee24b05aaefea169f1bb13a58532583d6b3142668cac913886f3784ada80b95",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/UpgradeParentVersion.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-maven/src/main/java/org/openrewrite/maven/ChangeProjectVersion.java",
+      "git_blob": "fa56790e65d9f540a823e803b86b7eb8a8a00417",
+      "bytes": 5548,
+      "sha256": "4f6adc10f851e760e226f31bdec581a0f062a868ae4ed1fab9946f43029f8daa",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-maven/src/main/java/org/openrewrite/maven/ChangeProjectVersion.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-yaml/src/main/java/org/openrewrite/yaml/ChangeKey.java",
+      "git_blob": "b5dd940621047e4a36efbae338f72ebad8c05211",
+      "bytes": 2422,
+      "sha256": "d515ebc2f86772223a948f48e05bf266bb715628ad098ef75cd365d69bcd9e0b",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-yaml/src/main/java/org/openrewrite/yaml/ChangeKey.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-yaml/src/main/java/org/openrewrite/yaml/ChangeValue.java",
+      "git_blob": "3856a181e83d5a8f5b23885cf11686078522dfda",
+      "bytes": 3284,
+      "sha256": "3b03a79f6e4d1a0906ead622638b7799ecd0ae9ff5ff593f096f19a10c7c5558",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-yaml/src/main/java/org/openrewrite/yaml/ChangeValue.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-yaml/src/main/java/org/openrewrite/yaml/ChangePropertyKey.java",
+      "git_blob": "700bb5d2ab6c2140c3e00a855bdbc8048a176231",
+      "bytes": 14799,
+      "sha256": "16dcde22acb52691632813c97eb54a4da329590014180b0ffce5cdeb10dadf63",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-yaml/src/main/java/org/openrewrite/yaml/ChangePropertyKey.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-yaml/src/main/java/org/openrewrite/yaml/ChangePropertyValue.java",
+      "git_blob": "d88baa5268bbc083f737cfce836fd3e7bac70633",
+      "bytes": 5757,
+      "sha256": "aebac2d217421d2760fcdd0f910e0dd8cdbe5dfc956f155c33401abea5c37131",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-yaml/src/main/java/org/openrewrite/yaml/ChangePropertyValue.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-yaml/src/main/java/org/openrewrite/yaml/DeleteKey.java",
+      "git_blob": "902c7cbdded9407d8f15b80b92f40d6c5116184c",
+      "bytes": 3050,
+      "sha256": "fd85696cce08cd09396d3436fdf7f3ac7cb1e36deb7f63cd993c3fca91af256b",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-yaml/src/main/java/org/openrewrite/yaml/DeleteKey.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-yaml/src/main/java/org/openrewrite/yaml/DeleteProperty.java",
+      "git_blob": "6b36ea26ed7a0d0c26ecf67cae6384a76ec85cc4",
+      "bytes": 8260,
+      "sha256": "6c3e974fc36ee15407039cb1477447567301e1a224096f3890b42b68387e69ef",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-yaml/src/main/java/org/openrewrite/yaml/DeleteProperty.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-yaml/src/main/java/org/openrewrite/yaml/MergeYaml.java",
+      "git_blob": "8117183298dfdea3e2907c1c771b91e2cf7c3e98",
+      "bytes": 8714,
+      "sha256": "912971ae54d9da7cfed359fbcccba705b7c9be0ae3e835bbb2f027f16e34331d",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-yaml/src/main/java/org/openrewrite/yaml/MergeYaml.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-yaml/src/main/java/org/openrewrite/yaml/AppendToSequence.java",
+      "git_blob": "ff75c7fa0e85557249d4a2e4d2052e7ece63ee67",
+      "bytes": 2779,
+      "sha256": "0c6daed8b9ca39b446548c81d8e9a7323e7309601b0dc28420e8864adaef4dfb",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-yaml/src/main/java/org/openrewrite/yaml/AppendToSequence.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-yaml/src/main/java/org/openrewrite/yaml/CopyValue.java",
+      "git_blob": "77d5e923458c414941c55d8f1bcf0cc7c4475ccb",
+      "bytes": 5081,
+      "sha256": "d3ae9712098aeec5402eb7cb9ebbe8a53055e3ef37b78c74706f61e3cdb4c88b",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-yaml/src/main/java/org/openrewrite/yaml/CopyValue.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-yaml/src/main/java/org/openrewrite/yaml/CreateYamlFile.java",
+      "git_blob": "c926ab1859c18705e5eb71f148e4d008dedc3754",
+      "bytes": 4162,
+      "sha256": "fe1bf9bf4f5311d3a709ab6af3955ed524f7c78847a418daec7f96bd4a6b82d3",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-yaml/src/main/java/org/openrewrite/yaml/CreateYamlFile.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-yaml/src/main/java/org/openrewrite/yaml/CommentOutProperty.java",
+      "git_blob": "7e352474b9ea6d22fb660648866e35e48f07fc36",
+      "bytes": 4402,
+      "sha256": "6ddc26ed99a30e061814c6e1232316580fb1fc208294142922f69182d8a1cd5e",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-yaml/src/main/java/org/openrewrite/yaml/CommentOutProperty.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-xml/src/main/java/org/openrewrite/xml/ChangeTagName.java",
+      "git_blob": "d46d12e63fdc1abdc26c963eec82ea63bafdedf8",
+      "bytes": 2270,
+      "sha256": "592fcca61b66917d66cf4409232f82b8a09bf9cd7725da2e9855835ebcefe0db",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-xml/src/main/java/org/openrewrite/xml/ChangeTagName.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-xml/src/main/java/org/openrewrite/xml/ChangeTagValue.java",
+      "git_blob": "d1510a37b94727fe27aebdb26411ea5e336a367f",
+      "bytes": 2664,
+      "sha256": "fac0b859d615dfc91eff6990d48a3e00180cc78a00ce7d9ccf70452fc2f06551",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-xml/src/main/java/org/openrewrite/xml/ChangeTagValue.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-xml/src/main/java/org/openrewrite/xml/ChangeTagAttribute.java",
+      "git_blob": "e5765acaec483f64a6b95e7108727ec3430313e4",
+      "bytes": 4478,
+      "sha256": "36179afd2116e989bee6eea1d08a726890c67cc9d2aa52f4d0c9c6b930034bf0",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-xml/src/main/java/org/openrewrite/xml/ChangeTagAttribute.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-xml/src/main/java/org/openrewrite/xml/ChangeNamespaceValue.java",
+      "git_blob": "b821a95421e0388a81016f154aa3671debbf3422",
+      "bytes": 6144,
+      "sha256": "ceb0d7294758c1f7a9334938f61a5ae9a80da01eaaf6d0ea5c6654d59a272a0e",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-xml/src/main/java/org/openrewrite/xml/ChangeNamespaceValue.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-xml/src/main/java/org/openrewrite/xml/AddOrUpdateChild.java",
+      "git_blob": "bfc6ca50678baefa098af15bff16b9a111537f36",
+      "bytes": 3638,
+      "sha256": "f87dd596122401cc9ebba141ee466a81a1c336030cb43bdf939a2bb9ff27e285",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-xml/src/main/java/org/openrewrite/xml/AddOrUpdateChild.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-xml/src/main/java/org/openrewrite/xml/RemoveXmlTag.java",
+      "git_blob": "0619b9fe78785d201b28d364549327c0bb8a92c8",
+      "bytes": 2168,
+      "sha256": "6fe0cfbacbef57323cbc4568911da5b53e0175eefbfc5d214697858b57f882ce",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-xml/src/main/java/org/openrewrite/xml/RemoveXmlTag.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-xml/src/main/java/org/openrewrite/xml/CreateXmlFile.java",
+      "git_blob": "0870e8f01dcef7953067bd957fcf29f88bf3e846",
+      "bytes": 4300,
+      "sha256": "edcabcd3a4a32ddf82940d00aa174c41aa0ba335b20c4d5f8e55018bfec63c5f",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-xml/src/main/java/org/openrewrite/xml/CreateXmlFile.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-xml/src/main/java/org/openrewrite/xml/AddCommentToXmlTag.java",
+      "git_blob": "c2232eaa53d3fd62ef86b26e4145b90f17b509d3",
+      "bytes": 3121,
+      "sha256": "29f3d196a777278341a12155c8707e35e0888847021b8e822c3afc847770acf2",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-xml/src/main/java/org/openrewrite/xml/AddCommentToXmlTag.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-json/src/main/java/org/openrewrite/json/ChangeKey.java",
+      "git_blob": "b9f77351f722f3782630d70422241ab61c6ff93f",
+      "bytes": 2784,
+      "sha256": "88a17becdfc8ca7638050ee69c447f770be1f5caa909812904b648d583798372",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-json/src/main/java/org/openrewrite/json/ChangeKey.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-json/src/main/java/org/openrewrite/json/ChangeValue.java",
+      "git_blob": "017fa06b23046e2755eb13d26225371a29005294",
+      "bytes": 2921,
+      "sha256": "11664a591731525efde17899a59a1c8efdc94351a540f13c69836153b6c8b347",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-json/src/main/java/org/openrewrite/json/ChangeValue.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-json/src/main/java/org/openrewrite/json/DeleteKey.java",
+      "git_blob": "dc6b5042ba77ed623b6da0467befe5df297f1abd",
+      "bytes": 2551,
+      "sha256": "537fb1e357bfc2a5153a30c39de520ca2b5bcca014a6cd6d5cd7621dba089d37",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-json/src/main/java/org/openrewrite/json/DeleteKey.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-properties/src/main/java/org/openrewrite/properties/AddProperty.java",
+      "git_blob": "22668841d73a05ee4c9397981dc3df28ef4dc3fb",
+      "bytes": 6474,
+      "sha256": "261ec9bb3d2ba10461adaf0b3dc9627bb4e011975846c971e7e5c73295eb827a",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-properties/src/main/java/org/openrewrite/properties/AddProperty.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-properties/src/main/java/org/openrewrite/properties/ChangePropertyKey.java",
+      "git_blob": "777bce8a60d02c9d478e04c7d2a1c78713138fbe",
+      "bytes": 3739,
+      "sha256": "9aadb35039b4dd9992fd1c6f0af6e7b60187fd5d1b9b56cfc7eb2b7afbc4bf80",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-properties/src/main/java/org/openrewrite/properties/ChangePropertyKey.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-properties/src/main/java/org/openrewrite/properties/ChangePropertyValue.java",
+      "git_blob": "49c34f990144be63bb36f352c7628541af316436",
+      "bytes": 4751,
+      "sha256": "15b9298badab643ba5605baf63e0844b3f64c4fe621858a2a5e2c1afb8d313b3",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-properties/src/main/java/org/openrewrite/properties/ChangePropertyValue.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-properties/src/main/java/org/openrewrite/properties/DeleteProperty.java",
+      "git_blob": "b974fd19f81a37530a89271c71fe9511c33a1b8e",
+      "bytes": 3836,
+      "sha256": "29c9cf31c80a6e47979580d4998fbd663e958533688d373d5e666285565229cb",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-properties/src/main/java/org/openrewrite/properties/DeleteProperty.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-properties/src/main/java/org/openrewrite/properties/CreatePropertiesFile.java",
+      "git_blob": "d7b9dcab964b6a4376112eccb5c2c70586241da8",
+      "bytes": 4104,
+      "sha256": "f011a58abc6f714a457a11edd791c425e330cb234ac19ab635c63f461a723fb2",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-properties/src/main/java/org/openrewrite/properties/CreatePropertiesFile.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalRecipeCatalog.java",
+      "git_blob": "5aa47e0c35ced74e2b5d497d8f55d96777682a4e",
+      "bytes": 2273,
+      "sha256": "5c26af8ffb0dc35ee53314ff742b02d9fab6af5037e704195c2120228d791bb0",
+      "license": "Apache-2.0",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b12feaaa50615614a4235ecb1f7212bceda1b7bb/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalRecipeCatalog.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+      "git_blob": "d06c42aa8ad27118497cd057d1aef8168e4e97f5",
+      "bytes": 27717,
+      "sha256": "ca98114b1f46cc0858d674393f7ac86d3e92cbbb66842cc511709e725239c911",
+      "license": "Apache-2.0",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b12feaaa50615614a4235ecb1f7212bceda1b7bb/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+      "git_blob": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
+      "bytes": 528,
+      "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
+      "license": "Apache-2.0",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b12feaaa50615614a4235ecb1f7212bceda1b7bb/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java"
+    },
+    {
+      "repository": "openrewrite/rewrite-maven-plugin",
+      "commit": "f4e1ac2af034603f8ffdf86e0731c99e02cc64a8",
+      "path": "src/main/java/org/openrewrite/maven/AbstractRewriteMojo.java",
+      "git_blob": "0393919fdebe75f072e05d89e69958dfbb3e1f0a",
+      "bytes": 22809,
+      "sha256": "101257ec4c473e6f5908eefa3f18084812f89b6ac853162d5cb00965d6b2f3ad",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite-maven-plugin/blob/f4e1ac2af034603f8ffdf86e0731c99e02cc64a8/src/main/java/org/openrewrite/maven/AbstractRewriteMojo.java"
+    },
+    {
+      "repository": "openrewrite/rewrite-maven-plugin",
+      "commit": "f4e1ac2af034603f8ffdf86e0731c99e02cc64a8",
+      "path": "src/main/java/org/openrewrite/maven/AbstractRewriteDryRunMojo.java",
+      "git_blob": "9e807ea31bc63cbb43309a513fc7889a172a48df",
+      "bytes": 6280,
+      "sha256": "835e8d98a8cce5e6c0c71fb74a7805662f88b54bf76c7d8baa6192a22d74bbbf",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite-maven-plugin/blob/f4e1ac2af034603f8ffdf86e0731c99e02cc64a8/src/main/java/org/openrewrite/maven/AbstractRewriteDryRunMojo.java"
+    },
+    {
+      "repository": "openrewrite/rewrite-maven-plugin",
+      "commit": "f4e1ac2af034603f8ffdf86e0731c99e02cc64a8",
+      "path": "src/main/java/org/openrewrite/maven/RewriteDryRunNoForkMojo.java",
+      "git_blob": "07f2fcab7edea3df14bc8013a11b7884cfc5447f",
+      "bytes": 1398,
+      "sha256": "55af223b2edacdd6fbe63faaf672525bd254a67ce10e2581374a116bb6ac0d44",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite-maven-plugin/blob/f4e1ac2af034603f8ffdf86e0731c99e02cc64a8/src/main/java/org/openrewrite/maven/RewriteDryRunNoForkMojo.java"
+    },
+    {
+      "repository": "openrewrite/rewrite-maven-plugin",
+      "commit": "f4e1ac2af034603f8ffdf86e0731c99e02cc64a8",
+      "path": "src/main/java/org/openrewrite/maven/RewriteRunNoForkMojo.java",
+      "git_blob": "5b469409c0a5e6b142ba3c4b65b8cb6ef0a12fa8",
+      "bytes": 1276,
+      "sha256": "7e7d1b54c1001695f7ce9ddca7b8037e7762130ef91b98e53af97cf18fc583da",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite-maven-plugin/blob/f4e1ac2af034603f8ffdf86e0731c99e02cc64a8/src/main/java/org/openrewrite/maven/RewriteRunNoForkMojo.java"
+    },
+    {
+      "repository": "openrewrite/rewrite-maven-plugin",
+      "commit": "f4e1ac2af034603f8ffdf86e0731c99e02cc64a8",
+      "path": "src/main/java/org/openrewrite/maven/ConfigurableRewriteMojo.java",
+      "git_blob": "1eb0e45b22c85b60a271a5e09cd9750aa4af5474",
+      "bytes": 11834,
+      "sha256": "cc5caa7ec9b0b42596b6eaa884f45603061ed4fa0667397753b21758c59dbbb6",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite-maven-plugin/blob/f4e1ac2af034603f8ffdf86e0731c99e02cc64a8/src/main/java/org/openrewrite/maven/ConfigurableRewriteMojo.java"
+    },
+    {
+      "repository": "openrewrite/rewrite-maven-plugin",
+      "commit": "f4e1ac2af034603f8ffdf86e0731c99e02cc64a8",
+      "path": "pom.xml",
+      "git_blob": "30e7f89155bf54e75439c8a08fb7f0a286c2fa2e",
+      "bytes": 26371,
+      "sha256": "8fcba59fac39a4689a811e4e054207c07c6bd93157a836878b00a95faa3e4b99",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite-maven-plugin/blob/f4e1ac2af034603f8ffdf86e0731c99e02cc64a8/pom.xml"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalPasses.java",
+      "git_blob": "2cec710aeebc3dca7dee4b4f489f5b180765b5ca",
+      "bytes": 1399,
+      "sha256": "b8b74d942474d68cd42bbbf6e81286a7c0b0e88790144b96880544dc5055bfc6",
+      "license": "Apache-2.0",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b12feaaa50615614a4235ecb1f7212bceda1b7bb/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalPasses.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3UpperCaseLiteralSuffixesRecipe.java",
+      "git_blob": "23e450ca2dad7e7f2ae729825142463a87a91fb7",
+      "bytes": 3648,
+      "sha256": "d2d0fce61377c06d1f1bc46df81ac43babe30d1a3e7cda6be35efb46111360ff",
+      "license": "Apache-2.0",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b12feaaa50615614a4235ecb1f7212bceda1b7bb/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3UpperCaseLiteralSuffixesRecipe.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ModifierOrderRecipe.java",
+      "git_blob": "29d78ec2f4edafff54c464af501574570d1a92f0",
+      "bytes": 4981,
+      "sha256": "80bc9e5607e746fd529307f1876837b784384b693ecc62b40296f1e08db6eda6",
+      "license": "Apache-2.0",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b12feaaa50615614a4235ecb1f7212bceda1b7bb/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ModifierOrderRecipe.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3NegatedEqualityRecipe.java",
+      "git_blob": "13ea4c9ff7db679a4bd44b1662f7a2c5173b8813",
+      "bytes": 4254,
+      "sha256": "cf89d50a5da84a8d13be224cd7a35abacfc296f32f4c1f73f92f19fc10ffa0ee",
+      "license": "Apache-2.0",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b12feaaa50615614a4235ecb1f7212bceda1b7bb/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3NegatedEqualityRecipe.java"
+    },
+    {
+      "repository": "hsoliwal/com.synexia",
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalJavaRecipe.java",
+      "git_blob": "765a603de75d3ac9106c87f04163f7375f0bab02",
+      "bytes": 4971,
+      "sha256": "f13e7415a02ede233f68441caef287f69135fbeb637ddd0e1633e852d7158ed7",
+      "license": "Apache-2.0",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b12feaaa50615614a4235ecb1f7212bceda1b7bb/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MechanicalJavaRecipe.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/config/YamlResourceLoader.java",
+      "git_blob": "9050c6f5ac8edfa615e7313068a5b93a89c456a8",
+      "bytes": 25581,
+      "sha256": "c787d228b4d3cfd6aab5bf85d8b67c3b306133353452e8c04e779a681153cfa8",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/config/YamlResourceLoader.java"
+    },
+    {
+      "repository": "openrewrite/rewrite",
+      "commit": "3bd8271be963c025ce0856072d0f09360e3184cd",
+      "path": "rewrite-core/src/main/java/org/openrewrite/config/DeclarativeRecipe.java",
+      "git_blob": "44704bf02f0c9058bc71f66607aeb51ce4400626",
+      "bytes": 13344,
+      "sha256": "a6851274f652a76c3a1c24b662deb55b9153e09801e930e7dcf2843ab55cedb1",
+      "license": "Apache-2.0",
+      "url": "https://github.com/openrewrite/rewrite/blob/3bd8271be963c025ce0856072d0f09360e3184cd/rewrite-core/src/main/java/org/openrewrite/config/DeclarativeRecipe.java"
+    }
+  ],
+  "additional_meta_recipe_pins": [
+    {
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/crates/m3-recipe-enhance/perfection/README.md",
+      "git_blob": "c84b1e27e3df30362fc8e826a7d33f25ce5d6edf",
+      "sha256": "639c4e5f4ecc5e90a954fd926d93d2eb55a6f5e06cee0684de673fa674ff1761",
+      "bytes": 2113
+    },
+    {
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/crates/m3-recipe-enhance/perfection/pom.xml",
+      "git_blob": "1065f03c7fa0e9169b763a56ce578980c4806bd1",
+      "sha256": "7f600dd12aa80facb57e1a0079bb28d039ae11bdf411c1bd1de84ba03b5c2fe8",
+      "bytes": 3120
+    },
+    {
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-recipe-perfection.yml",
+      "git_blob": "43111000bd2bf8bf78c4522eee620c83d10ea42b",
+      "sha256": "433b34a4df4ad66c3e0507a677c3a5493d4a0c0d1e36f9481884636ae51892e0",
+      "bytes": 757
+    },
+    {
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipePerfectionAuditRecipe.java",
+      "git_blob": "a4f8c08bf5606918e7597e07872a79619ac46096",
+      "sha256": "ebf5bc93a62f9b53ef63b5341fa9961043b2bcfc5ad9751b0397d87aea583aea",
+      "bytes": 13069
+    },
+    {
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeHeaderAndAnchorRecipe.java",
+      "git_blob": "4b13180b022216308ddacd0db320fa2687949a51",
+      "sha256": "5b8940758362cbc53c58d8223de1176765a4e99c61f7e76e489d16655d55050d",
+      "bytes": 3915
+    },
+    {
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeTestScaffoldRecipe.java",
+      "git_blob": "235dafa27e131858bbbaba556ef6b23e827dd868",
+      "sha256": "0e08fd69dff23587dd8fc02ef18b3fe773e56325bd58a3ab4aba34fb0c42bd8e",
+      "bytes": 10783
+    },
+    {
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3RecipePerfectionRecipeTest.java",
+      "git_blob": "4dada07535e18462bd2ab2f44364e38c959c9209",
+      "sha256": "ea1ad449ddd9c543373f40ca4933c98cff446d5980fa6a2c5d580e5cb37788f9",
+      "bytes": 3929
+    },
+    {
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3RecipeTestScaffoldRecipeTest.java",
+      "git_blob": "b791e3ed59e8015633a0499c035c6f374b44d3a7",
+      "sha256": "234eb6be3ff35963d74087a5fd5de783d886b14b8a45d6d395cc770a23f8cff0",
+      "bytes": 4987
+    },
+    {
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3RecipePerfectionApply.java",
+      "git_blob": "6136e1e8e54b2c43ba84feafeb440f3d76c31549",
+      "sha256": "ba24a6672f76db25979b1c1b08516270ac64edccd6b1af6c43e44e9bb8c37e91",
+      "bytes": 5655
+    },
+    {
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/RECIPE_LABORATORY.md",
+      "git_blob": "2b24d0922d89ce56dee04a669bdffc846c3416bb",
+      "sha256": "983d8678c43cae6ddd9853f1c38a116ce7cece4226b70662540ddece3e50b198",
+      "bytes": 7865
+    },
+    {
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/pom.xml",
+      "git_blob": "3dc77127a08aa362d73df1bed2445cea152b8288",
+      "sha256": "dceea1e504471c80d71b01e624651cebafa2dc0483de72f2fbc9e64a8f3d950c",
+      "bytes": 250720
+    },
+    {
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/README.md",
+      "git_blob": "f6ae2c2ed01a1b995a05d1ed359de693f34bcb9f",
+      "sha256": "f9a23579943e87bc1b56e457b478ed429f688a0299fe5f3e24c5258455cf3ef5",
+      "bytes": 22025
+    },
+    {
+      "commit": "b12feaaa50615614a4235ecb1f7212bceda1b7bb",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeLaboratoryCli.java",
+      "git_blob": "3409085a0a79c415971457eea74b1fddf6a9036e",
+      "sha256": "7d4aa86971ad5a042cc3f99cb0b58cad13762b266702ce451552ad47720e8c4f",
+      "bytes": 12399
+    }
+  ],
+  "note": "Pinned source inspection is not execution evidence. No upstream implementation copied into product runtime."
+}

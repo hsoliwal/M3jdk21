@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Created-By: Maven Source Plugin 3.4.0
+Java-Version: 8
+Specification-Title: Apache Commons Codec
+Specification-Version: 1.22
+Specification-Vendor: The Apache Software Foundation
+Implementation-Title: Apache Commons Codec
+Implementation-Version: 1.22.1
+Implementation-Vendor: The Apache Software Foundation
+

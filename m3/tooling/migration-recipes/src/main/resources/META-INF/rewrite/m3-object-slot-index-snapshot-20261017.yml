@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3ObjectSlotIndexSnapshot20261017
+displayName: Add M3 object slot store and primitive indexed snapshots
+description: >-
+  Additive Java 21 M3 Collections receiver over existing generation-safe slots,
+  byte state masks, primitive row permutations, bounded JNI mask windows and
+  signal ordering. Refuses occupied/drifted targets and remains non-promoting
+  until the String predecessor is qualified.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-object-slot-index-snapshot-20261017

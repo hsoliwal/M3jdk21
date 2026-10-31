@@ -1,0 +1,97 @@
+{
+  "schema": "M3JDK21_TREE_RESIDENCY_BINDING_RECEIVING_V1",
+  "canonical_synexia_pr": "https://github.com/hsoliwal/com.synexia/pull/13707",
+  "canonical_synexia_commit": "ba6bd8738aa8b411718e6afbfa5de53520924049",
+  "canonical_recipe_stages": [
+    "com.synexia.m3.ViewportPlanIdentity20261027",
+    "com.synexia.m3.ViewportPlanCompose20261027"
+  ],
+  "product_pr": "https://github.com/hsoliwal/M3jdk21/pull/2013",
+  "original_product_master": "92962fbba10cbf13799253a307dc90f4de94b179",
+  "source_path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+  "source_pre_git_blob": "fd425edf2bb7446a0e4446b272a616015b200361",
+  "source_post_git_blob": "2e7a634931a0f57e6fe4cef45c39db6fbe6c4487",
+  "source_pre_sha256": "ce27f58fa068a61feb6e74d6067a5751241f41688b63e87085ecae34a1eeba6d",
+  "source_post_sha256": "5b05afa28e4a8ed2d6090b1ac8ff5f1c89a334bb3b93c94ae8038669e72c5fbb",
+  "test_new_path": "m3/collections/src/test/java/com/m3/collections/M3TreePlanBindingTest.java",
+  "test_git_blob": "391ede060e2276c8cc2bd2b55b063f3cbf44b137",
+  "test_sha256": "77ecebc9d7109ca788282af18d416fcf84e1f5081674dd55da7a647f6f101495",
+  "maven_openrewrite": {
+    "authentic_parser": "org.openrewrite:rewrite-java-21:8.17.1",
+    "parser_jar_sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+    "original_recipe_engines_exact_git_blobs": true,
+    "original_recipe_test_exact_git_blob": true,
+    "original_receiver_py_exact_git_blob": "d7f5cda465d8f473f4969d4db15d717af1391745",
+    "focused_offline_maven_pom_not_byte_identical_full_canonical": true,
+    "stage1_original_JUnit": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stage2_original_JUnit": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "stage1_SDK_Result_rows": 2,
+    "stage2_SDK_Result_rows": 2,
+    "stage1_receiver_check_apply_replay": [
+      2,
+      2,
+      0
+    ],
+    "stage2_receiver_check_apply_replay": [
+      2,
+      2,
+      0
+    ],
+    "source_drift_refusal": true
+  },
+  "actual_original_junit_contracts": {
+    "master": {
+      "tests": 12,
+      "failed": 7
+    },
+    "identity_only": {
+      "tests": 12,
+      "failed": 2
+    },
+    "composed": {
+      "tests": 12,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "java_public_descriptors_unchanged": true,
+  "jni_viewport_compatibility": {
+    "source": "retained 20261022 compatible fixture dependencies; NOT full current product module",
+    "frames_per_execution": 1024,
+    "checks_per_execution": 417171,
+    "modes": [
+      "mixed Java",
+      "mixed checked JNI",
+      "interpreted Java",
+      "interpreted checked JNI"
+    ],
+    "equal_digest": "79e90d00d243eaf1303ea975ea65384765e4bdcf7fc3bd40a0930a16fac93e03",
+    "fatal_ubsan": true
+  },
+  "local_evidence_zip_sha256": "97fec68524eb752c818cca82e69a149248465dba1a2905fef806ed3cb104d875",
+  "local_evidence_files": 87,
+  "product_java_public_API_added": false,
+  "product_native_C_changed": false,
+  "product_JNI_export_changed": false,
+  "admission": "ACTUAL_SDK_JAVA_RESULTS_RECEIVED_IN_REVIEW_BRANCH",
+  "not_run": [
+    "byte-identical full canonical Maven reactor",
+    "current M3JDK21 full source module and existing 620-suite current-head qualification",
+    "source-built JDK HotSpot jtreg JCK",
+    "actual SWT Nebula GEF RWT native widgets",
+    "all platform and resource/performance gates"
+  ],
+  "ci": "PENDING_NEW_PRODUCT_HEAD",
+  "status": "DRAFT_REVIEW_UNMERGED"
+}

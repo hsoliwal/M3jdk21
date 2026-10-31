@@ -1,0 +1,621 @@
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java b/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
+index e094fdd..10c4d16 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java
+@@ -133,6 +133,19 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+         StrictReadOnlyList(List<E> delegate) { this.delegate = Objects.requireNonNull(delegate); }
+         @Override public int size() { return delegate.size(); }
+         @Override public E get(int index) { return delegate.get(index); }
++        // Keep the inherited indexed read path and its callback demand unchanged.
++        // Only removal is guarded, including calls before next or after exhaustion.
++        @Override public Iterator<E> iterator() {
++            Iterator<E> cursor = super.iterator();
++            return new Iterator<>() {
++                @Override public boolean hasNext() { return cursor.hasNext(); }
++                @Override public E next() { return cursor.next(); }
++                @Override public void forEachRemaining(Consumer<? super E> action) {
++                    cursor.forEachRemaining(action);
++                }
++                @Override public void remove() { throw new UnsupportedOperationException(); }
++            };
++        }
+         @Override public ListIterator<E> listIterator(int index) {
+             return Collections.unmodifiableList(delegate).listIterator(index);
+         }
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java b/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java
+index ccf65b2..d84e5ab 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java
+@@ -1,3 +1,4 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
+ // SPDX-License-Identifier: Apache-2.0
+ package com.m3.collections;
+ 
+@@ -8,6 +9,7 @@
+ import java.util.NavigableSet;
+ import java.util.Objects;
+ import java.util.SortedSet;
++import java.util.Spliterator;
+ import java.util.function.Predicate;
+ 
+ /**
+@@ -44,6 +46,7 @@
+ 
+     @Override public Comparator<? super E> comparator() { return delegate.comparator(); }
+     @Override public Iterator<E> iterator() { return delegate.iterator(); }
++    @Override public Spliterator<E> spliterator() { return delegate.spliterator(); }
+     @Override public Iterator<E> descendingIterator() { return delegate.descendingIterator(); }
+     @Override public int size() { return delegate.size(); }
+     @Override public boolean isEmpty() { return delegate.isEmpty(); }
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java b/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
+index 6ec7a88..c75721c 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
+@@ -1,12 +1,14 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ /*
+  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+  * SPDX-License-Identifier: Apache-2.0
++ * Modified 2026: converge stack-safe filters, readonly navigation and sorted splits.
+  */
+ package com.m3.collections;
+ 
+ import java.util.AbstractCollection;
+ import java.util.AbstractMap;
+ import java.util.AbstractSet;
++import java.util.ArrayList;
+ import java.util.Collection;
+ import java.util.Collections;
+ import java.util.Comparator;
+@@ -19,6 +21,7 @@
+ import java.util.Set;
+ import java.util.SortedMap;
+ import java.util.SortedSet;
++import java.util.Spliterator;
+ import java.util.function.BiPredicate;
+ import java.util.function.Predicate;
+ 
+@@ -124,6 +127,12 @@
+     private static <E> boolean visible(Collection<E> source,
+             Predicate<? super E> predicate, Object value) {
+         if (!source.contains(value)) return false;
++        return visibleMember(source, predicate, value);
++    }
++
++    /** Membership has already succeeded; preserve the original representative probe order. */
++    private static <E> boolean visibleMember(Collection<E> source,
++            Predicate<? super E> predicate, Object value) {
+         if (source instanceof Set<?>) {
+             for (E owned : source) {
+                 if (owned == value) return predicate.test(owned);
+@@ -135,6 +144,20 @@
+         return false;
+     }
+ 
++    /** Open only private read-only owners whose iterator is exactly the same filter decorator. */
++    @SuppressWarnings("unchecked")
++    private static <E> CollectionView<E> iterationView(Collection<E> source) {
++        if (source instanceof CollectionView<?> view) return (CollectionView<E>) view;
++        return source instanceof SetView<?> view ? ((SetView<E>) view).view : null;
++    }
++
++    /** Sorted membership has a different representative probe and remains an opaque boundary. */
++    @SuppressWarnings("unchecked")
++    private static <E> CollectionView<E> membershipView(Collection<E> source) {
++        if (source instanceof CollectionView<?> view) return (CollectionView<E>) view;
++        return source.getClass() == SetView.class ? ((SetView<E>) source).view : null;
++    }
++
+     private static class CollectionView<E> extends AbstractCollection<E> {
+         private final Collection<E> source;
+         private final Predicate<? super E> predicate;
+@@ -144,14 +167,48 @@
+             this.predicate = Objects.requireNonNull(predicate, "predicate");
+         }
+ 
+-        @Override public Iterator<E> iterator() { return filtered(source.iterator(), predicate); }
++        @Override public Iterator<E> iterator() {
++            if (iterationView(source) == null) return filtered(source.iterator(), predicate);
++            // A depth-sized array replaces nested iterator frames, never backing elements.
++            ArrayList<Predicate<? super E>> filters = new ArrayList<>();
++            CollectionView<E> layer = this;
++            Collection<E> backing;
++            do {
++                filters.add(layer.predicate);
++                backing = layer.source;
++                layer = iterationView(backing);
++            } while (layer != null);
++            return filtered(backing.iterator(), value -> {
++                for (int index = filters.size() - 1; index >= 0; index--) {
++                    if (!filters.get(index).test(value)) return false;
++                }
++                return true;
++            });
++        }
+         @Override public int size() {
+             int count = 0;
+-            for (E item : source) if (predicate.test(item)) count++;
++            Iterator<E> cursor = iterator();
++            while (cursor.hasNext()) { cursor.next(); count++; }
+             return count;
+         }
+         @Override public boolean isEmpty() { return !iterator().hasNext(); }
+-        @Override public boolean contains(Object value) { return visible(source, predicate, value); }
++        @Override public boolean contains(Object value) {
++            if (membershipView(source) == null) return visible(source, predicate, value);
++            // Replay the existing inner membership and outer representative scans in order.
++            ArrayList<CollectionView<E>> pending = new ArrayList<>();
++            CollectionView<E> layer = this;
++            CollectionView<E> inner;
++            while ((inner = membershipView(layer.source)) != null) {
++                pending.add(layer);
++                layer = inner;
++            }
++            if (!visible(layer.source, layer.predicate, value)) return false;
++            for (int index = pending.size() - 1; index >= 0; index--) {
++                layer = pending.get(index);
++                if (!visibleMember(layer.source, layer.predicate, value)) return false;
++            }
++            return true;
++        }
+         @Override public boolean add(E value) { throw readonly(); }
+         @Override public boolean remove(Object value) { throw readonly(); }
+         @Override public boolean addAll(Collection<? extends E> values) { throw readonly(); }
+@@ -179,6 +236,50 @@
+         @Override public void clear() { throw readonly(); }
+     }
+ 
++    /** Guard the existing JDK reversed traversal without rebuilding its predicate pipeline. */
++    private static <E> SortedSet<E> readOnlySortedSet(SortedSet<E> source) {
++        return source instanceof SortedSetView<?> || source instanceof ReadOnlySortedSet<?>
++                ? source : new ReadOnlySortedSet<>(source);
++    }
++
++    private static final class ReadOnlySortedSet<E> extends AbstractSet<E> implements SortedSet<E> {
++        private final SortedSet<E> source;
++        private ReadOnlySortedSet(SortedSet<E> source) { this.source = source; }
++        @Override public int size() { return source.size(); }
++        @Override public boolean isEmpty() { return source.isEmpty(); }
++        @Override public boolean contains(Object value) { return source.contains(value); }
++        @Override public boolean containsAll(Collection<?> values) { return source.containsAll(values); }
++        @Override public Iterator<E> iterator() { return Collections.unmodifiableSet(source).iterator(); }
++        @Override public java.util.Spliterator<E> spliterator() { return source.spliterator(); }
++        @Override public Object[] toArray() { return source.toArray(); }
++        @Override public <T> T[] toArray(T[] target) { return source.toArray(target); }
++        @Override public <T> T[] toArray(java.util.function.IntFunction<T[]> factory) {
++            return source.toArray(factory);
++        }
++        @Override public void forEach(java.util.function.Consumer<? super E> action) { source.forEach(action); }
++        @Override public boolean equals(Object other) { return other == this || source.equals(other); }
++        @Override public int hashCode() { return source.hashCode(); }
++        @Override public String toString() { return source.toString(); }
++        @Override public Comparator<? super E> comparator() { return source.comparator(); }
++        @Override public E first() { return source.first(); }
++        @Override public E last() { return source.last(); }
++        @Override public SortedSet<E> subSet(E from, E to) { return readOnlySortedSet(source.subSet(from, to)); }
++        @Override public SortedSet<E> headSet(E to) { return readOnlySortedSet(source.headSet(to)); }
++        @Override public SortedSet<E> tailSet(E from) { return readOnlySortedSet(source.tailSet(from)); }
++        @Override public SortedSet<E> reversed() { return readOnlySortedSet(source.reversed()); }
++        @Override public boolean add(E value) { throw readonly(); }
++        @Override public boolean remove(Object value) { throw readonly(); }
++        @Override public boolean addAll(Collection<? extends E> values) { throw readonly(); }
++        @Override public boolean removeAll(Collection<?> values) { throw readonly(); }
++        @Override public boolean retainAll(Collection<?> values) { throw readonly(); }
++        @Override public boolean removeIf(Predicate<? super E> filter) { throw readonly(); }
++        @Override public void clear() { throw readonly(); }
++        @Override public void addFirst(E value) { throw readonly(); }
++        @Override public void addLast(E value) { throw readonly(); }
++        @Override public E removeFirst() { throw readonly(); }
++        @Override public E removeLast() { throw readonly(); }
++    }
++
+     private static class SortedSetView<E> extends SetView<E> implements SortedSet<E> {
+         protected final SortedSet<E> sorted;
+         protected final Predicate<? super E> predicate;
+@@ -190,6 +291,10 @@
+         }
+ 
+         @Override public Comparator<? super E> comparator() { return sorted.comparator(); }
++        /** Preserve custom ordering on every recursively split child. */
++        @Override public Spliterator<E> spliterator() {
++            return M3SlotSpliterators.sorted(this);
++        }
+         @Override public boolean contains(Object value) {
+             if (!sorted.contains(value)) return false;
+             @SuppressWarnings("unchecked") E alias = (E) value;
+@@ -206,6 +311,14 @@
+         @Override public SortedSet<E> tailSet(E from) {
+             return new SortedSetView<>(sorted.tailSet(from), predicate);
+         }
++        @Override public SortedSet<E> reversed() {
++            return readOnlySortedSet(SortedSet.super.reversed());
++        }
++        // An explicit read-only boundary refuses even empty endpoint mutations.
++        @Override public void addFirst(E value) { throw readonly(); }
++        @Override public void addLast(E value) { throw readonly(); }
++        @Override public E removeFirst() { throw readonly(); }
++        @Override public E removeLast() { throw readonly(); }
+         @Override public E first() { return iterator().next(); }
+         @Override public E last() {
+             Iterator<E> iterator = iterator();
+@@ -236,9 +349,15 @@
+          */
+         private boolean nullIsCandidate(E query, boolean forward, boolean inclusive) {
+             Comparator<? super E> order = nav.comparator();
+-            if (order == null || nav.isEmpty()
+-                    || (nav.first() != null && nav.last() != null)) return false;
+-            int direction = order.compare(null, query);
++            if (order == null || nav.isEmpty()) return false;
++            // Retain the former first/last lookup order. A null member need not
++            // be an extreme: the opposite stored boundary proves whether a
++            // navigational candidate exists, even when that candidate is null.
++            // Compare only a stored value; do not fabricate an unsupported null.
++            E first = nav.first();
++            E last = first == null ? null : nav.last();
++            E boundary = first == null || last == null ? null : (forward ? last : first);
++            int direction = order.compare(boundary, query);
+             return forward ? (inclusive ? direction >= 0 : direction > 0)
+                     : (inclusive ? direction <= 0 : direction < 0);
+         }
+@@ -279,6 +398,7 @@
+         }
+         @Override public E pollFirst() { throw readonly(); }
+         @Override public E pollLast() { throw readonly(); }
++        @Override public NavigableSet<E> reversed() { return descendingSet(); }
+         @Override public NavigableSet<E> descendingSet() {
+             return new NavigableSetView<>(nav.descendingSet(), predicate);
+         }
+@@ -343,6 +463,16 @@
+         @Override public Set<Entry<K, V>> entrySet() {
+             return new AbstractSet<>() {
+                 @Override public int size() { return SortedMapView.this.size(); }
++                @Override public boolean contains(Object candidate) {
++                    if (!(candidate instanceof Entry<?, ?> probe)) return false;
++                    Object key = probe.getKey();
++                    if (!sorted.containsKey(key)) return false;
++                    V value = sorted.get(key);
++                    // Reuse comparator membership and the existing stored-key
++                    // atom. A nullable mapping is distinct from an absent key.
++                    return predicate.test(storedKey(key), value)
++                            && Objects.equals(value, probe.getValue());
++                }
+                 @Override public Iterator<Entry<K, V>> iterator() {
+                     Iterator<Entry<K, V>> cursor = sorted.entrySet().iterator();
+                     Iterator<Entry<K, V>> filtered = M3FilteredViews.filtered(cursor,
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java b/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
+index ef0fac5..1e77b20 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java
+@@ -1,6 +1,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ /*
+  * Copyright 2026 Hitesh Soliwal and contributors
+  * SPDX-License-Identifier: Apache-2.0
++ * Modified 2026: refuse output aliasing mask vectors before selection or JNI dispatch.
+  */
+ package com.m3.collections;
+ 
+@@ -96,7 +97,9 @@
+      * callbacks or mutable/live collection membership.
+      *
+      * <p>All path geometry, stage alignment, output bounds and aliases are checked before
+-     * writes. Only offsets encountered in this window are checked: later offsets are
++     * writes. Output cannot alias any input integer array, including required or forbidden
++     * mask vectors, even when the window is empty or its limit is zero.
++     * Only offsets encountered in this window are checked: later offsets are
+      * validated when their respective window is visited. A zero limit performs no scans
+      * or writes and leaves {@code next} unchanged. The returned high 32 bits contain the
+      * next ordinal in {@code [0,count]}, low 32 contain written count. All arrays must
+@@ -122,7 +125,8 @@
+             throw new IllegalArgumentException("output limit exceeds bounded window");
+         }
+         Objects.checkFromIndexSize(outputOffset, limit, output.length);
+-        if (output == orderedRows || output == physicalOffsets) {
++        if (output == orderedRows || output == physicalOffsets
++                || output == requiredMasks || output == forbiddenMasks) {
+             throw new IllegalArgumentException("source/output metadata alias");
+         }
+         for (int[] plane : statePlanes) {
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java b/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
+index c1c0bea..a6612fd 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java
+@@ -9,8 +9,10 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ import java.util.Arrays;
+ import java.util.BitSet;
+ import java.util.Collection;
++import java.util.Collections;
+ import java.util.function.UnaryOperator;
+ import java.util.Comparator;
++import java.util.List;
+ import java.util.Objects;
+ import java.util.RandomAccess;
+ import java.util.function.Predicate;
+@@ -110,6 +112,16 @@
+     @Override public void clear() { throw immutable(); }
+     @Override protected void removeRange(int begin, int end) { throw immutable(); }
+ 
++    @Override public void addFirst(E value) { throw immutable(); }
++    @Override public void addLast(E value) { throw immutable(); }
++    @Override public E removeFirst() { throw immutable(); }
++    @Override public E removeLast() { throw immutable(); }
++
++    /** Preserve no-op immutable refusal on the JDK21 reversed view as well. */
++    @Override public List<E> reversed() {
++        return Collections.unmodifiableList(super.reversed());
++    }
++
+     public int[] physicalIndices() { return Arrays.copyOfRange(positions, from, to); }
+ 
+     /** Detached copy; mutable callers cannot modify the canonical reference lane. */
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java b/m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java
+index 73d9011..c049870 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java
+@@ -1,5 +1,7 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ /*
+  * Copyright 2026 Hitesh Soliwal and contributors
++ * Modified 2026: copy wrapped exports and growth through two contiguous spans.
++ * Swift Collections segment-copy pattern evaluated; see qualification/swift-deque-spans-20261018.
+  * SPDX-License-Identifier: Apache-2.0
+  */
+ package com.m3.collections;
+@@ -260,9 +262,7 @@
+     @Override
+     public long[] toArray() {
+         long[] result = new long[size];
+-        for (int i = 0; i < size; i++) {
+-            result[i] = elements[physicalIndex(i)];
+-        }
++        copyElementsInto(result);
+         return result;
+     }
+ 
+@@ -337,13 +337,20 @@
+             throw new OutOfMemoryError("deque too large");
+         }
+         long[] grown = new long[elements.length << 1];
+-        for (int i = 0; i < size; i++) {
+-            grown[i] = elements[physicalIndex(i)];
+-        }
++        copyElementsInto(grown);
+         elements = grown;
+         head = 0;
+     }
+ 
++    /** Copies logical encounter order into a fresh array with room for all live elements. */
++    private void copyElementsInto(long[] destination) {
++        int firstLength = Math.min(size, elements.length - head);
++        System.arraycopy(elements, head, destination, 0, firstLength);
++        if (firstLength < size) {
++            System.arraycopy(elements, 0, destination, firstLength, size - firstLength);
++        }
++    }
++
+     private int physicalIndex(int logicalIndex) {
+         return (head + logicalIndex) & mask();
+     }
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java b/m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java
+index 7d4a3b8..31d199e 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java
+@@ -254,7 +254,73 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+             return last;
+         }
+ 
++        /**
++         * Only the final, first-party M3LongTreeSet supplies proven, signed-long
++         * indexed neighbors. Other M3LongSortedSet implementations retain the
++         * original cursor traversal, including order/callback validation.
++         * For a STRICT neighbor the query itself is a safe miss marker:
++         * an existing predecessor or successor cannot equal that query.
++         */
++        private long indexedSeek(long query, long fallback,
++                boolean forward, boolean inclusive) {
++            if (inclusive && contains(query)) return query;
++            long a = forward ? left.higher(query, query) : left.lower(query, query);
++            long b = forward ? right.higher(query, query) : right.lower(query, query);
++            boolean haveA = a != query;
++            boolean haveB = b != query;
++            switch (operation) {
++                case INTERSECTION -> {
++                    while (haveA && haveB) {
++                        int comparison = Long.compare(a, b);
++                        if (comparison == 0) return a;
++                        if (forward ? comparison < 0 : comparison > 0) {
++                            long next = neighbor(left, a, forward);
++                            haveA = next != a;
++                            a = next;
++                        } else {
++                            long next = neighbor(right, b, forward);
++                            haveB = next != b;
++                            b = next;
++                        }
++                    }
++                }
++                case DIFFERENCE -> {
++                    while (haveA) {
++                        if (!right.contains(a)) return a;
++                        long next = neighbor(left, a, forward);
++                        haveA = next != a;
++                        a = next;
++                    }
++                }
++                case SYMMETRIC_DIFFERENCE -> {
++                    while (haveA || haveB) {
++                        if (!haveA) return b;
++                        if (!haveB) return a;
++                        int comparison = Long.compare(a, b);
++                        if (comparison != 0) {
++                            return (forward ? comparison < 0 : comparison > 0) ? a : b;
++                        }
++                        long nextA = neighbor(left, a, forward);
++                        long nextB = neighbor(right, b, forward);
++                        haveA = nextA != a;
++                        haveB = nextB != b;
++                        a = nextA;
++                        b = nextB;
++                    }
++                }
++            }
++            return fallback;
++        }
++
++        private static long neighbor(M3LongSortedSet owner, long pivot,
++                boolean forward) {
++            return forward ? owner.higher(pivot, pivot) : owner.lower(pivot, pivot);
++        }
++
+         private long seek(long query, long fallback, boolean forward, boolean inclusive) {
++            if (left instanceof M3LongTreeSet && right instanceof M3LongTreeSet) {
++                return indexedSeek(query, fallback, forward, inclusive);
++            }
+             M3LongIterator cursor = iterator();
+             boolean found = false;
+             long last = 0L;
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java b/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java
+index ef1a953..37b669d 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java
+@@ -1,3 +1,4 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Modified 2026 by Hitesh Soliwal and contributors: preserve comparator metadata across filtered splits.
+ /*
+  * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+  * SPDX-License-Identifier: Apache-2.0
+@@ -18,6 +19,7 @@
+ import java.util.Set;
+ import java.util.SortedMap;
+ import java.util.SortedSet;
++import java.util.Spliterator;
+ import java.util.TreeMap;
+ import java.util.function.BiPredicate;
+ import java.util.function.Predicate;
+@@ -83,6 +85,10 @@
+         }
+ 
+         @Override public Comparator<? super E> comparator() { return source.comparator(); }
++        /** Keep the live iterator/size policy and retain ordering on split children. */
++        @Override public Spliterator<E> spliterator() {
++            return M3SlotSpliterators.sorted(this);
++        }
+ 
+         @Override public int size() {
+             int count = 0;
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java b/m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java
+index a212ea5..d20986b 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java
+@@ -8,11 +8,15 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+ import java.util.AbstractList;
+ import java.util.Arrays;
+ import java.util.BitSet;
++import java.util.Collection;
++import java.util.Collections;
+ import java.util.Comparator;
++import java.util.List;
+ import java.util.ConcurrentModificationException;
+ import java.util.Objects;
+ import java.util.RandomAccess;
+ import java.util.function.Predicate;
++import java.util.function.UnaryOperator;
+ import java.util.function.ToDoubleFunction;
+ 
+ /**
+@@ -32,8 +36,9 @@
+  *
+  * <p>This is a detached read-only M3 view, not a replacement concrete identity
+  * for {@code java.util.ArrayList}, {@code SortedSet} or another JDK collection.
+- * Mutation methods inherited from {@link AbstractList} refuse with
+- * {@link UnsupportedOperationException}.</p>
++ * Every mutator explicitly refuses with {@link UnsupportedOperationException},
++ * including empty/no-op bulk methods; reversed views retain the same strict
++ * immutable boundary instead of inheriting AbstractList's no-op paths.</p>
+  */
+ public final class M3ObjectIndexSnapshot<E> extends AbstractList<E> implements RandomAccess {
+     public enum Order {
+@@ -87,6 +92,35 @@
+         return (E) values[denseRow(index)];
+     }
+ 
++    /** Strict immutable mutation boundary, even for no-op writes or empty views. */
++    private static UnsupportedOperationException immutable() {
++        return new UnsupportedOperationException("immutable M3 object-index snapshot");
++    }
++
++    @Override public E set(int index, E value) { throw immutable(); }
++    @Override public void add(int index, E value) { throw immutable(); }
++    @Override public boolean add(E value) { throw immutable(); }
++    @Override public boolean addAll(Collection<? extends E> incoming) { throw immutable(); }
++    @Override public boolean addAll(int index, Collection<? extends E> incoming) { throw immutable(); }
++    @Override public E remove(int index) { throw immutable(); }
++    @Override public boolean remove(Object value) { throw immutable(); }
++    @Override public boolean removeAll(Collection<?> incoming) { throw immutable(); }
++    @Override public boolean retainAll(Collection<?> incoming) { throw immutable(); }
++    @Override public boolean removeIf(Predicate<? super E> test) { throw immutable(); }
++    @Override public void replaceAll(UnaryOperator<E> operator) { throw immutable(); }
++    @Override public void sort(Comparator<? super E> comparator) { throw immutable(); }
++    @Override public void clear() { throw immutable(); }
++    @Override protected void removeRange(int begin, int end) { throw immutable(); }
++    @Override public void addFirst(E value) { throw immutable(); }
++    @Override public void addLast(E value) { throw immutable(); }
++    @Override public E removeFirst() { throw immutable(); }
++    @Override public E removeLast() { throw immutable(); }
++
++    /** JDK21 reverse order is a view, but never a writable alias to a snapshot. */
++    @Override public List<E> reversed() {
++        return Collections.unmodifiableList(super.reversed());
++    }
++
+     public int physicalSlotAt(int index) {
+         return physicalSlots[denseRow(index)];
+     }
+diff --git a/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java b/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java
+index 30cf137..2fe08d8 100644
+--- a/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java
+@@ -1,3 +1,4 @@ com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
++// Modified 2026 by Hitesh Soliwal and contributors: retain lazy comparator lookup for filtered split children.
+ // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: Synexia-to-M3 package/type adaptation.
+ // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: late-binding collection adapters and comparator-preserving splits.
+@@ -10,7 +11,9 @@
+ import java.util.Objects;
+ import java.util.Spliterator;
+ import java.util.Spliterators;
++import java.util.SortedSet;
+ import java.util.function.Consumer;
++import java.util.function.Supplier;
+ 
+ /** Preserve encounter/comparator semantics for sequential and parallel stream boundaries. */
+ final class M3SlotSpliterators {
+@@ -35,15 +38,20 @@
+                 Objects.requireNonNull(action); if (!iterator.hasNext()) { return false; } action.accept(iterator.next()); return true;
+             }
+         };
+-        return withComparator(source, comparator);
++        return withComparator(source, () -> comparator);
+     }
+     static <E> Spliterator<E> sorted(Collection<E> collection, Comparator<? super E> comparator) {
+         return withComparator(Spliterators.spliterator(collection,
+-                Spliterator.ORDERED | Spliterator.SORTED | Spliterator.DISTINCT), comparator);
++                Spliterator.ORDERED | Spliterator.SORTED | Spliterator.DISTINCT), () -> comparator);
++    }
++    /** Preserve the SortedSet default's lazy comparator lookup as well as child order. */
++    static <E> Spliterator<E> sorted(SortedSet<E> collection) {
++        return withComparator(Spliterators.spliterator(collection,
++                Spliterator.ORDERED | Spliterator.SORTED | Spliterator.DISTINCT), collection::comparator);
+     }
+     /** JDK iterator batching returns array splits; retain custom ordering on each child. */
+     private static <E> Spliterator<E> withComparator(
+-            Spliterator<E> source, Comparator<? super E> comparator) {
++            Spliterator<E> source, Supplier<Comparator<? super E>> comparator) {
+         return new Spliterator<>() {
+             @Override public boolean tryAdvance(Consumer<? super E> action) {
+                 return source.tryAdvance(action);
+@@ -57,7 +65,7 @@
+             }
+             @Override public long estimateSize() { return source.estimateSize(); }
+             @Override public int characteristics() { return source.characteristics(); }
+-            @Override public Comparator<? super E> getComparator() { return comparator; }
++            @Override public Comparator<? super E> getComparator() { return comparator.get(); }
+         };
+     }
+ }

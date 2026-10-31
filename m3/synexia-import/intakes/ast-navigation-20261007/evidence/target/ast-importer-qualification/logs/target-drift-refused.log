@@ -1,0 +1,3 @@
+Exception in thread "main" java.lang.IllegalStateException: M3JDK21 target drift: m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTPrecompute.java expected=7baae702ff9c58180329df4b2c9947d3f2d6247fca37757d9656b8ec776460b7 actual=2ffb8e8ac35ec3c8c85de51ed8b14ebc8eb589b4969248a684994eba013fb42a
+	at com.m3.synexia.importer.SynexiaImporter.verify(SynexiaImporter.java:37)
+	at com.m3.synexia.importer.SynexiaImportCli.main(SynexiaImportCli.java:22)

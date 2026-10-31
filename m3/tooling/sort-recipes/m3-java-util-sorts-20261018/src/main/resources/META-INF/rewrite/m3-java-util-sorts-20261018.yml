@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.JavaUtilSorts20261018
+displayName: M3JDK21 additive java.util sorting candidate
+description: Source-sealed Java and text recipe composition for the 2026-10-18 sorting packet.
+tags:
+  - m3
+  - sorting
+  - candidate-only
+recipeList:
+  - com.synexia.rewrite.sorts.M3JavaUtilSortsRecipe

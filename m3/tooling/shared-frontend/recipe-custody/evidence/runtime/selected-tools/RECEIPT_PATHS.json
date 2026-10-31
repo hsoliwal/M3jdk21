@@ -1,0 +1,134 @@
+[
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/RECEIPT.json",
+    "retained_path": "RECEIPT.json",
+    "sha256": "a215edc13ebd547a0a8905f0e9b97b050b59a898da17d21e6f7875a4dff28132",
+    "bytes": 9896
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/commands.json",
+    "retained_path": "commands.json",
+    "sha256": "5525a091c57a6307a6c0fbde77c7df58d5f1619a6e7bd60650d9e07acea18bae",
+    "bytes": 4347
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/combined-tool-lock.json",
+    "retained_path": "combined-tool-lock.json",
+    "sha256": "8717998bb1a4aecb83dc542f4e9a43611b9837e2c6f99984a6440aa284630c91",
+    "bytes": 127728
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/linked/RECEIPT.json",
+    "retained_path": "linked-image-receipt.json",
+    "sha256": "a92733ee24421ff8d706340bb3ca053cc9acc9e46d96a37ce19c775aab4fe3ef",
+    "bytes": 76374
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/linked/IMAGE_SHA256.tsv",
+    "retained_path": "IMAGE_SHA256.tsv",
+    "sha256": "5f0f697854250a32b96195f6952b9e836a9709ef5cfd9f31cff07f31eb335701",
+    "bytes": 63809
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/linked/MODULES.tsv",
+    "retained_path": "MODULES.tsv",
+    "sha256": "eb2ecedc11b233c282661c4d0b6b9691d52995663b8900cc3f3936457c770537",
+    "bytes": 14838
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/linked/JDK_RELEASE.txt",
+    "retained_path": "JDK_RELEASE.txt",
+    "sha256": "5a3d73c8957e7fcb0da466afc0be260adeaddbf8bb04ad82ebb562710c2989de",
+    "bytes": 1223
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/linked/logs/installed-inventory.tsv",
+    "retained_path": "installed-inventory.tsv",
+    "sha256": "eb2ecedc11b233c282661c4d0b6b9691d52995663b8900cc3f3936457c770537",
+    "bytes": 14838
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/linked/logs/inventory-replay.tsv",
+    "retained_path": "inventory-replay.tsv",
+    "sha256": "eb2ecedc11b233c282661c4d0b6b9691d52995663b8900cc3f3936457c770537",
+    "bytes": 14838
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/project with spaces/maven-trace.tsv",
+    "retained_path": "maven-trace.tsv",
+    "sha256": "dfe57eb985737fbef1ea1e88a155bb594ad0d26573c174eae69db5ebddf5b975",
+    "bytes": 655
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/project with spaces/slots.tsv",
+    "retained_path": "slots.tsv",
+    "sha256": "9738b5684d3873cc670a90f271c37e705ad9a026d31584ddcc2cdadab85258d1",
+    "bytes": 145
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/project with spaces/review.patch",
+    "retained_path": "review-patch.txt",
+    "sha256": "4f920121fd38d9d6b095411649de9e596188a647b97ef611502ff1bd504a9148",
+    "bytes": 752
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/logs/build-selected-image.txt",
+    "retained_path": "logs/build-selected-image.txt",
+    "sha256": "b89405e7b477262393cfce2d1cd60b698bd19bc30fcbb412723d77f357425c8f",
+    "bytes": 68
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/logs/maven-before-relocation.txt",
+    "retained_path": "logs/maven-before-relocation.txt",
+    "sha256": "95b3ac32855d52627e9ff79c89fb2b1e542001094a5c8b703dce41041c1b5673",
+    "bytes": 361
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/logs/rewrite-before-relocation.txt",
+    "retained_path": "logs/rewrite-before-relocation.txt",
+    "sha256": "70aba104ec96f47eb9ab6de7b489f7f5e491ed04c0f73d2641c1cb2399451159",
+    "bytes": 940
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/logs/maven-after-relocation.txt",
+    "retained_path": "logs/maven-after-relocation.txt",
+    "sha256": "ef33684fe5e60217df6d11321e3faa9f996a30c87b555763053e41b7ede6e9be",
+    "bytes": 391
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/logs/rewrite-after-relocation.txt",
+    "retained_path": "logs/rewrite-after-relocation.txt",
+    "sha256": "70aba104ec96f47eb9ab6de7b489f7f5e491ed04c0f73d2641c1cb2399451159",
+    "bytes": 940
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/logs/maven-compile.txt",
+    "retained_path": "logs/maven-compile.txt",
+    "sha256": "382506ddc56352da57a9c6d7ef0a796872746d4ccf74ab626be2efde701c1aef",
+    "bytes": 1092
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/logs/compiled-program.txt",
+    "retained_path": "logs/compiled-program.txt",
+    "sha256": "8b85518672bb6350f95a49cc1ed31c6bb23ee655194ee2bac7d6b3769eaf7e0d",
+    "bytes": 10
+  },
+  {
+    "original_path": "/tmp/m3-selected-tools-final-v3-20261017/logs/typed-java-recipe.txt",
+    "retained_path": "logs/typed-java-recipe.txt",
+    "sha256": "1486e24f89c82c6e260841d2b118a3b98fe56cf13777e70961a1a00b1dda5481",
+    "bytes": 336
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/build-work/native-maven-sdk-pack-lock.json",
+    "retained_path": "maven-input-lock.json",
+    "sha256": "13231a58122efbf7269810a1dba934ec8663833adbf738c32f25b36b2e65e03f",
+    "bytes": 59183
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-pack-sdk-proof/openrewrite-lock.json",
+    "retained_path": "openrewrite-input-lock.json",
+    "sha256": "a847e6c9c8f89a1d0c9be9aaf047d3ffa64a65fb33d4ec7dcabfa08d8d1619a8",
+    "bytes": 67998
+  }
+]

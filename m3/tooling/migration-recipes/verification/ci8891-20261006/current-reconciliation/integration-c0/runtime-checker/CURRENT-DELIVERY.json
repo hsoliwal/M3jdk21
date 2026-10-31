@@ -1,0 +1,386 @@
+{
+  "canonicalOutputPublication": false,
+  "custodyBoundary": "Absolute paths identify original receipts. Each unchanged PROJECT-READY.json and SOURCE-CLOSURE.json specifies its own reconstruction. No aggregate archive or readiness schema is introduced.",
+  "latestHeadIntegrationClaimed": false,
+  "mode": "TASK_AND_EVIDENCE_ONLY",
+  "packages": [
+    {
+      "basePhysicalRows": 49,
+      "executionPhysicalRows": 24,
+      "name": "rf0",
+      "namespace": "runtime-checker",
+      "package": {
+        "archiveOnlyProjectFiles": 0,
+        "bundle": {
+          "bytes": 209211,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/bundle/BUNDLE.json",
+          "sha256": "802f254d1d4639a5bd0f436756bf1b43c418844828db6e2b07f9e8a0797628b1"
+        },
+        "execution": {
+          "bytes": 1666,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/root-packaging-v1/RESULT.json",
+          "sha256": "3b64210c1e2319d226d21416c3086e7141a3cadc46001c9cc06a50a75ca66af4"
+        },
+        "flatProjectFiles": 16,
+        "hermetic": false,
+        "logicalFiles": 1333,
+        "projectReady": {
+          "bytes": 11481,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/PROJECT-READY.json",
+          "sha256": "03f1526e6fe12de19323ecc03eb7c10a30e8b48a9d4594ab6a81f4502e6e7bf0"
+        },
+        "readback": {
+          "bytes": 1399571,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/READBACK.json",
+          "sha256": "76a4ef8194190c082833aaeed067653c3ce7ebcd4d0a52c7f82fd07995c3def6"
+        },
+        "status": "PASS_SELECT_PACK_VERIFY_EXTRACT_FINISH"
+      },
+      "producer": {
+        "additions": 0,
+        "canonicalProductionApplied": false,
+        "junit": {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 7
+        },
+        "output": {
+          "bytes": 6331,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/producer-v1/generated-candidate/OUTPUT.json",
+          "sha256": "0c5889046c2e4e8962f02071b0ba6a9ae6a8b2fc82f2d62cd2cc1687b62f605c"
+        },
+        "replacements": 3,
+        "result": {
+          "bytes": 7113,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/producer-v1/RESULT.json",
+          "sha256": "c4cb9608ab895490158236e93334b83eea1996f454d8085c454676e3fea37e75"
+        },
+        "status": "PASS_FOCUSED_PRODUCER",
+        "targets": 3
+      },
+      "semantic": {
+        "bodyRequiredFiles": 250,
+        "compiledIdentityOnlyFiles": 1,
+        "completedCommands": [
+          "python-runtime-observation",
+          "git-loader-observation",
+          "rfc-syntax-patch-contract"
+        ],
+        "observedBooleans": {
+          "checkerSemanticallyExecuted": false,
+          "consumerQualified": false,
+          "fullM3RuntimeQualified": false,
+          "fullOpenJdkBuildQualified": false,
+          "fullReceiverQualified": false,
+          "jniQualified": false,
+          "priorReceivingGateQualificationInherited": false,
+          "productionPromotion": false,
+          "rfcSyntaxPatchControlsQualified": true,
+          "systemLoaderAndSharedLibraryClosureComplete": false
+        },
+        "prerequisite": {
+          "applicability": "RF0_INTERMEDIATE_STAGE_BEFORE_PHC_FOUNDATION",
+          "controller": {
+            "bytes": 25470,
+            "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/semantic-authoring-v1/rfc_semantic_capture_v4.py",
+            "sha256": "bd30b628d4aac3e486fbfb9d646b50c0dd92b742bb2071b2156307fe495f178b"
+          },
+          "plan": {
+            "bytes": 126297,
+            "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/semantic-authoring-v1/SEMANTIC-PLAN-v4.json",
+            "sha256": "2a39e5803e2e7bfc6fab4bc467cf9f50b3005d79f2aa081e29e7f061b0f4e554"
+          },
+          "priorStop": {
+            "bytes": 7602,
+            "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v1/RESULT.json",
+            "sha256": "0954ce5327412705d8a44e11feee952d4722aa358889c082016e3cd3a251fc22"
+          },
+          "result": {
+            "bytes": 50611,
+            "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/RESULT.json",
+            "sha256": "b5a579eb42c8b306f7ef505e73b04d25a7fb91d5fd117157bc0d16fa47d7df90"
+          },
+          "rootReadback": {
+            "bytes": 9057,
+            "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/ROOT-READBACK-v1.json",
+            "sha256": "3226e1540c13cd47ff3bf8ddf386ce5a94d564084d065b183a1f51872bb2081d"
+          }
+        },
+        "result": {
+          "bytes": 50611,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/semantic-v2/RESULT.json",
+          "sha256": "b5a579eb42c8b306f7ef505e73b04d25a7fb91d5fd117157bc0d16fa47d7df90"
+        },
+        "selectionManifest": {
+          "bytes": 83818,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/semantic-selection-v2/SEMANTIC-SELECTION.json",
+          "sha256": "fdaf5f4cd76e855f09bacba1c4a5e1efb53b143936f28399211395396d534bff"
+        },
+        "status": "PASS_RFC_SYNTAX_PATCH_CONTROLS_RECEIVING_PENDING"
+      }
+    },
+    {
+      "basePhysicalRows": 54,
+      "executionPhysicalRows": 24,
+      "name": "ph0",
+      "namespace": "pattern-hidden",
+      "package": {
+        "archiveOnlyProjectFiles": 0,
+        "bundle": {
+          "bytes": 235613,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/bundle/BUNDLE.json",
+          "sha256": "58abf51a90e8af9ac295713523a31f0fa2be639b98bf262c6aea5dd7f1cfbb46"
+        },
+        "execution": {
+          "bytes": 1660,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/root-packaging-v1/RESULT.json",
+          "sha256": "299a13001d3f4626204f44f6d56d9ba2b2dbe35f12085ee133e01e636f378e41"
+        },
+        "flatProjectFiles": 20,
+        "hermetic": false,
+        "logicalFiles": 1503,
+        "projectReady": {
+          "bytes": 14401,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/PROJECT-READY.json",
+          "sha256": "6709723bb4dfc2072b24341cfe3fbe38cbfbbe9ebcb9b9a413543c43a8fa9b35"
+        },
+        "readback": {
+          "bytes": 1388548,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/READBACK.json",
+          "sha256": "c2828962cff591eb221f79768d35ea9c33fb3305b39afc47f2cd33f95a3f8dac"
+        },
+        "status": "PASS_SELECT_PACK_VERIFY_EXTRACT_FINISH"
+      },
+      "producer": {
+        "additions": 0,
+        "canonicalProductionApplied": false,
+        "junit": {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 7
+        },
+        "output": {
+          "bytes": 10288,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/evidence/producer-v1/generated-candidate/OUTPUT.json",
+          "sha256": "ba2ed5b84a02947382b7acb14908f1e1fbaac9c655ff31dc0a33508e09b83cfd"
+        },
+        "replacements": 5,
+        "result": {
+          "bytes": 8027,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/evidence/producer-v1/RESULT.json",
+          "sha256": "69f0cdbc45ced316f259d868ecb4f931fa275e6d9e1cbafbb65b1fd77ea9b9ec"
+        },
+        "status": "PASS_FOCUSED_PRODUCER",
+        "targets": 5
+      },
+      "semantic": {
+        "bodyRequiredFiles": 125,
+        "compiledIdentityOnlyFiles": 16,
+        "completedCommands": [
+          "compile-fixture",
+          "three-image-documentation-contract",
+          "metadata-preservation-controls"
+        ],
+        "observedBooleans": {
+          "consumerQualified": false,
+          "fullM3RuntimeQualified": false,
+          "fullReceiverQualified": false,
+          "oldPatternTypedFixtureQualified": false,
+          "phcFocusedSemanticQualified": true,
+          "primaryGroupQualified": false,
+          "productionPromotion": false,
+          "systemLoaderAndSharedLibraryClosureComplete": false
+        },
+        "prerequisite": {
+          "applicability": "PH0_FIVE_OUTPUT_STAGE_AFTER_RF0",
+          "controller": {
+            "bytes": 17241,
+            "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/semantic-authoring-v2/phc_semantic_capture_v2.py",
+            "sha256": "34738f0d45392f54ca2814b7099c719686caf439fc8f593484f3950c4e206a99"
+          },
+          "plan": {
+            "bytes": 32120,
+            "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/semantic-authoring-v2/SEMANTIC-PLAN.json",
+            "sha256": "85fa6321cfa8ab3fe9481e16bf748433574c75cbe658eca4be24a682cd5fa3f6"
+          },
+          "priorStop": {
+            "bytes": 9408,
+            "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/evidence/phc-semantic-v1/RESULT.json",
+            "sha256": "867839c90c474b42c91f5a80a225a47c4292041e4ea0c2e3c677fed05d81e8ea"
+          },
+          "result": {
+            "bytes": 9289,
+            "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/evidence/phc-semantic-v2/RESULT.json",
+            "sha256": "b55db37bc651351cf6d8cd765b5944f107b75565500974eff10ca3359a070bfd"
+          },
+          "rootReadback": {
+            "bytes": 5151,
+            "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/evidence/phc-semantic-v2/ROOT-READBACK-v1.json",
+            "sha256": "ff021b1b06b2fa8a430667a79fbf7ee31091bfbc32f8f6fcf911e308fb2c83fd"
+          }
+        },
+        "result": {
+          "bytes": 9289,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/evidence/phc-semantic-v2/RESULT.json",
+          "sha256": "b55db37bc651351cf6d8cd765b5944f107b75565500974eff10ca3359a070bfd"
+        },
+        "selectionManifest": {
+          "bytes": 44271,
+          "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/semantic-selection-v1/SEMANTIC-SELECTION.json",
+          "sha256": "54ed59514dfd08ffb714b1590b780825f0f04ac4d754ebd5da7b43b2b1f7960a"
+        },
+        "status": "PASS_PHC_FOCUSED_SEMANTICS"
+      }
+    }
+  ],
+  "parentCheckpoint": "PARENT-CHECKPOINT.json",
+  "physicalSelection": {
+    "executionRows": 48,
+    "explanatoryEnvelopes": [
+      "CURRENT-DELIVERY.json",
+      "CURRENT-DELIVERY.md",
+      "PARENT-CHECKPOINT.json"
+    ],
+    "immutablePackageRows": 103,
+    "originalSupplierDictionariesPreserved": true,
+    "priorCheckBodies": 5,
+    "totalNewRows": 159
+  },
+  "preservedPairedFiles": 507,
+  "proofSourceCommit": "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c",
+  "proofTargetCommit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "receiving": {
+    "attemptedCommands": 2,
+    "commandReportCounts": [
+      {
+        "counts": {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "suites": 77,
+          "tests": 344
+        },
+        "exitCode": 0,
+        "id": "dag-install-prerequisite"
+      },
+      {
+        "counts": {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "suites": 92,
+          "tests": 422
+        },
+        "exitCode": 1,
+        "id": "full-reactor-clean-verify"
+      }
+    ],
+    "completedCommands": [
+      "dag-install-prerequisite"
+    ],
+    "consumerQualified": false,
+    "countsAreSeparatePerCommand": true,
+    "failure": {
+      "message": "command failed: full-reactor-clean-verify",
+      "scope": "COMMAND_OR_OBSERVATION",
+      "stage": "full-reactor-clean-verify",
+      "type": "RuntimeError"
+    },
+    "fullOpenJdkBuildQualified": false,
+    "fullReceiverQualified": false,
+    "hostedWorkflowExecuted": false,
+    "otherGroups": [
+      {
+        "id": "bridge",
+        "reason": "Separate primary-only observation epoch; full receiving remains pending",
+        "status": "NOT_EXECUTED",
+        "unexecutedCommands": [
+          "gatherer-current-fixture-javac",
+          "gatherer-current-docs",
+          "gatherer-current-guard-lowering",
+          "gatherer-current-manifest",
+          "gatherer-current-live-fixed-point",
+          "gatherer-original-materializer-tests",
+          "prepared-inputs-regressions",
+          "tq-sync-generation",
+          "tq-sync-custody",
+          "tq-sync-current-regressions",
+          "lane-generation",
+          "tq-generation",
+          "tq-custody",
+          "tq-current-regressions",
+          "lane-current-custody",
+          "lane-current-regressions",
+          "lane-migration-validation",
+          "foundation-current-regressions",
+          "foundation-ci-generation",
+          "foundation-image-generation",
+          "foundation-current-custody",
+          "jep493-workflow-structure",
+          "pattern-documentation-javac",
+          "pattern-documentation-contract",
+          "pattern-metadata-regressions",
+          "jep485-packet",
+          "jep485-project"
+        ]
+      },
+      {
+        "id": "legacy-example",
+        "reason": "Separate primary-only observation epoch; full receiving remains pending",
+        "status": "NOT_EXECUTED",
+        "unexecutedCommands": [
+          "legacy-example-packet",
+          "legacy-example-project"
+        ]
+      },
+      {
+        "id": "collection-467",
+        "reason": "Separate primary-only observation epoch; full receiving remains pending",
+        "status": "NOT_EXECUTED",
+        "unexecutedCommands": [
+          "jep-467-markdown-validate",
+          "jep-467-markdown-project"
+        ]
+      },
+      {
+        "id": "collection-493",
+        "reason": "Separate primary-only observation epoch; full receiving remains pending",
+        "status": "NOT_EXECUTED",
+        "unexecutedCommands": [
+          "jep-493-runtime-image-validate",
+          "jep-493-runtime-image-project"
+        ]
+      },
+      {
+        "id": "legacy-jep458",
+        "reason": "Separate primary-only observation epoch; full receiving remains pending",
+        "status": "NOT_EXECUTED",
+        "unexecutedCommands": [
+          "jep458-packet",
+          "jep458-project"
+        ]
+      }
+    ],
+    "remainingPrimary": [
+      "classver",
+      "public-javap",
+      "default-main",
+      "dgc-javac",
+      "dgc-java"
+    ],
+    "result": {
+      "bytes": 83386,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed/primary-observation-v1/RESULT.json",
+      "sha256": "38b49d749921719b3773eeb8b10da1d0fc0461c3e483bdd7970c95797ab84ede"
+    },
+    "rootReadback": {
+      "bytes": 81525,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed/primary-observation-v1/ROOT-READBACK-v1.json",
+      "sha256": "c90c38328817d8f3bdccd784afb3f2e2f3b9754748203a2c166e968cca028295"
+    },
+    "status": "PRIMARY_ONLY_STOP"
+  },
+  "schema": "m3.composed.current-delivery/1"
+}

@@ -1,0 +1,39 @@
+{
+  "consumerQualified": false,
+  "end": "2026-10-06T06:48:35.158229+00:00",
+  "inputPinsRechecked": 2879,
+  "proofGatesExecuted": false,
+  "receipts": [
+    {
+      "bytes": 1641,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/pack.json",
+      "sha256": "07a504cf806e1a22e5928fa3001fcedd77ebef6e229f1ac05376e15aa36f1a44"
+    },
+    {
+      "bytes": 1634,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/verify.json",
+      "sha256": "9ddb0ddbf2b0bd1ec544fede9ff28173a0a1f5bacc0fbfac99c863385d3cc16f"
+    },
+    {
+      "bytes": 2041,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/extract.json",
+      "sha256": "c7e8bdf603ff112623f7a43c991eecb6425f7ee9be8a0ad91e3cb0ce00f8f8aa"
+    },
+    {
+      "bytes": 1992,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/readback.json",
+      "sha256": "73f754fc88220e2ec709fe481d485f3ad042a8f9e625900be99931c2c133b2b2"
+    }
+  ],
+  "rootCommand": {
+    "bytes": 3012,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/COMMAND.json",
+    "sha256": "13f18298ec8594e6c70c8f632cd7184ad8f971dbde6b4c8a265632e565d5cd64"
+  },
+  "spec": {
+    "bytes": 1054690,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/PACKAGE-SPEC.json",
+    "sha256": "a9124171aa9417d38be38ab8e634f41135126fb4650cce188c071d137c37a1e0"
+  },
+  "status": "PASS_PACKAGE_VERIFY_EXTRACT_AND_READBACK"
+}

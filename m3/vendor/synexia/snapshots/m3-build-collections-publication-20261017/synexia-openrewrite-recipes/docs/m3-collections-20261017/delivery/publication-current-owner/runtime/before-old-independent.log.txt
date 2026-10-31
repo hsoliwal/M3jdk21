@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.AssertionError: M3 predicate cast propagation: missing ClassCastException
+	at com.synexia.common.collections.M3WrapperSemanticContract.fails(M3WrapperSemanticContract.java:61)
+	at com.synexia.common.collections.M3WrapperSemanticContract.collectionContracts(M3WrapperSemanticContract.java:107)
+	at com.synexia.common.collections.M3WrapperSemanticContract.main(M3WrapperSemanticContract.java:464)

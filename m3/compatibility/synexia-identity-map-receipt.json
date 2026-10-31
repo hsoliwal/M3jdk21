@@ -1,0 +1,73 @@
+{
+  "schema": "M3JDK21_SYNEXIA_IDENTITY_MAP_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-identity-map-20261008",
+    "pullRequest": 9810,
+    "commit": "0ae6771b299",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.IdentityMap",
+    "crate": "m3-identity-map",
+    "donors": [
+      {
+        "path": "synexia-primitives/src/main/java/com/synexia/primitives/DenseIdentityHashMap.java",
+        "blob": "096e3216",
+        "target": "com.m3.collections.M3ObjectIdentityMap"
+      },
+      {
+        "path": "synexia-primitives/src/main/java/com/synexia/primitives/DenseIdentityHashSet.java",
+        "blob": "5f51ee0c",
+        "target": "com.m3.collections.M3ObjectIdentitySet"
+      }
+    ],
+    "license": "Apache-2.0 first-party",
+    "disposition": "ADAPT: donor mechanics kept, DenseHash helper inlined, API renamed to the JDK/M3 shape, modCount added"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "bac0108267c93ecdd702f06609828f9953278eef",
+    "owners": [
+      "com.m3.collections.M3ObjectIdentityMap",
+      "com.m3.collections.M3ObjectIdentitySet"
+    ],
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIdentityMap.java",
+      "before": "ABSENT",
+      "after": "0e6e12dd48b62b8606de078e25a0b3a75b6d741d11bf9b5927d730d2f0110bd3",
+      "resource": "00-M3ObjectIdentityMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIdentitySet.java",
+      "before": "ABSENT",
+      "after": "6d6b6f58113a44438c721cd645efa45ac6c0f63842b164ebb33a94dce4066e3d",
+      "resource": "01-M3ObjectIdentitySet.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectIdentityTest.java",
+      "before": "ABSENT",
+      "after": "9d7a4f6d385ef013f868f5a1984f28e73537952eacc81f5854611ecaafc98746",
+      "resource": "02-M3ObjectIdentityTest.java.txt"
+    }
+  ],
+  "gates": {
+    "m3CollectionsModuleCompile": "PASS_WINDOWS -Xlint:all,-module -Werror (31 sources)",
+    "m3CollectionsModuleTests": "PASS_WINDOWS 43/43 (differential vs IdentityHashMap and identity set)",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3IdentityMapRecipeTest 2/2",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "jdkBuildJtregRuntime": "PENDING_LINUX",
+    "ci": "PENDING"
+  },
+  "semanticDecisions": [
+    "== keys with System.identityHashCode; null key sidecar; null values legal (JDK IdentityHashMap contract)",
+    "putIfAbsent replaces a null-valued mapping (java.util.Map default); remove(k,v) compares values by identity (JDK IdentityHashMap)",
+    "forEach is fail-fast after traversal, as the JDK's",
+    "object-space owner: reference lanes, not primitive lanes; no entry objects"
+  ]
+}

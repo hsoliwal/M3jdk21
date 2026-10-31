@@ -1,0 +1,263 @@
+{
+  "schema": "m3-indexed-eclipse-source-custody/v1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "metadataLicense": "Apache-2.0; original Eclipse and Apache donor payload rights remain unchanged",
+  "disposition": "PENDING_SOURCE_CUSTODY_ONLY",
+  "source": {
+    "repository": "hsoliwal/eclipse-collections",
+    "parent": "e460a03da7ac45602f795e4bd9783b2a03de09c0",
+    "commit": "7ead4f8b958b498e3de691dfe70f9efeef97edad",
+    "tree": "8e548f00c6da0e3077b21ffca4435233f0ed3de2",
+    "pullRequest": "https://github.com/hsoliwal/eclipse-collections/pull/11",
+    "filesVerifiedAgainstRemoteCommit": true
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "parent": "677437be295b23f7ccf7409be287008944d0e8b0",
+    "baseTree": "bb8a0483b84cafe1d55abc347a0bbc93a6ae60b4",
+    "prefix": "m3/collections/receiving/eclipse-indexed-rb-20261019/",
+    "compiledRootsOrDependenciesChanged": false,
+    "receivingSequenceAdvanced": false,
+    "sequence": "String -> arrays -> collections -> AST/compiler -> remaining families",
+    "runtimeDependencyOnSynexia": false
+  },
+  "sourcePacket": {
+    "manifestSha256": "db92fc04b7f72c28461d6b34970f76a23028e4bf33f396a23c6760c0d8447301",
+    "fileCount": 23,
+    "canonicalBytes": 174988,
+    "productionJavaFiles": 5,
+    "normalJupiterClasses": 3,
+    "files": [
+      {
+        "path": "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/IndexedRedBlackMap.java",
+        "bytes": 15585,
+        "sha256": "07c7f5a64d5c40a729d786412ab46432a6b30ac9791ec71375d243211a37eb16",
+        "gitBlob": "6fcae43e38dddf57327695a33bbd8af840368ab5",
+        "mode": "100644"
+      },
+      {
+        "path": "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/IndexedRedBlackTree.java",
+        "bytes": 15663,
+        "sha256": "4a2a723c135bc46590069491a8675d8d470c44d8c83f9087048077e90dcc755a",
+        "gitBlob": "7f45ce40d39c40839e383b8b65ae25afc0ff5939",
+        "mode": "100644"
+      },
+      {
+        "path": "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/IndexedSortedMap.java",
+        "bytes": 18831,
+        "sha256": "632204c5cc96775dc5809c30a33e6c9f569b3cf90cc0d5260305c18b868405c2",
+        "gitBlob": "cfc8c95785f56b2d607f718caf1f570a3912cb31",
+        "mode": "100644"
+      },
+      {
+        "path": "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/IndexedTreeArena.java",
+        "bytes": 10105,
+        "sha256": "e12c41963cf7dad3a3bda058397de6863e3393443cbbfb74ee8fe26918d97ac3",
+        "gitBlob": "9a50a4e1fc4c5c00d203a53e343bb6ec7af0c8e2",
+        "mode": "100644"
+      },
+      {
+        "path": "eclipse-collections/src/main/java/com/m3/collections/eclipse/impl/map/sorted/mutable/TreeSortedMap.java",
+        "bytes": 14092,
+        "sha256": "60a96dcbe95c90295e989daf5053401b7f4dcba940e383c2b13f77e17742bd4c",
+        "gitBlob": "6c81f3cb507c452c448c598b22c14d4d06eb88fc",
+        "mode": "100644"
+      },
+      {
+        "path": "m3/indexed-rb/CATALOGUE.json",
+        "bytes": 10262,
+        "sha256": "460b7654dc800a799eab2b0b12e0d01949d4db6fe86dea3823022ac9f3592653",
+        "gitBlob": "bc1343458fe6510650ff86d01bbf8479e9fe0d8f",
+        "mode": "100644"
+      },
+      {
+        "path": "m3/indexed-rb/EC_INDEXED_RB_RECIPE_V1.json",
+        "bytes": 2990,
+        "sha256": "3be56902188c143e403b753dae5ab798dbbebfeed1578b8b4897969f666c7929",
+        "gitBlob": "7225d18beba0f933b99984549e4c308ed9284d77",
+        "mode": "100644"
+      },
+      {
+        "path": "m3/indexed-rb/FOSS_REUSE_DECISION.tsv",
+        "bytes": 1140,
+        "sha256": "376bf4e94cc72c81c3c12e30b0e59bb019d7c2563b68d6821fccdf3a2e493c27",
+        "gitBlob": "7cfba6c84effbc887f739b5817e797089accace4",
+        "mode": "100644"
+      },
+      {
+        "path": "m3/indexed-rb/LICENSE-APACHE-2.0.txt",
+        "bytes": 11360,
+        "sha256": "c1d1a38c99c48ccad170890ade6066e2e240bb6ce59861d4eb7f672eddd2a4c6",
+        "gitBlob": "c8118641cddd58f5b8f175c4ec91b8e69b65e97c",
+        "mode": "100644"
+      },
+      {
+        "path": "m3/indexed-rb/NOTICE-APACHE.txt",
+        "bytes": 182,
+        "sha256": "51c1300b48378217bbe0f93299065ea7999b9285860f2aa7e38958fb63b4fbda",
+        "gitBlob": "bd519aca0e943f3155b615953f410eb935f2c801",
+        "mode": "100644"
+      },
+      {
+        "path": "m3/indexed-rb/PROOF_SCOPE.json",
+        "bytes": 13197,
+        "sha256": "ff3634f2619d481e87cdfc8d1b8fb0f17d6a088719e44edad4eb922a69a79384",
+        "gitBlob": "9bb505452ed3a5b7110a1a94567d72dcbdb8038e",
+        "mode": "100644"
+      },
+      {
+        "path": "m3/indexed-rb/PROVENANCE.md",
+        "bytes": 2137,
+        "sha256": "85bc83467d13b8f9631bc845159fe787901225ffa5f33db11615a4a3c2a17567",
+        "gitBlob": "863c086819e0b34a9f789b773cb6df42e8be9bed",
+        "mode": "100644"
+      },
+      {
+        "path": "m3/indexed-rb/PURE_RECIPE_PROOF_R3.json",
+        "bytes": 281,
+        "sha256": "27927b38d515c488612a4d742b4cc29325c6f6c1ff032be6b319c81f98385318",
+        "gitBlob": "8946869d2ab9fea4be8e3d4d2ad49476c61ab9d7",
+        "mode": "100644"
+      },
+      {
+        "path": "m3/indexed-rb/README.md",
+        "bytes": 1678,
+        "sha256": "de51f24bc21a5b9814e0bc4ac13d7049a104a46d326be89c9dc865db9dccc0d5",
+        "gitBlob": "9043801d55d3afe0b9c7805c0f5d1c3be0b9d6a3",
+        "mode": "100644"
+      },
+      {
+        "path": "m3/indexed-rb/THIRD_PARTY_NOTICES.md",
+        "bytes": 1536,
+        "sha256": "3d2f3711e70c5756e3ab3a755f142a65c2c7b801a3036040fbef83542e0e6866",
+        "gitBlob": "c9a91f8ed48e169b795ea9b797599cd879959705",
+        "mode": "100644"
+      },
+      {
+        "path": "m3/indexed-rb/apply_recipe.py",
+        "bytes": 1707,
+        "sha256": "e1c79568356d6fe0ece6e0a596ae7aa58112a6ebd7bc07c9912d61eda54ca313",
+        "gitBlob": "0601829065af9451660dabc2b646ea7a5a42115d",
+        "mode": "100644"
+      },
+      {
+        "path": "m3/indexed-rb/proofs/IndexedRedBlackMapProof.java",
+        "bytes": 6581,
+        "sha256": "3c3278579bf0f12873811c35ae67235ded089f82e16f0f81dc2fc85cab56e59d",
+        "gitBlob": "fd163ae346d30cca4d1570f72d557bef0d34798f",
+        "mode": "100644"
+      },
+      {
+        "path": "m3/indexed-rb/proofs/IndexedRedBlackTreeProof.java",
+        "bytes": 10283,
+        "sha256": "dd1fa99056a4f74566bc6c09366903e8f35d3d19660412dcfba70a0ec6dc8f85",
+        "gitBlob": "0fa66b69771b79062fcae08bfa25b5a3d4d090f6",
+        "mode": "100644"
+      },
+      {
+        "path": "m3/indexed-rb/proofs/IndexedTreeArenaTest.java",
+        "bytes": 15531,
+        "sha256": "42d46bb63d6b8792f919f66e3b437e9ace21828f5e3923da55e50c34f9b5349c",
+        "gitBlob": "c6b2c038ed3395eb1a098d82b5bc2282fae61fb3",
+        "mode": "100644"
+      },
+      {
+        "path": "unit-tests/src/test/java/com/m3/collections/eclipse/impl/map/sorted/mutable/ComparatorPutAllCallbackOrderTest.java",
+        "bytes": 7675,
+        "sha256": "9ef1201c895e06fefedfdfd4aefcf01c28ee807add532294887afecdec4a27d7",
+        "gitBlob": "cc5486b0c93a1da5b35a6ae101acf43dcaa7553f",
+        "mode": "100644"
+      },
+      {
+        "path": "unit-tests/src/test/java/com/m3/collections/eclipse/impl/map/sorted/mutable/IndexedSortedMapLifecycleTest.java",
+        "bytes": 6018,
+        "sha256": "fdedc25de005024ce09f01e2b2a6119a6bb39e414f699a8336112e4e91c647cf",
+        "gitBlob": "95019f91c301ff91f2727b3940accfc79f7db088",
+        "mode": "100644"
+      },
+      {
+        "path": "unit-tests/src/test/java/com/m3/collections/eclipse/impl/map/sorted/mutable/IndexedSortedMapViewProtocolTest.java",
+        "bytes": 4783,
+        "sha256": "b85ea31f92a37254b997456cd4069c53ecb75b86d318a13a496d5647cdbf29db",
+        "gitBlob": "a0108aab0b1aed52bb1255d3c6d72143bf50c845",
+        "mode": "100644"
+      },
+      {
+        "path": "unit-tests/src/test/resources/ComparatorPutAllCallbackOrderTest.expected.properties",
+        "bytes": 3371,
+        "sha256": "8a7f12a308e786f4c8f0aa1b7ace9916d2dbe42c592ec8afd4dbe5a5862dad11",
+        "gitBlob": "04c1c369b55120d68428de85515ad8c4b209cdba",
+        "mode": "100644"
+      }
+    ]
+  },
+  "validation": {
+    "runtime": "JDK21.0.9+7-LTS-338",
+    "normalJupiter": {
+      "found": 9,
+      "successful": 9,
+      "failed": 0,
+      "aborted": 0,
+      "skipped": 0,
+      "compiledFixturesUnchanged": true,
+      "receiptSha256": "500004c31b08c381635c9b5b1b8b0ca3e0d22ebd3d27b2ea96b7d9f06781648e"
+    },
+    "comparatorOriginalFirst": {
+      "cases": 15,
+      "typedDifferences": 0,
+      "normalized": false,
+      "sealSha256": "7c2c676804fba81fe3e1f5545ae59addf37009a57d36af541f4c05ea0d475bff",
+      "resultSha256": "d833f90efc25a37fd551622c5f5109c9f404cb198bcdfdf214484391a9e95779"
+    },
+    "fullScope": "source/m3/indexed-rb/PROOF_SCOPE.json",
+    "publishedPureRecipeProof": "source/m3/indexed-rb/PURE_RECIPE_PROOF_R3.json"
+  },
+  "review": {
+    "engine": "Codex",
+    "model": "gpt-5.6-sol",
+    "reasoning": "high",
+    "webSearch": false,
+    "shellToolDisabledBeforeNativeLaunch": true,
+    "fullSourceReview": {
+      "reportSha256": "4f40384f6562ec1e89d95962f1c8a57861dca3a85415bd6e69af7f122e77267f",
+      "rawHelperExitCode": 1,
+      "comparatorFinding": "Rejected against actual JDK21/current-owner original-first observations; production retained unchanged"
+    },
+    "testAndMetadataDelta": {
+      "reportSha256": "ccad20b271b7fa880256d36580c214aec3761aa22bb138e53feaecb19a499afb",
+      "rawHelperExitCode": 1,
+      "acceptedFinding": "Stale proof link",
+      "resolution": "Exact existing proof published; catalogue/scope current pointers fixed and independently hash-checked; no implementation/test/oracle/recipe code changed"
+    },
+    "command": "guarded scoped-autoreview.py --mode commit --commit 84fb683b69ca9a4a4cafd1d45593bad842661ccf --engine codex --no-web-search --prompt-file review-context/REVIEW_SCOPE.txt --dataset review-context/COMPLETE_CONTEXT_01.json",
+    "exactCommandReceiptSha256": "de1c3c9cb2a3c50e96f3eb5759c14fed17db78e2081315305e9ded3d898cefc6",
+    "actualNativeArgvJournalSha256": "4a94b1e54ec0b092616b7a7df8f083f87df04fb813513222752ef5dfcf63697a",
+    "terminalAuditSha256": "2db5d0ed30bf317e671a13d6f5a314a4e7523fcc1b0e35548a64ba64647cfe92",
+    "mechanicalCorrectionSha256": "07c4bed055821dd2cd8e2dbc67e996fd67e18a600be7ee24c960063203480405",
+    "independentCorrectionCheckSha256": "783bc2418bb1047bed2f69cc16744029d9a63a2ed6161218900862abcb6f6454",
+    "remainingKnownAcceptedActionableFindings": 0,
+    "rawReportsCalledClean": false
+  },
+  "pending": {
+    "sourceAwareReview": "Full V6 source and R3 test/resource/metadata reviews completed. Comparator finding refuted by sealed originals. The sole stale proof-link finding is corrected by shipping and pinning the already executed exact R3 proof; no production, test or recipe code changed. Raw reports remain recorded separately in the PR and receiving manifest.",
+    "fullEC14": "Clean/incremental reactor, generator/dependency closure and checkstyle NOT_RUN; finite owner proof uses received11.1 hierarchy",
+    "runtime17": "NOT_RUN; release17 compilation executed on JDK21",
+    "moduleOSGi": "JPMS/bnd/OSGi/single-provider installed artifact qualification OPEN",
+    "GCResource": "CPU, retained heap and native/process-memory comparison OPEN; no peak or zero-GC claim",
+    "JNI": "No native symbols added or JNI execution in this change",
+    "canonicalRecipe": "Existing Synexia Maven/OpenRewrite control-plane crate/registration/execution PENDING; pure CPU guards are explicit source custody proof, not that execution",
+    "fiveLibraries": "Full JDK/Guava/Eclipse/Apache/Spring coverage UNFINISHED",
+    "directPrivateHelperBackreferences": "Direct comparator backreferences to the package-private helper remain unqualified. No serialization protocol redesign is included."
+  },
+  "licensing": {
+    "originalOwner": "EPL-1.0 / EDL-1.0 preserved",
+    "newAttributedLeavesAndRecipes": "Apache-2.0",
+    "apacheLicense": "source/m3/indexed-rb/LICENSE-APACHE-2.0.txt",
+    "apacheNotice": "source/m3/indexed-rb/NOTICE-APACHE.txt",
+    "thirdPartyNotices": "source/m3/indexed-rb/THIRD_PARTY_NOTICES.md",
+    "eclipseLicenses": [
+      "LICENSE-ECLIPSE-EPL-1.0.txt",
+      "LICENSE-ECLIPSE-EDL-1.0.txt"
+    ]
+  }
+}

@@ -1,0 +1,1639 @@
+{
+  "schema": "synexia.m3jdk21.existing-seal-replay-plan.v1",
+  "status": "PREPARED_NOT_RUN",
+  "execution_authorized": false,
+  "execution_root": "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+  "commands": [
+    {
+      "id": "compile",
+      "kind": "STRICT_JDK21_COMPILE",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/javac.exe",
+        "-J-Xms32m",
+        "-J-Xmx512m",
+        "-J-XX:+UseSerialGC",
+        "-J-XX:MaxMetaspaceSize=256m",
+        "-J-XX:ReservedCodeCacheSize=64m",
+        "-J-XX:TieredStopAtLevel=1",
+        "-J-XX:-UsePerfData",
+        "-J-XX:+DisableAttachMechanism",
+        "-J-XX:-HeapDumpOnOutOfMemoryError",
+        "-J-XX:-CreateCoredumpOnCrash",
+        "-J-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-J-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-J-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-J-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-J-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-J-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-J-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-J-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-J-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-J-Dfile.encoding=UTF-8",
+        "-J-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/compile-hs_err_pid%p.log",
+        "--release",
+        "21",
+        "-encoding",
+        "UTF-8",
+        "-parameters",
+        "-proc:none",
+        "-implicit:none",
+        "-Xlint:all",
+        "-Werror",
+        "-sourcepath",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/empty-sourcepath",
+        "-classpath",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "-d",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/java/com/synexia/rewrite/SealReplay.java",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java"
+      ],
+      "deadline_seconds": 120,
+      "expected_exitcode": 0,
+      "stdout_acceptance": {
+        "exact_empty": true
+      }
+    },
+    {
+      "id": "current-check",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/current-check-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "check",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/current",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 0,
+      "image": "current",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "stdout_acceptance": {
+        "exact_ascii_line": "M3_SEALED_REPLAY action=check changes=0",
+        "allow_only_trailing_CR_LF": true
+      }
+    },
+    {
+      "id": "baseline-check",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/baseline-check-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "check",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/baseline",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 0,
+      "image": "baseline",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 18371,
+          "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 16830,
+          "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": null,
+          "sha256": "ABSENT"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 18371,
+          "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 16830,
+          "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": null,
+          "sha256": "ABSENT"
+        }
+      ],
+      "stdout_acceptance": {
+        "exact_ascii_line": "M3_SEALED_REPLAY action=check changes=3",
+        "allow_only_trailing_CR_LF": true
+      }
+    },
+    {
+      "id": "baseline-apply",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/baseline-apply-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "apply",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/baseline",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 0,
+      "image": "baseline",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 18371,
+          "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 16830,
+          "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": null,
+          "sha256": "ABSENT"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "stdout_acceptance": {
+        "exact_ascii_line": "M3_SEALED_REPLAY action=apply changes=3",
+        "allow_only_trailing_CR_LF": true
+      }
+    },
+    {
+      "id": "baseline-fixed-check",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/baseline-fixed-check-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "check",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/baseline",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 0,
+      "image": "baseline",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "stdout_acceptance": {
+        "exact_ascii_line": "M3_SEALED_REPLAY action=check changes=0",
+        "allow_only_trailing_CR_LF": true
+      }
+    },
+    {
+      "id": "baseline-fixed-apply",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/baseline-fixed-apply-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "apply",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/baseline",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 0,
+      "image": "baseline",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "stdout_acceptance": {
+        "exact_ascii_line": "M3_SEALED_REPLAY action=apply changes=0",
+        "allow_only_trailing_CR_LF": true
+      }
+    },
+    {
+      "id": "drift-refusal-apply",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/drift-refusal-apply-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "apply",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/drift",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 1,
+      "image": "drift",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 18371,
+          "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 16831,
+          "sha256": "c9170a1c070d3cae4b9ff698c2bc9c6d2feb81506ffadc5dc39080f8d2f47bdb"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": null,
+          "sha256": "ABSENT"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 18371,
+          "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 16831,
+          "sha256": "c9170a1c070d3cae4b9ff698c2bc9c6d2feb81506ffadc5dc39080f8d2f47bdb"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": null,
+          "sha256": "ABSENT"
+        }
+      ],
+      "stdout_acceptance": {
+        "contains": [
+          "java.lang.IllegalStateException: source drift: m3/collections/src/main/native/collections/m3_index_mask_compactor.c"
+        ],
+        "must_not_contain": [
+          "M3_SEALED_REPLAY action="
+        ],
+        "all_image_bytes_unchanged": true
+      }
+    },
+    {
+      "id": "java-before-check",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/java-before-check-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "check",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/java-before",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 0,
+      "image": "java-before",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 18371,
+          "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 18371,
+          "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "stdout_acceptance": {
+        "exact_ascii_line": "M3_SEALED_REPLAY action=check changes=1",
+        "allow_only_trailing_CR_LF": true
+      }
+    },
+    {
+      "id": "java-before-apply",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/java-before-apply-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "apply",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/java-before",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 0,
+      "image": "java-before",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 18371,
+          "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "stdout_acceptance": {
+        "exact_ascii_line": "M3_SEALED_REPLAY action=apply changes=1",
+        "allow_only_trailing_CR_LF": true
+      }
+    },
+    {
+      "id": "java-before-fixed-check",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/java-before-fixed-check-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "check",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/java-before",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 0,
+      "image": "java-before",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "stdout_acceptance": {
+        "exact_ascii_line": "M3_SEALED_REPLAY action=check changes=0",
+        "allow_only_trailing_CR_LF": true
+      }
+    },
+    {
+      "id": "c-before-check",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/c-before-check-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "check",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/c-before",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 0,
+      "image": "c-before",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 16830,
+          "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 16830,
+          "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "stdout_acceptance": {
+        "exact_ascii_line": "M3_SEALED_REPLAY action=check changes=1",
+        "allow_only_trailing_CR_LF": true
+      }
+    },
+    {
+      "id": "c-before-apply",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/c-before-apply-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "apply",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/c-before",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 0,
+      "image": "c-before",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 16830,
+          "sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "stdout_acceptance": {
+        "exact_ascii_line": "M3_SEALED_REPLAY action=apply changes=1",
+        "allow_only_trailing_CR_LF": true
+      }
+    },
+    {
+      "id": "c-before-fixed-check",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/c-before-fixed-check-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "check",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/c-before",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 0,
+      "image": "c-before",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "stdout_acceptance": {
+        "exact_ascii_line": "M3_SEALED_REPLAY action=check changes=0",
+        "allow_only_trailing_CR_LF": true
+      }
+    },
+    {
+      "id": "proof-absent-check",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/proof-absent-check-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "check",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/proof-absent",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 0,
+      "image": "proof-absent",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": null,
+          "sha256": "ABSENT"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": null,
+          "sha256": "ABSENT"
+        }
+      ],
+      "stdout_acceptance": {
+        "exact_ascii_line": "M3_SEALED_REPLAY action=check changes=1",
+        "allow_only_trailing_CR_LF": true
+      }
+    },
+    {
+      "id": "proof-absent-apply",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/proof-absent-apply-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "apply",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/proof-absent",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 0,
+      "image": "proof-absent",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": null,
+          "sha256": "ABSENT"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "stdout_acceptance": {
+        "exact_ascii_line": "M3_SEALED_REPLAY action=apply changes=1",
+        "allow_only_trailing_CR_LF": true
+      }
+    },
+    {
+      "id": "proof-absent-fixed-check",
+      "kind": "EXISTING_SEAL_REPLAY_CLI",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:+UseSerialGC",
+        "-XX:MaxMetaspaceSize=256m",
+        "-XX:ReservedCodeCacheSize=64m",
+        "-XX:TieredStopAtLevel=1",
+        "-XX:-UsePerfData",
+        "-XX:+DisableAttachMechanism",
+        "-XX:-HeapDumpOnOutOfMemoryError",
+        "-XX:-CreateCoredumpOnCrash",
+        "-XX:HeapDumpPath=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/dumps",
+        "-Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp",
+        "-Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/home",
+        "-Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+        "-Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jna",
+        "-Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/jansi",
+        "-Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/tmp/snappy",
+        "-Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/user",
+        "-Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/prefs/system",
+        "-Dfile.encoding=UTF-8",
+        "-XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/proof-absent-fixed-check-hs_err_pid%p.log",
+        "-ea",
+        "-cp",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes",
+        "com.synexia.rewrite.SealReplay",
+        "check",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/images/proof-absent",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/packet/src/main/resources/current-mask-window"
+      ],
+      "deadline_seconds": 30,
+      "expected_exitcode": 0,
+      "image": "proof-absent",
+      "expected_image_before": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "expected_image_after": [
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+          "bytes": 17626,
+          "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+          "bytes": 5865,
+          "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+        },
+        {
+          "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+          "bytes": 9493,
+          "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+        },
+        {
+          "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+          "bytes": 15719,
+          "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+        },
+        {
+          "path": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+          "bytes": 13002,
+          "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+        }
+      ],
+      "stdout_acceptance": {
+        "exact_ascii_line": "M3_SEALED_REPLAY action=check changes=0",
+        "allow_only_trailing_CR_LF": true
+      }
+    }
+  ],
+  "tools": [
+    {
+      "id": "javac",
+      "path": "C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+      "sha256": "8a1d32f529ba4d01940194e3b06d14aff828e5d47f5f374ec88c81902fc3456f"
+    },
+    {
+      "id": "java",
+      "path": "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+      "sha256": "d27c1a75edf380963c430232e93340eab4bd3694044976cff85421bf163b876c"
+    }
+  ],
+  "source_inventory": {
+    "path": "SOURCE_INVENTORY.json",
+    "sha256": "95910ead26a46895c3627a02a3cf16a6bccd19de9318baf96d4e2bb8272428c7"
+  },
+  "initial_images": {
+    "path": "IMAGE_INVENTORY.json",
+    "sha256": "e1bf55e7191b734d32d5e74991070f1c0509ea5ec0e83a1cb482f3490ca9de6e"
+  },
+  "owned_directories": [
+    "classes",
+    "empty-sourcepath",
+    "images",
+    "tmp/jna",
+    "tmp/jansi",
+    "tmp/snappy",
+    "home",
+    "prefs/user",
+    "prefs/system",
+    "dumps"
+  ],
+  "scope": {
+    "kind": "EXACT_FIVE_TARGET_SOURCE_SEAL",
+    "new_Java_or_C_or_test_sources": false,
+    "external_dependencies": 0,
+    "product_worktree_mutation": false,
+    "resource_mutation": false,
+    "mutable_outputs": "Only the six explicitly prepared K images and owned compile/log/receipt paths",
+    "mechanism": "Existing SealReplay calls unchanged M3GpuToolJoinManifest; no OpenRewrite SDK execution"
+  },
+  "execution_protocol": {
+    "serial_actions": 16,
+    "no_parallel_JVMs": true,
+    "no_retry_of_started_or_uncertain_actions": true,
+    "abort_following_actions_on_any_failure": "Abort on unexpected result; required drift exit1 is successful refusal evidence.",
+    "isolated_classpaths": {
+      "helpers": "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1/classes"
+    },
+    "supervisor": {
+      "source": "S:/codex-work/storage-recovery-20261013/native-process-cwd-recipe-20261016/target/generated/OwnedJobSupervisor.py",
+      "sha256": "c3f5f71cacbb8b95c99eaff74b3bc787359540ad738d65a007668da6b6ad83e9",
+      "bind_ROOT_to": "K:/codex-work/m3jdk21-recipe-pass-20261020/mask-seal-replay-v1",
+      "scope": "Borrow definitions only; never execute the historical main"
+    },
+    "operational_reference": {
+      "path": "K:/codex-work/claude-preservation-20261020/bootstrap-conflict/qualification-k-v1/run_qualification.py",
+      "sha256": "e0513362b4240c6698fb8190a05420e9fcd6e1894a918cf54a998a5919cc34d8",
+      "reuse": "Definitions/protocol only; completed main must not be rerun"
+    },
+    "global_jvm_lock": {
+      "path": "K:/m3-work/tmp/jvm.lock",
+      "acquire": "One atomic mkdir; HOLD if existing. No wait loop or stale deletion.",
+      "hold": "Across all sixteen serial actions.",
+      "release": "Only own unchanged identity, empty directory and exact resolved path, after native terminal evidence is durably published.",
+      "ownership": "Separate owned K PID/token/identity receipt, not a file in shared empty lock directory"
+    },
+    "native_success": [
+      "terminal",
+      "same_handle_wait=0",
+      "exitcode equals the command expected_exitcode",
+      "job_active_processes=0",
+      "all_owned_native_handles_closed",
+      "cleanup_errors empty",
+      "supervisor_error null"
+    ],
+    "receipt_policy": "Create-only claims; mutable native/final receipts use owned same-directory temp+flush/fsync+atomic replace. Persist terminal evidence before lock release, then persist release state.",
+    "clear_child_environment": [
+      "JAVA_TOOL_OPTIONS",
+      "JDK_JAVA_OPTIONS",
+      "_JAVA_OPTIONS",
+      "CLASSPATH",
+      "MAVEN_OPTS",
+      "MAVEN_ARGS"
+    ],
+    "child_environment": {
+      "TEMP": "K:/codex-work/agent-temp",
+      "TMP": "K:/codex-work/agent-temp",
+      "home_and_cache_paths": "Owned K home directories; JVM properties in exact argv bind all JVM temp/home/preferences/native caches/error/dump paths"
+    },
+    "storage": {
+      "minimum_K_free_bytes_before_and_during": 8673820672,
+      "combined_roots": [
+        "K:/codex-work/claude-preservation-20261020",
+        "K:/codex-work/m3jdk21-recipe-pass-20261020"
+      ],
+      "combined_output_cap_bytes": 83886080,
+      "per_execution_root_cap_bytes": 4194304,
+      "capacity_interval_ms": 250,
+      "physical_and_commit_min_before_bytes": 536870912,
+      "physical_and_commit_min_during_bytes": 268435456,
+      "stop_on_breach": true,
+      "protection": "ACTIVE"
+    }
+  },
+  "common": {
+    "no_external_dependencies": true,
+    "source_status": "Existing source bytes copied verbatim; no Java/POM/test generation",
+    "source_guard": "All immutable local donor inputs and five upstream postimages match exact Git blob and SHA256 before and after every action. Mutable image states follow each command before/after map."
+  },
+  "capacity": {
+    "fixture_logical_cap_bytes": 4194304,
+    "combined_task_cap_bytes": 83886080,
+    "minimum_K_free_before_start_bytes": 8673820672,
+    "initial_capacity": {
+      "k_free_bytes": 9093554176,
+      "native_temp": "K:\\codex-work\\agent-temp\\"
+    }
+  },
+  "acceptance": [
+    "Each command requires its exact expected exit code and log contract; exit zero alone is insufficient.",
+    "Verify all immutable input and tool hashes before and after every action.",
+    "Verify the entire five-target state and absence conditions before and after every image action.",
+    "Current check and every check action leave all bytes unchanged.",
+    "Baseline and each narrow successful apply produce exact current postimages; two KEEP files unchanged.",
+    "Drift refuses at preflight before any writes: all four existing files unchanged and proof remains ABSENT.",
+    "No additional file or temporary residue is permitted inside an image.",
+    "All sixteen owned jobs must be terminal, active0 and handle-closed; expected drift exit1 is required.",
+    "Acquire global JVM lock once, HOLD if present; release only the acquired identity after durable terminal evidence."
+  ],
+  "claim_boundary": {
+    "actual_recipe_manifest_kernel": "NOT_RUN until this approved plan executes",
+    "OpenRewrite_Maven_SDK": "NOT_RUN",
+    "performance_admission": false,
+    "full_JDK_or_global_phase_admission": false
+  }
+}

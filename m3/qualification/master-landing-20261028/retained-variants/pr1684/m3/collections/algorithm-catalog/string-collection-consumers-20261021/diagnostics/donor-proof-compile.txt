@@ -1,0 +1,3 @@
+$ /workspace/scratch/6a76dfb8b5f4/toolchains/jdk21/bin/javac --release 21 -Xlint:all -Werror -cp /workspace/scratch/6a76dfb8b5f4/candidates/collections/evidence/wrapper-boundary-classes -d /workspace/scratch/6a76dfb8b5f4/candidates/collections/evidence/wrapper-boundary-classes /workspace/scratch/6a76dfb8b5f4/candidates/collections/m3/collections/algorithm-catalog/string-collection-consumers-20261021/diagnostics/M3FilteredComparatorRepresentativeProof.java
+
+EXIT=0

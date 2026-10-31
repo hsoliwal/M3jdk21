@@ -1,0 +1,10 @@
+artifact	purpose
+DESIGN.md	Intent, source lanes, pattern roles and safety limits
+TASK_PACKET.json	Explicit bounded scope and locked production/build files
+STATUS.tsv	Separate current candidate and verified outcomes
+RUN_CONTEXT.tsv	Pinned head, tooling and execution roots
+PROVENANCE.tsv	Existing-source/upstream API evidence
+VERIFY_CONTRACT.tsv	Independent execution and product gates
+OUTPUT_CONTRACT.tsv	This artifact inventory
+FINAL_REPORT.md	Actual delta, proof, blockers and reproduction
+ACTION_QUEUE.tsv	Continuation through all discussion workstreams

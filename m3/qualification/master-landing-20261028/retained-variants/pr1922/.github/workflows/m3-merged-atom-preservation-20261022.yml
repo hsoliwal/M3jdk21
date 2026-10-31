@@ -1,0 +1,127 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 merged recipe atom preservation
+
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - 'm3/collections/**'
+      - 'm3/tooling/migration-recipes/**'
+      - 'm3/history/**'
+      - '.github/workflows/**'
+  push:
+    branches:
+      - master
+      - m3/restore-merged-atoms-ci-20261022
+    paths:
+      - 'm3/file/**'
+      - 'm3/collections/**'
+      - 'm3/tooling/migration-recipes/**'
+      - 'm3/history/**'
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  require-merged-sources:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Exercise missing, drifted and forged-recipe negative oracles
+        run: python3 -m unittest discover -s m3/history -p 'test_merged_atoms_preservation_20261022.py' -v
+      - name: Reject disappearing merged product atoms
+        run: python3 m3/history/verify-merged-atoms-preservation-20261022.py --root .
+      - name: Verify product source SHA-256 matches canonical Synexia handoff receipts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import re
+          from pathlib import Path
+          root = Path.cwd().resolve()
+          receipt = root / "m3/docs/synexia-m3jdk21-eclipse-recipe-handoff-20261022.tsv"
+          lines = [line for line in receipt.read_text(encoding="utf-8").splitlines()
+                   if line and not line.startswith("#")]
+          if len(lines) != 5:
+              raise SystemExit("M3 product/source recipe handoff must cover five Java outputs")
+          last = ""
+          for line in lines:
+              cells = line.split("\t")
+              if len(cells) != 8:
+                  raise SystemExit("invalid M3 handoff receipt shape")
+              relative, recipe, previous, expected, origin, pull, state, license_id = cells
+              if (relative <= last or Path(relative).is_absolute()
+                      or any(part in ("..", ".") for part in Path(relative).parts)):
+                  raise SystemExit("unsafe or unsorted M3 handoff source path")
+              last = relative
+              if not relative.endswith(".java") or not recipe.startswith("com.synexia.m3."):
+                  raise SystemExit("invalid M3 product recipe binding")
+              if (previous != "ABSENT" and not re.fullmatch("[0-9a-f]{64}", previous)):
+                  raise SystemExit("invalid original preimage SHA-256")
+              if not re.fullmatch("[0-9a-f]{64}", expected) or license_id != "Apache-2.0":
+                  raise SystemExit("invalid M3 postimage SHA or license receipt")
+              if pull != "hsoliwal/com.synexia#12951":
+                  raise SystemExit("missing canonical Synexia recipe provenance")
+              if state not in ("PENDING_RECIPE_AND_PRODUCT_CI", "QUALIFIED"):
+                  raise SystemExit("invalid M3 source admission status")
+              file = root / relative
+              if file.is_symlink() or not file.is_file() or not file.resolve().is_relative_to(root):
+                  raise SystemExit("lost M3 product source: " + relative)
+              actual = hashlib.sha256(file.read_bytes()).hexdigest()
+              if relative == "m3/file/src/main/java/com/m3/file/M3ResourceLocks.java":
+                  historical = "18d05ae54945d4129c46d62e26551cbc4fd200b31c185e020b9ee6240fdc9599"
+                  successor = "eb0bf36625effaffa147be1f650590dfa08627a5f6f52d105b8fbb201d6b5718"
+                  if expected != historical or actual != successor:
+                      raise SystemExit("M3ResourceLocks historical/successor SHA drift")
+                  successor_receipt = root / "m3/docs/m3jdk21-resource-locks-composed-successor-20261025.tsv"
+                  expected_row = "\t".join((
+                      relative, historical, successor, "hsoliwal/com.synexia#12951",
+                      "hsoliwal/com.synexia#12842", "hsoliwal/M3jdk21#1821",
+                      "com.synexia.rewrite.M3Jdk21ResourceLocksComposedSuccessor",
+                      "PENDING_RECIPE_AND_PRODUCT_CI"))
+                  successor_rows = [row for row in successor_receipt.read_text(
+                      encoding="utf-8").splitlines() if row and not row.startswith("#")]
+                  if successor_rows != [expected_row]:
+                      raise SystemExit("M3ResourceLocks composed provenance drift")
+                  source = file.read_bytes()
+                  time_unit_import = b"import java.util.concurrent.TimeUnit;\n"
+                  method_start = b"    /**\n     * Wait at most the specified total budget"
+                  method_end = b"    /** Execute an ordinary Java Runnable"
+                  if (source.count(time_unit_import) != 1
+                          or source.count(method_start) != 1
+                          or source.count(method_end) != 1):
+                      raise SystemExit("M3ResourceLocks composed method identity drift")
+                  begin = source.index(method_start)
+                  finish = source.index(method_end, begin)
+                  method = source[begin:finish]
+                  if hashlib.sha256(method).hexdigest() != (
+                          "04a88733c515c71f9f02e50ab26b799bde75cb91a7b10d8d9e727a292656c3cd"):
+                      raise SystemExit("M3ResourceLocks timed method body drift")
+                  ancestor = source.replace(time_unit_import, b"", 1).replace(method, b"", 1)
+                  if hashlib.sha256(ancestor).hexdigest() != historical:
+                      raise SystemExit("M3ResourceLocks old recipe atom lost")
+                  print("M3_RESOURCE_LOCKS_COMPOSED_HANDOFF_PASS original=" + historical
+                        + " successor=" + successor)
+              elif actual != expected:
+                  raise SystemExit("M3 source drifted from Synexia recipe result: " + relative)
+          print("M3_PRODUCT_SOURCE_RECIPE_HANDOFF_PASS outputs=5")
+          PY
+      - name: Reject new transformation recipe sources in the downstream product
+        if: github.event_name == 'pull_request'
+        shell: bash
+        env:
+          M3_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin "$M3_BASE_SHA"
+          git diff --diff-filter=A --name-only "$M3_BASE_SHA" HEAD > "$RUNNER_TEMP/m3-new-paths.txt"
+          if grep -E '(^m3/recipes/|^m3/tooling/migration-recipes/|/recipe(s)?/)' "$RUNNER_TEMP/m3-new-paths.txt"; then
+            echo 'ERROR: executable transformation recipes belong in hsoliwal/com.synexia, not M3JDK21'
+            exit 1
+          fi

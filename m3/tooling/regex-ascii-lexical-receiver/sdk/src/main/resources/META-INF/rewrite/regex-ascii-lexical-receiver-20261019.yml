@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.RegexAsciiLexicalReceiver
+displayName: RegexAsciiLexical
+description: Replay the sealed per-file ASCII numeric admission fixtures without runtime promotion.
+recipeList:
+  - com.synexia.rewrite.M3RegexAsciiLexicalReceiverRecipe
+---
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.RegexAsciiLexicalReceiverInverse
+displayName: RegexAsciiLexicalInverse
+description: Replay the sealed per-file ASCII numeric admission fixtures without runtime promotion.
+recipeList:
+  - com.synexia.rewrite.M3RegexAsciiLexicalReceiverInverseRecipe

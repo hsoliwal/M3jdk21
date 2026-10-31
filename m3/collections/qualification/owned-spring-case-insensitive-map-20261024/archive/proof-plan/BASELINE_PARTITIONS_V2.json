@@ -1,0 +1,15 @@
+{
+  "schema": "spring-case-insensitive-map-prospective-baseline-partitions-v2",
+  "status": "CLASSIFIED_BEFORE_FIRST_PROVIDER_BASELINE_AND_CANDIDATE",
+  "preservedProposal": "PROPOSAL_SEAL_V1.json",
+  "preservedProposalSHA256": "16918c29fd95fe6042fa183b3d18511c5836ff08aec907f4f568586da182645a",
+  "v1SourcesUnchanged": true,
+  "requiredCommonLaws": "V1 common clean model/attachedentry/graph assertions; no blanket Map law assertion on ghoststates or postexternalmodification entries",
+  "requiredConcretePolicy": "All V1 case records except the two explicit compatibility selectors below. Ghost aliases, keyviewnull return behavior, casing/order/defaults/locale/callback/clone view and clone hook observations remain required as selected before candidate.",
+  "compatibilitySelectors": ["^C27/stale-entry-after-reinsert$", "^C27/held-entry/.*$"],
+  "additionalObserver": {"source": "SpringCaseInsensitiveMapEntryCompatibilityObserver.java", "requiredChannel": "ENTRY_REQUIRED", "noFitChannels": ["ENTRY_IDENTITY_NO_FIT", "PRIVATE_WIRE_NO_FIT"], "mainArgument": "exact provider owner classname; future owner binding only after rootgate"},
+  "digestRule": "V1 commonSHA256 remains an assertion/check trace. V1 observationSHA256 is custody of the complete raw trace, not an all-observable candidate equality gate. After baseline execution, retain every raw row, compute separate canonical requiredPolicySHA256 and compatibilitySHA256 by exact case selectors in original order, and compare future candidate only against the required partition. Preserve/report NO_FIT raw differences without normalizing them or aggregating them into parity.",
+  "storageRule": "No owner Entry cache/node objects may be introduced to force repeated reference identity. The test may retain temporary API entries to record validity/identity observations. A separate source-aware ownership audit is still mandatory.",
+  "nominalRule": "Only owner names may relocate in metadata; raw reference booleans and serialized byte digests remain actual observations, not relabeled matching results.",
+  "limits": "Prospective source classification after proposal V1 seal but before compilation/baseline/candidate. No runtime expectation changed, no passing behavior result claimed and no ghost/clone policy waived."
+}

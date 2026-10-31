@@ -1,0 +1,92 @@
+{
+  "schema": "synexia.fc0.receiving-selection-extension/1",
+  "parent": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
+    "sha256": "b17fdfb979a86086ae8b860f933163b24ccde175c97880adb7fd71cc146deb6b",
+    "bytes": 42932
+  },
+  "selected": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/receiving-selection-v3/RECEIVING-SELECTION.json",
+    "sha256": "6483d4a75236aaa6f4231bd3c509c14de950a75f03537e565170138a1f0e70cb",
+    "bytes": 45711
+  },
+  "originalRowsRetainedExactly": 129,
+  "added": [
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/FULL-27-CONTROLS.json",
+      "sha256": "cae5b88fa656e199bf60c4c7ccc4c8822a7f19d5080764fd6319e03368b4a37b",
+      "bytes": 140380
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/HANDOFF.json",
+      "sha256": "910526229544bf0f1278744a80378a12c5fc94a007ec91063ebbffefd92ed730",
+      "bytes": 22136
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/MIGRATION-PYTHON-BINDING.json",
+      "sha256": "387ef4bb049c945aa67d8aa2496c5fadc4d3909e6da24615a5591ce2032d2010",
+      "bytes": 320764
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/PATTERN-BINDINGS-v2.json",
+      "sha256": "4dceda21ea9ea15d4f6dcef5913edb7fc59f42c7d5f4c5a99b1958d7a8ec3930",
+      "bytes": 71261
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/PATTERN-BINDINGS-v3.json",
+      "sha256": "e7996e21a29d4aee5b79fa67fb616a8d1b00660b158d5216483efdb61a4a343b",
+      "bytes": 85951
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/PATTERN-BINDINGS.json",
+      "sha256": "6b8c340b9cd3d68eb2a71e6c6ed66934e9df6f9e3418e580ce959cd69deaeb84",
+      "bytes": 7907
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/build_full_declaration.py",
+      "sha256": "bfc2224d270c4c764e92fd7deb6b92c94ee0bb8c432d52216672b66766f9937c",
+      "bytes": 16226
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/gatherer-review/DECLARATION.json",
+      "sha256": "ec83f7f3ceb93c466cb741a260e1c82203765d47584fcc0bdee8deeb0a53d21e",
+      "bytes": 120942
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/base-refresh-20261006-0443/native/fc0-supplemental-bindings-v1/profile-review/DECLARATION.json",
+      "sha256": "a5b583677f45cea1df3559bba3bc9355f3e01819e49234bd367ecb8719cdfb16",
+      "bytes": 54411
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-check-authoring-v1/m3-check/independent-review-v1/REVIEW.json",
+      "sha256": "a432ed1f986db235ab18b3de91df192e8c1bfc66e3f111d495d2e51fb398614b",
+      "bytes": 9955
+    }
+  ],
+  "identicalAlreadySelected": [
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/tool-copy-authoring-v1/COMMAND.json",
+      "sha256": "f25af863f0d24de1db29501243264b143a4ac4af59bd044619d680c1dbb09b1a",
+      "bytes": 1729
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/tool-copy-authoring-v1/COPY-RESULT.json",
+      "sha256": "5373d98423a98b0402157c6d8a0bb9845b1e1c7920eda5fd1be3c88422ddaaff",
+      "bytes": 2234162
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/tool-copy-authoring-v1/SOURCE.json",
+      "sha256": "f0643bbb79b7a6d7ec7e7d7ed97f780554cc480322ef15013d1f03bd878dc07b",
+      "bytes": 2233872
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/tool-copy-authoring-v1/copy_runtime.py",
+      "sha256": "bf6c5dbeb02feeef46262ee55e743232757c34fe745e37869ac6fde33b5e234c",
+      "bytes": 4942
+    }
+  ],
+  "toolBodiesTraversed": false,
+  "receivingStatusChanged": false,
+  "gatesExecuted": false,
+  "reason": "Root-requested bounded supplemental declarations, runtime-copy metadata and Native M3 checker static review. All are source/metadata; unexecuted supplementals confer no qualification."
+}

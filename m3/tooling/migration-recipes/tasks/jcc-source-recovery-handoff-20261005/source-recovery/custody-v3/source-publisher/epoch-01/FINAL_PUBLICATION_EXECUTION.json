@@ -1,0 +1,10 @@
+{
+  "schema": "jcc-source-final-publication-execution/1",
+  "result": {
+    "chunk_id": "808aa5",
+    "wall_time_seconds": 0.647112016,
+    "exit_code": 0,
+    "original_token_count": 77,
+    "output": "{\"status\": \"PUBLISHED_CUSTODY_VERIFIED\", \"commit\": \"0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\", \"tree\": \"0361e4a07b77a01df170523033fef01c4052ddc5\", \"pr\": \"https://github.com/hsoliwal/com.synexia/pull/9362\", \"files\": 2796, \"receipt_sha256\": \"95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8\"}\n"
+  }
+}

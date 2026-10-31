@@ -1,0 +1,209 @@
+{
+  "scope": "Retained exact executed evidence and reproducible source support; original absolute paths inside receipts identify the historical execution workspace",
+  "copies": [
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/QUALIFICATION.md",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/QUALIFICATION.md",
+      "sha256": "5d8ed744bae6d487b307ffe989ff185ce4f66778695e8642d1d67206841166d4",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/SOURCE_SEALS.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/SOURCE_SEALS.json",
+      "sha256": "b2fe6b8c49dba14c90139a45a6b4609eda22d9d0183be962234fa2d1f7753252",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/PROVENANCE.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/PROVENANCE.json",
+      "sha256": "98969a42effdc19602de5c7022e14ce0ba674486b92ae9bb34e9d20c423cbec6",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/NATIVE_SOURCE_SEALS.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/NATIVE_SOURCE_SEALS.json",
+      "sha256": "12c0a2f4b7f90b0c1187bdfa85149ef2efae1e7ad4f2756f52ca70eb89af2cc5",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/UPSTREAM_CARRY_FORWARD.tsv",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/UPSTREAM_CARRY_FORWARD.tsv",
+      "sha256": "de13cf5b7fa8b36ab245c27832ee3eebffda5551f40210f5577e3259607e7a04",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/FINAL_RECEIPTS.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/FINAL_RECEIPTS.json",
+      "sha256": "ff499451d855eb5ba76eafb35654a6dd8bfb53af080bfb3ae6ddd2e87128fafa",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/SDK_EXECUTION.tsv",
+      "original_source": "/workspace/scratch/7ea994fb52d9/proofs/sdk-collections-current-01/sdk-output/SDK_EXECUTION.tsv",
+      "sha256": "d279be75821d860fb0c2986c8ed87195054916a556b0d2fd8fb8d094b070f2ed",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/verify_candidates.py",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/verify_candidates.py",
+      "sha256": "529115491b2067bdd2dbb857e91b76cdca6235674727a6957f40cf2109897b26",
+      "kind": "PORTABLE_ADAPTER_OF_EXECUTED_DRIVER"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/executed-drivers/verify_candidates.py",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/verify_candidates.py",
+      "sha256": "2b9f9c8fac3020afb1b9ea344b953c2d1d5bd603841cc1a8f307804879c06129",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/qualify_current_module.py",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/qualify_current_module.py",
+      "sha256": "280f440b33b86017474a928291e25d909db210c261002f2ec06f980edba18a75",
+      "kind": "PORTABLE_ADAPTER_OF_EXECUTED_DRIVER"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/executed-drivers/qualify_current_module.py",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/qualify_current_module.py",
+      "sha256": "545d06e6b1a5ed4999dee6ff802ebfd892dbbcd8f7f95eb434c4090d431923e6",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/qualify_integrated_native.py",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/qualify_integrated_native.py",
+      "sha256": "32a25a5618dcf67a785d90838de4c1b6589a9c835d2a293e3348282d9f5e4005",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof-src/com/m3/collections/M3FilteredListMutationWitness.java",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof-src/com/m3/collections/M3FilteredListMutationWitness.java",
+      "sha256": "ae3e7e15d34261ecad519ecde13fac7d50f0d239fe2c1dc3c8828b1673139df2",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof-src/com/m3/collections/M3IndexOrderWindowResourceProbe.java",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/probe-src/com/m3/collections/M3IndexOrderWindowResourceProbe.java",
+      "sha256": "d711aa55378fe89dc263a2de6fe90449ab690e9759d27906a9389f9a0434fdba",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-verification-1/RESULT.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/RESULT.json",
+      "sha256": "e6865c08bb247cfc670ef95f6d17028a49c39d5c402b2730aae4b915792b10e8",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-verification-1/INPUTS.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/INPUTS.json",
+      "sha256": "571dee423d012cbc01c35d5e6a5c3cc1efadabf2a2d4048919251016b804b01d",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-verification-1/COMMANDS.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/COMMANDS.json",
+      "sha256": "3052bb9f08101d66f6dcdd45d38a95696ed1b1a2783643a673f3406260c03fe8",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-verification-1/NATIVE_INPUTS.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/NATIVE_INPUTS.json",
+      "sha256": "12c0a2f4b7f90b0c1187bdfa85149ef2efae1e7ad4f2756f52ca70eb89af2cc5",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-verification-1/PRESERVED_UPSTREAM.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/PRESERVED_UPSTREAM.json",
+      "sha256": "600622ddb66337ead084511f8a514e7dfe152f20ced2ead1f8eb8e0249cad601",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-verification-1/RESOURCE_SUMMARY.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/RESOURCE_SUMMARY.json",
+      "sha256": "00d99a2df7ae075226f88e03a54f8bb2c73b28664746a7c7ad52608a4978cd33",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-verification-1/sequenced-reconciled-control-resources.log",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/sequenced-reconciled-control-resources.log",
+      "sha256": "244cee974d52341d10da14685862cb22b90884972fb32ee94038740813c236e2",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-verification-1/candidate-resources.log",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate-resources.log",
+      "sha256": "91c9c7d549180fb2fd241b423633d7d5bf0db0401c0c6c182db46acd08b2f41c",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-verification-1/baseline-three-mutation-witness.log",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/baseline-three-mutation-witness.log",
+      "sha256": "b559eddffec68f979adb4584705ce5921435ded3967c96ad10ec7c7f04e50da2",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-verification-1/candidate-three-mutation-witness.log",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/candidate-three-mutation-witness.log",
+      "sha256": "6c6045cda7c2707484692ac200f8508be9ec7572cd8d8efc7051d4b2f5a2a000",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-verification-1/original-baseline-strict-negative.log",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-verification-1/original-baseline-strict-negative.log",
+      "sha256": "2ffe854338475d5b92b20ea0aeb776e82d0d7fb1188f9d88e012d24c680b8b48",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-owning-module-1/JUNIT_SUMMARY.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-owning-module-1/JUNIT_SUMMARY.json",
+      "sha256": "2e68d60afa5f7112445689af9219feed52d9f9e617a7cf1939471c4fb3ce0598",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-owning-module-1/SOURCE_RECEIPT.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-owning-module-1/SOURCE_RECEIPT.json",
+      "sha256": "b9f1278f22adee0b850f588725705e4c93c8700d49150a6f8301021a5dd669c9",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/emitted-owning-module-1/MAVEN.log",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/emitted-owning-module-1/MAVEN.log",
+      "sha256": "ad5cb0448735319649f0221843186a0277ce77fe4f2e533fe9211c2bfc706dbf",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/integrated-java-native-1/RESULT.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/integrated-java-native-1/RESULT.json",
+      "sha256": "ae420fe3513d22e7fd37911f539c945393379abeb4d974558d78df75f61deb2a",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/integrated-java-native-1/SOURCE_RECEIPT.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/integrated-java-native-1/SOURCE_RECEIPT.json",
+      "sha256": "a455f76b03b37a00f00046f98b43b8f1e8acd9adfff4fe827648afbd868a9f08",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/integrated-java-native-1/COMMANDS.json",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/integrated-java-native-1/COMMANDS.json",
+      "sha256": "1df2a45462754793b694c21a904c14c94e603a1ad7efcfa2ea6fd381352d6cc3",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/integrated-java-native-1/integrated-module-source.log",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/integrated-java-native-1/integrated-module-source.log",
+      "sha256": "1dfbe5196bc1d31ae0604bb20a8a8674f7a1ebc4611346230c9f657d4b70552c",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/integrated-java-native-1/integrated-M3IndexOrderWindowContract.log",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/integrated-java-native-1/integrated-M3IndexOrderWindowContract.log",
+      "sha256": "3560deac75e8b9009fc5ca237be25a4c852d01763d452cb3538730c25f16a11a",
+      "kind": "EXACT_COPY"
+    },
+    {
+      "target": "m3/collections/qualification/owner-current-20261019/proof/integrated-java-native-1/integrated-M3IndexedMultiValueOccurrenceSelfTest.log",
+      "original_source": "/workspace/scratch/7ea994fb52d9/candidates/collections-current/proof/integrated-java-native-1/integrated-M3IndexedMultiValueOccurrenceSelfTest.log",
+      "sha256": "810dd169eabfab6bf5a45a823cc1c670a42ea0c62b791316b77afdc08e037208",
+      "kind": "EXACT_COPY"
+    }
+  ]
+}

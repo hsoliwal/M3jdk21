@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.m3jdk.StaticLanguageAffectText20261020
+displayName: M3JDK21 static language/affect native and qualification delivery
+description: Materialize reviewed native C, workflow, qualification and catalogue files from exact absent preimages; replay is fixed and drift refuses.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-static-language-affect-text-20261020

@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "status": "AUTHORIZED_ONE_LINE_RECIPE_POSTIMAGE_NOT_YET_COMPILED",
+  "sourceRevision": "80b8534ad1e45002185fb3eeab233f98d3a7c0bd",
+  "unchangedHistoricalOwner": "6cb27fcc02c72f93d6ae7bdf6edb680ec5563468",
+  "path": "m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaImportPlan.java",
+  "preimagePath": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlan.java",
+  "preimageSha256": "27996c430d055bdf5b5ba32c2664b3cc683731a0dd1edf51aca067d876859b82",
+  "postimagePath": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\importer-fix-recipe\\templates\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlan.java.txt",
+  "postimageSha256": "cb8822f92db1c65c695d724013c47225d37b75ed766b2c9d197c562004b4add6",
+  "before": "String expected = root(sourceRevision, manifestRoot, rows);",
+  "after": "String expected = SynexiaImportPlan.root(sourceRevision, manifestRoot, rows);",
+  "line": 149,
+  "existingHelperLine": 480,
+  "publicSignatureChange": false,
+  "algorithmChange": false,
+  "originalDonorChanged": false,
+  "initialCompilerFailureRetained": "logs/compile.log",
+  "fossRowWrittenBeforeEdit": true,
+  "recipeManifestPath": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\importer-fix-recipe\\templates\\manifest.tsv"
+}

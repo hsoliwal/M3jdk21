@@ -1,0 +1,15 @@
+java-version: exit=0
+javac-version: exit=0
+strict-javac: exit=0
+public-api: exit=0
+junit-readonly-policy: exit=0
+oracle-readonly-policy: exit=0
+oracle-readonly-effects: exit=0
+oracle-readonly-linear: exit=1
+oracle-readonly-failfast: exit=1
+oracle-comparator-failure: exit=1
+oracle-bounded-map: exit=0
+oracle-bounded-set: exit=0
+oracle-interior-null: exit=0
+oracle-readonly: exit=1
+{"junit": {"aborted": 0, "failed": 0, "found": 1, "skipped": 0, "started": 1, "successful": 1}, "standalone": {"executed": 9, "passed": 5, "retained_known_failures": 4}, "status": "RETAINED_READONLY_POLICY_PASS_WITH_PRESERVED_KNOWN_FAILURES"}

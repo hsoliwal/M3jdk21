@@ -1,0 +1,11 @@
+path	sha256	git_blob	mode	pr	note
+m3/migration/original-provider-20261017/FOSS_REUSE_DECISION.tsv	0234ff4d05ffe9c0e810a7d9b61658304be917b16b33ac679f5ac59979b0d7ad	8e0ca7776dde3956895edee5480f5e02f5ecfa80	100644	1430	PR version, not live
+m3/migration/original-provider-20261017/MINUTE_PROGRESS.jsonl	87335ac4744b0bebf250e687373b81fa8942bb5971d91d33988fdf49ef1d6885	42c5bdeeb985c1591e8659ac0b2252b23b64746c	100644	1430	PR version, not live
+m3/migration/original-provider-20261017/README.md	12dafede580d828fe9d2d6a4648f3fbc66cc305aea21b3e7945d4fffa87aca91	29524ad532da5216f8b7cdee011d3152f0de7d72	100644	1430	PR version, not live
+m3/migration/original-provider-20261017/TASK_STATUS.json	e75176c35340652dbc9e6bde9715fa6ac7c88cf3656b9ddaf3d9ba8f9cf37294	cf581eb730c80fa36a29f1f7e95ad3b9dc7d90ec	100644	1430	PR version, not live
+m3/migration/original-provider-20261017/sdk/pins.json	b3c1ba7f3b85e4c0a11949f5f4b787fc994d888ac8a0c0d97aa6ae04b6276b73	176375972d8a329f7c7c39a5ff1524c5fc7957f7	100644	1430	PR version, not live
+m3/migration/original-provider-20261017/sdk/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/after-009.txt	051debeca7331c8aab5c636c0d8cd200c61d60e5c3a64362597f96c17751ab17	a90f96ed14bdb8c2ce3310d3ed4a3e40cea28f4f	100644	1430	PR version, not live
+m3/migration/original-provider-20261017/sdk/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-original-mapping-provider-20261017/manifest.tsv	3d52b74babc843461aa20b27f39d064a2de93608e30206ce899b344ff4581ea7	b26de7b52b8fdb89913ce3362c326b47bbafc5f6	100644	1430	PR version, not live
+m3/migration/original-provider-20261017/sdk/src/test/java/com/m3/rewrite/backport/M3OriginalCliProviderRecipeTest.java	c9887254606d9f17fb60227dc4c7153cbaf988bd0dafc6199a2b5ebf2c7ce083	a09227509be476e87a2fa8772a97007ff5f9be84	100644	1430	PR version, not live
+m3/migration/original-provider-20261017/source-binding.json	f077e88a43c09ac276d6d14e42d437b042131eab3cdb983fa4a1ea78c010b1af	446001636778374497a4e7c353fdfdc51705130f	100644	1430	PR version, not live
+m3/migration/original-provider-20261017/source-review-summary.json	d94692942d73894698ee6433e1795a2f0a7e653d5a7c82eabfde9c633b644638	7f133f6fbbad04dc7cb27bbbdc6c9d144f82b920	100644	1430	PR version, not live

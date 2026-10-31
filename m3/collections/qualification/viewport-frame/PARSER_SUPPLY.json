@@ -1,0 +1,33 @@
+{
+  "schema": "M3JDK21_PINNED_JAVA_PARSER_SUPPLY_RECEIVING_V1",
+  "canonical_repo": "hsoliwal/com.synexia",
+  "canonical_commit": "771bc0c0f20b36e4ec10b7cceb22f839476955b9",
+  "canonical_recipe": "com.synexia.m3.PinnedJavaParserSupply20261025",
+  "target": ".github/workflows/m3-pinned-java-parser-supply.yml",
+  "product_pre_blob": "bde509ddffe8edba0b7fbb7996e523dc869125c9",
+  "source_post_blob": "552996c3bc6e99501017a28a991af6c54671a454",
+  "source_pre_sha256": "8325624e5583dcebeb93e25e81ee4f34b88bab6b49791f90e3acba91504c428e",
+  "source_post_sha256": "1508263ed200917bdf7f83e181aeaf4ff5e1ff3e76acf0015a2c47ae494fc187",
+  "local_maven_openrewrite": {
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "real_results": 1,
+    "replay_changes": 0
+  },
+  "local_source_shell_tests": {
+    "tests": 7,
+    "failures": 0
+  },
+  "independent_artifact_sha256": {
+    "jar": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+    "pom": "9465d6d13672fc36b517e7c06ad649a081829340b53ee3872bf08349ca9310c7"
+  },
+  "hosted_parser_download": "NOT_VERIFIED_AT_PUBLICATION",
+  "authentic_java21_lSt_result": "NOT_RUN",
+  "product_java_source_changed": false,
+  "runtime_native_source_changed": false,
+  "jdk_hotspot_jtreg": "NOT_RUN",
+  "viewport_swt_nebula_gef_rwt_native": "NOT_RUN"
+}

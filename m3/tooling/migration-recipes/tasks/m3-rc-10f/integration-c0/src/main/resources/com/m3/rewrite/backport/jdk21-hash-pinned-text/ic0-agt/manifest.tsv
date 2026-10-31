@@ -1,0 +1,4 @@
+m3/tooling/a3/src/main/java/com/m3/a3/A3Gate.java	ABSENT	de69a27d63c8591bce12967b82d01cd407d3e7a450ddf65fe8636d61616a4be7	target-1.txt
+m3/tooling/a3/src/test/java/com/m3/a3/A3GateTest.java	ABSENT	4153ba0405d19e1b49762ec2c1cdd6c42971e000f0660c674587d8611336ef14	target-2.txt
+m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-mastery-v6/A3Gate.java.txt	ABSENT	de69a27d63c8591bce12967b82d01cd407d3e7a450ddf65fe8636d61616a4be7	target-3.txt
+m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-mastery-v6/A3GateTest.java.txt	ABSENT	4153ba0405d19e1b49762ec2c1cdd6c42971e000f0660c674587d8611336ef14	target-4.txt

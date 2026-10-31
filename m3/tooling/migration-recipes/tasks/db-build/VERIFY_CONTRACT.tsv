@@ -1,0 +1,8 @@
+gate	state	qualification
+full_target_reads	PASS	Actual failure source, sibling, existing test and module inventory read
+source_diff	PASS	Only six assignment-form changes in production
+static_fences	PASS	Pinned pre/post snapshots; no guard/path/signature/config edits
+prior_compiler_failure	OBSERVED	Actual OpenRewrite8.17.1/JDK21 compile output
+current_compile_and_JUnit	PENDING	No syntax or dummy dependency substitute
+DB_tests_and_coverage	SEPARATE	51 pass at271f; coverage remains below0.99
+full_JDK_release	NOT_RUN	No acceptance claim

@@ -1,0 +1,46 @@
+{
+  "DLL": {
+    "bytes": 14336,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\native-compile-v1\\m3_arrays_current.dll",
+    "sha256": "8daf087344d1a54e99beccb664cd1d542abb8006421a368909ce3221a71f4144"
+  },
+  "JNI_warnings": 0,
+  "checks": 18612,
+  "exit": 0,
+  "fixture_compile": {
+    "bytes": 6830,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\configured-startup-v1\\runtime-v2\\compile-1\\RESULT.json",
+    "sha256": "6ea437df5cb283f1373a1cee3cb80a5c2e1b44860a2df9ab12c6eccafd5c1741"
+  },
+  "formal_review": "NO_VERDICT",
+  "full_goal": "UNFINISHED",
+  "global_slot_admission": false,
+  "input_seal": {
+    "bytes": 2624,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\seals\\current-native-composition-v1-array-contract-1.json",
+    "sha256": "f55fbed8b94f6934ea3e01a44f36c4a9c135a68d617793321501046f7e5b517a"
+  },
+  "log": {
+    "bytes": 60,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\current-native-composition-v1-array-contract-1.log",
+    "sha256": "37ff42901f929b6281b3be241fe4200bd6ffaf974c473f5a1bf9ec388582129b"
+  },
+  "native_compile": {
+    "bytes": 5242,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-native-composition-v1\\native-compile-v1\\RESULT.json",
+    "sha256": "a90ec76e2e5edbe9c20b7a8fa243ceb4ee96744b2e1aca1e155110e58d3f3a01"
+  },
+  "provider": {
+    "bytes": 10068,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\whole-arrays-module-v2\\ACTUAL_COMPILE_V1.json",
+    "sha256": "2aacf2a592aa651f27dd775df59315985919b168f55502fee76c691b7b3b4541"
+  },
+  "schema": "M3_CURRENT_NATIVE_ARRAY_RUNTIME_V1",
+  "scope": "Existing four-array allocation/type/identity/zero/negative/overflow/actual-GC-reference survival and UTF16 regressions with current composed DLL. Not installed image or whole collections qualification.",
+  "status": "PASS",
+  "terminal_receipt": {
+    "bytes": 3491,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\current-native-composition-v1-array-contract-1.json",
+    "sha256": "2fc1fdb4264eadfc57e87e0ab344980c0a1330c5ea97846cde4aed622d299655"
+  }
+}

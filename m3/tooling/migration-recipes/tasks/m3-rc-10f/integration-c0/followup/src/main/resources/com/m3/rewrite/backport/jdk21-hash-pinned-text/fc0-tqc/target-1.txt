@@ -1,0 +1,112 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 TQ counterpart
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-tq.yml'
+      - '.m3/openrewrite-recipes/**'
+      - 'm3/tooling/tq/**'
+      - 'm3/tooling/tq-sync/**'
+      - 'm3/tooling/lane28/**'
+      - 'm3/tooling/migration-recipes/**'
+      - 'm3/migration/**'
+      - 'm3/docs/name-mapping*'
+      - 'm3/docs/counterpart-naming.md'
+      - 'src/java.base/**'
+      - 'src/hotspot/**'
+      - 'test/jdk/java/lang/String/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: m3-tq-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  recipe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '21.0.8'
+      - name: Pin Maven
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 https://archive.apache.org/dist/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz -o "$RUNNER_TEMP/maven.tgz"
+          echo "a555254d6b53d267965a3404ecb14e53c3827c09c3b94b5678835887ab404556bfaf78dcfe03ba76fa2508649dca8531c74bca4d5846513522404d48e8c4ac8b $RUNNER_TEMP/maven.tgz" | sha512sum -c -
+          tar -xzf "$RUNNER_TEMP/maven.tgz" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/apache-maven-3.9.9/bin" >> "$GITHUB_PATH"
+      - name: Mapping validator dependencies
+        shell: bash
+        run: |
+          python3 -m venv "$RUNNER_TEMP/tq-python"
+          "$RUNNER_TEMP/tq-python/bin/python" -m pip install -r m3/migration/requirements.txt
+          echo "$RUNNER_TEMP/tq-python/bin" >> "$GITHUB_PATH"
+      - name: TQ successor recipe and custody
+        run: |
+          mvn -B -ntp -f m3/tooling/tq-sync/pom.xml verify
+          python3 m3/tooling/tq-sync/verify-plan.py --context ic0
+          python3 -B -S -m unittest discover -s m3/tooling/tq-sync/src/test/python -p test_ic0_context.py -v
+      - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
+        run: mvn -B -ntp -f m3/tooling/tq/pom.xml verify
+      - name: Current TQ workflow context regression
+        run: python3 -B -S -m unittest discover -s m3/tooling/tq/src/test/python -p test_ic0_context.py -v
+      - name: Preserve release evidence
+        run: |
+          mkdir -p m3/tooling/tq/target/release
+          cp m3/tooling/tq/target/*.log m3/tooling/tq/target/release/
+          cp m3/tooling/tq/target/surefire-reports/TEST-*.xml m3/tooling/tq/target/release/
+      - name: Native undefined-behavior gate
+        run: mvn -B -ntp -f m3/tooling/tq/pom.xml -Dtq.sanitize=true verify
+      - name: Installed bytes and retained mapping
+        shell: bash
+        run: |
+          python3 m3/tooling/tq/verify-plan.py --context ic0
+          python3 m3/migration/migration.py validate . --previous m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: tq-recipe-${{ github.sha }}
+          path: |
+            m3/tooling/tq-sync/target/surefire-reports/
+            m3/tooling/tq-sync/target/custody.json
+            m3/tooling/tq/target/*.log
+            m3/tooling/tq/target/*compilation.xml
+            m3/tooling/tq/target/custody.json
+            m3/tooling/tq/target/surefire-reports/
+            m3/tooling/tq/target/release/
+          if-no-files-found: error
+  image:
+    needs: recipe
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '21.0.8'
+      - name: Build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y autoconf make gcc g++ zip unzip libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+      - name: Build complete fastdebug image
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p m3/tooling/tq/target/image
+          bash configure --with-boot-jdk="$JAVA_HOME" --with-debug-level=fastdebug --with-jvm-variants=server --enable-warnings-as-errors 2>&1 | tee m3/tooling/tq/target/image/configure.log
+          make JOBS=2 images 2>&1 | tee m3/tooling/tq/target/image/build.log
+      - name: Match source with image and verify the M3 interpreter boundary
+        env:
+          M3_TEST_JDK: ${{ github.workspace }}/build/linux-x86_64-server-fastdebug/images/jdk
+        run: bash m3/tooling/tq/verify-image.sh
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: tq-image-${{ github.sha }}
+          path: m3/tooling/tq/target/image/
+          if-no-files-found: error

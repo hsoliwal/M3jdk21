@@ -1,0 +1,32 @@
+{
+  "cases": [
+    {
+      "case": "exact_candidate",
+      "expected": "ACCEPT",
+      "observed": "ACCEPT"
+    },
+    {
+      "case": "known_owner_byte_drift",
+      "expected": "receiver source drift: m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "observed": "receiver source drift: m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java"
+    },
+    {
+      "case": "known_owner_missing",
+      "expected": "receiver source drift: m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "observed": "receiver source drift: m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java"
+    },
+    {
+      "case": "unlisted_java_owner",
+      "expected": "receiver source coverage drift: com.m3.text",
+      "observed": "receiver source coverage drift: com.m3.text"
+    }
+  ],
+  "fixture_restored_exactly": true,
+  "helper_sha256": "6f458df3f6c01326f1d9365c708e95545b4594daa1b966b92af79988bb7648b7",
+  "locked_file_count": 145,
+  "schema": "M3_NLP_SOURCE_LOCK_GUARD_PROOF_1",
+  "source_coverage_guard_removed": false,
+  "source_lock_sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+  "state": "PASS",
+  "unchanged_production_verifier_sha256": "85bcb7e3e70a892f17481b0dcbcf08549a598b5de52a065583b7a8b9e909f917"
+}

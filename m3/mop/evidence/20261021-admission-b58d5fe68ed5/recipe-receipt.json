@@ -1,0 +1,291 @@
+{
+  "schema": "M3_MOP_TARGET_RECEIPT_V1",
+  "task": "mop-continuation-20261021",
+  "component": "memory",
+  "dataset": "mop-admission-20261021",
+  "phase": "STRING_QUALIFICATION",
+  "status": "FINITE_SDK_AND_RECEIVER_QUALIFIED",
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "qualified_source_baseline": "de5e0d18fa602c902b6164c6941938f6b2b6275d",
+    "publication_parent": "a62eacad46b51ce757ded74579f1ad2aabc4d638",
+    "before_hashes_are_qualified_source_preconditions": true
+  },
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "visibility": "private",
+    "commit": "b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5",
+    "pull_request": "https://github.com/hsoliwal/com.synexia/pull/12772",
+    "recipe": "com.synexia.m3jdk.AstBuildReverse20261017",
+    "qualified_engine_input_revision": "a78f94f5f6377b108effdbde3ce492eec4f53d5e"
+  },
+  "outputs": [
+    {
+      "path": "m3/mop/src/main/java/com/m3/mop/M3RecipeMemory.java",
+      "before_sha256": "567a191373c37f08a2643e46f2fca6e92e23146e53e19e5650d7fc4c2d8db7b2",
+      "after_sha256": "d26260c27d1ac4f4789fc130a400ebc198d85b65f75bdcaa43e670d91fb2e976",
+      "mode": "100644",
+      "bytes": 13678,
+      "git_blob": "49315ca98323dab451b52c7c486ec3e2417bbef7"
+    },
+    {
+      "path": "m3/mop/src/test/java/com/m3/mop/M3RecipeMemoryAdmissionContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "2b4568454a53f9faa7db923aca8ceb351c150a542fd31bc6ceec431da3f78d01",
+      "mode": "100644",
+      "bytes": 10462,
+      "git_blob": "8a134b86b5daf3ba1643210fb5749bc9231f828f"
+    },
+    {
+      "path": "m3/mop/verify.sh",
+      "before_sha256": "6d52aa8284e4ab50fd9113640d94b131217fc08d1ae68c0af01e4c87955423a1",
+      "after_sha256": "86d62198e4f20ba32be68892894588bb5addfc1d57e204fc936cc2b3404fa0f6",
+      "mode": "100644",
+      "bytes": 736,
+      "git_blob": "cfe35a7263c1785f207e06e2d5c6eaaa8cc9d968"
+    }
+  ],
+  "artifacts": {
+    "publication_scope": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/enhancements/mop-continuation-20261021/PUBLICATION_SCOPE.json",
+      "sha256": "73ba341ab938a3f61d3706a4424ed55df69b57a8bc1b19d6e938cb6fb78047a4",
+      "bytes": 2265,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/enhancements/mop-continuation-20261021/PUBLICATION_SCOPE.json"
+    },
+    "dataset": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/DATASET.json",
+      "sha256": "7d3add5b72da4638c68c6573e26638cf8df5cc7b53a3f4398c7d5644e52cf7ee",
+      "bytes": 754,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/DATASET.json"
+    },
+    "modes": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/MODES.tsv",
+      "sha256": "6d529bbe1dc134b0d78628651b49f5c4d69e046f27467007edea9e1d6eb305ae",
+      "bytes": 153,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/MODES.tsv"
+    },
+    "effective_engine": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/ENGINE_EFFECTIVE.tsv",
+      "sha256": "cfabbbf3804e852a62ea1ba00fb2f63028752d18b217144401b6bee5fb7be0ee",
+      "bytes": 747,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/ENGINE_EFFECTIVE.tsv"
+    },
+    "sdk_inputs": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/sdk/SDK_INPUTS.tsv",
+      "sha256": "3883e7934ad473ddc27c1166a1e9ab3df9baa9526ff34ec4eb25778e137102c0",
+      "bytes": 3171,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/sdk/SDK_INPUTS.tsv"
+    },
+    "sdk_results": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/sdk/SDK_RESULTS.tsv",
+      "sha256": "25ec4943cde101b61466268b3a35d3518f9ae628af9033087ca299fd048bf206",
+      "bytes": 530,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/sdk/SDK_RESULTS.tsv"
+    },
+    "qualification": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/QUALIFICATION.json",
+      "sha256": "02b7763897f583706a717c8bd16a279d0030bbf9d907313d784fa056c1e6e6c2",
+      "bytes": 2693,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/QUALIFICATION.json"
+    },
+    "runtime_evidence": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/preparation/evidence/candidate.json",
+      "sha256": "fb467983bd841a55c1a6957119a50b03836abf6504f7b0cf6e609f05a6e8be9a",
+      "bytes": 5966,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/preparation/evidence/candidate.json"
+    },
+    "strict_memory": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/memory/mop-continuation-20261021/RECIPE_MEMORY.tsv",
+      "sha256": "528a652d1d0726eba793304061dd6a80c7bdc03d9d488450afe05debcef8b9d7",
+      "bytes": 7140,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/memory/mop-continuation-20261021/RECIPE_MEMORY.tsv"
+    },
+    "correction_patch": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/sdk/combined.patch",
+      "sha256": "54332a5a4222304ac1f15ede1980ff1948e8aca5ae67b1c6ef9b8f0ac6107d39",
+      "bytes": 14095,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/sdk/combined.patch"
+    },
+    "guard": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/0002-M3RecipeMemoryAdmissionContract.java.txt",
+      "sha256": "2b4568454a53f9faa7db923aca8ceb351c150a542fd31bc6ceec431da3f78d01",
+      "bytes": 10462,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/0002-M3RecipeMemoryAdmissionContract.java.txt"
+    },
+    "memory_proof": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/M3_RECIPE_PROOF.tsv",
+      "sha256": "66edd45022510d92c48d087744ade65ccb438422f8463301a091d58d7b9cf609",
+      "bytes": 231,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/M3_RECIPE_PROOF.tsv"
+    },
+    "memory_admission": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/memory/mop-continuation-20261021/mop-admission-20261021.json",
+      "sha256": "80f969f07d423dd4662020ec3f8189280663e7ae8aa5919b2db2346eaad065ca",
+      "bytes": 2500,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/memory/mop-continuation-20261021/mop-admission-20261021.json"
+    },
+    "sdk_test_report": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/sdk/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "sha256": "c66d3ff3676b001d7a426a44cf9e589b643338ebc19a8136ab5ef5a4a2b5fb76",
+      "bytes": 18849,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/sdk/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+    },
+    "receiver_apply": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/sdk/receiver-apply.log",
+      "sha256": "40a32613418bb6685dcc4a6b2632b290b9a09af8625a02882dc1a189c38ddba4",
+      "bytes": 138,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/sdk/receiver-apply.log"
+    },
+    "receiver_fixed_point": {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/sdk/receiver-fixed-point.log",
+      "sha256": "be26d567275372f3a8ccf93aa86ee3805f620a4c92d02792be80a40ae11cbda1",
+      "bytes": 138,
+      "url": "https://github.com/hsoliwal/com.synexia/blob/b58d5fe68ed54aa62ca317e73851f99e2dd6ebc5/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/sdk/receiver-fixed-point.log"
+    }
+  },
+  "recipe_input_seals": [
+    {
+      "sdk_input": "crate/ENGINE_SOURCES.tsv",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/ENGINE_SOURCES.tsv",
+      "sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e"
+    },
+    {
+      "sdk_input": "crate/datasets/mop-admission-20261021/DATASET.json",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/DATASET.json",
+      "sha256": "7d3add5b72da4638c68c6573e26638cf8df5cc7b53a3f4398c7d5644e52cf7ee"
+    },
+    {
+      "sdk_input": "crate/datasets/mop-admission-20261021/ENGINE_EFFECTIVE.tsv",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/ENGINE_EFFECTIVE.tsv",
+      "sha256": "cfabbbf3804e852a62ea1ba00fb2f63028752d18b217144401b6bee5fb7be0ee"
+    },
+    {
+      "sdk_input": "crate/datasets/mop-admission-20261021/MODES.tsv",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/MODES.tsv",
+      "sha256": "6d529bbe1dc134b0d78628651b49f5c4d69e046f27467007edea9e1d6eb305ae"
+    },
+    {
+      "sdk_input": "crate/datasets/mop-admission-20261021/resources/META-INF/rewrite/m3-ast-build-reverse-20261017-mop-admission-20261021.yml",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/resources/META-INF/rewrite/m3-ast-build-reverse-20261017-mop-admission-20261021.yml",
+      "sha256": "77a5745e06e9aa1a5aa51241f6648837f80e3f62b98166287c67469992bb4787"
+    },
+    {
+      "sdk_input": "crate/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/0001-M3RecipeMemory.java.txt",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/0001-M3RecipeMemory.java.txt",
+      "sha256": "d26260c27d1ac4f4789fc130a400ebc198d85b65f75bdcaa43e670d91fb2e976"
+    },
+    {
+      "sdk_input": "crate/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/0002-M3RecipeMemoryAdmissionContract.java.txt",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/0002-M3RecipeMemoryAdmissionContract.java.txt",
+      "sha256": "2b4568454a53f9faa7db923aca8ceb351c150a542fd31bc6ceec431da3f78d01"
+    },
+    {
+      "sdk_input": "crate/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/manifest.tsv",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/manifest.tsv",
+      "sha256": "c484ca2dc748ccd4cd0cc59ce7f0d07337dd2bf5b6b0ec99015c9d6a8fc68ded"
+    },
+    {
+      "sdk_input": "crate/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/pre/0001-M3RecipeMemory.java.txt",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/pre/0001-M3RecipeMemory.java.txt",
+      "sha256": "567a191373c37f08a2643e46f2fca6e92e23146e53e19e5650d7fc4c2d8db7b2"
+    },
+    {
+      "sdk_input": "crate/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-mop-admission-20261021/0003-verify.sh.txt",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-mop-admission-20261021/0003-verify.sh.txt",
+      "sha256": "86d62198e4f20ba32be68892894588bb5addfc1d57e204fc936cc2b3404fa0f6"
+    },
+    {
+      "sdk_input": "crate/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-mop-admission-20261021/manifest.tsv",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-mop-admission-20261021/manifest.tsv",
+      "sha256": "a63294e76bdc690dc95481c3c7bd4b9fcb12ba4cadadfb45147f37dad0283966"
+    },
+    {
+      "sdk_input": "crate/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-mop-admission-20261021/pre/0003-verify.sh.txt",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-text/m3-ast-build-reverse-20261017-mop-admission-20261021/pre/0003-verify.sh.txt",
+      "sha256": "6d52aa8284e4ab50fd9113640d94b131217fc08d1ae68c0af01e4c87955423a1"
+    },
+    {
+      "sdk_input": "crate/pom.xml",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/pom.xml",
+      "sha256": "56567ab0175c47dbbada68bec8fe0fd9bbe027d6174c5cefef695a0b7283d448"
+    },
+    {
+      "sdk_input": "crate/prepare.py",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/prepare.py",
+      "sha256": "4a585b670e5d9defab8e7d63d6fc80508321d0b0e750a15b667cbe6ee14eefc4"
+    },
+    {
+      "sdk_input": "crate/receive.py",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/receive.py",
+      "sha256": "5d9df3c2623c21c43ade4cbfcbe459026af3983e1d2b21018397dc12e775898a"
+    },
+    {
+      "sdk_input": "crate/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
+    },
+    {
+      "sdk_input": "owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    },
+    {
+      "sdk_input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "595ab8c4314de4f84708b3ec081fbef375e534787e5684ee98131ee16ab397b8"
+    },
+    {
+      "sdk_input": "owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "c4517401a7defd94ecc621bb2c19773bd6672c8fa3ee965c1ad37a63718bd92a"
+    },
+    {
+      "sdk_input": "owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "canonical_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+    }
+  ],
+  "sdk": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "receiver": {
+    "actual_sdk_results": true,
+    "apply_changes": 3,
+    "fixed_point_changes": 0,
+    "received_bytes_match_sdk_output_hashes": true
+  },
+  "runtime": {
+    "baseline_failed_cases_per_mode": 4,
+    "modes": [
+      "normal",
+      "-Xint"
+    ],
+    "public_protected_api": "UNCHANGED",
+    "received_new_checks_per_mode": 219,
+    "received_original_checks_per_mode": 27
+  },
+  "admitted_correction": {
+    "correction": "SELF@synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/evidence/mop-continuation-20261021/mop-admission-20261021/sdk/combined.patch#54332a5a4222304ac1f15ede1980ff1948e8aca5ae67b1c6ef9b8f0ac6107d39",
+    "guard": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/mop-admission-20261021/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-mop-admission-20261021/0002-M3RecipeMemoryAdmissionContract.java.txt",
+    "utc": "2026-10-21T06:50:19.478065Z",
+    "trigger": "mop/admission/round-trip",
+    "lesson": "Atomize framing, timestamp admission and lossless encoding. Admit the canonical empty header before stripping row delimiters; enforce the reader epoch floor and strict UTF-8 encoding before filesystem publication. Preserve valid Unicode, proof binding, append-only prefix, locking and atomic move. Retain the failing oracle before replacement.",
+    "admission_implementation_sha256": "d26260c27d1ac4f4789fc130a400ebc198d85b65f75bdcaa43e670d91fb2e976"
+  },
+  "limits": [
+    "No full source-built M3JDK21 image, jtreg/JCK or cross-platform qualification.",
+    "No new JNI declarations or native implementation change; scoped native-backed I/O is not a native-engine gate.",
+    "No performance claim or phase promotion; retain STRING_QUALIFICATION."
+  ],
+  "unrun_broader_gates": {
+    "full_sdk_reactor": true,
+    "full_source_built_jdk_image": true,
+    "jtreg_or_jck": true,
+    "cross_platform": true,
+    "m3fs_native_engine": true
+  },
+  "payload_verification_scope": "Local received bytes, canonical input seals, SDK test/receiver records, and strict memory/proof bindings checked. Publication-parent source admission and remote commit verification are performed by the publisher; this generator makes no network or Git calls."
+}

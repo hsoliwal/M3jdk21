@@ -1,0 +1,10 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.RemoveAnnotationAttribute"
+contributors:
+- name: "Tobias Lidskog"
+  email: "tlidskog@paypal.com"
+  lineCount: 101
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 1

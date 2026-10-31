@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.IllegalStateException: Synexia source hash drift: synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTPrecompute.java expected=7baae702ff9c58180329df4b2c9947d3f2d6247fca37757d9656b8ec776460b7 actual=d8961b939f815137b9d6c0c832bfd67ad1e88802381f8f31a21df6876277530e
+	at com.m3.synexia.importer.SynexiaImporter.verifySources(SynexiaImporter.java:63)
+	at com.m3.synexia.importer.SynexiaImporter.verify(SynexiaImporter.java:21)
+	at com.m3.synexia.importer.SynexiaImportCli.main(SynexiaImportCli.java:22)

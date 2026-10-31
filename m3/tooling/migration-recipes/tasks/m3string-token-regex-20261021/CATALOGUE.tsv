@@ -1,0 +1,6 @@
+category	problem_shape	candidate	donor_or_reference	license_boundary	decision	rationale
+regex-token-sequence	regular expression over canonical token sequence	M3StringTokenRegex	Stanford CoreNLP TokensRegex	reference-only shape	ADAPT	atomic unit is M3 canonical leaf token not CoreNLP token annotation
+regex-rich-token	predicates and regex operators over rich tokens	M3String token facts/masks	Square T-Rex	reference-only shape	REFERENCE_ONLY	use shape terminology only; M3 tokens retain canonical owner/range identity
+regex-nfa	bit-mask NFA over <=62 pattern atoms	long frontier + epsilon closure	M3JDK21 existing M3StringRegexDp	GPLv2+Classpath target owner	REUSE_EXISTING_SHAPE	preserve bounded non-backtracking mask mechanics
+regex-native-candidate	hash/fingerprint SIMD/native rejection	(String.hashCode,length) token fingerprint	M3JDK21 existing hash-first gates	target-owned	ADAPT	collision can only create false-positive candidate; Java exact verification is authoritative
+array-dp	regex state transition over sequence	bitset frontier rather than O(nm) matrix	LeetCode regex-matching category	problem reference only	REFERENCE_ONLY	category guides recurrence; no platform solution body copied

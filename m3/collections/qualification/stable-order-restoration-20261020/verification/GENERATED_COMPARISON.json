@@ -1,0 +1,140 @@
+{
+  "status": "GENERATED_JAVA_PASS_NATIVE_GATE_SEPARATE",
+  "scope": "One existing stable-order restoration; exact SDK-emitted receiver projection and verification sources",
+  "baseline_receipt": {
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/baseline/RESULTS.json",
+    "sha256": "dc761bfabdf8785e4fbb099ae6970a0acbf81f8cda0b67ebdc95ba0e97cbdbe1"
+  },
+  "generated_receipt": {
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/generated/RESULTS.json",
+    "sha256": "48ea94ba750af3acb228c2c854458149a08b0f5d7ea1bae99191eaa3d18014b4"
+  },
+  "sdk_receipt": {
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/sdk/RESULTS.json",
+    "sha256": "5e4d2fa1eab5702d65a1b6d44ca1a1d099d34e8e5620c85a4439a11c4d6823a1"
+  },
+  "diagnostic_comparison_retained_separately": {
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/DIAGNOSTIC_COMPARISON.json",
+    "sha256": "e60a1bcd07db5087c99e8300c92aef3223196b06e4f3dd95c594c3a9448c4b06"
+  },
+  "exact_candidate_sha256": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e",
+  "public_protected_api_identical": true,
+  "deterministic_observations_sha256": "e15c399b7be3d8c0fbd38bc6e2cd4c63b93bb0b95d1272bce9acdcc7bec5445b",
+  "workload": {
+    "view_rows": 32750,
+    "input_rows": 32768,
+    "warmup": 50,
+    "operations_per_sample": 100,
+    "samples": 3,
+    "pattern": "8 equal signed-long values per original group; ascending slice(5,size-18) sorted descending; split endpoint tie groups"
+  },
+  "metrics": {
+    "wall_ns": {
+      "baseline_samples": [
+        62256207,
+        56981777,
+        55912702
+      ],
+      "generated_samples": [
+        6586803,
+        4671171,
+        4451510
+      ],
+      "baseline_median": 56981777,
+      "generated_median": 4671171
+    },
+    "thread_cpu_ns": {
+      "baseline_samples": [
+        60532741,
+        57242035,
+        56081150
+      ],
+      "generated_samples": [
+        6722733,
+        4797184,
+        4834429
+      ],
+      "baseline_median": 57242035,
+      "generated_median": 4834429
+    },
+    "process_cpu_ns": {
+      "baseline_samples": [
+        60000000,
+        60000000,
+        60000000
+      ],
+      "generated_samples": [
+        10000000,
+        0,
+        0
+      ],
+      "baseline_median": 60000000,
+      "generated_median": 0
+    },
+    "allocated_bytes": {
+      "baseline_samples": [
+        26208304,
+        26207984,
+        26207984
+      ],
+      "generated_samples": [
+        13106704,
+        13106384,
+        13106384
+      ],
+      "baseline_median": 26207984,
+      "generated_median": 13106384
+    },
+    "heap_after_requested_gc_delta": {
+      "baseline_samples": [
+        1960,
+        32,
+        32
+      ],
+      "generated_samples": [
+        1960,
+        32,
+        32
+      ],
+      "baseline_median": 32,
+      "generated_median": 32
+    },
+    "rss_kib": {
+      "baseline_samples": [
+        72324,
+        75440,
+        75476
+      ],
+      "generated_samples": [
+        59872,
+        60924,
+        60960
+      ],
+      "baseline_median": 75440,
+      "generated_median": 60924
+    },
+    "vmhwm_kib": {
+      "baseline_samples": [
+        72324,
+        75440,
+        75476
+      ],
+      "generated_samples": [
+        59872,
+        60924,
+        60960
+      ],
+      "baseline_median": 75440,
+      "generated_median": 60924
+    }
+  },
+  "warm_wall_ratio_observed_decimal": "12.198606516",
+  "allocation_saved_bytes_per_operation": 131016,
+  "limits": [
+    "Exact generated receiver; native ABI/runtime proof remains separately assigned",
+    "Five existing JUnit entrypoints and finite source-owned oracles do not establish complete module or five-provider compatibility",
+    "One warm workload with three observations; no general speed claim",
+    "Requested-GC heap delta does not demonstrate reduced retained storage; RSS/VmHWM cover the whole process",
+    "Integrated receiving phase remains STRING"
+  ]
+}

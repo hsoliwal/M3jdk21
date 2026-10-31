@@ -1,0 +1,8 @@
+{
+  "stage": "baseline product compile",
+  "signature": "[this-escape] possible this escape before subclass is fully initialized",
+  "cause": "isolated harness enabled a warning excluded by the existing java.desktop product build",
+  "correction": "Use actual module this-escape exclusion; keep all remaining warnings as errors; no source change",
+  "authority": "make/modules/java.desktop/Java.gmk@677437be295b23f7ccf7409be287008944d0e8b0",
+  "authority_sha256": "70b9c7064b7c2e32745555d1ff1019716320f86ff2f6d0aa50f290502ae75b9d"
+}

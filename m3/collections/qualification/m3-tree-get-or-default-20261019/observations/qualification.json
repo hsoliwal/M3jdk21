@@ -1,0 +1,91 @@
+{
+  "status": "PASS_SCOPED_QUALIFICATION",
+  "targetBase": "0228a71901cd8f0abb38bccdc4941da2ec7d1aa9",
+  "canonicalRecipeBase": "08e84ed4430894e07dea272758401fd7202d2187",
+  "recipe": "com.synexia.m3.TreeGetOrDefaultCallbacks",
+  "recipeExecution": "OPENREWRITE_SDK_8.17.1_VIA_OFFLINE_MAVEN",
+  "manifestSha256": "c7a4b290acfcc4c2b51deb230cc2364a809c004ec1981f16352a70a524caf2f2",
+  "jdkOracle": "Unchanged PR 1442 fixture and all 640 complete case objects",
+  "jdkRuntime": {
+    "kind": "identity",
+    "provider": "java.util.TreeMap",
+    "origin": "jrt:/java.base",
+    "classSha256": "1bbb94b566de21fa9aff705f169097207a184b4a9cb60ad9c5fb78ae0d1b25c5",
+    "javaHome": "/tmp/m3-cursor-tools/jdk-21.0.12.1+1",
+    "javaVersion": "21.0.12.1",
+    "temp": "/tmp",
+    "arguments": [
+      "-Xmx256m",
+      "-Duser.language=en",
+      "-DexpectedJavaHome=/tmp/m3-cursor-tools/jdk-21.0.12.1+1",
+      "-DexpectedProviderOrigin=jrt:/java.base"
+    ]
+  },
+  "baselineProvider": {
+    "kind": "identity",
+    "provider": "com.m3.collections.M3TreeMap",
+    "origin": "file:/workspace/scratch/a20ebe6f78bb/M3jdk21/m3/collections/target/classes/",
+    "classSha256": "c2132b9c0641948a50befb7b42418be564b2925b6e3e73f76eb1c753aac938d5",
+    "javaHome": "/tmp/m3-cursor-tools/jdk-21.0.12.1+1",
+    "javaVersion": "21.0.12.1",
+    "temp": "/tmp",
+    "arguments": [
+      "-Xmx256m",
+      "-Duser.language=en",
+      "-DexpectedJavaHome=/tmp/m3-cursor-tools/jdk-21.0.12.1+1",
+      "-DexpectedProviderOrigin=file:/workspace/scratch/a20ebe6f78bb/M3jdk21/m3/collections/target/classes/"
+    ]
+  },
+  "candidateProvider": {
+    "kind": "identity",
+    "provider": "com.m3.collections.M3TreeMap",
+    "origin": "file:/workspace/scratch/a20ebe6f78bb/M3jdk21/m3/collections/target/classes/",
+    "classSha256": "167f30a94f324d217529eb747fdbe1a489dd4fb0e49350265190d17ede30c071",
+    "javaHome": "/tmp/m3-cursor-tools/jdk-21.0.12.1+1",
+    "javaVersion": "21.0.12.1",
+    "temp": "/tmp",
+    "arguments": [
+      "-Xmx256m",
+      "-Duser.language=en",
+      "-DexpectedJavaHome=/tmp/m3-cursor-tools/jdk-21.0.12.1+1",
+      "-DexpectedProviderOrigin=file:/workspace/scratch/a20ebe6f78bb/M3jdk21/m3/collections/target/classes/"
+    ]
+  },
+  "baselineMatches": 630,
+  "candidateMatches": 640,
+  "repairedCases": 10,
+  "preservedEmptyCases": 144,
+  "introducedDifferences": 0,
+  "effectivePublicMethodSignaturesUnchanged": 85,
+  "reflectionNote": "Explicit overrides replace compiler bridges; declaration metadata is not claimed identical.",
+  "avlStorage": "Nested Tree source and declared fields/methods unchanged; no entry storage introduced.",
+  "recipeTests": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "collectionTests": {
+    "tests": 241,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "inheritedTestReconciled": "M3FootprintContractTest empty comparator get: 1 -> JDK-verified 0 calls; remaining assertions retained.",
+  "scope": "Finite corpus and standalone collection Maven module; not universal AVL/red-black callback path equivalence.",
+  "notRun": [
+    "whole Synexia reactor and provenance CI",
+    "hosted CI",
+    "full OpenJDK build/jtreg"
+  ],
+  "notApplicable": [
+    "JNI/native runtime changes",
+    "performance gain claims"
+  ],
+  "retainedFailures": [
+    "missing SLF4J in initial proof POM (fixed)",
+    "baseline regression: two failures",
+    "stale compiled-class attempt rejected by unchanged provider hash",
+    "inherited empty-comparator footprint expectation (reconciled)"
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "reviewer": "/root/correction_memory/interop_semantics",
+  "created_utc": "2026-10-20T14:56:26.093115+00:00",
+  "result": "CHANGES_REQUIRED_BEFORE_FINAL_METADATA_PUBLICATION",
+  "scope": "Read-only source review of task publication adapter and existing helpers/policy; current crate plus parent-confirmed forthcoming memory/evidence categories; adapter not executed.",
+  "adapter": {
+    "path": "work-canonical-publication-20261020/prepare_interop_publication.py",
+    "reviewed_sha256": "4f6064e3660ded955026471f64c636fb45964b6929c1e7abac2fe79c12d8ffc9",
+    "observed_sha256_at_report": "1b82a1ae75dc198a9ae84968269f6b76ff76ef77222ce53ac9058f860bfa910c",
+    "unchanged_since_review": false
+  },
+  "helper_sha256": "7ea7caf1913cd2698e744db4b4843c20641eb64a75807ec5e46cabb5c3a259ce",
+  "checker_sha256": "55e8183c58e4bf3608355e650e3be18609feab70f7baa75c935716b396d24900",
+  "policy_sha256": "4a3bbc60b2960774058c8a822999e8668239c9192571633480463d47d31381dc",
+  "findings": [
+    {
+      "id": "IPR-1",
+      "severity": "P1",
+      "area": "Donor-origin classification of planned Spring disassembly",
+      "adapter_lines": "95-100; defaults 72-74",
+      "planned_canonical_path": "evidence/interop-correction/independent/Spring-MultiValueMapAdapter-javap.log",
+      "current_rule_result": {
+        "classification": "FIRST_PARTY_NO_HEADER",
+        "source_url": "https://github.com/hsoliwal/com.synexia",
+        "source_revision": "recorded-evidence-sha256:<digest>",
+        "source_path": "new canonical evidence path",
+        "license_id": "Apache-2.0"
+      },
+      "problem": "The log contains donor method bytecode disassembly, not only first-party measurements or factual run metadata. The generic .log rule loses its Spring origin and describes it as first-party material.",
+      "local_log": "work-interop-fix-20261020/independent/Spring-MultiValueMapAdapter-javap.log",
+      "log_sha256": "9a3e94a883baa9c858394822323eaedd1fe9659c36506401c7662de1fb8555aa",
+      "jar": "org.springframework:spring-core:6.2.0",
+      "jar_sha256": "3b82629da38717dd616a70ec1055f9a8e208d58132071a6314a32159f8bce162",
+      "jar_class": "org/springframework/util/MultiValueMapAdapter.class",
+      "donor_source_pin": {
+        "repository": "spring-projects/spring-framework",
+        "commit": "5024bb72279188f1d0dcfe19e8abdd4bdb9887c8",
+        "path": "spring-core/src/main/java/org/springframework/util/MultiValueMapAdapter.java",
+        "git_blob": "4c7c2f1d133cccef1eab060524a71cd3de4b45a9"
+      },
+      "notice": {
+        "jar_path": "META-INF/notice.txt",
+        "sha256": "141d4305646d8e4268468641b3ace0aef3e0b8f73e0319056e12f601079e634e"
+      },
+      "recommendation": "Place a finite exact-path donor-origin override before the generic evidence rule; verify its log seal, retain Spring jar/version/class identity and Apache-2.0 attribution/NOTICE. GENERATED with DONOR_BYTECODE_DISASSEMBLY_EVIDENCE accurately distinguishes the recorded rendering from a copied source file. If adding a donor NOTICE under licenses/, explicitly classify that exact custody path because the current licenses/ rule accepts only Apache-2.0.txt."
+    },
+    {
+      "id": "IPR-2",
+      "severity": "P2",
+      "area": "Exact target-owner fixture source-origin completeness",
+      "adapter_lines": "95-100; defaults 72-74",
+      "problem": "Known copied M3 owner files placed under evidence/ or memory/fixtures/ receive a canonical self-path and recorded-evidence hash as their origin. PRESERVED_HISTORY and Apache-2.0 are appropriate, but those fields omit their known target repository, revision and source path.",
+      "known_inputs": [
+        {
+          "local_path": "work-interop-fix-20261020/independent/M3SpringArrayMultiValueMap.java",
+          "source_path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringArrayMultiValueMap.java",
+          "sha256": "8062247a92ee9dc90d313b715ba9158e47c53b3e7848508a5fdd54ddaaaecb96"
+        },
+        {
+          "local_path": "work-final-review-20261020/interop/M3ApacheBag.java",
+          "source_path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java",
+          "sha256": "5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f"
+        }
+      ],
+      "source_repository": "hsoliwal/M3JDK21",
+      "source_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+      "recommendation": "For the final packed paths, use finite preserved-history origin overrides and check byte seals against the known M3JDK21 sources. The exact sources and receipts already exist; no generic runtime logic or broad new classifier is needed. Independent newly authored probes and run-result metadata can retain their recorded first-party evidence provenance."
+    }
+  ],
+  "accepted_design_checks": [
+    "Unchanged helper provides inventory/cache/symlink refusal, Git blob/SHA-256 calculations, append_exact, and unchanged checker loading; adapter imports do not invoke helper.main.",
+    "Engine rows verify both recorded Git blob and SHA-256 and retain engine origin/revision/license; host rows likewise verify exact bytes and retain host source revision/path.",
+    "Payload resources verify manifest SHA-256 and retain target preimage revision or reviewed postimage identity; current 13 test/metadata targets are Apache-2.0.",
+    "FIRST_PARTY_NO_HEADER covers new JSON/TSV/CSV and SHA256SUMS metadata; new commentable first-party source/docs remain subject to the unchanged canonical SPDX check.",
+    "Ordinary first-party execution logs, Surefire XML/text and correction diffs may be recorded as task evidence; file extension alone is insufficient for included donor disassembly.",
+    "Adapter appends only the interop crate namespace plus central ledger/registry successors. It uses exact pinned prior bytes and asserts prefix preservation. It does not write main canonical source files or implement SDK/runtime generation.",
+    "Projection validation is correctly described as an isolated unchanged-API gate, not a whole remote Git branch gate.",
+    "Final moving-path and per-file blob rechecks refuse a crate changed during authoring. The final packet must be frozen before the publication result is used."
+  ],
+  "base_preservation": {
+    "main_C_source_files": 318,
+    "main_C_path_or_byte_differences": 0,
+    "main_C_reference_receipt_sha256": "50e3e786afb021dbb1c1116d03f79a44cf2d6b1394f62ce71a7f35d68910d5ff",
+    "ledger_git_blob": "a039aaa32905432b16b938fb342c89d3883f6c5e",
+    "ledger_sha256": "3a140ae5c0115c66fe24fe17a024ba0f6d497c9c4c3c9ef714f6954c6864aee6",
+    "registry_git_blob": "60a76c5c06e1059a4f7919761b155cf5ef90b8fe",
+    "registry_sha256": "35bfb6220861c46b0373407a25ab079dade32157c98ae4033c8a2bba97935f8f",
+    "append_exact_preserves_prefix_by_source_inspection": true
+  },
+  "separate_custody_review": "work-interop-fix-20261020/independent/CANONICAL_13_TARGET_CUSTODY_20261020.json",
+  "limits": [
+    "Memory/evidence packet was still being assembled at review; exact final path inventory and output classifications require review after freeze.",
+    "No adapter, Maven, SDK, checker projection, or remote publication was executed by this review.",
+    "Reported findings apply to the recorded adapter SHA-256; later fixes require a separate follow-up."
+  ]
+}

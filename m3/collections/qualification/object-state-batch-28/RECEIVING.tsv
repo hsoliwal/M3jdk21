@@ -1,0 +1,16 @@
+# M3JDK21 separately-built collection receiving, not java.base promotion
+source_repository	hsoliwal/com.synexia
+source_pr	12097
+source_commit	9e8e3acf0432f988587598749c44cbf23550301b
+target_base	4e29dc9d4141261e8763fbe9ffd6a20e017b1aff
+target_owner	com.m3.collections.M3ObjectStateBatch28
+recipe	com.synexia.rewrite.M3ObjectStateBatch28
+generation_owner	M3ObjectStateSlots28
+state_representation	unsigned 8-bit flags in existing segmented lanes
+jni_owner	M3IndexMaskCompactor (unchanged)
+promotion_phase	WAITING_FOR_STRING
+local_sdk_tests	4 PASS
+local_behavior_checks	1720349
+local_seeded_operations	49152
+native_test	NOT_RUN_LOCALLY (focused CI requests inherited JNI regression)
+hosted	NOT_YET_OBSERVED

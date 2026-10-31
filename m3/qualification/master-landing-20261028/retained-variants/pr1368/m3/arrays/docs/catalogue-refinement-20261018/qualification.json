@@ -1,0 +1,623 @@
+{
+  "schema": "m3.arrays.catalogue-refinement-qualification.v1",
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "qualification_date_utc": "2026-10-18",
+  "decision": "TEST_REFINEMENTS_SELECTED_RUNTIME_COMPARATOR_REJECTED",
+  "target_repository": "https://github.com/hsoliwal/M3jdk21",
+  "target_baseline_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "selected_source_changes": [
+    {
+      "path": "m3/arrays/src/main/native/tests/m3_arrays_checks.c",
+      "before_sha256": "eeccc76a11969a9f235c73fb4e71a64c211af4dc8abe29759bffb161dbf947ab",
+      "after_sha256": "5bbaf29b0b184fdd97f6765843910fde094f7ebe416e7276578290afef036977"
+    },
+    {
+      "path": "m3/arrays/src/test/java/com/m3/arrays/M3ArrayNativeTest.java",
+      "before_sha256": "e0b08d8dae4311127827dc606723180aa3a7f0a1141a147d30b8cdbe1a65a63e",
+      "after_sha256": "a7138863de372351d655bd9be6d1d7bf7da9bf71c252d9187acf85e3c3bf3cef"
+    }
+  ],
+  "retained_runtime_sources": [
+    {
+      "path": "m3/arrays/src/main/native/m3_arrays.c",
+      "sha256": "0c7be7f8176ca235c40d88aad2cefab15e7ce7363d7fc648bafba4fdb535695d"
+    },
+    {
+      "path": "m3/arrays/src/main/native/include/m3_arrays.h",
+      "sha256": "f2eec872591c7af40c13af75012fb20efb8376cdb29209c9e8151fd9775d758d"
+    },
+    {
+      "path": "m3/arrays/src/main/native/m3_arrays_jni.c",
+      "sha256": "d5dd8f71a86e5f527941886a5358eeec5596a0f6a5735c82db8c10b72a129d1a"
+    },
+    {
+      "path": "m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java",
+      "sha256": "54e15c58f4467d2e27155b521e49e1bfe81d0bce1459e2c804c38ade5fcd4eec"
+    }
+  ],
+  "executed_qualification": {
+    "native_selected_combination": {
+      "status": "PASS",
+      "selected_checks_with_unchanged_baseline_comparator": true,
+      "cases": 187008,
+      "failures": 0,
+      "seed": "0x4d335554",
+      "stdout": "M3_UTF16_NATIVE_CORPUS seed=0x4d335554 differential_cases=187008 failures=0\n",
+      "stdout_sha256": "8886ec5e66f83839045eb8ed85bbf2c35ed5de819cf9a3931384925e1a205ee1"
+    },
+    "actual_java_test_class": {
+      "class": "com.m3.arrays.M3ArrayNativeTest",
+      "status": "PASS_FOCUSED_DIRECT_METHOD_INVOCATION",
+      "methods": [
+        "javaFallbackHasExactCompareAndMaterializationSemantics",
+        "optionalNativeProviderMatchesJavaAcrossChunkAndUnicodeBoundaries",
+        "comparisonRetainsExactResultsAcrossLanesOffsetsAndSeededInputs",
+        "publicRangeNullAndEmptyValidationStaysExact",
+        "actualJniDirectValidationKeepsItsOwnRefusalContract"
+      ],
+      "random_trials": 4096,
+      "seed": "0x4d335554",
+      "modes": [
+        "java_fallback",
+        "actual_baseline_jni"
+      ],
+      "baseline_native_loaded": true,
+      "native_stdout": "M3_ARRAY_ACTUAL_TEST_METHODS_PASS mode=native invoked_methods=5 random_trials=4096 seed=0x4d335554 native_loaded=true\n",
+      "native_stdout_sha256": "f4b3013de7b18edac8977f80f5428d392587f2f3098a22c64072034540299bf7",
+      "fallback_stdout_sha256": "cde38d7945c9a40c51582edec9e0c791c2bf5f06fe64142142f9fcd464735bbf",
+      "javac_flags": [
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror"
+      ],
+      "native_vm_flags": [
+        "-ea",
+        "-Xcheck:jni",
+        "-Dm3.arrays.native.required=true",
+        "-Dm3.arrays.native.path=<native-library>"
+      ],
+      "assertion_dependencies": [
+        "org.junit.jupiter:junit-jupiter-api:5.10.2",
+        "org.junit.platform:junit-platform-commons:1.10.2",
+        "org.opentest4j:opentest4j:1.3.0",
+        "org.apiguardian:apiguardian-api:1.1.2"
+      ],
+      "repository_pom_junit_version": "5.10.2-m3-source-1",
+      "maven_surefire_discovery_executed": false
+    },
+    "jni_abi": {
+      "status": "PASS_GENERATED_DECLARATION_EXPORT_PARITY",
+      "exports": [
+        "Java_com_m3_arrays_M3ArrayNative_nativeCompareUtf16",
+        "Java_com_m3_arrays_M3ArrayNative_nativeConcatenateUtf16"
+      ]
+    },
+    "native_required_refusal": {
+      "status": "PASS_EXPECTED_REFUSAL",
+      "condition": "required native provider without m3.arrays.native.path",
+      "expected_diagnostic": "Actual JNI qualification requires m3.arrays.native.path"
+    }
+  },
+  "normalized_recorded_native_commands": {
+    "normalization": "Only workspace/source locations, output directory and output label are expressed with public repository-relative paths; source contents and compiler flags are pinned above.",
+    "build_check": [
+      "gcc",
+      "-std=c17",
+      "-O3",
+      "-DNDEBUG",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-fno-lto",
+      "-fstack-usage",
+      "-I",
+      "m3/arrays/src/main/native/include",
+      "m3/arrays/src/main/native/m3_arrays.c",
+      "m3/arrays/src/main/native/tests/m3_arrays_checks.c",
+      "-o",
+      "m3/arrays/target/catalogue-refinement-20261018/m3_arrays_checks"
+    ],
+    "run_check": [
+      "m3/arrays/target/catalogue-refinement-20261018/m3_arrays_checks"
+    ],
+    "build_baseline_jni": [
+      "gcc",
+      "-std=c17",
+      "-O3",
+      "-DNDEBUG",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wconversion",
+      "-Wshadow",
+      "-Wpedantic",
+      "-fno-lto",
+      "-fstack-usage",
+      "-I",
+      "m3/arrays/src/main/native/include",
+      "-fPIC",
+      "-shared",
+      "-I<JDK21>/include",
+      "-I<JDK21>/include/linux",
+      "m3/arrays/src/main/native/m3_arrays.c",
+      "m3/arrays/src/main/native/m3_arrays_jni.c",
+      "-Wl,--no-undefined",
+      "-o",
+      "m3/arrays/target/catalogue-refinement-20261018/libm3_arrays_baseline.so"
+    ]
+  },
+  "repository_reproduction_commands": {
+    "status": "DOCUMENTED_COMMANDS_NOT_EXECUTED_AS_FULL_MODULE_GATES",
+    "prerequisites": [
+      "JDK 21",
+      "Repository dependency setup including the pinned JUnit source artifact",
+      "CMake >= 3.20 and a C compiler for native-linux"
+    ],
+    "java": [
+      "mvn",
+      "-f",
+      "m3/arrays/pom.xml",
+      "-Dtest=M3ArrayNativeTest",
+      "test"
+    ],
+    "native_jni": [
+      "mvn",
+      "-f",
+      "m3/arrays/pom.xml",
+      "-Pnative-linux",
+      "-Dtest=M3ArrayNativeTest",
+      "-Dm3.arrays.native.required=true",
+      "-DargLine=-Xcheck:jni",
+      "test"
+    ]
+  },
+  "rejected_comparator_evaluation": {
+    "decision": "DO_NOT_APPLY",
+    "after_sha256": "37bff7172793cdc12d9a8e9bec55f66bca24cb8a6c1f25feb1c3b8c27d193ab3",
+    "previous_rejected_sha256": [
+      "e2f2203937525a532d7d6265c5472de74446763186a576eaf73d57d50eaeae86",
+      "9d0126fbf8ef2be87cefbcc2866b46cb121265b0de4fb345da0d415af30a43e0"
+    ],
+    "reason": "Long-prefix gains did not clear the tiny/early native comparison selection condition. No runtime speedup is claimed for this test refinement.",
+    "environment": {
+      "jdk": "Temurin 21.0.12.1+1",
+      "gcc": "13.3.0 (Ubuntu 13.3.0-6ubuntu2~24.04)",
+      "architecture": "x86_64",
+      "os": "Linux",
+      "kernel": "6.18.55",
+      "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+      "shared_host": true,
+      "effective_process_cpu_affinity": [
+        0
+      ],
+      "physical_core_reserved": false,
+      "aarch64_tested": false
+    },
+    "workloads": {
+      "lengths": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        15,
+        16,
+        63,
+        64,
+        1023,
+        1024,
+        1025,
+        4097,
+        65537
+      ],
+      "offset_pairs": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          7,
+          7
+        ]
+      ],
+      "kinds": [
+        "equal",
+        "first-mismatch",
+        "middle-mismatch",
+        "last-mismatch"
+      ],
+      "empty_range_kind": "equal only",
+      "configurations": 260,
+      "seed": "0x4d334245",
+      "warm_repeats_per_configuration": 5,
+      "unit_budget": 262144,
+      "jni_forks_per_variant": 3,
+      "input_preparation_outside_timing": true,
+      "consumed_checksums_verified": true
+    },
+    "estimator": {
+      "ratio": "candidate divided by baseline; below one uses less time",
+      "native": "Median warm ns/op for each variant/configuration, then ratio; cohort is unweighted median of configuration ratios.",
+      "jni": "Median warm ns/op within corresponding JVM forks, then median paired fork ratio for each configuration; cohort is unweighted median of configuration ratios.",
+      "first_call_rows": "One timed call at that point in an increasingly warmed process; includes probe overhead, not controlled cold-cache evidence."
+    },
+    "native_thread_cpu_cohorts": [
+      {
+        "workload": "equal",
+        "cohort": "tiny (0..7)",
+        "configurations": 28,
+        "ratio_median": 0.9601997953440752,
+        "ratio_min": 0.5534932797031455,
+        "ratio_max": 1.67721439766642,
+        "baseline_ns_median": 3.894224166870117,
+        "candidate_ns_median": 3.2543335502277007
+      },
+      {
+        "workload": "equal",
+        "cohort": "short (8..64)",
+        "configurations": 20,
+        "ratio_median": 0.37062293014668923,
+        "ratio_min": 0.29851973684210525,
+        "ratio_max": 0.6368715083798883,
+        "baseline_ns_median": 19.377166748046875,
+        "candidate_ns_median": 8.20767932070232
+      },
+      {
+        "workload": "equal",
+        "cohort": "chunk (1023..1025)",
+        "configurations": 12,
+        "ratio_median": 0.2638170251630365,
+        "ratio_min": 0.22968594442936013,
+        "ratio_max": 0.36643321486177927,
+        "baseline_ns_median": 561.3603477328431,
+        "candidate_ns_median": 148.18394607843138
+      },
+      {
+        "workload": "equal",
+        "cohort": "long (4097..65537)",
+        "configurations": 8,
+        "ratio_median": 0.2420908358142143,
+        "ratio_min": 0.22342625885379147,
+        "ratio_max": 0.3741001693534297,
+        "baseline_ns_median": 19306.75390625,
+        "candidate_ns_median": 4839.0390625
+      },
+      {
+        "workload": "first-mismatch",
+        "cohort": "tiny (0..7)",
+        "configurations": 24,
+        "ratio_median": 1.3790498450152087,
+        "ratio_min": 0.605690230472532,
+        "ratio_max": 1.8018362081385146,
+        "baseline_ns_median": 1.870635986328125,
+        "candidate_ns_median": 2.4958362579345703
+      },
+      {
+        "workload": "first-mismatch",
+        "cohort": "short (8..64)",
+        "configurations": 20,
+        "ratio_median": 1.2495824701406928,
+        "ratio_min": 1.03463077408943,
+        "ratio_max": 1.8344123099113718,
+        "baseline_ns_median": 2.2172393798828125,
+        "candidate_ns_median": 2.702289581298828
+      },
+      {
+        "workload": "first-mismatch",
+        "cohort": "chunk (1023..1025)",
+        "configurations": 12,
+        "ratio_median": 1.4738197070542607,
+        "ratio_min": 0.8268243116120616,
+        "ratio_max": 1.8199868087813145,
+        "baseline_ns_median": 1.7146320343017578,
+        "candidate_ns_median": 2.5069942474365234
+      },
+      {
+        "workload": "first-mismatch",
+        "cohort": "long (4097..65537)",
+        "configurations": 8,
+        "ratio_median": 1.274045088215403,
+        "ratio_min": 0.680932324715749,
+        "ratio_max": 1.6923982545322818,
+        "baseline_ns_median": 2.2585372924804688,
+        "candidate_ns_median": 2.613008499145508
+      },
+      {
+        "workload": "middle-mismatch",
+        "cohort": "tiny (0..7)",
+        "configurations": 24,
+        "ratio_median": 1.3303173995940516,
+        "ratio_min": 0.689948120794726,
+        "ratio_max": 1.619494805623285,
+        "baseline_ns_median": 2.7094620111923646,
+        "candidate_ns_median": 2.988431930541992
+      },
+      {
+        "workload": "middle-mismatch",
+        "cohort": "short (8..64)",
+        "configurations": 20,
+        "ratio_median": 0.5418359407656901,
+        "ratio_min": 0.2868192641157412,
+        "ratio_max": 0.9251463950555814,
+        "baseline_ns_median": 10.423627562055824,
+        "candidate_ns_median": 6.10308837890625
+      },
+      {
+        "workload": "middle-mismatch",
+        "cohort": "chunk (1023..1025)",
+        "configurations": 12,
+        "ratio_median": 0.2566797840405435,
+        "ratio_min": 0.20360493318068615,
+        "ratio_max": 0.2600762843125883,
+        "baseline_ns_median": 286.5535198293787,
+        "candidate_ns_median": 73.63111545988258
+      },
+      {
+        "workload": "middle-mismatch",
+        "cohort": "long (4097..65537)",
+        "configurations": 8,
+        "ratio_median": 0.2517277443484456,
+        "ratio_min": 0.22058779543809484,
+        "ratio_max": 0.2574937784861449,
+        "baseline_ns_median": 9675.41796875,
+        "candidate_ns_median": 2372.30078125
+      },
+      {
+        "workload": "last-mismatch",
+        "cohort": "tiny (0..7)",
+        "configurations": 24,
+        "ratio_median": 1.109737658441909,
+        "ratio_min": 0.5300134957235945,
+        "ratio_max": 1.619389413714856,
+        "baseline_ns_median": 3.2222061157226562,
+        "candidate_ns_median": 3.0668678283691406
+      },
+      {
+        "workload": "last-mismatch",
+        "cohort": "short (8..64)",
+        "configurations": 20,
+        "ratio_median": 0.43777294170088976,
+        "ratio_min": 0.2222093759739411,
+        "ratio_max": 0.7895460471731658,
+        "baseline_ns_median": 17.801666259765625,
+        "candidate_ns_median": 8.258392333984375
+      },
+      {
+        "workload": "last-mismatch",
+        "cohort": "chunk (1023..1025)",
+        "configurations": 12,
+        "ratio_median": 0.2625192875540533,
+        "ratio_min": 0.2528974661244818,
+        "ratio_max": 0.2740022765685903,
+        "baseline_ns_median": 562.7137254901961,
+        "candidate_ns_median": 148.47798713235295
+      },
+      {
+        "workload": "last-mismatch",
+        "cohort": "long (4097..65537)",
+        "configurations": 8,
+        "ratio_median": 0.247976560235798,
+        "ratio_min": 0.2340857912817421,
+        "ratio_max": 0.253698608986146,
+        "baseline_ns_median": 19309.21875,
+        "candidate_ns_median": 4827.5390625
+      }
+    ],
+    "jni_thread_cpu_cohorts": [
+      {
+        "workload": "equal",
+        "cohort": "tiny (0..7)",
+        "configurations": 28,
+        "ratio_median": 0.9521759256667348,
+        "ratio_min": 0.5295991166538376,
+        "ratio_max": 1.730503707177769,
+        "baseline_ns_median": 68.30454751795776,
+        "candidate_ns_median": 52.85091837936703
+      },
+      {
+        "workload": "equal",
+        "cohort": "short (8..64)",
+        "configurations": 20,
+        "ratio_median": 0.8701405328754214,
+        "ratio_min": 0.4596741067895675,
+        "ratio_max": 1.4695675215091188,
+        "baseline_ns_median": 74.40723383801972,
+        "candidate_ns_median": 59.815141618465155
+      },
+      {
+        "workload": "equal",
+        "cohort": "chunk (1023..1025)",
+        "configurations": 12,
+        "ratio_median": 0.5617108329796587,
+        "ratio_min": 0.48927183473102887,
+        "ratio_max": 0.8064283616754319,
+        "baseline_ns_median": 656.9885110294117,
+        "candidate_ns_median": 384.0078125
+      },
+      {
+        "workload": "equal",
+        "cohort": "long (4097..65537)",
+        "configurations": 8,
+        "ratio_median": 0.4958876159825163,
+        "ratio_min": 0.3116473643974036,
+        "ratio_max": 0.602862365966272,
+        "baseline_ns_median": 21155.54296875,
+        "candidate_ns_median": 9843.640625
+      },
+      {
+        "workload": "first-mismatch",
+        "cohort": "tiny (0..7)",
+        "configurations": 24,
+        "ratio_median": 0.9264834703664563,
+        "ratio_min": 0.5364581115981858,
+        "ratio_max": 1.2505551027234334,
+        "baseline_ns_median": 83.90101623535156,
+        "candidate_ns_median": 54.37358856201172
+      },
+      {
+        "workload": "first-mismatch",
+        "cohort": "short (8..64)",
+        "configurations": 20,
+        "ratio_median": 0.9358821820165831,
+        "ratio_min": 0.5630585943899376,
+        "ratio_max": 1.1271165257034752,
+        "baseline_ns_median": 63.221519470214844,
+        "candidate_ns_median": 57.951568603515625
+      },
+      {
+        "workload": "first-mismatch",
+        "cohort": "chunk (1023..1025)",
+        "configurations": 12,
+        "ratio_median": 1.0097887361128697,
+        "ratio_min": 0.9249171925315742,
+        "ratio_max": 1.4346394626790013,
+        "baseline_ns_median": 233.5025863647461,
+        "candidate_ns_median": 237.26478576660156
+      },
+      {
+        "workload": "first-mismatch",
+        "cohort": "long (4097..65537)",
+        "configurations": 8,
+        "ratio_median": 0.9702670874716581,
+        "ratio_min": 0.7354843141397535,
+        "ratio_max": 1.0214170116562122,
+        "baseline_ns_median": 233.75511169433594,
+        "candidate_ns_median": 186.52803802490234
+      },
+      {
+        "workload": "middle-mismatch",
+        "cohort": "tiny (0..7)",
+        "configurations": 24,
+        "ratio_median": 0.9650156741501434,
+        "ratio_min": 0.5696620500353734,
+        "ratio_max": 1.6267542156645218,
+        "baseline_ns_median": 78.4461669921875,
+        "candidate_ns_median": 58.621726989746094
+      },
+      {
+        "workload": "middle-mismatch",
+        "cohort": "short (8..64)",
+        "configurations": 20,
+        "ratio_median": 0.8907204256692802,
+        "ratio_min": 0.5348462819276298,
+        "ratio_max": 1.1028757215264764,
+        "baseline_ns_median": 77.59683701223173,
+        "candidate_ns_median": 58.52783203125
+      },
+      {
+        "workload": "middle-mismatch",
+        "cohort": "chunk (1023..1025)",
+        "configurations": 12,
+        "ratio_median": 0.6304017193740721,
+        "ratio_min": 0.4187665387274418,
+        "ratio_max": 0.9791319035327289,
+        "baseline_ns_median": 405.91487279843443,
+        "candidate_ns_median": 305.84375
+      },
+      {
+        "workload": "middle-mismatch",
+        "cohort": "long (4097..65537)",
+        "configurations": 8,
+        "ratio_median": 0.5321377016644215,
+        "ratio_min": 0.3653047672696479,
+        "ratio_max": 0.6556432869808826,
+        "baseline_ns_median": 11988.76953125,
+        "candidate_ns_median": 5174.2578125
+      },
+      {
+        "workload": "last-mismatch",
+        "cohort": "tiny (0..7)",
+        "configurations": 24,
+        "ratio_median": 0.9598029717391444,
+        "ratio_min": 0.5264968352537676,
+        "ratio_max": 1.643275519788077,
+        "baseline_ns_median": 85.56165313720703,
+        "candidate_ns_median": 62.717681884765625
+      },
+      {
+        "workload": "last-mismatch",
+        "cohort": "short (8..64)",
+        "configurations": 20,
+        "ratio_median": 0.8862963397764696,
+        "ratio_min": 0.4817983837981848,
+        "ratio_max": 1.018088920924294,
+        "baseline_ns_median": 72.88296945173562,
+        "candidate_ns_median": 59.64591538828745
+      },
+      {
+        "workload": "last-mismatch",
+        "cohort": "chunk (1023..1025)",
+        "configurations": 12,
+        "ratio_median": 0.5368386147375108,
+        "ratio_min": 0.35522923011662877,
+        "ratio_max": 0.7266910938018166,
+        "baseline_ns_median": 749.7368336397059,
+        "candidate_ns_median": 376.904296875
+      },
+      {
+        "workload": "last-mismatch",
+        "cohort": "long (4097..65537)",
+        "configurations": 8,
+        "ratio_median": 0.47741584014748617,
+        "ratio_min": 0.4640649472762107,
+        "ratio_max": 0.5456976204539701,
+        "baseline_ns_median": 20678.16015625,
+        "candidate_ns_median": 10289.26171875
+      }
+    ],
+    "resources": {
+      "native_comparator_static_stack_bytes": {
+        "baseline": 8,
+        "candidate": 8
+      },
+      "native_process_peak_rss_kib": {
+        "baseline": 13056,
+        "candidate": 13056
+      },
+      "jni_warm_samples_per_fork": 1300,
+      "jni_median_warm_allocated_bytes_per_op": 0,
+      "jni_nonzero_warm_samples_per_fork": 1,
+      "jni_nonzero_sample_allocated_bytes": 584,
+      "jni_nonzero_sample_iterations": 65536,
+      "scope": "Whole-process/counter observations; not retained comparator allocation or proof of zero allocation on every operation."
+    },
+    "benchmark_limits": [
+      "Repeating deterministic inputs do not supply a production workload distribution.",
+      "Process variation remains; some independent process comparisons reverse small nanosecond differences.",
+      "No physical CPU isolation, AArch64, universal improvement or peak claim.",
+      "The rejected runtime and historical benchmark harness are not part of this test-only source change."
+    ],
+    "raw_native_samples_sha256": "0c4f3900f60c1d8e28861dbff72acbea187cd8a08dc92daa0923cd716ab86fe6"
+  },
+  "pending_gates": {
+    "leak_sanitizer": "PENDING_EXTERNAL: process task directory visibility prevented completion. Subsequent candidate ASan/UBSan execution explicitly used detect_leaks=0.",
+    "asan_ubsan_scope": "PASS on the evaluated candidate native corpus with detect_leaks=0; not a LeakSanitizer pass.",
+    "full_module_maven_cmake_surefire": "NOT_EXECUTED_BY_FOCUSED_QUALIFICATION",
+    "full_jdk_jtreg": "NOT_EXECUTED",
+    "aarch64": "NOT_EXECUTED"
+  },
+  "recipe_provenance": {
+    "kind": "existing target-specific hash-pinned SDK materialization",
+    "public_array_owner": "com.m3.M3ArraySubstrate",
+    "refinement_identifier": "m3-catalogue-refinement-20261018",
+    "challenge_submission_code_copied": false
+  },
+  "receiving_phase_advanced": false,
+  "peak_claim": false
+}

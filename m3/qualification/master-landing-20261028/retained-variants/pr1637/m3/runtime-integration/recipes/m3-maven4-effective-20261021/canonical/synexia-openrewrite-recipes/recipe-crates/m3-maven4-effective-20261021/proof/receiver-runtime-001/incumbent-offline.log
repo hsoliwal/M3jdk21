@@ -1,0 +1,18 @@
+["/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn", "-B", "-ntp", "-Dmaven.repo.local=/tmp/m3-build-m2", "-s", "/workspace/scratch/206049dfb270/canonical-work/maven-proxy-settings.xml", "-o", "-f", "/workspace/scratch/206049dfb270/M3jdk21/m3/tooling/module-packs/parser/real-providers/maven4/pom.xml", "org.apache.maven.plugins:maven-dependency-plugin:3.11.0:build-classpath", "-Dmdep.outputFile=/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/incumbent-classpath.txt"]
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------< com.m3.validation:m3-maven4-provider-compatibility >---------
+[INFO] Building m3-maven4-provider-compatibility 1.0.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- dependency:3.11.0:build-classpath (default-cli) @ m3-maven4-provider-compatibility ---
+[INFO] Wrote classpath file '/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001/incumbent-classpath.txt'.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.009 s
+[INFO] Finished at: 2026-10-21T03:01:42+01:00
+[INFO] ------------------------------------------------------------------------
+
+EXIT 0

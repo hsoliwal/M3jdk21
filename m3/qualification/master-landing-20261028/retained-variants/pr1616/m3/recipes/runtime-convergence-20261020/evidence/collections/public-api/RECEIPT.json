@@ -1,0 +1,37 @@
+[
+  {
+    "owner": "M3FilteredLists",
+    "baseline_sha256": "501a138684ef77a5590ed2b691e2b16d67dbadb3e82aacdcc1b6d74c8b454477",
+    "candidate_sha256": "501a138684ef77a5590ed2b691e2b16d67dbadb3e82aacdcc1b6d74c8b454477",
+    "declared_surface_equal": true,
+    "disposition": "exact public declaration and descriptor equality"
+  },
+  {
+    "owner": "M3FilteredViews",
+    "baseline_sha256": "e6858fc71e688b3fad7ec770d716124a0b451092c793b5c446d998ec310266f1",
+    "candidate_sha256": "e6858fc71e688b3fad7ec770d716124a0b451092c793b5c446d998ec310266f1",
+    "declared_surface_equal": true,
+    "disposition": "exact public declaration and descriptor equality"
+  },
+  {
+    "owner": "M3FilteredNavigableSet",
+    "baseline_sha256": "2adb06ca985c6ef54410657dc0142279510251c1cee078fe8697dc27a422f5eb",
+    "candidate_sha256": "b22190d99a53e59e352099cd0fd166f971cf81b0722545e3b5d41f644f503402",
+    "declared_surface_equal": false,
+    "disposition": "explicit overrides of inherited removeFirst/removeLast preserve callable API; declared reflection set differs"
+  },
+  {
+    "owner": "M3LongIndexProjection",
+    "baseline_sha256": "84744f6573753e03ea8ecf1b5a9bc437e3078c1142e34cb11d0ab1ceb09d3d90",
+    "candidate_sha256": "84744f6573753e03ea8ecf1b5a9bc437e3078c1142e34cb11d0ab1ceb09d3d90",
+    "declared_surface_equal": true,
+    "disposition": "exact public declaration and descriptor equality"
+  },
+  {
+    "owner": "M3IndexMaskCompactor",
+    "baseline_sha256": "b63a4fdd01ae39e2babf9baabb756320bb5945b6fc72343a2b68b134d76e362a",
+    "candidate_sha256": "b63a4fdd01ae39e2babf9baabb756320bb5945b6fc72343a2b68b134d76e362a",
+    "declared_surface_equal": true,
+    "disposition": "exact public declaration and descriptor equality"
+  }
+]

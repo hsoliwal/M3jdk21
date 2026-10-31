@@ -1,0 +1,12 @@
+{"size":0,"stride":1,"selected":0,"structural_bytes":72,"structural_objects":3,"arrays":1}
+{"size":0,"stride":2,"selected":0,"structural_bytes":72,"structural_objects":3,"arrays":1}
+{"size":0,"stride":16,"selected":0,"structural_bytes":72,"structural_objects":3,"arrays":1}
+{"size":65,"stride":1,"selected":65,"structural_bytes":336,"structural_objects":3,"arrays":1}
+{"size":65,"stride":2,"selected":33,"structural_bytes":208,"structural_objects":3,"arrays":1}
+{"size":65,"stride":16,"selected":5,"structural_bytes":96,"structural_objects":3,"arrays":1}
+{"size":1024,"stride":1,"selected":1024,"structural_bytes":4168,"structural_objects":3,"arrays":1}
+{"size":1024,"stride":2,"selected":512,"structural_bytes":2120,"structural_objects":3,"arrays":1}
+{"size":1024,"stride":16,"selected":64,"structural_bytes":328,"structural_objects":3,"arrays":1}
+{"size":65536,"stride":1,"selected":65536,"structural_bytes":262216,"structural_objects":3,"arrays":1}
+{"size":65536,"stride":2,"selected":32768,"structural_bytes":131144,"structural_objects":3,"arrays":1}
+{"size":65536,"stride":16,"selected":4096,"structural_bytes":16456,"structural_objects":3,"arrays":1}

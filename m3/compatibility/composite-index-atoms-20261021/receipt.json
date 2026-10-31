@@ -1,0 +1,117 @@
+{
+  "schema": "M3_COMPOSITE_INDEX_FINITE_PROOF_1",
+  "date": "2026-10-21",
+  "target_base": "a4415af418a9b0f21a06cd5801d238577fbb6eb7",
+  "synexia_base": "621215399de3835e032e4dd7bdf1a416602ec678",
+  "status": "DRAFT_PARTIAL_NOT_RUNTIME_ADMITTED",
+  "source_change_count": 5,
+  "serial_passes": 5,
+  "per_pass_assertions": {
+    "native_alias_domain": 711005,
+    "java_owner_and_jni": 1754320,
+    "span_oracle_java_jni": 606952
+  },
+  "recipe_host_assertions": 24,
+  "fixedpoint_changes": 0,
+  "work_witnesses": {
+    "repeated_sparse_right_row_reads": [
+      64,
+      1
+    ],
+    "native_bit63_loop_expansions": [
+      64,
+      1
+    ],
+    "span_binary_search_comparisons": [
+      21,
+      11
+    ],
+    "fragmented_mask_prepass_words": [
+      16384,
+      257
+    ]
+  },
+  "evidence_kind": "Finite actual-owner execution on installed OpenJDK21 with patched java.base classes and locally compiled JNI; not a source-built M3JDK21 image.",
+  "toolchain": {
+    "java": "openjdk version \"21.0.12.1\" 2026-08-18\nOpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)\nOpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-deb13u1-Debian, mixed mode, sharing)",
+    "gcc": "gcc (Debian 14.2.0-19) 14.2.0"
+  },
+  "passed": [
+    "javac -Xlint:all -Werror",
+    "gcc C17 -Wall -Wextra -Wpedantic -Werror",
+    "-Xcheck:jni actual JNI",
+    "UBSan native alias/domain corpus",
+    "forced portable ctz corpus",
+    "Java descriptors unchanged",
+    "generated JNI headers unchanged",
+    "dynamic native exports unchanged",
+    "source-seal drift/refusal/fixedpoint",
+    "all original type names and JNI signatures retained"
+  ],
+  "pending": [
+    "source-built M3JDK21 image",
+    "jtreg and full HotSpot/JIT/GC/CDS/JVMTI gates",
+    "Maven/OpenRewrite SDK execution",
+    "whole Synexia module/reactor compile/tests",
+    "whole collections provider/live-wrapper contracts",
+    "cross-platform native matrix",
+    "wall-clock JMH/CPU/retained-heap/native-memory benchmarks",
+    "repository provenance/intake/ordered receiving admission"
+  ],
+  "performance_claim": "Only deterministic reductions on the four declared work-count witnesses; no general throughput, CPU or memory percentage claim.",
+  "scope_exclusions": [
+    "universal regex/capture summaries",
+    "new trie/FST/path/occurrence implementation",
+    "full interner/lexicon qualification",
+    "full AST/compiler incremental reuse",
+    "completion or merge of PR1627/1636"
+  ],
+  "baseline": {
+    "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java": {
+      "git_blob": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+      "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa",
+      "bytes": 2138
+    },
+    "src/java.base/share/native/libjava/m3_state_relation.h": {
+      "git_blob": "18a02e228129827da486edc5b316790af6135310",
+      "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
+      "bytes": 1021
+    },
+    "src/java.base/share/native/libjava/M3StateRelation.c": {
+      "git_blob": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+      "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+      "bytes": 5899
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java": {
+      "git_blob": "b945fd98cef1ea03e30131e1460c507cd90119c9",
+      "sha256": "6219f44775b4c20c6caa6d541ce0b1f54892d3c9529391addb517b15fe0f464c",
+      "bytes": 1268
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java": {
+      "git_blob": "88836faa4dfeb114825547e43cae6a6521303f88",
+      "sha256": "6d26934bab87d6bc68a0c38f0c8ceeec72dc5817e5fca12cfafbc276bafb133d",
+      "bytes": 4256
+    },
+    "m3/collections/src/main/native/collections/m3_span_index_jni.c": {
+      "git_blob": "5664098cc69800fc83140a84db48cac98625232f",
+      "sha256": "f33781ca270dda25553986da350d4d5fc3808c483363c93a7bad64717effaf3c",
+      "bytes": 2898
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3SpanIndex.java": {
+      "git_blob": "2f3099248a67b636a9f926747dd6a8d2b4c21baf",
+      "sha256": "cf76dacccd055f5a21338c09ae7ce77efc0fe21fb756ad6c2e7015f9831d650b",
+      "bytes": 10344
+    }
+  },
+  "logs": {
+    "baseline.log": "PASS native alias/domain assertions=711005\nPASS owner assertions=1754320\nPASS span assertions=606952\n",
+    "pass-1.log": "PASS native alias/domain assertions=711005\nPASS owner assertions=1754320\nPASS span assertions=606952\n",
+    "pass-2.log": "PASS native alias/domain assertions=711005\nPASS owner assertions=1754320\nPASS span assertions=606952\n",
+    "pass-3.log": "PASS native alias/domain assertions=711005\nPASS owner assertions=1754320\nPASS span assertions=606952\n",
+    "pass-4.log": "PASS native alias/domain assertions=711005\nPASS owner assertions=1754320\nPASS span assertions=606952\n",
+    "pass-5.log": "PASS native alias/domain assertions=711005\nPASS owner assertions=1754320\nPASS span assertions=606952\n",
+    "recipe-host-final.log": "PASS recipe host assertions=24\n",
+    "fixedpoint.log": "M3_COMPOSITE_INDEX_REPLAY changed=0 mode=--apply\n",
+    "portable-ctz.log": "PASS native alias/domain assertions=711005\n"
+  }
+}

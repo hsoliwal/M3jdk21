@@ -1,0 +1,165 @@
+{
+  "schema": "SWT_CURRENT_OWNER_REMOTE_LINEAGE/1",
+  "old_revision": "839ce8a904cfe399912caea7f58bd59713a8fbbb",
+  "current_revision": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+  "compare": {
+    "status": "ahead",
+    "ahead_by": 5,
+    "commits": [
+      {
+        "sha": "30814fe4c1662bdc699b8f0ec25681c6945701a3",
+        "message": "test(swt): qualify canonical full-range scrollbar recipe before receiving\n\nPin the existing Synexia recipe and scope owners at exact blob identities from #12544. Add independent full-range geometry oracle and Linux/Windows/macOS Java qualification; this is not native SWT acceptance. Production ViewportScrollBarGeometry remains unchanged until actual SDK generation and verification pass. Preserve dual target license and pending platform gates.",
+        "url": "https://github.com/hsoliwal/eclipse.platform.swt/commit/30814fe4c1662bdc699b8f0ec25681c6945701a3"
+      },
+      {
+        "sha": "8e5eb98cb71b2751a6690d34aece98973e246f9c",
+        "message": "fix(swt): receive hash-pinned full-range scrollbar geometry after 5,723,783 Java21 oracle checks",
+        "url": "https://github.com/hsoliwal/eclipse.platform.swt/commit/8e5eb98cb71b2751a6690d34aece98973e246f9c"
+      },
+      {
+        "sha": "3227ec6564ee75ed48828a9426e5a817e7dd05a3",
+        "message": "docs(swt): record exact receiver hashes and 5.7m Java21 oracle assertions",
+        "url": "https://github.com/hsoliwal/eclipse.platform.swt/commit/3227ec6564ee75ed48828a9426e5a817e7dd05a3"
+      },
+      {
+        "sha": "edef4a88ba4c415478dd3931094a151f1c4073e8",
+        "message": "Merge pull request #236 from hsoliwal/m3/swt-scrollbar-full-range-20261020-01\n\n[Draft] Fix full-range scrollbar scaling and hit geometry through canonical recipe",
+        "url": "https://github.com/hsoliwal/eclipse.platform.swt/commit/edef4a88ba4c415478dd3931094a151f1c4073e8"
+      },
+      {
+        "sha": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+        "message": "Merge pull request #237 from hsoliwal/fix/m3-swt-scrollbar-full-range-receiver-20261020\n\nfix(swt): receive exact full-range scrollbar geometry with 5.7M Java21 checks",
+        "url": "https://github.com/hsoliwal/eclipse.platform.swt/commit/c0ffa6d76338ed1b06cfe0158b0e04d8930df546"
+      }
+    ],
+    "files": [
+      {
+        "path": ".github/workflows/swt-scrollbar-full-range-20261020.yml",
+        "blob": "005dc64b27d6eae2e9e42d56553a75d263a1bbeb",
+        "status": "added"
+      },
+      {
+        "path": "bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/ViewportScrollBarGeometry.java",
+        "blob": "7370ac91ca85784b7b72efabef4129ffbfd3cea3",
+        "status": "modified"
+      },
+      {
+        "path": "docs/m3/scrollbar-full-range-20261020/README.md",
+        "blob": "83d573334e9ac8d0fd0c79d255c60a6c1bdca815",
+        "status": "added"
+      },
+      {
+        "path": "docs/m3/scrollbar-full-range-20261020/RECEIVER_LOCAL_JAVA21_PROOF.md",
+        "blob": "01db397fad0d9a27514c0ceb371cc23b1c755eaf",
+        "status": "added"
+      },
+      {
+        "path": "docs/m3/scrollbar-full-range-20261020/receiver-map.json",
+        "blob": "f2535b13c3a206faed691a62820241341bfce335",
+        "status": "added"
+      },
+      {
+        "path": "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+        "blob": "420eabcfebc730b8d932d2db884908c1cd77840b",
+        "status": "added"
+      },
+      {
+        "path": "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/proof/ScrollbarFullRangeProof.java",
+        "blob": "0765c1a56c0f85d64f987e7e15edfcc8553f3b54",
+        "status": "added"
+      },
+      {
+        "path": "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/src/test/java/com/synexia/rewrite/ScrollbarFullRangeRecipeTest.java",
+        "blob": "1d8555a826f233a47a11fa1f67ba928a8f2467eb",
+        "status": "added"
+      },
+      {
+        "path": "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/verify.py",
+        "blob": "f4df2d0b6603d5eab8c38331999b27c0e1c683d4",
+        "status": "added"
+      },
+      {
+        "path": "docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3EditScope.java",
+        "blob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+        "status": "added"
+      },
+      {
+        "path": "docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "blob": "135a28d0cec9ea988607cdef6caa1f0fe5115d75",
+        "status": "added"
+      },
+      {
+        "path": "docs/m3/scrollbar-full-range-20261020/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+        "blob": "9174dd681f0d75b5086fc19904a71524a03972dc",
+        "status": "added"
+      },
+      {
+        "path": "docs/m3/scrollbar-full-range-20261020/src/main/resources/META-INF/rewrite/swt-scrollbar-full-range-20261020.yml",
+        "blob": "15edde1be40ba520b63dbfa4d5966a081d1e07b9",
+        "status": "added"
+      },
+      {
+        "path": "docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/ViewportScrollBarGeometry.before.java.txt",
+        "blob": "1fd72c44bf9dcd5c2beca6ce95388640f48e0f67",
+        "status": "added"
+      },
+      {
+        "path": "docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/ViewportScrollBarGeometry.java.txt",
+        "blob": "7370ac91ca85784b7b72efabef4129ffbfd3cea3",
+        "status": "added"
+      },
+      {
+        "path": "docs/m3/scrollbar-full-range-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/manifest.tsv",
+        "blob": "2e34dbb84e92a05afd1bc548296fad04dbf2059e",
+        "status": "added"
+      }
+    ]
+  },
+  "pull_requests": [
+    {
+      "url": "https://github.com/hsoliwal/eclipse.platform.swt/pull/236",
+      "head": "30814fe4c1662bdc699b8f0ec25681c6945701a3",
+      "merge": "edef4a88ba4c415478dd3931094a151f1c4073e8",
+      "merged_at": "2026-10-21T01:14:42Z",
+      "state": "closed",
+      "body": "## Existing SWT-owned geometry, not another framework\n\nThis continuation targets only `ViewportScrollBarGeometry` in the existing common widget implementation. No runtime dependency, new widget/viewport framework, storage owner or JNI ABI is added. M3JDK21 remains the integrated SDK product; Synexia owns build-time recipe convergence.\n\n**Initial proof commit `30814fe4c1662bdc699b8f0ec25681c6945701a3` does NOT modify production Java.** It publishes the exact canonical recipe proof first. Production receiving must be a separate one-file commit only after actual SDK generation and generated-source tests execute successfully. The final CI receiver comparison deliberately refuses until that is done.\n\n### Reproduced defects\nExact original SWT head `839ce8a904cfe399912caea7f58bd59713a8fbbb`; target blob `1fd72c44bf9dcd5c2beca6ce95388640f48e0f67`.\n\n1. `thumbLength(100,8,0,Integer.MAX_VALUE,Integer.MAX_VALUE-1)` returns **8**, not the independent rational result **100**. Page+1 and range+1 overflow before division.\n2. `hit(0,16,Integer.MAX_VALUE,8,0,100,10,0)` returns **NONE**, not **ARROW_DECREASE**, because `2*arrow+track` wraps.\n3. Thumb position and drag-selection mapping inherit the first error through their length dependency.\n\n### Implementation candidate\nWiden page/range additions and hit endpoint expressions BEFORE evaluating them. Preserve the original int mulDiv method and signed rounding/zero-denominator behavior via a private bounded-long overload. Keep the existing thumbStart/selectionAt algorithms, clamping, no-thumb and non-scrollable sentinel. No allocation, runtime BigInteger, floating point, new native symbol or public/package ABI change.\n\nThe numeric domain is valid nonnegative int scrollbar state, valid bounded selection, nonnegative track/arrow and positive minimum thumb. Full numeric support is not a claim that native windows can have arbitrary extreme pixel dimensions.\n\n### Canonical recipe and source custody\n[Synexia #12544](https://github.com/hsoliwal/com.synexia/pull/12544) at `9372a2d57f1a05394172a7bd85dda3f0d6d83983`, named recipe `com.synexia.swt.ScrollbarFullRange20261020`.\n\nExisting engine `M3HashPinnedJavaSnapshotRecipe` blob `135a28d0cec9ea988607cdef6caa1f0fe5115d75`, scope owner `9174dd681f0d75b5086fc19904a71524a03972dc`, enum `274360816db1e44a2f1796a3bc5cdeff6b0ce6db`. Target-side copies are byte-identical build-time proof/custody, not a competing recipe authority. Existing Apache-2.0 OR EPL-2.0 target header remains unchanged. Canonical catalogue evaluates incumbent rational scaling, interval bounds, rejected floating point/new JNI, and licensed/reference-only donors.\n\nSeven authored JUnit/OpenRewrite tests cover exact generation, fixed point, missing/duplicate/drift/semantic-change refusal and code-looking decoys under input permutations. Generated-source verification requires actual `Result.getAfter()` output and will not substitute the resource template.\n\n### Tests actually completed locally\nDebian OpenJDK21.0.12.1/Linux x86_64, strict `--release 21 -proc:none -Xlint:all -Werror`:\n- Original and candidate: **5,723,783 assertions per tiered run** against an independent BigInteger oracle.\n- Candidate: zero discrepancies; separate full C1 candidate run also passed.\n- Original: zero ordinary-range discrepancies, with extreme-boundary length/start/selection/hit counterexamples retained.\n- Package/public descriptors identical; four compiled negative controls rejected by the unchanged oracle.\n- Expected-value oracle digest identifies the corpus, not baseline/candidate output equivalence.\n\nNo local Maven/SDK execution is claimed. The exact-head Linux/Windows/macOS jobs execute it, but are Java arithmetic qualification, **not native SWT display tests**.\n\n### HOLD and scope\nKeep draft. Native Win32 extreme pixels/real input, GTK/Cocoa geometry, DPI, accessibility/events/resource lifetimes, SWT/Tycho and full M3JDK21 receiving/performance gates remain unexecuted. Historical Win32 samples stop at maximum 100000 and 100% DPI; old samples are preserved, not relabeled fresh evidence. No unrelated M3File/M3AST migration is included. Bounded deduplication found attribution checkpoint #207; row-window #229 and GTK disposal work are distinct. Full history audit and all-widget support are not claimed.\n\nNo merge, force-push, rebase or release-contract promotion."
+    },
+    {
+      "url": "https://github.com/hsoliwal/eclipse.platform.swt/pull/237",
+      "head": "3227ec6564ee75ed48828a9426e5a817e7dd05a3",
+      "merge": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+      "merged_at": "2026-10-21T01:15:03Z",
+      "state": "closed",
+      "body": "## Additive production receiver for hash-pinned PR #236\n\nThis stacks on proof-only [#236](https://github.com/hsoliwal/eclipse.platform.swt/pull/236) without modifying its branch. It changes exactly one production Java source (`ViewportScrollBarGeometry.java`) using the **unchanged byte-exact canonical generated receiver** from Synexia recipe [#12544](https://github.com/hsoliwal/com.synexia/pull/12544), and adds one local Java21 proof receipt.\n\nThe original `master` and proof branch source blob was `1fd72c44bf9dcd5c2beca6ce95388640f48e0f67`. The received source blob equals the canonical generator output `7370ac91ca85784b7b72efabef4129ffbfd3cea3`, SHA-256 `df4f8498b1f633f2ffeae310f761ecaa0ea686e392557b8cfe2c684864a7f9b4`; no second geometry class, API change, JNI symbol or runtime dependency is introduced.\n\n### Executed exact-byte verification\n\n`javac --release 21 -encoding UTF-8 -Xlint:all -Werror` compiled the exact candidate and exact proof files (verified Git blob IDs), followed by `ScrollbarFullRangeProof strict`:\n\n```text\nGEOMETRY_PASS checks=5723783 ordinaryFailures=0 oracleDigest=27d10dbfbd5f515a\nmulDiv mismatches=0\nhasThumb mismatches=0\nthumbLength mismatches=0\nthumbStart mismatches=0\nselectionAt mismatches=0\nhit mismatches=0\n```\n\nThe source-receiving commit is `8e5eb98cb71b2751a6690d34aece98973e246f9c`; `RECEIVER_LOCAL_JAVA21_PROOF.md` records source and test lineage.\n\n### Required before merging to protected master\n\nThe canonical Maven/OpenRewrite SDK and fixed-point recipe replay have **not** run in this session (Maven unavailable). The existing receiver workflow must verify generation equality and actual SDK JUnit on this exact head. SWT/Tycho, native Win32/GTK/Cocoa, DPI, accessibility and disposal remain pending, as do M3JDK21 JDK/JNI/HotSpot gates. Keep this PR draft until that evidence is available.\n\nNo force-push, rebase, squash or destructive conflict choice; historical proof and baseline remain reachable."
+    },
+    {
+      "url": "https://github.com/hsoliwal/com.synexia/pull/12544",
+      "head": "9372a2d57f1a05394172a7bd85dda3f0d6d83983",
+      "merge": "f3e2309cfecd56a95b446f64592923bdfd977122",
+      "merged_at": null,
+      "state": "open",
+      "body": "## One original SWT owner; canonical recipe first\n\nSubstantiated continuation of the October 20 scrollbar audit. Reuses **existing `M3HashPinnedJavaSnapshotRecipe`** at current canonical engine blob `135a28d0cec9ea988607cdef6caa1f0fe5115d75`, not another rewrite/runtime framework. Product target is SWT's existing `ViewportScrollBarGeometry`; M3JDK21 remains the integrated SDK product and no M3File/M3AST migration is needed for this arithmetic defect.\n\n### Defects reproduced on exact current source\nSWT master `839ce8a904cfe399912caea7f58bd59713a8fbbb`, file `bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/ViewportScrollBarGeometry.java`, original blob `1fd72c44bf9dcd5c2beca6ce95388640f48e0f67`.\n\n- `thumbLength(100,8,0,Integer.MAX_VALUE,Integer.MAX_VALUE-1)` returns **8**, independently specified rational result **100**. Both page+1 and range+1 must widen before arithmetic.\n- `hit(0,16,Integer.MAX_VALUE,8,0,100,10,0)` returns **NONE** because the outer endpoint overflows; expected **ARROW_DECREASE**.\n- Thumb placement and drag selection inherit the first error through thumb length.\n\n### Candidate\nPreserve the package-level int mulDiv signature and exact legacy int behavior (including zero denominator), factor its rounding atom through a private bounded-long overload, and widen page/range and hit endpoint expressions. No allocation, runtime BigInteger, floating point, new storage, new native symbol, callback, widget framework or public ABI. Target dual license Apache-2.0 OR EPL-2.0 is unchanged; recipe/test expression is first-party Apache-2.0.\n\n### Actual local fixture evidence\nStrict Java21 `--release 21 -proc:none -Xlint:all -Werror` on Debian OpenJDK21.0.12.1/Linux x86_64. **5,723,783 assertions per version** against an independent BigInteger oracle. Candidate: zero mismatches. Original: zero ordinary-range mismatches; 1,156 length, 571 start, 1,771 selection and 1,124,782 hit discrepancies across adversarial boundary/extreme configurations. These counts overlap and are not unique native GUI bugs. Existing mulDiv/hasThumb agree with their oracles.\n\n### Required next gate\nSeven authored real SDK tests cover exact generation, fixed point, drift/missing/duplicate/semantic-change refusal and code-looking decoys under input permutations. They must actually run. The verifier consumes **only `Result.getAfter()` bytes** emitted by the SDK; it cannot substitute the candidate template. No production SWT source is changed in this commit. Local Maven/dependency retrieval was unavailable; this exact-head workflow is the executable generation lane, not a preclaimed pass.\n\n### Scope and HOLD\nThe numeric domain is explicitly documented: valid nonnegative int scrollbar state, valid bounded selection, nonnegative track/arrow and positive minimum thumb. This does not claim a native window of any extreme size is supported. Prior SWT #229 row-window fix and disposal PRs are distinct; exact geometry PR search found only attribution checkpoint #207. Search/history coverage is bounded, not complete.\n\nNative Win32 extreme-range pixels/real drag, GTK/Cocoa, DPI, accessibility/events/lifetimes, SWT/Tycho and full M3JDK21 compatibility remain NOT_RUN. Existing Win32 historical samples covered maximum <=100000 at 100% DPI. Keep draft; do not auto-merge, rebase, force-push, weaken native gates or upgrade release claims."
+    }
+  ],
+  "original_canonical_pom": {
+    "content": "<!-- Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 -->\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n  <modelVersion>4.0.0</modelVersion>\n  <groupId>com.synexia.verification</groupId><artifactId>swt-scrollbar-full-range-proof</artifactId><version>1.0-SNAPSHOT</version>\n  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>\n  <dependencies>\n    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>8.17.1</version></dependency>\n    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>8.17.1</version><scope>runtime</scope></dependency>\n    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>\n  </dependencies>\n  <build>\n    <sourceDirectory>${project.basedir}/../../src/main/java</sourceDirectory>\n    <resources><resource><directory>${project.basedir}/../../src/main/resources</directory><includes><include>com/synexia/rewrite/hash-pinned-java/swt-scrollbar-full-range-20261020/**</include><include>META-INF/rewrite/swt-scrollbar-full-range-20261020.yml</include></includes></resource></resources>\n    <plugins>\n      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration><release>21</release><includes><include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include><include>com/synexia/rewrite/M3ScopeInference.java</include><include>com/synexia/rewrite/M3EditScope.java</include></includes></configuration></plugin>\n      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration><failIfNoTests>true</failIfNoTests><useModulePath>false</useModulePath><argLine>-Xmx512m</argLine></configuration></plugin>\n    </plugins>\n  </build>\n</project>\n",
+    "encoding": "utf-8",
+    "sha": "420eabcfebc730b8d932d2db884908c1cd77840b",
+    "display_url": "https://github.com/hsoliwal/com.synexia/blob/9372a2d57f1a05394172a7bd85dda3f0d6d83983/synexia-openrewrite-recipes/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+    "display_title": "pom.xml"
+  },
+  "canonical_base_owner_path_observation": {
+    "revision": "e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07",
+    "path": "synexia-openrewrite-recipes/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+    "result": "NOT_FOUND",
+    "tool_response": {
+      "error": "GitHub API error 404: {\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/repos/contents#get-repository-content\",\"status\":\"404\"}",
+      "error_code": "NOT_FOUND",
+      "error_data": {
+        "message": "Not Found",
+        "documentation_url": "https://docs.github.com/rest/repos/contents#get-repository-content",
+        "status": "404"
+      }
+    }
+  }
+}

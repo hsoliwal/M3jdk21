@@ -1,0 +1,1149 @@
+{
+  "schema": 1,
+  "tested_candidate_commit": "69667e3f1ce673aaded2ad93e4ae2ecf6c59668b",
+  "candidate_base_commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+  "latest_observed_master_commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+  "read_only_merge_tree": "a0634e969347ade199e3e3495770083a4851eee8",
+  "merge_tree_exit": 0,
+  "untouched_incoming_preserved": [
+    {
+      "path": ".github/workflows/m3-history-audit.yml",
+      "git_entry": "100644 blob f1d50c98ccf563fa4fe3a1ab89bbb4e9cb9d7c15",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": ".github/workflows/mindex-string-backing.yml",
+      "git_entry": "100644 blob 2e48ef733d17532caa6ed38629d9b23d4fb89562",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "doc/mindex-string-backing.md",
+      "git_entry": "100644 blob ea5afb66ca30fc5b89ba4d129d6bb3b62fb93538",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+      "git_entry": "100644 blob 65f259e23d818b9b35052feff37198f5ddf567b4",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/algorithms/test/PrefixZContractTest.java",
+      "git_entry": "100644 blob 5e9a2af0dba89366459f2eb25f4a06301652dd73",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/algorithms/test/ViewInteropContractTest.java",
+      "git_entry": "100644 blob 003d437dd482e2bc7e85eb38747a41e6940b08e5",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/docs/migration-acceptance-matrix.md",
+      "git_entry": "100644 blob dda0754119ae9237c71b4d6b15961d087add80b4",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/docs/migration-mapping-lifecycle.md",
+      "git_entry": "100644 blob b27cd11e50b64e6548e2d46c19b8d117c71b89bd",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/docs/migration-mapping.example.json",
+      "git_entry": "100644 blob 18541f94766ee19a8feae5ef94cb0b05b07bd820",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/docs/migration-mapping.schema.json",
+      "git_entry": "100644 blob 36ef00223c7c6708bf31d4de1f26f5193c835ef1",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/docs/migration-source-census.tsv",
+      "git_entry": "100644 blob b44d72daa921129a07f32017864ff04869765385",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/docs/migration-worked-port-decisions.md",
+      "git_entry": "100644 blob 69c826c3a0466f8cd30e3ddf51e95fd8acc94414",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/docs/migration-worked-text-trace.md",
+      "git_entry": "100644 blob 509d83dc8796d588dc735aa4aea73d6e4038808c",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/docs/mindex-migration-handoff.md",
+      "git_entry": "100644 blob 0735fda0b8bf5d73d55eab8028758e29dbdf0855",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "git_entry": "100644 blob f2194f6970009089e40463bf104506f62e9907b0",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "git_entry": "100644 blob 40f032174baa2f1c19e3b02686723bc37f37122c",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/ATOM_PLAN.tsv",
+      "git_entry": "100644 blob c8ce97c13be626dd80b2a06ce53cd1fa3a4cd331",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/README.md",
+      "git_entry": "100644 blob 17c16d122cd37ed0217c048465a1de40e19a2378",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/TASK_PACKET.json",
+      "git_entry": "100644 blob aadc1ffdd0ba149aeb1c96ca16bf309815835885",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/audit.py",
+      "git_entry": "100644 blob 184131d373f913e98ae5f88274a0c235d20678c5",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/collect_prs.py",
+      "git_entry": "100644 blob 5cafe2561f548579490cbee4f542a114a4be6198",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/ACTION_QUEUE.tsv",
+      "git_entry": "100644 blob d5959ca40bdea281e2e6921184ad3b80b24c55dd",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/CLUSTERS_EXACT.tsv",
+      "git_entry": "100644 blob e13dbcf8956c8ec7baa1a3ffe0b635edcc7d56ad",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/CLUSTERS_NORMALIZED.tsv",
+      "git_entry": "100644 blob a638eac0b563846ff75d626752ae8995110a7030",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/FINAL_REPORT.md",
+      "git_entry": "100644 blob f66e860b6dd98473c6b24c12576b7483d699237c",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/HOSTED_ATTEMPT.json",
+      "git_entry": "100644 blob cc0431984edc4f20bcba3398650cce8f87b31cc8",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/INVENTORY.tsv",
+      "git_entry": "100644 blob 77abc54bd5293fc46d273c6ff6c696640fbba493",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/OUTPUT_CONTRACT.tsv",
+      "git_entry": "100644 blob 01c6712c78673cd8e84876dd94f1a0f656b931ad",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/PROVENANCE.tsv",
+      "git_entry": "100644 blob fd7cd5172b839bc5732f2de766fb6170770ef81d",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/RUN_CONTEXT.tsv",
+      "git_entry": "100644 blob 40738d34d9311c594f747e6f250a984914005f91",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/STATUS.tsv",
+      "git_entry": "100644 blob 3d52da5ae64639ece1c13688b86530621ea7e554",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/SUMMARY.tsv",
+      "git_entry": "100644 blob be9416af6b6d57a1f8397756cd9869f3fdd054fe",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/VERIFY_CONTRACT.tsv",
+      "git_entry": "100644 blob a47182780f8b549fe98db127b45d68891c167104",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/compile.log",
+      "git_entry": "100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/diff.log",
+      "git_entry": "100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/fixture-tests.log",
+      "git_entry": "100644 blob d03ce27e8226ae4118f6a50f96e35f1d4ce02222",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/evidence/20261002-inspection/lint.log",
+      "git_entry": "100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/git_graph.py",
+      "git_entry": "100644 blob 10aee90a9dc2b09b79158608e662e50e45ec227d",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/pom.xml",
+      "git_entry": "100644 blob 3d194ddbbb34f95aaa1605a3d2e3f5b541624f87",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/snapshot-forward-0323.json",
+      "git_entry": "100644 blob f7e6c4b30da4112a0b60fc4726cf7868cd2f81ec",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/snapshot.json",
+      "git_entry": "100644 blob 76f19403d3a39f19067c57fd28711eea4461a18a",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/history/test_audit.py",
+      "git_entry": "100644 blob 828e59be74f5bbc7e617eb5ba0a783a0119bdea8",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/.gitignore",
+      "git_entry": "100644 blob 6f29cb4127f6bde6f9bc45cbf97b5a406f598d8d",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/RESUME.md",
+      "git_entry": "100644 blob 439e057c8502505f49d54c9655776c33057050b4",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/SurfaceInventory.java",
+      "git_entry": "100644 blob 476c4c8b99627082c683f24629bf0cc801e14b6d",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/docs/ACCEPTANCE.md",
+      "git_entry": "100644 blob e60bf588f1afeb3533783cf7f913b1fdc0ba6b04",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/docs/ARCHITECTURE.md",
+      "git_entry": "100644 blob 0182f9314d013fe222453792024c2c2edfcdc5f8",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/docs/COVERAGE.md",
+      "git_entry": "100644 blob 97218f2965c8806e4ac82ca96ef1379e7f6046f6",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/docs/DONORS.md",
+      "git_entry": "100644 blob 7ff2ee059cb853b904a7cfe264978bb87eeefa3c",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/docs/IMPLEMENTATION_PLAN.md",
+      "git_entry": "100644 blob 7a344004e8a68210593871807fcbd6da3c8c2ea7",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/docs/RESUME.md",
+      "git_entry": "100644 blob 13b7071754adc05ac812438d493cf39ec58d70e7",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/evidence/local-20261002-final/exact-recipe-contract.log",
+      "git_entry": "100644 blob 1144bff8fcbe7f0b759a98635ac849547b81ae1a",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/evidence/local-20261002-final/javac21.log",
+      "git_entry": "100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/evidence/local-20261002-final/migration-validator.log",
+      "git_entry": "100644 blob a3bd9a74c06e60e67cee85a4abcc3c91c86b5ac1",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log",
+      "git_entry": "100644 blob bb620416f7179f62c06f9085b1bd7d560807145d",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/evidence/local-20261002-final/prefix-z-normal.log",
+      "git_entry": "100644 blob bb620416f7179f62c06f9085b1bd7d560807145d",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/evidence/local-20261002-final/receipt.json",
+      "git_entry": "100644 blob 45838490350429dd4c62f723ed4133a1111b81f9",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/evidence/local-20261002-final/stock-string-surface.log",
+      "git_entry": "100644 blob bea3a92a91a5f932bcd788d8bbd1fae941abe63a",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/evidence/local-20261002-final/view-interop-interpreter.log",
+      "git_entry": "100644 blob 0b37865a0ba6fc1921cdf2125a7b4cb82b74ab86",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/evidence/local-20261002-final/view-interop-normal.log",
+      "git_entry": "100644 blob 0b37865a0ba6fc1921cdf2125a7b4cb82b74ab86",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/evidence/replay-final.json",
+      "git_entry": "100644 blob 0686c439d742eb2cfd53580ed7c67bb795283c0e",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/inventory.py",
+      "git_entry": "100644 blob f51ce78b6a2fa786aae248b058a90cb4cbf05b32",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/lineage.py",
+      "git_entry": "100644 blob 02a2aaca86595aa6b9b82b4a8b0cbadbbee24309",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/mapping.schema.json",
+      "git_entry": "100644 blob 01a8afffd9747b91aca77af3cf814d317da35512",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/migration.py",
+      "git_entry": "100644 blob d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/observed-baselines.json",
+      "git_entry": "100644 blob 80eac591791f47762a8222a3293652feac73f74f",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/pinned-dependencies.json",
+      "git_entry": "100644 blob 7049bf1c72e057aa82d956469d0e72cd968686ed",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/pom.xml",
+      "git_entry": "100644 blob 5a1a01f8bec178fdf511286293dee4223099b3fc",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "git_entry": "100644 blob 02f88f9f8b1eb8930fff59684c81bb30819800ad",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/recipes/baselines/name-mapping.v1.json",
+      "git_entry": "100644 blob e1cb2f21355e70446cae3506fae3e3b4befb943d",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/recipes/postimages/M3PrefixZ.java.txt",
+      "git_entry": "100644 blob 65f259e23d818b9b35052feff37198f5ddf567b4",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/recipes/prefix-z-v1.tsv",
+      "git_entry": "100644 blob 9b70c3bfea7109fffab44b186d407854a5fe495d",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/requirements.txt",
+      "git_entry": "100644 blob 05b7a1e858af08d4d364a1e4a3df8c856c6a8451",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/run-tests.py",
+      "git_entry": "100644 blob 6c5a48faed8affdef5c3cbb39e349fa4154187a7",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/run_local.py",
+      "git_entry": "100644 blob deed879bed3e59ac6016598e3208fb4687563171",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/source-files.json",
+      "git_entry": "100644 blob 464407f4219e0180382311552ab8906bcf24740b",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/source-recipe/MIndexJoinedChars.after.java.txt",
+      "git_entry": "100644 blob 6d7d06cc24c7c42c0aa2e6d21b82a53c9b4e1566",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/source-recipe/MIndexJoinedChars.before.java.txt",
+      "git_entry": "100644 blob d9ec1832d1b9381cf0243dfd132e089797f0a2d8",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/source-recipe/source-plan.json",
+      "git_entry": "100644 blob 75898959ec311c62f5360885fa79fcd43bccd6f4",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+      "git_entry": "100644 blob 918f41259c0c623bb88287c44c817070a58fd9fe",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/test/RecipeContractTest.java",
+      "git_entry": "100644 blob 77644bc9defdf65793dc3049ed0e6658acb6463a",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/test/test_migration.py",
+      "git_entry": "100644 blob 3b8f82b6ec1bfc7047eb4a178216829f50d51c34",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/test_inventory.py",
+      "git_entry": "100644 blob a68ed1ebd133fa1c61fdad091e92a91930bedf0b",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/test_lineage.py",
+      "git_entry": "100644 blob 530c29054c16c06b51d1b8d92832f08596620496",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/test_recipe.py",
+      "git_entry": "100644 blob e7d5f92f168f0d26de69dcdd9775f3771e1cc5f3",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/migration/test_run_local.py",
+      "git_entry": "100644 blob 40cfaaa053d4b1b0c54478e0d78ea5e1c8b3012e",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/README.md",
+      "git_entry": "100644 blob e054dd6631b4b97be8d9b4939e0df8be98788317",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/native-test/NativeBoundaryTest.java",
+      "git_entry": "100644 blob 0999ab0eb5753cb199c1acd4ddfe3e4ebca552b2",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/native-test/boundary.c",
+      "git_entry": "100644 blob 4c0cd42a34a3780d09fa0599175082c2f5836726",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/pom.xml",
+      "git_entry": "100644 blob e1e576668ad4cc91524d1c9b002e1e0fd82bf25b",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/recipe.json",
+      "git_entry": "100644 blob 4a189a1c547f63f793686532e0cc6b884b692aca",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/m3/text/compat/M3Text.java",
+      "git_entry": "100644 blob 46aecc2fb0b1e5f516c1db8b5e93476eb70444f2",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java",
+      "git_entry": "100644 blob b624dc8dbb23eac6b3147ea888ac69df60f971e1",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java",
+      "git_entry": "100644 blob a8f016a1764aea6e970bc60e38f345804e82a84e",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java",
+      "git_entry": "100644 blob 9db0c6363480ccb0f38bba7b2218e151dd75ee68",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java",
+      "git_entry": "100644 blob 6d7d06cc24c7c42c0aa2e6d21b82a53c9b4e1566",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+      "git_entry": "100644 blob 95a576da9e60fb830a443034d6403e84740233e8",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java",
+      "git_entry": "100644 blob 6f350a84b954b2f80929252254a007652fc1d0d0",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/src/test/java/ExistingSurfaceTest.java",
+      "git_entry": "100644 blob d660ec518b35c944280b6165adf6138e7fff6b36",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/src/test/java/PortMicrobench.java",
+      "git_entry": "100644 blob 6b541b4d1d53c7aef7b73521c6ce0b0ea497c241",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/src/test/java/RetainedViewTest.java",
+      "git_entry": "100644 blob 22ad8979e7124c34e5095235b958c03ad1636e4d",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/templates/FrozenBytes.java.txt",
+      "git_entry": "100644 blob b624dc8dbb23eac6b3147ea888ac69df60f971e1",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/templates/FrozenChars.java.txt",
+      "git_entry": "100644 blob a8f016a1764aea6e970bc60e38f345804e82a84e",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/templates/M3Text.java.txt",
+      "git_entry": "100644 blob 46aecc2fb0b1e5f516c1db8b5e93476eb70444f2",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/templates/MIndexJoinedBytes.java.txt",
+      "git_entry": "100644 blob 9db0c6363480ccb0f38bba7b2218e151dd75ee68",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/templates/MIndexJoinedChars.java.txt",
+      "git_entry": "100644 blob 6d7d06cc24c7c42c0aa2e6d21b82a53c9b4e1566",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/templates/MIndexJoinedStorageIntern.java.txt",
+      "git_entry": "100644 blob 95a576da9e60fb830a443034d6403e84740233e8",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/ports/indexstring/templates/MIndexJoinedStreams.java.txt",
+      "git_entry": "100644 blob 6f350a84b954b2f80929252254a007652fc1d0d0",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "git_entry": "100644 blob 7f98c91457edd324a1c15d2ba306745de88204ec",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/InstallIndexStringCompatibility.java",
+      "git_entry": "100644 blob a5a1745d543de4b043580e39891f7fec31b541b1",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3MIndexJoinedCharsViewRecipe.java",
+      "git_entry": "100644 blob 3ba6857dec13ca5af871b73238495124b0d1602f",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-migration.yml",
+      "git_entry": "100644 blob afb16ca23ec0080935d2d9c97bbd17f3f19d4e5d",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/FrozenBytes.java.txt",
+      "git_entry": "100644 blob b624dc8dbb23eac6b3147ea888ac69df60f971e1",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/FrozenChars.java.txt",
+      "git_entry": "100644 blob a8f016a1764aea6e970bc60e38f345804e82a84e",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/M3Text.java.txt",
+      "git_entry": "100644 blob 46aecc2fb0b1e5f516c1db8b5e93476eb70444f2",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/MIndexJoinedBytes.java.txt",
+      "git_entry": "100644 blob 9db0c6363480ccb0f38bba7b2218e151dd75ee68",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/MIndexJoinedChars.java.txt",
+      "git_entry": "100644 blob 6d7d06cc24c7c42c0aa2e6d21b82a53c9b4e1566",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/MIndexJoinedStorageIntern.java.txt",
+      "git_entry": "100644 blob 95a576da9e60fb830a443034d6403e84740233e8",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/MIndexJoinedStreams.java.txt",
+      "git_entry": "100644 blob 6f350a84b954b2f80929252254a007652fc1d0d0",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/pom.xml.txt",
+      "git_entry": "100644 blob e1e576668ad4cc91524d1c9b002e1e0fd82bf25b",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/port.properties",
+      "git_entry": "100644 blob a12ce13ef45d22e11b4377992e700b130663c8f1",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/FrozenBytes.java.before.txt",
+      "git_entry": "100644 blob b624dc8dbb23eac6b3147ea888ac69df60f971e1",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/FrozenChars.java.before.txt",
+      "git_entry": "100644 blob a8f016a1764aea6e970bc60e38f345804e82a84e",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/MIndexJoinedBytes.java.before.txt",
+      "git_entry": "100644 blob 9db0c6363480ccb0f38bba7b2218e151dd75ee68",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/MIndexJoinedChars.java.after.txt",
+      "git_entry": "100644 blob 6d7d06cc24c7c42c0aa2e6d21b82a53c9b4e1566",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/MIndexJoinedChars.java.before.txt",
+      "git_entry": "100644 blob d9ec1832d1b9381cf0243dfd132e089797f0a2d8",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/MIndexJoinedStorageIntern.java.before.txt",
+      "git_entry": "100644 blob 95a576da9e60fb830a443034d6403e84740233e8",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/MIndexJoinedStreams.java.before.txt",
+      "git_entry": "100644 blob 6f350a84b954b2f80929252254a007652fc1d0d0",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/source.properties",
+      "git_entry": "100644 blob 2dd81396179ad88689e0d1628aa0ba4c0f899cce",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/InstallIndexStringCompatibilityTest.java",
+      "git_entry": "100644 blob 76c7924f9c078981b7638c29ceecd3e47ea371c6",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3MIndexJoinedCharsViewRecipeTest.java",
+      "git_entry": "100644 blob 99ec6b3cee0630064eba6b9561ea43783ad96d12",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/CodeIdentity.java",
+      "git_entry": "100644 blob 33b941ffe94226e86256fa5e9e58e1c41c4332db",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/ExtractPrivateIntHelper.java",
+      "git_entry": "100644 blob fb7e52a0005e3595a814aa36fbc929a322940e87",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/JavaContractSurface.java",
+      "git_entry": "100644 blob ce1e81ef87d21f5c788a2465f5233ce4ba518efd",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/JavaSourceUnit.java",
+      "git_entry": "100644 blob 5113df0e88b9d431147ad4dc3c50f1569cbe20b0",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/M3ExactSourceAtom.java",
+      "git_entry": "100644 blob 37184a23a6f5db0b2250a80b3b76d50a78389ab3",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/SealHash.java",
+      "git_entry": "100644 blob 8184e14c51f8dc288ae44879a7e0a69c0ff26c05",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/SealedContract.java",
+      "git_entry": "100644 blob 86e499444af33708e29789a9faa997e3d50c65e0",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/SealedRecipe.java",
+      "git_entry": "100644 blob 638d90e988ff24c75ddf711a0a7bd1c015aa46e3",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/SealedSources.java",
+      "git_entry": "100644 blob ec494ce355b799daf2d4a53e559cc823e9b525cd",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java",
+      "git_entry": "100644 blob 0f8c86dd676ce7f36b8cff4394992ed8fec0e3e4",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java",
+      "git_entry": "100644 blob ef2085838f06e633d659832225e1474be946e02a",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    },
+    {
+      "path": "test/jdk/java/lang/String/MIndexMappedStringBackingTest.java",
+      "git_entry": "100644 blob dab7de1fa7c090974f6ff810e8e728d3ba53ea16",
+      "proof": "identical Git mode/type/object in merged tree and incoming master"
+    }
+  ],
+  "overlap_paths": [
+    "m3/recipes/manifest.json"
+  ],
+  "production_restoration": [
+    {
+      "path": "src/hotspot/share/classfile/javaClasses.cpp",
+      "sha256": "8f23cb683cb34fba46b0eadcfeb39898d42e267dcb7ae6e348c48bfd470b9936",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/classfile/javaClasses.hpp",
+      "sha256": "c72e2f6fcec1665b2daadd4d288dd98b349d3955e38e8f17ef0476f66e3b5f02",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/classfile/javaClasses.inline.hpp",
+      "sha256": "edbc37d89f16f55064dd9ecaa9656bdd6b99d28b9a7570dac95c91d8357aafae",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/classfile/stringTable.cpp",
+      "sha256": "c483984d1e7622b51985f72fc2b8b650b42ba4488cc04c2f48a5b4f7421c72fc",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/classfile/vmClassMacros.hpp",
+      "sha256": "517ff68a8161e1c59dec99bae75133f6c463811bd11bd96bb295ec11c081eb85",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/classfile/vmIntrinsics.cpp",
+      "sha256": "eaa4cf151155de4a31cf47a5147ce842872ea453ef0a798954e05ea32200c5b9",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/classfile/vmSymbols.hpp",
+      "sha256": "093f375f1883f66b672bd3eba0b4d50be86925fd92de1ae348fae1101ed6823e",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/gc/shared/stringdedup/stringDedup.cpp",
+      "sha256": "15cb52369aa1a879ccb2902adb94d5055647d4b82cf54e7409939fc6ba804377",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/jfr/recorder/jfrRecorder.cpp",
+      "sha256": "98555ee5b3f195a468461f43428c1f2db535d2a85b38d239d220f3494c3ed6ec",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/prims/jni.cpp",
+      "sha256": "82eec22a87598470669a05f2fc2581191f738ea3bafe6448c5ce43c39ab7c66b",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/prims/jvmtiTagMap.cpp",
+      "sha256": "477ba6e96bc62f5f315c3290e9c7f544bac6395731dda6bc4615103b714ddb13",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/runtime/arguments.cpp",
+      "sha256": "cde11381b3d49642dee5988d0188e6f3ffc0dcd3a7789b3abec12a00eb832dc5",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/runtime/globals.hpp",
+      "sha256": "cb97b8978fa8f94ad5c1088b1616f4aef14fef9b6f454f21bd96449a2a3e0fc3",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/runtime/threads.cpp",
+      "sha256": "d715f6bc169184ebb6e06b0ace2e8dd21f50077e1cdbfebc04b0fae73d7a0531",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/services/diagnosticCommand.cpp",
+      "sha256": "b0e5a34c68f8a8d8160358164eddcb1699d67246831095a28045c54fa94c7e52",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/hotspot/share/services/finalizerService.cpp",
+      "sha256": "2438cc3588b1f937175e62e229feb1090a59c5aa18657fe03d64cd2a937029dc",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/MIndexString.java",
+      "sha256": "21e373dbe450c7cd7b85ede587209f88b4546b1833a75c83370b213aa66d97d0",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/MIndexStringPool.java",
+      "sha256": "6d2ef8a907cb6cc604ed1c6700415f0886fd5229d3d92060fe93e235d3ecdd31",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "sha256": "068cc68a4968c1f8aed45d7ff73a9bfca8dc19723015cd739728cbd56d90150d",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/StringConcatHelper.java",
+      "sha256": "9e247659c7af6834e5aab378e98a61a843fc5c21497decd2e85bab445cc4da34",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/System.java",
+      "sha256": "b1df6179cf686d9ed7e7329f99be503fc1d484662d98f717633fdec5e8d8c8fd",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java",
+      "sha256": "efe0c96211a13aa34f0fbc55f4bd4190287846c329b2f25c3cbcf97185a709de",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java",
+      "sha256": "b096377681dbc135d90f26abc972769557ae7c271d48ad59d241e149658438e3",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/java.base/share/native/libjava/jni_util.c",
+      "sha256": "f19521f723ecf9a4cdf639a04b93c0dece27e37f5877d756f007adbdc16d6a16",
+      "byte_identical_to_donor": true
+    },
+    {
+      "path": "src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java",
+      "sha256": "5c76caf1c717e4f05c0f2f8adf87265422c0a0e3571dc5e852f8ceaa476c90ba",
+      "byte_identical_to_donor": true
+    }
+  ],
+  "merged_tree_built_or_tested": false,
+  "scope": "source equivalence and clean mergeability only; runtime receipt belongs to candidate commit",
+  "earlier_observations": [
+    {
+      "latest_observed_master_commit": "4a81f3b3050fa5572ec1ff9368e2c383231db2e6",
+      "read_only_merge_tree": "27a6e5a9145a86de389d59c80c3451c9d8af35b7",
+      "merge_tree_exit": 0,
+      "untouched_incoming_preserved": [
+        {
+          "path": ".github/workflows/mindex-string-backing.yml",
+          "git_entry": "100644 blob 2e48ef733d17532caa6ed38629d9b23d4fb89562",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "doc/mindex-string-backing.md",
+          "git_entry": "100644 blob ea5afb66ca30fc5b89ba4d129d6bb3b62fb93538",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+          "git_entry": "100644 blob 65f259e23d818b9b35052feff37198f5ddf567b4",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/algorithms/test/PrefixZContractTest.java",
+          "git_entry": "100644 blob 5e9a2af0dba89366459f2eb25f4a06301652dd73",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/algorithms/test/ViewInteropContractTest.java",
+          "git_entry": "100644 blob 003d437dd482e2bc7e85eb38747a41e6940b08e5",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/docs/migration-acceptance-matrix.md",
+          "git_entry": "100644 blob dda0754119ae9237c71b4d6b15961d087add80b4",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/docs/migration-mapping-lifecycle.md",
+          "git_entry": "100644 blob b27cd11e50b64e6548e2d46c19b8d117c71b89bd",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/docs/migration-mapping.example.json",
+          "git_entry": "100644 blob 18541f94766ee19a8feae5ef94cb0b05b07bd820",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/docs/migration-mapping.schema.json",
+          "git_entry": "100644 blob 36ef00223c7c6708bf31d4de1f26f5193c835ef1",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/docs/migration-source-census.tsv",
+          "git_entry": "100644 blob b44d72daa921129a07f32017864ff04869765385",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/docs/migration-worked-port-decisions.md",
+          "git_entry": "100644 blob 69c826c3a0466f8cd30e3ddf51e95fd8acc94414",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/docs/migration-worked-text-trace.md",
+          "git_entry": "100644 blob 509d83dc8796d588dc735aa4aea73d6e4038808c",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/docs/mindex-migration-handoff.md",
+          "git_entry": "100644 blob 0735fda0b8bf5d73d55eab8028758e29dbdf0855",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/docs/name-mapping.json",
+          "git_entry": "100644 blob f2194f6970009089e40463bf104506f62e9907b0",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/docs/name-mapping.schema.json",
+          "git_entry": "100644 blob 40f032174baa2f1c19e3b02686723bc37f37122c",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/.gitignore",
+          "git_entry": "100644 blob 6f29cb4127f6bde6f9bc45cbf97b5a406f598d8d",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/docs/ACCEPTANCE.md",
+          "git_entry": "100644 blob e60bf588f1afeb3533783cf7f913b1fdc0ba6b04",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/docs/ARCHITECTURE.md",
+          "git_entry": "100644 blob 0182f9314d013fe222453792024c2c2edfcdc5f8",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/docs/COVERAGE.md",
+          "git_entry": "100644 blob 97218f2965c8806e4ac82ca96ef1379e7f6046f6",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/docs/DONORS.md",
+          "git_entry": "100644 blob 7ff2ee059cb853b904a7cfe264978bb87eeefa3c",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/docs/IMPLEMENTATION_PLAN.md",
+          "git_entry": "100644 blob 7a344004e8a68210593871807fcbd6da3c8c2ea7",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/docs/RESUME.md",
+          "git_entry": "100644 blob 13b7071754adc05ac812438d493cf39ec58d70e7",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/evidence/local-20261002-final/exact-recipe-contract.log",
+          "git_entry": "100644 blob 1144bff8fcbe7f0b759a98635ac849547b81ae1a",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/evidence/local-20261002-final/javac21.log",
+          "git_entry": "100644 blob e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/evidence/local-20261002-final/migration-validator.log",
+          "git_entry": "100644 blob a3bd9a74c06e60e67cee85a4abcc3c91c86b5ac1",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log",
+          "git_entry": "100644 blob bb620416f7179f62c06f9085b1bd7d560807145d",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/evidence/local-20261002-final/prefix-z-normal.log",
+          "git_entry": "100644 blob bb620416f7179f62c06f9085b1bd7d560807145d",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/evidence/local-20261002-final/receipt.json",
+          "git_entry": "100644 blob 45838490350429dd4c62f723ed4133a1111b81f9",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/evidence/local-20261002-final/stock-string-surface.log",
+          "git_entry": "100644 blob bea3a92a91a5f932bcd788d8bbd1fae941abe63a",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/evidence/local-20261002-final/view-interop-interpreter.log",
+          "git_entry": "100644 blob 0b37865a0ba6fc1921cdf2125a7b4cb82b74ab86",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/evidence/local-20261002-final/view-interop-normal.log",
+          "git_entry": "100644 blob 0b37865a0ba6fc1921cdf2125a7b4cb82b74ab86",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/evidence/replay-final.json",
+          "git_entry": "100644 blob 0686c439d742eb2cfd53580ed7c67bb795283c0e",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/migration.py",
+          "git_entry": "100644 blob d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/observed-baselines.json",
+          "git_entry": "100644 blob 80eac591791f47762a8222a3293652feac73f74f",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/pinned-dependencies.json",
+          "git_entry": "100644 blob 7049bf1c72e057aa82d956469d0e72cd968686ed",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/pom.xml",
+          "git_entry": "100644 blob 5a1a01f8bec178fdf511286293dee4223099b3fc",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/recipes/baselines/name-mapping.v1.json",
+          "git_entry": "100644 blob e1cb2f21355e70446cae3506fae3e3b4befb943d",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/recipes/postimages/M3PrefixZ.java.txt",
+          "git_entry": "100644 blob 65f259e23d818b9b35052feff37198f5ddf567b4",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/recipes/prefix-z-v1.tsv",
+          "git_entry": "100644 blob 9b70c3bfea7109fffab44b186d407854a5fe495d",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/requirements.txt",
+          "git_entry": "100644 blob 05b7a1e858af08d4d364a1e4a3df8c856c6a8451",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/run-tests.py",
+          "git_entry": "100644 blob 6c5a48faed8affdef5c3cbb39e349fa4154187a7",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+          "git_entry": "100644 blob 918f41259c0c623bb88287c44c817070a58fd9fe",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/test/RecipeContractTest.java",
+          "git_entry": "100644 blob 77644bc9defdf65793dc3049ed0e6658acb6463a",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/migration/test/test_migration.py",
+          "git_entry": "100644 blob 3b8f82b6ec1bfc7047eb4a178216829f50d51c34",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/CodeIdentity.java",
+          "git_entry": "100644 blob 33b941ffe94226e86256fa5e9e58e1c41c4332db",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/ExtractPrivateIntHelper.java",
+          "git_entry": "100644 blob fb7e52a0005e3595a814aa36fbc929a322940e87",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/JavaContractSurface.java",
+          "git_entry": "100644 blob ce1e81ef87d21f5c788a2465f5233ce4ba518efd",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/JavaSourceUnit.java",
+          "git_entry": "100644 blob 5113df0e88b9d431147ad4dc3c50f1569cbe20b0",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/M3ExactSourceAtom.java",
+          "git_entry": "100644 blob 37184a23a6f5db0b2250a80b3b76d50a78389ab3",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/SealHash.java",
+          "git_entry": "100644 blob 8184e14c51f8dc288ae44879a7e0a69c0ff26c05",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/SealedContract.java",
+          "git_entry": "100644 blob 86e499444af33708e29789a9faa997e3d50c65e0",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/SealedRecipe.java",
+          "git_entry": "100644 blob 638d90e988ff24c75ddf711a0a7bd1c015aa46e3",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "m3/tooling/src/main/java/com/synexia/rewrite/sealed/SealedSources.java",
+          "git_entry": "100644 blob ec494ce355b799daf2d4a53e559cc823e9b525cd",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java",
+          "git_entry": "100644 blob 0f8c86dd676ce7f36b8cff4394992ed8fec0e3e4",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java",
+          "git_entry": "100644 blob ef2085838f06e633d659832225e1474be946e02a",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        },
+        {
+          "path": "test/jdk/java/lang/String/MIndexMappedStringBackingTest.java",
+          "git_entry": "100644 blob dab7de1fa7c090974f6ff810e8e728d3ba53ea16",
+          "proof": "identical Git mode/type/object in merged tree and incoming master"
+        }
+      ],
+      "overlap_paths": [
+        "m3/recipes/manifest.json"
+      ]
+    }
+  ]
+}

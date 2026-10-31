@@ -1,0 +1,211 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------< com.synexia.verification:swt-scrollbar-full-range-proof >-------
+[INFO] Building swt-scrollbar-full-range-proof 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ swt-scrollbar-full-range-proof ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ swt-scrollbar-full-range-proof ---
+[INFO] Copying 4 resources from ../../src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ swt-scrollbar-full-range-proof ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 3 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ swt-scrollbar-full-range-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ swt-scrollbar-full-range-proof ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ swt-scrollbar-full-range-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.ScrollbarFullRangeRecipeTest
+[ERROR] Tests run: 7, Failures: 4, Errors: 3, Skipped: 0, Time elapsed: 1.794 s <<< FAILURE! -- in com.synexia.rewrite.ScrollbarFullRangeRecipeTest
+[ERROR] com.synexia.rewrite.ScrollbarFullRangeRecipeTest.refusesDuplicateSource -- Time elapsed: 1.031 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.RuntimeException> but was: <java.lang.NoClassDefFoundError>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.refusesDuplicateSource(ScrollbarFullRangeRecipeTest.java:73)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory
+	at org.openrewrite.Recipe.<clinit>(Recipe.java:63)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.recipe(ScrollbarFullRangeRecipeTest.java:42)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.lambda$refusesDuplicateSource$3(ScrollbarFullRangeRecipeTest.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	... 6 more
+Caused by: java.lang.ClassNotFoundException: org.slf4j.LoggerFactory
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	... 10 more
+
+[ERROR] com.synexia.rewrite.ScrollbarFullRangeRecipeTest.refusesMissingSource -- Time elapsed: 0.001 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.RuntimeException> but was: <java.lang.NoClassDefFoundError>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.refusesMissingSource(ScrollbarFullRangeRecipeTest.java:68)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.NoClassDefFoundError: Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.recipe(ScrollbarFullRangeRecipeTest.java:42)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.lambda$refusesMissingSource$2(ScrollbarFullRangeRecipeTest.java:68)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	... 6 more
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.Recipe.<clinit>(Recipe.java:63)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.recipe(ScrollbarFullRangeRecipeTest.java:42)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.lambda$refusesDuplicateSource$3(ScrollbarFullRangeRecipeTest.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.refusesDuplicateSource(ScrollbarFullRangeRecipeTest.java:73)
+	... 3 more
+
+[ERROR] com.synexia.rewrite.ScrollbarFullRangeRecipeTest.refusesDrift -- Time elapsed: 0.171 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.RuntimeException> but was: <java.lang.NoClassDefFoundError>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.refusesDrift(ScrollbarFullRangeRecipeTest.java:65)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.NoClassDefFoundError: Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.recipe(ScrollbarFullRangeRecipeTest.java:42)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.lambda$refusesDrift$1(ScrollbarFullRangeRecipeTest.java:65)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	... 6 more
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.Recipe.<clinit>(Recipe.java:63)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.recipe(ScrollbarFullRangeRecipeTest.java:42)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.lambda$refusesDuplicateSource$3(ScrollbarFullRangeRecipeTest.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.refusesDuplicateSource(ScrollbarFullRangeRecipeTest.java:73)
+	... 3 more
+
+[ERROR] com.synexia.rewrite.ScrollbarFullRangeRecipeTest.exactGeneration -- Time elapsed: 0.001 s <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.recipe(ScrollbarFullRangeRecipeTest.java:42)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.exactGeneration(ScrollbarFullRangeRecipeTest.java:44)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.Recipe.<clinit>(Recipe.java:63)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.recipe(ScrollbarFullRangeRecipeTest.java:42)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.lambda$refusesDuplicateSource$3(ScrollbarFullRangeRecipeTest.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.refusesDuplicateSource(ScrollbarFullRangeRecipeTest.java:73)
+	... 3 more
+
+[ERROR] com.synexia.rewrite.ScrollbarFullRangeRecipeTest.refusesChangedBehavior -- Time elapsed: 0.210 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.RuntimeException> but was: <java.lang.NoClassDefFoundError>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.refusesChangedBehavior(ScrollbarFullRangeRecipeTest.java:80)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.NoClassDefFoundError: Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.recipe(ScrollbarFullRangeRecipeTest.java:42)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.lambda$refusesChangedBehavior$4(ScrollbarFullRangeRecipeTest.java:80)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	... 6 more
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.Recipe.<clinit>(Recipe.java:63)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.recipe(ScrollbarFullRangeRecipeTest.java:42)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.lambda$refusesDuplicateSource$3(ScrollbarFullRangeRecipeTest.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.refusesDuplicateSource(ScrollbarFullRangeRecipeTest.java:73)
+	... 3 more
+
+[ERROR] com.synexia.rewrite.ScrollbarFullRangeRecipeTest.ignoresCodeLookingDecoyInBothOrders -- Time elapsed: 0.347 s <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.recipe(ScrollbarFullRangeRecipeTest.java:42)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.ignoresCodeLookingDecoyInBothOrders(ScrollbarFullRangeRecipeTest.java:88)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.Recipe.<clinit>(Recipe.java:63)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.recipe(ScrollbarFullRangeRecipeTest.java:42)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.lambda$refusesDuplicateSource$3(ScrollbarFullRangeRecipeTest.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.refusesDuplicateSource(ScrollbarFullRangeRecipeTest.java:73)
+	... 3 more
+
+[ERROR] com.synexia.rewrite.ScrollbarFullRangeRecipeTest.fixedPoint -- Time elapsed: 0.002 s <<< ERROR!
+java.lang.NoClassDefFoundError: Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.recipe(ScrollbarFullRangeRecipeTest.java:42)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.fixedPoint(ScrollbarFullRangeRecipeTest.java:61)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: org/slf4j/LoggerFactory [in thread "main"]
+	at org.openrewrite.Recipe.<clinit>(Recipe.java:63)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.recipe(ScrollbarFullRangeRecipeTest.java:42)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.lambda$refusesDuplicateSource$3(ScrollbarFullRangeRecipeTest.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.synexia.rewrite.ScrollbarFullRangeRecipeTest.refusesDuplicateSource(ScrollbarFullRangeRecipeTest.java:73)
+	... 3 more
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   ScrollbarFullRangeRecipeTest.refusesChangedBehavior:80 Unexpected exception type thrown, expected: <java.lang.RuntimeException> but was: <java.lang.NoClassDefFoundError>
+[ERROR]   ScrollbarFullRangeRecipeTest.refusesDrift:65 Unexpected exception type thrown, expected: <java.lang.RuntimeException> but was: <java.lang.NoClassDefFoundError>
+[ERROR]   ScrollbarFullRangeRecipeTest.refusesDuplicateSource:73 Unexpected exception type thrown, expected: <java.lang.RuntimeException> but was: <java.lang.NoClassDefFoundError>
+[ERROR]   ScrollbarFullRangeRecipeTest.refusesMissingSource:68 Unexpected exception type thrown, expected: <java.lang.RuntimeException> but was: <java.lang.NoClassDefFoundError>
+[ERROR] Errors: 
+[ERROR]   ScrollbarFullRangeRecipeTest.exactGeneration:44->recipe:42 NoClassDefFound Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+[ERROR]   ScrollbarFullRangeRecipeTest.fixedPoint:61->recipe:42 NoClassDefFound Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+[ERROR]   ScrollbarFullRangeRecipeTest.ignoresCodeLookingDecoyInBothOrders:88->recipe:42 NoClassDefFound Could not initialize class com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe
+[INFO] 
+[ERROR] Tests run: 7, Failures: 4, Errors: 3, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.763 s
+[INFO] Finished at: 2026-10-21T03:18:07+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project swt-scrollbar-full-range-proof: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

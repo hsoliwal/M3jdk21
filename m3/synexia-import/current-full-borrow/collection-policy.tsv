@@ -1,0 +1,12 @@
+schema	law	value
+M3JDK_COLLECTION_RECEIVER_V1	SOURCE_OF_TRUTH	hsoliwal/com.synexia
+M3JDK_COLLECTION_RECEIVER_V1	SOURCE_POLICY	.m3/m3-collection-canonicalization-policy.tsv
+M3JDK_COLLECTION_RECEIVER_V1	RECEIVER_ROLE	M3JDK21 consumes qualified Synexia collection outputs/receipts; it does not become the recipe or reusable implementation source of truth
+M3JDK_COLLECTION_RECEIVER_V1	M3_NAMING	Receive Synexia-owned collection/data-structure families under coherent M3* names in proving-ground/tooling surfaces
+M3JDK_COLLECTION_RECEIVER_V1	JDK_NAMES	Use short JDK-like names only for actual JDK-facing contract surfaces after explicit acceptance; do not rename proving-ground owners as if already accepted
+M3JDK_COLLECTION_RECEIVER_V1	CANONICAL_ONE	Only the evidence-selected canonical implementation per semantic role advances toward target integration
+M3JDK_COLLECTION_RECEIVER_V1	ALTERNATIVES	Alternative donor/strategy implementations remain support/internal variants in the same family/package and do not create competing public APIs
+M3JDK_COLLECTION_RECEIVER_V1	ORDER	STRING -> ARRAYS -> COLLECTIONS -> AST_COMPILER -> REMAINING_FAMILIES
+M3JDK_COLLECTION_RECEIVER_V1	COLLECTION_GATE	Differential contract tests against java.util authority plus deterministic fixed-point recipe evidence are required before promotion
+M3JDK_COLLECTION_RECEIVER_V1	LICENSE_BOUNDARY	OpenJDK remains GPLv2+Classpath where applicable; imported qualified first-party Synexia expression retains Apache-2.0 provenance/copyright; third-party donor terms remain intact
+M3JDK_COLLECTION_RECEIVER_V1	STATUS	POLICY_PIN_ONLY

@@ -1,0 +1,14 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.M3TaskRecipeRawByteHash20261020
+displayName: M3 recipe-custody raw-byte SHA-256 correction
+description: >-
+  Replace filesystem text decoding with bounded-memory raw-byte SHA-256 for
+  custody inputs while retaining UTF-8 text hashes for OpenRewrite source.
+tags:
+  - m3jdk21
+  - recipe-custody
+  - raw-byte-hash
+  - recipe-first
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-task-recipe-raw-byte-hash-20261020

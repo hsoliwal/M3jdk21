@@ -1,0 +1,287 @@
+{
+  "schema": "M3_FEATURE_CURRENT_RECEIVING_V1",
+  "baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "prior_qualification_baseline": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+  "qualification_reuse": "All receiving preimages are exact; existing controls enforce hashes. Lost runtime dependencies require their separate current restoration before image acceptance.",
+  "target": "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current",
+  "started_at": 1792300425.5707252,
+  "operations": [
+    {
+      "dataset": "m3jdk21-runtime-facade",
+      "mode": "check",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/receive.py",
+        "--dataset",
+        "m3jdk21-runtime-facade",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/source/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3jdk21-runtime-facade-check.txt",
+      "sha256": "b60ec1d2bb91f4f2c338c329d80205423719c0185420a5c517fce9529ecdf14a"
+    },
+    {
+      "dataset": "m3jdk21-runtime-facade",
+      "mode": "apply",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/receive.py",
+        "--dataset",
+        "m3jdk21-runtime-facade",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/source/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3jdk21-runtime-facade-apply.txt",
+      "sha256": "4b4a23d7ce712161ccce8697daa4685ae588f941b39a280ba5e6a26b65e88117"
+    },
+    {
+      "dataset": "m3jdk21-runtime-facade",
+      "mode": "replay",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3-runtime-parser-host/candidate/synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018/receive.py",
+        "--dataset",
+        "m3jdk21-runtime-facade",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/source/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3jdk21-runtime-facade-replay.txt",
+      "sha256": "79c36377e3ebae1bb144e970c45f6d1dd396e29942029d2cfeb6334773d80e00"
+    },
+    {
+      "dataset": "m3-runtime-facade-custody-v2-1",
+      "mode": "check",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3-runtime-facade-custody-v2-1",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/source/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3-runtime-facade-custody-v2-1-check.txt",
+      "sha256": "9ebe4111cc3af2ec8bd41959a98bef220cac87a3c2ca73d2f8244f6104a2f893"
+    },
+    {
+      "dataset": "m3-runtime-facade-custody-v2-1",
+      "mode": "apply",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3-runtime-facade-custody-v2-1",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/source/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3-runtime-facade-custody-v2-1-apply.txt",
+      "sha256": "25bfe8106bbb2b472cf415dd45ca28050072f2a8e9215a26cd52999737cadb08"
+    },
+    {
+      "dataset": "m3-runtime-facade-custody-v2-1",
+      "mode": "replay",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3-runtime-facade-custody-v2-1",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/source/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3-runtime-facade-custody-v2-1-replay.txt",
+      "sha256": "234b8c22d0036b43d897cc1424af239437faaa465cd3b48df959cca534fa3727"
+    },
+    {
+      "dataset": "m3-runtime-facade-custody-v2-2",
+      "mode": "check",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3-runtime-facade-custody-v2-2",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/source/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3-runtime-facade-custody-v2-2-check.txt",
+      "sha256": "1588c9c7d9ab3b26756441c784d3afd378091257fd29da22fb5972289e277164"
+    },
+    {
+      "dataset": "m3-runtime-facade-custody-v2-2",
+      "mode": "apply",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3-runtime-facade-custody-v2-2",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/source/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3-runtime-facade-custody-v2-2-apply.txt",
+      "sha256": "0f5b2ead650c21a72459a42215916a5b6708c9488fc607fd244cbefc7d55c6c3"
+    },
+    {
+      "dataset": "m3-runtime-facade-custody-v2-2",
+      "mode": "replay",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3-runtime-facade-custody-v2-2",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/source/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3-runtime-facade-custody-v2-2-replay.txt",
+      "sha256": "03c4c06034749b7a3820826dd68be365d27a257b726fde470b413636453911f8"
+    },
+    {
+      "dataset": "m3jdk21-progress-job",
+      "mode": "check",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-progress-job",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3jdk21-progress-job-check.txt",
+      "sha256": "6c777d4f76ada442ffd1d12525f377450c41083cec43a000f937756813def3fe"
+    },
+    {
+      "dataset": "m3jdk21-progress-job",
+      "mode": "apply",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-progress-job",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3jdk21-progress-job-apply.txt",
+      "sha256": "ff18ca54c3b8b803df3e0732fc38fe18c9b245a8ad2af2099c089d9f5f684138"
+    },
+    {
+      "dataset": "m3jdk21-progress-job",
+      "mode": "replay",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-progress-job",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3jdk21-progress-job-replay.txt",
+      "sha256": "696b72c0694ccaeee691cae90271b43a0ccc10e6736cd7b319b8ab740a76ee05"
+    },
+    {
+      "dataset": "m3jdk21-progress-job-custody",
+      "mode": "check",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-progress-job-custody",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3jdk21-progress-job-custody-check.txt",
+      "sha256": "1ac6b9178edf5b9a6d3ca275459e7d6d020399a0f26f7eaf14c669b2e26b5026"
+    },
+    {
+      "dataset": "m3jdk21-progress-job-custody",
+      "mode": "apply",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-progress-job-custody",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3jdk21-progress-job-custody-apply.txt",
+      "sha256": "0b74eb3904ecc4fc61330a8a2ab8a992302f094fedd3863bd3719c60b9e60a2b"
+    },
+    {
+      "dataset": "m3jdk21-progress-job-custody",
+      "mode": "replay",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+        "--dataset",
+        "m3jdk21-progress-job-custody",
+        "--recipe-owner",
+        "/workspace/scratch/2b4d1cb957a7/runtime-refinement/canonical/synexia-openrewrite-recipes",
+        "--target",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current"
+      ],
+      "exit_code": 0,
+      "log": "/workspace/scratch/2b4d1cb957a7/build-proof/feature-current-receiving/m3jdk21-progress-job-custody-replay.txt",
+      "sha256": "f1128a937404e8c817cb73450dd58fda1f8f0eab1c42e992b18f0ceabff9e06c"
+    }
+  ],
+  "status": "PASS",
+  "finished_at": 1792300432.7279267
+}

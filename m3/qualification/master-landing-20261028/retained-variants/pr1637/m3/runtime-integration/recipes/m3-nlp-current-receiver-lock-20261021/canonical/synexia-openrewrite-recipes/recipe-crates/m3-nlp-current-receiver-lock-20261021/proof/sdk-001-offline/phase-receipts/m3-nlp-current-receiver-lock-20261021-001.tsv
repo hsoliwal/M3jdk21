@@ -1,0 +1,2 @@
+phase	kind	targets	manifest_sha256	before_root	after_root	missing_refusals	drift_refusals	duplicate_refusal	fixed_point	mixed	order	repeat	decoys	workers	cycles
+m3-nlp-current-receiver-lock-20261021-001	java	1	2dda091367402d8a8fb1b7df9af6a767df3fe4245683c1bc18d9bf30f488ce1d	6c89f006fbdd9e57938641be2965e5cf16de047b9f5cfb4c79c80a4340fd5db4	1b97ce88c6585cf6e7aed42fcb3485634a0fe4e09c5c89f66fbeeed0511031ac	1	1	PASS	PASS	PASS	PASS	PASS	PASS	2	1

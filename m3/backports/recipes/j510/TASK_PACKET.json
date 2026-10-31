@@ -1,0 +1,43 @@
+{
+  "task_packet": "active",
+  "source_doc": "M3-SCALE v3 Locked Canon",
+  "invariant_id": "J510-KDF-INTAKE",
+  "run": {
+    "mode": "inventory",
+    "profile": "security-high-risk",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "targets": {
+    "jep": 510,
+    "product_materialization": false
+  },
+  "invariant_locks": {
+    "JAVA21_IDENTITY": "LOCKED",
+    "PUBLIC_API": "EXPLICIT_OPT_IN_ONLY",
+    "SECURITY_REVIEW": "MANDATORY"
+  },
+  "allowed_delta": "Inventory, dependency closure, compatibility classification",
+  "forbidden": [
+    "security product mutation",
+    "preview API import",
+    "unrelated TLS/DHKEM refactor",
+    "provider-order drift"
+  ],
+  "verify_order": [
+    "inventory",
+    "dependency audit",
+    "source21 compile",
+    "known-answer tests",
+    "provider tests",
+    "security jtreg",
+    "image"
+  ],
+  "stop_conditions": [
+    "missing dependency",
+    "source-level incompatibility",
+    "test-vector mismatch",
+    "provider-order drift"
+  ]
+}

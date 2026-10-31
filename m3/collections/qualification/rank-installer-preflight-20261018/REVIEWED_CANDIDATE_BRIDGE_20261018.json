@@ -1,0 +1,144 @@
+{
+  "schema": "M3_RANK_REVIEWED_CANDIDATE_BRIDGE_RECEIPT_20261018",
+  "recorded_utc": "2026-10-18T06:44:18.891987+00:00",
+  "status": "BOUNDED_QUALIFIED_GENERATED_BRIDGE",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_revision": "1d95ea58e0c432de8d5e9814a0899aed27ee71d5",
+  "canonical_recipe": "com.synexia.m3.M3RankInstallerReviewedCandidateBridge20261018",
+  "canonical_crate": "m3-rank-installer-preflight-bridge-20261018",
+  "canonical_evidence_path": "synexia-openrewrite-recipes/recipes/m3-rank-installer-preflight-20261017/evidence/reviewed-candidate-bridge-20261018",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_pull_request": 1281,
+  "target_preappend_revision": "eb6349ae6c8c998859c12d46c88011753c1085d5",
+  "target_base_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "target_path": "m3/collections/recipe/order-statistics/src/main/java/com/m3/recipe/M3RankIndexRecipe.java",
+  "before_sha256": "74c167625a4d1e7885cfb8e7d9fd1e1767b725cb0e814bafa08368f78cfc0838",
+  "after_sha256": "ee4184ece40071b6bbac0ed9ef60014a26af4857f39d1041da7ad41995561294",
+  "bridge_descriptor_sha256": "2fbb67dccda104e67fe118d551b4ccd6369970a2467484884e583b670fa4de7a",
+  "bridge_manifest_sha256": "e9675536e1ee34e10cd52f53f4e263bb156422a2a6d73a8132814bc82252c917",
+  "generation": {
+    "execution_kind": "OPENREWRITE_SDK_EXECUTION",
+    "first_results": 1,
+    "fixedpoint_results": 0,
+    "serial_replay_results": 1,
+    "source_drift": "REFUSED",
+    "required_missing": "REFUSED",
+    "sdk_patch_sha256": "19d16c39c10766b25187962385a5f0f7ec119071b94dda1f0a787ef93bf2725c"
+  },
+  "canonical_published_readback": {
+    "exact_source_paths": 7,
+    "unchanged_engine_scope_sources": 3,
+    "rank_home_row": "EXACT_MATCH"
+  },
+  "bounded_validation": {
+    "java21_compile_warnings_as_errors": "PASS",
+    "canonical_junit": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "all_four_method_bodies": "UNCHANGED"
+    },
+    "original_four_argument_receiver_sdk": "PASS_1_CHANGE_0_FIXEDPOINT_1_REPLAY_WITH_REFUSALS",
+    "target_postimage_identity": "BYTE_IDENTICAL_TO_COMPILED_AND_EXECUTED_QUALIFIED_CANDIDATE",
+    "unchanged_target_installer_pom_verify": "PASS_OFFLINE",
+    "target_rank_junit": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "production_sources": 12,
+      "test_sources": 2
+    },
+    "target_rank_jni_c17_warnings_as_errors": "PASS",
+    "target_rank_jni_runtime": "PASS_NATIVE_TRUE_XCHECK_JNI_2500_ROUNDS",
+    "installer_cli": {
+      "cases": 8,
+      "status": "PASS",
+      "witnesses": [
+        "apply",
+        "unchanged-replay",
+        "check-satisfied",
+        "missing-refusal",
+        "late-drift-refusal",
+        "late-blocked-parent-refusal",
+        "symlink-refusal",
+        "template-drift-refusal"
+      ]
+    }
+  },
+  "existing_nine_receipts_preserved": [
+    {
+      "path": "m3/collections/qualification/rank-installer-preflight-20261018/CURRENT_HEAD_READBACK.json",
+      "sha": "2daae7cbfbc242957a37048f069a18f4e98863b4",
+      "type": "file",
+      "size": 6261
+    },
+    {
+      "path": "m3/collections/qualification/rank-installer-preflight-20261018/RECEIVING.json",
+      "sha": "f08f6b768224aaff1588383658e19dcdc84e3236",
+      "type": "file",
+      "size": 2851
+    },
+    {
+      "path": "m3/collections/qualification/rank-installer-preflight-20261018/SDK_APPLICATION.tsv",
+      "sha": "c1bb5f1d8d346c8044f73c180da2ca2819c2b9da",
+      "type": "file",
+      "size": 385
+    },
+    {
+      "path": "m3/collections/qualification/rank-installer-preflight-20261018/TARGET_GATES.json",
+      "sha": "973702af4159f0329ae0b7d17f81f3f4cf8c5c8f",
+      "type": "file",
+      "size": 3555
+    },
+    {
+      "path": "m3/collections/qualification/rank-installer-preflight-20261018/java21-compile-and-jni-headers.log",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "type": "file",
+      "size": 0
+    },
+    {
+      "path": "m3/collections/qualification/rank-installer-preflight-20261018/java21-jni-selftest-xcheck-ubsan.log",
+      "sha": "72d425f5817d38d40dc9ad2f1f39c0f2e8b90818",
+      "type": "file",
+      "size": 41
+    },
+    {
+      "path": "m3/collections/qualification/rank-installer-preflight-20261018/java21-selftest.log",
+      "sha": "c62c21f102fbbf0a63f09d208bfbda5e4fbd56ed",
+      "type": "file",
+      "size": 42
+    },
+    {
+      "path": "m3/collections/qualification/rank-installer-preflight-20261018/native-c17-compile-ubsan.log",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "type": "file",
+      "size": 0
+    },
+    {
+      "path": "m3/collections/qualification/rank-installer-preflight-20261018/target-maven-verify.log",
+      "sha": "8381e07d4e219be3d88cae758257f0051de431fe",
+      "type": "file",
+      "size": 1943
+    }
+  ],
+  "existing_nine_receipts_assertion": "Every existing receipt has the listed Git blob at the freshly read preappend head and is outside the two-path append delta.",
+  "original_recipe_preserved": "com.synexia.m3.M3RankInstallerAtomicPreflight20261017; original eac25798 preimage seal unchanged",
+  "unchanged_template_and_product_outputs": 5,
+  "existing_tooling_owner": "com.m3.recipe.M3RankIndexRecipe",
+  "api_contract": [
+    "main(String[])",
+    "run(Path, boolean)"
+  ],
+  "naming_map_disposition": "EXISTING_TARGET_TOOLING_OWNER_NO_RENAME; runtime-family promotion excluded",
+  "receiving_sequence_disposition": "STRING_QUALIFICATION_REMAINS_ACTIVE; NO_PHASE_ADVANCE",
+  "open_gates": [
+    "full_synexia_reactor",
+    "full_collections_dependent_reactor",
+    "full_jdk_jtreg_image",
+    "other_platforms"
+  ],
+  "modification": "Reject existing non-directory parent components during whole-batch preflight and apply revalidation before installer writes.",
+  "scope": "Routine independently licensed authoring-tool repair; bounded exact-source rank witnesses. The installer is not a transaction against concurrent external filesystem mutation."
+}

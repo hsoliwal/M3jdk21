@@ -1,0 +1,28 @@
+{
+  "schema": "M3_ECLIPSE_PROGRESS_JPMS_RECEIVING_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "34a2477b65e68c3ad1e91b4200b8bae2f736729c",
+  "dataset": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/vpt-eclipse-progress-20261026",
+  "original_product_parent": "dffb0b92724ea02e0ef4e2b17ede4ff2462f4c60",
+  "source": ".github/workflows/m3-eclipse-progress-forward-20261017.yml",
+  "source_before_git_blob": "59bb88b5e483974ea7dbb28782795d0c697ccdef",
+  "source_after_git_blob": "b2880f9007bbf0a9314105fdb3372cabc2eb86af",
+  "source_before_sha256": "805d4e4ecd29c6aa41b0eee6a4e6ca5a3a33fdfef0acb4fd4d2dde92b7375d4c",
+  "source_after_sha256": "957ef34ba27f5f933499dda5ccc480d4719652a73ff37bcdc550f18d9f831310",
+  "sdk": {
+    "java21": true,
+    "maven": "3.9.9",
+    "openrewrite": "8.17.1",
+    "actual_junit_tests": 7,
+    "failures": 0,
+    "results": 1,
+    "fixed_point_changes": 0
+  },
+  "baseline_ci_run": 40177948354,
+  "baseline_failure": "module not found: com.m3.arrays",
+  "real_9_eclipse_test_cases": "PENDING_HOSTED",
+  "full_collections_compile": "PENDING_HOSTED",
+  "source_classes_changed": false,
+  "toolkit_native_and_platform": "NOT_RUN",
+  "merge_authority": false
+}

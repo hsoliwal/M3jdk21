@@ -1,0 +1,8 @@
+{
+  "schema": "m3-guava-namespace-identity-exception-v1",
+  "authorizedScope": "successor 20261024 of guava-33.4.8-20261018; no new package",
+  "source": "com.google.common",
+  "target": "com.m3.collections.guava",
+  "inventory": "FULL_SOURCE_BINDINGS.tsv",
+  "notClaimed": "wire compatibility with com.google.common"
+}

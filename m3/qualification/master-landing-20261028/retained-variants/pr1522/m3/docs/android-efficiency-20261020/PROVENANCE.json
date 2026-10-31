@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0 for this metadata; receiving sources retain the per-file licenses below.",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+    "tree": "2059c036dbe04e51f72411b3510794d8da3c2040",
+    "pr": "https://github.com/hsoliwal/com.synexia/pull/12564",
+    "recipe": "com.synexia.rewrite.M3AndroidEfficiency20261020",
+    "common_build_recipe": "com.synexia.rewrite.M3AndroidEfficiency20261020$CommonJniBuild",
+    "recipe_implementation_license": "Apache-2.0",
+    "generic_owner": "Existing M3GpuToolJoinRecipe / M3GpuToolJoinManifest",
+    "runtime_dependency_added": false
+  },
+  "receiving": {
+    "repository": "hsoliwal/M3JDK21",
+    "runtime_commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+    "runtime_tree": "fc1e63dab966db59446e4943029bc3510adff807",
+    "pr": "https://github.com/hsoliwal/M3jdk21/pull/1572",
+    "stack_base": "8e868958f017482cfd6c5085869263c92a011cf6",
+    "runtime_files": [
+      {
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java",
+        "git_blob_sha1": "27cc19dd4037da1779d57825d02393bb8ada732b",
+        "sha256": "89baa852620434a11eadf753f5c0593ac2ae88bfbe5d006904e849d378f281e6",
+        "canonical_template_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java.txt",
+        "canonical_template_git_blob_sha1": "27cc19dd4037da1779d57825d02393bb8ada732b",
+        "license": "GPL-2.0-only WITH Classpath-exception-2.0",
+        "migration_record_id": "synexia.m3jdk21.android-efficiency-20261020.mapped-scalars",
+        "migration_status": "implemented-unverified"
+      },
+      {
+        "path": "src/java.base/share/native/libjava/M3StateRelation.c",
+        "git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+        "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+        "canonical_template_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/src/java.base/share/native/libjava/M3StateRelation.c.txt",
+        "canonical_template_git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+        "license": "Apache-2.0",
+        "migration_record_id": "synexia.m3jdk21.android-efficiency-20261020.state-relation-sparse",
+        "migration_status": "implemented-unverified"
+      },
+      {
+        "path": "m3/arrays/src/main/native/CMakeLists.txt",
+        "git_blob_sha1": "de0f4f870e2107ed74506a6ab9963b550cb4bc06",
+        "sha256": "1d3ea54f564b519d215a49bb6a7628aa894e94dc804cce5cae5cf92ee10a50c7",
+        "canonical_template_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/common-jni-build/m3/arrays/src/main/native/CMakeLists.txt.txt",
+        "canonical_template_git_blob_sha1": "de0f4f870e2107ed74506a6ab9963b550cb4bc06",
+        "license": "Apache-2.0",
+        "migration_record_id": "synexia.m3jdk21.android-efficiency-20261020.arrays-common-jni-build",
+        "migration_status": "implemented-unverified"
+      }
+    ]
+  },
+  "name_mapping": {
+    "path": "m3/docs/name-mapping.json",
+    "before_git_blob_sha1": "32d214357ba4f13c8e63be3737a989978b3613a2",
+    "before_sha256": "7815ef0f4003f0b5a753a6439b8e7b658f4a09baf82c8b529deaef0cf92664b0",
+    "after_git_blob_sha1": "d8baac9900534e93c3337676c17f061449f42ee4",
+    "after_sha256": "4f9e82d22a7c14c1739b975ed6fb53fddc7610cd41782b078d143f9eb23454e9",
+    "after_bytes": 633358,
+    "mappings": 77,
+    "migration_records": 63,
+    "all60_original_ids_and_statuses_preserved": true,
+    "new_records_status": "implemented-unverified",
+    "preservation_receipt": "evidence/metadata-preservation.json",
+    "preservation_receipt_sha256": "6208f70dbe26e00d209b7321d427324195cc288f4e46f78e835112de69b0c6b3"
+  },
+  "sdk_materialization": {
+    "path": "synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/execution/SDK_MATERIALIZATION_STAGE_2.json",
+    "sha256": "ffb9b779f73ae9c42f5235d4ae4640f91cb6f6952be770d5ff6782219726acbe",
+    "url": "https://github.com/hsoliwal/com.synexia/blob/517d49739dca95ba5caad4a3f14f94171a984b71/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/execution/SDK_MATERIALIZATION_STAGE_2.json",
+    "hand_patched_runtime_files": false
+  },
+  "retained_host_qualification": [
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/java-leaf/QUALIFICATION.json",
+      "git_blob_sha1": "23b71486457e8450239cc0b7dd4aca61733e556e",
+      "sha256": "33dda263a7c35d87137281be5cb01a40c6a44a34658071270124cbe90d55c00c",
+      "status": "PASS",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/517d49739dca95ba5caad4a3f14f94171a984b71/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/java-leaf/QUALIFICATION.json"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/native-leaf/QUALIFICATION.json",
+      "git_blob_sha1": "72b7cb549f16a5132650e7fb0ad734f3f94ed103",
+      "sha256": "18a887298d67d4873541a8326da7eaf5d5a7924f97bb1d964d6ace24114e8835",
+      "status": "HOST_CORRECTNESS_PASS_CONTROLLED_TIMING_PASS_ORIGINAL_HOLD_RETAINED",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/517d49739dca95ba5caad4a3f14f94171a984b71/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/native-leaf/QUALIFICATION.json"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/common-jni-build/QUALIFICATION.json",
+      "git_blob_sha1": "62b9fb67ffd0d0633cc1c361118e14cd534fa26f",
+      "sha256": "1ea703992bf15733301f927fb3dac372e85e88c5794bbb91a481c6fa4ae6b658",
+      "status": "PASS_HOST_CLOSURE",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/517d49739dca95ba5caad4a3f14f94171a984b71/synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/common-jni-build/QUALIFICATION.json"
+    }
+  ],
+  "receiving_validator": {
+    "status": "PASS_COMPLETION_INCOMPLETE",
+    "exit_code": 0,
+    "stdout": "MIGRATION_MANIFEST_VALID completion=INCOMPLETE\n",
+    "stderr_bytes": 0,
+    "declared_input_count": 66,
+    "command": "evidence/migration-validator-command.json",
+    "receipt": "evidence/migration-validator-receipt.json",
+    "receipt_sha256": "f673ccdcd130edf066c62c362acd88e75c5cbe1307e65c4d46f5b2cf1100bfc0",
+    "schema_unchanged": true,
+    "validator_unchanged": true,
+    "jsonschema": "4.26.0",
+    "runtime_tests_executed": false
+  },
+  "acceptance": {
+    "phase": "STRING",
+    "state": "QUALIFICATION_REQUIRED",
+    "migration_completion": "INCOMPLETE",
+    "runtime_or_platform_test_status_promoted": false,
+    "remaining": [
+      "Integrated source-built M3JDK21/HotSpot and full libjava",
+      "Installed-image behavior and jtreg/JCK",
+      "Android NDK/ELF/package/device/VM execution",
+      "Apple target VM/JNI/signing/device execution",
+      "SWT/Swing/Skija mobile peers and lifecycle/IME/accessibility"
+    ]
+  }
+}

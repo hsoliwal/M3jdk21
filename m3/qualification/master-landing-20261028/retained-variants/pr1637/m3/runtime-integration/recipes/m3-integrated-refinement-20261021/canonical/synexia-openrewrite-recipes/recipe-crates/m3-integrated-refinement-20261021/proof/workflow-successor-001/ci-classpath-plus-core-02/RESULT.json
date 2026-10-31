@@ -1,0 +1,53 @@
+{
+  "schema": "M3_FINAL_CI_CLASSPATH_REVIEW_RESULT_V1",
+  "status": "PASS_WITH_ACTUAL_CORE_RUNTIME_CLASSES",
+  "scope": "Isolated exact emitted framework CI SDK parser-classpath reproduction, with actual qualified core-runtime owner added only",
+  "exit_code": 0,
+  "suites": [
+    {
+      "name": "com.synexia.rewrite.M3IntegratedRefinementRecipeTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "76.506"
+    },
+    {
+      "name": "com.synexia.rewrite.memory.M3CorrectionMemoryConformanceTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.143"
+    }
+  ],
+  "counts": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "input_receipt_sha256": "929f5cf4d25cedf71e18784107453aa1fb60712d75369956adcf7f398cc48bb9",
+  "all_frozen_source_class_jar_readbacks_unchanged": true,
+  "frozen_mirror_files": 683,
+  "original_classpath_members": 27,
+  "corrected_classpath_members": 28,
+  "added_owner_classes": 7,
+  "owner_qualification_receipt": "/workspace/scratch/206049dfb270/jobs-work/emitted-eclipse-owning-01/RESULT.json",
+  "owner_qualification_sha256": "f117fa9737bb59dcc6d138afbe5a543260ac2b04d507e7c5c6bd0b8b1b592e5a",
+  "mop_conformance_checks": 129,
+  "mop_control_cases": 32,
+  "recipe_phases": 48,
+  "sealed_target_paths": 48,
+  "log_sha256": "18a69ca5e69ac683a8323428252c5605d32137339cf8bc0125924dc02fbfb17e",
+  "recipe_receipt_sha256": "4b203217347943a982de5e6b3c1827840cf5b689e919bf3a9b3344f98f798e3c",
+  "fresh_reports_source": "/workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-plus-core-02/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/surefire-reports",
+  "copied_historical_proof_status": "The frozen canonical mirror includes historical proof/sdk-001. Its RESULT.json is not this trial receipt; this trial uses fresh target/surefire-reports and target/recipe-proof.tsv only.",
+  "target_sources_modified": false,
+  "finding": "Building the existing core-runtime owning POM and adding its actual target/classes to the framework parser classpath is sufficient for the unchanged five-method attribution probe and all unchanged SDK gates. No patch-java.base owner is additionally required by that sealed probe.",
+  "limits": [
+    "Local Java 21 reproduction; hosted GitHub Actions run not performed",
+    "SDK scope source replay only; actual receiving runtime gates retained separately",
+    "No engine, POM, test, source, permission, workflow activation, or job budget change in this isolated trial"
+  ]
+}

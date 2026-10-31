@@ -1,0 +1,207 @@
+[
+  {
+    "label": "environment/java",
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "0,1",
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xms256m",
+      "-Xmx256m",
+      "-XX:ActiveProcessorCount=2",
+      "-XshowSettings:vm",
+      "-version"
+    ],
+    "exit": 0,
+    "started_utc": "2026-10-18T05:57:16.183023+00:00",
+    "ended_utc": "2026-10-18T05:57:16.268340+00:00",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "fac45862e9fb8a96293a4a5723128a99d3b8707f901814ee363f4f53bde722bc"
+  },
+  {
+    "label": "environment/javac",
+    "argv": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+      "-version"
+    ],
+    "exit": 0,
+    "started_utc": "2026-10-18T05:57:16.268766+00:00",
+    "ended_utc": "2026-10-18T05:57:16.589886+00:00",
+    "stdout_sha256": "2df6b9c76e710158266aeaae8f3578eaed8ddd747a2272483506ad9a8a5e644a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "baseline/compile-proof",
+    "argv": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/workspace/scratch/8762dba320ce/audit/collections-latest-baseline-build/m3/collections/target/classes",
+      "-d",
+      "/workspace/scratch/8762dba320ce/ast-work/order-window-allocation/final/baseline/proof-classes",
+      "/workspace/scratch/8762dba320ce/audit/collections-latest-receiver/m3/collections/src/test/java/com/m3/collections/M3OrderWindowProof.java"
+    ],
+    "exit": 0,
+    "started_utc": "2026-10-18T05:57:16.698672+00:00",
+    "ended_utc": "2026-10-18T05:57:18.401766+00:00",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "receiver/compile-proof",
+    "argv": [
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/target/classes",
+      "-d",
+      "/workspace/scratch/8762dba320ce/ast-work/order-window-allocation/final/receiver/proof-classes",
+      "/workspace/scratch/8762dba320ce/audit/collections-latest-receiver/m3/collections/src/test/java/com/m3/collections/M3OrderWindowProof.java"
+    ],
+    "exit": 0,
+    "started_utc": "2026-10-18T05:57:18.492033+00:00",
+    "ended_utc": "2026-10-18T05:57:20.167841+00:00",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "runs/baseline-1",
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "0,1",
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xms256m",
+      "-Xmx256m",
+      "-XX:ActiveProcessorCount=2",
+      "-Djava.library.path=/workspace/scratch/8762dba320ce/ast-work/order-window-allocation/final/empty-native-path",
+      "-cp",
+      "/workspace/scratch/8762dba320ce/ast-work/order-window-allocation/final/baseline/proof-classes:/workspace/scratch/8762dba320ce/audit/collections-latest-baseline-build/m3/collections/target/classes",
+      "com.m3.collections.M3OrderWindowProof",
+      "allocation"
+    ],
+    "exit": 0,
+    "started_utc": "2026-10-18T05:57:20.173309+00:00",
+    "ended_utc": "2026-10-18T05:57:20.921674+00:00",
+    "stdout_sha256": "2b15d0a5eccf27c67d027689287ce3a023846444c3e763d1e21828743abedd0b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "runs/receiver-1",
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "0,1",
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xms256m",
+      "-Xmx256m",
+      "-XX:ActiveProcessorCount=2",
+      "-Djava.library.path=/workspace/scratch/8762dba320ce/ast-work/order-window-allocation/final/empty-native-path",
+      "-cp",
+      "/workspace/scratch/8762dba320ce/ast-work/order-window-allocation/final/baseline/proof-classes:/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/target/classes",
+      "com.m3.collections.M3OrderWindowProof",
+      "allocation"
+    ],
+    "exit": 0,
+    "started_utc": "2026-10-18T05:57:20.922737+00:00",
+    "ended_utc": "2026-10-18T05:57:21.197775+00:00",
+    "stdout_sha256": "93f454de1dcebc41c029f4d1d81e46410befdb285e18763b6d0acd50c2043da9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "runs/baseline-2",
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "0,1",
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xms256m",
+      "-Xmx256m",
+      "-XX:ActiveProcessorCount=2",
+      "-Djava.library.path=/workspace/scratch/8762dba320ce/ast-work/order-window-allocation/final/empty-native-path",
+      "-cp",
+      "/workspace/scratch/8762dba320ce/ast-work/order-window-allocation/final/baseline/proof-classes:/workspace/scratch/8762dba320ce/audit/collections-latest-baseline-build/m3/collections/target/classes",
+      "com.m3.collections.M3OrderWindowProof",
+      "allocation"
+    ],
+    "exit": 0,
+    "started_utc": "2026-10-18T05:57:21.198442+00:00",
+    "ended_utc": "2026-10-18T05:57:22.753669+00:00",
+    "stdout_sha256": "2b15d0a5eccf27c67d027689287ce3a023846444c3e763d1e21828743abedd0b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "runs/receiver-2",
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "0,1",
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xms256m",
+      "-Xmx256m",
+      "-XX:ActiveProcessorCount=2",
+      "-Djava.library.path=/workspace/scratch/8762dba320ce/ast-work/order-window-allocation/final/empty-native-path",
+      "-cp",
+      "/workspace/scratch/8762dba320ce/ast-work/order-window-allocation/final/baseline/proof-classes:/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/target/classes",
+      "com.m3.collections.M3OrderWindowProof",
+      "allocation"
+    ],
+    "exit": 0,
+    "started_utc": "2026-10-18T05:57:22.754704+00:00",
+    "ended_utc": "2026-10-18T05:57:23.016054+00:00",
+    "stdout_sha256": "93f454de1dcebc41c029f4d1d81e46410befdb285e18763b6d0acd50c2043da9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "runs/baseline-3",
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "0,1",
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xms256m",
+      "-Xmx256m",
+      "-XX:ActiveProcessorCount=2",
+      "-Djava.library.path=/workspace/scratch/8762dba320ce/ast-work/order-window-allocation/final/empty-native-path",
+      "-cp",
+      "/workspace/scratch/8762dba320ce/ast-work/order-window-allocation/final/baseline/proof-classes:/workspace/scratch/8762dba320ce/audit/collections-latest-baseline-build/m3/collections/target/classes",
+      "com.m3.collections.M3OrderWindowProof",
+      "allocation"
+    ],
+    "exit": 0,
+    "started_utc": "2026-10-18T05:57:23.016943+00:00",
+    "ended_utc": "2026-10-18T05:57:23.947544+00:00",
+    "stdout_sha256": "2b15d0a5eccf27c67d027689287ce3a023846444c3e763d1e21828743abedd0b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "label": "runs/receiver-3",
+    "argv": [
+      "/usr/bin/taskset",
+      "-c",
+      "0,1",
+      "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+      "-Xms256m",
+      "-Xmx256m",
+      "-XX:ActiveProcessorCount=2",
+      "-Djava.library.path=/workspace/scratch/8762dba320ce/ast-work/order-window-allocation/final/empty-native-path",
+      "-cp",
+      "/workspace/scratch/8762dba320ce/ast-work/order-window-allocation/final/baseline/proof-classes:/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/module/m3/collections/target/classes",
+      "com.m3.collections.M3OrderWindowProof",
+      "allocation"
+    ],
+    "exit": 0,
+    "started_utc": "2026-10-18T05:57:23.952882+00:00",
+    "ended_utc": "2026-10-18T05:57:24.378226+00:00",
+    "stdout_sha256": "93f454de1dcebc41c029f4d1d81e46410befdb285e18763b6d0acd50c2043da9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "gate": "sdk-execution",
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "-B",
+    "-ntp",
+    "--offline",
+    "-Dmaven.repo.local=/tmp/m3-maven-repository",
+    "-Drecipe.owner.root=/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes",
+    "-Dm3.dataset=m3jdk21-wrapper-proof2-20261018",
+    "-Dm3.contract.output=/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/receiver-proof",
+    "-f",
+    "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml",
+    "-Pcontract",
+    "verify"
+  ],
+  "cwd": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "JAVA_HOME": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+  "started_at_utc": "2026-10-18T05:54:43.521453+00:00",
+  "exit_code": 0,
+  "seconds": 8.167,
+  "log": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/sdk-execution.log",
+  "sha256": "abfec6aec893693511ec6228ac43625f8b62a848cdad3180f5c0b1f1c00fece2",
+  "dataset": "m3jdk21-wrapper-proof2-20261018"
+}

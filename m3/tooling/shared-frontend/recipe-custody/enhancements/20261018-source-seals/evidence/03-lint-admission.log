@@ -1,0 +1,1 @@
+PASS: no whitespace diagnostics. Git diff --no-index implies --exit-code; 1 records different files, not a whitespace failure. All Python/XML/JSON/text checks from 02-lint.log passed. No source changes.

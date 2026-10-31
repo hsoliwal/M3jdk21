@@ -1,0 +1,204 @@
+diff --git a/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java b/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
+index 91039e9..4b0a8eb 100644
+--- a/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
++++ b/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
+@@ -18,6 +18,8 @@ com.synexia.rewrite.Mrd
+ import java.util.List;
+ import java.util.Map;
+ import java.util.Set;
++import java.util.function.Consumer;
++import org.openrewrite.DelegatingExecutionContext;
+ import org.openrewrite.ExecutionContext;
+ import org.openrewrite.Option;
+ import org.openrewrite.Parser;
+@@ -36,10 +38,15 @@
+  * rendered Java text encoded as UTF-8, not the original on-disk byte encoding. Replacements
+  * preserve the input charset and BOM flag and discard its obsolete checksum. This recipe checks source identity and
+  * syntax; the sealed M3 contract, coverage, compiler, test and runtime gates remain authoritative.
++ * An optional bounded parser-dependencies resource supplies exact source context and refuses parser
++ * callbacks before candidate publication; crates without that resource retain the default parser policy.
+  */
+ public final class M3HashPinnedJavaSnapshotRecipe
+         extends ScanningRecipe<M3HashPinnedJavaSnapshotRecipe.Inventory> {
+     private static final String RESOURCE_ROOT = "/com/synexia/rewrite/hash-pinned-java/";
++    private static final int MAX_PARSER_DEPENDENCIES = 16;
++    private static final int MAX_PARSER_DEPENDENCY_MANIFEST_BYTES = 65_536;
++    private static final int MAX_PARSER_DEPENDENCY_BYTES = 262_144;
+ 
+     @Option(
+             displayName = "Crate name",
+@@ -48,15 +55,18 @@
+     private final String crateName;
+ 
+     private record Target(String path, String before, String after, String text) { }
++    private record ParserDependency(String path, String text) { }
+ 
+     public static final class Inventory {
+         private final List<Target> targets;
++        private final List<ParserDependency> parserDependencies;
+         private final Map<String, String> seen = new HashMap<>();
+         private final List<String> conflicts = new ArrayList<>();
+         private Map<String, SourceFile> candidates;
+ 
+-        private Inventory(List<Target> targets) {
++        private Inventory(List<Target> targets, List<ParserDependency> parserDependencies) {
+             this.targets = targets;
++            this.parserDependencies = parserDependencies;
+         }
+     }
+ 
+@@ -84,7 +94,8 @@
+     @Override public int maxCycles() { return 1; }
+ 
+     @Override public Inventory getInitialValue(ExecutionContext context) {
+-        return new Inventory(targets());
++        List<Target> targets = targets();
++        return new Inventory(targets, parserDependencies(targets));
+     }
+ 
+     @Override public TreeVisitor<?, ExecutionContext> getScanner(Inventory inventory) {
+@@ -190,9 +201,10 @@
+         synchronized (inventory) {
+             requireAdmissible(inventory);
+             if (inventory.candidates == null) {
++                validateParserDependencies(inventory.parserDependencies, context);
+                 Map<String, SourceFile> prepared = new HashMap<>();
+                 for (Target target : inventory.targets) {
+-                    prepared.put(target.path(), parse(target, context));
++                    prepared.put(target.path(), parse(target, context, inventory.parserDependencies));
+                 }
+                 inventory.candidates = Map.copyOf(prepared);
+             }
+@@ -213,10 +225,15 @@
+         }
+     }
+ 
+-    private static SourceFile parse(Target target, ExecutionContext context) {
+-        List<SourceFile> parsed = JavaParser.fromJavaVersion().build()
+-                .parseInputs(List.of(Parser.Input.fromString(Path.of(target.path()), target.text())),
+-                        null, context).toList();
++    private static SourceFile parse(
++            Target target, ExecutionContext context, List<ParserDependency> dependencies) {
++        JavaParser.Builder<?, ?> builder = JavaParser.fromJavaVersion();
++        if (!dependencies.isEmpty()) builder.dependsOn(dependencyInputs(dependencies));
++        JavaParser parser = builder.build();
++        List<Parser.Input> inputs = List.of(Parser.Input.fromString(Path.of(target.path()), target.text()));
++        List<SourceFile> parsed = dependencies.isEmpty()
++                ? parser.parseInputs(inputs, null, context).toList()
++                : parseChecked(parser, inputs, context, target.path());
+         if (parsed.size() != 1 || !(parsed.get(0) instanceof J.CompilationUnit)
+                 || !target.text().equals(parsed.get(0).printAll())) {
+             throw new IllegalStateException("Java template parse/format drift: " + target.path());
+@@ -224,6 +241,112 @@
+         return parsed.get(0);
+     }
+ 
++    private List<ParserDependency> parserDependencies(List<Target> targets) {
++        String root = RESOURCE_ROOT + crateName + "/";
++        String manifest = dependencyResource(root + "parser-dependencies.tsv",
++                MAX_PARSER_DEPENDENCY_MANIFEST_BYTES, true);
++        if (manifest == null) return List.of();
++        Set<String> reservedPaths = new HashSet<>();
++        Set<String> reservedTypes = new HashSet<>();
++        for (Target target : targets) {
++            reservedPaths.add(target.path());
++            reservedTypes.add(javaIdentity(target.path()));
++        }
++        Set<String> resources = new HashSet<>();
++        List<ParserDependency> dependencies = new ArrayList<>();
++        String previous = "";
++        int remaining = MAX_PARSER_DEPENDENCY_BYTES;
++        for (String line : manifest.lines().toList()) {
++            if (line.isBlank() || line.startsWith("#")) continue;
++            String[] cells = line.split("\t", -1);
++            if (cells.length != 3 || !javaPath(cells[0]) || previous.compareTo(cells[0]) >= 0
++                    || !reservedPaths.add(cells[0]) || !reservedTypes.add(javaIdentity(cells[0]))
++                    || !sha(cells[1]) || cells[2].length() > 256
++                    || !cells[2].matches("[A-Za-z0-9_][A-Za-z0-9_.-]*\\.java\\.txt")
++                    || !resources.add(cells[2])) {
++                throw new IllegalStateException("invalid Java parser dependency manifest row");
++            }
++            if (dependencies.size() == MAX_PARSER_DEPENDENCIES) {
++                throw new IllegalStateException("Java parser dependency count budget");
++            }
++            String text = dependencyResource(root + cells[2], remaining, false);
++            if (text.isBlank() || !sha256(text).equals(cells[1])) {
++                throw new IllegalStateException("Java parser dependency hash/content drift: " + cells[0]);
++            }
++            remaining -= text.getBytes(StandardCharsets.UTF_8).length;
++            dependencies.add(new ParserDependency(cells[0], text));
++            previous = cells[0];
++        }
++        if (dependencies.isEmpty()) throw new IllegalStateException("empty Java parser dependency manifest");
++        return List.copyOf(dependencies);
++    }
++
++    private static String javaIdentity(String path) {
++        return M3ScopeInference.describeJavaTarget(path).packageName() + "."
++                + Path.of(path).getFileName();
++    }
++
++    private static List<Parser.Input> dependencyInputs(List<ParserDependency> dependencies) {
++        return dependencies.stream()
++                .map(dependency -> Parser.Input.fromString(Path.of(dependency.path()), dependency.text()))
++                .toList();
++    }
++
++    private static void validateParserDependencies(
++            List<ParserDependency> dependencies, ExecutionContext context) {
++        if (dependencies.isEmpty()) return;
++        List<SourceFile> parsed = parseChecked(JavaParser.fromJavaVersion().build(),
++                dependencyInputs(dependencies), context, "parser dependencies");
++        Map<String, String> expected = new HashMap<>();
++        for (ParserDependency dependency : dependencies) expected.put(dependency.path(), dependency.text());
++        Set<String> seen = new HashSet<>();
++        for (SourceFile source : parsed) {
++            String path = normalized(source.getSourcePath());
++            if (!(source instanceof J.CompilationUnit) || !seen.add(path)
++                    || !source.printAll().equals(expected.get(path))) {
++                throw new IllegalStateException("Java parser dependency parse/format drift: " + path);
++            }
++        }
++        if (!seen.equals(expected.keySet())) {
++            throw new IllegalStateException("incomplete Java parser dependency parse");
++        }
++    }
++
++    private static List<SourceFile> parseChecked(
++            JavaParser parser, List<Parser.Input> inputs, ExecutionContext context, String description) {
++        List<Throwable> errors = new ArrayList<>();
++        ExecutionContext checked = new DelegatingExecutionContext(context) {
++            @Override public Consumer<Throwable> getOnError() {
++                return error -> {
++                    errors.add(error);
++                    context.getOnError().accept(error);
++                };
++            }
++        };
++        List<SourceFile> parsed = parser.parseInputs(inputs, null, checked).toList();
++        if (!errors.isEmpty()) {
++            throw new IllegalStateException("Java parser failed while preparing " + description, errors.getFirst());
++        }
++        return parsed;
++    }
++
++    private static String dependencyResource(String name, int maxBytes, boolean optional) {
++        try (var stream = M3HashPinnedJavaSnapshotRecipe.class.getResourceAsStream(name)) {
++            if (stream == null) {
++                if (optional) return null;
++                throw new IllegalStateException("missing Java parser dependency resource: " + name);
++            }
++            byte[] bytes = stream.readNBytes(maxBytes + 1);
++            if (bytes.length > maxBytes) throw new IllegalStateException("Java parser dependency byte budget");
++            String text = StandardCharsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPORT)
++                    .onUnmappableCharacter(CodingErrorAction.REPORT).decode(ByteBuffer.wrap(bytes)).toString();
++            if (text.indexOf('\0') >= 0) throw new IllegalStateException("NUL in Java parser dependency resource");
++            return text;
++        } catch (IOException failure) {
++            throw new IllegalStateException("cannot read Java parser dependency resource", failure);
++        }
++    }
++
+     private List<Target> targets() {
+         String root = RESOURCE_ROOT + crateName + "/";
+         List<Target> targets = new ArrayList<>();

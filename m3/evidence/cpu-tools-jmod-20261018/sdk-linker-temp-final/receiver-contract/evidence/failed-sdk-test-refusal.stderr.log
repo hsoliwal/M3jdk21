@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/dev/shm/m3-cpu-tools-f4826e049195-workspace/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/linker-temp/receiver-proof/isolated-bm772bdd/failed-tests/crate/receive.py", line 197, in <module>
+    main()
+  File "/dev/shm/m3-cpu-tools-f4826e049195-workspace/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/linker-temp/receiver-proof/isolated-bm772bdd/failed-tests/crate/receive.py", line 192, in main
+    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/dev/shm/m3-cpu-tools-f4826e049195-workspace/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/linker-temp/receiver-proof/isolated-bm772bdd/failed-tests/crate/receive.py", line 149, in receive
+    qualified = qualification(crate, dataset, owner)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/dev/shm/m3-cpu-tools-f4826e049195-workspace/com.synexia/synexia-openrewrite-recipes/recipes/m3-cpu-tools-jmod-20261018/target/linker-temp/receiver-proof/isolated-bm772bdd/failed-tests/crate/receive.py", line 73, in qualification
+    raise ValueError("all actual SDK qualification tests must execute successfully")
+ValueError: all actual SDK qualification tests must execute successfully

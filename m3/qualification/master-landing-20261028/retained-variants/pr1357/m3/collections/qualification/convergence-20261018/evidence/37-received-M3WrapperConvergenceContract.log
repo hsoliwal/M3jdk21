@@ -1,0 +1,7 @@
+Exception in thread "main" java.lang.AssertionError: read-only map comparator failure: missing IllegalArgumentException
+	at com.m3.collections.M3WrapperConvergenceContract.failure(M3WrapperConvergenceContract.java:59)
+	at com.m3.collections.M3WrapperConvergenceContract.comparatorFailureIdentity(M3WrapperConvergenceContract.java:292)
+	at com.m3.collections.M3WrapperConvergenceContract.run(M3WrapperConvergenceContract.java:369)
+	at com.m3.collections.M3WrapperConvergenceContract.main(M3WrapperConvergenceContract.java:383)
+
+EXIT=1

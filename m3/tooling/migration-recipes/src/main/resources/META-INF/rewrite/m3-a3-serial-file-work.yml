@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.SerialFileWork
+displayName: Install A3 serial FILE work planner
+description: >
+  Source-sealed A3 queue-to-FILE work planner. Candidate-only; no OpenJDK product
+  source, donor-copy or promotion authority.
+recipeList:
+  - com.m3.rewrite.a3.M3A3SerialFileWorkRecipe

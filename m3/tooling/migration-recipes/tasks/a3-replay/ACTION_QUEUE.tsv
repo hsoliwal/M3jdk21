@@ -1,0 +1,9 @@
+id	state	exit
+A3_REPLAY	TARGETED_PASS	Exact-current full reactor and independent integration confirmation
+VERBATIM_DESCRIPTOR	FAIL_OBSERVED	M3VerbatimJavaPairRecipeTest.driftAndMalformedDescriptorsFailClosed
+JNI_STRING_RECIPE	FAIL_OBSERVED	Two M3MIndexJniNewStringAdmissionRecipeTest parse/execution failures
+BULK_STRING_TYPES	FAIL_OBSERVED	Two M3MIndexStringBulkCharBoundaryRecipeTest missing-type errors
+COVERAGE	NOT_99	Preserve gates; fill real reachable proof gaps without exclusions
+CURRENT_FULL_SOURCE	PENDING	Capture candidate full source/cache through existing proof kit
+WHOLE_JDK	PENDING	Retain tasks/map-utf/TODO.tsv; all compatible JEP/non-JEP/fork packets and build/jtreg
+STRING_NATIVE_MODULES	PENDING	Full String/JNI/GC/CDS and application/native platform acceptance

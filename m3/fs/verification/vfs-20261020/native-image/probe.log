@@ -1,0 +1,5 @@
+M3FS_MODULE_RESOURCE=jrt:/jdk.m3fs/com/m3/fs/M3FS.class
+M3FS_NATIVE_ORIGIN=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture/image/lib/libm3fs.so
+M3FS_SQLITE_ORIGIN=/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture/image/lib/libsqlite3.so.0
+M3FS_FEATURE_BITS=2097151
+M3FS_RUNTIME_PROBE=PASS

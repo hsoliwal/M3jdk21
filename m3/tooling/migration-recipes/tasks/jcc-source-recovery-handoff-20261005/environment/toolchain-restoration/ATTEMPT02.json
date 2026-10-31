@@ -1,0 +1,6 @@
+{
+  "result": "REFUSED_BEFORE_COPY",
+  "reason": "JDK skeleton retains205 license symlinks; second guard allowed directories only. All links will be preserved only if their exact target/mode match the cache.",
+  "files_copied": 0,
+  "toolchain_execution": false
+}

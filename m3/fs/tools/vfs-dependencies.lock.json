@@ -1,0 +1,70 @@
+{
+  "dependencies": [
+    {
+      "descriptor_kind": "injected",
+      "descriptor_sha256": "1e26139e0b23c98524079d76e5036189ba4e40cc38157a5e87411852c1c4e109",
+      "descriptor_target": "src/main/dependency-modules/commons.logging/module-info.java",
+      "legal_sha256": {
+        "META-INF/LICENSE.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "META-INF/NOTICE.txt": "785071a94ab6133000164bc6ed8543da88231503768dfeadcc83847af99cf8f8"
+      },
+      "maven_coordinate": "commons-logging:commons-logging:1.2",
+      "module": "commons.logging",
+      "repository_path": "commons-logging/commons-logging/1.2/commons-logging-1.2.jar",
+      "sha256": "daddea1ea0be0f56978ab3006b8ac92834afeefbd9b7e4e6316fca57df0fa636",
+      "source": "https://repo.maven.apache.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar"
+    },
+    {
+      "descriptor_kind": "published",
+      "legal_sha256": {
+        "META-INF/LICENSE.txt": "b1d2870f1a00e4d7f56576e5f0870cba109e041f8af66866cf5b499478e654e7",
+        "META-INF/NOTICE.txt": "64bc8696af3f6c770521412b85d3a733fa44b2ef5b0f4bd739e0c4d02eca492a"
+      },
+      "maven_coordinate": "org.apache.commons:commons-lang3:3.18.0",
+      "module": "org.apache.commons.lang3",
+      "repository_path": "org/apache/commons/commons-lang3/3.18.0/commons-lang3-3.18.0.jar",
+      "sha256": "4eeeae8d20c078abb64b015ec158add383ac581571cddc45c68f0c9ae0230720",
+      "source": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.18.0/commons-lang3-3.18.0.jar"
+    },
+    {
+      "descriptor_kind": "published",
+      "legal_sha256": {
+        "META-INF/LICENSE.txt": "c1d1a38c99c48ccad170890ade6066e2e240bb6ce59861d4eb7f672eddd2a4c6",
+        "META-INF/NOTICE.txt": "b54b0db6c617273efff79ba193bb01b05eadcddfff55c24063b38b2acef714c3"
+      },
+      "maven_coordinate": "commons-io:commons-io:2.21.0",
+      "module": "org.apache.commons.io",
+      "repository_path": "commons-io/commons-io/2.21.0/commons-io-2.21.0.jar",
+      "sha256": "7d643a2afea8b058b762aa6fb90e5b256f6c729739f8b3784c3370ddc609e88d",
+      "source": "https://repo.maven.apache.org/maven2/commons-io/commons-io/2.21.0/commons-io-2.21.0.jar"
+    },
+    {
+      "descriptor_kind": "published",
+      "legal_sha256": {
+        "META-INF/LICENSE.txt": "51b88fd3e9e24edcdce1dd145a4fca2dcd12911407f00b06dfa6ff600f9733c1",
+        "META-INF/NOTICE.txt": "0d98967f0ab328af8d9d536aa9a5c684b5dd665657245f6ee6b5915affe811c0"
+      },
+      "maven_coordinate": "org.apache.commons:commons-compress:1.28.0",
+      "module": "org.apache.commons.compress",
+      "repository_path": "org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.jar",
+      "sha256": "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca",
+      "source": "https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.jar"
+    },
+    {
+      "descriptor_kind": "published",
+      "legal_sha256": {
+        "META-INF/LICENSE.txt": "b1d2870f1a00e4d7f56576e5f0870cba109e041f8af66866cf5b499478e654e7",
+        "META-INF/NOTICE.txt": "b64933ee1d36d14659156223a2604edadb60bffdd465d5368ff422d7689db5fb"
+      },
+      "maven_coordinate": "commons-codec:commons-codec:1.19.0",
+      "module": "org.apache.commons.codec",
+      "repository_path": "commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.jar",
+      "sha256": "5c3881e4f556855e9c532927ee0c9dfde94cc66760d5805c031a59887070af5f",
+      "source": "https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.jar"
+    }
+  ],
+  "profile": "m3-vfs-core",
+  "qualification": "Exact supplied artifacts; these selected dependency versions differ from some Apache Commons VFS 2.10.0 parent defaults. This is a bounded core-profile build, not all upstream provider compatibility.",
+  "schema": 1,
+  "vfs_upstream_commit": "685b3b723a83e56034391350ea1a02231411142f"
+}

@@ -1,0 +1,418 @@
+Compiled from "M3ChildProgressMonitor.java"
+final class com.m3.collections.M3ChildProgressMonitor implements com.m3.collections.M3ProgressMonitor {
+  public void beginTask(java.lang.String, long);
+    descriptor: (Ljava/lang/String;J)V
+
+  public void done();
+    descriptor: ()V
+
+  public void worked(long);
+    descriptor: (J)V
+
+  public void setProgress(long, long);
+    descriptor: (JJ)V
+
+  public void setTaskName(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public void subTask(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public boolean isCanceled();
+    descriptor: ()Z
+
+  public void setCanceled(boolean);
+    descriptor: (Z)V
+
+  public com.m3.collections.M3ProgressMonitor split(long);
+    descriptor: (J)Lcom/m3/collections/M3ProgressMonitor;
+
+  public synchronized com.m3.collections.M3ProgressState state();
+    descriptor: ()Lcom/m3/collections/M3ProgressState;
+}
+Compiled from "M3DefaultProgressMonitor.java"
+public final class com.m3.collections.M3DefaultProgressMonitor implements com.m3.collections.M3ProgressMonitor {
+  public com.m3.collections.M3DefaultProgressMonitor();
+    descriptor: ()V
+
+  public void beginTask(java.lang.String, long);
+    descriptor: (Ljava/lang/String;J)V
+
+  public void done();
+    descriptor: ()V
+
+  public void worked(long);
+    descriptor: (J)V
+
+  public void setProgress(long, long);
+    descriptor: (JJ)V
+
+  public void setTaskName(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public void subTask(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public boolean isCanceled();
+    descriptor: ()Z
+
+  public void setCanceled(boolean);
+    descriptor: (Z)V
+
+  public com.m3.collections.M3ProgressMonitor split(long);
+    descriptor: (J)Lcom/m3/collections/M3ProgressMonitor;
+
+  public com.m3.collections.M3ProgressState state();
+    descriptor: ()Lcom/m3/collections/M3ProgressState;
+}
+Compiled from "M3Progress.java"
+public class com.m3.collections.M3Progress implements com.m3.collections.M3ProgressMonitor {
+  public static final com.m3.collections.M3Progress NULL;
+    descriptor: Lcom/m3/collections/M3Progress;
+  protected com.m3.collections.M3Progress(int);
+    descriptor: (I)V
+
+  public static com.m3.collections.M3Progress of(int);
+    descriptor: (I)Lcom/m3/collections/M3Progress;
+
+  public static com.m3.collections.M3Progress of(int, java.util.function.Consumer<com.m3.collections.M3Progress>);
+    descriptor: (ILjava/util/function/Consumer;)Lcom/m3/collections/M3Progress;
+
+  public void beginTask(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)V
+
+  public void beginTask(java.lang.String, long);
+    descriptor: (Ljava/lang/String;J)V
+
+  public void subTask(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public void worked(int);
+    descriptor: (I)V
+
+  public void worked(long);
+    descriptor: (J)V
+
+  public void setProgress(long, long);
+    descriptor: (JJ)V
+
+  public void setTaskName(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public com.m3.collections.M3Progress split(int);
+    descriptor: (I)Lcom/m3/collections/M3Progress;
+
+  public com.m3.collections.M3Progress split(long);
+    descriptor: (J)Lcom/m3/collections/M3Progress;
+
+  public void done();
+    descriptor: ()V
+
+  public synchronized void cancel();
+    descriptor: ()V
+
+  public synchronized boolean isCanceled();
+    descriptor: ()Z
+
+  public synchronized void setCanceled(boolean);
+    descriptor: (Z)V
+
+  public synchronized boolean isDone();
+    descriptor: ()Z
+
+  public synchronized int getPercentComplete();
+    descriptor: ()I
+
+  public synchronized int getTotalWork();
+    descriptor: ()I
+
+  public synchronized int getWorkedSoFar();
+    descriptor: ()I
+
+  public synchronized java.lang.String getTaskName();
+    descriptor: ()Ljava/lang/String;
+
+  public synchronized java.lang.String getSubTaskName();
+    descriptor: ()Ljava/lang/String;
+
+  public synchronized com.m3.collections.M3Progress$Snapshot snapshot();
+    descriptor: ()Lcom/m3/collections/M3Progress$Snapshot;
+
+  public synchronized com.m3.collections.M3ProgressState state();
+    descriptor: ()Lcom/m3/collections/M3ProgressState;
+
+  protected void onWorkChanged();
+    descriptor: ()V
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public com.m3.collections.M3ProgressMonitor split(long);
+    descriptor: (J)Lcom/m3/collections/M3ProgressMonitor;
+}
+Compiled from "M3Progress.java"
+final class com.m3.collections.M3Progress$NullProgress extends com.m3.collections.M3Progress {
+  public void beginTask(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)V
+
+  public void beginTask(java.lang.String, long);
+    descriptor: (Ljava/lang/String;J)V
+
+  public void subTask(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public void worked(int);
+    descriptor: (I)V
+
+  public void worked(long);
+    descriptor: (J)V
+
+  public void setProgress(long, long);
+    descriptor: (JJ)V
+
+  public void setTaskName(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public com.m3.collections.M3Progress split(int);
+    descriptor: (I)Lcom/m3/collections/M3Progress;
+
+  public com.m3.collections.M3Progress split(long);
+    descriptor: (J)Lcom/m3/collections/M3Progress;
+
+  public void done();
+    descriptor: ()V
+
+  public void cancel();
+    descriptor: ()V
+
+  public void setCanceled(boolean);
+    descriptor: (Z)V
+
+  public com.m3.collections.M3ProgressMonitor split(long);
+    descriptor: (J)Lcom/m3/collections/M3ProgressMonitor;
+}
+Compiled from "M3Progress.java"
+public final class com.m3.collections.M3Progress$Snapshot extends java.lang.Record {
+  public com.m3.collections.M3Progress$Snapshot(java.lang.String, java.lang.String, int, int, boolean, boolean, long);
+    descriptor: (Ljava/lang/String;Ljava/lang/String;IIZZJ)V
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public java.lang.String taskName();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String subTaskName();
+    descriptor: ()Ljava/lang/String;
+
+  public int worked();
+    descriptor: ()I
+
+  public int total();
+    descriptor: ()I
+
+  public boolean canceled();
+    descriptor: ()Z
+
+  public boolean done();
+    descriptor: ()Z
+
+  public long generation();
+    descriptor: ()J
+}
+Compiled from "M3Progress.java"
+final class com.m3.collections.M3Progress$SubProgress extends com.m3.collections.M3Progress {
+  public void beginTask(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)V
+
+  protected void onWorkChanged();
+    descriptor: ()V
+
+  public boolean isCanceled();
+    descriptor: ()Z
+
+  public void cancel();
+    descriptor: ()V
+
+  public com.m3.collections.M3ProgressMonitor split(long);
+    descriptor: (J)Lcom/m3/collections/M3ProgressMonitor;
+}
+Compiled from "M3ProgressAdapters.java"
+public final class com.m3.collections.M3ProgressAdapters {
+  public static com.m3.collections.M3Progress asLegacy(com.m3.collections.M3ProgressMonitor);
+    descriptor: (Lcom/m3/collections/M3ProgressMonitor;)Lcom/m3/collections/M3Progress;
+}
+Compiled from "M3ProgressAdapters.java"
+final class com.m3.collections.M3ProgressAdapters$LegacyAdapter extends com.m3.collections.M3Progress {
+  public void beginTask(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)V
+
+  public void beginTask(java.lang.String, long);
+    descriptor: (Ljava/lang/String;J)V
+
+  public void subTask(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public void worked(int);
+    descriptor: (I)V
+
+  public void worked(long);
+    descriptor: (J)V
+
+  public void setProgress(long, long);
+    descriptor: (JJ)V
+
+  public void setTaskName(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public com.m3.collections.M3Progress split(int);
+    descriptor: (I)Lcom/m3/collections/M3Progress;
+
+  public com.m3.collections.M3Progress split(long);
+    descriptor: (J)Lcom/m3/collections/M3Progress;
+
+  public void done();
+    descriptor: ()V
+
+  public void cancel();
+    descriptor: ()V
+
+  public void setCanceled(boolean);
+    descriptor: (Z)V
+
+  public boolean isCanceled();
+    descriptor: ()Z
+
+  public boolean isDone();
+    descriptor: ()Z
+
+  public int getTotalWork();
+    descriptor: ()I
+
+  public int getWorkedSoFar();
+    descriptor: ()I
+
+  public java.lang.String getTaskName();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String getSubTaskName();
+    descriptor: ()Ljava/lang/String;
+
+  public int getPercentComplete();
+    descriptor: ()I
+
+  public com.m3.collections.M3Progress$Snapshot snapshot();
+    descriptor: ()Lcom/m3/collections/M3Progress$Snapshot;
+
+  public com.m3.collections.M3ProgressState state();
+    descriptor: ()Lcom/m3/collections/M3ProgressState;
+
+  public com.m3.collections.M3ProgressMonitor split(long);
+    descriptor: (J)Lcom/m3/collections/M3ProgressMonitor;
+}
+Compiled from "M3ProgressMonitor.java"
+public interface com.m3.collections.M3ProgressMonitor {
+  public static final long UNKNOWN = -1l;
+    descriptor: J
+  public abstract void beginTask(java.lang.String, long);
+    descriptor: (Ljava/lang/String;J)V
+
+  public abstract void done();
+    descriptor: ()V
+
+  public abstract void worked(long);
+    descriptor: (J)V
+
+  public abstract void setProgress(long, long);
+    descriptor: (JJ)V
+
+  public abstract void setTaskName(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public abstract void subTask(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public abstract boolean isCanceled();
+    descriptor: ()Z
+
+  public abstract void setCanceled(boolean);
+    descriptor: (Z)V
+
+  public abstract com.m3.collections.M3ProgressState state();
+    descriptor: ()Lcom/m3/collections/M3ProgressState;
+
+  public default void checkCanceled();
+    descriptor: ()V
+
+  public default com.m3.collections.M3ProgressMonitor split(long);
+    descriptor: (J)Lcom/m3/collections/M3ProgressMonitor;
+}
+Compiled from "M3ProgressScope.java"
+public final class com.m3.collections.M3ProgressScope implements java.lang.AutoCloseable {
+  public static com.m3.collections.M3ProgressScope resolve(com.m3.collections.M3Progress, long);
+    descriptor: (Lcom/m3/collections/M3Progress;J)Lcom/m3/collections/M3ProgressScope;
+
+  public com.m3.collections.M3Progress monitor();
+    descriptor: ()Lcom/m3/collections/M3Progress;
+
+  public boolean owned();
+    descriptor: ()Z
+
+  public void close();
+    descriptor: ()V
+}
+Compiled from "M3ProgressState.java"
+public final class com.m3.collections.M3ProgressState extends java.lang.Record {
+  public com.m3.collections.M3ProgressState(java.lang.String, java.lang.String, long, long, boolean, boolean, long, long);
+    descriptor: (Ljava/lang/String;Ljava/lang/String;JJZZJJ)V
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public java.lang.String taskName();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String subTaskName();
+    descriptor: ()Ljava/lang/String;
+
+  public long worked();
+    descriptor: ()J
+
+  public long totalWork();
+    descriptor: ()J
+
+  public boolean canceled();
+    descriptor: ()Z
+
+  public boolean done();
+    descriptor: ()Z
+
+  public long generation();
+    descriptor: ()J
+
+  public long startedAtMs();
+    descriptor: ()J
+}
+Compiled from "M3SystemProgress.java"
+public final class com.m3.collections.M3SystemProgress {
+  public static com.m3.collections.M3ProgressMonitor get();
+    descriptor: ()Lcom/m3/collections/M3ProgressMonitor;
+
+  public static com.m3.collections.M3ProgressMonitor split(long);
+    descriptor: (J)Lcom/m3/collections/M3ProgressMonitor;
+
+  public static com.m3.collections.M3ProgressMonitor resolve(com.m3.collections.M3ProgressMonitor, long);
+    descriptor: (Lcom/m3/collections/M3ProgressMonitor;J)Lcom/m3/collections/M3ProgressMonitor;
+}

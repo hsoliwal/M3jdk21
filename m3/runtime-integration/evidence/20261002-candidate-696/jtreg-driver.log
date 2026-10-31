@@ -1,0 +1,16 @@
+JTREG_START_UTC=2026-10-02T03:31:11Z
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+jtreg 7.5.2-src+1
+Installed in /var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/jtreg/lib/jtreg.jar
+Running on platform version 21.0.12.1 from /usr/lib/jvm/java-21-openjdk-amd64.
+Built with Java(TM) 2 SDK, Version 21.0.8+9-Ubuntu-0ubuntu1 on Thu, 18 Sep 2025 18:21:28 +1200.
+JT Harness, version 6.0 ea b24 (January 25, 1970)
+Java Assembler Tools, version 7.0 ea b09 (February 06, 2023)
+TestNG: testng.jar, guice.jar, jcommander.jar, slf4j-simple.jar, slf4j-api.jar
+TestNG (testng.jar): version 7.5
+TestNG (guice.jar): version 4.2.3
+TestNG (jcommander.jar): version unknown
+TestNG (slf4j-simple.jar): version 1.7.32
+TestNG (slf4j-api.jar): version 1.7.32
+JUnit: junit-platform-console-standalone.jar
+JUnit: version unknown

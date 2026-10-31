@@ -1,0 +1,110 @@
+{
+  "schema": "M3JDK21_ARRAY_MASK_RECEIVER_20261026_V1",
+  "product": {
+    "repository": "hsoliwal/M3jdk21",
+    "base_commit": "b513047feaefd282c27178588581b93840ba8658",
+    "integrated_jdk_not_overlay": true,
+    "public_java_se_api_changed": false,
+    "legacy_public_m3_api_removed": false
+  },
+  "recipe": {
+    "repository": "hsoliwal/com.synexia",
+    "pull_request": "https://github.com/hsoliwal/com.synexia/pull/13426",
+    "symbol": "com.synexia.rewrite.M3Jdk21ArrayMaskConvergenceRecipe",
+    "class": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3Jdk21ArrayMaskConvergenceRecipe.java",
+    "rules": "M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe",
+    "owned_only_in_synexia": true
+  },
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "before_blob": "c43ca5578521b8f0a2ab1305f5d4becdeabc772e",
+      "after_blob": "b1135dc23d04d4654cedab2e8b62684e1e7d4471",
+      "before_sha256": "884c9078022f64eb3c1f4aa8c306d852521be6089164c7e99b08e17c318d8282",
+      "after_sha256": "2168db105fe700ea1a8022ad362ee41d8f181180deba8404ea87d9c70f46d134",
+      "contract": "One temporary mask atom, no public signature/owner/JNI change"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java",
+      "before_blob": "3412d8c46d326e8a6bba2b674a8db18fde7a277f",
+      "after_blob": "e87326da9e8d59e36cd84fd1413a0f55087200aa",
+      "before_sha256": "054bcf36dfcc6915a4ced91264bbe005c183df2be4f93bf709ab0f8c42e928a7",
+      "after_sha256": "aadabb968ad9d9483d02aa67a353d9a6fec402d90c9522325342a8ca8d1d07f1",
+      "contract": "Preserves dual Apache-2.0/EPL-2.0 license, extends 64/65 and 128/129 differential"
+    },
+    {
+      "path": "m3/arrays/pom.xml",
+      "before_blob": "45b090e6c6003a21db08884379678b3ba410754c",
+      "after_blob": "668fab1d24bbebd407ed920664487db848db464e",
+      "before_sha256": "1448e9b9597df4648c3469ef1c49a57086df58de246e25b946e10b5c04906dd5",
+      "after_sha256": "12b02965bdb4058068885e5acd109334d0f1f827ea2176e3d3e111db320a65e7",
+      "contract": "Test-scope JUnit 5.10.2-M3 unresolved suffix corrected to released 5.10.2 only"
+    }
+  ],
+  "native_sources_unchanged": [
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "git_blob": "bedd442346de5b7dd9d5f1965c510950e0c45ea1"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "git_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e"
+    }
+  ],
+  "reference_proof": {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayListRemoveIfProof.java",
+    "git_blob": "7a52a9412ff45e55a895ceb3ea17191b40b0c1d4"
+  },
+  "semantic_invariants": [
+    "One parent-owned dynamic Object[]; no Node/Entry result structure",
+    "Stable occurrences and null/duplicate reference identity",
+    "Predicate called exactly once per original occurrence before compaction",
+    "All callback exceptions raised before outer compaction",
+    "Same modCount/fail-fast and original serial form",
+    "High 64-bit mask covers logical ordinal 64..127; BitSet remains for >128",
+    "No new JNI ABI, callbacks in C, native heap owner or public java.util class"
+  ],
+  "catalogue": {
+    "repository": "hsoliwal/com.synexia",
+    "location": "synexia-openrewrite-recipes/crates/m3jdk21-array-mask-20261026/CANDIDATE_CATALOGUE.tsv",
+    "selection": "Dual 64-bit inline removal masks for <=128 with incumbent BitSet fallback; retain existing JNI kernel",
+    "donor_code_copied": false
+  },
+  "checks": {
+    "historical_target_real_module": {
+      "run_id": 40166826760,
+      "job_id": 121089487102,
+      "date": "2026-10-25",
+      "status": "PASS",
+      "junit": {
+        "run": 607,
+        "failures": 0,
+        "errors": 0,
+        "skips": 2
+      },
+      "oracle_mask": 585423,
+      "oracle_remove_if": 1883123,
+      "mask_java_and_real_jni": "PASS",
+      "scope": "Same candidate postimages in previous feature branch; newer master branch requires independent qualification"
+    },
+    "current_branch_receiving": {
+      "status": "PENDING",
+      "scope": "Real m3-arrays native and m3-collections Maven plus Java/native mask window"
+    },
+    "current_branch_synexia_recipe": {
+      "status": "PENDING",
+      "pull_request": "https://github.com/hsoliwal/com.synexia/pull/13426"
+    },
+    "full_source_built_jdk_jtreg_abi": {
+      "status": "NOT_RUN"
+    },
+    "hot_spot_jni_gc_jmm_stress": {
+      "status": "NOT_RUN"
+    },
+    "resource_cpu_heap_native": {
+      "status": "NOT_RUN",
+      "veto": "No optimization claim based on mask-only microbench"
+    }
+  },
+  "admission": "DRAFT_REVIEW_ONLY_UNTIL_ALL_RECIPE_AND_TARGET_GATES_PASS"
+}

@@ -1,0 +1,12 @@
+problem_category	atom	candidate	decision	reason	complexity	provenance
+BULK_INPUT_ONCE	SetView.addAll	Synexia #12139 call-local ArrayList capture	SELECT	Avoids re-enumerating lazy source after validation	O(n) time; O(n) transient refs	first-party Apache-2.0; JDK TreeSet oracle
+BULK_KV_ONCE	MapView.putAll	Synexia #12139 parallel key/value arrays	SELECT	Reusable Entry may change across reads; preserve exact accepted occurrence	O(n) transient refs	first-party Apache-2.0; JDK TreeMap oracle
+STORED_REPRESENTATIVE	NavigableMap comparator collision	Reuse M3MutableFilteredViews storedEntry checks	REUSE	Keep canonical stored key and range contract	O(log n) probes	M3JDK21 owner
+RUNTIME_INDEX	Primitive row offsets/state-mask scanning	M3IndexMaskWindow existing Java/JNI	KEEP	Recent #1131 faster region-load path differs from source-pinned recipe	O(n) worst case	M3JDK21/Synexia #12120
+LEETCODE_ARRAY	Remove Element / compact accepted offsets	REFERENCE_ONLY	Do not copy problem/editorial code; shape for mechanical catalogue	O(n) scan	LeetCode taxonomy only
+HACKERRANK_SORT	Sorted array merging and comparator order	REFERENCE_ONLY	Contract oracle requires JDK comparator semantics	O(n log n) model	HackerRank problem categories only
+GFG_RANGE	Navigable range handling	REFERENCE_ONLY	JDK TreeSet/TreeMap owner is authority	O(log n) navigation	GeeksforGeeks taxonomy only
+GUAVA_PREDICATES	Guava filteredSet / filteredEntries	COMPARE	Guava semantics differ in mutability and invalid stored values	N/A	Guava Apache-2.0, no source copied
+ECLIPSE_FILTER	Eclipse Collections select/reject	COMPARE	Lazy/mutable source behavior must remain independently profiled	N/A	Eclipse EPL-2.0 comparison; no source copied
+APACHE_PREDICATE	Commons PredicatedSet / PredicatedMap	COMPARE	Admission differs from already-present hidden values	N/A	Apache Commons Apache-2.0, no source copied
+SPRING_WRAPPER	Spring MultiValueMap	EXCLUDE	Different cardinality and API from filtered JDK map	N/A	Spring Apache-2.0, no source copied

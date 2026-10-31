@@ -1,0 +1,219 @@
+{
+  "canonical_baseline_packet": {
+    "path": "current-map-validation-v03/PACKET.json",
+    "result": "MIGRATION_MANIFEST_VALID completion=INCOMPLETE",
+    "sha256": "6e2ab166b48662dbf216c9791597d7779163236a0dc2e4ce76c2963bb022882c"
+  },
+  "compile_only_status": "PASS",
+  "crate": "jcc-merge-recovery-20261006-mapping-v03",
+  "destination_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "destination_root_tree": "491bbd80a51483d0710fc12c1bad3a037b385ba0",
+  "excluded_from_delivery": [
+    "compile-check-*/src/**",
+    "compile-check-*/classes/**",
+    "__pycache__/**"
+  ],
+  "files": [
+    {
+      "bytes": 52471,
+      "path": "JccMergeMappingRecoveryV03Test.java.in",
+      "sha256": "d30fb1e55a59014dc6b4df8cd79a2086a2db4c7e460c13140668d7715175c71d"
+    },
+    {
+      "bytes": 9411,
+      "path": "README.md",
+      "sha256": "07d8733b6e45870d3e293f0f631f636e665810a6dc845a3106e331d10df44ef6"
+    },
+    {
+      "bytes": 0,
+      "path": "compile-check-v01/javac.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "compile-check-v01/javac.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 6239,
+      "path": "compile-check-v01/receipt.json",
+      "sha256": "c8182b75ec10d7ee66da00f5a9e92306b0b78fcdecf2114bbd1e84c6c0cadc40"
+    },
+    {
+      "bytes": 0,
+      "path": "compile-check-v01/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "compile-check-v01/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "compile-check-v02/javac.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "compile-check-v02/javac.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 6353,
+      "path": "compile-check-v02/receipt.json",
+      "sha256": "18282ba41314228e287c7fac5562e2ecca9edefc262dac2d76fef80dbf9add5b"
+    },
+    {
+      "bytes": 626,
+      "path": "m3-jcc-merge-mapping-recovery-v03.yml",
+      "sha256": "7ef86264b8742dfa06ce5bc83ea2bed6be19b24059f479c4e7f0ed61d58b84bc"
+    },
+    {
+      "bytes": 3441,
+      "path": "pom.xml",
+      "sha256": "6808747ea5d7c7f19fdde1cff69e504734c2f23455841fae1d2aded08f4fdcf0"
+    },
+    {
+      "bytes": 52471,
+      "path": "previous-input-epoch-01/JccMergeMappingRecoveryV03Test.java.in",
+      "sha256": "22808cffcad7aa2477fdb91c53592cce3430aab02da14a5a2b62e6c9dcfbcf27"
+    },
+    {
+      "bytes": 8841,
+      "path": "previous-input-epoch-01/README.md",
+      "sha256": "e28aa2f0ebb4b324dc70297de60aceab20749c9dabc0d902fdb29d7986adabf4"
+    },
+    {
+      "bytes": 4194,
+      "path": "previous-input-epoch-01/TEMPLATE_PACKET.json",
+      "sha256": "e2f496b32efd62d50649d49ad9e3714de0a5493d3f0532fef317d0384b2add67"
+    },
+    {
+      "bytes": 0,
+      "path": "previous-input-epoch-01/compile-check-v01/javac.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "previous-input-epoch-01/compile-check-v01/javac.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 6239,
+      "path": "previous-input-epoch-01/compile-check-v01/receipt.json",
+      "sha256": "c8182b75ec10d7ee66da00f5a9e92306b0b78fcdecf2114bbd1e84c6c0cadc40"
+    },
+    {
+      "bytes": 626,
+      "path": "previous-input-epoch-01/m3-jcc-merge-mapping-recovery-v03.yml",
+      "sha256": "7ef86264b8742dfa06ce5bc83ea2bed6be19b24059f479c4e7f0ed61d58b84bc"
+    },
+    {
+      "bytes": 3441,
+      "path": "previous-input-epoch-01/pom.xml",
+      "sha256": "6808747ea5d7c7f19fdde1cff69e504734c2f23455841fae1d2aded08f4fdcf0"
+    },
+    {
+      "bytes": 14710,
+      "path": "previous-input-epoch-01/render_template.py",
+      "sha256": "de6d8a59b0f49a5ca9378c1422cc3d52cb41d3e7f638f6c618ba638fa407b2dd"
+    },
+    {
+      "bytes": 3713,
+      "path": "previous-input-epoch-01/self-review-v01/receipt.json",
+      "sha256": "be516beef38a31b6e1de5555aedad840112cd23431deb38078b4f6ab1d0572a0"
+    },
+    {
+      "bytes": 1031,
+      "path": "previous-input-epoch-01/self-review-v01/renderer-refusal.stderr.log",
+      "sha256": "89a694a091438441d50974ed455bcec01c0fca928d72331071e7601538df78a8"
+    },
+    {
+      "bytes": 0,
+      "path": "previous-input-epoch-01/self-review-v01/renderer-refusal.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 14710,
+      "path": "render_template.py",
+      "sha256": "44814edd234cdb8b39e11f526b21fd31b43361ab1250b6c58289848c637c454c"
+    },
+    {
+      "bytes": 3713,
+      "path": "self-review-v01/receipt.json",
+      "sha256": "be516beef38a31b6e1de5555aedad840112cd23431deb38078b4f6ab1d0572a0"
+    },
+    {
+      "bytes": 1031,
+      "path": "self-review-v01/renderer-refusal.stderr.log",
+      "sha256": "89a694a091438441d50974ed455bcec01c0fca928d72331071e7601538df78a8"
+    },
+    {
+      "bytes": 0,
+      "path": "self-review-v01/renderer-refusal.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4048,
+      "path": "self-review-v02/receipt.json",
+      "sha256": "025cb94c113ee7b28cf6e6c4bcf4bd4837827e69b88c5a6aac4aeaa7e74ae1fa"
+    },
+    {
+      "bytes": 1031,
+      "path": "self-review-v02/renderer-refusal.stderr.log",
+      "sha256": "89a694a091438441d50974ed455bcec01c0fca928d72331071e7601538df78a8"
+    },
+    {
+      "bytes": 0,
+      "path": "self-review-v02/renderer-refusal.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "input_epoch": {
+    "gates": 20,
+    "non_jcc_records": 50,
+    "ordered_records": 52,
+    "top_level_mappings": 25
+  },
+  "input_epoch_sha256": "027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee",
+  "junit_methods_authored": 13,
+  "junit_methods_executed": 0,
+  "materialized_result_property": "m3.mapping.materialized",
+  "named_recipe": "com.m3.rewrite.backport.JccMergeMappingRecoveryV03",
+  "previous_packets_unchanged": [
+    {
+      "files_verified_unchanged": 15,
+      "path": "candidate/mapping/java-template/TEMPLATE_PACKET.json",
+      "sha256": "5fe25ca79a45bd4e499fd6171dfe5375390f91f2331330797b93aec3c5eec142"
+    },
+    {
+      "files_verified_unchanged": 11,
+      "path": "candidate/mapping-v02/java-template/TEMPLATE_PACKET.json",
+      "sha256": "24b0adba2b80ee105ba9904e4d00b96d441cddf4b548b5400d72ca09f1d26136"
+    },
+    {
+      "files_verified_unchanged": 113,
+      "path": "current-map-validation/PACKET.json",
+      "sha256": "ac86b7dfedc336871e8a6f79cb340e4717da031c3fea8e3769fc3b7524b98f50"
+    }
+  ],
+  "previous_v03_revision": {
+    "all_sealed_files_verified_unchanged": 11,
+    "packet": "previous-input-epoch-01/TEMPLATE_PACKET.json",
+    "sha256": "e2f496b32efd62d50649d49ad9e3714de0a5493d3f0532fef317d0384b2add67"
+  },
+  "revision": 2,
+  "revision_delta": "Only input-epoch pin changed in Java and renderer; operational bodies and13controls unchanged. Fresh compile-check-v02 and self-review-v02 receipts; firstV03seal retained.",
+  "schema": "m3-jcc-mapping-java-template-packet/3",
+  "scope": "Exact C0 input template, compile-only and fixture-refusal proof. Thirteen controls preserved plus separate module-POM component and intermediate d1 epoch assertions. No JUnit execution or actual operational mapping output until verified source publication is bound.",
+  "separate_source_build_components": 1,
+  "source_commit": "__UNRESOLVED_ACTUAL_SOURCE_COMMIT__",
+  "source_java_owners": 20,
+  "source_jni_owners": 6,
+  "source_laboratory_owners": 14,
+  "source_root_tree": "__UNRESOLVED_ACTUAL_SOURCE_ROOT_TREE__",
+  "status": "FROZEN_PREPARED_ACTUAL_SOURCE_PUBLICATION_REQUIRED",
+  "test_class": "com.m3.rewrite.backport.JccMergeMappingRecoveryV03Test",
+  "version": 3
+}

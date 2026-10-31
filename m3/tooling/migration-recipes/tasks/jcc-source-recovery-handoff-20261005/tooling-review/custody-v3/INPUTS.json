@@ -1,0 +1,110 @@
+{
+  "scope": "Static V3 additive reader/entrypoint review; no candidate imports or execution",
+  "files": [
+    {
+      "source": "work/m3jdk21-current/successor-e04/publication_custody_v3.py",
+      "snapshot": "inputs/publication_custody_v3.py",
+      "bytes": 9752,
+      "sha256": "46cf912b0f464caeb9718b08d22f9cdd5b74875e3ab614ccee19c7b0a4dae7b7",
+      "git_blob_sha1": "546b1156070b6f117b747fa7ae0be2788476f96f"
+    },
+    {
+      "source": "work/m3jdk21-current/successor-e04/derive_source_handoff_v3.py",
+      "snapshot": "inputs/derive_source_handoff_v3.py",
+      "bytes": 12245,
+      "sha256": "0086ac594cf4e459b0bf903e8eea95a6aa38198b5d23cb6f140726afcd08f76b",
+      "git_blob_sha1": "bf017e4f4ae6a1e31a360f68e5444605c4666671"
+    },
+    {
+      "source": "work/m3jdk21-current/successor-e04/author_e04_v3.py",
+      "snapshot": "inputs/author_e04_v3.py",
+      "bytes": 18901,
+      "sha256": "db47c8ae008021e4a250004ae8631b1a40c9cd731c5c2001f41eacedac129359",
+      "git_blob_sha1": "49855f31def0d007aaadab5c263896ea10952a20"
+    },
+    {
+      "source": "work/m3jdk21-current/successor-e04/run_verification_v3.py",
+      "snapshot": "inputs/run_verification_v3.py",
+      "bytes": 13081,
+      "sha256": "2c0cc74d7c7faa821bec1969c20aa6e41f6cfd1aa29ec67cc6187b52878f38f9",
+      "git_blob_sha1": "a3acf3dc4f5319d928a74147856ac14b225e88d9"
+    },
+    {
+      "source": "work/m3jdk21-current/successor-e04/DERIVATION_INPUTS_V3.json",
+      "snapshot": "inputs/DERIVATION_INPUTS_V3.json",
+      "bytes": 177,
+      "sha256": "9c2eb2a5d487896b7fbfd13a7ddb028ce9c13f7457e5889e63731d6d550d7824",
+      "git_blob_sha1": "7e17325f91b2c1c77948a0f2cb704bcb50ef46a7"
+    },
+    {
+      "source": "work/m3jdk21-current/successor-e04/FINAL_SOURCE_INPUTS_V3.json",
+      "snapshot": "inputs/FINAL_SOURCE_INPUTS_V3.json",
+      "bytes": 497,
+      "sha256": "e430cbddd09b14c6ca27dc7e818963fe271b68e65a24e498883731c6d13c0655",
+      "git_blob_sha1": "e1a92acc909e599933e6976a4338ae8cdc527a1a"
+    },
+    {
+      "source": "work/m3jdk21-current/successor-e04/HANDOFF_DOCUMENT_v3.template.md",
+      "snapshot": "inputs/HANDOFF_DOCUMENT_v3.template.md",
+      "bytes": 10697,
+      "sha256": "09cb707fed38eacd63836f5204e052552fc778eb9ef594c4769c3c4819145060",
+      "git_blob_sha1": "b3a151c04d8df5d335d5e0f1d3c4ce6fb5a2d568"
+    },
+    {
+      "source": "work/m3jdk21-current/successor-e04/source-prepublication/DESIGNATED_COMPARISON.json",
+      "snapshot": "inputs/DESIGNATED_COMPARISON.json",
+      "bytes": 15782,
+      "sha256": "39e7fe930028e5e7561414fbf8f75f247c634182c19648f6c0e6b6d0849d055a",
+      "git_blob_sha1": "9eda27de6c0949291cf5212915e7ee74af1df8e5"
+    },
+    {
+      "source": "work/m3jdk21-current/successor-e04/custody-v3-proposal/READINESS_T01.json",
+      "snapshot": "inputs/READINESS_T01.json",
+      "bytes": 16575,
+      "sha256": "69722816b7744af9f4a1a69356b797616d04d54fae7008d438cf08131685b21b",
+      "git_blob_sha1": "3be57c938f92a4c9c11dd717fb2b5319a9b547ab"
+    },
+    {
+      "source": "work/m3jdk21-current/successor-e04/custody-v3-proposal/LOCAL_EXPECTATIONS.json",
+      "snapshot": "inputs/LOCAL_EXPECTATIONS.json",
+      "bytes": 6004,
+      "sha256": "548b98ef8531b369f4c378bfdebf681e514a5b46da15bcf32db9ab491a7ce8d5",
+      "git_blob_sha1": "a58a8352c709f5b6330263fa151dca2a164e77b5"
+    },
+    {
+      "source": "work/m3jdk21-current/successor-e04/custody-v3-proposal/CUSTODY_EVIDENCE_DRAFT_INDEX.json",
+      "snapshot": "inputs/CUSTODY_EVIDENCE_DRAFT_INDEX.json",
+      "bytes": 41226,
+      "sha256": "e79a0b601f2bec4d0c871ed7f1d30806b7fd7f0328c65588eea015fb1beccf99",
+      "git_blob_sha1": "c436a9046632a195008ab09483422eb432f39e11"
+    },
+    {
+      "source": "work/m3jdk21-current/successor-e04/custody-v3-proposal/CUSTODY_PROSE.template.md",
+      "snapshot": "inputs/CUSTODY_PROSE.template.md",
+      "bytes": 1884,
+      "sha256": "2db5a33bfb757e3544443df1bb44c3718acb03ffc959a6ff88b45c8ac3671808",
+      "git_blob_sha1": "a07fc11ef9fd62f3a03223fe1b999e110aef5657"
+    },
+    {
+      "source": "work/m3jdk21-current/successor-e04/custody-v3-proposal/PROPOSAL.md",
+      "snapshot": "inputs/PROPOSAL.md",
+      "bytes": 5725,
+      "sha256": "ac33c9e1d7dcc5cfcf51d3d75d3f5a8ba9744643ceccc6a5ccaa49ca3263a779",
+      "git_blob_sha1": "4ef3979f0e910f0d3c913a564596dae1c69b31b8"
+    },
+    {
+      "source": "work/publication-current/source-recovery-publish/verify_publication_v3.py",
+      "snapshot": "inputs/verify_publication_v3.py",
+      "bytes": 13831,
+      "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
+      "git_blob_sha1": "c5efacc8212e97a74770db0c70bcbd80d24ec232"
+    },
+    {
+      "source": "work/publication-current/source-recovery-publish/raw_custody_v3.py",
+      "snapshot": "inputs/raw_custody_v3.py",
+      "bytes": 12912,
+      "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
+      "git_blob_sha1": "25a836990c02625c79f44492eb43b7ffca13b07f"
+    }
+  ]
+}

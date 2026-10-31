@@ -1,0 +1,26 @@
+START_UTC=2026-10-02T01:40:25Z
+Linux SoliwalLaptop 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+/usr/bin/java
+/usr/bin/javac
+/usr/bin/gcc
+/usr/bin/g++
+/usr/bin/make
+/usr/bin/autoconf
+openjdk version "21.0.12.1" 2026-08-18
+OpenJDK Runtime Environment (build 21.0.12.1+1-1-24.04.4-Ubuntu)
+OpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-24.04.4-Ubuntu, mixed mode, sharing)
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+autoconf (GNU Autoconf) 2.71
+CPUS=32
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       713Mi        14Gi       3.5Mi       503Mi        14Gi
+Swap:          4.0Gi          0B       4.0Gi
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdd       1007G   21G  935G   3% /
+Native header inventory
+ABSENT /usr/include/cups/cups.h
+ABSENT /usr/include/cups/raster.h
+ABSENT /usr/include/fontconfig/fontconfig.h
+ABSENT /usr/include/alsa/asoundlib.h
+ABSENT /usr/include/X11/Xlib.h
+Copy pinned candidate into Linux filesystem

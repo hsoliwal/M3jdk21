@@ -1,0 +1,91 @@
+{
+  "schema": "M3_SCHEDULED_PROGRESS_SOURCE_PIN_V1",
+  "receiving_repository": "hsoliwal/M3jdk21",
+  "receiving_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "owner": {
+    "path": "src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java",
+    "before_sha256": "3a914503908cd93c321c356f215eb3e022a064c1c124331d0dd2edb429bdd7a5",
+    "after_sha256": "97ada5bb138bcf47b5ac8b168c36a5ff17936acf64e83c4e7f3a7151b279cd3d",
+    "before_git_blob": "4d63ffae4bb44f60e446cbcc77a898ab9bd1e7ce",
+    "after_git_blob": "7548675c9b35bc0bb9a8f9d2d4153e5b156464ca"
+  },
+  "dependencies": [
+    {
+      "path": "src/java.base/share/classes/java/lang/Runnable.java",
+      "bytes": 2565,
+      "sha256": "b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a",
+      "git_blob": "8fb270de68f57fc5463bfecd6ac8418012d16fde"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",
+      "bytes": 3165,
+      "sha256": "6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f",
+      "git_blob": "7cd9b5d7d538b4dffe426cacc9a03651f635e005"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+      "bytes": 1534,
+      "sha256": "77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733",
+      "git_blob": "6e08ac638e7500945cdabb77beec0ad434b2cfe1"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "bytes": 3394,
+      "sha256": "368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93",
+      "git_blob": "58172366681470702282607e58f542f47079993a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "bytes": 10395,
+      "sha256": "48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc",
+      "git_blob": "38637beaea7a7adf7375dc36dbcf95c87183d1a0"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Executor.java",
+      "bytes": 6052,
+      "sha256": "e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa",
+      "git_blob": "4fd7398351048045a6b77c57393b52ed492730fe"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "bytes": 20247,
+      "sha256": "9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d",
+      "git_blob": "fa608ebcf4bcf49f55475471aea8ad31b1328490"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressJob.java",
+      "bytes": 4169,
+      "sha256": "d2734bcc607b1af8a593387040da53886530a310685a26965a5aa77609aaefc8",
+      "git_blob": "ea5d302f454e094b5b1ed346104987c7c037b7f8"
+    }
+  ],
+  "tests": [
+    {
+      "path": "test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java",
+      "bytes": 17041,
+      "sha256": "c8a20e2143ab2a1ab4ca3437ca2bf79c1ab486596247e0aecd6c1cde3b0dd609",
+      "git_blob": "9d8ae731f8b69e7217349a6981ad84ae8c89f863"
+    },
+    {
+      "path": "test/jdk/java/util/concurrent/ProgressJob/M3ScheduledProgress.java",
+      "bytes": 24441,
+      "sha256": "a57df3b673802259ae630eb083dcd1f3feb3e6c32d832afadcda4cb8370f2dd2",
+      "git_blob": "92347373eda93ecfc9318588fdf4265d33c572ff"
+    },
+    {
+      "path": "m3/runtime-integration/scheduled-progress-20261021/src/test/java/LegacyScheduledClient.java",
+      "bytes": 6118,
+      "sha256": "32881654d117127b11be68a2511a0d5860a3032f0e7ca1ada0332c7f648e0c90",
+      "git_blob": "421e23a0ee6fe3154feb3f6bcfde32d5e5b74c45"
+    }
+  ],
+  "rights": {
+    "production": "TARGET_OWNED_PORT; retained OpenJDK GPL-2.0-only WITH Classpath-exception-2.0 header and original JSR-166 public-domain notice; additive first-party target contribution under the same target terms",
+    "tests": "GPL-2.0-only; Copyright 2026 Hitesh Soliwal and contributors",
+    "proof_tooling_and_catalogue": "Apache-2.0; Copyright 2026 Hitesh Soliwal and contributors",
+    "external_implementation_copied": false
+  },
+  "api": "Four additive named default methods requested by user; all four existing abstract scheduler declarations retained; monitor/status/job/child owners unchanged",
+  "recovery": "Original unpublished postimages/evidence not recovered; current code rebuilt from unchanged target-owned primitives, then qualified afresh",
+  "mapping": "java.util.concurrent.ScheduledExecutorService + existing ProgressMonitors; no renamed type or new runtime owner; additive API disposition recorded here; global receiving stage remains STRING"
+}

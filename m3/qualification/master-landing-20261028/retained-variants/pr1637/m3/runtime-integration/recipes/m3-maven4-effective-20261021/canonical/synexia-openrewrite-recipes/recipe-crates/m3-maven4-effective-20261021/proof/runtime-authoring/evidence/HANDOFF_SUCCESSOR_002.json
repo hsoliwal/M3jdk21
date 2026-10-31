@@ -1,0 +1,44 @@
+{
+  "status": "FROZEN_SUCCESSOR_HANDOFF",
+  "receiving_baseline_commit": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "original": {
+    "path": "/workspace/scratch/206049dfb270/maven-work/HANDOFF.json",
+    "sha256": "3e66250f18894ed3704ccd68c9d6227d399ffa8eee787fd7c719ed94e70d7164",
+    "rows": 8,
+    "preserved": true
+  },
+  "successor": {
+    "path": "/workspace/scratch/206049dfb270/maven-work/HANDOFF-002.json",
+    "sha256": "359b2929cce0028a8f15297211159613b599d6db5e2a9767bc18e667f1bc93f6",
+    "rows": 7
+  },
+  "correction": {
+    "source": "canonical SDK001 admission refusal reported by /root/jobs_resources",
+    "message": "invalid hash-pinned text manifest row",
+    "reason": "The existing M3HashPinnedTextSnapshotRecipe structuredText admission does not admit CSV.",
+    "change": "Exclude only the proposed historical CATALOGUE.csv update; no engine widening.",
+    "excluded_target": "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv",
+    "retained_target_sha256": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+    "rejected_candidate_sha256": "3a214a73da26b90972b9ca1c2088ee173dd8575dc2a82660f6c0ef3fa1945d7c",
+    "rejected_candidate_preserved": true,
+    "original_sdk_failure_evidence_owner": "/root/jobs_resources"
+  },
+  "unchanged_candidate_rows": 7,
+  "java_source_test_runtime_changes_from_original_handoff": false,
+  "catalogue_decision_location": "m3/tooling/module-packs/parser/real-providers/maven4/README.md",
+  "catalogue_decision_coverage": [
+    "exact hsoliwal/maven commit and 4.1.0-SNAPSHOT API",
+    "Apache-2.0 license and notice retention",
+    "completed model authority and rejected raw or incomplete inputs",
+    "separate Maven 3 and Maven 4 result owners",
+    "subprojects and legacy modules selection",
+    "existing bounded detached M3 index ownership",
+    "source-build and cached dependency qualification limits"
+  ],
+  "readback": {
+    "all_eight_original_candidate_hashes_match": true,
+    "historical_csv_target_remains_before_hash": true,
+    "original_handoff_unchanged": true
+  },
+  "publication_and_actual_receiver": "pending canonical application and receiver verification"
+}

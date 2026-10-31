@@ -1,0 +1,21 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.openrewrite.viewport.M3SwingTreeSelectionContinuity
+displayName: DefaultTreeSelectionModel.insureRowContinuity skips selected paths without a row (D2)
+description: >-
+  M3 upstream defect D2 (m3/docs/swing-viewport/UPSTREAM_DEFECTS.tsv, DESIGN.md section 4). insureRowContinuity
+  keeps the first run of contiguous selected rows and copies each selected path whose row is below the first gap
+  to newSel[row - min]. A selected path that is not visible has row -1, so the index was negative and the method
+  threw ArrayIndexOutOfBoundsException. One guard before the copy skips rows below min: a path without a row is
+  in no run of rows. Unconditional, like the JDK-8299722 fix (an exception is not behaviour to keep). Applied by
+  M3PerFileApply; a second pass must report UNCHANGED.
+recipeList:
+  - com.synexia.openrewrite.viewport.M3InsertStatements:
+      declaringClasses: [javax.swing.tree.DefaultTreeSelectionModel]
+      methodName: insureRowContinuity
+      parameterCount: 0
+      anchor: "newSel[selectionIndex[i]-min] = selection[i];"
+      position: BEFORE
+      statements: "                                    if (selectionIndex[i] < min) {\n                                        // M3 (D2): a selected path that is not visible has no row\n                                        continue;\n                                    }"

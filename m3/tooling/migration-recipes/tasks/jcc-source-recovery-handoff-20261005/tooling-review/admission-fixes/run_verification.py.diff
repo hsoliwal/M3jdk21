@@ -1,0 +1,122 @@
+--- T01/run_verification.py
++++ T02/run_verification.py
+@@ -5,7 +5,8 @@
+ import hashlib
+ import json
+ import os
+-from pathlib import Path
++from pathlib import Path, PurePosixPath
++import stat
+ import subprocess
+ import sys
+ import xml.etree.ElementTree as ET
+@@ -19,6 +20,7 @@
+ JDK = Path("/workspace/scratch/877d9513c002/toolchains/jdk-21.0.2")
+ MAVEN = Path("/workspace/scratch/877d9513c002/toolchains/apache-maven-3.9.12/bin/mvn")
+ M2 = Path("/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2")
++CONTEXT_ROOT = BASE.parents[2] / "recovery-baseline-be92"
+ 
+ 
+ def identity(path):
+@@ -26,6 +28,68 @@
+     return {"path": str(path), "bytes": len(content), "sha256": hashlib.sha256(content).hexdigest(),
+             "git_blob_sha1": hashlib.sha1(f"blob {len(content)}\0".encode() + content).hexdigest(),
+             "mode": oct(path.stat().st_mode & 0o777)}
++
++
++def admit_declared_file(path, row):
++    assert path.is_absolute() and not path.is_symlink()
++    assert path.resolve(strict=True) == path, "Symlink or noncanonical input path: " + str(path)
++    assert stat.S_ISREG(path.lstat().st_mode), "Input is not a regular file: " + str(path)
++    with path.open("rb") as stream:
++        before = os.fstat(stream.fileno())
++        assert stat.S_ISREG(before.st_mode), "Input is not a regular file: " + str(path)
++        content = stream.read()
++        after = os.fstat(stream.fileno())
++    fields = ("st_dev", "st_ino", "st_mode", "st_size", "st_mtime_ns", "st_ctime_ns")
++    assert all(getattr(before, field) == getattr(after, field) for field in fields)
++    assert path.resolve(strict=True) == path
++    observed = path.lstat()
++    assert stat.S_ISREG(observed.st_mode)
++    assert all(getattr(after, field) == getattr(observed, field) for field in fields)
++    actual = {"path": str(path), "bytes": len(content),
++              "sha256": hashlib.sha256(content).hexdigest(),
++              "git_blob_sha1": hashlib.sha1(f"blob {len(content)}\0".encode() + content).hexdigest(),
++              "mode": oct(after.st_mode & 0o777)}
++    assert all(actual[key] == row[key] for key in ("bytes", "sha256", "git_blob_sha1")), str(path)
++    if "mode" in row:
++        assert row["mode"] in ("100644", "100755")
++        assert ("100755" if after.st_mode & 0o111 else "100644") == row["mode"], str(path)
++    return actual
++
++
++def admit_current_context(context):
++    """Compare every declared input before retaining its same-read freeze identity."""
++    rows = context["current_context"]
++    assert len(rows) == context["current_context_count"] == 527
++    admitted = {}
++    repository_paths = set()
++    for row in rows:
++        name = row["path"]
++        relative = PurePosixPath(name)
++        assert name and "\\" not in name and not relative.is_absolute() and relative.as_posix() == name
++        assert all(part not in ("", ".", "..") for part in relative.parts)
++        assert name not in repository_paths
++        repository_paths.add(name)
++        assert row["repo"] == "hsoliwal/com.synexia"
++        assert row["commit"] == "be92c62ece9023b5c33676716a1076d00e26120a"
++        path = Path(row["local_path"])
++        assert path == CONTEXT_ROOT / relative and path not in admitted
++        assert "mode" in row
++        admitted[path] = admit_declared_file(path, row)
++    return admitted
++
++
++def admit_current_receipts(context):
++    receipts = context["receipts"]
++    assert len(receipts) == 10
++    prefix = PurePosixPath("m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current")
++    admitted = {}
++    for name, row in receipts.items():
++        assert name and "\\" not in name and PurePosixPath(name).name == name
++        assert name not in (".", "..") and row["path"] == str(prefix / name)
++        path = ROOT / row["path"]
++        assert path not in admitted
++        admitted[path] = admit_declared_file(path, row)
++    return admitted
+ 
+ 
+ def write(path, value):
+@@ -47,16 +111,19 @@
+     plan = json.loads(PLAN.read_text())
+     assert plan["source_commit"] == source
+     assert plan["target_commit"] == "0994ecd65e86600f417f4d8702838d8c2663af61"
+-    OUT.mkdir()
++    admitted_context = admit_current_context(context)
++    admitted_receipts = admit_current_receipts(context)
+     mutated = {str(ROOT / row["path"]) for row in plan["outputs"]}
+     fixed_paths = sorted(path for path in ROOT.rglob("*") if path.is_file() and "target" not in path.parts and str(path) not in mutated)
++    assert set(admitted_receipts) <= set(fixed_paths)
+     external = {Path(row["local_path"]) for group in ("sources", "proof_references") for row in inventory[group]}
+-    external.update(Path(row["local_path"]) for row in context["current_context"])
++    external.update(admitted_context)
+     external.update(Path(final_inputs[key]["local_path"]) for key in ("publication_receipt", "source_inventory", "root_accounting", "handoff_document"))
+     inputs = {"frozen_at_utc": now(), "plan_sha256": plan["plan_sha256"],
+-              "fixed_inputs": [identity(path) for path in fixed_paths],
+-              "external_source_and_proof_inputs": [identity(path) for path in sorted(external)],
++              "fixed_inputs": [admitted_receipts[path] if path in admitted_receipts else identity(path) for path in fixed_paths],
++              "external_source_and_proof_inputs": [admitted_context[path] if path in admitted_context else identity(path) for path in sorted(external)],
+               "operational_preimages": [identity(ROOT / row["path"]) for row in plan["outputs"]]}
++    OUT.mkdir()
+     write(OUT / "inputs.json", inputs)
+     env = {"PATH": str(JDK / "bin") + ":/usr/local/bin:/usr/bin:/bin", "JAVA_HOME": str(JDK),
+            "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "PYTHONDONTWRITEBYTECODE": "1",
+@@ -127,6 +194,8 @@
+         "python_count_basis": "Successful six-test actual packet contract with required four outputs/seven guards: (8 preimage cases +14 guard cases +14 mixed cases +4 changed postimages +4 missing postimages) times three modes.",
+         "source_input_commit": "be92c62ece9023b5c33676716a1076d00e26120a",
+         "source_context_files": 527, "main_membership": 446, "parent_context_files": 109,
++        "source_context_declared_identities_admitted_before_freeze": True,
++        "source_context_receipt_identities_admitted_before_freeze": True,
+         "source_qualification_transfer": False,
+         "source_export_admitted": False, "owning_module_gate": "NOT_EXECUTED; preserved E2 acquisition/frontier and 99% gate remain",
+         "receiver_behavior_rerun": False, "jdk_acceptance": False, "remote_writes": False,

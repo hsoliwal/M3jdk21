@@ -1,0 +1,8 @@
+{
+  "started_utc": "2026-10-20T11:23:33.346778+00:00",
+  "repository": "https://repo.maven.apache.org/maven2/",
+  "artifacts": [],
+  "status": "FAIL",
+  "error": "URLError: <urlopen error [Errno -3] Temporary failure in name resolution>",
+  "finished_utc": "2026-10-20T11:23:33.350822+00:00"
+}

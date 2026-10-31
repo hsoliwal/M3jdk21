@@ -1,0 +1,19 @@
+{
+  "schema": "M3_ARRAY_CATALOGUE_RECEIVING_STATUS_V1",
+  "status": "PASS",
+  "dataset": "m3jdk21-arrays",
+  "authoring_evaluation_sha256": "d78b70b6ecf7f661ac7d246c4267f293bf64f63493744e1e587dd02d0813b4cd",
+  "sdk_qualification": "evidence/m3jdk21-arrays/SDK_QUALIFICATION.json",
+  "actual_receiving_receipt": "evidence/runtime/arrays/RECEIPT.json",
+  "actual_receiving_receipt_sha256": "88199729c837f1a9162de4afefb5547becc6abd7640ac8372c39f885c63cb8aa",
+  "resource_receipt": "evidence/runtime/arrays/RESOURCE_RECEIPT.json",
+  "resource_receipt_sha256": "c2d077d99b4becc6e57b3ffa39c4dc1311b5d744e76931ec73df44f496f111a4",
+  "reception_gate": "4 actual SDK Results applied; repeat replay writes zero files",
+  "remaining_gates": [
+    "hosted CI",
+    "non-Linux native platforms",
+    "full JDK/JCK",
+    "array-family promotion"
+  ],
+  "throughput_claim": false
+}

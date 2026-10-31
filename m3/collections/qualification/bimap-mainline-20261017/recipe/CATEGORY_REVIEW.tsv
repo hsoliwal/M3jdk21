@@ -1,0 +1,8 @@
+category	donor_or_reference	selected_existing_owner	complexity	contract	decision	provenance
+BIDIRECTIONAL_UNIQUE_MAP	M3JDK21 PR #970 exact donor source f7b9062	M3BiMap over two M3LinkedHashMap indexes	expected O(1) map access	BiMap inverse and strict unique values	REUSE	Apache-2.0; Guava Authors source-adaptation attribution
+INVERSE_VIEW	Guava BiMap https://github.com/google/guava	M3BiMap.inverse()	O(1) view create	inverse.inverse() identity; live mutation	REUSE	API reference only
+STABLE_INDEX_MAP	LeetCode #205 https://leetcode.com/problems/isomorphic-strings/	M3LinkedHashMap forward/reverse	O(n) scan / O(1) average lookup	bijection and duplicate-value rejection	CATEGORY_ONLY	No challenge solution copied
+VALUE_COLLISION	HackerRank Hash Tables https://www.hackerrank.com/domains/data-structures/hash-tables	M3LinkedHashMap keys/values	O(n) check corpus	Equal keys/values and nulls	CATEGORY_ONLY	No challenge submission copied
+PRIMITIVE_HASH	GeeksforGeeks Hashing https://www.geeksforgeeks.org/hashing-data-structure/	M3 hash slot-index metadata	expected O(1)	No retained per-entry object	CATEGORY_ONLY	No tutorial code copied
+OTHER_MULTIMAP	Apache Commons BidiMap / Eclipse BiMap	Explicit boundary via M3BiMaps	Varies	Provider API contracts not conflated	REFERENCE_ONLY	Upstream licensing and APIs retained
+JNI_BOUNDARY	Existing M3BiMapNativeTest donor f7b9062	Test-only JNI callback consumer	O(1) transition+Java call	Checked JNI and exception identity	REUSE	Original M3 Apache-2.0

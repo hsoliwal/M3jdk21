@@ -1,0 +1,1 @@
+PASS M3ReadOnlyViewBoundarySelfTest checks=32267

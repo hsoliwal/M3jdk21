@@ -1,0 +1,19 @@
+{
+  "command": [
+    "python3",
+    "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/helpers/verify_runner_helpers.py",
+    "--runner",
+    "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrapper-proof2-20261018/candidate/m3/collections/verification/wrapper-convergence-20261018/verify.py",
+    "--headers",
+    "/workspace/scratch/8762dba320ce/qualification/wrappers/current-runtime/after-jni-headers",
+    "--receipt",
+    "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/helpers/HELPER_RECEIPT.json"
+  ],
+  "cwd": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/helpers",
+  "started_utc": "2026-10-18T05:59:53.078758+00:00",
+  "elapsed_seconds": 0.431006,
+  "exit_code": 0,
+  "stdout_sha256": "1313c7ff140ba00eaf45d06682fc06dc494681adf06d0a37a597373acf7e6887",
+  "stderr_sha256": "7a43162d78428232335fc83924ae977ae787a9132a820a3b00c245cf5876acf8",
+  "helper_receipt_sha256": "88fbcbac792f56cab2f58b9b4ffbedc8a95b929ceda57234c843f41583fd54ac"
+}

@@ -1,0 +1,9 @@
+module	counter	covered	missed	percent	gate
+indexdb	LINE	685	2	99.7089	PASS_EXISTING_GATE
+indexdb	BRANCH	240	1	99.5851	PASS_EXISTING_GATE
+tooling/migration-recipes	LINE	312	34	90.1734	FAIL_EXISTING_GATE
+tooling/migration-recipes	BRANCH	186	77	70.7224	FAIL_EXISTING_GATE
+tooling/module-packs/kernel	LINE	151	1	99.3421	PASS_EXISTING_GATE
+tooling/module-packs/kernel	BRANCH	99	1	99.0000	PASS_EXISTING_GATE
+tooling/module-packs/recipes	LINE	51	0	100.0000	PASS_EXISTING_GATE
+tooling/module-packs/recipes	BRANCH	16	0	100.0000	PASS_EXISTING_GATE

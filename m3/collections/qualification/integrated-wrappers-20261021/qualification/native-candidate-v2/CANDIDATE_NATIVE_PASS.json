@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "candidate_revision": "v2_pointer_end_traversal",
+  "libraries": 11,
+  "translation_units": 12,
+  "sdk_gate_sha256": "03fc413d0129475cb3416bc21ba6efb0da63c3f44fbff3102657666577541d28",
+  "candidate_source_sha256": "56e2781621b3998b8afcf0d428b5c37d10339590d56f8c8cf852398b4df4bdee",
+  "v1_model_and_java_jni_tapes_byte_identical": true,
+  "v1_performance_hold_preserved": true,
+  "model_digest": "2f94c174f2012771",
+  "model_baseline_payload_bytes": 3021360,
+  "model_candidate_payload_bytes": 2304828,
+  "actual_jvm_native_contracts": "PASS baseline/candidate and capability refusals",
+  "full_junit_lane": "separate root SDK component gate; not executed by this native adapter",
+  "cpu_heap_native_process_measurement": "NOT_RUN_IN_THIS_STAGE",
+  "full_current_source_integrated_image": "NOT_RUN"
+}

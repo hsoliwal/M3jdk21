@@ -1,0 +1,6 @@
+owner	path	git_blob
+M3JDK21_master	master	4598bfc398d3024e7ea67e42034e857a53a1b378
+M3JDK21_factory	m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java	f05d0949cadb14bfad90287444addf6501c21992
+M3JDK21_bindings	m3/collections/interop/sdk-family-bindings.tsv	96abef29845c8ff3d9b8fd7a8458519590757da7
+M3JDK21_ApacheFirstParty	hsoliwal/M3jdk21#1199	e3c3714fdd73c24d3e8ecdcca72f3cd0a20bf6eb
+Synexia_develop	develop	ea172544e3ed6d5b67aa2248b821bfaa7c2efa9f

@@ -1,0 +1,69 @@
+--- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java
++++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java
+@@ -7,15 +7,16 @@
+ import com.m3.collections.M3IndexMaskCompactor;
+ import java.util.ArrayList;
+ import java.util.Arrays;
++import java.util.Collections;
+ import java.util.List;
+ import java.util.Random;
+ import org.apache.commons.collections4.Bag;
+ import org.apache.commons.collections4.bag.HashBag;
+ import org.junit.jupiter.api.Test;
+ 
+-/** Real Commons 4.5.0 donor-API differential over M3 arrays/counts. */
++/** Real Commons 4.5.0 API differential with an independent retention contract oracle. */
+ final class M3ApacheBagContractTest {
+-    @Test void randomizedOfficialHashBagOracle() {
++    @Test void randomizedBagContractAndPinnedDonor() {
+         Bag<Integer> expected=new HashBag<>();
+         Bag<Integer> actual=new M3ApacheBag<>();
+         Random random=new Random(20261018L);
+@@ -36,7 +37,24 @@
+                 }
+                 default -> {
+                     List<Integer> source=Arrays.asList(key,key,random.nextInt(11));
+-                    assertEquals(expected.retainAll(source),actual.retainAll(source));
++                    // Consume input occurrences independently of either counted-bag implementation.
++                    List<Integer> retained=new ArrayList<>(expected);
++                    List<Integer> budget=new ArrayList<>(source);
++                    boolean changed=retained.removeIf(item->!budget.remove(item));
++                    assertEquals(changed,actual.retainAll(source));
++                    Bag<Integer> donor=new HashBag<>(expected);
++                    boolean equivalentDomain=true;
++                    for(Integer item:expected.uniqueSet()) {
++                        if(Collections.frequency(source,item)>expected.getCount(item))equivalentDomain=false;
++                    }
++                    boolean donorChanged=donor.retainAll(source);
++                    expected=new HashBag<>(retained);
++                    // Pinned HashBag 4.5.0 differs when input count exceeds owned count.
++                    // Never carry that divergent donor state into a subsequent operation.
++                    if(equivalentDomain) {
++                        assertEquals(changed,donorChanged,"donor return step="+step);
++                        assertEquals(expected,donor,"donor retention step="+step);
++                    }
+                 }
+             }
+             assertEquals(expected.size(),actual.size(),"size step="+step);
+@@ -45,6 +63,21 @@
+             assertEquals(expected,actual,"equals step="+step);
+             assertEquals(expected.hashCode(),actual.hashCode(),"hash step="+step);
+         }
++    }
++
++    @Test void oversizedRetentionPreservesContractAndPinsDonorDivergence() {
++        Bag<Integer> actual=new M3ApacheBag<>();
++        Bag<Integer> donor=new HashBag<>();
++        actual.add(6,2);
++        donor.add(6,2);
++        List<Integer> input=List.of(6,6,6);
++        assertFalse(actual.retainAll(input));
++        assertEquals(2,actual.getCount(6));
++        assertEquals(2,actual.size());
++        // This assertion deliberately records the exact Commons Collections 4.5.0 quirk.
++        assertTrue(donor.retainAll(input));
++        assertEquals(0,donor.getCount(6));
++        assertTrue(donor.isEmpty());
+     }
+ 
+     @Test void iteratorLiveUniqueAndRealPrimitiveMaskSelection() {

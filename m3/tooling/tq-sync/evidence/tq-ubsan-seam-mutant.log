@@ -1,0 +1,5 @@
+Exception in thread "main" java.lang.AssertionError: seam composition
+	at M3TQTest.check(M3TQTest.java:307)
+	at M3TQTest.equal(M3TQTest.java:296)
+	at M3TQTest.range(M3TQTest.java:98)
+	at M3TQTest.main(M3TQTest.java:54)

@@ -1,0 +1,78 @@
+{
+  "schema": "M3JDK21_REGISTER_MASK_CURRENT_RECEIPT_V1",
+  "product": "M3JDK21 (integrated JDK fork)",
+  "source_master": "882ebe18891c719c0e26b6ee42558e50e96fe33e",
+  "synexia": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-mask-current-recipe-20261025",
+    "recipe": "com.synexia.rewrite.M3ArrayListDualWordCurrentRecipe",
+    "crate": "m3-arraylist-dual-word-current-20261025",
+    "descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-arraylist-junit-resolve-20261023.yml"
+  },
+  "state": "DRAFT_NOT_JAVA_SE_PROMOTED",
+  "algorithm": "existing Object[] stable two-pass removeIf; two long decision words for n<=128, incumbent BitSet above 128",
+  "invariants": [
+    "Single dynamic Object[] ownership, no per-entry Node/Entry object",
+    "Same public List/serialization/JDK external contract",
+    "Predicate evaluation exactly once per original occurrence before compaction",
+    "Stable selected element identity, null and duplicate order",
+    "Exception and modCount/fail-fast semantics unchanged",
+    "No JNI signature or native kernel changed",
+    "M3 compatibility API is not a Java SE replacement"
+  ],
+  "source_postimages": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "before_git_blob": "c43ca5578521b8f0a2ab1305f5d4becdeabc772e",
+      "after_git_blob": "b1135dc23d04d4654cedab2e8b62684e1e7d4471",
+      "before_sha256": "884c9078022f64eb3c1f4aa8c306d852521be6089164c7e99b08e17c318d8282",
+      "after_sha256": "2168db105fe700ea1a8022ad362ee41d8f181180deba8404ea87d9c70f46d134",
+      "role": "array-backed source atom"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java",
+      "before_git_blob": "3412d8c46d326e8a6bba2b674a8db18fde7a277f",
+      "after_git_blob": "e87326da9e8d59e36cd84fd1413a0f55087200aa",
+      "before_sha256": "054bcf36dfcc6915a4ced91264bbe005c183df2be4f93bf709ab0f8c42e928a7",
+      "after_sha256": "aadabb968ad9d9483d02aa67a353d9a6fec402d90c9522325342a8ca8d1d07f1",
+      "role": "expanded current JDK differential"
+    },
+    {
+      "path": "m3/arrays/pom.xml",
+      "before_git_blob": "45b090e6c6003a21db08884379678b3ba410754c",
+      "after_git_blob": "668fab1d24bbebd407ed920664487db848db464e",
+      "before_sha256": "1448e9b9597df4648c3469ef1c49a57086df58de246e25b946e10b5c04906dd5",
+      "after_sha256": "12b02965bdb4058068885e5acd109334d0f1f827ea2176e3d3e111db320a65e7",
+      "role": "test-only released JUnit dependency"
+    }
+  ],
+  "native_unmodified": [
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "git_blob": "bedd442346de5b7dd9d5f1965c510950e0c45ea1"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "git_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e"
+    }
+  ],
+  "catalogue": {
+    "path": "m3/collections/algorithm-catalog/arraylist-dual-word-current-20261025.tsv",
+    "git_blob": "cb3c21e2da0508ed8af9ed3df6863b5a76d9ef59",
+    "category_count": 11
+  },
+  "evidence": {
+    "historical_good_target_run": {
+      "workflow_run": 40166826760,
+      "condition": "older branch on prior source/master; success, not automatically inherited by current branch"
+    },
+    "current_target_module_maven": "PENDING_WORKFLOW",
+    "current_native_jni_parity": "PENDING_WORKFLOW",
+    "current_synexia_openrewrite": "PENDING_WORKFLOW",
+    "source_built_jtreg_abi_gc_jmm": "NOT_RUN",
+    "cpu_heap_native_performance": "NOT_RUN",
+    "licensing": "Existing Apache-2.0 OR EPL-2.0 source headers retained; external donor problem references only, no copied code",
+    "current_public_jvm_abi_diff": "PENDING_WORKFLOW",
+    "current_public_jvm_abi_differential_proof": "javac original source Git blob c43ca5578521b8f0a2ab1305f5d4becdeabc772e from PR base, javap -public -s versus candidate compiled class"
+  }
+}

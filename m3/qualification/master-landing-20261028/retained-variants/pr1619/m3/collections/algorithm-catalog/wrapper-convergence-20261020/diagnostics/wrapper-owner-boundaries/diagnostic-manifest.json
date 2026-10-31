@@ -1,0 +1,268 @@
+{
+  "baseline_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "canonical_recipe_owner": "hsoliwal/com.synexia:synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "executable_diagnostic_sources": {
+    "src/test/java/com/m3/collections/M3CandidateListBoundaryProof.java": "81b782e600c9c78d4f270c82a919bde12e09a90e671833f2944029077df558cb",
+    "src/test/java/com/m3/collections/M3ComparatorBoundaryProof.java": "47ce8f6239a3805303b85529301aeedd756956cee86f1d3210073300bad53e98",
+    "src/test/java/com/m3/collections/M3ListMutationGuardCounterexamples.java": "061621182ed3624162ba712b373ac4ef544503bb721e36e7b2cb22b80c961dab",
+    "src/test/java/com/m3/collections/M3ReadonlyBoundaryProof.java": "217726658fbc3274463dd83e708ec52d841e74edebd5fc9c62f489e91a076b7e"
+  },
+  "files": {
+    "M3FilteredLists.baseline.java.txt": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
+    "M3FilteredLists.rejected.java.txt": "a8bfd9e5d38aa378e7dab73fdbc59ef1512ff2782670100712178bd3c7261c88",
+    "M3WrapperConvergenceContract.baseline.java.txt": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847",
+    "README.md": "4fbca9a034b2d88305cd1ff03ff404733bce4b3255a5e8488276c6064419eb57",
+    "SOURCE_REVIEW.md": "16aa5d235cc32d9b23532d77cc69dd9de6b10d7aa8241e2be7128d8d49c27070",
+    "recorded-replay-layout-amended.json": "92cc382e4343a6c2b3f2abfe86b747ca8ef4bda320ee8eda4734e60939825ac9",
+    "recorded-replay.json": "ee56e19279e1ebd87e996a3d5a60cb68e445b03088200dd112738a53ee3e745b",
+    "run_diagnostics.py": "c400213eaa6aa1f536d602987c12e77b6c612c7b2b30393eebefa9fa954d24cc",
+    "src/test/java/com/m3/collections/M3CandidateListBoundaryProof.java": "81b782e600c9c78d4f270c82a919bde12e09a90e671833f2944029077df558cb",
+    "src/test/java/com/m3/collections/M3ComparatorBoundaryProof.java": "47ce8f6239a3805303b85529301aeedd756956cee86f1d3210073300bad53e98",
+    "src/test/java/com/m3/collections/M3ListMutationGuardCounterexamples.java": "061621182ed3624162ba712b373ac4ef544503bb721e36e7b2cb22b80c961dab",
+    "src/test/java/com/m3/collections/M3ReadonlyBoundaryProof.java": "217726658fbc3274463dd83e708ec52d841e74edebd5fc9c62f489e91a076b7e"
+  },
+  "independent_review_source_seals": [
+    {
+      "baseline_sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
+      "disposition": "NO_ADDITIONAL_BLOCKER_FOUND_BY_INDEPENDENT_SOURCE_REVIEW",
+      "reviewed_candidate_sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java"
+    },
+    {
+      "baseline_sha256": "d13c5c5db3e07e5c66f8857f2c74e07d2ba60babb7d2529bd397e61894881fd0",
+      "disposition": "NO_ADDITIONAL_BLOCKER_FOUND_BY_INDEPENDENT_SOURCE_REVIEW",
+      "reviewed_candidate_sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java"
+    },
+    {
+      "baseline_sha256": "511800d4d79c7d8838ddb497f031e13827decd44c9c2790093f89ea01cdaa349",
+      "disposition": "NO_ADDITIONAL_BLOCKER_FOUND_BY_INDEPENDENT_SOURCE_REVIEW",
+      "reviewed_candidate_sha256": "48d8636ea51c1bf05a1c4747e416916695b6bcbe665467f940e71b07ce2d327a",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java"
+    },
+    {
+      "baseline_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "disposition": "NO_ADDITIONAL_BLOCKER_FOUND_BY_INDEPENDENT_SOURCE_REVIEW",
+      "reviewed_candidate_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java"
+    },
+    {
+      "baseline_sha256": "487a54917cbae6ec9802ca75aa04edc1a99dc0b6e9ed2a294b06dca6054c1af3",
+      "disposition": "NO_ADDITIONAL_BLOCKER_FOUND_BY_INDEPENDENT_SOURCE_REVIEW",
+      "reviewed_candidate_sha256": "4616405cec600726a31256ba654e25614d963afc8109469d5c8257fa197cc052",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3PrimitiveFilteredSequences.java"
+    },
+    {
+      "disposition": "NO_ADDITIONAL_BLOCKER_FOUND; BODY_EQUALS_RECONCILED_M3_COLLECTION_VIEWS_AFTER_NAMESPACE_NORMALIZATION",
+      "reviewed_candidate_sha256": "ba48ef15edf9f64824669354d38f9fb295b6c39e2fc7885ee6b3b654aa932ef3",
+      "target": "src/java.base/share/classes/java/util/CollectionViews.java"
+    }
+  ],
+  "intended_additive_dataset": "m3-wrap-jni-20261020",
+  "kind": "ISOLATED_DIAGNOSTIC_EVIDENCE_NOT_ORDINARY_ACCEPTANCE",
+  "licensing": "Exact source headers preserved; independent diagnostics retain Apache-2.0 SPDX notices. No JDK source copied or relicensed.",
+  "positive_observations": {
+    "classes": [
+      "M3ComparatorBoundaryProof",
+      "M3ReadonlyBoundaryProof",
+      "M3ListMutationGuardCounterexamples"
+    ],
+    "meaning": "A successful diagnostic asserts that the defect or rejected effect occurs; it does not qualify the product."
+  },
+  "required_oracles": [
+    {
+      "class": "M3WrapperConvergenceContract",
+      "disposition": "PENDING",
+      "expected_actual_exit_by_source_version": {
+        "baseline": 1,
+        "rejected": 1
+      },
+      "mode": "comparator-failure"
+    },
+    {
+      "class": "M3WrapperConvergenceContract",
+      "disposition": "PENDING",
+      "expected_actual_exit_by_source_version": {
+        "baseline": 1,
+        "rejected": 1
+      },
+      "mode": "readonly-failfast"
+    },
+    {
+      "class": "M3WrapperConvergenceContract",
+      "disposition": "EXISTING_BEHAVIOR_PRESERVED",
+      "expected_actual_exit_by_source_version": {
+        "baseline": 0,
+        "rejected": 0
+      },
+      "mode": "bounded-map"
+    },
+    {
+      "class": "M3WrapperConvergenceContract",
+      "disposition": "EXISTING_BEHAVIOR_PRESERVED",
+      "expected_actual_exit_by_source_version": {
+        "baseline": 0,
+        "rejected": 0
+      },
+      "mode": "bounded-set"
+    },
+    {
+      "class": "M3WrapperConvergenceContract",
+      "disposition": "EXISTING_BEHAVIOR_PRESERVED",
+      "expected_actual_exit_by_source_version": {
+        "baseline": 0,
+        "rejected": 0
+      },
+      "mode": "interior-null"
+    },
+    {
+      "class": "M3WrapperConvergenceContract",
+      "disposition": "EXISTING_BEHAVIOR_PRESERVED",
+      "expected_actual_exit_by_source_version": {
+        "baseline": 0,
+        "rejected": 0
+      },
+      "mode": "readonly-effects"
+    },
+    {
+      "class": "M3CandidateListBoundaryProof",
+      "disposition": "REJECTED_REGRESSION",
+      "expected_actual_exit_by_source_version": {
+        "baseline": 0,
+        "rejected": 1
+      },
+      "mode": "transport"
+    },
+    {
+      "class": "M3CandidateListBoundaryProof",
+      "disposition": "UNRESOLVED_IN_BOTH_VERSIONS",
+      "expected_actual_exit_by_source_version": {
+        "baseline": 1,
+        "rejected": 1
+      },
+      "mode": "empty-add"
+    },
+    {
+      "class": "M3CandidateListBoundaryProof",
+      "disposition": "UNRESOLVED_IN_BOTH_VERSIONS",
+      "expected_actual_exit_by_source_version": {
+        "baseline": 1,
+        "rejected": 1
+      },
+      "mode": "exhausted-add"
+    },
+    {
+      "class": "M3CandidateListBoundaryProof",
+      "disposition": "UNRESOLVED_IN_BOTH_VERSIONS",
+      "expected_actual_exit_by_source_version": {
+        "baseline": 1,
+        "rejected": 1
+      },
+      "mode": "exhausted-set"
+    },
+    {
+      "class": "M3CandidateListBoundaryProof",
+      "disposition": "UNRESOLVED_IN_BOTH_VERSIONS",
+      "expected_actual_exit_by_source_version": {
+        "baseline": 1,
+        "rejected": 1
+      },
+      "mode": "exhausted-remove"
+    }
+  ],
+  "resolution_decisions": [
+    {
+      "owner": "M3FilteredViews.NavigableMapView.boundedEntry;M3MutableFilteredViews.SetView.bounded",
+      "rejected_patterns": [
+        "neighbor anchor changes callbacks",
+        "exception message/stack/type origin inference",
+        "unknown-wrapper retry",
+        "unproven JDK/submap/comparator/key whitelist"
+      ],
+      "status": "PENDING_OWNER_RANGE_ADMISSION"
+    },
+    {
+      "owner": "M3FilteredLists.StrictReadOnlyList",
+      "rejected_patterns": [
+        "delegate cursor switches predicate demand",
+        "size/content ABA checks",
+        "opaque auxiliary transport reads"
+      ],
+      "status": "PENDING_ACTUAL_OWNER_GENERATION"
+    },
+    {
+      "owner": "M3FilteredLists.View.Cursor",
+      "reasons": [
+        "new unrelated source read changes a valid write to same caller failure",
+        "exhausted/empty exact JDK subList skips root generation check and still writes"
+      ],
+      "status": "REJECTED_PROPOSED_RAW_CURSOR_GUARD"
+    }
+  ],
+  "snapshot_files": {
+    "M3FilteredLists.baseline.java.txt": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
+    "M3FilteredLists.rejected.java.txt": "a8bfd9e5d38aa378e7dab73fdbc59ef1512ff2782670100712178bd3c7261c88",
+    "M3WrapperConvergenceContract.baseline.java.txt": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847"
+  },
+  "snapshot_provenance": {
+    "M3FilteredLists.baseline.java.txt": {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "repository": "hsoliwal/M3JDK21",
+      "revision": "2779aba3f98f31c324be43f731be7914e1a05935"
+    },
+    "M3FilteredLists.rejected.java.txt": {
+      "baseline_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+      "disposition": "REJECTED_NEW_READ_EFFECTS_AND_INCOMPLETE_INVALIDATION",
+      "donor_head": "a02f0d912ff9da60a5dbc0a7832d7f4b56260fa0",
+      "donor_pr": 1538,
+      "kind": "EXACT_REJECTED_FORWARD_RECONCILIATION_POSTIMAGE"
+    },
+    "M3WrapperConvergenceContract.baseline.java.txt": {
+      "oracle_changes": "NONE",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java",
+      "repository": "hsoliwal/M3JDK21",
+      "revision": "2779aba3f98f31c324be43f731be7914e1a05935"
+    }
+  },
+  "source_layout_amendment": {
+    "assertions_changed": false,
+    "classes_packages_or_public_apis_changed": false,
+    "exclude_previous_paths_from_positive_export": [
+      "M3CandidateListBoundaryProof.java",
+      "M3ComparatorBoundaryProof.java",
+      "M3ListMutationGuardCounterexamples.java",
+      "M3ReadonlyBoundaryProof.java"
+    ],
+    "historical_snapshots_moved": false,
+    "java_bytes_changed": false,
+    "kind": "SOURCE_LAYOUT_ONLY",
+    "moves": [
+      {
+        "current_path": "src/test/java/com/m3/collections/M3CandidateListBoundaryProof.java",
+        "previous_path": "M3CandidateListBoundaryProof.java",
+        "sha256_unchanged": "81b782e600c9c78d4f270c82a919bde12e09a90e671833f2944029077df558cb"
+      },
+      {
+        "current_path": "src/test/java/com/m3/collections/M3ComparatorBoundaryProof.java",
+        "previous_path": "M3ComparatorBoundaryProof.java",
+        "sha256_unchanged": "47ce8f6239a3805303b85529301aeedd756956cee86f1d3210073300bad53e98"
+      },
+      {
+        "current_path": "src/test/java/com/m3/collections/M3ListMutationGuardCounterexamples.java",
+        "previous_path": "M3ListMutationGuardCounterexamples.java",
+        "sha256_unchanged": "061621182ed3624162ba712b373ac4ef544503bb721e36e7b2cb22b80c961dab"
+      },
+      {
+        "current_path": "src/test/java/com/m3/collections/M3ReadonlyBoundaryProof.java",
+        "previous_path": "M3ReadonlyBoundaryProof.java",
+        "sha256_unchanged": "217726658fbc3274463dd83e708ec52d841e74edebd5fc9c62f489e91a076b7e"
+      }
+    ],
+    "original_record": {
+      "disposition": "UNCHANGED_HISTORICAL_EXECUTION_EVIDENCE",
+      "path": "recorded-replay.json",
+      "sha256": "ee56e19279e1ebd87e996a3d5a60cb68e445b03088200dd112738a53ee3e745b"
+    },
+    "reason": "Use the canonical Java engine admitted src/test/java source root without changing the engine."
+  }
+}

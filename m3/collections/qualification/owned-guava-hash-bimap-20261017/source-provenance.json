@@ -1,0 +1,118 @@
+{
+  "status": "SCOPED_RUNTIME_AND_REAL_RECIPE_QUALIFIED",
+  "source_receipts": [
+    {
+      "target": "m3/collections/implementations/guava/src/main/java/com/m3/collections/guava/M3HashBiMap.java",
+      "before": "ABSENT",
+      "sha256": "e5aca4438e0687af0aa6737a96acc60c50955722e50971a272bee9a98e443987",
+      "bytes": 52125,
+      "template": "M3HashBiMap.java.txt",
+      "git_blob": "35ecf219a77ea5db7cf057d8feeefdc3be3d953f"
+    },
+    {
+      "target": "m3/collections/implementations/guava/src/test/java/com/m3/collections/guava/InverseForcePutDenseOrderDiscriminator.java",
+      "before": "ABSENT",
+      "sha256": "66b8bdc1cb45b9994c615abc2c0a32dfd6a774f4b5eb78d20df4b82abbb35461",
+      "bytes": 12285,
+      "template": "InverseForcePutDenseOrderDiscriminator.java.txt",
+      "git_blob": "6a28ca0676667c75d39009ca5d6487cddec4be68"
+    },
+    {
+      "target": "m3/collections/implementations/guava/src/test/java/com/m3/collections/guava/M3HashBiMapCommonSelfTest.java",
+      "before": "ABSENT",
+      "sha256": "bf5c83eb152ce2c2f3f8dc6bcda071d7b93a011189efe152c349786dbdaa443e",
+      "bytes": 54933,
+      "template": "M3HashBiMapCommonSelfTest.java.txt",
+      "git_blob": "205e6f6838997fc3c4370d67ec1defbb5d070264"
+    }
+  ],
+  "donor_commit": "f06690fa3e874f65515e8fd338a74d636e2c792f",
+  "original_donor_blob": "ad9138c8eca437bda700df63a4afa80e5abe474f",
+  "rejected_relocation_blob": "8c7caa428b1e5f1b58b4f9fa07c85df2798302ac",
+  "refined_atoms": [
+    "replaceKeyInEntry captured-anchor relocation before adjacency",
+    "putInverse captured-predecessor relocation after swap-last deletion"
+  ],
+  "positive_attempts": [
+    "guava-common-compile-01",
+    "guava-common-jre-01",
+    "guava-section-android-01",
+    "guava-dense-jre-02",
+    "guava-protocol-compile-04",
+    "guava-android-03"
+  ],
+  "jre_common_api": {
+    "checks": 1707096,
+    "paired_operations": 12726,
+    "cases": 38,
+    "random_operations": 12000,
+    "scope": "shared canonical object per logical key/value ID; full ordered content/results/exceptions/callbacks/invariants",
+    "cached_view_identity_cross_variant_comparison": "outside Map/BiMap contract; retained strictly in Android profile"
+  },
+  "android_valid_profile": {
+    "checks": 12098101,
+    "paired_operations": 2488,
+    "cases": 85,
+    "groups": 9,
+    "adapted_donor_cases": 13,
+    "random_operations": 0,
+    "scope": "unchanged constructor/representative/donor/view/array/callback groups and four serialized graph arrangements"
+  },
+  "dense_order": {
+    "scenarios": 17,
+    "independent_checks": 3032,
+    "jre": "PASS",
+    "android": "retained FAIL with four provider-only tuple violations; corrected candidate obeys independent legal-map expectations"
+  },
+  "android_targeted_protocol": {
+    "cases": 66,
+    "equivalent": 66,
+    "different": 0
+  },
+  "jre_targeted_protocol": {
+    "cases": 66,
+    "equivalent": 28,
+    "different": 38,
+    "invariant_failures": 0,
+    "oracle_contract_bugs": 1,
+    "status": "FAILED_ORACLE_COMMON_ASSERTION__FULL_JRE_PARITY_NOT_ADMITTED"
+  },
+  "negative_attempts_retained": [
+    "guava-selftest-android-01",
+    "guava-dense-android-01",
+    "guava-dense-jre-01",
+    "guava-dense-android-02",
+    "guava-section-jre-01",
+    "guava-jre-03"
+  ],
+  "original_whole_selftest": "FAILED_RETAINED__NOT_CLAIMED_AS_PASS",
+  "original_equal_distinct_random_trace": "NOT_EXECUTED_TO_COMPLETION",
+  "wire_identity": "OWN_CLASS_UID1__NO_DONOR_WIRE_IDENTITY_PROMISE",
+  "performance": "NOT_MEASURED",
+  "new_jni_guava_body": false,
+  "existing_adapter_factories": "UNCHANGED_PENDING_SEPARATE_QUALIFIED_MIGRATION",
+  "full_guava_library_complete": false,
+  "full_five_library_superset_complete": false,
+  "recipe_tests": 2,
+  "recipe_installation_states": 16,
+  "recipe_refusals": 6,
+  "engine_blob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+  "source_review": {
+    "body_blob": "35ecf219a77ea5db7cf057d8feeefdc3be3d953f",
+    "commands": "DISABLED",
+    "production_source_findings": "NO_ADDITIONAL_ACTIONABLE_FINDINGS",
+    "reviewer_fixture_authorship": "DISCLOSED",
+    "independent_execution": false
+  },
+  "hosted_ci": "PENDING",
+  "publication_parent": "4598bfc398d3024e7ea67e42034e857a53a1b378",
+  "publication_review": {
+    "prototype_commit": "3a68eb63341f48b0d2ad35a38344f4a8edb2867e",
+    "finding": "CI downloaded fixed coordinates without enforcing locally executed oracle SHA256",
+    "fix": "verify_provider_artifacts.py checks bothGuava andallthreeannotation lengths/SHA256 before hostedcompile/runtime",
+    "actual_local_artifact_verification": "guava-provider-custody-01 PASS",
+    "source_recheck": "PENDING",
+    "commands": "DISABLED",
+    "reviewer_protocol_fixture_authorship": "DISCLOSED"
+  }
+}

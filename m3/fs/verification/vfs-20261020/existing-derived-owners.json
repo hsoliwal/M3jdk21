@@ -1,0 +1,26 @@
+{
+  "repository": "hsoliwal/M3jdk21",
+  "commit": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+  "retrieval": "Read-only GitHub connector, exact pinned source contents inspected",
+  "owners": [
+    {
+      "path": "m3/file/src/main/java/com/m3/file/M3File.java",
+      "git_blob": "c182a3b1526f9fd0ca20c631d97df3048076defd",
+      "role": "Existing Path boundary; no file interning or word-ID representation added by this change",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/73f59218dc4ef1a3ef79aad990e77273db2a2d60/m3/file/src/main/java/com/m3/file/M3File.java"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3WordRows.java",
+      "git_blob": "5215e2771f5ede8cb35dd78275bd85a7cda4a057",
+      "role": "Existing generation-qualified packed word IDs; dictionary context must accompany reuse",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/73f59218dc4ef1a3ef79aad990e77273db2a2d60/m3/core/src/com/m3/text/M3WordRows.java"
+    },
+    {
+      "path": "m3/ast/src/main/java/com/m3/ast/M3ASTHierarchy.java",
+      "git_blob": "2913873c0c46bb7c8dcd7c960c0cbdc4f4f23abd",
+      "role": "Existing atom-handle hierarchy; consumes verified atomization and hashes raw-source/receipt identity, not a parser or whitespace-invariant equivalence hash",
+      "url": "https://github.com/hsoliwal/M3jdk21/blob/73f59218dc4ef1a3ef79aad990e77273db2a2d60/m3/ast/src/main/java/com/m3/ast/M3ASTHierarchy.java"
+    }
+  ],
+  "scope": "Existing-owner integration and documentation; no edits to these owners, no new parser or word-ID store"
+}

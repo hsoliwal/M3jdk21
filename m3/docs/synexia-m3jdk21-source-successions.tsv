@@ -1,0 +1,2 @@
+# target_path	historical_sha256	current_sha256	public_product_pr	canonical_recipe_pr	qualification_state	license
+m3/file/src/main/java/com/m3/file/M3ResourceLocks.java	18d05ae54945d4129c46d62e26551cbc4fd200b31c185e020b9ee6240fdc9599	eb0bf36625effaffa147be1f650590dfa08627a5f6f52d105b8fbb201d6b5718	hsoliwal/M3jdk21#1821	hsoliwal/com.synexia#12842	SOURCE_SUCCESSOR_RECEIVED_FULL_RUNTIME_QUALIFICATION_PENDING	Apache-2.0

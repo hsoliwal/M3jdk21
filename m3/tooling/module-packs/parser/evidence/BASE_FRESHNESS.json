@@ -1,0 +1,18 @@
+{
+  "target": {
+    "pinned": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+    "observed": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "status": "ahead",
+    "commitsAhead": 7,
+    "overlap": "NONE with parser, compiler closure, packager and policy inputs",
+    "changed_file_count": 19
+  },
+  "canonical": {
+    "pinned": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+    "observed": "140c263a90f9803b9c46103c63355a286e0515f0",
+    "status": "ahead",
+    "ahead": 16,
+    "overlap": [],
+    "changed_file_count": 38
+  }
+}

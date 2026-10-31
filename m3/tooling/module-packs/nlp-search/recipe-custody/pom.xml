@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.verification</groupId><artifactId>m3-nlp-search-integration-receiver-proof</artifactId><version>1</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <m3.integration.id>m3-nlp-search-integration-20261018</m3.integration.id>
+    <m3.integration.kind>both</m3.integration.kind>
+    <m3.integration.crate>${project.basedir}</m3.integration.crate>
+    <m3.integration.owner>${project.basedir}/../../../shared-frontend/recipe-custody/sdk-owner/src/main/java</m3.integration.owner>
+  </properties>
+  <dependencies>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1-m3-source-1</version></dependency>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>8.17.1-m3-source-1</version></dependency>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>8.17.1-m3-source-1</version><scope>runtime</scope></dependency>
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>2.0.9-m3-source-1</version><scope>runtime</scope></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2-m3-source-1</version><scope>test</scope></dependency>
+  </dependencies>
+  <build>
+    <sourceDirectory>${m3.integration.owner}</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+    <resources><resource><directory>${project.basedir}/resources</directory><includes><include>com/synexia/rewrite/hash-pinned-java/${m3.integration.id}/**</include><include>com/synexia/rewrite/hash-pinned-text/${m3.integration.id}/**</include><include>META-INF/rewrite/${m3.integration.id}.yml</include></includes></resource></resources>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration><proc>none</proc><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs><includes><include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include><include>com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java</include><include>com/synexia/rewrite/M3EditScope.java</include><include>com/synexia/rewrite/M3ScopeInference.java</include></includes></configuration></plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration><useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests><argLine>-Xmx1024m -Xcheck:jni</argLine><systemPropertyVariables><m3.integration.crate>${m3.integration.crate}</m3.integration.crate><m3.integration.id>${m3.integration.id}</m3.integration.id><m3.integration.kind>${m3.integration.kind}</m3.integration.kind><m3.integration.owner>${m3.integration.owner}</m3.integration.owner></systemPropertyVariables></configuration></plugin>
+    </plugins>
+  </build>
+</project>

@@ -1748,4 +1748,65 @@ public interface Map<K, V> {
             return (Map<K,V>)Map.ofEntries(map.entrySet().toArray(new Entry[0]));
         }
     }
+
+    /**
+     * Cooperative, caller-monitored operation. The monitor is borrowed and
+     * never begun, finished or cancelled by this method. One unit is credited
+     * after each successfully completed element/callback operation.
+     * Cancellation is checked at delegate boundaries only.
+     *
+     * @param action the action to perform for each mapping
+     * @param monitor the borrowed progress and cancellation monitor
+     */
+    default void forEachMonitored(BiConsumer<? super K, ? super V> action, java.util.concurrent.ProgressMonitor monitor) {
+        Objects.requireNonNull(action);
+        Objects.requireNonNull(monitor);
+        monitor.checkCancelled();
+        forEach((key, value) -> {
+            monitor.checkCancelled();
+            action.accept(key, value);
+            monitor.worked(1);
+        });
+        monitor.checkCancelled();
+    }
+
+    /**
+     * Checks map values individually; credits one successful comparison.
+     *
+     * @param target the value to find
+     * @param monitor the borrowed progress and cancellation monitor
+     * @return true if this map contains a value equal to the target
+     */
+    default boolean containsValueMonitored(Object target, java.util.concurrent.ProgressMonitor monitor) {
+        Objects.requireNonNull(monitor);
+        for (V value : values()) {
+            monitor.checkCancelled();
+            boolean match = Objects.equals(target, value);
+            monitor.worked(1);
+            if (match) {
+                monitor.checkCancelled();
+                return true;
+            }
+        }
+        monitor.checkCancelled();
+        return false;
+    }
+
+    /**
+     * Incremental putAll with one unit per successful put. An exception or
+     * cancellation may leave a committed prefix; rollback is not implied.
+     *
+     * @param source the map whose mappings are copied into this map
+     * @param monitor the borrowed progress and cancellation monitor
+     */
+    default void putAllMonitored(Map<? extends K, ? extends V> source, java.util.concurrent.ProgressMonitor monitor) {
+        Objects.requireNonNull(source);
+        Objects.requireNonNull(monitor);
+        for (Entry<? extends K, ? extends V> entry : source.entrySet()) {
+            monitor.checkCancelled();
+            put(entry.getKey(), entry.getValue());
+            monitor.worked(1);
+        }
+        monitor.checkCancelled();
+    }
 }

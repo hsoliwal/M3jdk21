@@ -1,0 +1,20 @@
+{
+  "schema": "m3.integrated.collections.payload-custody.v1",
+  "manifest_sha256": "ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2",
+  "referenced_templates": 12,
+  "publication_policy": "Publish exact manifest references only; exclude two rejected local unreferenced payloads. Preserve exact history separately. Verify remote template tree after commit.",
+  "unreferenced_local_payloads": [
+    {
+      "path": "canonical/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "sha256": "93e5cccc6453cac279fe146a7d619f1ffb837205a365f484e19923012cee75d1",
+      "status": "EXCLUDED_FROM_FINAL_CANONICAL_DELTA"
+    },
+    {
+      "path": "canonical/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/templates/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "sha256": "56e2781621b3998b8afcf0d428b5c37d10339590d56f8c8cf852398b4df4bdee",
+      "status": "EXCLUDED_FROM_FINAL_CANONICAL_DELTA"
+    }
+  ],
+  "emitted_source_affected": false,
+  "observation": "Repeated local deletion followed by same-call absence verification did not persist into later inspections; cause unresolved. Positive manifest selection is explicit and does not alter frozen evidence or emitted source."
+}

@@ -1,0 +1,114 @@
+{
+  "schema": "m3-catalogue-lookup-selection/v1",
+  "problemCategory": "ordered-map/key-lookup-validation",
+  "selected": "Reuse bounds/nonempty indexed BST descent to validate queries; retain explicit natural-empty validation",
+  "sourceDonor": "M3TreeMap at dcaf125c2104853208608d1ff2c38d8b91d8ba7a (Apache-2.0)",
+  "challengeDiscoveryOnly": [
+    "https://leetcode.com/problems/search-in-a-binary-search-tree/",
+    "https://www.hackerrank.com/challenges/binary-search-tree-insertion/problem"
+  ],
+  "challengeSolutionCodeCopied": false,
+  "correctness": "Frozen SDK strict/API88/entry132/bulk113/exhaustive gates PASS; public metadata unchanged",
+  "complexity": "O(log n) balanced lookup unchanged; removes one query-self comparator invocation when a bound or visited key performs validation",
+  "throughputConclusion": "INCONCLUSIVE: all six99.9% CI pairs overlap; five point estimates lower, shuffled65536 point estimate17.65% higher. No universal speedup or peak claim.",
+  "comparisonProtocol": "Unchanged frozen churn harness; two sizes,three orders,two versions,two forks,three300ms warmups,five300ms measurements,one thread,GC profiler. ns/pair is whole-invocation ns/op divided by size.",
+  "allSixComparisons": [
+    {
+      "order": "ascending",
+      "size": 4096,
+      "baseline_ns_per_pair": 92.21395510596895,
+      "lookup_ns_per_pair": 91.96543671922291,
+      "baseline_CI": [
+        87.6628294936997,
+        96.7650807182382
+      ],
+      "lookup_CI": [
+        78.57478041813988,
+        105.35609302030593
+      ],
+      "lookup_over_baseline": 0.9973049807216223,
+      "CIs_overlap": true
+    },
+    {
+      "order": "ascending",
+      "size": 65536,
+      "baseline_ns_per_pair": 129.56887276766096,
+      "lookup_ns_per_pair": 117.14860432840253,
+      "baseline_CI": [
+        119.35010835710624,
+        139.78763717821568
+      ],
+      "lookup_CI": [
+        107.48860741257614,
+        126.80860124422891
+      ],
+      "lookup_over_baseline": 0.9041415721696515,
+      "CIs_overlap": true
+    },
+    {
+      "order": "descending",
+      "size": 4096,
+      "baseline_ns_per_pair": 168.29422688708604,
+      "lookup_ns_per_pair": 160.68948618368427,
+      "baseline_CI": [
+        155.78951280655247,
+        180.79894096761961
+      ],
+      "lookup_CI": [
+        132.56310578890998,
+        188.81586657845855
+      ],
+      "lookup_over_baseline": 0.9548128248718595,
+      "CIs_overlap": true
+    },
+    {
+      "order": "descending",
+      "size": 65536,
+      "baseline_ns_per_pair": 246.1085928882672,
+      "lookup_ns_per_pair": 243.97959970651112,
+      "baseline_CI": [
+        226.2898842404711,
+        265.9273015360633
+      ],
+      "lookup_CI": [
+        235.54283861900126,
+        252.416360794021
+      ],
+      "lookup_over_baseline": 0.9913493748561529,
+      "CIs_overlap": true
+    },
+    {
+      "order": "seededshuffle",
+      "size": 4096,
+      "baseline_ns_per_pair": 256.84772811226355,
+      "lookup_ns_per_pair": 253.5791798633623,
+      "baseline_CI": [
+        240.48261040636507,
+        273.212845818162
+      ],
+      "lookup_CI": [
+        238.6911757885851,
+        268.4671839381395
+      ],
+      "lookup_over_baseline": 0.9872743735250302,
+      "CIs_overlap": true
+    },
+    {
+      "order": "seededshuffle",
+      "size": 65536,
+      "baseline_ns_per_pair": 460.09256536310374,
+      "lookup_ns_per_pair": 541.3129420810276,
+      "baseline_CI": [
+        425.8036354436541,
+        494.3814952825534
+      ],
+      "lookup_CI": [
+        456.01396220522406,
+        626.6119219568311
+      ],
+      "lookup_over_baseline": 1.1765305132757904,
+      "CIs_overlap": true
+    }
+  ],
+  "admission": "SDK lookup-validation atom only. Complete Eclipse ownership/all five libraries/JNI CRUD are OPEN."
+}

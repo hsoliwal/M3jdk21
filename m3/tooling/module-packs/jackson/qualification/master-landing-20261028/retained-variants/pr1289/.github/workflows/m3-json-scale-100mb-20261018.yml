@@ -1,0 +1,95 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 JSON 100MB AST acceptance
+
+on:
+  push:
+    branches:
+      - m3/json-scale-100mb-acceptance-20261018
+  pull_request:
+    paths:
+      - m3/tooling/module-packs/jackson/src/main/java/**
+      - m3/tooling/module-packs/jackson/src/test/java/jdk/m3/jackson/tests/M3LargeJsonAcceptance.java
+      - .github/workflows/m3-json-scale-100mb-20261018.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  functional-scale:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Fetch pinned upstream Jackson binary modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          JARS="$RUNNER_TEMP/m3-jars"
+          mkdir -p "$JARS"
+          for jar in jackson-core jackson-annotations jackson-databind; do
+            curl --fail --location --retry 3 --silent --show-error \
+              "https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/$jar/2.19.2/$jar-2.19.2.jar" \
+              --output "$JARS/$jar-2.19.2.jar"
+          done
+          sha256sum "$JARS"/*.jar | tee "$RUNNER_TEMP/jackson-jars.sha256"
+      - name: Strict Java 21 source and fixture compile
+        shell: bash
+        run: |
+          set -euo pipefail
+          PACK="$GITHUB_WORKSPACE/m3/tooling/module-packs/jackson"
+          JARS="$RUNNER_TEMP/m3-jars"
+          MODS="$RUNNER_TEMP/m3-modules"
+          TESTS="$RUNNER_TEMP/m3-test-classes"
+          mkdir -p "$MODS/jdk.m3.jackson" "$TESTS"
+          find "$PACK/src/main/java" -name '*.java' -print0 | sort -z \
+            | xargs -0 javac --release 21 -Xlint:all,-module -Werror -proc:none \
+              --module-path "$JARS" -d "$MODS/jdk.m3.jackson"
+          javac --release 21 -Xlint:all,-module -Werror -proc:none \
+            --module-path "$JARS:$MODS" --add-modules jdk.m3.jackson \
+            -d "$TESTS" "$PACK/src/test/java/jdk/m3/jackson/tests/M3LargeJsonAcceptance.java"
+      - name: Parse exactly 100,000,000 bytes and compare SHA-256
+        shell: bash
+        run: |
+          set -euo pipefail
+          /usr/bin/time -v -o "$RUNNER_TEMP/m3-100mb.time.txt" \
+            java -Xmx2g --module-path "$RUNNER_TEMP/m3-jars:$RUNNER_TEMP/m3-modules" \
+              --add-modules jdk.m3.jackson -cp "$RUNNER_TEMP/m3-test-classes" \
+              jdk.m3.jackson.tests.M3LargeJsonAcceptance "$RUNNER_TEMP/m3-100mb" 100000000
+          grep '^M3_JSON_SCALE_PASS bytes=100000000 ' "$RUNNER_TEMP/m3-100mb/RESULT.txt"
+          cat "$RUNNER_TEMP/m3-100mb/RESULT.txt"
+      - name: Parse exactly 100 MiB and compare SHA-256
+        shell: bash
+        run: |
+          set -euo pipefail
+          /usr/bin/time -v -o "$RUNNER_TEMP/m3-100mib.time.txt" \
+            java -Xmx2g --module-path "$RUNNER_TEMP/m3-jars:$RUNNER_TEMP/m3-modules" \
+              --add-modules jdk.m3.jackson -cp "$RUNNER_TEMP/m3-test-classes" \
+              jdk.m3.jackson.tests.M3LargeJsonAcceptance "$RUNNER_TEMP/m3-100mib" 104857600
+          grep '^M3_JSON_SCALE_PASS bytes=104857600 ' "$RUNNER_TEMP/m3-100mib/RESULT.txt"
+          cat "$RUNNER_TEMP/m3-100mib/RESULT.txt"
+      - name: Stage proof summaries only
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p m3-json-proof
+          for file in "$RUNNER_TEMP/jackson-jars.sha256" "$RUNNER_TEMP/m3-100mb.time.txt" \
+                      "$RUNNER_TEMP/m3-100mb/RESULT.txt" "$RUNNER_TEMP/m3-100mib.time.txt" \
+                      "$RUNNER_TEMP/m3-100mib/RESULT.txt"; do
+            if test -f "$file"; then
+              cp "$file" "m3-json-proof/$(basename "$(dirname "$file")")-$(basename "$file")"
+            fi
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-json-100mb-proof
+          path: m3-json-proof/
+          if-no-files-found: warn
+          retention-days: 14

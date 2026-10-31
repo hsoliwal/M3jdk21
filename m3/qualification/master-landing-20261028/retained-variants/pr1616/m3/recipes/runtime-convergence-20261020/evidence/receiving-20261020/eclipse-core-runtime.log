@@ -1,0 +1,48 @@
+['/tmp/m3jdk21-toolchain-20261020/apache-maven-3.9.9/bin/mvn', '-B', '-ntp', '-Dmaven.repo.local=/tmp/m3jdk21-toolchain-20261020/m2', '-f', '/workspace/scratch/53bcd62c244c/M3JDK21/m3/eclipse/core-runtime/pom.xml', 'clean', 'verify']
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.m3:m3-eclipse-core-runtime-bridge >----------------
+[INFO] Building m3-eclipse-core-runtime-bridge 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ m3-eclipse-core-runtime-bridge ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-eclipse-core-runtime-bridge ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/53bcd62c244c/M3JDK21/m3/eclipse/core-runtime/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-eclipse-core-runtime-bridge ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-eclipse-core-runtime-bridge ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/53bcd62c244c/M3JDK21/m3/eclipse/core-runtime/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-eclipse-core-runtime-bridge ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-eclipse-core-runtime-bridge ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.eclipse.runtime.M3EclipseProgressMonitorTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.156 s -- in com.m3.eclipse.runtime.M3EclipseProgressMonitorTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.1:jar (default-jar) @ m3-eclipse-core-runtime-bridge ---
+[INFO] Building jar: /workspace/scratch/53bcd62c244c/M3JDK21/m3/eclipse/core-runtime/target/m3-eclipse-core-runtime-bridge-0.1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.565 s
+[INFO] Finished at: 2026-10-20T15:05:57+01:00
+[INFO] ------------------------------------------------------------------------
+
+EXIT=0

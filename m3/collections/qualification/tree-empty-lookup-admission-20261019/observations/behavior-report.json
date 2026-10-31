@@ -1,0 +1,80 @@
+{
+  "status": "FAIL_INHERITED_OBSERVATIONS",
+  "target": "com.m3.collections.M3TreeMap via EmptyRootLookupOracle",
+  "contractSha256": "4bbfaa6c501bb112ed6ff06a61706ce1e7745a5f9b9b4a2c7d6c8004bd8f135b",
+  "sourceBlind": true,
+  "sourceInspected": false,
+  "candidateJvmRuns": 1,
+  "clauses": {
+    "1": {
+      "status": "pass",
+      "evidence": "JDK21.0.9, provider/origin/class bytes/home/temp exact;640 unique ordered IDs"
+    },
+    "2": {
+      "status": "pass",
+      "evidence": "All144 empty natural comparable cases exactly match JDK and have no callback; fresh/cleared/removed, root/descending, all8 operations"
+    },
+    "3": {
+      "status": "pass",
+      "evidence": "All128 natural null/non-Comparable cases exactly match JDK, including raw exceptions/messages, callbacks and state"
+    },
+    "4": {
+      "status": "fail",
+      "evidence": "All400 controls exactly match prior baseline;10 inherited JDK differences remain unresolved: populated getOrDefault repeats fewer callback events; outcomes/messages/state match"
+    },
+    "5": {
+      "status": "pass",
+      "evidence": "All640 complete case objects compared in order;10 exact inherited difference records/paths retained; no whole-library admission"
+    },
+    "6": {
+      "status": "pass",
+      "evidence": "No fixture edits/recompile; before/after opaque pins match; full raw gzip roundtrip, command, exit0, joined readers and WindowsJob containment retained"
+    }
+  },
+  "summary": {
+    "pass": 5,
+    "fail": 1,
+    "blocked": 0,
+    "outOfScope": 0,
+    "orderedCompleteCases": 640,
+    "fixedToOriginal": 144,
+    "inheritedDifferentFromOriginal": 10,
+    "newDifferentFromOriginal": 0,
+    "emptyNaturalComparableCases": 144,
+    "controls": 400,
+    "controlsUnchangedFromBaseline": 400,
+    "controlsInheritedDifferentFromOriginal": 10,
+    "invalidNaturalCases": 128,
+    "invalidNaturalDifferentFromOriginal": 0
+  },
+  "capture": {
+    "status": "GZIP_CAPTURE_COMPLETE",
+    "jvmPid": 42776,
+    "jvmExitCode": 0,
+    "uncompressedBytes": 134040,
+    "uncompressedSha256": "b8e22aaa80cfe6f0958698b937d3c4f29dc006b8c6d54869236ee54ab3ccb0e8",
+    "gzipSha256": "a4ab18ddb0c430c3814c8a3cbc40bc40cb60f3a5a60be8b16a71ce90bb68ec21",
+    "roundtripVerified": true
+  },
+  "terminal": {
+    "returncode": 0,
+    "reason": "completed",
+    "pid": 52588,
+    "capturedBytes": 502,
+    "combinedLogLimitBytes": 8192,
+    "capacityChecks": 14,
+    "readerThreadsJoined": true,
+    "treeContainment": "Windows kill-on-close job with stdin-gated command",
+    "elapsedSeconds": 28.563
+  },
+  "evidence": {
+    "raw": "candidate.stdout.jsonl.gz",
+    "exactPaths": "EXACT_DIFFERENCES.json.gz",
+    "command": "ATTEMPT.json",
+    "before": "INPUT_PINS_BEFORE.json",
+    "after": "INPUT_PINS_AFTER.json"
+  },
+  "remainingBlockers": [],
+  "classificationCorrection": "Public lifecycle label is NONEMPTY. This final report supersedes provisional POPULAT-based subset counts in OBSERVATIONS.json; all640 exact body comparisons and stored exact difference paths were unaffected.",
+  "finiteCorpusOnly": true
+}

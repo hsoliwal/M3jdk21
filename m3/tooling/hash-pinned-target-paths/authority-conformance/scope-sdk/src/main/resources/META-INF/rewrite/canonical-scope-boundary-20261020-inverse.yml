@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CanonicalScopeBoundary.Inverse
+displayName: Canonical scope boundary inverse
+description: Exact one-owner scope repair with unchanged enum and external admission gates.
+recipeList:
+  - com.synexia.rewrite.M3CanonicalScopeBoundaryInverseRecipe

@@ -1,0 +1,960 @@
+// SPDX-License-Identifier: Apache-2.0
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+package jdk.m3.parser.test;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.URI;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Random;
+import jdk.m3.parser.M3ASTIndex;
+import jdk.m3.parser.M3ASTIngress;
+import jdk.m3.parser.M3ASTInterop;
+import jdk.m3.parser.M3File;
+
+/** Standalone Java 21 oracle: no external parser, source reload or JNI needed. */
+public final class M3ASTInteropContract {
+    private static int checks;
+    private M3ASTInteropContract() { }
+
+    private static final class Node {
+        final String kind;
+        final int start, end, flags;
+        final Node[] children;
+        final String[] roles;
+        final int[] rolePositions;
+        final int fullStart, fullEnd;
+        Node(String kind, int start, int end, int flags, Node[] children, String[] roles) {
+            this(kind, start, end, flags, children, roles, null);
+        }
+        Node(String kind, int start, int end, int flags, Node[] children, String[] roles,
+             int[] rolePositions) {
+            this(kind, start, end, flags, children, roles, rolePositions, -1, -1);
+        }
+        Node(String kind, int start, int end, int flags, Node[] children, String[] roles,
+             int[] rolePositions, int fullStart, int fullEnd) {
+            this.kind = kind;
+            this.start = start;
+            this.end = end;
+            this.flags = flags;
+            this.children = children;
+            this.roles = roles;
+            this.rolePositions = rolePositions;
+            this.fullStart = fullStart;
+            this.fullEnd = fullEnd;
+        }
+        Node(String kind, int start, int end, int flags) {
+            this(kind, start, end, flags, new Node[0], new String[0]);
+        }
+    }
+
+    private static final M3ASTInterop.Surface<Node> SURFACE = new M3ASTInterop.Surface<>() {
+        @Override public String kind(Node node) { return node.kind; }
+        @Override public int childCount(Node node) { return node.children.length; }
+        @Override public Node child(Node node, int row) { return node.children[row]; }
+        @Override public String childRole(Node node, int row) { return node.roles[row]; }
+        @Override public int childRolePosition(Node node, int row) {
+            return node.rolePositions == null ? -1 : node.rolePositions[row];
+        }
+        @Override public int start(Node node) { return node.start; }
+        @Override public int end(Node node) { return node.end; }
+        @Override public int fullStart(Node node) { return node.fullStart; }
+        @Override public int fullEnd(Node node) { return node.fullEnd; }
+        @Override public int syntaxFlags(Node node) { return node.flags; }
+        @Override public String name(Node node) { return "emoji".equals(node.kind) ? "cat" : null; }
+        @Override public M3ASTIndex.LiteralKind literalKind(Node node) {
+            return "emoji".equals(node.kind) ? M3ASTIndex.LiteralKind.STRING : M3ASTIndex.LiteralKind.NONE;
+        }
+        @Override public String literalValue(Node node) { return "emoji".equals(node.kind) ? "😺" : null; }
+    };
+
+    private static final class CountedInput extends ByteArrayInputStream {
+        int readCount, closes;
+        CountedInput(byte[] contents) { super(contents); }
+        @Override public synchronized int read(byte[] target, int start, int count) {
+            int n = super.read(target, start, count);
+            if (n > 0) readCount += n;
+            return n;
+        }
+        @Override public void close() throws IOException { closes++; super.close(); }
+    }
+
+    private static void equal(Object expected, Object actual) {
+        checks++;
+        if (!java.util.Objects.equals(expected, actual)) {
+            throw new AssertionError("expected " + expected + ", got " + actual);
+        }
+    }
+    private static void ok(boolean condition) {
+        checks++;
+        if (!condition) throw new AssertionError("contract failed at check " + checks);
+    }
+    private static void refuses(Class<? extends RuntimeException> kind, Runnable action) {
+        checks++;
+        try { action.run(); }
+        catch (RuntimeException exception) {
+            if (kind.isInstance(exception)) return;
+            throw new AssertionError("wrong exception type", exception);
+        }
+        throw new AssertionError("expected " + kind.getSimpleName());
+    }
+
+    @FunctionalInterface
+    private interface CheckedAction { void run() throws IOException; }
+
+    private static void refusesIo(Class<? extends IOException> kind, CheckedAction action) {
+        checks++;
+        try { action.run(); }
+        catch (IOException failure) {
+            if (kind.isInstance(failure)) return;
+            throw new AssertionError("wrong checked exception type", failure);
+        }
+        throw new AssertionError("expected " + kind.getSimpleName());
+    }
+
+    private static long[] digestWords(byte[] original) {
+        try {
+            ByteBuffer digest = ByteBuffer.wrap(MessageDigest.getInstance("SHA-256").digest(original));
+            return new long[] {digest.getLong(), digest.getLong(), digest.getLong(), digest.getLong()};
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new AssertionError(impossible);
+        }
+    }
+
+    private static M3ASTIndex project(M3File source, Node root, M3ASTInterop.SourceStamp stamp,
+            M3ASTInterop.Coordinates units, M3ASTIngress.Limits limits) {
+        return M3ASTInterop.project(source, root, "tree-sitter/java@0.25", units, SURFACE, stamp, limits);
+    }
+
+    private static void byteAndIndexContracts() throws IOException {
+        String sourceText = "A😺\r\n中\n";
+        byte[] bytes = sourceText.getBytes(StandardCharsets.UTF_8);
+        CountedInput input = new CountedInput(bytes);
+        URI uri = URI.create("file:///tmp/m3-interop.java");
+        M3File source = M3File.read(uri, input, StandardCharsets.UTF_8, 256);
+        equal(bytes.length, input.readCount);
+        equal(1, input.closes);
+        equal(11, bytes.length);
+        equal(7, source.length());
+        M3File.Utf8Offsets offsets = source.utf8Offsets().orElseThrow();
+        equal(11, offsets.byteLength());
+        equal(7, offsets.utf16Length());
+        equal(2, offsets.nonAsciiCount());
+        equal(16L, offsets.primitiveBytes());
+        for (int[] pair : new int[][] {{0,0},{1,1},{5,3},{6,4},{7,5},{10,6},{11,7}}) {
+            equal(pair[1], offsets.toUtf16(pair[0]));
+            equal(pair[0], offsets.toByte(pair[1]));
+        }
+        for (int byteOffset : new int[] {2,3,4,8,9}) {
+            refuses(IllegalArgumentException.class, () -> offsets.toUtf16(byteOffset));
+        }
+        refuses(IllegalArgumentException.class, () -> offsets.toByte(2));
+        refuses(IndexOutOfBoundsException.class, () -> offsets.toUtf16(12));
+
+        Node reused = new Node("identifier", 7, 10, M3ASTIndex.NAMED | M3ASTIndex.TOKEN);
+        Node root = new Node("unit", 0, 11, M3ASTIndex.NAMED,
+                new Node[] {
+                    new Node("identifier", 0, 1, M3ASTIndex.NAMED | M3ASTIndex.TOKEN),
+                    new Node("emoji", 1, 5, M3ASTIndex.NAMED | M3ASTIndex.TOKEN),
+                    new Node("comment", 5, 7, M3ASTIndex.TRIVIA | M3ASTIndex.TOKEN),
+                    reused,
+                    new Node("missing", 10, 10, M3ASTIndex.MISSING | M3ASTIndex.TOKEN),
+                    reused,
+                    reused,
+                }, new String[] {"name", "value", "trivia", "left", "semicolon", "right", "right"});
+        M3ASTInterop.SourceStamp stamp = new M3ASTInterop.SourceStamp(source.uri(),
+                source.utf16Sha256(), source.byteSha256().orElseThrow());
+        M3ASTIndex index = project(source, root, stamp, M3ASTInterop.Coordinates.UTF8_BYTES,
+                new M3ASTIngress.Limits(256, 20, 3));
+        equal(8, index.nodeCount());
+        equal(M3ASTIndex.Domain.GENERIC, index.domain());
+        equal("tree-sitter/java@0.25", index.providerId());
+        equal(7, index.childCount(0));
+        equal(0, index.parent(1));
+        equal(1, index.start(2));
+        equal(3, index.end(2));
+        equal("😺", index.sourceText(2));
+        equal("cat", index.name(2).orElseThrow());
+        equal("😺", index.literalValue(2).orElseThrow());
+        equal("value", index.incomingRole(2).orElseThrow());
+        equal("left", index.incomingRole(4).orElseThrow());
+        equal("right", index.incomingRole(6).orElseThrow());
+        equal("right", index.incomingRole(7).orElseThrow());
+        ok(index.incomingRole(0).isEmpty());
+        ok((index.flags(3) & M3ASTIndex.TRIVIA) != 0);
+        ok((index.flags(5) & (M3ASTIndex.MISSING | M3ASTIndex.RECOVERED))
+                == (M3ASTIndex.MISSING | M3ASTIndex.RECOVERED));
+        ok(index.hasExactRange(5));
+        equal("", index.sourceText(5));
+        equal(16L, offsets.primitiveBytes());
+        equal(bytes.length, input.readCount); // projection did not reopen source
+        M3ASTIndex.StructuralHashes hashes = index.structuralHashes(20, 4096);
+        equal(M3ASTIndex.GENERIC_STRUCTURE_HASH_SCHEMA, hashes.schema());
+        ok(!hashes.sha256(4).equals(hashes.sha256(6))); // edge role is structural
+        equal(hashes.sha256(6), hashes.sha256(7)); // same role, same retained node
+
+        M3ASTIndex unverified = project(source, root, null, M3ASTInterop.Coordinates.UTF8_BYTES,
+                new M3ASTIngress.Limits(256, 20, 3));
+        ok((unverified.flags(0) & M3ASTIndex.SOURCE_UNVERIFIED) != 0);
+        ok(!unverified.hasExactRange(2));
+        refuses(IllegalStateException.class, () -> unverified.sourceText(2));
+
+        refuses(IllegalArgumentException.class, () -> project(source, root, stamp,
+                M3ASTInterop.Coordinates.UTF8_BYTES, new M3ASTIngress.Limits(256, 6, 3)));
+        refuses(IllegalArgumentException.class, () -> project(source, root, stamp,
+                M3ASTInterop.Coordinates.UTF8_BYTES, new M3ASTIngress.Limits(256, 20, 1)));
+        refuses(IllegalArgumentException.class, () -> project(source, root, stamp,
+                M3ASTInterop.Coordinates.UTF8_BYTES, new M3ASTIngress.Limits(2, 20, 3)));
+        refuses(IllegalArgumentException.class, () -> project(source, root,
+                new M3ASTInterop.SourceStamp(uri, "wrong", null),
+                M3ASTInterop.Coordinates.UTF8_BYTES, new M3ASTIngress.Limits(256, 20, 3)));
+        refuses(IllegalArgumentException.class, () -> project(source, root,
+                new M3ASTInterop.SourceStamp(uri, source.utf16Sha256(), "wrong"),
+                M3ASTInterop.Coordinates.UTF8_BYTES, new M3ASTIngress.Limits(256, 20, 3)));
+
+        M3File charsOnly = M3File.of(uri, sourceText);
+        ok(charsOnly.utf8Offsets().isEmpty());
+        refuses(IllegalArgumentException.class, () -> project(charsOnly, root, null,
+                M3ASTInterop.Coordinates.UTF8_BYTES, new M3ASTIngress.Limits(256, 20, 3)));
+        M3File utf16 = M3File.read(uri, new ByteArrayInputStream(
+                sourceText.getBytes(StandardCharsets.UTF_16LE)), StandardCharsets.UTF_16LE, 256);
+        ok(utf16.utf8Offsets().isEmpty());
+        M3ASTIndex conventional = originalSchemaIndex(source);
+        equal(M3ASTIndex.STRUCTURAL_HASH_SCHEMA, conventional.structuralHashes(2, 100).schema());
+    }
+
+    private static M3ASTIndex originalSchemaIndex(M3File source) {
+        M3ASTIndex.Builder builder = M3ASTIndex.builder(source, M3ASTIndex.Domain.JAVAC, 2);
+        builder.add(-1, "ROOT", 0, source.length(), M3ASTIndex.EXACT_RANGE);
+        return builder.seal();
+    }
+
+    private static void randomizedOffsets() throws IOException {
+        Random random = new Random(0x5EED2026);
+        StringBuilder text = new StringBuilder(8192);
+        for (int i = 0; i < 1600; i++) {
+            int choice = random.nextInt(5);
+            text.appendCodePoint(switch (choice) {
+                case 0 -> 65 + random.nextInt(26);
+                case 1 -> 0x100 + random.nextInt(0x200);
+                case 2 -> 0x4E00 + random.nextInt(0x200);
+                case 3 -> 0x1F600 + random.nextInt(75);
+                default -> 10;
+            });
+        }
+        String value = text.toString();
+        byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
+        M3File source = M3File.read(URI.create("file:///unicode"), new ByteArrayInputStream(bytes),
+                StandardCharsets.UTF_8, bytes.length);
+        M3File.Utf8Offsets map = source.utf8Offsets().orElseThrow();
+        int charIndex = 0, byteIndex = 0;
+        while (charIndex < value.length()) {
+            equal(charIndex, map.toUtf16(byteIndex));
+            equal(byteIndex, map.toByte(charIndex));
+            int point = value.codePointAt(charIndex);
+            charIndex += Character.charCount(point);
+            byteIndex += new String(Character.toChars(point)).getBytes(StandardCharsets.UTF_8).length;
+        }
+        equal(value.length(), map.toUtf16(bytes.length));
+        equal(bytes.length, map.toByte(value.length()));
+        M3File ascii = M3File.read(URI.create("file:///ascii"),
+                new ByteArrayInputStream(new byte[] {65, 66, 67}), StandardCharsets.UTF_8, 4);
+        equal(0, ascii.utf8Offsets().orElseThrow().nonAsciiCount());
+        equal(3, ascii.utf8Offsets().orElseThrow().toByte(3));
+    }
+
+    private static boolean insidePair(String value, int index) {
+        return index > 0 && index < value.length()
+                && Character.isHighSurrogate(value.charAt(index - 1))
+                && Character.isLowSurrogate(value.charAt(index));
+    }
+
+    private static void sourceDeltaContracts() throws IOException {
+        URI uri = URI.create("memory:/same-source.java");
+        M3File original = M3File.of(uri, "A😀B");
+        M3File updated = M3File.of(uri, "A😺B");
+        M3File.ChangeEnvelope changed = updated.changeSince(original, 20);
+        equal(1, changed.previousStart());
+        equal(3, changed.previousEnd());
+        equal(1, changed.currentStart());
+        equal(3, changed.currentEnd());
+        ok(changed.textChanged());
+        equal(M3File.RawDigestComparison.UNAVAILABLE, changed.rawDigestComparison());
+
+        M3File.ChangeEnvelope noTextChange = original.changeSince(original, 8);
+        ok(!noTextChange.textChanged());
+        equal(0, noTextChange.previousEnd());
+        refuses(IllegalArgumentException.class, () -> updated.changeSince(original, 7));
+        refuses(IllegalArgumentException.class, () -> updated.changeSince(original, -1));
+        refuses(IllegalArgumentException.class, () -> updated.changeSince(
+                M3File.of(URI.create("memory:/renamed.java"), "A😀B"), 20));
+
+        M3File utf8 = M3File.read(uri, new ByteArrayInputStream(new byte[] {65}),
+                StandardCharsets.UTF_8, 4);
+        M3File utf8Again = M3File.read(uri, new ByteArrayInputStream(new byte[] {65}),
+                StandardCharsets.UTF_8, 4);
+        M3File utf16 = M3File.read(uri, new ByteArrayInputStream(new byte[] {65, 0}),
+                StandardCharsets.UTF_16LE, 4);
+        equal(M3File.RawDigestComparison.SHA256_SAME,
+                utf8Again.changeSince(utf8, 2).rawDigestComparison());
+        M3File.ChangeEnvelope byteOnly = utf16.changeSince(utf8, 2);
+        equal(M3File.RawDigestComparison.SHA256_DIFFERENT, byteOnly.rawDigestComparison());
+        ok(!byteOnly.textChanged());
+
+        M3File insert = M3File.of(uri, "ab😺c");
+        M3File.ChangeEnvelope inserted = insert.changeSince(M3File.of(uri, "abc"), 8);
+        equal(2, inserted.previousStart());
+        equal(2, inserted.previousEnd());
+        equal(4, inserted.currentEnd());
+
+        Random random = new Random(0xD17A2026L);
+        String[] pieces = {"a", "b", "中", "😺", "😀", "\r\n", "\n", "\t", "é"};
+        for (int sample = 0; sample < 500; sample++) {
+            StringBuilder prior = new StringBuilder();
+            int pointCount = random.nextInt(48);
+            for (int position = 0; position < pointCount; position++) {
+                prior.append(pieces[random.nextInt(pieces.length)]);
+            }
+            String previousText = prior.toString();
+            int[] points = previousText.codePoints().toArray();
+            int from = random.nextInt(points.length + 1);
+            int through = from + random.nextInt(points.length - from + 1);
+            int start = previousText.offsetByCodePoints(0, from);
+            int end = previousText.offsetByCodePoints(0, through);
+            String replacement = pieces[random.nextInt(pieces.length)];
+            String currentText = previousText.substring(0, start) + replacement
+                    + previousText.substring(end);
+            M3File.ChangeEnvelope delta = M3File.of(uri, currentText)
+                    .changeSince(M3File.of(uri, previousText), 4096);
+            ok(!insidePair(previousText, delta.previousStart()));
+            ok(!insidePair(previousText, delta.previousEnd()));
+            ok(!insidePair(currentText, delta.currentStart()));
+            ok(!insidePair(currentText, delta.currentEnd()));
+            equal(currentText, previousText.substring(0, delta.previousStart())
+                    + currentText.substring(delta.currentStart(), delta.currentEnd())
+                    + previousText.substring(delta.previousEnd()));
+            equal(!previousText.equals(currentText), delta.textChanged());
+        }
+    }
+
+    private static void boundedParentEdgeCursorContracts() {
+        M3File source = M3File.of(URI.create("memory:/cursor.java"), "abcdef");
+        Node shared = new Node("Name", 1, 3, M3ASTIndex.NAMED);
+        Node nested = new Node("Group", 0, 4, M3ASTIndex.NAMED,
+                new Node[] {shared}, new String[] {"body"}, new int[] {-1});
+        Node root = new Node("Root", 0, 6, M3ASTIndex.NAMED,
+                new Node[] {shared, nested, shared},
+                new String[] {"members", "members", "members"},
+                new int[] {0, 1, 2});
+        int[] cursors = {0};
+        M3ASTInterop.Surface<Node> cursorSurface = new M3ASTInterop.Surface<>() {
+            @Override public String kind(Node node) { return node.kind; }
+            @Override public int childCount(Node node) {
+                throw new AssertionError("cursor provider must not rescan childCount");
+            }
+            @Override public Node child(Node node, int ordinal) {
+                throw new AssertionError("cursor provider must not rescan child");
+            }
+            @Override public M3ASTInterop.Edges<Node> childEdges(Node node, int maxEdges) {
+                cursors[0]++;
+                if (node.children.length > maxEdges) {
+                    throw new IllegalArgumentException("bounded parent edge cursor");
+                }
+                return new M3ASTInterop.Edges<>() {
+                    @Override public int count() { return node.children.length; }
+                    @Override public Node child(int ordinal) { return node.children[ordinal]; }
+                    @Override public String role(int ordinal) { return node.roles[ordinal]; }
+                    @Override public int rolePosition(int ordinal) {
+                        return node.rolePositions == null ? -1 : node.rolePositions[ordinal];
+                    }
+                };
+            }
+            @Override public int start(Node node) { return node.start; }
+            @Override public int end(Node node) { return node.end; }
+            @Override public int syntaxFlags(Node node) { return node.flags; }
+        };
+        M3ASTInterop.SourceStamp stamp =
+                new M3ASTInterop.SourceStamp(source.uri(), source.utf16Sha256(), null);
+        M3ASTIngress.Limits limits = new M3ASTIngress.Limits(100, 5, 3);
+        M3ASTIndex snapshot = M3ASTInterop.project(source, root, "jdt-probe",
+                M3ASTInterop.Coordinates.UTF16, cursorSurface, stamp, limits);
+        equal(5, snapshot.nodeCount());
+        equal(5, cursors[0]);
+        equal("members", snapshot.incomingRole(1).orElseThrow());
+        equal(0, snapshot.incomingRolePosition(1));
+        equal("members", snapshot.incomingRole(2).orElseThrow());
+        equal(1, snapshot.incomingRolePosition(2));
+        equal("body", snapshot.incomingRole(3).orElseThrow());
+        equal(-1, snapshot.incomingRolePosition(3));
+        equal(2, snapshot.incomingRolePosition(4));
+        equal(2, snapshot.parent(3));
+        equal(0, snapshot.parent(4));
+        equal(M3ASTIndex.GENERIC_POSITIONED_STRUCTURE_HASH_SCHEMA,
+                snapshot.structuralHashes(5, 100).schema());
+        M3ASTIndex direct = M3ASTInterop.project(source, root, "jdt-probe",
+                M3ASTInterop.Coordinates.UTF16, SURFACE, stamp, limits);
+        for (int i = 0; i < snapshot.nodeCount(); i++) {
+            equal(direct.kind(i), snapshot.kind(i));
+            equal(direct.parent(i), snapshot.parent(i));
+            equal(direct.flags(i), snapshot.flags(i));
+            equal(direct.incomingRole(i), snapshot.incomingRole(i));
+            equal(direct.incomingRolePosition(i), snapshot.incomingRolePosition(i));
+        }
+        equal(direct.structuralHashes(5, 100).sha256(0),
+                snapshot.structuralHashes(5, 100).sha256(0));
+
+        refuses(IllegalArgumentException.class, () -> M3ASTInterop.project(
+                source, root, "jdt-probe", M3ASTInterop.Coordinates.UTF16,
+                cursorSurface, stamp, new M3ASTIngress.Limits(100, 4, 3)));
+        refuses(IllegalArgumentException.class, () -> M3ASTInterop.project(
+                source, root, "jdt-probe", M3ASTInterop.Coordinates.UTF16,
+                cursorSurface, stamp, new M3ASTIngress.Limits(100, 5, 2)));
+        refuses(IllegalArgumentException.class, () -> M3ASTInterop.project(
+                source, root, "jdt-probe", M3ASTInterop.Coordinates.UTF16,
+                new M3ASTInterop.Surface<>() {
+                    @Override public String kind(Node node) { return node.kind; }
+                    @Override public int childCount(Node node) { return 0; }
+                    @Override public Node child(Node node, int ordinal) { return null; }
+                    @Override public M3ASTInterop.Edges<Node> childEdges(Node node, int bound) {
+                        return new M3ASTInterop.Edges<>() {
+                            @Override public int count() { return bound + 1; }
+                            @Override public Node child(int ordinal) { return shared; }
+                        };
+                    }
+                }, stamp, limits));
+        refuses(IllegalArgumentException.class, () ->
+                M3ASTInterop.eclipseJdtDom(source, new Object(), limits));
+    }
+
+    private static void fieldListPositionContracts() {
+        M3File source = M3File.of(URI.create("memory:/list-fields.java"), "abc");
+        Node reused = new Node("Name", 0, 1, M3ASTIndex.NAMED);
+        Node root = new Node("Call", 0, 3, M3ASTIndex.NAMED,
+                new Node[] {reused, reused, reused},
+                new String[] {"arguments", "arguments", "arguments"},
+                new int[] {0, 1, 0});
+        M3ASTIndex index = project(source, root,
+                new M3ASTInterop.SourceStamp(source.uri(), source.utf16Sha256(), null),
+                M3ASTInterop.Coordinates.UTF16, new M3ASTIngress.Limits(16, 8, 2));
+        equal(4, index.nodeCount());
+        equal(-1, index.incomingRolePosition(0));
+        equal(0, index.incomingRolePosition(1));
+        equal(1, index.incomingRolePosition(2));
+        equal(0, index.incomingRolePosition(3));
+        equal("arguments", index.incomingRole(2).orElseThrow());
+        equal(32L, index.metadataBytes()); // roles and positions: 2 optional int lanes
+        M3ASTIndex.StructuralHashes hashes = index.structuralHashes(4, 1024);
+        equal(M3ASTIndex.GENERIC_POSITIONED_STRUCTURE_HASH_SCHEMA, hashes.schema());
+        ok(!hashes.sha256(1).equals(hashes.sha256(2)));
+        equal(hashes.sha256(1), hashes.sha256(3));
+
+        Node noOrdinals = new Node("Call", 0, 3, M3ASTIndex.NAMED,
+                root.children, root.roles);
+        M3ASTIndex oldShape = project(source, noOrdinals, null,
+                M3ASTInterop.Coordinates.UTF16, new M3ASTIngress.Limits(16, 8, 2));
+        equal(M3ASTIndex.GENERIC_STRUCTURE_HASH_SCHEMA,
+                oldShape.structuralHashes(4, 1024).schema());
+        equal(-1, oldShape.incomingRolePosition(1));
+        equal(16L, oldShape.metadataBytes());
+        M3ASTIndex.Builder illegal = M3ASTIndex.builder(source, M3ASTIndex.Domain.GENERIC, 3, "provider@1");
+        refuses(IllegalArgumentException.class,
+                () -> illegal.add(-1, "Root", 0, 3, 0, "root", 0));
+        refuses(IllegalArgumentException.class,
+                () -> illegal.add(-1, "Root", 0, 3, 0, null, 0));
+        illegal.add(-1, "Root", 0, 3, 0);
+        refuses(IllegalArgumentException.class,
+                () -> illegal.add(0, "Child", 0, 1, 0, null, 0));
+        refuses(IllegalArgumentException.class,
+                () -> illegal.add(0, "Child", 0, 1, 0, "field", -2));
+        M3ASTIndex.Builder legacy = M3ASTIndex.builder(source, M3ASTIndex.Domain.JAVAC, 3);
+        legacy.add(-1, "Root", 0, 3, 0);
+        refuses(IllegalArgumentException.class,
+                () -> legacy.add(0, "Child", 0, 1, 0, "field", 0));
+        equal(M3ASTIndex.STRUCTURAL_HASH_SCHEMA,
+                legacy.seal().structuralHashes(3, 100).schema());
+
+        M3ASTIndex.Builder grown = M3ASTIndex.builder(source, M3ASTIndex.Domain.GENERIC, 65, "provider@1");
+        grown.add(-1, "Root", 0, 3, 0);
+        for (int i = 0; i < 40; i++) {
+            grown.add(0, "Name", 0, 1, 0, "arguments", i);
+        }
+        M3ASTIndex many = grown.seal();
+        equal(41, many.nodeCount());
+        for (int i = 0; i < 40; i++) equal(i, many.incomingRolePosition(i + 1));
+        equal(328L, many.metadataBytes());
+    }
+
+    private static void sourceLineIndexContracts() {
+        M3File source = M3File.of(URI.create("memory:/lines.java"), "A😺\r\n中\n");
+        M3File.LineIndex lines = source.lineIndex(3);
+        equal(3, lines.lineCount());
+        equal(12L, lines.primitiveBytes());
+        equal(0, lines.lineStart(1));
+        equal(5, lines.lineStart(2));
+        equal(7, lines.lineStart(3));
+        equal(new M3File.LinePosition(1, 3), lines.positionAt(3)); // CR
+        equal(new M3File.LinePosition(1, 4), lines.positionAt(4)); // LF in CRLF
+        equal(new M3File.LinePosition(2, 0), lines.positionAt(5));
+        equal(new M3File.LinePosition(3, 0), lines.positionAt(7)); // empty trailing line
+        equal(4, lines.offsetAt(1, 4));
+        equal(6, lines.offsetAt(2, 1));
+        equal(7, lines.offsetAt(3, 0));
+        ok(lines == source.lineIndex(3));
+        refuses(IllegalArgumentException.class, () -> source.lineIndex(2));
+        refuses(IllegalArgumentException.class, () -> source.lineIndex(0));
+        refuses(IndexOutOfBoundsException.class, () -> lines.positionAt(8));
+        refuses(IndexOutOfBoundsException.class, () -> lines.offsetAt(1, 5));
+        refuses(IndexOutOfBoundsException.class, () -> lines.offsetAt(2, 2));
+        refuses(IndexOutOfBoundsException.class, () -> lines.lineStart(0));
+        refuses(IndexOutOfBoundsException.class, () -> lines.lineStart(4));
+        M3File empty = M3File.of(URI.create("memory:/empty"), "");
+        equal(1, empty.lineIndex(1).lineCount());
+        equal(new M3File.LinePosition(1, 0), empty.lineIndex(1).positionAt(0));
+        equal(0, empty.lineIndex(1).offsetAt(1, 0));
+
+        Random random = new Random(0x11AE2026);
+        String[] units = {"A", "中", "😺", "\r", "\n", "\r\n", "é", " "};
+        for (int trial = 0; trial < 250; trial++) {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0, count = random.nextInt(60); i < count; i++) {
+                builder.append(units[random.nextInt(units.length)]);
+            }
+            M3File candidate = M3File.of(URI.create("memory:/seeded-lines"), builder.toString());
+            M3File.LineIndex lineIndex = candidate.lineIndex(128);
+            for (int offset = 0; offset <= candidate.length(); offset++) {
+                M3File.LinePosition point = lineIndex.positionAt(offset);
+                equal(offset, lineIndex.offsetAt(point.line(), point.column()));
+            }
+            if (lineIndex.lineCount() > 1) {
+                int shortBudget = lineIndex.lineCount() - 1;
+                refuses(IllegalArgumentException.class, () -> candidate.lineIndex(shortBudget));
+            }
+        }
+    }
+
+    private static void fullSpanContracts() throws IOException {
+        String text = " /*a*/ alpha /*b*/ ";
+        URI uri = URI.create("memory:/full-span.java");
+        M3File source = M3File.read(uri, new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8)),
+                StandardCharsets.UTF_8, 128);
+        Node child = new Node("Name", 7, 12, M3ASTIndex.NAMED, new Node[0],
+                new String[0], null, 6, 18);
+        Node root = new Node("Declaration", 7, 12, M3ASTIndex.NAMED,
+                new Node[] {child}, new String[] {"name"}, null, 0, text.length());
+        M3ASTInterop.SourceStamp stamp = new M3ASTInterop.SourceStamp(source.uri(),
+                source.utf16Sha256(), source.byteSha256().orElseThrow());
+        M3ASTIndex index = project(source, root, stamp, M3ASTInterop.Coordinates.UTF8_BYTES,
+                new M3ASTIngress.Limits(128, 4, 2));
+        equal(2, index.nodeCount());
+        equal("alpha", index.sourceText(1));
+        equal(" alpha /*b*/", index.fullSourceText(1));
+        equal(text, index.fullSourceText(0));
+        equal(6, index.fullStart(1));
+        equal(18, index.fullEnd(1));
+        equal(24L, index.metadataBytes()); // name role plus 2 full-span int[] lanes
+        ok(index.hasExactFullRange(0));
+        ok(index.hasExactFullRange(1));
+        M3ASTIndex unverified = project(source, root, null, M3ASTInterop.Coordinates.UTF8_BYTES,
+                new M3ASTIngress.Limits(128, 4, 2));
+        equal(6, unverified.fullStart(1));
+        ok(!unverified.hasExactFullRange(1));
+        refuses(IllegalStateException.class, () -> unverified.fullSourceText(1));
+
+        Node plainChild = new Node("Name", 7, 12, M3ASTIndex.NAMED);
+        Node plainRoot = new Node("Declaration", 7, 12, M3ASTIndex.NAMED,
+                new Node[] {plainChild}, new String[] {"name"});
+        M3ASTIndex withoutFull = project(source, plainRoot, stamp,
+                M3ASTInterop.Coordinates.UTF8_BYTES, new M3ASTIngress.Limits(128, 4, 2));
+        equal(-1, withoutFull.fullStart(1));
+        equal(8L, withoutFull.metadataBytes());
+        equal(M3ASTIndex.GENERIC_STRUCTURE_HASH_SCHEMA,
+                index.structuralHashes(4, 1024).schema());
+        equal(withoutFull.structuralHashes(4, 1024).sha256(0),
+                index.structuralHashes(4, 1024).sha256(0)); // span geometry excluded
+
+        Node badCore = new Node("Name", 7, 12, M3ASTIndex.NAMED,
+                new Node[0], new String[0], null, 8, 11);
+        Node malformed = new Node("Declaration", 0, text.length(), M3ASTIndex.NAMED,
+                new Node[] {badCore}, new String[] {"name"});
+        refuses(IllegalArgumentException.class, () -> project(source, malformed, stamp,
+                M3ASTInterop.Coordinates.UTF8_BYTES, new M3ASTIngress.Limits(128, 4, 2)));
+        Node partial = new Node("Name", 7, 12, M3ASTIndex.NAMED,
+                new Node[0], new String[0], null, 6, -1);
+        refuses(IllegalArgumentException.class, () -> project(source, partial, stamp,
+                M3ASTInterop.Coordinates.UTF8_BYTES, new M3ASTIngress.Limits(128, 4, 2)));
+
+        M3ASTIndex.Builder builder = M3ASTIndex.builder(source, M3ASTIndex.Domain.GENERIC, 65, "full@1");
+        refuses(IllegalArgumentException.class, () -> builder.add(-1, "Root", 0,
+                text.length(), M3ASTIndex.EXACT_FULL_RANGE));
+        builder.add(-1, "Root", 0, text.length(), M3ASTIndex.EXACT_RANGE);
+        builder.fullRange(0, 0, text.length(), true);
+        refuses(IllegalStateException.class, () -> builder.fullRange(0, 0, text.length(), true));
+        for (int i = 0; i < 40; i++) {
+            int node = builder.add(0, "Name", 7, 12, M3ASTIndex.EXACT_RANGE);
+            builder.fullRange(node, 6, 18, true);
+        }
+        M3ASTIndex grown = builder.seal();
+        equal(41, grown.nodeCount());
+        equal(328L, grown.metadataBytes());
+        equal(" alpha /*b*/", grown.fullSourceText(40));
+        M3ASTIndex.Builder legacy = M3ASTIndex.builder(source, M3ASTIndex.Domain.JAVAC, 1);
+        legacy.add(-1, "Root", 0, text.length(), M3ASTIndex.EXACT_RANGE);
+        refuses(IllegalArgumentException.class, () -> legacy.fullRange(0, 0, text.length(), true));
+        M3ASTIndex.Builder untrusted = M3ASTIndex.builder(source, M3ASTIndex.Domain.GENERIC, 1, "untrusted@1");
+        untrusted.add(-1, "Root", 0, text.length(), M3ASTIndex.SOURCE_UNVERIFIED);
+        refuses(IllegalArgumentException.class, () -> untrusted.fullRange(0, 0, text.length(), true));
+    }
+
+    private static void originalUtf8ByteChangeContracts() throws IOException {
+        URI uri = URI.create("memory:/utf8-delta.java");
+        String[] units = {"a", "z", "中", "é", "😺", "🐶", "\r\n", "\n", " "};
+        Random random = new Random(0xB17E2026L);
+        for (int sample = 0; sample < 350; sample++) {
+            StringBuilder before = new StringBuilder();
+            for (int i = 0, count = random.nextInt(50); i < count; i++) {
+                before.append(units[random.nextInt(units.length)]);
+            }
+            String previousText = before.toString();
+            int[] codepoints = previousText.codePoints().toArray();
+            int from = random.nextInt(codepoints.length + 1);
+            int end = from + random.nextInt(codepoints.length - from + 1);
+            int beginUtf16 = previousText.offsetByCodePoints(0, from);
+            int endUtf16 = previousText.offsetByCodePoints(0, end);
+            String currentText = previousText.substring(0, beginUtf16)
+                    + units[random.nextInt(units.length)] + previousText.substring(endUtf16);
+            byte[] previousBytes = previousText.getBytes(StandardCharsets.UTF_8);
+            byte[] currentBytes = currentText.getBytes(StandardCharsets.UTF_8);
+            M3File old = M3File.read(uri, new ByteArrayInputStream(previousBytes),
+                    StandardCharsets.UTF_8, 4096);
+            M3File current = M3File.read(uri, new ByteArrayInputStream(currentBytes),
+                    StandardCharsets.UTF_8, 4096);
+            M3File.Utf8ChangeEnvelope change = current.utf8ChangeSince(old, 4096);
+            equal(!previousText.equals(currentText), change.textChanged());
+            equal(previousText.equals(currentText) ? M3File.RawDigestComparison.SHA256_SAME
+                    : M3File.RawDigestComparison.SHA256_DIFFERENT, change.rawDigestComparison());
+            int prefix = change.previousStartByte();
+            int previousEnd = change.previousEndByte();
+            int currentEnd = change.currentEndByte();
+            ok(prefix <= previousEnd && previousEnd <= previousBytes.length);
+            ok(prefix <= currentEnd && currentEnd <= currentBytes.length);
+            byte[] rebuilt = new byte[prefix + currentEnd - prefix + previousBytes.length - previousEnd];
+            System.arraycopy(previousBytes, 0, rebuilt, 0, prefix);
+            System.arraycopy(currentBytes, prefix, rebuilt, prefix, currentEnd - prefix);
+            System.arraycopy(previousBytes, previousEnd, rebuilt, currentEnd,
+                    previousBytes.length - previousEnd);
+            ok(Arrays.equals(currentBytes, rebuilt));
+            equal(prefix, change.currentStartByte());
+        }
+        M3File charsOnly = M3File.of(uri, "abc");
+        M3File utf8 = M3File.read(uri, new ByteArrayInputStream(new byte[] {97, 98, 99}),
+                StandardCharsets.UTF_8, 16);
+        refuses(IllegalArgumentException.class, () -> utf8.utf8ChangeSince(charsOnly, 6));
+        refuses(IllegalArgumentException.class, () -> charsOnly.utf8ChangeSince(utf8, 6));
+        refuses(IllegalArgumentException.class, () -> utf8.utf8ChangeSince(utf8, 5));
+        refuses(IllegalArgumentException.class, () -> utf8.utf8ChangeSince(
+                M3File.of(URI.create("memory:/elsewhere"), "abc"), 8));
+    }
+
+    private static void originalUtf8PointEditContracts() throws IOException {
+        URI uri = URI.create("memory:/utf8-point.java");
+        byte[] bytes = "\r\n中\r😺\nZ\n".getBytes(StandardCharsets.UTF_8);
+        M3File snapshot = M3File.read(uri, new ByteArrayInputStream(bytes),
+                StandardCharsets.UTF_8, 64);
+        M3File.Utf8Offsets geometry = snapshot.utf8Offsets().orElseThrow();
+        equal(13, geometry.byteLength());
+        equal(4, geometry.lfLineCount(4));
+        for (int[] sample : new int[][] {
+                {0, 0, 0}, {1, 0, 1}, {2, 1, 0}, {5, 1, 3},
+                {6, 1, 4}, {10, 1, 8}, {11, 2, 0}, {12, 2, 1}, {13, 3, 0}
+        }) {
+            M3File.Utf8Point point = new M3File.Utf8Point(sample[1], sample[2]);
+            equal(point, geometry.pointAt(sample[0], 4));
+            equal(sample[0], geometry.byteAt(point, 4));
+        }
+        refuses(IllegalArgumentException.class, () -> geometry.pointAt(3, 4));
+        refuses(IllegalArgumentException.class, () -> geometry.pointAt(7, 4));
+        refuses(IllegalArgumentException.class,
+                () -> geometry.byteAt(new M3File.Utf8Point(1, 5), 4));
+        refuses(IndexOutOfBoundsException.class,
+                () -> geometry.byteAt(new M3File.Utf8Point(1, 9), 4));
+        refuses(IndexOutOfBoundsException.class,
+                () -> geometry.byteAt(new M3File.Utf8Point(4, 0), 4));
+        refuses(IllegalArgumentException.class, () -> geometry.lfLineCount(3));
+        refuses(IllegalArgumentException.class, () -> geometry.pointAt(0, 0));
+        refuses(IllegalArgumentException.class, () -> new M3File.Utf8Point(-1, 0));
+        refuses(IllegalArgumentException.class, () -> new M3File.Utf8Point(0, -1));
+
+        M3File previous = M3File.read(uri,
+                new ByteArrayInputStream("😺\r\n中\nQ".getBytes(StandardCharsets.UTF_8)),
+                StandardCharsets.UTF_8, 64);
+        M3File current = M3File.read(uri,
+                new ByteArrayInputStream("😺\r\nx\nQ".getBytes(StandardCharsets.UTF_8)),
+                StandardCharsets.UTF_8, 64);
+        M3File.Utf8InputEdit edit = current.utf8InputEditSince(previous, 24, 3);
+        equal(6, edit.startByte());
+        equal(9, edit.oldEndByte());
+        equal(7, edit.newEndByte());
+        equal(new M3File.Utf8Point(1, 0), edit.startPoint());
+        equal(new M3File.Utf8Point(1, 3), edit.oldEndPoint());
+        equal(new M3File.Utf8Point(1, 1), edit.newEndPoint());
+        equal(M3File.RawDigestComparison.SHA256_DIFFERENT, edit.rawDigestComparison());
+        ok(edit.textChanged());
+        refuses(IllegalArgumentException.class,
+                () -> current.utf8InputEditSince(previous, 24, 2));
+        M3File.Utf8InputEdit same = current.utf8InputEditSince(current, 24, 3);
+        ok(!same.textChanged());
+        equal(new M3File.Utf8Point(0, 0), same.startPoint());
+
+        Random random = new Random(0xAB71E2026L);
+        String[] words = {"\r", "\n", "\r\n", "a", "é", "中", "😺"};
+        for (int sample = 0; sample < 250; sample++) {
+            StringBuilder text = new StringBuilder();
+            for (int i = 0, count = random.nextInt(70); i < count; i++) {
+                text.append(words[random.nextInt(words.length)]);
+            }
+            String value = text.toString();
+            byte[] input = value.getBytes(StandardCharsets.UTF_8);
+            M3File file = M3File.read(uri, new ByteArrayInputStream(input),
+                    StandardCharsets.UTF_8, 4096);
+            M3File.Utf8Offsets map = file.utf8Offsets().orElseThrow();
+            int row = 0, column = 0, byteOffset = 0;
+            for (int at = 0; at < value.length();) {
+                M3File.Utf8Point expected = new M3File.Utf8Point(row, column);
+                equal(expected, map.pointAt(byteOffset, 128));
+                equal(byteOffset, map.byteAt(expected, 128));
+                int codepoint = value.codePointAt(at);
+                int width = new String(Character.toChars(codepoint))
+                        .getBytes(StandardCharsets.UTF_8).length;
+                for (int offset = 0; offset < width; offset++) {
+                    if (input[byteOffset + offset] == '\n') {
+                        row++;
+                        column = 0;
+                    } else column++;
+                }
+                byteOffset += width;
+                at += Character.charCount(codepoint);
+            }
+            M3File.Utf8Point eof = new M3File.Utf8Point(row, column);
+            equal(eof, map.pointAt(byteOffset, 128));
+            equal(byteOffset, map.byteAt(eof, 128));
+            equal(row + 1, map.lfLineCount(128));
+        }
+    }
+
+    private static void originalCodePointCoordinateContracts() throws IOException {
+        URI uri = URI.create("memory:/antlr-codepoints.java");
+        String contents = "A😺中B\n";
+        M3File source = M3File.of(uri, contents);
+        M3File.CodePointOffsets map = source.codePointOffsets();
+        equal(5, map.codePointLength());
+        equal(6, map.utf16Length());
+        equal(1, map.supplementaryCount());
+        equal(4L, map.primitiveBytes());
+        for (int[] pair : new int[][] {{0,0},{1,1},{2,3},{3,4},{4,5},{5,6}}) {
+            equal(pair[1], map.toUtf16(pair[0]));
+            equal(pair[0], map.toCodePoint(pair[1]));
+        }
+        refuses(IllegalArgumentException.class, () -> map.toCodePoint(2));
+        refuses(IndexOutOfBoundsException.class, () -> map.toUtf16(6));
+        refuses(IndexOutOfBoundsException.class, () -> map.toCodePoint(7));
+
+        Node emoji = new Node("emoji", 1, 2, M3ASTIndex.NAMED | M3ASTIndex.TOKEN,
+                new Node[0], new String[0], null, 1, 2);
+        Node han = new Node("identifier", 2, 3, M3ASTIndex.NAMED | M3ASTIndex.TOKEN);
+        Node root = new Node("unit", 0, 5, M3ASTIndex.NAMED,
+                new Node[] {emoji, han}, new String[] {"name", "name"}, null, 0, 5);
+        M3ASTInterop.SourceStamp stamp = new M3ASTInterop.SourceStamp(
+                uri, source.utf16Sha256(), null);
+        M3ASTIndex index = project(source, root, stamp,
+                M3ASTInterop.Coordinates.CODE_POINTS, new M3ASTIngress.Limits(32, 8, 3));
+        equal(3, index.nodeCount());
+        equal(1, index.start(1));
+        equal(3, index.end(1));
+        equal("😺", index.sourceText(1));
+        equal("😺", index.fullSourceText(1));
+        equal(3, index.start(2));
+        equal(4, index.end(2));
+        equal("中", index.sourceText(2));
+        equal(contents, index.fullSourceText(0));
+        ok(index.hasExactFullRange(0));
+        ok(index.hasExactRange(2));
+
+        M3ASTIndex unknown = project(source, root, null,
+                M3ASTInterop.Coordinates.CODE_POINTS, new M3ASTIngress.Limits(32, 8, 3));
+        ok(!unknown.hasExactRange(1));
+        ok(!unknown.hasExactFullRange(0));
+        refuses(IllegalArgumentException.class, () -> project(source, root,
+                new M3ASTInterop.SourceStamp(uri, "stale-source", null),
+                M3ASTInterop.Coordinates.CODE_POINTS, new M3ASTIngress.Limits(32, 8, 3)));
+
+        Node wrong = new Node("unit", 0, 6, M3ASTIndex.NAMED);
+        refuses(IndexOutOfBoundsException.class, () -> project(source, wrong, stamp,
+                M3ASTInterop.Coordinates.CODE_POINTS, new M3ASTIngress.Limits(32, 8, 3)));
+        refuses(IllegalArgumentException.class,
+                () -> M3File.of(uri, "high\ud83d").codePointOffsets());
+        refuses(IllegalArgumentException.class,
+                () -> M3File.of(uri, "low\ude3a").codePointOffsets());
+        M3File.CodePointOffsets ascii = M3File.of(uri, "source\n").codePointOffsets();
+        equal(0, ascii.supplementaryCount());
+        equal(0L, ascii.primitiveBytes());
+        equal(7, ascii.toUtf16(7));
+
+        Random random = new Random(0xC0DEF0A2026L);
+        String[] pieces = {"x", "é", "中", "\r\n", "\n", "😺", "😀", "👩"};
+        for (int sample = 0; sample < 600; sample++) {
+            StringBuilder value = new StringBuilder();
+            int count = random.nextInt(100);
+            for (int i = 0; i < count; i++) value.append(pieces[random.nextInt(pieces.length)]);
+            String text = value.toString();
+            M3File.CodePointOffsets offsets = M3File.of(uri, text).codePointOffsets();
+            int scalarCount = text.codePointCount(0, text.length());
+            equal(scalarCount, offsets.codePointLength());
+            equal(text.length(), offsets.utf16Length());
+            for (int at = 0; at <= scalarCount; at++) {
+                int utf16 = text.offsetByCodePoints(0, at);
+                equal(utf16, offsets.toUtf16(at));
+                equal(at, offsets.toCodePoint(utf16));
+            }
+        }
+    }
+
+    /** Strict, bounded original-byte capture with no second physical source read. */
+    private static void onePassObservedUtf8Contracts() throws IOException {
+        URI uri = URI.create("memory:/physical-observation.java");
+        String[] corpus = {"", "ascii\r\n", "A😺中B\r\n", "\ufeffBOM", "\0", "👩🏽‍💻"};
+        Random random = new Random(0x20261026ACE0L);
+        String[] parts = {"A", "中", "😺", "\r\n", "\0", "é", "👩", "\ufeff", "\n"};
+        for (int sample = 0; sample < 300; sample++) {
+            String sourceText;
+            if (sample < corpus.length) sourceText = corpus[sample];
+            else {
+                StringBuilder builder = new StringBuilder();
+                for (int i = random.nextInt(140); i > 0; i--) {
+                    builder.append(parts[random.nextInt(parts.length)]);
+                }
+                sourceText = builder.toString();
+            }
+            byte[] bytes = sourceText.getBytes(StandardCharsets.UTF_8);
+            M3File expected = M3File.read(uri, new ByteArrayInputStream(bytes),
+                    StandardCharsets.UTF_8, bytes.length);
+            long[] digest = digestWords(bytes);
+            for (int stride : new int[] {1, 2, 3, 7, 8192}) {
+                M3File.Utf8Capture capture = M3File.captureObservedUtf8(uri, bytes.length);
+                for (int at = 0; at < bytes.length; at += stride) {
+                    int length = Math.min(stride, bytes.length - at);
+                    byte[] scratch = new byte[length + 2];
+                    System.arraycopy(bytes, at, scratch, 1, length);
+                    capture.onBytes(scratch, 1, length);
+                    // Physical ByteObserver reuses its original scratch on the next read.
+                    Arrays.fill(scratch, (byte) 0x7f);
+                }
+                M3File observed = capture.seal(bytes.length,
+                        digest[0], digest[1], digest[2], digest[3]);
+                equal(expected.uri(), observed.uri());
+                equal(expected.text(), observed.text());
+                equal(expected.utf16Sha256(), observed.utf16Sha256());
+                equal(expected.byteSha256(), observed.byteSha256());
+                equal(expected.utf8Offsets().orElseThrow().byteLength(),
+                        observed.utf8Offsets().orElseThrow().byteLength());
+                equal(expected.codePointOffsets().codePointLength(),
+                        observed.codePointOffsets().codePointLength());
+                refuses(IllegalStateException.class, () -> {
+                    try { capture.onBytes(bytes, 0, bytes.length); }
+                    catch (IOException impossible) { throw new AssertionError(impossible); }
+                });
+                refuses(IllegalStateException.class, () -> {
+                    try { capture.seal(bytes.length, digest[0], digest[1], digest[2], digest[3]); }
+                    catch (IOException impossible) { throw new AssertionError(impossible); }
+                });
+            }
+        }
+
+        for (byte[] malformed : new byte[][] {
+                {(byte) 0x80}, {(byte) 0xc0, (byte) 0xaf}, {(byte) 0xe2},
+                {(byte) 0xf0, (byte) 0x9f, (byte) 0x98},
+                {(byte) 0xed, (byte) 0xa0, (byte) 0x80},
+                {(byte) 0xf4, (byte) 0x90, (byte) 0x80, (byte) 0x80}}) {
+            M3File.Utf8Capture capture = M3File.captureObservedUtf8(uri, malformed.length);
+            long[] words = digestWords(malformed);
+            refusesIo(IOException.class, () -> {
+                for (byte b : malformed) capture.onBytes(new byte[] {b}, 0, 1);
+                capture.seal(malformed.length, words[0], words[1], words[2], words[3]);
+            });
+            refuses(IllegalStateException.class, () -> {
+                try { capture.onBytes(new byte[] {1}, 0, 1); }
+                catch (IOException impossible) { throw new AssertionError(impossible); }
+            });
+        }
+
+        // Differential rejection oracle: the original strict JDK UTF-8
+        // decoder decides which arbitrary byte sequences may be admitted.
+        Random binary = new Random(0x4D3346494C45L);
+        for (int sample = 0; sample < 1800; sample++) {
+            byte[] bytes = new byte[binary.nextInt(20)];
+            binary.nextBytes(bytes);
+            M3File expected = null;
+            try {
+                expected = M3File.read(uri, new ByteArrayInputStream(bytes),
+                        StandardCharsets.UTF_8, bytes.length);
+            } catch (IOException malformedExpected) {
+                // The baseline reader is the authoritative strict decoder.
+            }
+            long[] digest = digestWords(bytes);
+            for (int stride : new int[] {1, 2, 23}) {
+                M3File.Utf8Capture capture = M3File.captureObservedUtf8(uri, bytes.length);
+                M3File observed = null;
+                try {
+                    for (int at = 0; at < bytes.length; at += stride) {
+                        capture.onBytes(bytes, at, Math.min(stride, bytes.length - at));
+                    }
+                    observed = capture.seal(bytes.length,
+                            digest[0], digest[1], digest[2], digest[3]);
+                } catch (IOException malformedObserved) {
+                    // Rejection must agree with the canonical JDK decoder.
+                }
+                equal(expected == null, observed == null);
+                if (expected != null) {
+                    equal(expected.text(), observed.text());
+                    equal(expected.byteSha256(), observed.byteSha256());
+                }
+            }
+        }
+
+        byte[] ascii = "size".getBytes(StandardCharsets.UTF_8);
+        long[] words = digestWords(ascii);
+        M3File.Utf8Capture mismatched = M3File.captureObservedUtf8(uri, ascii.length);
+        mismatched.onBytes(ascii, 0, ascii.length);
+        refusesIo(IOException.class,
+                () -> mismatched.seal(ascii.length - 1L, words[0], words[1], words[2], words[3]));
+        refuses(IllegalStateException.class, () -> {
+            try { mismatched.seal(0, words[0], words[1], words[2], words[3]); }
+            catch (IOException impossible) { throw new AssertionError(impossible); }
+        });
+        M3File.Utf8Capture over = M3File.captureObservedUtf8(uri, 1);
+        refusesIo(IOException.class, () -> over.onBytes(ascii, 0, ascii.length));
+        refuses(IllegalStateException.class, () -> {
+            try { over.onBytes(ascii, 0, 0); }
+            catch (IOException impossible) { throw new AssertionError(impossible); }
+        });
+        refuses(IllegalArgumentException.class, () -> M3File.captureObservedUtf8(uri, -1));
+    }
+
+    public static void main(String[] args) throws IOException {
+        byteAndIndexContracts();
+        randomizedOffsets();
+        sourceDeltaContracts();
+        boundedParentEdgeCursorContracts();
+        fieldListPositionContracts();
+        sourceLineIndexContracts();
+        fullSpanContracts();
+        originalUtf8ByteChangeContracts();
+        originalUtf8PointEditContracts();
+        originalCodePointCoordinateContracts();
+        onePassObservedUtf8Contracts();
+        System.out.println("M3_AST_INTEROP_PASS checks=" + checks);
+    }
+}

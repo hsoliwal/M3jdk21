@@ -1,0 +1,15 @@
+{
+  "sdk_tests": 6,
+  "sdk_failures": 0,
+  "source_context_seals": 10,
+  "whole_owner": "PASS; original and actual SDK output compile with actual strict command; defined symbols/addresses identical; one byte5to6",
+  "actual_exploded_image_modes": [
+    "normal",
+    "int"
+  ],
+  "actual_exploded_image_fixture": "PASS; no runtime patch",
+  "full_image_packaging_and_CDS": "separate parent integration gate",
+  "baseline_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "candidate_sha256": "c465bc54b703617bad3ab70c25041c3182363afb95b82ea9640f20e29f032b0c",
+  "recovery_evidence": "All included proof logs rerun19October2026; no unavailable historical receipt asserted fresh"
+}

@@ -1,0 +1,10 @@
+gate	status	proof_or_missing
+ORIGINAL_NATIVE_DIRECTORY_PREIMAGE	PASS	M3DirectoryTable exact donor Git blob d5fd2188ec1feb751d0501051ec52f3cdd37692e
+ORIGINAL_POSTIMAGE	PASS	M3DirectoryTable and 2 owning tests exact Synexia recipe templates
+SCOPED_JAVA21_UTF16	PASS_ISOLATED	779223 char-slice/binary-prefix oracle checks on equivalent standalone Java21 implementation
+OWNING_M3FS_JUNIT	DEFINED_NOT_RUN	M3DirectoryNameIndexContract and JUnit5 wrapper committed
+OPENREWRITE_JAVA_RECIPE	DEFINED_NOT_RUN	M3HashPinnedJavaSnapshotRecipe fixed-point and stale-source gate
+NATIVE_M3FS_SQLITE_JNI	NOT_RUN	Original M3FS JNI SQLite/CTest, module compile
+FULL_M3JDK21_HOTSPOT	NOT_RUN	Source-built JDK21, JMOD, jtreg and supported OS/ABI
+MAVEN_GRADLE_IDE_INTEGRATION	NOT_RUN	Project/source-root consumers and policy boundaries
+PERFORMANCE	NOT_MEASURED	Sorted-index build/cached-prefix break-even and native/heap cost

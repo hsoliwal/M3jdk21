@@ -1,0 +1,78 @@
+{
+  "schema": "m3-jcc-mapping-template-self-review/4",
+  "status": "PASS_PREPARED_NOT_EXECUTED",
+  "receiving_commit": "09075810b55229662329a158923287e8a7118f86",
+  "receiving_root_tree": "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52",
+  "receiving_input_epoch_sha256": "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70",
+  "authored_test_methods": [
+    "manifestAndPlanSealExactlyFourCurrentImagesAndAllExistingGuards",
+    "retainedOwnerProducesExactlyFourOutputsAndPreservesPlainTextIdentity",
+    "freshPostimageInputsAreFixedAndEachMixedInputConvergesOnce",
+    "namedEntryAndSerializedOwnerProduceTheSameFourImages",
+    "everyMissingCurrentTargetRefusesWithoutPartialResults",
+    "everyDriftedCurrentTargetRefusesWithoutPartialResults",
+    "everyDuplicateTargetRefusesEvenWhenBothImagesAreAdmitted",
+    "everyAdmittedImageSwapAfterScanRefuses",
+    "ordered55RecordsAndEveryGlobalPolicyAndNonJccRecordArePreserved",
+    "current14LaboratoryAnd6JniOwnersMatchActualReadbacksAndRemainBlocked",
+    "everyHistoricalSourceTargetAndBindingEpochSurvivesUnchanged",
+    "coverageAccountsForEveryActualRootObjectAndAllPomDeclarations",
+    "bindingsAndEarlierProsePreserveGateRequirementsWithoutAcceptancePromotion"
+  ],
+  "junit_tests_executed": 0,
+  "unresolved_tokens": [
+    "ACTUAL_SOURCE_COMMIT",
+    "ACTUAL_SOURCE_ROOT_TREE",
+    "ACTUAL_SOURCE_INPUT_SHA256",
+    "ACTUAL_PUBLICATION_SUMMARY_SHA256",
+    "ACTUAL_MAPPING_MANIFEST_SHA256",
+    "ACTUAL_MAPPING_PLAN_SHA256",
+    "ACTUAL_MAPPING_PLAN_FILE_SHA256",
+    "ACTUAL_AFTER_00_SHA256",
+    "ACTUAL_AFTER_01_SHA256",
+    "ACTUAL_AFTER_02_SHA256",
+    "ACTUAL_AFTER_03_SHA256"
+  ],
+  "renderer_fixture_refusal": {
+    "command": [
+      "python3",
+      "-B",
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/java-template/render_template.py",
+      "--audit-root",
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit",
+      "--source-input",
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/verification-v01/fixture-source-input.json",
+      "--mapping-resources",
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/verification-v01/fixture-output",
+      "--output",
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/java-template/self-review-v01/forbidden-fixture-output"
+    ],
+    "exit_code": 1,
+    "output_created": false,
+    "diagnostic": "mapping_template_binder.Refusal: fixture inputs are unpublishable"
+  },
+  "source_owner_counts": {
+    "laboratory": 14,
+    "jni": 6,
+    "total": 20
+  },
+  "separate_source_build_components": 1,
+  "preservation_counts": {
+    "ordered_records": 55,
+    "non_jcc_records": 53,
+    "top_level_mappings": 34,
+    "gates": 20
+  },
+  "new_global_nodes_preserved": [
+    "donor_artifact_policy",
+    "family_name_mapping",
+    "porting_invariant"
+  ],
+  "previous_qualified_input_publication_manifest_sha256": "2f816b0f0606257ca0c1746a0a30d54b96562a4b28ba0351429c006c6baf4d92",
+  "repository_metadata_filenames": [
+    "source-publication-input-v04.json",
+    "mapping-input-epoch-v04.json"
+  ],
+  "local_binder_filenames_unchanged": true,
+  "scope": "Compile-only and renderer refusal. Same13behavioral/negative/metadata controls, exactlatest55/53/34/20 oracle, allnewglobalnodes, fullpriorC0qualifiedinput preserved. Actualsource pins render only from verifiedpacket; noJUnit execution claimed."
+}

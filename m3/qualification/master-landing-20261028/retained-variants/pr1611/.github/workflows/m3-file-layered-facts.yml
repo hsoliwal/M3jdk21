@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3File layered fact receipts
+
+on:
+  pull_request:
+    paths:
+      - 'm3/file/src/main/java/com/m3/file/M3FileFact*.java'
+      - 'm3/file/src/main/java/com/m3/file/M3FileIndexed*.java'
+      - 'm3/file/src/main/java/com/m3/file/M3File.java'
+      - 'm3/file/src/test/java/com/m3/file/M3FileStreamTest.java'
+      - 'm3/file/qualification/layered-facts-20261020/**'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/file/M3FileLayeredFactsReceiverRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-file-layered-facts-20261020/**'
+      - '.github/workflows/m3-file-layered-facts.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  layered-facts:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Verify exact recipe receipts
+        run: python3 m3/file/qualification/layered-facts-20261020/verify.py
+
+      - name: Strict M3File Java contracts
+        run: mvn -B -ntp -f m3/file/pom.xml clean test

@@ -1,0 +1,17 @@
+gate	status	evidence_or_remaining_work
+NATIVE_C_PREIMAGE	EXACT_GIT_MATCH	Original JNI C source 7a61719ada663bf8918724debeee270ac34a1dc0
+NATIVE_JAVA_PREIMAGE	EXACT_GIT_MATCH	Original M3FsNative source f6d07841c9623a7141cd219d64179758f18fb88b
+M3FS_MASTER_FORWARD	EXACT_SOURCE_MATCH	New original M3FS.java 49.6KiB preimage, only statBatch inserted
+NEW_PACKED_ROW_OWNER	SOURCE_RECEIVED	M3FsStatBatch and owning JUnit exact donor postimages
+FIVE_OUTPUT_GIT_BLOBS	PASS	Exact source readbacks for all five target files
+ORIGINAL_SQLITE_STATE	PRESERVED_SOURCE	No separate native SQLite database or JNI handle owner
+BOUND_4096_PATHS	SOURCE_ADMITTED	Java and JNI both bound array rows; 32-row native stack slab
+DONOR_JAVA21	HISTORICAL_SCOPED	318 isolated assertions from #1740, not rerun in combined source
+DONOR_NATIVE_JNI	HISTORICAL_MOCK	Isolated C11 check and mock -Xcheck:jni; not actual SQLite
+CANONICAL_OPENREWRITE	NOT_RUN	Maven Recipe.run, fixed point, drift refusal and byte postimages
+ORIGINAL_M3FS_JUNIT	NOT_RUN	mvn -B -f m3/fs/pom.xml verify with actual native SQLite
+JNI_ABI_EXPORTS	NOT_RUN	javac -h, actual generated header, JNI C17 compile, symbol check
+M3JDK21_HOTSPOT	NOT_RUN	make images and jtreg/JCK/GC
+PLATFORM_MATRIX	NOT_RUN	Windows/macOS/Linux/Android and native provider semantics
+CPU_HEAP_NATIVE	NOT_MEASURED	JNI calls saved may not beat Java for tiny path counts
+STAT_RESULT_ORIGINAL_JAVA21_SCOPED	PASS_3070994	Original M3FsStatBatch Git blob, standalone Java21 fuzz oracle with only M3FS.Kind/Stat API-shaped stub; Synexia #13073 verification/README.md

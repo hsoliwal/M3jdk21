@@ -1,0 +1,56 @@
+{
+  "schema": "M3_EXACT_TASK_INPUTS_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "recipe": "com.synexia.m3.StringPoolIndex20261018",
+  "files": [
+    {
+      "path": ".github/workflows/mindex-string-backing.yml",
+      "before": "2f32f2028229c8a6071ac6f3be9f1e9d607d302f32683921c980f188c7538c9c",
+      "after": "5e260879e483d1a2a78403701646ddfe786f983cd8a19edaf1f1f76eaf0cd426",
+      "bytes": 11192
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-string-pool-index-20261018.json",
+      "before": "ABSENT",
+      "after": "e324d5f44b2026df2fa206c888066964b601cfee5627f99ed385d0de624e2a06",
+      "bytes": 1840
+    },
+    {
+      "path": "m3/qualification/string-index-reverse-20261018/pool/CONTRACT.md",
+      "before": "ABSENT",
+      "after": "d4b5600c220ce9b43a8c542bc4a697675200fdb386d43a500412bb2405e5d710",
+      "bytes": 3792
+    },
+    {
+      "path": "m3/runtime-integration/check-m3string-invariants.py",
+      "before": "fa88e6ee2b5903802a9463bec14133feb74a730009b08e722924064052afb10e",
+      "after": "1a52bde12079be573553da3bb8912c8052cc162c4cc86737a0fcd935091bbe0e",
+      "bytes": 96952
+    },
+    {
+      "path": "m3/runtime-integration/test_string_pool_precompute.py",
+      "before": "ABSENT",
+      "after": "d8c37f937216e9905062638d91ad95be60aee140ff766ed75ab601d4fae2707c",
+      "bytes": 6482
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPool.java",
+      "before": "b58c82047f795807ff32229146c370c9e596eff19942a92cd0128ce4987d20ca",
+      "after": "aa9d894268d5dd3aa076f36a5e301a773106a0f84ca05163d4da2eb7594e4039",
+      "bytes": 72923
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringFrozenLexiconIndexTest.java",
+      "before": "ABSENT",
+      "after": "1677e00f038889ec9d608383e96eebdad898735367441be66bab487a5e071b42",
+      "bytes": 16889
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringPoolMetadataBoundsTest.java",
+      "before": "ABSENT",
+      "after": "21523bf18d83f7f94f4941ff4d039814eb09c4d89c91df3b27b20cb22099481b",
+      "bytes": 5542
+    }
+  ]
+}

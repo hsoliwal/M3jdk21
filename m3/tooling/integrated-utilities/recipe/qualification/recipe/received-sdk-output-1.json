@@ -1,0 +1,211 @@
+{
+  "scope": "SERIAL_RECEIVE_OF_ACTUAL_OPENREWRITE_RESULTS",
+  "baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "manifest_sha256": "a7ea777197248e5430680dd599004ca815b881890bf7a746cb156ad79950301d",
+  "sdk_receipt_sha256": "cb0b1c569a13a30f04ee3ad10b0e5694cc9d01960b24b1080869cc4a3b484dd8",
+  "unchanged_source_paths": 450,
+  "materialized_unchanged_tracked_paths": 376,
+  "received_count": 33,
+  "all_postimages_match": true,
+  "generated_source_manual_edits": false,
+  "received": [
+    {
+      "path": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
+      "before": "ABSENT",
+      "after": "f123ae356ffdd5df1523205dc5f1f48e6daf461b8a6f908a9870e348e80f5e7f",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/compatibility/check_integrated_utility_coverage.py",
+      "before": "ABSENT",
+      "after": "75a089b2ef4bce9beb75f88869c4f613c530df528c872af33df9e8440914d9c1",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/compatibility/test_integrated_utility_coverage.py",
+      "before": "ABSENT",
+      "after": "e783a54fcd7430755874e55dd2af19530d217084a76d61d845ab14f3c1069f5f",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md",
+      "before": "ABSENT",
+      "after": "301320272695a993769df1164709d2c5fbe469e45543139ecbbece8bf824fbf2",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
+      "before": "ABSENT",
+      "after": "0271ca2761cb871091fb22c5d7989ff11822ff2deb65d67d2c58080878948ff5",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json",
+      "before": "ABSENT",
+      "after": "7ec04178398539f8f27459d0d754a294af275f5469fcfa51db6ce58d872d47b1",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+      "after": "2bb378d4e2af9c0bf62482182acdf53f1919abe16e6146195d38d9bcfc6ab9d7",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/FOSS_REUSE_DECISION.json",
+      "before": "ABSENT",
+      "after": "9659689fab63ae642eb4b789814f6402108c9d24a9f1b48bf924207992fd6db1",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/README.md",
+      "before": "ABSENT",
+      "after": "dc79aace9491a7ab1755d52076fdc08844109388405fe10802ba5cb85cbb5287",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/behavioral-atoms.json",
+      "before": "ABSENT",
+      "after": "5e38a593c69884ae4553b4ee40eed774b517c9a48df7a118ef6dbd0514cf4007",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/candidate-receiver.json",
+      "before": "ABSENT",
+      "after": "0d334e13765b476d851f7b8585f9157dda4e4d3150eb460eec5eb13dcd0d0025",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/counterexamples.json",
+      "before": "ABSENT",
+      "after": "b481d09450f49bf14dbc40d5bec89c9d6924a5e1893e614f7216e8ef5959c077",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/public-api.json",
+      "before": "ABSENT",
+      "after": "aa9eaf8e3e92a1211cff849048169f35e88dd9ebca59d7714d54be6e7f61ad19",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/verify.py",
+      "before": "ABSENT",
+      "after": "89540bb2b2deff0d3d8a7f371f1874fb65c96ee397478f1e0254a16eea889726",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-utilities/README.md",
+      "before": "ABSENT",
+      "after": "cd8b7985fed714c09893305e585a39b4272e0e54c0fc2b78465a3a1a530d2db1",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-utilities/behavioral-atoms.json",
+      "before": "ABSENT",
+      "after": "a3015f30c325ed9e40e73f5416d48616e5411e32db64b0e813796fe5273ae0d8",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-utilities/contract-catalogue.json",
+      "before": "ABSENT",
+      "after": "d36b88fc08ce728285c59f1826211be0a9154df2dbf8aedcd8a9a5875150d4b8",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-utilities/verify.py",
+      "before": "ABSENT",
+      "after": "b85e062ff6a5d6b227cbd0940dff75737ac52120800c28f16c8273191a324991",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "src/java.base/share/classes/java/io/IOUtils.java",
+      "before": "ABSENT",
+      "after": "d93e16b7e1c594039ff479b4d5a2ef973e55596b1df574608cf108692edd8623",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Reflection.java",
+      "before": "ABSENT",
+      "after": "54b08b0396cd8e749093ae55f74eb5db1b5844605cc5610705471275b5b92883",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Collections.java",
+      "before": "7dcb1bde18923274518b747ad4e65e3019046ca7742714ead678c615d99499ba",
+      "after": "4227019cc64ce600908eace9425718d8fe49ec4f4028a638cb70cd17a2f2917a",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/M3CollectionMasks.java",
+      "before": "ABSENT",
+      "after": "1337bb1e4c03c974bd4e335f7201c19186ab345548479ba29cebe639310c4017",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/M3CollectionViews.java",
+      "before": "ABSENT",
+      "after": "3818e50c23166b20c0516b4a6f9cb3c12ed9fe7f73ca1d55c38f616a5c4ac4f7",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "before": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
+      "after": "b62532d9b0c77bc5edc07ea87daf58706e68ce4084ec228919d5cf0c28847270",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "before": "8b385ad8883b73423c90a2c3132700f3669dfe145916a8c38a4a93702ff379de",
+      "after": "d0726fb7f8615fed0d3c9747f62750569506242b1cc32c806bae0f3c64816355",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3CollectionMasks.c",
+      "before": "ABSENT",
+      "after": "7ecac17c362d2bce127b08c930b4beb263d06bd79439fcffcdcc5801ca7718a7",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "test/jdk/java/io/IOUtils/IOUtilsTest.java",
+      "before": "ABSENT",
+      "after": "93642831a11cf08a3b157aebe82bce2f91613369e2bcbc778fd5def1826cf018",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "test/jdk/java/lang/reflect/Reflection/ReflectionTest.java",
+      "before": "ABSENT",
+      "after": "4243e53aa979ecc9ff7ff453293dbcd20fde28bdb60bc955674d9967d740aaa8",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "test/jdk/java/util/Collections/M3CollectionMasksBenchmark.java",
+      "before": "ABSENT",
+      "after": "6e1a76800b296c96a9dd342998d76ae7c014389be394effc8a059302e6811e92",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "test/jdk/java/util/Collections/M3CollectionMasksTest.java",
+      "before": "ABSENT",
+      "after": "09283aa9f8e6f184f9f2e50f2967be6fc47654b591d3de0908751d84d622ce17",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "test/jdk/java/util/Collections/M3CollectionViewsBenchmark.java",
+      "before": "ABSENT",
+      "after": "1ac002cd6862ffbdd1574ec7afc2270c0298e20bf47916ffe3a54e2d53bb742a",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "test/jdk/java/util/Collections/M3CollectionViewsTest.java",
+      "before": "ABSENT",
+      "after": "7a245f98feee1590a6c01cec79b779441c85a72a30838d9bbec949024fed1878",
+      "source": "actual SDK Result bytes"
+    },
+    {
+      "path": "test/jdk/java/util/stream/Streams/StreamsTest.java",
+      "before": "ABSENT",
+      "after": "1e2ff81d43c458e62cf5d3fae03c963be525db7e9948cc4d5e3fe910a98ae967",
+      "source": "actual SDK Result bytes"
+    }
+  ]
+}

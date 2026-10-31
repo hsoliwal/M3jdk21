@@ -1,0 +1,515 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-19T01:40:13Z",
+  "donor_repository": "hsoliwal/com.synexia",
+  "donor_commit": "289e32f130c9c8e4a1cf0edc1066327d699393bf",
+  "rows": 50000,
+  "warmups": 3,
+  "measured_repetitions": 3,
+  "jvm_flags": [
+    "-XX:+UseSerialGC",
+    "-Xms32m",
+    "-Xmx512m",
+    "-XX:NativeMemoryTracking=summary",
+    "-XX:+UnlockDiagnosticVMOptions",
+    "-XX:+PrintNMTStatistics"
+  ],
+  "os": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "cpu_count": 9,
+  "jdk_release": "IMPLEMENTOR=\"Eclipse Adoptium\"\nIMPLEMENTOR_VERSION=\"Temurin-21.0.12.1+1\"\nJAVA_RUNTIME_VERSION=\"21.0.12.1+1-LTS\"\nJAVA_VERSION=\"21.0.12.1\"\nJAVA_VERSION_DATE=\"2026-08-18\"\nLIBC=\"gnu\"\nMODULES=\"java.base java.compiler java.datatransfer java.xml java.prefs java.desktop java.instrument java.logging java.management java.security.sasl java.naming java.rmi java.management.rmi java.net.http java.scripting java.security.jgss java.transaction.xa java.sql java.sql.rowset java.xml.crypto java.se java.smartcardio jdk.accessibility jdk.internal.jvmstat jdk.attach jdk.charsets jdk.internal.opt jdk.zipfs jdk.compiler jdk.crypto.ec jdk.crypto.cryptoki jdk.dynalink jdk.internal.ed jdk.editpad jdk.hotspot.agent jdk.httpserver jdk.incubator.vector jdk.internal.le jdk.internal.vm.ci jdk.internal.vm.compiler jdk.internal.vm.compiler.management jdk.jartool jdk.javadoc jdk.jcmd jdk.management jdk.management.agent jdk.jconsole jdk.jdeps jdk.jdwp.agent jdk.jdi jdk.jfr jdk.jlink jdk.jpackage jdk.jshell jdk.jsobject jdk.jstatd jdk.localedata jdk.management.jfr jdk.naming.dns jdk.naming.rmi jdk.net jdk.nio.mapmode jdk.random jdk.sctp jdk.security.auth jdk.security.jgss jdk.unsupported jdk.unsupported.desktop jdk.xml.dom\"\nOS_ARCH=\"x86_64\"\nOS_NAME=\"Linux\"\nSOURCE=\".:git:1c417fbfc2f7\"\nBUILD_SOURCE=\"git:e6ba7dec3d07654074559310376a3ae89da5f4ac\"\nBUILD_SOURCE_REPO=\"https://github.com/adoptium/temurin-build.git\"\nSOURCE_REPO=\"https://github.com/adoptium/jdk21u.git\"\nFULL_VERSION=\"21.0.12.1+1-LTS\"\nSEMANTIC_VERSION=\"21.0.12.1+1\"\nBUILD_INFO=\"OS: Linux Version: 6.8.0-1064-azure\"\nJVM_VARIANT=\"Hotspot\"\nJVM_VERSION=\"21.0.12.1+1-LTS\"\nIMAGE_TYPE=\"JDK\"\n",
+  "java_sha256": "2a207f5e7d075afa01d97f8048389a64432a44c4a5af0f5e77d6e286ec5f401d",
+  "javac_sha256": "55859b80e7a9c4c4736be19ad3addeb35112ca6d17a30c4e0e116afc0a499bdb",
+  "probe_sources": [
+    {
+      "path": "/tmp/m3fs-java-work/postimage/m3/fs/verification/metadata-resource-probe/MetadataResourceProbe.java",
+      "bytes": 7336,
+      "sha256": "de55a67c78372b71f5bf94761aaf3c0d858585670ab71040e5e90138fe55c1b6",
+      "git_blob": "f989716e36ec5ec7bf79fbc9a1532bef2c727d10"
+    },
+    {
+      "path": "/tmp/m3fs-java-work/postimage/m3/fs/verification/metadata-resource-probe/run_probe.py",
+      "bytes": 9473,
+      "sha256": "f0f18a39e9103c0a9aee8377b824390c8025b034f717369f76a279f752c32971",
+      "git_blob": "a323a1a4e228242c9e2f505d1d24e8feb6cf50fd"
+    }
+  ],
+  "limitations": [
+    "Finite construction workload only; no timing assertion and no general performance guarantee.",
+    "Each mode runs in one fresh, separate JVM; three warmups and three measured constructions.",
+    "The same deterministic prepared input shape is retained for all samples in each mode.",
+    "Input map, strings and public ID objects are prepared outside measured intervals and kept reachable.",
+    "Heap delta is incremental owner retention after three requested full GCs, against that prepared input.",
+    "Heap used sums heap-pool collection-usage snapshots; separate live Runtime heap counters are also recorded.",
+    "Donor can share input ID objects; receiver copies IDs into packed bytes. This is part of this workload.",
+    "CPU and allocation cover the current calling thread including reflective constructor invocation, not all JVM threads.",
+    "GC, JIT, OS scheduling and shared-host noise affect results; no CPU affinity was imposed.",
+    "RSS and peak RSS describe the complete process, including heap, code, libraries and native bookkeeping.",
+    "NMT committed/reserved virtual memory is not resident native memory and does not isolate M3FS allocations.",
+    "No native filesystem operations, JDBC, Eclipse workload or API enumeration is measured."
+  ],
+  "modes": {
+    "donor": {
+      "samples": [
+        {
+          "repetition": 1,
+          "rows": 50000,
+          "constructor_cpu_ns": 178364245,
+          "constructor_allocated_bytes": 51653824,
+          "constructor_wall_ns": 202637475,
+          "heap_baseline_bytes": 11708904,
+          "heap_retained_bytes": 21104736,
+          "heap_delta_bytes": 9395832,
+          "vm_rss_kib": 127720,
+          "vm_hwm_kib": 127720,
+          "rss_anon_kib": 106804,
+          "rss_file_kib": 20916,
+          "heap_live_baseline_bytes": 12030248,
+          "heap_live_retained_bytes": 21426176
+        },
+        {
+          "repetition": 2,
+          "rows": 50000,
+          "constructor_cpu_ns": 367775049,
+          "constructor_allocated_bytes": 51653824,
+          "constructor_wall_ns": 419603202,
+          "heap_baseline_bytes": 12982592,
+          "heap_retained_bytes": 21199040,
+          "heap_delta_bytes": 8216448,
+          "vm_rss_kib": 127996,
+          "vm_hwm_kib": 127996,
+          "rss_anon_kib": 107080,
+          "rss_file_kib": 20916,
+          "heap_live_baseline_bytes": 13304032,
+          "heap_live_retained_bytes": 21520504
+        },
+        {
+          "repetition": 3,
+          "rows": 50000,
+          "constructor_cpu_ns": 137125599,
+          "constructor_allocated_bytes": 51653824,
+          "constructor_wall_ns": 165108834,
+          "heap_baseline_bytes": 11803520,
+          "heap_retained_bytes": 21199040,
+          "heap_delta_bytes": 9395520,
+          "vm_rss_kib": 127272,
+          "vm_hwm_kib": 127272,
+          "rss_anon_kib": 106356,
+          "rss_file_kib": 20916,
+          "heap_live_baseline_bytes": 12122392,
+          "heap_live_retained_bytes": 21519408
+        }
+      ],
+      "canonical": [
+        {
+          "repetition": 1,
+          "bytes": 3451572,
+          "sha256": "9ba5076f50d1643150a4ab24c9fea08d10cecb448850edce4facafb4383a694f"
+        },
+        {
+          "repetition": 2,
+          "bytes": 3451572,
+          "sha256": "9ba5076f50d1643150a4ab24c9fea08d10cecb448850edce4facafb4383a694f"
+        },
+        {
+          "repetition": 3,
+          "bytes": 3451572,
+          "sha256": "9ba5076f50d1643150a4ab24c9fea08d10cecb448850edce4facafb4383a694f"
+        }
+      ],
+      "environment": {
+        "package": "com.synexia.indexstring.fs",
+        "java_runtime_version": "21.0.12.1+1-LTS",
+        "java_vm_name": "OpenJDK 64-Bit Server VM",
+        "jvm_arguments": "[-XX:+UseSerialGC, -Xms32m, -Xmx512m, -XX:NativeMemoryTracking=summary, -XX:+UnlockDiagnosticVMOptions, -XX:+PrintNMTStatistics]",
+        "heap_used_source": "Sum of heap MemoryPoolMXBean collection-usage snapshots after GC"
+      },
+      "nmt_total_lines": [
+        "Total: reserved=1983398804, committed=106382228",
+        "malloc: 21934996 #11417",
+        "mmap:   reserved=1961463808, committed=84447232"
+      ],
+      "input_rows": 50000,
+      "input_sha256": "52565238248a3ad330bf0a7c8ab801537cfee8adc4d48a5aadad036d7654c4ff",
+      "summary": {
+        "constructor_cpu_ns": {
+          "minimum": 137125599,
+          "median": 178364245,
+          "maximum": 367775049
+        },
+        "constructor_allocated_bytes": {
+          "minimum": 51653824,
+          "median": 51653824,
+          "maximum": 51653824
+        },
+        "constructor_wall_ns": {
+          "minimum": 165108834,
+          "median": 202637475,
+          "maximum": 419603202
+        },
+        "heap_delta_bytes": {
+          "minimum": 8216448,
+          "median": 9395520,
+          "maximum": 9395832
+        },
+        "vm_rss_kib": {
+          "minimum": 127272,
+          "median": 127720,
+          "maximum": 127996
+        },
+        "vm_hwm_kib": {
+          "minimum": 127272,
+          "median": 127720,
+          "maximum": 127996
+        },
+        "rss_anon_kib": {
+          "minimum": 106356,
+          "median": 106804,
+          "maximum": 107080
+        },
+        "rss_file_kib": {
+          "minimum": 20916,
+          "median": 20916,
+          "maximum": 20916
+        }
+      },
+      "sources": [
+        {
+          "path": "/tmp/m3fs-java-work/donor/synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3ContentId.java",
+          "bytes": 2243,
+          "sha256": "c1412090abf49c04fa5cc9b5d457d3809ad4bbac5bb41c45085b6ccaf075d74e",
+          "git_blob": "b8dffdfaf6809e130b7c95ae38c79cb2beb937c6"
+        },
+        {
+          "path": "/tmp/m3fs-java-work/donor/synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3GenerationRoot.java",
+          "bytes": 11634,
+          "sha256": "6cbda1349581259191fbaef5ffd0afb5b12bc126ccd447df8ad9934264240a6b",
+          "git_blob": "394ef480d165d9c48b5e4f6d9ca6df467147e6c4"
+        }
+      ],
+      "classes": [
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/donor/MetadataResourceProbe.class",
+          "bytes": 9500,
+          "sha256": "4105301e75a84593025708323612c76549ba46a4ed0e76a94d45ab2d34e64f5b",
+          "git_blob": "1342327a260b126d166e2803a48004e4091dee25"
+        },
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/donor/com/synexia/indexstring/fs/M3ContentId.class",
+          "bytes": 2818,
+          "sha256": "29dc989dcc980fe78bad9efc32a1e93d9757481a850ecc614303f0345d105ef9",
+          "git_blob": "d8efaac5356d7e0e8e7eb7a4bf2509424641a2af"
+        },
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/donor/com/synexia/indexstring/fs/M3GenerationRoot$DirectoryEntry.class",
+          "bytes": 2751,
+          "sha256": "0187c780e4e2bbba15e1bb4a711143e62f9e14a080713e37df6bd257b808faa0",
+          "git_blob": "2a599a45a7cd2a02720778675e2598079dcc9798"
+        },
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/donor/com/synexia/indexstring/fs/M3GenerationRoot$DirectoryPage.class",
+          "bytes": 2953,
+          "sha256": "8d9396e2d5a575d28aa2a11b08437788b811ba83bec855f1d420a8d0cb741c04",
+          "git_blob": "969a69bc9dd199423d3852b8a90135cf0a4b5a8b"
+        },
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/donor/com/synexia/indexstring/fs/M3GenerationRoot.class",
+          "bytes": 11093,
+          "sha256": "72f56a7180752a671c072e27b1cfbe4056638579603d9e10712859f13b7e5516",
+          "git_blob": "0f832a0d8c37c0053a821e80af74307464a66840"
+        }
+      ],
+      "compile_command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/donor",
+        "/tmp/m3fs-java-work/postimage/m3/fs/verification/metadata-resource-probe/MetadataResourceProbe.java",
+        "/tmp/m3fs-java-work/donor/synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3ContentId.java",
+        "/tmp/m3fs-java-work/donor/synexia-indexstring/src/main/java/com/synexia/indexstring/fs/M3GenerationRoot.java"
+      ],
+      "run_command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-XX:+UseSerialGC",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:NativeMemoryTracking=summary",
+        "-XX:+UnlockDiagnosticVMOptions",
+        "-XX:+PrintNMTStatistics",
+        "-cp",
+        "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/donor",
+        "MetadataResourceProbe",
+        "com.synexia.indexstring.fs",
+        "50000",
+        "3",
+        "3"
+      ],
+      "process_usage": {
+        "source": "Linux wait4 child-specific resource usage",
+        "exit_code": 0,
+        "user_cpu_seconds": 5.148863,
+        "system_cpu_seconds": 0.275578,
+        "maximum_rss_kib": 127184,
+        "minor_page_faults": 33658,
+        "major_page_faults": 0,
+        "voluntary_context_switches": 1128,
+        "involuntary_context_switches": 196
+      }
+    },
+    "receiver": {
+      "samples": [
+        {
+          "repetition": 1,
+          "rows": 50000,
+          "constructor_cpu_ns": 66877117,
+          "constructor_allocated_bytes": 48653664,
+          "constructor_wall_ns": 91284486,
+          "heap_baseline_bytes": 11709704,
+          "heap_retained_bytes": 20905448,
+          "heap_delta_bytes": 9195744,
+          "vm_rss_kib": 123860,
+          "vm_hwm_kib": 123860,
+          "rss_anon_kib": 102648,
+          "rss_file_kib": 21212,
+          "heap_live_baseline_bytes": 12043336,
+          "heap_live_retained_bytes": 21240432
+        },
+        {
+          "repetition": 2,
+          "rows": 50000,
+          "constructor_cpu_ns": 88678508,
+          "constructor_allocated_bytes": 48653664,
+          "constructor_wall_ns": 99825166,
+          "heap_baseline_bytes": 13648816,
+          "heap_retained_bytes": 20999624,
+          "heap_delta_bytes": 7350808,
+          "vm_rss_kib": 124136,
+          "vm_hwm_kib": 124136,
+          "rss_anon_kib": 102924,
+          "rss_file_kib": 21212,
+          "heap_live_baseline_bytes": 13983800,
+          "heap_live_retained_bytes": 21334976
+        },
+        {
+          "repetition": 3,
+          "rows": 50000,
+          "constructor_cpu_ns": 85615075,
+          "constructor_allocated_bytes": 48653664,
+          "constructor_wall_ns": 100959018,
+          "heap_baseline_bytes": 11804192,
+          "heap_retained_bytes": 20999624,
+          "heap_delta_bytes": 9195432,
+          "vm_rss_kib": 123492,
+          "vm_hwm_kib": 123492,
+          "rss_anon_kib": 102280,
+          "rss_file_kib": 21212,
+          "heap_live_baseline_bytes": 12129184,
+          "heap_live_retained_bytes": 21324848
+        }
+      ],
+      "canonical": [
+        {
+          "repetition": 1,
+          "bytes": 3451572,
+          "sha256": "9ba5076f50d1643150a4ab24c9fea08d10cecb448850edce4facafb4383a694f"
+        },
+        {
+          "repetition": 2,
+          "bytes": 3451572,
+          "sha256": "9ba5076f50d1643150a4ab24c9fea08d10cecb448850edce4facafb4383a694f"
+        },
+        {
+          "repetition": 3,
+          "bytes": 3451572,
+          "sha256": "9ba5076f50d1643150a4ab24c9fea08d10cecb448850edce4facafb4383a694f"
+        }
+      ],
+      "environment": {
+        "package": "com.m3.fs",
+        "java_runtime_version": "21.0.12.1+1-LTS",
+        "java_vm_name": "OpenJDK 64-Bit Server VM",
+        "jvm_arguments": "[-XX:+UseSerialGC, -Xms32m, -Xmx512m, -XX:NativeMemoryTracking=summary, -XX:+UnlockDiagnosticVMOptions, -XX:+PrintNMTStatistics]",
+        "heap_used_source": "Sum of heap MemoryPoolMXBean collection-usage snapshots after GC"
+      },
+      "nmt_total_lines": [
+        "Total: reserved=1981936689, committed=106071089",
+        "malloc: 20472881 #11214",
+        "mmap:   reserved=1961463808, committed=85598208"
+      ],
+      "input_rows": 50000,
+      "input_sha256": "52565238248a3ad330bf0a7c8ab801537cfee8adc4d48a5aadad036d7654c4ff",
+      "summary": {
+        "constructor_cpu_ns": {
+          "minimum": 66877117,
+          "median": 85615075,
+          "maximum": 88678508
+        },
+        "constructor_allocated_bytes": {
+          "minimum": 48653664,
+          "median": 48653664,
+          "maximum": 48653664
+        },
+        "constructor_wall_ns": {
+          "minimum": 91284486,
+          "median": 99825166,
+          "maximum": 100959018
+        },
+        "heap_delta_bytes": {
+          "minimum": 7350808,
+          "median": 9195432,
+          "maximum": 9195744
+        },
+        "vm_rss_kib": {
+          "minimum": 123492,
+          "median": 123860,
+          "maximum": 124136
+        },
+        "vm_hwm_kib": {
+          "minimum": 123492,
+          "median": 123860,
+          "maximum": 124136
+        },
+        "rss_anon_kib": {
+          "minimum": 102280,
+          "median": 102648,
+          "maximum": 102924
+        },
+        "rss_file_kib": {
+          "minimum": 21212,
+          "median": 21212,
+          "maximum": 21212
+        }
+      },
+      "sources": [
+        {
+          "path": "/tmp/m3fs-java-work/postimage/m3/fs/src/main/java/com/m3/fs/M3ContentId.java",
+          "bytes": 2347,
+          "sha256": "7657036de0e76f98eb2c8a09bb025dc4fc591644639086e190a1cdf057dc172d",
+          "git_blob": "d3087e9383d13893a5d5152ce2fc9d574f3e1f13"
+        },
+        {
+          "path": "/tmp/m3fs-root-work/postimage/m3/fs/src/main/java/com/m3/fs/M3GenerationRoot.java",
+          "bytes": 8452,
+          "sha256": "73eaf23ec20a378fe282387577ebe84a1400fc8d756738fb3d83443550a3f561",
+          "git_blob": "b717a9a47ee1406d579d2623c4a24257edf43b5f"
+        },
+        {
+          "path": "/tmp/m3fs-root-work/postimage/m3/fs/src/main/java/com/m3/fs/M3IdTable.java",
+          "bytes": 3306,
+          "sha256": "52ac98b8a6c02151891af19a60fdb122e4bf8a68844e1c2046fa84434c36171d",
+          "git_blob": "6259ca428eab3859ed27fdda2eb3bd03fda1a489"
+        },
+        {
+          "path": "/tmp/m3fs-root-work/postimage/m3/fs/src/main/java/com/m3/fs/M3Columns.java",
+          "bytes": 4173,
+          "sha256": "a732ebe478c6fc9501ba0422a6ad9966696b975f932ed54c9ab6b49b2d75de35",
+          "git_blob": "8381e6ff327a26e3f1b2a9f0cd1c3175afd00d3a"
+        }
+      ],
+      "classes": [
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/receiver/MetadataResourceProbe.class",
+          "bytes": 9500,
+          "sha256": "4105301e75a84593025708323612c76549ba46a4ed0e76a94d45ab2d34e64f5b",
+          "git_blob": "1342327a260b126d166e2803a48004e4091dee25"
+        },
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/receiver/com/m3/fs/M3Columns$1$1$1.class",
+          "bytes": 1558,
+          "sha256": "df89564b2a12167213e50752ef6be246fb5a74666d902a694773a1aa1c203358",
+          "git_blob": "1834c58f5d245181f04bcd0e517ee99b50ec670d"
+        },
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/receiver/com/m3/fs/M3Columns$1$1.class",
+          "bytes": 950,
+          "sha256": "e4d89ef9954e3aec5a6f75f6f0c1257cdcaa4dd10e718cd12131ef10a0456dbe",
+          "git_blob": "1973f21c5c285d951ad5e744a8eb3ec25328115e"
+        },
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/receiver/com/m3/fs/M3Columns$1.class",
+          "bytes": 1618,
+          "sha256": "4851f143d46e889c0c542bfe4545758cd5656e543345a9303373bade55baa3f8",
+          "git_blob": "f175f0ea72256a56f4a4b7df41800d39e78258da"
+        },
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/receiver/com/m3/fs/M3Columns.class",
+          "bytes": 4440,
+          "sha256": "602578c0c0d3b12761a66aea37bb5caa17375d2be27100ac5640a9d48f33c271",
+          "git_blob": "0e67602baa6cd19a03a86cb2cd6c511bd7474e5e"
+        },
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/receiver/com/m3/fs/M3ContentId.class",
+          "bytes": 2733,
+          "sha256": "3e9f57fd2f8bf25c73fd351c3df878db54dfa9dd5fdc7a143784bee4d177d6c8",
+          "git_blob": "9a9e7b4e99b55b743005942bd402575d1d08af62"
+        },
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/receiver/com/m3/fs/M3GenerationRoot$DirectoryEntry.class",
+          "bytes": 2580,
+          "sha256": "c4abe4901bcce06e37999853d8fad64912d624611b11d1125ee8c724c8c76591",
+          "git_blob": "16fd665217c17f25726ef3cd657d32df513d7b29"
+        },
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/receiver/com/m3/fs/M3GenerationRoot$DirectoryPage.class",
+          "bytes": 2796,
+          "sha256": "654da482cdaa9df24fb674f0b5324d0dbc77e7e220ff8555201d537982f460ce",
+          "git_blob": "b3e3a095e383b85ea32a774395431f4de74aa4b2"
+        },
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/receiver/com/m3/fs/M3GenerationRoot.class",
+          "bytes": 9298,
+          "sha256": "0d7fd4e8e58cdf5f59069eb90a840809a55acf034a6b8110e1ed247434074cce",
+          "git_blob": "eede9553fe8ba47262d8582259a65823c1758134"
+        },
+        {
+          "path": "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/receiver/com/m3/fs/M3IdTable.class",
+          "bytes": 4496,
+          "sha256": "44bd17c284723244449b4e72a1f85371bbd7e4d3ec9ec7d5ec8f62ca2e61210a",
+          "git_blob": "dab57ee0f6e767dbaaa919f6897ae919aef4db94"
+        }
+      ],
+      "compile_command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/receiver",
+        "/tmp/m3fs-java-work/postimage/m3/fs/verification/metadata-resource-probe/MetadataResourceProbe.java",
+        "/tmp/m3fs-java-work/postimage/m3/fs/src/main/java/com/m3/fs/M3ContentId.java",
+        "/tmp/m3fs-root-work/postimage/m3/fs/src/main/java/com/m3/fs/M3GenerationRoot.java",
+        "/tmp/m3fs-root-work/postimage/m3/fs/src/main/java/com/m3/fs/M3IdTable.java",
+        "/tmp/m3fs-root-work/postimage/m3/fs/src/main/java/com/m3/fs/M3Columns.java"
+      ],
+      "run_command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-XX:+UseSerialGC",
+        "-Xms32m",
+        "-Xmx512m",
+        "-XX:NativeMemoryTracking=summary",
+        "-XX:+UnlockDiagnosticVMOptions",
+        "-XX:+PrintNMTStatistics",
+        "-cp",
+        "/tmp/m3fs-java-work/evidence/metadata-resource-probe/classes/receiver",
+        "MetadataResourceProbe",
+        "com.m3.fs",
+        "50000",
+        "3",
+        "3"
+      ],
+      "process_usage": {
+        "source": "Linux wait4 child-specific resource usage",
+        "exit_code": 0,
+        "user_cpu_seconds": 4.497453,
+        "system_cpu_seconds": 0.248019,
+        "maximum_rss_kib": 123416,
+        "minor_page_faults": 32579,
+        "major_page_faults": 0,
+        "voluntary_context_switches": 904,
+        "involuntary_context_switches": 135
+      }
+    }
+  },
+  "canonical_identity_verified": true
+}

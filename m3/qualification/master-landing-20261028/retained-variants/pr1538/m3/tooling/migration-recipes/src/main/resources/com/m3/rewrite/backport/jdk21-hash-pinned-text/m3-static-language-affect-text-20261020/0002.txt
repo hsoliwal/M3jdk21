@@ -1,0 +1,19 @@
+owner	operation	problem_category	incumbent_or_baseline	candidates_reviewed	selected	complexity	contract_decision
+M3StaticLanguageGeometry	CWID metadata lookup	dense direct indexing	object/map metadata	dense arrays; hash map; packed tables	dense primitive CWID lanes	O(1)	CWID 1..V is already canonical; no per-word object
+M3StaticLanguageGeometry	concept/subject storage	compressed adjacency	per-word collections	CSR; flat offset arena; linked lists	CSR primitive lanes	O(1) range + O(k) scan	immutable sorted IDs; no Entry nodes
+M3StaticLanguageGeometry	concept/subject overlap	sorted intersection	HashSet allocation	two-pointer merge; binary search each; bitsets	two-pointer merge	O(a+b)	no temporary allocation; unsigned ID order
+M3StaticLanguageGeometry	pair lookup	sorted adjacency search	map edge lookup	CSR binary search; open addressing; linear scan	CSR + binary search	O(log degree)	frozen deterministic ordering
+M3StaticLanguageGeometry	default significance band	frequency thresholding	stop-word String set	quantiles; mean multiple; rank table	bounded mean-derived band	O(V) build / O(1) read	policy hint only; caller may override
+M3LuhnSummarizer	significance clusters	extractive summarization	String/token object scoring	classic Luhn; TF-IDF; graph rank	Luhn on CWIDs	O(tokens)	algorithm re-expression; no donor code
+M3LuhnSummarizer	pair cohesion	sequence association	live model inference	bigram probability; PMI-style association; count only	precomputed Q20 association	O(tokens)	consumer-defined immutable pair signal
+M3LuhnSummarizer	semantic cohesion	coordinate overlap	object-set semantics	class masks; concept merge; subject merge	primitive overlap composition	O(tokens * sidecar spans)	no model mutation
+M3LanguageNative	batch cluster scan	JNI primitive traversal	Java scalar loop	GetArrayRegion chunks; critical arrays; array elements	primitive array batch kernel	O(tokens)	Java oracle; no callbacks/objects/native semantic authority
+M3AtomStore	canonical immutable atoms	hash-consing	per-node object graph	open addressing; HashMap; trie	open-addressed build table -> frozen SoA	expected O(1) admission	builder table discarded after freeze
+M3Dag	acyclic relation topology	topological graph	object graph recursion	Kahn; DFS; CSR	CSR + Kahn	O(V+E)	cycles refuse; execution authority unchanged
+M3RelationStore	cyclic semantic relations	general directed graph	misusing DAG	CSR; adjacency lists; relation table	CSR primitive lanes	O(V+E)	cycles and symmetric edges valid
+M3EmotionOntology	label lookup	immutable symbol index	String map	binary search; open addressing; trie	open addressing over M3 label IDs	expected O(1)	labels remain M3 lexicon/string coordinates
+M3EmotionOntology	categorical topology	emotion ontology	flat enum labels	Plutchik wheel; GoEmotions vocabulary; donor taxonomies	primitive atoms + relation store	O(1) node / O(degree) relation	built-in topology only; restricted data not embedded
+M3AffectVector	dimensional affect	sparse fixed-point vector	double object maps	dense double[]; sparse pairs; packed core	sparse Q15 + packed core	O(log axes) read	missing is missing; no invented zero
+M3EmotionProfile	contextual affect	sparse weighted composition	mutable model state	dense probability vector; sparse weights	sorted IDs + Q16 weights	O(k)	context changes profile, not ontology
+CATALOGUE	graph topological taxonomy	problem discovery	ad hoc search	LeetCode 207/210; HackerRank/GFG graph categories; graph literature	taxonomy only	n/a	no challenge solution/editorial copied
+CATALOGUE	search/index donor	implementation comparison	new custom index	OpenJDK owners; Apache Lucene; standard CSR/binary search	first-party M3 + standard mechanics	n/a	license/provenance retained; no runtime Lucene dependency

@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "sources": [
+    {
+      "repository": "abseil/abseil-cpp",
+      "revision": "22dd800ead4104f3a1fdb64d27dbde822826ca8d",
+      "path": "LICENSE",
+      "git_blob": "ccd61dcfe3dbcdf77a72794d7794b1e112a39e0b",
+      "sha256": "c79a7fea0e3cac04cd43f20e7b648e5a0ff8fa5344e644b0ee09ca1162b62747",
+      "reviewed_scope": "full license",
+      "license": "Apache-2.0",
+      "source_expression_copied": false
+    },
+    {
+      "repository": "abseil/abseil-cpp",
+      "revision": "22dd800ead4104f3a1fdb64d27dbde822826ca8d",
+      "path": "absl/strings/internal/cord_rep_btree_reader.h",
+      "git_blob": "46ed3523d9294109f213ae22246eef5e18df8a10",
+      "sha256": "02ca89d7c57cb85a5265f755d2d75a638e3e8da9485d73d40b0741bcf3f97453",
+      "reviewed_scope": "complete reader class",
+      "license": "Apache-2.0",
+      "source_expression_copied": false
+    },
+    {
+      "repository": "abseil/abseil-cpp",
+      "revision": "22dd800ead4104f3a1fdb64d27dbde822826ca8d",
+      "path": "absl/strings/cord.cc",
+      "git_blob": "f9f576a22a5031432dbe7dbae928d315318429c1",
+      "sha256": "18bf79f5961492d36a43077ab76bd6ce637b71f04711bf6f8408af6d75864df1",
+      "reviewed_scope": "CompareChunks, GenericCompare, CompareSlowPath, SharedCompareImpl",
+      "license": "Apache-2.0",
+      "source_expression_copied": false
+    },
+    {
+      "repository": "abseil/abseil-cpp",
+      "revision": "22dd800ead4104f3a1fdb64d27dbde822826ca8d",
+      "path": "absl/container/internal/hashtable_control_bytes.h",
+      "git_blob": "34df1d4b57c1e7b77bdeb2aa920c74fc3c25df0d",
+      "sha256": "5810219d65c1db598435b5aa941ead7d30e7f337cf000a48c448fabac111c2b5",
+      "reviewed_scope": "ctrl_t, state predicates, GroupSse2Impl mask matching",
+      "license": "Apache-2.0",
+      "source_expression_copied": false
+    },
+    {
+      "repository": "abseil/abseil-cpp",
+      "revision": "22dd800ead4104f3a1fdb64d27dbde822826ca8d",
+      "path": "absl/container/btree_set.h",
+      "git_blob": "892dc886a68f05d2d7381bb8eaa90b5ebfa6dde2",
+      "sha256": "e2efe7e39ffdd7c9235ccef1340fc0ce5cfc03b521aebd69f9c7da6c331486ac",
+      "reviewed_scope": "public iterator and insertion/removal invalidation contract",
+      "license": "Apache-2.0",
+      "source_expression_copied": false
+    }
+  ]
+}

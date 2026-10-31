@@ -1,0 +1,31 @@
+{
+  "dataset": "receive-concat-guard21",
+  "checks": [
+    {
+      "dataset": "receive-concat-guard21",
+      "targets": 2,
+      "changes": 2,
+      "mode": "check",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "receive-concat-guard21",
+      "targets": 2,
+      "changes": 2,
+      "mode": "apply",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "receive-concat-guard21",
+      "targets": 2,
+      "changes": 0,
+      "mode": "apply",
+      "actual_sdk_results": true
+    }
+  ],
+  "replay_preserved_bytes_and_mtime": true,
+  "postimages": {
+    "m3/runtime-integration/check-m3string-concat-reference-dag.py": "4fff9f78297b91a63c401e9fd9994de6ed643207661bb58fd099d0870e073ec2",
+    "m3/runtime-integration/recipe/manifest.json": "416f8c17500afd1d9d2d2e3a7a85e300cf9807fbac7ead514b9c48cf0494e4e5"
+  }
+}

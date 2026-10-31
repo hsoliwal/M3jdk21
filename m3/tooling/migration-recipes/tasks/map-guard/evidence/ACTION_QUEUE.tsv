@@ -1,0 +1,14 @@
+track	state	required_exit
+MapGuard	LOCAL_PROVEN_FRAMEWORK_PENDING	Execute5 recipe JUnit cases and existing product workflow; retain full tests
+CURRENT_RECIPE_SUITE	PENDING	Run exact latest merged Gate/TypeFix suite; resolve actual failures without exclusions
+JNI_HANDLE	SOURCE_PRESENT_BUILD_PENDING	Current jni.cpp has assignment forms; verify full native build instead of repeating old patch
+BACKING_CLOSE	CURRENT_DECLARATION_PRESENT	Current interface has no-checked close; no change here; prior contract-transition audit remains separate
+JDK_PRODUCT	PENDING	Full matched configure/make/images, jtreg and runtime acceptance on modified fork
+BACKPORTS	PENDING	Complete existing compatible JEP/non-JEP/JBS/tooling catalogue and dependencies
+STRINGS	PENDING	Joined storage, lifetimes, interning, JIT/GC/JNI/CDS, full String compatibility
+A3_PARSER_DB	PENDING	Existing donor normalization, partial AST/type context and DB framework integration
+M3_NAMES	PENDING	Short API naming and contract-tested MIndex migration without duplicate owners
+MODULE_PACKS	PENDING	Actual JavaFX/native/UI and desired application pack acceptance
+FRAMEWORK	SEPARATE_OWNER	OrdinaryJava21 Synexia templates and optimized APIs; no mandatory modified JDK
+CI_EXECUTION	BLOCKED	Hosted runner must create jobs or an authorized build host must execute equivalent gates
+PLATFORMS_COVERAGE	PENDING	Supported OS/native platforms and measured atomic/pattern coverage; no invented completion

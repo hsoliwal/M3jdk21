@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FactsScanFused
+displayName: M3JDK21 fused single-pass facts scan over bulk-read windows
+description: >-
+  java.lang.M3StringFacts.scan folds every fact (unit hashes, ASCII case hashes, prefix4/suffix4,
+  code-unit/bigram/trigram signals, UTF-8 length, code-point count, unpaired surrogates, strip and
+  trim boundaries) in one streaming pass over bulk-read 1024-unit windows instead of three per-unit
+  owner-dispatch passes; a high surrogate is resolved by its successor through a one-unit delay so
+  the pass is exact across window boundaries. A Latin-1 unit-signal table folded at class
+  initialization replaces the two per-unit mixes for units below U+0100 in the scan, the
+  flat-needle fold and the code-unit gate. Outputs are byte-identical (differential dump of 14,842
+  fact rows). Stacks on crate m3-facts-mixed-consumers (the preimage is its postimage).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-facts-scan-fused

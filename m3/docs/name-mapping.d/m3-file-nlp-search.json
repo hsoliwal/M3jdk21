@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "source_repository": "hsoliwal/com.synexia",
+  "source_revision": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+  "canonical_recipe": "com.synexia.m3.M3NlpSearchIntegration20261018",
+  "canonical_crate": "synexia-openrewrite-recipes/crates/m3-nlp-search/integration-20261018",
+  "canonical_commit_receipt": "m3/tooling/module-packs/nlp-search/INTEGRATION_CUSTODY.json",
+  "target_base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "receiving_sequence_advanced": false,
+  "phase": "String qualification remains active; independent file/tool source and image evidence does not promote the global receiving sequence",
+  "file_family": {
+    "source_package": "com.synexia.indexstring.file",
+    "target_package": "com.m3.file",
+    "source_class_count": 50,
+    "mapped_public_and_protected_declarations_and_record_components": 709,
+    "full_mapping": "m3/tooling/module-packs/nlp-search/FILE_PORT_MAP.json",
+    "api_parity": "m3/tooling/module-packs/nlp-search/FILE_API_PARITY.json",
+    "native_and_json_closure": "m3/tooling/module-packs/nlp-search/JSON_CLOSURE_PROVENANCE.json"
+  },
+  "support_owner_mapping": {
+    "MIndexString": "com.m3.file.M3FileText",
+    "IndexResolver": "com.m3.file.M3FileResolver",
+    "MIndexStringBuilder": "com.m3.file.M3FileTextBuilder",
+    "AST/compiler": "existing com.sun.source.util.M3AST and com.sun.tools.javac.m3 owner"
+  },
+  "payload_owner": "Public java.lang.String is authoritative; package-private java.lang.M3String remains its target runtime representation. M3FileText retains resolver IDs, coordinates, metric metadata and bounded descriptor nodes, with no retained byte[]/char[] spelling payload. Materialization at public String boundaries is explicit.",
+  "file_identity": "Persisted files retain exact validated frozen dictionary generation/fingerprint; malformed UTF-16 frozen dictionary entries are refused to avoid UTF-8 fingerprint aliasing. Live dictionary overlays cannot be persisted.",
+  "module_roots": [
+    "m3/ports/file/src/main/java",
+    "m3/tooling/module-packs/nlp-search/frontend/src/main/java"
+  ],
+  "fork_projection": {
+    "lucene": {
+      "repository": "hsoliwal/lucene",
+      "revision": "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e",
+      "full_target_source_version": "9.10.0",
+      "projection": "ReusableStringReader, M3TextReaders, cached String hash atom in CharArrayMap; preserve every other full tool source",
+      "provenance": "m3/tooling/module-packs/nlp-search/LUCENE_PROVENANCE.json"
+    },
+    "opennlp": {
+      "repository": "hsoliwal/opennlp",
+      "revision": "368337311ad94b665fd178f8d3ced005a73b2370",
+      "full_target_source_version": "2.4.0",
+      "projection": "Eight explicit UTF-16 span, borrowed CharSequence and WordPiece backports into the existing aggregate org.apache.opennlp.tools owner",
+      "provenance": "m3/tooling/module-packs/nlp-search/OPENNLP_PROVENANCE.json"
+    }
+  },
+  "runtime_dependency_on_synexia": false,
+  "license": "Apache-2.0; Copyright 2026 Hitesh Soliwal and contributors. Preserve all embedded Lucene/OpenNLP Apache and SLF4J MIT notices and existing OpenJDK GPL-2.0-with-Classpath-exception licenses.",
+  "gates": [
+    "Actual canonical OpenRewrite Java/Text recipe execution; exact source preimages/postimages, fixed point, reversed input, independent workers, missing/duplicate/drift refusal",
+    "Named-module Java21 -Xlint:all -Werror; all 50 file-family mapped APIs and original probes",
+    "Java and required JNI file/JSON/metrics behavior, custom charset and frozen generation regressions",
+    "Unchanged full Lucene before/after reader observations on one linked image; borrowed readers, analyzers, persisted disk index",
+    "OpenNLP independent original-source loader, all UTF16 units, WordPiece, null interpreter diagnostics, cancellation/concurrency",
+    "Real M3AST compiler callbacks, expiry, source snapshot, token positions/offsets, disk reopen, failed CLI transaction rollback",
+    "Ten source-built JMODs and actual compiler-source proof image; full upstream suites, all-platform native and enabled-M3String HotSpot/jtreg/resource promotion remain separately pending"
+  ]
+}

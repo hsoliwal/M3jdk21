@@ -1,0 +1,47 @@
+{
+  "schema": "M3_INTEGRATED_WORKFLOW_SUCCESSOR/1",
+  "task": "m3-integrated-refinement-20261021",
+  "predecessor_phase": {
+    "target_path": ".github/workflows/m3-eclipse-framework-forward-20261017.yml",
+    "before_sha256": "f99b655ed4ab286724723ee855fc497b7a63287ab9e8bf79adf3b2389077f77d",
+    "after_sha256": "dbceffdfba2dbaee03e71d6d84ad3f9302620201cf86e20ff0f925dc745ff16a",
+    "kind": "text",
+    "phase": "m3-integrated-refinement-20261021-002",
+    "resource": "postimage.txt"
+  },
+  "successor_phase": {
+    "target_path": ".github/workflows/m3-eclipse-framework-forward-20261017.yml",
+    "before_sha256": "dbceffdfba2dbaee03e71d6d84ad3f9302620201cf86e20ff0f925dc745ff16a",
+    "after_sha256": "d808a06805622896a543c48b60aa400caa087d699db83dfe158be1487ca9980d",
+    "kind": "text",
+    "phase": "m3-integrated-refinement-20261021-049",
+    "resource": "postimage.txt"
+  },
+  "first_stage": {
+    "path": "proof/sdk-002-offline/RESULT.json",
+    "sha256": "be10089f40c3b8b1e5da9c0233c8bbd4ab5f2c19e05dfc6756e4f49c5b4ce888"
+  },
+  "product_edits": false,
+  "runtime_source_changes": 0,
+  "baseline_contract": "From pristine2779, first execute the retained SDK002 input snapshot; then execute this successor. All other47 file phases retain their exact prior manifests.",
+  "handoff_sha256": "c5b988d4b136537c6703282ddc9e6db619e56f3da451cfd3f5ecca51e846ab84",
+  "derived_files": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/SOURCE_SEALS.json",
+      "before_sha256": "046bd17846177a28a970aa936669d7a92e4b617609c4feda61aabadc303c1871",
+      "after_sha256": "b931ab0a97eb0b5b708f549c2ee79c321ee3ad62d8c27c1f1cb23006c964bc68"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/phases.tsv",
+      "before_sha256": "c7691f409ac820efb41cd749ee14cfd3660954c0587200eed11c8c8d627dd63f",
+      "after_sha256": "acea35f501bf3366557f0be28110f4654b22d60346e8caeca363b8362923bc2c"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-integrated-refinement-20261021.yml",
+      "before_sha256": "38322956c1323590ca0751f00b8f9ac3c2c11c261647010f57b56ee8139a2e0f",
+      "after_sha256": "e78fcd6ac7b037e62ba14813070fa7f507ca73f313b21efa04ce5063c8daabba"
+    }
+  ],
+  "unchanged_owners": "All four canonical engines, the harness, copier, qualifier and original phase resources.",
+  "qualification": "PENDING fresh SDK execution with the corrected actual CI classpath"
+}

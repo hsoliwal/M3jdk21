@@ -1,0 +1,1269 @@
+{
+  "status": "KEEP_INCUMBENT_NATIVE_SOURCE",
+  "candidate_revision": "v2_pointer_end_traversal",
+  "candidate_performance_admission": "REJECTED_UNDER_FROZEN_LOCAL_RULE",
+  "decision_authority": "Root explicitly accepted KEEP incumbent after complete v2 flags; this report seals the native analysis, not a claim that final publication has occurred.",
+  "reason": "V2 has 25 frozen CPU flags, including six changed nonempty emissions across both primitive widths. Functional and transfer parity do not override the resource admission rule.",
+  "functional_evidence": "PASS: 53 commands, 12 C17 translation units, 11 libraries, exact header/export ABI, C++20 generated-header linkage, UBSan JNI-table model, actual checked-JNI contracts and unavailable/legacy capability refusals.",
+  "timing_threshold": {
+    "median_paired_ratio_greater_than": 1.1,
+    "minimum_pairs_above_1_05": 4,
+    "pairs": 6
+  },
+  "case_count": 196,
+  "raw_timing_samples": 7056,
+  "raw_retained_output_observations": 2352,
+  "paired_cpu_ratios_recomputed": 1176,
+  "all_summary_cpu_elapsed_allocation_heap_rss_fields_recomputed": true,
+  "semantic_tapes_match_across_variants_and_rounds": true,
+  "all_measurement_commands_exit_zero": true,
+  "all_command_order_argv_and_log_hashes_match": true,
+  "timing_jvms_complete_and_idle": true,
+  "sample_allocation_equal_pairs": 3528,
+  "sample_allocation_comparison_pairs": 3528,
+  "retained_allocation_equal_pairs": 1176,
+  "retained_allocation_comparison_pairs": 1176,
+  "per_case_median_allocation_vectors_equal": 196,
+  "allocation_increase_flags": 0,
+  "cpu_regression_flags": 25,
+  "flagged_path_classification": {
+    "unchanged_control_or_empty_path": 19,
+    "changed_nonempty_emission": 6
+  },
+  "descriptive_bins": [
+    {
+      "width": "int",
+      "entry_path": "changed_nonempty_emission",
+      "bin": "flagged",
+      "cases": 2
+    },
+    {
+      "width": "int",
+      "entry_path": "changed_nonempty_emission",
+      "bin": "median_above_one_unflagged",
+      "cases": 12
+    },
+    {
+      "width": "int",
+      "entry_path": "changed_nonempty_emission",
+      "bin": "median_below_one",
+      "cases": 32
+    },
+    {
+      "width": "int",
+      "entry_path": "unchanged_control_or_empty_path",
+      "bin": "flagged",
+      "cases": 10
+    },
+    {
+      "width": "int",
+      "entry_path": "unchanged_control_or_empty_path",
+      "bin": "median_above_one_unflagged",
+      "cases": 20
+    },
+    {
+      "width": "int",
+      "entry_path": "unchanged_control_or_empty_path",
+      "bin": "median_below_one",
+      "cases": 22
+    },
+    {
+      "width": "long",
+      "entry_path": "changed_nonempty_emission",
+      "bin": "flagged",
+      "cases": 4
+    },
+    {
+      "width": "long",
+      "entry_path": "changed_nonempty_emission",
+      "bin": "median_above_one_unflagged",
+      "cases": 15
+    },
+    {
+      "width": "long",
+      "entry_path": "changed_nonempty_emission",
+      "bin": "median_below_one",
+      "cases": 27
+    },
+    {
+      "width": "long",
+      "entry_path": "unchanged_control_or_empty_path",
+      "bin": "flagged",
+      "cases": 9
+    },
+    {
+      "width": "long",
+      "entry_path": "unchanged_control_or_empty_path",
+      "bin": "median_above_one_unflagged",
+      "cases": 18
+    },
+    {
+      "width": "long",
+      "entry_path": "unchanged_control_or_empty_path",
+      "bin": "median_below_one",
+      "cases": 25
+    }
+  ],
+  "flagged_cases": [
+    {
+      "width": "int",
+      "shape": "contradictory",
+      "length": 0,
+      "row_offset": 0,
+      "state_offset": 0,
+      "cpu_baseline_ns_per_op_median": 56.872375000000005,
+      "cpu_candidate_ns_per_op_median": 65.7611875,
+      "cpu_paired_ratios": [
+        1.152879164061065,
+        1.0152365075683991,
+        0.9506895474596507,
+        1.137645700271751,
+        2.06327645998058,
+        1.113978419955108
+      ],
+      "cpu_ratio_median": 1.1258120601134296,
+      "cpu_ratio_min": 0.9506895474596507,
+      "cpu_ratio_max": 2.06327645998058,
+      "elapsed_ratio_median": 1.1311613472918407,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 0,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "int",
+      "shape": "contradictory",
+      "length": 256,
+      "row_offset": 0,
+      "state_offset": 0,
+      "cpu_baseline_ns_per_op_median": 58.6685,
+      "cpu_candidate_ns_per_op_median": 78.389,
+      "cpu_paired_ratios": [
+        1.1210972793354996,
+        1.8200368223083863,
+        1.6524569730683185,
+        0.9743403261064925,
+        1.5460996864926548,
+        0.9773942228588097
+      ],
+      "cpu_ratio_median": 1.3335984829140772,
+      "cpu_ratio_min": 0.9743403261064925,
+      "cpu_ratio_max": 1.8200368223083863,
+      "elapsed_ratio_median": 1.3349288215445996,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 0,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "int",
+      "shape": "contradictory",
+      "length": 65536,
+      "row_offset": 0,
+      "state_offset": 0,
+      "cpu_baseline_ns_per_op_median": 70.38934426229508,
+      "cpu_candidate_ns_per_op_median": 104.21311475409837,
+      "cpu_paired_ratios": [
+        1.0550824175824176,
+        1.7709998597672136,
+        1.426390281956982,
+        0.6117926071311743,
+        1.779078273591807,
+        2.3348449267147138
+      ],
+      "cpu_ratio_median": 1.5986950708620977,
+      "cpu_ratio_min": 0.6117926071311743,
+      "cpu_ratio_max": 2.3348449267147138,
+      "elapsed_ratio_median": 1.647838837949669,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 0,
+      "paired_ratios_above_1_05": 5
+    },
+    {
+      "width": "int",
+      "shape": "contradictory",
+      "length": 65536,
+      "row_offset": 3,
+      "state_offset": 5,
+      "cpu_baseline_ns_per_op_median": 63.33196721311475,
+      "cpu_candidate_ns_per_op_median": 82.99180327868852,
+      "cpu_paired_ratios": [
+        1.1174416980868593,
+        1.740166865315852,
+        1.6198915487369394,
+        0.6286407766990292,
+        1.902179422199696,
+        0.557811320754717
+      ],
+      "cpu_ratio_median": 1.3686666234118994,
+      "cpu_ratio_min": 0.557811320754717,
+      "cpu_ratio_max": 1.902179422199696,
+      "elapsed_ratio_median": 1.3680018519410815,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 0,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "int",
+      "shape": "dense",
+      "length": 256,
+      "row_offset": 3,
+      "state_offset": 5,
+      "cpu_baseline_ns_per_op_median": 582.2811875,
+      "cpu_candidate_ns_per_op_median": 725.599,
+      "cpu_paired_ratios": [
+        1.5466695430895845,
+        1.3814549336555684,
+        1.1260876519439493,
+        0.9602903570772249,
+        1.3442671423562724,
+        0.5990430957022754
+      ],
+      "cpu_ratio_median": 1.2351773971501108,
+      "cpu_ratio_min": 0.5990430957022754,
+      "cpu_ratio_max": 1.5466695430895845,
+      "elapsed_ratio_median": 1.238306561405635,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "changed_nonempty_emission",
+      "kept": 256,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "int",
+      "shape": "last-only",
+      "length": 255,
+      "row_offset": 3,
+      "state_offset": 5,
+      "cpu_baseline_ns_per_op_median": 398.47771875,
+      "cpu_candidate_ns_per_op_median": 475.32596875,
+      "cpu_paired_ratios": [
+        1.257158384859919,
+        1.6212942700551785,
+        0.9242473049108043,
+        1.3790555550163117,
+        1.150567024885244,
+        0.45828951011615005
+      ],
+      "cpu_ratio_median": 1.2038627048725816,
+      "cpu_ratio_min": 0.45828951011615005,
+      "cpu_ratio_max": 1.6212942700551785,
+      "elapsed_ratio_median": 1.2066943993693144,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "changed_nonempty_emission",
+      "kept": 1,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "int",
+      "shape": "prefix",
+      "length": 0,
+      "row_offset": 0,
+      "state_offset": 0,
+      "cpu_baseline_ns_per_op_median": 66.29384375000001,
+      "cpu_candidate_ns_per_op_median": 77.56653125,
+      "cpu_paired_ratios": [
+        1.4349859110775747,
+        1.1035833644127753,
+        0.7637996998051927,
+        0.9636700788116634,
+        1.3571223586311094,
+        1.1517615484188455
+      ],
+      "cpu_ratio_median": 1.1276724564158105,
+      "cpu_ratio_min": 0.7637996998051927,
+      "cpu_ratio_max": 1.4349859110775747,
+      "elapsed_ratio_median": 1.12758942125334,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 0,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "int",
+      "shape": "rejected",
+      "length": 0,
+      "row_offset": 3,
+      "state_offset": 5,
+      "cpu_baseline_ns_per_op_median": 70.91884375000001,
+      "cpu_candidate_ns_per_op_median": 80.95715625,
+      "cpu_paired_ratios": [
+        1.0867179336639303,
+        0.6489541206567835,
+        1.2228255145437839,
+        1.2076942977773075,
+        1.0987942143009632,
+        1.1217243115624327
+      ],
+      "cpu_ratio_median": 1.1102592629316979,
+      "cpu_ratio_min": 0.6489541206567835,
+      "cpu_ratio_max": 1.2228255145437839,
+      "elapsed_ratio_median": 1.0486050766721107,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 0,
+      "paired_ratios_above_1_05": 5
+    },
+    {
+      "width": "int",
+      "shape": "zero-masks",
+      "length": 255,
+      "row_offset": 0,
+      "state_offset": 0,
+      "cpu_baseline_ns_per_op_median": 173.58534375,
+      "cpu_candidate_ns_per_op_median": 183.7335625,
+      "cpu_paired_ratios": [
+        1.057868070750791,
+        1.252867040210017,
+        1.0317037937571822,
+        1.1720734160331239,
+        1.9232344752662958,
+        0.5056086147299125
+      ],
+      "cpu_ratio_median": 1.1149707433919573,
+      "cpu_ratio_min": 0.5056086147299125,
+      "cpu_ratio_max": 1.9232344752662958,
+      "elapsed_ratio_median": 1.1300482250984674,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 255,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "int",
+      "shape": "zero-masks",
+      "length": 256,
+      "row_offset": 0,
+      "state_offset": 0,
+      "cpu_baseline_ns_per_op_median": 191.51440624999998,
+      "cpu_candidate_ns_per_op_median": 267.1953125,
+      "cpu_paired_ratios": [
+        0.8846812630324695,
+        1.6956995124372567,
+        1.3932320808985104,
+        1.0593677144700446,
+        1.4298632499529627,
+        1.3304181825450763
+      ],
+      "cpu_ratio_median": 1.3618251317217933,
+      "cpu_ratio_min": 0.8846812630324695,
+      "cpu_ratio_max": 1.6956995124372567,
+      "elapsed_ratio_median": 1.2758685202472262,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 256,
+      "paired_ratios_above_1_05": 5
+    },
+    {
+      "width": "int",
+      "shape": "zero-masks",
+      "length": 256,
+      "row_offset": 3,
+      "state_offset": 5,
+      "cpu_baseline_ns_per_op_median": 171.68096874999998,
+      "cpu_candidate_ns_per_op_median": 249.4453125,
+      "cpu_paired_ratios": [
+        1.1781811146041465,
+        1.6853569917024436,
+        1.2400842227477873,
+        3.377217560794573,
+        1.883046724556447,
+        1.078708905773764
+      ],
+      "cpu_ratio_median": 1.4627206072251155,
+      "cpu_ratio_min": 1.078708905773764,
+      "cpu_ratio_max": 3.377217560794573,
+      "elapsed_ratio_median": 1.46072228837602,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 256,
+      "paired_ratios_above_1_05": 6
+    },
+    {
+      "width": "int",
+      "shape": "zero-masks",
+      "length": 65536,
+      "row_offset": 3,
+      "state_offset": 5,
+      "cpu_baseline_ns_per_op_median": 39817.12295081967,
+      "cpu_candidate_ns_per_op_median": 46476.61885245902,
+      "cpu_paired_ratios": [
+        1.1367345785576477,
+        1.3565426375920804,
+        0.8843244749781523,
+        0.7325976694262298,
+        1.4530000672328425,
+        1.3267339605348174
+      ],
+      "cpu_ratio_median": 1.2317342695462326,
+      "cpu_ratio_min": 0.7325976694262298,
+      "cpu_ratio_max": 1.4530000672328425,
+      "elapsed_ratio_median": 1.2260574997515457,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 65536,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "long",
+      "shape": "alternating-pages",
+      "length": 0,
+      "row_offset": 0,
+      "state_offset": 0,
+      "cpu_baseline_ns_per_op_median": 65.7580625,
+      "cpu_candidate_ns_per_op_median": 94.14643749999999,
+      "cpu_paired_ratios": [
+        0.7180467129314596,
+        1.3844167238739944,
+        1.6250910198763644,
+        0.9936811896961929,
+        1.7461676591232087,
+        1.0960020414061107
+      ],
+      "cpu_ratio_median": 1.2402093826400526,
+      "cpu_ratio_min": 0.7180467129314596,
+      "cpu_ratio_max": 1.7461676591232087,
+      "elapsed_ratio_median": 1.2387614223012462,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 0,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "long",
+      "shape": "alternating-pages",
+      "length": 257,
+      "row_offset": 3,
+      "state_offset": 5,
+      "cpu_baseline_ns_per_op_median": 750.3419375,
+      "cpu_candidate_ns_per_op_median": 1046.50584375,
+      "cpu_paired_ratios": [
+        0.9349653319968795,
+        1.3251032958764182,
+        1.3158140263144729,
+        0.5509593701788573,
+        1.7011984920015575,
+        1.5651785248325056
+      ],
+      "cpu_ratio_median": 1.3204586610954454,
+      "cpu_ratio_min": 0.5509593701788573,
+      "cpu_ratio_max": 1.7011984920015575,
+      "elapsed_ratio_median": 1.2473274601769178,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "changed_nonempty_emission",
+      "kept": 256,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "long",
+      "shape": "contradictory",
+      "length": 1,
+      "row_offset": 0,
+      "state_offset": 0,
+      "cpu_baseline_ns_per_op_median": 57.39034375,
+      "cpu_candidate_ns_per_op_median": 67.3325625,
+      "cpu_paired_ratios": [
+        1.1591041332891525,
+        1.3856608922090994,
+        1.1861919272029051,
+        0.8052896767266031,
+        1.6364778921344136,
+        0.5479379963639843
+      ],
+      "cpu_ratio_median": 1.172648030246029,
+      "cpu_ratio_min": 0.5479379963639843,
+      "cpu_ratio_max": 1.6364778921344136,
+      "elapsed_ratio_median": 1.1723952640153088,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 0,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "long",
+      "shape": "dense",
+      "length": 0,
+      "row_offset": 0,
+      "state_offset": 0,
+      "cpu_baseline_ns_per_op_median": 65.80503125,
+      "cpu_candidate_ns_per_op_median": 80.79721875,
+      "cpu_paired_ratios": [
+        1.0717021811026917,
+        1.308075108527198,
+        1.4155269627479181,
+        1.0416499225878402,
+        1.4978042936888072,
+        0.6847908702954623
+      ],
+      "cpu_ratio_median": 1.1898886448149448,
+      "cpu_ratio_min": 0.6847908702954623,
+      "cpu_ratio_max": 1.4978042936888072,
+      "elapsed_ratio_median": 1.1785606931598331,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 0,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "long",
+      "shape": "dense",
+      "length": 255,
+      "row_offset": 0,
+      "state_offset": 0,
+      "cpu_baseline_ns_per_op_median": 706.84375,
+      "cpu_candidate_ns_per_op_median": 862.2808125,
+      "cpu_paired_ratios": [
+        0.621507388322087,
+        1.164605309643403,
+        1.6352419184055005,
+        1.4123104950183896,
+        1.5130818945330793,
+        0.6868068008836534
+      ],
+      "cpu_ratio_median": 1.2884579023308964,
+      "cpu_ratio_min": 0.621507388322087,
+      "cpu_ratio_max": 1.6352419184055005,
+      "elapsed_ratio_median": 1.3005000740958277,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "changed_nonempty_emission",
+      "kept": 255,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "long",
+      "shape": "dense",
+      "length": 257,
+      "row_offset": 3,
+      "state_offset": 5,
+      "cpu_baseline_ns_per_op_median": 660.16359375,
+      "cpu_candidate_ns_per_op_median": 778.187,
+      "cpu_paired_ratios": [
+        1.2932313443652201,
+        0.7072000196963545,
+        1.127889786916531,
+        0.7134075589469475,
+        1.202240270795833,
+        1.225125728762504
+      ],
+      "cpu_ratio_median": 1.1650650288561821,
+      "cpu_ratio_min": 0.7072000196963545,
+      "cpu_ratio_max": 1.2932313443652201,
+      "elapsed_ratio_median": 1.1785566146083801,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "changed_nonempty_emission",
+      "kept": 257,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "long",
+      "shape": "last-only",
+      "length": 0,
+      "row_offset": 0,
+      "state_offset": 0,
+      "cpu_baseline_ns_per_op_median": 63.20553125000001,
+      "cpu_candidate_ns_per_op_median": 96.958375,
+      "cpu_paired_ratios": [
+        1.1382107860872346,
+        1.6870842511272024,
+        1.4901271265825702,
+        0.9021922263719229,
+        1.6899751053733933,
+        1.0314702324644192
+      ],
+      "cpu_ratio_median": 1.3141689563349024,
+      "cpu_ratio_min": 0.9021922263719229,
+      "cpu_ratio_max": 1.6899751053733933,
+      "elapsed_ratio_median": 1.315122136232553,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 0,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "long",
+      "shape": "prefix",
+      "length": 0,
+      "row_offset": 0,
+      "state_offset": 0,
+      "cpu_baseline_ns_per_op_median": 63.729749999999996,
+      "cpu_candidate_ns_per_op_median": 82.74418750000001,
+      "cpu_paired_ratios": [
+        1.1895976453591262,
+        0.9407394833610522,
+        1.4478443960869045,
+        1.0147841357215455,
+        1.700802813031376,
+        1.3139090943673861
+      ],
+      "cpu_ratio_median": 1.2517533698632561,
+      "cpu_ratio_min": 0.9407394833610522,
+      "cpu_ratio_max": 1.700802813031376,
+      "elapsed_ratio_median": 1.2568838647259302,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 0,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "long",
+      "shape": "prefix",
+      "length": 256,
+      "row_offset": 3,
+      "state_offset": 5,
+      "cpu_baseline_ns_per_op_median": 488.673875,
+      "cpu_candidate_ns_per_op_median": 600.73775,
+      "cpu_paired_ratios": [
+        1.1746896488073468,
+        1.615773991962458,
+        1.6088518165736834,
+        0.8040369519574295,
+        1.3336364700707006,
+        0.8432669334807825
+      ],
+      "cpu_ratio_median": 1.2541630594390236,
+      "cpu_ratio_min": 0.8040369519574295,
+      "cpu_ratio_max": 1.615773991962458,
+      "elapsed_ratio_median": 1.2535341962812736,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "changed_nonempty_emission",
+      "kept": 64,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "long",
+      "shape": "rejected",
+      "length": 0,
+      "row_offset": 3,
+      "state_offset": 5,
+      "cpu_baseline_ns_per_op_median": 64.01328125,
+      "cpu_candidate_ns_per_op_median": 76.85484375,
+      "cpu_paired_ratios": [
+        1.3367365952964834,
+        1.3096556514513664,
+        1.4911584883388787,
+        0.9792003423777421,
+        1.0710958190089646,
+        0.8525265014878393
+      ],
+      "cpu_ratio_median": 1.1903757352301656,
+      "cpu_ratio_min": 0.8525265014878393,
+      "cpu_ratio_max": 1.4911584883388787,
+      "elapsed_ratio_median": 1.1879591400148244,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 0,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "long",
+      "shape": "zero-masks",
+      "length": 1,
+      "row_offset": 0,
+      "state_offset": 0,
+      "cpu_baseline_ns_per_op_median": 88.48928125,
+      "cpu_candidate_ns_per_op_median": 97.31518750000001,
+      "cpu_paired_ratios": [
+        1.0672495791472392,
+        1.1662454393759012,
+        1.1965082646754786,
+        1.068706709583362,
+        1.3637313455822333,
+        0.9333667905789585
+      ],
+      "cpu_ratio_median": 1.1174760744796317,
+      "cpu_ratio_min": 0.9333667905789585,
+      "cpu_ratio_max": 1.3637313455822333,
+      "elapsed_ratio_median": 1.1118224942288795,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 1,
+      "paired_ratios_above_1_05": 5
+    },
+    {
+      "width": "long",
+      "shape": "zero-masks",
+      "length": 1,
+      "row_offset": 3,
+      "state_offset": 5,
+      "cpu_baseline_ns_per_op_median": 86.10825,
+      "cpu_candidate_ns_per_op_median": 94.15734375,
+      "cpu_paired_ratios": [
+        1.131454258828309,
+        1.3136611604928852,
+        1.0801449301882995,
+        0.9258991663413528,
+        1.7332669866053327,
+        0.7662110821848087
+      ],
+      "cpu_ratio_median": 1.1057995945083041,
+      "cpu_ratio_min": 0.7662110821848087,
+      "cpu_ratio_max": 1.7332669866053327,
+      "elapsed_ratio_median": 1.1060524696036347,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 1,
+      "paired_ratios_above_1_05": 4
+    },
+    {
+      "width": "long",
+      "shape": "zero-masks",
+      "length": 256,
+      "row_offset": 0,
+      "state_offset": 0,
+      "cpu_baseline_ns_per_op_median": 246.059625,
+      "cpu_candidate_ns_per_op_median": 290.78218749999996,
+      "cpu_paired_ratios": [
+        1.050820501443647,
+        1.6449841482388796,
+        1.2547461173282188,
+        0.7130078378263074,
+        2.142222611680838,
+        0.5470544938124279
+      ],
+      "cpu_ratio_median": 1.1527833093859328,
+      "cpu_ratio_min": 0.5470544938124279,
+      "cpu_ratio_max": 2.142222611680838,
+      "elapsed_ratio_median": 1.167194822796555,
+      "material_cpu_regression_observed": true,
+      "allocation_increase_observed": false,
+      "entry_path": "unchanged_control_or_empty_path",
+      "kept": 256,
+      "paired_ratios_above_1_05": 4
+    }
+  ],
+  "requested_gc_heap_differences": [
+    [
+      1,
+      [
+        "int",
+        "rejected",
+        0,
+        0,
+        0
+      ],
+      816,
+      -714864
+    ],
+    [
+      1,
+      [
+        "int",
+        "last-only",
+        0,
+        3,
+        5
+      ],
+      -1520,
+      -584
+    ],
+    [
+      3,
+      [
+        "int",
+        "rejected",
+        0,
+        0,
+        0
+      ],
+      -714864,
+      816
+    ],
+    [
+      3,
+      [
+        "int",
+        "last-only",
+        0,
+        3,
+        5
+      ],
+      -584,
+      -1520
+    ],
+    [
+      4,
+      [
+        "int",
+        "rejected",
+        0,
+        0,
+        0
+      ],
+      -714864,
+      816
+    ],
+    [
+      4,
+      [
+        "int",
+        "last-only",
+        0,
+        3,
+        5
+      ],
+      -584,
+      -1520
+    ]
+  ],
+  "memory_and_process_observations": {
+    "baseline": {
+      "sample_counters_unavailable": {
+        "thread_cpu_ns": 0,
+        "allocated_bytes": 0,
+        "process_cpu_ns": 0
+      },
+      "rss_after_unavailable": 0,
+      "rss_after_kib_range": [
+        46128,
+        109760
+      ],
+      "requested_gc_heap_delta_bytes_range": [
+        -852576,
+        16778000
+      ],
+      "process_peak_rss_kib_range": [
+        105892,
+        109992
+      ],
+      "processes": [
+        {
+          "label": "round-00-baseline",
+          "elapsed_seconds": 9.590463,
+          "process_user_cpu_seconds": 9.375403,
+          "process_system_cpu_seconds": 0.18987199999999999,
+          "process_peak_rss_kib": 108772
+        },
+        {
+          "label": "round-01-baseline",
+          "elapsed_seconds": 9.236288,
+          "process_user_cpu_seconds": 9.133961,
+          "process_system_cpu_seconds": 0.091449,
+          "process_peak_rss_kib": 105892
+        },
+        {
+          "label": "round-02-baseline",
+          "elapsed_seconds": 9.251808,
+          "process_user_cpu_seconds": 9.108975,
+          "process_system_cpu_seconds": 0.133595,
+          "process_peak_rss_kib": 106476
+        },
+        {
+          "label": "round-03-baseline",
+          "elapsed_seconds": 9.654903,
+          "process_user_cpu_seconds": 9.535713,
+          "process_system_cpu_seconds": 0.114011,
+          "process_peak_rss_kib": 106224
+        },
+        {
+          "label": "round-04-baseline",
+          "elapsed_seconds": 9.176255,
+          "process_user_cpu_seconds": 9.044375,
+          "process_system_cpu_seconds": 0.12647,
+          "process_peak_rss_kib": 109992
+        },
+        {
+          "label": "round-05-baseline",
+          "elapsed_seconds": 11.704298,
+          "process_user_cpu_seconds": 11.560497999999999,
+          "process_system_cpu_seconds": 0.138652,
+          "process_peak_rss_kib": 109256
+        }
+      ]
+    },
+    "candidate": {
+      "sample_counters_unavailable": {
+        "thread_cpu_ns": 0,
+        "allocated_bytes": 0,
+        "process_cpu_ns": 0
+      },
+      "rss_after_unavailable": 0,
+      "rss_after_kib_range": [
+        46084,
+        108976
+      ],
+      "requested_gc_heap_delta_bytes_range": [
+        -852576,
+        16778000
+      ],
+      "process_peak_rss_kib_range": [
+        105820,
+        109272
+      ],
+      "processes": [
+        {
+          "label": "round-00-candidate",
+          "elapsed_seconds": 8.934371,
+          "process_user_cpu_seconds": 8.817383,
+          "process_system_cpu_seconds": 0.108126,
+          "process_peak_rss_kib": 105820
+        },
+        {
+          "label": "round-01-candidate",
+          "elapsed_seconds": 9.531945,
+          "process_user_cpu_seconds": 9.371301,
+          "process_system_cpu_seconds": 0.15623399999999998,
+          "process_peak_rss_kib": 109184
+        },
+        {
+          "label": "round-02-candidate",
+          "elapsed_seconds": 9.258885,
+          "process_user_cpu_seconds": 9.137079,
+          "process_system_cpu_seconds": 0.11715199999999999,
+          "process_peak_rss_kib": 109272
+        },
+        {
+          "label": "round-03-candidate",
+          "elapsed_seconds": 8.705796,
+          "process_user_cpu_seconds": 8.615533,
+          "process_system_cpu_seconds": 0.08723199999999999,
+          "process_peak_rss_kib": 105932
+        },
+        {
+          "label": "round-04-candidate",
+          "elapsed_seconds": 11.532776,
+          "process_user_cpu_seconds": 11.404633,
+          "process_system_cpu_seconds": 0.11881599999999999,
+          "process_peak_rss_kib": 108364
+        },
+        {
+          "label": "round-05-candidate",
+          "elapsed_seconds": 9.240314,
+          "process_user_cpu_seconds": 9.141526,
+          "process_system_cpu_seconds": 0.094413,
+          "process_peak_rss_kib": 106032
+        }
+      ]
+    }
+  },
+  "jni_table_model": {
+    "status": "PASS",
+    "baseline": {
+      "mode": "baseline",
+      "cases": "1864",
+      "checks": "3438161",
+      "digest": "2f94c174f2012771",
+      "count_bytes": "582934",
+      "emit_bytes": "503560",
+      "payload_calls": "2324",
+      "payload_bytes": "3021360"
+    },
+    "candidate": {
+      "mode": "skip-prefix",
+      "cases": "1864",
+      "checks": "3438621",
+      "digest": "2f94c174f2012771",
+      "count_bytes": "582934",
+      "emit_bytes": "503560",
+      "payload_calls": "1954",
+      "payload_bytes": "2304828"
+    },
+    "previous_candidate_tape_byte_identical": true
+  },
+  "assembly": {
+    "variants": {
+      "baseline": {
+        "object": "qualification/native-baseline/obj/m3_index_mask_compactor.o",
+        "object_sha256": "d1b773fa6a3cf91721e528a89e5db203b6b8cce8b91cbf0cec5064e60c215bc4",
+        "text_bytes": 6431,
+        "entries": [
+          {
+            "width": "int",
+            "symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative",
+            "object_offset": "0x1340",
+            "function_bytes": 751,
+            "principal_frame_reservation_bytes": 1368,
+            "simd_register_reference_count": 0,
+            "assembly_log": "qualification/native-candidate-v2/assembly-baseline-int.log",
+            "assembly_log_sha256": "2889f074f6812fcc0b4efe7757314a9bdf8bec4326d671834c597da853b72791"
+          },
+          {
+            "width": "long",
+            "symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative",
+            "object_offset": "0x1630",
+            "function_bytes": 751,
+            "principal_frame_reservation_bytes": 2392,
+            "simd_register_reference_count": 0,
+            "assembly_log": "qualification/native-candidate-v2/assembly-baseline-long.log",
+            "assembly_log_sha256": "fb7033b6f3f17ef9ddf61662a7b56973e1ff7fc159c7285ca440e75aa197ce55"
+          }
+        ]
+      },
+      "v1": {
+        "object": "qualification/native-candidate/obj/m3_index_mask_compactor.o",
+        "object_sha256": "5d065f6943be44afa48ab7e38769c8c674eb7c7c3a3c24911b8279470f128371",
+        "text_bytes": 6654,
+        "entries": [
+          {
+            "width": "int",
+            "symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative",
+            "object_offset": "0x1340",
+            "function_bytes": 862,
+            "principal_frame_reservation_bytes": 1368,
+            "simd_register_reference_count": 0,
+            "assembly_log": "qualification/native-candidate-v2/assembly-v1-int.log",
+            "assembly_log_sha256": "9dd969f7f4f0d0ad07fbc3c514669c350f4c31b0865ee062ddffdd3e599d1460"
+          },
+          {
+            "width": "long",
+            "symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative",
+            "object_offset": "0x16a0",
+            "function_bytes": 862,
+            "principal_frame_reservation_bytes": 2392,
+            "simd_register_reference_count": 0,
+            "assembly_log": "qualification/native-candidate-v2/assembly-v1-long.log",
+            "assembly_log_sha256": "4ad1f4281ff5babbe1866e5272247397239808f5cb4da9e6901d65a2094ddcac"
+          }
+        ]
+      },
+      "v2": {
+        "object": "qualification/native-candidate-v2/obj/m3_index_mask_compactor.o",
+        "object_sha256": "9993263cf74ec0e3ede55c80e4c41021a8a991381b1f6b8da0bec491b9c0740c",
+        "text_bytes": 6809,
+        "entries": [
+          {
+            "width": "int",
+            "symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowMasksNative",
+            "object_offset": "0x1340",
+            "function_bytes": 937,
+            "principal_frame_reservation_bytes": 1384,
+            "simd_register_reference_count": 0,
+            "assembly_log": "qualification/native-candidate-v2/assembly-v2-int.log",
+            "assembly_log_sha256": "ff1f88fcf82c265cb4713acd37f14162bffd77c18356ba023358048a6da8ced5"
+          },
+          {
+            "width": "long",
+            "symbol": "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowMasksNative",
+            "object_offset": "0x16f0",
+            "function_bytes": 937,
+            "principal_frame_reservation_bytes": 2408,
+            "simd_register_reference_count": 0,
+            "assembly_log": "qualification/native-candidate-v2/assembly-v2-long.log",
+            "assembly_log_sha256": "4078897b880e34446713d89a38335248b4dc6cb65ded55553dcd3a5d71716ac6"
+          }
+        ]
+      }
+    },
+    "unchanged_text_prefix_bytes": 4928,
+    "observations": [
+      "V2 rejected-prefix loops increment only the cursor; the end pointer is computed before traversal.",
+      "V2 derives begin from first minus marks once after a match, before the payload JNI call.",
+      "V2 preserves suffix addressing strength reduction; no per-row i-minus-begin subtraction appears in the emission loop.",
+      "Each two-mask export grows from baseline751 to v1 862 to v2 937 bytes.",
+      "V2 principal compiler frame reservations grow16 bytes: int1384 versus1368; long2408 versus2392. Fixed source buffer capacities remain unchanged.",
+      "The excluded mask is read from a stack slot on part of the v2 first-match path; do not claim fewer spills or universally cheaper code.",
+      "Earlier entrypoints and count helpers have an identical4928-byte text prefix across all three objects.",
+      "Both two-mask exports remain scalar in all three objects; no lost-vectorization explanation is supported.",
+      "Assembly confirms the bounded hypothesis only. CPU, allocation and process admission require the complete unchanged frozen matrix."
+    ]
+  },
+  "prior_v1_disposition": "HOLD_NATIVE_ATOM_FOR_PERFORMANCE_ADMISSION remains preserved; v1 had 18 CPU flags, including 10 changed emission cases.",
+  "prior_v1_manifest_entries_reverified": 151,
+  "interpretation_limits": [
+    "Nineteen controls/empty paths also flag and changed-case paired ranges cross one. These local ratios do not prove a causal slowdown for every flagged case.",
+    "The decision applies the complete predeclared admission rule without width, shape, or size exemptions; no further retries or tuning were used.",
+    "V1 and v2 were measured in separate sessions; changes in flag counts do not establish a head-to-head performance ranking.",
+    "Exact Java allocated-byte parity does not measure native allocator traffic, and RSS/requested-GC heap observations do not establish process-memory reduction.",
+    "Pointer traversal removes an ordinal increment in generated code but increases both export bodies to 937 bytes and their frames by 16 bytes; assembly alone establishes no CPU improvement.",
+    "SDK library qualification does not close a matching current-source integrated JDK image, full owning reactor, or cross-platform acceptance gate.",
+    "Earlier pre-measurement status fields remain immutable; this completed report records subsequent performance disposition without rewriting historical receipts."
+  ],
+  "evidence": [
+    {
+      "path": "qualification/native-resource-v2/SUMMARY.json",
+      "bytes": 389102,
+      "sha256": "a3786285fd040abfe0c1f9cec3e2c621222763a6447342883b0fd228783f88a7"
+    },
+    {
+      "path": "qualification/native-resource-v2/SUMMARY.csv",
+      "bytes": 30105,
+      "sha256": "33c06ef7fcf365d3ebdd9a4b156226fa8bc40c33f4f39ecaf8d1fbfecc9f531f"
+    },
+    {
+      "path": "qualification/native-resource-v2/COMMANDS.jsonl",
+      "bytes": 12787,
+      "sha256": "5ea47db35796af2e92e514c1eb0ab857e4592af481c2318401e1644ee163cb14"
+    },
+    {
+      "path": "qualification/native-resource-v2/MEASUREMENT_ENVIRONMENT.json",
+      "bytes": 1584,
+      "sha256": "d20204badd36fb5642bb96a0bf0500e3d89eef69fb4104aeabc800a81248977f"
+    },
+    {
+      "path": "qualification/native-resource-v2/WORKLOAD_IDLE_GATE.json",
+      "bytes": 3328,
+      "sha256": "4807c2f0281c8b641ce7a954b0992753a8ea1e7bde630afe048b558b1a9a7945"
+    },
+    {
+      "path": "qualification/native-resource-v2/V2_RESOURCE_ADAPTER_RECEIPT.json",
+      "bytes": 1706,
+      "sha256": "6bfd494eb73c1f036a28c0c686cecf7e9539105818105df74d9e0b29a2f70204"
+    },
+    {
+      "path": "qualification/native-resource-v2/run_resources_v2.py",
+      "bytes": 15520,
+      "sha256": "f39e426bec280bc60017591c912fe18efc66fd6e9fca62487e4656d494bf4438"
+    },
+    {
+      "path": "qualification/native-resource-v2/INDEPENDENT_REVIEW_CONFIRMATION.json",
+      "bytes": 1165,
+      "sha256": "145847102716d764e335c57fdec95682535f4b3628bf01c3b743bc55a703d362"
+    }
+  ],
+  "sealed_sources_and_gates": [
+    {
+      "path": "design/native-tests/NATIVE_RESOURCE_PLAN.md",
+      "bytes": 7856,
+      "sha256": "845e52a407252f93170de08077ecc3ecc472ebae871f4dcea3396ea9e07ef5c8"
+    },
+    {
+      "path": "design/native-tests/M3RequiredExcludedWindowResourceProbe.java",
+      "bytes": 13703,
+      "sha256": "028871e85e025b5b413dc8d7d34241bb9d6f588ecc067075b0932f846c1c33de"
+    },
+    {
+      "path": "design/native-tests/POINTER_REFINEMENT_CONTRACT.md",
+      "bytes": 10432,
+      "sha256": "cce6405361c0bca61c8c6e837461396426e7740c6ec0a420f4c0153dfd74739b"
+    },
+    {
+      "path": "design/catalogue/INDEPENDENT_NATIVE_V2_REVIEW.md",
+      "bytes": 8152,
+      "sha256": "57147b03247d18557dfbe21a0dfc1328e33e58001e429cf385bd9d99aa20f580"
+    },
+    {
+      "path": "input/m3/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 21506,
+      "sha256": "c1e6205563921072f7ac86be79862e4e16c69cdf5951057331d4ca8a83025052"
+    },
+    {
+      "path": "design/candidates-v1/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 22522,
+      "sha256": "3b1b9fb01b4edab703022f06366d725cf4bf71c84e8aa300d3e824991ac9746a"
+    },
+    {
+      "path": "sdk-image-v1/files/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 22522,
+      "sha256": "3b1b9fb01b4edab703022f06366d725cf4bf71c84e8aa300d3e824991ac9746a"
+    },
+    {
+      "path": "design/candidates-v2/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 22808,
+      "sha256": "56e2781621b3998b8afcf0d428b5c37d10339590d56f8c8cf852398b4df4bdee"
+    },
+    {
+      "path": "sdk-image-v2/files/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 22808,
+      "sha256": "56e2781621b3998b8afcf0d428b5c37d10339590d56f8c8cf852398b4df4bdee"
+    },
+    {
+      "path": "qualification/native-resource/NATIVE_EVIDENCE_MANIFEST.json",
+      "bytes": 29553,
+      "sha256": "dac8c1e57cd9631b83c985b6cffd6a4fb727758727feb1743e511e61ed45689c"
+    },
+    {
+      "path": "qualification/native-resource/ADMISSION_RECOMMENDATION.json",
+      "bytes": 24731,
+      "sha256": "b80c850409bb3193eb86eac7368ad8c23599d1d8747c82d2e16386db89de6ed4"
+    },
+    {
+      "path": "qualification/native-resource/SUMMARY.json",
+      "bytes": 387275,
+      "sha256": "c28a45c7c4a1c714c9e1c511afe7240e5107ab23c5c7cf2da484f734dfbd7148"
+    },
+    {
+      "path": "qualification/native-resource/PROBE_COMPILE_PASS.json",
+      "bytes": 1471,
+      "sha256": "bb5c8d72d84d2018ebc1cbb413c039158c42a0c72a2a45a5044d43993230485c"
+    },
+    {
+      "path": "qualification/native-resource/INDEPENDENT_REVIEW_CONFIRMATION.json",
+      "bytes": 2002,
+      "sha256": "95245cd7750e37b12812d542455dbc9a2dc056850aec550a941d799e71face25"
+    },
+    {
+      "path": "qualification/native-candidate-v2/CANDIDATE_NATIVE_PASS.json",
+      "bytes": 824,
+      "sha256": "81cf87ca0a6d27fd44df2be83f7891ccfb03f8f93fd5700634ec047b37f5260f"
+    },
+    {
+      "path": "qualification/native-candidate-v2/MODEL_COMPARISON.json",
+      "bytes": 15007,
+      "sha256": "c8c2ffab8ed4a32ed3251c12038b7a671a49daf19d58a10a91bd877c9c0ca309"
+    },
+    {
+      "path": "qualification/native-candidate-v2/REAL_JVM_COMPARISON.json",
+      "bytes": 1079,
+      "sha256": "c51f474bee922e2c6ce0e052bb3e3fce2cb429a12418e32e1668a8dd77b920d3"
+    },
+    {
+      "path": "qualification/native-candidate-v2/ASSEMBLY_REVIEW.json",
+      "bytes": 5293,
+      "sha256": "7918920199139507af9c060171af6b7539414e3d67bb039b8c9de38ed7cfaad1"
+    },
+    {
+      "path": "qualification/native-resource-v2/run_resources_v2.py",
+      "bytes": 15520,
+      "sha256": "f39e426bec280bc60017591c912fe18efc66fd6e9fca62487e4656d494bf4438"
+    },
+    {
+      "path": "qualification/native-resource-v2/V2_RESOURCE_ADAPTER_RECEIPT.json",
+      "bytes": 1706,
+      "sha256": "6bfd494eb73c1f036a28c0c686cecf7e9539105818105df74d9e0b29a2f70204"
+    },
+    {
+      "path": "qualification/native-resource-v2/WORKLOAD_IDLE_GATE.json",
+      "bytes": 3328,
+      "sha256": "4807c2f0281c8b641ce7a954b0992753a8ea1e7bde630afe048b558b1a9a7945"
+    },
+    {
+      "path": "qualification/native-resource-v2/SUMMARY.json",
+      "bytes": 389102,
+      "sha256": "a3786285fd040abfe0c1f9cec3e2c621222763a6447342883b0fd228783f88a7"
+    },
+    {
+      "path": "qualification/recipe-v2/PASS.json",
+      "bytes": 1905,
+      "sha256": "03fc413d0129475cb3416bc21ba6efb0da63c3f44fbff3102657666577541d28"
+    },
+    {
+      "path": "sdk-image-v2/SDK_RUN.json",
+      "bytes": 763,
+      "sha256": "aa44ed61ab0e9ad110766f4bb5f557f0fc42758c50dbf7a58535d108a1e036a5"
+    },
+    {
+      "path": "sdk-image-v2/SDK_RECEIPT.tsv",
+      "bytes": 5743,
+      "sha256": "4c2f438d0df83a64776413d7478e2296d137de16ebda5c02210196f9dff7af74"
+    },
+    {
+      "path": "sdk-fixedpoint-image-v2/SDK_RECEIPT.tsv",
+      "bytes": 6220,
+      "sha256": "de831baeb63daa2810c711ccd97946777d01f4d0a0e2d0cf5537f3b41ef1c862"
+    }
+  ]
+}

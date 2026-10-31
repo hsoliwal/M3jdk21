@@ -1,0 +1,2 @@
+phase	kind	targets	manifest_sha256	before_root	after_root	missing_refusals	drift_refusals	duplicate_refusal	fixed_point	mixed	order	repeat	decoys	workers	cycles
+swt-current-owner-runtime-closure-20261021-001	text	1	39a511dc8f39daa112754e7850db43f451b63b95c072649362f34b1a91a03264	eea287a26934aba9cecfefcdbc3cef88fe3ced3c4f62b2d51a8fb5404f2b9682	4515e9cf273b74f575d55175240a4a088f4fb3647585d322087e196aa15441ae	1	1	PASS	PASS	PASS	PASS	PASS	PASS	2	1

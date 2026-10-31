@@ -1,0 +1,120 @@
+Classfile /workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v4/baseline/rewrite-java-21/target/classes/org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$1.class
+  Last modified Oct 18, 2026; size 982 bytes
+  SHA-256 checksum a78bd2567c78cfaa11073c1de44d043e08a45405241bb4a8104ba3fe150a3a32
+  Compiled from "ReloadableJava21JavadocVisitor.java"
+class org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor$1
+  minor version: 0
+  major version: 65
+  flags: (0x1020) ACC_SUPER, ACC_SYNTHETIC
+  this_class: #8                          // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$1
+  super_class: #29                        // java/lang/Object
+  interfaces: 0, fields: 1, methods: 1, attributes: 4
+Constant pool:
+   #1 = Methodref          #2.#3          // com/sun/source/doctree/AttributeTree$ValueKind.values:()[Lcom/sun/source/doctree/AttributeTree$ValueKind;
+   #2 = Class              #4             // com/sun/source/doctree/AttributeTree$ValueKind
+   #3 = NameAndType        #5:#6          // values:()[Lcom/sun/source/doctree/AttributeTree$ValueKind;
+   #4 = Utf8               com/sun/source/doctree/AttributeTree$ValueKind
+   #5 = Utf8               values
+   #6 = Utf8               ()[Lcom/sun/source/doctree/AttributeTree$ValueKind;
+   #7 = Fieldref           #8.#9          // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$1.$SwitchMap$com$sun$source$doctree$AttributeTree$ValueKind:[I
+   #8 = Class              #10            // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$1
+   #9 = NameAndType        #11:#12        // $SwitchMap$com$sun$source$doctree$AttributeTree$ValueKind:[I
+  #10 = Utf8               org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$1
+  #11 = Utf8               $SwitchMap$com$sun$source$doctree$AttributeTree$ValueKind
+  #12 = Utf8               [I
+  #13 = Fieldref           #2.#14         // com/sun/source/doctree/AttributeTree$ValueKind.UNQUOTED:Lcom/sun/source/doctree/AttributeTree$ValueKind;
+  #14 = NameAndType        #15:#16        // UNQUOTED:Lcom/sun/source/doctree/AttributeTree$ValueKind;
+  #15 = Utf8               UNQUOTED
+  #16 = Utf8               Lcom/sun/source/doctree/AttributeTree$ValueKind;
+  #17 = Methodref          #2.#18         // com/sun/source/doctree/AttributeTree$ValueKind.ordinal:()I
+  #18 = NameAndType        #19:#20        // ordinal:()I
+  #19 = Utf8               ordinal
+  #20 = Utf8               ()I
+  #21 = Class              #22            // java/lang/NoSuchFieldError
+  #22 = Utf8               java/lang/NoSuchFieldError
+  #23 = Fieldref           #2.#24         // com/sun/source/doctree/AttributeTree$ValueKind.SINGLE:Lcom/sun/source/doctree/AttributeTree$ValueKind;
+  #24 = NameAndType        #25:#16        // SINGLE:Lcom/sun/source/doctree/AttributeTree$ValueKind;
+  #25 = Utf8               SINGLE
+  #26 = Fieldref           #2.#27         // com/sun/source/doctree/AttributeTree$ValueKind.DOUBLE:Lcom/sun/source/doctree/AttributeTree$ValueKind;
+  #27 = NameAndType        #28:#16        // DOUBLE:Lcom/sun/source/doctree/AttributeTree$ValueKind;
+  #28 = Utf8               DOUBLE
+  #29 = Class              #30            // java/lang/Object
+  #30 = Utf8               java/lang/Object
+  #31 = Utf8               <clinit>
+  #32 = Utf8               ()V
+  #33 = Utf8               Code
+  #34 = Utf8               LineNumberTable
+  #35 = Utf8               LocalVariableTable
+  #36 = Utf8               StackMapTable
+  #37 = Utf8               SourceFile
+  #38 = Utf8               ReloadableJava21JavadocVisitor.java
+  #39 = Utf8               EnclosingMethod
+  #40 = Class              #41            // org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor
+  #41 = Utf8               org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor
+  #42 = Utf8               NestHost
+  #43 = Utf8               InnerClasses
+  #44 = Class              #45            // com/sun/source/doctree/AttributeTree
+  #45 = Utf8               com/sun/source/doctree/AttributeTree
+  #46 = Utf8               ValueKind
+{
+  static final int[] $SwitchMap$com$sun$source$doctree$AttributeTree$ValueKind;
+    descriptor: [I
+    flags: (0x1018) ACC_STATIC, ACC_FINAL, ACC_SYNTHETIC
+
+  static {};
+    descriptor: ()V
+    flags: (0x0008) ACC_STATIC
+    Code:
+      stack=3, locals=1, args_size=0
+         0: invokestatic  #1                  // Method com/sun/source/doctree/AttributeTree$ValueKind.values:()[Lcom/sun/source/doctree/AttributeTree$ValueKind;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$com$sun$source$doctree$AttributeTree$ValueKind:[I
+         9: getstatic     #7                  // Field $SwitchMap$com$sun$source$doctree$AttributeTree$ValueKind:[I
+        12: getstatic     #13                 // Field com/sun/source/doctree/AttributeTree$ValueKind.UNQUOTED:Lcom/sun/source/doctree/AttributeTree$ValueKind;
+        15: invokevirtual #17                 // Method com/sun/source/doctree/AttributeTree$ValueKind.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$com$sun$source$doctree$AttributeTree$ValueKind:[I
+        27: getstatic     #23                 // Field com/sun/source/doctree/AttributeTree$ValueKind.SINGLE:Lcom/sun/source/doctree/AttributeTree$ValueKind;
+        30: invokevirtual #17                 // Method com/sun/source/doctree/AttributeTree$ValueKind.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$com$sun$source$doctree$AttributeTree$ValueKind:[I
+        42: getstatic     #26                 // Field com/sun/source/doctree/AttributeTree$ValueKind.DOUBLE:Lcom/sun/source/doctree/AttributeTree$ValueKind;
+        45: invokevirtual #17                 // Method com/sun/source/doctree/AttributeTree$ValueKind.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+      LineNumberTable:
+        line 222: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+      StackMapTable: number_of_entries = 6
+        frame_type = 87 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+        frame_type = 77 /* same_locals_1_stack_item */
+          stack = [ class java/lang/NoSuchFieldError ]
+        frame_type = 0 /* same */
+}
+SourceFile: "ReloadableJava21JavadocVisitor.java"
+EnclosingMethod: #40.#0                 // org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor
+NestHost: class org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor
+InnerClasses:
+  public static final #46= #2 of #44;     // ValueKind=class com/sun/source/doctree/AttributeTree$ValueKind of class com/sun/source/doctree/AttributeTree
+  static #8;                              // class org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$1

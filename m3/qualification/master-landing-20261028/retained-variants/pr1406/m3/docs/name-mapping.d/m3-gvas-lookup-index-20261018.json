@@ -1,0 +1,32 @@
+{
+  "schema": "M3_SOURCE_REFINEMENT_MAPPING_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "recipe": "com.synexia.m3.GvasLookupIndex20261018",
+  "recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-gvas-lookup-index-20261018",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "target": "com.m3.text.M3GvasLiteralImage",
+  "target_path": "m3/core/src/com/m3/text/M3GvasLiteralImage.java",
+  "source_reference": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MappedCompiledLanguageImage.java",
+  "source_revision": "289e32f130c9c8e4a1cf0edc1066327d699393bf",
+  "source_role": "primitive bounded candidate-directory pattern; UTF-8 comparator not ported",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "disposition": "EXISTING_OWNER_PRIVATE_ATOM_REFINEMENT",
+  "contracts": [
+    "unchanged public/protected declarations",
+    "unchanged M3GVAS01 bytes and lexicographic row IDs",
+    "exact UTF-16 verification including unpaired surrogates",
+    "same fixed native base+payload offsets",
+    "direct mapped reverse facts/address access",
+    "bounded optional process-local metadata with binary fallback"
+  ],
+  "proof": "m3/qualification/string-index-reverse-20261018/gvas",
+  "pending": [
+    "Windows native mapper execution",
+    "matched full M3String/HotSpot/jtreg integration",
+    "permanent UNICODEX concept-anchor and cross-generation publisher contract"
+  ],
+  "receiving_sequence_advanced": false,
+  "family_completion": false,
+  "repository_completion": false
+}

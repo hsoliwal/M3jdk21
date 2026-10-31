@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.Descriptor
+displayName: M3 VM-owned descriptors
+description: >-
+  Reuses Class.descriptorString for hidden and nominal reflection types and adds
+  the source-bound runtime regression. The legacy jdk22 crate prefix is not a JEP claim.
+tags:
+  - m3
+  - jdk21
+  - reflection
+  - fail-closed
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-descriptor

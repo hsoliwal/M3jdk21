@@ -1,0 +1,33 @@
+M3JDK21 native shadow-stream local Java21/JMOD proof
+Executed 2026-10-20 using Linux OpenJDK 21.0.12.1
+Canonical source: hsoliwal/com.synexia#12598
+Product source: hsoliwal/M3JDK21#1600, four exact source postimages
+M3File SHA-256: 93864fe41040396ffa40775ed7489f8e97ae6ee058538294e0626d046b12915c
+M3StreamProgress SHA-256: e7258d79c6dcfb65c2598ae1480f5d7078a31fde921c4842ea8ab4209754362d
+M3ShadowStreams SHA-256: bcbbb5567fb8afd2a8f32124096d6af97b68a3da2e67e0809343de52a812e3a5
+M3ShadowStreamsContract SHA-256: c38c59dcfc5137cf6685ba25f6e126e971251b66898a976dd1a3f6950c5d1352
+
+javac --release 21 -proc:none -Xlint:all,-module -Werror ... module-info.java M3File.java M3StreamProgress.java M3ShadowStreams.java M3ShadowStreamsContract.java
+PASS (zero errors/warnings)
+java --module-path module -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+M3_SHADOW_STREAM_PASS checks=44
+java -Xint --module-path module -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+M3_SHADOW_STREAM_PASS checks=44
+
+jmod create --class-path module pack/com.m3.file.jmod
+PASS
+jlink --module-path $JDK/jmods:pack --add-modules com.m3.file --output pack/image --strip-debug --no-man-pages --no-header-files
+PASS
+pack/image/bin/java -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+M3_SHADOW_STREAM_PASS checks=44
+pack/image/bin/java -Xint -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+M3_SHADOW_STREAM_PASS checks=44
+pack/image/bin/java --list-modules
+com.m3.file
+java.base@21.0.12.1
+
+SHA-256 proof JMOD: fbc6a1556f79920401ef47639d705a6f2e9d876a9bcc98a47b1c9ffc08525065
+SHA-256 M3File class: 85db6e0612183db1dd8f553fc52984d4df908d53b22647ecb6387243dbf1081b
+No JNI native code created, executed or benchmarked.
+No full M3JDK21/HotSpot self-hosting image built; proof uses a stock Java21 VM/JDK and a JMOD with embedded test code.
+Maven/OpenRewrite candidate replay and hosted CI are NOT EXECUTED/CONFIRMED by this local proof.

@@ -1,0 +1,42 @@
+[
+  {
+    "source_repository": "hsoliwal/M3jdk21",
+    "source_ref": "1e5056b698fddc9992dc771ee5b1ababc3b53ce9",
+    "path": "m3/collections/src/main/java/com/m3/collections/M3SignalDimensions.java",
+    "git_blob": "1fb23273f62ad650c220e8e2692f939527b45f34",
+    "sha256": "f1a6fd89538f0f3c526f50323eb8a43d3bd7e49c49257fe3385c91d600fc5446",
+    "copy_mode": "EXACT_QUALIFICATION_FIXTURE_ONLY"
+  },
+  {
+    "source_repository": "hsoliwal/M3jdk21",
+    "source_ref": "1e5056b698fddc9992dc771ee5b1ababc3b53ce9",
+    "path": "m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+    "git_blob": "dfbcd0cb5552d979af3340cdbd7aec98155841ce",
+    "sha256": "15c85e74a51a716af1b11038c05263b83b1a1ea02f345bc3838d661a158fd80f",
+    "copy_mode": "EXACT_QUALIFICATION_FIXTURE_ONLY"
+  },
+  {
+    "source_repository": "hsoliwal/M3jdk21",
+    "source_ref": "1e5056b698fddc9992dc771ee5b1ababc3b53ce9",
+    "path": "m3/collections/src/main/java/com/m3/collections/M3SignalOrderNative.java",
+    "git_blob": "7e5bc5fb1c1a25e00452f2dc0f58d4c90900bffe",
+    "sha256": "eaa37fee096172a200088d80b2b48955d60d602061fba71d715e25f6d395acc8",
+    "copy_mode": "EXACT_QUALIFICATION_FIXTURE_ONLY"
+  },
+  {
+    "source_repository": "hsoliwal/M3jdk21",
+    "source_ref": "1e5056b698fddc9992dc771ee5b1ababc3b53ce9",
+    "path": "m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorContract.java",
+    "git_blob": "ba4b96a53d5a16fa9cfe8312dbfb03af16c7bb5f",
+    "sha256": "549ae933049b3f3925036cf0c188aaf0affea95ecf5c7d6e05c1ee1426325381",
+    "copy_mode": "EXACT_QUALIFICATION_FIXTURE_ONLY"
+  },
+  {
+    "source_repository": "hsoliwal/M3jdk21",
+    "source_ref": "1e5056b698fddc9992dc771ee5b1ababc3b53ce9",
+    "path": "m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.java",
+    "git_blob": "312757d9147eeb80e6d291e38d019e3a4931ee49",
+    "sha256": "89c35701322381e4d958bf6344e2357988c4ad97ce1a0dd42a9a3f698a205c7f",
+    "copy_mode": "EXACT_QUALIFICATION_FIXTURE_ONLY"
+  }
+]

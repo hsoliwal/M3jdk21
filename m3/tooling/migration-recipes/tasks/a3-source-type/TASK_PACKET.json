@@ -1,0 +1,14 @@
+{
+  "task_packet": "active",
+  "source_doc": "m3/tooling/migration-recipes/tasks/a3-source-type/DESIGN.md",
+  "invariant_id": "A3_SOURCEFILE_TARGET_TYPE",
+  "base_commit": "7fffe6f14ea0073126e57a27ab7c2e333b5b8883",
+  "run": {"mode": "apply", "profile": "hosted-compiler-repair", "workers": 1, "shard_count": 1, "shard_index": 0},
+  "targets": {"files": ["m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3SerialFileWorkRecipe.java", "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/a3/M3A3SerialFileWorkRecipeTest.java", "m3/tooling/migration-recipes/tasks/a3-source-type/**"]},
+  "invariant_locks": {"PUBLIC_API": "LOCKED", "RECIPE_IMAGES": "LOCKED", "EXISTING_TESTS": "RETAIN", "WORKFLOWS_POMS_THRESHOLDS": "LOCKED", "CANONICAL_BRANCHES": "READ_ONLY"},
+  "allowed_delta": ["typed assignment in existing reusable recipe", "metadata regression assertions", "task evidence"],
+  "forbidden": ["force/rebase/squash/merge", "gate exclusions", "silent source or manifest changes"],
+  "verify_order": ["diff", "static review", "hosted compiler", "tests", "coverage"],
+  "output_contract": ["STATUS.tsv", "FINAL_REPORT.md", "RUN_CONTEXT.tsv", "PROVENANCE.tsv", "VERIFY_CONTRACT.tsv", "OUTPUT_CONTRACT.tsv"],
+  "stop_conditions": ["source drift", "unexpected diff", "failed mandatory gate blocks promotion"]
+}

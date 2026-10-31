@@ -1,0 +1,209 @@
+Compiled from "M3Arrays.java"
+public final class com.m3.arrays.M3Arrays {
+  public static com.m3.arrays.M3ByteArrayView bytes(byte[]);
+    descriptor: ([B)Lcom/m3/arrays/M3ByteArrayView;
+
+  public static com.m3.arrays.M3Utf16ArrayView chars(char[]);
+    descriptor: ([C)Lcom/m3/arrays/M3Utf16ArrayView;
+
+  public static com.m3.arrays.M3Utf16ArrayView chars(java.lang.CharSequence);
+    descriptor: (Ljava/lang/CharSequence;)Lcom/m3/arrays/M3Utf16ArrayView;
+
+  public static com.m3.arrays.M3IntArrayView ints(int[]);
+    descriptor: ([I)Lcom/m3/arrays/M3IntArrayView;
+
+  public static com.m3.arrays.M3LongArrayView longs(long[]);
+    descriptor: ([J)Lcom/m3/arrays/M3LongArrayView;
+
+  public static com.m3.arrays.M3ByteArrayView join(com.m3.arrays.M3ByteArrayView...);
+    descriptor: ([Lcom/m3/arrays/M3ByteArrayView;)Lcom/m3/arrays/M3ByteArrayView;
+
+  public static com.m3.arrays.M3Utf16ArrayView join(com.m3.arrays.M3Utf16ArrayView...);
+    descriptor: ([Lcom/m3/arrays/M3Utf16ArrayView;)Lcom/m3/arrays/M3Utf16ArrayView;
+
+  public static com.m3.arrays.M3IntArrayView join(com.m3.arrays.M3IntArrayView...);
+    descriptor: ([Lcom/m3/arrays/M3IntArrayView;)Lcom/m3/arrays/M3IntArrayView;
+
+  public static com.m3.arrays.M3LongArrayView join(com.m3.arrays.M3LongArrayView...);
+    descriptor: ([Lcom/m3/arrays/M3LongArrayView;)Lcom/m3/arrays/M3LongArrayView;
+}
+Compiled from "M3ArrayNative.java"
+public final class com.m3.arrays.M3ArrayNative {
+  public static synchronized void load(java.nio.file.Path);
+    descriptor: (Ljava/nio/file/Path;)V
+
+  public static boolean isLoaded();
+    descriptor: ()Z
+
+  public static int compareUtf16(char[], int, char[], int, int);
+    descriptor: ([CI[CII)I
+
+  public static char[] concatenateUtf16(char[]...);
+    descriptor: ([[C)[C
+}
+Compiled from "M3ByteArrayView.java"
+public interface com.m3.arrays.M3ByteArrayView {
+  public abstract int length();
+    descriptor: ()I
+
+  public abstract byte byteAt(int);
+    descriptor: (I)B
+
+  public abstract com.m3.arrays.M3ByteArrayView slice(int, int);
+    descriptor: (II)Lcom/m3/arrays/M3ByteArrayView;
+
+  public abstract int segmentCount();
+    descriptor: ()I
+
+  public abstract java.nio.ByteBuffer[] asReadOnlyBuffers();
+    descriptor: ()[Ljava/nio/ByteBuffer;
+
+  public default void copyTo(int, byte[], int, int);
+    descriptor: (I[BII)V
+
+  public default byte[] copy();
+    descriptor: ()[B
+}
+Compiled from "M3Utf16ArrayView.java"
+public interface com.m3.arrays.M3Utf16ArrayView extends java.lang.CharSequence {
+  public abstract int length();
+    descriptor: ()I
+
+  public abstract char charAt(int);
+    descriptor: (I)C
+
+  public abstract com.m3.arrays.M3Utf16ArrayView subSequence(int, int);
+    descriptor: (II)Lcom/m3/arrays/M3Utf16ArrayView;
+
+  public abstract int segmentCount();
+    descriptor: ()I
+
+  public abstract com.m3.arrays.M3Utf16Facts facts();
+    descriptor: ()Lcom/m3/arrays/M3Utf16Facts;
+
+  public abstract java.nio.CharBuffer[] asReadOnlyCharBuffers();
+    descriptor: ()[Ljava/nio/CharBuffer;
+
+  public default int javaHashCode();
+    descriptor: ()I
+
+  public default int codePointCount();
+    descriptor: ()I
+
+  public default int codePointAt(int);
+    descriptor: (I)I
+
+  public default int codePointBefore(int);
+    descriptor: (I)I
+
+  public default int offsetByCodePoints(int, int);
+    descriptor: (II)I
+
+  public default java.util.stream.IntStream chars();
+    descriptor: ()Ljava/util/stream/IntStream;
+
+  public default java.util.stream.IntStream codePoints();
+    descriptor: ()Ljava/util/stream/IntStream;
+
+  public default boolean contentEquals(com.m3.arrays.M3Utf16ArrayView);
+    descriptor: (Lcom/m3/arrays/M3Utf16ArrayView;)Z
+
+  public default int compareTo(com.m3.arrays.M3Utf16ArrayView);
+    descriptor: (Lcom/m3/arrays/M3Utf16ArrayView;)I
+
+  public default int indexOf(java.lang.CharSequence, int);
+    descriptor: (Ljava/lang/CharSequence;I)I
+
+  public default int lastIndexOf(java.lang.CharSequence, int);
+    descriptor: (Ljava/lang/CharSequence;I)I
+
+  public default void copyTo(int, char[], int, int);
+    descriptor: (I[CII)V
+
+  public default char[] copy();
+    descriptor: ()[C
+
+  public default java.lang.CharSequence subSequence(int, int);
+    descriptor: (II)Ljava/lang/CharSequence;
+}
+Compiled from "M3IntArrayView.java"
+public interface com.m3.arrays.M3IntArrayView {
+  public abstract int length();
+    descriptor: ()I
+
+  public abstract int intAt(int);
+    descriptor: (I)I
+
+  public abstract com.m3.arrays.M3IntArrayView slice(int, int);
+    descriptor: (II)Lcom/m3/arrays/M3IntArrayView;
+
+  public default void copyTo(int, int[], int, int);
+    descriptor: (I[III)V
+
+  public default int[] copy();
+    descriptor: ()[I
+}
+Compiled from "M3LongArrayView.java"
+public interface com.m3.arrays.M3LongArrayView {
+  public abstract int length();
+    descriptor: ()I
+
+  public abstract long longAt(int);
+    descriptor: (I)J
+
+  public abstract com.m3.arrays.M3LongArrayView slice(int, int);
+    descriptor: (II)Lcom/m3/arrays/M3LongArrayView;
+
+  public default void copyTo(int, long[], int, int);
+    descriptor: (I[JII)V
+
+  public default long[] copy();
+    descriptor: ()[J
+}
+Compiled from "M3Utf16Facts.java"
+public final class com.m3.arrays.M3Utf16Facts extends java.lang.Record {
+  public com.m3.arrays.M3Utf16Facts(int, int, int, int, boolean, boolean, char, char);
+    descriptor: (IIIIZZCC)V
+
+  public boolean empty();
+    descriptor: ()Z
+
+  public static com.m3.arrays.M3Utf16Facts of(java.lang.CharSequence);
+    descriptor: (Ljava/lang/CharSequence;)Lcom/m3/arrays/M3Utf16Facts;
+
+  public static com.m3.arrays.M3Utf16Facts combine(com.m3.arrays.M3Utf16Facts, com.m3.arrays.M3Utf16Facts);
+    descriptor: (Lcom/m3/arrays/M3Utf16Facts;Lcom/m3/arrays/M3Utf16Facts;)Lcom/m3/arrays/M3Utf16Facts;
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public int length();
+    descriptor: ()I
+
+  public int javaHashCode();
+    descriptor: ()I
+
+  public int hashPower31();
+    descriptor: ()I
+
+  public int codePointCount();
+    descriptor: ()I
+
+  public boolean ascii();
+    descriptor: ()Z
+
+  public boolean latin1();
+    descriptor: ()Z
+
+  public char first();
+    descriptor: ()C
+
+  public char last();
+    descriptor: ()C
+}

@@ -1,0 +1,100 @@
+{
+  "schema": "M3_OPENREWRITE_SOURCE_BUILT_PARSER_V1",
+  "status": "PASS",
+  "sdk_inputs_sha256": "7763c7f44ca9ae65624fcfa0bf5cadecdff5b10b816db0e63916f18e7cd25f34",
+  "sdk_results_sha256": "6c591d4b6d37db723682e79fbccc6f9bc8421276ddbcddc0ccf8971c2fae0601",
+  "coordinate": "com.synexia.sourcebuilt.openrewrite:rewrite-java-21:8.17.1-m3-javadoc-1",
+  "original_donor": "openrewrite/rewrite@3bd8271be963c025ce0856072d0f09360e3184cd",
+  "commands": [
+    {
+      "variant": "baseline",
+      "command": [
+        "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+        "-s",
+        "/tmp/m3-toolchain/settings.xml",
+        "-B",
+        "-ntp",
+        "-f",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v4/baseline/rewrite-java-21/pom.xml",
+        "-Dmaven.repo.local=/tmp/m3-maven-repository",
+        "verify"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 12.548162698745728,
+      "log_sha256": "2477f33e8fa30d01b64cb65d4ff57a5e0b6c72b87244c6077cf55d830358bc26",
+      "tests": {
+        "tests": 4,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report_sha256": "db605da53d4c9b31e4a8bca8099efc8d846bbbd92469f92bf1c4fb9493eb21a4"
+    },
+    {
+      "variant": "candidate",
+      "command": [
+        "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+        "-s",
+        "/tmp/m3-toolchain/settings.xml",
+        "-B",
+        "-ntp",
+        "-f",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v4/candidate/rewrite-java-21/pom.xml",
+        "-Dmaven.repo.local=/tmp/m3-maven-repository",
+        "install"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 22.627835512161255,
+      "log_sha256": "bc28c0849ff3452ed7993d09e2852ddd40b5c5fb9166eea0b4a3e6927e7577a3",
+      "tests": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report_sha256": "527d9e3071c2014266708d16afb13b48a973402711d102d53d4c12e99fd74073"
+    }
+  ],
+  "legacy_jdk_compiler_gate_changed": false,
+  "scope": "bounded Javadoc atoms and paired donor class proof; no full upstream TCK claim",
+  "compiled_classes": 21,
+  "changed_classes": [
+    "org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$1.class",
+    "org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor.class",
+    "org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor.class"
+  ],
+  "line_number_only_changes": [
+    "org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$1.class",
+    "org/openrewrite/java/isolated/ReloadableJava21JavadocVisitor$JavaVisitor.class"
+  ],
+  "unchanged_class_hashes": {
+    "org/openrewrite/java/Java21Parser$Builder.class": "9c9caff2a3c22b8c47245ffdda05d7b6756e52e4264fedd19d571be33b5278cc",
+    "org/openrewrite/java/Java21Parser.class": "ea3b222d5b537b8bf73798f1e0dd00539cc5ba1bdc0a89172c5621ddc270e372",
+    "org/openrewrite/java/isolated/ReloadableJava21ModifierResults.class": "fe8e5197d5a4d20154469d5470e1f1662e4e6e92710ed797747111f3cd9fdfa1",
+    "org/openrewrite/java/isolated/ReloadableJava21Parser$1.class": "0bd34711f946c041a271a0a0e7b9781cd93bd26aa95668ee5fed49a6c11478fa",
+    "org/openrewrite/java/isolated/ReloadableJava21Parser$Builder.class": "d4eb5facf74edf7c0adb497176b1304ed95af17e9d237e0393380fc5dae60bf2",
+    "org/openrewrite/java/isolated/ReloadableJava21Parser$ByteArrayCapableJavacFileManager.class": "0add4ee1ea32be34b641004ce2bd9171f3466cad158aeee212140b00db6968bd",
+    "org/openrewrite/java/isolated/ReloadableJava21Parser$PackageAwareJavaFileObject$1.class": "a96c32b3bd5e0cb58fe5c18bb9e8f7a623ff117c8f468c8a0ef836423e66ed84",
+    "org/openrewrite/java/isolated/ReloadableJava21Parser$PackageAwareJavaFileObject.class": "01bae6178c736ea6177ffd3bcf011d9db95d51b2420dc63a1e5734e409f61c10",
+    "org/openrewrite/java/isolated/ReloadableJava21Parser$ResettableLog.class": "55258a6780946dbbfef1d0909c557f438b258f712677b1ef9033e88b3e5613cf",
+    "org/openrewrite/java/isolated/ReloadableJava21Parser.class": "a84ac7e796d7f6bba9d9911969519d465f49f4d264c0940a6c68c3766203e8e0",
+    "org/openrewrite/java/isolated/ReloadableJava21ParserInputFileObject.class": "3676e904eab73fff5233b33d18595a7b116a0d34f86058407c52cee79bfc6c77",
+    "org/openrewrite/java/isolated/ReloadableJava21ParserVisitor$1.class": "bb0dbe72e1f64da22e41005dded57de18a9639e1d9c049119df3dda042c93b20",
+    "org/openrewrite/java/isolated/ReloadableJava21ParserVisitor.class": "c44a77d8e5a80831e5c665c31ca6127aa173f642f14719b6155b3005af7533d6",
+    "org/openrewrite/java/isolated/ReloadableJava21TypeMapping$1.class": "0cdcdef5c7b25035dc82c529024328e4bb5c3d40f743ef41a5a02d0c6010b063",
+    "org/openrewrite/java/isolated/ReloadableJava21TypeMapping.class": "d7a69f2be17c6d81dd392893fc6dcfba986a96c4975891ee3b20b596c6fa4410",
+    "org/openrewrite/java/isolated/ReloadableJava21TypeSignatureBuilder$1.class": "92ff6565755c9d12844d433e7da64b9059edc71052137dedf824d633799c827d",
+    "org/openrewrite/java/isolated/ReloadableJava21TypeSignatureBuilder.class": "b6a6caa36513f753c4b88ab337437f2d7ff8d35af3e763743990828e99795b50",
+    "org/openrewrite/java/isolated/package-info.class": "71ddfd673ea9bdedc4836e264847672e089d1268209b34a95f04817f04a32be2"
+  },
+  "artifact_sha256": "bc5fef92a854c72e8706fc58f545a8ac3e9e4395a052b50810366b94869aef52",
+  "artifact": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v4/candidate/rewrite-java-21/target/rewrite-java-21-8.17.1-m3-javadoc-1.jar",
+  "original_main_warnings": [
+    "[WARNING] No processor claimed any of these annotations: /org.openrewrite.internal.lang.Nullable,/org.openrewrite.internal.lang.NonNullFields,/org.openrewrite.internal.lang.NonNullApi",
+    "[WARNING] /workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v4/baseline/rewrite-java-21/target/source/src/main/java/org/openrewrite/java/isolated/ReloadableJava21ParserVisitor.java:[1453,20] unchecked cast"
+  ],
+  "candidate_main_warnings": [
+    "[WARNING] No processor claimed any of these annotations: /org.openrewrite.internal.lang.Nullable,/org.openrewrite.internal.lang.NonNullFields,/org.openrewrite.internal.lang.NonNullApi",
+    "[WARNING] /workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v4/candidate/rewrite-java-21/target/source/src/main/java/org/openrewrite/java/isolated/ReloadableJava21ParserVisitor.java:[1453,20] unchecked cast"
+  ]
+}

@@ -1,0 +1,570 @@
+{
+  "schema": "M3_GUAVA_ARRAY_VALUE_LISTS_RECEIVING_PROOF_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "synexia_recipe_commit": "83cbf7399396afafa42ec75ecd81e6d2131166da",
+  "synexia_recipe_pr": "https://github.com/hsoliwal/com.synexia/pull/12292",
+  "recipe": "com.synexia.rewrite.M3GuavaArrayValueLists20261018",
+  "recipe_engine_blob": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40",
+  "canonical_proof_path": "synexia-openrewrite-recipes/docs/guava-array-value-lists-20261018/PROOF.json",
+  "canonical_proof_sha256": "1b5ac019e764e55237832ab6f2dbe3187999ebe247d5b7898a8dfe258fd7806a",
+  "bindings": [
+    {
+      "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java",
+      "before_sha256": "f93bc46a69911eb8a05b13b94bb4e4d77b42e2a534576e90c1243b7cbe779fb6",
+      "after_sha256": "6da1ee407d7ade0daaf1260e87e42edbede7c01ff3f7b773fef0c137d0a4e8cb"
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryCollectionsTest.java",
+      "before_sha256": "4bebee17ef96cefd2c779c76a0b190e27de311d136dec2de0fc5c05161ac199a",
+      "after_sha256": "792a0a8fdb7dadd0fc81e033fc0fc61cc8e2f7c4af5acdfb7098304d19b0d1f1"
+    }
+  ],
+  "runtime_tests": {
+    "tests": 23,
+    "passed": 23,
+    "failures": 0,
+    "aborted": 0,
+    "skipped": 0,
+    "guava_version": "33.4.8-jre",
+    "regression_red_against_before": true,
+    "public_protected_javap_descriptors_equal": true
+  },
+  "recipe_tests": {
+    "tests": 9,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "actual_sdk_execution": true,
+    "exact_publication_copy_requalified": true,
+    "actual_emitted_product_outputs_equal_tested_source": true
+  },
+  "review": {
+    "supplementary_source_review": "NO_CONCRETE_FINDINGS",
+    "bundled_autoreview": "HELPER_REFUSED_REQUIRED_NO_TOOLS_OPTION",
+    "reason": "Bundled Codex helper rejects --no-tools; file-auth refresh may write original C credential and keyring mode retains unproved CODEX_HOME caches. No engine/model switch or credential copying.",
+    "reviewer_engine_invoked": false,
+    "helper_refusal_receipt_sha256": "85b9d5320f341c3a1127328806e5e0ac69b4c4c6038e4d3f649b2068ebe6e32b",
+    "helper_refusal_receipt": {
+      "status": "ACTUAL_BUNDLED_HELPER_REFUSED_NO_TOOLS_NOT_A_CLEAN_REVIEW",
+      "helper": "C:\\Users\\hsoliwal\\.codex\\skills\\autoreview\\scripts\\autoreview",
+      "helper_flags": [
+        "--mode",
+        "local",
+        "--engine",
+        "codex",
+        "--no-tools",
+        "--no-web-search"
+      ],
+      "launcher_argv": [
+        "C:\\Progra~1\\Python312\\python.exe",
+        "-I",
+        "-S",
+        "-B",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\review-support\\record_refusal.py",
+        "--helper-child"
+      ],
+      "cwd": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\review-fixture",
+      "pid": 37340,
+      "exit_code": 1,
+      "stdout_path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\review-support\\helper.stdout.txt",
+      "stdout_sha256": "ab50fcd89ee3f75e6151e3771c766ab5ef0b5f3fdb6e56d74fe7692776baf995",
+      "stderr_path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\review-support\\helper.stderr.txt",
+      "stderr_sha256": "c2eb9ebb1760e5c53308ddd5b45e20b02a2ce3384b09cd1bbbd29e5a157d0369",
+      "scope_baseline_sha256": "87bc6fcf8cfad7be6498c484cc823fc6249f2b1d715eff32d1d2e0bee688b5b9",
+      "source_order_proof": {
+        "helper_sha256": "0d0382bf0b2d95a1ada6fa1af1ec49dedfe99d8395c97f7910be46f36ac8cc6f",
+        "run_codex_line": 6293,
+        "guard_line": 6294,
+        "raise_line": 6295
+      },
+      "no_authentication_handling": true,
+      "no_review_engine_invoked": true,
+      "basis": "Exact run_codex first-statement guard raised before safe_temp_root, runtime directories, authentication, and engine subprocess",
+      "credentials_read_or_copied": false,
+      "helper_invocations": 1,
+      "inherited_native_temp": "K:\\codex-work\\agent-temp\\",
+      "verified_task_native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\review-support\\temp\\",
+      "git_binary": "C:\\Program Files\\Git\\cmd\\git.exe",
+      "git_binary_sha256": "37c5725818d602e951ba2563b870d62763322956b73373da4c33a0b566a80bc9",
+      "wrapper_sha256": "e921b8dea132ccf98fc9edb1cfadfa68970296718877894af3da11f024a3f5ca",
+      "before": {
+        "regular_bytes": 24709654,
+        "regular_files": 389,
+        "S_free_bytes": 25956261888
+      },
+      "after": {
+        "regular_bytes": 24873807,
+        "regular_files": 404,
+        "S_free_bytes": 25955090432
+      }
+    }
+  },
+  "coverage": {
+    "catalogue": "m3/collections/qualification/m3-sdk-families-20261017/FAMILY_CATALOG.tsv",
+    "family": "com.google.common.collect.ArrayListMultimap",
+    "catalogue_status": "PENDING",
+    "scope": "One existing factory uses existing M3ArrayList through Guava ListMultimap policy.",
+    "pending": [
+      "Concrete ArrayListMultimap identity and serialization compatibility",
+      "Full collection superset",
+      "Hosted CI and product promotion"
+    ],
+    "jni": "NOT_APPLICABLE_TO_THIS_PURE_JAVA_FACTORY_CHANGE",
+    "performance": "NOT_MEASURED_NO_SPEEDUP_CLAIM",
+    "phase_advance": false
+  },
+  "disclosure": {
+    "classification": "ROUTINE_MAINTENANCE_OF_ALREADY_PUBLIC_CODE",
+    "public_source_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "new_invention_specific_details": false,
+    "copied_guava_implementation_bodies": false
+  },
+  "storage": {
+    "task_authorization": "Allow this bounded S-only task",
+    "cap_bytes": 67108864,
+    "reserve_bytes": 8589934592,
+    "storage_protection": "ACTIVE",
+    "owned_regular_bytes_at_closeout": 24876063,
+    "S_free_bytes_at_closeout": 25948614656
+  },
+  "runtime_receipts": [
+    {
+      "name": "jdk21-version",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "terminal": true,
+      "command": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:ErrorFile=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\hs_err_%p.log",
+        "-XX:ReplayDataFile=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\replay_%p.log",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp",
+        "-Duser.home=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\user-home",
+        "-version"
+      ],
+      "expected": "21.0.9",
+      "before": {
+        "K_free": 2628009984,
+        "S_free": 26027044864,
+        "commit_available": 13758976000,
+        "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+        "output_bytes": 2427725,
+        "physical_available": 11812245504
+      },
+      "after": {
+        "K_free": 2628009984,
+        "S_free": 26026541056,
+        "commit_available": 13760774144,
+        "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+        "output_bytes": 2928142,
+        "physical_available": 11996626944
+      },
+      "minimum_S_free_bytes": 26026541056,
+      "minimum_physical": 11812245504,
+      "minimum_commit": 13758976000,
+      "sources_unchanged": true,
+      "log_sha256": "34de39c1aabf56f9049e140a34d62657d15a543f16d00097a2dbcc4d6d668836",
+      "log_bytes": 177,
+      "full_receipt_sha256": "d9698a5cf374c126c88c5fbefe5377f4e237a55fd5d9a4156a3fd807d387bbdc"
+    },
+    {
+      "name": "runtime-compile-before",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "terminal": true,
+      "command": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+        "-J-Xmx256m",
+        "-J-XX:ActiveProcessorCount=2",
+        "-J-XX:ErrorFile=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\hs_err_%p.log",
+        "-J-XX:ReplayDataFile=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\replay_%p.log",
+        "-J-XX:-UsePerfData",
+        "-J-Djava.io.tmpdir=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp",
+        "-J-Duser.home=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\user-home",
+        "--release",
+        "21",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-jre.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections\\11.1.0\\eclipse-collections-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections-api\\11.1.0\\eclipse-collections-api-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-jcl\\6.2.0\\spring-jcl-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-collections4\\4.5.0\\commons-collections4-4.5.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.36.0\\error_prone_annotations-2.36.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jspecify\\jspecify\\1.0.0\\jspecify-1.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\j2objc\\j2objc-annotations\\3.0.0\\j2objc-annotations-3.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\guava\\failureaccess\\1.0.3\\failureaccess-1.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\code\\findbugs\\jsr305\\3.0.2\\jsr305-3.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2\\junit-platform-launcher-1.10.2.jar",
+        "-sourcepath",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\current-source\\m3\\collections\\src\\main\\java;S:\\codex-work\\guava-array-multimap-one-file-20261018\\current-source\\m3\\collections\\interop\\src\\main\\java",
+        "-d",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\runtime-before",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\current-source\\m3\\collections\\interop\\src\\main\\java\\com\\m3\\collections\\interop\\M3LibraryCollections.java",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\emitted\\m3\\collections\\interop\\src\\test\\java\\com\\m3\\collections\\interop\\M3LibraryCollectionsTest.java",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\CollectionTestLauncher.java"
+      ],
+      "expected": "",
+      "before": {
+        "K_free": 2628009984,
+        "S_free": 26022518784,
+        "commit_available": 13283647488,
+        "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+        "output_bytes": 6602604,
+        "physical_available": 11420450816
+      },
+      "after": {
+        "K_free": 2628009984,
+        "S_free": 26021679104,
+        "commit_available": 12869394432,
+        "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+        "output_bytes": 7299706,
+        "physical_available": 11197923328
+      },
+      "minimum_S_free_bytes": 26021679104,
+      "minimum_physical": 11119362048,
+      "minimum_commit": 12713914368,
+      "sources_unchanged": true,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_bytes": 0,
+      "full_receipt_sha256": "3816fa5b1bd6f3b21bc52f7979610655df157ce821db59f15a6c6a02ab3b519b"
+    },
+    {
+      "name": "runtime-red-before",
+      "exit": 1,
+      "expected_exit": 1,
+      "passed": true,
+      "terminal": true,
+      "command": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:ErrorFile=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\hs_err_%p.log",
+        "-XX:ReplayDataFile=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\replay_%p.log",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp",
+        "-Duser.home=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\user-home",
+        "-ea",
+        "-cp",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\runtime-before;C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-jre.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections\\11.1.0\\eclipse-collections-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections-api\\11.1.0\\eclipse-collections-api-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-jcl\\6.2.0\\spring-jcl-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-collections4\\4.5.0\\commons-collections4-4.5.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.36.0\\error_prone_annotations-2.36.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jspecify\\jspecify\\1.0.0\\jspecify-1.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\j2objc\\j2objc-annotations\\3.0.0\\j2objc-annotations-3.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\guava\\failureaccess\\1.0.3\\failureaccess-1.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\code\\findbugs\\jsr305\\3.0.2\\jsr305-3.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2\\junit-platform-launcher-1.10.2.jar",
+        "CollectionTestLauncher",
+        "com.m3.collections.interop.M3LibraryCollectionsTest#guavaListMultimapRetainsArrayListRandomAccessContracts",
+        "1"
+      ],
+      "expected": "RUNTIME_TESTS found=1 passed=0 failed=1 aborted=0 skipped=0",
+      "before": {
+        "K_free": 2628009984,
+        "S_free": 26020659200,
+        "commit_available": 9436102656,
+        "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+        "output_bytes": 8304484,
+        "physical_available": 6685986816
+      },
+      "after": {
+        "K_free": 2628009984,
+        "S_free": 26020151296,
+        "commit_available": 9425440768,
+        "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+        "output_bytes": 8809233,
+        "physical_available": 6325350400
+      },
+      "minimum_S_free_bytes": 26020151296,
+      "minimum_physical": 6325350400,
+      "minimum_commit": 9086779392,
+      "sources_unchanged": true,
+      "log_sha256": "8f17eccdd15f53404086f1679cd283d1294d3082b5b5c2e069767f5e56a54c61",
+      "log_bytes": 2010,
+      "full_receipt_sha256": "1b301d766dc79a84fea0e1d84155addb46cfd44dc8a058c9b4b74b35427709cb"
+    },
+    {
+      "name": "runtime-compile-after",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "terminal": true,
+      "command": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+        "-J-Xmx256m",
+        "-J-XX:ActiveProcessorCount=2",
+        "-J-XX:ErrorFile=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\hs_err_%p.log",
+        "-J-XX:ReplayDataFile=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\replay_%p.log",
+        "-J-XX:-UsePerfData",
+        "-J-Djava.io.tmpdir=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp",
+        "-J-Duser.home=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\user-home",
+        "--release",
+        "21",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-jre.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections\\11.1.0\\eclipse-collections-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections-api\\11.1.0\\eclipse-collections-api-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-jcl\\6.2.0\\spring-jcl-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-collections4\\4.5.0\\commons-collections4-4.5.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.36.0\\error_prone_annotations-2.36.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jspecify\\jspecify\\1.0.0\\jspecify-1.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\j2objc\\j2objc-annotations\\3.0.0\\j2objc-annotations-3.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\guava\\failureaccess\\1.0.3\\failureaccess-1.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\code\\findbugs\\jsr305\\3.0.2\\jsr305-3.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2\\junit-platform-launcher-1.10.2.jar",
+        "-sourcepath",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\current-source\\m3\\collections\\src\\main\\java;S:\\codex-work\\guava-array-multimap-one-file-20261018\\current-source\\m3\\collections\\interop\\src\\main\\java",
+        "-d",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\runtime-after",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\emitted\\m3\\collections\\interop\\src\\main\\java\\com\\m3\\collections\\interop\\M3LibraryCollections.java",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\emitted\\m3\\collections\\interop\\src\\test\\java\\com\\m3\\collections\\interop\\M3LibraryCollectionsTest.java",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\CollectionTestLauncher.java"
+      ],
+      "expected": "",
+      "before": {
+        "K_free": 2628009984,
+        "S_free": 26019139584,
+        "commit_available": 13154852864,
+        "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+        "output_bytes": 9813422,
+        "physical_available": 11313586176
+      },
+      "after": {
+        "K_free": 2628009984,
+        "S_free": 26018271232,
+        "commit_available": 13175713792,
+        "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+        "output_bytes": 10532848,
+        "physical_available": 11457867776
+      },
+      "minimum_S_free_bytes": 26018271232,
+      "minimum_physical": 11254448128,
+      "minimum_commit": 12911456256,
+      "sources_unchanged": true,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log_bytes": 0,
+      "full_receipt_sha256": "4fb7a7c22fd649204dcda7dfa260455829ad174139c005f7c2ff34b6254c350e"
+    },
+    {
+      "name": "runtime-green-after",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "terminal": true,
+      "command": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-XX:ErrorFile=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\hs_err_%p.log",
+        "-XX:ReplayDataFile=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\replay_%p.log",
+        "-XX:-UsePerfData",
+        "-Djava.io.tmpdir=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp",
+        "-Duser.home=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\user-home",
+        "-ea",
+        "-cp",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\runtime-after;C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-jre.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections\\11.1.0\\eclipse-collections-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections-api\\11.1.0\\eclipse-collections-api-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-jcl\\6.2.0\\spring-jcl-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-collections4\\4.5.0\\commons-collections4-4.5.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.36.0\\error_prone_annotations-2.36.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jspecify\\jspecify\\1.0.0\\jspecify-1.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\j2objc\\j2objc-annotations\\3.0.0\\j2objc-annotations-3.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\guava\\failureaccess\\1.0.3\\failureaccess-1.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\code\\findbugs\\jsr305\\3.0.2\\jsr305-3.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2\\junit-platform-launcher-1.10.2.jar",
+        "CollectionTestLauncher",
+        "com.m3.collections.interop.M3LibraryCollectionsTest",
+        "23"
+      ],
+      "expected": "RUNTIME_TESTS found=23 passed=23 failed=0 aborted=0 skipped=0",
+      "before": {
+        "K_free": 2628009984,
+        "S_free": 26017263616,
+        "commit_available": 13280681984,
+        "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+        "output_bytes": 11537626,
+        "physical_available": 11507879936
+      },
+      "after": {
+        "K_free": 2628009984,
+        "S_free": 26016759808,
+        "commit_available": 13240254464,
+        "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+        "output_bytes": 12040854,
+        "physical_available": 11487539200
+      },
+      "minimum_S_free_bytes": 26016759808,
+      "minimum_physical": 11353595904,
+      "minimum_commit": 12879089664,
+      "sources_unchanged": true,
+      "log_sha256": "2e10ae81f1801c4ebb2ea3ed1e2dd857b6a4afb6bbebe23e370322f280894709",
+      "log_bytes": 543,
+      "full_receipt_sha256": "7d107afd58e65a006dc42dd4ddc2364a42413cd86d0c28fad2869cc070a1f36e"
+    },
+    {
+      "name": "factory-abi-before",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "terminal": true,
+      "command": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap.exe",
+        "-J-Xmx128m",
+        "-J-XX:-UsePerfData",
+        "-J-Djava.io.tmpdir=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp",
+        "-J-Duser.home=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\user-home",
+        "-classpath",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\runtime-before;C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-jre.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections\\11.1.0\\eclipse-collections-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections-api\\11.1.0\\eclipse-collections-api-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-jcl\\6.2.0\\spring-jcl-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-collections4\\4.5.0\\commons-collections4-4.5.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.36.0\\error_prone_annotations-2.36.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jspecify\\jspecify\\1.0.0\\jspecify-1.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\j2objc\\j2objc-annotations\\3.0.0\\j2objc-annotations-3.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\guava\\failureaccess\\1.0.3\\failureaccess-1.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\code\\findbugs\\jsr305\\3.0.2\\jsr305-3.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2\\junit-platform-launcher-1.10.2.jar",
+        "-protected",
+        "-s",
+        "com.m3.collections.interop.M3LibraryCollections"
+      ],
+      "expected": "guavaListMultimap",
+      "before": {
+        "K_free": 2628009984,
+        "S_free": 26014461952,
+        "commit_available": 13136674816,
+        "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+        "output_bytes": 13044336,
+        "physical_available": 11211558912
+      },
+      "after": {
+        "K_free": 2628009984,
+        "S_free": 26013954048,
+        "commit_available": 13054693376,
+        "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+        "output_bytes": 13550827,
+        "physical_available": 11327905792
+      },
+      "minimum_S_free_bytes": 26013954048,
+      "minimum_physical": 11145355264,
+      "minimum_commit": 12975022080,
+      "sources_unchanged": true,
+      "log_sha256": "ba0bc8a57d5427efc9370df6a12becde85d0a5884ca2f00b7880b8b102d832f1",
+      "log_bytes": 4052,
+      "full_receipt_sha256": "13ec87e0b42b9e505cfd08248284b88c1b724264ce2db302721d438ee6acd4e8"
+    },
+    {
+      "name": "factory-abi-after",
+      "exit": 0,
+      "expected_exit": 0,
+      "passed": true,
+      "terminal": true,
+      "command": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap.exe",
+        "-J-Xmx128m",
+        "-J-XX:-UsePerfData",
+        "-J-Djava.io.tmpdir=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp",
+        "-J-Duser.home=S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\user-home",
+        "-classpath",
+        "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\runtime-after;C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-jre.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections\\11.1.0\\eclipse-collections-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections-api\\11.1.0\\eclipse-collections-api-11.1.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-jcl\\6.2.0\\spring-jcl-6.2.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-collections4\\4.5.0\\commons-collections4-4.5.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.36.0\\error_prone_annotations-2.36.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\jspecify\\jspecify\\1.0.0\\jspecify-1.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\j2objc\\j2objc-annotations\\3.0.0\\j2objc-annotations-3.0.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\guava\\failureaccess\\1.0.3\\failureaccess-1.0.3.jar;C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\code\\findbugs\\jsr305\\3.0.2\\jsr305-3.0.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar;C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2\\junit-platform-launcher-1.10.2.jar",
+        "-protected",
+        "-s",
+        "com.m3.collections.interop.M3LibraryCollections"
+      ],
+      "expected": "guavaListMultimap",
+      "before": {
+        "K_free": 2628009984,
+        "S_free": 26012950528,
+        "commit_available": 12890705920,
+        "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+        "output_bytes": 14554019,
+        "physical_available": 11055677440
+      },
+      "after": {
+        "K_free": 2628009984,
+        "S_free": 26012442624,
+        "commit_available": 12866772992,
+        "native_temp": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\tmp\\",
+        "output_bytes": 15060507,
+        "physical_available": 11177525248
+      },
+      "minimum_S_free_bytes": 26012442624,
+      "minimum_physical": 10962399232,
+      "minimum_commit": 12701954048,
+      "sources_unchanged": true,
+      "log_sha256": "ba0bc8a57d5427efc9370df6a12becde85d0a5884ca2f00b7880b8b102d832f1",
+      "log_bytes": 4052,
+      "full_receipt_sha256": "f8d44c1963bbd864fbdf61f57525cf167f85b4a7670f78bc22171c1d541dc0f8"
+    }
+  ],
+  "runtime_dependency_pins": [
+    {
+      "path": "C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-jre.jar",
+      "bytes": 3023797,
+      "sha256": "f3d7f57f67fd622f4d468dfdd692b3a5e3909246c28017ac3263405f0fe617ed"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections\\11.1.0\\eclipse-collections-11.1.0.jar",
+      "bytes": 10475509,
+      "sha256": "8881749de791c28c6ccea621314a3a154cfe76ef77c30054b6e714c3dc76969d"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\eclipse\\collections\\eclipse-collections-api\\11.1.0\\eclipse-collections-api-11.1.0.jar",
+      "bytes": 1789461,
+      "sha256": "1b8608ecf4e681f031c29a28c403f71476fe5df3a8f0c0dd8c7ad33b91984212"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-core\\6.2.0\\spring-core-6.2.0.jar",
+      "bytes": 1954386,
+      "sha256": "3b82629da38717dd616a70ec1055f9a8e208d58132071a6314a32159f8bce162"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\springframework\\spring-jcl\\6.2.0\\spring-jcl-6.2.0.jar",
+      "bytes": 24534,
+      "sha256": "2b59288f030ce77a89ec88aa426f32eb9a309056f3646dd5157f9f31f0204fd7"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-collections4\\4.5.0\\commons-collections4-4.5.0.jar",
+      "bytes": 898652,
+      "sha256": "00f93263c267be201b8ae521b44a7137271b16688435340bf629db1bac0a5845"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\errorprone\\error_prone_annotations\\2.36.0\\error_prone_annotations-2.36.0.jar",
+      "bytes": 19401,
+      "sha256": "77440e270b0bc9a249903c5a076c36a722c4886ca4f42675f2903a1c53ed61a5"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\jspecify\\jspecify\\1.0.0\\jspecify-1.0.0.jar",
+      "bytes": 3819,
+      "sha256": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\j2objc\\j2objc-annotations\\3.0.0\\j2objc-annotations-3.0.0.jar",
+      "bytes": 12467,
+      "sha256": "88241573467ddca44ffd4d74aa04c2bbfd11bf7c17e0c342c94c9de7a70a7c64"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\guava\\failureaccess\\1.0.3\\failureaccess-1.0.3.jar",
+      "bytes": 10763,
+      "sha256": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\com\\google\\code\\findbugs\\jsr305\\3.0.2\\jsr305-3.0.2.jar",
+      "bytes": 19936,
+      "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar",
+      "bytes": 6359,
+      "sha256": "263e43447f4b40f126ad6b1dcbd7df379448413bdedb8e0d240c5bcbba7c7a4f"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar",
+      "bytes": 210956,
+      "sha256": "afff77c186cd317275803872fa5133aa801fd6ac40bd91c78a6cf8009b4b17cc"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar",
+      "bytes": 14304,
+      "sha256": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar",
+      "bytes": 106232,
+      "sha256": "b56a5ec000a479df4973b18bba24c98fe0db8faa14c8907d3ef451d8c71fd8ae"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar",
+      "bytes": 6806,
+      "sha256": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar",
+      "bytes": 586027,
+      "sha256": "edb1e43ff0b8067626ffb55e5e9eeca1d9ab2478141a7c7f253d115b29cc7cf2"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar",
+      "bytes": 244690,
+      "sha256": "b6df35da750a546ae932376f11b3c0df841f0c90c7cb2944cd39adb432886e4b"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar",
+      "bytes": 204821,
+      "sha256": "905cba9b4998ccc29d1239085a7fb1fe0e28024d7526152356d810edec0a49a3"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2\\junit-platform-launcher-1.10.2.jar",
+      "bytes": 183814,
+      "sha256": "aed4f42fb90ada9b347c231f13656fc09121ba20dab6dc646a6bd9d4da31e4aa"
+    }
+  ],
+  "hosting": "DRAFT_PR; HOSTED_CI_AND_PRODUCT_PROMOTION_NOT_CLAIMED"
+}

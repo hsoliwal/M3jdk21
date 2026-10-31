@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.M3StringFacts{mayContain(M3StringFacts), prefixMayMatch(M3StringFacts), suffixMayMatch(M3StringFacts)} (master da6084c4ef)",
+      "source_commit": "da6084c4ef",
+      "target": "java.lang.M3StringFacts{mayContain(String), prefixMayMatch(String), suffixMayMatch(String)}: flat-needle forms folding code-unit, bigram, trigram, prefix4 and suffix4 signals on the fly",
+      "status": "implemented-locally-verified (G7; flag-off differential on the patched module: agreement with the M3-needle gates, soundness for present needles); flag-on jtreg PENDING_LINUX",
+      "target_rule": "facts may prove absence, never equality; gates are consulted only when facts are already prepared (factsIfPrepared), never forcing a scan"
+    },
+    {
+      "source": "java.lang.String mixed-side consumers (indexOf/lastIndexOf/startsWith/endsWith/replace with a flat needle) and toLowerCase/toUpperCase(Locale.ROOT only) (master da6084c4ef)",
+      "source_commit": "da6084c4ef",
+      "target": "java.lang.String: prepared-facts gates before the mixed-side charAt loops; replace returns this without admission when the flat target cannot or does not occur; ASCII case lane for every locale except tr, az, lt (StringLatin1 branch parity)",
+      "status": "implemented-locally-verified; flag-on jtreg PENDING_LINUX",
+      "target_rule": "JLS/JDK semantics unchanged; precompute is implementation-internal (lineage invariant 5) and its absence cannot change results (invariant 8)"
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "schema": "M3JDK21_SYNEXIA_CATALOGUE_GAPS_V1_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-catalogue-gaps-20261017",
+    "pullRequest": 12388,
+    "commit": "0aaa75b4f71a7731d91f97c54f47be39925fd5dd",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.CatalogueGapsV1",
+    "crate": "m3-catalogue-gaps-v1",
+    "fossReuseDecisionRow": "synexia-openrewrite-recipes/crates/m3-collection-contracts/catalogue-gaps-v1/FOSS_REUSE_DECISION.tsv rows m3-lfu-cache-lanes, m3-patricia-trie-lanes, m3-lane-algorithms (IDEA_ONLY / CONTRACT_REFERENCE_ONLY / ORACLE_ONLY / NO_FIT_GAP_FILLED)",
+    "donors": [
+      {
+        "path": "LeetCode 460 LFU Cache (problem statement)",
+        "blob": "IDEA_ONLY",
+        "developCommit": "-",
+        "target": "com.m3.collections.M3LongLfuCache",
+        "mechanics": "frequency buckets threaded ascending + per-bucket LRU order; realised as int link lanes over an open-addressed table with occupancy/tombstone bitmasks"
+      },
+      {
+        "path": "LeetCode 189 / 75 / 41 / 268 (problem statements)",
+        "blob": "IDEA_ONLY",
+        "developCommit": "-",
+        "target": "com.m3.collections.M3LaneAlgorithms",
+        "mechanics": "three-reversal and cycle-leader rotation, Dutch national flag three-way partition, cyclic sort slot permutation / first absent, stable mask compaction"
+      },
+      {
+        "path": "apache/commons-collections src/main/java/org/apache/commons/collections4/trie/PatriciaTrie.java",
+        "blob": "0b545e2f (commit)",
+        "developCommit": "-",
+        "target": "com.m3.collections.M3LongPatriciaTrie",
+        "mechanics": "contract reference only: PATRICIA crit-bit skip and prefixMap semantics; realised as dense leaf/internal int+byte lanes with swap-move removal, nothing copied"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3LongLinkedHashSet.java",
+        "target": "com.m3.collections.M3LongLfuCache",
+        "mechanics": "house style: open-addressed long table, probing, link lanes indexed by slot, same-size rebuild"
+      },
+      {
+        "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveLruMap.java",
+        "blob": "442759d0",
+        "developCommit": "11c94feb1815",
+        "target": "com.m3.collections.M3LongLfuCache",
+        "mechanics": "nearest first-party cache lane at the pin (LRU only); evaluated, not copied: NO_FIT_GAP_FILLED"
+      }
+    ],
+    "license": "Apache-2.0 first-party",
+    "disposition": "GENERATE_GAP: no first-party or permissive Java donor at the Synexia pin for lfu-cache, patricia-trie or the array-manipulation rows; LeetCode ids are idea-only; Commons PatriciaTrie is a contract reference and java.util.Collections.rotate/reverse/TreeMap are oracles only; case-insensitive-map dropped (IN_FLIGHT_OTHER_LANE, M3jdk21#1220); lfu overlap with #1331/#1335 and lane-atom overlap with #1354 recorded as distinct contracts"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "owners": [
+      "com.m3.collections.M3LaneAlgorithms",
+      "com.m3.collections.M3LongLfuCache",
+      "com.m3.collections.M3LongPatriciaTrie"
+    ],
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LaneAlgorithms.java",
+      "before": "ABSENT",
+      "after": "2cfa3d24f864a1a6d148ca35bc5c12304ce89889ff6071cf9b1f8265d4ccb28a",
+      "resource": "00-M3LaneAlgorithms.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLfuCache.java",
+      "before": "ABSENT",
+      "after": "18335c0ba9c6433ef77e74abcffb98d118295dc50b94f5eec3815a11ed29c2b1",
+      "resource": "01-M3LongLfuCache.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongPatriciaTrie.java",
+      "before": "ABSENT",
+      "after": "29400fa6cd7414b10f752cc2f084a0f95cddc169273c88777c015220be37e2b5",
+      "resource": "02-M3LongPatriciaTrie.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LaneAlgorithmsTest.java",
+      "before": "ABSENT",
+      "after": "7ada97abe05a29496ff1d91b49af23b5a6f67762d1000cce7007db9383b56279",
+      "resource": "03-M3LaneAlgorithmsTest.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongLfuCacheTest.java",
+      "before": "ABSENT",
+      "after": "b1c342d47df2e01cfb1b97d08e3f19c0242f6e37585b4670999301ed56e8ef0c",
+      "resource": "04-M3LongLfuCacheTest.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongPatriciaTrieTest.java",
+      "before": "ABSENT",
+      "after": "c004b54f07d411089774cf3236412c22f69053789678dd65563deb4217b59c1f",
+      "resource": "05-M3LongPatriciaTrieTest.java.txt"
+    }
+  ],
+  "gates": {
+    "m3CollectionsModuleCompile": "PASS_WINDOWS mvn -o -B -ntp -f m3/collections/pom.xml (-Xlint:all,-module -Werror via pom)",
+    "m3CollectionsModuleTests": "PASS_WINDOWS 165/165 (M3LaneAlgorithmsTest 3: 40,000 long-lane + 20,000 int-lane differential vs Collections.rotate/reverse; M3LongLfuCacheTest 3: 48,000-op differential vs HashMap+TreeMap<freq,LinkedHashSet> reference; M3LongPatriciaTrieTest 3: 48,000-op differential vs TreeMap(Long::compareUnsigned) incl. prefixes; mvn log sha256 fe9497aaa1662bbd4a585c083fffdc08c8923070473bdf5dacf31c042dd03f42)",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3CatalogueGapsV1RecipeTest 2/2, 6 targets (mvn log sha256 0f35299c7bb918cfac370eeef3ab1d627e85ca8785390ea93d9c5ef18fb982e8)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "jdkBuildJtregRuntime": "PENDING_LINUX",
+    "ci": "PENDING_QUEUE; m3/collections/verify_donation.py line 99 'Java source set changed; qualify a successor packet' refuses new m3/collections source until a successor installed-source manifest is qualified (not run in this leaf)"
+  },
+  "semanticDecisions": [
+    "M3LongLfuCache: capacity fixed at construction (1..2^29); table sized once to >= 1.5 x capacity, never grows; tombstone sweep rebuilds same-size lanes keeping bucket ids and order",
+    "M3LongLfuCache: get counts a use and is a structural modification for the fail-fast iterator (LinkedHashMap access-order precedent); peekOrDefault/containsKey/frequencyOf do not count",
+    "M3LongLfuCache: eviction = head (least recently used) of the minimum-frequency bucket, LeetCode 460 tie rule; lastEvictedKey/Value + evictionCount expose it without allocation",
+    "M3LongPatriciaTrie: keys ordered by bit string = Long.compareUnsigned; prefixKeys/prefixCount(prefix, bits 0..64) = Commons prefixMap over the top bits; ceiling/floor/higher/lower OrDefault navigation; removal swap-moves the last leaf and last internal node so both arenas stay dense; lanes grow by doubling and never shrink",
+    "M3LaneAlgorithms: Collections.rotate distance semantics for any int distance; partition3 returns packed (low, high) bounds; compact is stable and realigns the mask; firstAbsent permutes the lane",
+    "per-element allocation: 0 for all three owners; only transient facades (M3LongIterator) and result arrays (keysByEviction) allocate",
+    "not java.util: primitive proving-ground surfaces only"
+  ]
+}

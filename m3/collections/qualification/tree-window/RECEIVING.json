@@ -1,0 +1,77 @@
+{
+  "schema": "M3JDK21_TREE_WINDOW_EXACT_CURRENT_RECEIVING_V1",
+  "product_repository": "hsoliwal/M3jdk21",
+  "base_commit": "882ebe18891c719c0e26b6ee42558e50e96fe33e",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_pr": 12855,
+  "canonical_commit": "8ec2ca63a1e6cbd6d2e01e24c23619519ce311af",
+  "source_recipe": "com.synexia.m3.ViewportTreeCurrent20261025",
+  "dataset": "viewport-tree-current-20261025",
+  "target_files": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+      "pre_git_blob": "bb41516a28fc653c9b2f42d26b991cfeaaf34999",
+      "post_git_blob": "65ab293a00da1092243f7f1904771c5a0cc60a44",
+      "pre_sha256": "888b22b7615d170fff078bdc06780de07a7dfdef2025406b7f4134429db37503",
+      "post_sha256": "bf6fb2f1d5f1c86ee51a94ad7a058537b092d256dc6fa583cbd712e7800b2944"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeRebasedAdmissionTest.java",
+      "pre_git_blob": "ABSENT",
+      "post_git_blob": "d2b260109b342cff3ffa6f6ba373a2830dbd7f48",
+      "post_sha256": "3d0aa405824ec50add3323f081ade5f74ee33bcb419dd9faeffed12dd456c2b7"
+    }
+  ],
+  "original_shiftSiblings_source_unchanged": true,
+  "canonical_local_evidence": {
+    "actual_java21_lst": "J.CompilationUnit",
+    "authentic_parser": "org.openrewrite:rewrite-java-21:8.17.1",
+    "maven_tests": 5,
+    "maven_failures": 0,
+    "maven_errors": 0,
+    "maven_skipped": 0,
+    "actual_results": 2,
+    "receiver_check": 2,
+    "receiver_apply": 2,
+    "receiver_replay": 0,
+    "baseline_regression": {
+      "tests": 10,
+      "failures": 6,
+      "errors": 1
+    },
+    "candidate_regression": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "public_protected_java_descriptors": "UNCHANGED",
+    "tree_residency": {
+      "frames": 1024,
+      "checks_per_mode": 417171,
+      "observation_sha256": "79e90d00d243eaf1303ea975ea65384765e4bdcf7fc3bd40a0930a16fac93e03",
+      "modes": [
+        "Java mixed",
+        "Java -Xint",
+        "checked JNI mixed",
+        "checked JNI -Xint"
+      ],
+      "ubsan_fatal": true
+    }
+  },
+  "remaining_gates": {
+    "committed_canonical_Maven_reactor": "HOSTED_PENDING",
+    "product_Java_JUnit_and_JNI": "HOSTED_PENDING",
+    "actual_SWT_tree_handles": "NOT_RUN",
+    "JDK_source_build_HotSpot_jtreg": "NOT_RUN",
+    "platform_Cocoa_Win32_Android": "NOT_RUN",
+    "accessibility_IME_GPU": "NOT_RUN",
+    "latency_heap_RSS": "NOT_MEASURED"
+  },
+  "product_merged": false,
+  "receiving_mode": "SDK_RESULT_IDENTICAL_DRAFT_REVIEW",
+  "rewritten_recipe_sources_downstream": false,
+  "no_rebase": true,
+  "no_force_push": true,
+  "no_default_branch_change": true
+}

@@ -1,0 +1,27 @@
+{
+  "compile_command": [
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+    "-Xlint:all",
+    "-Werror",
+    "--patch-module",
+    "java.base=/dev/shm/m3jdk21-work/token-candidates/build/patch",
+    "-d",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/token-review/classes",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/token-review/EmptyFailureProbe.java"
+  ],
+  "run_command": [
+    "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+    "-Xmx64m",
+    "--patch-module",
+    "java.base=/dev/shm/m3jdk21-work/token-candidates/build/patch",
+    "-cp",
+    "/dev/shm/m3jdk21-work/mask-candidates/qualification/token-review/classes",
+    "EmptyFailureProbe"
+  ],
+  "compile_exit": 0,
+  "run_exit": 0,
+  "stdout": "first=true span=Span[start=0, end=0]\nend=true span=Span[start=1, end=1]\nexhausted=false\nhasMatch=true\nstart=1\ngroup=null\nspan=null\n",
+  "stderr": "",
+  "source_sha256": "aa3fc7b0cedeba3dc688a007c1e750f2b46142d9f9c49d2fdca79c55dba3f407",
+  "finding": "Published after-failed-operation IllegalStateException and hasMatch last-operation-success promises conflict with inherited Matcher empty-end early-return state."
+}

@@ -1,0 +1,2 @@
+# ordinal	stage_crate	target	resource	behavioral_atom	problem_category
+1	m3-ast-build-reverse-20261017-swt-event-table-m3-20261021	bundles/org.eclipse.swt/Eclipse SWT/common/org/eclipse/swt/widgets/EventTable.java	0001-EventTable.java.txt	EventTable active event slot boundary	SWT_EVENT_TABLE_ARRAY_HIGHWATER

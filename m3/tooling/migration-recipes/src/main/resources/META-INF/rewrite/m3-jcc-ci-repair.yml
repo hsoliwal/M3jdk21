@@ -1,0 +1,11 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.JccCiRepair
+displayName: Restore Java literals and the pinned foundation compiler
+description: Repairs exactly reviewed current-master test literals and selects the already pinned JDK21 for foundation Maven verification.
+tags:
+  - m3
+  - recipe-first
+  - jdk21
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: jcc-ci-repair-20261006

@@ -1,0 +1,15 @@
+{
+  "label": "07-product-lint",
+  "command": [
+    "python3",
+    "lint_sources.py",
+    "generated"
+  ],
+  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work",
+  "jdk": "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1",
+  "previous": "06c-receiver-fixedpoint",
+  "started_utc": "2026-10-18T12:55:32.261537+00:00",
+  "finished_utc": "2026-10-18T12:55:32.308196+00:00",
+  "exit_code": 0,
+  "log_sha256": "6200996a47dc5c293ed31a8169dfe287f53a0db51954f6cafd16d7c01b52a806"
+}

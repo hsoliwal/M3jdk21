@@ -1,0 +1,359 @@
+#!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+"""Qualify exact SDK-emitted escape owners with frozen failures and the whole port JUnit suite.
+
+All target inputs are read-only. Output contains isolated source copies and actual compiler,
+JUnit and VM receipts. The historical whole-port custody refusal remains explicit.
+"""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import signal
+import subprocess
+import sys
+import time
+import xml.etree.ElementTree as ET
+
+sys.dont_write_bytecode = True
+CRATE = "m3-program-escape-precompute-20261017"
+RECIPE = "com.synexia.m3jdk.ProgramEscapePrecompute20261017"
+PIN = "d47a4b4fdb8e3794ec56768b06aa9e23730c6b8e"
+FLOW = "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3EscapeFlow.java"
+SCAN = "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ItemReferenceScan.java"
+GVAS = "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteralHarvester.java"
+GVAS_TEST = "m3/ports/compiletime/src/test/java/com/m3/compiletime/M3GvasLiteralHarvesterTest.java"
+COMPILE_FAILURE = "variable destination is already defined in method main(String[])"
+SWAP_FAILURE = "SWAP_REFERENCE_ESCAPE_LOST expected=1 actual=0"
+CUSTODY_FAILURE = "crate targets differ from port sources (re-run seal_crate.py)"
+SDK_TESTS = {
+    "exactReplayFixedPointAndInputOrder", "mixedPreimagesAndPostimages",
+    "driftMissingDuplicateAndWrongRepresentationRefuse", "postScanChangesRefuse",
+    "qualifiedSdkResultsAreRetained",
+}
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def read(root, relative, optional=False):
+    path = Path(relative)
+    if path.is_absolute() or not path.parts or ".." in path.parts:
+        raise ValueError("invalid input path: " + relative)
+    result = root / path
+    cursor = result
+    while cursor != root:
+        if cursor.is_symlink():
+            raise ValueError("symlinked input: " + relative)
+        cursor = cursor.parent
+    if optional and not result.exists():
+        return None
+    if not result.is_file():
+        raise ValueError("missing input: " + relative)
+    return result.read_bytes()
+
+
+def rows(data, width):
+    result = [line.split("\t") for line in data.decode().splitlines()
+              if line and not line.startswith("#")]
+    if (not result or any(len(row) != width for row in result)
+            or len({row[0] for row in result}) != len(result)):
+        raise ValueError("malformed or duplicate sealed inventory")
+    return result
+
+
+def admit(target, crate):
+    seals = json.loads(read(crate, "contract/input-seals.json"))
+    if seals["target_revision"] != PIN or seals["manifest_counts"] != {"java": 4, "text": 1}:
+        raise ValueError("wrong qualified scope")
+    xml = read(crate, "target/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml")
+    suite = ET.fromstring(xml)
+    if ({key: int(suite.get(key, "-1")) for key in ("tests", "failures", "errors", "skipped")}
+            != {"tests": 5, "failures": 0, "errors": 0, "skipped": 0}
+            or {node.get("name") for node in suite.findall("testcase")} != SDK_TESTS):
+        raise ValueError("five actual SDK tests must execute without failure or skip")
+    properties = {node.get("name"): node.get("value") for node in suite.findall("./properties/property")}
+    if (properties.get("m3.crate.name") != CRATE or properties.get("m3.recipe.name") != RECIPE
+            or properties.get("java.specification.version") != "21"):
+        raise ValueError("SDK test identity or Java baseline mismatch")
+    owner = Path(properties["m3.recipe.owner.root"]).resolve(strict=True)
+    for name, expected in seals["owners"].items():
+        if sha(read(owner, "src/main/java/com/synexia/rewrite/" + name)) != expected:
+            raise ValueError("canonical SDK owner drift: " + name)
+    binding = dict(rows(read(crate, "target/candidate/SDK_INPUTS.tsv"), 2))
+    expected_binding = {"crate/" + p: sha(read(crate, p)) for p in ("pom.xml", "receive.py")}
+    for domain in ("src", "contract"):
+        for path in sorted((crate / domain).rglob("*")):
+            if path.is_file():
+                relative = path.relative_to(crate).as_posix()
+                expected_binding["crate/" + relative] = sha(read(crate, relative))
+    for name, expected in seals["owners"].items():
+        expected_binding["owner/src/main/java/com/synexia/rewrite/" + name] = expected
+    if binding != expected_binding:
+        raise ValueError("recipe inputs changed after SDK execution; rerun its five tests")
+    if read(crate, "contract/verify_sdk_results.py") != Path(__file__).read_bytes():
+        raise ValueError("executing contract is not the SDK-bound contract")
+
+    inventory = read(crate, "contract/parent-inputs.tsv")
+    parents = rows(inventory, 2)
+    if sha(inventory) != seals["parent_inputs_sha256"] or len(parents) != seals["parent_input_count"]:
+        raise ValueError("parent inventory seal mismatch")
+    if [r[0] for r in parents] != sorted(r[0] for r in parents):
+        raise ValueError("parent inventory order")
+    baseline, outputs, target_state = {}, {}, {}
+    for path, expected in parents:
+        body = read(target, path)
+        if sha(body) != expected:
+            raise ValueError("required parent source drift: " + path)
+        baseline[path] = body
+        target_state[path] = expected
+    sdk_rows = []
+    for kind in ("java", "text"):
+        resource = "src/main/resources/com/synexia/rewrite/hash-pinned-" + kind + "/" + CRATE
+        manifest = read(crate, resource + "/manifest.tsv")
+        lane = rows(manifest, 4)
+        if sha(manifest) != seals["manifest_hashes"][kind] or len(lane) != seals["manifest_counts"][kind]:
+            raise ValueError("exact manifest seal mismatch: " + kind)
+        if [row[0] for row in lane] != sorted(row[0] for row in lane):
+            raise ValueError("target order")
+        for path, before, after, name in lane:
+            if path in baseline or path in outputs:
+                raise ValueError("cross-domain target duplicate: " + path)
+            template = read(crate, resource + "/" + name)
+            emitted = read(crate, "target/candidate/" + path)
+            if sha(template) != after or emitted != template:
+                raise ValueError("actual SDK result/template mismatch: " + path)
+            if before != "ABSENT":
+                original = read(crate, resource + "/pre/" + name)
+                if sha(original) != before:
+                    raise ValueError("preimage seal mismatch: " + path)
+                baseline[path] = original
+            current = read(target, path, optional=True)
+            current_sha = "ABSENT" if current is None else sha(current)
+            if current_sha not in (before, after):
+                raise ValueError("target pre/post admission refused: " + path)
+            outputs[path] = emitted
+            target_state[path] = current_sha
+            sdk_rows.append([path, before, after])
+    if rows(read(crate, "target/candidate/SDK_RESULTS.tsv"), 3) != sdk_rows:
+        raise ValueError("SDK Results receipt differs from exact target inventory")
+    # The retained oracle may change only by the independently reproduced SWAP correction.
+    marker = b"    static int escape("
+    old_flow = baseline[FLOW][baseline[FLOW].index(marker):]
+    new_flow = outputs[FLOW][outputs[FLOW].index(marker):]
+    swap = b"            case Opcodes.SWAP:\n"
+    if new_flow.count(swap) != 1 or new_flow.replace(swap, b"") != old_flow:
+        raise ValueError("frozen forward oracle changed beyond the exact SWAP repair")
+    expected_gvas = baseline[GVAS]
+    for old, new in ((b"String destination =", b"String requestedDestination ="),
+                     (b"if (destination == null)", b"if (requestedDestination == null)"),
+                     (b"Path.of(destination)", b"Path.of(requestedDestination)")):
+        if expected_gvas.count(old) != 1:
+            raise ValueError("GVAS binding repair baseline drift")
+        expected_gvas = expected_gvas.replace(old, new)
+    if outputs[GVAS] != expected_gvas:
+        raise ValueError("GVAS compile repair exceeds its three bound identifier occurrences")
+    return baseline, outputs, target_state, seals
+
+
+def terminate_group(process):
+    for sig in (signal.SIGTERM, signal.SIGKILL):
+        try:
+            os.killpg(process.pid, sig)
+        except ProcessLookupError:
+            pass
+        try:
+            process.wait(timeout=3)
+        except subprocess.TimeoutExpired:
+            pass
+    return process.communicate(timeout=3)
+
+
+def execute(target, crate, output, java_home, maven, repository):
+    baseline_bytes, generated, before_state, seals = admit(target, crate)
+    java = java_home / "bin"
+    version = subprocess.run([str(java / "javac"), "-version"], capture_output=True, text=True, check=True, timeout=10)
+    if not version.stdout.startswith("javac 21."):
+        raise ValueError("JAVA_HOME must select the pinned Java21 line")
+    output.mkdir(parents=True, exist_ok=False)
+    baseline, candidate, build, evidence = [output / name for name in ("baseline", "candidate", "build", "evidence")]
+    for directory in (baseline, candidate, build, evidence):
+        directory.mkdir()
+    for path, body in baseline_bytes.items():
+        for directory in (baseline, candidate):
+            destination = directory / path
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(body)
+    for path, body in generated.items():
+        destination = candidate / path
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(body)  # byte-identical actual OpenRewrite Result, never an edited postimage
+    environment = dict(os.environ)
+    environment.update({"JAVA_HOME": str(java_home), "TZ": "UTC", "PYTHONDONTWRITEBYTECODE": "1",
+                        "PATH": str(java) + os.pathsep + environment.get("PATH", "")})
+    record = {"schema": "M3_PROGRAM_ESCAPE_CONTRACT_V1", "target_revision": PIN,
+              "source_recipe_revision": seals["source_recipe_revision"], "status": "RUNNING",
+              "commands": [], "sdk_tests": 5, "targets": 5, "parent_inputs": seals["parent_input_count"],
+              "holds": ["Historical whole-port custody checker remains stale; no history resealed.",
+                        "No whole JDK reactor/image or general ownership/GC qualification is claimed."]}
+
+    def save():
+        (output / "receipt.json").write_text(json.dumps(record, indent=2) + "\n")
+
+    def run(name, command, expected_failure=None, timeout=90):
+        command = [str(part) for part in command]
+        started = time.monotonic()
+        process = subprocess.Popen(command, cwd=crate, env=environment, text=True,
+                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
+        timed_out = False
+        try:
+            stdout, stderr = process.communicate(timeout=timeout)
+        except subprocess.TimeoutExpired:
+            timed_out = True
+            stdout, stderr = terminate_group(process)
+        (evidence / (name + ".stdout.log")).write_text(stdout)
+        (evidence / (name + ".stderr.log")).write_text(stderr)
+        passed = not timed_out and (process.returncode == 0 if expected_failure is None
+                                    else process.returncode != 0 and expected_failure in stdout + stderr)
+        record["commands"].append({"name": name, "argv": command, "exit": process.returncode,
+                                   "elapsed_seconds": time.monotonic() - started,
+                                   "expected_failure": expected_failure, "timeout": timed_out,
+                                   "qualified": passed})
+        save()
+        if not passed:
+            raise RuntimeError("contract command failed: " + name + "\n" + stdout + stderr)
+        return stdout, stderr
+
+    def source_args(name, paths):
+        path = build / (name + ".args")
+        path.write_text("".join(json.dumps(str(item)) + "\n" for item in paths))
+        return "@" + str(path)
+
+    junit = [repository / path for path in (
+        "org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar",
+        "org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+        "org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar",
+        "org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+    )]
+    tools = {"javac_version": version.stdout.strip(),
+             "junit_compile_artifacts": {str(path): sha(path.read_bytes()) for path in junit}}
+    (output / "toolchain.json").write_text(json.dumps(tools, indent=2) + "\n")
+    dependencies = build / "asm-classes"
+    dependencies.mkdir()
+    asm_sources = []
+    for folder in ("asm-9.6", "asm-tree", "asm-analysis"):
+        asm_sources += sorted((baseline / "m3/vendor/third_party" / folder / "src/main/java").rglob("*.java"))
+    compile_classpath = os.pathsep.join(map(str, [dependencies] + junit))
+
+    def port_sources(root, available_only=False):
+        paths = []
+        for domain in ("m3/ports/precompute/src/main/java", "m3/ports/compiletime/src/main/java",
+                       "m3/ports/compiletime/src/test/java"):
+            paths += sorted((root / domain).rglob("*.java"))
+        if available_only:
+            paths = [path for path in paths if path.relative_to(root).as_posix() not in (GVAS, GVAS_TEST)]
+        return paths
+
+    def compile_port(name, root, destination, available_only=False, expected_failure=None):
+        destination.mkdir()
+        run(name, [java / "javac", "--release", "21", "-proc:none", "-Xlint:all", "-Werror",
+                   "-cp", compile_classpath, "-d", destination,
+                   source_args(name, port_sources(root, available_only))], expected_failure)
+
+    def port_tests(name, classes, expected_count):
+        reports = output / (name + "-junit")
+        run(name, [maven, "-o", "-B", "-ntp", "-Dmaven.repo.local=" + str(repository), "-Pport-tests",
+                   "-Dm3.port.classes=" + str(classes), "-Dm3.port.dependencies=" + str(dependencies),
+                   "-Dm3.port.reports=" + str(reports),
+                   "org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test"])
+        total = {key: 0 for key in ("tests", "failures", "errors", "skipped")}
+        for report in reports.glob("TEST-*.xml"):
+            suite = ET.parse(report).getroot()
+            for key in total:
+                total[key] += int(suite.get(key, "0"))
+        if total != {"tests": expected_count, "failures": 0, "errors": 0, "skipped": 0}:
+            raise ValueError("whole selected port suite count/failure mismatch: " + str(total))
+        record[name] = total
+        save()
+
+    try:
+        run("compile-vendored-asm", [java / "javac", "--release", "8", "-proc:none", "-d", dependencies,
+                                    source_args("asm", asm_sources)])
+        run("baseline-custody-refusal", [sys.executable, baseline / "m3/ports/compiletime/verify_compiletime_precompute.py"],
+            CUSTODY_FAILURE)
+        compile_port("baseline-full-compile-failure", baseline, build / "baseline-failed-classes",
+                     expected_failure=COMPILE_FAILURE)
+        old_classes = build / "baseline-classes"
+        compile_port("baseline-available-compile", baseline, old_classes, available_only=True)
+        port_tests("baseline-available-tests", old_classes, 18)
+        support = crate / "contract/support"
+        witness_classes = build / "baseline-witness"
+        witness_classes.mkdir()
+        run("compile-baseline-witness", [java / "javac", "--release", "21", "-Xlint:all", "-Werror",
+                                         "-cp", os.pathsep.join(map(str, [old_classes, dependencies])),
+                                         "-d", witness_classes, support / "SwapFailureProbe.java"])
+        run("baseline-swap-escape-failure", [java / "java", "-Xmx512m", "-cp",
+                                             os.pathsep.join(map(str, [witness_classes, old_classes, dependencies])),
+                                             "com.m3.compiletime.SwapFailureProbe"], SWAP_FAILURE)
+        new_classes = build / "candidate-classes"
+        compile_port("candidate-full-compile", candidate, new_classes)
+        port_tests("candidate-full-tests", new_classes, 30)
+        helper_classes = build / "probe-classes"
+        helper_classes.mkdir()
+        helper_cp = os.pathsep.join(map(str, [new_classes, dependencies] + junit))
+        run("compile-probes", [java / "javac", "--release", "21", "-Xlint:all", "-Werror", "-cp", helper_cp,
+                               "-d", helper_classes, *sorted(support.glob("*.java"))])
+        runtime_cp = os.pathsep.join(map(str, [helper_classes, new_classes, dependencies] + junit))
+        run("candidate-swap-escape-pass", [java / "java", "-Xmx512m", "-cp", runtime_cp,
+                                          "com.m3.compiletime.SwapFailureProbe"])
+        manifest = build / "heap-agent-manifest.mf"
+        manifest.write_text("Manifest-Version: 1.0\nPremain-Class: com.m3.compiletime.HeapAgent\n\n")
+        agent = build / "heap-agent.jar"
+        run("package-vm-size-agent", [java / "jar", "--create", "--file", agent, "--manifest", manifest,
+                                      "-C", helper_classes, "com/m3/compiletime/HeapAgent.class"])
+        benchmark, unused = run("cold-warm-work-and-vm-heap", [java / "java", "-Xmx512m", "-javaagent:" + str(agent),
+                                                            "-cp", runtime_cp, "com.m3.compiletime.EscapeWorkProbe"])
+        record["work_and_memory"] = json.loads(benchmark)
+        old_api, unused = run("baseline-public-api", [java / "javap", "-public", "-classpath", old_classes,
+                                                       "com.m3.compiletime.M3ItemReferenceScan"])
+        new_api, unused = run("candidate-public-api", [java / "javap", "-public", "-classpath", new_classes,
+                                                        "com.m3.compiletime.M3ItemReferenceScan"])
+        if old_api != new_api:
+            raise ValueError("public scanner API changed")
+        for path, expected in before_state.items():
+            body = read(target, path, optional=True)
+            if ("ABSENT" if body is None else sha(body)) != expected:
+                raise ValueError("read-only target changed during qualification: " + path)
+        record["source_inputs_unchanged"] = True
+        record["public_api_equal"] = True
+        record["forward_oracle_equal_except_swap"] = True
+        record["gvas_change_only_three_bound_identifier_occurrences"] = True
+        record["status"] = "PASS_WITH_EXPLICIT_HISTORICAL_CUSTODY_HOLD"
+        save()
+        print("M3_PROGRAM_ESCAPE_SDK_CONTRACT_PASS targets=5 sdk_tests=5 baseline_tests=18 candidate_tests=30")
+    except BaseException as failure:
+        record["status"] = "FAILED"
+        record["failure"] = str(failure)
+        save()
+        raise
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--target", type=Path, required=True)
+    parser.add_argument("--crate", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--maven", type=Path, default=Path(os.environ.get("M3_MAVEN", "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn")))
+    parser.add_argument("--repository", type=Path, default=Path(os.environ.get("M3_MAVEN_REPOSITORY", "/tmp/m3-maven-repository")))
+    args = parser.parse_args()
+    java_home = Path(os.environ["JAVA_HOME"]).resolve(strict=True)
+    execute(args.target.resolve(strict=True), args.crate.resolve(strict=True), args.output.resolve(),
+            java_home, args.maven.resolve(strict=True), args.repository.resolve(strict=True))
+
+
+if __name__ == "__main__":
+    main()

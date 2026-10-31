@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/tmp/m3-cursor-tools/jdk-21.0.12.1+1/bin/javac",
+    "--release",
+    "21",
+    "-Xlint:all",
+    "-Werror",
+    "-h",
+    "/workspace/scratch/a20ebe6f78bb/continuation/portable/native-after/headers",
+    "-d",
+    "/workspace/scratch/a20ebe6f78bb/continuation/portable/native-after/classes",
+    "/workspace/scratch/a20ebe6f78bb/continuation/after/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+    "/workspace/scratch/a20ebe6f78bb/continuation/after/m3/collections/src/test/java/com/m3/collections/M3SparseMaskReadContract.java"
+  ],
+  "cwd": "/workspace/scratch/a20ebe6f78bb/continuation/after",
+  "jdk": "/tmp/m3-cursor-tools/jdk-21.0.12.1+1"
+}

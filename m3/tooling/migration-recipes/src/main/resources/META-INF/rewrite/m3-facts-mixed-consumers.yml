@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FactsMixedConsumers
+displayName: M3JDK21 prepared facts gate the mixed-side String consumers
+description: >-
+  java.lang.M3StringFacts gains zero-allocation flat-needle gates (mayContain(String),
+  prefixMayMatch(String), suffixMayMatch(String)) that fold a literal needle's code-unit, bigram and
+  trigram signals on the fly and agree exactly with the M3-needle gates; String.indexOf,
+  lastIndexOf, startsWith/endsWith and replace(CharSequence,CharSequence) consult prepared facts
+  before scanning when the needle is flat, and toLowerCase/toUpperCase(Locale) map ASCII M3 Strings
+  in place for every locale except tr, az and lt (StringLatin1 parity). Ships the jtreg proof.
+  TARGET_OWNED_PORT postimages; String.java is carried as text because the pinned Java parser
+  cannot convert its Javadoc.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-facts-mixed-consumers
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-facts-mixed-consumers

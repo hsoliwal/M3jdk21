@@ -1,0 +1,61 @@
+{
+  "schema": "M3_SHARED_FRONTEND_PORTABLE_CUSTODY_REPLAY_V1",
+  "status": "PASS",
+  "mirror_source": "Actual OpenRewrite 8.17.1 SDK Results received from m3jdk21-custody.",
+  "custody_targets": 75,
+  "embedded_product_targets": 29,
+  "custody_sdk_inputs_sha256": "7145a0626bbcebce4c8d75bad7fdff289d5591972d7f47f8afefe33121c50dec",
+  "custody_sdk_results_sha256": "d4dae8ed7d2aac2b18822a42e4b27bc17f7966f807e65de0115d7da50bbfbb09",
+  "canonical_dependency_commit": "c05613123249b74ac4243fe0b924b68494116931",
+  "java_version": "21.0.12.1",
+  "java_vendor": "Eclipse Adoptium",
+  "maven_version": "3.9.11",
+  "openrewrite_version": "8.17.1",
+  "offline_cached_dependencies": true,
+  "mirror_sources_unchanged_after_execution": true,
+  "embedded_result_bytes_and_modes_equal_canonical_results": true,
+  "product_receiver_actions": "Read-only postimage checks; product writes were performed separately by the parent receiver.",
+  "runs": [
+    {
+      "dataset": "m3jdk21-build",
+      "targets": 16,
+      "sdk_tests": 5,
+      "input_sealer_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "e9c694f1c68f5f1b987865e2bc21c33d7b1f8943994e43e4ad9e4119376f4f1c",
+      "sdk_results_sha256": "b2a8da0d7375dc2e35102f2d6085662b719cc4b595c5674568bcfa85805f1a87",
+      "canonical_sdk_results_sha256": "b2a8da0d7375dc2e35102f2d6085662b719cc4b595c5674568bcfa85805f1a87",
+      "maven_log_sha256": "697fff0d4f3d119f877ac575e31ab12bc584468ad5e63a0be6b724fd37fe89ec",
+      "junit_report_sha256": "6d542041533306c49d8c3d4a70e8c0a8a16cb1177785374db7e09787f5bf8ddf",
+      "receiver_receipt_sha256": "67e90e11f97f5f807636efa44d4659a5b9c281bec47f8ba67a225df1a5e2c779",
+      "product_postimage_check": {
+        "dataset": "m3jdk21-build",
+        "targets": 16,
+        "changes": 0,
+        "mode": "check",
+        "actual_sdk_results": true
+      }
+    },
+    {
+      "dataset": "m3jdk21-compiler",
+      "targets": 13,
+      "sdk_tests": 5,
+      "input_sealer_tests": 8,
+      "receiver_cases": 9,
+      "sdk_inputs_sha256": "e3c644114f3833cabefdb9d85f5bc98b282ea6cbd3f71844019623de9f2f5b7b",
+      "sdk_results_sha256": "eb706d53b554e60da748b145833af93655c3914634edb3adeb16892ef5086a1b",
+      "canonical_sdk_results_sha256": "eb706d53b554e60da748b145833af93655c3914634edb3adeb16892ef5086a1b",
+      "maven_log_sha256": "5c56df711d6995653e527f3ef150e2a0a727eaaa59fe94bc135a51915e7a2912",
+      "junit_report_sha256": "2ac2864445838194b92bdc722a9fb537a27e70532e766b5c3a357852c51563e6",
+      "receiver_receipt_sha256": "6831c1829cf95d1ec33071c9d2c7f5bf7eb4a2f049c5ba1581462105f17bccf1",
+      "product_postimage_check": {
+        "dataset": "m3jdk21-compiler",
+        "targets": 13,
+        "changes": 0,
+        "mode": "check",
+        "actual_sdk_results": true
+      }
+    }
+  ],
+  "scope": "Recipe source replay and receiving contracts; separate product runtime/full-image gates retain their own evidence."
+}

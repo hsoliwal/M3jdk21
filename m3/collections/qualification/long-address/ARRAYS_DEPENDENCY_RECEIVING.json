@@ -1,0 +1,57 @@
+{
+  "schema": "M3_LONG_ADDRESS_ARRAYS_DEPENDENCY_RECEIVING_V1",
+  "canonical_repo": "hsoliwal/com.synexia",
+  "canonical_pr": 12855,
+  "canonical_commit": "073b8062405b916cab841dd2c1dea8f0520fef32",
+  "dataset": "long-address-arrays-20261027",
+  "named_recipe": "com.synexia.m3.LongAddressArrays20261027",
+  "recipe_engine_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+  "product_repo": "hsoliwal/M3jdk21",
+  "product_pr": 2006,
+  "product_preimage_head": "ec6a7f717e76e7e57d74b9b2db8fc71542607fc7",
+  "target_path": ".github/workflows/m3-long-direct-address-kernel.yml",
+  "source_pre_git_blob": "b0bf1b2a1e3121ccb47e74ba72e3f29bb7dca9b9",
+  "source_post_git_blob": "e6484a24fb348ba75c56710e6e1d949988e8727a",
+  "source_pre_sha256": "084f0590fd3ed903042bc544aad7c9f6ad38a6980899d4f498897f42e3e5fc36",
+  "source_post_sha256": "960892ae5857c628bb28fd41d3cb90f7c68b00c6a2b6c1d1ab2c9d04a38a2c8b",
+  "defect": {
+    "failing_ci": "https://github.com/hsoliwal/M3jdk21/actions/runs/40447711261",
+    "failing_job_id": 122002826771,
+    "failure_stage": "Java owner tests",
+    "diagnostic": "Could not find artifact com.m3:m3-arrays:jar:0.1.0-SNAPSHOT",
+    "historical_recipe_selftest": "PASSED"
+  },
+  "fix": {
+    "original_arrays_build": "mvn -B -ntp -f m3/arrays/pom.xml -DskipTests install",
+    "assert_module": "com.m3.arrays",
+    "original_remaining_workflow_steps": "UNCHANGED",
+    "product_java_modified": false,
+    "jni_c_modified": false,
+    "apis_modified": false
+  },
+  "source_qualification": {
+    "jdk": "21.0.12.1",
+    "maven": "3.9.9",
+    "rewrite": "8.17.1",
+    "actual_recipe_run": true,
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "sdk_results": 1,
+    "receiver_matches_emitted_bytes": true,
+    "fixed_point_changes": 0,
+    "exact_source_and_template_refusals": "PASSED",
+    "yaml_and_shell_syntax": "PASSED",
+    "byte_diff": "ONE_ADDITIVE_STEP"
+  },
+  "remaining": {
+    "hosted_product_maven_arrays_install": "PENDING",
+    "collections_java_owner_tests": "PENDING",
+    "checked_jni": "PENDING",
+    "full_jdk_hotspot_jtreg": "NOT_RUN",
+    "ui_toolkits": "NOT_RUN",
+    "performance": "NO_CLAIM"
+  },
+  "state": "DRAFT_REVIEW_ONLY"
+}

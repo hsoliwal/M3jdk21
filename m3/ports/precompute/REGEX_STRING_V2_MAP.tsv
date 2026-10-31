@@ -1,0 +1,4 @@
+source_type	target_type	status	authority_rule
+com.synexia.indexstring.MIndexCodeTextSignalTrialImage	com.m3.precompute.M3RegexStringTrialImage	IMPLEMENTED_PORT_CANDIDATE	JDK Pattern exact outcomes; M3 signals ranking only
+com.synexia.rewrite.M3RegexStringPrecomputeSignals	com.m3.precompute.M3RegexStringSignals	IMPLEMENTED_PORT_CANDIDATE	plain literal facts exact; general regex features advisory
+com.synexia.rewrite.M3RegexStringNativeSignals	com.m3.precompute.M3CodeTextSignalBatchNative	REUSED_TARGET_OWNER_NO_DIRECT_PORT	existing M3 JNI lexical signal provider; no second native ABI

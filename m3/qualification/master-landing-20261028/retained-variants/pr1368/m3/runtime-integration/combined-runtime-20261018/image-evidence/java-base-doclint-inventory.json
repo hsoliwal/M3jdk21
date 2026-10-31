@@ -1,0 +1,936 @@
+{
+  "schema": "M3_JAVA_BASE_STRICT_DOCLINT_DIAGNOSTIC_INVENTORY_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "source_head": "92fc722d9fd33093d280d7f80500fb1859c887c0",
+  "source_tree": "51246136763bff28b9fcc5daf01c884ae05bca7c",
+  "compiler": "Actual in-treeinterimjavaccompiledfromcombinedsource",
+  "flags": "Originalmakecompilerflagsincluding-Werror/-Xdoclint:all/protected retained; diagnosticlimitonly-Xmaxwarns1000",
+  "exit_code": 1,
+  "log_path": "/dev/shm/m3-combined-image-f8287/java-base-all-warnings-console.log",
+  "log_sha256": "9e81672e880d5d749bdc1d7c7f448439a8bd473715992665a0995bb129384961",
+  "warnings": [
+    {
+      "path": "src/java.base/share/classes/java/lang/Runnable.java",
+      "line": 49,
+      "warning": "no @return",
+      "source_line": "    default java.util.concurrent.ProgressMonitor progressMonitor() {",
+      "caret": "                                                 ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Runnable.java",
+      "line": 57,
+      "warning": "no @param for monitor",
+      "source_line": "    default void run(java.util.concurrent.ProgressMonitor monitor) {",
+      "caret": "                 ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 25,
+      "warning": "no @param for source",
+      "source_line": "    public static boolean isNullOrEmpty(CharSequence source) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 25,
+      "warning": "no @return",
+      "source_line": "    public static boolean isNullOrEmpty(CharSequence source) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 30,
+      "warning": "no @param for source",
+      "source_line": "    public static String nullToEmpty(String source) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 30,
+      "warning": "no @return",
+      "source_line": "    public static String nullToEmpty(String source) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 35,
+      "warning": "no @param for source",
+      "source_line": "    public static String emptyToNull(String source) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 35,
+      "warning": "no @return",
+      "source_line": "    public static String emptyToNull(String source) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 43,
+      "warning": "no @param for source",
+      "source_line": "    public static boolean isNullOrBlank(CharSequence source) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 43,
+      "warning": "no @return",
+      "source_line": "    public static boolean isNullOrBlank(CharSequence source) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 54,
+      "warning": "no @param for source",
+      "source_line": "    public static boolean hasText(CharSequence source) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 54,
+      "warning": "no @return",
+      "source_line": "    public static boolean hasText(CharSequence source) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 59,
+      "warning": "no @param for source",
+      "source_line": "    public static String defaultIfEmpty(String source, String fallback) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 59,
+      "warning": "no @param for fallback",
+      "source_line": "    public static String defaultIfEmpty(String source, String fallback) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 59,
+      "warning": "no @return",
+      "source_line": "    public static String defaultIfEmpty(String source, String fallback) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 64,
+      "warning": "no @param for source",
+      "source_line": "    public static String defaultIfBlank(String source, String fallback) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 64,
+      "warning": "no @param for fallback",
+      "source_line": "    public static String defaultIfBlank(String source, String fallback) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 64,
+      "warning": "no @return",
+      "source_line": "    public static String defaultIfBlank(String source, String fallback) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 69,
+      "warning": "no @param for source",
+      "source_line": "    public static String repeat(String source, int copies) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 69,
+      "warning": "no @param for copies",
+      "source_line": "    public static String repeat(String source, int copies) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 69,
+      "warning": "no @return",
+      "source_line": "    public static String repeat(String source, int copies) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 74,
+      "warning": "no @param for source",
+      "source_line": "    public static String padStart(String source, int minLength, char pad) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 74,
+      "warning": "no @param for minLength",
+      "source_line": "    public static String padStart(String source, int minLength, char pad) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 74,
+      "warning": "no @param for pad",
+      "source_line": "    public static String padStart(String source, int minLength, char pad) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 74,
+      "warning": "no @return",
+      "source_line": "    public static String padStart(String source, int minLength, char pad) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 82,
+      "warning": "no @param for source",
+      "source_line": "    public static String padEnd(String source, int minLength, char pad) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 82,
+      "warning": "no @param for minLength",
+      "source_line": "    public static String padEnd(String source, int minLength, char pad) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 82,
+      "warning": "no @param for pad",
+      "source_line": "    public static String padEnd(String source, int minLength, char pad) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 82,
+      "warning": "no @return",
+      "source_line": "    public static String padEnd(String source, int minLength, char pad) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 93,
+      "warning": "no @param for first",
+      "source_line": "    public static String commonPrefix(String first, String second) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 93,
+      "warning": "no @param for second",
+      "source_line": "    public static String commonPrefix(String first, String second) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 93,
+      "warning": "no @return",
+      "source_line": "    public static String commonPrefix(String first, String second) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 104,
+      "warning": "no @param for first",
+      "source_line": "    public static String commonSuffix(String first, String second) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 104,
+      "warning": "no @param for second",
+      "source_line": "    public static String commonSuffix(String first, String second) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 104,
+      "warning": "no @return",
+      "source_line": "    public static String commonSuffix(String first, String second) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 118,
+      "warning": "no @param for source",
+      "source_line": "    public static String removePrefix(String source, String prefix) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 118,
+      "warning": "no @param for prefix",
+      "source_line": "    public static String removePrefix(String source, String prefix) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 118,
+      "warning": "no @return",
+      "source_line": "    public static String removePrefix(String source, String prefix) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 125,
+      "warning": "no @param for source",
+      "source_line": "    public static String removeSuffix(String source, String suffix) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 125,
+      "warning": "no @param for suffix",
+      "source_line": "    public static String removeSuffix(String source, String suffix) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 125,
+      "warning": "no @return",
+      "source_line": "    public static String removeSuffix(String source, String suffix) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 133,
+      "warning": "no @param for source",
+      "source_line": "    public static String substringBefore(String source, String delimiter) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 133,
+      "warning": "no @param for delimiter",
+      "source_line": "    public static String substringBefore(String source, String delimiter) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 133,
+      "warning": "no @return",
+      "source_line": "    public static String substringBefore(String source, String delimiter) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 141,
+      "warning": "no @param for source",
+      "source_line": "    public static String substringAfter(String source, String delimiter) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 141,
+      "warning": "no @param for delimiter",
+      "source_line": "    public static String substringAfter(String source, String delimiter) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 141,
+      "warning": "no @return",
+      "source_line": "    public static String substringAfter(String source, String delimiter) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 149,
+      "warning": "no @param for source",
+      "source_line": "    public static String substringBeforeLast(String source, String delimiter) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 149,
+      "warning": "no @param for delimiter",
+      "source_line": "    public static String substringBeforeLast(String source, String delimiter) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 149,
+      "warning": "no @return",
+      "source_line": "    public static String substringBeforeLast(String source, String delimiter) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 158,
+      "warning": "no @param for source",
+      "source_line": "    public static String substringAfterLast(String source, String delimiter) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 158,
+      "warning": "no @param for delimiter",
+      "source_line": "    public static String substringAfterLast(String source, String delimiter) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 158,
+      "warning": "no @return",
+      "source_line": "    public static String substringAfterLast(String source, String delimiter) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 167,
+      "warning": "no @param for source",
+      "source_line": "    public static int countOccurrences(String source, String needle) {",
+      "caret": "                      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 167,
+      "warning": "no @param for needle",
+      "source_line": "    public static int countOccurrences(String source, String needle) {",
+      "caret": "                      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 167,
+      "warning": "no @return",
+      "source_line": "    public static int countOccurrences(String source, String needle) {",
+      "caret": "                      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 183,
+      "warning": "no @param for source",
+      "source_line": "    public static boolean startsWithIgnoreCase(String source, String prefix) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 183,
+      "warning": "no @param for prefix",
+      "source_line": "    public static boolean startsWithIgnoreCase(String source, String prefix) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 183,
+      "warning": "no @return",
+      "source_line": "    public static boolean startsWithIgnoreCase(String source, String prefix) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 190,
+      "warning": "no @param for source",
+      "source_line": "    public static boolean endsWithIgnoreCase(String source, String suffix) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 190,
+      "warning": "no @param for suffix",
+      "source_line": "    public static boolean endsWithIgnoreCase(String source, String suffix) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 190,
+      "warning": "no @return",
+      "source_line": "    public static boolean endsWithIgnoreCase(String source, String suffix) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 199,
+      "warning": "no @param for source",
+      "source_line": "    public static int indexOfIgnoreCase(String source, String needle, int fromIndex) {",
+      "caret": "                      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 199,
+      "warning": "no @param for needle",
+      "source_line": "    public static int indexOfIgnoreCase(String source, String needle, int fromIndex) {",
+      "caret": "                      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 199,
+      "warning": "no @param for fromIndex",
+      "source_line": "    public static int indexOfIgnoreCase(String source, String needle, int fromIndex) {",
+      "caret": "                      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 199,
+      "warning": "no @return",
+      "source_line": "    public static int indexOfIgnoreCase(String source, String needle, int fromIndex) {",
+      "caret": "                      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 211,
+      "warning": "no comment",
+      "source_line": "    public static int indexOfIgnoreCase(String source, String needle) {",
+      "caret": "                      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 215,
+      "warning": "no comment",
+      "source_line": "    public static boolean containsIgnoreCase(String source, String needle) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 220,
+      "warning": "no @param for source",
+      "source_line": "    public static String reverse(String source) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 220,
+      "warning": "no @return",
+      "source_line": "    public static String reverse(String source) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 227,
+      "warning": "no @param for source",
+      "source_line": "    public static String stripToNull(String source) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 227,
+      "warning": "no @return",
+      "source_line": "    public static String stripToNull(String source) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 234,
+      "warning": "no @param for source",
+      "source_line": "    public static String stripToEmpty(String source) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "line": 234,
+      "warning": "no @return",
+      "source_line": "    public static String stripToEmpty(String source) {",
+      "caret": "                         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",
+      "line": 68,
+      "warning": "no @param for monitor",
+      "source_line": "    default V call(ProgressMonitor monitor) throws Exception {",
+      "caret": "              ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",
+      "line": 68,
+      "warning": "no @return",
+      "source_line": "    default V call(ProgressMonitor monitor) throws Exception {",
+      "caret": "              ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",
+      "line": 68,
+      "warning": "no @throws for java.lang.Exception",
+      "source_line": "    default V call(ProgressMonitor monitor) throws Exception {",
+      "caret": "              ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Executor.java",
+      "line": 142,
+      "warning": "no @param for command",
+      "source_line": "    default void execute(Runnable command, ProgressMonitor monitor) {",
+      "caret": "                 ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Executor.java",
+      "line": 142,
+      "warning": "no @param for monitor",
+      "source_line": "    default void execute(Runnable command, ProgressMonitor monitor) {",
+      "caret": "                 ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Executor.java",
+      "line": 149,
+      "warning": "no @param for command",
+      "source_line": "    default void executeWithProgress(Runnable command) {",
+      "caret": "                 ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "line": 435,
+      "warning": "no @param for <T>",
+      "source_line": "    default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "line": 435,
+      "warning": "no @param for task",
+      "source_line": "    default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "line": 435,
+      "warning": "no @param for monitor",
+      "source_line": "    default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "line": 435,
+      "warning": "no @return",
+      "source_line": "    default <T> Future<T> submitMonitored(Callable<T> task, ProgressMonitor monitor) {",
+      "caret": "                          ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "line": 442,
+      "warning": "no @param for task",
+      "source_line": "    default Future<?> submitMonitored(Runnable task, ProgressMonitor monitor) {",
+      "caret": "                      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "line": 442,
+      "warning": "no @param for monitor",
+      "source_line": "    default Future<?> submitMonitored(Runnable task, ProgressMonitor monitor) {",
+      "caret": "                      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "line": 442,
+      "warning": "no @return",
+      "source_line": "    default Future<?> submitMonitored(Runnable task, ProgressMonitor monitor) {",
+      "caret": "                      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+      "line": 16,
+      "warning": "no @param for monitor",
+      "source_line": "    V callMonitored(ProgressMonitor monitor) throws Exception;",
+      "caret": "      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+      "line": 16,
+      "warning": "no @return",
+      "source_line": "    V callMonitored(ProgressMonitor monitor) throws Exception;",
+      "caret": "      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+      "line": 16,
+      "warning": "no @throws for java.lang.Exception",
+      "source_line": "    V callMonitored(ProgressMonitor monitor) throws Exception;",
+      "caret": "      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
+      "line": 15,
+      "warning": "no @param for monitor",
+      "source_line": "    void runMonitored(ProgressMonitor monitor);",
+      "caret": "         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "line": 14,
+      "warning": "no comment",
+      "source_line": "    long UNKNOWN_WORK = -1L;",
+      "caret": "         ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "line": 15,
+      "warning": "no comment",
+      "source_line": "    ProgressMonitor NONE = new ProgressMonitor() { };",
+      "caret": "                    ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "line": 17,
+      "warning": "no comment",
+      "source_line": "    default void begin(String task, long totalWork) { }",
+      "caret": "                 ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "line": 18,
+      "warning": "no comment",
+      "source_line": "    default void worked(long units) { }",
+      "caret": "                 ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "line": 19,
+      "warning": "no comment",
+      "source_line": "    default void message(String text) { }",
+      "caret": "                 ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "line": 20,
+      "warning": "no comment",
+      "source_line": "    default boolean isCancelled() { return false; }",
+      "caret": "                    ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "line": 21,
+      "warning": "no comment",
+      "source_line": "    default void cancel() { }",
+      "caret": "                 ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "line": 22,
+      "warning": "no comment",
+      "source_line": "    default void done() { }",
+      "caret": "                 ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "line": 24,
+      "warning": "no comment",
+      "source_line": "    default void checkCancelled() {",
+      "caret": "                 ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "line": 31,
+      "warning": "no @param for name",
+      "source_line": "    default ProgressMonitor child(String name, long parentTicks, long totalWork) {",
+      "caret": "                            ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "line": 31,
+      "warning": "no @param for parentTicks",
+      "source_line": "    default ProgressMonitor child(String name, long parentTicks, long totalWork) {",
+      "caret": "                            ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "line": 31,
+      "warning": "no @param for totalWork",
+      "source_line": "    default ProgressMonitor child(String name, long parentTicks, long totalWork) {",
+      "caret": "                            ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "line": 31,
+      "warning": "no @return",
+      "source_line": "    default ProgressMonitor child(String name, long parentTicks, long totalWork) {",
+      "caret": "                            ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "line": 27,
+      "warning": "no @return",
+      "source_line": "    public static ProgressMonitor system() {",
+      "caret": "                                  ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "line": 33,
+      "warning": "no @param for provider",
+      "source_line": "    public static Supplier<? extends ProgressMonitor> setSystem(",
+      "caret": "                                                      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "line": 33,
+      "warning": "no @return",
+      "source_line": "    public static Supplier<? extends ProgressMonitor> setSystem(",
+      "caret": "                                                      ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "line": 38,
+      "warning": "no comment",
+      "source_line": "    public static void resetSystem() { SYSTEM.set(NONE); }",
+      "caret": "                       ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "line": 41,
+      "warning": "no @return",
+      "source_line": "    public static ProgressMonitor current() {",
+      "caret": "                                  ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "line": 47,
+      "warning": "no @param for monitor",
+      "source_line": "    public static Scope bind(ProgressMonitor monitor) {",
+      "caret": "                        ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "line": 47,
+      "warning": "no @return",
+      "source_line": "    public static Scope bind(ProgressMonitor monitor) {",
+      "caret": "                        ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "line": 54,
+      "warning": "no comment",
+      "source_line": "    public static void run(Runnable task, ProgressMonitor monitor) {",
+      "caret": "                       ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "line": 63,
+      "warning": "no comment",
+      "source_line": "    public static <T> T call(Callable<T> task, ProgressMonitor monitor) throws Exception {",
+      "caret": "                        ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "line": 73,
+      "warning": "no comment",
+      "source_line": "    public static ProgressMonitor child(",
+      "caret": "                                  ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Consumer.java",
+      "line": 69,
+      "warning": "no @param for value",
+      "source_line": "    default void accept(T value, java.util.concurrent.ProgressMonitor monitor) {",
+      "caret": "                 ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Consumer.java",
+      "line": 69,
+      "warning": "no @param for monitor",
+      "source_line": "    default void accept(T value, java.util.concurrent.ProgressMonitor monitor) {",
+      "caret": "                 ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Function.java",
+      "line": 102,
+      "warning": "no @param for value",
+      "source_line": "    default R apply(T value, java.util.concurrent.ProgressMonitor monitor) {",
+      "caret": "              ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Function.java",
+      "line": 102,
+      "warning": "no @param for monitor",
+      "source_line": "    default R apply(T value, java.util.concurrent.ProgressMonitor monitor) {",
+      "caret": "              ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Function.java",
+      "line": 102,
+      "warning": "no @return",
+      "source_line": "    default R apply(T value, java.util.concurrent.ProgressMonitor monitor) {",
+      "caret": "              ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Supplier.java",
+      "line": 51,
+      "warning": "no @param for monitor",
+      "source_line": "    default T get(java.util.concurrent.ProgressMonitor monitor) {",
+      "caret": "              ^"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Supplier.java",
+      "line": 51,
+      "warning": "no @return",
+      "source_line": "    default T get(java.util.concurrent.ProgressMonitor monitor) {",
+      "caret": "              ^"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "src/java.base/share/classes/java/lang/Runnable.java",
+      "warning_count": 2,
+      "git_blob": "1d8275948a6e638bfe814f41f0afac82663ff2ca",
+      "sha256": "bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "warning_count": 72,
+      "git_blob": "d4f0687c2145b94de67d29012cea5edf1f47badd",
+      "sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",
+      "warning_count": 3,
+      "git_blob": "8210cfb6a6fdf942b9553e80c303a4b8c9f2671f",
+      "sha256": "a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Executor.java",
+      "warning_count": 3,
+      "git_blob": "802c00832d217a77bb1245c1ba473479df4c3096",
+      "sha256": "63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "warning_count": 7,
+      "git_blob": "a599ad8915eda2ace1454d59cc64c739ffc9cf66",
+      "sha256": "ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+      "warning_count": 3,
+      "git_blob": "157cce905a828a8cc34fc977f0fa42dc8362aa03",
+      "sha256": "a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
+      "warning_count": 1,
+      "git_blob": "1a8d02bf7ea449018cae69aae5b784a65a172e66",
+      "sha256": "8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "warning_count": 13,
+      "git_blob": "2c90932ecb19c138a62f9860232162002f87c012",
+      "sha256": "58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "warning_count": 10,
+      "git_blob": "a634db13a764d22fc55ad75ae35cc4952d3b20f6",
+      "sha256": "5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Consumer.java",
+      "warning_count": 2,
+      "git_blob": "3df6f12a3a442c3a9f0d47ed5fc8aa725e634ccb",
+      "sha256": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Function.java",
+      "warning_count": 3,
+      "git_blob": "76a20ef10fa1fbb701adb544ff6b7eb152f4303c",
+      "sha256": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Supplier.java",
+      "warning_count": 2,
+      "git_blob": "ae9a9fd8a0158cb396d36304a607709cd875903c",
+      "sha256": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6"
+    }
+  ],
+  "not_acceptance": true
+}

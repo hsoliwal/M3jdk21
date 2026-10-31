@@ -1,0 +1,22 @@
+{
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_pr": 12446,
+  "qualified_canonical_commit": "b8ee85a73166407e0d82a6bdf51cfaad7698f4ed",
+  "publication_canonical_commit": "aa1d9e0e58de313ab624ff16b92a1ef61852a049",
+  "canonical_task": "synexia-openrewrite-recipes/recipes/m3jdk21-rx7-view-convergence-20261019",
+  "receiver_parent": "46b35b58e142099020822d7189b1f18c129729eb",
+  "selected_production_files": 3,
+  "new_proof_sources": 6,
+  "copy_policy": "EXACT_CANONICAL_GIT_BLOBS; target-owned JDK postimages and original per-file licenses retained",
+  "runtime_source_delta_since_host_qualification": false,
+  "rx7_production_delta": false,
+  "filtered_view_production_delta": false,
+  "rx7_early_finalization": "HOLD_NOT_APPLIED",
+  "host_results": "Retained exact canonical host-receipt.json and packaged-host-proof.log; not hosted execution",
+  "runner_sha256": "471e85b256d28e0c75bbaa5bb0936affa653d2bd66c93b0c3eccb6d861fdb100",
+  "runner_guard_syntax": "PASS",
+  "runner_guard_invalid_pin_refusal": "PASS_EXIT_2",
+  "new_guarded_runner_end_to_end": "NOT_RUN",
+  "full_source_built_jdk_sdk_reactor_jtreg_platform_pressure": "NOT_RUN",
+  "receiving_phase_advanced": false
+}

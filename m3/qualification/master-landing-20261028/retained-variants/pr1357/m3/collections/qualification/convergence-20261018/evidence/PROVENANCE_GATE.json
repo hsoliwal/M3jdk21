@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "scope": "explicit changed-file list in bounded canonical assembly; not full repo diff/CI",
+  "base": "140c263a90f9803b9c46103c63355a286e0515f0",
+  "paths": 317,
+  "violations": []
+}

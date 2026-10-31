@@ -1,0 +1,11 @@
+/workspace/scratch/a20ebe6f78bb/continuation/before/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserFixtures.java:11: error: cannot find symbol
+import jdk.m3.parser.M3JavacTree;
+                    ^
+  symbol:   class M3JavacTree
+  location: package jdk.m3.parser
+/workspace/scratch/a20ebe6f78bb/continuation/before/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserFixtures.java:79: error: cannot find symbol
+    static String javacDigest(M3JavacTree tree) {
+                              ^
+  symbol:   class M3JavacTree
+  location: class M3ParserFixtures
+2 errors

@@ -1,0 +1,19 @@
+{
+  "schema": "M3_EXISTING_INPUT_BUILDER_ADAPTATION_V1",
+  "predecessor_source": "runtime-refinement/authoring/seal_final_public_evidence.py",
+  "predecessor_sha256": "f0293fab5e5880be9449f0df83190557a736bbb52db8b1328d4c88dfe05fdd57",
+  "adapted_source": "seal_final_public_evidence.py",
+  "adapted_sha256": "b52174e54d14ca2e19e5ab8098a77c775bad031c09a29c3e2d5042793b922d71",
+  "changes": [
+    "Parameterize immutable baseline; validate it resolves to the exact commit before source admission.",
+    "Parameterize existing recipe crate independently of unchanged engine owner.",
+    "Use a distinct final image custody dataset and receipt schema."
+  ],
+  "unchanged": [
+    "Original Git blob/absence admission",
+    "Original256 text target limit",
+    "Original prepare.seal transformation engine",
+    "All existing Maven engines/POM/SDK/sealer/receiver tests"
+  ],
+  "source_license": "Apache-2.0"
+}

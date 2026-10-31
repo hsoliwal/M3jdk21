@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors.
+category	candidate	provenance	licence	contract_fitness	complexity	decision	validation
+IMMUTABLE_MASK_RANK	Existing M3IndexPathRank bitmap+wordPrefix	M3JDK21 master/1753	First-party Apache-2.0	EXACT	O(1) rank, O(log(w)+64) seek	REUSE	Exact source contract and original rank differential
+IDENTITY_OFFSETS	Implicit source ordinal rowIdAt	M3JDK21 #1753 / Synexia #12849	First-party Apache-2.0	EXACT	O(n/64) retained bitmap instead of two int[n] identity arrays	REUSE	Identity vs general index randomized equality
+BULK_PAGED_RANK	M3IndexPathRank.Window.copySelectedRowIds	M3JDK21 #1738 / Synexia #12834	First-party Apache-2.0	EXACT_WITH_IDENTITY_ADAPTATION	O(walked words + rows), O(1) scratch	SELECT	Source sealed Java21 bulk and original JNI oracles
+LIVE_FILTER_SORT_REFRESH	M3IndexedLiveView original owner reentrancy	M3JDK21 #1734 / canonical Synexia recipe	First-party Apache-2.0	EXACT	O(n predicate + index sort), fail-fast refresh	SELECT	Preserve comparator/predicate order and invalidation exceptions
+JAVA_JNI_PATH_MASK	M3IndexPathMasks existing C11/JNI	M3JDK21 existing native owner	First-party Apache-2.0	EXACT	O(n) primitive selector plus JNI entry	REUSE	NATIVE_REQUIRED -Xcheck:jni exact differential
+PREFIX_SUM	LeetCode 303	https://leetcode.com/problems/range-sum-query-immutable/	REFERENCE_ONLY	PATTERN_ONLY	O(n) prefix build	CATALOGUE	Existing immutable rank prefix already meets requirements
+BINARY_SEARCH	LeetCode 34	https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/	REFERENCE_ONLY	PATTERN_ONLY	O(log w) rank seek	CATALOGUE	Reuse existing binary wordPrefix search
+STRING_SPARSE_COUNTS	HackerRank Sparse Arrays	https://www.hackerrank.com/challenges/sparse-arrays/problem	REFERENCE_ONLY	REJECTED	Unrelated token frequency	NO_IMPORT	Cannot preserve signed duplicate row semantics
+RIGHTMOST_SET_BIT	GeeksforGeeks bit rank	https://www.geeksforgeeks.org/dsa/position-of-rightmost-set-bit/	REFERENCE_ONLY	PATTERN_ONLY	O(1) word primitive	CATALOGUE	Existing Long.numberOfTrailingZeros and popcount
+OPENJDK_BITSET	OpenJDK java.util.BitSet	https://github.com/openjdk/jdk/blob/jdk-21%2B35/src/java.base/share/classes/java/util/BitSet.java	GPLv2 + Classpath exception	REFERENCE_ONLY	O(n/64) bitmap	NO_COPY	Existing M3 word bitmap owner; preserve source licensing

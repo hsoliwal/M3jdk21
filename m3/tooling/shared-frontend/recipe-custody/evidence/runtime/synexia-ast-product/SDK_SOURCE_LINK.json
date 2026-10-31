@@ -1,0 +1,19 @@
+{
+  "schema": "SYNEXIA_AST_SDK_COMPLETE_PRODUCT_LINK_V1",
+  "status": "PASS",
+  "dataset": "synexia-ast-complete",
+  "targets": 8,
+  "sdk_inputs_sha256": "bf95d77aedff2ff1e368615c8b86efbd048420baf35236c20ca7793444d718d6",
+  "sdk_results_sha256": "44ab8476a184f14995381da5d0896d3a9e19e318e76387d16bf491b0b083947b",
+  "receipt_sha256": "3a35cc6a633e5ffa40b1ed29cedf78824218e5e19e207e4a927bd11e2bd491f1",
+  "source_jdk_modules_sha256": "e7a2827ebfcb2f1fb474db3a8e4e4bc058ffe5f5dea5f9701803669101b28b8b",
+  "strict_compile": "-Xlint:all -Werror; zero diagnostics",
+  "junit": {
+    "found": 19,
+    "started": 19,
+    "successful": 19,
+    "failed": 0
+  },
+  "scope": "Complete modified M3JDK21 image built from source; baseline make images and final make jdk-image succeeded. Actual exact current Synexia source snapshot and real external dependencies; not full Maven reactor qualification.",
+  "earlier_receipt_unchanged": true
+}

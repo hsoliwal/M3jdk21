@@ -915,6 +915,10 @@ public class DefaultTreeSelectionModel implements Cloneable, Serializable, TreeS
                             // rows of the new selection
                             for (int i = 0; i < selectionIndex.length; i++) {
                                 if (selectionIndex[i]<counter) {
+                                    if (selectionIndex[i] < min) {
+                                        // M3 (D2): a selected path that is not visible has no row
+                                        continue;
+                                    }
                                     newSel[selectionIndex[i]-min] = selection[i];
                                 }
                             }

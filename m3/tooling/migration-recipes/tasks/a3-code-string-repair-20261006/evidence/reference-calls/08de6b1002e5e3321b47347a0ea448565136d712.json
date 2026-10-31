@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "08de6b1002e5e3321b47347a0ea448565136d712"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "src/main/resources/META-INF/rewrite/m3-java21-convergence.yml\tABSENT\tf9ec35b4af6d74de7dadfc6bd420612703fc08952b77dfa20c94b16132f7ecbc\t00-m3-java21-convergence.yml.txt\n"
+    },
+    "isError": false
+  }
+}

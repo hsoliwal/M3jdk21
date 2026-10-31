@@ -1,0 +1,259 @@
+{
+  "schema": "M3_NUMERIC_COPY_SDK_QUALIFICATION_V1",
+  "baseline": "4b24824c3aa09d802121447f8970d442a855f064",
+  "source_stage": "ACTUAL_QUALIFIED_SDK_RESULTS_NOT_PRODUCT_RECEIVER",
+  "sdk_input_sha256": "1f6796cfb9dc805b44223e02efe05596147be06052447c9f9d6d6bf7016a3365",
+  "sdk_results_sha256": "0f4c412e6b4ade2c05bb7afcec22efd626e89eebf0278762fad32c71ee593043",
+  "sources": {
+    "M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java": "54e15c58f4467d2e27155b521e49e1bfe81d0bce1459e2c804c38ade5fcd4eec",
+    "M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java": "8d6afc24c677adb7ba612071d34453c8a7d8b9e1a81ac27fb06bc3f62c673edd",
+    "M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3ByteArrayView.java": "4e5d750bf138e744a2d7ff31e7b79edd1044d66372a13c4fbededfb28adcbb2b",
+    "M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3IntArrayView.java": "60b056f30ff6e6b19a4197401b8b0faa2fce57208eb4b6744f9340ae0082e6eb",
+    "M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3LongArrayView.java": "065da79db609116600f90e7fa650ca589abfa5fd8b988c9b865898f1633efd84",
+    "M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3Utf16ArrayView.java": "69076f0cbd6744bc2a0d0dedb55ae6ad94bdef8faccb42a241efc579fddfbe62",
+    "M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3Utf16Facts.java": "d1716b27289912f6d75ab2538aa9431f19324d6bb510f5c196c9cd5dab3176a8",
+    "M3jdk21/m3/arrays/src/main/java/module-info.java": "fcdc79c97c36428da6e359f6b0310140550b0eb5d8c8b2b3c04b8d55d94e0ca5",
+    "M3jdk21/m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsSelfTest.java": "632ee4cfa058f1f80536d4387e41b9d0fff41f64307d1c21f4cf2cbed94d20b1",
+    "collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java": "546e85b54b595e5a8e49a2fb4959539b0641dc007c0bf807bfd77542a0568a45",
+    "collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java": "3221d674ac9947c97d50967659176aa5bdf3db6a51e7e3574daa3d0792a6d83d"
+  },
+  "commands": [
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "-Xlint:all,-module",
+        "-Werror",
+        "-d",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3ByteArrayView.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3IntArrayView.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3LongArrayView.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3Utf16ArrayView.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3Utf16Facts.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/module-info.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsSelfTest.java",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.830453872680664,
+      "log": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/compile.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3ArrayEmptySegmentsSelfTest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.8849685192108154,
+      "log": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/default-M3ArrayEmptySegmentsSelfTest.log",
+      "log_sha256": "9b6a217e670f2ff8871b48c1858c58501a64adf08c059ecb7896c0b43d353de0"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3ArrayNumericCopySelfTest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.8729016780853271,
+      "log": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/default-M3ArrayNumericCopySelfTest.log",
+      "log_sha256": "97deeff20fe273269758b8c753154d0c648e43de424addbd05898dba545769a3"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+        "-public",
+        "-s",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/classes",
+        "com.m3.arrays.M3Arrays",
+        "com.m3.arrays.M3ArrayNative",
+        "com.m3.arrays.M3ByteArrayView",
+        "com.m3.arrays.M3Utf16ArrayView",
+        "com.m3.arrays.M3IntArrayView",
+        "com.m3.arrays.M3LongArrayView",
+        "com.m3.arrays.M3Utf16Facts"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.3406193256378174,
+      "log": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/baseline/public-api.log",
+      "log_sha256": "3c50e82b789904813f9cb126ddc8f7e6059fcb65374f1e398c3df9423015b3e3"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "-Xlint:all,-module",
+        "-Werror",
+        "-d",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3ByteArrayView.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3IntArrayView.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3LongArrayView.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3Utf16ArrayView.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3Utf16Facts.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/module-info.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsSelfTest.java",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-numeric-copy/candidate/m3/arrays/src/test/java/com/m3/arrays/M3ArrayNumericCopySelfTest.java"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.9079749584197998,
+      "log": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/compile.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayEmptySegmentsSelfTest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.588414192199707,
+      "log": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/default-M3ArrayEmptySegmentsSelfTest.log",
+      "log_sha256": "9b6a217e670f2ff8871b48c1858c58501a64adf08c059ecb7896c0b43d353de0"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopySelfTest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.0531120300292969,
+      "log": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/default-M3ArrayNumericCopySelfTest.log",
+      "log_sha256": "97deeff20fe273269758b8c753154d0c648e43de424addbd05898dba545769a3"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xint",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayEmptySegmentsSelfTest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.290438413619995,
+      "log": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/interpreter-M3ArrayEmptySegmentsSelfTest.log",
+      "log_sha256": "9b6a217e670f2ff8871b48c1858c58501a64adf08c059ecb7896c0b43d353de0"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-Xint",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopySelfTest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.133850574493408,
+      "log": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/interpreter-M3ArrayNumericCopySelfTest.log",
+      "log_sha256": "97deeff20fe273269758b8c753154d0c648e43de424addbd05898dba545769a3"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-XX:TieredStopAtLevel=1",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayEmptySegmentsSelfTest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.3645892143249512,
+      "log": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/c1-M3ArrayEmptySegmentsSelfTest.log",
+      "log_sha256": "9b6a217e670f2ff8871b48c1858c58501a64adf08c059ecb7896c0b43d353de0"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-XX:TieredStopAtLevel=1",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopySelfTest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.7258777618408203,
+      "log": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/c1-M3ArrayNumericCopySelfTest.log",
+      "log_sha256": "97deeff20fe273269758b8c753154d0c648e43de424addbd05898dba545769a3"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-XX:-TieredCompilation",
+        "-Xbatch",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayEmptySegmentsSelfTest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 6.425644874572754,
+      "log": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/c2-M3ArrayEmptySegmentsSelfTest.log",
+      "log_sha256": "9b6a217e670f2ff8871b48c1858c58501a64adf08c059ecb7896c0b43d353de0"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xmx256m",
+        "-XX:-TieredCompilation",
+        "-Xbatch",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3ArrayNumericCopySelfTest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.763543128967285,
+      "log": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/c2-M3ArrayNumericCopySelfTest.log",
+      "log_sha256": "97deeff20fe273269758b8c753154d0c648e43de424addbd05898dba545769a3"
+    },
+    {
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+        "-public",
+        "-s",
+        "-cp",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/classes",
+        "com.m3.arrays.M3Arrays",
+        "com.m3.arrays.M3ArrayNative",
+        "com.m3.arrays.M3ByteArrayView",
+        "com.m3.arrays.M3Utf16ArrayView",
+        "com.m3.arrays.M3IntArrayView",
+        "com.m3.arrays.M3LongArrayView",
+        "com.m3.arrays.M3Utf16Facts"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.3042919635772705,
+      "log": "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/sdk-numeric-v2/sdk/public-api.log",
+      "log_sha256": "3c50e82b789904813f9cb126ddc8f7e6059fcb65374f1e398c3df9423015b3e3"
+    }
+  ],
+  "public_api_equal": true,
+  "retained_fields_equal": true,
+  "status": "PASS"
+}

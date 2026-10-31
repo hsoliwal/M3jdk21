@@ -1,0 +1,80 @@
+{
+  "schema": "M3JDK21_SYNEXIA_CONCAT_TUPLE_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for the test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-concat-tuple-20261008",
+    "pullRequest": 9868,
+    "commit": "bf791f6c6cf",
+    "recipes": [
+      "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe (crate m3-concat-tuple: StringConcatHelper.java preimage->postimage, M3StringConcatTupleTest ABSENT)",
+      "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe (crate m3-concat-tuple: StringConcatFactory.java preimage->postimage; bootstrap allowlist entry)"
+    ],
+    "declarativeRecipe": "com.synexia.m3.ConcatTuple",
+    "fossReuseDecisionRow": "string.concat-tuple.combinator",
+    "donors": [
+      {
+        "path": "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java generateM3Concat + stringValueOf/floatStringifier/doubleStringifier/objectStringifier",
+        "commit": "c9b07049c5",
+        "target": "StringConcatFactory.generateM3Concat + m3Stringifier",
+        "mechanics": "typed stringify gateways per parameter, filterArguments, one String[] collection"
+      },
+      {
+        "path": "src/java.base/share/classes/java/lang/StringConcatHelper.java m3Concat",
+        "commit": "c9b07049c5",
+        "target": "StringConcatHelper.m3Concat(String[], String[])",
+        "mechanics": "folds constants and stringified pieces into M3 storage unchanged"
+      }
+    ],
+    "license": "first-party (JDK GPLv2+CPE factory, M3 owner)",
+    "disposition": "ADAPT: boxing collector replaced by typed gateways and a String[] collector; JLS 15.18.1 null/toString rules kept through String.valueOf and stringOf; indy call-site contract unchanged"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "c9b07049c57ecdf43175f5885e11998918416a00 + hsoliwal/M3jdk21#441 (A2, adb9fad4e3)",
+    "owners": [
+      "java.lang.invoke.StringConcatFactory.generateM3Concat",
+      "java.lang.StringConcatHelper.m3Concat"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: 65 targets, target_commit ec0ead0e3f; apply.py --check state=after; test_recipe.py 8/8"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/StringConcatHelper.java",
+      "before": "c16dcf6693d8f94cb52f9f902b71d7d91160c287affa15e16d245f7e19121510",
+      "after": "1d41449dceb4350049689669bca5567e005d51e8440d2a88e81288d6a9f50ce7",
+      "resource": "hash-pinned-java/00-StringConcatHelper.java.txt"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java",
+      "before": "efe0c96211a13aa34f0fbc55f4bd4190287846c329b2f25c3cbcf97185a709de",
+      "after": "0bdcf30e2e090545d41e80566ca2b60d50d3a1c3e80e3dc849f1a22ecc3e11b8",
+      "resource": "hash-pinned-text/00-StringConcatFactory.java.txt"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringConcatTupleTest.java",
+      "before": "ABSENT",
+      "after": "cf870f27491be49bcae7acf23900c8ac28a339aea42915f225e2529c98abc4da",
+      "resource": "hash-pinned-java/01-M3StringConcatTupleTest.java.txt"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base over the sealed M3 java.base subset (149 classes)",
+    "flagOffProof": "PASS_WINDOWS M3StringConcatTupleTest on the patched module without the M3 flag: 13,425 checks; every gateway takes the primitive parameter type itself (no boxing), generated handles carry the exact call-site type, javac indy expressions agree with StringBuilder",
+    "g8RuntimeRecipe": "PASS_WINDOWS apply.py --check state=after; test_recipe.py 8/8",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3ConcatTupleRecipeTest 3/3 (mvn log sha256 8066a31ecdeec15cc3704a9ff14fb2b8e463b662e6e4833f14c06ba359f20ea9)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "flagOnInvocation": "PENDING_LINUX (jtreg M3StringConcatTupleTest invoke: 3,000 random shapes over 13 argument types and arities 1..6 through the combinator; needs the M3 runtime)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "only the M3 segmented path changes; the flat byte[] fast paths and the LITERAL/simpleConcat shapes are untouched",
+    "gateways: String.valueOf(int/long/char/boolean), byte and short widened to int, float/double stringifiers, stringOf for every reference type (null and null toString become \"null\"), none for String",
+    "the combinator cannot be invoked without the M3 runtime (String(M3String) needs the storage pool), so the Windows proof covers construction, types and gateways; invocation is the flag-on jtreg run",
+    "no timing claim"
+  ]
+}

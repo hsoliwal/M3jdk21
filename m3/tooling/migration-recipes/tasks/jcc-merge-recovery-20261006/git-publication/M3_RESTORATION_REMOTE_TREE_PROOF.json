@@ -1,0 +1,19 @@
+{
+  "schema": "m3-jcc-restoration-remote-tree-proof/1",
+  "status": "COMPLETE_M3_TREE_EXACT",
+  "root": "0b686778262c36f40153dde6e569abc8d393a3c6",
+  "m3_tree": "19aae07ba508323d71a57034e37642a237283a0d",
+  "verified_tree_objects": 544,
+  "current_m3_leaves_preserved": 1766,
+  "historical_files_restored": 443,
+  "resulting_m3_leaves": 2209,
+  "all_other_root_entries_preserved": true,
+  "operational_mapping_unchanged": true,
+  "new_runtime_qualification": false,
+  "inputs": {
+    "M3_RESTORATION_PLAN.json": "33ae3c57f49d87739a27fab55402746f7a46d93554d227385da948939b1c03c0",
+    "M3_RESTORATION_CREATE_TREE.json": "d0e1b6a5a762df0a2c667089ae2191a203d5b795b97aadbd8d6290e4cc8d3c2e",
+    "M3_RESTORATION_READBACK_ROOT.json": "16fa29e226d6bcb3849fc42e1b59b1970414fd8770bcdf622bc6410843db7199",
+    "M3_RESTORATION_READBACK_M3_RECURSIVE.json": "d7f276c5cfc613d9433f420998e487819e9f0ab09f1a3462681f49083e323de7"
+  }
+}

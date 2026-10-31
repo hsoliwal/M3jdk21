@@ -1,0 +1,21 @@
+{
+  "orders": [
+    {
+      "families": [
+        "Rfc"
+      ],
+      "id": "Forward",
+      "recipe": "com.synexia.m3.Rf0Forward"
+    },
+    {
+      "families": [
+        "Rfc"
+      ],
+      "id": "Reverse",
+      "recipe": "com.synexia.m3.Rf0Reverse"
+    }
+  ],
+  "schema": "synexia.rf0.composition-orders/1",
+  "sourceCommit": "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c",
+  "targetCommit": "c0a14387009aefc7d62bd3268055d526e04f9074"
+}

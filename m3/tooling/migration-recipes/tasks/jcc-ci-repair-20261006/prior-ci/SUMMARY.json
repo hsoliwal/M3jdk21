@@ -1,0 +1,447 @@
+{
+  "schema": "jcc-current-ci-inspection/1",
+  "status": "BOUNDED_READ_ONLY_INSPECTION_COMPLETE",
+  "observed_start_utc": "2026-10-06T03:16:19.149Z",
+  "observed_finish_utc": "2026-10-06T03:17:31.108Z",
+  "read_only_remote_call_count": 19,
+  "subjects": [
+    {
+      "subject": "source-final-head",
+      "repository": "hsoliwal/com.synexia",
+      "head_sha": "5159cdd69dfdf8dfc8f3e191280d3ffdf246631b",
+      "pr_number": 9362,
+      "pr_url": "https://github.com/hsoliwal/com.synexia/pull/9362",
+      "pr_state": "closed",
+      "merged": true,
+      "merged_at": "2026-10-06T01:59:14Z",
+      "merge_commit_sha": "ab0589e045ca9a3f39eff8bd12cb3ec2a27da816",
+      "collections": {
+        "workflows": {
+          "total_count": 17,
+          "fetched_count": 17,
+          "pages": [
+            1
+          ],
+          "per_page": 100,
+          "complete_against_returned_total": true,
+          "states": {
+            "failure": 17
+          },
+          "aggregate_state": null,
+          "captured_call": "source-final-head-workflows-p1.json",
+          "started_utc": "2026-10-06T03:16:19.149Z",
+          "finished_utc": "2026-10-06T03:16:19.933Z"
+        },
+        "checks": {
+          "total_count": 0,
+          "fetched_count": 0,
+          "pages": [
+            1
+          ],
+          "per_page": 100,
+          "complete_against_returned_total": true,
+          "states": {},
+          "aggregate_state": null,
+          "captured_call": "source-final-head-checks-p1.json",
+          "started_utc": "2026-10-06T03:16:19.149Z",
+          "finished_utc": "2026-10-06T03:16:19.895Z"
+        },
+        "statuses": {
+          "total_count": 0,
+          "fetched_count": 0,
+          "pages": [
+            1
+          ],
+          "per_page": 100,
+          "complete_against_returned_total": true,
+          "states": {},
+          "aggregate_state": "pending",
+          "captured_call": "source-final-head-statuses-p1.json",
+          "started_utc": "2026-10-06T03:16:19.149Z",
+          "finished_utc": "2026-10-06T03:16:19.705Z"
+        }
+      }
+    },
+    {
+      "subject": "receiving-head",
+      "repository": "hsoliwal/M3jdk21",
+      "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+      "pr_number": 147,
+      "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/147",
+      "pr_state": "closed",
+      "merged": true,
+      "merged_at": "2026-10-06T02:26:59Z",
+      "merge_commit_sha": "f5a28ac841958313d0c287f87c263a84b7ef6c39",
+      "collections": {
+        "workflows": {
+          "total_count": 12,
+          "fetched_count": 12,
+          "pages": [
+            1
+          ],
+          "per_page": 100,
+          "complete_against_returned_total": true,
+          "states": {
+            "failure": 9,
+            "success": 2,
+            "queued": 1
+          },
+          "aggregate_state": null,
+          "captured_call": "receiving-head-workflows-p1.json",
+          "started_utc": "2026-10-06T03:16:19.149Z",
+          "finished_utc": "2026-10-06T03:16:20.875Z"
+        },
+        "checks": {
+          "total_count": 33,
+          "fetched_count": 33,
+          "pages": [
+            1
+          ],
+          "per_page": 100,
+          "complete_against_returned_total": true,
+          "states": {
+            "skipped": 3,
+            "queued": 8,
+            "failure": 19,
+            "success": 3
+          },
+          "aggregate_state": null,
+          "captured_call": "receiving-head-checks-p1.json",
+          "started_utc": "2026-10-06T03:16:19.149Z",
+          "finished_utc": "2026-10-06T03:16:19.907Z"
+        },
+        "statuses": {
+          "total_count": 0,
+          "fetched_count": 0,
+          "pages": [
+            1
+          ],
+          "per_page": 100,
+          "complete_against_returned_total": true,
+          "states": {},
+          "aggregate_state": "pending",
+          "captured_call": "receiving-head-statuses-p1.json",
+          "started_utc": "2026-10-06T03:16:19.149Z",
+          "finished_utc": "2026-10-06T03:16:19.653Z"
+        }
+      }
+    }
+  ],
+  "sampled_workflow_jobs": [
+    {
+      "subject": "receiving-head",
+      "run_id": 37355594879,
+      "selection_reason": "OpenJDK GHA Sanity Checks",
+      "total_count": 21,
+      "pages": [
+        1
+      ],
+      "complete_against_returned_total": true,
+      "jobs": [
+        {
+          "id": 111917074647,
+          "name": "Select platforms",
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": []
+        },
+        {
+          "id": 111917562203,
+          "name": "linux-x64-hs-zero / build (debug)",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": [
+            "Install toolchain and dependencies"
+          ]
+        },
+        {
+          "id": 111917562337,
+          "name": "linux-x64-hs-minimal / build (debug)",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": [
+            "Install toolchain and dependencies"
+          ]
+        },
+        {
+          "id": 111917562489,
+          "name": "linux-x86 / build (release)",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": [
+            "Install toolchain and dependencies"
+          ]
+        },
+        {
+          "id": 111917562555,
+          "name": "linux-x64 / build (release)",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": [
+            "Install toolchain and dependencies"
+          ]
+        },
+        {
+          "id": 111917562597,
+          "name": "macos-aarch64 / build (debug)",
+          "status": "queued",
+          "conclusion": null,
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": []
+        },
+        {
+          "id": 111917562614,
+          "name": "linux-x86 / build (debug)",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": [
+            "Install toolchain and dependencies"
+          ]
+        },
+        {
+          "id": 111917562655,
+          "name": "linux-x64-hs-nopch / build (debug)",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": [
+            "Install toolchain and dependencies"
+          ]
+        },
+        {
+          "id": 111917562664,
+          "name": "linux-x64-hs-optimized / build (debug)",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": [
+            "Install toolchain and dependencies"
+          ]
+        },
+        {
+          "id": 111917562718,
+          "name": "macos-aarch64 / build (release)",
+          "status": "queued",
+          "conclusion": null,
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": []
+        },
+        {
+          "id": 111917562737,
+          "name": "macos-x64 / build (debug)",
+          "status": "queued",
+          "conclusion": null,
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": []
+        },
+        {
+          "id": 111917562776,
+          "name": "windows-x64 / build (release)",
+          "status": "queued",
+          "conclusion": null,
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": []
+        },
+        {
+          "id": 111917562804,
+          "name": "windows-aarch64 / build (debug)",
+          "status": "queued",
+          "conclusion": null,
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": []
+        },
+        {
+          "id": 111917562810,
+          "name": "macos-x64 / build (release)",
+          "status": "queued",
+          "conclusion": null,
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": []
+        },
+        {
+          "id": 111917562847,
+          "name": "linux-x64 / build (debug)",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": [
+            "Install toolchain and dependencies"
+          ]
+        },
+        {
+          "id": 111917562855,
+          "name": "windows-aarch64 / build (release)",
+          "status": "queued",
+          "conclusion": null,
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": []
+        },
+        {
+          "id": 111917562878,
+          "name": "docs / build (debug)",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": [
+            "Install toolchain and dependencies"
+          ]
+        },
+        {
+          "id": 111917563033,
+          "name": "windows-x64 / build (debug)",
+          "status": "queued",
+          "conclusion": null,
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": []
+        },
+        {
+          "id": 111918915216,
+          "name": "linux-x86",
+          "status": "completed",
+          "conclusion": "skipped",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": []
+        },
+        {
+          "id": 111919197578,
+          "name": "linux-x64",
+          "status": "completed",
+          "conclusion": "skipped",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": []
+        },
+        {
+          "id": 111919197984,
+          "name": "linux-cross-compile",
+          "status": "completed",
+          "conclusion": "skipped",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": []
+        }
+      ],
+      "captured_call": "receiving-head-jobs-37355594879-p1.json"
+    },
+    {
+      "subject": "receiving-head",
+      "run_id": 37355599835,
+      "selection_reason": "M3 OpenRewrite recipe proof",
+      "total_count": 1,
+      "pages": [
+        1
+      ],
+      "complete_against_returned_total": true,
+      "jobs": [
+        {
+          "id": 111917090577,
+          "name": "verify-recipes",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": [
+            "Maven JUnit OpenRewrite proof"
+          ]
+        }
+      ],
+      "captured_call": "receiving-head-jobs-37355599835-p1.json"
+    },
+    {
+      "subject": "receiving-head",
+      "run_id": 37355599854,
+      "selection_reason": "M3 foundation contracts",
+      "total_count": 1,
+      "pages": [
+        1
+      ],
+      "complete_against_returned_total": true,
+      "jobs": [
+        {
+          "id": 111917089800,
+          "name": "foundation",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": [
+            "Verify OpenRewrite convergence DAG"
+          ]
+        }
+      ],
+      "captured_call": "receiving-head-jobs-37355599854-p1.json"
+    },
+    {
+      "subject": "receiving-head",
+      "run_id": 37355599864,
+      "selection_reason": "M3JDK21 Backport Recipe DAG",
+      "total_count": 1,
+      "pages": [
+        1
+      ],
+      "complete_against_returned_total": true,
+      "jobs": [
+        {
+          "id": 111917089229,
+          "name": "dag-proof",
+          "status": "completed",
+          "conclusion": "failure",
+          "head_sha": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+          "failed_steps": [
+            "Verify recipe substrate and DAG semantic kernel"
+          ]
+        }
+      ],
+      "captured_call": "receiving-head-jobs-37355599864-p1.json"
+    },
+    {
+      "subject": "source-final-head",
+      "run_id": 37401274621,
+      "selection_reason": "M3 fingerprint catalogue",
+      "total_count": 0,
+      "pages": [
+        1
+      ],
+      "complete_against_returned_total": true,
+      "jobs": [],
+      "captured_call": "source-final-head-jobs-37401274621-p1.json"
+    },
+    {
+      "subject": "source-final-head",
+      "run_id": 37401277937,
+      "selection_reason": "Donor superset multipass",
+      "total_count": 0,
+      "pages": [
+        1
+      ],
+      "complete_against_returned_total": true,
+      "jobs": [],
+      "captured_call": "source-final-head-jobs-37401277937-p1.json"
+    },
+    {
+      "subject": "source-final-head",
+      "run_id": 37401284361,
+      "selection_reason": "M3 Full All-Ref Superset",
+      "total_count": 0,
+      "pages": [
+        1
+      ],
+      "complete_against_returned_total": true,
+      "jobs": [],
+      "captured_call": "source-final-head-jobs-37401284361-p1.json"
+    }
+  ],
+  "successful_job_log_downloads": 4,
+  "diagnostic_families": 4,
+  "source_merge_fallback_used": false,
+  "source_merge_fallback_reason": "Final source head has 17 workflow runs; requested fallback condition did not apply.",
+  "source_failure_cause": "NOT_ESTABLISHED: all three sampled source-head failed runs have zero jobs; no unsupported inference from failure labels.",
+  "current_branch_heads_inspected": false,
+  "workflow_reruns": 0,
+  "remote_writes": 0,
+  "annotation_calls": 0,
+  "scope": "Status/check/workflow collections are complete against each returned total on the named immutable heads. Job diagnosis is a selected sample, not all failures. Foundation/backport logs compiled a generated merge, explicitly distinguished from the advertised PR head.",
+  "diagnostics_file": "LOG_DIAGNOSTICS.json"
+}

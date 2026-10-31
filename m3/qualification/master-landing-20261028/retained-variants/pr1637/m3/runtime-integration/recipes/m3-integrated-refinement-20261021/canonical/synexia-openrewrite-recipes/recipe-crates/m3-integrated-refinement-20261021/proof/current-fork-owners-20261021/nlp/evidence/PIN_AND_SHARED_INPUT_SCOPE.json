@@ -1,0 +1,44 @@
+{
+  "source_snapshot_commit": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "packager_sources": {
+    "m3/tooling/jmod-recipes/tools/descriptor_gen.py": "c9730d4efba66f2f78b051077571a81d15558c03e69e1dda69bfb6a802a2457d",
+    "m3/tooling/jmod-recipes/tools/jmod_image.py": "407622e9a4db86f1b9abae2e451638713b151f14256190c0e28fe7d0739eb7cf",
+    "m3/tooling/jmod-recipes/tools/jmod_pack.py": "8acdc46eaa0cac0861384d6caf252d1a2f763c80d09b68932177e1dac598bfaf",
+    "m3/tooling/jmod-recipes/tools/sdk_image_probe.py": "5f9a43a425fac0cbec3d8cb47c9fcdfbbd056e7101de40c2f1a5f4ec69d821af",
+    "m3/tooling/jmod-recipes/tools/split_packages.py": "8559a357fb2e3b06af13b1b3972166493aede2d77dc3611e84555a87ab068d9a",
+    "m3/tooling/jmod-recipes/tools/test_sdk_image_probe.py": "c085496c1826fd2dea67adc5681378a8c1aaf79e53cd37da65839d7d32a0ce60",
+    "m3/tooling/jmod-recipes/tools/test_verify_sdk_receiver.py": "3861e52f0712f388eb7a0e9bce142347dddfe74a50afbc7b701fbee253f97e45",
+    "m3/tooling/jmod-recipes/tools/verify_cpu_jmod_packet.py": "9c58853ecce939721601e4ee0046400db9d5f70b6a22759fb2d3da8951136597",
+    "m3/tooling/jmod-recipes/tools/verify_sdk_receiver.py": "41aeec9d5b14df79ea1625488c15a6f841e61183f75c14d36941042428c643d8"
+  },
+  "actual_product_packager_missing": [],
+  "actual_product_packager_different": [],
+  "all_available_actual_packager_sources_equal": true,
+  "shared_artifacts": [
+    "morfologik-fsa-2.2.0.jar",
+    "morfologik-stemming-2.2.0.jar",
+    "slf4j-api-2.0.20.jar"
+  ],
+  "unique_external_archive_count": 27,
+  "companion_refs_path": "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/module-packs/nlp-search/CURRENT_FORK_REFS.json",
+  "companion_refs_sha256": "b4151ffe154630e5c5b93e043b1c29919f93f9a8fc39459a41408b165d59cc06",
+  "companion_refs": {
+    "schema": "M3_CURRENT_FORK_COMPANION_SOURCES_1",
+    "receiver_repository": "hsoliwal/M3jdk21",
+    "receiver_base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "canonical_recipe_repository": "hsoliwal/com.synexia",
+    "canonical_recipe_commit": "663e2cd2784514f7a343bb65ac17ed00ba7e8fb8",
+    "donors": {
+      "lucene": {
+        "repository": "hsoliwal/lucene",
+        "input_commit": "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e",
+        "implementation_commit": "873b6167603c69101d626ddffd8d733340300fea"
+      },
+      "opennlp": {
+        "repository": "hsoliwal/opennlp",
+        "input_commit": "368337311ad94b665fd178f8d3ced005a73b2370",
+        "implementation_commit": "8b647d1d389736952e43fb46865c874747f7acde"
+      }
+    }
+  }
+}

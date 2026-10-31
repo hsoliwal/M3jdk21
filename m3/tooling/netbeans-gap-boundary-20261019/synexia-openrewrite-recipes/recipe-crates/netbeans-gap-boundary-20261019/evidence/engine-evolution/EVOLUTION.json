@@ -1,0 +1,18 @@
+{
+  "old_source": "7d9464e880d4aa18f9d68a4f90f720e1af62a067",
+  "new_source": "4565392487bf83b55a3031a26ea1a61b1b526b3c",
+  "decision": "consume existing upstream additions for m3/core legacy text source/test scope; no engine edits or widening authored in this task",
+  "files": [
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "before_sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4",
+      "after_sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "before_sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+      "after_sha256": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63"
+    }
+  ],
+  "qualification": "final actual SDK replay required before publication"
+}

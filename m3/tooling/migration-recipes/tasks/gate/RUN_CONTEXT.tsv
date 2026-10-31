@@ -1,0 +1,10 @@
+key	value
+repository	hsoliwal/M3jdk21
+base_commit	2aa6c8dcc7bc23e482c2a12e3b49e4de43fb2695
+branch	m3/db-parse-20261004
+scope	MODULE test/configuration repair; product APIs locked
+worker_count	1
+Java_template_root	m3/tooling/migration-recipes
+text_template_root	repository
+toolchain	javac21.0.11; local Maven absent
+proof_order	diff; static and manifest checks; Java syntax parse; hosted compile/test pending

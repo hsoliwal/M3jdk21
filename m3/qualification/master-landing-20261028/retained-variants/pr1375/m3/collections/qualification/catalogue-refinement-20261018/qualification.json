@@ -1,0 +1,541 @@
+{
+  "SPDX-FileCopyrightText": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "schema_version": 1,
+  "status": "QUALIFIED_RESOURCE_REFINEMENT_WITH_TIMING_TRADEOFFS",
+  "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "changed_sources": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "before_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+      "after_sha256": "2aa572587c9a4da5d7b5504e85d1457d1bbbabc66aeadde89a75f2839ea41ade"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "before_sha256": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7",
+      "after_sha256": "9f6dd6f5e29a7e321250e60ed92065a1f761d3087005b2f7bc9bbc0b33395397"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "before_sha256": "a5cefed03d9db9429048a218945a8af71b5b7acc862e089f6cc8a451a172e212",
+      "after_sha256": "0e280bb53c2ee78a18fccd6da81492155885ebf6362f5bcd5fdc181fe46166a1"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/build.py",
+      "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "before_sha256": "115bbc8d7bf48b25c81228797efb36ad0463fc535a8ff5be134c61ecb38c0934",
+      "after_sha256": "41041648d9f5f6df8bf035d13cf3c0d79e08fef02ac26088cc4383a2812a2ad3"
+    }
+  ],
+  "new_test_sources": [
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredTerminalTraversalContract.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "213ecb1ebe2883ca18e2889c624a055cd0f8dee04aa0974b84f78caa9e3b8df9"
+    },
+    {
+      "path": "m3/collections/src/test/native/m3_mask_window_bounded_regions.c",
+      "before_sha256": "ABSENT",
+      "after_sha256": "ce2d20d28b50cc438c2275056017bbef5c89b236ebc127a131bd95ecf6d71e4a"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/test_build_jni_symbols.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "926fe20656a853fd85be1117c14a4c6a122eb4723bac0c30722985b05ca58307"
+    }
+  ],
+  "toolchain": {
+    "java": "Temurin21.0.12.1+1",
+    "c": "GCC13.3.0",
+    "platform": "Linux x86_64",
+    "java_flags": [
+      "--release",
+      "21",
+      "-Xlint:all,-module",
+      "-Werror",
+      "-proc:none"
+    ],
+    "native_flags": [
+      "-std=c17",
+      "-O2",
+      "-fPIC",
+      "-Wall",
+      "-Wextra",
+      "-Werror"
+    ],
+    "checked_jni": true
+  },
+  "source_closure": {
+    "collection_main_java_files": 134,
+    "optional_projection_java_files": 7,
+    "scope": "Actual source compilation and selected existing contracts, not an exhaustive repository audit"
+  },
+  "callback_contract": {
+    "cases": 48,
+    "injected_exceptions": 595,
+    "bytes_each": 283903,
+    "equality": "EXACT_EQUAL",
+    "tape_sha256": "956ff7a874775ef830f03c7b64e2b8d8e3a71cafaf8e15deea2538643827d5f2"
+  },
+  "jni_contracts": {
+    "exports": [
+      "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative",
+      "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative",
+      "Java_com_m3_collections_M3IndexMaskWindow_scanNative"
+    ],
+    "generated_header_parity": "EXACT_EQUAL",
+    "actual_native_required_modes": "PASSED",
+    "java_reference_modes": "PASSED",
+    "missing_library_refusal": "PASSED",
+    "checks_each_native_variant": {
+      "M3IndexMaskCompactorSelfTest": 26152,
+      "M3IndexMaskWindowRecoverySelfTest": 10528,
+      "M3IndexMaskWindowSelfTest": 30596,
+      "M3BudgetedMaskWindowContract": 28914,
+      "M3MaskWindowSparseContract": 357095
+    }
+  },
+  "native_resource_evidence": {
+    "compiler_frame_bytes": {
+      "selectWindowNative": {
+        "before": 2464,
+        "after": 1424,
+        "classification": "dynamic,bounded"
+      },
+      "selectLongWindowNative": {
+        "before": 4512,
+        "after": 2448,
+        "classification": "dynamic,bounded"
+      }
+    },
+    "source_removed_scratch_bytes": {
+      "int_window": 1024,
+      "long_window": 2048
+    },
+    "prefix_transfer": {
+      "exports": [
+        "scanNative",
+        "scanBoundedNative"
+      ],
+      "chunk_lanes": 128,
+      "rejected_prefix": 127,
+      "before_row_lanes": 128,
+      "after_row_lanes": 1,
+      "flag_lanes_each": 128,
+      "output_lanes_each": 1,
+      "region_calls_each": 3
+    }
+  },
+  "benchmark": {
+    "forks": 3,
+    "warm_samples_per_fork": 7,
+    "jvm_processes": 18,
+    "matched_observation_checksums_and_operation_counts": 528,
+    "terminal_operations": 50000,
+    "terminal_warmup": 100000,
+    "native_operations": 1000,
+    "native_warmup": 2000,
+    "heap_flags": [
+      "-Xms256m",
+      "-Xmx256m"
+    ],
+    "no_escape_analysis_flag": "-XX:-DoEscapeAnalysis",
+    "warm_observations": [
+      {
+        "case": "native_scanBounded_dense",
+        "mode": "native",
+        "jvm_configuration": "default_jit",
+        "before_ns_per_op_median_of_fork_medians": 250.374,
+        "after_ns_per_op_median_of_fork_medians": 252.868,
+        "paired_after_over_before_ratio": {
+          "median": 1.074881403771275,
+          "min": 0.5577242688105183,
+          "max": 1.183801033653654,
+          "q1_inclusive": 0.8163028362908966,
+          "q3_inclusive": 1.1293412187124645
+        },
+        "before_java_bytes_per_op": 0.0,
+        "after_java_bytes_per_op": 0.0
+      },
+      {
+        "case": "native_scanBounded_prefix127",
+        "mode": "native",
+        "jvm_configuration": "default_jit",
+        "before_ns_per_op_median_of_fork_medians": 6789.508,
+        "after_ns_per_op_median_of_fork_medians": 6931.681,
+        "paired_after_over_before_ratio": {
+          "median": 1.0115156772752278,
+          "min": 1.0030369934687058,
+          "max": 1.0209401034655234,
+          "q1_inclusive": 1.0072763353719667,
+          "q3_inclusive": 1.0162278903703756
+        },
+        "before_java_bytes_per_op": 0.0,
+        "after_java_bytes_per_op": 0.0
+      },
+      {
+        "case": "native_selectLongWindow_sparse",
+        "mode": "native",
+        "jvm_configuration": "default_jit",
+        "before_ns_per_op_median_of_fork_medians": 22621.514,
+        "after_ns_per_op_median_of_fork_medians": 24236.659,
+        "paired_after_over_before_ratio": {
+          "median": 1.071398625220222,
+          "min": 1.0539790979074646,
+          "max": 1.0955643745028127,
+          "q1_inclusive": 1.0626888615638432,
+          "q3_inclusive": 1.0834814998615174
+        },
+        "before_java_bytes_per_op": 21856.0,
+        "after_java_bytes_per_op": 21856.0
+      },
+      {
+        "case": "native_selectLongWindow_zero",
+        "mode": "native",
+        "jvm_configuration": "default_jit",
+        "before_ns_per_op_median_of_fork_medians": 9682.674,
+        "after_ns_per_op_median_of_fork_medians": 9577.857,
+        "paired_after_over_before_ratio": {
+          "median": 0.9969115969410929,
+          "min": 0.9683380672540948,
+          "max": 1.007895925444008,
+          "q1_inclusive": 0.9826248320975939,
+          "q3_inclusive": 1.0024037611925505
+        },
+        "before_java_bytes_per_op": 65552.0,
+        "after_java_bytes_per_op": 65552.0
+      },
+      {
+        "case": "native_selectWindow_int_sparse",
+        "mode": "native",
+        "jvm_configuration": "default_jit",
+        "before_ns_per_op_median_of_fork_medians": 16010.582,
+        "after_ns_per_op_median_of_fork_medians": 15096.496,
+        "paired_after_over_before_ratio": {
+          "median": 0.963899530447916,
+          "min": 0.9292747758950923,
+          "max": 1.0143765820556387,
+          "q1_inclusive": 0.9465871531715042,
+          "q3_inclusive": 0.9891380562517773
+        },
+        "before_java_bytes_per_op": 10936.0,
+        "after_java_bytes_per_op": 10936.0
+      },
+      {
+        "case": "native_selectWindow_int_zero",
+        "mode": "native",
+        "jvm_configuration": "default_jit",
+        "before_ns_per_op_median_of_fork_medians": 5396.757,
+        "after_ns_per_op_median_of_fork_medians": 5502.165,
+        "paired_after_over_before_ratio": {
+          "median": 1.0071606572597045,
+          "min": 0.9875312155059048,
+          "max": 1.0685458421430358,
+          "q1_inclusive": 0.9973459363828047,
+          "q3_inclusive": 1.0378532497013702
+        },
+        "before_java_bytes_per_op": 32784.0,
+        "after_java_bytes_per_op": 32784.0
+      },
+      {
+        "case": "collection_isEmpty_match_1",
+        "mode": "terminals",
+        "jvm_configuration": "default_jit",
+        "before_ns_per_op_median_of_fork_medians": 7.71594,
+        "after_ns_per_op_median_of_fork_medians": 7.8229,
+        "paired_after_over_before_ratio": {
+          "median": 1.0138622125107246,
+          "min": 0.7204194056976863,
+          "max": 1.2488271290837354,
+          "q1_inclusive": 0.8671408091042054,
+          "q3_inclusive": 1.1313446707972301
+        },
+        "before_java_bytes_per_op": 0.0,
+        "after_java_bytes_per_op": 0.0
+      },
+      {
+        "case": "collection_isEmpty_match_127",
+        "mode": "terminals",
+        "jvm_configuration": "default_jit",
+        "before_ns_per_op_median_of_fork_medians": 145.27234,
+        "after_ns_per_op_median_of_fork_medians": 123.67306,
+        "paired_after_over_before_ratio": {
+          "median": 0.8058052771218732,
+          "min": 0.7793452344008966,
+          "max": 0.97981597873346,
+          "q1_inclusive": 0.792575255761385,
+          "q3_inclusive": 0.8928106279276666
+        },
+        "before_java_bytes_per_op": 0.0,
+        "after_java_bytes_per_op": 0.0
+      },
+      {
+        "case": "navigableMap_firstEntry_match_1",
+        "mode": "terminals",
+        "jvm_configuration": "default_jit",
+        "before_ns_per_op_median_of_fork_medians": 38.4693,
+        "after_ns_per_op_median_of_fork_medians": 10.68378,
+        "paired_after_over_before_ratio": {
+          "median": 0.2635302533237957,
+          "min": 0.24762186990665286,
+          "max": 0.4302894221603074,
+          "q1_inclusive": 0.2555760616152243,
+          "q3_inclusive": 0.34690983774205153
+        },
+        "before_java_bytes_per_op": 48.0,
+        "after_java_bytes_per_op": 0.0
+      },
+      {
+        "case": "navigableMap_firstEntry_match_127",
+        "mode": "terminals",
+        "jvm_configuration": "default_jit",
+        "before_ns_per_op_median_of_fork_medians": 955.0123,
+        "after_ns_per_op_median_of_fork_medians": 401.47932,
+        "paired_after_over_before_ratio": {
+          "median": 0.4211564837322525,
+          "min": 0.37316281492840475,
+          "max": 0.42181752004660045,
+          "q1_inclusive": 0.39715964933032866,
+          "q3_inclusive": 0.42148700188942645
+        },
+        "before_java_bytes_per_op": 48.0,
+        "after_java_bytes_per_op": 0.0
+      },
+      {
+        "case": "navigableSet_ceiling_match_1",
+        "mode": "terminals",
+        "jvm_configuration": "default_jit",
+        "before_ns_per_op_median_of_fork_medians": 52.975,
+        "after_ns_per_op_median_of_fork_medians": 42.02602,
+        "paired_after_over_before_ratio": {
+          "median": 1.0496050933270464,
+          "min": 0.6350036000277768,
+          "max": 1.13557602642756,
+          "q1_inclusive": 0.8423043466774116,
+          "q3_inclusive": 1.0925905598773031
+        },
+        "before_java_bytes_per_op": 104.0,
+        "after_java_bytes_per_op": 64.0
+      },
+      {
+        "case": "navigableSet_ceiling_match_127",
+        "mode": "terminals",
+        "jvm_configuration": "default_jit",
+        "before_ns_per_op_median_of_fork_medians": 1028.74388,
+        "after_ns_per_op_median_of_fork_medians": 460.82898,
+        "paired_after_over_before_ratio": {
+          "median": 0.4406739546571574,
+          "min": 0.37116512957186715,
+          "max": 0.45976454314362486,
+          "q1_inclusive": 0.4059195421145123,
+          "q3_inclusive": 0.4502192489003911
+        },
+        "before_java_bytes_per_op": 104.0,
+        "after_java_bytes_per_op": 64.0
+      },
+      {
+        "case": "sortedMap_isEmpty_match_1",
+        "mode": "terminals",
+        "jvm_configuration": "default_jit",
+        "before_ns_per_op_median_of_fork_medians": 14.1091,
+        "after_ns_per_op_median_of_fork_medians": 16.17598,
+        "paired_after_over_before_ratio": {
+          "median": 1.1464926891155354,
+          "min": 0.8692780525106193,
+          "max": 1.168780978501511,
+          "q1_inclusive": 1.0078853708130773,
+          "q3_inclusive": 1.1576368338085232
+        },
+        "before_java_bytes_per_op": 0.0,
+        "after_java_bytes_per_op": 0.0
+      },
+      {
+        "case": "sortedMap_isEmpty_match_127",
+        "mode": "terminals",
+        "jvm_configuration": "default_jit",
+        "before_ns_per_op_median_of_fork_medians": 941.31598,
+        "after_ns_per_op_median_of_fork_medians": 350.87624,
+        "paired_after_over_before_ratio": {
+          "median": 0.36810103466160327,
+          "min": 0.3634388442746613,
+          "max": 0.42408084902584997,
+          "q1_inclusive": 0.3657699394681323,
+          "q3_inclusive": 0.3960909418437266
+        },
+        "before_java_bytes_per_op": 48.0,
+        "after_java_bytes_per_op": 0.0
+      },
+      {
+        "case": "collection_isEmpty_match_1",
+        "mode": "terminals",
+        "jvm_configuration": "escape_analysis_disabled",
+        "before_ns_per_op_median_of_fork_medians": 39.44376,
+        "after_ns_per_op_median_of_fork_medians": 20.17514,
+        "paired_after_over_before_ratio": {
+          "median": 0.5197896955057023,
+          "min": 0.3671243352881813,
+          "max": 0.5445825813602081,
+          "q1_inclusive": 0.4434570153969418,
+          "q3_inclusive": 0.5321861384329551
+        },
+        "before_java_bytes_per_op": 64.0,
+        "after_java_bytes_per_op": 32.0
+      },
+      {
+        "case": "collection_isEmpty_match_127",
+        "mode": "terminals",
+        "jvm_configuration": "escape_analysis_disabled",
+        "before_ns_per_op_median_of_fork_medians": 176.60838,
+        "after_ns_per_op_median_of_fork_medians": 117.64966,
+        "paired_after_over_before_ratio": {
+          "median": 0.6661612546358219,
+          "min": 0.42021106496663413,
+          "max": 0.7747862992204939,
+          "q1_inclusive": 0.543186159801228,
+          "q3_inclusive": 0.720473776928158
+        },
+        "before_java_bytes_per_op": 64.0,
+        "after_java_bytes_per_op": 32.0
+      },
+      {
+        "case": "navigableMap_firstEntry_match_1",
+        "mode": "terminals",
+        "jvm_configuration": "escape_analysis_disabled",
+        "before_ns_per_op_median_of_fork_medians": 74.29726,
+        "after_ns_per_op_median_of_fork_medians": 18.08322,
+        "paired_after_over_before_ratio": {
+          "median": 0.22977051912816168,
+          "min": 0.19063672291416467,
+          "max": 0.3857261398282216,
+          "q1_inclusive": 0.2102036210211632,
+          "q3_inclusive": 0.30774832947819164
+        },
+        "before_java_bytes_per_op": 120.0,
+        "after_java_bytes_per_op": 56.0
+      },
+      {
+        "case": "navigableMap_firstEntry_match_127",
+        "mode": "terminals",
+        "jvm_configuration": "escape_analysis_disabled",
+        "before_ns_per_op_median_of_fork_medians": 1216.3967,
+        "after_ns_per_op_median_of_fork_medians": 499.67272,
+        "paired_after_over_before_ratio": {
+          "median": 0.43225960499457283,
+          "min": 0.4086840675309551,
+          "max": 0.4982856661811068,
+          "q1_inclusive": 0.42047183626276396,
+          "q3_inclusive": 0.4652726355878398
+        },
+        "before_java_bytes_per_op": 120.0,
+        "after_java_bytes_per_op": 56.0
+      },
+      {
+        "case": "navigableSet_ceiling_match_1",
+        "mode": "terminals",
+        "jvm_configuration": "escape_analysis_disabled",
+        "before_ns_per_op_median_of_fork_medians": 52.30578,
+        "after_ns_per_op_median_of_fork_medians": 76.57244,
+        "paired_after_over_before_ratio": {
+          "median": 1.6260654231026999,
+          "min": 1.463938402218646,
+          "max": 1.7629274309324734,
+          "q1_inclusive": 1.5450019126606729,
+          "q3_inclusive": 1.6944964270175866
+        },
+        "before_java_bytes_per_op": 152.0,
+        "after_java_bytes_per_op": 120.0
+      },
+      {
+        "case": "navigableSet_ceiling_match_127",
+        "mode": "terminals",
+        "jvm_configuration": "escape_analysis_disabled",
+        "before_ns_per_op_median_of_fork_medians": 1119.22768,
+        "after_ns_per_op_median_of_fork_medians": 551.92834,
+        "paired_after_over_before_ratio": {
+          "median": 0.49313321128726917,
+          "min": 0.4748231425309781,
+          "max": 0.5209032940917512,
+          "q1_inclusive": 0.48397817690912365,
+          "q3_inclusive": 0.5070182526895102
+        },
+        "before_java_bytes_per_op": 152.0,
+        "after_java_bytes_per_op": 120.0
+      },
+      {
+        "case": "sortedMap_isEmpty_match_1",
+        "mode": "terminals",
+        "jvm_configuration": "escape_analysis_disabled",
+        "before_ns_per_op_median_of_fork_medians": 50.67436,
+        "after_ns_per_op_median_of_fork_medians": 22.6711,
+        "paired_after_over_before_ratio": {
+          "median": 0.43852907551453524,
+          "min": 0.2849476988604656,
+          "max": 1.285860936378871,
+          "q1_inclusive": 0.3617383871875004,
+          "q3_inclusive": 0.8621950059467031
+        },
+        "before_java_bytes_per_op": 80.0,
+        "after_java_bytes_per_op": 32.0
+      },
+      {
+        "case": "sortedMap_isEmpty_match_127",
+        "mode": "terminals",
+        "jvm_configuration": "escape_analysis_disabled",
+        "before_ns_per_op_median_of_fork_medians": 1110.9056,
+        "after_ns_per_op_median_of_fork_medians": 458.33886,
+        "paired_after_over_before_ratio": {
+          "median": 0.41258128503448,
+          "min": 0.39201824075012076,
+          "max": 0.47320993426637425,
+          "q1_inclusive": 0.4022997628923004,
+          "q3_inclusive": 0.4428956096504271
+        },
+        "before_java_bytes_per_op": 80.0,
+        "after_java_bytes_per_op": 32.0
+      }
+    ],
+    "cold_scope": "First invocation after all fixture construction; excludes JVM startup/construction; later cases share an active JVM",
+    "limits": [
+      "Fixed-workload short custom harness on one host/toolchain, not JMH",
+      "Descriptive fork ranges are not confidence intervals",
+      "Default JIT and disabled escape analysis are separate cohorts",
+      "Native long sparse selection observed paired ratio1.071; bounded sparse1.012",
+      "Java-thread allocation does not measure native stack or RSS",
+      "Map entry does not escape in this harness; caller-retained entries may allocate"
+    ]
+  },
+  "module_pack": {
+    "builder": "m3/tooling/module-packs/collections/build.py",
+    "baseline": "EXPECTED_ONE_SYMBOL_EXPORT_REFUSAL",
+    "candidate": "ACTUAL_HOST_AND_LINKED_IMAGE_PASS",
+    "modules": [
+      "com.m3.collections",
+      "jdk.m3.collections"
+    ],
+    "packaged_compactor_exports": 7,
+    "window_native_scope": "Separate combined nine-export checked-JNI cohort",
+    "host_and_image_contract_counts_each": {
+      "filtered": 123500,
+      "mutable": 288223,
+      "primitive_index_filter": 798846,
+      "native_compactor": 26152
+    },
+    "native_packaging_transform": "objcopy --strip-debug reference with exact linked byte equality"
+  },
+  "unexecuted": [
+    "Full target Maven suite with source-built JUnit",
+    "Historical real old-binary branch",
+    "Full custom VM build",
+    "java.util receiving promotion"
+  ],
+  "qualification_markdown_path": "m3/collections/qualification/catalogue-refinement-20261018/qualification.md"
+}

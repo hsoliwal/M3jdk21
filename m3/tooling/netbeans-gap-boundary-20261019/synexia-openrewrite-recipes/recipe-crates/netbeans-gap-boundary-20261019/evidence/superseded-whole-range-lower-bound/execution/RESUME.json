@@ -1,0 +1,33 @@
+{
+  "from": "trial-02",
+  "last_verified_stage": "03-sdk-execution",
+  "reused_stages": [
+    "01-source-lint",
+    "02-source-compile",
+    "03-sdk-execution"
+  ],
+  "changed_only": "proof compiler option aligned with actual java.desktop build",
+  "verified_outputs": [
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/text/GapContent.java",
+      "sha256": "85057e3db09c6791cfb3d6d31f05031893377a9b55f58e41b1447598794e4f92"
+    },
+    {
+      "path": "test/jdk/javax/swing/text/GapContent/GapContentLowerBoundTest.java",
+      "sha256": "6ce17e3278a156ca418060614300c4ea63672e380875f334d965f7bf17738860"
+    },
+    {
+      "path": "m3/runtime-integration/netbeans-gap-boundary-20261019/README.md",
+      "sha256": "26aff8c13a9a91c36d7dcf0a9d5fc7a5a709874b3465b7cef7bf9335a42c4cbb"
+    },
+    {
+      "path": "m3/docs/name-mapping.d/netbeans-gap-boundary-20261019.json",
+      "sha256": "cc692fe05ff6656dd3f0daf548012bc55dc9f058cffc10434eeb5d04ef35bc17"
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/netbeans-gap-boundary-20261019.tsv",
+      "sha256": "293c9080e462c7394dc07b59dcbea923948a9b62336474f1fc9986a5e80c3711"
+    }
+  ],
+  "failed_attempt_retained": "evidence/rejected-baseline-warning"
+}

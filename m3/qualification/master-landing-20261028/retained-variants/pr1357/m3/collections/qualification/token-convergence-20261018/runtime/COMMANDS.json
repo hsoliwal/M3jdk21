@@ -1,0 +1,336 @@
+[
+  {
+    "stage": "01-java-lint-compile",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javac",
+      "-Xlint:all",
+      "-Werror",
+      "-h",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/headers",
+      "-d",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/classes",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-token/src/java.base/share/classes/jdk/internal/mindex/M3RX7.java"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 87204,
+    "user_seconds": 1.393359,
+    "system_seconds": 0.151242
+  },
+  {
+    "stage": "02-test-lint-compile",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javac",
+      "-Xlint:all",
+      "-Werror",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-d",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/tests",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-token/test/jdk/jdk/internal/mindex/M3RX7TokenIndexContract.java",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-token/test/jdk/jdk/internal/mindex/M3RX7BoundaryContract.java",
+      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/src/test/java/M3RX7ResourceProbe.java"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 111256,
+    "user_seconds": 2.141051,
+    "system_seconds": 0.140001
+  },
+  {
+    "stage": "03-native-lint",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/headers",
+      "-I",
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include",
+      "-I",
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux",
+      "-fsyntax-only",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-token/src/java.base/share/native/libjava/M3RX7.c",
+      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/src/test/native/libM3RX7Boundary.c"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 11392,
+    "user_seconds": 0.027292,
+    "system_seconds": 0.0044269999999999995
+  },
+  {
+    "stage": "04-native-link",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/headers",
+      "-I",
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include",
+      "-I",
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux",
+      "-O2",
+      "-fPIC",
+      "-shared",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=undefined",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-token/src/java.base/share/native/libjava/M3RX7.c",
+      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/src/test/native/libM3RX7Boundary.c",
+      "-o",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/libM3RX7Boundary.so"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 21420,
+    "user_seconds": 0.147613,
+    "system_seconds": 0.007391999999999999
+  },
+  {
+    "stage": "05-native-symbols",
+    "argv": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/libM3RX7Boundary.so"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 11392,
+    "user_seconds": 0.002626,
+    "system_seconds": 0.0
+  },
+  {
+    "stage": "06-donor-contract",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/tests",
+      "M3RX7TokenIndexContract"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 47228,
+    "user_seconds": 0.34359799999999996,
+    "system_seconds": 0.028075
+  },
+  {
+    "stage": "07-java-boundaries",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/tests",
+      "M3RX7BoundaryContract"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 61136,
+    "user_seconds": 0.47620799999999996,
+    "system_seconds": 0.085973
+  },
+  {
+    "stage": "08-native-boundaries",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/tests",
+      "--add-opens",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-Xcheck:jni",
+      "M3RX7BoundaryContract",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/libM3RX7Boundary.so"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 62952,
+    "user_seconds": 0.500885,
+    "system_seconds": 0.071384
+  },
+  {
+    "stage": "09-native-interpreter",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/tests",
+      "--add-opens",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-Xcheck:jni",
+      "-Xint",
+      "M3RX7BoundaryContract",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/libM3RX7Boundary.so"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 50336,
+    "user_seconds": 0.6828799999999999,
+    "system_seconds": 0.042186999999999995
+  },
+  {
+    "stage": "api-M3RX7",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javap",
+      "-public",
+      "-s",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/classes/jdk/internal/mindex/M3RX7.class"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 59320,
+    "user_seconds": 0.430324,
+    "system_seconds": 0.047756
+  },
+  {
+    "stage": "baseline-api-M3RX7",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javap",
+      "-public",
+      "-s",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/donor-build/classes/jdk/internal/mindex/M3RX7.class"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 56192,
+    "user_seconds": 0.460972,
+    "system_seconds": 0.055569
+  },
+  {
+    "stage": "api-M3RX7-TokenIndex",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javap",
+      "-public",
+      "-s",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/classes/jdk/internal/mindex/M3RX7$TokenIndex.class"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 59640,
+    "user_seconds": 0.424871,
+    "system_seconds": 0.070129
+  },
+  {
+    "stage": "baseline-api-M3RX7-TokenIndex",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javap",
+      "-public",
+      "-s",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/donor-build/classes/jdk/internal/mindex/M3RX7$TokenIndex.class"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 56656,
+    "user_seconds": 0.393658,
+    "system_seconds": 0.055272999999999996
+  },
+  {
+    "stage": "resource-candidate-0",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/tests",
+      "M3RX7ResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 125168,
+    "user_seconds": 0.922358,
+    "system_seconds": 0.068809
+  },
+  {
+    "stage": "resource-donor-0",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/rx7/donor-build/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/tests",
+      "M3RX7ResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 119340,
+    "user_seconds": 0.927433,
+    "system_seconds": 0.072615
+  },
+  {
+    "stage": "resource-candidate-1",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/tests",
+      "M3RX7ResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 122736,
+    "user_seconds": 0.695485,
+    "system_seconds": 0.08059
+  },
+  {
+    "stage": "resource-donor-1",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/rx7/donor-build/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/tests",
+      "M3RX7ResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 125704,
+    "user_seconds": 0.868408,
+    "system_seconds": 0.07131599999999999
+  },
+  {
+    "stage": "resource-candidate-2",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/tests",
+      "M3RX7ResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 122956,
+    "user_seconds": 0.763652,
+    "system_seconds": 0.07556199999999999
+  },
+  {
+    "stage": "resource-donor-2",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/rx7/donor-build/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/rx7/qualification-final/tests",
+      "M3RX7ResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 122632,
+    "user_seconds": 0.834893,
+    "system_seconds": 0.06011
+  }
+]

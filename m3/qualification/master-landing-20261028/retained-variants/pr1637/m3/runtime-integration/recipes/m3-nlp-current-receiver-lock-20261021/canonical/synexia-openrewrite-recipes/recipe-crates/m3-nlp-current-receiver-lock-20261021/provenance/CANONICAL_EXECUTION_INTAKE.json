@@ -1,0 +1,201 @@
+{
+  "schema": "M3_NLP_CANONICAL_EXECUTION_INTAKE/1",
+  "status": "EXACT_READBACK",
+  "files": [
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-preparation-001/RESULT.json",
+      "path": "proof/preparation-refusal-001/RESULT.json",
+      "bytes": 1230,
+      "sha256": "ff33bb769ace4c7cf53f6d69a9a26972cccd953219e66211523a19705d2e8e22"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-owner-sdk-001/INPUTS_AND_COMMAND.json",
+      "path": "proof/isolated-sdk-custody-001/INPUTS_AND_COMMAND.json",
+      "bytes": 5240,
+      "sha256": "4ffb647d28eaafdf380c1f53e7cd4a8fd3ff8c8ae76aaeacf718f2e3ca7c9139"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-owner-sdk-001/RESULT.json",
+      "path": "proof/isolated-sdk-custody-001/RESULT.json",
+      "bytes": 4992,
+      "sha256": "56888a951363b3674a0dfcc6a106334a7a365db5faf0962ef182fb4b9c2c023c"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-owner-sdk-001/parser-classpath.txt",
+      "path": "proof/isolated-sdk-custody-001/parser-classpath.txt",
+      "bytes": 109,
+      "sha256": "5c8dad90d5dade6c7bb24ee5e15ec07ba75f49de7ca8781ccab9af38db3ef95a"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-owner-sdk-001/qualify.log",
+      "path": "proof/isolated-sdk-custody-001/qualify.log",
+      "bytes": 317,
+      "sha256": "2b4637140a79aed910ba9480bdd0b0b9aad37924e24e9b7abaf34a52245320f4"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/01-preflight.json",
+      "path": "proof/copier-qualification-001/01-preflight.json",
+      "bytes": 936,
+      "sha256": "c842f51b25f004150e54821e6ab44518acea393c6e95da20e34ec9740837dc16"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/01-preflight.log",
+      "path": "proof/copier-qualification-001/01-preflight.log",
+      "bytes": 61,
+      "sha256": "20a7260560b6f05b20a12dc0dc69f2e8af95cd8a7c3f372f09320535032c33bc"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/02-first-apply.json",
+      "path": "proof/copier-qualification-001/02-first-apply.json",
+      "bytes": 936,
+      "sha256": "20ee70c6bd514f20dee892c09592b83432c8656660046bdfdefd531217a4a907"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/02-first-apply.log",
+      "path": "proof/copier-qualification-001/02-first-apply.log",
+      "bytes": 61,
+      "sha256": "39e11f25b4aa0270d4dafbea116c8f43998b22a279442b87dd9d4a76791fc529"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/03-fixed-point.json",
+      "path": "proof/copier-qualification-001/03-fixed-point.json",
+      "bytes": 956,
+      "sha256": "6e55f24d18ca3d1de4e33ea5bcf1f4709bc4ddddbc85b6b20c609d71956973aa"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/03-fixed-point.log",
+      "path": "proof/copier-qualification-001/03-fixed-point.log",
+      "bytes": 61,
+      "sha256": "ecc80624289ed9259e855f275d0387e19655c9af71139e8898c75f1f0670f7b6"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/04-product-drift.json",
+      "path": "proof/copier-qualification-001/04-product-drift.json",
+      "bytes": 133,
+      "sha256": "e191c2ed07a55a50cf29ad109c60ed4b525e3513973d76fb84bc88bc3aeaf88c"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/04-product-drift.log",
+      "path": "proof/copier-qualification-001/04-product-drift.log",
+      "bytes": 626,
+      "sha256": "073d3f6a35babe422b45ee6f73ef6dd25335019fd013ac0d4ff0dba733551da6"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/05-symbolic-destination.json",
+      "path": "proof/copier-qualification-001/05-symbolic-destination.json",
+      "bytes": 174,
+      "sha256": "2d53c7cbe6942162a13c26a5bd85632557777c3708ca0c61275cccf8fb68fdbb"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/05-symbolic-destination.log",
+      "path": "proof/copier-qualification-001/05-symbolic-destination.log",
+      "bytes": 958,
+      "sha256": "993c7d8bf73fe0f147ef3f3ec6ace5c1373ffbae79d6742cb0e09949ceb4afa2"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/06-emitted-drift.json",
+      "path": "proof/copier-qualification-001/06-emitted-drift.json",
+      "bytes": 133,
+      "sha256": "96e7b4070fae5415bb34a2735016365376c1a2969384fa4a9dc6fd0c493830b6"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/06-emitted-drift.log",
+      "path": "proof/copier-qualification-001/06-emitted-drift.log",
+      "bytes": 625,
+      "sha256": "2fc2c010d9dbd6f9c15189ac241b08b3dd742a8672631a3abc6dc9f1e41568c3"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/07-owner-drift.json",
+      "path": "proof/copier-qualification-001/07-owner-drift.json",
+      "bytes": 95,
+      "sha256": "2bd989d319c9efd45406107075f891e7dfca2ab8c3b9cb8c8956b596ea6dceee"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/07-owner-drift.log",
+      "path": "proof/copier-qualification-001/07-owner-drift.log",
+      "bytes": 591,
+      "sha256": "f08241b479907b05664c4e710c74414a356010b83d395196938e4b4e9b95d53d"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/RESULT.json",
+      "path": "proof/copier-qualification-001/RESULT.json",
+      "bytes": 8595,
+      "sha256": "02ba2402bcbe554ec4e18ede6eec1c84c4accccb098a9779996995aaedf4289b"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/nlp-baseline-hydration-001/FILES.json",
+      "path": "proof/unchanged-baseline-hydration-001/FILES.json",
+      "bytes": 468969,
+      "sha256": "18f3cffece98eb5602c9ef1d53294a85e7b6005961fce7d83303fbd824c05015"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/nlp-baseline-hydration-001/RESULT.json",
+      "path": "proof/unchanged-baseline-hydration-001/RESULT.json",
+      "bytes": 407,
+      "sha256": "ad7ad7d6c17012b2df7dc8ccc053ec559f5d3f0a7b0507f7a84c6c437803892f"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/nlp-receiver-001/RESULT.json",
+      "path": "proof/receiving-application-001/RESULT.json",
+      "bytes": 745,
+      "sha256": "91f29c76306be5b28000b916fcf73d7afad4e938abbd0a9ca81c938c98fb0467"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/nlp-receiver-001/apply.json",
+      "path": "proof/receiving-application-001/apply.json",
+      "bytes": 888,
+      "sha256": "f86c0873c77fd1d788799f6c222932dcd2dff224b4a0cd56f36b283dbb1fbdbb"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/nlp-receiver-001/apply.log",
+      "path": "proof/receiving-application-001/apply.log",
+      "bytes": 61,
+      "sha256": "39e11f25b4aa0270d4dafbea116c8f43998b22a279442b87dd9d4a76791fc529"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/nlp-receiver-001/preflight.json",
+      "path": "proof/receiving-application-001/preflight.json",
+      "bytes": 888,
+      "sha256": "043adf3842f76e35b230109740f7d7d651e7acdd92a08e22cc5b59512725dafa"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/nlp-receiver-001/preflight.log",
+      "path": "proof/receiving-application-001/preflight.log",
+      "bytes": 61,
+      "sha256": "20a7260560b6f05b20a12dc0dc69f2e8af95cd8a7c3f372f09320535032c33bc"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/nlp-receiver-001/replay.json",
+      "path": "proof/receiving-application-001/replay.json",
+      "bytes": 908,
+      "sha256": "560205e2e39181103408cc73a5c1cd4a105e4dbccbfb7e84591c9d1894703635"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/nlp-receiver-001/replay.log",
+      "path": "proof/receiving-application-001/replay.log",
+      "bytes": 61,
+      "sha256": "ecc80624289ed9259e855f275d0387e19655c9af71139e8898c75f1f0670f7b6"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/integration-work/nlp-receiver-001/source-verification.log",
+      "path": "proof/receiving-application-001/source-verification.log",
+      "bytes": 254,
+      "sha256": "2ef747e04798a3dac71d6675734c745995feeb24e6a571e37cf1c6b59a474954"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/curate_nlp_canonical_execution.py",
+      "path": "provenance/qualification-tools/curate_canonical_execution.py",
+      "bytes": 4222,
+      "sha256": "a96516bd039c59742e52a9a950c8b04475f04e77a9f651a910c87689f9efd425"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/canonical-work/run_nlp_owner_sdk.py",
+      "path": "provenance/qualification-tools/run_isolated_sdk.py",
+      "bytes": 4610,
+      "sha256": "fae81e9045020e0e3fc6319e7953974bffbee67f5d6723d6a587c19acbcf729b"
+    }
+  ],
+  "copied_files": 32,
+  "bytes": 508903,
+  "scope": "Finite text evidence; no compiled classes, JARs, native payloads or receiving source writes."
+}

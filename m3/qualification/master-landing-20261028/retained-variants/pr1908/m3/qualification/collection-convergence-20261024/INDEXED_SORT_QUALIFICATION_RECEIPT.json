@@ -1,0 +1,233 @@
+{
+  "schema": "M3_INDEXED_SORT_QUALIFICATION_RECEIVER_V1",
+  "status": "VERIFIED_TEST_ONLY_RUNTIME_CANDIDATES_REJECTED",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_revision": "c3cdb2accafef86cedf7c14e94029807a51c6ed5",
+  "canonical_pr": 13301,
+  "canonical_task": "synexia-openrewrite-recipes/recipes/m3-indexed-sort-workspace-20261025",
+  "target_parent": "43f50e1f76e5a2bbd996f5891c50050864da8ae8",
+  "publication_parent": "2e7457eb3a31641cef3851244ea3d58207cdaa27",
+  "concurrent_parent_evidence": "evidence/concurrent-parent.json; external merge added only workflow and receipt, no runtime/test change",
+  "target_pr": 1908,
+  "recipe_engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "dataset": "m3-indexed-sort-workspace-20261025",
+  "scope": "One executed target contract test; exact incumbent M3IndexedArray preserved. No runtime Java/JNI delta or provider completion.",
+  "executed_outputs": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+      "before_sha256": "0c79f59b111bc1669a626c4a45598b7205319522b0c00c56ef009a8b9ea660e5",
+      "after_sha256": "0c79f59b111bc1669a626c4a45598b7205319522b0c00c56ef009a8b9ea660e5",
+      "template": "00-M3IndexedArray.java.txt",
+      "mode": "100644",
+      "disposition": "PRESERVE_EXACT_INCUMBENT_AFTER_RESOURCE_REJECTION"
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/M3IndexedSortWorkspaceTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "f88e37c1be6063063f79b83a9b3bce3471b15991df6780e76469eea848d67096",
+      "template": "01-M3IndexedSortWorkspaceTest.java.txt",
+      "mode": "100644"
+    }
+  ],
+  "preserved_owners": [
+    {
+      "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
+      "sha256": "7fb5c5c9a2be3ba14f1946a2a1c000b61010b93f0fd8894cd3e8b52fecaec203",
+      "git_blob_sha1": "7819788e326c0a833984186af9b4a91f3d156cdf"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+      "sha256": "e09db07fb113233e52a67960411608d8b18dc0eedfc5a7f861cdaecc7c1cc1e6",
+      "git_blob_sha1": "5c39dc53d3bbd80eada25f74b960e22391eeecb6"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java",
+      "sha256": "91c7a99d394fe76a47af0c1eaaa35ffd6d070ee6e2497a63668db8301dd86329",
+      "git_blob_sha1": "b9c942d354189c26ed0848d7dd73f21754838049"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java",
+      "sha256": "6eaccec5b5ccc41b39ba165c2b5c57768e84d964430a7c28fba0c5061d41ba04",
+      "git_blob_sha1": "885f237a80cdd5997a852609fa60066d0f7d11c4"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3IndexMaskWindow.c",
+      "sha256": "4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91",
+      "git_blob_sha1": "59b2130ca8e897e75e24afbd45e8fd885c55b0e9"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/CopyOnWriteArrayList.java",
+      "sha256": "8a68f8a3a662fb3d5d80c41848041e81dfeeb2c659a3a26f8d3742717a8c861d",
+      "git_blob_sha1": "944c61e15ede09dfc0965a425bbd60aafe761176"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java",
+      "sha256": "17a2c1b601d5552b3baeb6751c18700f7254ee6faa23afc0913cf3c45a3b4c05",
+      "git_blob_sha1": "3f88d207e1f6d68da96477a0d184cf8d1caaa6d7"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+      "sha256": "b7a474ba351d6d29d0a29467e5cb4fb8aa3b387cd01e29d831a06705edb9e147",
+      "git_blob_sha1": "4974e71c6db4dcb74b4fe6943254db38a801daac"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+      "sha256": "b6dbec25d39bb18f08e66625b4063cb6848bf34c33fd43b1392ccaff8d35937a",
+      "git_blob_sha1": "252e46fb57e824f30688eac3600bae9480511fc8"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+      "sha256": "6ffb6eb3bf57c56101dbcfe97e97f529324efa6363c9648065ee58302e01b48c",
+      "git_blob_sha1": "91028d46e069879446a03cf815e7043866924e6b"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "sha256": "1f730adaf2e7abb82f464d75008d5884bbc121b19f9d7ff770a220edc427340e",
+      "git_blob_sha1": "8fc8308c919d60c78b80843d3e601553b16f19d4"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+      "sha256": "0c79f59b111bc1669a626c4a45598b7205319522b0c00c56ef009a8b9ea660e5",
+      "git_blob_sha1": "e6059aeb9b2e7f332fb0baea2684395c268a5414"
+    }
+  ],
+  "sdk": {
+    "engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "dataset": "m3-indexed-sort-workspace-20261025",
+    "SDK_EXECUTION": "PASS",
+    "tests": 6,
+    "distinct_input_states": 2,
+    "input_orders": 2,
+    "exact_outputs": 2,
+    "new_test_outputs": 1,
+    "unchanged_runtime_outputs": 1,
+    "fixed_point": "PASS",
+    "missing_drift_duplicate_refusal": "PASS",
+    "engine_modified": false
+  },
+  "verification": {
+    "status": "PASS_TEST_ONLY",
+    "recipe_outputs": 2,
+    "new_public_test": 1,
+    "unchanged_runtime_target": 1,
+    "preserved_owners": 12,
+    "sdk_tests": 6,
+    "distinct_input_states": 2,
+    "input_orders": 2,
+    "current_jtreg_passed": 2,
+    "oracle_mode_runs": 6,
+    "oracle_checks_each": 7327,
+    "unstable_tie_mutant": "COMPILE_VALID_REJECTED",
+    "runtime_source": "BYTE_EQUAL_PARENT",
+    "runtime_image": "BYTE_EQUAL_PARENT",
+    "native_required": true,
+    "api_abi": "No runtime source or binary delta; previous parent API/ABI evidence retained",
+    "rejected_candidate_suites": "Historical only; not claimed as final receiving runs"
+  },
+  "image_identity": {
+    "files": [
+      {
+        "path": "bin/java",
+        "sha256": "ad70aef14502b7716e0c0f28818c511447dd23883eb2bb38fa1d56e48641bd93",
+        "bytes": 16320
+      },
+      {
+        "path": "lib/modules",
+        "sha256": "5b00e801cd4cc25e95550771175755ac5461297ab2ccfa6486cb0d993ba12914",
+        "bytes": 143556318
+      },
+      {
+        "path": "lib/libjava.so",
+        "sha256": "18c57c074047b2fccdeed23f5f59f745fc7d6cef15ad0e49876dc86e233c2b57",
+        "bytes": 215880
+      },
+      {
+        "path": "lib/server/libjvm.so",
+        "sha256": "837f3934a5c318f5f93bb49479c63bb1fce55176238b6b3038e0960c106b9e16",
+        "bytes": 26473136
+      }
+    ],
+    "runtime_source_and_binary": "BYTE_EQUAL_PARENT",
+    "final_patch_module": false
+  },
+  "jtreg": {
+    "current_passed": 2,
+    "tests": [
+      "M3IndexedSortWorkspaceTest",
+      "M3IndexMaskWindowJniTest"
+    ],
+    "flags": "-Xcheck:jni",
+    "summary": "evidence/image/admitted-jtreg-summary.txt",
+    "scope": "Two current tests on unchanged parent image; rejected candidate55-test runs are historical"
+  },
+  "oracle_mode_runs": 6,
+  "oracle_checks_each": 7327,
+  "mutation": "COMPILE_VALID_UNSTABLE_TIE_MUTANT_REJECTED",
+  "resource_decision": {
+    "status": "REJECT_ALL_RUNTIME_TRIALS",
+    "dense_candidate_sparse_cpu_ratio": 1.3947463316932742,
+    "forced_inline_sparse_cpu_ratio": 1.4459485108959462,
+    "public_runtime_performance_change": "NONE; original implementation preserved",
+    "private_evidence": "EVIDENCE.json resources; measurements describe rejected candidates only"
+  },
+  "review": {
+    "reviewer": "fresh gpt-6-astra /root/review_indexed_sort_pass10",
+    "status": "NO_CORRECTNESS_BLOCKER_READY_FOR_TEST_ONLY_DRAFT_PUBLICATION",
+    "critical": [],
+    "important": [],
+    "minor_deferred": [
+      "NOTICE first paragraph describes private workspace refinement in present tense; later paragraphs explicitly reject runtime admission",
+      "Historical sparse-workspace correction uses generic final terminology and generic evidence paths despite explicit historical disposition",
+      "Setup-inclusive resource fixture covers fresh query/view construction, lazy selection/sort and consumption; source-owner population occurs outside timing"
+    ],
+    "independent_checks": [
+      "Two exact recipe exports; required runtime byte-equal pinned parent; twelve preserved owners",
+      "Two distinct final input states in both orders; fixed-point and missing/drift/duplicate refusal",
+      "Independent list-of-runs identity/order/trace oracle and boundary selection cases",
+      "Iterator/range epochs, comparator exception identity, failed publication and structure/state reentrant recovery",
+      "Compile-valid unstable-tie mutant fails stable identity/order",
+      "Six SDK tests; two current jtreg tests; six modes with7327checks each; historical candidate suites separated",
+      "CPU-first rejection independently justified; runtime/source/image unchanged; license and receiver boundary preserved"
+    ],
+    "declined_to_judge": [
+      "Runtime workspace-reuse/copy-elision/ForceInline candidate acceptance: none admitted",
+      "General CPU/heap/RSS/native-memory/release improvements: unchanged incumbent; finite rejected-trial observations",
+      "Exact sparse regression cause: unconfirmed",
+      "Exhaustive predicate/comparator exceptions and reentrancy, mutation combinations and arbitrary comparator contracts",
+      "Concurrent access, OOME/failure injection, maximum-size overflow and exhaustive seven-plane growth",
+      "Full JCK/JDK, cross-platform/provider/CDS, full reactor and historical provenance",
+      "Local full-borrow success despite remote ancestry confirmation",
+      "Prior-pass resource holds, naming/backend/phase promotion and historical public recipe residue",
+      "Remote CI and exact publication/receipt closure",
+      "Externally advanced product head2e7457eb was not independently inspected by reviewer"
+    ],
+    "executor_disposition": "Accept for test-only draft publication. No critical/important fixes. Three minor wording/measurement-scope clarifications deferred and recorded. Each excluded runtime/coverage/release behavior remains unqualified; no merge or phase promotion. Executor verifies concurrent parent diff/owners, private/public exact blobs and expected heads; CI remains separately reported.",
+    "ready_to_merge": false,
+    "review_only": true,
+    "broad_test_rerun": false
+  },
+  "scoped_provenance": {
+    "status": "SCOPED_PASS",
+    "checked_paths": 811,
+    "checker": "scripts/legal/check_m3_provenance.py load_ledger + validate_change; exact canonical index order/count/pin assertions",
+    "parent_index_members_preserved": 18,
+    "new_index_members": 19,
+    "old_pins_byte_equal": true,
+    "old_relative_order_preserved": true,
+    "canonical_shard_order": "PASS: lexical after canonical first member",
+    "policy_change": "only ledger_set.index SHA256 and bytes",
+    "full_historical_gate": "NOT_RUN: full historical ledger set was not recovered; no full pass claimed"
+  },
+  "remaining_gates": [
+    "Full JCK/JDK and cross-platform/provider qualification",
+    "Full CDS behavior beyond previously built parent archives",
+    "Full canonical reactor and historical provenance ledger set",
+    "Local full-borrow gate blocked by shallow ancestry despite remote ancestor confirmation",
+    "Required remote CI pending; historical public recipe residue not repaired",
+    "Previous pass resource holds remain; this pass makes no runtime improvement claim",
+    "String remains active; no naming/backend/phase promotion"
+  ],
+  "receiving_phase": "String remains active; no promotion",
+  "rights": "New first-party Apache-2.0 test; original runtime per-file rights unchanged. Rejected GPL+Classpath source variants remain canonical with attribution.",
+  "boundary": "Passive receipt only; recipe sources, fixtures, catalogue and correction memory remain exclusively in private Synexia."
+}

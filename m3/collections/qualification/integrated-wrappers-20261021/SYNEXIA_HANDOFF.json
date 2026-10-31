@@ -1,0 +1,75 @@
+{
+  "schema": "m3.integrated.collections.synexia-handoff.v1",
+  "status": "QUALIFIED_COMPONENT_DRAFT_RECEIVING_HANDOFF",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12895",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021",
+  "recipe": "com.synexia.rewrite.M3IntegratedCollections20261021Recipe",
+  "manifest_path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/manifest.tsv",
+  "manifest_sha256": "ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2",
+  "qualified_source_pins": {
+    "m3": "33d2e6ae8048c436bd55b951d9f7dbfab2f3efcb",
+    "synexia_engine": "408373f4101fdca2fb3625bec8af1234e5fd3e26"
+  },
+  "receiving_branch_base": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+  "documentation_parent": "d66bdbf3a8f870708a29d93d84c4a61fdebad911",
+  "counts": {
+    "modify": 4,
+    "keep": 10,
+    "add": 8,
+    "emitted_source_changes": 12
+  },
+  "ownership": "M3JDK21 is the integrated runtime. Synexia convergence workspaces own reusable transformation recipes, catalogue evidence and correction memory.",
+  "invariant": "Maintain reusable, validated transformation recipes; apply them through contract-preserving, per-file transformations; continuously improve algorithm choices through catalogue-driven comparison and donor evaluation.",
+  "public_interfaces_and_jni_abi": "UNCHANGED_WITHIN_QUALIFIED_SCOPE",
+  "catalogue": {
+    "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/catalogue/candidate-catalogue.tsv",
+    "receiving_mirror": "../../algorithm-catalog/integrated-wrappers-20261021.tsv",
+    "sha256": "4006e28e896de0b3b1b5f7bdb5848c705c0203381f2f860c45deb8f45ed8e384",
+    "rows": 16
+  },
+  "license_provenance_url": "https://github.com/hsoliwal/com.synexia/blob/f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/LICENSE_PROVENANCE.md",
+  "reproduction_url": "https://github.com/hsoliwal/com.synexia/blob/f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/REPRODUCTION.md",
+  "previous_index_atom_prs": [
+    "https://github.com/hsoliwal/com.synexia/pull/12857",
+    "https://github.com/hsoliwal/M3jdk21/pull/1760"
+  ],
+  "provenance": {
+    "status": "PASS",
+    "base": "408373f4101fdca2fb3625bec8af1234e5fd3e26",
+    "head": "f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d",
+    "changed_paths": 97,
+    "receipt": "provenance/EXACT_COMMIT_RECEIPT.json",
+    "receipt_sha256": "2e4cec35536b0da541e9bae429ced7337d2337ba0b5ebd9fc986616677d37e91",
+    "reports": [
+      "provenance/PROVENANCE_FILES.tsv",
+      "provenance/PROVENANCE_GATE.tsv",
+      "provenance/PROVENANCE_VIOLATIONS.tsv"
+    ]
+  },
+  "open_gates": [
+    {
+      "gate": "matching_current_source_full_jdk_image",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "core_native_window_exports_in_matching_installed_image",
+      "status": "BLOCKED",
+      "reason": "Historical source-built image lacks required exports."
+    },
+    {
+      "gate": "unchanged_owning_maven_reactor_source_built_dependencies",
+      "status": "NOT_RUN",
+      "reason": "Component JUnit uses upstream 5.10.2; owning source-built 5.10.2-m3-source-1 is a separate requirement."
+    },
+    {
+      "gate": "applicable_jtreg_jck_platform_provider_matrix",
+      "status": "NOT_RUN"
+    },
+    {
+      "gate": "existing_java_base_CollectionViews_license_promotion_review",
+      "status": "OPEN"
+    }
+  ]
+}

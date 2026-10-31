@@ -1,0 +1,14 @@
+schema	m3-spring-multivalue-api-inline-1
+recipe	com.synexia.m3.InlineSpringMultiValueApi20261027
+canonical	hsoliwal/com.synexia:m3/inline-spring-multivalue-api-recipe-20261027
+donor	spring-projects/spring-framework:v6.2.0
+donor_license	Apache-2.0/2002-2024_original_authors
+source_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-inline-spring-multivalue-api-20261027/manifest.tsv
+pom_scope_change	org.springframework:spring-core->test;com.google.code.findbugs:jsr305->test
+jacoco_owned_M3_threshold	UNCHANGED_99_PERCENT
+jacoco_upstream_api_exclusion	org/springframework/**
+runtime_modules	java.base_ONLY_PENDING_JDEPS
+JSR305_alias_metadata	OMITTED_HOLD
+full_spring_abi	NOT_QUALIFIED
+recipe_tests	PENDING
+product_CI	PENDING

@@ -1,0 +1,8 @@
+openjdk version "21.0.12.1" 2026-08-18
+OpenJDK Runtime Environment (build 21.0.12.1+1-1-24.04.4-Ubuntu)
++ /usr/lib/jvm/java-21-openjdk-amd64/bin/java -Xcheck:jni --patch-module java.base=$OUT/O1_component-patch java.lang.M3StringLeafRangesOracle component
+M3_LEAF_RANGES_PASS mode=component stringLayout=stock checks=353136 leaves=27105 atomLeaves=18317 inlineLeaves=8788 startMutantsKilled=17739/17739 byteOrderMutantsKilled=13484/13484
+rc=0
++ /usr/lib/jvm/java-21-openjdk-amd64/bin/java -Xcheck:jni --patch-module java.base=$OUT/M2_byte_order_swapped-patch java.lang.M3StringLeafRangesOracle component
+rc=1
+Exception in thread "main" java.lang.AssertionError: utf16-local-atom-big-endian unit mismatch at 0

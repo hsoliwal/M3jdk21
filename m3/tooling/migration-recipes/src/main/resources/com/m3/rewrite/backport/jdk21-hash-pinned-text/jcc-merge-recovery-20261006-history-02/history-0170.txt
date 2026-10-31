@@ -1,0 +1,643 @@
+{
+  "state": "PUBLISHED_CUSTODY_VERIFIED",
+  "publication_receipt": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/PUBLICATION_CUSTODY.json",
+    "bytes": 1099619,
+    "sha256": "95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8",
+    "git_blob_sha1": "0f084555dbbea3ba4c9302386ced30e1e1503dda"
+  },
+  "base_tree_model": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/BASE_TREE_MODEL.json",
+    "bytes": 1372743,
+    "sha256": "877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80",
+    "git_blob_sha1": "6ee3c1bfd76dc5c0abdba031f163a3d38294f5e9"
+  },
+  "source_output_root": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92",
+  "root_pom": {
+    "local_path": "/workspace/scratch/c0bcaa06df78/m3-mastery/inventory/final-integration/build-declarations/root-pom.xml",
+    "bytes": 119981,
+    "sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab",
+    "git_blob_sha1": "98889a040aad5cc3c82f782bb4b173d118207988"
+  },
+  "proofs": [
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/RECOVERY_REPORT.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/publication/RECOVERY_REPORT.md",
+      "bytes": 16279,
+      "sha256": "b21708f3c4537237db3608f8c12ba54ee1940817eb7d5594c1fea5bdeab29259",
+      "git_blob_sha1": "c019f5e4cf5014915d0686aeeeeb4cc306264907",
+      "mode": "100644",
+      "selection_reasons": [
+        "Actual source recovery entry-point report"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/RECOVERY_RESULT.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/RECOVERY_RESULT.json",
+      "bytes": 456423,
+      "sha256": "086f4ef835a0939b212bcb7595e75513ecbd46ce6bbf764a8d1f5aca1e418954",
+      "git_blob_sha1": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link",
+        "Reviewed compact execution reference"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/E4_EXECUTION_INPUT.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/E4_EXECUTION_INPUT.json",
+      "bytes": 12601,
+      "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
+      "git_blob_sha1": "428422fc77c5335a43b9c978515445f056d0d2c6",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/SAFE_ADDITIONS_STAGED.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/SAFE_ADDITIONS_STAGED.json",
+      "bytes": 1516300,
+      "sha256": "a3c4741cad08018ff12f21288fa1483ffd55b2c878ab65f5c3c0ce82a10e3e91",
+      "git_blob_sha1": "baa75b9225caf3c8f41946443d7327290c6e174c",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/CURRENT_PROJECTION.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/CURRENT_PROJECTION.json",
+      "bytes": 596276,
+      "sha256": "18c5fea0f72fe21aa78df1aa6c319eb4276fc15aa481952539c221ce651e6f49",
+      "git_blob_sha1": "d20138ab763408bbbd793c1ff27778d866b29009",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/DESIGNATED_SOURCE_OUTPUTS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/DESIGNATED_SOURCE_OUTPUTS.json",
+      "bytes": 15261,
+      "sha256": "296d5b9eb4f41b51a85d44bb4f05c76e8c5b6453fb55881691b9823055062510",
+      "git_blob_sha1": "59e4ba6f35c37c1a00da2678ed88b9f034d885e1",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-framing-review/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/contract-framing-review/REVIEW.md",
+      "bytes": 7269,
+      "sha256": "76822940bd1cc9234a5ac5486bb63b73743f6e1d30e8cfcbfc6f5000c787007c",
+      "git_blob_sha1": "4b3ade8280c0a3264974df477e7332e1c1485abb",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-units-epoch02-review/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-units-epoch02-review/REVIEW.md",
+      "bytes": 7425,
+      "sha256": "890439836c59488cef7b5a83959f504efe14ac17023e33baa9c9fde53449ce6c",
+      "git_blob_sha1": "14990c6803c4ac74bd3dafa60907eb448e4b17ae",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/RESULT.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/RESULT.json",
+      "bytes": 2586,
+      "sha256": "066c4fa046adf063f2bffb02ac8d6be949e5f85d55de489dd081d56bddcd93dd",
+      "git_blob_sha1": "1a55550a8fe316b98743f3fa3f63bb8719a3b360",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link",
+        "Reviewed compact execution reference"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-units-epoch02/RESULT.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-units-epoch02/RESULT.json",
+      "bytes": 20809,
+      "sha256": "a7a92fc26c62ce0938464a75dff13ea1785822f787bf17e03ebf6dd0cc45296f",
+      "git_blob_sha1": "864b64878c8f06c45b9b6dad6d89c3284aaed612",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link",
+        "Reviewed compact execution reference"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/RESULT.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/observation-regression-epoch02/RESULT.json",
+      "bytes": 17990,
+      "sha256": "041ba5fa63b335839675d773c36588d6207c11d0933ad303fa3378a5922000d4",
+      "git_blob_sha1": "d6f19056296663d3da760957937a8f3edec64535",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link",
+        "Reviewed compact execution reference"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/upstream-regression-epoch02/RESULT.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/upstream-regression-epoch02/RESULT.json",
+      "bytes": 14193,
+      "sha256": "c6a3b0125bae6af2b9f704784b4b114eb988da44cfb56696287134d309629609",
+      "git_blob_sha1": "2527bcf3a09ba0051880b06fd1e402a1fcfb5e36",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link",
+        "Reviewed compact execution reference"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/RESULT.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/native-lane-epoch02/RESULT.json",
+      "bytes": 11617,
+      "sha256": "206f4380105bfe863704b92bba17f8ce2df7bbb82d0fbe986751c1dc4d721796",
+      "git_blob_sha1": "0b22050eb54dab0e05cdb1f7b34e411abd092f53",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link",
+        "Reviewed compact execution reference"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
+      "bytes": 883,
+      "sha256": "b7262f5ce0c1868e8b4741b2bd46c09fd26c16bc5a044179988c42ce80642c3e",
+      "git_blob_sha1": "e9a31d082ced46a6f57b0874a25b10df61634753",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link",
+        "Reviewed compact execution reference"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/t03-execution-review/REVIEW.md",
+      "bytes": 12253,
+      "sha256": "d6109ae253343f5c157d867732f3eea954cc4e57438968154b476407a21e86b2",
+      "git_blob_sha1": "966b2ec295da85f5d4399ea7c717eeaf0d4d06d3",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link",
+        "Independent final replay review and seal"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-applicability-review/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/t03-applicability-review/REVIEW.md",
+      "bytes": 6678,
+      "sha256": "9d290b484f5d5c6ddb3c2c37842f2edd43555b29e0933ba5c7c92796c8326b8f",
+      "git_blob_sha1": "f1116725ed4da13d222f070cd92d43a3ade6a80a",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-provider-execution-review/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/current-owner-upstream-review/t03-provider-execution-review/REVIEW.md",
+      "bytes": 7777,
+      "sha256": "47779ed5f43d7a512c5a372650569fa1442d8099ce544fe3c6b59196c955471a",
+      "git_blob_sha1": "7e9560159cbda808d45f26afe26a3c36aad2e910",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/native-lane-epoch02-review/REVIEW.md",
+      "bytes": 9790,
+      "sha256": "f29f2a7394019d1e882c61f2e7527afe90bbffde0f840c56703f3eb82399a281",
+      "git_blob_sha1": "792b277c3a23a2c82aee57d5adc1d00b25303f14",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-runtime-admission/CURRENT_RUNTIME_ADMISSION.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-runtime-admission/CURRENT_RUNTIME_ADMISSION.md",
+      "bytes": 13254,
+      "sha256": "5227dbd72cd7e24ada181695f51da97819af29640a3f712a50a1463cd14fc75f",
+      "git_blob_sha1": "90da6d0729226f3025474589967f0b3a7fe68ad1",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/runtime-availability-epoch02/AVAILABILITY.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/runtime-availability-epoch02/AVAILABILITY.md",
+      "bytes": 10374,
+      "sha256": "0b5a82147a0d36894b6eca57b51d73886b94574b4bacf674f302461505af701f",
+      "git_blob_sha1": "91cd73e4ad8efa3eb27284c8962503c4f46914dc",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/T03_REPLAY_SCOPE.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/T03_REPLAY_SCOPE.md",
+      "bytes": 4990,
+      "sha256": "726902d1072bdad532aa891c1a855282e702a51ca422a5ee341358e4965b87e3",
+      "git_blob_sha1": "748884fc81dfa87ee3a09f2b0f255481ff23b689",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/verify.sh",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/verify.sh",
+      "bytes": 30326,
+      "sha256": "a46e4877d5fd07afa65283652cc1b7407584291425a88740ba8d5dd3411e9441",
+      "git_blob_sha1": "2aa03ddf92e0bea905103a26396f4f8341711220",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/provider-v2.py",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/provider-v2.py",
+      "bytes": 11627,
+      "sha256": "da9311e1f014a36801aff09060696aafd54c79fe28c5ec6ea3b8ca7036b13558",
+      "git_blob_sha1": "b98e9ad56452bc9db9a65e085413a5e1f4379457",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence-applicability.py",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence-applicability.py",
+      "bytes": 7338,
+      "sha256": "7ac61a5b7a91fea2023a4e28e7d93f2a69a570694a66e0e7f5c091c2e2538893",
+      "git_blob_sha1": "58ac97001ccc441b5d01eeac272ba908b33edb68",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/LAUNCH.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/final-t03/LAUNCH.json",
+      "bytes": 1128,
+      "sha256": "206c1664179770263006a3108e72421cf06725b0df3c57bf75664a60cd2c233e",
+      "git_blob_sha1": "96b73cf6f1e6ea7a14ddbf2bc9506c12a09ecc26",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/SEED.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/final-t03/SEED.json",
+      "bytes": 693595,
+      "sha256": "d33cf9575e511976bc042f5e9c91f3c3d9154a169567d462b4db9d4c027d9204",
+      "git_blob_sha1": "71e46ff5dff4a91405449c1be2df9bc520381505",
+      "mode": "100644",
+      "selection_reasons": [
+        "Direct actual report link"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/parser-t02-candidate-epoch01/RESULT.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/parser-t02-candidate-epoch01/RESULT.json",
+      "bytes": 14247,
+      "sha256": "039b7d54e6de11a865874ef8f2820f3071e61700bf06224d94afdd0315ed63a6",
+      "git_blob_sha1": "a5d44068a5e01ec4c09612b2b145476d7c0268cc",
+      "mode": "100644",
+      "selection_reasons": [
+        "Reviewed compact execution reference"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/CAMPAIGN_RESULT.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/observation-regression-epoch02/CAMPAIGN_RESULT.json",
+      "bytes": 599,
+      "sha256": "622c75ca29de15c17344089df368255fa13dd35f340c708cd80d8476a1966a28",
+      "git_blob_sha1": "c0882c9cb45ebead41fc3889aebb02b40622de9d",
+      "mode": "100644",
+      "selection_reasons": [
+        "Reviewed compact execution reference"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/PARITY.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/native-lane-epoch02/PARITY.json",
+      "bytes": 1394,
+      "sha256": "b1d375e04deb8078e47e261238308de2d4312d6b0ed55a400725031884cfb0a6",
+      "git_blob_sha1": "74a05b892b158f2473e102c541be20274d636e44",
+      "mode": "100644",
+      "selection_reasons": [
+        "Reviewed compact execution reference"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/contract-api-epoch02/REVIEW.md",
+      "bytes": 2865,
+      "sha256": "eb6ddcfbba9e9f6d0fc675c4c58f9b279cd7c96cbd8acb9749e41591497f6c30",
+      "git_blob_sha1": "00284ac27872ad911924d3491b4277fb30247a22",
+      "mode": "100644",
+      "selection_reasons": [
+        "Reviewed compact execution reference"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/FILE_SEALS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/t03-execution-review/FILE_SEALS.json",
+      "bytes": 2062,
+      "sha256": "b928cc49ef7897f3c7c76fc057a56af86b5b8eb1c7576d65eeb094eec70694e2",
+      "git_blob_sha1": "c7a17d84ace6fde9f3efc5ed6ffa3b0f338c39c5",
+      "mode": "100644",
+      "selection_reasons": [
+        "Independent final replay review and seal"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-parser.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-parser.json",
+      "bytes": 550,
+      "sha256": "9a2b2e07a6b54330b6d7457e9df4ed631617e11351daa9670ff51e00e8263d66",
+      "git_blob_sha1": "aa13035f107b82f230e82ffeee01243dccaeb2be",
+      "mode": "100644",
+      "selection_reasons": [
+        "materializations summary"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-parser/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-parser/receipts/materialization.tsv",
+      "bytes": 19818,
+      "sha256": "865c1ed23e83694fdcb00011a615448615bfbf661baf6c99bd4486aa829b9bec",
+      "git_blob_sha1": "22dcb8986dbda5251ea9c04e446880c64417fe5f",
+      "mode": "100644",
+      "selection_reasons": [
+        "materializations raw Results/write receipt"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-contract.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-contract.json",
+      "bytes": 554,
+      "sha256": "c72fd6137847627eeffbe5d92c8c14537ef7912c99742ebddf2cf197669f0389",
+      "git_blob_sha1": "0625973c7794161b2e7d1888b5d94ca88ca7d040",
+      "mode": "100644",
+      "selection_reasons": [
+        "materializations summary"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-contract/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-contract/receipts/materialization.tsv",
+      "bytes": 19766,
+      "sha256": "2fe8c1f9eb21ea008a12c1deb304c8cb2ee417d84407db78ce67ef7cd00620ec",
+      "git_blob_sha1": "7ddfef5cc2224d35f507f611bc27f00de29a86e0",
+      "mode": "100644",
+      "selection_reasons": [
+        "materializations raw Results/write receipt"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-convergence.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-convergence.json",
+      "bytes": 560,
+      "sha256": "9732bdf683770abb602127ce7cd663b0db448683de8a0a30633abafbf4d69ea6",
+      "git_blob_sha1": "507484ee82dedbd0ec0ead3701a9475399fe77a5",
+      "mode": "100644",
+      "selection_reasons": [
+        "materializations summary"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-convergence/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-convergence/receipts/materialization.tsv",
+      "bytes": 35476,
+      "sha256": "9efc02ffe63e045d16284b8283a722f5974702f7a83510e0a115335d68f0389e",
+      "git_blob_sha1": "16558854fd261ca1262000296e1465ae7e0aa0bf",
+      "mode": "100644",
+      "selection_reasons": [
+        "materializations raw Results/write receipt"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-observation-imports.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-observation-imports.json",
+      "bytes": 576,
+      "sha256": "ab92660e01e24283f56ac18c15f853cd6033eb5b5deeecc23949c269f1a7e557",
+      "git_blob_sha1": "c02ef4fd7a1172ee3925905a8513944c69bb5d77",
+      "mode": "100644",
+      "selection_reasons": [
+        "materializations summary"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-observation-imports/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-observation-imports/receipts/materialization.tsv",
+      "bytes": 20416,
+      "sha256": "41b33c4ddf348357ae78015b2b4380a49b85a24e9af9be1e5df4644d49971dc6",
+      "git_blob_sha1": "8ca3c1425b1493c6bbe557c6a6bc18427fcf99e4",
+      "mode": "100644",
+      "selection_reasons": [
+        "materializations raw Results/write receipt"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-upstream-imports.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization-jcc-be92-upstream-imports.json",
+      "bytes": 570,
+      "sha256": "f1c18ebb2c88a8cc00d518ff1cb615b34ab55e494a5cf5811dd0032b5f9849dd",
+      "git_blob_sha1": "aee158a0b3db79dfe880ed5a68ea36147410357d",
+      "mode": "100644",
+      "selection_reasons": [
+        "materializations summary"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-upstream-imports/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/materialization/jcc-be92-upstream-imports/receipts/materialization.tsv",
+      "bytes": 20827,
+      "sha256": "6f9a81a6337c3f12348db495590436457094c9bbb71874e22a525b3e4df45256",
+      "git_blob_sha1": "b2f8c8e9454ba3160dd3df628540de8bcf26f9e0",
+      "mode": "100644",
+      "selection_reasons": [
+        "materializations raw Results/write receipt"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-parser.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-parser.json",
+      "bytes": 554,
+      "sha256": "6dd4d88cc1c6101add61ad2003a1eedc1569c392c20e67f4152059c9d20e6289",
+      "git_blob_sha1": "5b42410ca62ac0a1c231cec8bc45780deda60005",
+      "mode": "100644",
+      "selection_reasons": [
+        "independent_disk_replays summary"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-parser/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-parser/receipts/materialization.tsv",
+      "bytes": 19316,
+      "sha256": "85380910bcbe353610b4c7bdf7923a5d915ca191f05f6d25ca73ccc4bc602655",
+      "git_blob_sha1": "01e035ffb3515315e463ae3d539b4b77de1a672e",
+      "mode": "100644",
+      "selection_reasons": [
+        "independent_disk_replays raw Results/write receipt"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-contract.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-contract.json",
+      "bytes": 558,
+      "sha256": "9710c4147eeff9787b7f611ddc085ac49709a8e0f24849559286cc61e8c27e41",
+      "git_blob_sha1": "92503dd9bc5751613f72da452157538a8e257573",
+      "mode": "100644",
+      "selection_reasons": [
+        "independent_disk_replays summary"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-contract/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-contract/receipts/materialization.tsv",
+      "bytes": 19282,
+      "sha256": "0f21875027bcc7dc9cfa68e1e965225e7ce1f03802a60fe22d5f1800d5afae0c",
+      "git_blob_sha1": "cfbe75bf8bbf7043125a7628b60b212c637fa483",
+      "mode": "100644",
+      "selection_reasons": [
+        "independent_disk_replays raw Results/write receipt"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-convergence.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-convergence.json",
+      "bytes": 564,
+      "sha256": "35602ad28d2a0fcd92ca7a69a71fcec99a20a82673023139bcae912bbc9640b2",
+      "git_blob_sha1": "02f359082dd7b2d0084f49eacaaa59f8967d2a5b",
+      "mode": "100644",
+      "selection_reasons": [
+        "independent_disk_replays summary"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-convergence/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-convergence/receipts/materialization.tsv",
+      "bytes": 34556,
+      "sha256": "a87f0ecf67b05914872f58d3cd6afe3494285ff74b3935b95f35181416775883",
+      "git_blob_sha1": "ba103fcf5e81819018c11b95a00ebac2905551e7",
+      "mode": "100644",
+      "selection_reasons": [
+        "independent_disk_replays raw Results/write receipt"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-observation-imports.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-observation-imports.json",
+      "bytes": 580,
+      "sha256": "268e3c473143016e256e69360ea3909c403da1cd41c5f264f957e1af7ad6042a",
+      "git_blob_sha1": "4cf378780c7ef9fc80ea8ac16c8210f53e1f02ac",
+      "mode": "100644",
+      "selection_reasons": [
+        "independent_disk_replays summary"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-observation-imports/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-observation-imports/receipts/materialization.tsv",
+      "bytes": 19719,
+      "sha256": "208992e13de48a1740b2e0b6075fc756f935d797a3e3080b8a9fe8564ec455c6",
+      "git_blob_sha1": "f94af1af0d6bb82cd007c0f47b2376365c90d4fa",
+      "mode": "100644",
+      "selection_reasons": [
+        "independent_disk_replays raw Results/write receipt"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-upstream-imports.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay-jcc-be92-upstream-imports.json",
+      "bytes": 574,
+      "sha256": "93d8bbe6b54f3a473dae75c0809a7c465c7c29d6c0534598e1d26b013c75e8c9",
+      "git_blob_sha1": "337049e4cb8104042a82a405d9f4e3b568ec640b",
+      "mode": "100644",
+      "selection_reasons": [
+        "independent_disk_replays summary"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-upstream-imports/receipts/materialization.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/disk-replay/jcc-be92-upstream-imports/receipts/materialization.tsv",
+      "bytes": 19992,
+      "sha256": "23ce3c33b1154fffd08a367140e3ceeac7bcc78185940dfb3ccd13ca8b933419",
+      "git_blob_sha1": "65842208bc32f5df8d06951f52dc1770a00b2818",
+      "mode": "100644",
+      "selection_reasons": [
+        "independent_disk_replays raw Results/write receipt"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/source-packets/32-final-source-packet.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/source-packets/32-final-source-packet.json",
+      "bytes": 215015,
+      "sha256": "acd4a586753334a9cee8d81d2ac9745cf87160fe7a10e0a1ac6a041d059d050d",
+      "git_blob_sha1": "5e32b23f0265d2bc25dc9671023fea0620823a04",
+      "mode": "100644",
+      "selection_reasons": [
+        "Final source packet, ordered mechanical stages, API/native review seal"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/status.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/status.tsv",
+      "bytes": 3859,
+      "sha256": "896a92c9ba590d7b3a1955422b83781aff0b7695bc96897d3ed30227eb21215a",
+      "git_blob_sha1": "4eb2f20a69e351bd7a499a76d48782bfcf9d1853",
+      "mode": "100644",
+      "selection_reasons": [
+        "Final source packet, ordered mechanical stages, API/native review seal"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/FILE_SEALS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/contract-api-epoch02/FILE_SEALS.json",
+      "bytes": 17549,
+      "sha256": "0fcc8c3808d4ada7d55c7ab3055539f81c651d08da5d794ec8aeae263e18c232",
+      "git_blob_sha1": "fe63deffae7984cb42dfd7c5e73a526c3f20619e",
+      "mode": "100644",
+      "selection_reasons": [
+        "Final source packet, ordered mechanical stages, API/native review seal"
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/FILE_SEALS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/execution-static-review/native-lane-epoch02-review/FILE_SEALS.json",
+      "bytes": 2146,
+      "sha256": "2fe867381a466d94a9c42c8e71f5ddf0dcea5601b432fcfed03bc70f95462d37",
+      "git_blob_sha1": "11ab0b138fa25b15bb07ca2d3e6e50acf516c675",
+      "mode": "100644",
+      "selection_reasons": [
+        "Final source packet, ordered mechanical stages, API/native review seal"
+      ]
+    }
+  ],
+  "execution_review": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/E4_EXECUTION_INPUT.json",
+    "bytes": 12601,
+    "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
+    "git_blob_sha1": "428422fc77c5335a43b9c978515445f056d0d2c6"
+  }
+}

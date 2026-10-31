@@ -1,0 +1,142 @@
+{
+  "schema": "SWT_CURRENT_OWNER_COPIER_QUALIFICATION/1",
+  "status": "PASS",
+  "scope": "isolated exact product-source fixtures; no target repository writes",
+  "sdk_receipt_sha256": "a950522f8342e90af73568ae052eca44f776d377a57e4a392477ec5ea95a5098",
+  "script_sha256": "80eab858911f37af08f15ef9145413cf4ab850ad4f83f3df36513e474c6a1716",
+  "source_seals_sha256": "8fbab5e40413771d432d5016964f5bd71d95bf4043805bac828d82bd92200bb0",
+  "target_paths": 1,
+  "first_writes": 1,
+  "replay_writes": 0,
+  "refusals": 4,
+  "steps": [
+    {
+      "name": "01-preflight",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving"
+      ],
+      "exit_code": 0,
+      "log_sha256": "79f612b4453a59fdef83008a4e862e6a2ca903b357649ae28be432f09ae95477",
+      "receipt_sha256": "dd80dcf24821033311f053c4377ac8b6280ef9d2735295dba6d810e19a6709a7",
+      "before": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0"
+      },
+      "after": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0"
+      }
+    },
+    {
+      "name": "02-first-apply",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "log_sha256": "41364394aee6f6a2ba1bd479557c58e24731c73b03c0d584d39ea10be7ad7807",
+      "receipt_sha256": "2fcaadd71764120502c1b424cdcb8a02defad4abfda5fcc116d9b95094c98ace",
+      "before": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0"
+      },
+      "after": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600"
+      }
+    },
+    {
+      "name": "03-fixed-point",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "log_sha256": "e71d6838344f10f48f8754b0213837514322b4ea7e4dba62baf33bd529c4e729",
+      "receipt_sha256": "b6e5f2e15eac1e2deba1ad0a281d460772137fbe0259b9483ea08f538d530f9e",
+      "before": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600"
+      },
+      "after": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600"
+      }
+    },
+    {
+      "name": "04-product-drift",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving-drift",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "65dc1f067cca22532d0ee33266813ee43496808f297b52490c0476c8cfaa4fe0",
+      "receipt_sha256": "aa1e94274493dd7319d55c789d978ecdaca766b77db26913e2f8f1decefee43e",
+      "before": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "6dc2f8fb8523511b36f5ed99afd2e53cfc19a0322b6b1ee759f62403560aa79d"
+      },
+      "after": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "6dc2f8fb8523511b36f5ed99afd2e53cfc19a0322b6b1ee759f62403560aa79d"
+      }
+    },
+    {
+      "name": "05-symbolic-destination",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving-symbolic",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "e7ced098fc0ddab96821af24f61698a331b6fab23501014d438c4c17503a988b",
+      "receipt_sha256": "fddba93d93494af70c864757938899b67db527606e09220cc668b8d69c43cfc9",
+      "before": {},
+      "after": {}
+    },
+    {
+      "name": "06-emitted-drift",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving-emitted-drift",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "1e18e10e844ac131163caa314b6b5521b6484cf46a455d915754b2163bbde8b3",
+      "receipt_sha256": "c4f88c2e332fa75dc4695574ce4e0a4b4e4f42970007908a5e6f62f000891760",
+      "before": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0"
+      },
+      "after": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0"
+      }
+    },
+    {
+      "name": "07-owner-drift",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/swt-owner-closure-20261021/receiver-qualification-001/receiving-owner-drift",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "7ddf49b370a147e4d665fff8a18bb77a52972e155f8d78fbb3cfc6dcb3d3d26c",
+      "receipt_sha256": "2bd989d319c9efd45406107075f891e7dfca2ab8c3b9cb8c8956b596ea6dceee",
+      "before": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0"
+      },
+      "after": {
+        "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0"
+      }
+    }
+  ]
+}

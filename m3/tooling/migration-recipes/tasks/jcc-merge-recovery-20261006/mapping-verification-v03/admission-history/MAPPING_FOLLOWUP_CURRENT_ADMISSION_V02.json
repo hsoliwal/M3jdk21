@@ -1,0 +1,23 @@
+{
+  "commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+  "frozen_retention_publication_changed": false,
+  "guards_exact": 7,
+  "input_epoch": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/input-epoch/INPUT_EPOCH.json",
+    "sha256": "fb413e58be72aaffa1e91149479ac159c6d4b961101eed4ab10f1c99df0b6711"
+  },
+  "mapping_preimages_exact": 4,
+  "prior_preimage_refusal_preserved": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/MAPPING_FOLLOWUP_CURRENT_ADMISSION_FAILURE_V01.json",
+    "sha256": "92e79b1c35e0f2ec86023ea6d6ead293aa6b749d85035b5b75079b66847df16b"
+  },
+  "root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0",
+  "schema": "m3-jcc-receiving-input-refresh/2",
+  "shape": {
+    "gates": 20,
+    "non_jcc_records": 50,
+    "ordered_records": 52,
+    "top_level_mappings": 25
+  },
+  "status": "PASS_NEW_EPOCH_FROZEN"
+}

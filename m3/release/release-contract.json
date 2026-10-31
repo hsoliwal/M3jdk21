@@ -1,0 +1,163 @@
+{
+  "schema": "M3_RELEASE_CONTRACT_V1",
+  "release": {
+    "product": "M3JDK21",
+    "tier": "P0_TECHNICAL_PREVIEW",
+    "upstream_repository": "openjdk/jdk21",
+    "upstream_baseline": "890adb6410dab4606a4f26a942aed02fb2f55387",
+    "release_branch": "release/first-clean-boundary-20261007",
+    "single_fork_commit_required": true,
+    "released_history_immutable_after_tag": true
+  },
+  "priority_order": [
+    "M3_STRING",
+    "REGEX_PRECOMPUTE",
+    "GENERAL_PRECOMPUTE",
+    "ARRAYS",
+    "COLLECTIONS",
+    "SWT_ECLIPSE_IDE"
+  ],
+  "claim_policy": {
+    "evidence_before_claim": true,
+    "marketing_must_reference_proof": true,
+    "self_reported_completion_forbidden": true,
+    "catalogue_or_recipe_execution_is_not_runtime_acceptance": true
+  },
+  "current_claims": {
+    "immutable_text_foundation": "IMPLEMENTED_WITH_REPOSITORY_TEST_SURFACE",
+    "java_lang_string_backed_by_m3_string": "NOT_CLAIMED",
+    "full_regex_precompute": "NOT_CLAIMED",
+    "full_jtreg_compatibility": "NOT_CLAIMED",
+    "performance_superiority_over_openjdk21": "NOT_CLAIMED",
+    "arrays_qualified": "NOT_CLAIMED",
+    "collections_qualified": "NOT_CLAIMED",
+    "swt_eclipse_ide_qualified": "NOT_CLAIMED"
+  },
+  "mandatory_release_gates": [
+    "RIGHTS_AND_LICENSE_BOUNDARY",
+    "SOURCE_TREE_AND_UPSTREAM_BASELINE",
+    "OPENJDK_SANITY_MATRIX",
+    "M3_FOUNDATION_TESTS",
+    "PRECOMPUTE_JAVA_DIFFERENTIAL",
+    "PRECOMPUTE_JNI_NATIVE_PARITY",
+    "M3_MAVEN_CONTROL_REACTOR",
+    "STRING_UTF16_CONTRACT",
+    "RELEASE_CLAIMS_VALIDATION",
+    "PROOF_PACK_SHA256"
+  ],
+  "claim_upgrade_gates": {
+    "java_lang_string_backed_by_m3_string": [
+      "jdk_product_build",
+      "relevant_jtreg",
+      "interpreter",
+      "c1",
+      "c2",
+      "gc_matrix",
+      "cds",
+      "utf16_and_unpaired_surrogate_contract",
+      "substring_equals_hash_compare_intern_contract"
+    ],
+    "full_regex_precompute": [
+      "at_least_10000_regex_cases",
+      "java_util_regex_semantic_oracle",
+      "cold_compile_vs_warm_reuse",
+      "cache_key_owner_snapshot_options_version",
+      "invalidation_and_corruption_refusal",
+      "java_jni_native_parity_where_native_is_used"
+    ],
+    "performance_superiority_over_openjdk21": [
+      "same_host_same_toolchain_ab",
+      "exact_openjdk_baseline",
+      "raw_results_preserved",
+      "cold_and_warm_results",
+      "cpu_time",
+      "allocation",
+      "heap",
+      "native_memory_or_rss",
+      "gc",
+      "startup",
+      "statistical_summary_and_variance"
+    ]
+  },
+  "forbidden_unqualified_release_phrases": [
+    "drop-in String replacement",
+    "fully compatible",
+    "full jtreg pass",
+    "faster than OpenJDK",
+    "zero allocation String",
+    "all regex is precomputed",
+    "production ready",
+    "all collections optimized"
+  ],
+  "optional_runtime_capabilities": {
+    "tornadovm": {
+      "owner": "M3JDK21",
+      "source": "m3/vendor/tornadovm",
+      "mapping": "m3/docs/name-mapping.d/m3-tornado-integrated-runtime-20261021.json",
+      "build": "m3/build-tornado.sh",
+      "claim": "CONDITIONAL_ON_EXACT_MATCHED_IMAGE_RECEIPT",
+      "required_gates": [
+        "PINNED_SOURCE_AND_RUNTIME_DEPENDENCIES",
+        "CANONICAL_RECIPE_SDK_AND_ZERO_CHANGE_REPLAY",
+        "LINT_BEFORE_COMPILE",
+        "SOURCE_COMPILER_RUNTIME_BACKEND_BUILD",
+        "EXISTING_PROVIDER_API_AND_BEHAVIOR",
+        "NAMED_MODULE_CLOSURE_AND_JMODS",
+        "MATCHED_M3JDK21_INSTALLED_IMAGE",
+        "ACTUAL_DEVICE_PARITY_FOR_CLAIMED_BACKEND",
+        "JVMCI_M3_STRING_GUARD_PRESERVED",
+        "UPSTREAM_AND_DEPENDENCY_LEGAL_NOTICES"
+      ],
+      "bootstrap_image_is_final_admission": false,
+      "cpu_opencl_is_physical_gpu_evidence": false,
+      "receiving_sequence_advanced": false,
+      "performance_superiority": "NOT_CLAIMED"
+    }
+  },
+  "execution_evidence": {
+    "schema": "M3_RELEASE_EVIDENCE_V1",
+    "default_manifest": "m3/release/queue/current/evidence.json",
+    "require_exact_commit_and_tree": true,
+    "require_clean_source": true,
+    "artifact_paths_relative_to": "manifest_directory",
+    "legacy_recipe_sources_block_release": true,
+    "gate_owners": {
+      "M3_MAVEN_CONTROL_REACTOR": "hsoliwal/com.synexia"
+    },
+    "maven_gate_scope": "Preserve this existing gate ID. Its equivalent canonical Maven/OpenRewrite recipe execution is owned and executed only by hsoliwal/com.synexia. The historical target m3/pom.xml reactor and target-local recipes remain migration holds; running them in M3JDK21 does not satisfy this gate.",
+    "required_manifest_fields": [
+      "schema",
+      "source_commit",
+      "source_tree",
+      "gates"
+    ],
+    "required_gate_fields": [
+      "id",
+      "owner_repository",
+      "status",
+      "exit_code",
+      "command",
+      "environment",
+      "artifacts"
+    ],
+    "required_environment_fields": [
+      "os",
+      "architecture",
+      "toolchain"
+    ],
+    "required_artifact_fields": [
+      "path",
+      "sha256"
+    ],
+    "canonical_recipe_gate_fields": [
+      "repository",
+      "commit",
+      "recipe_id"
+    ],
+    "policy_valid_is_release_ready": false,
+    "evidence_scope": "The verifier checks receipt structure, current source identity and artifact bytes. Actual contract coverage and execution provenance still require review.",
+    "visible_queue_source": "m3/tooling/name-contract/name-plan.json",
+    "visible_queue_authority": "m3/docs/name-mapping.json",
+    "queue_output_command": "python3 m3/release/verify_release_admission.py --queue-out m3/release/queue/current/README.md --json-out m3/release/queue/current/admission.json"
+  }
+}

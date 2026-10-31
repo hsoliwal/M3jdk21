@@ -1,0 +1,61 @@
+{
+  "schema": "M3_CANONICAL_RECIPE_RECEIVING_V1",
+  "repository": "hsoliwal/M3jdk21",
+  "input_revision": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_recipe": "com.synexia.m3.M3RankInstallerAtomicPreflight20261017",
+  "canonical_recipe_revision": "e52e37be17350628e70408a49ada49aa403ee2ed",
+  "canonical_application_qualification_revision": "8ffbde7414f33de549c1363f64c33d75bfed2564",
+  "canonical_qualification_path": "synexia-openrewrite-recipes/verification/m3-rank-installer-application-20261018",
+  "canonical_qualification_pr": "https://github.com/hsoliwal/com.synexia/pull/12270",
+  "source_path": "m3/collections/recipe/order-statistics/src/main/java/com/m3/recipe/M3RankIndexRecipe.java",
+  "preimage_git_blob": "146c953902760d29e6f17ce658f6625fbc532839",
+  "postimage_git_blob": "c3f02f21b574ba5d0de6bc44f7b07692cccc5957",
+  "sdk_first_changes": 1,
+  "sdk_fixed_point_changes": 0,
+  "canonical_tests": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "target_gates": [
+    {
+      "gate": "target-maven-verify",
+      "status": "PASSED",
+      "output_sha256": "620b2140c9326b42be3b3380374816bb8dba230a7d7c4615020f9ad84eed7610"
+    },
+    {
+      "gate": "java21-compile-and-jni-headers",
+      "status": "PASSED",
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "gate": "java21-selftest",
+      "status": "PASSED",
+      "output_sha256": "52bbd2b87d9e4a85252227e28f204ee4cb493c875175304c7e7e2d60142e31b7"
+    },
+    {
+      "gate": "native-c17-compile-ubsan",
+      "status": "PASSED",
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "gate": "java21-jni-selftest-xcheck-ubsan",
+      "status": "PASSED",
+      "output_sha256": "720e876154e023f9a9790dd0f16f292d62a8d7121ea7024c7e785ed4d26a7a1f"
+    }
+  ],
+  "scope": "Authoring-tool atomic-preflight repair. All five Java/JNI product target postimages and recipe templates remain byte-identical. No runtime family advancement.",
+  "target_naming_disposition": "EXISTING_TOOL_CLI_AND_TARGET_NAMES_UNCHANGED; no JDK or M3 runtime API port.",
+  "disclosure_disposition": "Routine maintenance of already-public Apache-2.0 recipe.",
+  "not_claimed": [
+    "Full JDK/reactor build or jtreg",
+    "Windows/macOS or other native platforms",
+    "Concurrency-safe filesystem transaction",
+    "Repository-wide recipe application or semantic atomization"
+  ],
+  "rights": "Existing Apache-2.0 recipe and independent M3 collection program notices preserved. OpenJDK and other donors are not relicensed.",
+  "receiving_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "freshness": "15 qualified inputs byte-and-mode identical to original qualified revision; no new module files"
+}

@@ -1,0 +1,16 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.search.ResultOfMethodCallIgnored"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 57
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 9
+- name: "Aaron Gershman"
+  email: "aegershman@gmail.com"
+  lineCount: 5
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 3

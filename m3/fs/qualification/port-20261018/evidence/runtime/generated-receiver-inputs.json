@@ -1,0 +1,54 @@
+{
+  "donor_commit": "289e32f130c9c8e4a1cf0edc1066327d699393bf",
+  "existing_packer": {
+    "path": "/workspace/scratch/dcb6660d4786/M3jdk21/m3/tooling/jmod-recipes/tools/jmod_pack.py",
+    "sha256": "a2c1f69f6aaea0de7d5047c14f6f7530fe3231dca97fffdc4defee506daeb454"
+  },
+  "jar": {
+    "path": "/workspace/scratch/dcb6660d4786/M3jdk21/m3/fs/target/m3-fs-0.1.0-SNAPSHOT.jar",
+    "sha256": "d26696e0b79b81cbc51d8c07e0e19c574111e6603b930c15006a01c8d8c69970"
+  },
+  "jdk_home": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+  "jdk_release": "IMPLEMENTOR=\"Eclipse Adoptium\"\nIMPLEMENTOR_VERSION=\"Temurin-21.0.12.1+1\"\nJAVA_RUNTIME_VERSION=\"21.0.12.1+1-LTS\"\nJAVA_VERSION=\"21.0.12.1\"\nJAVA_VERSION_DATE=\"2026-08-18\"\nLIBC=\"gnu\"\nMODULES=\"java.base java.compiler java.datatransfer java.xml java.prefs java.desktop java.instrument java.logging java.management java.security.sasl java.naming java.rmi java.management.rmi java.net.http java.scripting java.security.jgss java.transaction.xa java.sql java.sql.rowset java.xml.crypto java.se java.smartcardio jdk.accessibility jdk.internal.jvmstat jdk.attach jdk.charsets jdk.internal.opt jdk.zipfs jdk.compiler jdk.crypto.ec jdk.crypto.cryptoki jdk.dynalink jdk.internal.ed jdk.editpad jdk.hotspot.agent jdk.httpserver jdk.incubator.vector jdk.internal.le jdk.internal.vm.ci jdk.internal.vm.compiler jdk.internal.vm.compiler.management jdk.jartool jdk.javadoc jdk.jcmd jdk.management jdk.management.agent jdk.jconsole jdk.jdeps jdk.jdwp.agent jdk.jdi jdk.jfr jdk.jlink jdk.jpackage jdk.jshell jdk.jsobject jdk.jstatd jdk.localedata jdk.management.jfr jdk.naming.dns jdk.naming.rmi jdk.net jdk.nio.mapmode jdk.random jdk.sctp jdk.security.auth jdk.security.jgss jdk.unsupported jdk.unsupported.desktop jdk.xml.dom\"\nOS_ARCH=\"x86_64\"\nOS_NAME=\"Linux\"\nSOURCE=\".:git:1c417fbfc2f7\"\nBUILD_SOURCE=\"git:e6ba7dec3d07654074559310376a3ae89da5f4ac\"\nBUILD_SOURCE_REPO=\"https://github.com/adoptium/temurin-build.git\"\nSOURCE_REPO=\"https://github.com/adoptium/jdk21u.git\"\nFULL_VERSION=\"21.0.12.1+1-LTS\"\nSEMANTIC_VERSION=\"21.0.12.1+1\"\nBUILD_INFO=\"OS: Linux Version: 6.8.0-1064-azure\"\nJVM_VARIANT=\"Hotspot\"\nJVM_VERSION=\"21.0.12.1+1-LTS\"\nIMAGE_TYPE=\"JDK\"\n",
+  "jni_library": {
+    "path": "/workspace/scratch/dcb6660d4786/M3jdk21/m3/fs/target/native/libm3fs.so",
+    "sha256": "fb2e70989a90f1ff151519ad875c09f82a3812ec7e2d7cfc932c2a001eccfcdf"
+  },
+  "legal": {
+    "apache_license": "/workspace/scratch/dcb6660d4786/M3jdk21/m3/fs/legal/LICENSE.txt",
+    "apache_sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+    "m3fs_notices": [
+      {
+        "path": "/workspace/scratch/dcb6660d4786/M3jdk21/m3/fs/legal/NOTICE.txt",
+        "sha256": "04388dcdce95e27e00b7de45976825189d2ab28f67fe3d37959ab5504728a82d"
+      },
+      {
+        "path": "/workspace/scratch/dcb6660d4786/M3jdk21/m3/fs/legal/THIRD_PARTY_NOTICES.md",
+        "sha256": "60c3384823634c5f6fd5ddce4698a99759cb9641694dbe822d58ac8bc6f3a780"
+      }
+    ],
+    "sqlite_distribution_notices": [
+      {
+        "path": "/tmp/m3fs-native-work/deps/usr/share/doc/libsqlite3-0/copyright",
+        "sha256": "78e9df8f8153c91c762ec970b82d224ac4d30f05aa7773e7e17e268141e53873"
+      }
+    ]
+  },
+  "probe_source": {
+    "path": "/workspace/scratch/dcb6660d4786/M3jdk21/m3/fs/verification/M3FsRuntimeProbe.java",
+    "sha256": "dd1003681fe672c1f477183dfdc035853496e09093e5c71eb5de4b444f62a2c3"
+  },
+  "removed_environment_names": [],
+  "roots": [
+    "java.se",
+    "jdk.m3fs",
+    "jdk.unsupported",
+    "jdk.zipfs"
+  ],
+  "scope": "Linked-image packaging and native probe on the supplied prebuilt JDK 21. This wrapper does not build or qualify the full modified OpenJDK/M3JDK21 tree.",
+  "sqlite_library": {
+    "path": "/tmp/m3fs-native-work/deps/usr/lib/x86_64-linux-gnu/libsqlite3.so.0.8.6",
+    "sha256": "2e6eef9a727f081f0d453b4e5e6cbd8b9ef8b6f86cbf7681cbad444d3b0b55c8",
+    "soname": "libsqlite3.so.0"
+  }
+}

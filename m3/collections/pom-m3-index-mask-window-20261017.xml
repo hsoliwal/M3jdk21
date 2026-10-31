@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Focused Java 21 contract oracle; does not claim a complete OpenJDK build. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3.verification</groupId><artifactId>m3-index-mask-window-java-proof</artifactId><version>1.0.0</version>
+  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <dependencies><dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2-m3-source-1</version><scope>test</scope></dependency></dependencies>
+  <build>
+    <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+        <configuration><release>21</release><proc>none</proc><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
+          <includes><include>com/m3/collections/M3IndexMaskWindow.java</include><include>com/m3/collections/M3IndexMaskCompactor.java</include></includes>
+          <testIncludes><testInclude>com/m3/collections/M3IndexMaskWindowSelfTest.java</testInclude><testInclude>com/m3/collections/M3IndexMaskWindowTest.java</testInclude></testIncludes>
+        </configuration>
+      </plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
+        <configuration><useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests><includes><include>**/M3IndexMaskWindowTest.java</include></includes></configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

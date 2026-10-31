@@ -1,0 +1,102 @@
+{
+  "schema": "m3-jcc-mapping-java-template-packet/1",
+  "version": 1,
+  "status": "FROZEN_OLD_INPUT_TEMPLATE_NOT_BOUND_OR_EXECUTED",
+  "destination_commit": "87590cb96fb0e2dc0f88fae8e01957f7179cd255",
+  "destination_root_tree": "6672d8a05a2324f29e38e0ab5ed242039cdf6d86",
+  "input_epoch": {
+    "ordered_records": 47,
+    "non_jcc_records": 45,
+    "top_level_mappings": 17,
+    "gates": 20
+  },
+  "source_commit": "__UNRESOLVED_ACTUAL_SOURCE_COMMIT__",
+  "source_root_tree": "__UNRESOLVED_ACTUAL_SOURCE_ROOT_TREE__",
+  "junit_methods_authored": 13,
+  "junit_methods_executed": 0,
+  "compile_only_status": "PASS",
+  "supersession": "Receiving current input advanced to52 records/50 non-JCC/25 mappings; this v01 oracle is retained unchanged and a separate v02 is required.",
+  "files": [
+    {
+      "path": "JccMergeMappingRecoveryTest.java.in",
+      "bytes": 49157,
+      "sha256": "3ac63041bb04d41ce17989957f6b5fb98c1125ca54da03b42b6080fbf7e51faf"
+    },
+    {
+      "path": "pom.xml",
+      "bytes": 3419,
+      "sha256": "374c614fd1119a140d69890cb366523db3d0dea573180697144af115ad42506c"
+    },
+    {
+      "path": "m3-jcc-merge-mapping-recovery.yml",
+      "bytes": 619,
+      "sha256": "5b15d5f15a8f1559c74a96b70ab5d68a408ab577f55b732c2f6b90c12b0c35dd"
+    },
+    {
+      "path": "render_template.py",
+      "bytes": 12670,
+      "sha256": "8de92641da0a3cdd6d741d6b526a459d6615527610b3c7565be718a27a4c44b0"
+    },
+    {
+      "path": "README.md",
+      "bytes": 6946,
+      "sha256": "264ecfc1876402eeaf28b0190306b71a3a7e3fc318b1b6e31f4f9ac5a96e9e5a"
+    },
+    {
+      "path": "compile-check-v01/receipt.json",
+      "bytes": 6316,
+      "sha256": "d63ff92d1b317188e032793e98721cba69c1c00b3bc5b5c267d63da32117fd97"
+    },
+    {
+      "path": "compile-check-v01/javac.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "compile-check-v01/javac.stderr.log",
+      "bytes": 426,
+      "sha256": "075c1fd6238386ed6dec222ac8556bd62eb13f370db31e314399bbfb10d3ab21"
+    },
+    {
+      "path": "compile-check-v01/src/com/m3/rewrite/backport/JccMergeMappingRecoveryTest.java",
+      "bytes": 49145,
+      "sha256": "a3ca105ed369e0eb0298440e47eab6e93afada986667d6605a24dfcb14eb3d7a"
+    },
+    {
+      "path": "compile-check-v02/receipt.json",
+      "bytes": 6287,
+      "sha256": "7ef8ab96ead54287d9ebcb6af8137963295a977bcc248159ce35cdcc3592ea3e"
+    },
+    {
+      "path": "compile-check-v02/javac.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "compile-check-v02/javac.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "self-review-v01/receipt.json",
+      "bytes": 2260,
+      "sha256": "c99d8823fec8e05e67387d5a049869f960bbe02665fdb7ecdd22b4dad28856d1"
+    },
+    {
+      "path": "self-review-v01/renderer-refusal.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "self-review-v01/renderer-refusal.stderr.log",
+      "bytes": 1015,
+      "sha256": "d24bf67471178a1577d95ce0293ebd22b96c9d37522e7bb9ddad83374c2d2a1d"
+    }
+  ],
+  "excluded_from_delivery": [
+    "compile-check-v01/classes",
+    "compile-check-v02/classes",
+    "compile-check-v02 duplicate source copy"
+  ],
+  "scope": "Prepared unresolved test/configuration packet. No GitHub write, source publication, operational mapping output, or acceptance promotion."
+}

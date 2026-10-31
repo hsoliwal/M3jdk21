@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# path	sha256	resource
+src/java.base/share/classes/java/lang/Runnable.java	5cb23586f22d8ecd7e0dd80e3352d181e8a24d72690838af8eaf72ac8dce6f07	Runnable.java.txt
+src/java.base/share/classes/java/util/Strings.java	6bb37ca2c3a6369a3c6fcb55fa24d77ae7044e99c2c71a3e81c976973b6aa62b	Strings.java.txt
+src/java.base/share/classes/java/util/concurrent/Callable.java	680695c2e9fa5b7408c63a29ef29a1ad9bed25c03eac0daf2c8c2d537eb06d96	Callable.java.txt
+src/java.base/share/classes/java/util/concurrent/Executor.java	6b83e511df523ff2910965345fe6db5446b79d242d7c8068d2ced9a9f28d440c	Executor.java.txt
+src/java.base/share/classes/java/util/concurrent/ExecutorService.java	5d82b5de9f77c1ef77b15982fcc72c86b8fb45cd881222b4ee1cd9342a324ee9	ExecutorService.java.txt
+src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java	590c0d79a50a072961242f8f911bb5840ce4eeb9d5c233f775e2c9cf845d36d1	MonitoredCallable.java.txt
+src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java	d09468f789dc6b0e806f58ecd6bb39670e7884bd4fdd955191964f5a06f6028f	MonitoredRunnable.java.txt
+src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java	59197a31316193c7be6eec156e898d856e334802ba4d56e067786a7dd566a3a0	ProgressMonitor.java.txt
+src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	686c204a63c33d36caa08cba3f03c6653a9ba83966b87520b7e90ba29d1a5775	ProgressMonitors.java.txt
+src/java.base/share/classes/java/util/function/Consumer.java	bd1803b432358d1a4844d759c9ce00648ce3750fc9a80d8603c2e183598eb955	Consumer.java.txt
+src/java.base/share/classes/java/util/function/Function.java	ea51212f8894832e54ac68e976281552b52799e610ce65fda433a64db1e31657	Function.java.txt
+src/java.base/share/classes/java/util/function/Supplier.java	812b8592b36d9633c8c34c0d2efa42f98bf45569f2b4db1e64bae6b5395a17be	Supplier.java.txt

@@ -1,0 +1,91 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// M3FS adaptation, Copyright 2026 Hitesh Soliwal and contributors.
+// Original Apache license and attribution retained.
+// Relocated Apache Commons VFS 2.10.0 to the M3FS namespace.
+package com.m3.fs.vfs.provider.ftp;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
+import com.m3.fs.vfs.Capability;
+import com.m3.fs.vfs.FileName;
+import com.m3.fs.vfs.FileSystem;
+import com.m3.fs.vfs.FileSystemConfigBuilder;
+import com.m3.fs.vfs.FileSystemException;
+import com.m3.fs.vfs.FileSystemOptions;
+import com.m3.fs.vfs.UserAuthenticationData;
+import com.m3.fs.vfs.provider.AbstractOriginatingFileProvider;
+import com.m3.fs.vfs.provider.GenericFileName;
+
+/**
+ * A provider for FTP file systems.
+ */
+public class FtpFileProvider extends AbstractOriginatingFileProvider {
+
+    /**
+     * File Entry Parser.
+     */
+    public static final String ATTR_FILE_ENTRY_PARSER = "FEP";
+
+    /**
+     * Authenticator types.
+     */
+    public static final UserAuthenticationData.Type[] AUTHENTICATOR_TYPES = {
+            UserAuthenticationData.USERNAME, UserAuthenticationData.PASSWORD };
+
+    static final Collection<Capability> CAPABILITIES = Collections
+        .unmodifiableCollection(Arrays.asList(Capability.CREATE, Capability.DELETE, Capability.RENAME,
+            Capability.GET_TYPE, Capability.LIST_CHILDREN, Capability.READ_CONTENT, Capability.GET_LAST_MODIFIED,
+            Capability.URI, Capability.WRITE_CONTENT, Capability.APPEND_CONTENT, Capability.RANDOM_ACCESS_READ));
+
+    /**
+     * Constructs a new provider.
+     */
+    public FtpFileProvider() {
+        setFileNameParser(FtpFileNameParser.getInstance());
+    }
+
+    /**
+     * Creates the file system.
+     *
+     * @return a new FileSystem, never null.
+     */
+    @Override
+    protected FileSystem doCreateFileSystem(final FileName name, final FileSystemOptions fileSystemOptions)
+            throws FileSystemException {
+        // Create the file system
+        final GenericFileName rootName = (GenericFileName) name;
+        final FTPClientWrapper ftpClient = new FTPClientWrapper(rootName, fileSystemOptions);
+        /*
+         * FTPClient ftpClient = FtpClientFactory.createConnection(rootName.getHostName(), rootName.getPort(),
+         * rootName.getUserName(), rootName.getPassword(), rootName.getPath(), fileSystemOptions);
+         */
+        return new FtpFileSystem(rootName, ftpClient, fileSystemOptions);
+    }
+
+    @Override
+    public Collection<Capability> getCapabilities() {
+        return CAPABILITIES;
+    }
+
+    @Override
+    public FileSystemConfigBuilder getConfigBuilder() {
+        return FtpFileSystemConfigBuilder.getInstance();
+    }
+}

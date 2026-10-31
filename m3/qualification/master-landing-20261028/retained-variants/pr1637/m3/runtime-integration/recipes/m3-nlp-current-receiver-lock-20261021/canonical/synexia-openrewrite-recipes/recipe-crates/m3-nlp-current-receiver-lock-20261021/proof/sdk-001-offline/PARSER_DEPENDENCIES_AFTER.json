@@ -1,0 +1,108 @@
+[
+  {
+    "path": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/builder-and-whole-rope-001/candidate-classes",
+    "kind": "compiled-directory",
+    "files": [
+      {
+        "path": "M3LexiconPrecomputeTest.class",
+        "sha256": "6eda4c79ba821c79507da64935829dcf7bcf21a576dd492b3fe816bd3633992b",
+        "bytes": 15239
+      },
+      {
+        "path": "com/m3/text/M3LexiconPrecompute$IndexWordFacts.class",
+        "sha256": "5e226aa51e9c4f62bf03302de048c8100acbb041afb8887da7c4fbae2610b2e0",
+        "bytes": 2966
+      },
+      {
+        "path": "com/m3/text/M3LexiconPrecompute$IndexWordSignal.class",
+        "sha256": "96af173f5fc18b336f097e438b158601d1d7beefddc1e084ea48e5b3bad8bdb3",
+        "bytes": 2490
+      },
+      {
+        "path": "com/m3/text/M3LexiconPrecompute$PrefixCounts.class",
+        "sha256": "e74fde25fb87787590d58b22de46d2cfc0d00ca178c5b57fe0c525786350cba4",
+        "bytes": 1501
+      },
+      {
+        "path": "com/m3/text/M3LexiconPrecompute$RangeFingerprint.class",
+        "sha256": "dcb288ee019def170c8a3bff4e4e00c47f65a42c8178ad68124c85267282d60a",
+        "bytes": 1703
+      },
+      {
+        "path": "com/m3/text/M3LexiconPrecompute$SiUnitPrecompute.class",
+        "sha256": "fc0284f3ccf395352af1d292e49074dd867e23e5f27f43edb4ecbde63a0a750d",
+        "bytes": 2004
+      },
+      {
+        "path": "com/m3/text/M3LexiconPrecompute$SpellIndex.class",
+        "sha256": "614303ccbb36e9cc416fa39d782f09554fa80cc2e0e3bfee8c5f3104d540bc1d",
+        "bytes": 4782
+      },
+      {
+        "path": "com/m3/text/M3LexiconPrecompute$TokenFrequency.class",
+        "sha256": "494576254b8eb9f4766c39cbb51934dcf1c2f05502d2a6305bec7f7e66c522f0",
+        "bytes": 2731
+      },
+      {
+        "path": "com/m3/text/M3LexiconPrecompute$TokenHashPrecompute.class",
+        "sha256": "1c1799988af7321e8110c1dc981c0819f643ba0e42dbfc2a12f2ed914e3a4135",
+        "bytes": 2863
+      },
+      {
+        "path": "com/m3/text/M3LexiconPrecompute$TranslationProjection.class",
+        "sha256": "1ae3061c3cb6489e8584c6868832f293e63411be974ad070808f0f7a4bf16ff2",
+        "bytes": 2439
+      },
+      {
+        "path": "com/m3/text/M3LexiconPrecompute.class",
+        "sha256": "39de9448f1d374941076a1eba1fa1dbfbbd2b6196313a94775118eaf0a20605f",
+        "bytes": 1858
+      },
+      {
+        "path": "com/m3/text/SharedLexiconPrecomputeCatalog$Builder.class",
+        "sha256": "6dd97b552ec6e1610b9baf62d5a74981828ac2770cf4f91bcc75bd3c5e2b069d",
+        "bytes": 6644
+      },
+      {
+        "path": "com/m3/text/SharedLexiconPrecomputeCatalog$Coordinate.class",
+        "sha256": "d596b609b665e20d9b9e6d7dc60ef4dc2da95ec20e4f66af01667f14883b0177",
+        "bytes": 1638
+      },
+      {
+        "path": "com/m3/text/SharedLexiconPrecomputeCatalog$SpellScope.class",
+        "sha256": "fd95b24a25fc982c599171ba35e820b089fdb3571eae33737caa19894468e928",
+        "bytes": 2236
+      },
+      {
+        "path": "com/m3/text/SharedLexiconPrecomputeCatalog$TokenRange.class",
+        "sha256": "ba438f6343bc0b52473a086aedb5e58e60d7d7f265bc0372e6366263807d17f9",
+        "bytes": 2583
+      },
+      {
+        "path": "com/m3/text/SharedLexiconPrecomputeCatalog$TranslationIdentity.class",
+        "sha256": "d464b6e511672cc78c3af8669e124f8a059819065c67587cd87abad8a619b813",
+        "bytes": 2289
+      },
+      {
+        "path": "com/m3/text/SharedLexiconPrecomputeCatalog$ValueScope.class",
+        "sha256": "664c70db506164139ee28254913652a08ad6c14057faa61df6a6d59e007a73b8",
+        "bytes": 2004
+      },
+      {
+        "path": "com/m3/text/SharedLexiconPrecomputeCatalog$ValueToken.class",
+        "sha256": "5f6336a213a1ed4b7aae116aec20d0b35a9b60b024e7eb288a0343ea8033d86c",
+        "bytes": 2286
+      },
+      {
+        "path": "com/m3/text/SharedLexiconPrecomputeCatalog$WordIdentity.class",
+        "sha256": "b97ad3723deeabcc36777d9ef899c3ddf00a14f4d95933e18b4aae24a901bb37",
+        "bytes": 1926
+      },
+      {
+        "path": "com/m3/text/SharedLexiconPrecomputeCatalog.class",
+        "sha256": "7ccf81f992c8d3db503e433b911ad58a5bd298b273353f34aa1d7d2854660415",
+        "bytes": 6385
+      }
+    ]
+  }
+]

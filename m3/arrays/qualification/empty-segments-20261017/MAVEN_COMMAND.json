@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/tmp/m3-maven-repository",
+    "-DfailIfNoTests=true",
+    "-f",
+    "/workspace/scratch/13309be96b09/collections-work/received/m3/arrays/pom.xml",
+    "-Pnative-linux",
+    "verify"
+  ],
+  "JAVA_HOME": "/tmp/m3-ast-product-build/images/jdk",
+  "cmake": "/tmp/m3-arrays-cmake-20261017/cmake/data/bin/cmake",
+  "exit_code": 0,
+  "elapsed_seconds": 5.267
+}

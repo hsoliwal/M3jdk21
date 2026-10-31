@@ -827,10 +827,10 @@ class Invariance : public StackObj {
   }
 };
 
-//------------------------------is_range_check_if -----------------------------------
-// Returns true if the predicate of iff is in "scale*iv + offset u< load_range(ptr)" format
-// Note: this function is particularly designed for loop predication. We require load_range
-//       and offset to be loop invariant computed on the fly by "invar"
+// Returns true if the predicate has the form
+//     scale*iv + offset <u R
+// where scale and offset are loop invariant and R >= 0.
+// Note: This is used by Loop Predication and PhaseIdealLoop::extract_long_range_check().
 bool IdealLoopTree::is_range_check_if(IfProjNode* if_success_proj, PhaseIdealLoop *phase, BasicType bt, Node *iv, Node *&range,
                                       Node *&offset, jlong &scale) const {
   IfNode* iff = if_success_proj->in(0)->as_If();
@@ -888,20 +888,23 @@ bool IdealLoopTree::is_range_check_if(IfProjNode* if_success_proj, PhaseIdealLoo
     return false;
   }
   range = cmp->in(2);
+
+  // Now we check the condition R >= 0 from the method comment.
   if (range->Opcode() != Op_LoadRange) {
     const TypeInteger* tinteger = phase->_igvn.type(range)->isa_integer(bt);
     if (tinteger == nullptr || tinteger->empty() || tinteger->lo_as_long() < 0) {
-      // Allow predication on positive values that aren't LoadRanges.
-      // This allows optimization of loops where the length of the
-      // array is a known value and doesn't need to be loaded back
-      // from the array.
+      // R is not proven to be non-negative. Bail out.
       return false;
     }
   } else {
+    // R = LoadRange are always non-negative.
     assert(bt == T_INT, "no LoadRange for longs");
   }
   scale  = 0;
   offset = nullptr;
+  // Now check the form
+  //     scale*iv + offset <u R
+  // from the method comment.
   if (!phase->is_scaled_iv_plus_offset(cmp->in(1), iv, bt, &scale, &offset)) {
     return false;
   }
@@ -1035,9 +1038,10 @@ BoolNode* PhaseIdealLoop::rc_predicate(IdealLoopTree* loop, Node* ctrl, int scal
     // Check if (scale * max_idx_expr) may overflow
     const TypeInt* scale_type = TypeInt::make(scale);
     MulINode* mul = new MulINode(max_idx_expr, con_scale);
-    idx_type = (TypeInt*)mul->mul_ring(idx_type, scale_type);
-    if (overflow || TypeInt::INT->higher_equal(idx_type)) {
+
+    if (overflow || MulINode::does_overflow(idx_type, scale_type)) {
       // May overflow
+      idx_type = TypeInt::INT;
       mul->destruct(&_igvn);
       if (!overflow) {
         max_idx_expr = new ConvI2LNode(max_idx_expr);
@@ -1050,6 +1054,7 @@ BoolNode* PhaseIdealLoop::rc_predicate(IdealLoopTree* loop, Node* ctrl, int scal
     } else {
       // No overflow possible
       max_idx_expr = mul;
+      idx_type = (TypeInt*)mul->mul_ring(idx_type, scale_type);
     }
     register_new_node(max_idx_expr, ctrl);
   }
@@ -1144,7 +1149,7 @@ bool PhaseIdealLoop::loop_predication_should_follow_branches(IdealLoopTree* loop
         CountedLoopNode* cl = head->as_CountedLoop();
         if (cl->phi() != nullptr) {
           const TypeInt* t = _igvn.type(cl->phi())->is_int();
-          float worst_case_trip_cnt = ((float)t->_hi - t->_lo) / ABS(cl->stride_con());
+          float worst_case_trip_cnt = ((float)t->_hi - t->_lo) / ABS((float)cl->stride_con());
           if (worst_case_trip_cnt < loop_trip_cnt) {
             loop_trip_cnt = worst_case_trip_cnt;
           }
@@ -1369,6 +1374,7 @@ bool PhaseIdealLoop::loop_predication_impl_helper(IdealLoopTree* loop, IfProjNod
     return false;
   }
   BoolNode* bol = test->as_Bool();
+  bool range_check_predicate = false;
   if (invar.is_invariant(bol)) {
     // Invariant test
     new_predicate_proj = create_new_if_for_predicate(parse_predicate_proj, nullptr,
@@ -1397,6 +1403,7 @@ bool PhaseIdealLoop::loop_predication_impl_helper(IdealLoopTree* loop, IfProjNod
     }
 #endif
   } else if (cl != nullptr && loop->is_range_check_if(if_success_proj, this, invar DEBUG_ONLY(COMMA parse_predicate_proj))) {
+    range_check_predicate = true;
     // Range check for counted loops
     assert(if_success_proj->is_IfTrue(), "trap must be on false projection for a range check");
     const Node*    cmp    = bol->in(1)->as_Cmp();
@@ -1452,7 +1459,7 @@ bool PhaseIdealLoop::loop_predication_impl_helper(IdealLoopTree* loop, IfProjNod
     IfNode* upper_bound_iff = upper_bound_proj->in(0)->as_If();
     _igvn.hash_delete(upper_bound_iff);
     upper_bound_iff->set_req(1, upper_bound_bol);
-    if (TraceLoopPredicate) tty->print_cr("upper bound check if: %d", lower_bound_iff->_idx);
+    if (TraceLoopPredicate) tty->print_cr("upper bound check if: %d", upper_bound_iff->_idx);
 
     // Fall through into rest of the cleanup code which will move any dependent nodes to the skeleton predicates of the
     // upper bound test. We always need to create skeleton predicates in order to properly remove dead loops when later
@@ -1476,7 +1483,10 @@ bool PhaseIdealLoop::loop_predication_impl_helper(IdealLoopTree* loop, IfProjNod
   invar.map_ctrl(if_success_proj, new_predicate_proj); // so that invariance test can be appropriate
 
   // Eliminate the old If in the loop body
-  dominated_by(new_predicate_proj, iff, if_success_proj->_con != new_predicate_proj->_con);
+  // If a range check is eliminated, data dependent nodes (Load and range check CastII nodes) are now dependent on 2
+  // Hoisted Check Predicates (one for the start of the loop, one for the end) but we can only keep track of one control
+  // dependency: pin the data dependent nodes.
+  dominated_by(new_predicate_proj, iff, if_success_proj->_con != new_predicate_proj->_con, range_check_predicate);
 
   C->set_major_progress();
   return true;

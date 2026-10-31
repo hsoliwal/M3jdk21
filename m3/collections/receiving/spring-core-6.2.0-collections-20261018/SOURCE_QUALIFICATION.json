@@ -1,0 +1,56 @@
+{
+  "schema": "m3-spring-namespace-source-qualification-v1",
+  "sourceRepository": "spring-projects/spring-framework",
+  "sourceCommit": "5024bb72279188f1d0dcfe19e8abdd4bdb9887c8",
+  "sourceFiles": 27,
+  "bodySources": 26,
+  "packageMetadataSources": 1,
+  "namespace": {
+    "source": "org.springframework.util",
+    "target": "com.m3.collections.spring"
+  },
+  "sourceOnlyTree": "94de7f94d9388a4ac25739d0d3b80e878b4f3503",
+  "implementationTree": "e81467780160c2cfa7714aee3a8b970d80fc7972",
+  "javaTree": "fabc9fc957fe50ce3e57f1340ec16ec345f8922c",
+  "javaTreeExact": true,
+  "sourceCount": 27,
+  "licenseIncluded": true,
+  "qualifiedRecipe": "OpenRewrite8.17.1 ChangePackage; exact raw inverse, class-body checks and fresh fixed points",
+  "compile": {
+    "sources": 27,
+    "classfiles": 89,
+    "result": "PASS on original Java17 API baseline using JDK21",
+    "strictWarnings": "Exactly five original warnings preserved; successful profile excludes only their two known categories"
+  },
+  "APIComparison": {
+    "bodyClasses": 88,
+    "publicProtectedGenericBridgeSymbols": 954,
+    "result": "PASS under namespace mapping; platform interface Class identities retained"
+  },
+  "packageAnnotations": "Actual NonNullApi/NonNullFields identities and pinned provider origin PASS",
+  "externalSpringTypes": [
+    "org.springframework.lang.NonNullApi",
+    "org.springframework.lang.NonNullFields",
+    "org.springframework.lang.Nullable",
+    "org.springframework.lang.Contract (CLASS retention)"
+  ],
+  "dependencyChecks": "jdeps multi-release17 and21 PASS; no unported org.springframework.util runtime helper edge",
+  "pending": [
+    "FileSystemUtils Javadoc-only link and Javadoc build",
+    "Runtime behavior and original donor tests",
+    "Original node/reference entries, Java backing maps and ClassUtils/ReflectionUtils global caches",
+    "Array/index/offset/mask storage conversion and JNI",
+    "Full Spring and five-library scope"
+  ],
+  "review": {
+    "result": "PASS: helper exited0; findings[]",
+    "engine": "Codex gpt-5.6-sol/high",
+    "scope": "Transformation recipes, records, ownership, licensing and source custody. All86 bodies separately machine-hashed; no manual all-body/runtime claim.",
+    "target": "a68678bc224343bc1354fcff218aa312fb84d0f7",
+    "reportSHA256": "e73be3776706e11090b278a37bdf81821a610a1d92ec63865ad99d7651267dbd",
+    "commandReceiptSHA256": "fddeabcfe46f21cd8754a007613183296c1d372a85d71fd5189b3e8bd747b252",
+    "elapsedSeconds": 253.265
+  },
+  "metadataLicense": "Apache-2.0",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors"
+}

@@ -1,0 +1,431 @@
+Compiled from "Pattern.java"
+public final class java.util.regex.Pattern implements java.io.Serializable {
+  public static final int UNIX_LINES;
+    descriptor: I
+  public static final int CASE_INSENSITIVE;
+    descriptor: I
+  public static final int COMMENTS;
+    descriptor: I
+  public static final int MULTILINE;
+    descriptor: I
+  public static final int LITERAL;
+    descriptor: I
+  public static final int DOTALL;
+    descriptor: I
+  public static final int UNICODE_CASE;
+    descriptor: I
+  public static final int CANON_EQ;
+    descriptor: I
+  public static final int UNICODE_CHARACTER_CLASS;
+    descriptor: I
+  private static final int ALL_FLAGS;
+    descriptor: I
+  private static final long serialVersionUID;
+    descriptor: J
+  private java.lang.String pattern;
+    descriptor: Ljava/lang/String;
+  private int flags;
+    descriptor: I
+  private transient int flags0;
+    descriptor: I
+  private volatile transient boolean compiled;
+    descriptor: Z
+  private transient java.lang.String normalizedPattern;
+    descriptor: Ljava/lang/String;
+  transient java.util.regex.Pattern$Node root;
+    descriptor: Ljava/util/regex/Pattern$Node;
+  transient java.util.regex.Pattern$Node matchRoot;
+    descriptor: Ljava/util/regex/Pattern$Node;
+  transient jdk.internal.mindex.M3TQ m3Tq;
+    descriptor: Ljdk/internal/mindex/M3TQ;
+  transient int[] buffer;
+    descriptor: [I
+  transient java.util.regex.Pattern$CharPredicate predicate;
+    descriptor: Ljava/util/regex/Pattern$CharPredicate;
+  volatile transient java.util.Map<java.lang.String, java.lang.Integer> namedGroups;
+    descriptor: Ljava/util/Map;
+  transient java.util.regex.Pattern$GroupHead[] groupNodes;
+    descriptor: [Ljava/util/regex/Pattern$GroupHead;
+  transient java.util.List<java.util.regex.Pattern$Node> topClosureNodes;
+    descriptor: Ljava/util/List;
+  transient int localTCNCount;
+    descriptor: I
+  transient boolean hasGroupRef;
+    descriptor: Z
+  private transient int[] temp;
+    descriptor: [I
+  transient int capturingGroupCount;
+    descriptor: I
+  transient int localCount;
+    descriptor: I
+  private transient int cursor;
+    descriptor: I
+  private transient int patternLength;
+    descriptor: I
+  private transient boolean hasSupplementary;
+    descriptor: Z
+  static final int MAX_REPS;
+    descriptor: I
+  static final java.util.regex.Pattern$Node accept;
+    descriptor: Ljava/util/regex/Pattern$Node;
+  static final java.util.regex.Pattern$Node lastAccept;
+    descriptor: Ljava/util/regex/Pattern$Node;
+  static final boolean $assertionsDisabled;
+    descriptor: Z
+  public static java.util.regex.Pattern compile(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/util/regex/Pattern;
+
+  public static java.util.regex.Pattern compile(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)Ljava/util/regex/Pattern;
+
+  public java.lang.String pattern();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public java.util.regex.Matcher matcher(java.lang.CharSequence);
+    descriptor: (Ljava/lang/CharSequence;)Ljava/util/regex/Matcher;
+
+  public int flags();
+    descriptor: ()I
+
+  public static boolean matches(java.lang.String, java.lang.CharSequence);
+    descriptor: (Ljava/lang/String;Ljava/lang/CharSequence;)Z
+
+  public java.lang.String[] split(java.lang.CharSequence, int);
+    descriptor: (Ljava/lang/CharSequence;I)[Ljava/lang/String;
+
+  public java.lang.String[] splitWithDelimiters(java.lang.CharSequence, int);
+    descriptor: (Ljava/lang/CharSequence;I)[Ljava/lang/String;
+
+  private java.lang.String[] split(java.lang.CharSequence, int, boolean);
+    descriptor: (Ljava/lang/CharSequence;IZ)[Ljava/lang/String;
+
+  public java.lang.String[] split(java.lang.CharSequence);
+    descriptor: (Ljava/lang/CharSequence;)[Ljava/lang/String;
+
+  public static java.lang.String quote(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+
+  private void readObject(java.io.ObjectInputStream) throws java.io.IOException, java.lang.ClassNotFoundException;
+    descriptor: (Ljava/io/ObjectInputStream;)V
+
+  private java.util.regex.Pattern(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)V
+
+  private static java.lang.String normalize(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+
+  private static void normalizeSlice(java.lang.String, int, int, java.lang.StringBuilder);
+    descriptor: (Ljava/lang/String;IILjava/lang/StringBuilder;)V
+
+  private static void normalizeClazz(java.lang.String, int, int, java.lang.StringBuilder);
+    descriptor: (Ljava/lang/String;IILjava/lang/StringBuilder;)V
+
+  private static void produceEquivalentAlternation(java.lang.String, java.util.Set<java.lang.String>);
+    descriptor: (Ljava/lang/String;Ljava/util/Set;)V
+
+  private static java.lang.String[] producePermutations(java.lang.String);
+    descriptor: (Ljava/lang/String;)[Ljava/lang/String;
+
+  private static int getClass(int);
+    descriptor: (I)I
+
+  private static java.lang.String composeOneStep(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+
+  private void RemoveQEQuoting();
+    descriptor: ()V
+
+  private void compile();
+    descriptor: ()V
+
+  private java.util.Map<java.lang.String, java.lang.Integer> namedGroupsMap();
+    descriptor: ()Ljava/util/Map;
+
+  public java.util.Map<java.lang.String, java.lang.Integer> namedGroups();
+    descriptor: ()Ljava/util/Map;
+
+  private boolean has(int);
+    descriptor: (I)Z
+
+  private void accept(int, java.lang.String);
+    descriptor: (ILjava/lang/String;)V
+
+  private void mark(int);
+    descriptor: (I)V
+
+  private int peek();
+    descriptor: ()I
+
+  private int read();
+    descriptor: ()I
+
+  private int readEscaped();
+    descriptor: ()I
+
+  private int next();
+    descriptor: ()I
+
+  private int nextEscaped();
+    descriptor: ()I
+
+  private int peekPastWhitespace(int);
+    descriptor: (I)I
+
+  private int parsePastWhitespace(int);
+    descriptor: (I)I
+
+  private int parsePastLine();
+    descriptor: ()I
+
+  private int peekPastLine();
+    descriptor: ()I
+
+  private boolean isLineSeparator(int);
+    descriptor: (I)Z
+
+  private int skip();
+    descriptor: ()I
+
+  private void unread();
+    descriptor: ()V
+
+  private java.util.regex.PatternSyntaxException error(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/util/regex/PatternSyntaxException;
+
+  private boolean findSupplementary(int, int);
+    descriptor: (II)Z
+
+  private static final boolean isSupplementary(int);
+    descriptor: (I)Z
+
+  private java.util.regex.Pattern$Node expr(java.util.regex.Pattern$Node);
+    descriptor: (Ljava/util/regex/Pattern$Node;)Ljava/util/regex/Pattern$Node;
+
+  private java.util.regex.Pattern$Node sequence(java.util.regex.Pattern$Node);
+    descriptor: (Ljava/util/regex/Pattern$Node;)Ljava/util/regex/Pattern$Node;
+
+  private java.util.regex.Pattern$Node atom();
+    descriptor: ()Ljava/util/regex/Pattern$Node;
+
+  private void append(int, int);
+    descriptor: (II)V
+
+  private java.util.regex.Pattern$Node ref(int);
+    descriptor: (I)Ljava/util/regex/Pattern$Node;
+
+  private int escape(boolean, boolean, boolean);
+    descriptor: (ZZZ)I
+
+  private java.util.regex.Pattern$CharPredicate clazz(boolean);
+    descriptor: (Z)Ljava/util/regex/Pattern$CharPredicate;
+
+  private java.util.regex.Pattern$CharPredicate bitsOrSingle(java.util.regex.Pattern$BitClass, int);
+    descriptor: (Ljava/util/regex/Pattern$BitClass;I)Ljava/util/regex/Pattern$CharPredicate;
+
+  private java.util.regex.Pattern$CharPredicate single(int);
+    descriptor: (I)Ljava/util/regex/Pattern$CharPredicate;
+
+  private java.util.regex.Pattern$CharPredicate range(java.util.regex.Pattern$BitClass);
+    descriptor: (Ljava/util/regex/Pattern$BitClass;)Ljava/util/regex/Pattern$CharPredicate;
+
+  private java.util.regex.Pattern$CharPredicate family(boolean, boolean);
+    descriptor: (ZZ)Ljava/util/regex/Pattern$CharPredicate;
+
+  private java.util.regex.Pattern$CharProperty newCharProperty(java.util.regex.Pattern$CharPredicate);
+    descriptor: (Ljava/util/regex/Pattern$CharPredicate;)Ljava/util/regex/Pattern$CharProperty;
+
+  private java.lang.String groupname(int);
+    descriptor: (I)Ljava/lang/String;
+
+  private java.util.regex.Pattern$Node group0();
+    descriptor: ()Ljava/util/regex/Pattern$Node;
+
+  private java.util.regex.Pattern$Node createGroup(boolean);
+    descriptor: (Z)Ljava/util/regex/Pattern$Node;
+
+  private void addFlag();
+    descriptor: ()V
+
+  private void subFlag();
+    descriptor: ()V
+
+  private java.util.regex.Pattern$Qtype qtype();
+    descriptor: ()Ljava/util/regex/Pattern$Qtype;
+
+  private java.util.regex.Pattern$Node curly(java.util.regex.Pattern$Node, int);
+    descriptor: (Ljava/util/regex/Pattern$Node;I)Ljava/util/regex/Pattern$Node;
+
+  private java.util.regex.Pattern$Node closure(java.util.regex.Pattern$Node);
+    descriptor: (Ljava/util/regex/Pattern$Node;)Ljava/util/regex/Pattern$Node;
+
+  private int c();
+    descriptor: ()I
+
+  private int o();
+    descriptor: ()I
+
+  private int x();
+    descriptor: ()I
+
+  private int cursor();
+    descriptor: ()I
+
+  private void setcursor(int);
+    descriptor: (I)V
+
+  private int uxxxx();
+    descriptor: ()I
+
+  private int u();
+    descriptor: ()I
+
+  private int N();
+    descriptor: ()I
+
+  private static final int countChars(java.lang.CharSequence, int, int);
+    descriptor: (Ljava/lang/CharSequence;II)I
+
+  private static final int countCodePoints(java.lang.CharSequence);
+    descriptor: (Ljava/lang/CharSequence;)I
+
+  private java.util.regex.Pattern$Node newSlice(int[], int, boolean);
+    descriptor: ([IIZ)Ljava/util/regex/Pattern$Node;
+
+  private static boolean hasBaseCharacter(java.util.regex.Matcher, int, java.lang.CharSequence);
+    descriptor: (Ljava/util/regex/Matcher;ILjava/lang/CharSequence;)Z
+
+  private static java.util.regex.Pattern$CharPredicate and(java.util.regex.Pattern$CharPredicate, java.util.regex.Pattern$CharPredicate, boolean);
+    descriptor: (Ljava/util/regex/Pattern$CharPredicate;Ljava/util/regex/Pattern$CharPredicate;Z)Ljava/util/regex/Pattern$CharPredicate;
+
+  private static java.util.regex.Pattern$CharPredicate union(java.util.regex.Pattern$CharPredicate, java.util.regex.Pattern$CharPredicate, boolean);
+    descriptor: (Ljava/util/regex/Pattern$CharPredicate;Ljava/util/regex/Pattern$CharPredicate;Z)Ljava/util/regex/Pattern$CharPredicate;
+
+  private static java.util.regex.Pattern$CharPredicate union(java.util.regex.Pattern$CharPredicate, java.util.regex.Pattern$CharPredicate, java.util.regex.Pattern$CharPredicate, boolean);
+    descriptor: (Ljava/util/regex/Pattern$CharPredicate;Ljava/util/regex/Pattern$CharPredicate;Ljava/util/regex/Pattern$CharPredicate;Z)Ljava/util/regex/Pattern$CharPredicate;
+
+  private static java.util.regex.Pattern$CharPredicate negate(java.util.regex.Pattern$CharPredicate);
+    descriptor: (Ljava/util/regex/Pattern$CharPredicate;)Ljava/util/regex/Pattern$CharPredicate;
+
+  static java.util.regex.Pattern$BmpCharPredicate VertWS();
+    descriptor: ()Ljava/util/regex/Pattern$BmpCharPredicate;
+
+  static java.util.regex.Pattern$BmpCharPredicate HorizWS();
+    descriptor: ()Ljava/util/regex/Pattern$BmpCharPredicate;
+
+  static java.util.regex.Pattern$CharPredicate ALL();
+    descriptor: ()Ljava/util/regex/Pattern$CharPredicate;
+
+  static java.util.regex.Pattern$CharPredicate DOT();
+    descriptor: ()Ljava/util/regex/Pattern$CharPredicate;
+
+  static java.util.regex.Pattern$CharPredicate UNIXDOT();
+    descriptor: ()Ljava/util/regex/Pattern$CharPredicate;
+
+  static java.util.regex.Pattern$CharPredicate SingleS(int);
+    descriptor: (I)Ljava/util/regex/Pattern$CharPredicate;
+
+  static java.util.regex.Pattern$BmpCharPredicate Single(int);
+    descriptor: (I)Ljava/util/regex/Pattern$BmpCharPredicate;
+
+  static java.util.regex.Pattern$BmpCharPredicate SingleI(int, int);
+    descriptor: (II)Ljava/util/regex/Pattern$BmpCharPredicate;
+
+  static java.util.regex.Pattern$CharPredicate SingleU(int);
+    descriptor: (I)Ljava/util/regex/Pattern$CharPredicate;
+
+  private static boolean inRange(int, int, int);
+    descriptor: (III)Z
+
+  static java.util.regex.Pattern$CharPredicate Range(int, int);
+    descriptor: (II)Ljava/util/regex/Pattern$CharPredicate;
+
+  static java.util.regex.Pattern$CharPredicate CIRange(int, int);
+    descriptor: (II)Ljava/util/regex/Pattern$CharPredicate;
+
+  static java.util.regex.Pattern$CharPredicate CIRangeU(int, int);
+    descriptor: (II)Ljava/util/regex/Pattern$CharPredicate;
+
+  public java.util.function.Predicate<java.lang.String> asPredicate();
+    descriptor: ()Ljava/util/function/Predicate;
+
+  public java.util.function.Predicate<java.lang.String> asMatchPredicate();
+    descriptor: ()Ljava/util/function/Predicate;
+
+  public java.util.stream.Stream<java.lang.String> splitAsStream(java.lang.CharSequence);
+    descriptor: (Ljava/lang/CharSequence;)Ljava/util/stream/Stream;
+
+  private boolean lambda$asMatchPredicate$22(java.lang.String);
+    descriptor: (Ljava/lang/String;)Z
+
+  private boolean lambda$asPredicate$21(java.lang.String);
+    descriptor: (Ljava/lang/String;)Z
+
+  private static boolean lambda$CIRangeU$20(int, int, int);
+    descriptor: (III)Z
+
+  private static boolean lambda$CIRange$19(int, int, int);
+    descriptor: (III)Z
+
+  private static boolean lambda$Range$18(int, int, int);
+    descriptor: (III)Z
+
+  private static boolean lambda$Range$17(int, int, int);
+    descriptor: (III)Z
+
+  private static boolean lambda$SingleU$16(int, int);
+    descriptor: (II)Z
+
+  private static boolean lambda$SingleI$15(int, int, int);
+    descriptor: (III)Z
+
+  private static boolean lambda$Single$14(int, int);
+    descriptor: (II)Z
+
+  private static boolean lambda$SingleS$13(int, int);
+    descriptor: (II)Z
+
+  private static boolean lambda$UNIXDOT$12(int);
+    descriptor: (I)Z
+
+  private static boolean lambda$DOT$11(int);
+    descriptor: (I)Z
+
+  private static boolean lambda$ALL$10(int);
+    descriptor: (I)Z
+
+  private static boolean lambda$HorizWS$9(int);
+    descriptor: (I)Z
+
+  private static boolean lambda$VertWS$8(int);
+    descriptor: (I)Z
+
+  private static boolean lambda$negate$7(java.util.regex.Pattern$CharPredicate, int);
+    descriptor: (Ljava/util/regex/Pattern$CharPredicate;I)Z
+
+  private static boolean lambda$union$6(java.util.regex.Pattern$CharPredicate, java.util.regex.Pattern$CharPredicate, java.util.regex.Pattern$CharPredicate, int);
+    descriptor: (Ljava/util/regex/Pattern$CharPredicate;Ljava/util/regex/Pattern$CharPredicate;Ljava/util/regex/Pattern$CharPredicate;I)Z
+
+  private static boolean lambda$union$5(java.util.regex.Pattern$CharPredicate, java.util.regex.Pattern$CharPredicate, java.util.regex.Pattern$CharPredicate, int);
+    descriptor: (Ljava/util/regex/Pattern$CharPredicate;Ljava/util/regex/Pattern$CharPredicate;Ljava/util/regex/Pattern$CharPredicate;I)Z
+
+  private static boolean lambda$union$4(java.util.regex.Pattern$CharPredicate, java.util.regex.Pattern$CharPredicate, int);
+    descriptor: (Ljava/util/regex/Pattern$CharPredicate;Ljava/util/regex/Pattern$CharPredicate;I)Z
+
+  private static boolean lambda$union$3(java.util.regex.Pattern$CharPredicate, java.util.regex.Pattern$CharPredicate, int);
+    descriptor: (Ljava/util/regex/Pattern$CharPredicate;Ljava/util/regex/Pattern$CharPredicate;I)Z
+
+  private static boolean lambda$and$2(java.util.regex.Pattern$CharPredicate, java.util.regex.Pattern$CharPredicate, int);
+    descriptor: (Ljava/util/regex/Pattern$CharPredicate;Ljava/util/regex/Pattern$CharPredicate;I)Z
+
+  private static boolean lambda$and$1(java.util.regex.Pattern$CharPredicate, java.util.regex.Pattern$CharPredicate, int);
+    descriptor: (Ljava/util/regex/Pattern$CharPredicate;Ljava/util/regex/Pattern$CharPredicate;I)Z
+
+  private static void lambda$normalizeSlice$0(java.lang.StringBuilder, java.lang.String);
+    descriptor: (Ljava/lang/StringBuilder;Ljava/lang/String;)V
+
+  static {};
+    descriptor: ()V
+}

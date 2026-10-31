@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FiveLibraryIndexViews20261017
+displayName: M3 five-provider indexed state-mask views
+description: Admit two source-sealed Java 21 postimages without replacing existing M3 owners or vendor contracts.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-five-library-index-views-20261017

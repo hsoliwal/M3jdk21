@@ -1,0 +1,32 @@
+{"stage": "test", "commandIndex": 1, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin/mvn"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------< com.synexia.verification:mre-packed-current-992-20261005 >------
+[INFO] Building M3 packed current992 exact-source qualification 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-cli) @ mre-packed-current-992-20261005 ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.common.collections.jdk.PackedLazyTreeMapTest
+PACKED_LAZY_STATE_OK null/reuse/growth/failure/recursion/mutation/cancellation/events/system-progress
+PACKED_LAZY_TREE_OK eager/lazy AVL differential=20000 views/entries/flags/progress/events
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.444 s -- in com.synexia.common.collections.jdk.PackedLazyTreeMapTest
+[INFO] Running com.synexia.common.collections.jdk.PackedLazyCallbackSafetyTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.124 s -- in com.synexia.common.collections.jdk.PackedLazyCallbackSafetyTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.092 s
+[INFO] Finished at: 2026-10-05T11:27:41+02:00
+[INFO] ------------------------------------------------------------------------
+{"status": "ACTUAL_SUREFIRE_REPORTS", "totals": {"tests": 14, "failures": 0, "errors": 0, "skipped": 0}, "suites": {"com.synexia.common.collections.jdk.PackedLazyCallbackSafetyTest": {"counts": {"tests": 13, "failures": 0, "errors": 0, "skipped": 0}, "report": "TEST-com.synexia.common.collections.jdk.PackedLazyCallbackSafetyTest.xml", "sha256": "71dbefe03a8d4ea81b46c26978a651e45609b91a2d3204817da3daea4de92a8d"}, "com.synexia.common.collections.jdk.PackedLazyTreeMapTest": {"counts": {"tests": 1, "failures": 0, "errors": 0, "skipped": 0}, "report": "TEST-com.synexia.common.collections.jdk.PackedLazyTreeMapTest.xml", "sha256": "af7a29dc2917b23f682454ec63fc0b37bcf85dee2e2e7dac2b0196e070a1d441"}}}

@@ -1,0 +1,16 @@
+{
+  "refines_existing_target": "jdk.internal.mindex.M3TQ",
+  "existing_consumer": "java.lang.M3StringSearchPrecompute",
+  "target_parent": "a4415af418a9b0f21a06cd5801d238577fbb6eb7",
+  "recipe": "com.synexia.rewrite.M3TQArrayCompositionRecipe",
+  "recipe_commit": "e3adf09c8257dd3058f7a0736afb6af6cab20324",
+  "canonical_task": "synexia-openrewrite-recipes/recipes/m3jdk21-tq-primitive-composition-20261021",
+  "changes": ["primitive dynamic trigram staging", "immutable key-array sharing after exact seam proof"],
+  "native_role": "additive verification-oracle binding, not production backend",
+  "new_payload_owner": false,
+  "new_string_tuple_dispatch": false,
+  "public_descriptors": "unchanged",
+  "license": "retain current per-file notices; historical intake review not waived",
+  "status": "HOST_COMPONENT_QUALIFIED_FULL_JDK_PENDING",
+  "phase_advance": false
+}

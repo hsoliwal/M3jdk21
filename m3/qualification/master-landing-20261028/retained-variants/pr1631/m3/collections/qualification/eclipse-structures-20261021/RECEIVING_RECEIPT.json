@@ -1,0 +1,270 @@
+{
+  "schema": "M3_RECEIVING_CUSTODY_V1",
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "spdx_license_identifier": "Apache-2.0",
+  "status": "PREPARED_FROM_RECEIVED_SDK_OUTPUTS",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "20ed2a74122214ea301fc70fe5dac1d61f85f822",
+    "pull_request": "https://github.com/hsoliwal/com.synexia/pull/12639",
+    "crate": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021"
+  },
+  "product_repository": "hsoliwal/M3JDK21",
+  "bases": {
+    "qualified_source_commit": "2779aba3f98f31c324be43f731be7914e1a05935",
+    "publication_parent": "2779aba3f98f31c324be43f731be7914e1a05935",
+    "publication_base_tree": "91924b99946e1fb26c2447a332c59d997ff3baa9",
+    "base_branch": "master",
+    "branch": "m3/eclipse-collections-20261021-b38a"
+  },
+  "sdk_selections": [
+    {
+      "selection": "collections",
+      "recipe": "com.synexia.m3jdk.EclipseStructures20261021.collections",
+      "sdk_tests_passed": 8,
+      "qualified_target_count": 9,
+      "outputs_in_this_pr": 9,
+      "full_selection_output_root_sha256": "3d3b1d18b4e3c769d56308cfc58620efea2355f2c778f738bc33659ee940e937",
+      "actual_receiving_fixedpoint_changes": 0
+    },
+    {
+      "selection": "metadata",
+      "recipe": "com.synexia.m3jdk.EclipseStructures20261021.metadata",
+      "sdk_tests_passed": 8,
+      "qualified_target_count": 5,
+      "outputs_in_this_pr": 2,
+      "full_selection_output_root_sha256": "dd7ac4c0b5f662f64ed756df6ea6c69f2de081206b63e2b91a80c356f9622fa7",
+      "actual_receiving_fixedpoint_changes": 0
+    }
+  ],
+  "source_application": "Existing canonical OpenRewrite SDK results and receiving adapter; this receipt alone is authored metadata.",
+  "outputs": [
+    {
+      "path": "m3/collections/algorithm-catalog/eclipse-structures-20261021.tsv",
+      "selection": "metadata",
+      "before_sha256": "ABSENT",
+      "sha256": "aff8cbc734d5723f825c9fb4af172283f8942fe8c0cab5a693be30efd4dc8f30",
+      "git_blob": "62db6ca4a510992f1c88e2433760d2c2f7384ff9",
+      "bytes": 6107
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "selection": "collections",
+      "before_sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
+      "sha256": "9d1af9b76972a505abea14faf59a9aaa384f2227094a7ca4e0d6a944679ba762",
+      "git_blob": "1194af8b5bdb6c57081163890f049a9729e1843f",
+      "bytes": 32198
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "selection": "collections",
+      "before_sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178",
+      "sha256": "d6b88f4579c798b8715dbe7da1a41d33e0bd1329a2d518b23a20981f70b344a5",
+      "git_blob": "b1f77d8d02176ba540f44c5c97b39a0f8ec512bb",
+      "bytes": 25756
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+      "selection": "collections",
+      "before_sha256": "15c85e74a51a716af1b11038c05263b83b1a1ea02f345bc3838d661a158fd80f",
+      "sha256": "3b117a531afd39f071fda04796684084812371982295a508270e58bfb70a2430",
+      "git_blob": "14674f07013af8bb4b4a8d4bc9450e6b7394290d",
+      "bytes": 9084
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_signal_order_jni.c",
+      "selection": "collections",
+      "before_sha256": "e7a5991f5be2e0bad99400ff477a1c03ec9d1d8e1236f9faf366485f94966ed5",
+      "sha256": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22",
+      "git_blob": "ebd380c52bc2536d7b5dce9bc84dd72574181895",
+      "bytes": 3295
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java",
+      "selection": "collections",
+      "before_sha256": "ABSENT",
+      "sha256": "558bcb65249fba80faa5ddb00d138566132c13acfd3c6e67763c78fa1acd5fd8",
+      "git_blob": "d1273eb57076612ae33e4d92b80953c4598b9ddb",
+      "bytes": 13570
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionTest.java",
+      "selection": "collections",
+      "before_sha256": "ABSENT",
+      "sha256": "5ff4d5d15263310027c66eac8d595c62161fdc20623b42b4f5265a77dab4cedb",
+      "git_blob": "2541f35dea93ccc80e38d4a03a2b02ee5dc0d457",
+      "bytes": 333
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java",
+      "selection": "collections",
+      "before_sha256": "ABSENT",
+      "sha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4",
+      "git_blob": "dd77920695fad1bc870dec44d3f68b962af78c7c",
+      "bytes": 3279
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformContract.java",
+      "selection": "collections",
+      "before_sha256": "ABSENT",
+      "sha256": "dd85a7c4b19364cc9b91ecf581abb33bf613435aec0873319f7082649dbdfbac",
+      "git_blob": "83f8f678e93d34d9032dd953549fa9ec6f9aaaf8",
+      "bytes": 8115
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformTest.java",
+      "selection": "collections",
+      "before_sha256": "ABSENT",
+      "sha256": "482d0d75e1b926b2da7013f8f572b9559738f18e8831ab0b398dcb06825071d8",
+      "git_blob": "a52ab654e11444632ca3929f02dfe4db51010a71",
+      "bytes": 311
+    },
+    {
+      "path": "m3/docs/name-mapping.d/eclipse-collections-20261021.json",
+      "selection": "metadata",
+      "before_sha256": "ABSENT",
+      "sha256": "2201aae2f7a422829c62bbbe3f6fd4bd1545c60611a5806b2faee9cd1b0f5224",
+      "git_blob": "6c8b6b774354d751bd23a1c29a926eae09a6eb0c",
+      "bytes": 2642
+    }
+  ],
+  "validation": {
+    "module_runs": {
+      "baseline-002": {
+        "status": "BASELINE_DEFECTS_REPRODUCED",
+        "goal": "verify",
+        "exit": 1,
+        "tests": 475,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 2,
+        "pom_unchanged": true,
+        "original_pom_sha256": "7308f1db65883601ab9645b4d824178773d1a815fe9b644f2ae59f5513867573"
+      },
+      "candidate-002": {
+        "status": "PASS",
+        "goal": "verify",
+        "exit": 0,
+        "tests": 477,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 2,
+        "pom_unchanged": true,
+        "original_pom_sha256": "7308f1db65883601ab9645b4d824178773d1a815fe9b644f2ae59f5513867573"
+      },
+      "received-001": {
+        "status": "PASS",
+        "goal": "install",
+        "exit": 0,
+        "tests": 477,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 2,
+        "pom_unchanged": true,
+        "original_pom_sha256": "7308f1db65883601ab9645b4d824178773d1a815fe9b644f2ae59f5513867573"
+      }
+    },
+    "assertions_per_run": {
+      "java": 417033,
+      "jni_release": 417038,
+      "jni_ubsan": 417038,
+      "filtered": 1346
+    },
+    "matching_navigation_traces": 1008,
+    "received_java_jni": "PASS",
+    "native_modes": [
+      "release-Xcheck:jni",
+      "UBSan-Xcheck:jni"
+    ],
+    "jni_export": "Java_com_m3_collections_M3SignalOrderNative_sort0",
+    "public_descriptors_and_jni_header": "EXACT_MATCH_BASELINE",
+    "native_module_skips": [
+      "M3FilteredSplitsMaskSpansTest.allNativeBackendsAreRequiredByTheFullLane",
+      "M3FilteredSplitsMaskSpansTest.maskSpanCheckedJniOracle"
+    ],
+    "overlap": "PR #1616 contains the same four read-only overrides; cursor repair and radix work are distinct. No supersession claim."
+  },
+  "limits": [
+    "Two default-module native-dependent mask/span tests remain skipped; bounded radix JNI is separate.",
+    "Range-construction comparator failures remain outside the cursor repair.",
+    "Native allocation-failure injection, other platforms and a complete installed JDK/SDK image remain pending.",
+    "Varying-key JNI timing is inconclusive; no universal CPU or retained-memory improvement claim.",
+    "Finite evidence does not advance global receiving/family phases or replace product-owned acceptance.",
+    "This custody receipt is prepared locally; publication and remote Git-tree readback are separate actions."
+  ],
+  "evidence": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/SDK_QUALIFICATION.json",
+      "sha256": "90212245a6b8e85e7c54812863c5f456bf60513304c68b77f918d8e714c45544"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/contract/collections/TARGETS.json",
+      "sha256": "f377a568fb7dc0a9a3a0ccecace84d28ca57a961c0b9e6d2cc93c90e61d6a5a9"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/contract/metadata/TARGETS.json",
+      "sha256": "4985e2411eca5e0622c7ec8bbb246b3ec6f7ecd20499240429716a776932f798"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/evidence/collections/module-evidence/baseline-002/RECEIPT.json",
+      "sha256": "3de04247764ab8570eb4fe664cf3f599add3e5988a6ff3d5d3587f60efcbcd93"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/evidence/collections/module-evidence/candidate-002/RECEIPT.json",
+      "sha256": "27069f763a5e6fd1762be56fbd4fd1f286522703cec28c154ffc69a2a31bd58d"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/evidence/collections/module-evidence/received-001/RECEIPT.json",
+      "sha256": "6f72c1bf0dec9cfa89c70b2e98b6edcdf2fcbd77f9e62148af9247446ffd29d6"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/evidence/collections/qualification/001/RECEIPT.json",
+      "sha256": "a0174f767b663a5a55ee38320278347ef06d315fe2171dfdff3daf0876cbc76a"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/evidence/collections/qualification/001/candidate-filter-contract.stdout",
+      "sha256": "9596a0209f05c88be6dad46312f75c2f5df24b9e81d1b321568b5175e70986ca"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/evidence/collections/qualification/001/candidate-native-radix.stdout",
+      "sha256": "b0a2a442acbc380176b76380ca85dbc439ddf2d7bd4301a0a5487932fdd48eda"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/evidence/collections/qualification/001/candidate-radix-java.stdout",
+      "sha256": "cca24523000a25b7f8d6ad47090eef7c25756a37d4a7101ce1912f1745fabba7"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/evidence/collections/qualification/001/candidate-ubsan-radix.stdout",
+      "sha256": "b0a2a442acbc380176b76380ca85dbc439ddf2d7bd4301a0a5487932fdd48eda"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/evidence/collections/received/001/RECEIPT.json",
+      "sha256": "3bcdcbb629075f83bf945b8d6e9aa20f02aa3d228baded58e8f4b11bdf648e23"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/evidence/publication/remote-heads-001.json",
+      "sha256": "d38c03a5615a58a22817568415b4bc54997ec52cb0642aa7c37e32d275b970db"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/evidence/receiving/metadata-001/RECEIPT.json",
+      "sha256": "f14748b2d45531c81bcff995ded335624ce8cbf6490fa3afe07e4421aee5c959"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/evidence/receiving/source-001/RECEIPT.json",
+      "sha256": "ad5efacb12cdd0d047c1ff68ce09aca73b2f44d534a22c6e23c35ea9db18c79e"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/evidence/sdk/sdk-collections-002/actual-sdk-output/candidate/SDK_RESULTS.tsv",
+      "sha256": "e3eb077cdbdc753aaae3376a4e39aa191313be6c88d1bb2516264833a3b4f9b6"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/evidence/sdk/sdk-metadata-001/actual-sdk-output/candidate/SDK_RESULTS.tsv",
+      "sha256": "761d11260a46d78b4a9632c63e3a841388b4201d371381163cd76c4c22dd1b0f"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-eclipse-structures-20261021/receive.py",
+      "sha256": "02a713e52d4aec57e8754826cfad2205248a5e1a9873119004c13171da0dc2ea"
+    }
+  ],
+  "license_scope": "Apache-2.0 applies to this authored receipt. All received files retain their existing per-file rights and notices."
+}

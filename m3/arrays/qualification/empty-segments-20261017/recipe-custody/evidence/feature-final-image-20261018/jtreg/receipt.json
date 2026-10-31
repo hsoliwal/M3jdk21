@@ -1,0 +1,26 @@
+{
+  "schema": "M3_FEATURE_JTREG_EXECUTION_V1",
+  "command": [
+    "/tmp/m3-toolchain/jtreg/bin/jtreg",
+    "-jdk:/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk",
+    "-w:/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/work",
+    "-r:/workspace/scratch/2b4d1cb957a7/build-proof/feature-jtreg/report",
+    "-conc:2",
+    "-othervm",
+    "-Xmx512m",
+    "-Xcheck:jni",
+    "-Dm3.stock.jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1",
+    "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Object",
+    "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Runtime/M3RuntimeLegacyClient.java",
+    "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/lang/Runtime/M3RuntimeProgressFacade.java",
+    "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current/test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java"
+  ],
+  "exit": 0,
+  "seconds": 81.05041170120239,
+  "runtime_image": "/workspace/scratch/2b4d1cb957a7/M3jdk21-features/build/m3-feature-fastdebug/images/jdk",
+  "receiving_baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "build_source_identity_receipt": "build-proof/feature-source-identity-after-restoration.json",
+  "stock_jdk": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+  "scope": "Six existing Object tests plus Runtime progress, Runtime legacy client and ProgressJob; universal Object compatibility witness intentionally retains HOLD",
+  "log_sha256": "8e68dfd9936fd0c6072cf2d0057d7c176e4acf81590756a8e9147b720917deb6"
+}

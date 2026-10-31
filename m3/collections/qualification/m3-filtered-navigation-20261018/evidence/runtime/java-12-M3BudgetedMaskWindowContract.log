@@ -1,0 +1,2 @@
+/tmp/jdk-21.0.12.1+1/bin/java -ea -Xcheck:jni -Xmx512m -Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/empty-lib -cp /workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/test-classes com.m3.collections.M3BudgetedMaskWindowContract --missing
+EXPLICIT_NATIVE_REFUSAL_PASS --missing assertions=2

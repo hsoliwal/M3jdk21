@@ -1,0 +1,13 @@
+{
+  "command": [
+    "javap",
+    "-p",
+    "-s",
+    "/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/baseline/classes/javax/swing/text/GapContent$UndoPosRef.class"
+  ],
+  "exit": 0,
+  "log_sha256": "f1083c5266bcefead8fe761aab713d1d99c18599048268848ef4f9c44d050443",
+  "user_seconds": 0.38487,
+  "system_seconds": 0.055848999999999996,
+  "max_rss_kib_linux": 58752
+}

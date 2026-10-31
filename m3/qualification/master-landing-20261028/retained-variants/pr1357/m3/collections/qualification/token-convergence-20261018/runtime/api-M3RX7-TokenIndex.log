@@ -1,0 +1,26 @@
+Compiled from "M3RX7.java"
+public final class jdk.internal.mindex.M3RX7$TokenIndex {
+  public int tokenCount();
+    descriptor: ()I
+
+  public int initialState();
+    descriptor: ()I
+
+  public boolean isFinal(int);
+    descriptor: (I)Z
+
+  public int nextState(int, int);
+    descriptor: (II)I
+
+  public long allowedMaskWord(int, int);
+    descriptor: (II)J
+
+  public int allowedMaskWords();
+    descriptor: ()I
+
+  public long retainedPrimitiveBytes();
+    descriptor: ()J
+
+  public boolean matches(int[]);
+    descriptor: ([I)Z
+}

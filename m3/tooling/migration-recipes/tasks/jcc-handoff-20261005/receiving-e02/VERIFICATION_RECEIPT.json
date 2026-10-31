@@ -1,0 +1,45 @@
+{
+  "scope": "CANDIDATE_TOOLING_DEVELOPMENT_ONLY",
+  "destination_pin": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+  "exit_code": 0,
+  "toolchain": {
+    "jdk": "/workspace/scratch/877d9513c002/toolchains/jdk-21.0.2",
+    "maven": "/workspace/scratch/877d9513c002/toolchains/apache-maven-3.9.12/bin/mvn",
+    "offline_repository": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2"
+  },
+  "command": [
+    "mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2",
+    "-f",
+    "overlay/m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml",
+    "clean",
+    "verify"
+  ],
+  "inputs_unchanged_after_run": true,
+  "source_export_admitted": false,
+  "source_pass_evidence_transferred": false,
+  "jdk_acceptance": false,
+  "parent_99_percent_module_gate": "NOT_EXECUTED",
+  "remote_writes": false,
+  "epoch": 2,
+  "execution_epoch": "test, explicit corpus contract and all eight inputs frozen before Maven execution",
+  "concrete_gap_closed": "Explicit asserted distinct ascending and descending enumeration each executed with fresh composite, independently compiled and observed, and final maps compared.",
+  "result": {
+    "tests": "4",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "5.937"
+  },
+  "prior_epoch_inputs_and_evidence_unchanged": true,
+  "files": {
+    "STAGING_RECEIPT.json": "19ca333464debc4e70547660374b554308fae7ade7c0e7639e6397f59b801f86",
+    "CORPUS_CONTRACT.md": "40cec6db1b58dd19a0eaaaaf51396202db496188b755233883ec871f909d1a84",
+    "revision.diff": "2f35d7e9ef58679375485ba1c7c966ba6e4cf7bfe710e870a2fdc6844d8d1140",
+    "maven-verify.log": "673e9e8687b9bccbea5ed768a9ed97954fc208edd2a781338d80d574ad517cfc",
+    "overlay/m3/tooling/migration-recipes/verification/jcc-receiving/target/surefire-reports/TEST-com.m3.rewrite.atom.JccReceivingFixtureTest.xml": "98164bd35fccdb340016502bb6e3caa0fa9a3a6f9760d00054c1c817b7bff279"
+  }
+}

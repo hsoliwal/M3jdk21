@@ -1,0 +1,5 @@
+Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData
+/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/src/test/java/org.apache.opennlp.m3.probe/module-info.java:17: warning: [module] module name component m3 should avoid terminal digits
+module org.apache.opennlp.m3.probe {
+                         ^
+1 warning

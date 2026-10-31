@@ -1,0 +1,9 @@
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+/** Optional M3 generic filtered views and versioned primitive row projections. */
+module jdk.m3.collections {
+    exports jdk.m3.collections;
+    exports com.m3.util;
+}

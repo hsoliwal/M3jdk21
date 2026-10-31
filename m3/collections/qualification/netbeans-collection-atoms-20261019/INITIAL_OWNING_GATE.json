@@ -1,0 +1,28 @@
+{
+  "command_receipt": {
+    "gate": "full-java-jni",
+    "exit_code": 1,
+    "seconds": 353.354453086853,
+    "command": [
+      "python3",
+      "m3/collections/qualification/full-java-jni-20261018/verify.py"
+    ],
+    "log": "full-java-jni.log"
+  },
+  "log_sha256": "f193cfe03a5d2b1c134e427aef0eb0a0af0611f029e59c7185d7c4f1550c7f9c",
+  "java": {
+    "tests": 453,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2
+  },
+  "jni": {
+    "tests": 453,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "sole_failure": "M3ObjectRangeMapSelfTest incorrectly expected NATIVE_REQUIRED refusal while m3_collections_pathmask was available",
+  "not_reached": "Explicit post-Maven native harnesses and packaged-resource checks; the gate stopped correctly on the Maven failure",
+  "receiver_manifest_sha256": "5b4d4e61f21020151e27bb7df07247d5e6a6217b999f1692121495a463d43ffc"
+}

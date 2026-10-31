@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ZeroMaskWindowCopy20261017
+displayName: Copy zero-mask native windows without reading state arrays
+description: Replays the two reviewed Java-test and C-source postimages from their exact preimages or fixed-point postimages.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: native-zero-mask-window-java
+      lst: false
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: native-zero-mask-window-c

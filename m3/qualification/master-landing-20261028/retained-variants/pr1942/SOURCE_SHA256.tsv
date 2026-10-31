@@ -1,0 +1,8 @@
+path	sha256	git_blob	mode	pr	note
+m3/tooling/module-packs/parser/UNIVERSAL_AST_INTEROP_20261025.md	98351d5c428558dd74662236a608e1d0d615cdf41c5330bfdabda354a04ee3b6	1a615dd13739db20bd699a9b308b9e7315e6e7e5	100644	1942	PR version, not live
+m3/tooling/module-packs/parser/build.py	b744ace9a0146418dc0fb35ebfc0fe1694c96a869827f31c0b44fa832bd0cf84	d339416bcf840b55b4d0fa601f8be300bc415d54	100644	1942	PR version, not live
+m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTFieldRoles.java	0eea8d3366ec55a913daa89cbe15ff831cd2b288e111afb78434afa5d9ef8232	ebb0c72acb862e7c3afc43b896ad14266f7b318c	100644	1942	PR version, not live
+m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTProjectionCapture.java	975bc2dc47dd403eb288ffbfb36a6285cfede1afd08fcaab11a1188465f3de82	959676d4f96c7a5997916afc4f7a1a9a1bddd489	100644	1942	PR version, not live
+m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3FileLineIndex.java	c2b364cd475da6c71e4f1383998fce334b732d9877ef0d5111b382ede739300f	2ddd1e020abacadf55c839deb4de51c90d91bb59	100644	1942	PR version, not live
+m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTInteroperabilityContract.java	c29f3495ea5c8408c7596e56d8171297733d27dc6872d53cb6400620bf1d8b9b	dd501f51ab6cce95f8a1c6c2d1f3d946b4486b64	100644	1942	PR version, not live
+m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTInteroperabilityFuzzContract.java	9afef7b1e3c4e23d6d82baf813518fce65426d98b8a0aca16196a6757b04f5ce	facb08537e0dc06890e2824d9af958247a2293ba	100644	1942	PR version, not live

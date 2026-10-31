@@ -1,0 +1,26 @@
+M3JDK Chrome LLM and summary module
+Copyright 2026 Hitesh Soliwal and contributors.
+Licensed under the Apache License, Version 2.0.
+
+This module contains first-party generated receiving implementations adapted from
+hsoliwal/com.synexia at revision 2ab439480ecb0643615e85b42def954dbf3b5627:
+cpullm-opdag/java/chrome-ai-mechanical, cpullm-java, and
+synexia-flldcim/tools/m3-text-pipeline, and
+aix-chrome-ai-studio/mechanical/browser. The bounded Summarizer implementation
+also retains its coherent historical source at c26433b5856192807616c9fb09741de0b1bdd93c.
+Original source identities and subsequent
+recipe-owned corrections are recorded in the module's provenance receipts.
+
+Canonical authoring and execution owner:
+com.synexia.m3jdk.ChromeSummary20261029
+synexia-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029
+
+M3JDK21 owns the received module, public SDK namespace and target acceptance.
+Chrome browser APIs and any model runtime remain separately supplied software.
+No Chrome, Chromium, Gemini model weights or third-party model binary is bundled.
+Upstream OpenJDK components retain their original licenses and notices.
+
+The unchanged casefold.tsv resource contains 1,530 Unicode default full-case
+fold mappings. It equals CPython 3.12 Unicode 15.0.0 casefold data for every
+Unicode code point. Unicode data rights are preserved in UNICODE_LICENSE.txt;
+Apache-2.0 attribution for first-party source does not relicense that data.

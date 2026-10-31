@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/206049dfb270/maven-work/candidates/m3/tooling/module-packs/parser/real-providers/maven4/verify.py", line 231, in <module>
+    main()
+  File "/workspace/scratch/206049dfb270/maven-work/candidates/m3/tooling/module-packs/parser/real-providers/maven4/verify.py", line 120, in main
+    run('source-offline', [*mvn, '-o', *selected, '-Dtest=DefaultModelBuilderTest',
+  File "/workspace/scratch/206049dfb270/maven-work/candidates/m3/tooling/module-packs/parser/real-providers/maven4/verify.py", line 107, in run
+    raise RuntimeError('qualification failed: ' + str(log))
+RuntimeError: qualification failed: /workspace/scratch/206049dfb270/maven-work/qualified-candidate-001/source-offline.log

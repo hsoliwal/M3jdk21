@@ -1,0 +1,66 @@
+[
+  {
+    "variant": "baseline",
+    "kernel_sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+    "exports": [
+      "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative",
+      "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative",
+      "Java_com_m3_collections_M3IndexMaskWindow_scanNative"
+    ],
+    "work_counts": [
+      "lane=0 density=0 states=8 payload=4 result=0",
+      "lane=0 density=1 states=8 payload=4 result=256",
+      "lane=0 density=2 states=8 payload=4 result=1024",
+      "lane=1 density=0 states=8 payload=4 result=0",
+      "lane=1 density=1 states=8 payload=4 result=256",
+      "lane=1 density=2 states=8 payload=4 result=1024",
+      "lane=2 density=0 states=8 payload=4 result=0",
+      "lane=2 density=1 states=8 payload=4 result=256",
+      "lane=2 density=2 states=8 payload=4 result=1024",
+      "lane=3 density=0 states=8 payload=4 result=0",
+      "lane=3 density=1 states=8 payload=4 result=256",
+      "lane=3 density=2 states=8 payload=4 result=1024",
+      "NATIVE_WORK_PROBE checks=54 PASS (function-table instrument; actual JVM proof separate)"
+    ]
+  },
+  {
+    "variant": "candidate",
+    "kernel_sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026",
+    "exports": [
+      "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative",
+      "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative",
+      "Java_com_m3_collections_M3IndexMaskWindow_scanNative"
+    ],
+    "work_counts": [
+      "lane=0 density=0 states=8 payload=0 result=0",
+      "lane=0 density=1 states=8 payload=1 result=256",
+      "lane=0 density=2 states=8 payload=4 result=1024",
+      "lane=1 density=0 states=8 payload=0 result=0",
+      "lane=1 density=1 states=8 payload=1 result=256",
+      "lane=1 density=2 states=8 payload=4 result=1024",
+      "lane=2 density=0 states=8 payload=0 result=0",
+      "lane=2 density=1 states=8 payload=1 result=256",
+      "lane=2 density=2 states=8 payload=4 result=1024",
+      "lane=3 density=0 states=8 payload=0 result=0",
+      "lane=3 density=1 states=8 payload=1 result=256",
+      "lane=3 density=2 states=8 payload=4 result=1024",
+      "NATIVE_WORK_PROBE checks=54 PASS (function-table instrument; actual JVM proof separate)"
+    ]
+  }
+]

@@ -1,0 +1,7 @@
+# JEP 510 security proof tests pinned to final cumulative lineage
+# path	beforeSha256|ABSENT	afterSha256	resource
+test/jdk/com/sun/crypto/provider/KDF/HKDFBasicFunctionsTest.java	ABSENT	4fe432e5a9122580f28b5221d7011f614f8122df37c82c423baab79288055363	00-HKDFBasicFunctionsTest.java.after.txt
+test/jdk/com/sun/crypto/provider/KDF/HKDFDelayedPRK.java	ABSENT	df795433dbb9f2a6b7cc9f8c8c4fa0842a837f98f3b447cfb07a5652a79e903a	01-HKDFDelayedPRK.java.after.txt
+test/jdk/com/sun/crypto/provider/KDF/HKDFKnownAnswerTests.java	ABSENT	9e22ecd44b9787ce5e9add5f31e8d9ee6ad90fc1dee34459b46d16c02a63d7aa	02-HKDFKnownAnswerTests.java.after.txt
+test/jdk/javax/crypto/KDF/KDFDelayedProviderSyncTest.java	ABSENT	13877717bf97bbc15a773250e103a5e4b52a710fd5f6f6215de34ad2c3fc8da6	03-KDFDelayedProviderSyncTest.java.after.txt
+test/jdk/javax/crypto/KDF/KDFDelayedProviderThreadingTest.java	ABSENT	c6fb28992cc995a0997aa6be027ac7a2d6492ac4885b3d6cab6542849403fc22	04-KDFDelayedProviderThreadingTest.java.after.txt

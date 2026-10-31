@@ -1,0 +1,82 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:+UseSerialGC -XX:ActiveProcessorCount=2 -Xmx512m
+Exception in thread "main" java.lang.AssertionError: Unresolved real target platform: [org.eclipse.core.contenttype: org.osgi.framework.BundleException: Could not resolve module: org.eclipse.core.contenttype [5]
+  Unresolved requirement: Require-Capability: osgi.extender; filter:="(&(osgi.extender=osgi.component)(version>=1.2)(!(version>=2.0)))"
+, org.eclipse.core.expressions: org.osgi.framework.BundleException: Could not resolve module: org.eclipse.core.expressions [6]
+  Unresolved requirement: Require-Bundle: org.eclipse.core.runtime; bundle-version="[3.29.0,4.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.core.runtime; bundle-version="3.35.0.v20260623-1631"; singleton:="true"
+       org.eclipse.core.runtime [10]
+         Unresolved requirement: Require-Bundle: org.eclipse.core.contenttype; bundle-version="[3.9.0,4.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.core.contenttype; bundle-version="3.9.900.v20260617-0626"; singleton:="true"
+              org.eclipse.core.contenttype [5]
+                Unresolved requirement: Require-Capability: osgi.extender; filter:="(&(osgi.extender=osgi.component)(version>=1.2)(!(version>=2.0)))"
+, org.eclipse.core.filesystem: org.osgi.framework.BundleException: Could not resolve module: org.eclipse.core.filesystem [7]
+  Unresolved requirement: Require-Bundle: org.eclipse.core.runtime; bundle-version="[3.29.0,4.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.core.runtime; bundle-version="3.35.0.v20260623-1631"; singleton:="true"
+       org.eclipse.core.runtime [10]
+         Unresolved requirement: Require-Bundle: org.eclipse.core.contenttype; bundle-version="[3.9.0,4.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.core.contenttype; bundle-version="3.9.900.v20260617-0626"; singleton:="true"
+              org.eclipse.core.contenttype [5]
+                Unresolved requirement: Require-Capability: osgi.extender; filter:="(&(osgi.extender=osgi.component)(version>=1.2)(!(version>=2.0)))"
+, org.eclipse.core.resources: org.osgi.framework.BundleException: Could not resolve module: org.eclipse.core.resources [9]
+  Unresolved requirement: Require-Bundle: org.eclipse.core.filesystem; bundle-version="[1.11.0,2.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.core.filesystem; bundle-version="1.11.500.v20260721-1509"; singleton:="true"
+       org.eclipse.core.filesystem [7]
+         Unresolved requirement: Require-Bundle: org.eclipse.core.runtime; bundle-version="[3.29.0,4.0.0)"
+           -> Bundle-SymbolicName: org.eclipse.core.runtime; bundle-version="3.35.0.v20260623-1631"; singleton:="true"
+              org.eclipse.core.runtime [10]
+                Unresolved requirement: Require-Bundle: org.eclipse.core.contenttype; bundle-version="[3.9.0,4.0.0)"; visibility:="reexport"
+                  -> Bundle-SymbolicName: org.eclipse.core.contenttype; bundle-version="3.9.900.v20260617-0626"; singleton:="true"
+                     org.eclipse.core.contenttype [5]
+                       Unresolved requirement: Require-Capability: osgi.extender; filter:="(&(osgi.extender=osgi.component)(version>=1.2)(!(version>=2.0)))"
+  Unresolved requirement: Require-Bundle: org.eclipse.core.expressions; bundle-version="[3.9.0,4.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.core.expressions; bundle-version="3.9.700.v20260710-0925"; singleton:="true"
+       org.eclipse.core.expressions [6]
+         Unresolved requirement: Require-Bundle: org.eclipse.core.runtime; bundle-version="[3.29.0,4.0.0)"
+           -> Bundle-SymbolicName: org.eclipse.core.runtime; bundle-version="3.35.0.v20260623-1631"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.core.runtime; bundle-version="[3.34.0,4.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.core.runtime; bundle-version="3.35.0.v20260623-1631"; singleton:="true"
+, org.eclipse.core.runtime: org.osgi.framework.BundleException: Could not resolve module: org.eclipse.core.runtime [10]
+  Unresolved requirement: Require-Bundle: org.eclipse.core.contenttype; bundle-version="[3.9.0,4.0.0)"; visibility:="reexport"
+    -> Bundle-SymbolicName: org.eclipse.core.contenttype; bundle-version="3.9.900.v20260617-0626"; singleton:="true"
+       org.eclipse.core.contenttype [5]
+         Unresolved requirement: Require-Capability: osgi.extender; filter:="(&(osgi.extender=osgi.component)(version>=1.2)(!(version>=2.0)))"
+, org.eclipse.jdt.core: org.osgi.framework.BundleException: Could not resolve module: org.eclipse.jdt.core [15]
+  Unresolved requirement: Require-Bundle: org.eclipse.core.resources; bundle-version="[3.22.0,4.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.core.resources; bundle-version="3.24.100.v20260812-0827"; singleton:="true"
+       org.eclipse.core.resources [9]
+         Unresolved requirement: Require-Bundle: org.eclipse.core.filesystem; bundle-version="[1.11.0,2.0.0)"
+           -> Bundle-SymbolicName: org.eclipse.core.filesystem; bundle-version="1.11.500.v20260721-1509"; singleton:="true"
+              org.eclipse.core.filesystem [7]
+                Unresolved requirement: Require-Bundle: org.eclipse.core.runtime; bundle-version="[3.29.0,4.0.0)"
+                  -> Bundle-SymbolicName: org.eclipse.core.runtime; bundle-version="3.35.0.v20260623-1631"; singleton:="true"
+                     org.eclipse.core.runtime [10]
+                       Unresolved requirement: Require-Bundle: org.eclipse.core.contenttype; bundle-version="[3.9.0,4.0.0)"; visibility:="reexport"
+                         -> Bundle-SymbolicName: org.eclipse.core.contenttype; bundle-version="3.9.900.v20260617-0626"; singleton:="true"
+                            org.eclipse.core.contenttype [5]
+                              Unresolved requirement: Require-Capability: osgi.extender; filter:="(&(osgi.extender=osgi.component)(version>=1.2)(!(version>=2.0)))"
+         Unresolved requirement: Require-Bundle: org.eclipse.core.expressions; bundle-version="[3.9.0,4.0.0)"
+           -> Bundle-SymbolicName: org.eclipse.core.expressions; bundle-version="3.9.700.v20260710-0925"; singleton:="true"
+              org.eclipse.core.expressions [6]
+                Unresolved requirement: Require-Bundle: org.eclipse.core.runtime; bundle-version="[3.29.0,4.0.0)"
+                  -> Bundle-SymbolicName: org.eclipse.core.runtime; bundle-version="3.35.0.v20260623-1631"; singleton:="true"
+         Unresolved requirement: Require-Bundle: org.eclipse.core.runtime; bundle-version="[3.34.0,4.0.0)"
+           -> Bundle-SymbolicName: org.eclipse.core.runtime; bundle-version="3.35.0.v20260623-1631"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.core.runtime; bundle-version="[3.29.0,4.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.core.runtime; bundle-version="3.35.0.v20260623-1631"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.core.filesystem; bundle-version="[1.11.0,2.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.core.filesystem; bundle-version="1.11.500.v20260721-1509"; singleton:="true"
+  Unresolved requirement: Require-Bundle: org.eclipse.text; bundle-version="[3.6.0,4.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.text; bundle-version="3.14.700.v20260326-1107"
+       org.eclipse.text [16]
+         Unresolved requirement: Require-Bundle: org.eclipse.core.runtime; bundle-version="[3.29.0,4.0.0)"
+           -> Bundle-SymbolicName: org.eclipse.core.runtime; bundle-version="3.35.0.v20260623-1631"; singleton:="true"
+, org.eclipse.text: org.osgi.framework.BundleException: Could not resolve module: org.eclipse.text [16]
+  Unresolved requirement: Require-Bundle: org.eclipse.core.runtime; bundle-version="[3.29.0,4.0.0)"
+    -> Bundle-SymbolicName: org.eclipse.core.runtime; bundle-version="3.35.0.v20260623-1631"; singleton:="true"
+       org.eclipse.core.runtime [10]
+         Unresolved requirement: Require-Bundle: org.eclipse.core.contenttype; bundle-version="[3.9.0,4.0.0)"; visibility:="reexport"
+           -> Bundle-SymbolicName: org.eclipse.core.contenttype; bundle-version="3.9.900.v20260617-0626"; singleton:="true"
+              org.eclipse.core.contenttype [5]
+                Unresolved requirement: Require-Capability: osgi.extender; filter:="(&(osgi.extender=osgi.component)(version>=1.2)(!(version>=2.0)))"
+]
+	at jdk.m3.parser.test.M3JdtEquinoxContract.main(M3JdtEquinoxContract.java:38)

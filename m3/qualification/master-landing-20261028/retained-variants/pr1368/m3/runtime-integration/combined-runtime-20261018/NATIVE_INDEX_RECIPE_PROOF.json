@@ -1,0 +1,42 @@
+{
+  "schema": "M3_NATIVE_INDEX_STANDARD_MAVEN_BUILD_PROOF_V1",
+  "dataset": "m3-native-index-build3-20261018",
+  "pom_after_sha256": "cca8fc1572a6bec7543cb73901409ea7ea249d46a7682a0cbee9551fe17859db",
+  "new_standard_java_owner": "m3/collections/recipes/native-index-range-20261017/src/test/java/com/synexia/rewrite/NativeIndexRangeSdkTest.java",
+  "java_before": "ABSENT",
+  "java_after_sha256": "b480ed9d4243dde0c79091e94505432871e6954f7e42b634567aa9b948dc3bc3",
+  "legacy_sdk_retained_sha256": "94decce75e67a1a63fe76ede01b994e5bbf789b5678d3f3b6a7182468a2e64e1",
+  "frozen_engine_owner_changes": [],
+  "current_full_verify": "All5 tests pass; expected source drift refusal at original C manifest input,11.023s",
+  "historical_explicit_fixture_full_verify": "PASS33.725s; all5 tests and unchanged actual Java/C/JNI/serial3/ABI/mutants/native witnesses/allocation/fixed point corpus",
+  "runtime_classpath": "25 exact unchanged versions/hashes under final cca8 POM; annotation scope promotion only at compile, logger only at test",
+  "current_whole_product_java_jni": "Separate attached source-built264/41 +12JNI current-tree binding",
+  "rejected_beforeproofs": "Earlier immutable ../PROOF.json and ../ACTUAL_EXECUTION_LOGS.tar.gz retain original JPMS/API cascade, two-source/helper, annotation/logger, Java21 named scan and rejected Surefire trial proofs. Canonical build2 path refusal retained by actual_recipe_qualification.",
+  "reports": [
+    {
+      "scope": "current",
+      "name": "com.m3.collections.M3NativeIndexRangeTest",
+      "tests": 1,
+      "sha256": "3d7c5b97327364bef9c86c09e09b5377fe48f42628f10e4954b03eac013e1296"
+    },
+    {
+      "scope": "current",
+      "name": "com.synexia.rewrite.NativeIndexRangeSdkTest",
+      "tests": 4,
+      "sha256": "7c7fd9ae00e01ec05b345f1706f8f530c46f6a57ef866f81adf0fd015baa63e7"
+    },
+    {
+      "scope": "historical",
+      "name": "com.m3.collections.M3NativeIndexRangeTest",
+      "tests": 1,
+      "sha256": "39535305d2d1a478d3c2c1724729ef32994b42a3c3d0943db6e50119e40d24df"
+    },
+    {
+      "scope": "historical",
+      "name": "com.synexia.rewrite.NativeIndexRangeSdkTest",
+      "tests": 4,
+      "sha256": "d94eb71f9cf2f782cff0fab97a0fdb9e218d6941c16c960c0d00e06ba4aa1803"
+    }
+  ],
+  "proof_archive_sha256": "9f708198409d1ebce7abb0175982de66b2ae86c4fa4243d3c6d8685c99ae4de4"
+}

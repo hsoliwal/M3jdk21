@@ -1,0 +1,72 @@
+{
+  "schema": "m3-jcc-current-mapping-resources/1",
+  "status": "ACTUAL_SOURCE_BOUND_TEMPLATES_NOT_EXECUTED",
+  "fixture": false,
+  "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+  "source_root_tree": "a72565e0e67f330f12c712dcc7a3fcbe1d80d24e",
+  "destination_base": "09075810b55229662329a158923287e8a7118f86",
+  "crate": "jcc-merge-recovery-20261006-mapping-v04",
+  "rows": [
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before_sha256": "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1",
+      "after_sha256": "cf84929db27261fceb704e2b9b3ebfca212dcea6a8f61acff099104118342645",
+      "before_git_blob": "466f7c14d3fbe852bf9e2d1dc3e410e8b38a9ee2",
+      "after_git_blob": "99894f94301810820d049c2a1a791e24f0387628",
+      "before_bytes": 308294,
+      "after_bytes": 355729,
+      "before_resource": "before-00.txt",
+      "after_resource": "after-00.txt"
+    },
+    {
+      "path": "m3/docs/jcc-source-handoff.md",
+      "before_sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+      "after_sha256": "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc",
+      "before_git_blob": "f7991e22d16e01c9d9626add7d6894a1404dc19c",
+      "after_git_blob": "c2d2cf856514384a4bd552eb3eb0ea04bf516c15",
+      "before_bytes": 17031,
+      "after_bytes": 18828,
+      "before_resource": "before-01.txt",
+      "after_resource": "after-01.txt"
+    },
+    {
+      "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "before_sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+      "after_sha256": "73b3b5bd60eff1c1a904bd96517309067a9a93832060b63fa19c0c826e10630d",
+      "before_git_blob": "375a65a82dd39b5fa278e52472f3a99bdd5c9fdf",
+      "after_git_blob": "f60c1eb5d33c0203fb3baa42a741aee3979e3c36",
+      "before_bytes": 24139,
+      "after_bytes": 256194,
+      "before_resource": "before-02.txt",
+      "after_resource": "after-02.txt"
+    },
+    {
+      "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "before_sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+      "after_sha256": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c",
+      "before_git_blob": "5ed0454b97e046042a6ffce38f29a06776016378",
+      "after_git_blob": "10ba51ea38869ca61d23cbf99ee980d4ace8b732",
+      "before_bytes": 107504,
+      "after_bytes": 108212,
+      "before_resource": "before-03.txt",
+      "after_resource": "after-03.txt"
+    }
+  ],
+  "plan_sha256": "884b2722f1f6a7df5b8c872542d7b06a513c82f973a3219347639bd617ad88ba",
+  "manifest_sha256": "6a2ca1c34f3f848369d3adb41e6f4c10ab8a774e5d3b953e0a2c93ee268c7a00",
+  "source_input_sha256": "b6753688fcacb6f1255c607072ea10823c29f8c574f049dc96cee8c5a7ad5613",
+  "input_epoch_sha256": "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70",
+  "destination_root_tree": "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52",
+  "preserved": {
+    "ordered_records": 55,
+    "non_jcc_records": 53,
+    "gates": 20,
+    "top_level_mappings": 34
+  },
+  "bound_owners": {
+    "synexia.jcc-recipe-laboratory": 14,
+    "synexia.jcc-java-jni-regression": 6
+  },
+  "source_export_admitted": false,
+  "destination_gates_passed": false
+}

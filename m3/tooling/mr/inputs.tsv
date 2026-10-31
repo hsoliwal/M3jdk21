@@ -1,0 +1,7 @@
+# unchanged owner	sha256
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java	0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java	8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6
+src/java.base/share/classes/java/util/regex/Pattern.java	8cbd439235c592ecc98eb2a26f8494108c18a6521e715431ca1bec6db1e0b170
+src/java.base/share/classes/jdk/internal/mindex/M3TQ.java	d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155
+src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java	bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251
+test/jdk/java/util/regex/M3RegexLiteralTQTest.java	9900b7a8baffdc05c65a73b139715e9ff543e97e171d6fbb8b013b6837919766

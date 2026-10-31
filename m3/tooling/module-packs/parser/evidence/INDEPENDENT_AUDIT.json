@@ -1,0 +1,125 @@
+{
+  "schema": "M3_PARSER_INDEPENDENT_ARTIFACT_AUDIT_V1",
+  "status": "PASS",
+  "audited_at_utc": "2026-10-18T06:12:23Z",
+  "target_baseline": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "proof_run": "parser-target-proof-2",
+  "maven_log": "target-maven-proof-2.log",
+  "audit_file_preimage": "ABSENT",
+  "method": "Read-only verification of existing receipts, inputs, artifacts, command logs, and class archives using independent Python hashlib/zipfile checks and javap descriptor inspection. The qualification driver and consumers were not invoked by this audit.",
+  "tests_rerun": false,
+  "compilation_rerun": false,
+  "sealed_source_files_modified": false,
+  "input_seal": {
+    "sha256": "e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5",
+    "total_files": 133,
+    "repository_files": 57,
+    "jdk_files": 76,
+    "canonical_json_digest_verified": true,
+    "all_file_sizes_and_sha256_verified": true
+  },
+  "phase_chain": {
+    "order": ["lint", "compile", "test", "runtime"],
+    "active": null,
+    "failed": null,
+    "event_count": 8,
+    "events_are_ordered_start_pass_pairs": true,
+    "all_receipt_sha256_and_predecessor_links_verified": true,
+    "all_artifact_sizes_and_sha256_verified": true,
+    "artifact_entries_verified": 121,
+    "artifact_entries_by_phase": {
+      "lint": 4,
+      "compile": 96,
+      "test": 4,
+      "runtime": 17
+    },
+    "receipt_sha256": {
+      "lint": "c3ff923ad56ca0daf4374687fe74479f0a28b7681b52699cb64436f7bb8173bc",
+      "compile": "f6b6432e580fd97981b486d899765f17878640066eb65acb0d741ed230fe923d",
+      "test": "b386e5ac318d93aefdafb1c24dbbf7d6a3ea520685a2b32b8afb197b226d73bc",
+      "runtime": "d31e6084429ed76b19182a4f3a7a94fa5cfd92f6dfac3330033fbd949278abf9"
+    }
+  },
+  "compile_scope": {
+    "actual_compiler_source_files": 4,
+    "parser_production_source_files_including_descriptor": 32,
+    "test_source_files_including_shared_fixture": 4,
+    "compiler_sources": [
+      "src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java",
+      "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java",
+      "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java",
+      "src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java"
+    ],
+    "compiler_sources_match_pinned_baseline": true,
+    "staged_compiler_sources_match_target_bytes": true,
+    "actual_compiler_compile_flags_include": ["-Xlint:all", "-Werror", "-implicit:none"],
+    "compiler_patch_contains_module_descriptor": false,
+    "all_compiled_and_staged_files_covered_by_receipts": true,
+    "all_recorded_commands_exit_zero": true,
+    "all_build_javac_invocations_precede_test_phase": true,
+    "runtime_packager_uses_empty_descriptor_manifest": true,
+    "runtime_packager_uses_root_module_selector": false
+  },
+  "consumer_evidence": {
+    "invocations": 7,
+    "distinct_work_directories": 7,
+    "all_use_explicit_external_compiler_patch": true,
+    "image_consumers_use_image_java_without_external_parser_module_path": true,
+    "generic_contract_checks_host": 297,
+    "generic_contract_checks_image": 297,
+    "javac_contract_checks_host": 116,
+    "javac_contract_checks_image": 116,
+    "host_and_two_image_smoke_stdout_equal": true,
+    "smoke_stdout_sha256": "df8c5ff7e53750d37d5de36351d0fd6b6ec81d0e48eb67841cfae8db5e9fda61",
+    "grammar_digest": "226dcf197db58d57e54d3d28e218ddc4432e3a59c324410d7a1f9faa2f3116a8",
+    "javac_digest": "baa59465e21b574b257298314e6bf5fa58f8b6d65a70f06e24801260169fedf1"
+  },
+  "packaged_artifacts": {
+    "jar_sha256": "22f2ccf032add6fa4f1124fdd1eb8d67758d18efdcebfabcbd59fc75b5266dc6",
+    "jmod_sha256": "c777266f0cbe71ec9828f1565ecf06320b194bb12eb830e5c5f22ac17abc96cd",
+    "linked_modules_sha256": "28573f29ca92bf542b48ae3cad5f70dc009b03c090b8d899cb2e1d7f37a61a0b",
+    "runtime_proof_artifact_hash_fields_verified": true,
+    "class_entries": 45,
+    "ordinary_classes_byte_identical_to_javac_output": 44,
+    "all_jar_and_jmod_class_bytes_identical": true,
+    "jar_and_jmod_class_sets_equal_compiled_class_set": true,
+    "license_and_notice_bytes_equal_target_files": true,
+    "legal_entries": ["legal/LICENSE.txt", "legal/NOTICE.txt"],
+    "descriptor_difference": {
+      "classification": "EXPECTED_JAR_TOOL_METADATA",
+      "compiled_bytes": 246,
+      "packaged_bytes": 275,
+      "compiled_sha256": "678cdc6099fc8b1615dee370f541760b6357f861dd1a8849ada24225c2733d0d",
+      "packaged_sha256": "12e5617c6ea16a4096cf1a8792d279fa472f072b78e387c97ceecee6e1e639c8",
+      "added_attribute": "ModulePackages",
+      "packages": ["jdk.m3.parser", "jdk.m3.parser.grammar"],
+      "requires_and_exports_unchanged": true,
+      "explanation": "The standard jar tool adds ModulePackages to module-info.class. javap confirms this is the sole descriptor metadata addition; all ordinary classes retain the compiled bytes. The packaged descriptor is identical in the JAR and JMOD."
+    }
+  },
+  "policy_evidence": {
+    "checker": "m3/compatibility/check_synexia_full_borrow_receiver.py",
+    "checker_log": "lint-full-borrow-receiver.log",
+    "marker": "SYNEXIA_FULL_BORROW_RECEIVER_PASS",
+    "families": 32,
+    "state": "SOURCE_PIN_ONLY",
+    "completion": false
+  },
+  "maven_evidence": {
+    "result": "BUILD SUCCESS",
+    "selected_artifact": "com.m3.tooling:m3-parser-jmod-pack:0.1.0-SNAPSHOT",
+    "phase_markers": ["lint", "compile", "test", "runtime"],
+    "elapsed_seconds": 17.135,
+    "profile_warning": {
+      "text": "The requested profile \"m3-parser\" could not be activated because it does not exist.",
+      "classification": "NONFATAL_SELECTED_BUILD_CONTEXT_WARNING",
+      "explanation": "The selected parser build context does not define the requested profile, but Maven selected m3-parser-jmod-pack and executed all four named qualification phases successfully. This proves the selected parser build and does not assert successful activation of the named aggregate profile."
+    }
+  },
+  "qualified_scope": "Optional jdk.m3.parser JMOD and linked-image consumers using the existing compiler owners compiled from pinned actual sources and supplied by an explicit external --patch-module jdk.compiler.",
+  "pending_gates": [
+    "Full M3JDK and HotSpot source build with jtreg",
+    "M3AST plugin and service discovery using a rebuilt compiler module descriptor",
+    "Other platforms and performance qualification"
+  ]
+}

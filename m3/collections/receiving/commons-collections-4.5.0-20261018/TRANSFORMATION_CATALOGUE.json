@@ -1,0 +1,22 @@
+{
+  "schema": "m3-commons-namespace-recipe-selection-v1",
+  "categories": [
+    {
+      "problem": "binary-serialization-name-slots",
+      "donor": "tcalmant/python-javaobj@a3b67d208fb041e5a40dd7fe4e12c4a6ab5b7ce7 (javaobj-py3 v0.6.1, Apache-2.0)",
+      "selected": "Borrow unchanged grammar/reader plus narrow typed UTF/handle-role observer",
+      "rejected": "Unqualified raw byte prefix replacement",
+      "reason": "Length fields, array signatures, opaque bytes and shared handles require typed ownership",
+      "evidence": "182 inverse/fixed-point fixtures;578 typed slots; native V5 proxy positive and malformed-original rejection;19 discriminators",
+      "remaining": "Full fixture Java deserialization runtime"
+    },
+    {
+      "problem": "build-and-export-identity",
+      "selected": "Default install/deploy skips in sole donor POM",
+      "evidence": "Actual parent81/Apache33 inheritance and3.1.2 plugin property contracts; exact POM inverse/fixed point",
+      "remaining": "Target-owned Maven artifacts/full build"
+    }
+  ],
+  "invariant": "Consult validated donor recipes, refine serially per file, preserve source/proof failures and admit runtime/storage atoms separately.",
+  "performance": "Linear parse/slot-splice cost; no measured speedup or memory claim"
+}

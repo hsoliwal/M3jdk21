@@ -1,0 +1,13 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.FindGitProvenance"
+contributors:
+- name: "Kevin McCarpenter™️"
+  email: "kevin@moderne.io"
+  lineCount: 38
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 26
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 1

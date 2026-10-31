@@ -1,0 +1,48 @@
+{
+  "status": "ROOT_EXACT_PACKAGE_READBACK",
+  "logicalFiles": 810,
+  "logicalBytes": 74190773,
+  "pairedFiles": 48,
+  "pairedBytes": 13826806,
+  "retainedPriorFiles": 435,
+  "priorOverlap": false,
+  "projectFiles": 20,
+  "flatProjectFiles": 20,
+  "archiveOnlyProjectFiles": 0,
+  "producerQualified": true,
+  "spcSemanticQualified": true,
+  "primaryStatus": "PRIMARY_ONLY_STOP",
+  "fullReceiverQualified": false,
+  "packageFiles": [
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/bundle/BUNDLE.json",
+      "bytes": 123241,
+      "sha256": "af4f16e7c63ea8adb004de897bb3cfb1b089bac346c9360e438ae2969e36039e"
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/SOURCE-CLOSURE.json",
+      "bytes": 2214350,
+      "sha256": "75ddf05d07f537ace036cfa6d490aa2849213d386fb14fff6736198cb45c068b"
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/READBACK.json",
+      "bytes": 384272,
+      "sha256": "3f1a568c9846f6b2b627aa6cfe287693e2be26c13cd2ba2052afea9443a0e0f1"
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/PROJECT-READY.json",
+      "bytes": 14331,
+      "sha256": "0d4e7b4726d4f1c598a8ccdb75357418e21ebbf67d6be6607089f7c9004d8062"
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/PAIRED-FILES.json",
+      "bytes": 129646,
+      "sha256": "9f2a86d59fc3839244eaf6e8a10df69f824d4c3b16614bc12517dad186dd73ed"
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/RESULT.json",
+      "bytes": 1797,
+      "sha256": "892345dd1a120e86f3a11d6a62ed3a9c4fdba1734fa83917783f3dce4cfb8b2c"
+    }
+  ]
+}

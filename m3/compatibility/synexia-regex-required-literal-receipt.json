@@ -1,0 +1,95 @@
+{
+  "schema": "M3JDK21_SYNEXIA_REGEX_REQUIRED_LITERAL_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "GPLv2 with the Classpath exception for src/** postimages (TARGET_OWNED_PORT); Apache-2.0 for m3/** and test/jdk M3 test",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-regex-required-literal-20261008",
+    "pullRequest": 9866,
+    "commit": "f89abcc5215",
+    "recipes": [
+      "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe (crate m3-regex-required-literal, 3 ABSENT targets)",
+      "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe (crate m3-regex-required-literal, Pattern.java preimage to postimage; bootstrap allowlist entry because OpenRewrite 8.17.1 cannot convert the file's Javadoc)"
+    ],
+    "declarativeRecipe": "com.synexia.m3.RegexRequiredLiteral",
+    "fossReuseDecisionRow": "string.regex-required-literal.planner",
+    "donors": [
+      {
+        "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+        "blob": "f39709b6",
+        "developCommit": "296323958b1",
+        "target": "java.util.regex.M3PatternQuery",
+        "mechanics": "trigramQuery / trigramConcatQuery rules: literal runs required, alternation OR, sequences AND, min-0 repetition and single atoms unconstrained"
+      },
+      {
+        "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+        "target": "java.util.regex.M3PatternQuery",
+        "mechanics": "query algebra (fromExact/and/or), Facts and the existing Matcher gate; M3TQ is already the JDK adaptation of MIndexRegexTrigramQuery"
+      },
+      {
+        "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexOracleCorpus.java",
+        "receipt": "m3/compatibility/synexia-regex-oracle-harness-receipt.json",
+        "target": "M3PatternQueryDifferential / M3PatternQueryTest",
+        "mechanics": "frozen 10k x 64 proof corpus (A5)"
+      }
+    ],
+    "license": "Apache-2.0 first-party donors; postimages authored for the target",
+    "disposition": "ADAPT the planner rules onto the JDK compiled node tree (Slice/SliceS runs, Branch, Prolog/Loop, GroupCurly, Curly, Ques); no second regex parser; admission refuses Dollar/UnixDollar/Bound/GraphemeBound/Neg (requireEnd writers), roots other than Start/BnM (hitEnd parity), CANON_EQ and unknown node classes; any derivation failure keeps the engine unassisted"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "c9b07049c57ecdf43175f5885e11998918416a00 + hsoliwal/M3jdk21#430 (A5 harness, 8dfde7f727)",
+    "owners": [
+      "java.util.regex.M3PatternQuery",
+      "java.util.regex.Pattern (compile() installs the derived query)"
+    ],
+    "publicJdkApiChange": false,
+    "runtimeRecipe": "m3/runtime-integration/recipe re-sealed: 65 targets, target_commit ce17ebce9b, patch sha256 8b7c50d1009b…; absorbs 4 java/lang after-images that had drifted on master (AbstractStringBuilder, M3StringSearchPrecompute, String, StringConcatHelper)"
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/ports/precompute/src/test/java/com/m3/precompute/M3PatternQueryDifferential.java",
+      "before": "ABSENT",
+      "after": "975d7960d3c87fe5c5ca1158dba2195dfed1b808356b4f65738860f6f4e95a02",
+      "resource": "hash-pinned-java/00-M3PatternQueryDifferential.java.txt"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+      "before": "ABSENT",
+      "after": "5712e094926b90f3be5356dea999e9d5dc2d13e0f1fb5082e943f8c0a2d5575f",
+      "resource": "hash-pinned-java/01-M3PatternQuery.java.txt"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+      "before": "8cbd439235c592ecc98eb2a26f8494108c18a6521e715431ca1bec6db1e0b170",
+      "after": "d2828f7a76ae172204abe56cdf4e9df4b5fc0133bb65936b4e82aa9f7b9d105f",
+      "resource": "hash-pinned-text/00-Pattern.java.txt"
+    },
+    {
+      "path": "test/jdk/java/util/regex/M3PatternQueryTest.java",
+      "before": "ABSENT",
+      "after": "f842f38d63d0d438ca8019a816d1bc2080c8102f4385adf0bef1707389118931",
+      "resource": "hash-pinned-java/02-M3PatternQueryTest.java.txt"
+    }
+  ],
+  "gates": {
+    "g7PatchModuleCompile": "PASS_WINDOWS javac --release 21 -Xlint:all,-module -Werror --patch-module java.base over the regex and mindex postimages (112 classes; log sha256 f939932f222a440c74de5ce03722d5c71c19b81f94c4b7e421951770ad251162)",
+    "g7rDifferential": "PASS_WINDOWS M3PatternQueryDifferential on stock JDK 21.0.9 and on the patched module: identical ungated digest d9d1c8dacb9c1c8ac35a7cefe3433896446bb11af6006bed2807d5fe7dc4dccb over 640,000 pairs; gated String searches equal ungated CharSequence searches in result, spans, hitEnd, requireEnd (2,304,914 checks); patched run: 295 constrained patterns, 18,880 pruned searches",
+    "jtregBodyLocal": "PASS_WINDOWS M3PatternQueryTest compiled and run directly against the patched module: 21,276,464 checks, 321 constrained patterns, 19,183 pruned searches",
+    "g8RuntimeRecipe": "PASS_WINDOWS apply.py --check state=after; test_recipe.py 8/8 (65 targets)",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3RegexRequiredLiteralRecipeTest 4/4 (mvn log sha256 98151d0276ba6f72e68e90a6e719d65db5a1091979aec2efaa91101848e00c76)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "jtregLinux": "PENDING_LINUX (test/jdk/java/util/regex incl. M3PatternQueryTest on the built JDK)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "the query is a necessary condition only; Matcher's existing gate evaluates it over exact UTF-16 trigram facts of [from, to) and a false result skips the engine with the same observable state as a failed Start/BnM search (hitEnd true, requireEnd false, no match)",
+    "LITERAL patterns keep the previous exact query; CASE_INSENSITIVE slices contribute nothing; CANON_EQ patterns get no query",
+    "requireEnd writers (Dollar, UnixDollar, Bound, GraphemeBound, Neg) and Begin/First-rooted patterns are refused so no observable Matcher state can differ; \\G (LastMatch) compiles under a Start root and is admitted",
+    "lookaround contents, back references, character classes and min-0 repetitions are unconstrained; adjacent literal runs across empty-width group nodes are joined; alternatives are OR-ed and an empty alternative removes the alternation's requirement",
+    "a derivation failure of any kind (RuntimeException or OutOfMemoryError) leaves m3Tq null; Pattern.compile gains no failure mode",
+    "no timing or runtime claim; the jtreg suite on Linux and the hosted build remain pending"
+  ]
+}

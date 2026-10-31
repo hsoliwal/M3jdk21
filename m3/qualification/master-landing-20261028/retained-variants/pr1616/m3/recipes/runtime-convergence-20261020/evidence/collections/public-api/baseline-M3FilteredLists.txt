@@ -1,0 +1,8 @@
+Compiled from "M3FilteredLists.java"
+public final class com.m3.collections.M3FilteredLists {
+  public static <E> java.util.List<E> filtered(java.util.List<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/List;Ljava/util/function/Predicate;)Ljava/util/List;
+
+  public static <E> java.util.List<E> readOnlyFiltered(java.util.List<E>, java.util.function.Predicate<? super E>);
+    descriptor: (Ljava/util/List;Ljava/util/function/Predicate;)Ljava/util/List;
+}

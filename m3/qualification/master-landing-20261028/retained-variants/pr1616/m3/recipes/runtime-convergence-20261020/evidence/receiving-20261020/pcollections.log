@@ -1,0 +1,47 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< com.m3:m3-pcollections >-----------------------
+[INFO] Building M3 persistent array and mask collections 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ m3-pcollections ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-pcollections ---
+[INFO] Copying 6 resources from  to target/classes/META-INF
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-pcollections ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 13 source files with javac [debug release 21 module-path] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-pcollections ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/53bcd62c244c/M3JDK21/m3/collections/pcollections/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-pcollections ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 6 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-pcollections ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.pcollections.M3PCollectionsTest
+M3PVector sharing pages=135 height=3 retained=4097 visible=100 updatedShared=132
+M3PVectorContract PASS assertions=983505 seed=1295210064 boundaries=[0, 1, 15, 16, 17, 31, 32, 33, 63, 64, 65, 1023, 1024, 1025, 4097]
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.406 s -- in com.m3.pcollections.M3PCollectionsTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.5.0:jar (default-jar) @ m3-pcollections ---
+[INFO] Building jar: /workspace/scratch/53bcd62c244c/M3JDK21/m3/collections/pcollections/target/m3-pcollections-0.1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.657 s
+[INFO] Finished at: 2026-10-20T15:14:53+01:00
+[INFO] ------------------------------------------------------------------------

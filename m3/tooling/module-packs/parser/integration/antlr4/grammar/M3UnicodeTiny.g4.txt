@@ -1,0 +1,15 @@
+// SPDX-License-Identifier: Apache-2.0
+// Original test grammar authored for M3JDK21; no upstream grammar source copied.
+grammar M3UnicodeTiny;
+
+@header {package jdk.m3.parser.test.antlr;}
+
+document : item* EOF;
+item : WORD | EMOJI | ACCENT | RUPEE | OTHER;
+
+EMOJI : '\u{1F600}';
+ACCENT : '\u00E9';
+RUPEE : '\u20B9';
+WORD : [a-zA-Z]+;
+SPACE : [ \t\r\n]+ -> channel(HIDDEN);
+OTHER : .;

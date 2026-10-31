@@ -1,0 +1,113 @@
+{
+  "build_inputs": [],
+  "commit": "d53bd9539decc1f5beeed2828117e6de2feddfdc",
+  "descriptors": [
+    {
+      "release": "11",
+      "sha256": "99daf602779eb83d0d2181f1ae5b20d6326d8e52e3cec52c178a8016652c0dd8",
+      "upstream_path": "fastdoubleparser-java11/src/main/java/ch.randelshofer.fastdoubleparser/module-info.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/d53bd9539decc1f5beeed2828117e6de2feddfdc/fastdoubleparser-java11/src/main/java/ch.randelshofer.fastdoubleparser/module-info.java"
+    },
+    {
+      "release": "17",
+      "sha256": "99daf602779eb83d0d2181f1ae5b20d6326d8e52e3cec52c178a8016652c0dd8",
+      "upstream_path": "fastdoubleparser-java17/src/main/java/ch.randelshofer.fastdoubleparser/module-info.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/d53bd9539decc1f5beeed2828117e6de2feddfdc/fastdoubleparser-java17/src/main/java/ch.randelshofer.fastdoubleparser/module-info.java"
+    },
+    {
+      "release": "21",
+      "sha256": "99daf602779eb83d0d2181f1ae5b20d6326d8e52e3cec52c178a8016652c0dd8",
+      "upstream_path": "fastdoubleparser-java21/src/main/java/ch.randelshofer.fastdoubleparser/module-info.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/d53bd9539decc1f5beeed2828117e6de2feddfdc/fastdoubleparser-java21/src/main/java/ch.randelshofer.fastdoubleparser/module-info.java"
+    }
+  ],
+  "donor": "fastdoubleparser-1.0.90",
+  "files": [
+    {
+      "class": "ch/randelshofer/fastdoubleparser/BigSignificand",
+      "release": "11",
+      "sha256": "42145e12cb5d8a3dda8cd8f566d750ffa3f5b4253c4fbd22766dbfdab8da585a",
+      "upstream_path": "fastdoubleparser-dev/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/BigSignificand.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/d53bd9539decc1f5beeed2828117e6de2feddfdc/fastdoubleparser-dev/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/BigSignificand.java"
+    },
+    {
+      "class": "ch/randelshofer/fastdoubleparser/FastDoubleSwar",
+      "release": "11",
+      "sha256": "010b7777ef01c7ba522c46b191acdd869079031a01d4d65415d45176c19ffb0c",
+      "upstream_path": "fastdoubleparser-java11/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastDoubleSwar.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/d53bd9539decc1f5beeed2828117e6de2feddfdc/fastdoubleparser-java11/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastDoubleSwar.java"
+    },
+    {
+      "class": "ch/randelshofer/fastdoubleparser/FastIntegerMath",
+      "release": "11",
+      "sha256": "de069745f07a8f83f7913d80c268084a47a70a51fc3fcc763f62eb5d26d95964",
+      "upstream_path": "fastdoubleparser-java11/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastIntegerMath.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/d53bd9539decc1f5beeed2828117e6de2feddfdc/fastdoubleparser-java11/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastIntegerMath.java"
+    },
+    {
+      "class": "ch/randelshofer/fastdoubleparser/FastDoubleSwar",
+      "release": "17",
+      "sha256": "4f0833e84e1e535cf46fe8a881b1c939ee5b5d5e5f157a526d3ca7c2bc2d9baf",
+      "upstream_path": "fastdoubleparser-java17/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastDoubleSwar.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/d53bd9539decc1f5beeed2828117e6de2feddfdc/fastdoubleparser-java17/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastDoubleSwar.java"
+    },
+    {
+      "class": "ch/randelshofer/fastdoubleparser/FastIntegerMath",
+      "release": "17",
+      "sha256": "4c18f34aaedcc86f9f49cb11a74b687835255be11e4fc0f3c2c1d906eaff1ab8",
+      "upstream_path": "fastdoubleparser-java17/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastIntegerMath.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/d53bd9539decc1f5beeed2828117e6de2feddfdc/fastdoubleparser-java17/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastIntegerMath.java"
+    },
+    {
+      "class": "ch/randelshofer/fastdoubleparser/FastDoubleSwar",
+      "release": "21",
+      "sha256": "8e8468de7c6255c04ae7b6e99fea295af471f5911f025241268e9389e5b6e918",
+      "upstream_path": "fastdoubleparser-java21/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastDoubleSwar.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/d53bd9539decc1f5beeed2828117e6de2feddfdc/fastdoubleparser-java21/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastDoubleSwar.java"
+    },
+    {
+      "class": "ch/randelshofer/fastdoubleparser/FastIntegerMath",
+      "release": "21",
+      "sha256": "9a6eb4b12760b6ce3eff2db0691716c2b0d2c6609eeb16ce439e1a0bac3aed0c",
+      "upstream_path": "fastdoubleparser-dev/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastIntegerMath.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/d53bd9539decc1f5beeed2828117e6de2feddfdc/fastdoubleparser-dev/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastIntegerMath.java"
+    },
+    {
+      "class": "ch/randelshofer/fastdoubleparser/BigSignificand",
+      "release": "base",
+      "sha256": "0322ebfda3c02d8df163e985fce3c1a55c41f5e1cd5ff5238bd936b2f5fb342a",
+      "upstream_path": "fastdoubleparser-java8/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/BigSignificand.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/d53bd9539decc1f5beeed2828117e6de2feddfdc/fastdoubleparser-java8/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/BigSignificand.java"
+    },
+    {
+      "class": "ch/randelshofer/fastdoubleparser/FastDoubleSwar",
+      "release": "base",
+      "sha256": "04a303f402316e49800c08aea364473196049022d6cfb3759a0925039f82d980",
+      "upstream_path": "fastdoubleparser-java8/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastDoubleSwar.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/d53bd9539decc1f5beeed2828117e6de2feddfdc/fastdoubleparser-java8/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastDoubleSwar.java"
+    },
+    {
+      "class": "ch/randelshofer/fastdoubleparser/FastIntegerMath",
+      "release": "base",
+      "sha256": "f78cb7f918fe09497e103e1ea7cfe78ce521dbaaf5af7e25baccbb1a1ccf14a3",
+      "upstream_path": "fastdoubleparser-java8/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastIntegerMath.java",
+      "url": "https://raw.githubusercontent.com/wrandelshofer/FastDoubleParser/d53bd9539decc1f5beeed2828117e6de2feddfdc/fastdoubleparser-java8/src/main/java/ch.randelshofer.fastdoubleparser/ch/randelshofer/fastdoubleparser/FastIntegerMath.java"
+    }
+  ],
+  "not_reproduced": [
+    {
+      "class": "ch/randelshofer/fastdoubleparser/FastDoubleSwar",
+      "reason": "needs JDK 22; toolchain is JDK 21",
+      "release": "22"
+    },
+    {
+      "class": "ch/randelshofer/fastdoubleparser/FastIntegerMath",
+      "reason": "needs JDK 22; toolchain is JDK 21",
+      "release": "22"
+    }
+  ],
+  "published_jar": "K:\\m3-work\\donors\\maven-sources\\store\\ch\\randelshofer\\fastdoubleparser\\1.0.90\\fastdoubleparser-1.0.90.jar",
+  "published_jar_sha256": "e06f1063e1df20b187ef5d06c56c0a3feed079dfaf85a01a6948f3dcb602472f",
+  "repository": "github:wrandelshofer/FastDoubleParser",
+  "tag": "v1.0.90"
+}

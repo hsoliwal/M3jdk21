@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Ph0Phc
+displayName: Ph0 exact Pattern hidden-comment snapshot repair
+description: One bounded five-replacement family over the actual Rf0 candidate with exact Fc0 and Sc0 ancestry; source-operation qualification only.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: ph0-phc

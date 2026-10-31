@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Test set: com.synexia.rewrite.M3IntegratedRefinementRecipeTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.975 s <<< FAILURE! -- in com.synexia.rewrite.M3IntegratedRefinementRecipeTest
+com.synexia.rewrite.M3IntegratedRefinementRecipeTest -- Time elapsed: 0.975 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: missing actual owner attribution: com.m3.eclipse.runtime.M3EclipseProgressMonitor#borrowed; resolved methods: [com.m3.collections.M3FilteredViews#filter, com.m3.eclipse.framework.M3EclipseResourceDeltaSnapshot#capture, com.m3.eclipse.framework.M3EclipseResourceDeltaSnapshot#size] ==> expected: <true> but was: <false>
+	at com.synexia.rewrite.M3IntegratedRefinementRecipeTest.actualDependencyAttribution(M3IntegratedRefinementRecipeTest.java:129)
+	at com.synexia.rewrite.M3IntegratedRefinementRecipeTest.canonicalOwnerAndClasspathIdentity(M3IntegratedRefinementRecipeTest.java:112)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

@@ -1,0 +1,39 @@
+Compiled from "M3TreeMap.java"
+final class com.m3.collections.M3TreeMap$Tree<K, V> {
+  private java.lang.Object[] keys;
+  private java.lang.Object[] values;
+  private int[] left;
+  private int[] right;
+  private int[] parent;
+  private byte[] height;
+  private int root;
+  private int free;
+  private int used;
+  private int size;
+  private int modifications;
+  private final java.util.Comparator<? super K> comparator;
+  private final boolean keyOnly;
+  private final com.m3.collections.M3LazyValueState<K, V> lazy;
+  com.m3.collections.M3TreeMap$Tree(java.util.Comparator<? super K>, boolean, com.m3.collections.M3LazyValueProvider<? super K, ? extends V>);
+  void writable();
+  int compare(K, K);
+  int find(K);
+  int extreme(int, boolean);
+  int step(int, boolean);
+  int near(K, int);
+  int h(int);
+  void update(int);
+  void connect(int, int);
+  int rotate(int, boolean);
+  void balance(int);
+  void balance(int, boolean);
+  void grow();
+  void loadSorted(int, java.util.Iterator<? extends java.util.Map$Entry<? extends K, ? extends V>>, int);
+  private int readSorted(java.util.Iterator<? extends java.util.Map$Entry<? extends K, ? extends V>>, int, int, int);
+  void insert(int, int, K, V);
+  void insert(int, int, K, V, boolean);
+  void erase(int);
+  void clear();
+  void verify();
+  int verify(int, int, boolean[]);
+}

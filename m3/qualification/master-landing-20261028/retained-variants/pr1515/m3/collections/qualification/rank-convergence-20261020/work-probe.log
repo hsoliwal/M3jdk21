@@ -1,0 +1,4 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3 /workspace/scratch/abdb4b1178cf/synexia-work/synexia-openrewrite-recipes/tasks/m3-index-rank-word-walk-20261020/qualification-20261020/work_probe.py /workspace/scratch/abdb4b1178cf/m3-repo/m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java
+source_sha256=556802c1eff44ffffceba0f09da6cb920ec418a6d1fce84ee398c1097b830430
+mode=sparse steps=14 budget=128
+mode=dense steps=1064960 budget=2097152

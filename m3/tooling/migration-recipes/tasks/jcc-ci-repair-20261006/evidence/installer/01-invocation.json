@@ -1,0 +1,17 @@
+{
+  "tool": "exec_command",
+  "request": {
+    "cmd": "python3 /workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/overlay/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/test_installer.py --repo /workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/baseline --plan /workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json --out /workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/installer",
+    "max_output_tokens": 3000,
+    "yield_time_ms": 1000
+  },
+  "start_utc": "2026-10-06T03:39:27.828Z",
+  "finish_utc": "2026-10-06T03:39:28.502Z",
+  "response": {
+    "chunk_id": "a89660",
+    "wall_time_seconds": 0.180452887,
+    "exit_code": 0,
+    "original_token_count": 236,
+    "output": "test_before_and_after_resource_drift_refuse_before_any_write (__main__.InstallerTests.test_before_and_after_resource_drift_refuse_before_any_write) ... ok\ntest_each_guard_drift_refuses_before_any_write (__main__.InstallerTests.test_each_guard_drift_refuses_before_any_write) ... ok\ntest_each_target_drift_refuses_before_any_write (__main__.InstallerTests.test_each_target_drift_refuses_before_any_write) ... ok\ntest_foundation_selects_unchanged_pinned_jdk_for_next_maven_step (__main__.InstallerTests.test_foundation_selects_unchanged_pinned_jdk_for_next_maven_step) ... ok\ntest_lifecycle_materializes_three_files_and_preserves_modes (__main__.InstallerTests.test_lifecycle_materializes_three_files_and_preserves_modes) ... ok\ntest_mixed_states_refuse_before_any_write (__main__.InstallerTests.test_mixed_states_refuse_before_any_write) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.231s\n\nOK\n"
+  }
+}

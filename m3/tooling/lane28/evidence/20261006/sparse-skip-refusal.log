@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.AssertionError: 0 != 17
+	at M3SparseFillTest.equal(M3SparseFillTest.java:45)
+	at M3SparseFillTest.verify(M3SparseFillTest.java:65)
+	at M3SparseFillTest.main(M3SparseFillTest.java:121)

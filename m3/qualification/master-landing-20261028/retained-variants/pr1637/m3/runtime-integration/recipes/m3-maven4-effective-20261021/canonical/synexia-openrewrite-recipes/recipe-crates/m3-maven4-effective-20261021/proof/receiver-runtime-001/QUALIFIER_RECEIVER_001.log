@@ -1,0 +1,17 @@
+["/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3", "/workspace/scratch/206049dfb270/M3jdk21/m3/tooling/module-packs/parser/real-providers/maven4/verify.py", "--repo-root", "/workspace/scratch/206049dfb270/M3jdk21", "--baseline-root", "/workspace/scratch/206049dfb270/maven-work/baseline", "--fork-root", "/workspace/scratch/206049dfb270/maven-work/fork", "--jdk-home", "/tmp/m3-build-tools/jdk-21.0.12.1+1", "--maven", "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn", "--cache", "/tmp/m3-build-m2", "--settings", "/workspace/scratch/206049dfb270/canonical-work/maven-proxy-settings.xml", "--out", "/workspace/scratch/206049dfb270/maven-work/qualified-receiver-001"]
+{
+  "status": "PASS",
+  "source_builder_tests": {
+    "tests": 41,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_built_fork_jars": 16,
+  "results": {
+    "baseline": "M3_MAVEN4_BASELINE_GAP checks=13",
+    "candidate": "M3_MAVEN4_REAL_PROVIDER_PASS checks=102"
+  }
+}
+
+EXIT 0

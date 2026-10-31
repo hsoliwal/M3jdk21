@@ -1,0 +1,347 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+"""Check currentc0 identities; replay original task plans in historical roots.
+
+This command does not build a JDK, attest a Maven invocation, or install a plan
+into the current repository. Run each original task's `mvn clean verify` first.
+The unchanged historical self-verifiers own replay, rollback and refusal tests.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path, PurePosixPath
+import stat
+import subprocess
+import sys
+import tempfile
+
+SCHEMA = 'm3.currentc0.historical-tasks/1'
+CONTEXT = 'currentc0-history-1'
+HEAD = 'c0a14387009aefc7d62bd3268055d526e04f9074'
+TREE = '491bbd80a51483d0710fc12c1bad3a037b385ba0'
+MANIFEST = 'm3/tooling/image-gates/current-c0.json'
+COUNTS = {'selected_outputs': 31, 'guards': 8, 'protected_current': 101,
+          'task_inputs': 85, 'historical_records': 33, 'extension_inputs': 2}
+TASKS = {'ci-repair': (4, 'm3.ci-repair-custody/1'),
+         'image-gates': (29, 'm3.image-gates-custody/1')}
+LEGACY = [
+    'm3/runtime-integration/tests/MIndexIntegration.java',
+    'm3/runtime-integration/tests/MIndexStringInvariant.java',
+    'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-precompute/0002-MIndexString.java.txt',
+    'src/java.base/share/classes/java/lang/MIndexString.java',
+    'src/java.base/share/classes/java/lang/MIndexStringPool.java',
+    'src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java',
+    'src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java',
+    'test/jdk/java/lang/String/MIndexMappedStringBackingTest.java',
+    'm3/tooling/lane28/plan-current-875.json',
+    'm3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28-current-875/counterpart.after.md',
+    'm3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28-current-875/counterpart.before.md',
+    'm3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28-current-875/legal.before.md',
+    'm3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28-current-875/mapping.after.json',
+    'm3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28-current-875/mapping.before.json',
+    'm3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28-current-875/workflow.after.yml',
+    'm3/tooling/lane28/test_current_context.py',
+]
+
+
+class Refusal(ValueError):
+    """An explicit current or historical input contract was not satisfied."""
+
+
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def git_blob(data):
+    return hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+
+
+def canonical(value):
+    return (json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=True) + '\n').encode()
+
+
+def unique_json(data):
+    def pairs(items):
+        value = {}
+        for key, item in items:
+            if key in value:
+                raise Refusal('duplicate JSON key: ' + key)
+            value[key] = item
+        return value
+    return json.loads(data.decode('utf-8'), object_pairs_hook=pairs)
+
+
+def root_path(value):
+    path = Path(value).absolute()
+    if '..' in path.parts:
+        raise Refusal('parent traversal in root')
+    component = Path(path.anchor)
+    for part in path.parts[1:]:
+        component /= part
+        if component.is_symlink():
+            raise Refusal('symlink root component')
+    if not path.is_dir():
+        raise Refusal('root is not a directory')
+    return path
+
+
+def checked(root, relative):
+    if not isinstance(relative, str) or not relative or '\\' in relative or '\0' in relative:
+        raise Refusal('invalid relative path')
+    parts = relative.split('/')
+    if PurePosixPath(relative).is_absolute() or any(p in ('', '.', '..') or ':' in p for p in parts):
+        raise Refusal('unsafe relative path: ' + relative)
+    path = root
+    for part in parts:
+        path /= part
+        if path.is_symlink():
+            raise Refusal('symlink refused: ' + relative)
+    return path
+
+
+def read_file(path):
+    try:
+        info = path.stat()
+    except FileNotFoundError as failure:
+        raise Refusal('missing file: ' + str(path)) from failure
+    if not stat.S_ISREG(info.st_mode):
+        raise Refusal('not a regular file: ' + str(path))
+    return path.read_bytes(), '100755' if info.st_mode & 0o111 else '100644'
+
+
+def pin_bytes(root, row):
+    required = {'path', 'mode', 'bytes', 'sha256', 'gitBlob'}
+    if not isinstance(row, dict) or not required.issubset(row) or set(row) - required - {'supplier', 'role'}:
+        raise Refusal('invalid file identity row')
+    if row['mode'] not in ('100644', '100755') or type(row['bytes']) is not int or row['bytes'] < 0:
+        raise Refusal('invalid file mode or size')
+    for key, size in [('sha256', 64), ('gitBlob', 40)]:
+        value = row[key]
+        if not isinstance(value, str) or len(value) != size or any(c not in '0123456789abcdef' for c in value):
+            raise Refusal('invalid ' + key)
+    data, mode = read_file(checked(root, row['path']))
+    if (len(data), mode, digest(data), git_blob(data)) != (row['bytes'], row['mode'], row['sha256'], row['gitBlob']):
+        raise Refusal('identity drift: ' + row['path'])
+    return data
+
+
+def load_context(root, relative=MANIFEST):
+    """Authenticate every current input before any temporary replay or import."""
+    root = root_path(root)
+    if relative != MANIFEST:
+        raise Refusal('explicit currentc0 manifest path required')
+    manifest_bytes, _ = read_file(checked(root, relative))
+    context = unique_json(manifest_bytes)
+    keys = {'schema', 'context_id', 'base_commit', 'base_tree', 'manifest_sha256',
+            'tasks', 'legacy_absent', *COUNTS}
+    if set(context) != keys:
+        raise Refusal('unknown or missing context field')
+    if (context['schema'], context['context_id'], context['base_commit'], context['base_tree']) != (SCHEMA, CONTEXT, HEAD, TREE):
+        raise Refusal('wrong currentc0 context')
+    body = {k: v for k, v in context.items() if k != 'manifest_sha256'}
+    if digest(canonical(body)) != context['manifest_sha256']:
+        raise Refusal('context seal drift')
+    if context['legacy_absent'] != LEGACY:
+        raise Refusal('legacy absence contract drift')
+    pins, contents = {}, {}
+    memberships = {}
+    for group, expected in COUNTS.items():
+        entries = context[group]
+        if not isinstance(entries, list) or len(entries) != expected:
+            raise Refusal('wrong context row count: ' + group)
+        names = []
+        for row in entries:
+            data = pin_bytes(root, row)
+            path = row['path']
+            identity = {key: row[key] for key in ['path', 'mode', 'bytes', 'sha256', 'gitBlob']}
+            if path in names:
+                raise Refusal('duplicate context path: ' + group + ': ' + path)
+            if path in pins and pins[path] != identity:
+                raise Refusal('conflicting context identities: ' + path)
+            pins[path], contents[path] = identity, data
+            names.append(path)
+        if names != sorted(names):
+            raise Refusal('context paths must be sorted: ' + group)
+        memberships[group] = set(names)
+    for path in LEGACY:
+        if checked(root, path).exists():
+            raise Refusal('legacy owner reintroduced: ' + path)
+    tasks = context['tasks']
+    if not isinstance(tasks, list) or not all(isinstance(t, dict) for t in tasks) or [t.get('id') for t in tasks] != list(TASKS):
+        raise Refusal('exact historical task set required')
+    selected, parsed = set(), []
+    for task in tasks:
+        if set(task) != {'id', 'plan_sha256'}:
+            raise Refusal('unknown historical task field')
+        name = task['id']
+        crate = 'm3/tooling/' + name
+        plan_path = crate + '/plan.json'
+        script = crate + '/verify-plan.py'
+        if plan_path not in memberships['task_inputs'] or script not in memberships['task_inputs']:
+            raise Refusal('historical plan/script not pinned')
+        plan = unique_json(contents[plan_path])
+        plan_body = {k: v for k, v in plan.items() if k != 'plan_sha256'}
+        if plan.get('schema') != 'm3.sealed-install/1' or plan.get('plan_sha256') != task['plan_sha256'] or digest(canonical(plan_body)) != task['plan_sha256']:
+            raise Refusal('historical plan seal drift: ' + name)
+        if len(plan['outputs']) != TASKS[name][0]:
+            raise Refusal('historical output count drift')
+        images, seen = [], set()
+        for entry in plan['outputs']:
+            path = entry['path']
+            checked(root, path)
+            if path in seen or path not in memberships['selected_outputs']:
+                raise Refusal('unexpected historical target: ' + path)
+            seen.add(path)
+            selected.add(path)
+            for side in ['before', 'after']:
+                image = entry[side]
+                if image is None:
+                    if side == 'after':
+                        raise Refusal('historical deletion not admitted')
+                    continue
+                checked(root, image['resource'])
+                source = crate + '/' + image['resource']
+                if source not in memberships['task_inputs'] or digest(contents[source]) != image['sha256']:
+                    raise Refusal('historical image resource drift: ' + path)
+            images.append((path, contents[crate + '/' + entry['after']['resource']]))
+        for guard in plan.get('guards', []):
+            path = guard['path']
+            if path not in memberships['guards'] or pins[path]['sha256'] != guard['sha256']:
+                raise Refusal('historical guard not current-exact: ' + path)
+        parsed.append({'id': name, 'crate': crate, 'script': script, 'plan': plan, 'images': images})
+    if selected != memberships['selected_outputs']:
+        raise Refusal('unowned current selection path')
+    return {'root': root, 'manifest': context, 'manifest_bytes': manifest_bytes,
+            'pins': pins, 'contents': contents, 'memberships': memberships, 'tasks': parsed}
+
+
+def generated_outputs(admission):
+    """Require actual Maven-generated bytes; historical receipts are not inputs."""
+    generated = {}
+    for task in admission['tasks']:
+        for path, image in task['images']:
+            relative = task['crate'] + '/target/generated/' + path
+            data, _ = read_file(checked(admission['root'], relative))
+            if data != image:
+                raise Refusal('Maven generated output drift: ' + relative)
+            generated[relative] = data
+    return generated
+
+
+def assert_unchanged(admission, generated):
+    for path, row in admission['pins'].items():
+        if pin_bytes(admission['root'], row) != admission['contents'][path]:
+            raise Refusal('current input changed during replay: ' + path)
+    data, _ = read_file(checked(admission['root'], MANIFEST))
+    if data != admission['manifest_bytes']:
+        raise Refusal('context manifest changed during replay')
+    for path in LEGACY:
+        if checked(admission['root'], path).exists():
+            raise Refusal('legacy owner introduced during replay: ' + path)
+    for path, expected in generated.items():
+        data, _ = read_file(checked(admission['root'], path))
+        if data != expected:
+            raise Refusal('generated output changed during replay: ' + path)
+
+
+def place(root, relative, data, mode='100644'):
+    path = checked(root, relative)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists():
+        existing, existing_mode = read_file(path)
+        if existing != data or existing_mode != mode:
+            raise Refusal('historical context collision: ' + relative)
+        return
+    with path.open('xb') as stream:
+        stream.write(data)
+    path.chmod(0o755 if mode == '100755' else 0o644)
+
+
+def materialize_task(admission, task, root, generated):
+    """Each original plan owns a separate root, avoiding cross-plan collisions."""
+    prefix = task['crate'] + '/'
+    for path in sorted(admission['memberships']['task_inputs']):
+        if path.startswith(prefix):
+            place(root, path, admission['contents'][path], admission['pins'][path]['mode'])
+    for guard in task['plan'].get('guards', []):
+        path = guard['path']
+        place(root, path, admission['contents'][path], admission['pins'][path]['mode'])
+    for path, image in task['images']:
+        # Existing crate files must already be the exact historical postimage.
+        place(root, path, image)
+        source = task['crate'] + '/target/generated/' + path
+        place(root, source, generated[source])
+
+
+def validate_custody(task, result):
+    count, schema = TASKS[task['id']]
+    if result.get('schema') != schema or result.get('plan_sha256') != task['plan']['plan_sha256'] or result.get('generated_outputs') != count:
+        raise Refusal('historical custody identity drift')
+    events = result.get('events', [])
+    expected = [('check', 'before', 0), ('apply', 'after', count),
+                ('apply', 'after', 0), ('rollback', 'before', count), ('rollback', 'before', 0)]
+    if len(events) != 8 or [(e.get('mode'), e.get('state'), e.get('writes')) for e in events[:5]] != expected:
+        raise Refusal('historical replay/fixed-point/rollback custody drift')
+    if events[5:] != [{'refusal': name} for name in ['destination drift', 'mixed states', 'dependency drift']]:
+        raise Refusal('historical refusal custody drift')
+
+
+def qualify(root, relative=MANIFEST):
+    admission = load_context(root, relative)
+    generated = generated_outputs(admission)
+    output = checked(admission['root'], 'm3/tooling/image-gates/target/currentc0')
+    output.mkdir(parents=True, exist_ok=True)
+    if not output.is_dir():
+        raise Refusal('result location is not a directory')
+    run = Path(tempfile.mkdtemp(prefix='run-', dir=output))
+    records = []
+    try:
+        for task in admission['tasks']:
+            with tempfile.TemporaryDirectory(prefix='m3-' + task['id'] + '-historical-') as directory:
+                historical = Path(directory)
+                materialize_task(admission, task, historical, generated)
+                completed = subprocess.run([sys.executable, '-I', '-B', str(historical / task['script'])],
+                                           cwd=historical, capture_output=True, timeout=120, check=False)
+                (run / (task['id'] + '.stdout.log')).write_bytes(completed.stdout)
+                (run / (task['id'] + '.stderr.log')).write_bytes(completed.stderr)
+                if completed.returncode != 0:
+                    raise Refusal('historical verifier failed: ' + task['id'] + '; logs: ' + str(run))
+                custody, _ = read_file(historical / task['crate'] / 'target/custody.json')
+                parsed = unique_json(custody)
+                validate_custody(task, parsed)
+                (run / (task['id'] + '.custody.json')).write_bytes(custody)
+                records.append({'task': task['id'], 'scope': 'ISOLATED_ORIGINAL_HISTORICAL_PLAN',
+                                'plan_sha256': task['plan']['plan_sha256'], 'exit_code': completed.returncode,
+                                'custody_sha256': digest(custody), 'stdout_sha256': digest(completed.stdout),
+                                'stderr_sha256': digest(completed.stderr)})
+    finally:
+        assert_unchanged(admission, generated)
+    result = {'schema': 'm3.currentc0.historical-task-result/1',
+              'status': 'PASS_CURRENT_IDENTITIES_AND_ISOLATED_HISTORICAL_REPLAY',
+              'context': CONTEXT, 'base_commit': HEAD, 'base_tree': TREE,
+              'manifest_sha256': admission['manifest']['manifest_sha256'],
+              'current_inputs_unchanged': True, 'maven_generated_outputs_matched': len(generated),
+              'maven_execution_attested_by_this_command': False,
+              'historical_tasks': records, 'current_runtime_qualified': False,
+              'full_openjdk_build_qualified': False, 'canonical_install_performed': False}
+    report = run / 'RESULT.json'
+    report.write_bytes(canonical(result))
+    return {'status': result['status'], 'report': str(report), 'sha256': digest(report.read_bytes())}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--context', required=True)
+    parser.add_argument('--root', required=True, type=Path)
+    args = parser.parse_args()
+    try:
+        print(json.dumps(qualify(args.root, args.context), sort_keys=True))
+    except (Refusal, OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as failure:
+        parser.exit(2, 'REFUSED: ' + str(failure) + '\n')
+
+
+if __name__ == '__main__':
+    main()

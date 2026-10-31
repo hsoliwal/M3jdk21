@@ -1,0 +1,8 @@
+{
+  "schema": "m3.independent-e03-review-method-notes.v1",
+  "scope": "Review-program comparison assumptions only; no candidate edit or project execution",
+  "initial_assumption": "The reference checker differs only at its two TSV field separators, and the retained failure artifact contains a raw traceback",
+  "observed_artifacts": "The checker also changes its output-directory guard to preserve attempt01 files while refusing to overwrite REFERENCE_AUDIT.json; attempt01.txt is a written failure note, not a raw traceback",
+  "correction": "The complete old/new checker bodies are compared after precisely those three line changes, and the failure note is described at its actual evidentiary level",
+  "project_gate_effect": "None; no project test, recipe, installer, or build was rerun by the reviewer"
+}

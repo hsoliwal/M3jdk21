@@ -1,0 +1,99 @@
+LOCAL CANDIDATE EXECUTION; NOT MAVEN/OPENREWRITE OR MATCHED-M3JDK PROOF
+
+=== evidence/01-static.log SHA256=bf343ad4228ab21b885a9f72e5058a2216b5b605e09a4abf8af452580fa577b6 ===
+PASS: five candidate template SHA-256 seals; seven original Git-verified preimages; Java/test UTF-8, NUL, final-newline and trailing-whitespace checks. Java semantic lint follows with javac.
+
+=== evidence/02-baseline-compile.log SHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 ===
+
+=== evidence/03-candidate-compile.log SHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 ===
+
+=== evidence/04-native-lint.log SHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 ===
+
+=== evidence/05-mask-native-compile.log SHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 ===
+
+=== evidence/06-size-native-compile.log SHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 ===
+
+=== evidence/07-baseline-views.log SHA256=7ee954b85f05dadf91b5e800fa1e05845e90b3cb40baa425ccd268d4b8fc6cf9 ===
+VIEWS_PASS checks=104477
+
+=== evidence/08-candidate-views.log SHA256=7ee954b85f05dadf91b5e800fa1e05845e90b3cb40baa425ccd268d4b8fc6cf9 ===
+VIEWS_PASS checks=104477
+
+=== evidence/09-baseline-mask.log SHA256=34e7dca4103115f5d62b23c974bec6eab4f3312419dd866ddcb7d7148b440065 ===
+MASK_PASS mode=java checks=19718
+
+=== evidence/10-candidate-mask.log SHA256=34e7dca4103115f5d62b23c974bec6eab4f3312419dd866ddcb7d7148b440065 ===
+MASK_PASS mode=java checks=19718
+
+=== evidence/11-mask-jni.log SHA256=04b8c3a16b9165625430d062cfc86239f550064d401340255a63ef970579ef5a ===
+MASK_PASS mode=native checks=19718
+
+=== evidence/12-size-jni.log SHA256=9303222c3a80b88fe474604beaad533b91873a65998859d16632430d59556505 ===
+SIZE_PASS checks=147 concurrent_calls=16000
+
+=== evidence/13-mask-no-native.log SHA256=74304c91d9b74573bb581f55c6989976f244542b437cfe2c65942ce5aa21a851 ===
+MASK_PASS mode=missing checks=19719
+
+=== evidence/14-size-no-native.log SHA256=56080dc4b9c6ffa6a8fca6457e98609d1d8000638e7664e66b2f2fbffd3ea2ba ===
+SIZE_MISSING_PASS checks=5
+
+=== evidence/15-candidate-staging.log SHA256=c4626d79414b8a2d2139727d9e9b02ca79db5795435e1dc4b0b1a5b45bb0fa91 ===
+Candidate template fixture assembly: nine source/test targets plus four exact unchanged dependencies. NOT an OpenRewrite execution claim. All SHA-256 seals passed.
+
+=== evidence/16-candidate-harness.log SHA256=497982fee27522677ad23314135c73dc815b8c9c4639fcf63617fcccd0ea7260 ===
+m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java: OK
+m3/collections/src/main/java/com/m3/collections/M3LongCollection.java: OK
+m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java: OK
+m3/collections/src/main/java/com/m3/collections/M3LongIterator.java: OK
+m3/collections/src/main/java/com/m3/collections/M3LongSortedSet.java: OK
+m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java: OK
+m3/collections/src/main/java/com/m3/collections/M3ObjectSize.java: OK
+m3/collections/src/main/native/collections/m3_index_mask_compactor.c: OK
+m3/collections/src/main/native/collections/m3_object_size.c: OK
+m3/collections/verification/size-views-20261017/src/test/java/com/m3/collections/MaskChecks.java: OK
+m3/collections/verification/size-views-20261017/src/test/java/com/m3/collections/SizeAgent.java: OK
+m3/collections/verification/size-views-20261017/src/test/java/com/m3/collections/SizeChecks.java: OK
+m3/collections/verification/size-views-20261017/src/test/java/com/m3/collections/ViewsChecks.java: OK
+openjdk version "21.0.12.1" 2026-08-18
+OpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)
+OpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-deb13u1-Debian, mixed mode, sharing)
+VIEWS_PASS checks=104477
+MASK_PASS mode=java checks=19718
+MASK_PASS mode=native checks=19718
+SIZE_PASS checks=147 concurrent_calls=16000
+SIZE_PASS checks=147 concurrent_calls=16000
+SIZE_PASS checks=147 concurrent_calls=16000
+MASK_PASS mode=missing checks=19719
+SIZE_MISSING_PASS checks=5
+BOUNDED_JAVA_JNI_PASS; not whole module/JDK/SDK-source qualification
+
+=== evidence/17-public-api-diff.log SHA256=4826226423567789a90985eece12706eec6723f74119219e055c59fa5b0f6fcf ===
+PASS public javap signatures unchanged for three existing owners
+
+=== evidence/18-cost-probe-compile.log SHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 ===
+
+=== evidence/19-cost-default-after.log SHA256=b0f03c2da517a4b74eb8c5cb926a19eca31e0e6019a622173b2882fb5fe835d6 ===
+SAMPLE ops=100000 bytes=256 elapsed_ns=8385163 checksum=6400000
+
+=== evidence/19-cost-default-before.log SHA256=9fb744eb4728962e0772a8ed47a6333a62f3062f0789f2307e4bf8a5eaa973f1 ===
+SAMPLE ops=100000 bytes=256 elapsed_ns=10594621 checksum=6400000
+
+=== evidence/19-cost-no-ea-after.log SHA256=92db416c54085a95060353657cd89e7b6af66c80b2150f387463c866a38a0233 ===
+SAMPLE ops=100000 bytes=2400256 elapsed_ns=9513158 checksum=6400000
+
+=== evidence/19-cost-no-ea-before.log SHA256=98e8d21fe21ee9eb4bf70b0a68a7ac8c780d671296d5d76ee890f9fd7451aa19 ===
+SAMPLE ops=100000 bytes=5600256 elapsed_ns=12330803 checksum=6400000
+
+=== candidate-verified/06-size-compile.log SHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 ===
+
+=== candidate-verified/10-size-aligned.log SHA256=9303222c3a80b88fe474604beaad533b91873a65998859d16632430d59556505 ===
+SIZE_PASS checks=147 concurrent_calls=16000
+
+=== candidate-verified/10-size-default.log SHA256=9303222c3a80b88fe474604beaad533b91873a65998859d16632430d59556505 ===
+SIZE_PASS checks=147 concurrent_calls=16000
+
+=== candidate-verified/10-size-serial.log SHA256=9303222c3a80b88fe474604beaad533b91873a65998859d16632430d59556505 ===
+SIZE_PASS checks=147 concurrent_calls=16000
+
+=== candidate-verified/12-size-unavailable.log SHA256=56080dc4b9c6ffa6a8fca6457e98609d1d8000638e7664e66b2f2fbffd3ea2ba ===
+SIZE_MISSING_PASS checks=5

@@ -1,0 +1,8 @@
+{
+  "artifact": "sqlite-jdbc",
+  "version": "3.45.1.0",
+  "origin": "https://raw.githubusercontent.com/xerial/sqlite-jdbc/3.45.1.0/LICENSE",
+  "sha256": "3ddf9be5c28fe27dad143a5dc76eea25222ad1dd68934a047064e56ed2fa40c5",
+  "bytes": 11560,
+  "pom_license": "The Apache Software License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0.txt>"
+}

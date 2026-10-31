@@ -1,0 +1,38 @@
+
+The following files have been resolved:
+   org.m3jdk.tooling:m3-shared-openrewrite-frontend:jar:1.0-SNAPSHOT:compile:/tmp/m3-maven-repository/org/m3jdk/tooling/m3-shared-openrewrite-frontend/1.0-SNAPSHOT/m3-shared-openrewrite-frontend-1.0-SNAPSHOT.jar -- module m3.shared.openrewrite.frontend (auto)
+   org.openrewrite:rewrite-java-21:jar:8.17.1:compile:/tmp/m3-maven-repository/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.jar
+   org.slf4j:slf4j-api:jar:2.0.13:compile:/tmp/m3-maven-repository/org/slf4j/slf4j-api/2.0.13/slf4j-api-2.0.13.jar -- module org.slf4j
+   org.openrewrite:rewrite-core:jar:8.17.1:compile:/tmp/m3-maven-repository/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar -- module rewrite.core (auto)
+   com.fasterxml.jackson.core:jackson-databind:jar:2.16.1:compile:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar -- module com.fasterxml.jackson.databind
+   com.fasterxml.jackson.core:jackson-core:jar:2.16.1:compile:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar -- module com.fasterxml.jackson.core
+   com.fasterxml.jackson.dataformat:jackson-dataformat-smile:jar:2.16.1:compile:/tmp/m3-maven-repository/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar -- module com.fasterxml.jackson.dataformat.smile
+   com.fasterxml.jackson.module:jackson-module-parameter-names:jar:2.16.1:compile:/tmp/m3-maven-repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar -- module com.fasterxml.jackson.module.paramnames
+   com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.16.1:compile:/tmp/m3-maven-repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar -- module com.fasterxml.jackson.datatype.jsr310
+   org.jetbrains:annotations:jar:24.1.0:compile:/tmp/m3-maven-repository/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar -- module org.jetbrains.annotations
+   org.openrewrite.tools:java-object-diff:jar:1.0.1:runtime:/tmp/m3-maven-repository/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar -- module java.object.diff (auto)
+   io.quarkus.gizmo:gizmo:jar:1.0.11.Final:runtime:/tmp/m3-maven-repository/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar -- module gizmo (auto)
+   org.jboss:jandex:jar:2.4.2.Final:runtime:/tmp/m3-maven-repository/org/jboss/jandex/2.4.2.Final/jandex-2.4.2.Final.jar -- module org.jboss.jandex [auto]
+   net.java.dev.jna:jna-platform:jar:5.14.0:runtime:/tmp/m3-maven-repository/net/java/dev/jna/jna-platform/5.14.0/jna-platform-5.14.0.jar -- module com.sun.jna.platform [auto]
+   net.java.dev.jna:jna:jar:5.14.0:runtime:/tmp/m3-maven-repository/net/java/dev/jna/jna/5.14.0/jna-5.14.0.jar -- module com.sun.jna [auto]
+   org.apache.commons:commons-compress:jar:1.26.0:runtime:/tmp/m3-maven-repository/org/apache/commons/commons-compress/1.26.0/commons-compress-1.26.0.jar -- module org.apache.commons.compress
+   commons-io:commons-io:jar:2.15.1:runtime:/tmp/m3-maven-repository/commons-io/commons-io/2.15.1/commons-io-2.15.1.jar -- module org.apache.commons.io
+   io.micrometer:micrometer-core:jar:1.9.17:compile:/tmp/m3-maven-repository/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar -- module micrometer.core [auto]
+   org.hdrhistogram:HdrHistogram:jar:2.1.12:compile:/tmp/m3-maven-repository/org/hdrhistogram/HdrHistogram/2.1.12/HdrHistogram-2.1.12.jar -- module HdrHistogram (auto)
+   org.latencyutils:LatencyUtils:jar:2.0.3:runtime:/tmp/m3-maven-repository/org/latencyutils/LatencyUtils/2.0.3/LatencyUtils-2.0.3.jar -- module LatencyUtils (auto)
+   io.github.classgraph:classgraph:jar:4.8.165:runtime:/tmp/m3-maven-repository/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar -- module io.github.classgraph
+   org.yaml:snakeyaml:jar:2.2:runtime:/tmp/m3-maven-repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar -- module org.yaml.snakeyaml
+   org.openrewrite:rewrite-java:jar:8.17.1:compile:/tmp/m3-maven-repository/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar -- module rewrite.java (auto)
+   org.openrewrite:rewrite-xml:jar:8.17.1:compile:/tmp/m3-maven-repository/org/openrewrite/rewrite-xml/8.17.1/rewrite-xml-8.17.1.jar -- module rewrite.xml (auto)
+   com.fasterxml.jackson.core:jackson-annotations:jar:2.16.1:compile:/tmp/m3-maven-repository/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar -- module com.fasterxml.jackson.annotation
+   org.antlr:antlr4-runtime:jar:4.11.1:runtime:/tmp/m3-maven-repository/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1.jar -- module org.antlr.antlr4.runtime [auto]
+   org.apache.commons:commons-lang3:jar:3.14.0:runtime:/tmp/m3-maven-repository/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar -- module org.apache.commons.lang3
+   org.apache.commons:commons-text:jar:1.11.0:runtime:/tmp/m3-maven-repository/org/apache/commons/commons-text/1.11.0/commons-text-1.11.0.jar -- module org.apache.commons.text
+   org.xerial.snappy:snappy-java:jar:1.1.10.5:runtime:/tmp/m3-maven-repository/org/xerial/snappy/snappy-java/1.1.10.5/snappy-java-1.1.10.5.jar -- module snappy.java (auto)
+   io.github.fastfilter:fastfilter:jar:1.0.2:runtime:/tmp/m3-maven-repository/io/github/fastfilter/fastfilter/1.0.2/fastfilter-1.0.2.jar -- module fastfilter (auto)
+   org.ow2.asm:asm:jar:9.6:runtime:/tmp/m3-maven-repository/org/ow2/asm/asm/9.6/asm-9.6.jar -- module org.objectweb.asm
+   org.ow2.asm:asm-util:jar:9.6:runtime:/tmp/m3-maven-repository/org/ow2/asm/asm-util/9.6/asm-util-9.6.jar -- module org.objectweb.asm.util
+   org.ow2.asm:asm-tree:jar:9.6:runtime:/tmp/m3-maven-repository/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar -- module org.objectweb.asm.tree
+   org.ow2.asm:asm-analysis:jar:9.6:runtime:/tmp/m3-maven-repository/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6.jar -- module org.objectweb.asm.tree.analysis
+   org.openrewrite:rewrite-yaml:jar:8.17.1:compile:/tmp/m3-maven-repository/org/openrewrite/rewrite-yaml/8.17.1/rewrite-yaml-8.17.1.jar -- module rewrite.yaml (auto)
+

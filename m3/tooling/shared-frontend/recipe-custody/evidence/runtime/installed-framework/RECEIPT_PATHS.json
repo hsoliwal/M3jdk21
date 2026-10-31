@@ -1,0 +1,38 @@
+[
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-selected-image-proof/QUALIFICATION_RECEIPT.json",
+    "retained_path": "QUALIFICATION_RECEIPT.json",
+    "sha256": "077cfb35402caf3e9644d0b8e105bf9d59796f5c56483e72d25a9f1fa844559b",
+    "bytes": 53378
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-selected-image-proof/commands.json",
+    "retained_path": "commands.json",
+    "sha256": "e1b8f548ad6a55cea9621265d7c6dbe78ddb2b7ecae1f8303ba5ca6fb212b1a7",
+    "bytes": 3568
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-selected-image-proof/harness-compile.log",
+    "retained_path": "harness-compile.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/rewrite-selected-image-proof/installed-framework-tests.log",
+    "retained_path": "installed-framework-tests.txt",
+    "sha256": "c7eb094d060b530b3f7a9c2436ddc50decb9a4c6c3c3e846e9b205e98bb29a13",
+    "bytes": 4714
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/qualify_selected_rewrite_runtime.py",
+    "retained_path": "src/test/java/qualify_selected_rewrite_runtime.py",
+    "sha256": "7c0f4b4daea1abd898d2c280488e479b55c4f9f10d4287e68abbcd14d967b9a3",
+    "bytes": 6284
+  },
+  {
+    "original_path": "/workspace/scratch/13309be96b09/ast-work/SelectedFrameworkTests.java",
+    "retained_path": "src/test/java/SelectedFrameworkTests.java",
+    "sha256": "44038bcf4431c31d7e677dbadc78db2bc4936fa57ef4bed9a49e2e5b4eaf6972",
+    "bytes": 3534
+  }
+]

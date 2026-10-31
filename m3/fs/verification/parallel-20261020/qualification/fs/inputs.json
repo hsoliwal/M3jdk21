@@ -1,0 +1,59 @@
+{
+  "dependencies": [
+    {
+      "descriptor_kind": "injected",
+      "jar": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/commons-logging/commons-logging/1.2/commons-logging-1.2.jar",
+      "module": "commons.logging",
+      "sha256": "daddea1ea0be0f56978ab3006b8ac92834afeefbd9b7e4e6316fca57df0fa636"
+    },
+    {
+      "descriptor_kind": "published",
+      "jar": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.jar",
+      "module": "org.apache.commons.codec",
+      "sha256": "5c3881e4f556855e9c532927ee0c9dfde94cc66760d5805c031a59887070af5f"
+    },
+    {
+      "descriptor_kind": "published",
+      "jar": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.jar",
+      "module": "org.apache.commons.compress",
+      "sha256": "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca"
+    },
+    {
+      "descriptor_kind": "published",
+      "jar": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/commons-io/commons-io/2.21.0/commons-io-2.21.0.jar",
+      "module": "org.apache.commons.io",
+      "sha256": "7d643a2afea8b058b762aa6fb90e5b256f6c729739f8b3784c3370ddc609e88d"
+    },
+    {
+      "descriptor_kind": "published",
+      "jar": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apache/commons/commons-lang3/3.18.0/commons-lang3-3.18.0.jar",
+      "module": "org.apache.commons.lang3",
+      "sha256": "4eeeae8d20c078abb64b015ec158add383ac581571cddc45c68f0c9ae0230720"
+    }
+  ],
+  "dependency_lock": {
+    "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/tools/vfs-dependencies.lock.json",
+    "sha256": "1f739f1452f41e650c4ec0bf91e9c1a50549e7d5c842cb56dd55a57e56151907"
+  },
+  "existing_packer": {
+    "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/tooling/jmod-recipes/tools/jmod_pack.py",
+    "sha256": "8acdc46eaa0cac0861384d6caf252d1a2f763c80d09b68932177e1dac598bfaf"
+  },
+  "jdk_home": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21",
+  "jdk_release": "IMPLEMENTOR=\"Eclipse Adoptium\"\nIMPLEMENTOR_VERSION=\"Temurin-21.0.12.1+1\"\nJAVA_RUNTIME_VERSION=\"21.0.12.1+1-LTS\"\nJAVA_VERSION=\"21.0.12.1\"\nJAVA_VERSION_DATE=\"2026-08-18\"\nLIBC=\"gnu\"\nMODULES=\"java.base java.compiler java.datatransfer java.xml java.prefs java.desktop java.instrument java.logging java.management java.security.sasl java.naming java.rmi java.management.rmi java.net.http java.scripting java.security.jgss java.transaction.xa java.sql java.sql.rowset java.xml.crypto java.se java.smartcardio jdk.accessibility jdk.internal.jvmstat jdk.attach jdk.charsets jdk.internal.opt jdk.zipfs jdk.compiler jdk.crypto.ec jdk.crypto.cryptoki jdk.dynalink jdk.internal.ed jdk.editpad jdk.hotspot.agent jdk.httpserver jdk.incubator.vector jdk.internal.le jdk.internal.vm.ci jdk.internal.vm.compiler jdk.internal.vm.compiler.management jdk.jartool jdk.javadoc jdk.jcmd jdk.management jdk.management.agent jdk.jconsole jdk.jdeps jdk.jdwp.agent jdk.jdi jdk.jfr jdk.jlink jdk.jpackage jdk.jshell jdk.jsobject jdk.jstatd jdk.localedata jdk.management.jfr jdk.naming.dns jdk.naming.rmi jdk.net jdk.nio.mapmode jdk.random jdk.sctp jdk.security.auth jdk.security.jgss jdk.unsupported jdk.unsupported.desktop jdk.xml.dom\"\nOS_ARCH=\"x86_64\"\nOS_NAME=\"Linux\"\nSOURCE=\".:git:1c417fbfc2f7\"\nBUILD_SOURCE=\"git:e6ba7dec3d07654074559310376a3ae89da5f4ac\"\nBUILD_SOURCE_REPO=\"https://github.com/adoptium/temurin-build.git\"\nSOURCE_REPO=\"https://github.com/adoptium/jdk21u.git\"\nFULL_VERSION=\"21.0.12.1+1-LTS\"\nSEMANTIC_VERSION=\"21.0.12.1+1\"\nBUILD_INFO=\"OS: Linux Version: 6.8.0-1064-azure\"\nJVM_VARIANT=\"Hotspot\"\nJVM_VERSION=\"21.0.12.1+1-LTS\"\nIMAGE_TYPE=\"JDK\"\n",
+  "probe": {
+    "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/test/java/com/m3/fs/verification/M3VfsImageProbe.java",
+    "sha256": "d3d8395b7b46a050a93e146c43e9a749425dba947d3d52c1a7a095e22a3663cc"
+  },
+  "removed_environment_names": [],
+  "scope": "Complete existing M3FS Java sources plus the 237-source attributed VFS core, JAR/JMOD assembly through the existing shared packer, and named-consumer execution on an image linked from the supplied prebuilt JDK 21. Maven lifecycle, JNI/SQLite runtime verification, and source-built OpenJDK/M3JDK21 qualification remain separate gates.",
+  "source": {
+    "donor_java_compiled": 237,
+    "donor_java_custody": 311,
+    "input_files": 389,
+    "receiver_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+    "source_lock": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/fs-source.lock.tsv",
+    "source_lock_sha256": "331ff4235c5f48e20c577a89c1736d96b831589a46816c9bf68f58edd299ab58",
+    "vfs_upstream_commit": "685b3b723a83e56034391350ea1a02231411142f"
+  }
+}

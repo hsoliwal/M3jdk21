@@ -1,0 +1,567 @@
+{
+  "schema": "M3JDK21_JAVA_BASE_COLLECTION_CORE_RECEIPT_V1",
+  "product": "M3JDK21",
+  "copyright": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0; product files retain their per-file rights",
+  "status": "BOUNDED_RECEIVING_EVIDENCE_PENDING_FULL_ADMISSION",
+  "recipe_authority": "hsoliwal/com.synexia",
+  "published_source": "730294cac8e98d860aaddd12222874a014146d44",
+  "private_parent": "56e6a44d1f364b2c4846a549f446c978b63473fc",
+  "target_base": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+  "target_observed_head": "2c99886d4926afcf66e65fd5a6579aa164a83866",
+  "source_tree_alias": {
+    "local_source_commit": "056d752c7352e8132a3b2aa44d8ace584a8acf9d",
+    "published_commit": "2c99886d4926afcf66e65fd5a6579aa164a83866",
+    "tree": "5ccc6207f5ddb2c1cea5039fabfd4bf0bbfc3734",
+    "alias_evidence_sha256": "954808c92658b309dd7d9eb3fa2bfe6d2dd9bebc5994f212c7bbcd5dc7a97ec1"
+  },
+  "active_phase": "STRING",
+  "phase_advance": false,
+  "runtime_dependency_on_synexia": false,
+  "naming": {
+    "authority": "m3/docs/name-mapping.json",
+    "before": {
+      "sha256": "90bd38ec4f882d7e6042567d379de972bc5f7ffe759bc10df49702fb2e71a251",
+      "git_blob_sha1": "1ec5939e50c775bf4b6fa630f5098edd8f6503c8",
+      "bytes": 517587
+    },
+    "after": {
+      "sha256": "298f087bfd4960d0d1c8d2e72704d7e7f60f1e3ca6376105e5ac3a7fe3fefa86",
+      "git_blob_sha1": "48e68a9d1261ea5af61e99525ba1e984ec83e0c1",
+      "bytes": 521576
+    },
+    "preserved_historical_records": 65,
+    "appended_ids": [],
+    "amended_ids": [
+      "m3.collections.filtered-add-all.capture-once",
+      "m3.collections.reverse-sorted-subset.bounded-seek"
+    ],
+    "queue_operations_unchanged": true,
+    "promotions": 0
+  },
+  "executed_datasets": [
+    {
+      "dataset": "m3-jdk-filtered-batch-20261025",
+      "source_commit": "730294cac8e98d860aaddd12222874a014146d44",
+      "descriptor": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-filtered-batch-20261025/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-jdk-filtered-batch-20261025.yml",
+      "descriptor_sha256": "4097e22acb7b6fa00eb33bc745ff41cf665f6abd57e2911a6536dc3d9a3e3e55",
+      "qualification": {
+        "sha256": "4a7b48306f56cb722b08f5feb8e08c32865f70fd6cf7ac7be9e55bb522ba72f4",
+        "status": "PASS_ACTUAL_SDK5_SEALING10_RECEIVER9",
+        "sdk_tests": 5,
+        "sealing_tests": 10,
+        "receiver_cases": 9,
+        "actual_code_source": "56e6a44d1f364b2c4846a549f446c978b63473fc",
+        "actual_invocation_source": "56e6a44d1f364b2c4846a549f446c978b63473fc",
+        "successor_source_closure": {
+          "schema": "SYNEXIA_CORE_RECEIPT_COMMON_B_CLOSURE_V1",
+          "copyright": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+          "license": "Apache-2.0",
+          "base_pin": "97e654946b98056a2c117eee994905b45fcf0cde",
+          "files": [
+            {
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+              "sha256": "fba17870791ee9f2498173420b3035325b3096aafdeda45565eee53b79ea599c",
+              "git_blob_sha1": "04854ce87cf8333e3e698aaf7eaa06b5f15fd923"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/prepare.py",
+              "sha256": "edf243e9057415b908a62e55abdf8090f23742d51b61536b97cfa36650443bf2",
+              "git_blob_sha1": "882b83b3dbebfc7da7654c961d2841104e029c69"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+              "sha256": "58ea51c0658983a1515f7a0aff9fa14282a5461b36851919b86dd0f9a2319197",
+              "git_blob_sha1": "0238e5b063bb83640ad8e7a4a4c59d80f28cf431"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/test_prepare.py",
+              "sha256": "b2595330f73fe0a39ce90cf3a18576e553b997b7398e98664e65c04c1b2fe45d",
+              "git_blob_sha1": "cda95e284883bfff29f1beb6828b1969bab3e902"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+              "sha256": "b4186dfb05f0df1eb47625001138781c529f5c92c5b11c1bfd441e66d0dcf043",
+              "git_blob_sha1": "5104286de31bc794af85a95a92d8b2f55118d680"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/fixtures/collections-seed-before.java.txt",
+              "sha256": "7f1f00afbec94d40b24c25256ac531ec754fe6bae856f2001d6f8d3944576e25",
+              "git_blob_sha1": "74369df9ef10241fb748b710ab50ec1075edbee6"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/fixtures/collections-seed-after.java.txt",
+              "sha256": "e2b20b7d2dc79bb821236e3c0f9459ea7db25b6d443c5047fe08118ce34f1afe",
+              "git_blob_sha1": "8a33b08f52ef2da14354499d577090b099e2c515"
+            }
+          ]
+        }
+      },
+      "sdk_inputs_sha256": "c49024da5f47364a59d3ed761de93f8e1cd181410bceb21be631f913b9f7dfa3",
+      "sdk_results_sha256": "2054da59dea6835154b579b1fcd2ea509a9b69f9a45c51c795db733d8f558411",
+      "receiving_epoch": {
+        "local_source_commit": "43fe1f0394846eda2343555addb23a70b9ce05f1",
+        "published_commit": "3000635810b7ee7983d3d7fc1ca172418245e2dc",
+        "source_tree": "afe46dcabf4db181d368e0a6e8b28d0705fe4bc7",
+        "receiving_receipt_sha256": "150ca914cb1f81afe5e8c101a2083f5685d5801bc40a0219e55b47d4e3644052"
+      },
+      "actual_sdk_outputs": [
+        {
+          "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+          "preimage_sha256": "c8820e5bbd7b7c7b4c683f5081ec74b99a4aac6b854f6c8dc79d4e0ee4767ffb",
+          "sha256": "1c811f4473088c46e39e9621eb27380806e420fe09062072e413d48af78059c0",
+          "git_blob_sha1": "3f2c3eecb6a0c239025ac7051b5bd4f3e6953605",
+          "bytes": 30568,
+          "template": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-filtered-batch-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-jdk-filtered-batch-20261025/0001-CollectionViews.java.txt"
+        },
+        {
+          "path": "test/jdk/java/util/CollectionViews/CollectionViewsBatchAdmissionTest.java",
+          "preimage_sha256": "ABSENT",
+          "sha256": "96904ca4643c5dff2ff1cb9b51223e6dd21e4c2dde4a73ca9d6d56f372bd2c61",
+          "git_blob_sha1": "42f8fd5404103241ac616f360021326a4b965d42",
+          "bytes": 10824,
+          "template": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-filtered-batch-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-jdk-filtered-batch-20261025/0002-CollectionViewsBatchAdmissionTest.java.txt"
+        }
+      ]
+    },
+    {
+      "dataset": "m3-jdk-reverse-seek-20261025",
+      "source_commit": "730294cac8e98d860aaddd12222874a014146d44",
+      "descriptor": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-reverse-seek-20261025/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-jdk-reverse-seek-20261025.yml",
+      "descriptor_sha256": "79f88c644586050d4a4dbca1fe294dc7b70ca7ce73268685dde50654acef0822",
+      "qualification": {
+        "sha256": "06b89f8c54cb1232fbad430635249fac82361d2cf257a73941105cee76208602",
+        "status": "PASS_ACTUAL_SDK5_SEALING10_RECEIVER9",
+        "sdk_tests": 5,
+        "sealing_tests": 10,
+        "receiver_cases": 9,
+        "actual_code_source": "56e6a44d1f364b2c4846a549f446c978b63473fc",
+        "actual_invocation_source": "56e6a44d1f364b2c4846a549f446c978b63473fc",
+        "successor_source_closure": {
+          "schema": "SYNEXIA_CORE_RECEIPT_COMMON_B_CLOSURE_V1",
+          "copyright": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+          "license": "Apache-2.0",
+          "base_pin": "97e654946b98056a2c117eee994905b45fcf0cde",
+          "files": [
+            {
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+              "sha256": "fba17870791ee9f2498173420b3035325b3096aafdeda45565eee53b79ea599c",
+              "git_blob_sha1": "04854ce87cf8333e3e698aaf7eaa06b5f15fd923"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/prepare.py",
+              "sha256": "edf243e9057415b908a62e55abdf8090f23742d51b61536b97cfa36650443bf2",
+              "git_blob_sha1": "882b83b3dbebfc7da7654c961d2841104e029c69"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/receive.py",
+              "sha256": "58ea51c0658983a1515f7a0aff9fa14282a5461b36851919b86dd0f9a2319197",
+              "git_blob_sha1": "0238e5b063bb83640ad8e7a4a4c59d80f28cf431"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/test_prepare.py",
+              "sha256": "b2595330f73fe0a39ce90cf3a18576e553b997b7398e98664e65c04c1b2fe45d",
+              "git_blob_sha1": "cda95e284883bfff29f1beb6828b1969bab3e902"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+              "sha256": "b4186dfb05f0df1eb47625001138781c529f5c92c5b11c1bfd441e66d0dcf043",
+              "git_blob_sha1": "5104286de31bc794af85a95a92d8b2f55118d680"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/fixtures/collections-seed-before.java.txt",
+              "sha256": "7f1f00afbec94d40b24c25256ac531ec754fe6bae856f2001d6f8d3944576e25",
+              "git_blob_sha1": "74369df9ef10241fb748b710ab50ec1075edbee6"
+            },
+            {
+              "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/fixtures/collections-seed-after.java.txt",
+              "sha256": "e2b20b7d2dc79bb821236e3c0f9459ea7db25b6d443c5047fe08118ce34f1afe",
+              "git_blob_sha1": "8a33b08f52ef2da14354499d577090b099e2c515"
+            }
+          ]
+        }
+      },
+      "sdk_inputs_sha256": "69fe044b91ddb0602311352006c0d2f2723c040f8a14e20426e67e07a81913fe",
+      "sdk_results_sha256": "0b978606dea95c37f62907cf444a7d80f7a71add325aa69e098f315a12e1d114",
+      "receiving_epoch": {
+        "local_source_commit": "f97c614ce0c32c3bf229e1929877ba4ed1cc8888",
+        "published_commit": "21bdd46c73ebfb81a61bd29d4af3cebabdd50a89",
+        "source_tree": "92102509cbfad6b7756cf9bf6edb734b80a27d5f",
+        "receiving_receipt_sha256": "38f69644bdb1c3ef2f39734c6e5c45cda6809d7ffbaef4383727d606f497c766"
+      },
+      "actual_sdk_outputs": [
+        {
+          "path": "src/java.base/share/classes/java/util/ReverseOrderSortedSetView.java",
+          "preimage_sha256": "5157b7148a717a01d71277ca99f061938c97065198663b35796eca2e45aa3a40",
+          "sha256": "43e3e77c8fb8e6a311b927b504eb34579b70154ff4d1a8f9a9312f062c32d1ed",
+          "git_blob_sha1": "fae11e4cbc5d4aa5aa8bd976210ceb03ed49c50d",
+          "bytes": 14541,
+          "template": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-reverse-seek-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-jdk-reverse-seek-20261025/0001-ReverseOrderSortedSetView.java.txt"
+        },
+        {
+          "path": "test/jdk/java/util/SortedSet/ReverseSubsetSeekTest.java",
+          "preimage_sha256": "ABSENT",
+          "sha256": "eda199afc0651a68b8bea18ab201247455de9d0af3b1900220443e20e08b08ef",
+          "git_blob_sha1": "eb963d8cf0e1c7bec42a7c5fd5bd70921547eb71",
+          "bytes": 17241,
+          "template": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-jdk-reverse-seek-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-jdk-reverse-seek-20261025/0002-ReverseSubsetSeekTest.java.txt"
+        }
+      ]
+    }
+  ],
+  "target_gates": {
+    "boundaries": [
+      "All five required core roles and every additional runtime row use the same actual H2 source commit/tree and frozen image manifest; tool/helper source epochs are recorded separately.",
+      "Earlier SDK059/M module maintenance, earlier module refusal attempts, earlier image/source epochs and legally rejected recipe preparations remain scoped history; they are not relabeled as H2 results.",
+      "The two collection capability IDs remain pending; public interfaces, native algorithm counts, provider contracts, family admission and queue operations are not promoted.",
+      "Recipe/tool code, templates, raw environment/logs and MOP/catalogue bodies remain private. Public rows contain only reviewed scalar metrics, source identities, measured counters and evidence pointers."
+    ],
+    "pending": [
+      "Whole-SDK, all-provider/family, JCK and broader platform/headful acceptance remain pending; global phase remains STRING.",
+      "The two inherited attach-boundary utility nonpasses remain unresolved; the full jdk_util group is not qualified."
+    ],
+    "runs": [
+      {
+        "evidence_pointer": "private-proof:next-pass-collection-core/image-core-actual-03/STRICT_IMAGE_QUALIFICATION.json",
+        "evidence_sha256": "2ac424115f16e7a57d7cf320285b866b9a1968541b511bb502e54e20b739806d",
+        "exit_code": 0,
+        "id": "core-image",
+        "image_manifest_sha256": "7901ffa1c52ee336e68ee6cc6c7df6f4df605de02dde2d04202aba41c3682f1b",
+        "metrics": {
+          "finite_boot_modes": 5,
+          "internal_image_symlinks": 205,
+          "production_class_patches": false,
+          "regular_image_files": 394
+        },
+        "mode": "full JDK image; headful-capable configuration; warnings as errors",
+        "notes": [
+          "Actual clean/configure/full make images completed with exit zero at H2; complete frozen image manifest matches the produced image.",
+          "Five finite version/probe lanes passed, including M3 backing checks; enabled M3 CDS refusal is expected and recorded separately from flat CDS success.",
+          "Later independent owning, signature, installed and resource gates have their own evidence below; this image gate alone does not qualify the entire SDK."
+        ],
+        "published_commit": "2c99886d4926afcf66e65fd5a6579aa164a83866",
+        "scope": "Strict complete make images and finite boot qualification",
+        "source_commit": "056d752c7352e8132a3b2aa44d8ace584a8acf9d",
+        "source_tree": "5ccc6207f5ddb2c1cea5039fabfd4bf0bbfc3734",
+        "status": "PASS"
+      },
+      {
+        "errors": 0,
+        "evidence_pointer": "private-proof:next-pass-collection-core/actual-gates-H2-056d-01/SAFE_CORE_OWNER_QUALIFICATION.json",
+        "evidence_sha256": "68acab27a6f5eb076356e17c441ba488c7e10f7553ddba4f5d451fb7ea1574f1",
+        "exit_code": 0,
+        "failures": 0,
+        "id": "core-java-base-owners",
+        "image_manifest_sha256": "7901ffa1c52ee336e68ee6cc6c7df6f4df605de02dde2d04202aba41c3682f1b",
+        "metrics": {
+          "main_actions": 11,
+          "new_main_actions": 4,
+          "new_test_entries": 2,
+          "production_patch_collisions": 0
+        },
+        "notes": [
+          "All nine owner-directory entries and eleven main actions passed in an independent actual command.",
+          "Existing java.base owners executed from the frozen H2 image; test-only helper patches have no production collisions.",
+          "The wider utility command has two remaining attach-boundary nonpasses and is recorded as a separate failed run below."
+        ],
+        "published_commit": "2c99886d4926afcf66e65fd5a6579aa164a83866",
+        "scope": "Independent actual CollectionViews and SortedSet owner directory jtreg command",
+        "skipped": 0,
+        "source_commit": "056d752c7352e8132a3b2aa44d8ace584a8acf9d",
+        "source_tree": "5ccc6207f5ddb2c1cea5039fabfd4bf0bbfc3734",
+        "status": "PASS",
+        "tests": 9
+      },
+      {
+        "evidence_pointer": "private-proof:next-pass-collection-core/actual-gates-H2-056d-01/SAFE_SIGNATURE_NATIVE_QUALIFICATION.json",
+        "evidence_sha256": "45c06579e0712ce8494c630650d9ca5b3f58f1d901980abe364809aaba054a17",
+        "exit_code": 0,
+        "id": "core-signatures-native",
+        "image_manifest_sha256": "7901ffa1c52ee336e68ee6cc6c7df6f4df605de02dde2d04202aba41c3682f1b",
+        "metrics": {
+          "native_headers_byte_identical": 8,
+          "native_library_bytes_different": 34,
+          "native_library_bytes_identical": 5,
+          "native_source_or_make_changes": 0,
+          "public_protected_signature_classes": 13,
+          "shared_library_export_sets": 39
+        },
+        "notes": [
+          "The independent ABI command exited zero: all thirteen public/protected descriptor sets, all thirty-nine defined dynamic export sets and all eight native headers agree.",
+          "Five shared-library files are byte-identical; thirty-four differ only in measured GNU build-ID/debug-link metadata. Whole-file native byte identity is not claimed.",
+          "No new native algorithm, source, JNI header, export or public API is introduced by the two collection-owner refinements."
+        ],
+        "published_commit": "2c99886d4926afcf66e65fd5a6579aa164a83866",
+        "scope": "Measured public/protected descriptors, dynamic export sets and native header bytes against SDK059",
+        "source_commit": "056d752c7352e8132a3b2aa44d8ace584a8acf9d",
+        "source_tree": "5ccc6207f5ddb2c1cea5039fabfd4bf0bbfc3734",
+        "status": "PASS"
+      },
+      {
+        "errors": 0,
+        "evidence_pointer": "private-proof:next-pass-collection-core/actual-gates-H2-056d-01/SAFE_INSTALLED_CORE_QUALIFICATION.json",
+        "evidence_sha256": "8326cacdf1b41246c1374e24f9777f1d2ccddec5b7843da981ec35c3b0efd55e",
+        "exit_code": 0,
+        "failures": 0,
+        "id": "core-installed-java-base",
+        "image_manifest_sha256": "7901ffa1c52ee336e68ee6cc6c7df6f4df605de02dde2d04202aba41c3682f1b",
+        "metrics": {
+          "actual_invocations": 6,
+          "new_runtime_layer": false,
+          "production_class_patches": false,
+          "unique_consumer_classes": 3
+        },
+        "mode": "three consumer classes in default and checked-JNI SerialGC modes",
+        "notes": [
+          "All six independent consumer commands and their H2 javac compilation exited zero.",
+          "Bootstrap java.base and null defining-loader assertions executed with an empty external user native-library path; production classes were not patched.",
+          "The separate installed M3 module/catalogue invocations are recorded below and do not promote module count into SDK capability coverage."
+        ],
+        "published_commit": "2c99886d4926afcf66e65fd5a6579aa164a83866",
+        "scope": "External installed-image consumers of the java.base bootstrap collection owners",
+        "skipped": 0,
+        "source_commit": "056d752c7352e8132a3b2aa44d8ace584a8acf9d",
+        "source_tree": "5ccc6207f5ddb2c1cea5039fabfd4bf0bbfc3734",
+        "status": "PASS",
+        "tests": 6
+      },
+      {
+        "checks": 82,
+        "evidence_pointer": "private-proof:next-pass-collection-core/resources/actual-H2-observations-01/RESOURCE_OBSERVATIONS.json",
+        "evidence_sha256": "87f7fffd55cff2eb6d6a17bf67a190d5f49b3c85802fd48611ca4486e6efe10b",
+        "exit_code": 0,
+        "id": "core-resources",
+        "image_manifest_sha256": "7901ffa1c52ee336e68ee6cc6c7df6f4df605de02dde2d04202aba41c3682f1b",
+        "metrics": {
+          "C_boundary_seals": 13,
+          "C_finite_checks": 82,
+          "C_forks": 12,
+          "actual_unpatched_forks": 16,
+          "additional_capture4096_bytes_per_call": 50256,
+          "complete_postrun_image_entries_each": 599,
+          "failed_controls": 0,
+          "new_sink4096_bytes_per_call": 50288,
+          "new_sorted_source_comparisons_per8192": 167992,
+          "new_sorted_source_warm_allocated_bytes_per_call": 440496,
+          "new_tree_full_head_first_comparisons_8192": 51,
+          "new_tree_low_rank_first_comparisons_65536": 34,
+          "old_sink4096_bytes_per_call": 32,
+          "old_sorted_source_comparisons_per8192": 0,
+          "old_sorted_source_warm_allocated_bytes_per_call": 327744,
+          "old_tree_full_head_first_comparisons_8192": 2,
+          "old_tree_low_rank_first_comparisons_65536": 1474203,
+          "resource_C_harness_source_commit": "730294cac8e98d860aaddd12222874a014146d44",
+          "sorted_control_source_commit_at_invocation": null,
+          "sorted_control_source_snapshot_sha256": "44c0e1d8a480a8713eff4499a66dd79ef39a57d11dc93755a59907a09a9073e4",
+          "sorted_source_closure_checks": 5,
+          "sorted_source_forks": 4,
+          "unsafe_not_run": 0
+        },
+        "notes": [
+          "All sixteen actual unpatched forks exited zero; eighty-two finite semantic checks, thirteen C boundary seals and five sorted-control closure checks passed.",
+          "Exact reference identity, order, backing return and bounded 32 MiB pressure refusal/retry remained intact.",
+          "Low-rank tree seek at 65,536 elements used 34 first-result comparisons versus 1,474,203; full-head initialization at 8,192 elements cost 51 versus 2 comparisons.",
+          "Capturing 4,096 references added 50,256 allocated bytes per call in the sink control (32 to 50,288 bytes), an operation-local correctness cost.",
+          "For same-comparator sorted source with 8,192 elements, the detached capture loses the backing TreeSet fast path: comparator work rose from 0 to 167,992 per call and warm allocation from 327,744 to 440,496 bytes per call.",
+          "Retained cursor heap net deltas are inconclusive; finite CPU/process observations establish no universal speed, concurrency or global native-memory benefit.",
+          "The C harness was source-pinned to C730; the additional sorted-source probe was an unpublished-at-invocation post-C immutable SHA256 snapshot with a null committed source epoch. Product runtime/source binding for every observation is H2."
+        ],
+        "published_commit": "2c99886d4926afcf66e65fd5a6579aa164a83866",
+        "scope": "Finite comparative resources on two balanced actual unpatched JVM pairs per image and mode",
+        "source_commit": "056d752c7352e8132a3b2aa44d8ace584a8acf9d",
+        "source_tree": "5ccc6207f5ddb2c1cea5039fabfd4bf0bbfc3734",
+        "status": "OBSERVED",
+        "units": {
+          "allocated_bytes": "thread-allocated bytes per call",
+          "comparisons": "comparator invocations per stated input/call",
+          "process_readings": "combined JVM process RSS/HWM/virtual memory; not isolated native allocation"
+        }
+      },
+      {
+        "errors": 0,
+        "evidence_pointer": "private-proof:next-pass-collection-core/actual-gates-H2-056d-01/SAFE_REGEX_QUALIFICATION.json",
+        "evidence_sha256": "c17a8fc763e231ccf6c1c51dcc2e62173ac145f70446516ee72331a0bc479648",
+        "exit_code": 0,
+        "failures": 0,
+        "id": "existing-regex-jni-gc",
+        "image_manifest_sha256": "7901ffa1c52ee336e68ee6cc6c7df6f4df605de02dde2d04202aba41c3682f1b",
+        "metrics": {
+          "main_actions": 38,
+          "pressure_actions": 4,
+          "pressure_pass_markers": 4,
+          "pressure_refusal_markers": 2
+        },
+        "notes": [
+          "All thirteen existing source-authoritative entries and thirty-eight main actions passed against the actual H2 image.",
+          "Pressure actions include G1 and Serial collectors; production classes were not component-patched.",
+          "This finite cohort does not qualify every regex/provider/platform contract."
+        ],
+        "published_commit": "2c99886d4926afcf66e65fd5a6579aa164a83866",
+        "scope": "Independent actual existing String/regex/JNI/GC cohort",
+        "skipped": 0,
+        "source_commit": "056d752c7352e8132a3b2aa44d8ace584a8acf9d",
+        "source_tree": "5ccc6207f5ddb2c1cea5039fabfd4bf0bbfc3734",
+        "status": "PASS",
+        "tests": 13
+      },
+      {
+        "errors": 0,
+        "evidence_pointer": "private-proof:next-pass-collection-core/postbuild-module-gates-packaged-r2/run-postbuild-H2-packaged-r2-056d752-9132fadd17/module-java-SAFE_RUN.json",
+        "evidence_sha256": "5f1c1e5159a7539cf993ed3fb29e5afc68b299e5a2c6045b425bd1defadce9ae",
+        "exit_code": 0,
+        "failures": 0,
+        "id": "postbuild-module-java",
+        "image_manifest_sha256": "7901ffa1c52ee336e68ee6cc6c7df6f4df605de02dde2d04202aba41c3682f1b",
+        "metrics": {
+          "expected_native_assumptions": 2,
+          "helper_ancestor_source_commit": "730294cac8e98d860aaddd12222874a014146d44",
+          "helper_source_commit_at_invocation": null,
+          "helper_source_snapshot_sha256": "af7495c37277a544501e014c3915fbfe9f0b0b97e7749b3a588fb8a9b599e963",
+          "required_native": false
+        },
+        "mode": "module-java",
+        "notes": [
+          "Actual received module sources compiled with the separately bound frozen source-built SDK.",
+          "Exact upstream882 production baseline compiled and archived with the same SDK using clean compile and pinned maven-jar-plugin3.4.1:jar, without test-phase or full-test-PASS claim.",
+          "Only the pinned upstream M3MethodSignalImage production class family and exact single upstream JUnit ID are admitted additively.",
+          "Executed helper is an unpublished-at-invocation immutable post-C SHA256 snapshot; ancestor C is recorded separately.",
+          "Arrays JNI allocator is mandatory in both selector modes; no test filters or exclusions.",
+          "Historical verify_donation.py was left unchanged and was not executed.",
+          "Two declared native-only assumptions; required-native counterparts pass.",
+          "H2 is both the actual module source and compiler/runtime image epoch; the earlier SDK059/M catalogue maintenance receipt remains a separate historical module-only proof.",
+          "Helper execution source was unpublished at invocation and pinned by its immutable SHA256 snapshot, with ancestor C recorded separately; later publication does not rewrite that execution epoch."
+        ],
+        "published_commit": "2c99886d4926afcf66e65fd5a6579aa164a83866",
+        "scope": "MODULE_ONLY: packaged M3 modules compiled and consumed using the actual H2 SDK",
+        "skipped": 2,
+        "source_commit": "056d752c7352e8132a3b2aa44d8ace584a8acf9d",
+        "source_tree": "5ccc6207f5ddb2c1cea5039fabfd4bf0bbfc3734",
+        "status": "PASS",
+        "tests": 620
+      },
+      {
+        "errors": 0,
+        "evidence_pointer": "private-proof:next-pass-collection-core/postbuild-module-gates-packaged-r2/run-postbuild-H2-packaged-r2-056d752-9132fadd17/module-required-native-SAFE_RUN.json",
+        "evidence_sha256": "3bc7e67ce225867df1782d5f46da4e8647a39c18a35b1d1dd7ade1136f1a1886",
+        "exit_code": 0,
+        "failures": 0,
+        "id": "postbuild-module-required-native",
+        "image_manifest_sha256": "7901ffa1c52ee336e68ee6cc6c7df6f4df605de02dde2d04202aba41c3682f1b",
+        "metrics": {
+          "expected_native_assumptions": 0,
+          "helper_ancestor_source_commit": "730294cac8e98d860aaddd12222874a014146d44",
+          "helper_source_commit_at_invocation": null,
+          "helper_source_snapshot_sha256": "af7495c37277a544501e014c3915fbfe9f0b0b97e7749b3a588fb8a9b599e963",
+          "required_native": true
+        },
+        "mode": "module-required-native",
+        "notes": [
+          "Actual received module sources compiled with the separately bound frozen source-built SDK.",
+          "Exact upstream882 production baseline compiled and archived with the same SDK using clean compile and pinned maven-jar-plugin3.4.1:jar, without test-phase or full-test-PASS claim.",
+          "Only the pinned upstream M3MethodSignalImage production class family and exact single upstream JUnit ID are admitted additively.",
+          "Executed helper is an unpublished-at-invocation immutable post-C SHA256 snapshot; ancestor C is recorded separately.",
+          "Arrays JNI allocator is mandatory in both selector modes; no test filters or exclusions.",
+          "Historical verify_donation.py was left unchanged and was not executed.",
+          "All collection native selectors required; zero skips.",
+          "H2 is both the actual module source and compiler/runtime image epoch; the earlier SDK059/M catalogue maintenance receipt remains a separate historical module-only proof.",
+          "Helper execution source was unpublished at invocation and pinned by its immutable SHA256 snapshot, with ancestor C recorded separately; later publication does not rewrite that execution epoch."
+        ],
+        "published_commit": "2c99886d4926afcf66e65fd5a6579aa164a83866",
+        "scope": "MODULE_ONLY: packaged M3 modules compiled and consumed using the actual H2 SDK",
+        "skipped": 0,
+        "source_commit": "056d752c7352e8132a3b2aa44d8ace584a8acf9d",
+        "source_tree": "5ccc6207f5ddb2c1cea5039fabfd4bf0bbfc3734",
+        "status": "PASS",
+        "tests": 620
+      },
+      {
+        "errors": 0,
+        "evidence_pointer": "private-proof:next-pass-collection-core/postbuild-module-gates-packaged-r2/run-postbuild-H2-packaged-r2-056d752-9132fadd17/installed-catalogue-SAFE_RUN.json",
+        "evidence_sha256": "793ff40326491721e9a2460e7f7a6b94711fada9c246bc5bb93a0cd81adc1494",
+        "exit_code": 0,
+        "failures": 0,
+        "id": "postbuild-installed-catalogue",
+        "image_manifest_sha256": "7901ffa1c52ee336e68ee6cc6c7df6f4df605de02dde2d04202aba41c3682f1b",
+        "metrics": {
+          "actual_invocations": 9,
+          "existing_m3_modules": 2,
+          "expected_native_assumptions": 0,
+          "helper_ancestor_source_commit": "730294cac8e98d860aaddd12222874a014146d44",
+          "helper_source_commit_at_invocation": null,
+          "helper_source_snapshot_sha256": "af7495c37277a544501e014c3915fbfe9f0b0b97e7749b3a588fb8a9b599e963",
+          "installed_modules": 71,
+          "preserved_sdk_modules": 69,
+          "required_native": false,
+          "unique_consumer_classes": 5
+        },
+        "mode": "installed-catalogue",
+        "notes": [
+          "Actual received module sources compiled with the separately bound frozen source-built SDK.",
+          "Exact upstream882 production baseline compiled and archived with the same SDK using clean compile and pinned maven-jar-plugin3.4.1:jar, without test-phase or full-test-PASS claim.",
+          "Only the pinned upstream M3MethodSignalImage production class family and exact single upstream JUnit ID are admitted additively.",
+          "Executed helper is an unpublished-at-invocation immutable post-C SHA256 snapshot; ancestor C is recorded separately.",
+          "Arrays JNI allocator is mandatory in both selector modes; no test filters or exclusions.",
+          "Historical verify_donation.py was left unchanged and was not executed.",
+          "Nine invocations across five unique consumer classes; four default-installed and four explicit-native invocations plus one plain catalogue consumer.",
+          "Image-internal native peers are available in both installed modes; default-installed is not a native-absent fallback lane.",
+          "All 69 SDK modules retained plus the two existing M3 modules; production classes unpatched and provider dependencies absent.",
+          "H2 is both the actual module source and compiler/runtime image epoch; the earlier SDK059/M catalogue maintenance receipt remains a separate historical module-only proof.",
+          "Helper execution source was unpublished at invocation and pinned by its immutable SHA256 snapshot, with ancestor C recorded separately; later publication does not rewrite that execution epoch."
+        ],
+        "published_commit": "2c99886d4926afcf66e65fd5a6579aa164a83866",
+        "scope": "MODULE_ONLY: packaged M3 modules compiled and consumed using the actual H2 SDK",
+        "skipped": 0,
+        "source_commit": "056d752c7352e8132a3b2aa44d8ace584a8acf9d",
+        "source_tree": "5ccc6207f5ddb2c1cea5039fabfd4bf0bbfc3734",
+        "status": "PASS",
+        "tests": 9
+      },
+      {
+        "errors": 1,
+        "evidence_pointer": "private-proof:next-pass-collection-core/actual-gates-H2-056d-01/SAFE_JDK_UTIL_QUALIFICATION.json",
+        "evidence_sha256": "5f22b61c82fa063b0bf44c19b48a4181fd7597cb1999f43cdf7ea9d6eab2bde8",
+        "exit_code": 3,
+        "failures": 1,
+        "id": "full-authoritative-jdk-util",
+        "image_manifest_sha256": "7901ffa1c52ee336e68ee6cc6c7df6f4df605de02dde2d04202aba41c3682f1b",
+        "metrics": {
+          "default_list_selected": 1021,
+          "executed_entries": 1013,
+          "gatherer_junit_errors": 0,
+          "gatherer_junit_failures": 0,
+          "gatherer_junit_skips": 0,
+          "gatherer_junit_tests_passed": 291,
+          "not_run_manual_or_ignore": 9,
+          "not_run_platform_requires": 3,
+          "not_run_unchanged_problem_list": 2,
+          "passed_entries": 1011,
+          "pattern_state_main_actions_passed": 2
+        },
+        "notes": [
+          "Actual command exit is 3: 1,011 entries passed, TestLoggerWeakRefLeak failed and TimedAcquireLeak errored; the broad utility group is not marked PASS.",
+          "All 1,027 discovered report entries are accounted for: 1,013 executed and fourteen standard not-run dispositions (nine manual/ignore policy, three platform requirements, two unchanged upstream problem-list entries).",
+          "The two attach-boundary nonpasses were reproduced in prior SDK059/H1 controls; environment versus inherited runtime root cause remains unresolved.",
+          "Pattern state regression passed two main actions and Gatherer cardinality passed 291 JUnit tests in this actual H2 run.",
+          "The separate independent nine-entry owner command passed; it does not relabel or suppress these wider utility nonpasses."
+        ],
+        "published_commit": "2c99886d4926afcf66e65fd5a6579aa164a83866",
+        "scope": "Full authoritative jdk_util command with unchanged source VM flags and standard exclusions",
+        "skipped": 14,
+        "source_commit": "056d752c7352e8132a3b2aa44d8ace584a8acf9d",
+        "source_tree": "5ccc6207f5ddb2c1cea5039fabfd4bf0bbfc3734",
+        "status": "FAIL",
+        "tests": 1027
+      }
+    ],
+    "status": "PASS_REQUIRED_CORE_ROLES_WITH_OBSERVED_RESOURCES_AND_RECORDED_UTILITY_NONPASSES"
+  },
+  "native": "Existing java.base Java owner refinement only; no new native source, export, symbol, header or algorithm claimed.",
+  "integration": "Existing java.base bootstrap owners, not optional-module capability or module-count promotion.",
+  "boundaries": [
+    "Source C pins templates/tooling; actual earlier source qualification code/invocation pins remain distinct and explicit.",
+    "Names phase targets are actual unchanged owner preimages, never future received implementation claims.",
+    "Final receiving epochs and built-image epochs are distinct; use exact tree/source identity per gate.",
+    "Recipe Java/YAML, templates, executors, prototypes, catalogue and MOP memory remain private.",
+    "Whole-SDK/family/five-provider/JCK/platform and subsequent global phase admission remain pending."
+  ]
+}

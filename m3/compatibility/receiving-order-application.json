@@ -1,0 +1,70 @@
+{
+  "schema": "M3_RECEIVING_ORDER_APPLICATION_V1",
+  "sourceRepository": "hsoliwal/com.synexia",
+  "sourceRevision": "2e19d0caac5d6162eaa063f4f741d0c4b45a99ff",
+  "sourcePullRequest": "https://github.com/hsoliwal/com.synexia/pull/9704",
+  "recipe": "com.synexia.rewrite.M3JdkReceivingOrderRecipe",
+  "recipeCrate": "synexia-openrewrite-recipes/recipes/m3jdk-receiving-order",
+  "proofPath": "synexia-openrewrite-recipes/recipes/m3jdk-receiving-order/verification/proof.json",
+  "proofSha256": "c9b443b2c7169367d386477b57f651358bab22d8fd053a1f6fbbff080aa6c506",
+  "targetBaseline": "a694bbd2b3c382a40d401a813ae547293c9d1074",
+  "execution": "SDK_EXECUTION",
+  "targetStages": [
+    {
+      "stage": "target-01",
+      "repository": "target",
+      "path": "m3/docs/name-mapping.json",
+      "beforeSha256": "bf18229cd5f8a0b36559f3becca71fdeec86080da50187fc6a6e27cb84794203",
+      "afterSha256": "75df53d5b22e58cf094ca4ecac28cb7c88753e1e4044934970e60f1ac15a04ff"
+    },
+    {
+      "stage": "target-02",
+      "repository": "target",
+      "path": "m3/docs/m3jdk21-porting-invariant.md",
+      "beforeSha256": "054a022471cecad91adcdc5efa0f7e1ee6e2f024e8d42254d2e5ca070134cdb5",
+      "afterSha256": "f3dc76f260ae7ea989c31b4c2ca3ca193ff36a850c2129fb8a181e9124434c9c"
+    },
+    {
+      "stage": "target-03",
+      "repository": "target",
+      "path": "AGENTS.md",
+      "beforeSha256": "44cfb1456994ac39cac26dc61f36e5fdbd3ba1485c7e7416a0f9e59f3cfc6676",
+      "afterSha256": "f9b77f96b82faeb2d291d6c7fd21a3a1aab652c310cc747e12cd4426e526f98e"
+    },
+    {
+      "stage": "target-04",
+      "repository": "target",
+      "path": "m3/compatibility/check_synexia_full_family.py",
+      "beforeSha256": "bea7492e21312b2951b33d005a38263ffc9d15370f493fd23a17f75cf1f049bc",
+      "afterSha256": "be1b983596b6df7043cbd187617c144d52ecb07b2c555364895bdff198fdb170"
+    },
+    {
+      "stage": "target-05",
+      "repository": "target",
+      "path": "m3/compatibility/test_synexia_full_family.py",
+      "beforeSha256": "674fb86e571a36f554a2435f1a5f1eb0217652345b5b20b13a64b1cdcf9d9274",
+      "afterSha256": "1d6f4571cc284fd4e83a8e3e220f22ca15f4d2e0926d82bfbbd9025385afed42"
+    },
+    {
+      "stage": "target-06",
+      "repository": "target",
+      "path": ".github/workflows/m3-synexia-public-target-policy.yml",
+      "beforeSha256": "73248049710811e3ee7b75f34a7bc6f73e3d5d141e8ed34a8d2ac141c7387717",
+      "afterSha256": "824f2d59ee578b5ec5d3aa8fd06b1049098e93729d9c0e48029a9d085cf07963"
+    }
+  ],
+  "wholeRoundReplayChanges": 0,
+  "targetPolicyTests": 13,
+  "newNegativePolicyCases": 53,
+  "license": "Apache-2.0",
+  "copyrightNotice": "Copyright 2026 Hitesh Soliwal and contributors",
+  "runtimeAcceptance": false,
+  "familyCompletion": false,
+  "notRun": [
+    "OpenJDK product build and jtreg",
+    "JNI/native runtime",
+    "interpreter/C1/C2/GC/CDS/platform tests",
+    "resource/performance benchmarks",
+    "full Synexia reactor and repository-local dependency-source mirror gate"
+  ]
+}

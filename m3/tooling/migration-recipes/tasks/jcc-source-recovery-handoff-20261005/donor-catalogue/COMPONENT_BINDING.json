@@ -1,0 +1,382 @@
+{
+  "capability_ids": [
+    "synexia.jcc-recipe-laboratory",
+    "synexia.jcc-java-jni-regression"
+  ],
+  "copies": [
+    {
+      "bytes": 3358,
+      "git_blob": "0f024cef89a998670da06f390f14234e0948250c",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/payload/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/AUTHORING_RECEIPT.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/AUTHORING_RECEIPT.json",
+      "role": "historical_document",
+      "sha256": "b96baa62d0814767fa847d8f6a72dda1972ad673b137fec7c180916b2de098ac"
+    },
+    {
+      "bytes": 12750,
+      "git_blob": "d5ff11d9ba0135dbb30d87cb0c0d0e4eab2d5dcc",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/payload/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/DONOR_CATALOGUE.md",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/DONOR_CATALOGUE.md",
+      "role": "historical_document",
+      "sha256": "f12b6c4986ab5d283205ecbdddce46a461bb579db2d3c83513cddaed23b722a7"
+    },
+    {
+      "bytes": 8533,
+      "git_blob": "64e307ac4e3847696d0609bd53031881f0787c76",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/payload/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/EXECUTED_TEST_MAPPING.md",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/EXECUTED_TEST_MAPPING.md",
+      "role": "historical_document",
+      "sha256": "6e39cc123a018f72d3cdb02c178326f757b44159c75bd7332435ae5916ca19f9"
+    },
+    {
+      "bytes": 2069,
+      "git_blob": "4e8b4b266ad2356d4e063ac0015df97c7b5467d3",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/payload/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/INTEGRATION.md",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/INTEGRATION.md",
+      "role": "historical_document",
+      "sha256": "e4c26810f4cc52ce476666795c7f54ed9288ab3e3dbe5629a2aa5f17df0dd57b"
+    },
+    {
+      "bytes": 51757,
+      "git_blob": "d663dc4c8c13968edfffe0258a1b6ccc927434fb",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/payload/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/donor_catalogue.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/donor_catalogue.json",
+      "role": "historical_document",
+      "sha256": "b9c144d5eb9be716fd749b6d7cda456e0d40aae6ae423c794ad2ace1a4fe1322"
+    },
+    {
+      "bytes": 9384,
+      "git_blob": "5c3f46cdd7e9d64126edc81520c554d04056faf2",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/donor-catalogue-recovery-publish/PUBLICATION.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_PUBLICATION.json",
+      "role": "publication_evidence",
+      "sha256": "8dadc9f70a6a2fa1f069bcc0883cef2c3d2218e701fdd166203c7304a3c50e25"
+    },
+    {
+      "bytes": 291118,
+      "git_blob": "a4176d4f180a4d75176f6118b99f5e24857eede2",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/donor-catalogue-recovery-publish/FINAL_READBACK.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_FINAL_READBACK.json",
+      "role": "publication_evidence",
+      "sha256": "c98fdec1b73b2949415fde70f24c9c0d671ec9dc86535ef39b69f331e2f29fc6"
+    },
+    {
+      "bytes": 368376,
+      "git_blob": "b353fcf87e3d48cec32bdd0119bdc2d653a83511",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/donor-catalogue-recovery-publish/TREE_AND_BODY_CALLS.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_TREE_AND_BODY_CALLS.json",
+      "role": "publication_evidence",
+      "sha256": "193f9fe97c86b3a7dfda78458f6566e34189f8922dd31d6dec1d0a76c082cf56"
+    },
+    {
+      "bytes": 48404,
+      "git_blob": "0771deb1c8fca8f73ea404acda5de835173f1aa1",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/donor-catalogue-recovery-publish/FINAL_PUBLICATION_CALLS.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_FINAL_PUBLICATION_CALLS.json",
+      "role": "publication_evidence",
+      "sha256": "557f5751a5dc4d21c0dafc40b3c493345f86d23fce1ac6ac9214eb285e194111"
+    },
+    {
+      "bytes": 671,
+      "git_blob": "c3c71891f0954d607c8d9f20695740c9c4ad6ec8",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/donor-catalogue-recovery-publish/TREE_CREATION.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_TREE_CREATION.json",
+      "role": "publication_evidence",
+      "sha256": "016fa414afbd5e42ec56093d952276140d695f41d5c199b15615eeda9359dc91"
+    },
+    {
+      "bytes": 750,
+      "git_blob": "a252207a3e929e43440024031023db12a456bb55",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/donor-catalogue-recovery-publish/COMMIT_CREATION.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_COMMIT_CREATION.json",
+      "role": "publication_evidence",
+      "sha256": "da87a53dd252a318f05a187751be9972e331dc910a5f54ed0128a8c42067c7d9"
+    },
+    {
+      "bytes": 481,
+      "git_blob": "d2702df8cf25095f732253855c58069e41744bc4",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/donor-catalogue-recovery-publish/BRANCH_CREATION.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_BRANCH_CREATION.json",
+      "role": "publication_evidence",
+      "sha256": "c34da01ca97b444752fef431a09f9a67eef4fba1505e46eaef5965027d3636d7"
+    },
+    {
+      "bytes": 9173,
+      "git_blob": "15f4006a0c9fef677c7136917b50479e0fde305b",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/donor-catalogue-recovery-publish/PR_CREATION.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_PR_CREATION.json",
+      "role": "publication_evidence",
+      "sha256": "6fafbf96fcaae74f720995bfa67d2e2146f0844e046d1db19095005ab99e1efd"
+    },
+    {
+      "bytes": 56222,
+      "git_blob": "0c52c8306ba4dacde0a0b9226c969c0f3566cb9c",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/donor-catalogue-recovery-publish/STATE_BEFORE_BRANCH.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_STATE_BEFORE_BRANCH.json",
+      "role": "publication_evidence",
+      "sha256": "c6cc73879c924be30d70ea248b92a2b281e28d7064de9bce1d2299eb9750e78b"
+    },
+    {
+      "bytes": 9255,
+      "git_blob": "e17c6c6875b60ab2ce2f044a822185f83de0fd06",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/donor-catalogue-recovery-publish/BEFORE_BRANCH.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_BEFORE_BRANCH.json",
+      "role": "publication_evidence",
+      "sha256": "e569931153bf732dd94ad6db0c362361c6cc1c25edf01c52cc17d578a07d3936"
+    },
+    {
+      "bytes": 158688,
+      "git_blob": "af8242ef2fe7309fc67a758c4bae1aeb31025f1c",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/donor-catalogue-recovery-publish/BASE_CHAIN.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_BASE_CHAIN.json",
+      "role": "publication_evidence",
+      "sha256": "bea94459b67cc6b7c0d98a2cfe3f946c6f558c803725ee76f89e0821dae3ff4a"
+    },
+    {
+      "bytes": 102357,
+      "git_blob": "1a0f6483450c8346863a3bc1488c4efe188b5a66",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/donor-catalogue-recovery-publish/PREFLIGHT.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_PREFLIGHT.json",
+      "role": "publication_evidence",
+      "sha256": "448f91365fa5cf8d4c832c2c404397ecc87706afb128a6a41079d5f695dfca08"
+    },
+    {
+      "bytes": 9531,
+      "git_blob": "bda3074d7bae098731575c7958124b2b28bcd547",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/donor-catalogue-recovery-publish/verify_restoration.py",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/verify_restoration.py",
+      "role": "publication_evidence",
+      "sha256": "e5fb893d0f420e73a6ff3552f1c86f7129b8fc2b29b388939e7b12c10fc16a01"
+    },
+    {
+      "bytes": 13498,
+      "git_blob": "395fb197cea28385df86c10416f20d7e333f8aff",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/INPUT_MANIFEST.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/INPUT_MANIFEST.json",
+      "role": "publication_evidence",
+      "sha256": "f7949116d828c55aa5cc77c19764cf0484958d408b86d0c91999c45a3fedd8f3"
+    },
+    {
+      "bytes": 2166,
+      "git_blob": "a4d7f11f1d87401f5eebbcd6bca5ba3196081d02",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/HISTORICAL_PR_9142.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/HISTORICAL_PR_9142.json",
+      "role": "publication_evidence",
+      "sha256": "eaf45a8f519958536b7695da1fe3c0173253851aad9d3c4eca816f05b81fd4da"
+    },
+    {
+      "bytes": 45037,
+      "git_blob": "129faf2feda8856e25dbc9381d1aa221ef2f9f31",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/PATH_AND_TEST_ADMISSION.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/PATH_AND_TEST_ADMISSION.json",
+      "role": "publication_evidence",
+      "sha256": "29e476534bd7e7743194d1ae9b7a81f30d2f2dd4ca8b4ee8f115e2d7970f1fe1"
+    },
+    {
+      "bytes": 152653,
+      "git_blob": "635b2c094ea28d35bc2de58f64c80f9474a21c24",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/EXPECTED_SOURCE_TREES.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/EXPECTED_SOURCE_TREES.json",
+      "role": "publication_evidence",
+      "sha256": "b8c31ba4c3c6c3cfafc426852655c15994193dc1a9c62edaefce05c7840131e0"
+    },
+    {
+      "bytes": 329050,
+      "git_blob": "f145213673812e90875126acfa20e66c6655cdb0",
+      "mode": "100644",
+      "original_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/inputs/CAPTURED_INPUTS.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/HISTORICAL_CAPTURED_INPUTS.json",
+      "role": "publication_evidence",
+      "sha256": "7e13c28978bf59518850ecd10637729c87c25e0604c7b5505c44d1d5d5fa1fab"
+    }
+  ],
+  "documentation_source_publication": {
+    "base_branch": "aix/jcc-source-merge-recovery-20261005",
+    "branch": "aix/jcc-donor-catalogue-recovery-20261005",
+    "commit": "4990edbf4ba4afaa14e0ba2d7613331c31e21e9e",
+    "five_direct_bodies_verified": true,
+    "parent": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+    "pull_request": 9367,
+    "receipt": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_PUBLICATION.json",
+    "receipt_sha256": "8dadc9f70a6a2fa1f069bcc0883cef2c3d2218e701fdd166203c7304a3c50e25",
+    "repository": "hsoliwal/com.synexia",
+    "root": "1bd86f643f0e08ecb1b5a43d020bf0110e797d68",
+    "six_complete_tree_objects_verified": true,
+    "status": "PUBLISHED_READBACK_VERIFIED",
+    "url": "https://github.com/hsoliwal/com.synexia/pull/9367"
+  },
+  "documents": [
+    {
+      "bytes": 3358,
+      "git_blob": "0f024cef89a998670da06f390f14234e0948250c",
+      "mode": "100644",
+      "original_url": "https://github.com/hsoliwal/com.synexia/blob/36609e4a8719859b46e540f85013c1126a5e3bc2/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/AUTHORING_RECEIPT.json",
+      "receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/AUTHORING_RECEIPT.json",
+      "sha256": "b96baa62d0814767fa847d8f6a72dda1972ad673b137fec7c180916b2de098ac",
+      "source_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/AUTHORING_RECEIPT.json",
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/4990edbf4ba4afaa14e0ba2d7613331c31e21e9e/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/AUTHORING_RECEIPT.json"
+    },
+    {
+      "bytes": 12750,
+      "git_blob": "d5ff11d9ba0135dbb30d87cb0c0d0e4eab2d5dcc",
+      "mode": "100644",
+      "original_url": "https://github.com/hsoliwal/com.synexia/blob/36609e4a8719859b46e540f85013c1126a5e3bc2/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/DONOR_CATALOGUE.md",
+      "receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/DONOR_CATALOGUE.md",
+      "sha256": "f12b6c4986ab5d283205ecbdddce46a461bb579db2d3c83513cddaed23b722a7",
+      "source_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/DONOR_CATALOGUE.md",
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/4990edbf4ba4afaa14e0ba2d7613331c31e21e9e/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/DONOR_CATALOGUE.md"
+    },
+    {
+      "bytes": 8533,
+      "git_blob": "64e307ac4e3847696d0609bd53031881f0787c76",
+      "mode": "100644",
+      "original_url": "https://github.com/hsoliwal/com.synexia/blob/36609e4a8719859b46e540f85013c1126a5e3bc2/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/EXECUTED_TEST_MAPPING.md",
+      "receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/EXECUTED_TEST_MAPPING.md",
+      "sha256": "6e39cc123a018f72d3cdb02c178326f757b44159c75bd7332435ae5916ca19f9",
+      "source_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/EXECUTED_TEST_MAPPING.md",
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/4990edbf4ba4afaa14e0ba2d7613331c31e21e9e/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/EXECUTED_TEST_MAPPING.md"
+    },
+    {
+      "bytes": 2069,
+      "git_blob": "4e8b4b266ad2356d4e063ac0015df97c7b5467d3",
+      "mode": "100644",
+      "original_url": "https://github.com/hsoliwal/com.synexia/blob/36609e4a8719859b46e540f85013c1126a5e3bc2/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/INTEGRATION.md",
+      "receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/INTEGRATION.md",
+      "sha256": "e4c26810f4cc52ce476666795c7f54ed9288ab3e3dbe5629a2aa5f17df0dd57b",
+      "source_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/INTEGRATION.md",
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/4990edbf4ba4afaa14e0ba2d7613331c31e21e9e/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/INTEGRATION.md"
+    },
+    {
+      "bytes": 51757,
+      "git_blob": "d663dc4c8c13968edfffe0258a1b6ccc927434fb",
+      "mode": "100644",
+      "original_url": "https://github.com/hsoliwal/com.synexia/blob/36609e4a8719859b46e540f85013c1126a5e3bc2/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/donor_catalogue.json",
+      "receiving_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/donor_catalogue.json",
+      "sha256": "b9c144d5eb9be716fd749b6d7cda456e0d40aae6ae423c794ad2ace1a4fe1322",
+      "source_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/donor_catalogue.json",
+      "source_url": "https://github.com/hsoliwal/com.synexia/blob/4990edbf4ba4afaa14e0ba2d7613331c31e21e9e/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/donor_catalogue.json"
+    }
+  ],
+  "implementation_source_epoch": {
+    "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+    "pull_request": 9362,
+    "repository": "hsoliwal/com.synexia",
+    "root": "0361e4a07b77a01df170523033fef01c4052ddc5",
+    "unchanged": true
+  },
+  "interpretation": {
+    "current_donor_evidence_url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/05-donor-native.log",
+    "current_donor_methods": 7,
+    "document_bytes_and_original_published_false_preserved": true,
+    "literal_pairs": 247,
+    "original_68_test_total_is_historical": true,
+    "proposal_1871_cases_executed": false,
+    "regex_pairs": 1477,
+    "relative_links_use_original_source_context": "Use each immutable source_url for source-relative links; receiving copies are historical documentation, not newly generated runtime proof."
+  },
+  "kind": "historical-documentation-restoration",
+  "original_publication": {
+    "base_branch": "aix/javac-convergence-20261005",
+    "base_observed_commit": "1123430085af1ad886a35efb8cd5354709d5bb4f",
+    "changed_files": 6,
+    "files": [
+      {
+        "additions": 8,
+        "deletions": 0,
+        "git_blob": "37a4e9583c419aca53d45b16af201f55638c87f4",
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/README.md",
+        "status": "modified"
+      },
+      {
+        "additions": 94,
+        "deletions": 0,
+        "git_blob": "0f024cef89a998670da06f390f14234e0948250c",
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/AUTHORING_RECEIPT.json",
+        "status": "added"
+      },
+      {
+        "additions": 66,
+        "deletions": 0,
+        "git_blob": "d5ff11d9ba0135dbb30d87cb0c0d0e4eab2d5dcc",
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/DONOR_CATALOGUE.md",
+        "status": "added"
+      },
+      {
+        "additions": 69,
+        "deletions": 0,
+        "git_blob": "64e307ac4e3847696d0609bd53031881f0787c76",
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/EXECUTED_TEST_MAPPING.md",
+        "status": "added"
+      },
+      {
+        "additions": 32,
+        "deletions": 0,
+        "git_blob": "4e8b4b266ad2356d4e063ac0015df97c7b5467d3",
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/INTEGRATION.md",
+        "status": "added"
+      },
+      {
+        "additions": 1127,
+        "deletions": 0,
+        "git_blob": "d663dc4c8c13968edfffe0258a1b6ccc927434fb",
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/donor_catalogue.json",
+        "status": "added"
+      }
+    ],
+    "head_branch": "aix/jcc-donor-catalogue-20261005",
+    "head_commit": "36609e4a8719859b46e540f85013c1126a5e3bc2",
+    "merge_commit": "ab77ae5c13a302318e5b4fc97e2f980591234450",
+    "merged": true,
+    "merged_at": "2026-10-05T07:32:44Z",
+    "pull_request": 9142,
+    "repository": "hsoliwal/com.synexia",
+    "state": "closed",
+    "title": "M3: catalogue donor categories and bind executed search/regex coverage",
+    "url": "https://github.com/hsoliwal/com.synexia/pull/9142"
+  },
+  "qualification": {
+    "complete_capability_readback_delivered": false,
+    "destination_gates_passed": false,
+    "new_behavioral_execution_claimed": false,
+    "source_export_admitted": false,
+    "source_qualification": "BLOCKED",
+    "source_qualified_destination_materialized": false
+  },
+  "receiving_evidence_boundary": {
+    "included_in_1008_input_freeze": false,
+    "included_in_182_reference_occurrence_audit": false,
+    "operational_afterimage_sha256_unchanged": {
+      "m3/docs/jcc-source-handoff.md": "d5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d",
+      "m3/docs/name-mapping.json": "eb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e",
+      "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv": "1c4eedbf3f155bac469693da312c577d26999e7776ca1f85870f6cce125f1e35",
+      "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": "f8b27e3582eb494af2c8dd47225976f974be6edc2f6c26313975064d48739497"
+    },
+    "separate_final_documentation_review_required": true,
+    "staged_after_receiving_execution_and_reference_audit": true,
+    "tests_rerun": false
+  },
+  "schema": "m3-jcc-donor-catalogue-component/1",
+  "status": "SOURCE_PUBLICATION_VERIFIED_EXACT_RECEIVING_COPIES_STAGED"
+}

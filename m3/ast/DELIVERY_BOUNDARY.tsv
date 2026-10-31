@@ -1,0 +1,10 @@
+attribute	value
+source_repository	hsoliwal/com.synexia
+source_recipe	com.synexia.rewrite.M3ASTL0L5Synexia20261017
+receiver_recipe	com.synexia.rewrite.M3ASTL0L5Target20261017
+source_provenance	Synexia first-party Apache-2.0
+method	exact hash-pinned generated Java adaptation
+public_jdk_contract_change	false
+new_jni_symbols	false
+java_base_changes	false
+full_qualification	HOLD

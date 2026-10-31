@@ -1,0 +1,51 @@
+[
+  {
+    "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PREFLIGHT.json",
+    "git_blob": "0365b81ad1f8b3cef95993f23a84488c87f1c2ab",
+    "decoded_bytes": 0,
+    "expected_bytes": 4201003,
+    "file": "calls/restore_0365b81ad1f8b3cef95993f23a84488c87f1c2ab.json"
+  },
+  {
+    "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/PUBLICATION_CUSTODY.json",
+    "git_blob": "0f084555dbbea3ba4c9302386ced30e1e1503dda",
+    "decoded_bytes": 0,
+    "expected_bytes": 1099619,
+    "file": "calls/restore_0f084555dbbea3ba4c9302386ced30e1e1503dda.json"
+  },
+  {
+    "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_READBACK.json",
+    "git_blob": "13fcb514b91562724004ba752cc019b6498efa07",
+    "decoded_bytes": 0,
+    "expected_bytes": 3447648,
+    "file": "calls/restore_13fcb514b91562724004ba752cc019b6498efa07.json"
+  },
+  {
+    "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/BASE_TREE_MODEL.json",
+    "git_blob": "6ee3c1bfd76dc5c0abdba031f163a3d38294f5e9",
+    "decoded_bytes": 0,
+    "expected_bytes": 1372743,
+    "file": "calls/restore_6ee3c1bfd76dc5c0abdba031f163a3d38294f5e9.json"
+  },
+  {
+    "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-manifest/FINAL_MANIFEST.json",
+    "git_blob": "8b87e4320079b69393a01387f11ccda15a273509",
+    "decoded_bytes": 0,
+    "expected_bytes": 2651088,
+    "file": "calls/restore_8b87e4320079b69393a01387f11ccda15a273509.json"
+  },
+  {
+    "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FILE_READBACKS.json",
+    "git_blob": "ea5f1bce7b2fb42a30e813a9126baa7f0c920407",
+    "decoded_bytes": 0,
+    "expected_bytes": 1164286,
+    "file": "calls/restore_ea5f1bce7b2fb42a30e813a9126baa7f0c920407.json"
+  },
+  {
+    "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_SOURCE_MANIFEST.json",
+    "git_blob": "f1892501332d65721bfd6164597d93f3a298a10a",
+    "decoded_bytes": 0,
+    "expected_bytes": 1891080,
+    "file": "calls/restore_f1892501332d65721bfd6164597d93f3a298a10a.json"
+  }
+]

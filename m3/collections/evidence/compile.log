@@ -1,0 +1,36 @@
+$ ['/workspace/scratch/b37f6ba1283f/synexia-continuation/toolchain/jdk-21.0.12.1+1/bin/javac', '@m3/collections/target/main.args']
+/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/recipe/target/candidate/src/main/java/com/m3/collections/M3BitLane28.java:7: warning: [missing-explicit-ctor] class M3BitLane28 in exported package com.m3.collections declares no explicit constructors, thereby exposing a default constructor to clients of module com.m3.collections
+public final class M3BitLane28 {
+             ^
+error: warnings found and -Werror specified
+/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/recipe/target/candidate/src/main/java/com/m3/collections/M3LongLane28.java:10: warning: [missing-explicit-ctor] class M3LongLane28 in exported package com.m3.collections declares no explicit constructors, thereby exposing a default constructor to clients of module com.m3.collections
+public final class M3LongLane28 {
+             ^
+/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/recipe/target/candidate/src/main/java/com/m3/collections/M3IntLane28.java:5: warning: [missing-explicit-ctor] class M3IntLane28 in exported package com.m3.collections declares no explicit constructors, thereby exposing a default constructor to clients of module com.m3.collections
+public final class M3IntLane28 {
+             ^
+/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/recipe/target/candidate/src/main/java/com/m3/collections/M3SlotAllocator28.java:10: warning: [missing-explicit-ctor] class M3SlotAllocator28 in exported package com.m3.collections declares no explicit constructors, thereby exposing a default constructor to clients of module com.m3.collections
+public final class M3SlotAllocator28 {
+             ^
+/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/recipe/target/candidate/src/main/java/com/m3/collections/M3LongArena28.java:13: warning: [missing-explicit-ctor] class M3LongArena28 in exported package com.m3.collections declares no explicit constructors, thereby exposing a default constructor to clients of module com.m3.collections
+public final class M3LongArena28 {
+             ^
+/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/recipe/target/candidate/src/main/java/com/m3/collections/M3LongLinkedList28.java:15: warning: [missing-explicit-ctor] class M3LongLinkedList28 in exported package com.m3.collections declares no explicit constructors, thereby exposing a default constructor to clients of module com.m3.collections
+public final class M3LongLinkedList28 {
+             ^
+/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/recipe/target/candidate/src/main/java/com/m3/collections/M3ConcurrentLongLane28.java:32: warning: [missing-explicit-ctor] class M3ConcurrentLongLane28 in exported package com.m3.collections declares no explicit constructors, thereby exposing a default constructor to clients of module com.m3.collections
+public final class M3ConcurrentLongLane28 {
+             ^
+/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/recipe/target/candidate/src/main/java/com/m3/collections/M3ConcurrentIntLane28.java:32: warning: [missing-explicit-ctor] class M3ConcurrentIntLane28 in exported package com.m3.collections declares no explicit constructors, thereby exposing a default constructor to clients of module com.m3.collections
+public final class M3ConcurrentIntLane28 {
+             ^
+/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/recipe/target/candidate/src/main/java/com/m3/collections/M3ConcurrentLongMap.java:20: warning: [missing-explicit-ctor] class M3ConcurrentLongMap in exported package com.m3.collections declares no explicit constructors, thereby exposing a default constructor to clients of module com.m3.collections
+public final class M3ConcurrentLongMap {
+             ^
+/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/recipe/target/candidate/src/main/java/com/m3/collections/M3ConcurrentLongSet.java:21: warning: [missing-explicit-ctor] class M3ConcurrentLongSet in exported package com.m3.collections declares no explicit constructors, thereby exposing a default constructor to clients of module com.m3.collections
+public final class M3ConcurrentLongSet implements M3LongCollection {
+             ^
+1 error
+10 warnings
+
+EXIT=1

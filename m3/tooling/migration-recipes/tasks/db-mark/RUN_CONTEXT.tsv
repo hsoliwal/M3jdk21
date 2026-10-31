@@ -1,0 +1,9 @@
+key	value
+repository	hsoliwal/M3jdk21
+pr	88
+base_head	565bc02094731fbe0dcf3a2fff75706be8d0a60b
+base_tree	96853241043a69d50f91aaa57afa067bc85226ec
+original_test_blob	ed3c0f99eb7ee9f5940c6cd19374033923039a76
+source_root	m3/tooling/migration-recipes
+workers	1
+mode	draft-branch candidate only

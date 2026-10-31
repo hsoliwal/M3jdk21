@@ -1,0 +1,292 @@
+{
+  "schema": "M3_ACTUAL_IMAGE_INDEPENDENT_POSTCHECKS_V1",
+  "image_epoch": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+  "executed_metadata_head": "4c48a3ab34a91e92bcac6e98175dfbee75abba20",
+  "scope": "Independent cost/progress/override-array diagnostics authorized after4selectedtestPASS+1testannotationcompileRED. Does not assertaggregatefive-testpass.",
+  "cost": [
+    {
+      "mode": "flat",
+      "result_receipt": "regex-cost-flat-result.json",
+      "raw_rows": [
+        {
+          "units": 126,
+          "pass": 0,
+          "coldNs": 898603,
+          "queries": 256,
+          "bytes": 8256,
+          "ns": 727038
+        },
+        {
+          "units": 126,
+          "pass": 1,
+          "coldNs": 898603,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 353927
+        },
+        {
+          "units": 126,
+          "pass": 2,
+          "coldNs": 898603,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 215752
+        },
+        {
+          "units": 126,
+          "pass": 3,
+          "coldNs": 898603,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 245444
+        },
+        {
+          "units": 6144,
+          "pass": 0,
+          "coldNs": 784686,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 233514
+        },
+        {
+          "units": 6144,
+          "pass": 1,
+          "coldNs": 784686,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 264307
+        },
+        {
+          "units": 6144,
+          "pass": 2,
+          "coldNs": 784686,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 212795
+        },
+        {
+          "units": 6144,
+          "pass": 3,
+          "coldNs": 784686,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 2217790
+        }
+      ],
+      "steady_observed_bytes_per_query": 32
+    },
+    {
+      "mode": "m3-enabled-compact",
+      "result_receipt": "regex-cost-m3-enabled-compact-result.json",
+      "raw_rows": [
+        {
+          "units": 126,
+          "pass": 0,
+          "coldNs": 373677,
+          "queries": 256,
+          "bytes": 8256,
+          "ns": 305000
+        },
+        {
+          "units": 126,
+          "pass": 1,
+          "coldNs": 373677,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 481454
+        },
+        {
+          "units": 126,
+          "pass": 2,
+          "coldNs": 373677,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 301966
+        },
+        {
+          "units": 126,
+          "pass": 3,
+          "coldNs": 373677,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 396774
+        },
+        {
+          "units": 6144,
+          "pass": 0,
+          "coldNs": 2939033,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 298558
+        },
+        {
+          "units": 6144,
+          "pass": 1,
+          "coldNs": 2939033,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 353549
+        },
+        {
+          "units": 6144,
+          "pass": 2,
+          "coldNs": 2939033,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 305389
+        },
+        {
+          "units": 6144,
+          "pass": 3,
+          "coldNs": 2939033,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 311560
+        }
+      ],
+      "steady_observed_bytes_per_query": 32
+    },
+    {
+      "mode": "m3-enabled-noncompact",
+      "result_receipt": "regex-cost-m3-enabled-noncompact-result.json",
+      "raw_rows": [
+        {
+          "units": 126,
+          "pass": 0,
+          "coldNs": 430002,
+          "queries": 256,
+          "bytes": 8272,
+          "ns": 524288
+        },
+        {
+          "units": 126,
+          "pass": 1,
+          "coldNs": 430002,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 336203
+        },
+        {
+          "units": 126,
+          "pass": 2,
+          "coldNs": 430002,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 302658
+        },
+        {
+          "units": 126,
+          "pass": 3,
+          "coldNs": 430002,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 537779
+        },
+        {
+          "units": 6144,
+          "pass": 0,
+          "coldNs": 9943366,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 720745
+        },
+        {
+          "units": 6144,
+          "pass": 1,
+          "coldNs": 9943366,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 435774
+        },
+        {
+          "units": 6144,
+          "pass": 2,
+          "coldNs": 9943366,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 443041
+        },
+        {
+          "units": 6144,
+          "pass": 3,
+          "coldNs": 9943366,
+          "queries": 256,
+          "bytes": 8192,
+          "ns": 363155
+        }
+      ],
+      "steady_observed_bytes_per_query": 32
+    }
+  ],
+  "cost_limitations": [
+    "Existing cost mode only warms Matcher regional facts; does not explicitly prepare shared String facts.",
+    "Steady warmallocation8192bytes/256queries=32Bperquery, not zeroallocation.",
+    "Cold/warm timings are one bounded local fastdebug observation without throughput, universal speedup or C2-compilation claims."
+  ],
+  "progress_tests": [
+    {
+      "test": "test/jdk/java/lang/Object/M3MonitoredTemplateTest.java",
+      "source_blob": "0b9bd424c67d98c7f033e5e91fd1881b38767fd7",
+      "jtr_sha256": "c1b30e398bb4852e5e9500a929f9db3b40846d1eb78078d05a125adf7293cb00",
+      "jtr_receipt": "jtreg-monitored-template-postimage.jtr.gz",
+      "status": "PASS"
+    },
+    {
+      "test": "test/jdk/java/lang/Object/M3AdapterProgress.java",
+      "source_blob": "17c0e4f83c3142bbede6523058f40d09ebfe4a02",
+      "jtr_sha256": "df06f4c6741d82a4b2e7497b1c9008edacaa014e1ce02d22290745ab0954f25c",
+      "jtr_receipt": "jtreg-adapter-progress-postimage.jtr.gz",
+      "status": "PASS"
+    }
+  ],
+  "adapter_diagnostic": {
+    "source_receipt": "ObjectAdapterVmDiagnostic.java",
+    "source_sha256": "415e3181d23a3738cf2537aa0c54eb538d46c36ad5055fcebd85b17a01af0f61",
+    "compile_receipt": "adapter-diagnostic-compile-result.json",
+    "compiler_flags": [
+      "-Xlint:all",
+      "-Werror"
+    ],
+    "class_files": [
+      {
+        "name": "ObjectAdapterVmDiagnostic$Adaptable.class",
+        "bytes": 936,
+        "sha256": "3565a575d866441963a836769647fdd65a557428a54335710ef90a128f6c5ab1"
+      },
+      {
+        "name": "ObjectAdapterVmDiagnostic$CloneBox.class",
+        "bytes": 764,
+        "sha256": "ec277f775790666d0e4ed0d0b0aae9df77e10102656bfe82aba58b46e5f925af"
+      },
+      {
+        "name": "ObjectAdapterVmDiagnostic.class",
+        "bytes": 4366,
+        "sha256": "b2670040fe1e05936596ea987e9628b679413b336601814a06458c6f2dc85c42"
+      }
+    ],
+    "modes": [
+      {
+        "mode": "default",
+        "result_receipt": "adapter-diagnostic-default-result.json",
+        "status": "PASS",
+        "checks": 50040
+      },
+      {
+        "mode": "sharing-on",
+        "result_receipt": "adapter-diagnostic-sharing-on-result.json",
+        "status": "PASS",
+        "checks": 50040
+      },
+      {
+        "mode": "sharing-off",
+        "result_receipt": "adapter-diagnostic-sharing-off-result.json",
+        "status": "PASS",
+        "checks": 50040
+      }
+    ],
+    "limit": "10,000iterations test dispatch; no C2 proof."
+  },
+  "resource_observation": "2-second process-group samples; short JVM probes may finish before a representative RSS sample. Global free-memory/SHM guards remain active.",
+  "aggregate_five_test_status": "Four PASS; sparse test metadata compile refusal retained, awaiting qualified :+open recipe and rerun.",
+  "wrapper_stdout_correction": "Reused wrapper closing sentence mentioning the five-test lane is not an aggregate pass assertion; exact independent per-step receipts and this report define scope."
+}

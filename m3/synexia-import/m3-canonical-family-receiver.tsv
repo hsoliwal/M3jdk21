@@ -1,0 +1,11 @@
+schema	family	canonical_synexia_package	legacy_inputs	target_role	automatic_license
+M3_CANONICAL_FAMILY_RECEIVER_V1	TEXT	com.synexia.m3.text	MIndexString;IndexString;MatIndexString	TARGET_INTEGRATION_ONLY	Apache-2.0
+M3_CANONICAL_FAMILY_RECEIVER_V1	AST	com.synexia.m3.ast	MIndexAST;legacy AST atoms	TARGET_INTEGRATION_ONLY	Apache-2.0
+M3_CANONICAL_FAMILY_RECEIVER_V1	DAG	com.synexia.m3.dag	MIndexDag;legacy DAG atoms	TARGET_INTEGRATION_ONLY	Apache-2.0
+M3_CANONICAL_FAMILY_RECEIVER_V1	OBJECT	com.synexia.m3.object	MIndexObject;context wrappers	TARGET_INTEGRATION_ONLY	Apache-2.0
+M3_CANONICAL_FAMILY_RECEIVER_V1	DATA_STRUCTURE	com.synexia.m3.ds	MIndex data-structure;MAT structures	TARGET_INTEGRATION_ONLY	Apache-2.0
+M3_CANONICAL_FAMILY_RECEIVER_V1	COLLECTION	com.synexia.m3.collection	MIndex collections;MAT collections	TARGET_INTEGRATION_ONLY	Apache-2.0
+M3_CANONICAL_FAMILY_RECEIVER_V1	PRECOMPUTE	com.synexia.m3.precompute	MIndex precompute;index precompute	TARGET_INTEGRATION_ONLY	Apache-2.0
+M3_CANONICAL_FAMILY_RECEIVER_V1	SEARCH_REGEX	com.synexia.m3.search	MIndex search;IndexString regex;RE2J bridges	TARGET_INTEGRATION_ONLY	Apache-2.0
+M3_CANONICAL_FAMILY_RECEIVER_V1	JNI_NATIVE	com.synexia.m3.nativeapi	MIndex JNI;IndexString native	TARGET_INTEGRATION_ONLY	Apache-2.0
+M3_CANONICAL_FAMILY_RECEIVER_V1	RECIPE	com.synexia.rewrite	legacy local reusable recipes	THIN_RECEIVER_ONLY	Apache-2.0

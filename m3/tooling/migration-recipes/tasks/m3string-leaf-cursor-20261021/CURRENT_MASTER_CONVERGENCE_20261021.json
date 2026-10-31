@@ -1,0 +1,134 @@
+{
+  "atom": "Retained owner-range cursor for canonical comparison and native copy traversal",
+  "branch": "m3/m3string-token-sequence-regex-20261021",
+  "claims": {
+    "actual_sdk_tests": 12,
+    "fixed_point": "PASS",
+    "full_jdk_build": "NOT_RUN",
+    "integrated_runtime": "BLOCKED",
+    "native_runtime": "NOT_RUN",
+    "performance": "NOT_RUN",
+    "receiver_phase_advanced": false,
+    "sdk_failures": 0,
+    "source_order": "PASS",
+    "unknown_source_refusal": "PASS"
+  },
+  "dependencies": {
+    "java": "21.0.12.1",
+    "junit": "5.10.2",
+    "maven": "3.9.9",
+    "openrewrite": "8.17.1"
+  },
+  "exact_branch_head": "c11d404b681945cde18c24d33261fc1be6649c53",
+  "original_product_tests": {
+    "compilation": "PASS",
+    "javac_flags": [
+      "-Xlint:all",
+      "-Werror"
+    ],
+    "reason": "Available stock JDK21 rejects -XX:+UseM3StringStorage before test execution",
+    "runtime": "BLOCKED",
+    "test/jdk/java/lang/String/M3StringJniCompositeLeafPathTest.java": "58b3cd6b42dd51f5eba38e4cc3d839e52f110d97",
+    "test/jdk/java/lang/String/M3StringLeafCursorCanonicalTest.java": "e61909f7696638d1ffc78fb50ce920fd7a1b0da3"
+  },
+  "ownership": "Existing JDK_TARGET_SPECIFIC owner in place; no competing canonical copy or new PR",
+  "pattern": "Exact current and exact predecessor states converge to one sealed postimage, retaining untouched owners and explicit coalescing",
+  "pr": 1623,
+  "proof": {
+    "copy_helper_loop_bounds_and_native_join_declaration_preserved": true,
+    "master_advancement": {
+      "changed_paths": 58,
+      "from": "1d105af842f16ba31a8ca14593f58ed43b7429ee",
+      "overlap_with_branch_changes": [],
+      "to": "974687e3d3d69410466207624cf56e7bb62caedf"
+    },
+    "neighboring_tuple_bucket_and_remaining_tail_exact": true,
+    "ownership_tsv": {
+      "appended_rows": 3,
+      "child_bytes": 12423,
+      "child_git_blob": "39e7adad3f9f93f2154ab3f64283937fc8cf00e5",
+      "exact_prefix": true,
+      "master_bytes": 11501,
+      "master_git_blob": "9a9fa4164d19b02db17203bac1e3a872ecbc11e5"
+    },
+    "pool_coalescing": true,
+    "pool_generated_git_blob": "7c05d6ab0082eb26f39e4e6dc93c422237588cae",
+    "pool_master_git_blob": "394af2f062e9d99abf73e5a6f15df015a59b8072",
+    "pool_master_reconstruction_exact": true,
+    "reversible_ownership_substitutions": 6,
+    "scope": "Existing #1623 target-specific leaf-cursor owner; source-preserving forward composition only",
+    "sdk_suites": [
+      {
+        "errors": "0",
+        "failures": "0",
+        "name": "com.m3.rewrite.backport.M3FileByteEventFactRecipeTest",
+        "skipped": "0",
+        "tests": "3"
+      },
+      {
+        "errors": "0",
+        "failures": "0",
+        "name": "com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipeTest",
+        "skipped": "0",
+        "tests": "4"
+      },
+      {
+        "errors": "0",
+        "failures": "0",
+        "name": "com.m3.rewrite.backport.M3StringLeafCursorCurrentMasterTest",
+        "skipped": "0",
+        "tests": "4"
+      },
+      {
+        "errors": "0",
+        "failures": "0",
+        "name": "com.m3.rewrite.backport.M3StringTokenSequenceRegexRecipeTest",
+        "skipped": "0",
+        "tests": "1"
+      }
+    ],
+    "shared_cursor_existing_algorithm_exact_after_removing_new_constructor": true,
+    "shared_cursor_generated_git_blob": "5ac0eee6e2a1eaf3e24c387c02bcff4e66eb2c0a",
+    "shared_cursor_previous_git_blob": "1851d3ce7cd6de9f0a9d9b84ef83999b43de64f4",
+    "token_regex_coalescing": false,
+    "token_regex_git_blob_unchanged": "ad87db7ed0f7e0490b46245782ec64185fb457d7"
+  },
+  "publication": "Compose onto qualified master tree, then overlay all 36 existing branch entries followed by this exact packet; preserve two parent histories",
+  "qualified_master": "974687e3d3d69410466207624cf56e7bb62caedf",
+  "qualified_master_tree": "4a423270d518c114605ab6ca9166ce7f2195de39",
+  "recipe": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3StringLeafCursorConvergenceRecipe.java",
+  "recipe_after": {
+    "bytes": 7666,
+    "git_blob": "a29b26e81cc9d06504b9bd13b58a066307330812",
+    "sha256": "b523d24b492f26efe065b20c2cda85d5879fceac4f4935b57e3717e70f8dfc05"
+  },
+  "recipe_before_git_blob": "33fb5149e32c7982b00150d3656dc66858ba9693",
+  "rejected_draft": {
+    "pool_git_blob": "b88f0f083113900948c1cc8cfdbaf0e829e44893",
+    "published": false,
+    "reason": "Neighboring TupleBucket removed; final template and regression preserve it exactly"
+  },
+  "repository": "hsoliwal/M3jdk21",
+  "schema": "M3JDK21_EXISTING_OWNER_FORWARD_COMPOSITION_1",
+  "source_pins": {
+    "branch_head": "c11d404b681945cde18c24d33261fc1be6649c53",
+    "cursor": {
+      "after": "5ac0eee6e2a1eaf3e24c387c02bcff4e66eb2c0a",
+      "previous_after": "1851d3ce7cd6de9f0a9d9b84ef83999b43de64f4"
+    },
+    "master": "1d105af842f16ba31a8ca14593f58ed43b7429ee",
+    "pool": {
+      "after": "7c05d6ab0082eb26f39e4e6dc93c422237588cae",
+      "before": "394af2f062e9d99abf73e5a6f15df015a59b8072",
+      "previous_after": "15231ee5a2c48153550c700f98722e15c0f4451c"
+    },
+    "preserved": [
+      "concatViewsNative0 exact declaration and documentation",
+      "copyCharsFromPath loop and bounds",
+      "copyBytesFromPath loop and bounds",
+      "coalescing=true for pool; false for token regex"
+    ],
+    "product_output_authority": "Only SDK materialization; templates are not copied into target output."
+  },
+  "trigger": "One M3StringPool Git conflict after current master added native join and raw-owner copy helpers; append-only ownership TSV conflict"
+}

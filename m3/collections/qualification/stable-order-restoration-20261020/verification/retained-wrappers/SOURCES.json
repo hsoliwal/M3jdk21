@@ -1,0 +1,144 @@
+{
+  "dependency_closure": "Three contract-referenced public owners plus their M3SlotSpliterators dependency; all other dependencies are java.base.",
+  "executed_collections_tree": "985d672bf250aa090b2399d626f0e3e1b541135d",
+  "fixture_sources_modified": false,
+  "historical_fixtures": [
+    {
+      "bytes": 19318,
+      "canonical_publication_commit": "528aaf79cfae79c5dbfe7c307340329d320e8c44",
+      "git_blob": "b551b7b5bb45fd082d478c3313ada4d62487b6a7",
+      "manifest": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/custody/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-contract-v2/resources/com/synexia/rewrite/hash-pinned-java/m3-wrapper-wrapper-contract-v2/manifest.tsv",
+      "manifest_target": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java",
+      "original": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/custody/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-contract-v2/resources/com/synexia/rewrite/hash-pinned-java/m3-wrapper-wrapper-contract-v2/M3WrapperConvergenceContract.java.txt",
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3WrapperConvergenceContract.java",
+      "qualification_kind": "historical fixture, executed freshly in this run",
+      "role": "unchanged copied historical fixture",
+      "sha256": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847"
+    },
+    {
+      "bytes": 453,
+      "canonical_publication_commit": "528aaf79cfae79c5dbfe7c307340329d320e8c44",
+      "git_blob": "0a6e1b09701331712dbc07e8cc18f6b2d9d26a47",
+      "manifest": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/custody/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-junit-v2/resources/com/synexia/rewrite/hash-pinned-java/m3-wrapper-wrapper-junit-v2/manifest.tsv",
+      "manifest_target": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java",
+      "original": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/custody/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/passes/wrapper-junit-v2/resources/com/synexia/rewrite/hash-pinned-java/m3-wrapper-wrapper-junit-v2/M3WrapperConvergenceTest.java.txt",
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3WrapperConvergenceTest.java",
+      "qualification_kind": "historical fixture, executed freshly in this run",
+      "role": "unchanged copied historical fixture",
+      "sha256": "fe071ef7e801a9bb1d57501512f0dd606f0c08652e100e6132dc7c4e4a8f6327"
+    }
+  ],
+  "historical_guard_postimage_equals_current_owner": true,
+  "production_owners": [
+    {
+      "bytes": 19677,
+      "git_blob": "10c4d16cc9cd62d36f22646988718422caa2311e",
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3FilteredLists.java",
+      "role": "unchanged production owner",
+      "sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+    },
+    {
+      "bytes": 31807,
+      "git_blob": "1a31827cd6274b5ad8eb62f3a5ce0e5e0667478f",
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3FilteredViews.java",
+      "role": "unchanged production owner",
+      "sha256": "8419315c3058bce6add897b7ffa7c6763bbb6b85418bb35e190ba8a4d2dd70c4",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+    },
+    {
+      "bytes": 25720,
+      "git_blob": "37b669dfe22a3b6be9e68aa59f9dd94e96fc3d49",
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3MutableFilteredViews.java",
+      "role": "unchanged production owner",
+      "sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+    },
+    {
+      "bytes": 4051,
+      "git_blob": "2fe08d8728732e5f53e75d9feb34c9c6ffc74a8d",
+      "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/source/com/m3/collections/M3SlotSpliterators.java",
+      "role": "unchanged production owner",
+      "sha256": "9257ce0c9c95e3afef20624631ba048aa3d60ef53a1189cd2bbabc07da2bba2f",
+      "target_path": "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+      "tree": "985d672bf250aa090b2399d626f0e3e1b541135d"
+    }
+  ],
+  "production_sources_modified": false,
+  "read_mechanism": "git show exact local immutable tree objects; working tree not copied",
+  "target_commit_as_recorded_by_parent_inventory": "95d0266ff15ae1f11876cce7360b155ef33a1862",
+  "target_repository": "hsoliwal/M3jdk21",
+  "test_dependencies": [
+    {
+      "bytes": 210956,
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar",
+      "role": "JUnit execution dependency",
+      "sha256": "afff77c186cd317275803872fa5133aa801fd6ac40bd91c78a6cf8009b4b17cc"
+    },
+    {
+      "bytes": 244690,
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar",
+      "role": "JUnit execution dependency",
+      "sha256": "b6df35da750a546ae932376f11b3c0df841f0c90c7cb2944cd39adb432886e4b"
+    },
+    {
+      "bytes": 106232,
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+      "role": "JUnit execution dependency",
+      "sha256": "b56a5ec000a479df4973b18bba24c98fe0db8faa14c8907d3ef451d8c71fd8ae"
+    },
+    {
+      "bytes": 204821,
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar",
+      "role": "JUnit execution dependency",
+      "sha256": "905cba9b4998ccc29d1239085a7fb1fe0e28024d7526152356d810edec0a49a3"
+    },
+    {
+      "bytes": 183814,
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/junit/platform/junit-platform-launcher/1.10.2/junit-platform-launcher-1.10.2.jar",
+      "role": "JUnit execution dependency",
+      "sha256": "aed4f42fb90ada9b347c231f13656fc09121ba20dab6dc646a6bd9d4da31e4aa"
+    },
+    {
+      "bytes": 14304,
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar",
+      "role": "JUnit execution dependency",
+      "sha256": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b"
+    },
+    {
+      "bytes": 6806,
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+      "role": "JUnit execution dependency",
+      "sha256": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38"
+    }
+  ],
+  "toolchain": [
+    {
+      "bytes": 12328,
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+      "role": "Java 21 toolchain",
+      "sha256": "2a207f5e7d075afa01d97f8048389a64432a44c4a5af0f5e77d6e286ec5f401d"
+    },
+    {
+      "bytes": 12424,
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javac",
+      "role": "Java 21 toolchain",
+      "sha256": "55859b80e7a9c4c4736be19ad3addeb35112ca6d17a30c4e0e116afc0a499bdb"
+    },
+    {
+      "bytes": 12392,
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javap",
+      "role": "Java 21 toolchain",
+      "sha256": "bd8fe7ac7eb91e0167766b6c37350fa96c4b601a5f086de8fa96d9f8f6a7b0dd"
+    },
+    {
+      "bytes": 1628,
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/release",
+      "role": "Java 21 toolchain",
+      "sha256": "ebbd70bf00bab6d39addf51969c5ff244030b86b29de400b9fb10612ebd3ceec"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "363cc7bdc97540bb91d81eb7ec0f72aecc5dd17f"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "src/java.base/share/conf/security/java.security\t05fe1073e0381059378b8b94d5b8ecabdcbc812ba0c6a251a2d7971a2d951126\ta10aa2b1c0e78309438d00d218979152aa90a5b0c9a219cee79a6fb584e37630\t00-java.security.txt\n"
+    },
+    "isError": false
+  }
+}

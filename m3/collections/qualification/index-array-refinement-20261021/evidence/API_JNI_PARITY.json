@@ -1,0 +1,18 @@
+{
+  "public_descriptors": "MATCH",
+  "classes": 2,
+  "native_header": "MATCH",
+  "native_header_sha256": "2c9ee704fe1128ca05a7ff38b6844ad178fd79c03fef0aa24fe9605778f46c81",
+  "exports": [
+    "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative"
+  ],
+  "native_source_sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef"
+}

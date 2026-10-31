@@ -1,0 +1,5 @@
+# Canonical recipe source postimages and exact workflow, SHA-256
+c9bd258efefb991b32410f2116c156848f47d341d25cb997b22847f2156cc3f6  m3/fs/src/main/java/com/m3/fs/M3FsPrecomputeBundle.java
+c5319137a8e7cfe5432343f54d386b2dba8eb86e9fea63c4f66317bf145e45c9  m3/fs/src/test/java/com/m3/fs/M3FsSegmentedCursorSelfTest.java
+982cdac3c18f06286b6bcc47fa44b513886b62fc46ad4acbfe1c2b81e73862fa  m3/fs/src/test/java/com/m3/fs/M3FsSegmentedCursorTest.java
+be0c91651d474d450f97f1cff540d29dda31fe86fee60c09c0fbd102593ea469  .github/workflows/m3fs-segmented-utf16-cursor-20261020.yml

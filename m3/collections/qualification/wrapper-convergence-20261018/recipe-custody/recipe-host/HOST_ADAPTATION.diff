@@ -1,0 +1,558 @@
+diff --git a/workspace/scratch/7846804a0074/M3jdk21/m3/arrays/qualification/empty-segments-20261017/recipe-custody/pom.xml b/workspace/scratch/7846804a0074/synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/pom.xml
+index dcef271..8157943 100644
+--- a/workspace/scratch/7846804a0074/M3jdk21/m3/arrays/qualification/empty-segments-20261017/recipe-custody/pom.xml
++++ b/workspace/scratch/7846804a0074/synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/pom.xml
+@@ -2,32 +2,35 @@
+ <!--
+ SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ SPDX-License-Identifier: Apache-2.0
++Adapted from the existing array/collection custody proof host for one-file passes.
+ -->
+ <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.synexia.verification</groupId>
+-  <artifactId>m3-collections-contract-refinement-recipe-proof</artifactId>
++  <artifactId>m3-wrapper-convergence-recipe-proof</artifactId>
+   <version>1</version>
+   <properties>
+     <maven.compiler.release>21</maven.compiler.release>
+     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+-    <recipe.owner.root>${project.basedir}/../..</recipe.owner.root>
+-    <m3.dataset>fixture</m3.dataset>
+-    <m3.crate.name>m3-collections-contract-refinement-20261017-${m3.dataset}</m3.crate.name>
+-    <m3.resources>${project.basedir}/datasets/${m3.dataset}/resources</m3.resources>
+-    <m3.recipe.name>com.synexia.m3jdk.CollectionsContractRefinement20261017</m3.recipe.name>
++    <recipe.owner.root>${project.basedir}/../../..</recipe.owner.root>
++    <m3.pass>fixture-java</m3.pass>
++    <m3.crate.name>m3-wrapper-${m3.pass}</m3.crate.name>
++    <m3.resources>${project.basedir}/passes/${m3.pass}/resources</m3.resources>
++    <m3.recipe.name>com.synexia.m3.WrapperConvergence20261018</m3.recipe.name>
++    <m3.parser.classpath></m3.parser.classpath>
+     <rewrite.version>8.17.1</rewrite.version>
+     <m3.recipe.test.maxHeap>768m</m3.recipe.test.maxHeap>
+   </properties>
+   <dependencies>
++    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>${rewrite.version}</version></dependency>
+     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>${rewrite.version}</version></dependency>
+     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>${rewrite.version}</version><scope>runtime</scope></dependency>
+     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+     <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-simple</artifactId><version>2.0.13</version><scope>test</scope></dependency>
+   </dependencies>
+   <build>
+-    <directory>${project.basedir}/target/${m3.dataset}</directory>
++    <directory>${project.basedir}/target/${m3.pass}</directory>
+     <sourceDirectory>${recipe.owner.root}/src/main/java</sourceDirectory>
+     <resources><resource><directory>${m3.resources}</directory></resource></resources>
+     <plugins>
+@@ -35,7 +38,7 @@ SPDX-License-Identifier: Apache-2.0
+         <configuration><overwrite>true</overwrite></configuration>
+       </plugin>
+       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+-        <configuration><includes>
++        <configuration><release>21</release><proc>none</proc><includes>
+           <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include>
+           <include>com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java</include>
+           <include>com/synexia/rewrite/M3ScopeInference.java</include>
+@@ -46,66 +49,21 @@ SPDX-License-Identifier: Apache-2.0
+       <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
+         <configuration>
+           <failIfNoTests>true</failIfNoTests>
++          <useModulePath>false</useModulePath>
+           <includes><include>com/synexia/rewrite/M3TaskRecipeTest.java</include></includes>
+-          <argLine>-Xmx${m3.recipe.test.maxHeap}</argLine>
++          <argLine>-Xmx${m3.recipe.test.maxHeap} -XX:-UsePerfData -Djava.io.tmpdir=${project.basedir}/target -Duser.home=${project.basedir}/target</argLine>
+           <systemPropertyVariables>
+-            <m3.dataset>${m3.dataset}</m3.dataset>
++            <m3.pass>${m3.pass}</m3.pass>
+             <m3.crate.name>${m3.crate.name}</m3.crate.name>
+             <m3.recipe.name>${m3.recipe.name}</m3.recipe.name>
+             <m3.crate.root>${project.basedir}</m3.crate.root>
+             <m3.recipe.owner.root>${recipe.owner.root}</m3.recipe.owner.root>
+-            <m3.candidate.root>${project.build.directory}/candidate</m3.candidate.root>
++            <m3.candidate.root>${project.basedir}/target/candidate/${m3.pass}</m3.candidate.root>
++            <m3.parser.classpath>${m3.parser.classpath}</m3.parser.classpath>
++            <junit.jupiter.execution.parallel.enabled>false</junit.jupiter.execution.parallel.enabled>
+           </systemPropertyVariables>
+         </configuration>
+       </plugin>
+     </plugins>
+   </build>
+-  <profiles>
+-<profile>
+-  <id>contract</id>
+-  <properties>
+-    <m3.contract.python>python3</m3.contract.python>
+-    <m3.contract.output>${project.build.directory}/receiver-proof</m3.contract.output>
+-  </properties>
+-  <build>
+-    <plugins>
+-      <plugin>
+-        <groupId>org.codehaus.mojo</groupId>
+-        <artifactId>exec-maven-plugin</artifactId>
+-        <version>3.5.0</version>
+-        <executions>
+-          <execution>
+-            <id>verify-input-sealing-contract</id>
+-            <phase>verify</phase>
+-            <goals><goal>exec</goal></goals>
+-            <configuration>
+-              <executable>${m3.contract.python}</executable>
+-              <arguments><argument>${project.basedir}/contract/test_prepare.py</argument></arguments>
+-              <environmentVariables><PYTHONDONTWRITEBYTECODE>1</PYTHONDONTWRITEBYTECODE></environmentVariables>
+-              <timeout>30000</timeout>
+-            </configuration>
+-          </execution>
+-          <execution>
+-            <id>verify-sdk-receiver-integrity</id>
+-            <phase>verify</phase>
+-            <goals><goal>exec</goal></goals>
+-            <configuration>
+-              <executable>${m3.contract.python}</executable>
+-              <arguments>
+-                <argument>${project.basedir}/contract/verify_receiver.py</argument>
+-                <argument>--crate</argument><argument>${project.basedir}</argument>
+-                <argument>--dataset</argument><argument>${m3.dataset}</argument>
+-                <argument>--recipe-owner</argument><argument>${recipe.owner.root}</argument>
+-                <argument>--output</argument><argument>${m3.contract.output}</argument>
+-              </arguments>
+-              <environmentVariables><PYTHONDONTWRITEBYTECODE>1</PYTHONDONTWRITEBYTECODE></environmentVariables>
+-              <timeout>120000</timeout>
+-            </configuration>
+-          </execution>
+-        </executions>
+-      </plugin>
+-    </plugins>
+-  </build>
+-</profile>
+-  </profiles>
+ </project>
+diff --git a/workspace/scratch/7846804a0074/M3jdk21/m3/arrays/qualification/empty-segments-20261017/recipe-custody/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java b/workspace/scratch/7846804a0074/synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java
+index e699937..e882144 100644
+--- a/workspace/scratch/7846804a0074/M3jdk21/m3/arrays/qualification/empty-segments-20261017/recipe-custody/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java
++++ b/workspace/scratch/7846804a0074/synexia-work/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java
+@@ -1,25 +1,35 @@
+ // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ // SPDX-License-Identifier: Apache-2.0
++// Modified 2026-10-18: bind one-file passes and retain exact SDK output after ordered proofs.
+ package com.synexia.rewrite;
+ 
+ import static org.junit.jupiter.api.Assertions.*;
+ 
++import java.io.File;
+ import java.io.IOException;
+ import java.net.URI;
+ import java.nio.charset.StandardCharsets;
+ import java.nio.file.Files;
++import java.nio.file.LinkOption;
+ import java.nio.file.Path;
++import java.nio.file.StandardOpenOption;
+ import java.security.MessageDigest;
+ import java.security.NoSuchAlgorithmException;
+ import java.util.ArrayList;
+ import java.util.Collections;
+ import java.util.Comparator;
+ import java.util.HexFormat;
++import java.util.LinkedHashSet;
+ import java.util.List;
+ import java.util.Map;
+ import java.util.Properties;
++import java.util.Set;
+ import java.util.TreeMap;
++import org.junit.jupiter.api.MethodOrderer;
++import org.junit.jupiter.api.Order;
+ import org.junit.jupiter.api.Test;
++import org.junit.jupiter.api.TestInstance;
++import org.junit.jupiter.api.TestMethodOrder;
+ import org.openrewrite.config.Environment;
+ import org.openrewrite.config.YamlResourceLoader;
+ import org.openrewrite.ExecutionContext;
+@@ -34,9 +44,14 @@ import org.openrewrite.java.JavaParser;
+ import org.openrewrite.java.tree.J;
+ import org.openrewrite.text.PlainText;
+ 
+-/** Task qualification using the existing canonical recipes and real SDK scheduler. */
++/** One-file task qualification adapted from the existing real OpenRewrite SDK proof host. */
++@TestInstance(TestInstance.Lifecycle.PER_CLASS)
++@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+ public final class M3TaskRecipeTest {
++    private static final String PASS = System.getProperty("m3.pass");
+     private static final String CRATE = System.getProperty("m3.crate.name");
++    private final Set<String> completedProofs = new LinkedHashSet<>();
++    private final Map<String, String> refusalEvidence = new TreeMap<>();
+     private static final String NOTE = "unrelated/recipe-decoys.txt";
+     private static final String DECOYS = "plugins { java }\n<project><modelVersion>4.0.0</modelVersion></project>\n"
+             + "class Decoy { String s = \"source-looking text\"; }\n";
+@@ -46,6 +61,10 @@ public final class M3TaskRecipeTest {
+     private record Replay(Map<String, String> output, String diff, int changes) { }
+ 
+     private static List<Lane> lanes() {
++        assertNotNull(PASS, "a selected pass is mandatory");
++        assertTrue(PASS.matches("[a-z0-9][a-z0-9-]{0,59}"), "bounded pass identity");
++        assertEquals("m3-wrapper-" + PASS, CRATE);
++        verifyEnginePins();
+         List<Lane> lanes = new ArrayList<>();
+         for (String kind : List.of("java", "text")) {
+             String root = "/com/synexia/rewrite/hash-pinned-" + kind + "/" + CRATE + "/";
+@@ -69,13 +88,18 @@ public final class M3TaskRecipeTest {
+             assertFalse(targets.isEmpty());
+             lanes.add(new Lane(kind, List.copyOf(targets)));
+         }
+-        assertFalse(lanes.isEmpty(), "a real recipe target is mandatory");
++        assertEquals(1, lanes.size(), "one selected source language per FILE pass");
++        assertEquals(1, lanes.getFirst().targets.size(), "exactly one target per FILE pass");
+         return List.copyOf(lanes);
+     }
+ 
+     private static ScanningRecipe<?> recipe(Lane lane) {
+-        return lane.kind.equals("java") ? new M3HashPinnedJavaSnapshotRecipe(CRATE)
+-                : new M3HashPinnedTextSnapshotRecipe(CRATE);
++        if (lane.kind.equals("java")) {
++            M3HashPinnedJavaSnapshotRecipe recipe = new M3HashPinnedJavaSnapshotRecipe(CRATE);
++            assertEquals(M3EditScope.FILE, recipe.requiredScope());
++            return recipe;
++        }
++        return new M3HashPinnedTextSnapshotRecipe(CRATE);
+     }
+ 
+     private static Map<String, String> state(Lane lane, boolean after) {
+@@ -98,8 +122,8 @@ public final class M3TaskRecipeTest {
+         });
+         if (!java.isEmpty()) {
+             List<Throwable> errors = new ArrayList<>();
+-            List<SourceFile> units = JavaParser.fromJavaVersion().build()
+-                    .parseInputs(java, null, new InMemoryExecutionContext(errors::add)).toList();
++            List<SourceFile> units = javaParser().build()
++                    .parseInputs(java, null, executionContext(errors::add)).toList();
+             assertTrue(errors.isEmpty(), () -> "Java parser errors: " + errors);
+             assertEquals(java.size(), units.size());
+             for (SourceFile unit : units) {
+@@ -116,7 +140,7 @@ public final class M3TaskRecipeTest {
+         Map<String, String> before = rendered(sources);
+         List<Throwable> errors = new ArrayList<>();
+         List<Result> results = recipe(lane).run(new InMemoryLargeSourceSet(sources),
+-                new InMemoryExecutionContext(errors::add), 1).getChangeset().getAllResults();
++                executionContext(errors::add), 1).getChangeset().getAllResults();
+         assertTrue(errors.isEmpty(), () -> "Recipe errors: " + errors);
+         Map<String, String> actual = new TreeMap<>(before);
+         StringBuilder patch = new StringBuilder();
+@@ -139,7 +163,7 @@ public final class M3TaskRecipeTest {
+         return new Replay(Map.copyOf(actual), patch.toString(), results.size());
+     }
+ 
+-    @Test void exactReplayFixedPointAndInputOrder() {
++    @Test @Order(1) void exactReplayFixedPointAndInputOrder() {
+         namedDescriptorComposesTheQualifiedLanes();
+         for (Lane lane : lanes()) {
+             List<SourceFile> initial = parse(lane, state(lane, false));
+@@ -149,8 +173,11 @@ public final class M3TaskRecipeTest {
+             assertEquals(0, fixed.changes);
+             assertEquals("", fixed.diff);
+             Collections.reverse(initial);
+-            assertEquals(result.output, replay(lane, initial).output);
++            Replay reversed = replay(lane, initial);
++            assertEquals(result.output, reversed.output);
++            assertEquals(result.diff, reversed.diff, "input order preserves the exact patch");
+         }
++        completedProofs.add("replay");
+     }
+ 
+     private static void namedDescriptorComposesTheQualifiedLanes() {
+@@ -172,20 +199,20 @@ public final class M3TaskRecipeTest {
+             List<Throwable> errors = new ArrayList<>();
+             List<SourceFile> sources = new ArrayList<>(sourceMap.values());
+             List<Result> results = named.run(new InMemoryLargeSourceSet(sources),
+-                    new InMemoryExecutionContext(errors::add), 1).getChangeset().getAllResults();
++                    executionContext(errors::add), 1).getChangeset().getAllResults();
+             assertTrue(errors.isEmpty(), () -> "named recipe errors: " + errors);
+             Map<String, String> actual = rendered(sources);
+             for (Result result : results) {
+                 assertNotNull(result.getAfter(), "named recipe never deletes source");
+                 actual.put(path(result.getAfter()), result.getAfter().printAll());
+             }
+-            assertEquals(expected, actual, "named YAML composes both qualified lanes");
++            assertEquals(expected, actual, "named YAML executes the selected qualified lane");
+         } catch (IOException failure) { throw new IllegalStateException(failure); }
+     }
+ 
+-    @Test void mixedPreimagesAndPostimages() {
++    @Test @Order(2) void mixedPreimagesAndPostimages() {
+         for (Lane lane : lanes()) {
+-            // Exercise each file independently against already-converged sibling owners.
++            // Exercise the selected preimage independently from its fixed-point postimage.
+             for (Target target : lane.targets) {
+                 Map<String, String> input = state(lane, true);
+                 if (target.before == null) input.remove(target.path);
+@@ -194,92 +221,99 @@ public final class M3TaskRecipeTest {
+                 assertEquals(target.beforeHash.equals(target.afterHash) ? 0 : 1, result.changes);
+             }
+         }
++        completedProofs.add("mixed");
+     }
+ 
+-    @Test void driftMissingDuplicateAndWrongRepresentationRefuse() {
++    @Test @Order(3) void driftMissingDuplicateAndWrongRepresentationRefuse() {
+         for (Lane lane : lanes()) {
+             List<SourceFile> initial = parse(lane, state(lane, false));
+             for (Target target : lane.targets) {
+                 Map<String, String> drift = state(lane, false);
+                 drift.put(target.path, target.after + "\n// source drift\n");
+-                refused(lane, parse(lane, drift));
++                refusalEvidence.put("source-drift", refused(lane, parse(lane, drift), "source drift:"));
+                 if (target.before != null) {
+                     List<SourceFile> missing = without(initial, target.path);
+-                    refused(lane, missing);
++                    refusalEvidence.put("missing-source", refused(lane, missing, "required source missing:"));
+                 }
+                 List<SourceFile> duplicate = new ArrayList<>(without(initial, target.path));
+                 SourceFile post = parse(lane, Map.of(target.path, target.after)).getFirst();
+                 duplicate.add(post);
+-                duplicate.add(post.withId(java.util.UUID.randomUUID()));
+-                refused(lane, duplicate);
++                duplicate.add(post.withId(new java.util.UUID(
++                        post.getId().getMostSignificantBits() ^ Long.MIN_VALUE,
++                        post.getId().getLeastSignificantBits())));
++                refusalEvidence.put("duplicate-source", refused(lane, duplicate, "duplicate target:"));
+                 if (lane.kind.equals("java")) {
+                     List<SourceFile> wrong = new ArrayList<>(without(initial, target.path));
+                     wrong.add(PlainText.builder().sourcePath(Path.of(target.path))
+                             .text(target.before == null ? target.after : target.before).build());
+-                    refused(lane, wrong);
++                    refusalEvidence.put("wrong-java-representation", refused(lane, wrong,
++                            "target is not a Java compilation unit:"));
+                 }
+             }
+         }
++        completedProofs.add("refusals");
+     }
+ 
+-    @Test void postScanChangesRefuse() {
++    @Test @Order(4) void postScanChangesRefuse() {
+         for (Lane lane : lanes()) postScan(lane, recipe(lane));
++        completedProofs.add("post-scan");
+     }
+ 
+-    private static <A> void postScan(Lane lane, ScanningRecipe<A> recipe) {
++    private <A> void postScan(Lane lane, ScanningRecipe<A> recipe) {
+         for (Target target : lane.targets) {
+-            ExecutionContext context = new InMemoryExecutionContext(error -> { throw new AssertionError(error); });
++            ExecutionContext context = executionContext(error -> { throw new AssertionError(error); });
+             A inventory = recipe.getInitialValue(context);
+             for (SourceFile source : parse(lane, state(lane, false)))
+                 recipe.getScanner(inventory).visit(source, context);
+             SourceFile drift = parse(lane, Map.of(target.path,
+                     target.after + "\n// change after scan\n")).getFirst();
+-            assertThrows(RuntimeException.class, () -> recipe.getVisitor(inventory).visit(drift, context));
++            RuntimeException failure = assertThrows(RuntimeException.class,
++                    () -> recipe.getVisitor(inventory).visit(drift, context));
++            String diagnostic = diagnostic(failure);
++            assertTrue(diagnostic.contains("target changed after scan:"), diagnostic);
++            refusalEvidence.put("post-scan-drift", diagnostic);
+         }
+     }
+ 
+-    @Test void qualifiedSdkResultsAreRetained() throws IOException {
+-        Path root = Path.of(System.getProperty("m3.candidate.root"));
++    @Test @Order(5) void qualifiedSdkResultsAreRetained() throws IOException {
++        assertEquals(Set.of("replay", "mixed", "refusals", "post-scan"), completedProofs,
++                "all proof groups must pass before retaining a candidate");
++        Path crate = Path.of(System.getProperty("m3.crate.root")).toAbsolutePath().normalize();
++        Path root = Path.of(System.getProperty("m3.candidate.root")).toAbsolutePath().normalize();
++        assertEquals(crate.resolve("target/candidate").resolve(PASS), root,
++                "candidate output is confined to the selected host pass");
++        Map<String, String> outputs = new TreeMap<>();
+         StringBuilder receipt = new StringBuilder("# OpenRewrite SDK Results; no template-copy materialization\n");
+         for (Lane lane : lanes()) {
+             Replay result = replay(lane, parse(lane, state(lane, false)));
+             assertEquals(0, replay(lane, parse(lane, result.output)).changes);
+             for (Target target : lane.targets) {
+-                Path output = root.resolve(target.path);
+-                assertTrue(output.normalize().startsWith(root.normalize()));
+-                Files.createDirectories(output.getParent());
+                 String text = result.output.get(target.path);
+                 assertEquals(target.afterHash, sha(text));
+-                Files.writeString(output, text, StandardCharsets.UTF_8);
++                outputs.put(target.path, text);
+                 receipt.append(target.path).append('\t').append(target.beforeHash)
+                         .append('\t').append(target.afterHash).append('\n');
+             }
+-            Files.createDirectories(root);
+-            Files.writeString(root.resolve(lane.kind + ".patch"), result.diff, StandardCharsets.UTF_8);
++            outputs.put(lane.kind + ".patch", result.diff);
+         }
+-        Files.writeString(root.resolve("SDK_RESULTS.tsv"), receipt, StandardCharsets.UTF_8);
+-        StringBuilder inputs = new StringBuilder("# Recipe inputs used by this SDK execution\n");
+-        Path crate = Path.of(System.getProperty("m3.crate.root"));
++        outputs.put("SDK_RESULTS.tsv", receipt.toString());
++        StringBuilder inputs = new StringBuilder("# Exact recipe inputs used by this SDK execution\n");
+         List<Path> boundFiles = new ArrayList<>();
+-        boundFiles.add(crate.resolve("pom.xml"));
+-        boundFiles.add(crate.resolve("receive.py"));
+-        boundFiles.add(crate.resolve("prepare.py"));
+-        boundFiles.add(crate.resolve("ENGINE_SOURCES.tsv"));
+-        for (String domain : List.of("src", "contract")) {
+-            Path directory = crate.resolve(domain);
+-            if (!Files.exists(directory)) continue;
+-            try (var paths = Files.walk(directory)) {
+-                boundFiles.addAll(paths.filter(Files::isRegularFile).toList());
+-            }
++        for (String name : List.of("pom.xml", "README.md", "ENGINE_SOURCES.tsv", "HARNESS_LINEAGE.json"))
++            boundFiles.add(crate.resolve(name));
++        try (var paths = Files.walk(crate.resolve("src"))) {
++            boundFiles.addAll(paths.filter(Files::isRegularFile).toList());
+         }
+-        Path dataset = crate.resolve("datasets").resolve(System.getProperty("m3.dataset"));
+-        try (var paths = Files.walk(dataset)) {
++        Path pass = crate.resolve("passes").resolve(PASS);
++        try (var paths = Files.walk(pass)) {
+             boundFiles.addAll(paths.filter(Files::isRegularFile).toList());
+         }
+-        for (Path source : boundFiles.stream().sorted().toList()) {
+-            inputs.append("crate/").append(crate.relativize(source).toString().replace('\\', '/'))
+-                    .append('\t').append(sha(Files.readString(source))).append('\n');
++        for (Path file : boundFiles.stream().sorted().toList()) {
++            inputs.append("host/").append(crate.relativize(file).toString().replace('\\', '/'))
++                    .append('\t').append(sha(Files.readString(file))).append('\n');
+         }
++        inputs.append("contract/CONTRACT.md\t")
++                .append(sha(Files.readString(crate.getParent().resolve("CONTRACT.md")))).append('\n');
+         Path owner = Path.of(System.getProperty("m3.recipe.owner.root"));
+         for (String name : List.of("M3EditScope.java", "M3HashPinnedJavaSnapshotRecipe.java",
+                 "M3HashPinnedTextSnapshotRecipe.java", "M3ScopeInference.java")) {
+@@ -287,18 +321,120 @@ public final class M3TaskRecipeTest {
+             inputs.append("owner/").append(relative).append('\t')
+                     .append(sha(Files.readString(owner.resolve(relative)))).append('\n');
+         }
+-        Files.writeString(root.resolve("SDK_INPUTS.tsv"), inputs, StandardCharsets.UTF_8);
++        List<Path> classpath = parserClasspath();
++        for (int index = 0; index < classpath.size(); index++) {
++            Path entry = classpath.get(index);
++            List<Path> paths;
++            if (Files.isDirectory(entry)) {
++                try (var files = Files.walk(entry)) {
++                    paths = files.filter(Files::isRegularFile).sorted().toList();
++                }
++            } else paths = List.of(entry);
++            for (Path file : paths) {
++                String relative = Files.isDirectory(entry) ? entry.relativize(file).toString() : entry.getFileName().toString();
++                inputs.append("parser-classpath/").append(index).append('/').append(relative.replace('\\', '/'))
++                        .append('\t').append(sha(Files.readAllBytes(file))).append('\n');
++            }
++        }
++        outputs.put("SDK_INPUTS.tsv", inputs.toString());
++        StringBuilder refusals = new StringBuilder("# case\tdiagnostic-sha256\tdiagnostic\n");
++        refusalEvidence.forEach((name, text) -> refusals.append(name).append('\t').append(sha(text))
++                .append('\t').append(text.replace("\t", "\\t").replace("\r", "\\r").replace("\n", "\\n")).append('\n'));
++        outputs.put("SDK_REFUSALS.tsv", refusals.toString());
++        writeExactOutputs(crate, root, outputs);
+     }
+ 
+-    private static void refused(Lane lane, List<SourceFile> input) {
++    /** The host retains actual SDK output only; an existing different output fails without overwrite. */
++    private static void writeExactOutputs(Path crate, Path root, Map<String, String> outputs) throws IOException {
++        for (Map.Entry<String, String> entry : outputs.entrySet()) {
++            Path path = root.resolve(entry.getKey()).normalize();
++            assertTrue(path.startsWith(root) && !path.equals(root), "confined candidate path");
++            for (Path ancestor = path; ancestor != null && ancestor.startsWith(crate); ancestor = ancestor.getParent())
++                assertFalse(Files.isSymbolicLink(ancestor), "symlink candidate path: " + ancestor);
++            if (Files.exists(path, LinkOption.NOFOLLOW_LINKS)) {
++                assertTrue(Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS), "regular candidate output");
++                assertEquals(entry.getValue(), Files.readString(path), "existing candidate output drift: " + path);
++            }
++        }
++        for (Map.Entry<String, String> entry : outputs.entrySet()) {
++            Path path = root.resolve(entry.getKey()).normalize();
++            if (Files.exists(path, LinkOption.NOFOLLOW_LINKS)) continue;
++            Files.createDirectories(path.getParent());
++            Files.writeString(path, entry.getValue(), StandardCharsets.UTF_8, StandardOpenOption.CREATE_NEW);
++        }
++    }
++
++    private static String refused(Lane lane, List<SourceFile> input, String expectedDiagnostic) {
+         List<String> before = input.stream().map(SourceFile::printAll).toList();
+         List<Throwable> errors = new ArrayList<>();
+         InMemoryLargeSourceSet sources = new InMemoryLargeSourceSet(input);
+         RuntimeException failure = assertThrows(RuntimeException.class, () -> recipe(lane)
+-                .run(sources, new InMemoryExecutionContext(errors::add), 1));
++                .run(sources, executionContext(errors::add), 1));
+         assertNotNull(failure);
+         assertTrue(sources.getChangeset().getAllResults().isEmpty(), "no partial publication");
+         assertEquals(before, input.stream().map(SourceFile::printAll).toList());
++        String diagnostic = diagnostic(failure);
++        assertTrue(diagnostic.contains(expectedDiagnostic), diagnostic);
++        return diagnostic;
++    }
++
++    private static String diagnostic(Throwable failure) {
++        StringBuilder result = new StringBuilder();
++        Set<Throwable> seen = Collections.newSetFromMap(new java.util.IdentityHashMap<>());
++        for (Throwable cause = failure; cause != null && seen.add(cause); cause = cause.getCause())
++            result.append(cause.getClass().getName()).append(": ").append(cause.getMessage()).append('\n');
++        return result.toString();
++    }
++
++    private static List<Path> parserClasspath() {
++        String configured = System.getProperty("m3.parser.classpath", "");
++        if (configured.isBlank()) return List.of();
++        List<Path> paths = new ArrayList<>();
++        for (String entry : configured.split(java.util.regex.Pattern.quote(File.pathSeparator), -1)) {
++            assertFalse(entry.isBlank(), "empty parser classpath element");
++            Path path = Path.of(entry).toAbsolutePath().normalize();
++            assertTrue(Files.exists(path), "real parser classpath entry: " + path);
++            paths.add(path);
++        }
++        return List.copyOf(paths);
++    }
++
++    private static JavaParser.Builder<?, ?> javaParser() {
++        JavaParser.Builder<?, ?> parser = JavaParser.fromJavaVersion();
++        List<Path> classpath = parserClasspath();
++        if (!classpath.isEmpty()) parser.classpath(classpath);
++        return parser;
++    }
++
++    private static InMemoryExecutionContext executionContext(java.util.function.Consumer<Throwable> onError) {
++        InMemoryExecutionContext context = new InMemoryExecutionContext(onError);
++        List<Path> classpath = parserClasspath();
++        if (!classpath.isEmpty()) context.putMessage(
++                "com.synexia.rewrite.hashPinnedJavaSnapshotRecipe.parserClasspath", classpath);
++        return context;
++    }
++
++    /** Pin all four existing source owners; no older custody copy is assumed equivalent. */
++    private static void verifyEnginePins() {
++        Path crate = Path.of(System.getProperty("m3.crate.root"));
++        Path owner = Path.of(System.getProperty("m3.recipe.owner.root"));
++        Set<String> expected = Set.of("M3EditScope.java", "M3HashPinnedJavaSnapshotRecipe.java",
++                "M3HashPinnedTextSnapshotRecipe.java", "M3ScopeInference.java");
++        Set<String> actual = new LinkedHashSet<>();
++        try {
++            for (String line : Files.readAllLines(crate.resolve("ENGINE_SOURCES.tsv"))) {
++                if (line.isBlank() || line.startsWith("#")) continue;
++                String[] cells = line.split("\t", -1);
++                assertEquals(5, cells.length, "canonical source pin row");
++                String prefix = "synexia-openrewrite-recipes/";
++                assertTrue(cells[0].startsWith(prefix));
++                String name = Path.of(cells[0]).getFileName().toString();
++                assertTrue(expected.contains(name) && actual.add(name), "exact unique engine owner");
++                assertEquals("Apache-2.0", cells[3]);
++                assertEquals(cells[2], sha(Files.readAllBytes(owner.resolve(cells[0].substring(prefix.length())))), name);
++            }
++        } catch (IOException failure) { throw new IllegalStateException(failure); }
++        assertEquals(expected, actual, "complete exact engine source closure");
+     }
+ 
+     private static List<SourceFile> without(List<SourceFile> input, String omitted) {
+@@ -319,9 +455,9 @@ public final class M3TaskRecipeTest {
+             return new String(stream.readAllBytes(), StandardCharsets.UTF_8);
+         } catch (IOException failure) { throw new IllegalStateException(failure); }
+     }
+-    private static String sha(String text) {
+-        try { return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256")
+-                .digest(text.getBytes(StandardCharsets.UTF_8))); }
++    private static String sha(String text) { return sha(text.getBytes(StandardCharsets.UTF_8)); }
++    private static String sha(byte[] bytes) {
++        try { return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes)); }
+         catch (NoSuchAlgorithmException impossible) { throw new ExceptionInInitializerError(impossible); }
+     }
+ }

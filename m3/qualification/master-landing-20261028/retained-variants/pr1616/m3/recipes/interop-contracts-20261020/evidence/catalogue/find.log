@@ -1,0 +1,6 @@
+LC:350	Intersection of Two Arrays II	multiset_intersection	interop_tests	EVALUATED
+GFG:common-elements-two-arrays	Common Elements in Two Sorted Arrays	multiset_intersection	interop_tests	EVALUATED
+GFG:intersection-with-duplicate-elements	Intersection of Two Arrays with Duplicate Elements	multiset_intersection	interop_tests	REJECTED_CONTRACT
+GH:apache-bag-api	Commons Collections 4.5.0 Bag contract	multiset_intersection;multiset_state	interop_tests	EVALUATED
+GH:apache-hashbag-retain	Commons Collections 4.5.0 AbstractMapBag retention	multiset_intersection	interop_tests	REJECTED_CONTRACT
+GH:m3-bag-owner	Existing M3ApacheBag owner	multiset_intersection;multiset_state	interop_tests	LOCAL_TESTED

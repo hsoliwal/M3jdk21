@@ -1,0 +1,165 @@
+{
+  "schema": "M3_TQ_EXISTING_OWNER_CUSTODY_DIAGNOSTIC_V1",
+  "state": "OBSERVATION_ONLY_NO_GUARD_OR_MAPPING_WRITES",
+  "full_diagnostic_sha256": "b32e793caa5aac1ea8138179e1c125c965947381d7f080385606ea9cb3f9eff9",
+  "plans": [
+    {
+      "owner": "tq",
+      "all_dependency_guards_match": true,
+      "output_byte_mismatches": [
+        {
+          "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+          "expected_resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQ.java.txt",
+          "expected_sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+          "expected_resource_valid": true,
+          "actual_sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+          "byte_equal": false,
+          "exists": true
+        },
+        {
+          "path": "m3/docs/counterpart-naming.md",
+          "expected_resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/counterpart-naming.md.txt",
+          "expected_sha256": "8a32b9ba61492c9b232439b9d917db12f3d8d5b25236bb4acb0439c32e16ac8d",
+          "expected_resource_valid": true,
+          "actual_sha256": "56626d53928e650c0b87e3505718bffd8e3db4c335eee087760fc4fd5d7618b9",
+          "byte_equal": false,
+          "retained_naming_line_subsequence": true,
+          "exists": true
+        },
+        {
+          "path": "m3/docs/name-mapping.json",
+          "expected_resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt",
+          "expected_sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60",
+          "expected_resource_valid": true,
+          "actual_sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+          "byte_equal": false,
+          "exists": true,
+          "mapping": {
+            "historical_count": 47,
+            "current_count": 56,
+            "historical_ids_retained": true,
+            "historical_id_order_is_prefix": true,
+            "top_level_changed_keys": [
+              "donor_artifact_policy",
+              "family_name_mapping",
+              "mappings",
+              "optional_module_mappings",
+              "porting_invariant",
+              "recipe_authority"
+            ],
+            "other_migration_changes": [],
+            "added_ids": [
+              "synexia.collections.SegmentedAddress28",
+              "synexia.collections.SegmentedIntLane28",
+              "synexia.collections.SegmentedLongLane28",
+              "synexia.collections.SegmentedBitLane28",
+              "synexia.collections.PackedBitAtoms",
+              "synexia.regex.mr",
+              "synexia.regex.rxm",
+              "synexia.regex.rxa",
+              "synexia.counterpart.MIndexRegexTrigramQuery.sparseLookup"
+            ],
+            "changed_records": [
+              {
+                "id": "synexia.jcc-recipe-laboratory",
+                "missing": false,
+                "changed_keys": [
+                  "lineage",
+                  "observation",
+                  "reason",
+                  "recipe",
+                  "sources",
+                  "sync"
+                ]
+              },
+              {
+                "id": "synexia.jcc-java-jni-regression",
+                "missing": false,
+                "changed_keys": [
+                  "lineage",
+                  "observation",
+                  "reason",
+                  "recipe",
+                  "sources",
+                  "sync"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "path": "src/java.base/share/legal/synexia.md",
+          "expected_resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/synexia.md.txt",
+          "expected_sha256": "f2c1255f1a27c75e7c6835e01f61e3fb861407571410365e9b64267c7f27f516",
+          "expected_resource_valid": true,
+          "actual_sha256": "2d1d742093ddfd2424442ff27db87af57c9c2b7eb73e68670a05fc5f7d91860a",
+          "byte_equal": false,
+          "retained_legal_suffix": true,
+          "exists": true
+        }
+      ]
+    },
+    {
+      "owner": "tq-sync",
+      "all_dependency_guards_match": true,
+      "output_byte_mismatches": [
+        {
+          "path": "m3/docs/name-mapping.json",
+          "expected_resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt",
+          "expected_sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da",
+          "expected_resource_valid": true,
+          "actual_sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+          "byte_equal": false,
+          "exists": true,
+          "mapping": {
+            "historical_count": 52,
+            "current_count": 56,
+            "historical_ids_retained": true,
+            "historical_id_order_is_prefix": true,
+            "top_level_changed_keys": [
+              "donor_artifact_policy",
+              "family_name_mapping",
+              "mappings",
+              "optional_module_mappings",
+              "porting_invariant",
+              "recipe_authority"
+            ],
+            "other_migration_changes": [],
+            "added_ids": [
+              "synexia.regex.mr",
+              "synexia.regex.rxm",
+              "synexia.regex.rxa",
+              "synexia.counterpart.MIndexRegexTrigramQuery.sparseLookup"
+            ],
+            "changed_records": [
+              {
+                "id": "synexia.jcc-recipe-laboratory",
+                "missing": false,
+                "changed_keys": [
+                  "lineage",
+                  "observation",
+                  "reason",
+                  "recipe",
+                  "sources",
+                  "sync"
+                ]
+              },
+              {
+                "id": "synexia.jcc-java-jni-regression",
+                "missing": false,
+                "changed_keys": [
+                  "lineage",
+                  "observation",
+                  "reason",
+                  "recipe",
+                  "sources",
+                  "sync"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

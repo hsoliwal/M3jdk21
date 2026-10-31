@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.synexia.PureIntConvergence
+displayName: Apply the borrowed Synexia pure-int convergence recipe
+description: >-
+  Target-side activation only. The reusable implementation is canonically owned by Synexia and
+  imported under com.synexia.rewrite.atom from an exact source-bound handoff.
+recipeList:
+  - com.synexia.rewrite.atom.M3PureIntConvergenceRecipe

@@ -1,0 +1,10 @@
+category	authority	technique	remaining_gate
+JavaCompiler	com.sun.source.util.M3AST	original javac event scoped reuse	merged PR 1382
+Eclipse	org.eclipse.jdt.core.dom.ASTNode	borrow DOM structural properties and spans	actual JDT/PDE and working-copy test
+Maven	JDK XML DOM and Maven ModelBuilder	secure XML syntax projection	effective model and inheritance
+Gradle Groovy	Gradle Groovy compiler/tooling API	lexical source envelope only	full Groovy AST and resolved model
+Gradle Kotlin	Gradle Kotlin compiler/tooling API	lexical source envelope only	full Kotlin AST and resolved model
+Jackson	jdk.m3.jackson.M3AST	public occurrence traversal	linked module and zero-wrapper cursor
+Algorithms	LeetCode HackerRank DFS / arrays	primitive parent sibling indexed preorder	no donor challenge source copied
+Algorithms	GeeksforGeeks graph adjacency	sibling link over primitive lanes	budgets and lossless ordering
+Recipes	Synexia Maven/OpenRewrite taxonomy	source sealed Maven-executed generator	attributed OpenRewrite replay unverified

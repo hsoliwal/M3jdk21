@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.OwnedApacheBidiMap20261017V3
+displayName: Receive the V3 owned M3 Apache BidiMap and unchanged provider oracle
+description: Installs two exact reviewed V3 Java sources from absent targets or their fixed-point postimages using the unchanged canonical Java snapshot engine.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: owned-apache-bidimap-v3
+      lst: false
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.OwnedApacheBidiMapValuesTransition20261017V3
+displayName: Transition the exact V2 owned M3 BidiMap body to its V3 postimage
+description: Replaces only the sealed V2 BidiMap body or retains its exact V3 fixed point; missing, drifted and duplicate target sources refuse through the unchanged canonical Java snapshot engine.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: owned-apache-bidimap-values-transition-v3
+      lst: false

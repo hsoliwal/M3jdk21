@@ -1,0 +1,312 @@
+{
+  "binding": {
+    "actual_result_sha256": "9903f6f97515baf46705a83fdda9b55ce5dd5206a727aeb961f08c93fca8d7a0",
+    "all_before_after_inputs_identical": true,
+    "artifact_seals_recomputed": 4,
+    "compiled_java_sources": [
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/src/module-info.java",
+      "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/one-pass/src/proof/OnePassProof.java"
+    ],
+    "linked_legal_entries_recomputed": 110,
+    "modules": [
+      "commons.logging",
+      "java.base",
+      "java.compiler",
+      "java.datatransfer",
+      "java.desktop",
+      "java.logging",
+      "java.naming",
+      "java.prefs",
+      "java.security.sasl",
+      "java.sql",
+      "java.sql.rowset",
+      "java.transaction.xa",
+      "java.xml",
+      "jdk.compiler",
+      "jdk.internal.opt",
+      "jdk.m3.parser",
+      "jdk.m3fs",
+      "jdk.zipfs",
+      "m3fs.onepass.proof",
+      "org.apache.commons.codec",
+      "org.apache.commons.compress",
+      "org.apache.commons.io",
+      "org.apache.commons.lang3",
+      "org.slf4j",
+      "org.xerial.sqlitejdbc"
+    ],
+    "only_qualification_harness_compiled": true,
+    "original_JDBC_resources_recomputed": 4,
+    "product_JAR_JMOD_nondescriptor_class_parity": {
+      "jdk.m3.parser": 64,
+      "jdk.m3fs": 426
+    },
+    "runtime_named_image_without_source_or_class_overlay": true,
+    "sealed_inputs_recomputed": 566,
+    "successful_commands": 12
+  },
+  "blockers": [],
+  "claim_limits": [
+    "1179 checks is the aggregate across three operations plus setup/final checks, not per operation.",
+    "One primary content read and one top-level parse is demonstrated per selected file per case; each separate failure/success case rereads fixtures.",
+    "Reference hashes and AST structural/range hashes are deliberately recomputed; no claim that all analysis traverses bytes or nodes only once.",
+    "Strict byte decoding may fail after a complete raw capture; only a successful task/generation publishes syntax facts.",
+    "Syntax facts, exact UTF-16 ranges and structural identities remain distinct; no semantic cache, atomic source snapshot or E48 schema claim.",
+    "The linked image uses the supplied prebuilt JDK 21; no full source-built M3JDK, default Synexia Maven switch or separate M3FS native-engine qualification is claimed."
+  ],
+  "linked_receiving_review": {
+    "bytes": 75249,
+    "path": "verification/final-receiving-review/REVIEW.json",
+    "sha256": "a6f0193f739a6c0cc97bf092b55b94ea3c351bf2a8e54b6b3e90b07a2e6529e8"
+  },
+  "observed": {
+    "jni": "Original SQLite JDBC 3.45.1.0 / SQLite 3.45.1 active under -Xcheck:jni, zero matching JNI diagnostics.",
+    "logging_note": "Original runtime log retains SLF4J missing-provider/NOP fallback notice; this is not a JNI failure.",
+    "operation_cases": [
+      {
+        "cleanup_before_publication": true,
+        "compiler_contexts_closed": 6,
+        "compiler_contexts_opened": 6,
+        "completed_raw_and_parsed_files": 6,
+        "delivered_indexes": 6,
+        "generation": "one-pass-success",
+        "outcome": "COMMITTED",
+        "peak_callbacks": 3,
+        "primary_inputs_closed": 6,
+        "primary_inputs_opened": 6,
+        "provider_components_closed": 4,
+        "provider_components_opened": 4,
+        "sql_exact_node_hashes": 72,
+        "sql_files": 6,
+        "sql_nodes": 87,
+        "sql_raw_file_hashes": 6,
+        "sql_structural_node_hashes": 87,
+        "sql_utf16_file_hashes": 6,
+        "status": "PASS",
+        "stream_close_calls": 1,
+        "task_entries": 6
+      },
+      {
+        "cleanup_before_publication": true,
+        "compiler_contexts_closed": 6,
+        "compiler_contexts_opened": 6,
+        "completed_raw_and_parsed_files": 6,
+        "delivered_indexes": 3,
+        "generation": "one-pass-task-failure",
+        "outcome": "EXPECTED_TASK_FAILURE_ROLLED_BACK",
+        "peak_callbacks": 3,
+        "primary_inputs_closed": 6,
+        "primary_inputs_opened": 6,
+        "provider_components_closed": 3,
+        "provider_components_opened": 3,
+        "status": "PASS",
+        "stream_close_calls": 1,
+        "task_entries": 6
+      },
+      {
+        "cleanup_before_publication": true,
+        "compiler_contexts_closed": 6,
+        "compiler_contexts_opened": 6,
+        "completed_raw_and_parsed_files": 6,
+        "delivered_indexes": 6,
+        "generation": "one-pass-close-failure",
+        "outcome": "EXPECTED_CLOSE_FAILURE_ROLLED_BACK",
+        "peak_callbacks": 3,
+        "primary_inputs_closed": 6,
+        "primary_inputs_opened": 6,
+        "provider_components_closed": 5,
+        "provider_components_opened": 5,
+        "status": "PASS",
+        "stream_close_calls": 1,
+        "task_entries": 6
+      }
+    ],
+    "per_file_evidence_rows_checked": 18,
+    "selected_files_per_case": 6,
+    "successful_case_UTF16_file_hashes": 6,
+    "successful_case_consumed_bytes": 411,
+    "successful_case_exact_node_hashes": 72,
+    "successful_case_nodes": 87,
+    "successful_case_raw_file_hashes": 6,
+    "successful_case_structural_node_hashes": 87,
+    "total_checks_including_setup_and_final_checks": 1179
+  },
+  "preserved_correction": {
+    "description": "Replace the qualification consumer name m3.onepass.proof with m3fs.onepass.proof in its descriptor, runtime module assertion and packaging/launch references. Keep all product module names, module requirements and lint flags unchanged.",
+    "failed_receipt_sha256": "88811391d54b234cc27e8ab11d34ae5af4ab3724a7845a30631a442acf0e3d08",
+    "final_receipt_sha256": "9903f6f97515baf46705a83fdda9b55ce5dd5206a727aeb961f08c93fca8d7a0",
+    "scope": "Harness-only module name; no product source change or lint suppression"
+  },
+  "production_modified": false,
+  "proof_seals": {
+    "qualification/one-pass-final/COMMANDS.json": {
+      "bytes": 11021,
+      "sha256": "f89e62239bcb57fabb3b8581c128ce15d7c3e72556909c78c9ace0ed9a36962e"
+    },
+    "qualification/one-pass-final/INPUTS.after.json": {
+      "bytes": 144608,
+      "sha256": "3ee4939afd20bb64386447cf761f83f05c105a9d881cb372261d64d6ab7191b0"
+    },
+    "qualification/one-pass-final/INPUTS.json": {
+      "bytes": 144871,
+      "sha256": "76a8d92d4f7df5f0a49f9aebc262ff3b5c1b320c356da96a98325ac1db7ac208"
+    },
+    "qualification/one-pass-final/LEGAL_AND_NATIVE_RESOURCES.json": {
+      "bytes": 978,
+      "sha256": "64dad4690652b9012eb1ebdd66b917c6255472e3688510c9486270ce74aea7cd"
+    },
+    "qualification/one-pass-final/RESULTS.json": {
+      "bytes": 18672,
+      "sha256": "9903f6f97515baf46705a83fdda9b55ce5dd5206a727aeb961f08c93fca8d7a0"
+    },
+    "qualification/one-pass-final/compile-proof.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/one-pass-final/describe-slf4j.log": {
+      "bytes": 331,
+      "sha256": "d64eac1188405300eb8e9fad3bddf5bf3a34dde315d153ffc4a863ab45d26661"
+    },
+    "qualification/one-pass-final/describe-sqlite.log": {
+      "bytes": 626,
+      "sha256": "021da5bc250c0180b83631282f3b7d72c10e2c1c56151a81cbbbe9e7472aa888"
+    },
+    "qualification/one-pass-final/extract-original-jdbc-resources.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/one-pass-final/image/lib/modules": {
+      "bytes": 96106165,
+      "sha256": "a5435e3628fd5c3a5fbc9853d2c88a681afff832417b9c06dbec8cedb9d0eabf"
+    },
+    "qualification/one-pass-final/jar-proof.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/one-pass-final/jlink-composed-image.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/one-pass-final/list-image-modules.log": {
+      "bytes": 594,
+      "sha256": "b7d9de3d371ecc566019be926d015efefc62c150ee9f2c5e9258c3d23328e421"
+    },
+    "qualification/one-pass-final/m3fs.onepass.proof.jar": {
+      "bytes": 29279,
+      "sha256": "7197f298c8b5cce1bf56f953f395630f0be71b4430ffe5a4ae79ed9c50fff751"
+    },
+    "qualification/one-pass-final/one-pass-image.log": {
+      "bytes": 243,
+      "sha256": "829817d55ad667d9e52ad59a73b4e9de853f16d8050e5a1f43ce48096a91643d"
+    },
+    "qualification/one-pass-final/pack-original-jdbc-modules.log": {
+      "bytes": 57,
+      "sha256": "14ba6afe29d3d278facc9d351f202ea27a0b48c5adb7ee71135b9c6d76dc5dd0"
+    },
+    "qualification/one-pass-final/pack-proof.log": {
+      "bytes": 57,
+      "sha256": "d2fc9338b29aa8987f823887f49adcafbad30d9b9c86c82bf3ba07f6eae70881"
+    },
+    "qualification/one-pass-final/toolchain.log": {
+      "bytes": 205,
+      "sha256": "5b4412738541184e84f6b2d7520d4f4a7c2a455f60650491464c61adcbbbdeb0"
+    },
+    "qualification/one-pass-final/validate-image.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/one-pass-final/work/RESULTS.json": {
+      "bytes": 11416,
+      "sha256": "74673d4281e478f2daf147e1a3c454da35aa0f80e8c08d3512749edd5ac76d76"
+    },
+    "qualification/one-pass-final/work/module/target/m3/facts.sqlite": {
+      "bytes": 57344,
+      "sha256": "1727729a7285afc5c79c8914f667b237fbd1758500a666c4f057ea47ec1f0f23"
+    },
+    "qualification/one-pass/RESULTS.json": {
+      "bytes": 764,
+      "sha256": "88811391d54b234cc27e8ab11d34ae5af4ab3724a7845a30631a442acf0e3d08"
+    },
+    "qualification/one-pass/compile-proof.log": {
+      "bytes": 268,
+      "sha256": "360d74fe1d862f5dfc0cb7f03a74fd32b916ca34fea98089dc605507508e21c5"
+    },
+    "verification/final-receiving-review/REVIEW.json": {
+      "bytes": 75249,
+      "sha256": "a6f0193f739a6c0cc97bf092b55b94ea3c351bf2a8e54b6b3e90b07a2e6529e8"
+    },
+    "verification/one-pass/CORRECTION.json": {
+      "bytes": 3078,
+      "sha256": "b4d97973e5a066ab5961a5dabbd9a030ab15676a291b7ab4b2867b650aa94e4b"
+    },
+    "verification/one-pass/INVOCATION.json": {
+      "bytes": 1976,
+      "sha256": "5c8f849cd08cb3466a0da0eb0ba34c5eb300738dcb6ce18f1209ccbc9a62fbeb"
+    },
+    "verification/one-pass/README.md": {
+      "bytes": 8049,
+      "sha256": "edc6ecfa76d3ad85126aa539960cfc30a7024adce18b73247d87a015a928296c"
+    },
+    "verification/one-pass/SOURCE_PINS.json": {
+      "bytes": 1766,
+      "sha256": "371d1fb71877bd9d0c95e2f6f998b11bb1e2cb876014d917cf09c8943c61c790"
+    },
+    "verification/one-pass/run_proof.py": {
+      "bytes": 17746,
+      "sha256": "3797a7f421fbd78bd53cdb442fd503189294f26f12ed7a0d0b0b0cfd5e4af853"
+    },
+    "verification/one-pass/src/module-info.java": {
+      "bytes": 331,
+      "sha256": "ba5b55b48e5563dcfc645123b17437014496fdb5a4dc4c8cd4e32d031cf85c30"
+    },
+    "verification/one-pass/src/proof/OnePassProof.java": {
+      "bytes": 37776,
+      "sha256": "811866311b38c376a45c82ca5c1765100f29e688124d02657e3cec0d0f3c373f"
+    }
+  },
+  "reviewed_contracts": [
+    {
+      "contract": "One primary file input per selected file per operation",
+      "evidence": "FileRead.openInputStream counts and delegates exactly once to actual MFile, and its counting stream records all consumed bytes. M3File.read owns the monitored input close. No second primary content source or path reopen is present. Per-file runtime counters and finite fixture byte/hash comparisons agree.",
+      "status": "PASS"
+    },
+    {
+      "contract": "Progress, synchronous shadow and complete raw capture share that input",
+      "evidence": "FileRead.read composes progressify().shadow(\"raw-java\",observer).captureReads(); onBytes sees no prior completion/capture; completion asserts EOF and one primary close; capture follows that completion. Bytes, progress, shadow, raw hash and raw manifest agree.",
+      "status": "PASS"
+    },
+    {
+      "contract": "One retained-text top-level javac parse, owner-thread isolation",
+      "evidence": "project() creates a fresh StandardJavaFileManager/JavacTask per callback, contains one task.parse() call, and passes retained source.text() through a counted JavaFileObject. getCharContent is requested exactly once before and after existing-tree ingress; openInputStream throws if javac attempts a byte reopen. The manager closes before the detached index is returned.",
+      "precision": "javac_parse_calls=1 is the single statically visible task.parse invocation recorded by the harness, not an instrumented assertion that all javac internals or later hashes traverse text once.",
+      "status": "PASS"
+    },
+    {
+      "contract": "Failed task follows at least one uncommitted file insertion",
+      "evidence": "The failing RootC callback waits for firstInserted. That latch is released on the second result delivery; M3FactsWriter.load completes insertion/batching of the first index before requesting the next iterator element. The failure identity and at least two deliveries are asserted, then separate connections observe zero failed-generation/file/node rows.",
+      "status": "PASS"
+    },
+    {
+      "contract": "Owned stream cleanup precedes committed visibility",
+      "evidence": "M3FactsWriter owns the stream; its onClose runs after MFiles cleanup. beforePublication checks zero active tasks/readers/compiler managers and balanced registered-provider cleanup, then opens a separate SQLite connection and observes that the new generation is absent. Injected close failure occurs after all six indexes were delivered and causes zero rows for that generation. Successful publication is queried after return.",
+      "precision": "These checks demonstrate the pre-commit source/stream cleanup boundary. They do not imply rollback after a later post-commit connection restoration/close failure; the resolved FACTS successor explicitly preserves that distinction.",
+      "status": "PASS"
+    },
+    {
+      "contract": "SOURCE_UNVERIFIED stays explicit",
+      "evidence": "Every projected node asserts SOURCE_UNVERIFIED. SQL checkFacts compares every stored node flag to the detached index, alongside exact/structural hashes. The public supplied-tree ingress does not turn a matching fixture into a compiler-attested source binding.",
+      "status": "PASS"
+    },
+    {
+      "contract": "Meaningful local bounded concurrency and lifetime",
+      "evidence": "Three finite local roots use extension and directory pruning. A first-wave latch proves K=3 concurrent callbacks; each operation reports peak 3. No live FileObject/compiler context escapes callbacks. Borrowed executor remains open. Audit provider observes manager component cleanup on its creating worker.",
+      "precision": "The proof does not establish one physical archive read, arbitrary callback memory bounds, all-provider thread safety, or a whole-filesystem snapshot.",
+      "status": "PASS"
+    }
+  ],
+  "reviewer": "/root/m3fs_monitored_streams",
+  "runtime_rerun": false,
+  "schema": "M3_ONE_PASS_COMPOSED_RECEIVING_REVIEW_V1",
+  "scope": "Bounded read-only review of the final composed harness, actual named-image receipt, source/artifact seals, original resource custody and stated publication contracts. No test rerun.",
+  "status": "PASS"
+}

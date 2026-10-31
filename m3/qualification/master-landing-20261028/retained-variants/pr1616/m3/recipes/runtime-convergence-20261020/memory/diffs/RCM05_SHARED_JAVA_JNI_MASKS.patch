@@ -1,0 +1,506 @@
+--- before/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
++++ after/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+@@ -141,23 +141,7 @@
+     public static long[] selectLong(long[] orderedRows, byte[] rowStates, int requiredMask) {
+         Objects.requireNonNull(orderedRows, "orderedRows");
+         validate(rowStates, orderedRows.length, requiredMask);
+-        int selectedCount = countSelected(rowStates, requiredMask);
+-        // Every row is selected: one defensive primitive copy, no second mask scan.
+-        if (selectedCount == orderedRows.length) return orderedRows.clone();
+-        long[] selected = new long[selectedCount];
+-        int written = 0;
+-        for (int i = 0; i < orderedRows.length; i++) {
+-            if (matches(rowStates[i], requiredMask)) {
+-                if (written == selected.length) {
+-                    throw new ConcurrentModificationException("aligned selection states changed");
+-                }
+-                selected[written++] = orderedRows[i];
+-            }
+-        }
+-        if (written != selected.length) {
+-            throw new ConcurrentModificationException("aligned selection states changed");
+-        }
+-        return selected;
++        return selectLongWindowJava(orderedRows, 0, rowStates, 0, orderedRows.length, requiredMask);
+     }
+ 
+     /** Validate before an in-place primitive owner writes a single resident slot. */
+@@ -202,23 +186,7 @@
+      * or per-element object. Caller must keep both input arrays stable during use.
+      */
+     static int[] selectJava(int[] orderedRows, byte[] rowStates, int requiredMask) {
+-        int selectedCount = countSelected(rowStates, requiredMask);
+-        // Retain output isolation even when the mask selects every source index.
+-        if (selectedCount == orderedRows.length) return orderedRows.clone();
+-        int[] selected = new int[selectedCount];
+-        int written = 0;
+-        for (int i = 0; i < orderedRows.length; i++) {
+-            if (matches(rowStates[i], requiredMask)) {
+-                if (written == selected.length) {
+-                    throw new ConcurrentModificationException("aligned selection states changed");
+-                }
+-                selected[written++] = orderedRows[i];
+-            }
+-        }
+-        if (written != selected.length) {
+-            throw new ConcurrentModificationException("aligned selection states changed");
+-        }
+-        return selected;
++        return selectIntWindowJava(orderedRows, 0, rowStates, 0, orderedRows.length, requiredMask);
+     }
+ 
+     /** Exact-sized logical-position selection; no O(n) identity input scratch. */
+@@ -273,6 +241,32 @@
+             return selectWindowNative(orderedRows, rowOffset, states, stateOffset,
+                     length, requiredMask);
+         }
++        return selectIntWindowJava(orderedRows, rowOffset, states, stateOffset, length, requiredMask);
++    }
++
++    /** Primitive-long counterpart, preserving signed extremes and duplicates. */
++    public static long[] selectLongWindow(long[] orderedRows, int rowOffset,
++                                          byte[] states, int stateOffset, int length,
++                                          int requiredMask, Backend backend) {
++        Objects.requireNonNull(orderedRows, "orderedRows");
++        Objects.requireNonNull(states, "states");
++        Objects.requireNonNull(backend, "backend");
++        Objects.checkFromIndexSize(rowOffset, length, orderedRows.length);
++        Objects.checkFromIndexSize(stateOffset, length, states.length);
++        requireMask(requiredMask);
++        if (backend == Backend.NATIVE_REQUIRED) {
++            if (!NativeLibrary.AVAILABLE) {
++                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
++            }
++            return selectLongWindowNative(orderedRows, rowOffset, states, stateOffset,
++                    length, requiredMask);
++        }
++        return selectLongWindowJava(orderedRows, rowOffset, states, stateOffset, length, requiredMask);
++    }
++
++    /** Stable int emission shared by existing checked callers; no retained input. */
++    private static int[] selectIntWindowJava(int[] orderedRows, int rowOffset,
++            byte[] states, int stateOffset, int length, int requiredMask) {
+         int kept = countWindow(states, stateOffset, length, requiredMask);
+         if (kept == length) {
+             return java.util.Arrays.copyOfRange(orderedRows, rowOffset, rowOffset + length);
+@@ -293,23 +287,9 @@
+         return selected;
+     }
+ 
+-    /** Primitive-long counterpart, preserving signed extremes and duplicates. */
+-    public static long[] selectLongWindow(long[] orderedRows, int rowOffset,
+-                                          byte[] states, int stateOffset, int length,
+-                                          int requiredMask, Backend backend) {
+-        Objects.requireNonNull(orderedRows, "orderedRows");
+-        Objects.requireNonNull(states, "states");
+-        Objects.requireNonNull(backend, "backend");
+-        Objects.checkFromIndexSize(rowOffset, length, orderedRows.length);
+-        Objects.checkFromIndexSize(stateOffset, length, states.length);
+-        requireMask(requiredMask);
+-        if (backend == Backend.NATIVE_REQUIRED) {
+-            if (!NativeLibrary.AVAILABLE) {
+-                throw new UnsatisfiedLinkError("m3_index_mask JNI library unavailable");
+-            }
+-            return selectLongWindowNative(orderedRows, rowOffset, states, stateOffset,
+-                    length, requiredMask);
+-        }
++    /** Stable long emission shared by existing checked callers; no retained input. */
++    private static long[] selectLongWindowJava(long[] orderedRows, int rowOffset,
++            byte[] states, int stateOffset, int length, int requiredMask) {
+         int kept = countWindow(states, stateOffset, length, requiredMask);
+         if (kept == length) {
+             return java.util.Arrays.copyOfRange(orderedRows, rowOffset, rowOffset + length);
+--- before/m3/collections/src/main/native/collections/m3_index_mask_compactor.c
++++ after/m3/collections/src/main/native/collections/m3_index_mask_compactor.c
+@@ -14,153 +14,6 @@
+         (*env)->ThrowNew(env, type, "aligned selection states changed");
+         (*env)->DeleteLocalRef(env, type);
+     }
+-}
+-
+-/* One core for legacy whole-index and offset windows. All bounds validated by exports.
+- * Prefix compaction is safe in row_ids: accepted never exceeds the current input slot.
+- */
+-static jintArray m3_select_range(JNIEnv *env, jintArray rows, jbyteArray states,
+-        jsize first, jsize n, jint required_mask) {
+-    jbyte marks[M3_CHUNK];
+-    jint row_ids[M3_CHUNK];
+-    jsize count = required_mask == 0 ? n : 0;
+-    for (jsize offset = 0; required_mask != 0 && offset < n;) {
+-        jsize chunk = n - offset < M3_CHUNK ? n - offset : M3_CHUNK;
+-        (*env)->GetByteArrayRegion(env, states, offset, chunk, marks);
+-        if ((*env)->ExceptionCheck(env)) return NULL;
+-        for (jsize i = 0; i < chunk; i++) {
+-            unsigned int bits = (unsigned int)(unsigned char)marks[i];
+-            if ((bits & (unsigned int)required_mask) == (unsigned int)required_mask) count++;
+-        }
+-        offset += chunk;
+-    }
+-    jintArray result = (*env)->NewIntArray(env, count);
+-    if (result == NULL) return NULL;
+-    jsize written = 0;
+-    for (jsize offset = 0; offset < n;) {
+-        jsize chunk = n - offset < M3_CHUNK ? n - offset : M3_CHUNK;
+-        if (required_mask != 0) {
+-            (*env)->GetByteArrayRegion(env, states, offset, chunk, marks);
+-            if ((*env)->ExceptionCheck(env)) return NULL;
+-        }
+-        (*env)->GetIntArrayRegion(env, rows, first + offset, chunk, row_ids);
+-        if ((*env)->ExceptionCheck(env)) return NULL;
+-        jsize accepted = 0;
+-        for (jsize i = 0; i < chunk; i++) {
+-            unsigned int bits = required_mask == 0 ? 0u : (unsigned int)(unsigned char)marks[i];
+-            if ((bits & (unsigned int)required_mask) == (unsigned int)required_mask) {
+-                row_ids[accepted++] = row_ids[i];
+-            }
+-        }
+-        if (accepted > count - written) {
+-            m3_throw_state_drift(env);
+-            return NULL;
+-        }
+-        if (accepted > 0) {
+-            (*env)->SetIntArrayRegion(env, result, written, accepted, row_ids);
+-            if ((*env)->ExceptionCheck(env)) return NULL;
+-            written += accepted;
+-        }
+-        offset += chunk;
+-    }
+-    if (written != count) {
+-        m3_throw_state_drift(env);
+-        return NULL;
+-    }
+-    return result;
+-}
+-
+-JNIEXPORT jintArray JNICALL
+-Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
+-        JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint required_mask) {
+-    (void)owner;
+-    if (rows == NULL || states == NULL || required_mask < 0 || required_mask > 255) {
+-        jclass exception = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+-        if (exception != NULL) {
+-            (*env)->ThrowNew(env, exception, "invalid primitive selection inputs");
+-            (*env)->DeleteLocalRef(env, exception);
+-        }
+-        return NULL;
+-    }
+-    jsize n = (*env)->GetArrayLength(env, rows);
+-    if ((*env)->ExceptionCheck(env)) return NULL;
+-    if ((*env)->GetArrayLength(env, states) != n) {
+-        if ((*env)->ExceptionCheck(env)) return NULL;
+-        jclass exception = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+-        if (exception != NULL) {
+-            (*env)->ThrowNew(env, exception, "state/index length mismatch");
+-            (*env)->DeleteLocalRef(env, exception);
+-        }
+-        return NULL;
+-    }
+-    return m3_select_range(env, rows, states, 0, n, required_mask);
+-}
+-
+-/* Capability discovery keeps older binaries usable through their original native ABI. */
+-JNIEXPORT jint JNICALL
+-Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative(JNIEnv *env, jclass owner) {
+-    (void)env; (void)owner;
+-    return 1;
+-}
+-
+-JNIEXPORT jintArray JNICALL
+-Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(
+-        JNIEnv *env, jclass owner, jintArray rows, jbyteArray states,
+-        jint first, jint length, jint required_mask) {
+-    (void)owner;
+-    if (rows == NULL || states == NULL || required_mask < 0 || required_mask > 255) {
+-        jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+-        if (type != NULL) {
+-            (*env)->ThrowNew(env, type, "invalid primitive selection inputs");
+-            (*env)->DeleteLocalRef(env, type);
+-        }
+-        return NULL;
+-    }
+-    jsize rows_length = (*env)->GetArrayLength(env, rows);
+-    if ((*env)->ExceptionCheck(env)) return NULL;
+-    jsize states_length = (*env)->GetArrayLength(env, states);
+-    if ((*env)->ExceptionCheck(env)) return NULL;
+-    /* Subtraction-based bounds keep first+length from overflowing before validation. */
+-    if (first < 0 || length < 0 || first > rows_length || length > rows_length - first
+-            || states_length != length) {
+-        jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+-        if (type != NULL) {
+-            (*env)->ThrowNew(env, type, "invalid index window or aligned state length");
+-            (*env)->DeleteLocalRef(env, type);
+-        }
+-        return NULL;
+-    }
+-    return m3_select_range(env, rows, states, first, length, required_mask);
+-}
+-
+-/* Independent row/state offsets are checked before JNI region reads.
+- * Reuse the original chunked mask/compactor ABI and state-drift diagnostic.
+- */
+-static void m3_bad_window(JNIEnv *env) {
+-    jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+-    if (type != NULL) {
+-        (*env)->ThrowNew(env, type, "invalid indexed window or unsigned-byte mask");
+-        (*env)->DeleteLocalRef(env, type);
+-    }
+-}
+-
+-static int m3_window_valid(JNIEnv *env, jarray rows, jbyteArray states,
+-        jint row_offset, jint state_offset, jint length, jint mask) {
+-    if (rows == NULL || states == NULL || row_offset < 0 || state_offset < 0
+-            || length < 0 || mask < 0 || mask > 255) {
+-        m3_bad_window(env);
+-        return 0;
+-    }
+-    jsize row_size = (*env)->GetArrayLength(env, rows);
+-    if ((*env)->ExceptionCheck(env)) return 0;
+-    jsize state_size = (*env)->GetArrayLength(env, states);
+-    if ((*env)->ExceptionCheck(env)) return 0;
+-    if (row_offset > row_size || state_offset > state_size
+-            || length > row_size - row_offset || length > state_size - state_offset) {
+-        m3_bad_window(env);
+-        return 0;
+-    }
+-    return 1;
+ }
+ 
+ static jint m3_count_window(JNIEnv *env, jbyteArray states,
+@@ -181,6 +34,167 @@
+     }
+     return kept;
+ }
++
++/* First retained ordinal; zero-mask never reads uninitialized marks. */
++static jsize m3_first_selected(const jbyte *marks, jsize size, jint mask) {
++    if (mask == 0) return 0;
++    jsize first = 0;
++    while (first < size) {
++        unsigned int flags = (unsigned int)(unsigned char)marks[first];
++        if ((flags & (unsigned int)mask) == (unsigned int)mask) break;
++        first++;
++    }
++    return first;
++}
++
++/* One core for legacy whole-index and independent-offset windows. All bounds validated by exports.
++ * Prefix compaction is safe in row_ids: accepted never exceeds the current input slot.
++ */
++static jintArray m3_select_range(JNIEnv *env, jintArray rows, jbyteArray states,
++        jsize first, jsize state_first, jsize n, jint required_mask) {
++    jbyte marks[M3_CHUNK];
++    jint row_ids[M3_CHUNK];
++    jsize count = m3_count_window(env, states, state_first, n, required_mask);
++    if (count < 0) return NULL;
++    jintArray result = (*env)->NewIntArray(env, count);
++    if (result == NULL) return NULL;
++    jsize written = 0;
++    for (jsize offset = 0; offset < n;) {
++        jsize chunk = n - offset < M3_CHUNK ? n - offset : M3_CHUNK;
++        if (required_mask != 0) {
++            (*env)->GetByteArrayRegion(env, states, state_first + offset, chunk, marks);
++            if ((*env)->ExceptionCheck(env)) return NULL;
++        }
++        jsize begin = m3_first_selected(marks, chunk, required_mask);
++        if (begin == chunk) {
++            /* Preserve the second state scan and count-drift guard, omit rejected payload. */
++            offset += chunk;
++            continue;
++        }
++        (*env)->GetIntArrayRegion(env, rows, first + offset, chunk, row_ids);
++        if ((*env)->ExceptionCheck(env)) return NULL;
++        jsize accepted = chunk;
++        if (required_mask != 0) {
++            accepted = 0;
++            for (jsize i = begin; i < chunk; i++) {
++                unsigned int bits = (unsigned int)(unsigned char)marks[i];
++                if ((bits & (unsigned int)required_mask) == (unsigned int)required_mask) {
++                    row_ids[accepted++] = row_ids[i];
++                }
++            }
++        }
++        if (accepted > count - written) {
++            m3_throw_state_drift(env);
++            return NULL;
++        }
++        if (accepted > 0) {
++            (*env)->SetIntArrayRegion(env, result, written, accepted, row_ids);
++            if ((*env)->ExceptionCheck(env)) return NULL;
++            written += accepted;
++        }
++        offset += chunk;
++    }
++    if (written != count) {
++        m3_throw_state_drift(env);
++        return NULL;
++    }
++    return result;
++}
++
++JNIEXPORT jintArray JNICALL
++Java_com_m3_collections_M3IndexMaskCompactor_selectNative(
++        JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint required_mask) {
++    (void)owner;
++    if (rows == NULL || states == NULL || required_mask < 0 || required_mask > 255) {
++        jclass exception = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
++        if (exception != NULL) {
++            (*env)->ThrowNew(env, exception, "invalid primitive selection inputs");
++            (*env)->DeleteLocalRef(env, exception);
++        }
++        return NULL;
++    }
++    jsize n = (*env)->GetArrayLength(env, rows);
++    if ((*env)->ExceptionCheck(env)) return NULL;
++    if ((*env)->GetArrayLength(env, states) != n) {
++        if ((*env)->ExceptionCheck(env)) return NULL;
++        jclass exception = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
++        if (exception != NULL) {
++            (*env)->ThrowNew(env, exception, "state/index length mismatch");
++            (*env)->DeleteLocalRef(env, exception);
++        }
++        return NULL;
++    }
++    return m3_select_range(env, rows, states, 0, 0, n, required_mask);
++}
++
++/* Capability discovery keeps older binaries usable through their original native ABI. */
++JNIEXPORT jint JNICALL
++Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative(JNIEnv *env, jclass owner) {
++    (void)env; (void)owner;
++    return 1;
++}
++
++JNIEXPORT jintArray JNICALL
++Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative(
++        JNIEnv *env, jclass owner, jintArray rows, jbyteArray states,
++        jint first, jint length, jint required_mask) {
++    (void)owner;
++    if (rows == NULL || states == NULL || required_mask < 0 || required_mask > 255) {
++        jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
++        if (type != NULL) {
++            (*env)->ThrowNew(env, type, "invalid primitive selection inputs");
++            (*env)->DeleteLocalRef(env, type);
++        }
++        return NULL;
++    }
++    jsize rows_length = (*env)->GetArrayLength(env, rows);
++    if ((*env)->ExceptionCheck(env)) return NULL;
++    jsize states_length = (*env)->GetArrayLength(env, states);
++    if ((*env)->ExceptionCheck(env)) return NULL;
++    /* Subtraction-based bounds keep first+length from overflowing before validation. */
++    if (first < 0 || length < 0 || first > rows_length || length > rows_length - first
++            || states_length != length) {
++        jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
++        if (type != NULL) {
++            (*env)->ThrowNew(env, type, "invalid index window or aligned state length");
++            (*env)->DeleteLocalRef(env, type);
++        }
++        return NULL;
++    }
++    return m3_select_range(env, rows, states, first, 0, length, required_mask);
++}
++
++/* Independent row/state offsets are checked before JNI region reads.
++ * Reuse the original chunked mask/compactor ABI and state-drift diagnostic.
++ */
++static void m3_bad_window(JNIEnv *env) {
++    jclass type = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
++    if (type != NULL) {
++        (*env)->ThrowNew(env, type, "invalid indexed window or unsigned-byte mask");
++        (*env)->DeleteLocalRef(env, type);
++    }
++}
++
++static int m3_window_valid(JNIEnv *env, jarray rows, jbyteArray states,
++        jint row_offset, jint state_offset, jint length, jint mask) {
++    if (rows == NULL || states == NULL || row_offset < 0 || state_offset < 0
++            || length < 0 || mask < 0 || mask > 255) {
++        m3_bad_window(env);
++        return 0;
++    }
++    jsize row_size = (*env)->GetArrayLength(env, rows);
++    if ((*env)->ExceptionCheck(env)) return 0;
++    jsize state_size = (*env)->GetArrayLength(env, states);
++    if ((*env)->ExceptionCheck(env)) return 0;
++    if (row_offset > row_size || state_offset > state_size
++            || length > row_size - row_offset || length > state_size - state_offset) {
++        m3_bad_window(env);
++        return 0;
++    }
++    return 1;
++}
++
++
+ 
+ /* ABI probe for direct logical-position selection from the state lane. */
+ JNIEXPORT jint JNICALL
+@@ -329,48 +343,7 @@
+     if (!m3_window_valid(env, rows, states, row_offset, state_offset, length, mask)) {
+         return NULL;
+     }
+-    jint kept = m3_count_window(env, states, state_offset, length, mask);
+-    if (kept < 0) return NULL;
+-    jintArray result = (*env)->NewIntArray(env, kept);
+-    if (result == NULL) return NULL;
+-    jbyte marks[M3_CHUNK];
+-    jint values[M3_CHUNK];
+-    jint written = 0;
+-    for (jint position = 0; position < length;) {
+-        jint remaining = length - position;
+-        jsize chunk = remaining < M3_CHUNK ? remaining : M3_CHUNK;
+-        if (mask != 0) {
+-            (*env)->GetByteArrayRegion(env, states, state_offset + position, chunk, marks);
+-            if ((*env)->ExceptionCheck(env)) return NULL;
+-        }
+-        (*env)->GetIntArrayRegion(env, rows, row_offset + position, chunk, values);
+-        if ((*env)->ExceptionCheck(env)) return NULL;
+-        jsize batch = chunk;
+-        if (mask != 0) {
+-            /* Stable prefix compaction: batch <= i, so unread values stay intact. */
+-            batch = 0;
+-            for (jsize i = 0; i < chunk; i++) {
+-                unsigned int flags = (unsigned int)(unsigned char)marks[i];
+-                if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
+-            }
+-        }
+-        if (batch > kept - written) {
+-            m3_throw_state_drift(env);
+-            return NULL;
+-        }
+-        if (batch > 0) {
+-            /* Zero-mask identity copies the row chunk without reading aligned states. */
+-            (*env)->SetIntArrayRegion(env, result, written, batch, values);
+-            if ((*env)->ExceptionCheck(env)) return NULL;
+-            written += batch;
+-        }
+-        position += chunk;
+-    }
+-    if (written != kept) {
+-        m3_throw_state_drift(env);
+-        return NULL;
+-    }
+-    return result;
++    return m3_select_range(env, rows, states, row_offset, state_offset, length, mask);
+ }
+ 
+ JNIEXPORT jlongArray JNICALL
+@@ -395,13 +368,18 @@
+             (*env)->GetByteArrayRegion(env, states, state_offset + position, chunk, marks);
+             if ((*env)->ExceptionCheck(env)) return NULL;
+         }
++        jsize begin = m3_first_selected(marks, chunk, mask);
++        if (begin == chunk) {
++            position += chunk;
++            continue;
++        }
+         (*env)->GetLongArrayRegion(env, rows, row_offset + position, chunk, values);
+         if ((*env)->ExceptionCheck(env)) return NULL;
+         jsize batch = chunk;
+         if (mask != 0) {
+             /* Stable prefix compaction: batch <= i, so unread values stay intact. */
+             batch = 0;
+-            for (jsize i = 0; i < chunk; i++) {
++            for (jsize i = begin; i < chunk; i++) {
+                 unsigned int flags = (unsigned int)(unsigned char)marks[i];
+                 if ((flags & (unsigned int)mask) == (unsigned int)mask) values[batch++] = values[i];
+             }

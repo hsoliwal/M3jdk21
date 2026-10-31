@@ -1,0 +1,15 @@
+["/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn", "-B", "-ntp", "-s", "/workspace/scratch/206049dfb270/canonical-work/maven-proxy-settings.xml", "-Dmaven.repo.local=/tmp/m3-build-m2", "-f", "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/dependencies.xml", "org.apache.maven.plugins:maven-dependency-plugin:3.11.0:copy-dependencies", "-DincludeScope=runtime", "-DoutputDirectory=/workspace/scratch/206049dfb270/nlp-work/dependencies/opennlp"]
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------< org.apache.opennlp.m3:current-fork-jmod-external-closure >------
+[INFO] Building current-fork-jmod-external-closure 1
+[INFO]   from dependencies.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- dependency:3.11.0:copy-dependencies (default-cli) @ current-fork-jmod-external-closure ---
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.708 s
+[INFO] Finished at: 2026-10-21T03:09:20+01:00
+[INFO] ------------------------------------------------------------------------

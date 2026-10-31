@@ -1,0 +1,55 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "source_epoch": {
+    "name": "E2",
+    "repository": "hsoliwal/M3jdk21",
+    "source_base": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+    "E1_target_commit": "f35342202149b98465bb4e9e6be807eb0cf3f762",
+    "E1_canonical_commit": "0ee3e62241cb1252f2d018a33969f64e66c2b2fe",
+    "aggregate_changed_paths_relative_to_base": 55,
+    "receiving_paths_over_E1": [
+      "test/jdk/java/lang/String/M3StringPoolMetadataBoundsTest.java",
+      "m3/runtime-integration/check-m3string-concat-reference-dag.py",
+      "m3/runtime-integration/recipe/manifest.json",
+      "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java",
+      "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java",
+      "src/java.base/share/classes/java/lang/M3StringPool.java",
+      "test/jdk/java/lang/String/M3StringCanonicalDagTest.java"
+    ],
+    "source_seal_sha256": "00882b5e2c1dbb162aff9fdabdf98a226757919b288621ab219902d2b4609275",
+    "source_seal_format": "SHA-256 of sorted SOURCE55 row objects serialized as JSON with sorted keys and compact separators",
+    "all_55_actual_receiver_bytes_verified": true,
+    "final_publication_commit": null,
+    "publication_binding": "Final canonical and target publication commits are pending at this frozen evidence checkpoint. The enclosing SOURCE_RECEIPT.json supplies their later binding to these exact source seals.",
+    "image_scope": "Rebuilt source image, not --patch-module runtime classes. Native test libraries are the selected JNI fixture libraries passed through jtreg -nativepath."
+  },
+  "command_lines": [
+    "source <TOOLS>/build-env.sh",
+    "make CONF=m3-composed-release images JOBS=4"
+  ],
+  "configuration": "Same release/server/headless configuration as E1, --disable-javac-server, warnings-as-errors retained; see ../SOURCE_BUILD.json.",
+  "builds": [
+    {
+      "input": "images-receiving.log",
+      "status": "FAILED",
+      "exit": 2,
+      "exit_provenance": "direct make tool completion confirmed by executing parent",
+      "raw_sha256": "7a8f5cb37d39b6975f502b0d4c4f8b9cf5859fe063330d8e93b1178c8d4c1dec",
+      "normalized_sha256": "f40b09bfa89200e6eb12cba7fd5c7d8264f18124c0c39ecb6f6450bb7d61a494",
+      "packet_path": "build/images-receiving.log",
+      "explanation": "Compilation of receiving java.base completed; jlink rejected the existing images/jdk directory. Repeated footer excerpts from old failure logs do not identify new compiler failures."
+    },
+    {
+      "input": "images-receiving-retry.log",
+      "status": "PASSED",
+      "exit": 0,
+      "exit_provenance": "direct make tool completion confirmed by executing parent",
+      "raw_sha256": "c6c8aefe441520a4171a67250923d9ca7e9fea0d43bddd56a097d847293a0420",
+      "normalized_sha256": "c6c8aefe441520a4171a67250923d9ca7e9fea0d43bddd56a097d847293a0420",
+      "packet_path": "build/images-receiving-retry.log",
+      "explanation": "After the existing image directory was renamed, the same make command completed images successfully. No source code change or warnings override was made for this retry."
+    }
+  ],
+  "verification": "The rebuilt image executed the full unchanged 28-test selection. Installed Factory and Pool disassembly extracts additionally confirm the received methods; see INSTALLED_BYTECODE.json."
+}

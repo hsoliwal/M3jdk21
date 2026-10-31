@@ -1,0 +1,5 @@
+owner	path	identity	license	admission
+hsoliwal/M3jdk21	m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java	git-blob:416291e4d93e583f07fab280c577b7cdddc6d5ce	Apache-2.0	READ_ONLY_DEPENDENCY
+hsoliwal/M3jdk21	m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java	git-blob:a5fe77001be04ca123593908fb68ca008935d543	Apache-2.0	REFERENCE_EXISTING_CACHE
+hsoliwal/com.synexia	src/main/resources/templates/M3LongBitmapFilterPlan.java	sha256:bd7969cfc42e26171b9904c65eb12f3321b2fbffe77a34f6d76f4db15c11c1d3	Apache-2.0	GENERATE_JAVA
+hsoliwal/com.synexia	src/main/resources/templates/M3LongBitmapFilterPlanSelfTest.java	sha256:fa87bbf51b5a58b6b1562b909c3c16d0b670168165db57e6bb4430158de11fd7	Apache-2.0	GENERATE_TEST

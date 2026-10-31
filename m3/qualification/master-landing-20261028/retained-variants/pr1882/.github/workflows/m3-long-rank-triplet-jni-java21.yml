@@ -1,0 +1,103 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 original LC15 triplet Java21 JNI parity
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-long-rank-triplet-jni-java21.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankTripletSumContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankTripletSumTest.java'
+      - 'm3/collections/qualification/leetcode-triplet-jni-20261028/**'
+
+permissions:
+  contents: read
+
+jobs:
+  original-java-native-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact PR head and original source-image pins
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = 'e7f9a656ae90a7e90478a80cabbe8e19419f6d5d'
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = '1d6930704b737f38aaaca1de37570efa3cdd4de5'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'f03722dd7836b668247ea595d953769b4ffa7e60'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankTripletSumContract.java)" = '011265b99581d3bd86be09c3112fea335439756d'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankTripletSumTest.java)" = '6f835bcaef2caf20e633754af2bc5ed3b6da2229'
+      - name: Compile original Java owner and JNI header with strict Java21
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3triplet/classes" "$RUNNER_TEMP/m3triplet/headers" "$RUNNER_TEMP/m3triplet/lib" "$RUNNER_TEMP/m3triplet/older"
+          javac --release 21 -Xlint:all -Werror \
+            -h "$RUNNER_TEMP/m3triplet/headers" \
+            -d "$RUNNER_TEMP/m3triplet/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongRankTripletSumContract.java
+          grep -Fq 'Java_com_m3_collections_M3LongRankBatchNative_distinctTripletSumCount0' \
+            "$RUNNER_TEMP/m3triplet/headers/com_m3_collections_M3LongRankBatchNative.h"
+      - name: Compile existing m3rankbatch library with native ABI and UBSan
+        shell: bash
+        run: |
+          set -euo pipefail
+          cc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -include "$RUNNER_TEMP/m3triplet/headers/com_m3_collections_M3LongRankBatchNative.h" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$RUNNER_TEMP/m3triplet/lib/libm3rankbatch.so"
+      - name: Verify Java oracle, real JNI and older-symbol fallback
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$RUNNER_TEMP/m3triplet/classes"
+          java -cp "$classes" com.m3.collections.M3LongRankTripletSumContract \
+            | tee "$RUNNER_TEMP/m3triplet/java.txt"
+          java -Dm3.collections.rank.native=true \
+            -Djava.library.path="$RUNNER_TEMP/m3triplet/lib" \
+            -cp "$classes" com.m3.collections.M3LongRankTripletSumContract \
+            | tee "$RUNNER_TEMP/m3triplet/native.txt"
+          cat > "$RUNNER_TEMP/m3triplet/older/older.c" <<'EOF'
+          #include <jni.h>
+          JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *unused) {
+              (void) vm; (void) unused; return JNI_VERSION_1_8;
+          }
+          EOF
+          cc -std=c17 -O2 -fPIC -shared -Wall -Wextra -Werror \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            "$RUNNER_TEMP/m3triplet/older/older.c" \
+            -o "$RUNNER_TEMP/m3triplet/older/libm3rankbatch.so"
+          java -Dm3.collections.rank.native=true -Dm3.triplet.testOlderAbi=true \
+            -Djava.library.path="$RUNNER_TEMP/m3triplet/older" \
+            -cp "$classes" com.m3.collections.M3LongRankTripletSumContract \
+            | tee "$RUNNER_TEMP/m3triplet/older.txt"
+          grep -Fxq 'PASS M3_TRIPLET_JNI checks=5502 native=false' "$RUNNER_TEMP/m3triplet/java.txt"
+          grep -Fxq 'PASS M3_TRIPLET_JNI checks=7348 native=true' "$RUNNER_TEMP/m3triplet/native.txt"
+          grep -Fxq 'PASS M3_TRIPLET_JNI checks=5502 native=true' "$RUNNER_TEMP/m3triplet/older.txt"
+      - name: Preserve executed contract and native logs
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-triplet-jni-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/m3triplet/java.txt
+            ${{ runner.temp }}/m3triplet/native.txt
+            ${{ runner.temp }}/m3triplet/older.txt
+          if-no-files-found: warn
+          retention-days: 14

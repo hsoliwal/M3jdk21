@@ -1,0 +1,16 @@
+m3/tooling/jmod-recipes/tools/jmod_pack.py	0644
+m3/tooling/module-packs/build-tools/README.md	0644
+m3/tooling/module-packs/build-tools/config/ant-m3ast.xml	0644
+m3/tooling/module-packs/build-tools/config/gradle-m3ast.init.gradle	0644
+m3/tooling/module-packs/build-tools/config/maven-m3ast.xml	0644
+m3/tooling/module-packs/build-tools/launchers/m3-ant	0644
+m3/tooling/module-packs/build-tools/launchers/m3-ant.cmd	0644
+m3/tooling/module-packs/build-tools/launchers/m3-gradle	0644
+m3/tooling/module-packs/build-tools/launchers/m3-gradle.cmd	0644
+m3/tooling/module-packs/build-tools/launchers/m3-mvn	0644
+m3/tooling/module-packs/build-tools/launchers/m3-mvn.cmd	0644
+m3/tooling/module-packs/build-tools/verify_maven.py	0644
+m3/tooling/module-packs/build_pack.py	0644
+m3/tooling/module-packs/lock_tool_distribution.py	0644
+m3/tooling/module-packs/test_tool_packs.py	0644
+m3/tooling/module-packs/tool_packs.py	0644

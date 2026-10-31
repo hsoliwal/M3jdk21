@@ -1,0 +1,497 @@
+{
+  "copyright": "SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "baseline": "672e29f20bd039acaaeeb97ea17eee2939fcc8e4",
+  "canonical_crate": "hsoliwal/com.synexia/synexia-openrewrite-recipes/crates/m3jdk21-20261019/string-native",
+  "recipe": "com.synexia.m3.GvasNativePath20261019",
+  "source_seals": [
+    {
+      "path": "m3/core/test/com/m3/text/M3GvasLookupIndexContractTest.java",
+      "kind": "java",
+      "before": "6e387bbd278c1cfa8891e9b19f235c22e478e9965c71f1b028f7ca9668106dd3",
+      "after": "d5abf7d9e5aa6ec3e25626463db0c5b7d6e883a45b94e56baf5779f1c8a8bb6a",
+      "absent_before": false
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-gvas-native-path-20261019.json",
+      "kind": "text",
+      "before": "ABSENT",
+      "after": "576c315e5c7997e222102eaddd6d1a33c511ffc330d1def64eada78ca60ea994",
+      "absent_before": true
+    },
+    {
+      "path": "m3/lexicon/native/m3_fixed_address_mapping_jni.c",
+      "kind": "text",
+      "before": "99ee928f3af6733d344933836541d1fbeafa69555e18148728a5ba52b8dc7f41",
+      "after": "34f24dc1f258309dd42ae02c5dc8bbf35c99c964d84ee659da4fe9ff187bec54",
+      "absent_before": false
+    },
+    {
+      "path": "m3/lexicon/native/test/m3_fixed_address_path_fault_test.c",
+      "kind": "text",
+      "before": "ABSENT",
+      "after": "c0fac54f11701c0d4dd85e23fa3943c154991e37b6d8a6b2896a4055a6a71629",
+      "absent_before": true
+    },
+    {
+      "path": "m3/verify-gvas-lookup-index.py",
+      "kind": "text",
+      "before": "338106efc7721b170c64ffcb2d37c7c91c3942d17a4c4a269dc6f70a5c91f99b",
+      "after": "93dedbe27c421dbe751a2f6923f9ae4294e972a0ace131fa51eec667a66d74e7",
+      "absent_before": false
+    }
+  ],
+  "native_abi": {
+    "header_sha256": "deacc06bfd0d226f5ab661a8a3a3e2848a3a1e4b70f62001fcf982c1664b55db",
+    "jni_exports": [
+      "Java_com_m3_text_M3FixedAddressMapping_directAddress0",
+      "Java_com_m3_text_M3FixedAddressMapping_mapExact0",
+      "Java_com_m3_text_M3FixedAddressMapping_reserveCollision0",
+      "Java_com_m3_text_M3FixedAddressMapping_unmapRejected0"
+    ],
+    "java_descriptors_sha256": "ec175e8ca49c61e111491986aeb84d52b6e067ba49b9b9f4385f7460ba1f98c5",
+    "windows_map_branch_unchanged": true,
+    "other_three_native_bodies_unchanged": true,
+    "native_before_sha256": "99ee928f3af6733d344933836541d1fbeafa69555e18148728a5ba52b8dc7f41",
+    "native_after_sha256": "34f24dc1f258309dd42ae02c5dc8bbf35c99c964d84ee659da4fe9ff187bec54"
+  },
+  "native_red_green": [
+    {
+      "label": "baseline-native-new-test",
+      "argv": [
+        "/tmp/m3jdk21-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xcheck:jni",
+        "-ea",
+        "-esa",
+        "-cp",
+        "/tmp/m3-native-path-qualification-20261019",
+        "com.m3.text.M3GvasLookupIndexContractTest",
+        "paths",
+        "/tmp/m3-native-path-repro-20261019/libm3gvas.so",
+        "/tmp/m3-native-path-qualification-20261019/old-paths"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Picked up JAVA_TOOL_OPTIONS: -Xmx256m -XX:ActiveProcessorCount=2\nException in thread \"main\" java.io.IOException: cannot open canonical image read-only\n\tat com.m3.text.M3FixedAddressMapping.mapExact0(Native Method)\n\tat com.m3.text.M3FixedAddressMapping.open(M3FixedAddressMapping.java:106)\n\tat com.m3.text.M3GvasLookupIndexContractTest.pathnames(M3GvasLookupIndexContractTest.java:102)\n\tat com.m3.text.M3GvasLookupIndexContractTest.main(M3GvasLookupIndexContractTest.java:151)\n"
+    },
+    {
+      "label": "candidate-native-new-test",
+      "argv": [
+        "/tmp/m3jdk21-toolchain/jdk-21.0.12.1+1/bin/java",
+        "-Xcheck:jni",
+        "-ea",
+        "-esa",
+        "-cp",
+        "/tmp/m3-native-path-qualification-20261019",
+        "com.m3.text.M3GvasLookupIndexContractTest",
+        "paths",
+        "/tmp/m3-native-path-qualification-20261019/libm3gvas.so",
+        "/tmp/m3-native-path-qualification-20261019/new-paths"
+      ],
+      "returncode": 0,
+      "stdout": "M3_GVAS_NATIVE_PATH_PASS paths=8 checks=336 encoder=sun.nio.fs.Util.toBytes\n",
+      "stderr": "Picked up JAVA_TOOL_OPTIONS: -Xmx256m -XX:ActiveProcessorCount=2\n"
+    }
+  ],
+  "results": {
+    "java_pathnames": {
+      "families": 8,
+      "checks": 336,
+      "xcheck_jni": true
+    },
+    "native_fault_injection": {
+      "cases": 10,
+      "checks": 102,
+      "mocked_jni": true
+    },
+    "lookup": {
+      "fixtures": 5,
+      "checks": 43015
+    },
+    "strict_processes": {
+      "processes": 3,
+      "checks_per_child": 15433,
+      "base": "0x600000000000",
+      "literal": "0x600000014e9a",
+      "inode": 334406,
+      "sha256": "1143e7895b8e631d3847411958db7ae53fc750f769c8ec93556c21bb279474b5"
+    },
+    "process_identity": {
+      "tests": 25,
+      "failures": 0
+    },
+    "sdk": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "drift_refusal": true,
+      "fixed_point": true
+    }
+  },
+  "lookup_observation_scope": "Process-cold mapping/digest and image-validation/index preparation; OS page cache uncontrolled. 20 warmup passes then 100 passes per hit, miss and reverse workload; 3 JVMs per fixture. Diagnostic observations under shared-host contention, not a universal latency claim.",
+  "lookup_observation_platform": {
+    "system": "Linux",
+    "release": "6.18.55",
+    "machine": "x86_64"
+  },
+  "lookup_java_tool_options": "-Xmx256m -XX:ActiveProcessorCount=2",
+  "fixture_images": [
+    {
+      "kind": "small",
+      "sha256": "940e7776082b1bd1c29b1804512c4b84af781fef1e38268a775b202c4f905541",
+      "bytes": 456
+    },
+    {
+      "kind": "normal",
+      "sha256": "43c80f9c1ff2153a191d9f4a21e673f5d7e71b3c3e492953a18f1ab8d6928143",
+      "bytes": 768284
+    },
+    {
+      "kind": "collision64",
+      "sha256": "03251adb1b78d1ab9de569958f910d2078f721d1f839ca50152f9925d6b35547",
+      "bytes": 4162
+    },
+    {
+      "kind": "collision65",
+      "sha256": "0769681bc2c28e6597c7c48c2ec1ea29db179666401609739d96ad63a62fa3fd",
+      "bytes": 4226
+    },
+    {
+      "kind": "collision",
+      "sha256": "a65053f314c02b22a0e634bf91c16453e31679eb375dca3f5c7a64688632a62f",
+      "bytes": 16450
+    }
+  ],
+  "lookup_observations": [
+    {
+      "kind": "small",
+      "fork": 0,
+      "words": 11,
+      "operations": 1100,
+      "prepare_ns": 4320819,
+      "lookup_ns": 17882432,
+      "reverse_ns": 13152256,
+      "allocated_lookup_bytes": 288,
+      "retained_index_payload_bytes": 0,
+      "mapped_bytes": 456,
+      "consumed": -1500728648541780079,
+      "mapping_ns": 173133496,
+      "miss_ns": 15897273,
+      "allocated_miss_bytes": 728,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 5500,
+      "miss_checksum": -1100
+    },
+    {
+      "kind": "small",
+      "fork": 1,
+      "words": 11,
+      "operations": 1100,
+      "prepare_ns": 1977902,
+      "lookup_ns": 19843444,
+      "reverse_ns": 5669786,
+      "allocated_lookup_bytes": 288,
+      "retained_index_payload_bytes": 0,
+      "mapped_bytes": 456,
+      "consumed": -1500728648541780079,
+      "mapping_ns": 233502924,
+      "miss_ns": 12976416,
+      "allocated_miss_bytes": 728,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 5500,
+      "miss_checksum": -1100
+    },
+    {
+      "kind": "small",
+      "fork": 2,
+      "words": 11,
+      "operations": 1100,
+      "prepare_ns": 1714071,
+      "lookup_ns": 6323318,
+      "reverse_ns": 13506295,
+      "allocated_lookup_bytes": 288,
+      "retained_index_payload_bytes": 0,
+      "mapped_bytes": 456,
+      "consumed": -1500728648541780079,
+      "mapping_ns": 226291566,
+      "miss_ns": 6171122,
+      "allocated_miss_bytes": 728,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 5500,
+      "miss_checksum": -1100
+    },
+    {
+      "kind": "normal",
+      "fork": 0,
+      "words": 8203,
+      "operations": 820300,
+      "prepare_ns": 168926111,
+      "lookup_ns": 149419473,
+      "reverse_ns": 8487908,
+      "allocated_lookup_bytes": 0,
+      "retained_index_payload_bytes": 131072,
+      "mapped_bytes": 768284,
+      "consumed": -5664966473283732573,
+      "mapping_ns": 320608998,
+      "miss_ns": 12860163,
+      "allocated_miss_bytes": 0,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 3364050300,
+      "miss_checksum": -820300
+    },
+    {
+      "kind": "normal",
+      "fork": 1,
+      "words": 8203,
+      "operations": 820300,
+      "prepare_ns": 89354152,
+      "lookup_ns": 172676771,
+      "reverse_ns": 9543767,
+      "allocated_lookup_bytes": 0,
+      "retained_index_payload_bytes": 131072,
+      "mapped_bytes": 768284,
+      "consumed": -5664966473283732573,
+      "mapping_ns": 372293468,
+      "miss_ns": 17228763,
+      "allocated_miss_bytes": 0,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 3364050300,
+      "miss_checksum": -820300
+    },
+    {
+      "kind": "normal",
+      "fork": 2,
+      "words": 8203,
+      "operations": 820300,
+      "prepare_ns": 60852444,
+      "lookup_ns": 107668599,
+      "reverse_ns": 4556599,
+      "allocated_lookup_bytes": 0,
+      "retained_index_payload_bytes": 131072,
+      "mapped_bytes": 768284,
+      "consumed": -5664966473283732573,
+      "mapping_ns": 164161083,
+      "miss_ns": 9943560,
+      "allocated_miss_bytes": 0,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 3364050300,
+      "miss_checksum": -820300
+    },
+    {
+      "kind": "collision64",
+      "fork": 0,
+      "words": 64,
+      "operations": 6400,
+      "prepare_ns": 4693362,
+      "lookup_ns": 2061757,
+      "reverse_ns": 2701469,
+      "allocated_lookup_bytes": 0,
+      "retained_index_payload_bytes": 512,
+      "mapped_bytes": 4162,
+      "consumed": 0,
+      "mapping_ns": 67606493,
+      "miss_ns": 227288,
+      "allocated_miss_bytes": 0,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 201600,
+      "miss_checksum": -6400
+    },
+    {
+      "kind": "collision64",
+      "fork": 1,
+      "words": 64,
+      "operations": 6400,
+      "prepare_ns": 8885619,
+      "lookup_ns": 3149175,
+      "reverse_ns": 27599266,
+      "allocated_lookup_bytes": 0,
+      "retained_index_payload_bytes": 512,
+      "mapped_bytes": 4162,
+      "consumed": 0,
+      "mapping_ns": 134596836,
+      "miss_ns": 256682,
+      "allocated_miss_bytes": 0,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 201600,
+      "miss_checksum": -6400
+    },
+    {
+      "kind": "collision64",
+      "fork": 2,
+      "words": 64,
+      "operations": 6400,
+      "prepare_ns": 9478449,
+      "lookup_ns": 3357365,
+      "reverse_ns": 8407327,
+      "allocated_lookup_bytes": 0,
+      "retained_index_payload_bytes": 512,
+      "mapped_bytes": 4162,
+      "consumed": 0,
+      "mapping_ns": 186105461,
+      "miss_ns": 285965,
+      "allocated_miss_bytes": 0,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 201600,
+      "miss_checksum": -6400
+    },
+    {
+      "kind": "collision65",
+      "fork": 0,
+      "words": 65,
+      "operations": 6500,
+      "prepare_ns": 9240987,
+      "lookup_ns": 80147799,
+      "reverse_ns": 10593809,
+      "allocated_lookup_bytes": 0,
+      "retained_index_payload_bytes": 0,
+      "mapped_bytes": 4226,
+      "consumed": -2052715585664480541,
+      "mapping_ns": 149100282,
+      "miss_ns": 753111,
+      "allocated_miss_bytes": 0,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 208000,
+      "miss_checksum": -6500
+    },
+    {
+      "kind": "collision65",
+      "fork": 1,
+      "words": 65,
+      "operations": 6500,
+      "prepare_ns": 54209552,
+      "lookup_ns": 34455316,
+      "reverse_ns": 3004249,
+      "allocated_lookup_bytes": 0,
+      "retained_index_payload_bytes": 0,
+      "mapped_bytes": 4226,
+      "consumed": -2052715585664480541,
+      "mapping_ns": 326769203,
+      "miss_ns": 363821,
+      "allocated_miss_bytes": 0,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 208000,
+      "miss_checksum": -6500
+    },
+    {
+      "kind": "collision65",
+      "fork": 2,
+      "words": 65,
+      "operations": 6500,
+      "prepare_ns": 10658886,
+      "lookup_ns": 32549640,
+      "reverse_ns": 14090812,
+      "allocated_lookup_bytes": 0,
+      "retained_index_payload_bytes": 0,
+      "mapped_bytes": 4226,
+      "consumed": -2052715585664480541,
+      "mapping_ns": 179344513,
+      "miss_ns": 562657,
+      "allocated_miss_bytes": 0,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 208000,
+      "miss_checksum": -6500
+    },
+    {
+      "kind": "collision",
+      "fork": 0,
+      "words": 256,
+      "operations": 25600,
+      "prepare_ns": 53958888,
+      "lookup_ns": 2979356,
+      "reverse_ns": 364351,
+      "allocated_lookup_bytes": 0,
+      "retained_index_payload_bytes": 0,
+      "mapped_bytes": 16450,
+      "consumed": 0,
+      "mapping_ns": 250214202,
+      "miss_ns": 42078389,
+      "allocated_miss_bytes": 0,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 3264000,
+      "miss_checksum": -25600
+    },
+    {
+      "kind": "collision",
+      "fork": 1,
+      "words": 256,
+      "operations": 25600,
+      "prepare_ns": 29049504,
+      "lookup_ns": 2121803,
+      "reverse_ns": 505571,
+      "allocated_lookup_bytes": 0,
+      "retained_index_payload_bytes": 0,
+      "mapped_bytes": 16450,
+      "consumed": 0,
+      "mapping_ns": 152508627,
+      "miss_ns": 30159293,
+      "allocated_miss_bytes": 0,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 3264000,
+      "miss_checksum": -25600
+    },
+    {
+      "kind": "collision",
+      "fork": 2,
+      "words": 256,
+      "operations": 25600,
+      "prepare_ns": 15931527,
+      "lookup_ns": 2310442,
+      "reverse_ns": 225495,
+      "allocated_lookup_bytes": 0,
+      "retained_index_payload_bytes": 0,
+      "mapped_bytes": 16450,
+      "consumed": 0,
+      "mapping_ns": 213525075,
+      "miss_ns": 27270181,
+      "allocated_miss_bytes": 0,
+      "allocated_reverse_bytes": 0,
+      "hit_checksum": 3264000,
+      "miss_checksum": -25600
+    }
+  ],
+  "unchanged_strict_proof_closure": [
+    {
+      "path": "m3/core/src/com/m3/text/M3FixedAddressMapping.java",
+      "qualified_sha256": "704acbd7c0899f6cb4ca47658e0ce0387d8b498ce6ca6d801f02461d2f3a0025",
+      "target_sha256": "704acbd7c0899f6cb4ca47658e0ce0387d8b498ce6ca6d801f02461d2f3a0025"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3GvasLiteralImage.java",
+      "qualified_sha256": "ac3e0cab92111e7b1af138b1f246a56083e81528dd1c951a21c2bb07d7778073",
+      "target_sha256": "ac3e0cab92111e7b1af138b1f246a56083e81528dd1c951a21c2bb07d7778073"
+    },
+    {
+      "path": "m3/core/test/com/m3/text/M3GvasLiteralImageContractTest.java",
+      "qualified_sha256": "b81541431b6eb57e0d8d200d0a65a1a67cc5e9a3022ac8363d401ea4bdd44a3e",
+      "target_sha256": "b81541431b6eb57e0d8d200d0a65a1a67cc5e9a3022ac8363d401ea4bdd44a3e"
+    },
+    {
+      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3GvasLiteralImageWriter.java",
+      "qualified_sha256": "68960329204f13a52204ee857a1e5a5155072222dac43622c7fd5fdbabd5abae",
+      "target_sha256": "68960329204f13a52204ee857a1e5a5155072222dac43622c7fd5fdbabd5abae"
+    },
+    {
+      "path": "m3/lexicon/native/m3_fixed_address_mapping_jni.c",
+      "qualified_sha256": "34f24dc1f258309dd42ae02c5dc8bbf35c99c964d84ee659da4fe9ff187bec54",
+      "target_sha256": "34f24dc1f258309dd42ae02c5dc8bbf35c99c964d84ee659da4fe9ff187bec54"
+    },
+    {
+      "path": "m3/verify-gvas-literal-precompute.py",
+      "qualified_sha256": "e940ff340cc72582e0433c012bd39837f483a9d0d1561ae01dceb449c98e64c5",
+      "target_sha256": "e940ff340cc72582e0433c012bd39837f483a9d0d1561ae01dceb449c98e64c5"
+    },
+    {
+      "path": "m3/tests/test_gvas_literal_process_identity.py",
+      "qualified_sha256": "51c9d4f98125522c2cc50a0af2cad1e2b48c9d47743626f6970dd0f975b3e14d",
+      "target_sha256": "51c9d4f98125522c2cc50a0af2cad1e2b48c9d47743626f6970dd0f975b3e14d"
+    }
+  ],
+  "unexecuted": [
+    "Windows runtime",
+    "iOS",
+    "full M3JDK21 images",
+    "HotSpot/GC/CDS/jtreg",
+    "full reactor"
+  ]
+}

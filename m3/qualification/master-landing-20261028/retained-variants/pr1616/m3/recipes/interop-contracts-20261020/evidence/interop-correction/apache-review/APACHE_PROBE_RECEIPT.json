@@ -1,0 +1,46 @@
+{
+  "source_head": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "commands": [
+    [
+      "/tmp/m3jdk21-toolchain-20261020/jdk-21.0.12.1+1/bin/javac",
+      "--release",
+      "21",
+      "-proc:none",
+      "-Xlint:all",
+      "-Werror",
+      "-cp",
+      "/tmp/m3jdk21-toolchain-20261020/m2/com/m3/m3-collections/0.1.0-SNAPSHOT/m3-collections-0.1.0-SNAPSHOT.jar:/tmp/m3jdk21-toolchain-20261020/m2/org/apache/commons/commons-collections4/4.5.0/commons-collections4-4.5.0.jar",
+      "-d",
+      "/workspace/scratch/53bcd62c244c/work-final-review-20261020/interop/classes",
+      "/workspace/scratch/53bcd62c244c/work-final-review-20261020/interop/M3ApacheBag.java",
+      "/workspace/scratch/53bcd62c244c/work-final-review-20261020/interop/ApacheBagContractProbe.java"
+    ],
+    [
+      "/tmp/m3jdk21-toolchain-20261020/jdk-21.0.12.1+1/bin/java",
+      "-ea",
+      "-cp",
+      "/workspace/scratch/53bcd62c244c/work-final-review-20261020/interop/classes:/tmp/m3jdk21-toolchain-20261020/m2/com/m3/m3-collections/0.1.0-SNAPSHOT/m3-collections-0.1.0-SNAPSHOT.jar:/tmp/m3jdk21-toolchain-20261020/m2/org/apache/commons/commons-collections4/4.5.0/commons-collections4-4.5.0.jar",
+      "ApacheBagContractProbe"
+    ]
+  ],
+  "inputs": {
+    "/workspace/scratch/53bcd62c244c/M3JDK21/m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheBag.java": "5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f",
+    "/workspace/scratch/53bcd62c244c/M3JDK21/m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheBagContractTest.java": "737dba455e469117b94cd82a48458bcbe2e4c1fd038b0beb578dcc00ccc1982a",
+    "/workspace/scratch/53bcd62c244c/work-final-review-20261020/interop/M3ApacheBag.java": "5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f",
+    "/workspace/scratch/53bcd62c244c/work-final-review-20261020/interop/ApacheBagContractProbe.java": "79e4f8fd0ba2d1d54e50bb46b36c24f956a14f22f1031971b0e3452211298aec",
+    "/tmp/m3jdk21-toolchain-20261020/m2/com/m3/m3-collections/0.1.0-SNAPSHOT/m3-collections-0.1.0-SNAPSHOT.jar": "c440f4f104373c5ed64f8ee313a8f8007de79b9ff7150f207f25164cd348ab80",
+    "/tmp/m3jdk21-toolchain-20261020/m2/org/apache/commons/commons-collections4/4.5.0/commons-collections4-4.5.0.jar": "00f93263c267be201b8ae521b44a7137271b16688435340bf629db1bac0a5845"
+  },
+  "steps": [
+    {
+      "exit": 0,
+      "log": "/workspace/scratch/53bcd62c244c/work-final-review-20261020/interop/apache-compile.log",
+      "sha256": "0e606818852cc6d4e60902e87575d34ac32240a5d6906a692c9213d2c43e035c"
+    },
+    {
+      "exit": 0,
+      "log": "/workspace/scratch/53bcd62c244c/work-final-review-20261020/interop/apache-contract-probe.log",
+      "sha256": "d3f4f97058b05f61b07f645edd4f8da381a5cc1a0ef3ceeefa9198bbfd831f63"
+    }
+  ]
+}

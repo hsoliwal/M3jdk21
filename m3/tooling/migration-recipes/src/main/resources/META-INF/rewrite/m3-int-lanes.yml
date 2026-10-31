@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.IntLanes
+displayName: M3JDK21 int-lane proving-ground owners
+description: >-
+  Adds the com.m3.collections int lane: M3IntCollection and M3IntIterator contracts, M3IntIntConsumer,
+  M3IntHashSet (zero-sentinel linear probing with backward-shift deletion), M3IntIntHashMap (parallel
+  int lanes, JDK-shaped put/getOrDefault/replace/remove/addTo) and M3IntPriorityQueue (binary
+  min-heap), adapted from the first-party Synexia donors IntHashSet, IntIntHashMap and IntMinHeap and
+  shaped like the master long lanes, plus the differential test suite against HashSet, HashMap and
+  PriorityQueue. Proving ground only (wave 2 of the COLLECTIONS family); no java.util type is replaced.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-int-lanes

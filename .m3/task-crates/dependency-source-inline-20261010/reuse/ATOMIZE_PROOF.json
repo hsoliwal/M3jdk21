@@ -1,0 +1,2798 @@
+{
+  "authority": {
+    "canonical": "com.synexia.rewrite.M3AtomizeRecipe + M3PatternizeRecipe via .m3/atomize-patternize/run.sh",
+    "projection": "cpu_lhash_treesitter leaf extraction + declared pattern dimensions (candidate evidence, no mutation authority)",
+    "status": "PENDING_BUILD_HOST (Maven/OpenRewrite not executed on this host)"
+  },
+  "counts": {
+    "cross_donor_exact_classes": 26367,
+    "cross_donor_structural_classes": 13695,
+    "errors": 0,
+    "exact_classes": 144155,
+    "exact_classes_size_ge2": 42568,
+    "hashed_leaves_min8_tokens": 346553,
+    "java_files": 21717,
+    "lambdas": 8176,
+    "leaves": 360050,
+    "leaves_in_exact_dup_class": 244966,
+    "leaves_in_structural_class": 299056,
+    "methods": 318683,
+    "parse_errors": 2,
+    "parsed_files": 21717,
+    "structural_classes": 66712,
+    "structural_classes_size_ge2": 19215,
+    "types": 33191,
+    "worker_faults": 400
+  },
+  "declared_rules": {
+    "algorithm": "NOT PROJECTED: requires M3PatternizeRecipe problem catalogues; keyword detectors are not admitted as algorithm identity",
+    "carrier": "REGEX if Pattern.compile/matches/quote or String.replaceAll/replaceFirst/matches is invoked; else TEXT_BLOCK if a text_block literal occurs; else STRING if a string_literal occurs; else NONE",
+    "classes": "leaves with fewer than 8 normalized tokens are not entered into pattern classes",
+    "complexity": "normalized token count: <16 TRIVIAL, <64 SIMPLE, <256 ORDINARY, <1024 COMPLEX, <4096 HOSTILE, else PATHOLOGICAL",
+    "composition": "LOCAL_ANON if a local class declaration or anonymous class body occurs; else LAMBDA_STREAM if a lambda, method reference or stream()/parallelStream() invocation occurs; else PLAIN",
+    "control": "STRAIGHT: no control statement; NESTED: control nesting depth >= 2; SWITCH: a switch occurs at depth <= 1; BRANCH: otherwise",
+    "language": "sorted '|'-joined flags among RECORD_GENERIC (record or type parameters), SEALED_PATTERN (sealed/non-sealed/permits, instanceof type/record pattern, switch pattern label), METHOD_REFERENCE, TRY_RESOURCE, RECURSIVE (unqualified or this-qualified self invocation); BASELINE when none",
+    "native": "DECLARATION if the native modifier is present; OVERLOAD if another method of the same owner shares the name; else NONE",
+    "visibility": "modifier keyword public/protected/private, else package (interface-implicit public is not inferred)"
+  },
+  "donors": [
+    {
+      "commit": "sources-jar-sha1-ed8279522a6160373fa620cba8012514ab985d5f",
+      "counts": {
+        "lambdas": 3,
+        "leaves": 2946,
+        "methods": 2649,
+        "types": 294
+      },
+      "donor": "agrona-1.21.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\agrona-1.21.2",
+      "java_files": 195,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-d90a405211798b013b8ee3d54f70edc0913a28b0",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 63,
+        "methods": 4,
+        "types": 59
+      },
+      "donor": "annotations-24.1.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\annotations-24.1.0",
+      "java_files": 31,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-2b1e7885e03030615026af6ffb9de75d38a7b47b",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 1769,
+        "methods": 1564,
+        "types": 205
+      },
+      "donor": "antlr4-runtime-4.11.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\antlr4-runtime-4.11.1",
+      "java_files": 174,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-391aff23db4000ad7a2fa02e182a3767f659c38d",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 1769,
+        "methods": 1564,
+        "types": 205
+      },
+      "donor": "antlr4-runtime-4.13.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\antlr4-runtime-4.13.2",
+      "java_files": 174,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-e0787a997746ac32639e0bf3cb27af8dce8a3428",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 2,
+        "methods": 0,
+        "types": 2
+      },
+      "donor": "apiguardian-api-1.1.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\apiguardian-api-1.1.2",
+      "java_files": 2,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-9f9a96aa17fd1113b218fa2dd6c4dc075192aa2e",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 598,
+        "methods": 560,
+        "types": 38
+      },
+      "donor": "asm-9.10.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\asm-9.10.1",
+      "java_files": 35,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-d55087ece3c6a82ef0d6acb9d853886d7af9445d",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 591,
+        "methods": 553,
+        "types": 38
+      },
+      "donor": "asm-9.6",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\asm-9.6",
+      "java_files": 35,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-2a0c33a19c1b594fee4eb539e3cd51eb3dd80903",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 146,
+        "methods": 132,
+        "types": 14
+      },
+      "donor": "asm-analysis-9.6",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\asm-analysis-9.6",
+      "java_files": 13,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-0ea2ff719db7976655f5c95469a98eac7671a119",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 291,
+        "methods": 254,
+        "types": 37
+      },
+      "donor": "asm-tree-9.6",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\asm-tree-9.6",
+      "java_files": 36,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-7113c3476982c7b982f16b45d24dd86e2ffca46a",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 556,
+        "methods": 532,
+        "types": 24
+      },
+      "donor": "asm-util-9.6",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\asm-util-9.6",
+      "java_files": 20,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-227e1a8a29851120c8fcfecf5f329135a0311308",
+      "counts": {
+        "lambdas": 203,
+        "leaves": 9796,
+        "methods": 8777,
+        "types": 816
+      },
+      "donor": "assertj-core-3.25.3",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\assertj-core-3.25.3",
+      "java_files": 782,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-67010508a95b30eff7fc6f8ffe16b6d03fc57b99",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 14095,
+        "methods": 11565,
+        "types": 2530
+      },
+      "donor": "byte-buddy-1.14.11",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\byte-buddy-1.14.11",
+      "java_files": 369,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-352209f02df83046de6ebfd647b22d726ca3a954",
+      "counts": {
+        "lambdas": 93,
+        "leaves": 1567,
+        "methods": 1313,
+        "types": 161
+      },
+      "donor": "caffeine-3.1.8",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\caffeine-3.1.8",
+      "java_files": 50,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-b9b848fda50c0ca9b80d5422f021d0755044d2d6",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 1394,
+        "methods": 1214,
+        "types": 180
+      },
+      "donor": "cglib-3.3.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\cglib-3.3.0",
+      "java_files": 130,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-9990309889a76e4c6556c18140ce8559b854bae3",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 378,
+        "methods": 19,
+        "types": 359
+      },
+      "donor": "checker-qual-3.37.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\checker-qual-3.37.0",
+      "java_files": 342,
+      "parse_errors": 1
+    },
+    {
+      "commit": "sources-jar-sha1-928b59a35a6c4f2dfe80f2327341fe3b94cd1422",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 404,
+        "methods": 19,
+        "types": 385
+      },
+      "donor": "checker-qual-3.55.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\checker-qual-3.55.1",
+      "java_files": 363,
+      "parse_errors": 1
+    },
+    {
+      "commit": "sources-jar-sha1-aba0976f5bc61bc90efd2f0f14c1c62373415308",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 2064,
+        "methods": 1867,
+        "types": 197
+      },
+      "donor": "classgraph-4.8.165",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\classgraph-4.8.165",
+      "java_files": 140,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-fc5f7979ad342343cef862f967a92d750bb3abad",
+      "counts": {
+        "lambdas": 5,
+        "leaves": 1088,
+        "methods": 913,
+        "types": 170
+      },
+      "donor": "commonmark-0.30.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commonmark-0.30.0",
+      "java_files": 135,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-335f6edc3ea89bb9ed0febd6685aff864dc8f4d4",
+      "counts": {
+        "lambdas": 23,
+        "leaves": 1058,
+        "methods": 938,
+        "types": 97
+      },
+      "donor": "commons-codec-1.17.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commons-codec-1.17.1",
+      "java_files": 80,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-ebb7cc57bf07da8a3a82eac77691edd5a2786f4d",
+      "counts": {
+        "lambdas": 28,
+        "leaves": 1283,
+        "methods": 1133,
+        "types": 122
+      },
+      "donor": "commons-codec-1.22.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commons-codec-1.22.1",
+      "java_files": 87,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-35d0a3e49b7c2321c8445a375adc6df9d148c132",
+      "counts": {
+        "lambdas": 94,
+        "leaves": 4888,
+        "methods": 4294,
+        "types": 500
+      },
+      "donor": "commons-compress-1.26.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commons-compress-1.26.0",
+      "java_files": 404,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-c90678c885e13d0c2ea971f05f8fc15004906d0f",
+      "counts": {
+        "lambdas": 94,
+        "leaves": 4899,
+        "methods": 4304,
+        "types": 501
+      },
+      "donor": "commons-compress-1.27.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commons-compress-1.27.1",
+      "java_files": 404,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-7eb930a37d962fd72cba1f48fc1d2f816c441245",
+      "counts": {
+        "lambdas": 4,
+        "leaves": 271,
+        "methods": 251,
+        "types": 16
+      },
+      "donor": "commons-csv-1.12.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commons-csv-1.12.0",
+      "java_files": 12,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-f23737700ceaddc75169d994c7d9c9a2e5dddf39",
+      "counts": {
+        "lambdas": 163,
+        "leaves": 3125,
+        "methods": 2661,
+        "types": 301
+      },
+      "donor": "commons-io-2.15.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commons-io-2.15.1",
+      "java_files": 251,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-9ab23bf96cc41b731cb123fbee97198f901af68e",
+      "counts": {
+        "lambdas": 174,
+        "leaves": 3350,
+        "methods": 2852,
+        "types": 324
+      },
+      "donor": "commons-io-2.18.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commons-io-2.18.0",
+      "java_files": 261,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-f1817164f17deedc780df4ce0bedd1d7f267d40a",
+      "counts": {
+        "lambdas": 15,
+        "leaves": 3372,
+        "methods": 3054,
+        "types": 303
+      },
+      "donor": "commons-jexl3-3.4.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commons-jexl3-3.4.0",
+      "java_files": 209,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-9ef3e18356f4ac30b15bfa48c02a7f54b51af382",
+      "counts": {
+        "lambdas": 193,
+        "leaves": 4451,
+        "methods": 3922,
+        "types": 336
+      },
+      "donor": "commons-lang3-3.14.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commons-lang3-3.14.0",
+      "java_files": 246,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-f409092a9f723034a839327029255900a19742b4",
+      "counts": {
+        "lambdas": 243,
+        "leaves": 4774,
+        "methods": 4188,
+        "types": 343
+      },
+      "donor": "commons-lang3-3.17.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commons-lang3-3.17.0",
+      "java_files": 249,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-3bf2b5ce48a273d1d37bac9df0ab9f73b4ef92cb",
+      "counts": {
+        "lambdas": 9,
+        "leaves": 405,
+        "methods": 373,
+        "types": 23
+      },
+      "donor": "commons-logging-1.3.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commons-logging-1.3.2",
+      "java_files": 18,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-96cfb848abe8352c3f29a7c39d93c07ada1be08d",
+      "counts": {
+        "lambdas": 10,
+        "leaves": 1972,
+        "methods": 1786,
+        "types": 176
+      },
+      "donor": "commons-net-3.11.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commons-net-3.11.1",
+      "java_files": 180,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-0f74769762ca5e6f44043ae43c8c3c70da4ee665",
+      "counts": {
+        "lambdas": 27,
+        "leaves": 936,
+        "methods": 834,
+        "types": 75
+      },
+      "donor": "commons-pool2-2.12.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commons-pool2-2.12.0",
+      "java_files": 52,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-495883e4f3d80c80f15f6a5ae0e2b4a81184a9b5",
+      "counts": {
+        "lambdas": 9,
+        "leaves": 1324,
+        "methods": 1179,
+        "types": 136
+      },
+      "donor": "commons-text-1.11.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\commons-text-1.11.0",
+      "java_files": 106,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-c04c22a0f5a84e985bd04d2129638e590c1e5edc",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 81,
+        "methods": 62,
+        "types": 19
+      },
+      "donor": "dec-0.1.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\dec-0.1.2",
+      "java_files": 15,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-63a7b02952221106d1f1095048e7d8a4d599d7c2",
+      "counts": {
+        "lambdas": 133,
+        "leaves": 12141,
+        "methods": 11303,
+        "types": 705
+      },
+      "donor": "ecj-3.46.100",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\ecj-3.46.100",
+      "java_files": 553,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-507ee4a7a69ffc45cc39bcbb6f5a93765186825e",
+      "counts": {
+        "lambdas": 1578,
+        "leaves": 78584,
+        "methods": 73586,
+        "types": 3420
+      },
+      "donor": "eclipse-collections-11.1.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\eclipse-collections-11.1.0",
+      "java_files": 2117,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-b0cc359d4fa5bfb98f2a3959c18d6664910cd042",
+      "counts": {
+        "lambdas": 638,
+        "leaves": 14899,
+        "methods": 12722,
+        "types": 1539
+      },
+      "donor": "eclipse-collections-api-11.1.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\eclipse-collections-api-11.1.0",
+      "java_files": 1592,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-68e62df0cf0c3927fa98f6d795543ecbeb919521",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 27,
+        "methods": 0,
+        "types": 27
+      },
+      "donor": "error-prone-annotations-2.21.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\error_prone_annotations-2.21.1",
+      "java_files": 27,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-6acdafcf2dfc3b548e59dd3a4b454552aeb6ff65",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 6,
+        "methods": 4,
+        "types": 2
+      },
+      "donor": "failureaccess-1.0.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\failureaccess-1.0.2",
+      "java_files": 2,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-9214c405663faa817e97afa0176a407f2116303a",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 324,
+        "methods": 284,
+        "types": 40
+      },
+      "donor": "fastdoubleparser-0.9.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\fastdoubleparser-0.9.0",
+      "java_files": 39,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-71b918bd3b56a714becc39bcbad85025309033b6",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 333,
+        "methods": 292,
+        "types": 41
+      },
+      "donor": "fastdoubleparser-1.0.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\fastdoubleparser-1.0.0",
+      "java_files": 41,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-f81017d4d03c3078bab3c78a4ed3ee28f7203b09",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 333,
+        "methods": 292,
+        "types": 41
+      },
+      "donor": "fastdoubleparser-1.0.90",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\fastdoubleparser-1.0.90",
+      "java_files": 41,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-45ba1e73d20a1e00808a9f559f64375e7e11b5ae",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 313,
+        "methods": 282,
+        "types": 31
+      },
+      "donor": "fastfilter-1.0.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\fastfilter-1.0.2",
+      "java_files": 29,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-8914e161392c662e2954deaa990f6f110707ef7d",
+      "counts": {
+        "lambdas": 1,
+        "leaves": 584,
+        "methods": 536,
+        "types": 47
+      },
+      "donor": "gizmo-1.0.11.Final",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\gizmo-1.0.11.Final",
+      "java_files": 35,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-2cca40652185734d5a89349c471a54367fb98067",
+      "counts": {
+        "lambdas": 190,
+        "leaves": 14646,
+        "methods": 12945,
+        "types": 1511
+      },
+      "donor": "guava-33.0.0-jre",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\guava-33.0.0-jre",
+      "java_files": 621,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-d8cf7bad79ef75fd41395c5f464ea38777463d95",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 1116,
+        "methods": 1031,
+        "types": 85
+      },
+      "donor": "HdrHistogram-2.1.12",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\HdrHistogram-2.1.12",
+      "java_files": 53,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-74fb66e276fc42784d884d51f841e35232bc90de",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 13,
+        "methods": 0,
+        "types": 13
+      },
+      "donor": "j2objc-annotations-2.8",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\j2objc-annotations-2.8",
+      "java_files": 11,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-b81b39665962a39168ed4be3ebd4d00f21fd2ac8",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 319,
+        "methods": 249,
+        "types": 70
+      },
+      "donor": "jackson-annotations-2.15.3",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-annotations-2.15.3",
+      "java_files": 46,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-980f63c6ea050aca8c9a47f7643fb183b5d7143c",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 342,
+        "methods": 271,
+        "types": 71
+      },
+      "donor": "jackson-annotations-2.16.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-annotations-2.16.1",
+      "java_files": 46,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-22e185659b89eec9db253ba6fd2507dc18c6d5be",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 351,
+        "methods": 280,
+        "types": 71
+      },
+      "donor": "jackson-annotations-2.19.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-annotations-2.19.2",
+      "java_files": 46,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-0e275b6eae6b6c71083b0305b8aeaaf72e36a2ca",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 2788,
+        "methods": 2649,
+        "types": 139
+      },
+      "donor": "jackson-core-2.15.3",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-core-2.15.3",
+      "java_files": 129,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-13883e6b942fe5991477befedf3af8a7a82b3e32",
+      "counts": {
+        "lambdas": 3,
+        "leaves": 2966,
+        "methods": 2803,
+        "types": 160
+      },
+      "donor": "jackson-core-2.16.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-core-2.16.1",
+      "java_files": 134,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-29708d9844a706a30ba30de0908688a20cd5aa3a",
+      "counts": {
+        "lambdas": 3,
+        "leaves": 3047,
+        "methods": 2880,
+        "types": 164
+      },
+      "donor": "jackson-core-2.19.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-core-2.19.2",
+      "java_files": 136,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-61876bc4e552ff3b7657909fc3232e94e6a4ce8e",
+      "counts": {
+        "lambdas": 2,
+        "leaves": 8796,
+        "methods": 8094,
+        "types": 700
+      },
+      "donor": "jackson-databind-2.15.3",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-databind-2.15.3",
+      "java_files": 471,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-49d81b4832bc388e38901b9d6cf0f8a170820849",
+      "counts": {
+        "lambdas": 3,
+        "leaves": 8901,
+        "methods": 8195,
+        "types": 703
+      },
+      "donor": "jackson-databind-2.16.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-databind-2.16.1",
+      "java_files": 475,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-6247c862564d7c43d7e69669dd8339f69fff271a",
+      "counts": {
+        "lambdas": 3,
+        "leaves": 9062,
+        "methods": 8334,
+        "types": 725
+      },
+      "donor": "jackson-databind-2.19.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-databind-2.19.2",
+      "java_files": 481,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-4b8cd69fb5cab8e2c709ea3d53173302bca5f6c8",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 644,
+        "methods": 609,
+        "types": 35
+      },
+      "donor": "jackson-dataformat-csv-2.16.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-dataformat-csv-2.16.1",
+      "java_files": 19,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-1dc3eeae624ee6f7b3b16548579324f468b0643b",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 466,
+        "methods": 449,
+        "types": 17
+      },
+      "donor": "jackson-dataformat-smile-2.16.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-dataformat-smile-2.16.1",
+      "java_files": 15,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-de1de71e6b362918867ae876e824a9702493759e",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 292,
+        "methods": 275,
+        "types": 17
+      },
+      "donor": "jackson-dataformat-yaml-2.15.3",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-dataformat-yaml-2.15.3",
+      "java_files": 16,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-073d1c83fdf632e5e415da01ed16c6dadc098993",
+      "counts": {
+        "lambdas": 15,
+        "leaves": 391,
+        "methods": 322,
+        "types": 54
+      },
+      "donor": "jackson-datatype-jsr310-2.15.3",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-datatype-jsr310-2.15.3",
+      "java_files": 51,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-5392cace4c894fdb83e76044919ea19711e43d77",
+      "counts": {
+        "lambdas": 15,
+        "leaves": 411,
+        "methods": 341,
+        "types": 55
+      },
+      "donor": "jackson-datatype-jsr310-2.16.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-datatype-jsr310-2.16.1",
+      "java_files": 52,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-defe56863cf6f36a11f0dddcb92850e3be38af9d",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 16,
+        "methods": 12,
+        "types": 4
+      },
+      "donor": "jackson-module-parameter-names-2.16.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jackson-module-parameter-names-2.16.1",
+      "java_files": 4,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-798180cc939fc34e3fc6b7e7771f9bde1c63d14a",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 1281,
+        "methods": 1179,
+        "types": 102
+      },
+      "donor": "jandex-2.4.2.Final",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jandex-2.4.2.Final",
+      "java_files": 59,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-7c2c40f1f8ba7582bb1f1ca89303edf357f83f62",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 790,
+        "methods": 654,
+        "types": 136
+      },
+      "donor": "java-object-diff-1.0.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\java-object-diff-1.0.1",
+      "java_files": 109,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-143b4431254a808c1b73fdf8047be9313e5562c8",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 1010,
+        "methods": 940,
+        "types": 70
+      },
+      "donor": "JavaEWAH-1.1.13",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\JavaEWAH-1.1.13",
+      "java_files": 62,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-13bda98796cf4739f5d40cb825578cfaa8463c6e",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 1006,
+        "methods": 901,
+        "types": 105
+      },
+      "donor": "jna-5.14.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jna-5.14.0",
+      "java_files": 65,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-4bd8a21c9bfd90ed0b4d8780308b67e0ace998a3",
+      "counts": {
+        "lambdas": 4,
+        "leaves": 1016,
+        "methods": 907,
+        "types": 105
+      },
+      "donor": "jna-5.18.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jna-5.18.1",
+      "java_files": 65,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-cefe3d258159eb44f4369ff5d8e12602a340bd15",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 5461,
+        "methods": 4229,
+        "types": 1232
+      },
+      "donor": "jna-platform-5.14.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jna-platform-5.14.0",
+      "java_files": 241,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-40c83bbe7e07d1593facfac04b78775fa9368d24",
+      "counts": {
+        "lambdas": 14,
+        "leaves": 1950,
+        "methods": 1768,
+        "types": 168
+      },
+      "donor": "jsoup-1.17.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jsoup-1.17.2",
+      "java_files": 76,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-135c799deec88d95d066292acfbdf6116b50bfac",
+      "counts": {
+        "lambdas": 45,
+        "leaves": 2478,
+        "methods": 2231,
+        "types": 202
+      },
+      "donor": "jsoup-1.23.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jsoup-1.23.2",
+      "java_files": 91,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-5cbacba3af55bd8f7352c519be2f76ec2d0ccde4",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 4,
+        "methods": 0,
+        "types": 4
+      },
+      "donor": "jspecify-0.3.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jspecify-0.3.0",
+      "java_files": 5,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-d2e55ec437fe3325189dba51ab25fb86af479fb1",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 4,
+        "methods": 0,
+        "types": 4
+      },
+      "donor": "jspecify-1.0.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jspecify-1.0.1",
+      "java_files": 5,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-b19b5927c2c25b6c70f093767041e641ae0b1b35",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 40,
+        "methods": 5,
+        "types": 35
+      },
+      "donor": "jsr305-3.0.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\jsr305-3.0.2",
+      "java_files": 31,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-4e79ee610aff59d79b5f229252ded392b7d48fd1",
+      "counts": {},
+      "donor": "junit-jupiter-5.10.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\junit-jupiter-5.10.2",
+      "java_files": 1,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-4e79ee610aff59d79b5f229252ded392b7d48fd1",
+      "counts": {},
+      "donor": "junit-jupiter-5.11.4",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\junit-jupiter-5.11.4",
+      "java_files": 1,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-b281dbb5921ce56b37b6e07a2502f663ca6c8db6",
+      "counts": {
+        "lambdas": 51,
+        "leaves": 1100,
+        "methods": 882,
+        "types": 167
+      },
+      "donor": "junit-jupiter-api-5.10.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\junit-jupiter-api-5.10.2",
+      "java_files": 149,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-c2973c17e3a51473b6827b7a5d3f7167b687f42d",
+      "counts": {
+        "lambdas": 49,
+        "leaves": 1105,
+        "methods": 886,
+        "types": 170
+      },
+      "donor": "junit-jupiter-api-5.11.4",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\junit-jupiter-api-5.11.4",
+      "java_files": 152,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-624f71a8d76185f2ac8d234c686bbdab0bd28ae0",
+      "counts": {
+        "lambdas": 208,
+        "leaves": 974,
+        "methods": 649,
+        "types": 117
+      },
+      "donor": "junit-jupiter-engine-5.10.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\junit-jupiter-engine-5.10.2",
+      "java_files": 101,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-62890d34f46a222a73690cff58bc6ba477ac1214",
+      "counts": {
+        "lambdas": 230,
+        "leaves": 1024,
+        "methods": 673,
+        "types": 121
+      },
+      "donor": "junit-jupiter-engine-5.11.4",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\junit-jupiter-engine-5.11.4",
+      "java_files": 102,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-1add8e4310a408675f46eae8acafe6b2b72232e5",
+      "counts": {
+        "lambdas": 73,
+        "leaves": 340,
+        "methods": 198,
+        "types": 69
+      },
+      "donor": "junit-jupiter-params-5.10.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\junit-jupiter-params-5.10.2",
+      "java_files": 61,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-2a8cedde21fd75650a78c825f0439ccab44a5217",
+      "counts": {
+        "lambdas": 83,
+        "leaves": 349,
+        "methods": 192,
+        "types": 74
+      },
+      "donor": "junit-jupiter-params-5.11.4",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\junit-jupiter-params-5.11.4",
+      "java_files": 61,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-513097c1d045c39db2fa42a54f830d4358936dc3",
+      "counts": {
+        "lambdas": 85,
+        "leaves": 518,
+        "methods": 392,
+        "types": 41
+      },
+      "donor": "junit-platform-commons-1.10.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\junit-platform-commons-1.10.2",
+      "java_files": 42,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-1acfe264ada9081bba59c937a8b0cae0619491bc",
+      "counts": {
+        "lambdas": 103,
+        "leaves": 643,
+        "methods": 478,
+        "types": 62
+      },
+      "donor": "junit-platform-commons-1.11.4",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\junit-platform-commons-1.11.4",
+      "java_files": 58,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-886c197f5fcfe9eaf0d1dde20aa1bd3abd653f44",
+      "counts": {
+        "lambdas": 108,
+        "leaves": 945,
+        "methods": 714,
+        "types": 123
+      },
+      "donor": "junit-platform-engine-1.10.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\junit-platform-engine-1.10.2",
+      "java_files": 98,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-9e12d99def318784875efc0804bae79bc45c61f8",
+      "counts": {
+        "lambdas": 124,
+        "leaves": 1091,
+        "methods": 822,
+        "types": 145
+      },
+      "donor": "junit-platform-engine-1.11.4",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\junit-platform-engine-1.11.4",
+      "java_files": 101,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-cab5a912975af7dc5d195970f8f1ca27f5caf35a",
+      "counts": {
+        "lambdas": 131,
+        "leaves": 837,
+        "methods": 614,
+        "types": 92
+      },
+      "donor": "junit-platform-launcher-1.10.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\junit-platform-launcher-1.10.2",
+      "java_files": 81,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-d705f6b0d147036b7d84dca5eaad35b41d64592a",
+      "counts": {
+        "lambdas": 133,
+        "leaves": 842,
+        "methods": 617,
+        "types": 92
+      },
+      "donor": "junit-platform-launcher-1.11.4",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\junit-platform-launcher-1.11.4",
+      "java_files": 81,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-fbc38259e2077a428984637d811dac542a6a913e",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 109,
+        "methods": 89,
+        "types": 20
+      },
+      "donor": "LatencyUtils-2.0.3",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\LatencyUtils-2.0.3",
+      "java_files": 9,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-98ce845de3676015ec2438f367421f706917978c",
+      "counts": {
+        "lambdas": 54,
+        "leaves": 3679,
+        "methods": 3036,
+        "types": 589
+      },
+      "donor": "lucene-analysis-common-9.10.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\lucene-analysis-common-9.10.0",
+      "java_files": 552,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-a9be171b9d66f50a2f8c9db40219b7107794dbf5",
+      "counts": {
+        "lambdas": 274,
+        "leaves": 16615,
+        "methods": 14549,
+        "types": 1792
+      },
+      "donor": "lucene-core-9.10.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\lucene-core-9.10.0",
+      "java_files": 1089,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-237dd274b96cee40461c9a802f7649c102b9ec99",
+      "counts": {
+        "lambdas": 30,
+        "leaves": 2337,
+        "methods": 2060,
+        "types": 247
+      },
+      "donor": "lucene-queries-9.10.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\lucene-queries-9.10.0",
+      "java_files": 165,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-3a54be38b57fbf299c44ede435d9bee3d6aa4975",
+      "counts": {
+        "lambdas": 7,
+        "leaves": 1714,
+        "methods": 1466,
+        "types": 241
+      },
+      "donor": "lucene-queryparser-9.10.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\lucene-queryparser-9.10.0",
+      "java_files": 250,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-0c76b90f41051e9f27578144edee6f8252d40e09",
+      "counts": {
+        "lambdas": 6,
+        "leaves": 713,
+        "methods": 618,
+        "types": 89
+      },
+      "donor": "lucene-sandbox-9.10.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\lucene-sandbox-9.10.0",
+      "java_files": 53,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-7609c362f37f0c0bd3743bc1976df2daa28ad19e",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 426,
+        "methods": 372,
+        "types": 54
+      },
+      "donor": "lz4-java-1.8.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\lz4-java-1.8.0",
+      "java_files": 41,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-c77fa0305e75290685d2c04c2e531c425b4dd98b",
+      "counts": {
+        "lambdas": 356,
+        "leaves": 3563,
+        "methods": 2912,
+        "types": 295
+      },
+      "donor": "micrometer-core-1.9.17",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\micrometer-core-1.9.17",
+      "java_files": 282,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-afb8ff23cffb021c56f333953aebfe6e8818568e",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 54,
+        "methods": 47,
+        "types": 7
+      },
+      "donor": "opentest4j-1.3.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\opentest4j-1.3.0",
+      "java_files": 8,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-37af49190695b4b669a8f62757fbd47ff39d0009",
+      "counts": {
+        "lambdas": 328,
+        "leaves": 19037,
+        "methods": 17425,
+        "types": 1284
+      },
+      "donor": "org.eclipse.jdt.core-3.47.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\org.eclipse.jdt.core-3.47.0",
+      "java_files": 1073,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-1e8cc0d2d0417b9683ee60b4eac306ee4e4ac8bd",
+      "counts": {
+        "lambdas": 147,
+        "leaves": 11788,
+        "methods": 10324,
+        "types": 1317
+      },
+      "donor": "org.eclipse.jgit-5.13.3.202401111512-r",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\org.eclipse.jgit-5.13.3.202401111512-r",
+      "java_files": 861,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-347531f45363ed10e222b03231d49bb7df016a4d",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 828,
+        "methods": 698,
+        "types": 130
+      },
+      "donor": "org.osgi.core-6.0.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\org.osgi.core-6.0.0",
+      "java_files": 130,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-2edc75f087faa2f5dc8c6317b784737ca1373301",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 2032,
+        "methods": 1842,
+        "types": 190
+      },
+      "donor": "picocli-4.7.5",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\picocli-4.7.5",
+      "java_files": 3,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-e943b75d6f46a37dad72e881127557a595439932",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 506,
+        "methods": 473,
+        "types": 33
+      },
+      "donor": "re2j-1.8",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\re2j-1.8",
+      "java_files": 19,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-641a1ece612dd2f8117113ffd257b68e964c26cc",
+      "counts": {
+        "lambdas": 125,
+        "leaves": 1793,
+        "methods": 1385,
+        "types": 283
+      },
+      "donor": "rewrite-core-8.17.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\rewrite-core-8.17.1",
+      "java_files": 213,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-2e7b5e0db06d8e0739c28db13d3c6f23f1684e92",
+      "counts": {
+        "lambdas": 103,
+        "leaves": 514,
+        "methods": 337,
+        "types": 74
+      },
+      "donor": "rewrite-gradle-8.17.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\rewrite-gradle-8.17.1",
+      "java_files": 59,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-41821cb435f9851949581c0211f749ec9786190f",
+      "counts": {
+        "lambdas": 52,
+        "leaves": 492,
+        "methods": 375,
+        "types": 65
+      },
+      "donor": "rewrite-groovy-8.17.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\rewrite-groovy-8.17.1",
+      "java_files": 45,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-7e1a450fca025a40c264b7c19a1bf877149d24f6",
+      "counts": {
+        "lambdas": 80,
+        "leaves": 1933,
+        "methods": 1657,
+        "types": 196
+      },
+      "donor": "rewrite-hcl-8.17.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\rewrite-hcl-8.17.1",
+      "java_files": 66,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-f133bd0ba96af8944d46df8997decc80fe01ef13",
+      "counts": {
+        "lambdas": 49,
+        "leaves": 289,
+        "methods": 226,
+        "types": 14
+      },
+      "donor": "rewrite-java-21-8.17.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\rewrite-java-21-8.17.1",
+      "java_files": 9,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-3e97e633ecbada1bbdd4e3875b75a9b0d2d1d57c",
+      "counts": {
+        "lambdas": 438,
+        "leaves": 4461,
+        "methods": 3442,
+        "types": 581
+      },
+      "donor": "rewrite-java-8.17.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\rewrite-java-8.17.1",
+      "java_files": 268,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-0b3f22c638d4322ec68e9d41aa68e2af63469df7",
+      "counts": {
+        "lambdas": 36,
+        "leaves": 718,
+        "methods": 613,
+        "types": 69
+      },
+      "donor": "rewrite-json-8.17.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\rewrite-json-8.17.1",
+      "java_files": 36,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-48e1ab45e7f558ef524fa8b5ed3e60ad2f092e94",
+      "counts": {
+        "lambdas": 143,
+        "leaves": 1419,
+        "methods": 1053,
+        "types": 223
+      },
+      "donor": "rewrite-maven-8.17.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\rewrite-maven-8.17.1",
+      "java_files": 134,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-76d10288a0414f54b9e881302f6b1c2bca875530",
+      "counts": {
+        "lambdas": 10,
+        "leaves": 130,
+        "methods": 96,
+        "types": 24
+      },
+      "donor": "rewrite-properties-8.17.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\rewrite-properties-8.17.1",
+      "java_files": 17,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-c18b1863a809b96e1f2d032b68ce9fecae6fcbcd",
+      "counts": {
+        "lambdas": 11,
+        "leaves": 1143,
+        "methods": 1025,
+        "types": 107
+      },
+      "donor": "rewrite-protobuf-8.17.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\rewrite-protobuf-8.17.1",
+      "java_files": 26,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-63b16979e7429ce45b1788df7fdef3a0fe567fbc",
+      "counts": {
+        "lambdas": 189,
+        "leaves": 1667,
+        "methods": 1243,
+        "types": 235
+      },
+      "donor": "rewrite-static-analysis-1.4.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\rewrite-static-analysis-1.4.2",
+      "java_files": 144,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-220562903ffbbe4bc1581dd377bcce5de16cd53d",
+      "counts": {
+        "lambdas": 37,
+        "leaves": 184,
+        "methods": 124,
+        "types": 23
+      },
+      "donor": "rewrite-test-8.17.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\rewrite-test-8.17.1",
+      "java_files": 20,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-963e0aa4d6f3a705c404a611fe72071a142eea47",
+      "counts": {
+        "lambdas": 72,
+        "leaves": 816,
+        "methods": 640,
+        "types": 104
+      },
+      "donor": "rewrite-xml-8.17.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\rewrite-xml-8.17.1",
+      "java_files": 69,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-11946503f294a0f5fe7d9c65a1ca33a589a7fdd8",
+      "counts": {
+        "lambdas": 67,
+        "leaves": 820,
+        "methods": 659,
+        "types": 94
+      },
+      "donor": "rewrite-yaml-8.17.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\rewrite-yaml-8.17.1",
+      "java_files": 55,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-ae9c1aae0033af915cfa75d850eb9d880f21a701",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 477,
+        "methods": 443,
+        "types": 34
+      },
+      "donor": "slf4j-api-1.7.36",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\slf4j-api-1.7.36",
+      "java_files": 32,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-c2824e780c88689134cb99fb33c8a4ed3de0f406",
+      "counts": {
+        "lambdas": 1,
+        "leaves": 676,
+        "methods": 625,
+        "types": 50
+      },
+      "donor": "slf4j-api-2.0.12",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\slf4j-api-2.0.12",
+      "java_files": 46,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-97e46b94d70f47892145e09d685461245584d596",
+      "counts": {
+        "lambdas": 1,
+        "leaves": 663,
+        "methods": 615,
+        "types": 47
+      },
+      "donor": "slf4j-api-2.0.9",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\slf4j-api-2.0.9",
+      "java_files": 45,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-3d41ed2d64c1d54887fd01a1c1242f400768d52e",
+      "counts": {
+        "lambdas": 1,
+        "leaves": 45,
+        "methods": 38,
+        "types": 6
+      },
+      "donor": "slf4j-simple-2.0.13",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\slf4j-simple-2.0.13",
+      "java_files": 5,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-4d116eec648de507ce9a3ad6d85147fd6a9eb78a",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 1214,
+        "methods": 998,
+        "types": 216
+      },
+      "donor": "snakeyaml-2.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\snakeyaml-2.1",
+      "java_files": 121,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-575a7915b847393207642575c139177ac2b2ac23",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 1214,
+        "methods": 998,
+        "types": 216
+      },
+      "donor": "snakeyaml-2.2",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\snakeyaml-2.2",
+      "java_files": 121,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-9256bb1fc9d420e70bb1dc9defc33553903b6ebc",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 1235,
+        "methods": 1016,
+        "types": 219
+      },
+      "donor": "snakeyaml-2.6",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\snakeyaml-2.6",
+      "java_files": 123,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-91b8ad1beb60d778c6d184c8482974579ef559c6",
+      "counts": {
+        "lambdas": 23,
+        "leaves": 1111,
+        "methods": 875,
+        "types": 213
+      },
+      "donor": "snakeyaml-engine-3.1.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\snakeyaml-engine-3.1.1",
+      "java_files": 136,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-7826b3c28c6d3491875d267ecf8f573fcf03da56",
+      "counts": {
+        "lambdas": 1,
+        "leaves": 335,
+        "methods": 300,
+        "types": 34
+      },
+      "donor": "snappy-java-1.1.10.5",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\snappy-java-1.1.10.5",
+      "java_files": 31,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-a61c129637e41a7fd10262648a6ff356e8d01476",
+      "counts": {
+        "lambdas": 31,
+        "leaves": 1607,
+        "methods": 1464,
+        "types": 112
+      },
+      "donor": "sqlite-jdbc-3.45.1.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\sqlite-jdbc-3.45.1.0",
+      "java_files": 56,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-d20e4b8b95dbc802b4b39ea46746220259293c6b",
+      "counts": {
+        "lambdas": 47,
+        "leaves": 1651,
+        "methods": 1487,
+        "types": 117
+      },
+      "donor": "sqlite-jdbc-3.51.1.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\sqlite-jdbc-3.51.1.1",
+      "java_files": 58,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-34a344f6029f00cc1491b62f221c1c489e2db67b",
+      "counts": {
+        "lambdas": 20,
+        "leaves": 1383,
+        "methods": 1265,
+        "types": 98
+      },
+      "donor": "tomlj-1.1.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\tomlj-1.1.1",
+      "java_files": 38,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-eb79a789d3489e2fbf0915118653369f26c7593b",
+      "counts": {
+        "lambdas": 22,
+        "leaves": 1489,
+        "methods": 1360,
+        "types": 107
+      },
+      "donor": "tomlj-1.3.0",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\tomlj-1.3.0",
+      "java_files": 44,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-5be7a41a5ecf4777dcf547126376808e165930d1",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 2733,
+        "methods": 2506,
+        "types": 227
+      },
+      "donor": "univocity-parsers-2.9.1",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\univocity-parsers-2.9.1",
+      "java_files": 216,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-da40ce96732b8b24c994218f5f55a04d6aca4c00",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 814,
+        "methods": 688,
+        "types": 126
+      },
+      "donor": "xz-1.10",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\xz-1.10",
+      "java_files": 116,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-1369a5e3784d95627df17724f621faf4bcaabb55",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 485,
+        "methods": 435,
+        "types": 50
+      },
+      "donor": "zero-allocation-hashing-0.16",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\zero-allocation-hashing-0.16",
+      "java_files": 24,
+      "parse_errors": 0
+    },
+    {
+      "commit": "sources-jar-sha1-c057f4f927ef195e63efae817648a87b0d3fc067",
+      "counts": {
+        "lambdas": 0,
+        "leaves": 513,
+        "methods": 483,
+        "types": 30
+      },
+      "donor": "zstd-jni-1.5.6-4",
+      "errors": 0,
+      "image": "K:\\m3-work\\donors\\maven-sources\\src\\zstd-jni-1.5.6-4",
+      "java_files": 29,
+      "parse_errors": 0
+    }
+  ],
+  "root_sha256": "3fff0ce1ab17d254d79d3f8a08d3008c38c007823c4efd21dbf8c41d366ff390",
+  "schema": "m3.java-corpus-atomize-patternize.v1",
+  "self_validation_guard": {
+    "HdrHistogram-2.1.12": {
+      "all_equal": true,
+      "checked_leaves": 320
+    },
+    "JavaEWAH-1.1.13": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "LatencyUtils-2.0.3": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "agrona-1.21.2": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "annotations-24.1.0": {
+      "all_equal": true,
+      "checked_leaves": 63
+    },
+    "antlr4-runtime-4.11.1": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "antlr4-runtime-4.13.2": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "apiguardian-api-1.1.2": {
+      "all_equal": true,
+      "checked_leaves": 2
+    },
+    "asm-9.10.1": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "asm-9.6": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "asm-analysis-9.6": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "asm-tree-9.6": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "asm-util-9.6": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "assertj-core-3.25.3": {
+      "all_equal": true,
+      "checked_leaves": 576
+    },
+    "byte-buddy-1.14.11": {
+      "all_equal": true,
+      "checked_leaves": 794
+    },
+    "caffeine-3.1.8": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "cglib-3.3.0": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "checker-qual-3.37.0": {
+      "all_equal": true,
+      "checked_leaves": 240
+    },
+    "checker-qual-3.55.1": {
+      "all_equal": true,
+      "checked_leaves": 256
+    },
+    "classgraph-4.8.165": {
+      "all_equal": true,
+      "checked_leaves": 635
+    },
+    "commonmark-0.30.0": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "commons-codec-1.17.1": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "commons-codec-1.22.1": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "commons-compress-1.26.0": {
+      "all_equal": true,
+      "checked_leaves": 468
+    },
+    "commons-compress-1.27.1": {
+      "all_equal": true,
+      "checked_leaves": 996
+    },
+    "commons-csv-1.12.0": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "commons-io-2.15.1": {
+      "all_equal": true,
+      "checked_leaves": 907
+    },
+    "commons-io-2.18.0": {
+      "all_equal": true,
+      "checked_leaves": 256
+    },
+    "commons-jexl3-3.4.0": {
+      "all_equal": true,
+      "checked_leaves": 256
+    },
+    "commons-lang3-3.14.0": {
+      "all_equal": true,
+      "checked_leaves": 512
+    },
+    "commons-lang3-3.17.0": {
+      "all_equal": true,
+      "checked_leaves": 320
+    },
+    "commons-logging-1.3.2": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "commons-net-3.11.1": {
+      "all_equal": true,
+      "checked_leaves": 320
+    },
+    "commons-pool2-2.12.0": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "commons-text-1.11.0": {
+      "all_equal": true,
+      "checked_leaves": 85
+    },
+    "dec-0.1.2": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "ecj-3.46.100": {
+      "all_equal": true,
+      "checked_leaves": 1350
+    },
+    "eclipse-collections-11.1.0": {
+      "all_equal": true,
+      "checked_leaves": 3945
+    },
+    "eclipse-collections-api-11.1.0": {
+      "all_equal": true,
+      "checked_leaves": 1344
+    },
+    "error-prone-annotations-2.21.1": {
+      "all_equal": true,
+      "checked_leaves": 27
+    },
+    "failureaccess-1.0.2": {
+      "all_equal": true,
+      "checked_leaves": 6
+    },
+    "fastdoubleparser-0.9.0": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "fastdoubleparser-1.0.0": {
+      "all_equal": true,
+      "checked_leaves": 264
+    },
+    "fastdoubleparser-1.0.90": {
+      "all_equal": true,
+      "checked_leaves": 293
+    },
+    "fastfilter-1.0.2": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "gizmo-1.0.11.Final": {
+      "all_equal": true,
+      "checked_leaves": 192
+    },
+    "guava-33.0.0-jre": {
+      "all_equal": true,
+      "checked_leaves": 682
+    },
+    "j2objc-annotations-2.8": {
+      "all_equal": true,
+      "checked_leaves": 13
+    },
+    "jackson-annotations-2.15.3": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "jackson-annotations-2.16.1": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "jackson-annotations-2.19.2": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "jackson-core-2.15.3": {
+      "all_equal": true,
+      "checked_leaves": 265
+    },
+    "jackson-core-2.16.1": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "jackson-core-2.19.2": {
+      "all_equal": true,
+      "checked_leaves": 406
+    },
+    "jackson-databind-2.15.3": {
+      "all_equal": true,
+      "checked_leaves": 1049
+    },
+    "jackson-databind-2.16.1": {
+      "all_equal": true,
+      "checked_leaves": 913
+    },
+    "jackson-databind-2.19.2": {
+      "all_equal": true,
+      "checked_leaves": 1201
+    },
+    "jackson-dataformat-csv-2.16.1": {
+      "all_equal": true,
+      "checked_leaves": 256
+    },
+    "jackson-dataformat-smile-2.16.1": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "jackson-dataformat-yaml-2.15.3": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "jackson-datatype-jsr310-2.15.3": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "jackson-datatype-jsr310-2.16.1": {
+      "all_equal": true,
+      "checked_leaves": 230
+    },
+    "jackson-module-parameter-names-2.16.1": {
+      "all_equal": true,
+      "checked_leaves": 16
+    },
+    "jandex-2.4.2.Final": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "java-object-diff-1.0.1": {
+      "all_equal": true,
+      "checked_leaves": 252
+    },
+    "jna-5.14.0": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "jna-5.18.1": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "jna-platform-5.14.0": {
+      "all_equal": true,
+      "checked_leaves": 621
+    },
+    "jsoup-1.17.2": {
+      "all_equal": true,
+      "checked_leaves": 440
+    },
+    "jsoup-1.23.2": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "jspecify-0.3.0": {
+      "all_equal": true,
+      "checked_leaves": 4
+    },
+    "jspecify-1.0.1": {
+      "all_equal": true,
+      "checked_leaves": 4
+    },
+    "jsr305-3.0.2": {
+      "all_equal": true,
+      "checked_leaves": 40
+    },
+    "junit-jupiter-5.10.2": {
+      "all_equal": true,
+      "checked_leaves": 0
+    },
+    "junit-jupiter-5.11.4": {
+      "all_equal": true,
+      "checked_leaves": 0
+    },
+    "junit-jupiter-api-5.10.2": {
+      "all_equal": true,
+      "checked_leaves": 192
+    },
+    "junit-jupiter-api-5.11.4": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "junit-jupiter-engine-5.10.2": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "junit-jupiter-engine-5.11.4": {
+      "all_equal": true,
+      "checked_leaves": 133
+    },
+    "junit-jupiter-params-5.10.2": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "junit-jupiter-params-5.11.4": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "junit-platform-commons-1.10.2": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "junit-platform-commons-1.11.4": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "junit-platform-engine-1.10.2": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "junit-platform-engine-1.11.4": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "junit-platform-launcher-1.10.2": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "junit-platform-launcher-1.11.4": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "lucene-analysis-common-9.10.0": {
+      "all_equal": true,
+      "checked_leaves": 640
+    },
+    "lucene-core-9.10.0": {
+      "all_equal": true,
+      "checked_leaves": 1822
+    },
+    "lucene-queries-9.10.0": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "lucene-queryparser-9.10.0": {
+      "all_equal": true,
+      "checked_leaves": 384
+    },
+    "lucene-sandbox-9.10.0": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "lz4-java-1.8.0": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "micrometer-core-1.9.17": {
+      "all_equal": true,
+      "checked_leaves": 256
+    },
+    "opentest4j-1.3.0": {
+      "all_equal": true,
+      "checked_leaves": 54
+    },
+    "org.eclipse.jdt.core-3.47.0": {
+      "all_equal": true,
+      "checked_leaves": 2232
+    },
+    "org.eclipse.jgit-5.13.3.202401111512-r": {
+      "all_equal": true,
+      "checked_leaves": 1944
+    },
+    "org.osgi.core-6.0.0": {
+      "all_equal": true,
+      "checked_leaves": 236
+    },
+    "picocli-4.7.5": {
+      "all_equal": true,
+      "checked_leaves": 123
+    },
+    "re2j-1.8": {
+      "all_equal": true,
+      "checked_leaves": 192
+    },
+    "rewrite-core-8.17.1": {
+      "all_equal": true,
+      "checked_leaves": 256
+    },
+    "rewrite-gradle-8.17.1": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "rewrite-groovy-8.17.1": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "rewrite-hcl-8.17.1": {
+      "all_equal": true,
+      "checked_leaves": 521
+    },
+    "rewrite-java-21-8.17.1": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "rewrite-java-8.17.1": {
+      "all_equal": true,
+      "checked_leaves": 475
+    },
+    "rewrite-json-8.17.1": {
+      "all_equal": true,
+      "checked_leaves": 256
+    },
+    "rewrite-maven-8.17.1": {
+      "all_equal": true,
+      "checked_leaves": 652
+    },
+    "rewrite-properties-8.17.1": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "rewrite-protobuf-8.17.1": {
+      "all_equal": true,
+      "checked_leaves": 372
+    },
+    "rewrite-static-analysis-1.4.2": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "rewrite-test-8.17.1": {
+      "all_equal": true,
+      "checked_leaves": 184
+    },
+    "rewrite-xml-8.17.1": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "rewrite-yaml-8.17.1": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "slf4j-api-1.7.36": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "slf4j-api-2.0.12": {
+      "all_equal": true,
+      "checked_leaves": 256
+    },
+    "slf4j-api-2.0.9": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "slf4j-simple-2.0.13": {
+      "all_equal": true,
+      "checked_leaves": 45
+    },
+    "snakeyaml-2.1": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "snakeyaml-2.2": {
+      "all_equal": true,
+      "checked_leaves": 192
+    },
+    "snakeyaml-2.6": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "snakeyaml-engine-3.1.1": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "snappy-java-1.1.10.5": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "sqlite-jdbc-3.45.1.0": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "sqlite-jdbc-3.51.1.1": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "tomlj-1.1.1": {
+      "all_equal": true,
+      "checked_leaves": 64
+    },
+    "tomlj-1.3.0": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "univocity-parsers-2.9.1": {
+      "all_equal": true,
+      "checked_leaves": 349
+    },
+    "xz-1.10": {
+      "all_equal": true,
+      "checked_leaves": 128
+    },
+    "zero-allocation-hashing-0.16": {
+      "all_equal": true,
+      "checked_leaves": 256
+    },
+    "zstd-jni-1.5.6-4": {
+      "all_equal": true,
+      "checked_leaves": 64
+    }
+  },
+  "tables": {
+    "HdrHistogram-2.1.12/ATOMS.tsv.gz": "2ad99a7b79f8fd6c87e66391c11e3201381137e82762fbdf00caaa3469c28cec",
+    "HdrHistogram-2.1.12/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "HdrHistogram-2.1.12/FILES.tsv": "e760813d0cb3e40b1cc88b3fe23125ecee76fbfb243e467c8b8b70fb717b7bb1",
+    "JavaEWAH-1.1.13/ATOMS.tsv.gz": "bb8e67f4a8727d99d46b16566cac43f4eb5e01014e808ece26445734f39766ff",
+    "JavaEWAH-1.1.13/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "JavaEWAH-1.1.13/FILES.tsv": "8abe4e3dbdb51280e9d2e63bc84b623398fb84d660bf5f38148f23925e27e229",
+    "LatencyUtils-2.0.3/ATOMS.tsv.gz": "7c51cc43f6ddddfc01e67f8cdf015955957799f7ff552be6985545ed8cee29d0",
+    "LatencyUtils-2.0.3/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "LatencyUtils-2.0.3/FILES.tsv": "a84015e3a13e997ed14e88bf360ea7bf09aba8803cd7f376455da8b3961181b5",
+    "PATTERNS_EXACT.tsv": "090cc04628c26d86aaf16a5d4a756b44a4ed4d82a6fe1f51e5e0cda091c0be95",
+    "PATTERNS_STRUCTURAL.tsv": "ce5c9ec0661c87d60f92c0636d738f0cb75449fdaa5f32bba54ff3fdf718f446",
+    "SPECTRUM.tsv": "9f2316e9e1190347ac6eacc6a73bc92bb477f9d9141508e39635c0d09952b0cf",
+    "agrona-1.21.2/ATOMS.tsv.gz": "6d6dc99ee103d835d4601b826b3bd85c7b01e821e796780dddc1f8563476aea2",
+    "agrona-1.21.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "agrona-1.21.2/FILES.tsv": "afa1b21c5a03e5f3132152acaf32e4e8e1bd039c20a120c0fd0ac6ad2809b2c5",
+    "annotations-24.1.0/ATOMS.tsv.gz": "92852108edc30ba7cbce19f146426193e827a51b2a93aed8ae9d8a8b7c67256f",
+    "annotations-24.1.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "annotations-24.1.0/FILES.tsv": "853db7cda7fe7a67dd7fea783f98e539e0342d2c4446b6e1983f149d25bce19a",
+    "antlr4-runtime-4.11.1/ATOMS.tsv.gz": "8115ce8112d73cf18e8036fabe6094a6314fd14fd57b9cd182e8a42b008663d2",
+    "antlr4-runtime-4.11.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "antlr4-runtime-4.11.1/FILES.tsv": "83f4c3e56f739cca081f6c19922c84f2476ca090724cfb91ac11970e8b062fed",
+    "antlr4-runtime-4.13.2/ATOMS.tsv.gz": "9b162aac772108a3c6602a1cb3fcefc552b8f262b122ec615e02c63c7784771d",
+    "antlr4-runtime-4.13.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "antlr4-runtime-4.13.2/FILES.tsv": "099e036e54a48709674edc404c585c3a02ef79d139d3d57e988b83b4da56266e",
+    "apiguardian-api-1.1.2/ATOMS.tsv.gz": "e06273852935a47d649d0ee5ff8371d3ff5be02ab683a2ed071ad346148ef348",
+    "apiguardian-api-1.1.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "apiguardian-api-1.1.2/FILES.tsv": "4658dd3c510a287a4365d85eb6c1cb7f94cd7ad00e96a89d113fa99f68624ecf",
+    "asm-9.10.1/ATOMS.tsv.gz": "0e4c3f656d461e2fc4fb0f3c18b3a5cb892ce63cd19820294c74bc8084a44553",
+    "asm-9.10.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "asm-9.10.1/FILES.tsv": "5a9cb9a52a3dc71c6011545a5a117ebb1df498e6f3f6f124745d1d9269078fd4",
+    "asm-9.6/ATOMS.tsv.gz": "d5513e1af323f817f3cbbca6f80f2cde8e9a377ada7a155fa50b6dd22ac80939",
+    "asm-9.6/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "asm-9.6/FILES.tsv": "86a3325a4c37b836bb0b888bedb6ce90a059b7b9010221feee35de17979d93cd",
+    "asm-analysis-9.6/ATOMS.tsv.gz": "f6ddda6f9ed1c09a6209df4eed07c5d6580aea16ee490ec5960e987979cb0dae",
+    "asm-analysis-9.6/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "asm-analysis-9.6/FILES.tsv": "edecc2017d1d6a40ce6bd095e7afb2c9610aee91a621ce0104239f3093f350c2",
+    "asm-tree-9.6/ATOMS.tsv.gz": "5e30f1f454379b3d1fb60c77f7e85867382e0ab3daebbb7f52d1a1665aacd717",
+    "asm-tree-9.6/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "asm-tree-9.6/FILES.tsv": "f7da69e1f15ea507f0f228a7ed4ce366b4fa71c8197cdef6895bc0d0af50b568",
+    "asm-util-9.6/ATOMS.tsv.gz": "86b0ed14a375d250f664acad06298590f710e0e85e4d0b8e3286af1b0da66e7a",
+    "asm-util-9.6/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "asm-util-9.6/FILES.tsv": "d56300eb77ba713a94eccfc97d7610c3ce20423939382f9a0a664ffc81d338b5",
+    "assertj-core-3.25.3/ATOMS.tsv.gz": "4205e5df33753c0a4af532b31fbbbbae92906da5373db64c1d6b62d41ad9f377",
+    "assertj-core-3.25.3/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "assertj-core-3.25.3/FILES.tsv": "e0870bb706e5b54d91fa3f400238211a564ea9c99be94a3835e513bdc5dbb6d0",
+    "byte-buddy-1.14.11/ATOMS.tsv.gz": "13dcf4eba8d7f8854bedb45ab29bc8762d30e62b4234a4f4b8535d0e98a9d5c0",
+    "byte-buddy-1.14.11/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "byte-buddy-1.14.11/FILES.tsv": "edd9d354f564c5baea691622ec71451ab6d2874a086d59cb5904c7141ceb906c",
+    "caffeine-3.1.8/ATOMS.tsv.gz": "60ae1913ab9dc08f19b5429ebd75e24cfbd7f1ecd511c3a1e9eced62dbaa02ef",
+    "caffeine-3.1.8/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "caffeine-3.1.8/FILES.tsv": "7b5f0b1da16b94b03a6c06454e0a53cb461163475a9e03a85ece5f332541d272",
+    "cglib-3.3.0/ATOMS.tsv.gz": "ff8a9d7a932290cb642b4c1732892a7054b4c410c7ec467fa88bca25ca772645",
+    "cglib-3.3.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "cglib-3.3.0/FILES.tsv": "b553038c11f7f0bde6fb14f9450b6a985b74beeee147727ec4743d89323320d0",
+    "checker-qual-3.37.0/ATOMS.tsv.gz": "f748dbc3aa10e28723b43d86e9c32cad80f15395f2e3d60543c060e2c995892d",
+    "checker-qual-3.37.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "checker-qual-3.37.0/FILES.tsv": "f3504f9346b713f0e68af553ed2ad2b387d7f52448f922c559d15cdd0c0db931",
+    "checker-qual-3.55.1/ATOMS.tsv.gz": "0c2fe8ae59271eafe7470b238a68352025267cbb02d354dd402033fc1b64a13a",
+    "checker-qual-3.55.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "checker-qual-3.55.1/FILES.tsv": "e95d9018e60962e463cde637122d700a9c15eb0ad13f4be2a56b227ba1818c1b",
+    "classgraph-4.8.165/ATOMS.tsv.gz": "52b58b832c554b5def90c19008a29cf52527e5f10698759c229a96d76ef901d5",
+    "classgraph-4.8.165/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "classgraph-4.8.165/FILES.tsv": "b574df7d8987349b7b3d2364b8413b3c40132b13ef64ddc8da58eb0cfe371688",
+    "commonmark-0.30.0/ATOMS.tsv.gz": "b620c82a1178da3e323043785bfee4b69b0e7b1e08487240e9ae4b27b3f522fd",
+    "commonmark-0.30.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commonmark-0.30.0/FILES.tsv": "3612825554f9784f7c50761c7171a4d52cd29a189c69dfcf05d790890f0da480",
+    "commons-codec-1.17.1/ATOMS.tsv.gz": "3e3362ad8f04d699ccca1b6b3653212d159f98fa9757a8167bdb7ee8c28cc36c",
+    "commons-codec-1.17.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-codec-1.17.1/FILES.tsv": "98908fb8455b4c8a3bb47941eca53826dc9c7a84008c23eb33f49bd3fa8d2622",
+    "commons-codec-1.22.1/ATOMS.tsv.gz": "02eb1d11126ff62f7889d3b16a24049c1112d21b986b4da1b21d287e6a68f973",
+    "commons-codec-1.22.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-codec-1.22.1/FILES.tsv": "f01b62ae5c84daee4711343f5136864e7d7999689037ba71222d6a78e58fb2f2",
+    "commons-compress-1.26.0/ATOMS.tsv.gz": "2062b671adad698cfb84667a2790d0fef218c349645ce13f8ffd0ca09dd1dba0",
+    "commons-compress-1.26.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-compress-1.26.0/FILES.tsv": "c1957065c3b602fea2e136bf78f3f9bdd54719f28a30ba611d266f8432f0b68c",
+    "commons-compress-1.27.1/ATOMS.tsv.gz": "c2195ee38bb5a6bebda9e151092fc0d2beb859f5ea2e35a65df0a7283874aadd",
+    "commons-compress-1.27.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-compress-1.27.1/FILES.tsv": "1f7dd04b938389d84fe3683f21e271eb3d401a0beffb183bcff7a95ce88dd278",
+    "commons-csv-1.12.0/ATOMS.tsv.gz": "3226c377304f17b9a1ba70b3bd9729a131e45d5f2080f961d554eadbbe43cc1e",
+    "commons-csv-1.12.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-csv-1.12.0/FILES.tsv": "e13e6aeb4cc90506fd6fb9f93a235cffacad95cf49471095189545e4f083a4f1",
+    "commons-io-2.15.1/ATOMS.tsv.gz": "0c0a24964133ab08c79aa02734d939e9506f8c7084c7e7ae17ee04e61eadb99d",
+    "commons-io-2.15.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-io-2.15.1/FILES.tsv": "ea8180601001480122819c7913a7e08240088f8b6f04ebb46a3bca03fed1ed56",
+    "commons-io-2.18.0/ATOMS.tsv.gz": "0f00f22e3d3620d313a9a1f0790dc2ec0660eaadd8f00e4d546c68f453f5a604",
+    "commons-io-2.18.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-io-2.18.0/FILES.tsv": "e9c13dbe9f929f745d04d2f40efda3fc6708decbc08495b3463b0a4ea05e30d5",
+    "commons-jexl3-3.4.0/ATOMS.tsv.gz": "c64b6f7369d06848cbd8d27a22e2f3d48976680991d0dfe43163f7834c0e55db",
+    "commons-jexl3-3.4.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-jexl3-3.4.0/FILES.tsv": "0511b7659e32909e2949aa1c8bd476d15e8b66fcd33686aceb3030dad61bc3a2",
+    "commons-lang3-3.14.0/ATOMS.tsv.gz": "2626f00be0d1691ca37a7b2107cdc359a15af0c61f8571b86447d9e36dee83e7",
+    "commons-lang3-3.14.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-lang3-3.14.0/FILES.tsv": "74d9baba9e9e6b83f7583d5b44f2ce81f2dc4af1bbabae83d55b1d5a0c3e6101",
+    "commons-lang3-3.17.0/ATOMS.tsv.gz": "e5047c334d5e98a0a37a7e8eb5e678cab034b5cd33d0b458fe87696b0a087e77",
+    "commons-lang3-3.17.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-lang3-3.17.0/FILES.tsv": "dce1669e0785048f9b2c245b8770f2ed4d1d42535c5e7689e4b5f5835f275a33",
+    "commons-logging-1.3.2/ATOMS.tsv.gz": "bda94d3df84a5439de48d4e4f4cdc0b5cd94d71a68e1ee3899ef9b81891c5990",
+    "commons-logging-1.3.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-logging-1.3.2/FILES.tsv": "73fd58941b9105c0ed8e89c9e57deba35b8648943f58b289ad35b7f341e258d1",
+    "commons-net-3.11.1/ATOMS.tsv.gz": "cab18cafa44c6d92fa3c659992f9292509472ce79333944544d25a5ff2fdc345",
+    "commons-net-3.11.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-net-3.11.1/FILES.tsv": "854fe18e8919faba6f11eec80ee17e75c12d6001d4936dea06a0d604187fda8f",
+    "commons-pool2-2.12.0/ATOMS.tsv.gz": "ceada0045e22c4a70c8dd84e7f6db5270c7b3e264c26171d0afc0dea55ce67ef",
+    "commons-pool2-2.12.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-pool2-2.12.0/FILES.tsv": "2ec3505822ad4d2798828711ffb5ab970a69de4f837e22249f9b4497f43778a1",
+    "commons-text-1.11.0/ATOMS.tsv.gz": "53ee992e00a3b8fb41cf24009e8c4a344439106d2f97dba65b91ed709b5f6590",
+    "commons-text-1.11.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "commons-text-1.11.0/FILES.tsv": "7072a8718062f2eccb5c13ce51c20d1f65248139bd32c83057bc70635c3a4b6a",
+    "dec-0.1.2/ATOMS.tsv.gz": "46d84f56206f79d29ec6a6c01e144bf3cef7d31588a82fcdb247020312bdc0f4",
+    "dec-0.1.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "dec-0.1.2/FILES.tsv": "4b8e68baf1f35d87bc23b238831351f2fc2cf739a8b35e69cc3c9a791a8b0162",
+    "ecj-3.46.100/ATOMS.tsv.gz": "dd60d3f80c4403cc021779096f86c7d30c2203468b5269cc4db05bd19e0a21c2",
+    "ecj-3.46.100/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "ecj-3.46.100/FILES.tsv": "32123c0403691be17a16aae0f87d85b37eb9f09d75acf5ac2a31f93ae783b92e",
+    "eclipse-collections-11.1.0/ATOMS.tsv.gz": "ce9d2bcef96cf424a9006efcf6799cffa404308888a941e2ba50e5f168a97073",
+    "eclipse-collections-11.1.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "eclipse-collections-11.1.0/FILES.tsv": "1eb2115f1d1a4a6e0c7aa8b90b44514f16e65444060cad263af7f50c1724a8fe",
+    "eclipse-collections-api-11.1.0/ATOMS.tsv.gz": "e032dab82652edab400cd14b5cbe0f081aadb0fc0892f44fd865ae116180dde1",
+    "eclipse-collections-api-11.1.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "eclipse-collections-api-11.1.0/FILES.tsv": "cce99ea82f0551485319d6e87d3d6812e142cb0bbe953ed99f983c1c5977d33b",
+    "error-prone-annotations-2.21.1/ATOMS.tsv.gz": "35bdaf62e42e7425e51ac13358f05df77b4ec7babf3b873ddcd6a2c8acad3a41",
+    "error-prone-annotations-2.21.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "error-prone-annotations-2.21.1/FILES.tsv": "71a44bce6a5a4efef893389f12b046afe00c78db741869102ef10ba2b70e5341",
+    "failureaccess-1.0.2/ATOMS.tsv.gz": "3ac3305e970c8259a2f769a3e3f893db10686f3e3714f2f40d2ded217ffe2271",
+    "failureaccess-1.0.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "failureaccess-1.0.2/FILES.tsv": "0b83da192b13bee19fcca4eb30bfc3543dd23e89b8bbfdd599427ba0751abd69",
+    "fastdoubleparser-0.9.0/ATOMS.tsv.gz": "4de5b5e1af533c46798659176ef3edbe56bde1e92b5b5ccfdfd8fcb838a993a4",
+    "fastdoubleparser-0.9.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "fastdoubleparser-0.9.0/FILES.tsv": "bc5df5ab1bf06cd2bf814f1067deb431f2694cc23a24f5656370e66d695be40f",
+    "fastdoubleparser-1.0.0/ATOMS.tsv.gz": "e2ade48887891bbfdd93e4fa6ead94eb574779941cf8251dd9baeb03c815044f",
+    "fastdoubleparser-1.0.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "fastdoubleparser-1.0.0/FILES.tsv": "ac3bbe129ae79ecaa506c26068f04bfb7685d5fbc422da1ba9b6a741df0a73ac",
+    "fastdoubleparser-1.0.90/ATOMS.tsv.gz": "d8767eb56f4b73046b337c51a03d66f09c326e0e133f0e5d72fd422d11d01179",
+    "fastdoubleparser-1.0.90/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "fastdoubleparser-1.0.90/FILES.tsv": "993fa310a0c407c8cc7e302ec1970fb5bdd6d2c9b3af8db7f2a59e11b29e7df8",
+    "fastfilter-1.0.2/ATOMS.tsv.gz": "42df858afeb485ab5b9e2bf8c47445da94514c4e36ba4c5012eddabaa60d3a46",
+    "fastfilter-1.0.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "fastfilter-1.0.2/FILES.tsv": "c0a21e893ae4abba8381447a6feb242360304a199a073f0d26d401f71ecd0cd0",
+    "gizmo-1.0.11.Final/ATOMS.tsv.gz": "9e629c84221eb2f458996801b07ae8f72a99a5aea5390a3bd2a6f35baff8b05c",
+    "gizmo-1.0.11.Final/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "gizmo-1.0.11.Final/FILES.tsv": "7cc2c02223627bdfa9aa37af332b1d196bda30b8de2a14359d18ec5cea009f69",
+    "guava-33.0.0-jre/ATOMS.tsv.gz": "b158e7321cfaffdbb9f2f3e547f8a7a88c5e950b9f320916300c6bdc02c385dc",
+    "guava-33.0.0-jre/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "guava-33.0.0-jre/FILES.tsv": "441ed03ea49fd201afb7700620ab7e11c7d5c5e763acc8ed0e23dd923c0893f0",
+    "j2objc-annotations-2.8/ATOMS.tsv.gz": "c7145163fe11617d4cd82351b27dbebc6f6e8da20231d615a0c4cd51c0ee382c",
+    "j2objc-annotations-2.8/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "j2objc-annotations-2.8/FILES.tsv": "5189716beb36fc773de746262a42be229c4f4c806148f3dba2ed609eb57a3ea4",
+    "jackson-annotations-2.15.3/ATOMS.tsv.gz": "b65d2636111795e0638b49b35a04bf5c02dcaa6c361822fe5793dfcf32e091ce",
+    "jackson-annotations-2.15.3/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-annotations-2.15.3/FILES.tsv": "b5e4907f83c94dbc1c79100fb3a148c59ab5dfd5d9c2d47ac2b3e4e0298469b4",
+    "jackson-annotations-2.16.1/ATOMS.tsv.gz": "dcb95aa4af7576f4e709e79400398c70a6b6b76121217c06ccdc771322f0ede0",
+    "jackson-annotations-2.16.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-annotations-2.16.1/FILES.tsv": "9ce9b5ce28d873e4fb181d4664ab92de0ba8838fc9b86a35b0128f11b6733ab2",
+    "jackson-annotations-2.19.2/ATOMS.tsv.gz": "69ed05f0efebd57c5ada9bd89f40495e5578be4735c0d35a43d10a06814b3619",
+    "jackson-annotations-2.19.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-annotations-2.19.2/FILES.tsv": "db1430495cac0615e03a07ba43f4af905faa30a967347042b3fbd019ebe9b1e6",
+    "jackson-core-2.15.3/ATOMS.tsv.gz": "c1275e73576f4bd30ad9e06c7ab3af14bd69a38e2c2a1d75616632091cd84285",
+    "jackson-core-2.15.3/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-core-2.15.3/FILES.tsv": "f8b18d3e5c87b8755147c959d9d25145de45c158f47bc0cc34674b1ce3a8d7e1",
+    "jackson-core-2.16.1/ATOMS.tsv.gz": "88d3a9b4b81474bd02b636cd2185955ff11475609aa31955cc6f8253b5a5be17",
+    "jackson-core-2.16.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-core-2.16.1/FILES.tsv": "7229b891e53d99daedbd60f8ce93f2231069e72c8a4141e521311a51f2ae7107",
+    "jackson-core-2.19.2/ATOMS.tsv.gz": "9e94f9f43cabaee3f35b74d2e8d488a631def3810e18ee64b18dd982cf94c840",
+    "jackson-core-2.19.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-core-2.19.2/FILES.tsv": "5a624cc1e2f68edbe0cecb9e07a356293af6c8c72f9159164aca45019e97ee57",
+    "jackson-databind-2.15.3/ATOMS.tsv.gz": "2a1edb78ea3bb26b79cbc3d4dcc510eded2cec273a9797316007ef764509c62a",
+    "jackson-databind-2.15.3/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-databind-2.15.3/FILES.tsv": "2bea83859de2cb6dc31bac644cc92b9379340e394250be550a292716d7b0cf74",
+    "jackson-databind-2.16.1/ATOMS.tsv.gz": "b9bab77b9b70cb801b4ee22d2dbae67a0baf0c7f9a34430d545cd91c5ed885fb",
+    "jackson-databind-2.16.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-databind-2.16.1/FILES.tsv": "3f4c5fd0f7a57645b407c961c46155a53f16c2f12824b7fc042355b617195623",
+    "jackson-databind-2.19.2/ATOMS.tsv.gz": "289ff2d44e7ab13a7bd825802d8eda74650195531f44ac5fed838351169ca54c",
+    "jackson-databind-2.19.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-databind-2.19.2/FILES.tsv": "0ebef8afc6a2f9622c8eb8cc6879211f11599511b8fd8692c69b5865d78a3dc7",
+    "jackson-dataformat-csv-2.16.1/ATOMS.tsv.gz": "c130eb9a61f01f2bea709ce7c4724d8c82eb5102e3d364585b761939764558ba",
+    "jackson-dataformat-csv-2.16.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-dataformat-csv-2.16.1/FILES.tsv": "da342b722009731c94b6a89253da52eae67c597284e3db7e404ae14121b5efd6",
+    "jackson-dataformat-smile-2.16.1/ATOMS.tsv.gz": "f796cf523e8ce6d1f8deb61a73d2ea00b1a670b8580e57f8ca2560eeade1c821",
+    "jackson-dataformat-smile-2.16.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-dataformat-smile-2.16.1/FILES.tsv": "cc332dbc6d6c5056a95fe38c2c2aef0d8f4fbb693afff7e72ccdd8d2957f905a",
+    "jackson-dataformat-yaml-2.15.3/ATOMS.tsv.gz": "92cf3435f69849af366616ad439f39f6e232533b7731df90fbc32033b7eac35a",
+    "jackson-dataformat-yaml-2.15.3/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-dataformat-yaml-2.15.3/FILES.tsv": "14b78dbdf6f728720a4eef95e9be4c8109ecbc1bcb65dbe239ee25e3d9b36826",
+    "jackson-datatype-jsr310-2.15.3/ATOMS.tsv.gz": "288ba10c59b24fcb217df9a66529aa5bd3cf5965f15e25599853361610fe1047",
+    "jackson-datatype-jsr310-2.15.3/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-datatype-jsr310-2.15.3/FILES.tsv": "6883de1750c249c98776985681a0d56a4df265f4ebcf939686afa4e5c43b345b",
+    "jackson-datatype-jsr310-2.16.1/ATOMS.tsv.gz": "65fd2b8708a7df73df653c2d869f7436cfd3b0fa270496572008324c7c4f100b",
+    "jackson-datatype-jsr310-2.16.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-datatype-jsr310-2.16.1/FILES.tsv": "2323ea67567fa4df9be2ab6333d5b7f869b4ba41907637e498d5a8309a8fcd25",
+    "jackson-module-parameter-names-2.16.1/ATOMS.tsv.gz": "8de8283426d21701ade2327ec75329b4e3d86541b5b0db0d84f0a49f72b37076",
+    "jackson-module-parameter-names-2.16.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jackson-module-parameter-names-2.16.1/FILES.tsv": "9cbd12e01489ceb1e6d00d4dc33dfc7f033b7c212f38fd65655b633291e7c7a6",
+    "jandex-2.4.2.Final/ATOMS.tsv.gz": "8ba6463b2d728cd6b19f7ad0bf759537b207f73cd7d72e58c11533683c69ff5e",
+    "jandex-2.4.2.Final/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jandex-2.4.2.Final/FILES.tsv": "02c4065c3afdb598872ade43409f0ff7071d44805d9e9b7c9b30c5ece82aae83",
+    "java-object-diff-1.0.1/ATOMS.tsv.gz": "cff76fdc5af34c974a6918c4a1249a7af3fe6433c277d9955f4d7634a79780f6",
+    "java-object-diff-1.0.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "java-object-diff-1.0.1/FILES.tsv": "e18176184178f793e144ee6d21df2b6086ffc67d3a510a38aa962fde3cb83c62",
+    "jna-5.14.0/ATOMS.tsv.gz": "a2fe13b567c237d9dba856bd0ad6115af93ee8c676823d22a36842fc511bfaa3",
+    "jna-5.14.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jna-5.14.0/FILES.tsv": "7d44167fdbbb4798a9206e1914a091f5cbc662a0a7312fb9b54e9aea87818ca5",
+    "jna-5.18.1/ATOMS.tsv.gz": "221c3cf0b1001a47fbfc7966cff4c610d00ef20da1b91ed0e33b140d7e6d0139",
+    "jna-5.18.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jna-5.18.1/FILES.tsv": "754625de7a3c7cb21e02d677d14eac98228a29d83e0a4bf6cb939108f9502357",
+    "jna-platform-5.14.0/ATOMS.tsv.gz": "c30d2cb85e28ee2afcd50743ac1f62b2422f95a4b9a56f4ef94f102aad5c769e",
+    "jna-platform-5.14.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jna-platform-5.14.0/FILES.tsv": "e795ec75c090b312a6dc70811adec8ca9e181ec9c0fe14d932e6cfe04c20c342",
+    "jsoup-1.17.2/ATOMS.tsv.gz": "77eb5b976a6712e24520268965164b1669785a7c527a4f8d6ead6b999dc632f1",
+    "jsoup-1.17.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jsoup-1.17.2/FILES.tsv": "f6001815738e617978cbe848bee8be71b57062b2414dc4a11fa143c6319de39c",
+    "jsoup-1.23.2/ATOMS.tsv.gz": "a81da3c86af2cd085247f72a3918a1a45f1a33f4ec67ad180a25716e00c5fae1",
+    "jsoup-1.23.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jsoup-1.23.2/FILES.tsv": "e62ae8b2851dd911001d050fb16b57167a1bf091073e9262bb4ce664ec882939",
+    "jspecify-0.3.0/ATOMS.tsv.gz": "5dfbec46c5ef7abb2f292d4d36b343a09a28a653c83cffad5d44e2842c536984",
+    "jspecify-0.3.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jspecify-0.3.0/FILES.tsv": "27251d5b681aba02daeb93facdad9e3814adc44e313c684aeb7a08663aa686ea",
+    "jspecify-1.0.1/ATOMS.tsv.gz": "1f4c1d54129dec6761a058ee749b3cc3515de80522a43abf6506824473b43160",
+    "jspecify-1.0.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jspecify-1.0.1/FILES.tsv": "b64e497e901030c99421bdd93a4b2fd280677dff55435962fff8f5f309a5a45e",
+    "jsr305-3.0.2/ATOMS.tsv.gz": "9304523a8e7a838395ceb274e0b89d100946f255e8aebab911f00eb469a4c817",
+    "jsr305-3.0.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "jsr305-3.0.2/FILES.tsv": "0c20e7fa28c32caf397952fc8013bb6d354e5c8813c11e159332f2f2a6f7e0f6",
+    "junit-jupiter-5.10.2/ATOMS.tsv.gz": "7e2f035f16ad3ef60ce49fb298117351c04598e9f92133dbc8571da909db6116",
+    "junit-jupiter-5.10.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "junit-jupiter-5.10.2/FILES.tsv": "6c9d237ed5fddcdb61254d97a9a200c239b7959c0056d235bf1e3987798adf1a",
+    "junit-jupiter-5.11.4/ATOMS.tsv.gz": "7e2f035f16ad3ef60ce49fb298117351c04598e9f92133dbc8571da909db6116",
+    "junit-jupiter-5.11.4/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "junit-jupiter-5.11.4/FILES.tsv": "bb0110e6b97094c69819c8bf21c5b94562c732fe0284a9e207d8d663d89c4252",
+    "junit-jupiter-api-5.10.2/ATOMS.tsv.gz": "2eb7f3ea0a454cea94c2c0ff12f18961893da1266a72ba862fe76227f7aa3efe",
+    "junit-jupiter-api-5.10.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "junit-jupiter-api-5.10.2/FILES.tsv": "3626a1b8d8b34ea3f52ede5f1517886eca966d00f2bc3d5183d83ba0901e5205",
+    "junit-jupiter-api-5.11.4/ATOMS.tsv.gz": "4ef9d2359b1c644e88c0fb1b5a7825b15c79548afd8c3bd138103ad068cf787d",
+    "junit-jupiter-api-5.11.4/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "junit-jupiter-api-5.11.4/FILES.tsv": "024ddebc8f8f479a36be7374f05cba5b39d6d01504ba761c9ce0cfaee8496316",
+    "junit-jupiter-engine-5.10.2/ATOMS.tsv.gz": "8863a5c0270b4099d1441eb5ea9932259bf4b8394ad455c57387485fe847b068",
+    "junit-jupiter-engine-5.10.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "junit-jupiter-engine-5.10.2/FILES.tsv": "bd8ea66e21abb9ef38a5c85e54e31ec1c4d9e9ee8a158906db0942c5007be429",
+    "junit-jupiter-engine-5.11.4/ATOMS.tsv.gz": "035d755a3961205f670a4bbbffe3fb45a5fd76b5d0a18997667362908d9e8836",
+    "junit-jupiter-engine-5.11.4/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "junit-jupiter-engine-5.11.4/FILES.tsv": "71b218f509c0c3c961d1eb86e556daa36b565c615e93ce4c2cf19d9d6209c6c1",
+    "junit-jupiter-params-5.10.2/ATOMS.tsv.gz": "e1015392a42e9e4a7a6c161ef6fff67cd11d883630973e49d81ac2a01d2e50e6",
+    "junit-jupiter-params-5.10.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "junit-jupiter-params-5.10.2/FILES.tsv": "8e87ea9c9d61fd99cffc26cf48af456c61c0f91dd948da2034ad3919b5691c47",
+    "junit-jupiter-params-5.11.4/ATOMS.tsv.gz": "d3f2085a73089b775204db812d2c6c962277a8d05c0dae9f4e9e9ed116ba68b9",
+    "junit-jupiter-params-5.11.4/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "junit-jupiter-params-5.11.4/FILES.tsv": "c34eed956cd1f952c18b1d4cca93744fb6b8702e2005a7799ebf28d6c11eb9bf",
+    "junit-platform-commons-1.10.2/ATOMS.tsv.gz": "30b5dbf9831293ec081d926c67b22b1c946609cc098ba746563cc3124e72d254",
+    "junit-platform-commons-1.10.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "junit-platform-commons-1.10.2/FILES.tsv": "4f57e40b829d2b56dff7efb9e0ad7cc465860c3f7d511aaca8ac42c4dc389e1c",
+    "junit-platform-commons-1.11.4/ATOMS.tsv.gz": "7937bab20639920bfe046a35ed2df7d559e850aea0077dc4508ef7dcd5bb1d75",
+    "junit-platform-commons-1.11.4/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "junit-platform-commons-1.11.4/FILES.tsv": "01f45d01fcf0e30538ec9359c02fd339c1726aa71fa8b9df74ec4afea0a122e9",
+    "junit-platform-engine-1.10.2/ATOMS.tsv.gz": "f79ef6bbcbf522eb2af16de9c00ab76430648283de3582cd938009d10113bfe0",
+    "junit-platform-engine-1.10.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "junit-platform-engine-1.10.2/FILES.tsv": "ca103ef21a0f414fb4cc76b2c69c701ca6fab57f3f8a4a6da25eb492a87d9dff",
+    "junit-platform-engine-1.11.4/ATOMS.tsv.gz": "3e2dc3d93a4337534dfd6dcb1a3f51b3174ac9c1993f57060a6e25b5e9047755",
+    "junit-platform-engine-1.11.4/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "junit-platform-engine-1.11.4/FILES.tsv": "33dc9ee1e782f906d185bf0610ba9a6d98ce5c4cb1faa5b2449f073910635059",
+    "junit-platform-launcher-1.10.2/ATOMS.tsv.gz": "7e0918d905517c977cd7b69c56216f6c1763efd8608b260b5bd3c9c12acc1e9a",
+    "junit-platform-launcher-1.10.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "junit-platform-launcher-1.10.2/FILES.tsv": "baf1863c7f14e79cb17fda7b729acec3c9bb22400915a2ca33c8b4c163849a35",
+    "junit-platform-launcher-1.11.4/ATOMS.tsv.gz": "38c8dfb37a187f8463263b8ba2f27fe8969727bad8edda8ffb6e47045a523340",
+    "junit-platform-launcher-1.11.4/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "junit-platform-launcher-1.11.4/FILES.tsv": "0f78e9c30cb0aabcde72e63567d7997ccdf3d777d8e9a17f676bd8f538ac2d83",
+    "lucene-analysis-common-9.10.0/ATOMS.tsv.gz": "6f0b6d4c3b0d100cc292b06b841302465000adba843b0b91116852304e34589a",
+    "lucene-analysis-common-9.10.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "lucene-analysis-common-9.10.0/FILES.tsv": "7792b7497d39503825d47f6460f1915ec3f1857ada9c108bea969f78b406b617",
+    "lucene-core-9.10.0/ATOMS.tsv.gz": "d9954132eb7aaf836408fad2d16de9f02fd81da89924a3f2bde6bb87eef406b9",
+    "lucene-core-9.10.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "lucene-core-9.10.0/FILES.tsv": "61d087fe0742fd83188c37c6ddaaf961b4fbffba162844f17b76d46a43283371",
+    "lucene-queries-9.10.0/ATOMS.tsv.gz": "87989b8b385308f9bde9189f0cfb8aa34fb4db0bd96d28a2111c87b93ee6e296",
+    "lucene-queries-9.10.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "lucene-queries-9.10.0/FILES.tsv": "aa53f4b3a8595613d92d35f0fa71b6389cf99407833b7b3cc350d8d153d6dae3",
+    "lucene-queryparser-9.10.0/ATOMS.tsv.gz": "e1e452c8c3fa8a65ddf49c2aee411a25aa0d4b339fc38861d408b25b5e6d4902",
+    "lucene-queryparser-9.10.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "lucene-queryparser-9.10.0/FILES.tsv": "110a617dc0eff5715c3cf1f4e205e29362637f66fa57cad208202fdd3b6719ee",
+    "lucene-sandbox-9.10.0/ATOMS.tsv.gz": "5ae05677d1642d3363f4cddcac8ff9959ec34618a1feae33e4177fb0d3ab45a8",
+    "lucene-sandbox-9.10.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "lucene-sandbox-9.10.0/FILES.tsv": "5403bb02110508c15129adfce5c510dd622181461ecce1805403ca4fa246f199",
+    "lz4-java-1.8.0/ATOMS.tsv.gz": "4a8247d7eeb77a8201742de2405a4236b8cb838b4610b14b2ff15f117a8d01d8",
+    "lz4-java-1.8.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "lz4-java-1.8.0/FILES.tsv": "9ae4bff21cba5920627a013e1065175c84cb945260bf54879ee1ffd4bcde16bb",
+    "micrometer-core-1.9.17/ATOMS.tsv.gz": "ffbb7a354cf6ba45c98c298532cb28109a4fb6eec6780c291bf6b130cbb47962",
+    "micrometer-core-1.9.17/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "micrometer-core-1.9.17/FILES.tsv": "4fae9f6620b20fe4dee8dcaaf6ef75762aa7f37071f1ed6ae0dfde6b4a790276",
+    "opentest4j-1.3.0/ATOMS.tsv.gz": "245936e7ddfd619374c3329d0870de208b98b5a000fe3fe37b41ac033793fa42",
+    "opentest4j-1.3.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "opentest4j-1.3.0/FILES.tsv": "c7e2f85b2444916defeb4450ded0dec794aaea00503fa6bcc9601d72de8c2e3f",
+    "org.eclipse.jdt.core-3.47.0/ATOMS.tsv.gz": "c18fffa875eab10cc42204df8d4fe1417ecf7b2ad165196054279e8a51dd2395",
+    "org.eclipse.jdt.core-3.47.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "org.eclipse.jdt.core-3.47.0/FILES.tsv": "91e18f269b91c72f4ce42eb313bf005d000611e8b587d2383f1921f026499069",
+    "org.eclipse.jgit-5.13.3.202401111512-r/ATOMS.tsv.gz": "c38b827ac1bfe8616399d18e4a8b55cdd986324e1fcecb0995bf60e18301a02c",
+    "org.eclipse.jgit-5.13.3.202401111512-r/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "org.eclipse.jgit-5.13.3.202401111512-r/FILES.tsv": "d1b6b87fefc68b2872b9d2eac41fd44e1f09698ab287bf2fe1966c57ef381d90",
+    "org.osgi.core-6.0.0/ATOMS.tsv.gz": "fac605fc4e764b60288419bc9a3eb2c43718d6aa351dbf931cff2716239b0f51",
+    "org.osgi.core-6.0.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "org.osgi.core-6.0.0/FILES.tsv": "41841a266a5378bcdfeee21aeb6d72945201786dacbe2c8c970e0bd60ddd6689",
+    "picocli-4.7.5/ATOMS.tsv.gz": "7f46ab3b446df014ba3f9d2411165b3b1eb7c60b369c165a80951bf85333a016",
+    "picocli-4.7.5/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "picocli-4.7.5/FILES.tsv": "30cf9c3eefca4b50ff08771ee78b3e5cae4e512d91a927f6dbd992695c1694ea",
+    "re2j-1.8/ATOMS.tsv.gz": "7c826355e53d106c598775ad99db9a3ac60ec464883e274029f429f611fa8b21",
+    "re2j-1.8/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "re2j-1.8/FILES.tsv": "5e6486d321898de7f868480c85687f63e35fc81e79cd5ce0ace2f3d640368fcc",
+    "rewrite-core-8.17.1/ATOMS.tsv.gz": "ad27287b3ac8ccf69cfd5c9ab7f12097b0f50c7cae8fa5f3844802bcdae1b38e",
+    "rewrite-core-8.17.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "rewrite-core-8.17.1/FILES.tsv": "0edc6f7c653100d6b5af86c4329c139430253f08c68c02f3197796f6365182ed",
+    "rewrite-gradle-8.17.1/ATOMS.tsv.gz": "d4f3a1294415bff376ca13ad062194885bfe999aebf8ebe29d3ffd0444fa06f5",
+    "rewrite-gradle-8.17.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "rewrite-gradle-8.17.1/FILES.tsv": "84d8b2f6ca23170874148f8aae36dac6203f8838ef9aa4ae273d19f8c257dad3",
+    "rewrite-groovy-8.17.1/ATOMS.tsv.gz": "34f7dac5da42e44fb7805d3b9716ca4e13507f0d9d4bfa3f3829df7f0ced1645",
+    "rewrite-groovy-8.17.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "rewrite-groovy-8.17.1/FILES.tsv": "431034eacbabd8666085673a396bdd8ed1f5a42f0232b41df3b9730aa2db3582",
+    "rewrite-hcl-8.17.1/ATOMS.tsv.gz": "45e75b27a05545575f77210687f3a47f5bb2cb80147fa11b3642762819917fe9",
+    "rewrite-hcl-8.17.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "rewrite-hcl-8.17.1/FILES.tsv": "abcafd13dfe7121d56a320838d807c8f60700ac310d11c80fc7bc68498fa8962",
+    "rewrite-java-21-8.17.1/ATOMS.tsv.gz": "81cee187ef32011c5d18303a7806000f016c83c8918eae7a2802f11730976e5e",
+    "rewrite-java-21-8.17.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "rewrite-java-21-8.17.1/FILES.tsv": "bbf554f484e17c8d47e0527f3f67ce2d2251ffc77c7b1ff488bf55ca40038a17",
+    "rewrite-java-8.17.1/ATOMS.tsv.gz": "7f4450f9c9cf0ca49092719b0fc292bc208cf73c5661ad5236c0ff5ce0f8237d",
+    "rewrite-java-8.17.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "rewrite-java-8.17.1/FILES.tsv": "0065b015c4fc01c4017709808301437ce7750861786e63ef321056a542f37ebb",
+    "rewrite-json-8.17.1/ATOMS.tsv.gz": "9a9ccb733c8d229589226883f201c215f08ed6ff9323d940a61b6c394c46af11",
+    "rewrite-json-8.17.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "rewrite-json-8.17.1/FILES.tsv": "61bab129514b7e2819b7af6427e2911946a2f3372511b0833219c515c01941d7",
+    "rewrite-maven-8.17.1/ATOMS.tsv.gz": "5f084253ab4d568e94b6467f98ddf754b044491f43b99e07920e390a7214e199",
+    "rewrite-maven-8.17.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "rewrite-maven-8.17.1/FILES.tsv": "e94a126f939724eaa7bfd5bc74b61be9bd86a4d36f1fe28a92c59d0dbe8bd5df",
+    "rewrite-properties-8.17.1/ATOMS.tsv.gz": "32e44f5456a1d36452fff17717a5c5afeb3618b15a420eeda4f31056a059bb91",
+    "rewrite-properties-8.17.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "rewrite-properties-8.17.1/FILES.tsv": "4064d82fa2d250271cc100d58441ebf9f0ef78d5b316ca1ab0053e05d78a51e9",
+    "rewrite-protobuf-8.17.1/ATOMS.tsv.gz": "b807bf105687672ffeef67cd86ef766979b830f3713383f04c83c035bb3cecf5",
+    "rewrite-protobuf-8.17.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "rewrite-protobuf-8.17.1/FILES.tsv": "d730d32d5d4edebffb648acbcd7b3725369762412094f1f61b4800cb75ab8d7a",
+    "rewrite-static-analysis-1.4.2/ATOMS.tsv.gz": "0c0720db51aeb6de141a16d89a8975b1e25d0c2fb3266fee003ef6c49e5f5d08",
+    "rewrite-static-analysis-1.4.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "rewrite-static-analysis-1.4.2/FILES.tsv": "dc144143f1c1b04c19b440bf6806f03331f23b232aee0b4e8931f3729f871c67",
+    "rewrite-test-8.17.1/ATOMS.tsv.gz": "fe9a6c4830b9b2e38dcab845e463681844b6c1752c6d7bacb047920264c680fc",
+    "rewrite-test-8.17.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "rewrite-test-8.17.1/FILES.tsv": "0875a2543f1e448575089615816049af63876890b3da1f171daf1c15871fdd69",
+    "rewrite-xml-8.17.1/ATOMS.tsv.gz": "e3b01ef718b5dd15b3b2d99c6f1a6a79baaea6c9535c59651c0ee99a255294a3",
+    "rewrite-xml-8.17.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "rewrite-xml-8.17.1/FILES.tsv": "72e53cc4af605a0035a4109ae916173fa422f9050f1531a055b2a93c1889be7c",
+    "rewrite-yaml-8.17.1/ATOMS.tsv.gz": "4c44604b8481528b98a6eea1d1a8b6efd51c86033880bda66b7cea8c3b14be2a",
+    "rewrite-yaml-8.17.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "rewrite-yaml-8.17.1/FILES.tsv": "cbe0d26284b7c9a35fd46191086542bbbcf7496dc5dd37a0b28e8fa0b3808f25",
+    "slf4j-api-1.7.36/ATOMS.tsv.gz": "ad574c1d980aff102e7e6efeb61782ca2395893442eafb2c61fb438b4637589d",
+    "slf4j-api-1.7.36/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "slf4j-api-1.7.36/FILES.tsv": "bca74939505d87b092aaa38313579661b5cf08f5516d45e9f41028158d20b996",
+    "slf4j-api-2.0.12/ATOMS.tsv.gz": "967765b991b62db0eebf7de3784e4b33c39b125884b05524313a32d62dac9905",
+    "slf4j-api-2.0.12/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "slf4j-api-2.0.12/FILES.tsv": "2e57bb0fcc9b4e37e1850b95c09fc8d20e79d9da7453d39d3230a8f0d010035e",
+    "slf4j-api-2.0.9/ATOMS.tsv.gz": "20e7eea3b2186a50272f073c56d4ea3534ca671ff0c1dd73f66c4abd185bd7bc",
+    "slf4j-api-2.0.9/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "slf4j-api-2.0.9/FILES.tsv": "77cb20f17a1757d71a2ba5a4d2293c19b569752c0b8c896f7445b5635a4804fb",
+    "slf4j-simple-2.0.13/ATOMS.tsv.gz": "6a83fa6c5a71d0b84b973098ebe0a7e0fc491de66ca70c319940cbf48dbb409a",
+    "slf4j-simple-2.0.13/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "slf4j-simple-2.0.13/FILES.tsv": "78e0c0a5510285887e6c7a56b32ec50b8836aa787abcdabfec40c41d531c4a57",
+    "snakeyaml-2.1/ATOMS.tsv.gz": "cfb64134f86d51492ea1dcb68a50f826cd73369f4e58168dc18189d38a65b689",
+    "snakeyaml-2.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "snakeyaml-2.1/FILES.tsv": "7d4ce65f495cacb315281498f93ab308ebaa61e193d95be5a153a5a96bc18dd8",
+    "snakeyaml-2.2/ATOMS.tsv.gz": "9ae0d5cc61122b332c9f96fee3e6af5527417209853faea416d645a83ef9fe95",
+    "snakeyaml-2.2/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "snakeyaml-2.2/FILES.tsv": "6fcecb4e63b808f40d94979305ac69bb29fee49549df94696a3afff9a5f9b47a",
+    "snakeyaml-2.6/ATOMS.tsv.gz": "6da914d649cda76e9b07a95f443d1e511b3a0a5739be8662adcf6b71702fab15",
+    "snakeyaml-2.6/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "snakeyaml-2.6/FILES.tsv": "7f96b1489f1c83630bfd840eaca1bb0f311d0ba1a1980fc16af6aa05cfc49b44",
+    "snakeyaml-engine-3.1.1/ATOMS.tsv.gz": "e146d82872efb6728d32e63ddda9d65a984bb8f009921889a10418bf8c234f03",
+    "snakeyaml-engine-3.1.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "snakeyaml-engine-3.1.1/FILES.tsv": "49706b75f2b73c344edc4cd3cbace39b4b665798665ad3370ed8cd75b2fd3817",
+    "snappy-java-1.1.10.5/ATOMS.tsv.gz": "5a65608ea3130da14721cdfd50f8ebdad80466e44415c0a6add31291ede06095",
+    "snappy-java-1.1.10.5/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "snappy-java-1.1.10.5/FILES.tsv": "4c44a6313887ef0849a9665aa8c624c346708e5213b1f21657f3462a353b4b3c",
+    "sqlite-jdbc-3.45.1.0/ATOMS.tsv.gz": "ea6f6f84b07e37b706526c2f49b5b6b0375f52f11f157ecb8df105a86eea1bba",
+    "sqlite-jdbc-3.45.1.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "sqlite-jdbc-3.45.1.0/FILES.tsv": "214e0850f9df26ec5008ce3dff44fc74ad07fab8f3c90aefc756a47eed51f3dd",
+    "sqlite-jdbc-3.51.1.1/ATOMS.tsv.gz": "4585ddb65be968066608784c1f152d62e03f2b59d4feed07d8245773c54209c0",
+    "sqlite-jdbc-3.51.1.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "sqlite-jdbc-3.51.1.1/FILES.tsv": "e40a962cec05d236df039bc1be9162f284856acbac6f4b50e1da0366254a9d5b",
+    "tomlj-1.1.1/ATOMS.tsv.gz": "9a66b662abd25770f09eca3c5a221acc1d31d4344834263ce0f9b985d0493fcb",
+    "tomlj-1.1.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "tomlj-1.1.1/FILES.tsv": "ab0ed6a64c9544d48e958128ed5b03d7a8b18ba90cf52d86961b0b154aaa56b3",
+    "tomlj-1.3.0/ATOMS.tsv.gz": "53db2fa0d28fdc25e8b857e3965fd059c0d81dd70144945af5d4798dd7f6abcc",
+    "tomlj-1.3.0/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "tomlj-1.3.0/FILES.tsv": "6bf500045e1a1393b8b13c7ae0cb689f33532d17a562bc99127f9b299c3a8a50",
+    "univocity-parsers-2.9.1/ATOMS.tsv.gz": "4d6aaafc14f147a6dbab2b77ebe65538af813abbdc012bd0844ec27af647afcf",
+    "univocity-parsers-2.9.1/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "univocity-parsers-2.9.1/FILES.tsv": "a5c943ad599d538998c662611371bde22f80acc1d6788f7f1d84821d0d22ba75",
+    "xz-1.10/ATOMS.tsv.gz": "15d258e1f77fd36496cd5dcd8e3094fa702dd648c7998b11d497a587794d1321",
+    "xz-1.10/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "xz-1.10/FILES.tsv": "1aa6ef5f9c2757fe0f69cf07c9a97f7ad3bb4310dbf1b3c5370f32d0eb129265",
+    "zero-allocation-hashing-0.16/ATOMS.tsv.gz": "77e4904dd4e31162e506363d6f94233855db250241792a9583474bde8e1e9ea5",
+    "zero-allocation-hashing-0.16/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "zero-allocation-hashing-0.16/FILES.tsv": "cad152676136b7a44ad7d28404f7810c29fee0c796fa7da083c8ed3d7f95fdb5",
+    "zstd-jni-1.5.6-4/ATOMS.tsv.gz": "cf5579c5a099232186ce4c61e40ebf953b73e2f281a5437d5b84d49acbf9ec3a",
+    "zstd-jni-1.5.6-4/ERRORS.tsv": "a4a6b1901df85639f9ba68d2cb5acebf26fe37ab8636a87c83d48c6edbc299e3",
+    "zstd-jni-1.5.6-4/FILES.tsv": "5a4726f18bdd78424dad1d2ace79dee169b4bcc4e8e4081528af2a08c3c14c33"
+  },
+  "tools": {
+    "lhash_module": "E:/tools/cpu_lhash_treesitter.py",
+    "lhash_module_sha256": "a5d270b105b7dcd530e66e7223efbd2fef5401b393ca9480598745c1bea332a6",
+    "projector_sha256": "141a29d995d0992b1f731056652ea2c1e1887aec2685a2faf0074c6a45cdaca6",
+    "python": "3.12.6",
+    "tree_sitter": "0.26.0",
+    "tree_sitter_language_pack": "1.12.5"
+  }
+}

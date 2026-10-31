@@ -1,0 +1,9 @@
+$ ["/workspace/scratch/a0f19f379302/jdk-21.0.12.1+1/bin/jar","--describe-module","--file","/workspace/scratch/a0f19f379302/parser-target-proof-2/jdk.m3.parser.jar"]
+jdk.m3.parser jar:file:///workspace/scratch/a0f19f379302/parser-target-proof-2/jdk.m3.parser.jar!/module-info.class
+exports jdk.m3.parser
+exports jdk.m3.parser.grammar
+requires java.base mandated
+requires jdk.compiler transitive
+
+
+EXIT 0

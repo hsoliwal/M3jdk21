@@ -1,0 +1,107 @@
+# JCC source publication and the existing M3JDK21 receiving lifecycle
+
+The receiving ledger now binds the actual Synexia implementation publication `d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906` and its exact source/evidence objects. The two JCC capability records remain **blocked**. The final source replay passed 91 core tests and eight parent tests, then stopped at its required original upstream gate: 67 tests, 66 passed, zero failures and one error. Later required JNI stages did not execute. Artifact publication and finite test passes do not establish source export or JDK acceptance.
+
+This is an additive metadata successor to E2 at `df06cdee5a8526f573b3ad89622824d0b49e2f25`. The original receiving test is unchanged; its formerly null-commit candidate reference is now pinned to that actual existing publication, with the exact old candidate retained in canonical lineage. Its original four-test execution and all owner/corpus/receipt inputs remain unchanged.
+
+## Exact identities and publication history
+
+| Identity | Bound value and scope |
+| --- | --- |
+| Frozen source execution input | `0b8dc32b9e8a616b7b7141bbdd88722839dc64bc`, root `3a270e543f9a547582ebda8ac8b69bfd134c41be` |
+| Local replay seed | `72c958b9856a505f7da5eced4e58a6ee1c4dc0b9`; an input snapshot, not remote ancestry |
+| Published source output | `d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906`, root `6f9b6a48f8cefa7a643f222c7aa1f621497725e7` |
+| Source branch and parent | `refs/heads/aix/jcc-canonical-integration-20261005`; parent `a4761769f2fea3f468512d98568f6d5a1ecf427e` |
+| Source PR | [com.synexia #9285](https://github.com/hsoliwal/com.synexia/pull/9285); the captured observation is open/draft and dirty against develop `123b49647bd3f1f7d5962a72a3e5bbb3cbc57038` |
+| Retained destination compiler/recipe owners | `da958d00d24154c0db87beca0ec80a7df2b43b73`; their exact bytes and narrower contracts remain unchanged |
+| Published E2 receiver and successor preimages | `df06cdee5a8526f573b3ad89622824d0b49e2f25`, root `e3e079ba36553bae517c3e53a5a834b24452a82e` |
+| Prior receiving PR | [M3jdk21 #139](https://github.com/hsoliwal/M3jdk21/pull/139), merged at `2026-10-05T10:43:48Z`, merge `8131f535300c005afd27443d0281ede11198522f` |
+
+The source publication receipt verifies 1,016 payload blobs, sizes and modes, 22,836,558 payload bytes and 112 preserved files. Direct body read-back separately matches all nine production postimages. The final root and selected Rewrite package are independently rehashed, including the intervening tree chain. Those observations connect the actual materialized/tested bytes to the later source publication; the original run is not relabelled as a fresh checkout test at `d1cf2d81`.
+
+The E2 merge retains `df06cdee` as actual ancestry. A subsequent recorded observation of destination master `7652e327eccb9df658cbfaf2f6373a01c562b260` found all four active E2 receiving files byte-identical. This is integration context, not full-master qualification. The successor is prepared on branch `aix/jcc-source-final-handoff-20261005` from the exact E2 preimages; PR139 remains merged history.
+
+The initial source CI observation returned zero PR-triggered runs through the wrapper, zero commit statuses and zero check runs. The prior receiving investigation observed eleven failed workflow records with no returned jobs and no explicit failure cause. Neither observation supplies a CI pass. Live PR/CI state can change independently of these pinned receipts.
+
+## One canonical authority and explicit source obligations
+
+`m3/docs/name-mapping.json` remains the only mapping authority. The existing operational schema, `migration.py`, retained text-snapshot recipe and `recipe.py` sealed installer are reused. No second registry, compiler, scanner, scheduler or importer is introduced.
+
+Only `synexia.jcc-recipe-laboratory` and `synexia.jcc-java-jni-regression` advance their scoped source bindings. All 46 IDs and their order, the other 44 complete records, all 20 destination gates and every non-record global remain exact. This includes the entire reconciled Descriptor record and its historical evidence. Global source/mainline observations are not rewritten merely because this feature branch was published.
+
+The two records account for 17 source owners/contracts: nine changed production owners, four unchanged previously mapped owners, and four unchanged shared-transpiler contracts. All four complete old source objects remain in `lineage.previous_sources`. The receiver's exact old null-commit artifact remains in `lineage.previous_targets`. This preservation is checked explicitly because the ordinary validator compares locations `(repo,path,symbol)` and does not force retention of old commit/hash values during a same-path repin.
+
+| Source owner or group | Existing record | Concrete obligation |
+| --- | --- | --- |
+| `M3RecipeMasteryLab`, `M3RecipeMasterySchedulePlanner` | `synexia.jcc-recipe-laboratory` | Retained unchanged source owners; publication identity advances without copying their engine into the destination. |
+| `M3HashPinnedJavaSnapshotRecipe` | `synexia.jcc-recipe-laboratory` | Reviewed ordered parser-classpath context for actual materialization; exact source/manifest/refusal boundaries remain. |
+| `M3OpenRewriteTranspiler` and four `M3Transpile*` contracts | `synexia.jcc-recipe-laboratory` | Changed project runner compares exact source map/String contents; diagnostics remain separate. The four pass/plan/result/run contracts are unchanged. |
+| `M3OpenRewriteRuntimeRecipeInventoryRecipe` | `synexia.jcc-recipe-laboratory` | Uses the actual SDK collection return type while preserving sorted inventory and false mutation/promotion authority. |
+| `M3RecipeCrateSerialAtomReview` | `synexia.jcc-recipe-laboratory` | Final capture of normalized atom binding for the lambda, preserving serial review and guard semantics. |
+| `M3SemanticCodeInventoryRecipe` | `synexia.jcc-recipe-laboratory` | Explicit pinned-SDK JavaPrinter for unresolved inventory text; replacement authority remains false. |
+| `M3AtomPatternSignalChainRecipe`, `M3CodeSignalChain` | `synexia.jcc-java-jni-regression` | Retained unchanged source owners; wider Java/regex/JNI applicability is not inferred. |
+| `CompetitiveProblemReview` | `synexia.jcc-java-jni-regression` | Enclosing helper and lambda-capture repairs, plus canonical enum ordering of Review lists. Ordering and derived Review roots deliberately change. |
+| `ChallengeDonorPassLedger`, `CompetitiveCapabilityPlanIndex` | `synexia.jcc-java-jni-regression` | Enclosing normalization/root helper qualification; existing evidence and proof-root contracts remain. |
+| `DonorMechanicalShapeCatalog` | `synexia.jcc-java-jni-regression` | Removes redundant enum-class cast/suppression while retaining the immutable enum-keyed catalogue. |
+
+The four donor/category/planning repairs are source-side Java regression obligations. Their classification in the existing Java/JNI record does not imply a native implementation, destination port or passing JNI qualification. Exact paths, complete hashes, original preimages, Result/write receipts and source-to-record assignments are retained in the [binding receipt](../migration/evidence/jcc-handoff-20261005/source-destination-bindings.json) and [source review](../tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_REVIEW.md).
+
+The source tests and catalogue metadata do not import challenge statements or solutions into M3jdk21. Source provenance, file-level licensing and applicable target proof remain requirements before any future implementation import.
+
+## Source execution results and remaining admission
+
+The final driver used the admitted 503-input original-source packet and compiled 443 first-party Java owners with Java 21, `-proc:none`, `-Xlint:all` and `-Werror`. Exactly nine original production files changed, and 494 original inputs remained byte-identical. Twelve advertised production bindings comprise those nine changes and three already-satisfied outputs. A separate protected fixture recipe expands four wildcard imports while retaining bodies and assertions.
+
+| Executed source phase | Tests | Passed | Failures | Errors | Skipped |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Self materializer | 1 | 1 | 0 | 0 | 0 |
+| Main materializer | 1 | 1 | 0 | 0 | 0 |
+| Protected fixture materializer | 1 | 1 | 0 | 0 | 0 |
+| Core | 91 | 91 | 0 | 0 | 0 |
+| Existing parent class | 8 | 8 | 0 | 0 | 0 |
+| Complete selected upstream classes | 67 | 66 | 0 | 1 | 0 |
+
+The materializers produced one self write, eight main production writes and one separate fixture write. Each actual second application produced zero Results. The source recipe refusals, original input preservation and exact materialized postimages are recorded separately from these JUnit invocation counts.
+
+All 17 original `CompetitiveProblemReviewTest` invocations now pass. The unchanged complete upstream packet still reports `M3 static-analysis recipe pack is incomplete: org.openrewrite.staticanalysis.AtomicPrimitiveEqualsUsesGet`. The existing canonical pack 1.4.2 is declared already. Its missing/held runtime custody includes Kotlin 1.13.0, analysis 2.5.0, templating 1.6.3 and BOM 8.21.0, with exact SDK mediation still requiring review. No different dependency version, excluded class, shortened test packet or relaxed oracle supplies a substitute pass.
+
+The driver exits 1 at `46-upstream-java`. Thirteen later stages did not execute: upstream report collection; native build/hashes; JCC native tests/reports; parent native tests/reports; Java/native receipt comparison; three final source/fixture checks; final proof-input and cache checks. A separately labelled post-run audit does not mark those driver stages as passed. Historical JNI evidence remains historical.
+
+The source API comparison covers 69 externally visible types across twelve owners and 126 owned class files. Its combined baseline is the retained epoch-04 candidate capture, with narrower actual preimage comparisons for the catalogue, transpiler and hash-pinned recipe. The original complete baseline did not compile. This is scoped API evidence, not complete original-baseline binary or behavioral compatibility.
+
+The source composition proof has 16 logical A/P/AP/PA schedules and 32 executions including independent replay. Its complete serialized receipts agree, and the executed fixtures include exact-body admission/parse/print checks. Persisted transformed-source observations use hashes; no retained full transformed-source-map or class-byte AP/PA comparison is claimed.
+
+The source-canon checkpoint remains a separate authority. Its verification order is DIFF, POLICY_LINT, COMPILE, STATIC_ANALYSIS, UNIT_TEST, INTEGRATION_TEST, API_CONTRACT, FULL_BUILD, RUNTIME, REPLAY and SOURCE_HASH_PRESERVATION. The existing exact-root, separate-worktree, complete-coverage, history and pattern-audit requirements are not discharged by this metadata successor or its finite fixture tests.
+
+## Every root entry accounted, with a bounded denominator
+
+The final source root contains 343 entries: 255 trees, 87 blobs and one gitlink. Root names, modes and kinds match the frozen input; four subtree identities change: `m3-fast-search`, `synexia-algo`, `synexia-donor-inventory` and `synexia-openrewrite-recipes`. The root POM remains blob `98889a040aad5cc3c82f782bb4b173d118207988`, SHA256 `f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab`.
+
+Fresh XML parsing finds 201 unique Maven declarations: 200 project declarations and one `m3-tornado` profile declaration. There are 190 direct paths and eleven nested paths. Eight root trees contain nested declarations, four of those are also direct modules, and four are additional containers: 194 distinct root components are referenced. A root directory is not automatically a Maven module, and declaration parsing does not prove profile activation or reactor execution.
+
+The regenerated [root obligations](../migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv) include every actual final root object and its exact declaration context. They identify the four root units containing the scoped JCC source obligations. Each whole-root-unit test/export/materialization/acceptance status remains unestablished; bounded owner tests are described separately. The descendant file/symbol and semantic dependency denominators remain unknown. The 503-input replay packet is not the whole repository.
+
+## Retained receiving implementation and honest proof scope
+
+The original destination test reuses `MemJava`, `M3PureIntConvergenceRecipe`, its eligibility/atom/pattern/document owners and the existing project proof contracts. Eligibility remains private static scalar-int expression leaves with the established purity/operation/budget restrictions. The test compiler remains a package-private Java 21/proc:none/empty-path, `-Xlint:all`/`-Werror` oracle with a platform-parent loader. No broader source Mastery engine or product dependency is copied.
+
+The independent receiver retains four original arithmetic leaves and 113 deterministic input pairs. It exercises A, P, AP and PA, compiles every intermediate, distinguishes A-only from P-only, compares convergent AP/PA outputs, checks explicit ascending/descending enumeration, immutable source/member observations, opaque code-looking strings, null versus text `null`, Unicode observations, isolated loader state and curated compiler/numeric/string failures. Its four tests passed in the original destination proof epoch. Metadata-only repinning does not rerun or relabel that execution.
+
+The whole receiving module's unchanged 99% line/branch requirement has not passed locally. The preserved acquisition frontier contains 605 non-tree inputs, of which 32 were acquired and 573 were not; the exact offline JaCoCo 0.8.15 POM/JAR were absent. The focused metadata and receiver POMs are not whole-module `clean verify`. JDK image/runtime gates, source-qualified capability delivery and broader JNI/platform behavior remain unestablished.
+
+The inherited Descriptor reconciliation stays byte-identical in both the mapping and binding receipt. It retains the actual hidden-class descriptor correction, historical target/source objects and original scoped evidence. Its status remains `implemented-unverified`; no Descriptor Java change or new Descriptor qualification occurs here.
+
+## Additive recipe and verification boundaries
+
+`com.m3.rewrite.backport.JccSourceFinalHandoff` activates the retained `M3Jdk21HashPinnedTextSnapshotRecipe` with crate `jcc-source-final-handoff-20261005`. The matching `m3.sealed-install/1` plan uses four exact existing E2 before-images, four reviewed after-images and the same seven dependency guards. The original E2 resources and their one-update/three-absent installation remain unchanged. The successor never reuses those `ABSENT` assumptions.
+
+The ordinary whole-map validator checks operational schema and lineage but skips target/recipe/evidence file hashes for blocked records. Explicit source/body/proof reference checks therefore accompany it. Full old source and receiver object preservation is tested independently of its location-only previous-record comparison. A valid map is distinct from the separate incomplete migration result.
+
+The new focused checks cover actual named/serialized text-recipe activation, four updates with a fresh fixed point, all four missing/drifted/duplicate/scan-mutated inputs, canonical map and historical evidence preservation, and actual installer check/apply/rollback/replay/refusals including all fourteen mixed before/after subsets. Their executed receipts belong under `m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/`; recipe definition alone is not a passing execution receipt.
+
+```sh
+mvn -B -ntp -f m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml clean verify
+python -B m3/migration/test/test_jcc_source_final_handoff_packet.py
+```
+
+All four broad capability flags—source export admitted, source-qualified destination materialized, destination gates passed and complete capability read-back delivered—remain false. Exact committed artifact read-back is separately recorded. Source root accounting, finite source tests, the independent receiver, metadata replay, full-module coverage, CI, source export and JDK acceptance remain distinct evidence dimensions.

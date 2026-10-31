@@ -1,0 +1,32 @@
+{
+  "schema": "synexia.data.address.public-independent-review.v1",
+  "status": "PASS_SOURCE_BOUND_RETAINED_COMPILE_AND_FIVE_NEW_NATIVE_PHASES",
+  "source_ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
+  "retained_file_pins_verified": 25,
+  "source_pins_and_Git_blobs_verified": 11,
+  "static_tool_files_verified": 37,
+  "python_launcher_pin_verified": true,
+  "continuation_output_manifest_entries_verified": 27,
+  "current_continuation_files": 29,
+  "class_files_major65": 11,
+  "generated_headers": 2,
+  "exact_stdout_verified": true,
+  "PE_exports_and_import_names_verified": true,
+  "fresh_DLL_load_and_symbol_verified": true,
+  "six_native_job_receipts_verified": true,
+  "own_lock_release_verified": true,
+  "original_failure_retained": true,
+  "completed_compile_replayed": false,
+  "raw_record_hashes": {
+    "original_failed_result": "e1fee8bf2602cd5540bf234997163f9d4ec7127dcd88428751cbad021a60c878",
+    "continuation_plan": "d74f0634c7bcc257084bb3bfb2cdba46acc115e3115d6d57687799d61a783d26",
+    "continuation_wrapper": "5c11ab84e4cb6c1739d96be5301120545c58aad678cb1b076ebbcf4f6c085e49",
+    "continuation_result": "16bcfd7c8f98586d0ccb9303c124a2e44c6717160b62d7248d8979a6572a6780",
+    "continuation_output_manifest": "e2f2e9434708dcbacf4f3c061e1eabe56838de281622b3c091b980ba2fa9de75",
+    "local_independent_review": "eca145410b745943390b4811de29878784813ba7cb1fd71041859aca314eeb1b"
+  },
+  "public_projection": "Local absolute paths omitted. Product sources, test sources, class files, DLL and operational Python helpers are not copied into this packet.",
+  "separate_literal_corpus_executed": false,
+  "source_or_tests_authored": false,
+  "global_phase_advance": false
+}

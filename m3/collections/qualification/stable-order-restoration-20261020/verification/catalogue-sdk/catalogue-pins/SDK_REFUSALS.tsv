@@ -1,0 +1,4 @@
+# case	diagnostic-sha256	diagnostic
+duplicate-source	98e1308d67d626b7383b6934bf069ad6ecbde4eec783b07c7747eb66c80ec681	java.lang.IllegalStateException: duplicate target: m3/collections/algorithm-catalog/stable-order-restoration-20261020/SOURCE_PINS.json\n
+post-scan-drift	e88e93f02f9cc9464d0132e1fc47df85db1c2440c80990102bbda6ee9ae5de21	org.openrewrite.internal.RecipeRunException: java.lang.IllegalStateException: target changed after scan: m3/collections/algorithm-catalog/stable-order-restoration-20261020/SOURCE_PINS.json\njava.lang.IllegalStateException: target changed after scan: m3/collections/algorithm-catalog/stable-order-restoration-20261020/SOURCE_PINS.json\n
+source-drift	eb834485e8c52cc5781061792e05f3a66340afaa0db0ee9770eba4a0b76c5135	java.lang.IllegalStateException: source drift: m3/collections/algorithm-catalog/stable-order-restoration-20261020/SOURCE_PINS.json\n

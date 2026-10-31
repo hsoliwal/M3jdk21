@@ -1,0 +1,71 @@
+{
+  "schema": "m3-pr129-current-master-convergence-v2",
+  "recorded_date": "2026-10-05",
+  "repository": "hsoliwal/M3jdk21",
+  "branch": "codex/m3jdk-atom-spectrum-20261005",
+  "branch_head": "fc990dc3fe18616af47a265944c0ad45dfaf3b84",
+  "current_master": "778ee312c271e38c494b496dc3de31ecb6e4b937",
+  "authored_recipe_owners": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+      "branch_blob": "f1e91061396fffa34245c9f40c2fe161f86cef74",
+      "master_blob": "94ff41d9a298b671749a69bd8bc7b32005ebf877"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+      "branch_blob": "5951c24774f1e40f3f42f7b61e8f7f2e38031bc0",
+      "master_blob": "6b3b8a126cca230526c66adba36f53f5f9f49f5b"
+    }
+  ],
+  "inherited_exact_master_owners": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java",
+      "git_blob": "06333bb96157aef24de86425488dfcb3c20bf201",
+      "provenance": "merged PR #130"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java",
+      "git_blob": "ea5dc1c8a57b773c2b1353ac0b8e468a7f26d2e6",
+      "provenance": "merged PR #131"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "git_blob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+      "provenance": "merged PR #131"
+    }
+  ],
+  "executed_focused_evidence": {
+    "tested_head": "a96338d9b72ae4c71638948b2e5e8f851ac07726",
+    "tested_parent": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+    "junit_cases": 39,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "generated_expressions": 324,
+    "input_pairs": 225,
+    "recipe_orders": 6,
+    "intermediate_checks": 45,
+    "arithmetic_comparisons_per_oracle": 3280500,
+    "real_corpus_files": 100,
+    "real_corpus_bytes": 4004365,
+    "full_default_module_gate": "NOT_EXECUTED",
+    "jdk_configure_make_jtreg": "NOT_EXECUTED",
+    "jni_native_runtime": "NOT_EXECUTED"
+  },
+  "current_master_overlap_assessment": {
+    "documenter_change": "absorbed byte-for-byte from master; #130 affects methods with existing declaration Javadoc. Generated spectrum candidates contain no declaration Javadoc, while #130 separately proves undocumented generated-M3-Javadoc behavior and existing-user-Javadoc preservation.",
+    "scope_inference_change": "absorbed byte-for-byte from master; not an atom-spectrum production owner.",
+    "hash_pinned_helper_change": "absorbed byte-for-byte from master; path admission broadening only, source-sealed by PR #131."
+  },
+  "hosted_ci": {
+    "status": "CI_BLOCKED_BEFORE_JOB",
+    "observation": "Current PR workflows conclude failure before creating jobs; no Maven/JUnit/JaCoCo result exists for the combined current-master head."
+  },
+  "admission_claims": {
+    "focused_atom_pattern_behavior": "EXECUTED_ON_TESTED_HEAD",
+    "current_master_owner_identity": "CHECKED_BY_GIT_BLOB",
+    "combined_current_master_execution": "NOT_EXECUTED",
+    "semantic_equivalence_authority": false,
+    "full_jdk_verification": false
+  }
+}

@@ -1,0 +1,4 @@
+M3 optional collection module pack
+Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project
+
+The original com.m3.collections module retains the generic filtered wrapper owners and JNI peer. Two private readonly wrapper constructions are refined through the canonical Synexia recipe. The separately named jdk.m3.collections module carries the qualified com.m3.util primitive projections. Synexia remains the canonical portable source and recipe owner. Original Apache-2.0 per-file copyrights, licences and modification notices remain intact. See PROJECTION_SOURCE_IDENTITY.json. No OpenJDK licence grant changes and no third-party challenge implementations are included.

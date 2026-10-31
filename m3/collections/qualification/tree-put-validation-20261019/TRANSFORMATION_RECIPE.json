@@ -1,0 +1,24 @@
+{
+  "schema": "m3-exact-file-behavior-atom-recipe/v1",
+  "sourceRepository": "hsoliwal/M3jdk21",
+  "sourceCommit": "f19934e045f7e0f896704940a786106153ad4dc2",
+  "file": "m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
+  "preimageSha256": "21dc9a2eed607c55b1ff4d49ffef5e19b3bac43b591b62e13191791cabbc3b41",
+  "postimageSha256": "9c767668c925581799dc97f20e63fce0be19e8fec4c4ec59b1ce257a6c969f4e",
+  "preimageGitBlob": "5115084463d3cb4e229f33e905899cf15316b268",
+  "postimageGitBlob": "dd0cf2b8125348cd7134eda565ca40aaa990a864",
+  "originalOracle": {
+    "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\ORIGINAL_ORACLE_SEAL.json",
+    "bytes": 2632,
+    "sha256": "9670389b1e814d7f71b02608c09560e5372ced79f490cca918bb64e9e83020c1"
+  },
+  "atom": "ordinary eager unbounded forward nonempty root put validation",
+  "before": "    @Override public V put(K key, V value) {\n        tree.writable(); checked(key);\n",
+  "after": "    @Override public V put(K key, V value) {\n        tree.writable();\n        // Ordinary nonempty roots validate against visited keys during descent.\n        // Keep admission validation for the first key and all other value/view modes.\n        if (tree.size == 0 || hasLow || hasHigh || descending || tree.lazy != null || tree.keyOnly) {\n            checked(key);\n        }\n",
+  "occurrences": 1,
+  "inverseVerified": true,
+  "publicInterfacesUnchanged": true,
+  "allOtherSourceBytesUnchanged": true,
+  "noOpenJdkSourceImported": true,
+  "runtimeQualification": "PENDING"
+}

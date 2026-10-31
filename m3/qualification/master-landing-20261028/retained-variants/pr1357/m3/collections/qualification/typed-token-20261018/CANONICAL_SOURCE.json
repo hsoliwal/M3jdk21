@@ -1,0 +1,24 @@
+{
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "a17010170d89160ba79b2e785b36933e46648340",
+  "canonical_pr": 12381,
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_evidence": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018",
+  "target_base": "872e70d20f3f3223a72eb5f67b001528b7fb2cb6",
+  "recipe_mirror": "m3/collections/qualification/convergence-20261018/recipe",
+  "datasets": [
+    "typed-token-20261018",
+    "typed-token-oracles-20261018",
+    "typed-token-map-20261018",
+    "typed-token-find-20261018"
+  ],
+  "source_targets": [
+    "src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3TokenRegexPlan.java",
+    "test/jdk/jdk/internal/mindex/M3TokenRegexPlanContract.java",
+    "test/jdk/jdk/internal/mindex/M3TokenCompilerLexicalContract.java",
+    "m3/docs/name-mapping.json"
+  ],
+  "native_owner": "unchanged M3RegexDpPlan.c; exact source and JNI ABI reused",
+  "scope": "finite typed-token continuation; no global phase promotion or full product acceptance"
+}

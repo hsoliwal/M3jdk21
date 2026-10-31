@@ -1,0 +1,457 @@
+[
+  {
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe$1.class",
+    "bytes": 3716,
+    "sha256": "e2e60e69d916190375d08ecea60c82257c5fc6ebf3369cf362680897e9f41fea"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe$2.class",
+    "bytes": 4907,
+    "sha256": "ca2c6e6eca552c991713e0deb8eac4387a77ea0514af442e6960a2ed24fabb90"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe$Inventory.class",
+    "bytes": 1297,
+    "sha256": "cc42b9f1257848d3a45e935027c9c730710e6a1babf26d458a46116c3a748977"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe$Target.class",
+    "bytes": 2100,
+    "sha256": "91b28129ee0c405a90aba24ae295f28f3af115a861467f4a527f58eb966d4d4b"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.class",
+    "bytes": 15074,
+    "sha256": "1d63d99cc76a74dd95b970dd165ad6b909a4c7b76f3a1eabc2626a10a4216427"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$1.class",
+    "bytes": 3690,
+    "sha256": "74b44a8d4dd9c5573194a956f6268cbc3713819d89564b7f5b828eaebeafe935"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$2.class",
+    "bytes": 4810,
+    "sha256": "e8085d301ff5b40d71a204f1c0f6a4912be2b57e608cc5438b7a2f4f8585f5fe"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Inventory.class",
+    "bytes": 1230,
+    "sha256": "f54fea5844ba1b19ee22e5ccfae495d4a9b2b03e9edfb5bc09ac620321ef628f"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Target.class",
+    "bytes": 2128,
+    "sha256": "7eb62aee1d3e3f89575b4973ffba8e1defae3270853de61c96d1efbd21fe128e"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.class",
+    "bytes": 12899,
+    "sha256": "732bde7f1026cd3ee719379d8f47cb307a2f781e3450751fbc37003fb4ac4266"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/00-m3-lane28.yml.txt",
+    "bytes": 5105,
+    "sha256": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/00-m3-lane28.yml.txt.before",
+    "bytes": 4794,
+    "sha256": "ee99386c35f3f663fe9011cb2cc56c98e20cdc9bc6e44f3b1525747fce2e0925"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/01-m3-tq.yml.txt",
+    "bytes": 5378,
+    "sha256": "783e59db8ae27787a5cc40310f534e90ae24d60ebdc71c5feb3f30f35a85972b"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/01-m3-tq.yml.txt.before",
+    "bytes": 4454,
+    "sha256": "4b6dd04c600a6350c5be8c4ed54ac88ae396604eed906eea0d925d2f3e8ded12"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/02-m3-porting.md.txt",
+    "bytes": 6469,
+    "sha256": "ac399d376bf624d81a0fd3ed39005f0a71807afe3164fc611c346dcf0463e47a"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt",
+    "bytes": 280877,
+    "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt.before",
+    "bytes": 279411,
+    "sha256": "22ce39ac68e6f5efab18e9bbf6d3da45af585067d88848f1eb7ce8a76987df87"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/04-plan.json.txt",
+    "bytes": 8501,
+    "sha256": "592477414957af5b2780b5c9e4ce09391e6f3dc60d11e3ceff5cd0683338796b"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/04-plan.json.txt.before",
+    "bytes": 8501,
+    "sha256": "08ceafed668f25bef92ee06f3adfa3333c4a972292cc8316cf12d14620048de9"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/05-manifest.tsv.txt",
+    "bytes": 1603,
+    "sha256": "a90b5a4571363d6a34bacf94daa0671cd447196b2938fa62545aed5e39a1458b"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/05-manifest.tsv.txt.before",
+    "bytes": 1603,
+    "sha256": "eaa0afe5ce1f3b53ca4ad651d204d3242296363a139f6a61ec9e9277b81b650f"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/06-name-mapping.json.txt.txt",
+    "bytes": 280877,
+    "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/06-name-mapping.json.txt.txt.before",
+    "bytes": 273950,
+    "sha256": "2d53e630c81c05b2c48dd45d31b0c3cdc7bf1ecbb2ea0bd9d7b52666d073075b"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/07-name-mapping.json.txt.before.txt",
+    "bytes": 242226,
+    "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/07-name-mapping.json.txt.before.txt.before",
+    "bytes": 235299,
+    "sha256": "9fce21acb83574c795ca674b263a324315be01e8c87ba149ae6ae3ac79d39c45"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/08-workflow.yml.txt.txt",
+    "bytes": 5105,
+    "sha256": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/08-workflow.yml.txt.txt.before",
+    "bytes": 4794,
+    "sha256": "ee99386c35f3f663fe9011cb2cc56c98e20cdc9bc6e44f3b1525747fce2e0925"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/09-inputs.tsv.txt",
+    "bytes": 1937,
+    "sha256": "6f602866bae4dc215675311740a6f3d9b7795c866674e3f1f813c37ad07c075a"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/09-inputs.tsv.txt.before",
+    "bytes": 1599,
+    "sha256": "3a2c71f0a27fdc9ffd42f3caa14bcb8be6898e036ca34b371d7e3e5ccd834e05"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/10-pins.json.txt",
+    "bytes": 3546,
+    "sha256": "a7c4ba68ec1c51febf7a75d3539b857713b4efb2101f6cdea90ddb724e0f841f"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/10-pins.json.txt.before",
+    "bytes": 2964,
+    "sha256": "6909507522d9400d7047d25ef825cb5d87ed87244673b2446de5e79c968c2941"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
+    "bytes": 5005,
+    "sha256": "806d6393832ec0d6b355fba3a01bf847441c36aca2642347d08bb94d4921d8e8"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt.before",
+    "bytes": 5017,
+    "sha256": "9f9db680db1dc3c449b98ee8c928b7865da4ff1381c7b26fc1d165fe50c41118"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/12-manifest.tsv.txt",
+    "bytes": 948,
+    "sha256": "456ce63b32cbeecefb417f082b4faf734d1652e7dc1a6c60e46bc86bde09d608"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/12-manifest.tsv.txt.before",
+    "bytes": 948,
+    "sha256": "71e698a761e813d51fb688e254353cb3b405d823e984ab34c082b66fe7da1dc5"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/13-name-mapping.json.txt.txt",
+    "bytes": 242226,
+    "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/13-name-mapping.json.txt.txt.before",
+    "bytes": 230618,
+    "sha256": "3c9e3dea8ca5a6945a060d41772868b4850b6dc387030302fed7490aef631822"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/14-name-mapping.json.txt.before.txt",
+    "bytes": 234123,
+    "sha256": "bc6f8d7d7562d067d916a4987749019c5085e88665592ac533b49ef9a4856132"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/14-name-mapping.json.txt.before.txt.before",
+    "bytes": 220539,
+    "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/15-verify-image.sh.txt.txt",
+    "bytes": 3102,
+    "sha256": "fddf22592f0461fa91bd25753d8d41aa444ac1406fa74a9d04351f2b8585803d"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/15-verify-image.sh.txt.txt.before",
+    "bytes": 2924,
+    "sha256": "280267785554ab46a8fa67d1801b4abd6fb3639a993c508e46e511d16affd407"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/16-workflow.yml.txt.txt",
+    "bytes": 5378,
+    "sha256": "783e59db8ae27787a5cc40310f534e90ae24d60ebdc71c5feb3f30f35a85972b"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/16-workflow.yml.txt.txt.before",
+    "bytes": 4454,
+    "sha256": "4b6dd04c600a6350c5be8c4ed54ac88ae396604eed906eea0d925d2f3e8ded12"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/17-M3TQ.java.txt.txt",
+    "bytes": 16998,
+    "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/17-M3TQ.java.txt.txt.before",
+    "bytes": 16197,
+    "sha256": "9c45405969aeac089ad8786443d59450f2fd8e6f33ca1a6e35e95a7a45f4f0b1"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/18-M3TQTest.java.txt.txt",
+    "bytes": 17321,
+    "sha256": "f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/18-M3TQTest.java.txt.txt.before",
+    "bytes": 14394,
+    "sha256": "68316b377bc4e538c7cb343060696cb8fccfaee433c220bdb73d3486d16e9f20"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/19-manifest.tsv.txt",
+    "bytes": 303,
+    "sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/19-manifest.tsv.txt.before",
+    "bytes": 303,
+    "sha256": "30b9aee3598aa556a9de57e612a1b3e3b045586b6d7382d53dc92798177338fb"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/20-TQTest.java.txt",
+    "bytes": 22222,
+    "sha256": "7ce7e90af7f0011c133ef71f2b75b01f17b02a102d3b2b70bd01856092467c8c"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/20-TQTest.java.txt.before",
+    "bytes": 15206,
+    "sha256": "6d7ddef6dad7ce2d4127417448891251cb83b8315f5325b525a7c9d727260dd4"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/21-verify-image.sh.txt",
+    "bytes": 3102,
+    "sha256": "fddf22592f0461fa91bd25753d8d41aa444ac1406fa74a9d04351f2b8585803d"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/21-verify-image.sh.txt.before",
+    "bytes": 2924,
+    "sha256": "280267785554ab46a8fa67d1801b4abd6fb3639a993c508e46e511d16affd407"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/22-verify-plan.py.txt",
+    "bytes": 5089,
+    "sha256": "ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/22-verify-plan.py.txt.before",
+    "bytes": 3630,
+    "sha256": "9073d2710bd9497f6e76871cdc8f9e291608ed3024af6bf76ed36306fd191d9a"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/23-M3TQTest.java.txt",
+    "bytes": 17321,
+    "sha256": "f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/23-M3TQTest.java.txt.before",
+    "bytes": 14394,
+    "sha256": "68316b377bc4e538c7cb343060696cb8fccfaee433c220bdb73d3486d16e9f20"
+  },
+  {
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
+    "bytes": 5292,
+    "sha256": "b3b984e1bcb74194b524850064cbce01805eff41595e50aae3947f78e5373772"
+  },
+  {
+    "path": "generated/.github/workflows/m3-lane28.yml",
+    "bytes": 5105,
+    "sha256": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb"
+  },
+  {
+    "path": "generated/.github/workflows/m3-tq.yml",
+    "bytes": 5378,
+    "sha256": "783e59db8ae27787a5cc40310f534e90ae24d60ebdc71c5feb3f30f35a85972b"
+  },
+  {
+    "path": "generated/m3/docs/m3-porting.md",
+    "bytes": 6469,
+    "sha256": "ac399d376bf624d81a0fd3ed39005f0a71807afe3164fc611c346dcf0463e47a"
+  },
+  {
+    "path": "generated/m3/docs/name-mapping.json",
+    "bytes": 280877,
+    "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
+  },
+  {
+    "path": "generated/m3/tooling/lane28/plan.json",
+    "bytes": 8501,
+    "sha256": "592477414957af5b2780b5c9e4ce09391e6f3dc60d11e3ceff5cd0683338796b"
+  },
+  {
+    "path": "generated/m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/manifest.tsv",
+    "bytes": 1603,
+    "sha256": "a90b5a4571363d6a34bacf94daa0671cd447196b2938fa62545aed5e39a1458b"
+  },
+  {
+    "path": "generated/m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt",
+    "bytes": 280877,
+    "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
+  },
+  {
+    "path": "generated/m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before",
+    "bytes": 242226,
+    "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
+  },
+  {
+    "path": "generated/m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/workflow.yml.txt",
+    "bytes": 5105,
+    "sha256": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb"
+  },
+  {
+    "path": "generated/m3/tooling/tq/inputs.tsv",
+    "bytes": 1937,
+    "sha256": "6f602866bae4dc215675311740a6f3d9b7795c866674e3f1f813c37ad07c075a"
+  },
+  {
+    "path": "generated/m3/tooling/tq/pins.json",
+    "bytes": 3546,
+    "sha256": "a7c4ba68ec1c51febf7a75d3539b857713b4efb2101f6cdea90ddb724e0f841f"
+  },
+  {
+    "path": "generated/m3/tooling/tq/plan.json",
+    "bytes": 5005,
+    "sha256": "806d6393832ec0d6b355fba3a01bf847441c36aca2642347d08bb94d4921d8e8"
+  },
+  {
+    "path": "generated/m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQ.java.txt",
+    "bytes": 16998,
+    "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155"
+  },
+  {
+    "path": "generated/m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQTest.java.txt",
+    "bytes": 17321,
+    "sha256": "f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f"
+  },
+  {
+    "path": "generated/m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+    "bytes": 303,
+    "sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338"
+  },
+  {
+    "path": "generated/m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/manifest.tsv",
+    "bytes": 948,
+    "sha256": "456ce63b32cbeecefb417f082b4faf734d1652e7dc1a6c60e46bc86bde09d608"
+  },
+  {
+    "path": "generated/m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt",
+    "bytes": 242226,
+    "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
+  },
+  {
+    "path": "generated/m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before",
+    "bytes": 234123,
+    "sha256": "bc6f8d7d7562d067d916a4987749019c5085e88665592ac533b49ef9a4856132"
+  },
+  {
+    "path": "generated/m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/verify-image.sh.txt",
+    "bytes": 3102,
+    "sha256": "fddf22592f0461fa91bd25753d8d41aa444ac1406fa74a9d04351f2b8585803d"
+  },
+  {
+    "path": "generated/m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/workflow.yml.txt",
+    "bytes": 5378,
+    "sha256": "783e59db8ae27787a5cc40310f534e90ae24d60ebdc71c5feb3f30f35a85972b"
+  },
+  {
+    "path": "generated/m3/tooling/tq/src/test/java/com/m3/tq/TQTest.java",
+    "bytes": 22222,
+    "sha256": "7ce7e90af7f0011c133ef71f2b75b01f17b02a102d3b2b70bd01856092467c8c"
+  },
+  {
+    "path": "generated/m3/tooling/tq/verify-image.sh",
+    "bytes": 3102,
+    "sha256": "fddf22592f0461fa91bd25753d8d41aa444ac1406fa74a9d04351f2b8585803d"
+  },
+  {
+    "path": "generated/m3/tooling/tq/verify-plan.py",
+    "bytes": 5089,
+    "sha256": "ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978"
+  },
+  {
+    "path": "generated/test/jdk/java/lang/String/M3TQTest.java",
+    "bytes": 17321,
+    "sha256": "f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f"
+  },
+  {
+    "path": "maven-archiver/pom.properties",
+    "bytes": 55,
+    "sha256": "e4546d2c5b7860cf3f2920141cb27a37a81794f18f2bb9b3a22716a51d0b12bc"
+  },
+  {
+    "path": "maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst",
+    "bytes": 682,
+    "sha256": "5bd323a62004e60d7b53c5df6c5b1e8e84eaf0c8d446c8cd3b203a8ab6ecaf50"
+  },
+  {
+    "path": "maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst",
+    "bytes": 364,
+    "sha256": "9b586641dc5b0e1c25870ddebdce42e0b0f633f8df4454f7478b83f40dcd5bc6"
+  },
+  {
+    "path": "maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst",
+    "bytes": 27,
+    "sha256": "c59f57a706406fb34f90a1b2beff90ed33a80b7dede00aba0ca63a8b1d85b073"
+  },
+  {
+    "path": "maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst",
+    "bytes": 107,
+    "sha256": "4b87e48dda72248eafbb2f8c3a4dc1a47863dab77312c3ed083e68dedd4a91b9"
+  },
+  {
+    "path": "surefire-reports/TEST-com.m3.tq.TQSyncTest.xml",
+    "bytes": 15818,
+    "sha256": "2bb2af36dfca01ca500f4c51f04335ab7805117b9a570641113ae9c1ced3e9fe"
+  },
+  {
+    "path": "surefire-reports/com.m3.tq.TQSyncTest.txt",
+    "bytes": 290,
+    "sha256": "c94fabc4a71d304cd398f21d27cf5a83d804a20f0ff39126d787bb307de1b2ba"
+  },
+  {
+    "path": "test-classes/com/m3/tq/TQSyncTest.class",
+    "bytes": 8561,
+    "sha256": "2a9f334b83a6060a06b8786fd6e1e436f3fbaa859c559a6becd0a18414921186"
+  },
+  {
+    "path": "tq-sync-1.0-SNAPSHOT.jar",
+    "bytes": 370453,
+    "sha256": "554cd6eaf0859834b1cac5154beca4f9d9caff996576d4598cb261ef7d7e3ec1"
+  }
+]

@@ -1,0 +1,13 @@
+fork	marked_sites_20261020	classified_ui_thread_abuse_20261020	thread_blocking_class_20261020	delta_defects_reviewed_20261020	family	status
+eclipse.platform.ui	876	34	69	9	workbench/JFace/markers/search/selection	DATED_GREPS_NOT_EXECUTED_FIXES
+initiative31-eclipse.pde	745	28	20	59	PDE models/form sections/plugin tooling	DATED_GREPS_NOT_EXECUTED_FIXES
+eclipse.platform	718	27	54	20	resources/jobs/workspace/runtime	DATED_GREPS_NOT_EXECUTED_FIXES
+eclipse.jdt.ui	459	18	34	16	refactoring/search/outlines/java model UI	DATED_GREPS_NOT_EXECUTED_FIXES
+egit	261	12	24	5	git history/staging/diff viewers	DATED_GREPS_NOT_EXECUTED_FIXES
+nebula	196	1	6	3	grid/custom widgets and viewport	DATED_GREPS_NOT_EXECUTED_FIXES
+org.eclipse.emf	125	39	2	7	observable EList/Notification/containment	DATED_GREPS_NOT_EXECUTED_FIXES
+eclipse.jdt.debug	116	3	6	3	stack frames/variables/breakpoints	DATED_GREPS_NOT_EXECUTED_FIXES
+p2	103	1	13	4	resolution/profiles/artifact updates	DATED_GREPS_NOT_EXECUTED_FIXES
+gef-classic	77	5	1	5	draw2d/editpart spatial graph	DATED_GREPS_NOT_EXECUTED_FIXES
+eclipse.jdt.core	29	2	0	0	compiler and Java model	DATED_GREPS_NOT_EXECUTED_FIXES
+eclipse.platform.swt	28	4	5	0	native widgets and UI resource lifecycle	DATED_GREPS_NOT_EXECUTED_FIXES

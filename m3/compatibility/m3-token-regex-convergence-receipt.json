@@ -1,0 +1,23 @@
+{
+  "schema": "m3-token-regex-convergence-receipt-v1",
+  "date": "2026-10-20",
+  "target_repo": "hsoliwal/M3jdk21",
+  "target_base": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "recipe": "com.synexia.m3.TokenRegexConvergence",
+  "crate": "m3-token-regex-convergence",
+  "lineage": {
+    "scaffold_pr": 1397,
+    "cursor_engine_pr": 1402,
+    "t_rex": "c84ddf5a"
+  },
+  "invariants": [
+    "M3String remains canonical owner+coordinate",
+    "M3StringTuple remains balanced canonical composition owner",
+    "lexical token boundaries belong only to M3TokenIndex",
+    "no token objects retained",
+    "no challenge-platform source copied",
+    "java.lang.String public API unchanged"
+  ],
+  "targets": 6,
+  "verification": "PENDING_EXECUTION"
+}

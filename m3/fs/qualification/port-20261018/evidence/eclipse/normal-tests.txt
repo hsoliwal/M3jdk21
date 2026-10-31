@@ -1,0 +1,37 @@
+FULL_BACKEND_STAGING_ACCEPTANCE NORMAL
+Derived from executed Surefire/Failsafe XML and Maven log; JVM system properties omitted.
+Provider: tests=14 failures=0 errors=0 skipped=0
+Real Equinox: tests=1 failures=0 errors=0 skipped=0
+Workspace contract checks inside Equinox: 15
+
+Provider test cases:
+PASS independentOwnersAppendTransactionallyAndRejectReplacedStreamPaths
+PASS directoriesSupportShallowAndRecursiveCreationAndRejectWrongTypes
+PASS pagedUnicodeEnumerationAndIterativeDeletionCoverMultipleNativePages
+PASS symbolicLinksFollowTargetsWhileDanglingEntriesRemainEnumerableAndAbsent
+PASS readOnlyImagesAdvertiseAndEnforceTheImagePolicy
+PASS removedInodesAndReusedMountNamesCannotRetargetOldHandles
+PASS namespaceValidationRejectsEscapesInvalidUtf16AndOverlongPaths
+PASS metadataFlagsPersistModeAndTimeAndEnforceReadOnly
+PASS cancellationMissingPathsAndUnsupportedFlagsKeepTheirEfsContracts
+PASS physicalImageAliasesAreProtectedButRetainedSnapshotsCanRestoreContent
+PASS streamsHonorSubrangesOffsetsAppendEofAndImmediateTruncate
+PASS aliasProtectionRefusesHardLinksSymlinkAliasesAndDirectoryCycles
+PASS copyAndAtomicMovePreserveDestinationsUnlessOverwriteIsRequested
+PASS uriHandlesRepresentLocationsWithoutMaterializingMetadata
+
+Equinox test case:
+PASS com.m3.eclipse.filesystem.launcher.M3ResourcesIT.eclipseResourcesConsumesTheRegisteredM3Filesystem
+
+Executed Maven output:
+M3FS_WORKSPACE_MODE=backend-osgi-bundle
+M3FS_WORKSPACE_JAVA_HOME=/tmp/m3-toolchain/jdk-21.0.12.1+1
+M3FS_WORKSPACE_CHECKS=15 extension-discovery,efs-uri-round-trip,workspace-linked-folders,workspace-create-read,workspace-append-replace,m3fs-to-m3fs-copy,m3fs-to-local-copy,local-to-m3fs-copy,workspace-move,workspace-refresh-external-change,workspace-delete-refresh,workspace-native-timestamp,snapshot-view-isolation,workspace-project-reopen,durable-image-reopen
+[INFO] BUILD SUCCESS
+[INFO] Total time:  24.170 s
+[INFO] Finished at: 2026-10-19T09:38:34+08:00
+
+Source report SHA-256:
+eaee4bcc127fd19bb94825f7eadd2643761eee55a7c644667c4d52abd5a74920  surefire-reports/TEST-com.m3.eclipse.filesystem.M3EclipseFileSystemTest.xml
+54029edff20c1b019fc2757a2a2d0b75b1fba16bd52a2c9ad0eeb868af9bbe55  failsafe-reports/TEST-com.m3.eclipse.filesystem.launcher.M3ResourcesIT.xml
+be8fec65e54d616ee81ea159bb32ac7e0144335f20950b71e37def12fd10baa7  maven-verify.log

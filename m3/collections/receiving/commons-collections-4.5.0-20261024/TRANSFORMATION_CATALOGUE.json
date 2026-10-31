@@ -1,0 +1,13 @@
+{
+  "schema": "m3-commons-receiving-transformation-catalogue-v1",
+  "problemCategory": "node-based or boxed storage in received collection owners",
+  "rows": [
+    {"owner": "TreeList", "selected": "AVL nodes in parallel slot lanes (Object[] values; int[] left, right, relativePosition; byte[] heights, state); root and links are slot indexes", "invariant": "4.5.0 List contract, fail-fast iteration and index checks (checkInterval kept before insertion)"},
+    {"owner": "SparseBloomFilter", "selected": "enabled-bit index in int[] lanes (IndexStore) instead of TreeSet<Integer>", "invariant": "bit-set semantics and ascending index order"},
+    {"owner": "IteratorChain", "selected": "ArrayDeque pending queue instead of LinkedList", "invariant": "4.5.0 addIterator (no post-4.5.0 flattening)"},
+    {"owner": "PermutationIterator", "selected": "dense Object[] payloads addressed by the one-based permutation keys instead of HashMap<Integer, E>", "invariant": "permutation order and payload identity"},
+    {"owner": "CircularFifoQueue", "selected": "clear() and iterator removal touch only the occupied span of the array ring", "invariant": "4.5.0 readObject (no post-4.5.0 validation)"}
+  ],
+  "donor": "hsoliwal/commons-collections fork master 0268162dfc5e",
+  "next": "E7 (open contract and bulk-capture branches)"
+}

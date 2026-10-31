@@ -1,0 +1,778 @@
+#!/usr/bin/env python3
+# Copyright (c) 2026 Hitesh Soliwal.
+# SPDX-License-Identifier: Apache-2.0
+"""Generate candidate hash-pinned OpenRewrite crates from exact JDK21/donor file pairs.
+
+The generator never admits compatibility. By default it preserves the historical Java-only
+behavior and turns selected exact Java deltas into deterministic resources consumed by
+M3Jdk21HashPinnedSnapshotRecipe. Native/JNI C/C++ deltas can be selected explicitly with
+--include-native and are emitted through M3Jdk21HashPinnedTextSnapshotRecipe as source-sealed FILE
+atoms; PlainText replay is byte custody, not a C/C++ semantic parser. The historical --include-text
+mode remains a broader opt-in for strict UTF-8 non-Java deltas. Generated crates remain
+CANDIDATE_UNVERIFIED until recipe JUnit, native/JDK build, jtreg/runtime and compatibility gates pass.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import importlib.util
+import json
+import subprocess
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Iterable, Sequence
+
+CRATE_LIMIT = 256
+RESOURCE_ROOT = Path(
+    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned"
+)
+TEXT_RESOURCE_ROOT = Path(
+    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text"
+)
+YAML_ROOT = Path("src/main/resources/META-INF/rewrite")
+
+
+def _load_delta_module():
+    path = Path(__file__).with_name("file_delta_inventory.py")
+    spec = importlib.util.spec_from_file_location("m3_file_delta_inventory_for_crates", path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"cannot load {path}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+DELTA = _load_delta_module()
+
+
+@dataclass(frozen=True)
+class Candidate:
+    path: str
+    status: str
+    before_sha256: str
+    after_sha256: str
+    after_text: str
+    kind: str = "JAVA"
+
+
+def _git_bytes(repo: Path, ref: str, path: str) -> bytes:
+    proc = subprocess.run(
+        ("git", "-C", str(repo), "show", f"{ref}:{path}"),
+        check=False,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if proc.returncode:
+        raise RuntimeError(
+            f"git show {ref}:{path} failed: "
+            + proc.stderr.decode("utf-8", "replace").strip()
+        )
+    return proc.stdout
+
+
+def _utf8(data: bytes, label: str) -> str:
+    try:
+        text = data.decode("utf-8", "strict")
+    except UnicodeDecodeError as failure:
+        raise ValueError(f"{label}: source is not UTF-8") from failure
+    if text.encode("utf-8") != data:
+        raise ValueError(f"{label}: UTF-8 round-trip drift")
+    return text
+
+
+def _sha256_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def _selected_paths(path_file: Path | None) -> set[str] | None:
+    if path_file is None:
+        return None
+    paths = {
+        line.strip()
+        for line in path_file.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    }
+    if not paths:
+        raise ValueError("paths file selected zero paths")
+    return paths
+
+
+GA_SCHEMA = "m3.ga-path-reconciliation/1"
+GA_RENAME = "RENAMED_PREIMAGE_ALREADY_SELECTED"
+GA_TRANSIENT = "TRANSIENT_DELETED_BEFORE_GA"
+GA_RECEIPT_COLUMNS = (
+    "path", "outcome", "reason", "related_path", "baseline_commit", "donor_commit",
+    "implementation_commit", "transition_commit", "manifest_sha256", "catalogue_sha256",
+)
+
+
+def _ga_object(pairs: list[tuple[str, object]]) -> dict:
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate reconciliation key: {key}")
+        result[key] = value
+    return result
+
+
+def _ga_keys(value: object, expected: set[str], label: str) -> None:
+    if not isinstance(value, dict) or set(value) != expected:
+        raise ValueError(f"invalid {label} fields")
+
+
+def _ga_hash(value: object, length: int, label: str) -> str:
+    if not isinstance(value, str) or len(value) != length or any(
+        char not in "0123456789abcdef" for char in value
+    ):
+        raise ValueError(f"invalid {label}")
+    return value
+
+
+def _ga_path(value: object) -> str:
+    if not isinstance(value, str) or not value or value.startswith("/") or "\\" in value:
+        raise ValueError("invalid reconciliation path")
+    if any(part in {"", ".", ".."} for part in value.split("/")) or any(
+        ord(char) < 32 or ord(char) == 127 for char in value
+    ):
+        raise ValueError("invalid reconciliation path")
+    return value
+
+
+def _ga_candidates(
+    repo: Path,
+    release: int,
+    paths_file: Path,
+    reconciliation_file: Path,
+    include_text: bool = False,
+    include_native: bool = False,
+) -> tuple[list[Candidate], list[tuple[str, str]], list[dict[str, str]]]:
+    """Account for reviewed historical paths; never authorize a target deletion."""
+    catalogue_bytes = paths_file.read_bytes()
+    catalogue_hash = hashlib.sha256(catalogue_bytes).hexdigest()
+    catalogue_lines = _utf8(catalogue_bytes, "GA catalogue").splitlines()
+    path_list = [line.strip() for line in catalogue_lines if line.strip() and not line.lstrip().startswith("#")]
+    selected = {_ga_path(path) for path in path_list}
+    if not selected or len(path_list) != len(selected):
+        raise ValueError("GA catalogue must contain unique explicit paths")
+    raw = reconciliation_file.read_bytes()
+    manifest_hash = hashlib.sha256(raw).hexdigest()
+    plan = json.loads(_utf8(raw, "GA reconciliation"), object_pairs_hook=_ga_object)
+    _ga_keys(plan, {
+        "schema", "release", "catalogue_sha256", "declared_paths", "baseline_ref",
+        "baseline_commit", "donor_ref", "donor_commit", "implementation_commit",
+        "implementation_parent", "entries",
+    }, "reconciliation")
+    if plan["schema"] != GA_SCHEMA or type(plan["release"]) is not int or plan["release"] != release:
+        raise ValueError("GA reconciliation schema/release mismatch")
+    if type(plan["declared_paths"]) is not int or plan["declared_paths"] != len(selected):
+        raise ValueError("GA reconciliation catalogue count mismatch")
+    if _ga_hash(plan["catalogue_sha256"], 64, "catalogue hash") != catalogue_hash:
+        raise ValueError("GA reconciliation catalogue bytes drift")
+    donor_ref = dict(DELTA.DONORS).get(release)
+    if plan["baseline_ref"] != DELTA.BASELINE[1] or plan["donor_ref"] != donor_ref or donor_ref is None:
+        raise ValueError("GA reconciliation endpoint ref mismatch")
+    for field in ("baseline_commit", "donor_commit", "implementation_commit", "implementation_parent"):
+        _ga_hash(plan[field], 40, field)
+
+    # Caller-owned, bounded by this one finite manifest; no retained global facts.
+    git_cache: dict[tuple[str, ...], bytes] = {}
+
+    def git(*args: str) -> bytes:
+        if args not in git_cache:
+            proc = subprocess.run(
+                ("git", "--literal-pathspecs", "-C", str(repo), *args),
+                check=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            )
+            if proc.returncode:
+                raise ValueError("GA Git evidence refused: " + proc.stderr.decode("utf-8", "replace").strip())
+            git_cache[args] = proc.stdout
+        return git_cache[args]
+
+    def entry(commit: str, path: str) -> tuple[str, str] | None:
+        records = [record for record in git("ls-tree", "-z", commit, "--", path).split(b"\0") if record]
+        if not records:
+            return None
+        if len(records) != 1:
+            raise ValueError("ambiguous GA tree entry")
+        metadata, actual_path = records[0].split(b"\t", 1)
+        mode, kind, oid = metadata.decode("ascii").split()
+        if actual_path.decode("utf-8") != path or kind != "blob":
+            raise ValueError("GA evidence must name an exact file blob")
+        return mode, oid
+
+    def parent(commit: str, expected: str) -> None:
+        if git("rev-list", "--parents", "-n", "1", commit).decode("ascii").split() != [commit, expected]:
+            raise ValueError("GA transition requires the pinned sole parent")
+
+    def ancestor(before: str, after: str) -> None:
+        git("merge-base", "--is-ancestor", before, after)
+
+    for ref_field, commit_field in (("baseline_ref", "baseline_commit"), ("donor_ref", "donor_commit")):
+        if git("rev-parse", "--verify", plan[ref_field] + "^{commit}").decode("ascii").strip() != plan[commit_field]:
+            raise ValueError("GA endpoint commit drift")
+    implementation = plan["implementation_commit"]
+    parent(implementation, plan["implementation_parent"])
+    ancestor(implementation, plan["donor_commit"])
+    if not isinstance(plan["entries"], list) or not plan["entries"] or len(plan["entries"]) > len(selected):
+        raise ValueError("GA reconciliation must declare a bounded nonempty entry set")
+
+    # Reuse the existing endpoint comparator once. SAME remains visible for accounting.
+    rows = DELTA.compare(repo, (release,))
+    by_path = {row.path: row for row in rows}
+    admitted: dict[str, dict] = {}
+    for item in plan["entries"]:
+        if not isinstance(item, dict):
+            raise ValueError("invalid reconciliation entry")
+        common = {"path", "disposition", "transition_commit", "transition_parent", "before_blob", "before_mode"}
+        kind = item.get("disposition")
+        if kind == GA_RENAME:
+            extra = {"replacement_path", "transition_after_blob", "ga_blob", "after_mode"}
+        elif kind == GA_TRANSIENT:
+            extra = {"implementation_blob"}
+        else:
+            raise ValueError("unknown GA reconciliation disposition")
+        _ga_keys(item, common | extra, "reconciliation entry")
+        path = _ga_path(item["path"])
+        if path in admitted or path not in selected or path in by_path:
+            raise ValueError("reconciliation entry must uniquely cover a selected absent-both path")
+        for field in ("transition_commit", "transition_parent", "before_blob"):
+            _ga_hash(item[field], 40, field)
+        if item["before_mode"] != "100644":
+            raise ValueError("GA transition preimage mode must be100644")
+        transition = item["transition_commit"]
+        previous = item["transition_parent"]
+        parent(transition, previous)
+        ancestor(implementation, transition)
+        ancestor(transition, plan["donor_commit"])
+        if entry(previous, path) != (item["before_mode"], item["before_blob"]) or entry(transition, path) is not None:
+            raise ValueError("GA transition path preimage/absence drift")
+        if kind == GA_RENAME:
+            replacement = _ga_path(item["replacement_path"])
+            if transition != implementation or replacement == path or replacement not in selected:
+                raise ValueError("GA rename must retain its already-selected implementation replacement")
+            if item["after_mode"] != "100644":
+                raise ValueError("GA rename replacement mode must be100644")
+            for field in ("transition_after_blob", "ga_blob"):
+                _ga_hash(item[field], 40, field)
+            if entry(previous, replacement) is not None:
+                raise ValueError("GA rename replacement must be absent before transition")
+            if entry(transition, replacement) != (item["after_mode"], item["transition_after_blob"]):
+                raise ValueError("GA rename replacement transition drift")
+            donor_row = by_path.get(replacement)
+            if donor_row is None or (donor_row.donor_mode, donor_row.donor_oid) != (item["after_mode"], item["ga_blob"]):
+                raise ValueError("GA rename replacement donor drift")
+        else:
+            _ga_hash(item["implementation_blob"], 40, "implementation blob")
+            ancestor(implementation, previous)
+            if entry(plan["implementation_parent"], path) is not None:
+                raise ValueError("transient GA path must be introduced by the implementation")
+            if entry(implementation, path) != (item["before_mode"], item["implementation_blob"]):
+                raise ValueError("transient GA implementation preimage drift")
+        admitted[path] = item
+    if set(admitted) != selected - set(by_path):
+        raise ValueError("GA reconciliation does not exactly cover missing selected paths")
+
+    generated, exclusions = _candidates_from_rows(
+        repo, rows, selected - set(admitted), include_text, include_native,
+    )
+    exclusions.extend((path, "TYPED_EXCLUSION_GA_" + item["disposition"]) for path, item in admitted.items())
+    exclusions.sort()
+    generated_paths = {candidate.path for candidate in generated}
+    exclusion_reasons = dict(exclusions)
+    if len(generated_paths) != len(generated) or len(exclusion_reasons) != len(exclusions) or generated_paths & set(exclusion_reasons):
+        raise ValueError("duplicate or overlapping GA outcomes")
+    receipt = []
+    for path in sorted(selected):
+        item = admitted.get(path)
+        reason = exclusion_reasons.get(path, "")
+        if item is not None:
+            outcome = "HISTORY_ONLY"
+        elif path in generated_paths:
+            outcome = "GENERATED"
+        elif path in exclusion_reasons:
+            outcome = "EXCLUDED"
+        elif by_path[path].status == "SAME":
+            outcome = "SAME"
+        else:
+            raise ValueError(f"GA path has no explicit outcome for the selected lane: {path}")
+        receipt.append({
+            "path": path, "outcome": outcome, "reason": reason,
+            "related_path": item.get("replacement_path", "") if item else "",
+            "baseline_commit": plan["baseline_commit"], "donor_commit": plan["donor_commit"],
+            "implementation_commit": implementation,
+            "transition_commit": item["transition_commit"] if item else "",
+            "manifest_sha256": manifest_hash, "catalogue_sha256": catalogue_hash,
+        })
+    return generated, exclusions, receipt
+
+
+def _write_ga_receipt(out: Path, receipt: list[dict[str, str]]) -> None:
+    with (out / "GA_RECONCILIATION.tsv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=GA_RECEIPT_COLUMNS, delimiter="\t", lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(receipt)
+
+
+
+def _verify_ga_accounting(
+    out: Path,
+    paths_file: Path,
+    reconciliation_file: Path,
+    inventory_file: Path | None = None,
+) -> dict[str, int]:
+    """Verify exact physical-output and declared-path sets, not just equal counts."""
+    raw = reconciliation_file.read_bytes()
+    plan = json.loads(_utf8(raw, "GA reconciliation"), object_pairs_hook=_ga_object)
+    selected = _selected_paths(paths_file)
+    catalogue_hash = hashlib.sha256(paths_file.read_bytes()).hexdigest()
+    manifest_hash = hashlib.sha256(raw).hexdigest()
+    if plan["schema"] != GA_SCHEMA or plan["catalogue_sha256"] != catalogue_hash or plan["declared_paths"] != len(selected):
+        raise ValueError("GA accounting catalogue/manifest mismatch")
+    entries = {item["path"]: item for item in plan["entries"]}
+    if len(entries) != len(plan["entries"]):
+        raise ValueError("duplicate GA accounting history entry")
+
+    def table(path: Path, fields: tuple[str, ...]) -> list[dict[str, str]]:
+        with path.open(encoding="utf-8", newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            if reader.fieldnames != list(fields):
+                raise ValueError("GA accounting table schema mismatch")
+            records = list(reader)
+        if any(set(row) != set(fields) or any(value is None for value in row.values()) for row in records):
+            raise ValueError("malformed GA accounting row")
+        return records
+
+    receipt = table(out / "GA_RECONCILIATION.tsv", GA_RECEIPT_COLUMNS)
+    outcomes = {row["path"]: row for row in receipt}
+    if len(outcomes) != len(receipt) or set(outcomes) != selected:
+        raise ValueError("GA accounting must cover every original path exactly once")
+    groups = {name: set() for name in ("GENERATED", "EXCLUDED", "SAME", "HISTORY_ONLY")}
+    for path, row in outcomes.items():
+        if row["outcome"] not in groups:
+            raise ValueError("unknown GA accounting outcome")
+        groups[row["outcome"]].add(path)
+        for key, expected in (
+            ("manifest_sha256", manifest_hash), ("catalogue_sha256", catalogue_hash),
+            ("baseline_commit", plan["baseline_commit"]), ("donor_commit", plan["donor_commit"]),
+            ("implementation_commit", plan["implementation_commit"]),
+        ):
+            if row[key] != expected:
+                raise ValueError("GA accounting provenance drift")
+        item = entries.get(path)
+        if item is None:
+            if row["related_path"] or row["transition_commit"] or row["outcome"] == "HISTORY_ONLY":
+                raise ValueError("unbound GA history outcome")
+            if row["outcome"] in {"GENERATED", "SAME"} and row["reason"]:
+                raise ValueError("unexpected GA accounting reason")
+        elif (
+            item["disposition"] not in {GA_RENAME, GA_TRANSIENT}
+            or row["outcome"] != "HISTORY_ONLY"
+            or row["reason"] != "TYPED_EXCLUSION_GA_" + item["disposition"]
+            or row["related_path"] != item.get("replacement_path", "")
+            or row["transition_commit"] != item["transition_commit"]
+        ):
+            raise ValueError("GA history disposition drift")
+    if groups["HISTORY_ONLY"] != set(entries):
+        raise ValueError("GA history accounting set mismatch")
+    crates = table(out / "CRATES.tsv", (
+        "crate_name", "release", "baseline_ref", "donor_ref", "target_count",
+        "first_path", "last_path", "status",
+    ))
+    generated = []
+    crate_names = set()
+    for row in crates:
+        if (
+            row["release"] != str(plan["release"])
+            or row["baseline_ref"] != plan["baseline_ref"] or row["donor_ref"] != plan["donor_ref"]
+            or row["target_count"] != "1" or row["first_path"] != row["last_path"]
+            or row["status"] != "CANDIDATE_UNVERIFIED" or row["crate_name"] in crate_names
+        ):
+            raise ValueError("GA accounting requires exact candidate-only FILE crates")
+        crate_names.add(row["crate_name"])
+        generated.append(row["first_path"])
+    if len(set(generated)) != len(generated) or set(generated) != groups["GENERATED"]:
+        raise ValueError("GA generated path set mismatch")
+    exclusions = table(out / "EXCLUSIONS.tsv", ("path", "reason"))
+    excluded = {row["path"]: row["reason"] for row in exclusions}
+    expected_excluded = groups["EXCLUDED"] | groups["HISTORY_ONLY"]
+    if len(excluded) != len(exclusions) or set(excluded) != expected_excluded:
+        raise ValueError("GA excluded path set mismatch")
+    if any(reason != outcomes[path]["reason"] for path, reason in excluded.items()):
+        raise ValueError("GA exclusion reason mismatch")
+    if inventory_file is not None:
+        with inventory_file.open(encoding="utf-8", newline="") as handle:
+            deltas = [row for row in csv.DictReader(handle, delimiter="\t") if row["path"] in selected]
+        by_path = {row["path"]: row for row in deltas}
+        if len(by_path) != len(deltas) or selected - set(by_path) != groups["HISTORY_ONLY"]:
+            raise ValueError("GA endpoint inventory missing-path set mismatch")
+        if any(row["release"] != str(plan["release"]) or row["baseline_ref"] != plan["baseline_ref"] or row["donor_ref"] != plan["donor_ref"] for row in deltas):
+            raise ValueError("GA endpoint inventory ref mismatch")
+        if {path for path, row in by_path.items() if row["status"] == "SAME"} != groups["SAME"]:
+            raise ValueError("GA endpoint inventory SAME set mismatch")
+    return {
+        "generated": len(generated), "exclusions": len(exclusions), "same": len(groups["SAME"]),
+        "history_only": len(groups["HISTORY_ONLY"]), "selected": len(selected),
+    }
+
+
+
+def candidates(
+    repo: Path,
+    release: int,
+    selected: set[str] | None,
+    all_candidates: bool,
+    include_text: bool = False,
+    include_native: bool = False,
+) -> tuple[list[Candidate], list[tuple[str, str]]]:
+    if selected is None and not all_candidates:
+        raise ValueError("select --paths-file or explicitly request --all-candidates")
+
+    rows = DELTA.compare(repo, (release,))
+    return _candidates_from_rows(repo, rows, selected, include_text, include_native)
+
+
+def _candidates_from_rows(
+    repo: Path,
+    rows: Sequence,
+    selected: set[str] | None,
+    include_text: bool,
+    include_native: bool,
+) -> tuple[list[Candidate], list[tuple[str, str]]]:
+    by_path = {row.path: row for row in rows}
+    if selected is not None:
+        missing = sorted(selected - set(by_path))
+        if missing:
+            raise ValueError(f"selected paths absent from comparison: {missing[:5]}")
+
+    result: list[Candidate] = []
+    exclusions: list[tuple[str, str]] = []
+    for row in rows:
+        if selected is not None and row.path not in selected:
+            continue
+        if row.status == "SAME":
+            continue
+        if not row.java_source:
+            if row.native_source:
+                if not (include_native or include_text):
+                    continue
+            elif not include_text:
+                continue
+        if row.status == "REMOVED":
+            exclusions.append((row.path, "TYPED_EXCLUSION_AUTOMATIC_REMOVAL"))
+            continue
+        if row.status not in {"MODIFIED", "ADDED"}:
+            exclusions.append((row.path, "TYPED_EXCLUSION_UNKNOWN_STATUS"))
+            continue
+
+        if row.donor_mode != "100644" or (
+            row.status == "MODIFIED" and row.baseline_mode != row.donor_mode
+        ):
+            exclusions.append(
+                (
+                    row.path,
+                    "TYPED_EXCLUSION_FILE_MODE:"
+                    f"{row.baseline_mode or 'ABSENT'}->{row.donor_mode or 'ABSENT'}",
+                )
+            )
+            continue
+
+        try:
+            after_text = _utf8(
+                _git_bytes(repo, row.donor_ref, row.path),
+                f"{row.donor_ref}:{row.path}",
+            )
+            if row.status == "ADDED":
+                before_hash = "ABSENT"
+            else:
+                before_text = _utf8(
+                    _git_bytes(repo, row.baseline_ref, row.path),
+                    f"{row.baseline_ref}:{row.path}",
+                )
+                before_hash = _sha256_text(before_text)
+            after_hash = _sha256_text(after_text)
+        except ValueError as failure:
+            exclusions.append((row.path, f"TYPED_EXCLUSION_ENCODING:{failure}"))
+            continue
+
+        if before_hash == after_hash:
+            raise AssertionError(f"verbatim MODIFIED/ADDED row has no delta: {row.path}")
+        result.append(
+            Candidate(
+                path=row.path,
+                status=row.status,
+                before_sha256=before_hash,
+                after_sha256=after_hash,
+                after_text=after_text,
+                kind=(
+                    "JAVA"
+                    if row.java_source
+                    else "NATIVE"
+                    if row.native_source and include_native
+                    else "TEXT"
+                ),
+            )
+        )
+
+    result.sort(key=lambda item: item.path)
+    exclusions.sort()
+    return result, exclusions
+
+
+def _chunks(values: Sequence[Candidate], size: int) -> Iterable[Sequence[Candidate]]:
+    for start in range(0, len(values), size):
+        yield values[start : start + size]
+
+
+def materialize(
+    out: Path,
+    release: int,
+    candidates_: Sequence[Candidate],
+    exclusions: Sequence[tuple[str, str]],
+    crate_size: int = CRATE_LIMIT,
+) -> list[str]:
+    if crate_size < 1 or crate_size > CRATE_LIMIT:
+        raise ValueError(f"crate_size must be between 1 and {CRATE_LIMIT}")
+
+    yaml_root = out / YAML_ROOT
+    yaml_root.mkdir(parents=True, exist_ok=True)
+
+    kinds = {candidate.kind for candidate in candidates_}
+    if not kinds.issubset({"JAVA", "NATIVE", "TEXT"}):
+        raise ValueError(f"unsupported candidate kind(s): {sorted(kinds)}")
+
+    qualified_names = len(kinds) > 1 or "NATIVE" in kinds
+    lanes: list[tuple[str, list[Candidate], Path, str, str]] = []
+    java_candidates = [candidate for candidate in candidates_ if candidate.kind == "JAVA"]
+    native_candidates = [candidate for candidate in candidates_ if candidate.kind == "NATIVE"]
+    text_candidates = [candidate for candidate in candidates_ if candidate.kind == "TEXT"]
+    if java_candidates:
+        lanes.append(
+            (
+                "java",
+                java_candidates,
+                RESOURCE_ROOT,
+                "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
+                ".java.txt",
+            )
+        )
+    if native_candidates:
+        lanes.append(
+            (
+                "native",
+                native_candidates,
+                TEXT_RESOURCE_ROOT,
+                "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
+                ".txt",
+            )
+        )
+    if text_candidates:
+        lanes.append(
+            (
+                "text",
+                text_candidates,
+                TEXT_RESOURCE_ROOT,
+                "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
+                ".txt",
+            )
+        )
+
+    crate_names: list[str] = []
+    crate_types: dict[str, str] = {}
+    crate_rows: list[tuple[str, ...]] = []
+    for lane_name, lane_candidates, resource_root_path, recipe_class, suffix in lanes:
+        resource_root = out / resource_root_path
+        resource_root.mkdir(parents=True, exist_ok=True)
+        for crate_index, chunk in enumerate(_chunks(lane_candidates, crate_size), 1):
+            if qualified_names:
+                crate_name = f"jdk{release}-{lane_name}-{crate_index:04d}"
+            else:
+                crate_name = f"jdk{release}-{crate_index:04d}"
+            crate_names.append(crate_name)
+            crate_types[crate_name] = recipe_class
+            crate_dir = resource_root / crate_name
+            crate_dir.mkdir(parents=True, exist_ok=True)
+
+            manifest_rows: list[tuple[str, str, str, str]] = []
+            for resource_index, candidate in enumerate(chunk, 1):
+                resource_name = f"{resource_index:04d}{suffix}"
+                (crate_dir / resource_name).write_text(
+                    candidate.after_text,
+                    encoding="utf-8",
+                    newline="",
+                )
+                manifest_rows.append(
+                    (
+                        candidate.path,
+                        candidate.before_sha256,
+                        candidate.after_sha256,
+                        resource_name,
+                    )
+                )
+
+            with (crate_dir / "manifest.tsv").open(
+                "w", encoding="utf-8", newline=""
+            ) as handle:
+                writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
+                writer.writerows(manifest_rows)
+
+            crate_rows.append(
+                (
+                    crate_name,
+                    str(release),
+                    "jdk-21+35",
+                    f"jdk-{release}+"
+                    + {22: "36", 23: "37", 24: "36", 25: "36", 26: "35", 27: "35"}[release],
+                    str(len(chunk)),
+                    chunk[0].path,
+                    chunk[-1].path,
+                    "CANDIDATE_UNVERIFIED",
+                )
+            )
+
+    with (out / "CRATES.tsv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
+        writer.writerow(
+            (
+                "crate_name",
+                "release",
+                "baseline_ref",
+                "donor_ref",
+                "target_count",
+                "first_path",
+                "last_path",
+                "status",
+            )
+        )
+        writer.writerows(crate_rows)
+
+    with (out / "EXCLUSIONS.tsv").open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
+        writer.writerow(("path", "reason"))
+        writer.writerows(exclusions)
+
+    yaml = []
+    for crate_name in crate_names:
+        recipe_name = crate_name.replace("-", "_")
+        yaml.extend(
+            [
+                "---",
+                "type: specs.openrewrite.org/v1beta/recipe",
+                f"name: com.m3.generated.{recipe_name}",
+                f"displayName: M3JDK21 candidate crate {crate_name}",
+                "description: Exact hash-pinned candidate; compatibility proof required before admission.",
+                "recipeList:",
+                f"  - {crate_types[crate_name]}:",
+                f"      crateName: {crate_name}",
+                "",
+            ]
+        )
+
+    yaml.extend(
+        [
+            "---",
+            "type: specs.openrewrite.org/v1beta/recipe",
+            f"name: com.m3.generated.jdk{release}.CandidateBackports",
+            f"displayName: M3JDK21 JDK {release} candidate backports",
+            "description: Candidate-only composition of generated hash-pinned donor crates.",
+            "recipeList:",
+        ]
+    )
+    for crate_name in crate_names:
+        recipe_name = crate_name.replace("-", "_")
+        yaml.append(f"  - com.m3.generated.{recipe_name}")
+    yaml.append("")
+
+    (yaml_root / f"m3-jdk{release}-candidate-backports.yml").write_text(
+        "\n".join(yaml),
+        encoding="utf-8",
+    )
+    return crate_names
+
+
+def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--repo", type=Path, required=True)
+    parser.add_argument("--release", type=int, choices=range(22, 28), required=True)
+    parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--paths-file", type=Path)
+    parser.add_argument(
+        "--ga-reconciliation", type=Path,
+        help="strict pinned history accounting for selected paths absent from both GA endpoints",
+    )
+    parser.add_argument("--all-candidates", action="store_true")
+    parser.add_argument(
+        "--include-text",
+        action="store_true",
+        help=(
+            "legacy broad opt-in: emit strict UTF-8 non-Java candidates through "
+            "M3Jdk21HashPinnedTextSnapshotRecipe; default remains Java-only"
+        ),
+    )
+    parser.add_argument(
+        "--include-native",
+        action="store_true",
+        help=(
+            "emit C/C++/header/assembly deltas as explicit NATIVE source-sealed FILE atoms "
+            "through M3Jdk21HashPinnedTextSnapshotRecipe"
+        ),
+    )
+    parser.add_argument(
+        "--crate-size",
+        type=int,
+        default=CRATE_LIMIT,
+        choices=range(1, CRATE_LIMIT + 1),
+        help=(
+            "maximum targets per generated crate; use 1 for true FILE-scope recipe atoms "
+            "before explicit DAG promotion"
+        ),
+    )
+    return parser.parse_args(argv)
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    args = _parse_args(sys.argv[1:] if argv is None else argv)
+    repo = args.repo.resolve()
+    out = args.out.resolve()
+    selected = _selected_paths(args.paths_file)
+    receipt = None
+    if args.ga_reconciliation is None:
+        candidate_rows, exclusions = candidates(
+            repo,
+            args.release,
+            selected,
+            args.all_candidates,
+            include_text=args.include_text,
+            include_native=args.include_native,
+        )
+    else:
+        if args.paths_file is None or args.all_candidates:
+            raise ValueError("GA reconciliation requires only an explicit --paths-file")
+        candidate_rows, exclusions, receipt = _ga_candidates(
+            repo, args.release, args.paths_file, args.ga_reconciliation,
+            include_text=args.include_text, include_native=args.include_native,
+        )
+    if not candidate_rows:
+        raise SystemExit("no donor candidates selected")
+    crates = materialize(
+        out,
+        args.release,
+        candidate_rows,
+        exclusions,
+        crate_size=args.crate_size,
+    )
+    if receipt is not None:
+        _write_ga_receipt(out, receipt)
+    print(
+        f"generated {len(crates)} crate(s) at max {args.crate_size} target(s)/crate, "
+        f"{len(candidate_rows)} candidate(s), "
+        f"{len(exclusions)} typed exclusion(s)"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

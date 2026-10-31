@@ -1,0 +1,2 @@
+/tmp/jdk-21.0.12.1+1/bin/java -ea -Xcheck:jni -Xmx512m -Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib -cp /workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes:/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/test-classes com.m3.collections.M3IndexPathRankNativeSelfTest
+PASS M3IndexPathRank JNI parity: 180 deterministic Java/rank/native paths

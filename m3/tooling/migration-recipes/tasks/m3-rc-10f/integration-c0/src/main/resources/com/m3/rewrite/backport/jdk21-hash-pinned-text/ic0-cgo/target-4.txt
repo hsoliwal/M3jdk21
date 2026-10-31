@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.jdk21.Jep485StreamGatherers
+displayName: Backport final JEP 485 Stream Gatherers to M3JDK21
+description: Explicit opt-in source-sealed JDK24-GA Stream Gatherers API and implementation; LIBRARY_API contract-change authority is required.
+recipeList:
+  - com.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipe:
+      optInToken: JEP485

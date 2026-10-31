@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.M3FileStreamDeltaReceiver
+displayName: Receive M3File monitored shadow streams and deltas
+description: >-
+  Applies the exact hash-pinned M3JDK21 product postimages for monitored input/output shadows,
+  lazy provider-preserving traversal, metadata-first snapshots and compact downstream deltas.
+recipeList:
+  - com.m3.rewrite.file.M3FileStreamDeltaReceiverRecipe

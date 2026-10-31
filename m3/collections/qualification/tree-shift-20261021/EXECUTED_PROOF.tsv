@@ -1,0 +1,8 @@
+evidence	jdk	result	checks	limitations
+Original reconstructed shift	21.0.12.1	FAIL at assertion 12	12	Partial key-array mutation on late overflow; not full original source
+Corrected reconstructed shift default	21.0.12.1	PASS	2591918	Method-level reconstruction only
+Corrected reconstructed shift -Xint	21.0.12.1	PASS	2591918	Method-level reconstruction only
+Corrected reconstructed shift C1	21.0.12.1	PASS	2591918	Method-level reconstruction only
+Corrected reconstructed shift no-tiered	21.0.12.1	PASS	2591918	Method-level reconstruction only
+Canonical OpenRewrite SDK Recipe.run	unknown	NOT_RUN	0	Maven unavailable locally
+Original m3/collections JUnit and full JDK image	unknown	NOT_RUN	0	Retain draft until exact-head gates

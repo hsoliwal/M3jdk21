@@ -1,0 +1,13 @@
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+{"segmented":false,"joins":2000,"allocated_bytes":65632176,"operation_ns":680057860,"retained_leaf_arrays":2000,"leaf_payload_bytes":65536000}
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+{"segmented":true,"joins":2000,"allocated_bytes":433056,"operation_ns":9960806,"retained_leaf_arrays":2,"leaf_payload_bytes":24576}
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+{"segmented":false,"joins":2000,"allocated_bytes":65632176,"operation_ns":618622905,"retained_leaf_arrays":2000,"leaf_payload_bytes":65536000}
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+{"segmented":true,"joins":2000,"allocated_bytes":433056,"operation_ns":10289333,"retained_leaf_arrays":2,"leaf_payload_bytes":24576}
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+{"segmented":false,"joins":2000,"allocated_bytes":65632176,"operation_ns":638620492,"retained_leaf_arrays":2000,"leaf_payload_bytes":65536000}
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+{"segmented":true,"joins":2000,"allocated_bytes":433056,"operation_ns":10067714,"retained_leaf_arrays":2,"leaf_payload_bytes":24576}

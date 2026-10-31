@@ -1,0 +1,82 @@
+// Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+package com.m3.collections;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Random;
+import org.junit.jupiter.api.Test;
+
+/** Separate inverse-prefix oracle; no row sized state for huge logical counts. */
+public final class M3FenwickInverseTest {
+    private static long prefix(int estimate, int row, int[] ids, int[] heights) {
+        long sum = (long) row * estimate;
+        for (int i = 0; i < ids.length; i++) if (ids[i] < row) sum += (long) heights[i] - estimate;
+        return sum;
+    }
+    private static int independentRow(int count, int estimate, int[] ids, int[] heights, long offset) {
+        if (count == 0) return -1;
+        if (offset <= 0) return 0;
+        if (offset >= prefix(estimate, count, ids, heights)) return count - 1;
+        int low = 0, high = count - 1;
+        while (low < high) {
+            int mid = low + ((high - low) >>> 1);
+            if (prefix(estimate, mid + 1, ids, heights) > offset) high = mid;
+            else low = mid + 1;
+        }
+        return low;
+    }
+    @Test public void extremeSparseLogicalCountHasExactInverseAndNoRowAllocation() {
+        int count = Integer.MAX_VALUE;
+        int estimate = Integer.MAX_VALUE;
+        int[] ids = {0, 1000, 1_073_741_823, count - 2, count - 1};
+        int[] heights = {0, 1, Integer.MAX_VALUE, 0, 1};
+        M3SparseExtents x = new M3SparseExtents(estimate);
+        x.reset(count);
+        for (int i = 0; i < ids.length; i++) x.setExtent(ids[i], heights[i]);
+        assertEquals(5, x.measuredCount());
+        long total = prefix(estimate, count, ids, heights);
+        assertEquals(total, x.totalExtent());
+        for (int i = 0; i < 15_000; i++) {
+            long offset = switch (i % 7) {
+                case 0 -> i;
+                case 1 -> (long) i * estimate;
+                case 2 -> total - i;
+                case 3 -> Long.MAX_VALUE - i;
+                case 4 -> ((long) count / 2) * estimate - i;
+                case 5 -> -i;
+                default -> total / 2 + i;
+            };
+            assertEquals(independentRow(count, estimate, ids, heights, offset), x.rowAt(offset));
+        }
+        x.reset(count);
+        assertEquals(0, x.measuredCount());
+        assertEquals(count - 1, x.rowAt(Long.MAX_VALUE));
+    }
+    @Test public void mutatedMeasuredSlotsAgreeWithLinearPrefixInverse() {
+        Random random = new Random(0x4db67df32L);
+        for (int seed = 0; seed < 180; seed++) {
+            int n = 64, estimate = 1 + random.nextInt(20);
+            int[] heights = new int[n];
+            java.util.Arrays.fill(heights, -1);
+            M3SparseExtents x = new M3SparseExtents(estimate);
+            x.reset(n);
+            for (int step = 0; step < 200; step++) {
+                int row = random.nextInt(n), size = random.nextInt(30);
+                x.setExtent(row, size);
+                heights[row] = size;
+                for (long offset : new long[] {0, 1, 2, 25, 100, x.totalExtent() - 1,
+                        x.totalExtent(), x.totalExtent() + 1, random.nextInt(3000)}) {
+                    long sum = 0;
+                    int expected = 0;
+                    if (offset <= 0) expected = 0;
+                    else if (offset >= x.totalExtent()) expected = n - 1;
+                    else for (int i = 0; i < n; i++) {
+                        sum += heights[i] < 0 ? estimate : heights[i];
+                        if (sum > offset) { expected = i; break; }
+                    }
+                    assertEquals(expected, x.rowAt(offset));
+                }
+            }
+        }
+    }
+}

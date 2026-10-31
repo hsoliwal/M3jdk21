@@ -1,0 +1,93 @@
+[
+  {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "0122f7cf73b3b2a10429806c3e4beadc4caf0792",
+    "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+    "git_blob": "a9b2f396ae9e952a5cf54cd99e5689b6a23b9517",
+    "sha256": "a8bfd9e5d38aa378e7dab73fdbc59ef1512ff2782670100712178bd3c7261c88"
+  },
+  {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "0122f7cf73b3b2a10429806c3e4beadc4caf0792",
+    "target": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+    "git_blob": "daea60beeb202d9e996f9a018fe5974738a43523",
+    "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+  },
+  {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "0122f7cf73b3b2a10429806c3e4beadc4caf0792",
+    "target": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+    "git_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
+    "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+  },
+  {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "0122f7cf73b3b2a10429806c3e4beadc4caf0792",
+    "target": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+    "git_blob": "a94368898d0c5d9b0dbedb9dcd56d4d2e39a1414",
+    "sha256": "e7708773958746254defdfc1a77fa7946089a9623781a356c211a36c3be32026"
+  },
+  {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "0122f7cf73b3b2a10429806c3e4beadc4caf0792",
+    "target": "m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationProof.java",
+    "git_blob": "5a1e46a18f753f11dd415894b5961c20942d620a",
+    "sha256": "2647764e90666b193426f3985026f25d8fe76e1114239ae6dd52a0036f5f4292"
+  },
+  {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "0122f7cf73b3b2a10429806c3e4beadc4caf0792",
+    "target": "m3/collections/src/test/java/com/m3/collections/M3FilteredListMutationTest.java",
+    "git_blob": "e024c1606276b21e4696161838aebb9ae43a9cf2",
+    "sha256": "ebd9ee4a1cc4f9b602bc7bffd2e2654d3e95a0d3ec10f4ba7b1f24710d6c1207"
+  },
+  {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "0122f7cf73b3b2a10429806c3e4beadc4caf0792",
+    "target": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java",
+    "git_blob": "411b69ea33c059d4243afedd5a1bc53b6e7f7122",
+    "sha256": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94"
+  },
+  {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "0122f7cf73b3b2a10429806c3e4beadc4caf0792",
+    "target": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java",
+    "git_blob": "404ef3a934c21ffd9baf96112602203489ef6680",
+    "sha256": "69af2677ee57c22da762b275c7b16d6718877159b340a949cc6b5a2d0c2158f8"
+  },
+  {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "0122f7cf73b3b2a10429806c3e4beadc4caf0792",
+    "target": "m3/collections/src/test/java/com/m3/collections/M3MaskWindowCurrentProof.java",
+    "git_blob": "636ceb1c9324c6cfd4fa9aa0077f8ffc2be8228d",
+    "sha256": "f1249302fac441f9cf092fbe6052443d54ee3f60ddfff7178fae25b5529bcff3"
+  },
+  {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "987f743658055252bdaf056610a3a903eba0bfee",
+    "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+    "git_blob": "63c44f618cd9e93f588cbee05d904b5ccc883e79",
+    "sha256": "a9b51ed9c0859ef27d308ea89e1b41cf3283dfd54478a36b1d89d6ab66711b0c"
+  },
+  {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "987f743658055252bdaf056610a3a903eba0bfee",
+    "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+    "git_blob": "b9eb9c75d51844abda78517f9c1116a00c414f94",
+    "sha256": "dce9da78508449041db8907ef7bc44e9fcee1117bbe91db880e35c26933f9470"
+  },
+  {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "987f743658055252bdaf056610a3a903eba0bfee",
+    "target": "m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationContract.java",
+    "git_blob": "08019848e254390b6b568d13b3bd5868f4d39df1",
+    "sha256": "a1cf85feec6621af519dc03d86389945527f7c6544947a28ce49ac2328db8773"
+  },
+  {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "987f743658055252bdaf056610a3a903eba0bfee",
+    "target": "m3/collections/src/test/java/com/m3/collections/M3FilteredEndpointRestorationTest.java",
+    "git_blob": "e144a52c6f9c725cc08e40261cc85e6c7f64b9a8",
+    "sha256": "294b4a465a3189f8115210b626a9a44dcb19e53f6e73ddf98395bdc13a11a488"
+  }
+]

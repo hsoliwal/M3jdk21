@@ -1,0 +1,14 @@
+Compiled from "M3RegexDpPlan.java"
+public final class jdk.internal.mindex.M3RegexDpPlan$Effect {
+  public long length();
+    descriptor: ()J
+
+  public long apply(long);
+    descriptor: (J)J
+
+  public jdk.internal.mindex.M3RegexDpPlan$Effect then(jdk.internal.mindex.M3RegexDpPlan$Effect, java.lang.Runnable);
+    descriptor: (Ljdk/internal/mindex/M3RegexDpPlan$Effect;Ljava/lang/Runnable;)Ljdk/internal/mindex/M3RegexDpPlan$Effect;
+
+  public jdk.internal.mindex.M3RegexDpPlan$Effect repeated(long, java.lang.Runnable);
+    descriptor: (JLjava/lang/Runnable;)Ljdk/internal/mindex/M3RegexDpPlan$Effect;
+}

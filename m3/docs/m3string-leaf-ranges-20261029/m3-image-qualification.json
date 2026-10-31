@@ -1,0 +1,299 @@
+{
+  "schema": "M3_LEAF_RANGES_SOURCE_IMAGE_QUALIFICATION_V1",
+  "status": "PASS",
+  "qualification_date": "2026-10-29",
+  "platform": "Linux x86_64",
+  "source_base_commit": "3569c790d5cc3f9bc871ab0ecd025dab0fd5cafc",
+  "source_postimages": [
+    {
+      "path": "src/java.base/share/classes/java/lang/Iterable.java",
+      "sha256": "56ac54d30ce216a9555cd5d93657b4a85f999d8b17583b75f4b719de8bbb5c28",
+      "bytes": 4795
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3Object.java",
+      "sha256": "410cd15637e91d49804e20578cda6a0f46c8be1df11ad044a60e2e8d66ebbb05",
+      "bytes": 10148
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ObjectEvent.java",
+      "sha256": "e0d9942aef2001f7eec50ca2c5b5b72d5ff698e737c0d051a556502f059998c4",
+      "bytes": 5151
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ObjectSubscription.java",
+      "sha256": "4e41eec1c6ecbdc03da1d299f5ba74ad73c86e38458efd69bd20887157be6c62",
+      "bytes": 1818
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Runnable.java",
+      "sha256": "3fb345c86aab0a61fcac191fa861a7281491e3d877dfd8747a89c2c53a347606",
+      "bytes": 2597
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Collection.java",
+      "sha256": "56ea11774da1b83fecf33f10c83c12e6256b7ce2511b7f54d1b61d27be81e4bd",
+      "bytes": 41774
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Iterator.java",
+      "sha256": "d9aa3a067455e4b12134b951dad977ff6767331e9dc691c2211e9796a11da0d6",
+      "bytes": 6072
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/List.java",
+      "sha256": "b03b05637325315c21f59efb2a6051204f4bd0d82fa4f87aad7b915c0a9fb7c8",
+      "bytes": 52847
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Map.java",
+      "sha256": "9fb9bf66c4cac60a87d1293992196302ebcb77690266fe44f0376b05a75194b7",
+      "bytes": 83230
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/PrimitiveIterator.java",
+      "sha256": "7d9e2902fbdb675e299211e09155a928ca875b72c51a853d9b7bb4c3d36730ee",
+      "bytes": 13849
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Spliterator.java",
+      "sha256": "c08bee2f56f146ec1687dc5546d79ab62ae9467f7534563aed5cb0c9d6fce70d",
+      "bytes": 41944
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "sha256": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
+      "bytes": 17999
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "sha256": "d37156c3aa56b24a2c4e4c264868e23d33e908e5dda0f01ff17c7f8cb219dd3a",
+      "bytes": 21745
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "sha256": "0a8dc18017584efbdcfaf1467e50efdad0b1ce649c30a80e9504752c28efd26e",
+      "bytes": 5956
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "sha256": "2f3bb91b55fa9715aed6e774501b83474b7fdb9451e601f29499c123bbc4959a",
+      "bytes": 10579
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/TokenMatcher.java",
+      "sha256": "50e4250d6a0ccb4816ef2e259bcd27d31f0ebb18d69eb31aa5e04a0b96ebe1c1",
+      "bytes": 12535
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/TokenPattern.java",
+      "sha256": "499b388a33a4e24bfcaf51f56f6b803496604c5d7e0fd22cf7662672eeea49b8",
+      "bytes": 20882
+    },
+    {
+      "path": "src/java.naming/share/classes/com/sun/jndi/ldap/EventSupport.java",
+      "sha256": "8e1dedcac110fe03b2287110ee8ade2cbc262bd0b3b7f1edc65c92d0cc256aab",
+      "bytes": 14340
+    },
+    {
+      "path": "src/java.naming/share/classes/com/sun/jndi/ldap/NotifierArgs.java",
+      "sha256": "7b3db5face14bfe98df649403d517f30b170aed5b1cbde54dea7765073c5feda",
+      "bytes": 5177
+    }
+  ],
+  "recipe_datasets": [
+    "doclint-parser-20261029",
+    "jndi-listener-import-20261029"
+  ],
+  "make_images": {
+    "status": "PASS",
+    "exit_code": 0,
+    "arguments": [
+      "CONF=m3-chronology-release",
+      "JOBS=4",
+      "ENABLE_JAVAC_SERVER=false",
+      "images"
+    ],
+    "compiler_flags_relaxed": false,
+    "image_files": 530,
+    "log_sha256": "5b31746be94b4e6b6c3653e58f24623107fb4ffbbf7f47e5c15ef8a2ae9d1f09"
+  },
+  "image_identity": {
+    "bin/java": {
+      "path": "bin/java",
+      "bytes": 16320,
+      "sha256": "c769b14c621116f0aa73d9a56a4983b97586c0abfca029ff02fcc07ae9ffdda0"
+    },
+    "lib/server/libjvm.so": {
+      "path": "lib/server/libjvm.so",
+      "bytes": 26473136,
+      "sha256": "0b4541572e0e4e3e61902b314411e7f04fefb59c1e99ac3295a65ac7f1509f4d"
+    },
+    "lib/modules": {
+      "path": "lib/modules",
+      "bytes": 143834856,
+      "sha256": "8aaf74b8e6461328f5f46534d029fc4663f62b68ab2b242ba0396f20df1ba6a0"
+    }
+  },
+  "private_image_receipt_sha256": "a1879b271428f61ae31789dda64ef83ecc67500fbe26423faf2df85c63541f5c",
+  "jtreg": {
+    "status": "PASS",
+    "tests": 1,
+    "runtime_actions": 3,
+    "driver": "test/jdk/java/lang/String/M3StringLeafRanges/M3StringLeafRangesDriver.java",
+    "jtr_sha256": "f2147e949740e4ad9243a8392ed708eb2946b7d83c816d71f612622fe618dcf3",
+    "lanes": [
+      {
+        "arguments": [
+          "m3"
+        ],
+        "vm_flags": [
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:+UseM3StringStorage"
+        ],
+        "status": "PASS",
+        "stdout": "M3_LEAF_RANGES_PASS mode=m3 stringLayout=m3 checks=376903 leaves=27105 atomLeaves=18317 inlineLeaves=8788 startMutantsKilled=17739/17739 byteOrderMutantsKilled=13484/13484"
+      },
+      {
+        "arguments": [
+          "m3"
+        ],
+        "vm_flags": [
+          "-XX:+UnlockExperimentalVMOptions",
+          "-XX:+UseM3StringStorage",
+          "-XX:-CompactStrings"
+        ],
+        "status": "PASS",
+        "stdout": "M3_LEAF_RANGES_PASS mode=m3 stringLayout=m3 checks=376903 leaves=27105 atomLeaves=19137 inlineLeaves=7968 startMutantsKilled=18420/18420 byteOrderMutantsKilled=15244/15244"
+      },
+      {
+        "arguments": [
+          "stock"
+        ],
+        "vm_flags": [],
+        "status": "PASS",
+        "stdout": "M3_LEAF_RANGES_PASS mode=stock stringLayout=m3 checks=353338 leaves=27105 atomLeaves=18317 inlineLeaves=8788 startMutantsKilled=17739/17739 byteOrderMutantsKilled=13484/13484"
+      }
+    ]
+  },
+  "qualified_export_contract": {
+    "status": "PASS",
+    "gates": 14,
+    "receipt_sha256": "b7e380ce1b4b9018ccd2f878c6dd2ca4b01ee9c59aed068c8a78db9def8aa42e",
+    "results": [
+      {
+        "gate": "E0_module_name_lint",
+        "expect": "nonzero",
+        "pattern": "avoid terminal digits",
+        "rc": "1",
+        "verdict": "PASS",
+        "log": "E0_module_name_lint.log"
+      },
+      {
+        "gate": "E1_javac_without_export",
+        "expect": "nonzero",
+        "pattern": "package jdk\\.internal\\.access is not visible",
+        "rc": "1",
+        "verdict": "PASS",
+        "log": "E1_javac_without_export.log"
+      },
+      {
+        "gate": "E2_javac_with_export",
+        "expect": "0",
+        "pattern": "-",
+        "rc": "0",
+        "verdict": "PASS",
+        "log": "E2_javac_with_export.log"
+      },
+      {
+        "gate": "E3_run_without_export",
+        "expect": "nonzero",
+        "pattern": "does not export jdk\\.internal\\.access to module jdk\\.m3\\.text",
+        "rc": "1",
+        "verdict": "PASS",
+        "log": "E3_run_without_export.log"
+      },
+      {
+        "gate": "E4_run_with_export",
+        "expect": "0",
+        "pattern": "PROBE_OK countPositives=2",
+        "rc": "0",
+        "verdict": "PASS",
+        "log": "E4_run_with_export.log"
+      },
+      {
+        "gate": "E5_jlink_add_options",
+        "expect": "0",
+        "pattern": "-",
+        "rc": "0",
+        "verdict": "PASS",
+        "log": "E5_jlink_add_options.log"
+      },
+      {
+        "gate": "E6_image_run_baked_export",
+        "expect": "0",
+        "pattern": "PROBE_OK countPositives=2",
+        "rc": "0",
+        "verdict": "PASS",
+        "log": "E6_image_run_baked_export.log"
+      },
+      {
+        "gate": "E7_image_validate_modules",
+        "expect": "0",
+        "pattern": "-",
+        "rc": "0",
+        "verdict": "PASS",
+        "log": "E7_image_validate_modules.log"
+      },
+      {
+        "gate": "E8_unnamed_javac",
+        "expect": "0",
+        "pattern": "-",
+        "rc": "0",
+        "verdict": "PASS",
+        "log": "E8_unnamed_javac.log"
+      },
+      {
+        "gate": "E9_image_unnamed_denied",
+        "expect": "nonzero",
+        "pattern": "does not export jdk\\.internal\\.access to unnamed module",
+        "rc": "1",
+        "verdict": "PASS",
+        "log": "E9_image_unnamed_denied.log"
+      },
+      {
+        "gate": "E10_qualified_export_javac",
+        "expect": "0",
+        "pattern": "-",
+        "rc": "0",
+        "verdict": "PASS",
+        "log": "E10_qualified_export_javac.log"
+      },
+      {
+        "gate": "E11_jlink_target_absent",
+        "expect": "0",
+        "pattern": "-",
+        "rc": "0",
+        "verdict": "PASS",
+        "log": "E11_jlink_target_absent.log"
+      },
+      {
+        "gate": "E12_validate_target_absent",
+        "expect": "0",
+        "pattern": "-",
+        "rc": "0",
+        "verdict": "PASS",
+        "log": "E12_validate_target_absent.log"
+      },
+      {
+        "gate": "E13_describe_target_absent",
+        "expect": "0",
+        "pattern": "qualified exports probe\\.base\\.internal to jdk\\.m3\\.text",
+        "rc": "0",
+        "verdict": "PASS",
+        "log": "E13_describe_target_absent.log"
+      }
+    ]
+  },
+  "scope": "Complete server release image and the existing leaf-range and export contracts. Other OpenJDK tests and other operating systems are outside this receipt."
+}

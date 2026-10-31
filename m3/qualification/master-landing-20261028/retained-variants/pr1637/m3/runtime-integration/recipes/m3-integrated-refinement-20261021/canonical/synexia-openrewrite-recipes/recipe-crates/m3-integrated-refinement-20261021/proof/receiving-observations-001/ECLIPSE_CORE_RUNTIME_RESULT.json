@@ -1,0 +1,228 @@
+{
+  "schema": "M3_ECLIPSE_ACTUAL_OWNING_MODULE_PROOF_V1",
+  "status": "PASS",
+  "scope": "ACTUAL_EMITTED_TARGET_UNMODIFIED_OWNING_MAVEN_POM",
+  "exit_code": 0,
+  "argv": [
+    "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/tmp/m3-build-m2",
+    "-f",
+    "/workspace/scratch/206049dfb270/M3jdk21/m3/eclipse/core-runtime/pom.xml",
+    "verify"
+  ],
+  "input_receipt_sha256": "0d98c120510514da032a1719c20c751c774e7996de04bfdd2cf75767e887ced9",
+  "all_source_readbacks_unchanged": true,
+  "owning_pom_unchanged": true,
+  "production_sources": 3,
+  "test_sources": 4,
+  "test_suites": 4,
+  "tests": 21,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "name": "com.m3.eclipse.runtime.M3EclipseJobSchedulerTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.114"
+    },
+    {
+      "name": "com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.014"
+    },
+    {
+      "name": "com.m3.eclipse.runtime.M3EclipseJobsTest",
+      "tests": "7",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.015"
+    },
+    {
+      "name": "com.m3.eclipse.runtime.M3EclipseProgressMonitorTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.005"
+    }
+  ],
+  "fresh_reports_verified": true,
+  "maven_log_sha256": "b88a85d3423b72379da0b78119a4349c3c4854eff1c57ffebafb44a211a3439f",
+  "actual_runtime_jars": [
+    {
+      "path": "/tmp/m3-build-m2/com/m3/m3-collections/0.1.0-SNAPSHOT/m3-collections-0.1.0-SNAPSHOT.jar",
+      "bytes": 959537,
+      "sha256": "c74623ac85af1d4e4254dec6c7d246476b12bdca3b882f96c9a399debbd1bb82"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+      "bytes": 6806,
+      "sha256": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.contenttype/3.9.900/org.eclipse.core.contenttype-3.9.900.jar",
+      "bytes": 107781,
+      "sha256": "6c57132740523b5c5de125c0041ca43c1606da6563214c1bae3999fa21ead893"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.jobs/3.15.900/org.eclipse.core.jobs-3.15.900.jar",
+      "bytes": 120947,
+      "sha256": "941b3c5feeba4ec0a949a8a94ff10283b2505813fa736c9e6345f146ae1b7e8a"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.runtime/3.35.0/org.eclipse.core.runtime-3.35.0.jar",
+      "bytes": 90388,
+      "sha256": "5b0c2794e9fe1785360dec920cc802f3388a0eb72ee25b89054b79ff3e2f07c9"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.app/1.7.600/org.eclipse.equinox.app-1.7.600.jar",
+      "bytes": 93212,
+      "sha256": "fd353398835107608f554779a6e91891725efb94e0f57559d0ab3cea4b6156c7"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.common/3.21.0/org.eclipse.equinox.common-3.21.0.jar",
+      "bytes": 161122,
+      "sha256": "2545ed27d408f19882695703097e5998bf25652bd0dac76a8e6d1391ec228ab7"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.preferences/3.12.100/org.eclipse.equinox.preferences-3.12.100.jar",
+      "bytes": 130382,
+      "sha256": "fd04e81a28ab32b6bb073286eb293c44b760176fcf1e35ef15614d62df820f86"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.registry/3.12.600/org.eclipse.equinox.registry-3.12.600.jar",
+      "bytes": 206425,
+      "sha256": "4f8cd72681446b598390a8c24ee9b9996f6e4c5fabed022b50bd26f6f5a0bf6c"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.osgi/3.24.300/org.eclipse.osgi-3.24.300.jar",
+      "bytes": 1615320,
+      "sha256": "4a770aa4a78df653af871073c8b4ddd56884895f5fc71d10c40b4289ac7c8b9f"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar",
+      "bytes": 6359,
+      "sha256": "263e43447f4b40f126ad6b1dcbd7df379448413bdedb8e0d240c5bcbba7c7a4f"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar",
+      "bytes": 210956,
+      "sha256": "afff77c186cd317275803872fa5133aa801fd6ac40bd91c78a6cf8009b4b17cc"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar",
+      "bytes": 244690,
+      "sha256": "b6df35da750a546ae932376f11b3c0df841f0c90c7cb2944cd39adb432886e4b"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar",
+      "bytes": 586027,
+      "sha256": "edb1e43ff0b8067626ffb55e5e9eeca1d9ab2478141a7c7f253d115b29cc7cf2"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+      "bytes": 106232,
+      "sha256": "b56a5ec000a479df4973b18bba24c98fe0db8faa14c8907d3ef451d8c71fd8ae"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar",
+      "bytes": 204821,
+      "sha256": "905cba9b4998ccc29d1239085a7fb1fe0e28024d7526152356d810edec0a49a3"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar",
+      "bytes": 14304,
+      "sha256": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/osgi/org.osgi.service.prefs/1.1.2/org.osgi.service.prefs-1.1.2.jar",
+      "bytes": 20165,
+      "sha256": "43c7c870710e363405d422da653cce0d798a4537f76e4930f79bceadd3a55345"
+    },
+    {
+      "path": "/tmp/m3-build-m2/org/osgi/osgi.annotation/8.0.1/osgi.annotation-8.0.1.jar",
+      "bytes": 36875,
+      "sha256": "a0e8a4c362bd3600812f37b0ea45fba966c7bc049d01fed56a09ecc74082759e"
+    }
+  ],
+  "collections_source_qualified_dependency": {
+    "path": "/tmp/m3-build-m2/com/m3/m3-collections/0.1.0-SNAPSHOT/m3-collections-0.1.0-SNAPSHOT.jar",
+    "bytes": 959537,
+    "sha256": "c74623ac85af1d4e4254dec6c7d246476b12bdca3b882f96c9a399debbd1bb82",
+    "source_qualified_receipt": "/workspace/scratch/206049dfb270/collections-work/evidence/TARGET_OWNING_INSTALL.json",
+    "source_qualified_receipt_sha256": "6eb2b16f7adb29893b8e73e242e63cbf98b3b0b70213d6ac45f1ff6313c412ce"
+  },
+  "resulting_module_jar": {
+    "path": "/workspace/scratch/206049dfb270/M3jdk21/m3/eclipse/core-runtime/target/m3-eclipse-core-runtime-bridge-0.1.0-SNAPSHOT.jar",
+    "bytes": 11152,
+    "sha256": "a8d333178423abeda8b0454a8107f989852df3bafca56d3f1cc0201da5ff610c"
+  },
+  "donor_api_descriptor_comparison": {
+    "status": "EXACT_MATCH",
+    "argv": [
+      "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javap",
+      "-protected",
+      "-s",
+      "-classpath",
+      "/workspace/scratch/206049dfb270/M3jdk21/m3/eclipse/core-runtime/target/classes:/tmp/m3-build-m2/com/m3/m3-collections/0.1.0-SNAPSHOT/m3-collections-0.1.0-SNAPSHOT.jar:/tmp/m3-build-m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.contenttype/3.9.900/org.eclipse.core.contenttype-3.9.900.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.jobs/3.15.900/org.eclipse.core.jobs-3.15.900.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.runtime/3.35.0/org.eclipse.core.runtime-3.35.0.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.app/1.7.600/org.eclipse.equinox.app-1.7.600.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.common/3.21.0/org.eclipse.equinox.common-3.21.0.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.preferences/3.12.100/org.eclipse.equinox.preferences-3.12.100.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.registry/3.12.600/org.eclipse.equinox.registry-3.12.600.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.osgi/3.24.300/org.eclipse.osgi-3.24.300.jar:/tmp/m3-build-m2/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/tmp/m3-build-m2/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/tmp/m3-build-m2/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/tmp/m3-build-m2/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/tmp/m3-build-m2/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/tmp/m3-build-m2/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/tmp/m3-build-m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/tmp/m3-build-m2/org/osgi/org.osgi.service.prefs/1.1.2/org.osgi.service.prefs-1.1.2.jar:/tmp/m3-build-m2/org/osgi/osgi.annotation/8.0.1/osgi.annotation-8.0.1.jar",
+      "com.m3.eclipse.runtime.M3EclipseJobs",
+      "com.m3.eclipse.runtime.M3EclipseJobs$Task",
+      "com.m3.eclipse.runtime.M3EclipseJobScheduler"
+    ],
+    "actual_output_sha256": "0fbabc977a014617a582b1e8e99a129605f14a4c2abd34a3a07fd2319eec9b49",
+    "pinned_donor_output_sha256": "0fbabc977a014617a582b1e8e99a129605f14a4c2abd34a3a07fd2319eec9b49"
+  },
+  "report_copies": [
+    {
+      "path": "surefire-reports/TEST-com.m3.eclipse.runtime.M3EclipseJobSchedulerTest.xml",
+      "sha256": "c8fcac20903459ec944d9e51300de41def2c0feb788bf91ddb01ba931efbba32"
+    },
+    {
+      "path": "surefire-reports/TEST-com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest.xml",
+      "sha256": "a93911e8475946213abe8186884813ca26cd0620dc813cd89eb235d46107b36b"
+    },
+    {
+      "path": "surefire-reports/TEST-com.m3.eclipse.runtime.M3EclipseJobsTest.xml",
+      "sha256": "b29692162bdc12b131700a83988bbbd1ba35838c57a3be00206eec851543cc7e"
+    },
+    {
+      "path": "surefire-reports/TEST-com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.xml",
+      "sha256": "a19d30f0632236ad5aa433dcf47863be08c8b277571dda6c2ab5c6a377393138"
+    },
+    {
+      "path": "surefire-reports/com.m3.eclipse.runtime.M3EclipseJobSchedulerTest.txt",
+      "sha256": "e4a4f6fb84754d030be65020ac4ec46d2410c969ef60d98cba793014a7e0bdde"
+    },
+    {
+      "path": "surefire-reports/com.m3.eclipse.runtime.M3EclipseJobsCompatibilityTest.txt",
+      "sha256": "4246aaed77749d414c8e7c99cf6b9cdc052ce7a2006345ecfb7b4043c9b92a69"
+    },
+    {
+      "path": "surefire-reports/com.m3.eclipse.runtime.M3EclipseJobsTest.txt",
+      "sha256": "37052f096b3aaab141b0485ce090de31a0440976eb07a65bbd57e4c6fe9bd948"
+    },
+    {
+      "path": "surefire-reports/com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.txt",
+      "sha256": "1026bc975f00cde61df72a25a09fe787cfd79b479389b4b43c6520e570174d05"
+    }
+  ],
+  "interpretation": "The emitted sources passed the original whole module POM with the actual source-qualified collection JAR and real Eclipse runtime3.35.0/jobs3.15.900 binaries; all original donor/current tests plus four real native-Job oracle tests passed.",
+  "boundaries": [
+    "Eclipse dependency binaries are real pinned artifacts; Eclipse itself was not rebuilt from source.",
+    "No full OSGi/PDE/workbench/UI application, family policy or platform integration claim.",
+    "This gate introduces no JNI symbols and does not substitute for separate native library gates.",
+    "No hosted GitHub Actions or full JDK image gate executed here.",
+    "No performance or global receiving-phase promotion claim."
+  ]
+}

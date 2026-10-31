@@ -1,0 +1,265 @@
+{
+  "schema": "M3_GRADLE_PROVIDER_QUALIFICATION_V1",
+  "status": "LOCAL_QUALIFICATION_PASS",
+  "recorded_utc": "2026-10-18T13:29:08.971591+00:00",
+  "source_lock": "SOURCE_LOCK.json",
+  "source_lock_sha256": "cbeed0552c0c43534fcf83b0d748ae1642c9a6abe3d5c0a51e89e3a7e565c564",
+  "receiver_prefix": "m3/tooling/module-packs/build-support/gradle-provider/",
+  "receiving_files": 9,
+  "implementation_sha256": "92a7700275af7759c6a8c80e636fc19e9ac1affa84c0cfa15b8063ae70244557",
+  "actual_host_contract": {
+    "repository": "hsoliwal/gradle",
+    "commit": "419a77cf61af3924f60678510ed2440230047671",
+    "path": "platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/M3JavacASTProvider.java",
+    "blob": "f2a08ee8074d6f6faec69543032c9176ad62ef11",
+    "url": "https://github.com/hsoliwal/gradle/blob/419a77cf61af3924f60678510ed2440230047671/platforms/jvm/java-compiler-worker/src/main/java/org/gradle/api/internal/tasks/compile/M3JavacASTProvider.java",
+    "qualification": "Exact published interface source; selective source compilation does not establish a Gradle worker/distribution build.",
+    "mutations": 0
+  },
+  "compiler_proof_inputs": "proof-inputs/compiler-module-02/INPUTS.json",
+  "compiler_image": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/candidate/image",
+  "compiler_classification": "Hybrid Java21 image built from actual M3 compiler sources and actual module descriptor plus preserved stock native/module payload; no hash-check bypass and not a full source-built M3JDK.",
+  "full_native_gradle_distribution": {
+    "status": "UNVERIFIED",
+    "reason": "No usable source-built pinned Gradle distribution or required JDK25 build environment was available. Exact published SPI source was compiled; full Gradle host wrapper, worker/daemon and incremental tasks were not executed."
+  },
+  "gates": [
+    {
+      "label": "22-authoring-lint",
+      "command_record": "logs/22-authoring-lint.json",
+      "command_record_sha256": "9b19e1b3bc4f1f12493f476454ea1d487a1d4956e3783e278f547f406b75ff47",
+      "log_sha256": "36674a8134f71b16ac01ed1f3ebc8e53bc08d8fedbebe2464a0f74fbcb99c1f2",
+      "exit_code": 0
+    },
+    {
+      "label": "23-authoring-compile",
+      "command_record": "logs/23-authoring-compile.json",
+      "command_record_sha256": "7e6b28bac7f8d4a5989c448bd76d8de82a41ae8c18e2cef2db2dcf2b3b1bb86d",
+      "log_sha256": "cfb4b261cbf177ac9cc8ee5c1275354a8d5a15f57d8596e099fa4b0f741455b6",
+      "exit_code": 0
+    },
+    {
+      "label": "24-authoring-tests",
+      "command_record": "logs/24-authoring-tests.json",
+      "command_record_sha256": "beabdb287c21b5fc8d5e00137daeac896518be4184b2010d7074fab696999d46",
+      "log_sha256": "c856f61da9e9addf864a9c793e7fb45033ba5010cf8ad0a170c8f6d280505e69",
+      "exit_code": 0
+    },
+    {
+      "label": "05b-sealing-contracts",
+      "command_record": "logs/05b-sealing-contracts.json",
+      "command_record_sha256": "bbe69a17b1bb1889260804ad8544ffb952c7b1c3f87aa6178ad74ce592d877ac",
+      "log_sha256": "316558a93ba028238bcd514bbec8a07c6b5122f2fa8e4ce8499b5d85bc6111f8",
+      "exit_code": 0
+    },
+    {
+      "label": "25-receiver-contracts",
+      "command_record": "logs/25-receiver-contracts.json",
+      "command_record_sha256": "03826103f05625fe7a78a9a3a1f9ca1b90c7fd5019fb3b1d16255a34e44c7e77",
+      "log_sha256": "a1b9da09018fc875b42949371dcfa3ea65eb1771964bb235a4e363329b1547e7",
+      "exit_code": 0
+    },
+    {
+      "label": "26a-receiver-check",
+      "command_record": "logs/26a-receiver-check.json",
+      "command_record_sha256": "5f918b4f35e4387b6ea704507d3670e1eb6a20d0b8efeec84654bff6044c6929",
+      "log_sha256": "2a64ff9cb65287ac2f1f9389012ea37dad5b7893440dc076ae76754b2e8ed97f",
+      "exit_code": 0
+    },
+    {
+      "label": "26b-receiver-apply",
+      "command_record": "logs/26b-receiver-apply.json",
+      "command_record_sha256": "bc863258889fd00bbc53f4f6ee4b4e8f8785c87c74cb3b8480567ec40d128f7f",
+      "log_sha256": "b24ccd2f1d1d2be95e954a3dc921ac4ed8055b93d70a032fc2c02242ad46c3ca",
+      "exit_code": 0
+    },
+    {
+      "label": "26c-receiver-fixedpoint",
+      "command_record": "logs/26c-receiver-fixedpoint.json",
+      "command_record_sha256": "c0fffa3b80ca7838b382bdd26a68c40a0a0a901b17b852d28617d111ce1d31eb",
+      "log_sha256": "cce5171cc7519c81262e25eb3ce8ffb4fce1ba61ffcd89d8720b8e86ef62221c",
+      "exit_code": 0
+    },
+    {
+      "label": "27-product-lint",
+      "command_record": "logs/27-product-lint.json",
+      "command_record_sha256": "601eb5081f2fef1a43c16115c9e0a537805438798b397ae0de420a239e37857b",
+      "log_sha256": "36674a8134f71b16ac01ed1f3ebc8e53bc08d8fedbebe2464a0f74fbcb99c1f2",
+      "exit_code": 0
+    },
+    {
+      "label": "28-provider-compile",
+      "command_record": "logs/28-provider-compile.json",
+      "command_record_sha256": "75c3fb2613ba5e11b6f31ad404ceb91f1e4bab195bd76d89b25b857e71591df1",
+      "log_sha256": "64559fb9464074665ec6f25f387d02118c291b791d4140771519603ee90ca0e7",
+      "exit_code": 0
+    },
+    {
+      "label": "29-provider-tests",
+      "command_record": "logs/29-provider-tests.json",
+      "command_record_sha256": "99f96ae32c07ce935d29327882ca164475499a86a1b1ef24f90ad9502cae821f",
+      "log_sha256": "07d7062caf122f69d343d4bd492da34253c06d353576570e2f573cc813779223",
+      "exit_code": 0
+    },
+    {
+      "label": "30-provider-package",
+      "command_record": "logs/30-provider-package.json",
+      "command_record_sha256": "5495a8ba5d63bc0bed86bee3541081e7933596070a823b247e036b56406a63c6",
+      "log_sha256": "74242e3bfcffea2e5da7b36c5649725d930c88e4e082dd66b3f72fde24d2f9bf",
+      "exit_code": 0
+    },
+    {
+      "label": "31-provider-runtime",
+      "command_record": "logs/31-provider-runtime.json",
+      "command_record_sha256": "d7a649028ee5b9f368ba272a84c67e48fc94146a8c81742f73a9f932b33c32bb",
+      "log_sha256": "7989a8f6202f6f385a32336ef5843ec4294fabf2ca876161a25e4aba3b683636",
+      "exit_code": 0
+    }
+  ],
+  "product_tests": {
+    "tests": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "suite": "org.gradle.internal.m3.ast.M3GradleASTProviderTest",
+    "report": "generated-final/m3/tooling/module-packs/build-support/gradle-provider/target/surefire-reports/TEST-org.gradle.internal.m3.ast.M3GradleASTProviderTest.xml",
+    "report_sha256": "616451add3de2c1adb57552759679de797160621f3a1023e87fb728f581ea4a9",
+    "cases": [
+      "longerPluginNameDoesNotSuppressProviderConsumers",
+      "laterCompilerOptionOverrideKeepsProviderConsumersWhenBuiltinIsRemoved",
+      "compilerErrorsKeepOriginalDiagnosticsAndCloseBothConsumers",
+      "parentLoadedConsumerIsRejectedBeforeConstructionAndKeepsApiIdentity",
+      "programmaticNulSeparatedPluginNamesKeepOneDiscoveryOwner",
+      "parsedFailureClosesBothConsumersAndDoesNotLeakIntoNextInvocation",
+      "twoConsumersShareOriginalTreesAndOneProjectionPerParse",
+      "builtinPluginAndProviderDiscoverConsumersOnce",
+      "compilerOptionTableEnablingBuiltinPluginKeepsOneDiscoveryOwner",
+      "failedServiceConstructionClosesOriginalSessionBeforeCompilation",
+      "bothFinishedFailuresPreservePrimaryAndSuppressedErrors",
+      "optionLookingClasspathOperandDoesNotSuppressProviderConsumers",
+      "builtinPluginArgumentsUseJavacsExactWhitespace(char)[1]",
+      "builtinPluginArgumentsUseJavacsExactWhitespace(char)[2]",
+      "builtinPluginArgumentsUseJavacsExactWhitespace(char)[3]",
+      "builtinPluginArgumentsUseJavacsExactWhitespace(char)[4]",
+      "builtinPluginArgumentsUseJavacsExactWhitespace(char)[5]",
+      "builtinPluginArgumentsUseJavacsExactWhitespace(char)[6]",
+      "originalSessionHasOneAttachmentAndExplicitCloseReleasesTask",
+      "preparePreservesDeferredInputsAndExistingManagerWithoutReading"
+    ],
+    "test_vm_profile": "default; real descriptor image; no --patch-module or test skips"
+  },
+  "artifact": {
+    "schema": "M3_GRADLE_PROVIDER_JAR_INVENTORY_V1",
+    "jar": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/generated-final/m3/tooling/module-packs/build-support/gradle-provider/target/m3-gradle-ast-provider-1.0-SNAPSHOT.jar",
+    "sha256": "7545639011d3a2c5a38d0d256ec98e2e6427753c2c24171b74552717d539957a",
+    "bytes": 7942,
+    "compiled_class_count": 3,
+    "entries": [
+      {
+        "path": "META-INF/MANIFEST.MF",
+        "sha256": "8ef19699a3672226baa7a2419c01b023200134eca343c1949255670ea1b30ade",
+        "bytes": 81
+      },
+      {
+        "path": "org/gradle/internal/m3/ast/M3GradleASTProvider.class",
+        "sha256": "ee31fa1ce690f6541e0e4d8f3cc96c4762588cb0158798d4c5c83abc58c339eb",
+        "bytes": 2276
+      },
+      {
+        "path": "org/gradle/internal/m3/ast/M3GradleASTProvider$Compilation.class",
+        "sha256": "44926b3323b055c9bc15a3cf4f14a66e30204783a4e30140e5fdbb5e98bef234",
+        "bytes": 5053
+      },
+      {
+        "path": "org/gradle/internal/m3/ast/M3GradleASTProvider$Compilation$Execution.class",
+        "sha256": "b7c901b546c331c9eb9f18bd6ee613a6b9a64ef6017c0ff351d0b6ccd7695836",
+        "bytes": 2292
+      },
+      {
+        "path": "META-INF/maven/org.m3jdk.tooling/m3-gradle-ast-provider/pom.xml",
+        "sha256": "f3467d28d5184aa914652c01113033e122c816ed95ac4285ee2ca02572b14ca1",
+        "bytes": 4298
+      },
+      {
+        "path": "META-INF/maven/org.m3jdk.tooling/m3-gradle-ast-provider/pom.properties",
+        "sha256": "21fe222d5d60c5d3a913d51953b7754b3f43c163ffcb83e6d7f8ad32dfeb4a30",
+        "bytes": 81
+      }
+    ],
+    "manifest": "Manifest-Version: 1.0\r\nCreated-By: Maven JAR Plugin 3.4.1\r\nBuild-Jdk-Spec: 21\r\n\r\n",
+    "bundles_gradle_spi": false,
+    "bundles_m3ast_api": false,
+    "bundles_test_consumers": false,
+    "class_bytes_match_tested_output": true,
+    "package_gate": "logs/30-provider-package.json"
+  },
+  "runtime": {
+    "receipt": "runtime-proof-01/RECEIPT.json",
+    "schema": "M3_GRADLE_PROVIDER_RUNTIME_V1",
+    "status": "PASS",
+    "compilerInvocations": 1,
+    "parsedUnits": 2,
+    "consumers": 2,
+    "projectionComputations": 2,
+    "projectionHits": 2,
+    "extraSourceReads": 0,
+    "classByteParity": true,
+    "runtimeAnswer": 42,
+    "fullGradleDistribution": false,
+    "compilerInvocations_scope": "One original compiler task per selected compilation; the parity baseline is a separate ordinary invocation.",
+    "parse_and_projection_scope": "Two parsed units: original source plus annotation-processor generated source. Each unit has one projection computation and one cache hit for two independent consumers.",
+    "live_tree_identity": "Asserted against the actual original PARSE TaskEvent object and Trees.instance(originalTask); no alternate parser or AST representation."
+  },
+  "recipe_custody": {
+    "canonical_owner": "hsoliwal/com.synexia@140c263a90f9803b9c46103c63355a286e0515f0",
+    "crate": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+    "dataset": "gradle-provider-20261018",
+    "input_count": 16,
+    "engine_changes": 0,
+    "recipe_test_count": 5,
+    "sealing_contract_count": 8,
+    "receiver_contract_count": 9,
+    "receiver_first_changes": 9,
+    "receiver_second_changes": 0,
+    "manifest_normalization": "FINAL_PREPARATION.json",
+    "engine_scope": "Unchanged existing class-backed Java/Text snapshots and unchanged actual existing SDK harness.",
+    "public_mirror": "m3/tooling/shared-frontend/recipe-custody/datasets/gradle-provider-20261018",
+    "evidence_mirror": "m3/tooling/shared-frontend/recipe-custody/enhancements/20261018-gradle-provider",
+    "canonical_evidence": "enhancements/20261018-gradle-provider"
+  },
+  "historical_failures_preserved": [
+    {
+      "gate": "04-authoring-tests",
+      "reason": "Existing prepare-produced $ template reference rejected by unchanged text engine; normalized only task resource reference."
+    },
+    {
+      "gate": "05-authoring-contracts",
+      "reason": "Offline Maven exec-plugin unavailable before launch; exact unchanged configured Python sealing8 + receiver9 contracts ran directly and passed; Maven contract-profile launcher is not claimed."
+    },
+    {
+      "gate": "08c-provider-compile",
+      "reason": "Split --patch-module argument triggers actual Maven compiler-plugin3.13.0 testCompile NPE on nonmodular project; existing supported single-token compiler argument qualified through SDK and final compile28 PASS."
+    }
+  ],
+  "review": {
+    "reviewer": "/root/ast_invariants",
+    "implementation_sha256": "92a7700275af7759c6a8c80e636fc19e9ac1affa84c0cfa15b8063ae70244557",
+    "result": "Read-only source re-review PASS; effective query precedes open, no duplicate compiler work, real option regressions and parent-consumer refusal present."
+  },
+  "prohibited_changes_observed": {
+    "engine_forks": 0,
+    "new_compiler_tasks_in_provider": 0,
+    "provider_source_reads": 0,
+    "separate_parses_in_provider": 0,
+    "default_lossless_override": false,
+    "receiver_source_hand_edits": 0,
+    "remote_mutations": 0
+  },
+  "next_owner_action": "Root reviews, receives exact existing SDK-qualified nine-file candidate through the unchanged receiver, then mirrors the new canonical dataset and evidence under existing custody paths. No action has been taken in the root receiving checkout or remote repositories by this agent.",
+  "compiler_proof_inputs_sha256": "633be747ca379e4eadd02b105b44e526f389dd504eb2d1225200a3a4a07cdde6",
+  "compiler_descriptor_validation": {
+    "status": "ROOT_VALIDATION_PASS",
+    "receipt": "proof-inputs/descriptor-image-02/VALIDATION_RECEIPT.json",
+    "sha256": "d8ff6b867adf66f631b39ee0b2687c3ff04dc9aa98d6da80fecbd293ed1b927a"
+  }
+}

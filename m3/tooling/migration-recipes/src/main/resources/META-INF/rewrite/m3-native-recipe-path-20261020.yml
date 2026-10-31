@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3NativeRecipePath20261020
+displayName: Guarded PlainText native source admission for M3JDK21
+description: Source-sealed Java LST migration of the native-path admission kernel and its tests.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-native-recipe-path-20261020
+      lst: true

@@ -1,0 +1,11 @@
+{
+  "contained_accepts_non_directory_ancestor": true,
+  "receive_error": {
+    "type": "FileExistsError",
+    "message": "[Errno 17] File exists: '/tmp/m3-parent-file-review-dpfmc3bt/target/z'"
+  },
+  "first_target_written_before_refusal": true,
+  "blocking_parent_unchanged": true,
+  "prepare_seals_impossible_baseline_child": true,
+  "scope": "Temporary isolated receiver-admission witness; SDK qualification replaced by a fixed two-output value only for this path-admission test; production files untouched."
+}

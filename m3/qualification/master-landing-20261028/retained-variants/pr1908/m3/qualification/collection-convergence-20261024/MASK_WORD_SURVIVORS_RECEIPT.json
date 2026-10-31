@@ -1,0 +1,110 @@
+{
+  "schema": "M3_MASK_WORD_SURVIVORS_RECEIVER_V1",
+  "status": "QUALIFIED_BOUNDED_DRAFT",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_revision": "1dd3623a9bf800129a0a1c5f7fc3c971e0c48298",
+  "canonical_pr": 13301,
+  "canonical_task": "synexia-openrewrite-recipes/recipes/m3-mask-word-survivors-20261025",
+  "recipe_id": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "dataset_id": "m3-mask-word-survivors-20261025",
+  "target_parent": "5b85b2153426a597d936aa0eb0f11b842f9a4574",
+  "target_pr": 1908,
+  "executed_postimages": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java",
+      "before_sha256": "1c3f3d2cf129b0ccc44e001fce9f68a251e964ce2c5f7ac5007990cfdaca3216",
+      "after_sha256": "17a2c1b601d5552b3baeb6751c18700f7254ee6faa23afc0913cf3c45a3b4c05",
+      "mode": "100644"
+    },
+    {
+      "path": "test/jdk/java/util/ArrayList/M3MaskWordSurvivorsTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "574b4e97abf2df7f9c539f7c0a38473960c39bd3dccafd8f8b1f967116f837f8",
+      "mode": "100644"
+    }
+  ],
+  "unchanged_callers": [
+    {
+      "path": "src/java.base/share/classes/java/util/ArrayList.java",
+      "sha256": "d05d5efd61e1ae8514c904d28cea7335eec824becddbf62dcb0b425ec7790c7b",
+      "changed": false
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Vector.java",
+      "sha256": "14ebbeeb90561ab7c24ba67f4bea90d55735d5c7212fd43c9799e5ba84afdace",
+      "changed": false
+    }
+  ],
+  "runtime_owner": "jdk.internal.mindex.M3CollectionMaskCompactor in actual java.base",
+  "behavior": "Stable survivor-word compaction only for large fragmented fallback; scalar windows<1024 and early-exit run-copy dispatch retained",
+  "sdk_execution": {
+    "status": "PASS",
+    "tests": 6,
+    "fixed_point_refusal": "PASS"
+  },
+  "source_image": {
+    "strict_build": "PASS",
+    "jtreg_selected_passed": 26,
+    "actual_jni": "NATIVE_REQUIRED under -Xcheck:jni",
+    "api": "3publicsignatureoutputs byte-equal",
+    "compiler_gc": "default/interpreter/C1/C2/SerialGC/defaultG1/ZGC checks pass",
+    "new_oracle_checks_each": 109744384,
+    "native_symbols_changed": 0
+  },
+  "resources": {
+    "status": "BOUNDED_CPU_IMPROVEMENT_WITH_MEASURED_PROCESS_MEMORY_COST",
+    "summary": "evidence/image/resources-summary.json",
+    "matched_process_pairs": 3,
+    "cohorts": 120,
+    "allocation_delta_bytes_per_call": [
+      0.0
+    ],
+    "large_fragmented_caller_cohorts": 20,
+    "candidate_over_baseline_cpu_ratio_range": [
+      0.5684384467852664,
+      0.8564835633521397
+    ],
+    "regressions_and_controls": "Raw table retained: unchanged controls vary; isolated kernel128dense1 ~1.18x, kernel65536none ~1.21x, Vector512dense8 ~1.10x. Initial4096blocks kernel and65536blocks ArrayList concerns reduce to~1.00x/~1.02x. No universal speed claim.",
+    "retained_graph_deltas": [
+      {
+        "pair": 1,
+        "allocated_bytes": 0,
+        "retained_heap_used_bytes": 160,
+        "nmt_committed_bytes": 820036,
+        "max_rss_kib": 1600
+      },
+      {
+        "pair": 2,
+        "allocated_bytes": 0,
+        "retained_heap_used_bytes": 160,
+        "nmt_committed_bytes": 820036,
+        "max_rss_kib": 296
+      }
+    ],
+    "native_analysis": "~818600 of820036 extra committed NMT bytes classified Arena Chunk; source introduces no payload field or allocation. NMT is process-wide and does not establish per-entry ownership; no memory-reduction claim.",
+    "harness_correction": "evidence/image/memory-harness-correction.json",
+    "limitations": "One host, short diagnostic probes, median samples; not JMH, sustained workload, multi-machine or full release resource gate",
+    "aggregation": "median of9pooled observations: samples3..5fromeach3processes pervariant;3independentprocesspairs"
+  },
+  "review": {
+    "status": "NO_CRITICAL_OR_IMPORTANT_FINDINGS",
+    "scope": "code, exact source-image evidence, resource calculations",
+    "merge_or_release_approval": false
+  },
+  "rights": {
+    "helper": "Existing copyright2026 Hitesh Soliwal and contributors; GPL-2.0-only WITH Classpath-exception-2.0 retained",
+    "target_test": "GPL-2.0-only",
+    "donor": "Synexia PR12367 revision1bd84e58368279cf3259c78e7d70c04c7df27f9e; existing BitSet traversal pattern",
+    "independent_oracles": "M3JDK21 PR1873 revision3ed89578f122860e091d17e630be7ed89c9dceba; private qualification fixtures"
+  },
+  "remaining_gates": [
+    "GitHub CI after publication",
+    "full JCK/jtreg and reactor",
+    "cross-platform/JIT/GC/serialization qualification",
+    "complete five-provider collection-family integration",
+    "complete historical provenance gate",
+    "ordered String -> arrays -> collections release admission"
+  ],
+  "receiving_phase": "String remains active; no phase promotion",
+  "boundary": "Data-only receipt. Recipes, fixtures, catalogues and correction memory remain exclusively in Synexia. No new runtime dependency."
+}

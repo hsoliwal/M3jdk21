@@ -1,0 +1,101 @@
+{
+  "schema": "M3_CURRENT_SOURCE_RECEIVING_ADMISSION_V1",
+  "qualified_source": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+  "observed_master": "df532e779056dbec203dde20030657c3d144f5b5",
+  "merge_base": "9a164c31b38c7013c179a3ff38b0bb60c199c7fd",
+  "total_commits": 39,
+  "complete_file_comparison": true,
+  "changed_files": [
+    {
+      "path": ".github/actions/do-build/action.yml",
+      "status": "modified",
+      "git_blob": "670b2d97ecb8e4f4fa7cd31d59a5031e3bbbeb54"
+    },
+    {
+      "path": ".github/actions/get-bundles/action.yml",
+      "status": "modified",
+      "git_blob": "0e52320a3506063d7705005513c10a7c40c65cf3"
+    },
+    {
+      "path": ".github/actions/upload-bundles/action.yml",
+      "status": "modified",
+      "git_blob": "b35ee3a42e98cbc57d0f467a9b34ad5b58fa4043"
+    },
+    {
+      "path": ".github/workflows/m3-ast-real-providers-20261019.yml",
+      "status": "added",
+      "git_blob": "909b262ae04a8f33b536899ca9080af307259be1"
+    },
+    {
+      "path": "m3/lexicon/hf-intake/README.md",
+      "status": "modified",
+      "git_blob": "f2831bcb3310353892d0d482228af5aa92053331"
+    },
+    {
+      "path": "m3/lexicon/hf-intake/algorithm-catalogue.tsv",
+      "status": "modified",
+      "git_blob": "b9e81d96d261749677fbc79774205c37863bd2db"
+    },
+    {
+      "path": "m3/lexicon/hf-intake/src/test/java/com/m3/lexicon/hf/M3HfLexiconIntakeProof.java",
+      "status": "modified",
+      "git_blob": "76210b522d670415e141af81f1bf02c3f8d0f6f5"
+    },
+    {
+      "path": "m3/lexicon/hf-intake/src/test/resources/com/m3/lexicon/hf/language-resource-discovery.tsv",
+      "status": "modified",
+      "git_blob": "ed22aa162eb90e038b9be9b4e30624b704d31a91"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv",
+      "status": "added",
+      "git_blob": "dad7f159b7df1f19cb47cad51478045222de54ba"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/README.md",
+      "status": "added",
+      "git_blob": "4813248f295337ee4204eabcb826c0a23b9b9e0e"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/pom.xml",
+      "status": "added",
+      "git_blob": "a57dae329510917e297c9dd2705dab901a430fb0"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3GradleToolingSmoke.java",
+      "status": "added",
+      "git_blob": "a8eae55e6dfa11ed760ad9a3368a8e25dae7b678"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3JacksonIndexScale.java",
+      "status": "added",
+      "git_blob": "3cfa5bc13317b36db7ecb1a55d9c178b15db88cd"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3KotlinPsiSmoke.java",
+      "status": "added",
+      "git_blob": "8c1b90c42736d7f9af42aae057dc6a0563d3a517"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3RealProvidersSmoke.java",
+      "status": "added",
+      "git_blob": "fd726ec0b248a327f0d7dc853d58b545d49e5d25"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java",
+      "status": "added",
+      "git_blob": "bd7220287e7190d7da8c88c06fd2ee8f602b9426"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTJacksonEvents.java",
+      "status": "added",
+      "git_blob": "12a1ddd26a300ff62dbcba52f4fef0ee91fc62a7"
+    }
+  ],
+  "overlapping_qualified_source_files": [],
+  "qualification": "PASS_SOURCE_SCOPE_UNCHANGED; NO_ADDITIONAL_RUNTIME_EXECUTION",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "74d5a8e17e130c65dc3b57fae8d23c7e243a2fdd",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12528",
+  "phase_promotion": false
+}

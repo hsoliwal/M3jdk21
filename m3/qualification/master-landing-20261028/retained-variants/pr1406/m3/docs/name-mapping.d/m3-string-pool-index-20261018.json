@@ -1,0 +1,36 @@
+{
+  "schema": "M3_SOURCE_REFINEMENT_MAPPING_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "recipe": "com.synexia.m3.StringPoolIndex20261018",
+  "recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-string-pool-index-20261018",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_base": "289e32f130c9c8e4a1cf0edc1066327d699393bf",
+  "disposition": "EXISTING_OWNER_PRIVATE_ATOM_REFINEMENT",
+  "targets": [
+    "m3/runtime-integration/check-m3string-invariants.py",
+    "m3/runtime-integration/test_string_pool_precompute.py",
+    "src/java.base/share/classes/java/lang/M3StringPool.java",
+    "test/jdk/java/lang/String/M3StringFrozenLexiconIndexTest.java",
+    "test/jdk/java/lang/String/M3StringPoolMetadataBoundsTest.java"
+  ],
+  "proof": "m3/qualification/string-index-reverse-20261018/pool",
+  "receiving_sequence_advanced": false,
+  "family_completion": false,
+  "repository_completion": false,
+  "intake_mode": "OPENJDK_OWNER_ALGORITHM_ADAPTATION",
+  "source_reference": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MappedCompiledLanguageImage.java",
+  "source_role": "primitive bounded row+1 candidate-directory design; no donor source body copied into java.base",
+  "contracts": [
+    "unchanged public/protected descriptors and M3String representations",
+    "exact UTF-16 and existing duplicate shared-row selection",
+    "same M3LEX/SYNARR01 formats and mapped payload identity",
+    "bounded optional slots/coders after mandatory allocations",
+    "existing monitor, retired-bucket retry and native accounting"
+  ],
+  "pending": [
+    "fresh strict matched M3JDK21 image and selected jtreg runtime",
+    "representative native/heap/latency measurements",
+    "permanent cross-generation semantic concept anchors"
+  ]
+}

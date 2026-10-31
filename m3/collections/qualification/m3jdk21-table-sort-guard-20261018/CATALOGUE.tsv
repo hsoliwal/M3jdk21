@@ -1,0 +1,5 @@
+category	owner	candidate	selection	contract	origin
+stable-index-sorting	M3IndexedTable.IndexView.sortedByValue	Existing bottom-up stable mergesort on int[]	RETAIN	equal keys choose left, no payload movement	first-party Apache-2.0
+reentrant-mutation-guard	M3IndexedTable.IndexView.sortedByValue	revision check after every Comparator and before return	ADMIT	fail before index publication if a callback changes owner revision	first-party Apache-2.0
+JNI-index-selection	M3IndexMaskCompactor	original native int[]/byte[] mask selector	UNCHANGED	no Java comparator, object, payload or predicate passed to C	first-party Apache-2.0
+donor-discovery	LeetCode 912; HackerRank sorting; GeeksforGeeks merge sort	algorithm/category taxonomy	NO CODE COPY	no third-party algorithm code ingested	reference only

@@ -1,0 +1,15 @@
+key	value
+run_date	2026-10-21
+product	hsoliwal/M3jdk21
+product_input	2779aba3f98f31c324be43f731be7914e1a05935
+canonical_family	m3-arrayification-20261018
+mode	apply to isolated recipe-emitted candidate; remote not applied
+workers	1
+shards	1
+public_api	LOCKED
+external_behavior	LOCKED
+native_abi	LOCKED
+verify_order	diff -> source hygiene/C syntax lint -> compile -> tests -> runtime
+source_built_jdk_admission	NOT_ADVANCED
+java	OpenJDK 21.0.12.1 Debian
+maven	3.9.9 offline

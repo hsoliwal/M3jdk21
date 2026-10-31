@@ -1,0 +1,59 @@
+{
+  "source_repo": "hsoliwal/com.synexia",
+  "source_commit": "cf3796cfca75284e9626b1e31703e41314c9f852",
+  "target_repo": "hsoliwal/M3jdk21",
+  "target_base": "7652e327eccb9df658cbfaf2f6373a01c562b260",
+  "target_tree": "4f06dbf789b4447e3c694100be3690dc7afafd95",
+  "donor": {
+    "LICENSE": {
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "git_blob": "29f81d812f3e768fa89638d1f72920dbfd1413a8"
+    },
+    "MIndexRegexTrigramQuery.java.txt": {
+      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+      "git_blob": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea"
+    },
+    "NOTICE": {
+      "sha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+      "git_blob": "cf6694a1316785ba2aa45394314bbae2e856c7fe"
+    },
+    "trigram-oracle.cpp.txt": {
+      "sha256": "5cc3a6d227b44b234b0883dc7c3790ee522b153013f3f302233ef42ae01f3d89",
+      "git_blob": "c55de5857bb14269dcc66e4bd107d4f5346645a3"
+    }
+  },
+  "dependencies": {
+    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java": {
+      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72",
+      "git_blob": "33783749e46474f2bdc68103e189fe2907a61fa9"
+    },
+    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": {
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "git_blob": "a2e8c916208b563517e51b738744a05357e633aa"
+    },
+    ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java": {
+      "sha256": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462",
+      "git_blob": "cfb9fb8befe2c5ccde5035e96ae7c99b89b5f490"
+    },
+    ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java": {
+      "sha256": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5",
+      "git_blob": "8f1018a1bcfa203420253d59a8473ef5a18e19b6"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java": {
+      "sha256": "880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f",
+      "git_blob": "1258454eed20e5ec07c51a07efd554eb2d68ab45"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java": {
+      "sha256": "323bca7d4452e3e58f5c5941b586c33825becc2593b853b51df86db9d820e25b",
+      "git_blob": "070ab09ff689f63f15f91f57e9dd63e2cf839031"
+    },
+    "test/jdk/java/lang/String/MIndexMappedStringBackingTest.java": {
+      "sha256": "95916a7687bf3dcf2bb39a7d0859a023d0796b58a3ac25318e6a813595f531b0",
+      "git_blob": "dab7de1fa7c090974f6ff810e8e728d3ba53ea16"
+    },
+    "test/jdk/java/lang/String/MapFactsTest.java": {
+      "sha256": "c5d856acc3fa5b7b636894d1dd18b087c1d8e1a450fcbef0821e87b969d185c2",
+      "git_blob": "69703b272a5f153eaf8d43d169a5151cb725e15d"
+    }
+  }
+}

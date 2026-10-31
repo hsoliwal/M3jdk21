@@ -1,0 +1,10 @@
+category	baseline	selected	decision	contract
+FILTERED_NAVIGATION	repeated higher/lower tree lookup per rejected value	bounded range iterator after one range seek	ADMIT_CANDIDATE	ordering/comparator/range exceptions preserved
+FILTERED_WRAPPER_OWNERSHIP	M3FilteredNavigableSet duplicates M3FilteredViews algorithm	compatibility facade over M3FilteredViews	CONSOLIDATE	public M3 type/factory and live read-only semantics retained
+DYNAMIC_ARRAY_MASKS	M3 index/mask/state arrays	keep existing primitive owners	REUSE	no Entry allocation and stable offsets/masks remain separate
+JNI_OBJECT_PREDICATE	per-element Java callback crossing	no new JNI callback	REJECT	predicate order/exceptions/GC references remain Java-owned
+LEETCODE	Remove Element #27 / ordered selection shapes	reference only	TAXONOMY_ONLY	no source copied
+HACKERRANK	Java Comparator / ordered traversal shapes	reference only	TAXONOMY_ONLY	no source copied
+GEEKSFORGEEKS	selection/search/bit-mask categories	reference only	TAXONOMY_ONLY	no source copied
+GUAVA	Sets.filter/Collections2	contract reference	REFERENCE_ONLY	mutable live-view differences prevent direct replacement
+OPENJDK	TreeSet/NavigableSet/TreeMap	contract reference	REFERENCE_ONLY	comparator and endpoint semantics authoritative

@@ -1,0 +1,10 @@
+M3_CACHE_RESOURCE failure=false count=1 samples=8 bytesPerEvent=344.0 nsPerEvent=8045.4
+M3_CACHE_RESOURCE failure=false count=8 samples=8 bytesPerEvent=344.0 nsPerEvent=27582.1
+M3_CACHE_RESOURCE failure=false count=64 samples=8 bytesPerEvent=1912.0 nsPerEvent=510391.0
+M3_CACHE_RESOURCE failure=false count=1024 samples=8 bytesPerEvent=32696.0 nsPerEvent=3246642.8
+M3_CACHE_RESOURCE failure=false count=8192 samples=8 bytesPerEvent=262120.0 nsPerEvent=61462724.0
+M3_CACHE_RESOURCE failure=true count=1 samples=8 bytesPerEvent=360.0 nsPerEvent=39256.4
+M3_CACHE_RESOURCE failure=true count=8 samples=8 bytesPerEvent=472.0 nsPerEvent=145793.5
+M3_CACHE_RESOURCE failure=true count=64 samples=8 bytesPerEvent=2936.0 nsPerEvent=748187.8
+M3_CACHE_RESOURCE failure=true count=1024 samples=8 bytesPerEvent=49080.0 nsPerEvent=13710511.4
+M3_CACHE_RESOURCE failure=true count=8192 samples=8 bytesPerEvent=393192.0 nsPerEvent=69149775.3

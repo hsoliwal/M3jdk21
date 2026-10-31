@@ -1,0 +1,14 @@
+field	value
+source_repo	hsoliwal/com.synexia
+source_pr	12052
+source_commit	7d8d33c8ccdb59309a3d45c33bae7efef9050a39
+source_recipe	com.synexia.rewrite.M3Jdk21MaskAllSelectReceiver20261017
+recipe_resource	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-mask-all-select-20261017/
+receiver_repo	hsoliwal/M3jdk21
+receiver_base	a918e588dd11d5ff7e0a6d4efaa89bb1679a9798
+receiver_target	m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+receiver_before_git_blob	240bbfb62ca949bfbd8abb0061cccad6630f7888
+receiver_after_sha256	e4d8fd83ec0acb9b94bdde5a138d797ccd539c0bb87fe60d419a52f910051fcb
+native_abi_source_git_blob	f1a9488905807e6417dd267e125bfc44dbcc9297
+source_license	Apache-2.0 first-party, original notice retained
+phase_authority	String phase remains active; collections target qualification only

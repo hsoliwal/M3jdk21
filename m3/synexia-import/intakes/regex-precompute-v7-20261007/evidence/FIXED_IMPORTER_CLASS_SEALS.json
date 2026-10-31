@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "status": "PASS_STRICT_SIX_OWNER_COMPILER_COMMAND",
+  "classRoot": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed",
+  "sourceOwners": 6,
+  "compiledClassCount": 14,
+  "classes": [
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed\\com\\m3\\synexia\\importer\\SynexiaCanonicalFamilyPolicy$Family.class",
+      "relative": "com/m3/synexia/importer/SynexiaCanonicalFamilyPolicy$Family.class",
+      "sha256": "f9aae19bc654be8dc25c91f2e027265519b173538fedb53e80945fc8b007ce39",
+      "bytes": 2789
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed\\com\\m3\\synexia\\importer\\SynexiaCanonicalFamilyPolicy.class",
+      "relative": "com/m3/synexia/importer/SynexiaCanonicalFamilyPolicy.class",
+      "sha256": "01e615c2c13e28259ca50ff66aa0bf8c9c3674e8aece0ab3439efac544758a6b",
+      "bytes": 4774
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed\\com\\m3\\synexia\\importer\\SynexiaImportCli.class",
+      "relative": "com/m3/synexia/importer/SynexiaImportCli.class",
+      "sha256": "ed3022c99a1cc3c9b360dda103d1f205ea60ed3fa7d7483a9fc41c75b79898c2",
+      "bytes": 2242
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed\\com\\m3\\synexia\\importer\\SynexiaImporter.class",
+      "relative": "com/m3/synexia/importer/SynexiaImporter.class",
+      "sha256": "6b7bf64a353f1fc6709e7fe4564ce3b37f31d8788827f205532e207134ca45d2",
+      "bytes": 5891
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed\\com\\m3\\synexia\\importer\\SynexiaImportManifest$Entry.class",
+      "relative": "com/m3/synexia/importer/SynexiaImportManifest$Entry.class",
+      "sha256": "e2562740c9f5babbf1aa8740d7b1a8afb17b0f3f1b3b8c2868a87b04e0e74960",
+      "bytes": 3125
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed\\com\\m3\\synexia\\importer\\SynexiaImportManifest$Mode.class",
+      "relative": "com/m3/synexia/importer/SynexiaImportManifest$Mode.class",
+      "sha256": "fa6f0cd32b01680c4f10e7c79faa54c23b59f5a3c89c0bb180ed06872db1e774",
+      "bytes": 1274
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed\\com\\m3\\synexia\\importer\\SynexiaImportManifest.class",
+      "relative": "com/m3/synexia/importer/SynexiaImportManifest.class",
+      "sha256": "cdbb5f74a326ffa6da862093ac02cae601c7926136b2fe169a02cf7bf77b4524",
+      "bytes": 9080
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed\\com\\m3\\synexia\\importer\\SynexiaImportPlan$1.class",
+      "relative": "com/m3/synexia/importer/SynexiaImportPlan$1.class",
+      "sha256": "f18b8871c5b8bfdb1ffa9f9f0a9c5af5e5b6804079947903dea53eb08ab21c56",
+      "bytes": 2806
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed\\com\\m3\\synexia\\importer\\SynexiaImportPlan$Action.class",
+      "relative": "com/m3/synexia/importer/SynexiaImportPlan$Action.class",
+      "sha256": "9562c0d830a69f3879d3064af2f61b6f97f5492e447b652485352095be9040f7",
+      "bytes": 1334
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed\\com\\m3\\synexia\\importer\\SynexiaImportPlan$Lane.class",
+      "relative": "com/m3/synexia/importer/SynexiaImportPlan$Lane.class",
+      "sha256": "6f1fd639bbb2011656fc759e5dbb4436b7e26f0b906c7448ecfc0052d09c2233",
+      "bytes": 2055
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed\\com\\m3\\synexia\\importer\\SynexiaImportPlan$Plan.class",
+      "relative": "com/m3/synexia/importer/SynexiaImportPlan$Plan.class",
+      "sha256": "4ea1389122c94c0c211b2a58083954781a6c79897a7f82ebad8cd9b253952105",
+      "bytes": 6414
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed\\com\\m3\\synexia\\importer\\SynexiaImportPlan$Row.class",
+      "relative": "com/m3/synexia/importer/SynexiaImportPlan$Row.class",
+      "sha256": "0fcd91a31c1fa2fa9b9c269ef1627c592540243c8224856f41a0b8d70d2d981a",
+      "bytes": 4047
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed\\com\\m3\\synexia\\importer\\SynexiaImportPlan.class",
+      "relative": "com/m3/synexia/importer/SynexiaImportPlan.class",
+      "sha256": "979cb1f05611f484845cd0e0711ee1f169f57e2eaf068275f867ab52ad3fd2f1",
+      "bytes": 15973
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed\\com\\m3\\synexia\\importer\\SynexiaImportPlanCli.class",
+      "relative": "com/m3/synexia/importer/SynexiaImportPlanCli.class",
+      "sha256": "6006e572b60ddc5bbc1a91a43385d4f265ffc1a66b6444e00f9795cfa05ce3c6",
+      "bytes": 2794
+    }
+  ],
+  "compileCommand": {
+    "label": "compile-fixed-six",
+    "argv": [
+      "-o",
+      "-B",
+      "-f",
+      "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\pom.xml",
+      "-Dexec.executable=C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+      "-Dexec.args=-J-Xms16m -J-Xmx256m -J-XX:MaxMetaspaceSize=192m -J-XX:ActiveProcessorCount=2 --release 21 -proc:none -implicit:none -Xlint:all -Werror -sourcepath K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\empty-sourcepath -classpath K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\empty-sourcepath -d K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\importer-receiver\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaCanonicalFamilyPolicy.java K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\importer-receiver\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportCli.java K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\importer-receiver\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImporter.java K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\importer-receiver\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportManifest.java K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\importer-receiver\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlan.java K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\importer-receiver\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlanCli.java",
+      "org.codehaus.mojo:exec-maven-plugin:3.5.0:exec"
+    ],
+    "executable": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+    "exitCode": 0,
+    "logSha256": "3d6cd71f624e5190ec8aec0186f09e2f092c6646ce6c09a204c731aba683c230"
+  },
+  "note": "Original three JUnit oracle classes are separate; first executable unit run 21 tests/18 passed/2 failures/1 error/0 skips, fixture corrections prepared. This seal admits no runtime regex closure."
+}

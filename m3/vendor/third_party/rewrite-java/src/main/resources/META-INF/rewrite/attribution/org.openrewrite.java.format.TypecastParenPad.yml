@@ -1,0 +1,7 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.format.TypecastParenPad"
+contributors:
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 75

@@ -1,0 +1,25 @@
+{
+  "artifacts": [
+    {
+      "artifact": "com.google.guava:guava:33.4.8-jre",
+      "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar",
+      "published_sha1_url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.4.8-jre/guava-33.4.8-jre.jar.sha1",
+      "published_sha1": "e70a3268e6cd3e7d458aa15787ce6811c34e96ae",
+      "sha256": "f3d7f57f67fd622f4d468dfdd692b3a5e3909246c28017ac3263405f0fe617ed",
+      "bytes": 3023797,
+      "destination": "C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-jre.jar",
+      "role": "pinned binary oracle/API dependency; not M3 storage delegate"
+    },
+    {
+      "artifact": "com.google.guava:guava:33.4.8-android",
+      "url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.4.8-android/guava-33.4.8-android.jar",
+      "published_sha1_url": "https://repo.maven.apache.org/maven2/com/google/guava/guava/33.4.8-android/guava-33.4.8-android.jar.sha1",
+      "published_sha1": "0cb7510a733595f02fe633ffff62d40cfc3056e9",
+      "sha256": "a1f8a4bafe5a77232d333356843e194599b30837574a7f4be1063daaaaab102c",
+      "bytes": 2936569,
+      "destination": "C:\\codex-work\\m3-apache-validation-20261017-g1\\guava-unit\\deps\\guava-33.4.8-android.jar",
+      "role": "pinned binary oracle/API dependency; not M3 storage delegate"
+    }
+  ],
+  "global_cache_writes": false
+}

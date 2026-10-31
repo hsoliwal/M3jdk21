@@ -1,0 +1,52 @@
+diff --git a/m3/collections/algorithm-catalog/stable-order-restoration-20261020/DISCOVERY.json b/m3/collections/algorithm-catalog/stable-order-restoration-20261020/DISCOVERY.json
+new file mode 100644
+index 0000000..7f1a43a
+--- /dev/null
++++ b/m3/collections/algorithm-catalog/stable-order-restoration-20261020/DISCOVERY.json
+@@ -0,0 +1,46 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++{
++  "date": "2026-10-20",
++  "scope": "Existing catalogue first; problem sites as taxonomy and contract comparisons, no editorial or submission code reuse",
++  "target_revision": "95d0266ff15ae1f11876cce7360b155ef33a1862",
++  "retrieved_existing_catalogues": {
++    "m3/collections/algorithm-catalog/README-collection-file-review-20261017.md": "f598ec356cd140e71a7d2c085c61ac857b8a7d8e8228723a85df7cfff60db4d9",
++    "m3/collections/algorithm-catalog/challenge-forks-20261018/ALGORITHM_DECISIONS.tsv": "88c848415a3ca3bc04d00ba354a96482506fadfe899d2a64e58bd48ec39ee41a",
++    "m3/collections/algorithm-catalog/collection-candidate-comparison-20261017.tsv": "e9d721fd062fe291f695a9dc39de2f4d90a725a49432cde5017ccac644c910cd",
++    "m3/collections/algorithm-catalog/wrapper-convergence-20261018/SDK_QUALIFIED_PASSES.tsv": "8367e21361918e8837be808d8130c1828d4cf10d89cc3f4c6b4df672d15a43bb",
++    "m3/collections/algorithm-catalog/wrapper-convergence-20261018/catalogue-review/WRAPPER_FINDINGS.tsv": "5af6b0dcb436ef80a955bd844f68e29521adc07c35bde7a25ef6f276742eba8c",
++    "m3/collections/algorithm-catalog/wrapper-convergence-20261018/index-candidates/CATALOGUE.tsv": "c4ca2ef4ec48bcfd4745b337962ee121e635def9b455cfc4779d98d3c221f763"
++  },
++  "sources": [
++    {
++      "category": "STABLE_COMPACTION",
++      "source": "https://leetcode.com/problems/move-zeroes/",
++      "review": "Official statement requires relative order of nonzero elements. Useful for stable-compaction fixtures, but its in-place zero-tail mutation differs from detached M3 index output.",
++      "disposition": "EVIDENCE_ONLY; no source copied"
++    },
++    {
++      "category": "STABLE_COMPACTION",
++      "source": "https://leetcode.com/problems/remove-element/",
++      "review": "Official statement permits reordering. Swap-with-tail cannot preserve M3 occurrence order, so it is rejected for the ordered index and live filtered view contracts.",
++      "disposition": "REJECT_REORDERING; taxonomy only"
++    },
++    {
++      "category": "BIT_STATE",
++      "source": "https://www.hackerrank.com/challenges/java-bitset/problem",
++      "review": "Official challenge exercises AND, OR, XOR, flip and set. It nominates mask truth-table and cardinality checks; it does not specify M3 owner generation, JNI cursor or lifetime semantics.",
++      "disposition": "EVIDENCE_ONLY; no solution copied"
++    },
++    {
++      "category": "ARRAY_OFFSETS",
++      "source": "https://www.hackerrank.com/challenges/dynamic-array/problem",
++      "review": "Official indexed append/query challenge is a category reference. M3 physical slots, half-open windows, stable duplicates and immutable ownership retain their own contracts.",
++      "disposition": "EVIDENCE_ONLY; no solution copied"
++    },
++    {
++      "category": "STABLE_INDIRECT_ORDER",
++      "source": "https://www.geeksforgeeks.org/dsa/stable-quicksort/",
++      "review": "Article defines stable equal-key ordering and illustrates auxiliary partitions. The general recursive sort is not selected for a direction change on an already sorted immutable M3 index; reuse the existing qualified group reversal.",
++      "disposition": "EVIDENCE_ONLY; no article implementation copied"
++    }
++  ],
++  "selection_rule": "Pin and inspect the licensed existing Synexia recipe and exact target beforeimage; compare real baseline/candidate behavior, ABI and resource observations before admitting its generated output. Preserve stronger current wrapper/native owners."
++}

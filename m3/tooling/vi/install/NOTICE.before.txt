@@ -1,0 +1,9 @@
+M3 immutable text foundation
+Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
+
+The original sources under m3/ are independently authored and licensed under
+Apache License 2.0. No MatIndex/MIndex donor source has been imported.
+OpenJDK files outside m3/ retain their existing notices and licenses.
+This separately built module is not integrated into java.base. A future
+integration must explicitly resolve license compatibility; this notice does
+not relicense OpenJDK or authorize incompatible donor imports.

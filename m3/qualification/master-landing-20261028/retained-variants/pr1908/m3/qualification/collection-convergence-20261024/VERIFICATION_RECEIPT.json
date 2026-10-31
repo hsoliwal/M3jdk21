@@ -1,0 +1,54 @@
+{
+  "schema": "M3_TARGET_RECIPE_RECEIPT_V1",
+  "task": "m3-collection-proof-20261025",
+  "target_parent": "2dd3b23bc795d85f6d1aba543b50a98f91ede544",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_revision": "735a448122cf7d157f571d288bd20c490e1aa08f",
+  "recipe_id": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+  "dataset_id": "m3-collection-proof-20261025",
+  "canonical_evidence_path": "synexia-openrewrite-recipes/recipes/m3-collection-proof-20261025/EVIDENCE.json",
+  "canonical_evidence_sha256": "e88190e099a4b89d5c621ac65e6f6c3912e2ca75512d1841c47d6062668de8f7",
+  "received": [
+    {
+      "path": ".github/workflows/collection-views-contract.yml",
+      "before_sha256": "0367d1033d9239297d3a0c1aed158b39a04add3eca6500bd2677e93d68f0443f",
+      "after_sha256": "178129bbd3f802c7fc5b8eb50332cbe75d1c5e63d55f68ead282a1f35632b877",
+      "mode": "100644"
+    },
+    {
+      "path": ".github/workflows/m3-stored-occurrence-20261021.yml",
+      "before_sha256": "8f760c86e6487e4c66277d601c06720f9278c619d7313eb8fee39063f72352f2",
+      "after_sha256": "bba0dfd330413bf688d62886405eb3e0a872babfd65f2ee244f98a7e89db7e93",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/runtime-integration/stored-occurrence-20261021/verify.sh",
+      "before_sha256": "be43112b0cf2b3576d38761f5baea67a5e0a6e4760c70a5382b6a7f28db3d8fc",
+      "after_sha256": "77c4bcebb8ee8782f3e2be4a6c24c84b7a54b5e6160d835757b24d52b80ea7bc",
+      "mode": "100644"
+    }
+  ],
+  "gates": {
+    "actual_openrewrite_sdk": "PASS 6 tests, 0 failures/errors/skips",
+    "target_stored_occurrence_verifier": "PASS",
+    "target_collection_compatibility_verifier": "PASS",
+    "strict_java21_compile": "PASS -Xlint:all -Werror",
+    "public_abi": "PASS zero-byte javap diff",
+    "historical_red": "PASS original AssertionError: check=1 reproduced",
+    "stored_representative_oracle": "PASS 736018 checks in each of default/interpreter/C1/C2 for both scripts",
+    "batch_admission": "PASS 7233 checks default and interpreter",
+    "scoped_canonical_provenance": "PASS 73 paths; 13 historical pins preserved; full historical gate NOT_RUN",
+    "independent_review": "PASS no findings"
+  },
+  "production_java_jni_changes": 0,
+  "ci": "Parent has failed and queued checks; new commit requires fresh CI. No CI green claim.",
+  "not_run_this_pass": [
+    "source-built JDK image",
+    "JNI native runtime",
+    "full jtreg/JCK",
+    "full Maven reactor",
+    "full historical provenance",
+    "cross-platform/release performance"
+  ],
+  "admission": "Draft qualification maintenance; String active; no phase or family promotion"
+}

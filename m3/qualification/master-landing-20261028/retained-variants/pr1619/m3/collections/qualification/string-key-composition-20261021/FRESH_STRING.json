@@ -1,0 +1,448 @@
+{
+  "receiving_preimage": "18213fe70c66567fdfc6ba6f669909e7e9251663",
+  "image": "/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk",
+  "fresh_source_build": true,
+  "production_patch_module": false,
+  "prior_image_classes_in_acceptance": false,
+  "test_compiler": "same fresh installed image",
+  "jtreg_harness": "7.3.1 on stock JDK21",
+  "jni_check_enabled": true,
+  "manifest_records": {
+    "total": 15,
+    "passed": 14,
+    "failed": 1,
+    "unique_test_sources": 11
+  },
+  "execution_actions": {
+    "total": 27,
+    "passed": 26,
+    "failed": 1
+  },
+  "required_key_comparison_prefix_mixed_leaf_utf16_tests": "PASS",
+  "stock_m3_disabled_hash_equals_compare_prefix": "PASS both declared CompactStrings variants",
+  "additional_fact_composition": {
+    "compact_enabled": "FAIL pre-existing immediate-vs-atom oracle assertion",
+    "compact_disabled": "PASS 196246 checks",
+    "baseline_matrix_reproduced": true,
+    "baseline_witness_environment": "prior built VM with all18 String owners patched from exact18213fe; diagnostic only"
+  },
+  "source_policy": {
+    "full_borrow_receiver": "PASS",
+    "phase_closure": "OPEN all12 gates; promotionBLOCKED; checker exits0",
+    "source_invariants": "FAIL exact baseline reproduces same missing pool marker",
+    "precompute_bridge_receipt": "FAIL exact baseline reproduces same receipt hash drift",
+    "string_phase_successor_chain": "FAIL exact baseline reproduces same chain length drift"
+  },
+  "suite_exit": 1,
+  "all_selected_tests_pass_claimed": false,
+  "phase_promotion_claimed": false,
+  "actions": [
+    {
+      "source_report": "m3-compact-off-supplement-work/java/lang/String/M3StringFactsCompositionTest.jtr",
+      "kind": "main",
+      "command": [
+        "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringFactsCompositionTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3_STRING_FACT_COMPOSITION_PASS|checks=196246|fields=23"
+      ]
+    },
+    {
+      "source_report": "m3-compact-off-supplement-work/java/lang/String/M3StringLeafCursorCanonicalTest.jtr",
+      "kind": "main",
+      "command": [
+        "main -Xmx128m --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringLeafCursorCanonicalTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3_LEAF_CURSOR_JTREG checks=29771 oracleOnly=false PASS"
+      ]
+    },
+    {
+      "source_report": "m3-compact-off-supplement-work/java/lang/String/M3StringMixedEqualityGatesTest.jtr",
+      "kind": "main",
+      "command": [
+        "main M3StringMixedEqualityGatesTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3StringMixedEqualityGatesTest checks=46899"
+      ]
+    },
+    {
+      "source_report": "m3-compact-off-supplement-work/java/lang/String/M3StringMixedEqualityGatesTest.jtr",
+      "kind": "main",
+      "command": [
+        "main -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringMixedEqualityGatesTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3StringMixedEqualityGatesTest checks=46899"
+      ]
+    },
+    {
+      "source_report": "m3-compact-off-supplement-work/java/lang/String/M3StringUtf16DifferentialTest.jtr",
+      "kind": "main",
+      "command": [
+        "main M3StringUtf16DifferentialTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3_STRING_UTF16_DIFFERENTIAL_PASS|values=524|checks=436112"
+      ]
+    },
+    {
+      "source_report": "m3-compact-off-supplement-work/java/lang/String/M3StringUtf16DifferentialTest.jtr",
+      "kind": "main",
+      "command": [
+        "main -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringUtf16DifferentialTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3_STRING_UTF16_DIFFERENTIAL_PASS|values=524|checks=436112"
+      ]
+    },
+    {
+      "source_report": "m3-declared-manifests-work/java/lang/String/M3StringCompositeComparisonTest.jtr",
+      "kind": "main",
+      "command": [
+        "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCompositeComparisonTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3_STRING_COMPOSITE_COMPARISON_PASS checks=120923"
+      ]
+    },
+    {
+      "source_report": "m3-declared-manifests-work/java/lang/String/M3StringCompositeComparisonTest.jtr",
+      "kind": "main",
+      "command": [
+        "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCompositeComparisonTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3_STRING_COMPOSITE_COMPARISON_PASS checks=120923"
+      ]
+    },
+    {
+      "source_report": "m3-declared-manifests-work/java/lang/String/M3StringCompositeComparisonTest.jtr",
+      "kind": "main",
+      "command": [
+        "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -Xint M3StringCompositeComparisonTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3_STRING_COMPOSITE_COMPARISON_PASS checks=120923"
+      ]
+    },
+    {
+      "source_report": "m3-declared-manifests-work/java/lang/String/M3StringCompositePrefixCursorTest.jtr",
+      "kind": "main",
+      "command": [
+        "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringCompositePrefixCursorTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3_STRING_COMPOSITE_PREFIX_CURSOR_PASS checks=3747"
+      ]
+    },
+    {
+      "source_report": "m3-declared-manifests-work/java/lang/String/M3StringCompositePrefixCursorTest.jtr",
+      "kind": "main",
+      "command": [
+        "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringCompositePrefixCursorTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3_STRING_COMPOSITE_PREFIX_CURSOR_PASS checks=3747"
+      ]
+    },
+    {
+      "source_report": "m3-declared-manifests-work/java/lang/String/M3StringFactsCompositionTest.jtr",
+      "kind": "main",
+      "command": [
+        "main --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringFactsCompositionTest"
+      ],
+      "result": [
+        "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: pair flat oracle is not a scalar atom: class java.lang.M3StringImmediate"
+      ],
+      "markers": [
+        "java.lang.AssertionError: pair flat oracle is not a scalar atom: class java.lang.M3StringImmediate",
+        "JavaTest Message: Test threw exception: java.lang.AssertionError: pair flat oracle is not a scalar atom: class java.lang.M3StringImmediate",
+        "STATUS:Failed.`main' threw exception: java.lang.AssertionError: pair flat oracle is not a scalar atom: class java.lang.M3StringImmediate",
+        "result: Failed. Execution failed: `main' threw exception: java.lang.AssertionError: pair flat oracle is not a scalar atom: class java.lang.M3StringImmediate",
+        "test result: Failed. Execution failed: `main' threw exception: java.lang.AssertionError: pair flat oracle is not a scalar atom: class java.lang.M3StringImmediate"
+      ]
+    },
+    {
+      "source_report": "m3-declared-manifests-work/java/lang/String/M3StringKeyedCollectionsTest.jtr",
+      "kind": "main",
+      "command": [
+        "main -Xmx256m --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringKeyedCollectionsTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3_STRING_KEYED_COLLECTIONS_PASS checks=6987"
+      ]
+    },
+    {
+      "source_report": "m3-declared-manifests-work/java/lang/String/M3StringKeyedCollectionsTest.jtr",
+      "kind": "main",
+      "command": [
+        "main -Xmx256m --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringKeyedCollectionsTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3_STRING_KEYED_COLLECTIONS_PASS checks=6987"
+      ]
+    },
+    {
+      "source_report": "m3-declared-manifests-work/java/lang/String/M3StringLeafCursorCanonicalTest.jtr",
+      "kind": "main",
+      "command": [
+        "main -Xmx128m --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringLeafCursorCanonicalTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3_LEAF_CURSOR_JTREG checks=29771 oracleOnly=false PASS"
+      ]
+    },
+    {
+      "source_report": "m3-declared-manifests-work/java/lang/String/M3StringMixedEqualityGatesTest.jtr",
+      "kind": "main",
+      "command": [
+        "main M3StringMixedEqualityGatesTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3StringMixedEqualityGatesTest checks=46946"
+      ]
+    },
+    {
+      "source_report": "m3-declared-manifests-work/java/lang/String/M3StringMixedEqualityGatesTest.jtr",
+      "kind": "main",
+      "command": [
+        "main -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringMixedEqualityGatesTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3StringMixedEqualityGatesTest checks=46946"
+      ]
+    },
+    {
+      "source_report": "m3-declared-manifests-work/java/lang/String/M3StringUtf16DifferentialTest.jtr",
+      "kind": "main",
+      "command": [
+        "main M3StringUtf16DifferentialTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3_STRING_UTF16_DIFFERENTIAL_PASS|values=524|checks=436112"
+      ]
+    },
+    {
+      "source_report": "m3-declared-manifests-work/java/lang/String/M3StringUtf16DifferentialTest.jtr",
+      "kind": "main",
+      "command": [
+        "main -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringUtf16DifferentialTest"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": [
+        "M3_STRING_UTF16_DIFFERENTIAL_PASS|values=524|checks=436112"
+      ]
+    },
+    {
+      "source_report": "stock-m3-disabled-work/java/lang/String/CompactString/CompareTo.jtr",
+      "kind": "testng",
+      "command": [
+        "testng -XX:+CompactStrings CompareTo"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": []
+    },
+    {
+      "source_report": "stock-m3-disabled-work/java/lang/String/CompactString/CompareTo.jtr",
+      "kind": "testng",
+      "command": [
+        "testng -XX:-CompactStrings CompareTo"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": []
+    },
+    {
+      "source_report": "stock-m3-disabled-work/java/lang/String/CompactString/Equals.jtr",
+      "kind": "testng",
+      "command": [
+        "testng -XX:+CompactStrings Equals"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": []
+    },
+    {
+      "source_report": "stock-m3-disabled-work/java/lang/String/CompactString/Equals.jtr",
+      "kind": "testng",
+      "command": [
+        "testng -XX:-CompactStrings Equals"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": []
+    },
+    {
+      "source_report": "stock-m3-disabled-work/java/lang/String/CompactString/StartsWith.jtr",
+      "kind": "testng",
+      "command": [
+        "testng -XX:+CompactStrings StartsWith"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": []
+    },
+    {
+      "source_report": "stock-m3-disabled-work/java/lang/String/CompactString/StartsWith.jtr",
+      "kind": "testng",
+      "command": [
+        "testng -XX:-CompactStrings StartsWith"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": []
+    },
+    {
+      "source_report": "stock-m3-disabled-work/java/lang/String/HashCode.jtr",
+      "kind": "main",
+      "command": [
+        "main -XX:+CompactStrings HashCode"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": []
+    },
+    {
+      "source_report": "stock-m3-disabled-work/java/lang/String/HashCode.jtr",
+      "kind": "main",
+      "command": [
+        "main -XX:-CompactStrings HashCode"
+      ],
+      "result": [
+        "Passed. Execution successful"
+      ],
+      "markers": []
+    }
+  ],
+  "report_records": [
+    {
+      "path": "m3-compact-off-supplement-work/java/lang/String/M3StringFactsCompositionTest.jtr",
+      "status": "Passed. Execution successful"
+    },
+    {
+      "path": "m3-compact-off-supplement-work/java/lang/String/M3StringLeafCursorCanonicalTest.jtr",
+      "status": "Passed. Execution successful"
+    },
+    {
+      "path": "m3-compact-off-supplement-work/java/lang/String/M3StringMixedEqualityGatesTest.jtr",
+      "status": "Passed. Execution successful"
+    },
+    {
+      "path": "m3-compact-off-supplement-work/java/lang/String/M3StringUtf16DifferentialTest.jtr",
+      "status": "Passed. Execution successful"
+    },
+    {
+      "path": "m3-declared-manifests-work/java/lang/String/M3StringCompositeComparisonTest.jtr",
+      "status": "Passed. Execution successful"
+    },
+    {
+      "path": "m3-declared-manifests-work/java/lang/String/M3StringCompositePrefixCursorTest.jtr",
+      "status": "Passed. Execution successful"
+    },
+    {
+      "path": "m3-declared-manifests-work/java/lang/String/M3StringFactsCompositionTest.jtr",
+      "status": "Failed. Execution failed\\: `main' threw exception\\: java.lang.AssertionError\\: pair flat oracle is not a scalar atom\\: class java.lang.M3StringImmediate"
+    },
+    {
+      "path": "m3-declared-manifests-work/java/lang/String/M3StringKeyedCollectionsTest.jtr",
+      "status": "Passed. Execution successful"
+    },
+    {
+      "path": "m3-declared-manifests-work/java/lang/String/M3StringLeafCursorCanonicalTest.jtr",
+      "status": "Passed. Execution successful"
+    },
+    {
+      "path": "m3-declared-manifests-work/java/lang/String/M3StringMixedEqualityGatesTest.jtr",
+      "status": "Passed. Execution successful"
+    },
+    {
+      "path": "m3-declared-manifests-work/java/lang/String/M3StringUtf16DifferentialTest.jtr",
+      "status": "Passed. Execution successful"
+    },
+    {
+      "path": "stock-m3-disabled-work/java/lang/String/CompactString/CompareTo.jtr",
+      "status": "Passed. Execution successful"
+    },
+    {
+      "path": "stock-m3-disabled-work/java/lang/String/CompactString/Equals.jtr",
+      "status": "Passed. Execution successful"
+    },
+    {
+      "path": "stock-m3-disabled-work/java/lang/String/CompactString/StartsWith.jtr",
+      "status": "Passed. Execution successful"
+    },
+    {
+      "path": "stock-m3-disabled-work/java/lang/String/HashCode.jtr",
+      "status": "Passed. Execution successful"
+    }
+  ],
+  "evidence_directories": {
+    "fresh_image": "/workspace/scratch/122ce7bf56c1/evidence/string/fresh-image-20261021T043259Z",
+    "source_policy": "/workspace/scratch/122ce7bf56c1/evidence/string/source-policy-20261021T043210Z",
+    "source_guard_baseline": "/workspace/scratch/122ce7bf56c1/evidence/string/source-baseline-witness",
+    "facts_baseline": "/workspace/scratch/122ce7bf56c1/evidence/string/facts-baseline-witness/verified"
+  }
+}

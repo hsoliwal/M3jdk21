@@ -1,0 +1,31 @@
+test_candidate_runtime_admission_cannot_be_fabricated (__main__.SourceCoverageTest.test_candidate_runtime_admission_cannot_be_fabricated) ... ok
+test_conditional_platform_owner_cannot_be_mislabeled_shared (__main__.SourceCoverageTest.test_conditional_platform_owner_cannot_be_mislabeled_shared) ... ok
+test_donor_branch_url_is_not_an_immutable_blob (__main__.SourceCoverageTest.test_donor_branch_url_is_not_an_immutable_blob) ... ok
+test_exact_baseline_inventory_is_source_only (__main__.SourceCoverageTest.test_exact_baseline_inventory_is_source_only) ... ok
+test_existing_map_state_cannot_change (__main__.SourceCoverageTest.test_existing_map_state_cannot_change) ... ok
+test_extended_public_owner_source_seal_is_enforced (__main__.SourceCoverageTest.test_extended_public_owner_source_seal_is_enforced) ... ok
+test_extra_aspect_cannot_reference_invented_utility (__main__.SourceCoverageTest.test_extra_aspect_cannot_reference_invented_utility) ... ok
+test_generated_api_requires_its_actual_generator (__main__.SourceCoverageTest.test_generated_api_requires_its_actual_generator) ... ok
+test_internal_module_cannot_be_mislabeled_as_public_utility (__main__.SourceCoverageTest.test_internal_module_cannot_be_mislabeled_as_public_utility) ... ok
+test_inventory_cannot_promote_receiving_phase (__main__.SourceCoverageTest.test_inventory_cannot_promote_receiving_phase) ... ok
+test_jni_symbol_drift_is_refused (__main__.SourceCoverageTest.test_jni_symbol_drift_is_refused) ... ok
+test_missing_family_is_refused (__main__.SourceCoverageTest.test_missing_family_is_refused) ... ok
+test_missing_platform_module_cannot_claim_full_source_set (__main__.SourceCoverageTest.test_missing_platform_module_cannot_claim_full_source_set) ... ok
+test_module_index_cannot_invent_public_facade (__main__.SourceCoverageTest.test_module_index_cannot_invent_public_facade) ... ok
+test_module_row_cannot_claim_completion (__main__.SourceCoverageTest.test_module_row_cannot_claim_completion) ... ok
+test_nonpublic_type_cannot_be_counted_as_public (__main__.SourceCoverageTest.test_nonpublic_type_cannot_be_counted_as_public) ... ok
+test_pending_token_slot_cannot_fabricate_public_owner (__main__.SourceCoverageTest.test_pending_token_slot_cannot_fabricate_public_owner) ... ok
+test_prior_family_mapping_cannot_change (__main__.SourceCoverageTest.test_prior_family_mapping_cannot_change) ... ok
+test_private_receiver_cannot_become_public_companion (__main__.SourceCoverageTest.test_private_receiver_cannot_become_public_companion) ... ok
+test_public_tool_service_owner_cannot_be_dropped (__main__.SourceCoverageTest.test_public_tool_service_owner_cannot_be_dropped) ... ok
+test_real_record_and_legacy_modifier_forms_are_recognized (__main__.SourceCoverageTest.test_real_record_and_legacy_modifier_forms_are_recognized) ... ok
+test_source_git_blob_drift_is_refused (__main__.SourceCoverageTest.test_source_git_blob_drift_is_refused) ... ok
+test_source_paths_cannot_escape_the_repository (__main__.SourceCoverageTest.test_source_paths_cannot_escape_the_repository) ... ok
+test_source_sha_drift_is_refused (__main__.SourceCoverageTest.test_source_sha_drift_is_refused) ... ok
+test_tool_module_cannot_claim_an_unexported_public_package (__main__.SourceCoverageTest.test_tool_module_cannot_claim_an_unexported_public_package) ... ok
+test_unsupported_export_is_not_stable_public_api_acceptance (__main__.SourceCoverageTest.test_unsupported_export_is_not_stable_public_api_acceptance) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 7.293s
+
+OK

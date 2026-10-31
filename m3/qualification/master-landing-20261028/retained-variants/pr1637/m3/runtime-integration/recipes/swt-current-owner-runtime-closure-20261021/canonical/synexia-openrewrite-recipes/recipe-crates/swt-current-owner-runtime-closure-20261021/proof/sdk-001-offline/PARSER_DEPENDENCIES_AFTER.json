@@ -1,0 +1,13 @@
+[
+  {
+    "path": "/tmp/m3-swt-current-owner-attribution-001/classes",
+    "kind": "compiled-directory",
+    "files": [
+      {
+        "path": "org/eclipse/swt/widgets/ViewportScrollBarGeometry.class",
+        "sha256": "8954b4769d932ce45289fdbda93e31bd3db9a806f2bcd22157db81022d4102f5",
+        "bytes": 1582
+      }
+    ]
+  }
+]

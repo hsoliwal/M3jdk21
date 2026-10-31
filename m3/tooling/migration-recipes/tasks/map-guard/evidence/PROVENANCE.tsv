@@ -1,0 +1,9 @@
+source	identity	role
+src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java	0f8c86dd676ce7f36b8cff4394992ed8fec0e3e4	Original source; no external donor rewrite
+src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java	1258454eed20e5ec07c51a07efd554eb2d68ab45	Unchanged interface
+test/jdk/java/lang/String/MIndexMappedStringBackingTest.java	dab7de1fa7c090974f6ff810e8e728d3ba53ea16	Unchanged format/Unicode/alias test and minimum-record fixture
+.github/workflows/mindex-string-backing.yml	2e48ef733d17532caa6ed38629d9b23d4fb89562	Existing workflow retains all prior settings
+M3Jdk21HashPinnedSnapshotRecipe	33783749e46474f2bdc68103e189fe2907a61fa9	Existing engine reused; no constructor or path-fence changes
+M3Scale locked canon	5ec31d51207bda02d2f1f9a7fcd940f2ae5e1bfc9f0ef9358139fe62b47f393b	Docs/inventory/contract/proof authority
+current recipe workflow	37192357698	Failure with zero jobs; retry403; no test verdict
+native JNI ingress source	81ace3e98b92a1b6c0cf1acdc7440484368e3ae4	Observed corrected Handle assignment forms; not modified or native-build certified

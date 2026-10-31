@@ -1,0 +1,60 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "a3-code-string-repair-20261006/1",
+  "source_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+  "target_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+  "source_repository": "hsoliwal/M3jdk21",
+  "recipe": "com.m3.rewrite.backport.A3CodeStringRepair",
+  "outputs": [
+    {
+      "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+      "before": {
+        "resource": "before-00-A3RegexMatrix.java.txt",
+        "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404"
+      },
+      "after": {
+        "resource": "after-00-A3RegexMatrix.java.txt",
+        "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "before": {
+        "resource": "before-01-A3RegexMatrix.java.after.txt",
+        "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404"
+      },
+      "after": {
+        "resource": "after-01-A3RegexMatrix.java.after.txt",
+        "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "before": {
+        "resource": "before-02-manifest.tsv.txt",
+        "sha256": "b2febbb17ed96ae6f582eee2e16af3fc5e435c23e350708f56397bee9ac38ab5"
+      },
+      "after": {
+        "resource": "after-02-manifest.tsv.txt",
+        "sha256": "e92d3c16a897a02084ca749d092a02402c2f1d0225bcb9c8755c0304f838dabd"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+    }
+  ],
+  "scope": "Escape two nested quotes in the existing code-containing regex subject, synchronize exact production/template bytes and only the bound Java-template hash.",
+  "qualification": {
+    "whole_module_coverage_accepted": false,
+    "jdk_image_accepted": false,
+    "native_or_jni_accepted": false
+  },
+  "plan_sha256": "5d05cf8f9db1c62fdba4e328206f54848c4f5ac20b9d2f03189dc40aaaf1cf3a"
+}

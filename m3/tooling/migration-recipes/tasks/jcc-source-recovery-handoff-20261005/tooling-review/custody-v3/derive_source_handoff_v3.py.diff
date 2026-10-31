@@ -1,0 +1,43 @@
+--- derive_source_handoff.py
++++ derive_source_handoff_v3.py
+@@ -7,6 +7,7 @@
+ from __future__ import annotations
+ import copy,hashlib,json,re,xml.etree.ElementTree as ET
+ from pathlib import Path
++from publication_custody_v3 import admit_publication_custody
+ B=Path(__file__).resolve().parent
+ INPUT='be92c62ece9023b5c33676716a1076d00e26120a';INPUT_ROOT='3c4f32b66633a251ba2c117090830252a7e2da03'
+ OLD='d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906'
+@@ -37,10 +38,11 @@
+ 
+ def main():
+  if not __debug__:raise RuntimeError('Optimized Python disables required handoff admission assertions')
+- spec=data(B/'DERIVATION_INPUTS.json')
+- assert spec['state']=='PUBLISHED_READBACK_VERIFIED','No final recovery publication supplied'
++ spec=data(B/'DERIVATION_INPUTS_V3.json')
++ assert spec['state']=='PUBLISHED_CUSTODY_VERIFIED','No final recovery publication supplied'
+  pub_path=receipt(spec['publication_receipt']);pub=data(pub_path)
+- assert pub['schema']=='jcc-source-recovery-publication/1' and pub['status']=='PUBLISHED_READBACK_VERIFIED'
++ assert pub['schema']=='jcc-source-recovery-publication/1' and pub['status']=='PUBLISHED_CUSTODY_VERIFIED'
++ custody=admit_publication_custody(pub)
+  assert pub['repository']=='hsoliwal/com.synexia'
+  source=pub['commit'];root=pub['tree'];ref='refs/heads/'+pub['branch']
+  assert re.fullmatch('[0-9a-f]{40}',source) and source not in (INPUT,OLD,'0'*40)
+@@ -48,7 +50,7 @@
+  assert pub['parent']==INPUT and pub['branch_commit_parent_tree_pr_verified'] is True
+  assert pub['source_input_revision']==INPUT and pub['source_input_root']==INPUT_ROOT
+  assert pub['ref_update_forced'] is False
+- out=B/'source-binding';assert not out.exists(),'Derive a new explicit epoch instead of overwriting'
++ out=B/'source-binding-v3';assert not out.exists(),'Derive a new explicit epoch instead of overwriting'
+  trees={};input_receipts=[]
+  def admit(tree):
+   tree_id=git_tree_id(tree);assert tree_id==tree['sha']
+@@ -131,7 +133,7 @@
+  unresolved=[d for d in decl if d['path'].split('/')[0] not in byroot or byroot[d['path'].split('/')[0]]['type']!='tree']
+  assert not unresolved,('Unresolved module-root declarations need explicit accounting policy before generation',unresolved)
+  root_account={'schema':'jcc-final-root-accounting/1','repository':'hsoliwal/com.synexia','final_commit':source,'final_root_tree':root,'tracking_ref':ref,'root_entries':root_entries,'root_entry_count':len(root_entries),'root_entry_types':{kind:sum(e['type']==kind for e in root_entries) for kind in ('tree','blob','commit')},'root_pom':{'body_path':pom['local_path'],**{k:pom[k] for k in ('bytes','sha256','git_blob_sha1')},'final_tree_path_chain':pom['final_tree_path_chain']},'maven_declarations':decl,'maven_declaration_count':len(decl),'unresolved_module_root_declarations':unresolved,'qualification':'Actual final Git root and fresh root-POM declarations only; no reactor execution, descendant-file denominator or semantic closure.','publication_receipt':{'local_path':str(pub_path),**identity(pub_path)},'tree_receipts':input_receipts}
+- source_pub={'commit':source,'root_tree':root,'parent':pub['parent'],'tracking_ref':ref,'pull_request':pub['pull_request'],'source_gate_or_export_authority_granted':False,'scope':'Exact artifact publication/readback is separate from source execution qualification.'}
++ source_pub={'commit':source,'root_tree':root,'parent':pub['parent'],'tracking_ref':ref,'pull_request':pub['pull_request'],'source_gate_or_export_authority_granted':False,'publication_status':pub['status'],'custody':copy.deepcopy(custody),'scope':'Publication Git custody with six mandatory direct body reads and two explicit invalid-UTF8 identity-only fixtures is separate from source execution qualification.'}
+  inventory={'schema':'jcc-recovery-source-fields-and-proofs/1','source_commit':source,'source_root_tree':root,'tracking_ref':ref,'sources':sources,'proof_references':proofs,'source_publication':source_pub,'source_execution':execution,'current_designated_changes':changes,'designated_changes_are_full_repository_change_count':False,'source_input_commit':INPUT,'source_input_root':INPUT_ROOT,'publication_receipt':{'local_path':str(pub_path),**identity(pub_path)},'execution_review_receipt':{'local_path':str(review_path),**identity(review_path)},'tree_receipts':input_receipts,'source_current_context':{'local_path':str(B/'current-context/CONTEXT_REFERENCES.json'),**identity(B/'current-context/CONTEXT_REFERENCES.json')}}
+  out.mkdir()
+  for name,value in [('SOURCE_FIELDS_AND_PROOFS.json',inventory),('ROOT_ACCOUNTING.json',root_account)]: (out/name).write_bytes(encoded(value))

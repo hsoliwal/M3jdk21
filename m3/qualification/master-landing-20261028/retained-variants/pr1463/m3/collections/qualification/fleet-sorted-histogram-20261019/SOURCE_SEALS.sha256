@@ -1,0 +1,6 @@
+# Postimage SHA-256, pinned to canonical Synexia recipe #12403 and the new YAML recipe #12406.
+9b4b095f7f51b27a76e6a56cda60c6662cbbf60bcb8b55655f82c127b4451af6  m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java
+21ff3a8dade438a819d411fba96a6cb4ee8ddbd4c568409686137c42524e41bf  m3/collections/src/main/native/collections/m3_state_mask_histogram.c
+57dcca5226299fe29f6c116f83bff76040a1c7483e5671d425c0832a1c016a4a  m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java
+3386e196bccd356dd022a5dfa50e67cda6887aef08ff7b738703230cc37b37b6  m3/collections/src/test/java/com/m3/collections/M3StateMaskHistogramSelfTest.java
+44c7d811481496d9604172092f271a816f76509b3e401a664e8de623db7d6bab  .github/workflows/m3-composite-sorted-histogram-20261019.yml

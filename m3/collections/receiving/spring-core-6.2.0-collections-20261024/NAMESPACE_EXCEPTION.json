@@ -1,0 +1,7 @@
+{
+  "schema": "m3.collections.namespace-exception.v1",
+  "authorizedScope": "implementations/spring-core-6.2.0-collections, successor 20261024",
+  "mapping": {"org.springframework.util": "com.m3.collections.spring"},
+  "preserved": "the 20261018 mapping; no new package",
+  "notClaimed": "wire compatibility with org.springframework.util"
+}

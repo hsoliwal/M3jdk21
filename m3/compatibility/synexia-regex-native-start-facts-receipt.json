@@ -1,0 +1,74 @@
+{
+  "schema": "M3JDK21_SYNEXIA_RECEIPT_ONLY_CLOSURE_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "evidenceOnly": true,
+  "claim": "Receipt is EVIDENCE of pre-existing pinned-master content and its Synexia canonical unit. It receives nothing, changes no source, advances no phase, and asserts no runtime result.",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "develop",
+    "pullRequest": "UNVERIFIED",
+    "commit": "11c94feb18155a53cc213708c353791132edc4a7",
+    "pinRef": "refs/m3run/synexia-develop-20261017",
+    "recipe": "UNVERIFIED",
+    "crate": "regex-native-start-facts",
+    "unitKind": "RECIPE_DIR",
+    "unitPath": "synexia-openrewrite-recipes/recipes/regex-native-start-facts",
+    "unitTreeSha": "544039ab5ee8fb514a6241ddd0dd34ebbce1c5d3",
+    "mechanics": "Regex P0: precompute native start facts (README title)",
+    "donors": [
+      {
+        "path": "synexia-openrewrite-recipes/recipes/regex-native-start-facts/README.md",
+        "blob": "41a2c7f665af",
+        "target": "M3StringFacts",
+        "mechanics": "unit contract"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/regex-native-start-facts/pom.xml",
+        "blob": "be6513f549bf",
+        "target": "M3StringFacts",
+        "mechanics": "build+recipe declaration"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/regex-native-start-facts/provenance.tsv",
+        "blob": "261a6ec1333e",
+        "target": "M3StringFacts",
+        "mechanics": "provenance rows"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/regex-native-start-facts/src/test/java/com/synexia/rewrite/RegexNativeStartFactsRecipeTest.java",
+        "blob": "7a30849271e3",
+        "target": "M3StringFacts",
+        "mechanics": "recipe test"
+      }
+    ],
+    "license": "Apache-2.0 first-party"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "pinRef": "refs/m3run/m3jdk21-master-20261017",
+    "owners": [
+      "M3StringFacts"
+    ]
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+      "blob": "d8dd7dc30db6",
+      "before": "PREEXISTING",
+      "after": "2152c154d3cdece330667ee09675fd21d86f3b483a23a3156b8a3626c3f9f420"
+    }
+  ],
+  "residue": "RE_SEAL_REQUIRED: unit has no hash-pinned manifest covering the pinned-master content of its owner file(s); a successor hash-pinned recipe must seal master content before any phase advance",
+  "unverifiedFields": [
+    "pullRequest",
+    "recipe",
+    "ownerAssociation=TOKEN_MATCH(facts)"
+  ],
+  "gates": {
+    "evidenceOnly": "NOT_RUN: no build, no recipe execution, no tests; ls-tree + git show sha256 only (run RCPT-receipt-only-closure 2026-10-18)"
+  }
+}

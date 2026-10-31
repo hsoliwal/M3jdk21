@@ -1,0 +1,38 @@
+m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/ConvergenceCostProbe.java: OK
+m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/FilteredOwnerIntegration.java: OK
+m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/MaskWindowConvergence.java: OK
+m3/collections/qualification/jdk-rx7-view-convergence-20261019/proof/MaskWindowWork.c: OK
+m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java: OK
+m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java: OK
+m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java: OK
+m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java: OK
+m3/collections/src/main/native/collections/m3_index_mask_window.c: OK
+src/java.base/share/classes/java/util/ReverseOrderSortedSetView.java: OK
+src/java.base/share/classes/java/util/SortedSet.java: OK
+src/java.base/share/classes/jdk/internal/mindex/M3RX7.java: OK
+src/java.base/share/classes/jdk/internal/mindex/M3RX7Transitions.java: OK
+src/java.base/share/native/libjava/M3RX7.c: OK
+test/jdk/java/util/SortedSet/SortedSetSplitOrder.java: OK
+test/jdk/jdk/internal/mindex/M3RX7ArrayPowerContract.java: OK
+test/jdk/jdk/internal/mindex/RX7FindConvergence.java: OK
+openjdk version "21.0.12.1" 2026-08-18
+OpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)
+OpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-deb13u1-Debian, mixed mode, sharing)
+cc (Debian 14.2.0-19) 14.2.0
+Copyright (C) 2024 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+SORTED_SET_SPLIT_PASS checks=1031319
+FILTERED_OWNER_INTEGRATION_PASS checks=337790
+RX7_FIND_CONVERGENCE_PASS checks=251558
+RX7_FIND_CONVERGENCE_PASS checks=251558
+MASK_WINDOW_CONVERGENCE_PASS checks=270606
+MASK_WINDOW_MISSING_NATIVE_PASS checks=3
+shape,row_values_read,state_values_read,output_values_written,candidate
+0,1,128,1,1
+1,1,128,1,1
+2,130,300,4,1
+MASK_WINDOW_WORK_AND_FAULT_PASS
+RX7_ARRAY_POWER_PASS assertions=632868 native=true trace=5107111528486731443
+JDK_SORTED_RX7_MASK_HOST_PASS; actual SDK/reactor/source-built JDK/jtreg/production linkage/platform/pressure gates NOT_RUN

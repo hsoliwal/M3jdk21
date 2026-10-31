@@ -1,0 +1,7 @@
+Exception in thread "main" java.lang.AssertionError: ordinary iterator predicate work must be linear, actual=787456
+	at com.m3.collections.M3WrapperConvergenceContract.require(M3WrapperConvergenceContract.java:47)
+	at com.m3.collections.M3WrapperConvergenceContract.readOnlyLinearTraversal(M3WrapperConvergenceContract.java:116)
+	at com.m3.collections.M3WrapperConvergenceContract.run(M3WrapperConvergenceContract.java:372)
+	at com.m3.collections.M3WrapperConvergenceContract.main(M3WrapperConvergenceContract.java:383)
+
+EXIT=1

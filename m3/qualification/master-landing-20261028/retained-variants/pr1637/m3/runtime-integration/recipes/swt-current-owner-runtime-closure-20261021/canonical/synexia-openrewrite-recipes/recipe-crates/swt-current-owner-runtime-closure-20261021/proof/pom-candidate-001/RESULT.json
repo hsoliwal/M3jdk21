@@ -1,0 +1,52 @@
+{
+  "schema": "SWT_CURRENT_OWNER_POM_CANDIDATE/1",
+  "status": "PASS",
+  "error": null,
+  "receiver_revision": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+  "candidate_pom_sha256": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600",
+  "sdk_tests": {
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "steps": [
+    {
+      "name": "sdk",
+      "argv": [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-o",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/tmp/m3-swt-current-owner-candidate-001/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+        "clean",
+        "test"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 6.456,
+      "log_sha256": "7947ed1f9a83c43b010c58cc1642a6396eba7ce7cc68667dffe08a5aa580447f"
+    },
+    {
+      "name": "receiver",
+      "argv": [
+        "python3",
+        "/tmp/m3-swt-current-owner-candidate-001/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/verify.py",
+        "--receiver",
+        "/tmp/m3-swt-current-owner-candidate-001"
+      ],
+      "exit_code": 0,
+      "duration_seconds": 7.102,
+      "log_sha256": "08e66ae27bafdcd8fab887c6f2e6e1fd4c81a6f26445b77e79b03dd36246cc66"
+    }
+  ],
+  "inputs_sha256": "465aae1915cada475d7bdb13acb82c28cc08f112c672ba04c3154972d317d883",
+  "commands_sha256": "4f71800f86ce81ce5a70c60cc75618516f0fc7da8fdbd7e2439090ed7d0b7eab",
+  "candidate_inputs_unchanged": true,
+  "baseline_inputs_unchanged": true,
+  "production_source_writes": 0,
+  "original_test_sources_changed": 0,
+  "duration_seconds": 13.56,
+  "scope": "POM candidate only; existing seven-test SDK plus exact generated/current arithmetic receiver; native/Tycho/display/image/performance NOT_RUN"
+}

@@ -1,0 +1,134 @@
+"""Run existing per-file SDK proofs, admit exact output, compile after each pass."""
+from pathlib import Path
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import time
+import xml.etree.ElementTree as ET
+
+C2 = Path(__file__).resolve().parent
+B = C2.parent / 'm3fs-vfs-20261020'
+HOST = B / 'canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020/recipe-host'
+RECEIVER = B / 'receiver'
+JDK = B / 'toolchain/jdk21'
+OUT = C2 / 'verification/sdk'
+OUT.mkdir(parents=True, exist_ok=True)
+PASSES = ('stable-order-groups', 'index-contract', 'index-resource-probe', 'index-junit')
+PREP = json.loads((C2 / 'verification/sdk-preparation.json').read_text())
+assert PREP['status'] == 'PASS'
+env = os.environ.copy()
+env['JAVA_HOME'] = str(JDK)
+env['PATH'] = str(JDK / 'bin') + os.pathsep + env['PATH']
+commands = []
+admissions = []
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def write(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, indent=2, sort_keys=True) + '\n')
+
+
+def run(name, argv):
+    start = time.monotonic()
+    stdout, stderr = OUT / (name + '.stdout.log'), OUT / (name + '.stderr.log')
+    with stdout.open('w') as out, stderr.open('w') as err:
+        result = subprocess.run(argv, env=env, cwd=HOST, stdout=out, stderr=err, check=False)
+    receipt = {'name': name, 'argv': list(map(str, argv)), 'cwd': str(HOST),
+               'exit': result.returncode, 'elapsed_seconds': round(time.monotonic() - start, 6),
+               'stdout': str(stdout), 'stderr': str(stderr),
+               'stdout_sha256': sha(stdout), 'stderr_sha256': sha(stderr)}
+    commands.append(receipt)
+    write(OUT / 'commands.json', commands)
+    print(json.dumps({'stage': name, 'exit': result.returncode}), flush=True)
+    if result.returncode:
+        write(OUT / 'RESULTS.json', {'status': 'FAIL', 'failed_stage': name,
+                                   'commands': commands, 'admissions': admissions})
+        raise SystemExit(result.returncode)
+
+
+# Exact unchanged receiving owners are materialized solely to compile the real
+# closure. They are not changed files in the publication set.
+MAIN = 'm3/collections/src/main/java/com/m3/collections'
+for name in ('M3LongIndexProjection.java', 'M3LongAddressKernel.java',
+             'M3IndexMaskCompactor.java', 'M3IndexMaskWindow.java'):
+    rel = MAIN + '/' + name
+    source, destination = C2 / 'baseline' / rel, RECEIVER / rel
+    if destination.exists():
+        assert destination.read_bytes() == source.read_bytes(), rel
+    else:
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, destination)
+main_sources = sorted((RECEIVER / MAIN).glob('*.java'))
+assert len(main_sources) == 4
+baseline = json.loads((C2 / 'verification/baseline/RESULTS.json').read_text())
+junit_jars = [p for p in (B / 'm2').rglob('*.jar') if (
+    p.name in {'junit-jupiter-api-5.10.2.jar', 'junit-jupiter-engine-5.10.2.jar',
+               'junit-platform-launcher-1.10.2.jar', 'junit-platform-engine-1.10.2.jar',
+               'junit-platform-commons-1.10.2.jar', 'opentest4j-1.3.0.jar',
+               'apiguardian-api-1.1.2.jar'})]
+assert len(junit_jars) == 7
+parser_classpath = baseline['production_classes'] + os.pathsep + os.pathsep.join(map(str, junit_jars))
+compiled_tests = []
+for selected in PASSES:
+    maven = [str(B / 'toolchain/maven/bin/mvn'), '-o', '-B', '-ntp',
+             '-Dmaven.repo.local=' + str(B / 'm2'), '-f', str(HOST / 'pom.xml'),
+             '-Dm3.pass=' + selected, '-Dm3.parser.classpath=' + parser_classpath]
+    run(selected + '-compile', maven + ['-DskipTests', 'test-compile'])
+    run(selected + '-sdk', maven + ['surefire:test'])
+    reports = sorted((HOST / 'target' / selected / 'surefire-reports').glob('TEST-*.xml'))
+    counts = {key: sum(int(ET.parse(p).getroot().get(key, '0')) for p in reports)
+              for key in ('tests', 'failures', 'errors', 'skipped')}
+    assert counts == {'tests': 5, 'failures': 0, 'errors': 0, 'skipped': 0}, counts
+    for report in reports:
+        shutil.copyfile(report, OUT / (selected + '-' + report.name))
+    packet = HOST / 'target/candidate' / selected
+    rows = [(target, details) for target, details in PREP['targets'].items()
+            if details['pass'] == selected]
+    assert len(rows) == 1
+    target, expected = rows[0]
+    generated, destination = packet / target, RECEIVER / target
+    assert sha(generated) == expected['after_sha256'], target
+    if expected['before_sha256'] == 'ABSENT':
+        assert not destination.exists(), target
+    else:
+        assert sha(destination) == expected['before_sha256'], target
+    source_seals = {}
+    for name in ('SDK_RESULTS.tsv', 'SDK_INPUTS.tsv', 'SDK_REFUSALS.tsv', 'java.patch'):
+        path = packet / name
+        assert path.is_file(), path
+        output = OUT / selected / name
+        output.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(path, output)
+        source_seals[name] = sha(path)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(generated, destination)
+    assert sha(destination) == expected['after_sha256']
+    if '/src/test/' in target:
+        compiled_tests.append(destination)
+    compile_output = OUT / (selected + '-receiving-classes')
+    compile_output.mkdir()
+    run(selected + '-receiving-compile', [str(JDK / 'bin/javac'), '--release', '21',
+        '-Xlint:all', '-Werror', '-cp', os.pathsep.join(map(str, junit_jars)),
+        '-d', str(compile_output), *map(str, main_sources + compiled_tests)])
+    admissions.append(dict(expected, path=target, sdk_tests=counts,
+                           materialization='actual OpenRewrite Result retained by ordered proof test',
+                           sdk_receipts=source_seals, receiving_compile='PASS'))
+    write(OUT / 'admissions.json', admissions)
+
+write(OUT / 'RESULTS.json', {'status': 'PASS', 'schema': 'M3_SERIAL_EXISTING_ATOM_REPLAY_V1',
+    'canonical_base': 'f04fbac91a7891e64b77c7b24cef1ab75ec88144',
+    'published_packet_source': '528aaf79cfae79c5dbfe7c307340329d320e8c44',
+    'target_base': '95d0266ff15ae1f11876cce7360b155ef33a1862',
+    'passes': len(admissions), 'sdk_tests': 5 * len(admissions),
+    'admitted_files': {r['path']: r['after_sha256'] for r in admissions},
+    'production_changes': 1, 'verification_files': 3,
+    'admissions': admissions, 'commands': commands,
+    'engine_bindings': PREP['engine_bindings'], 'production_overlays': False,
+    'runtime_status': 'SEPARATE_GATE', 'source_built_m3jdk21': 'NOT_RUN'})
+print(json.dumps({'status': 'PASS', 'passes': len(admissions), 'sdk_tests': 5 * len(admissions)}))

@@ -1,0 +1,82 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 JDK proof kit
+on:
+  push:
+    branches: ['m3/jdk-proof-20261004']
+  pull_request:
+    paths:
+      - '.github/workflows/m3-jdk-proof.yml'
+      - 'm3/tooling/migration-recipes/**'
+      - 'm3/tooling/a3/**'
+permissions:
+  contents: read
+jobs:
+  proof:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - name: Read the exact candidate
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          [[ "$HEAD_SHA" =~ ^[0-9a-f]{40}$ ]]
+          mkdir "$RUNNER_TEMP/kit" "$RUNNER_TEMP/repo" "$RUNNER_TEMP/maven-repo"
+          curl --fail --location --retry 3 "https://codeload.github.com/${GITHUB_REPOSITORY}/tar.gz/${HEAD_SHA}" -o "$RUNNER_TEMP/kit/source.tar.gz"
+          tar -xzf "$RUNNER_TEMP/kit/source.tar.gz" -C "$RUNNER_TEMP/repo" --strip-components=1
+          printf '%s\n' "$HEAD_SHA" > "$RUNNER_TEMP/kit/source-sha.txt"
+          printf 'REPO=%s\n' "$RUNNER_TEMP/repo" >> "$GITHUB_ENV"
+      - name: Prepare the retained Java21 toolchain
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' -o "$RUNNER_TEMP/jdk21.tar.gz"
+          printf '%s  %s\n' '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
+          printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
+          printf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
+      - name: Execute real module-pack tests then unchanged admission
+        run: |
+          set -euo pipefail
+          java -version 2>&1 | tee "$RUNNER_TEMP/kit/java-version.txt"
+          mvn -version 2>&1 | tee "$RUNNER_TEMP/kit/maven-version.txt"
+          mvn -B -ntp -Dmaven.repo.local="$RUNNER_TEMP/maven-repo" -f "$REPO/m3/tooling/module-packs/pom.xml" clean test 2>&1 | tee "$RUNNER_TEMP/kit/test.log"
+          mvn -B -ntp -Dmaven.repo.local="$RUNNER_TEMP/maven-repo" -f "$REPO/m3/tooling/module-packs/pom.xml" verify 2>&1 | tee "$RUNNER_TEMP/kit/verify.log"
+      - name: Attempt the complete retained control reactor without hiding failures
+        if: always() && env.REPO != ''
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -fae -Dmaven.repo.local="$RUNNER_TEMP/maven-repo" -f "$REPO/m3/pom.xml" clean verify 2>&1 | tee "$RUNNER_TEMP/kit/reactor-verify.log"
+      - name: Preserve exact runtime and dependencies even on rejection
+        if: always()
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/kit"
+          if command -v mvn >/dev/null; then
+            home=$(dirname "$(dirname "$(readlink -f "$(command -v mvn)")")")
+            test -d "$home/lib" && test -d "$home/boot"
+            mkdir -p "$RUNNER_TEMP/maven/conf"
+            cp -R "$home/bin" "$home/boot" "$home/lib" "$RUNNER_TEMP/maven/"
+            for name in LICENSE NOTICE README.txt; do
+              if test -f "$home/$name"; then cp "$home/$name" "$RUNNER_TEMP/maven/"; fi
+            done
+            if test -d "$home/conf/logging"; then cp -R "$home/conf/logging" "$RUNNER_TEMP/maven/conf/"; fi
+            printf '%s\n' '<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"/>' > "$RUNNER_TEMP/maven/conf/settings.xml"
+            tar -czf "$RUNNER_TEMP/kit/maven.tar.gz" -C "$RUNNER_TEMP" maven
+          fi
+          if test -d "$RUNNER_TEMP/maven-repo"; then
+            tar --exclude='*.lastUpdated' --exclude='resolver-status.properties' -czf "$RUNNER_TEMP/kit/repository.tar.gz" -C "$RUNNER_TEMP" maven-repo
+          fi
+          if test -d "$RUNNER_TEMP/repo/m3"; then
+            find "$RUNNER_TEMP/repo/m3" -type f \( -path '*/surefire-reports/*' -o -path '*/site/jacoco/*' -o -name 'jacoco.exec' \) -print0 | tar --null -T - -czf "$RUNNER_TEMP/kit/reports.tar.gz"
+          fi
+          printf '%s\n' 'Proof inputs only. Artifact preservation is not test success or release admission. No user/runner settings, credentials, or generated key stores are included.' > "$RUNNER_TEMP/kit/BOUNDARY.txt"
+          (cd "$RUNNER_TEMP/kit" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
+      - name: Save proof inputs, not a release
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-jdk-kit-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/kit
+          retention-days: 3
+          if-no-files-found: error

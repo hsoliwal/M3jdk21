@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.LongArrayDequeReconcile
+displayName: M3JDK21 M3LongArrayDeque union owner
+description: >-
+  Resolves the com.m3.collections.M3LongArrayDeque collision between the JDK-shaped backend on
+  M3JDK21 master and the Synexia LongDeque lineage variant preserved only as zero-file ancestry:
+  the master class stays the single owner and gains queue offer/peek/poll, addLastIf, indexed get and
+  exception-safe filterInPlace with modCount on every structural mutation. Adds M3LongQueue,
+  M3LongDeque (JDK-shaped names; first/last/removeFirst/removeLast as defaulted aliases) and the
+  adapted lineage differential test from exact hash-pinned preimages. Proving-ground only;
+  java.util.ArrayDeque remains authority.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-long-array-deque-reconcile

@@ -1,0 +1,182 @@
+[
+  {
+    "bytes": 2143,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/FacadeTestLauncher.class",
+    "sha256": "15a090d2a7a90a99316c135e67dfd5b860d0d8c3ae80a8ca01d315ff342e6e5c"
+  },
+  {
+    "bytes": 1801,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredLists$FilterChain.class",
+    "sha256": "06b8badab0fb591dec98e8f72e5568f7409a477de514b2cfa7fe0eb383cb6b66"
+  },
+  {
+    "bytes": 859,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredLists$FilterTerm.class",
+    "sha256": "6e11b685b7655200b3ac49303eb0d04f42e5cdcf609765d412e630b5925acba7"
+  },
+  {
+    "bytes": 1206,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredLists$StrictReadOnlyList$1.class",
+    "sha256": "44c087d62df038f931e2bd93e52f50be1648948eb4bff3cea713a380f0ea4ea6"
+  },
+  {
+    "bytes": 3644,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredLists$StrictReadOnlyList.class",
+    "sha256": "ae9ccf5899854ecbe7f75551dccf42a75858ced9b52035fef1cfda48bf40e265"
+  },
+  {
+    "bytes": 1598,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredLists$View$1.class",
+    "sha256": "359b351d5aef0583ef16d9851ab7840c5a74a8fe00e73ff01b440bf42c5dc542"
+  },
+  {
+    "bytes": 4158,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredLists$View$Cursor.class",
+    "sha256": "4eaea38aaf8dc911fa6a352d45c52d774d0d13a554dac5d74922784549991b31"
+  },
+  {
+    "bytes": 4650,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredLists$View.class",
+    "sha256": "562c821595db2d77c99fa9f3e2bf7234a93129fc353933fd0fd9f1d176b1499d"
+  },
+  {
+    "bytes": 1332,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredLists.class",
+    "sha256": "1e51b6bf6c8a15d8134a7f2e878a232e068dce36baa6c01c1a9a96e1229e5cb1"
+  },
+  {
+    "bytes": 1425,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredViews$1.class",
+    "sha256": "b13198663c9297163e7e905fe4927361e29e5487ce6f39f989751b1b5176373c"
+  },
+  {
+    "bytes": 3564,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredViews$CollectionView.class",
+    "sha256": "7ec1a48e553183858973d580d0bcff244b65252691fe46e032d6d2b5c293aea3"
+  },
+  {
+    "bytes": 6762,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredViews$NavigableMapView.class",
+    "sha256": "e05e0846e405bfce6edf111d611ab403dfc9b36ec5c67c777de6c260c6b505b0"
+  },
+  {
+    "bytes": 4664,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredViews$NavigableSetView.class",
+    "sha256": "c94b78d1fa934878af4554fc3e0e65f0106af024564b16217deed6fbda02bafa"
+  },
+  {
+    "bytes": 4331,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredViews$ReadOnlySortedSet.class",
+    "sha256": "c047d461f254145e2f3ca4933dbbca4f70b7be7308b05f8820b37603569ec7c7"
+  },
+  {
+    "bytes": 1856,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredViews$SetView.class",
+    "sha256": "1c1d04d90278700d30d48dd4adbde9fa008b054788d6e9548ff555d0f8aab31a"
+  },
+  {
+    "bytes": 1447,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredViews$SortedMapView$1$1.class",
+    "sha256": "191d7e1f9c986d15afba48c5ed87833b38257032a28599c7bd7c087f5e846804"
+  },
+  {
+    "bytes": 2978,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredViews$SortedMapView$1.class",
+    "sha256": "2f1a4e6af514c7784423b8d06b3becb132fba9da6999d4b07572a66ba6a6d052"
+  },
+  {
+    "bytes": 4474,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredViews$SortedMapView.class",
+    "sha256": "13519bc942916b4c76f2cba94c08374728e1822fb08a30b417dc0601e8094286"
+  },
+  {
+    "bytes": 2747,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredViews$SortedSetView.class",
+    "sha256": "bee60ec307cbe53e3eb5585b3ed1d4fb6b37489ebd32d0fd8af78562cca8fb84"
+  },
+  {
+    "bytes": 5875,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3FilteredViews.class",
+    "sha256": "8f75006b2c6c145946aa66a3c41bd5bee9cc281b1d0940c1b30c222bfb1a7632"
+  },
+  {
+    "bytes": 1802,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3MutableFilteredViews$CapturedEntries$1$1.class",
+    "sha256": "b0e6f2b4332de1f09b8c478b4ee86e626e8b31b2d68bcf91b1ae37605e43f603"
+  },
+  {
+    "bytes": 1273,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3MutableFilteredViews$CapturedEntries$1.class",
+    "sha256": "99711e30160e6e77554b76a05929186320c18077272dac875681488f906bbee8"
+  },
+  {
+    "bytes": 1194,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3MutableFilteredViews$CapturedEntries.class",
+    "sha256": "df82fc680a695d3f61c213f4b4d5931b60407e2d2f71912d5aafb22d11602879"
+  },
+  {
+    "bytes": 1780,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3MutableFilteredViews$MapView$1.class",
+    "sha256": "b66f50d9a3ae8f24e0145de9d51f22c99859054e25f98b8291de0b0675b9e7ea"
+  },
+  {
+    "bytes": 2434,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3MutableFilteredViews$MapView$2.class",
+    "sha256": "1dec67139d2973d15c1d1d5f73cda730e8b8bad0bf4819068a881edfb29f9089"
+  },
+  {
+    "bytes": 2379,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3MutableFilteredViews$MapView$LiveEntry.class",
+    "sha256": "571f6c6619322ad4a7e1ca2a9f8545ea8de908a1f0c2b41b9f1a8df1cbcf6219"
+  },
+  {
+    "bytes": 8826,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3MutableFilteredViews$MapView.class",
+    "sha256": "f60aa3bd212597ba444fe8da1172064b1aa677cb1eb6d90ba566f655ce037fe8"
+  },
+  {
+    "bytes": 2231,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3MutableFilteredViews$SetView$1.class",
+    "sha256": "f40f9d8e71fa7e87eb0b8efbaa12477469227daada71a849fdf2a6d51e8c02b3"
+  },
+  {
+    "bytes": 6916,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3MutableFilteredViews$SetView.class",
+    "sha256": "42fa6e6cf8275aa20d98604a1a37c8a12ab9463ba7adcf5935e6d65b3ec87441"
+  },
+  {
+    "bytes": 2553,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3MutableFilteredViews.class",
+    "sha256": "c4fad67af4ad0a9863ad30ac0195454dd62ed0630b09ed8949dba2788f8212d8"
+  },
+  {
+    "bytes": 1140,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3SlotSpliterators$1.class",
+    "sha256": "62289360ecbce8abe6a93e12f66ab0e5d2ef251c19af921cad1bc05c48623802"
+  },
+  {
+    "bytes": 1658,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3SlotSpliterators$2.class",
+    "sha256": "cd6b259bc5c2f3e2388b72681736a30f24cb5e1b6cd1e60a26d8f25310c4174e"
+  },
+  {
+    "bytes": 3558,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3SlotSpliterators.class",
+    "sha256": "6f1d49bc783e41d7e5625f347a8c91c481d8197d2d7398372c6df070a80b2bdd"
+  },
+  {
+    "bytes": 777,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3WrapperConvergenceContract$1.class",
+    "sha256": "7cfffb5c5f8eb49191fba5556f25265a89c6dcca1f36820d9d1257c05de65899"
+  },
+  {
+    "bytes": 20144,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3WrapperConvergenceContract.class",
+    "sha256": "d53a6f20dfca13386423ba0ea8bf080cacee312da669a82d9f22ba447a65cb6c"
+  },
+  {
+    "bytes": 531,
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/verification/retained-wrappers/classes/com/m3/collections/M3WrapperConvergenceTest.class",
+    "sha256": "166b1425e97bc6049dbe63349039471085b86dc6ab6dd12a74b4e0240b847bff"
+  }
+]

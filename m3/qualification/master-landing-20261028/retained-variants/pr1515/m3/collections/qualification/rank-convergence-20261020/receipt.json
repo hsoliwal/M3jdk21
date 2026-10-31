@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "b5d2bbb3c75ff928f3dbb0f92ed4471488ea8c05",
+  "canonical_pr": 12563,
+  "canonical_packet": "synexia-openrewrite-recipes/tasks/m3-index-rank-word-walk-20261020/qualification-20261020",
+  "recipe": "com.synexia.m3.M3IndexPathRankAdaptive20261020",
+  "target_parent": "fd493c1d9dac8cdf462351c35d588fe9299b7e34",
+  "stacked_on_pr": 1549,
+  "generated_targets": {
+    "m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java": "556802c1eff44ffffceba0f09da6cb920ec418a6d1fce84ee398c1097b830430",
+    "m3/collections/src/test/java/com/m3/collections/M3IndexPathRankWordWalkProof.java": "7520d700bba2dd8907b571bd669e02b609e442f39f1197b42d2ed39e747611e4",
+    "m3/collections/src/test/java/com/m3/collections/M3IndexPathRankWordWalkTest.java": "29abc88719bf011572bb23eec9d88cb38cd3fcbf6c69d0ee28d25c7457a49f14"
+  },
+  "sdk": {
+    "tests_passed": 6,
+    "first_application_files": 3,
+    "replay_files": 0
+  },
+  "runtime": {
+    "java_release": 21,
+    "production_sources": 267,
+    "test_sources": 261,
+    "source_built_junit_java": 751,
+    "sealed_inputs": 1318,
+    "junit_tests_found": 468,
+    "junit_tests_passed": 468,
+    "junit_tests_skipped": 0,
+    "junit_tests_aborted": 0,
+    "jni_libraries": 10,
+    "native_c_units": 11,
+    "checked_jni": true,
+    "fatal_ubsan": true,
+    "rank_native_parity_paths": 180,
+    "interpreter_random_windows": 6300,
+    "sparse_extreme_windows": 29
+  },
+  "unchanged_surfaces": {
+    "public_classes": 2,
+    "generated_jni_headers": 12
+  },
+  "hold": [
+    "Original module Maven source-owned JUnit artifact installation",
+    "Source-built OpenRewrite dependency closure and full canonical reactor",
+    "Installed integrated M3JDK21 / HotSpot / jtreg / JCK",
+    "Non-Linux platforms",
+    "Retained heap and native RSS",
+    "String-first phase promotion and all-family completion"
+  ],
+  "status": "DRAFT_COLLECTION_SOURCE_QUALIFIED_NOT_INSTALLED_JDK_QUALIFIED"
+}

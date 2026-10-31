@@ -1,0 +1,102 @@
+{
+  "status": "ROOT_SCOPED_PROOFS_PASS__PUBLIC_MODULE_AND_HOSTED_CI_PENDING",
+  "baseCommit": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+  "owner": {
+    "path": "m3/collections/implementations/guava-evicting-queue/src/main/java/com/m3/collections/guava/M3EvictingQueue.java",
+    "bytes": 16979,
+    "sha256": "8afe356324bdaa51953933f2213b573175b64e2921df4c0df7c4a16161274840"
+  },
+  "frozenPrewrittenBehaviorFixture": {
+    "bytes": 32195,
+    "path": "proof/GuavaEvictingQueueProtocolProof.java",
+    "sha256": "e2766ba3cc1c42de7ac902a931b498d819064f565aa84569d0b4f2c82aa20fc1"
+  },
+  "rootExecuted": {
+    "protocol": {
+      "mandatoryChecks": 1053660,
+      "mandatoryOperations": 92051,
+      "mandatorySHA256": "30058bc214ac296942eca37f0ff5cd867fb61389cf552c4b34f89c770bde5b5a",
+      "providerSpecificObservations": 30029,
+      "providerSpecificSHA256": "ae9f76a1cd93fbf853c3f88fdfaba10a2d9c6d804f7bc4e645112ffd77ec809a",
+      "scope": "one full queue public protocol; concrete observers are separate from common Collection laws; owned namespace/serialization identity declared; no native queue store claim",
+      "selectedPolicyChecks": 51,
+      "selectedPolicyOperations": 62,
+      "selectedPolicySHA256": "8c1997f08ce5060c8f5ecefff152b227aacee907892ea907d04a970ccfaa584c",
+      "status": "PASS"
+    },
+    "publicSurface": {
+      "classPolicy": "final",
+      "constructorPolicy": "private(int)",
+      "publicSignaturesIncludingObject": 35,
+      "relocation": "declared owner type only",
+      "status": "PASS"
+    },
+    "projection": {
+      "cases": 1048576,
+      "checks": 9437473,
+      "projectionSHA256": "ac52a2b5ea97f05f8fa659f997afc307747a73c026ee1d6233c7ac6c924d420e",
+      "scope": "existing aligned primitive kernel over public queue snapshots/cursors; no native queue store or ABI addition",
+      "status": "PASS"
+    },
+    "receiving": {
+      "status": "PASS",
+      "tests": 2,
+      "testSHA256": "ea5c450de991672fdeb1d66fa73cacbe86fa1bde30f1c89f3af4a92d5e3f7e1b",
+      "engineSHA256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+    }
+  },
+  "directInterfaces": [
+    "java.util.Queue",
+    "java.io.Serializable"
+  ],
+  "productionClasspath": "JDK and own compiled class only; provider jar absent from owned protocol process",
+  "limits": [
+    "One complete mapped collection body; finite selected corpus and root Oracle21.0.9 runtime",
+    "Own nominal and serialized class identity; no provider concrete assignability/original wire/private-field identity",
+    "Existing primitive JNI projection only; no native queue store/enqueue/dequeue ABI",
+    "Repeated corpus profiles are not added as distinct coverage",
+    "Actual local2-test receiving proof is separate; module Maven and hosted three-job CI pending",
+    "Full five-library and every native collection operation scope remains unfinished"
+  ],
+  "performance": "performance/RESULTS_COMPACT.json; local descriptive samples; owned slower at1024 in all7 workloads",
+  "serializationRegression": {
+    "status": "PASS",
+    "cases": 15,
+    "checks": 34,
+    "failures": 0,
+    "fixtureSHA256": "6659b1f7853a5edd8f286b67e42644fe1d6d1df68f5df60fa6d620124c818e5b",
+    "oldRuntimeExit": 1,
+    "newRuntimeExit": 0,
+    "results": "serialization-review/REGRESSION_RESULTS.json"
+  },
+  "v2RootReceipts": [
+    {
+      "name": "CANDIDATE_RUN_V2.json",
+      "bytes": 5145,
+      "sha256": "d9664e4ba6bc15ea73beb08b21d5a4393524debbdc2f97adfe97ce9b89221f77"
+    },
+    {
+      "name": "PUBLIC_SURFACE_PROOF_V2.json",
+      "bytes": 2841,
+      "sha256": "4f44b7ff2eec22ad2634d2d98e9cb617db927ea27dd9f04128f989fadd821754"
+    },
+    {
+      "name": "MASK_PROJECTION_V2.json",
+      "bytes": 9014,
+      "sha256": "6c0b19dd1b9c709f903880d11fdf2573be235b200a26953bee8131debc3196a6"
+    },
+    {
+      "name": "RECEIVING_PROOF-v2.json",
+      "bytes": 23666,
+      "sha256": "1a386443a57167e3859b100a809a465bc62bf15474e0c3efc5a5436627a8d5ab"
+    }
+  ],
+  "privateWire": "Unpublished V1 replaced by own V2: validated declarations, real serialized Object[] sentinel image, filter-admitted extent, cloned private storage; no Guava wire compatibility promise.",
+  "historicalPerformance": {
+    "measuredOwnerSHA256": "34e31faf78923e335d74a249af3c2d419f616d9812e5f5bee0a9a0d4bf1ac04b",
+    "measuredOwnerBytes": 16180,
+    "v2WholeClassMeasured": false,
+    "allTimedMethodsByteIdentical": true,
+    "evidence": "serialization-review/SOURCE_DELTA.json"
+  }
+}

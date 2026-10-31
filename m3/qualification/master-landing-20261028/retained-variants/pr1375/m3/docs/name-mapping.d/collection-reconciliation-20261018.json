@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "status": "ISOLATED_EXISTING_OWNER_RECONCILIATION_PRODUCT_HOLD",
+  "source_repo": "hsoliwal/com.synexia",
+  "source_commit": "7fafc4e3c9b9c7ab2b5d942768564ac865be3074",
+  "recipe": "com.synexia.rewrite.M3Jdk21CollectionReconcileRecipe",
+  "target_base": "fcf3965eb7e021560aa49bbc722fd2edf4abb1b7",
+  "source_pr": 12386,
+  "target_module": "m3/collections",
+  "mappings": [
+    {"source":"M3JDK21 PR1328 null atom plus PR1375 fused terminals","target":"com.m3.collections.M3FilteredViews","status":"combined source qualified; full module pending"},
+    {"source":"M3JDK21 PR1328 borrowed-mask alias refusal","target":"com.m3.collections.M3IndexPathMasks","status":"exact prior postimage received; unchanged native owner"},
+    {"source":"M3JDK21 PR1366 packed snapshot filtering","target":"com.m3.collections.M3IndexedListSnapshot","status":"exact prior postimage received; stable sort unchanged"},
+    {"source":"M3JDK21 PR1366 empty verification plus PR1375 prefix compaction","target":"m3_index_mask_compactor.c","status":"both composition orders byte-identical; existing JNI exports"}
+  ],
+  "license": "Existing first-party Apache-2.0 notices retained; no source copied into GPL src files",
+  "runtime_dependency": "NONE",
+  "public_api_and_native_abi": "UNCHANGED",
+  "receiving_phase": "STRING_ACTIVE_UNCHANGED",
+  "pending": ["OpenRewrite SDK","complete collection module","installed M3JDK21 image","jtreg/JCK","other native platforms","token and widget product contracts"]
+}

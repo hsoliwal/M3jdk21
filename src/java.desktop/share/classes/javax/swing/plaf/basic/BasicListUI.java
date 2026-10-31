@@ -199,6 +199,12 @@ public class BasicListUI extends ListUI
 
     private static final int DROP_LINE_THICKNESS = 2;
 
+    /** Row offsets over {@code cellHeights} for the M3 row path ({@code sun.swing.list.M3ListRows}). */
+    private final sun.swing.list.M3ListRows m3Rows = new sun.swing.list.M3ListRows();
+
+    /** Row sizes kept between layouts for the M3 measurement path ({@code sun.swing.list.M3ListMeasure}). */
+    private final sun.swing.list.M3ListMeasure m3Measure = new sun.swing.list.M3ListMeasure();
+
     /**
      * Constructs a {@code BasicListUI}.
      */
@@ -1100,6 +1106,12 @@ public class BasicListUI extends ListUI
             break;
         default:
             x = insets.left;
+            if (m3Rows.indexes(this, cellHeights) && row < cellHeights.length) {
+                y += m3Rows.startOf(row);
+                w = list.getWidth() - (insets.left + insets.right);
+                h = getRowHeight(index);
+                return new Rectangle(x, y, w, h);
+            }
             if (cellHeights == null) {
                 y += (cellHeight * row);
             }
@@ -1214,6 +1226,12 @@ public class BasicListUI extends ListUI
             return -1;
         }
         else {
+            if (m3Rows.indexes(this, cellHeights)) {
+                int m3Row = m3Rows.rowAt(size, insets.top, y0, closest);
+                if (m3Row != sun.swing.list.M3ListRows.STOCK) {
+                    return m3Row;
+                }
+            }
             int y = insets.top;
             int row = 0;
 
@@ -1406,6 +1424,13 @@ public class BasicListUI extends ListUI
      */
     protected void updateLayoutState()
     {
+        if (layoutOrientation == JList.VERTICAL && m3Measure.measure(this, list, rendererPane)) {
+            cellWidth = m3Measure.cellWidth();
+            cellHeight = -1;
+            cellHeights = m3Measure.cellHeights();
+            columnCount = 1;
+            return;
+        }
         /* If both JList fixedCellWidth and fixedCellHeight have been
          * set, then initialize cellWidth and cellHeight, and set
          * cellHeights to null.
@@ -2760,6 +2785,7 @@ public class BasicListUI extends ListUI
         // ListDataListener
         //
         public void intervalAdded(ListDataEvent e) {
+            m3Measure.added(e.getIndex0(), e.getIndex1());
             updateLayoutStateNeeded = modelChanged;
 
             int minIndex = Math.min(e.getIndex0(), e.getIndex1());
@@ -2783,6 +2809,7 @@ public class BasicListUI extends ListUI
 
         public void intervalRemoved(ListDataEvent e)
         {
+            m3Measure.removed(e.getIndex0(), e.getIndex1());
             updateLayoutStateNeeded = modelChanged;
 
             /* Sync the SelectionModel with the DataModel.
@@ -2803,6 +2830,7 @@ public class BasicListUI extends ListUI
 
 
         public void contentsChanged(ListDataEvent e) {
+            m3Measure.changed(e.getIndex0(), e.getIndex1());
             updateLayoutStateNeeded = modelChanged;
             redrawList();
         }

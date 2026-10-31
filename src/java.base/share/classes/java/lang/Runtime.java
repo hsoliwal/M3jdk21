@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 1995, 2022, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2019, Azul Systems, Inc. All rights reserved.
+ * Copyright (c) 2026 Hitesh Soliwal and contributors.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -34,6 +35,8 @@ import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Optional;
 import java.util.StringTokenizer;
+import java.util.concurrent.ProgressMonitor;
+import java.util.concurrent.ProgressMonitors;
 
 import jdk.internal.access.SharedSecrets;
 import jdk.internal.reflect.CallerSensitive;
@@ -134,6 +137,67 @@ public class Runtime {
      */
     public static Runtime getRuntime() {
         return currentRuntime;
+    }
+
+    /**
+     * Returns the borrowed progress monitor selected for the calling thread.
+     * A monitor bound by {@link ProgressMonitors#bind(ProgressMonitor)} takes
+     * precedence over the process fallback. Without such a binding, the
+     * current fallback provider is evaluated on each call; a {@code null}
+     * provider result is represented by {@link ProgressMonitor#NONE}.
+     *
+     * <p>This method delegates to {@link ProgressMonitors#current()}.
+     * Ownership remains with the caller that supplied or bound the monitor.
+     * A task reports work to a borrowed monitor and leaves its completion to
+     * that owner. Thread bindings are local to the binding thread; monitored
+     * executor methods provide explicit propagation to asynchronous tasks.
+     *
+     * <p>The fallback provider may be invoked concurrently, and its unchecked
+     * failures propagate to the caller. The selected monitor determines
+     * whether concurrent updates are supported.
+     *
+     * @apiNote This is an opt-in M3JDK progress facade over the existing
+     * {@code java.util.concurrent} progress owners.
+     * @return the current lexical or process fallback monitor, never {@code null}
+     * @see java.util.concurrent.Executor#executeWithProgress(Runnable)
+     * @since 21
+     */
+    public ProgressMonitor progressMonitor() {
+        return ProgressMonitors.current();
+    }
+
+    /**
+     * Allocates a child progress budget from the monitor selected for this thread.
+     * The parent is resolved once, then passed to
+     * {@link ProgressMonitors#child(ProgressMonitor, String, long, long)}.
+     * Subsequent scope or fallback-provider changes do not rebind that child.
+     *
+     * <p>The caller completes the returned child independently. Completion
+     * credits its remaining parent budget without completing the borrowed
+     * parent. Parent cancellation is visible to the child; cancelling the
+     * child leaves the parent's cancellation state unchanged. When the parent
+     * is {@link ProgressMonitor#NONE}, this method returns that monitor.
+     *
+     * <p>Child accounting uses the existing atomic implementation. The parent
+     * must support concurrent callbacks when the child is shared across
+     * threads. A nonempty task description is delivered through the parent's
+     * {@link ProgressMonitor#message(String) message} method during creation.
+     * Unchecked provider or callback failures propagate unchanged. The parent
+     * is selected before the child factory validates the work range.
+     *
+     * @apiNote This is an opt-in M3JDK progress facade; it uses the existing
+     * child factory and current-monitor selection rules.
+     * @param task the child description, or {@code null} for no description
+     * @param parentTicks the nonnegative budget credited to the parent
+     * @param totalWork the positive child work estimate, or
+     *                  {@link ProgressMonitor#UNKNOWN_WORK} for completion-only credit
+     * @return the child monitor, or {@link ProgressMonitor#NONE} for a no-op parent
+     * @throws IllegalArgumentException if {@code parentTicks} is negative or
+     *         {@code totalWork} is neither positive nor {@code UNKNOWN_WORK}
+     * @since 21
+     */
+    public ProgressMonitor subProgressMonitor(String task, long parentTicks, long totalWork) {
+        return ProgressMonitors.child(ProgressMonitors.current(), task, parentTicks, totalWork);
     }
 
     /** Don't let anyone else instantiate this class */

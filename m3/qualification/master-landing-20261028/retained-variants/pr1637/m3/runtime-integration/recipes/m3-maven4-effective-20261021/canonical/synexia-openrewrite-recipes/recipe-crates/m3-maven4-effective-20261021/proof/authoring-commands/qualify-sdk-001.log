@@ -1,0 +1,1 @@
+{"status": "FAIL", "attempt": "sdk-001-offline", "counts": {"tests": 1, "failures": 1, "errors": 0, "skipped": 0}, "duration_seconds": "5.516", "receipt": "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/proof/sdk-001-offline/RESULT.json"}

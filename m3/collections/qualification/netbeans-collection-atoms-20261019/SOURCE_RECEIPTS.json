@@ -1,0 +1,156 @@
+{
+  "schema": 1,
+  "donor": "apache/netbeans",
+  "commit": "f26ca8d8025ff820b8ffe751b6db6c1cc67baa97",
+  "license": "Apache-2.0; original NOTICE and per-file headers retained",
+  "custody": "all retained file bytes match GitHub pinned Git blobs",
+  "files": [
+    {
+      "path": "ide/editor.util/src/org/netbeans/lib/editor/util/GapList.java",
+      "git_blob": "5a329a1c56d48a1e4e0e1a50a3998d811cc924cf",
+      "sha256": "e72257eccdb7d9c0b5a61cf0bb2ac93ff7289b4736cf2d3e08bd8017b5800afa",
+      "source_url": "https://github.com/apache/netbeans/blob/f26ca8d8025ff820b8ffe751b6db6c1cc67baa97/ide/editor.util/src/org/netbeans/lib/editor/util/GapList.java"
+    },
+    {
+      "path": "ide/editor.util/test/unit/src/org/netbeans/lib/editor/util/GapListRandomTest.java",
+      "git_blob": "c4adc339b951203d4e11c2fb7c1307602c785fbf",
+      "sha256": "406291b768d6bd829e647265ed3af68add734367ff77f6575b30d3eaf8150563",
+      "source_url": "https://github.com/apache/netbeans/blob/f26ca8d8025ff820b8ffe751b6db6c1cc67baa97/ide/editor.util/test/unit/src/org/netbeans/lib/editor/util/GapListRandomTest.java"
+    },
+    {
+      "path": "ide/editor.util/src/org/netbeans/lib/editor/util/CharSequenceUtilities.java",
+      "git_blob": "1ee8a7161f3e1fce41a24e9ddc288b6993565a6a",
+      "sha256": "c7a4f9233d7ed419f683cd466ccd77c980c17f8ba55ac0baa4d713097a2ec00b",
+      "source_url": "https://github.com/apache/netbeans/blob/f26ca8d8025ff820b8ffe751b6db6c1cc67baa97/ide/editor.util/src/org/netbeans/lib/editor/util/CharSequenceUtilities.java"
+    },
+    {
+      "path": "ide/editor.util/test/unit/src/org/netbeans/lib/editor/util/CharSequenceUtilitiesTest.java",
+      "git_blob": "3775667458874c8d861e1941771eb111cf2c2b3c",
+      "sha256": "2fa7128b53aa67fc35ef1197175880e0d547fed087b9b7725439f8920c59c918",
+      "source_url": "https://github.com/apache/netbeans/blob/f26ca8d8025ff820b8ffe751b6db6c1cc67baa97/ide/editor.util/test/unit/src/org/netbeans/lib/editor/util/CharSequenceUtilitiesTest.java"
+    },
+    {
+      "path": "LICENSE",
+      "git_blob": "aeb123f7531beff0d8d3301991af7736d471c646",
+      "sha256": "68cc3fd4b636818c8eda3bbf690b3a6bfb20d96ec16ef8bd1647ba4e4300bb17",
+      "source_url": "https://github.com/apache/netbeans/blob/f26ca8d8025ff820b8ffe751b6db6c1cc67baa97/LICENSE"
+    },
+    {
+      "path": "NOTICE",
+      "git_blob": "b09ec350398aff366e7ce61e12500aef4b491e15",
+      "sha256": "eaf000a25aea4084fb4927ae79b000a44e5559d59c9d0bcf5cdbb56d2fb41bbd",
+      "source_url": "https://github.com/apache/netbeans/blob/f26ca8d8025ff820b8ffe751b6db6c1cc67baa97/NOTICE"
+    },
+    {
+      "path": "ide/editor.util/src/org/netbeans/lib/editor/util/ArrayUtilities.java",
+      "git_blob": "903d77f6e06bd3c705d5e177bf2e4bc28efc02f7",
+      "sha256": "0c603832ccc7ecd85f4ceefcd96700f45237b3f0597626fac0afe74183279713",
+      "source_url": "https://github.com/apache/netbeans/blob/f26ca8d8025ff820b8ffe751b6db6c1cc67baa97/ide/editor.util/src/org/netbeans/lib/editor/util/ArrayUtilities.java"
+    },
+    {
+      "path": "ide/editor.util/src/org/netbeans/lib/editor/util/OffsetGapList.java",
+      "git_blob": "c0fdd1149b8cbf4c76468eef54d636cc92d72fbe",
+      "source_url": "https://github.com/apache/netbeans/blob/f26ca8d8025ff820b8ffe751b6db6c1cc67baa97/ide/editor.util/src/org/netbeans/lib/editor/util/OffsetGapList.java",
+      "sha256": "263cc194490bb50c9a28de0ec0376c9b03b4965f74a7f278d05a2f29d5d91796"
+    },
+    {
+      "path": "ide/editor.util/src/org/netbeans/lib/editor/util/FlyOffsetGapList.java",
+      "git_blob": "24119f904998c10d1fd192ea591badefea07f6e3",
+      "source_url": "https://github.com/apache/netbeans/blob/f26ca8d8025ff820b8ffe751b6db6c1cc67baa97/ide/editor.util/src/org/netbeans/lib/editor/util/FlyOffsetGapList.java",
+      "sha256": "528161dffe9511df00ca6774cb8a910e36b29f60cd7f6f0b38acf499734af645"
+    },
+    {
+      "path": "platform/openide.util/src/org/openide/util/CharSequences.java",
+      "git_blob": "c1f4633452c4e0127098e64843b9f9ce26b143c2",
+      "source_url": "https://github.com/apache/netbeans/blob/f26ca8d8025ff820b8ffe751b6db6c1cc67baa97/platform/openide.util/src/org/openide/util/CharSequences.java",
+      "sha256": "eb4815a1e422a68dbdd0c80d0fb24987ea1bf6ae1ac19b4bfd5f8b323b26267c"
+    },
+    {
+      "path": "ide/lexer/src/org/netbeans/lib/lexer/inc/TokenListUpdater.java",
+      "git_blob": "086c75b39a68cf953bd884d0fe64b461c1978c12",
+      "source_url": "https://github.com/apache/netbeans/blob/f26ca8d8025ff820b8ffe751b6db6c1cc67baa97/ide/lexer/src/org/netbeans/lib/lexer/inc/TokenListUpdater.java",
+      "sha256": "2cff485deddcfc4bf1c30c573bfc69a6b87b5b9ebd1ac2393bd4416e404b0373"
+    },
+    {
+      "path": "ide/parsing.api/src/org/netbeans/modules/parsing/api/Snapshot.java",
+      "git_blob": "1a0d9a289cf15eb32c46d891ddea1b4d94226da1",
+      "source_url": "https://github.com/apache/netbeans/blob/f26ca8d8025ff820b8ffe751b6db6c1cc67baa97/ide/parsing.api/src/org/netbeans/modules/parsing/api/Snapshot.java",
+      "sha256": "9deea12fb1fa42a05c6014cecb3d5ee1064cb16f3292700d7a626e945d5801b8"
+    },
+    {
+      "path": "java/java.source.base/src/org/netbeans/api/java/source/ElementHandle.java",
+      "git_blob": "fdd0e8d2cd3e212729801336d1309c70213a881b",
+      "source_url": "https://github.com/apache/netbeans/blob/f26ca8d8025ff820b8ffe751b6db6c1cc67baa97/java/java.source.base/src/org/netbeans/api/java/source/ElementHandle.java",
+      "sha256": "4ad9ef7f2546f8802d3dbe8fe7bc7a1a2dc2ed3d81843113dc7e5b28f639deb0"
+    }
+  ],
+  "target_path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+  "before_sha256": "ae1092d66bb27e18c0f435d9dc148bd0f46fbc33f9731d9e2d2194142ccc3d32",
+  "status": "REUSE_INCUMBENT_DONOR_CANDIDATES_REFUSED",
+  "target_checkout_revision": "677437be295b23f7ccf7409be287008944d0e8b0",
+  "target_preimage_exact": true,
+  "dependency_fixtures": [
+    {
+      "path": "before/dependencies/M3IndexMaskCompactor.java",
+      "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c"
+    },
+    {
+      "path": "before/dependencies/M3IndexedListSnapshot.java",
+      "sha256": "59b273fb50a1ab33d770028ceec80265ab3c21f06ffed12529346dc9859687ef"
+    }
+  ],
+  "selected_production_postimage": null,
+  "production_source_unchanged": true,
+  "candidate_trials": [
+    {
+      "id": "NB_GAP_UNCONDITIONAL",
+      "description": "Unconditional survivor-run arraycopy",
+      "source_fixture": "rejected/unconditional-span-copy/M3ArrayList.java.txt",
+      "public_fixture": "fixtures/unconditional-span-copy-M3ArrayList.java.txt",
+      "sha256": "1dfc267aae07ddcb03334e8d9ccfb1b8d6be79f8a6388f5eb9759189b3dc656a",
+      "decision": "REFUSED_MEASURED_COST",
+      "contract_result": "PASS finite baseline/JDK proof",
+      "production_adopted": false
+    },
+    {
+      "id": "NB_GAP_INLINE_HYBRID",
+      "description": "Inline short-run scalar fallback",
+      "source_fixture": "rejected/inline-hybrid/M3ArrayList.java.txt",
+      "public_fixture": "fixtures/inline-hybrid-M3ArrayList.java.txt",
+      "sha256": "0605bbe2b500f2d09afe4f8a2f016af3df7d6ff17bd373b71e8d49b37a6bb3e2",
+      "decision": "REFUSED_MEASURED_COST",
+      "contract_result": "PASS finite baseline/JDK proof",
+      "production_adopted": false
+    },
+    {
+      "id": "NB_GAP_PRIVATE_HELPER",
+      "description": "Private helper short-run fallback",
+      "source_fixture": "candidate/M3ArrayList.java.txt",
+      "public_fixture": "fixtures/private-helper-hybrid-M3ArrayList.java.txt",
+      "sha256": "4201eba712cb76c29dc0b73a6f3fea25767eedf736a40953e1e1275eec388872",
+      "decision": "REFUSED_MEASURED_COST",
+      "contract_result": "PASS finite baseline/JDK proof",
+      "production_adopted": false
+    },
+    {
+      "id": "NB_GAP_SINGLE_INTERVAL",
+      "description": "Inline single rejected interval with exact scalar fallback",
+      "source_fixture": "candidate/contiguous-run/M3ArrayList.java.txt",
+      "public_fixture": "fixtures/single-interval-M3ArrayList.java.txt",
+      "sha256": "ed6801202148166726242042b84fba3d988919c363d93571624a943958f25dfc",
+      "decision": "REFUSED_MEASURED_COST",
+      "contract_result": "PASS finite baseline/JDK proof",
+      "production_adopted": false
+    },
+    {
+      "id": "NB_GAP_EXISTING_RANGE",
+      "description": "Single rejected interval delegates to existing removeRange",
+      "source_fixture": "candidate/existing-remove-range/M3ArrayList.java.txt",
+      "public_fixture": "fixtures/existing-remove-range-M3ArrayList.java.txt",
+      "sha256": "2faf80a555f6c03ffacc2ef2d2ba09580fb249036d23e4e9a8e2582c82662872",
+      "decision": "REFUSED_MEASURED_COST",
+      "contract_result": "PASS finite baseline/JDK proof",
+      "production_adopted": false
+    }
+  ]
+}

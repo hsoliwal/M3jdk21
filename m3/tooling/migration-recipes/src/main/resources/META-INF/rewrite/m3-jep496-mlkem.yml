@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.jdk21.Jep496MlKem
+displayName: Receive JEP 496 ML-KEM candidate
+description: >-
+  Replays exact Java-21 ML-KEM Java postimages and pinned FIPS-203 vectors from the
+  reviewed SHAKE/XOF prerequisite state. Candidate only; promotion remains separately gated.
+recipeList:
+  - com.m3.rewrite.backport.M3Jep496MlKemBackportRecipe

@@ -1,0 +1,6 @@
+m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java	b96894a77e5c310addbda72b248ab56fedf8ceb24e5de81fe6e5d090982a4abc
+.m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java	58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462
+.m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java	05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5
+src/java.base/share/classes/jdk/internal/mindex/M3VI.java	0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a
+src/java.base/share/classes/jdk/internal/mindex/M3Release.java	901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java	8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6

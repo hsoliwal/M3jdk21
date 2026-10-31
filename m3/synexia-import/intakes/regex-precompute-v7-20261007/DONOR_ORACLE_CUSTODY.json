@@ -1,0 +1,81 @@
+{
+  "status": "PASS_ORIGINAL_ADMITTED_TEST_AND_PROOF_CUSTODY_ONLY",
+  "parentProof": {
+    "path": "K:\\codex-work\\m3-precompute-controls-20261006\\synexia-openrewrite-recipes\\tasks\\regex-persisted-precompute-20261006\\target\\proof-20261006T042930Z\\PROOF.json",
+    "bytes": 86975,
+    "sha256": "f005a6648371d84b4b317152ade12cb61c9c0814ee8524d2cd87abd61f821dc6",
+    "gitBlobSha1": "f813061a7a348b6da540534da0b04cbfc83fc686"
+  },
+  "proofCopiedTo": "donor-oracles/ORIGINAL_PROOF.json",
+  "testSources": [
+    {
+      "path": "synexia-openrewrite-recipes/tasks/regex-persisted-precompute-20261006/src/test/java/com/synexia/indexstring/ExactUtf16CodecProof.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 29380,
+      "sha256": "0cb38e58496089120e3ef7bf1eb705f29abab454782e8ea08d5b1bb65bee058b",
+      "gitBlobSha1": "d621c9d95fa8c99f0b77ea1ab5d0f8ce3a7cba11",
+      "license": "Apache-2.0",
+      "imports": [
+        "java.nio.ByteBuffer",
+        "java.nio.ByteOrder",
+        "java.nio.file.Path",
+        "java.util.List"
+      ],
+      "localPath": "donor-oracles/synexia-openrewrite-recipes/tasks/regex-persisted-precompute-20261006/src/test/java/com/synexia/indexstring/ExactUtf16CodecProof.java",
+      "executedHere": false,
+      "inVendorManifest": false
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/regex-persisted-precompute-20261006/src/test/java/com/synexia/indexstring/PersistedRegexProof.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 15252,
+      "sha256": "a63233a4d7aafb4301e54719586da2e0edab7c941118278bd7a105475d5cdf6a",
+      "gitBlobSha1": "ef0132a34b3fba653b13e6d89071d4455716facd",
+      "license": "Apache-2.0",
+      "imports": [
+        "com.synexia.indexstring.fs.M3DirectoryContentStore",
+        "com.synexia.indexstring.fs.M3ObjectKind",
+        "com.synexia.indexstring.fs.M3ObjectRef",
+        "com.synexia.indexstring.fs.M3PrecomputeCache",
+        "com.synexia.indexstring.fs.M3PrecomputeResult",
+        "java.io.IOException",
+        "java.lang.reflect.RecordComponent",
+        "java.nio.file.Files",
+        "java.nio.file.Path",
+        "java.nio.file.StandardOpenOption",
+        "java.util.ArrayList",
+        "java.util.Arrays",
+        "java.util.HashSet",
+        "java.util.List",
+        "java.util.Objects",
+        "java.util.concurrent.atomic.AtomicInteger",
+        "java.util.regex.Pattern"
+      ],
+      "localPath": "donor-oracles/synexia-openrewrite-recipes/tasks/regex-persisted-precompute-20261006/src/test/java/com/synexia/indexstring/PersistedRegexProof.java",
+      "executedHere": false,
+      "inVendorManifest": false
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/regex-persisted-precompute-20261006/src/test/java/com/synexia/indexstring/SegmentedPersistedRegexProof.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 10048,
+      "sha256": "c1c8e5b1c96321b594ab09857733076112b69236e1a7fd7bb18c5f9906bfdcd3",
+      "gitBlobSha1": "e5ad651b00c4ce3ce7449cd99149d616767069bd",
+      "license": "Apache-2.0",
+      "imports": [
+        "com.synexia.indexstring.fs.M3DirectoryContentStore",
+        "java.nio.file.Files",
+        "java.nio.file.Path",
+        "java.util.ArrayList",
+        "java.util.Arrays",
+        "java.util.List",
+        "java.util.OptionalLong",
+        "java.util.regex.Pattern"
+      ],
+      "localPath": "donor-oracles/synexia-openrewrite-recipes/tasks/regex-persisted-precompute-20261006/src/test/java/com/synexia/indexstring/SegmentedPersistedRegexProof.java",
+      "executedHere": false,
+      "inVendorManifest": false
+    }
+  ],
+  "newTestOrJvmExecution": false
+}

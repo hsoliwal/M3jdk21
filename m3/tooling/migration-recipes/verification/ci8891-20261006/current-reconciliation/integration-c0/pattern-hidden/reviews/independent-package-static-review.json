@@ -1,0 +1,131 @@
+{
+  "confirmedContracts": {
+    "archiveOwnerUnchanged": true,
+    "canonicalPromotionAuthorized": false,
+    "compiledBodiesNotArchived": true,
+    "consumerQualificationInferred": false,
+    "explicitOwnSemanticCohorts": [
+      251,
+      141
+    ],
+    "explicitOwnSemanticCompiledExclusions": [
+      1,
+      16
+    ],
+    "fiveRemainingPrimaryCommandsNotExecuted": true,
+    "hermetic": false,
+    "negativeSymlinksRemainCustodyMetadataOnly": true,
+    "parentCheckpointCohorts": [
+      338,
+      97,
+      72
+    ],
+    "parentCheckpointUnion": 507,
+    "parentMapsStaySeparate": true,
+    "phcOldPatternTypedQualification": false,
+    "publicationsRemainTaskEvidenceOnly": true,
+    "qualifiedProjectFileCounts": [
+      16,
+      20
+    ],
+    "receivingAttemptedCommands": 2,
+    "receivingCompletedCommands": [
+      "dag-install-prerequisite"
+    ],
+    "receivingSchema": "m3.ci8891.receiver-capture-result/10-primary",
+    "receivingStatus": "PRIMARY_ONLY_STOP",
+    "rfcApplicabilityPreserved": "RF0_INTERMEDIATE_STAGE_BEFORE_PHC_FOUNDATION",
+    "semanticPriorStopsRetained": true,
+    "separateSingleProjectEnvelopes": true,
+    "sharedReceivingBodyRequiredRows": 781,
+    "sharedReceivingExplicitCompiledIdentityOnlyRows": 23,
+    "sharedReceivingSelectionRows": 804,
+    "supplementalAndCliCommandsNotExecuted": true
+  },
+  "directIdentityPinsReadAndMatched": 95,
+  "findings": [
+    {
+      "detail": "Two Ph0 plan donor references carried old Rf0 helper hashes at changed live paths. Corrected only those paths to exact immutable draft-before-parent507 bodies. Preserved prior plan and command file under draft-before-donor-path-review; only corresponding current plan identity changed in commands.",
+      "id": "ph0-donor-historical-paths",
+      "status": "RESOLVED_BEFORE_ROOT_EXECUTION"
+    }
+  ],
+  "inputs": [
+    {
+      "bytes": 37932,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/prepare_package.py",
+      "sha256": "f4301c004f216310d8052ab840e1ce11482864d8cd2c0aab97a88836f131cf9a"
+    },
+    {
+      "bytes": 8317,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/finish_package.py",
+      "sha256": "56bcf840b0179594757631aac82993694ff65d24e0bd5fd044e4886c4902fbea"
+    },
+    {
+      "bytes": 1860,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/reconstruct.py",
+      "sha256": "0f087f7b4de445ad4b5c6ff99274213954e93b2ae5fdb9fcac6fc5331652f5c1"
+    },
+    {
+      "bytes": 18902,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/AUTHORING-PLAN.json",
+      "sha256": "0b2dae2e0b90630a54cbbf570241972aee95e5943735a5f91e31b4434b8922df"
+    },
+    {
+      "bytes": 8276,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/packaging-authoring-v1/ROOT-COMMANDS.json",
+      "sha256": "f73e870cefbd17a6bbefae2988a686be6c44617c5cf36af804b65433f7af1ccf"
+    },
+    {
+      "bytes": 42362,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/prepare_package.py",
+      "sha256": "62fb1acf64255842cf63d990f64b926efdc12a19ac31a6e3bfb2f10b7c6df1b2"
+    },
+    {
+      "bytes": 8307,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/finish_package.py",
+      "sha256": "33571b5d0ffca7b0b53e922724a1885a8fb1fb01fcf163f81ba63c977d25ee42"
+    },
+    {
+      "bytes": 1860,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/reconstruct.py",
+      "sha256": "1da350657069707b569ba2c29b2f8a82a8f0f8ba00f4dcff277e786886be4c9f"
+    },
+    {
+      "bytes": 18182,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/AUTHORING-PLAN.json",
+      "sha256": "692168a01faba10dfcbfce604376e952240a00378937034948e0a9dde2061113"
+    },
+    {
+      "bytes": 8254,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/ROOT-COMMANDS.json",
+      "sha256": "98b87f85a3ee80d5007d3be4aebb08face0e53b918deb7596b37622604f7adc8"
+    }
+  ],
+  "owner": {
+    "bytes": 33814,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+    "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574"
+  },
+  "remainingBlockingFindings": [],
+  "reviewNotes": [
+    "Read the full Rf0 helper, Ph0 substantive delta, finish/reconstruct helpers, unchanged owner classification and explicit-selection/reference boundaries, command order, and exact authoring plan references.",
+    "Historical /7 materialization bodies retain existing published-parent custody requirements. A later paired checker must not indiscriminately require compiled identities or every historical body in each new archive.",
+    "Physical archive construction, verify/extract/readback, immutable parent Git-tree retention and actual paired publication remain root execution responsibilities."
+  ],
+  "schema": "synexia.rfph.package-independent-static-review/1",
+  "scope": "Static source/data review only; no selector, archive, proof, compiler, tests, Maven, or GitHub operation executed by reviewer.",
+  "sourceProjects": [
+    {
+      "exactQualifiedSourceBodies": 16,
+      "qualifiedBodiesEdited": false,
+      "root": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-runtime-checker-c0/evidence/producer-v1/project"
+    },
+    {
+      "exactQualifiedSourceBodies": 20,
+      "qualifiedBodiesEdited": false,
+      "root": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/evidence/producer-v1/project"
+    }
+  ],
+  "status": "STATIC_REVIEW_CLEAR_ROOT_EXECUTION_REQUIRED"
+}

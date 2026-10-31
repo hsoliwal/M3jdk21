@@ -1,0 +1,22 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "com.m3.M3FullPrecomputeSecondPass/1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_commit": "d479e02178d908fd59df941c7d91275970d412d3",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base_commit": "1a74105bc7ac45851006753eaa1ef7cb37b7edf2",
+  "java_crate": "m3-full-precompute-second-pass",
+  "text_crate": "m3-full-precompute-second-pass",
+  "runtime_dependency_on_synexia": false,
+  "public_jdk_api_change": false,
+  "bootstrap_promotion": false,
+  "authority": {
+    "approximate_signals": "candidate_ranking_only",
+    "edit_lower_bound": "safe_negative_only",
+    "edit_distance": "exact_verifier",
+    "regex_shape": "candidate_specialization_only",
+    "java_semantics": "compiler_and_tests",
+    "native_semantics": "java_reference_parity"
+  },
+  "promotion_rule": "Atoms remain in m3/ports/precompute until a concrete JDK consumer passes independent contract, retention, memory, CPU, JNI and compatibility gates."
+}

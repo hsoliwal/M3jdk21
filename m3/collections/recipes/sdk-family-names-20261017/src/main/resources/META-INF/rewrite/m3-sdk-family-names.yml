@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.SdkFamilyNames20261017
+displayName: M3 five-family SDK names and adapters
+description: Preserve donor type identities and M3 storage owners through a sealed additive recipe.
+recipeList:
+  - com.synexia.rewrite.M3SdkFamilyNamesRecipe

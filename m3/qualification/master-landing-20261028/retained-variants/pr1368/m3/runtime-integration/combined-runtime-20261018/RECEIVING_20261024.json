@@ -1,0 +1,183 @@
+{
+  "schema": "M3_RUNTIME_RECEIVING_20261024_V1",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "copyright": "2026 Hitesh Soliwal and contributors",
+  "canonical_recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "qualification_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
+  "source_input_head": "82eb7fc30da9d3cf5556a11fb4a2b4ec0f09f385",
+  "source_output_head": "22c70a28966e2470352af34abf914d6917d941d5",
+  "stage_instances": 6,
+  "target_applications": 16,
+  "unique_product_files": 15,
+  "serial_receipts": [
+    {
+      "dataset": "m3-descending-depth-20261024",
+      "observed_input_head": "82eb7fc30da9d3cf5556a11fb4a2b4ec0f09f385",
+      "canonical_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
+      "qualification_owner": "/workspace/scratch/f8287c652798/recovery-20261024/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "check": {
+        "dataset": "m3-descending-depth-20261024",
+        "targets": 3,
+        "changes": 3,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-descending-depth-20261024",
+        "targets": 3,
+        "changes": 3,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-descending-depth-20261024",
+        "targets": 3,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "observed_output_head": "da79d8c85fdea1ec91e3f41a4ecdb4b460888195"
+    },
+    {
+      "dataset": "m3-artifact-actions-20261024",
+      "observed_input_head": "da79d8c85fdea1ec91e3f41a4ecdb4b460888195",
+      "canonical_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
+      "qualification_owner": "/workspace/scratch/f8287c652798/recovery-20261024/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "check": {
+        "dataset": "m3-artifact-actions-20261024",
+        "targets": 6,
+        "changes": 6,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-artifact-actions-20261024",
+        "targets": 6,
+        "changes": 6,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-artifact-actions-20261024",
+        "targets": 6,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "observed_output_head": "9ff3e51ae3d8f93353a525fbbcc359b71317e78e"
+    },
+    {
+      "dataset": "m3-mask-pack-20261024",
+      "observed_input_head": "9ff3e51ae3d8f93353a525fbbcc359b71317e78e",
+      "canonical_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
+      "qualification_owner": "/workspace/scratch/f8287c652798/recovery-20261024/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "check": {
+        "dataset": "m3-mask-pack-20261024",
+        "targets": 1,
+        "changes": 1,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-mask-pack-20261024",
+        "targets": 1,
+        "changes": 1,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-mask-pack-20261024",
+        "targets": 1,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "observed_output_head": "489fded3392081a8a467e454ca5d22fc92939caf"
+    },
+    {
+      "dataset": "m3-regex-pressure-20261024",
+      "observed_input_head": "489fded3392081a8a467e454ca5d22fc92939caf",
+      "canonical_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
+      "qualification_owner": "/workspace/scratch/f8287c652798/recovery-20261024/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "check": {
+        "dataset": "m3-regex-pressure-20261024",
+        "targets": 3,
+        "changes": 3,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-regex-pressure-20261024",
+        "targets": 3,
+        "changes": 3,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-regex-pressure-20261024",
+        "targets": 3,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "observed_output_head": "95145ef4cf2f7348892d695c11fd6a124eda60b9"
+    },
+    {
+      "dataset": "m3-regex-dp-fixture-20261024",
+      "observed_input_head": "95145ef4cf2f7348892d695c11fd6a124eda60b9",
+      "canonical_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
+      "qualification_owner": "/workspace/scratch/f8287c652798/recovery-20261024/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "check": {
+        "dataset": "m3-regex-dp-fixture-20261024",
+        "targets": 1,
+        "changes": 1,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-regex-dp-fixture-20261024",
+        "targets": 1,
+        "changes": 1,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-regex-dp-fixture-20261024",
+        "targets": 1,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "observed_output_head": "4948be182d9a086694ebe37bba5b53df80b8d57e"
+    },
+    {
+      "dataset": "m3-regex-hierarchy-20261024",
+      "observed_input_head": "4948be182d9a086694ebe37bba5b53df80b8d57e",
+      "canonical_source_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
+      "qualification_owner": "/workspace/scratch/f8287c652798/recovery-20261024/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+      "check": {
+        "dataset": "m3-regex-hierarchy-20261024",
+        "targets": 2,
+        "changes": 2,
+        "mode": "check",
+        "actual_sdk_results": true
+      },
+      "apply": {
+        "dataset": "m3-regex-hierarchy-20261024",
+        "targets": 2,
+        "changes": 2,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "replay": {
+        "dataset": "m3-regex-hierarchy-20261024",
+        "targets": 2,
+        "changes": 0,
+        "mode": "apply",
+        "actual_sdk_results": true
+      },
+      "observed_output_head": "22c70a28966e2470352af34abf914d6917d941d5"
+    }
+  ],
+  "scope": "Exact source stage receipts. Later metadata receipt lives in the canonical task; no recursive self-hash or phase promotion."
+}

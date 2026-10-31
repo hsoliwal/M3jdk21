@@ -1,0 +1,76 @@
+{
+  "schema": "m3-jcc-mapping-template-self-review/3",
+  "status": "PASS_PREPARED_NOT_EXECUTED",
+  "receiving_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "receiving_root_tree": "491bbd80a51483d0710fc12c1bad3a037b385ba0",
+  "receiving_input_epoch_sha256": "2a4878ce5eeeeeccfe216dae36e62faa3e5da06c7baa654e7a43ce3d823c5139",
+  "authored_test_methods": [
+    "manifestAndPlanSealExactlyFourCurrentImagesAndAllExistingGuards",
+    "retainedOwnerProducesExactlyFourOutputsAndPreservesPlainTextIdentity",
+    "freshPostimageInputsAreFixedAndEachMixedInputConvergesOnce",
+    "namedEntryAndSerializedOwnerProduceTheSameFourImages",
+    "everyMissingCurrentTargetRefusesWithoutPartialResults",
+    "everyDriftedCurrentTargetRefusesWithoutPartialResults",
+    "everyDuplicateTargetRefusesEvenWhenBothImagesAreAdmitted",
+    "everyAdmittedImageSwapAfterScanRefuses",
+    "ordered52RecordsAndEveryGlobalPolicyAndNonJccRecordArePreserved",
+    "current14LaboratoryAnd6JniOwnersMatchActualReadbacksAndRemainBlocked",
+    "everyHistoricalSourceTargetAndBindingEpochSurvivesUnchanged",
+    "coverageAccountsForEveryActualRootObjectAndAllPomDeclarations",
+    "bindingsAndEarlierProsePreserveGateRequirementsWithoutAcceptancePromotion"
+  ],
+  "junit_tests_executed": 0,
+  "unresolved_tokens": [
+    "ACTUAL_SOURCE_COMMIT",
+    "ACTUAL_SOURCE_ROOT_TREE",
+    "ACTUAL_SOURCE_INPUT_SHA256",
+    "ACTUAL_PUBLICATION_SUMMARY_SHA256",
+    "ACTUAL_MAPPING_MANIFEST_SHA256",
+    "ACTUAL_MAPPING_PLAN_SHA256",
+    "ACTUAL_MAPPING_PLAN_FILE_SHA256",
+    "ACTUAL_AFTER_00_SHA256",
+    "ACTUAL_AFTER_01_SHA256",
+    "ACTUAL_AFTER_02_SHA256",
+    "ACTUAL_AFTER_03_SHA256"
+  ],
+  "renderer_fixture_refusal": {
+    "command": [
+      "python3",
+      "-B",
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/java-template/render_template.py",
+      "--audit-root",
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit",
+      "--source-input",
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/verification-v01/fixture-source-input.json",
+      "--mapping-resources",
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/verification-v01/fixture-output",
+      "--output",
+      "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/java-template/self-review-v01/forbidden-fixture-output"
+    ],
+    "exit_code": 1,
+    "output_created": false,
+    "diagnostic": "mapping_template_binder.Refusal: fixture inputs are unpublishable"
+  },
+  "source_owner_counts": {
+    "laboratory": 14,
+    "jni": 6,
+    "total": 20
+  },
+  "separate_source_build_components": 1,
+  "preservation_counts": {
+    "ordered_records": 52,
+    "non_jcc_records": 50,
+    "top_level_mappings": 25,
+    "gates": 20
+  },
+  "reviewed_controls": [
+    "V02 13-method behavior and negative controls retained",
+    "source component projected by binder.validate_build_components with exactly10body-free fields",
+    "module POM exact203000B SHA7846d9447016ab714a4d1c82d7f3814efa7a94049cb99bb59ba09f6f6d8c7a80 Git1a1c0cc8017b9ce9eadd6eba7e2ead3400a2266f",
+    "source_build_components full node equality; remains outside20Javaowners",
+    "intermediate d1 epoch and original47/45/17/20 epoch retained",
+    "C0 TQ record46 preserved by full non-JCC record equality",
+    "materialized Result directory remains exactly4files; reports elsewhere"
+  ],
+  "scope": "Compile-only and fixture-refusal evidence. No actual source binding, JUnit run, operational afterimage materialization, or acceptance claim."
+}

@@ -1,0 +1,1 @@
+java.base,java.desktop,java.prefs,java.scripting,java.security.jgss,java.sql,jdk.compiler,jdk.management,jdk.unsupported

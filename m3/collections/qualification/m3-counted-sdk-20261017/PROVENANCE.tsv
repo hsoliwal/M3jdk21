@@ -1,0 +1,6 @@
+owner	path	git_blob_sha1	license	disposition
+hsoliwal/M3jdk21	m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java	ade59880b8c9b2bee1b32ae67ca9d29b7382d998	Apache-2.0	READ_ONLY_EXISTING_OWNER
+hsoliwal/M3jdk21	m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java	5def05aad11dbe3ab7bebe27a3c11b5d241c9a7a	Apache-2.0	READ_ONLY_EXISTING_JNI_OWNER
+hsoliwal/com.synexia	synexia-m3-recipe/recipes/m3-counted-sdk-20261017/	NEW_CANONICAL_RECIPE	Apache-2.0	AUTHORITATIVE_GENERATOR
+google/guava	com.google.common.collect.Multiset	EXTERNAL_PROVIDER_JAR	Apache-2.0	API_INTERFACE_ONLY_NO_COPY
+apache/commons-collections	org.apache.commons.collections4.MultiSet	EXTERNAL_PROVIDER_JAR	Apache-2.0	API_INTERFACE_ONLY_NO_COPY

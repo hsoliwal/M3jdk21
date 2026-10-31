@@ -1,0 +1,51 @@
+{
+  "status": "PASS_LINKED_M3JDK21_COLLECTION_SDK",
+  "utc": "2026-10-21T03:00:18.177837+00:00",
+  "image": "${IMAGE}",
+  "sourceJdk": "${SOURCE_SDK}",
+  "platform": "Linux x86_64",
+  "moduleJarSha256": "a1e9c1dc0234ddc6fa3ae0534d981d2467ec11fa93add05c25ca5b0bf693e879",
+  "jmodSha256": "94aefb435be9818d2155bef4b0177f06978cdf2ecbcf416b8b213895f2261f16",
+  "imageModuleStoreSha256": "5997b6dae6095303ab6d40c33dc20945a6210fe389159a051923453304417e3d",
+  "moduleCount": 29,
+  "productionClassFiles": 512,
+  "observedJunitProductionClassOrigins": 370,
+  "productNativeLibraries": 10,
+  "generatedJniExports": 21,
+  "legalNotices": 4,
+  "preservedMetadataResources": 9,
+  "junit": {
+    "tests": 491,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "explicitNamedModuleMainRuns": 22,
+  "publicCoreRuns": 7,
+  "allSourceAndInputHashesUnchanged": true,
+  "sourceBuiltJniHeadersMatchCompiledInputs": true,
+  "packedSelectionAllocationBytesPerCall": 125890,
+  "receiptSha256": {
+    "INPUTS.json": "e4e8242d74016da75db3259882ef4ce0f951e62cee8ac574a0806065f50a1265",
+    "NATIVE_INPUTS.json": "213eef201c7764f808df38c94e64ae4333331e3d63a8587fc135483813d3c315",
+    "JNI_HEADER_EQUIVALENCE.json": "a28a92da3d75d5d66774696fc01fc79032e8844683b4f628541d35a0144889ab",
+    "SOURCE_SDK_INPUTS.json": "f20c075daa14339e3941c416560064f9d163a98b2e3185b8278940f360412553",
+    "PACK001.json": "732f955ac62d341e43ae87bf301996ae86ea4a9b632dcbda27a6621588528501",
+    "STATIC_OWNERSHIP.json": "7b73546e45b0ecbe4df4058862e57f0f291366d0d5170698ec551c9cc94ec54b",
+    "OWNERSHIP_PROBE.json": "f0f34be1714db3c6cd6ab5d03027dc185e0ecc113c5bf1531849c53d358446bc",
+    "LINKED_JUNIT_001.json": "627c842d4378af7506141a1ad013ecf55009fce08e852d6ddc0fb8e96db19dd3",
+    "CLASS_ORIGINS.json": "85b6836b283aabfb11ebab015f9cbb4c79b04957ef43a409af779436d858681c",
+    "CONTRACTS.json": "26a51b0af7bbe076f931be3cf1ca9746d84be427bd355bbee36689b1487fe656"
+  },
+  "scope": [
+    "Source-built M3JDK21 java.base and HotSpot, linked by the unchanged repository JMOD packager with the published com.m3.collections module and ten release JNI libraries.",
+    "All 491 owning JUnit tests ran on the linked image with required native paths. Every observed production collection class came from jrt:/com.m3.collections.",
+    "Only test classes were patched into com.m3.collections. They had no production-class overlap. There was no java.base patch. JUnit and the bit-lane test JNI fixture remained external harness inputs.",
+    "Public core fixtures ran from bootstrap java.base: current contract 14694 checks; identity 540 plus 46; refinement 1828 plus 2 large-count checks; copy-on-write 120; bootstrap ownership 77.",
+    "This linked SDK contains 29 selected modules. It does not reproduce the complete original JDK module inventory.",
+    "This finite Linux x86_64 gate does not advance the ordered receiving phase or establish all providers, all platforms, full jtreg/JCK, all JMM/GC behavior, whole-heap/native-peak measurements or general performance.",
+    "Independent generic com.m3 identity-view defects remain outside this admitted identity repair; the integrated public java.util identity owner is repaired."
+  ],
+  "epoch": "E1: exact 49-file source checkpoint in EPOCHS.json",
+  "rawReceiptHashesAreHistorical": true
+}

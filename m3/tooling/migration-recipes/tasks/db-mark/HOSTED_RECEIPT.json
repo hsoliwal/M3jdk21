@@ -1,0 +1,51 @@
+{
+  "schema": "m3-bounded-proof-receipt-v1",
+  "repository": "hsoliwal/M3jdk21",
+  "pr": 88,
+  "observed_head": "565bc02094731fbe0dcf3a2fff75706be8d0a60b",
+  "observed_run": 37186615402,
+  "database": {
+    "job": 111389766782,
+    "conclusion": "success",
+    "command": "mvn -B -ntp -f m3/indexdb/pom.xml verify",
+    "tests": 61,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "coverage": {
+      "LINE": {"covered": 685, "missed": 2},
+      "BRANCH": {"covered": 240, "missed": 1},
+      "METHOD": {"covered": 124, "missed": 0},
+      "CLASS": {"covered": 14, "missed": 0}
+    },
+    "original_minimums": {"LINE": "0.99", "BRANCH": "0.99"},
+    "jacoco_gate": "All coverage checks have been met.",
+    "artifact": 11296887801,
+    "artifact_sha256": "020a44aec4d5fed09d46f581db2c5ada326d01a55cf822310ea255fbdbb06725"
+  },
+  "focused_recipe_baseline": {
+    "job": 111389766948,
+    "compile": "success",
+    "tests": 10,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "failure": "Whole-marker equality incorrectly rejects scheduler RecipesThatMadeChanges provenance",
+    "artifact": 11296909606,
+    "artifact_sha256": "331c6347909ccb75f2be1ac2a67c03b665fa760bef0bb3e55f7900e449fc3e01"
+  },
+  "marker_repair": {
+    "head": "d9d090af6875d698e4fc77632de0f6a8300e8854",
+    "tree": "623b28ebf252856e4df479157da3d5f8fbd9932c",
+    "test_blob": "2ece77f3720875ffc0686c2707b28a73f1eb7f72",
+    "test_sha256": "847e23f5ea4f8f4bc889c61bda6dfc638442ae105e6b3ef70081ddb102d3c001",
+    "source_test_count_only": 11,
+    "pr_attempt": {"run": 37187221635, "conclusion": "failure", "jobs": []},
+    "push_attempt": {"run": 37187219783, "conclusion": "failure", "jobs": []},
+    "current_test_execution": "NOT_EXECUTED",
+    "production_database_recipes_poms_workflows": "UNCHANGED"
+  },
+  "broader_recipe_baseline": {"run": 37186615413, "tests": 77, "failures": 12, "errors": 0, "skipped": 0, "ledger": "ACTION_QUEUE.tsv"},
+  "promotion": "NOT_PERFORMED",
+  "rule": "Assess any later head from its own receipt; a focused result does not certify the complete recipe module, reactor, JNI, jtreg or backport programme."
+}

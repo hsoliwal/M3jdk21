@@ -1,0 +1,120 @@
+{
+  "schema": "M3_COLLECTION_TEST_ORACLE_REFINEMENT_V1",
+  "baseline_repository": "hsoliwal/M3jdk21",
+  "baseline_revision": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+  "baseline_failures": {
+    "tests": 225,
+    "failures": 4,
+    "errors": 0,
+    "skipped": 0
+  },
+  "baseline_receipt_sha256": "206aae4a4174909e897c445a7b4cdb5347cc5e9dfb04c2c6698efaf9364305bc",
+  "source_targets": {
+    "m3/collections/src/test/java/com/m3/collections/M3LongTreeSetTest.java": {
+      "before_sha256": "57289895f6bf2307cf3890faa803ff8b81ec128a56e11f84df613fe65068c4cf",
+      "after_sha256": "088e41d28929b3916e5c6da9a12a2ebbae258116d11508235d44771a6c1b2471"
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java": {
+      "before_sha256": "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016",
+      "after_sha256": "821b8ae1ec22516dceef16f5951ab66fe3f6db799f26732c620202bab862754b"
+    }
+  },
+  "unchanged_production_owners": {
+    "m3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java": "141b90d104cf9d8715e97b6a805314fd2a8fcc9fe10d3c81b1894cf744141d42",
+    "m3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java": "7a42630fbffd2c5875d8a7e4258540454879117a52bd6fe52c3cde4ce07b4d99",
+    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java": "4a109baf88457d625fa8fc259ee8e7908340f5436cfea77dc5ac554924045b8d"
+  },
+  "production_changes": 0,
+  "public_interface_changes": 0,
+  "jni_changes": 0,
+  "algorithm_selection": "reuse the existing first-party M3 owners and JDK collection contracts; repair the four test premises demonstrated independently",
+  "cases": [
+    {
+      "id": "M3-ORACLE-SIGNED-SURVIVORS",
+      "category": "SORTED_MEMBERSHIP_AND_ORDER",
+      "operation": "M3LongTreeSetTest.growthSplitsPagesAndRemovalMergesAndTrimsThem",
+      "baseline_failure": "expected 0 but was 21 at the -21-to-21 transition",
+      "rejected_oracle": "a single arithmetic progression through zero, which was never inserted",
+      "selected_oracle": "TreeSet receives and removes the same members; compare the full ordered array and explicitly exclude zero",
+      "coverage_preserved": "200000 insertions, 133334 removals, 66666 survivors, ends, page merges, trim, navigation, clear and reuse"
+    },
+    {
+      "id": "M3-ORACLE-PAGE-OCCUPANCY",
+      "category": "DYNAMIC_ARRAY_PAGE_SPLIT_INVARIANT",
+      "operation": "M3LongTreeSetTest.filterInPlaceCommitsPriorRejectionsAndKeepsTheThrowingSuffix",
+      "baseline_failure": "expected three pages but had four before the predicate ran",
+      "rejected_oracle": "ceil(size / capacity) assumes packed pages after documented half splits",
+      "selected_oracle": "pageCount * capacity >= size and pageCount * floor(capacity/2) <= size for this insertion-only fixture",
+      "coverage_preserved": "partial commit before predicate throw, exact throwing suffix, exception identity, removed counts, fail-fast and reuse"
+    },
+    {
+      "id": "M3-ORACLE-BOUNDED-ADD",
+      "category": "SORTED_VIEW_SET_MEMBERSHIP",
+      "operation": "M3LongTreeSetTest.sortedViewsAndUnionsWorkOverTheOwnerAsBackingSet",
+      "baseline_failure": "add(7) correctly returned false because -200 + 3*69 equals 7",
+      "rejected_oracle": "treating an existing bounded member as absent",
+      "selected_oracle": "assert duplicate add(7) false in both views; assert new bounded add(8) true in both views",
+      "coverage_preserved": "both duplicate and successful admission, range rejection, removals, clear, navigation, unmodifiable and union behavior"
+    },
+    {
+      "id": "M3-ORACLE-STORED-REFERENCE",
+      "category": "FILTERED_STORED_REPRESENTATIVE_IDENTITY",
+      "operation": "M3StoredRepresentativeContract.identityAndDuplicateMembers",
+      "baseline_failure": "fixture removed the first equals member (hidden), leaving the visible reference present",
+      "rejected_oracle": "Collection.remove(Object) as an identity removal operation",
+      "selected_oracle": "iterator removal selected with reference equality; assert exactly the hidden reference remains before last-visible lookup",
+      "coverage_preserved": "Collection overload, distinct equals-equal hidden/visible members, identity-owned sets, foreign identity exclusion and last-visible removal semantics"
+    }
+  ],
+  "existing_catalogues_consulted": [
+    "m3/collections/algorithm-catalog/full-m3-family-inventory-20261017/COLLECTION_SOURCE_INVENTORY.tsv",
+    "m3/collections/algorithm-catalog/collection-catalogue-input-provenance-20261017.tsv",
+    "m3/backports/ALGORITHM_CATALOGUE.tsv"
+  ],
+  "primary_contract_sources": [
+    "src/java.base/share/classes/java/util/ArrayList.java: remove(Object) and iterator removal",
+    "src/java.base/share/classes/java/util/TreeSet.java: add and subSet",
+    "m3/collections/src/main/java/com/m3/collections/M3LongTreeSet.java: documented half split and page capacity"
+  ],
+  "donor_evaluation": [
+    {
+      "candidate": "existing M3LongTreeSet / M3LongSortedViews / M3FilteredViews",
+      "license": "Apache-2.0",
+      "choice": "retain exact production bytes; no defect established by these failures"
+    },
+    {
+      "candidate": "JDK TreeSet / ArrayList",
+      "license": "GPL-2.0-with-Classpath-exception",
+      "choice": "call public APIs as independent test oracles; no implementation source copied"
+    },
+    {
+      "candidate": "existing Synexia PackedLongSortedSet / PackedLongPagedSortedSet lineage",
+      "license": "Apache-2.0",
+      "choice": "reuse current documented half-split contract; no new production donor adaptation"
+    },
+    {
+      "candidate": "existing GitHub / LeetCode / HackerRank / GeeksforGeeks catalogue",
+      "license": "reference-only; individual donor licenses remain applicable",
+      "choice": "reuse prior category discovery; no new algorithm replacement is justified by a mistaken test fixture"
+    }
+  ],
+  "complexity": {
+    "production": "unchanged",
+    "retained_production_state": "unchanged",
+    "test_tree_oracle": "O(n log n) time and O(n) test-only space",
+    "test_reference_removal": "O(n) scan and O(1) auxiliary space"
+  },
+  "independent_witness": {
+    "path": "m3/collections/qualification/oracle-repair-20261018/src/test/java/CollectionOracleWitness.java",
+    "source_sha256": "d870c4819d2354bfbc2bc129329375780adaab0629e27c02bdf6039dccad8fd8",
+    "receipt_sha256": "44846f0397778801b5746fbd2369655a4157da3e14f24b770c2a09c8f339e70e",
+    "status": "PASS",
+    "production_dependencies": []
+  },
+  "required_qualification": [
+    "original Maven SDK five tests, eight sealing tests and nine receiving cases",
+    "entire original collections Maven suite after receiving; no disabled tests",
+    "unchanged production owner fingerprints"
+  ],
+  "claim_limit": "These repairs qualify the test premises. They do not establish complete SDK parity, application performance, native equivalence, or a new production algorithm improvement."
+}

@@ -1,0 +1,12 @@
+gate	status	detail
+ORIGINAL_MANAGER_SOURCE_PREIMAGE	PASS	d77ad058b73a61ed304312053574029fa33643a0 original FileSystemManager
+SOURCE_POSTIMAGE_RECEIPT	PASS	Five GitHub postimages equal canonical qualified donor
+PACKED_MASK_SELECTION	PRESERVED_SOURCE	Original long[] physical selected-word cursor, no boxed retained row objects
+PROVIDER_ROUTING	PRESERVED_SOURCE	Uses FileSystemManager.resolveFile and existing VFS providers
+JNI_NATIVE_OWNER	UNCHANGED	Original M3FS native SQLite JNI hooks and provider file systems untouched
+DONOR_JAVA21	HISTORICAL_SCOPED_ONLY	#1749 ten synthetic tests, 320 deterministic windows; not rerun
+CANONICAL_MAVEN_OPENREWRITE	NOT_RUN	Synexia #12846 fixed-point/drift and Maven validation
+M3FS_REAL_PROVIDERS	NOT_RUN	Native SQLite/ZIP/JRT and provider manager actual JUnit
+M3FS_NATIVE_JNI_CTEST	NOT_RUN	Original native SQLite C/JNI ABI, WAL and failure paths
+HOTSPOT_JMOD_JTREG	NOT_RUN	Full source-built M3JDK21 module and Java21 test
+PLATFORM_AND_PERFORMANCE	NOT_RUN	Multi-provider and Android/Windows/macOS CPU/native/heap

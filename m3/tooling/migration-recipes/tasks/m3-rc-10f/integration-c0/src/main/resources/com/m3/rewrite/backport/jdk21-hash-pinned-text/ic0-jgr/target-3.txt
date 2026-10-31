@@ -1,0 +1,23 @@
+{
+  "schema": "m3.ga-path-reconciliation/1",
+  "baseline_ref": "jdk-21+35",
+  "baseline_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
+  "release": 24,
+  "catalogue_sha256": "89c4c4065f61b77160bb8c9e6b328d004de1989359636e1497c1d36b8cfb9cf7",
+  "declared_paths": 47,
+  "donor_ref": "jdk-24+36",
+  "donor_commit": "6705a9255d28f351950e7fbca9d05e73942a4e27",
+  "implementation_commit": "2ec358082f0896480bdbfcb289b4ba2bff0dd828",
+  "implementation_parent": "f3ba7676043756f7cf95d5215e18bd65e9f167e6",
+  "entries": [
+    {
+      "path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/runtimelink/RuntimeImageLinkException.java",
+      "disposition": "TRANSIENT_DELETED_BEFORE_GA",
+      "transition_commit": "05ee562a38bf7325becdd04f2e9d3238b95a4cb0",
+      "transition_parent": "0664b517650c622dcf21f8bd2e3e389e7d81bbab",
+      "before_blob": "9f54fd63476ffb41162519f94089facfe07de79a",
+      "before_mode": "100644",
+      "implementation_blob": "9f54fd63476ffb41162519f94089facfe07de79a"
+    }
+  ]
+}

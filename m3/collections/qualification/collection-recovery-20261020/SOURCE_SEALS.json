@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "target_repository": "hsoliwal/M3JDK21",
+  "target_revision": "df532e779056dbec203dde20030657c3d144f5b5",
+  "recipe": "com.synexia.m3.CollectionRecovery20261020",
+  "runtime_dependency_on_synexia": false,
+  "ordered_parents": [
+    1459
+  ],
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "before_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "after_sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e",
+      "before_blob": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+      "after_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
+      "donor_head": "63bc1db1c6ef1c701aa5e25629288c0c4139a64d",
+      "group": "1451files"
+    },
+    {
+      "path": "m3/collections/src/test/java/MaskWindowConvergence.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "d6a39208e6f869d04b188ae001da471543a92bddb53d84ff7ba3d68dbde84de1",
+      "before_blob": null,
+      "after_blob": "f9984077d684c918f1c1d7d218449be635e6f4cd",
+      "donor_head": "c555dc79160fecaf4e424edd1ba793627a51c778",
+      "group": "tests"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNullNavigationProbe.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "fb53a688c8e7ad3fa1a1cb21c3248b59ce9c49e1e5a82fe374ea61aa46fa3f54",
+      "before_blob": null,
+      "after_blob": "71395196b1d4244c7c435addd69d0d4b5c7df2bd",
+      "donor_head": "63bc1db1c6ef1c701aa5e25629288c0c4139a64d",
+      "group": "tests"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ProjectionRefinementProbe.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "f3c44e00f608aba01171e7ce781a233949686034cb621254ade6af8ebf3bbc54",
+      "before_blob": null,
+      "after_blob": "515fa0a01cb9e00cbc914714df6835f5eaa3ed5e",
+      "donor_head": "63bc1db1c6ef1c701aa5e25629288c0c4139a64d",
+      "group": "tests"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/SortedSet.java",
+      "before_sha256": "9e7c747ca013801ae2261f77cd3b5e98ac7debe33dfb71882515f6ef7f558def",
+      "after_sha256": "cad903e966ac81eae0763973d9bbfdc37f50233c5a60e82beeb8e064028febe4",
+      "before_blob": "3b4612457c6e4cc247601a6d1e0b64a1a7f720d2",
+      "after_blob": "ad3ee89d40de8c0ca344863bb6fc4469cec97a09",
+      "donor_head": "c555dc79160fecaf4e424edd1ba793627a51c778",
+      "group": "1444files"
+    },
+    {
+      "path": "test/jdk/java/util/SortedSet/SortedSetSplitOrder.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "53436025986374971be348d431f4419d730f7174729964549860db76f05ae0bf",
+      "before_blob": null,
+      "after_blob": "f02816b296c00e3d0a0e8b25de7381d360876382",
+      "donor_head": "c555dc79160fecaf4e424edd1ba793627a51c778",
+      "group": "tests"
+    }
+  ],
+  "disclosure": "Already-public exact donor bodies only. No IDE-private codec body published.",
+  "replay_of": "com.synexia.m3.CollectionComposite20261019"
+}

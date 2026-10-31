@@ -1,0 +1,34 @@
+{
+  "schema": "m3.mask-window-current.execution.v1",
+  "status": "DRAFT_HOLD_FULL_GATES",
+  "javaChecksPerRun": 236639,
+  "jniChecksPerRun": 320006,
+  "javaDigest": "4d79e76f92e079de30d99aff98324657115cb029add55d34d00c5e9562877baf",
+  "jniDigest": "8a4338e94c64996bde776a42c0de8a0eaa6857a31f1beb3eacb60586f01be012",
+  "nativeRequired": true,
+  "jniSanitizers": [
+    "-Xcheck:jni",
+    "UBSan nonrecovering"
+  ],
+  "exportsUnchanged": 9,
+  "publicDescriptorComparisons": 4,
+  "partialStates": 8,
+  "prewriteRefusals": 7,
+  "kernelCancellationChecks": 2,
+  "nativeWorkProbeChecksPerStage": 54,
+  "legacyBinary": "test fixture omits excluded-mask ABI; not a historical binary",
+  "missingNativeChecks": 21,
+  "nativeMutantRejected": true,
+  "productionFilesChanged": 2,
+  "sourceApplication": "unchanged Synexia SealReplay / M3GpuToolJoinManifest; not OpenRewrite SDK",
+  "notRun": [
+    "Maven lifecycle (127)",
+    "OpenRewrite attributed SDK",
+    "full owning module/JUnit",
+    "whole installed M3JDK21/jtreg",
+    "cross-platform JNI",
+    "throughput/RSS benchmarks",
+    "all remaining programme items"
+  ],
+  "promotionAuthority": false
+}

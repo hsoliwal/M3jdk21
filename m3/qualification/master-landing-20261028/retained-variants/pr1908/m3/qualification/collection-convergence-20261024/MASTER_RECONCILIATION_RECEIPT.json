@@ -1,0 +1,109 @@
+{
+  "schema": "M3JDK21_MASTER_RECONCILIATION_RECEIPT_V1",
+  "copyright": "2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "status": "SCOPED_IMAGE_AND_SDK_PASS",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "798f9281ed4346eb4c21774313110fad9f6b559a",
+  "canonical_task": "synexia-openrewrite-recipes/recipes/m3-master-reconciliation-20261026",
+  "canonical_parser_repair": "synexia-openrewrite-recipes/recipes/m3-openrewrite-javadoc-escapes-20261026",
+  "target_parents": [
+    "9fb631fa57636dbb52e2bd89e812e28963c3d606",
+    "2bf5c24a550ca0d19d556a21918333f66ce1935f"
+  ],
+  "qualified_tree_before_this_receipt": "cc010bfb48365dc972dee9ab44653598d31fda78",
+  "full_tree_entries_before_receipt": 129006,
+  "source_recipe_outputs": 15,
+  "upstream_byte_exact_outputs": 14,
+  "source_conflict": "ChangeJournal return documentation uses exact current-master wording",
+  "sdk": {
+    "parser_bootstrap": 6,
+    "reconciliation_java": 8,
+    "reconciliation_text": 7
+  },
+  "jtreg": {
+    "baseline": 59,
+    "candidate": 67,
+    "Xcheck_jni": true
+  },
+  "unchanged_api_owners": [
+    "java.util.regex.Pattern",
+    "java.util.regex.Matcher",
+    "java.lang.String",
+    "java.lang.M3String",
+    "java.util.regex.M3PatternQuery",
+    "java.util.regex.M3PatternQuery$BooleanPlan",
+    "java.lang.StringBuffer",
+    "java.util.Arrays",
+    "java.util.ChangeJournal",
+    "java.util.CollectionViews",
+    "java.util.concurrent.CopyOnWriteArrayList",
+    "jdk.internal.m3.M3IndexMaskWindow",
+    "jdk.internal.m3.M3IndexedArray",
+    "jdk.internal.m3.M3IndexedView",
+    "jdk.internal.mindex.M3CollectionMaskCompactor",
+    "jdk.internal.mindex.M3TQ"
+  ],
+  "native_libraries_identical": [
+    "libjava.so",
+    "libjvm.so"
+  ],
+  "source_zip_owners": 13,
+  "class_custody_entries": 22,
+  "vm_modes": [
+    "default",
+    "interpreter",
+    "C1",
+    "C2",
+    "SerialGC",
+    "ZGC"
+  ],
+  "per_mode_checks": {
+    "UnicodeFrontier": 13542,
+    "PredicateRuns": 2622976
+  },
+  "workflow": "Existing four checks plus seven upstream test entrypoints /22run invocations executed locally; hosted Actions not claimed",
+  "candidate_image_seals": [
+    {
+      "path": "bin/java",
+      "sha256": "12ed557e9e29b812ca9c805933bba0f898edbb63229b4b232e6cd8f3bcf5c617",
+      "bytes": 16320
+    },
+    {
+      "path": "lib/modules",
+      "sha256": "4a31ce2ee5db23151e59058424c0f36ee1f0fdb59f1e7c4bb35bf9622fb2bbcf",
+      "bytes": 143562636
+    },
+    {
+      "path": "lib/libjava.so",
+      "sha256": "226859aed00ade756e4a5abaa06df7fcc4c8417bbcbd7e5723d4c4609061787c",
+      "bytes": 215880
+    },
+    {
+      "path": "lib/server/libjvm.so",
+      "sha256": "98b96f7628c36e2a7985164643435158e9a7b0fdcfdd05d81690a37f08bccf20",
+      "bytes": 26473136
+    },
+    {
+      "path": "lib/src.zip",
+      "sha256": "d6988280c71380ee4ffc9600f54f539c6b6d6ae65147e9e6de89bbda4c9eefcf",
+      "bytes": 53977690
+    }
+  ],
+  "name_and_family_receivers": "PASS; String remains active; no phase promotion",
+  "publication": "Existing reviewable draft PR1908; two-parent additive history; no mainline merge",
+  "remaining_gates": [
+    "Full JDK/JCK/platform and dedicated CDS/serialization qualification not performed.",
+    "Full Maven/reactor and dependency source-mirror closure not admitted; scoped task crates execute offline from restored pinned artifact cache.",
+    "Leading Unicode-escaped Javadoc whitespace and line-breaking/structural escapes remain unsupported safe parser refusals.",
+    "Prior Pass9 cold CPU, Pass10 sort workspace and Pass13 Unicode-frontier optimization holds remain held. No speedup claim for this image.",
+    "String phase remains active; no phase promotion, mainline merge, ABI or String ownership changes."
+  ],
+  "live_master_followup": {
+    "sha": "175c7ed1056005e5a686e3189f601c8ed4f406bb",
+    "changed_runtime_build_test_or_receiving_workflow_paths": [],
+    "check": "git diff --name-only 2bf5c24a550ca0d19d556a21918333f66ce1935f 175c7ed1056005e5a686e3189f601c8ed4f406bb -- src test make .github/workflows/m3-regex-collection-superset.yml",
+    "interpretation": "Qualification remains pinned; later master contains no changes in checked executable/build/test scope."
+  },
+  "private_custody": "Recipes, templates, SDK tests, correction memory and provenance remain canonical in Synexia; this is a passive receiving receipt."
+}

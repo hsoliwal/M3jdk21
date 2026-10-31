@@ -1,0 +1,97 @@
+{
+  "census_path_sha256_stream_sha256": "1ebac6071117be500755bca6b8d1d37668a0e250b70cb2d9a7cee67580851f0b",
+  "challenge_platform_counts": {
+    "HackerRank": 6,
+    "LeetCode": 19
+  },
+  "decision_counts": {
+    "CONSOLIDATE_CANDIDATE": 40,
+    "DELEGATE_VIEW": 13,
+    "INCOMPLETE_SCAFFOLD": 77,
+    "NO_STORAGE_CONTRACT": 66,
+    "QUALIFIED_CHANGE": 1,
+    "REMOVE_TEMPORARY_CANDIDATE": 30,
+    "RETAIN_ARRAY_BACKEND": 26,
+    "RETAIN_SPECIALIZED": 17
+  },
+  "java_source_bytes": 1856801,
+  "java_source_files": 270,
+  "latest_source_refresh": {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java",
+    "ref": "6ac3d5834844d444979ab1f7b8c85e68982759b7",
+    "sha256": "b6aec5a921f9eaba6feb14461bf6dca7e67cee26bb84fee3ee3143f873df5121"
+  },
+  "observed_on": "2026-10-21",
+  "official_challenge_rows": 25,
+  "original_review_ref": "d814e68f98715ebf71743c00b82f5a9a61223af0",
+  "priority_counts": {
+    "NONE": 121,
+    "P0": 1,
+    "P1": 48,
+    "P2": 100
+  },
+  "provider_counts": {
+    "APACHE": 17,
+    "ECLIPSE": 17,
+    "GUAVA": 23,
+    "JDK": 41,
+    "SPRING": 6
+  },
+  "provider_family_rows": 104,
+  "provider_source_review_kinds": {
+    "CLASS_STORAGE_AND_CONTRACT": 45,
+    "GENERATOR_CONTRACT_TEMPLATE": 4,
+    "INTERFACE_CONTRACT": 54,
+    "UTILITY_CONTRACT": 1
+  },
+  "provider_status_counts_unchanged": {
+    "JDK_RETAINED": 12,
+    "M3_BACKEND_ONLY": 27,
+    "M3_VIEW_ONLY": 8,
+    "PENDING": 57
+  },
+  "qualification": "STATIC_SOURCE_AND_CONTRACT_REVIEW_EXCEPT_PREVIOUSLY_EXECUTED_FIRST_LEAF",
+  "qualified_first_leaf": {
+    "after_sha256": "ba5d4873dc52bb55c571e147ea20648410adc3f38bef84d51789c809f4972298",
+    "canonical_commit": "cac5116e3408d6ff306d95654e9f4db6b59a27c1",
+    "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12705",
+    "owner": "M3LongLongTreeMap",
+    "receiving_evidence": "m3/collections/qualification/array-defaults-20261021/RESULTS.md"
+  },
+  "receiving_base_ref": "6ac3d5834844d444979ab1f7b8c85e68982759b7",
+  "review_artifact_sha256": {
+    "README.md": "1c535d2ec43ae8e420f1a3b27a4ae6de649ad3fa0e96281cc374f6e5a3e73740",
+    "additional-patterns.tsv": "8b0e7ec528e8000e40c41cbc80f55c8e89f78f6c8ab7b05b96656e23d65776fc",
+    "m3-source-review.tsv": "78a69bead226d00e4e7a92fc37fe9492dea75a80d44494f5245c49c6a075a409",
+    "priorities.tsv": "19a8484595bba0ae304c70da3ab0688ac3454253993d44d9c73f3174727a5bb6",
+    "provider-review.tsv": "cd88423e4f91daec1ae087e64f0ab2a412e57ddba3b62d83b8375277270e7404"
+  },
+  "role_counts": {
+    "CONTRACT": 29,
+    "HELPER": 34,
+    "INFRASTRUCTURE": 26,
+    "OWNER": 86,
+    "SCAFFOLD": 77,
+    "VIEW": 18
+  },
+  "schema": "M3_ALL_COLLECTIONS_STRUCTURAL_REVIEW_V1",
+  "source_root": "m3/collections/src/main/java",
+  "unexecuted_gates": [
+    "all-other-candidate implementation and recipe qualification",
+    "all-other-candidate runtime/resource measurements",
+    "full module/reactor tests",
+    "full provider compatibility",
+    "installed-JDK runtime admission"
+  ],
+  "upstream_boundary": "Complete receiving census and family catalogue; not every source class in all40 historical public-fork repositories.",
+  "validated_at_utc": "2026-10-21T04:14:53.858860+00:00",
+  "validation": {
+    "baseline_blobs": "269_EXACT_BASE_BLOBS_PLUS_ONE_QUALIFIED_CANDIDATE",
+    "patterns": "25_UNIQUE_OFFICIAL_URLS_AND_IDS",
+    "provider_fetched_blobs": "100_JAVA_AND_4_GENERATOR_TEMPLATES_VERIFIED",
+    "provider_identity_and_status": "104_EXACT_ORIGINAL_ROWS_NO_PROMOTION",
+    "schema_and_text": "PASS",
+    "source_hashes": "270_EXACT_WORKING_BYTES",
+    "source_paths": "270_UNIQUE_EXACT_CENSUS"
+  }
+}

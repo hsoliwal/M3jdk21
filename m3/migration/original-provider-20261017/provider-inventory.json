@@ -1,0 +1,651 @@
+{
+  "schema": "M3_ORIGINAL_MAPPING_PYTHON_PROVIDER_READ_ONLY_INVENTORY_V1",
+  "observedDate": "2026-10-17",
+  "scope": "READ_ONLY_OFFICIAL_RELEASE_METADATA_AND_SOURCE_INVENTORY_NO_PROVIDER_EXECUTION",
+  "sourceParent": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "112ccad490aa94551c587d2229c6729c24252363",
+    "pullRequest": 12066
+  },
+  "receiverParent": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "6b16a20dcedfada658595a1c155b06db5f943327",
+    "pullRequest": 1084
+  },
+  "priorClosureAudit": "4437ac925c6aa2990af247c1a65c498fd4c6b798",
+  "originalValidator": {
+    "path": "m3/migration/migration.py",
+    "gitBlob": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
+    "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+    "imports": "from jsonschema import Draft202012Validator",
+    "unchanged": true
+  },
+  "target": {
+    "implementation": "CPython",
+    "pythonVersion": "3.12",
+    "platform": "Linux",
+    "architecture": "x86_64",
+    "libc": "glibc >=2.17",
+    "extras": [],
+    "venvRequired": true,
+    "systemSitePackages": false
+  },
+  "selectedWheels": [
+    {
+      "name": "attrs",
+      "version": "25.4.0",
+      "requiresPython": ">=3.9",
+      "requiresDist": [],
+      "activeRuntimeRequiresDist": [],
+      "license": "MIT",
+      "licenseFiles": [
+        "LICENSE"
+      ],
+      "metadataUrl": "https://pypi.org/pypi/attrs/25.4.0/json",
+      "filename": "attrs-25.4.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/3a/2a/7cc015f5b9f5db42b7d48157e23356022889fc354a2813c15934b7cb5c0e/attrs-25.4.0-py3-none-any.whl",
+      "sha256": "adcf7e2a1fb3b36ac48d97835bb6d8ade15b8dcce26aba8bf1d14847b57a3373",
+      "bytes": 67615,
+      "publishedCoreMetadataSha256": "d917abc63eda81c311c62c1d92dea50b682ea870269062821f5de75962bb6684",
+      "uploadTime": "2025-10-06T13:54:43.170512Z",
+      "yanked": false,
+      "source": {
+        "repository": "python-attrs/attrs",
+        "tag": "25.4.0",
+        "tagObject": "91983f38be8b623619dee14e9eacf2e3f8b15eb5",
+        "commit": "9a98e00a7c078360add417c5d62db820d4645ab1",
+        "pypiPublishingCommit": "9a98e00a7c078360add417c5d62db820d4645ab1",
+        "pypiWheelAttestationPage": "https://pypi.org/project/attrs/25.4.0/",
+        "pypiAttestationStatus": "Official PyPI rendered wheel-specific PyPI Publish attestation matches exact selected wheel SHA256 and this immutable donor source commit; independent cryptographic bundle verification NOT_RUN."
+      },
+      "evidenceStatus": "PRIMARY_METADATA_AND_IMMUTABLE_SOURCE_READ_ONLY_PAYLOAD_NOT_DOWNLOADED",
+      "sourceFiles": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "2bd6453d255e19b973f19b128596a8b6dd65b2c3",
+          "sha256": "882115c95dfc2af1eeb6714f8ec6d5cbcabf667caff8729f42420da63f714e9f",
+          "bytes": 1109,
+          "url": "https://github.com/python-attrs/attrs/blob/9a98e00a7c078360add417c5d62db820d4645ab1/LICENSE"
+        },
+        {
+          "path": "pyproject.toml",
+          "gitBlob": "f9e801d72146834d4cb70f8c4d30ac93a0fcc052",
+          "sha256": "8057187c065c164e050b076232098ba69df055265f5c84d99381d438c5b9e905",
+          "bytes": 8612,
+          "url": "https://github.com/python-attrs/attrs/blob/9a98e00a7c078360add417c5d62db820d4645ab1/pyproject.toml"
+        }
+      ]
+    },
+    {
+      "name": "jsonschema",
+      "version": "4.26.0",
+      "requiresPython": ">=3.10",
+      "requiresDist": [
+        "attrs>=22.2.0",
+        "jsonschema-specifications>=2023.03.6",
+        "referencing>=0.28.4",
+        "rpds-py>=0.25.0",
+        "fqdn; extra == \"format\"",
+        "idna; extra == \"format\"",
+        "isoduration; extra == \"format\"",
+        "jsonpointer>1.13; extra == \"format\"",
+        "rfc3339-validator; extra == \"format\"",
+        "rfc3987; extra == \"format\"",
+        "uri-template; extra == \"format\"",
+        "webcolors>=1.11; extra == \"format\"",
+        "fqdn; extra == \"format-nongpl\"",
+        "idna; extra == \"format-nongpl\"",
+        "isoduration; extra == \"format-nongpl\"",
+        "jsonpointer>1.13; extra == \"format-nongpl\"",
+        "rfc3339-validator; extra == \"format-nongpl\"",
+        "rfc3986-validator>0.1.0; extra == \"format-nongpl\"",
+        "rfc3987-syntax>=1.1.0; extra == \"format-nongpl\"",
+        "uri-template; extra == \"format-nongpl\"",
+        "webcolors>=24.6.0; extra == \"format-nongpl\""
+      ],
+      "activeRuntimeRequiresDist": [
+        "attrs>=22.2.0",
+        "jsonschema-specifications>=2023.03.6",
+        "referencing>=0.28.4",
+        "rpds-py>=0.25.0"
+      ],
+      "license": "MIT",
+      "licenseFiles": [
+        "COPYING"
+      ],
+      "metadataUrl": "https://pypi.org/pypi/jsonschema/4.26.0/json",
+      "filename": "jsonschema-4.26.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/69/90/f63fb5873511e014207a475e2bb4e8b2e570d655b00ac19a9a0ca0a385ee/jsonschema-4.26.0-py3-none-any.whl",
+      "sha256": "d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce",
+      "bytes": 90630,
+      "publishedCoreMetadataSha256": "05b189866ca98a96da3934bf6b83687ced3ff85325273b77e16b705f6d8b26d2",
+      "uploadTime": "2026-01-07T13:41:05.306692Z",
+      "yanked": false,
+      "source": {
+        "repository": "python-jsonschema/jsonschema",
+        "tag": "v4.26.0",
+        "tagObject": "c87a92202e986be7e3ae0db992cdc2608bbfd815",
+        "commit": "a7277432b0f7bcd0551f6e589d30457017125df4",
+        "pypiPublishingCommit": "a7277432b0f7bcd0551f6e589d30457017125df4",
+        "pypiWheelAttestationPage": "https://pypi.org/project/jsonschema/4.26.0/",
+        "pypiAttestationStatus": "Official PyPI rendered wheel-specific PyPI Publish attestation matches exact selected wheel SHA256 and this immutable donor source commit; independent cryptographic bundle verification NOT_RUN."
+      },
+      "evidenceStatus": "PRIMARY_METADATA_AND_IMMUTABLE_SOURCE_READ_ONLY_PAYLOAD_NOT_DOWNLOADED",
+      "sourceFiles": [
+        {
+          "path": "COPYING",
+          "gitBlob": "af9cfbdb134f42e5205ecbad597421d778826481",
+          "sha256": "4f92a015a13c4d1a040bef018aa13430b4f1bc73b41b16bb846c346766de7439",
+          "bytes": 1057,
+          "url": "https://github.com/python-jsonschema/jsonschema/blob/a7277432b0f7bcd0551f6e589d30457017125df4/COPYING"
+        },
+        {
+          "path": "pyproject.toml",
+          "gitBlob": "acc2431214d6521f8bdac88bf9aca9af6684ae71",
+          "sha256": "7a0ecddffacfc1c01a23f59525961fc6494060df5cc006c185ea60c8c4e63ad5",
+          "bytes": 6489,
+          "url": "https://github.com/python-jsonschema/jsonschema/blob/a7277432b0f7bcd0551f6e589d30457017125df4/pyproject.toml"
+        }
+      ]
+    },
+    {
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1",
+      "requiresPython": ">=3.9",
+      "requiresDist": [
+        "referencing>=0.31.0"
+      ],
+      "activeRuntimeRequiresDist": [
+        "referencing>=0.31.0"
+      ],
+      "license": "MIT",
+      "licenseFiles": [
+        "COPYING"
+      ],
+      "metadataUrl": "https://pypi.org/pypi/jsonschema-specifications/2025.9.1/json",
+      "filename": "jsonschema_specifications-2025.9.1-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/41/45/1a4ed80516f02155c51f51e8cedb3c1902296743db0bbc66608a0db2814f/jsonschema_specifications-2025.9.1-py3-none-any.whl",
+      "sha256": "98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe",
+      "bytes": 18437,
+      "publishedCoreMetadataSha256": "35abd41757f32b4ea24756920ded47b70173d77cbc052a5a6d3ab583b2e8d89d",
+      "uploadTime": "2025-09-08T01:34:57.871954Z",
+      "yanked": false,
+      "source": {
+        "repository": "python-jsonschema/jsonschema-specifications",
+        "tag": "v2025.9.1",
+        "tagObject": "7e507a04553f480549f9eedae887dff0efa5742a",
+        "commit": "3b846010c34ce254d8ced23023451d1d64de37f5",
+        "pypiPublishingCommit": "3b846010c34ce254d8ced23023451d1d64de37f5",
+        "pypiWheelAttestationPage": "https://pypi.org/project/jsonschema-specifications/2025.9.1/",
+        "pypiAttestationStatus": "Official PyPI rendered wheel-specific PyPI Publish attestation matches exact selected wheel SHA256 and this immutable donor source commit; independent cryptographic bundle verification NOT_RUN."
+      },
+      "evidenceStatus": "PRIMARY_METADATA_AND_IMMUTABLE_SOURCE_READ_ONLY_PAYLOAD_NOT_DOWNLOADED",
+      "sourceFiles": [
+        {
+          "path": "COPYING",
+          "gitBlob": "a9f853e43069b8e3f8a156a4af2b1198a004230d",
+          "sha256": "42dcd63495f87b4eb7c7757afa379bb55a53f94afd7a5f657d9adf57236e515c",
+          "bytes": 1057,
+          "url": "https://github.com/python-jsonschema/jsonschema-specifications/blob/3b846010c34ce254d8ced23023451d1d64de37f5/COPYING"
+        },
+        {
+          "path": "pyproject.toml",
+          "gitBlob": "184f815fd3a7520b62a8c7177294570e6a76cc89",
+          "sha256": "38e97b425adc7c9f69d799d46653fd592c846f1fc56f046e941d20e46255fa37",
+          "bytes": 4884,
+          "url": "https://github.com/python-jsonschema/jsonschema-specifications/blob/3b846010c34ce254d8ced23023451d1d64de37f5/pyproject.toml"
+        }
+      ]
+    },
+    {
+      "name": "referencing",
+      "version": "0.37.0",
+      "requiresPython": ">=3.10",
+      "requiresDist": [
+        "attrs>=22.2.0",
+        "rpds-py>=0.7.0",
+        "typing-extensions>=4.4.0; python_version < \"3.13\""
+      ],
+      "activeRuntimeRequiresDist": [
+        "attrs>=22.2.0",
+        "rpds-py>=0.7.0",
+        "typing-extensions>=4.4.0; python_version < \"3.13\""
+      ],
+      "license": "MIT",
+      "licenseFiles": [
+        "COPYING"
+      ],
+      "metadataUrl": "https://pypi.org/pypi/referencing/0.37.0/json",
+      "filename": "referencing-0.37.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/2c/58/ca301544e1fa93ed4f80d724bf5b194f6e4b945841c5bfd555878eea9fcb/referencing-0.37.0-py3-none-any.whl",
+      "sha256": "381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231",
+      "bytes": 26766,
+      "publishedCoreMetadataSha256": "c93b00e6ab1524fd60848376604c189a114374776475c25a31d57be47b29de6a",
+      "uploadTime": "2025-10-13T15:30:47.625937Z",
+      "yanked": false,
+      "source": {
+        "repository": "python-jsonschema/referencing",
+        "tag": "v0.37.0",
+        "tagObject": "e403010277e060b8e892b9b090d48101d6f3e753",
+        "commit": "944ed5a20bc5125f2349156cbdc365daac0e67e6",
+        "pypiPublishingCommit": "944ed5a20bc5125f2349156cbdc365daac0e67e6",
+        "pypiWheelAttestationPage": "https://pypi.org/project/referencing/0.37.0/",
+        "pypiAttestationStatus": "Official PyPI rendered wheel-specific PyPI Publish attestation matches exact selected wheel SHA256 and this immutable donor source commit; independent cryptographic bundle verification NOT_RUN."
+      },
+      "evidenceStatus": "PRIMARY_METADATA_AND_IMMUTABLE_SOURCE_READ_ONLY_PAYLOAD_NOT_DOWNLOADED",
+      "sourceFiles": [
+        {
+          "path": "COPYING",
+          "gitBlob": "a9f853e43069b8e3f8a156a4af2b1198a004230d",
+          "sha256": "42dcd63495f87b4eb7c7757afa379bb55a53f94afd7a5f657d9adf57236e515c",
+          "bytes": 1057,
+          "url": "https://github.com/python-jsonschema/referencing/blob/944ed5a20bc5125f2349156cbdc365daac0e67e6/COPYING"
+        },
+        {
+          "path": "pyproject.toml",
+          "gitBlob": "48a09af1670ff404ac4f8fe7d996980fff86d391",
+          "sha256": "e13334be0fc778656e27ee3f0e2937b13b4a7165da0a2e472233dc37e9e03811",
+          "bytes": 5054,
+          "url": "https://github.com/python-jsonschema/referencing/blob/944ed5a20bc5125f2349156cbdc365daac0e67e6/pyproject.toml"
+        }
+      ]
+    },
+    {
+      "name": "rpds-py",
+      "version": "0.30.0",
+      "requiresPython": ">=3.10",
+      "requiresDist": [],
+      "activeRuntimeRequiresDist": [],
+      "license": "MIT",
+      "licenseFiles": [
+        "LICENSE"
+      ],
+      "metadataUrl": "https://pypi.org/pypi/rpds-py/0.30.0/json",
+      "filename": "rpds_py-0.30.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "url": "https://files.pythonhosted.org/packages/60/1b/6f8f29f3f995c7ffdde46a626ddccd7c63aefc0efae881dc13b6e5d5bb16/rpds_py-0.30.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "sha256": "47f236970bccb2233267d89173d3ad2703cd36a0e2a6e92d0560d333871a3d23",
+      "bytes": 394080,
+      "primaryRenderedSize": "394.1 kB",
+      "publishedCoreMetadataSha256": null,
+      "uploadTime": "2025-11-30",
+      "yanked": null,
+      "yankedEvidence": "PyPI JSON field could not be parsed by text renderer; official PyPI page still lists exact file and donor GitHub release asset is uploaded. No runtime qualification inferred.",
+      "source": {
+        "repository": "crate-py/rpds",
+        "tag": "v0.30.0",
+        "tagObject": "e8c5b3467c6c73103c553433b17beb51fc092490",
+        "commit": "c38c9795cc6a1b4d95bd1863e7164f889a638adf",
+        "pypiPublishingCommit": "c38c9795cc6a1b4d95bd1863e7164f889a638adf",
+        "pypiWheelAttestationPage": "https://pypi.org/project/rpds-py/0.30.0/",
+        "pypiAttestationStatus": "Official PyPI rendered wheel-specific PyPI Publish attestation matches exact selected wheel SHA256 and this immutable donor source commit; independent cryptographic bundle verification NOT_RUN."
+      },
+      "wheelTag": "cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64",
+      "evidenceStatus": "PRIMARY_PYPI_HASH_TAG_ATTESTED_COMMIT_AND_DONOR_GITHUB_EXACT_BYTES_READ_ONLY_PAYLOAD_NOT_DOWNLOADED",
+      "sourceFiles": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "119a1f205aa85f584e0dbc04d7b34deaebe9199d",
+          "sha256": "314e4e91be3baa93c0fb4bccc9e4e97cd643eb839b065af921782c2175fe9909",
+          "bytes": 1057,
+          "url": "https://github.com/crate-py/rpds/blob/c38c9795cc6a1b4d95bd1863e7164f889a638adf/LICENSE"
+        },
+        {
+          "path": "pyproject.toml",
+          "gitBlob": "c96f3d4efa81dada24104198ebcabc00811727c3",
+          "sha256": "bba6f924880566e45c4e00d44dddbeb1360314d4cb9a1883fe957e2f7b60ecf2",
+          "bytes": 4887,
+          "url": "https://github.com/crate-py/rpds/blob/c38c9795cc6a1b4d95bd1863e7164f889a638adf/pyproject.toml"
+        }
+      ],
+      "sizePrimaryMetadata": {
+        "url": "https://api.github.com/repos/crate-py/rpds/releases/assets/322605050",
+        "repository": "crate-py/rpds",
+        "releaseTag": "v0.30.0",
+        "assetId": 322605050,
+        "filename": "rpds_py-0.30.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "bytes": 394080,
+        "sha256": "47f236970bccb2233267d89173d3ad2703cd36a0e2a6e92d0560d333871a3d23",
+        "state": "uploaded",
+        "metadataOnly": true
+      }
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.15.0",
+      "requiresPython": ">=3.9",
+      "requiresDist": [],
+      "activeRuntimeRequiresDist": [],
+      "license": "PSF-2.0",
+      "licenseFiles": [
+        "LICENSE"
+      ],
+      "metadataUrl": "https://pypi.org/pypi/typing-extensions/4.15.0/json",
+      "filename": "typing_extensions-4.15.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl",
+      "sha256": "f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548",
+      "bytes": 44614,
+      "publishedCoreMetadataSha256": "c138378fe8f18934ac99de060535c53ec6c13aeed65e94c32641da7ee3192a72",
+      "uploadTime": "2025-08-25T13:49:24.860024Z",
+      "yanked": false,
+      "source": {
+        "repository": "python/typing_extensions",
+        "tag": "4.15.0",
+        "tagObject": "9d1637e264b5c1a6b7acee3e907015f89b20c2c9",
+        "commit": "9d1637e264b5c1a6b7acee3e907015f89b20c2c9",
+        "pypiPublishingCommit": "9d1637e264b5c1a6b7acee3e907015f89b20c2c9",
+        "pypiWheelAttestationPage": "https://pypi.org/project/typing-extensions/4.15.0/",
+        "pypiAttestationStatus": "Official PyPI rendered wheel-specific PyPI Publish attestation matches exact selected wheel SHA256 and this immutable donor source commit; independent cryptographic bundle verification NOT_RUN."
+      },
+      "evidenceStatus": "PRIMARY_METADATA_AND_IMMUTABLE_SOURCE_READ_ONLY_PAYLOAD_NOT_DOWNLOADED",
+      "sourceFiles": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "f26bcf4d2de6eb136e31006ca3ab447d5e488adf",
+          "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf",
+          "bytes": 13936,
+          "url": "https://github.com/python/typing_extensions/blob/9d1637e264b5c1a6b7acee3e907015f89b20c2c9/LICENSE"
+        },
+        {
+          "path": "pyproject.toml",
+          "gitBlob": "adfed5d4e85eb0ea308e9c1cfd640ab35be29702",
+          "sha256": "ca83c4570ee8617862dd5251671cabe354fb52d26927c56b974f81a3121e1271",
+          "bytes": 3566,
+          "url": "https://github.com/python/typing_extensions/blob/9d1637e264b5c1a6b7acee3e907015f89b20c2c9/pyproject.toml"
+        }
+      ]
+    }
+  ],
+  "closure": {
+    "distributionCount": 6,
+    "directRuntimeEdges": 4,
+    "transitiveRuntimeEdges": 4,
+    "activeTypingExtensionsMarker": "python_version < \"3.13\"",
+    "activeOnPython312": true,
+    "optionalFormatExtrasRequested": false,
+    "noOtherPythonRuntimeDependenciesInSelectedReleaseMetadata": true,
+    "rpdsRuntimeDependenciesFromImmutableSourceProjectNotParsedWheelMetadata": true,
+    "knownBytesExcludingRpds": 248062,
+    "maximumWheelDownloadBytes": 642142,
+    "candidateTotalDownloadBytes": 642142,
+    "allWheelPayloadsDownloaded": false,
+    "allWheelHashesVerifiedFromPayload": false,
+    "qualified": false,
+    "publishedExactWheelBytes": 642142,
+    "allWheelBytesAndSha256BoundByPrimaryMetadata": true
+  },
+  "sourceFit": {
+    "mechanism": "DIRECT_IMPORT of unmodified released wheels into a task-owned isolated venv; preserve original validator/schema/manifest and existing version-only requirement file.",
+    "javaJacksonReplacement": "NO_FIT: a Java API cannot satisfy original Python Draft202012Validator import.",
+    "stdlibShim": "NO_FIT: would replace original schema semantics and dependencies.",
+    "sourceBuild": "NO_FIT for this lane: existing cp312 manylinux wheel avoids Rust/build backend/bootstrap resolver.",
+    "latestUnpinnedResolver": "NO_FIT: no bounded reproducible dependency closure.",
+    "rootArchitectureGate": "PENDING_ROOT_PHYSICAL_FOSS_ROW_BEFORE_BOOTSTRAP_CODE"
+  },
+  "bootstrapContract": {
+    "execution": "NOT_IMPLEMENTED_THIS_INVENTORY",
+    "download": "Only six exact allowlisted HTTPS files.pythonhosted.org wheel URLs after destination/output/8GiB reserve gates; require published SHA256 and bounded byte counts, no redirects to unapproved hosts, no source distribution.",
+    "venv": "Preinstalled CPython3.12 must be proven CPython/Linux/x86_64/glibc-compatible; use stdlib venv with include-system-site-packages=false, no pip/CPython upgrade/download; record actual interpreter/pip versions and origins.",
+    "pipArgv": [
+      "<owned-venv>/bin/python",
+      "-I",
+      "-B",
+      "-m",
+      "pip",
+      "--isolated",
+      "--disable-pip-version-check",
+      "install",
+      "--no-index",
+      "--require-hashes",
+      "--only-binary=:all:",
+      "--no-deps",
+      "--no-compile",
+      "--no-cache-dir",
+      "--find-links",
+      "<owned-wheelhouse>",
+      "-r",
+      "<six-row-hash-locked-requirements>"
+    ],
+    "isolationBoundary": "Use -I -B for venv external-provider import/CLI, not -S; -S suppresses site initialization, and -I ignores PYTHONPATH. Existing stdlib-only verifier may continue -I -S -B.",
+    "verification": "Check all six importlib.metadata versions, exact installed distributions/import origins within owned venv, no system site packages; real Draft202012Validator check_schema/valid/invalid and reference cases then untouched original CLI validate/report against exact source closure/current canonical/previous manifest. pip dependency check must succeed. No skip/mock/shim.",
+    "networkFallback": "FORBIDDEN: no index, source build, resolver, extra format dependencies, alternate latest release, pip upgrade or global installation."
+  },
+  "licenses": {
+    "policy": "Keep complete source license files with provenance and install published wheels without repackaging or stripping bundled license metadata. MIT for first five distribution identities except typing_extensions PSF-2.0; preserve typing_extensions complete 13936-byte historical license text. No artifact payload extracted/inspected this inventory, so bundled Rust-component license contents have not been independently audited.",
+    "sourceLicenseFiles": [
+      {
+        "distribution": "jsonschema",
+        "path": "COPYING",
+        "gitBlob": "af9cfbdb134f42e5205ecbad597421d778826481",
+        "sha256": "4f92a015a13c4d1a040bef018aa13430b4f1bc73b41b16bb846c346766de7439",
+        "bytes": 1057,
+        "content": "Copyright (c) 2013 Julian Berman\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n"
+      },
+      {
+        "distribution": "attrs",
+        "path": "LICENSE",
+        "gitBlob": "2bd6453d255e19b973f19b128596a8b6dd65b2c3",
+        "sha256": "882115c95dfc2af1eeb6714f8ec6d5cbcabf667caff8729f42420da63f714e9f",
+        "bytes": 1109,
+        "content": "The MIT License (MIT)\n\nCopyright (c) 2015 Hynek Schlawack and the attrs contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+      },
+      {
+        "distribution": "jsonschema-specifications",
+        "path": "COPYING",
+        "gitBlob": "a9f853e43069b8e3f8a156a4af2b1198a004230d",
+        "sha256": "42dcd63495f87b4eb7c7757afa379bb55a53f94afd7a5f657d9adf57236e515c",
+        "bytes": 1057,
+        "content": "Copyright (c) 2022 Julian Berman\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n"
+      },
+      {
+        "distribution": "referencing",
+        "path": "COPYING",
+        "gitBlob": "a9f853e43069b8e3f8a156a4af2b1198a004230d",
+        "sha256": "42dcd63495f87b4eb7c7757afa379bb55a53f94afd7a5f657d9adf57236e515c",
+        "bytes": 1057,
+        "content": "Copyright (c) 2022 Julian Berman\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n"
+      },
+      {
+        "distribution": "rpds-py",
+        "path": "LICENSE",
+        "gitBlob": "119a1f205aa85f584e0dbc04d7b34deaebe9199d",
+        "sha256": "314e4e91be3baa93c0fb4bccc9e4e97cd643eb839b065af921782c2175fe9909",
+        "bytes": 1057,
+        "content": "Copyright (c) 2023 Julian Berman\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n"
+      },
+      {
+        "distribution": "typing-extensions",
+        "path": "LICENSE",
+        "gitBlob": "f26bcf4d2de6eb136e31006ca3ab447d5e488adf",
+        "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf",
+        "bytes": 13936,
+        "content": "A. HISTORY OF THE SOFTWARE\n==========================\n\nPython was created in the early 1990s by Guido van Rossum at Stichting\nMathematisch Centrum (CWI, see https://www.cwi.nl) in the Netherlands\nas a successor of a language called ABC.  Guido remains Python's\nprincipal author, although it includes many contributions from others.\n\nIn 1995, Guido continued his work on Python at the Corporation for\nNational Research Initiatives (CNRI, see https://www.cnri.reston.va.us)\nin Reston, Virginia where he released several versions of the\nsoftware.\n\nIn May 2000, Guido and the Python core development team moved to\nBeOpen.com to form the BeOpen PythonLabs team.  In October of the same\nyear, the PythonLabs team moved to Digital Creations, which became\nZope Corporation.  In 2001, the Python Software Foundation (PSF, see\nhttps://www.python.org/psf/) was formed, a non-profit organization\ncreated specifically to own Python-related Intellectual Property.\nZope Corporation was a sponsoring member of the PSF.\n\nAll Python releases are Open Source (see https://opensource.org for\nthe Open Source Definition).  Historically, most, but not all, Python\nreleases have also been GPL-compatible; the table below summarizes\nthe various releases.\n\n    Release         Derived     Year        Owner       GPL-\n                    from                                compatible? (1)\n\n    0.9.0 thru 1.2              1991-1995   CWI         yes\n    1.3 thru 1.5.2  1.2         1995-1999   CNRI        yes\n    1.6             1.5.2       2000        CNRI        no\n    2.0             1.6         2000        BeOpen.com  no\n    1.6.1           1.6         2001        CNRI        yes (2)\n    2.1             2.0+1.6.1   2001        PSF         no\n    2.0.1           2.0+1.6.1   2001        PSF         yes\n    2.1.1           2.1+2.0.1   2001        PSF         yes\n    2.1.2           2.1.1       2002        PSF         yes\n    2.1.3           2.1.2       2002        PSF         yes\n    2.2 and above   2.1.1       2001-now    PSF         yes\n\nFootnotes:\n\n(1) GPL-compatible doesn't mean that we're distributing Python under\n    the GPL.  All Python licenses, unlike the GPL, let you distribute\n    a modified version without making your changes open source.  The\n    GPL-compatible licenses make it possible to combine Python with\n    other software that is released under the GPL; the others don't.\n\n(2) According to Richard Stallman, 1.6.1 is not GPL-compatible,\n    because its license has a choice of law clause.  According to\n    CNRI, however, Stallman's lawyer has told CNRI's lawyer that 1.6.1\n    is \"not incompatible\" with the GPL.\n\nThanks to the many outside volunteers who have worked under Guido's\ndirection to make these releases possible.\n\n\nB. TERMS AND CONDITIONS FOR ACCESSING OR OTHERWISE USING PYTHON\n===============================================================\n\nPython software and documentation are licensed under the\nPython Software Foundation License Version 2.\n\nStarting with Python 3.8.6, examples, recipes, and other code in\nthe documentation are dual licensed under the PSF License Version 2\nand the Zero-Clause BSD license.\n\nSome software incorporated into Python is under different licenses.\nThe licenses are listed with code falling under that license.\n\n\nPYTHON SOFTWARE FOUNDATION LICENSE VERSION 2\n--------------------------------------------\n\n1. This LICENSE AGREEMENT is between the Python Software Foundation\n(\"PSF\"), and the Individual or Organization (\"Licensee\") accessing and\notherwise using this software (\"Python\") in source or binary form and\nits associated documentation.\n\n2. Subject to the terms and conditions of this License Agreement, PSF hereby\ngrants Licensee a nonexclusive, royalty-free, world-wide license to reproduce,\nanalyze, test, perform and/or display publicly, prepare derivative works,\ndistribute, and otherwise use Python alone or in any derivative version,\nprovided, however, that PSF's License Agreement and PSF's notice of copyright,\ni.e., \"Copyright (c) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010,\n2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Python Software Foundation;\nAll Rights Reserved\" are retained in Python alone or in any derivative version\nprepared by Licensee.\n\n3. In the event Licensee prepares a derivative work that is based on\nor incorporates Python or any part thereof, and wants to make\nthe derivative work available to others as provided herein, then\nLicensee hereby agrees to include in any such work a brief summary of\nthe changes made to Python.\n\n4. PSF is making Python available to Licensee on an \"AS IS\"\nbasis.  PSF MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR\nIMPLIED.  BY WAY OF EXAMPLE, BUT NOT LIMITATION, PSF MAKES NO AND\nDISCLAIMS ANY REPRESENTATION OR WARRANTY OF MERCHANTABILITY OR FITNESS\nFOR ANY PARTICULAR PURPOSE OR THAT THE USE OF PYTHON WILL NOT\nINFRINGE ANY THIRD PARTY RIGHTS.\n\n5. PSF SHALL NOT BE LIABLE TO LICENSEE OR ANY OTHER USERS OF PYTHON\nFOR ANY INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES OR LOSS AS\nA RESULT OF MODIFYING, DISTRIBUTING, OR OTHERWISE USING PYTHON,\nOR ANY DERIVATIVE THEREOF, EVEN IF ADVISED OF THE POSSIBILITY THEREOF.\n\n6. This License Agreement will automatically terminate upon a material\nbreach of its terms and conditions.\n\n7. Nothing in this License Agreement shall be deemed to create any\nrelationship of agency, partnership, or joint venture between PSF and\nLicensee.  This License Agreement does not grant permission to use PSF\ntrademarks or trade name in a trademark sense to endorse or promote\nproducts or services of Licensee, or any third party.\n\n8. By copying, installing or otherwise using Python, Licensee\nagrees to be bound by the terms and conditions of this License\nAgreement.\n\n\nBEOPEN.COM LICENSE AGREEMENT FOR PYTHON 2.0\n-------------------------------------------\n\nBEOPEN PYTHON OPEN SOURCE LICENSE AGREEMENT VERSION 1\n\n1. This LICENSE AGREEMENT is between BeOpen.com (\"BeOpen\"), having an\noffice at 160 Saratoga Avenue, Santa Clara, CA 95051, and the\nIndividual or Organization (\"Licensee\") accessing and otherwise using\nthis software in source or binary form and its associated\ndocumentation (\"the Software\").\n\n2. Subject to the terms and conditions of this BeOpen Python License\nAgreement, BeOpen hereby grants Licensee a non-exclusive,\nroyalty-free, world-wide license to reproduce, analyze, test, perform\nand/or display publicly, prepare derivative works, distribute, and\notherwise use the Software alone or in any derivative version,\nprovided, however, that the BeOpen Python License is retained in the\nSoftware, alone or in any derivative version prepared by Licensee.\n\n3. BeOpen is making the Software available to Licensee on an \"AS IS\"\nbasis.  BEOPEN MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR\nIMPLIED.  BY WAY OF EXAMPLE, BUT NOT LIMITATION, BEOPEN MAKES NO AND\nDISCLAIMS ANY REPRESENTATION OR WARRANTY OF MERCHANTABILITY OR FITNESS\nFOR ANY PARTICULAR PURPOSE OR THAT THE USE OF THE SOFTWARE WILL NOT\nINFRINGE ANY THIRD PARTY RIGHTS.\n\n4. BEOPEN SHALL NOT BE LIABLE TO LICENSEE OR ANY OTHER USERS OF THE\nSOFTWARE FOR ANY INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES OR LOSS\nAS A RESULT OF USING, MODIFYING OR DISTRIBUTING THE SOFTWARE, OR ANY\nDERIVATIVE THEREOF, EVEN IF ADVISED OF THE POSSIBILITY THEREOF.\n\n5. This License Agreement will automatically terminate upon a material\nbreach of its terms and conditions.\n\n6. This License Agreement shall be governed by and interpreted in all\nrespects by the law of the State of California, excluding conflict of\nlaw provisions.  Nothing in this License Agreement shall be deemed to\ncreate any relationship of agency, partnership, or joint venture\nbetween BeOpen and Licensee.  This License Agreement does not grant\npermission to use BeOpen trademarks or trade names in a trademark\nsense to endorse or promote products or services of Licensee, or any\nthird party.  As an exception, the \"BeOpen Python\" logos available at\nhttp://www.pythonlabs.com/logos.html may be used according to the\npermissions granted on that web page.\n\n7. By copying, installing or otherwise using the software, Licensee\nagrees to be bound by the terms and conditions of this License\nAgreement.\n\n\nCNRI LICENSE AGREEMENT FOR PYTHON 1.6.1\n---------------------------------------\n\n1. This LICENSE AGREEMENT is between the Corporation for National\nResearch Initiatives, having an office at 1895 Preston White Drive,\nReston, VA 20191 (\"CNRI\"), and the Individual or Organization\n(\"Licensee\") accessing and otherwise using Python 1.6.1 software in\nsource or binary form and its associated documentation.\n\n2. Subject to the terms and conditions of this License Agreement, CNRI\nhereby grants Licensee a nonexclusive, royalty-free, world-wide\nlicense to reproduce, analyze, test, perform and/or display publicly,\nprepare derivative works, distribute, and otherwise use Python 1.6.1\nalone or in any derivative version, provided, however, that CNRI's\nLicense Agreement and CNRI's notice of copyright, i.e., \"Copyright (c)\n1995-2001 Corporation for National Research Initiatives; All Rights\nReserved\" are retained in Python 1.6.1 alone or in any derivative\nversion prepared by Licensee.  Alternately, in lieu of CNRI's License\nAgreement, Licensee may substitute the following text (omitting the\nquotes): \"Python 1.6.1 is made available subject to the terms and\nconditions in CNRI's License Agreement.  This Agreement together with\nPython 1.6.1 may be located on the internet using the following\nunique, persistent identifier (known as a handle): 1895.22/1013.  This\nAgreement may also be obtained from a proxy server on the internet\nusing the following URL: http://hdl.handle.net/1895.22/1013\".\n\n3. In the event Licensee prepares a derivative work that is based on\nor incorporates Python 1.6.1 or any part thereof, and wants to make\nthe derivative work available to others as provided herein, then\nLicensee hereby agrees to include in any such work a brief summary of\nthe changes made to Python 1.6.1.\n\n4. CNRI is making Python 1.6.1 available to Licensee on an \"AS IS\"\nbasis.  CNRI MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR\nIMPLIED.  BY WAY OF EXAMPLE, BUT NOT LIMITATION, CNRI MAKES NO AND\nDISCLAIMS ANY REPRESENTATION OR WARRANTY OF MERCHANTABILITY OR FITNESS\nFOR ANY PARTICULAR PURPOSE OR THAT THE USE OF PYTHON 1.6.1 WILL NOT\nINFRINGE ANY THIRD PARTY RIGHTS.\n\n5. CNRI SHALL NOT BE LIABLE TO LICENSEE OR ANY OTHER USERS OF PYTHON\n1.6.1 FOR ANY INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES OR LOSS AS\nA RESULT OF MODIFYING, DISTRIBUTING, OR OTHERWISE USING PYTHON 1.6.1,\nOR ANY DERIVATIVE THEREOF, EVEN IF ADVISED OF THE POSSIBILITY THEREOF.\n\n6. This License Agreement will automatically terminate upon a material\nbreach of its terms and conditions.\n\n7. This License Agreement shall be governed by the federal\nintellectual property law of the United States, including without\nlimitation the federal copyright law, and, to the extent such\nU.S. federal law does not apply, by the law of the Commonwealth of\nVirginia, excluding Virginia's conflict of law provisions.\nNotwithstanding the foregoing, with regard to derivative works based\non Python 1.6.1 that incorporate non-separable material that was\npreviously distributed under the GNU General Public License (GPL), the\nlaw of the Commonwealth of Virginia shall govern this License\nAgreement only as to issues arising under or with respect to\nParagraphs 4, 5, and 7 of this License Agreement.  Nothing in this\nLicense Agreement shall be deemed to create any relationship of\nagency, partnership, or joint venture between CNRI and Licensee.  This\nLicense Agreement does not grant permission to use CNRI trademarks or\ntrade name in a trademark sense to endorse or promote products or\nservices of Licensee, or any third party.\n\n8. By clicking on the \"ACCEPT\" button where indicated, or by copying,\ninstalling or otherwise using Python 1.6.1, Licensee agrees to be\nbound by the terms and conditions of this License Agreement.\n\n        ACCEPT\n\n\nCWI LICENSE AGREEMENT FOR PYTHON 0.9.0 THROUGH 1.2\n--------------------------------------------------\n\nCopyright (c) 1991 - 1995, Stichting Mathematisch Centrum Amsterdam,\nThe Netherlands.  All rights reserved.\n\nPermission to use, copy, modify, and distribute this software and its\ndocumentation for any purpose and without fee is hereby granted,\nprovided that the above copyright notice appear in all copies and that\nboth that copyright notice and this permission notice appear in\nsupporting documentation, and that the name of Stichting Mathematisch\nCentrum or CWI not be used in advertising or publicity pertaining to\ndistribution of the software without specific, written prior\npermission.\n\nSTICHTING MATHEMATISCH CENTRUM DISCLAIMS ALL WARRANTIES WITH REGARD TO\nTHIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND\nFITNESS, IN NO EVENT SHALL STICHTING MATHEMATISCH CENTRUM BE LIABLE\nFOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES\nWHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN\nACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT\nOF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.\n\nZERO-CLAUSE BSD LICENSE FOR CODE IN THE PYTHON DOCUMENTATION\n----------------------------------------------------------------------\n\nPermission to use, copy, modify, and/or distribute this software for any\npurpose with or without fee is hereby granted.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH\nREGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY\nAND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,\nINDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM\nLOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR\nOTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR\nPERFORMANCE OF THIS SOFTWARE.\n"
+      }
+    ]
+  },
+  "openEvidence": [
+    "rpds PyPI JSON core-metadata SHA/yanked field not independently parsed; exact394080-byte length and same SHA256 were obtained directly from official donor GitHub release asset322605050 metadata. Installed wheel METADATA will still need payload verification.",
+    "Wheel payload, METADATA, WHEEL, RECORD and bundled-license contents have not been downloaded/inspected.",
+    "Actual CPython3.12 hosted interpreter/pip/venv and successful six-package import are unproved.",
+    "Original CLI validate/report, schema/previous/current custody replay, behavior, Java/JNI/full-JDK/performance/retention gates remain NOT_RUN."
+  ],
+  "execution": {
+    "sourceReview": "READ_ONLY",
+    "wheelDownloads": "NOT_RUN",
+    "wheelHashVerification": "NOT_RUN",
+    "venvCreation": "NOT_RUN",
+    "pipInstall": "NOT_RUN",
+    "providerImports": "NOT_RUN",
+    "originalCliValidate": "NOT_RUN",
+    "originalCliReport": "NOT_RUN",
+    "runtimeQualified": false,
+    "jniQualified": false,
+    "jdkQualified": false,
+    "performanceQualified": false,
+    "phaseAdvanced": false
+  },
+  "primaryEvidenceSources": [
+    "https://pypi.org/pypi/attrs/25.4.0/json",
+    "https://pypi.org/project/attrs/25.4.0/",
+    "https://github.com/python-attrs/attrs/blob/9a98e00a7c078360add417c5d62db820d4645ab1/LICENSE",
+    "https://github.com/python-attrs/attrs/blob/9a98e00a7c078360add417c5d62db820d4645ab1/pyproject.toml",
+    "https://pypi.org/pypi/jsonschema/4.26.0/json",
+    "https://pypi.org/project/jsonschema/4.26.0/",
+    "https://github.com/python-jsonschema/jsonschema/blob/a7277432b0f7bcd0551f6e589d30457017125df4/COPYING",
+    "https://github.com/python-jsonschema/jsonschema/blob/a7277432b0f7bcd0551f6e589d30457017125df4/pyproject.toml",
+    "https://pypi.org/pypi/jsonschema-specifications/2025.9.1/json",
+    "https://pypi.org/project/jsonschema-specifications/2025.9.1/",
+    "https://github.com/python-jsonschema/jsonschema-specifications/blob/3b846010c34ce254d8ced23023451d1d64de37f5/COPYING",
+    "https://github.com/python-jsonschema/jsonschema-specifications/blob/3b846010c34ce254d8ced23023451d1d64de37f5/pyproject.toml",
+    "https://pypi.org/pypi/referencing/0.37.0/json",
+    "https://pypi.org/project/referencing/0.37.0/",
+    "https://github.com/python-jsonschema/referencing/blob/944ed5a20bc5125f2349156cbdc365daac0e67e6/COPYING",
+    "https://github.com/python-jsonschema/referencing/blob/944ed5a20bc5125f2349156cbdc365daac0e67e6/pyproject.toml",
+    "https://pypi.org/pypi/rpds-py/0.30.0/json",
+    "https://pypi.org/project/rpds-py/0.30.0/",
+    "https://github.com/crate-py/rpds/blob/c38c9795cc6a1b4d95bd1863e7164f889a638adf/LICENSE",
+    "https://github.com/crate-py/rpds/blob/c38c9795cc6a1b4d95bd1863e7164f889a638adf/pyproject.toml",
+    "https://pypi.org/pypi/typing-extensions/4.15.0/json",
+    "https://pypi.org/project/typing-extensions/4.15.0/",
+    "https://github.com/python/typing_extensions/blob/9d1637e264b5c1a6b7acee3e907015f89b20c2c9/LICENSE",
+    "https://github.com/python/typing_extensions/blob/9d1637e264b5c1a6b7acee3e907015f89b20c2c9/pyproject.toml",
+    "https://api.github.com/repos/crate-py/rpds/releases/assets/322605050",
+    "https://docs.python.org/3.12/library/venv.html",
+    "https://docs.python.org/3.12/using/cmdline.html",
+    "https://pip.pypa.io/en/stable/topics/secure-installs/",
+    "https://pip.pypa.io/en/stable/cli/pip_install/"
+  ],
+  "requirementsCandidate": {
+    "scope": "CANDIDATE_LITERAL_LOCKFILE_NOT_APPLIED_TO_REPOSITORY_OR_EXECUTED",
+    "content": "attrs==25.4.0 --hash=sha256:adcf7e2a1fb3b36ac48d97835bb6d8ade15b8dcce26aba8bf1d14847b57a3373\njsonschema==4.26.0 --hash=sha256:d489f15263b8d200f8387e64b4c3a75f06629559fb73deb8fdfb525f2dab50ce\njsonschema_specifications==2025.9.1 --hash=sha256:98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe\nreferencing==0.37.0 --hash=sha256:381329a9f99628c9069361716891d34ad94af76e461dcb0335825aecc7692231\nrpds_py==0.30.0 --hash=sha256:47f236970bccb2233267d89173d3ad2703cd36a0e2a6e92d0560d333871a3d23\ntyping_extensions==4.15.0 ; python_version < \"3.13\" --hash=sha256:f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548\n"
+  },
+  "fossReuseCandidates": [
+    {
+      "capability": "original-mapping-cli-python312-provider:attrs",
+      "classification": "DIRECT_IMPORT",
+      "donor": "python-attrs/attrs",
+      "sourceCommit": "9a98e00a7c078360add417c5d62db820d4645ab1",
+      "paths": [
+        "attrs-25.4.0-py3-none-any.whl",
+        "LICENSE",
+        "pyproject.toml"
+      ],
+      "license": "MIT",
+      "interfaces": [
+        "runtime dependency of immutable jsonschema.Draft202012Validator implementation"
+      ],
+      "fit": "Official immutable source/PyPI runtime metadata constraints satisfy exact CPython3.12 Linuxx64 closure; unmodified released wheel SHA256 and bytes pinned.",
+      "proof": "SOURCE_METADATA_FIT_ONLY; provider import, wheel payload audit, original CLI, runtime execution NOT_RUN",
+      "notices": "Retain whole published wheel license metadata and complete source license file; no relabeling/repacking."
+    },
+    {
+      "capability": "original-mapping-cli-python312-provider:jsonschema",
+      "classification": "DIRECT_IMPORT",
+      "donor": "python-jsonschema/jsonschema",
+      "sourceCommit": "a7277432b0f7bcd0551f6e589d30457017125df4",
+      "paths": [
+        "jsonschema-4.26.0-py3-none-any.whl",
+        "COPYING",
+        "pyproject.toml"
+      ],
+      "license": "MIT",
+      "interfaces": [
+        "jsonschema.Draft202012Validator.check_schema",
+        "jsonschema.Draft202012Validator.iter_errors"
+      ],
+      "fit": "Official immutable source/PyPI runtime metadata constraints satisfy exact CPython3.12 Linuxx64 closure; unmodified released wheel SHA256 and bytes pinned.",
+      "proof": "SOURCE_METADATA_FIT_ONLY; provider import, wheel payload audit, original CLI, runtime execution NOT_RUN",
+      "notices": "Retain whole published wheel license metadata and complete source license file; no relabeling/repacking."
+    },
+    {
+      "capability": "original-mapping-cli-python312-provider:jsonschema-specifications",
+      "classification": "DIRECT_IMPORT",
+      "donor": "python-jsonschema/jsonschema-specifications",
+      "sourceCommit": "3b846010c34ce254d8ced23023451d1d64de37f5",
+      "paths": [
+        "jsonschema_specifications-2025.9.1-py3-none-any.whl",
+        "COPYING",
+        "pyproject.toml"
+      ],
+      "license": "MIT",
+      "interfaces": [
+        "runtime dependency of immutable jsonschema.Draft202012Validator implementation"
+      ],
+      "fit": "Official immutable source/PyPI runtime metadata constraints satisfy exact CPython3.12 Linuxx64 closure; unmodified released wheel SHA256 and bytes pinned.",
+      "proof": "SOURCE_METADATA_FIT_ONLY; provider import, wheel payload audit, original CLI, runtime execution NOT_RUN",
+      "notices": "Retain whole published wheel license metadata and complete source license file; no relabeling/repacking."
+    },
+    {
+      "capability": "original-mapping-cli-python312-provider:referencing",
+      "classification": "DIRECT_IMPORT",
+      "donor": "python-jsonschema/referencing",
+      "sourceCommit": "944ed5a20bc5125f2349156cbdc365daac0e67e6",
+      "paths": [
+        "referencing-0.37.0-py3-none-any.whl",
+        "COPYING",
+        "pyproject.toml"
+      ],
+      "license": "MIT",
+      "interfaces": [
+        "runtime dependency of immutable jsonschema.Draft202012Validator implementation"
+      ],
+      "fit": "Official immutable source/PyPI runtime metadata constraints satisfy exact CPython3.12 Linuxx64 closure; unmodified released wheel SHA256 and bytes pinned.",
+      "proof": "SOURCE_METADATA_FIT_ONLY; provider import, wheel payload audit, original CLI, runtime execution NOT_RUN",
+      "notices": "Retain whole published wheel license metadata and complete source license file; no relabeling/repacking."
+    },
+    {
+      "capability": "original-mapping-cli-python312-provider:rpds-py",
+      "classification": "DIRECT_IMPORT",
+      "donor": "crate-py/rpds",
+      "sourceCommit": "c38c9795cc6a1b4d95bd1863e7164f889a638adf",
+      "paths": [
+        "rpds_py-0.30.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "LICENSE",
+        "pyproject.toml"
+      ],
+      "license": "MIT",
+      "interfaces": [
+        "rpds.HashTrieMap",
+        "rpds.HashTrieSet",
+        "rpds.List"
+      ],
+      "fit": "Official immutable source/PyPI runtime metadata constraints satisfy exact CPython3.12 Linuxx64 closure; unmodified released wheel SHA256 and bytes pinned.",
+      "proof": "SOURCE_METADATA_FIT_ONLY; provider import, wheel payload audit, original CLI, runtime execution NOT_RUN",
+      "notices": "Retain whole published wheel license metadata and complete source license file; no relabeling/repacking."
+    },
+    {
+      "capability": "original-mapping-cli-python312-provider:typing-extensions",
+      "classification": "DIRECT_IMPORT",
+      "donor": "python/typing_extensions",
+      "sourceCommit": "9d1637e264b5c1a6b7acee3e907015f89b20c2c9",
+      "paths": [
+        "typing_extensions-4.15.0-py3-none-any.whl",
+        "LICENSE",
+        "pyproject.toml"
+      ],
+      "license": "PSF-2.0",
+      "interfaces": [
+        "runtime dependency of immutable jsonschema.Draft202012Validator implementation"
+      ],
+      "fit": "Official immutable source/PyPI runtime metadata constraints satisfy exact CPython3.12 Linuxx64 closure; unmodified released wheel SHA256 and bytes pinned.",
+      "proof": "SOURCE_METADATA_FIT_ONLY; provider import, wheel payload audit, original CLI, runtime execution NOT_RUN",
+      "notices": "Retain whole published wheel license metadata and complete source license file; no relabeling/repacking."
+    },
+    {
+      "capability": "original-mapping-cli-owned-offline-venv-bootstrap",
+      "classification": "WRAP",
+      "donor": "CPython stdlib venv/ensurepip + preinstalled pip documented secure-install CLI",
+      "sourceCommit": "HOSTED_INTERPRETER_AND_ENSUREPIP_SOURCE_IDENTITY_PENDING_EXECUTED_RECEIPT",
+      "paths": [
+        "Lib/venv",
+        "Lib/ensurepip",
+        "pip install CLI"
+      ],
+      "license": "PSF-2.0 (CPython stdlib); MIT (pip; preserve bundled notices)",
+      "fit": "Reuse maintained venv isolation/offline wheel install; implement only exact allowlist/hash/byte-budget/provider-origin receipts and unchanged original CLI orchestration.",
+      "proof": "Official Python3.12/pip docs source fit only; no bootstrap authored or run in this inventory.",
+      "notices": "No downloaded CPython/pip or source builds; record preinstalled actual interpreter/pip identity, preserve package license metadata.",
+      "gate": "ROOT_MUST_PUBLISH_PHYSICAL_FOSS_REUSE_ROW_BEFORE_BOOTSTRAP_IMPLEMENTATION"
+    }
+  ],
+  "supersedesProvisionalInventoryGitBlob": "abf5c0824f25132f82b45ea7fd56f09a53156a05"
+}

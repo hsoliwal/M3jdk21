@@ -1,0 +1,4 @@
+# ordinal	stage_crate	target	resource	behavioral_atom	problem_category
+1	m3-superset-array-20261021-p1	m3/collections/src/main/java/com/m3/collections/M3ArrayList.java	0001-M3ArrayList.java.txt	trim epoch + dynamic mask	DYNAMIC_ARRAY_MASK_RECONCILIATION
+2	m3-superset-array-20261021-p2	m3/collections/src/test/java/com/m3/collections/M3ArrayListSupersetContract.java	0002-M3ArrayListSupersetContract.java.txt	regression source	ITERATOR_EPOCH_AND_CALLBACK
+3	m3-superset-array-20261021-p3	m3/collections/src/test/java/com/m3/collections/M3ArrayListSupersetTest.java	0003-M3ArrayListSupersetTest.java.txt	regression source	MAVEN_JUNIT_REGRESSION

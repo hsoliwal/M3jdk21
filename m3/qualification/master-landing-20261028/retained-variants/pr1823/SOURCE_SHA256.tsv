@@ -1,0 +1,6 @@
+path	sha256	git_blob	mode	pr	note
+m3/file/src/main/java/com/m3/file/M3File.java	f212b7b35361bceaf87846a942dda7245b5006bef7804e6585227cadbee4ade1	2e7a9df8d9a1f537bc3eb2cc0400a0a273fb24d1	100644	1823	PR version, not live
+m3/file/src/test/java/com/m3/file/M3FileSharedScratchContract.java	1da4f8ce076f63e9bf2684c4bf767626f97d4b64497654275d149fff2e033cd6	c22565ec112fe62fb433dfa41ef7594e70801940	100644	1823	PR version, not live
+m3/fs/src/main/java/com/m3/fs/M3HostFileInventory.java	5f2c119f130245eed388bc26fa92d771e058303bdf9866ec4ed811385b5b081b	bd2c9f0a873205a7f31a017ee7c35f4f7504f950	100644	1823	PR version, not live
+m3/qualification/provider-capture-shared-scratch-20261022/GATES.tsv	69f87f19dc81229c8065ca9eb59194af8a9ff8dc8bcede41fffc9c9e12b65e16	c1727434b14c7ac6dddccaaf99191f51133ddf14	100644	1823	PR version, not live
+m3/qualification/provider-capture-shared-scratch-20261022/README.md	46f86e3746e9d03952ef60d1c6de15180edd9547098968ec9cc0606bf939e716	52ddf47bef035393210072bef6a9f8b6f60dc218	100644	1823	PR version, not live

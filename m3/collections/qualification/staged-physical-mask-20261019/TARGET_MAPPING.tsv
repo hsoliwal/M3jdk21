@@ -1,0 +1,4 @@
+source_family	target_owner	old_revision	input_role	admission	pending
+Canonical Synexia M3 patternized collection algorithms	M3IndexedListSnapshot + M3CollectionSdk	Synexia recipe com.synexia.m3jdk21.PhysicalMaskSortedSnapshotV2	Exact hash-sealed authoring and proof; no Synexia runtime jar	M3JDK21-owned m3/collections target	Full module/JMOD/jtreg and String stage
+M3JDK21 legacy one-stage byte-mask and sorted indexed snapshot	M3IndexedListSnapshot int[] positions/Object[] values	M3JDK21@2786e22ee2b85af4c1853041c7d80415a9c2a6d1	Preserve prior direct methods and comparator semantics	Add full-width multi-stage mask + single output directory sorting	Source-epoch and ABI gates
+OpenJDK java.util collections	Unmodified java.util public names and contracts	OpenJDK21	Compatibility oracle only, not new object-per-entry backing	No public JDK replacement in this PR	Full JDK boot image approval

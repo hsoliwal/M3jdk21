@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "symbols": [
+    "Java_com_m3_collections_M3BitLane28_cardinality0",
+    "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative",
+    "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative",
+    "Java_com_m3_collections_M3IndexMaskWindow_scanNative",
+    "Java_com_m3_collections_M3IndexPathMasks_selectNative",
+    "Java_com_m3_collections_M3LongAddressKernel_gatherNative",
+    "Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0",
+    "Java_com_m3_collections_M3ResidencyStateMaskIndex_select0",
+    "Java_com_m3_collections_M3SignalOrderNative_sort0",
+    "Java_com_m3_collections_M3SpanIndex_batchNative",
+    "Java_com_m3_collections_M3StateMaskHistogram_tallyNative"
+  ],
+  "count": 17
+}

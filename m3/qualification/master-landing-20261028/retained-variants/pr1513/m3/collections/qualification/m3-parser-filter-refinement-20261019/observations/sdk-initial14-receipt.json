@@ -1,0 +1,75 @@
+{
+  "emittedFiles": 14,
+  "files": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "before": "5f6df0d4875cdd5673b244094ad9330dee7fb18081ede81819d29cf7c3ca1ff3",
+      "after": "931fcf6df5d7b63c53e9d666320c3c17d2c537f956c556d0ad51be9582cb7c42"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+      "before": "94941ecd803a93db5bbe036c1cea6f936eefaaf5a5864929e93422901e4c09d5",
+      "after": "633b986b4f96a6494ff71762edde3a0ad5edaad62f789be17c4fac2dffd49d28"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
+      "before": "43c258835a31848aca0155177248ee5733ce70f02733e0023045e3e5b2386871",
+      "after": "dd77ad619ab3b4e6d6ba25a137b374e3814626014c00caff1061950c08e63b20"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredTerminalTrace.java",
+      "before": "ABSENT",
+      "after": "378ec11a5b40a5f40bf35edff58fc901c549f6b26499c602caf4298d2ef55011"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SparseMaskReadContract.java",
+      "before": "ABSENT",
+      "after": "5c5690ca1c6458c382266509c3b9b1a07b73f76f5c20794af70f0ee3be9b9ea0"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeMapEmptyLookupTest.java",
+      "before": "ABSENT",
+      "after": "9441094d8265dac0f247491154b3aa22e3c0732d6e7f87a7e0e62466955ceb52"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeMapGetOrDefaultTest.java",
+      "before": "ABSENT",
+      "after": "e9781753cdcf4727a97a13e9ecb5046c7f45ed3cc0086baa7ddd6bcb6a5b994f"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/src/integration/java/jdk/m3/parser/test/M3JdtEquinoxContract.java",
+      "before": "ABSENT",
+      "after": "878d27ced6e9dfeae192509c95dad7434984d1b23633529e4566b40d16fc46cc"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/src/integration/java/jdk/m3/parser/test/M3JdtSemanticContract.java",
+      "before": "ABSENT",
+      "after": "bf2bc74f024d79a9d76cfca508c2d5f9021a3c32b13cd2ecc1108f95c1ddff46"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/src/integration/java/jdk/m3/parser/test/M3JdtWorkspaceProbe.java",
+      "before": "ABSENT",
+      "after": "c369de643ebec0a41d5ecbfb1e3a3d313ab6a6d526ef10790e221e4c6162f6b6"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java",
+      "before": "4563fcc9ea0a1572f9e0d8040f4980adf40feec4d85b3d0e30d14906b4672fc2",
+      "after": "f98b1f6012229b7d8d4ff6df696b8091398f5c00840719ec8c350e146e303432"
+    },
+    {
+      "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java",
+      "before": "c84e5c826d306f14be105c28a459a8a056023e44b828791f984b9a627c4166ec",
+      "after": "1087d211897a29c5f0afd2e2efa535c0b7f9ce1bc8dcfc34a7a499e24e96c97f"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "before": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+      "after": "6ecc1d5b34f49f3fd295817e3685bdd157b83d0d420a57a016da3a9b978ed57e"
+    },
+    {
+      "path": "m3/collections/src/test/native/m3_sparse_mask_reads.c",
+      "before": "ABSENT",
+      "after": "37514672a429893d2a75a6bf9035bf5f909ab71c2db3d18044abb9c503be0b53"
+    }
+  ]
+}

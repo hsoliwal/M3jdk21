@@ -1,0 +1,65 @@
+{
+  "schema": "independent-raw-transport-adapter-admission/v1",
+  "status": "ADMITTED_FOR_EXACT_CONTENTS_VERIFICATION",
+  "adapter_sha256": "c12b3bb6415f89a94e946d8937b50e9f974e6bcf79f4f6ecdb388dc1cdfa16c6",
+  "manifest_sha256": "9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328",
+  "final_expected_tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
+  "verification_expected_tree": "bf2b8fe43cda47f0c6363c8d376f61419e647e4d",
+  "verification_changed_trees": 17,
+  "verification_entries": [
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "59b4ec83f687499a54f15695b9b246599f9579d7"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-nul/Dependency.java.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fb1c29bba17633d2de5d53d924ec210965374c37"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "24cdc62e634934527d551324c2449bcf951b5589"
+    }
+  ],
+  "only_four_raw_additions_to_exact_base": true,
+  "all_other_base_entries_preserved": true,
+  "actual_create_responses_match_four_expected_blobs": true,
+  "historic_first_creation_response_uncaptured": true,
+  "current_all_four_creation_responses_retained": true,
+  "base64_capability_probe": {
+    "sha": "b4081310a343cbd067c7deb5e907031598e82536",
+    "bytes": 2538,
+    "sha256": "e2fee64f28c2fd71db1d0f2fba8a9bf3bd4c3d210119d4e12823b7d01a98ec0a",
+    "exact_immutable_baseline_body_equal": true,
+    "raw_fixture_verification": false
+  },
+  "raw_fixture_contents_readbacks_completed_in_this_review": false,
+  "final_commit_or_branch_readback_completed_in_this_review": false,
+  "v2_verifier_unchanged": true,
+  "root_responsibilities": [
+    "Use explicit exact verification/final commit refs with full-file base64 reads, without line slicing.",
+    "Preserve actual wrapper/request; normalized sha/encoding/content must come from that response.",
+    "Label size as decoded-response-derived; never claim independently observed remote size.",
+    "Verify all four raw bodies before any final-payload batch; verify all four raw and four canonical final bodies before branch creation.",
+    "Use only be92 as the final commit parent; verification commit must not enter final ancestry.",
+    "Retain original refused-envelope episode without promoting it to a successful raw readback."
+  ],
+  "limits": [
+    "This explicitly changes the old before-any-tree sequence by adding an unreferenced four-fixture verification tree/commit, while retaining before-final-payload and before-branch byte gates.",
+    "V2 verifies normalized bytes/identities, not the provenance of their wrapper-to-entry copying or caller sequencing.",
+    "Derived size is a consistency check; expected manifest/tree lengths, Git identity, SHA-256 and direct byte equality remain separate checks.",
+    "No source/payload/manifest/script change, project execution, remote mutation or qualification promotion is performed by this reviewer."
+  ],
+  "stable_read_inputs": 19
+}

@@ -1,0 +1,12 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.JccMergeRecovery
+displayName: Restore exact JCC history and preserve its declared retention obligations
+description: Recover 443 historically published recipe, test and evidence files and integrate six current retention updates without promoting any runtime capability.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: jcc-merge-recovery-20261006-history-01
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: jcc-merge-recovery-20261006-history-02
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: jcc-merge-recovery-20261006-retention

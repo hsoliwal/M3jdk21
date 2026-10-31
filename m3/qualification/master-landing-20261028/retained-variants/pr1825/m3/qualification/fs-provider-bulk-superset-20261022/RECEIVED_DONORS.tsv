@@ -1,0 +1,6 @@
+# path	previous_git_blob	received_git_blob	problem_category
+m3/fs/qualification/manager-bulk-20261021/DONORS.tsv	ABSENT	ef34379c8951c5c57b25c02ee0864a8c84ac076c	DONOR_CATEGORY_DECISIONS
+m3/fs/qualification/manager-bulk-20261021/RECEIPT.md	ABSENT	6969d77bec3c37084679fc9b4d492afc50636be4	QUALIFIED_ORIGINAL_SOURCE_RECEIPT
+m3/fs/src/main/java/com/m3/fs/M3FsManagerBulk.java	ABSENT	84614eaee227c3e8436e7dd21855c0512a2906f5	PACKED_INDEX_CROSS_PROVIDER_DISPATCH
+m3/fs/src/main/java/com/m3/fs/vfs/FileSystemManager.java	d77ad058b73a61ed304312053574029fa33643a0	166604c4f3dca6695b0fb7efc0b6f3b1f58033b8	ORIGINAL_VFS_MANAGER_DEFAULT_METHODS
+m3/fs/src/test/java/com/m3/fs/M3FsManagerBulkTest.java	ABSENT	c91e7de32023f729d26cc256edccf73075ebf681	ORIGINAL_PROVIDER_BULK_CONTRACT

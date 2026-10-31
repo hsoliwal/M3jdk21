@@ -1,0 +1,8 @@
+{
+  "schema": "M3_PARSER_MATERIALIZATION_V1",
+  "status": "PASS",
+  "sources": 49,
+  "application_manifest_sha256": "4c4dd0130b71e096b8bb5415b53a364422684838e5dc40e559098cbc487c9e70",
+  "event_log_sha256": "ddefb605a8cb1176b56ef20a1dd22befc3bbd29714a4214f197798709efc1a3e",
+  "source_origin": "Actual OpenRewrite SDK outputs; no direct template body copy"
+}

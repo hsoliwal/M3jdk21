@@ -1,0 +1,19 @@
+{
+  "status": "SOURCE_WITNESS_VERIFIED_RUNTIME_REQUALIFICATION_PENDING",
+  "source_head": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "factory": {
+    "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java",
+    "sha256": "bdd58a73f64875bc7f523901f72be318d1c9a63bab1a98f01d07d38597733b02",
+    "exact_source_line": "        return Multimaps.newListMultimap(new M3LinkedHashMap<>(), M3ArrayList::new);"
+  },
+  "metadata_loader": {
+    "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryBindings.java",
+    "sha256": "46e13c91b108ccb886fa14c6df4a363488f12a35d4fef55c78fee51ac789edcd",
+    "resource": "/META-INF/m3/sdk-family-bindings.tsv"
+  },
+  "change": "Only Guava list-multimap value owner changes from M3LinkedList to existing M3ArrayList in TSV and overview; all25 entries, adapter names, factory signatures, versions, and production sources preserved.",
+  "before_tsv_sha256": "bb59939f0ee98635455ee4543a8d6df606f0b5325ac320c6b93f583b1b440900",
+  "after_tsv_sha256": "95075c5fd971af4d7272f6aa40ab90acfdb2fbd274bde4f0ebd8d6deb9fdb4d8",
+  "sdk_overview_after_sha256": "da19139c66d6f3e221a91f8d66315a58c7f8d887740c310e6ae3cd8b89b0c73a",
+  "prior_frozen_candidate_set_sha256": "d2ca682f4a4a66c0bd2f6d0ddd2b456c3ab8038f4c8985caf3af59b4452dc8a8"
+}

@@ -1,0 +1,163 @@
+{
+  "schema": "m3.integrated.collections.final-freshness.v1",
+  "syn": {
+    "qualified_revision": "408373f4101fdca2fb3625bec8af1234e5fd3e26",
+    "observed_develop": "d3f7dccd5e9c44ad122f9664a4990af05d50f2f3",
+    "ahead_by": 31,
+    "changed_files": [
+      {
+        "path": ".github/workflows/m3-crossrepo-prfleet-chronological-20261021.yml",
+        "status": "added",
+        "git_blob": "dc896cc160bf4ed4092ab167ec8b82f653010cfa"
+      },
+      {
+        "path": "docs/convergence/FLEET_ADDITIVE_CHECKPOINT_20261021.md",
+        "status": "added",
+        "git_blob": "78e91f7f8c8b974c248549cc961ba322e7c1f20c"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/crates/m3-pr-stack-preservation/receipts/20261021-crossrepo-chronological/ALGORITHM_CATEGORY_DONOR_REVIEW.tsv",
+        "status": "added",
+        "git_blob": "17b77e0a80de42db60736ff131eafced6fcf7415"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/crates/m3-pr-stack-preservation/receipts/20261021-crossrepo-chronological/CANDIDATE_DEPENDENCY_DAG.json",
+        "status": "added",
+        "git_blob": "fc5be798cfbb5aa9b6679fc54651232afa0935bb"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/crates/m3-pr-stack-preservation/receipts/20261021-crossrepo-chronological/MERGE_GATE_MATRIX.tsv",
+        "status": "added",
+        "git_blob": "14880b2f916daccbc33d1a34e7f595ee852ad448"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/crates/m3-pr-stack-preservation/receipts/20261021-crossrepo-chronological/OPEN_PR_HEADS.tsv",
+        "status": "added",
+        "git_blob": "daebe45de3e8cc18292c271006dbb772dff68338"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/crates/m3-pr-stack-preservation/receipts/20261021-crossrepo-chronological/README.md",
+        "status": "added",
+        "git_blob": "474c7dbb6f898af5dba829156ad326deb48b9beb"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/crates/m3-pr-stack-preservation/src/test/java/com/synexia/m3/prstack/PrFleetCrossRepoCensusTest.java",
+        "status": "added",
+        "git_blob": "df487e27fb7927d4f010dbc0c98fab2722941bfa"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-crossrepo-chronological-20261021.yml",
+        "status": "added",
+        "git_blob": "48eb38801ce8e0e2fa2928dd5de605db79dd962b"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-product-prfleet-20261021.yml",
+        "status": "added",
+        "git_blob": "de4999e792b3ea35aef46875d6272727dc8debbf"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-crossrepo-chronological-test-20261021/PrFleetCrossRepoCensusTest.java.txt",
+        "status": "added",
+        "git_blob": "df487e27fb7927d4f010dbc0c98fab2722941bfa"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-crossrepo-chronological-test-20261021/manifest.tsv",
+        "status": "added",
+        "git_blob": "48c8a1be42576e6b3bd85d280561c06944b51e59"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-prfleet-source-check-20261021/M3PrFleetSourceProof.java.txt",
+        "status": "added",
+        "git_blob": "f838661efaf82e9031ef1ff76ab8bd5364515002"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-prfleet-source-check-20261021/manifest.tsv",
+        "status": "added",
+        "git_blob": "78be6a9046ca99c81eb11e8ecf929690e9a51432"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-crossrepo-chronological-20261021/ALGORITHM_CATEGORY_DONOR_REVIEW.tsv.txt",
+        "status": "added",
+        "git_blob": "17b77e0a80de42db60736ff131eafced6fcf7415"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-crossrepo-chronological-20261021/CANDIDATE_DEPENDENCY_DAG.json.txt",
+        "status": "added",
+        "git_blob": "fc5be798cfbb5aa9b6679fc54651232afa0935bb"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-crossrepo-chronological-20261021/MERGE_GATE_MATRIX.tsv.txt",
+        "status": "added",
+        "git_blob": "14880b2f916daccbc33d1a34e7f595ee852ad448"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-crossrepo-chronological-20261021/OPEN_PR_HEADS.tsv.txt",
+        "status": "added",
+        "git_blob": "daebe45de3e8cc18292c271006dbb772dff68338"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-crossrepo-chronological-20261021/README.md.txt",
+        "status": "added",
+        "git_blob": "474c7dbb6f898af5dba829156ad326deb48b9beb"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-crossrepo-chronological-20261021/manifest.tsv",
+        "status": "added",
+        "git_blob": "36a385264d896a6bb36fddb761b6ec206861b9ea"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-product-prfleet-20261021/M3JDK21_MERGE_GATES.tsv.txt",
+        "status": "added",
+        "git_blob": "3939f3e23dd99933f789dd7d09e0bcf8ac573cc4"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-product-prfleet-20261021/M3JDK21_PR_HEADS.tsv.txt",
+        "status": "added",
+        "git_blob": "1a70394104b1e74b29bcf41d9764930bccf4e5fb"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-product-prfleet-20261021/M3JDK21_SOURCE_PINNED_OWNERS.tsv.txt",
+        "status": "added",
+        "git_blob": "5326c3ee14cfe03006e9cb363cc4730fedd0728e"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-product-prfleet-20261021/README.md.txt",
+        "status": "added",
+        "git_blob": "0e2e341653b35175c05259f13c02c4df5856ef87"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-product-prfleet-20261021/m3-product-prfleet-20261021.yml.txt",
+        "status": "added",
+        "git_blob": "2ca837734051b53fe727d427d2c79fa03480cc0b"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-product-prfleet-20261021/manifest.tsv",
+        "status": "added",
+        "git_blob": "d0476c431971c9bc2603392e610a6a5fb1f6a39f"
+      }
+    ]
+  },
+  "m3": {
+    "qualified_revision": "33d2e6ae8048c436bd55b951d9f7dbfab2f3efcb",
+    "branch_base": "7f657d6ca05760af7bee7d4d2d9e14ae91ddd942",
+    "observed_master": "79d764d6b7164f75aeee23e5793ae9d7fe217e1c",
+    "ahead_by": 4,
+    "changed_files": [
+      {
+        "path": "m3/docs/ECLIPSE_CAPABILITY_CONVERGENCE.md",
+        "status": "added",
+        "git_blob": "36f5d5ca09d94717c777ab6d3640ead8044ba006"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
+        "status": "modified",
+        "git_blob": "382e76061737743792885c4cadad5db15e474b2e"
+      }
+    ]
+  },
+  "status": "SELECTED_INPUT_CLOSURES_UNCHANGED",
+  "disposition": "Syn changes add separate PR-fleet recipes/receipts/workflow and convergence documentation; selected engines, canonical registry, provenance ledger/policy, fixture/target closure and task paths are unchanged. M3 changes are ChangeJournal documentation and an Eclipse capability document; selected collection/core/native/test closure is unchanged. Task branches still point to the exact docs commits. Existing ancestry is preserved; no rebase, force push or merge performed.",
+  "observed_utc": "2026-10-21T15:47:32.918563+00:00",
+  "previous_comparison_receipt_sha256": "f408c52167548e24599076767c8c887ba4b324652e5bc33096528f0edea34f3a",
+  "method": "Fresh GitHub refs read; identities exactly equal V2 complete compare identities. Original owner/fixture/policy/registry closure remains unchanged."
+}

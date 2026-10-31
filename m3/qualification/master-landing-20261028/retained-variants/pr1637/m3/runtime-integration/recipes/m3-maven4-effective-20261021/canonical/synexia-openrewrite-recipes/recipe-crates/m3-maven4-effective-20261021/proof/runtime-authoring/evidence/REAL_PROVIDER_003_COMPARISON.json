@@ -1,0 +1,20 @@
+{
+  "status": "PASS_CANDIDATE_TEMPLATES",
+  "baseline_checks": 13,
+  "candidate_checks": 102,
+  "incumbent_shapes_equal": true,
+  "incumbent_shape_sha256": "8f7f6e264f59a5785dc7d3a1ef686c72a085f7e75ad069f958359634c386d127",
+  "actual_receiver_pending": true,
+  "initial_observations": [
+    {
+      "log": "baseline-real-provider-001.log",
+      "sha256": "5bb026256538d647e8333679cbfae8705def9ea42f86503fbe85164ce476ce4f",
+      "classification": "test selected ApiRunner.SecurityMode.NONE, which lacks required Dispatcher map in actual pinned implementation; corrected test to REQUIRED with installed dependency and isolated empty settings; no provider source change"
+    },
+    {
+      "log": "candidate-real-provider-002.log",
+      "sha256": "fb3bc78e12f5b4708fbe5d88fddeea62f304dad323ac1579119da6454cebf6b3",
+      "classification": "test4.1.0 POM omitted required Maven namespace; corrected XML fixture to actual API contract; no parser/provider source workaround"
+    }
+  ]
+}

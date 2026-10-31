@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.NativeIndexRange20261017
+displayName: M3 native index windows and stable sort reuse
+description: Refine existing mask compaction and immutable index-window owners through source-sealed postimages.
+recipeList:
+  - com.synexia.rewrite.M3NativeIndexRangeRecipe

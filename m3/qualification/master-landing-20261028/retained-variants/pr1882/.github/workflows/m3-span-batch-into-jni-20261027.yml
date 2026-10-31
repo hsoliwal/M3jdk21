@@ -1,0 +1,52 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 span-window Java 21 JNI exact owner
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-span-batch-into-jni-20261027.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3SpanIndex.java'
+      - 'm3/collections/src/main/native/collections/m3_span_index_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3SpanBatchIntoContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3SpanBatchIntoTest.java'
+      - 'm3/collections/qualification/span-batch-into-20261027/**'
+
+permissions:
+  contents: read
+
+jobs:
+  original-java21-c17-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Bind this exact PR head, not a moving branch
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+      - name: Compile and execute original M3SpanIndex native and Java batch contracts
+        shell: bash
+        env:
+          M3_SPAN_REPORT_DIR: ${{ runner.temp }}/m3-span-jni-receipts
+          UBSAN_OPTIONS: halt_on_error=1
+        run: |
+          set -euo pipefail
+          bash m3/collections/qualification/span-batch-into-20261027/verify.sh "$PWD"
+      - name: Preserve normal, interpreted, fallback and legacy JNI evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-span-batch-jni-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-span-jni-receipts/**
+          if-no-files-found: error
+          retention-days: 14

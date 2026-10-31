@@ -1,0 +1,28 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 indexed live reentrancy contract
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java'
+      - 'm3/collections/qualification/indexed-live-reentrancy-20261021/**'
+      - 'm3/collections/qualification/indexed-live-views-20261021/verify_recipe.py'
+      - 'm3/collections/qualification/indexed-live-views-20261021/SUCCESSOR_RECEIVERS.tsv'
+      - '.github/workflows/m3-indexed-live-reentrancy-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  java21-original-owner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Exact original owner Java21 source seals and regression
+        run: bash m3/collections/qualification/indexed-live-reentrancy-20261021/verify.sh
+      - name: Existing C11 JNI mask selector required-backend proof
+        run: bash m3/collections/qualification/required-excluded-windows-20261021/verify.sh

@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "source": "hsoliwal/com.synexia",
+  "recipe_commit": "54312c6134bb7bb33587b16e1f6510aded7d7e29",
+  "recipe_pr": 12311,
+  "recipe": "com.synexia.m3.FilteredSplitsMaskSpans20261018",
+  "target_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "targets": [
+    "com.m3.collections.M3FilteredViews",
+    "com.m3.collections.M3MutableFilteredViews",
+    "com.m3.collections.M3FilteredNavigableSet",
+    "com.m3.collections.M3SlotSpliterators",
+    "com.m3.collections.M3IndexMaskWindow"
+  ],
+  "public_names": "unchanged; no new public collection or native method",
+  "implementation": "Existing comparator adapter with lazy owner lookup; stable byte-mask scan using bounded relative ordinals and JNI row spans",
+  "canonical_ownership": "Synexia recipe and reusable templates; M3JDK21 product/runtime and receiving proof",
+  "license": "Apache-2.0 first-party owners; no donor code relicensed",
+  "status": "DRAFT_PENDING_HOSTED_HEAD_AND_OWNING_MAVEN_GATES"
+}

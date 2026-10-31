@@ -1,0 +1,5 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+# The historical five-row handoff remains unmodified; this one successor binds two independently authored atoms in their current original M3JDK21 owner.
+# path	legacy_sha256	timed_sha256	current_sha256	current_git_blob_sha1	canonical_recipe	canonical_pr	license	status
+m3/file/src/main/java/com/m3/file/M3ResourceLocks.java	18d05ae54945d4129c46d62e26551cbc4fd200b31c185e020b9ee6240fdc9599	7d0e50075f26400bfce311919457996468321a987d86cf0145737da9fde024c5	eb0bf36625effaffa147be1f650590dfa08627a5f6f52d105b8fbb201d6b5718	f493038c3829def666664da3c2297fa7a0e9d877	com.synexia.m3.M3Jdk21ResourceLocksTimedCtorSuccessor20261023	hsoliwal/com.synexia#13236	Apache-2.0	PENDING_OPENREWRITE_AND_PRODUCT_RUNTIME

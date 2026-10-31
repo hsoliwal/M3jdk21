@@ -1,0 +1,84 @@
+{
+  "schema": "m3.integrated.collections.evidence-handoff.v1",
+  "canonical_commit": "f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d",
+  "canonical_crate_url": "https://github.com/hsoliwal/com.synexia/blob/f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021",
+  "local_measurement_parts": [
+    {
+      "name": "measurement-evidence.part-001.jsonl",
+      "bytes": 5614883,
+      "records": 21,
+      "sha256": "14f2b2260f5b7b07577387f2f3bdbffc3e5a7663bc30712536b11123ad2a7496",
+      "path": "evidence/bundles/measurement-evidence.part-001.jsonl"
+    },
+    {
+      "name": "measurement-evidence.part-002.jsonl",
+      "bytes": 6135617,
+      "records": 277,
+      "sha256": "34a3e643b8595f453227d1f7339d0a441a44fc130048c331dae7b968e3084239",
+      "path": "evidence/bundles/measurement-evidence.part-002.jsonl"
+    },
+    {
+      "name": "measurement-evidence.part-003.jsonl",
+      "bytes": 6288247,
+      "records": 201,
+      "sha256": "cfd350e3f9f31193ca71d654f5c641bf13de0713bfea1bb36622449d7210a273",
+      "path": "evidence/bundles/measurement-evidence.part-003.jsonl"
+    },
+    {
+      "name": "measurement-evidence.part-004.jsonl",
+      "bytes": 5624854,
+      "records": 271,
+      "sha256": "d6fce994d8bd536106567c8fad694537f5afd4c5f29d7d7fc323ece5eca1551c",
+      "path": "evidence/bundles/measurement-evidence.part-004.jsonl"
+    },
+    {
+      "name": "measurement-evidence.part-005.jsonl",
+      "bytes": 4043804,
+      "records": 16,
+      "sha256": "e3198fa77f5f5b2cd0cb59977a071cd8e8ca311e36d7a26f5faddfad10906e10",
+      "path": "evidence/bundles/measurement-evidence.part-005.jsonl"
+    }
+  ],
+  "original_measurement": {
+    "name": "measurement-evidence.jsonl",
+    "bytes": 27707405,
+    "records": 786,
+    "sha256": "4eb14cb5a8bb45f1d4f21a4e9b89ca7b7c7df7f77a9809fed715ba3c8b087900"
+  },
+  "parts_manifest_sha256": "4eecd3fb45d0efdf4a9a87c3ceb9b126a7114b02bfa1142a84bbb0cfb9b8a256",
+  "full_bundle_companions": [
+    {
+      "name": "source-history.jsonl",
+      "bytes": 2554550,
+      "sha256": "f644eb936d127ef21dcd6f667e8b446dd36eb53d39d29205c3b8819cc2343a67",
+      "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/source-history.jsonl"
+    },
+    {
+      "name": "MANIFEST.json",
+      "bytes": 8225560,
+      "sha256": "d25f3fd5ceef32769117943f14f5a21e1d3913757974b68ce07d6453134fffd5",
+      "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/MANIFEST.json"
+    },
+    {
+      "name": "RECEIPT.json",
+      "bytes": 1629,
+      "sha256": "a6ed8117ef85909ef173937e7fa50069976c64f9da2be94219ff9809833728bb",
+      "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/RECEIPT.json"
+    },
+    {
+      "name": "ROUNDTRIP_VERIFICATION.json",
+      "bytes": 194,
+      "sha256": "7d2dbec2406ae3bbc477e4116490658227485a31ce09ceaae8073a52e3468de5",
+      "canonical_url": "https://github.com/hsoliwal/com.synexia/blob/f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/evidence/bundles/ROUNDTRIP_VERIFICATION.json"
+    }
+  ],
+  "restoration": "Follow the pinned canonical REPRODUCTION.md. The canonical packet contains the restore/verifier adapters, all five measurement parts and the four unchanged companion files. The receiving packet mirrors the parts and visible qualification summaries; source history remains canonical.",
+  "reproduction_url": "https://github.com/hsoliwal/com.synexia/blob/f5c6fc673b0c7dfa684f0b0c1e3f0c15bb57b14d/synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021/REPRODUCTION.md",
+  "full_evidence_files": 1092,
+  "decoded_source_bytes": 27983471,
+  "publication_gate_archive": "provenance/PUBLICATION_GATE_ATTEMPTS.jsonl",
+  "publication_gate_archive_records": 1067,
+  "publication_gate_archive_scope": "All text command/diagnostic/receipt/report files from both disk-exhausted attempts and the successful exact-commit attempt. Duplicated partial Git/source working copies are excluded; exact commit/tree metadata and committed blob identities are provided separately.",
+  "provenance_receipt": "provenance/EXACT_COMMIT_RECEIPT.json",
+  "source_history_licensing": "Per-record source rights and notices remain intact; mixed Apache-2.0 and GPL-2.0-only WITH Classpath-exception-2.0."
+}

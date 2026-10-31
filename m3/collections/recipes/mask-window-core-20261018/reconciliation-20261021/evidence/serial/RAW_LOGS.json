@@ -1,0 +1,422 @@
+{
+  "000-author-check.log": {
+    "sha256": "f15ff8689b42df61c4d2de601db7d6c40b84fe88529e3ebd4de3efbb9023e112",
+    "content": "AUTHOR_FIXED_POINT 3\n"
+  },
+  "001-recipe-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "002-recipe-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "003-recipe-apply.log": {
+    "sha256": "f62171550f0b1bb21198fcaf162a1c379dadd438000383c2058ce2497b35a5be",
+    "content": "M3_SEALED_REPLAY action=apply changes=3\n"
+  },
+  "004-recipe-check.log": {
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "content": "M3_SEALED_REPLAY action=check changes=0\n"
+  },
+  "005-recipe-apply.log": {
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "content": "M3_SEALED_REPLAY action=apply changes=0\n"
+  },
+  "006-recipe-apply.log": {
+    "sha256": "980550fb678812b16f257c50d9d0ac81b5c9b665273aa239bbe98579a1419404",
+    "content": "M3_SEALED_REPLAY action=apply changes=2\n"
+  },
+  "007-recipe-check.log": {
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "content": "M3_SEALED_REPLAY action=check changes=0\n"
+  },
+  "008-recipe-apply.log": {
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "content": "M3_SEALED_REPLAY action=apply changes=0\n"
+  },
+  "009-recipe-apply.log": {
+    "sha256": "980550fb678812b16f257c50d9d0ac81b5c9b665273aa239bbe98579a1419404",
+    "content": "M3_SEALED_REPLAY action=apply changes=2\n"
+  },
+  "010-recipe-check.log": {
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "content": "M3_SEALED_REPLAY action=check changes=0\n"
+  },
+  "011-recipe-apply.log": {
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "content": "M3_SEALED_REPLAY action=apply changes=0\n"
+  },
+  "012-recipe-apply.log": {
+    "sha256": "77ff9bcd6acdbddc5e9ddeb3a10a7a3d9aba33d177be14008adb466d05d21423",
+    "content": "M3_SEALED_REPLAY action=apply changes=1\n"
+  },
+  "013-recipe-check.log": {
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "content": "M3_SEALED_REPLAY action=check changes=0\n"
+  },
+  "014-recipe-apply.log": {
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "content": "M3_SEALED_REPLAY action=apply changes=0\n"
+  },
+  "015-recipe-apply.log": {
+    "sha256": "980550fb678812b16f257c50d9d0ac81b5c9b665273aa239bbe98579a1419404",
+    "content": "M3_SEALED_REPLAY action=apply changes=2\n"
+  },
+  "016-recipe-check.log": {
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "content": "M3_SEALED_REPLAY action=check changes=0\n"
+  },
+  "017-recipe-apply.log": {
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "content": "M3_SEALED_REPLAY action=apply changes=0\n"
+  },
+  "018-recipe-apply.log": {
+    "sha256": "77ff9bcd6acdbddc5e9ddeb3a10a7a3d9aba33d177be14008adb466d05d21423",
+    "content": "M3_SEALED_REPLAY action=apply changes=1\n"
+  },
+  "019-recipe-check.log": {
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "content": "M3_SEALED_REPLAY action=check changes=0\n"
+  },
+  "020-recipe-apply.log": {
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "content": "M3_SEALED_REPLAY action=apply changes=0\n"
+  },
+  "021-recipe-apply.log": {
+    "sha256": "77ff9bcd6acdbddc5e9ddeb3a10a7a3d9aba33d177be14008adb466d05d21423",
+    "content": "M3_SEALED_REPLAY action=apply changes=1\n"
+  },
+  "022-recipe-check.log": {
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "content": "M3_SEALED_REPLAY action=check changes=0\n"
+  },
+  "023-recipe-apply.log": {
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "content": "M3_SEALED_REPLAY action=apply changes=0\n"
+  },
+  "024-recipe-apply.log": {
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "content": "M3_SEALED_REPLAY action=apply changes=0\n"
+  },
+  "025-recipe-check.log": {
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "content": "M3_SEALED_REPLAY action=check changes=0\n"
+  },
+  "026-recipe-apply.log": {
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "content": "M3_SEALED_REPLAY action=apply changes=0\n"
+  },
+  "027-recipe-apply.log": {
+    "sha256": "22cd93baca87af0f63d21e2f08f37271480981156dd5a9b872c980eaa57c514c",
+    "content": "Exception in thread \"main\" java.lang.IllegalStateException: required source missing: m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireNoFailure(M3GpuToolJoinManifest.java:163)\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireAdmissible(M3GpuToolJoinManifest.java:133)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:39)\n"
+  },
+  "028-recipe-apply.log": {
+    "sha256": "53cba079bdd0418f96599896b8bef5511def9811835d6b93a261c0da540eb886",
+    "content": "Exception in thread \"main\" java.lang.IllegalStateException: source drift: m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireNoFailure(M3GpuToolJoinManifest.java:163)\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireAdmissible(M3GpuToolJoinManifest.java:133)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:39)\n"
+  },
+  "029-recipe-apply.log": {
+    "sha256": "bdfd3b128ab6509bc470d957c286b66a3103a1aebf83606c9278ddf905eb8310",
+    "content": "Exception in thread \"main\" java.lang.IllegalStateException: source drift: m3/collections/src/test/java/com/m3/collections/M3MaskWindowKernelSelfTest.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireNoFailure(M3GpuToolJoinManifest.java:163)\n\tat com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireAdmissible(M3GpuToolJoinManifest.java:133)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:39)\n"
+  },
+  "030-recipe-apply.log": {
+    "sha256": "f175f9494d9b3207a7ae0f9253a6a3dd859de04366edb31a9245788f61e22c17",
+    "content": "Exception in thread \"main\" java.lang.IllegalStateException: template hash mismatch: m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest.load(M3GpuToolJoinManifest.java:92)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:25)\n"
+  },
+  "031-recipe-apply.log": {
+    "sha256": "18f7ec0ae10dbf800d920c390bf91571b8a0c34fa27a72cf8ca4c2023bbec0dd",
+    "content": "Exception in thread \"main\" java.lang.IllegalStateException: duplicate template target: m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java\n\tat com.synexia.rewrite.M3GpuToolJoinManifest.load(M3GpuToolJoinManifest.java:72)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:25)\n"
+  },
+  "032-recipe-apply.log": {
+    "sha256": "a9a04779f6098ed5f61a46cb8d83fc5f7f3ebabddb5dba734e6ad5a6db0987fb",
+    "content": "Exception in thread \"main\" java.lang.IllegalStateException: noncanonical template path\n\tat com.synexia.rewrite.M3GpuToolJoinManifest.relative(M3GpuToolJoinManifest.java:181)\n\tat com.synexia.rewrite.M3GpuToolJoinManifest.load(M3GpuToolJoinManifest.java:70)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:25)\n"
+  },
+  "033-recipe-apply.log": {
+    "sha256": "782cd36866790075921e74444ae40421fc13e5c25a824e88941a23bf91b9beac",
+    "content": "Exception in thread \"main\" java.io.IOException: symlink target ancestor\n\tat com.synexia.rewrite.SealReplay.safe(SealReplay.java:69)\n\tat com.synexia.rewrite.SealReplay.main(SealReplay.java:30)\n"
+  },
+  "034-java-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "035-native-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "036-probe-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "037-java-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "038-native-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "039-probe-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "040-api.log": {
+    "sha256": "b63a4fdd01ae39e2babf9baabb756320bb5945b6fc72343a2b68b134d76e362a",
+    "content": "Compiled from \"M3IndexMaskCompactor.java\"\npublic final class com.m3.collections.M3IndexMaskCompactor {\n  public static boolean nativeAvailable();\n    descriptor: ()Z\n\n  public static int[] select(int[], byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([I[BILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static int[] selectPositions(byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([BILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static int[] selectPositions(byte[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([BIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static int selectedCount(byte[], int);\n    descriptor: ([BI)I\n\n  public static int selectedCount(byte[], int, int);\n    descriptor: ([BII)I\n\n  public static long[] selectLong(long[], byte[], int);\n    descriptor: ([J[BI)[J\n\n  public static int[] selectWindow(int[], int, byte[], int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([II[BIIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static long[] selectLongWindow(long[], int, byte[], int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([JI[BIIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[J\n}\n"
+  },
+  "041-api.log": {
+    "sha256": "eb9b5480c80efd01f44ba9eff3b750939e293516df51771903219dc36126c063",
+    "content": "Compiled from \"M3IndexMaskCompactor.java\"\npublic final class com.m3.collections.M3IndexMaskCompactor$Backend extends java.lang.Enum<com.m3.collections.M3IndexMaskCompactor$Backend> {\n  public static final com.m3.collections.M3IndexMaskCompactor$Backend JAVA;\n    descriptor: Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n  public static final com.m3.collections.M3IndexMaskCompactor$Backend NATIVE_REQUIRED;\n    descriptor: Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n  public static com.m3.collections.M3IndexMaskCompactor$Backend[] values();\n    descriptor: ()[Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n\n  public static com.m3.collections.M3IndexMaskCompactor$Backend valueOf(java.lang.String);\n    descriptor: (Ljava/lang/String;)Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n}\n"
+  },
+  "042-symbols.log": {
+    "sha256": "0ade00841fa3cfc7cbd98ff9adcc8ce538defa2331b6b1eca46dc5e47c89456d",
+    "content": "0000000000005b10 T Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative\n0000000000006190 T Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative\n00000000000056e0 T Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative\n00000000000073f0 T Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative\n00000000000052f0 T Java_com_m3_collections_M3IndexMaskCompactor_selectNative\n00000000000061a0 T Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative\n0000000000005b20 T Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative\n00000000000056f0 T Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative\n0000000000006b80 T Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative\n"
+  },
+  "043-probe-test.log": {
+    "sha256": "16f65f00cea96787a241677f22abad50eacac224b5a4a93c1140a291e0d01ace",
+    "content": "WORK width=0 pattern=0 row_reads=4 row_elements=1024 state_reads=8 writes=0\nWORK width=0 pattern=1 row_reads=4 row_elements=1024 state_reads=8 writes=1\nWORK width=0 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=0 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nWORK width=1 pattern=0 row_reads=4 row_elements=1024 state_reads=8 writes=0\nWORK width=1 pattern=1 row_reads=4 row_elements=1024 state_reads=8 writes=1\nWORK width=1 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=1 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nNATIVE_PROBE_PASS assertions=7828\n"
+  },
+  "044-java-test.log": {
+    "sha256": "cf7bf2611b8965c4d30a6eabecfaa1947d4034fbb3cf1c2770d74d78c36f04c6",
+    "content": "M3_MASK_WINDOW_PASS checks=18744 trace=1c6611ecf874e43ecc53e4d746badcb9bb3ad854da3b57a109c949987b61dd87\n"
+  },
+  "045-jni-runtime.log": {
+    "sha256": "7e68774530aaa7e738962f422dab2f8210735613b8b93e5f50b7c572afc04edc",
+    "content": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a\n"
+  },
+  "046-missing-runtime.log": {
+    "sha256": "e8ee77d6b6127aecc56d2b45b6519178f9c05e55b0526110efe8416264385001",
+    "content": "M3_MASK_WINDOW_PASS checks=25 trace=04ae8e18032cc5a498b63324c102fed7ba99f27c3b0b3baa15c01e16c2eee8fa\n"
+  },
+  "047-recipe-apply.log": {
+    "sha256": "77ff9bcd6acdbddc5e9ddeb3a10a7a3d9aba33d177be14008adb466d05d21423",
+    "content": "M3_SEALED_REPLAY action=apply changes=1\n"
+  },
+  "048-recipe-check.log": {
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "content": "M3_SEALED_REPLAY action=check changes=0\n"
+  },
+  "049-java-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "050-native-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "051-probe-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "052-java-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "053-native-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "054-probe-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "055-api.log": {
+    "sha256": "b63a4fdd01ae39e2babf9baabb756320bb5945b6fc72343a2b68b134d76e362a",
+    "content": "Compiled from \"M3IndexMaskCompactor.java\"\npublic final class com.m3.collections.M3IndexMaskCompactor {\n  public static boolean nativeAvailable();\n    descriptor: ()Z\n\n  public static int[] select(int[], byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([I[BILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static int[] selectPositions(byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([BILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static int[] selectPositions(byte[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([BIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static int selectedCount(byte[], int);\n    descriptor: ([BI)I\n\n  public static int selectedCount(byte[], int, int);\n    descriptor: ([BII)I\n\n  public static long[] selectLong(long[], byte[], int);\n    descriptor: ([J[BI)[J\n\n  public static int[] selectWindow(int[], int, byte[], int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([II[BIIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static long[] selectLongWindow(long[], int, byte[], int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([JI[BIIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[J\n}\n"
+  },
+  "056-api.log": {
+    "sha256": "eb9b5480c80efd01f44ba9eff3b750939e293516df51771903219dc36126c063",
+    "content": "Compiled from \"M3IndexMaskCompactor.java\"\npublic final class com.m3.collections.M3IndexMaskCompactor$Backend extends java.lang.Enum<com.m3.collections.M3IndexMaskCompactor$Backend> {\n  public static final com.m3.collections.M3IndexMaskCompactor$Backend JAVA;\n    descriptor: Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n  public static final com.m3.collections.M3IndexMaskCompactor$Backend NATIVE_REQUIRED;\n    descriptor: Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n  public static com.m3.collections.M3IndexMaskCompactor$Backend[] values();\n    descriptor: ()[Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n\n  public static com.m3.collections.M3IndexMaskCompactor$Backend valueOf(java.lang.String);\n    descriptor: (Ljava/lang/String;)Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n}\n"
+  },
+  "057-symbols.log": {
+    "sha256": "0ade00841fa3cfc7cbd98ff9adcc8ce538defa2331b6b1eca46dc5e47c89456d",
+    "content": "0000000000005b10 T Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative\n0000000000006190 T Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative\n00000000000056e0 T Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative\n00000000000073f0 T Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative\n00000000000052f0 T Java_com_m3_collections_M3IndexMaskCompactor_selectNative\n00000000000061a0 T Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative\n0000000000005b20 T Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative\n00000000000056f0 T Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative\n0000000000006b80 T Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative\n"
+  },
+  "058-probe-test.log": {
+    "sha256": "16f65f00cea96787a241677f22abad50eacac224b5a4a93c1140a291e0d01ace",
+    "content": "WORK width=0 pattern=0 row_reads=4 row_elements=1024 state_reads=8 writes=0\nWORK width=0 pattern=1 row_reads=4 row_elements=1024 state_reads=8 writes=1\nWORK width=0 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=0 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nWORK width=1 pattern=0 row_reads=4 row_elements=1024 state_reads=8 writes=0\nWORK width=1 pattern=1 row_reads=4 row_elements=1024 state_reads=8 writes=1\nWORK width=1 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=1 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nNATIVE_PROBE_PASS assertions=7828\n"
+  },
+  "059-java-test.log": {
+    "sha256": "cf7bf2611b8965c4d30a6eabecfaa1947d4034fbb3cf1c2770d74d78c36f04c6",
+    "content": "M3_MASK_WINDOW_PASS checks=18744 trace=1c6611ecf874e43ecc53e4d746badcb9bb3ad854da3b57a109c949987b61dd87\n"
+  },
+  "060-jni-runtime.log": {
+    "sha256": "7e68774530aaa7e738962f422dab2f8210735613b8b93e5f50b7c572afc04edc",
+    "content": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a\n"
+  },
+  "061-missing-runtime.log": {
+    "sha256": "e8ee77d6b6127aecc56d2b45b6519178f9c05e55b0526110efe8416264385001",
+    "content": "M3_MASK_WINDOW_PASS checks=25 trace=04ae8e18032cc5a498b63324c102fed7ba99f27c3b0b3baa15c01e16c2eee8fa\n"
+  },
+  "062-recipe-apply.log": {
+    "sha256": "77ff9bcd6acdbddc5e9ddeb3a10a7a3d9aba33d177be14008adb466d05d21423",
+    "content": "M3_SEALED_REPLAY action=apply changes=1\n"
+  },
+  "063-recipe-check.log": {
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "content": "M3_SEALED_REPLAY action=check changes=0\n"
+  },
+  "064-java-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "065-native-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "066-probe-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "067-java-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "068-native-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "069-probe-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "070-api.log": {
+    "sha256": "b63a4fdd01ae39e2babf9baabb756320bb5945b6fc72343a2b68b134d76e362a",
+    "content": "Compiled from \"M3IndexMaskCompactor.java\"\npublic final class com.m3.collections.M3IndexMaskCompactor {\n  public static boolean nativeAvailable();\n    descriptor: ()Z\n\n  public static int[] select(int[], byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([I[BILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static int[] selectPositions(byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([BILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static int[] selectPositions(byte[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([BIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static int selectedCount(byte[], int);\n    descriptor: ([BI)I\n\n  public static int selectedCount(byte[], int, int);\n    descriptor: ([BII)I\n\n  public static long[] selectLong(long[], byte[], int);\n    descriptor: ([J[BI)[J\n\n  public static int[] selectWindow(int[], int, byte[], int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([II[BIIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static long[] selectLongWindow(long[], int, byte[], int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([JI[BIIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[J\n}\n"
+  },
+  "071-api.log": {
+    "sha256": "eb9b5480c80efd01f44ba9eff3b750939e293516df51771903219dc36126c063",
+    "content": "Compiled from \"M3IndexMaskCompactor.java\"\npublic final class com.m3.collections.M3IndexMaskCompactor$Backend extends java.lang.Enum<com.m3.collections.M3IndexMaskCompactor$Backend> {\n  public static final com.m3.collections.M3IndexMaskCompactor$Backend JAVA;\n    descriptor: Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n  public static final com.m3.collections.M3IndexMaskCompactor$Backend NATIVE_REQUIRED;\n    descriptor: Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n  public static com.m3.collections.M3IndexMaskCompactor$Backend[] values();\n    descriptor: ()[Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n\n  public static com.m3.collections.M3IndexMaskCompactor$Backend valueOf(java.lang.String);\n    descriptor: (Ljava/lang/String;)Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n}\n"
+  },
+  "072-symbols.log": {
+    "sha256": "028ff7a7fbe80e31ccc7319ed609910f15fb88d918e3c16b6c0dedfaccbbb649",
+    "content": "0000000000005a40 T Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative\n00000000000060c0 T Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative\n0000000000005610 T Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative\n0000000000006b50 T Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative\n0000000000005220 T Java_com_m3_collections_M3IndexMaskCompactor_selectNative\n00000000000060d0 T Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative\n0000000000005a50 T Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative\n0000000000005620 T Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative\n0000000000006ab0 T Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative\n"
+  },
+  "073-probe-test.log": {
+    "sha256": "27988b573cee7eb8fe4f47d123b7518c616947c79902e2a48f9d7f4d57e52d18",
+    "content": "WORK width=0 pattern=0 row_reads=0 row_elements=0 state_reads=8 writes=0\nWORK width=0 pattern=1 row_reads=1 row_elements=256 state_reads=8 writes=1\nWORK width=0 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=0 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nWORK width=1 pattern=0 row_reads=0 row_elements=0 state_reads=8 writes=0\nWORK width=1 pattern=1 row_reads=1 row_elements=256 state_reads=8 writes=1\nWORK width=1 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=1 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nNATIVE_PROBE_PASS assertions=7198\n"
+  },
+  "074-java-test.log": {
+    "sha256": "cf7bf2611b8965c4d30a6eabecfaa1947d4034fbb3cf1c2770d74d78c36f04c6",
+    "content": "M3_MASK_WINDOW_PASS checks=18744 trace=1c6611ecf874e43ecc53e4d746badcb9bb3ad854da3b57a109c949987b61dd87\n"
+  },
+  "075-jni-runtime.log": {
+    "sha256": "7e68774530aaa7e738962f422dab2f8210735613b8b93e5f50b7c572afc04edc",
+    "content": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a\n"
+  },
+  "076-missing-runtime.log": {
+    "sha256": "e8ee77d6b6127aecc56d2b45b6519178f9c05e55b0526110efe8416264385001",
+    "content": "M3_MASK_WINDOW_PASS checks=25 trace=04ae8e18032cc5a498b63324c102fed7ba99f27c3b0b3baa15c01e16c2eee8fa\n"
+  },
+  "077-recipe-apply.log": {
+    "sha256": "77ff9bcd6acdbddc5e9ddeb3a10a7a3d9aba33d177be14008adb466d05d21423",
+    "content": "M3_SEALED_REPLAY action=apply changes=1\n"
+  },
+  "078-recipe-check.log": {
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "content": "M3_SEALED_REPLAY action=check changes=0\n"
+  },
+  "079-java-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "080-native-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "081-probe-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "082-java-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "083-native-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "084-probe-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "085-api.log": {
+    "sha256": "b63a4fdd01ae39e2babf9baabb756320bb5945b6fc72343a2b68b134d76e362a",
+    "content": "Compiled from \"M3IndexMaskCompactor.java\"\npublic final class com.m3.collections.M3IndexMaskCompactor {\n  public static boolean nativeAvailable();\n    descriptor: ()Z\n\n  public static int[] select(int[], byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([I[BILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static int[] selectPositions(byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([BILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static int[] selectPositions(byte[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([BIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static int selectedCount(byte[], int);\n    descriptor: ([BI)I\n\n  public static int selectedCount(byte[], int, int);\n    descriptor: ([BII)I\n\n  public static long[] selectLong(long[], byte[], int);\n    descriptor: ([J[BI)[J\n\n  public static int[] selectWindow(int[], int, byte[], int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([II[BIIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I\n\n  public static long[] selectLongWindow(long[], int, byte[], int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);\n    descriptor: ([JI[BIIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[J\n}\n"
+  },
+  "086-api.log": {
+    "sha256": "eb9b5480c80efd01f44ba9eff3b750939e293516df51771903219dc36126c063",
+    "content": "Compiled from \"M3IndexMaskCompactor.java\"\npublic final class com.m3.collections.M3IndexMaskCompactor$Backend extends java.lang.Enum<com.m3.collections.M3IndexMaskCompactor$Backend> {\n  public static final com.m3.collections.M3IndexMaskCompactor$Backend JAVA;\n    descriptor: Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n  public static final com.m3.collections.M3IndexMaskCompactor$Backend NATIVE_REQUIRED;\n    descriptor: Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n  public static com.m3.collections.M3IndexMaskCompactor$Backend[] values();\n    descriptor: ()[Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n\n  public static com.m3.collections.M3IndexMaskCompactor$Backend valueOf(java.lang.String);\n    descriptor: (Ljava/lang/String;)Lcom/m3/collections/M3IndexMaskCompactor$Backend;\n}\n"
+  },
+  "087-symbols.log": {
+    "sha256": "028ff7a7fbe80e31ccc7319ed609910f15fb88d918e3c16b6c0dedfaccbbb649",
+    "content": "0000000000005a40 T Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative\n00000000000060c0 T Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative\n0000000000005610 T Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative\n0000000000006b50 T Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative\n0000000000005220 T Java_com_m3_collections_M3IndexMaskCompactor_selectNative\n00000000000060d0 T Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative\n0000000000005a50 T Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative\n0000000000005620 T Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative\n0000000000006ab0 T Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative\n"
+  },
+  "088-probe-test.log": {
+    "sha256": "27988b573cee7eb8fe4f47d123b7518c616947c79902e2a48f9d7f4d57e52d18",
+    "content": "WORK width=0 pattern=0 row_reads=0 row_elements=0 state_reads=8 writes=0\nWORK width=0 pattern=1 row_reads=1 row_elements=256 state_reads=8 writes=1\nWORK width=0 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=0 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nWORK width=1 pattern=0 row_reads=0 row_elements=0 state_reads=8 writes=0\nWORK width=1 pattern=1 row_reads=1 row_elements=256 state_reads=8 writes=1\nWORK width=1 pattern=2 row_reads=4 row_elements=1024 state_reads=8 writes=4\nWORK width=1 pattern=3 row_reads=4 row_elements=1024 state_reads=0 writes=4\nNATIVE_PROBE_PASS assertions=7198\n"
+  },
+  "089-java-test.log": {
+    "sha256": "cf7bf2611b8965c4d30a6eabecfaa1947d4034fbb3cf1c2770d74d78c36f04c6",
+    "content": "M3_MASK_WINDOW_PASS checks=18744 trace=1c6611ecf874e43ecc53e4d746badcb9bb3ad854da3b57a109c949987b61dd87\n"
+  },
+  "090-jni-runtime.log": {
+    "sha256": "7e68774530aaa7e738962f422dab2f8210735613b8b93e5f50b7c572afc04edc",
+    "content": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a\n"
+  },
+  "091-missing-runtime.log": {
+    "sha256": "e8ee77d6b6127aecc56d2b45b6519178f9c05e55b0526110efe8416264385001",
+    "content": "M3_MASK_WINDOW_PASS checks=25 trace=04ae8e18032cc5a498b63324c102fed7ba99f27c3b0b3baa15c01e16c2eee8fa\n"
+  },
+  "092-binary-matrix.log": {
+    "sha256": "7e68774530aaa7e738962f422dab2f8210735613b8b93e5f50b7c572afc04edc",
+    "content": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a\n"
+  },
+  "093-binary-matrix.log": {
+    "sha256": "7e68774530aaa7e738962f422dab2f8210735613b8b93e5f50b7c572afc04edc",
+    "content": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a\n"
+  },
+  "094-legacy-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "095-legacy-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "096-legacy-runtime.log": {
+    "sha256": "7e68774530aaa7e738962f422dab2f8210735613b8b93e5f50b7c572afc04edc",
+    "content": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a\n"
+  },
+  "097-mutant-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "098-mutant-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "099-mutant-runtime.log": {
+    "sha256": "00d43afe5ca35a0faef6fd44d72c02c03a0a97dca224df531c536c5fc1c71b3a",
+    "content": "Exception in thread \"main\" java.util.ConcurrentModificationException: aligned selection states changed\n\tat com.m3.collections.M3IndexMaskCompactor.selectWindowNative(Native Method)\n\tat com.m3.collections.M3IndexMaskCompactor.selectWindow(M3IndexMaskCompactor.java:241)\n\tat com.m3.collections.M3MaskWindowKernelSelfTest.fixture(M3MaskWindowKernelSelfTest.java:100)\n\tat com.m3.collections.M3MaskWindowKernelSelfTest.main(M3MaskWindowKernelSelfTest.java:217)\n"
+  },
+  "100-mutant-lint.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "101-mutant-compile.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "content": ""
+  },
+  "102-mutant-runtime.log": {
+    "sha256": "b21b7f015b949332b14add5c2c62c6dcabc864dd0761345cf5d6de745ba18314",
+    "content": "Exception in thread \"main\" java.lang.AssertionError: long independent offsets\n\tat com.m3.collections.M3MaskWindowKernelSelfTest.check(M3MaskWindowKernelSelfTest.java:21)\n\tat com.m3.collections.M3MaskWindowKernelSelfTest.longs(M3MaskWindowKernelSelfTest.java:32)\n\tat com.m3.collections.M3MaskWindowKernelSelfTest.fixture(M3MaskWindowKernelSelfTest.java:102)\n\tat com.m3.collections.M3MaskWindowKernelSelfTest.main(M3MaskWindowKernelSelfTest.java:217)\n"
+  },
+  "103-recipe-check.log": {
+    "sha256": "13838a89c9f97ae400b1d46379a3e8f5b2a919122748c48cfd9935462e96ce33",
+    "content": "M3_SEALED_REPLAY action=check changes=0\n"
+  },
+  "104-recipe-apply.log": {
+    "sha256": "f79d4afdb7d344727a0f8cfc6dba365b49fef2a0e7158ee80e2fedbbfd6e1384",
+    "content": "M3_SEALED_REPLAY action=apply changes=0\n"
+  }
+}

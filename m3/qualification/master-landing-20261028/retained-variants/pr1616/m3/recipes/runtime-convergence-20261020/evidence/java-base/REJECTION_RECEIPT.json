@@ -1,0 +1,27 @@
+{
+  "disposition": "REJECT_COST_GATE",
+  "runtime_target": "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java",
+  "receiving_commit": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "before_sha256": "6d26934bab87d6bc68a0c38f0c8ceeec72dc5817e5fca12cfafbc276bafb133d",
+  "rejected_candidate_sha256": "fbe88bc0e60bf5dcc9da145928d7b3a94b9195f3d5e9f6dbd0989de40ec326ef",
+  "rejected_candidate": "evidence/rejected-threshold-exit/M3CollectionMaskCompactor.java.txt",
+  "runtime_header_unchanged": true,
+  "runtime_original_still_exact": true,
+  "functional_oracle_cases": 199294,
+  "existing_differential_checks": 13493171,
+  "existing_arraylist_vector_contract_checks": 3019650,
+  "execution": "Direct Java mains on stock Temurin21.0.12.1 with actual compactor+receiving ArrayList/Vector source compiled as java.base patch; strict Xlint/Werror; class-load logs prove patched owners loaded. Not a source-built full M3JDK image or jtreg harness run.",
+  "functional_passes": [
+    "baseline",
+    "rejected_candidate"
+  ],
+  "test_only_candidate": {
+    "payload": "payloads/M3MaskThresholdContracts.java.txt",
+    "sha256": "5186dff4ded7eb6167e903be67c0ef724c978a4548b3a7a6a5d9fa3b50730331",
+    "target": "test/jdk/java/util/ArrayList/M3MaskThresholdContracts.java",
+    "before": "ABSENT"
+  },
+  "public_api": "unchanged",
+  "jni": "none added; no native object-reference transfer",
+  "pending": "canonical recipe application/refusal/fixed point, target jtreg, full-source runtime image and hosted checks remain unexecuted; no phase promotion"
+}

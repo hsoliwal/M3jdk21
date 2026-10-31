@@ -1,0 +1,60 @@
+# DeltaBench 2026-10-19 on S:, JDK 21.0.9 with the patched java.desktop (stock = property off, the hooks fall through), headless, -XX:+UseSerialGC -Xmx2500m, 10^6 rows; each scenario: edit + event + getPreferredSize (runs the lazy JList layout) + validate + one 800x600 frame, median of 7. table, table-sorted, list: second run (15:3x) with getPreferredSize; tree and heap: first run (the tree caches update eagerly; heap rows need no frame). Machine shared (commit headroom 0.8-47 GB at the starts)
+case	impl	metric	value	unit	note
+list	stock	contents_changed_1	2787.949	ms p50	one row edited, contentsChanged(i, i); min 2403.568 max 3303.932
+list	stock	contents_changed_100	2979.264	ms p50	100 rows edited, contentsChanged(i, i + 99); min 2342.220 max 3111.455
+list	stock	contents_changed_all	3020.607	ms p50	one row edited, contentsChanged(0, n - 1); min 2601.484 max 3556.597
+list	stock	no_event	0.289	ms p50	validate + frame only; min 0.285 max 0.422
+list	m3	contents_changed_1	3.178	ms p50	one row edited, contentsChanged(i, i); min 2.388 max 95.218
+list	m3	contents_changed_100	4.052	ms p50	100 rows edited, contentsChanged(i, i + 99); min 2.534 max 9.495
+list	m3	contents_changed_all	2865.469	ms p50	one row edited, contentsChanged(0, n - 1); min 2604.854 max 3407.340
+list	m3	no_event	0.007	ms p50	validate + frame only; min 0.006 max 1.450
+table	stock	data_changed_1_cell	0.014	ms p50	one cell edited, fireTableDataChanged (selection cleared, sorter rebuilt); min 0.011 max 13.893
+table	stock	cell_updated_1_cell	0.009	ms p50	one cell edited, fireTableCellUpdated; min 0.008 max 0.199
+table	stock	data_changed_100_rows	0.073	ms p50	100 contiguous rows edited, fireTableDataChanged; min 0.057 max 0.274
+table	stock	rows_updated_100_rows	0.023	ms p50	100 contiguous rows edited, fireTableRowsUpdated; min 0.022 max 0.222
+table	stock	structure_changed	0.078	ms p50	no change, fireTableStructureChanged (columns recreated); min 0.057 max 0.209
+table	stock	no_event	0.011	ms p50	validate + frame only; min 0.010 max 0.081
+table	m3	data_changed_1_cell	0.013	ms p50	one cell edited, fireTableDataChanged (selection cleared, sorter rebuilt); min 0.011 max 8.056
+table	m3	cell_updated_1_cell	0.009	ms p50	one cell edited, fireTableCellUpdated; min 0.008 max 0.195
+table	m3	data_changed_100_rows	0.066	ms p50	100 contiguous rows edited, fireTableDataChanged; min 0.047 max 0.246
+table	m3	rows_updated_100_rows	0.026	ms p50	100 contiguous rows edited, fireTableRowsUpdated; min 0.023 max 0.210
+table	m3	structure_changed	0.054	ms p50	no change, fireTableStructureChanged (columns recreated); min 0.041 max 0.141
+table	m3	no_event	0.005	ms p50	validate + frame only; min 0.004 max 0.046
+table-sorted	stock	data_changed_1_cell	69.558	ms p50	one cell edited, fireTableDataChanged (selection cleared, sorter rebuilt); min 66.560 max 155.414
+table-sorted	stock	cell_updated_1_cell	0.021	ms p50	one cell edited, fireTableCellUpdated; min 0.020 max 0.386
+table-sorted	stock	data_changed_100_rows	75.043	ms p50	100 contiguous rows edited, fireTableDataChanged; min 68.661 max 90.526
+table-sorted	stock	rows_updated_100_rows	0.048	ms p50	100 contiguous rows edited, fireTableRowsUpdated; min 0.044 max 0.324
+table-sorted	stock	structure_changed	0.109	ms p50	no change, fireTableStructureChanged (columns recreated); min 0.087 max 0.261
+table-sorted	stock	no_event	0.011	ms p50	validate + frame only; min 0.010 max 0.070
+table-sorted	m3	data_changed_1_cell	82.372	ms p50	one cell edited, fireTableDataChanged (selection cleared, sorter rebuilt); min 77.607 max 231.967
+table-sorted	m3	cell_updated_1_cell	0.014	ms p50	one cell edited, fireTableCellUpdated; min 0.012 max 0.248
+table-sorted	m3	data_changed_100_rows	88.819	ms p50	100 contiguous rows edited, fireTableDataChanged; min 76.994 max 96.511
+table-sorted	m3	rows_updated_100_rows	0.051	ms p50	100 contiguous rows edited, fireTableRowsUpdated; min 0.046 max 0.367
+table-sorted	m3	structure_changed	0.107	ms p50	no change, fireTableStructureChanged (columns recreated); min 0.085 max 0.297
+table-sorted	m3	no_event	0.011	ms p50	validate + frame only; min 0.010 max 0.096
+tree	stock	node_changed_1	6.199	ms p50	one node edited, nodeChanged; min 5.862 max 18.410
+tree	stock	nodes_changed_100	21.803	ms p50	100 nodes edited, nodesChanged; min 20.647 max 23.348
+tree	stock	node_structure_changed_group	105.038	ms p50	100 nodes edited, nodeStructureChanged(group) + re-expand the group; min 101.215 max 142.610
+tree	stock	reload_root_reexpand	1118.472	ms p50	one node edited, reload() + re-expand all 1,000 groups; min 972.367 max 1458.695
+tree	stock	no_event	0.005	ms p50	validate + frame only; min 0.004 max 0.094
+tree	m3	node_changed_1	0.084	ms p50	one node edited, nodeChanged; min 0.054 max 85.994
+tree	m3	nodes_changed_100	0.116	ms p50	100 nodes edited, nodesChanged; min 0.097 max 0.418
+tree	m3	node_structure_changed_group	1.275	ms p50	100 nodes edited, nodeStructureChanged(group) + re-expand the group; min 0.383 max 15.416
+tree	m3	reload_root_reexpand	420.502	ms p50	one node edited, reload() + re-expand all 1,000 groups; min 214.855 max 1340.705
+tree	m3	no_event	0.004	ms p50	validate + frame only; min 0.004 max 0.083
+heap	stock	table_model	132.0	MB	DefaultTableModel 10^6 x 3
+heap	stock	table_view	0.8	MB	JTable, no sorter, uniform rows
+heap	stock	table_sorter	32.0	MB	TableRowSorter sorted: Row object + two int lanes per row
+heap	stock	table_row_heights	8.0	MB	1,000 variable row heights with a sorter: view and model SizeSequences
+heap	stock	tree_model	93.3	MB	1,001,001 DefaultMutableTreeNodes
+heap	stock	tree_view	129.1	MB	JTree expanded: layout cache + expansion table
+heap	stock	list_model	60.2	MB	10^6 strings
+heap	stock	list_view	4.5	MB	JList laid out: cellHeights (+ M3 width and offset lanes)
+heap	m3	table_model	132.0	MB	DefaultTableModel 10^6 x 3
+heap	m3	table_view	0.8	MB	JTable, no sorter, uniform rows
+heap	m3	table_sorter	32.0	MB	TableRowSorter sorted: Row object + two int lanes per row
+heap	m3	table_row_heights	8.0	MB	1,000 variable row heights with a sorter: view and model SizeSequences
+heap	m3	tree_model	93.3	MB	1,001,001 DefaultMutableTreeNodes
+heap	m3	tree_view	20.7	MB	JTree expanded: layout cache + expansion table
+heap	m3	list_model	60.2	MB	10^6 strings
+heap	m3	list_view	12.5	MB	JList laid out: cellHeights (+ M3 width and offset lanes)

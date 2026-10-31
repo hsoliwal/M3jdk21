@@ -1,0 +1,14 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.SynexiaFullDeliveryA3
+displayName: Stage current Synexia Apache delivery for A3
+description: >
+  Install the target-side full Synexia delivery planner/stager and its contract document from
+  exact reviewed preimages. Candidate staging remains below m3/build and grants no product
+  promotion authority.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: synexia-full-delivery-a3
+      lst: true
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: synexia-full-delivery-a3-doc

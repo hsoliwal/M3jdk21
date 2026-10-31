@@ -1,0 +1,139 @@
+{
+  "scope": "Unchanged owning m3/collections/pom.xml clean verify with all received Java/test sources.",
+  "source_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "received_owner_hashes": {
+    "M3FilteredViews.java": "4213ae2302fca4a9e5044185104ae43a8829e4f2d3dbbd6422cff1b53fe713e9",
+    "M3IndexPathMasks.java": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577"
+  },
+  "status": "PASS",
+  "maven_exit_code": 0,
+  "seconds": 171.191,
+  "production_source_units": 134,
+  "test_source_units": 161,
+  "junit": {
+    "tests": 234,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": 79,
+  "source_inputs_unchanged": true,
+  "source_pom_sha256": "d216e3da4ac02615ef46f8b48803174e24c11939ad5b826be9ca9d7df6bbebf6",
+  "native_libraries": {
+    "libm3_collections_mask.so": "030d566cf400655cdf3d1be7f9f6c1da7193e58d0e3508fab35659a357b7b1c0",
+    "libm3_collections_pathmask.so": "a76f6d66d14f331aabd1ea0b5769f7938d7db4e03a58dd8185cebc3401cdcbc9"
+  },
+  "source_built_junit_classpath": [
+    {
+      "coordinate": "org.apiguardian:apiguardian-api:1.1.2-m3-source-1",
+      "filename": "apiguardian-api-1.1.2-m3-source-1.jar",
+      "sha256": "f4cb4830147a72e2e905102239e0a693f44e0e13da91e9a57449fcd06036a37b"
+    },
+    {
+      "coordinate": "org.opentest4j:opentest4j:1.3.0-m3-source-1",
+      "filename": "opentest4j-1.3.0-m3-source-1.jar",
+      "sha256": "dda73e267f6d4980fcea642052987139f9210c45905a2a9d79be993b23dc8d1e"
+    },
+    {
+      "coordinate": "org.junit.platform:junit-platform-commons:1.10.2-m3-source-1",
+      "filename": "junit-platform-commons-1.10.2-m3-source-1.jar",
+      "sha256": "65713fe46a8ae31112c9890eaeb61d0e4e8bb47bea9ecd78a46a2c440ef98134"
+    },
+    {
+      "coordinate": "org.junit.platform:junit-platform-engine:1.10.2-m3-source-1",
+      "filename": "junit-platform-engine-1.10.2-m3-source-1.jar",
+      "sha256": "003a060d866f2b74689bb11c5e2b874a948f21c605066e965ddc213a2e136024"
+    },
+    {
+      "coordinate": "org.junit.jupiter:junit-jupiter-api:5.10.2-m3-source-1",
+      "filename": "junit-jupiter-api-5.10.2-m3-source-1.jar",
+      "sha256": "26634413361b9e8367ba13def27f17571f1dee25626418116466ece02e1575ff"
+    },
+    {
+      "coordinate": "org.junit.jupiter:junit-jupiter-engine:5.10.2-m3-source-1",
+      "filename": "junit-jupiter-engine-5.10.2-m3-source-1.jar",
+      "sha256": "9a04a862faf00d7fc78953b956419a49cef335a5215d8af88e39d3dbde9aba5d"
+    },
+    {
+      "coordinate": "org.junit.jupiter:junit-jupiter-params:5.10.2-m3-source-1",
+      "filename": "junit-jupiter-params-5.10.2-m3-source-1.jar",
+      "sha256": "9ebf5ad19ca00454dff4b916ba517d7f47b4558683339da969cbf133c087421d"
+    },
+    {
+      "coordinate": "org.junit.jupiter:junit-jupiter:5.10.2-m3-source-1",
+      "filename": "junit-jupiter-5.10.2-m3-source-1.jar",
+      "sha256": "a48bd0d20ae81e6baf3b5c5ae29467aa430258b3c962591ca3b7b899cd6398ba"
+    }
+  ],
+  "classpath_jar_inventory": [
+    {
+      "filename": "apiguardian-api-1.1.2-m3-source-1.jar",
+      "sha256": "f4cb4830147a72e2e905102239e0a693f44e0e13da91e9a57449fcd06036a37b"
+    },
+    {
+      "filename": "junit-jupiter-api-5.10.2-m3-source-1.jar",
+      "sha256": "26634413361b9e8367ba13def27f17571f1dee25626418116466ece02e1575ff"
+    },
+    {
+      "filename": "junit-jupiter-engine-5.10.2-m3-source-1.jar",
+      "sha256": "9a04a862faf00d7fc78953b956419a49cef335a5215d8af88e39d3dbde9aba5d"
+    },
+    {
+      "filename": "junit-jupiter-params-5.10.2-m3-source-1.jar",
+      "sha256": "9ebf5ad19ca00454dff4b916ba517d7f47b4558683339da969cbf133c087421d"
+    },
+    {
+      "filename": "junit-jupiter-5.10.2-m3-source-1.jar",
+      "sha256": "a48bd0d20ae81e6baf3b5c5ae29467aa430258b3c962591ca3b7b899cd6398ba"
+    },
+    {
+      "filename": "junit-platform-commons-1.10.2-m3-source-1.jar",
+      "sha256": "65713fe46a8ae31112c9890eaeb61d0e4e8bb47bea9ecd78a46a2c440ef98134"
+    },
+    {
+      "filename": "junit-platform-engine-1.10.2-m3-source-1.jar",
+      "sha256": "003a060d866f2b74689bb11c5e2b874a948f21c605066e965ddc213a2e136024"
+    },
+    {
+      "filename": "opentest4j-1.3.0-m3-source-1.jar",
+      "sha256": "dda73e267f6d4980fcea642052987139f9210c45905a2a9d79be993b23dc8d1e"
+    }
+  ],
+  "runtime_properties": {
+    "java.version": [
+      "21.0.12.1"
+    ],
+    "java.runtime.version": [
+      "21.0.12.1+1-LTS"
+    ],
+    "java.vm.name": [
+      "OpenJDK 64-Bit Server VM"
+    ],
+    "java.vm.version": [
+      "21.0.12.1+1-LTS"
+    ],
+    "java.vendor": [
+      "Eclipse Adoptium"
+    ],
+    "java.library.path": [
+      "/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib"
+    ]
+  },
+  "command": [
+    "/tmp/apache-maven-3.9.9/bin/mvn",
+    "-s",
+    "/tmp/m3-source-junit-settings.xml",
+    "-B",
+    "-ntp",
+    "-U",
+    "-Dmaven.repo.local=/tmp/m3-owning-collections-m2",
+    "-DfailIfNoTests=true",
+    "-DargLine=-Xmx768m -Xcheck:jni -Djava.library.path=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native-lib",
+    "-f",
+    "/workspace/scratch/6b6041146177/wrapper-audit/owning-collections-native/repository/m3/collections/pom.xml",
+    "clean",
+    "verify"
+  ],
+  "raw_surefire_xml_policy": "Local audit only; public summary excludes arbitrary system properties.",
+  "source_dependency_build": "10 unchanged source POM installs; 886 tracked files and 826 provenance entries verified."
+}

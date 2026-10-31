@@ -1,0 +1,3 @@
+capability	donor	revision	license	classification	fit	gap
+junit-public-regression	hsoliwal/M3jdk21 M3LazyTreeMapTest.java	b101de05ae69a578f273f4e455b796224a2ecf0a	Apache-2.0	ADAPT	existing module JUnit Jupiter test layout	assert frozen original empty lookup behaviors through normal test discovery
+junit-execution	provisioned junit-platform-console-standalone	1.11.4	EPL-2.0	DIRECT_IMPORT	actual Jupiter engine, readonly existing cache	bind candidate/test classpaths and report finite runtime

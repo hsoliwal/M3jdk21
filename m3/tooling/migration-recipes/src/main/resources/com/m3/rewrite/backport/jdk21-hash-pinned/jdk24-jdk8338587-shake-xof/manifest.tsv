@@ -1,0 +1,2 @@
+src/java.base/share/classes/sun/security/provider/SHA3.java	31f01666305badefae6763d7f14b1d04d22dea7f9d605e8b8cdf7ef573053534	4025bdd21526aca1bbfd0d0d18e04072564f34bef339f04d830df74dda453087	00-SHA3.java.after.txt
+test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java	ABSENT	df0f17d1602805a0683250d80c6d6201772c12224fcf360061c1665baf84b257	01-SHAKEXofCompatibility.java.after.txt

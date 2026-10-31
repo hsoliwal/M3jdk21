@@ -1,0 +1,139 @@
+[
+  {
+    "argv": [
+      "/workspace/scratch/a0f19f379302/jdk-21.0.12.1+1/bin/jar",
+      "--create",
+      "--file",
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/jdk.m3.parser.jar",
+      "--date",
+      "2026-01-01T00:00:00Z",
+      "-C",
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/modules/jdk.m3.parser",
+      "."
+    ],
+    "exit": 0,
+    "name": "jar"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/a0f19f379302/jdk-21.0.12.1+1/bin/jar",
+      "--describe-module",
+      "--file",
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/jdk.m3.parser.jar"
+    ],
+    "exit": 0,
+    "name": "jar-descriptor"
+  },
+  {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "/workspace/scratch/a0f19f379302/M3jdk21/m3/tooling/jmod-recipes/tools/jmod_pack.py",
+      "--jdk-home",
+      "/workspace/scratch/a0f19f379302/jdk-21.0.12.1+1",
+      "--image-tsv",
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/INPUT_JMOD_IMAGE.tsv",
+      "--manifest",
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/EMPTY_DESCRIPTOR_MANIFEST.tsv",
+      "--layer-root",
+      "/workspace/scratch/a0f19f379302/M3jdk21",
+      "--out",
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/pack",
+      "--legal-notices",
+      "/workspace/scratch/a0f19f379302/M3jdk21/m3/tooling/module-packs/parser/legal",
+      "--add-modules",
+      "java.se,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps"
+    ],
+    "exit": 0,
+    "name": "jmod-pack"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/a0f19f379302/jdk-21.0.12.1+1/bin/jmod",
+      "describe",
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/pack/jmods/jdk.m3.parser.jmod"
+    ],
+    "exit": 0,
+    "name": "jmod-descriptor"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/a0f19f379302/jdk-21.0.12.1+1/bin/jmod",
+      "list",
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/pack/jmods/jdk.m3.parser.jmod"
+    ],
+    "exit": 0,
+    "name": "jmod-contents"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/pack/image/bin/java",
+      "--list-modules"
+    ],
+    "exit": 0,
+    "name": "image-modules"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/pack/image/bin/java",
+      "-ea",
+      "-Dm3.parser.test.work=/workspace/scratch/a0f19f379302/parser-target-proof-2/consumer-work/runtime-image-M3ParserFrameworkContract",
+      "--patch-module",
+      "jdk.compiler=/workspace/scratch/a0f19f379302/parser-target-proof-2/compiler-patch",
+      "--add-modules",
+      "jdk.m3.parser",
+      "-cp",
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/test-classes",
+      "jdk.m3.parser.test.M3ParserFrameworkContract"
+    ],
+    "exit": 0,
+    "name": "image-M3ParserFrameworkContract"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/pack/image/bin/java",
+      "-ea",
+      "-Dm3.parser.test.work=/workspace/scratch/a0f19f379302/parser-target-proof-2/consumer-work/runtime-image-M3JavacParserContract",
+      "--patch-module",
+      "jdk.compiler=/workspace/scratch/a0f19f379302/parser-target-proof-2/compiler-patch",
+      "--add-modules",
+      "jdk.m3.parser",
+      "-cp",
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/test-classes",
+      "jdk.m3.parser.test.M3JavacParserContract"
+    ],
+    "exit": 0,
+    "name": "image-M3JavacParserContract"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/pack/image/bin/java",
+      "-ea",
+      "-Dm3.parser.test.work=/workspace/scratch/a0f19f379302/parser-target-proof-2/consumer-work/runtime-image-smoke-1",
+      "--patch-module",
+      "jdk.compiler=/workspace/scratch/a0f19f379302/parser-target-proof-2/compiler-patch",
+      "--add-modules",
+      "jdk.m3.parser",
+      "-cp",
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/test-classes",
+      "jdk.m3.parser.test.M3ParserImageSmoke"
+    ],
+    "exit": 0,
+    "name": "image-smoke-1"
+  },
+  {
+    "argv": [
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/pack/image/bin/java",
+      "-ea",
+      "-Dm3.parser.test.work=/workspace/scratch/a0f19f379302/parser-target-proof-2/consumer-work/runtime-image-smoke-2",
+      "--patch-module",
+      "jdk.compiler=/workspace/scratch/a0f19f379302/parser-target-proof-2/compiler-patch",
+      "--add-modules",
+      "jdk.m3.parser",
+      "-cp",
+      "/workspace/scratch/a0f19f379302/parser-target-proof-2/test-classes",
+      "jdk.m3.parser.test.M3ParserImageSmoke"
+    ],
+    "exit": 0,
+    "name": "image-smoke-2"
+  }
+]

@@ -1,0 +1,19 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.FindSourceFiles"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 59
+- name: "Shannon Pamperl"
+  email: "shanman190@gmail.com"
+  lineCount: 12
+- name: "Nick McKinney"
+  email: "mckinneynicholas@gmail.com"
+  lineCount: 5
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 1
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 1

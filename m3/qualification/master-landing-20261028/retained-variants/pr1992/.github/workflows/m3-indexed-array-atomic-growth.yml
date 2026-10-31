@@ -1,0 +1,133 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# Original M3JDK21 java.base source patch-tested under host JDK21.
+# This is not a built/installed full M3JDK21 runtime acceptance test.
+name: M3JDK21 indexed array atomic growth Java21
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java'
+      - 'test/jdk/jdk/internal/m3/M3IndexedArrayGrowth*.java'
+      - 'test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java'
+      - '.github/workflows/m3-indexed-array-atomic-growth.yml'
+      - 'm3/qualification/indexed-array-atomic-growth/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  actual-java-base-owner-under-checked-faults:
+    if: github.repository == 'hsoliwal/M3jdk21'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout source-only, no stored credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Use Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Confirm exact original owner and donor fixture SHA256
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          expected = {
+              "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java": "0c79f59b111bc1669a626c4a45598b7205319522b0c00c56ef009a8b9ea660e5",
+              "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthAgent.java": "0a1957ea4c6db007f13ab9d1ef669e2334eb2dc7121fcc4c0d16602e843aead3",
+              "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFailureTest.java": "3cffeb6f2352e20cbdfa7843b29d6372181d78aff6eed305939c3497315aa750",
+              "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFault.java": "f4f28798f4ef81eb8f49fefb972b90d9daa15b7ff5255515efe6e0ceaf8541a0",
+              "test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java": "1c599c9f7a8dd98dd1c6b067c7703105923914fa9a86082899a133993ed1bf97",
+          }
+          for filename, target in expected.items():
+              path = Path(filename)
+              if not path.is_file() or path.is_symlink():
+                  raise SystemExit(f"OWNER_OR_TEST_MISSING: {filename}")
+              digest = hashlib.sha256(path.read_bytes()).hexdigest()
+              if digest != target:
+                  raise SystemExit(f"OWNER_OR_TEST_DRIFT: {filename}: {digest}")
+              print("SOURCE_SEAL_OK", filename)
+          PY
+      - name: Compile original JDK-owned array/view sources into java.base patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-atomic-growth"
+          mkdir -p "$out/patch" "$out/test" "$out/src/jdk/internal/m3"
+          # Copy only the two SHA-audited original JDK sources into an isolated
+          # patch input. The full JDK source root would pull unrelated JDK
+          # sources into javac and fail strict lint for out-of-scope code.
+          cp src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java "$out/src/jdk/internal/m3/"
+          cp src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java "$out/src/jdk/internal/m3/"
+          javac -source 21 -target 21 -proc:none -Xlint:all -Werror \
+            --patch-module java.base="$out/src" \
+            -d "$out/patch" \
+            "$out/src/jdk/internal/m3/M3IndexedArray.java" \
+            "$out/src/jdk/internal/m3/M3IndexedView.java"
+      - name: Compile original 21-site fault injection and existing indexed view oracles
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-atomic-growth"
+          javac -source 21 -target 21 -proc:none -Xlint:all,-serial -Werror \
+            --patch-module java.base="$out/patch" \
+            --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
+            --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED \
+            -d "$out/test" \
+            test/jdk/jdk/internal/m3/M3IndexedArrayGrowthAgent.java \
+            test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFailureTest.java \
+            test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFault.java \
+            test/jdk/jdk/internal/m3/M3IndexedArrayTest.java \
+            test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java
+      - name: Package original Java agent/bootstrap fault hook
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-atomic-growth"
+          ( cd "$out/test"
+            java -Dtest.classes="$out/test" \
+              -cp "$out/test" M3IndexedArrayGrowthFailureTest build-agent )
+      - name: Execute seven-site fault injection at three capacities under -Xint and -Xmixed
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-atomic-growth"
+          for mode in -Xint -Xmixed; do
+            java "$mode" \
+              --patch-module java.base="$out/patch" \
+              --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
+              --add-opens java.base/jdk.internal.m3=ALL-UNNAMED \
+              --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED \
+              -javaagent:"$out/test/M3IndexedArrayGrowthAgent.jar=$out/test/M3IndexedArrayGrowthHook.jar" \
+              -Dm3.growth.evidence="$out" \
+              -cp "$out/test" M3IndexedArrayGrowthFailureTest
+          done
+      - name: Execute incumbent index, state mask, sorted and filtered view regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-atomic-growth"
+          for test in M3IndexedArrayTest M3StateMaskedIndexedViewTest; do
+            java --patch-module java.base="$out/patch" \
+              --add-exports java.base/jdk.internal.m3=ALL-UNNAMED \
+              -cp "$out/test" "$test"
+          done
+          echo "PASS_HOST_PATCHED_JAVA_BASE; FULL_M3JDK21_IMAGE_JTREG_AND_JNI_STILL_PENDING"
+      - name: Verify fused predicate/mask/sorted contract on the same original JDK owner
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-atomic-growth"
+          javac -source 21 -target 21 -proc:none -Xlint:all -Werror \
+            --patch-module "java.base=$out/patch:$PWD/test/jdk/jdk/internal/m3" \
+            -d "$out/patch" \
+            test/jdk/jdk/internal/m3/M3FusedMaskedFilteredSortedViewTest.java
+          for mode in -Xint -Xmixed; do
+            java "$mode" --patch-module "java.base=$out/patch" \
+              jdk.internal.m3.M3FusedMaskedFilteredSortedViewTest
+          done

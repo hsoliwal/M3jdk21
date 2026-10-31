@@ -1,0 +1,380 @@
+[
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/lucene-fetch.log",
+    "relative_path": "evidence/lucene-fetch.log",
+    "bytes": 672,
+    "sha256": "90689ae169b67354dff974f0ee3e6ba0268e9e8d9cb929d1e41d2a4457c8c5eb"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/LUCENE_DEPENDENCIES_001.json",
+    "relative_path": "evidence/LUCENE_DEPENDENCIES_001.json",
+    "bytes": 6532,
+    "sha256": "41c72d5265e441f63cf9be8ec4d498e45e5f1c75a98feae9ff7c6736812d3e61"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/lucene-dependencies-001.log",
+    "relative_path": "evidence/lucene-dependencies-001.log",
+    "bytes": 1194,
+    "sha256": "2e47eaa25e1134738440c125c8b75da7875133862eec5cf5674b310065f90573"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/LUCENE_OWNER_001.json",
+    "relative_path": "evidence/LUCENE_OWNER_001.json",
+    "bytes": 5371,
+    "sha256": "e64793f43586ad6dfb27df426c37f4ae1ba0f7205cc3f0be1ee92a5a50d7ee34"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/LUCENE_OWNER_001.log",
+    "relative_path": "evidence/LUCENE_OWNER_001.log",
+    "bytes": 4578,
+    "sha256": "7319155f1f24801fc21b17ef2111086fc359db10382475cca65452d9b968df86"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/LUCENE_OWNER_001_INPUTS.json",
+    "relative_path": "evidence/LUCENE_OWNER_001_INPUTS.json",
+    "bytes": 2314051,
+    "sha256": "9490dddc38c2b81beab49bc6a5690e8666fb210497f5f01e1ee0cd6f39e50fd2"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/LUCENE_OWNER_001_READBACK.json",
+    "relative_path": "evidence/LUCENE_OWNER_001_READBACK.json",
+    "bytes": 2314051,
+    "sha256": "9490dddc38c2b81beab49bc6a5690e8666fb210497f5f01e1ee0cd6f39e50fd2"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/LUCENE_INSTALLED_ARTIFACTS.json",
+    "relative_path": "evidence/LUCENE_INSTALLED_ARTIFACTS.json",
+    "bytes": 23251,
+    "sha256": "040ed67671d693c2d51515d86dd284aa2bdc6212acdb3fc95b367431b7f563d1"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/run_lucene_gate.py",
+    "relative_path": "run_lucene_gate.py",
+    "bytes": 5461,
+    "sha256": "787c3440c9f80fcaf9c1fa020d3adca0c7a5c4ad37e787b4219b2f2ae864cebf"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/BUILD_REPORT.json",
+    "relative_path": "lucene-owner-001/BUILD_REPORT.json",
+    "bytes": 23739,
+    "sha256": "928d1eada8e945e65a6f8f1ed8c78a7b6ef8e2cf31e629ace456eb71d391c365"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/source-overlay/SDK_RECEIPT.json",
+    "relative_path": "lucene-owner-001/source-overlay/SDK_RECEIPT.json",
+    "bytes": 28187,
+    "sha256": "9ee28a39487781ca451a79c6283bf065ac6ffa4b6996642acb24f4a2716cd081"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/dependency-descriptors/SDK_RECEIPT.json",
+    "relative_path": "lucene-owner-001/dependency-descriptors/SDK_RECEIPT.json",
+    "bytes": 1523,
+    "sha256": "3c8848d906c31aca9810b8bac488d909aa13c7e0fc36816c87f22aa1e837cea3"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/DEPENDENCY_DESCRIPTOR_MANIFEST.tsv",
+    "relative_path": "lucene-owner-001/DEPENDENCY_DESCRIPTOR_MANIFEST.tsv",
+    "bytes": 2375,
+    "sha256": "58d6832536ed28498003733f112ee7c49a23d0bbd20532a2d69edba04892f58b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/JMOD_IMAGE.tsv",
+    "relative_path": "lucene-owner-001/JMOD_IMAGE.tsv",
+    "bytes": 12190,
+    "sha256": "393788a688954ff3c80691fcb5e3a3c0abf9940dd15a6b62a55af94a49308d5f"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/DESCRIPTOR_MANIFEST.tsv",
+    "relative_path": "lucene-owner-001/DESCRIPTOR_MANIFEST.tsv",
+    "bytes": 51,
+    "sha256": "815c13462921dbb3a75d638c701c85a5422591176e0cf0380e264b81ce7ee41b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/pack/JMOD_PACK.tsv",
+    "relative_path": "lucene-owner-001/pack/JMOD_PACK.tsv",
+    "bytes": 2433,
+    "sha256": "99cb4edfb7b864e0df1452bda30ef284cd1bf99c277b73f1eea844dd0c50f169"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/source-recipe.log",
+    "relative_path": "lucene-owner-001/logs/source-recipe.log",
+    "bytes": 380,
+    "sha256": "4d338e3113bec0713f41fa262c9d4046e410b1ea534b5ffbd318fcca7719f710"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/descriptor-recipe.log",
+    "relative_path": "lucene-owner-001/logs/descriptor-recipe.log",
+    "bytes": 376,
+    "sha256": "1563e2a39488dd21df12835ccd6e9d656efdd41dce5da6741283eb7d3ef0be82"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/jmod-pack.log",
+    "relative_path": "lucene-owner-001/logs/jmod-pack.log",
+    "bytes": 195,
+    "sha256": "9e310a134db6126f05b4492a0cc16b9c9ce848a3624a720cb8e6995b2ca54a17"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/contract-test-compile.log",
+    "relative_path": "lucene-owner-001/logs/contract-test-compile.log",
+    "bytes": 150,
+    "sha256": "6fb24fc6b6be0c40dc9b0a764a75903e1c71c03c2ae75a0066da0cc1eb9c664e"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/lucene/.m3/current-jmods/build.py",
+    "relative_path": "forks/lucene/.m3/current-jmods/build.py",
+    "bytes": 21511,
+    "sha256": "584342e4696b57872419feb12551b6f755084a2a4d21d3c7b11a0261f6885b3c"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/lucene/.m3/current-jmods/source-lock.json",
+    "relative_path": "forks/lucene/.m3/current-jmods/source-lock.json",
+    "bytes": 1084615,
+    "sha256": "e97a3ffafcf55ac67efbac1611dcfeb37e8d986ae9fd3151dbacacf043d1d83c"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/lucene/.m3/current-jmods/dependency-lock.json",
+    "relative_path": "forks/lucene/.m3/current-jmods/dependency-lock.json",
+    "bytes": 9858,
+    "sha256": "6e65c358662c9cf2b79ce6c948909d7b29ddb89282627a6ddffe933f587218be"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/lucene/LICENSE.txt",
+    "relative_path": "forks/lucene/LICENSE.txt",
+    "bytes": 26031,
+    "sha256": "7c8714cc3ad0f446c01973cc694ccdb9abc388388fbbe7a22b968157dfe34aa4"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/lucene/NOTICE.txt",
+    "relative_path": "forks/lucene/NOTICE.txt",
+    "bytes": 9664,
+    "sha256": "543e5afa0e450739bcf59829f901333c73a42a3a8261a905ef8dfc690896dbb0"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.analysis.common-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.analysis.common-compile.log",
+    "bytes": 192,
+    "sha256": "1bd9da0e72dac353d80f224afc1f43920c435cff2694e8f0f986f29c562ec049"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.analysis.icu-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.analysis.icu-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.analysis.kuromoji-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.analysis.kuromoji-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.analysis.morfologik-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.analysis.morfologik-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.analysis.nori-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.analysis.nori-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.analysis.opennlp-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.analysis.opennlp-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.analysis.phonetic-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.analysis.phonetic-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.analysis.smartcn-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.analysis.smartcn-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.analysis.stempel-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.analysis.stempel-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.backward_codecs-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.backward_codecs-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.classification-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.classification-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.codecs-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.codecs-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.core-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.core-compile.log",
+    "bytes": 300,
+    "sha256": "51e5dcf619a2effcf5699a6106a8154d4c29efae2acd3df7f2071ff61ebed726"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.expressions-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.expressions-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.facet-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.facet-compile.log",
+    "bytes": 192,
+    "sha256": "1bd9da0e72dac353d80f224afc1f43920c435cff2694e8f0f986f29c562ec049"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.grouping-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.grouping-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.highlighter-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.highlighter-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.join-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.join-compile.log",
+    "bytes": 307,
+    "sha256": "166bc78ec9af3fb8c9390cb6c2502ebd698551ba9fa2f1614e566cd2942f06a1"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.luke-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.luke-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.memory-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.memory-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.misc-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.misc-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.monitor-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.monitor-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.queries-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.queries-compile.log",
+    "bytes": 328,
+    "sha256": "60b866d4fb9f3bc92b85ab269b396104e35d6aafc05c437603f53d585678da98"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.queryparser-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.queryparser-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.replicator-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.replicator-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.sandbox-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.sandbox-compile.log",
+    "bytes": 300,
+    "sha256": "51e5dcf619a2effcf5699a6106a8154d4c29efae2acd3df7f2071ff61ebed726"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.spatial3d-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.spatial3d-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.spatial_extras-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.spatial_extras-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/org.apache.lucene.suggest-compile.log",
+    "relative_path": "lucene-owner-001/logs/org.apache.lucene.suggest-compile.log",
+    "bytes": 82,
+    "sha256": "121cdec86cf659712572c7589e2bc7ca32688a7abce709a36bddcce8a6c1cf4b"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/linked-image-Jdk21ExpressionsCheck.log",
+    "relative_path": "lucene-owner-001/logs/linked-image-Jdk21ExpressionsCheck.log",
+    "bytes": 223,
+    "sha256": "f4c9eb21142b98acce668d356976ea47af56e3c226229d5cc06311a8664314d5"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/linked-image-Jdk21ProviderCheck.log",
+    "relative_path": "lucene-owner-001/logs/linked-image-Jdk21ProviderCheck.log",
+    "bytes": 494,
+    "sha256": "7c77425abc776f709bae93a12944b03693ed98600acaee2908dc3a794290a810"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/linked-image-M3LuceneJmodCheck.log",
+    "relative_path": "lucene-owner-001/logs/linked-image-M3LuceneJmodCheck.log",
+    "bytes": 534,
+    "sha256": "888bcef89d6136beb2e1b6d1a4a3f3355104fcece048d1295e4aacc3877cc832"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/module-path-Jdk21ExpressionsCheck.log",
+    "relative_path": "lucene-owner-001/logs/module-path-Jdk21ExpressionsCheck.log",
+    "bytes": 223,
+    "sha256": "f4c9eb21142b98acce668d356976ea47af56e3c226229d5cc06311a8664314d5"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/module-path-Jdk21ProviderCheck.log",
+    "relative_path": "lucene-owner-001/logs/module-path-Jdk21ProviderCheck.log",
+    "bytes": 173,
+    "sha256": "a862a09c1193f27493fb411723b577ddb92efb859603b3ca7ddf8f17be0b40f3"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/logs/module-path-M3LuceneJmodCheck.log",
+    "relative_path": "lucene-owner-001/logs/module-path-M3LuceneJmodCheck.log",
+    "bytes": 213,
+    "sha256": "34073304d490fa2d958d3b84ab1cd5f7d81c3db998a2dddbfc2ba99ee3601039"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/lucene/.m3/current-jmods/src/test/java/Jdk21ExpressionsCheck.java",
+    "relative_path": "forks/lucene/.m3/current-jmods/src/test/java/Jdk21ExpressionsCheck.java",
+    "bytes": 2587,
+    "sha256": "ef3fa9de3d6f514f8ec95fd6f513c1d3a33130d5838546146000c4cff99150df"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/lucene/.m3/current-jmods/src/test/java/Jdk21ProviderCheck.java",
+    "relative_path": "forks/lucene/.m3/current-jmods/src/test/java/Jdk21ProviderCheck.java",
+    "bytes": 475,
+    "sha256": "b6b7a14a70568b0c13a7fd74ddd84d199585c438e4c3ca8afcdb3f202c70b8d0"
+  },
+  {
+    "source_path": "/workspace/scratch/206049dfb270/nlp-work/forks/lucene/.m3/current-jmods/src/test/java/M3LuceneJmodCheck.java",
+    "relative_path": "forks/lucene/.m3/current-jmods/src/test/java/M3LuceneJmodCheck.java",
+    "bytes": 9485,
+    "sha256": "ff952de6283806ad14bf52bf8aa1c3dded44e815729ef31f24a36fcb210ea57d"
+  }
+]

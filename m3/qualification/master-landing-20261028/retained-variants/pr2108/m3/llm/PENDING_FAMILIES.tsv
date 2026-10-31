@@ -1,0 +1,8 @@
+family	source_path	status	scope_or_remaining_dependency
+id_luhn	synexia-tabletree/src/main/java/com/synexia/tabletree/knowledge/MIndexLuhnSummarizer.java	HELD_OWNER_CLOSURE	MIndexString/WordKnowledge/WordIdAddress/IndexResolver canonical owner integration; do not invent duplicate lexicon
+cited_rag_extractive	cognix-rag/src/main/java/com/synexia/rag/live/ExtractiveSummarizer.java	HELD_OWNER_CLOSURE	Nested EvidenceIndex.Passage pins Lucene/Jackson outer owner; requires approved typed DTO extraction recipe
+chrome_java_summary_tree	cpullm-java/skill-dag/src/main/java/com/synexia/cpullm/skilldag/ChromeAiSummaryTree.java	HELD_JACKSON_LOWERING	ChromeAiRequest/ChromeAiJson/SkillJson Jackson dependencies; do not introduce downstream runtime JARs
+chrome2api_mixed_provider	synexia-cpullm/src/main/java/com/synexia/cpullm/convergence/ChromeMixedSummaryCandidateProvider.java	HELD_SERVICE_CLOSURE	Existing ChromeService/Request/Completion/Failure owner requires separate runtime closure
+cop_prompt_summary	synexia-cop/src/main/java/com/synexia/cop/capability/ContextSemanticPrompts.java	INVENTORIED	Synthesized SUMMARIZE through PROMPT must remain distinct from native browser Summarizer
+browser_measurement_provider	synexia-chrome-ai/browser-research/web/summarizer-provider.mjs	INVENTORIED	Alternative existing provider requires measureInputUsage/inputQuota; not merged with selected optional-measurement behavior
+standalone_visual_media_diffusion	hsoliwal/ChromeLLM@9cdfe7665dc5555f9ea554ba1f1c60f82e806a09	HELD_SEPARATE_PRODUCT	Distinct visual/media/diffusion planner; JNA/Jackson and native qualification require separate admission

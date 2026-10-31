@@ -1,0 +1,5 @@
+artifact	version	jar	module	requires	disposition
+classgraph-4.8.197.jar	locked	/workspace/scratch/206049dfb270/nlp-work/dependencies/opennlp/classgraph-4.8.197.jar	io.github.classgraph	-	JMOD
+commons-secure-xml-1.1.0.jar	locked	/workspace/scratch/206049dfb270/nlp-work/dependencies/opennlp/commons-secure-xml-1.1.0.jar	org.apache.commons.xml.secure	-	JMOD
+slf4j-api-2.0.20.jar	locked	/workspace/scratch/206049dfb270/nlp-work/dependencies/opennlp/slf4j-api-2.0.20.jar	org.slf4j	-	JMOD
+slf4j-simple-2.0.20.jar	locked	/workspace/scratch/206049dfb270/nlp-work/dependencies/opennlp/slf4j-simple-2.0.20.jar	org.slf4j.simple	-	JMOD

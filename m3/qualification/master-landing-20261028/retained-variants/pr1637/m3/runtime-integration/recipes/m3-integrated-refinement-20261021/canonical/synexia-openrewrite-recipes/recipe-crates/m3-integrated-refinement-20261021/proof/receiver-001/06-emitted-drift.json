@@ -1,0 +1,4 @@
+{
+  "status": "FAIL",
+  "failure": "ValueError: emitted output drift: .github/workflows/m3-collections.yml"
+}

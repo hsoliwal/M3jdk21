@@ -1,0 +1,75 @@
+{
+  "schema": "M3_NLP_CURRENT_OWNER_FINAL_QUALIFICATION/1",
+  "status": "LOCAL_RECIPE_AND_ACTUAL_RECEIVER_PASS",
+  "source_seals": {
+    "path": "SOURCE_SEALS.json",
+    "sha256": "6cc232bd392dd188b227a0a7c304d0a6e6d25ed91dd3641fefb335afdfc8574e"
+  },
+  "sdk": {
+    "receipt": {
+      "path": "proof/sdk-001-offline/RESULT.json",
+      "sha256": "5f9b55adcb99fb526dd044476ec647cd2ca82dc3bb25a38c71f479df9925a187"
+    },
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "phases": 2,
+    "source_inputs_unchanged": 21
+  },
+  "copier": {
+    "receipt": {
+      "path": "proof/copier-qualification-001/RESULT.json",
+      "sha256": "02ba2402bcbe554ec4e18ede6eec1c84c4accccb098a9779996995aaedf4289b"
+    },
+    "writes": 2,
+    "replay_writes": 0,
+    "refusals": 4
+  },
+  "receiving_application": {
+    "path": "proof/receiving-application-001/RESULT.json",
+    "sha256": "91f29c76306be5b28000b916fcf73d7afad4e938abbd0a9ca81c938c98fb0467"
+  },
+  "actual_receiving_runtime": {
+    "path": "proof/receiver-runtime-001/combined-receiver-001-receipts/RESULT.json",
+    "sha256": "38c71b8c4f6fb632f2352873cbd2578be7cf1f1383cdf34d64f4fce9e5c0cee1"
+  },
+  "runtime_scope": {
+    "pack_modules": 62,
+    "source_built_modules": 36,
+    "locked_external_modules": 26,
+    "jdk_image_modules": 30,
+    "total_image_modules": 92,
+    "installed_image_probes": 3,
+    "input_readbacks_unchanged": 11373,
+    "module_jar_hashes_equal_candidate": 62
+  },
+  "owner_candidate": {
+    "path": "proof/owner-candidate-001/CANDIDATE_QUALIFICATION.json",
+    "sha256": "17e447626a1fd62e5aa649574ff5ab00ac257d642f0ed890ed8a32de40cf52fb"
+  },
+  "exact_contracts": {
+    "path": "proof/owner-candidate-001/OWNER_CONTRACTS.md",
+    "sha256": "aa732e344212c8e80a717f05cdc2d10d268fc55e93e13d8f853e9d072dbbd729"
+  },
+  "memory": {
+    "path": "memory/FINAL_RESULT.json",
+    "sha256": "e1a67c9cb29aada8de10269fad3de345f9d83abace47669fbbd3be181ef6d634"
+  },
+  "source_rights": {
+    "path": "provenance/SOURCE_AND_RIGHTS.json",
+    "sha256": "67555856f433a784f66865a5ed11f0e6d0229cacdc42de5cd391d1901619a115"
+  },
+  "admission": "PENDING; bounded local actual proof is not full-product or hosted acceptance.",
+  "preserved_warnings": [
+    "Optional jdk.management not readable for Lucene internals/object sizing.",
+    "Original foreign Linker native-access warning; no launch flags weakened."
+  ],
+  "pending": [
+    "Original Java25 upstream/full test lanes",
+    "Full String/HotSpot/JDK family and platforms",
+    "Optional native/model providers and performance acceptance",
+    "Exact hosted admission including separate broader migration-engine baseline pin failure"
+  ],
+  "historical_status": "Old candidate and initial source-custody status fields remain immutable; this final index links later actual SDK/application/receiver authorities without rewriting them."
+}

@@ -1,0 +1,416 @@
+{
+  "schema": 1,
+  "status": "EXACT_DECLARED_METADATA_CHANGES_VERIFIED",
+  "at_utc": "2026-10-20T07:51:07.277709+00:00",
+  "original_map": {
+    "repository": "hsoliwal/M3JDK21",
+    "commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+    "path": "m3/docs/name-mapping.json",
+    "git_blob_sha1": "32d214357ba4f13c8e63be3737a989978b3613a2",
+    "sha256": "7815ef0f4003f0b5a753a6439b8e7b658f4a09baf82c8b529deaef0cf92664b0",
+    "bytes": 590143
+  },
+  "proposal": {
+    "task_artifact_path": "receiving-prep/metadata-additions.json",
+    "sha256": "425a5d0a29eaef94a0651bfb1efdd19d6df9e2be44362332bc7eacbb9a77e36d"
+  },
+  "final_map": {
+    "path": "m3/docs/name-mapping.json",
+    "git_blob_sha1": "d8baac9900534e93c3337676c17f061449f42ee4",
+    "sha256": "4f9e82d22a7c14c1739b975ed6fb53fddc7610cd41782b078d143f9eb23454e9",
+    "bytes": 633358
+  },
+  "canonical_commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+  "receiving_runtime_commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+  "receiving_pr": "https://github.com/hsoliwal/M3jdk21/pull/1572",
+  "counts": {
+    "original_mappings": 76,
+    "final_mappings": 77,
+    "original_migration_records": 60,
+    "final_migration_records": 63
+  },
+  "preserved": {
+    "every_original_mapping_field_and_value": true,
+    "other74_mapping_objects_exact": true,
+    "all60_original_migration_ids_and_statuses": true,
+    "other57_original_migration_records_exact": true,
+    "all_other_root_and_migration_objects_exact": true,
+    "original_sources_contracts_owners_dependencies_tests_provenance_source_state": true,
+    "existing_lineage_and_sync_prefixes": true,
+    "phase_and_completion_gates": true
+  },
+  "original_status_counts": {
+    "implemented-tested": 1,
+    "pending": 32,
+    "implemented-unverified": 25,
+    "blocked": 2
+  },
+  "new_record_status": "implemented-unverified",
+  "new_record_ids": [
+    "synexia.m3jdk21.android-efficiency-20261020.mapped-scalars",
+    "synexia.m3jdk21.android-efficiency-20261020.state-relation-sparse",
+    "synexia.m3jdk21.android-efficiency-20261020.arrays-common-jni-build"
+  ],
+  "new_tests_receipts_added": false,
+  "legacy_mapping_additions": [
+    {
+      "index": 4,
+      "field": "refinements"
+    },
+    {
+      "index": 42,
+      "field": "build_refinements"
+    }
+  ],
+  "new_legacy_mapping_index": 76,
+  "changed_original_record_indices": [
+    30,
+    50,
+    56
+  ],
+  "declared_existing_record_diff": [
+    {
+      "pointer": "/migration/records/30/targets/0/commit",
+      "before": null,
+      "after": "8e868958f017482cfd6c5085869263c92a011cf6"
+    },
+    {
+      "pointer": "/migration/records/30/targets/0/sha256",
+      "before": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
+      "after": "8603f9aaded1ea8d8fdf886e3e549ae7196efc378f27eb4a452ca0f1907963fe"
+    },
+    {
+      "pointer": "/migration/records/30/targets/0/git_blob_sha1",
+      "before": null,
+      "after": "31620898a75896f922ce7f4e663b0e9d9a5ae068"
+    },
+    {
+      "pointer": "/migration/records/30/targets/0/revision_role",
+      "before": "candidate",
+      "after": "pinned"
+    },
+    {
+      "pointer": "/migration/records/30/sync/target_revision",
+      "before": "3ec445df10a3e8fc74aa983181f0700ac7bfbcad",
+      "after": "8e868958f017482cfd6c5085869263c92a011cf6"
+    },
+    {
+      "pointer": "/migration/records/30/lineage/previous_targets",
+      "change": "append-only",
+      "before_count": 1,
+      "after_count": 2
+    },
+    {
+      "pointer": "/migration/records/30/sync/target_adaptations",
+      "change": "append-only",
+      "before_count": 5,
+      "after_count": 6
+    },
+    {
+      "pointer": "/migration/records/30/observation",
+      "change": "explicit snapshot and receiving identity pointer",
+      "snapshot_path": "m3/docs/android-efficiency-20261020/history/class-index-counterpart-before.json",
+      "snapshot_sha256": "349fb2885f2e8914d4e4c6714862a8c7f04b3991c013a06b26a0af4d20bd3320"
+    },
+    {
+      "pointer": "/migration/records/50/targets/0/commit",
+      "before": null,
+      "after": "8e868958f017482cfd6c5085869263c92a011cf6"
+    },
+    {
+      "pointer": "/migration/records/50/targets/0/sha256",
+      "before": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+      "after": "f4ddda4db918b03450eb46d2c610d3bc1c7b65dc2ab0c4e00e42407e4026546b"
+    },
+    {
+      "pointer": "/migration/records/50/targets/0/git_blob_sha1",
+      "before": "5942b1f46eedf83ad8c4ef8edee91f75e7424e7a",
+      "after": "dba8629e2a8a7ed9a18dc87e7849ac9a4e451566"
+    },
+    {
+      "pointer": "/migration/records/50/targets/0/revision_role",
+      "before": "candidate",
+      "after": "pinned"
+    },
+    {
+      "pointer": "/migration/records/50/targets/1/commit",
+      "before": null,
+      "after": "8e868958f017482cfd6c5085869263c92a011cf6"
+    },
+    {
+      "pointer": "/migration/records/50/targets/1/sha256",
+      "before": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
+      "after": "615b37ffa3781dae9739213db43299bfb2025e98b9960f35dc25c5b0325cc216"
+    },
+    {
+      "pointer": "/migration/records/50/targets/1/git_blob_sha1",
+      "before": "e68e05555efbe2dbf1355e6820cc7795d9c33942",
+      "after": "e635253e2ba030155f088e7750f6b1627f5e91cf"
+    },
+    {
+      "pointer": "/migration/records/50/targets/1/revision_role",
+      "before": "candidate",
+      "after": "pinned"
+    },
+    {
+      "pointer": "/migration/records/50/sync/target_revision",
+      "before": "87590cb96fb0e2dc0f88fae8e01957f7179cd255",
+      "after": "8e868958f017482cfd6c5085869263c92a011cf6"
+    },
+    {
+      "pointer": "/migration/records/50/lineage/previous_targets",
+      "change": "append-only",
+      "before_count": 2,
+      "after_count": 4
+    },
+    {
+      "pointer": "/migration/records/50/sync/target_adaptations",
+      "change": "append-only",
+      "before_count": 2,
+      "after_count": 3
+    },
+    {
+      "pointer": "/migration/records/50/observation",
+      "change": "explicit snapshot and receiving identity pointer",
+      "snapshot_path": "m3/docs/android-efficiency-20261020/history/segmented-bit-lane-28-before.json",
+      "snapshot_sha256": "7447594bd333dff329e320c6af54b00a3b6ac5e7b45a10861ad96080000f9ddb"
+    },
+    {
+      "pointer": "/migration/records/56/targets/2/commit",
+      "before": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+      "after": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e"
+    },
+    {
+      "pointer": "/migration/records/56/targets/2/sha256",
+      "before": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+      "after": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f"
+    },
+    {
+      "pointer": "/migration/records/56/targets/2/git_blob_sha1",
+      "before": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+      "after": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d"
+    },
+    {
+      "pointer": "/migration/records/56/sync/target_revision",
+      "before": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
+      "after": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e"
+    },
+    {
+      "pointer": "/migration/records/56/lineage/previous_targets",
+      "change": "append-only",
+      "before_count": 0,
+      "after_count": 1
+    },
+    {
+      "pointer": "/migration/records/56/sync/target_adaptations",
+      "change": "append-only",
+      "before_count": 3,
+      "after_count": 4
+    },
+    {
+      "pointer": "/migration/records/56/observation",
+      "change": "explicit snapshot and receiving identity pointer",
+      "snapshot_path": "m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json",
+      "snapshot_sha256": "53535c80f8b2b434a4be6852a03175b831f42f73b8fa73a14ea3ec28c5ee13ac"
+    }
+  ],
+  "complete_original_record_snapshots": [
+    {
+      "path": "m3/docs/android-efficiency-20261020/history/class-index-counterpart-before.json",
+      "sha256": "349fb2885f2e8914d4e4c6714862a8c7f04b3991c013a06b26a0af4d20bd3320",
+      "git_blob_sha1": "0d92ce61c5af1d0458771724b238e5b46d03064b",
+      "record_index": 30,
+      "record_id": "synexia.counterpart.MIndexClassIndex"
+    },
+    {
+      "path": "m3/docs/android-efficiency-20261020/history/segmented-bit-lane-28-before.json",
+      "sha256": "7447594bd333dff329e320c6af54b00a3b6ac5e7b45a10861ad96080000f9ddb",
+      "git_blob_sha1": "3b49d7f7aacd35863f7f105eeb04a2c9abea43f2",
+      "record_index": 50,
+      "record_id": "synexia.collections.SegmentedBitLane28"
+    },
+    {
+      "path": "m3/docs/android-efficiency-20261020/history/ordered-relations-adapter-before.json",
+      "sha256": "53535c80f8b2b434a4be6852a03175b831f42f73b8fa73a14ea3ec28c5ee13ac",
+      "git_blob_sha1": "4054e1dea3a52ed30f3aa30136232e4d90399be1",
+      "record_index": 56,
+      "record_id": "synexia.regex.ordered-relations.adapter"
+    }
+  ],
+  "runtime_outputs": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java",
+      "sha256": "89baa852620434a11eadf753f5c0593ac2ae88bfbe5d006904e849d378f281e6",
+      "git_blob_sha1": "27cc19dd4037da1779d57825d02393bb8ada732b",
+      "before_sha256": "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3StateRelation.c",
+      "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+      "git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+      "before_sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16"
+    },
+    {
+      "path": "m3/arrays/src/main/native/CMakeLists.txt",
+      "sha256": "1d3ea54f564b519d215a49bb6a7628aa894e94dc804cce5cae5cf92ee10a50c7",
+      "git_blob_sha1": "de0f4f870e2107ed74506a6ab9963b550cb4bc06",
+      "before_sha256": "16a47b1494259d37063c1286d8c29f631777cfe3ba44db0cf4847f73fd925a9c"
+    }
+  ],
+  "preexisting_current_base_source_files_unchanged": [
+    "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
+    "src/java.base/share/classes/jdk/internal/mindex/M3CI.java",
+    "src/java.base/share/native/libjava/M3BitLane28.c"
+  ],
+  "current_base_inventory_sha256": "393087d2ccc5d6a7e1a1a5353f3fe4944487b77a24274d3276c52f07d39f67a1",
+  "current_base_assembly_receipt_sha256": "08c7e2edfb796eb5442ecdd90933958d602bdc1e8b4574fd02f0002e5f39a35b",
+  "sdk_stage2_receipt_sha256": "ffb9b779f73ae9c42f5235d4ae4640f91cb6f6952be770d5ff6782219726acbe",
+  "api_observations": [
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java.txt",
+      "git_blob_sha1": "27cc19dd4037da1779d57825d02393bb8ada732b",
+      "expected_sha256": "89baa852620434a11eadf753f5c0593ac2ae88bfbe5d006904e849d378f281e6",
+      "kind": "canonical-source",
+      "sha256": "89baa852620434a11eadf753f5c0593ac2ae88bfbe5d006904e849d378f281e6",
+      "bytes": 32214
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/src/java.base/share/native/libjava/M3StateRelation.c.txt",
+      "git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+      "expected_sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+      "kind": "canonical-source",
+      "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+      "bytes": 7673
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/common-jni-build/m3/arrays/src/main/native/CMakeLists.txt.txt",
+      "git_blob_sha1": "de0f4f870e2107ed74506a6ab9963b550cb4bc06",
+      "expected_sha256": "1d3ea54f564b519d215a49bb6a7628aa894e94dc804cce5cae5cf92ee10a50c7",
+      "kind": "canonical-source",
+      "sha256": "1d3ea54f564b519d215a49bb6a7628aa894e94dc804cce5cae5cf92ee10a50c7",
+      "bytes": 1631
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AndroidEfficiency20261020.java",
+      "git_blob_sha1": "ace0fc61b0080f54fbfbbe1ce45ed07ac1150f5c",
+      "expected_sha256": "624b8a771ebaf158450c33e6c930c7165bc82de5803dec435fbcf781fea0727c",
+      "kind": "canonical-source",
+      "sha256": "624b8a771ebaf158450c33e6c930c7165bc82de5803dec435fbcf781fea0727c",
+      "bytes": 2147
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/manifest.tsv",
+      "git_blob_sha1": "a4a448583aa518600ce0ca25033e5c66c8216e09",
+      "expected_sha256": "3f2bca03e4c67f376e0a5eccb753f433d224ca7f7d2c8032ef4b04fa6149ede7",
+      "kind": "canonical-source",
+      "sha256": "3f2bca03e4c67f376e0a5eccb753f433d224ca7f7d2c8032ef4b04fa6149ede7",
+      "bytes": 1928
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3-android-efficiency-20261020/common-jni-build/manifest.tsv",
+      "git_blob_sha1": "aba73a65c112838a70ccd2a28e22ab8223584fd5",
+      "expected_sha256": "0b0b31bd583394003e8f97b79ad5ab64f02a02f3c0a1fb2a23f17499b3907b13",
+      "kind": "canonical-source",
+      "sha256": "0b0b31bd583394003e8f97b79ad5ab64f02a02f3c0a1fb2a23f17499b3907b13",
+      "bytes": 1626
+    },
+    {
+      "repo": "hsoliwal/M3JDK21",
+      "commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java",
+      "git_blob_sha1": "27cc19dd4037da1779d57825d02393bb8ada732b",
+      "expected_sha256": "89baa852620434a11eadf753f5c0593ac2ae88bfbe5d006904e849d378f281e6",
+      "kind": "receiving-runtime",
+      "sha256": "89baa852620434a11eadf753f5c0593ac2ae88bfbe5d006904e849d378f281e6",
+      "bytes": 32214
+    },
+    {
+      "repo": "hsoliwal/M3JDK21",
+      "commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+      "path": "src/java.base/share/native/libjava/M3StateRelation.c",
+      "git_blob_sha1": "d6bdfeb01dd632b83b978b1bdb5ed2cbdeaebd9d",
+      "expected_sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+      "kind": "receiving-runtime",
+      "sha256": "faa999e2538087bd214c922cb1ad4b0dcaa208b04240acaed27771d47911cf1f",
+      "bytes": 7673
+    },
+    {
+      "repo": "hsoliwal/M3JDK21",
+      "commit": "329cd9116eca5a3b2ec081fb6760ca3e6508da7e",
+      "path": "m3/arrays/src/main/native/CMakeLists.txt",
+      "git_blob_sha1": "de0f4f870e2107ed74506a6ab9963b550cb4bc06",
+      "expected_sha256": "1d3ea54f564b519d215a49bb6a7628aa894e94dc804cce5cae5cf92ee10a50c7",
+      "kind": "receiving-runtime",
+      "sha256": "1d3ea54f564b519d215a49bb6a7628aa894e94dc804cce5cae5cf92ee10a50c7",
+      "bytes": 1631
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+      "path": "synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/README.md",
+      "git_blob_sha1": "ca4edfb15a0f6584b71c71b6092e539612e73358",
+      "kind": "canonical-proof-custody",
+      "sha256": "02e74c6ea2412eecf5671b7d60ed07f5377f0b53929ddd6746d3cc24762df595",
+      "bytes": 8998
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+      "path": "synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/LICENSE_CUSTODY.md",
+      "git_blob_sha1": "15795fe4d38dd2ddcc90d34ccff903f575159924",
+      "kind": "canonical-proof-custody",
+      "sha256": "9e1a600cce54f521785e314e945d5e382e0d30b0110e8e44203f27514dfb5caf",
+      "bytes": 2233
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+      "path": "synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/java-leaf/QUALIFICATION.json",
+      "git_blob_sha1": "23b71486457e8450239cc0b7dd4aca61733e556e",
+      "kind": "canonical-proof-custody",
+      "sha256": "33dda263a7c35d87137281be5cb01a40c6a44a34658071270124cbe90d55c00c",
+      "bytes": 25255
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+      "path": "synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/native-leaf/QUALIFICATION.json",
+      "git_blob_sha1": "72b7cb549f16a5132650e7fb0ad734f3f94ed103",
+      "kind": "canonical-proof-custody",
+      "sha256": "18a887298d67d4873541a8326da7eaf5d5a7924f97bb1d964d6ace24114e8835",
+      "bytes": 76878
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+      "path": "synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/common-jni-build/QUALIFICATION.json",
+      "git_blob_sha1": "62b9fb67ffd0d0633cc1c361118e14cd534fa26f",
+      "kind": "canonical-proof-custody",
+      "sha256": "1ea703992bf15733301f927fb3dac372e85e88c5794bbb91a481c6fa4ae6b658",
+      "bytes": 29073
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "517d49739dca95ba5caad4a3f14f94171a984b71",
+      "path": "synexia-openrewrite-recipes/recipes/m3-android-efficiency-20261020/execution/SDK_MATERIALIZATION_STAGE_2.json",
+      "git_blob_sha1": "0e54b65f962afcd0c00381ea4ac753c9d731d5ae",
+      "kind": "canonical-proof-custody",
+      "sha256": "ffb9b779f73ae9c42f5235d4ae4640f91cb6f6952be770d5ff6782219726acbe",
+      "bytes": 8493
+    }
+  ],
+  "migration_validator_executed": false,
+  "runtime_tests_executed": false
+}

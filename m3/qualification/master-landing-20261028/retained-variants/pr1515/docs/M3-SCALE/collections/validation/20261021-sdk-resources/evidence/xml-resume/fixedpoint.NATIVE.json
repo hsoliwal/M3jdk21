@@ -1,0 +1,18 @@
+{
+  "pid": 37248,
+  "creation_FILETIME": "134370222838708590",
+  "assigned_to_job": true,
+  "resumed": true,
+  "termination_requested": false,
+  "terminal": true,
+  "cleanup_errors": [],
+  "thread_handle_closed": true,
+  "same_handle_wait": 0,
+  "exitcode": 0,
+  "job_active_processes": 0,
+  "job_total_processes": 2,
+  "process_handle_closed": true,
+  "job_handle_closed": true,
+  "all_owned_native_handles_closed": true,
+  "supervisor_error": null
+}

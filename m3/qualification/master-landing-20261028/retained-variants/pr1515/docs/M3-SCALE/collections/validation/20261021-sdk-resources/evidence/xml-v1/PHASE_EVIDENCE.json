@@ -1,0 +1,9 @@
+[
+  {
+    "phase": "install",
+    "log_bytes": 13234,
+    "log_sha256": "e76ecc8f2efab3071fa353f90b41f353032c185c5099dd1cf7c2e26e5a5c03e9",
+    "realm_count": 2,
+    "realm_list_sha256": "94fabed8c4572fb63962fcabdb723d05ae7eab3ea360b8128e59d6ec79572dc8"
+  }
+]

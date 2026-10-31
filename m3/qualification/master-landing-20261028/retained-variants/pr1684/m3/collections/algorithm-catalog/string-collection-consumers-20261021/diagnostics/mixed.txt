@@ -1,0 +1,4 @@
+$ /workspace/scratch/6a76dfb8b5f4/toolchains/jdk21/bin/java -ea -cp /workspace/scratch/6a76dfb8b5f4/candidates/collections/evidence/wrapper-boundary-classes com.m3.collections.M3WrapperReadBoundaryProof
+WRAPPER_BOUNDARY_OBSERVATIONS checks=12 rejected=tailSet-to-ceiling,live-size-cache,predicate-on-probe known_defect=set-overload-comparator-alias
+
+EXIT=0

@@ -1,0 +1,113 @@
+{
+  "schema": "jcc-actual-file-read-calls/1",
+  "calls": [
+    {
+      "request": {
+        "repository_full_name": "hsoliwal/com.synexia",
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
+        "ref": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+        "encoding": "base64"
+      },
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Action completed."
+            }
+          ],
+          "structuredContent": {
+            "content": "c3JjL21haW4vamF2YS9maXh0dXJlL0RlcGVuZGVuY3kuamF2YQljYjFhY2U5\nZmNhODhkZWM5NzM2YWY5NWM5NmFkZGRjM2YwMWNjYjg0OTA0ZWQ3ZDJjZjdj\nZmRjZDI4OTBiYzYzCURlcGVuZGVuY3kuamF2YS50eHQKIwAK\n",
+            "encoding": "base64",
+            "sha": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d",
+            "display_url": "https://github.com/hsoliwal/com.synexia/blob/9dab34bd9e34e4d661004482248b5b02d94e0816/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
+            "display_title": "parser-dependencies.tsv"
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "request": {
+        "repository_full_name": "hsoliwal/com.synexia",
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+        "ref": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+        "encoding": "base64"
+      },
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Action completed."
+            }
+          ],
+          "structuredContent": {
+            "content": "I++/vSgK\n",
+            "encoding": "base64",
+            "sha": "59b4ec83f687499a54f15695b9b246599f9579d7",
+            "display_url": "https://github.com/hsoliwal/com.synexia/blob/9dab34bd9e34e4d661004482248b5b02d94e0816/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+            "display_title": "parser-dependencies.tsv"
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "request": {
+        "repository_full_name": "hsoliwal/com.synexia",
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-nul/Dependency.java.txt",
+        "ref": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+        "encoding": "base64"
+      },
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Action completed."
+            }
+          ],
+          "structuredContent": {
+            "content": "cGFja2FnZSBmaXh0dXJlOwpwdWJsaWMgY2xhc3MgRGVwZW5kZW5jeSB7CiAg\nICBwdWJsaWMgc3RhdGljIE9iamVjdCBkZXBWYWx1ZSgpIHsgcmV0dXJuICJk\nZXBlbmRlbmN5IjsgfQp9Ci8vAAo=\n",
+            "encoding": "base64",
+            "sha": "fb1c29bba17633d2de5d53d924ec210965374c37",
+            "display_url": "https://github.com/hsoliwal/com.synexia/blob/9dab34bd9e34e4d661004482248b5b02d94e0816/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-nul/Dependency.java.txt",
+            "display_title": "Dependency.java.txt"
+          },
+          "isError": false
+        }
+      }
+    },
+    {
+      "request": {
+        "repository_full_name": "hsoliwal/com.synexia",
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+        "ref": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+        "encoding": "base64"
+      },
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "Action completed."
+            }
+          ],
+          "structuredContent": {
+            "content": "cGFja2FnZSBmaXh0dXJlOwovL++/vSgK\n",
+            "encoding": "base64",
+            "sha": "24cdc62e634934527d551324c2449bcf951b5589",
+            "display_url": "https://github.com/hsoliwal/com.synexia/blob/9dab34bd9e34e4d661004482248b5b02d94e0816/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+            "display_title": "Dependency.java.txt"
+          },
+          "isError": false
+        }
+      }
+    }
+  ]
+}

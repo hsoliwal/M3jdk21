@@ -1,0 +1,115 @@
+--- runtime-v4.py
++++ runtime-v5.py
+@@ -1,6 +1,7 @@
+ #!/usr/bin/env python3
+ """Bounded receiving-context checks; uses the unchanged installer and intake owner."""
+ import argparse
++import ast
+ import hashlib
+ import json
+ import os
+@@ -21,6 +22,20 @@
+ CURRENT_PACKET_SHA='3b556b885af4b5afeb0b9f22a4bcceea93b6c836125019bde1534652d77c7639'
+ CURRENT_RECEIPT_SHA='ae4758723f215fda7db7568df5441d83a773eabc7791f86505ca9dfc7c1416db'
+ REGISTRY_SHA='245fcd73135ef418a30ee350049719574f86222e08c63219d883119b3dc8321f'
++JCC_CRATE='m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005'
++JCC_POM='m3/tooling/migration-recipes/pom.xml'
++OLD_POM_SHA='8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888'
++CURRENT_POM_SHA='a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9'
++ADDED_TARGETS={
++    'm3/migration/test/test_jcc_handoff_current_context.py',
++    JCC_CRATE+'/plan-intake-752-ci.json',
++    JCC_CRATE+'/pom-before-752.xml',
++}
++JCC_PROFILES=[
++    ('before','before',OLD_POM_SHA,'plan.json','648f80ae4073400f1ea1210f8cdc26942019d53eb4452d839961c466f395d05a','jcc-handoff-20261005/2','70283e86d30abf8e30a09b10d77be40f99160371a98927dc151d680e3c2e4a87'),
++    ('after','after',OLD_POM_SHA,'plan-intake-8131.json','8034d77f1124584888dce10760bd2f5dae55eeb93497f7a0db1d09a3a197ec5f','jcc-handoff-20261005/2-intake-8131','0704f21408ef263d4d0adc9eb5d48e62c7c30949cb1a197fb9b7f8a21aff4152'),
++    ('current','after',CURRENT_POM_SHA,'plan-intake-752-ci.json','e4ea964db1a6f9527122ff0dad1c969a43dc50a0f80c771c86b70bcd6da6dcaf','jcc-handoff-20261005/2-intake-752-ci','6e8d48067e814566e0c63db14db405c360c8ff3ab4948d352170b6ca20293594'),
++]
+ 
+ 
+ def require(ok,message):
+@@ -72,16 +87,28 @@
+         return out.read_bytes(),err.read_bytes()
+     plan_path=source/TASK/'crate/plan.json';plan=load(plan_path);rows=plan['outputs']
+     target_count=manifest['provenance']['declaredOutputCount']
+-    require(target_count==19 and len(rows)==target_count and {r['path'] for r in rows}=={r['path'] for r in manifest['producerOutputs']},'nineteen exact target installer closure')
++    require(target_count==24 and len(rows)==target_count and {r['path'] for r in rows}=={r['path'] for r in manifest['producerOutputs']},'twenty-four exact target installer closure')
++    require(manifest['provenance']['addedTargetPaths']==sorted(ADDED_TARGETS),'exact three declared additions')
++    require({r['path'] for r in rows if r['before'] is None}==ADDED_TARGETS,'installer ABSENT preimages')
++    operations={r['path']:('ADD' if r['path'] in ADDED_TARGETS else 'REPLACE') for r in rows}
++    require(manifest['provenance']['outputOperations']==operations,'exact target operation mapping')
+     producer_by_path={r['path']:r for r in manifest['producerOutputs']}
+     expected=inventory(source);installed=area/'installed';shutil.copytree(source,installed)
+     for row in rows:
+-        before=(plan_path.parent/row['before']['resource']).read_bytes();after=(plan_path.parent/row['after']['resource']).read_bytes()
+-        require(sha(before)==row['before']['sha256'] and sha(after)==row['after']['sha256'],'installer image drift')
++        after=(plan_path.parent/row['after']['resource']).read_bytes()
++        require(sha(after)==row['after']['sha256'],'installer postimage drift')
+         produced=producer_by_path[row['path']]
+         require(sha(after)==produced['sha256'] and len(after)==produced['bytes'],'installer postimage differs from actual recipe output')
+         require((installed/row['path']).read_bytes()==after,'installed initial candidate mismatch')
+-        (installed/row['path']).write_bytes(before)
++        if row['before'] is None:
++            require(row['path'] in ADDED_TARGETS,'undeclared ABSENT preimage')
++            (installed/row['path']).unlink()
++        else:
++            require(row['path'] not in ADDED_TARGETS,'ADD target has a concrete preimage')
++            before=(plan_path.parent/row['before']['resource']).read_bytes()
++            require(sha(before)==row['before']['sha256'],'installer preimage drift')
++            (installed/row['path']).write_bytes(before)
++    require(all(not (installed/p).exists() for p in ADDED_TARGETS),'all additions absent before apply')
+     before=inventory(installed);installer=source/INSTALLER
+     def recipe(name,mode,root=installed,selected_plan=plan_path,expected_code=0):
+         return run(name,[python,str(installer),mode,'--plan',str(selected_plan),'--root',str(root)],proof,expected_code)
+@@ -100,7 +127,7 @@
+     require(json.loads(recipe('installer-apply','apply')[0])['writes']==target_count and inventory(installed)==expected,'exact declared-target apply')
+     require(json.loads(recipe('installer-repeat','apply')[0])['writes']==0 and inventory(installed)==expected,'fixed point')
+     require(json.loads(recipe('installer-after','check')[0])['state']=='after','after state')
+-    require(json.loads(recipe('installer-rollback','rollback')[0])['writes']==target_count and inventory(installed)==before,'rollback')
++    require(json.loads(recipe('installer-rollback','rollback')[0])['writes']==target_count and inventory(installed)==before and all(not (installed/p).exists() for p in ADDED_TARGETS),'rollback including three ABSENT additions')
+     require(json.loads(recipe('installer-reapply','apply')[0])['writes']==target_count and inventory(installed)==expected,'reapply')
+     # The retained invalid source must remain evidence of the actual NUL defect.
+     policy=[r for r in rows if r['path']=='m3/backports/compatibility_policy.py'][0]
+@@ -112,17 +139,26 @@
+     for mode,code in [('validate',0),('complete',2)]:
+         out,_=run('canonical-'+mode,[python,str(validator),mode,str(installed),'--previous',str(installed/OLDTASK/'inputs/master.json')],installed,code)
+         require(b'MIGRATION_MANIFEST_VALID completion=INCOMPLETE' in out and inventory(installed)==expected,'bounded canonical validation')
+-    # Retain all six behavior bodies under both exact known JCC validator profiles.
++    # Retain all six behavior bodies under all three exact validator/POM pairs.
+     old_plan_path=source/'m3/migration/intake-20261005/crate/plan.json';old_plan=load(old_plan_path)
+     migration_row=next(r for r in old_plan['outputs'] if r['path']==MIGRATION);profiles=[]
+-    for state in ['before','after']:
+-        root=area/('jcc-'+state);shutil.copytree(source,root);image=migration_row[state]
++    old_pom=(source/JCC_CRATE/'pom-before-752.xml').read_bytes();current_pom=(source/JCC_POM).read_bytes()
++    require(sha(old_pom)==OLD_POM_SHA and sha(current_pom)==CURRENT_POM_SHA,'exact historical and current JCC POM images')
++    packet_ast=ast.parse((source/'m3/migration/test/test_jcc_handoff_packet.py').read_text())
++    packet_names=sorted(n.name for c in packet_ast.body if isinstance(c,ast.ClassDef) and c.name=='JccHandoffPacketTests' for n in c.body if isinstance(n,ast.FunctionDef) and n.name.startswith('test_'))
++    require(len(packet_names)==6,'six retained packet methods')
++    for state,migration_state,pom_sha,plan_name,plan_sha,recipe_id,plan_seal in JCC_PROFILES:
++        root=area/('jcc-'+state);shutil.copytree(source,root);image=migration_row[migration_state]
+         code=(old_plan_path.parent/image['resource']).read_bytes();require(sha(code)==image['sha256'],'JCC historic image drift');(root/MIGRATION).write_bytes(code)
++        pom=old_pom if state in ['before','after'] else current_pom
++        require(sha(pom)==pom_sha,'JCC tuple POM identity');(root/JCC_POM).write_bytes(pom)
++        selected=root/JCC_CRATE/plan_name;selected_plan=load(selected)
++        require(sha(selected.read_bytes())==plan_sha and selected_plan['recipe_id']==recipe_id and selected_plan['plan_sha256']==plan_seal,'exact selected JCC plan')
+         frozen=inventory(root)
+         out,err=run('jcc-'+state,[python,'-m','unittest','discover','-s',str(root/'m3/migration/test'),'-p','test_jcc_handoff_packet.py','-v'],root,jcc=root)
+-        text=(out+b'\n'+err).decode();observed=re.findall(r'^test_\w+ \([^)]+\) \.\.\. ok$',text,re.M)
+-        require(len(observed)==6 and re.findall(r'^Ran ([0-9]+) tests? in ',text,re.M)==['6'] and inventory(root)==frozen,'six retained JCC tests per profile')
+-        profiles.append({'profile':state,'tests':6,'validatorSHA256':image['sha256'],'files':frozen})
++        text=(out+b'\n'+err).decode();observed=re.findall(r'^(test_\w+) \([^)]+\) \.\.\. ok$',text,re.M)
++        require(sorted(observed)==packet_names and re.findall(r'^Ran ([0-9]+) tests? in ',text,re.M)==['6'] and inventory(root)==frozen,'six retained JCC tests per profile')
++        profiles.append({'profile':state,'tests':6,'methods':packet_names,'validatorSHA256':image['sha256'],'pomSHA256':pom_sha,'plan':plan_name,'planSHA256':plan_sha,'recipeId':recipe_id,'planSeal':plan_seal,'files':frozen})
+     require(sha((installed/OLD_PACKET).read_bytes())==ORIGINAL_PACKET_SHA and sha((installed/OLD_RECEIPT).read_bytes())==ORIGINAL_RECEIPT_SHA,'original evidence bytes')
+     out,err=run('old-packet-current-authority-refusal',[python,str(validator),'intake',str(installed),'--intake-packet',str(installed/OLD_PACKET),'--expected-sha256',ORIGINAL_PACKET_SHA],installed,2)
+     require(not out and b'intake: canonical mapping binding' in err and inventory(installed)==expected,'old authority refusal')
+@@ -144,7 +180,7 @@
+     maven=[str(Path(tools['mavenHome'])/'bin/mvn'),'-o','-B','-ntp','-s',str(proof/'harness/empty-settings.xml'),'-gs',str(proof/'harness/empty-settings.xml'),'-Dmaven.repo.local='+tools['cache'],'-Dm3.python='+python,'-f',str(installed/TASK/'pom.xml'),'verify']
+     run('task-maven-recipe',maven,installed)
+     require(inventory(installed)==expected,'Maven task changed product context')
+-    write(proof/'runtime-report.json',{'schema':'m3.current-752-runtime/1','state':'PASS_BOUNDED_RECEIVER_CHECKS','source':manifest['source'],'receiving':manifest['receiving'],'publicationHead':manifest['publicationHead'],'producerResultSHA256':manifest['provenance']['producerResultSHA256'],'additionalProducerResultSHA256':manifest['provenance']['additionalProducerResultSHA256'],'ciaProducerResultSHA256':manifest['provenance']['ciaProducerResultSHA256'],'cicProducerResultSHA256':manifest['provenance']['cicProducerResultSHA256'],'declaredOutputCount':target_count,'installer':{'applyWrites':target_count,'repeatWrites':0,'rollbackWrites':target_count,'reapplyWrites':target_count,'refusals':refusals},'jccProfiles':profiles,'originalReceiptSHA256':ORIGINAL_RECEIPT_SHA,'currentReceiptSHA256':CURRENT_RECEIPT_SHA,'readOnlyReplays':receipts,'registrySHA256':REGISTRY_SHA,'registryRecords':81,'retainedOutputs':35,'installedFiles':expected,'historicalFiles':hist_before,'runtimeCommands':command_rows,'canonicalProductionApplied':False,'wholeSourceTreeCovered':False,'runtimeAccepted':False,'productWrites':0,'nativeReexecuted':False,'nativePublicationManifestSHA256':manifest['provenance']['nativePublicationManifestSHA256']})
++    write(proof/'runtime-report.json',{'schema':'m3.current-752-runtime/1','state':'PASS_BOUNDED_RECEIVER_CHECKS','source':manifest['source'],'receiving':manifest['receiving'],'publicationHead':manifest['publicationHead'],'producerResultSHA256':manifest['provenance']['producerResultSHA256'],'additionalProducerResultSHA256':manifest['provenance']['additionalProducerResultSHA256'],'ciaProducerResultSHA256':manifest['provenance']['ciaProducerResultSHA256'],'cicProducerResultSHA256':manifest['provenance']['cicProducerResultSHA256'],'cihProducerResultSHA256':manifest['provenance']['cihProducerResultSHA256'],'addedTargetPaths':sorted(ADDED_TARGETS),'historical569ActiveExceptions':manifest['provenance']['historical569ActiveExceptions'],'declaredOutputCount':target_count,'installer':{'applyWrites':target_count,'repeatWrites':0,'rollbackWrites':target_count,'reapplyWrites':target_count,'refusals':refusals},'jccProfiles':profiles,'originalReceiptSHA256':ORIGINAL_RECEIPT_SHA,'currentReceiptSHA256':CURRENT_RECEIPT_SHA,'readOnlyReplays':receipts,'registrySHA256':REGISTRY_SHA,'registryRecords':81,'retainedOutputs':35,'installedFiles':expected,'historicalFiles':hist_before,'runtimeCommands':command_rows,'canonicalProductionApplied':False,'wholeSourceTreeCovered':False,'runtimeAccepted':False,'productWrites':0,'nativeReexecuted':False,'nativePublicationManifestSHA256':manifest['provenance']['nativePublicationManifestSHA256']})
+     require(inventory(source)==manifest['files'],'frozen context changed')
+     print('M3_CURRENT_752_RUNTIME_PASS')
+ 

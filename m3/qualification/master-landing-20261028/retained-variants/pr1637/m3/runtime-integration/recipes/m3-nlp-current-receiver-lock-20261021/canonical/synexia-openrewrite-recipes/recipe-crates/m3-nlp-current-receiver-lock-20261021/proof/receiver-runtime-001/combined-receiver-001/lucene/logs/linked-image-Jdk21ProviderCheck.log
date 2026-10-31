@@ -1,0 +1,5 @@
+Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData
+WARNING: Using incubator modules: jdk.incubator.vector
+Oct 21, 2026 3:38:11 AM org.apache.lucene.util.HotspotVMOptions <clinit>
+WARNING: Lucene cannot access JVM internals to optimize algorithms or calculate object sizes, unless the 'jdk.management' Java module is readable [please add 'jdk.management' to modular application either by command line or its module descriptor].
+Java 21 core vector fallback passed

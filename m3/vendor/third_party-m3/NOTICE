@@ -1,0 +1,6 @@
+M3 refactor layer over the vendored third-party modules
+Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project
+
+Module descriptors (provenance kind m3-descriptor-for-jmod) generated with jdeps and written by the
+OpenRewrite recipe com.m3.rewrite.jmod.M3ModuleDescriptorRecipe; Apache-2.0. The described libraries keep
+their own licences and notices in m3/vendor/third_party/<module>/.

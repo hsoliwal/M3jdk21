@@ -265,6 +265,10 @@ module jdk.compiler {
 
     uses javax.annotation.processing.Processor;
     uses com.sun.source.util.Plugin;
+    uses com.sun.source.util.M3AST.Consumer;
+
+    provides com.sun.source.util.Plugin
+        with com.sun.tools.javac.m3.M3ASTPC;
     uses com.sun.tools.doclint.DocLint;
     uses com.sun.tools.javac.platform.PlatformProvider;
 

@@ -647,6 +647,8 @@ public class JavaCompiler {
                 keepComments = true;
                 genEndPos = true;
             }
+            // M3 is opt-in and binds source facts to this actual parser input.
+            if (!silent) content = com.sun.tools.javac.m3.M3ASTPC.retainSource(context, filename, content);
             Parser parser = parserFactory.newParser(content, keepComments(), genEndPos,
                                 lineDebugInfo, filename.isNameCompatible("module-info", Kind.SOURCE));
             tree = parser.parseCompilationUnit();
@@ -915,8 +917,6 @@ public class JavaCompiler {
             taskListener.started(new TaskEvent(TaskEvent.Kind.COMPILATION));
         }
 
-        if (processors != null && processors.iterator().hasNext())
-            explicitAnnotationProcessingRequested = true;
         // as a JavaCompiler can only be used once, throw an exception if
         // it has been used before.
         if (hasBeenUsed)
@@ -985,6 +985,13 @@ public class JavaCompiler {
         } catch (Abort ex) {
             if (devVerbose)
                 ex.printStackTrace(System.err);
+
+            // In case an Abort was thrown before processAnnotations could be called,
+            // we could have deferred diagnostics that haven't been reported.
+            if (deferredDiagnosticHandler != null) {
+                deferredDiagnosticHandler.reportDeferredDiagnostics();
+                log.popDiagnosticHandler(deferredDiagnosticHandler);
+            }
         } finally {
             if (verbose) {
                 elapsed_msec = elapsed(start_msec);
@@ -1136,6 +1143,9 @@ public class JavaCompiler {
     public void initProcessAnnotations(Iterable<? extends Processor> processors,
                                        Collection<? extends JavaFileObject> initialFiles,
                                        Collection<String> initialClassNames) {
+        if (processors != null && processors.iterator().hasNext())
+            explicitAnnotationProcessingRequested = true;
+
         // Process annotations if processing is not disabled and there
         // is at least one Processor available.
         if (options.isSet(PROC, "none")) {

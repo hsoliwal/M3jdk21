@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.EqualityGates
+displayName: M3JDK21 mixed-side equality gates from known hashes and an ASCII-lower fold
+description: >-
+  String.equals with one M3 side gates on the flat side's cached hashCode against the M3 owner's
+  canonical hash (or prepared range facts) before the unit compare; equalsIgnoreCase and
+  regionMatches(true, ...) with one M3 side fold the flat region's ASCII-lower hash without
+  allocation and reject it against prepared ASCII facts. Both gates prove inequality only and never
+  prepare facts. Java step: M3StringFacts.asciiLowerHashOrNegative, M3String.hashKnownToDiffer, the
+  jtreg proof; text step: String.java (Javadoc cannot be parsed by the pinned Java parser). Stacks
+  on crate m3-facts-scan-fused (its postimages are these preimages).
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-equality-gates
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-equality-gates

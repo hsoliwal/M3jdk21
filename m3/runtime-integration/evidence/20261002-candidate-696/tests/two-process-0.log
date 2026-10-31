@@ -1,0 +1,5 @@
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+MINDEX_INTEGRATION_PASS checks=524336 mapped=true
+MAP 7e5777473000-7e5777474000 r--s 00000000 00:4a 7036874419164714           /mnt/c/worktrees/M3jdk21-runtime-migration-20261002/m3/runtime-integration/evidence/20261002-candidate-696/tests/shared-two-process.bin
+READY id=-6459248878922235902 address=138914128408809
+MAPPING_LIFETIME_PASS id=-6459248878922235902

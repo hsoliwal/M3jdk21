@@ -1,0 +1,86 @@
+{
+  "schema": "M3_EXISTING_COLLECTION_JNI_SYMBOL_VERIFICATION_V1",
+  "java21_generated_header_symbols": [
+    "Java_com_m3_collections_M3BitLane28_cardinality0",
+    "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative",
+    "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative",
+    "Java_com_m3_collections_M3IndexMaskWindow_scanNative",
+    "Java_com_m3_collections_M3IndexPathMasks_selectNative",
+    "Java_com_m3_collections_M3LongAddressKernel_gatherNative",
+    "Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0",
+    "Java_com_m3_collections_M3ResidencyStateMaskIndex_select0",
+    "Java_com_m3_collections_M3SignalOrderNative_sort0",
+    "Java_com_m3_collections_M3SpanIndex_batchNative",
+    "Java_com_m3_collections_M3StateMaskHistogram_tallyNative"
+  ],
+  "native_exported_symbols": [
+    "Java_com_m3_collections_M3BitLane28_cardinality0",
+    "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative",
+    "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative",
+    "Java_com_m3_collections_M3IndexMaskWindow_scanNative",
+    "Java_com_m3_collections_M3IndexPathMasks_selectNative",
+    "Java_com_m3_collections_M3LongAddressKernel_gatherNative",
+    "Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0",
+    "Java_com_m3_collections_M3ResidencyStateMaskIndex_select0",
+    "Java_com_m3_collections_M3SignalOrderNative_sort0",
+    "Java_com_m3_collections_M3SpanIndex_batchNative",
+    "Java_com_m3_collections_M3StateMaskHistogram_tallyNative"
+  ],
+  "missing": [],
+  "unexpected": [],
+  "capability_versions": {
+    "M3IndexMaskCompactor.rangeAbiNative": 1,
+    "M3IndexMaskCompactor.positionsAbiNative": 1
+  },
+  "native_libraries": [
+    {
+      "path": "libm3_collections_address.so",
+      "sha256": "c86c64235e0f4e1b9925ba20c6a7a7267df4d9e63197dd2982d8301a613205c5"
+    },
+    {
+      "path": "libm3_collections_mask.so",
+      "sha256": "57e9805763b99bbb5faa470ef3de605d82b38b2c0271a0a300199f5d31b941dd"
+    },
+    {
+      "path": "libm3_collections_pathmask.so",
+      "sha256": "7520a1f36901523098e939782d6fa52050de914b390d4e1a8393960f14dce332"
+    },
+    {
+      "path": "libm3_collections_span.so",
+      "sha256": "258c9234a940e3ece05f070ecd7572aab6a3d839e326b5b0603390e6a591f2d7"
+    },
+    {
+      "path": "libm3_collections_statehist.so",
+      "sha256": "effaa7360c41d2941566978cfe73e2c2ba69385762701ebef537de32b7db0f21"
+    },
+    {
+      "path": "libm3_residency_state_mask.so",
+      "sha256": "869cb66fd5eac794a821da6e4566667cb85e9c0b4d9612d88c76f1cd60c868c8"
+    },
+    {
+      "path": "libm3rankbatch.so",
+      "sha256": "2e230526bd6d778023880d43c970e2da3520122d5fd6cc7f2d7cb24c640da2cc"
+    },
+    {
+      "path": "libm3signalorder.so",
+      "sha256": "72fcf20892ea2f8d4abbca47e6a5e547adb984313f61b858d8e29d07d37a78cf"
+    },
+    {
+      "path": "libsegmented_bits.so",
+      "sha256": "60c7f6d2da4558b13e08caec15d6f1ecc57154fc89e144d33ad84f2c9b30b322"
+    }
+  ],
+  "capability_versions_actually_invoked": true
+}

@@ -1,0 +1,10 @@
+M3 source search integration
+Copyright 2026 Hitesh Soliwal and contributors
+Licensed under the Apache License, Version 2.0.
+
+Canonical recipes and bounded file-source/facts donors: hsoliwal/com.synexia.
+Apache Lucene and OpenNLP preserve their upstream namespaces, API contracts and
+per-file copyright, LICENSE, NOTICE and embedded donor obligations. Their complete
+notices are retained inside each source-built module under META-INF/third-party.
+SLF4J retains its MIT license. OpenJDK compiler/runtime sources remain governed
+by their existing GPLv2 with Classpath exception notices; they are not relicensed.

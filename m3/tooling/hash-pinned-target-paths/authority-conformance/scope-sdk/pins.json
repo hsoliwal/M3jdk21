@@ -1,0 +1,151 @@
+{
+  "schema": "M3_CANONICAL_SCOPE_BOUNDARY_SDK_INPUTS_V1",
+  "admissionCommit": "24bdaa2c54d7ff2da53f3edfcf068ddd4ffa70f7",
+  "sourceOnly": true,
+  "sourceLineages": {
+    "frozenRecipeInput": {
+      "commit": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
+      "gitBlob": "9174dd681f0d75b5086fc19904a71524a03972dc"
+    },
+    "branchCanonicalRefusal": {
+      "commit": "24bdaa2c54d7ff2da53f3edfcf068ddd4ffa70f7",
+      "gitBlob": "d24729950508857280ea1b56d4e930f05137ec85"
+    },
+    "publicHistoricalRefusal": {
+      "commit": "0000dd38d8b7ea7d49173c0adee02b08563954c1",
+      "gitBlob": "2768fe5846c2c67c52e872a97f735a0fb4d0d69a"
+    }
+  },
+  "providers": {
+    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+  },
+  "files": [
+    {
+      "path": "FOSS_REUSE_DECISION.tsv",
+      "gitBlob": "dc3e1b4041fcda7bd5fcc457fbf6a51b02f4d7ee",
+      "bytes": 898,
+      "sha256": "5520a5e9fab3c0143bc5065ce208df0d04a8e751633e5fbf61e78eb33a50d1bf"
+    },
+    {
+      "path": "README.md",
+      "gitBlob": "e01389177318ddd06c509a05bb01b19f2ff5cec7",
+      "bytes": 4604,
+      "sha256": "cb3d9b11c9633a772ae22c788a87bb1b1a70e03865e6d9dd77b5d88706347323"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "gitBlob": "e698243622898952a49dc17c8afbdf1ea9d31ca1",
+      "bytes": 1368,
+      "sha256": "42ed4bc0a8b3f57abe547f50861657f7ecbcb72b821cde1b5a731121f8bbea53"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3CanonicalScopeBoundaryInverseRecipe.java",
+      "gitBlob": "7071ddc2f287e8e450c1ce7cabeba87e5d463da5",
+      "bytes": 702,
+      "sha256": "017c3a2909d330b2ce760d330aa0e456033208aff5a7ddec996faed12d90c509"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3CanonicalScopeBoundaryRecipe.java",
+      "gitBlob": "adcfe7ae35f171923f088df655c253b6c6379a46",
+      "bytes": 690,
+      "sha256": "61ee3731aa6e240b4e638bfd4a9816a36403683f6320754a41e3ef9f21e20b81"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "bytes": 10964,
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "bytes": 5187,
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+    },
+    {
+      "path": "pom.xml",
+      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "bytes": 2678,
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/canonical-scope-boundary-20261020-inverse.yml",
+      "gitBlob": "d95f91774a11bbc6440c77194f5185e790ba59dd",
+      "bytes": 430,
+      "sha256": "0bf4d59620ca95f6b6192e791810d7a81f3f269a6a51f271f96412b46aa74486"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/canonical-scope-boundary-20261020.yml",
+      "gitBlob": "8b900c17d3bdaaeb1f60d8dde3ab4c7c66571c0f",
+      "bytes": 418,
+      "sha256": "4701bbfbcc380a6169505987e892cf319956d648e8e2374805b93043e080a3e3"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/canonical-scope-boundary-20261020/before/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "gitBlob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "bytes": 1052,
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/canonical-scope-boundary-20261020/before/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "gitBlob": "9174dd681f0d75b5086fc19904a71524a03972dc",
+      "bytes": 8268,
+      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/canonical-scope-boundary-20261020/inverse/manifest.tsv",
+      "gitBlob": "917f9b251f75f1bcba03b3c86e2a36fb26a5b749",
+      "bytes": 516,
+      "sha256": "88a922854f807a8c577ae4924cb97aebc5b9ac33a6f7498f06414f97cca548f5"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/canonical-scope-boundary-20261020/inverse/out/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "gitBlob": "9174dd681f0d75b5086fc19904a71524a03972dc",
+      "bytes": 8268,
+      "sha256": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/canonical-scope-boundary-20261020/manifest.tsv",
+      "gitBlob": "469219da5424cdbb74e6f00bfd3502b4bceb9b7b",
+      "bytes": 516,
+      "sha256": "b60d40fc62a17b7d390bd41ca845db9e4ed3f50eb1596bed1a81977f24192826"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/canonical-scope-boundary-20261020/out/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "gitBlob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "bytes": 1052,
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/canonical-scope-boundary-20261020/out/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "gitBlob": "8b7d2adb648d98ef8654e5ab4eb0f03560a982c8",
+      "bytes": 9179,
+      "sha256": "e95b11ebad61c551bc25df3276fa560a613d476bcee2d865ac272bd35bdade9d"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3CanonicalScopeBoundaryRecipeTest.java",
+      "gitBlob": "9a0d570c30dd9d0df17d700f7c1efafba61cc8d8",
+      "bytes": 25457,
+      "sha256": "a0544889320689f8423779839d4d62f9d8b1f05b4e02602f277e8db27c9462c6"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/canonical-scope-boundary-20261020/divergent/M3ScopeInference.java.txt",
+      "gitBlob": "d24729950508857280ea1b56d4e930f05137ec85",
+      "bytes": 7655,
+      "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
+    },
+    {
+      "path": "src/test/resources/com/synexia/rewrite/canonical-scope-boundary-20261020/historical/M3ScopeInference.java.txt",
+      "gitBlob": "2768fe5846c2c67c52e872a97f735a0fb4d0d69a",
+      "bytes": 6528,
+      "sha256": "ff929c5e4b4ad7a579b69034479294f37a3cbaac36127b6524d02f60049c068d"
+    },
+    {
+      "path": "verify.py",
+      "gitBlob": "ded464e1f4618d19d0ac76f78ab36707fc4aca7f",
+      "bytes": 26196,
+      "sha256": "be7abdb9750e0614e17b62469c4b4e6323551fde298329c22f111bcc5b4b3647"
+    }
+  ]
+}

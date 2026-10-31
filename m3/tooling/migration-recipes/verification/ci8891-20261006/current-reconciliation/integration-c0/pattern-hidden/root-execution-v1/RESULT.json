@@ -1,0 +1,36 @@
+{
+  "schema": "synexia.root-package-execution/1",
+  "status": "PASS",
+  "spec": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/ROOT-COMMANDS.json",
+    "sha256": "98b87f85a3ee80d5007d3be4aebb08face0e53b918deb7596b37622604f7adc8",
+    "bytes": 8254
+  },
+  "commands": [
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/root-packaging-v1/select.json",
+      "sha256": "7d5894113bf860c014c8b129798bb696a8b473e357db87da0620cf321da17b3d",
+      "bytes": 2008
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/root-packaging-v1/pack.json",
+      "sha256": "46fd5e4d0e176ab9077e27bb5e28345c289ffc5c158eb46a8620bf781e3ed0dd",
+      "bytes": 1677
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/root-packaging-v1/verify.json",
+      "sha256": "c30015e9955134c71cf98a05ea6aa4f257cb60b07df33b68d6a7518e7862ba0c",
+      "bytes": 1380
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/root-packaging-v1/extract.json",
+      "sha256": "5a42f69f059c55fb13691d9e83675bef7ef6750e1cb00cdf843cb10d3fa24341",
+      "bytes": 1536
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/root-packaging-v1/finish.json",
+      "sha256": "32f76c31a7f8461a5a2260c4d71f3a9cc1b2bd94b585740bbb3b24145eab60b4",
+      "bytes": 1203
+    }
+  ]
+}

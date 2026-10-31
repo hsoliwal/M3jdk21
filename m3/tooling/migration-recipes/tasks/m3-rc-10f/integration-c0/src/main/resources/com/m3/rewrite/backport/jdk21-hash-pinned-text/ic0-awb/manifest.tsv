@@ -1,0 +1,5 @@
+m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/a3-lab.md	ABSENT	d9d39747f40bb5eff6ba8639e1e5d0554f0223cc94c09443fe1b2054aac9c3d6	target-1.txt
+m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/a3-mastery.md	ABSENT	01a428a662ffbdbd22dcd39d1fea7b69084ce34cada0bb5582b8c3686615750d	target-2.txt
+m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/a3.md	ABSENT	9c5177ee233ee5335131c9106b7a6faa0041b1cd09e9385e36909d8c6365cf87	target-3.txt
+m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/pom.xml	ABSENT	27308b049acc122f62f9cb9a9a679a94640952c423b04495c0ef5b9a2c824ec1	target-4.txt
+m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt-workflow/before/workflow.yml	ABSENT	b408f0b8d0e4d6e197230e3cb1469d14e0d52aecd33ac55c71f11d513d6e23ec	target-5.txt

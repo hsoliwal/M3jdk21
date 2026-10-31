@@ -1,0 +1,20 @@
+[
+  {
+    "class": "org.eclipse.jdt.core.dom.ASTNode",
+    "identicalOriginal25Generated25Generated21": true,
+    "signatureSha256": [
+      "b7483d0106a58997d63270506f6c55beb7e7d5180030a6bd2c832e83531ea67b",
+      "b7483d0106a58997d63270506f6c55beb7e7d5180030a6bd2c832e83531ea67b",
+      "b7483d0106a58997d63270506f6c55beb7e7d5180030a6bd2c832e83531ea67b"
+    ]
+  },
+  {
+    "class": "org.eclipse.jdt.internal.core.builder.JavaBuilder",
+    "identicalOriginal25Generated25Generated21": true,
+    "signatureSha256": [
+      "b0376b4ba8b6a946b0ca0812e04c7cdc9f711bcbff6cfba70512cd90d670723c",
+      "b0376b4ba8b6a946b0ca0812e04c7cdc9f711bcbff6cfba70512cd90d670723c",
+      "b0376b4ba8b6a946b0ca0812e04c7cdc9f711bcbff6cfba70512cd90d670723c"
+    ]
+  }
+]

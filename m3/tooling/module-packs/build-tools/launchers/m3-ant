@@ -1,0 +1,7 @@
+#!/bin/sh
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+JAVA_HOME=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd) || exit 1
+ANT_HOME="$JAVA_HOME/lib/m3-tools/ant"
+export JAVA_HOME ANT_HOME
+exec "$ANT_HOME/bin/ant" "$@"

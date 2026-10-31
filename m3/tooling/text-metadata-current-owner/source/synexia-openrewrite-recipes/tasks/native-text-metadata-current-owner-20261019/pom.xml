@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion><groupId>com.synexia.m3</groupId><artifactId>text-metadata-current-owner-proof</artifactId><version>1.0.0</version>
+ <packaging>pom</packaging><properties><proof.mode></proof.mode></properties>
+ <build><directory>${m3.qualification.root}/maven-build</directory><plugins><plugin>
+  <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.5.0</version>
+  <executions><execution><id>current-source-and-real-java-c11-jni-proof</id><phase>verify</phase><goals><goal>exec</goal></goals>
+   <configuration><executable>python3</executable><commandlineArgs>-I -S -B "${project.basedir}/qualify.py" --output-root "${m3.qualification.root}" ${proof.mode}</commandlineArgs></configuration>
+  </execution></executions>
+ </plugin></plugins></build>
+ <profiles><profile><id>jni</id><properties><proof.mode>--jni</proof.mode></properties></profile></profiles>
+</project>

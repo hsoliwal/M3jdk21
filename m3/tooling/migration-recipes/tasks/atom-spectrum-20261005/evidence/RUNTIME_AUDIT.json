@@ -1,0 +1,35 @@
+{
+  "status": "FOCUSED_RECEIPTS_AUDITED",
+  "junit_tests": 39,
+  "junit_failures_errors_skips": 0,
+  "generated_expressions": 324,
+  "input_pairs": 225,
+  "recipe_orders": 6,
+  "intermediate_checks": 45,
+  "arithmetic_result_comparisons_per_oracle_across_intermediates": 3280500,
+  "zero_change_sweeps": {
+    "[0, 1, 2]": 2,
+    "[0, 2, 1]": 2,
+    "[1, 0, 2]": 2,
+    "[1, 2, 0]": 3,
+    "[2, 0, 1]": 3,
+    "[2, 1, 0]": 3
+  },
+  "real_corpus_files": 100,
+  "real_corpus_bytes": 4004365,
+  "single_file_statuses": {
+    "NOOP_FIXED_POINT": 15,
+    "PARSE_REFUSED": 14,
+    "TYPE_REFUSED": 71
+  },
+  "real_m3_source_group": {
+    "files": 25,
+    "strict_type_admitted": 25,
+    "compiled": 25,
+    "utf16_cases": 515
+  },
+  "source_snapshot_owners": 2,
+  "full_default_module_gate": "NOT_EXECUTED",
+  "jdk_configure_make_jtreg": "NOT_EXECUTED",
+  "jni_native_runtime": "NOT_EXECUTED"
+}

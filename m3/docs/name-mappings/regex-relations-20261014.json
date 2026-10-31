@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "authority": "m3/docs/name-mapping.json",
+  "status": "source-implemented; numeric Java/JNI qualified; full M3JDK target promotion HOLD",
+  "synexia_base": "8200bd6a92b5e4f81522c177ed0e668bf03664aa",
+  "m3jdk21_base": "d5abed865bd47c4dd5ad78e95704348fe2095ed2",
+  "recipe": "com.synexia.m3.RegexRelationsReceiver",
+  "canonical_recipe_path": "synexia-openrewrite-recipes/recipes/m3-regex-receiver-20261014",
+  "mappings": [
+    {
+      "source": "com.synexia.indexstring.MIndexString",
+      "target": "java.lang.M3String",
+      "disposition": "existing mapping preserved, no alternate text owner"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexStateRelation",
+      "source_blob": "bc5eb2bf64eaacb85011c50749f8b02b7608f4f4",
+      "target": "jdk.internal.mindex.M3StateRelation",
+      "disposition": "four numeric method bodies plus mapped JNI compose/repeat; NOT a full Domain/RangeIndex API port"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexDotStarRelations",
+      "target": "jdk.internal.mindex.M3DotStarRelations",
+      "disposition": "mechanical package/name/progress-adapter mapping; same bounded compiled-atom and owner/range algebra"
+    },
+    {
+      "source": "mindex_state_relation_jni.c + mindex_state_relation.h",
+      "target": "src/java.base/share/native/libjava/M3StateRelation.c + m3_state_relation.h",
+      "disposition": "identifier-only native port; no automatic JNI dispatch"
+    },
+    {
+      "source": "compiled dot/star atoms + canonical relation algebra",
+      "target": "java.lang.M3StringRegexDp.tryMatch",
+      "disposition": "existing M3-backed composite receiver, length>=256; count<64; old pattern/text/work caps; Java default; optional state-work bounded by old DP cells; all refusals retain rolling DP/JDK fallback"
+    }
+  ],
+  "limits": {
+    "max_optional_memo_nodes": 128,
+    "max_depth": 64,
+    "max_states": 64,
+    "max_target_text_units": 8192,
+    "max_target_pattern_units": 128,
+    "max_target_dp_cells": 1000000,
+    "min_hierarchical_text_units": 256,
+    "optional_relation_work": "min(existing cap, textLength * stateCount)"
+  },
+  "not_claimed": [
+    "full Pattern/Matcher replacement",
+    "persistent or cross-process DP cache",
+    "full M3String or MIndex family migration",
+    "full JDK/HotSpot/jtreg qualification",
+    "native automatic dispatch",
+    "universal speedup"
+  ]
+}

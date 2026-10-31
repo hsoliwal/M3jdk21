@@ -1,0 +1,2 @@
+# path	before_sha256	after_sha256	resource
+src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java	5c76caf1c717e4f05c0f2f8adf87265422c0a0e3571dc5e852f8ceaa476c90ba	f964925e59e6b1ef233d3508a6ba901afc9c4bf1430b60fc6ea0f71d6999cc86	00-OopUtilities.java.txt

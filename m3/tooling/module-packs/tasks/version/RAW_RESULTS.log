@@ -1,0 +1,37 @@
+Fresh local command outputs, 2026-10-04. Installed Debian OpenJDK21.0.11; not modified M3JDK21.
+
+=== baseline archive/JVM differential ===
+Exception in thread "main" java.lang.AssertionError: archive/VM mismatch at 0.0 baseline/fixtures-jit/v0-0.jar
+	at com.m3.tools.modulepack.VersionProbe.expect(VersionProbe.java:180)
+	at com.m3.tools.modulepack.VersionProbe.version(VersionProbe.java:98)
+	at com.m3.tools.modulepack.VersionProbe.run(VersionProbe.java:46)
+	at com.m3.tools.modulepack.VersionProbe.main(VersionProbe.java:56)
+exit=1
+
+=== candidate normal VM ===
+M3_CLASS_VERSION_PASS checks=639
+exit=0
+
+=== candidate interpreter VM ===
+M3_CLASS_VERSION_PASS checks=639
+
+=== retained original corpus ===
+M3_MODULE_CHECKS_PASS checks=41
+
+=== source checks ===
+UTF8_NEWLINE_TRAILING_WHITESPACE_PASS (not Checkstyle/PMD/SpotBugs)
+
+=== javap public before/after, identical ===
+Compiled from "M3ModuleInspector.java"
+public final class com.m3.tools.modulepack.M3ModuleInspector {
+  public com.m3.tools.modulepack.M3ModuleInspector();
+  public com.m3.tools.modulepack.M3ModuleArtifact inspect(java.nio.file.Path) throws java.io.IOException;
+  public static java.lang.String sha256(java.nio.file.Path) throws java.io.IOException;
+}
+
+=== initial connected workflow ===
+head=d268250d213a93eb5f64443b92de8e5e1891dff4
+push-run=37180846710 jobs=0 conclusion=failure
+pull-request-run=37180861888 jobs=0 conclusion=failure
+retry-PR-run=403 This workflow run cannot be retried
+No compiler/test/coverage verdict is inferred from these jobless runs.

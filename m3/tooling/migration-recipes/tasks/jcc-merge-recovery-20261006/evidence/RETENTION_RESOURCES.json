@@ -1,0 +1,91 @@
+{
+  "schema": "m3-jcc-retention-integration-resources/1",
+  "status": "FROZEN_TEMPLATES_NOT_EXECUTED",
+  "destination_base": "87590cb96fb0e2dc0f88fae8e01957f7179cd255",
+  "crate": "jcc-merge-recovery-20261006-retention",
+  "targets": 6,
+  "history_targets": 443,
+  "reviewed_packet_sha256": "2f271f5a7bf66e5a77fd4c19db9eef486a0af24f9da5bef0e5d4813de3b71295",
+  "manifest_path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-retention/manifest.tsv",
+  "manifest_sha256": "a8fed905d1de5d2e90a1912fc15bd9064c23a389475cd69b63ebe167cbd4fc1c",
+  "plan_path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-retention/plan.json",
+  "plan_sha256": "45023d28f18af7639eb071845be094b63aa72f28c647ae0796334297c0e1e0a4",
+  "rows": [
+    {
+      "path": ".github/workflows/m3-retained-capability-audit.yml",
+      "before_sha256": "517a8bb2f5e8e7ec0652ff33606155835084bd9669e936e7ecdc80984a857940",
+      "after_sha256": "f60cd12f2a0b1530f022c4aa9f98d48647a136328be7b67dd117cd08d1081300",
+      "before_git_blob": "a35908062f2d967b904c7491b568c37a9cd53dfa",
+      "after_git_blob": "ee6902e0df9269026182a6dea9496a5e4fdf790f",
+      "before_bytes": 1791,
+      "after_bytes": 2832,
+      "before_resource": "before-00.txt",
+      "after_resource": "after-00.txt",
+      "review_authority": "workflow.yml.txt"
+    },
+    {
+      "path": "m3/history/README.md",
+      "before_sha256": "ef145204809b2ab1b3fa79b75ce740dfddb1d536f98f65b14ba50eea057fc4fc",
+      "after_sha256": "8918e530b22f7960db1a3918a5685978fd9fc14ed35338faefb224d935d7f5c0",
+      "before_git_blob": "1c012956c7ae68a9651144f4643a6013a3cdb9a2",
+      "after_git_blob": "caef24cd8c170b36db726dd905919d4a57ac37ed",
+      "before_bytes": 9171,
+      "after_bytes": 14225,
+      "before_resource": "before-01.txt",
+      "after_resource": "after-01.txt",
+      "review_authority": "README.md.txt"
+    },
+    {
+      "path": "m3/history/RETAINED_CAPABILITIES.tsv",
+      "before_sha256": "f25f982c294aa0ec17911a54e4245072923f7b1f73f2422997b567c67e7f20e5",
+      "after_sha256": "3c9fa3ab96110d58d83caa75f806b8677379a5d086976245f2f74efec9c7e7d8",
+      "before_git_blob": "b550fe9d9008f0a8334bd69e4bd53430b51a535a",
+      "after_git_blob": "75eef39ed983f96ea39bd6c20d64d3c69e22d53f",
+      "before_bytes": 319,
+      "after_bytes": 691,
+      "before_resource": "before-02.txt",
+      "after_resource": "after-02.txt",
+      "review_authority": "exact catalogue prefix plus two history manifests"
+    },
+    {
+      "path": "m3/history/retention-pom.xml",
+      "before_sha256": "14c29126da786a7456a55ce400f5a800dfe53693e6c329e7342bf2fabb087e11",
+      "after_sha256": "b4f00263594158b47e76ccb34000095f46bc3f66a69151304fe7b544dad6ca15",
+      "before_git_blob": "8c02223c7af8ca2e415103dcdea930d6ad9c7beb",
+      "after_git_blob": "e2485c372f5cac990e4920e4fb83c65b5be77e50",
+      "before_bytes": 2726,
+      "after_bytes": 3716,
+      "before_resource": "before-03.txt",
+      "after_resource": "after-03.txt",
+      "review_authority": "retention-pom.xml.txt"
+    },
+    {
+      "path": "m3/history/retention.py",
+      "before_sha256": "06c713d051ce0411b9c8a4faeafeaa3245b75ff4350e8f9afd94f15dd86451e4",
+      "after_sha256": "ccd63d4e05f51e816548ad9da4e5a0ce880a9cf90b1fd0dfe80b04f30f7d8a14",
+      "before_git_blob": "3bb3bba9a620c253ac1ad82736a923e0660c6ae2",
+      "after_git_blob": "b8d57642120f1ae5fef7765dea292f1594def3f6",
+      "before_bytes": 7189,
+      "after_bytes": 19982,
+      "before_resource": "before-04.txt",
+      "after_resource": "after-04.txt",
+      "review_authority": "retention.py.txt"
+    },
+    {
+      "path": "m3/history/test_retention.py",
+      "before_sha256": "68ae3ae0be2f45f9746c9573bf949698221a99696715065a14a293729c022a0c",
+      "after_sha256": "6d11c5ff5d429daca053775a7b8eae9cbe89c3498c3b33c4f0f576c36b2b91c3",
+      "before_git_blob": "87e86678a7ea7238f9f30c3974dd1962e26a71a4",
+      "after_git_blob": "268c50cb323b482f9bae57a5919c61b5c8ee1bb3",
+      "before_bytes": 5468,
+      "after_bytes": 28135,
+      "before_resource": "before-05.txt",
+      "after_resource": "after-05.txt",
+      "review_authority": "test_retention.py.txt"
+    }
+  ],
+  "current_tree_captures": [
+    "calls/current_refresh_m3_tree.json",
+    "calls/current_refresh_github_tree.json"
+  ]
+}

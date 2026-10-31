@@ -1,0 +1,6 @@
+S:\m3-scratch\m3jdk-superset-20261029\gate21u\wt-cand\src\java.base\share\classes\sun\security\util\KnownOIDs.java|variable ML_DSA_44 is already defined in enum KnownOIDs
+S:\m3-scratch\m3jdk-superset-20261029\gate21u\wt-cand\src\java.base\share\classes\sun\security\util\KnownOIDs.java|variable ML_DSA_65 is already defined in enum KnownOIDs
+S:\m3-scratch\m3jdk-superset-20261029\gate21u\wt-cand\src\java.base\share\classes\sun\security\util\KnownOIDs.java|variable ML_DSA_87 is already defined in enum KnownOIDs
+S:\m3-scratch\m3jdk-superset-20261029\gate21u\wt-cand\src\java.base\share\classes\sun\security\util\KnownOIDs.java|variable ML_KEM_1024 is already defined in enum KnownOIDs
+S:\m3-scratch\m3jdk-superset-20261029\gate21u\wt-cand\src\java.base\share\classes\sun\security\util\KnownOIDs.java|variable ML_KEM_512 is already defined in enum KnownOIDs
+S:\m3-scratch\m3jdk-superset-20261029\gate21u\wt-cand\src\java.base\share\classes\sun\security\util\KnownOIDs.java|variable ML_KEM_768 is already defined in enum KnownOIDs

@@ -1,0 +1,49 @@
+{
+  "schema": "M3JDK21_COLLECTIONVIEWS_IDENTITY_SUCCESSOR_V1",
+  "productRepository": "hsoliwal/M3JDK21",
+  "canonicalRecipeWorkspace": "hsoliwal/com.synexia",
+  "targetOwner": "src/java.base/share/classes/java/util/CollectionViews.java",
+  "targetBaseBranch": "m3/java-base-filtered-cursor-reentry-20261021-gpt6",
+  "targetPinnedParentCommit": "ef24da4c5224ca0f728db3c3c30fa412592c7765",
+  "targetParentGitBlob": "1df992f3258e3b8573003172d9b7ea7083ac5e18",
+  "targetSuccessorGitBlob": "3a4258b2846c311d812883314d7c178f32feeabb",
+  "targetSuccessorSha256": "b739779bddf9a89ec1c0266fbbe70923101cd139974e76c917ed2f45648315fc",
+  "donorRecipes": [
+    "hsoliwal/com.synexia#12865",
+    "hsoliwal/com.synexia#12866"
+  ],
+  "productDonors": [
+    "hsoliwal/M3JDK21#1770",
+    "hsoliwal/M3JDK21#1773",
+    "hsoliwal/M3JDK21#1116"
+  ],
+  "behavioralAtoms": [
+    "FilteredCollection.contains: Set membership admission and exact stored reference precedence",
+    "FilteredCollection.remove: Set physical owner and identity preservation"
+  ],
+  "existingAtomsPreserved": [
+    "SelectionSpliterator.tryAdvance reentrant callback state",
+    "FilteredCollection List indexed physical removal",
+    "FilteredSortedSet comparator representative",
+    "FilteredNavigableSet bounded cursor",
+    "SelectionSpliterator SORTED/DISTINCT owner metadata"
+  ],
+  "publicAbi": "UNCHANGED_IN_SOURCE_CANDIDATE_NOT_JAVAP_VERIFIED",
+  "newJniSymbols": 0,
+  "performance": "No speedup claimed; Set.contains introduces owner admission plus O(n) representative search",
+  "proof": {
+    "parent-red-identity": "SCRIPT_ADDED_NOT_EXECUTED",
+    "postimage-compile-java21": "SCRIPT_ADDED_NOT_EXECUTED",
+    "storedOccurrenceOracle": "NOT_RUN_EXACT_POSTIMAGE",
+    "filteredRepresentativeContract": "NOT_RUN_EXACT_POSTIMAGE",
+    "reentrantSpliterator": "NOT_RUN_EXACT_POSTIMAGE",
+    "sortedSpliteratorMetadata": "NOT_RUN_EXACT_POSTIMAGE",
+    "BootstrapViewsTest": "NOT_RUN_EXACT_POSTIMAGE",
+    "CollectionViewsContract": "NOT_RUN_EXACT_POSTIMAGE",
+    "sourceBuiltJdkImage": "NOT_RUN",
+    "jtregNativeGc": "NOT_RUN",
+    "canonicalSynexiaSerialOpenRewriteFixedPoint": "PENDING",
+    "targetLicenceReview": "PENDING"
+  },
+  "admission": "DRAFT_REVIEW_CANDIDATE_NO_MASTER_MUTATION"
+}

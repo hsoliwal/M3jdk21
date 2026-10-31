@@ -1,0 +1,33 @@
+{
+  "cwd": "/tmp/m3-swt-current-owner-candidate-001",
+  "commands": [
+    [
+      "sdk",
+      [
+        "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+        "-B",
+        "-ntp",
+        "-o",
+        "-Dmaven.repo.local=/tmp/m3-build-m2",
+        "-f",
+        "/tmp/m3-swt-current-owner-candidate-001/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+        "clean",
+        "test"
+      ]
+    ],
+    [
+      "receiver",
+      [
+        "python3",
+        "/tmp/m3-swt-current-owner-candidate-001/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/verify.py",
+        "--receiver",
+        "/tmp/m3-swt-current-owner-candidate-001"
+      ]
+    ]
+  ],
+  "environment": {
+    "JAVA_HOME": "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "MAVEN_OPTS": "-Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData"
+  },
+  "java_release_sha256": "e5a4248b028f6ecd6d43fb1a57fff0f900ef62e026501e95875a60b0cf904338"
+}

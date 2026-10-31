@@ -1,0 +1,13 @@
+# Local executed evidence — 2026-10-17
+Machine: Linux x86_64, OpenJDK 21.0.12.1, Maven 3.9.9, OpenRewrite 8.17.1, JUnit Jupiter 5.10.2.
+Verified actual M3 core Java source baseline: 77 files compiled with --release 21 -proc:none -Xlint:all,-module -Werror.
+Verified Eclipse provider API and implementation: original 11.1.0 JAR files, no test-only stubs for this family.
+Strict Eclipse JDK21 compile of both new adapters and both deterministic oracles: PASS.
+Tiered JVM ListMultimap: PASS checks=161657, seeded_operations=3000.
+Tiered JVM SetMultimap: PASS checks=161679, seeded_operations=3000.
+Interpreter JVM ListMultimap: PASS checks=161657, seeded_operations=3000.
+Interpreter JVM SetMultimap: PASS checks=161679, seeded_operations=3000.
+Aggregate checks per VM mode: 323336. This is NOT a measured speedup.
+Actual Maven/OpenRewrite Java-LST recipe tests: 3 run / 0 failed / 0 errors / 0 skipped; BUILD SUCCESS.
+Six exact ABSENT→SHA-256 template postimages; fixed point; six one-ABSENT states in both orders; occupied source and duplicate refusals passed.
+Remaining: real Apache binary absent from local cache, five-provider integration JUnit not run locally, complete updated M3JDK21 module, source-built JDK, full JNI, JCK/JTReg/serialization/concurrency/JMH not run.

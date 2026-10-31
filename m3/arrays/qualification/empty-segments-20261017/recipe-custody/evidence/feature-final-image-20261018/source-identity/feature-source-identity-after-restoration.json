@@ -1,0 +1,23 @@
+{
+  "schema": "M3_OPENJDK_BUILD_SOURCE_IDENTITY_V1",
+  "scopes": [
+    "src",
+    "make",
+    "configure",
+    "Makefile"
+  ],
+  "built_repository": "/workspace/scratch/2b4d1cb957a7/M3jdk21-features",
+  "built_baseline": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+  "receiving_repository": "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current",
+  "receiving_baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "built_files": 25341,
+  "receiving_files": 25341,
+  "built_bytes": 398067787,
+  "receiving_bytes": 398067787,
+  "built_inventory_sha256": "7f7ead74c77e4e26e4d188a8ee3810e2a939112c9190bac09bd492020099346b",
+  "receiving_inventory_sha256": "7f7ead74c77e4e26e4d188a8ee3810e2a939112c9190bac09bd492020099346b",
+  "byte_comparison_after_matching_hashes": true,
+  "differences": [],
+  "status": "PASS",
+  "limits": "Source identity for the named OpenJDK build scopes. The build configuration, external tools, original build workspace, native image identity and executed tests retain their separate receipts. No separately built m3 module, hosted CI or phase-promotion claim."
+}

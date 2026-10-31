@@ -1,0 +1,371 @@
+{
+  "schema": "M3_NATIVE_COUNT_BATCHING_RECEIVER_V1",
+  "status": "SCOPED_VERIFIED_FOR_DRAFT_REVIEW",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_revision": "ed0982be1de0e217634c92e066e16d9d5120c1f9",
+  "canonical_pr": 13301,
+  "canonical_task": "synexia-openrewrite-recipes/recipes/m3-native-count-batching-20261025",
+  "target_parent": "c4213e5a00282640c66199db55a612a75b31b8f2",
+  "target_pr": 1908,
+  "recipe_engines": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe",
+  "dataset": "m3-native-count-batching-20261025",
+  "scope": "Existing integrated libjava state-only count batching; unchanged scanner/Java owners/API/native exports; target oracle and existing workflow updated",
+  "executed_outputs": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java",
+      "before_sha256": "91c7a99d394fe76a47af0c1eaaa35ffd6d070ee6e2497a63668db8301dd86329",
+      "after_sha256": "91c7a99d394fe76a47af0c1eaaa35ffd6d070ee6e2497a63668db8301dd86329",
+      "template": "00-M3IndexMaskWindow.java.txt",
+      "mode": "100644",
+      "engine": "java"
+    },
+    {
+      "path": "test/jdk/jdk/internal/m3/M3NativeCountBatchingTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "b8995aa7be1bb74aa55b4f843e6d1fffe05222991a612adb01871547e83d5647",
+      "template": "01-M3NativeCountBatchingTest.java.txt",
+      "mode": "100644",
+      "engine": "java"
+    },
+    {
+      "path": ".github/workflows/m3-regex-collection-superset.yml",
+      "before_sha256": "3a58184eec04689755eb9972720024d8a5951fd47eb46455276a62f5ad8c7eaa",
+      "after_sha256": "18c9d5104154a164d7d8e35823d2453d7a7a4cac8a05e6eceeba62c1646b5048",
+      "template": "m3-regex-collection-superset.yml.txt",
+      "mode": "100644",
+      "engine": "text"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3IndexMaskWindow.c",
+      "before_sha256": "4a9c0ab3e8d7a0aac0027e8fb4789f768ee5a48b2db18b7a54e2fd543c5c7f91",
+      "after_sha256": "881a1f4afb97cefe7eb8f2b5d6eba6bb777d537fb3ba5a2b011df3158ba714a7",
+      "template": "M3IndexMaskWindow.c.txt",
+      "mode": "100644",
+      "engine": "text"
+    }
+  ],
+  "preserved_owners": [
+    {
+      "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
+      "sha256": "7fb5c5c9a2be3ba14f1946a2a1c000b61010b93f0fd8894cd3e8b52fecaec203",
+      "git_blob_sha1": "7819788e326c0a833984186af9b4a91f3d156cdf"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+      "sha256": "e09db07fb113233e52a67960411608d8b18dc0eedfc5a7f861cdaecc7c1cc1e6",
+      "git_blob_sha1": "5c39dc53d3bbd80eada25f74b960e22391eeecb6"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexMaskWindow.java",
+      "sha256": "91c7a99d394fe76a47af0c1eaaa35ffd6d070ee6e2497a63668db8301dd86329",
+      "git_blob_sha1": "b9c942d354189c26ed0848d7dd73f21754838049"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/CopyOnWriteArrayList.java",
+      "sha256": "8a68f8a3a662fb3d5d80c41848041e81dfeeb2c659a3a26f8d3742717a8c861d",
+      "git_blob_sha1": "944c61e15ede09dfc0965a425bbd60aafe761176"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CollectionMaskCompactor.java",
+      "sha256": "17a2c1b601d5552b3baeb6751c18700f7254ee6faa23afc0913cf3c45a3b4c05",
+      "git_blob_sha1": "3f88d207e1f6d68da96477a0d184cf8d1caaa6d7"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+      "sha256": "b7a474ba351d6d29d0a29467e5cb4fb8aa3b387cd01e29d831a06705edb9e147",
+      "git_blob_sha1": "4974e71c6db4dcb74b4fe6943254db38a801daac"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+      "sha256": "b6dbec25d39bb18f08e66625b4063cb6848bf34c33fd43b1392ccaff8d35937a",
+      "git_blob_sha1": "252e46fb57e824f30688eac3600bae9480511fc8"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+      "sha256": "6ffb6eb3bf57c56101dbcfe97e97f529324efa6363c9648065ee58302e01b48c",
+      "git_blob_sha1": "91028d46e069879446a03cf815e7043866924e6b"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "sha256": "1f730adaf2e7abb82f464d75008d5884bbc121b19f9d7ff770a220edc427340e",
+      "git_blob_sha1": "8fc8308c919d60c78b80843d3e601553b16f19d4"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+      "sha256": "0c79f59b111bc1669a626c4a45598b7205319522b0c00c56ef009a8b9ea660e5",
+      "git_blob_sha1": "e6059aeb9b2e7f332fb0baea2684395c268a5414"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedView.java",
+      "sha256": "cf42b786168ec31bfa29f1c8c7bf6021f67690cb69a747975de45d8d384ee61d",
+      "git_blob_sha1": "1dec3dbe282a53f20c3c70458d949ac3f7df53b5"
+    }
+  ],
+  "sdk": {
+    "engines": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe + M3HashPinnedTextSnapshotRecipe",
+    "dataset": "m3-native-count-batching-20261025",
+    "SDK_EXECUTION": "PASS",
+    "tests": 12,
+    "java_mixed_states": 2,
+    "text_mixed_states": 4,
+    "input_orders": 2,
+    "exact_exports": 4,
+    "changed_exports": 3,
+    "engine_modified": false,
+    "fixed_point": "PASS",
+    "missing_drift_duplicate_refusal": "PASS"
+  },
+  "verification": {
+    "status": "SCOPED_SOURCE_BEHAVIOR_CPU_AND_ALLOCATION_PASS",
+    "executed_outputs": 4,
+    "changed_outputs": 3,
+    "java_outputs": 2,
+    "text_outputs": 2,
+    "preserved_owners": 11,
+    "sdk_tests": 12,
+    "java_mixed_states": 2,
+    "text_mixed_states": 4,
+    "input_orders": 2,
+    "jtreg_passed": 57,
+    "native_required": true,
+    "oracle_modes": 6,
+    "checks_each": 134187,
+    "native_probe_checks": 419983,
+    "lost_batch_mutant": "COMPILE_VALID_REJECTED",
+    "source_zip": "ALL_SCOPED_JAVA_OWNERS_EXACT",
+    "api": "BYTE_EQUAL_PROTECTED_SIGNATURES_4_OWNERS",
+    "native": "EXPORTED_LIBJAVA_NAMES_EQUAL",
+    "workflow": "SOURCE_SEALS_COMPILATION_REGEX_AND_COLLECTION_RUNTIME_PASS",
+    "resource_cohorts": 30,
+    "resource_processes": 180,
+    "allocation_delta_bytes_per_call": 0,
+    "cpu_max_ratio": 1.1143444613737896,
+    "long_window_cohorts": 12,
+    "long_window_at_least_10_percent_cpu_reduction": 12,
+    "long_window_cpu_ratio_range": [
+      0.582422179381913,
+      0.7503992257493529
+    ],
+    "scope": "Linux x86_64 finite measurements; no universal CPU claim or full JDK/JCK certification",
+    "full_programme": "NOT_QUALIFIED",
+    "focused_cpu_cohorts": 2,
+    "focused_processes": 20,
+    "focused_cpu_ratio_range": [
+      1.0117015716146156,
+      1.0438353115442325
+    ],
+    "initial_counterevidence": "Java128 initial1.1143x preserved; five-pair same-protocol focused repeat and adjacent control. Cause unconfirmed; no universal CPU claim."
+  },
+  "image_identity": {
+    "variant": "candidate",
+    "root": "/workspace/scratch/abdb4b1178cf/m3-pass5/build/m3-mask-word-survivors-20261025/images/jdk-pass12",
+    "files": [
+      {
+        "path": "bin/java",
+        "sha256": "ad70aef14502b7716e0c0f28818c511447dd23883eb2bb38fa1d56e48641bd93",
+        "bytes": 16320
+      },
+      {
+        "path": "lib/modules",
+        "sha256": "f7a933f296c89d8c5ddacfbbdda0d073ceaee0426b1c91d9cf38100c5744edd3",
+        "bytes": 143556307
+      },
+      {
+        "path": "lib/libjava.so",
+        "sha256": "226859aed00ade756e4a5abaa06df7fcc4c8417bbcbd7e5723d4c4609061787c",
+        "bytes": 215880
+      },
+      {
+        "path": "lib/server/libjvm.so",
+        "sha256": "837f3934a5c318f5f93bb49479c63bb1fce55176238b6b3038e0960c106b9e16",
+        "bytes": 26473136
+      }
+    ]
+  },
+  "jtreg": {
+    "passed": 57,
+    "flags": "-Xcheck:jni",
+    "native_required": true,
+    "summary": "evidence/image/jtreg-summary.txt",
+    "scope": "Selected collection/COW/JNI and regex suite, not full JDK/JCK"
+  },
+  "oracles": {
+    "mode_runs": 6,
+    "checks_each": 134187,
+    "modes": [
+      "default",
+      "interpreter",
+      "C1",
+      "C2",
+      "SerialGC",
+      "ZGC"
+    ],
+    "native_boundary_checks": 419983,
+    "sanitizers": "ASan + UBSan PASS; LeakSanitizer blocked by sandbox /proc/task",
+    "transfer_red_green": "4097states: baseline33reads fails1024budget; candidate5reads passes",
+    "fault_injection": "Pending exception stops later transfers and returns sentinel",
+    "mutation": "Compile-valid lost-prior-batch reduction rejected",
+    "evidence": "evidence/native/commands.json"
+  },
+  "workflow": {
+    "source_seals": "PASS",
+    "actual_full_standalone_compilation": "PASS",
+    "actual_regex_reuse_runtime": "PASS",
+    "actual_full_selected_collection_JNI_runtime": "PASS",
+    "hosted_image_path_substitution_only": true,
+    "commands": "evidence/workflow/commands.json",
+    "complete_remote_workflow": "NOT_CLAIMED"
+  },
+  "resources": {
+    "decision": "ADMIT_SCOPED_NATIVE_COUNT_BATCHING",
+    "cohorts": 30,
+    "processes": 180,
+    "long_window_cohorts": 12,
+    "long_window_at_least_10_percent_cpu_reduction": 12,
+    "long_window_cpu_ratio_range": [
+      0.582422179381913,
+      0.7503992257493529
+    ],
+    "initial_maximum_cpu_ratio": 1.1143444613737896,
+    "initial_counterevidence": "Java128 initial1.1143x preserved; five-pair same-protocol focused repeat and adjacent control. Cause unconfirmed; no universal CPU claim.",
+    "focused_cohorts": 2,
+    "focused_processes": 20,
+    "focused_cpu_ratio_range": [
+      1.0117015716146156,
+      1.0438353115442325
+    ],
+    "focused_summary": "evidence/resources/focused/summary.json",
+    "allocation_delta_bytes_per_call": 0,
+    "count_stack_frame_bytes": {
+      "baseline": 240,
+      "candidate": 1136
+    },
+    "scanner_stack_frame_bytes": 1440,
+    "aggregation": "Median last5of9samples/process then median3alternating pairs;12warmup batches; fixed seed; no JMH confidence intervals",
+    "scope": "Linux x86_64 finite single-host; setup excluded, call and result consumption included; no universal gain claim",
+    "summary": "evidence/resources/summary.json",
+    "plan": "evidence/resources/plan.json",
+    "retained_processes": 6,
+    "retained_summary": {
+      "baseline": {
+        "used_heap": 9886104,
+        "peak_rss_kib": 53008,
+        "nmt_reserved": 1492077066,
+        "nmt_committed": 290925066
+      },
+      "candidate": {
+        "used_heap": 9886440,
+        "peak_rss_kib": 52964,
+        "nmt_reserved": 1492077108,
+        "nmt_committed": 290925108
+      }
+    },
+    "retained_scope": "Whole-process heap/RSS/NMT only; no causal per-function attribution",
+    "retained_evidence": "evidence/resources/retained-summary.json"
+  },
+  "review": {
+    "reviewer": "fresh gpt-6-astra /root/review_native_count_pass12",
+    "status": "APPROVED_SCOPED_DRAFT_SUBJECT_TO_REMOTE_CUSTODY",
+    "critical": [],
+    "important_runtime": [],
+    "minor_deferred": [],
+    "publication_prerequisite": "Replace PENDING_VERIFIED_CANONICAL_COMMIT only after exact canonical remote verification, then verify receiving payload before expected-head update",
+    "independent_checks": [
+      "unsigned byte promotion and row cardinality",
+      "clamped tails/shifted bounds and count/cursor packing",
+      "pending exception propagation and no incomplete-buffer consumption",
+      "scanner128 unchanged; fixed1024 count scratch only",
+      "caller synchronization/stable arrays and per-call scratch ownership",
+      "4executed output/template/preimage seals;11preservedowners;8image file seals",
+      "then-current568canonical local/blob identities and180initial+20focused raw CSV aggregation",
+      "catalogue exact prior prefix plus3rows; all prior provenance members retained; policy index pin only"
+    ],
+    "declined_to_qualify": [
+      "Other platforms, compilers and low-stack execution",
+      "Concurrent mutation and stale-generation resumptions",
+      "Maximum-sized arrays and exhaustive OOME",
+      "All real JVM JNI failures",
+      "Universal CPU causality and isolated memory",
+      "LeakSanitizer",
+      "Full JDK/JCK, provider, CDS, reactor and programme",
+      "Full historical provenance, ancestry and recipe residue",
+      "Hosted CI and final remote custody"
+    ],
+    "executor_dispositions": [
+      {
+        "topic": "Other platforms, compilers and low-stack execution",
+        "ruling": "Qualify only recorded Linux x86_64/compiler frame measurements; larger count frame remains below existing scanner frame in this build",
+        "cost_if_wrong": "Other platforms or constrained stacks may behave differently"
+      },
+      {
+        "topic": "Concurrent mutation and stale-generation resumptions",
+        "ruling": "Keep existing stable-input/caller-synchronization contract; no snapshot isolation or linearizable-count claim",
+        "cost_if_wrong": "Misuse or untested concurrent schedules may produce inconsistent results"
+      },
+      {
+        "topic": "Maximum-sized arrays and exhaustive OOME",
+        "ruling": "Arithmetic reviewed; extreme actual allocations and resource failure paths remain unqualified",
+        "cost_if_wrong": "Extreme runtime cases can expose untested failures"
+      },
+      {
+        "topic": "All real JVM JNI failures",
+        "ruling": "Accept inspected pending-exception protocol plus injected faults and actual native runtime tests only",
+        "cost_if_wrong": "Uninjected JVM failure combinations remain a coverage gap"
+      },
+      {
+        "topic": "Universal CPU causality and isolated memory",
+        "ruling": "Retain initial and focused measurements; original regression cause unconfirmed; heap/RSS/NMT are whole-process observations",
+        "cost_if_wrong": "Other workloads may regress and totals may have unrelated causes"
+      },
+      {
+        "topic": "LeakSanitizer",
+        "ruling": "Do not claim PASS; sandbox /proc/task failure retained; only ASan/UBSan qualified",
+        "cost_if_wrong": "Leak detection remains unavailable in this environment"
+      },
+      {
+        "topic": "Full JDK/JCK, provider, CDS, reactor and programme",
+        "ruling": "Keep all broader gates open; standard archive generation is not exhaustive CDS behavior; no merge or phase promotion",
+        "cost_if_wrong": "Premature promotion would overstate compatibility and completeness"
+      },
+      {
+        "topic": "Full historical provenance, ancestry and recipe residue",
+        "ruling": "Scoped ledger/index only; preserve24parent members; local full-borrow remains blocked; remote exact parent/CAS checked separately",
+        "cost_if_wrong": "Historical completeness and cleanup cannot be claimed"
+      },
+      {
+        "topic": "Hosted CI and final remote custody",
+        "ruling": "Local workflow steps are finite evidence; verify canonical and receiving remote trees/blobs/parents and lease before publication claim; report hosted CI separately",
+        "cost_if_wrong": "Remote environment failures or wrong payload would invalidate delivery"
+      }
+    ],
+    "ready_to_merge": false,
+    "broad_tests_rerun": false,
+    "review_only": true
+  },
+  "scoped_provenance": {
+    "status": "SCOPED_PASS",
+    "checked_paths": 570,
+    "checker": "scripts/legal/check_m3_provenance.py load_ledger + validate_change; exact canonical index order/count/pin assertions",
+    "parent_index_members_preserved": 24,
+    "new_index_members": 25,
+    "old_pins_byte_equal": true,
+    "old_relative_order_preserved": true,
+    "canonical_shard_order": "PASS: lexical after canonical first member",
+    "policy_change": "only ledger_set.index SHA256 and bytes",
+    "full_historical_gate": "NOT_RUN: full historical ledger set was not recovered; no full pass claimed"
+  },
+  "remaining_gates": [
+    "Full JCK/JDK and cross-platform/provider qualification",
+    "CDS behavior beyond standard archive generation",
+    "Full canonical reactor and historical provenance ledger set",
+    "Local full-borrow gate blocked by shallow ancestry",
+    "Required remote CI and complete hosted workflow execution",
+    "LeakSanitizer unavailable in this sandbox; ASan/UBSan passed",
+    "Exhaustive concurrency/OOME and maximum-size/low-stack platform cases",
+    "Historical public recipe residue and prior pass resource holds unchanged",
+    "String remains active; no naming/backend/phase promotion"
+  ],
+  "receiving_phase": "String remains active; no promotion",
+  "rights": "Existing Apache2 first-party native/test/workflow; unchanged Java/OpenJDK/third-party rights",
+  "boundary": "Passive receipt only; recipes, fixtures, catalogue and correction memory remain exclusively in private Synexia."
+}

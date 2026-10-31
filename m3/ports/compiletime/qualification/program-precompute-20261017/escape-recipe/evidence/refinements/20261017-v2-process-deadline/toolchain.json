@@ -1,0 +1,9 @@
+{
+  "javac_version": "javac 21.0.12.1",
+  "junit_compile_artifacts": {
+    "/tmp/m3-maven-repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar": "afff77c186cd317275803872fa5133aa801fd6ac40bd91c78a6cf8009b4b17cc",
+    "/tmp/m3-maven-repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar": "b56a5ec000a479df4973b18bba24c98fe0db8faa14c8907d3ef451d8c71fd8ae",
+    "/tmp/m3-maven-repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b",
+    "/tmp/m3-maven-repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38"
+  }
+}

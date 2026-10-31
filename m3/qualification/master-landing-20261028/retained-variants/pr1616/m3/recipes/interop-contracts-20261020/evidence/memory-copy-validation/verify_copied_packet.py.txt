@@ -1,0 +1,78 @@
+#!/usr/bin/env python3
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+"""Read-only custody verification of the exact bounded correction-memory packet."""
+from pathlib import Path
+import argparse
+import csv
+import hashlib
+import json
+import re
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('crate', type=Path)
+args = parser.parse_args()
+crate = args.crate.resolve()
+expected_manifest = '30911ebc70934f3cb0a9a9bf4dd72e1c82233e4e9836c33b92bf0a9220efde22'
+digest = lambda b: hashlib.sha256(b).hexdigest()
+manifest = (crate / 'PACKET_SHA256SUMS').read_bytes()
+assert digest(manifest) == expected_manifest, 'packet checksum index changed'
+paths = set()
+for line in manifest.decode().splitlines():
+    sha, rel = line.split('  ', 1)
+    assert rel not in paths and not Path(rel).is_absolute() and '..' not in Path(rel).parts
+    assert re.fullmatch('[0-9a-f]{64}', sha)
+    assert digest((crate / rel).read_bytes()) == sha, rel
+    paths.add(rel)
+assert len(paths) == 394
+ns = {}
+exec((crate / 'memory/PROFILE_REFERENCE.py.txt').read_text(), ns)
+
+def pairs(items):
+    value = {}
+    for key, child in items:
+        if key in value:
+            raise ValueError('duplicate JSON key')
+        value[key] = child
+    return value
+
+known, artifact_paths = set(), set()
+records = list(csv.DictReader((crate / 'memory/EVENTS.sha256.tsv').open(), delimiter='\t'))
+assert len(records) == 13
+for record in records:
+    data = (crate / record['path']).read_bytes()
+    event = json.loads(data.decode(), object_pairs_hook=pairs)
+    ns['schema_check'](event, ns['SCHEMA'])
+    assert event['schema'] == 'MOP-RCM/1.0'
+    assert event['event_schema'] == 'm3-interop-contracts-correction-event/1'
+    assert event['recipe_id'] == 'com.synexia.m3jdk.InteropContracts20261020'
+    assert data == ns['raw'](event) and not data.endswith(b'\n')
+    assert digest(data) == record['event_sha256'] == Path(record['path']).stem
+    assert record['attempt_id'] == event['attempt_id']
+    for key in ['parents', 'supersedes']:
+        assert event[key] == sorted(set(event[key]))
+        assert set(event[key]) <= known
+        assert ';'.join(event[key]) == record[key]
+    for artifact in ns['walk_artifacts'](event):
+        if artifact['status'] == 'EXACT':
+            rel = artifact['path']
+            assert rel and not Path(rel).is_absolute() and '..' not in Path(rel).parts
+            assert digest((crate / rel).read_bytes()) == artifact['sha256'], rel
+            artifact_paths.add(rel)
+        else:
+            assert artifact['status'] in ['UNKNOWN', 'ABSENT']
+            assert artifact['path'] is None and artifact['sha256'] is None
+    trigger = event['trigger']
+    assert trigger['observed_line'] in (crate / trigger['artifact']['path']).read_text().splitlines()
+    assert not event['admission']['merge_authority'] and not event['admission']['phase_promotion']
+    known.add(record['event_sha256'])
+assert {p.stem for p in (crate / 'memory/events').glob('*.json')} == known
+profile = json.loads((crate / 'memory/PROFILE_VALIDATION.json').read_text())
+assert profile['result'] == 'PASS' and profile['event_count'] == 13
+assert len(profile['checks']) == 26 and all(x['result'] == 'PASS' for x in profile['checks'])
+assert profile['schema_sha256'] == digest((crate / 'memory/EVENT.schema.json').read_bytes())
+assert profile['profile_reference_sha256'] == digest((crate / 'memory/PROFILE_REFERENCE.py.txt').read_bytes())
+index = list(csv.DictReader((crate / 'RECIPE_MEMORY.tsv').open(), delimiter='\t'))
+assert len(index) == 13 and set(index[0]) == set('utc recipe trigger observed correction corrected_by guard lesson'.split())
+assert {Path(r['corrected_by']).stem for r in index} == known
+print(json.dumps({'result': 'PASS', 'scope': 'Read-only copied packet checksum/schema/digest/parent/trigger/artifact custody; later SDK/receiving observations are separate', 'packet_files': len(paths) + 1, 'immutable_events': len(records), 'exact_referenced_artifacts': len(artifact_paths), 'retained_profile_checks': 26, 'packet_sha256sums_sha256': digest(manifest), 'phase_promotion': False}))

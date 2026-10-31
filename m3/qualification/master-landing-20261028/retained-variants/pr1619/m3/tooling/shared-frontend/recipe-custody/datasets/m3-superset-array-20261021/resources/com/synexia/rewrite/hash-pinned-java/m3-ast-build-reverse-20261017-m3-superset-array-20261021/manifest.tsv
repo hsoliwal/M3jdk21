@@ -1,0 +1,3 @@
+m3/collections/src/main/java/com/m3/collections/M3ArrayList.java	ef4648fc115b6ddc8173af77f08c249330d7fa5a8159adc8490ea9310945d17d	c9f521e1f93f503f4b7536fbcb38ebdf0a956c07d2d208c2a6e273ca32d466ec	0001-M3ArrayList.java.txt
+m3/collections/src/test/java/com/m3/collections/M3ArrayListSupersetContract.java	ABSENT	80ae1d1f718b64256368fe6cea75cb8dbf45d1d4f3197397ad84a33451b57ee7	0002-M3ArrayListSupersetContract.java.txt
+m3/collections/src/test/java/com/m3/collections/M3ArrayListSupersetTest.java	ABSENT	a609c374efce6c58dd011e8c1b9daff6bccde43725ba32c6ff31076abcbb18c6	0003-M3ArrayListSupersetTest.java.txt

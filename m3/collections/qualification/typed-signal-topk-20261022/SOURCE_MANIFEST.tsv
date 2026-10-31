@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# Canonical Synexia m3-typed-signal-topk-20261022; parent M3JDK21 compiler image branch
+# path	before_sha256	after_sha256	git_blob	canonical_resource
+m3/collections/src/main/java/com/m3/collections/M3SignalColumns.java	1e29a5867538965ae335a1effa6e0c6a591a94ccd42af81ec41702f78ec89766	f4caab98f766b076894e478444067c4245f61c6a2e660bda52f39c481af6e314	cf4fbd9951fefd413abcd356c893f6d3f3942538	00-M3SignalColumns.java.txt
+m3/collections/src/main/java/com/m3/collections/M3SignalTopK.java	ABSENT	d5e2cd4829027834c67193d4e94fcff1c2023992cd2d3653ef1a69fbb74400ab	13e550a74ed2dbc0aa4070aac1a1645a510af975	01-M3SignalTopK.java.txt
+m3/collections/src/test/java/com/m3/collections/M3SignalTopKSelfTest.java	ABSENT	86e6abd9604a799e6201eb1e9a6d8f801cd1476ecb99d91489a2b080f895c6c3	a0842cf961e72b89e5d1de7d8fb0a27306eda57e	02-M3SignalTopKSelfTest.java.txt
+m3/collections/src/test/java/com/m3/collections/M3SignalTopKTest.java	ABSENT	450fcf413baf06854521f68ef068515ec5d69f03679e870df170813ec5789bf3	eae2fd5913c113f6663031a5aa8ba781f7d882ed	03-M3SignalTopKTest.java.txt

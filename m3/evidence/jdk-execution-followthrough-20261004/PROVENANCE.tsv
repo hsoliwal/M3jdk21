@@ -1,0 +1,8 @@
+owner	identity	role
+M3-SCALE	v3 Locked Canon	Scope/documentation/inventory/proof authority
+module-pack assembler	52bc88d103d86296cc84b898d2f2dcb15cccc724	Exact existing file preimage
+Password.java	c3e25e60710baebd1764a5b0fc85aba2c4afb0a3	Unchanged current product source
+JDK-8368692	openjdk/jdk@9131c72d63cac7d2a0e845952cee0e3c7edbfc93	Existing backport lineage; no new donor code copied
+M3Jdk21HashPinnedTextSnapshotRecipe	a2e8c916208b563517e51b738744a05357e633aa	Existing adapter reused
+M3Jdk21HashPinnedSnapshotRecipe	828724689638268574c2b599b1bfcef7921a2f90	Existing Java parser adapter reused
+Nebula	hsoliwal/nebula@b7dd5097f62ba5ea2515b98311ea20e900642384	Conditional application through existing Synexia donor-assimilation lane

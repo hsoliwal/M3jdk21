@@ -1,0 +1,3 @@
+#include <stdint.h>
+static int has_required(uint8_t value, uint8_t required) { return (value & required) == required; }
+int m3_recipe_mask(uint8_t value, uint8_t required) { return has_required(value, required); }

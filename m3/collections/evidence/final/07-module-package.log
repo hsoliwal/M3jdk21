@@ -1,0 +1,3 @@
+$ ['/workspace/scratch/b37f6ba1283f/synexia-continuation/toolchain/jdk-21.0.12.1+1/bin/jar', '--create', '--file', '/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/target/m3-collections.jar', '-C', '/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/target/classes', 'module-info.class', '-C', '/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/target/classes', 'com/m3/collections', '-C', '/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/target/module-resources', 'META-INF']
+
+EXIT=0

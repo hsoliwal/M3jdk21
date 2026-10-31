@@ -1,0 +1,169 @@
+"""Append final catalogue decisions through the existing one-file text recipe."""
+from pathlib import Path
+import csv
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import time
+import xml.etree.ElementTree as ET
+
+C2 = Path(__file__).resolve().parent
+B = C2.parent / 'm3fs-vfs-20261020'
+CANON = B / 'canonical'
+RECEIVER = B / 'receiver'
+TASK = CANON / 'synexia-openrewrite-recipes/recipe-crates/m3-collections-refinement-20261020'
+HOST = TASK / 'catalogue/recipe-host'
+ORIGINAL = TASK / 'recipe-host'
+OUT = C2 / 'verification/catalogue-sdk'
+JDK = B / 'toolchain/jdk21'
+OWNER = CANON / 'synexia-openrewrite-recipes'
+CATALOGUE = 'm3/collections/algorithm-catalog/stable-order-restoration-20261020'
+NAMES = (('catalogue-candidates', 'CANDIDATES.tsv'), ('catalogue-readme', 'README.md'),
+         ('catalogue-discovery', 'DISCOVERY.json'), ('catalogue-pins', 'SOURCE_PINS.json'))
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def write(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(value)
+
+
+def json_file(path, value):
+    write(path, json.dumps(value, indent=2, sort_keys=True) + '\n')
+
+
+for relative in ('sdk/RESULTS.json', 'generated/RESULTS.json', 'native-final/RESULTS.json'):
+    assert json.loads((C2 / 'verification' / relative).read_text())['status'] == 'PASS', relative
+assert not OUT.exists(), 'Keep previous qualifications immutable; use a fresh output identity.'
+OUT.mkdir(parents=True)
+lineage = {}
+for rel in ('pom.xml', 'src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java', 'ENGINE_SOURCES.tsv'):
+    destination = HOST / rel
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ORIGINAL / rel, destination)
+    lineage[rel] = {'source': (ORIGINAL / rel).relative_to(CANON).as_posix(),
+                    'sha256': sha(destination), 'disposition': 'EXACT_EXISTING_HOST_REUSE'}
+write(HOST / 'README.md', '''<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# Additive catalogue receiving passes
+
+This task reuses the existing serial Maven/OpenRewrite proof host without changing
+its test or engine implementations. Select one catalogue pass with -Dm3.pass and
+set -Drecipe.owner.root to the enclosing synexia-openrewrite-recipes module.
+The nested location makes that explicit owner override mandatory. Each pass
+contains one ABSENT text target, a sealed template and the existing named recipe.
+The parent CONTRACT.md admits only the four appended knowledge files.
+
+Run manifest/format lint, test-compile -DskipTests, then surefire:test. The ordered
+SDK proof emits actual Result output only after replay/fixed-point/order/refusal
+checks pass. Target admission verifies the emitted source hash before copying.
+These decisions describe separate completed Java/JNI qualifications; generating
+the catalogue itself does not establish runtime correctness or performance.
+''')
+json_file(HOST / 'HARNESS_LINEAGE.json', {'schema': 'M3_CATALOGUE_HOST_REUSE_V1',
+          'copied_exact': lineage, 'implementation_changes': [],
+          'owner_root': str(OWNER), 'existing_recipe': 'com.synexia.m3.WrapperConvergence20261018'})
+write(HOST.parent / 'CONTRACT.md', '''<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# Additive stable-order catalogue record
+
+Admit exactly CANDIDATES.tsv, README.md, DISCOVERY.json and SOURCE_PINS.json under
+m3/collections/algorithm-catalog/stable-order-restoration-20261020. Existing
+catalogue history, production source and all earlier SDK receipts are unchanged.
+The four files record observed source loss, reuse of the exact published stable
+group recipe, current generated Java/JNI evidence, retained stronger native and
+wrapper owners, rejected effect-changing shortcuts, and bounded resource results.
+
+The root-owned generated and native receipts must pass before preparing this
+packet. The source statements distinguish historical, diagnostic and fresh
+receiving evidence. User-defined comparator/callback behavior, API compatibility,
+receiving order, license obligations and source-built M3JDK21 gates are not changed
+by catalogue admission. No additional discovery engine or runtime store is added.
+Each file is applied by the existing hash-pinned text owner as one serial pass.
+''')
+targets = {}
+for selected, name in NAMES:
+    relative = CATALOGUE + '/' + name
+    source = C2 / 'authored' / relative
+    assert source.is_file()
+    if name.endswith('.json'):
+        json.loads(source.read_text())
+    if name.endswith('.tsv'):
+        with source.open() as stream:
+            rows = list(csv.DictReader(stream, delimiter='\t'))
+        assert len(rows) >= 13 and all(None not in row for row in rows)
+        assert len({row['review_id'] for row in rows}) == len(rows)
+    result = subprocess.run(['git', '-C', '/workspace/scratch/53bcd62c244c/M3JDK21', 'show',
+                             '985d672bf250aa090b2399d626f0e3e1b541135d:' + relative.removeprefix('m3/collections/')],
+                            capture_output=True, check=False)
+    assert result.returncode != 0 and b'does not exist' in result.stderr
+    assert not (RECEIVER / relative).exists()
+    packet = HOST / 'passes' / selected
+    crate = 'm3-wrapper-' + selected
+    resource = packet / 'resources/com/synexia/rewrite/hash-pinned-text' / crate
+    template = name + '.txt'
+    write(resource / template, source.read_text())
+    write(resource / 'manifest.tsv', '# path\tbefore-sha256\tafter-sha256\ttemplate\n'
+          + '\t'.join((relative, 'ABSENT', sha(source), template)) + '\n')
+    write(packet / 'resources/META-INF/rewrite' / (crate + '.yml'),
+          '# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors\n'
+          '# SPDX-License-Identifier: Apache-2.0\n'
+          'type: specs.openrewrite.org/v1beta/recipe\n'
+          'name: com.synexia.m3.WrapperConvergence20261018\n'
+          'displayName: Append one validated M3 catalogue record\n'
+          'description: Admit one exact new catalogue file through the existing canonical text owner.\n'
+          'recipeList:\n  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:\n'
+          '      crateName: ' + crate + '\n')
+    write(packet / 'PASS.md', '# Pass ' + selected + '\n\nCopyright 2026 Hitesh Soliwal and contributors. '
+          'SPDX-License-Identifier: Apache-2.0.\n\nAppend only `' + relative + '` from ABSENT to SHA-256 `' + sha(source)
+          + '`. Runtime evidence is separate; preserve existing catalogue history.\n')
+    targets[selected] = {'path': relative, 'sha256': sha(source)}
+ET.parse(HOST / 'pom.xml')
+json_file(OUT / 'lint.json', {'status': 'PASS', 'targets': targets, 'engine_source_pins': sha(HOST / 'ENGINE_SOURCES.tsv')})
+env = os.environ.copy()
+env['JAVA_HOME'] = str(JDK)
+env['PATH'] = str(JDK / 'bin') + os.pathsep + env['PATH']
+commands, admitted = [], {}
+for selected, _ in NAMES:
+    base = [str(B / 'toolchain/maven/bin/mvn'), '-o', '-B', '-ntp',
+            '-Dmaven.repo.local=' + str(B / 'm2'), '-f', str(HOST / 'pom.xml'),
+            '-Drecipe.owner.root=' + str(OWNER), '-Dm3.pass=' + selected]
+    for stage, goals in (('compile', ['-DskipTests', 'test-compile']), ('sdk', ['surefire:test'])):
+        name = selected + '-' + stage
+        stdout, stderr = OUT / (name + '.stdout.log'), OUT / (name + '.stderr.log')
+        start = time.monotonic()
+        with stdout.open('w') as out, stderr.open('w') as err:
+            result = subprocess.run(base + goals, env=env, cwd=HOST, stdout=out, stderr=err, check=False)
+        commands.append({'name': name, 'argv': base + goals, 'cwd': str(HOST), 'exit': result.returncode,
+                         'elapsed_seconds': round(time.monotonic() - start, 6),
+                         'stdout_sha256': sha(stdout), 'stderr_sha256': sha(stderr)})
+        json_file(OUT / 'commands.json', commands)
+        print(json.dumps({'stage': name, 'exit': result.returncode}), flush=True)
+        assert result.returncode == 0, name
+    reports = sorted((HOST / 'target' / selected / 'surefire-reports').glob('TEST-*.xml'))
+    counts = {key: sum(int(ET.parse(p).getroot().get(key, '0')) for p in reports)
+              for key in ('tests', 'failures', 'errors', 'skipped')}
+    assert counts == {'tests': 5, 'failures': 0, 'errors': 0, 'skipped': 0}, counts
+    for report in reports:
+        shutil.copyfile(report, OUT / (selected + '-' + report.name))
+    target = targets[selected]
+    generated = HOST / 'target/candidate' / selected
+    assert sha(generated / target['path']) == target['sha256']
+    destination = RECEIVER / target['path']
+    assert not destination.exists()
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(generated / target['path'], destination)
+    for name in ('SDK_RESULTS.tsv', 'SDK_INPUTS.tsv', 'SDK_REFUSALS.tsv', 'text.patch'):
+        path = OUT / selected / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(generated / name, path)
+    admitted[target['path']] = target['sha256']
+json_file(OUT / 'RESULTS.json', {'status': 'PASS', 'schema': 'M3_ADDITIVE_CATALOGUE_SDK_V1',
+          'passes': 4, 'sdk_tests': 20, 'admitted_files': admitted, 'commands': commands,
+          'production_changes': 0, 'earlier_runtime_receipts_unchanged': True})
+print(json.dumps({'status': 'PASS', 'admitted_files': len(admitted), 'sdk_tests': 20}))

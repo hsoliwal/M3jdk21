@@ -1,0 +1,640 @@
+{
+  "schema": 1,
+  "status": "PASS_STRICT_SIX_OWNER_COMPILE_AND_SEALED_24_ENTRY_VENDOR_CUSTODY",
+  "scope": "Existing receiver importer compile, source verification, materialization, target verification, second apply and source/target drift refusal. No regex runtime behavior or source-complete closure claim.",
+  "inputSealChecks": [
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\CURRENT_SOURCE_CONNECTOR_BODIES.json",
+      "expectedSha256": "62ff314f625c10a10b04a2dfb946565f074c84eb3b34cc46cfadc0d2a78dfda6",
+      "actualSha256": "62ff314f625c10a10b04a2dfb946565f074c84eb3b34cc46cfadc0d2a78dfda6",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\CURRENT_SOURCE_EQUIVALENCE.json",
+      "expectedSha256": "abb8c0899b376f3fe11e34ec7855123611aec8cbf66c141103cc05f36d0d1a93",
+      "actualSha256": "abb8c0899b376f3fe11e34ec7855123611aec8cbf66c141103cc05f36d0d1a93",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\CURRENT_SOURCE_EQUIVALENCE_V2.json",
+      "expectedSha256": "f7a9807f172489dee758dd0415c67fc772a44986664511cf303a28820416855c",
+      "actualSha256": "f7a9807f172489dee758dd0415c67fc772a44986664511cf303a28820416855c",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\DEPENDENCY_FRONTIER.json",
+      "expectedSha256": "ea74a06d85a468f14ce7df11162296229ab8d83e0fc461d45d03732a4ef97112",
+      "actualSha256": "ea74a06d85a468f14ce7df11162296229ab8d83e0fc461d45d03732a4ef97112",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\donor-oracles\\ORIGINAL_PROOF.json",
+      "expectedSha256": "f005a6648371d84b4b317152ade12cb61c9c0814ee8524d2cd87abd61f821dc6",
+      "actualSha256": "f005a6648371d84b4b317152ade12cb61c9c0814ee8524d2cd87abd61f821dc6",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\donor-oracles\\synexia-openrewrite-recipes\\tasks\\regex-persisted-precompute-20261006\\src\\test\\java\\com\\synexia\\indexstring\\ExactUtf16CodecProof.java",
+      "expectedSha256": "0cb38e58496089120e3ef7bf1eb705f29abab454782e8ea08d5b1bb65bee058b",
+      "actualSha256": "0cb38e58496089120e3ef7bf1eb705f29abab454782e8ea08d5b1bb65bee058b",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\donor-oracles\\synexia-openrewrite-recipes\\tasks\\regex-persisted-precompute-20261006\\src\\test\\java\\com\\synexia\\indexstring\\PersistedRegexProof.java",
+      "expectedSha256": "a63233a4d7aafb4301e54719586da2e0edab7c941118278bd7a105475d5cdf6a",
+      "actualSha256": "a63233a4d7aafb4301e54719586da2e0edab7c941118278bd7a105475d5cdf6a",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\donor-oracles\\synexia-openrewrite-recipes\\tasks\\regex-persisted-precompute-20261006\\src\\test\\java\\com\\synexia\\indexstring\\SegmentedPersistedRegexProof.java",
+      "expectedSha256": "c1c8e5b1c96321b594ab09857733076112b69236e1a7fd7bb18c5f9906bfdcd3",
+      "actualSha256": "c1c8e5b1c96321b594ab09857733076112b69236e1a7fd7bb18c5f9906bfdcd3",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\DONOR_ORACLE_CUSTODY.json",
+      "expectedSha256": "92e08eb1570cc887199cbf812ae4eb9eee14d851c3b4f9b068607bcdddfda9a3",
+      "actualSha256": "92e08eb1570cc887199cbf812ae4eb9eee14d851c3b4f9b068607bcdddfda9a3",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\connector\\m3\\synexia-import\\intakes\\callback-parity\\README.md.json",
+      "expectedSha256": "04378bad5595c6b531f41b3b7a7f2f22aa014480343b66040ff669cb641a4310",
+      "actualSha256": "04378bad5595c6b531f41b3b7a7f2f22aa014480343b66040ff669cb641a4310",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\connector\\m3\\synexia-import\\intakes\\callback-parity\\RECEIVER.json.json",
+      "expectedSha256": "74eae38b73020685e30d6861a8958e4120fd48573c3321056ee49ee2896bd50d",
+      "actualSha256": "74eae38b73020685e30d6861a8958e4120fd48573c3321056ee49ee2896bd50d",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\connector\\m3\\synexia-import\\src\\main\\java.json",
+      "expectedSha256": "fdd85ef0b1909be3850b1b19f0dce0da69984b4e23beb9fdf48ad8301d82396a",
+      "actualSha256": "fdd85ef0b1909be3850b1b19f0dce0da69984b4e23beb9fdf48ad8301d82396a",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\IMPORTER_SOURCES.json",
+      "expectedSha256": "571b545fd79648ae7369f915b612e79ee01e46fa098d0f5d52853f632bca42cf",
+      "actualSha256": "571b545fd79648ae7369f915b612e79ee01e46fa098d0f5d52853f632bca42cf",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\intake-directory.json",
+      "expectedSha256": "cc07e2a1543e5e9c3deaf1d26c12a41a032d9b799ad7f64185368d6a5427cc87",
+      "actualSha256": "cc07e2a1543e5e9c3deaf1d26c12a41a032d9b799ad7f64185368d6a5427cc87",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\m3\\docs\\synexia-intake-policy.tsv",
+      "expectedSha256": "519c6e3152fac4d5d06b77c859f8f5a6a6b7e54a1e3dbb5fdd999c4e100a69c7",
+      "actualSha256": "519c6e3152fac4d5d06b77c859f8f5a6a6b7e54a1e3dbb5fdd999c4e100a69c7",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\m3\\runtime-integration\\verify-synexia-intake.py",
+      "expectedSha256": "227562b4bc1cf11c38b5806298115f028dbc1534039c80b7fc31d7e3003d2688",
+      "actualSha256": "227562b4bc1cf11c38b5806298115f028dbc1534039c80b7fc31d7e3003d2688",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaCanonicalFamilyPolicy.java",
+      "expectedSha256": "c1762968dfe62a18706f2b6092f0a02341fafcc904fa6bec96643ef8cc480e5d",
+      "actualSha256": "c1762968dfe62a18706f2b6092f0a02341fafcc904fa6bec96643ef8cc480e5d",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportCli.java",
+      "expectedSha256": "5faebe932a52d45ba0ac5b1db134f4f90b2890f2b38691c4db657b62a7c19d3b",
+      "actualSha256": "5faebe932a52d45ba0ac5b1db134f4f90b2890f2b38691c4db657b62a7c19d3b",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImporter.java",
+      "expectedSha256": "df34e659a8acd1dd926ad0e28aa33903231128b73f74658b1b296aca455e0b9a",
+      "actualSha256": "df34e659a8acd1dd926ad0e28aa33903231128b73f74658b1b296aca455e0b9a",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportManifest.java",
+      "expectedSha256": "d497f52ebe91e6b97efb3708ff579356f05b65f1641a975c2b18215707ce3d98",
+      "actualSha256": "d497f52ebe91e6b97efb3708ff579356f05b65f1641a975c2b18215707ce3d98",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlan.java",
+      "expectedSha256": "27996c430d055bdf5b5ba32c2664b3cc683731a0dd1edf51aca067d876859b82",
+      "actualSha256": "27996c430d055bdf5b5ba32c2664b3cc683731a0dd1edf51aca067d876859b82",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\existing-intake\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlanCli.java",
+      "expectedSha256": "6dc4b9bc900484a41b7327d9fd353e9e0e618360d71b4c3873583ce66d0e306c",
+      "actualSha256": "6dc4b9bc900484a41b7327d9fd353e9e0e618360d71b4c3873583ce66d0e306c",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\export.tsv",
+      "expectedSha256": "ae72faedec7913ee25e74f4592b06bc9b6e31e80800587df1629619f91b20c9e",
+      "actualSha256": "ae72faedec7913ee25e74f4592b06bc9b6e31e80800587df1629619f91b20c9e",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\FOSS_REUSE_DECISION.tsv",
+      "expectedSha256": "ec656e0e39406d866c21914a7087a3485d9265a61a43b1eddf57c3c50106fe59",
+      "actualSha256": "ec656e0e39406d866c21914a7087a3485d9265a61a43b1eddf57c3c50106fe59",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\licenses\\LICENSE",
+      "expectedSha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "actualSha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\licenses\\NOTICE",
+      "expectedSha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+      "actualSha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\MANIFEST_VALIDATION.json",
+      "expectedSha256": "761870a1c9d320372ee2e6f6ea423a6db5a6ebc4f110ba495baf788943a9ef7c",
+      "actualSha256": "761870a1c9d320372ee2e6f6ea423a6db5a6ebc4f110ba495baf788943a9ef7c",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\NOTICE_READBACK.json",
+      "expectedSha256": "5d01ae8633554dcc03b9f4cd16ea2e96f268106d6e0b886661768611d7c8238a",
+      "actualSha256": "5d01ae8633554dcc03b9f4cd16ea2e96f268106d6e0b886661768611d7c8238a",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\OPTIONAL_AUTHORITY_COMPARISON.json",
+      "expectedSha256": "989e6ca82097937d6f1abcf4b88f43b07ed4dbb7b00efd1a19d5b4a49c67ec20",
+      "actualSha256": "989e6ca82097937d6f1abcf4b88f43b07ed4dbb7b00efd1a19d5b4a49c67ec20",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\OPTIONAL_AUTHORITY_READBACK.json",
+      "expectedSha256": "22690216a9d0d6c61418b5ff72c28540197514bcba2fc88bd6be4991573df669",
+      "actualSha256": "22690216a9d0d6c61418b5ff72c28540197514bcba2fc88bd6be4991573df669",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\PREGEN_INVENTORY.json",
+      "expectedSha256": "b2ef37938fa8614a7f743de98d94de058bf4f1dcab247131e00239715b2476d6",
+      "actualSha256": "b2ef37938fa8614a7f743de98d94de058bf4f1dcab247131e00239715b2476d6",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\README.md",
+      "expectedSha256": "4e744dcbf3b4f6ba0a03cb3df8199372591b66566291f252c07ece70f56e7c84",
+      "actualSha256": "4e744dcbf3b4f6ba0a03cb3df8199372591b66566291f252c07ece70f56e7c84",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\SOURCE_CUSTODY.json",
+      "expectedSha256": "97df0a295c9bb3c32ff71a3df6380c5beceb21e4528c218baa12cd4c39df0fb4",
+      "actualSha256": "97df0a295c9bb3c32ff71a3df6380c5beceb21e4528c218baa12cd4c39df0fb4",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\LICENSE",
+      "expectedSha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "actualSha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\NOTICE",
+      "expectedSha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+      "actualSha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3ContentId.java",
+      "expectedSha256": "c1412090abf49c04fa5cc9b5d457d3809ad4bbac5bb41c45085b6ccaf075d74e",
+      "actualSha256": "c1412090abf49c04fa5cc9b5d457d3809ad4bbac5bb41c45085b6ccaf075d74e",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3DirectoryContentStore.java",
+      "expectedSha256": "882a34ba5e4956c38c3c6ebd37840c76bc2ea7e480d2d86a3ef2cee5c7ea3f39",
+      "actualSha256": "882a34ba5e4956c38c3c6ebd37840c76bc2ea7e480d2d86a3ef2cee5c7ea3f39",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3MappedObject.java",
+      "expectedSha256": "4238d100d53cea1a7bbe3b4fd4105bf3f0b3a3acb30b0aee67e4fbe3797708a4",
+      "actualSha256": "4238d100d53cea1a7bbe3b4fd4105bf3f0b3a3acb30b0aee67e4fbe3797708a4",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3ObjectKind.java",
+      "expectedSha256": "4ab6ba55814edd9501803e26e03c0dee8c73b033c105f1b3756ce7bf5c15c4ea",
+      "actualSha256": "4ab6ba55814edd9501803e26e03c0dee8c73b033c105f1b3756ce7bf5c15c4ea",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3ObjectRef.java",
+      "expectedSha256": "e69debebeae92ecae49c7047f293ae256045243caec5e9e8b17fe81560499c77",
+      "actualSha256": "e69debebeae92ecae49c7047f293ae256045243caec5e9e8b17fe81560499c77",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3PrecomputeCache.java",
+      "expectedSha256": "14ecc79d5d298539085aa922090eb70665c05e913ef99acc74faeb040f00ea87",
+      "actualSha256": "14ecc79d5d298539085aa922090eb70665c05e913ef99acc74faeb040f00ea87",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3PrecomputeKey.java",
+      "expectedSha256": "720cff4115f6d30a90d228ae4a98a3fef76763c1ab0b08d909218c221f7d4cde",
+      "actualSha256": "720cff4115f6d30a90d228ae4a98a3fef76763c1ab0b08d909218c221f7d4cde",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3PrecomputeResult.java",
+      "expectedSha256": "e50355b571f0ebb61319ddf338003481c26e177f8346e1920f6702a457269fe4",
+      "actualSha256": "e50355b571f0ebb61319ddf338003481c26e177f8346e1920f6702a457269fe4",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexCompactAsciiDfaImage.java",
+      "expectedSha256": "31f4fd022eba03828d5ddc9d7dec0ab3dc978b3397d305f8b7655957e6a15269",
+      "actualSha256": "31f4fd022eba03828d5ddc9d7dec0ab3dc978b3397d305f8b7655957e6a15269",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexAcceleratedImage.java",
+      "expectedSha256": "c5d761d364c68ee588091c7258334afb8120125c1638c14c8151c37587360608",
+      "actualSha256": "c5d761d364c68ee588091c7258334afb8120125c1638c14c8151c37587360608",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexPrecompute.java",
+      "expectedSha256": "973210b927170cba5fc862a3a87336f5eb8e2e57ba7e8283a6339aa2a892ab13",
+      "actualSha256": "973210b927170cba5fc862a3a87336f5eb8e2e57ba7e8283a6339aa2a892ab13",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexPrecomputeKey.java",
+      "expectedSha256": "6b911035ec43ae48ff4cabcabb38b33334138d09822249a3dec2f0ba3d1353a9",
+      "actualSha256": "6b911035ec43ae48ff4cabcabb38b33334138d09822249a3dec2f0ba3d1353a9",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
+      "expectedSha256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131",
+      "actualSha256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgramImageCodec.java",
+      "expectedSha256": "09f4ef3d52a432b5a46bd784a91728352d121241dca9ab010df7a06f38d01dc7",
+      "actualSha256": "09f4ef3d52a432b5a46bd784a91728352d121241dca9ab010df7a06f38d01dc7",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputeArtifact.java",
+      "expectedSha256": "f28df39a3e247c22fe54fcfec9eaf749d490943b233a36148bf22611e3d18ba0",
+      "actualSha256": "f28df39a3e247c22fe54fcfec9eaf749d490943b233a36148bf22611e3d18ba0",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputeContext.java",
+      "expectedSha256": "702fdd1c02a6ce17a1e63459c6392d1bd1d1a50367e2e5a0cd58042b3ebd1937",
+      "actualSha256": "702fdd1c02a6ce17a1e63459c6392d1bd1d1a50367e2e5a0cd58042b3ebd1937",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputeKey.java",
+      "expectedSha256": "fab40b3eee67ed7bc377befb73357d1358c0e52cfb0940d92fc8e988d274376d",
+      "actualSha256": "fab40b3eee67ed7bc377befb73357d1358c0e52cfb0940d92fc8e988d274376d",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputeLimits.java",
+      "expectedSha256": "51cc3fea9d768172564d4870c7c006a574a64a250218eda25bfb63cc0620c095",
+      "actualSha256": "51cc3fea9d768172564d4870c7c006a574a64a250218eda25bfb63cc0620c095",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputePass.java",
+      "expectedSha256": "4494b40289d89f17c0cc1dd6b8aff313090d63f88973cbe6c47282899ecb662d",
+      "actualSha256": "4494b40289d89f17c0cc1dd6b8aff313090d63f88973cbe6c47282899ecb662d",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputePasses.java",
+      "expectedSha256": "8973ba20e7c524b0cef2e10250a84f69297b340012d734e260b0459cc8cd90e0",
+      "actualSha256": "8973ba20e7c524b0cef2e10250a84f69297b340012d734e260b0459cc8cd90e0",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputePlan.java",
+      "expectedSha256": "c1011fcc84663e1b93db824b7eb706d63a4b8d4ae6ab88bc81a31d68a363cd8a",
+      "actualSha256": "c1011fcc84663e1b93db824b7eb706d63a4b8d4ae6ab88bc81a31d68a363cd8a",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\templates\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputeScope.java",
+      "expectedSha256": "32e0508e5502ba50b9ea833cd7193f821122a935f72a7ae634c3a12733a0e3a9",
+      "actualSha256": "32e0508e5502ba50b9ea833cd7193f821122a935f72a7ae634c3a12733a0e3a9",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-receiver-20261007\\FINAL_CANDIDATE.json",
+      "expectedSha256": "bce0f1a364889383ca8b24c7d7b824ef8d729e323a3337800330bd3a6fef8040",
+      "actualSha256": "bce0f1a364889383ca8b24c7d7b824ef8d729e323a3337800330bd3a6fef8040",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaCanonicalFamilyPolicy.java",
+      "expectedSha256": "c1762968dfe62a18706f2b6092f0a02341fafcc904fa6bec96643ef8cc480e5d",
+      "actualSha256": "c1762968dfe62a18706f2b6092f0a02341fafcc904fa6bec96643ef8cc480e5d",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportCli.java",
+      "expectedSha256": "5faebe932a52d45ba0ac5b1db134f4f90b2890f2b38691c4db657b62a7c19d3b",
+      "actualSha256": "5faebe932a52d45ba0ac5b1db134f4f90b2890f2b38691c4db657b62a7c19d3b",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportManifest.java",
+      "expectedSha256": "d497f52ebe91e6b97efb3708ff579356f05b65f1641a975c2b18215707ce3d98",
+      "actualSha256": "d497f52ebe91e6b97efb3708ff579356f05b65f1641a975c2b18215707ce3d98",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlan.java",
+      "expectedSha256": "27996c430d055bdf5b5ba32c2664b3cc683731a0dd1edf51aca067d876859b82",
+      "actualSha256": "27996c430d055bdf5b5ba32c2664b3cc683731a0dd1edf51aca067d876859b82",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlanCli.java",
+      "expectedSha256": "6dc4b9bc900484a41b7327d9fd353e9e0e618360d71b4c3873583ce66d0e306c",
+      "actualSha256": "6dc4b9bc900484a41b7327d9fd353e9e0e618360d71b4c3873583ce66d0e306c",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImporter.java",
+      "expectedSha256": "df34e659a8acd1dd926ad0e28aa33903231128b73f74658b1b296aca455e0b9a",
+      "actualSha256": "df34e659a8acd1dd926ad0e28aa33903231128b73f74658b1b296aca455e0b9a",
+      "matched": true
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\pom.xml",
+      "expectedSha256": "8763a0c21f635dddec53d84927a91cebc9f79d6541f1bb524e2fd4d6a18c18dc",
+      "actualSha256": "8763a0c21f635dddec53d84927a91cebc9f79d6541f1bb524e2fd4d6a18c18dc",
+      "matched": true
+    }
+  ],
+  "allPriorInputSealsUnchanged": true,
+  "commandLogCustody": [
+    {
+      "label": "fix-replay-plan",
+      "expectedExitCode": 0,
+      "logSha256": "42f94a70067e9f8bbbf873a5cd6fd52f3481d6c9c87f71612d84351b00aa1af3",
+      "digestMatched": true
+    },
+    {
+      "label": "fix-replay-apply",
+      "expectedExitCode": 0,
+      "logSha256": "caeefb3999a79527f427507f7935034c115db9fd787b4e8bd73f9e24e6bb5dfe",
+      "digestMatched": true
+    },
+    {
+      "label": "fix-replay-fixed-point",
+      "expectedExitCode": 0,
+      "logSha256": "992bb46cf9e18e447c53792f26281adfb57834607a3f035c8f359b37e7edc327",
+      "digestMatched": true
+    },
+    {
+      "label": "fix-replay-second-apply",
+      "expectedExitCode": 0,
+      "logSha256": "d334a8e5eaf6b57f40f622bbab846de815fb44cef754bce8ee7f468aafea2830",
+      "digestMatched": true
+    },
+    {
+      "label": "compile-fixed-six",
+      "expectedExitCode": 0,
+      "logSha256": "3d6cd71f624e5190ec8aec0186f09e2f092c6646ce6c09a204c731aba683c230",
+      "digestMatched": true
+    },
+    {
+      "label": "verify-packet",
+      "expectedExitCode": 0,
+      "logSha256": "7911e6ead7ecd1f9fa1de9ab0666717e6a50687af626ddb11021861cab633472",
+      "digestMatched": true
+    },
+    {
+      "label": "materialize-packet",
+      "expectedExitCode": 0,
+      "logSha256": "d69a0590e45396fa29990b238df108bc20382c7543c928f25c9ff4bfa66e742b",
+      "digestMatched": true
+    },
+    {
+      "label": "verify-target-packet",
+      "expectedExitCode": 0,
+      "logSha256": "500effe5a9bdbb17abf3c310a6610ac8530f8dde6f9937a6ea11e6667a21078b",
+      "digestMatched": true
+    },
+    {
+      "label": "materialize-second-packet",
+      "expectedExitCode": 0,
+      "logSha256": "a0c0221e8d995f3518b3e1d7b9fc994d2dee0a574b846d732a1aa15716e2a30d",
+      "digestMatched": true
+    },
+    {
+      "label": "source-drift-refusal",
+      "expectedExitCode": 1,
+      "logSha256": "863541daa499c85e764bd1d9cc8c8700cb67492e454cad9cc537420a934b44fe",
+      "digestMatched": true
+    },
+    {
+      "label": "target-drift-verify-refusal",
+      "expectedExitCode": 1,
+      "logSha256": "29ab77664cbabf0ba88929857ef56795a5eed424c80d54137fc8b0e51b7965ef",
+      "digestMatched": true
+    },
+    {
+      "label": "target-drift-materialize-refusal",
+      "expectedExitCode": 1,
+      "logSha256": "3801f8568160a9648ac04ed03fdefd6898b3c87a777e807ea783b13751e56639",
+      "digestMatched": true
+    }
+  ],
+  "strictCompilation": {
+    "sourceOwners": 6,
+    "compiledClasses": 14,
+    "emptySourcepathAndClasspath": true,
+    "implicitNone": true,
+    "release": 21,
+    "xlintAll": true,
+    "warningsAsErrors": true,
+    "command": "COMMANDS.json#compile-fixed-six",
+    "classSealFile": "FIXED_IMPORTER_CLASS_SEALS.json",
+    "classSealSha256": "703cb46be6f18f20ea2939624f3d03121ca7d9e70317c0ffc714a9caf8d1ad0e"
+  },
+  "packet": {
+    "manifestEntries": 24,
+    "firstTargetFiles": 25,
+    "firstNewFiles": 22,
+    "existingLicenseNoticeAndUnrelatedFilePreserved": true,
+    "secondApplyExactHashesAndMtimes": true,
+    "sourceDriftRefusalTargetUnchanged": true,
+    "targetDriftVerifyAndMaterializeRefusalTargetUnchanged": true,
+    "currentTargetFileChecks": [
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\LICENSE",
+        "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\NOTICE",
+        "sha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3ContentId.java",
+        "sha256": "c1412090abf49c04fa5cc9b5d457d3809ad4bbac5bb41c45085b6ccaf075d74e",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3DirectoryContentStore.java",
+        "sha256": "882a34ba5e4956c38c3c6ebd37840c76bc2ea7e480d2d86a3ef2cee5c7ea3f39",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3MappedObject.java",
+        "sha256": "4238d100d53cea1a7bbe3b4fd4105bf3f0b3a3acb30b0aee67e4fbe3797708a4",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3ObjectKind.java",
+        "sha256": "4ab6ba55814edd9501803e26e03c0dee8c73b033c105f1b3756ce7bf5c15c4ea",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3ObjectRef.java",
+        "sha256": "e69debebeae92ecae49c7047f293ae256045243caec5e9e8b17fe81560499c77",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3PrecomputeCache.java",
+        "sha256": "14ecc79d5d298539085aa922090eb70665c05e913ef99acc74faeb040f00ea87",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3PrecomputeKey.java",
+        "sha256": "720cff4115f6d30a90d228ae4a98a3fef76763c1ab0b08d909218c221f7d4cde",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\fs\\M3PrecomputeResult.java",
+        "sha256": "e50355b571f0ebb61319ddf338003481c26e177f8346e1920f6702a457269fe4",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexCompactAsciiDfaImage.java",
+        "sha256": "31f4fd022eba03828d5ddc9d7dec0ab3dc978b3397d305f8b7655957e6a15269",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexAcceleratedImage.java",
+        "sha256": "c5d761d364c68ee588091c7258334afb8120125c1638c14c8151c37587360608",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexPrecompute.java",
+        "sha256": "973210b927170cba5fc862a3a87336f5eb8e2e57ba7e8283a6339aa2a892ab13",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexPrecomputeKey.java",
+        "sha256": "6b911035ec43ae48ff4cabcabb38b33334138d09822249a3dec2f0ba3d1353a9",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
+        "sha256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgramImageCodec.java",
+        "sha256": "09f4ef3d52a432b5a46bd784a91728352d121241dca9ab010df7a06f38d01dc7",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputeArtifact.java",
+        "sha256": "f28df39a3e247c22fe54fcfec9eaf749d490943b233a36148bf22611e3d18ba0",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputeContext.java",
+        "sha256": "702fdd1c02a6ce17a1e63459c6392d1bd1d1a50367e2e5a0cd58042b3ebd1937",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputeKey.java",
+        "sha256": "fab40b3eee67ed7bc377befb73357d1358c0e52cfb0940d92fc8e988d274376d",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputeLimits.java",
+        "sha256": "51cc3fea9d768172564d4870c7c006a574a64a250218eda25bfb63cc0620c095",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputePass.java",
+        "sha256": "4494b40289d89f17c0cc1dd6b8aff313090d63f88973cbe6c47282899ecb662d",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputePasses.java",
+        "sha256": "8973ba20e7c524b0cef2e10250a84f69297b340012d734e260b0459cc8cd90e0",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputePlan.java",
+        "sha256": "c1011fcc84663e1b93db824b7eb706d63a4b8d4ae6ab88bc81a31d68a363cd8a",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\precompute\\MIndexPrecomputeScope.java",
+        "sha256": "32e0508e5502ba50b9ea833cd7193f821122a935f72a7ae634c3a12733a0e3a9",
+        "matched": true
+      },
+      {
+        "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\target-fixture\\unchanged-existing-doc.md",
+        "sha256": "4e744dcbf3b4f6ba0a03cb3df8199372591b66566291f252c07ece70f56e7c84",
+        "matched": true
+      }
+    ]
+  },
+  "oneLineProductionFix": "IMPORTER_ROOT_QUALIFIER_FIX.json",
+  "priorFailureRetained": "logs/compile.log",
+  "snapshotsSha256": "76b52e5781747cc76c4149f68d988258c7ad268ab9240aebaf5ae491cc8fe03a",
+  "unitQualificationSeparate": {
+    "firstOriginalUnitCompileFailed": "ORIGINAL_JUNIT_COMMAND.json",
+    "correctedEncodingRun": "JUNIT_RESULT.json",
+    "tests": 21,
+    "passes": 18,
+    "failures": 2,
+    "errors": 1,
+    "skips": 0,
+    "furtherInputFixtureCorrectionsPrepared": "JUNIT_INPUT_FIXTURE_CORRECTIONS.json",
+    "furtherUnitRunStatus": "NOT_RUN_PENDING_SERIAL_JVM_LANE"
+  },
+  "limitations": [
+    "SynexiaSeedSnapshotTest full repository fixture not supplied or executed",
+    "Runtime regex dependency closure not established by importer",
+    "java.base runtime integration not established",
+    "Module verify/Jacoco 99% line/branch gate not executed"
+  ]
+}

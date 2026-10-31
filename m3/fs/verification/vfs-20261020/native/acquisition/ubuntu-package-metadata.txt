@@ -1,0 +1,118 @@
+Package: libsqlite3-dev
+Source: sqlite3
+Priority: optional
+Section: libdevel
+Installed-Size: 3323
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 3.45.1-1ubuntu2.7
+Suggests: sqlite3-doc
+Depends: libsqlite3-0 (= 3.45.1-1ubuntu2.7), libc-dev
+Filename: pool/main/s/sqlite3/libsqlite3-dev_3.45.1-1ubuntu2.7_amd64.deb
+Size: 910690
+MD5sum: 43950251aeb72d3600f6f7ced1460423
+SHA1: bcdd3d4d4775a0f037335bc152af629518eb3153
+SHA256: 6b8dfabce91ae021ff957f81dc4a4377c1bfa6eb9332cbf6d38e3e66b5198abb
+SHA512: 3c46bc99c4c13ef5f6d26fe3dd9fc297b97428851f0252ba6d12253243d9945e99c9c6a66e99d0762decc8a0cac8cf981c9db398951d835cb868aa05882fda20
+Homepage: https://www.sqlite.org/
+Description: SQLite 3 development files
+Description-md5: 6387c6fc4f6fed646a1e0a793253786e
+Multi-Arch: same
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+Package: libsqlite3-dev
+Architecture: amd64
+Version: 3.45.1-1ubuntu2
+Multi-Arch: same
+Priority: optional
+Section: libdevel
+Source: sqlite3
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 3321
+Depends: libsqlite3-0 (= 3.45.1-1ubuntu2), libc-dev
+Suggests: sqlite3-doc
+Filename: pool/main/s/sqlite3/libsqlite3-dev_3.45.1-1ubuntu2_amd64.deb
+Size: 910736
+MD5sum: a308841e13bfe1b4a78b452a9d2e0b15
+SHA1: b65a90c8662244eb5f38c9dc2fdeff72417b2e9f
+SHA256: d23577c43936fedd8c4fa1337a6e960a6e71e94ac164d7a15c46ea96bf21265d
+SHA512: d322b6abdf1533ef6407ee7b331402783491c127e1747c8e038ec4b07443f4c62f18bf3962608c3b035b7c3bf4705cbb211174fe4a0fc93c612c10bbce87ee0d
+Homepage: https://www.sqlite.org/
+Description: SQLite 3 development files
+Description-md5: 6387c6fc4f6fed646a1e0a793253786e
+
+Package: libsqlite3-0
+Source: sqlite3
+Priority: important
+Section: libs
+Installed-Size: 1731
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 3.45.1-1ubuntu2.7
+Depends: libc6 (>= 2.38)
+Breaks: crowdsec (<< 1.4), python-migrate (<< 0.11.0-4~), python3-migrate (<< 0.11.0-4~)
+Filename: pool/main/s/sqlite3/libsqlite3-0_3.45.1-1ubuntu2.7_amd64.deb
+Size: 701442
+MD5sum: 32a50828359e0411c6da90c53f6bd7a4
+SHA1: a512317e132ed1565b7530c37a382148f1060850
+SHA256: 488511119cad001a00f7e00e597112cf743ccfbd3f7a03c82d66237e1bfd82c8
+SHA512: 27183547f2c0f5063c64f930a627228a1d90ee3d3d4caff5a0c2eab891d10b942faa73b6bdeeaca4c9d6a54ed88892f0513fdd466c216a439a0576992588582b
+Homepage: https://www.sqlite.org/
+Description: SQLite 3 shared library
+Description-md5: 701b171ca60f3c96227ee4783a35419c
+Multi-Arch: same
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Task: cloud-minimal, minimal, server-minimal
+
+Package: libsqlite3-0
+Status: install ok installed
+Priority: optional
+Section: libs
+Installed-Size: 1731
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: same
+Source: sqlite3
+Version: 3.45.1-1ubuntu2.5
+Depends: libc6 (>= 2.38)
+Breaks: crowdsec (<< 1.4), python-migrate (<< 0.11.0-4~), python3-migrate (<< 0.11.0-4~)
+Description: SQLite 3 shared library
+ SQLite is a C library that implements an SQL database engine.
+ Programs that link with the SQLite library can have SQL database
+ access without running a separate RDBMS process.
+Description-md5: 
+Homepage: https://www.sqlite.org/
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+
+Package: libsqlite3-0
+Architecture: amd64
+Version: 3.45.1-1ubuntu2
+Multi-Arch: same
+Priority: important
+Section: libs
+Source: sqlite3
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 1730
+Depends: libc6 (>= 2.38)
+Breaks: crowdsec (<< 1.4), python-migrate (<< 0.11.0-4~), python3-migrate (<< 0.11.0-4~)
+Filename: pool/main/s/sqlite3/libsqlite3-0_3.45.1-1ubuntu2_amd64.deb
+Size: 700866
+MD5sum: 54f1f827236c7a32916e259ebe5375e8
+SHA1: 99310ebabf3fe040d9c306b021448b3c692df78f
+SHA256: 6ea94c8a822551187cef0085073910eeae0a7525cfec4415171942c7019c68af
+SHA512: 77704cdfaebe1d5eb695e665d25fbaac6c6a561a24720a9e951b67ecb0e7d50ca3e0f51f5d24416c6bf6a80586e369babe35df6af5c64d8e6961bb71f45d7496
+Homepage: https://www.sqlite.org/
+Description: SQLite 3 shared library
+Description-md5: 701b171ca60f3c96227ee4783a35419c
+Task: cloud-minimal, minimal, server-minimal
+

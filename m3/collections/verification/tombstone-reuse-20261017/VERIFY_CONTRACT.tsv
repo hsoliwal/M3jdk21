@@ -1,0 +1,10 @@
+gate	state
+source_git_blob_and_sha	PASS
+strict_Java21_selected_source	PASS_DONOR_IMAGE
+API_descriptor_parity	PASS_DONOR_IMAGE
+red_green_contract	PASS_DONOR_IMAGE
+refusal_fixedpoint_negative_controls	PASS_DONOR_RECIPE
+full_jdk_jtreg	NOT_RUN
+full_module_maven	NOT_RUN
+OpenRewrite_SDK	NOT_RUN
+JNI_ABI	UNCHANGED

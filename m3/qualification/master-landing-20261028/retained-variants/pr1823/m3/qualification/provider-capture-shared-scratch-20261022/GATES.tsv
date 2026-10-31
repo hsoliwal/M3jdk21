@@ -1,0 +1,14 @@
+gate	state	evidence
+SOURCE_PREIMAGE_M3FILE	PASS	Original #1814 M3File exact Git blob 62ac2f7eee03e4269922cfbe2870906dd5c37f66
+SOURCE_PREIMAGE_INVENTORY	PASS	Original shared base M3HostFileInventory 366b2f16d124867358fefcfc5f65a146a959e972
+SOURCE_POSTIMAGE_M3FILE	PASS	New #1814 captured file plus qualified #1817 scratch original atom
+SOURCE_POSTIMAGE_INVENTORY	PASS	Original #1817 exact M3HostFileInventory source blob bd2c9f0a873205a7f31a017ee7c35f4f7504f950
+ORIGINAL_SHARED_SCRATCH_TEST	SOURCE_RECEIVED	Original #1817 Java test blob c22565ec112fe62fb433dfa41ef7594e70801940
+ORIGINAL_M3FS_PROVIDERS	PRESERVED_PARENT	Original #1814 NIO ZIP/JRT and native SQLite m3db VFS
+ORIGINAL_CAPTURE_BYTES	PRESERVED	Original #1814 single-read SHA capture API
+MAVEN_REWRITE_SDK	NOT_RUN	Canonical #13006 fixed point and drift refusal defined not executed
+M3FILE_M3FS_JUNIT	NOT_RUN	Full original Maven tests
+M3FS_NATIVE_SQLITE_JNI	NOT_RUN	Native C17 JNI WAL, provider and mount tests
+HOTSPOT_JTREG	NOT_RUN	Complete source-built JDK21 image and jtreg
+OTHER_PLATFORMS	NOT_RUN	Windows macOS Android JRT ZIP provider matrix
+BENCHMARKS	NOT_MEASURED	Projected aggregate scratch allocation is not live heap or measured gain

@@ -1,0 +1,13 @@
+stage	expected	executed	result
+diff	Exactly two new source/test Java files, no existing source drift	YES_LOCAL	PASS_SCOPE
+lint	Java21 strict javac warnings as errors	YES_LOCAL	PASS
+compile	Java21 module compilation of parent original and new classes	YES_LOCAL	PASS
+test	Independent original delta plus reverse-graph random oracle	YES_LOCAL	30+10569_PASS
+runtime	Actual Java21 named module run	YES_LOCAL	PASS_LOCAL
+recipe	Real Maven/OpenRewrite generation, refusal, fixed point	NO	PENDING
+jni	- Xcheck:jni, javac -h native compare if changed	NO	N/A_NO_NATIVE_CHANGE
+full_sdk	Source-built JDK+HotSpot/jtreg/installed module	NO	PENDING
+fork_builds	Real Maven and Gradle no-op/ABI/classpath/processor cases	NO	PENDING
+perf	CPU+heap+native memory on representative workloads	NO	PENDING
+interpreted_runtime	OpenJDK21 -Xint same ABI/graph oracle	YES_LOCAL	PASS_10569
+jni_flag_only	-Xcheck:jni option over Java-only module	YES_LOCAL	NO_NATIVE_METHOD_EXERCISED

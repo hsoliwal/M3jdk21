@@ -1,0 +1,54 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CollectionsIteratorOrder20261019
+displayName: M3 collections iterator mutation and index order candidates
+description: Reconciles exact current owners through the canonical typed Java snapshot recipe. Runtime qualification and target promotion remain separate gates.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-collections-iterator-order-20261019
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.JdtArrayNodeList20261019
+displayName: Eclipse JDT direct array child lists and Java 21 syntax compatibility
+description: Refines the original JDT NodeList owner and its tests from exact source pins. Public list behavior and source-build qualification remain required.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: jdt-array-nodelist-20261019
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: jdt-array-nodelist-20261019
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ParserOwnerRefinements20261019
+displayName: M3 parser owner allocation refinements
+description: Applies reviewed file-local Java parser refinements through exact typed source snapshots. Compiler and runtime contracts remain separate qualification gates.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-parser-owner-refinements-20261019
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-parser-owner-refinements-20261019
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.SerialReviewInvariant20261019
+displayName: Synexia standing serial owner refinement and cumulative category review
+description: Adds the requested standing clarification to the existing invariant and records bounded candidate comparisons in the existing searchable catalogue. Earlier custody preconditions remain immutable.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-serial-review-invariant-20261019
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ParserOwnerCurrent20261019
+displayName: M3 parser owners reconciled with current compiler contracts
+description: Preserves the newer cross-frontend build contract and applies the same reviewed compiler/parser atoms from exact current preimages. The historical pass remains sealed separately.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-parser-owner-current-20261019
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-parser-owner-current-20261019
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CollectionsOwnerCurrent20261019
+displayName: M3 collection owner refinements reconciled with current upstream
+description: Preserves the newer entry, mask and test repairs and restores strict sequenced behavior on its evolved owner. Historical source pins remain separately sealed.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-collections-owner-current-20261019

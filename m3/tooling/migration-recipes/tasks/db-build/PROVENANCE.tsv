@@ -1,0 +1,7 @@
+source	identity	role
+original_JDK_recipe	828724689638268574c2b599b1bfcef7921a2f90	Compile-failure source; immutable before-template
+sibling_Java_recipe	1c960db1d2f2f3cbf9acdfb9162e265597dfa03c	Existing typed-assignment donor; unchanged engine
+original_DbRecipeTest	e48b1fe8b9f3835449636adec347eb9c9207a2d3	Six retained JUnit cases
+recipe_failure_artifact	11296387332	Run37184634302 at271f76e
+recipe_artifact_SHA256	8dfe688100858026f4556e7104b0b54dde4b4a31d7ed4b84cb7603a2dc49dacd	Downloaded and verified exact bytes
+license	Apache-2.0	Existing M3-owned source and original test fixtures; no imported dependency body

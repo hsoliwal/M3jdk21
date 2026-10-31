@@ -1,0 +1,72 @@
+{
+  "schema": "M3_COLLECTION_REFINEMENT_QUALIFICATION_V1",
+  "status": "PASS_BOUNDED_COLLECTIONS_CAMPAIGN",
+  "product": "M3JDK21",
+  "runtime_input_commit": "a7cfe4931f2258e01b3fd129db518ade6fbb4ff4",
+  "publication_base": "677437be295b23f7ccf7409be287008944d0e8b0",
+  "canonical_input_commit": "4565392487bf83b55a3031a26ea1a61b1b526b3c",
+  "canonical_publication_base": "c7cacae8c93533faf05c90d35fcab190c9d86642",
+  "canonical_recipe": "com.synexia.rewrite.M3CollectionRefinement20261019",
+  "canonical_home": "https://github.com/hsoliwal/com.synexia/tree/codex/m3-collection-refinement-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019",
+  "canonical_commit_pin": "Recorded in the receiving pull request; avoids self-referential template hashes.",
+  "runtime_manifest_sha256": "9fa5af19b58beda653c059ab8c5f9f217e10203a8ae9e9295a02a30a5fe0ad0d",
+  "catalogue_sha256": "739dddb798d4bf9503ba0db305bed1a39150e54d67f6287d3f50d77f2dd3a31b",
+  "product_receipt_sha256": "759959e51d89a548e654429d1cb140a552f9f69e3586b5b6838a34abc8ad6006",
+  "product_receipt": "https://github.com/hsoliwal/com.synexia/tree/codex/m3-collection-refinement-20261019/synexia-openrewrite-recipes/recipes/m3-collection-refinement-20261019/evidence/epoch2/product/full-verification-attempt05/receipt.json",
+  "java_source_counts": {
+    "main": 268,
+    "test": 243
+  },
+  "maven": {
+    "tests": 457,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2
+  },
+  "independent_junit": {
+    "tests": 457,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2
+  },
+  "native_exports": {
+    "libm3_collections_mask.so": [
+      "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative",
+      "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative",
+      "Java_com_m3_collections_M3IndexMaskWindow_scanNative"
+    ],
+    "libm3_collections_pathmask.so": [
+      "Java_com_m3_collections_M3IndexPathMasks_selectNative"
+    ]
+  },
+  "declared_probe_counts": {
+    "java": 5,
+    "missing": 3,
+    "native": 11
+  },
+  "freshness": "PASS",
+  "runtime_ubsan": "REQUESTED",
+  "baseline": "Raw current input has duplicate methods; paired observations use explicitly repaired current source.",
+  "snapshot_selection": "Fused byte-state count; packed candidates and arraycopy merge tails deferred.",
+  "resource_evidence": {
+    "linked_clear_report_sha256": "f636497291193866daaed0e72cc090662314c35b98046a34f09236afae7c7789",
+    "selected_snapshot_report_sha256": "99a984a7e18977df977ac47f2c2489b38a3138c6009983e6197fb36a071a6b12",
+    "scope": "Three matched fork pairs per report; local ThreadMXBean observations, not JMH or universal speedup."
+  },
+  "scope_limits": [
+    "268 production and 243 test Java files; complete compiled source tree and declared Maven resources, not every auxiliary file at repository master.",
+    "The two Java-suite native-only assumptions are retained. The mask-span contract runs explicitly with JNI; the full all-native-backends lane remains NOT_RUN.",
+    "Three C translation units in two mask/path libraries; no claim that every native collections backend was built.",
+    "Installed M3JDK21 image, full HotSpot build, jtreg/JCK and complete Synexia reactor NOT_RUN.",
+    "Actual SDK and kernel replay are recorded separately in the canonical packet; Java-LST attribution NOT_RUN.",
+    "Publication metadata is added after product verification; compiled Java/native/test inputs and executable plan retain their tested hashes."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalCommit": "63c6857c7b57f79a494e950c89d5fbcf5b8c33a7",
+  "canonicalPr": 12492,
+  "targetBase": "0228a71901cd8f0abb38bccdc4941da2ec7d1aa9",
+  "recipe": "com.synexia.m3.TreeGetOrDefaultCallbacks",
+  "manifestPath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-tree-get-or-default-20261019/manifest.tsv",
+  "manifestSha256": "c7a4b290acfcc4c2b51deb230cc2364a809c004ec1981f16352a70a524caf2f2",
+  "proofScriptPath": "synexia-openrewrite-recipes/verification/m3-tree-get-or-default-20261019/replay.py",
+  "proofScriptSha256": "eba86deb9d512764e5a8590caea03d1f72403ad5a9f10373890b269c8b1975a2",
+  "license": "Apache-2.0",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "donationMode": "EXTERNAL_RECIPE_TOOL",
+  "namingDisposition": "Existing com.m3.collections.M3TreeMap, no new runtime type or interface; canonical naming map unchanged",
+  "disclosureDisposition": "Routine maintenance of already-public implementation and JDK behavior"
+}

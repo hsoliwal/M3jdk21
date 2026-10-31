@@ -1,0 +1,24 @@
+{
+  "assumption": "Authentic GitHub object identifiers and ordinary Git content addressing bind the exact uploaded bytes; the two malformed UTF-8 remote byte arrays and their SHA-256 values were not recovered.",
+  "custody_input_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/CUSTODY_INPUT.json",
+  "custody_input_sha256": "22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df",
+  "failed_readback_observation": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/RAW_READBACK_FAILURE_OBSERVATION.json",
+    "sha256": "224b3baa99e71c846cc96319c0a829eec3521d75f68731332ac2fa59fa214112"
+  },
+  "final_payload_batches_executed_by_this_script": 0,
+  "identity_only_allowlist": [
+    "24cdc62e634934527d551324c2449bcf951b5589",
+    "59b4ec83f687499a54f15695b9b246599f9579d7"
+  ],
+  "probe_direct_body_reads": 2,
+  "probe_failed_utf8_body_reads": 2,
+  "protocol": "EXACT_CREATE_AND_TREE_IDENTITY_FOR_TWO_INVALID_UTF8_FIXTURES",
+  "publication_qualification": "Custody only; no source test or receiving acceptance promotion.",
+  "raw_create_requests_and_responses_verified": 4,
+  "schema": "jcc-two-utf8-fixture-probe-custody/1",
+  "status": "GIT_OBJECT_CUSTODY_VERIFIED_BODY_READBACK_FAILED_FOR_TWO",
+  "verification_commit": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+  "verification_tree": "bf2b8fe43cda47f0c6363c8d376f61419e647e4d",
+  "verification_trees_verified": 17
+}

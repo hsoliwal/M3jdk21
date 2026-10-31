@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors.
+# Mechanical current-master source-line inventory, 2026-10-21. NOT compiled javap/ABI.
+# Only trimmed lines starting public/protected or @Override public/protected were compared.
+path	baseline_git_blob	received_git_blob	public_protected_declarations	source_line_equivalence	javap_abi_gate
+m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java	dfdbf710de34e79bb5ba87e9af018914cbfbe9a5	44d8c21fa93edfcdd5f8d98a05bf62f48ec263fa	77	PASS	NOT_RUN
+m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java	10c4d16cc9cd62d36f22646988718422caa2311e	51b9beed051888910ec06e7453cda1d273f19051	57	PASS	NOT_RUN
+m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	349e91753bdca08599b653b81189c41663eb8ff6	f36893e6822e9299ec959a24d7a62a99e3e1ab8b	147	PASS	NOT_RUN
+m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	27c56be2bd960ea9de139766ab40960bdbe91b0a	d12e15f41fe17069739a1cdbca1728ee8286d9c4	44	PASS	NOT_RUN
+src/java.base/share/classes/java/util/CollectionViews.java	2ff7ec57ab93c8bd118ceb320fd76aae1c0e7d66	ab1723f1f137249481023d5ea6a796bf7039b695	55	PASS	NOT_RUN

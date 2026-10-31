@@ -1,0 +1,10 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.text.FindMultiselect"
+contributors:
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 151
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 9

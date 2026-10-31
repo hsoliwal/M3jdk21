@@ -1,0 +1,35 @@
+"""Acquire only the existing proof host's declared SLF4J test binding."""
+from pathlib import Path
+import hashlib
+import json
+import urllib.request
+
+C2 = Path(__file__).resolve().parent
+B = C2.parent / 'm3fs-vfs-20261020'
+relative = Path('org/slf4j/slf4j-simple/2.0.13')
+destination = B / 'm2' / relative
+destination.mkdir(parents=True, exist_ok=True)
+records = []
+for suffix in ('pom', 'jar'):
+    filename = 'slf4j-simple-2.0.13.' + suffix
+    url = 'https://repo.maven.apache.org/maven2/' + relative.as_posix() + '/' + filename
+    with urllib.request.urlopen(url + '.sha1', timeout=40) as response:
+        expected = response.read().decode('ascii').strip().split()[0]
+    with urllib.request.urlopen(url, timeout=40) as response:
+        data = response.read()
+    assert hashlib.sha1(data).hexdigest() == expected
+    path = destination / filename
+    if path.exists():
+        assert path.read_bytes() == data
+    else:
+        path.write_bytes(data)
+    (destination / (filename + '.sha1')).write_text(expected + '\n')
+    records.append({'url': url, 'bytes': len(data), 'sha1': expected,
+                    'sha256': hashlib.sha256(data).hexdigest(), 'path': str(path)})
+(destination / '_remote.repositories').write_text(
+    'slf4j-simple-2.0.13.jar>central=\nslf4j-simple-2.0.13.pom>central=\n')
+receipt = C2 / 'verification/sdk-dependency-acquisition.json'
+receipt.write_text(json.dumps({'status': 'PASS', 'declared_coordinate': 'org.slf4j:slf4j-simple:2.0.13',
+                               'records': records}, indent=2) + '\n')
+print(json.dumps({'status': 'PASS', 'coordinate': 'org.slf4j:slf4j-simple:2.0.13',
+                  'artifacts': len(records)}))

@@ -1,0 +1,28 @@
+{
+  "tool": "mcp__codex_apps__github_create_tree",
+  "request": {
+    "repository_full_name": "hsoliwal/com.synexia",
+    "base_tree_sha": "0361e4a07b77a01df170523033fef01c4052ddc5",
+    "tree_elements": [
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors",
+        "mode": "040000",
+        "type": "tree",
+        "sha": "54c7989b23bb4fea69b74352aa144c6ba3c3adf0"
+      }
+    ]
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "sha": "1bd86f643f0e08ecb1b5a43d020bf0110e797d68"
+    },
+    "isError": false
+  }
+}
+

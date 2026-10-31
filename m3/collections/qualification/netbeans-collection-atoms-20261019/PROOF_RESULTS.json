@@ -1,0 +1,43 @@
+{
+  "proof_source_sha256": "4f7212200a5b49bfd0db6ea71a7011b6c8e028264b16264f2f1bc44d31f0ef32",
+  "junit_adapter_sha256": "52c0618fe28ab6f699407165a50e7fc3caebb7cf93b0b86e2c9814844e90eaeb",
+  "independent_upstream_oracle_sha256": "38452eec5f520b874f410f3c11ba4d688c0e046005c030e9687356532a641abf",
+  "proof_scope": "Finite cases, not all possible programs; original upstream JUnit3/4 test sources retained but not executed",
+  "results": [
+    {
+      "fixture": "incumbent",
+      "raw_log_sha256": "447c97bef51b77ed32e9b8ec5509303f83cc95a500341345ab0539913a88737e",
+      "stdout": "M3ArrayListRemoveIfProof PASS cases=12013 assertions=1883123\nPreserved baseline: root rejects structural callbacks immediately; inherited subList retains prefix removals on callback failure.\nUnused Object[] slots are directly verified null; GC scheduling and whole-JDK integration are outside this finite proof.\n"
+    },
+    {
+      "fixture": "NB_GAP_UNCONDITIONAL",
+      "raw_log_sha256": "447c97bef51b77ed32e9b8ec5509303f83cc95a500341345ab0539913a88737e",
+      "stdout": "M3ArrayListRemoveIfProof PASS cases=12013 assertions=1883123\nPreserved baseline: root rejects structural callbacks immediately; inherited subList retains prefix removals on callback failure.\nUnused Object[] slots are directly verified null; GC scheduling and whole-JDK integration are outside this finite proof.\n"
+    },
+    {
+      "fixture": "NB_GAP_INLINE_HYBRID",
+      "raw_log_sha256": "447c97bef51b77ed32e9b8ec5509303f83cc95a500341345ab0539913a88737e",
+      "stdout": "M3ArrayListRemoveIfProof PASS cases=12013 assertions=1883123\nPreserved baseline: root rejects structural callbacks immediately; inherited subList retains prefix removals on callback failure.\nUnused Object[] slots are directly verified null; GC scheduling and whole-JDK integration are outside this finite proof.\n"
+    },
+    {
+      "fixture": "NB_GAP_PRIVATE_HELPER",
+      "raw_log_sha256": "447c97bef51b77ed32e9b8ec5509303f83cc95a500341345ab0539913a88737e",
+      "stdout": "M3ArrayListRemoveIfProof PASS cases=12013 assertions=1883123\nPreserved baseline: root rejects structural callbacks immediately; inherited subList retains prefix removals on callback failure.\nUnused Object[] slots are directly verified null; GC scheduling and whole-JDK integration are outside this finite proof.\n"
+    },
+    {
+      "fixture": "NB_GAP_SINGLE_INTERVAL",
+      "raw_log_sha256": "447c97bef51b77ed32e9b8ec5509303f83cc95a500341345ab0539913a88737e",
+      "stdout": "M3ArrayListRemoveIfProof PASS cases=12013 assertions=1883123\nPreserved baseline: root rejects structural callbacks immediately; inherited subList retains prefix removals on callback failure.\nUnused Object[] slots are directly verified null; GC scheduling and whole-JDK integration are outside this finite proof.\n"
+    },
+    {
+      "fixture": "NB_GAP_EXISTING_RANGE",
+      "raw_log_sha256": "447c97bef51b77ed32e9b8ec5509303f83cc95a500341345ab0539913a88737e",
+      "stdout": "M3ArrayListRemoveIfProof PASS cases=12013 assertions=1883123\nPreserved baseline: root rejects structural callbacks immediately; inherited subList retains prefix removals on callback failure.\nUnused Object[] slots are directly verified null; GC scheduling and whole-JDK integration are outside this finite proof.\n"
+    },
+    {
+      "fixture": "exact_netbeans_gaplist",
+      "raw_log_sha256": "eccff6bd778ff3c1e5012b8705871cbe5f09ab94a60179b41ec5086e8c0a9e27",
+      "stdout": "NetBeansGapListRangeProof PASS operations=15000 checks=388644\n"
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "schema": "m3-gcc-audit-input-seals/1",
+  "files": [
+    {
+      "path": "current-ci/REPORT.md",
+      "bytes": 4856,
+      "sha256": "662bf4f555381d4d1862a9ad4f12b19689014166a5eee3833c091f0e78b4165a"
+    },
+    {
+      "path": "current-ci/receiving-head-job-111917562555.log",
+      "bytes": 261202,
+      "sha256": "9667a7b35887f64517243d624b0a8c86336a934cdda5d33c3c4fe81f40c89927"
+    },
+    {
+      "path": "current-ci/current-master-applicability/FILES.json",
+      "bytes": 7655,
+      "sha256": "c61a866f040123f0d27b5d34b5fd54502d4b7f18a9496e019c65061d46da5a5f"
+    },
+    {
+      "path": "current-ci/current-master-applicability/files/.github/workflows/main.yml",
+      "bytes": 14517,
+      "sha256": "6caf401e349de95b37041524a598aa0174c8511d216bbc7932a7fd9d0d997039"
+    },
+    {
+      "path": "current-ci/current-master-applicability/files/.github/workflows/build-linux.yml",
+      "bytes": 5195,
+      "sha256": "db21647bdf5228850f5b3b5608f46b0d7de12fc53f4a775021ca21fa4a11c07a"
+    },
+    {
+      "path": "receiving-merge-audit/calls/current_refresh_github_tree.json",
+      "bytes": 30108,
+      "sha256": "e245ce94a52bf1cc38e43568ef122164e519deef0efb7c759c98bcfdaf30b813"
+    },
+    {
+      "path": "gcc-acquisition-audit/ARCHIVE_CALLS.json",
+      "bytes": 3703,
+      "sha256": "48c4db3657462dc5ebc4e3a1c2dfba8fed8dce6de83597ed6c314ad68768add1"
+    },
+    {
+      "path": "gcc-acquisition-audit/METADATA_CALLS.json",
+      "bytes": 7358,
+      "sha256": "9ed6dfd6b5a9e6816bae89ae8c8a5ad0f6ac6db0e8cd567d0d3fad8e55f86008"
+    },
+    {
+      "path": "gcc-acquisition-audit/REPORT.md",
+      "bytes": 5657,
+      "sha256": "4ca47c15f677a1eae442c19df1910df5d50a6fd4df40a221cc65d6db60435cd9"
+    },
+    {
+      "path": "gcc-acquisition-audit/SUMMARY.json",
+      "bytes": 10008,
+      "sha256": "2e2e28b298c8e7c8b5d6e977709bcfcccfee13a37391a734822288fe9a246017"
+    },
+    {
+      "path": "gcc-acquisition-audit/WEB_PRIMARY_SOURCES.json",
+      "bytes": 8837,
+      "sha256": "4870901905e87e36e77b63da0bc7ad8ecaf485499d5cfbdda99f38fe20ffb8d5"
+    },
+    {
+      "path": "gcc-acquisition-audit/acquire_metadata.py",
+      "bytes": 2194,
+      "sha256": "59bddd3406839b6c3ab2956d84d91e47e68402a9b6797da0adc8b36ecbcbf874"
+    },
+    {
+      "path": "gcc-acquisition-audit/build_report.py",
+      "bytes": 12576,
+      "sha256": "6e6167327c0c3df6873e9f3fbd12e94f2d8478acd318ccc26ad2d7c39cdaf09d"
+    },
+    {
+      "path": "gcc-acquisition-audit/current-gcc10-pool.html",
+      "bytes": 190325,
+      "sha256": "b5c9e9301a57bffc2939e0f232e814964579bbef3709e7ed30b72d40c9ffa530"
+    },
+    {
+      "path": "gcc-acquisition-audit/current-gcc10-pool.html.headers",
+      "bytes": 202,
+      "sha256": "f9920ddcf403e66dc76f41a26f90790105103ed262737e00ff177634398d6689"
+    },
+    {
+      "path": "gcc-acquisition-audit/debian-changelog",
+      "bytes": 739156,
+      "sha256": "fd61d2216f85ea64d8219c2fa72d35b7281ffc2570941782c49c7c6232f23d42"
+    },
+    {
+      "path": "gcc-acquisition-audit/gcc-10_10.5.0-1ubuntu1~22.04.3.debian.tar.xz",
+      "bytes": 602416,
+      "sha256": "1d78f0939f984920a952a56421be768351774229e8940d458377223a4451972f"
+    },
+    {
+      "path": "gcc-acquisition-audit/gcc-10_10.5.0-1ubuntu1~22.04.3.debian.tar.xz.headers",
+      "bytes": 293,
+      "sha256": "b3f9b38ce3cb8a6ac6f368b955a4a8de68a6480877d4fb9ecd7d023a4a7387d7"
+    },
+    {
+      "path": "gcc-acquisition-audit/gcc-10_10.5.0-1ubuntu1~22.04.3.dsc",
+      "bytes": 22275,
+      "sha256": "33cf0ff38703aa5559cb81c9ce84e7f62dc07ec3706d97869e993021537b1d02"
+    },
+    {
+      "path": "gcc-acquisition-audit/gcc-10_10.5.0-1ubuntu1~22.04.3.dsc.headers",
+      "bytes": 293,
+      "sha256": "eae666a75e3c94cdd0419daa63209210102f19441c70d0b482133c9e928736e1"
+    },
+    {
+      "path": "gcc-acquisition-audit/jammy-security-InRelease.headers",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "gcc-acquisition-audit/jammy-security-universe-amd64-Packages.xz.headers",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "gcc-acquisition-audit/jammy-updates-InRelease.headers",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "gcc-acquisition-audit/jammy-updates-universe-amd64-Packages.xz.headers",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "gcc-acquisition-audit/old-releases-gcc10-pool.html",
+      "bytes": 566507,
+      "sha256": "b94db0578bbf019a5f32fd8b1bdb6ed037d40ec42108c07542dd5901ca09c026"
+    },
+    {
+      "path": "gcc-acquisition-audit/old-releases-gcc10-pool.html.headers",
+      "bytes": 202,
+      "sha256": "3a97a1480c9d7eb27c3a3da0caacecd937ead2f8e64300bbc97fec0b9829c485"
+    },
+    {
+      "path": "gcc-acquisition-audit/snapshot-documentation.html.headers",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

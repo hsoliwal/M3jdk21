@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "observations": {
+    "baseline": [
+      {
+        "backend": "JAVA",
+        "cases": "70080",
+        "checks": "438034",
+        "digest": "c665315f798fc026"
+      },
+      {
+        "backend": "NATIVE_REQUIRED",
+        "cases": "70080",
+        "checks": "438034",
+        "digest": "c665315f798fc026"
+      }
+    ],
+    "candidate": [
+      {
+        "backend": "JAVA",
+        "cases": "70080",
+        "checks": "438034",
+        "digest": "c665315f798fc026"
+      },
+      {
+        "backend": "NATIVE_REQUIRED",
+        "cases": "70080",
+        "checks": "438034",
+        "digest": "c665315f798fc026"
+      }
+    ]
+  },
+  "jni_check_enabled": true,
+  "previous_v1_java_jni_refusal_and_viewport_tapes_byte_identical": true,
+  "existing_and_additive_contracts": "actual baseline and candidate JNI passed",
+  "unavailable_and_legacy_capability_lanes": "PASS in fresh JVMs",
+  "viewport_peer": "PASS actual JNI with unchanged library",
+  "scope": "actual SDK library JVM execution; not integrated core libjava or full current-source JDK image"
+}

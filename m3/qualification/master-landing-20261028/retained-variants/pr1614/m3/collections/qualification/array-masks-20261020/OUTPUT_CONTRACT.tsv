@@ -1,0 +1,7 @@
+artifact	purpose
+STATUS.tsv	executed_and_pending_stage_status
+FINAL_REPORT.md	exact_delta_verification_failures_and_scope
+RUN_CONTEXT.tsv	product_recipe_revision_and_locks
+PROVENANCE.tsv	per_file_pre_and_post_SHA256
+VERIFY_CONTRACT.tsv	bounded_contract_proofs_and_limits
+OUTPUT_CONTRACT.tsv	required_artifact_inventory

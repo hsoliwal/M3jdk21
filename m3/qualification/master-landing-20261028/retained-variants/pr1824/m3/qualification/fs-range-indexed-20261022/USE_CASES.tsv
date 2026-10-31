@@ -1,0 +1,7 @@
+use_case	category	original_sdk_owner	chosen_implementation	preserved_boundary	next_proof
+FileIndex known chunk reuse	RANGE_HASH	M3File	One seekable NIO channel; SHA256 primitive long[] lanes	Range != full-file identity	Original m3/file/verify.py host and linked image
+Compressed/archive data selection	SEQUENTIAL_RANGE_TRANSFER	MFileStreams	One provider Input with gap consumption and 8KiB scratch	Borrowed output; no atomic rollback	Original ZIP/JRT provider JUnit
+Large SQLite directory browsing	FILTERED_DIRECTORY	M3DirectoryTable	Physical row IDs and state-mask indexed projection	One char[] name payload and JNI wire layout	Original M3FS JNI/SQLite test
+Stable sorted directory viewport	STABLE_INDEX_SORT	M3DirectoryTable	Primitive int[] mergesort over size metadata	Stable tie/encounter order	Original directory projection JUnit
+Offline Maven/Gradle source comparison	COMPLETE_FILE_DELTA	M3File/M3HostFileInventory	Retain complete SHA256 and V2 observed inputs	Partial range hash must not replace full scan	Original ABI/SQLite source-build proof
+Java/JNI array-mask integration	JNI_STATE_SELECT	jdk.internal.m3 and libjava	Preserve existing primitive region/native selectors	No new JNI symbol/heap pin	Native header/export/JTReg

@@ -1,0 +1,213 @@
+{
+  "schema": "m3-regex-correction02-three-target-replay-actual-terminal/v1",
+  "status": "ACTUAL_APPLY3_CHECK0_SECONDAPPLY0_TWO_SOURCE_DRIFT_REFUSALS_PASS",
+  "commandPlan": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/CORRECTION02_COMMAND_PLAN_01.json",
+    "bytes": 128063,
+    "sha256": "77f91e6d7ea621c8ded0ae30aac841b8f84da7d0010b7bbe1603af535ce5d837"
+  },
+  "nativeManifest": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_NATIVE_COMMANDS_02_V2.json",
+    "bytes": 83456,
+    "sha256": "aa4eecf1e1a36241bc2b3e2a7ac520122a092dc64756797b64f0ce1ec43a4aee"
+  },
+  "stages": [
+    {
+      "commandName": "replayApplyThreeTargets",
+      "nativeArgv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms16m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\scratch",
+        "-cp",
+        "K:/codex-work/m3-synexia-full-family-invariant-20261007/target/replay-classes",
+        "com.synexia.rewrite.Replay",
+        "--apply",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\receiving-snapshot",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\templates"
+      ],
+      "nativeLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_1_replayApplyThreeTargets.log",
+        "bytes": 828,
+        "sha256": "bff4f713da18960ca3a7d0295a405554d2a8a2cae669758ea07c81340df0f92e"
+      },
+      "nativeExit": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_1_replayApplyThreeTargets.exit.txt",
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+      },
+      "nativePreflight": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_1_replayApplyThreeTargets.preflight.json",
+        "bytes": 758,
+        "sha256": "79083fc5e5d9f4870c44e58bcd3f92fff1bba3762ab4843f32b0b0973b4b3bf6"
+      },
+      "actualExitCode": 0,
+      "actualChanges": 3,
+      "sourceDriftNoMutation": false
+    },
+    {
+      "commandName": "replayCheckFixedpoint",
+      "nativeArgv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms16m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\scratch",
+        "-cp",
+        "K:/codex-work/m3-synexia-full-family-invariant-20261007/target/replay-classes",
+        "com.synexia.rewrite.Replay",
+        "--check",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\receiving-snapshot",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\templates"
+      ],
+      "nativeLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_2_replayCheckFixedpoint.log",
+        "bytes": 177,
+        "sha256": "d90f2fe2aea0aa2a5cbcdae28331b7f9822cce70ee42686c4045aeaa8cffc382"
+      },
+      "nativeExit": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_2_replayCheckFixedpoint.exit.txt",
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+      },
+      "nativePreflight": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-01/CORRECTION02_01_2_replayCheckFixedpoint.preflight.json",
+        "bytes": 756,
+        "sha256": "93ccb65acc9b5199396af31140d4af89ae7aea67cdb2efa59aeaa5ea3a1ab4f7"
+      },
+      "actualExitCode": 0,
+      "actualChanges": 0,
+      "sourceDriftNoMutation": false
+    },
+    {
+      "commandName": "replaySecondApplyFixedpoint",
+      "nativeArgv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms16m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\scratch",
+        "-cp",
+        "K:/codex-work/m3-synexia-full-family-invariant-20261007/target/replay-classes",
+        "com.synexia.rewrite.Replay",
+        "--apply",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\receiving-snapshot",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\templates"
+      ],
+      "nativeLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_3_replaySecondApplyFixedpoint.log",
+        "bytes": 176,
+        "sha256": "35168195e2633dc9d393178155e8cb1bdfe9f8c056eaf9b098aa536698d04343"
+      },
+      "nativeExit": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_3_replaySecondApplyFixedpoint.exit.txt",
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+      },
+      "nativePreflight": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_3_replaySecondApplyFixedpoint.preflight.json",
+        "bytes": 762,
+        "sha256": "f90e97a8af2b3b87ef3153cee35e9e436b00fa3e233dc92d3e55a07516abcd37"
+      },
+      "actualExitCode": 0,
+      "actualChanges": 0,
+      "sourceDriftNoMutation": false
+    },
+    {
+      "commandName": "driftProgramRefusal",
+      "nativeArgv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms16m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\scratch",
+        "-cp",
+        "K:/codex-work/m3-synexia-full-family-invariant-20261007/target/replay-classes",
+        "com.synexia.rewrite.Replay",
+        "--apply",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\driftProgramRefusal",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\templates"
+      ],
+      "nativeLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_4_driftProgramRefusal.log",
+        "bytes": 469,
+        "sha256": "c0d8977755c0aabe5163046a66f6f879a1030279a13d61deeae482d94431ce7e"
+      },
+      "nativeExit": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_4_driftProgramRefusal.exit.txt",
+        "bytes": 3,
+        "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+      },
+      "nativePreflight": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_4_driftProgramRefusal.preflight.json",
+        "bytes": 754,
+        "sha256": "eea7e239a3a0cb6ab6601224fcb7b15c7f0d373f4416f0a0b6201d8b4e782793"
+      },
+      "actualExitCode": 1,
+      "actualChanges": null,
+      "sourceDriftNoMutation": true
+    },
+    {
+      "commandName": "driftProgramTestRefusal",
+      "nativeArgv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xms16m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\scratch",
+        "-cp",
+        "K:/codex-work/m3-synexia-full-family-invariant-20261007/target/replay-classes",
+        "com.synexia.rewrite.Replay",
+        "--apply",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\target\\driftProgramTestRefusal",
+        "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\templates"
+      ],
+      "nativeLog": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_5_driftProgramTestRefusal.log",
+        "bytes": 473,
+        "sha256": "8d1050000039ef3f665ecc02971133100e9fbde399b89f22c487db90ae6cf600"
+      },
+      "nativeExit": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_5_driftProgramTestRefusal.exit.txt",
+        "bytes": 3,
+        "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+      },
+      "nativePreflight": {
+        "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/native-preparation-02/CORRECTION02_02V2_5_driftProgramTestRefusal.preflight.json",
+        "bytes": 758,
+        "sha256": "a7ba56a89d79f6311b2e2ea855696df56f7a22f060a7561913ac671dba0e0033"
+      },
+      "actualExitCode": 1,
+      "actualChanges": null,
+      "sourceDriftNoMutation": true
+    }
+  ],
+  "postimageSeals": [
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/receiving-snapshot/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+      "bytes": 141730,
+      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/receiving-snapshot/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexTrigramQueryTest.java",
+      "bytes": 11007,
+      "sha256": "bae0950fd49e10eaada3d8e9e61a9b99dd251357f3952bbd867e134f77ef2225"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/target/receiving-snapshot/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexProgramTest.java",
+      "bytes": 39322,
+      "sha256": "5c185acb76ef6de2a79eebec30a6b156fa982c7283cb0f4d0ef96840ce1a9dd6"
+    }
+  ],
+  "targetCount": 3,
+  "productionTemplateUnchanged": true,
+  "allNegativeSourceBytesUnchanged": true,
+  "sourceEditsLiveCheckout": 0,
+  "sealingJvmInvocations": 0
+}

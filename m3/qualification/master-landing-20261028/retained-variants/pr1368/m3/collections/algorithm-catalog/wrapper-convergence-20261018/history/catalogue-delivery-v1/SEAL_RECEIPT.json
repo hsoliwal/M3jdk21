@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/prepare.py",
+    "--dataset",
+    "m3jdk21-wrap-catalog-20261018",
+    "--repository",
+    "hsoliwal/M3jdk21",
+    "--baseline",
+    "/workspace/scratch/8762dba320ce/audit/collections-latest-baseline",
+    "--baseline-ref",
+    "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "--candidates",
+    "/workspace/scratch/8762dba320ce/qualification/wrappers/catalogue-input",
+    "--recipe-owner",
+    "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes"
+  ],
+  "returncode": 0,
+  "metadata_targets": 314,
+  "freeze_sha256": "667d1f0d7db87012b8a2d6b994dd86325bd45b493305050b2211b8cc0ed29448",
+  "target_prefix_absent_at_baseline": true,
+  "log_sha256": "4034928bb073792c3d4ef56f0b7f760ee74871c047a238be1e5f84754fa8345c"
+}

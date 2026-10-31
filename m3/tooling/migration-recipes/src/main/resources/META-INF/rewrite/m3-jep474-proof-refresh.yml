@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.Jep474ProofRefresh
+displayName: Refresh JEP 474 current-master equivalence proof
+description: >
+  Source-sealed proof-only repair for the JEP 474 equivalence workflow and receipt.
+  HotSpot product source remains unchanged.
+recipeList:
+  - com.m3.rewrite.backport.M3Jep474ProofRefreshRecipe

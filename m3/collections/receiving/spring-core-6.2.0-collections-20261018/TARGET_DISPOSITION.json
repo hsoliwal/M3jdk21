@@ -1,0 +1,33 @@
+{
+  "schema": "m3-spring-namespace-source-disposition-v1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "metadataLicense": "Apache-2.0",
+  "authority": {
+    "repository": "hsoliwal/M3jdk21",
+    "revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "policy": "m3/docs/m3jdk21-porting-invariant.md",
+    "mapping": "m3/docs/name-mapping.json"
+  },
+  "namespaceMapping": {
+    "source": "org.springframework.util",
+    "target": "com.m3.collections.spring",
+    "selection": "27 selected collection/dependency sources; donor JDK interfaces remain java.util"
+  },
+  "sourceTree": "e81467780160c2cfa7714aee3a8b970d80fc7972",
+  "sourceOnlyTree": "94de7f94d9388a4ac25739d0d3b80e878b4f3503",
+  "sourceFiles": 27,
+  "targetDisposition": "PENDING_RUNTIME_PORT",
+  "publicJDKNames": "UNCHANGED",
+  "receivingSequenceAdvanced": false,
+  "newCollectionAlgorithmsAdmitted": 0,
+  "arrayNativeStorage": "OPEN",
+  "runtimeDependencyOnSynexia": false,
+  "sourceQualification": "SOURCE_QUALIFICATION.json",
+  "pending": [
+    "FileSystemUtils Javadoc-only link and Javadoc build",
+    "Runtime behavior and original donor tests",
+    "Original node/reference entries, Java backing maps and ClassUtils/ReflectionUtils global caches",
+    "Array/index/offset/mask storage conversion and JNI",
+    "Full Spring and five-library scope"
+  ]
+}

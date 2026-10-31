@@ -1,0 +1,60 @@
+{
+  "schema": "M3_WRAPPER_PROOF2_SDK_QUALIFICATION_V1",
+  "status": "PASS_SDK_ONLY",
+  "dataset": "m3jdk21-wrapper-proof2-20261018",
+  "baseline_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "targets": 3,
+  "bound_input_files": 19,
+  "sdk_tests": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "input_sealing_tests": 8,
+  "receiver_contract_cases": 9,
+  "receiver_receipt": {
+    "path": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/receiver-proof/evidence/RECEIVER_RECEIPT.json",
+    "sha256": "4de6dfea72a69f6316010d14ea8baf6bbb4cf0c2e56f99cc9ab15b463273165b"
+  },
+  "source_manifest_rows": 337,
+  "generated_root": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-wrapper-proof2-20261018/candidate",
+  "generated_files": [
+    {
+      "path": "m3/collections/verification/wrapper-convergence-20261018/README.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "d39d34f3da572db2902308095048cb1430b9fa0b3c94c82248c25edc69f2621a",
+      "bytes": 7663
+    },
+    {
+      "path": "m3/collections/verification/wrapper-convergence-20261018/SOURCE_MANIFEST.json",
+      "before_sha256": "ABSENT",
+      "after_sha256": "90ec8c484c8ca68f1381133a0979ef88f4975dd4c46ced480db7a87d21b0a98e",
+      "bytes": 134405
+    },
+    {
+      "path": "m3/collections/verification/wrapper-convergence-20261018/verify.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "5af1979df6d91ae252d66a66375903c8c58b3f8b1028fa9dcf6e38ca59869391",
+      "bytes": 30116
+    }
+  ],
+  "binding_files": {
+    "DATASET.json": "d31c835762d935eec94d9e3b1fa7a923a7ed460d817b0d8802af0fbfc4bd09eb",
+    "ENGINE_EFFECTIVE.tsv": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
+    "SDK_INPUTS.tsv": "fbf3a62b84e9e6947d2fe79f0c945857d2a5afae91e847e4e1b2eab624f433c8",
+    "SDK_RESULTS.tsv": "f36aea78c259571800d34b80ba80efe0262bbbc7ae656b8093b9656d7d3c3d3b",
+    "SDK_REPORT.xml": "e40def8ea2bd93b0f9c11e94933e148b0bf7cb43e4a7eb0c9e1f6b460d829994",
+    "AUTHORING_RECEIPT.json": "ae2e097f97560ca1f203873cfb80e4a16e447aec78ac842dd873c3a726ae2a65",
+    "SEAL.json": "0dd6358b3cd57b9c3766b333f32bc296939d45b3eb8f60ed273e22150ad164a9",
+    "SDK_EXECUTION.json": "d5fb608e6864686395a3f62641db4696954293098c39bcdcdcf59f87cc81e6f2"
+  },
+  "notes": [
+    "Existing prepare.py, receive.py and canonical recipe engines unchanged",
+    "Actual receiver runtime validation delegated to root; not implied by SDK-only pass",
+    "Original wrapper-proof dataset and authoring receipts preserved",
+    "Three proof paths were ABSENT in exact baseline Git tree",
+    "Dataset name uses proof2 to comply with existing 32-character seal guard",
+    "Receipt inspection corrected an initial assumed top-level path to the existing evidence/RECEIVER_RECEIPT.json path; no inputs or tests changed"
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "schema": "M3_FILE_AST_NATIVE_QUALIFICATION_V1",
+  "target_baseline": "2879a91f48c184b90e7d1577ff581bd8793ae634",
+  "canonical_baseline": "8c15ac5a714caed2034b41f15cae715d30f111f5",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12609",
+  "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018",
+  "dataset": "file-ast-final-20261021",
+  "canonical_immutable_pin": "file-ast-native-source-pin-20261021.json",
+  "source_sha256": {
+    "m3/compatibility/verify_stream_shadow.py": "eac345f300c1834c05b85ed3ceee80aeac27d0aa650e749e8d5096b2c3077056",
+    "m3/docs/file-ast-native-continuation.md": "6decdf800f6fa54b7e194061040cbe1a251e27977d201f5a8c54957e0fea53f9",
+    "m3/eclipse/filesystem/qualification/streams/src/test/java/com/m3/eclipse/filesystem/M3NativeProgressShadow.java": "e0ca30e485332b41265f3c12f12523711168136382f2c9bede64cd05a39a224b",
+    "m3/file/pom.xml": "3230fb6506194471e08dcc8dfad866d8043c8df06c150a75f6324b1a9e69de5d",
+    "m3/file/src/main/java/com/m3/file/M3File.java": "056b9bf60563d223a8a82542d390722665e6bc2b2939d87ccea7cdddc198e452",
+    "m3/file/src/main/java/com/m3/file/M3FileObservation.java": "732795ee3230084e204af1f3fc360a01f4e476cb1f04d7e4cabf9ea6aa8fcb19",
+    "m3/file/src/main/java/com/m3/file/M3FileScope.java": "0c831e56cd0d776cd89a92ba5bafa92c5dd2e3acfde521a8a177425413dc3433",
+    "m3/file/src/main/java/com/m3/file/M3FileSnapshot.java": "be341991cace569b484c450e2c0f852fd43e7762050e802eea8b4d9197324397",
+    "m3/file/src/main/java/com/m3/file/M3FileVersionView.java": "29b2753a59fa9e2b86483c99aa15595f2e77bd5cab243b350a3fcf492a36a368",
+    "m3/file/src/test/java/M3FileIntegratedImageProbe.java": "325a0d447b0398304d9b943f551ceed6b4a928955a11f33a420c0704d7b000ee",
+    "m3/file/src/test/java/com/m3/file/M3FileAttributesTest.java": "074bbf1ca38d9789730ec3d3689ed7dd1dab9f42af6256a4b7fd00fc58bf816b",
+    "m3/file/src/test/java/com/m3/file/M3FileObservationProviderTest.java": "9e407562732c893ec26f36eeedd8ab456c3ae65588d1375c99d2b840115caa79",
+    "m3/file/src/test/java/com/m3/file/M3FileScopeTest.java": "0afd32824ffcc9e2119b1b8e3633dd2978440dedc450cda15a55b567837a1037",
+    "m3/file/src/test/java/com/m3/file/M3FileSnapshotTest.java": "917195a25b7cf3c359b79243be57dd74a34541ec368827d7565f8219ce6fa095",
+    "m3/file/src/test/java/com/m3/file/M3FileTraversalTest.java": "105e560d615760e2473796b7b17185bd2f3dadd1446bc2e63a7f461ec528a179",
+    "m3/tooling/module-packs/parser/build.py": "37d21eb87090ad9a87d2228f40e9a2aaf83d2cdbc1c2bfd49bb3c28b1dedded0",
+    "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java": "528813cdc5509c81e877ebbd934ddd7e7c92bf8f7850a5d389bbc97db5b6f20c",
+    "m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTDeltaContract.java": "71b0970fb64d8d7d5f48b4aef92c17f295e9eeff6fde36846e19245f621c1702",
+    "m3/tooling/shared-frontend/eclipse-jdt/sources.json": "d2269b68d75435245b3782ad3000e5385cfbe525500d4a7cb0bbe75cbff4850b",
+    "src/java.base/share/classes/java/io/InputStream.java": "f48ebb4233436b882f046d7d58ad44f5b1edff7ce808a3e236754f6ae8a36531",
+    "src/java.base/share/classes/java/io/OutputStream.java": "92adb9c2a5f62e87088ab7158c8e503c87745a60b5076ca4c3bd08c5823cdce6",
+    "src/java.base/share/classes/java/io/ShadowInputStream.java": "81cfe0dd83132e550ad5f7efb858d0c1cf34fff33074bb786141fc4976fc6fd1",
+    "src/java.base/share/classes/java/lang/M3StringImmediate.java": "9360687d536948728c8500aaae168e5bc47a1f51bef9f9bb6dcb2c9d8a6044e8",
+    "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java": "368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93",
+    "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java": "48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc",
+    "src/java.base/share/classes/jdk/internal/m3/io/M3IO.java": "76482eea6d15f0e4f95361cb5315e26ca04abb89919dcbf984035766a08d41b4",
+    "test/jdk/java/io/InputStream/M3StreamProgressShadow.java": "4776d5f0bb4192fd349233077a069e753bd11f08ba9bf543ba2ef4056f6839c1"
+  },
+  "history": [
+    "streams-shadow-traversal-qualification.json describes earlier sources and bootstrap proof",
+    "../tooling/shared-frontend/eclipse-jdt/qualification.json describes earlier source manifest; corrected manifest is sealed here"
+  ],
+  "qualification": {
+    "sdk_tests": 5,
+    "input_sealing_tests": 8,
+    "receiver_cases": 11,
+    "memory_integrity_tests": 4,
+    "memory_records": 13,
+    "parser_artifact_checks": 4,
+    "file_junit_tests": 28,
+    "file_on_source_built_image": "PASS",
+    "stream_checks_per_mode": 131326,
+    "stream_modes": [
+      "mixed -Xcheck:jni",
+      "-Xint -Xcheck:jni"
+    ],
+    "traversal_checks": 23,
+    "m3fs_java_tests": 101,
+    "m3fs_native_suites": 12,
+    "eclipse_filesystem_unit_tests": 18,
+    "eclipse_workspace_integration_tests": 1,
+    "native_progress_shadow_checks": 406,
+    "real_jdt_junit_tests": 6,
+    "real_jdt_on_source_built_image": "PASS",
+    "ast_delta_checks": 69018,
+    "parser_framework_checks": 297,
+    "javac_checks": 116,
+    "cross_frontend_checks": 12071,
+    "real_jdt_maven_groovy_smoke_checks": 18,
+    "real_kotlin_psi_nodes": 33,
+    "real_gradle_model": {
+      "projects": 2,
+      "tasks": 45,
+      "nodes": 47
+    },
+    "source_built_jdk_make_images": "PASS Linux x86_64 release/server",
+    "installed_file_module": "PASS",
+    "installed_parser_module": "PASS",
+    "installed_runtime_module_patches": false
+  },
+  "runtime": {
+    "runtime_sha256": {
+      "bin/java": "76e09ce124093dc9647a2625af88ad008431bebae0e2ab130717b023b07486c6",
+      "lib/server/libjvm.so": "285628f86e3ddfdcb32d5e4d7b76bad33006c4b023e12277e637667f9d52369e",
+      "lib/modules": "279458afa037338df0cdd4e05d53df3a7bd04eebceba682e0a3a469d81f94cc5"
+    },
+    "native_library_sha256": "fb2e70989a90f1ff151519ad875c09f82a3812ec7e2d7cfc932c2a001eccfcdf",
+    "linked_modules_sha256": "710be0d43c6eeb52299106b4223d630eec335a30c8745bccddd426a31414a488",
+    "jmods_sha256": {
+      "com.m3.file.jmod": "09dea5412cb163dd18baedf92fb79bbfb8d7158a6b38b360a3cc2507c1cd35dd",
+      "jdk.m3.parser.jmod": "f0c18e3f4936cc247bb6d76d76ee4a44240c1abdc474735e7218178bfde83398"
+    },
+    "commands_sha256": "1a164af3a948472b8ae15fbc8825b15fc839c15bda9d6219eb18403e5a8e3fdb"
+  },
+  "jdt_custody_correction": {
+    "canonical_commit": "08e84ed4430894e07dea272758401fd7202d2187",
+    "path": "synexia-job/src/main/java/com/synexia/job/utils/ProgressCalculationUtils.java",
+    "git_blob": "b0eb1223d9d9513828d5c015db3c3af69659bee7",
+    "sha256": "7a5f950efde91f07e8df46a092bb34408b49532807be361a6c1da19ac3b3bf45",
+    "source_body_changed": false
+  },
+  "contracts": [
+    "M3File.of remains fresh; M3FileScope is caller-owned and bounded",
+    "attribute equality is not content equivalence; optional version view is provider opt-in",
+    "AST structure hash excludes source/ranges/flags; exact row deltas are generation-local and not semantic/ABI proof",
+    "original stream/provider ownership and checked native selectors reused; no new JNI symbols",
+    "memory integrity is enforced for this canonical recipe host; no universal automatic writer claim"
+  ],
+  "pending": [
+    "full jtreg/API matrix",
+    "all operating systems and architectures",
+    "comparative CPU/retained-heap/native-memory benchmarks",
+    "five collection-library full contract and runtime admission",
+    "universal all-parser coverage",
+    "repository-wide automatic MOP event capture"
+  ],
+  "phase": "STRING; not advanced",
+  "attribution": "Copyright 2026 Hitesh Soliwal and contributors; Synexia MOP recipe expression Apache-2.0; OpenJDK and other payload licenses unchanged"
+}

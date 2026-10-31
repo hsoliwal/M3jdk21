@@ -1,0 +1,77 @@
+name: M3 Eclipse progress forward receiver (Java 21)
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'm3/eclipse/core-runtime/**'
+      - 'm3/collections/src/main/java/**'
+      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - '.github/workflows/m3-eclipse-progress-forward-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  m3-eclipse-progress-receiver:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Record exact head and verify postimage source hashes
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p proof
+          git rev-parse HEAD > proof/head.txt
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          base = Path('m3/eclipse/core-runtime/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/eclipse-m3-progress-forward')
+          rows = [s.split('\t') for s in (base / 'manifest.tsv').read_text().splitlines() if s and not s.startswith('#')]
+          assert len(rows) == 2
+          for relative, before, digest, name in rows:
+              assert before == 'ABSENT'
+              for candidate in (Path(relative), base / name):
+                  assert candidate.is_file() and not candidate.is_symlink(), candidate
+                  assert hashlib.sha256(candidate.read_bytes()).hexdigest() == digest, candidate
+          print('ADMITTED_TWO_EXACT_POSTIMAGES')
+          PY
+      - name: Run hash-pinned Java LST recipe and refusal/fixed-point tests
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/eclipse/core-runtime/recipe/pom.xml test 2>&1 | tee proof/recipe.txt
+      - name: Compile unchanged M3 collections and install runtime dependency
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p proof/classes
+          find m3/collections/src/main/java -name '*.java' | sort > proof/m3-sources.txt
+          javac --release 21 -Xlint:all,-module -Werror -d proof/classes @proof/m3-sources.txt 2>&1 | tee proof/m3-compile.txt
+          jar --create --file proof/m3-collections.jar -C proof/classes .
+          mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
+            -Dfile="$GITHUB_WORKSPACE/proof/m3-collections.jar" \
+            -DgroupId=com.m3 -DartifactId=m3-collections -Dversion=0.1.0-SNAPSHOT \
+            -Dpackaging=jar -DgeneratePom=true
+      - name: Compile and test real Eclipse API forwarding
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/eclipse/core-runtime/pom.xml verify 2>&1 | tee proof/maven-bridge.txt
+          git diff --exit-code -- m3/collections/src/main/java m3/eclipse/core-runtime/src
+      - name: Preserve receipts and JUnit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-eclipse-progress-${{ github.event.pull_request.head.sha || github.sha }}
+          retention-days: 30
+          path: |
+            proof/
+            m3/eclipse/core-runtime/recipe/target/surefire-reports/
+            m3/eclipse/core-runtime/target/surefire-reports/

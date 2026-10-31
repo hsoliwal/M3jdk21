@@ -1,0 +1,19 @@
+{
+  "schema": "M3_FEATURE_IMAGE_BUILD_V1",
+  "command": [
+    "make",
+    "CONF=m3-feature-fastdebug",
+    "images"
+  ],
+  "cwd": "/workspace/scratch/2b4d1cb957a7/M3jdk21-features",
+  "started_at": 1792299481.4707334,
+  "source_baseline": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+  "product_source_sha256": {
+    "src/java.base/share/classes/java/lang/Runtime.java": "22d589337e359550e6b6e7311aabe25affc7989f886085a44454e9053561e424",
+    "src/java.base/share/classes/java/util/concurrent/ProgressJob.java": "d2734bcc607b1af8a593387040da53886530a310685a26965a5aa77609aaefc8"
+  },
+  "exit_code": 0,
+  "finished_at": 1792301497.791567,
+  "log_sha256": "86517333f6a05dbd407b1f55cf6b3bab58294247193aaaf28445f0003523e455",
+  "resources_sha256": "0e8c82ca463db94e5ada57d65fbf0d4045a3c1927510271232be2650a9c6ebbe"
+}

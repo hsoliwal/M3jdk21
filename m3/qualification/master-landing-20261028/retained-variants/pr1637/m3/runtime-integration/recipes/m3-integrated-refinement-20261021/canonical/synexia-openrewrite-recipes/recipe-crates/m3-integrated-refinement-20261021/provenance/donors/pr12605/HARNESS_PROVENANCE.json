@@ -1,0 +1,30 @@
+{
+  "task": "m3-string-ast-index-views-recovery-20261020",
+  "status": "fresh qualification required; no lost receipt is imported",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_predecessor_revision": "f04fbac91a7891e64b77c7b24cef1ab75ec88144",
+  "canonical_predecessor_test_blob": "40b52f4d85cc10388e628c462c0ee211ba015645",
+  "canonical_predecessor_pom_blob": "5d05381ccae9cbf3b663d1fd0561b200737933f9",
+  "recovery_donor_crate": "m3-abseil-refinement-20261020",
+  "recovery_donor_provenance_sha256": "0e448dbb1aeb15d472919a23fe0ebd52b009fd62e28fa77469947e847319598b",
+  "recovery_donor_test_sha256": "7b7289473e9aba72eeab09669fb3bf786514b7adf7ead96581ea1e29eac2173e",
+  "lost_harness_sha256_recorded_by_donor": "ebce858f3cd34fa0ba1cb92b88d2cf61b9c84e8b7ade4810c7c9e5bcba08fc4b",
+  "restored_test_is_byte_identical_to_lost_harness": false,
+  "restored_copier_is_byte_identical_to_lost_copier": true,
+  "apply_receiver_sha256": "070774ffe4cff58a3cf6c34d146fb87a83038d3135a40558c75eb2af3a7311c7",
+  "changes": [
+    "fresh recovery task and named-recipe identity",
+    "remove later Abseil-only dataset selector and source-sealed CRC composition lane",
+    "retain Java/text actual scheduler and all applicable qualification/refusal trials",
+    "require attributed method resolution for actual compiled array, compiler and collection owners",
+    "verify package-private String owner from bootstrap java.base instead of an inaccessible unnamed-module source call"
+  ],
+  "engines_unchanged": {
+    "M3HashPinnedJavaSnapshotRecipe.java": "083f8b1fd956fe2ed81168bc580d1e0f39a815401c50571d397ddba40150cf63",
+    "M3HashPinnedTextSnapshotRecipe.java": "5a64bd502cb8aa7d51b78813b736e37a0a7f420233f405c4d2df08ee2eefe8bc",
+    "M3EditScope.java": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+    "M3ScopeInference.java": "9a6c54f42564c0ef82de3f40a2de17e6598569916c15255653bf79fbe3353579"
+  },
+  "license": "Apache-2.0; target source resources retain their own file licenses",
+  "qualification_runtime": "Actual existing M3JDK21 image required for module-owner attribution; command receipts pin the image and distinguish it from a fresh rebuild"
+}

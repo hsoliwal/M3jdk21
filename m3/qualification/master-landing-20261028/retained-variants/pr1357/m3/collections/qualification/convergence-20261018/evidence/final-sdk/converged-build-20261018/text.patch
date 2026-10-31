@@ -1,0 +1,396 @@
+diff --git a/m3/vendor/third_party/apiguardian-api/PROVENANCE.json b/m3/vendor/third_party/apiguardian-api/PROVENANCE.json
+index ce606f7..3431490 100644
+--- a/m3/vendor/third_party/apiguardian-api/PROVENANCE.json
++++ b/m3/vendor/third_party/apiguardian-api/PROVENANCE.json
+@@ -54,7 +54,7 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+   "group": "org.apiguardian",
+   "kind": "MODULE",
+   "license": "The Apache License, Version 2.0",
+-  "license_file": "LICENSE",
++  "license_file": "src/main/resources/META-INF/LICENSE",
+   "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+   "module_descriptors": "reproduced (see src/main/descriptor)",
+   "multi_release_overlays": {
+diff --git a/m3/vendor/third_party/apiguardian-api/pom.xml b/m3/vendor/third_party/apiguardian-api/pom.xml
+index 6538a4c..cbeafd8 100644
+--- a/m3/vendor/third_party/apiguardian-api/pom.xml
++++ b/m3/vendor/third_party/apiguardian-api/pom.xml
+@@ -11,6 +11,8 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+   </dependencies>
+   <build>
+     <resources>
++      <!-- Package the exact existing upstream license; no duplicate license owner. -->
++      <resource><directory>src/main/resources/META-INF</directory><targetPath>META-INF/third-party/apiguardian-api</targetPath><includes><include>LICENSE</include></includes></resource>
+       <resource><directory>src/main/resources</directory></resource>
+       <resource><directory>${project.basedir}</directory><targetPath>META-INF/third-party/apiguardian-api</targetPath><includes><include>LICENSE</include><include>PROVENANCE.json</include><include>THIRD_PARTY_NOTICES.md</include></includes></resource>
+     </resources>
+diff --git a/m3/vendor/third_party/apiguardian-api/verify_source.py b/m3/vendor/third_party/apiguardian-api/verify_source.py
+index ffc827f..5a29751 100644
+--- a/m3/vendor/third_party/apiguardian-api/verify_source.py
++++ b/m3/vendor/third_party/apiguardian-api/verify_source.py
+@@ -1,5 +1,6 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ #!/usr/bin/env python3
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026 by Hitesh Soliwal and contributors: resolve repository-relative source seals.
+ """Check the pinned, unchanged donor and its optional built legal resources."""
+ import hashlib
+ import json
+@@ -10,7 +11,7 @@
+ 
+ def main():
+     owner = Path(__file__).resolve().parent
+-    root = owner.parent.parent
++    root = owner.parents[3]  # PROVENANCE paths are repository-relative.
+     manifest = json.loads((owner / "PROVENANCE.json").read_text(encoding="utf-8"))
+     for item in manifest["files"]:
+         source = root / item["repository"]
+@@ -24,13 +25,14 @@
+     }
+     if set((owner / "src/main/java").rglob("*.java")) != expected:
+         raise SystemExit("Production donor inventory changed")
+-    receipt = {"revision": manifest["revision"], "exact_files": len(manifest["files"]),
++    receipt = {"coordinate": manifest["coordinate"],
++               "sources_jar_sha256": manifest["sources_jar_sha256"], "exact_files": len(manifest["files"]),
+                "exact_production_files": len(expected)}
+     if len(sys.argv) > 1:
+         artifact = Path(sys.argv[1])
+         with zipfile.ZipFile(artifact) as jar:
+             for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "PROVENANCE.json"):
+-                if jar.read("META-INF/third-party/apiguardian-api/" + name) != (owner / name).read_bytes():
++                if jar.read("META-INF/third-party/apiguardian-api/" + name) != (owner / (manifest["license_file"] if name == "LICENSE" else name)).read_bytes():
+                     raise SystemExit("Packaged legal/provenance bytes changed: " + name)
+             if "M3jdk21-Source-Inline: no upstream Automatic-Module-Name" not in jar.read("META-INF/MANIFEST.MF").decode():
+                 raise SystemExit("Automatic module identity changed")
+diff --git a/m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py b/m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py
+index 100263d..d00122e 100644
+--- a/m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py
++++ b/m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py
+@@ -1,5 +1,6 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ #!/usr/bin/env python3
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026 by Hitesh Soliwal and contributors: resolve repository-relative source seals.
+ """Check the pinned, unchanged donor and its optional built legal resources."""
+ import hashlib
+ import json
+@@ -10,7 +11,7 @@
+ 
+ def main():
+     owner = Path(__file__).resolve().parent
+-    root = owner.parent.parent
++    root = owner.parents[3]  # PROVENANCE paths are repository-relative.
+     manifest = json.loads((owner / "PROVENANCE.json").read_text(encoding="utf-8"))
+     for item in manifest["files"]:
+         source = root / item["repository"]
+@@ -24,13 +25,14 @@
+     }
+     if set((owner / "src/main/java").rglob("*.java")) != expected:
+         raise SystemExit("Production donor inventory changed")
+-    receipt = {"revision": manifest["revision"], "exact_files": len(manifest["files"]),
++    receipt = {"coordinate": manifest["coordinate"],
++               "sources_jar_sha256": manifest["sources_jar_sha256"], "exact_files": len(manifest["files"]),
+                "exact_production_files": len(expected)}
+     if len(sys.argv) > 1:
+         artifact = Path(sys.argv[1])
+         with zipfile.ZipFile(artifact) as jar:
+             for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "PROVENANCE.json"):
+-                if jar.read("META-INF/third-party/junit-jupiter-5.10.2/" + name) != (owner / name).read_bytes():
++                if jar.read("META-INF/third-party/junit-jupiter-5.10.2/" + name) != (owner / (manifest["license_file"] if name == "LICENSE" else name)).read_bytes():
+                     raise SystemExit("Packaged legal/provenance bytes changed: " + name)
+             if "M3jdk21-Source-Inline: no upstream Automatic-Module-Name" not in jar.read("META-INF/MANIFEST.MF").decode():
+                 raise SystemExit("Automatic module identity changed")
+diff --git a/m3/vendor/third_party/junit-jupiter-api-5.10.2/verify_source.py b/m3/vendor/third_party/junit-jupiter-api-5.10.2/verify_source.py
+index 063dc0e..4c8885f 100644
+--- a/m3/vendor/third_party/junit-jupiter-api-5.10.2/verify_source.py
++++ b/m3/vendor/third_party/junit-jupiter-api-5.10.2/verify_source.py
+@@ -1,5 +1,6 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ #!/usr/bin/env python3
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026 by Hitesh Soliwal and contributors: resolve repository-relative source seals.
+ """Check the pinned, unchanged donor and its optional built legal resources."""
+ import hashlib
+ import json
+@@ -10,7 +11,7 @@
+ 
+ def main():
+     owner = Path(__file__).resolve().parent
+-    root = owner.parent.parent
++    root = owner.parents[3]  # PROVENANCE paths are repository-relative.
+     manifest = json.loads((owner / "PROVENANCE.json").read_text(encoding="utf-8"))
+     for item in manifest["files"]:
+         source = root / item["repository"]
+@@ -24,13 +25,14 @@
+     }
+     if set((owner / "src/main/java").rglob("*.java")) != expected:
+         raise SystemExit("Production donor inventory changed")
+-    receipt = {"revision": manifest["revision"], "exact_files": len(manifest["files"]),
++    receipt = {"coordinate": manifest["coordinate"],
++               "sources_jar_sha256": manifest["sources_jar_sha256"], "exact_files": len(manifest["files"]),
+                "exact_production_files": len(expected)}
+     if len(sys.argv) > 1:
+         artifact = Path(sys.argv[1])
+         with zipfile.ZipFile(artifact) as jar:
+             for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "PROVENANCE.json"):
+-                if jar.read("META-INF/third-party/junit-jupiter-api-5.10.2/" + name) != (owner / name).read_bytes():
++                if jar.read("META-INF/third-party/junit-jupiter-api-5.10.2/" + name) != (owner / (manifest["license_file"] if name == "LICENSE" else name)).read_bytes():
+                     raise SystemExit("Packaged legal/provenance bytes changed: " + name)
+             if "M3jdk21-Source-Inline: no upstream Automatic-Module-Name" not in jar.read("META-INF/MANIFEST.MF").decode():
+                 raise SystemExit("Automatic module identity changed")
+diff --git a/m3/vendor/third_party/junit-jupiter-engine-5.10.2/verify_source.py b/m3/vendor/third_party/junit-jupiter-engine-5.10.2/verify_source.py
+index b2b5f8f..90543e7 100644
+--- a/m3/vendor/third_party/junit-jupiter-engine-5.10.2/verify_source.py
++++ b/m3/vendor/third_party/junit-jupiter-engine-5.10.2/verify_source.py
+@@ -1,5 +1,6 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ #!/usr/bin/env python3
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026 by Hitesh Soliwal and contributors: resolve repository-relative source seals.
+ """Check the pinned, unchanged donor and its optional built legal resources."""
+ import hashlib
+ import json
+@@ -10,7 +11,7 @@
+ 
+ def main():
+     owner = Path(__file__).resolve().parent
+-    root = owner.parent.parent
++    root = owner.parents[3]  # PROVENANCE paths are repository-relative.
+     manifest = json.loads((owner / "PROVENANCE.json").read_text(encoding="utf-8"))
+     for item in manifest["files"]:
+         source = root / item["repository"]
+@@ -24,13 +25,14 @@
+     }
+     if set((owner / "src/main/java").rglob("*.java")) != expected:
+         raise SystemExit("Production donor inventory changed")
+-    receipt = {"revision": manifest["revision"], "exact_files": len(manifest["files"]),
++    receipt = {"coordinate": manifest["coordinate"],
++               "sources_jar_sha256": manifest["sources_jar_sha256"], "exact_files": len(manifest["files"]),
+                "exact_production_files": len(expected)}
+     if len(sys.argv) > 1:
+         artifact = Path(sys.argv[1])
+         with zipfile.ZipFile(artifact) as jar:
+             for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "PROVENANCE.json"):
+-                if jar.read("META-INF/third-party/junit-jupiter-engine-5.10.2/" + name) != (owner / name).read_bytes():
++                if jar.read("META-INF/third-party/junit-jupiter-engine-5.10.2/" + name) != (owner / (manifest["license_file"] if name == "LICENSE" else name)).read_bytes():
+                     raise SystemExit("Packaged legal/provenance bytes changed: " + name)
+             if "M3jdk21-Source-Inline: no upstream Automatic-Module-Name" not in jar.read("META-INF/MANIFEST.MF").decode():
+                 raise SystemExit("Automatic module identity changed")
+diff --git a/m3/vendor/third_party/junit-jupiter-params-5.10.2/verify_source.py b/m3/vendor/third_party/junit-jupiter-params-5.10.2/verify_source.py
+index e8681a5..1f14868 100644
+--- a/m3/vendor/third_party/junit-jupiter-params-5.10.2/verify_source.py
++++ b/m3/vendor/third_party/junit-jupiter-params-5.10.2/verify_source.py
+@@ -1,5 +1,6 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ #!/usr/bin/env python3
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026 by Hitesh Soliwal and contributors: resolve repository-relative source seals.
+ """Check the pinned, unchanged donor and its optional built legal resources."""
+ import hashlib
+ import json
+@@ -10,7 +11,7 @@
+ 
+ def main():
+     owner = Path(__file__).resolve().parent
+-    root = owner.parent.parent
++    root = owner.parents[3]  # PROVENANCE paths are repository-relative.
+     manifest = json.loads((owner / "PROVENANCE.json").read_text(encoding="utf-8"))
+     for item in manifest["files"]:
+         source = root / item["repository"]
+@@ -24,13 +25,14 @@
+     }
+     if set((owner / "src/main/java").rglob("*.java")) != expected:
+         raise SystemExit("Production donor inventory changed")
+-    receipt = {"revision": manifest["revision"], "exact_files": len(manifest["files"]),
++    receipt = {"coordinate": manifest["coordinate"],
++               "sources_jar_sha256": manifest["sources_jar_sha256"], "exact_files": len(manifest["files"]),
+                "exact_production_files": len(expected)}
+     if len(sys.argv) > 1:
+         artifact = Path(sys.argv[1])
+         with zipfile.ZipFile(artifact) as jar:
+             for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "PROVENANCE.json"):
+-                if jar.read("META-INF/third-party/junit-jupiter-params-5.10.2/" + name) != (owner / name).read_bytes():
++                if jar.read("META-INF/third-party/junit-jupiter-params-5.10.2/" + name) != (owner / (manifest["license_file"] if name == "LICENSE" else name)).read_bytes():
+                     raise SystemExit("Packaged legal/provenance bytes changed: " + name)
+             if "M3jdk21-Source-Inline: no upstream Automatic-Module-Name" not in jar.read("META-INF/MANIFEST.MF").decode():
+                 raise SystemExit("Automatic module identity changed")
+diff --git a/m3/vendor/third_party/junit-platform-commons-1.10.2/verify_source.py b/m3/vendor/third_party/junit-platform-commons-1.10.2/verify_source.py
+index 3bb7647..29bf87c 100644
+--- a/m3/vendor/third_party/junit-platform-commons-1.10.2/verify_source.py
++++ b/m3/vendor/third_party/junit-platform-commons-1.10.2/verify_source.py
+@@ -1,5 +1,6 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ #!/usr/bin/env python3
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026 by Hitesh Soliwal and contributors: resolve repository-relative source seals.
+ """Check the pinned, unchanged donor and its optional built legal resources."""
+ import hashlib
+ import json
+@@ -10,7 +11,7 @@
+ 
+ def main():
+     owner = Path(__file__).resolve().parent
+-    root = owner.parent.parent
++    root = owner.parents[3]  # PROVENANCE paths are repository-relative.
+     manifest = json.loads((owner / "PROVENANCE.json").read_text(encoding="utf-8"))
+     for item in manifest["files"]:
+         source = root / item["repository"]
+@@ -24,13 +25,14 @@
+     }
+     if set((owner / "src/main/java").rglob("*.java")) != expected:
+         raise SystemExit("Production donor inventory changed")
+-    receipt = {"revision": manifest["revision"], "exact_files": len(manifest["files"]),
++    receipt = {"coordinate": manifest["coordinate"],
++               "sources_jar_sha256": manifest["sources_jar_sha256"], "exact_files": len(manifest["files"]),
+                "exact_production_files": len(expected)}
+     if len(sys.argv) > 1:
+         artifact = Path(sys.argv[1])
+         with zipfile.ZipFile(artifact) as jar:
+             for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "PROVENANCE.json"):
+-                if jar.read("META-INF/third-party/junit-platform-commons-1.10.2/" + name) != (owner / name).read_bytes():
++                if jar.read("META-INF/third-party/junit-platform-commons-1.10.2/" + name) != (owner / (manifest["license_file"] if name == "LICENSE" else name)).read_bytes():
+                     raise SystemExit("Packaged legal/provenance bytes changed: " + name)
+             if "M3jdk21-Source-Inline: no upstream Automatic-Module-Name" not in jar.read("META-INF/MANIFEST.MF").decode():
+                 raise SystemExit("Automatic module identity changed")
+diff --git a/m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py b/m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py
+index ea9bc13..4a96182 100644
+--- a/m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py
++++ b/m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py
+@@ -1,5 +1,6 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ #!/usr/bin/env python3
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026 by Hitesh Soliwal and contributors: resolve repository-relative source seals.
+ """Check the pinned, unchanged donor and its optional built legal resources."""
+ import hashlib
+ import json
+@@ -10,7 +11,7 @@
+ 
+ def main():
+     owner = Path(__file__).resolve().parent
+-    root = owner.parent.parent
++    root = owner.parents[3]  # PROVENANCE paths are repository-relative.
+     manifest = json.loads((owner / "PROVENANCE.json").read_text(encoding="utf-8"))
+     for item in manifest["files"]:
+         source = root / item["repository"]
+@@ -24,13 +25,14 @@
+     }
+     if set((owner / "src/main/java").rglob("*.java")) != expected:
+         raise SystemExit("Production donor inventory changed")
+-    receipt = {"revision": manifest["revision"], "exact_files": len(manifest["files"]),
++    receipt = {"coordinate": manifest["coordinate"],
++               "sources_jar_sha256": manifest["sources_jar_sha256"], "exact_files": len(manifest["files"]),
+                "exact_production_files": len(expected)}
+     if len(sys.argv) > 1:
+         artifact = Path(sys.argv[1])
+         with zipfile.ZipFile(artifact) as jar:
+             for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "PROVENANCE.json"):
+-                if jar.read("META-INF/third-party/junit-platform-engine-1.10.2/" + name) != (owner / name).read_bytes():
++                if jar.read("META-INF/third-party/junit-platform-engine-1.10.2/" + name) != (owner / (manifest["license_file"] if name == "LICENSE" else name)).read_bytes():
+                     raise SystemExit("Packaged legal/provenance bytes changed: " + name)
+             if "M3jdk21-Source-Inline: no upstream Automatic-Module-Name" not in jar.read("META-INF/MANIFEST.MF").decode():
+                 raise SystemExit("Automatic module identity changed")
+diff --git a/m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py b/m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py
+index 5057ea0..f880435 100644
+--- a/m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py
++++ b/m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py
+@@ -1,5 +1,6 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ #!/usr/bin/env python3
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026 by Hitesh Soliwal and contributors: resolve repository-relative source seals.
+ """Check the pinned, unchanged donor and its optional built legal resources."""
+ import hashlib
+ import json
+@@ -10,7 +11,7 @@
+ 
+ def main():
+     owner = Path(__file__).resolve().parent
+-    root = owner.parent.parent
++    root = owner.parents[3]  # PROVENANCE paths are repository-relative.
+     manifest = json.loads((owner / "PROVENANCE.json").read_text(encoding="utf-8"))
+     for item in manifest["files"]:
+         source = root / item["repository"]
+@@ -24,13 +25,14 @@
+     }
+     if set((owner / "src/main/java").rglob("*.java")) != expected:
+         raise SystemExit("Production donor inventory changed")
+-    receipt = {"revision": manifest["revision"], "exact_files": len(manifest["files"]),
++    receipt = {"coordinate": manifest["coordinate"],
++               "sources_jar_sha256": manifest["sources_jar_sha256"], "exact_files": len(manifest["files"]),
+                "exact_production_files": len(expected)}
+     if len(sys.argv) > 1:
+         artifact = Path(sys.argv[1])
+         with zipfile.ZipFile(artifact) as jar:
+             for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "PROVENANCE.json"):
+-                if jar.read("META-INF/third-party/junit-platform-launcher-1.10.2/" + name) != (owner / name).read_bytes():
++                if jar.read("META-INF/third-party/junit-platform-launcher-1.10.2/" + name) != (owner / (manifest["license_file"] if name == "LICENSE" else name)).read_bytes():
+                     raise SystemExit("Packaged legal/provenance bytes changed: " + name)
+             if "M3jdk21-Source-Inline: no upstream Automatic-Module-Name" not in jar.read("META-INF/MANIFEST.MF").decode():
+                 raise SystemExit("Automatic module identity changed")
+diff --git a/m3/vendor/third_party/opentest4j/verify_source.py b/m3/vendor/third_party/opentest4j/verify_source.py
+index 7020ef2..30c2890 100644
+--- a/m3/vendor/third_party/opentest4j/verify_source.py
++++ b/m3/vendor/third_party/opentest4j/verify_source.py
+@@ -1,5 +1,6 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ #!/usr/bin/env python3
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026 by Hitesh Soliwal and contributors: resolve repository-relative source seals.
+ """Check the pinned, unchanged donor and its optional built legal resources."""
+ import hashlib
+ import json
+@@ -10,7 +11,7 @@
+ 
+ def main():
+     owner = Path(__file__).resolve().parent
+-    root = owner.parent.parent
++    root = owner.parents[3]  # PROVENANCE paths are repository-relative.
+     manifest = json.loads((owner / "PROVENANCE.json").read_text(encoding="utf-8"))
+     for item in manifest["files"]:
+         source = root / item["repository"]
+@@ -24,13 +25,14 @@
+     }
+     if set((owner / "src/main/java").rglob("*.java")) != expected:
+         raise SystemExit("Production donor inventory changed")
+-    receipt = {"revision": manifest["revision"], "exact_files": len(manifest["files"]),
++    receipt = {"coordinate": manifest["coordinate"],
++               "sources_jar_sha256": manifest["sources_jar_sha256"], "exact_files": len(manifest["files"]),
+                "exact_production_files": len(expected)}
+     if len(sys.argv) > 1:
+         artifact = Path(sys.argv[1])
+         with zipfile.ZipFile(artifact) as jar:
+             for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "PROVENANCE.json"):
+-                if jar.read("META-INF/third-party/opentest4j/" + name) != (owner / name).read_bytes():
++                if jar.read("META-INF/third-party/opentest4j/" + name) != (owner / (manifest["license_file"] if name == "LICENSE" else name)).read_bytes():
+                     raise SystemExit("Packaged legal/provenance bytes changed: " + name)
+             if "M3jdk21-Source-Inline: no upstream Automatic-Module-Name" not in jar.read("META-INF/MANIFEST.MF").decode():
+                 raise SystemExit("Automatic module identity changed")
+diff --git a/m3/vendor/third_party/univocity-parsers/verify_source.py b/m3/vendor/third_party/univocity-parsers/verify_source.py
+index d73b6b4..2c9c689 100644
+--- a/m3/vendor/third_party/univocity-parsers/verify_source.py
++++ b/m3/vendor/third_party/univocity-parsers/verify_source.py
+@@ -1,5 +1,6 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ #!/usr/bin/env python3
+ # SPDX-License-Identifier: Apache-2.0
++# Modified 2026 by Hitesh Soliwal and contributors: resolve repository-relative source seals.
+ """Check the pinned, unchanged donor and its optional built legal resources."""
+ import hashlib
+ import json
+@@ -10,7 +11,7 @@
+ 
+ def main():
+     owner = Path(__file__).resolve().parent
+-    root = owner.parent.parent
++    root = owner.parents[3]  # PROVENANCE paths are repository-relative.
+     manifest = json.loads((owner / "PROVENANCE.json").read_text(encoding="utf-8"))
+     for item in manifest["files"]:
+         source = root / item["repository"]
+@@ -24,13 +25,14 @@
+     }
+     if set((owner / "src/main/java").rglob("*.java")) != expected:
+         raise SystemExit("Production donor inventory changed")
+-    receipt = {"revision": manifest["revision"], "exact_files": len(manifest["files"]),
++    receipt = {"coordinate": manifest["coordinate"],
++               "sources_jar_sha256": manifest["sources_jar_sha256"], "exact_files": len(manifest["files"]),
+                "exact_production_files": len(expected)}
+     if len(sys.argv) > 1:
+         artifact = Path(sys.argv[1])
+         with zipfile.ZipFile(artifact) as jar:
+             for name in ("LICENSE", "THIRD_PARTY_NOTICES.md", "PROVENANCE.json"):
+-                if jar.read("META-INF/third-party/univocity-parsers/" + name) != (owner / name).read_bytes():
++                if jar.read("META-INF/third-party/univocity-parsers/" + name) != (owner / (manifest["license_file"] if name == "LICENSE" else name)).read_bytes():
+                     raise SystemExit("Packaged legal/provenance bytes changed: " + name)
+             if "M3jdk21-Source-Inline: no upstream Automatic-Module-Name" not in jar.read("META-INF/MANIFEST.MF").decode():
+                 raise SystemExit("Automatic module identity changed")

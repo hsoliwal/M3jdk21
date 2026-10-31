@@ -1,0 +1,33 @@
+{
+  "schema": "M3_NLP_CURRENT_RECEIVER_LOCK_SOURCE_SEALS/1",
+  "task": "m3-nlp-current-receiver-lock-20261021",
+  "recipe": "com.synexia.m3.NlpCurrentReceiverLock20261021",
+  "canonical_source_revision": "e02e7cb0f2e8e46db4c5b476d59aa26658fa4d07",
+  "receiving_repository": "hsoliwal/M3jdk21",
+  "receiving_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "files": [
+    {
+      "target_path": "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "before_sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d",
+      "after_sha256": "92fd76c3f0d3c10c90ea4cb52485d2dbceda513fa3d794d22ec67fd153fd62ed",
+      "kind": "java",
+      "phase": "m3-nlp-current-receiver-lock-20261021-001",
+      "resource": "postimage.java.txt"
+    },
+    {
+      "target_path": "m3/tooling/module-packs/nlp-search/current-source-lock.json",
+      "before_sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
+      "after_sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+      "kind": "text",
+      "phase": "m3-nlp-current-receiver-lock-20261021-002",
+      "resource": "postimage.txt"
+    }
+  ],
+  "input_handoffs": [
+    {
+      "name": "HANDOFF.json",
+      "sha256": "0c309fc03f9ad5a9464d3e0093dea77946c11d845c07766d8c7dc117675f0a9a"
+    }
+  ],
+  "qualification": "NOT_RUN; source custody is not recipe or runtime proof"
+}

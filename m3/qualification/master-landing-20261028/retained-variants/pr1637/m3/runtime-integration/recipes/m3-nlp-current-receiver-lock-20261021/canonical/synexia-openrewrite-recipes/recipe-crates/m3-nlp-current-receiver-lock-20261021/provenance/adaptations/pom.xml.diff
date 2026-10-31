@@ -1,0 +1,24 @@
+--- synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/pom.xml
++++ synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/pom.xml
+@@ -1,18 +1,18 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+ <!-- Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 -->
+-<!-- Modified 2026-10-21 from pinned PR12605: new integrated task and separate pending-memory conformance gate. -->
++<!-- Modified 2026-10-21 from published core #12648: distinct NLP lock packet; unchanged engines and scheduler harness; memory remains a separate gate. -->
+ <project xmlns="http://maven.apache.org/POM/4.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.synexia.m3</groupId>
+-  <artifactId>integrated-refinement-recovery-proof</artifactId>
++  <artifactId>nlp-current-receiver-lock-proof</artifactId>
+   <version>1.0-SNAPSHOT</version>
+   <properties>
+     <maven.compiler.release>21</maven.compiler.release>
+     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+-    <task.id>m3-integrated-refinement-20261021</task.id>
++    <task.id>m3-nlp-current-receiver-lock-20261021</task.id>
+   </properties>
+   <dependencies>
+     <dependency>

@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf (MOP pillars atomize/patternize/refactor: Synexia-only javac Plugin + CLI, run from M3JDK21).",
+  "mappings": [
+    {
+      "source": "com.synexia.ai.m3scale.M3AtomTyping + M3AtomFacts + M3FileAtomizer + M3FileAtomContract + M3FileAtom + M3AtomPatternIndex + M3PatternPlan + M3RefactorGate + M3RefactorStage + M3MopReceipt, com.synexia.ai.mojo.M3MopChainMojo (synexia-maven-plugin, Synexia #13966); ABI rules of open drafts #14042 #14066 #14069 #14084 #14100",
+      "source_commit": "37519d1f6bfb59f779f1cf36cfe7877091479b8a",
+      "target": "com.synexia.rewrite.mop.javac.{M3Atom,M3AtomFacts,M3AtomTyping,M3Atomizer,M3AtomizeRun,M3PatternRegistry,M3PatternPlan,M3RefactorGate,M3MopChain,M3MopReceipt,M3MopPlugin,M3Mop} in hsoliwal/com.synexia synexia-openrewrite-recipes/crates/m3-mop/javac-pillars (branch m3/mop-javac-pillars-20261030, PR https://github.com/hsoliwal/com.synexia/pull/14187)",
+      "status": "ported in Synexia; crate verify.sh 19 PASS / 0 FAIL on JDK 21.0.9 (javac --release 21 -Xlint:all -Werror, 4 contracts x default VM and -Xint, plugin == CLI byte-identical dogfood, registry fixed point, 7/7 discriminator mutants killed); M3JDK21 carries no source, registry or memory rows (AGENTS.md recipe-memory policy, #1819)",
+      "target_rule": "one javac AST: atoms projected from com.sun.source trees at PARSE finish (Plugin) or a parse-only JavacTask (CLI), units published after ANALYZE; refusals are written by com.synexia.rewrite.mop.compiler.M3RecipeMemory (E44 schema) into the recipe's RECIPE_MEMORY.tsv; HOLD instead of ADMITTED without a fixed-point witness; per-kind limit ratchet"
+    },
+    {
+      "source": "M3JDK21 m3/mop/src/main/java/com/m3/mop/M3RecipeMemory.java (proof-receipt memory, blob 49315ca98323dab451b52c7c486ec3e2417bbef7)",
+      "source_commit": "669a949d192345acefcfc5e9bb0b3724174d270c",
+      "target": "unchanged; the first draft of this leaf (M3jdk21 #2153 b84a4bad60f) added appendCandidate and 11 pillar classes under m3/mop, all reverted on the owner's decision",
+      "status": "reverted to master bytes; m3/mop/MOP_PILLARS.md documents the javac -processorpath/-Xplugin:M3Mop invocation of the Synexia crate from an M3JDK21 checkout",
+      "target_rule": "M3JDK21 runs the Synexia tool from a run directory; promotion into M3JDK21 sources stays with the existing recipe/PR gates"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.AddOrUpdateAnnotationAttribute"
+contributors:
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 124
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 23
+- name: "Kun Li"
+  email: "kun@moderne.io"
+  lineCount: 3
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 3
+- name: "Knut Wannheden"
+  email: "knut@moderne.io"
+  lineCount: 2

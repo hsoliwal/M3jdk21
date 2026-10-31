@@ -1,0 +1,4 @@
+['python3', '/workspace/scratch/53bcd62c244c/work-qualification-20261020/proof-tree/m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py', '/workspace/scratch/53bcd62c244c/M3JDK21/m3/vendor/third_party/junit-platform-launcher-1.10.2/target/junit-platform-launcher-1.10.2-m3-source-1.jar']
+{"artifact_sha256": "c67c70cbe2a49b10518af8cf3bd4b6752584250f1650e34e576bb675fe5ead6c", "coordinate": "org.junit.platform:junit-platform-launcher:1.10.2-m3-source-1", "exact_files": 88, "exact_production_files": 80, "sources_jar_sha256": "d3c84fbec86b224e0d2bd49e9335978bdeb6aead9f17cbee4f0e2e8885c7ab89"}
+
+EXIT=0

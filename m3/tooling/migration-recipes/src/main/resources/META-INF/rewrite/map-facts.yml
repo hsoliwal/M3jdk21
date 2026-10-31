@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.MapFacts
+displayName: Validate mapped String facts in the existing payload pass
+description: Source-sealed internal Java21 fact validation retaining valid format, public APIs and MapGuard bounds and cleanup.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-map-facts
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.MapFactsWorkflow
+displayName: Add mapped fact regression to the existing jtreg workflow
+description: Source-sealed additive test selection; no permissions, tests, dependencies or build gates removed.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: map-facts

@@ -1,0 +1,30 @@
+{
+  "schema": "M3_TASK_INVOCATION_FORMAT_OBSERVATION/1",
+  "status": "REFUSED_BEFORE_MAVEN",
+  "custody": "RETROSPECTIVE_EXACT_TRANSCRIPTION_FROM_SESSION_EXEC_COMMAND_OUTPUT",
+  "command": [
+    "python3",
+    "synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/qualify.py",
+    "--java-home",
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "--maven",
+    "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+    "--maven-repo",
+    "/tmp/m3-build-m2",
+    "--parser-classpath",
+    "/workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-plus-core-02/classpath.txt",
+    "--attempt",
+    "sdk-003-workflow-successor-offline"
+  ],
+  "cwd": "/workspace/scratch/206049dfb270",
+  "exit_code": 1,
+  "fingerprint": "FileNotFoundError: [Errno 2] No such file or directory: '/workspace/scratch/206049dfb270/jobs-work/final-review/ci-classpath-01/resource-classes:'",
+  "source_format": "One colon-separated classpath line",
+  "required_wrapper_format": "One path per line; qualify.py joins for the Maven property",
+  "source_sha256": "4ba0b3a88f5c5d86589589e3e3f81f98bba40aad8e294fbeaa83a3648f5d59ce",
+  "correction": "Split the exact28 colon-delimited paths into an isolated newline input; preserve source and qualifier",
+  "corrected_path": "/workspace/scratch/206049dfb270/canonical-work/CI_SUCCESSOR_PARSER_CLASSPATH.txt",
+  "corrected_sha256": "ae1ead1e1683e1eecfdd6f08ff954290feb339b0108678ffa23ea62591fef06c",
+  "recipe_executed": false,
+  "attempt_directory_created": false
+}

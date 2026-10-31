@@ -1,0 +1,94 @@
+{
+  "artifacts": [
+    {
+      "bytes": 51,
+      "path": "EMPTY_DESCRIPTOR_MANIFEST.tsv",
+      "sha256": "815c13462921dbb3a75d638c701c85a5422591176e0cf0380e264b81ce7ee41b"
+    },
+    {
+      "bytes": 169,
+      "path": "INPUT_JMOD_IMAGE.tsv",
+      "sha256": "d6415dba12c268acf09852c7c621b408a84b5ebac5d0a272ef9ae753df3f8ece"
+    },
+    {
+      "bytes": 1081,
+      "path": "RUNTIME_PROOF.json",
+      "sha256": "6c051e609e154d90348a0419d789be470b7b5ab699e0e924f8c2f08521e3f2a5"
+    },
+    {
+      "bytes": 80476,
+      "path": "jdk.m3.parser.jar",
+      "sha256": "22f2ccf032add6fa4f1124fdd1eb8d67758d18efdcebfabcbd59fc75b5266dc6"
+    },
+    {
+      "bytes": 73494789,
+      "path": "pack/image/lib/modules",
+      "sha256": "28573f29ca92bf542b48ae3cad5f70dc009b03c090b8d899cb2e1d7f37a61a0b"
+    },
+    {
+      "bytes": 85406,
+      "path": "pack/jmods/jdk.m3.parser.jmod",
+      "sha256": "c777266f0cbe71ec9828f1565ecf06320b194bb12eb830e5c5f22ac17abc96cd"
+    },
+    {
+      "bytes": 4642,
+      "path": "runtime-commands.json",
+      "sha256": "73069a40ec5c93e116326d87e5dd3c33e0ab4a8159fca543abd56e7020a046ba"
+    },
+    {
+      "bytes": 505,
+      "path": "runtime-image-M3JavacParserContract.log",
+      "sha256": "7145cdc377af1223d9e43c86797ac93fa0f45ac61618e77fd422e94208d73210"
+    },
+    {
+      "bytes": 517,
+      "path": "runtime-image-M3ParserFrameworkContract.log",
+      "sha256": "5525c7cd56c4347d4d18b04b1934d1f1bb40cc6b2a58f5df5ce82668b89baed5"
+    },
+    {
+      "bytes": 758,
+      "path": "runtime-image-modules.log",
+      "sha256": "c9bca31ea2227f58a20f829eedb45cfa0eed166984ce0ca1619d422683ade2ef"
+    },
+    {
+      "bytes": 621,
+      "path": "runtime-image-smoke-1.log",
+      "sha256": "27e69f1ac43fded9eae69688b337f3c8abf7473134a3ea926cfc163c4314896d"
+    },
+    {
+      "bytes": 621,
+      "path": "runtime-image-smoke-2.log",
+      "sha256": "b128a79968ea967121921615cb5b4546f091173dccaaf53dae96d8d828b5ed58"
+    },
+    {
+      "bytes": 403,
+      "path": "runtime-jar-descriptor.log",
+      "sha256": "6fa08297198babe26d52475adcb033c41739fa52212d2c2877188db41eb2a245"
+    },
+    {
+      "bytes": 283,
+      "path": "runtime-jar.log",
+      "sha256": "80fd5b22c1a5b741c0fe2fc10fbda1eacec4a802baf3e68f45ebc98651b285f4"
+    },
+    {
+      "bytes": 2636,
+      "path": "runtime-jmod-contents.log",
+      "sha256": "536ca19665b28425100ef71844e642e17e8b96d80c479292cd9bba10c88710f4"
+    },
+    {
+      "bytes": 296,
+      "path": "runtime-jmod-descriptor.log",
+      "sha256": "09148586a6bbc1be2e9943380b101427580762d1731caa7e72a64e7a05a16b7b"
+    },
+    {
+      "bytes": 828,
+      "path": "runtime-jmod-pack.log",
+      "sha256": "03ec929a3df753719129d5da470b408b9fa9650bc9af0064cd2a7bbb74666b3c"
+    }
+  ],
+  "input_sha256": "e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5",
+  "phase": "runtime",
+  "previous_receipt_sha256": "b386e5ac318d93aefdafb1c24dbbf7d6a3ea520685a2b32b8afb197b226d73bc",
+  "schema": "M3_PARSER_PHASE_RECEIPT_V1",
+  "status": "PASS"
+}

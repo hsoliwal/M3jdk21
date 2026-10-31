@@ -1,0 +1,60 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 BigString rope and summary proof
+
+on:
+  pull_request:
+    paths:
+      - 'm3/core/src/com/m3/text/M3BigString.java'
+      - 'm3/core/src/com/m3/text/M3StringPiece.java'
+      - 'm3/core/src/com/m3/text/LocalM3StringPiece.java'
+      - 'm3/core/src/com/m3/text/JoinedM3StringPiece.java'
+      - 'm3/core/src/com/m3/text/StorageIdentity.java'
+      - 'm3/core/test/com/m3/text/M3BigStringSelfTest.java'
+      - '.github/workflows/m3-bigstring-rope-summary-20261018.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  java21-proof:
+    name: Strict Java 21 build and deterministic large-rope proof
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Set up Java 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact recipe-generated postimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' 'e09815cea88c44e4da89ca8979ba247cddeee6c97b496d1aa2309a48916a90de' 'm3/core/src/com/m3/text/M3BigString.java' | sha256sum --check -
+          printf '%s  %s\n' '5f47db4885a99b1ec7dc95957276d0130f2eab7cba16614907995c722fa6f9a6' 'm3/core/test/com/m3/text/M3BigStringSelfTest.java' | sha256sum --check -
+          git diff --check
+      - name: Compile against the actual M3 immutable text-piece owners
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3-bigstring-classes"
+          rm -rf "$out"
+          mkdir -p "$out"
+          javac --release 21 -Xlint:all -Werror -d "$out" \
+            m3/core/src/com/m3/text/StorageIdentity.java \
+            m3/core/src/com/m3/text/M3StringPiece.java \
+            m3/core/src/com/m3/text/LocalM3StringPiece.java \
+            m3/core/src/com/m3/text/JoinedM3StringPiece.java \
+            m3/core/src/com/m3/text/M3BigString.java \
+            m3/core/test/com/m3/text/M3BigStringSelfTest.java
+          printf 'M3_BIGSTRING_CLASSES=%s\n' "$out" >> "$GITHUB_ENV"
+      - name: Run deterministic Unicode, search and long-coordinate oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -Xmx128m -ea -cp "$M3_BIGSTRING_CLASSES" com.m3.text.M3BigStringSelfTest

@@ -1,0 +1,66 @@
+{
+  "schema": "jcc-static-review-seals/1",
+  "epoch": "T02",
+  "files": [
+    {
+      "path": "REVIEW.json",
+      "bytes": 1020,
+      "sha256": "b181f16da4916cf946ca07e46156fd16c16cd2e12e486d730a1106e08f947434",
+      "git_blob_sha1": "9c8e5b76c4b27e0ac85fc214f32f42915cc5ccde"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 5816,
+      "sha256": "0b5d20b213f5e98ec75b1750e03fe085d21c2465bca42993e3d9264623a52dd1",
+      "git_blob_sha1": "d3cb530c9ad6f594fea3cc73ee0f547fdae20e35"
+    },
+    {
+      "path": "STATIC_CHECKS.json",
+      "bytes": 3888,
+      "sha256": "679c58b0f1861971864f8a0cc77ea363a62af7b74d8ecb8f7147711822128610",
+      "git_blob_sha1": "65309855b10d4cea551ca7048266a1c54f353736"
+    },
+    {
+      "path": "author_e04.py.diff",
+      "bytes": 4219,
+      "sha256": "e23b9630be02b01893da60284fbf98b8cd668318a5ff9987bbfdc5785bd5f5cd",
+      "git_blob_sha1": "1f7469821a233cadec77cc07e33a6558a2467fd1"
+    },
+    {
+      "path": "inputs/BEFORE.json",
+      "bytes": 411,
+      "sha256": "82ffa7a014ba2e1a6905fd012692be67098df44748892852688c925cf4b8bd35",
+      "git_blob_sha1": "e450d43270a77306cc1b6e712ef09d8ed6d814c9"
+    },
+    {
+      "path": "inputs/REVIEW_RESPONSE.md",
+      "bytes": 2693,
+      "sha256": "487c3f9658bdf2d80aa4538fa36966aae1e5bff16bbbe6158fbde89921a0a7dd",
+      "git_blob_sha1": "1e2270c3162b2453d4f1e3b1f244d66f6171bf80"
+    },
+    {
+      "path": "inputs/UNBOUND_READINESS_03.json",
+      "bytes": 3889,
+      "sha256": "7c55917967ca23fa0afa64b51441e029f9a1dfa99e3403252d2bd9b18b6619be",
+      "git_blob_sha1": "ed2f3b4d89d61e75a52207c45b58778765191696"
+    },
+    {
+      "path": "inputs/author_e04.py",
+      "bytes": 18487,
+      "sha256": "8773314a48caf6072480c030a14bd794e30f7ea216895b02d33b359b3159631f",
+      "git_blob_sha1": "70d32d8444c7f2bb7119654c7d7475348a738f8c"
+    },
+    {
+      "path": "inputs/run_verification.py",
+      "bytes": 12368,
+      "sha256": "c817f482570b292f54b04f7ec6f0e6025df30a1ad5ef4b02c44f1d47f01a2232",
+      "git_blob_sha1": "e830bd30adccaa7b25e1eb1a18a4d56fa305d93f"
+    },
+    {
+      "path": "run_verification.py.diff",
+      "bytes": 6630,
+      "sha256": "8cbd11d00c95f196a19618f8fc60caa23c08eeef3fd80d34d8a22e55c36000ba",
+      "git_blob_sha1": "4f7e5b1db2b3f577c453d6d9a4754b9548af21d3"
+    }
+  ]
+}

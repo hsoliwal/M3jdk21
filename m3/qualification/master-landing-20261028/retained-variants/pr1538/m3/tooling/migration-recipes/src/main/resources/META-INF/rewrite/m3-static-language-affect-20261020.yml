@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.m3jdk.StaticLanguageAffect20261020
+displayName: M3JDK21 static language and affect geometry
+description: Materialize the reviewed immutable language/affect Java owners from exact absent preimages; replay is fixed and drift refuses.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-static-language-affect-20261020

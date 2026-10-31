@@ -1,0 +1,1 @@
+PASS M3IndexPathMasksSelfTest checks=1554 JNI=false

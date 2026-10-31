@@ -1,0 +1,59 @@
+{
+  "copy_helper_loop_bounds_and_native_join_declaration_preserved": true,
+  "master_advancement": {
+    "changed_paths": 58,
+    "from": "1d105af842f16ba31a8ca14593f58ed43b7429ee",
+    "overlap_with_branch_changes": [],
+    "to": "974687e3d3d69410466207624cf56e7bb62caedf"
+  },
+  "neighboring_tuple_bucket_and_remaining_tail_exact": true,
+  "ownership_tsv": {
+    "appended_rows": 3,
+    "child_bytes": 12423,
+    "child_git_blob": "39e7adad3f9f93f2154ab3f64283937fc8cf00e5",
+    "exact_prefix": true,
+    "master_bytes": 11501,
+    "master_git_blob": "9a9fa4164d19b02db17203bac1e3a872ecbc11e5"
+  },
+  "pool_coalescing": true,
+  "pool_generated_git_blob": "7c05d6ab0082eb26f39e4e6dc93c422237588cae",
+  "pool_master_git_blob": "394af2f062e9d99abf73e5a6f15df015a59b8072",
+  "pool_master_reconstruction_exact": true,
+  "reversible_ownership_substitutions": 6,
+  "scope": "Existing #1623 target-specific leaf-cursor owner; source-preserving forward composition only",
+  "sdk_suites": [
+    {
+      "errors": "0",
+      "failures": "0",
+      "name": "com.m3.rewrite.backport.M3FileByteEventFactRecipeTest",
+      "skipped": "0",
+      "tests": "3"
+    },
+    {
+      "errors": "0",
+      "failures": "0",
+      "name": "com.m3.rewrite.backport.M3StringLeafCursorConvergenceRecipeTest",
+      "skipped": "0",
+      "tests": "4"
+    },
+    {
+      "errors": "0",
+      "failures": "0",
+      "name": "com.m3.rewrite.backport.M3StringLeafCursorCurrentMasterTest",
+      "skipped": "0",
+      "tests": "4"
+    },
+    {
+      "errors": "0",
+      "failures": "0",
+      "name": "com.m3.rewrite.backport.M3StringTokenSequenceRegexRecipeTest",
+      "skipped": "0",
+      "tests": "1"
+    }
+  ],
+  "shared_cursor_existing_algorithm_exact_after_removing_new_constructor": true,
+  "shared_cursor_generated_git_blob": "5ac0eee6e2a1eaf3e24c387c02bcff4e66eb2c0a",
+  "shared_cursor_previous_git_blob": "1851d3ce7cd6de9f0a9d9b84ef83999b43de64f4",
+  "token_regex_coalescing": false,
+  "token_regex_git_blob_unchanged": "ad87db7ed0f7e0490b46245782ec64185fb457d7"
+}

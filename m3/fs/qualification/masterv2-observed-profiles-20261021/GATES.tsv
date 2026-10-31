@@ -1,0 +1,12 @@
+gate	status	note
+CURRENT_MASTER_V2_PREIMAGE	PASSED_EXACT	Original M3BuildStateStore and JUnit blobs match canonical Synexia preimages
+JAVA_POSTIMAGE	PASSED_EXACT	Two exact source/test Git blob postimages
+V2_COMPLETED_INVENTORY	SOURCE_PRESERVED	Existing M3BuildState completeInventory() not modified
+SINGLE_SUCCESSFUL_HEAD	SOURCE_PRESERVED	Original /m3-build/state CAS and native SQLite transaction
+LEGACY_UNPROFILED_METHODS	SOURCE_PRESERVED	Original readObserved/observe/promoteObserved overloads kept
+PROFILE_ISOLATION_TEST	DEFINED_NOT_RUN	Original JUnit class now contains two context profiles in same database
+MAVEN_OPENREWRITE	DEFINED_NOT_RUN	Source seals, fixed-point and source drift refusal test definitions
+M3FS_NATIVE_JNI	NOT_RUN	Native SQLite/JNI and original Maven verification required
+HOTSPOT_JTREG	NOT_RUN	Complete M3JDK21 make images and module system required
+MASTER_STREAM_GRAFT	PENDING	Forward adapt old M3File one-pass scan to M3BuildState V2 completed facts
+PERFORMANCE	NOT_MEASURED	JNI heap/native memory and scan cost

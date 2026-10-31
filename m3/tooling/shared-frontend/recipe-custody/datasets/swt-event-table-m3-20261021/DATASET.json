@@ -1,0 +1,16 @@
+{
+  "schema": "M3_AST_BUILD_REVERSE_DATASET_V1",
+  "dataset": "swt-event-table-m3-20261021",
+  "repository": "hsoliwal/eclipse.platform.swt",
+  "baseline_ref": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+  "crate_name": "m3-ast-build-reverse-20261017-swt-event-table-m3-20261021",
+  "recipe_name": "com.synexia.m3jdk.AstBuildReverse20261017",
+  "targets": 1,
+  "java_targets": 1,
+  "text_targets": 0,
+  "product_sources_written": false,
+  "engine_changes_from_origin": [
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
+  ]
+}

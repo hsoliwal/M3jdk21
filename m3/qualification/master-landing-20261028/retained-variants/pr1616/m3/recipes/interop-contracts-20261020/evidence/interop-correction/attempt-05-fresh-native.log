@@ -1,0 +1,124 @@
+["/tmp/m3jdk21-toolchain-20261020/apache-maven-3.9.9/bin/mvn", "-o", "-B", "-ntp", "-Dmaven.repo.local=/tmp/m3jdk21-toolchain-20261020/m2", "-DargLine=-ea -Xcheck:jni -Djava.library.path=/workspace/scratch/53bcd62c244c/M3JDK21/m3/collections/target/full-java-jni/native -Dm3.interop.requireNative=true", "clean", "verify"]
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< com.m3:m3-collections-interop >--------------------
+[INFO] Building M3 optional collection library interoperability 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ m3-collections-interop ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3-collections-interop ---
+[INFO] Copying 2 resources from .. to target/classes/META-INF
+[INFO] Copying 7 resources from  to target/classes/META-INF/m3
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-collections-interop ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 32 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3-collections-interop ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/fresh-native-09ff689bcb844e82b1b80769673c0faf/m3/collections/interop/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-collections-interop ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 44 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ m3-collections-interop ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.collections.interop.M3FiveLibraryArrayificationTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.812 s -- in com.m3.collections.interop.M3FiveLibraryArrayificationTest
+[INFO] Running com.m3.collections.interop.M3GuavaListMultimapRealTest
+PASS M3GuavaListMultimapContract checks=26421 steps=6400
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.237 s -- in com.m3.collections.interop.M3GuavaListMultimapRealTest
+[INFO] Running com.m3.collections.interop.M3SpringArrayContractTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.111 s -- in com.m3.collections.interop.M3SpringArrayContractTest
+[INFO] Running com.m3.collections.interop.M3ApacheBidiMapContractTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.060 s -- in com.m3.collections.interop.M3ApacheBidiMapContractTest
+[INFO] Running com.m3.collections.interop.M3FiveProviderKeyGroupsTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 s -- in com.m3.collections.interop.M3FiveProviderKeyGroupsTest
+[INFO] Running com.m3.collections.interop.M3FiveProviderKeyGroupClosureTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.225 s -- in com.m3.collections.interop.M3FiveProviderKeyGroupClosureTest
+[INFO] Running com.m3.collections.interop.M3LibraryCollectionsTest
+[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.269 s -- in com.m3.collections.interop.M3LibraryCollectionsTest
+[INFO] Running com.m3.collections.interop.M3EclipseBagMultimapTest
+PASS ECLIPSE_BAG_M3 checks=251476 operations=8300
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.682 s -- in com.m3.collections.interop.M3EclipseBagMultimapTest
+[INFO] Running com.m3.collections.interop.M3FiveLibraryKeyRangesTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.147 s -- in com.m3.collections.interop.M3FiveLibraryKeyRangesTest
+[INFO] Running com.m3.collections.interop.M3GuavaBiMapContractTest
+PASS M3GuavaBiMapSelfTest checks=324001
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.215 s -- in com.m3.collections.interop.M3GuavaBiMapContractTest
+[INFO] Running com.m3.collections.interop.M3FiveProviderBagContractTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.m3.collections.interop.M3FiveProviderBagContractTest
+[INFO] Running com.m3.collections.interop.M3GuavaRowSortedTableTest
+PASS M3_GUAVA_ROW_SORTED_TABLE realGuava assertions=153557 operations=3200
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.293 s -- in com.m3.collections.interop.M3GuavaRowSortedTableTest
+[INFO] Running com.m3.collections.interop.M3SpringCaseInsensitiveTest
+PASS M3_SPRING_CASE_INSENSITIVE oracle_checks=947349 randomized_operations=22500
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.465 s -- in com.m3.collections.interop.M3SpringCaseInsensitiveTest
+[INFO] Running com.m3.collections.interop.M3FiveLibraryIndexViewsTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 s -- in com.m3.collections.interop.M3FiveLibraryIndexViewsTest
+[INFO] Running com.m3.collections.interop.M3LibraryClosureTest
+[INFO] Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.112 s -- in com.m3.collections.interop.M3LibraryClosureTest
+[INFO] Running com.m3.collections.interop.M3FiveProviderFlagSelectionTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in com.m3.collections.interop.M3FiveProviderFlagSelectionTest
+[INFO] Running com.m3.collections.interop.M3ObjectStreamProviderContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in com.m3.collections.interop.M3ObjectStreamProviderContractTest
+[INFO] Running com.m3.collections.interop.M3GuavaClassToInstanceMapsTest
+PASS GUAVA_CLASS_TO_INSTANCE_M3 checks=11992 operations=3000
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.m3.collections.interop.M3GuavaClassToInstanceMapsTest
+[INFO] Running com.m3.collections.interop.M3FiveLibraryInteropContractTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in com.m3.collections.interop.M3FiveLibraryInteropContractTest
+[INFO] Running com.m3.collections.interop.M3SdkFamiliesTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.117 s -- in com.m3.collections.interop.M3SdkFamiliesTest
+[INFO] Running com.m3.collections.interop.M3SpringCaseInsensitiveSdkFactoryTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in com.m3.collections.interop.M3SpringCaseInsensitiveSdkFactoryTest
+[INFO] Running com.m3.collections.interop.M3ApacheCollectionsTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in com.m3.collections.interop.M3ApacheCollectionsTest
+[INFO] Running com.m3.collections.interop.M3EclipseMultimapTest
+PASS M3_ECLIPSE_LIST_MULTIMAP checks=161657 provider=Eclipse-Collections-11.1.0
+PASS M3_ECLIPSE_SET_MULTIMAP checks=161679 provider=Eclipse-Collections-11.1.0
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.302 s -- in com.m3.collections.interop.M3EclipseMultimapTest
+[INFO] Running com.m3.collections.interop.M3BiMapTest
+BIMAP_DIFFERENTIAL_OPERATIONS=48000
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.963 s -- in com.m3.collections.interop.M3BiMapTest
+[INFO] Running com.m3.collections.interop.M3FiveFamilyPreparedSelectionTest
+PASS M3FiveFamilyPreparedSelectionSelfTest checks=44417
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 s -- in com.m3.collections.interop.M3FiveFamilyPreparedSelectionTest
+[INFO] Running com.m3.collections.interop.M3FiveProviderCountSharingRegressionTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s -- in com.m3.collections.interop.M3FiveProviderCountSharingRegressionTest
+[INFO] Running com.m3.collections.interop.M3FiveListFamiliesTest
+PASS M3FiveListFamiliesContract checks=56
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.m3.collections.interop.M3FiveListFamiliesTest
+[INFO] Running com.m3.collections.interop.M3FiveLibraryPreparedRowsTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s -- in com.m3.collections.interop.M3FiveLibraryPreparedRowsTest
+[INFO] Running com.m3.collections.interop.M3ApacheBagContractTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.057 s -- in com.m3.collections.interop.M3ApacheBagContractTest
+[INFO] Running com.m3.collections.interop.M3FiveLibraryState32Test
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 s -- in com.m3.collections.interop.M3FiveLibraryState32Test
+[INFO] Running com.m3.collections.interop.M3GuavaSetMultimapTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.272 s -- in com.m3.collections.interop.M3GuavaSetMultimapTest
+[INFO] Running com.m3.collections.interop.M3FiveLibraryExpandedContractsTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.026 s -- in com.m3.collections.interop.M3FiveLibraryExpandedContractsTest
+[INFO] Running com.m3.collections.interop.M3CountedProviderContractTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.059 s -- in com.m3.collections.interop.M3CountedProviderContractTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 159, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ m3-collections-interop ---
+[INFO] Building jar: /workspace/scratch/53bcd62c244c/work-interop-fix-20261020/fresh-native-09ff689bcb844e82b1b80769673c0faf/m3/collections/interop/target/m3-collections-interop-0.1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  12.602 s
+[INFO] Finished at: 2026-10-20T15:34:57+01:00
+[INFO] ------------------------------------------------------------------------
+
+EXIT=0

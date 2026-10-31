@@ -1,0 +1,125 @@
+{
+  "scope": "Selected Synexia owner diagnostic parity on same actual javac trees; no full Maven/reactor or target phase claim.",
+  "binding": "generated-compiler-and-explicit-parser-module",
+  "baseline": false,
+  "sources": [
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/evidence/compiler/preimages/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeSpec.java",
+      "sha256": "662f66dcb349b12b3966313047faa5afc0c65d501030c85e260c1d7ecdeeb6c3"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/evidence/compiler/preimages/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeCompilerConfig.java",
+      "sha256": "48feefc7d7112072e6180045536058ebdbc0b365a459d769cf13fbab93c8b1f8"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/evidence/compiler/preimages/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeCulprit.java",
+      "sha256": "3baa813d0564557e3ee9f67469940da3228b6d9a5911604ca47cc32a934ca117"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/evidence/compiler/preimages/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeProblem.java",
+      "sha256": "fb968b86742693abb7eba07e364b6c19e552acb38f8920179f6049f40d017e3f"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/consumer/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeTreeLint.java",
+      "sha256": "eb5c63a7732d90b3efa3edafda47f4788a82a47fe78b1d71ce603deffeca8178"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/consumer/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeJavacGate.java",
+      "sha256": "fbd4016ee2fd12bdff8adcf267608e7d166c812494e9515dde3db08eea0e2afb"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/evidence/compiler/oracle/M3RecipeTreeLintBaseline.java",
+      "sha256": "568c7d7bd64d47e430ade9a2cd5c2e4a957e4c3b9b7f9210d944aeb1785c65a7"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/consumer/synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/mop/compiler/M3RecipeIndexLintContract.java",
+      "sha256": "3e137788cc64c5f7c8b6a7f84c10d53e1b5a264214d46dcbd62457188ae8b7de"
+    }
+  ],
+  "commands": [
+    {
+      "label": "toolchain",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "--version"
+      ],
+      "exit_code": 0,
+      "log": "toolchain.log"
+    },
+    {
+      "label": "describe-parser-module",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "--module-path",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/jdk.m3.parser.jar",
+        "--describe-module",
+        "jdk.m3.parser"
+      ],
+      "exit_code": 0,
+      "log": "describe-parser-module.log"
+    },
+    {
+      "label": "compile",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-sourcepath",
+        "",
+        "--module-path",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/jdk.m3.parser.jar",
+        "--add-modules",
+        "jdk.m3.parser",
+        "-d",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/compiler-final/classes",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/evidence/compiler/preimages/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeSpec.java",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/evidence/compiler/preimages/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeCompilerConfig.java",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/evidence/compiler/preimages/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeCulprit.java",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/evidence/compiler/preimages/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeProblem.java",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/consumer/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeTreeLint.java",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/consumer/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeJavacGate.java",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/evidence/compiler/oracle/M3RecipeTreeLintBaseline.java",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/consumer/synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/mop/compiler/M3RecipeIndexLintContract.java"
+      ],
+      "exit_code": 0,
+      "log": "compile.log"
+    },
+    {
+      "label": "contract",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-ea",
+        "--module-path",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/jdk.m3.parser.jar",
+        "--add-modules",
+        "jdk.m3.parser",
+        "-classpath",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/compiler-final/classes",
+        "com.synexia.rewrite.mop.compiler.M3RecipeIndexLintContract"
+      ],
+      "exit_code": 0,
+      "log": "contract.log"
+    }
+  ],
+  "parser_jar": {
+    "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/jdk.m3.parser.jar",
+    "sha256": "28cb413a3c3b9e5777651e255b1b2f9b26c6910c04edcbe564dbcd06874e6289",
+    "module": "jdk.m3.parser"
+  },
+  "consumer_root": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/consumer",
+  "baseline_root": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/evidence/compiler/preimages",
+  "reference_receipt": {
+    "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/compiler/candidate2/RESULTS.json",
+    "sha256": "f70f5aa208e52d982a53638f692e48279b10a34bdaa5e5119aa7342b8570b180"
+  },
+  "parser_source_compilation": false,
+  "sources_unchanged": true,
+  "parser_jar_unchanged": true,
+  "reference_unchanged": true,
+  "exit_code": 0,
+  "status": "PASS"
+}

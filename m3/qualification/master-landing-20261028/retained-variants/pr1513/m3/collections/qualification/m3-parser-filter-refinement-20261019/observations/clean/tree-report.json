@@ -1,0 +1,8 @@
+{
+  "total": 640,
+  "baselineMatches": 128,
+  "candidateMatches": 640,
+  "preservedEmptyCases": 144,
+  "introducedDifferences": [],
+  "remainingDifferences": []
+}

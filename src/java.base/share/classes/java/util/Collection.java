@@ -770,4 +770,74 @@ public interface Collection<E> extends Iterable<E> {
     default Stream<E> parallelStream() {
         return StreamSupport.stream(spliterator(), true);
     }
+
+    /**
+     * Cooperative, caller-monitored operation. The monitor is borrowed and
+     * never begun, finished or cancelled by this method. One unit is credited
+     * after each successfully completed element/callback operation.
+     * Cancellation is checked at delegate boundaries only.
+     *
+     * @param elements the elements whose presence is tested
+     * @param monitor the borrowed progress and cancellation monitor
+     * @return true if this collection contains every supplied element
+     */
+    default boolean containsAllMonitored(Collection<?> elements, java.util.concurrent.ProgressMonitor monitor) {
+        Objects.requireNonNull(elements);
+        Objects.requireNonNull(monitor);
+        for (Object value : elements) {
+            monitor.checkCancelled();
+            boolean present = contains(value);
+            monitor.worked(1);
+            if (!present) {
+                monitor.checkCancelled();
+                return false;
+            }
+        }
+        monitor.checkCancelled();
+        return true;
+    }
+
+    /**
+     * Delegates to this collection's original removeIf implementation.
+     * Progress measures completed predicate evaluations, not committed removals;
+     * an optimized collection may publish its changes only after evaluation.
+     *
+     * @param predicate the predicate that identifies elements to remove
+     * @param monitor the borrowed progress and cancellation monitor
+     * @return true if this collection changed as a result of the removal
+     */
+    default boolean removeIfMonitored(Predicate<? super E> predicate, java.util.concurrent.ProgressMonitor monitor) {
+        Objects.requireNonNull(predicate);
+        Objects.requireNonNull(monitor);
+        monitor.checkCancelled();
+        boolean changed = removeIf(value -> {
+            monitor.checkCancelled();
+            boolean remove = predicate.test(value);
+            monitor.worked(1);
+            return remove;
+        });
+        monitor.checkCancelled();
+        return changed;
+    }
+
+    /**
+     * Incremental addAll with one credit per successful add call. Cancellation
+     * and exceptions can leave a successfully added prefix; no rollback occurs.
+     *
+     * @param elements the elements to add
+     * @param monitor the borrowed progress and cancellation monitor
+     * @return true if this collection changed as a result of the additions
+     */
+    default boolean addAllMonitored(Collection<? extends E> elements, java.util.concurrent.ProgressMonitor monitor) {
+        Objects.requireNonNull(elements);
+        Objects.requireNonNull(monitor);
+        boolean changed = false;
+        for (E value : elements) {
+            monitor.checkCancelled();
+            if (add(value)) changed = true;
+            monitor.worked(1);
+        }
+        monitor.checkCancelled();
+        return changed;
+    }
 }

@@ -1,0 +1,26 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "m3-close",
+  "target_base": "3ec445df10a3e8fc74aa983181f0700ac7bfbcad",
+  "scope": "MODULE",
+  "outputs": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java",
+      "before": {
+        "resource": "MIndexStringBacking.java.before",
+        "sha256": "944f12c8b77d19fdb6fc6c7eee1baac0cc91322511c52abca1957fd4120219f5"
+      },
+      "after": {
+        "resource": "MIndexStringBacking.java.after",
+        "sha256": "880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "b96894a77e5c310addbda72b248ab56fedf8ceb24e5de81fe6e5d090982a4abc"
+    }
+  ],
+  "plan_sha256": "f00772ac2bd44b30b563d019e0573580037f3e7b43116f85ddc5fbb0a3656c10"
+}

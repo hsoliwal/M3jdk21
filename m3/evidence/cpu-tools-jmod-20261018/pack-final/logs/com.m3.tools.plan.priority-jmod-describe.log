@@ -1,0 +1,4 @@
+com.m3.tools.plan.priority
+exports com.m3.tools.plan.priority
+requires java.base mandated
+

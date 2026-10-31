@@ -1,0 +1,87 @@
+{
+  "schema": "synexia.data.address.public-source-pins.v1",
+  "repository": "hsoliwal/M3JDK21",
+  "source_ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
+  "license": "Apache-2.0",
+  "captured_ref": "fd493c1d9dac8cdf462351c35d588fe9299b7e34",
+  "historical_receipt_delivery_ref": "0122f7cf73b3b2a10429806c3e4beadc4caf0792",
+  "files": [
+    {
+      "repository_path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "git_blob": "daea60beeb202d9e996f9a018fe5974738a43523",
+      "ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
+      "bytes": 17626,
+      "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924"
+    },
+    {
+      "repository_path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "git_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb",
+      "ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
+      "bytes": 9493,
+      "sha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+    },
+    {
+      "repository_path": "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "git_blob": "9ac6c5a1e121affd28e6503d922927f6c91c3a66",
+      "ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
+      "bytes": 5865,
+      "sha256": "7e4997911a30ae3d2a9a558f0a80dff3ba98bc5b3c9d81b37215a33c2b597d7d"
+    },
+    {
+      "repository_path": "m3/collections/src/test/java/com/m3/collections/M3LongAddressBoundedSelfTest.java",
+      "git_blob": "0018546ee8ae7a4b60daba3c3bd0fc02a8ce5345",
+      "ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
+      "bytes": 8569,
+      "sha256": "0e590e67416010c433b82eb263ddc55f162c099eed13b7fb1606b2c868d83c5d"
+    },
+    {
+      "repository_path": "m3/collections/src/main/native/collections/m3_long_address_kernel.c",
+      "git_blob": "821876dfb56d836a0ae23e4bc16a391fd7f97ef2",
+      "ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
+      "bytes": 3458,
+      "sha256": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f"
+    },
+    {
+      "repository_path": ".github/workflows/m3-long-direct-address-kernel.yml",
+      "git_blob": "7753da6af91ccc4e1f4310629db9d05f329e3bbc",
+      "ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
+      "bytes": 1533,
+      "sha256": "b563da28eca90b0ac41306bf933b984dd2e039be88a244b55c43c5c4ca46ee86"
+    },
+    {
+      "repository_path": "m3/collections/LICENSE",
+      "git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "repository_path": "m3/collections/qualification/m3-long-direct-address-kernel-20261017/bounded-gather-20261017/README.md",
+      "git_blob": "07a7271d85bcf3b5e2afebca05acc2bf4729c430",
+      "ref": "fd493c1d9dac8cdf462351c35d588fe9299b7e34",
+      "bytes": 4554,
+      "sha256": "2bec5bc138dbc24c37d162f0c98ba0b15db046d0b66b07cb8f9d0182a7b99aae"
+    },
+    {
+      "repository_path": "m3/collections/qualification/m3-long-direct-address-kernel-20261017/bounded-gather-20261017/CONTRACT.md",
+      "git_blob": "15268588a0f5693c4d3ac20a15833188542497fa",
+      "ref": "fd493c1d9dac8cdf462351c35d588fe9299b7e34",
+      "bytes": 2106,
+      "sha256": "2f069dcb2917e08bc18eb0cecbd2a56d23f329d1d9c879796d67d4ab9386ba9d"
+    },
+    {
+      "repository_path": "m3/collections/qualification/m3-long-direct-address-kernel-20261017/bounded-gather-20261017/RECEIPT.json",
+      "git_blob": "0daa2a6ec2628ae6aa6d1ffa7da86ddc875947f2",
+      "ref": "fd493c1d9dac8cdf462351c35d588fe9299b7e34",
+      "bytes": 1512,
+      "sha256": "630d94fefcfb4bb3493686cc771f600dc4870e87114f7b5accb0fc2189b9baeb"
+    },
+    {
+      "repository_path": "m3/collections/qualification/m3-long-direct-address-kernel-20261017/bounded-gather-20261017/RECIPE_PROVENANCE.json",
+      "git_blob": "881fbc138cb7a83cd6cfdf65dc6c40ffdb918225",
+      "ref": "fd493c1d9dac8cdf462351c35d588fe9299b7e34",
+      "bytes": 967,
+      "sha256": "5207cb4762b7c62ef81b996eca7c50a642444dd069f6c538237daa278813345b"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NLP_FINITE_INTAKE_REFUSAL/1",
+  "status": "FAIL",
+  "argv": [
+    "python3",
+    "-B",
+    "canonical-work/curate_nlp_owner_evidence.py",
+    "owner-candidate-001",
+    "nlp-work/EVIDENCE_HANDOFF-LOCK-CANDIDATE.json",
+    "9abfc97ebc9c003e5ff3666d5a91bd108ea09498dbcb1b17cd9bd02c0f1e79d3"
+  ],
+  "cwd": "/workspace/scratch/206049dfb270",
+  "command_custody": "Retrospective exact transcription of executed session tool call",
+  "exit_code": 1,
+  "signature": "AssertionError at the finite intake source-root check",
+  "source_tool_sha256": "792f96a2039256636b18c1518c75e22f6a9c7f51c59244b65d6e6460869206fb",
+  "copied_files": 0,
+  "cause": "The sealed handoff includes one exact independent lineage receipt at jobs-work/nlp-lineage-readonly/HANDOFF.json. The task-specific intake initially admitted only nlp-work source paths.",
+  "correction": "Admit that one exact non-symlink file in addition to the original NLP source root, retain every sealed byte/hash/size/path/symlink/UTF8 check and the all-inputs-before-copy rule. No canonical recipe or runtime source guard changes."
+}

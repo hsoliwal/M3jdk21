@@ -1,0 +1,1537 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-merge-recovery-20261006-history-02",
+  "version": 1,
+  "source_commit": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+  "destination_base": "87590cb96fb0e2dc0f88fae8e01957f7179cd255",
+  "scope": "Exact restoration of previously published JCC recipe/test/evidence files. Historical execution claims retain their original epochs. No runtime acceptance.",
+  "outputs": [
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json",
+      "before": null,
+      "after": {
+        "resource": "history-0000.txt",
+        "sha256": "95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-00.json",
+      "before": null,
+      "after": {
+        "resource": "history-0001.txt",
+        "sha256": "5f9e682afec61bf2c2cd8883ba2533927c5317dc2409fc43fd85e3b112b00f08"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-01.json",
+      "before": null,
+      "after": {
+        "resource": "history-0002.txt",
+        "sha256": "e2f25989522f89098bc62bf552938de6f9e97385fee166907e5b053cc311d474"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-02.json",
+      "before": null,
+      "after": {
+        "resource": "history-0003.txt",
+        "sha256": "651dd383a98b0b6587f214aa8041257e41b1b01c4bf93018a0de4cae6054979f"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-03.json",
+      "before": null,
+      "after": {
+        "resource": "history-0004.txt",
+        "sha256": "6b4d2e9f1e02b5ab466a898724df1f4bde2e8b2495f8198c8d3aac36dd2836ba"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-04.json",
+      "before": null,
+      "after": {
+        "resource": "history-0005.txt",
+        "sha256": "b0fe9bc72bc8c63f5394d068395612478301c1c34ab3440e0a516782676847e2"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-05.json",
+      "before": null,
+      "after": {
+        "resource": "history-0006.txt",
+        "sha256": "9c8ca761372671f98263d9dc341cf6eb83c870c2894849ad096522af955412cb"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-06.json",
+      "before": null,
+      "after": {
+        "resource": "history-0007.txt",
+        "sha256": "b5fb7d882960f20a2bfa0517d9b9d908761cf3fcf241b6dde31c8485c92e9440"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-07.json",
+      "before": null,
+      "after": {
+        "resource": "history-0008.txt",
+        "sha256": "d59b1e109ce61bd49881ffa232de3689dbedb2329f62b63675445bb31f822511"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-08.json",
+      "before": null,
+      "after": {
+        "resource": "history-0009.txt",
+        "sha256": "431ed2a5df0f5101a590fba5279cb1a06661cebac99150884d714d01c0534e60"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-09.json",
+      "before": null,
+      "after": {
+        "resource": "history-0010.txt",
+        "sha256": "f42c51a6383836cffb05e723743dd06545d0917696742670e70c393975f144cb"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-10.json",
+      "before": null,
+      "after": {
+        "resource": "history-0011.txt",
+        "sha256": "ba773cfa1b16a5079c70c5e79f9663b529f568e7c3599a97b66addf8a8414130"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-11.json",
+      "before": null,
+      "after": {
+        "resource": "history-0012.txt",
+        "sha256": "8053df3ad2ec58b19a0ac2c86585ab922e93a873db3fc800972b4d497d5c1941"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-12.json",
+      "before": null,
+      "after": {
+        "resource": "history-0013.txt",
+        "sha256": "38dcbd14e3307d0e4fe6e99e72fb01ca13606eb4b2667cb9639bafa05d1a4292"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-13.json",
+      "before": null,
+      "after": {
+        "resource": "history-0014.txt",
+        "sha256": "a05bda83bcf3a7d8f59a5e3dc794a9ba03483af9a2475a630c819a2fc1d4be6d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-14.json",
+      "before": null,
+      "after": {
+        "resource": "history-0015.txt",
+        "sha256": "06aca18820078bedfed28d2ff8aafa034fb6ff75c11a3397bf86fb8f0338e154"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-15.json",
+      "before": null,
+      "after": {
+        "resource": "history-0016.txt",
+        "sha256": "9351543516c7a3a190420731b804380ecee3c12e547e45747c3551dd2536a0d8"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-16.json",
+      "before": null,
+      "after": {
+        "resource": "history-0017.txt",
+        "sha256": "ec6ff31e12a7c478f8cbf47bb21c4e33add7340bbbec7a55d235e903fe88defc"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-17.json",
+      "before": null,
+      "after": {
+        "resource": "history-0018.txt",
+        "sha256": "d7fe5f167d72b2b4ae340f142410e114db79b58cd10e10190775a838f4864cb5"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-18.json",
+      "before": null,
+      "after": {
+        "resource": "history-0019.txt",
+        "sha256": "8b4c874062ffb16b7c1aed6a9083805442cb78bb88eaccba2def92e5708c1580"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-19.json",
+      "before": null,
+      "after": {
+        "resource": "history-0020.txt",
+        "sha256": "7da6c3d541b2cb97717996d12b13a4ddbfa355ce8dc87c545e3aa480c57f6e17"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-20.json",
+      "before": null,
+      "after": {
+        "resource": "history-0021.txt",
+        "sha256": "91ada336fd5462edc80519398132f663450a1da3820472bd4f49ecc13d838749"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-21.json",
+      "before": null,
+      "after": {
+        "resource": "history-0022.txt",
+        "sha256": "9c7a7a546385f054b1039b535f19b14ab1701e0cc1d3d736baaa2a938ab32801"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-22.json",
+      "before": null,
+      "after": {
+        "resource": "history-0023.txt",
+        "sha256": "97183d3d4517cdbb7472afe1291a8c503d864159ef6cf1aabd70cd15a66eca18"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/commit.json",
+      "before": null,
+      "after": {
+        "resource": "history-0024.txt",
+        "sha256": "1ed2dbd664e8a3cf508c87dc7e2ca871e2d347d431d17b9c243a52400241ca35"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/pull_request.json",
+      "before": null,
+      "after": {
+        "resource": "history-0025.txt",
+        "sha256": "e891628db522796a21a5930c75455dcbd057cf2d6d55ea14f13c375adec23466"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/ref.json",
+      "before": null,
+      "after": {
+        "resource": "history-0026.txt",
+        "sha256": "4b7ac816b0b9f78f3e48ff85cb60eba8ba9714b1295f1ef0df247c5300197542"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/transport/INDEX.json",
+      "before": null,
+      "after": {
+        "resource": "history-0027.txt",
+        "sha256": "dce1e97079aeb3ad9edbdf9f814b3ccaeebfd0053c9d2b4b79ff841632c0736d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/prepare_publication.py",
+      "before": null,
+      "after": {
+        "resource": "history-0028.txt",
+        "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0029.txt",
+        "sha256": "22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0030.txt",
+        "sha256": "074e9dcec6275f05bc8ac93d6d92e36b5adaeaa4c6503ace2dbf047b49916705"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0031.txt",
+        "sha256": "90c9f648768fde6d74bc416d5a52076c7b29581a5df42e21f80da62e983a9be6"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROTOCOL.md",
+      "before": null,
+      "after": {
+        "resource": "history-0032.txt",
+        "sha256": "cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-0.json",
+      "before": null,
+      "after": {
+        "resource": "history-0033.txt",
+        "sha256": "b8a32d3afbab09a54e0783bcd9c30784f52c2f354df1963ce0fdabeb1977b366"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-1.json",
+      "before": null,
+      "after": {
+        "resource": "history-0034.txt",
+        "sha256": "5b7ac8ba077d2b3ee8c3cf6853ade48ea8e568f97d8f98d4f18d46ff7835423b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-2.json",
+      "before": null,
+      "after": {
+        "resource": "history-0035.txt",
+        "sha256": "cfe40a28577457759a7bd1ba588d069c4a7a8c7e2f8edff631e48598f8f6c64d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-3.json",
+      "before": null,
+      "after": {
+        "resource": "history-0036.txt",
+        "sha256": "354b7b50af7d013a23870acbd24603e32c9f248bd4ca2ba86c4ea7e489064b79"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/raw_custody_v3.py",
+      "before": null,
+      "after": {
+        "resource": "history-0037.txt",
+        "sha256": "a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/verify_publication_v3.py",
+      "before": null,
+      "after": {
+        "resource": "history-0038.txt",
+        "sha256": "7138709c360728c17c701391f303a02e21e6e1334b29bc3f67f6c9702f7440f4"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json",
+      "before": null,
+      "after": {
+        "resource": "history-0039.txt",
+        "sha256": "d6a876dffdb48da7271d85966ac7d9cd684e4b89ecc3548e79a5dc8ef55be637"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json",
+      "before": null,
+      "after": {
+        "resource": "history-0040.txt",
+        "sha256": "e60253446c2741c41d127b379f3b9f56506442a0476ea377ab9de43f4ef98701"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json",
+      "before": null,
+      "after": {
+        "resource": "history-0041.txt",
+        "sha256": "bf6ecda1e1cd2d3a0fe726b39e1b1fb924fb9dd9e6bff7fb311cec53a69da76b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json",
+      "before": null,
+      "after": {
+        "resource": "history-0042.txt",
+        "sha256": "87897d5da6389eb5421cf083436ea9dba28921fc7c46fcec185c336677476023"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json",
+      "before": null,
+      "after": {
+        "resource": "history-0043.txt",
+        "sha256": "bc4a2014f1bde8d775d57d3a3f3e31f441e933a1dec4116df3a1fd92a64ed1bb"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json",
+      "before": null,
+      "after": {
+        "resource": "history-0044.txt",
+        "sha256": "bbbbe2668c25e80d6e53d7c59a4a020fac5ee12f41daed2c665d52c7de1211ac"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json",
+      "before": null,
+      "after": {
+        "resource": "history-0045.txt",
+        "sha256": "400fa13aa4dce4c38c9af8c98d252c1fab164119e26d623e18d01f9e36d6a127"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json",
+      "before": null,
+      "after": {
+        "resource": "history-0046.txt",
+        "sha256": "878c3f9a33326df4d91935336962565b2d644e694e51b2aca9f7a47010044324"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json",
+      "before": null,
+      "after": {
+        "resource": "history-0047.txt",
+        "sha256": "cc07ab6028915303903199aa027d19e27aa96d1d60d16231bf04ea24eb74ec6f"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json",
+      "before": null,
+      "after": {
+        "resource": "history-0048.txt",
+        "sha256": "7f438bf36e2a306ffd396d10d6c1e23164f4456ce85b0d06a23b020183682bd1"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json",
+      "before": null,
+      "after": {
+        "resource": "history-0049.txt",
+        "sha256": "05a12fcdcba2cbb33d7f26c823c1ec77e712b206b0513ad69971affda5dc24f6"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
+      "before": null,
+      "after": {
+        "resource": "history-0050.txt",
+        "sha256": "f6852b552a509cd63b6f3622a21124215fb4c584d9b0b35fb4fd66dc6631f5d3"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json",
+      "before": null,
+      "after": {
+        "resource": "history-0051.txt",
+        "sha256": "0e3ba46f0ff549937802d41bcd60f36e7a1d2221744d7fed2bac7c3b14a290ba"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json",
+      "before": null,
+      "after": {
+        "resource": "history-0052.txt",
+        "sha256": "4371692b6dc8fafe9355b12f4dd9a7ef3dbda4f38d4a4b262fc7d7e536ebedd2"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json",
+      "before": null,
+      "after": {
+        "resource": "history-0053.txt",
+        "sha256": "31f6229cce694b49b0e30cb34791f0b4df696b933965637241dd5b053f751b04"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json",
+      "before": null,
+      "after": {
+        "resource": "history-0054.txt",
+        "sha256": "4df921e09958f15fd17261bfbb5f9b948b4382afed7890b4568be4444594c7d3"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json",
+      "before": null,
+      "after": {
+        "resource": "history-0055.txt",
+        "sha256": "6f3742c4822492686a14cf87ba0697e05fa3082cecbe958772e2b97200c60225"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/verification-file-reads.json",
+      "before": null,
+      "after": {
+        "resource": "history-0056.txt",
+        "sha256": "5f992ea5fa2a618093909b3ba7b063a8972de84f2af4b00ed44b323597538a87"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw_custody_v3.py",
+      "before": null,
+      "after": {
+        "resource": "history-0057.txt",
+        "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json",
+      "before": null,
+      "after": {
+        "resource": "history-0058.txt",
+        "sha256": "e5d6703bbeaebb2f6718c7b7f9cefd7dfd723f1b3cead9c50e397ce96e26b791"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0059.txt",
+        "sha256": "da5f48a847613be5599132af53755f677cc579da75d302bfea66d36da643232d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/INPUT_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0060.txt",
+        "sha256": "52d1f09a46c14b1aed8d181e11bc7b0df9f0346eaa453676b8f6ba64e5ce6ace"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.json",
+      "before": null,
+      "after": {
+        "resource": "history-0061.txt",
+        "sha256": "e8ff8e7928611d4cdbe34c9dfd58340e3aa282205bfd405a2bf56d57393d78b0"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0062.txt",
+        "sha256": "6578850848d5e69f454b06c55c898da3811c9607f395c485aafe586178cfa8ee"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/audit_base.py",
+      "before": null,
+      "after": {
+        "resource": "history-0063.txt",
+        "sha256": "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/prepare_publication.py",
+      "before": null,
+      "after": {
+        "resource": "history-0064.txt",
+        "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/PROTOCOL.md",
+      "before": null,
+      "after": {
+        "resource": "history-0065.txt",
+        "sha256": "cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py",
+      "before": null,
+      "after": {
+        "resource": "history-0066.txt",
+        "sha256": "a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py",
+      "before": null,
+      "after": {
+        "resource": "history-0067.txt",
+        "sha256": "7138709c360728c17c701391f303a02e21e6e1334b29bc3f67f6c9702f7440f4"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw_custody_v3.py",
+      "before": null,
+      "after": {
+        "resource": "history-0068.txt",
+        "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication.py",
+      "before": null,
+      "after": {
+        "resource": "history-0069.txt",
+        "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication_v3.py",
+      "before": null,
+      "after": {
+        "resource": "history-0070.txt",
+        "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py",
+      "before": null,
+      "after": {
+        "resource": "history-0071.txt",
+        "sha256": "ef55ea26a4df72e09416ffcec9eff75798a4c126378149cf2c667071446f27d2"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/raw_custody_v3.py.T01-T02.diff",
+      "before": null,
+      "after": {
+        "resource": "history-0072.txt",
+        "sha256": "e234102abc927fda207e5766aa06bd949c56478566ab2fa990666f882e8ceca7"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/verify_publication_v3.py.T01-T02.diff",
+      "before": null,
+      "after": {
+        "resource": "history-0073.txt",
+        "sha256": "2905e58d2d063a419abc99cb52bcb46db1dae3c3655a135497630cb2218154d6"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0074.txt",
+        "sha256": "30556460d63d575f1b18b098fcbd2019239e4634c6067ab319b348c40d39f581"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/INPUT_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0075.txt",
+        "sha256": "97680e799c6b21d29f86b7f2249e22dacc5e1c761d1e7f2ade704eba729a481f"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/READ_CAPABILITIES.json",
+      "before": null,
+      "after": {
+        "resource": "history-0076.txt",
+        "sha256": "1356f767136ebe7d2bbc59bd61904691b82a88161d776d8039fc9ab97510ca60"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.json",
+      "before": null,
+      "after": {
+        "resource": "history-0077.txt",
+        "sha256": "be0f51039422ac6e111a0f5d3a0ba96a74730555d5663c2483fb1ac94a1d96f0"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0078.txt",
+        "sha256": "52621f38ee8dbd408012219a4a5bd5cef08c046da3ada5cecf923398d637e769"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/inspect.py",
+      "before": null,
+      "after": {
+        "resource": "history-0079.txt",
+        "sha256": "67dba07d875c0f9a9bc9e18522bed9fc71b1aeb16787e869fbc75ee9650b8640"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FETCH_FILE_CAPABILITY.json",
+      "before": null,
+      "after": {
+        "resource": "history-0080.txt",
+        "sha256": "0b52650547b4d4ae69a1e462c38ef2077cddb0dfd2c7915e327fcd041dca1709"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0081.txt",
+        "sha256": "2102f85bd93143fd60431fd26a8069bdff2a5e4a2e6616deb6d6f934dc5191f8"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/INPUT_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0082.txt",
+        "sha256": "4e5b2bce37562177cbfb2485a082c33df5a97aa238fac42dacfde355f41ff444"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.json",
+      "before": null,
+      "after": {
+        "resource": "history-0083.txt",
+        "sha256": "1e879a75f8b6d08fba9628406fffa7a7fa20d471fceb0cb8da5bbf47c0f2a5df"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0084.txt",
+        "sha256": "03f15a70c1ac11b52005af86f2bc193599709427f39ae250234fbf9bfbf8b626"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/inspect.py",
+      "before": null,
+      "after": {
+        "resource": "history-0085.txt",
+        "sha256": "c80763ab3a3796d4f7dc8a22596dc96c060bef801b9a8fa845109ce044d36d97"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0086.txt",
+        "sha256": "efbdfa191409f225d814662a744003070f3bf4ce2bd7a4e331cb022abd607696"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/INPUT_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0087.txt",
+        "sha256": "5a26d9913a9b18f97b68aa8bf3eac6855d954f5d4e1c7c7805a16f1589f0a881"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0088.txt",
+        "sha256": "f84ae9ee896eaadd79ae00c3c1747decd0f928872baecbec56166f363f675b59"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/audit_base.py.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0089.txt",
+        "sha256": "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/prepare_publication.py.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0090.txt",
+        "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/v1-v2.diff",
+      "before": null,
+      "after": {
+        "resource": "history-0091.txt",
+        "sha256": "dcb1f09d1b221eb10837874bf62e82093813eb102229567ac19ed4a9c56831d9"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/verify_publication.py.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0092.txt",
+        "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0093.txt",
+        "sha256": "2322e736246e2fd11d94bc4c9c5d1a5717e0bd5be6179f7e4509a9242606d43c"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0094.txt",
+        "sha256": "793b5cfb897b0e0b7471f5f0c85adf3d6520b11c2077d669bbb8a1b48f647120"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0095.txt",
+        "sha256": "9fba35c03ee7d13a7ace7ef8f760f48186c0a8caf73e5dd5cd5d227815f1d693"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0096.txt",
+        "sha256": "05242c715b5d63567d13c26c801e9a2c96ca4e27f14434e3a96020cdcd374a97"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0097.txt",
+        "sha256": "beb5b6f452c2f1f6356136b5ae236bfd23fb2c7313228765357a3f46e50f3f4b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0098.txt",
+        "sha256": "c7c575b882732681c3b5f1435f70063a765435f9e6137e10151fb2f8fa2ef2df"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff",
+      "before": null,
+      "after": {
+        "resource": "history-0099.txt",
+        "sha256": "5f5c5f9c2b9d82607b8e3e30e9027ee8032f4d9fde812c2617343cb934049745"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/V2_V3.diff",
+      "before": null,
+      "after": {
+        "resource": "history-0100.txt",
+        "sha256": "e487f83f318b61c01515549e588b66a384d0d281a0bc5d3a4ace5f1ca6cd8803"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication.py",
+      "before": null,
+      "after": {
+        "resource": "history-0101.txt",
+        "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication_v3.py",
+      "before": null,
+      "after": {
+        "resource": "history-0102.txt",
+        "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-manifest/FINAL_MANIFEST.json",
+      "before": null,
+      "after": {
+        "resource": "history-0103.txt",
+        "sha256": "9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/DESIGNATED_SOURCE_OUTPUTS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0104.txt",
+        "sha256": "296d5b9eb4f41b51a85d44bb4f05c76e8c5b6453fb55881691b9823055062510"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/E4_EXECUTION_INPUT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0105.txt",
+        "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/FINAL_T03_REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0106.txt",
+        "sha256": "d6109ae253343f5c157d867732f3eea954cc4e57438968154b476407a21e86b2"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_REPORT.md",
+      "before": null,
+      "after": {
+        "resource": "history-0107.txt",
+        "sha256": "b21708f3c4537237db3608f8c12ba54ee1940817eb7d5594c1fea5bdeab29259"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_RESULT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0108.txt",
+        "sha256": "086f4ef835a0939b212bcb7595e75513ecbd46ce6bbf764a8d1f5aca1e418954"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM.xml",
+      "before": null,
+      "after": {
+        "resource": "history-0109.txt",
+        "sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM_RECOVERY_CALL.json",
+      "before": null,
+      "after": {
+        "resource": "history-0110.txt",
+        "sha256": "f647efbec6809523678b640b0dfbdf495f494bfc5c3e84a8a5e6e8a473e89d41"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM_RESTORATION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0111.txt",
+        "sha256": "34a6cf995296ed929c2209d34480245473150601f8a556945aa1d8c2947fda6d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0112.txt",
+        "sha256": "8ec211daffcfe3472c2fe66d7cecd9e49c4362102c5876092da09d4f38d87bab"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/REVIEW.json",
+      "before": null,
+      "after": {
+        "resource": "history-0113.txt",
+        "sha256": "b181f16da4916cf946ca07e46156fd16c16cd2e12e486d730a1106e08f947434"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0114.txt",
+        "sha256": "0b5d20b213f5e98ec75b1750e03fe085d21c2465bca42993e3d9264623a52dd1"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/STATIC_CHECKS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0115.txt",
+        "sha256": "679c58b0f1861971864f8a0cc77ea363a62af7b74d8ecb8f7147711822128610"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/author_e04.py.diff",
+      "before": null,
+      "after": {
+        "resource": "history-0116.txt",
+        "sha256": "e23b9630be02b01893da60284fbf98b8cd668318a5ff9987bbfdc5785bd5f5cd"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/run_verification.py.diff",
+      "before": null,
+      "after": {
+        "resource": "history-0117.txt",
+        "sha256": "8cbd11d00c95f196a19618f8fc60caa23c08eeef3fd80d34d8a22e55c36000ba"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0118.txt",
+        "sha256": "fc7317936fca35529dd233eb056bb4ffb47df1090ba415642f8ff3ef705e6510"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/INPUTS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0119.txt",
+        "sha256": "624665aef80b209cc9861ff35de0aee2b3ad139e48763ae2b3e7bc01af697248"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/REVIEW.json",
+      "before": null,
+      "after": {
+        "resource": "history-0120.txt",
+        "sha256": "77fc1ee0a600577a60f324f8c0cd87b10657aecdacb91290b826bf5cddc228ab"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0121.txt",
+        "sha256": "0353e7d8d4c4b4e709394ecc271ad662b84604b0e890ab09c65aad5e39c68ad7"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/STATIC_CHECKS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0122.txt",
+        "sha256": "979820ef1beafa75891ff0b0518ce5d354cc54661694aa5b30ae00471c2c9558"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/author_e04_v3.py.diff",
+      "before": null,
+      "after": {
+        "resource": "history-0123.txt",
+        "sha256": "d67c30dc775052b26f655cfe92cc953a878c41fedf76fc997450513c6d61f3fe"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/derive_source_handoff_v3.py.diff",
+      "before": null,
+      "after": {
+        "resource": "history-0124.txt",
+        "sha256": "e9bafa64375a79d317177aaa4c0059770696f70cf5fef062bb0f3729d36dc763"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/run_verification_v3.py.diff",
+      "before": null,
+      "after": {
+        "resource": "history-0125.txt",
+        "sha256": "8bc22ad6293df139b0e21c17bfaa476d469fe4cb834e68c56f3cb5e2df26263f"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0126.txt",
+        "sha256": "bf6b81d60beef64f05f42fe05673bc0caae6912edd89843dbf9072087a1a581e"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/REVIEW.json",
+      "before": null,
+      "after": {
+        "resource": "history-0127.txt",
+        "sha256": "ef2561dd1fedb08a4f82495f6d377309e7b130ae5c084cff432c5564dbff0783"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0128.txt",
+        "sha256": "5f6d0d5502344a92d27dddc0aface389effc92729501d6e767a9b2c63dc0a657"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/STATIC_CHECKS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0129.txt",
+        "sha256": "cc4e176bf91941c0ba23860c0d44737b1736e3c1d0307b45a8b8a121eb3ed561"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/revision.diff",
+      "before": null,
+      "after": {
+        "resource": "history-0130.txt",
+        "sha256": "492a75974397e65dde54e1506efe612fe795532544a69b4f92a9579acf013768"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0131.txt",
+        "sha256": "d7358b6c30ea0306248e35f36fc3b1a8aba22b02a95e0d76882c3d1b97eb07aa"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/INPUTS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0132.txt",
+        "sha256": "195ff814b12c14f80cee26c2d86385315d1a4d9829315996be31a36f6a43cf4d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/REVIEW.json",
+      "before": null,
+      "after": {
+        "resource": "history-0133.txt",
+        "sha256": "7c5e70a0095e24dbec941b877d51e153f8f46fc67da3c803871766456603a3d3"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0134.txt",
+        "sha256": "3b79302b2797b99bae5013946e1196ca1f4b836c89c69a416cf1db7431684976"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/STATIC_INPUT_CHECKS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0135.txt",
+        "sha256": "fc6e7ae2fa63710e714e189722d0a2aa15b0d6a7944767e767b8ce13471a8014"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/01-check-E3-preimages.json",
+      "before": null,
+      "after": {
+        "resource": "history-0136.txt",
+        "sha256": "b23850ef1f1c67c35d91ae8c336be9e679423badbacee8d1b7c600ab5d999d1d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/01-check-E3-preimages.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0137.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/01-check-E3-preimages.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0138.txt",
+        "sha256": "10f0c98cdab62eae01ae2826f952a9f5f7667d0350c537e47fb0d2c6ed65ad94"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/02-actual-text-recipe-maven.json",
+      "before": null,
+      "after": {
+        "resource": "history-0139.txt",
+        "sha256": "6493aa9abdf40f16768a9ef47f1e3f60f9313f3bb60fba97f903a3f53c729bf2"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/02-actual-text-recipe-maven.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0140.txt",
+        "sha256": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/02-actual-text-recipe-maven.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0141.txt",
+        "sha256": "0138e46f20874e7da1ba8c669b91a258fea7cc4e53ae27c83271881ce8eaf6b0"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/03-actual-packet-contract.json",
+      "before": null,
+      "after": {
+        "resource": "history-0142.txt",
+        "sha256": "feb59597ea3bbcfeed76abfb1b265c51098b75fd820c467496bfb5de3a6c9874"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/03-actual-packet-contract.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0143.txt",
+        "sha256": "e19416824a0f98fc36b2be2534541ab8060148f0274a68398362c6ed3a33e827"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/03-actual-packet-contract.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0144.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/04-apply.json",
+      "before": null,
+      "after": {
+        "resource": "history-0145.txt",
+        "sha256": "e0e7bc2be0cbb90d04ea82e3d00986861e2f2cc12e30cafeaeb38ce859072830"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/04-apply.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0146.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/04-apply.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0147.txt",
+        "sha256": "db1a0d7fed17da0f1f64299a6f38db109cc291e7da45800bf4603d3add73fd11"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/05-apply-fixed-point.json",
+      "before": null,
+      "after": {
+        "resource": "history-0148.txt",
+        "sha256": "610e555d607485e7a96fe9725a87b96c1cae5190e0222bcab2cda0dc7e34aa42"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/05-apply-fixed-point.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0149.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/05-apply-fixed-point.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0150.txt",
+        "sha256": "c1888956bcb8c9fa2f5a52d7cdcf4ec3d997bdbda439b431051ac839c33f36a1"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/06-rollback.json",
+      "before": null,
+      "after": {
+        "resource": "history-0151.txt",
+        "sha256": "16bd4e3768ed4f1cb5264b5473be6d06e4331bb4175b9752a31bc657793e9d53"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/06-rollback.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0152.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/06-rollback.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0153.txt",
+        "sha256": "5fc9f3ec131e0a0566699f38cc38809048fb229d27dbd59655f3b39795ef1d06"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/07-replay.json",
+      "before": null,
+      "after": {
+        "resource": "history-0154.txt",
+        "sha256": "80e1d37222b678b47c7522fc4cebfbe311fe095afdd534b74e0b25cf0aab74e9"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/07-replay.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0155.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/07-replay.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0156.txt",
+        "sha256": "db1a0d7fed17da0f1f64299a6f38db109cc291e7da45800bf4603d3add73fd11"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/08-check-final.json",
+      "before": null,
+      "after": {
+        "resource": "history-0157.txt",
+        "sha256": "1340fbfdf8feaa6d4e330669c2a9eeeb28edbd9abd76ddb5d999bb29134b2171"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/08-check-final.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0158.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/08-check-final.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0159.txt",
+        "sha256": "c1888956bcb8c9fa2f5a52d7cdcf4ec3d997bdbda439b431051ac839c33f36a1"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/09-whole-map-validate.json",
+      "before": null,
+      "after": {
+        "resource": "history-0160.txt",
+        "sha256": "8e0a1f21b7b419a230e3bdc2631c58e6abcc4e5d0f133f4e981af4975af0d98c"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/09-whole-map-validate.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0161.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/09-whole-map-validate.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0162.txt",
+        "sha256": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/10-completion-remains-blocked.json",
+      "before": null,
+      "after": {
+        "resource": "history-0163.txt",
+        "sha256": "347e716e7e9e871d30f76f832a4de2f2c404407bae4ebb6d5c37b5722894f679"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/10-completion-remains-blocked.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0164.txt",
+        "sha256": "c4a5d6a265b1a39ec6254fe71bc9e58cd55a7658d9ea6d18ccff4cba24687b25"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/10-completion-remains-blocked.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0165.txt",
+        "sha256": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/JccSourceRecoveryHandoffTest.xml",
+      "before": null,
+      "after": {
+        "resource": "history-0166.txt",
+        "sha256": "09d606a9675a7aa17a64945e499c8f8062bd75a42cce2ed53851309aa3efd001"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/empty-maven-settings.xml",
+      "before": null,
+      "after": {
+        "resource": "history-0167.txt",
+        "sha256": "b546e42cf905023b479e33abc908fed827584e753d6402a372fb11fc1d343bca"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/inputs.json",
+      "before": null,
+      "after": {
+        "resource": "history-0168.txt",
+        "sha256": "6367c7d343ece1f1547e4db7873180f4dfae6dda83212edadf0564e0a93bc341"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/receipt.json",
+      "before": null,
+      "after": {
+        "resource": "history-0169.txt",
+        "sha256": "1f4ac9825d975520a04b7dc5ac1b282d96be32601c7abe2b0cfb676b0ff2df09"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/DERIVATION_INPUTS_V3.json",
+      "before": null,
+      "after": {
+        "resource": "history-0170.txt",
+        "sha256": "0d494e5904854b3529e0fb72079cb8c4c9fab520e20077d0e68e6a1887e11b73"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/FINAL_SOURCE_INPUTS_V3.json",
+      "before": null,
+      "after": {
+        "resource": "history-0171.txt",
+        "sha256": "df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/author_e04_v3.py",
+      "before": null,
+      "after": {
+        "resource": "history-0172.txt",
+        "sha256": "db47c8ae008021e4a250004ae8631b1a40c9cd731c5c2001f41eacedac129359"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/check_references_v3.py",
+      "before": null,
+      "after": {
+        "resource": "history-0173.txt",
+        "sha256": "521c18944616fe46a3e347860c25a7283e1b74674c594e40996c787e01e96b81"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/current-context/CONTEXT_REFERENCES.json",
+      "before": null,
+      "after": {
+        "resource": "history-0174.txt",
+        "sha256": "fbc460874aeb04a688ad0ed9b47ad8e3f3b37f88af09d0f32ecfeedc2827fbed"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/LOCAL_EXPECTATIONS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0175.txt",
+        "sha256": "548b98ef8531b369f4c378bfdebf681e514a5b46da15bcf32db9ab491a7ce8d5"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/READINESS_T01.json",
+      "before": null,
+      "after": {
+        "resource": "history-0176.txt",
+        "sha256": "69722816b7744af9f4a1a69356b797616d04d54fae7008d438cf08131685b21b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/READINESS_T02.json",
+      "before": null,
+      "after": {
+        "resource": "history-0177.txt",
+        "sha256": "d8a816935713d91745e7b341e0e2d58ae98e6aed36ee9bafba4567117771c406"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/revisions/before-two-fixture-freeze/revision.diff",
+      "before": null,
+      "after": {
+        "resource": "history-0178.txt",
+        "sha256": "dfdfdbb915b7f26679d429c625ebbd5e7e7ed1eed00bb74deeed85e07243062a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/derive_source_handoff_v3.py",
+      "before": null,
+      "after": {
+        "resource": "history-0179.txt",
+        "sha256": "0086ac594cf4e459b0bf903e8eea95a6aa38198b5d23cb6f140726afcd08f76b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/publication_custody_v3.py",
+      "before": null,
+      "after": {
+        "resource": "history-0180.txt",
+        "sha256": "46cf912b0f464caeb9718b08d22f9cdd5b74875e3ab614ccee19c7b0a4dae7b7"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/run_verification_v3.py",
+      "before": null,
+      "after": {
+        "resource": "history-0181.txt",
+        "sha256": "496e1877914e15f4342111c37020a2d58790038516b62872680427e585b21f50"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/seal_publication_v3.py",
+      "before": null,
+      "after": {
+        "resource": "history-0182.txt",
+        "sha256": "992ff5d18c611afe1b01d1ce941e07e84c76557ff1f3cab91b4fc25750a1ada7"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/source-prepublication/DESIGNATED_COMPARISON.json",
+      "before": null,
+      "after": {
+        "resource": "history-0183.txt",
+        "sha256": "39e7fe930028e5e7561414fbf8f75f247c634182c19648f6c0e6b6d0849d055a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/source-prepublication/PROOF_SELECTION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0184.txt",
+        "sha256": "482431a3222b032443b76bb3f57395c097bad1ac161b90280123b3ad5764f650"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml",
+      "before": null,
+      "after": {
+        "resource": "history-0185.txt",
+        "sha256": "87410fdc613d15f549f155f676be3ba5ab535eb7e7b73eda45f4409fb6dd095a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml",
+      "before": null,
+      "after": {
+        "resource": "history-0186.txt",
+        "sha256": "6ee0745e1927e2bb60e52e5f50af9b77e01d7f45063a35050e8151af2df81f55"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"
+    },
+    {
+      "path": "m3/migration/migration.py",
+      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1"
+    }
+  ],
+  "plan_sha256": "a03d68cef91f6f88c52fee462e88b54455a1146d93f4d666fe78e646e17962a5"
+}

@@ -1,0 +1,80 @@
+Compiled from "M3LongLongTreeMap.java"
+public final class com.m3.collections.M3LongLongTreeMap implements com.m3.collections.M3LongLongSortedMap {
+  public com.m3.collections.M3LongLongTreeMap();
+    descriptor: ()V
+
+  public com.m3.collections.M3LongLongTreeMap(int);
+    descriptor: (I)V
+
+  public boolean put(long, long);
+    descriptor: (JJ)Z
+
+  public int putAllSorted(long[], long[]);
+    descriptor: ([J[J)I
+
+  public boolean containsKey(long);
+    descriptor: (J)Z
+
+  public long getOrDefault(long, long);
+    descriptor: (JJ)J
+
+  public long getOrThrow(long);
+    descriptor: (J)J
+
+  public boolean remove(long);
+    descriptor: (J)Z
+
+  public long firstKey();
+    descriptor: ()J
+
+  public long lastKey();
+    descriptor: ()J
+
+  public long pollFirstKey();
+    descriptor: ()J
+
+  public long pollLastKey();
+    descriptor: ()J
+
+  public long floorKey(long, long);
+    descriptor: (JJ)J
+
+  public long ceilingKey(long, long);
+    descriptor: (JJ)J
+
+  public long lowerKey(long, long);
+    descriptor: (JJ)J
+
+  public long higherKey(long, long);
+    descriptor: (JJ)J
+
+  public void forEach(com.m3.collections.M3LongLongConsumer);
+    descriptor: (Lcom/m3/collections/M3LongLongConsumer;)V
+
+  public void forEachInRange(long, long, com.m3.collections.M3LongLongConsumer);
+    descriptor: (JJLcom/m3/collections/M3LongLongConsumer;)V
+
+  public com.m3.collections.M3LongIterator keyIterator();
+    descriptor: ()Lcom/m3/collections/M3LongIterator;
+
+  public int size();
+    descriptor: ()I
+
+  public boolean isEmpty();
+    descriptor: ()Z
+
+  public int capacity();
+    descriptor: ()I
+
+  public void clear();
+    descriptor: ()V
+
+  public void trimToSize();
+    descriptor: ()V
+
+  public long[] keysToArray();
+    descriptor: ()[J
+
+  public long[] valuesToArray();
+    descriptor: ()[J
+}

@@ -1,0 +1,234 @@
+Compiled from "SharedLexiconPrecomputeCatalog.java"
+public final class com.m3.text.SharedLexiconPrecomputeCatalog {
+  public static com.m3.text.SharedLexiconPrecomputeCatalog$Builder builder();
+    descriptor: ()Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+
+  public java.util.Optional<com.m3.text.M3LexiconPrecompute$TranslationProjection> translationAt(com.m3.text.SharedLexiconPrecomputeCatalog$TranslationIdentity);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$TranslationIdentity;)Ljava/util/Optional;
+
+  public java.util.Optional<com.m3.text.M3LexiconPrecompute$SpellIndex> spellAt(com.m3.text.SharedLexiconPrecomputeCatalog$SpellScope);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$SpellScope;)Ljava/util/Optional;
+
+  public java.util.Optional<com.m3.text.M3LexiconPrecompute$TokenHashPrecompute> tokenHashesAt(com.m3.text.SharedLexiconPrecomputeCatalog$TokenRange);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$TokenRange;)Ljava/util/Optional;
+
+  public java.util.Optional<com.m3.text.M3LexiconPrecompute$PrefixCounts> prefixCountsAt(com.m3.text.SharedLexiconPrecomputeCatalog$ValueToken);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$ValueToken;)Ljava/util/Optional;
+
+  public java.util.Optional<com.m3.text.M3LexiconPrecompute$TokenFrequency> tokenFrequencyAt(com.m3.text.SharedLexiconPrecomputeCatalog$ValueScope);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$ValueScope;)Ljava/util/Optional;
+
+  public java.util.Optional<com.m3.text.M3LexiconPrecompute$IndexWordFacts> wordFactsAt(com.m3.text.SharedLexiconPrecomputeCatalog$WordIdentity);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$WordIdentity;)Ljava/util/Optional;
+
+  public java.util.Optional<com.m3.text.M3LexiconPrecompute$IndexWordSignal> wordSignalAt(com.m3.text.SharedLexiconPrecomputeCatalog$WordIdentity);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$WordIdentity;)Ljava/util/Optional;
+}
+Compiled from "SharedLexiconPrecomputeCatalog.java"
+public final class com.m3.text.SharedLexiconPrecomputeCatalog$Builder {
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder();
+    descriptor: ()V
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder translation(com.m3.text.SharedLexiconPrecomputeCatalog$TranslationIdentity, com.m3.text.M3LexiconPrecompute$TranslationProjection);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$TranslationIdentity;Lcom/m3/text/M3LexiconPrecompute$TranslationProjection;)Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder spell(com.m3.text.SharedLexiconPrecomputeCatalog$SpellScope, com.m3.text.M3LexiconPrecompute$SpellIndex);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$SpellScope;Lcom/m3/text/M3LexiconPrecompute$SpellIndex;)Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder tokenHashes(com.m3.text.SharedLexiconPrecomputeCatalog$TokenRange, com.m3.text.M3LexiconPrecompute$TokenHashPrecompute);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$TokenRange;Lcom/m3/text/M3LexiconPrecompute$TokenHashPrecompute;)Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder prefixCounts(com.m3.text.SharedLexiconPrecomputeCatalog$ValueToken, com.m3.text.M3LexiconPrecompute$PrefixCounts);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$ValueToken;Lcom/m3/text/M3LexiconPrecompute$PrefixCounts;)Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder tokenFrequency(com.m3.text.SharedLexiconPrecomputeCatalog$ValueScope, com.m3.text.M3LexiconPrecompute$TokenFrequency);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$ValueScope;Lcom/m3/text/M3LexiconPrecompute$TokenFrequency;)Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder wordFacts(com.m3.text.SharedLexiconPrecomputeCatalog$WordIdentity, com.m3.text.M3LexiconPrecompute$IndexWordFacts);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$WordIdentity;Lcom/m3/text/M3LexiconPrecompute$IndexWordFacts;)Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Builder wordSignal(com.m3.text.SharedLexiconPrecomputeCatalog$WordIdentity, com.m3.text.M3LexiconPrecompute$IndexWordSignal);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$WordIdentity;Lcom/m3/text/M3LexiconPrecompute$IndexWordSignal;)Lcom/m3/text/SharedLexiconPrecomputeCatalog$Builder;
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog build();
+    descriptor: ()Lcom/m3/text/SharedLexiconPrecomputeCatalog;
+}
+Compiled from "SharedLexiconPrecomputeCatalog.java"
+public final class com.m3.text.SharedLexiconPrecomputeCatalog$Coordinate extends java.lang.Record {
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Coordinate(int, int);
+    descriptor: (II)V
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public int shardId();
+    descriptor: ()I
+
+  public int imageRow();
+    descriptor: ()I
+}
+Compiled from "SharedLexiconPrecomputeCatalog.java"
+public final class com.m3.text.SharedLexiconPrecomputeCatalog$SpellScope extends java.lang.Record {
+  public com.m3.text.SharedLexiconPrecomputeCatalog$SpellScope(java.lang.String, java.lang.String, int, int, java.lang.String);
+    descriptor: (Ljava/lang/String;Ljava/lang/String;IILjava/lang/String;)V
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public java.lang.String lexiconFingerprint();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String language();
+    descriptor: ()Ljava/lang/String;
+
+  public int maxEditDistance();
+    descriptor: ()I
+
+  public int prefixLength();
+    descriptor: ()I
+
+  public java.lang.String sourceFingerprint();
+    descriptor: ()Ljava/lang/String;
+}
+Compiled from "SharedLexiconPrecomputeCatalog.java"
+public final class com.m3.text.SharedLexiconPrecomputeCatalog$TokenRange extends java.lang.Record {
+  public com.m3.text.SharedLexiconPrecomputeCatalog$TokenRange(com.m3.text.SharedLexiconPrecomputeCatalog$Coordinate, java.lang.String, java.lang.String, int, int);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$Coordinate;Ljava/lang/String;Ljava/lang/String;II)V
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Coordinate coordinate();
+    descriptor: ()Lcom/m3/text/SharedLexiconPrecomputeCatalog$Coordinate;
+
+  public java.lang.String valueFingerprint();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String tokenizerVersion();
+    descriptor: ()Ljava/lang/String;
+
+  public int startInclusive();
+    descriptor: ()I
+
+  public int endExclusive();
+    descriptor: ()I
+}
+Compiled from "SharedLexiconPrecomputeCatalog.java"
+public final class com.m3.text.SharedLexiconPrecomputeCatalog$TranslationIdentity extends java.lang.Record {
+  public com.m3.text.SharedLexiconPrecomputeCatalog$TranslationIdentity(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+    descriptor: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public java.lang.String sourceId();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String recordId();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String sourceLanguage();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String targetLanguage();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String lexiconFingerprint();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String sourceFingerprint();
+    descriptor: ()Ljava/lang/String;
+}
+Compiled from "SharedLexiconPrecomputeCatalog.java"
+public final class com.m3.text.SharedLexiconPrecomputeCatalog$ValueScope extends java.lang.Record {
+  public com.m3.text.SharedLexiconPrecomputeCatalog$ValueScope(com.m3.text.SharedLexiconPrecomputeCatalog$Coordinate, java.lang.String);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$Coordinate;Ljava/lang/String;)V
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Coordinate coordinate();
+    descriptor: ()Lcom/m3/text/SharedLexiconPrecomputeCatalog$Coordinate;
+
+  public java.lang.String valueFingerprint();
+    descriptor: ()Ljava/lang/String;
+}
+Compiled from "SharedLexiconPrecomputeCatalog.java"
+public final class com.m3.text.SharedLexiconPrecomputeCatalog$ValueToken extends java.lang.Record {
+  public com.m3.text.SharedLexiconPrecomputeCatalog$ValueToken(com.m3.text.SharedLexiconPrecomputeCatalog$Coordinate, java.lang.String, int);
+    descriptor: (Lcom/m3/text/SharedLexiconPrecomputeCatalog$Coordinate;Ljava/lang/String;I)V
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public com.m3.text.SharedLexiconPrecomputeCatalog$Coordinate coordinate();
+    descriptor: ()Lcom/m3/text/SharedLexiconPrecomputeCatalog$Coordinate;
+
+  public java.lang.String valueFingerprint();
+    descriptor: ()Ljava/lang/String;
+
+  public int tokenId();
+    descriptor: ()I
+}
+Compiled from "SharedLexiconPrecomputeCatalog.java"
+public final class com.m3.text.SharedLexiconPrecomputeCatalog$WordIdentity extends java.lang.Record {
+  public com.m3.text.SharedLexiconPrecomputeCatalog$WordIdentity(java.lang.String, java.lang.String, java.lang.String, java.lang.String);
+    descriptor: (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public java.lang.String sourceId();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String recordId();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String lexeme();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.String sourceRevision();
+    descriptor: ()Ljava/lang/String;
+}

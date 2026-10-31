@@ -1,0 +1,34 @@
+{
+  "source_repository": "hsoliwal/com.synexia",
+  "source_commit": "4f9a91ab6239212acdb676757d96f5083d27c474",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "donor_sources": [
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegexAutomaton.java",
+      "git_blob_sha1": "28a5c10f1b0c859694da2c2ee880667f54ddf717",
+      "sha256": "c4cd9feb7645ccd1ef7fc66d165e33ee74fb9fbf6002d80518c228df47290b46"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/rxm/proof/RXM_SUMMARY.tsv",
+      "git_blob_sha1": "a520833ca9b5fa641658bc0ca61b43fceb5d84bf",
+      "sha256": "a81c05eff679719bbea55b4bfc30f34ec609faba2a47b6bd6115ea27cfe001d4"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/rxa/proof/RXA_SUMMARY.tsv",
+      "git_blob_sha1": "d5084245908f10bdc3ebf18d6c7d4fa3c29c9453",
+      "sha256": "dfb8d318492f2bc3e75e20d7ee4b1d58bb84d6906893180d87d80e3d2b54cd46"
+    },
+    {
+      "path": "LICENSE",
+      "git_blob_sha1": "29f81d812f3e768fa89638d1f72920dbfd1413a8",
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6"
+    },
+    {
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex/MIndexCompositeRegexIndex.java",
+      "git_blob_sha1": "20c22c81316b48314c1c7c3d6e173e688f3b787d",
+      "sha256": "2e4da7b5b4519c4b4dc8231231dcc9b2b2e408e2524ae6ca142b1cd56622ae6c"
+    }
+  ],
+  "initial_target_base": "1c389e31805fb4faf5d9fe256c8dc6797a2eadff"
+}

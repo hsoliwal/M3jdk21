@@ -1,0 +1,82 @@
+Building target 'jdk-image' in configuration 'm3-ast-reverse'
+Compiling up to 363 files for BUILD_jdk.compiler.interim
+Creating ct.sym classes
+Updating support/src.zip
+Compiling up to 372 files for jdk.compiler
+Optimizing the exploded image
+Creating java.instrument.jmod
+Creating java.datatransfer.jmod
+Creating java.compiler.jmod
+Creating java.desktop.jmod
+Creating java.logging.jmod
+Creating java.management.rmi.jmod
+Creating java.management.jmod
+Creating java.naming.jmod
+Creating java.net.http.jmod
+Creating java.prefs.jmod
+Creating java.rmi.jmod
+Creating java.scripting.jmod
+Creating java.se.jmod
+Creating java.security.jgss.jmod
+Creating java.security.sasl.jmod
+Creating java.smartcardio.jmod
+Creating java.sql.jmod
+Creating java.sql.rowset.jmod
+Creating java.transaction.xa.jmod
+Creating java.xml.jmod
+Creating java.xml.crypto.jmod
+Creating jdk.accessibility.jmod
+Creating jdk.attach.jmod
+Creating jdk.charsets.jmod
+Creating jdk.compiler.jmod
+Creating jdk.crypto.cryptoki.jmod
+Creating jdk.crypto.ec.jmod
+Creating jdk.dynalink.jmod
+Creating jdk.editpad.jmod
+Creating jdk.hotspot.agent.jmod
+Creating jdk.httpserver.jmod
+Creating jdk.incubator.vector.jmod
+Creating jdk.internal.ed.jmod
+Creating jdk.internal.jvmstat.jmod
+Creating jdk.internal.le.jmod
+Creating jdk.internal.opt.jmod
+Creating jdk.internal.vm.ci.jmod
+Creating jdk.internal.vm.compiler.jmod
+Creating jdk.internal.vm.compiler.management.jmod
+Creating jdk.jartool.jmod
+Creating jdk.javadoc.jmod
+Creating jdk.jcmd.jmod
+Creating jdk.jconsole.jmod
+Creating jdk.jdeps.jmod
+Creating jdk.jdi.jmod
+Creating jdk.jdwp.agent.jmod
+Creating jdk.jfr.jmod
+Creating interim java.base.jmod
+Creating interim java.logging.jmod
+Creating jdk.jpackage.jmod
+Creating jdk.jshell.jmod
+Creating jdk.jsobject.jmod
+Creating jdk.jstatd.jmod
+Creating jdk.localedata.jmod
+Creating jdk.management.jmod
+Creating jdk.management.agent.jmod
+Creating jdk.management.jfr.jmod
+Creating jdk.naming.dns.jmod
+Creating jdk.naming.rmi.jmod
+Creating jdk.net.jmod
+Creating jdk.nio.mapmode.jmod
+Creating jdk.random.jmod
+Creating jdk.sctp.jmod
+Creating jdk.security.auth.jmod
+Creating jdk.security.jgss.jmod
+Creating jdk.unsupported.jmod
+Creating jdk.unsupported.desktop.jmod
+Creating jdk.xml.dom.jmod
+Creating jdk.zipfs.jmod
+Creating interim jimage
+Creating jdk.jlink.jmod
+Creating java.base.jmod
+Creating jdk image
+Creating CDS archive for jdk image for server
+Creating CDS-NOCOOPS archive for jdk image for server
+Finished building target 'jdk-image' in configuration 'm3-ast-reverse'

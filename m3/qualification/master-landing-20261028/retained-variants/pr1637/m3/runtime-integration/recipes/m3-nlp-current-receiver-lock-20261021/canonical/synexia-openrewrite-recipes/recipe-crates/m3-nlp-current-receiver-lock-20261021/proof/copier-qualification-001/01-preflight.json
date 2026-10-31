@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "mode": "CHECK",
+  "recipe_proof_sha256": "3e524fbb755c3eae8156fd1e04cfceb56a2fd7b6095ffd6d89e2f1a33873d10a",
+  "receiver_root": "b01f50348060b191d87cd7bdc0e42061a5c994e0c0664ea78accc9b220b87380",
+  "repository": "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/receiving",
+  "files": [
+    {
+      "path": "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "before_sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d",
+      "after_sha256": "92fd76c3f0d3c10c90ea4cb52485d2dbceda513fa3d794d22ec67fd153fd62ed",
+      "action": "WRITE"
+    },
+    {
+      "path": "m3/tooling/module-packs/nlp-search/current-source-lock.json",
+      "before_sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
+      "after_sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+      "action": "WRITE"
+    }
+  ]
+}

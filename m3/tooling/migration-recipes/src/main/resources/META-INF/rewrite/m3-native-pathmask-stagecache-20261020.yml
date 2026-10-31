@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3NativePathMaskStageCache20261020
+displayName: Source-sealed M3JDK21 bounded JNI stage metadata cache
+description: PlainText exact C source migration; invoked only after native-path recipe engine qualification.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-native-pathmask-stagecache-20261020
+      lst: false

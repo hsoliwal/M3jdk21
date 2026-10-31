@@ -1,0 +1,6 @@
+{
+  "findings": [],
+  "overall_correctness": "patch is correct",
+  "overall_explanation": "The multiline sparse-checkout configuration is valid for actions/checkout's default cone mode and now includes both the collection tree and the workflow path required by source verification in all three jobs. The bound workflow byte count increases by 132 bytes, matching the three identical 44-byte checkout expansions, and no actionable regression is evident in the supplied change bundle.",
+  "overall_confidence": 0.97
+}

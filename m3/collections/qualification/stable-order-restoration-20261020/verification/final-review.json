@@ -1,0 +1,138 @@
+{
+  "admitted_files_rechecked": {
+    "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e",
+    "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94",
+    "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowResourceProbe.java": "d711aa55378fe89dc263a2de6fe90449ab690e9759d27906a9389f9a0434fdba",
+    "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java": "75f32c3f515783fff233992a3144f867fa9bc767d481ba1d2db05b996895ad40"
+  },
+  "baseline_source": {
+    "git_blob": "317136e66200db1d8fc72d47ff9f8cf52b4566b5",
+    "path": "/workspace/scratch/e736b6177c79/m3-collections-refinement-20261020/baseline/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+    "sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545"
+  },
+  "existing_success_receipts_modified": false,
+  "generated_source": {
+    "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+    "sha256": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e"
+  },
+  "integrity_checks": {
+    "actual_sdk_outputs": 4,
+    "checks": 420,
+    "finite_mask_pairs": 65536,
+    "finite_observation_sha256": "e15c399b7be3d8c0fbd38bc6e2cd4c63b93bb0b95d1272bce9acdcc7bec5445b",
+    "finite_windows": 67914,
+    "generated_junit_tests": 5,
+    "generated_production_classfiles": 11,
+    "generated_proof_classfiles": 14,
+    "java_finite_checks": 2990400,
+    "jni_diagnostics": 0,
+    "jni_symbols": 12,
+    "native_finite_checks": 3267362,
+    "native_proof_classfiles": 6,
+    "native_runtime_checks": 14,
+    "native_source_sha256": {
+      "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+      "m3/collections/src/main/native/collections/m3_index_mask_window.c": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
+      "m3/collections/src/main/native/collections/m3_long_address_kernel.c": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f"
+    },
+    "production_overlays": false,
+    "production_source_and_class_seals_match": true,
+    "public_protected_api_sha256": "39c1da7f0234160a93c42948e8618e37f9ab813d34f5e5f6e625bb487d85d682",
+    "recorded_command_logs_rehashed": 114,
+    "sdk_tests": 20,
+    "sdk_xml": {
+      "index-contract": {
+        "sha256": "a4aa2ee7211a4249a6a2c05564482ca6666bacc70aa9d288c551b33b540e6e9d",
+        "tests": 5
+      },
+      "index-junit": {
+        "sha256": "3985844277728663b9559537fb7ea7059c9ffa612dba2f14af8ef04893b21588",
+        "tests": 5
+      },
+      "index-resource-probe": {
+        "sha256": "407bd885443f0528e374656d1751291997358da413642af8a2e92fe13db6d3d4",
+        "tests": 5
+      },
+      "stable-order-groups": {
+        "sha256": "605f9285ed3ca27a24e7d0e2ae33c767be48cf8e97df778fde4bfa5cdec61826",
+        "tests": 5
+      }
+    },
+    "serial_sdk_passes": 4,
+    "unchanged_native_fixture_support_classfiles": 14,
+    "unchanged_native_fixture_support_sources": 10,
+    "undefined_behavior_diagnostics": 0
+  },
+  "issues": [],
+  "limits": [
+    "The review reconciles existing bounded evidence; it does not constitute a full source-built M3JDK21 build.",
+    "Resource observations apply only to the recorded workload; no general speed or retained-heap guarantee is inferred.",
+    "The earlier failed native closure attempt remains preserved and is not counted as success; native-final is the sole final native receipt."
+  ],
+  "review_method": "Manual complete source/diff review plus read-only byte/hash, receipt, XML, class inventory, symbol and raw-log reconciliation; no compiler, test, benchmark or native gate rerun.",
+  "reviewed_at_utc": "2026-10-20T11:38:15.301473+00:00",
+  "reviewed_evidence": {
+    "SOURCE_INVENTORY.json": {
+      "sha256": "bf32e868c51884c0b730c306432cbd1377a4e3d766f5b06ecec7fc4bae997af7",
+      "status": "PINNED_SOURCE_INVENTORY"
+    },
+    "research/retained-owners.json": {
+      "sha256": "f613076919e831450a75fafb92e2259fd78d2b640d5359a9ea60489f530aaa6c",
+      "status": "PINNED_SOURCE_INVENTORY"
+    },
+    "verification/GENERATED_COMPARISON.json": {
+      "sha256": "44378db2d3d6dae5e6c5686f8b1174dd013ce519e1a58d7339775606575f9e12",
+      "status": "GENERATED_JAVA_PASS_NATIVE_GATE_SEPARATE"
+    },
+    "verification/baseline/RESULTS.json": {
+      "sha256": "dc761bfabdf8785e4fbb099ae6970a0acbf81f8cda0b67ebdc95ba0e97cbdbe1",
+      "status": "PASS"
+    },
+    "verification/generated/RESULTS.json": {
+      "sha256": "48ea94ba750af3acb228c2c854458149a08b0f5d7ea1bae99191eaa3d18014b4",
+      "status": "PASS"
+    },
+    "verification/native-final/RESULTS.json": {
+      "sha256": "10b0a99ab1651259a12398e1cce64f8906adfd10ef037dac4aefd0558d2cc263",
+      "status": "PASS"
+    },
+    "verification/retained-wrappers/RESULTS.json": {
+      "sha256": "0009f9e99b53878dd0a22e38d4b81175d16fd5e65d594d5941030d2d868834fd",
+      "status": "RETAINED_READONLY_POLICY_PASS_WITH_PRESERVED_KNOWN_FAILURES"
+    },
+    "verification/sdk/RESULTS.json": {
+      "sha256": "5e4d2fa1eab5702d65a1b6d44ca1a1d099d34e8e5620c85a4439a11c4d6823a1",
+      "status": "PASS"
+    }
+  },
+  "schema": "M3_COLLECTIONS_FINAL_READ_ONLY_REVIEW_V1",
+  "scope": "Exact selected opposite-known-order M3LongIndexProjection atom and its serial SDK, generated Java, and frozen native-final proof chain.",
+  "separate_retained_wrapper_findings": {
+    "findings": [
+      "Comparator-owned IllegalArgumentException is swallowed in the bounded read-only map witness. Both comparator-failure and the original default readonly mode stop at that first failure; their later mutable-set assertion is not reached.",
+      "The ordinary read-only iterator retains the indexed callback path and exceeds the original linear-work oracle: 787456 predicate calls for a 1024-element backing list. There is no traversal speed claim.",
+      "The ordinary read-only iterator does not detect the backing mutation in the original fail-fast witness. Later assertions in that mode are not reached."
+    ],
+    "interpretation": "Existing live-wrapper failures are preserved separately and are not results from or regressions caused by the selected detached-projection atom.",
+    "original_junit_tests_passed": 1,
+    "projection_regression": false,
+    "standalone_counts": {
+      "executed": 9,
+      "passed": 5,
+      "retained_known_failures": 4
+    },
+    "status": "RETAINED_READONLY_POLICY_PASS_WITH_PRESERVED_KNOWN_FAILURES"
+  },
+  "source_review": {
+    "cost": "The selected path partitions and copies each selected index once into one result int[]; O(n) time and index storage. No whole value copy or per-row objects are introduced.",
+    "native_bodies": "All three actual current C owners match retained immutable Git objects and SHA-256 pins; the stronger admitted-span native window implementation remains unchanged.",
+    "other_paths": "Encounter-order stable merge, same-order descriptor sharing, empty/singleton behavior, slicing, filtering, validation, detached snapshot ownership and address/native calls are unchanged.",
+    "physical_offsets": "The helper scans absolute index positions inside [from,to), passes base zero to the existing address kernel, and copies original physical indices. Sliced/filtered partial groups remain bounded; no prefix/suffix or double-offset exposure.",
+    "public_contract": "Only a private helper, its internal branch and cost documentation changed; recorded public/protected signatures and descriptors are byte-identical across baseline, generated Java and native-final.",
+    "selected_branch": "After the unchanged same-order/size<2 guard, order!=ENCOUNTER identifies exactly the opposite known sorted direction.",
+    "tie_stability": "Whole equal-value groups move in reverse group order; each group is copied forward, retaining physical occurrence order, including equal signed-long extrema."
+  },
+  "status": "PASS",
+  "tests_and_builds_executed_during_review": 0,
+  "unified_diff_sha256": "64244fea63a3c0fd66c28e2c6921fd6810164bfcbe45b190a1641396336a2cc2"
+}

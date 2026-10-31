@@ -1,0 +1,49 @@
+{
+  "schema": "M3_NATIVE_VM_INDEPENDENT_REVIEW_V1",
+  "baselineCommit": "a4415af418a9b0f21a06cd5801d238577fbb6eb7",
+  "sourceReviewOnly": true,
+  "targetRuntimeExecutedByReviewer": false,
+  "reviewDisposition": "No newly introduced blocking JNI defect identified in frozen five-file candidate; wider known gaps remain explicit",
+  "directSymbolFiles": 48,
+  "javaTableFiles": 24,
+  "javaTableDirectSymbolFiles": 23,
+  "remainingDirectSymbolFiles": 25,
+  "coverageCompleteForSpecifiedDirectSymbolSearch": true,
+  "scopeLimitation": "This enumerates direct-symbol owners plus the separately included frozen index; it does not enumerate all transitive String consumers or certify them.",
+  "candidateFiles": [
+    {
+      "path": "src/java.base/share/native/libjava/String.c",
+      "sha256": "44a1b43f07f62439f4ca35aeb674602a25184c7d5c28d5fec74192022fc2f2ce",
+      "gitBlob": "e8d3a9c0bbf36d6dedeb83c59d1f4d982d290011"
+    },
+    {
+      "path": "src/hotspot/share/prims/jni.cpp",
+      "sha256": "00ee5dbf5185b930e5f30f7b4532c59b0ef3a47e83c1196f63d10c75db5d5e53",
+      "gitBlob": "0e1de0e62b03e24d7e07e3b2b9cd7faab6071f0c"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringShadowRangeTest.java",
+      "sha256": "fd64f8ae0b0f1d74720ce7f34c6cf8ff9a268dbeae11b6be7c7fcfe0ba50ae49",
+      "gitBlob": "3b202df4285578af6773c6c33b4fb26a6b84a592"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringCriticalFirstTest.java",
+      "sha256": "d2dd195c4565ddca1a7c6bb24d74d805b8fec6c5ac5a06980de81fb98b0022b4",
+      "gitBlob": "dce922f5c28cac0fa65324376710ba3225e88ae3"
+    },
+    {
+      "path": "test/jdk/java/lang/String/libM3StringCriticalFirstTest.c",
+      "sha256": "cef9e8f2f4e43b2124a95a8bc34808a1a36de7a740bc93385ac2d0b6489d00b6",
+      "gitBlob": "fdfb6d11fa2bdf08f92ba89f8f2c5caeb785e4af"
+    }
+  ],
+  "donorBlobIndependentlyMatched": true,
+  "sourceCoverageSha256": "4de42cfe0c4ce70e0b9b3bcbf0d861795d2194998cc257e247794540c7bd8bb1",
+  "pendingFindings": [
+    "Serviceability m3OwnerCharAt lacks Immediate kind3 decoder",
+    "CodeUnitCursor does not implement existing M3ChunkCursor interface",
+    "GetStringCritical retains pre-existing signed s_len+1 allocation expression; extreme logical-length overflow remains unqualified",
+    "Critical-first fixture asserts some M3 values but not each owner kind; digest oracle is not exhaustive native buffer equivalence",
+    "Matched VM build/tests/GC/resource configurations pending; source review and stock oracle logs are not their replacement"
+  ]
+}

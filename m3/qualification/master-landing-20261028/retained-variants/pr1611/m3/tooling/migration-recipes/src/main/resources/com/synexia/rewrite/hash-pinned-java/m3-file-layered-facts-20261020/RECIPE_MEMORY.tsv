@@ -1,0 +1,3 @@
+utc	recipe	trigger	observed	correction	corrected_by	guard	lesson
+2026-10-20T14:30:00Z	com.m3.rewrite.file.M3FileLayeredFactsReceiverRecipe	user-requirement	M3_LAYERED_FACT_RECEIPTS_REQUIRED	initial-crate	GPT-5.6-Sol	M3FileLayeredFactsReceiverRecipeTest;M3FileStreamTest	Parser and index layers publish fixed-width receipts from one primary stream instead of forcing M3File to own parser-specific objects.
+2026-10-20T14:45:00Z	com.m3.rewrite.file.M3FileLayeredFactsReceiverRecipe	design-review	M3_FILE_FACT_IDENTICAL_DUPLICATE_SHOULD_CONVERGE	f349ba87452cf6498534f981c767205c0e4134d1	GPT-5.6-Sol	M3FileStreamTest#identicalFactReceiptsConvergeButConflictsFail	Fold exact duplicate named facts during sorted admission; reject only conflicting digests for the same name.

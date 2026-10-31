@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+# Exact first-party Synexia #12181 recipe outputs, no provider adapter subclass.
+schema	path	git_blob
+M3_SPRING_DIRECT_V1	m3/collections/interop/src/main/java/com/m3/collections/interop/M3SpringArrayMultiValueMap.java	47c6517b81a2091c48c88a03fc53533a9eb9ee9f
+M3_SPRING_DIRECT_V1	m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java	9a74a6645582019debc1c2dd4ba3c0278868ad30
+M3_SPRING_DIRECT_V1	m3/collections/interop/sdk-family-bindings.tsv	1ab6be7ce811207f4b873c5c7bfb87176259bab2
+M3_SPRING_DIRECT_V1	m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java	978dc2e1b8468ae3178a35adc478267d34723b4e

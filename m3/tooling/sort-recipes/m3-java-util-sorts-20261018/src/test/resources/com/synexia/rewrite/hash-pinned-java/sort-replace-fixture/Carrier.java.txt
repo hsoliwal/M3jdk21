@@ -1,0 +1,29 @@
+// SPDX-License-Identifier: Apache-2.0
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+package fixture;
+
+import java.io.StringReader;
+import java.util.function.IntUnaryOperator;
+
+/** The following is data: public void rewriteMe() { dangerous(); } */
+public final class Carrier {
+    private Carrier() {}
+    public static String observe() throws Exception {
+        String fake = "for (;;) { return -1; }";
+        String regex = "\\breturn\\s+\\d+\\b";
+        String code = """
+                if (pretend) { throw new UnsupportedOperationException(); }
+                // public int method() { return 999; }
+                """;
+        IntUnaryOperator plus = x -> x + 4;
+        try (StringReader reader = new StringReader("A")) {
+            return plus.applyAsInt(reader.read()) + ":" + new Pair(2, 3).sum()
+                    + ":" + fake + ":" + regex + ":" + code;
+        }
+    }
+    public record Pair(int left, int right) {
+        int sum() { return left + right; }
+    }
+    public sealed interface Token permits Value {}
+    public record Value(int number) implements Token {}
+}

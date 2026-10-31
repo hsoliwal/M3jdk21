@@ -1,0 +1,12 @@
+{
+  "repository": "hsoliwal/com.synexia",
+  "commit": "75b7e31199c4440e12c7c36f1746bf9b77f178a9",
+  "files": {
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java": "42ce1c8ac4dc83a850b900b3c5a0b60de98410495c7da0145ff99cc9d19e950f",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java": "2b64eee9b2930963a7442b6691993006cd7db3178975dc7071a8774e2046ba0f",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/LocalM3StringPiece.java": "3a39470d8d239487716f5b295cf4b222ef180013f50cbbfc06e577c344cb2b44",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java": "69669b30d87bdb686c38a125b748fb7defcd75168b50e0ff5a92b5f5e3562180",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenByteInterner.java": "1cf936e8aab4c4066f58ea41b817646bc06bca65a5c171724c0e6ae972e6eeb6"
+  },
+  "relationship": "All five production owners are byte-identical to 9c36c18; PR7392 adds parity recipe/harness only."
+}

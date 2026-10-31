@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FreeReuseJdkReceiver
+displayName: Recover the M3JDK21 policy and receive Synexia reuse
+description: Create the missing target policy only with the exact retained JDK build guard.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-jdk-free-reuse-target

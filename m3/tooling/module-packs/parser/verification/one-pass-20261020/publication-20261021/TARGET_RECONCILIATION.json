@@ -1,0 +1,46 @@
+{
+  "schema": "M3_PUBLICATION_TARGET_RECHECK_V1",
+  "date": "2026-10-21",
+  "repository": "hsoliwal/M3jdk21",
+  "prepared_base": "065e3626aac2de62d2f531aec3bed2fca533c9f9",
+  "inspected_target_head": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "inspected_root_tree": "91924b99946e1fb26c2447a332c59d997ff3baa9",
+  "ahead_by": 31,
+  "behind_by": 0,
+  "scope": "target-parser",
+  "actual_prepared_payload_paths": 171,
+  "counts": {
+    "total": 171,
+    "changes": {
+      "ADD": 165,
+      "MODIFY": 6
+    },
+    "drift": {
+      "UNCHANGED_PREIMAGE": 171
+    }
+  },
+  "path_seals": {
+    "path": "PATH_SEALS.tsv",
+    "sha256": "18e102a6ba9a1666b4c4bff7f3a4be72ffa198dc1c0832f3933521109ecc0d71"
+  },
+  "method": "Complete nontruncated bounded Git trees, anchored in the two root trees; unchanged blob/mode or unchanged proven absence for every actual prepared payload destination. The capped 300-file compare response was not used as complete overlap evidence.",
+  "integration": "Apply exact payload entries additively onto the current publication base; preserve unrelated intervening fleet files. Recheck moving heads before each integration.",
+  "root_agents_blob": "9cf0dc67aeb62237fb54c49b03586f3ae39bcc79",
+  "porting_invariant_blob": "291eec22b13d01baecf2c3acef24c3749e19cc24",
+  "mop_memory_specification_blob": "c9386f423cd810aa77379b980ed52153d2090ffb",
+  "active_qualification_phase": "STRING",
+  "phase_advanced": false,
+  "full_source_built_m3jdk21": "NOT_RUN_BY_THIS_RECHECK",
+  "full_maven_sdk": "NOT_RUN_BY_THIS_RECHECK",
+  "new_native_runtime_qualification": "NOT_RUN_BY_THIS_RECHECK",
+  "hosted_ci": "NOT_ESTABLISHED_BY_THIS_RECHECK",
+  "canonical_identity_not_asserted_by_this_read_only_record": true,
+  "remote_mutations_by_reviewer": false,
+  "unchanged_parser_subtree": "9587752ca265444e94078eb50b60ee7eec0c40bc",
+  "fresh_parser_sqlite_openrewrite_tests": "NOT_RUN_BY_THIS_RECHECK",
+  "retained_fleet_work": [
+    "module-packs/nlp-search",
+    "newer jmod M3ModuleDescriptorApply and verify_sdk_receiver tooling",
+    "global naming mappings"
+  ]
+}

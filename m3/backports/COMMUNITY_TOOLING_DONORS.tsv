@@ -1,0 +1,3 @@
+donor_id	repository	ref	pinned_head	plane	license	license_blob	copy_authority	selected_for_distribution	integration_mode	notes
+temurin-build	adoptium/temurin-build	master	cc31225e0aad72a5598d94e174cdd5c09e0d85a8	BUILD_TOOLING	Apache-2.0	d5dd862b1759bce588502bc0a7d4040e5fa9154e	false	false	ADAPT_OR_WRAP	OpenJDK build orchestration; SBOM/source pinning/DevKit/build metadata evidence
+aqavit-tests	adoptium/aqa-tests	master	6772f0835e011b175b4c1ad3a708f35912b6d249	TEST_AND_PERFORMANCE	Apache-2.0	d5dd862b1759bce588502bc0a7d4040e5fa9154e	false	false	ADAPT_OR_WRAP	OpenJDK/system/external/performance test orchestration evidence

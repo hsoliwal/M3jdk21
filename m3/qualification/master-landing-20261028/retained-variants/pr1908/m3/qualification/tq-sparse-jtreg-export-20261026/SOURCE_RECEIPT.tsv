@@ -1,0 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+# Review-only receipt: does not claim executed current-head jtreg, full image, JCK or release
+path	before_sha256	after_sha256	donor_evidence	admission
+.github/workflows/m3-regex-collection-superset.yml	e0612defaf95f0d18883f30005be4fb7af3f69e1eb0069aea87633b64382b18a	d20776893d287f04d63e64c523f056bffc282accd41a519b62d46d23a370feb1	Synexia#13301 JTREG compile failure captured	SOURCE_SEALED_CURRENT_HEAD_IMAGE_PENDING
+test/jdk/java/lang/String/M3TQSparseContainmentTest.java	94a1b87f6702a780173c14b9676400522c980b2da328b13321650f0df656c790	8ff07088ef10cff9b44e31be439e8b92b8c284ae04854c7832f96ba79cd88e50	Synexia#13301 m3-string-null-concat jtr blob 19ca187693bd05522dac21661d657d76a20d965d	JTREG_MODULE_EXPORT_FIX_UNTESTED

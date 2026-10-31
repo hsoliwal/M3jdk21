@@ -1,0 +1,15 @@
+# RowEditsBench 2026-10-19, JDK 21.0.9, -XX:+UseSerialGC -Xms512m -Xmx1g, n = 10^6 rows (heights 16..40, widths 40..239, seed 42), median of 7 runs, third round reported; bookkeeping between two layouts only (measuring new rows is the same for both and excluded); commit headroom 40 GB at start
+candidate	n	scenario	value	unit
+# candidates agree on every scenario
+piece_table	1000000	insert_front_1	1.333	ms
+shift_per_event	1000000	insert_front_1	0.962	ms
+piece_table	1000000	insert_random_40	1.959	ms
+shift_per_event	1000000	insert_random_40	15.531	ms
+piece_table	1000000	append_1000	1.240	ms
+shift_per_event	1000000	append_1000	0.505	ms
+piece_table	1000000	insert_front_1000	1.040	ms
+shift_per_event	1000000	insert_front_1000	346.491	ms
+piece_table	1000000	change_random_100	1.524	ms
+shift_per_event	1000000	change_random_100	0.881	ms
+piece_table	1000000	remove_random_100	2.960	ms
+shift_per_event	1000000	remove_random_100	16.090	ms

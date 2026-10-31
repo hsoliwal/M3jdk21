@@ -1,0 +1,3 @@
+PASS M3MaskNativeParityProof checks=11520 checkedJNI=true
+
+EXIT=0

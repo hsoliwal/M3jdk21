@@ -1,0 +1,8 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ViewOrderSdk20261020
+displayName: Qualify existing M3 stable index order on the current collection stack
+description: Reuses the existing view-order output and canonical hash-pinned Java owner without broadening source-path admission.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-view-order-sdk-20261020

@@ -1,0 +1,4 @@
+# M3JDK21 OpenJDK Actions artifact migration; source integrity only, release gates pending.
+# path	sha256-before	sha256-after	canonical-source	contract	qualification
+.github/workflows/main.yml	f39c030c6ecd4de2e6844ec02fdb4745d0da7c40531e9f9f3a4e829f459beaf5	13f63f4c372aae143a1d4a3f79ddb2d945497c14cb7c8ba70dd32b0509ae1ff6	hsoliwal/com.synexia	Bundled build artifacts deleted by bounded run-specific actions REST with cleanup-only token write	GHA_WORKFLOW_EXECUTION_PENDING
+.github/workflows/test.yml	48eb3174ea45dce0003f0615af4241f9532c68824b4670ebbafe3a0c347de353	e4401b7bdeffbda21fdc0eacec62644350c3593189767461c063bd2bb802fa06	hsoliwal/com.synexia	Per-matrix test-result archives retained with actions/upload-artifact v4	GHA_WORKFLOW_EXECUTION_PENDING

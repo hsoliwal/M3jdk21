@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Ic0Hts
+displayName: Ic0 Hts exact current snapshot
+description: Exact hash-pinned current c0 family; bounded task qualification only.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: ic0-hts

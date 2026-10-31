@@ -202,7 +202,7 @@ import jdk.internal.vm.annotation.IntrinsicCandidate;
 
     @Override
     public synchronized int length() {
-        return count;
+        return super.length(); //FLLDCIM: R5-BUILDER \u2014 pieces + flat chunks
     }
 
     @Override
@@ -504,6 +504,7 @@ import jdk.internal.vm.annotation.IntrinsicCandidate;
      */
     @Override
     public synchronized String substring(int start) {
+        m3EnsureFlat();
         return substring(start, count);
     }
 
@@ -687,6 +688,7 @@ import jdk.internal.vm.annotation.IntrinsicCandidate;
     @Override
     public int lastIndexOf(String str) {
         // Note, synchronization achieved via invocations of other StringBuffer methods
+        m3EnsureFlat();
         return lastIndexOf(str, count);
     }
 
@@ -715,6 +717,7 @@ import jdk.internal.vm.annotation.IntrinsicCandidate;
      */
     @Override
     public synchronized StringBuffer repeat(int codePoint, int count) {
+        toStringCache = null;
         super.repeat(codePoint, count);
         return this;
     }
@@ -726,6 +729,7 @@ import jdk.internal.vm.annotation.IntrinsicCandidate;
      */
     @Override
     public synchronized StringBuffer repeat(CharSequence cs, int count) {
+        toStringCache = null;
         super.repeat(cs, count);
         return this;
     }
@@ -734,7 +738,9 @@ import jdk.internal.vm.annotation.IntrinsicCandidate;
     @IntrinsicCandidate
     public synchronized String toString() {
         if (toStringCache == null) {
-            return toStringCache = new String(this, null);
+            //FLLDCIM: R5-BUILDER \u2014 the cache holds the composed M3 String; new String(cache) shares it
+            String composed = m3ComposedString();
+            return toStringCache = composed != null ? composed : new String(this, null);
         }
         return new String(toStringCache);
     }
@@ -768,6 +774,7 @@ import jdk.internal.vm.annotation.IntrinsicCandidate;
     @Serial
     private synchronized void writeObject(ObjectOutputStream s)
             throws IOException {
+        m3EnsureFlat(); //FLLDCIM: R5-BUILDER \u2014 serial form unchanged
         ObjectOutputStream.PutField fields = s.putFields();
         char[] val = new char[capacity()];
         if (isLatin1()) {

@@ -1,0 +1,57 @@
+{
+  "schema": "M3_AST_BUILD_RECEIVER_CONTRACT_V1",
+  "status": "PASS",
+  "dataset": "m3jdk21-wrapper-proof2-20261018",
+  "targets": 3,
+  "cases": [
+    {
+      "case": "check-no-write",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "apply-exact-sdk",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "fixed-point-no-write",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "late-drift-no-partial-write",
+      "exit_code": 1,
+      "expected_refusal": "target source drift: m3/collections/verification/wrapper-convergence-20261018/verify.py"
+    },
+    {
+      "case": "qualified-input-tamper",
+      "exit_code": 1,
+      "expected_refusal": "recipe changed after SDK qualification:"
+    },
+    {
+      "case": "sdk-result-tamper",
+      "exit_code": 1,
+      "expected_refusal": "SDK result changed after qualification: m3/collections/verification/wrapper-convergence-20261018/verify.py"
+    },
+    {
+      "case": "symlink-target",
+      "exit_code": 1,
+      "expected_refusal": "symlink target or parent is not admitted:"
+    },
+    {
+      "case": "mixed-pre-postimages",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "failed-sdk-test-refusal",
+      "exit_code": 1,
+      "expected_refusal": "all actual SDK qualification tests must execute successfully"
+    }
+  ],
+  "actual_sdk_results": true,
+  "product_files_written": false,
+  "sdk_inputs_sha256": "fbf3a62b84e9e6947d2fe79f0c945857d2a5afae91e847e4e1b2eab624f433c8",
+  "sdk_results_sha256": "f36aea78c259571800d34b80ba80efe0262bbbc7ae656b8093b9656d7d3c3d3b"
+}

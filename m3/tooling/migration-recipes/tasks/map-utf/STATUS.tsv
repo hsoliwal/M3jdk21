@@ -1,0 +1,10 @@
+task	state	evidence
+mapfacts-recovery	RUNTIME_VERIFIED_SUBSET	370960 assertions per run; prior work reused
+utf8-binding	RUNTIME_VERIFIED_SUBSET	985026 assertions per run;16 baseline defects
+original-mapguard	RUNTIME_VERIFIED_SUBSET	78 checks; original tests unchanged
+mutation	PASS	4 actual compiled mutants rejected
+public-surface	PASS	3 javap surfaces unchanged
+recipe-framework	UNEXECUTED	7 new JUnit cases; Maven absent
+coverage-99	UNMEASURED	No JaCoCo result
+full-jdk-image	BLOCKED	Full checkout/native prerequisites not available
+all-jdk-programme	OPEN	Other whole-JDK work packets not closed

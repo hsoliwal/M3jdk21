@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/jdk-21+35/bin/javac",
+    "--release",
+    "21",
+    "-proc:none",
+    "-encoding",
+    "UTF-8",
+    "-d",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/compiled",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/materialized/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java"
+  ],
+  "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/materialized",
+  "start_utc": "2026-10-06T05:30:10.559721+00:00",
+  "java_home": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/jdk-21+35",
+  "finish_utc": "2026-10-06T05:30:11.131381+00:00",
+  "exit_code": 0,
+  "log": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/execution/02-actual-produced-javac.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+  }
+}

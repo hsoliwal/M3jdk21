@@ -1,0 +1,2 @@
+src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java	845c70bdc5e77a62282417889dc77bf466fd0c0005f72112e86faf27ec616399	8b426b59796942253765c0fe45725d4b3e0f3640a3dffe4ec3d8c44413109bb3	0003-M3ASTPC.java.txt
+test/langtools/tools/javac/m3/M3ASTSourceSealTest.java	ABSENT	1b3423999ac2644f17ba6bc743f3873f4130846acc4e346518e16958606e5e1a	0004-M3ASTSourceSealTest.java.txt

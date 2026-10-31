@@ -1,0 +1,164 @@
+[
+  {
+    "lane": "baseline",
+    "jvm": 1,
+    "sample": 0,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 26206400,
+    "bytes_per_operation": 262064.0
+  },
+  {
+    "lane": "baseline",
+    "jvm": 1,
+    "sample": 1,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 26206400,
+    "bytes_per_operation": 262064.0
+  },
+  {
+    "lane": "baseline",
+    "jvm": 1,
+    "sample": 2,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 26206400,
+    "bytes_per_operation": 262064.0
+  },
+  {
+    "lane": "receiver",
+    "jvm": 1,
+    "sample": 0,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 13104800,
+    "bytes_per_operation": 131048.0
+  },
+  {
+    "lane": "receiver",
+    "jvm": 1,
+    "sample": 1,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 13104800,
+    "bytes_per_operation": 131048.0
+  },
+  {
+    "lane": "receiver",
+    "jvm": 1,
+    "sample": 2,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 13104800,
+    "bytes_per_operation": 131048.0
+  },
+  {
+    "lane": "baseline",
+    "jvm": 2,
+    "sample": 0,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 26206400,
+    "bytes_per_operation": 262064.0
+  },
+  {
+    "lane": "baseline",
+    "jvm": 2,
+    "sample": 1,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 26206400,
+    "bytes_per_operation": 262064.0
+  },
+  {
+    "lane": "baseline",
+    "jvm": 2,
+    "sample": 2,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 26206400,
+    "bytes_per_operation": 262064.0
+  },
+  {
+    "lane": "receiver",
+    "jvm": 2,
+    "sample": 0,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 13104800,
+    "bytes_per_operation": 131048.0
+  },
+  {
+    "lane": "receiver",
+    "jvm": 2,
+    "sample": 1,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 13104800,
+    "bytes_per_operation": 131048.0
+  },
+  {
+    "lane": "receiver",
+    "jvm": 2,
+    "sample": 2,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 13104800,
+    "bytes_per_operation": 131048.0
+  },
+  {
+    "lane": "baseline",
+    "jvm": 3,
+    "sample": 0,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 26206400,
+    "bytes_per_operation": 262064.0
+  },
+  {
+    "lane": "baseline",
+    "jvm": 3,
+    "sample": 1,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 26206400,
+    "bytes_per_operation": 262064.0
+  },
+  {
+    "lane": "baseline",
+    "jvm": 3,
+    "sample": 2,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 26206400,
+    "bytes_per_operation": 262064.0
+  },
+  {
+    "lane": "receiver",
+    "jvm": 3,
+    "sample": 0,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 13104800,
+    "bytes_per_operation": 131048.0
+  },
+  {
+    "lane": "receiver",
+    "jvm": 3,
+    "sample": 1,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 13104800,
+    "bytes_per_operation": 131048.0
+  },
+  {
+    "lane": "receiver",
+    "jvm": 3,
+    "sample": 2,
+    "units": 32750,
+    "operations": 100,
+    "bytes": 13104800,
+    "bytes_per_operation": 131048.0
+  }
+]

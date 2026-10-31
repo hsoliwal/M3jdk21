@@ -1,0 +1,97 @@
+{
+  "allChangesAreDeclaredAdditions": true,
+  "attributes": {
+    "globalFile": "/dev/null",
+    "infoAttributesAbsent": true,
+    "initTemplateEmpty": true,
+    "repositoryAttributesRecheckedAroundCommands": true,
+    "repositoryBlob": "eb8e244dde7c89357de437e7449500a158c3c5f6",
+    "systemAttributesDisabled": true
+  },
+  "baseCommit": "2b05a83fe790ae5b1926eed6bba88a6d5b3c0619",
+  "baseTree": "d1e34c8025f5797d1e3ba696b6ee710cb2a2fb7e",
+  "bytes": 13951192,
+  "fileCount": 72,
+  "fixtureCommits": {
+    "base": "25d1fa999223f51a04061f13e45e72027f71a456",
+    "candidate": "6f66847d88189a0eee1f490e6e80ec4117e19507",
+    "publicationCommits": false
+  },
+  "fullCheckoutPerformed": false,
+  "gitConfiguration": {
+    "bytes": 92,
+    "gitBlob": "515f4836297fdf7567c066983c16e5eff598f7bd",
+    "sha256": "cfe7ba1238c9a78be7535d7c63bcaf5a4d5011d46b07c9b45d3bbf7d6c312dfe"
+  },
+  "gitExecutable": {
+    "bytes": 19135768,
+    "gitBlob": "c1c696819ccb0e54b37970624bd8198105ef2536",
+    "path": "/usr/local/bin/git",
+    "sha256": "2dae8066ef4d6a926561b4b0eaca7b458d4f5b56bb83760656e6baa7fc3e974f"
+  },
+  "githubWrites": false,
+  "manifest": {
+    "bytes": 38271,
+    "gitBlob": "01d80910ea005cc2742c18c81307e27169292f67",
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/SOURCE-PUBLICATION-MANIFEST.json",
+    "sha256": "c9ceefe3934c216c5e64888a20db86cb7270ecec83069a93c561bd4f90adec40"
+  },
+  "predictedFinalTree": "2350ac5bb6a891771335784f3498bb120bd20bf9",
+  "publicationRequirement": "GitHub created tree root must equal predictedFinalTree before commit/ref publication.",
+  "receipts": [
+    {
+      "bytes": 730,
+      "gitBlob": "d2ef094088d62e53a9bd3775cd8af279bc686482",
+      "path": "commands/0001-git-version.json",
+      "sha256": "b11e50f0135161c45d6b82aee53e7670ad47cf8a35ab02b4e57c0505279c0f05"
+    },
+    {
+      "bytes": 1138,
+      "gitBlob": "35133ad9e50c5eaeec580bcf29697fc6b283b73c",
+      "path": "commands/0002-git-init.json",
+      "sha256": "7abe3daec1365d534e67065032e11c18a8b3def14a54b470f4e8f8e94977f8e2"
+    },
+    {
+      "bytes": 1125,
+      "gitBlob": "bb9c5c69e0c6e00d5a893d4f7fda97edf0608b8d",
+      "path": "commands/0003-native-tree-objects.json",
+      "sha256": "fe1ba7cf54a87d3a929d9d04e121fc4d605e41682aba79a23339943a0f0554af"
+    },
+    {
+      "bytes": 1123,
+      "gitBlob": "177636512c087ae9ebdd2ec2f916df2192858644",
+      "path": "commands/0004-native-blob-objects.json",
+      "sha256": "e9ff44d46826ed233896ea9b6a8c7f54eca8e1156cd8c644de3a19e20da93983"
+    },
+    {
+      "bytes": 1082,
+      "gitBlob": "f87329d00647e5f9ebe55293f127bc0685e8cae1",
+      "path": "commands/0005-fixture-base.json",
+      "sha256": "025e21a18e9ad6b0e36f86bb38b7c091a72c51ca05f0120b905a977f78f55451"
+    },
+    {
+      "bytes": 1138,
+      "gitBlob": "8e5407210bf68c222a52b824086ab8b9b8dd6d85",
+      "path": "commands/0006-fixture-new.json",
+      "sha256": "7012a8e552813c767f5d814ffbafbd394a4344c3075fea9b8eca6190ba5a8418"
+    },
+    {
+      "bytes": 1136,
+      "gitBlob": "d99c3ef8179cf5cf27c768b00066c3ff9a9d5dda",
+      "path": "commands/0007-complete-raw-diff.json",
+      "sha256": "3e581fef8d7fd61a0b1386fde8a031da10fa229b3c524656cfc7e55efb3368c4"
+    },
+    {
+      "bytes": 1131,
+      "gitBlob": "45249afc0a36291d773936c6e4e7c946cf8a119e",
+      "path": "commands/0008-complete-diff-check.json",
+      "sha256": "06b52ad017055f5b521cf47b0ba4865cea3258f3a77dfebcfa85b49e96a77caa"
+    }
+  ],
+  "retainedOriginalPaths": 642,
+  "retainedPublishedTaskPaths": 435,
+  "retainedTotalPaths": 1077,
+  "schema": "synexia.source-final-git-check/1",
+  "semanticOrReactorQualification": false,
+  "status": "PASS_COMPLETE_CHANGED_PATH_CHECK"
+}

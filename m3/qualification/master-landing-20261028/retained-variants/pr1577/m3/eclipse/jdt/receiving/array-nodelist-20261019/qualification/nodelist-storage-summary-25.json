@@ -1,0 +1,61 @@
+{
+  "java": "Temurin25.0.4.1+1",
+  "heap": "-Xms256m -Xmx256m",
+  "blocks": 10000,
+  "measurement": "Instrumentation.getObjectSize for distinct objects directly owned by the NodeList store; AST nodes excluded",
+  "scope": "One paired run per arity, with seven samples after ten warmup iterations. Timing and RSS are observations, not adoption claims.",
+  "rows": [
+    {
+      "childrenPerBlock": 0,
+      "baselineRetainedBytes": 560016,
+      "generatedRetainedBytes": 400016,
+      "savedRetainedBytes": 160000,
+      "savedRetainedObjects": 10000,
+      "medianAllocatedBytesBefore": 1161944,
+      "medianAllocatedBytesAfter": 1001944,
+      "medianThreadCpuNanosBefore": 1302355,
+      "medianThreadCpuNanosAfter": 861193,
+      "rssKiBBefore": 87104,
+      "rssKiBAfter": 83900
+    },
+    {
+      "childrenPerBlock": 1,
+      "baselineRetainedBytes": 800000,
+      "generatedRetainedBytes": 640000,
+      "savedRetainedBytes": 160000,
+      "savedRetainedObjects": 10000,
+      "medianAllocatedBytesBefore": 1881944,
+      "medianAllocatedBytesAfter": 1721944,
+      "medianThreadCpuNanosBefore": 5060181,
+      "medianThreadCpuNanosAfter": 4192738,
+      "rssKiBBefore": 101420,
+      "rssKiBAfter": 98436
+    },
+    {
+      "childrenPerBlock": 4,
+      "baselineRetainedBytes": 880000,
+      "generatedRetainedBytes": 720000,
+      "savedRetainedBytes": 160000,
+      "savedRetainedObjects": 10000,
+      "medianAllocatedBytesBefore": 4201944,
+      "medianAllocatedBytesAfter": 4041944,
+      "medianThreadCpuNanosBefore": 21501517,
+      "medianThreadCpuNanosAfter": 16291819,
+      "rssKiBBefore": 115184,
+      "rssKiBAfter": 115384
+    },
+    {
+      "childrenPerBlock": 16,
+      "baselineRetainedBytes": 1520000,
+      "generatedRetainedBytes": 1360000,
+      "savedRetainedBytes": 160000,
+      "savedRetainedObjects": 10000,
+      "medianAllocatedBytesBefore": 12601944,
+      "medianAllocatedBytesAfter": 12441944,
+      "medianThreadCpuNanosBefore": 58602911,
+      "medianThreadCpuNanosAfter": 53150013,
+      "rssKiBBefore": 187596,
+      "rssKiBAfter": 187148
+    }
+  ]
+}

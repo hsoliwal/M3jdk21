@@ -1,0 +1,8 @@
+gate	command	state
+java21_compile	javac --release 21 -proc:none -Xlint:all -Werror -d classes M3ASTHierarchy.java M3ASTHierarchyContract.java	PASS
+scope_corpus	java -Xmx256m -cp classes com.m3.ast.M3ASTHierarchyContract 2000	PASS
+maven_module	mvn -B -ntp -f m3/ast/pom.xml test	NOT_RUN
+maven_openrewrite_sdk	mvn -B -ntp -pl synexia-openrewrite-recipes -am rewrite:dryRun	NOT_RUN
+jdk_build	bash m3/build-openjdk.sh	NOT_RUN
+jtreg	jtreg selected compiler/java.base cases	NOT_RUN
+native_jni	no JNI change in this candidate	NOT_APPLICABLE

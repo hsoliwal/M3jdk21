@@ -1,0 +1,7 @@
+GEOMETRY_BASELINE_REPRODUCED checks=5723783 ordinaryFailures=0 oracleDigest=27d10dbfbd5f515a
+mulDiv mismatches=0
+hasThumb mismatches=0
+thumbLength mismatches=1156
+thumbStart mismatches=571
+selectionAt mismatches=1771
+hit mismatches=1124782

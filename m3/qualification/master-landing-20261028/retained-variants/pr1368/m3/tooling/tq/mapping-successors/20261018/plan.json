@@ -1,0 +1,585 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "mapping-source-custody-20261018",
+  "outputs": [
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before": {
+        "resource": "payloads/before/0001-name-mapping.json.txt",
+        "sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3"
+      },
+      "after": {
+        "resource": "payloads/after/0001-name-mapping.json.txt",
+        "sha256": "56bc21c6dab332ba39527eef3f95e761936138407aee951ab1e020cbd28dccc4"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/plan.json",
+      "before": {
+        "resource": "payloads/before/0002-plan.json.txt",
+        "sha256": "592477414957af5b2780b5c9e4ce09391e6f3dc60d11e3ceff5cd0683338796b"
+      },
+      "after": {
+        "resource": "payloads/after/0002-plan.json.txt",
+        "sha256": "5154eae1ef6be6fce56e641bc633b0031efd849e37482a2270b179e8bf9bbb02"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/manifest.tsv",
+      "before": {
+        "resource": "payloads/before/0003-manifest.tsv.txt",
+        "sha256": "a90b5a4571363d6a34bacf94daa0671cd447196b2938fa62545aed5e39a1458b"
+      },
+      "after": {
+        "resource": "payloads/after/0003-manifest.tsv.txt",
+        "sha256": "1e9236bd9b740a3e5094edfb6b73d8e9a2d298f60bdfe01a640254eb98dcc004"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt",
+      "before": {
+        "resource": "payloads/before/0004-name-mapping.json.txt.txt",
+        "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
+      },
+      "after": {
+        "resource": "payloads/after/0004-name-mapping.json.txt.txt",
+        "sha256": "b454f2ef3aca8fa9de6a39cf8b0840d1a698db6b1d2a6701b9c2a22729586eb3"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before",
+      "before": {
+        "resource": "payloads/before/0005-name-mapping.json.txt.before.txt",
+        "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
+      },
+      "after": {
+        "resource": "payloads/after/0005-name-mapping.json.txt.before.txt",
+        "sha256": "d2558aa9a213ea1f6affd03c918fc1466c58096e3a8ee4c59b5d271096105aa5"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/DATASET.json",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0006-DATASET.json.txt",
+        "sha256": "980597178661fec942255b7b04cc3ca09b2702335915c5598967582e4ff6b9d8"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/ENGINE_EFFECTIVE.tsv",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0007-ENGINE_EFFECTIVE.tsv.txt",
+        "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/README.md",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0008-README.md.txt",
+        "sha256": "4b909693eb842c00d5054a7d6bfa5ecb55237b9559f4c5f9328ba396ccf4bea1"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/SDK_INPUTS.tsv",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0009-SDK_INPUTS.tsv.txt",
+        "sha256": "5b374bb56dba5b5b8fbe0f563782229b8666268f4ef1185c0ed3e2d6e60b7c5f"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/SDK_QUALIFICATION.xml",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0010-SDK_QUALIFICATION.xml.txt",
+        "sha256": "44b0132eaca37d18b37c4f39d0b91f4f155aeae04f3093ebf8221b261d1a3b41"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/SDK_RESULTS.tsv",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0011-SDK_RESULTS.tsv.txt",
+        "sha256": "5a8a37afa7757b2a345914ed673135b28debc7bd0bfd1e35ad754ec7831aa147"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/SOURCE_WITNESS.json",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0012-SOURCE_WITNESS.json.txt",
+        "sha256": "add3acf4e2b78f26ee840d8d85ba53c0dd29d1f3b04488e3228bbb682b12a703"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/TARGETS.tsv",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0013-TARGETS.tsv.txt",
+        "sha256": "1bbbe4d4841c1265ade15f770be6e70c27d25e737da01428ef1f6fa5407ebfc0"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018.yml",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0014-m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018.yml.txt",
+        "sha256": "f592199953b479a4aa70e092adecd052604f84d8733e25a05d9d6fa99e9b2c52"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0001-M3StringFacts.java.txt",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0015-0001-M3StringFacts.java.txt.txt",
+        "sha256": "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0002-M3StringPrecomputeBridge.java.txt",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0016-0002-M3StringPrecomputeBridge.java.txt.txt",
+        "sha256": "fb9bcce115dc5dc378311522b81212a7d8f2b932c88e6b350b9f3b15ba4ad77a"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0003-System.java.txt",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0017-0003-System.java.txt.txt",
+        "sha256": "ded729befad98c337bc650f07d5ddbe1c5599cc0dc3cc1a42163273cef7fcdf2"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0004-Matcher.java.txt",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0018-0004-Matcher.java.txt.txt",
+        "sha256": "43332bd7bbd235d7937da53d467672887b411c6a4a4e77bbf9462e1d877eb876"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0005-JavaLangAccess.java.txt",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0019-0005-JavaLangAccess.java.txt.txt",
+        "sha256": "d77aa827b5f9e94b0a3922cbb63a74478a8c225a29c82498c782252683a1e01d"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/0006-M3RegexReuseTest.java.txt",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0020-0006-M3RegexReuseTest.java.txt.txt",
+        "sha256": "fd289321fb6d5792bf59f08f3987d9f96f2e8659be87a11735a19da1692c34d0"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/manifest.tsv",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0021-manifest.tsv.txt",
+        "sha256": "3d805f0601e3460d9773e15736f759ef2d5519ecac47cf9da548079db27743a1"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0001-M3StringFacts.java.txt",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0022-0001-M3StringFacts.java.txt.txt",
+        "sha256": "34663f5b64dbd44b566e655a17170b36f55c19f9e0e630c02ed291f78422e267"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0002-M3StringPrecomputeBridge.java.txt",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0023-0002-M3StringPrecomputeBridge.java.txt.txt",
+        "sha256": "030689833d079ca28efef49664e8bc3047afd3c6c41f3db75873a40a88a2d53d"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0003-System.java.txt",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0024-0003-System.java.txt.txt",
+        "sha256": "4dcf8f1efbfe1b6ee1e9c5417fa3df50647bb55dc636411d783c844aa5e0847c"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0004-Matcher.java.txt",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0025-0004-Matcher.java.txt.txt",
+        "sha256": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0005-JavaLangAccess.java.txt",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0026-0005-JavaLangAccess.java.txt.txt",
+        "sha256": "b096377681dbc135d90f26abc972769557ae7c271d48ad59d241e149658438e3"
+      }
+    },
+    {
+      "path": "m3/tooling/mr/recipe-witnesses/20261018-canonical-b/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-regex-facts-v2-20261018/pre/0006-M3RegexReuseTest.java.txt",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0027-0006-M3RegexReuseTest.java.txt.txt",
+        "sha256": "922d6c26a0ffe5bfa9a239a6e7f2e3380dfb0a37a568a007915246005c642364"
+      }
+    },
+    {
+      "path": "m3/tooling/tq-sync/plan.json",
+      "before": {
+        "resource": "payloads/before/0028-plan.json.txt",
+        "sha256": "651ffe3803188a9bf6aba81bf9fb50ef2027b8cafe816017542ee4d4f5d9c2f8"
+      },
+      "after": {
+        "resource": "payloads/sparse-input-epoch/after/0001-plan.json.txt",
+        "sha256": "f6208b4651586ffc9dde2a40a0a87401204bc481147cfea2ad09f75511a5d1aa"
+      }
+    },
+    {
+      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt",
+      "before": {
+        "resource": "payloads/before/0029-03-name-mapping.json.txt.txt",
+        "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
+      },
+      "after": {
+        "resource": "payloads/after/0029-03-name-mapping.json.txt.txt",
+        "sha256": "b454f2ef3aca8fa9de6a39cf8b0840d1a698db6b1d2a6701b9c2a22729586eb3"
+      }
+    },
+    {
+      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt.before",
+      "before": {
+        "resource": "payloads/before/0030-03-name-mapping.json.txt.before.txt",
+        "sha256": "22ce39ac68e6f5efab18e9bbf6d3da45af585067d88848f1eb7ce8a76987df87"
+      },
+      "after": {
+        "resource": "payloads/after/0030-03-name-mapping.json.txt.before.txt",
+        "sha256": "1bf2190ddf6481e7eb4fe7eee64aca7f3476be0a24ad60424b99bc5e5e1c21ac"
+      }
+    },
+    {
+      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/04-plan.json.txt",
+      "before": {
+        "resource": "payloads/before/0031-04-plan.json.txt.txt",
+        "sha256": "592477414957af5b2780b5c9e4ce09391e6f3dc60d11e3ceff5cd0683338796b"
+      },
+      "after": {
+        "resource": "payloads/after/0031-04-plan.json.txt.txt",
+        "sha256": "5154eae1ef6be6fce56e641bc633b0031efd849e37482a2270b179e8bf9bbb02"
+      }
+    },
+    {
+      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/05-manifest.tsv.txt",
+      "before": {
+        "resource": "payloads/before/0032-05-manifest.tsv.txt.txt",
+        "sha256": "a90b5a4571363d6a34bacf94daa0671cd447196b2938fa62545aed5e39a1458b"
+      },
+      "after": {
+        "resource": "payloads/after/0032-05-manifest.tsv.txt.txt",
+        "sha256": "1e9236bd9b740a3e5094edfb6b73d8e9a2d298f60bdfe01a640254eb98dcc004"
+      }
+    },
+    {
+      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/06-name-mapping.json.txt.txt",
+      "before": {
+        "resource": "payloads/before/0033-06-name-mapping.json.txt.txt.txt",
+        "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
+      },
+      "after": {
+        "resource": "payloads/after/0033-06-name-mapping.json.txt.txt.txt",
+        "sha256": "b454f2ef3aca8fa9de6a39cf8b0840d1a698db6b1d2a6701b9c2a22729586eb3"
+      }
+    },
+    {
+      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/07-name-mapping.json.txt.before.txt",
+      "before": {
+        "resource": "payloads/before/0034-07-name-mapping.json.txt.before.txt.txt",
+        "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
+      },
+      "after": {
+        "resource": "payloads/after/0034-07-name-mapping.json.txt.before.txt.txt",
+        "sha256": "d2558aa9a213ea1f6affd03c918fc1466c58096e3a8ee4c59b5d271096105aa5"
+      }
+    },
+    {
+      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/09-inputs.tsv.txt",
+      "before": {
+        "resource": "payloads/sparse-input-epoch/before/0002-09-inputs.tsv.txt.txt",
+        "sha256": "6f602866bae4dc215675311740a6f3d9b7795c866674e3f1f813c37ad07c075a"
+      },
+      "after": {
+        "resource": "payloads/sparse-input-epoch/after/0002-09-inputs.tsv.txt.txt",
+        "sha256": "f7700900ee124965cac684215f83cc6589bb7393c8e7b3b4985a57ae56163310"
+      }
+    },
+    {
+      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt",
+      "before": {
+        "resource": "payloads/before/0035-11-plan.json.txt.txt",
+        "sha256": "1779dde108352325ca972cbc8325718b17c131f5883229c25e635ea4aac19880"
+      },
+      "after": {
+        "resource": "payloads/after/0035-11-plan.json.txt.txt",
+        "sha256": "025081f4d4a77dfd3525c5bb4b2acaf6826faa4b916ab8b6bd906c6f3e1db13f"
+      }
+    },
+    {
+      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/12-manifest.tsv.txt",
+      "before": {
+        "resource": "payloads/before/0036-12-manifest.tsv.txt.txt",
+        "sha256": "456ce63b32cbeecefb417f082b4faf734d1652e7dc1a6c60e46bc86bde09d608"
+      },
+      "after": {
+        "resource": "payloads/after/0036-12-manifest.tsv.txt.txt",
+        "sha256": "cf2c1c9c6e66231c7726ad1f10f74a41591a6bf6e3f2e04e0d8848ad0b479a8a"
+      }
+    },
+    {
+      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/13-name-mapping.json.txt.txt",
+      "before": {
+        "resource": "payloads/before/0037-13-name-mapping.json.txt.txt.txt",
+        "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
+      },
+      "after": {
+        "resource": "payloads/after/0037-13-name-mapping.json.txt.txt.txt",
+        "sha256": "d2558aa9a213ea1f6affd03c918fc1466c58096e3a8ee4c59b5d271096105aa5"
+      }
+    },
+    {
+      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/14-name-mapping.json.txt.before.txt",
+      "before": {
+        "resource": "payloads/before/0038-14-name-mapping.json.txt.before.txt.txt",
+        "sha256": "bc6f8d7d7562d067d916a4987749019c5085e88665592ac533b49ef9a4856132"
+      },
+      "after": {
+        "resource": "payloads/after/0038-14-name-mapping.json.txt.before.txt.txt",
+        "sha256": "cfdb6e5472c8ef22047acf01d562dc2857255ab9b53487847790310e2e467e9b"
+      }
+    },
+    {
+      "path": "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv",
+      "before": {
+        "resource": "payloads/before/0039-manifest.tsv.txt",
+        "sha256": "6aeb3e02fca5dd93a2b515d92fdd52b722499509f904a80b861bfeaab4ed297c"
+      },
+      "after": {
+        "resource": "payloads/sparse-input-epoch/after/0003-manifest.tsv.txt",
+        "sha256": "fd78ae34f836e18f8dcedc133eba9413aa842f511e50b9551ceae1f4523d1426"
+      }
+    },
+    {
+      "path": "m3/tooling/tq/current-20261018-plan.json",
+      "before": {
+        "resource": "payloads/before/0040-current-20261018-plan.json.txt",
+        "sha256": "1779dde108352325ca972cbc8325718b17c131f5883229c25e635ea4aac19880"
+      },
+      "after": {
+        "resource": "payloads/after/0040-current-20261018-plan.json.txt",
+        "sha256": "025081f4d4a77dfd3525c5bb4b2acaf6826faa4b916ab8b6bd906c6f3e1db13f"
+      }
+    },
+    {
+      "path": "m3/tooling/tq/inputs.tsv",
+      "before": {
+        "resource": "payloads/sparse-input-epoch/before/0004-inputs.tsv.txt",
+        "sha256": "6f602866bae4dc215675311740a6f3d9b7795c866674e3f1f813c37ad07c075a"
+      },
+      "after": {
+        "resource": "payloads/sparse-input-epoch/after/0004-inputs.tsv.txt",
+        "sha256": "f7700900ee124965cac684215f83cc6589bb7393c8e7b3b4985a57ae56163310"
+      }
+    },
+    {
+      "path": "m3/tooling/tq/mapping-successors/20261018/README.md",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0041-README.md.txt",
+        "sha256": "b523a46094eee67f8de44e407567da98d78d4b55992a53e36b9f1278698867f1"
+      }
+    },
+    {
+      "path": "m3/tooling/tq/mapping-successors/20261018/RECEIVING_CONTRACT.json",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0042-RECEIVING_CONTRACT.json.txt",
+        "sha256": "b937cc26f437d0a7f6730c9702375d363445fae82ae5094fac38268e7c1f005f"
+      }
+    },
+    {
+      "path": "m3/tooling/tq/mapping-successors/20261018/history/SOURCE_ARCHIVE.json",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0043-SOURCE_ARCHIVE.json.txt",
+        "sha256": "8efffa8f29807694e676296c54ba55d2cc5f1a50f1b2f2dff0250deb33680ab6"
+      }
+    },
+    {
+      "path": "m3/tooling/tq/mapping-successors/20261018/source-witnesses/sparse.json",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0044-sparse.json.txt",
+        "sha256": "f6f0c6ad7ddc0f30394bf31bdb3b9f83296446aec56ef64ad7f313c8277ccd2b"
+      }
+    },
+    {
+      "path": "m3/tooling/tq/plan.json",
+      "before": {
+        "resource": "payloads/before/0045-plan.json.txt",
+        "sha256": "1779dde108352325ca972cbc8325718b17c131f5883229c25e635ea4aac19880"
+      },
+      "after": {
+        "resource": "payloads/after/0045-plan.json.txt",
+        "sha256": "025081f4d4a77dfd3525c5bb4b2acaf6826faa4b916ab8b6bd906c6f3e1db13f"
+      }
+    },
+    {
+      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/manifest.tsv",
+      "before": {
+        "resource": "payloads/before/0046-manifest.tsv.txt",
+        "sha256": "456ce63b32cbeecefb417f082b4faf734d1652e7dc1a6c60e46bc86bde09d608"
+      },
+      "after": {
+        "resource": "payloads/after/0046-manifest.tsv.txt",
+        "sha256": "cf2c1c9c6e66231c7726ad1f10f74a41591a6bf6e3f2e04e0d8848ad0b479a8a"
+      }
+    },
+    {
+      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt",
+      "before": {
+        "resource": "payloads/before/0047-name-mapping.json.txt.txt",
+        "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
+      },
+      "after": {
+        "resource": "payloads/after/0047-name-mapping.json.txt.txt",
+        "sha256": "d2558aa9a213ea1f6affd03c918fc1466c58096e3a8ee4c59b5d271096105aa5"
+      }
+    },
+    {
+      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before",
+      "before": {
+        "resource": "payloads/before/0048-name-mapping.json.txt.before.txt",
+        "sha256": "bc6f8d7d7562d067d916a4987749019c5085e88665592ac533b49ef9a4856132"
+      },
+      "after": {
+        "resource": "payloads/after/0048-name-mapping.json.txt.before.txt",
+        "sha256": "cfdb6e5472c8ef22047acf01d562dc2857255ab9b53487847790310e2e467e9b"
+      }
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-tq-sparse-lookup.yml",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0049-m3jdk21-tq-sparse-lookup.yml.txt",
+        "sha256": "6d6cce9b0c7a7abb4030eb24959bb4fd3c84195c3367eb00fcebfa1bdae0776e"
+      }
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQ.java.txt",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0050-M3TQ.java.txt.txt",
+        "sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4"
+      }
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/M3TQSparseContainmentTest.java.txt",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0051-M3TQSparseContainmentTest.java.txt.txt",
+        "sha256": "94a1b87f6702a780173c14b9676400522c980b2da328b13321650f0df656c790"
+      }
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
+      "before": null,
+      "after": {
+        "resource": "payloads/after/0052-manifest.tsv.txt",
+        "sha256": "725a5dbccbfa4ff834586c21f9c495fffec985dd9d9033f86fc6e808ea421fa2"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"
+    },
+    {
+      "path": "m3/migration/migration.py",
+      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+      "sha256": "54fd1fa51872048d8427594691838e27912187ae539463fde51aea5c62e46831"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8133bcf7e9f750c714cdd42784bdf30b60f67dd957b2831cd54cb01c9a2cfc3a"
+    },
+    {
+      "path": "m3/tooling/tq-sync/src/test/java/com/m3/tq/TQSyncTest.java",
+      "sha256": "6e7a56c85819115303df92cec677bf851abae19bbbcb5c31553d52e4c6db7084"
+    },
+    {
+      "path": "m3/tooling/tq-sync/verify-plan.py",
+      "sha256": "905fb42c90ef44cbc5d4449218b825eca025fd23ae169b15606b0b95de359793"
+    },
+    {
+      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-tq-current-20261018/manifest.tsv",
+      "sha256": "cac30c16f176f9c269f9c910b4d5079d54496691486e7cc0d2db67b74760b511"
+    },
+    {
+      "path": "m3/tooling/tq/src/test/java/com/m3/tq/TQTest.java",
+      "sha256": "bbd76de79fdfdfd016880ada18abdb372f8d160bc4ae0f21ccb203e381652e44"
+    },
+    {
+      "path": "m3/tooling/tq/verify-plan.py",
+      "sha256": "ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+      "sha256": "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java",
+      "sha256": "fb9bcce115dc5dc378311522b81212a7d8f2b932c88e6b350b9f3b15ba4ad77a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/System.java",
+      "sha256": "ded729befad98c337bc650f07d5ddbe1c5599cc0dc3cc1a42163273cef7fcdf2"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+      "sha256": "43332bd7bbd235d7937da53d467672887b411c6a4a4e77bbf9462e1d877eb876"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java",
+      "sha256": "d77aa827b5f9e94b0a3922cbb63a74478a8c225a29c82498c782252683a1e01d"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3TQSparseContainmentTest.java",
+      "sha256": "8ff07088ef10cff9b44e31be439e8b92b8c284ae04854c7832f96ba79cd88e50"
+    },
+    {
+      "path": "test/jdk/java/util/regex/M3RegexReuseTest.java",
+      "sha256": "fd289321fb6d5792bf59f08f3987d9f96f2e8659be87a11735a19da1692c34d0"
+    }
+  ],
+  "plan_sha256": "8d1dd2d5440e917ddfaa99c38939b2ae3f8b05ed3f2111dd5289351158dd6b24"
+}

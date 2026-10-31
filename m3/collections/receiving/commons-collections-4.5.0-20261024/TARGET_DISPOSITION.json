@@ -1,0 +1,7 @@
+{
+  "schema": "m3-commons-namespace-receiving-disposition-v1",
+  "predecessor": "receiving/commons-collections-4.5.0-20261018",
+  "targetDisposition": "receive source and tests only; outside the M3 reactor; no runtime admission",
+  "arrayNativeStorage": "five owners move from node or boxed storage to array lanes",
+  "receivingSequenceAdvanced": false
+}

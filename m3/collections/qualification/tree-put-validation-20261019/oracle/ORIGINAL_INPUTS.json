@@ -1,0 +1,56 @@
+{
+  "candidateExecuted": false,
+  "compileInputs": {
+    "bytes": 3201,
+    "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\COMPILE_INPUTS.json",
+    "sha256": "09a28fc650edecf27278a2773302629bce7afee4ecfc6c188eba4b1ea8b1cec2"
+  },
+  "fixtureClasses": [
+    {
+      "bytes": 4524,
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\classes\\JdkTreePutValidationOracle$Context.class",
+      "sha256": "8cb7ccba8fcabb83241df37a2d3d623f9f4f79d272e4724c8b82160958d25ec9"
+    },
+    {
+      "bytes": 2090,
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\classes\\JdkTreePutValidationOracle$Counting.class",
+      "sha256": "44739d7db5a730ba1d3e1368c18e17a03afe0cbfb544c5ffc14958035ab81407"
+    },
+    {
+      "bytes": 1595,
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\classes\\JdkTreePutValidationOracle$Key.class",
+      "sha256": "003a8b7c679fb49b84f403bd4d8618d339565d965d73b0787474a3ba0f59dd6b"
+    },
+    {
+      "bytes": 417,
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\classes\\JdkTreePutValidationOracle$Marker.class",
+      "sha256": "349fe004239c9936be9ffc5705a4fed2cc5da737ab6cd2313a2f80d11d529992"
+    },
+    {
+      "bytes": 322,
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\classes\\JdkTreePutValidationOracle$Plain.class",
+      "sha256": "ee76c6e15bd9dcc5e037c1db3db87132422659e7ecefb865756b77c481d38118"
+    },
+    {
+      "bytes": 1385,
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\classes\\JdkTreePutValidationOracle$WrongComparable.class",
+      "sha256": "79e85784b2ba5621586e63f91be7b77cdcec2803abaa5cf443efaa59536609b0"
+    },
+    {
+      "bytes": 11321,
+      "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\classes\\JdkTreePutValidationOracle.class",
+      "sha256": "c7179194dc8804cf1ab80cf9e7a09443cddfcfe5d26b6fb051192473198e5190"
+    }
+  ],
+  "fixtureSource": {
+    "bytes": 13373,
+    "path": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\JdkTreePutValidationOracle.java",
+    "sha256": "352650bdf601146fa9e30d68e6250a7ea599f3d7b2c6b3bdb1501c661fefcd9a"
+  },
+  "originalClasspath": [
+    "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-put-validation-oracle-20261019\\classes"
+  ],
+  "provider": "java.util.TreeMap",
+  "providerExpectedBootstrapLoader": true,
+  "providerExpectedModule": "java.base"
+}

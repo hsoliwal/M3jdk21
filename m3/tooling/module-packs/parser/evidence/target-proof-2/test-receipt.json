@@ -1,0 +1,29 @@
+{
+  "artifacts": [
+    {
+      "bytes": 559,
+      "path": "test-M3JavacParserContract.log",
+      "sha256": "5963f935bdf0d8284e93e66ff0bcaf074ad17009c61641907287157594f0e575"
+    },
+    {
+      "bytes": 571,
+      "path": "test-M3ParserFrameworkContract.log",
+      "sha256": "f26636d7d084a27270d1f8f9c2a54e3311d91a4f92f12d1d710cb9be7f22265b"
+    },
+    {
+      "bytes": 2035,
+      "path": "test-commands.json",
+      "sha256": "7508bfb0053b0b88352bbe4e7ecf4b4f28e00fd0f3fbeffac6082a861325ac09"
+    },
+    {
+      "bytes": 682,
+      "path": "test-consumer-smoke.log",
+      "sha256": "fa6a9b63d8720af70d4922d538b1c0019e2191e44aee7ac671b70118b2165c73"
+    }
+  ],
+  "input_sha256": "e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5",
+  "phase": "test",
+  "previous_receipt_sha256": "f6b6432e580fd97981b486d899765f17878640066eb65acb0d741ed230fe923d",
+  "schema": "M3_PARSER_PHASE_RECEIPT_V1",
+  "status": "PASS"
+}

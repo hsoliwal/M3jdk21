@@ -1,0 +1,15 @@
+{
+  "command": [
+    "javac",
+    "-J-Xmx256m",
+    "-Xlint:all",
+    "--patch-module",
+    "java.base=/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/java-mask/classes:/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/java-mask/boot-source",
+    "-d",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/java-mask/boot-classes",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/java-mask/boot-source/java/util/M3CollectionDenseTest.java",
+    "/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/java-mask/boot-source/java/util/M3CollectionMasksTest.java"
+  ],
+  "exit": 0,
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

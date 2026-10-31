@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/tmp/m3-cursor-tools/maven-current/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/tmp/m3-cursor-m2",
+    "-f",
+    "/workspace/scratch/a20ebe6f78bb/continuation/after/m3/collections/pom.xml",
+    "test"
+  ],
+  "cwd": "/workspace/scratch/a20ebe6f78bb",
+  "jdk": "/tmp/m3-cursor-tools/jdk-21.0.12.1+1"
+}

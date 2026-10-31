@@ -1,0 +1,15 @@
+{
+  "schema": "M3_OBJECT_VTABLE_SOURCE_BOUNDARY_V1",
+  "source_revision": "19fc2c988ae7358b24e68e090eba214340d66452",
+  "path": "src/hotspot/share/classfile/classLoader.cpp",
+  "source_git_blob": "ab29ec3524d40ff58d6ff3e6fe2c1123b3abc1dd",
+  "before_sha256": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d",
+  "after_sha256": "5f8555b02497a2a1a416244dc6bbd2b6fcbc51b7ac3dde34e76fba2de52bfac6",
+  "before_anchor": "  // hardwired for JDK1.2 -- would need to duplicate class file parsing\n  // code to determine actual value from file\n  // Would be value '11' if finals were in vtable\n  int JDK_1_2_Object_vtable_size = 5;\n  return JDK_1_2_Object_vtable_size * vtableEntry::size();",
+  "after_anchor": "  // Required before Object is loaded, when bootstrap array klasses are created.\n  // M3JDK21 adds the overridable toAdapter(Class) method to the five legacy\n  // Object slots. klassVtable verifies this reservation against parsed methods.\n  const int M3_Object_vtable_size = 6;\n  return M3_Object_vtable_size * vtableEntry::size();",
+  "inverse_anchor_restores_all_original_source_bytes": true,
+  "public_signatures_unchanged": true,
+  "object_source_unchanged": true,
+  "klass_vtable_consistency_guard_unchanged": true,
+  "reason": "Universe genesis reserves bootstrap array vtables before Object loading/parsing. Existing fixed reservation must match six actual overridable methods, including toAdapter; do not add a duplicate parser or relax the guard."
+}

@@ -1,0 +1,14 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.AstBuildReverse20261017
+displayName: Native M3JDK21 immutable MIndexAST filtered and subtree views
+description: >-
+  Three file-local serial source-generation passes: original M3ASTIndex
+  primitive selection, contract oracle, and unchanged parser build owner.
+  No parser duplication, no retained child directory and no JNI ABI change.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ast-select-20261021-p1
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ast-select-20261021-p2
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-ast-select-20261021-p3

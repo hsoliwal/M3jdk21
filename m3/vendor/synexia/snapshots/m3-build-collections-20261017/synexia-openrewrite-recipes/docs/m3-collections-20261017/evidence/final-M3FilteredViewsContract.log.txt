@@ -1,0 +1,4 @@
+$ ["/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/bin/java", "-cp", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/final-classes", "com.synexia.common.collections.M3FilteredViewsContract"]
+PASS M3_FILTERED_VIEWS checks=123500 randomized=750
+
+EXIT 0

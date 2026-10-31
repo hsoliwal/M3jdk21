@@ -1,0 +1,4 @@
+# path	before_sha256	after_sha256	resource
+m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexOracleCorpus.java	ABSENT	1fc9ab6e71de93f3b737c7f6297c49e787190b369f776b4247f50cb21d98e5ab	00-M3RegexOracleCorpus.java.txt
+m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexOracleHarness.java	ABSENT	d73788794ea4f0ef8d92e6c15077b2c907000c121c553115c2faf07ea804213f	01-M3RegexOracleHarness.java.txt
+m3/ports/precompute/src/test/java/com/m3/precompute/M3RegexOracleHarnessTest.java	ABSENT	8d79f5663691a00dd6f8b1946cfa79150fdd5db812df17e7737cbb5d41088929	02-M3RegexOracleHarnessTest.java.txt

@@ -1,0 +1,24 @@
+{
+  "schema": "jcc-e04-v3-t02-static-checks/1",
+  "candidate_runner": {
+    "bytes": 13664,
+    "sha256": "496e1877914e15f4342111c37020a2d58790038516b62872680427e585b21f50",
+    "git_blob_sha1": "f29227b5411053782980a14eb4de29b924e12753",
+    "mode": "100644"
+  },
+  "readiness": {
+    "bytes": 7301,
+    "sha256": "d8a816935713d91745e7b341e0e2d58ae98e6aed36ee9bafba4567117771c406",
+    "git_blob_sha1": "9b3d3223095a9baa93af64683bdd49769e3170b0",
+    "mode": "100644"
+  },
+  "preserved_T01_runner_byte_exact": true,
+  "prior_T01_sealed_files_unchanged": 58,
+  "other_T01_readiness_files_unchanged": 51,
+  "ordinary_entrypoints_unchanged": 3,
+  "actual_fixture_bodies_match_expected": 2,
+  "UNBOUND_inputs_at_review": 4,
+  "AST_parse_only": true,
+  "candidate_imports_functions_mains_executed": false,
+  "builds_tests_remote_calls": false
+}

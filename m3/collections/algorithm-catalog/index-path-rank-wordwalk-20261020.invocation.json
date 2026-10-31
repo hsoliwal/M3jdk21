@@ -1,0 +1,171 @@
+{
+  "schema": "synexia.m3jdk21.static-jdk-action-selection.v1",
+  "id": "m3.index-path-rank.window-wordwalk.java21.20261020",
+  "action": "QUALIFY_FIXED_SOURCE_SET_WITH_EXISTING_JDK_TOOLS",
+  "record_kind": "STATIC_SELECTION_DATA",
+  "registered_dispatcher_or_MCP_tool": false,
+  "parameters_schema": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": false
+  },
+  "selection_example": {
+    "entry_id": "m3.index-path-rank.window-wordwalk.java21.20261020",
+    "parameters": {}
+  },
+  "selection_example_is_executable_API": false,
+  "repository": "hsoliwal/M3jdk21",
+  "source_head": "4fd2abe76a3a63f5c363f69b4a5f979540a95bdb",
+  "scope": {
+    "kind": "EXACT_PINNED_SOURCE_SET",
+    "candidate_owners": 1,
+    "incumbent_owners": 1,
+    "shared_existing_proof_sources": 2,
+    "external_dependencies": 0,
+    "source_transformation": false,
+    "enforcement_observed": "Reviewed wrapper checked plan/source/tool hashes. Each javac argv lists one owner and the same two proof sources, empty sourcepath and classes-only classpath. All eight actions are fixed by the approved plan.",
+    "widening_parameters": []
+  },
+  "source_pins": [
+    {
+      "path": "src/com/m3/collections/M3IndexPathRank.java",
+      "bytes": 9834,
+      "git_blob": "4a60fd1fab763c03dd14f1e4e5abe4ff33a712fa",
+      "sha256": "24fc18d444d8e92d0a136b2541b5a92e203e3179b1ab1c4518f6d6becf902e2a",
+      "license": "Apache-2.0",
+      "repository_path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java",
+      "source_head": "4fd2abe76a3a63f5c363f69b4a5f979540a95bdb"
+    },
+    {
+      "path": "src/com/m3/collections/M3IndexPathRankSelfTest.java",
+      "bytes": 10699,
+      "git_blob": "0a95152c8b7345fc73901e850bde66bb1fcd390b",
+      "sha256": "d354516b794666bb594d91acb1da0128172b88771b48a899e4c456da947759d2",
+      "license": "Apache-2.0",
+      "repository_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathRankSelfTest.java",
+      "source_head": "4fd2abe76a3a63f5c363f69b4a5f979540a95bdb"
+    },
+    {
+      "path": "src/com/m3/collections/M3IndexPathRankWordWalkProof.java",
+      "bytes": 4857,
+      "git_blob": "18267cd65e757a2d875754d4b852c2205b2e4e7d",
+      "sha256": "876fd1c73030a39b1e629580111b94cee6cd39205da34e2ff900a0570057eae9",
+      "license": "Apache-2.0",
+      "repository_path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathRankWordWalkProof.java",
+      "source_head": "4fd2abe76a3a63f5c363f69b4a5f979540a95bdb"
+    },
+    {
+      "path": "baseline/src/com/m3/collections/M3IndexPathRank.java",
+      "git_blob": "6bc439b69f739608141acf6ee3800e5b5b0163c3",
+      "sha256": "9f683bec8b328f4d2ed4ae1540281ea14ccd2475e2096c60ffe77e36bfe53ecc",
+      "bytes": 9214,
+      "license": "Apache-2.0",
+      "role": "Exact incumbent owner; shared candidate test sources are used unchanged for both strict compilations"
+    }
+  ],
+  "tool_paths": {
+    "javac": "C:/Program Files/Java/jdk-21/bin/javac.exe",
+    "java": "C:/Program Files/Java/jdk-21/bin/java.exe",
+    "javap": "C:/Program Files/Java/jdk-21/bin/javap.exe"
+  },
+  "tool_sha256": {
+    "javac": "8a1d32f529ba4d01940194e3b06d14aff828e5d47f5f374ec88c81902fc3456f",
+    "java": "d27c1a75edf380963c430232e93340eab4bd3694044976cff85421bf163b876c",
+    "javap": "f87c22763907b019cefc5db416168f4e9f355afbfd7ca8777e9c5433533c3378"
+  },
+  "command_manifest": {
+    "path": "../evidence/index-path-rank-wordwalk-20261020/windows-host-20261020/PLAN.json",
+    "sha256": "611ae5374fc50448ba41d4c5495145b1111af2529a234299a71b61cdf2c51e86",
+    "commands": [
+      {
+        "id": "baseline-compile",
+        "argv_json_pointer": "/commands/0/argv",
+        "deadline_seconds": 120
+      },
+      {
+        "id": "baseline-selftest",
+        "argv_json_pointer": "/commands/1/argv",
+        "deadline_seconds": 60
+      },
+      {
+        "id": "baseline-wordwalk",
+        "argv_json_pointer": "/commands/2/argv",
+        "deadline_seconds": 60
+      },
+      {
+        "id": "baseline-javap",
+        "argv_json_pointer": "/commands/3/argv",
+        "deadline_seconds": 60
+      },
+      {
+        "id": "candidate-compile",
+        "argv_json_pointer": "/commands/4/argv",
+        "deadline_seconds": 120
+      },
+      {
+        "id": "candidate-selftest",
+        "argv_json_pointer": "/commands/5/argv",
+        "deadline_seconds": 60
+      },
+      {
+        "id": "candidate-wordwalk",
+        "argv_json_pointer": "/commands/6/argv",
+        "deadline_seconds": 60
+      },
+      {
+        "id": "candidate-javap",
+        "argv_json_pointer": "/commands/7/argv",
+        "deadline_seconds": 60
+      }
+    ]
+  },
+  "main_class_arguments": [],
+  "preconditions": [
+    "Verify pinned source/tool bytes.",
+    "Use a fresh reviewed output root; never replay this completed directory.",
+    "Verify K temp, 8 GiB reserve after output, and combined 80 MiB cap.",
+    "Hold the acquired global JVM lock across all serial owned jobs until durable terminal evidence.",
+    "Existing JDK21 CLI executes the command arrays; this record supplies no executor."
+  ],
+  "observed_result": {
+    "path": "../evidence/index-path-rank-wordwalk-20261020/windows-host-20261020/RESULT.json",
+    "sha256": "08e96d5f9e30f325a5e2bd4ae6cef1847b87e2f4da16fb1355e67bce457e6228",
+    "status": "PASS_EXACT_BASELINE_CANDIDATE_JAVA_AND_API",
+    "rank_checks_per_variant": 36476,
+    "randomized_paths_per_variant": 900,
+    "window_cases_per_variant": 6300,
+    "pair_comparisons": [
+      {
+        "baseline": "baseline-selftest",
+        "candidate": "candidate-selftest",
+        "sha256": "a2c4d7735430af3cd7e3667ac0606ebe855a7ae1fd83b3adeec38ed7ae73ce68",
+        "bytes": 97
+      },
+      {
+        "baseline": "baseline-wordwalk",
+        "candidate": "candidate-wordwalk",
+        "sha256": "3ecf68f8069be7b6c1912335a81e211d237c6aee127222a19269ee6819a67d8b",
+        "bytes": 106
+      },
+      {
+        "baseline": "baseline-javap",
+        "candidate": "candidate-javap",
+        "sha256": "43078be89f7f5c61998d7a58ec9c811f0b5609b18cab0bbde1f543bf3cb23a57",
+        "bytes": 859
+      }
+    ],
+    "all_eight_owned_jobs_terminal": true,
+    "own_jvm_lock_released": true
+  },
+  "pending_gates": [
+    "Canonical com.synexia PR12545 OpenRewrite/Maven SDK application and tests NOT_RUN.",
+    "JNI parity, performance/allocation, full JDK/image integration, downstream compatibility and merge/promotion remain unproved.",
+    "Global active family unchanged."
+  ],
+  "catalogue_ingestion": "Static sidecar; no automatic parser ingestion claim.",
+  "attribution": {
+    "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+    "spdx_license_identifier": "Apache-2.0",
+    "notice": "First-party proof and selection data; existing OpenJDK and third-party source rights are unchanged."
+  }
+}

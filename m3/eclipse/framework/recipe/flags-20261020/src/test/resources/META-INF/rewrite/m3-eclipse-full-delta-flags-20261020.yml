@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3EclipseFullDeltaFlags20261020
+displayName: Native M3JDK21 Eclipse full-width delta state masks and bit filtering
+description: >-
+  Exact source-sealed Java LST replacement of one existing M3 resource delta
+  snapshot and its oracle. Parent-owned long-array flags preserve every 32-bit
+  IResourceDelta flag, ordering and original Eclipse resource identities.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-eclipse-full-delta-flags-20261020

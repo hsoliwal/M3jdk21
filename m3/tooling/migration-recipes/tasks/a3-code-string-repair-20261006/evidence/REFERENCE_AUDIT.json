@@ -1,0 +1,481 @@
+{
+  "revision": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+  "m3_tree": "581f0c626bb8466afc71ac5171694e54be87327b",
+  "scope": "All 65 current migration-recipes main-resource manifest.tsv and plan.json files, plus complete current tree duplicate-blob inspection; historical evidence untouched.",
+  "files": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-declarative-yaml/manifest.tsv",
+      "git_blob": "08de6b1002e5e3321b47347a0ea448565136d712",
+      "sha256": "1d9b1a9e9613a4c85949187dbea7c90eed853c8a17d07c55b921ca21b7920c21",
+      "bytes": 167,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-levenshtein-evidence-closure/manifest.tsv",
+      "git_blob": "89edd28887c738f18924bc680dd604e44595e642",
+      "sha256": "71354b8d11941dd594385eff498af6551771b78e54a60278cdbb42b3b841f77c",
+      "bytes": 357,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-mastery-workflow/manifest.tsv",
+      "git_blob": "57a664b12fa4189f73e6f543cb9171bac7fa151b",
+      "sha256": "652890e8db13e090c5036f649ce61540f7d3d479660c921fd7b7a0ef5b3e1054",
+      "bytes": 449,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-native-jni-lane/manifest.tsv",
+      "git_blob": "b8da118fe664573ae1ae26fc0026228532d9bf84",
+      "sha256": "d315fd7c7c9df68eacf3a1c5d816e504b1d20d8bf1d2cd86b18af9da9d2bcf1e",
+      "bytes": 1139,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-proof-kit/manifest.tsv",
+      "git_blob": "8dcd430a0a30f14dd18d4522b7598e84de87917b",
+      "sha256": "26dfba89f2b4de3d33f3ad55c60d1b1e6f55a9720fe9d6ab1d778eb300383b9a",
+      "bytes": 182,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/manifest.tsv",
+      "git_blob": "40c60bd055fca26ec84fa93626c008e99440b6ba",
+      "sha256": "39ff7949565412e2b8587fb428545d722c70fb360c8ee66962b08754642c6d17",
+      "bytes": 507,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/db-meta/manifest.tsv",
+      "git_blob": "ce665061763c1e4b2250d20b6cfc95f0300ed243",
+      "sha256": "9b3dd65526e174b2d65f307582a6969b7423101600170319e2ea90518bcf0470",
+      "bytes": 675,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/gate-meta/manifest.tsv",
+      "git_blob": "ac204a09d875c89853c173cc5a39bdefda7c57c0",
+      "sha256": "08eafb7dfce6f0b9403338277fbd3c04c521a39921d8b27148da1072b7687be8",
+      "bytes": 1377,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv",
+      "git_blob": "9f24b0965b9c78257ab0ebfb9f3f83561766e0ea",
+      "sha256": "258b5ab6f6cb7099685ee4548d5430fcb952561fefdf565a6dff149cf50c5f06",
+      "bytes": 687,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+      "git_blob": "12fa915d4d077fd870900e65d79d2135921977b0",
+      "sha256": "648f80ae4073400f1ea1210f8cdc26942019d53eb4452d839961c466f395d05a",
+      "bytes": 2861,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/manifest.tsv",
+      "git_blob": "15f10c1fa21138816bda76d42545db9c015ab650",
+      "sha256": "4e8bd94f8dd29256ca41dee2fb0b5164ba24c387038143d88d5fa958e6ecdad5",
+      "bytes": 876,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
+      "git_blob": "9b5be4d1bbd8c817b6f29aa42e82326304ac741d",
+      "sha256": "ae42e3db29017106b47f493fc663ca679ead1802558699915d1a3a1fb3454c48",
+      "bytes": 3414,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/manifest.tsv",
+      "git_blob": "e322acedc29a26c1291e55a773a4e22c1d548eb7",
+      "sha256": "944d1531de586740a9e098f4c36f98f8e4c668f35090b8bc68a116b5c8eb0efb",
+      "bytes": 876,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/plan.json",
+      "git_blob": "64fedb3af5b9930d8ef03d1da062ca1e337b5c7e",
+      "sha256": "272a4b6a2f6d39a0d7baf2d4a104d671125fe471a2a3351cd321315e6be5d499",
+      "bytes": 3390,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk21-developer-image-proof-20261004/manifest.tsv",
+      "git_blob": "9ef3ef07f20070382faf16b09c19ce50fe9337f3",
+      "sha256": "3fd45ee524d2d5df0ed34da5b0caf66a284e060776df05c28140b6ed2f0654ce",
+      "bytes": 901,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk22-jep458-multifile-text/manifest.tsv",
+      "git_blob": "67d3ab4c5cd27c98765ed50f157a9583e6061c3a",
+      "sha256": "9840f7df906c76374303e06ae1cff0e8e64f9b7c26ccd8bb72cd78d52ab8b764",
+      "bytes": 1071,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-javadoc-8347112-text/manifest.tsv",
+      "git_blob": "e07ea92b582d10e17add54eaa00121f81694df43",
+      "sha256": "31b5f1947703c25fe9ad6ec433f239fa741436d049dbb59be2a191edf45c55e5",
+      "bytes": 442,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-jfr-options-help-8367584-dcmd-cpp/manifest.tsv",
+      "git_blob": "3dae8b135c79661582aade6e13d4b6fbcdc88556",
+      "sha256": "4e7a6f467d408eff5810d60406fdef0d2fd47d5885e9ac049a41a269dd9f4e1b",
+      "bytes": 190,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-jfr-options-help-8367584-dcmd-hpp/manifest.tsv",
+      "git_blob": "13cb877e1b652e141a94c9cac7bcae566492cb11",
+      "sha256": "ed63b31e69831051e2ef854f78d006d9d063d4b6568b4e511bbf1a7cb8b99fec",
+      "bytes": 190,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-jfr-options-help-8367584-option-set/manifest.tsv",
+      "git_blob": "9a260fadf8409610be932abcd58883c211910c6e",
+      "sha256": "6e28b8e278ca8e8e2184a7b885be433cf4c0fc1082125b229fb3ecb4734b0726",
+      "bytes": 210,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-password-systemin-8368692-text/manifest.tsv",
+      "git_blob": "363cc7bdc97540bb91d81eb7ec0f72aecc5dd17f",
+      "sha256": "6f72ba5990199b3f5353081d71db86a8d6ed64412faee408d891de0959ec6f74",
+      "bytes": 199,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-security-properties-8364182-text/manifest.tsv",
+      "git_blob": "474528353a20dd44986197b5dd35f1d67c01b75c",
+      "sha256": "ecde84303e4c4df6ced406a4d2aaeff3cf518f3f3d0034fe009959666dddd842",
+      "bytes": 609,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jni-packet/manifest.tsv",
+      "git_blob": "4ce112ef032375cbb9f3ad5a935c14c7a24f1407",
+      "sha256": "8661c270eadb65f06cc9fc36f3261db6f7a5c3abd53caa95ab3ff14537832d46",
+      "bytes": 1088,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-canonical-dag-master-repair/manifest.tsv",
+      "git_blob": "18f53de44ba571560caffc887b58e9fd5d9b0008",
+      "sha256": "187e7881ad746920b508c9a69ff11f5be64fd3452d40cf9bd2ae446a20373231",
+      "bytes": 1579,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-history-convergence/manifest.tsv",
+      "git_blob": "03498729753869ba5773642607e14f68435507b3",
+      "sha256": "8d74f04f71d23b8c1df15afead88f77bffef7fb30b86774f513dedee6038d166",
+      "bytes": 1196,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/map-facts/manifest.tsv",
+      "git_blob": "cddc19696fc5e6a4c36cf94f5734012b94b60b66",
+      "sha256": "a11ac37e9a84ab7472cdc5001eeb70e00adf7f25e9a7e87ab45e788e4f310603",
+      "bytes": 191,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/map-guard/manifest.tsv",
+      "git_blob": "8a5b66c6c8954b4ea9323b59b34c674ee991a2b8",
+      "sha256": "7c327e6b56d0ca544adf36071e97bbc63bc11ec49d684efa20237d3a1a33197a",
+      "bytes": 191,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/map-utf/manifest.tsv",
+      "git_blob": "cddc19696fc5e6a4c36cf94f5734012b94b60b66",
+      "sha256": "a11ac37e9a84ab7472cdc5001eeb70e00adf7f25e9a7e87ab45e788e4f310603",
+      "bytes": 191,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/proof-kit/manifest.tsv",
+      "git_blob": "6c880d8e614d93510e319044688ad1c0f195d263",
+      "sha256": "36d8b7d6f79643c290d13b64575fcaada7cf3e519bca303987cbdc152b5a3186",
+      "bytes": 124,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-class-ver/manifest.tsv",
+      "git_blob": "4983044bcd9d56c87486a0cd226292b213d6f088",
+      "sha256": "d927952d199afa2da9f115494dbb68066acb3c9a90b33213a0a4127de1cb3b57",
+      "bytes": 531,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "git_blob": "2a62a7a35e9e59cf403336c197f60d7e5915b064",
+      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+      "bytes": 396,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-jep458-multifile-java/manifest.tsv",
+      "git_blob": "b8f888ded1482b3a72a9e628604cb837649a6864",
+      "sha256": "366ba913bfd9bb6fba5821f490df81cead34268e54818f7eb4c26962fada8ba1",
+      "bytes": 3869,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-canonical-dag-master-repair/manifest.tsv",
+      "git_blob": "bc9fdbb7bc3601309bff3dddb4715ea21a6555ab",
+      "sha256": "fb25e5d7cf4908a1969c78a40f139bb3dc1b56ef2fb522d52ae324993c90c1b0",
+      "bytes": 618,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
+      "git_blob": "5c8978e385a4ba3b3cb7091884e77cafd281153a",
+      "sha256": "2b724a9f9cf9fce382c34f4b5872312bfb4c30791decf8c093bd2dfb9fc0d400",
+      "bytes": 3300,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-map-facts/manifest.tsv",
+      "git_blob": "9629f6dbb034ed77470d0995154b8fa615f5d85d",
+      "sha256": "79eb64cf105af766b0814815e63665e3e1218d7eade2ad6578d9a7b3058ecc68",
+      "bytes": 370,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-map-guard/manifest.tsv",
+      "git_blob": "1677c62b61f3b2991c21f2b154d33c38d63fb6ec",
+      "sha256": "347f7f0081625963a40530ce285167198916fa85850fdec5c4c845a271c1bb74",
+      "bytes": 370,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-map-utf/manifest.tsv",
+      "git_blob": "83f053281f167765f1dec611de1f41ad97cf80d8",
+      "sha256": "0fc943f7b7c181dde4f9160321b9597cef69ca2cc070a19cd2a0162eeea53def",
+      "bytes": 507,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/manifest.tsv",
+      "git_blob": "06cb1cfb82e63c7eccb6af892ac2552a98d8257b",
+      "sha256": "d80a5af11629b89cb2e69d3a119becb7606fb029e8e121d47d684ca755435182",
+      "bytes": 934,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers/manifest.tsv",
+      "git_blob": "3f298a4c9d4dcb77b5c53e9796a29e166cc90cf5",
+      "sha256": "3172ca1814ce01a40091d05f691ee044dfa72c1b4f24b10514fe491fc6d6e66c",
+      "bytes": 2598,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-javadoc-8347112-java/manifest.tsv",
+      "git_blob": "cb7a94bba78932e9f02d371385714c645f32ff45",
+      "sha256": "7b25f62e952a632b6b2fae30e31c0d41f1d648fcb2b3c18e5e5ce520ba202cf8",
+      "bytes": 732,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-jfr-options-help-8367584-java/manifest.tsv",
+      "git_blob": "13e6e607445fc4a1c42f332617731f0d70528c72",
+      "sha256": "c26014d4684ea246a8d5540149cb86f6a40fd8743aa4ac8dda70e44fe0cfc56e",
+      "bytes": 150,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-keystore-creation-instant-8374808/manifest.tsv",
+      "git_blob": "b111ca2616cc2cf149a9152dc605d7dd7c94abe1",
+      "sha256": "2d805902f415e7acbdf8955da127474ce5fb901d6392b8a5c733f1faf5a204db",
+      "bytes": 573,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-password-policy-proof-20261004/manifest.tsv",
+      "git_blob": "34870e19df381ca71478406eaacf54251dcbe789",
+      "sha256": "4affb89e8d6ebc558672e0e786d147fdc684b85a04ac6a91fcf91e79509b9ad7",
+      "bytes": 169,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-password-systemin-8368692-java/manifest.tsv",
+      "git_blob": "35d9e7d1b85ff9017758cb12bacb19b88cf82073",
+      "sha256": "360e70e3d733b04f426fffebeedb59c76a158b405c01ccfc61a35593334f8e35",
+      "bytes": 364,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-security-properties-8364182-java/manifest.tsv",
+      "git_blob": "34274b52c6ba7791b21389030158578118f8ac2e",
+      "sha256": "365fa8c05d774109ac66c411d4a4b4945f0fa76386d352983e0894d53074e6eb",
+      "bytes": 848,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-declarative-activation/manifest.tsv",
+      "git_blob": "cdafb6ae81073c68fc2bb9d8e239242b017f8aa6",
+      "sha256": "944b68ad6939351c313439fa0ed53af948a1182cd0630c988b5252d86fc11cc0",
+      "bytes": 382,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-declarative-convergence/manifest.tsv",
+      "git_blob": "f65dbb4bb592cd9edc8d8467433cad0319e4ee13",
+      "sha256": "e3461850eb6a306eeba22c2189aefbcdc520762dafa3520fa40282576aff2b61",
+      "bytes": 546,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+      "git_blob": "4fcf73bf19ec1b50334d6535bdfd995e28bee089",
+      "sha256": "b901f0b1aae122711792a66dc9750b9ba4608d59613641e74f378218757cbb4d",
+      "bytes": 734,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "git_blob": "f18bdb2c7808e88dc2692e58acafbdfbc854b7e5",
+      "sha256": "b2febbb17ed96ae6f582eee2e16af3fc5e435c23e350708f56397bee9ac38ab5",
+      "bytes": 658,
+      "hits": [
+        {
+          "line": 3,
+          "text": "src/main/java/com/m3/a3/A3RegexMatrix.java\tABSENT\tf000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404\tA3RegexMatrix.java.after"
+        }
+      ]
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-comment-custody/manifest.tsv",
+      "git_blob": "aac2b14e91ba06088f7258f0891289d046a71d5c",
+      "sha256": "51d6ff438165fd05e6702364c8f131820efd9742e687a88a949d5fa182f46322",
+      "bytes": 213,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/manifest.tsv",
+      "git_blob": "bb46fe59932b1c3af2a44f803743c3aba7990224",
+      "sha256": "1fc319641c44bfcf7428c09c10015f0e9619d09b56a8bcfbed9da310f74f0a49",
+      "bytes": 440,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/db-atom/manifest.tsv",
+      "git_blob": "8cd1b6d4e8290a049c8d0f3bfa9fc24141579cf4",
+      "sha256": "6bd41049e8393139f34fd3ae778b570432a49f7784c6a228f7c3e06ee3c6f7e6",
+      "bytes": 694,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/db-build/manifest.tsv",
+      "git_blob": "b7303dda69f37d797da0fc3d6d872fffa2a9ca6b",
+      "sha256": "d33a2add601309d3554c8ba047b9fe8f4b24adc4eef75d4f1219f8d958546f71",
+      "bytes": 427,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/db-check/manifest.tsv",
+      "git_blob": "a28a71e12eca18161a8462baf7ebf570173b5895",
+      "sha256": "6ae483638d7a0deae763cdeca4c7634d0b6b45f6653ea692a38ce8d0e7049baf",
+      "bytes": 213,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/db-java/manifest.tsv",
+      "git_blob": "3ced0108efa26ae117463fdb1f7a83d8f251e7c7",
+      "sha256": "44369e8fd1e69e3c0b5270bd39841fc862bb4ee0cc26fcc7b952f806dd7edcc3",
+      "bytes": 2906,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/db-mark/manifest.tsv",
+      "git_blob": "d449f6acb84fc7c45253f88d6ed6ee4be425e348",
+      "sha256": "526ee42aca43af5d10f6d2daf561f7cbb2a533feca8320f4b438e4f502edd8a6",
+      "bytes": 203,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/db-parse/manifest.tsv",
+      "git_blob": "dbcb9cb28235d7a161bd081aba752b8746a2c689",
+      "sha256": "8d4e2a3afdab73eff23bcd6cc436f409ba68eb2516a2ba583fc69c4435e42323",
+      "bytes": 481,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/document-javadoc-contract/manifest.tsv",
+      "git_blob": "2badc9ffc4ed517b51dc592988d5e8bf7ef31407",
+      "sha256": "1b01ee07dec3427ff43837f00297a8e81aee5eabfa9a2d643b4752ac3f3e1991",
+      "bytes": 241,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/gate-java/manifest.tsv",
+      "git_blob": "400920825bbac788443ab73b5467d50a6e55d3ff",
+      "sha256": "70e886e7201a8b5f507b6ade08ba338bdac5410d761d4b35b9013852db3888bd",
+      "bytes": 1640,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/jdk-focus-a3/manifest.tsv",
+      "git_blob": "d932b927d23abcbc1e850d6fcd0da3055e35c167",
+      "sha256": "897cd98a7a41ced925f792af67642e82eb5f3026ca3bc69064edb868745184b3",
+      "bytes": 211,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-collection-lanes/manifest.tsv",
+      "git_blob": "a4f5105d29b41f8315b0b71d3aaa138534c6d79f",
+      "sha256": "cfd99d1d4cfd40371718188e695221d6aee88eb9579a815f0f0e3b05643f2054",
+      "bytes": 3285,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/mindex-jni-newstring-admission/manifest.tsv",
+      "git_blob": "4cc1d1e5747a1fef81e179069684b8e17ca1c4ab",
+      "sha256": "2a5c781c50f48e19f3f9ec0ba99cb6f894e76779b088dc7d04d3ddda73251245",
+      "bytes": 239,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/mindex-string-bulk-char-boundary/manifest.tsv",
+      "git_blob": "3ad3ccad81cb8da26dbbd6baf4ad9660391ae3dd",
+      "sha256": "4e51fd1acaf8a22036d2dc5d0b405509f3f469d6e4054c8a0a4133cfe230d7a4",
+      "bytes": 251,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/pack-version/manifest.tsv",
+      "git_blob": "fa58d084752ef8b556e6f693cd17331c3aeae669",
+      "sha256": "d0166513af5e163700a832139bdf40f467f382f4e7b3d48a7dfa0ae7b94a0fc1",
+      "bytes": 525,
+      "hits": []
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/scope-backslash-literal/manifest.tsv",
+      "git_blob": "0e3705882a1efd57b2eb1b0b3c6ba6c2deef642b",
+      "sha256": "0b68d3c7541f21b7f45cf548a098079aae36934c3da31183f1e28567558ffe15",
+      "bytes": 231,
+      "hits": []
+    }
+  ],
+  "matching_files": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "git_blob": "f18bdb2c7808e88dc2692e58acafbdfbc854b7e5",
+      "sha256": "b2febbb17ed96ae6f582eee2e16af3fc5e435c23e350708f56397bee9ac38ab5",
+      "bytes": 658,
+      "hits": [
+        {
+          "line": 3,
+          "text": "src/main/java/com/m3/a3/A3RegexMatrix.java\tABSENT\tf000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404\tA3RegexMatrix.java.after"
+        }
+      ]
+    }
+  ]
+}

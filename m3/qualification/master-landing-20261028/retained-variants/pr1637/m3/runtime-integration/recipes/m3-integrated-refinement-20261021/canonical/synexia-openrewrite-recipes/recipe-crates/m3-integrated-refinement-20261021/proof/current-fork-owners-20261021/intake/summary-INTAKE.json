@@ -1,0 +1,33 @@
+{
+  "schema": "M3_CURRENT_FORK_OWNERS_EVIDENCE_INTAKE/1",
+  "status": "PASS",
+  "group": "summary",
+  "handoff_source": "/workspace/scratch/206049dfb270/nlp-work/EVIDENCE_HANDOFF-SUMMARY.json",
+  "handoff_sha256": "faa2241467f6903a7d1d6d2a9cfc6bc921bf199e808faf10ab19acc8b10f581a",
+  "files": [
+    {
+      "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/NLP_RUNTIME_SUMMARY.json",
+      "destination": "nlp/evidence/NLP_RUNTIME_SUMMARY.json",
+      "sha256": "e7eb8de77a79b99fb5eee4e5c05791ec3c58b7b64b19f3a1a6cb9631e1ce7131",
+      "bytes": 6366,
+      "reused_exact_existing_copy": false
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/nlp-work/evidence/PIN_AND_SHARED_INPUT_SCOPE.json",
+      "destination": "nlp/evidence/PIN_AND_SHARED_INPUT_SCOPE.json",
+      "sha256": "77e200b5ce35d939bd013b51c4d397e24afca576713d5cf370bac84a75f402a1",
+      "bytes": 2552,
+      "reused_exact_existing_copy": false
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/module-packs/nlp-search/CURRENT_FORK_REFS.json",
+      "destination": "nlp/combined-receiver-source/m3/tooling/module-packs/nlp-search/CURRENT_FORK_REFS.json",
+      "sha256": "b4151ffe154630e5c5b93e043b1c29919f93f9a8fc39459a41408b165d59cc06",
+      "bytes": 723,
+      "reused_exact_existing_copy": false
+    }
+  ],
+  "no_source_mutation": true,
+  "binary_payloads_copied": 0,
+  "scope": "Exact evidence custody only; copying a result does not extend its runtime, recipe or platform authority."
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "m3-jcc-mapping-fixture-verification/1",
+  "status": "PASS",
+  "fixture": true,
+  "started": "2026-10-06T04:48:38.491533+00:00",
+  "finished": "2026-10-06T04:48:38.822264+00:00",
+  "unit_tests": 13,
+  "commands": [
+    {
+      "name": "01-unit-tests",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_bind_mapping.py"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "25cb67ba2a7842e1a595bd2878f45b7883b5834e310402249d5cce0ecdc967f9"
+    },
+    {
+      "name": "02-fixture-authoring",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/bind_mapping.py",
+        "--audit-root",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit",
+        "--source-input",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/verification-v01/fixture-source-input.json",
+        "--fixture-only",
+        "--output",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/verification-v01/fixture-output"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "937dbbd2eb25cc467d8afc00eb48f21bec2fe00babba74dc3f5bbb59a3d94bf6",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "03-publication-mode-refusal",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/bind_mapping.py",
+        "--audit-root",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit",
+        "--source-input",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/verification-v01/fixture-source-input.json",
+        "--output",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/verification-v01/forbidden-output"
+      ],
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "da49a451a0a5c1cc51f1f45f442c7ed24ff5d50a5413c64f1f250f0aa37fc043"
+    }
+  ],
+  "input_hashes": {
+    "bind_mapping.py": "847cb604dd131f70466148d22ffc3da9ae1f67ec4f7578c18c758e5953914b03",
+    "test_bind_mapping.py": "cd5c1a5e7991eba86bda4c292766727740d630881b9f3350e1da0a25c1da69ea",
+    "verify_fixture.py": "6f6722955759619a764bb00598536ccafecf4cb0dc442665da8cea8410878171"
+  },
+  "fixture_input_sha256": "604d4c4dce4259114f9586f16add0064e9667bb0856c2c273151218f11f16399",
+  "scope": "Unpublishable synthetic source input; validates authoring and refusal only. No actual source publication or target materialization claimed."
+}

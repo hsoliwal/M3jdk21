@@ -1,0 +1,59 @@
+{
+  "actual_source": {
+    "bytes": 14538,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-pom-composition-v1\\actual-sdk-v1\\pom.xml",
+    "sha256": "aa9905011b1509de8e8aa733dcbdfe134df47971c2cfeab2f82814f9185ea670"
+  },
+  "canonical_engines": [
+    {
+      "bytes": 10850,
+      "donor_path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\hash-multimap-next\\package-recipe-v1\\src\\main\\java\\com\\synexia\\rewrite\\M3HashPinnedPomSnapshotRecipe.java",
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\collections-pom-v1\\src\\main\\java\\com\\synexia\\rewrite\\M3HashPinnedPomSnapshotRecipe.java",
+      "sha256": "8d344221f7f85c68587f3a0e85f0f805bced18319c4fd8a3667759b0b0079cec"
+    },
+    {
+      "bytes": 1052,
+      "donor_path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\hash-multimap-next\\package-recipe-v1\\src\\main\\java\\com\\synexia\\rewrite\\M3EditScope.java",
+      "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\collections-pom-v1\\src\\main\\java\\com\\synexia\\rewrite\\M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    }
+  ],
+  "current_target_revision": "51259ccbdc9b17dc7a76a68730acd92f8b278525",
+  "errors": 0,
+  "failures": 0,
+  "formal_review": "NO_VERDICT",
+  "full_goal": "UNFINISHED",
+  "global_slot_admission": false,
+  "input_seal": {
+    "bytes": 6636,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\seals\\current-pom-composition-v1-sdk-1.json",
+    "sha256": "ac784b6ea629dc96b29cc819cf7835385a1f7a48ae80d7ae91f8a4189e7898c4"
+  },
+  "marker": {
+    "bytes": 262,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-pom-composition-v1\\actual-sdk-v1\\actual-pom-results.tsv",
+    "sha256": "baa074907a017f7477ee1d7090aab07bd79333ad49af1cb09d16174d7dc4205d"
+  },
+  "native_reactor_and_installed_distribution": "PENDING",
+  "prepared": {
+    "bytes": 9782,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-pom-composition-v1\\PREPARED_QUALIFICATION.json",
+    "sha256": "ecf1f43e0b9ee8647eb33272d848ade9b15d7f51640e8a4dcee77062910d3d01"
+  },
+  "preserves_current_variant": true,
+  "report": {
+    "bytes": 16065,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\full-guava\\jni-backing-array-v1\\current-pom-composition-v1\\sdk-output-v1\\surefire-reports\\TEST-com.synexia.rewrite.M3CollectionsArrayDependencyPomRecipeTest.xml",
+    "sha256": "a690f1933c8fa5089ee0e5ca0303904e2511ff2bb55a20960fe4a9d04e290e0e"
+  },
+  "schema": "M3_CURRENT_ARRAY_COMPOSITION_ACTUAL_SDK_V1",
+  "skips": 0,
+  "status": "SDK_QUALIFIED_CURRENT_SOURCE_ONLY",
+  "terminal_exit": 0,
+  "terminal_receipt": {
+    "bytes": 4553,
+    "path": "S:\\codex-work\\guava-array-multimap-one-file-20261018\\build\\current-pom-composition-v1-sdk-1.json",
+    "sha256": "884cdf461b1b11c3f3982843920fdae82a9bebc1864641e38ea7d12ded98e5a1"
+  },
+  "tests": 7
+}

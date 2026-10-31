@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/java-template/render_template.py",
+    "--audit-root",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit",
+    "--source-input",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/final-source-packet-v01/source-publication-input.json",
+    "--mapping-resources",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/bound-inputs",
+    "--output",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/rendered-tests"
+  ],
+  "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03",
+  "exit_code": 0,
+  "name": "02-render-tests",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "348dff2530eb8679059bfcf8bdb97b2959a5647f977966e20e12de444521adb5"
+}

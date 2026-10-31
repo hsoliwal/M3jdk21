@@ -1,0 +1,49 @@
+{
+  "command": [
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture/image/bin/java",
+    "-Xcheck:jni",
+    "--module-path",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/consumer-classes",
+    "--module",
+    "m3fs.vfs.consumer/com.m3.fs.verification.M3VfsImageProbe",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture-receipts/vfs-fixtures"
+  ],
+  "exit_code": 0,
+  "finished_utc": "2026-10-20T11:22:32.424098+00:00",
+  "image": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture/image",
+  "image_release_sha256": "6737918dff72e8b01132f7505cec1e9daf7e4f8ab3d87ced413229f654994a36",
+  "named_consumer": {
+    "COMPOSED_CONTENT_CAPTURE": "PASS",
+    "CONSUMER_MODULE": "m3fs.vfs.consumer",
+    "GENERIC_URL_NAMES": "PASS",
+    "M3FS_VFS_IMAGE_PROBE": "PASS",
+    "MODULE": "jdk.m3fs",
+    "MONITORED_CONTENT": "PASS",
+    "NATIVE_SQLITE_PROBE": "NOT_RUN",
+    "OBSERVATION_DELTA": "PASS",
+    "SELECTED_ARCHIVE_LAYER": "PASS",
+    "SOURCE_BUILT_M3JDK21": "NOT_RUN"
+  },
+  "named_consumer_class_sha256": {
+    "com/m3/fs/verification/M3VfsImageProbe$1.class": "91acc59b49fa7edeac952a90a2c55cfa2b494060e7cf3054a7882de23e20a267",
+    "com/m3/fs/verification/M3VfsImageProbe.class": "3608b5bbe107660f4291ceb9fa75c41e37382cee97f8383ce50886b1acf0fa3a",
+    "module-info.class": "3e91e6acf5b5d4e7e07a414c1b6fbd4635ff2cb48f3ce4a285dbec8b3ad57183"
+  },
+  "native_probe": "PASS",
+  "native_probe_receipt": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture-receipts/runtime-proof.json",
+  "native_probe_receipt_sha256": "5e3694f765ea6fb5890c3e111a3faaf723f40d6865d6f500f71d9358e5b817a2",
+  "removed_environment_names": [],
+  "scope": "Both the mandatory native filesystem probe and existing independent named VFS/capture consumer executed on this exact supplied-JDK native image. The named consumer own NATIVE_SQLITE_PROBE=NOT_RUN marker describes its local checks; the separate native probe passed. No full source-built OpenJDK, CMake/CTest or Maven lifecycle claim.",
+  "source_lock": {
+    "donor_java_compiled": 237,
+    "donor_java_custody": 311,
+    "input_files": 389,
+    "receiver_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+    "source_lock": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
+    "source_lock_sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1",
+    "vfs_upstream_commit": "685b3b723a83e56034391350ea1a02231411142f"
+  },
+  "source_lock_unchanged": true,
+  "started_utc": "2026-10-20T11:22:31.975587+00:00",
+  "status": "PASS"
+}

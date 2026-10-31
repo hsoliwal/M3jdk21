@@ -1,0 +1,200 @@
+{
+  "m3": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270278086870,
+    "inode": 581697
+  },
+  "m3/collections": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270278086870,
+    "inode": 581713
+  },
+  "m3/collections/src": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270283203835,
+    "inode": 581716
+  },
+  "m3/collections/src/main": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270284028489,
+    "inode": 581717
+  },
+  "m3/collections/src/main/java": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270278086870,
+    "inode": 581718
+  },
+  "m3/collections/src/main/java/com": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270278086870,
+    "inode": 581719
+  },
+  "m3/collections/src/main/java/com/m3": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270278086870,
+    "inode": 581720
+  },
+  "m3/collections/src/main/java/com/m3/collections": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270284360190,
+    "inode": 581721
+  },
+  "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792549270282977573,
+    "inode": 581723,
+    "bytes": 19677,
+    "sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
+    "git_blob": "10c4d16cc9cd62d36f22646988718422caa2311e"
+  },
+  "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792549270282808017,
+    "inode": 581722,
+    "bytes": 32139,
+    "sha256": "fb1f4da6cbfcaf27385bad58eb810f22b1f8f5577b73bd04fc8c06c871c5035c",
+    "git_blob": "513a104b589b7834cf873cd46054d233b5302d74"
+  },
+  "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792549270284595685,
+    "inode": 581737,
+    "bytes": 18371,
+    "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
+    "git_blob": "b81b069fb4815f0c78b17119390d7b204f6179d1"
+  },
+  "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792549270283104495,
+    "inode": 581724,
+    "bytes": 25720,
+    "sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178",
+    "git_blob": "37b669dfe22a3b6be9e68aa59f9dd94e96fc3d49"
+  },
+  "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792549270283203835,
+    "inode": 581725,
+    "bytes": 4051,
+    "sha256": "9257ce0c9c95e3afef20624631ba048aa3d60ef53a1189cd2bbabc07da2bba2f",
+    "git_blob": "2fe08d8728732e5f53e75d9feb34c9c6ffc74a8d"
+  },
+  "m3/collections/src/main/native": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270284028489,
+    "inode": 581734
+  },
+  "m3/collections/src/main/native/collections": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270284028489,
+    "inode": 581735
+  },
+  "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792549270284360190,
+    "inode": 581736,
+    "bytes": 17359,
+    "sha256": "58f403c3b2677ecb8c7c36d9e04233760c1477f4d770f431efddc5318edf9ad2",
+    "git_blob": "1fede488cf577ffc8c90b503c4f4e45369aba5b9"
+  },
+  "m3/collections/src/test": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270283203835,
+    "inode": 581726
+  },
+  "m3/collections/src/test/java": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270283203835,
+    "inode": 581727
+  },
+  "m3/collections/src/test/java/com": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270283203835,
+    "inode": 581728
+  },
+  "m3/collections/src/test/java/com/m3": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270283203835,
+    "inode": 581729
+  },
+  "m3/collections/src/test/java/com/m3/collections": {
+    "kind": "directory",
+    "mode": 493,
+    "mtime_ns": 1792549270284761976,
+    "inode": 581730
+  },
+  "m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationContract.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792549270284028489,
+    "inode": 581733,
+    "bytes": 10127,
+    "sha256": "f37ead5e6647b1f0ec7cf0d0723c2662508d1991bf0c967b298f2be737fd7c8d",
+    "git_blob": "a8073b064f222e6c95451107f3a274572d6bdbd6"
+  },
+  "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792549270283868077,
+    "inode": 581732,
+    "bytes": 24121,
+    "sha256": "2cde685da95319bca841ae3c95fb73e3ea4776177a78046d96b79033545dfc2d",
+    "git_blob": "dcc512d8b39199cc8c4492179a140ea132bb2680"
+  },
+  "m3/collections/src/test/java/com/m3/collections/M3IndexMaskRangeNativeTest.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792549270284761976,
+    "inode": 581739,
+    "bytes": 6815,
+    "sha256": "01cca6f8506da8120978892182071b2d3be631bebf5011fa112602524c532619",
+    "git_blob": "e614d7fe5c9878f1dd95684375569c5454a07623"
+  },
+  "m3/collections/src/test/java/com/m3/collections/M3MaskPositionAtomsTest.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792549270285283143,
+    "inode": 581740,
+    "bytes": 8624,
+    "sha256": "53d22b261f4376f41e735dc5121d3d8f97ee08f4eafdf99e3f615d0330b22548",
+    "git_blob": "dca94be95032319e7f029c792e5ecffdc336b404"
+  },
+  "m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792549270284699833,
+    "inode": 581738,
+    "bytes": 1830,
+    "sha256": "89c35701322381e4d958bf6344e2357988c4ad97ce1a0dd42a9a3f698a205c7f",
+    "git_blob": "312757d9147eeb80e6d291e38d019e3a4931ee49"
+  },
+  "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java": {
+    "kind": "file",
+    "mode": 420,
+    "mtime_ns": 1792549270283608956,
+    "inode": 581731,
+    "bytes": 19318,
+    "sha256": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847",
+    "git_blob": "b551b7b5bb45fd082d478c3313ada4d62487b6a7"
+  }
+}

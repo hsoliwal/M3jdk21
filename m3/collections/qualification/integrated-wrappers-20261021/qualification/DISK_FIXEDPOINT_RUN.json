@@ -1,0 +1,15 @@
+{
+  "status": "SDK_REPLAY_PASS",
+  "recipe": "com.synexia.rewrite.M3IntegratedCollections20261021Recipe",
+  "resource_root": "/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021/",
+  "manifest_sha256": "ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2",
+  "receipt_sha256": "43fe0ca79fda32cc0286ea5e0027ed172e6b5fb9967511692ec5406051329cb3",
+  "input_root": "/workspace/scratch/a729c0cf94f5/collection-convergence-20261021/sdk-image-v3/files",
+  "output_root": "/workspace/scratch/a729c0cf94f5/collection-convergence-20261021/sdk-fixedpoint-image-v3",
+  "java_version": "21.0.8",
+  "target_count": 22,
+  "first_run_change_count": 0,
+  "second_run_change_count": 0,
+  "sdk_error_count": 0,
+  "product_acceptance": "NOT_ASSESSED_BY_THIS_DRIVER"
+}

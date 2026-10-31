@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/tmp/m3jdk21-toolchain-20261020/apache-maven-3.9.9/bin/mvn",
+    "-o",
+    "-Dmaven.repo.local=/tmp/m3jdk21-toolchain-20261020/m2",
+    "-f",
+    "/workspace/scratch/53bcd62c244c/canonical-interop-contracts-20261020/pom.xml",
+    "clean",
+    "verify"
+  ],
+  "JAVA_HOME": "/tmp/m3jdk21-toolchain-20261020/jdk-21.0.12.1+1",
+  "source_crate": "/workspace/scratch/53bcd62c244c/canonical-interop-contracts-20261020",
+  "scope": "actual SDK qualification; target receiving not run"
+}

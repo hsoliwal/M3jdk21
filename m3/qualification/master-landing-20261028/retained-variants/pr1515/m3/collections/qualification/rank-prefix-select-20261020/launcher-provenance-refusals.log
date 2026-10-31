@@ -1,0 +1,31 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3 /workspace/scratch/abdb4b1178cf/synexia-work/synexia-openrewrite-recipes/tasks/m3-index-rank-prefix-select-20261020/qualification-20261020/verify_provenance.py /workspace/scratch/abdb4b1178cf/m3-repo
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "source-valid",
+      "exit": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "artifact-valid",
+      "exit": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "source-drift",
+      "exit": 1,
+      "expected_refusal": "Donor bytes changed"
+    },
+    {
+      "case": "source-inventory",
+      "exit": 1,
+      "expected_refusal": "Production donor inventory changed"
+    },
+    {
+      "case": "artifact-license-drift",
+      "exit": 1,
+      "expected_refusal": "Packaged legal/provenance bytes changed"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "com.synexia.common.collections.DenseOrderedSet (20e9aec1)",
+      "source_commit": "origin/develop 296323958b1",
+      "target": "com.m3.collections.M3LongLinkedHashSet",
+      "status": "implemented-locally-verified; proving ground; runtime PENDING_LINUX",
+      "target_rule": "ADAPT link lanes (previous/next/first/last, O(1) unlink) onto the M3LongHashSet table indexed by slot; rehash re-inserts in encounter order; LinkedHashSet SequencedSet surface"
+    },
+    {
+      "source": "com.synexia.common.collections.PackedLongOrderedSet (6156e5d4)",
+      "source_commit": "origin/develop 296323958b1",
+      "target": "com.m3.collections.M3LongLinkedHashSet",
+      "status": "contract donor",
+      "target_rule": "insertion-ordered primitive-long set contract; O(n) removeValue of the packed order lane replaced by O(1) unlink"
+    },
+    {
+      "source": "com.m3.collections.M3LongHashSet (master c9b07049c5)",
+      "source_commit": "c9b07049c5",
+      "target": "com.m3.collections.M3LongLinkedHashSet",
+      "status": "table mechanics reused",
+      "target_rule": "same probing, occupancy, growth and compaction rules"
+    }
+  ]
+}

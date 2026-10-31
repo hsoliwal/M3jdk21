@@ -1,0 +1,15 @@
+M3 collection Java/JNI qualification
+Copyright 2026 Hitesh Soliwal and contributors
+
+First-party integration, recipes, tests and proof tooling are Apache-2.0.
+Existing Synexia and M3 ownership and modification notices remain attached.
+
+The source-built dependencies retain their upstream licenses and notices:
+JUnit Jupiter/Platform: Eclipse Public License 2.0.
+API Guardian, OpenTest4J and Univocity parsers: Apache License 2.0.
+See SOURCES.tsv and each module's exact PROVENANCE.json, LICENSE declaration,
+and THIRD_PARTY_NOTICES.md. No upstream implementation body is relicensed by
+this qualification recipe or its generated integration metadata.
+
+OpenJDK keeps its existing license. This independent proving module does not
+replace java.util classes or promote the global runtime migration phase.

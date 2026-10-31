@@ -1,0 +1,14 @@
+field	value
+repository	hsoliwal/M3jdk21
+base	db2017c1aa4aace99543417fba79e3f7a307c26b
+archive_source	b0c2e495b8465dc802ef309c06810844b04e08e9
+archive_tree	a6977f429d9e1482018391d9fb8bd28ad4b40d36
+artifact_run	37251872807
+artifact_id	11321049911
+artifact_sha256	4ec6f65f360bd830500bd22316714af7367b3779614bd52b9ace3c7577e225ee
+maven	3.9.16
+rewrite	8.17.1
+java	Debian OpenJDK21.0.11
+workers	1
+platform	Linux amd64
+canonical_writes	false

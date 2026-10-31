@@ -1,0 +1,37 @@
+{
+  "command": [
+    "/workspace/scratch/877d9513c002/toolchains/apache-maven-3.9.12/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2",
+    "-f",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/tooling/migration-recipes/verification/jcc-handoff/pom.xml",
+    "clean",
+    "verify"
+  ],
+  "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate",
+  "started_utc": "2026-10-05T08:52:23.211028+00:00",
+  "ended_utc": "2026-10-05T08:52:28.750430+00:00",
+  "exit_code": 0,
+  "jdk": "/workspace/scratch/877d9513c002/toolchains/jdk-21.0.2",
+  "maven": "/workspace/scratch/877d9513c002/toolchains/apache-maven-3.9.12/bin/mvn",
+  "offline_repository": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2",
+  "stdout_sha256": "c3b617c8f251ed7f131c7dac7411339f45d647335b2b21671f8b35dfeae1ae3f",
+  "stderr_sha256": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55",
+  "inputs_sha256": "beb03b4d9b2fda498ff4f845972c75b1a5417c94513e5e6d4477d8cb467c6b82",
+  "inputs_unchanged": true,
+  "source_export_admitted": false,
+  "owning_module_99_percent_gate": "NOT_EXECUTED: exact whole-module source closure is not staged.",
+  "jdk_product_gate": "NOT_EXECUTED",
+  "remote_writes": false,
+  "suite": {
+    "name": "com.m3.rewrite.backport.JccHandoffTest",
+    "tests": "8",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.901"
+  },
+  "surefire_xml_sha256": "715d036afa0ec9a29dd7d31bbf9189e587b3dd81b55860ab35d4b4734340e5c5"
+}

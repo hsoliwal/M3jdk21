@@ -1,0 +1,161 @@
+{
+  "scope": "Independent static input identity/JSON checks only; no candidate imports, generation, builds, tests or remote calls.",
+  "current_context_declared": 527,
+  "current_context_unique_paths": 527,
+  "current_context_actual_bodies_match_now": true,
+  "current_context_mismatched_paths": [],
+  "current_main_membership": 446,
+  "current_parent_membership": 109,
+  "designated_owners": 19,
+  "designated_distribution": {
+    "synexia.jcc-recipe-laboratory": 13,
+    "synexia.jcc-java-jni-regression": 6
+  },
+  "E3_prior_objects_match_context_exactly": 17,
+  "E3_preexisting_history_count": 4,
+  "expected_complete_history_count": 21,
+  "older_history_commits": {
+    "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc": 4
+  },
+  "active_E3_commits": {
+    "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906": 17
+  },
+  "ordered_records": 46,
+  "unique_record_ids": 46,
+  "untouched_other_records_expected": 44,
+  "destination_gates": 20,
+  "selected_status_and_tests": [
+    {
+      "id": "synexia.jcc-recipe-laboratory",
+      "status": "blocked",
+      "tests": []
+    },
+    {
+      "id": "synexia.jcc-java-jni-regression",
+      "status": "blocked",
+      "tests": []
+    }
+  ],
+  "before_images": [
+    {
+      "resource": "before00-name-mapping.json.txt",
+      "path": "m3/docs/name-mapping.json",
+      "bytes": 236215,
+      "sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3",
+      "git_blob_sha1": "d10174dd61016069b9d5b73b7fd581a025855bcc",
+      "exact_E3_manifest_match": true,
+      "operational_preimage_equal": true
+    },
+    {
+      "resource": "before01-jcc-source-handoff.md.txt",
+      "path": "m3/docs/jcc-source-handoff.md",
+      "bytes": 16423,
+      "sha256": "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0",
+      "git_blob_sha1": "69ef3f693b65ec5dc95ab38f35c449c933c1c80b",
+      "exact_E3_manifest_match": true,
+      "operational_preimage_equal": true
+    },
+    {
+      "resource": "before02-source-destination-bindings.json.txt",
+      "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "bytes": 92103,
+      "sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef",
+      "git_blob_sha1": "b6283a33b9348f4ac6da3adaf5a35edb34a5a0c1",
+      "exact_E3_manifest_match": true,
+      "operational_preimage_equal": true
+    },
+    {
+      "resource": "before03-root-coverage-obligations.tsv.txt",
+      "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "bytes": 107597,
+      "sha256": "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12",
+      "git_blob_sha1": "b734e19c2dace50691612215e9a7cfb70c014aab",
+      "exact_E3_manifest_match": true,
+      "operational_preimage_equal": true
+    }
+  ],
+  "unbound_readiness_file_identities_checked": [
+    "derive_source_handoff.py",
+    "DERIVATION_INPUTS.json",
+    "DERIVATION_PREPARATION.md",
+    "HANDOFF_DOCUMENT.template.md",
+    "author_e04.py",
+    "run_verification.py",
+    "BINDING_INPUT_CONTRACT.md",
+    "FINAL_SOURCE_INPUTS.json",
+    "current-context/CONTEXT_REFERENCES.json"
+  ],
+  "pending": "No actual source publication receipt, derived output inventory, final root accounting, operational afterimages, sealed plan, receiving execution or final reference admission has been reviewed.",
+  "ten_context_receipt_copies_match_now": [
+    {
+      "name": "CURRENT_SOURCE_MANIFEST.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_SOURCE_MANIFEST.json",
+      "bytes": 1891080,
+      "sha256": "20fd857cb00711e02c34cd27445bd2c057db8f57a0cafb8ed9a455b453f3b37c",
+      "git_blob_sha1": "f1892501332d65721bfd6164597d93f3a298a10a"
+    },
+    {
+      "name": "PARENT_BUILD_CONTEXT.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/PARENT_BUILD_CONTEXT.json",
+      "bytes": 112397,
+      "sha256": "4f8fbf09070e4d45e42c7ac29c94401d70058fea04d98e44b3526a24c77912fc",
+      "git_blob_sha1": "665dac597b1b33414e152c9224c840e7e01127d5"
+    },
+    {
+      "name": "CURRENT_PROJECTION.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_PROJECTION.json",
+      "bytes": 596276,
+      "sha256": "18c5fea0f72fe21aa78df1aa6c319eb4276fc15aa481952539c221ce651e6f49",
+      "git_blob_sha1": "d20138ab763408bbbd793c1ff27778d866b29009"
+    },
+    {
+      "name": "CURRENT_CONTEXT_MANIFEST.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_CONTEXT_MANIFEST.json",
+      "bytes": 70459,
+      "sha256": "936730925c534f0744d5a3ed5831812c221c3ac919b889c1be5ebdfe294396ce",
+      "git_blob_sha1": "56f05d9af349f29cbfda8f12b158702606517fba"
+    },
+    {
+      "name": "BUILD_ROLE_MAP.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/BUILD_ROLE_MAP.json",
+      "bytes": 63816,
+      "sha256": "cabf31b005b28c18053c107936134356986f55770368cb982800900380ee8689",
+      "git_blob_sha1": "eed55a4d5b77d6bfe61746576409ae68d46f8a84"
+    },
+    {
+      "name": "INVENTORY_REVIEW.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_REVIEW.json",
+      "bytes": 14727,
+      "sha256": "41178470be98b342b83f58c43afa4a603d72c115584956c4fdbc96ce6a45d039",
+      "git_blob_sha1": "e3e43e60d7ed5247cadab7e58c5515e6e7e07136"
+    },
+    {
+      "name": "AMENDMENT.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/AMENDMENT.json",
+      "bytes": 1177,
+      "sha256": "e20b0de4dfa51c79e6e16d035c6c55a5d368a9641b175239cb6f41f916bd74a6",
+      "git_blob_sha1": "5009d7d338eaaca207129c277acc8513351939cc"
+    },
+    {
+      "name": "INVENTORY_REVIEW.md",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_REVIEW.md",
+      "bytes": 13344,
+      "sha256": "17af04df1ca7db7329bbff3f2cfa840b39ab69d93ef3a61caa988b71bb221400",
+      "git_blob_sha1": "2f4e377117ec1355537aac0e9a1de8fa141f5ea2"
+    },
+    {
+      "name": "INVENTORY_FILE_SEALS.json",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_FILE_SEALS.json",
+      "bytes": 183376,
+      "sha256": "02b0e8700b6d46a1c84730f8810ca510824af1da46655c5d59660b5902bb4b0c",
+      "git_blob_sha1": "3c068f6e10cc156cee9769a94997f5b7fbb3c4d9"
+    },
+    {
+      "name": "RECOVERY_SOURCE_INCLUDES.txt",
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/RECOVERY_SOURCE_INCLUDES.txt",
+      "bytes": 39132,
+      "sha256": "739ef583031ef3b940cbd141386ca91501fb7d505ce3ed78e2c55d2a98c70407",
+      "git_blob_sha1": "d64110d838a6a2632f8483c88ba0b2b94901e70d"
+    }
+  ]
+}

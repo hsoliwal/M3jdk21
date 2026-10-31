@@ -1,0 +1,5 @@
+source_repo	source_commit	source_path	source_blob	target	disposition
+hsoliwal/com.synexia	296323958b1019edd59b60b9c05cb148d024cfe5	synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/Regex10kMatrixMasteryCorpus.java	98b74755	com.m3.precompute.M3RegexOracleCorpus	ADAPT_FIRST_PARTY_GENERATOR_AND_ROOTS_FROZEN
+hsoliwal/com.synexia	296323958b1019edd59b60b9c05cb148d024cfe5	synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexPrecomputeMatrix10kTest.java	c40b3bb9	com.m3.precompute.M3RegexOracleHarness	ADAPT_BOUNDED_ORDERED_MISMATCH_LEDGER_JDK_PATTERN_ORACLE_SIGNALS_RANK_ONLY
+hsoliwal/M3jdk21	c9b07049c5	m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexStringTrialImage.java	ffce8a21	com.m3.precompute.M3RegexOracleHarness	REUSED_TARGET_OWNER_SHARDED_ORACLE_STORE
+hsoliwal/M3jdk21	c9b07049c5	m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexShape.java	ff989cfa	com.m3.precompute.M3RegexOracleHarness.literalShape	REUSED_TARGET_OWNER_FIRST_PRUNING_CANDIDATE

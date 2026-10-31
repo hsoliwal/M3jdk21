@@ -1,0 +1,42 @@
+{
+  "schema": "eclipse-collections-namespace-identity-exception-v1",
+  "sourceNamespace": "org.eclipse.collections",
+  "targetNamespace": "com.m3.collections.eclipse",
+  "authorizedScope": "User requested package-first renaming across all collections libraries; owner decision 2026-10-24: receive fork master acefe9c62227 after the fork-first header prep",
+  "identitiesChanged": [
+    "declared qualified names",
+    "reflection names",
+    "generator template package paths and generated-source packages",
+    "factory fallback class names in ServiceLoaderUtils",
+    "OSGi Bundle-SymbolicName and JPMS module names: com.m3.collections.eclipse.api and com.m3.collections.eclipse.impl (fork bnd; BSN = module name)",
+    "serialized descriptors",
+    "explicit qualified-name diagnostics"
+  ],
+  "preserved": [
+    "original method and storage algorithms under name mapping",
+    "original source headers and license/notice bytes",
+    "Maven coordinates org.eclipse.collections:*:14.0.0-SNAPSHOT as provenance",
+    "external provenance URLs",
+    "paths of the 12 Scala files under org/eclipse/collections (their packages are relocated)"
+  ],
+  "notClaimed": [
+    "original qualified assignability",
+    "original serialization wire compatibility",
+    "Maven Central artifact publication",
+    "META-INF/services provider files (the tree has none; API factories resolve through the ServiceLoaderUtils reflection fallback)",
+    "whole-library arrays or JNI completion"
+  ],
+  "namingException": {
+    "rule": "R2",
+    "ruleText": "A received source dir carries the full release version; only release tags are received, never snapshots",
+    "directory": "m3/collections/implementations/eclipse-collections-14.0.0-snapshot-00a668d6",
+    "evidenceDirectory": "m3/collections/receiving/eclipse-collections-14.0.0-snapshot-00a668d6-20261024",
+    "decision": "Owner-approved exception, 2026-10-24",
+    "record": "m3/collections/NAMING.md, Exceptions table",
+    "reason": "No release contains the fork M3 work; fork master acefe9c62227 compiles with --release 21 and --release 17; the name carries the snapshot version and the upstream commit 00a668d6"
+  },
+  "deferred": [
+    "M3 prefix for the first-party IndexedRedBlackMap, IndexedRedBlackTree, IndexedSortedMap and IndexedTreeArena (naming item C3 #9, undecided)"
+  ],
+  "buildQuarantineException": "Original coordinates retained as provenance; the 19 donor POMs are unchanged in this receive and default install/deploy skips follow in the build-quarantine successor (leaf A2). The tree is outside the M3 reactor."
+}

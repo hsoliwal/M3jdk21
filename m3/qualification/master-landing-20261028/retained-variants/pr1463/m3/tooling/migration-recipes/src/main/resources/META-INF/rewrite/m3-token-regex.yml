@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.TokenRegex
+displayName: M3JDK21 token-sequence regex scaffold over M3String token indexes
+description: >-
+  Scaffold-first receiver for token-sequence regular expressions (TokensRegex / T-Rex shape) in
+  java.base jdk.internal.mindex: M3TokenPattern (hand-written parser for a Square T-Rex grammar
+  subset, primitive arena AST), M3TokenIndex (kind, lexeme, source start/end, flags, binding and
+  attribute lanes of one M3String snapshot), M3TokenPredicateCache (predicate rows bound per
+  generation; regex-on-spelling rows pending the M3RX7 TokenIndex fill) and M3TokenMatcher
+  (capture contract; match bodies throw M3NotYetReceived until the MIndexTaggedRegex port lands),
+  plus the jtreg-shaped M3TokenRegexTest. Six ABSENT targets, hash-pinned TARGET_OWNED_PORT
+  postimages; no public JDK API change.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-token-regex

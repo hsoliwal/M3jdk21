@@ -1,0 +1,3 @@
+$ ["/workspace/scratch/a0f19f379302/jdk-21.0.12.1+1/bin/jar","--create","--file","/workspace/scratch/a0f19f379302/parser-target-proof-2/jdk.m3.parser.jar","--date","2026-01-01T00:00:00Z","-C","/workspace/scratch/a0f19f379302/parser-target-proof-2/modules/jdk.m3.parser","."]
+
+EXIT 0

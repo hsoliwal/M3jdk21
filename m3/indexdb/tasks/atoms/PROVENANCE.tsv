@@ -1,0 +1,8 @@
+source	identity	role
+DB_CI_artifact	11296581450	51-test baseline and actual JaCoCo XML
+DB_artifact_sha256	d541f9ec8eae2a739392e78c87b3bcfc12c52f97b8683fbb36a3b0eef4ebccf7	Downloaded bytes verified
+recipe_CI_artifact	11296387332	Actual prior compile failure and source
+recipe_artifact_sha256	8dfe688100858026f4556e7104b0b54dde4b4a31d7ed4b84cb7603a2dc49dacd	Prior source evidence
+engine	M3HashPinnedJavaSnapshotRecipe	Existing unchanged transformation engine
+filesystem	JDK ZIP/default providers	Real fallback; no new provider implementation
+licensing	Apache-2.0	Existing M3 source; original tests; no donor bodies copied

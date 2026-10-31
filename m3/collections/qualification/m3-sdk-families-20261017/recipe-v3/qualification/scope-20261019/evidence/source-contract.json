@@ -1,0 +1,325 @@
+{
+  "schema": "M3_EXACT_TEXT_EVIDENCE_BUNDLE_V1",
+  "receipt": {
+    "schema": "M3_SORTED_RECIPE_SCOPE_CONTRACT_V1",
+    "status": "PASS",
+    "before_sha256": "4871d83f3c0da5d1bbf0f5157c1a73d5335a8508027d2a69b5e5096ce62673ff",
+    "after_sha256": "fa29e6edd44510564f00e5759f31ab97d595823857a8841f30ae2a1c58bed8b2",
+    "source_api_unchanged": true,
+    "scope_only_change": true,
+    "commands": [
+      {
+        "case": "original-failure",
+        "argv": [
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/javac",
+          "--release",
+          "21",
+          "-proc:none",
+          "-Xlint:all",
+          "-Werror",
+          "-XDrawDiagnostics",
+          "-d",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/classes",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/preimages/canonical/synexia-m3-recipe/recipes/m3-sdk-sorted-contract-20261017/src/main/java/com/synexia/m3/M3SdkSortedContractRecipe.java"
+        ],
+        "exit_code": 1,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "71e5bb16cfd25cb871981f9d881d5be364995e5d472ce0e190418e557b598b09",
+        "expected_diagnostic": "compiler.err.cant.resolve.location: kindname.variable, file"
+      },
+      {
+        "case": "minimized-same-failure",
+        "argv": [
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/javac",
+          "--release",
+          "21",
+          "-proc:none",
+          "-Xlint:all",
+          "-Werror",
+          "-XDrawDiagnostics",
+          "-d",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/classes",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/ScopeCounterexample.java"
+        ],
+        "exit_code": 1,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "ae2ad08f3c1d4f7ef1518e99018ed216249351c00b69a56d3220c2d4ad248c69",
+        "expected_diagnostic": "compiler.err.cant.resolve.location: kindname.variable, file"
+      },
+      {
+        "case": "fixed-strict-compile",
+        "argv": [
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/javac",
+          "--release",
+          "21",
+          "-proc:none",
+          "-Xlint:all",
+          "-Werror",
+          "-XDrawDiagnostics",
+          "-d",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/classes",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/proof/target/sorted-recipe-canonical/candidate/synexia-m3-recipe/recipes/m3-sdk-sorted-contract-20261017/src/main/java/com/synexia/m3/M3SdkSortedContractRecipe.java"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_diagnostic": null
+      },
+      {
+        "case": "fixed-public-descriptors",
+        "argv": [
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/javap",
+          "-public",
+          "-classpath",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/classes",
+          "com.synexia.m3.M3SdkSortedContractRecipe"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "baaf6b8f66cdda44bbf36f9b897727eb148400cb2cd02708cc5cb5de4262ab94",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_diagnostic": null
+      },
+      {
+        "case": "original-selftest-1",
+        "argv": [
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+          "-Xcheck:jni",
+          "-Djava.io.tmpdir=/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/tmp",
+          "-cp",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/classes",
+          "com.synexia.m3.M3SdkSortedContractRecipe",
+          "--selftest"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "b62022ef0bd98fa3a4eafd25660caaf0b8a5c17794c9aaf2e20c05d620cba295",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_diagnostic": null
+      },
+      {
+        "case": "original-selftest-2",
+        "argv": [
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+          "-Xcheck:jni",
+          "-Djava.io.tmpdir=/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/tmp",
+          "-cp",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/classes",
+          "com.synexia.m3.M3SdkSortedContractRecipe",
+          "--selftest"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "b62022ef0bd98fa3a4eafd25660caaf0b8a5c17794c9aaf2e20c05d620cba295",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_diagnostic": null
+      },
+      {
+        "case": "v2-check-refusal",
+        "argv": [
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+          "-Xcheck:jni",
+          "-Djava.io.tmpdir=/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/tmp",
+          "-cp",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/classes",
+          "com.synexia.m3.M3SdkSortedContractRecipe",
+          "--check",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/v2-receiver"
+        ],
+        "exit_code": 1,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "b625620895ef9772f3d460332ef58ea6cf78c84ffad760b6d96b6f82b9006a7a",
+        "expected_diagnostic": "REFUSE_DRIFT"
+      },
+      {
+        "case": "v2-apply",
+        "argv": [
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+          "-Xcheck:jni",
+          "-Djava.io.tmpdir=/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/tmp",
+          "-cp",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/classes",
+          "com.synexia.m3.M3SdkSortedContractRecipe",
+          "--apply",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/v2-receiver"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "75ec0046b4a24c1dbf6db47380211a6ceb564c127506ca09c61eb61e137b82e8",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_diagnostic": null
+      },
+      {
+        "case": "v3-fixed-point",
+        "argv": [
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+          "-Xcheck:jni",
+          "-Djava.io.tmpdir=/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/tmp",
+          "-cp",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/classes",
+          "com.synexia.m3.M3SdkSortedContractRecipe",
+          "--apply",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/v2-receiver"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "75ec0046b4a24c1dbf6db47380211a6ceb564c127506ca09c61eb61e137b82e8",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_diagnostic": null
+      },
+      {
+        "case": "v3-check",
+        "argv": [
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+          "-Xcheck:jni",
+          "-Djava.io.tmpdir=/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/tmp",
+          "-cp",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/classes",
+          "com.synexia.m3.M3SdkSortedContractRecipe",
+          "--check",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/v2-receiver"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "8d1e1eccf8f1f0d28f97ff3f88b2f005817f9c19cd7cd65fc021fa906a6dee32",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_diagnostic": null
+      },
+      {
+        "case": "late-drift-atomic-refusal",
+        "argv": [
+          "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
+          "-Xcheck:jni",
+          "-Djava.io.tmpdir=/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/tmp",
+          "-cp",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/classes",
+          "com.synexia.m3.M3SdkSortedContractRecipe",
+          "--apply",
+          "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/evidence/sorted-source-contract-01/late-drift-receiver"
+        ],
+        "exit_code": 1,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "ebbf199a11236a26d76c86f22b1ef174a844f16339c776b0d308dd765df90882",
+        "expected_diagnostic": "REFUSE_DRIFT"
+      }
+    ],
+    "product_sources_written": false,
+    "exact_historical_atoms": 2,
+    "minimized_failure_signature": "compiler.err.cant.resolve.location: kindname.variable, file",
+    "temporary_roots_removed": true,
+    "fixed_point_preserves_bytes_modes_mtimes": true,
+    "late_drift_refuses_before_any_write": true,
+    "public_descriptor_comparison": "source declaration and generated bytecode; original does not compile"
+  },
+  "logs": [
+    {
+      "path": "evidence/sorted-source-contract-01/logs/fixed-public-descriptors.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "utf8": ""
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/fixed-public-descriptors.stdout.log",
+      "sha256": "baaf6b8f66cdda44bbf36f9b897727eb148400cb2cd02708cc5cb5de4262ab94",
+      "utf8": "Compiled from \"M3SdkSortedContractRecipe.java\"\npublic final class com.synexia.m3.M3SdkSortedContractRecipe {\n  public static void main(java.lang.String[]) throws java.lang.Exception;\n}\n"
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/fixed-strict-compile.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "utf8": ""
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/fixed-strict-compile.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "utf8": ""
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/late-drift-atomic-refusal.stderr.log",
+      "sha256": "ebbf199a11236a26d76c86f22b1ef174a844f16339c776b0d308dd765df90882",
+      "utf8": "Exception in thread \"main\" java.io.IOException: REFUSE_DRIFT: m3/collections/src/test/java/com/m3/collections/M3CollectionSdkSelfTest.java: 45e44187ad0a2530ec6573912f2b9032afcfa3be\n\tat com.synexia.m3.M3SdkSortedContractRecipe.run(M3SdkSortedContractRecipe.java:144)\n\tat com.synexia.m3.M3SdkSortedContractRecipe.main(M3SdkSortedContractRecipe.java:53)\n"
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/late-drift-atomic-refusal.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "utf8": ""
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/minimized-same-failure.stderr.log",
+      "sha256": "ae2ad08f3c1d4f7ef1518e99018ed216249351c00b69a56d3220c2d4ad248c69",
+      "utf8": "ScopeCounterexample.java:6:33: compiler.err.cant.resolve.location: kindname.variable, file, , , (compiler.misc.location: kindname.class, ScopeCounterexample, null)\n1 error\n"
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/minimized-same-failure.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "utf8": ""
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/original-failure.stderr.log",
+      "sha256": "71e5bb16cfd25cb871981f9d881d5be364995e5d472ce0e190418e557b598b09",
+      "utf8": "M3SdkSortedContractRecipe.java:224:27: compiler.err.cant.resolve.location: kindname.variable, file, , , (compiler.misc.location: kindname.class, com.synexia.m3.M3SdkSortedContractRecipe, null)\n1 error\n"
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/original-failure.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "utf8": ""
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/original-selftest-1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "utf8": ""
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/original-selftest-1.stdout.log",
+      "sha256": "b62022ef0bd98fa3a4eafd25660caaf0b8a5c17794c9aaf2e20c05d620cba295",
+      "utf8": "PASS M3SdkSortedContractRecipe selftest fixed-point/missing/drift\n"
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/original-selftest-2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "utf8": ""
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/original-selftest-2.stdout.log",
+      "sha256": "b62022ef0bd98fa3a4eafd25660caaf0b8a5c17794c9aaf2e20c05d620cba295",
+      "utf8": "PASS M3SdkSortedContractRecipe selftest fixed-point/missing/drift\n"
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/v2-apply.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "utf8": ""
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/v2-apply.stdout.log",
+      "sha256": "75ec0046b4a24c1dbf6db47380211a6ceb564c127506ca09c61eb61e137b82e8",
+      "utf8": "PASS M3SdkSortedContractRecipe --apply atoms=2\n"
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/v2-check-refusal.stderr.log",
+      "sha256": "b625620895ef9772f3d460332ef58ea6cf78c84ffad760b6d96b6f82b9006a7a",
+      "utf8": "Exception in thread \"main\" java.io.IOException: REFUSE_DRIFT: m3/collections/src/main/java/com/m3/collections/M3CollectionSdk.java: 042069cd167191e1faa1710fb9a9e65bca14983c\n\tat com.synexia.m3.M3SdkSortedContractRecipe.run(M3SdkSortedContractRecipe.java:144)\n\tat com.synexia.m3.M3SdkSortedContractRecipe.main(M3SdkSortedContractRecipe.java:53)\n"
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/v2-check-refusal.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "utf8": ""
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/v3-check.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "utf8": ""
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/v3-check.stdout.log",
+      "sha256": "8d1e1eccf8f1f0d28f97ff3f88b2f005817f9c19cd7cd65fc021fa906a6dee32",
+      "utf8": "PASS M3SdkSortedContractRecipe --check atoms=2\n"
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/v3-fixed-point.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "utf8": ""
+    },
+    {
+      "path": "evidence/sorted-source-contract-01/logs/v3-fixed-point.stdout.log",
+      "sha256": "75ec0046b4a24c1dbf6db47380211a6ceb564c127506ca09c61eb61e137b82e8",
+      "utf8": "PASS M3SdkSortedContractRecipe --apply atoms=2\n"
+    }
+  ],
+  "minimized_counterexample": {
+    "path": "ScopeCounterexample.java",
+    "sha256": "efa2edfb65606caee9583e9e0942153c85c150a97fe5342b7148c44aa566703a",
+    "utf8": "// SPDX-License-Identifier: Apache-2.0\nimport java.nio.file.Path;\nfinal class ScopeCounterexample {\n    static void reproduce(Path root) {\n        try { Path file = root.resolve(\"fixture\"); }\n        finally { for (Path p = file.getParent(); !p.equals(root); p = p.getParent()) { } }\n    }\n}\n"
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "canonical": {
+    "authority": "hsoliwal/com.synexia",
+    "authority_role": "CANONICAL_RECIPE_AND_CONVERGENCE_WORKSPACE",
+    "base_commit": "140c263a90f9803b9c46103c63355a286e0515f0",
+    "datasets": [
+      {
+        "after_sha256": "e4ffa9331e6dfb74cd91391c4cdc9b9cc8fa1f359e79b6f98f4ccb962b1f6fd9",
+        "before_sha256": "ABSENT",
+        "id": "m3-set-null-oracle-20261018",
+        "manifest_git_blob": "30b1a9547ac7bfece7af043f1e2e797e2b49bcb2",
+        "manifest_sha256": "011dd4e769f9beee710ecf32e33fc1b6477d3dbd86ee9c22218c81453f83609c",
+        "replay_results": 0,
+        "sdk_receipt_sha256": "1bd69df3fc51bea3670ed5aed316062d2d3af4ced2a6c6328207b5080c5a0e23",
+        "sdk_results": 1,
+        "target_path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullContract.java"
+      },
+      {
+        "after_sha256": "ba0af20ac2ebc21a88c5283484e02106a656838f85a6568ea15b6268e8aa9c80",
+        "before_sha256": "ABSENT",
+        "id": "m3-set-null-junit-20261018",
+        "manifest_git_blob": "39a66c450b024987126449d7babcdf24c9112496",
+        "manifest_sha256": "55d42a9ccdc7d4c5f1416d70803b15bcf37b66e0d68a9d8606b2803a48f5a7ca",
+        "replay_results": 0,
+        "sdk_receipt_sha256": "92b7a52fdff2d2e0b730bdf26506c42ccfe872afc7ce9201e6ebd5774f4d5be3",
+        "sdk_results": 1,
+        "target_path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullTest.java"
+      },
+      {
+        "after_sha256": "3c5528cb59b86a5905c42c4c7e1dd4923772bdb5e2f4918c94466d809ad3344b",
+        "before_sha256": "ABSENT",
+        "id": "m3-mask-oracle-20261018",
+        "manifest_git_blob": "4b3f00d2dcf563ec31e0a03e5becfa9586dc962a",
+        "manifest_sha256": "7872cd8dc592027ce87644df34c400897f7a4f37d38ea72b9d90dc15ec34f920",
+        "replay_results": 0,
+        "sdk_receipt_sha256": "d4482f77e1d156058d5e6208912203a9fd47668d69ea5a198673476206e2f926",
+        "sdk_results": 1,
+        "target_path": "m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasContract.java"
+      },
+      {
+        "after_sha256": "21524ab83d436650d247964f54ad659bcee754d279e81be2450fc22142e989c3",
+        "before_sha256": "ABSENT",
+        "id": "m3-mask-junit-20261018",
+        "manifest_git_blob": "89fd225dbf8ae486d4c0f733e080961fe8e84876",
+        "manifest_sha256": "40c730473a92d29ad77addf51a8d7bae75e01decf16978c8236811130c040c31",
+        "replay_results": 0,
+        "sdk_receipt_sha256": "8cd6422936a7626280cca9c819fade94ec4e4e2cbc0d02bbe49919a28ce3f4f4",
+        "sdk_results": 1,
+        "target_path": "m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasTest.java"
+      },
+      {
+        "after_sha256": "3f4c6ec67e0dacf16efaa0d22a1b649790b00c81e4c4f9cd8564851ffef4769b",
+        "before_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+        "id": "m3-readonly-set-null-20261018",
+        "manifest_git_blob": "e3b88148a0d261ff15bdc1d23d1358ff6afc535b",
+        "manifest_sha256": "42972edae494d1d19f42e05218b90b58122908c7e1fe6c8a42006779f02da017",
+        "replay_results": 0,
+        "sdk_receipt_sha256": "9f3720568304fcd00552312e487841be7a056d6131d2e7c866433b39035541f4",
+        "sdk_results": 1,
+        "target_path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java"
+      },
+      {
+        "after_sha256": "772c6edbf3781fcebc373e6ad79d82770112e91eab811b5883d92650dcdfd947",
+        "before_sha256": "4d1c782345de46c31e24b4822f58c431903c7b951b6a15641c88e055271f971e",
+        "id": "m3-path-mask-alias-20261018",
+        "manifest_git_blob": "c3e4a938494f7527a927b9b415de8c408528c29b",
+        "manifest_sha256": "2328c0e733f51a20e4af04ab48d86b34fab918e31fcf3c5b47a94c6e86c629fc",
+        "replay_results": 0,
+        "sdk_receipt_sha256": "314cefb4b881cd0507864270d57305832b06e9e2ca831b81a18c4852e03d536b",
+        "sdk_results": 1,
+        "target_path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java"
+      }
+    ],
+    "descriptor_git_blob": "22d38e374005a43752a40a359ec3e8960b8af85f",
+    "descriptor_sha256": "72083cc748879db1a720fd398073da9bb89cf8a5ca79b0e71abff93ef1ca8123",
+    "engine_input_manifest_sha256": "c298435901b973d806128a3c4dfe48430570920e7d09982afb604e7e39913011",
+    "executed_source_hashes_manifest_sha256": "e1fc00c20645dd5532e2a06e36bd5d2fdaaf292331cc8b727448603c1fe5b441",
+    "final_commit": "8d465b3383b5b3a16cc43af5372e7c21d69cd42e",
+    "final_packet_manifest_entries": 78,
+    "final_packet_sha256": "4f6e0c1a340e5595609f558915b7381c1008d26866a65dd76aee0f3efb23152c",
+    "final_tree": "7d92a0415bee9c2d776a4442c6b8678bff9cf619",
+    "named_recipe": "com.synexia.rewrite.m3.NavigationMask20261018",
+    "owner_mapping_sha256": "e1fc00c20645dd5532e2a06e36bd5d2fdaaf292331cc8b727448603c1fe5b441",
+    "publication_manifest_entries": 80,
+    "publication_manifest_sha256": "4de573ab62d15ad63dbcbdcc4cfa5e4652fce8daf6da60e3fe0307805e8953b0",
+    "published_input_identity_check": {
+      "evidence_origin": "Publication controller verified the actual GitHub head and tree; opaque identity metadata only.",
+      "executed_inputs_unchanged": 32,
+      "materialized_files_equal_declared_head": 80,
+      "remote_tree_equals_local_git_tree": true,
+      "status": "PASS",
+      "unchanged_canonical_checker": {
+        "changed_files": 80,
+        "status": "PASS",
+        "violations": 0
+      }
+    },
+    "unchanged_engine_identity_metadata": [
+      {
+        "authority_component": "M3HashPinnedJavaSnapshotRecipe",
+        "git_blob": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40",
+        "role": "UNCHANGED_CANONICAL_SOURCE_INPUT",
+        "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625"
+      },
+      {
+        "authority_component": "M3ScopeInference",
+        "git_blob": "d24729950508857280ea1b56d4e930f05137ec85",
+        "role": "UNCHANGED_CANONICAL_SOURCE_INPUT",
+        "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
+      },
+      {
+        "authority_component": "M3EditScope",
+        "git_blob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+        "role": "UNCHANGED_CANONICAL_SOURCE_INPUT",
+        "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+      }
+    ]
+  },
+  "catalogue": {
+    "algorithm_admissions": 0,
+    "head_commit": "08181cf261f3b9224ec6916e352435ed0494a9a7",
+    "immutable_public_url": "https://github.com/hsoliwal/M3jdk21/tree/08181cf261f3b9224ec6916e352435ed0494a9a7/m3/collections/algorithm-catalog/challenge-forks-20261018",
+    "inventory_status": "NOT_EVALUATED",
+    "manifest_sha256": "5c0c71817c392c6b79d0536c4aa4c927e9142aad2c5a390f3e8518b1b7b3d36c",
+    "packet_path": "m3/collections/algorithm-catalog/challenge-forks-20261018",
+    "publication_pin_status": "VERIFIED_BY_PUBLICATION_CONTROLLER",
+    "pull_request": "https://github.com/hsoliwal/M3jdk21/pull/1323",
+    "repository": "hsoliwal/M3jdk21"
+  },
+  "public_boundary": {
+    "canonical_regeneration": "REQUIRES_AUTHORIZED_CANONICAL_ARTIFACT_ACCESS",
+    "engine_source_exported": false,
+    "global_ledger_exported": false,
+    "kind": "IDENTITY_AND_QUALIFICATION_METADATA_ONLY",
+    "private_commit_body_exported": false,
+    "private_source_inventory_exported": false,
+    "restricted_url_exported": false,
+    "target_verification": "PUBLIC_RECEIVED_SOURCE_AND_REAL_SOURCE_BUILT_DEPENDENCIES"
+  },
+  "qualification_receipts": {
+    "final_interfaces_sha256": "9295f3c50ffb92ad8f155777717f0fd50493f625a13e7c6c01238a17a3c074a9",
+    "native_prepare_sha256": "467ab1f13464fb4a611ebc322bd10fd656aa091e8994dd8a77498d95d8467be8",
+    "native_runtime_sha256": "838df21ba76e4ee66ec9c18b9afb0ecbe18b75de8d8ffdbacb04fbbad3d998d4",
+    "sdk_receiver_log_sha256": "65f5422eb25b7906d0584cb943b361aa06112cdae1ff97b63e55948d3809ca75",
+    "sdk_test_log_sha256": "88648987dd08e5c140036548af9bd11969a1ea1b4787759596b1c17a63294441"
+  },
+  "receipt_intake": "DATA_OR_METADATA_EXPORT",
+  "receiving_sequence": {
+    "active_phase": "STRING",
+    "arrays": "WAITING_FOR_PREDECESSOR",
+    "collections": "WAITING_FOR_PREDECESSOR",
+    "family_completion": false,
+    "optional_publication_pack": "NOT_ADVANCED",
+    "phase_promotion": false,
+    "repository_completion": false
+  },
+  "recipe_intake": "EXTERNAL_RECIPE_TOOL",
+  "rejected_generic_navigation": {
+    "archive_manifest_sha256": "df28ea858e0e1ebc438f6460f681430ace37feea48abe97bf3390c55c82eba85",
+    "decision": "REJECTED_SEMANTIC_ADMISSION",
+    "original_readonly_map_and_mutable_owners_retained": true,
+    "research_exported": false
+  },
+  "runtime_dependency_added": false,
+  "source_intake": "INDEPENDENT_APACHE_MODULE",
+  "spdx_file_copyright_text": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "spdx_license_identifier": "Apache-2.0",
+  "status": "EXACT_SOURCE_QUALIFIED_CANONICAL_AND_CATALOGUE_PINS_VERIFIED",
+  "target": {
+    "base_commit": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "head_branch": "m3/readonly-set-null-mask-receiver-20261018",
+    "head_resolution": {
+      "binding": "Verify SOURCE_RECEIPT.tsv and SHA256SUMS against the six blobs in the containing Git commit; resolve that commit and associated PR from Git/GitHub metadata.",
+      "pull_request": "GITHUB_PULL_REQUEST_METADATA_FOR_CONTAINING_COMMIT_AND_HEAD_BRANCH",
+      "reason": "A committed receipt cannot embed its own future commit hash without a self-reference cycle.",
+      "source_commit": "CONTAINING_GIT_COMMIT"
+    },
+    "hosted_ci": "NOT_ASSERTED_IN_SOURCE_RECEIPT",
+    "repository": "hsoliwal/M3JDK21"
+  }
+}

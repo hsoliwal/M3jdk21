@@ -1,0 +1,13 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.LongSortedSnapshot20261017
+displayName: Install immutable indexed M3 primitive-long sorted snapshot
+description: >-
+  Reuses the canonical M3HashPinnedJavaSnapshotRecipe engine. Adds only an immutable
+  primitive-long sorted snapshot and its JDK21 differential self-test, with exact
+  ABSENT preimages, SHA-256-sealed Java LST after-images and second-pass fixed-point
+  refusal. No JDK java.base, native ABI, or live wrapper ownership changes.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3long-sorted-snapshot-20261017
+      lst: true

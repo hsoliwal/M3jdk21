@@ -1,0 +1,658 @@
+{
+  "schema": "M3_ALGORITHM_EVALUATION_RESULTS_V1",
+  "atom_id": "ALG-NUMERIC-COPY-RUNS",
+  "category": [
+    "ARRAYS",
+    "IMMUTABLE_NUMERIC_RANGE_COPY"
+  ],
+  "baseline_revision": "4b24824c3aa09d802121447f8970d442a855f064",
+  "before_sha256": "8d6afc24c677adb7ba612071d34453c8a7d8b9e1a81ac27fb06bc3f62c673edd",
+  "after_sha256": "3221d674ac9947c97d50967659176aa5bdf3db6a51e7e3574daa3d0792a6d83d",
+  "evaluation_scope": "qualified SDK output for existing separately built immutable arrays module; root receiving Java/JNI gate has separate receipts",
+  "selection": "private-owned bulk copy plus one initial flat-join lookup; retain external and nested accessor fallback",
+  "sdk_qualification": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "sealing_tests": 8,
+    "receiver_cases": 9,
+    "sdk_inputs_sha256": "1f6796cfb9dc805b44223e02efe05596147be06052447c9f9d6d6bf7016a3365",
+    "sdk_results_sha256": "0f4c412e6b4ade2c05bb7afcec22efd626e89eebf0278762fad32c71ee593043"
+  },
+  "semantic_qualification": {
+    "baseline_default": [
+      "empty-segment corpus417595/912",
+      "numeric-copy corpus189233"
+    ],
+    "sdk_modes": [
+      "default",
+      "interpreter",
+      "C1",
+      "C2"
+    ],
+    "numeric_checks_per_mode": 189233,
+    "existing_empty_segment_checks_per_mode": 417595,
+    "existing_empty_segment_cases_per_mode": 912,
+    "public_api_equal": true,
+    "retained_fields_equal": true,
+    "native_loaded": false
+  },
+  "resources": {
+    "fresh_jvms": 24,
+    "warm_samples_per_primitive_shape_variant": 15,
+    "all_warm_allocations_zero": true,
+    "retained_graphs_equal": true,
+    "cpu_metric": "median current-thread CPU nanoseconds per512copies over15samples",
+    "comparisons": [
+      {
+        "shape": "snapshot",
+        "int_graph_equal": true,
+        "int_graph_observations": {
+          "baseline": [
+            {
+              "shallow_bytes": 32800,
+              "primitive_bytes": 32768,
+              "reference_slots": 1,
+              "arrays": 1,
+              "views": 1
+            },
+            {
+              "shallow_bytes": 32800,
+              "primitive_bytes": 32768,
+              "reference_slots": 1,
+              "arrays": 1,
+              "views": 1
+            },
+            {
+              "shallow_bytes": 32800,
+              "primitive_bytes": 32768,
+              "reference_slots": 1,
+              "arrays": 1,
+              "views": 1
+            }
+          ],
+          "sdk": [
+            {
+              "shallow_bytes": 32800,
+              "primitive_bytes": 32768,
+              "reference_slots": 1,
+              "arrays": 1,
+              "views": 1
+            },
+            {
+              "shallow_bytes": 32800,
+              "primitive_bytes": 32768,
+              "reference_slots": 1,
+              "arrays": 1,
+              "views": 1
+            },
+            {
+              "shallow_bytes": 32800,
+              "primitive_bytes": 32768,
+              "reference_slots": 1,
+              "arrays": 1,
+              "views": 1
+            }
+          ]
+        },
+        "long_graph_equal": true,
+        "long_graph_observations": {
+          "baseline": [
+            {
+              "shallow_bytes": 65568,
+              "primitive_bytes": 65536,
+              "reference_slots": 1,
+              "arrays": 1,
+              "views": 1
+            },
+            {
+              "shallow_bytes": 65568,
+              "primitive_bytes": 65536,
+              "reference_slots": 1,
+              "arrays": 1,
+              "views": 1
+            },
+            {
+              "shallow_bytes": 65568,
+              "primitive_bytes": 65536,
+              "reference_slots": 1,
+              "arrays": 1,
+              "views": 1
+            }
+          ],
+          "sdk": [
+            {
+              "shallow_bytes": 65568,
+              "primitive_bytes": 65536,
+              "reference_slots": 1,
+              "arrays": 1,
+              "views": 1
+            },
+            {
+              "shallow_bytes": 65568,
+              "primitive_bytes": 65536,
+              "reference_slots": 1,
+              "arrays": 1,
+              "views": 1
+            },
+            {
+              "shallow_bytes": 65568,
+              "primitive_bytes": 65536,
+              "reference_slots": 1,
+              "arrays": 1,
+              "views": 1
+            }
+          ]
+        },
+        "cold_allocated_bytes_equal": false,
+        "cold_allocated_bytes_observations": {
+          "baseline": [
+            12594488,
+            12594488,
+            12594488
+          ],
+          "sdk": [
+            12594328,
+            12594328,
+            12594328
+          ]
+        },
+        "int_cpu_median_ns": {
+          "baseline": 1859993,
+          "sdk": 536936
+        },
+        "int_warm_allocated_bytes": {
+          "baseline": [
+            0,
+            0,
+            0
+          ],
+          "sdk": [
+            0,
+            0,
+            0
+          ]
+        },
+        "long_cpu_median_ns": {
+          "baseline": 2246869,
+          "sdk": 1008384
+        },
+        "long_warm_allocated_bytes": {
+          "baseline": [
+            0,
+            0,
+            0
+          ],
+          "sdk": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "shape": "slice",
+        "int_graph_equal": true,
+        "int_graph_observations": {
+          "baseline": [
+            {
+              "shallow_bytes": 32824,
+              "primitive_bytes": 32768,
+              "reference_slots": 2,
+              "arrays": 1,
+              "views": 2
+            },
+            {
+              "shallow_bytes": 32824,
+              "primitive_bytes": 32768,
+              "reference_slots": 2,
+              "arrays": 1,
+              "views": 2
+            },
+            {
+              "shallow_bytes": 32824,
+              "primitive_bytes": 32768,
+              "reference_slots": 2,
+              "arrays": 1,
+              "views": 2
+            }
+          ],
+          "sdk": [
+            {
+              "shallow_bytes": 32824,
+              "primitive_bytes": 32768,
+              "reference_slots": 2,
+              "arrays": 1,
+              "views": 2
+            },
+            {
+              "shallow_bytes": 32824,
+              "primitive_bytes": 32768,
+              "reference_slots": 2,
+              "arrays": 1,
+              "views": 2
+            },
+            {
+              "shallow_bytes": 32824,
+              "primitive_bytes": 32768,
+              "reference_slots": 2,
+              "arrays": 1,
+              "views": 2
+            }
+          ]
+        },
+        "long_graph_equal": true,
+        "long_graph_observations": {
+          "baseline": [
+            {
+              "shallow_bytes": 65592,
+              "primitive_bytes": 65536,
+              "reference_slots": 2,
+              "arrays": 1,
+              "views": 2
+            },
+            {
+              "shallow_bytes": 65592,
+              "primitive_bytes": 65536,
+              "reference_slots": 2,
+              "arrays": 1,
+              "views": 2
+            },
+            {
+              "shallow_bytes": 65592,
+              "primitive_bytes": 65536,
+              "reference_slots": 2,
+              "arrays": 1,
+              "views": 2
+            }
+          ],
+          "sdk": [
+            {
+              "shallow_bytes": 65592,
+              "primitive_bytes": 65536,
+              "reference_slots": 2,
+              "arrays": 1,
+              "views": 2
+            },
+            {
+              "shallow_bytes": 65592,
+              "primitive_bytes": 65536,
+              "reference_slots": 2,
+              "arrays": 1,
+              "views": 2
+            },
+            {
+              "shallow_bytes": 65592,
+              "primitive_bytes": 65536,
+              "reference_slots": 2,
+              "arrays": 1,
+              "views": 2
+            }
+          ]
+        },
+        "cold_allocated_bytes_equal": false,
+        "cold_allocated_bytes_observations": {
+          "baseline": [
+            12600632,
+            12600632,
+            12600632
+          ],
+          "sdk": [
+            12600472,
+            12600472,
+            12600472
+          ]
+        },
+        "int_cpu_median_ns": {
+          "baseline": 1846763,
+          "sdk": 485062
+        },
+        "int_warm_allocated_bytes": {
+          "baseline": [
+            0,
+            0,
+            0
+          ],
+          "sdk": [
+            0,
+            0,
+            0
+          ]
+        },
+        "long_cpu_median_ns": {
+          "baseline": 2167451,
+          "sdk": 984033
+        },
+        "long_warm_allocated_bytes": {
+          "baseline": [
+            0,
+            0,
+            0
+          ],
+          "sdk": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "shape": "join",
+        "int_graph_equal": true,
+        "int_graph_observations": {
+          "baseline": [
+            {
+              "shallow_bytes": 43064,
+              "primitive_bytes": 33792,
+              "reference_slots": 514,
+              "arrays": 258,
+              "views": 257
+            },
+            {
+              "shallow_bytes": 43064,
+              "primitive_bytes": 33792,
+              "reference_slots": 514,
+              "arrays": 258,
+              "views": 257
+            },
+            {
+              "shallow_bytes": 43064,
+              "primitive_bytes": 33792,
+              "reference_slots": 514,
+              "arrays": 258,
+              "views": 257
+            }
+          ],
+          "sdk": [
+            {
+              "shallow_bytes": 43064,
+              "primitive_bytes": 33792,
+              "reference_slots": 514,
+              "arrays": 258,
+              "views": 257
+            },
+            {
+              "shallow_bytes": 43064,
+              "primitive_bytes": 33792,
+              "reference_slots": 514,
+              "arrays": 258,
+              "views": 257
+            },
+            {
+              "shallow_bytes": 43064,
+              "primitive_bytes": 33792,
+              "reference_slots": 514,
+              "arrays": 258,
+              "views": 257
+            }
+          ]
+        },
+        "long_graph_equal": true,
+        "long_graph_observations": {
+          "baseline": [
+            {
+              "shallow_bytes": 75832,
+              "primitive_bytes": 66560,
+              "reference_slots": 514,
+              "arrays": 258,
+              "views": 257
+            },
+            {
+              "shallow_bytes": 75832,
+              "primitive_bytes": 66560,
+              "reference_slots": 514,
+              "arrays": 258,
+              "views": 257
+            },
+            {
+              "shallow_bytes": 75832,
+              "primitive_bytes": 66560,
+              "reference_slots": 514,
+              "arrays": 258,
+              "views": 257
+            }
+          ],
+          "sdk": [
+            {
+              "shallow_bytes": 75832,
+              "primitive_bytes": 66560,
+              "reference_slots": 514,
+              "arrays": 258,
+              "views": 257
+            },
+            {
+              "shallow_bytes": 75832,
+              "primitive_bytes": 66560,
+              "reference_slots": 514,
+              "arrays": 258,
+              "views": 257
+            },
+            {
+              "shallow_bytes": 75832,
+              "primitive_bytes": 66560,
+              "reference_slots": 514,
+              "arrays": 258,
+              "views": 257
+            }
+          ]
+        },
+        "cold_allocated_bytes_equal": false,
+        "cold_allocated_bytes_observations": {
+          "baseline": [
+            1084728,
+            1084728,
+            1084728
+          ],
+          "sdk": [
+            1084568,
+            1084568,
+            1084568
+          ]
+        },
+        "int_cpu_median_ns": {
+          "baseline": 120923906,
+          "sdk": 1694710
+        },
+        "int_warm_allocated_bytes": {
+          "baseline": [
+            0,
+            0,
+            0
+          ],
+          "sdk": [
+            0,
+            0,
+            0
+          ]
+        },
+        "long_cpu_median_ns": {
+          "baseline": 116554917,
+          "sdk": 2368725
+        },
+        "long_warm_allocated_bytes": {
+          "baseline": [
+            0,
+            0,
+            0
+          ],
+          "sdk": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "shape": "nested",
+        "int_graph_equal": true,
+        "int_graph_observations": {
+          "baseline": [
+            {
+              "shallow_bytes": 44088,
+              "primitive_bytes": 33856,
+              "reference_slots": 562,
+              "arrays": 290,
+              "views": 273
+            },
+            {
+              "shallow_bytes": 44088,
+              "primitive_bytes": 33856,
+              "reference_slots": 562,
+              "arrays": 290,
+              "views": 273
+            },
+            {
+              "shallow_bytes": 44088,
+              "primitive_bytes": 33856,
+              "reference_slots": 562,
+              "arrays": 290,
+              "views": 273
+            }
+          ],
+          "sdk": [
+            {
+              "shallow_bytes": 44088,
+              "primitive_bytes": 33856,
+              "reference_slots": 562,
+              "arrays": 290,
+              "views": 273
+            },
+            {
+              "shallow_bytes": 44088,
+              "primitive_bytes": 33856,
+              "reference_slots": 562,
+              "arrays": 290,
+              "views": 273
+            },
+            {
+              "shallow_bytes": 44088,
+              "primitive_bytes": 33856,
+              "reference_slots": 562,
+              "arrays": 290,
+              "views": 273
+            }
+          ]
+        },
+        "long_graph_equal": true,
+        "long_graph_observations": {
+          "baseline": [
+            {
+              "shallow_bytes": 76856,
+              "primitive_bytes": 66624,
+              "reference_slots": 562,
+              "arrays": 290,
+              "views": 273
+            },
+            {
+              "shallow_bytes": 76856,
+              "primitive_bytes": 66624,
+              "reference_slots": 562,
+              "arrays": 290,
+              "views": 273
+            },
+            {
+              "shallow_bytes": 76856,
+              "primitive_bytes": 66624,
+              "reference_slots": 562,
+              "arrays": 290,
+              "views": 273
+            }
+          ],
+          "sdk": [
+            {
+              "shallow_bytes": 76856,
+              "primitive_bytes": 66624,
+              "reference_slots": 562,
+              "arrays": 290,
+              "views": 273
+            },
+            {
+              "shallow_bytes": 76856,
+              "primitive_bytes": 66624,
+              "reference_slots": 562,
+              "arrays": 290,
+              "views": 273
+            },
+            {
+              "shallow_bytes": 76856,
+              "primitive_bytes": 66624,
+              "reference_slots": 562,
+              "arrays": 290,
+              "views": 273
+            }
+          ]
+        },
+        "cold_allocated_bytes_equal": false,
+        "cold_allocated_bytes_observations": {
+          "baseline": [
+            2022712,
+            1953080,
+            2022712
+          ],
+          "sdk": [
+            2022712,
+            2022712,
+            2022712
+          ]
+        },
+        "int_cpu_median_ns": {
+          "baseline": 112035868,
+          "sdk": 38019700
+        },
+        "int_warm_allocated_bytes": {
+          "baseline": [
+            0,
+            0,
+            0
+          ],
+          "sdk": [
+            0,
+            0,
+            0
+          ]
+        },
+        "long_cpu_median_ns": {
+          "baseline": 108046125,
+          "sdk": 41956539
+        },
+        "long_warm_allocated_bytes": {
+          "baseline": [
+            0,
+            0,
+            0
+          ],
+          "sdk": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    ],
+    "limitations": [
+      "finite controlled workload; no application or platform-wide speed claim",
+      "cold construction allocation totals differ or vary; cause not established and no saving claimed",
+      "process RSS includes the probe and JVM; it is not the owned-graph measure",
+      "descriptor_count in raw probe names the prepared256segment pool; graph fields give actual retained shape counts"
+    ]
+  },
+  "evidence": {
+    "sdk": "evidence/numeric-copy-20261018/recipe-numeric/receipt.json",
+    "semantics": "evidence/numeric-copy-20261018/semantics/receipt.json",
+    "resources": "evidence/numeric-copy-20261018/resources/receipt.json"
+  },
+  "recipe_refinement_history": [
+    {
+      "attempt": "v1",
+      "result": "REFUSED",
+      "reason": "OpenRewrite8.17.1 isolated Java21 attribution failed on test-only switch expressions returning unresolved view types; actual javac accepted that source",
+      "action": "change authored test inputs to equivalent explicit returns; reseal; retain failing source/log/report; unchanged engines/tests/gates"
+    },
+    {
+      "attempt": "v2",
+      "result": "PASS",
+      "reason": "original5SDK/8sealing/9receiver cases passed after recipe input repair"
+    }
+  ]
+}

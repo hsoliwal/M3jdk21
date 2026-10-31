@@ -1,0 +1,14 @@
+field	value
+jep	491
+jep_issue	JDK-8337395
+implementation_issue	JDK-8338383
+upstream_repository	openjdk/jdk
+upstream_pr	21565
+reviewed_pr_head	0fe604654a6976ec28a46b2c26cff50b091b6490
+released_postimage_tag	jdk-24+36
+changed_paths	246
+pr_commits	90
+pr_additions	8283
+pr_deletions	2743
+skara_status	integrated
+source_license	GPL-2.0

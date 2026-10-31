@@ -1,0 +1,47 @@
+{
+  "schema": "M3_OPTIONAL_MODULE_MAPPING_V1",
+  "product": "M3JDK21 integrated Java21/HotSpot/JNI SDK",
+  "module": "com.m3.file",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "source_owner": "hsoliwal/com.synexia",
+  "canonical_recipe": "com.synexia.m3.M3FileShadowExactProgress20261021",
+  "canonical_recipe_pr": 12676,
+  "canonical_recipe_revision": "0c8cf65608e3050c9957deae6cdaf60dab417221",
+  "target_base_branch": "chatgpt/m3jdk21-unified-doop-ast-mop-collections-20261021",
+  "target_base_sha": "d7b9e65241b717a387b25234df4cf21531f07d9f",
+  "receiving_sequence_advanced": false,
+  "mappings": [
+    {
+      "original": "com.m3.file.M3FileShadowInputStream",
+      "destination": "existing original in m3/file module",
+      "role": "pre-read bound, EOF probe, latched limit refusal, same shadow API",
+      "status": "SOURCE_RECEIVED_TEST_GATE_PENDING"
+    },
+    {
+      "original": "com.m3.file.M3FileSubProgress",
+      "destination": "existing original in m3/file module",
+      "role": "exact 128/64 integer-scaled progress with no allocations",
+      "status": "SOURCE_RECEIVED_TEST_GATE_PENDING"
+    },
+    {
+      "original": "standalone byte/progress oracle",
+      "destination": "M3FileShadowBoundaryContract + JUnit adapter",
+      "role": "regression gate without another file owner",
+      "status": "SOURCE_RECEIVED_TEST_GATE_PENDING"
+    },
+    {
+      "original": "M3FileTree Zip/JAR architecture, JNI masks and sorted collection implementations",
+      "destination": null,
+      "role": "unchanged by this refinement; future superset reconciliation against #1608/#1624/#1643",
+      "status": "PRESERVE_AND_COMPARE"
+    }
+  ],
+  "gates": {
+    "source_postimage_equal": true,
+    "standalone_local_java21": "PASS_REPRESENTATIVE_ONLY",
+    "actual_canonical_maven_recipe": "NOT_RUN",
+    "actual_target_junit": "NOT_RUN",
+    "source_built_sdk_jtreg_jni": "NOT_RUN",
+    "performance": "NOT_MEASURED"
+  }
+}

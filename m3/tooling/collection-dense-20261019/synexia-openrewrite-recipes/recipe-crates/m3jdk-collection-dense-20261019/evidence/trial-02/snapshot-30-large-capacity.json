@@ -1,0 +1,17 @@
+{
+  "command": [
+    "java",
+    "-Xmx512m",
+    "-Xcheck:jni",
+    "--patch-module",
+    "java.base=/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/snapshot/classes:/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/snapshot/boot-classes",
+    "-Dtest.m3.masks.native.library=/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-02/snapshot/libM3CollectionMasksQualification.so",
+    "java.util.M3CollectionMasksTest",
+    "large"
+  ],
+  "exit": 0,
+  "log_sha256": "a662398080a9574510396afe839eacaaf1218e92898824a098754d579179ce71",
+  "max_rss_kib": 303256,
+  "user_seconds": 0.230187,
+  "system_seconds": 0.165187
+}

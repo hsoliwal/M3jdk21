@@ -1,0 +1,73 @@
+Property settings:
+    file.encoding = UTF-8
+    file.separator = \
+    io.netty.native.workdir = K:/codex-work/m3jdk21-recipe-pass-20261020/data-sdk-contract-main-proof-k-v1/tmp/fork
+    jansi.tmpdir = K:/codex-work/m3jdk21-recipe-pass-20261020/data-sdk-contract-main-proof-k-v1/tmp/fork
+    java.class.path = K:\codex-work\m3jdk21-recipe-pass-20261020\data-current-module-materialization-k-v1\module\target\test-classes
+        K:\codex-work\m3jdk21-recipe-pass-20261020\data-current-module-materialization-k-v1\module\target\classes
+    java.class.version = 65.0
+    java.home = C:\Program Files\Java\jdk-21
+    java.io.tmpdir = K:/codex-work/m3jdk21-recipe-pass-20261020/data-sdk-contract-main-proof-k-v1/tmp/fork
+    java.library.path = C:\Program Files\Java\jdk-21\bin
+        C:\WINDOWS\Sun\Java\bin
+        C:\WINDOWS\system32
+        C:\WINDOWS
+        C:/Program Files/Java/jdk-21/bin
+        C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin
+        C:/Windows/System32
+        C:/Windows
+        .
+    java.runtime.name = Java(TM) SE Runtime Environment
+    java.runtime.version = 21.0.9+7-LTS-338
+    java.specification.name = Java Platform API Specification
+    java.specification.vendor = Oracle Corporation
+    java.specification.version = 21
+    java.util.prefs.systemRoot = K:/codex-work/m3jdk21-recipe-pass-20261020/data-sdk-contract-main-proof-k-v1/prefs/system
+    java.util.prefs.userRoot = K:/codex-work/m3jdk21-recipe-pass-20261020/data-sdk-contract-main-proof-k-v1/prefs/user
+    java.vendor = Oracle Corporation
+    java.vendor.url = https://java.oracle.com/
+    java.vendor.url.bug = https://bugreport.java.com/bugreport/
+    java.version = 21.0.9
+    java.version.date = 2025-10-21
+    java.vm.compressedOopsMode = 32-bit
+    java.vm.info = mixed mode, sharing
+    java.vm.name = Java HotSpot(TM) 64-Bit Server VM
+    java.vm.specification.name = Java Virtual Machine Specification
+    java.vm.specification.vendor = Oracle Corporation
+    java.vm.specification.version = 21
+    java.vm.vendor = Oracle Corporation
+    java.vm.version = 21.0.9+7-LTS-338
+    jdk.debug = release
+    jna.tmpdir = K:/codex-work/m3jdk21-recipe-pass-20261020/data-sdk-contract-main-proof-k-v1/tmp/fork
+    line.separator = \r \n 
+    native.encoding = Cp1252
+    org.xerial.snappy.tempdir = K:/codex-work/m3jdk21-recipe-pass-20261020/data-sdk-contract-main-proof-k-v1/tmp/fork
+    os.arch = amd64
+    os.name = Windows 11
+    os.version = 10.0
+    path.separator = ;
+    stderr.encoding = Cp1252
+    stdout.encoding = Cp1252
+    sun.arch.data.model = 64
+    sun.boot.library.path = C:\Program Files\Java\jdk-21\bin
+    sun.cpu.endian = little
+    sun.cpu.isalist = amd64
+    sun.io.unicode.encoding = UnicodeLittle
+    sun.java.command = com.m3.collections.M3CollectionSdkContractSelfTest
+    sun.java.launcher = SUN_STANDARD
+    sun.jnu.encoding = Cp1252
+    sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+    sun.os.patch.level = 
+    user.country = IN
+    user.dir = K:/codex-work/m3jdk21-recipe-pass-20261020/data-current-module-materialization-k-v1/module
+    user.home = K:/codex-work/m3jdk21-recipe-pass-20261020/data-sdk-contract-main-proof-k-v1/home
+    user.language = en
+    user.name = hsoliwal
+    user.script = 
+    user.variant = 
+
+Exception in thread "main" java.lang.ExceptionInInitializerError: SDK catalogue resource missing: /com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv
+	at com.m3.collections.M3CollectionSdkNames.load(M3CollectionSdkNames.java:75)
+	at com.m3.collections.M3CollectionSdkNames.<clinit>(M3CollectionSdkNames.java:51)
+	at com.m3.collections.M3CollectionSdkContractSelfTest.names(M3CollectionSdkContractSelfTest.java:35)
+	at com.m3.collections.M3CollectionSdkContractSelfTest.main(M3CollectionSdkContractSelfTest.java:179)

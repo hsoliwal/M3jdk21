@@ -1,0 +1,99 @@
+// SPDX-License-Identifier: Apache-2.0
+package jdk.internal.mindex;
+
+import java.lang.reflect.AnnotatedElement;
+import java.util.Objects;
+import java.util.Optional;
+
+/** Two-field immutable declared-member view over one frozen M3CI row. */
+public final class M3Member {
+    private final M3CI owner;
+    private final int row;
+
+    M3Member(M3CI owner, int row) {
+        this.owner = Objects.requireNonNull(owner, "owner");
+        this.row = Objects.checkIndex(row, owner.memberSize());
+    }
+
+    public M3CI owner() {
+        return owner;
+    }
+
+    public int row() {
+        return row;
+    }
+
+    public M3MemberKind kind() {
+        return owner.memberKind(row);
+    }
+
+    public M3Class declaringClass() {
+        return owner.classAt(owner.memberDeclaringClassRow(row));
+    }
+
+    public String name() {
+        return owner.memberName(row);
+    }
+
+    public String descriptor() {
+        return owner.memberDescriptor(row);
+    }
+
+    public int modifiers() {
+        return owner.memberModifiers(row);
+    }
+
+    public int flags() {
+        return owner.memberFlags(row);
+    }
+
+    public boolean hasFlag(int flag) {
+        return (flags() & flag) != 0;
+    }
+
+    public int annotationCount() {
+        return owner.memberAnnotationCount(row);
+    }
+
+    public String annotationTypeNameAt(int ordinal) {
+        return owner.memberAnnotationTypeName(row, ordinal);
+    }
+
+    public int exceptionCount() {
+        return owner.memberExceptionCount(row);
+    }
+
+    public String exceptionTypeDescriptorAt(int ordinal) {
+        return owner.memberExceptionTypeDescriptor(row, ordinal);
+    }
+
+    public long structuralHash64() {
+        return owner.memberStructuralHash64(row);
+    }
+
+    public Optional<AnnotatedElement> tryReflectiveElement() {
+        return owner.resolveReflectiveElement(row);
+    }
+
+    public AnnotatedElement toReflectiveElement() {
+        return tryReflectiveElement().orElseThrow(
+                () -> new IllegalStateException(
+                        "JVM member boundary is no longer live for member row " + row));
+    }
+
+    @Override
+    public String toString() {
+        return declaringClass().name() + "#" + name() + descriptor();
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * System.identityHashCode(owner) + row;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other
+                || other instanceof M3Member that && owner == that.owner && row == that.row;
+    }
+}

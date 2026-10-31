@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-successor-fixture-v1/receiver-proof/isolated-bmbq15tx/failed-tests/crate/receive.py", line 195, in <module>
+    main()
+  File "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-successor-fixture-v1/receiver-proof/isolated-bmbq15tx/failed-tests/crate/receive.py", line 190, in main
+    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-successor-fixture-v1/receiver-proof/isolated-bmbq15tx/failed-tests/crate/receive.py", line 147, in receive
+    qualified = qualification(crate, dataset, owner)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-runtime-successor-fixture-v1/receiver-proof/isolated-bmbq15tx/failed-tests/crate/receive.py", line 71, in qualification
+    raise ValueError("all actual SDK qualification tests must execute successfully")
+ValueError: all actual SDK qualification tests must execute successfully

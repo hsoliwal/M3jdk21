@@ -1,0 +1,224 @@
+{
+  "active_phase": "STRING",
+  "actual_module_source_commit": "a92f8042cbcbb095a9e1e9f6cfead552ead0fba9",
+  "boundaries": [
+    "SDK059 is a compiler/runtime tool epoch for this module proof, never a claimed build of the later module/JDK source tree.",
+    "Only POM packaging and tests changed; production Java and both six-column authority TSVs remain byte-identical.",
+    "The qualified107 TSV is test data; the distinct104 legacy resource stays104/four-state at runtime.",
+    "Historical verify_donation tooling is not qualified against the current module graph by this receipt.",
+    "Canonical recipe/tooling/source templates, MOP memory and catalogue stay private; this is passive receiving data."
+  ],
+  "catalogue_contracts": {
+    "legacy": {
+      "api": "com.m3.collections.M3CollectionSdkNames",
+      "columns": 6,
+      "disposition_states": 4,
+      "families": 104,
+      "owner_absence_sentinel": "-",
+      "resource_byte_identical": true
+    },
+    "modern": {
+      "api": "com.m3.collections.M3CollectionSdkCatalog",
+      "columns": 6,
+      "families": 107,
+      "optional_adapters": 14
+    },
+    "new_catalogue_or_api": false,
+    "provider_contracts_promoted": false
+  },
+  "copyright": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "core_receiving_chain": [
+    {
+      "dataset": "m3-core-names-20261025",
+      "post_head": "98eefff4457fa2bfbe652b53a147a815ff139c80",
+      "post_tree": "c8c161041e1ab8953e4e50b05a3953375afcdd07",
+      "pre_head": "68e20d9a1fbba111fe180c1c9212f229a93af9ec",
+      "qualification_sha256": "c2f3e3433c1ea65a011597d04fb712986d32f57842425cd3890a64b62d785f4f"
+    },
+    {
+      "dataset": "m3-jdk-filtered-batch-20261025",
+      "post_head": "43fe1f0394846eda2343555addb23a70b9ce05f1",
+      "post_tree": "afe46dcabf4db181d368e0a6e8b28d0705fe4bc7",
+      "pre_head": "98eefff4457fa2bfbe652b53a147a815ff139c80",
+      "qualification_sha256": "4a7b48306f56cb722b08f5feb8e08c32865f70fd6cf7ac7be9e55bb522ba72f4"
+    },
+    {
+      "dataset": "m3-jdk-reverse-seek-20261025",
+      "post_head": "f97c614ce0c32c3bf229e1929877ba4ed1cc8888",
+      "post_tree": "92102509cbfad6b7756cf9bf6edb734b80a27d5f",
+      "pre_head": "43fe1f0394846eda2343555addb23a70b9ce05f1",
+      "qualification_sha256": "06b89f8c54cb1232fbad430635249fac82361d2cf257a73941105cee76208602"
+    }
+  ],
+  "license": "Apache-2.0; product files retain their original per-file rights",
+  "maintenance": {
+    "actual_code_source": "56e6a44d1f364b2c4846a549f446c978b63473fc",
+    "actual_invocation_source": "56e6a44d1f364b2c4846a549f446c978b63473fc",
+    "dataset": "m3-sdk-catalogue-fix-20261025",
+    "descriptor": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-sdk-catalogue-fix-20261025/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3-sdk-catalogue-fix-20261025.yml",
+    "descriptor_sha256": "0797a71549c3c64635acaedda525e4c356c472d2bf648fa8c810b2e1cdd889e6",
+    "outputs": [
+      {
+        "bytes": 6812,
+        "git_blob_sha1": "db75804258c024d7fc097100ca1358667ede1f84",
+        "path": "m3/collections/src/test/java/com/m3/collections/M3CollectionSdkCatalogProjectionTest.java",
+        "preimage_sha256": "ABSENT",
+        "sha256": "9d4465a76a51479dd17dd1220b4f4faafb174d716cee985849ce912435d6c2f5",
+        "template": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-sdk-catalogue-fix-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-sdk-catalogue-fix-20261025/0002-M3CollectionSdkCatalogProjectionTest.java.txt"
+      },
+      {
+        "bytes": 5059,
+        "git_blob_sha1": "7296171491e66958a272f5ef433cb94301ef69a9",
+        "path": "m3/collections/src/test/java/com/m3/collections/M3CollectionSdkCatalogSelfTest.java",
+        "preimage_sha256": "b28c7bea13e62b546cfc77b518126b1cbae52a3449bc264230ace523a10e3dc1",
+        "sha256": "0c26c6b8c1e0aba3bc4e26abea9f69adec29534d0aaf0f5edb2af619442bd666",
+        "template": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-sdk-catalogue-fix-20261025/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3-sdk-catalogue-fix-20261025/0003-M3CollectionSdkCatalogSelfTest.java.txt"
+      },
+      {
+        "bytes": 15187,
+        "git_blob_sha1": "b0e683fb6d9cefc590b6ac2cef1c92367691e769",
+        "path": "m3/collections/pom.xml",
+        "preimage_sha256": "ae20366179d89d453c1a165b8df2e02b1e52f2fbab1bf7d06aae8e7c842c734e",
+        "sha256": "6af806eb33c22b7f2a0ff5baf15b10b7ad0e8f797a0151284082b7a79ee425f8",
+        "template": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3-sdk-catalogue-fix-20261025/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3-sdk-catalogue-fix-20261025/0001-pom.xml.txt"
+      }
+    ],
+    "qualification_sha256": "183e8203044568d589671f1a1ea37bef4e10c1920ccd3f9e7b6d01446460ab48",
+    "receiver_cases": 9,
+    "recipe_id": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+    "role": "PACKAGING_AND_TEST_MAINTENANCE_NO_CAPABILITY_PROMOTION",
+    "sdk_inputs_sha256": "bc98747a2f1c84779d5cd2858a29d573e309a61c2624608f1bf6667060fe2b69",
+    "sdk_results_sha256": "90d96b534bf2d0408c12acaa6945c13216876364de2afb9e03d0aa8fab18ac4a",
+    "sdk_tests": 5,
+    "sealing_tests": 10
+  },
+  "module_gates": {
+    "binding": {
+      "authority_sha256": {
+        "m3/collections/qualification/m3-sdk-families-20261017/FAMILY_CATALOG.tsv": "406d9809dab857a62b571423a51c3240a7969f682a4a37c577590d6d79f344f9",
+        "m3/collections/src/main/java/com/m3/collections/M3CollectionSdkCatalog.java": "53d845fb4289c5d856d8eccc86235cdea0d5d3182c62d5956140c4d3d9e46b48",
+        "m3/collections/src/main/java/com/m3/collections/M3CollectionSdkNames.java": "0e8d7bf9235d4075552c104d650290534b3b814014bcdb664de89fbc804fdaee",
+        "m3/collections/src/main/resources/com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv": "e986838120c2558a145c6b16942475c8f5ff885b166526d635ef9c10360d8313"
+      },
+      "module_source_commit": "a92f8042cbcbb095a9e1e9f6cfead552ead0fba9",
+      "module_source_tree": "c34dfa6cb766af341b32b7ee99e96ef35dfac09e",
+      "postimage_sha256": {
+        "m3/collections/pom.xml": "6af806eb33c22b7f2a0ff5baf15b10b7ad0e8f797a0151284082b7a79ee425f8",
+        "m3/collections/src/test/java/com/m3/collections/M3CollectionSdkCatalogProjectionTest.java": "9d4465a76a51479dd17dd1220b4f4faafb174d716cee985849ce912435d6c2f5",
+        "m3/collections/src/test/java/com/m3/collections/M3CollectionSdkCatalogSelfTest.java": "0c26c6b8c1e0aba3bc4e26abea9f69adec29534d0aaf0f5edb2af619442bd666"
+      },
+      "sdk_image_manifest_sha256": "dabe08d30222f9cece1bea93fe004732df5477a80ccc2e719e68568d3d4971ce",
+      "sdk_source_commit": "059eb941577154868cd44029ba4ec018f25abdfb"
+    },
+    "runs": [
+      {
+        "errors": 0,
+        "evidence_pointer": "private-proof:next-pass-collection-core/module-gates/run-prebuild-sdk059-execution03-a92f804-da077adc1b/module-java-SAFE_RUN.json",
+        "evidence_sha256": "aa8f3053e9b9aa301c02246f507b0d72038a28d3831481b630d97b7771b38e56",
+        "exit_code": 0,
+        "expected_native_assumptions": 2,
+        "failures": 0,
+        "id": "module-java",
+        "notes": [
+          "Actual received module sources compiled with the separately bound frozen source-built SDK.",
+          "Arrays JNI allocator is mandatory in both selector modes; no test filters or exclusions.",
+          "Historical verify_donation.py was left unchanged and was not executed.",
+          "Two declared native-only assumptions; required-native counterparts pass."
+        ],
+        "required_native": false,
+        "skipped": 2,
+        "status": "PASS",
+        "tests": 619
+      },
+      {
+        "errors": 0,
+        "evidence_pointer": "private-proof:next-pass-collection-core/module-gates/run-prebuild-sdk059-execution03-a92f804-da077adc1b/module-required-native-SAFE_RUN.json",
+        "evidence_sha256": "a8c0675e13419b4505ab06f71af6291d1344f9461dc51cdc67fe666a45e131a4",
+        "exit_code": 0,
+        "expected_native_assumptions": 0,
+        "failures": 0,
+        "id": "module-required-native",
+        "notes": [
+          "Actual received module sources compiled with the separately bound frozen source-built SDK.",
+          "Arrays JNI allocator is mandatory in both selector modes; no test filters or exclusions.",
+          "Historical verify_donation.py was left unchanged and was not executed.",
+          "All collection native selectors required; zero skips."
+        ],
+        "required_native": true,
+        "skipped": 0,
+        "status": "PASS",
+        "tests": 619
+      },
+      {
+        "errors": 0,
+        "evidence_pointer": "private-proof:next-pass-collection-core/module-gates/run-prebuild-sdk059-execution03-a92f804-da077adc1b/installed-catalogue-SAFE_RUN.json",
+        "evidence_sha256": "557b48f630212052966f5708992578858498932325145a5f3943b927a47f7578",
+        "exit_code": 0,
+        "expected_native_assumptions": 0,
+        "failures": 0,
+        "id": "installed-catalogue",
+        "notes": [
+          "Actual received module sources compiled with the separately bound frozen source-built SDK.",
+          "Arrays JNI allocator is mandatory in both selector modes; no test filters or exclusions.",
+          "Historical verify_donation.py was left unchanged and was not executed.",
+          "Nine invocations across five unique consumer classes; four default-installed and four explicit-native invocations plus one plain catalogue consumer.",
+          "Image-internal native peers are available in both installed modes; default-installed is not a native-absent fallback lane.",
+          "All 69 SDK modules retained plus the two existing M3 modules; production classes unpatched and provider dependencies absent."
+        ],
+        "required_native": false,
+        "skipped": 0,
+        "status": "PASS",
+        "tests": 9
+      }
+    ],
+    "scope": "MODULE_ONLY",
+    "status": "PASS_MODULE_ONLY",
+    "whole_target_jdk_build_qualified": false
+  },
+  "module_source_tree": "c34dfa6cb766af341b32b7ee99e96ef35dfac09e",
+  "new_backend_or_native_algorithm": false,
+  "new_provider_contract_or_api": false,
+  "pending": [
+    "New strict core JDK image and independent actual-image owning/installed acceptance remain separate later gates.",
+    "Full SDK/provider/family/JCK/platform admission remains pending;107/104 catalogue counts do not imply runtime contract coverage."
+  ],
+  "phase_advance": false,
+  "previous_core_receiving_receipt_sha256": "38f69644bdb1c3ef2f39734c6e5c45cda6809d7ffbaef4383727d606f497c766",
+  "private_parent": "56e6a44d1f364b2c4846a549f446c978b63473fc",
+  "private_source_commit": "730294cac8e98d860aaddd12222874a014146d44",
+  "product": "M3JDK21",
+  "receiving_receipt_sha256": "d90c972e8c50102461b6837d3923d82579f115837adf0958701134afe2607878",
+  "recipe_authority": "hsoliwal/com.synexia",
+  "runtime_dependency_on_synexia": false,
+  "schema": "M3JDK21_SDK_CATALOGUE_MAINTENANCE_RECEIPT_V1",
+  "scope": "MODULE_ONLY",
+  "source_authority": [
+    {
+      "commit": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdkCatalog.java",
+      "repo": "hsoliwal/M3JDK21",
+      "sha256": "53d845fb4289c5d856d8eccc86235cdea0d5d3182c62d5956140c4d3d9e46b48"
+    },
+    {
+      "commit": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSdkNames.java",
+      "repo": "hsoliwal/M3JDK21",
+      "sha256": "0e8d7bf9235d4075552c104d650290534b3b814014bcdb664de89fbc804fdaee"
+    },
+    {
+      "commit": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+      "path": "m3/collections/qualification/m3-sdk-families-20261017/FAMILY_CATALOG.tsv",
+      "repo": "hsoliwal/M3JDK21",
+      "sha256": "406d9809dab857a62b571423a51c3240a7969f682a4a37c577590d6d79f344f9"
+    },
+    {
+      "commit": "c2abf0ba6077c12b30e702e4d3e52c665238b10f",
+      "path": "m3/collections/src/main/resources/com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv",
+      "repo": "hsoliwal/M3JDK21",
+      "sha256": "e986838120c2558a145c6b16942475c8f5ff885b166526d635ef9c10360d8313"
+    }
+  ],
+  "source_tree_alias_evidence_sha256": "8de19c96712c9589d26ea94ccd5d25792dfc965ca263e1f096b64f96719830b9",
+  "status": "RECEIVED_MODULE_ONLY_PASS",
+  "target_observed_commit": "6b720f32921697c52d6cc28726384799cd113424"
+}

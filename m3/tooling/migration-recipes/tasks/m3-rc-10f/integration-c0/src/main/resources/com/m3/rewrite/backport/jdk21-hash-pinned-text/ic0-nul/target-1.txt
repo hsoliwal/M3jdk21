@@ -1,0 +1,151 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+"""Fail-closed validation for the M3JDK21 post-21 compatibility ledger."""
+
+from __future__ import annotations
+
+import csv
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Iterable
+
+LEDGER = Path(__file__).with_name("POST21_PRIORITY_COMPATIBILITY.tsv")
+
+NO_DEFAULT = {
+    "OPT_IN_SE_API_EXTENSION",
+    "OPT_IN_JDK_API_EXTENSION",
+    "REJECT_LANGUAGE_SPEC",
+    "REJECT_JVMS_LANGUAGE_SPEC",
+}
+COMPATIBLE = {"COMPATIBLE_RUNTIME", "COMPATIBLE_TOOLING"}
+VALID_DEFAULTS = {"NO", "OPT_IN", "CANDIDATE"}
+
+
+@dataclass(frozen=True)
+class Entry:
+    jep: int
+    release: int
+    title: str
+    classification: str
+    default_java21: str
+    dependencies: tuple[int, ...]
+    owner_lane: str
+    evidence_url: str
+    note: str
+
+
+def load(path: Path = LEDGER) -> list[Entry]:
+    with path.open("r", encoding="utf-8", newline="") as stream:
+        # Strict UTF-8 cannot contain this surrogate. Keep NUL transport separate
+        # from CSV syntax so Python 3.10 reaches the same field validators.
+        reader = csv.DictReader(
+            (line.replace("\x00", "\udc00") for line in stream), delimiter="\t")
+        rows = [
+            {_restore_csv_nuls(key): _restore_csv_nuls(value)
+             for key, value in row.items()}
+            for row in reader
+        ]
+    if not rows:
+        raise ValueError("empty JEP compatibility ledger")
+
+    entries: list[Entry] = []
+    seen: set[int] = set()
+    for row in rows:
+        jep = _positive_int(row["jep"], "jep")
+        release = _positive_int(row["release"], "release")
+        if release < 22:
+            raise ValueError(f"post-21 ledger contains pre-22 release: JEP {jep}")
+        if jep in seen:
+            raise ValueError(f"duplicate JEP: {jep}")
+        seen.add(jep)
+
+        classification = _token(row["classification"], "classification")
+        default = _token(row["default_java21"], "default_java21")
+        if default not in VALID_DEFAULTS:
+            raise ValueError(f"invalid default_java21 for JEP {jep}: {default}")
+        if classification in NO_DEFAULT and default != "NO":
+            raise ValueError(
+                f"JEP {jep} classification {classification} cannot be default Java21")
+        if classification.startswith("REJECT_") and default != "NO":
+            raise ValueError(f"rejected JEP {jep} cannot be admitted")
+        if classification in COMPATIBLE and default == "NO":
+            raise ValueError(
+                f"compatible JEP {jep} must remain CANDIDATE or OPT_IN, not silently discarded")
+
+        dependencies = tuple(
+            _positive_int(value, f"dependency for JEP {jep}")
+            for value in row["dependency"].split(",")
+            if value.strip()
+        )
+        evidence = _token(row["evidence_url"], "evidence_url")
+        if evidence != f"https://openjdk.org/jeps/{jep}":
+            raise ValueError(f"non-canonical OpenJDK evidence URL for JEP {jep}: {evidence}")
+
+        entries.append(
+            Entry(
+                jep=jep,
+                release=release,
+                title=_token(row["title"], "title"),
+                classification=classification,
+                default_java21=default,
+                dependencies=dependencies,
+                owner_lane=_token(row["owner_lane"], "owner_lane"),
+                evidence_url=evidence,
+                note=_token(row["note"], "note"),
+            )
+        )
+
+    _validate_dependencies(entries)
+    return entries
+
+
+def _restore_csv_nuls(value):
+    if isinstance(value, str):
+        return value.replace("\udc00", "\x00")
+    if isinstance(value, list):
+        return [text.replace("\udc00", "\x00") for text in value]
+    return value
+
+
+def _validate_dependencies(entries: Iterable[Entry]) -> None:
+    by_jep = {entry.jep: entry for entry in entries}
+    for entry in by_jep.values():
+        for dependency in entry.dependencies:
+            if dependency not in by_jep:
+                raise ValueError(
+                    f"JEP {entry.jep} dependency {dependency} is absent from the reconciliation ledger")
+            if by_jep[dependency].release > entry.release:
+                raise ValueError(
+                    f"JEP {entry.jep} depends on later-release JEP {dependency}")
+
+
+def _positive_int(value: str, field: str) -> int:
+    try:
+        parsed = int(value.strip())
+    except (AttributeError, ValueError) as error:
+        raise ValueError(f"invalid {field}: {value!r}") from error
+    if parsed <= 0:
+        raise ValueError(f"invalid {field}: {value!r}")
+    return parsed
+
+
+def _token(value: str, field: str) -> str:
+    checked = (value or "").strip()
+    if not checked or "\x00" in checked:
+        raise ValueError(f"invalid {field}")
+    return checked
+
+
+def main() -> int:
+    entries = load()
+    compatible = sum(entry.classification in COMPATIBLE for entry in entries)
+    opt_in = sum(entry.classification.startswith("OPT_IN_") for entry in entries)
+    rejected = sum(entry.classification.startswith("REJECT_") for entry in entries)
+    print(
+        f"M3_POST21_COMPATIBILITY_PASS entries={len(entries)} "
+        f"compatible={compatible} opt_in={opt_in} rejected={rejected}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,3 @@
+$ /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3 /workspace/scratch/abdb4b1178cf/synexia-work/synexia-openrewrite-recipes/tasks/m3-index-rank-prefix-select-20261020/qualification-20261020/work_probe.py /workspace/scratch/abdb4b1178cf/m3-repo/m3/collections/src/main/java/com/m3/collections/M3IndexPathRank.java
+source_sha256=327c22ee178360d87aa82cbef5122ac19a44bd036415c315480166cd439fc0e2
+prefix_word_ranks=64 bit_clears=0 budget=0

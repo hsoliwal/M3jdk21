@@ -1,0 +1,504 @@
+{
+  "copied_bytes_per_case": 8333640,
+  "copied_files_per_case": 60,
+  "input_epoch_sha256": "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70",
+  "maven_cache_copied": false,
+  "new_evidence_subtree_excluded_from_original_comparison": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/packaging-refusals",
+  "original_execution": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01",
+  "original_file_hashes": {
+    "execution": {
+      "01-source-binding/receipt.json": "6d742421530a255bfb7a21dc202a74e668991807d9377a734a8c11b60bd34eba",
+      "01-source-binding/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "01-source-binding/stdout.log": "faee98c27f8ba723054470abc9d3547f1bf4f42b7476a0556102d2fd668f1640",
+      "02-render-tests/receipt.json": "3c3685b7a5309388b8080ec17fd1a47de324a5e722c2ea680091ea785019a0e2",
+      "02-render-tests/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "02-render-tests/stdout.log": "5890a1960fb44bda043e1b21a642dc672321c8d320047eb350a23b1e615daf24",
+      "03-maven/receipt.json": "7196632aa82cf257b835124698ef7a9aaa90d2538c56c803996f8c0d654ba664",
+      "03-maven/stderr.log": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55",
+      "03-maven/stdout.log": "1e10f3b7c34572043f569a583c15dc3657587d7fd10785d9bc6abb1c059eed94",
+      "03-maven/surefire-reports/TEST-com.m3.rewrite.backport.JccMergeMappingRecoveryV04Test.xml": "eead90df8bda6b156a1cc91a624d2d54c626f5a71aa5966b6baf77a3e19a3f76",
+      "03-maven/surefire-reports/com.m3.rewrite.backport.JccMergeMappingRecoveryV04Test.txt": "a1afc7eecb6e1736ae246e3a4d721ebcfe5589a51a713ad92034bafcf8bcfb0d",
+      "04-installer/receipt.json": "18a55456bb0acb3cdf82b0fde439b7aff48885249f9692a94d7c9352738cb3f2",
+      "04-installer/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "04-installer/stdout.log": "79465993211c476203465c85b7b510bf3c53a2635a7b9dfe30d319159a219a44",
+      "INPUT_SEAL.json": "5f99dafb72a72ddc05e6c97c54ffbdf3a2b13d7df64125869005ca960be9bcd9",
+      "MATERIALIZED_OUTPUTS.json": "448f23472d256a1887d5e1696333a959c15c88df266e8f49a6b737222f98bc20",
+      "bound-inputs/MAPPING_RESOURCES.json": "3b180a2dade96619532c46fb25cb550ebd5df8f7e7b8cfbb52528907d9703cea",
+      "bound-inputs/mapping-input-epoch.json": "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70",
+      "bound-inputs/resources/after-00.txt": "cf84929db27261fceb704e2b9b3ebfca212dcea6a8f61acff099104118342645",
+      "bound-inputs/resources/after-01.txt": "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc",
+      "bound-inputs/resources/after-02.txt": "73b3b5bd60eff1c1a904bd96517309067a9a93832060b63fa19c0c826e10630d",
+      "bound-inputs/resources/after-03.txt": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c",
+      "bound-inputs/resources/before-00.txt": "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1",
+      "bound-inputs/resources/before-01.txt": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+      "bound-inputs/resources/before-02.txt": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+      "bound-inputs/resources/before-03.txt": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+      "bound-inputs/resources/manifest.tsv": "6a2ca1c34f3f848369d3adb41e6f4c10ab8a774e5d3b953e0a2c93ee268c7a00",
+      "bound-inputs/resources/plan.json": "9189d4ff6f84914a6ac1612eb12ad04749d3feb49640cd920263e0c1cdeea56d",
+      "bound-inputs/source-publication-input.json": "b6753688fcacb6f1255c607072ea10823c29f8c574f049dc96cee8c5a7ad5613",
+      "cache-proof/OFFLINE_DIAGNOSTIC_CACHE_V02.json": "034d226e546825818559e5517ce62bb00dd855f9ce59760fa607049388280da9",
+      "cache-proof/RECEIVER_ASM93_ADDON.json": "c49c23fd5ec3fc02ad0c3332e16fe4b0f8c9ea4bfab296ad013c726bc226823d",
+      "cache-proof/VERIFIED_CACHE.json": "2433184e2416cca1c92761b297406ee8f76cc39f645e6be7f0445e5fbe348255",
+      "canonical-after/receipt.json": "066e53a66fe1b39138529ba350aa5e70ef1366965b46161d9cc0816c8b294f86",
+      "canonical-after/runtime.json": "3b49724deb63566f57d0da06cfffbc35404886ef65fa852f3d9e605f73673838",
+      "canonical-after/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "canonical-after/stdout.log": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b",
+      "canonical-after/workspace/m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+      "canonical-after/workspace/m3/algorithms/test/PrefixZContractTest.java": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448",
+      "canonical-after/workspace/m3/algorithms/test/ViewInteropContractTest.java": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7",
+      "canonical-after/workspace/m3/core/src/com/m3/text/JoinedM3StringPiece.java": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+      "canonical-after/workspace/m3/core/src/com/m3/text/LocalM3Arena.java": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+      "canonical-after/workspace/m3/core/src/com/m3/text/LocalM3StringPiece.java": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+      "canonical-after/workspace/m3/core/src/com/m3/text/M3StringPiece.java": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+      "canonical-after/workspace/m3/core/src/com/m3/text/StorageIdentity.java": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
+      "canonical-after/workspace/m3/docs/jcc-source-handoff.md": "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc",
+      "canonical-after/workspace/m3/docs/name-mapping.json": "cf84929db27261fceb704e2b9b3ebfca212dcea6a8f61acff099104118342645",
+      "canonical-after/workspace/m3/docs/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+      "canonical-after/workspace/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c",
+      "canonical-after/workspace/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": "73b3b5bd60eff1c1a904bd96517309067a9a93832060b63fa19c0c826e10630d",
+      "canonical-after/workspace/m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
+      "canonical-after/workspace/m3/migration/evidence/local-20261002-final/prefix-z-normal.log": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
+      "canonical-after/workspace/m3/migration/evidence/local-20261002-final/receipt.json": "2a639e4937a414f98fd6f859562f8c392e54e94a39f02427daa7df6e336f82f6",
+      "canonical-after/workspace/m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+      "canonical-after/workspace/m3/migration/pinned-dependencies.json": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+      "canonical-after/workspace/m3/migration/recipes/prefix-z-v1.tsv": "54251ed210b9ed280919968a6ea13f0b6ed6e590fbf92090d13b4495f05f4217",
+      "canonical-after/workspace/m3/migration/run-tests.py": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+      "canonical-after/workspace/m3/migration/src/com/m3/migration/ExactFileRecipe.java": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+      "canonical-after/workspace/m3/migration/test/RecipeContractTest.java": "bc6d57072811b232b774a835615c8ede038b5cbbb19a4f8d48badae25214ceea",
+      "canonical-after/workspace/m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "canonical-after/workspace/m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+      "canonical-after/workspace/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+      "canonical-after/workspace/m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv": "5b44008f02f49ce0a48fafcb4da24af69ea526a67f88041c209d6d574ed788da",
+      "canonical-after/workspace/m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
+      "canonical-after/workspace/m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
+      "canonical-after/workspace/src/java.base/share/classes/java/util/regex/Matcher.java": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3Address28.java": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3Bits.java": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3CB.java": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3CI.java": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3Class.java": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3Field.java": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3Member.java": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3Method.java": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3PC.java": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3TQ.java": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+      "canonical-after/workspace/src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
+      "canonical-after/workspace/src/java.base/share/native/libjava/M3BitLane28.c": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
+      "installer/01-check-before.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "installer/01-check-before.stdout.log": "a128e963309054f756e531331f5443c9f61a7aa4426ac88036568cd4eaf94b16",
+      "installer/02-apply.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "installer/02-apply.stdout.log": "d66256753174331f80380fc37050b61e4082ebb950116caae138618477c82698",
+      "installer/03-apply-fixed-point.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "installer/03-apply-fixed-point.stdout.log": "a6e65bc4756e36cb2bd6a3b723d979ec8a653c241420bc49565c3cd9cab35d5b",
+      "installer/04-check-after.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "installer/04-check-after.stdout.log": "a6e65bc4756e36cb2bd6a3b723d979ec8a653c241420bc49565c3cd9cab35d5b",
+      "installer/05-rollback.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "installer/05-rollback.stdout.log": "5475ec8c5b150abc9ce6f3cf39106e147f85681b633cbdb25dd5047250f9e0d2",
+      "installer/06-rollback-fixed-point.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "installer/06-rollback-fixed-point.stdout.log": "a128e963309054f756e531331f5443c9f61a7aa4426ac88036568cd4eaf94b16",
+      "installer/fixture/m3/docs/jcc-source-handoff.md": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+      "installer/fixture/m3/docs/name-mapping.json": "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1",
+      "installer/fixture/m3/docs/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+      "installer/fixture/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+      "installer/fixture/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+      "installer/fixture/m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+      "installer/fixture/m3/migration/recipe.py": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
+      "installer/fixture/m3/tooling/migration-recipes/pom.xml": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+      "installer/fixture/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "installer/fixture/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+      "installer/fixture/src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+      "installer/fixture/unrelated-sentinel.txt": "429d176b6a9d422d1e3a4d62764a67e1ba76d1fbeeff98cb71a5dbda73e6fb53",
+      "installer/receipt.json": "af710d2a4c9e7cd8fb3d31bda9884f73b31880d9572ed722e2ca4d92a034c0b0",
+      "materialized/m3/docs/jcc-source-handoff.md": "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc",
+      "materialized/m3/docs/name-mapping.json": "cf84929db27261fceb704e2b9b3ebfca212dcea6a8f61acff099104118342645",
+      "materialized/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c",
+      "materialized/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": "73b3b5bd60eff1c1a904bd96517309067a9a93832060b63fa19c0c826e10630d",
+      "receipt.json": "c2b40c794fa829d5667b1c722727635c3729746775df25bc430b6de6e639397a",
+      "rendered-tests/RENDERED_TEMPLATE_RECEIPT.json": "eab0faa1ca2bf7348fda775c68a7e95b91ce81cbc4507cdd91550a299777f5a8",
+      "rendered-tests/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-merge-mapping-recovery-v04.yml": "782d73a8c6e257f224376f1fee3e8f150dbfe3ba110b9312f13209e2ad81235a",
+      "rendered-tests/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.java": "46e05a40c57db7075a0ca4513938d535f9cc2ac0813e5e6a8c7e056beecd6366",
+      "rendered-tests/m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v04/publication-input-summary.json": "f2a9f842f1ad7e1015596aac0390027d2314c46e23b9bac50fa07dfb22c4d627",
+      "rendered-tests/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml": "258c1e3682df5f7f6c08c3f2c9a823bd5e132579c9af8e9264661fd6e7cac626",
+      "repository/m3/docs/jcc-source-handoff.md": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+      "repository/m3/docs/name-mapping.json": "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1",
+      "repository/m3/docs/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+      "repository/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+      "repository/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+      "repository/m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+      "repository/m3/migration/recipe.py": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
+      "repository/m3/tooling/migration-recipes/pom.xml": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+      "repository/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "repository/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-merge-mapping-recovery-v04.yml": "782d73a8c6e257f224376f1fee3e8f150dbfe3ba110b9312f13209e2ad81235a",
+      "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0014.txt": "eb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e",
+      "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0016.txt": "f8b27e3582eb494af2c8dd47225976f974be6edc2f6c26313975064d48739497",
+      "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-00.txt": "cf84929db27261fceb704e2b9b3ebfca212dcea6a8f61acff099104118342645",
+      "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-01.txt": "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc",
+      "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-02.txt": "73b3b5bd60eff1c1a904bd96517309067a9a93832060b63fa19c0c826e10630d",
+      "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-03.txt": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c",
+      "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-00.txt": "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1",
+      "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-01.txt": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+      "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-02.txt": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+      "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-03.txt": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+      "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/manifest.tsv": "6a2ca1c34f3f848369d3adb41e6f4c10ab8a774e5d3b953e0a2c93ee268c7a00",
+      "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/plan.json": "9189d4ff6f84914a6ac1612eb12ad04749d3feb49640cd920263e0c1cdeea56d",
+      "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+      "repository/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.java": "46e05a40c57db7075a0ca4513938d535f9cc2ac0813e5e6a8c7e056beecd6366",
+      "repository/m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v04/publication-input-summary.json": "f2a9f842f1ad7e1015596aac0390027d2314c46e23b9bac50fa07dfb22c4d627",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-input-epoch-v04.json": "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/MAPPING_RESOURCES.json": "3b180a2dade96619532c46fb25cb550ebd5df8f7e7b8cfbb52528907d9703cea",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml": "258c1e3682df5f7f6c08c3f2c9a823bd5e132579c9af8e9264661fd6e7cac626",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/META-INF/rewrite/m3-jcc-merge-mapping-recovery-v04.yml": "782d73a8c6e257f224376f1fee3e8f150dbfe3ba110b9312f13209e2ad81235a",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$1.class": "89b442e92cc55de2172e032f4f0650647509a015cf2b72dd3ebba505ac6fa71f",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$2.class": "1235413f44f1e53c83a5fa0786530ce15548c92c6b636b40118eef9847105611",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Inventory.class": "f54fea5844ba1b19ee22e5ccfae495d4a9b2b03e9edfb5bc09ac620321ef628f",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Target.class": "7eb62aee1d3e3f89575b4973ffba8e1defae3270853de61c96d1efbd21fe128e",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.class": "4193579cb92dd4afca14b5ee67d57580dc1b1afa64fef31a5b608a13a0959c13",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0014.txt": "eb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0016.txt": "f8b27e3582eb494af2c8dd47225976f974be6edc2f6c26313975064d48739497",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-00.txt": "cf84929db27261fceb704e2b9b3ebfca212dcea6a8f61acff099104118342645",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-01.txt": "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-02.txt": "73b3b5bd60eff1c1a904bd96517309067a9a93832060b63fa19c0c826e10630d",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-03.txt": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-00.txt": "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-01.txt": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-02.txt": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-03.txt": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/manifest.tsv": "6a2ca1c34f3f848369d3adb41e6f4c10ab8a774e5d3b953e0a2c93ee268c7a00",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/plan.json": "9189d4ff6f84914a6ac1612eb12ad04749d3feb49640cd920263e0c1cdeea56d",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/jcc-merge-mapping-recovery-v04-20261006.jar": "8564f2f0498b705d28ce847ff1a60394f2df5c09f35991311506caf81d96bf41",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/maven-archiver/pom.properties": "a25714cac0b7aa02b098d61cad15fdaa643e5a91dd91931cc1bc1591823f9f48",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst": "4df320aef2448cbc442ffc9ba268ac9c874de9e1f4be822fe60e5acfb3837e53",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst": "fd9a8a399e4f6a81761c005bd862360ddf4656d845b5c6d9705b16500a2ef3ab",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst": "45fc52abf5832bb14ba98597db2093c7aee2b20dd2964f4234daff63aa5dd3db",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst": "febef215ce675d961c737604e88001c33ac8752187e78a2fc9d1317dbb1a119d",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/surefire-reports/TEST-com.m3.rewrite.backport.JccMergeMappingRecoveryV04Test.xml": "eead90df8bda6b156a1cc91a624d2d54c626f5a71aa5966b6baf77a3e19a3f76",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/surefire-reports/com.m3.rewrite.backport.JccMergeMappingRecoveryV04Test.txt": "a1afc7eecb6e1736ae246e3a4d721ebcfe5589a51a713ad92034bafcf8bcfb0d",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/test-classes/com/m3/rewrite/backport/JccMergeMappingRecoveryV04Test$Guard.class": "2ed0e67b6ac5b54d772bdbda6e2bb9bd87a76927bedef15acdf712d873ed8272",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/test-classes/com/m3/rewrite/backport/JccMergeMappingRecoveryV04Test$Target.class": "8a0751bdcfa7a955b6839b7a14987a4d861c7d593d2f8a369fba7defe4d87c12",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/test-classes/com/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.class": "e516f8ca5acc1cdb1f00249ee33d883e0b44653bdd8a2fe2e5550d8e6a8c32c1",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/target/test-classes/com/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v04/publication-input-summary.json": "f2a9f842f1ad7e1015596aac0390027d2314c46e23b9bac50fa07dfb22c4d627",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/verify_installer.py": "4f03c9ac178c8011d474d02941dc2e6f2fe119f383e7cd4918f3e6c25e49252d",
+      "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/source-publication-input-v04.json": "b6753688fcacb6f1255c607072ea10823c29f8c574f049dc96cee8c5a7ad5613",
+      "repository/src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
+    },
+    "validator": {
+      "receipt.json": "066e53a66fe1b39138529ba350aa5e70ef1366965b46161d9cc0816c8b294f86",
+      "runtime.json": "3b49724deb63566f57d0da06cfffbc35404886ef65fa852f3d9e605f73673838",
+      "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout.log": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b",
+      "workspace/m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+      "workspace/m3/algorithms/test/PrefixZContractTest.java": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448",
+      "workspace/m3/algorithms/test/ViewInteropContractTest.java": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7",
+      "workspace/m3/core/src/com/m3/text/JoinedM3StringPiece.java": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+      "workspace/m3/core/src/com/m3/text/LocalM3Arena.java": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+      "workspace/m3/core/src/com/m3/text/LocalM3StringPiece.java": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+      "workspace/m3/core/src/com/m3/text/M3StringPiece.java": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+      "workspace/m3/core/src/com/m3/text/StorageIdentity.java": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
+      "workspace/m3/docs/jcc-source-handoff.md": "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc",
+      "workspace/m3/docs/name-mapping.json": "cf84929db27261fceb704e2b9b3ebfca212dcea6a8f61acff099104118342645",
+      "workspace/m3/docs/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+      "workspace/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c",
+      "workspace/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": "73b3b5bd60eff1c1a904bd96517309067a9a93832060b63fa19c0c826e10630d",
+      "workspace/m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
+      "workspace/m3/migration/evidence/local-20261002-final/prefix-z-normal.log": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
+      "workspace/m3/migration/evidence/local-20261002-final/receipt.json": "2a639e4937a414f98fd6f859562f8c392e54e94a39f02427daa7df6e336f82f6",
+      "workspace/m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+      "workspace/m3/migration/pinned-dependencies.json": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+      "workspace/m3/migration/recipes/prefix-z-v1.tsv": "54251ed210b9ed280919968a6ea13f0b6ed6e590fbf92090d13b4495f05f4217",
+      "workspace/m3/migration/run-tests.py": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+      "workspace/m3/migration/src/com/m3/migration/ExactFileRecipe.java": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+      "workspace/m3/migration/test/RecipeContractTest.java": "bc6d57072811b232b774a835615c8ede038b5cbbb19a4f8d48badae25214ceea",
+      "workspace/m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "workspace/m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+      "workspace/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+      "workspace/m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv": "5b44008f02f49ce0a48fafcb4da24af69ea526a67f88041c209d6d574ed788da",
+      "workspace/m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
+      "workspace/m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
+      "workspace/src/java.base/share/classes/java/util/regex/Matcher.java": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3Address28.java": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3Bits.java": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3CB.java": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3CI.java": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3Class.java": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3Field.java": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3Member.java": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3Method.java": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3PC.java": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3Release.java": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3TQ.java": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+      "workspace/src/java.base/share/classes/jdk/internal/mindex/M3VI.java": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
+      "workspace/src/java.base/share/native/libjava/M3BitLane28.c": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f"
+    }
+  },
+  "original_validator": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/canonical-after",
+  "packager_sha256": "a787f4bf08807a89c66bff954cc677b6b2c110dae1710964229095f69d01c3a0",
+  "schema": "m3-jcc-package-refusal-inputs/1",
+  "selected_execution_files": [
+    {
+      "path": "INPUT_SEAL.json",
+      "sha256": "5f99dafb72a72ddc05e6c97c54ffbdf3a2b13d7df64125869005ca960be9bcd9"
+    },
+    {
+      "path": "MATERIALIZED_OUTPUTS.json",
+      "sha256": "448f23472d256a1887d5e1696333a959c15c88df266e8f49a6b737222f98bc20"
+    },
+    {
+      "path": "bound-inputs/MAPPING_RESOURCES.json",
+      "sha256": "3b180a2dade96619532c46fb25cb550ebd5df8f7e7b8cfbb52528907d9703cea"
+    },
+    {
+      "path": "bound-inputs/mapping-input-epoch.json",
+      "sha256": "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70"
+    },
+    {
+      "path": "bound-inputs/resources/after-00.txt",
+      "sha256": "cf84929db27261fceb704e2b9b3ebfca212dcea6a8f61acff099104118342645"
+    },
+    {
+      "path": "bound-inputs/resources/after-01.txt",
+      "sha256": "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc"
+    },
+    {
+      "path": "bound-inputs/resources/after-02.txt",
+      "sha256": "73b3b5bd60eff1c1a904bd96517309067a9a93832060b63fa19c0c826e10630d"
+    },
+    {
+      "path": "bound-inputs/resources/after-03.txt",
+      "sha256": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c"
+    },
+    {
+      "path": "bound-inputs/resources/before-00.txt",
+      "sha256": "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1"
+    },
+    {
+      "path": "bound-inputs/resources/before-01.txt",
+      "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337"
+    },
+    {
+      "path": "bound-inputs/resources/before-02.txt",
+      "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126"
+    },
+    {
+      "path": "bound-inputs/resources/before-03.txt",
+      "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b"
+    },
+    {
+      "path": "bound-inputs/resources/manifest.tsv",
+      "sha256": "6a2ca1c34f3f848369d3adb41e6f4c10ab8a774e5d3b953e0a2c93ee268c7a00"
+    },
+    {
+      "path": "bound-inputs/resources/plan.json",
+      "sha256": "9189d4ff6f84914a6ac1612eb12ad04749d3feb49640cd920263e0c1cdeea56d"
+    },
+    {
+      "path": "bound-inputs/source-publication-input.json",
+      "sha256": "b6753688fcacb6f1255c607072ea10823c29f8c574f049dc96cee8c5a7ad5613"
+    },
+    {
+      "path": "cache-proof/OFFLINE_DIAGNOSTIC_CACHE_V02.json",
+      "sha256": "034d226e546825818559e5517ce62bb00dd855f9ce59760fa607049388280da9"
+    },
+    {
+      "path": "cache-proof/RECEIVER_ASM93_ADDON.json",
+      "sha256": "c49c23fd5ec3fc02ad0c3332e16fe4b0f8c9ea4bfab296ad013c726bc226823d"
+    },
+    {
+      "path": "cache-proof/VERIFIED_CACHE.json",
+      "sha256": "2433184e2416cca1c92761b297406ee8f76cc39f645e6be7f0445e5fbe348255"
+    },
+    {
+      "path": "materialized/m3/docs/jcc-source-handoff.md",
+      "sha256": "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc"
+    },
+    {
+      "path": "materialized/m3/docs/name-mapping.json",
+      "sha256": "cf84929db27261fceb704e2b9b3ebfca212dcea6a8f61acff099104118342645"
+    },
+    {
+      "path": "materialized/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "sha256": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c"
+    },
+    {
+      "path": "materialized/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "sha256": "73b3b5bd60eff1c1a904bd96517309067a9a93832060b63fa19c0c826e10630d"
+    },
+    {
+      "path": "receipt.json",
+      "sha256": "c2b40c794fa829d5667b1c722727635c3729746775df25bc430b6de6e639397a"
+    },
+    {
+      "path": "rendered-tests/RENDERED_TEMPLATE_RECEIPT.json",
+      "sha256": "eab0faa1ca2bf7348fda775c68a7e95b91ce81cbc4507cdd91550a299777f5a8"
+    },
+    {
+      "path": "rendered-tests/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-merge-mapping-recovery-v04.yml",
+      "sha256": "782d73a8c6e257f224376f1fee3e8f150dbfe3ba110b9312f13209e2ad81235a"
+    },
+    {
+      "path": "rendered-tests/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.java",
+      "sha256": "46e05a40c57db7075a0ca4513938d535f9cc2ac0813e5e6a8c7e056beecd6366"
+    },
+    {
+      "path": "rendered-tests/m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v04/publication-input-summary.json",
+      "sha256": "f2a9f842f1ad7e1015596aac0390027d2314c46e23b9bac50fa07dfb22c4d627"
+    },
+    {
+      "path": "rendered-tests/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml",
+      "sha256": "258c1e3682df5f7f6c08c3f2c9a823bd5e132579c9af8e9264661fd6e7cac626"
+    },
+    {
+      "path": "repository/m3/docs/jcc-source-handoff.md",
+      "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337"
+    },
+    {
+      "path": "repository/m3/docs/name-mapping.json",
+      "sha256": "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1"
+    },
+    {
+      "path": "repository/m3/docs/name-mapping.schema.json",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"
+    },
+    {
+      "path": "repository/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b"
+    },
+    {
+      "path": "repository/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126"
+    },
+    {
+      "path": "repository/m3/migration/migration.py",
+      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
+    },
+    {
+      "path": "repository/m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/pom.xml",
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-merge-mapping-recovery-v04.yml",
+      "sha256": "782d73a8c6e257f224376f1fee3e8f150dbfe3ba110b9312f13209e2ad81235a"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0014.txt",
+      "sha256": "eb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/history-0016.txt",
+      "sha256": "f8b27e3582eb494af2c8dd47225976f974be6edc2f6c26313975064d48739497"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-00.txt",
+      "sha256": "cf84929db27261fceb704e2b9b3ebfca212dcea6a8f61acff099104118342645"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-01.txt",
+      "sha256": "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-02.txt",
+      "sha256": "73b3b5bd60eff1c1a904bd96517309067a9a93832060b63fa19c0c826e10630d"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-03.txt",
+      "sha256": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-00.txt",
+      "sha256": "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-01.txt",
+      "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-02.txt",
+      "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-03.txt",
+      "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/manifest.tsv",
+      "sha256": "6a2ca1c34f3f848369d3adb41e6f4c10ab8a774e5d3b953e0a2c93ee268c7a00"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/plan.json",
+      "sha256": "9189d4ff6f84914a6ac1612eb12ad04749d3feb49640cd920263e0c1cdeea56d"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.java",
+      "sha256": "46e05a40c57db7075a0ca4513938d535f9cc2ac0813e5e6a8c7e056beecd6366"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v04/publication-input-summary.json",
+      "sha256": "f2a9f842f1ad7e1015596aac0390027d2314c46e23b9bac50fa07dfb22c4d627"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-input-epoch-v04.json",
+      "sha256": "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/MAPPING_RESOURCES.json",
+      "sha256": "3b180a2dade96619532c46fb25cb550ebd5df8f7e7b8cfbb52528907d9703cea"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/pom.xml",
+      "sha256": "258c1e3682df5f7f6c08c3f2c9a823bd5e132579c9af8e9264661fd6e7cac626"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v04/verify_installer.py",
+      "sha256": "4f03c9ac178c8011d474d02941dc2e6f2fe119f383e7cd4918f3e6c25e49252d"
+    },
+    {
+      "path": "repository/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/source-publication-input-v04.json",
+      "sha256": "b6753688fcacb6f1255c607072ea10823c29f8c574f049dc96cee8c5a7ad5613"
+    },
+    {
+      "path": "repository/src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
+    }
+  ],
+  "selected_validator_files": [
+    {
+      "path": "receipt.json",
+      "sha256": "066e53a66fe1b39138529ba350aa5e70ef1366965b46161d9cc0816c8b294f86"
+    }
+  ],
+  "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+  "source_root_tree": "a72565e0e67f330f12c712dcc7a3fcbe1d80d24e",
+  "successful_package_control": false
+}

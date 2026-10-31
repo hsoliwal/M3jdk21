@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.RequiredExcludedOffsetWindows20261021
+displayName: Receive original M3JDK21 int/long mask window atoms with exact SHA-256 preimages
+description: >-
+  Keep the original parent-owned array and JNI owner, and add exact
+  required/excluded mask selection over independently offset int/long windows.
+  Runtime Java/JNI differential checks and API admission are separate gates.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-required-excluded-offset-windows-20261021

@@ -1,0 +1,25 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+    "ref": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+    "encoding": "base64"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "IyBwYXRoCWJlZm9yZQlhZnRlcgl0ZW1wbGF0ZQpzcmMvamF2YS5iYXNlL3No\nYXJlL2NsYXNzZXMvamRrL2ludGVybmFsL21pbmRleC9NM1JlbGVhc2UuamF2\nYQlBQlNFTlQJOTAxMzQxOTEwMTcxYjQ2NGMxMTBkNDNlZjRkZDRkYTExYTM2\nMDZkYTU1MDRkNTM2OTFmMjRjNTU2MTEzMmFlYglNM1JlbGVhc2UuamF2YS50\neHQKc3JjL2phdmEuYmFzZS9zaGFyZS9jbGFzc2VzL2pkay9pbnRlcm5hbC9t\naW5kZXgvTTNWSS5qYXZhCUFCU0VOVAkwYzQyY2NjYjQxMjUxODI4ZWZlYzJk\nYjg1OGE5ZWQwOWFlZjNhMmM0ODlhNzVkMTFmZDEwZTE0YzQ2OGNkNjdhCU0z\nVkkuamF2YS50eHQKc3JjL3Rlc3QvamF2YS9jb20vbTMvdmkvVklQcm9iZS5q\nYXZhCUFCU0VOVAlhNDRjYTBjOTE0ZTY3Yjg2NDMwZWU4MWEyNTNlZGE2ZDE0\nZjNhZDAzOGQ5YjM1ZGU5NWM3YzhjZDI3MGI1YjEyCVZJUHJvYmUuamF2YS50\neHQK\n",
+      "encoding": "base64",
+      "sha": "2e77d4929b7b8dd3609b990774b062fc6991dc18",
+      "display_url": "https://github.com/hsoliwal/M3jdk21/blob/d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2/m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+      "display_title": "manifest.tsv"
+    },
+    "isError": false
+  }
+}
+

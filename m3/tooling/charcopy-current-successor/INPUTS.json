@@ -1,0 +1,229 @@
+{
+  "schema": 1,
+  "state": "SOURCE_AUTHORED_NOT_EXECUTED",
+  "capability": "charcopy-current-successor-20261019",
+  "foundation": "50cb3dc489c3f95a9781e50549d2e1866390f057",
+  "receiverRepository": "hsoliwal/M3jdk21",
+  "receiverCommit": "677437be295b23f7ccf7409be287008944d0e8b0",
+  "capBytes": 536870912,
+  "reserveBytes": 8589934592,
+  "sourceFiles": [
+    {
+      "path": "FOSS_REUSE_DECISION.tsv",
+      "bytes": 2781,
+      "sha256": "0c7116b7de3767915fcb2e96ec4aee1a9234f288785c2e90514960b2085e4929",
+      "gitBlob": "7d7ac648eed7567e292711375463d432d4536f42"
+    },
+    {
+      "path": "README.md",
+      "bytes": 5749,
+      "sha256": "b93fd7fddd486eadf5a76017caebbdd65a7ac9f3994ea3d31b376f63ff0170a5",
+      "gitBlob": "f6bd741455be5e12dc8ede439fd5ea559ad8e6a1"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "bytes": 2503,
+      "sha256": "44de745bbea399b698d9e02cd7672df3f63ab2ff40338fe15c25835c97553148",
+      "gitBlob": "29946dd8017392026b65713221f31d53d6cafd46"
+    },
+    {
+      "path": "pom.xml",
+      "bytes": 1136,
+      "sha256": "549dffc66823506f2df8baabc8122b7ac5e286569b5270fba87cf7c30a57c84a",
+      "gitBlob": "ca41ab4bbcb92b7bcefdd926aef2248f4f32081e"
+    },
+    {
+      "path": "qualify.py",
+      "bytes": 24896,
+      "sha256": "9f77f0e604433f3c5b252f2cac4c5c22034b5dac251a64f70853bbaee3d2784f",
+      "gitBlob": "3a12448b3a18d3964896d78ca380520008a3df5a"
+    },
+    {
+      "path": "sdk/LICENSE.OpenJDK",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726",
+      "gitBlob": "8b400c7ab81b7b18baff3f81d597f5e511883134"
+    },
+    {
+      "path": "sdk/THIRD_PARTY_NOTICES.md",
+      "bytes": 1711,
+      "sha256": "eed2c19593b61c28adbd556cfb238d53e30f1b6fe8539fd92a90cf44a2ff0a91",
+      "gitBlob": "da919637d7a59a2b06820ff47c70f73bc59cfbf9"
+    },
+    {
+      "path": "sdk/pinned-engine/com/synexia/rewrite/M3CharcopyCurrentSuccessorRecipe.java",
+      "bytes": 1951,
+      "sha256": "1ac098e2c7349fa5c4c75e2e72dc42ba958bcc945b777afded0adaa3cbe2c70a",
+      "gitBlob": "b50c9e1950ae73d8ddaa4b50c7e167c36869ab8a"
+    },
+    {
+      "path": "sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "bytes": 10964,
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+    },
+    {
+      "path": "sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "bytes": 5187,
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a"
+    },
+    {
+      "path": "sdk/pom.xml",
+      "bytes": 2678,
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e",
+      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f"
+    },
+    {
+      "path": "sdk/src/main/resources/META-INF/rewrite/charcopy-current-successor-20261019.yml",
+      "bytes": 446,
+      "sha256": "c97c3ef219bffd8177e01cd2bb585724408d5e3612253152c3a29d4af12998bf",
+      "gitBlob": "9d043e2ff8b34e9ff54482ad7887c0a6ea4a31a3"
+    },
+    {
+      "path": "sdk/src/main/resources/com/synexia/rewrite/charcopy-current-successor-20261019/manifest.tsv",
+      "bytes": 1489,
+      "sha256": "db44f3abf5270084eaa529469f664333fcef6abfe4df73e78d7548f2a3287303",
+      "gitBlob": "1546700a445bf1c38834a41ba3b4ed263abf9527"
+    },
+    {
+      "path": "sdk/src/test/java/com/synexia/rewrite/M3CharcopyCurrentSuccessorRecipeTest.java",
+      "bytes": 14347,
+      "sha256": "a7dedad6a36b2c6164251f9a2f2300af7a67d9d0195209b09287614ebf69b507",
+      "gitBlob": "728861be589ece7e46e17bc775b024f9075bba35"
+    },
+    {
+      "path": "sdk/src/test/resources/com/synexia/rewrite/charcopy-current-successor-20261019/M3String-predecessor.java.txt",
+      "bytes": 55181,
+      "sha256": "cd1192e27c981da03aeae2385d3d54ad31d912f043cf8c7dfba18c7b9106b728",
+      "gitBlob": "35ed998540e044eed8cb7596e2e2c019ae369bd3"
+    },
+    {
+      "path": "sdk/src/test/resources/com/synexia/rewrite/charcopy-current-successor-20261019/M3StringConcatLengthOverflowTest-predecessor.java.txt",
+      "bytes": 3957,
+      "sha256": "587f7f63fb419970ffdc889bca05335eb3f49ebcc97d3810906b3587ff9e7ab4",
+      "gitBlob": "04a62436389a02d735ec1a210052757818eef592"
+    },
+    {
+      "path": "sdk/src/test/resources/com/synexia/rewrite/charcopy-current-successor-20261019/M3StringFacts-predecessor.java.txt",
+      "bytes": 21176,
+      "sha256": "2152c154d3cdece330667ee09675fd21d86f3b483a23a3156b8a3626c3f9f420",
+      "gitBlob": "d8dd7dc30db6a9e3897146572bd4a7755c954ffb"
+    },
+    {
+      "path": "sdk/src/test/resources/com/synexia/rewrite/charcopy-current-successor-20261019/MIndexString-before.java.txt",
+      "bytes": 23998,
+      "sha256": "21e373dbe450c7cd7b85ede587209f88b4546b1833a75c83370b213aa66d97d0",
+      "gitBlob": "520e6fa968946830f2f78fd847fef4793869d74a"
+    },
+    {
+      "path": "sdk/src/test/resources/com/synexia/rewrite/charcopy-current-successor-20261019/MIndexStringInvariant-before.java.txt",
+      "bytes": 7269,
+      "sha256": "c4623ce4627dffb0b70c9b7d8cc8e429c50300a4fa6ec90ea5c7d1f6bbc4aee1",
+      "gitBlob": "2a7403c846bebd10c7cd726962f28ceea3cbe73d"
+    },
+    {
+      "path": "sdk/verify.py",
+      "bytes": 755,
+      "sha256": "e84a9573af23d1fa13ecf935a89347e1445b9b663698801416e35648e5b3bce2",
+      "gitBlob": "076e6c3c3ad74cdd5ae18d5f473a1ea0c9c1ac81"
+    }
+  ],
+  "receiverFiles": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3String.java",
+      "gitBlob": "e3bffdb11669a80a8fe8e1ba127b23fb7efc3c1e",
+      "bytes": 55467,
+      "sha256": "fad8274a84532ce29bd2b2fbdcb62474cfce32a6fb8eee89b885e5a611ea46f0"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+      "gitBlob": "3e76b8c52eefc3b1983c701a0b9dfc953262a554",
+      "bytes": 21325,
+      "sha256": "34663f5b64dbd44b566e655a17170b36f55c19f9e0e630c02ed291f78422e267"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringConcatLengthOverflowTest.java",
+      "gitBlob": "9584076244e2de107d9851d61b77cfb9f730717f",
+      "bytes": 12018,
+      "sha256": "a07590946ce9330772bb30a21dc35f1f1da0b87b671fdcf30c8630db33a91ac3"
+    },
+    {
+      "path": "m3/runtime-integration/tests/M3StringInvariant.java",
+      "gitBlob": "a39f876f0d3065d0754f8381e57aa097b6051e35",
+      "bytes": 12335,
+      "sha256": "7228184f31eaa1f8acd8271586b4745172b2f38dd24d004078f244b8cb6e54d8"
+    },
+    {
+      "path": "m3/runtime-integration/char-array-copy/recipe/apply.py",
+      "gitBlob": "3e1a29bedd5f508d1217d81f712d5351f2e56a5d",
+      "bytes": 10847,
+      "sha256": "01a20628a493101194d4698ad0701533c2a3ba797d17a344e5d557616976e16b"
+    },
+    {
+      "path": "m3/runtime-integration/char-array-copy/recipe/manifest.json",
+      "gitBlob": "244a5bd23f38065cb5d9e9fcacc3eb397c145a89",
+      "bytes": 1105,
+      "sha256": "cbd0b1b2aa815dcfb92fc517eedf5aed8da13dbf7a5af472b918aee4a38c25a0"
+    },
+    {
+      "path": "m3/runtime-integration/char-array-copy/recipe/test_recipe.py",
+      "gitBlob": "604e5f073577e4ac880ac594e0b48934657b8312",
+      "bytes": 6415,
+      "sha256": "dda45def134f0b188d8cecb0bca4f5e0049d237e3cdc91b8469316772d49e187"
+    },
+    {
+      "path": "LICENSE",
+      "gitBlob": "8b400c7ab81b7b18baff3f81d597f5e511883134",
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    }
+  ],
+  "namedRecipe": "com.synexia.m3.CharcopyCurrentSuccessor20261019",
+  "jdkRelease": 21,
+  "expected": {
+    "sdkTests": 3,
+    "successfulSdkRuns": 4,
+    "sdkRefusalRuns": 37,
+    "filesystemTests": 3,
+    "filesystemRefusals": 38,
+    "historicalOriginalTests": 7,
+    "historicalRefusals": 17,
+    "guardBlocks": 2,
+    "guardBlockBytes": 143
+  },
+  "donors": {
+    "sourceRepository": "hsoliwal/com.synexia",
+    "sourceRevision": "515f2f2153aa6afbc758da34c495c7223ee7997a",
+    "sdkTree": "955bcfbcfb09a72a327f3d541a74c1f1a45b733d",
+    "sdkPom": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+    "recipeEngine": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+  },
+  "rights": {
+    "newIndependentTooling": "Apache-2.0",
+    "payloads": "Retain each actual original copyright/license/jtreg header. Copyright/jtreg-only overflow test per-file license remains NOASSERTION; receiver repository GPLv2 evidence grants no inferred Classpath exception.",
+    "legacyHeaderlessExecutables": "NOASSERTION per-file; execute unchanged receiver-owned files separately in ephemeral receiver-shaped fixtures with receiver LICENSE; no relicensing",
+    "receiverLicenseGitBlob": "8b400c7ab81b7b18baff3f81d597f5e511883134"
+  },
+  "policy": {
+    "externalAggregateAndProcessGroupSupervisorRequired": true,
+    "childSessionsInherited": true,
+    "inputsManifestSelfSeal": "Caller must pin this INPUTS.json separately; it cannot contain its own full-content hash",
+    "sourceOutputs": "SDK target is supervised checkout output; root proof/log/temp/cache route to explicit qualification root",
+    "historicalPinsChanged": false,
+    "newEngine": false
+  },
+  "qualification": {
+    "namedSdk": "NOT_RUN",
+    "historicalReplay": "NOT_RUN",
+    "originalPrivateTyped3bdee": "NOT_RUN",
+    "targetJavaCompilation": "NOT_RUN",
+    "jni": "NOT_RUN",
+    "matchedJdk": "NOT_RUN",
+    "runtimeBehavior": "NOT_RUN",
+    "performanceRetention": "NOT_RUN"
+  },
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

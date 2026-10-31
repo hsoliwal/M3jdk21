@@ -1,0 +1,281 @@
+{
+  "schema": "M3_REGEX_ASCII_LEXICAL_RECEIVER_SDK_INPUTS_V1",
+  "admissionCommit": "812544033b50937bd7d976cca5f7cd09b5003b93",
+  "sourceOnly": true,
+  "providers": {
+    "openrewriteAdapter": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+    "manifestKernel": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2"
+  },
+  "files": [
+    {
+      "path": "FOSS_REUSE_DECISION.tsv",
+      "gitBlob": "c5549cda82b37ec7a06e216fe38fd5f1ed3ffc70",
+      "bytes": 1246,
+      "sha256": "7beb028394b29dafdeca1c4f4c37d94deaf4ad35126f7c3ed8a559a9453ee5de"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "bytes": 10964,
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "bytes": 5187,
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3RegexAsciiLexicalReceiverInverseRecipe.java",
+      "gitBlob": "3e301aa374f34a04ac3364f674e1e6703f6a8761",
+      "bytes": 831,
+      "sha256": "dfee7fb0f0398450ba49e38e7544677cea71e2a85e997ed7492ca4ab5cd29e18"
+    },
+    {
+      "path": "pinned-engine/com/synexia/rewrite/M3RegexAsciiLexicalReceiverRecipe.java",
+      "gitBlob": "71974e6dab0a12e3ad364769b3631e97f986ebe5",
+      "bytes": 812,
+      "sha256": "661a859dd246d5a9b68a3f3601cefb95ef0fbfbeb630bbd4fd6c86b01af7a9e2"
+    },
+    {
+      "path": "pom.xml",
+      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "bytes": 2678,
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e"
+    },
+    {
+      "path": "README.md",
+      "gitBlob": "bd82a9ad7112a06d70b0c82166c2ab62be84b2c1",
+      "bytes": 2576,
+      "sha256": "17afab41506ddfb0ad6f99db1c839c50830629fb88724a59f93615783f9ff910"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/m3/docs/name-mapping.json",
+      "gitBlob": "a7008bc04536586218da76e823bf570d50cec526",
+      "bytes": 451339,
+      "sha256": "1085c259e66bff017137e0c63bb86fc0b8daf436865f6378075cf4c920035ef4"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
+      "gitBlob": "7755e02e9da1546240afb96078a86e766566ff59",
+      "bytes": 19912,
+      "sha256": "606b60797ecce1ce888888dd4056fdcddffef7f5eb8f1a56cc854126c7884f0f"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
+      "gitBlob": "58cdad630918df11d186312b706bcea03ab52ffe",
+      "bytes": 37129,
+      "sha256": "9a34cb85a705f6bee43c5cbb6c7a7181996d3b3a9579aa4e547e1c2f112b8f45"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
+      "gitBlob": "30df0c03381ba2348899d1a842a13045466ef500",
+      "bytes": 2336,
+      "sha256": "cda9d82febd03dd401c40884bf66eb7e394c1c36af19e5406172d2e58b7a0660"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
+      "gitBlob": "ac96ac14ced11cf51983e555b7ff7898e2b0a4e9",
+      "bytes": 763,
+      "sha256": "2b53cf0eb526ab7af3c2e224f49676d0f3570db3e523b7c98e78715a4410cbff"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
+      "gitBlob": "3cd380eca7cc903ea7fb8f80cccae1894a851ac2",
+      "bytes": 31026,
+      "sha256": "650f1ecce5c3b555ecf8ef3d8e5aaf6ad14d24f18497a5f74cdef0437f62106c"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
+      "gitBlob": "8363e554ec77a65587a18ab468bdabd967e5f10d",
+      "bytes": 23015,
+      "sha256": "c5f97d75fe83e8dee3cf8c381c672edc0d8cbcb89a49fd94c158634db0342289"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/before/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
+      "gitBlob": "687dff70a6278355847a287d7dc3792867471b58",
+      "bytes": 13035,
+      "sha256": "9f0591f385bc4717fadfacefeb75c8823a3f372413a9440a2c0838c50e9c541d"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/manifest.tsv",
+      "gitBlob": "269bcda77ed0f8b09d475bcc7b9614d7237967a3",
+      "bytes": 1719,
+      "sha256": "db7432adc99c7be2dfd48f7437d48abcb493c775e36049d0f13953cc36dc2186"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/m3/docs/name-mapping.json",
+      "gitBlob": "b97a5f233cd993fbaf7bb3c297bf1821c6f4b8d7",
+      "bytes": 461599,
+      "sha256": "017c24acab18146c994c89328fe1081738017f32d3f5e4635ce3402e053e20d1"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
+      "gitBlob": "7755e02e9da1546240afb96078a86e766566ff59",
+      "bytes": 19912,
+      "sha256": "606b60797ecce1ce888888dd4056fdcddffef7f5eb8f1a56cc854126c7884f0f"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
+      "gitBlob": "58cdad630918df11d186312b706bcea03ab52ffe",
+      "bytes": 37129,
+      "sha256": "9a34cb85a705f6bee43c5cbb6c7a7181996d3b3a9579aa4e547e1c2f112b8f45"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
+      "gitBlob": "30df0c03381ba2348899d1a842a13045466ef500",
+      "bytes": 2336,
+      "sha256": "cda9d82febd03dd401c40884bf66eb7e394c1c36af19e5406172d2e58b7a0660"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
+      "gitBlob": "ac96ac14ced11cf51983e555b7ff7898e2b0a4e9",
+      "bytes": 763,
+      "sha256": "2b53cf0eb526ab7af3c2e224f49676d0f3570db3e523b7c98e78715a4410cbff"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
+      "gitBlob": "e51d3910df949e63229b100bc81716bc3f2742d6",
+      "bytes": 31293,
+      "sha256": "654390c7aeeacfa221a62044a9e2b863232aca461db6453a82f0270cb48ef914"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
+      "gitBlob": "8363e554ec77a65587a18ab468bdabd967e5f10d",
+      "bytes": 23015,
+      "sha256": "c5f97d75fe83e8dee3cf8c381c672edc0d8cbcb89a49fd94c158634db0342289"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/forward/out/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
+      "gitBlob": "3d95edee3c14c0a2a142217da695e77ed69e8026",
+      "bytes": 18394,
+      "sha256": "eb770a17a99070d430330de96bb4357088d70a447e7c7c5d6b04f50375a56d3a"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/m3/docs/name-mapping.json",
+      "gitBlob": "b97a5f233cd993fbaf7bb3c297bf1821c6f4b8d7",
+      "bytes": 461599,
+      "sha256": "017c24acab18146c994c89328fe1081738017f32d3f5e4635ce3402e053e20d1"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
+      "gitBlob": "7755e02e9da1546240afb96078a86e766566ff59",
+      "bytes": 19912,
+      "sha256": "606b60797ecce1ce888888dd4056fdcddffef7f5eb8f1a56cc854126c7884f0f"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
+      "gitBlob": "58cdad630918df11d186312b706bcea03ab52ffe",
+      "bytes": 37129,
+      "sha256": "9a34cb85a705f6bee43c5cbb6c7a7181996d3b3a9579aa4e547e1c2f112b8f45"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
+      "gitBlob": "30df0c03381ba2348899d1a842a13045466ef500",
+      "bytes": 2336,
+      "sha256": "cda9d82febd03dd401c40884bf66eb7e394c1c36af19e5406172d2e58b7a0660"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
+      "gitBlob": "ac96ac14ced11cf51983e555b7ff7898e2b0a4e9",
+      "bytes": 763,
+      "sha256": "2b53cf0eb526ab7af3c2e224f49676d0f3570db3e523b7c98e78715a4410cbff"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
+      "gitBlob": "e51d3910df949e63229b100bc81716bc3f2742d6",
+      "bytes": 31293,
+      "sha256": "654390c7aeeacfa221a62044a9e2b863232aca461db6453a82f0270cb48ef914"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
+      "gitBlob": "8363e554ec77a65587a18ab468bdabd967e5f10d",
+      "bytes": 23015,
+      "sha256": "c5f97d75fe83e8dee3cf8c381c672edc0d8cbcb89a49fd94c158634db0342289"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/before/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
+      "gitBlob": "3d95edee3c14c0a2a142217da695e77ed69e8026",
+      "bytes": 18394,
+      "sha256": "eb770a17a99070d430330de96bb4357088d70a447e7c7c5d6b04f50375a56d3a"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/manifest.tsv",
+      "gitBlob": "e61533b4e5f7d013bb2ce790fc6c4fa82cedbc1e",
+      "bytes": 1719,
+      "sha256": "df9909ff35c5c158682a58b0fd7f238cc57a144a38bc944a6abbf65b21f13e86"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/m3/docs/name-mapping.json",
+      "gitBlob": "a7008bc04536586218da76e823bf570d50cec526",
+      "bytes": 451339,
+      "sha256": "1085c259e66bff017137e0c63bb86fc0b8daf436865f6378075cf4c920035ef4"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java",
+      "gitBlob": "7755e02e9da1546240afb96078a86e766566ff59",
+      "bytes": 19912,
+      "sha256": "606b60797ecce1ce888888dd4056fdcddffef7f5eb8f1a56cc854126c7884f0f"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java",
+      "gitBlob": "58cdad630918df11d186312b706bcea03ab52ffe",
+      "bytes": 37129,
+      "sha256": "9a34cb85a705f6bee43c5cbb6c7a7181996d3b3a9579aa4e547e1c2f112b8f45"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java",
+      "gitBlob": "30df0c03381ba2348899d1a842a13045466ef500",
+      "bytes": 2336,
+      "sha256": "cda9d82febd03dd401c40884bf66eb7e394c1c36af19e5406172d2e58b7a0660"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java",
+      "gitBlob": "ac96ac14ced11cf51983e555b7ff7898e2b0a4e9",
+      "bytes": 763,
+      "sha256": "2b53cf0eb526ab7af3c2e224f49676d0f3570db3e523b7c98e78715a4410cbff"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java",
+      "gitBlob": "3cd380eca7cc903ea7fb8f80cccae1894a851ac2",
+      "bytes": 31026,
+      "sha256": "650f1ecce5c3b555ecf8ef3d8e5aaf6ad14d24f18497a5f74cdef0437f62106c"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java",
+      "gitBlob": "8363e554ec77a65587a18ab468bdabd967e5f10d",
+      "bytes": 23015,
+      "sha256": "c5f97d75fe83e8dee3cf8c381c672edc0d8cbcb89a49fd94c158634db0342289"
+    },
+    {
+      "path": "src/main/resources/com/synexia/rewrite/regex-ascii-lexical-receiver-20261019/inverse/out/test/jdk/java/util/regex/M3AutomatonDifferentialTest.java",
+      "gitBlob": "687dff70a6278355847a287d7dc3792867471b58",
+      "bytes": 13035,
+      "sha256": "9f0591f385bc4717fadfacefeb75c8823a3f372413a9440a2c0838c50e9c541d"
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/regex-ascii-lexical-receiver-20261019.yml",
+      "gitBlob": "1d9be3b38744c6cd6a3443a788f1e6474bb0a0ef",
+      "bytes": 853,
+      "sha256": "75090684812de7de29172351c10b194863c6699bd0e026c335849ab10b788588"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3RegexAsciiLexicalReceiverRecipeTest.java",
+      "gitBlob": "77e2fe7348670cf744de08c8cec6fa4c8ebf2ae6",
+      "bytes": 16047,
+      "sha256": "009427bfe21387443b46ee99bc3d2ba86f2af547be26f141f9b47d638562a4ff"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "gitBlob": "a955acfa11168926c54bdd0786f216c243843561",
+      "bytes": 982,
+      "sha256": "68793575d7552139a83950254ee70332141629ba396e28e68b981f0aa6c75c96"
+    },
+    {
+      "path": "verify.py",
+      "gitBlob": "b0d0c63653975ee92460dffb30e953bda3c8657b",
+      "bytes": 23045,
+      "sha256": "7e9b500925dcacbda836c0a1664f46c8b241568907de633848ac52fe555a143b"
+    }
+  ]
+}

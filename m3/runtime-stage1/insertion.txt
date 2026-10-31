@@ -1,0 +1,6 @@
+        // A singleton with no affixes already owns immutable contiguous backing.
+        // Preserve a fresh result object and its default hash/dedup state.
+        if (size == 1 && prefix.isEmpty() && suffix.isEmpty()) {
+            String element = elements[0];
+            return new String(element.value, element.coder());
+        }

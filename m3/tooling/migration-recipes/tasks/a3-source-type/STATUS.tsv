@@ -1,0 +1,5 @@
+task	state	evidence
+baseline-compile	FAILED_OBSERVED	Hosted run 37212552006 job 111466504051
+recipe-repair	IMPLEMENTED_UNVERIFIED	Typed SourceFile assignment; exact proof pending
+metadata-regression	AUTHORED_UNEXECUTED	Existing test retains old assertions and adds six metadata checks
+full-jdk-programme	OPEN	See ../map-utf/TODO.tsv

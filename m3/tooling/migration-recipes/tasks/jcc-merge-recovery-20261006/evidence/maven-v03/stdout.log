@@ -1,0 +1,107 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.m3.verification:jcc-merge-recovery >---------------
+[INFO] Building jcc-merge-recovery 20261006
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ jcc-merge-recovery ---
+[INFO] Copying 463 resources from ../../../src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ jcc-merge-recovery ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ jcc-merge-recovery ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/input-workspace/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ jcc-merge-recovery ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ jcc-merge-recovery ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.rewrite.backport.JccMergeRecoveryTest
+[ERROR] Tests run: 6, Failures: 1, Errors: 2, Skipped: 0, Time elapsed: 2.175 s <<< FAILURE! -- in com.m3.rewrite.backport.JccMergeRecoveryTest
+[ERROR] com.m3.rewrite.backport.JccMergeRecoveryTest.historicalConflictsAndDuplicateTargetsCannotPublishPartialHistory -- Time elapsed: 0.160 s <<< ERROR!
+java.lang.IllegalStateException: source drift: m3/migration/test/test_jcc_source_final_handoff_packet.py
+	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.requireAdmissible(M3Jdk21HashPinnedTextSnapshotRecipe.java:212)
+	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.generate(M3Jdk21HashPinnedTextSnapshotRecipe.java:142)
+	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.generate(M3Jdk21HashPinnedTextSnapshotRecipe.java:37)
+	at org.openrewrite.ScanningRecipe.generate(ScanningRecipe.java:63)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.m3.rewrite.backport.JccMergeRecoveryTest.reject(JccMergeRecoveryTest.java:243)
+	at com.m3.rewrite.backport.JccMergeRecoveryTest.historicalConflictsAndDuplicateTargetsCannotPublishPartialHistory(JccMergeRecoveryTest.java:172)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.rewrite.backport.JccMergeRecoveryTest.existingRecipeProduces449ExactOutputsAndFreshReplayMakesNoChanges -- Time elapsed: 0.257 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <Markers(id=8f17c697-d480-4781-a660-54bd80420b34, markers=[])> but was: <Markers(id=8f17c697-d480-4781-a660-54bd80420b34, markers=[RecipesThatMadeChanges(id=03b72ad2-19f7-4378-8e19-c844268bfda0, recipes=[[com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe@3cceba25]])])>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+	at com.m3.rewrite.backport.JccMergeRecoveryTest.existingRecipeProduces449ExactOutputsAndFreshReplayMakesNoChanges(JccMergeRecoveryTest.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.rewrite.backport.JccMergeRecoveryTest.everyCurrentMissingOrDriftedInputRefusesWithoutPartialUpdates -- Time elapsed: 0.153 s <<< ERROR!
+java.lang.IllegalStateException: required JDK21 text source missing: .github/workflows/m3-retained-capability-audit.yml
+	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.requireAdmissible(M3Jdk21HashPinnedTextSnapshotRecipe.java:208)
+	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.generate(M3Jdk21HashPinnedTextSnapshotRecipe.java:142)
+	at com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe.generate(M3Jdk21HashPinnedTextSnapshotRecipe.java:37)
+	at org.openrewrite.ScanningRecipe.generate(ScanningRecipe.java:63)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.m3.rewrite.backport.JccMergeRecoveryTest.reject(JccMergeRecoveryTest.java:243)
+	at com.m3.rewrite.backport.JccMergeRecoveryTest.everyCurrentMissingOrDriftedInputRefusesWithoutPartialUpdates(JccMergeRecoveryTest.java:161)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   JccMergeRecoveryTest.existingRecipeProduces449ExactOutputsAndFreshReplayMakesNoChanges:104 expected: <Markers(id=8f17c697-d480-4781-a660-54bd80420b34, markers=[])> but was: <Markers(id=8f17c697-d480-4781-a660-54bd80420b34, markers=[RecipesThatMadeChanges(id=03b72ad2-19f7-4378-8e19-c844268bfda0, recipes=[[com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe@3cceba25]])])>
+[ERROR] Errors: 
+[ERROR]   JccMergeRecoveryTest.everyCurrentMissingOrDriftedInputRefusesWithoutPartialUpdates:161->reject:243 » IllegalState required JDK21 text source missing: .github/workflows/m3-retained-capability-audit.yml
+[ERROR]   JccMergeRecoveryTest.historicalConflictsAndDuplicateTargetsCannotPublishPartialHistory:172->reject:243 » IllegalState source drift: m3/migration/test/test_jcc_source_final_handoff_packet.py
+[INFO] 
+[ERROR] Tests run: 6, Failures: 1, Errors: 2, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.202 s
+[INFO] Finished at: 2026-10-06T13:29:59+09:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project jcc-merge-recovery: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/input-workspace/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

@@ -1,0 +1,161 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+#include <jni.h>
+#include <stddef.h>
+
+/* Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project.
+ * Adapted from the existing Synexia packed-selection JNI acquisition guard.
+ * A NULL acquisition may have no pending exception; report it after cleanup.
+ */
+static void m3_rank_acquisition_failed(JNIEnv *env) {
+    if (!(*env)->ExceptionCheck(env)) {
+        jclass error = (*env)->FindClass(env, "java/lang/OutOfMemoryError");
+        if (error != NULL) {
+            (void) (*env)->ThrowNew(env, error, "JNI array acquisition");
+            (*env)->DeleteLocalRef(env, error);
+        }
+    }
+}
+
+/*
+ * One JNI transition per batch, signed jlong order matching Java Long.compare.
+ * Get/ReleaseArrayElements respects moving GC: no object addresses are retained.
+ * Input arrays are released JNI_ABORT; only the preallocated output array is written.
+ */
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0(
+        JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
+        jintArray results) {
+    (void) ignored;
+    if (sorted == NULL || queries == NULL || results == NULL) {
+        jclass error = (*env)->FindClass(env, "java/lang/NullPointerException");
+        if (error != NULL) (*env)->ThrowNew(env, error, "null batch argument");
+        return;
+    }
+    jsize size = (*env)->GetArrayLength(env, sorted);
+    jsize count = (*env)->GetArrayLength(env, queries);
+    if (count != (*env)->GetArrayLength(env, results)) {
+        jclass error = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+        if (error != NULL) (*env)->ThrowNew(env, error, "result length mismatch");
+        return;
+    }
+    if (count == 0) return;
+
+    jlong *values = (*env)->GetLongArrayElements(env, sorted, NULL);
+    if (values == NULL) {
+        m3_rank_acquisition_failed(env);
+        return;
+    }
+    jlong *targets = (*env)->GetLongArrayElements(env, queries, NULL);
+    if (targets == NULL) {
+        (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+        m3_rank_acquisition_failed(env);
+        return;
+    }
+    jint *positions = (*env)->GetIntArrayElements(env, results, NULL);
+    if (positions == NULL) {
+        (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
+        (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+        m3_rank_acquisition_failed(env);
+        return;
+    }
+
+    for (jsize i = 0; i < count; i++) {
+        jlong needle = targets[i];
+        jsize lo = 0;
+        jsize hi = size;
+        while (lo < hi) {
+            jsize mid = lo + ((hi - lo) >> 1);
+            if (values[mid] < needle) lo = mid + 1;
+            else hi = mid;
+        }
+        positions[i] = (jint) lo;
+    }
+    (*env)->ReleaseIntArrayElements(env, results, positions, 0);
+    (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
+    (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+}
+
+/*
+ * LeetCode 34 / 35 batch primitive: [lower0,upper0,...] in one JNI transition.
+ * The upper-bound search starts at the lower bound (never left of it).
+ * No JNI callbacks or Java object allocations in the search loop.
+ * Moving-GC-safe Get/ReleaseArrayElements; inputs always JNI_ABORT.
+ */
+/*
+ * The test-only legacy build deliberately omits new symbols while preserving
+ * the original lowerBounds0 export. It verifies safe Java fallback against
+ * already-installed older libm3rankbatch binaries, without a duplicate C owner.
+ */
+#if !defined(M3_RANK_LEGACY_ABI_TEST)
+JNIEXPORT jint JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_capabilities0(
+        JNIEnv *env, jclass ignored) {
+    (void) env;
+    (void) ignored;
+    return 1; /* Fused lower/upper-bound pairs supported. */
+}
+
+JNIEXPORT void JNICALL
+Java_com_m3_collections_M3LongRankBatchNative_lowerUpperBounds0(
+        JNIEnv *env, jclass ignored, jlongArray sorted, jlongArray queries,
+        jintArray pairs) {
+    (void) ignored;
+    if (sorted == NULL || queries == NULL || pairs == NULL) {
+        jclass error = (*env)->FindClass(env, "java/lang/NullPointerException");
+        if (error != NULL) (*env)->ThrowNew(env, error, "null pair argument");
+        return;
+    }
+    const jsize size = (*env)->GetArrayLength(env, sorted);
+    const jsize count = (*env)->GetArrayLength(env, queries);
+    const jsize output_size = (*env)->GetArrayLength(env, pairs);
+    if ((jlong) count * 2 != (jlong) output_size) {
+        jclass error = (*env)->FindClass(env, "java/lang/IllegalArgumentException");
+        if (error != NULL) (*env)->ThrowNew(env, error, "pair lane length mismatch");
+        return;
+    }
+    if (count == 0) return;
+
+    jlong *values = (*env)->GetLongArrayElements(env, sorted, NULL);
+    if (values == NULL) {
+        m3_rank_acquisition_failed(env);
+        return;
+    }
+    jlong *targets = (*env)->GetLongArrayElements(env, queries, NULL);
+    if (targets == NULL) {
+        (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+        m3_rank_acquisition_failed(env);
+        return;
+    }
+    jint *out = (*env)->GetIntArrayElements(env, pairs, NULL);
+    if (out == NULL) {
+        (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
+        (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+        m3_rank_acquisition_failed(env);
+        return;
+    }
+
+    for (jsize i = 0; i < count; ++i) {
+        const jlong target = targets[i];
+        jsize lo = 0, hi = size;
+        while (lo < hi) {
+            const jsize mid = lo + ((hi - lo) >> 1);
+            if (values[mid] < target) lo = mid + 1;
+            else hi = mid;
+        }
+        const jsize lower = lo;
+        hi = size;
+        while (lo < hi) {
+            const jsize mid = lo + ((hi - lo) >> 1);
+            if (values[mid] <= target) lo = mid + 1;
+            else hi = mid;
+        }
+        const size_t offset = (size_t) i * 2;
+        out[offset] = (jint) lower;
+        out[offset + 1] = (jint) lo;
+    }
+
+    (*env)->ReleaseIntArrayElements(env, pairs, out, 0);
+    (*env)->ReleaseLongArrayElements(env, queries, targets, JNI_ABORT);
+    (*env)->ReleaseLongArrayElements(env, sorted, values, JNI_ABORT);
+}
+#endif /* !M3_RANK_LEGACY_ABI_TEST */

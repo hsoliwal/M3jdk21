@@ -1,0 +1,174 @@
+{
+  "scope": "bounded paired diagnostic on a shared host; not JMH or a universal performance claim",
+  "gather_decision": "REUSE_INCUMBENT_DONOR_CANDIDATES_REFUSED",
+  "gather_trials": [
+    {
+      "label": "first-scan",
+      "source_sha256": {
+        "baseline": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
+        "candidate": "a30da9b8aaa4dfa3da59f1855d58ed878ff71fef3381bd792c3c57c128893210"
+      },
+      "fresh_forks_per_variant": 3,
+      "rows": 16384,
+      "iterations": 800,
+      "comparisons": [
+        {
+          "shape": "contiguous",
+          "baseline": {
+            "cpu_ns": 44748.44375,
+            "wall_ns": 55277.66875,
+            "allocated_bytes": 0.19
+          },
+          "candidate": {
+            "cpu_ns": 75931.47125,
+            "wall_ns": 86651.52125,
+            "allocated_bytes": 0.19
+          },
+          "cpu_ratio": 1.6968516642548046
+        },
+        {
+          "shape": "forward_gap",
+          "baseline": {
+            "cpu_ns": 57497.24125,
+            "wall_ns": 75992.94875,
+            "allocated_bytes": 0.0
+          },
+          "candidate": {
+            "cpu_ns": 84570.59125,
+            "wall_ns": 176699.92375,
+            "allocated_bytes": 0.0
+          },
+          "cpu_ratio": 1.4708634607751725
+        },
+        {
+          "shape": "many_spans",
+          "baseline": {
+            "cpu_ns": 58759.26625,
+            "wall_ns": 110851.18125,
+            "allocated_bytes": 0.0
+          },
+          "candidate": {
+            "cpu_ns": 74126.11625,
+            "wall_ns": 104699.73125,
+            "allocated_bytes": 0.0
+          },
+          "cpu_ratio": 1.2615221560905725
+        },
+        {
+          "shape": "two_reverse_spans",
+          "baseline": {
+            "cpu_ns": 46947.1375,
+            "wall_ns": 103257.2025,
+            "allocated_bytes": 0.0
+          },
+          "candidate": {
+            "cpu_ns": 84273.02375,
+            "wall_ns": 136590.37625,
+            "allocated_bytes": 0.0
+          },
+          "cpu_ratio": 1.7950620258796397
+        }
+      ],
+      "raw_receipt_sha256": "179f2c9ee8461ba612b034fa261fd1f69b5eab0b9e0f67cb4a1de54189a6743e"
+    },
+    {
+      "label": "narrow-second-run",
+      "source_sha256": {
+        "baseline": "49a3e45262ee764c37746c323ae0def76adfff5f27a4cace6ab7416587ca544f",
+        "candidate": "d0dcbc1127cf89eea2898a95d422962d9d5f7a1902a86153028cc7e1f3ff3e57"
+      },
+      "fresh_forks_per_variant": 3,
+      "rows": 16384,
+      "iterations": 800,
+      "comparisons": [
+        {
+          "shape": "contiguous",
+          "baseline": {
+            "cpu_ns": 35088.0725,
+            "wall_ns": 35105.655,
+            "allocated_bytes": 0.19
+          },
+          "candidate": {
+            "cpu_ns": 50635.605,
+            "wall_ns": 50616.0475,
+            "allocated_bytes": 0.19
+          },
+          "cpu_ratio": 1.4431002158924517
+        },
+        {
+          "shape": "forward_gap",
+          "baseline": {
+            "cpu_ns": 47840.4725,
+            "wall_ns": 47791.575,
+            "allocated_bytes": 0.0
+          },
+          "candidate": {
+            "cpu_ns": 123740.36,
+            "wall_ns": 124739.925,
+            "allocated_bytes": 0.0
+          },
+          "cpu_ratio": 2.5865204404074396
+        },
+        {
+          "shape": "many_spans",
+          "baseline": {
+            "cpu_ns": 43569.1375,
+            "wall_ns": 43651.56125,
+            "allocated_bytes": 0.0
+          },
+          "candidate": {
+            "cpu_ns": 76380.535,
+            "wall_ns": 76362.23,
+            "allocated_bytes": 0.0
+          },
+          "cpu_ratio": 1.7530880660651134
+        },
+        {
+          "shape": "two_reverse_spans",
+          "baseline": {
+            "cpu_ns": 44212.83375,
+            "wall_ns": 44229.65875,
+            "allocated_bytes": 0.0
+          },
+          "candidate": {
+            "cpu_ns": 60780.6575,
+            "wall_ns": 60760.11,
+            "allocated_bytes": 0.0
+          },
+          "cpu_ratio": 1.3747288365111863
+        }
+      ],
+      "raw_receipt_sha256": "35a630b1e4e681d709a788b6bf4e68d3dc61d02a8389cd0557e7f4871d503f85"
+    }
+  ],
+  "mask_zero_review": {
+    "decision": "DEFER_NATIVE_OPTIMIZATION_RETAIN_INCUMBENT",
+    "scope": "Independent bounded release-O2 evaluation; no target production mutation",
+    "baseline_sha256": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+    "current_candidate_sha256": "d64d5eb3c791e8d1bfceaedd08c12597f2e8960e027cb85baa875de803f5becb",
+    "early_candidate_sha256": "c5176bd544c3087504a9605eb8434be92fdf4c7def1da2413abdd01ee25bac73",
+    "early_preserves_exact_nonzero_source_body": true,
+    "early_ubsan_contract": "PASS M3IndexMaskCompactorSelfTest checks=26152 JNI=true",
+    "compiler": "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "jni_exports_identical": true,
+    "jni_exports": [
+      "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+      "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative"
+    ],
+    "java_allocation_equal_all_paired_rows": true,
+    "probe_source_sha256": "3361d4af2830e2f0a011ccd340e3993d34dd63ecb348c0c22b4d13aa3fde42d5",
+    "jni_header_sha256": "2c9ee704fe1128ca05a7ff38b6844ad178fd79c03fef0aa24fe9605778f46c81",
+    "compiled_probe_sha256": "767aadea087a81a308a1c6dcf2b26d94f7f9a832f61ab7fd45189528828862d3",
+    "compiled_owner_sha256": "b575827c4a385f992bc245f553ef44d307f564b8b04f0922ba94d833bb97ce9f",
+    "limitation": "Unpinned shared host; only 150 warmups + 400 calls per case; noisy native/JVM allocation/compiler effects; no isolated cost gate or universal speed claim",
+    "complete_receipt_sha256": "683c42dbfa977547b852decdb84013a0c089b1af5695d956f487a6727794d73c",
+    "canonical_evidence": "synexia-openrewrite-recipes/recipe-crates/m3-netbeans-collection-atoms-20261019/evidence/native-mask/REVIEW.json"
+  }
+}

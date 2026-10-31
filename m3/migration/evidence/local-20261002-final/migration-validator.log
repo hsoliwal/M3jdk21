@@ -1,0 +1,31 @@
+test_duplicate_json_key_and_nonfinite_number_refused (test_migration.MigrationTest.test_duplicate_json_key_and_nonfinite_number_refused) ... ok
+test_duplicate_mapping_id (test_migration.MigrationTest.test_duplicate_mapping_id) ... ok
+test_exclusion_requires_reason (test_migration.MigrationTest.test_exclusion_requires_reason) ... ok
+test_extension_can_replay_from_canonical_authority (test_migration.MigrationTest.test_extension_can_replay_from_canonical_authority) ... ok
+test_extension_preserves_legacy_and_refuses_drift (test_migration.MigrationTest.test_extension_preserves_legacy_and_refuses_drift) ... ok
+test_failed_receipt_is_not_pass (test_migration.MigrationTest.test_failed_receipt_is_not_pass) ... ok
+test_file_existence_is_not_test_evidence (test_migration.MigrationTest.test_file_existence_is_not_test_evidence) ... ok
+test_incomplete_inventory_is_not_deletion (test_migration.MigrationTest.test_incomplete_inventory_is_not_deletion) ... ok
+test_inventory_duplicates_refused (test_migration.MigrationTest.test_inventory_duplicates_refused) ... ok
+test_inventory_from_other_tracking_ref_is_unobserved (test_migration.MigrationTest.test_inventory_from_other_tracking_ref_is_unobserved) ... ok
+test_inventory_pin_drift_refused (test_migration.MigrationTest.test_inventory_pin_drift_refused) ... ok
+test_malformed_nested_shapes_are_refused_before_completion (test_migration.MigrationTest.test_malformed_nested_shapes_are_refused_before_completion) ... ok
+test_many_to_one_allowed_same_owner (test_migration.MigrationTest.test_many_to_one_allowed_same_owner) ... ok
+test_moves_require_previous_source_lineage (test_migration.MigrationTest.test_moves_require_previous_source_lineage) ... ok
+test_nonprefix_additions_are_not_lost (test_migration.MigrationTest.test_nonprefix_additions_are_not_lost) ... ok
+test_output_creation_preserves_existing_work (test_migration.MigrationTest.test_output_creation_preserves_existing_work) ... ok
+test_pending_record_keeps_unknowns_visible (test_migration.MigrationTest.test_pending_record_keeps_unknowns_visible) ... ok
+test_previous_mapping_cannot_disappear (test_migration.MigrationTest.test_previous_mapping_cannot_disappear) ... ok
+test_receipt_must_match_exact_candidate (test_migration.MigrationTest.test_receipt_must_match_exact_candidate) ... ok
+test_report_cannot_call_partial_complete (test_migration.MigrationTest.test_report_cannot_call_partial_complete) ... ok
+test_source_pin_is_required (test_migration.MigrationTest.test_source_pin_is_required) ... ok
+test_target_only_drift_invalidates_test_claim (test_migration.MigrationTest.test_target_only_drift_invalidates_test_claim) ... ok
+test_three_way_change_classification (test_migration.MigrationTest.test_three_way_change_classification) ... ok
+test_unpinned_candidate_must_be_labeled (test_migration.MigrationTest.test_unpinned_candidate_must_be_labeled) ... ok
+test_unsafe_paths_and_symlinks (test_migration.MigrationTest.test_unsafe_paths_and_symlinks) ... ok
+test_valid_partial_is_not_complete (test_migration.MigrationTest.test_valid_partial_is_not_complete) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.561s
+
+OK

@@ -1,0 +1,49 @@
+{
+  "schema": "m3-exact-file-behavior-atom-recipe/v1",
+  "sourceRepository": "hsoliwal/M3jdk21",
+  "sourceCommit": "a6a68ad408eeaac6917fdbae814e6c157641ef7f",
+  "file": "m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
+  "preimageSha256": "9c767668c925581799dc97f20e63fce0be19e8fec4c4ec59b1ce257a6c969f4e",
+  "postimageSha256": "0fdc824473fbdc40fa4a4dbefec0ffa429999f0ee362b9b5eb5af9798b3037f9",
+  "preimageGitBlob": "dd0cf2b8125348cd7134eda565ca40aaa990a864",
+  "postimageGitBlob": "11df05d4893faa66cb169d984108747768da6710",
+  "before": "            // No bounds or visited key can validate a natural-order empty lookup.\n            if (tree.comparator == null) { checked(key); }\n",
+  "after": "            // Empty natural lookup checks null/type without comparing a key.\n            if (tree.comparator == null) { Objects.requireNonNull((Comparable<?>) key); }\n",
+  "occurrences": 1,
+  "atom": "empty natural unbounded lookup null/type admission without comparison",
+  "originalSealSha256": "ad05e01d7ec2d165aa4ac0cea20c0bbe2a5172fc93b039cfe0e72b06b21d850a",
+  "baselinePath": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-empty-lookup-baseline-independent-20261019\\baseline.stdout.jsonl.gz",
+  "baselineGzipSha256": "06fdce1caf2a5559e5bd7a7cf23b7d57127d2e7356712a79d35e3f94b42d5660",
+  "baselineRawSha256": "1b7ab64c350c7525e99b803cbfef86aea31fe44704109d602e62a422377a547a",
+  "baselineWitness": {
+    "kind": "case",
+    "id": "NATURAL/FRESH/ROOT/ALWAYS_THROW/get",
+    "outcome": {
+      "kind": "throw",
+      "class": "EmptyRootLookupOracle$Marker",
+      "message": "empty-root-lookup-marker",
+      "markerIdentity": true
+    },
+    "events": [
+      "ALWAYS_THROW17:ALWAYS_THROW17"
+    ],
+    "size": 0,
+    "empty": true,
+    "entries": []
+  },
+  "originalWitness": {
+    "kind": "case",
+    "id": "NATURAL/FRESH/ROOT/ALWAYS_THROW/get",
+    "outcome": {
+      "kind": "return",
+      "value": null
+    },
+    "events": [],
+    "size": 0,
+    "empty": true,
+    "entries": []
+  },
+  "publicInterfacesUnchanged": true,
+  "allOtherSourceBytesUnchanged": true,
+  "noOpenJdkSourceImported": true
+}

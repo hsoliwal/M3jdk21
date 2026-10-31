@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.EnumLongMap
+displayName: M3JDK21 M3EnumLongMap proving-ground owner
+description: >-
+  Adds com.m3.collections.M3EnumLongMap, an enum-keyed primitive-long map indexed directly by
+  ordinal with one-bit presence and no per-entry object, adapted from the first-party Synexia donor
+  com.synexia.primitives.EnumPrimitiveMap to the single long value lane, plus its differential test
+  against java.util.EnumMap<E,Long>. Proving ground only (wave 2 of the COLLECTIONS family);
+  java.util.EnumMap remains authority and no java.util type is replaced.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-enum-long-map

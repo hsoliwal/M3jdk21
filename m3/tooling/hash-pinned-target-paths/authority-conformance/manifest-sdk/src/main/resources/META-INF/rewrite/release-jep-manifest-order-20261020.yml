@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ReleaseJepManifestOrder
+displayName: Repair ordinal release JEP authority recipe input
+description: Exact source-bound row permutation; original strict verifier and all11 template hashes remain unchanged.
+recipeList:
+  - com.synexia.rewrite.M3ReleaseJepManifestOrderRecipe

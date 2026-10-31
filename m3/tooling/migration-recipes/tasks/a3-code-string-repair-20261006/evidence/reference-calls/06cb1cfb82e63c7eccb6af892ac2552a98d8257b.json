@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "06cb1cfb82e63c7eccb6af892ac2552a98d8257b"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueRecipe.java\tf69f06564a88fcdc851d267e07f1def2586963d4f14bc552986529d7db8ec8e0\t4620bec8fa489b8dcfb8960d8979bfb75517d7893b5f26546d1abaf9f629800e\t00-M3A3AlgorithmCatalogueRecipe.java.txt\nsrc/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java\t2c7f2634165eaa4ae2ba668e38b4aeb44dad646d5f7b2dc55865e17d670771bf\tea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb\t01-M3PureIntAtomEligibility.java.txt\nsrc/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java\t232fae809f232e1201347be243a379d7c0b7cf13dba587219e64ed07c32b05fd\t9ba3245512f18e3d921b6a8d013cea05a70b5a84c473b34dbd574ba55a1978d4\t02-M3RecipeScopeRegistry.java.txt\nsrc/test/java/com/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java\ta79bd712e4ffc0d1ba0d4a7fba9c064f94420fbde8c63e7b2a91496d443e4b7c\tcf1c56ebf8fc2df3778cd56e34240da7c3ba722cb2949e8957b81157abf8b9ba\t03-M3RecipeScopeDeclarationTest.java.txt\n"
+    },
+    "isError": false
+  }
+}

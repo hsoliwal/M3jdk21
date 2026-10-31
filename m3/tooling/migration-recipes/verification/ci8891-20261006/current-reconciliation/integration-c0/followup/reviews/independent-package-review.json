@@ -1,0 +1,226 @@
+{
+  "archiveOnlyProjectFiles": [
+    {
+      "bytes": 5146,
+      "gitBlob": "2aa4ace0951b7019f1788929e014314d2d014d9f",
+      "mode": "100644",
+      "path": "src/test/resources/before/m3/tooling/lane28/verify-plan.py",
+      "sha256": "5ca191f85c48be0ffec139b94d0ed91e0ac58be73686773241255f651799ec4b"
+    },
+    {
+      "bytes": 5089,
+      "gitBlob": "559f9f475471c543bc3f446f1f637aa0c342bc28",
+      "mode": "100644",
+      "path": "src/test/resources/before/m3/tooling/tq/verify-plan.py",
+      "sha256": "ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978"
+    }
+  ],
+  "counts": {
+    "archiveOnlyProject": 2,
+    "archiveParts": 12,
+    "dispositionCounts": {
+      "EXACT_BODY_INCLUDED": 814,
+      "EXCLUDED_IDENTITY_ONLY": 1594
+    },
+    "excludedIdentityRecords": 1607,
+    "flatProject": 41,
+    "logicalProject": 43,
+    "pairedFiles": 71,
+    "pairedRoles": {
+      "mapping-envelope": 2,
+      "portable-evidence": 27,
+      "qualified-project-flat": 41,
+      "unqualified-reconstruction-envelope": 1
+    },
+    "parentProducerOutputs": 143,
+    "parentPublication": 338,
+    "portableFiles": 27,
+    "readbackFiles": 1235,
+    "receivingSelection": 139,
+    "referenceChecks": {
+      "actualTerminal": 1,
+      "bundlePlan": 1,
+      "bundleRawFiles": 16,
+      "executionPlan": 1,
+      "executionStreams": 10,
+      "extractedBodies": 1234,
+      "extractedReadback": 1235,
+      "flatFiles": 41,
+      "helpers": 4,
+      "metadataReferences": 453,
+      "originalBodies": 1234,
+      "pairedFiles": 71,
+      "parent143Metadata": 2,
+      "parent143Outputs": 143,
+      "parent338Bodies": 338,
+      "portableFiles": 27,
+      "projectFiles": 43,
+      "receiving139Files": 139,
+      "receivingSelection": 1,
+      "rootResult": 1,
+      "selectedBodies": 1234,
+      "selectionHelper": 1,
+      "sourceReadback": 1235
+    },
+    "sealedInputDispositions": 2408,
+    "selectedOriginalBodies": 1234,
+    "uniqueLocalFilesHashed": 3989
+  },
+  "findings": [],
+  "limits": [
+    "Packaging PASS preserves receiving PRIMARY_ONLY_STOP; consumer, canonical promotion, full receiver and full JDK qualification remain false.",
+    "Flat 41-file mirror is not Maven-ready; exact 43-file project is retained in reconstructed archive content.",
+    "Raw archive parts were hashed; archive-member parsing/verification was not rerun. Existing extracted bytes and recorded root command/log receipts were reviewed.",
+    "Excluded toolchain/dependency/cache/compiled bodies were not rehashed or restored; disposition metadata is identity-only.",
+    "No remote state was revalidated and no parent/new repository targets were written.",
+    "This review creates only this report; supplemental execution mapping/publication remains parent-owned."
+  ],
+  "metadata": [
+    {
+      "bytes": 110186,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/PAIRED-FILES.json",
+      "sha256": "a9d903ef7274bc8bdd0600f2be3d0b8d00577e021d496ccf15dc05f05fead061"
+    },
+    {
+      "bytes": 498306,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/READBACK.json",
+      "sha256": "6f7539c77f70ad4abdbb1fd38422b713bdc8059854f3430b8dd976bbc7177579"
+    },
+    {
+      "bytes": 28539,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/PROJECT-READY.json",
+      "sha256": "dda2c2b702cb731cb6f9036aa0b369ffd2125200f4f707af5e559b3df2eba2b7"
+    },
+    {
+      "bytes": 20869,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/PORTABLE-MANIFEST.json",
+      "sha256": "de6ce63ce40ad1f8a2e575cb050d162313cecaa09572b3ceed246787cad3d1a0"
+    },
+    {
+      "bytes": 39019,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/TASK-MAPPING.json",
+      "sha256": "4475432eb04ab77142e8d563da3ce77edf8534c8ebc9a3873e74906c0ce7a02a"
+    },
+    {
+      "bytes": 3625376,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/SOURCE-CLOSURE.json",
+      "sha256": "6cc2159363e45087a74cd6d5ec834d133659133c6ca907fc65c971f2f54370a4"
+    },
+    {
+      "bytes": 187339,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/bundle/BUNDLE.json",
+      "sha256": "644e9772b144bbb7452de73b778f805225a3d309f2c6abc85d743c807c095b46"
+    },
+    {
+      "bytes": 7311,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/RESULT.json",
+      "sha256": "54529032a8fa35857b3ea21210f988228a97a2f53f28cea89f5bc9cd1fd092b2"
+    },
+    {
+      "bytes": 7776,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/terminal-selection-v1/COMMANDS.json",
+      "sha256": "77d37faa667cc76cb0d36c203b942df976a902f3b658fed224b41ec081f2df71"
+    },
+    {
+      "bytes": 13982,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/AUTHORING-PLAN.json",
+      "sha256": "d6122560a9f8b8b7a033f8cde3b27427299cbd08fac8237def6ee311028eaf40"
+    }
+  ],
+  "oldParentPublicationPathOverlap": {
+    "m3": 0,
+    "synexia": 0
+  },
+  "parentProducer": {
+    "custody": "Both exact receipts are existing sealed inputs of the Fc0 proof; local source bodies are selected by the unchanged archive classification and compiled/tool bodies remain identity-only.",
+    "output": {
+      "bytes": 4370131,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/evidence/producer-v2/generated-candidate/OUTPUT.json",
+      "sha256": "4575e972110c9266b6c8a1177733506c95eb20a4e7825b799a7bb73ee5bb458f"
+    },
+    "result": {
+      "bytes": 100068,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/evidence/producer-v2/RESULT.json",
+      "sha256": "6fabdebabaef7e3c5fb1988e4fe3c8b87c59cd6066ff443a57e3285cf78e8d08"
+    },
+    "targets": 143
+  },
+  "parentPublication": {
+    "files": 338,
+    "heads": {
+      "hsoliwal/M3jdk21": "7fe5cb0d19bdb3a332f709dfcfbb1f3800919eb4",
+      "hsoliwal/com.synexia": "f7de6eebed10a4996dfcecc49172d45ac28244c3"
+    },
+    "localBodiesUnchanged": true,
+    "pairedMap": {
+      "bytes": 297967,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/integration-c0-final-v2/FINAL-PAIRED-FILES.json",
+      "sha256": "bb815cfcf64ac5298fa857355b8caccb5ebda6c76e2803906d8c92ac9578a2a8"
+    },
+    "publicationReceipt": {
+      "bytes": 1505,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/integration-c0-final-v2/PUBLISHED.json",
+      "sha256": "3cfd177c701dcbf0723dfd6b9b9b0ba7986130bc83c266b74f774de5618e9735"
+    },
+    "remoteStateRevalidated": false
+  },
+  "receivingObservedBooleans": {
+    "allAdmittedGroupsQualified": false,
+    "bridgeGroupQualified": false,
+    "canonicalProductionApplied": false,
+    "canonicalPromotionAuthorized": false,
+    "consumerQualified": false,
+    "fullOpenJdkBuildQualified": false,
+    "fullReceiverQualified": false,
+    "hostedWorkflowExecuted": false,
+    "jep458BlockedSpecificationObserved": false,
+    "jep458HostedWorkflowQualified": false,
+    "jep458ProjectionQualified": false,
+    "materializedInputsQualified": false,
+    "positiveCliGroupsQualified": false,
+    "preparedInputFixedPointObserved": true,
+    "primaryGroupQualified": false,
+    "strictCanonicalAdmission": false,
+    "testsCountedOnlyFromActualReports": true
+  },
+  "receivingSelection": {
+    "bytes": 45711,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/receiving-selection-v3/RECEIVING-SELECTION.json",
+    "sha256": "6483d4a75236aaa6f4231bd3c509c14de950a75f03537e565170138a1f0e70cb"
+  },
+  "receivingStatus": "PRIMARY_ONLY_STOP",
+  "receivingTerminal": {
+    "bytes": 32991,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/RESULT.json",
+    "sha256": "fcbf7e041a1465babc525f4a7c9743a5d4f57cb43a1c4bd065d3e90fbdcd1a51"
+  },
+  "recordedPackagingCommands": {
+    "exitCodes": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "order": [
+      "select",
+      "pack",
+      "verify",
+      "extract",
+      "finish"
+    ],
+    "result": {
+      "bytes": 7311,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/root-execution-v1/RESULT.json",
+      "sha256": "54529032a8fa35857b3ea21210f988228a97a2f53f28cea89f5bc9cd1fd092b2"
+    }
+  },
+  "schema": "synexia.fc0.independent-package-metadata-review/1",
+  "scope": "Independent reads/hashes of existing metadata and mapped/extracted/source/raw-archive bytes only. No archive/proof/helper execution, imports, compilation or test gates.",
+  "selectionHelper": {
+    "bytes": 13165,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/prepare_package.py",
+    "sha256": "8ccbea077946cb7cb8a01cf7473799433235b34467c9bfa4eabbf135af3ea95f"
+  },
+  "status": "PASS_READ_ONLY_METADATA_AND_BODY_REVIEW"
+}

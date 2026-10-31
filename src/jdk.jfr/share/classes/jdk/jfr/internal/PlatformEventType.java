@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, 2022, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2017, 2023, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -31,6 +31,7 @@ import java.util.Objects;
 
 import jdk.jfr.SettingDescriptor;
 import jdk.jfr.internal.periodic.PeriodicEvents;
+import jdk.jfr.internal.util.Utils;
 /**
  * Implementation of event type.
  *
@@ -41,6 +42,7 @@ public final class PlatformEventType extends Type {
     private final boolean isJVM;
     private final boolean isJDK;
     private final boolean isMethodSampling;
+    private final boolean isBackToBackSensitive;
     private final List<SettingDescriptor> settings = new ArrayList<>(5);
     private final boolean dynamicSettings;
     private final int stackTraceOffset;
@@ -71,8 +73,23 @@ public final class PlatformEventType extends Type {
         this.dynamicSettings = dynamicSettings;
         this.isJVM = Type.isDefinedByJVM(id);
         this.isMethodSampling = isJVM && (name.equals(Type.EVENT_NAME_PREFIX + "ExecutionSample") || name.equals(Type.EVENT_NAME_PREFIX + "NativeMethodSample"));
+        this.isBackToBackSensitive = determineBackToBackSensitive();
         this.isJDK = isJDK;
         this.stackTraceOffset = stackTraceOffset(name, isJDK);
+    }
+
+    private boolean determineBackToBackSensitive() {
+        if (getName().equals(Type.EVENT_NAME_PREFIX + "ThreadDump")) {
+            return true;
+        }
+        if (getName().equals(Type.EVENT_NAME_PREFIX + "ClassLoaderStatistics")) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isBackToBackSensitive() {
+        return isBackToBackSensitive;
     }
 
     private static boolean isExceptionEvent(String name) {
@@ -148,7 +165,7 @@ public final class PlatformEventType extends Type {
 
     public void setCutoff(long cutoffNanos) {
         if (isJVM) {
-            long cutoffTicks = Utils.nanosToTicks(cutoffNanos);
+            long cutoffTicks = JVMSupport.nanosToTicks(cutoffNanos);
             JVM.getJVM().setCutoff(getId(), cutoffTicks);
         }
     }
@@ -238,7 +255,7 @@ public final class PlatformEventType extends Type {
     }
 
     public void setThreshold(long thresholdNanos) {
-        this.thresholdTicks = Utils.nanosToTicks(thresholdNanos);
+        this.thresholdTicks = JVMSupport.nanosToTicks(thresholdNanos);
         if (isJVM) {
             JVM.getJVM().setThreshold(getId(), thresholdTicks);
         }

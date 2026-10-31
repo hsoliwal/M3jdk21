@@ -1,0 +1,300 @@
+{
+  "baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "status": "ALL_49_TARGETS_MATCH_FINAL_SEALS",
+  "targets": [
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "pre_sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d",
+      "post_sha256": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java",
+      "pre_sha256": "d70bcdd969aa688ed0a498ce3503684fee2b0ecc9eb11348160e7befa1a7cfe0",
+      "post_sha256": "d13c5c5db3e07e5c66f8857f2c74e07d2ba60babb7d2529bd397e61894881fd0"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "pre_sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+      "post_sha256": "a5bb9ab36fdfad2bd4d03af63f8f0152928247d93016172cef563c263df15ea6"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java",
+      "pre_sha256": "4d1c782345de46c31e24b4822f58c431903c7b951b6a15641c88e055271f971e",
+      "post_sha256": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "pre_sha256": "0e201b871ca85fa0af306530b6e52cd7fbcdb47207ea0554456abb25e003a61d",
+      "post_sha256": "8158f7de103260f0f692190267accad571cfe3de1b32cab561372d06ac759c21"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+      "pre_sha256": "67a1118b2df4cff80430e47700d6243e5135048abfa26ffdeffa66dc8f2e76cc",
+      "post_sha256": "ee2ce70df68f11d14ba85a7da8485c9e82e7bc38c08601b57b69d1f39d3bdd2a"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java",
+      "pre_sha256": "041c6afc3ed04671e9e9fa1a30c0ea7df7fe09aefdff405a3612afffee441ecb",
+      "post_sha256": "6a5e58ebe44b89e8f36bf2d134b46938e47dba4dff47d03ac00ac8000115d03c"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "pre_sha256": "66442108ee67cb8395f9e4cb7d26990583a33d2e2775347da15acb5cb3d5b62d",
+      "post_sha256": "3c65c0d918b6cb39d4c27f98699fa97067d2aa3a7fb76ea48b2fd6092a9d0178"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java",
+      "pre_sha256": "ed19c7b34e23f61ea5bfa808550a1189ccc07900b7022f3572d78c23c5929f0c",
+      "post_sha256": "1d8f25952de1f334edb5cde48ee45c3ad2ee6983b62679b5636d525710682423"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java",
+      "pre_sha256": "4ee2b86ea682c64da881d36eb5b4aadc4ba6640389f2adbfdc8dff4d44cf4070",
+      "post_sha256": "9257ce0c9c95e3afef20624631ba048aa3d60ef53a1189cd2bbabc07da2bba2f"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/qualification/full-java-jni-20261018/LICENSE.txt",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/qualification/full-java-jni-20261018/NOTICE.txt",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "9539dab2079a48f0c68717eec9d82ff82c1144302045ecfe2f9bc0a54b4e41d3"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/qualification/full-java-jni-20261018/README.md",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "2e4a6d57cb0deadefbeb14c23fc7696bd709fc947b778ce48e90aa0ecf157f1c"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/qualification/full-java-jni-20261018/verify.py",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "147f051a13353fe4add7b3ca200c47d82692c95466d0d7d8d486755929481e0d"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/qualification/swift-deque-spans-20261018/NOTICE.txt",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "734e46ccebfed7247fd5eed4f3e80cc4b1807e3b77884b0bbc8da7656dd42704"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/qualification/swift-deque-spans-20261018/SWIFT-LICENSE.txt",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "770af8291f708538d8ff885a0bbc4e045cd700531741c4f99528d435c14d7f55"
+    },
+    {
+      "dataset": "converged-owners-v2-20261018",
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "pre_sha256": "a5cefed03d9db9429048a218945a8af71b5b7acc862e089f6cc8a451a172e212",
+      "post_sha256": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3DequeSpanCopyTest.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "ace325fb05470e1b8b52d2f650c69dc339abf32d7402d6a73cbf718b9cdc1cbd"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "2cde685da95319bca841ae3c95fb73e3ea4776177a78046d96b79033545dfc2d"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationTest.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "fb79c68bdb9f59b91e5cc69e8ebc27963a2a50236b7ddf9d8f139615ad9033b7"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullContract.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "e4ffa9331e6dfb74cd91391c4cdc9b9cc8fa1f359e79b6f98f4ccb962b1f6fd9"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullTest.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "ba0af20ac2ebc21a88c5283484e02106a656838f85a6568ea15b6268e8aa9c80"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSplitContract.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "f00e6da4a79cd667d7af057765154812e292a59aa9656a0f6bb02d032880c3c8"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "46471955d786e65772734a9287e55c52b11b2d20ac2f9ee26003849bff5585f6"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksAliasContract.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "0775d6002cc1d34aa76049518c40e5bfbcdd10d9c25d06930b0d0b212f01552f"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopProof.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "d0939a83e279a102848ba4b36b21fa4a29f16f4220d16c9944307f58878f7eae"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopTest.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "eb59c62a478b6be8411976e61b5798c262b029bb71c69da9f63924e73013cb6b"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekProof.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "43bfa6a061c4725a3669d63e9a520a9eccab5fb0572c177630d7e65e66838cbc"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekTest.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "c78cd349bdf0caff1bd377c6aef0eb80bd150353fb2de93d664124d1b5b56fc4"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "ac936c50eeab26372d5406ab8ee3ede86f65173f8bc6d965adb151cf2ac5afeb"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasContract.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "3c5528cb59b86a5905c42c4c7e1dd4923772bdb5e2f4918c94466d809ad3344b"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasTest.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "21524ab83d436650d247964f54ad659bcee754d279e81be2450fc22142e989c3"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsContract.java",
+      "pre_sha256": "372a5be9ccd7bba8aae5083e63aaca59805f4b8ed17aca5854f6ea387aa49190",
+      "post_sha256": "3a637ad272bd46336384df01be4e6aae8cb8b4027b441ac57ec359e9fd0c3815"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java",
+      "pre_sha256": "821b8ae1ec22516dceef16f5951ab66fe3f6db799f26732c620202bab862754b",
+      "post_sha256": "1fe4d16e613da49b43b0d76412ed5c12e85c6833638272424709581cc50068d4"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "fe071ef7e801a9bb1d57501512f0dd606f0c08652e100e6132dc7c4e4a8f6327"
+    },
+    {
+      "dataset": "converged-oracles-20261018",
+      "path": "m3/collections/src/test/native/m3_mask_window_spans.c",
+      "pre_sha256": "ABSENT",
+      "post_sha256": "219d1cf76e3a02a08ec649f3da16e36e720b08f15124fa6a2b4504587468edb4"
+    },
+    {
+      "dataset": "converged-build-20261018",
+      "path": "m3/vendor/third_party/apiguardian-api/PROVENANCE.json",
+      "pre_sha256": "c03045650d5e792b926dc56c738e52946fb44ff1cc212fbb8c2e61e223802429",
+      "post_sha256": "8e1396bcf3bb9065824ba2b9db4aab03d2b4e9bf09c9209c0eb6cc0198effa58"
+    },
+    {
+      "dataset": "converged-build-20261018",
+      "path": "m3/vendor/third_party/apiguardian-api/pom.xml",
+      "pre_sha256": "0d6c98a7e1d59844d3c64ed1e4c59381c5a46834f2731375a7a6c9642ca62091",
+      "post_sha256": "54521e57cf458017c20682a31ad1a4dc1fa08b2847f8fa79091566dc748404d6"
+    },
+    {
+      "dataset": "converged-build-20261018",
+      "path": "m3/vendor/third_party/apiguardian-api/verify_source.py",
+      "pre_sha256": "130f5a0377e3c87f3d116a8de0a9eea02b4c65429bf71f2c8ccde7d1a55b7a4b",
+      "post_sha256": "8166b5a9f62367a00ebf90807ba56a1f0118d6fc1cab71fff43d0c7b3ce8e875"
+    },
+    {
+      "dataset": "converged-build-20261018",
+      "path": "m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py",
+      "pre_sha256": "e6980df7e72c9f516ec9e6a0fd0caff21ef80b8b70038a994cdb7ad0b2edb205",
+      "post_sha256": "2fd7297f2651f0b57fa28d7b411602de5589554c19875f2159b84617eb3c4a24"
+    },
+    {
+      "dataset": "converged-build-20261018",
+      "path": "m3/vendor/third_party/junit-jupiter-api-5.10.2/verify_source.py",
+      "pre_sha256": "841ef6d6ffde7c923368b66eca22d84119fc6058ccb3de711bcb5854bec54a0e",
+      "post_sha256": "ac6edc1c414abaf625a9b7ffd9ad4a7d4b1c1eaf49730a35538d142a61252f46"
+    },
+    {
+      "dataset": "converged-build-20261018",
+      "path": "m3/vendor/third_party/junit-jupiter-engine-5.10.2/verify_source.py",
+      "pre_sha256": "d916b253795ef44453c2ad8c17702d4fedbe39b6bbd05540ce0ad69a26638730",
+      "post_sha256": "1b5eb19be3cbee70e6f0efb14d6c88dcfb61cf4c3234e706f1c97d11efcbf85c"
+    },
+    {
+      "dataset": "converged-build-20261018",
+      "path": "m3/vendor/third_party/junit-jupiter-params-5.10.2/verify_source.py",
+      "pre_sha256": "e09067ef9d4fe30fe753d97922c62651242039f5659181dd2a56dbc5e7aab60a",
+      "post_sha256": "715118480c34ef8d07f43bdc03e848ff9719172a077f102a4054deb55f0654f9"
+    },
+    {
+      "dataset": "converged-build-20261018",
+      "path": "m3/vendor/third_party/junit-platform-commons-1.10.2/verify_source.py",
+      "pre_sha256": "77653e9824a67e3436b01035bc66c1a37f597dcb8755de2b28e8df32b642c9e6",
+      "post_sha256": "b6d0f1aea10bfd7fecdc22ab8ba61505eb312ba0f6fe5f5edd8441320778fdaf"
+    },
+    {
+      "dataset": "converged-build-20261018",
+      "path": "m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py",
+      "pre_sha256": "16561d05bbb62671077f7e1cdcdf2125859b33aff2f4357c0b3b2fcfce381139",
+      "post_sha256": "f34c7f9ed6b8809920419fc7a3dc715c309f12575f730b3ec354873088e29318"
+    },
+    {
+      "dataset": "converged-build-20261018",
+      "path": "m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py",
+      "pre_sha256": "7ecd6418dcd4097ca23b3382c4d87d18ed2a02bc8df2a503421c23793fcfd10b",
+      "post_sha256": "62ee079c1c692c657d3ff9dd30120d91702fd93c9b2b6203536865d56bae9d9d"
+    },
+    {
+      "dataset": "converged-build-20261018",
+      "path": "m3/vendor/third_party/opentest4j/verify_source.py",
+      "pre_sha256": "1ce4478e363193345dc9bcada6003190050cd30ebbaf78cf3aae6462aacedffb",
+      "post_sha256": "b1e440965b1b9c7d3ab767be7fc1eba48965736a83a091c7aeb31332a5d01542"
+    },
+    {
+      "dataset": "converged-build-20261018",
+      "path": "m3/vendor/third_party/univocity-parsers/verify_source.py",
+      "pre_sha256": "ccda49fc1a22f7e504c017f25fce4cf4140065ce1743bbdea86701b2040ab4f4",
+      "post_sha256": "436e34c43641ec5acb1e1c224621cd420a9175f0e9f0b9b74219a45cd1e0ccd5"
+    }
+  ]
+}

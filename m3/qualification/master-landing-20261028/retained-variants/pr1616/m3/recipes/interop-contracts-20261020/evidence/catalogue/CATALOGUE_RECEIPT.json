@@ -1,0 +1,85 @@
+{
+  "scope": "Existing unchanged inspection CLI strict compile and catalogue lookup; no new runtime or transformation engine",
+  "source_path": "make/m3/recipes/src/main/java/org/synexia/m3/recipe/M3ProblemCatalogue.java",
+  "source_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "source_sha256": "f422b82a5d020ee35f0e9ca53e82f581df8b944e41068d712c483c724880a929",
+  "catalogue_sha256": "987fb34a5b0b950fc5372e861081af46c48e31f610102fdeb9322d05259701b8",
+  "executions": [
+    {
+      "name": "compile",
+      "command": [
+        "/tmp/m3jdk21-toolchain-20261020/jdk-21.0.12.1+1/bin/javac",
+        "--release",
+        "21",
+        "-encoding",
+        "UTF-8",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/workspace/scratch/53bcd62c244c/work-final-review-20261020/catalogue-interop-classes",
+        "/workspace/scratch/53bcd62c244c/M3JDK21/make/m3/recipes/src/main/java/org/synexia/m3/recipe/M3ProblemCatalogue.java"
+      ],
+      "exit_code": 0,
+      "started_ns": 1792508223571758308,
+      "finished_ns": 1792508224648084343,
+      "log": "evidence/catalogue/compile.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "validate",
+      "command": [
+        "/tmp/m3jdk21-toolchain-20261020/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/53bcd62c244c/work-final-review-20261020/catalogue-interop-classes",
+        "org.synexia.m3.recipe.M3ProblemCatalogue",
+        "/workspace/scratch/53bcd62c244c/canonical-interop-contracts-20261020/catalogue/PROBLEMS_20261020.tsv",
+        "validate"
+      ],
+      "exit_code": 0,
+      "started_ns": 1792508224648231154,
+      "finished_ns": 1792508224717469685,
+      "log": "evidence/catalogue/validate.log",
+      "log_sha256": "1de50f0d02eee0588caa4fbdeb3fb5f3c098fcf88fb26c57e2f50cd3d510484d"
+    },
+    {
+      "name": "find",
+      "command": [
+        "/tmp/m3jdk21-toolchain-20261020/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/53bcd62c244c/work-final-review-20261020/catalogue-interop-classes",
+        "org.synexia.m3.recipe.M3ProblemCatalogue",
+        "/workspace/scratch/53bcd62c244c/canonical-interop-contracts-20261020/catalogue/PROBLEMS_20261020.tsv",
+        "find",
+        "area",
+        "multiset_intersection"
+      ],
+      "exit_code": 0,
+      "started_ns": 1792508224717606672,
+      "finished_ns": 1792508224795635895,
+      "log": "evidence/catalogue/find.log",
+      "log_sha256": "e113a6295aa73e123f33104153caf84b8871af1cf22b4cd7e85e6a5985bee74c"
+    },
+    {
+      "name": "validate-inherited",
+      "command": [
+        "/tmp/m3jdk21-toolchain-20261020/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/53bcd62c244c/work-final-review-20261020/catalogue-interop-classes",
+        "org.synexia.m3.recipe.M3ProblemCatalogue",
+        "/workspace/scratch/53bcd62c244c/canonical-interop-contracts-20261020/catalogue/inherited/PROBLEMS_20261020.tsv",
+        "validate"
+      ],
+      "exit_code": 0,
+      "started_ns": 1792508224795771811,
+      "finished_ns": 1792508224878070479,
+      "log": "evidence/catalogue/validate-inherited.log",
+      "log_sha256": "9dd52ff8b6a7461445d5eba0fdd081075acfd902939c1c7c290bc5acc29ec7d0"
+    }
+  ],
+  "new_rows": 9,
+  "inherited_rows": 13
+}

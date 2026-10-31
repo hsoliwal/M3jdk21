@@ -1,0 +1,21 @@
+{
+  "schema": "m3-optional-unified-guava-source-closure-20261027",
+  "canonical_recipe": "com.synexia.m3.UnifiedGuavaMultisetAndListMultimap20261027",
+  "recipe_authority": "hsoliwal/com.synexia",
+  "source_license": "Apache-2.0 Guava Authors plus original M3 Apache-2.0",
+  "retained_public_names": [
+    "com.google.common.collect.Multiset",
+    "com.google.common.collect.Multimap",
+    "com.google.common.collect.ListMultimap"
+  ],
+  "first_party_owners": [
+    "com.m3.collections.guava.M3HashMultiset",
+    "com.m3.collections.guava.M3ArrayListMultimap"
+  ],
+  "physical_owner": "M3 per-family dense Object[]/int[] and open-addressed index, no duplicate retained per-occurrence objects",
+  "product_build": "m3/collections/implementations/guava-unified/pom.xml",
+  "module_artifact": "com.m3.collections:m3-owned-guava-unified:0.1.0-SNAPSHOT",
+  "runtime_dependency_policy": "java.base; no Guava/Synexia/external Maven runtime",
+  "standalone_old_module_status": "historical candidates, DO NOT co-load or publish with unified",
+  "qualification": "strict Java21, actual Guava binary differential, exact source hashes, no duplicate class, jdeps, independent runtime tests pending"
+}

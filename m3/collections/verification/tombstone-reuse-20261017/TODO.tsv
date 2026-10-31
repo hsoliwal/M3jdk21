@@ -1,0 +1,7 @@
+priority	state	task
+P0	DONE	Apply exact Synexia source postimages without altering APIs/JNI
+P0	DONE	Bind source and recipe lineage
+P0	OPEN	Submit target draft PR and rerun installed receiver
+P0	BLOCKED	Maven/OpenRewrite SDK, full JDK build and jtreg
+P1	OPEN	Independent review and Windows/ARM/native image validation
+P1	OPEN	JMH CPU, heap, native memory and allocation regression

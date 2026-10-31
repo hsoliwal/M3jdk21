@@ -1,0 +1,1340 @@
+{
+  "admission": {
+    "SDK_input_records_recomputed": 3817,
+    "attribution_classpath_scope": "Historical SDK attribution classpaths include diagnostic classes and are sealed as such; final runtime qualification uses actual generated receiving sources/classes.",
+    "files": [
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-mfiles-9acdf5b32fc4ec6a/m3/fs/src/main/java/com/m3/fs/MFiles.java",
+        "after_sha256": "1c0df84c0b8c57f0098f5e9c2124932c426f774b6247da5f5946715a192456ed",
+        "before_sha256": "b881c356f46fd5bed68d1e6d78a704b6fae7012c1fd0e576e043ea53bc8468b4",
+        "pass": "onepass-mfiles-9acdf5b32fc4ec6a",
+        "path": "m3/fs/src/main/java/com/m3/fs/MFiles.java",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/fs/src/main/java/com/m3/fs/MFiles.java",
+        "sdk_receipt_sha256": "8e160e3a5748c559d57232f6bdb590cbb72c9f8de8954ba936086c6613d9f99e",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-mfilesparalleltest-51e46243dc9989b9/m3/fs/src/test/java/com/m3/fs/MFilesParallelTest.java",
+        "after_sha256": "cd9b36f2c2b9e785978e54536e2ebc8867c8105d4e5451ec937e82c8cd02d64f",
+        "before_sha256": "ABSENT",
+        "pass": "onepass-mfilesparalleltest-51e46243dc9989b9",
+        "path": "m3/fs/src/test/java/com/m3/fs/MFilesParallelTest.java",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/fs/src/test/java/com/m3/fs/MFilesParallelTest.java",
+        "sdk_receipt_sha256": "b39124ca8c8ae26d7376a7305f386cd96a9037b793ae992d8df9ebacb41818f3",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-readme-aa3fda40339f7faa/m3/tooling/module-packs/parser-openrewrite/README.md",
+        "after_sha256": "f51fd100c1ad7859e0724bc284c140a55c1db0a4ffd94ecb41d9bc78ef02ceb0",
+        "before_sha256": "ABSENT",
+        "pass": "onepass-readme-aa3fda40339f7faa",
+        "path": "m3/tooling/module-packs/parser-openrewrite/README.md",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser-openrewrite/README.md",
+        "sdk_receipt_sha256": "e68c60dcff82878c274fcc22a19e06edf682a1d73b9fb25c06905c7e863806c9",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3openrewriteingress-d36c4856092c0285/m3/tooling/module-packs/parser-openrewrite/src/main/java/jdk/m3/parser/openrewrite/M3OpenRewriteIngress.java",
+        "after_sha256": "4f5c229fe0c779a995a939d2f48a7a4c5c68d0aa061558deff2129b23347b01f",
+        "before_sha256": "ABSENT",
+        "pass": "onepass-m3openrewriteingress-d36c4856092c0285",
+        "path": "m3/tooling/module-packs/parser-openrewrite/src/main/java/jdk/m3/parser/openrewrite/M3OpenRewriteIngress.java",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser-openrewrite/src/main/java/jdk/m3/parser/openrewrite/M3OpenRewriteIngress.java",
+        "sdk_receipt_sha256": "ca46f0a59796b58b3f4dc61e3f38bc0bfada4d0735f30d88ca9d3330d7a9fdb0",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3openrewriteingresscontract-bbdb82668b5c69eb/m3/tooling/module-packs/parser-openrewrite/src/test/java/jdk/m3/parser/openrewrite/test/M3OpenRewriteIngressContract.java",
+        "after_sha256": "110cd8278056373b4d3e6908ddde012d3e1c9c216ff6db11a5b632d968eef5c7",
+        "before_sha256": "ABSENT",
+        "pass": "onepass-m3openrewriteingresscontract-bbdb82668b5c69eb",
+        "path": "m3/tooling/module-packs/parser-openrewrite/src/test/java/jdk/m3/parser/openrewrite/test/M3OpenRewriteIngressContract.java",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser-openrewrite/src/test/java/jdk/m3/parser/openrewrite/test/M3OpenRewriteIngressContract.java",
+        "sdk_receipt_sha256": "f960d7a5e2ee8d9e51cd0fbde1f6c89279dc924d968f9408fa45c9a733cccff5",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-facts-3638e88b94fe7322/m3/tooling/module-packs/parser/FACTS.md",
+        "after_sha256": "abb2ff1693a918a1f94718a3b9baf58172140d95e17520b508f41f764e9f59aa",
+        "before_sha256": "33f032313086cd28e989c404dc28308a16fcdc91f90b03488b16707164ba341a",
+        "pass": "onepass-facts-3638e88b94fe7322",
+        "path": "m3/tooling/module-packs/parser/FACTS.md",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser/FACTS.md",
+        "sdk_receipt_sha256": "a004348c299fc497de145ab0e35ccb2dedc77680f034f41aa0ee5e45262969bf",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-build-d2960a2a9d1520d9/m3/tooling/module-packs/parser/build.py",
+        "after_sha256": "078edd5d65e2c28c8a9d4980ef5bf1f5eded8e5ec57e111e21785a68a201b887",
+        "before_sha256": "77c98dd22cabe74518630acbec890b226735a85a14be533ddc5b38a634684bdf",
+        "pass": "onepass-build-d2960a2a9d1520d9",
+        "path": "m3/tooling/module-packs/parser/build.py",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser/build.py",
+        "sdk_receipt_sha256": "d753febad81e00a15b4bd9b6e79bfb11df145ef479ca1299f6d1ff99494d236f",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astindex-d2115cf48d21e3df/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java",
+        "after_sha256": "ae749dd67f865bc1fa34e8c691a0611ddcfb0eab0a9b75e5345403540dad89a7",
+        "before_sha256": "4563fcc9ea0a1572f9e0d8040f4980adf40feec4d85b3d0e30d14906b4672fc2",
+        "pass": "onepass-m3astindex-d2115cf48d21e3df",
+        "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java",
+        "sdk_receipt_sha256": "0142b47a3e602c5b46eb9a6b97fa6a20dcef28e1fdb1f092c6406b8dce0d3224",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astingress-c919b19aab355093/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java",
+        "after_sha256": "1f172ac1efa0ac6be0528b8c50c3505a1e54878a95e821d7a35433fe90402794",
+        "before_sha256": "c84e5c826d306f14be105c28a459a8a056023e44b828791f984b9a627c4166ec",
+        "pass": "onepass-m3astingress-c919b19aab355093",
+        "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java",
+        "sdk_receipt_sha256": "793d272344e64fcb8c32742b40636891428dfe5dd06d6b4a3878edafd360bb47",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3factswriter-685ce0ec6fd7b1f7/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3FactsWriter.java",
+        "after_sha256": "a321f340a3184f3d23952b2afa17b4afed88bffcbc045d9bd3c0da28015cec72",
+        "before_sha256": "ABSENT",
+        "pass": "onepass-m3factswriter-685ce0ec6fd7b1f7",
+        "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3FactsWriter.java",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3FactsWriter.java",
+        "sdk_receipt_sha256": "f4820adad6624c3369c497fcc9ab606158175625c35dfc3043beef8dcf40125d",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3file-ff0ed3321ca19b2d/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java",
+        "after_sha256": "203901e675d720ed0ce8e033b12352a2e729a36514b5a38741800e225f45ab57",
+        "before_sha256": "5851f9fc09cb079818fe2224249129688e7637bd562f77cb016cdc8c32c868ad",
+        "pass": "onepass-m3file-ff0ed3321ca19b2d",
+        "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java",
+        "sdk_receipt_sha256": "6198476fe3910506cf7b480d45fe4216b3db10bbf532fbac151932b663dd5760",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3javacparser-4e3e972ccc9968c1/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacParser.java",
+        "after_sha256": "e86b8fcda09613a84141aa95d4a7baa96d363bbeef26ff6c8c5e6a63f9e58273",
+        "before_sha256": "64a255aa080e9197f16dac5112609592b7ce015379a8673a8dcc219529e5356b",
+        "pass": "onepass-m3javacparser-4e3e972ccc9968c1",
+        "path": "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacParser.java",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacParser.java",
+        "sdk_receipt_sha256": "e4338a68d6f42552381fd3df2300c0cd3501ef98999ac0c3ff6dd81e05c6a0f0",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-module-info-4ae6202fc6a8c8c8/m3/tooling/module-packs/parser/src/main/java/module-info.java",
+        "after_sha256": "6790afe753de4567809b866554fba07e911a0477d0a8dfcaad027c973d030f37",
+        "before_sha256": "e79a2595912602f617b972207918d8a23c69ea96b39e37e01d6f7f517763144f",
+        "pass": "onepass-module-info-4ae6202fc6a8c8c8",
+        "path": "m3/tooling/module-packs/parser/src/main/java/module-info.java",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser/src/main/java/module-info.java",
+        "sdk_receipt_sha256": "9f5e9c1d684f386fc933f31c7f3f2b5439b0dd894dc531ba4481eb40f535409d",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astdetailscontract-c720ee42fb5e822a/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTDetailsContract.java",
+        "after_sha256": "1a19d5ea34ff525e35ca7a06bcfbfc4fed82affe5bed93afca6415da13d63ba6",
+        "before_sha256": "ABSENT",
+        "pass": "onepass-m3astdetailscontract-c720ee42fb5e822a",
+        "path": "m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTDetailsContract.java",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTDetailsContract.java",
+        "sdk_receipt_sha256": "c1f3fe42080ee1dca0f3aa32ea5a58e3b4034d56085da6a1319e3922b7af7a67",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astindexprojectioncontract-d77e49878bbc4006/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTIndexProjectionContract.java",
+        "after_sha256": "b9a211202dc35369d198f93b3e11c02d1f7fd583e9d3718e589b2210a72cf573",
+        "before_sha256": "ABSENT",
+        "pass": "onepass-m3astindexprojectioncontract-d77e49878bbc4006",
+        "path": "m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTIndexProjectionContract.java",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ASTIndexProjectionContract.java",
+        "sdk_receipt_sha256": "3ce8738989d42cc29caa7280a5d727d53548d937c91b7204b6bfd7a3649e8cdf",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3factswritercontract-09b4814be7c7d2b9/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FactsWriterContract.java",
+        "after_sha256": "5b1ba9a8754cad1210c523c4931eef93f612fee4220886c9e957d120ad7991cb",
+        "before_sha256": "ABSENT",
+        "pass": "onepass-m3factswritercontract-09b4814be7c7d2b9",
+        "path": "m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FactsWriterContract.java",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FactsWriterContract.java",
+        "sdk_receipt_sha256": "a09b40c1866e8f65d91b138f62f0471f38f5ae0076a89fe05e565b6686023dcf",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3fileinputcontract-fd592b4acecc83fd/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FileInputContract.java",
+        "after_sha256": "23bd37d9cde8fe84d3ad6b0cfdeca0b4ea80c8c31cbb7f57bbbc2b0ce4ca3da9",
+        "before_sha256": "ABSENT",
+        "pass": "onepass-m3fileinputcontract-fd592b4acecc83fd",
+        "path": "m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FileInputContract.java",
+        "receiver": "m3jdk21",
+        "receiving_path": "receiver/m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FileInputContract.java",
+        "sdk_receipt_sha256": "015d4ab041860ef605bc9b8e91d449ede7c6c56f30e70a4c1d37920b8c61a72b",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipejavacgate-acb18e3bf88dbdc8/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeJavacGate.java",
+        "after_sha256": "fbd4016ee2fd12bdff8adcf267608e7d166c812494e9515dde3db08eea0e2afb",
+        "before_sha256": "34fe230a7ff968dc7131e1a573d5ebc7cde3ca623dc22b433ed8fff68b9f2cef",
+        "pass": "onepass-m3recipejavacgate-acb18e3bf88dbdc8",
+        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeJavacGate.java",
+        "receiver": "synexia-consumer",
+        "receiving_path": "consumer/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeJavacGate.java",
+        "sdk_receipt_sha256": "094188747f7c91a390ab9f8b1a03f1110c98663abc98688f23b295f3120bca45",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipetreelint-c3bed1db0b901925/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeTreeLint.java",
+        "after_sha256": "eb5c63a7732d90b3efa3edafda47f4788a82a47fe78b1d71ce603deffeca8178",
+        "before_sha256": "f90dbb4128b3da0fb67dc509a8117af8f9295cf9b7efe2cb2176beef6545ccb5",
+        "pass": "onepass-m3recipetreelint-c3bed1db0b901925",
+        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeTreeLint.java",
+        "receiver": "synexia-consumer",
+        "receiving_path": "consumer/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/mop/compiler/M3RecipeTreeLint.java",
+        "sdk_receipt_sha256": "1bdbae5969a4d9e9856c96b86a619996027ee857c0b53e091ea5b90f468ec693",
+        "status": "PASS"
+      },
+      {
+        "actual_sdk_result": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipeindexlintcontract-64e6df4510e96feb/synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/mop/compiler/M3RecipeIndexLintContract.java",
+        "after_sha256": "3e137788cc64c5f7c8b6a7f84c10d53e1b5a264214d46dcbd62457188ae8b7de",
+        "before_sha256": "ABSENT",
+        "pass": "onepass-m3recipeindexlintcontract-64e6df4510e96feb",
+        "path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/mop/compiler/M3RecipeIndexLintContract.java",
+        "receiver": "synexia-consumer",
+        "receiving_path": "consumer/synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/mop/compiler/M3RecipeIndexLintContract.java",
+        "sdk_receipt_sha256": "90ed026ade93f87570d7f5682c969bb50ab9e32685b6473d9fddaa7525db9794",
+        "status": "PASS"
+      }
+    ],
+    "final_file_sdk_guard_tests": 100,
+    "final_files": 20,
+    "m3jdk21_files": 17,
+    "materialization": "Actual ordered OpenRewrite Result output, followed by receipt-bound receiver admission; no template-copy production admission.",
+    "rejected_attempts_preserved": [
+      {
+        "pass": "onepass-m3astindex-e8103c6c95c2c415",
+        "receipt": {
+          "bytes": 2340,
+          "path": "verification/sdk/onepass-m3astindex-e8103c6c95c2c415/RESULT.json",
+          "sha256": "ddd807fb0f307c7bce1cae12fb7669ab4616f80e6caf7804bcad4832b636d70c"
+        },
+        "status": "FAIL"
+      },
+      {
+        "pass": "onepass-m3astingress-edddc63320b8f6d9",
+        "receipt": {
+          "bytes": 2356,
+          "path": "verification/sdk/onepass-m3astingress-edddc63320b8f6d9/RESULT.json",
+          "sha256": "862df68d006c4abf49e7bc14f40bfa29244b4d531f5c80dc3d379242bcdcf083"
+        },
+        "status": "FAIL"
+      }
+    ],
+    "successful_historical_predecessors": 2,
+    "successful_sdk_guard_tests": 110,
+    "successful_sdk_passes": 22,
+    "successor_history": [
+      {
+        "path": "m3/tooling/module-packs/parser/build.py",
+        "predecessor_pass": "onepass-build-5ff31edfa72c7b2c",
+        "predecessor_receipt_sha256": "5a7a89409e38cb00cdaf6f939d2e0f5869abecb24e9c6d58545d6353fa7747ab",
+        "predecessor_sha256": "77c98dd22cabe74518630acbec890b226735a85a14be533ddc5b38a634684bdf",
+        "status": "PASS",
+        "successor_pass": "onepass-build-d2960a2a9d1520d9",
+        "successor_sha256": "078edd5d65e2c28c8a9d4980ef5bf1f5eded8e5ec57e111e21785a68a201b887"
+      },
+      {
+        "path": "m3/tooling/module-packs/parser/FACTS.md",
+        "predecessor_pass": "onepass-facts-488dc665ec29d1f4",
+        "predecessor_receipt_sha256": "a1d4e31c233d0958e7fc4d434a9e725356289e4186c5fd10c1cbd63c7cc5dda1",
+        "predecessor_sha256": "33f032313086cd28e989c404dc28308a16fcdc91f90b03488b16707164ba341a",
+        "status": "PASS",
+        "successor_pass": "onepass-facts-3638e88b94fe7322",
+        "successor_sha256": "abb2ff1693a918a1f94718a3b9baf58172140d95e17520b508f41f764e9f59aa"
+      }
+    ],
+    "synexia_consumer_files": 3,
+    "unique_SDK_input_files_recomputed": 805
+  },
+  "blockers": [],
+  "canonical_revision": "7b849eaae565d5afccc98e0c8d46d0f02ebd9ca4",
+  "claims_review": {
+    "bounds": "K bounds admitted work/result credits and the demonstrated one-primary-reader composition. Provider arrays/archive state, arbitrary callback opens/allocations and parser/index payloads remain additional costs.",
+    "contract_clarification_status": "PASS",
+    "generic_callback_content_ownership": "Only the callback can establish EOF and close its outer monitored/shadow/capture layer; a generic FileTask result alone is not complete content evidence.",
+    "identities": "Raw bytes, decoded UTF-16, exact spans and structural hashes are separately framed syntax evidence; no atomic filesystem snapshot or semantic equivalence is claimed.",
+    "publication_boundary": "Individual completed callback results can precede region manager close; successful terminal exhaustion/close waits workers and cleanup. Owning facts Stream is closed before commit.",
+    "resolved_findings": [
+      {
+        "control_flow": "transaction() commits before finally restoring autocommit; Path overload closes its owned connection after transaction() returns. Either cleanup can throw after commit.",
+        "generated_successor_pass": "onepass-facts-3638e88b94fe7322",
+        "generated_successor_receipt_sha256": "a004348c299fc497de145ab0e35ccb2dedc77680f034f41aa0ee5e45262969bf",
+        "generated_successor_sha256": "abb2ff1693a918a1f94718a3b9baf58172140d95e17520b508f41f764e9f59aa",
+        "id": "post_commit_cleanup_is_not_rollback",
+        "java_changed_for_resolution": false,
+        "original_claim": "A failure rolls back this generation, preserving earlier generations and unrelated caller work.",
+        "original_path": "m3/tooling/module-packs/parser/FACTS.md",
+        "original_sha256": "33f032313086cd28e989c404dc28308a16fcdc91f90b03488b16707164ba341a",
+        "resolution": "Documentation now says pre-publication failure attempts rollback and explicitly states post-commit restore/close failure cannot retract the committed generation; callers must distinguish failure from non-publication.",
+        "status": "RESOLVED"
+      }
+    ]
+  },
+  "facts": {
+    "native_check_mode": "-Xcheck:jni",
+    "older_named_compiler_patch_byte_identical_to_parser_final_classes": 29,
+    "pinned_dependencies_recomputed": 3,
+    "production_classes_byte_identical_to_parser_final": 65,
+    "scope": "Generated receiver, real pinned Xerial SQLite JNI; no total source-built SDK or SQLite module-image claim.",
+    "source_files_recomputed": 37,
+    "source_test_sha256": "5b1ba9a8754cad1210c523c4931eef93f612fee4220886c9e957d120ad7991cb",
+    "sqlite_checks": 278,
+    "status": "PASS"
+  },
+  "fs": {
+    "compiled_m3fs_java_sources": 62,
+    "compiled_vfs_java_sources": 237,
+    "dependencies_recomputed": 5,
+    "descriptor_packaging_note": "jar --create --module-version 0.1.0 intentionally enriches module-info; its JAR hash, descriptor log and JMOD receipt remain sealed.",
+    "finite_resource_checks": [
+      {
+        "case": "local_files",
+        "entries": 12,
+        "executor_threads": 8,
+        "limit": 3,
+        "peak_active_callbacks": 3
+      },
+      {
+        "callbacks_started": 4,
+        "case": "paused_consumer",
+        "delivered": 1,
+        "entries": 30,
+        "limit": 3,
+        "observation_window_ms": 150
+      },
+      {
+        "case": "directory_branches",
+        "executor_threads": 6,
+        "limit": 3,
+        "overlapping_branches": 2
+      }
+    ],
+    "frozen_production_class_hashes_recomputed": 427,
+    "generated_JUnit": {
+      "aborted": 0,
+      "failed": 0,
+      "found": 136,
+      "skipped": 0,
+      "started": 136,
+      "successful": 136
+    },
+    "generated_receiving_inputs_recomputed": 382,
+    "jar_sha256": "abc5879b71d6161e926970b637bb158a820af805cc175c17a4156184aa976b60",
+    "legal_receipt_checked_entries": 102,
+    "production_overlay_or_compilation_in_generated_test_run": false,
+    "production_test_overlap": [],
+    "qualified_JAR_non_descriptor_class_byte_matches": 426,
+    "scope": "Complete existing M3FS Java sources plus the 237-source attributed VFS core, JAR/JMOD assembly through the existing shared packer, and named-consumer execution on an image linked from the supplied prebuilt JDK 21. Maven lifecycle, JNI/SQLite runtime verification, and source-built OpenJDK/M3JDK21 qualification remain separate gates.",
+    "selected_JMOD_hashes_recomputed": 12,
+    "separate_gates": {
+      "maven_lifecycle": "NOT_RUN_BY_THIS_HELPER",
+      "native_sqlite_probe": "NOT_RUN",
+      "source_built_m3jdk21": "NOT_RUN"
+    },
+    "source_lock_rows_recomputed": 389,
+    "status": "PASS",
+    "test_class_hashes_recomputed": 48
+  },
+  "not_covered": [
+    "Composed filesystem-to-parser-to-SQL end-to-end proof is owned by the separate proof agent and not claimed by this review.",
+    "Final assembled payload closure is a subsequent review.",
+    "No remote tree/commit/PR was created; the prior explicit remote approval rejection remains in force.",
+    "No global String/arrays/collections/AST phase advancement or full source-built M3JDK qualification."
+  ],
+  "other_final_generated_consumers": [
+    {
+      "name": "openrewrite-final",
+      "parser_source_compilation": false,
+      "scope": "Standalone exact selected-source contract; not full Maven, linked image, or source-built JDK.",
+      "sources": 2,
+      "status": "PASS"
+    },
+    {
+      "name": "compiler-final",
+      "parser_source_compilation": false,
+      "scope": "Selected Synexia owner diagnostic parity on same actual javac trees; no full Maven/reactor or target phase claim.",
+      "sources": 8,
+      "status": "PASS"
+    }
+  ],
+  "parser": {
+    "contract_checks_per_host_or_image": 13115,
+    "contract_counts": {
+      "M3ASTDetailsContract": 527,
+      "M3ASTIndexProjectionContract": 37,
+      "M3CrossFrontendContract": 12071,
+      "M3FileInputContract": 67,
+      "M3JavacParserContract": 116,
+      "M3ParserFrameworkContract": 297
+    },
+    "host_and_image_each_pass": true,
+    "image_smoke_replay": true,
+    "input_rows_recomputed": 149,
+    "input_sha256": "f481be732b094cc7906147d2096a0b1f2196e6c2b8d5427d6af804ca3fc69648",
+    "jdk_inputs": 76,
+    "pending": [
+      "full M3JDK/HotSpot source build and jtreg",
+      "M3AST plugin/service discovery in rebuilt compiler descriptor",
+      "other platform and performance qualification"
+    ],
+    "phases": [
+      {
+        "command_exits": [
+          0
+        ],
+        "phase": "lint",
+        "receipt": {
+          "bytes": 840,
+          "path": "qualification/parser-final/lint-receipt.json",
+          "sha256": "3fbd2a4be5dfd6b84b4b381c8aa961d9fb0b8e35f0d9ff3438000aea60cde8a0"
+        },
+        "verified_artifacts": 4
+      },
+      {
+        "command_exits": [
+          0,
+          0,
+          0
+        ],
+        "phase": "compile",
+        "receipt": {
+          "bytes": 29268,
+          "path": "qualification/parser-final/compile-receipt.json",
+          "sha256": "1eb7a71e645166ed2a3b7228c02cff2f388371ead80b06527635a2bf0c87aa60"
+        },
+        "verified_artifacts": 147
+      },
+      {
+        "command_exits": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "phase": "test",
+        "receipt": {
+          "bytes": 1593,
+          "path": "qualification/parser-final/test-receipt.json",
+          "sha256": "c24a7342390646c8e17f29a73de367ac00476bf1a41b8468669dfe3504f32062"
+        },
+        "verified_artifacts": 8
+      },
+      {
+        "command_exits": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "phase": "runtime",
+        "receipt": {
+          "bytes": 3709,
+          "path": "qualification/parser-final/runtime-receipt.json",
+          "sha256": "8cc4a3042c65a5af98ced7edfb301e952efcf664136b251af423334e404cba56"
+        },
+        "verified_artifacts": 21
+      }
+    ],
+    "repository_inputs": 73,
+    "scope": "Optional JMOD and linked image; existing compiler sources supplied by explicit external --patch-module.",
+    "status": "PASS"
+  },
+  "production_mutated": false,
+  "proof_seals": {
+    "authored/parallel/GENERATED_READY.json": {
+      "bytes": 2815,
+      "sha256": "0cd2faa232008b1849827ed7220b357737ffbf82ccb8c18a24ba8d384565ff90"
+    },
+    "authored/parallel/verification/generated/CLASS_SEALS.json": {
+      "bytes": 56426,
+      "sha256": "70efa272912fa1f6615cab8daa2862c02de0d019d630c997a28f342e88494892"
+    },
+    "authored/parallel/verification/generated/RESOURCE_CHECKS.json": {
+      "bytes": 636,
+      "sha256": "31b907ddd35693201a606396955279f05a5df28ea3589207fcd9c383bbb1d526"
+    },
+    "authored/parallel/verification/generated/RESULTS.json": {
+      "bytes": 61395,
+      "sha256": "17f9d0edd589ebb7011fb504d66f3f58a27f27b2a8505324c1a0e44c194c2c9c"
+    },
+    "authored/parallel/verification/generated/compile-tests.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "authored/parallel/verification/generated/junit.log": {
+      "bytes": 837,
+      "sha256": "5856d621a96097345d37c08cf9a50c69608843540d1fce97b834272ce2a0c22c"
+    },
+    "authored/parallel/verification/public-api/RESULTS.json": {
+      "bytes": 2511,
+      "sha256": "d18ce9155418a6bd16cd36139caad14e37aebc436ae0007456315bf81c6ae66e"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/CONTRACT_CLARIFICATION.md": {
+      "bytes": 1979,
+      "sha256": "eb0978351ae8eeffb34ec9f1683ae679163b272e76607c26e95fb3a427d5d2be"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/ENGINE_SOURCES.tsv": {
+      "bytes": 1577,
+      "sha256": "7b6491403402acd1f94fda2a5360c8ff3cba06e4ce4d3921707ef07c8ed7765a"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/HARNESS_LINEAGE.json": {
+      "bytes": 1988,
+      "sha256": "0e303ba07672a9505e9e438da1b2d2bf24170a6f47c2fa1b1f762f4b75c9ae3d"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java": {
+      "bytes": 25425,
+      "sha256": "321776eb9a23a67403a8022dad3e61203e688742c8c229e3ded9de2e63e6301b"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-build-5ff31edfa72c7b2c/SDK_INPUTS.tsv": {
+      "bytes": 14091,
+      "sha256": "79e70b7351be22e065bd0e7b9c6e9c0c8583fa5d2ef9b6bd158bc4b2452ae850"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-build-5ff31edfa72c7b2c/SDK_REFUSALS.tsv": {
+      "bytes": 887,
+      "sha256": "e149aa691067057f0506478a29a96a7ab80f74fdd3a32d40250a74c300851b1a"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-build-5ff31edfa72c7b2c/SDK_RESULTS.tsv": {
+      "bytes": 230,
+      "sha256": "705e1a6ffcbda01ae2f9e491db9dfdfdede9b1db3f4aba73bb787443307fba99"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-build-5ff31edfa72c7b2c/text.patch": {
+      "bytes": 769,
+      "sha256": "9d1b925ddaf8cb1a943e57ede055ce08471a6c01093f392cf89611a488f9cd3e"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-build-d2960a2a9d1520d9/SDK_INPUTS.tsv": {
+      "bytes": 58278,
+      "sha256": "152bdc45ca287e0ab908794f058395ba458cc218df3c9120c46da105a4f1408d"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-build-d2960a2a9d1520d9/SDK_REFUSALS.tsv": {
+      "bytes": 887,
+      "sha256": "e149aa691067057f0506478a29a96a7ab80f74fdd3a32d40250a74c300851b1a"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-build-d2960a2a9d1520d9/SDK_RESULTS.tsv": {
+      "bytes": 230,
+      "sha256": "3eef6f69b5e43907d03371ad20c0c012c2c514ae4ca001036fe4682203647776"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-build-d2960a2a9d1520d9/text.patch": {
+      "bytes": 682,
+      "sha256": "7b233b9c7408070024a5c4908633a712e14024c2dcecca23efc2401ac38bfd05"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-facts-3638e88b94fe7322/SDK_INPUTS.tsv": {
+      "bytes": 1947,
+      "sha256": "a250de653b6d843837d7e9a8516370c367d29d56615c1aa9792ae27f9b6e3123"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-facts-3638e88b94fe7322/SDK_REFUSALS.tsv": {
+      "bytes": 887,
+      "sha256": "c02bf2b9b5603f9f7a67e5df18225203b1806b303f58abfe762c43d2b99b9b46"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-facts-3638e88b94fe7322/SDK_RESULTS.tsv": {
+      "bytes": 230,
+      "sha256": "b7f221e5339f3b2889199e5559bc938cd986ef2248b38eab035bf163f8e2113c"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-facts-3638e88b94fe7322/text.patch": {
+      "bytes": 1515,
+      "sha256": "e3e418cefb3bad8f3cf649fcabacbd6789ec9f7b5fb4efe8a82796b37e5b9835"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-facts-488dc665ec29d1f4/SDK_INPUTS.tsv": {
+      "bytes": 58063,
+      "sha256": "3753b389df20e3f258e27e8faefcd3db805156ab888de2d29af787ecb5870aca"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-facts-488dc665ec29d1f4/SDK_REFUSALS.tsv": {
+      "bytes": 707,
+      "sha256": "4e3c97659d72877e88d1da24bec180c2285f71b1d0f80dee5e4477404be98302"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-facts-488dc665ec29d1f4/SDK_RESULTS.tsv": {
+      "bytes": 172,
+      "sha256": "d06d84ef09f5a5b4ccb596229072616aaa547c264b224b0e2ad9606e0daa4eef"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-facts-488dc665ec29d1f4/text.patch": {
+      "bytes": 4623,
+      "sha256": "09efd673f1f82803640b584a3858558f883d8d1e28424d273efebbd660b74595"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astdetailscontract-c720ee42fb5e822a/SDK_INPUTS.tsv": {
+      "bytes": 13836,
+      "sha256": "db64e06e11221443eeae98efc8f6fd5e04851deb6c596db84ce2f785d0cc663b"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astdetailscontract-c720ee42fb5e822a/SDK_REFUSALS.tsv": {
+      "bytes": 1162,
+      "sha256": "fe8d481ffcf567c338a5672803b5e50a9ac2a68d6619a8b862f2fed760e68a0e"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astdetailscontract-c720ee42fb5e822a/SDK_RESULTS.tsv": {
+      "bytes": 222,
+      "sha256": "e2b66cbd596d19226d5083f236c704b379b5eddbe632539bbc4456508a0843f5"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astdetailscontract-c720ee42fb5e822a/java.patch": {
+      "bytes": 28483,
+      "sha256": "6de4777894ec59163e18651cc6b0ae39a3178ec602840afd0a70119ebd3333f7"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astindex-d2115cf48d21e3df/SDK_INPUTS.tsv": {
+      "bytes": 14001,
+      "sha256": "184dadec39e50b0deff351dc240110e8603fb34ed48600c9c5911297c94c121f"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astindex-d2115cf48d21e3df/SDK_REFUSALS.tsv": {
+      "bytes": 1302,
+      "sha256": "57a761c02edbf76e210bdab3e70162a809a8ac843ec212882e43f90858be7946"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astindex-d2115cf48d21e3df/SDK_RESULTS.tsv": {
+      "bytes": 265,
+      "sha256": "45deb2a5a59df4f7012fb1ed29ea18ac623a68a7313cd5f6b8534ed6f9c0127a"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astindex-d2115cf48d21e3df/java.patch": {
+      "bytes": 19545,
+      "sha256": "04c24d909992771a131734b9c97a18ce855c1208b4fb00930720db548ba46c61"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astindexprojectioncontract-d77e49878bbc4006/SDK_INPUTS.tsv": {
+      "bytes": 13884,
+      "sha256": "319c2eeea8160163302910c55edd5bedeabc598d75ec87401abd3b0c0aa65e55"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astindexprojectioncontract-d77e49878bbc4006/SDK_REFUSALS.tsv": {
+      "bytes": 1202,
+      "sha256": "85157079801fdd003b453dfb9c0dba185aa889971cc307e505336448e121ba3d"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astindexprojectioncontract-d77e49878bbc4006/SDK_RESULTS.tsv": {
+      "bytes": 230,
+      "sha256": "9ce677c8a1db98f199022436b21689d53103e8e4f37b5365e5492d16af2fb633"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astindexprojectioncontract-d77e49878bbc4006/java.patch": {
+      "bytes": 11849,
+      "sha256": "4fa8a6bdd837c8841095af845372f9ff7460e6cd3b4114edf1278b1f26fc278c"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astingress-c919b19aab355093/SDK_INPUTS.tsv": {
+      "bytes": 14017,
+      "sha256": "fdeae1039d1e028708c3c38e2c29dcf40a361fa7820794e1856ee7bf2c57994a"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astingress-c919b19aab355093/SDK_REFUSALS.tsv": {
+      "bytes": 1314,
+      "sha256": "c197943c7493b73b93c3bf8a733ccefec7cde790b6dc4fb773430f9ce6baac4b"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astingress-c919b19aab355093/SDK_RESULTS.tsv": {
+      "bytes": 267,
+      "sha256": "63668684327e179d1c2737cb88761347b39dc8e9f8a2cb6795855d3ea57db2c7"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3astingress-c919b19aab355093/java.patch": {
+      "bytes": 13397,
+      "sha256": "345b48e7b6a52d34d0e1303b5edb343f21525f21f94c3aef6262177582df77c0"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3factswriter-685ce0ec6fd7b1f7/SDK_INPUTS.tsv": {
+      "bytes": 13924,
+      "sha256": "7272e8b96f94617eeba6b3e5bdb7b8a4c7408c7c11c9f3e3d59e76ada8c18d34"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3factswriter-685ce0ec6fd7b1f7/SDK_REFUSALS.tsv": {
+      "bytes": 1102,
+      "sha256": "5faf24106b200201ba4225b77d238de244b160a5c79f272cc65d13e8d598f7b0"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3factswriter-685ce0ec6fd7b1f7/SDK_RESULTS.tsv": {
+      "bytes": 210,
+      "sha256": "c72b5b613ace4b473f73ce3e7f80e0bf15dae90650b9277fa4347cdfafc7655f"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3factswriter-685ce0ec6fd7b1f7/java.patch": {
+      "bytes": 26654,
+      "sha256": "37ed1e8b1a3732587dee58f5aec02c376798eaa7c30550c080a95a5fae6a509f"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3factswritercontract-09b4814be7c7d2b9/SDK_INPUTS.tsv": {
+      "bytes": 13972,
+      "sha256": "31b2aec7e859b142c29a1dbf92124c67644d485141e84a7043eab4aeb1a84f7c"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3factswritercontract-09b4814be7c7d2b9/SDK_REFUSALS.tsv": {
+      "bytes": 1167,
+      "sha256": "ecedd584e959ae2e7778df4176f01c96f666546e886402f49a99434e5138da9c"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3factswritercontract-09b4814be7c7d2b9/SDK_RESULTS.tsv": {
+      "bytes": 223,
+      "sha256": "88b4326a26586b2ddeb37551a57c093998894592d5cb94dcaf76722972845889"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3factswritercontract-09b4814be7c7d2b9/java.patch": {
+      "bytes": 23779,
+      "sha256": "35400cbfaf6d3edb18777b12889f702530363e96b7c7ecae3e2c28ebc84d00a3"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3file-ff0ed3321ca19b2d/SDK_INPUTS.tsv": {
+      "bytes": 14099,
+      "sha256": "b192b8e16c6e8e5a1f7f02d375cd13bb254aafc3835984d15f300c315556a24b"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3file-ff0ed3321ca19b2d/SDK_REFUSALS.tsv": {
+      "bytes": 1278,
+      "sha256": "0a5db679190a73d906a8667a4426c3af6f2043a03b0d16101d837863e2e50765"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3file-ff0ed3321ca19b2d/SDK_RESULTS.tsv": {
+      "bytes": 261,
+      "sha256": "3173d1bb090fc65b1d76b1c2fef12cca66199bf077a0b399a938f506f0b15bb1"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3file-ff0ed3321ca19b2d/java.patch": {
+      "bytes": 3286,
+      "sha256": "e54f08b8dc7c1e635737c1629e429b1506957c9c3d35d5a5c3890625d6ec46e9"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3fileinputcontract-fd592b4acecc83fd/SDK_INPUTS.tsv": {
+      "bytes": 13960,
+      "sha256": "de9862cd01c43d054e13d232404f253391886bf07e5444d1974019a2e7793528"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3fileinputcontract-fd592b4acecc83fd/SDK_REFUSALS.tsv": {
+      "bytes": 1157,
+      "sha256": "93fc0001e2139e558b12928bf00a155825c7ec4cea9c1257f763f90caf0b0ba7"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3fileinputcontract-fd592b4acecc83fd/SDK_RESULTS.tsv": {
+      "bytes": 221,
+      "sha256": "01a3271c92470aa45a82685d9398b3f05c776729dfa72b19cd2c60577f1903b8"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3fileinputcontract-fd592b4acecc83fd/java.patch": {
+      "bytes": 18296,
+      "sha256": "5e4b8ab49740b3ed6050ef77de844c564349a44263d85957afd85101b0f16a31"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3javacparser-4e3e972ccc9968c1/SDK_INPUTS.tsv": {
+      "bytes": 14025,
+      "sha256": "24ec133650110a7386df11bb24027e07c303fd9e2b99b18d0a0a0bb4044c1a66"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3javacparser-4e3e972ccc9968c1/SDK_REFUSALS.tsv": {
+      "bytes": 1320,
+      "sha256": "c8a93eaf47ed71460dbae61d5aa121d1de43a4d780262aaa7ee0a7a6323cb4ba"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3javacparser-4e3e972ccc9968c1/SDK_RESULTS.tsv": {
+      "bytes": 268,
+      "sha256": "9b1ade4e048eba61cfe7e74c330b32592e480b6d9105dbfb090c3b97601b4871"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3javacparser-4e3e972ccc9968c1/java.patch": {
+      "bytes": 2665,
+      "sha256": "4c0e74ab93e4498a7e0c0bc3f624bb8998123cdabf8ec820ac225d9b3bfd5769"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3openrewriteingress-d36c4856092c0285/SDK_INPUTS.tsv": {
+      "bytes": 17030,
+      "sha256": "2d1762d3768085c45f6eeeae189a7221a60835203845f710f36fb6dfdbce252b"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3openrewriteingress-d36c4856092c0285/SDK_REFUSALS.tsv": {
+      "bytes": 1257,
+      "sha256": "7fd4440c92421fcb86341dcf3cc7df76894a2a088915692c535d313d79bf1737"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3openrewriteingress-d36c4856092c0285/SDK_RESULTS.tsv": {
+      "bytes": 241,
+      "sha256": "a85b158c623f0899144f2b165fafed2b19294af0338b144568e40154609e93ea"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3openrewriteingress-d36c4856092c0285/java.patch": {
+      "bytes": 12789,
+      "sha256": "8df866a5dece12152c42343593003d641660be706a69135cafc0add631ac89a2"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3openrewriteingresscontract-bbdb82668b5c69eb/SDK_INPUTS.tsv": {
+      "bytes": 17078,
+      "sha256": "a1d3125df690e4900097d3bfa9444f895826475a7d6667ade69dc6adc233d25e"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3openrewriteingresscontract-bbdb82668b5c69eb/SDK_REFUSALS.tsv": {
+      "bytes": 1322,
+      "sha256": "f80f4653e0c7bf78eb156dad7bfe3821a39de4a1757521a8b670fc84495884ec"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3openrewriteingresscontract-bbdb82668b5c69eb/SDK_RESULTS.tsv": {
+      "bytes": 254,
+      "sha256": "8744264498c066a31c4dfdb0cee75044648aaf69b0c3c79ecd3d30088b40f5ed"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3openrewriteingresscontract-bbdb82668b5c69eb/java.patch": {
+      "bytes": 15596,
+      "sha256": "a0ce5b3d42298b98dbe7a0d8c7e1ca561d44b695a29632d64a949d6a8e1cc23b"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipeindexlintcontract-64e6df4510e96feb/SDK_INPUTS.tsv": {
+      "bytes": 17353,
+      "sha256": "6e9ff5823addfd7be08cb580af1848f73b858bee445604bfab5c5c49552f4eff"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipeindexlintcontract-64e6df4510e96feb/SDK_REFUSALS.tsv": {
+      "bytes": 1242,
+      "sha256": "bd1ae3ba451404b951a0686469f884a17cd5916db6f0f76bb2e3ec93fa1c2d5f"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipeindexlintcontract-64e6df4510e96feb/SDK_RESULTS.tsv": {
+      "bytes": 238,
+      "sha256": "e80c5af0bb3393692f6976e2a39f4054820892638d44c76acefaf31875df349b"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipeindexlintcontract-64e6df4510e96feb/java.patch": {
+      "bytes": 9584,
+      "sha256": "690a559ddef42d475559ae19a038b202d48541a905ed502fefd276ed2786462d"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipejavacgate-acb18e3bf88dbdc8/SDK_INPUTS.tsv": {
+      "bytes": 17544,
+      "sha256": "37f0287c9cfb2d5df72ecc31c2d3a0d5408e71209476bf1b6e4c6701b534bb53"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipejavacgate-acb18e3bf88dbdc8/SDK_REFUSALS.tsv": {
+      "bytes": 1440,
+      "sha256": "3e4cb6e17c182ed477e8638219debd1867272b29c21613e021c555658b17e680"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipejavacgate-acb18e3bf88dbdc8/SDK_RESULTS.tsv": {
+      "bytes": 288,
+      "sha256": "b45df88076a7ab0c4786f89658022fec496ab90b8e5d0ab277172c17955871d6"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipejavacgate-acb18e3bf88dbdc8/java.patch": {
+      "bytes": 2743,
+      "sha256": "e40f4df8410af97bdc86c3a277c49aa1ddc061839fdfb953d23ed7ce3e6b8b33"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipetreelint-c3bed1db0b901925/SDK_INPUTS.tsv": {
+      "bytes": 17536,
+      "sha256": "b98950def12a802848a71650aed5aabed5fb6a38d9e967deec6af41d4eba36c7"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipetreelint-c3bed1db0b901925/SDK_REFUSALS.tsv": {
+      "bytes": 1434,
+      "sha256": "30f4fccf81d1c44ac2a24a65855ad0fe7dc54a49512cf32192048d230f16e9b5"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipetreelint-c3bed1db0b901925/SDK_RESULTS.tsv": {
+      "bytes": 287,
+      "sha256": "5b1a950494cb0b0771355102fe12567c1ea96fbad1ee1e15d82233dc81ab6b6c"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-m3recipetreelint-c3bed1db0b901925/java.patch": {
+      "bytes": 18230,
+      "sha256": "71ed0e0ec28cf4a78ae9555306dbeb3bef43448a2017bef7b3578a3242d1d050"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-mfiles-9acdf5b32fc4ec6a/SDK_INPUTS.tsv": {
+      "bytes": 58286,
+      "sha256": "c0d69cc03aa05cf7bae937041e50f7d22a4dfc6c849c744c5b692397a7e46914"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-mfiles-9acdf5b32fc4ec6a/SDK_REFUSALS.tsv": {
+      "bytes": 1104,
+      "sha256": "316be14b37ac12e5fe7e571ceae030b01a978582bd366d30cb324e240ff75bc3"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-mfiles-9acdf5b32fc4ec6a/SDK_RESULTS.tsv": {
+      "bytes": 232,
+      "sha256": "23c892ef4a2207cebfe953da661b01c50f70b51e77a3e902623fec014b14cb0b"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-mfiles-9acdf5b32fc4ec6a/java.patch": {
+      "bytes": 30218,
+      "sha256": "8e793ae32dd3b012ef01199990c7a717aecc94b83fa9dea22421e9b25483d0c6"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-mfilesparalleltest-51e46243dc9989b9/SDK_INPUTS.tsv": {
+      "bytes": 58141,
+      "sha256": "1fc0fcd971b7bbbc58c75662488031777e1ac81959defd6d0e037ec48b4cd202"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-mfilesparalleltest-51e46243dc9989b9/SDK_REFUSALS.tsv": {
+      "bytes": 982,
+      "sha256": "93b1446035ab68f4b70758ccba251ba4c7ccb7ec8959c51cd05fff895fde25c7"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-mfilesparalleltest-51e46243dc9989b9/SDK_RESULTS.tsv": {
+      "bytes": 186,
+      "sha256": "98273c0dfe2ca3eb99c12df8fb2cd9690286e387d9421662c17a47130ae7d7de"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-mfilesparalleltest-51e46243dc9989b9/java.patch": {
+      "bytes": 47306,
+      "sha256": "8397827ee206c370bef4ecf8788576111158e6e0ee68ed215493290ae962fa2c"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-module-info-4ae6202fc6a8c8c8/SDK_INPUTS.tsv": {
+      "bytes": 14139,
+      "sha256": "8849e01448a2b4a216f0d69c0eceb3e4c056ae96a963082158d03289a4951faa"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-module-info-4ae6202fc6a8c8c8/SDK_REFUSALS.tsv": {
+      "bytes": 1224,
+      "sha256": "ea9ec283c7d2f2f7d972b5a86b962030538b64964410ba2d834792c6233c7225"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-module-info-4ae6202fc6a8c8c8/SDK_RESULTS.tsv": {
+      "bytes": 252,
+      "sha256": "752b6c6d15e209e772321abc45cd54ef89c5eb4908db487bd6bab27dbd1b0508"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-module-info-4ae6202fc6a8c8c8/java.patch": {
+      "bytes": 568,
+      "sha256": "1a6fe2b56c4e9645288c431767ec2ba1c52e5d3517d513378458ae2a12e559f9"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-readme-aa3fda40339f7faa/SDK_INPUTS.tsv": {
+      "bytes": 16946,
+      "sha256": "b4decfdd39a7d0e8d1812f25abcea3abe4d9986cc90cb1f597e47a84ae893944"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-readme-aa3fda40339f7faa/SDK_REFUSALS.tsv": {
+      "bytes": 759,
+      "sha256": "86d0976348989566aed1ac3800503bba59da01ff754e59b3a1dd5a747b7fbf18"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-readme-aa3fda40339f7faa/SDK_RESULTS.tsv": {
+      "bytes": 185,
+      "sha256": "5512d1d330554b55e21f28b585f25f28f48ee9002a4086e2063299932b6a5616"
+    },
+    "canonical/synexia-openrewrite-recipes/recipe-crates/m3-one-pass-20261020/recipe-host-v2/target/candidate/onepass-readme-aa3fda40339f7faa/text.patch": {
+      "bytes": 4779,
+      "sha256": "27f8226cd504a4527b76411f5ffb3c87ca6e503800005907c53b1d6d5afbbf1c"
+    },
+    "qualification/compiler-final/RESULTS.json": {
+      "bytes": 7378,
+      "sha256": "11902b08ebf4d7f5cd6a15ce5e488975ab433e4b221d0099a6037f3f4c81b512"
+    },
+    "qualification/compiler-final/compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/compiler-final/contract.log": {
+      "bytes": 597,
+      "sha256": "a0a92f417ace4abf0952a83ea20454988966a6a676cd128a3aad59807cb9417a"
+    },
+    "qualification/compiler-final/describe-parser-module.log": {
+      "bytes": 286,
+      "sha256": "334be82b879d81d4954481bd0ecf014ca665902bb060680346b16b1f52a69526"
+    },
+    "qualification/compiler-final/toolchain.log": {
+      "bytes": 195,
+      "sha256": "31c56f92082dd196281086e4714d9ad56668dc30ffc27699367ee081dfc3a5ae"
+    },
+    "qualification/facts-final/RESULT.json": {
+      "bytes": 12825,
+      "sha256": "384ec8e0078f0c08684523290f1b6d5f7da27e6d3f4cc4ad02fe44cc492ee444"
+    },
+    "qualification/facts-final/compile-test.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/facts-final/compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/facts-final/sqlite-jni.log": {
+      "bytes": 36,
+      "sha256": "70a466e404e93760f519b7710e4e2be2d50370d0c201cb949209c1af82738b75"
+    },
+    "qualification/fs-source.lock.tsv": {
+      "bytes": 47469,
+      "sha256": "331ff4235c5f48e20c577a89c1736d96b831589a46816c9bf68f58edd299ab58"
+    },
+    "qualification/fs/consumer-compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/fs/consumer-run.log": {
+      "bytes": 260,
+      "sha256": "583926e7e492d1369cf042e282980fced3260691b15adbde01cac3dd3f56a1b4"
+    },
+    "qualification/fs/inputs.json": {
+      "bytes": 4868,
+      "sha256": "ca818a440ee1ea3a40678374ac7c8e29427a0a16f297563c3396c8311d6a587b"
+    },
+    "qualification/fs/legal-sha256.json": {
+      "bytes": 1857,
+      "sha256": "d28e2396a4772f2b5914c84ebe7afe9852e9c19bdf852562d5fd9d43a2cb53c8"
+    },
+    "qualification/fs/m3fs-strict-compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/fs/module-description.txt": {
+      "bytes": 1106,
+      "sha256": "2ca917b3951122dc71982d27290539f230a8bd43faf62c88708eadd9fd457bfa"
+    },
+    "qualification/fs/module-descriptor-compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/fs/pack/JMOD_PACK.tsv": {
+      "bytes": 260,
+      "sha256": "81b5e9a3b9d79ed91bf9c8257562bf26519ce485ca43cb013d1a55dc4f126705"
+    },
+    "qualification/fs/pack/MODULES.tsv": {
+      "bytes": 8365,
+      "sha256": "f32030a1dc18373599bf91cdc067cdaa4718e1885e75678c0064e9d233b1941d"
+    },
+    "qualification/fs/pack/SELECTION.json": {
+      "bytes": 413,
+      "sha256": "4784f4e8e6ca0f06e570814d2b5e6f503a37ac457085848e5f995f9bd14920f2"
+    },
+    "qualification/fs/provider-compile.log": {
+      "bytes": 26844,
+      "sha256": "a963e0139016dfa302a6c59ddf976b08cc8fccbed35ba26224a38b32f6d83634"
+    },
+    "qualification/fs/qualification.json": {
+      "bytes": 1979,
+      "sha256": "c192426f5a94566eb20f3c4e2ccb40cd7835ae4dd2a0989d8550c1fd1572f97d"
+    },
+    "qualification/fs/shared-packer.log": {
+      "bytes": 124,
+      "sha256": "941e27ab6a47de8e5efb9a7fa663bcb00f1b643649ed2a1fcb2b958098a0cf17"
+    },
+    "qualification/openrewrite-final/RESULTS.json": {
+      "bytes": 17610,
+      "sha256": "527e036072cd85b0c616e903b99577a289832e222b3940c8824d641159af96a2"
+    },
+    "qualification/openrewrite-final/compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "qualification/openrewrite-final/contract.log": {
+      "bytes": 420,
+      "sha256": "f01a8bf97698d95499d8ea72f72c9104304e0d63abc7d9afce248ac399a59436"
+    },
+    "qualification/openrewrite-final/describe-parser-module.log": {
+      "bytes": 286,
+      "sha256": "438be283dfaa930be42c7ccc4fd0389aef88f4693c03bd67a8ecf3bad20a6e99"
+    },
+    "qualification/openrewrite-final/toolchain.log": {
+      "bytes": 195,
+      "sha256": "31c56f92082dd196281086e4714d9ad56668dc30ffc27699367ee081dfc3a5ae"
+    },
+    "qualification/parser-final/INPUTS.json": {
+      "bytes": 31506,
+      "sha256": "9ce677e850104c530ff1c68c482d497a17e4945bd9a6e75b7c121409ed7caeed"
+    },
+    "qualification/parser-final/RUNTIME_PROOF.json": {
+      "bytes": 1081,
+      "sha256": "a445ac903bce9f944661cf1cd82342bc0dc01618247218fb3710aee0223457dc"
+    },
+    "qualification/parser-final/STATE.json": {
+      "bytes": 586,
+      "sha256": "4d003cfdd489fca93f0d59deb1233373556c91dd6390098a177abdfbf6fb08ae"
+    },
+    "qualification/parser-final/compile-commands.json": {
+      "bytes": 10758,
+      "sha256": "c0b586c1c0b61955254b4c1ac07a516404f1339749e553f8fc5ff79a2a981953"
+    },
+    "qualification/parser-final/compile-receipt.json": {
+      "bytes": 29268,
+      "sha256": "1eb7a71e645166ed2a3b7228c02cff2f388371ead80b06527635a2bf0c87aa60"
+    },
+    "qualification/parser-final/lint-commands.json": {
+      "bytes": 291,
+      "sha256": "0f1d132d7c2c0a1c0af54269740d0d24e361d71641b405e295070ef5012f1fe2"
+    },
+    "qualification/parser-final/lint-receipt.json": {
+      "bytes": 840,
+      "sha256": "3fbd2a4be5dfd6b84b4b381c8aa961d9fb0b8e35f0d9ff3438000aea60cde8a0"
+    },
+    "qualification/parser-final/runtime-commands.json": {
+      "bytes": 8350,
+      "sha256": "262adb276488900660d17a6cbc6eb0b00716f29eb6bccf1861b0a814215aa7fb"
+    },
+    "qualification/parser-final/runtime-image-M3ASTDetailsContract.log": {
+      "bytes": 1038,
+      "sha256": "c18e63ed81f23bfc7d58882cbd7537d6c8846a4417af66c0dfba0773f6138aea"
+    },
+    "qualification/parser-final/runtime-image-M3ASTIndexProjectionContract.log": {
+      "bytes": 749,
+      "sha256": "68a52043076ca1c052ee05f224ab9f2f5fa133e56bb0bd50ed5300bc1d2f2ebb"
+    },
+    "qualification/parser-final/runtime-image-M3CrossFrontendContract.log": {
+      "bytes": 841,
+      "sha256": "4bbfc684054769cf57c3ce9132a07036da426b9693410baf7320ae1b4b2280a1"
+    },
+    "qualification/parser-final/runtime-image-M3FileInputContract.log": {
+      "bytes": 611,
+      "sha256": "53269b06d12f513f1c6f10f0aa820a2dfc5012e46479078a4eea007d63f7f0c6"
+    },
+    "qualification/parser-final/runtime-image-M3JavacParserContract.log": {
+      "bytes": 609,
+      "sha256": "504cef3f67b1c12936ea5b0e737bc53f5cfc6041a1b56bb3643dbd1f3f3660fc"
+    },
+    "qualification/parser-final/runtime-image-M3ParserFrameworkContract.log": {
+      "bytes": 621,
+      "sha256": "d4974acd3b6037ebd2653c745ddb7df3403a5d1e9631bfc3ae7ef1912e44df42"
+    },
+    "qualification/parser-final/runtime-receipt.json": {
+      "bytes": 3709,
+      "sha256": "8cc4a3042c65a5af98ced7edfb301e952efcf664136b251af423334e404cba56"
+    },
+    "qualification/parser-final/test-M3ASTDetailsContract.log": {
+      "bytes": 1110,
+      "sha256": "adf1a6de20b160c10f70706dda5ce92a1cbb721a0c3bea59a052102f19297974"
+    },
+    "qualification/parser-final/test-M3ASTIndexProjectionContract.log": {
+      "bytes": 821,
+      "sha256": "d2173a50e4ace14de80a8806c8dce49b1d0ecab661506400d918ce8098f6122e"
+    },
+    "qualification/parser-final/test-M3CrossFrontendContract.log": {
+      "bytes": 913,
+      "sha256": "84cdf6db6d3c04a2e70601915324076644a3022146cbf1092014c9eeba8f65e0"
+    },
+    "qualification/parser-final/test-M3FileInputContract.log": {
+      "bytes": 683,
+      "sha256": "ca1c512f49bcf8e6d86a1feb45ef4d9e5c9e79741ba1b3936cb24fbfc1c17a23"
+    },
+    "qualification/parser-final/test-M3JavacParserContract.log": {
+      "bytes": 681,
+      "sha256": "04942b6346278f63dc2d36588626f8e4f04888ae7c2289e823d4785c12468605"
+    },
+    "qualification/parser-final/test-M3ParserFrameworkContract.log": {
+      "bytes": 693,
+      "sha256": "41ad0f4b488b079db8c1186380e076e763207a39abaf82601ab2feab674b486e"
+    },
+    "qualification/parser-final/test-commands.json": {
+      "bytes": 5623,
+      "sha256": "eeefc0efee57187916ab9409d1c8384b76cc5ea0d5d5f40122c080448e10905b"
+    },
+    "qualification/parser-final/test-receipt.json": {
+      "bytes": 1593,
+      "sha256": "c24a7342390646c8e17f29a73de367ac00476bf1a41b8468669dfe3504f32062"
+    },
+    "receiver/m3/tooling/module-packs/parser/FACTS.md": {
+      "bytes": 4623,
+      "sha256": "abb2ff1693a918a1f94718a3b9baf58172140d95e17520b508f41f764e9f59aa"
+    },
+    "receiver/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java": {
+      "bytes": 25170,
+      "sha256": "ae749dd67f865bc1fa34e8c691a0611ddcfb0eab0a9b75e5345403540dad89a7"
+    },
+    "receiver/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java": {
+      "bytes": 31672,
+      "sha256": "1f172ac1efa0ac6be0528b8c50c3505a1e54878a95e821d7a35433fe90402794"
+    },
+    "receiver/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3FactsWriter.java": {
+      "bytes": 25791,
+      "sha256": "a321f340a3184f3d23952b2afa17b4afed88bffcbc045d9bd3c0da28015cec72"
+    },
+    "receiver/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java": {
+      "bytes": 7219,
+      "sha256": "203901e675d720ed0ce8e033b12352a2e729a36514b5a38741800e225f45ab57"
+    },
+    "receiver/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacParser.java": {
+      "bytes": 7846,
+      "sha256": "e86b8fcda09613a84141aa95d4a7baa96d363bbeef26ff6c8c5e6a63f9e58273"
+    },
+    "recipe-plan.json": {
+      "bytes": 11894,
+      "sha256": "78d943b3bac5e3ca533d803f0cd093e707a0e7ec5e592e81ee59595a83149abb"
+    },
+    "verification/generated-admission.json": {
+      "bytes": 21868,
+      "sha256": "61d3f7749c721b44fab036f1655a17a13f33b55bb0cb8ab04bd03df54a5c36dd"
+    },
+    "verification/parallel-independent-review/REVIEW.json": {
+      "bytes": 7147,
+      "sha256": "c9bc8efe00267cd46cf470f112e6edafa510faac44e1988e5bd802762e647e34"
+    },
+    "verification/sdk/onepass-build-5ff31edfa72c7b2c/RESULT.json": {
+      "bytes": 3127,
+      "sha256": "5a7a89409e38cb00cdaf6f939d2e0f5869abecb24e9c6d58545d6353fa7747ab"
+    },
+    "verification/sdk/onepass-build-5ff31edfa72c7b2c/sdk.log": {
+      "bytes": 1226,
+      "sha256": "289ea1a104660b07039104436e894d8ede0de45d62d855ff468b42a903ec3656"
+    },
+    "verification/sdk/onepass-build-d2960a2a9d1520d9/RESULT.json": {
+      "bytes": 3437,
+      "sha256": "d753febad81e00a15b4bd9b6e79bfb11df145ef479ca1299f6d1ff99494d236f"
+    },
+    "verification/sdk/onepass-build-d2960a2a9d1520d9/sdk.log": {
+      "bytes": 1226,
+      "sha256": "86f73367c92753751c545b84ea71a51223a730c3d732697f41c01ee9b8ff9528"
+    },
+    "verification/sdk/onepass-facts-3638e88b94fe7322/RESULT.json": {
+      "bytes": 2795,
+      "sha256": "a004348c299fc497de145ab0e35ccb2dedc77680f034f41aa0ee5e45262969bf"
+    },
+    "verification/sdk/onepass-facts-3638e88b94fe7322/sdk.log": {
+      "bytes": 1226,
+      "sha256": "ab0df0b55d6bdfe11b44509bb525a02179b2644c4a47a082c534205477ddcda6"
+    },
+    "verification/sdk/onepass-facts-488dc665ec29d1f4/RESULT.json": {
+      "bytes": 3312,
+      "sha256": "a1d4e31c233d0958e7fc4d434a9e725356289e4186c5fd10c1cbd63c7cc5dda1"
+    },
+    "verification/sdk/onepass-facts-488dc665ec29d1f4/sdk.log": {
+      "bytes": 1226,
+      "sha256": "bfb697f290d44cd2cddb5f246271fae849c60d796ccbe908e93049a93d3d7c62"
+    },
+    "verification/sdk/onepass-m3astdetailscontract-c720ee42fb5e822a/RESULT.json": {
+      "bytes": 3266,
+      "sha256": "c1f3fe42080ee1dca0f3aa32ea5a58e3b4034d56085da6a1319e3922b7af7a67"
+    },
+    "verification/sdk/onepass-m3astdetailscontract-c720ee42fb5e822a/sdk.log": {
+      "bytes": 1226,
+      "sha256": "0172a6e5dd368686910534f390bd5f80887ba98836d7e2804491ead206c35ab0"
+    },
+    "verification/sdk/onepass-m3astindex-d2115cf48d21e3df/RESULT.json": {
+      "bytes": 3242,
+      "sha256": "0142b47a3e602c5b46eb9a6b97fa6a20dcef28e1fdb1f092c6406b8dce0d3224"
+    },
+    "verification/sdk/onepass-m3astindex-d2115cf48d21e3df/sdk.log": {
+      "bytes": 1226,
+      "sha256": "477ef4ac87194ca5aa7c8a2d21ac90e4efc80da8a279ff93b30abdfeb9299853"
+    },
+    "verification/sdk/onepass-m3astindex-e8103c6c95c2c415/RESULT.json": {
+      "bytes": 2340,
+      "sha256": "ddd807fb0f307c7bce1cae12fb7669ab4616f80e6caf7804bcad4832b636d70c"
+    },
+    "verification/sdk/onepass-m3astindexprojectioncontract-d77e49878bbc4006/RESULT.json": {
+      "bytes": 3314,
+      "sha256": "3ce8738989d42cc29caa7280a5d727d53548d937c91b7204b6bfd7a3649e8cdf"
+    },
+    "verification/sdk/onepass-m3astindexprojectioncontract-d77e49878bbc4006/sdk.log": {
+      "bytes": 1226,
+      "sha256": "72be96a27e655ff552b8761953b75d598da53aefe51f4d6bf19f18e5fbc7e8ed"
+    },
+    "verification/sdk/onepass-m3astingress-c919b19aab355093/RESULT.json": {
+      "bytes": 3254,
+      "sha256": "793d272344e64fcb8c32742b40636891428dfe5dd06d6b4a3878edafd360bb47"
+    },
+    "verification/sdk/onepass-m3astingress-c919b19aab355093/sdk.log": {
+      "bytes": 1226,
+      "sha256": "a454252c6c2231534e7c6cdc00e498514cfc514b8e4c180b4910f0554cb021a9"
+    },
+    "verification/sdk/onepass-m3astingress-edddc63320b8f6d9/RESULT.json": {
+      "bytes": 2356,
+      "sha256": "862df68d006c4abf49e7bc14f40bfa29244b4d531f5c80dc3d379242bcdcf083"
+    },
+    "verification/sdk/onepass-m3factswriter-685ce0ec6fd7b1f7/RESULT.json": {
+      "bytes": 3207,
+      "sha256": "f4820adad6624c3369c497fcc9ab606158175625c35dfc3043beef8dcf40125d"
+    },
+    "verification/sdk/onepass-m3factswriter-685ce0ec6fd7b1f7/sdk.log": {
+      "bytes": 1226,
+      "sha256": "362a1ac6949d36624138d4ab6ddf200f7b2a987a4f3eec072096ae4dd634d7dc"
+    },
+    "verification/sdk/onepass-m3factswritercontract-09b4814be7c7d2b9/RESULT.json": {
+      "bytes": 3271,
+      "sha256": "a09b40c1866e8f65d91b138f62f0471f38f5ae0076a89fe05e565b6686023dcf"
+    },
+    "verification/sdk/onepass-m3factswritercontract-09b4814be7c7d2b9/sdk.log": {
+      "bytes": 1226,
+      "sha256": "77f350c358c506b2b5eb6b05ca5e65c6c3cf6533cf3d56c5e6bb4f21b12f0748"
+    },
+    "verification/sdk/onepass-m3file-ff0ed3321ca19b2d/RESULT.json": {
+      "bytes": 3204,
+      "sha256": "6198476fe3910506cf7b480d45fe4216b3db10bbf532fbac151932b663dd5760"
+    },
+    "verification/sdk/onepass-m3file-ff0ed3321ca19b2d/sdk.log": {
+      "bytes": 1226,
+      "sha256": "999c41cd6655f3fa010d6c1938de3ee18f009ec03b91236b92f7c1003804acce"
+    },
+    "verification/sdk/onepass-m3fileinputcontract-fd592b4acecc83fd/RESULT.json": {
+      "bytes": 3246,
+      "sha256": "015d4ab041860ef605bc9b8e91d449ede7c6c56f30e70a4c1d37920b8c61a72b"
+    },
+    "verification/sdk/onepass-m3fileinputcontract-fd592b4acecc83fd/sdk.log": {
+      "bytes": 1226,
+      "sha256": "204993dca80085188acf67e87854e659b6f2fa2e129342e7e820804283bbe74c"
+    },
+    "verification/sdk/onepass-m3javacparser-4e3e972ccc9968c1/RESULT.json": {
+      "bytes": 3260,
+      "sha256": "e4338a68d6f42552381fd3df2300c0cd3501ef98999ac0c3ff6dd81e05c6a0f0"
+    },
+    "verification/sdk/onepass-m3javacparser-4e3e972ccc9968c1/sdk.log": {
+      "bytes": 1226,
+      "sha256": "765a10f1916b0fbc4955514c8d66bc7ffdd8c1335e8528598c1d67e7af0c5fbd"
+    },
+    "verification/sdk/onepass-m3openrewriteingress-d36c4856092c0285/RESULT.json": {
+      "bytes": 9852,
+      "sha256": "ca46f0a59796b58b3f4dc61e3f38bc0bfada4d0735f30d88ca9d3330d7a9fdb0"
+    },
+    "verification/sdk/onepass-m3openrewriteingress-d36c4856092c0285/sdk.log": {
+      "bytes": 1226,
+      "sha256": "995ca33b3c0ae06ff77d973e3e5d7f962313ff8547537a5780464a5a04ebe419"
+    },
+    "verification/sdk/onepass-m3openrewriteingresscontract-bbdb82668b5c69eb/RESULT.json": {
+      "bytes": 9915,
+      "sha256": "f960d7a5e2ee8d9e51cd0fbde1f6c89279dc924d968f9408fa45c9a733cccff5"
+    },
+    "verification/sdk/onepass-m3openrewriteingresscontract-bbdb82668b5c69eb/sdk.log": {
+      "bytes": 1227,
+      "sha256": "3ec8b2b18aa7d6056871a0e0b4e14d3342a88ee0c5060e703ac390f754198417"
+    },
+    "verification/sdk/onepass-m3recipeindexlintcontract-64e6df4510e96feb/RESULT.json": {
+      "bytes": 3600,
+      "sha256": "90ed026ade93f87570d7f5682c969bb50ab9e32685b6473d9fddaa7525db9794"
+    },
+    "verification/sdk/onepass-m3recipeindexlintcontract-64e6df4510e96feb/sdk.log": {
+      "bytes": 1226,
+      "sha256": "8fd17e3fa93918e7af70c11eedadb39f5e65cbd5ec890a7c1b439c87abe341a1"
+    },
+    "verification/sdk/onepass-m3recipejavacgate-acb18e3bf88dbdc8/RESULT.json": {
+      "bytes": 3519,
+      "sha256": "094188747f7c91a390ab9f8b1a03f1110c98663abc98688f23b295f3120bca45"
+    },
+    "verification/sdk/onepass-m3recipejavacgate-acb18e3bf88dbdc8/sdk.log": {
+      "bytes": 1226,
+      "sha256": "911ae9f06131893a96da44ef933dc3b195a8c6253eb13d94f7de1bf1ab00c462"
+    },
+    "verification/sdk/onepass-m3recipetreelint-c3bed1db0b901925/RESULT.json": {
+      "bytes": 3513,
+      "sha256": "1bdbae5969a4d9e9856c96b86a619996027ee857c0b53e091ea5b90f468ec693"
+    },
+    "verification/sdk/onepass-m3recipetreelint-c3bed1db0b901925/sdk.log": {
+      "bytes": 1226,
+      "sha256": "086178b7f9de9d639eb4e988a57e6b14490057912365ec17b3d1dd70ee23eeae"
+    },
+    "verification/sdk/onepass-mfiles-9acdf5b32fc4ec6a/RESULT.json": {
+      "bytes": 3418,
+      "sha256": "8e160e3a5748c559d57232f6bdb590cbb72c9f8de8954ba936086c6613d9f99e"
+    },
+    "verification/sdk/onepass-mfiles-9acdf5b32fc4ec6a/sdk.log": {
+      "bytes": 1226,
+      "sha256": "2f4624980d81a4767e684019774976f7cc148f214ad0d34dadb92b4ca6babbbc"
+    },
+    "verification/sdk/onepass-mfilesparalleltest-51e46243dc9989b9/RESULT.json": {
+      "bytes": 3390,
+      "sha256": "b39124ca8c8ae26d7376a7305f386cd96a9037b793ae992d8df9ebacb41818f3"
+    },
+    "verification/sdk/onepass-mfilesparalleltest-51e46243dc9989b9/sdk.log": {
+      "bytes": 1226,
+      "sha256": "c693fa8cfa3eaa86f8afc052e77ea5fca3b4d84bf57e6a068cc030f0c5f49585"
+    },
+    "verification/sdk/onepass-module-info-4ae6202fc6a8c8c8/RESULT.json": {
+      "bytes": 3205,
+      "sha256": "9f5e9c1d684f386fc933f31c7f3f2b5439b0dd894dc531ba4481eb40f535409d"
+    },
+    "verification/sdk/onepass-module-info-4ae6202fc6a8c8c8/sdk.log": {
+      "bytes": 1226,
+      "sha256": "a5678f6a243b3b6f170b55025bda628a4872e9817fb345e969627208a272e33c"
+    },
+    "verification/sdk/onepass-readme-aa3fda40339f7faa/RESULT.json": {
+      "bytes": 9641,
+      "sha256": "e68c60dcff82878c274fcc22a19e06edf682a1d73b9fb25c06905c7e863806c9"
+    },
+    "verification/sdk/onepass-readme-aa3fda40339f7faa/sdk.log": {
+      "bytes": 1226,
+      "sha256": "186ea1d703cccc38e7cfd67ccc2cf242a53e85df259043260fa3e674e3d6cfc9"
+    },
+    "verification/source-input/COMPATIBILITY.json": {
+      "bytes": 2294,
+      "sha256": "95c817a8165e6eacfb99dcd332c0577455473f71e172f1b6ddf21c7e05ec5bdb"
+    },
+    "verification/source-input/api-after.txt": {
+      "bytes": 798,
+      "sha256": "964bd12743248c6bab5241d09e30d3b096407120f15225f17cad7a72563e025f"
+    },
+    "verification/source-input/api-before.txt": {
+      "bytes": 662,
+      "sha256": "f74864818d15d722e7826beb24acfaad91b37225853bba4f5f927fdbd62fdb5c"
+    }
+  },
+  "pull_request_created": false,
+  "remote_writes": false,
+  "reviewer": "/root/m3fs_monitored_streams",
+  "runtime_rerun": false,
+  "schema": "M3_ONE_PASS_FINAL_RECEIVING_REVIEW_V1",
+  "scope": "Read-only final receiving custody, existing successful qualification evidence and lifecycle/publication claims; no runtime tests rerun or production changes.",
+  "source_input_compatibility": {
+    "actual_final_host_checks": 67,
+    "actual_final_image_checks": 67,
+    "added_public_API": [
+      "public static jdk.m3.parser.M3File read(java.net.URI, java.io.InputStream, java.nio.charset.Charset, int) throws java.io.IOException;"
+    ],
+    "after_sha256": "203901e675d720ed0ce8e033b12352a2e729a36514b5a38741800e225f45ab57",
+    "before_sha256": "5851f9fc09cb079818fe2224249129688e7637bd562f77cb016cdc8c32c868ad",
+    "existing_Path_method_and_all_other_bytes_preserved": true,
+    "only_source_edit": "One 55-line contiguous insertion at prior line 74; deleting it reproduces every baseline byte.",
+    "removed_or_changed_public_API": [],
+    "status": "PASS"
+  },
+  "status": "PASS",
+  "target_revision": "065e3626aac2de62d2f531aec3bed2fca533c9f9",
+  "workspace": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020"
+}

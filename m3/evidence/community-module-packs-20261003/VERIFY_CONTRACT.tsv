@@ -1,0 +1,16 @@
+gate	result	receipt
+target scope and diff	PASS	30 declared source/build/doc files before evidence; source diff in downloadable artifact
+syntax/static checks	PASS	XML/POM, JSON, Python syntax and exact before/after POM identity
+Java kernel strict compile	PASS	logs/kernel-compile.log
+shared case strict compile	PASS	logs/test-compile.log
+shared Java case execution	PASS_41	logs/java-contract-checks.log
+Python execution	PASS_11	logs/python-tests.log
+real JMOD creation/describe	PASS	logs/com.m3tooling.modulepack.describe.log
+module closure fixed point	PASS	MODULES.tsv equals logs/inventory-replay.tsv
+jlink	PASS	logs/jlink.log
+image runtime/JFR/native jcmd	PASS	logs/diagnostics-run.log
+JMOD two-build byte identity	PASS	ARTIFACT_SHA256.tsv
+JUnit/OpenRewrite	NOT_RUN	logs/external-gate-blockers.log
+JaCoCo99 line/branch	NOT_MEASURED	Hard gate is configured, not weakened
+real JavaFX image	NOT_RUN	Await real reviewed artifact lock; example intentionally invalid
+modified M3JDK21 + jtreg	NOT_RUN	This packet changes external tooling, not JDK product source

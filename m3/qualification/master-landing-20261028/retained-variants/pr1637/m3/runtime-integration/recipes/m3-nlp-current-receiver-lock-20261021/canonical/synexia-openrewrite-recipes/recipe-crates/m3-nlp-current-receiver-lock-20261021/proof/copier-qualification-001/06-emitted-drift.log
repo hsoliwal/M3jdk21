@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py", line 145, in <module>
+    main()
+  File "/workspace/scratch/206049dfb270/canonical-work/nlp-receiver-qualification-001/canonical/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021/apply_receiver.py", line 99, in main
+    raise ValueError('emitted output drift: ' + path)
+ValueError: emitted output drift: m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java

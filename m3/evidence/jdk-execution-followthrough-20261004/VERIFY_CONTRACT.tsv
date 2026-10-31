@@ -1,0 +1,8 @@
+order	gate	required
+1	diff and exact source inventory	true
+2	syntax/lint	true
+3	Java21 compilation	true
+4	OpenRewrite scheduler/JUnit and unchanged 99% gates	true; BLOCKED
+5	standalone tool and patch experiments	true; executed independently, not promotion
+6	full modified-JDK build/jtreg	true; NOT_RUN
+7	Nebula Tycho/dependency/UI acceptance before application	true; HOLD

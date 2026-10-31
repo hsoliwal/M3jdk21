@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/213cc9f26139/continuation/catalogue/target-inventory-20261021/source/m3/collections/qualification/m3-index-mask-position-selection-20261018/verify.py", line 18, in <module>
+    assert actual == expected, f"{path}: SHA-256 drift {actual}"
+           ^^^^^^^^^^^^^^^^^^
+AssertionError: /workspace/scratch/213cc9f26139/continuation/catalogue/target-inventory-20261021/source/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java: SHA-256 drift ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c

@@ -1,0 +1,4 @@
+# path	before_sha256	after_sha256	template
+m3/docs/synexia-apache-reuse-policy.properties	ABSENT	51e71b3c613a88920595141ae24291549ed035b46a8fcd7abdba641e4af52aa4	policy.properties.txt
+m3/docs/synexia-apache-reuse-scope.tsv	ABSENT	f0c4956693279ffea733c13e504ba3ce83f679aba7af2c714c9f49dfc17b7447	scope.tsv.txt
+m3/docs/synexia-apache-reuse.md	ABSENT	f72dc9a3332aafe66a88576b5addf90d628b68046f833e773581c43d0c512756	reuse.md.txt

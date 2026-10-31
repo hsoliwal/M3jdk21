@@ -1,0 +1,228 @@
+{
+  "schema": 1,
+  "sourceRepository": "hsoliwal/com.synexia",
+  "sourceRevision": "1e4743f6661a9149f327bf7171b4de2df68add54",
+  "sourceDraftPr": 9797,
+  "sourceDraftPrMerged": false,
+  "owningRecipe": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007",
+  "owningRecipeScope": "Original Synexia three-target Program plus two test-owner recipe; not the new M3 two-target recipe.",
+  "publishedArtifacts": [
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/FOSS_REUSE_DECISION.tsv",
+      "bytes": 1453,
+      "sha256": "c2d0b5d08016d58712eb660a7988e1d6444c36a9eb025d2258a6179e05c3efe8",
+      "gitBlob": "692825e065fba31e3f73b5e1d743dd74c3b7f260",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/FOSS_REUSE_DECISION.tsv"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/NOTICE",
+      "bytes": 475,
+      "sha256": "14d0f257fef90f61db76401f4570b2ceefd85d8d4d323b8f4f724c0594db5cbf",
+      "gitBlob": "ffe04f2d07fdfa79879babfcd85ef80c2a99b78b",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/NOTICE"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/PROVENANCE.md",
+      "bytes": 3244,
+      "sha256": "38e7e05a66878c02b812247691d70c4b90d772d4bc778a02057098e3b043cd9c",
+      "gitBlob": "641e6bdd5ec57c82ae4507b1802cda6fcdfcd24b",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/PROVENANCE.md"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/README.md",
+      "bytes": 3433,
+      "sha256": "6f0da0f305e66f6186ac2eb0399f52857c01f9cc76d7c0945ae4f0e5885f302f",
+      "gitBlob": "ef4217198d88debdcf517ad7a1acd76bd2ad153a",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/README.md"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/THIRD_PARTY_NOTICES.md",
+      "bytes": 998,
+      "sha256": "51384adff46311fc62814dab8039a1b60cd134e8d1af25224444b01d2f101991",
+      "gitBlob": "29639382746a886cd9c9b3b3945bac08c733dbcc",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/THIRD_PARTY_NOTICES.md"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/ACTUAL_DONOR_MAVEN_COMPILE_PLAN.json",
+      "bytes": 9576,
+      "sha256": "bda8550b7329f58fde7808d41212406f8342b3b51661222bce2e0a22f3196d6d",
+      "gitBlob": "0fd487f4215f0bc9b6ea26ba388e920db8245814",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/ACTUAL_DONOR_MAVEN_COMPILE_PLAN.json"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/CORRECTION01_ORIGINAL_FAILURE_TERMINAL.json",
+      "bytes": 29115,
+      "sha256": "67ba190d24bddc889a128a1533db1506e7b048759180d0ab7d8bc59757de90fb",
+      "gitBlob": "1abb6216b43aec62e96fc8074ac77b8f1fe762f3",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/CORRECTION01_ORIGINAL_FAILURE_TERMINAL.json"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/CRATE_FORMAL_REVIEW_ACTUAL_TERMINAL.json",
+      "bytes": 48550,
+      "sha256": "7950ab980017b0821ae55050595ef9a3a15f56afd9a6aeef6ed4ffa6d91dacba",
+      "gitBlob": "3fd9409c8a06e7083821423ed2862df9d59f5d6f",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/CRATE_FORMAL_REVIEW_ACTUAL_TERMINAL.json"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/CRATE_FORMAL_REVIEW_RESULT.json",
+      "bytes": 579,
+      "sha256": "ddb25019f26a22d04bda1f8b056f5f3f77abf6b26ce63e0dfa8e75e481026980",
+      "gitBlob": "30d2a08c468751d0deb9d0c500cbc8416d07b685",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/CRATE_FORMAL_REVIEW_RESULT.json"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/DIRECT_ORIGINAL40_ACTUAL_TERMINAL.json",
+      "bytes": 90172,
+      "sha256": "eb947757b621f964cf7195df482030bb73a40800615bf21670949c67dc64f6c8",
+      "gitBlob": "bff0e7e8e0927d2b2ad23b30be7f7b5d4394490c",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/DIRECT_ORIGINAL40_ACTUAL_TERMINAL.json"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/DIRECT_REPLAY_ACTUAL_TERMINAL.json",
+      "bytes": 11210,
+      "sha256": "91113eb3bff24a1868ae6603daf778c82e62f7240d632d2c6dbd1aa577ce7669",
+      "gitBlob": "1d079abb26e0438890fe80535566bb239c33eaf8",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/DIRECT_REPLAY_ACTUAL_TERMINAL.json"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/ORIGINAL_PROGRAM3_BASELINE_FAILURE.json",
+      "bytes": 17989,
+      "sha256": "7f49c0f21ef7b8b7e94a5d32c597aaee964b74606e2a1efae8d4f882d7b9f186",
+      "gitBlob": "6125cf737add641f38623d381c814cdd6217f1f0",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/ORIGINAL_PROGRAM3_BASELINE_FAILURE.json"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/ORIGINAL_TRIGRAM_BASELINE_FAILURE.json",
+      "bytes": 15279,
+      "sha256": "5ee95a773f6cc28f1c25bd836f6b8283a923eacbb3aa6508406287f504b9be81",
+      "gitBlob": "7cab6a4e7faf568ec2de396222e9e6b3e2055888",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/ORIGINAL_TRIGRAM_BASELINE_FAILURE.json"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/PRIOR_PRODUCTION_FORMAL_REVIEW_RESULT.json",
+      "bytes": 569,
+      "sha256": "2dc90ec11577f189b4641366cfa3ac222e4563cb34c178dfb478cdbb87acaa52",
+      "gitBlob": "2b9e4f0898c7a6fdc1d873052a4bf68fd29f0bda",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/PRIOR_PRODUCTION_FORMAL_REVIEW_RESULT.json"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/PROGRAM_TEST_CONTRACT_CORRECTIONS.diff",
+      "bytes": 2071,
+      "sha256": "1533f0938546e7438c17d3928941b7d2a07258fb65c598c6170b9369eb3acd13",
+      "gitBlob": "525eed0c577f3284e6742c044c76d9fbe5f5e6c0",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/PROGRAM_TEST_CONTRACT_CORRECTIONS.diff"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/QUALIFICATION_SCOPE.json",
+      "bytes": 9453,
+      "sha256": "f15cfc00287b66c403356b19ba6656d160f0b02fdb207c7ed4e52e8416167311",
+      "gitBlob": "1cc99f3ddc182e026c3b57b742b456d7770b4466",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/QUALIFICATION_SCOPE.json"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/RECEIVER_PROGRAM_TEST_AUTHORITY.json",
+      "bytes": 1544,
+      "sha256": "fd161f5e70e6953796e58f433a4415264df507d096b7954b5584a3abe9126ece",
+      "gitBlob": "64f18e54858bcd8579584eaddae0d3179858a5c1",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/RECEIVER_PROGRAM_TEST_AUTHORITY.json"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/ROOT_CPU_TEST_REVIEW_DISPOSITION.json",
+      "bytes": 2688,
+      "sha256": "b9b72da1cb5f4c1110161cd1787d89ca0e3e4a5e80d06440212a1a55aa1844ae",
+      "gitBlob": "9c212baead87fe9c1255527b9fd6a5c65dd8f0de",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/ROOT_CPU_TEST_REVIEW_DISPOSITION.json"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/SHARED_ENGINE_SOURCE_PINS.json",
+      "bytes": 813,
+      "sha256": "b10be42509e5236274f0e86e7bb1dbd08138ba2678022613ada4825b5b4ec4c4",
+      "gitBlob": "f8d4011507a1309de650eda0d3d5bf18d9d73ccd",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/SHARED_ENGINE_SOURCE_PINS.json"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/STRICT_TEST_CLASS_ARTIFACTS.json",
+      "bytes": 16134,
+      "sha256": "e266184e472f4d301bec397e3b5c412d688e4c2fbb5f400ee019fb677a65c7c5",
+      "gitBlob": "5cebc4fa06123fa26368db940f8c4e4a233aa4dd",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/STRICT_TEST_CLASS_ARTIFACTS.json"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/TRIGRAM_EXISTENCE_CORRECTION.diff",
+      "bytes": 953,
+      "sha256": "8e9242e581e223fe5ac3d8d5ef9b3a9c6018b04eaa39ad21046b5281de577832",
+      "gitBlob": "971ef90598b8467aede2e9ea7f3f1541270a9b89",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/evidence/TRIGRAM_EXISTENCE_CORRECTION.diff"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/pom.xml",
+      "bytes": 2720,
+      "sha256": "50ff56284ee7a008835865ede3eb313d2bc3be59f86b97efbf1ebb6708e37eb2",
+      "gitBlob": "3009ad5fb29e9f79a1627d9157ea2bc944e59620",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/pom.xml"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/templates/base-revision.txt",
+      "bytes": 42,
+      "sha256": "9f15b57d9720c9591aa1725d397bc366f5b7319c56a818220eb751d76657d403",
+      "gitBlob": "7e3c952f7bcf0e11d7dc1c60e01cb5f1f3247224",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/templates/base-revision.txt"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/templates/manifest.tsv",
+      "bytes": 920,
+      "sha256": "b216c0da004d17de55196d12c6b8b7f5de79bb386a3a96f1b68c47d607bef871",
+      "gitBlob": "4f3ff28e9e184fa5231160825ad650acd4c0588d",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/templates/manifest.tsv"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/templates/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java.txt",
+      "bytes": 141730,
+      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
+      "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/templates/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java.txt"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/templates/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexProgramTest.java.txt",
+      "bytes": 39322,
+      "sha256": "5c185acb76ef6de2a79eebec30a6b156fa982c7283cb0f4d0ef96840ce1a9dd6",
+      "gitBlob": "13ec38e57bd6d4f8317566821f8d6e2dad153961",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/templates/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexProgramTest.java.txt"
+    },
+    {
+      "targetPath": "synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/templates/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexTrigramQueryTest.java.txt",
+      "bytes": 11007,
+      "sha256": "bae0950fd49e10eaada3d8e9e61a9b99dd251357f3952bbd867e134f77ef2225",
+      "gitBlob": "601a424ef6f477e675c64cdaa0643b0247c5476a",
+      "url": "https://github.com/hsoliwal/com.synexia/blob/1e4743f6661a9149f327bf7171b4de2df68add54/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/templates/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexTrigramQueryTest.java.txt"
+    }
+  ],
+  "copiedReceiptsRemainByteExact": true,
+  "historicalStatusTextPreserved": true,
+  "historicalCrateReviewPendingText": "Earlier QUALIFICATION_SCOPE status text remains historical; actual review result and terminal are separately published at this pinned source head.",
+  "selectedMethodLineage": {
+    "Trigram": {
+      "retained": 5,
+      "new": 3,
+      "selected": 8
+    },
+    "Program": {
+      "retained": 28
+    },
+    "gate": {
+      "retained": 4
+    },
+    "retainedTotal": 37,
+    "selectedTotal": 40
+  },
+  "testApplicability": "Actual donor stock-JDK21 focused outcomes only, using strict five-owner/46 production classes, 29 helpers, 58 fixtures, and the sealed inherited host/API context. No M3 target execution or source-complete closure.",
+  "conditionalJniMethod": "Preserved; conditional branch retention does not establish JNI execution.",
+  "reviewApplicability": {
+    "Program": "Prior clean model review applies to exact unchanged Program4e217 bytes only.",
+    "testOwnerCorrections": "Narrow root CPU disposition and actual 40-method qualification; no blanket model review.",
+    "SynexiaCrate": "Actual clean review applies only to the seven recorded Synexia config/docs. Does not review this new receiver ledger/recipe.",
+    "newReceiverPackage": "NOT_REVIEWED"
+  },
+  "warm04Applicability": "Separate bounded cold/warm oracle with retained source-qualified warm classes; no fresh warm compile, current JNI/module/jtreg closure, performance, or full String admission.",
+  "M3RecipeExecution": "NOT_RUN"
+}

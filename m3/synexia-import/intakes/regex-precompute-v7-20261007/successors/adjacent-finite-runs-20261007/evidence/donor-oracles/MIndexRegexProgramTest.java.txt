@@ -1,0 +1,1039 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.indexstring;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.synexia.job.DefaultProgressMonitor;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CancellationException;
+import java.util.regex.Pattern;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+final class MIndexRegexProgramTest {
+  @TempDir Path temp;
+  @Test
+  void compilationHonorsProgressCancellation() {
+    DefaultProgressMonitor monitor = new DefaultProgressMonitor();
+    monitor.setCanceled(true);
+
+    assertThrows(
+        CancellationException.class,
+        () -> MIndexRegexProgram.compile("(?:alpha|beta)+", monitor));
+    assertTrue(monitor.snapshot().done());
+  }
+
+  @Test
+  void imageRestoreHonorsProgressCancellation() {
+    MIndexRegexProgram program =
+        MIndexRegexProgram.compile("(?:ab|cd)+");
+    DefaultProgressMonitor monitor = new DefaultProgressMonitor();
+    monitor.setCanceled(true);
+
+    assertThrows(
+        CancellationException.class,
+        () -> MIndexRegexProgram.fromImage(program.image(), monitor));
+    assertTrue(monitor.snapshot().done());
+  }
+
+  @Test
+  void primitiveProgramMatchesRegularSubsetWithPrimitiveState() {
+    MIndexRegexProgram program =
+        MIndexRegexProgram.compile("^(?:dog|cat)[a-z]*\\d{2,4}$");
+
+    assertTrue(program.matches("dogma123"));
+    assertTrue(program.matches("cat99"));
+    assertFalse(program.matches("dogma1"));
+    assertFalse(program.matches("xxdogma123"));
+    assertTrue(program.stateCount() > 0);
+    assertTrue(program.characterClassCount() > 0);
+    assertTrue(program.primitivePayloadBytes() > 0L);
+  }
+
+  @Test
+  void precomputedBitKernelsPreserveBooleanSemantics() {
+    String expression = "(?:ab|cd)+x?";
+    MIndexRegexProgram program = MIndexRegexProgram.compile(expression);
+    assertTrue(program.hasAsciiStateMasks());
+    assertTrue(program.asciiStateMaskPayloadBytes() > 0L);
+    assertTrue(program.hasPrecomputedEpsilonClosures());
+    assertTrue(program.epsilonClosurePayloadBytes() > 0L);
+
+    com.google.re2j.Pattern re2 = com.google.re2j.Pattern.compile(expression);
+    Pattern jdk = Pattern.compile(expression);
+    List<String> samples =
+        List.of("", "ab", "cd", "ababx", "cdab", "xxabcdxzz", "ababy", "éabx");
+
+    for (String sample : samples) {
+      assertEquals(re2.matcher(sample).matches(), program.matches(sample), sample + " RE2 matches");
+      assertEquals(re2.matcher(sample).find(), program.find(sample), sample + " RE2 find");
+      assertEquals(
+          re2.matcher(sample).lookingAt(),
+          program.lookingAt(sample),
+          sample + " RE2 lookingAt");
+      assertEquals(jdk.matcher(sample).matches(), program.matches(sample), sample + " JDK matches");
+    }
+  }
+
+  @Test
+  void boundedAsciiDfaPreservesAllBooleanOperationsAndFallsBackForBmp() {
+    String expression = "(?:ab|cd)+x?";
+    MIndexRegexProgram program = MIndexRegexProgram.compile(expression);
+    assertTrue(program.hasAsciiDfa());
+    assertTrue(program.asciiDfaStateCount() > 0);
+    assertTrue(program.asciiDfaPayloadBytes() > 0L);
+    assertTrue(program.asciiDfaPayloadBytes() <= 4L * 1024L * 1024L);
+    assertTrue(program.hasAsciiSubsetTransitions());
+
+    com.google.re2j.Pattern re2 = com.google.re2j.Pattern.compile(expression);
+    Pattern jdk = Pattern.compile(expression);
+    List<String> samples =
+        List.of("", "ab", "cd", "ababx", "cdab", "zzabcdxzz", "ababy", "éabx");
+
+    for (String sample : samples) {
+      assertEquals(re2.matcher(sample).matches(), program.matches(sample), sample + " RE2 matches");
+      assertEquals(re2.matcher(sample).find(), program.find(sample), sample + " RE2 find");
+      assertEquals(
+          re2.matcher(sample).lookingAt(),
+          program.lookingAt(sample),
+          sample + " RE2 lookingAt");
+      assertEquals(jdk.matcher(sample).matches(), program.matches(sample), sample + " JDK matches");
+    }
+  }
+
+  @Test
+  void regexImageRoundTripRebuildsDfaSubsetAndBmpAccelerators() {
+    MIndexRegexProgram original = MIndexRegexProgram.compile("(?:ab|cd)+x?");
+    MIndexRegexProgram restored = MIndexRegexProgram.fromImage(original.image());
+
+    assertTrue(restored.hasAsciiStateMasks());
+    assertTrue(restored.hasPrecomputedEpsilonClosures());
+    assertTrue(restored.hasAsciiSubsetTransitions());
+    assertTrue(restored.hasAsciiDfa());
+    assertEquals(original.asciiDfaStateCount(), restored.asciiDfaStateCount());
+    assertEquals(original.requiredPresence64(), restored.requiredPresence64());
+    assertEquals(original.requiredCharacterFlags(), restored.requiredCharacterFlags());
+
+    for (String sample : List.of("", "ab", "cdx", "zzabcdxzz", "ababy", "éabx")) {
+      assertEquals(original.matches(sample), restored.matches(sample), sample + " matches");
+      assertEquals(original.find(sample), restored.find(sample), sample + " find");
+      assertEquals(original.lookingAt(sample), restored.lookingAt(sample), sample + " lookingAt");
+    }
+  }
+
+  @Test
+  void frozenAndMappedAsciiFactsDriveCompactDfaWithoutChangingTruth() throws Exception {
+    String expression = "(?:ab|cd)+x?";
+    Pattern jdk = Pattern.compile(expression);
+    MIndexRegexProgram program = MIndexRegexProgram.compile(expression);
+    IndexDictionary dictionary =
+        IndexDictionary.of(
+            1,
+            "en",
+            "dfa-facts-v1",
+            List.of("ababx", "cd", "éabx", "zzabcdxzz"));
+
+    for (int wordId = 0; wordId < dictionary.size(); wordId++) {
+      IndexLexiconWordView view = new IndexLexiconWordView(dictionary, wordId);
+      String text = dictionary.valueOfLocal(wordId);
+      assertEquals(jdk.matcher(text).matches(), program.matches(view), text + " heap matches");
+      assertEquals(jdk.matcher(text).find(), program.find(view), text + " heap find");
+      boolean ascii = text.chars().allMatch(value -> value < 128);
+      assertEquals(
+          ascii,
+          (view.characterFlags() & IndexCharacterFlags.ASCII) != 0,
+          text + " heap ASCII fact");
+    }
+
+    Path image = temp.resolve("dfa-facts.sidx");
+    IndexDictionaryImage.write(dictionary, image);
+    MappedIndexDictionary mapped =
+        MappedIndexDictionary.open(image, "en", "dfa-facts-v1");
+    try {
+      for (int wordId = 0; wordId < mapped.size(); wordId++) {
+        IndexLexiconWordView view = new IndexLexiconWordView(mapped, wordId);
+        String text = mapped.valueOfLocal(wordId);
+        assertEquals(jdk.matcher(text).matches(), program.matches(view), text + " mapped matches");
+        assertEquals(jdk.matcher(text).find(), program.find(view), text + " mapped find");
+        boolean ascii = text.chars().allMatch(value -> value < 128);
+        assertEquals(
+            ascii,
+            (view.characterFlags() & IndexCharacterFlags.ASCII) != 0,
+            text + " mapped ASCII fact");
+      }
+    } finally {
+      mapped.close();
+    }
+  }
+
+  @Test
+  void bitKernelPrecomputationIsSparseBoundedAndAssertionsUseDynamicClosure() {
+    MIndexRegexProgram anchored = MIndexRegexProgram.compile("^ab(?:cd|ef)*x$");
+    assertTrue(anchored.hasAsciiStateMasks());
+    assertFalse(anchored.hasPrecomputedEpsilonClosures());
+    assertFalse(anchored.hasAsciiDfa());
+    assertTrue(anchored.matches("abcdefcdx"));
+    assertFalse(anchored.matches("zabcdefcdx"));
+
+    MIndexRegexProgram longLiteral =
+        MIndexRegexProgram.tryCompile(
+            "a{7000}", MIndexRegexProgram.Semantics.JDK, 8_000);
+    assertNotNull(longLiteral);
+    assertTrue(longLiteral.hasAsciiStateMasks());
+    assertTrue(longLiteral.hasPrecomputedEpsilonClosures());
+    assertTrue(longLiteral.epsilonClosurePayloadBytes() < 65_536L);
+    assertFalse(longLiteral.hasAsciiDfa());
+    assertTrue(longLiteral.matches("a".repeat(7000)));
+    assertFalse(longLiteral.matches("a".repeat(6999)));
+
+    String manyOptionalAtoms = "a?".repeat(5000);
+    assertNull(
+        MIndexRegexProgram.tryCompile(
+            manyOptionalAtoms, MIndexRegexProgram.Semantics.JDK, 12_000));
+    // Lowering uses three states per optional atom, one concat jump and one terminal match.
+    MIndexRegexProgram budgetFallback =
+        MIndexRegexProgram.tryCompile(
+            manyOptionalAtoms, MIndexRegexProgram.Semantics.JDK, 15_002);
+    assertNotNull(budgetFallback);
+    assertEquals(15_002, budgetFallback.stateCount());
+    assertTrue(budgetFallback.hasAsciiStateMasks());
+    assertFalse(budgetFallback.hasPrecomputedEpsilonClosures());
+    assertTrue(budgetFallback.matches(""));
+    assertTrue(budgetFallback.matches("a".repeat(5000)));
+  }
+
+  @Test
+  void jdkSubsetIsDifferentiallyEquivalentForBooleanOperations() {
+    List<String> expressions =
+        List.of(
+            "a+",
+            "ab*c",
+            "(?:ab|cd)+",
+            "[a-z]+\\d{2,4}",
+            "colou?r",
+            "[^x]+",
+            "\\w+\\s\\d+",
+            "\\A[a-z]+\\z");
+    List<String> samples =
+        List.of(
+            "",
+            "a",
+            "aaaa",
+            "abc",
+            "abbbc",
+            "abcdcd",
+            "color",
+            "colour",
+            "foo 7",
+            "abc123",
+            "xx",
+            "xyz",
+            "dog99",
+            " dog99 ");
+
+    for (String expression : expressions) {
+      MIndexRegexProgram program =
+          MIndexRegexProgram.tryCompile(
+              expression, MIndexRegexProgram.Semantics.JDK, 10_000);
+      assertNotNull(program, expression);
+      Pattern jdk = Pattern.compile(expression);
+      for (String sample : samples) {
+        assertEquals(jdk.matcher(sample).matches(), program.matches(sample), expression + " matches");
+        assertEquals(jdk.matcher(sample).find(), program.find(sample), expression + " find");
+        assertEquals(
+            jdk.matcher(sample).lookingAt(), program.lookingAt(sample), expression + " lookingAt");
+      }
+    }
+  }
+
+  @Test
+  void acceptedSubsetIsDifferentiallyEquivalentAcrossGeneratedCorpus() {
+    List<String> expressions =
+        List.of(
+            "a*",
+            "ab+c",
+            "(?:ab|ba)+",
+            "[ab]{1,3}",
+            "[^x]{0,2}a",
+            "\\d+",
+            "\\w{1,3}",
+            "\\s?",
+            "\\A(?:ab|a)*\\z",
+            "a?b?x?",
+            "[a-c0-2]+");
+
+    List<String> corpus = new ArrayList<>();
+    generateCorpus(corpus, new char[] {'a', 'b', 'x', '1', ' ', '\n'}, new StringBuilder(), 4);
+
+    for (String expression : expressions) {
+      MIndexRegexProgram program =
+          MIndexRegexProgram.tryCompile(
+              expression, MIndexRegexProgram.Semantics.JDK, 10_000);
+      assertNotNull(program, expression);
+      Pattern jdk = Pattern.compile(expression);
+      for (String sample : corpus) {
+        boolean expectedMatches = jdk.matcher(sample).matches();
+        boolean expectedFind = jdk.matcher(sample).find();
+        boolean expectedLookingAt = jdk.matcher(sample).lookingAt();
+        assertEquals(
+            expectedMatches,
+            program.matches(sample),
+            expression + " matches " + printable(sample));
+        assertEquals(
+            expectedFind,
+            program.find(sample),
+            expression + " find " + printable(sample));
+        assertEquals(
+            expectedLookingAt,
+            program.lookingAt(sample),
+            expression + " lookingAt " + printable(sample));
+        if (expectedMatches || expectedFind || expectedLookingAt) {
+          assertTrue(
+              MIndexStringBitOps.mayContain(
+                  MIndexStringBitOps.signal(sample), program.requiredPresence64()),
+              expression + " presence proof " + printable(sample));
+        }
+      }
+    }
+  }
+
+  @Test
+  void astPresenceProofIsConservativeAcrossRegexAlgebra() {
+    long abx = MIndexStringBitOps.signal("abx");
+    long aby = MIndexStringBitOps.signal("aby");
+    long z = MIndexStringBitOps.signal("z");
+
+    MIndexRegexProgram repeatedAlternative =
+        MIndexRegexProgram.compile("(?:abx|aby)+z");
+    assertEquals((abx & aby) | z, repeatedAlternative.requiredPresence64());
+
+    MIndexRegexProgram optionalAlternative =
+        MIndexRegexProgram.compile("(?:abx|aby)?z");
+    assertEquals(z, optionalAlternative.requiredPresence64());
+
+    long classCommon =
+        MIndexStringBitOps.signal("a") & MIndexStringBitOps.signal("b");
+    MIndexRegexProgram classThenLiteral =
+        MIndexRegexProgram.compile("[ab]x");
+    assertEquals(
+        classCommon | MIndexStringBitOps.signal("x"),
+        classThenLiteral.requiredPresence64());
+
+    MIndexRegexProgram sharedGroup =
+        MIndexRegexProgram.compile("(?:prefix-a|prefix-b)-tail");
+    assertTrue(
+        MIndexStringBitOps.mayContain(
+            MIndexStringBitOps.signal("prefix-a-tail"),
+            sharedGroup.requiredPresence64()));
+    assertTrue(
+        MIndexStringBitOps.mayContain(
+            MIndexStringBitOps.signal("prefix-b-tail"),
+            sharedGroup.requiredPresence64()));
+  }
+
+  @Test
+  void requiredCharacterClassFactsAreConservativeAcrossRegexAlgebra() {
+    MIndexRegexProgram digits = MIndexRegexProgram.compile("\\d+");
+    assertEquals(
+        IndexCharacterFlags.HAS_ASCII_DIGIT | IndexCharacterFlags.HAS_ASCII_WORD,
+        digits.requiredCharacterFlags());
+
+    MIndexRegexProgram upper = MIndexRegexProgram.compile("[A-Z]+");
+    assertEquals(
+        IndexCharacterFlags.HAS_ASCII_UPPER | IndexCharacterFlags.HAS_ASCII_WORD,
+        upper.requiredCharacterFlags());
+
+    MIndexRegexProgram whitespace = MIndexRegexProgram.compile("\\s+");
+    assertEquals(
+        IndexCharacterFlags.HAS_ASCII_SPACE,
+        whitespace.requiredCharacterFlags());
+
+    MIndexRegexProgram sharedWord =
+        MIndexRegexProgram.compile("(?:\\d+|[A-Z]+)");
+    assertEquals(
+        IndexCharacterFlags.HAS_ASCII_WORD,
+        sharedWord.requiredCharacterFlags());
+
+    assertEquals(
+        0,
+        MIndexRegexProgram.compile("(?:\\d+|!+)").requiredCharacterFlags());
+    assertEquals(0, MIndexRegexProgram.compile("\\d*").requiredCharacterFlags());
+  }
+
+  @Test
+  void exactResolverClassFactsRejectBeforeCharacterReads() {
+    ExactStringIndexResolver delegate = new ExactStringIndexResolver();
+    IndexCharacterFlagsResolver guarded =
+        new IndexCharacterFlagsResolver() {
+          @Override
+          public java.util.OptionalLong lookup(int languageId, CharSequence term) {
+            return delegate.lookup(languageId, term);
+          }
+
+          @Override
+          public long intern(int languageId, CharSequence term) {
+            return delegate.intern(languageId, term);
+          }
+
+          @Override
+          public String resolve(long id) {
+            throw new AssertionError("class rejection must happen before resolve");
+          }
+
+          @Override
+          public IndexTextMetrics metrics(long id) {
+            return delegate.metrics(id);
+          }
+
+          @Override
+          public int characterFlags(long id) {
+            return delegate.characterFlags(id);
+          }
+
+          @Override
+          public char utf16CharAt(long id, int index) {
+            throw new AssertionError("class rejection must happen before charAt");
+          }
+        };
+
+    MIndexString letters = MIndexString.intern(guarded, 0, "letters_only");
+    MIndexRegexProgram digits = MIndexRegexProgram.compile("\\d+");
+
+    assertTrue(digits.requiredPresence64() == 0L);
+    assertTrue((digits.requiredCharacterFlags() & IndexCharacterFlags.HAS_ASCII_DIGIT) != 0);
+    assertFalse(digits.matches(letters));
+    assertFalse(digits.find(letters));
+    assertFalse(digits.lookingAt(letters));
+  }
+
+  @Test
+  void resolverFamiliesExposeConsistentPrecomputedRegexFacts() {
+    IndexDictionary dictionary =
+        IndexDictionary.of(5, "en", "facts-v1", List.of("letters_only", "12345"));
+    int lettersLocal = dictionary.lookupLocal("letters_only");
+    long expectedSignal = dictionary.bitSignalOfLocal(lettersLocal);
+    int expectedFlags = dictionary.characterFlagsOfLocal(lettersLocal);
+
+    IndexSpace space =
+        IndexSpace.builder()
+            .add(dictionary, IndexAffixIndex.freeze(dictionary))
+            .build();
+    long spaceId = space.intern(5, "letters_only");
+    assertEquals(expectedSignal, space.bitSignal(spaceId));
+    assertEquals(expectedFlags, space.characterFlags(spaceId));
+
+    HierarchicalIndexResolver hierarchical =
+        HierarchicalIndexResolver.builder().dictionary(dictionary).build();
+    long hierarchicalId = hierarchical.intern(5, "letters_only");
+    assertEquals(expectedSignal, hierarchical.bitSignal(hierarchicalId));
+    assertEquals(expectedFlags, hierarchical.characterFlags(hierarchicalId));
+
+    long literalId = hierarchical.intern(5, "literal_only");
+    assertEquals(
+        IndexCharacterFlags.of("literal_only"),
+        hierarchical.characterFlags(literalId));
+    assertEquals(
+        MIndexStringBitOps.signal("literal_only"),
+        hierarchical.bitSignal(literalId));
+
+    IndexExactLexicon exact =
+        IndexExactLexicon.builder("en")
+            .entry(IndexLexemeKind.ACRONYM, "ABC")
+            .freeze();
+    IndexExactLexiconResolver exactResolver = new IndexExactLexiconResolver(5, exact);
+    long exactId = exactResolver.intern(5, "ABC");
+    assertEquals(MIndexStringBitOps.signal("ABC"), exactResolver.bitSignal(exactId));
+    assertEquals(IndexCharacterFlags.of("ABC"), exactResolver.characterFlags(exactId));
+
+    MIndexRegexProgram digits = MIndexRegexProgram.compile("\\d+");
+    assertFalse(digits.matches(MIndexString.intern(space, 5, "letters_only")));
+    assertFalse(digits.matches(MIndexString.intern(hierarchical, 5, "letters_only")));
+    assertFalse(digits.matches(MIndexString.intern(exactResolver, 5, "ABC")));
+  }
+
+  @Test
+  void reusableWorkspaceDoesNotLeakStateAcrossInputs() {
+    MIndexRegexProgram program =
+        MIndexRegexProgram.compile("(?:ab|cd)+x?");
+    MIndexRegexProgram.Workspace workspace = program.workspace();
+
+    assertTrue(workspace.primitivePayloadBytes() > 0L);
+    assertTrue(workspace.matches("ababx"));
+    assertFalse(workspace.matches("ababy"));
+    assertTrue(workspace.matches("cd"));
+    assertTrue(workspace.find("--abcdx--"));
+    assertFalse(workspace.find("--yyyy--"));
+    assertTrue(workspace.lookingAt("cdx-tail"));
+    assertFalse(workspace.lookingAt("tail-cdx"));
+    assertEquals(program, workspace.program());
+  }
+
+  @Test
+  void bmpCharacterClassesUsePagedDirectAddressMasks() {
+    String expression = "[α-ω]+(?:é|ñ)?";
+    MIndexRegexProgram program = MIndexRegexProgram.compile(expression);
+    com.google.re2j.Pattern re2 = com.google.re2j.Pattern.compile(expression);
+
+    assertTrue(program.hasBmpClassMasks());
+    assertTrue(program.bmpClassMaskPayloadBytes() > 0L);
+
+    List<String> samples =
+        List.of(
+            "",
+            "α",
+            "αλφα",
+            "ωωé",
+            "βγñ",
+            "abc",
+            "αA",
+            "😀αω");
+
+    MIndexRegexProgram.Workspace workspace = program.workspace();
+    for (String sample : samples) {
+      assertEquals(
+          re2.matcher(sample).matches(),
+          workspace.matches(sample),
+          "BMP matches " + printable(sample));
+      assertEquals(
+          re2.matcher(sample).find(),
+          workspace.find(sample),
+          "BMP find " + printable(sample));
+      assertEquals(
+          re2.matcher(sample).lookingAt(),
+          workspace.lookingAt(sample),
+          "BMP lookingAt " + printable(sample));
+    }
+
+    MIndexRegexProgram restored = MIndexRegexProgram.fromImage(program.image());
+    assertTrue(restored.hasBmpClassMasks());
+    assertEquals(program.bmpClassMaskPayloadBytes(), restored.bmpClassMaskPayloadBytes());
+  }
+
+  @Test
+  void asciiSubsetTransitionsUseDirectAddressRamTableWithoutChangingTruth() {
+    String expression = "(?:ab|ac|ad|ba|bb|bc|ca|cb|cc)+(?:x|y|z)?";
+    MIndexRegexProgram program = MIndexRegexProgram.compile(expression);
+    com.google.re2j.Pattern re2 = com.google.re2j.Pattern.compile(expression);
+
+    assertTrue(program.hasPrecomputedEpsilonClosures());
+    assertTrue(program.hasAsciiStateMasks());
+    assertTrue(program.hasAsciiSubsetTransitions());
+    assertEquals(8, program.asciiSubsetBits());
+    assertTrue(program.asciiSubsetTransitionPayloadBytes() > 0L);
+
+    List<String> samples =
+        List.of(
+            "",
+            "ab",
+            "acx",
+            "adbay",
+            "bcbcccz",
+            "cccc",
+            "zz",
+            "xxab",
+            "abzz",
+            "😀abx");
+
+    MIndexRegexProgram.Workspace workspace = program.workspace();
+    for (String sample : samples) {
+      assertEquals(
+          re2.matcher(sample).matches(),
+          workspace.matches(sample),
+          "matches " + printable(sample));
+      assertEquals(
+          re2.matcher(sample).find(),
+          workspace.find(sample),
+          "find " + printable(sample));
+      assertEquals(
+          re2.matcher(sample).lookingAt(),
+          workspace.lookingAt(sample),
+          "lookingAt " + printable(sample));
+    }
+
+    MIndexRegexProgram restored = MIndexRegexProgram.fromImage(program.image());
+    assertTrue(restored.hasAsciiSubsetTransitions());
+    for (String sample : samples) {
+      assertEquals(
+          re2.matcher(sample).matches(),
+          restored.matches(sample),
+          "restored " + printable(sample));
+    }
+
+    MIndexRegexProgram medium =
+        MIndexRegexProgram.tryCompile(
+            "a?".repeat(70), MIndexRegexProgram.Semantics.JDK, 1_000);
+    assertNotNull(medium);
+    assertTrue(medium.hasPrecomputedEpsilonClosures());
+    assertTrue(medium.hasAsciiSubsetTransitions());
+    assertEquals(4, medium.asciiSubsetBits());
+
+    MIndexRegexProgram asserted = MIndexRegexProgram.compile("^ab+$");
+    assertFalse(asserted.hasPrecomputedEpsilonClosures());
+    assertFalse(asserted.hasAsciiSubsetTransitions());
+    assertEquals(0, asserted.asciiSubsetBits());
+  }
+
+  @Test
+  void astPresenceAlgebraCoversGroupedMandatoryText() {
+    String groupedExpression = "(?:alpha)(?:beta)";
+    MIndexRegexProgram grouped = MIndexRegexProgram.compile(groupedExpression);
+    assertTrue(MIndexRegexSearchPlan.analyze(groupedExpression).requiredLiterals().isEmpty());
+    assertEquals(MIndexStringBitOps.signal("alphabeta"), grouped.requiredPresence64());
+
+    MIndexRegexProgram optional = MIndexRegexProgram.compile("(?:foo)?bar");
+    assertEquals(MIndexStringBitOps.signal("bar"), optional.requiredPresence64());
+
+    MIndexRegexProgram repeated = MIndexRegexProgram.compile("(?:foo)+bar");
+    assertEquals(MIndexStringBitOps.signal("foobar"), repeated.requiredPresence64());
+
+    MIndexRegexProgram alternation = MIndexRegexProgram.compile("(?:foo|far)baz");
+    long expectedAlternation =
+        (MIndexStringBitOps.signal("foo") & MIndexStringBitOps.signal("far"))
+            | MIndexStringBitOps.signal("baz");
+    assertEquals(expectedAlternation, alternation.requiredPresence64());
+
+    MIndexRegexProgram characterClass = MIndexRegexProgram.compile("[ab]x");
+    long expectedClass =
+        (MIndexStringBitOps.signal("a") & MIndexStringBitOps.signal("b"))
+            | MIndexStringBitOps.signal("x");
+    assertEquals(expectedClass, characterClass.requiredPresence64());
+  }
+
+  @Test
+  void plannerProvenLiteralsProduceSafePrecomputedPresenceGate() {
+    MIndexRegexProgram program =
+        MIndexRegexProgram.compile("prefix-[a-z]+-suffix");
+    assertTrue(program.requiredPresence64() != 0L);
+
+    ExactStringIndexResolver resolver = new ExactStringIndexResolver();
+    MIndexString possible =
+        MIndexString.intern(resolver, 0, "prefix-value-suffix");
+    MIndexString impossible =
+        MIndexString.intern(resolver, 0, "!!!!!!!!!!!!!!!!!!!");
+
+    assertTrue(program.matches(possible));
+    assertFalse(
+        MIndexStringBitOps.mayContain(
+            impossible.bitSignal64(), program.requiredPresence64()));
+    assertFalse(program.matches(impossible));
+    assertFalse(program.find(impossible));
+    assertFalse(program.lookingAt(impossible));
+  }
+
+  @Test
+  void lexiconPresenceGateRejectsBeforeCharacterReads() {
+    IndexDictionary dictionary =
+        IndexDictionary.of(3, "en", "v1", List.of("ordinary"));
+    int local = dictionary.lookupLocal("ordinary");
+    PackedIndexLexicon guarded =
+        new PackedIndexLexicon() {
+          @Override public int languageId() { return dictionary.languageId(); }
+          @Override public String languageTag() { return dictionary.languageTag(); }
+          @Override public String version() { return dictionary.version(); }
+          @Override public int size() { return dictionary.size(); }
+          @Override public int lookupLocal(CharSequence term) { return dictionary.lookupLocal(term); }
+          @Override public String valueOfLocal(long id) { return dictionary.valueOfLocal(id); }
+          @Override public IndexTextMetrics metricsOfLocal(long id) {
+            return dictionary.metricsOfLocal(id);
+          }
+          @Override public int utf16LengthOfLocal(long id) {
+            return dictionary.utf16LengthOfLocal(id);
+          }
+          @Override public long bitSignalOfLocal(long id) {
+            return dictionary.bitSignalOfLocal(id);
+          }
+          @Override public boolean hasPrecomputedRegexFacts() {
+            return dictionary.hasPrecomputedRegexFacts();
+          }
+          @Override public int characterFlagsOfLocal(long id) {
+            return dictionary.characterFlagsOfLocal(id);
+          }
+          @Override public char utf16CharAtLocal(long id, int index) {
+            throw new AssertionError("precomputed rejection should happen before charAt");
+          }
+        };
+
+    MIndexRegexProgram program =
+        MIndexRegexProgram.compile(".*zxq-never-present.*");
+    IndexLexiconWordView view = new IndexLexiconWordView(guarded, local);
+
+    assertFalse(
+        MIndexStringBitOps.mayContain(
+            view.bitSignal64(), program.requiredPresence64()));
+    assertFalse(program.matches(view));
+    assertFalse(program.find(view));
+    assertFalse(program.lookingAt(view));
+
+    MIndexRegexProgram digits = MIndexRegexProgram.compile("\\d+");
+    assertTrue((digits.requiredCharacterFlags() & IndexCharacterFlags.HAS_ASCII_DIGIT) != 0);
+    assertFalse(digits.matches(view));
+    assertFalse(digits.find(view));
+    assertFalse(digits.lookingAt(view));
+  }
+
+  @Test
+  void re2PosixClassesLowerToPrimitiveAsciiRanges() {
+    List<String> expressions =
+        List.of(
+            "[[:alpha:]]+",
+            "[[:^digit:]]+",
+            "[[:xdigit:]]{2}",
+            "[[:space:]]",
+            "[[:punct:]]+",
+            "[[:word:]]+");
+    List<String> samples =
+        List.of(
+            "",
+            "abc",
+            "ABC",
+            "a1",
+            "19",
+            "FF",
+            "0f",
+            "gg",
+            " ",
+            "\t",
+            "\u000B",
+            "!",
+            "_",
+            "é");
+
+    for (String expression : expressions) {
+      MIndexRegexProgram program =
+          MIndexRegexProgram.tryCompile(
+              expression, MIndexRegexProgram.Semantics.RE2, 10_000);
+      assertNotNull(program, expression);
+      MIndexHybridRegex hybrid = MIndexHybridRegex.compile(expression);
+      assertEquals(MIndexRegexBackend.MINDEX_AUTOMATON, hybrid.backend(), expression);
+      com.google.re2j.Pattern re2 = com.google.re2j.Pattern.compile(expression);
+
+      for (String sample : samples) {
+        assertEquals(
+            re2.matcher(sample).matches(),
+            program.matches(sample),
+            expression + " matches " + printable(sample));
+        assertEquals(
+            re2.matcher(sample).find(),
+            program.find(sample),
+            expression + " find " + printable(sample));
+        assertEquals(
+            re2.matcher(sample).lookingAt(),
+            program.lookingAt(sample),
+            expression + " lookingAt " + printable(sample));
+      }
+    }
+
+    assertNull(
+        MIndexRegexProgram.tryCompile(
+            "[[:alpha:]]", MIndexRegexProgram.Semantics.JDK, 10_000));
+  }
+
+  @Test
+  void whitespaceClassesPreserveRe2AndJdkVerticalTabDifference() {
+    List<String> expressions = List.of("\\s", "\\S", "[\\s]", "[\\S]");
+    List<String> samples =
+        List.of(
+            "\t",
+            "\n",
+            "\u000B",
+            "\f",
+            "\r",
+            " ",
+            "x");
+
+    for (String expression : expressions) {
+      MIndexRegexProgram re2Program =
+          MIndexRegexProgram.tryCompile(
+              expression, MIndexRegexProgram.Semantics.RE2, 10_000);
+      MIndexRegexProgram jdkProgram =
+          MIndexRegexProgram.tryCompile(
+              expression, MIndexRegexProgram.Semantics.JDK, 10_000);
+      assertNotNull(re2Program, expression + " RE2");
+      assertNotNull(jdkProgram, expression + " JDK");
+
+      com.google.re2j.Pattern re2 = com.google.re2j.Pattern.compile(expression);
+      Pattern jdk = Pattern.compile(expression);
+      for (String sample : samples) {
+        assertEquals(
+            re2.matcher(sample).matches(),
+            re2Program.matches(sample),
+            expression + " RE2 " + printable(sample));
+        assertEquals(
+            jdk.matcher(sample).matches(),
+            jdkProgram.matches(sample),
+            expression + " JDK " + printable(sample));
+      }
+    }
+
+    assertFalse(MIndexRegexProgram.compile("\\s").matches("\u000B"));
+    MIndexRegexProgram jdkSpace =
+        MIndexRegexProgram.tryCompile(
+            "\\s", MIndexRegexProgram.Semantics.JDK, 10_000);
+    assertNotNull(jdkSpace);
+    assertTrue(jdkSpace.matches("\u000B"));
+  }
+
+  @Test
+  void re2WordBoundariesUseNativeAsciiBoundaryMath() {
+    List<String> expressions =
+        List.of(
+            "\\bcat\\b",
+            "\\Bcat\\B",
+            "\\b\\w+\\b",
+            "\\b123\\b");
+    List<String> samples =
+        List.of(
+            "",
+            "cat",
+            "a cat!",
+            "scatter",
+            "xcaty",
+            "_cat_",
+            "😀cat😀",
+            "😀abc_123!",
+            "abc-123",
+            " 123 ");
+
+    for (String expression : expressions) {
+      MIndexRegexProgram program =
+          MIndexRegexProgram.tryCompile(
+              expression, MIndexRegexProgram.Semantics.RE2, 10_000);
+      assertNotNull(program, expression);
+      assertFalse(program.mayConsumeSurrogateUnit(), expression);
+      MIndexHybridRegex hybrid = MIndexHybridRegex.compile(expression);
+      assertEquals(MIndexRegexBackend.MINDEX_AUTOMATON, hybrid.backend(), expression);
+      com.google.re2j.Pattern re2 = com.google.re2j.Pattern.compile(expression);
+
+      for (String sample : samples) {
+        assertEquals(
+            re2.matcher(sample).matches(),
+            program.matches(sample),
+            expression + " RE2 matches " + printable(sample));
+        assertEquals(
+            re2.matcher(sample).find(),
+            program.find(sample),
+            expression + " RE2 find " + printable(sample));
+        assertEquals(
+            re2.matcher(sample).lookingAt(),
+            program.lookingAt(sample),
+            expression + " RE2 lookingAt " + printable(sample));
+      }
+    }
+
+    assertNull(
+        MIndexRegexProgram.tryCompile(
+            "\\bcat\\b", MIndexRegexProgram.Semantics.JDK, 10_000));
+  }
+
+  @Test
+  void lazyQuantifiersAndQuotedLiteralsStayNativeForBooleanTruth() {
+    List<String> expressions =
+        List.of(
+            "a+?b",
+            "a*?b",
+            "a{1,3}?b",
+            "\\Qfoo.bar[1]\\E\\d+",
+            "\\Qab\\E+",
+            "\\Qunterminated.*");
+    List<String> samples =
+        List.of(
+            "",
+            "ab",
+            "aaab",
+            "aaaab",
+            "xxaaabyy",
+            "foo.bar[1]123",
+            "xxfoo.bar[1]7yy",
+            "ab",
+            "abb",
+            "abab",
+            "unterminated.*",
+            "unterminatedX");
+
+    for (String expression : expressions) {
+      MIndexRegexProgram program =
+          MIndexRegexProgram.tryCompile(
+              expression, MIndexRegexProgram.Semantics.RE2, 10_000);
+      assertNotNull(program, expression);
+      MIndexHybridRegex hybrid = MIndexHybridRegex.compile(expression);
+      MIndexRegexBackend expectedBackend =
+          expression.equals("\\Qunterminated.*")
+              ? MIndexRegexBackend.LITERAL_INDEX
+              : MIndexRegexBackend.MINDEX_AUTOMATON;
+      assertEquals(expectedBackend, hybrid.backend(), expression);
+      com.google.re2j.Pattern re2 = com.google.re2j.Pattern.compile(expression);
+      MIndexRegexProgram jdkProgram =
+          MIndexRegexProgram.tryCompile(
+              expression, MIndexRegexProgram.Semantics.JDK, 10_000);
+      assertNotNull(jdkProgram, expression + " JDK subset");
+      Pattern jdk = Pattern.compile(expression);
+
+      for (String sample : samples) {
+        assertEquals(
+            re2.matcher(sample).matches(),
+            program.matches(sample),
+            expression + " RE2 matches " + printable(sample));
+        assertEquals(
+            re2.matcher(sample).find(),
+            program.find(sample),
+            expression + " RE2 find " + printable(sample));
+        assertEquals(
+            re2.matcher(sample).lookingAt(),
+            program.lookingAt(sample),
+            expression + " RE2 lookingAt " + printable(sample));
+        assertEquals(
+            jdk.matcher(sample).matches(),
+            jdkProgram.matches(sample),
+            expression + " JDK matches " + printable(sample));
+        assertEquals(
+            jdk.matcher(sample).find(),
+            jdkProgram.find(sample),
+            expression + " JDK find " + printable(sample));
+        assertEquals(
+            jdk.matcher(sample).lookingAt(),
+            jdkProgram.lookingAt(sample),
+            expression + " JDK lookingAt " + printable(sample));
+      }
+    }
+
+    MIndexRegexProgram quotedRepeat =
+        MIndexRegexProgram.compile("\\Qab\\E+");
+    assertTrue(quotedRepeat.matches("abb"));
+    assertFalse(quotedRepeat.matches("abab"));
+
+    assertNull(
+        MIndexRegexProgram.tryCompile(
+            "a++", MIndexRegexProgram.Semantics.RE2, 10_000));
+  }
+
+  @Test
+  void unsupportedOrSemanticallyDifferentSyntaxDelegatesInsteadOfApproximating() {
+    assertNull(
+        MIndexRegexProgram.tryCompile(
+            "(?=foo)foo", MIndexRegexProgram.Semantics.JDK, 10_000));
+    assertNull(
+        MIndexRegexProgram.tryCompile(
+            "(ab)\\1", MIndexRegexProgram.Semantics.JDK, 10_000));
+    assertNull(
+        MIndexRegexProgram.tryCompile(
+            "foo$", MIndexRegexProgram.Semantics.JDK, 10_000));
+    assertNull(
+        MIndexRegexProgram.tryCompile(
+            "\\p{Han}+", MIndexRegexProgram.Semantics.RE2, 10_000));
+    assertNull(
+        MIndexRegexProgram.tryCompile(
+            "a{1001}", MIndexRegexProgram.Semantics.RE2, 10_000));
+  }
+
+  @Test
+  void supplementaryInputDelegatesOnlyWhenAnAtomCanConsumeSurrogateUnits() {
+    List<String> transparentExpressions =
+        List.of(
+            "abc",
+            "[a-z]+",
+            "\\d+",
+            "\\w+",
+            "\\s+",
+            "(?:abc|\\d+)+",
+            "a*");
+    List<String> supplementarySamples =
+        List.of(
+            "😀abc",
+            "abc😀",
+            "😀123",
+            "😀 abc",
+            "x😀abc123");
+
+    ExactStringIndexResolver resolver = new ExactStringIndexResolver();
+    for (String expression : transparentExpressions) {
+      MIndexRegexProgram program = MIndexRegexProgram.compile(expression);
+      com.google.re2j.Pattern re2 = com.google.re2j.Pattern.compile(expression);
+      assertFalse(program.mayConsumeSurrogateUnit(), expression);
+      for (String sample : supplementarySamples) {
+        assertTrue(program.supportsInput(sample), expression + " supports String");
+        MIndexString indexed = MIndexString.intern(resolver, 0, sample);
+        assertTrue(program.supportsInput(indexed), expression + " supports MIndexString");
+        assertEquals(
+            re2.matcher(sample).matches(),
+            program.matches(indexed),
+            expression + " matches " + sample);
+        assertEquals(
+            re2.matcher(sample).find(),
+            program.find(indexed),
+            expression + " find " + sample);
+        assertEquals(
+            re2.matcher(sample).lookingAt(),
+            program.lookingAt(indexed),
+            expression + " lookingAt " + sample);
+      }
+    }
+
+    List<String> sensitiveExpressions =
+        List.of(".", "a.", "[^x]+", "\\D+", "[\\uD7FF-\\uE000]");
+    for (String expression : sensitiveExpressions) {
+      MIndexRegexProgram program = MIndexRegexProgram.compile(expression);
+      assertTrue(program.mayConsumeSurrogateUnit(), expression);
+      assertFalse(program.supportsInput("😀"), expression);
+      assertThrows(IllegalArgumentException.class, () -> program.matches("😀"), expression);
+    }
+
+    MIndexHybridRegex hybrid = MIndexHybridRegex.compile(".");
+    assertEquals(MIndexRegexBackend.MINDEX_AUTOMATON, hybrid.backend());
+    assertTrue(hybrid.matches("😀"));
+  }
+
+  @Test
+  void hybridUsesNativeBackendForNoCaptureSubsetAndRe2ForCaptures() {
+    MIndexHybridRegex nativeRegex = MIndexHybridRegex.compile("cat[a-z]+\\d{2,4}");
+    assertEquals(MIndexRegexBackend.MINDEX_AUTOMATON, nativeRegex.backend());
+    assertTrue(nativeRegex.matches("catapult123"));
+    assertTrue(nativeRegex.find("xx catapult123 yy"));
+    assertTrue(nativeRegex.mindexProgramSize() > 0);
+    assertTrue(nativeRegex.mindexPrimitivePayloadBytes() > 0L);
+
+    MIndexHybridRegex captureRegex = MIndexHybridRegex.compile("([a-z]+)-(\\d+)");
+    assertEquals(MIndexRegexBackend.MINDEX_AUTOMATON, captureRegex.backend());
+    assertTrue(captureRegex.matches("name-123"));
+    assertTrue(captureRegex.find("xx name-123 yy"));
+  }
+
+  @Test
+  void mindexStringMatchesPreservesJdkSemanticsWithoutRequiringStringInputCopy() {
+    ExactStringIndexResolver resolver = new ExactStringIndexResolver();
+    List<String> samples = List.of("dogma123", "foo\n", "aa", "😀");
+    List<String> expressions =
+        List.of("(?:dog|cat)[a-z]*\\d{2,4}", "foo$", "(a)\\1", ".");
+
+    for (String sample : samples) {
+      MIndexString indexed = MIndexString.intern(resolver, 0, sample);
+      for (String expression : expressions) {
+        assertEquals(
+            sample.matches(expression),
+            indexed.matches(expression),
+            sample + " / " + expression);
+      }
+    }
+  }
+  private static void generateCorpus(
+      List<String> out, char[] alphabet, StringBuilder value, int remaining) {
+    out.add(value.toString());
+    if (remaining == 0) return;
+    for (char unit : alphabet) {
+      value.append(unit);
+      generateCorpus(out, alphabet, value, remaining - 1);
+      value.setLength(value.length() - 1);
+    }
+  }
+
+  private static String printable(String value) {
+    return value.replace("\n", "\\n");
+  }
+
+}

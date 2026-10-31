@@ -1,0 +1,194 @@
+{
+  "schema": "M3JDK21_STRING_SOURCE_CONCAT_RECEIPT_V1",
+  "status": "SCOPED_CORRECTNESS_PASS_FULL_STRING_HOLD",
+  "product_parent": "a3b398b4a5bd263b09de4b19cdc5c2995abf594a",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "22110800c95821f7799b46207032df8281fa915c",
+  "canonical_pull_request": 13301,
+  "product_pull_request": 1908,
+  "recipe_order": [
+    "m3-string-source-observation-20261026",
+    "m3-string-null-concat-20261026"
+  ],
+  "canonical_records": [
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-string-source-observation-20261026/SOURCE_MANIFEST.json",
+      "sha256": "a12f58091347a51c59b34630421acaefaf60baca90191e7fa00da42cba90fd89"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-string-source-observation-20261026/EVIDENCE.json",
+      "sha256": "a9b043f6f680ccc3887ce8cb8680ae38ffc79f29d2e0aedd30c0e61516bd590d"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-string-source-observation-20261026/CORRECTION_MEMORY.json",
+      "sha256": "e11cc205ab915e3353c14edcd905bfa53847189fa3c0ff469dc72c2ab9987cb0"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-string-null-concat-20261026/SOURCE_MANIFEST.json",
+      "sha256": "91fc26b1f5d43c75f755fd0f76819b61f6a3617eaa9b80f059c21f553dd84239"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-string-null-concat-20261026/TEXT_MANIFEST.json",
+      "sha256": "dcf3a5cdfb6033230487a782c207249d035c08b2d79483d5a010503bad49fab8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-string-null-concat-20261026/EVIDENCE.json",
+      "sha256": "adeeccf82a2d3d323e0138793ad5cbd5f1ffb15ae78a491d0089cac7cb1f0636"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-string-null-concat-20261026/CORRECTION_MEMORY.json",
+      "sha256": "9e5690b108a9a277ce89b19d6353d336133da734eeaf622fa286f4c52f90903b"
+    }
+  ],
+  "final_product_outputs": [
+    {
+      "path": ".github/workflows/m3-regex-collection-superset.yml",
+      "sha256": "e0612defaf95f0d18883f30005be4fb7af3f69e1eb0069aea87633b64382b18a",
+      "git_blob": "c10a92766ae35c17bf95d3fd5a93cc5eeb5d30fa"
+    },
+    {
+      "path": ".github/workflows/mindex-string-backing.yml",
+      "sha256": "9255b8f7412257a4f8955cad6d21e0e07f5b9ebd868b5752aeadedaf85c9145a",
+      "git_blob": "fcdc23621b60b9778a311324eddaf5075d9e2994"
+    },
+    {
+      "path": "m3/runtime-integration/check-m3string-concat-reference-dag.py",
+      "sha256": "d47702f58be8a6cda8fa96b02f79cd30de22fb09c9fd869df3cef100f1f2c54b",
+      "git_blob": "3758d4efaf4843297aee0b9238a549898e8d6f8c"
+    },
+    {
+      "path": "m3/runtime-integration/test_m3string_concat_reference_dag.py",
+      "sha256": "d14e92451af4bdbdbaacabd7a71f26431531c00a9e6b4ab677ea5fe46eda1edc",
+      "git_blob": "a083b6c12697273fd62c1b3d6c654c0d170c580c"
+    },
+    {
+      "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
+      "sha256": "399ae1c9ea8e05008451596bff4ec224ebdcc1c20059648e8a26a72f0c5cd544",
+      "git_blob": "32bb586cb28144accbfb7f1d380a2722b61e7a6d"
+    },
+    {
+      "path": "m3/synexia-import/current-full-borrow/string-source-observation-v3.tsv",
+      "sha256": "9bf825a448b991faed6d829cd6916606eb8e141abb9fbe6cc735e15fd8886578",
+      "git_blob": "4df92868dfe4ebab629a64ff4b293ed6d4aa62ee"
+    },
+    {
+      "path": "m3/synexia-import/current-full-borrow/test_string_phase_successors.py",
+      "sha256": "28bb588e1ff69388aa5a11c7f1bb11498e1b5df5a1c27fd326af2cbea068ad2f",
+      "git_blob": "d03d3cff2a9c4f3de708f1534e66461d229754e7"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java",
+      "sha256": "732c410330a1137aace06d3b20e0e8a86899b4fe98f15c738d588102383c4052",
+      "git_blob": "df9a89bd77ff1a1ecc582a1e41f9ec42758f269a"
+    },
+    {
+      "path": "test/jdk/java/lang/String/M3StringConcatTupleTest.java",
+      "sha256": "3038926c2dc0a9bcfbbcf1698212d02e3283770cd42bb6ad0ab7e6804bd2d39c",
+      "git_blob": "bec1d3f33ee938178c5dbb0db56944c31494d8ba"
+    }
+  ],
+  "qualification": {
+    "openrewrite_tests": 20,
+    "observation_python_tests": 30,
+    "concat_source_gate_tests": 7,
+    "strict_source_image_build": true,
+    "focused_concat_runs_with_jni_checks": 9,
+    "public_protected_api_owners_equal": 3,
+    "native_libjava_libjvm_equal": true,
+    "source_zip_factory_exact": true,
+    "installed_factory_class_exact": true,
+    "broad_string_selection": {
+      "selected": 58,
+      "baseline": {
+        "passed": 47,
+        "failed": 10,
+        "error": 1
+      },
+      "candidate": {
+        "passed": 49,
+        "failed": 8,
+        "error": 1
+      },
+      "improved": [
+        {
+          "path": "java/lang/String/M3StringConcatReferenceDagTest.java",
+          "before": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: null toString conversion",
+          "after": "Passed. Execution successful"
+        },
+        {
+          "path": "java/lang/String/M3StringConcatTupleTest.java",
+          "before": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: combinator (double,boolean,char,String,float,long)String constants [\"constant piece\", \"-\", \"-\", \"\\u03b1\\u03b2\", \"x\", \"constant piece\", \"\"] expected \"constant piece1.0E300-false-\\u907b\\u03b1\\u03b2nullx367861.16constant piece-9223372036854775808\" actual \"constant piece1.0E300-false-\\u907b\\u03b1\\u03b2x367861.16constant piece-9223372036854775808\"",
+          "after": "Passed. Execution successful"
+        }
+      ],
+      "new_failures": [],
+      "remaining": [
+        {
+          "path": "jdk/internal/mindex/M3TokenRegexTest.java",
+          "result": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: symbolic kind regex row",
+          "prior_failed": true
+        },
+        {
+          "path": "java/lang/String/M3StringRegexSplitCurrentTest.java",
+          "result": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: non-empty split result lost M3 storage",
+          "prior_failed": true
+        },
+        {
+          "path": "java/lang/String/M3StringPoolMetadataBoundsTest.java",
+          "result": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: Latin-1 admission refused",
+          "prior_failed": true
+        },
+        {
+          "path": "java/lang/String/M3StringFactsCompositionTest.java",
+          "result": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: pair flat oracle is not a scalar atom: class java.lang.M3StringImmediate",
+          "prior_failed": true
+        },
+        {
+          "path": "java/lang/String/M3StringPoolBoundsTest.java",
+          "result": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: a refused admission leaves the accounting untouched",
+          "prior_failed": true
+        },
+        {
+          "path": "java/lang/String/M3StringConcatLengthOverflowTest.java",
+          "result": "Error. Program `/workspace/scratch/abdb4b1178cf/m3-pass15/build/m3-reconciliation-20261026/images/jdk-string-null-concat/bin/java' timed out (timeout set to 240000ms, elapsed time including timeout handling was 250599ms).",
+          "prior_failed": true
+        },
+        {
+          "path": "java/lang/String/M3StringTokenRegexTest.java",
+          "result": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: large token source native-candidate lane",
+          "prior_failed": true
+        },
+        {
+          "path": "java/lang/String/M3TQSparseContainmentTest.java",
+          "result": "Failed. Compilation failed: Compilation failed",
+          "prior_failed": true
+        },
+        {
+          "path": "java/lang/String/M3StringInternTest.java",
+          "result": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: valueOf/scalar canonical unit owner identity",
+          "prior_failed": true
+        }
+      ],
+      "qualification": "SCOPED_CORRECTNESS_PASS_FULL_STRING_HOLD"
+    },
+    "neighboring_python_gates": {
+      "passed": 9,
+      "failed": 4,
+      "note": "Four preexisting failures retained; corrected concat source gate and seven new tests separately pass."
+    },
+    "independent_review": "No Critical/Important findings; draft only"
+  },
+  "disclosure_scope": "Maintenance of existing public source owners/gates; no private recipes, fixtures or unpublished storage design exported. Original source grants retained.",
+  "phase_promotion": false,
+  "merge_authorized_by_receipt": false,
+  "whole_programme_complete": false,
+  "remaining_gates": [
+    "full JDK/JCK/platform validation",
+    "complete private Maven reactor and historical provenance member closure",
+    "universal performance/resource qualification; no speedup claimed",
+    "prior Pass9/10/13 performance holds remain held",
+    "Eight broader String test failures and one overflow timeout remain.",
+    "Four existing adjacent source gates remain failed; no waiver.",
+    "Hosted validation on this new commit is pending and is distinct from local execution."
+  ]
+}

@@ -1,0 +1,243 @@
+{
+  "scope": "Standalone exact selected-source contract; not full Maven, linked image, or source-built JDK.",
+  "binding": "generated-provider-and-explicit-parser-module",
+  "baseline": false,
+  "sources": [
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/tooling/module-packs/parser-openrewrite/src/main/java/jdk/m3/parser/openrewrite/M3OpenRewriteIngress.java",
+      "bytes": 12103,
+      "sha256": "4f5c229fe0c779a995a939d2f48a7a4c5c68d0aa061558deff2129b23347b01f"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/tooling/module-packs/parser-openrewrite/src/test/java/jdk/m3/parser/openrewrite/test/M3OpenRewriteIngressContract.java",
+      "bytes": 14823,
+      "sha256": "110cd8278056373b4d3e6908ddde012d3e1c9c216ff6db11a5b632d968eef5c7"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar",
+      "bytes": 3392625,
+      "sha256": "d7c07f91ab085a39bf1b40d7f2a7796a52619aaeefeca1481435e685aa663efa"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar",
+      "bytes": 1613246,
+      "sha256": "32a3b27c0eafeb44c776500ae1378efdfb79d490a6afd7b58be07c6c0d6c55ff"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.jar",
+      "bytes": 109302,
+      "sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-xml/8.17.1/rewrite-xml-8.17.1.jar",
+      "bytes": 231353,
+      "sha256": "89e9568e9e48bd2d3fbce5d9d23d1a828a54c97442590f8f77624cafb095785f"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-yaml/8.17.1/rewrite-yaml-8.17.1.jar",
+      "bytes": 245085,
+      "sha256": "0203cc3b08f519975ed2dc2d20091f0b8e0ab20f72016871c05e50feb49e5a13"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar",
+      "bytes": 663613,
+      "sha256": "c350cfdc76c08356f12a60e840f2dbeaeea7540712d58b54becd6c302a86147a"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar",
+      "bytes": 30570,
+      "sha256": "27a770dc7ce50500918bb8c3c0660c98290630ec796b5e3cf6b90f403b3033c6"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar",
+      "bytes": 78480,
+      "sha256": "a4730771e6a495dd3793a42cdb8ce6bddb96c77e15f40c98fd8d9a7ae09e7286"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+      "bytes": 578125,
+      "sha256": "f5f8ef90609e64fec82eb908e497dc7d81b2eb983fe509b870292a193cde4dfb"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar",
+      "bytes": 1637611,
+      "sha256": "baf8a8ebee8f45ef68cdd5e2dd3923b3e296c0937b96ec0b4806aa3a31bccd1d"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar",
+      "bytes": 96079,
+      "sha256": "3767744f2e37e6e672c3a98174e68567907d18ea5c451b203a19e7b0ad934354"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar",
+      "bytes": 10354,
+      "sha256": "9b333e7e69053807f42a9d92fc1e5da405938ecc4683146b8b1eb9c6967fea8e"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar",
+      "bytes": 128295,
+      "sha256": "6281970682a8da3ddbac54bb203c9badf1c26f507f3ecaa48ef10318579bc9ad"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1.jar",
+      "bytes": 324039,
+      "sha256": "e06c6553c1ccc14d36052ec4b0fc6f13b808cf957b5b1dc3f61bf401996ada59"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar",
+      "bytes": 657952,
+      "sha256": "7b96bf3ee68949abb5bc465559ac270e0551596fa34523fddf890ec418dde13c"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apache/commons/commons-text/1.11.0/commons-text-1.11.0.jar",
+      "bytes": 246659,
+      "sha256": "2acf30a070b19163d5a480eae411a281341e870020e3534c6d5d4c8472739e30"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar",
+      "bytes": 562061,
+      "sha256": "5258d9218fc6413f4d14218a5a6e784528e349f60f48883b77de74bb478ebafd"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/xerial/snappy/snappy-java/1.1.10.5/snappy-java-1.1.10.5.jar",
+      "bytes": 2299797,
+      "sha256": "0f3f1857ed33116583f480b4df5c0218836c47bfbc9c6221c0d73f356decf37b"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/io/github/fastfilter/fastfilter/1.0.2/fastfilter-1.0.2.jar",
+      "bytes": 84703,
+      "sha256": "38f8824d07c8c932fa50cc0175f32c0fff2fafb3913cd2f9571ac349c9631149"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/ow2/asm/asm/9.6/asm-9.6.jar",
+      "bytes": 123598,
+      "sha256": "3c6fac2424db3d4a853b669f4e3d1d9c3c552235e19a319673f887083c2303a1"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/ow2/asm/asm-util/9.6/asm-util-9.6.jar",
+      "bytes": 91131,
+      "sha256": "c635a7402f4aa9bf66b2f4230cea62025a0fe1cd63e8729adefc9b1994fac4c3"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar",
+      "bytes": 51935,
+      "sha256": "c43ecf17b539c777e15da7b5b86553b377e2d39a683de6285567d5283888e7ef"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6.jar",
+      "bytes": 34041,
+      "sha256": "d92832d7c37edc07c60e2559ac6118b31d642e337a6671edcb7ba9fae68edbbb"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar",
+      "bytes": 334352,
+      "sha256": "1467931448a0817696ae2805b7b8b20bfb082652bf9c4efaed528930dc49389b"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar",
+      "bytes": 163543,
+      "sha256": "8dcf0381d306c5223cea4c0acb84afd5691ec6eb41e0b6a36dda288a0c7ec4dc"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar",
+      "bytes": 101336,
+      "sha256": "a54bfbb6dcce9298134595b3cd1df961bc732468825f26ee5296f2b5f88c0b99"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar",
+      "bytes": 41125,
+      "sha256": "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0"
+    },
+    {
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar",
+      "bytes": 15333,
+      "sha256": "2f39bed943d624dfa8f4102d0571283a10870b6aa36f197a8a506f147010c10f"
+    }
+  ],
+  "commands": [
+    {
+      "label": "toolchain",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "--version"
+      ],
+      "exit_code": 0,
+      "log": "toolchain.log"
+    },
+    {
+      "label": "describe-parser-module",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "--module-path",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/jdk.m3.parser.jar",
+        "--describe-module",
+        "jdk.m3.parser"
+      ],
+      "exit_code": 0,
+      "log": "describe-parser-module.log"
+    },
+    {
+      "label": "compile",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-proc:none",
+        "-implicit:none",
+        "-sourcepath",
+        "",
+        "--module-path",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/jdk.m3.parser.jar",
+        "--add-modules",
+        "jdk.m3.parser",
+        "-classpath",
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-xml/8.17.1/rewrite-xml-8.17.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-yaml/8.17.1/rewrite-yaml-8.17.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apache/commons/commons-text/1.11.0/commons-text-1.11.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/xerial/snappy/snappy-java/1.1.10.5/snappy-java-1.1.10.5.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/io/github/fastfilter/fastfilter/1.0.2/fastfilter-1.0.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/ow2/asm/asm/9.6/asm-9.6.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/ow2/asm/asm-util/9.6/asm-util-9.6.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar",
+        "-d",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/openrewrite-final/classes",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/tooling/module-packs/parser-openrewrite/src/main/java/jdk/m3/parser/openrewrite/M3OpenRewriteIngress.java",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/tooling/module-packs/parser-openrewrite/src/test/java/jdk/m3/parser/openrewrite/test/M3OpenRewriteIngressContract.java"
+      ],
+      "exit_code": 0,
+      "log": "compile.log"
+    },
+    {
+      "label": "contract",
+      "argv": [
+        "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java",
+        "-ea",
+        "--module-path",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/jdk.m3.parser.jar",
+        "--add-modules",
+        "jdk.m3.parser",
+        "-classpath",
+        "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/openrewrite-final/classes:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-java-21/8.17.1/rewrite-java-21-8.17.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-xml/8.17.1/rewrite-xml-8.17.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/rewrite-yaml/8.17.1/rewrite-yaml-8.17.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/io/micrometer/micrometer-core/1.9.17/micrometer-core-1.9.17.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/dataformat/jackson-dataformat-smile/2.16.1/jackson-dataformat-smile-2.16.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/module/jackson-module-parameter-names/2.16.1/jackson-module-parameter-names-2.16.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.16.1/jackson-datatype-jsr310-2.16.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/antlr/antlr4-runtime/4.11.1/antlr4-runtime-4.11.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apache/commons/commons-lang3/3.14.0/commons-lang3-3.14.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apache/commons/commons-text/1.11.0/commons-text-1.11.0.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/io/github/classgraph/classgraph/4.8.165/classgraph-4.8.165.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/xerial/snappy/snappy-java/1.1.10.5/snappy-java-1.1.10.5.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/io/github/fastfilter/fastfilter/1.0.2/fastfilter-1.0.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/ow2/asm/asm/9.6/asm-9.6.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/ow2/asm/asm-util/9.6/asm-util-9.6.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/ow2/asm/asm-analysis/9.6/asm-analysis-9.6.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/openrewrite/tools/java-object-diff/1.0.1/java-object-diff-1.0.1.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/io/quarkus/gizmo/gizmo/1.0.11.Final/gizmo-1.0.11.Final.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-simple/1.7.36/slf4j-simple-1.7.36.jar",
+        "jdk.m3.parser.openrewrite.test.M3OpenRewriteIngressContract"
+      ],
+      "exit_code": 0,
+      "log": "contract.log"
+    }
+  ],
+  "started_utc": "2026-10-20T13:58:56Z",
+  "receiving_root": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver",
+  "parser_jar": {
+    "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/jdk.m3.parser.jar",
+    "bytes": 132730,
+    "sha256": "28cb413a3c3b9e5777651e255b1b2f9b26c6910c04edcbe564dbcd06874e6289"
+  },
+  "reference_receipt": {
+    "path": "/workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/openrewrite/candidate3/RESULTS.json",
+    "bytes": 17442,
+    "sha256": "24fd7e43ae490f086aa296215a057b52b314c91420138acee985a2ce38a054e2"
+  },
+  "parser_source_compilation": false,
+  "sources_unchanged": true,
+  "dependencies_unchanged": true,
+  "parser_and_reference_unchanged": true,
+  "exit_code": 0,
+  "status": "PASS",
+  "finished_utc": "2026-10-20T13:59:01Z"
+}

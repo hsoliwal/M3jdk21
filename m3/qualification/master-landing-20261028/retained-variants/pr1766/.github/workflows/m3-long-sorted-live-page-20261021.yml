@@ -1,0 +1,24 @@
+name: M3JDK21 live sorted filtered viewport page
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongSortedViews.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongSortedPageContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongSortedPageTest.java'
+      - 'm3/collections/qualification/viewport-frame-20261021/**'
+      - '.github/workflows/m3-long-sorted-live-page-20261021.yml'
+  workflow_dispatch:
+jobs:
+  focused:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Original M3JDK21 sorted source Maven qualification
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3LongSortedPageTest test

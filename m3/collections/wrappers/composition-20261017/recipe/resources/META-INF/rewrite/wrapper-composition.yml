@@ -1,0 +1,24 @@
+# Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.WrapperComposition20261017
+displayName: Add staged admission to the stored-representative wrappers
+description: Preserve both previously independent wrapper fixes using exact predecessor seals.
+recipeList:
+  - com.synexia.rewrite.M3WrapperCompositionRecipe:
+      predecessor: representative
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.WrapperCompositionFromBatch20261017
+displayName: Add stored representatives to the staged-admission wrappers
+description: Qualify the inverse source state without weakening either historical manifest.
+recipeList:
+  - com.synexia.rewrite.M3WrapperCompositionRecipe:
+      predecessor: batch
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.WrapperCompositionWorkflow20261017
+displayName: Qualify the composed wrappers in their existing workflow
+description: Retain historical input seals and verify the exact SDK-generated successor and inherited Java and JNI contracts.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: wrapper-composition-workflow-20261017

@@ -1,0 +1,31 @@
+{
+  "source_commit": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "baseline_main_sources": 270,
+  "commands": [
+    {
+      "gate": "BASELINE_COMPILE",
+      "exit": 0,
+      "log": "evidence/BASELINE_COMPILE.log",
+      "sha256": "6c7b06bca6aa5c20f464ef217003b4e5c1b6d1131e7c93dcc37518b8c5b6f7a2"
+    },
+    {
+      "gate": "BASELINE_ENDPOINT_COMPILE",
+      "exit": 0,
+      "log": "evidence/BASELINE_ENDPOINT_COMPILE.log",
+      "sha256": "c9e750cb18668de618eb59b3201ac9cda71ca7c3d71c63542e9077471348ab4a"
+    },
+    {
+      "gate": "BASELINE_ENDPOINT_PRIVATE",
+      "exit": 1,
+      "log": "evidence/BASELINE_ENDPOINT_PRIVATE.log",
+      "sha256": "996881961667ddf64daec46c8af81a53aba0b2d5d0b6af9fb0eb64b03f221ff9"
+    },
+    {
+      "gate": "BASELINE_ENDPOINT_FACADE",
+      "exit": 1,
+      "log": "evidence/BASELINE_ENDPOINT_FACADE.log",
+      "sha256": "1573f5f40170680a3219157ed0bee411a0d30e2014c9c21ff04fc915041e3b54"
+    }
+  ],
+  "interpretation": "Source compilation must pass; donor strict endpoint regression is expected to expose original owner failure."
+}

@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "production_sources": 268,
+  "original_baseline_main_compilation": "PASS",
+  "current_strict_sequenced_counterexample": "REPRODUCED_NSEE_INSTEAD_OF_UOE",
+  "differential_control": "ONLY_M3FilteredViews_STRICT_SEQUENCED_OVERRIDES_RESTORED",
+  "unchanged_existing_standalone_contracts": 21,
+  "public_descriptors": "IDENTICAL",
+  "generated_jni_headers": "IDENTICAL",
+  "native": "REAL_REQUIRED_CHECKED_JNI_UBSAN",
+  "baseline_mutation_counterexample": "REPRODUCED",
+  "recipe_execution": "SEPARATE_GATE",
+  "current_upstream_key_mask_and_entry_fixes": "PRESERVED_UNCHANGED",
+  "unsigned_mask_boundary": "INDEPENDENT_TRUTH_TABLE_AND_CURRENT_UNCHANGED_CONTRACT",
+  "source_kind": "ACTUAL_SDK_EMITTED",
+  "commands": 88
+}

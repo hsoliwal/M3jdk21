@@ -1,0 +1,38 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1/prepare_package.py",
+    "--proof",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/evidence/producer-v1",
+    "--semantic-result",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/evidence/phc-semantic-v2/RESULT.json",
+    "--semantic-inputs",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/semantic-selection-v1/SEMANTIC-SELECTION.json",
+    "--receiving-result",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed/primary-observation-v1/RESULT.json",
+    "--receiving-inputs",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/receiving-selection-v1/RECEIVING-SELECTION.json"
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/packaging-authoring-v1",
+  "environment": {
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "PATH": "/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "id": "select",
+  "timeoutSeconds": 300,
+  "startedAt": "2026-10-06T10:14:39.992631+00:00",
+  "endedAt": "2026-10-06T10:14:43.974661+00:00",
+  "exitCode": 0,
+  "stdout": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/root-packaging-v1/select.stdout.log",
+    "sha256": "abcbcd2c3dafda151a020342c0f81b81a1bb1fc23b988641216d5cbf4e83c19b",
+    "bytes": 803
+  },
+  "stderr": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-pattern-hidden-c0/root-packaging-v1/select.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  }
+}

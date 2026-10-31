@@ -1,0 +1,1341 @@
+{
+  "artifact": "commons-codec",
+  "automatic_module_name": "org.apache.commons.codec",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "synexia-common (synexia-bom)",
+  "coordinate": "commons-codec:commons-codec:1.17.1-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "commons-codec-1.17.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/META-INF/LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "META-INF/LICENSE.txt"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "2cb7680d18c58f68ee46c3b3d2d2a474a943db186e94e69311d7d303c66c815b",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/META-INF/NOTICE.txt",
+      "sha256": "fc5bececcc4708ba23267644c1dbca212cfb015f21713f8080f99e441592d2e2",
+      "upstream": "META-INF/NOTICE.txt"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/upstream-excluded/META-INF/maven/commons-codec/commons-codec/pom.properties",
+      "sha256": "547810993812788c102be4037f5940e1965d26f0c9507e3ffe690ed3b18a8b3b",
+      "upstream": "META-INF/maven/commons-codec/commons-codec/pom.properties"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/upstream-excluded/META-INF/maven/commons-codec/commons-codec/pom.xml",
+      "sha256": "7fa0db4d8150daf932958b8aea89ee24abb4d18e2316a5de535278fc131512a0",
+      "upstream": "META-INF/maven/commons-codec/commons-codec/pom.xml"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/BinaryDecoder.java",
+      "sha256": "cd00573287b6b70b87fd5d8de193ba167267892d3fad70e4fea811432dc0158d",
+      "upstream": "org/apache/commons/codec/BinaryDecoder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/BinaryEncoder.java",
+      "sha256": "45844266221693ed61e4f3b5c3678e5d22b0243ce7e6495696ae14fa0e120fbe",
+      "upstream": "org/apache/commons/codec/BinaryEncoder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/CharEncoding.java",
+      "sha256": "4d8e9434cdd94a8781ecc173ff83c472aaebd3cd3e3748c4132a9569f698a29c",
+      "upstream": "org/apache/commons/codec/CharEncoding.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/Charsets.java",
+      "sha256": "008cea01f6cdcc7f6b5c89e9cc7667d6eab91996aa6bb47ee7b45549d47ee074",
+      "upstream": "org/apache/commons/codec/Charsets.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/CodecPolicy.java",
+      "sha256": "29b028ecd0dbc999af6bb5ceef33215c74d8d454681d675079f2c60b435ef608",
+      "upstream": "org/apache/commons/codec/CodecPolicy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/Decoder.java",
+      "sha256": "6ef7cdeebf42b22b4b7d76012b11def2a13b6c92cef6a8ef33ed52854ce65e99",
+      "upstream": "org/apache/commons/codec/Decoder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/DecoderException.java",
+      "sha256": "856666e789ef1b2b62860e9e47a5f99cc079d66cf98c9cc3e05da5bef8aed4d8",
+      "upstream": "org/apache/commons/codec/DecoderException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/Encoder.java",
+      "sha256": "22675a7b9594a975b3f544fb7c91cc65af93c84ac739142626b8c842cf7c9f08",
+      "upstream": "org/apache/commons/codec/Encoder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/EncoderException.java",
+      "sha256": "3d17d5822ff2646eee472c6f3c4db661fd676d8e7139bf0c5fd7be5b3a0d7145",
+      "upstream": "org/apache/commons/codec/EncoderException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/Resources.java",
+      "sha256": "e62bd5126eef1b0fe4ab05d7422fe82a216c0d51dd19a46baa2903341a286759",
+      "upstream": "org/apache/commons/codec/Resources.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/StringDecoder.java",
+      "sha256": "266f9054665e5d674ea8fcb96b17b74858ca85400bdcca4eea096b1327ef8e10",
+      "upstream": "org/apache/commons/codec/StringDecoder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/StringEncoder.java",
+      "sha256": "64dd32ffb3ae2abdb15eb69b6c53bca7de4180e544f0ce43b6c39c0750c35787",
+      "upstream": "org/apache/commons/codec/StringEncoder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/StringEncoderComparator.java",
+      "sha256": "09d683a93529e5df6e58856770859b4dc17704a38124243f6a9c85942cdb5510",
+      "upstream": "org/apache/commons/codec/StringEncoderComparator.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/Base16.java",
+      "sha256": "445d6ef35d69f418bdc3765045f029b0aa42d10aeebc4039fd2d993b03b4971b",
+      "upstream": "org/apache/commons/codec/binary/Base16.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/Base16InputStream.java",
+      "sha256": "d7055cf1f807a45f3db8a32cf207a84cbca2c6b6457a0cb34d5e9bec676db469",
+      "upstream": "org/apache/commons/codec/binary/Base16InputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/Base16OutputStream.java",
+      "sha256": "f3be06f30bfeaa862f42a0169e2e259eb0527670e4d4647dddb6e64d736d45ff",
+      "upstream": "org/apache/commons/codec/binary/Base16OutputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/Base32.java",
+      "sha256": "e36d2c8f55c802660ae1c0ea3ff71fb295872a8533432128b4f252479883973c",
+      "upstream": "org/apache/commons/codec/binary/Base32.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/Base32InputStream.java",
+      "sha256": "a009a072a2ab92073ea2c0ba888ba3304e9eb5416e898c021e18e1ead4848b82",
+      "upstream": "org/apache/commons/codec/binary/Base32InputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/Base32OutputStream.java",
+      "sha256": "a0d177c03edf6d4a6617440db3fad38a181b8b95f3ee4f2eab722cbccff5693e",
+      "upstream": "org/apache/commons/codec/binary/Base32OutputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/Base64.java",
+      "sha256": "facf066e4a89ddece159e7eeb97dba295a37a46352e708b342fc322a29e84360",
+      "upstream": "org/apache/commons/codec/binary/Base64.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/Base64InputStream.java",
+      "sha256": "75d5b55aa51aa08fd70c1837144ffa35a0f7ac13f812c2b810f50ecf7f9bb934",
+      "upstream": "org/apache/commons/codec/binary/Base64InputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/Base64OutputStream.java",
+      "sha256": "f9a2b235888d014442981599dbe595d677ee63b56b668883e88fb4d67237d463",
+      "upstream": "org/apache/commons/codec/binary/Base64OutputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/BaseNCodec.java",
+      "sha256": "33c6e7d09204e2fe91fff64a95c22a9d0bae9495ec30b85c948758b87e329542",
+      "upstream": "org/apache/commons/codec/binary/BaseNCodec.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/BaseNCodecInputStream.java",
+      "sha256": "1c191d2dc2c5c4fe8d585ddf010180feaafd4e8d7b932c52d1ec477209d2659a",
+      "upstream": "org/apache/commons/codec/binary/BaseNCodecInputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/BaseNCodecOutputStream.java",
+      "sha256": "33989b62b5adc10d9f3a80024e5a1f497517da20928568b18df01b7406a767a3",
+      "upstream": "org/apache/commons/codec/binary/BaseNCodecOutputStream.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/BinaryCodec.java",
+      "sha256": "7ad96e05075d0e2cf264af28e97afc35af3e440bb8f1ff29d2b8f011749cbf3d",
+      "upstream": "org/apache/commons/codec/binary/BinaryCodec.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/CharSequenceUtils.java",
+      "sha256": "978903e3b11c2f1a9031c4399d3d70e7a9a07a82bfcd22ba2b2e0075c5a11f3f",
+      "upstream": "org/apache/commons/codec/binary/CharSequenceUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/Hex.java",
+      "sha256": "97a9f5c495ce77aaf9ba8eda93c03873c29b48e9bada2ababb5a2d11a9e346b6",
+      "upstream": "org/apache/commons/codec/binary/Hex.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/StringUtils.java",
+      "sha256": "b0cf0da8589c62f40e27f1d88c66bf36a0454122c42554ccb26fbbd7e022c7d3",
+      "upstream": "org/apache/commons/codec/binary/StringUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/binary/package-info.java",
+      "sha256": "fd93fc31fcb236e324ae0f120a273ffda11fb0efbe715f46b532ad0bd36207df",
+      "upstream": "org/apache/commons/codec/binary/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/cli/Digest.java",
+      "sha256": "0aa20eddaac764488416dee7a8882c4466606740bbeefd3ce940b85ef248270c",
+      "upstream": "org/apache/commons/codec/cli/Digest.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/cli/package-info.java",
+      "sha256": "7cbc9f08136f8bbae5d991b80108c070a6a39937406599ce370c554ee2aa3d88",
+      "upstream": "org/apache/commons/codec/cli/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/B64.java",
+      "sha256": "989d9e2d6dc9c864c5f3e73ce505657e351bb75979aa2813bf4caa0e6eaf903d",
+      "upstream": "org/apache/commons/codec/digest/B64.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/Blake3.java",
+      "sha256": "a787b7e60ed893c0a9066fca24bb4876c4aaed673b98d35ee1cd74160159158e",
+      "upstream": "org/apache/commons/codec/digest/Blake3.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/Crypt.java",
+      "sha256": "bd4e9478c62d902b76c304f9e80fa16dcfe9c6123813dc7d98fdc6be0bddd682",
+      "upstream": "org/apache/commons/codec/digest/Crypt.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/DigestUtils.java",
+      "sha256": "0c243b2a365509f67e7e8e7255c89c373e41cbe1f75749a1cb147e7470023c0f",
+      "upstream": "org/apache/commons/codec/digest/DigestUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/HmacAlgorithms.java",
+      "sha256": "240cf4e16afa01ff210162d226bbfae8599916c634a376f13614057087642920",
+      "upstream": "org/apache/commons/codec/digest/HmacAlgorithms.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/HmacUtils.java",
+      "sha256": "0e82fadbc0537878529f2a741b1c38ad42ffcbec19e14a6546f14756444772b6",
+      "upstream": "org/apache/commons/codec/digest/HmacUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/Md5Crypt.java",
+      "sha256": "5bf90e470542a64834b7a4c25b047f0ab1813ef48d681d57beb9828085473ead",
+      "upstream": "org/apache/commons/codec/digest/Md5Crypt.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/MessageDigestAlgorithms.java",
+      "sha256": "ad3c5ca1bb55b49721fb44d74539b63f6c170fa96db7af54886669136e175be6",
+      "upstream": "org/apache/commons/codec/digest/MessageDigestAlgorithms.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/MurmurHash2.java",
+      "sha256": "ccb7bdc33d17d82220dcc53ef9d4aa68269450f302bbecb69b508bb3e6c09c80",
+      "upstream": "org/apache/commons/codec/digest/MurmurHash2.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/MurmurHash3.java",
+      "sha256": "56a91d9cd9a7560db888349f22a984d9b8f341df7656a7efd8863ffdb0f9203e",
+      "upstream": "org/apache/commons/codec/digest/MurmurHash3.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/PureJavaCrc32.java",
+      "sha256": "c79b6539ba30914edb0df377ff30edc17dffc362f485ac618e932d218a8542e7",
+      "upstream": "org/apache/commons/codec/digest/PureJavaCrc32.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/PureJavaCrc32C.java",
+      "sha256": "b36d35c67d976d9f3ea394482238613ef1139934f173482b3f80d4a27e493059",
+      "upstream": "org/apache/commons/codec/digest/PureJavaCrc32C.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/Sha2Crypt.java",
+      "sha256": "e72f1f53226f33fd66fe1dea019d323ef51cb4f50929fb441307de202e71f55e",
+      "upstream": "org/apache/commons/codec/digest/Sha2Crypt.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/UnixCrypt.java",
+      "sha256": "7bbe1abcd425eccbf1706b363a3c9c6898e1f3caf6244b59f9fb5017874419ac",
+      "upstream": "org/apache/commons/codec/digest/UnixCrypt.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/XXHash32.java",
+      "sha256": "55db80471de739753976c8e235f57f2d32d1f278a6237cf9a4f9a44f6b88179e",
+      "upstream": "org/apache/commons/codec/digest/XXHash32.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/digest/package-info.java",
+      "sha256": "80da99ab3e0c8a4e8276423dbe0e88ced9aca236c57734bd15e54d6c5a7f33a7",
+      "upstream": "org/apache/commons/codec/digest/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/AbstractCaverphone.java",
+      "sha256": "ac813b69f2113a118f6fbced85e7ed9101bd2f6150c7e2568b05c7df28200718",
+      "upstream": "org/apache/commons/codec/language/AbstractCaverphone.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/Caverphone.java",
+      "sha256": "c5e72117eb6201d272055931ed0b364caed594fe36bdb91dca5b8bebbb4a1f6d",
+      "upstream": "org/apache/commons/codec/language/Caverphone.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/Caverphone1.java",
+      "sha256": "eb11ac49b73b4488f8f58ed73cfbb859b9332f2fca362f1f075d079d4133b4d8",
+      "upstream": "org/apache/commons/codec/language/Caverphone1.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/Caverphone2.java",
+      "sha256": "f174973e1a98e53e731b85daaa505154a3f04ac5c43c22f1c099dbe4d1ad2b6d",
+      "upstream": "org/apache/commons/codec/language/Caverphone2.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/ColognePhonetic.java",
+      "sha256": "09c82bd7bbf95609f7688b90c851cad361dc2603353374f27bee089ff69ccc2a",
+      "upstream": "org/apache/commons/codec/language/ColognePhonetic.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/DaitchMokotoffSoundex.java",
+      "sha256": "89d9d14571fd2ddd48f2c9faaab7ac4d1ae745fc01c74b272c28313586fcb541",
+      "upstream": "org/apache/commons/codec/language/DaitchMokotoffSoundex.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java",
+      "sha256": "a5042a5f495483a9576e8d8ed2208a7b0f0b7594992ab076a9d92870fb23bda0",
+      "upstream": "org/apache/commons/codec/language/DoubleMetaphone.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/MatchRatingApproachEncoder.java",
+      "sha256": "2b5582efb959f8d6f325bc6c17430a9a5922a84b60fb0f22ca194d7882673214",
+      "upstream": "org/apache/commons/codec/language/MatchRatingApproachEncoder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/Metaphone.java",
+      "sha256": "915ada6fccf8a392a58410b0e0d359270a8fe2d61a7bda27b6747b1921803234",
+      "upstream": "org/apache/commons/codec/language/Metaphone.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/Nysiis.java",
+      "sha256": "ce5d89775c40983d6eb11321a05151c1046dccd5c6c0840b3be56c483e95bc8b",
+      "upstream": "org/apache/commons/codec/language/Nysiis.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/RefinedSoundex.java",
+      "sha256": "6cb5a25baff4008147756016cd2125a0a2c675d084c81cda45f8ae77c5a7bf80",
+      "upstream": "org/apache/commons/codec/language/RefinedSoundex.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/Soundex.java",
+      "sha256": "650a1ce8a5bdaa5dddb473c131fa7c63cd531a8263f26670bf0fa00a1abbf5a9",
+      "upstream": "org/apache/commons/codec/language/Soundex.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/SoundexUtils.java",
+      "sha256": "ba0ea7ea0969a027e752537c687241df391f11e3c4c593851210bd14e2992404",
+      "upstream": "org/apache/commons/codec/language/SoundexUtils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/bm/BeiderMorseEncoder.java",
+      "sha256": "888c8e178422b055a0c288137641225cf475d8e34e3ca956d74cc1a97a66a851",
+      "upstream": "org/apache/commons/codec/language/bm/BeiderMorseEncoder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/bm/Lang.java",
+      "sha256": "d9bd107f5dd72ede692349877d48d44c90322254eecf607f2376c5434dbf1f5c",
+      "upstream": "org/apache/commons/codec/language/bm/Lang.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/bm/Languages.java",
+      "sha256": "820864fcd90c5ead3b545a9d160c87bd0476cd7db3ddabe0556cc746121c5644",
+      "upstream": "org/apache/commons/codec/language/bm/Languages.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/bm/NameType.java",
+      "sha256": "7ab0dbe1eab51052ff7596da600d39ea951c3d16ecd0afe684cab0a84a37d156",
+      "upstream": "org/apache/commons/codec/language/bm/NameType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/bm/PhoneticEngine.java",
+      "sha256": "3a1483fc25c01340c0c46709b679bff1f6c15014feef4b9332da0997776e51c9",
+      "upstream": "org/apache/commons/codec/language/bm/PhoneticEngine.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/bm/ResourceConstants.java",
+      "sha256": "c26f0dc8b5f0c851ce42b40502c6335a6d675c6fafd424031a9dbcdf6d709423",
+      "upstream": "org/apache/commons/codec/language/bm/ResourceConstants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/bm/Rule.java",
+      "sha256": "d78ae9b113bf73864426e84071fabb1170469d552dd595066d1f08fbe11e777c",
+      "upstream": "org/apache/commons/codec/language/bm/Rule.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/bm/RuleType.java",
+      "sha256": "c8feef2e52ad83d5605d9148e1b586145e75b1f590dd8c3399760b6681644f69",
+      "upstream": "org/apache/commons/codec/language/bm/RuleType.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_approx_any.txt",
+      "sha256": "ad6c75e0e50b51f807d73a3d3ef46a6f666a891cb4953cc357a5d305e61e30ab",
+      "upstream": "org/apache/commons/codec/language/bm/ash_approx_any.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_approx_common.txt",
+      "sha256": "da5b7febc70f860f91bcccca37c29a619a23442cc80b9cd98ad884e16d6c9854",
+      "upstream": "org/apache/commons/codec/language/bm/ash_approx_common.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_approx_cyrillic.txt",
+      "sha256": "a29917ea4c00bdd216db31d36205ef3829d0fb76926d189fcd8260d3700d4c57",
+      "upstream": "org/apache/commons/codec/language/bm/ash_approx_cyrillic.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_approx_english.txt",
+      "sha256": "53739bd27868292338606ef7a1fd209b6253d35e94d7a4afb031769498d60d64",
+      "upstream": "org/apache/commons/codec/language/bm/ash_approx_english.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_approx_french.txt",
+      "sha256": "19650e4ab69678bb849028900e4c2e867f75229c4447a0fcbf5a5bd6b3bd69c3",
+      "upstream": "org/apache/commons/codec/language/bm/ash_approx_french.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_approx_german.txt",
+      "sha256": "cfc7c1ef41209af89b676ba46a183060b93dedcab1e7d730f6253f48f5af0ea9",
+      "upstream": "org/apache/commons/codec/language/bm/ash_approx_german.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_approx_hebrew.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/ash_approx_hebrew.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_approx_hungarian.txt",
+      "sha256": "6bd249910726949afa4e5a9623ec3999151c3ef43843714a90003cfb11350309",
+      "upstream": "org/apache/commons/codec/language/bm/ash_approx_hungarian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_approx_polish.txt",
+      "sha256": "5f56627d50d4ef0e3c8c76225d3e72fd95c8c90ae629d65d32f202f792d5912a",
+      "upstream": "org/apache/commons/codec/language/bm/ash_approx_polish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_approx_romanian.txt",
+      "sha256": "900bcb8b852ce9738f85efacda91bbcaf0192d662f2fa996ebbe34e115801736",
+      "upstream": "org/apache/commons/codec/language/bm/ash_approx_romanian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_approx_russian.txt",
+      "sha256": "b908b81325099091067ecbaab232db0215b61ebd6899d0f7d989a013363a7cb3",
+      "upstream": "org/apache/commons/codec/language/bm/ash_approx_russian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_approx_spanish.txt",
+      "sha256": "6bd249910726949afa4e5a9623ec3999151c3ef43843714a90003cfb11350309",
+      "upstream": "org/apache/commons/codec/language/bm/ash_approx_spanish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_exact_any.txt",
+      "sha256": "bc6b6b423e6af997ce45348e17f3a0d6a18617cfe67b50bdb501cc97258c3d35",
+      "upstream": "org/apache/commons/codec/language/bm/ash_exact_any.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_exact_approx_common.txt",
+      "sha256": "a1f947e071423aa5c24360484f85b7139f7a3ffe77d2089e367ca152743d1a19",
+      "upstream": "org/apache/commons/codec/language/bm/ash_exact_approx_common.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_exact_common.txt",
+      "sha256": "fc3558377839a10375bb40146d9d12ec9b37487223023cc0769946aed24f352f",
+      "upstream": "org/apache/commons/codec/language/bm/ash_exact_common.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_exact_cyrillic.txt",
+      "sha256": "265d93b530f2f0b3b2b602afda6e912370c0b01c06df4a2987119f6320bffb44",
+      "upstream": "org/apache/commons/codec/language/bm/ash_exact_cyrillic.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_exact_english.txt",
+      "sha256": "265d93b530f2f0b3b2b602afda6e912370c0b01c06df4a2987119f6320bffb44",
+      "upstream": "org/apache/commons/codec/language/bm/ash_exact_english.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_exact_french.txt",
+      "sha256": "265d93b530f2f0b3b2b602afda6e912370c0b01c06df4a2987119f6320bffb44",
+      "upstream": "org/apache/commons/codec/language/bm/ash_exact_french.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_exact_german.txt",
+      "sha256": "32674f342f7c8b73fe831f46b0537df0a2b9d43c45fcded7617ddf28495c0e2a",
+      "upstream": "org/apache/commons/codec/language/bm/ash_exact_german.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_exact_hebrew.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/ash_exact_hebrew.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_exact_hungarian.txt",
+      "sha256": "265d93b530f2f0b3b2b602afda6e912370c0b01c06df4a2987119f6320bffb44",
+      "upstream": "org/apache/commons/codec/language/bm/ash_exact_hungarian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_exact_polish.txt",
+      "sha256": "d04d6e8ea4ed593f478fe1ff150a1f57ac30557c13f9f019fcf2b1658b6ff49e",
+      "upstream": "org/apache/commons/codec/language/bm/ash_exact_polish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_exact_romanian.txt",
+      "sha256": "265d93b530f2f0b3b2b602afda6e912370c0b01c06df4a2987119f6320bffb44",
+      "upstream": "org/apache/commons/codec/language/bm/ash_exact_romanian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_exact_russian.txt",
+      "sha256": "34bfa509511f7517a628330cca7c5e51464ab4eef953834054f684d02e11ffc7",
+      "upstream": "org/apache/commons/codec/language/bm/ash_exact_russian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_exact_spanish.txt",
+      "sha256": "265d93b530f2f0b3b2b602afda6e912370c0b01c06df4a2987119f6320bffb44",
+      "upstream": "org/apache/commons/codec/language/bm/ash_exact_spanish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_hebrew_common.txt",
+      "sha256": "ad11a0f537e90b0893e8624e0c997dd8e2ece13dfe8b90b366d3a773f829bee5",
+      "upstream": "org/apache/commons/codec/language/bm/ash_hebrew_common.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_lang.txt",
+      "sha256": "93bc49f227498c3151f4f132363256429e700eece2b72e3d3bc5b7fd857cc22a",
+      "upstream": "org/apache/commons/codec/language/bm/ash_lang.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_languages.txt",
+      "sha256": "ee736888a0725497a11c74cca309ee21d520d5ad64b5541250e8f1da9138fe97",
+      "upstream": "org/apache/commons/codec/language/bm/ash_languages.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_rules_any.txt",
+      "sha256": "bdb60c3901ab057f4c94b384b302a0bdd7a6012ac07cf4edb87bd37b9283d17b",
+      "upstream": "org/apache/commons/codec/language/bm/ash_rules_any.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_rules_cyrillic.txt",
+      "sha256": "361bc87691da6bfda59ff416ce61c922aae811944669fd05f537ac629eefed84",
+      "upstream": "org/apache/commons/codec/language/bm/ash_rules_cyrillic.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_rules_english.txt",
+      "sha256": "7c28986e7dc911d8798ebe9f26b93d0487e632482fc5348363cd8ef94dac1a5e",
+      "upstream": "org/apache/commons/codec/language/bm/ash_rules_english.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_rules_french.txt",
+      "sha256": "234f4b1eeacea6c814af4494c155799c21387f2b3ce61c47f0f5e90e9592802a",
+      "upstream": "org/apache/commons/codec/language/bm/ash_rules_french.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_rules_german.txt",
+      "sha256": "00b0a4baf27ff74f992f39ff875df7b694efe7218f228734695b4b0817575758",
+      "upstream": "org/apache/commons/codec/language/bm/ash_rules_german.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_rules_hebrew.txt",
+      "sha256": "1e36828bd90a0721b6513f6f687eac503dc8c1a37824ae6e6d8d496344620194",
+      "upstream": "org/apache/commons/codec/language/bm/ash_rules_hebrew.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_rules_hungarian.txt",
+      "sha256": "a247af30ac47cbaa87cc9458fe33a9fa101424d77565c7ca012b4e8b923a369d",
+      "upstream": "org/apache/commons/codec/language/bm/ash_rules_hungarian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_rules_polish.txt",
+      "sha256": "047bf7630b038e180ac407dc6bedb45ebbc42c01a7c9be7b17845c4e9b15f250",
+      "upstream": "org/apache/commons/codec/language/bm/ash_rules_polish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_rules_romanian.txt",
+      "sha256": "212f03c2a1c539a08d4664107b107bddced3a461b6d5362335c0c1039dd88d7c",
+      "upstream": "org/apache/commons/codec/language/bm/ash_rules_romanian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_rules_russian.txt",
+      "sha256": "9d9904d23ec6031ff620967766cf72a06f5aa9ac958ebc9ab6c4956a19c2c76b",
+      "upstream": "org/apache/commons/codec/language/bm/ash_rules_russian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/ash_rules_spanish.txt",
+      "sha256": "c9e410a8a5c0965b39e39362a904bd107239bbfe0176348e003423e5e4812aa0",
+      "upstream": "org/apache/commons/codec/language/bm/ash_rules_spanish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_any.txt",
+      "sha256": "a72bbd45de8a31aa3ceaaa06513896c4abb59bc76ef945811a3edc63b55451d4",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_any.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_arabic.txt",
+      "sha256": "838a47e6f968189a4a882b82220654ca219450956d2cf0ae0336d342894c598f",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_arabic.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_common.txt",
+      "sha256": "edf03e4f49c343d45b63ea9c3d470b6baf95a3688c5723ad1e85bdfb860e3314",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_common.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_cyrillic.txt",
+      "sha256": "f9a750d48156d8e8e1d94c8ed34dbf596c24efe945123d6e808af069dee2599a",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_cyrillic.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_czech.txt",
+      "sha256": "e52b12a250fa593f99ca8a06e02b18a091518a1e6b66fd496e78a7db3888cc43",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_czech.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_dutch.txt",
+      "sha256": "e52b12a250fa593f99ca8a06e02b18a091518a1e6b66fd496e78a7db3888cc43",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_dutch.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_english.txt",
+      "sha256": "53739bd27868292338606ef7a1fd209b6253d35e94d7a4afb031769498d60d64",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_english.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_french.txt",
+      "sha256": "1d9d34f64e5d8d3009749d9d818c0583463ee89f08c0f7d2b0544a4316acad47",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_french.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_german.txt",
+      "sha256": "4330f43e087759d3616b02eb362074aed94698cb4d4f848a6e58f2532c5b0aeb",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_german.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_greek.txt",
+      "sha256": "e52b12a250fa593f99ca8a06e02b18a091518a1e6b66fd496e78a7db3888cc43",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_greek.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_greeklatin.txt",
+      "sha256": "dffa002d397f85134af0350cc2fa75f1eddfd75a2a18be5a5761e3c80781f12e",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_greeklatin.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_hebrew.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_hebrew.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_hungarian.txt",
+      "sha256": "f827f54af6560a4c6d615618433457e1c9dc06c78c7683dee6d4187cdbcd8c83",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_hungarian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_italian.txt",
+      "sha256": "f827f54af6560a4c6d615618433457e1c9dc06c78c7683dee6d4187cdbcd8c83",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_italian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_polish.txt",
+      "sha256": "d062343f0330e121c684e3e6943f7775855c78e965b043a839a4dba87336d4d8",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_polish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_portuguese.txt",
+      "sha256": "e52b12a250fa593f99ca8a06e02b18a091518a1e6b66fd496e78a7db3888cc43",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_portuguese.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_romanian.txt",
+      "sha256": "4e35dd86b22d8d011287b19aba8b1d4af9e8c63ebdf27d0899e8d9edf4d4b1ed",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_romanian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_russian.txt",
+      "sha256": "15e71e33faf7bb4558fd3f64ec9e38111bb04852343bc4a89b09ae127279caf0",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_russian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_spanish.txt",
+      "sha256": "ca9391f883011b749197fbbc79776777d957dd5f55749d9a600c1d229f80b8df",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_spanish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_approx_turkish.txt",
+      "sha256": "e52b12a250fa593f99ca8a06e02b18a091518a1e6b66fd496e78a7db3888cc43",
+      "upstream": "org/apache/commons/codec/language/bm/gen_approx_turkish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_any.txt",
+      "sha256": "cf8da3ee51d478dce1ff6fa1ccef2f65411308d47703f920423cc1172266623e",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_any.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_approx_common.txt",
+      "sha256": "948f6d4355ac74011cccd7bd54ec3bce4a29ea26c5d4518f019cdc1dcef27285",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_approx_common.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_arabic.txt",
+      "sha256": "891a20110c50fd5dd6c34ba71c11207e2e11948c3cca5f1554b3c934644f5a05",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_arabic.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_common.txt",
+      "sha256": "6a943ca8cf3f7bed1ff516de9a3ecf44f13c801d3dc967803b1b6a95ae45d372",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_common.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_cyrillic.txt",
+      "sha256": "fd5517e98eebfbe1f979ec21f9749e9d6cafd3e6798e5f31c173a0be08c025e5",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_cyrillic.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_czech.txt",
+      "sha256": "fd5517e98eebfbe1f979ec21f9749e9d6cafd3e6798e5f31c173a0be08c025e5",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_czech.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_dutch.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_dutch.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_english.txt",
+      "sha256": "fd5517e98eebfbe1f979ec21f9749e9d6cafd3e6798e5f31c173a0be08c025e5",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_english.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_french.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_french.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_german.txt",
+      "sha256": "abe0c2b293dde37d051c84c0a60194b8c3038f399411b60f0706dcddfadb0bdf",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_german.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_greek.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_greek.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_greeklatin.txt",
+      "sha256": "8784c2b1d8b8e206e3dfce6eda4f3dec800a1bc213dc4f4dc0cb09a8132a542c",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_greeklatin.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_hebrew.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_hebrew.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_hungarian.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_hungarian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_italian.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_italian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_polish.txt",
+      "sha256": "6d805f7fc3172f02f11240b9043fedc535d0729a105f218205ddbcee3245781a",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_polish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_portuguese.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_portuguese.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_romanian.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_romanian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_russian.txt",
+      "sha256": "34bfa509511f7517a628330cca7c5e51464ab4eef953834054f684d02e11ffc7",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_russian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_spanish.txt",
+      "sha256": "b3388ed5a9817dfa7172b1061cd2003068623c5b794b4d25a221225c893eddf2",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_spanish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_exact_turkish.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/gen_exact_turkish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_hebrew_common.txt",
+      "sha256": "4a989b869f2293590c21af2305da6588966aee6d3bde431b3e49123904b11bcf",
+      "upstream": "org/apache/commons/codec/language/bm/gen_hebrew_common.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_lang.txt",
+      "sha256": "705d3b0eca3803ab2764f00b4cf9b2a68f9ec2201a7b340d6893412361022d95",
+      "upstream": "org/apache/commons/codec/language/bm/gen_lang.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_languages.txt",
+      "sha256": "b3165adaa36026c29338dc8d8f351cebc7423731465e1d6422f27d6778494c7d",
+      "upstream": "org/apache/commons/codec/language/bm/gen_languages.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_any.txt",
+      "sha256": "d23d576829821edd7de13f6734eca746a767dd6d565a4cd18e33d9736df0d0ac",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_any.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_arabic.txt",
+      "sha256": "82b707c79998031bda269fd7c1192ea1a9670c03ead09ee77a77ce4feca12c38",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_arabic.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_cyrillic.txt",
+      "sha256": "0c8158127f19bd0e683bf883ab2fb7eb4c173a34ee51ab6752f56c932ab125e8",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_cyrillic.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_czech.txt",
+      "sha256": "84de9e152412cd6129340590372571fedb14876054b5df3b82a2a36564fcd619",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_czech.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_dutch.txt",
+      "sha256": "9921e75dbbc942d2572a8660b0979329639e8707ffa9bb1de6b7d1a7a9955c2b",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_dutch.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_english.txt",
+      "sha256": "bcfb8723cbf3966b09ba0dc6f3dbbdc7882869c4e7af160f803c2f0519785a22",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_english.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_french.txt",
+      "sha256": "b5f12b085cfb4896a91020f901bc16e6f3164f0641e683b0d205a730560274b3",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_french.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_german.txt",
+      "sha256": "453d474ab996523a2f09a1c5897d8e3e1b4c045061227c052792f982e1c3c8b7",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_german.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_greek.txt",
+      "sha256": "6b56c5d8a9b6270f8777cce5f1b0860390aa218f7e2b43eeb1d7cbdb38778830",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_greek.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_greeklatin.txt",
+      "sha256": "06122f03fe879f2ef78b0b76bf1412eb170c69fa828f40d7e7b907856656446e",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_greeklatin.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_hebrew.txt",
+      "sha256": "a570f37f45f35f2e409b1173d955d83adc878da8187f899db930d5d19f89a5f1",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_hebrew.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_hungarian.txt",
+      "sha256": "16ba7cf79bf85089dc29fd92eff6358c893bc6aef85e6396dd29af7c41a4f611",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_hungarian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_italian.txt",
+      "sha256": "99155dedf0caeaae4212877d0b90da52e0252812eee4ab06a9aaf5393b94afb0",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_italian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_polish.txt",
+      "sha256": "e4e0eb610a8bccf71d39cd0e10b2c51e4d1f132a052d183c749511464ed51fc9",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_polish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_portuguese.txt",
+      "sha256": "0c51c2cc22988516b03f6afdd5699897b7cafe2b3e5d3676ab101941fbfd92dc",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_portuguese.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_romanian.txt",
+      "sha256": "75ee26f3c6bf6cafc2258be21b820952e2e07c192919e34fd717dd81b0a2f4ad",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_romanian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_russian.txt",
+      "sha256": "ded105c857167c2ba8c44ced7cee000d6bcd7823a4851b698f8ea540115a7f37",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_russian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_spanish.txt",
+      "sha256": "e7253c7c1ab7e46d29c85792be68c15a7bdb8937c364043f4c4c658d08f76a6b",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_spanish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/gen_rules_turkish.txt",
+      "sha256": "1800bab9aee6be5f57838bfaaf071009841c1af93d5dd22789e1a7643d199261",
+      "upstream": "org/apache/commons/codec/language/bm/gen_rules_turkish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/lang.txt",
+      "sha256": "610a754f03e8838e1bdf8fc2f905cddae41d97142c54bf90e01f5582f8b5f7ba",
+      "upstream": "org/apache/commons/codec/language/bm/lang.txt"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/bm/package-info.java",
+      "sha256": "0b5a971316ca09ee044a883ca2b5f5675015b31f8c1bb10127128bee222e5249",
+      "upstream": "org/apache/commons/codec/language/bm/package-info.java"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_approx_any.txt",
+      "sha256": "47661c92b7bd2a3dbff0b19f2342281076f2877fab2592a0c076a555a813947f",
+      "upstream": "org/apache/commons/codec/language/bm/sep_approx_any.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_approx_common.txt",
+      "sha256": "7f3ea2985fd4b1b5e0f5a6544a47ab632497a7853b691aef5e6bd7320fcaa3a6",
+      "upstream": "org/apache/commons/codec/language/bm/sep_approx_common.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_approx_french.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/sep_approx_french.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_approx_hebrew.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/sep_approx_hebrew.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_approx_italian.txt",
+      "sha256": "b6165dbda3d972b5c54b2191409a2c04ac35fc7dba0abf5ddf3c9ae13f9a98a0",
+      "upstream": "org/apache/commons/codec/language/bm/sep_approx_italian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_approx_portuguese.txt",
+      "sha256": "21d632279772ae8983832220505bcf0c6fb500f4ffade0f9908306d018710f13",
+      "upstream": "org/apache/commons/codec/language/bm/sep_approx_portuguese.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_approx_spanish.txt",
+      "sha256": "21d632279772ae8983832220505bcf0c6fb500f4ffade0f9908306d018710f13",
+      "upstream": "org/apache/commons/codec/language/bm/sep_approx_spanish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_exact_any.txt",
+      "sha256": "df3f63b3946b8d5f05c4977ee5ab488da8162f4ad8cafa7a81cd8731b4954cb8",
+      "upstream": "org/apache/commons/codec/language/bm/sep_exact_any.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_exact_approx_common.txt",
+      "sha256": "232f59750f9dedcf0bc2af194d16a1f434a56a0ace0415fe67924b73c7e22a32",
+      "upstream": "org/apache/commons/codec/language/bm/sep_exact_approx_common.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_exact_common.txt",
+      "sha256": "c3654ad436be18536fef3e3872db7255659c413bfc9b5ad446b1467b68c8b8c0",
+      "upstream": "org/apache/commons/codec/language/bm/sep_exact_common.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_exact_french.txt",
+      "sha256": "9ddcb79875c3a49259e98faf98433c7d8c29e368dedea7155c9ff7171016857d",
+      "upstream": "org/apache/commons/codec/language/bm/sep_exact_french.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_exact_hebrew.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/sep_exact_hebrew.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_exact_italian.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/sep_exact_italian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_exact_portuguese.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/sep_exact_portuguese.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_exact_spanish.txt",
+      "sha256": "d54f26f806ec83a34beaa033cbd110a9204f853045bf9050a3050146b52ec50b",
+      "upstream": "org/apache/commons/codec/language/bm/sep_exact_spanish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_hebrew_common.txt",
+      "sha256": "f54d8a4d50ac4331b34a9a6d6466108e8d462f590d83b88130cb439f760a74e8",
+      "upstream": "org/apache/commons/codec/language/bm/sep_hebrew_common.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_lang.txt",
+      "sha256": "f3b5f5fda135f0b1d3016b67eea126a9415c50d3b169ee4fa9bd8dd0143fa9f5",
+      "upstream": "org/apache/commons/codec/language/bm/sep_lang.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_languages.txt",
+      "sha256": "9cc12d4172e415642b4105d96717d9c9b28abca8abfb61b6443f4e9c47adaf87",
+      "upstream": "org/apache/commons/codec/language/bm/sep_languages.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_rules_any.txt",
+      "sha256": "a334356decf81c182682d8e0d03e1727ab45a068446ed11c96809167aca1877f",
+      "upstream": "org/apache/commons/codec/language/bm/sep_rules_any.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_rules_french.txt",
+      "sha256": "2a3cbe347fda0df595e3110959c49656c6ec6b6f3b7af69a67d5590f0729699b",
+      "upstream": "org/apache/commons/codec/language/bm/sep_rules_french.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_rules_hebrew.txt",
+      "sha256": "545919eeecaee7301ff14afe69c88faf0277f3568c154032be204d3ff0d9da68",
+      "upstream": "org/apache/commons/codec/language/bm/sep_rules_hebrew.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_rules_italian.txt",
+      "sha256": "3b4d253710d0c9dd5649594047c8e10763094c10b7b518cfd84048c122255f9b",
+      "upstream": "org/apache/commons/codec/language/bm/sep_rules_italian.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_rules_portuguese.txt",
+      "sha256": "8a1e06755eba82e40de80beecdcabc01d8a0e9a547f1eabb35346e526bcf90b2",
+      "upstream": "org/apache/commons/codec/language/bm/sep_rules_portuguese.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/bm/sep_rules_spanish.txt",
+      "sha256": "57654b4355e47b908556126a8cf10f9a77dc49e5bf3b179e9797b4e9b47f88ed",
+      "upstream": "org/apache/commons/codec/language/bm/sep_rules_spanish.txt"
+    },
+    {
+      "kind": "unmodified-resource",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/resources/org/apache/commons/codec/language/dmrules.txt",
+      "sha256": "90ff9e9c775e01444f19dec3f8444eaa6d39fdeca77d0eaf4ddcb970a43687f7",
+      "upstream": "org/apache/commons/codec/language/dmrules.txt"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/language/package-info.java",
+      "sha256": "1a9660111988c90493ed848c3130113734515a955a38e4dfa30b93c13a01e7ab",
+      "upstream": "org/apache/commons/codec/language/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/net/BCodec.java",
+      "sha256": "b1e2f841e968bc115cb034810ee4fe0964cea8b8c08486e2cf17af21df21f7ee",
+      "upstream": "org/apache/commons/codec/net/BCodec.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/net/PercentCodec.java",
+      "sha256": "ed10d27e70f906444cf0b4469109636964baef47a14392b0010d6d7f134007f4",
+      "upstream": "org/apache/commons/codec/net/PercentCodec.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/net/QCodec.java",
+      "sha256": "6e9ad25b70fc2c36f90d0259199d6297f0eaac99b14ae9354ca495b144286a67",
+      "upstream": "org/apache/commons/codec/net/QCodec.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/net/QuotedPrintableCodec.java",
+      "sha256": "e30f5b7b5cbbcdf83ee5cea811fa98f185c0b2b6d589f8c49b6ebf0527b18566",
+      "upstream": "org/apache/commons/codec/net/QuotedPrintableCodec.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/net/RFC1522Codec.java",
+      "sha256": "14031e53288debb73a65429feffddaa7ad5a8a5423488415ee196dbcf31b7b8c",
+      "upstream": "org/apache/commons/codec/net/RFC1522Codec.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/net/URLCodec.java",
+      "sha256": "32d28d3bd9c6787bdd1b93c920e54c3262d8162f40cc301ce80dd6ced311d779",
+      "upstream": "org/apache/commons/codec/net/URLCodec.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/net/Utils.java",
+      "sha256": "cac581c89e036930422266b93cfde072f9d8a6d68b4e3f3a5f2e1ab3de356a81",
+      "upstream": "org/apache/commons/codec/net/Utils.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/net/package-info.java",
+      "sha256": "89566cd9ae0cc055d7b47c04ae23f317a8f64d9b517723f696dea9b76a203b96",
+      "upstream": "org/apache/commons/codec/net/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/java/org/apache/commons/codec/package-info.java",
+      "sha256": "20b15c885a05e987c7bb85134dca91e508b2628d5dd13de7eb0ca11fb1405428",
+      "upstream": "org/apache/commons/codec/package-info.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/SOURCES_MANIFEST.tsv",
+      "sha256": "f94ead6ee91b6076fe92077ae1b846748ba98cc09d52802eb51e51a5c71d92f5",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "upstream": "META-INF/LICENSE.txt"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "commons-codec:commons-codec:1.17.1 (sha256 f9f6cb103f2ddc3c99a9d80ada2ae7bf0685111fd6bffccb72033d1da4e6ff23)",
+      "repository": "m3/vendor/third_party/commons-codec-1.17.1/src/main/descriptor/9/module-info.java",
+      "sha256": "cf3c1aa48b815b1a85c5df6c5790e0603271498420ff634b3186606e564bc03a",
+      "upstream": "META-INF/versions/9/module-info.class"
+    }
+  ],
+  "group": "commons-codec",
+  "kind": "MODULE",
+  "license": "Apache License, Version 2.0 (from the license text; pom declares none)",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "org.apache.commons:commons-parent:71",
+  "pom": "https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.17.1/commons-codec-1.17.1.pom",
+  "receipt": {
+    "buildRoot": "34dac6ec4ccddb36e5e312bd8106afb36c1dda95ad67cfc411468b30bb379b12",
+    "distributionSha256": "c8823eeb68138ea79a84bfdb68c97945c777ef54acbc9c2bf18aaba2313de443",
+    "lock": "1a5d341c0745d61ddd6606d5dffa3d2c8af11a81e0e86ab2e2a1b9d7a747b35b",
+    "message": "",
+    "sourceRoot": "5026d1310bce7610f9eade7740d0a687a8e0e784b2c85fbbeef1fa37d6429b5c",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.17.1/commons-codec-1.17.1-sources.jar",
+  "sources_jar_sha1": "335f6edc3ea89bb9ed0febd6685aff864dc8f4d4",
+  "sources_jar_sha256": "2283aff7f425dff23ebdb7a8fc0f03ae21b4ced7a43aacba47cedae126dc5d4a",
+  "status": "PASS",
+  "upstream": "https://github.com/apache/commons-codec",
+  "version": "1.17.1"
+}

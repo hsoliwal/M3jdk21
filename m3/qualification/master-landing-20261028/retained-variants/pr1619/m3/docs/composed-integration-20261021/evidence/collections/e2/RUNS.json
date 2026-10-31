@@ -1,0 +1,488 @@
+{
+  "normalization": "Executed command argument order and flags are retained; private absolute paths are replaced with the README variables.",
+  "runs": [
+    {
+      "label": "pack001",
+      "command": [
+        "python3",
+        "${REPO}/m3/tooling/jmod-recipes/tools/jmod_pack.py",
+        "--jdk-home",
+        "${SOURCE_SDK_E2}",
+        "--image-tsv",
+        "${LINKED_WORK_E2}/INPUT_JMOD_IMAGE.tsv",
+        "--manifest",
+        "${LINKED_WORK_E2}/EMPTY_DESCRIPTOR_MANIFEST.tsv",
+        "--layer-root",
+        "${REPO}",
+        "--out",
+        "${PACK_OUT_E2}",
+        "--legal-notices",
+        "${LINKED_WORK_E2}/inputs/legal",
+        "--native-library",
+        "com.m3.collections=${LINKED_WORK_E2}/native-release",
+        "--add-modules",
+        "java.se,jdk.management,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jdeps",
+        "--date",
+        "2026-01-01T00:00:00Z"
+      ],
+      "returncode": 0,
+      "seconds": 4.6116439679990435,
+      "timedOut": false,
+      "log": "logs/pack001.log",
+      "logSha256": "bfe3dece3428cd00953eb9fb2c104f66ed155bcbfe58a78c7c17613205baf4a7",
+      "output": "image ${IMAGE_E2} modules 29 vendored 1 validate rc 0 \n"
+    },
+    {
+      "label": "image-validate",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "--validate-modules"
+      ],
+      "returncode": 0,
+      "seconds": 0.11935617299968726,
+      "timedOut": false,
+      "log": "logs/image-validate.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output": ""
+    },
+    {
+      "label": "image-modules",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "--list-modules"
+      ],
+      "returncode": 0,
+      "seconds": 0.11438604300019506,
+      "timedOut": false,
+      "log": "logs/image-modules.log",
+      "logSha256": "62e0383a6a33bae287c6f183f398cfc688b2d892f46af635d04864911bf42078",
+      "output": "com.m3.collections@0.1.0-SNAPSHOT\njava.base@21-internal\njava.compiler@21-internal\njava.datatransfer@21-internal\njava.desktop@21-internal\njava.instrument@21-internal\njava.logging@21-internal\njava.management@21-internal\njava.management.rmi@21-internal\njava.naming@21-internal\njava.net.http@21-internal\njava.prefs@21-internal\njava.rmi@21-internal\njava.scripting@21-internal\njava.se@21-internal\njava.security.jgss@21-internal\njava.security.sasl@21-internal\njava.sql@21-internal\njava.sql.rowset@21-internal\njava.transaction.xa@21-internal\njava.xml@21-internal\njava.xml.crypto@21-internal\njdk.compiler@21-internal\njdk.internal.opt@21-internal\njdk.jartool@21-internal\njdk.jdeps@21-internal\njdk.jlink@21-internal\njdk.management@21-internal\njdk.zipfs@21-internal\n"
+    },
+    {
+      "label": "image-jmod-descriptor",
+      "command": [
+        "${SOURCE_SDK_E2}/bin/jmod",
+        "describe",
+        "${PACK_OUT_E2}/jmods/com.m3.collections.jmod"
+      ],
+      "returncode": 0,
+      "seconds": 0.1645582769997418,
+      "timedOut": false,
+      "log": "logs/image-jmod-descriptor.log",
+      "logSha256": "b3c7fd92a5eb1053bb962187573ecf3d35a59cee84ab94cacbd860d8b04ef314",
+      "output": "com.m3.collections@0.1.0-SNAPSHOT\nexports com.m3.collections\nrequires java.base mandated\n\n"
+    },
+    {
+      "label": "image-inventory",
+      "command": [
+        "${SOURCE_SDK_E2}/bin/jimage",
+        "list",
+        "${IMAGE_E2}/lib/modules"
+      ],
+      "returncode": 0,
+      "seconds": 0.4668176939994737,
+      "timedOut": false,
+      "log": "logs/image-inventory.log",
+      "logSha256": "3c08f4f281ffdd97cf32aaa148d581fca748ee182f41b63b1bc172a3aa586a1f"
+    },
+    {
+      "label": "image-ownership",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-Xshare:off",
+        "--add-modules",
+        "com.m3.collections,jdk.management",
+        "-cp",
+        "${LINKED_WORK_E2}/inputs/ownership-probe",
+        "LinkedM3SdkOwnership",
+        "${IMAGE_E2}"
+      ],
+      "returncode": 0,
+      "seconds": 0.1672422749998077,
+      "timedOut": false,
+      "log": "logs/image-ownership.log",
+      "logSha256": "bb4e55f06862609f640ced65f6b8450ec2f0f859f3c4c514463de60d5a0cc7e1",
+      "output": "OWNER java.lang.String jrt:/java.base/java/lang/String.class\nOWNER java.lang.M3String jrt:/java.base/java/lang/M3String.class\nOWNER java.util.CollectionViews jrt:/java.base/java/util/CollectionViews.class\nOWNER com.m3.collections.M3CollectionViews jrt:/com.m3.collections/com/m3/collections/M3CollectionViews.class\nOWNER com.m3.collections.M3IndexedListSnapshot jrt:/com.m3.collections/com/m3/collections/M3IndexedListSnapshot.class\nOWNER com.m3.collections.M3IndexMaskCompactor jrt:/com.m3.collections/com/m3/collections/M3IndexMaskCompactor.class\nOWNER com.m3.collections.M3SignalOrder jrt:/com.m3.collections/com/m3/collections/M3SignalOrder.class\nPASS installed M3JDK21 ownership: 7 classes from the linked jrt image\n"
+    },
+    {
+      "label": "compile-string-fixtures",
+      "command": [
+        "${IMAGE_E2}/bin/javac",
+        "-d",
+        "${LINKED_WORK_E2}/string-test-classes",
+        "${LINKED_WORK_E2}/inputs/string-sources/M3StringCanonicalDagTest.java",
+        "${LINKED_WORK_E2}/inputs/string-sources/M3StringConcatLengthOverflowTest.java",
+        "${LINKED_WORK_E2}/inputs/string-sources/M3StringConcatReferenceDagTest.java"
+      ],
+      "returncode": 0,
+      "seconds": 1.245487038999272,
+      "timedOut": false,
+      "log": "logs/compile-string-fixtures.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output": ""
+    },
+    {
+      "label": "M3StringCanonicalDagTest-compact",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-ea",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "-cp",
+        "${LINKED_WORK_E2}/string-test-classes",
+        "M3StringCanonicalDagTest"
+      ],
+      "returncode": 0,
+      "seconds": 1.0217416699997557,
+      "timedOut": false,
+      "log": "logs/M3StringCanonicalDagTest-compact.log",
+      "logSha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+      "output": "M3_STRING_CANONICAL_DAG_PASS checks=59 height=12\n"
+    },
+    {
+      "label": "M3StringConcatLengthOverflowTest-compact",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-ea",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "-cp",
+        "${LINKED_WORK_E2}/string-test-classes",
+        "M3StringConcatLengthOverflowTest"
+      ],
+      "returncode": 0,
+      "seconds": 0.21482039200054714,
+      "timedOut": false,
+      "log": "logs/M3StringConcatLengthOverflowTest-compact.log",
+      "logSha256": "60313c3da01903d89bb94afc9b832da81bc7a311cd8939c2e9049800da948371",
+      "output": "M3_STRING_CONCAT_LENGTH_OVERFLOW_PASS|checks=111\n"
+    },
+    {
+      "label": "M3StringConcatReferenceDagTest-compact",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-ea",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "-cp",
+        "${LINKED_WORK_E2}/string-test-classes",
+        "M3StringConcatReferenceDagTest"
+      ],
+      "returncode": 0,
+      "seconds": 0.3697083669994754,
+      "timedOut": false,
+      "log": "logs/M3StringConcatReferenceDagTest-compact.log",
+      "logSha256": "e452b0f644518ec88fe769c00247c7bf1b087b3fb23ff2ec44d74588eda10df6",
+      "output": "M3_STRING_CONCAT_REFERENCE_DAG_PASS|checks=23|height=10\n"
+    },
+    {
+      "label": "M3StringCanonicalDagTest-utf16",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-ea",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "-XX:-CompactStrings",
+        "-cp",
+        "${LINKED_WORK_E2}/string-test-classes",
+        "M3StringCanonicalDagTest"
+      ],
+      "returncode": 0,
+      "seconds": 0.9177464129988948,
+      "timedOut": false,
+      "log": "logs/M3StringCanonicalDagTest-utf16.log",
+      "logSha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+      "output": "M3_STRING_CANONICAL_DAG_PASS checks=59 height=12\n"
+    },
+    {
+      "label": "M3StringConcatLengthOverflowTest-utf16",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-ea",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "-XX:-CompactStrings",
+        "-cp",
+        "${LINKED_WORK_E2}/string-test-classes",
+        "M3StringConcatLengthOverflowTest"
+      ],
+      "returncode": 0,
+      "seconds": 0.22270412599937117,
+      "timedOut": false,
+      "log": "logs/M3StringConcatLengthOverflowTest-utf16.log",
+      "logSha256": "60313c3da01903d89bb94afc9b832da81bc7a311cd8939c2e9049800da948371",
+      "output": "M3_STRING_CONCAT_LENGTH_OVERFLOW_PASS|checks=111\n"
+    },
+    {
+      "label": "M3StringConcatReferenceDagTest-utf16",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-ea",
+        "-Xmx512m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "-XX:-CompactStrings",
+        "-cp",
+        "${LINKED_WORK_E2}/string-test-classes",
+        "M3StringConcatReferenceDagTest"
+      ],
+      "returncode": 0,
+      "seconds": 0.3715766559998883,
+      "timedOut": false,
+      "log": "logs/M3StringConcatReferenceDagTest-utf16.log",
+      "logSha256": "e452b0f644518ec88fe769c00247c7bf1b087b3fb23ff2ec44d74588eda10df6",
+      "output": "M3_STRING_CONCAT_REFERENCE_DAG_PASS|checks=23|height=10\n"
+    },
+    {
+      "label": "compile-public-core",
+      "command": [
+        "${IMAGE_E2}/bin/javac",
+        "-d",
+        "${LINKED_WORK_E2}/core-test-classes",
+        "${LINKED_WORK_E2}/inputs/core-sources/BootstrapViewsTest.java",
+        "${LINKED_WORK_E2}/inputs/core-sources/CollectionViewsCoreContract.java",
+        "${LINKED_WORK_E2}/inputs/core-sources/CollectionViewsCowBulkTest.java",
+        "${LINKED_WORK_E2}/inputs/core-sources/CollectionViewsIdentityContract.java",
+        "${LINKED_WORK_E2}/inputs/core-sources/CollectionViewsIdentityTest.java",
+        "${LINKED_WORK_E2}/inputs/core-sources/CollectionViewsRefinement.java"
+      ],
+      "returncode": 0,
+      "seconds": 1.4908653519996733,
+      "timedOut": false,
+      "log": "logs/compile-public-core.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output": ""
+    },
+    {
+      "label": "BootstrapViewsTest",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=jdk.management",
+        "-cp",
+        "${LINKED_WORK_E2}/core-test-classes",
+        "BootstrapViewsTest"
+      ],
+      "returncode": 0,
+      "seconds": 0.16436919099942315,
+      "timedOut": false,
+      "log": "logs/BootstrapViewsTest.log",
+      "logSha256": "aecd4f60a44c234c58ad13d76cf8d4b3ea5f318d2cb1ba1d15d0f975b4bca5e1",
+      "output": "BootstrapViewsTest checks=77 module=java.base loader=bootstrap PASS\n"
+    },
+    {
+      "label": "CollectionViewsCoreContract",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=jdk.management",
+        "-Xss256k",
+        "--add-opens=java.base/java.util=ALL-UNNAMED",
+        "-cp",
+        "${LINKED_WORK_E2}/core-test-classes",
+        "CollectionViewsCoreContract"
+      ],
+      "returncode": 0,
+      "seconds": 0.316834593000749,
+      "timedOut": false,
+      "log": "logs/CollectionViewsCoreContract.log",
+      "logSha256": "c87cad733eafb6073ced8c38048c6109b2ada5ef49debeeeeb50ea86a8eddef2",
+      "output": "warm_predicate_tests=100000 depth=64 allocated_bytes=0\nCollectionViewsCoreContract methods=10 checks=14694 baseline=false PASS\n"
+    },
+    {
+      "label": "CollectionViewsIdentityTest",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=jdk.management",
+        "-cp",
+        "${LINKED_WORK_E2}/core-test-classes",
+        "CollectionViewsIdentityTest"
+      ],
+      "returncode": 0,
+      "seconds": 0.11737560400069924,
+      "timedOut": false,
+      "log": "logs/CollectionViewsIdentityTest.log",
+      "logSha256": "e2578791938ca91a7bdc39a8ab0b8fead2765047ef1d30363959c3fb17f91817",
+      "output": "CollectionViewsIdentityTest: 46 checks passed\n"
+    },
+    {
+      "label": "CollectionViewsCowBulkTest",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=jdk.management",
+        "-cp",
+        "${LINKED_WORK_E2}/core-test-classes",
+        "CollectionViewsCowBulkTest"
+      ],
+      "returncode": 0,
+      "seconds": 0.17003430700060562,
+      "timedOut": false,
+      "log": "logs/CollectionViewsCowBulkTest.log",
+      "logSha256": "7aa83ba32c97c924cd6ea727ea0c6fafaef0cc54c8c22e007d3991dc20b80636",
+      "output": "CollectionViewsCowBulkTest PASS checks=120\n"
+    },
+    {
+      "label": "CollectionViewsIdentityContract",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=jdk.management",
+        "-cp",
+        "${LINKED_WORK_E2}/core-test-classes",
+        "CollectionViewsIdentityContract"
+      ],
+      "returncode": 0,
+      "seconds": 0.11465752900039661,
+      "timedOut": false,
+      "log": "logs/CollectionViewsIdentityContract.log",
+      "logSha256": "233d51d84c2c3ce34f538f6063f923c2d43f26a8657ffbe513cd05dae8c1abbe",
+      "output": "CollectionViewsIdentityContract mode=all: 540 checks passed\n"
+    },
+    {
+      "label": "CollectionViewsRefinement",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=jdk.management",
+        "-cp",
+        "${LINKED_WORK_E2}/core-test-classes",
+        "CollectionViewsRefinement"
+      ],
+      "returncode": 0,
+      "seconds": 0.1147600140011491,
+      "timedOut": false,
+      "log": "logs/CollectionViewsRefinement.log",
+      "logSha256": "15a91e98fdac451a2ea35d18fbe1e68f04c0d8c4277597dee554e718f3a1ab71",
+      "output": "PASS CollectionViewsRefinement mode=all checks=1828\n"
+    },
+    {
+      "label": "CollectionViewsRefinement-size",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-Xmx128m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "-cp",
+        "${LINKED_WORK_E2}/core-test-classes",
+        "CollectionViewsRefinement",
+        "size"
+      ],
+      "returncode": 0,
+      "seconds": 1.4783616789991356,
+      "timedOut": false,
+      "log": "logs/CollectionViewsRefinement-size.log",
+      "logSha256": "56eea573758a0e7553cd6088d1a94d5c9812fd354cca77948c55cc681bcb2b40",
+      "output": "PASS CollectionViewsRefinement mode=size checks=2\n"
+    },
+    {
+      "label": "M3CatalogueRefinementContract",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-Xlog:class+load=info:file=${LINKED_WORK_E2}/logs/M3CatalogueRefinementContract-classes.log",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK_E2}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE_E2}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3CatalogueRefinementContract",
+        "native"
+      ],
+      "returncode": 0,
+      "seconds": 0.16442778099917632,
+      "timedOut": false,
+      "log": "logs/M3CatalogueRefinementContract.log",
+      "logSha256": "9f4d782bf9fd8c32faa78bc0f1c6b41e9b7325d4d7bf1c865dbac4ab3ce3bb28",
+      "output": "PASS M3CatalogueRefinementContract mode=native checks=8438\n"
+    },
+    {
+      "label": "M3SignalRadixUniformContract",
+      "command": [
+        "${IMAGE_E2}/bin/java",
+        "-Xlog:class+load=info:file=${LINKED_WORK_E2}/logs/M3SignalRadixUniformContract-classes.log",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=${LINKED_WORK_E2}/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "-Djava.library.path=${IMAGE_E2}/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "--module",
+        "com.m3.collections/com.m3.collections.M3SignalRadixUniformContract",
+        "native"
+      ],
+      "returncode": 0,
+      "seconds": 0.26712798699918494,
+      "timedOut": false,
+      "log": "logs/M3SignalRadixUniformContract.log",
+      "logSha256": "b0a2a442acbc380176b76380ca85dbc439ddf2d7bd4301a0a5487932fdd48eda",
+      "output": "PASS radix JNI checks=417038\n"
+    }
+  ]
+}

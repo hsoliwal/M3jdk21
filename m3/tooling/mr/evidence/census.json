@@ -1,0 +1,75 @@
+{
+  "source_commit": "4f9a91ab6239212acdb676757d96f5083d27c474",
+  "target_base": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "canonical_mapping": "m3/docs/name-mapping.json",
+  "selection": "All blobs under src/main in nine exact subtrees; MIndex/MatIndex prefix is an annotation, not dependency admission.",
+  "source_tree_complete": false,
+  "semantic_dependency_closure_complete": false,
+  "trees": [
+    {
+      "module": "synexia-common",
+      "tree": "d6afe3a5eedd23f8daa1905bd7ba9fb21f6ca381",
+      "truncated": false,
+      "production_blobs": 605
+    },
+    {
+      "module": "synexia-index-precompute",
+      "tree": "527faec803802de6ee9ae737dd46b734293e6727",
+      "truncated": false,
+      "production_blobs": 134
+    },
+    {
+      "module": "synexia-index-precompute-adapters",
+      "tree": "731d84521b5027b3c03b5b21b5329b943234a661",
+      "truncated": false,
+      "production_blobs": 22
+    },
+    {
+      "module": "synexia-indexstring",
+      "tree": "04bfb3a44d0ce7e8e3be03b3b4de6422326fd19f",
+      "truncated": false,
+      "production_blobs": 1694
+    },
+    {
+      "module": "synexia-mat-collections",
+      "tree": "29ef2cbfae23e07b5634067ea64dc2e12fea200e",
+      "truncated": false,
+      "production_blobs": 47
+    },
+    {
+      "module": "synexia-mat-index-string",
+      "tree": "993fa6caae8aa436ce800ee4571c79ae3bc240b6",
+      "truncated": false,
+      "production_blobs": 0
+    },
+    {
+      "module": "synexia-mat-value",
+      "tree": "f40f817770495f97142c57d5a09334a8fbcca588",
+      "truncated": false,
+      "production_blobs": 53
+    },
+    {
+      "module": "synexia-mindex",
+      "tree": "a133eb77e1e5617fb0b67dbec9447142e9e07a9c",
+      "truncated": false,
+      "production_blobs": 1717
+    },
+    {
+      "module": "synexia-mindex-indexstring-bridge",
+      "tree": "997bf5af5b4a26879b51e047f9123122b33dfd78",
+      "truncated": false,
+      "production_blobs": 16
+    }
+  ],
+  "production_blobs": 4288,
+  "prefix_matches": 2543,
+  "sha256": "814b7a74abd20117d2e7d0307e705e8f7f3e5e0b5c3edffaa0670458fd9d159a",
+  "exclusions": [
+    "other repository modules",
+    "test and generated source closures",
+    "nested declarations",
+    "semantic dependencies and contracts not read by this packet"
+  ],
+  "mutation_authority": false,
+  "initial_target_base": "1c389e31805fb4faf5d9fe256c8dc6797a2eadff"
+}

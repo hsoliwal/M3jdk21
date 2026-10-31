@@ -59,6 +59,12 @@
   template(java_lang_Package,                         "java/lang/Package")                        \
   template(java_lang_Module,                          "java/lang/Module")                         \
   template(java_lang_String,                          "java/lang/String")                         \
+  template(java_lang_M3String,                 "java/lang/M3String")                \
+  template(java_lang_M3StringOwner,            "java/lang/M3StringOwner")           \
+  template(java_lang_M3StringAtom,             "java/lang/M3StringAtom")            \
+  template(java_lang_M3StringTuple,            "java/lang/M3StringTuple")           \
+  template(java_lang_M3StringImmediate,        "java/lang/M3StringImmediate")       \
+  template(java_lang_M3StringFacts,            "java/lang/M3StringFacts")           \
   template(java_lang_StringLatin1,                    "java/lang/StringLatin1")                   \
   template(java_lang_StringUTF16,                     "java/lang/StringUTF16")                    \
   template(java_lang_Thread,                          "java/lang/Thread")                         \
@@ -127,7 +133,6 @@
   template(java_security_ProtectionDomain,            "java/security/ProtectionDomain")           \
   template(java_security_SecureClassLoader,           "java/security/SecureClassLoader")          \
   template(java_net_URL,                              "java/net/URL")                             \
-  template(java_net_URLClassLoader,                   "java/net/URLClassLoader")                  \
   template(java_util_jar_Manifest,                    "java/util/jar/Manifest")                   \
   template(java_io_OutputStream,                      "java/io/OutputStream")                     \
   template(java_io_Reader,                            "java/io/Reader")                           \
@@ -341,11 +346,9 @@
   template(java_lang_invoke_MemberName,               "java/lang/invoke/MemberName")              \
   template(java_lang_invoke_ResolvedMethodName,       "java/lang/invoke/ResolvedMethodName")      \
   template(java_lang_invoke_MethodHandleNatives,      "java/lang/invoke/MethodHandleNatives")     \
-  template(java_lang_invoke_MethodHandleNatives_CallSiteContext, "java/lang/invoke/MethodHandleNatives$CallSiteContext") \
   template(java_lang_invoke_LambdaForm,               "java/lang/invoke/LambdaForm")              \
   template(java_lang_invoke_InjectedProfile_signature, "Ljava/lang/invoke/InjectedProfile;")      \
   template(java_lang_invoke_LambdaForm_Compiled_signature, "Ljava/lang/invoke/LambdaForm$Compiled;") \
-  template(java_lang_invoke_MethodHandleNatives_CallSiteContext_signature, "Ljava/lang/invoke/MethodHandleNatives$CallSiteContext;") \
   /* internal up-calls made only by the JVM, via class sun.invoke.MethodHandleNatives: */         \
   template(findMethodHandleType_name,                 "findMethodHandleType")                     \
   template(findMethodHandleType_signature,       "(Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/invoke/MethodType;") \
@@ -427,7 +430,7 @@
   template(yieldInfo_name,                            "yieldInfo")                                \
   template(tail_name,                                 "tail")                                     \
   template(size_name,                                 "size")                                     \
-  template(argsize_name,                              "argsize")                                  \
+  template(bottom_name,                               "bottom")                                   \
   template(mode_name,                                 "mode")                                     \
   template(numFrames_name,                            "numFrames")                                \
   template(numOops_name,                              "numOops")                                  \
@@ -444,7 +447,7 @@
   template(cs_name,                                   "cs")                                       \
   template(refStack_name,                             "refStack")                                 \
   template(refSP_name,                                "refSP")                                    \
-  template(get_name,                                  "get")                                      \
+  template(get0_name,                                 "get0")                                     \
   template(refersTo0_name,                            "refersTo0")                                \
   template(put_name,                                  "put")                                      \
   template(type_name,                                 "type")                                     \
@@ -473,6 +476,7 @@
   template(cache_field_name,                          "cache")                                    \
   template(value_name,                                "value")                                    \
   template(compact_strings_name,                      "COMPACT_STRINGS")                          \
+  template(m3_joined_strings_name,                    "M3_JOINED_STRINGS")                       \
   template(numberOfLeadingZeros_name,                 "numberOfLeadingZeros")                     \
   template(numberOfTrailingZeros_name,                "numberOfTrailingZeros")                    \
   template(bitCount_name,                             "bitCount")                                 \
@@ -486,6 +490,7 @@
   template(vmtarget_name,                             "vmtarget")                                 \
   template(vmholder_name,                             "vmholder")                                 \
   template(method_name,                               "method")                                   \
+  template(m3AdmitNative_name,                        "m3AdmitNative")                            \
   template(vmindex_name,                              "vmindex")                                  \
   template(vmcount_name,                              "vmcount")                                  \
   template(flags_name,                                "flags")                                    \
@@ -652,6 +657,12 @@
   template(object_array_signature,                    "[Ljava/lang/Object;")                                      \
   template(class_signature,                           "Ljava/lang/Class;")                                        \
   template(string_signature,                          "Ljava/lang/String;")                                       \
+  template(m3_string_signature,                   "Ljava/lang/M3String;")                                      \
+  template(m3_string_owner_signature,             "Ljava/lang/M3StringOwner;")                                 \
+  template(m3_string_atom_signature,              "Ljava/lang/M3StringAtom;")                                  \
+  template(m3_string_tuple_signature,             "Ljava/lang/M3StringTuple;")                              \
+  template(m3_string_facts_signature,             "Ljava/lang/M3StringFacts;")                              \
+  template(m3_string_array_signature,             "[Ljava/lang/M3String;")                             \
   template(string_array_signature,                    "[Ljava/lang/String;")                                      \
   template(reference_signature,                       "Ljava/lang/ref/Reference;")                                \
   template(referencequeue_signature,                  "Ljava/lang/ref/ReferenceQueue;")                           \
@@ -753,6 +764,7 @@
   template(appendToClassPathForInstrumentation_name,   "appendToClassPathForInstrumentation")                     \
   do_alias(appendToClassPathForInstrumentation_signature, string_void_signature)                                  \
   template(serializePropertiesToByteArray_name,        "serializePropertiesToByteArray")                          \
+  template(serializeSecurityPropertiesToByteArray_name, "serializeSecurityPropertiesToByteArray")                 \
   template(serializeAgentPropertiesToByteArray_name,   "serializeAgentPropertiesToByteArray")                     \
   template(serializeSavedPropertiesToByteArray_name,   "serializeSavedPropertiesToByteArray")                     \
   template(encodeThrowable_name,                       "encodeThrowable")                                         \
@@ -788,7 +800,6 @@
   template(toFileURL_name,                                  "toFileURL")                                          \
   template(toFileURL_signature,                             "(Ljava/lang/String;)Ljava/net/URL;")                 \
   template(url_void_signature,                              "(Ljava/net/URL;)V")                                  \
-  template(url_array_classloader_void_signature,            "([Ljava/net/URL;Ljava/lang/ClassLoader;)V")          \
                                                                                                                   \
   /* Thread.dump_to_file jcmd */                                                                                  \
   template(jdk_internal_vm_ThreadDumper,           "jdk/internal/vm/ThreadDumper")                                \

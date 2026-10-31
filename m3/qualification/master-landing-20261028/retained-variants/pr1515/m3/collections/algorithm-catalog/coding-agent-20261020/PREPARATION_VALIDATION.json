@@ -1,0 +1,104 @@
+{
+  "schema": "synexia.coding-agent.catalogue-validation.v1",
+  "status": "PASS_METADATA_AND_SOURCE_BINDINGS_ONLY",
+  "bindings": 101,
+  "upstream_recipes": 87,
+  "mechanical_entries": 6,
+  "existing_check_fix_actions": 8,
+  "requirements": 417,
+  "categories": 31,
+  "bound_requirement_candidates": 106,
+  "unbound_requirements": 311,
+  "source_pins": 102,
+  "dag_shapes": 8,
+  "YAML_examples": 4,
+  "YAML_and_Maven_execution": false,
+  "source_implementation_generated": false,
+  "storage_protection": "ACTIVE",
+  "files": [
+    {
+      "path": "FOSS_REUSE_DECISION.tsv",
+      "bytes": 1673,
+      "sha256": "f476dcd42c37a6c120110c57217ebbde26fe2653b01f301f9404c8b046e4f4e3",
+      "git_blob": "b6dfb032cccd8e8ad5f86284a0404f8010c50c9b"
+    },
+    {
+      "path": "MAVEN_INVOCATION.json",
+      "bytes": 1658,
+      "sha256": "5fcd405f9228adebb42f0a5dd177702e8ed8e5055f8d0667e13a4742abcfbfb3",
+      "git_blob": "f79ff03ef79719eb530fdce510e9949af231f0b9"
+    },
+    {
+      "path": "PROGRAMMING_REQUIREMENTS.json",
+      "bytes": 214575,
+      "sha256": "d547e5c273d239489daaee384ab6b3191595c7103295bbc511b5eac228e38445",
+      "git_blob": "34c0819637927739e37873f826ae6903b951b16d"
+    },
+    {
+      "path": "PROGRAMMING_REQUIREMENTS.tsv",
+      "bytes": 130852,
+      "sha256": "b70f9d823510e5a263da62366922375a632d0bd57ea29fa9e6e44d62b161efd5",
+      "git_blob": "c0fec27bb690cad1732091e6eb605643502ef18d"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3369,
+      "sha256": "5235f0d5e2a0408a9931aae2df70962d127003301ab900426dc592f8316c0a00",
+      "git_blob": "79285e489ff47571b4bb7e3f7d58001fbec901b8"
+    },
+    {
+      "path": "RECIPE_BINDINGS.json",
+      "bytes": 220640,
+      "sha256": "3797cd227731c02f44dc3b1d88f4e113ef949f559d3677378890441685083ee5",
+      "git_blob": "8ed282b7be635959e9cd30b3ebf456bcaab938b5"
+    },
+    {
+      "path": "RECIPE_BINDINGS.tsv",
+      "bytes": 45319,
+      "sha256": "bfe7f5c4442d4955d619252ccbab8cd94308c8d81b9f6155ed9af2ddbe675ac6",
+      "git_blob": "fda8a99f04056565ce0299c14847739d79c9c4aa"
+    },
+    {
+      "path": "RECIPE_DAG_SHAPES.json",
+      "bytes": 15055,
+      "sha256": "42b64d8ede88f78079319d02798b398e07571c6e8b04fcaa1fa8afaf5a34e41a",
+      "git_blob": "7b9986131c545bbd306e556dbc566b5ed0bad052"
+    },
+    {
+      "path": "REGEX_CONTRACT.json",
+      "bytes": 1619,
+      "sha256": "813072053cab9bd79a8c8a057ec3a64e0229cae48f56fcfb52230f0359c3f668",
+      "git_blob": "7444ca5c825c75c4446d58dfe67c189e3fd896b5"
+    },
+    {
+      "path": "SCOPE_CONTRACT.json",
+      "bytes": 2995,
+      "sha256": "81df0c956ed594f17c28e15a9f8b5aee0d563d4c4a7669b002cde6a461b5a905",
+      "git_blob": "021e554f27245f661e0396ce7d18377b6208ce7b"
+    },
+    {
+      "path": "SCOPED_RECIPE_EXAMPLES.yml",
+      "bytes": 2339,
+      "sha256": "e6047123138d6915f97773b3f9b04ca19452586dfe2acbc5a7551802c93bb7de",
+      "git_blob": "1bafdcbca4418ced92afd58de23cc8d332e91aec"
+    },
+    {
+      "path": "SELECTION_EXAMPLES.json",
+      "bytes": 1731,
+      "sha256": "dc478a2207615994f242d8c8ce5346c4a3ce0be1332d2c16f16cfae5cdf33a0f",
+      "git_blob": "e35f8e2cb99a9d8066b64dcb940f14fd0460b940"
+    },
+    {
+      "path": "SOURCE_PINS.json",
+      "bytes": 63298,
+      "sha256": "1aed6997a912a1a278c95f0f429431056752db8d3e07add50a2b2e2802bbe8f9",
+      "git_blob": "33c6fc670df25a494b581bf69cd5422a1feeaf29"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "bytes": 928,
+      "sha256": "e5e41c1bf09b6a6224e5a9cb9e68ddfbf7c43f388c3c1b05c91689bb2c9829bb",
+      "git_blob": "99c7764aab81b0784c153f366d5fe47294dd1302"
+    }
+  ]
+}

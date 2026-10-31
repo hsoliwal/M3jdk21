@@ -1,0 +1,57 @@
+id	task	capability	input_or_condition	expected_observation	status
+A01	T1	C01	Directory with files nested folders and empty folders	Every eligible descendant once; root excluded	NOT_RUN_RUNTIME
+A02	T1	C02	Directory excluded by output predicate	Children still visited unless descent predicate rejects	NOT_RUN_RUNTIME
+A03	T1	C02	Pruned directory with inaccessible descendants	No child directory open or content read attempted	NOT_RUN_RUNTIME
+A04	T1	C03	Zero and bounded directory depths	Exact documented boundary with no accidental root emission	NOT_RUN_RUNTIME
+A05	T1	C03	Symlink loop and dangling link	No-follow emits link; explicit follow detects cycle	NOT_RUN_RUNTIME
+A06	T1	C04	Collect entries then inspect in reverse	Names types provenance and coordinates remain stable	NOT_RUN_RUNTIME
+A07	T1	C04	Unknown archive size versus empty file	Unknown distinct from zero and unknown-aware predicates	NOT_RUN_RUNTIME
+A08	T2	C05	Execute plan twice after source mutation	Fresh execution observes declared live state; plan unmodified	NOT_RUN_RUNTIME
+A09	T2	C06	findFirst limit lambda exception and explicit close	All owned traversal handles close; primary exception retained	NOT_RUN_RUNTIME
+A10	T2	C06	Close session while child content is open	Owned child closes; retained metadata stays readable	NOT_RUN_RUNTIME
+A11	T2	C07	Metadata snapshot followed by byte replacement	No claim of old content; content mode retains exact captured bytes	NOT_RUN_RUNTIME
+A12	T2	C07	Files mutate during directory capture	Report per-entry consistency or reject stronger unsupported snapshot	NOT_RUN_RUNTIME
+A13	T2	C19	Effectful predicates and rename/filter order	Do not reorder opaque callbacks or infer purity	NOT_RUN_RUNTIME
+A14	T2	C20	Export plan containing opaque lambda	Explicit refusal; named versioned equivalent exports	NOT_RUN_RUNTIME
+A15	T3	C08	ZIP contains duplicate member names	Retained members read in reverse and concurrently select exact occurrences	NOT_RUN_RUNTIME
+A16	T3	C08	ZIP index or local header inconsistent	Clear read failure; no wrong-member fallback	NOT_RUN_RUNTIME
+A17	T3	C09	tar.gz and tar.xz fixtures	Decode then enumerate correct original member bytes	NOT_RUN_RUNTIME
+A18	T3	C09	Recognized but unsupported encrypted member	Visible unsupported outcome with member identity	NOT_RUN_RUNTIME
+A19	T3	C10	Partial read in sequential scan callback	Next callback begins at the next member; previous content lease closed	NOT_RUN_RUNTIME
+A20	T3	C10	Borrowed stream used after callback	Deterministic closed/expired failure rather than next member bytes	NOT_RUN_RUNTIME
+A21	T3	C11	Duplicate inner archive names and member names	Identity includes all container/member occurrences	NOT_RUN_RUNTIME
+A22	T3	C11	Nested archive exceeds requested limit	Visible incomplete/failure outcome; no complete receipt	NOT_RUN_RUNTIME
+A23	T3	C12	Archive lacks parent directory records	Explicit mode synthesizes each logical parent once without invented attributes	NOT_RUN_RUNTIME
+A24	T4	C13	Unknown size or timestamp selected by predicate	Documented unknown-field decision; no coercion	NOT_RUN_RUNTIME
+A25	T4	C14	Content predicate reads prefix before output consumer	Consumer sees full selected original content	NOT_RUN_RUNTIME
+A26	T4	C14	UTF-8 split sequence BOM malformed input and newline mix	Explicit charset/error policy; no silent normalization	NOT_RUN_RUNTIME
+A27	T4	C16	Rename entry and inspect original source	Source names and bytes unchanged; derived provenance preserved	NOT_RUN_RUNTIME
+A28	T4	C17	Transform changes length and CRC	Old derived facts invalid; new facts computed only from transformed bytes	NOT_RUN_RUNTIME
+A29	T4	C17	Transform stream closes or throws	All underlying content closes; exception and suppressed failures retained	NOT_RUN_RUNTIME
+A30	T4	C18	One entry fans out to two equal names	Distinct derived identities; output collision policy still applied	NOT_RUN_RUNTIME
+A31	T5	C21	Sources contain same names and different bytes	Union preserves both; overlay only under explicit winner policy	NOT_RUN_RUNTIME
+A32	T5	C22	Duplicate keys on both sides of a join	Declared grouping/cardinality or refusal; no arbitrary pair loss	NOT_RUN_RUNTIME
+A33	T5	C23	Same size and mtime but changed bytes	Exact-content diff reports CHANGED	NOT_RUN_RUNTIME
+A34	T5	C23	Comparison read fails on one side	ERROR/UNKNOWN retained; not treated as deleted or unchanged	NOT_RUN_RUNTIME
+A35	T5	C24	Injected digest collision between different byte arrays	Exact verification prevents false deduplication	NOT_RUN_RUNTIME
+A36	T5	C24	Equal content at two required destination names	Storage dedup preserves both; distinctContent removal remains explicit	NOT_RUN_RUNTIME
+A37	T5	C25	Large sort or join under constrained heap	Uses bounded admitted residency/spill or explicit failure without lost entries	NOT_RUN_RUNTIME
+A38	T6	C26	Two analyses request same captured source/context	Reuse existing exact snapshot/parse result; no second parser owner	NOT_RUN_RUNTIME
+A39	T6	C27	Same bytes with different charset parser flags or module context	Reuse rejected where corresponding facts differ	NOT_RUN_RUNTIME
+A40	T6	C27	Rename changes parser filename semantics	Content facts reusable but contextual parse result recomputed	NOT_RUN_RUNTIME
+A41	T6	C28	Supplementary Unicode malformed surrogate and byte transform	No confusion among byte UTF-16 code-point and source coordinates	NOT_RUN_RUNTIME
+A42	T6	C26	Parse fails after provisional node capture	Uncommitted facts not published; original source remains valid	NOT_RUN_RUNTIME
+A43	T7	C29	Selected empty folder written to directory and ZIP	Folder preserved under declared output policy	NOT_RUN_RUNTIME
+A44	T7	C30	Expanded nested archive sent to output without mapping	Refuse ambiguous mapping rather than use display address as path	NOT_RUN_RUNTIME
+A45	T7	C31	Destination case collision path escape or existing symlink	Fail using destination semantics; no writes outside selected tree	NOT_RUN_RUNTIME
+A46	T7	C31	Write cancellation after several files committed	Exact partial receipt and cleanup; no false whole-tree rollback	NOT_RUN_RUNTIME
+A47	T7	C31	Atomic replacement requested on unsupported provider	Explicit refusal before silent guarantee weakening	NOT_RUN_RUNTIME
+A48	T7	C32	Repeat archive write from fixed captured inputs	Byte output reproducible under declared complete metadata policy	NOT_RUN_RUNTIME
+A49	T7	C30	Effectful callback or source change between preview and write	No harmless-preview assumption; revalidate or report stale plan	NOT_RUN_RUNTIME
+A50	T8	C33	Watch overflow missing event duplicate notifications	Reconcile state; no false unchanged proof	NOT_RUN_RUNTIME
+A51	T8	C34	Outer archive replaced with same visible size/mtime	Member index/content generation invalidated and revalidated	NOT_RUN_RUNTIME
+A52	T8	C35	Unknown totals cancellation and consumer failure	Indeterminate progress; correct terminal disposition and no leaks	NOT_RUN_RUNTIME
+A53	T8	C36	Memory pressure while source/content leases are pinned	Canonical payload preserved; permitted optional residency reclaimed only	NOT_RUN_RUNTIME
+A54	T9	C37	Run admitted API in packaged Java 21 image on supported platforms	Correct module exports provider resolution and runtime behavior	NOT_RUN_RUNTIME
+A55	T9	C38	Cold and warm scan/search/parse workloads	Measure CPU allocations retained heap native memory and work counts separately	NOT_RUN_RUNTIME
+A56	T3	C11	Filter only .java while archive expansion selects .jar	Traversal enters selected containers before downstream inclusion filtering	NOT_RUN_RUNTIME

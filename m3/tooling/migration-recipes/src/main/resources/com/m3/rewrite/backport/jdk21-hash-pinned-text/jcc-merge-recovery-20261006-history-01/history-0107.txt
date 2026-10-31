@@ -1,0 +1,918 @@
+{
+  "schema": "jcc-e4-bound-resources-review-packet/1",
+  "state": "ACTUALLY_AUTHORED_AWAITING_INDEPENDENT_RESOURCE_REVIEW",
+  "source_commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+  "destination_preimage_commit": "0994ecd65e86600f417f4d8702838d8c2663af61",
+  "plan_seal": "0aa1f4a3e080c36d233066f0a6e1dc8e1047e6f0592dba60829b8cca3177df64",
+  "plan": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/plan.json",
+    "bytes": 3390,
+    "sha256": "272a4b6a2f6d39a0d7baf2d4a104d671125fe471a2a3351cd321315e6be5d499",
+    "git_blob_sha1": "64fedb3af5b9930d8ef03d1da062ca1e337b5c7e",
+    "mode": "100644"
+  },
+  "manifest": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/manifest.tsv",
+    "bytes": 876,
+    "sha256": "944d1531de586740a9e098f4c36f98f8e4c668f35090b8bc68a116b5c8eb0efb",
+    "git_blob_sha1": "e322acedc29a26c1291e55a773a4e22c1d548eb7",
+    "mode": "100644"
+  },
+  "outputs": [
+    {
+      "path": "m3/docs/jcc-source-handoff.md",
+      "operational_still_before": true,
+      "before": {
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before01-jcc-source-handoff.md.txt",
+        "bytes": 16423,
+        "sha256": "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0",
+        "git_blob_sha1": "69ef3f693b65ec5dc95ab38f35c449c933c1c80b",
+        "mode": "100644"
+      },
+      "after": {
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after01-jcc-source-handoff.md.txt",
+        "bytes": 29680,
+        "sha256": "d5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d",
+        "git_blob_sha1": "9d15a9ebf080117a70e4e17cc4c0793d3971d2f7",
+        "mode": "100644"
+      }
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "operational_still_before": true,
+      "before": {
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before00-name-mapping.json.txt",
+        "bytes": 236215,
+        "sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3",
+        "git_blob_sha1": "d10174dd61016069b9d5b73b7fd581a025855bcc",
+        "mode": "100644"
+      },
+      "after": {
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after00-name-mapping.json.txt",
+        "bytes": 251524,
+        "sha256": "eb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e",
+        "git_blob_sha1": "a28601813e58ae43d4cdddd732a8878c5ea7a79b",
+        "mode": "100644"
+      }
+    },
+    {
+      "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "operational_still_before": true,
+      "before": {
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before03-root-coverage-obligations.tsv.txt",
+        "bytes": 107597,
+        "sha256": "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12",
+        "git_blob_sha1": "b734e19c2dace50691612215e9a7cfb70c014aab",
+        "mode": "100644"
+      },
+      "after": {
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after03-root-coverage-obligations.tsv.txt",
+        "bytes": 107597,
+        "sha256": "1c4eedbf3f155bac469693da312c577d26999e7776ca1f85870f6cce125f1e35",
+        "git_blob_sha1": "d906315e566c4434f2637ffebb58e36e4914cc37",
+        "mode": "100644"
+      }
+    },
+    {
+      "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "operational_still_before": true,
+      "before": {
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before02-source-destination-bindings.json.txt",
+        "bytes": 92103,
+        "sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef",
+        "git_blob_sha1": "b6283a33b9348f4ac6da3adaf5a35edb34a5a0c1",
+        "mode": "100644"
+      },
+      "after": {
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after02-source-destination-bindings.json.txt",
+        "bytes": 167811,
+        "sha256": "f8b27e3582eb494af2c8dd47225976f974be6edc2f6c26313975064d48739497",
+        "git_blob_sha1": "03a517fe8076e08c746f38ac452b8f29c6ecd3ec",
+        "mode": "100644"
+      }
+    }
+  ],
+  "entrypoint_test_and_proof_owners": [
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java",
+      "bytes": 29963,
+      "sha256": "803c34429b567af7a1802f04c2cbb52701cc580f8e0c58cc58ffde70bab70e2b",
+      "git_blob_sha1": "1673f9d635381cbb1f1106f2a39610f54faafe10",
+      "mode": "100644"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-recovery-handoff.yml",
+      "bytes": 638,
+      "sha256": "74248526b328662a9a3ee3cff75b16ff0f3c5d346b035fb5f54d707d738c36bf",
+      "git_blob_sha1": "a4f8bf20c0794ca1ff74b8f88a663a036872749d",
+      "mode": "100644"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/migration/test/test_jcc_source_recovery_handoff_packet.py",
+      "bytes": 17089,
+      "sha256": "90dc23b1a8db4ec3347048c7f85e688a76893633955e877eab723bdd87d58d19",
+      "git_blob_sha1": "e25e8cff096a7d7785b2d61cdbcea64022bc8b9b",
+      "mode": "100644"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml",
+      "bytes": 2846,
+      "sha256": "6ee0745e1927e2bb60e52e5f50af9b77e01d7f45063a35050e8151af2df81f55",
+      "git_blob_sha1": "0755d84f22c3416ae50b62941e411ce050638f9d",
+      "mode": "100644"
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/docs/name-mapping.schema.json",
+      "bytes": 16827,
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+      "git_blob_sha1": "40f032174baa2f1c19e3b02686723bc37f37122c",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/migration/migration.py",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/migration/migration.py",
+      "bytes": 23333,
+      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+      "git_blob_sha1": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/migration/recipe.py",
+      "bytes": 9860,
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
+      "git_blob_sha1": "02f88f9f8b1eb8930fff59684c81bb30819800ad",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "bytes": 12032,
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "git_blob_sha1": "a2e8c916208b563517e51b738744a05357e633aa",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/pom.xml",
+      "bytes": 3383,
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+      "git_blob_sha1": "86f223907bbb053f4792e6bf771c3c0882e1751b",
+      "mode": "100644"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "bytes": 1815,
+      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+      "git_blob_sha1": "92f4d7da32a3b8265675a413311fd304c6dc2dd2",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "bytes": 396,
+      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+      "git_blob_sha1": "2a62a7a35e9e59cf403336c197f60d7e5915b064",
+      "mode": "100644"
+    }
+  ],
+  "authoring": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/AUTHORING_RESULT_V3.json",
+    "bytes": 59614,
+    "sha256": "2880acc74ccba95ce8efe10e8762ebe36275cd44b7de602f07d08f272690ef4b",
+    "git_blob_sha1": "39c2af1cb23416d42a34fe74b3c0e55edc3083bc",
+    "mode": "100644"
+  },
+  "bound_input": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/FINAL_SOURCE_INPUTS_V3.json",
+    "bytes": 83448,
+    "sha256": "df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5",
+    "git_blob_sha1": "8e734cffb31445173044aead798664a81389a0b6",
+    "mode": "100644"
+  },
+  "prior_e3_preserved_payload_files": [
+    {
+      "path": "m3/migration/test/test_jcc_source_final_handoff_packet.py",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/migration/test/test_jcc_source_final_handoff_packet.py",
+      "bytes": 16951,
+      "sha256": "9703fd06fdb5f3616a721730270b15d02fb7593976ff4b210109e5ee57375c4f",
+      "git_blob_sha1": "696ceb92590bcc2548686c6c97b8ba6aa917bb47",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-final-handoff.yml",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-final-handoff.yml",
+      "bytes": 632,
+      "sha256": "4aedf7fb2a3bfab3f831f0c5bdba8764752616e2d92182e66f3962efa8446cd2",
+      "git_blob_sha1": "e4f020e48d3134e597e37b215f5c8405ab75bea1",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after00-name-mapping.json.txt",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after00-name-mapping.json.txt",
+      "bytes": 236215,
+      "sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3",
+      "git_blob_sha1": "d10174dd61016069b9d5b73b7fd581a025855bcc",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after01-jcc-source-handoff.md.txt",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after01-jcc-source-handoff.md.txt",
+      "bytes": 16423,
+      "sha256": "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0",
+      "git_blob_sha1": "69ef3f693b65ec5dc95ab38f35c449c933c1c80b",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after02-source-destination-bindings.json.txt",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after02-source-destination-bindings.json.txt",
+      "bytes": 92103,
+      "sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef",
+      "git_blob_sha1": "b6283a33b9348f4ac6da3adaf5a35edb34a5a0c1",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after03-root-coverage-obligations.tsv.txt",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after03-root-coverage-obligations.tsv.txt",
+      "bytes": 107597,
+      "sha256": "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12",
+      "git_blob_sha1": "b734e19c2dace50691612215e9a7cfb70c014aab",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before00-name-mapping.json.txt",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before00-name-mapping.json.txt",
+      "bytes": 220539,
+      "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace",
+      "git_blob_sha1": "895458cdc16a87f915f34747e1bf8684b827f16d",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before01-jcc-source-handoff.md.txt",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before01-jcc-source-handoff.md.txt",
+      "bytes": 17031,
+      "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+      "git_blob_sha1": "f7991e22d16e01c9d9626add7d6894a1404dc19c",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before02-source-destination-bindings.json.txt",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before02-source-destination-bindings.json.txt",
+      "bytes": 24139,
+      "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+      "git_blob_sha1": "375a65a82dd39b5fa278e52472f3a99bdd5c9fdf",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before03-root-coverage-obligations.tsv.txt",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before03-root-coverage-obligations.tsv.txt",
+      "bytes": 107504,
+      "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+      "git_blob_sha1": "5ed0454b97e046042a6ffce38f29a06776016378",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/manifest.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/manifest.tsv",
+      "bytes": 876,
+      "sha256": "4e8bd94f8dd29256ca41dee2fb0b5164ba24c387038143d88d5fa958e6ecdad5",
+      "git_blob_sha1": "15f10c1fa21138816bda76d42545db9c015ab650",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
+      "bytes": 3414,
+      "sha256": "ae42e3db29017106b47f493fc663ca679ead1802558699915d1a3a1fb3454c48",
+      "git_blob_sha1": "9b5be4d1bbd8c817b6f29aa42e82326304ac741d",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccSourceFinalHandoffTest.java",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccSourceFinalHandoffTest.java",
+      "bytes": 24518,
+      "sha256": "c08ec9e4ecd9c803c310bdbce32ae3b23cad9c0953db408f36a399d980736309",
+      "git_blob_sha1": "97c6851c29af7c8eca66d00d62ecc5cc953a3adf",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/REVIEW.md",
+      "bytes": 10628,
+      "sha256": "75a3f91291331447ef7c2093dab8844d2a8d1636a8ac928ec884d8e039632250",
+      "git_blob_sha1": "1ee42bcc489a0f7317fe87f0940d8d014ce8d967",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/01-check-E2-preimages.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/01-check-E2-preimages.json",
+      "bytes": 1645,
+      "sha256": "bdc11d9d7e07444e87b05548ae334d46f975c0ba40821f5bd78a57faa33cb73d",
+      "git_blob_sha1": "bf14eb3294ce1a9162d7ab4af40a2efa59e727e8",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/01-check-E2-preimages.stderr.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/01-check-E2-preimages.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/01-check-E2-preimages.stdout.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/01-check-E2-preimages.stdout.log",
+      "bytes": 177,
+      "sha256": "aa93e0784744196e9b44871f3e2b99491d354ac0cc5c7100a1b03529539db74d",
+      "git_blob_sha1": "3371200c48d1064d1b2923a9b63db4ffaee4447b",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/02-actual-text-recipe-maven.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/02-actual-text-recipe-maven.json",
+      "bytes": 1623,
+      "sha256": "641a0029d9ae43b052f176d2b78445b21014acde6f0aeff2cd26c81c04aa982d",
+      "git_blob_sha1": "962f733777b54ec2017254a1eeb655d19a90448b",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/02-actual-text-recipe-maven.stderr.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/02-actual-text-recipe-maven.stderr.log",
+      "bytes": 210,
+      "sha256": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55",
+      "git_blob_sha1": "16fe39932aaeac0592dbd6b686f9089bec9c28ac",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/02-actual-text-recipe-maven.stdout.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/02-actual-text-recipe-maven.stdout.log",
+      "bytes": 2629,
+      "sha256": "5b2544383f9ed80a58a994df641093034aaee8f61b2826322739fcc7bb2d1097",
+      "git_blob_sha1": "f7c7fb493f9a6a2d7b43565232878e0b5bcb523b",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/03-actual-packet-contract.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/03-actual-packet-contract.json",
+      "bytes": 1305,
+      "sha256": "094ce20878d1f32d534558deeccb9d0d74854d23324d3e77d5e4e56fdf3adbe5",
+      "git_blob_sha1": "e5c020f359d16fe3f61292ca5f3a650877395b27",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/03-actual-packet-contract.stderr.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/03-actual-packet-contract.stderr.log",
+      "bytes": 1252,
+      "sha256": "c1a8b249dcfa0c56577194cc2a9f85502fb3c817c13301d27a56c72672bed7ef",
+      "git_blob_sha1": "fb14d43525190960a7e428b26c6392ee994e6952",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/03-actual-packet-contract.stdout.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/03-actual-packet-contract.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/04-apply.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/04-apply.json",
+      "bytes": 1606,
+      "sha256": "a61de4e8b41058e8caff26fb329cf7e8e5a8c5a99cf77b93939fd9a0a02ebfa2",
+      "git_blob_sha1": "71114098cce30fc7af831b897988fa093bab6a4a",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/04-apply.stderr.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/04-apply.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/04-apply.stdout.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/04-apply.stdout.log",
+      "bytes": 176,
+      "sha256": "56d4fe6c67f912938f3ad0dbcec218e9138e7f9ed0140827d9f6e5b9b5ff40b2",
+      "git_blob_sha1": "8d5385bcaa353e92dd66c8d0541f7f0c2a0c8796",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/05-apply-fixed-point.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/05-apply-fixed-point.json",
+      "bytes": 1642,
+      "sha256": "ff2344acf152a26c7beb403d4850a86fea79b0ad20979a7e7e4d85d72603de96",
+      "git_blob_sha1": "794d02358844fe3c518f16a533ac2d2c7b882c19",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/05-apply-fixed-point.stderr.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/05-apply-fixed-point.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/05-apply-fixed-point.stdout.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/05-apply-fixed-point.stdout.log",
+      "bytes": 176,
+      "sha256": "427546e0d791d91055d48136e425e7a2e8713deb058c1e51b7d99769e827ab3c",
+      "git_blob_sha1": "5ffc8a9ee3fc75b74c135d185936a92a8561d501",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/06-rollback.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/06-rollback.json",
+      "bytes": 1618,
+      "sha256": "6b0cf854da053589c409255c4f515405f58a80cafa8f8de29a238c316e65a838",
+      "git_blob_sha1": "01b03693e234c0560dcf7b452160b7062fb1fa15",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/06-rollback.stderr.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/06-rollback.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/06-rollback.stdout.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/06-rollback.stdout.log",
+      "bytes": 177,
+      "sha256": "8055b81e0631c5495af9c11ec3f345b0a5a67cc11ba47462c55a37e42f823eec",
+      "git_blob_sha1": "93f78a22a29523e281aeb869a59d55a2ab260562",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/07-replay.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/07-replay.json",
+      "bytes": 1609,
+      "sha256": "11ac35097f2bfe8e32cf6ca038a4a6c052d1e63a75f924ec5882193f4c612d52",
+      "git_blob_sha1": "672b6d39e4929011430db5cdd15fa754eac94a0e",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/07-replay.stderr.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/07-replay.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/07-replay.stdout.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/07-replay.stdout.log",
+      "bytes": 176,
+      "sha256": "56d4fe6c67f912938f3ad0dbcec218e9138e7f9ed0140827d9f6e5b9b5ff40b2",
+      "git_blob_sha1": "8d5385bcaa353e92dd66c8d0541f7f0c2a0c8796",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/08-check-final.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/08-check-final.json",
+      "bytes": 1624,
+      "sha256": "b7968aef706956f3f7831c773d51a96404f60fe137f328898a1d446f00a5e0f5",
+      "git_blob_sha1": "ada45a9b3a1eeec9738049632bde4f3c5d9b10c6",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/08-check-final.stderr.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/08-check-final.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/08-check-final.stdout.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/08-check-final.stdout.log",
+      "bytes": 176,
+      "sha256": "427546e0d791d91055d48136e425e7a2e8713deb058c1e51b7d99769e827ab3c",
+      "git_blob_sha1": "5ffc8a9ee3fc75b74c135d185936a92a8561d501",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/09-whole-map-validate.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/09-whole-map-validate.json",
+      "bytes": 1661,
+      "sha256": "df65843d4ea27575ac3064a415510dfecf9b4d4f8b4bf6529b9b0049ad5612b7",
+      "git_blob_sha1": "ffe5f61fa8583959f325e4e8ed934b7681cd0484",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/09-whole-map-validate.stderr.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/09-whole-map-validate.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/09-whole-map-validate.stdout.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/09-whole-map-validate.stdout.log",
+      "bytes": 47,
+      "sha256": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b",
+      "git_blob_sha1": "407ff20445c228580201d3d921ccfc1ec401a7f7",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/10-completion-remains-blocked.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/10-completion-remains-blocked.json",
+      "bytes": 1688,
+      "sha256": "dc466635b8f90f742fe090bc60d5aa23f839fab05f2e77e352f247229b83ae69",
+      "git_blob_sha1": "1aa1f4e7c4b4a482e87226cbb1404551299c6cba",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/10-completion-remains-blocked.stderr.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/10-completion-remains-blocked.stderr.log",
+      "bytes": 6109,
+      "sha256": "c4a5d6a265b1a39ec6254fe71bc9e58cd55a7658d9ea6d18ccff4cba24687b25",
+      "git_blob_sha1": "097e1a5588bcbff34ce3ae0153d2652b3e224808",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/10-completion-remains-blocked.stdout.log",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/10-completion-remains-blocked.stdout.log",
+      "bytes": 47,
+      "sha256": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b",
+      "git_blob_sha1": "407ff20445c228580201d3d921ccfc1ec401a7f7",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/JccSourceFinalHandoffTest.xml",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/JccSourceFinalHandoffTest.xml",
+      "bytes": 16129,
+      "sha256": "e33dd229900b9614a77e9187b9ac04e024f2250c73c74a625dfe53fba093be85",
+      "git_blob_sha1": "bb99298fd2c7a1819682f73b0d0ed8d93715de09",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/empty-maven-settings.xml",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/empty-maven-settings.xml",
+      "bytes": 59,
+      "sha256": "b546e42cf905023b479e33abc908fed827584e753d6402a372fb11fc1d343bca",
+      "git_blob_sha1": "3e4f47214297278088854a4040fb6b8f4acb081e",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/inputs.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/inputs.json",
+      "bytes": 95340,
+      "sha256": "da48340c83e26dd478078dc5195e000b99666f54663361c1773827acdbd46416",
+      "git_blob_sha1": "7814104de55ea9742edd79e2addfdc16df8c0c17",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/receipt.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/receipt.json",
+      "bytes": 19724,
+      "sha256": "7d075ad45d5113694ded187de27595bcdf0a5fb0909bfadf715c786d06fcd854",
+      "git_blob_sha1": "3f1dac125e969678475bfa918fd60e793a116e01",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/FILE_SEALS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/FILE_SEALS.json",
+      "bytes": 841,
+      "sha256": "41451abbdc2676b9f76d894f82bf08f3406cb76df9015308fb54cdae3e9999e1",
+      "git_blob_sha1": "228b1546f1276fa938877844413d461c3147b3fd",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INPUT_SEALS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INPUT_SEALS.json",
+      "bytes": 141137,
+      "sha256": "d369f629eac19101b1fc80e5cdfeec195ddd26b1555790952b604dbd0e8c045f",
+      "git_blob_sha1": "6b054f73d6df8896f615b2692b9f4bf4cc7f3a08",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INSPECTION.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INSPECTION.json",
+      "bytes": 8303,
+      "sha256": "e47292537c9e43a1712ad56895a462b13ede3d92efae36752ea2591045918625",
+      "git_blob_sha1": "ea530a7b7027bb025eb92dcac87a5e4a2d24a6a0",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INSPECTION_METHOD_NOTES.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INSPECTION_METHOD_NOTES.json",
+      "bytes": 810,
+      "sha256": "23529ef9088bb5cfba0190b030748998203d8e90be634628ddb9097befb15891",
+      "git_blob_sha1": "a8616c4f602afdde12ddfbf4b6ebe5cae98cda78",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/REVIEW.md",
+      "bytes": 10543,
+      "sha256": "8b54e4e6bd75a7a5d12a7acf8ed86861f3d39eab734d284dd5901bd60790f5a8",
+      "git_blob_sha1": "98ed2e262e4b3d7044197e8eb595c68e6ef63173",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/inspect_receiving.py",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/inspect_receiving.py",
+      "bytes": 20397,
+      "sha256": "3bc757f8edd4d7965964392c670d30f5499e05c64b8b1b9ce6f37b73dc83324d",
+      "git_blob_sha1": "b6a8dcf7640ebf8597f24c961e60324bfeb88954",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/FILE_SEALS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/FILE_SEALS.json",
+      "bytes": 962,
+      "sha256": "d91d254762c0c628e46019c2cd53d1b05de1855512eeb5b6efd2e628ae1c3b52",
+      "git_blob_sha1": "55e4f38b10c8f41cdba66b2bdce3012f43f259ee",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/REVIEW.md",
+      "bytes": 7980,
+      "sha256": "d7bc139f4e4af0d7c680c8202adacc3b8d3267761c3865ffcf33f4131fe5e089",
+      "git_blob_sha1": "f841199efee5d90a2ff8f17a069b0a63b9b38b37",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/STRUCTURAL_INSPECTION.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/STRUCTURAL_INSPECTION.json",
+      "bytes": 15679,
+      "sha256": "b450bd8051b630dded029063176e6d4cb5ae59f718419d8052aef6ba2ba5723a",
+      "git_blob_sha1": "dd4118802af85c75d06356b24b380301a4c31182",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/FILE_SEALS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/FILE_SEALS.json",
+      "bytes": 251,
+      "sha256": "ece80d9a65fee0cb0468e25b3598933646e02f2a7b18772f993e01bf396463f6",
+      "git_blob_sha1": "8d1844a254cc34a361c2b3a4c34b0c45af7092aa",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/FINDINGS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/FINDINGS.json",
+      "bytes": 5158,
+      "sha256": "3287044289e953d694ca8655e89e7fed3c29017477393a4d16534dbafca0e5d9",
+      "git_blob_sha1": "4f1c0d07f50c098c12d38c0245b149ec472a54f4",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/REVIEW.md",
+      "bytes": 5166,
+      "sha256": "7c02e8a1c50d729f7ad10e30b57245c6d7c6a7729248a7c8281a060a55729206",
+      "git_blob_sha1": "2911776c4d03cc177efb430b11c54f9df3d3e8e0",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/source-proof/OBSERVATIONS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/source-proof/OBSERVATIONS.json",
+      "bytes": 160597,
+      "sha256": "88602ece9ae5d8577e732c89173ac258951f8955b6f1a7fc592f0214214228f8",
+      "git_blob_sha1": "0c3337d60af7ac1fdd95392dfc4518087688fbc5",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/source-proof/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/source-proof/REVIEW.md",
+      "bytes": 5574,
+      "sha256": "61d7ebff50601cf93c653eff27ce175ccd3ddbab6c5917c586b505774d5f8747",
+      "git_blob_sha1": "f2e36af580e00d304646c6f118bc7892defcf562",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/AUTHORING_RESULT.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/AUTHORING_RESULT.json",
+      "bytes": 3299,
+      "sha256": "12d6973deec9aa7735bd794f1659b68b214ee083dd1b573d826f46ab7efe59f4",
+      "git_blob_sha1": "2dbcf82f4e6453cdfe028e08693613351c179db5",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/author_successor.py",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/author_successor.py",
+      "bytes": 21788,
+      "sha256": "1e56387b23f35b8bf6f1707aac6a11215b8e2999ed65e370820933c95daea161",
+      "git_blob_sha1": "3c1c3ea29e2fb3b971f79c9ec12fed9ea77e7c1b",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/check_references.py",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/check_references.py",
+      "bytes": 14136,
+      "sha256": "0f21d0f5fdf5c0b00c775c6af2f829e301a40de3475bbf08f521a527e82cdd7c",
+      "git_blob_sha1": "09ebfe13f21a0ebfad967b53ae2a624123b1f314",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/run_verification.py",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/run_verification.py",
+      "bytes": 8109,
+      "sha256": "ac7b489278e25f5674fe4804531d0ba6eb732c8376c39b74dcf47a72b4cd9f4a",
+      "git_blob_sha1": "9336bfc939e80b21afdd0f26f1ceaf660ace6ea7",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/REFERENCE_AUDIT.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/REFERENCE_AUDIT.json",
+      "bytes": 178211,
+      "sha256": "a4af3c44bc1afa6f83881c17ced55f418940dbd792bfd687cbb3a717c44887cd",
+      "git_blob_sha1": "3843b99d83f9b98fc4c6dbb655b92fd35c4c4289",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/attempt01-checker.py",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/attempt01-checker.py",
+      "bytes": 14098,
+      "sha256": "8870ec7a99c1d3486740dd80fbcc173a046310c12a512e558fdf5b4860fdc32e",
+      "git_blob_sha1": "be9f980e08b9e323a9d8040a06b09aed874e5c74",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/attempt01.txt",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/attempt01.txt",
+      "bytes": 339,
+      "sha256": "0f6ecbb8c5380bb9f454c16b33dbe574a1847e810e9382cd75cf30a838040e3d",
+      "git_blob_sha1": "4bdeddf04071e45ee84058400426fcc2875bae05",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/FILE_SEALS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/FILE_SEALS.json",
+      "bytes": 399,
+      "sha256": "2a64db3e877371d61908cafdd9a86a2681a8d522672c49f7b1749d5e4541d57e",
+      "git_blob_sha1": "79e235c75dd91585c8eaf717fa665dcace2f6764",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/INPUT_SEALS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/INPUT_SEALS.json",
+      "bytes": 24961,
+      "sha256": "3e566919f1c576b36312744c2030db087f94befad10871dfd1e600fb8e120c7e",
+      "git_blob_sha1": "4e18a5ec623a22f069b130a4e0f1444fc0348746",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/REVIEW.md",
+      "bytes": 12537,
+      "sha256": "7f5f0c54cbac2b8d8201bb386678a03284f99cacdf9295eb4cac3ae9689b85d0",
+      "git_blob_sha1": "7ff0f759dcaa03c662b656ad09f86995fad0df36",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/SOURCE_FIELDS_AND_PROOFS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/SOURCE_FIELDS_AND_PROOFS.json",
+      "bytes": 64185,
+      "sha256": "b0a1ff2a675017bc4eda2620a031bb963d038c21e10ddacb8f57b1fc51f6188a",
+      "git_blob_sha1": "33670d4c3f8d5e9cc1be49f2125c95228abf4a06",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/donor-owners/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/donor-owners/REVIEW.md",
+      "bytes": 10284,
+      "sha256": "276087c23b14a886cb13f45055e1cd105a8bc56c52d7e36d7ede94bae65cd6db",
+      "git_blob_sha1": "ff817d06a8ec5fa0d9975114eba84887c048583b",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/donor-owners/SOURCE_TABLE.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/donor-owners/SOURCE_TABLE.json",
+      "bytes": 11874,
+      "sha256": "e9a1af5f9d9bc36507cee743ebfaa560b2ed5a026645791736d22f1f94528bb4",
+      "git_blob_sha1": "338d8eb6e0ed34d72c27c3e476717a550b3edeb4",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/FILE_SEALS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/FILE_SEALS.json",
+      "bytes": 525,
+      "sha256": "e912f6cad50f06e0679734efef700c07ff4249d796551bc7cb369b04dd1ad219",
+      "git_blob_sha1": "3178a023b8fca9061b32ad2e247d8b02f7233112",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/MAVEN_DECLARATIONS.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/MAVEN_DECLARATIONS.tsv",
+      "bytes": 6173,
+      "sha256": "b0f10b47bfa6f3ea6f27a235c0d55ab7c5fc86ac6dd41dbbc5164f44f5a94e9a",
+      "git_blob_sha1": "db8b56a3995fe4fe2cadfc3965970168bb933d5a",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/REVIEW.md",
+      "bytes": 7562,
+      "sha256": "1c2597b94843a7177731d88de222bc3f5ec38dab60c8ebb0da825b298dee16f6",
+      "git_blob_sha1": "b119fd4388cbf3a9a7c1bbe724c09dec53625c4d",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/ROOT_ACCOUNTING.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/ROOT_ACCOUNTING.json",
+      "bytes": 114933,
+      "sha256": "cfe76d41dda4220937086d951a126bf04dec0d282ba088b6de2a6bff33b6e14d",
+      "git_blob_sha1": "828eca9458cc37ba159984538b0f2e309df592f4",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/ROOT_ENTRIES.tsv",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/ROOT_ENTRIES.tsv",
+      "bytes": 41070,
+      "sha256": "307c01ac0648a8296f5f8b6c7533925de6050344f7a154d524796fc84b2ab4c3",
+      "git_blob_sha1": "6e79358b51049fa71a46784c7765fb0cee77c3ec",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/M3_CURRENT_MASTER_PREIMAGES.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/M3_CURRENT_MASTER_PREIMAGES.json",
+      "bytes": 1137,
+      "sha256": "6e3d2c9760ee93a10b0da660e84a77d002ea2312954b42d3459803c867b57475",
+      "git_blob_sha1": "ea4fb9e885a4e393b48faa479af8b1c1663e8edd",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/PR_STATE_AFTER_SOURCE_PUBLICATION.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/PR_STATE_AFTER_SOURCE_PUBLICATION.json",
+      "bytes": 814,
+      "sha256": "c23d1948cb21f8b3a5e294d3fb0c6c14527a9bed646e082a4dc94ae98832ceb5",
+      "git_blob_sha1": "dc87ed373e521d39ea72bddd81aeabb8dbdb1b99",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/ROOT_ACCOUNTING.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/ROOT_ACCOUNTING.json",
+      "bytes": 114933,
+      "sha256": "cfe76d41dda4220937086d951a126bf04dec0d282ba088b6de2a6bff33b6e14d",
+      "git_blob_sha1": "828eca9458cc37ba159984538b0f2e309df592f4",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_FIELDS_AND_PROOFS.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_FIELDS_AND_PROOFS.json",
+      "bytes": 64185,
+      "sha256": "b0a1ff2a675017bc4eda2620a031bb963d038c21e10ddacb8f57b1fc51f6188a",
+      "git_blob_sha1": "33670d4c3f8d5e9cc1be49f2125c95228abf4a06",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json",
+      "bytes": 370323,
+      "sha256": "03ba5aa231929079fda7772dc6a798a687ba7486fa81ceacc0723407330f956a",
+      "git_blob_sha1": "adb6d06c45d636c29612fe6442374b429a8cba60",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_INITIAL_CI_OBSERVATION.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_INITIAL_CI_OBSERVATION.json",
+      "bytes": 683,
+      "sha256": "6268a6944bf4f5a17f7783daaee5e462f68f2e1cb0853121dba9dc9049a077e9",
+      "git_blob_sha1": "8c66af2495565eea86d01fbe3af09313ccc35a15",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_PRODUCTION_BODY_READBACK.json",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_PRODUCTION_BODY_READBACK.json",
+      "bytes": 3206,
+      "sha256": "0abd6ddcbe96eac76da9a708a2ffc9350c546c1c63382686c600dad3f7fc20df",
+      "git_blob_sha1": "a33428c6607f9ff928748e6d25fe90cee2f9d336",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_REVIEW.md",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_REVIEW.md",
+      "bytes": 12537,
+      "sha256": "7f5f0c54cbac2b8d8201bb386678a03284f99cacdf9295eb4cac3ae9689b85d0",
+      "git_blob_sha1": "7ff0f759dcaa03c662b656ad09f86995fad0df36",
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml",
+      "bytes": 2680,
+      "sha256": "87410fdc613d15f549f155f676be3ba5ab535eb7e7b73eda45f4409fb6dd095a",
+      "git_blob_sha1": "1028c8f92b75c9dba15eab6c40ea9b41012e666d",
+      "mode": "100644"
+    }
+  ],
+  "source_recovery_receipts": 134,
+  "other_records_preserved": 44,
+  "ordered_ids": 46,
+  "gates": 20,
+  "receiving_execution": false,
+  "operational_outputs_unchanged": true,
+  "source_export_admitted": false
+}

@@ -1,0 +1,161 @@
+{
+  "schema": "M3_STRING_KEY_SOURCE_BUILD_V1",
+  "status": "PASS_FRESH_SOURCE_HOTSPOT_AND_JDK_IMAGE",
+  "repository": "hsoliwal/M3JDK21",
+  "baseline": "18213fe70c66567fdfc6ba6f669909e7e9251663",
+  "configuration": "m3-string-keys-release",
+  "configure": {
+    "command": [
+      "bash",
+      "/workspace/scratch/122ce7bf56c1/evidence/configure-product.sh"
+    ],
+    "exit_code": 0,
+    "script": {
+      "path": "evidence/configure-product.sh",
+      "bytes": 1028,
+      "sha256": "02a2f7d631130262d570a3b242469025d068b6b33025a8a05c9361ede99ba62e"
+    },
+    "log": {
+      "path": "evidence/configure-final.log",
+      "bytes": 20005,
+      "sha256": "9029e839c48a7eb1096e7d04272bd3f613ff63fb8ded1c95f09101fe61bfa9bb"
+    },
+    "reuse": {
+      "scope": "build tool reuse only; product sources not reused",
+      "autoconf_input_files_identical": 44,
+      "script_sha256": "a181e7ceab78282a2ddedcbb90c9895da8ee759b19897b673a70f7a8e6c1956d",
+      "prior_path": "/workspace/scratch/81117b672ae3/work/M3jdk21/build/.configure-support/generated-configure.sh",
+      "new_path": "/workspace/scratch/122ce7bf56c1/m3jdk21/build/.configure-support/generated-configure.sh"
+    }
+  },
+  "builds": [
+    {
+      "argv": [
+        "make",
+        "CONF=m3-string-keys-release",
+        "JOBS=6",
+        "hotspot"
+      ],
+      "cwd": "/workspace/scratch/122ce7bf56c1/m3jdk21",
+      "exit_code": 0,
+      "exit_code_basis": "exec PTY session 65486 completed with exit0; final completion marker also verified",
+      "log": {
+        "path": "evidence/hotspot-build.log",
+        "bytes": 457,
+        "sha256": "7fd87004ea545a2603aeda76b6b7c06ad78c098c44c443f95c3a5c4259c97842"
+      }
+    },
+    {
+      "argv": [
+        "make",
+        "CONF=m3-string-keys-release",
+        "JOBS=6",
+        "images"
+      ],
+      "cwd": "/workspace/scratch/122ce7bf56c1/m3jdk21",
+      "exit_code": 0,
+      "exit_code_basis": "exec PTY session 13555 completed with exit0; final completion marker also verified",
+      "log": {
+        "path": "evidence/images-build.log",
+        "bytes": 13945,
+        "sha256": "172b429d95c94f65712c2058b0740d4847a881d78c77c6fd76e877930c735913"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "label": "image-version",
+      "argv": [
+        "/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk/bin/java",
+        "-version"
+      ],
+      "cwd": "/workspace/scratch/122ce7bf56c1/m3jdk21",
+      "exit_code": 0,
+      "log": {
+        "path": "evidence/source-build-image-version.log",
+        "bytes": 193,
+        "sha256": "6be6c5577cba9da0b5a1e9983b9ee54679a4a62f86997212b060828ae1208637"
+      }
+    },
+    {
+      "label": "diff-whitespace",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/workspace/scratch/122ce7bf56c1/m3jdk21",
+      "exit_code": 0,
+      "log": {
+        "path": "evidence/source-build-diff-whitespace.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "received_production_files": [
+    {
+      "path": "m3jdk21/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "bytes": 33662,
+      "sha256": "c5140d787c8d4043d049c907bc813166a5515fead51401dd7c8e9e08010204ee"
+    },
+    {
+      "path": "m3jdk21/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "bytes": 17725,
+      "sha256": "f060bd939e4c8e10d2dd6e4e10f203c576d58ce775c56b26d41e70bfafd8d69e"
+    },
+    {
+      "path": "m3jdk21/src/java.base/share/classes/java/lang/M3String.java",
+      "bytes": 59326,
+      "sha256": "f5f779775ababfe10d6e71e4db8fae0b780df639d91508776874dadbe3d42ac3"
+    },
+    {
+      "path": "m3jdk21/src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java",
+      "bytes": 9098,
+      "sha256": "31aac4163520c012e912439fa9cc24f61174653134daaa4a045f28a953b16152"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "m3jdk21/build/m3-string-keys-release/images/jdk/bin/java",
+      "bytes": 16320,
+      "sha256": "c769b14c621116f0aa73d9a56a4983b97586c0abfca029ff02fcc07ae9ffdda0"
+    },
+    {
+      "path": "m3jdk21/build/m3-string-keys-release/images/jdk/bin/javac",
+      "bytes": 16416,
+      "sha256": "17df2cbab249823f79f962793dfcd2596ed271d7c996cadbf9a715b4060c5b58"
+    },
+    {
+      "path": "m3jdk21/build/m3-string-keys-release/images/jdk/bin/jmod",
+      "bytes": 16384,
+      "sha256": "e3b4539690741f49e783802b8c953e6f9675ba70c9b441fb4623aa29dcb3f4c7"
+    },
+    {
+      "path": "m3jdk21/build/m3-string-keys-release/images/jdk/bin/jlink",
+      "bytes": 16416,
+      "sha256": "bba233dc12daed35e2198c7241155dad38a3570bd58b2758b4272ec979d8d4d6"
+    },
+    {
+      "path": "m3jdk21/build/m3-string-keys-release/images/jdk/lib/server/libjvm.so",
+      "bytes": 26473064,
+      "sha256": "94ac420a0bc67d936988c73594541b881a1c8a8eff9e24aa4ce78724bfa46ef7"
+    },
+    {
+      "path": "m3jdk21/build/m3-string-keys-release/images/jdk/lib/modules",
+      "bytes": 143326288,
+      "sha256": "85a9fb910b1afdad42666d4856275f677f0be0f34a5292059b5228671bb92de7"
+    },
+    {
+      "path": "m3jdk21/build/m3-string-keys-release/images/jdk/jmods/java.base.jmod",
+      "bytes": 25389478,
+      "sha256": "9403ce6711e6e07d01bd8007b9afa63d5abee8f36f970125e07eba4d99745e80"
+    },
+    {
+      "path": "m3jdk21/build/m3-string-keys-release/images/jdk/release",
+      "bytes": 1223,
+      "sha256": "b3942bd09d34924bcf807804098c8044ec2fe6b19988438076de8edbeff5d829"
+    }
+  ],
+  "scope": "New source-built HotSpot and JDK image. The generated configure helper alone was reused after 44 autoconf input files matched byte-for-byte. No previous product binaries reused. Source-policy, selected jtreg and installed collection module results are recorded separately; this record does not assert whole-SDK qualification."
+}

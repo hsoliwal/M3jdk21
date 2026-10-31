@@ -1,0 +1,14 @@
+metric	value
+frozen_branches	26
+PR_descriptions_inspected	17
+candidate_to_target_ahead_commits	143
+confirmed_ancestry_only_merge_landmarks	2
+local_tool_tests_passed	31
+JDK_tests_run_this_session	0
+runtime_files_changed	0
+semantic_recovery_completion	OPEN
+full_Git_traversal_local	NOT_RUN
+additional_PR_descriptions_inspected	18 and 19
+additional_ancestry_only_landmark	4a81f3b3050fa5572ec1ff9368e2c383231db2e6
+hosted_jobs_executed	0
+PR_created	20

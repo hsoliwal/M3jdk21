@@ -1,0 +1,10 @@
+{
+  "source": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-jmh-measurements-20261018\\protocol-v2\\JMH.json",
+  "source_bytes": 120501,
+  "source_sha256": "1bcdb418207fc329d800b6c59b0fff3062993a79a0794fd1e158e0bbececaea3",
+  "archive": "S:\\codex-work\\m3-collections-next-20261018\\m3-tree-jmh-measurements-20261018\\protocol-v2\\JMH.json.gz",
+  "archive_bytes": 13238,
+  "archive_sha256": "f505e6443eff60f02728396700349f77b6887e962e519b257e0fe0d52a25804e",
+  "verified_full_roundtrip": true,
+  "remove_only_redundant_generated_json": true
+}

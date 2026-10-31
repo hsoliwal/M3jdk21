@@ -1,0 +1,8 @@
+lane	source	licenseState	disposition	purpose
+CANONICAL_SOURCE	hsoliwal/com.synexia exact pinned blobs	Apache-2.0	COPY_ADAPT	materialize already-selected first-party owners only
+JDK_CONTRACT_ORACLE	OpenJDK/JDK 21 java.util surfaces	retain upstream OpenJDK licensing	EVIDENCE_ONLY	API serialization behavior and target integration oracle; no source copied in this wave
+ECLIPSE_COLLECTIONS	Eclipse Collections	exact revision/license review required before any copy	EVIDENCE_ONLY	future algorithm/shape comparison only
+GUAVA	Guava	exact revision/license review required before any copy	EVIDENCE_ONLY	future collection utility/behavior comparison only
+APACHE_COLLECTIONS	Apache collection projects	exact project revision/license review required before any copy	EVIDENCE_ONLY	future category-specific comparison only
+SPECIALIZED_COLLECTIONS	fastutil HPPC Agrona Koloboke or other candidate	exact repository revision/path/license review required before any copy	EVIDENCE_ONLY	future primitive/storage strategy comparison only
+CHALLENGE_TAXONOMY	LeetCode HackerRank GeeksForGeeks	no solution/editorial source intake	TAXONOMY_ONLY	adversarial problem shapes and test ideas only

@@ -1,0 +1,76 @@
+{
+  "compile": {
+    "offline": true,
+    "production_sources": 133,
+    "release": 21,
+    "strict": true,
+    "test_sources": 158
+  },
+  "detached": true,
+  "focused_runtime": {
+    "comparator-failure": {
+      "contract_passed": false,
+      "exit": 1,
+      "inherited_failure_retained": true
+    },
+    "readonly-effects": {
+      "checks": 8,
+      "exit": 0
+    },
+    "readonly-policy": {
+      "checks": 25,
+      "exit": 0
+    }
+  },
+  "junit": {
+    "baseline_suites": 77,
+    "baseline_tests": 231,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "suites": 78,
+    "tests": 232
+  },
+  "manifest_sha256": "72e8bae307bc0bf5765ae2a55f99417375cd73cf533d0efb52691d23459f3d2d",
+  "public_protected_api": {
+    "identical": true,
+    "owner": "com.m3.collections.M3FilteredLists",
+    "signature_sha256": "501a138684ef77a5590ed2b691e2b16d67dbadb3e82aacdcc1b6d74c8b454477"
+  },
+  "review_sha256": "71d78d223c06b0f0b4cafe7c719c749a38fa4ec499fb777d5f23cae802eed100",
+  "revision": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "sdk_bindings_verified_per_pass": [
+    316,
+    338,
+    345
+  ],
+  "sdk_input_drift": false,
+  "source_change_count": 3,
+  "source_changes": [
+    {
+      "actual_sdk_postimage": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75",
+      "change_kind": "MODIFIED_PRODUCTION",
+      "pass": "readonly-iterator",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "preimage": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d"
+    },
+    {
+      "actual_sdk_postimage": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847",
+      "change_kind": "ADDED_TEST",
+      "pass": "wrapper-contract-v2",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java",
+      "preimage": "ABSENT"
+    },
+    {
+      "actual_sdk_postimage": "fe071ef7e801a9bb1d57501512f0dd606f0c08652e100e6132dc7c4e4a8f6327",
+      "change_kind": "ADDED_TEST",
+      "pass": "wrapper-junit-v2",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java",
+      "preimage": "ABSENT"
+    }
+  ],
+  "source_drift": false,
+  "status": "PR1_SCOPE_QUALIFIED_WITH_DISCLOSED_INHERITED_COMPARATOR_FAILURE",
+  "utc": "2026-10-18T06:06:49.356312+00:00",
+  "worktree": "/workspace/scratch/7846804a0074/M3jdk21-pr1-review"
+}

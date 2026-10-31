@@ -1,0 +1,18 @@
+[
+  {
+    "comparison": "source-unchanged",
+    "before_sha256": "0e0ddfc53acaeb28137319fd20ee5005f9d7231949ebd3106193c287f13be9b8",
+    "after_sha256": "0e0ddfc53acaeb28137319fd20ee5005f9d7231949ebd3106193c287f13be9b8",
+    "equal": true,
+    "before_git_blob": "d0eb96ae49c0456c8d31f1e714882b525b4c9a97",
+    "after_git_blob": "d0eb96ae49c0456c8d31f1e714882b525b4c9a97"
+  },
+  {
+    "comparison": "target-correction",
+    "before_sha256": "df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9",
+    "after_sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+    "equal": false,
+    "before_git_blob": "f4b4144f104eb4816cb80a44c136fa90b8114dc4",
+    "after_git_blob": "92f4d7da32a3b8265675a413311fd304c6dc2dd2"
+  }
+]

@@ -1,0 +1,179 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.tooling.dag;
+
+import com.m3.rewrite.scope.M3EditScope;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
+/**
+ * Evidence-complete collection of bounded, dependency-closed packets and explicit ordered joins.
+ *
+ * <p>Packet budgets and local dependency rules remain those of {@link M3BackportPacket}. The
+ * collection adds only joins over packet terminals or earlier joins. Original logical identities
+ * are retained in a complete, deterministic alias map; the composed DAG uses the bounded aliases.
+ * The canonical DAG kernel remains responsible for cycle, scope and serial-promotion validation.
+ */
+public record M3BackportPacketCollection(
+        String collectionId,
+        List<M3BackportPacket> packets,
+        List<M3BackportPacketEvidence> evidence,
+        List<M3RecipeAtom> joins,
+        List<M3RecipeAtomEvidence> joinEvidence,
+        Map<String, String> aliases,
+        String descriptorSHA256) {
+
+    public M3BackportPacketCollection {
+        collectionId = Objects.requireNonNull(collectionId, "collectionId");
+        if (!collectionId.matches("[a-z0-9][a-z0-9-]{0,79}")) {
+            throw new IllegalArgumentException("invalid collection id: " + collectionId);
+        }
+        Objects.requireNonNull(packets, "packets");
+        Objects.requireNonNull(evidence, "evidence");
+        Objects.requireNonNull(joins, "joins");
+        Objects.requireNonNull(joinEvidence, "joinEvidence");
+        Objects.requireNonNull(aliases, "aliases");
+        requireBudgets(packets, evidence, joins, joinEvidence, aliases);
+        packets = List.copyOf(packets);
+        evidence = List.copyOf(evidence);
+        joins = List.copyOf(joins);
+        joinEvidence = List.copyOf(joinEvidence);
+        aliases = Map.copyOf(aliases);
+        requireBudgets(packets, evidence, joins, joinEvidence, aliases);
+        descriptorSHA256 = Objects.requireNonNull(descriptorSHA256, "descriptorSHA256");
+        if (!descriptorSHA256.matches("[0-9a-f]{64}")) {
+            throw new IllegalArgumentException("invalid collection descriptor SHA-256");
+        }
+        Map<String, M3BackportPacketEvidence> evidenceByPacket = new LinkedHashMap<>();
+        for (M3BackportPacketEvidence row : evidence) {
+            if (evidenceByPacket.putIfAbsent(row.packetId(), row) != null) {
+                throw new IllegalArgumentException("duplicate packet evidence: " + row.packetId());
+            }
+        }
+        Set<String> packetIds = new HashSet<>();
+        Set<String> atomIds = new HashSet<>();
+        Set<String> availableJoinDependencies = new HashSet<>();
+        for (M3BackportPacket packet : packets) {
+            if (!packetIds.add(packet.packetId())) {
+                throw new IllegalArgumentException("duplicate collection packet: " + packet.packetId());
+            }
+            M3BackportPacketEvidence rows = evidenceByPacket.get(packet.packetId());
+            if (rows == null) {
+                throw new IllegalArgumentException("missing packet evidence: " + packet.packetId());
+            }
+            rows.requireComplete(packet);
+            for (M3RecipeAtom atom : packet.atoms()) {
+                if (!atomIds.add(atom.id())) {
+                    throw new IllegalArgumentException("duplicate collection atom: " + atom.id());
+                }
+            }
+            packet.terminalAtoms().forEach(atom -> availableJoinDependencies.add(atom.id()));
+        }
+        if (!packetIds.equals(evidenceByPacket.keySet())) {
+            throw new IllegalArgumentException("extra collection packet evidence");
+        }
+
+        Set<String> joinIds = new HashSet<>();
+        for (M3RecipeAtom join : joins) {
+            if (join.dependsOn().size() > 256) {
+                throw new IllegalArgumentException("collection join dependency budget");
+            }
+            if (!atomIds.add(join.id())) {
+                throw new IllegalArgumentException("duplicate collection atom: " + join.id());
+            }
+            for (String dependency : join.dependsOn()) {
+                if (!availableJoinDependencies.contains(dependency)) {
+                    throw new IllegalArgumentException(
+                            "join dependency is not a packet terminal or prior join: " + dependency);
+                }
+            }
+            joinIds.add(join.id());
+            availableJoinDependencies.add(join.id());
+        }
+        Set<String> evidencedJoins = new HashSet<>();
+        for (M3RecipeAtomEvidence row : joinEvidence) {
+            if (!evidencedJoins.add(row.atomId())) {
+                throw new IllegalArgumentException("duplicate join evidence: " + row.atomId());
+            }
+        }
+        if (!joinIds.equals(evidencedJoins)) {
+            throw new IllegalArgumentException("join evidence must cover exactly the collection joins");
+        }
+
+        Set<String> aliasIds = new HashSet<>();
+        for (Map.Entry<String, String> entry : aliases.entrySet()) {
+            if (!aliasOf(entry.getKey()).equals(entry.getValue())) {
+                throw new IllegalArgumentException("incorrect atom alias: " + entry.getKey());
+            }
+            if (!aliasIds.add(entry.getValue())) {
+                throw new IllegalArgumentException("atom alias collision: " + entry.getValue());
+            }
+        }
+        if (!aliasIds.equals(atomIds)) {
+            throw new IllegalArgumentException("aliases must cover exactly the collection atoms");
+        }
+    }
+
+    /** Bound caller inputs before copying and enforce the same policy on captured snapshots. */
+    private static void requireBudgets(
+            List<M3BackportPacket> packets,
+            List<M3BackportPacketEvidence> evidence,
+            List<M3RecipeAtom> joins,
+            List<M3RecipeAtomEvidence> joinEvidence,
+            Map<String, String> aliases) {
+        if (packets.isEmpty() || packets.size() > 16 || evidence.size() > 16
+                || joins.size() > 16 || joinEvidence.size() > 16 || aliases.size() > 4112) {
+            throw new IllegalArgumentException("collection input budget");
+        }
+    }
+
+    /** Deterministic bounded identity; the original remains in the collection's alias map. */
+    public static String aliasOf(String original) {
+        String checked = Objects.requireNonNull(original, "original");
+        if (!checked.matches("[a-z0-9][a-z0-9-]{0,1023}")) {
+            throw new IllegalArgumentException("invalid original atom id: " + checked);
+        }
+        try {
+            return "a-" + HexFormat.of().formatHex(
+                    MessageDigest.getInstance("SHA-256").digest(checked.getBytes(StandardCharsets.UTF_8)));
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new ExceptionInInitializerError(impossible);
+        }
+    }
+
+    /** Packet order, packet-local atom order, then declared join order; no atom is duplicated. */
+    public List<M3RecipeAtom> atoms() {
+        ArrayList<M3RecipeAtom> result = new ArrayList<>();
+        packets.forEach(packet -> result.addAll(packet.atoms()));
+        result.addAll(joins);
+        return List.copyOf(result);
+    }
+
+    /** Every global terminal rejoins the single canonical recipe-JUnit node. */
+    public List<M3RecipeAtom> terminalAtoms() {
+        List<M3RecipeAtom> all = atoms();
+        Set<String> dependencies = new HashSet<>();
+        all.forEach(atom -> dependencies.addAll(atom.dependsOn()));
+        return all.stream().filter(atom -> !dependencies.contains(atom.id())).toList();
+    }
+
+    public M3EditScope maximumScope() {
+        M3EditScope scope = M3EditScope.FILE;
+        for (M3RecipeAtom atom : atoms()) {
+            scope = scope.promote(atom.scope());
+        }
+        return scope;
+    }
+
+    public int edgeCount() {
+        return atoms().stream().mapToInt(atom -> atom.dependsOn().size()).sum();
+    }
+}

@@ -1,0 +1,52 @@
+{
+  "status": "PASS_E2_LINKED_SDK_FOCUSED_SUCCESSOR_QUALIFICATION",
+  "utc": "2026-10-21T03:16:29.680524+00:00",
+  "epoch": "E2",
+  "image": "${IMAGE_E2}",
+  "sourceSdk": "${SOURCE_SDK_E2}",
+  "platform": "Linux x86_64",
+  "moduleJarSha256": "a1e9c1dc0234ddc6fa3ae0534d981d2467ec11fa93add05c25ca5b0bf693e879",
+  "jmodSha256": "94aefb435be9818d2155bef4b0177f06978cdf2ecbcf416b8b213895f2261f16",
+  "imageModuleStoreSha256": "5d32a676e1adc57c0cfd405111b1a35f35d69701f1c3d626d88a8c02ffdb5c3c",
+  "moduleCount": 29,
+  "productionClassFiles": 512,
+  "sourceCollectionFilesVerifiedUnchanged": 567,
+  "productNativeLibraries": 10,
+  "generatedJniExports": 21,
+  "ownershipClasses": 7,
+  "stringFixtureRuns": 6,
+  "publicCoreRuns": 7,
+  "installedNativeModuleRuns": 2,
+  "observedTargetedProductionClasses": 10,
+  "allSourceAndInputSealsUnchanged": true,
+  "e1LinkedImageAndReceiptsUnchanged": true,
+  "e1PreservedSourceSdkDifferences": [],
+  "receiverPostimages": {
+    "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java": "732c410330a1137aace06d3b20e0e8a86899b4fe98f15c738d588102383c4052",
+    "test/jdk/java/lang/String/M3StringConcatReferenceDagTest.java": "053c69bd70909731e6509d06f6b29d31a24e2fb669a57f82bf22587e44e839c0",
+    "src/java.base/share/classes/java/lang/M3StringPool.java": "a4fe0b9327d48748083d92e6212f306bc8e039a76ed437afd6ecee57b903aa6e",
+    "test/jdk/java/lang/String/M3StringCanonicalDagTest.java": "ce58fbed5fb3608d625059d32b565bba80ca1bfa7ed556bdaa4d86ad03454c95",
+    "test/jdk/java/lang/String/M3StringPoolMetadataBoundsTest.java": "1ead247d909137f295633f488f8db0849f405cfed75a87ba4f3779ab67ff9180",
+    "m3/runtime-integration/check-m3string-concat-reference-dag.py": "4fff9f78297b91a63c401e9fd9994de6ed643207661bb58fd099d0870e073ec2",
+    "m3/runtime-integration/recipe/manifest.json": "416f8c17500afd1d9d2d2e3a7a85e300cf9807fbac7ead514b9c48cf0494e4e5"
+  },
+  "reusedEvidence": {
+    "epoch": "E1",
+    "junit": {
+      "tests": 491,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "qualificationSha256": "ebfe21b2318db1efa48996b64553beca35d125d7f1b84997d9c7263c356bf4f1",
+    "fresh491TestRunAtE2": false
+  },
+  "receiptSha256": {
+    "PREPARED.json": "61a529de06dff0d62ce2523331adb468ac4b9b7edb6e0007cf2ca3c43d53edce",
+    "SOURCE_SDK_INPUTS.json": "d7eb5761220869d2eecb192d90d05981745d3cd1fd29c4805cdbcda0bc6ccfc4",
+    "STATIC_OWNERSHIP.json": "c6a69545f9c74b58c4c180bfa1edda61a270341975680ee33247249c56b76a07",
+    "CLASS_ORIGINS.json": "ec0eb0bd00139f1942c5400c47a123f619a8a1635352d8f479a75c9bc5acd579",
+    "RUNS.json": "c4e5a1e21f47a786cc2591206b6fa8bb77244c03161b3792b5b97ae5e0a46ec3"
+  },
+  "scope": "Fresh E2 relink, installed ownership/packaging and focused String/public-core/native contracts. The complete 491-test owning linked suite is retained E1 evidence, not newly executed E2 evidence. No global receiving phase is advanced."
+}

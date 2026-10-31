@@ -1,0 +1,129 @@
+a3-proof	UNKNOWN STEP	﻿2026-10-25T07:40:31.4872016Z Current runner version: '2.338.0'
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4897377Z ##[group]Runner Image Provisioner
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4898427Z Hosted Compute Agent
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4899082Z Version: 20261021.618
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4899812Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4900672Z Build Date: 2026-10-21T00:45:21Z
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4901427Z Worker ID: {ba735f33-5c48-4351-8b89-ebb114ae1f3d}
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4902217Z Region: northcentralus
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4902868Z Cloud: Azure
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4903457Z ##[endgroup]
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4905674Z ##[group]Operating System
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4906359Z Ubuntu
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4906916Z 22.04.5
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4907587Z LTS
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4908209Z ##[endgroup]
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4908865Z ##[group]Runner Image
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4909510Z Image: ubuntu-22.04
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4910114Z Version: 20261012.322.1
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4911518Z Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20261012.322/images/ubuntu/Ubuntu2204-Readme.md
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4913192Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20261012.322
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4914602Z ##[endgroup]
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4915838Z ##[group]GITHUB_TOKEN Permissions
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4917861Z Contents: read
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4918505Z Metadata: read
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4919247Z ##[endgroup]
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4921364Z Secret source: Actions
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4922485Z Cache mode: write
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.4923238Z Prepare workflow directory
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.5276136Z Prepare all required actions
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.5325157Z Getting action download info
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:31.7546671Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.0192469Z Complete job name: a3-proof
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.1209252Z ##[group]Run set -euo pipefail
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.1209920Z [36;1mset -euo pipefail[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.1210483Z [36;1mtest -n "$HEAD_SHA"[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.1211646Z [36;1mcurl --fail --location --retry 3             "https://codeload.github.com/${GITHUB_REPOSITORY}/tar.gz/${HEAD_SHA}"             -o "$RUNNER_TEMP/repo.tar.gz"[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.1212867Z [36;1mmkdir -p "$RUNNER_TEMP/repo"[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.1213706Z [36;1mtar -xzf "$RUNNER_TEMP/repo.tar.gz" -C "$RUNNER_TEMP/repo" --strip-components=1[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.1214879Z [36;1mprintf 'REPO=%s\n' "$RUNNER_TEMP/repo" >> "$GITHUB_ENV"[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.1598523Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.1599491Z env:
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.1600006Z   HEAD_SHA: 15f1f76227bc6c5697a7cf64fe8f5f818f56efe2
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.1600631Z ##[endgroup]
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.1838892Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.1840381Z                                  Dload  Upload   Total   Spent    Left  Speed
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.1841090Z 
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:32.3846164Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:33.2889601Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:34.2722531Z 100 5634k    0 5634k    0     0  5092k      0 --:--:--  0:00:01 --:--:-- 5090k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:35.2758787Z 100 11.1M    0 11.1M    0     0  5472k      0 --:--:--  0:00:02 --:--:-- 5472k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:36.2916034Z 100 18.5M    0 18.5M    0     0  6128k      0 --:--:--  0:00:03 --:--:-- 6127k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:37.2841252Z 100 27.0M    0 27.0M    0     0  6729k      0 --:--:--  0:00:04 --:--:-- 6728k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:38.3155379Z 100 35.2M    0 35.2M    0     0  7075k      0 --:--:--  0:00:05 --:--:-- 7367k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:39.2915834Z 100 43.5M    0 43.5M    0     0  7262k      0 --:--:--  0:00:06 --:--:-- 7741k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:40.2785620Z 100 52.0M    0 52.0M    0     0  7492k      0 --:--:--  0:00:07 --:--:-- 8334k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:41.2724639Z 100 72.5M    0 72.5M    0     0  9169k      0 --:--:--  0:00:08 --:--:-- 10.7M
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:42.2917063Z 100  100M    0  100M    0     0  11.0M      0 --:--:--  0:00:09 --:--:-- 14.7M
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:43.2848678Z 100  118M    0  118M    0     0  11.6M      0 --:--:--  0:00:10 --:--:-- 16.5M
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:44.2723092Z 100  125M    0  125M    0     0  11.2M      0 --:--:--  0:00:11 --:--:-- 16.4M
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:45.2746666Z 100  132M    0  132M    0     0  10.9M      0 --:--:--  0:00:12 --:--:-- 16.0M
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:46.2730273Z 100  138M    0  138M    0     0  10.5M      0 --:--:--  0:00:13 --:--:-- 13.2M
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:47.2748006Z 100  146M    0  146M    0     0  10.3M      0 --:--:--  0:00:14 --:--:-- 9341k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:48.2733419Z 100  153M    0  153M    0     0  10.1M      0 --:--:--  0:00:15 --:--:-- 7195k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:49.2720353Z 100  160M    0  160M    0     0   9.9M      0 --:--:--  0:00:16 --:--:-- 7285k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:50.2889378Z 100  169M    0  169M    0     0   9.8M      0 --:--:--  0:00:17 --:--:-- 7549k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:51.2844952Z 100  177M    0  177M    0     0   9.7M      0 --:--:--  0:00:18 --:--:-- 7864k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:52.3219898Z 100  185M    0  185M    0     0  9930k      0 --:--:--  0:00:19 --:--:-- 8020k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:53.2997298Z 100  191M    0  191M    0     0  9724k      0 --:--:--  0:00:20 --:--:-- 7707k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:54.2911908Z 100  197M    0  197M    0     0  9577k      0 --:--:--  0:00:21 --:--:-- 7487k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:55.2889447Z 100  204M    0  204M    0     0  9448k      0 --:--:--  0:00:22 --:--:-- 7141k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:56.2767553Z 100  212M    0  212M    0     0  9429k      0 --:--:--  0:00:23 --:--:-- 7273k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:57.2762590Z 100  219M    0  219M    0     0  9339k      0 --:--:--  0:00:24 --:--:-- 7074k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:58.2858571Z 100  226M    0  226M    0     0  9242k      0 --:--:--  0:00:25 --:--:-- 7285k
+a3-proof	UNKNOWN STEP	2026-10-25T07:40:59.2738147Z 100  233M    0  233M    0     0  9169k      0 --:--:--  0:00:26 --:--:-- 7443k
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:00.2845071Z 100  240M    0  240M    0     0  9100k      0 --:--:--  0:00:27 --:--:-- 7552k
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:01.2906208Z 100  247M    0  247M    0     0  9027k      0 --:--:--  0:00:28 --:--:-- 7169k
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:02.2793500Z 100  254M    0  254M    0     0  8953k      0 --:--:--  0:00:29 --:--:-- 7099k
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:03.2715975Z 100  261M    0  261M    0     0  8909k      0 --:--:--  0:00:30 --:--:-- 7240k
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:04.3035269Z 100  268M    0  268M    0     0  8835k      0 --:--:--  0:00:31 --:--:-- 7084k
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:05.2724663Z 100  274M    0  274M    0     0  8744k      0 --:--:--  0:00:32 --:--:-- 6829k
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:06.2730726Z 100  281M    0  281M    0     0  8703k      0 --:--:--  0:00:33 --:--:-- 6878k
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:07.2717535Z 100  290M    0  290M    0     0  8710k      0 --:--:--  0:00:34 --:--:-- 7293k
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:07.9500830Z 100  297M    0  297M    0     0  8667k      0 --:--:--  0:00:35 --:--:-- 7203k
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:07.9502353Z 100  301M    0  301M    0     0  8642k      0 --:--:--  0:00:35 --:--:-- 7361k
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:17.9615874Z ##[group]Run set -euo pipefail
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:17.9616507Z [36;1mset -euo pipefail[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:17.9618356Z [36;1mcurl --fail --location --retry 3             'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz'             -o "$RUNNER_TEMP/jdk21.tar.gz"[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:17.9620702Z [36;1mprintf '%s  %s\n'             '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6'             "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:17.9622053Z [36;1mtar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:17.9622827Z [36;1mprintf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:17.9623640Z [36;1mprintf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:17.9726922Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:17.9727506Z env:
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:17.9728151Z   REPO: /home/runner/work/_temp/repo
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:17.9728608Z ##[endgroup]
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:17.9903185Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:17.9904494Z                                  Dload  Upload   Total   Spent    Left  Speed
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:17.9906396Z 
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:18.1443738Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:18.1446207Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:18.2736572Z 
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:18.7575417Z  12  198M   12 23.9M    0     0  84.6M      0  0:00:02 --:--:--  0:00:02 84.6M
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:18.7576427Z 100  198M  100  198M    0     0   258M      0 --:--:-- --:--:-- --:--:--  360M
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:19.7162062Z /home/runner/work/_temp/jdk21.tar.gz: OK
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:21.9937550Z ##[group]Run set -euo pipefail
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:21.9937888Z [36;1mset -euo pipefail[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:21.9938177Z [36;1mcurl --fail --location --retry 3 \[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:21.9938700Z [36;1m  "https://codeload.github.com/hsoliwal/com.synexia/tar.gz/${SYNEXIA_A3_COMMIT}" \[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:21.9939220Z [36;1m  -o "$RUNNER_TEMP/synexia-a3.tar.gz"[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:21.9939567Z [36;1mmkdir -p "$RUNNER_TEMP/synexia-a3"[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:21.9939901Z [36;1mtar -xzf "$RUNNER_TEMP/synexia-a3.tar.gz" \[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:21.9940271Z [36;1m  -C "$RUNNER_TEMP/synexia-a3" --strip-components=1[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:21.9940617Z [36;1mmvn -B -ntp \[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:21.9941031Z [36;1m  -f "$RUNNER_TEMP/synexia-a3/synexia-openrewrite-recipes/pom-jdk-a3-export.xml" \[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:21.9941478Z [36;1m  install[0m
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:22.0018865Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:22.0019224Z env:
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:22.0019500Z   REPO: /home/runner/work/_temp/repo
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:22.0019808Z   JAVA_HOME: /home/runner/work/_temp/jdk-21+35
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:22.0020178Z   SYNEXIA_A3_COMMIT: a062661e91e769a00c2d027e1f04a7a0c8f9dc28
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:22.0020517Z ##[endgroup]
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:22.0171168Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:22.0172136Z                                  Dload  Upload   Total   Spent    Left  Speed
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:22.0173095Z 
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:22.1032854Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:22.1033645Z   0    14    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:22.1034698Z curl: (22) The requested URL returned error: 404
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:22.1063186Z ##[error]Process completed with exit code 22.
+a3-proof	UNKNOWN STEP	2026-10-25T07:41:22.1274173Z Cleaning up orphan processes

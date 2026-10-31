@@ -1,0 +1,139 @@
+{
+  "source_templates": {
+    "MIndexRecordComponent": {
+      "sha256": "b63a7f5a59d3badd7340e00021f2eaa410645d0f4a5d25a5a570797897969457",
+      "git_blob": "56d5b4adead17be7fef8e4b750f13fdf75d98a31",
+      "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexRecordComponent.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexField": {
+      "sha256": "ae3d0439814c26aa0a012984aa6d4debef70bd31590b403f9643634c231cd8b4",
+      "git_blob": "bc93b18d5ee4867a841ac036ffb35dcd1e72c3f4",
+      "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexField.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexMemberKind": {
+      "sha256": "76c8a68d9f1bafa36df848da02c1b00c4d738e7ff09c63d6761d6c8f892e20cb",
+      "git_blob": "9ba32db4528c74535a68c656b891d08924b75dc0",
+      "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexMemberKind.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexClassBoundary": {
+      "sha256": "ea78f4d9e5870f6951dba8a124019aa96396261aac041c8ad8c247a6ddc35c3a",
+      "git_blob": "9166e2168afc6a78fe8bdb7e570defc178c7c35e",
+      "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClassBoundary.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexClassIndex": {
+      "sha256": "047eb00e579a0bed899419373e19514f0e06876efec39b9cfa2bca2d391196aa",
+      "git_blob": "35632a8688201f2a6849b52e325daa27ae3a7bfe",
+      "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClassIndex.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexJvmDescriptor": {
+      "sha256": "0e0ddfc53acaeb28137319fd20ee5005f9d7231949ebd3106193c287f13be9b8",
+      "git_blob": "d0eb96ae49c0456c8d31f1e714882b525b4c9a97",
+      "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexJvmDescriptor.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexClass": {
+      "sha256": "bd4e1312397b2d0b836f69aa32be6f7846cce69d30abc814936d0a88af06ea7c",
+      "git_blob": "488bfc02c9830b333f45c631a9fa933cec56ea91",
+      "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClass.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexVmPrecomputeKey": {
+      "sha256": "406f451222b1f6e950c28439316fdbcd6e9cfb9463658e1deec85cfe41197f1a",
+      "git_blob": "fc9aef1cce8e43ca81fd922ca6ea406417b1334b",
+      "path": "synexia-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/com/synexia/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmPrecomputeKey.java.txt",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexVmSession": {
+      "sha256": "bdeb857abaa302a40c4f542c23c4629eb0091f04d56d60545d6ca51325ff92a4",
+      "git_blob": "d2fb810dccd53b5ecccde9063a348199f78e0672",
+      "path": "synexia-openrewrite-recipes/crates/mindex-vm-runtime/src/main/resources/com/synexia/rewrite/hash-pinned-java/mindex-vm-runtime/MIndexVmSession.java.txt",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexMemberFlags": {
+      "sha256": "febb6a32912e4149ca5521b149c86554f37d978382242589603aa9265139dfb9",
+      "git_blob": "9a84c2a18fecd4b67a0c503527347e2d4f75d2c8",
+      "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexMemberFlags.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexMember": {
+      "sha256": "4230b2df028a54d833284d373c044b58c4ffde0da1f15b394372d9cbff6e97da",
+      "git_blob": "70cd228801272d8e5fcb68bce280d2cb842e5ae8",
+      "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexMember.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexClassFlags": {
+      "sha256": "bc3fcc4bc3f582e6565c1c8509038217e7a7360dbb0e290c66b03090c0f6961e",
+      "git_blob": "d8131ebce1c01a014a9320e2ec771673f2d06b5c",
+      "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexClassFlags.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexConstructor": {
+      "sha256": "3b2b432ebb29f5f08e30b8f9194a2675f052a238f5f16432ac9e3d26e9d489c2",
+      "git_blob": "24be84434f65bffed5a5f0c609cbe596ae2b4985",
+      "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexConstructor.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexMethod": {
+      "sha256": "b11190cdc801a2ce46078fa04d364d9362402c3aef4ff16aebac05a56898aaaa",
+      "git_blob": "41268ab2541b70fef70767557228bf568d9a01b7",
+      "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexMethod.java",
+      "license": "Apache-2.0",
+      "adaptation": "See README.md; JDK-owned counterpart"
+    },
+    "MIndexAlgorithm": {
+      "sha256": "993c38054e42c14efe27b52fa0b1e4d322aa17a2f8bdf7e8a460d4adbabe9e35",
+      "git_blob": "44975a54d368ecaf774683ab5d64bd14bb070209",
+      "path": "synexia-mindex/foundation/src/main/java/com/synexia/mindex/foundation/MIndexAlgorithm.java",
+      "license": "Apache-2.0",
+      "adaptation": "Only lowerBound and upperBound int-lane method bodies inlined into M3CI"
+    }
+  },
+  "legal": {
+    "LICENSE": {
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "git_blob": "29f81d812f3e768fa89638d1f72920dbfd1413a8",
+      "source_commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
+      "path": "LICENSE"
+    },
+    "NOTICE": {
+      "sha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+      "git_blob": "cf6694a1316785ba2aa45394314bbae2e856c7fe",
+      "source_commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
+      "path": "NOTICE"
+    }
+  },
+  "schema": 1,
+  "source_repository": "hsoliwal/com.synexia",
+  "source_commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
+  "target_base": "3ec445df10a3e8fc74aa983181f0700ac7bfbcad",
+  "crate": "m3-cb",
+  "scope": "MODULE; reflection snapshot and caller-owned Class bridge; no automatic ClassLoader/JVMTI hook",
+  "recipe_path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+  "recipe_sha256": "b96894a77e5c310addbda72b248ab56fedf8ceb24e5de81fe6e5d090982a4abc",
+  "history_review": {
+    "scope": "Read current pinned owner bodies and source commit metadata; not a complete-history admission",
+    "class_index_commits": [
+      "c25936c56b53313ced464f8741a496472494f16f",
+      "61ec083652f52218bb940dc6892d4c83861e681e",
+      "32cccbadd179d05b0d3a1708088bed9f356a1d79"
+    ]
+  }
+}

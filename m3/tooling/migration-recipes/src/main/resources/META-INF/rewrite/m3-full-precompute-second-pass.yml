@@ -1,0 +1,13 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.M3FullPrecomputeSecondPass
+displayName: Install M3 full precompute second pass
+description: >-
+  Replays the target-owned M3JDK full-precompute port, native JNI lane, tests and canonical
+  documentation only from exact receiver preimages or already-converged postimages. The port is
+  isolated under m3/ports/precompute; no java.lang.String promotion is implied.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: m3-full-precompute-second-pass
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-full-precompute-second-pass

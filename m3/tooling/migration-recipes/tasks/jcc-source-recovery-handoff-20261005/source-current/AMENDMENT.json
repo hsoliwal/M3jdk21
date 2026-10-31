@@ -1,0 +1,17 @@
+{
+  "corrected": {
+    "bytes": 1891080,
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/CURRENT_SOURCE_MANIFEST.json",
+    "sha256": "20fd857cb00711e02c34cd27445bd2c057db8f57a0cafb8ed9a455b453f3b37c"
+  },
+  "initial": {
+    "bytes": 1887717,
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/amendments/initial-503-handoff/CURRENT_SOURCE_MANIFEST.json",
+    "sha256": "446ab69557e33fe3d0e56ce3179d6b09d7a2769e42d10b5b1747b491da7aadb3"
+  },
+  "new_selected_inputs": 2,
+  "parent_surefire_correction": "Complete109-path current parent map resolves bothtest selectors; earlier108-path helper list omitted the already-selectedMastery test.",
+  "reason": "Initial role-limit text incorrectly described the JCC POM path as absent. The path exists with older91-source configuration; the delivered443-source form was not retained. Both POMs are now identity-bound and current91-source roles were added.",
+  "schema": "SYNEXIA_INVENTORY_WORDING_CORRECTION/1",
+  "unchanged_all503_original_published_current_bodies_and_path_proofs": true
+}

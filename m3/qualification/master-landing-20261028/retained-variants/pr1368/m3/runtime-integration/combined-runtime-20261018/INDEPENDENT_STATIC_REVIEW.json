@@ -1,0 +1,24 @@
+{
+  "schema": "M3_COMBINED_STATIC_REVIEW_V1",
+  "reviewed_head": "ab6cc64eddd17ea81242bf58a7a19cb130a58c77",
+  "prospective_regex_range": "combine/pr1315..combine/pr1320",
+  "reviewer": "independent combined_review agent",
+  "critical": [],
+  "important": [],
+  "scope": [
+    "every changed collections production Java/C file",
+    "all six prospective prepared String/Matcher facts files",
+    "all four tested TQ guard postimages"
+  ],
+  "observations": [
+    "array and offset geometry, signed arithmetic, full-width masks, aliases, detached output, group reversal, backing identity, comparator and read-only boundaries reviewed",
+    "JNI exception and reference paths reviewed",
+    "prepared facts use exact owner/range and conservative signal query; negative global facts safely reject subregions; positive queries retain regional exact verification",
+    "unrelated guards and order preserved; new hashes match executed hosted source epoch"
+  ],
+  "limits": [
+    "static review and hashes do not qualify execution",
+    "collections proving modules do not establish JDK backend acceptance",
+    "matched image, bootstrap, storage/compiler test modes and performance/memory measurements remain independent gates"
+  ]
+}

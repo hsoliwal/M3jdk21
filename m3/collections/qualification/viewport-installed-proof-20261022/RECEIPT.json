@@ -1,0 +1,49 @@
+{
+  "schema": "M3_VIEWPORT_BUILD_RECEIVER_20261022_V1",
+  "canonical_commit": "7087b720799e68d1c1f96d2d6574ba0320fcead5",
+  "canonical_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/viewport-installed-proof-20261022",
+  "canonical_tree": "09fcffa20ae73e66f069d06b0d656153f6275572",
+  "product_parent": "3ed252b92a5b029ea6ae00816ab6a4a4cda56ce1",
+  "status": "PASS_SCOPED_SDK_INSTALLED_NATIVE",
+  "sdk_tests": 7,
+  "sdk_results": 3,
+  "fixed_point_changes": 0,
+  "complete_entrypoint_exit": 0,
+  "product_command_count": 26,
+  "refusal_controls": 9,
+  "runtime_java_c_modified": false,
+  "runtime_apis_or_exports_changed": false,
+  "java_page_wired": false,
+  "targets": [
+    {
+      "path": "m3/collections/viewport-proof/CMakeLists.txt",
+      "before_sha256": "ABSENT",
+      "after_sha256": "42c729b26b2cded8dd1ca723b724648ad8807768637feba738c18f1293db248b",
+      "git_blob": "f9ae1de7a223c62bc87c8a946013a4b0496bb1b3"
+    },
+    {
+      "path": "m3/collections/viewport-proof/verify.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "b3e902faef7c29c28e48afbfb484c3cbebda8769dba2b3ed54fec2f9d765f293",
+      "git_blob": "1f55d3d2292ebf03d2fc6cf5bda77cd455e58aa9"
+    },
+    {
+      "path": "m3/collections/viewport-proof/verify.sh",
+      "before_sha256": "ccb22adceb62ea97207daead1e2fd28723e3a0d6f08879d28171a7959b8a4036",
+      "after_sha256": "2f5da0701d7a7d35e1bf60518dca44bf2d136caee143dbeb1d7f75f509549930",
+      "git_blob": "8057d53dbad55ea43c9d0c9ad8a7d612334500bc"
+    }
+  ],
+  "observations": {
+    "java-M3MaskViewportKernelContract": "PASS checks=94442 jni=false\n",
+    "java-M3MaskViewportPageContract": "M3_MASK_VIEWPORT_PAGE_PASS checks=121831 existingJni=false\n",
+    "jni-M3MaskViewportKernelContract": "PASS checks=144449 jni=true\n",
+    "jni-M3MaskViewportPageContract": "M3_MASK_VIEWPORT_PAGE_PASS checks=163640 existingJni=true\n"
+  },
+  "installed_sha256": "7c95d39ad5eccf60046870d8da923192f462834a64e6e09cf6721815e1d0f6ce",
+  "relocated_sha256": "7c95d39ad5eccf60046870d8da923192f462834a64e6e09cf6721815e1d0f6ce",
+  "source_before_equals_after": true,
+  "raw_log_entries": 87,
+  "raw_log_sha256": "46684701e97ef0623eef94782d2afbffafb2589a8bcc700ecd7b05fc452f1625",
+  "completion": false
+}

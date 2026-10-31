@@ -1,0 +1,7 @@
+Exception in thread "main" java.lang.AssertionError: interior-null floor skips hidden null: expected=-2 actual=null
+	at com.m3.collections.M3WrapperConvergenceContract.equal(M3WrapperConvergenceContract.java:36)
+	at com.m3.collections.M3WrapperConvergenceContract.interiorNullNavigation(M3WrapperConvergenceContract.java:350)
+	at com.m3.collections.M3WrapperConvergenceContract.run(M3WrapperConvergenceContract.java:377)
+	at com.m3.collections.M3WrapperConvergenceContract.main(M3WrapperConvergenceContract.java:383)
+
+EXIT=1

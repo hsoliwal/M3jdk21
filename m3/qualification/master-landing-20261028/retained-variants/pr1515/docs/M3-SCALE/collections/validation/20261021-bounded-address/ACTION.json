@@ -1,0 +1,198 @@
+{
+  "schema": "synexia.scoped-existing-executor-action.v1",
+  "id": "m3.collections.validate-bounded-address-windows-20261021",
+  "status": "SCOPED_WINDOWS_PROOF_PASS",
+  "action_kind": "VALIDATE_EXISTING_UNCHANGED_JAVA_JNI",
+  "executor_kind": "EXISTING_JAVA_MAIN_AND_NATIVE_BUILD_OWNER",
+  "scope": {
+    "repository": "hsoliwal/M3JDK21",
+    "source_ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
+    "module": "m3/collections",
+    "files": [
+      "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java",
+      "m3/collections/src/test/java/com/m3/collections/M3LongAddressBoundedSelfTest.java",
+      "m3/collections/src/main/native/collections/m3_long_address_kernel.c"
+    ],
+    "owner": "com.m3.collections.M3LongAddressKernel",
+    "member": "gatherInto(long[],int[],int,int,long[],int,M3IndexMaskCompactor.Backend)"
+  },
+  "inputs": {
+    "source_pins": "SOURCE_PINS.json",
+    "static_tool_pins": "TOOL_PINS.json",
+    "compiled_artifact_manifest": "COMPILE_OUTPUTS.json",
+    "invoker": "com.m3.collections.M3LongAddressBoundedSelfTest",
+    "invoker_arguments": []
+  },
+  "typed_bindings": {
+    "jdk": {
+      "type": "existing-jdk21-installation",
+      "pinned": true
+    },
+    "gcc": {
+      "type": "existing-mingw-w64-gcc15.2.0-installation",
+      "pinned": true
+    },
+    "fixture": {
+      "type": "fresh-owned-output-directory",
+      "required": true,
+      "required_output_drive": "K",
+      "distinct_from": "retained_root",
+      "controls": "EXECUTION_ARGV_PROJECTION.json#storage_controls"
+    },
+    "empty_native": {
+      "type": "empty-directory",
+      "required": true,
+      "path": "${fixture}/empty-native"
+    },
+    "retained_classes": {
+      "type": "immutable-class-directory",
+      "count": 11,
+      "path": "${retained_root}/classes"
+    },
+    "address_DLL": {
+      "type": "fresh-PE-x86-64-DLL",
+      "sha256": "3a931a52c2ca097f1fa9a690b40178d3de3aac57299bf9ba5f14250b7b81453f",
+      "path": "${fixture}/native/m3_collections_address.dll"
+    },
+    "retained_root": {
+      "type": "immutable-source-class-header-cohort-directory",
+      "access": "READ_ONLY",
+      "source_mapping": "EXECUTION_ARGV_PROJECTION.json#source_to_repository_mapping",
+      "compiled_manifest": "COMPILE_OUTPUTS.json"
+    },
+    "address_DLL_directory": {
+      "type": "owned-native-library-output-directory",
+      "path": "${fixture}/native"
+    },
+    "address_header": {
+      "type": "generated-JNI-header",
+      "access": "READ_ONLY",
+      "path": "${retained_root}/headers/com_m3_collections_M3LongAddressKernel.h",
+      "sha256": "d05efb9e3c397b1fc8cba4404372c9052efc91a2eea54d2e48b46cde93252dbf"
+    },
+    "native_C": {
+      "type": "existing-unchanged-C-source",
+      "access": "READ_ONLY",
+      "path": "${retained_root}/native-src/m3_long_address_kernel.c",
+      "source_pin": "SOURCE_PINS.json"
+    },
+    "input_sources": {
+      "type": "source-to-repository-binding-array",
+      "count": 5,
+      "mapping": "EXECUTION_ARGV_PROJECTION.json#source_to_repository_mapping"
+    },
+    "agent_temp": {
+      "type": "verified-K-agent-temp-directory",
+      "capacity_gate_before_probe": true
+    }
+  },
+  "dag": [
+    {
+      "id": "strict_java_compile_checkpoint",
+      "after": [],
+      "disposition": "RETAINED_ONCE_NOT_REPLAYED",
+      "outputs": "COMPILE_OUTPUTS.json"
+    },
+    {
+      "id": "compile_native",
+      "after": [
+        "strict_java_compile_checkpoint"
+      ],
+      "exit": 0,
+      "compiler_options": [
+        "-std=c17",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wconversion",
+        "-Wshadow",
+        "-pedantic",
+        "-shared",
+        "-O2"
+      ],
+      "generated_header_force_included": true
+    },
+    {
+      "id": "native_exports",
+      "after": [
+        "compile_native"
+      ],
+      "exit": 0,
+      "required_exports": [
+        "Java_com_m3_collections_M3LongAddressKernel_gatherNative"
+      ]
+    },
+    {
+      "id": "missing_required",
+      "after": [
+        "native_exports"
+      ],
+      "exit": 1,
+      "JVM_properties": {
+        "m3.address.required": "true",
+        "java.library.path": "${empty_native}"
+      },
+      "expected_refusal": true
+    },
+    {
+      "id": "java_only",
+      "after": [
+        "missing_required"
+      ],
+      "exit": 0,
+      "JVM_properties": {
+        "m3.address.required": "false",
+        "java.library.path": "${empty_native}"
+      }
+    },
+    {
+      "id": "native_required",
+      "after": [
+        "java_only"
+      ],
+      "exit": 0,
+      "JVM_properties": {
+        "m3.address.required": "true",
+        "java.library.path": "${address_DLL_directory}"
+      }
+    }
+  ],
+  "JVM_options": [
+    "-ea",
+    "-Xcheck:jni",
+    "-XX:+UseSerialGC"
+  ],
+  "profile_isolation": "Each main runs in a separate process; native_required must load the freshly hashed DLL. Native availability never authorizes Java fallback in required mode.",
+  "guards": [
+    "Exact immutable source and tool pins",
+    "fresh owned runtime; bounded output and storage reserve",
+    "exclusive JVM lock with exact ownership",
+    "native process terminal, zero job-active count and all handles closed before release"
+  ],
+  "observables": {
+    "java_only_checks": 11020139,
+    "java_fingerprint": "-9036386136120340114",
+    "native_enabled_checks": 21975732,
+    "native_fingerprint": "-8730037866241443045",
+    "exact_symbol": "Java_com_m3_collections_M3LongAddressKernel_gatherNative"
+  },
+  "qualification": "QUALIFICATION.json",
+  "source_edits": false,
+  "tests_authored": false,
+  "recipe_replayed": false,
+  "new_engine": false,
+  "global_phase_advance": false,
+  "invocation": {
+    "projection": "EXECUTION_ARGV_PROJECTION.json",
+    "argument_arrays": "observed_launches[*].argv",
+    "source_mapping": "source_to_repository_mapping",
+    "environment": "environment_construction",
+    "controls": "storage_controls",
+    "dispatch": "OBSERVED_ARGUMENTS_NOT_REGISTERED_GENERIC_EXECUTOR",
+    "retained_compile": "Already completed successfully; consume pinned artifacts, do not rerun javac.",
+    "all_six_jobs": "Already physically terminal; this packet is reviewable evidence and invocation shape, not a replay request."
+  },
+  "global_admission": "HOLD_FOR_UNQUALIFIED_BROADER_GATES; scoped Windows proof only"
+}

@@ -1,0 +1,22 @@
+{
+  "started_utc": "2026-10-20T11:23:58.110980+00:00",
+  "repository": "https://repo.maven.apache.org/maven2/",
+  "artifacts": [
+    {
+      "url": "https://repo.maven.apache.org/maven2/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar",
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar",
+      "bytes": 13501708,
+      "published_sha1": "7cd66c2793e4d9511f6da8fc6c621575171c2da1",
+      "sha256": "f5f5404fa5a60f9e0b15e7bea2ea2d137e255f01babd0bfcb9dafcd2e3bf9cd2"
+    },
+    {
+      "url": "https://repo.maven.apache.org/maven2/com/google/re2j/re2j/1.8/re2j-1.8.jar",
+      "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/com/google/re2j/re2j/1.8/re2j-1.8.jar",
+      "bytes": 114335,
+      "published_sha1": "12c25e923e9e4fb1575a7640a2698745c6f19a94",
+      "sha256": "7b52c72156dd7f98b3237a5b35c1d34fba381b21048c89208913ad80a45dfbd7"
+    }
+  ],
+  "status": "PASS",
+  "finished_utc": "2026-10-20T11:23:58.706107+00:00"
+}

@@ -1,0 +1,120 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----< com.synexia.verification:m3-ast-build-reverse-recipe-proof >-----
+[INFO] Building m3-ast-build-reverse-recipe-proof 1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-cli) @ m3-ast-build-reverse-recipe-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.M3TaskRecipeTest
+[ERROR] Tests run: 5, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 14.74 s <<< FAILURE! -- in com.synexia.rewrite.M3TaskRecipeTest
+[ERROR] com.synexia.rewrite.M3TaskRecipeTest.qualifiedSdkResultsAreRetained -- Time elapsed: 4.044 s <<< ERROR!
+java.lang.IllegalStateException: invalid hash-pinned text manifest row
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.targets(M3HashPinnedTextSnapshotRecipe.java:240)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:94)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:40)
+	at org.openrewrite.ScanningRecipe.lambda$getAccumulator$0(ScanningRecipe.java:89)
+	at java.base/java.util.HashMap.computeIfAbsent(HashMap.java:1228)
+	at org.openrewrite.Cursor.computeMessageIfAbsent(Cursor.java:285)
+	at org.openrewrite.ScanningRecipe.getAccumulator(ScanningRecipe.java:89)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.synexia.rewrite.M3TaskRecipeTest.replay(M3TaskRecipeTest.java:118)
+	at com.synexia.rewrite.M3TaskRecipeTest.qualifiedSdkResultsAreRetained(M3TaskRecipeTest.java:245)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.synexia.rewrite.M3TaskRecipeTest.postScanChangesRefuse -- Time elapsed: 3.053 s <<< ERROR!
+java.lang.IllegalStateException: invalid hash-pinned text manifest row
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.targets(M3HashPinnedTextSnapshotRecipe.java:240)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:94)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:40)
+	at com.synexia.rewrite.M3TaskRecipeTest.postScan(M3TaskRecipeTest.java:232)
+	at com.synexia.rewrite.M3TaskRecipeTest.postScanChangesRefuse(M3TaskRecipeTest.java:226)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.synexia.rewrite.M3TaskRecipeTest.mixedPreimagesAndPostimages -- Time elapsed: 2.388 s <<< ERROR!
+java.lang.IllegalStateException: invalid hash-pinned text manifest row
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.targets(M3HashPinnedTextSnapshotRecipe.java:240)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:94)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:40)
+	at org.openrewrite.ScanningRecipe.lambda$getAccumulator$0(ScanningRecipe.java:89)
+	at java.base/java.util.HashMap.computeIfAbsent(HashMap.java:1228)
+	at org.openrewrite.Cursor.computeMessageIfAbsent(Cursor.java:285)
+	at org.openrewrite.ScanningRecipe.getAccumulator(ScanningRecipe.java:89)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.synexia.rewrite.M3TaskRecipeTest.replay(M3TaskRecipeTest.java:118)
+	at com.synexia.rewrite.M3TaskRecipeTest.mixedPreimagesAndPostimages(M3TaskRecipeTest.java:193)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.synexia.rewrite.M3TaskRecipeTest.exactReplayFixedPointAndInputOrder -- Time elapsed: 0.982 s <<< ERROR!
+java.lang.IllegalStateException: invalid hash-pinned text manifest row
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.targets(M3HashPinnedTextSnapshotRecipe.java:240)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:94)
+	at com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe.getInitialValue(M3HashPinnedTextSnapshotRecipe.java:40)
+	at org.openrewrite.ScanningRecipe.lambda$getAccumulator$0(ScanningRecipe.java:89)
+	at java.base/java.util.HashMap.computeIfAbsent(HashMap.java:1228)
+	at org.openrewrite.Cursor.computeMessageIfAbsent(Cursor.java:285)
+	at org.openrewrite.ScanningRecipe.getAccumulator(ScanningRecipe.java:89)
+	at org.openrewrite.scheduling.RecipeRunCycle.lambda$generateSources$4(RecipeRunCycle.java:113)
+	at org.openrewrite.scheduling.RecipeStack.reduce(RecipeStack.java:57)
+	at org.openrewrite.scheduling.RecipeRunCycle.generateSources(RecipeRunCycle.java:108)
+	at org.openrewrite.RecipeScheduler.runRecipeCycles(RecipeScheduler.java:85)
+	at org.openrewrite.RecipeScheduler.scheduleRun(RecipeScheduler.java:41)
+	at org.openrewrite.Recipe.run(Recipe.java:344)
+	at org.openrewrite.Recipe.run(Recipe.java:340)
+	at com.synexia.rewrite.M3TaskRecipeTest.namedDescriptorComposesTheQualifiedLanes(M3TaskRecipeTest.java:174)
+	at com.synexia.rewrite.M3TaskRecipeTest.exactReplayFixedPointAndInputOrder(M3TaskRecipeTest.java:143)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   M3TaskRecipeTest.exactReplayFixedPointAndInputOrder:143->namedDescriptorComposesTheQualifiedLanes:174 » IllegalState invalid hash-pinned text manifest row
+[ERROR]   M3TaskRecipeTest.mixedPreimagesAndPostimages:193->replay:118 » IllegalState invalid hash-pinned text manifest row
+[ERROR]   M3TaskRecipeTest.postScanChangesRefuse:226->postScan:232 » IllegalState invalid hash-pinned text manifest row
+[ERROR]   M3TaskRecipeTest.qualifiedSdkResultsAreRetained:245->replay:118 » IllegalState invalid hash-pinned text manifest row
+[INFO] 
+[ERROR] Tests run: 5, Failures: 0, Errors: 4, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  16.264 s
+[INFO] Finished at: 2026-10-18T16:50:38+04:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-cli) on project m3-ast-build-reverse-recipe-proof: 
+[ERROR] 
+[ERROR] Please refer to /workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/target/gradle-provider-20261018/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

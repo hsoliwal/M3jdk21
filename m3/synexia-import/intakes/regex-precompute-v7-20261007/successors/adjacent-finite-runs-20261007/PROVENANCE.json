@@ -1,0 +1,193 @@
+{
+  "schema": 1,
+  "status": "PREPARED_SOURCE_CUSTODY_SUCCESSOR_ACTUAL_ISOLATED_APPLY2_PASS_REMAINING_FOUR_GATES_NOT_RUN",
+  "receiver": {
+    "repository": "hsoliwal/M3jdk21",
+    "pr": 394,
+    "lastObservedHead": "d6d03f3ac3fa0f2831db463715dc7a7ac3a88dae",
+    "freshHeadAndExactPreimagesRequired": true,
+    "historicalPr": 394,
+    "historicalPrMerged": true,
+    "historicalMergeCommit": "53e43009bc6eec38c1406221fdf4093689b297ba",
+    "publicationRoute": "NEW_PR_FROM_FRESHLY_GUARDED_MASTER_NO_UPDATE_TO_CLOSED_PR394",
+    "observedMaster": "bac0108267c93ecdd702f06609828f9953278eef",
+    "prior177Postimages": "ALL_IDENTICAL",
+    "currentMasterAndExactPreimagesRequiredBeforePublication": true
+  },
+  "donor": {
+    "repository": "hsoliwal/com.synexia",
+    "revision": "1e4743f6661a9149f327bf7171b4de2df68add54",
+    "tree": "7e797bd1bd735c75584dca9e3af48808ca249cd2",
+    "pr": 9797,
+    "draft": false,
+    "merged": true,
+    "mergeCommit": "56f49f0e38fb65d7862607d616938e9bc95358fc",
+    "mergedAt": "2026-10-07T15:49:01Z",
+    "mergedSourceRecipeFiles": 30,
+    "executedMavenEvidenceFollowUpPr": 9807,
+    "executedMavenEvidenceFollowUpObservedHead": "e4f886e9f63a18a215e591c33579e7e2e904bdab",
+    "executedMavenEvidenceFollowUpObservedState": "OPEN_DRAFT_63_ADDITIONS_SEPARATE_FROM_SOURCE_MERGE"
+  },
+  "historicalIntake": {
+    "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+    "directory": "m3/synexia-import/intakes/regex-precompute-v7-20261007",
+    "PROVENANCE_export_SOURCE_CUSTODY_importerRecipe_dependencyFrontier_ownerMap": "UNCHANGED_HISTORICAL_RECORDS"
+  },
+  "sourceSuccessor": [
+    {
+      "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+      "beforeSHA256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131",
+      "afterSHA256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
+      "sourcePath": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+      "sourceBodyAdaptationInM3": "NONE",
+      "effect": "SOURCE_CUSTODY_ONLY"
+    },
+    {
+      "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+      "beforeSHA256": "ABSENT",
+      "afterSHA256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+      "sourcePath": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+      "sourceBodyAdaptationInM3": "NONE",
+      "effect": "SOURCE_CUSTODY_ONLY"
+    }
+  ],
+  "programDelta": {
+    "changedPrivateSwitchBranches": [
+      "QuotedNode",
+      "ConcatNode"
+    ],
+    "addedPrivateMethod": "trigramConcatQuery",
+    "publicProtectedDeclarationLinesUnchanged": true,
+    "queryCandidateBody": "UNCHANGED",
+    "publicJdkInterfacesChanged": false,
+    "canonicalOwnerChanged": false
+  },
+  "queryFrontier": {
+    "historicalFrontierPath": "m3/synexia-import/intakes/regex-precompute-v7-20261007/DEPENDENCY_FRONTIER.json",
+    "historicalFrontierSHA256": "ea74a06d85a468f14ce7df11162296229ab8d83e0fc461d45d03732a4ef97112",
+    "exactHistoricalEdge": {
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 15093,
+      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+      "gitBlobSha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+      "license": "Apache-2.0",
+      "imports": [
+        "java.util.ArrayList",
+        "java.util.Arrays",
+        "java.util.List",
+        "java.util.Objects",
+        "java.util.function.LongPredicate"
+      ]
+    },
+    "supersedesAfterActualRecipeAndPublication": "ONLY original MIndexRegexTrigramQuery source-custody absence",
+    "allOtherMissingSourceEdgesAndModuleRuntimeGates": "OPEN",
+    "canonicalM3TQ": "UNCHANGED_IMPLEMENTED_UNVERIFIED"
+  },
+  "recipe": {
+    "path": "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates",
+    "manifestSHA256": "c460929619e876fb0c96a90fbe62383157ccc872d9ef5d9947e5cd74e5937b9c",
+    "targets": 2,
+    "engineBodyChanges": 0,
+    "engineRepository": "hsoliwal/com.synexia",
+    "engineRevision": "1e4743f6661a9149f327bf7171b4de2df68add54",
+    "engineInventory": {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/DONOR_INVENTORY_BEFORE_RECEIVER_ADAPTATION_01.json",
+      "bytes": 28175,
+      "sha256": "a440bed198932d4542923ebe51accdf214ae49bf91e1211ec537547fe0803b54",
+      "gitBlob": "3a41a39c63da131a10712be749ef822412bb823a"
+    },
+    "actualReceiverProof": {
+      "applyTwoTargets": "PASS_ACTUAL_MAVEN_EXIT0_CHANGES2",
+      "rootApplyObservation": {
+        "chunk_id": "6244ce",
+        "wall_time_seconds": 1.9030991,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "defaultCheckFixedpoint": "NOT_RUN_RESOURCE_REFUSED_BEFORE_JVM",
+      "secondApplyFixedpoint": "NOT_RUN",
+      "driftProgram": "NOT_RUN",
+      "driftQuery": "NOT_RUN",
+      "duplicateSuccessfulApplyAllowed": false,
+      "publicationAndCanonicalRuntimeAdmission": "OPEN"
+    }
+  },
+  "donorEvidence": "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DONOR_EVIDENCE_INDEX.json",
+  "invariants": [
+    "Precompute is core and P0. Receiver source custody must be retained and must not be mistaken for runtime qualification.",
+    "Canonical M3StringBacking ownership, owner/generation/range coordinates and exact source/query/image/raw-UTF16 key binding remain required.",
+    "Unknown syntax, unsupported modes, exhausted budgets and unavailable accelerators must remain conservative or refuse/fail open; a query positive is never a regex match.",
+    "Warm parser/compiler and materialization paths must remain unavailable under the recorded warm contract; persistence restore must preserve exact behavior and key/image parity.",
+    "Exact receiver recipe apply, check, second-apply fixed point and no-mutation drift refusal require root execution on isolated receiver snapshots.",
+    "Complete dependency/module source closure, JNI/ABI/provider parity, actual rebuilt M3 runtime, JDK/jtreg/platform and full String qualification precede phase promotion."
+  ],
+  "budgetAndOptimizationLedger": {
+    "finiteRunCardinalityLimit": 64,
+    "finiteRunUTF16LengthLimit": 256,
+    "status": "Bounded correctness choices; measured optimality and speedup not claimed.",
+    "followUp": "After reconciliation measure distributions/selectivity/cost, allocations and cold/warm/JNI outcomes before tuning.",
+    "existing21DeferredHypotheses": "PRESERVED_UNCHANGED_NOT_RECLASSIFIED_OR_TUNED"
+  },
+  "license": "Apache-2.0 first-party donor rights and existing notices retained; no other body relicensed.",
+  "review": "First seven-file review finding retained; missing-resource claim rejected by exact full21 inventory and actual apply2; corrected-context metadata review required and NOT_RUN.",
+  "P0": "OPEN",
+  "fullStringQualification": "OPEN",
+  "sourceBootstrapModuleClosure": "OPEN",
+  "nativeJniJtreg": "NOT_RUN",
+  "preparationJVMInvocations": 0,
+  "preparationReviewerInvocations": 0,
+  "preparationGitHubMutations": 0,
+  "authorityCorrection": {
+    "predecessor": {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/PREPARATION_SEAL_02.json",
+      "bytes": 6987,
+      "sha256": "7fc51308062a0c1f918c4cc431150fdaded0cb044dd2eb9044bb3221cd51dbd9",
+      "gitBlob": "63509f16f53c695e70a8c34ce9a3e1ca83ae9750"
+    },
+    "sourcePrReadback": {
+      "path": "K:/codex-work/m3-v7-ast-publication-20261007/REGEX_MAVEN63_FOLLOWUP_FINAL_sourcePR_01.json",
+      "bytes": 21626,
+      "sha256": "ba22766d3dc64021ebc97a65a28227491d0a7cc8d23e3750393def6368d5e246",
+      "gitBlob": "d699960477a776292aa93442ea80a4084356b7ab"
+    },
+    "historicalReceiverPrReadback": {
+      "path": "K:/codex-work/m3-v7-ast-publication-20261007/REGEX_MAVEN63_FOLLOWUP_FINAL_m3PR_01.json",
+      "bytes": 21678,
+      "sha256": "4fa909660b36e18367bcfcf8025563b51416dd508f9461b855e9fac5fc7a032e",
+      "gitBlob": "0881103cb270d5fafe6aae6034b8df16d530e75f"
+    },
+    "prior177MasterGuard": {
+      "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_CARRYBACK_FRESH_MASTER_ALL177_GUARD_01.json",
+      "bytes": 70451,
+      "sha256": "9b85154677ee1dcc4fbb9c31dc7b91b9628532bea0f46e65bbf3a58381644205",
+      "gitBlob": "ddcc7380b61a8b4ed01e8f5884f9453a059088ba"
+    },
+    "actualApplyAndCheckRefusal": {
+      "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_RECEIVER_NATIVE03_ROOT_APPLY_PASS_CHECK_RESOURCE_REFUSAL_01.json",
+      "bytes": 3907,
+      "sha256": "696ed8f16df68ab7f48f9fd9c75ef7dab88bee1de3e8772860adf430a1c83427",
+      "gitBlob": "9de411f778d7558de21168d45a9de324d4041b95"
+    },
+    "originalReview": {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/review-preparation-01/FORMAL_REVIEW.json",
+      "bytes": 1278,
+      "sha256": "434db4d33c5a9c1fed5dcbb752b9ac4098a2a707603e04bb170182681146adf8",
+      "gitBlob": "5bb348b8264fef82ecb09b210adee784cc5bacbd"
+    },
+    "rootResourceDispositionCorrection": {
+      "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_REVIEW01_ROOT_DISPOSITION_CUSTODY_CORRECTION_01.json",
+      "bytes": 1732,
+      "sha256": "05fb19c34f361c1ab3809f6f4fac4deea8515f6eb0696204b67d15166518546a",
+      "gitBlob": "5b6fe8b58c6bd3ab6b177fdd6a10b5a94e95c2d5"
+    },
+    "exactMetadataObservation": {
+      "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_REVIEW01_ROOT_ACTUAL_METADATA_REHASH_01.json",
+      "bytes": 7245,
+      "sha256": "ee034178e7dd59e8f94dfc08bc8eef64c37420aa680612862777d0c9346a8e47",
+      "gitBlob": "b5e5655116171ebeb720a2df352c2c57212eea18"
+    },
+    "scope": "Only two metadata postimages updated; all19 source/template/manifest/base/notice/FOSS/donor-evidence payloads unchanged."
+  }
+}

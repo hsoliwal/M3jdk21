@@ -1,0 +1,1389 @@
+{
+  "schema": "m3-tree-jmh-selection/v1",
+  "status": "ACCEPTED_MEASURED_PRIVATE_ENTRY_AND_INSERTION_FRONTIER",
+  "accepted_production": [
+    {
+      "name": "M3SlotMap",
+      "before_path": "m3-tree-map-entry-protocol-20261018/M3SlotMap.before.java.txt",
+      "after_path": "m3-tree-map-entry-protocol-20261018/src/main/java/com/m3/collections/M3SlotMap.java",
+      "before_git_blob": "9e4d7588d5bd527f3988ca4d46d79f31132630c7",
+      "after_git_blob": "93e7f6bf7271e3b6feafd85609c338a45a82b977",
+      "after_sha256": "d6b16b35119584cba0f9d782862568393100851af68dc6dba113adc69b41799f"
+    },
+    {
+      "name": "M3TreeMap",
+      "before_path": "m3-tree-map-entry-protocol-20261018/M3TreeMap.before.java.txt",
+      "after_path": "m3-avl-insertion-frontier-20261018/src/main/java/com/m3/collections/M3TreeMap.java",
+      "before_git_blob": "8d0690dd904df04cf087de7a7dc64107cf475210",
+      "after_git_blob": "fc8a9e75011f5dc8b86f1ee553caba979cb2e30b",
+      "after_sha256": "e8dcb2c6a1101195dbbecbb55018bb68f182f088309cdfd83f189231d69ca08e"
+    },
+    {
+      "name": "M3OrderedSlotMap",
+      "before_path": "m3-tree-map-entry-protocol-20261018/M3OrderedSlotMap.before.java.txt",
+      "after_path": "m3-tree-map-entry-protocol-20261018/src/main/java/com/m3/collections/M3OrderedSlotMap.java",
+      "before_git_blob": "e7be2297d19f22cf4dd4ef8b7d1424fe963063d9",
+      "after_git_blob": "064fd943a59958778408b9f089a1c58a0b06ae18",
+      "after_sha256": "982bf329055082c39650c1f976d7bff8bcef4a13ae028220607cdb3e093bf0c2"
+    }
+  ],
+  "matrix": {
+    "complete": true,
+    "workloads": [
+      "entrySetFullScan/4096/ascending",
+      "entrySetFullScan/4096/descending",
+      "entrySetFullScan/4096/seededshuffle",
+      "entrySetFullScan/65536/ascending",
+      "entrySetFullScan/65536/descending",
+      "entrySetFullScan/65536/seededshuffle",
+      "freshInsertion/4096/ascending",
+      "freshInsertion/4096/descending",
+      "freshInsertion/4096/seededshuffle",
+      "freshInsertion/65536/ascending",
+      "freshInsertion/65536/descending",
+      "freshInsertion/65536/seededshuffle",
+      "removeReinsertChurn/4096/ascending",
+      "removeReinsertChurn/4096/descending",
+      "removeReinsertChurn/4096/seededshuffle",
+      "removeReinsertChurn/65536/ascending",
+      "removeReinsertChurn/65536/descending",
+      "removeReinsertChurn/65536/seededshuffle"
+    ],
+    "versions": [
+      "old",
+      "protocol",
+      "frontier"
+    ],
+    "cells": [
+      {
+        "workload": "entrySetFullScan/4096/ascending",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/65536/ascending",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/4096/descending",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/65536/descending",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/4096/seededshuffle",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/65536/seededshuffle",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/4096/ascending",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/65536/ascending",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/4096/descending",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/65536/descending",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/4096/seededshuffle",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/65536/seededshuffle",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/4096/ascending",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/65536/ascending",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/4096/descending",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/65536/descending",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/4096/seededshuffle",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/65536/seededshuffle",
+        "version": "old",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/4096/ascending",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/65536/ascending",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/4096/descending",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/65536/descending",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/4096/seededshuffle",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/65536/seededshuffle",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/4096/ascending",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/65536/ascending",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/4096/descending",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/65536/descending",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/4096/seededshuffle",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/65536/seededshuffle",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/4096/ascending",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/65536/ascending",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/4096/descending",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/65536/descending",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/4096/seededshuffle",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/65536/seededshuffle",
+        "version": "protocol",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/4096/ascending",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/65536/ascending",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/4096/descending",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/65536/descending",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/4096/seededshuffle",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "entrySetFullScan/65536/seededshuffle",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/4096/ascending",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/65536/ascending",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/4096/descending",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/65536/descending",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/4096/seededshuffle",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "freshInsertion/65536/seededshuffle",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/4096/ascending",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/65536/ascending",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/4096/descending",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/65536/descending",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/4096/seededshuffle",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      },
+      {
+        "workload": "removeReinsertChurn/65536/seededshuffle",
+        "version": "frontier",
+        "status": "QUALIFIED"
+      }
+    ]
+  },
+  "proofs": {
+    "strict": {
+      "status": "PASS",
+      "receipt": "m3-avl-insertion-frontier-20261018/qualification-compile-v1/RESULT_V1.json",
+      "sha256": "6da08544cefe45133e689164234d258697c09f50011cb25fb83c87311d1d3e33",
+      "codeSha256": "e8dcb2c6a1101195dbbecbb55018bb68f182f088309cdfd83f189231d69ca08e",
+      "fixtures": []
+    },
+    "api": {
+      "status": "PASS",
+      "receipt": "m3-avl-insertion-frontier-20261018/qualification-compile-v1/RESULT_V1.json",
+      "sha256": "6da08544cefe45133e689164234d258697c09f50011cb25fb83c87311d1d3e33",
+      "codeSha256": "e8dcb2c6a1101195dbbecbb55018bb68f182f088309cdfd83f189231d69ca08e",
+      "fixtures": [
+        {
+          "path": "m3-tree-map-linear-bulk-load-20261018/TreeBulkPublicApi.java",
+          "sha256": "b7f4d9ea7f217d3ed794c3e77e61f5dbab8ef2dce7e82bf1e3130749f0b868d2"
+        }
+      ]
+    },
+    "protocol132": {
+      "status": "PASS",
+      "receipt": "m3-avl-insertion-frontier-20261018/qualification-regression-v1/RESULT_V1.json",
+      "sha256": "b644f40bdee022b20c94c3ecbc47f2b8b7a23017fec0f1e0d66c0c1a722db823",
+      "codeSha256": "e8dcb2c6a1101195dbbecbb55018bb68f182f088309cdfd83f189231d69ca08e",
+      "fixtures": [
+        {
+          "path": "eclipse-tree-full-contract-v2-20261018/TreeMapLookupEntryProof.java",
+          "sha256": "bb780f79bf22bafb48495014854fed92e9bf75227e756922451ae473bdcfddfa"
+        },
+        {
+          "path": "eclipse-tree-full-contract-v2-20261018/LOOKUP_ENTRY_SCENARIOS.json",
+          "sha256": "6db25025063db30ac2da0fcb8bc57386c7a11dbfde3982feed71c8f9073528ef"
+        },
+        {
+          "path": "m3-tree-map-entry-protocol-20261018/qualification-entry-proof-v1/FROZEN_ORACLE_V1.json",
+          "sha256": "7c72ed386772bce87e0f9418d0447212717da05911d85f7e6116fd73ad7066e5"
+        }
+      ]
+    },
+    "bulk113": {
+      "status": "PASS",
+      "receipt": "m3-avl-insertion-frontier-20261018/qualification-regression-v1/RESULT_V1.json",
+      "sha256": "b644f40bdee022b20c94c3ecbc47f2b8b7a23017fec0f1e0d66c0c1a722db823",
+      "codeSha256": "e8dcb2c6a1101195dbbecbb55018bb68f182f088309cdfd83f189231d69ca08e",
+      "fixtures": [
+        {
+          "path": "m3-tree-map-linear-bulk-load-20261018/proof/M3TreeMapSortedBulkProof.java",
+          "sha256": "b9d99b42ba8763ba294d7472642f59cdf9ec5aa0864b132fef23fbb7cd04d0e4"
+        }
+      ]
+    },
+    "property5040": {
+      "status": "PASS",
+      "receipt": "m3-avl-insertion-frontier-20261018/qualification-property-v1/RESULT_V1.json",
+      "sha256": "1bbf057bffa4b457ec3659e3b8a555028d29aa4d08dd1004cd315e22333b71e3",
+      "codeSha256": "e8dcb2c6a1101195dbbecbb55018bb68f182f088309cdfd83f189231d69ca08e",
+      "fixtures": [
+        {
+          "path": "m3-avl-growth-frontier-proof-20261018/AvlGrowthFrontierProof.java",
+          "sha256": "19fa6026f3367d57dd009107635d20997632a64af6d161878f4a31075b13e1a4"
+        },
+        {
+          "path": "m3-avl-growth-frontier-proof-20261018/PROOF_PLAN_V1.json",
+          "sha256": "ecde1e9bb244bba2c3de62c0738c1a9f20aa72e2122d6a3b3ccf5bfd5fabdff7"
+        },
+        {
+          "path": "m3-avl-insertion-frontier-20261018/qualification-property-v1/FROZEN_ORACLE_V1.json",
+          "sha256": "c12ce53570aeb576438fc7df2a72397afb0875040b9d35cad57f85ed6da91c2a"
+        }
+      ]
+    }
+  },
+  "evidencePaths": [
+    {
+      "path": "m3-tree-jmh-measurements-20261018/old-v2/RESULT_V1.json",
+      "sha256": "aae2b5de68f4cdcb4af8bcaa7caeb16ea46be3d78d168429695b270518ca8235",
+      "context": false
+    },
+    {
+      "path": "m3-tree-jmh-measurements-20261018/old-v2/JMH.json.gz",
+      "sha256": "61dfc1bd437456c597ab9d21e6209eb0429eced1c4f783faec7965f2dffcd8f5",
+      "context": false
+    },
+    {
+      "path": "m3-tree-jmh-measurements-20261018/old-v2/IDENTITY.json.gz",
+      "sha256": "49138e5fd3b869289b1783e763d9497538f7d2d66bf41234fdfc14484a5fe806",
+      "context": false
+    },
+    {
+      "path": "m3-tree-jmh-measurements-20261018/protocol-v2/RESULT_V1.json",
+      "sha256": "d4741813f1f11e0af82013af2dabc45e89851ebe8f70e5d17ce3184754818ae0",
+      "context": false
+    },
+    {
+      "path": "m3-tree-jmh-measurements-20261018/protocol-v2/JMH.json.gz",
+      "sha256": "f505e6443eff60f02728396700349f77b6887e962e519b257e0fe0d52a25804e",
+      "context": false
+    },
+    {
+      "path": "m3-tree-jmh-measurements-20261018/protocol-v2/IDENTITY.json.gz",
+      "sha256": "eefdce3ea9d31c45910034680d354c2871528c0cc470ea6cd1aacd209477036b",
+      "context": false
+    },
+    {
+      "path": "m3-tree-jmh-measurements-20261018/frontier-v2/RESULT_V1.json",
+      "sha256": "c34d248b5e18fdb1f33367d65200ae7b1e7ad450823752a1238f3764d590442d",
+      "context": false
+    },
+    {
+      "path": "m3-tree-jmh-measurements-20261018/frontier-v2/JMH.json.gz",
+      "sha256": "90ff36dd378cfb3538549fd619925ad5d0a2bb7f7889320e818da42af2f981e2",
+      "context": false
+    },
+    {
+      "path": "m3-tree-jmh-measurements-20261018/frontier-v2/IDENTITY.json.gz",
+      "sha256": "460d3551adcf3349667be0eb1cee85063f1a57376288a4a700974f549d684bc4",
+      "context": false
+    },
+    {
+      "path": "m3-tree-jmh-comparison-20261018/M3TreeMapPublicBench.java",
+      "sha256": "53317a2b1b31023b36dd3cc9205b92822d51871dedb4a454430413a6cd9251da",
+      "context": true
+    },
+    {
+      "path": "m3-tree-jmh-comparison-20261018/BENCHMARK_PLAN.json",
+      "sha256": "58596e174f37960e3469f82649228bd2b5a2232e4691704e8d58be7580144bae",
+      "context": true
+    },
+    {
+      "path": "m3-tree-jmh-comparison-20261018/SOURCE_SEAL.json",
+      "sha256": "58516951dcbb47b455463ee181c667601a75e0889470f079b22da2b3936a5bea",
+      "context": true
+    },
+    {
+      "path": "m3-tree-jmh-measurements-20261018/SELECTION_RULE_V1.json",
+      "sha256": "52674b075d88f946e83b4532f069f0864773f90f6816f4a01a503083a4b14286",
+      "context": true
+    },
+    {
+      "path": "m3-tree-jmh-comparison-20261018/FOSS_REUSE_DECISION.tsv",
+      "sha256": "67bfc3ad1b191d5f6302bb640f58cf7a2a9d0e9dc207d9181d003e10e3d64e41",
+      "context": true
+    },
+    {
+      "path": "m3-tree-jmh-comparison-20261018/THIRD_PARTY_NOTICES.txt",
+      "sha256": "b6ba9e3c6928a4d94b387c123fe0b686de2b2e37cfb2cd1fee33b500116dbe31",
+      "context": true
+    },
+    {
+      "path": "m3-tree-empty-default-diagnostic-20261018/RESULT_V1.json",
+      "sha256": "fd8a05dbe011a077a2e8ae1fe52086116c24c6491a86908f77be84684588c7cc",
+      "context": true
+    },
+    {
+      "path": "m3-tree-empty-default-diagnostic-20261018/EmptyTreeDefaultsDiagnostic.java",
+      "sha256": "baac9804009d9d97a0227b8c57c0a42022201fd8d7f44008d7fb93bb7bfaa346",
+      "context": true
+    },
+    {
+      "path": "m3-tree-empty-default-diagnostic-20261018/FROZEN_ORACLE_V1.json",
+      "sha256": "1e96ca7a99e771bde05e65e5b937881fd339c66657acea38583b61d0c01ca3d8",
+      "context": true
+    },
+    {
+      "path": "m3-tree-empty-default-diagnostic-20261018/old-diagnostic.stdout",
+      "sha256": "2e5592e2049e5e5fc086883b6e2231d580f6a2f1c2caac57a78b8d36aa3a8dcf",
+      "context": true
+    },
+    {
+      "path": "m3-tree-empty-default-diagnostic-20261018/protocol-diagnostic.stdout",
+      "sha256": "d4dfd4f70df8ee78d7ee5f4bdbf2d6b5865899e3b029b083893111618ad07b97",
+      "context": true
+    },
+    {
+      "path": "m3-tree-empty-default-diagnostic-20261018/frontier-diagnostic.stdout",
+      "sha256": "d4dfd4f70df8ee78d7ee5f4bdbf2d6b5865899e3b029b083893111618ad07b97",
+      "context": true
+    }
+  ],
+  "all18comparisons": [
+    {
+      "workload": "entrySetFullScan/4096/ascending",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 210033.26955272775,
+          "ns_per_element_or_churn_pair": 51.277653699396424,
+          "confidence_ns_per_element_or_pair": [
+            43.540082653996436,
+            59.01522474479641
+          ],
+          "bytes_per_invocation": 41.269537637361374,
+          "bytes_per_element_or_pair": 0.01007557071224643,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 13130.39296035242,
+          "ns_per_element_or_churn_pair": 3.20566234383604,
+          "confidence_ns_per_element_or_pair": [
+            3.0244578379269793,
+            3.3868668497451004
+          ],
+          "bytes_per_invocation": 25.412309442142714,
+          "bytes_per_element_or_pair": 0.0062041771098981235,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 13471.502506275898,
+          "ns_per_element_or_churn_pair": 3.288941041571264,
+          "confidence_ns_per_element_or_pair": [
+            3.027810791823549,
+            3.550071291318979
+          ],
+          "bytes_per_invocation": 25.41953002642291,
+          "bytes_per_element_or_pair": 0.006205939947857155,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 15.995962206685585,
+      "protocol_over_frontier": 0.9746791758555092,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "entrySetFullScan/4096/descending",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 181060.96911297744,
+          "ns_per_element_or_churn_pair": 44.20433816234801,
+          "confidence_ns_per_element_or_pair": [
+            40.4532987465911,
+            47.955377578104915
+          ],
+          "bytes_per_invocation": 39.42570166634212,
+          "bytes_per_element_or_pair": 0.009625415445884307,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 12914.77536528082,
+          "ns_per_element_or_churn_pair": 3.153021329414263,
+          "confidence_ns_per_element_or_pair": [
+            3.0677676791807373,
+            3.2382749796477883
+          ],
+          "bytes_per_invocation": 25.393520758476235,
+          "bytes_per_element_or_pair": 0.006199590028924862,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 15923.3572146722,
+          "ns_per_element_or_churn_pair": 3.88753838248833,
+          "confidence_ns_per_element_or_pair": [
+            3.5811306271258987,
+            4.193946137850761
+          ],
+          "bytes_per_invocation": 25.726499332949295,
+          "bytes_per_element_or_pair": 0.006280883626208324,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 14.019676222919765,
+      "protocol_over_frontier": 0.8110585720818225,
+      "frontier_confidently_slower_than_protocol": true
+    },
+    {
+      "workload": "entrySetFullScan/4096/seededshuffle",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 189231.9753494694,
+          "ns_per_element_or_churn_pair": 46.19921273180405,
+          "confidence_ns_per_element_or_pair": [
+            42.85609720051539,
+            49.54232826309271
+          ],
+          "bytes_per_invocation": 39.7936734464185,
+          "bytes_per_element_or_pair": 0.009715252306254517,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 21757.31961374617,
+          "ns_per_element_or_churn_pair": 5.311845608824749,
+          "confidence_ns_per_element_or_pair": [
+            5.1292496638751075,
+            5.49444155377439
+          ],
+          "bytes_per_invocation": 26.299646531774535,
+          "bytes_per_element_or_pair": 0.006420812141546517,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 23157.104158814233,
+          "ns_per_element_or_churn_pair": 5.653589882523006,
+          "confidence_ns_per_element_or_pair": [
+            5.213490430562438,
+            6.093689334483574
+          ],
+          "bytes_per_invocation": 26.62439669962371,
+          "bytes_per_element_or_pair": 0.00650009685049407,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 8.697393737320176,
+      "protocol_over_frontier": 0.939552694694977,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "entrySetFullScan/65536/ascending",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 3202812.459179248,
+          "ns_per_element_or_churn_pair": 48.87103972136304,
+          "confidence_ns_per_element_or_pair": [
+            46.98329563672821,
+            50.75878380599787
+          ],
+          "bytes_per_invocation": 95.40066568771951,
+          "bytes_per_element_or_pair": 0.0014556986341509935,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 223312.0151987034,
+          "ns_per_element_or_churn_pair": 3.407470935038809,
+          "confidence_ns_per_element_or_pair": [
+            3.2361979410303037,
+            3.5787439290473144
+          ],
+          "bytes_per_invocation": 69.43690793722077,
+          "bytes_per_element_or_pair": 0.0010595231313662837,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 240504.43762529184,
+          "ns_per_element_or_churn_pair": 3.6698064823195167,
+          "confidence_ns_per_element_or_pair": [
+            3.306609504455356,
+            4.033003460183677
+          ],
+          "bytes_per_invocation": 76.88729408849983,
+          "bytes_per_element_or_pair": 0.001173207002082822,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 14.342320346396859,
+      "protocol_over_frontier": 0.9285151550784505,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "entrySetFullScan/65536/descending",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 3239281.3135387795,
+          "ns_per_element_or_churn_pair": 49.42751027738616,
+          "confidence_ns_per_element_or_pair": [
+            45.29473369051289,
+            53.56028686425943
+          ],
+          "bytes_per_invocation": 305.0695681931064,
+          "bytes_per_element_or_pair": 0.00465499219044657,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 240606.6922033825,
+          "ns_per_element_or_churn_pair": 3.671366763357277,
+          "confidence_ns_per_element_or_pair": [
+            3.2791915677640304,
+            4.063541958950523
+          ],
+          "bytes_per_invocation": 70.9510100302193,
+          "bytes_per_element_or_pair": 0.001082626495822438,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 247956.22014191956,
+          "ns_per_element_or_churn_pair": 3.7835116598803644,
+          "confidence_ns_per_element_or_pair": [
+            3.5559423933115055,
+            4.011080926449224
+          ],
+          "bytes_per_invocation": 73.55966333094496,
+          "bytes_per_element_or_pair": 0.0011224313862754052,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 13.462972637521846,
+      "protocol_over_frontier": 0.9703595742251172,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "entrySetFullScan/65536/seededshuffle",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 3990298.436707291,
+          "ns_per_element_or_churn_pair": 60.88712214214006,
+          "confidence_ns_per_element_or_pair": [
+            53.33477700395563,
+            68.4394672803245
+          ],
+          "bytes_per_invocation": 664.1829169080619,
+          "bytes_per_element_or_pair": 0.010134627028016081,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 789307.24824393,
+          "ns_per_element_or_churn_pair": 12.043872806456452,
+          "confidence_ns_per_element_or_pair": [
+            11.33739266204878,
+            12.750352950864125
+          ],
+          "bytes_per_invocation": 108.62799565248004,
+          "bytes_per_element_or_pair": 0.00165753167194336,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 865024.8973595289,
+          "ns_per_element_or_churn_pair": 13.199232442619765,
+          "confidence_ns_per_element_or_pair": [
+            11.791802681905104,
+            14.606662203334427
+          ],
+          "bytes_per_invocation": 193.33836565146538,
+          "bytes_per_element_or_pair": 0.0029501093391642056,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 5.055443802885383,
+      "protocol_over_frontier": 0.9124676649808283,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "freshInsertion/4096/ascending",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 222495.15779116278,
+          "ns_per_element_or_churn_pair": 54.3201068826081,
+          "confidence_ns_per_element_or_pair": [
+            50.16517043100694,
+            58.47504333420926
+          ],
+          "bytes_per_invocation": 263346.7552318316,
+          "bytes_per_element_or_pair": 64.29364141402138,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 208585.5925160782,
+          "ns_per_element_or_churn_pair": 50.924216922870656,
+          "confidence_ns_per_element_or_pair": [
+            48.46371382932759,
+            53.38472001641372
+          ],
+          "bytes_per_invocation": 263352.3512070776,
+          "bytes_per_element_or_pair": 64.29500761891543,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 162146.88184160137,
+          "ns_per_element_or_churn_pair": 39.58664107460971,
+          "confidence_ns_per_element_or_pair": [
+            37.38594811858928,
+            41.787334030630134
+          ],
+          "bytes_per_invocation": 263344.1028050474,
+          "bytes_per_element_or_pair": 64.29299384888853,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 1.0666851679797222,
+      "protocol_over_frontier": 1.2863990361519382,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "freshInsertion/4096/descending",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 219014.0039315598,
+          "ns_per_element_or_churn_pair": 53.470215803603466,
+          "confidence_ns_per_element_or_pair": [
+            48.99211243475745,
+            57.94831917244948
+          ],
+          "bytes_per_invocation": 263346.1874582285,
+          "bytes_per_element_or_pair": 64.29350279741907,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 222813.7360557486,
+          "ns_per_element_or_churn_pair": 54.3978847792355,
+          "confidence_ns_per_element_or_pair": [
+            50.28683772502781,
+            58.508931833443185
+          ],
+          "bytes_per_invocation": 263358.76516002475,
+          "bytes_per_element_or_pair": 64.29657352539667,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 150947.9313713837,
+          "ns_per_element_or_churn_pair": 36.85252230746672,
+          "confidence_ns_per_element_or_pair": [
+            35.228632865526684,
+            38.47641174940676
+          ],
+          "bytes_per_invocation": 263341.89169607917,
+          "bytes_per_element_or_pair": 64.29245402736308,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 0.982946598394463,
+      "protocol_over_frontier": 1.4760966515503309,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "freshInsertion/4096/seededshuffle",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 529076.0545847894,
+          "ns_per_element_or_churn_pair": 129.1689586388646,
+          "confidence_ns_per_element_or_pair": [
+            116.97884773543937,
+            141.35906954228983
+          ],
+          "bytes_per_invocation": 263394.0667563107,
+          "bytes_per_element_or_pair": 64.30519207917742,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 522142.77770395775,
+          "ns_per_element_or_churn_pair": 127.47626408788031,
+          "confidence_ns_per_element_or_pair": [
+            115.39790649234476,
+            139.55462168341586
+          ],
+          "bytes_per_invocation": 263411.5992573356,
+          "bytes_per_element_or_pair": 64.30947247493545,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 407413.03303707874,
+          "ns_per_element_or_churn_pair": 99.46607251881805,
+          "confidence_ns_per_element_or_pair": [
+            96.87122191487929,
+            102.06092312275682
+          ],
+          "bytes_per_invocation": 263393.8381463138,
+          "bytes_per_element_or_pair": 64.30513626618989,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 1.013278507674318,
+      "protocol_over_frontier": 1.281605484762284,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "freshInsertion/65536/ascending",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 5203572.142297435,
+          "ns_per_element_or_churn_pair": 79.40020969081779,
+          "confidence_ns_per_element_or_pair": [
+            73.78743951071878,
+            85.0129798709168
+          ],
+          "bytes_per_invocation": 4483816.529919478,
+          "bytes_per_element_or_pair": 68.41761062499204,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 4777243.930328989,
+          "ns_per_element_or_churn_pair": 72.8949574329985,
+          "confidence_ns_per_element_or_pair": [
+            66.57425513903785,
+            79.21565972695915
+          ],
+          "bytes_per_invocation": 4484293.171356953,
+          "bytes_per_element_or_pair": 68.42488359614491,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 3660714.78637774,
+          "ns_per_element_or_churn_pair": 55.858074743312685,
+          "confidence_ns_per_element_or_pair": [
+            45.17699440461689,
+            66.53915508200848
+          ],
+          "bytes_per_invocation": 4484121.91124081,
+          "bytes_per_element_or_pair": 68.42227037415786,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 1.0892414576659655,
+      "protocol_over_frontier": 1.3050030415114775,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "freshInsertion/65536/descending",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 4748180.205860433,
+          "ns_per_element_or_churn_pair": 72.45148019196218,
+          "confidence_ns_per_element_or_pair": [
+            69.40503425896149,
+            75.49792612496286
+          ],
+          "bytes_per_invocation": 4484075.4545153845,
+          "bytes_per_element_or_pair": 68.42156150078407,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 4469214.952582481,
+          "ns_per_element_or_churn_pair": 68.19480823642702,
+          "confidence_ns_per_element_or_pair": [
+            65.08617316926654,
+            71.3034433035875
+          ],
+          "bytes_per_invocation": 4484264.520458901,
+          "bytes_per_element_or_pair": 68.42444641813509,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 3194265.1645377977,
+          "ns_per_element_or_churn_pair": 48.74061835537411,
+          "confidence_ns_per_element_or_pair": [
+            38.81058196926016,
+            58.67065474148806
+          ],
+          "bytes_per_invocation": 4484042.919515109,
+          "bytes_per_element_or_pair": 68.42106505607771,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 1.0624192965068182,
+      "protocol_over_frontier": 1.3991371167926085,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "freshInsertion/65536/seededshuffle",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 16094879.612440193,
+          "ns_per_element_or_churn_pair": 245.58837299255666,
+          "confidence_ns_per_element_or_pair": [
+            231.60692265845768,
+            259.56982332665564
+          ],
+          "bytes_per_invocation": 4492982.6708133975,
+          "bytes_per_element_or_pair": 68.55747483540951,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 14089979.988471672,
+          "ns_per_element_or_churn_pair": 214.99603253893542,
+          "confidence_ns_per_element_or_pair": [
+            202.83798956649704,
+            227.1540755113738
+          ],
+          "bytes_per_invocation": 4483680.070619237,
+          "bytes_per_element_or_pair": 68.41552842131404,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 13723264.660511037,
+          "ns_per_element_or_churn_pair": 209.4004007035986,
+          "confidence_ns_per_element_or_pair": [
+            174.14662716375108,
+            244.6541742434461
+          ],
+          "bytes_per_invocation": 4486061.060881929,
+          "bytes_per_element_or_pair": 68.45185944949232,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 1.1422925813669655,
+      "protocol_over_frontier": 1.0267221639334747,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "removeReinsertChurn/4096/ascending",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 475508.930367258,
+          "ns_per_element_or_churn_pair": 116.09104745294385,
+          "confidence_ns_per_element_or_pair": [
+            109.30028260074516,
+            122.88181230514255
+          ],
+          "bytes_per_invocation": 70.04906404103558,
+          "bytes_per_element_or_pair": 0.01710182227564345,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 448757.80797102646,
+          "ns_per_element_or_churn_pair": 109.56001171167638,
+          "confidence_ns_per_element_or_pair": [
+            105.5476836292389,
+            113.57233979411386
+          ],
+          "bytes_per_invocation": 86.43188054625095,
+          "bytes_per_element_or_pair": 0.02110153333648705,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 346560.6133062834,
+          "ns_per_element_or_churn_pair": 84.60952473297935,
+          "confidence_ns_per_element_or_pair": [
+            79.8937742999018,
+            89.3252751660569
+          ],
+          "bytes_per_invocation": 67.75060504248428,
+          "bytes_per_element_or_pair": 0.016540675059200264,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 1.0596114918137731,
+      "protocol_over_frontier": 1.2948898136165958,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "removeReinsertChurn/4096/descending",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 741651.9288855396,
+          "ns_per_element_or_churn_pair": 181.0673654505712,
+          "confidence_ns_per_element_or_pair": [
+            165.79037099869748,
+            196.34435990244492
+          ],
+          "bytes_per_invocation": 112.8234433467848,
+          "bytes_per_element_or_pair": 0.027544785973336133,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 709661.4561922812,
+          "ns_per_element_or_churn_pair": 173.25719145319366,
+          "confidence_ns_per_element_or_pair": [
+            160.97125426730244,
+            185.54312863908487
+          ],
+          "bytes_per_invocation": 134.25585473884854,
+          "bytes_per_element_or_pair": 0.032777308285851695,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 633025.65468396,
+          "ns_per_element_or_churn_pair": 154.54727897557618,
+          "confidence_ns_per_element_or_pair": [
+            145.23141620198658,
+            163.86314174916578
+          ],
+          "bytes_per_invocation": 126.73228337808101,
+          "bytes_per_element_or_pair": 0.03094049887160181,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 1.0450784982249208,
+      "protocol_over_frontier": 1.1210627103992836,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "removeReinsertChurn/4096/seededshuffle",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 1028082.8116835344,
+          "ns_per_element_or_churn_pair": 250.9967801961754,
+          "confidence_ns_per_element_or_pair": [
+            233.50659485941338,
+            268.4869655329374
+          ],
+          "bytes_per_invocation": 156.0526014688231,
+          "bytes_per_element_or_pair": 0.03809877965547439,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 1027288.3900317177,
+          "ns_per_element_or_churn_pair": 250.80282959758733,
+          "confidence_ns_per_element_or_pair": [
+            241.08358274694598,
+            260.5220764482287
+          ],
+          "bytes_per_invocation": 196.191350833492,
+          "bytes_per_element_or_pair": 0.04789827901208301,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 973224.3140045714,
+          "ns_per_element_or_churn_pair": 237.60359228627232,
+          "confidence_ns_per_element_or_pair": [
+            225.9610443394263,
+            249.24614023311833
+          ],
+          "bytes_per_invocation": 188.84832023623784,
+          "bytes_per_element_or_pair": 0.046105546932675254,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 1.0007733190207593,
+      "protocol_over_frontier": 1.0555515057003522,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "removeReinsertChurn/65536/ascending",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 10076043.675805189,
+          "ns_per_element_or_churn_pair": 153.7482250336485,
+          "confidence_ns_per_element_or_pair": [
+            132.78620416811748,
+            174.71024589917954
+          ],
+          "bytes_per_invocation": 1454.4153724631615,
+          "bytes_per_element_or_pair": 0.022192617377672752,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 10011956.090682168,
+          "ns_per_element_or_churn_pair": 152.77032609073132,
+          "confidence_ns_per_element_or_pair": [
+            138.43718152413325,
+            167.10347065732938
+          ],
+          "bytes_per_invocation": 1984.7753896103895,
+          "bytes_per_element_or_pair": 0.030285269006506188,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 7562529.844420989,
+          "ns_per_element_or_churn_pair": 115.39504767488081,
+          "confidence_ns_per_element_or_pair": [
+            95.990908015317,
+            134.79918733444464
+          ],
+          "bytes_per_invocation": 1530.3715141077105,
+          "bytes_per_element_or_pair": 0.023351616121028297,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 1.0064011052927675,
+      "protocol_over_frontier": 1.323889795696894,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "removeReinsertChurn/65536/descending",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 13185173.685806224,
+          "ns_per_element_or_churn_pair": 201.18978402414282,
+          "confidence_ns_per_element_or_pair": [
+            189.1237215665151,
+            213.25584648177056
+          ],
+          "bytes_per_invocation": 7912.49805330901,
+          "bytes_per_element_or_pair": 0.12073513875288407,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 12719085.619033141,
+          "ns_per_element_or_churn_pair": 194.07784452870393,
+          "confidence_ns_per_element_or_pair": [
+            177.4010520748465,
+            210.75463698256138
+          ],
+          "bytes_per_invocation": 2507.374793554272,
+          "bytes_per_element_or_pair": 0.03825950307547412,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 14666274.449181253,
+          "ns_per_element_or_churn_pair": 223.78958815279012,
+          "confidence_ns_per_element_or_pair": [
+            203.92156592045018,
+            243.65761038513006
+          ],
+          "bytes_per_invocation": 3076.396837944664,
+          "bytes_per_element_or_pair": 0.04694209042273963,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 1.0366447778349426,
+      "protocol_over_frontier": 0.8672335747639842,
+      "frontier_confidently_slower_than_protocol": false
+    },
+    {
+      "workload": "removeReinsertChurn/65536/seededshuffle",
+      "metrics": {
+        "old": {
+          "ns_per_invocation": 31513295.28282828,
+          "ns_per_element_or_churn_pair": 480.854725384953,
+          "confidence_ns_per_element_or_pair": [
+            406.2297810872436,
+            555.4796696826623
+          ],
+          "bytes_per_invocation": 4638.647272727273,
+          "bytes_per_element_or_pair": 0.07078014026988637,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "protocol": {
+          "ns_per_invocation": 32460230.636363637,
+          "ns_per_element_or_churn_pair": 495.3038122003729,
+          "confidence_ns_per_element_or_pair": [
+            437.298921116781,
+            553.3087032839647
+          ],
+          "bytes_per_invocation": 3305.6573737373737,
+          "bytes_per_element_or_pair": 0.05044032857875631,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        },
+        "frontier": {
+          "ns_per_invocation": 28256728.78787879,
+          "ns_per_element_or_churn_pair": 431.16346417051375,
+          "confidence_ns_per_element_or_pair": [
+            417.6056745964388,
+            444.7212537445887
+          ],
+          "bytes_per_invocation": 5375.957575757576,
+          "bytes_per_element_or_pair": 0.08203060265743371,
+          "unit": "ns/op",
+          "forks": 2,
+          "samples": 10
+        }
+      },
+      "old_over_protocol": 0.9708278303951867,
+      "protocol_over_frontier": 1.1487610926247065,
+      "frontier_confidently_slower_than_protocol": false
+    }
+  ],
+  "selection": {
+    "all6InsertionGeometricMeanSpeedup": 1.287839079319894,
+    "all6ScanOldOverProtocolRange": [
+      5.055443802885383,
+      15.995962206685585
+    ],
+    "insertionRejectCells": [],
+    "churnRejectCells": [],
+    "rule_sha256": "52674b075d88f946e83b4532f069f0864773f90f6816f4a01a503083a4b14286"
+  },
+  "limitations": "Two forks with five measured300ms iterations each. JMH reported confidence intervals retained. Overlapping intervals are inconclusive; no universal optimality, maximum throughput, platformwide or causality claim. Fixed sequential runtime order is a limitation.",
+  "fullFiveLibraryImplementation": false,
+  "fullEclipseOwnerImplementation": false,
+  "jniCrudImplemented": false,
+  "peakClaim": false,
+  "addendum": {
+    "schema": "measured-selection-adjudication/v2",
+    "originalAcceptanceSha256": "5bc538fb970f66369f489d01782f0ff8a3edebd499f594e760c11bb594bac109",
+    "diagnosticIsNotPass": true,
+    "diagnostic": {
+      "oldMismatches": 69,
+      "protocolMismatches": 33,
+      "frontierMismatches": 33,
+      "introduced": 0,
+      "resolved": 36,
+      "protocolToFrontierExactRowsEqual": true,
+      "residual": "24 natural empty root/descending compute/computeIfAbsent callback/key validation order cases and9 bounded merge(null incoming) exception-precedence cases. All33 identical to old. Follow-up full owner contract work; no canonical normalization."
+    },
+    "performanceTradeoff": "One4096 descending entry scan is23.3% slower frontier vs protocol with disjoint reported intervals; one65536 descending churn point estimate is15.3% slower with overlapping intervals. All six insertion point estimates improve, geometric mean1.287839. Original frozen selection rule passes; full matrix remains public, no universal peak claim.",
+    "runtimeIdentityMetadataCorrection": "Runtime identity archives list shared qualification context paths. Those paths are not assertions that OLD passed candidate-only132 behavior cases. OLD is the retained failing entry/lookup discriminator and passed the previous113 bulk proof plus JMH trial sanity checks. Protocol and frontier qualified132/113; both qualified5040-permutation property proof."
+  }
+}

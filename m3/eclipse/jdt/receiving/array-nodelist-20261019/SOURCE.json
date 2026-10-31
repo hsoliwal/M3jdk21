@@ -1,0 +1,20 @@
+{
+  "repository": "https://github.com/hsoliwal/eclipse.jdt.core",
+  "upstreamRepository": "https://github.com/eclipse-jdt/eclipse.jdt.core",
+  "commit": "623f17c961840a8c2b48672e0b71689106ba5050",
+  "license": "EPL-2.0",
+  "sourceLock": "UPSTREAM_SOURCE_SHA256SUMS",
+  "sourceLockSha256": "50eb1d6d8a187839f21a98687d14116e39db1581ee9072fac7e2079d0cc7da36",
+  "javaSources": 1624,
+  "lockedFiles": 1786,
+  "ownerTransforms": "OWNER_SOURCE_TRANSFORMS.tsv",
+  "compileApi": {
+    "path": "org.eclipse.jdt.core.compiler.batch/lib/javax23api.jar",
+    "sha256": "f6cff55614b8284341504d7a96580491f0b57ec75526b4d7662ab98164eff379",
+    "scope": "Compiler build only, matching upstream jars.extra.classpath; not packaged or patched into the runtime"
+  },
+  "upstreamCoreExecutionEnvironment": "JavaSE-25",
+  "upstreamCompilerExecutionEnvironment": "JavaSE-17",
+  "receivingCoreRelease": 21,
+  "scope": "Direct original ASTNode.NodeList storage and JavaBuilder unused lambda identifier. No alternate DOM, AST proxy, or replacement parser API."
+}

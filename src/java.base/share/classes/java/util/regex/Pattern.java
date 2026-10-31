@@ -43,6 +43,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import jdk.internal.mindex.M3TQ;
 import jdk.internal.util.ArraysSupport;
 import jdk.internal.util.regex.Grapheme;
 
@@ -1013,6 +1014,15 @@ public final class Pattern
     transient Node matchRoot;
 
     /**
+     * Candidate-only exact trigram query for case-sensitive literal find operations.
+     * Null means the regex engine is the only admissible authority.
+     */
+    transient M3TQ m3Tq;
+
+    // Optional immutable Boolean plan, published by the existing compiled volatile write.
+    private transient M3PatternQuery.BooleanPlan m3BooleanPlan;
+
+    /**
      * Temporary storage used by parsing pattern slice.
      */
     transient int[] buffer;
@@ -1218,8 +1228,7 @@ public final class Pattern
      */
     public static boolean matches(String regex, CharSequence input) {
         Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(input);
-        return m.matches();
+        return p.m3Matches(input);
     }
 
     /**
@@ -1910,6 +1919,19 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
         }
         patternLength = normalizedPattern.length();
 
+        // M3TQ is only an absence gate. Case-insensitive literal matching has different
+        // equivalence semantics and therefore deliberately does not install an exact query.
+        if (has(LITERAL) && !has(CASE_INSENSITIVE)) {
+            try {
+                m3Tq = M3TQ.fromExact(List.of(pattern));
+            } catch (OutOfMemoryError unavailable) {
+                // Candidate precompute must never add a new Pattern.compile failure mode.
+                m3Tq = null;
+            }
+        } else {
+            m3Tq = null;
+        }
+
         // Copy pattern to int array for convenience
         // Use double zero to terminate pattern
         temp = new int[patternLength + 2];
@@ -1965,6 +1987,27 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
             root = matchRoot;
         } else {
             root = hasSupplementary ? new StartS(matchRoot) : new Start(matchRoot);
+        }
+
+        // M3TQ absence gate for general patterns: the requirement is derived from the compiled
+        // node tree and refused whenever a pruned search could differ observably from a failed
+        // one (see M3PatternQuery). Still only a necessary condition; the engine stays authority.
+        if (m3Tq == null && !has(LITERAL) && !has(CANON_EQ)) {
+            try {
+                m3Tq = M3PatternQuery.derive(matchRoot, root);
+            } catch (OutOfMemoryError | RuntimeException unavailable) {
+                // Candidate precompute must never add a new Pattern.compile failure mode;
+                // an undecidable tree simply keeps the exact engine unassisted.
+                m3Tq = null;
+            }
+        }
+
+        if (!has(CANON_EQ)) {
+            try {
+                m3BooleanPlan = M3PatternQuery.deriveBoolean(matchRoot);
+            } catch (OutOfMemoryError | RuntimeException unavailable) {
+                m3BooleanPlan = null;
+            }
         }
 
         // Optimize the greedy Loop to prevent exponential backtracking, IF there
@@ -5529,10 +5572,10 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
      * they are ignored for purposes of finding word boundaries.
      */
     static final class Bound extends Node {
-        static int LEFT = 0x1;
-        static int RIGHT= 0x2;
-        static int BOTH = 0x3;
-        static int NONE = 0x4;
+        static final int LEFT = 0x1;
+        static final int RIGHT= 0x2;
+        static final int BOTH = 0x3;
+        static final int NONE = 0x4;
         int type;
         boolean useUWORD;
         Bound(int n, boolean useUWORD) {
@@ -6005,8 +6048,19 @@ NEXT:       while (i <= last) {
      * @see     Matcher#matches
      */
     public Predicate<String> asMatchPredicate() {
-        return s -> matcher(s).matches();
+        return this::m3Matches;
     }
+
+    private boolean m3Matches(CharSequence input) {
+        // Keep mutable/custom CharSequence reads and deserialization's lazy compilation
+        // with Matcher. String.charAt also reads canonical M3 storage without flattening.
+        if (compiled && input instanceof String text && m3BooleanPlan != null) {
+            int result = m3BooleanPlan.matches(text);
+            if (result >= 0) return result != 0;
+        }
+        return matcher(input).matches();
+    }
+
 
     /**
      * Creates a stream from the given input sequence around matches of this

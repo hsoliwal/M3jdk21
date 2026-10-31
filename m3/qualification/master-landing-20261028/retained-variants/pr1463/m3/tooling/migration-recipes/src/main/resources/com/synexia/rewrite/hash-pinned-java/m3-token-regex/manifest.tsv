@@ -1,0 +1,7 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java	ABSENT	ba5802a1b93b714e42e9770b398b4b51458d17d4d8e3b033a52ba3c5418f59f2	00-M3NotYetReceived.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3TokenIndex.java	ABSENT	606ca90bece15f486485fbc6749ed50ccdf6bcb3f18bdfd5b26784c4f4b0fb16	01-M3TokenIndex.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3TokenMatcher.java	ABSENT	6683641031307ae219d22cf5be0312bd2f6e71d63146a6902e6deff36e27bc2e	02-M3TokenMatcher.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3TokenPattern.java	ABSENT	d9e28e0b40adcdf518bc91c4bd9500051b34699a6e9a940b6c43f1498bb5ff45	03-M3TokenPattern.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java	ABSENT	1ff8bfead87ca62c84bf3fc2b96be4f6cac03bb433e04c6357131d2bf318b680	04-M3TokenPredicateCache.java.txt
+test/jdk/jdk/internal/mindex/M3TokenRegexTest.java	ABSENT	ba73e9c57b32f4878a835d2717f74d1b09e6610de86d1f5664d271bf0a633f1a	05-M3TokenRegexTest.java.txt

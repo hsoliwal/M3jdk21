@@ -1,0 +1,83 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Ic0Forward
+displayName: Ic0 Forward ordered composition
+description: One explicitly declared complete family order; no unlisted order claim.
+recipeList:
+  - com.synexia.m3.Ic0Cmp
+  - com.synexia.m3.Ic0Cgo
+  - com.synexia.m3.Ic0Cri
+  - com.synexia.m3.Ic0Gpc
+  - com.synexia.m3.Ic0Cor
+  - com.synexia.m3.Ic0Sdc
+  - com.synexia.m3.Ic0Fnd
+  - com.synexia.m3.Ic0Ciw
+  - com.synexia.m3.Ic0Cib
+  - com.synexia.m3.Ic0Jgr
+  - com.synexia.m3.Ic0Jma
+  - com.synexia.m3.Ic0Pcd
+  - com.synexia.m3.Ic0Pco
+  - com.synexia.m3.Ic0Pcw
+  - com.synexia.m3.Ic0Dgc
+  - com.synexia.m3.Ic0Nul
+  - com.synexia.m3.Ic0Hct
+  - com.synexia.m3.Ic0Hts
+  - com.synexia.m3.Ic0Ipr
+  - com.synexia.m3.Ic0Aca
+  - com.synexia.m3.Ic0Acs
+  - com.synexia.m3.Ic0Arm
+  - com.synexia.m3.Ic0Scp
+  - com.synexia.m3.Ic0Aml
+  - com.synexia.m3.Ic0Amc
+  - com.synexia.m3.Ic0Agt
+  - com.synexia.m3.Ic0Avr
+  - com.synexia.m3.Ic0Avp
+  - com.synexia.m3.Ic0Arr
+  - com.synexia.m3.Ic0Awr
+  - com.synexia.m3.Ic0Ard
+  - com.synexia.m3.Ic0Awb
+  - com.synexia.m3.Ic0Amb
+  - com.synexia.m3.Ic0Awd
+  - com.synexia.m3.Ic0Aad
+  - com.synexia.m3.Ic0Jop
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Ic0Reverse
+displayName: Ic0 Reverse ordered composition
+description: One explicitly declared complete family order; no unlisted order claim.
+recipeList:
+  - com.synexia.m3.Ic0Jop
+  - com.synexia.m3.Ic0Aad
+  - com.synexia.m3.Ic0Awd
+  - com.synexia.m3.Ic0Amb
+  - com.synexia.m3.Ic0Awb
+  - com.synexia.m3.Ic0Ard
+  - com.synexia.m3.Ic0Awr
+  - com.synexia.m3.Ic0Arr
+  - com.synexia.m3.Ic0Avp
+  - com.synexia.m3.Ic0Avr
+  - com.synexia.m3.Ic0Agt
+  - com.synexia.m3.Ic0Amc
+  - com.synexia.m3.Ic0Aml
+  - com.synexia.m3.Ic0Scp
+  - com.synexia.m3.Ic0Arm
+  - com.synexia.m3.Ic0Acs
+  - com.synexia.m3.Ic0Aca
+  - com.synexia.m3.Ic0Ipr
+  - com.synexia.m3.Ic0Hts
+  - com.synexia.m3.Ic0Hct
+  - com.synexia.m3.Ic0Nul
+  - com.synexia.m3.Ic0Dgc
+  - com.synexia.m3.Ic0Pcw
+  - com.synexia.m3.Ic0Pco
+  - com.synexia.m3.Ic0Pcd
+  - com.synexia.m3.Ic0Jma
+  - com.synexia.m3.Ic0Jgr
+  - com.synexia.m3.Ic0Cib
+  - com.synexia.m3.Ic0Ciw
+  - com.synexia.m3.Ic0Fnd
+  - com.synexia.m3.Ic0Sdc
+  - com.synexia.m3.Ic0Cor
+  - com.synexia.m3.Ic0Gpc
+  - com.synexia.m3.Ic0Cri
+  - com.synexia.m3.Ic0Cgo
+  - com.synexia.m3.Ic0Cmp

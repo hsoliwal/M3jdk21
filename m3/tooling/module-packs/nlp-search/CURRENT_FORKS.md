@@ -1,0 +1,108 @@
+# Current Lucene and OpenNLP JMODs
+
+Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0.
+
+`current_forks.py` builds the current source forks as optional Java 21 JMODs and links an image with the M3 source integration. The existing `build.py` remains the independent Lucene 9.10/OpenNLP 2.4 vendored-source lane.
+
+## Owners and source identity
+
+| Component | Implementation owner | Packaging |
+| --- | --- | --- |
+| Lucene | `hsoliwal/lucene`, input `d1b7235f1ba1c1eea5b04a5b7e6554595a90719e` | All 29 production modules retain their original `org.apache.lucene.*` identities. |
+| OpenNLP | `hsoliwal/opennlp`, input `368337311ad94b665fd178f8d3ced005a73b2370` | 1,000 production sources: the 923-source API/runtime/ML/CLI/formats/model-resolver/tools closure forms `org.apache.opennlp.tools`; morfologik (10 sources), spellcheck (23), and UIMA (44) keep separate modules. |
+| M3 immutable text | Existing `m3/core/src` | All 24 source classes and the existing `com.m3.text` descriptor. |
+| M3File/M3AST | Existing M3JDK PR #1192 source closure, exact head `215f6b9b4bb0ffbd9539106e6e8e394105933138` | The original 113-source closure is restored and packaged as `jdk.m3.compiletime`. |
+| Source integration | Existing module-pack receiver | `jdk.m3.nlp.search` directly calls the actual library implementations and existing M3 owners. |
+| Reusable recipes | `hsoliwal/com.synexia` | Maven/OpenRewrite engine and sealed payloads are mirrored into the receiver for reproducible builds. |
+
+The source locks include source/resource paths and SHA-256 identities. A changed, missing, or additional covered source is refused. Compilation uses complete production source, resources, public classes and services. No reflection adapter replaces either library. The linked image has no runtime dependency on the private Synexia repository or its Maven artifacts.
+
+The M3File/M3AST restoration preserves original public `com.synexia.mindex*` identities used by existing code, together with the existing `com.m3.compiletime.ast` names. It introduces no second parser, AST atom pool, or String implementation. `com.m3.text` remains the existing explicit immutable storage substrate; ordinary `java.lang.String` use continues through the selected JDK's String implementation.
+
+## Build
+
+Use a complete **JDK 21** (or the built M3JDK21 image), Python 3, and Maven 3.9+. Check out the companion source changes in both public forks. The exact source locks, rather than a moving branch name, determine admissible input content.
+
+`CURRENT_FORK_REFS.json` records the exact companion implementation commits. The `M3 current Lucene/OpenNLP JMODs` workflow checks out those public commits, builds the mirrored recipe engine, and uploads the resulting JMODs and qualification reports.
+
+First build the mirrored canonical recipe engine:
+
+```sh
+export JAVA_HOME=/path/to/jdk21
+export PATH="$JAVA_HOME/bin:$PATH"
+
+RECIPE_ROOT=m3/vendor/synexia/synexia-openrewrite-recipes
+RECIPE_CRATE="$RECIPE_ROOT/crates/m3-nlp-search/current-forks-20261018"
+
+mvn -B -ntp -f "$RECIPE_CRATE/pom.xml" test \
+  dependency:build-classpath -Dmdep.outputFile=target/sdk-classpath.txt
+```
+
+Then build the source modules and combined image:
+
+```sh
+python3 m3/tooling/module-packs/nlp-search/current_forks.py \
+  --jdk-home "$JAVA_HOME" \
+  --lucene-source /path/to/lucene \
+  --opennlp-source /path/to/opennlp \
+  --recipe-runner "$RECIPE_CRATE/run_recipe.py" \
+  --recipe-resources "$RECIPE_ROOT/src/main/resources" \
+  --out /path/to/fresh/current-nlp-search
+```
+
+`--maven` and `--maven-settings` select Maven and its network settings. `--lucene-dependencies` and `--opennlp-dependencies` can instead select directories containing the exact locked dependency JARs; their byte hashes are verified. The output directory must not exist. Existing outputs are never silently reused as evidence for a new source build.
+
+The build produces `pack/jmods/*.jmod`, `pack/image`, deterministic modular JARs under `jars/`, source/dependency receipts, module manifests, test logs and `BUILD_REPORT.json`. The report distinguishes exact input JMOD byte hashes from normalized class/resource payload hashes. JMOD wrapper timestamps may differ between runs; the recipes must reach a source fixed point, and the class/resource implementation must agree for every shared module.
+
+## Java 21 compatibility
+
+Lucene's current default Gradle lane requires Java 25. A separate sealed staging recipe compiles the current base implementations for Java 21, including explicit Java 21 foreign-memory preview APIs. The original Java 25 source lane remains available. The CPU fallback is selected where the Java 25 vector specialization cannot run.
+
+`JavascriptCompiler` retains the current expression compiler and uses the pinned Class-File API backport `io.github.dmlloyd:jdk-classfile-backport:25.1` on this lane. Expressions are generated as valid Java 21 class files; existing compiled classes are never relabeled. The dependency's GPL-2.0-with-Classpath-exception notices remain scoped to that dependency and are carried into the image.
+
+Run this Java 21 image with `--enable-preview`. The normal Lucene foreign-memory implementation can also be explicitly granted native access:
+
+```sh
+/path/to/current-nlp-search/pack/image/bin/java \
+  --enable-preview \
+  --enable-native-access=org.apache.lucene.core \
+  --add-modules jdk.m3.nlp.search \
+  -cp /path/to/application/classes example.Main
+```
+
+The source build accounts for optional OpenNLP extensions in its inventory. Deep-learning/GPU distributions and platform-specific Faiss libraries require their separate platform-native dependencies; a JMOD containing an optional API is not evidence that an external native backend is installed or qualified.
+
+## Shared source APIs
+
+`SourceDocument` retains an existing `M3File`, `M3StringPiece`, or `M3AST` owner. `ofImmutableView` explicitly admits another stable immutable `CharSequence`, including an M3-backed ordinary String. The caller must keep the length and characters stable for the holder's entire lifetime. Mutable input continues to enter through the existing snapshot-taking `M3File.of` boundary.
+
+```java
+M3File file = M3File.read(path, StandardCharsets.UTF_8, maxBytes);
+SourceDocument source = SourceDocument.of(file, existingAst);
+
+SourceSpans tokens = SourceSpans.simpleTokens(source);
+SourceSpans modelTokens = SourceSpans.modelTokens(source, trainedTokenizer);
+SourceSpans sentences = SourceSpans.sentences(source, trainedSentenceDetector);
+
+writer.addDocument(LuceneSourceFields.document(source, "source"));
+```
+
+These APIs use half-open **UTF-16 code-unit ranges**, matching the source, javac positions, OpenNLP spans and Lucene offsets. They never interpret these numbers as byte offsets or Unicode code-point indexes. `SourceSpans` retains primitive start/end arrays and the original source reference. It materializes no per-token text. An explicit `view(i).toString()` allocates only the requested range.
+
+`source.openNlpDocument()` creates a normal annotation container through `Document.ofImmutableView`, retaining the same source reference through layer addition and merging. The original `Document.of(CharSequence)` keeps its snapshot semantics. Model tokenization preserves the original algorithm, probabilities and newline settings; only model feature windows are converted to String where the existing model contract requires them. Sentence detection receives range descriptors for the same original coordinates.
+
+`source.astOccurrence(start, end)` returns the smallest containing occurrence from the original AST or `-1` when absent. Equal-width matches select the lowest original occurrence index. Empty ranges use inclusive containment at both endpoints. Unavailable/synthetic positions are ignored. The lazy primitive interval index retains occurrence numbers and range maxima, never duplicate AST nodes or symbols. Text and AST must describe exactly the same characters before they can be paired.
+
+`LuceneSourceFields.document` creates real Lucene fields with positions, offsets and term vectors. Use one returned document for each IndexWriter add/update operation. The caller selects the Analyzer; any transforming CharFilter must provide normal Lucene offset correction. Stored provenance includes source identity, its canonical M3 UTF-16 digest, the original-byte digest when available, and the separate AST fingerprint/digest. Source payload is not copied into a stored text field. Field names beginning with `_m3_` are reserved for that provenance.
+
+## Qualification and limits
+
+The build fails if source seals, recipe fixed points, refusal checks, source compilation, descriptors, JMOD creation, module validation or required runtime probes fail. Its probes cover:
+
+- Exact immutable UTF-16 digests against 2,000 seeded inputs, including malformed surrogates, with the original snapshot/null contracts preserved.
+- M3File and M3 composite ownership, source/byte digest separation, 2,000 AST interval oracles and 300 Unicode token oracles.
+- Real FSDirectory indexing, search and term-vector offsets mapped back to original AST occurrences.
+- Actual token and sentence model training, serialization, reload, inference, probability parity and immutable source boundaries.
+- The donor builders' library contract probes, CLI, named-module services and complete selected production source/resource inventories.
+
+This optional module pack does not by itself qualify the modified HotSpot runtime, every donor test suite, every OS/backend, or a measured memory/performance gain. It does not advance the repository's broader String/array/collection/AST receiving phases. Those claims require their own test and measurement evidence.

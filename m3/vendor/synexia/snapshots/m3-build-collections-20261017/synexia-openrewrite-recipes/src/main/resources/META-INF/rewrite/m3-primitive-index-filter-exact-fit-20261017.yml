@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3PrimitiveIndexFilterExactFit20261017
+displayName: Avoid exact-fit primitive index filter copies
+description: >-
+  Retain the new call-local row-index array when all projected rows pass a
+  filter. Partial projections keep their exact-size copy. Two independent
+  per-method qualification stages feed this convergent baseline-to-final crate;
+  source-version checks, callback order and defensive exports remain unchanged.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: primitive-index-filter-exact-fit-20261017

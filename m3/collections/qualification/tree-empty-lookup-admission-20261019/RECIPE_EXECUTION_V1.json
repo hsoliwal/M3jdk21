@@ -1,0 +1,21 @@
+{
+  "schema": "m3-exact-file-recipe-proof/v1",
+  "status": "PASS",
+  "preimageSha256": "9c767668c925581799dc97f20e63fce0be19e8fec4c4ec59b1ce257a6c969f4e",
+  "postimageSha256": "0fdc824473fbdc40fa4a4dbefec0ffa429999f0ee362b9b5eb5af9798b3037f9",
+  "applyExact": true,
+  "fixedPoint": true,
+  "inversion": true,
+  "refusedMutatedPreimages": [
+    "0b90efa3a1058b3dea4f332dd327aed1b1a93bdb7511f74e062ad17302e0f3a2",
+    "df78300d8e3bf997d561dc4f59d9d98180531fc31234aafbad372ceb905ad4f3",
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  ],
+  "sourceFileCount": 1,
+  "originalAndBaselineExecutedBeforeSourceWrite": true,
+  "controllerSha256": "827fd7fc4594ef547df5166b940c95d46e78b3acd7350d3cfdf37f56c7de8fb7",
+  "donorControllers": [
+    "apply_m3_tree_put_validation_v1.py",
+    "prove_tree_put_recipe_v1.py"
+  ]
+}

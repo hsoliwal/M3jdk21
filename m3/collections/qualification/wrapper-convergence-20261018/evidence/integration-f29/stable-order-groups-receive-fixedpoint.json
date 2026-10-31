@@ -1,0 +1,18 @@
+{
+  "stage": "RECEIVE",
+  "pass": "stable-order-groups",
+  "actual_sdk_results": true,
+  "target": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+  "before": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e",
+  "after": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e",
+  "changed_files": [],
+  "sdk_results_sha256": "92033ccd1e3ffaccec1f0825ba6bbf5f94af7a9f5099a35a0cc56a8885e23eb0",
+  "sdk_inputs_sha256": "5249fe225ad997d81741a667234b04f51ffb105a12051268c5837828815733e0",
+  "sdk_report_sha256": "9fb00beafb41b347d7d0a421aaa4edeeace75c3a8797d418012640c55f7c8833",
+  "sdk_patch_sha256": "ffdfcea9056ae5839d937977c14bad4899d765070ae9b51dc527c4522e354240",
+  "verified_bound_inputs": 316,
+  "helper_source": "m3/arrays/qualification/empty-segments-20261017/recipe-custody/receive.py",
+  "helper_sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712",
+  "commands": [],
+  "utc": "2026-10-18T05:37:00.800947+00:00"
+}

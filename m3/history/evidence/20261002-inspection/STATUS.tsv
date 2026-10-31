@@ -1,0 +1,12 @@
+stage	status	scope
+attached_doctrine	READ_AND_HASHED	three supplied artifacts; authority separated
+GitHub_repository_inventory	OBSERVED	26 branches and 17 PR descriptions; pinned current master
+reverse_merge_review	CONFIRMED	d639 and 67876 same tree; octopus parent identities read
+candidate_to_target_compare	OBSERVED	143 commits ahead; canonical runtime content absent in endpoint comparison
+tool_fixture_tests	PASS	31 tests; synthetic Git repositories only
+full_frozen_graph_traversal	NOT_RUN_LOCALLY	no repository clone in execution container; hosted workflow candidate
+whole_JDK_build_tests	NOT_RUN	no acceptance claim
+runtime_cleanup_and_reconciliation	OPEN	no production edits or merge
+publication	DRAFT_PR_20_OPEN	no merge
+forward_master_observation	SAME_TREE_CONFIRMED	4a81f3b3050fa5572ec1ff9368e2c383231db2e6
+hosted_audit_attempt	BLOCKED_NO_JOBS	run 36959929426 reports failure; zero jobs

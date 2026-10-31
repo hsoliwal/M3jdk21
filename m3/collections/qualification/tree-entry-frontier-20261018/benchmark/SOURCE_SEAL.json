@@ -1,0 +1,28 @@
+{
+  "id": "M3TreeMapPublicBench-source-seal-v1",
+  "source": {
+    "path": "M3TreeMapPublicBench.java",
+    "bytes": 5953,
+    "sha256": "53317a2b1b31023b36dd3cc9205b92822d51871dedb4a454430413a6cd9251da"
+  },
+  "plan": {
+    "path": "BENCHMARK_PLAN.json",
+    "bytes": 6553,
+    "sha256": "58596e174f37960e3469f82649228bd2b5a2232e4691704e8d58be7580144bae"
+  },
+  "foss": {
+    "path": "FOSS_REUSE_DECISION.tsv",
+    "bytes": 734,
+    "sha256": "67bfc3ad1b191d5f6302bb640f58cf7a2a9d0e9dc207d9181d003e10e3d64e41"
+  },
+  "notices": {
+    "path": "THIRD_PARTY_NOTICES.txt",
+    "bytes": 1025,
+    "sha256": "b6ba9e3c6928a4d94b387c123fe0b686de2b2e37cfb2cd1fee33b500116dbe31"
+  },
+  "benchmarkClass": "com.m3.bench.M3TreeMapPublicBench",
+  "status": "SOURCE_FROZEN; NO_COMPILE_RUN_RESULTS",
+  "runtimePins": "Root must bind full identity/correctness/public-ABI qualification for old8d,protocol1b,candidate; unqualified runtimes stay excluded.",
+  "reproducibility": "Use identical source/classes/JMH/params/flags across versions. JMH1.37 jars and exact ns/whole-op normalization pinned in plan. Root requests CLI -prof gc.",
+  "authoredByteLimit": 16384
+}

@@ -1,0 +1,19 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.xml.security.UpdateOwaspSuppressionDate"
+contributors:
+- name: "Patrick Way"
+  email: "pway99@users.noreply.github.com"
+  lineCount: 71
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 32
+- name: "Patrick"
+  email: "patway99@gmail.com"
+  lineCount: 4
+- name: "Jonathan Leitschuh"
+  email: "jonathan.leitschuh@gmail.com"
+  lineCount: 1
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 1

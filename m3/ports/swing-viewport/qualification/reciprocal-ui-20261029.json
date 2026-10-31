@@ -1,0 +1,154 @@
+{
+  "schema": "SYNEXIA_PASSIVE_QUALIFICATION_RECEIPT_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "qualified_target_base": "1d203c915ed0b07a6235700eea2bbf988745a778",
+  "followup_target_base": "1d203c915ed0b07a6235700eea2bbf988745a778",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "bf2cd74c552eb3cbb02ef0aad81deefc1d728542",
+  "canonical_engine_commit": "3cda7fa7fb30c9d4d75089265e73bbef3417bba7",
+  "canonical_evidence_url": "https://github.com/hsoliwal/com.synexia/tree/bf2cd74c552eb3cbb02ef0aad81deefc1d728542/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs",
+  "datasets": [
+    {
+      "dataset": "swing-tracked-20261029",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-tracked-20261029",
+      "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
+      "manifests": [
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swing-tracked-20261029/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swing-tracked-20261029/manifest.tsv",
+          "sha256": "60383469fb71a70d085ff6481e5e7f5f37202d2d4b9c6779c05edf64773cd303"
+        }
+      ],
+      "sdk_results": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/swing-tracked-followup-20261029/sdk/SDK_RESULTS.tsv",
+      "sdk_results_sha256": "8b825e16ddb76ecdc10bfde411a9f0d5caa7202447904386f5f75cbef5ed0b29",
+      "sdk_inputs": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/swing-tracked-followup-20261029/sdk/SDK_INPUTS.tsv",
+      "sdk_inputs_sha256": "8549a2847c0574004920bbea36ac3bc4327eef6dd486e7c17e1568ef5349fdb2",
+      "actual_sdk_tests": 5,
+      "input_sealing_tests": 12,
+      "receiver_integrity_cases": 15,
+      "receiver_fixed_point_changes": 0
+    },
+    {
+      "dataset": "swingx-selection-v2-20261029",
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swingx-selection-v2-20261029",
+      "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
+      "manifests": [
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/swingx-selection-v2-20261029/resources/com/synexia/rewrite/hash-pinned-java/m3-ast-build-reverse-20261017-swingx-selection-v2-20261029/manifest.tsv",
+          "sha256": "185260047c2cf22dfedaf9aa54b60b45b868c33589cefea5b17e3bb8657ba6af"
+        }
+      ],
+      "sdk_results": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-selection-followup-20261029/swingx-selection/SDK_RESULTS.tsv",
+      "sdk_results_sha256": "347426363d09006b550e4150a361d079a266db7c2e37601db1529ca101afead9",
+      "sdk_inputs": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/ui-selection-followup-20261029/swingx-selection/SDK_INPUTS.tsv",
+      "sdk_inputs_sha256": "15f236dd9c6fc8a64c1b338345581b428cfd3c0d6d2fc56d28fb116de0d97575",
+      "actual_sdk_tests": 5,
+      "input_sealing_tests": 12,
+      "receiver_integrity_cases": 15,
+      "receiver_fixed_point_changes": 0
+    }
+  ],
+  "generated_results": [
+    {
+      "dataset": "swing-tracked-20261029",
+      "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
+      "pre_sha256": "51238e60cd6bad56f28b3c4b798f565e6d7d7954f6c63c03054443aa51fae2a5",
+      "sha256": "3437e9bf318c4ca5799165e1514dc9ef5f01ac8e5f89138a2079973f3bd2edb1",
+      "path": "m3/ports/swing-viewport/src/main/java/com/m3/swing/viewport/M3ViewportBinding.java",
+      "execution_steps": [
+        {
+          "dataset": "swing-tracked-20261029",
+          "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
+          "pre_sha256": "51238e60cd6bad56f28b3c4b798f565e6d7d7954f6c63c03054443aa51fae2a5",
+          "sha256": "3437e9bf318c4ca5799165e1514dc9ef5f01ac8e5f89138a2079973f3bd2edb1"
+        }
+      ]
+    },
+    {
+      "dataset": "swingx-selection-v2-20261029",
+      "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
+      "pre_sha256": "de8be133a84c030f5559a97815069a737daa13931cb9b5a56269d346c0f80f82",
+      "sha256": "0cddd8413262c86e869069dba8f830251106441d82d575f2ff04a274b503d98b",
+      "path": "m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3SwingXColumnProof.java",
+      "execution_steps": [
+        {
+          "dataset": "swingx-selection-v2-20261029",
+          "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
+          "pre_sha256": "de8be133a84c030f5559a97815069a737daa13931cb9b5a56269d346c0f80f82",
+          "sha256": "0cddd8413262c86e869069dba8f830251106441d82d575f2ff04a274b503d98b"
+        }
+      ]
+    },
+    {
+      "dataset": "swing-tracked-20261029",
+      "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
+      "pre_sha256": "ABSENT",
+      "sha256": "30e2eef2d6206c01fef2875812e3f5590b39e814e80f9646b916207382530e74",
+      "path": "m3/ports/swing-viewport/src/test/java/com/m3/swing/viewport/M3ViewportBindingTrackingTest.java",
+      "execution_steps": [
+        {
+          "dataset": "swing-tracked-20261029",
+          "baseline_ref": "652ff7cfb605b088866eafb677917203af0964eb",
+          "pre_sha256": "ABSENT",
+          "sha256": "30e2eef2d6206c01fef2875812e3f5590b39e814e80f9646b916207382530e74"
+        }
+      ]
+    }
+  ],
+  "preimage_semantics": "Each result names its immediate last executed preimage; ordered execution_steps retain the full per-file chain and exact dataset baselines.",
+  "product_gate": {
+    "qualification": "PASSED",
+    "scope": "Complete Swing viewport owner module plus actual SwingX fixtures; source-built installed M3 JDK image is a separate gate.",
+    "junit_tests": 67,
+    "junit_failures": 0,
+    "junit_errors": 0,
+    "junit_skipped": 0,
+    "actual_swingx_checks": 77,
+    "java_version": 21,
+    "public_api": "All prior public JVM descriptors retained; three explicit installTracked factories added.",
+    "tracking_contract": "Opt-in EDT coalescing, model/sorter/tree subscription replacement and close lifecycle; existing install remains manual.",
+    "evidence": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/swing-tracked-followup-20261029/"
+  },
+  "evidence_corrections": [
+    "The original binding input archive omitted two published metadata files and included four unpublished refusal manifests; the exact canonical published dataset replay and unchanged output proof are retained in canonical-replay-repair-20261029.",
+    "The earlier PR2121 is merged; this receipt belongs to a new follow-up PR from the later current master."
+  ],
+  "public_api_preservation": "Prior public JVM descriptors retained; explicit additions and behavior corrections are recorded in the canonical proof.",
+  "scope": "Qualified component increment; complete toolkit parity and full release qualification are not claimed.",
+  "remaining_gates": [
+    "Source-built installed M3 JDK image and applicable full jtreg/native integration.",
+    "Cross-platform native toolkit acceptance beyond this Java21 owner module.",
+    "Full toolkit-wide reciprocal capability parity.",
+    "Performance benchmarks; no elapsed-time speedup claim."
+  ],
+  "passive": true,
+  "receiving_preimage_equivalence": {
+    "sealed_dataset_baseline": "652ff7cfb605b088866eafb677917203af0964eb",
+    "receiving_base": "1d203c915ed0b07a6235700eea2bbf988745a778",
+    "receiving_module_tree": "40769be9e409efea49a4e530df926f474579affa",
+    "reconstructed_module_files": 95,
+    "tracked_receiver_changes": [
+      2,
+      0
+    ],
+    "swingx_receiver_changes": [
+      1,
+      0
+    ],
+    "maven_build_closure_files": 58,
+    "maven_main_java_files": 44,
+    "maven_test_java_files": 13,
+    "maven_build_closure_identical_to_tested_combined_module": true,
+    "upstream_reproducer_git_blob_preserved": "16fac5afaf6d54d4769c05185d253c388e52c96a",
+    "only_differences_outside_tested_closure": [
+      "upstream jtreg reproducer",
+      "previous passive receipt"
+    ],
+    "authority": "Exact preimage and tested Maven input equivalence; no new runtime execution or installed M3 JDK image is claimed."
+  },
+  "previous_qualification": {
+    "merged_pr": 2121,
+    "qualified_head": "652ff7cfb605b088866eafb677917203af0964eb",
+    "merge_commit": "2275d88c93f77fe03e015fd477fbb51d88144b5b",
+    "previous_receipt_sha256": "224600d9a2a273ca52e3463f9d3773e233bcfa59cdc3c9f6eee007bbf7e1eb9d"
+  }
+}

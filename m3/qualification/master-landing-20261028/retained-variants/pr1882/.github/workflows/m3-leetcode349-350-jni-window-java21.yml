@@ -1,0 +1,83 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 JNI LeetCode 349 350 signed-long windows Java21
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankWindowIntersectionContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankWindowIntersectionTest.java'
+      - '.github/workflows/m3-leetcode349-350-jni-window-java21.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  original-java21-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Pin exact PR head and admitted original owner blobs
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '99872c10902c15cbbf143dd158a6bcf6736465e1'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = 'e7ed7e9a3a9eb71e1970d8b4f023147afb8e7543'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankWindowIntersectionContract.java)" = 'd5e611897131123061c5e40886be1cb672c58f0a'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankWindowIntersectionTest.java)" = 'c147f3f3c2376407bd95fe138c5eb7f2d07b1458'
+      - name: Compile existing Java rank owner plus independent LeetCode oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3rank/classes" "$RUNNER_TEMP/m3rank/native"
+          javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/m3rank/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongRankWindowIntersectionContract.java
+      - name: Compile complete original JNI rank batch library C17
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -Wall -Wextra -Werror -O2 -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$RUNNER_TEMP/m3rank/native/libm3rankbatch.so"
+      - name: Prove Java and required native including checked JNI and interpreter
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -cp "$RUNNER_TEMP/m3rank/classes" \
+            com.m3.collections.M3LongRankWindowIntersectionContract --java \
+            | tee "$RUNNER_TEMP/m3rank/java.txt"
+          java -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$RUNNER_TEMP/m3rank/native" \
+            -cp "$RUNNER_TEMP/m3rank/classes" \
+            com.m3.collections.M3LongRankWindowIntersectionContract --native \
+            | tee "$RUNNER_TEMP/m3rank/native.txt"
+          java -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
+            -Djava.library.path="$RUNNER_TEMP/m3rank/native" \
+            -cp "$RUNNER_TEMP/m3rank/classes" \
+            com.m3.collections.M3LongRankWindowIntersectionContract --native \
+            | tee "$RUNNER_TEMP/m3rank/interpreter.txt"
+          grep -Fxq 'PASS M3_LEETCODE349_350_JNI_WINDOW checks=6037 native=false' "$RUNNER_TEMP/m3rank/java.txt"
+          grep -Fxq 'PASS M3_LEETCODE349_350_JNI_WINDOW checks=10059 native=true' "$RUNNER_TEMP/m3rank/native.txt"
+          cmp "$RUNNER_TEMP/m3rank/native.txt" "$RUNNER_TEMP/m3rank/interpreter.txt"
+      - name: Retain exact head three-mode JNI proof
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-leetcode349-350-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3rank/*.txt
+          if-no-files-found: warn
+          retention-days: 14

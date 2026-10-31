@@ -1,0 +1,300 @@
+{
+  "status": "PASS",
+  "classification": "Current parser module relinked with exactly the previously qualified source-built M3JDK21 native/base/compiler modules; not a fresh full JDK source build",
+  "baseline_proof_sha256": "6755b629e5a77e4218978820e5a2d0e9e2c266ea68c4a46ae543c3fc8f0fe605",
+  "ordered_parser_state_sha256": "f18a84dae553a289010c76b1b61fa2d5f1e4e5758a2c71dad8ed9a30d75bbb52",
+  "inputs": {
+    "java.base.jmod": {
+      "path": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/jmods/java.base.jmod",
+      "sha256": "25497b81f131cdc152bf47098c23344a9042f5bfc411f0bdad8b444f0b1684b5"
+    },
+    "java.compiler.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.compiler.jmod",
+      "sha256": "803dabc6f27edd8dbd77e080cfcc7359e75020df7aa8febf2e622dcf3a0f96b3"
+    },
+    "java.datatransfer.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.datatransfer.jmod",
+      "sha256": "898008001d99fc1f8d17915ce5dc16fa59933d20b0da2adad696edecfe296526"
+    },
+    "java.desktop.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.desktop.jmod",
+      "sha256": "b4147593c1c9df98e2b8065a84b4338d4b4eff07e7ec6382733d5902633f132d"
+    },
+    "java.instrument.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.instrument.jmod",
+      "sha256": "b149b385f7299847edf18ad1d8a90b0af2f38c105969644a1388537e6f03955b"
+    },
+    "java.logging.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.logging.jmod",
+      "sha256": "93a45e49568201bab719d1cca4574aa6e032a5bd530a220a14a44db0e79e13c6"
+    },
+    "java.management.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.management.jmod",
+      "sha256": "b2343e986dfb94ded26fdeaa741be7e3313f591dbc8135eb903c407fb8e1643f"
+    },
+    "java.management.rmi.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.management.rmi.jmod",
+      "sha256": "2b9219697491107c9fb0971c3634fffb5a8be49ec46010ecb8b215463ba87bda"
+    },
+    "java.naming.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.naming.jmod",
+      "sha256": "8c7d758ff07ba7dc902b6ffa5eca1da6fd42cdaac795093d9890a8a8e8708248"
+    },
+    "java.net.http.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.net.http.jmod",
+      "sha256": "e931a5b03ef71f308f48fb0cbfee47482099668c2c14a77eb020d72ba1fc5bbc"
+    },
+    "java.prefs.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.prefs.jmod",
+      "sha256": "01d0ad8732007ac73b1058eaa210b4f897f3a61af7e425615126a1b8fd564e8c"
+    },
+    "java.rmi.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.rmi.jmod",
+      "sha256": "3abb1f101dc1fd5772d109825c5f5d3ac15e80d5b109b9c6b1e314574713ed53"
+    },
+    "java.scripting.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.scripting.jmod",
+      "sha256": "ca7d4a034617ff2b44c6e7db316123d781b353e44954ef6403d6d9c7c7781a3f"
+    },
+    "java.se.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.se.jmod",
+      "sha256": "c9df958c37574071a189f60ef8c2f3e2825d56763febf2918bc06d23e8e28d2a"
+    },
+    "java.security.jgss.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.security.jgss.jmod",
+      "sha256": "6b6dee26b591c959e7b7134a3b63f3585806eb9439d28abc9ac5e2d45defc391"
+    },
+    "java.security.sasl.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.security.sasl.jmod",
+      "sha256": "b641faf2c625a819f0fdf5c3f2ee1191c8fb830279cfe12ebbd2e426186e8901"
+    },
+    "java.smartcardio.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.smartcardio.jmod",
+      "sha256": "fd6c1a7ac178cc181e76e4556f987488d3944c61dc03f5b4fa9e2fd510302ca7"
+    },
+    "java.sql.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.sql.jmod",
+      "sha256": "17799f3fb451c0aef66f310d06df392049affbc3cfb1f70dc7927ac7fab32cf7"
+    },
+    "java.sql.rowset.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.sql.rowset.jmod",
+      "sha256": "3ef919030827ce8753ce996f1ce4f27baa2e0171ef3548a1bc6690f83c0c8c2d"
+    },
+    "java.transaction.xa.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.transaction.xa.jmod",
+      "sha256": "01a0a181b15d2d0803b9e6607c6385ddda5e5527aa72429ead46e50863f44a24"
+    },
+    "java.xml.crypto.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.xml.crypto.jmod",
+      "sha256": "a0285faf24d35f73e797585e456d40547cd109046092b9836412a072b168e609"
+    },
+    "java.xml.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/java.xml.jmod",
+      "sha256": "c465c9c6c226bf1ceef2797ff477b48802834e4f2b37169b40f8f7c5ac404fa9"
+    },
+    "jdk.accessibility.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.accessibility.jmod",
+      "sha256": "35b26b1fc5a2cfd0fb6dab06517bbde47ca564ac6e7bf0e429b461d2e842648f"
+    },
+    "jdk.attach.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.attach.jmod",
+      "sha256": "2b275a8856636420c3e5349e41a764b4ed06b431d704b967b6d8bad6b387e9b2"
+    },
+    "jdk.charsets.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.charsets.jmod",
+      "sha256": "9b365c0bc566f9dd0b3cdea83f5adf2780983f1edb6d1be2a3dd5a14e5c05199"
+    },
+    "jdk.compiler.jmod": {
+      "path": "/tmp/m3-parser-refinement-20261019/emitted-integrated-01/jmods/jdk.compiler.jmod",
+      "sha256": "a790966176c5e00995786cc48c69d112fb402e5f6b3b8266cdb45159655a5fe9"
+    },
+    "jdk.crypto.cryptoki.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.crypto.cryptoki.jmod",
+      "sha256": "c7128af746cb6c6e7bb5504da947a9aded77aefd19f8165adf1e311d2acf7e80"
+    },
+    "jdk.crypto.ec.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.crypto.ec.jmod",
+      "sha256": "bbe2542e03d28d3448ffa4df70e6da8cf750842b658cddc3f053360423603fc4"
+    },
+    "jdk.dynalink.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.dynalink.jmod",
+      "sha256": "6158ba4c992665ff1b100085c8857a1eec6f568cb8cce679888617d48d0d9874"
+    },
+    "jdk.editpad.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.editpad.jmod",
+      "sha256": "618e073e9b06be4c83e8c5026b2094c713c0a563f92c8a4a73c34bb331260bad"
+    },
+    "jdk.hotspot.agent.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.hotspot.agent.jmod",
+      "sha256": "6df79049feeecb7078a6df338001a7296433f06e327623f8dbbe5d5a41ea0a31"
+    },
+    "jdk.httpserver.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.httpserver.jmod",
+      "sha256": "7cd39ebdae6d66cf332e48bc02d143f829d525c85e88193334a07964c807d5a4"
+    },
+    "jdk.incubator.vector.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.incubator.vector.jmod",
+      "sha256": "b2fcf395d031062a07b42c371dbc12c96dd7daea34a852a1ee510646350673e8"
+    },
+    "jdk.internal.ed.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.internal.ed.jmod",
+      "sha256": "35cc1d006ef9faf59dee62f0f8a8a8c3ef1b6944ba4d3a1e1c4231fd82e8bb43"
+    },
+    "jdk.internal.jvmstat.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.internal.jvmstat.jmod",
+      "sha256": "17adc2e92ea9a41b8f57a7ceaf7614ef556ead8ce552dae24e9ce35eb0d49927"
+    },
+    "jdk.internal.le.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.internal.le.jmod",
+      "sha256": "e5e844fe4d2d9a5f273c727dd7f5c6a91f51fde70d4833379fc083c6c4ad763d"
+    },
+    "jdk.internal.opt.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.internal.opt.jmod",
+      "sha256": "bfdbfd92585e6f5c39d55163579f6a796f8e38a9abf75a5ac6e13190834439ef"
+    },
+    "jdk.internal.vm.ci.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.internal.vm.ci.jmod",
+      "sha256": "045a79fd9b3ccca1e090bf0e7c7529a33f00ad4710a5fc40f88670f9d43ed47f"
+    },
+    "jdk.internal.vm.compiler.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.internal.vm.compiler.jmod",
+      "sha256": "4f92cc33f1b9e81e317b26ae91799cf0e5edc65adbae54ffe33d6e44561524ab"
+    },
+    "jdk.internal.vm.compiler.management.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.internal.vm.compiler.management.jmod",
+      "sha256": "a57b8d0a484ec981bfb4c0826c316349c7490f4bb04f8bc529020c7108526d73"
+    },
+    "jdk.jartool.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.jartool.jmod",
+      "sha256": "b1c8443ae79a7a7e86a7ae3961cb4f12fa0623370987e3db7616d38648968419"
+    },
+    "jdk.javadoc.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.javadoc.jmod",
+      "sha256": "90dbe87e54cac3c5f357d4432de3c257115f931dde713c58d21a4579fa42bb79"
+    },
+    "jdk.jcmd.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.jcmd.jmod",
+      "sha256": "de98331476e61e0f359bfc034128216e2cb8a47583e53c27d653389365f01c53"
+    },
+    "jdk.jconsole.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.jconsole.jmod",
+      "sha256": "18c0d2662d45dcb1b6767006cb8d538efcad230f8829919edd33e9a74159f7ab"
+    },
+    "jdk.jdeps.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.jdeps.jmod",
+      "sha256": "620692095118c50f3d8a1c13473b16b8ed7021210acbbd24bdd6ad711bd551ee"
+    },
+    "jdk.jdi.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.jdi.jmod",
+      "sha256": "0d02bae4236ceb8e17a51f221c28732d0ce1c7feab6107355a78edcfdea41800"
+    },
+    "jdk.jdwp.agent.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.jdwp.agent.jmod",
+      "sha256": "4dbaaed33556b020461b4275da62ac92716ab4201043ba0f5ac3370ec87ffb11"
+    },
+    "jdk.jfr.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.jfr.jmod",
+      "sha256": "baaa7d8c6b334a580da1612183934594147145e2c70f943e9aa4598076e15191"
+    },
+    "jdk.jlink.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.jlink.jmod",
+      "sha256": "63cebe0bd9183020a313ee6beed988c9e7c47c254f4112c76e00843523c03bd6"
+    },
+    "jdk.jpackage.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.jpackage.jmod",
+      "sha256": "85efaa5630a0a3d5ce2d5f0275d4acff0c24ab78776d38a704a1918bc1b08411"
+    },
+    "jdk.jshell.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.jshell.jmod",
+      "sha256": "1bbc41dfed011d943ee7f2a4b3bb85abeedb65c8e2881790a3bc7c6fd0398ec7"
+    },
+    "jdk.jsobject.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.jsobject.jmod",
+      "sha256": "30509374e986e361c3a64db2a023e8fd39834788b1938594c3b34ca3b2c665e2"
+    },
+    "jdk.jstatd.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.jstatd.jmod",
+      "sha256": "19665b4657a6565fabf61fab27c465a4d8b4ddc9e777a44eb4a73dabc47403c4"
+    },
+    "jdk.localedata.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.localedata.jmod",
+      "sha256": "cccde56d9ef011caf72124f155cbe02f0a9eadebad4afb746045fe385cba5767"
+    },
+    "jdk.management.agent.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.management.agent.jmod",
+      "sha256": "04aeb649f10be8ffc976834dee0680d6c23c32cd2a8e90f15d3b7467680a4740"
+    },
+    "jdk.management.jfr.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.management.jfr.jmod",
+      "sha256": "46b9a4cbd96737a51f167b2bc2623537fee168c64acc92ad4516ae62d0a02d59"
+    },
+    "jdk.management.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.management.jmod",
+      "sha256": "31e34b688500ea5022d51b5ed596a492789f6c919bc0c5646f46c570a841b9c6"
+    },
+    "jdk.naming.dns.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.naming.dns.jmod",
+      "sha256": "3a257d8c65c42a05b9fdb35052628547b0c6053cec655c040e8d3afdce75d809"
+    },
+    "jdk.naming.rmi.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.naming.rmi.jmod",
+      "sha256": "b20fbf794bdf4444e6eac7bacd42263a8befafa9797b8c78f8d1298a6baf852b"
+    },
+    "jdk.net.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.net.jmod",
+      "sha256": "09dbf311f8e192b85b9b8ecc02b09656479d4288ab30a65f8d95cb5889456c7e"
+    },
+    "jdk.nio.mapmode.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.nio.mapmode.jmod",
+      "sha256": "39c2515f62b7fcd0b5d9e3735362325173b1708598afbc66c2a35c143a055e61"
+    },
+    "jdk.random.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.random.jmod",
+      "sha256": "7ea00f127d67389de2242bfc7d843d2de537ac9fdfdc4c07225fa01209914ee5"
+    },
+    "jdk.sctp.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.sctp.jmod",
+      "sha256": "5fa8ae7a69d298473617ab09e64220444e17b69d89a43769279fadf397faa221"
+    },
+    "jdk.security.auth.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.security.auth.jmod",
+      "sha256": "65c261bab895f8437ac3753c6e9bb40177161ab898e079a3161b064fde5f587e"
+    },
+    "jdk.security.jgss.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.security.jgss.jmod",
+      "sha256": "fca834f32af6ac06584ee78ca0aba7b3bef7c27f8f81199fe5960e7a01dade04"
+    },
+    "jdk.unsupported.desktop.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.unsupported.desktop.jmod",
+      "sha256": "c11e18066b100cd2926e0c77899462f7de23a8ed63a2947c123452b2b87dfe87"
+    },
+    "jdk.unsupported.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.unsupported.jmod",
+      "sha256": "ca4e07f2a44f489c1ecf03279c2ba22f460f41680c9792f591dd30ba8747d339"
+    },
+    "jdk.xml.dom.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.xml.dom.jmod",
+      "sha256": "5fffed5709f4083a0d92f481cc11a9df174e89c7c101fc8328ea4e67d6e8e3d1"
+    },
+    "jdk.zipfs.jmod": {
+      "path": "/workspace/scratch/fed6767966ad/M3jdk21/build/m3-convergence-20261019/images/jmods/jdk.zipfs.jmod",
+      "sha256": "723f4f0c385ea26ca724d468bafc24d0fe105789fc0225c05fe817a79f784d1b"
+    },
+    "jdk.m3.parser.jmod": {
+      "path": "/tmp/m3-parser-refinement-20261019/current-ordered/pack/jmods/jdk.m3.parser.jmod",
+      "sha256": "c66c44896e068c4fddad7ff75415b2f9a0fd063f60f34d766db9c6c5c09e197f"
+    }
+  },
+  "command": [
+    "/tmp/jdk-21.0.12.1+1/bin/jlink",
+    "--module-path",
+    "/tmp/m3-parser-refinement-20261019/current-integrated/jmods",
+    "--add-modules",
+    "ALL-MODULE-PATH",
+    "--output",
+    "/tmp/m3-parser-refinement-20261019/current-integrated/image"
+  ],
+  "runtime_patch_module": false,
+  "image": "/tmp/m3-parser-refinement-20261019/current-integrated/image",
+  "modules_sha256": "3ba6a75905fa90d991af967543c0a321c8f39262c101c02018c45f62d2afa041"
+}

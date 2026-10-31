@@ -1,0 +1,77 @@
+{
+  "schema": "m3-donor-source-receipts-v1",
+  "sources": [
+    {
+      "donor_id": "javadev_LeetCode-in-Java",
+      "license": "MIT",
+      "license_git_blob": "4f598e0140ade8398dea76ac784c6491402964a4",
+      "license_path": "LICENSE",
+      "recursive": true,
+      "repository": "javadev/LeetCode-in-Java",
+      "requests": [
+        {
+          "http_status": 200,
+          "request_url": "https://api.github.com/repos/javadev/LeetCode-in-Java/git/commits/bed5d330e2b145e24e6fc1048ca28bf156b3d639",
+          "response_bytes": 2197,
+          "response_sha256": "7148c71fca4e16a4ae169bbca0cc045e5de67c8f9620adc6f5abac77f3389b9d",
+          "response_url": "https://api.github.com/repos/javadev/LeetCode-in-Java/git/commits/bed5d330e2b145e24e6fc1048ca28bf156b3d639"
+        },
+        {
+          "http_status": 200,
+          "request_url": "https://api.github.com/repos/javadev/LeetCode-in-Java/git/trees/c9710969e21afcfb3b52ebe6f8aeac3e01590a8f?recursive=1",
+          "response_bytes": 4536315,
+          "response_sha256": "61e29bde4ceb5dad4608a243705199aa12235fe2f3705f422813a6f104694b79",
+          "response_url": "https://api.github.com/repos/javadev/LeetCode-in-Java/git/trees/c9710969e21afcfb3b52ebe6f8aeac3e01590a8f?recursive=1"
+        },
+        {
+          "http_status": 200,
+          "request_url": "https://raw.githubusercontent.com/javadev/LeetCode-in-Java/bed5d330e2b145e24e6fc1048ca28bf156b3d639/LICENSE",
+          "response_bytes": 1113,
+          "response_sha256": "db96dc984215c28ec4c690e6df365248ac00757fc5daf55d004bbdb85fc894a3",
+          "response_url": "https://raw.githubusercontent.com/javadev/LeetCode-in-Java/bed5d330e2b145e24e6fc1048ca28bf156b3d639/LICENSE"
+        }
+      ],
+      "revision": "bed5d330e2b145e24e6fc1048ca28bf156b3d639",
+      "root_tree": "c9710969e21afcfb3b52ebe6f8aeac3e01590a8f",
+      "tree_entries": 16105,
+      "trees_git_hash_verified_including_root": 6441,
+      "truncated": false
+    },
+    {
+      "donor_id": "RodneyShag_HackerRank_solutions",
+      "license": "MIT",
+      "license_git_blob": "62bac0de6a25610dbbbe6f8c4e9bcf27228f1f9b",
+      "license_path": "license",
+      "recursive": true,
+      "repository": "RodneyShag/HackerRank_solutions",
+      "requests": [
+        {
+          "http_status": 200,
+          "request_url": "https://api.github.com/repos/RodneyShag/HackerRank_solutions/git/commits/a98773d3a0c4f11b9cd90d6a1f37b994c170996a",
+          "response_bytes": 1518,
+          "response_sha256": "948e4b267fc5b6e888546410ebb71065d9bf148888198a9a64b0abb0b102821e",
+          "response_url": "https://api.github.com/repos/RodneyShag/HackerRank_solutions/git/commits/a98773d3a0c4f11b9cd90d6a1f37b994c170996a"
+        },
+        {
+          "http_status": 200,
+          "request_url": "https://api.github.com/repos/RodneyShag/HackerRank_solutions/git/trees/f7611734f13a7b74e75254eb489230f02f89e966?recursive=1",
+          "response_bytes": 174065,
+          "response_sha256": "25bcf538d666780960bd692e51e62339c421d9d4b0d362fa015bdb2ab7036640",
+          "response_url": "https://api.github.com/repos/RodneyShag/HackerRank_solutions/git/trees/f7611734f13a7b74e75254eb489230f02f89e966?recursive=1"
+        },
+        {
+          "http_status": 200,
+          "request_url": "https://raw.githubusercontent.com/RodneyShag/HackerRank_solutions/a98773d3a0c4f11b9cd90d6a1f37b994c170996a/license",
+          "response_bytes": 1075,
+          "response_sha256": "63dfaa0bbc8a027d79d0e9c9d8f08b6aca604cca5cc8fc03e40b6976aff5d341",
+          "response_url": "https://raw.githubusercontent.com/RodneyShag/HackerRank_solutions/a98773d3a0c4f11b9cd90d6a1f37b994c170996a/license"
+        }
+      ],
+      "revision": "a98773d3a0c4f11b9cd90d6a1f37b994c170996a",
+      "root_tree": "f7611734f13a7b74e75254eb489230f02f89e966",
+      "tree_entries": 649,
+      "trees_git_hash_verified_including_root": 319,
+      "truncated": false
+    }
+  ]
+}

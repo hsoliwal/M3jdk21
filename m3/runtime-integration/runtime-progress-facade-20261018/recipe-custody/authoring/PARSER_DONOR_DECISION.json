@@ -1,0 +1,167 @@
+{
+  "schema": "M3_JAVADOC_PARSER_DONOR_COMPARISON_V1",
+  "status": "QUALIFIED_SEPARATE_SOURCE_BUILT_PARSER_AND_HOST",
+  "source_module": "org.openrewrite:rewrite-java-21:8.17.1",
+  "source_repository": "openrewrite/rewrite",
+  "source_revision": "3bd8271be963c025ce0856072d0f09360e3184cd",
+  "source_license": "Apache-2.0",
+  "source_jar_sha256": "efdacbb9f1ad6c5c3d4b6efb0599b46d05c1d6c6e6c990831678332fbd732f9b",
+  "source_identity_receipts": [
+    "parser-upstream/UPSTREAM_RECEIPT.json",
+    "parser-upstream/GITHUB_SOURCE_BLOBS.json",
+    "donor-inspection/SOURCE_IDENTITIES.json"
+  ],
+  "problem_categories": [
+    {
+      "category": "source-language/Javadoc/specification-block",
+      "existing_behavior": "A valid Java21 @spec block reaches DocTreeScanner.visitSpec, which calls the visitor's intentionally unsupported generic visitText overload.",
+      "witness": "runtime-javadoc-parser-diagnostic-v1/parse.log: minimal spec and exact Runtime fail; plain and unknown-block examples pass",
+      "selected_pattern": "Reuse visitUnknownBlockTag's UnknownBlock representation and existing sourceBefore/convertMultiline cursor helpers. Convert the URL and title separately in order because the JDK supplies independently trimmed DocTree regions; the donor cursor retains the original separator.",
+      "scope": "Only SpecTree input; no new Java LST type, printer or global fallback.",
+      "refinement_witness": "Paired parser-module-v2 tests reproduced a dropped URL/title separator in the first recipe output. The authoring recipe was corrected to invoke convertMultiline separately, then the original source recipe and module tests were rerun; prior failing source and logs remain retained."
+    },
+    {
+      "category": "source-language/Javadoc/local-URI-fragment",
+      "existing_behavior": "The JDK's valid ##fragment reference has no Java memberName; the existing member-reference conversion loses the literal fragment and fails parse-to-print identity.",
+      "witness": "runtime-javadoc-parser-diagnostic-v3/parse.log: minimal ##shutdown link becomes ParseError before the recipe can run",
+      "selected_pattern": "Reuse UnknownInline for the exact local-fragment form, retaining link/plainlink name, original whitespace, literal fragment, title markup and end brace.",
+      "scope": "Guard only signatures starting with ##. Existing class, #member and module references keep the original path. Qualified URI-fragment semantics remain outside this narrow addition."
+    }
+  ],
+  "candidates": [
+    {
+      "name": "existing canonical 8.17.1 host",
+      "outcome": "REJECT_FOR_RUNTIME_SOURCE",
+      "reason": "The unchanged Runtime preimage fails all five original SDK tests; strict Java21 compiler/doclint independently accepts the same source."
+    },
+    {
+      "name": "current upstream Java21 visitor at 03fe230a1b4fff548f610a12519fe5bd22c1de9a",
+      "outcome": "NO_ESTABLISHED_FIX",
+      "reason": "Exact inspected visitor still has no visitSpec override and retains the original link conversion. No newer canonical host is claimed qualified."
+    },
+    {
+      "name": "Maven source-built 8.17.1 parser with two bounded atoms",
+      "outcome": "SELECTED_AND_QUALIFIED",
+      "reason": "Reuses the original nine-source donor module and four canonical recipes; isolates parser-host lineage and keeps all Runtime text and normal AST/error gates."
+    },
+    {
+      "name": "strip or rewrite existing Runtime Javadoc to fit the parser",
+      "outcome": "REJECT",
+      "reason": "Would alter an unrelated source contract to bypass the demonstrated input-domain problem."
+    },
+    {
+      "name": "route Runtime through the text recipe",
+      "outcome": "REJECT",
+      "reason": "Runtime has no existing text-lane admission; extending a Java bypass would avoid the required lossless Java LST proof."
+    }
+  ],
+  "complexity": "Linear in the consumed Javadoc content, using the donor's existing cursor and line-break accounting; only per-tag lists/LST nodes are added for previously unsupported syntax.",
+  "performance_claim": "none",
+  "compatibility_boundaries": [
+    "No public Runtime source is received by this parser repair.",
+    "No canonical recipe engine, shared frozen POM, sealer or receiver gate is changed.",
+    "The source-built parser dependency and consuming host get distinct Maven/version/source identities.",
+    "Opaque Javadoc nodes preserve text without inventing Java member/type attribution for URI fragments; richer fragment-aware refactoring is not claimed.",
+    "The donor main compiler retains its original Java21 source/target and internal exports. The original unchecked-cast diagnostic is recorded in baseline/candidate builds; recipe-host, parser tests and target Runtime strict gates remain separately mandatory."
+  ],
+  "qualification_plan": [
+    "Original five SDK tests, eight input sealing tests and nine receiver integrity cases for the parser source dataset.",
+    "Source-built parser baseline must reproduce failures using the same new regression tests; repaired module must pass.",
+    "Exact Runtime preimage and postimage must parse as Java compilation units without errors and print byte-identical text.",
+    "Fresh original fixture and Runtime dataset qualifications under the separately pinned parser successor host.",
+    "Strict target compiler/doclint, frozen old Runtime bytecode and scoped/executor/child tests on exact recipe outputs."
+  ],
+  "challenge_sites": "LeetCode, HackerRank and GeeksforGeeks collection algorithms are not an implementation donor for compiler Javadoc AST/cursor semantics; the existing array catalogue retains their applicable algorithm comparisons.",
+  "independent_review": "Canonical recovery agent reviewed the original UnknownBlock/UnknownInline owners and the narrow local-fragment guard; no source changes or new parser model owners were recommended.",
+  "qualification_results": {
+    "source_recipe": {
+      "dataset": "m3-openrewrite-javadoc",
+      "targets": 15,
+      "sdk_tests": 5,
+      "sealing_tests": 8,
+      "receiver_cases": 9,
+      "status": "PASS"
+    },
+    "paired_parser_module": {
+      "original_tests": 4,
+      "original_failures": 3,
+      "original_errors": 0,
+      "repaired_tests": 4,
+      "repaired_failures": 0,
+      "repaired_errors": 0,
+      "compiled_classes": 21,
+      "byte_identical_classes": 18,
+      "line_number_only_nested_classes": 2,
+      "behavior_modified_classes": 1,
+      "artifact_sha256": "bc5fef92a854c72e8706fc58f545a8ac3e9e4395a052b50810366b94869aef52"
+    },
+    "source_built_host": {
+      "dataset": "m3-runtime-parser-host",
+      "targets": 57,
+      "sdk_tests": 5,
+      "sealing_tests": 8,
+      "receiver_cases": 9,
+      "status": "PASS",
+      "pom_sha256": "824ced27a427e35901d413eb8c8beac0ee657d991a03079a5d1cc59e29f76092"
+    },
+    "fresh_successor_fixture": {
+      "sdk_tests": 5,
+      "sealing_tests": 8,
+      "receiver_cases": 9,
+      "parser_dependency_cases": 4,
+      "status": "PASS"
+    },
+    "fresh_runtime_dataset": {
+      "dataset": "m3jdk21-runtime-facade",
+      "targets": 6,
+      "sdk_tests": 5,
+      "sealing_tests": 8,
+      "receiver_cases": 9,
+      "parser_dependency_cases": 4,
+      "status": "PASS"
+    },
+    "runtime_compatibility": {
+      "strict_paired_compiler_doclint": "PASS_WITHOUT_DIAGNOSTICS",
+      "commands": 22,
+      "frozen_legacy_checks": 12,
+      "facade_checks_per_vm_mode": 84,
+      "vm_modes": [
+        "default",
+        "interpreter",
+        "c1",
+        "c2"
+      ],
+      "old_api_fields_native_descriptors": "UNCHANGED",
+      "new_public_methods": 2,
+      "new_fields": 0,
+      "existing_dependency_and_nested_class_bytes": "IDENTICAL",
+      "full_image_and_ordered_promotion": "SEPARATE_PENDING_ROOT_GATES"
+    }
+  },
+  "qualification_receipts": [
+    {
+      "path": "recipe-openrewrite-javadoc-v3/receipt.json",
+      "sha256": "ad2c9a51bec0777d58cee2ff76588d068c83f287abffa6d90729d2856478cf67"
+    },
+    {
+      "path": "openrewrite-parser-module-v4/receipt.json",
+      "sha256": "eb3621051147d14c64f7dce96ea03c00812d88ec5cbfadffd9bd68989ac48ef9"
+    },
+    {
+      "path": "recipe-runtime-parser-host-v1/receipt.json",
+      "sha256": "629cc45042ef93e3e4d982791158996feb29c5c18a256e2c7b9d209deb787b8b"
+    },
+    {
+      "path": "recipe-runtime-successor-fixture-v1/receipt.json",
+      "sha256": "2651268722e1fee4f23a7691325c32e6a5dc20c33a82323a1571323476956245"
+    },
+    {
+      "path": "recipe-runtime-facade-successor-v1/receipt.json",
+      "sha256": "bd008b56fac68082d7a0c208b7990da6d3a08579f637e3d2c7b8b4a0fc7d723a"
+    },
+    {
+      "path": "runtime-facade-patch-v1/receipt.json",
+      "sha256": "d2f5bc44b93f05ac5d106e3a6b29c00b1c0c86da0bf3a569ecfd6d2eedc350d0"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+# Copyright (c) 2026 Hitesh Soliwal.
+# SPDX-License-Identifier: Apache-2.0
+
+from __future__ import annotations
+
+import csv
+import unittest
+from pathlib import Path
+
+
+class Jep475InventoryPolicyTest(unittest.TestCase):
+    ROOT = Path(__file__).with_name("recipes") / "jep-475-late-barrier-g1"
+
+    def test_exact_sorted_unique_58_path_denominator(self) -> None:
+        paths = [
+            line.strip()
+            for line in (self.ROOT / "INTEGRATION_PATHS.txt")
+            .read_text(encoding="utf-8")
+            .splitlines()
+            if line.strip()
+        ]
+        self.assertEqual(58, len(paths))
+        self.assertEqual(paths, sorted(paths))
+        self.assertEqual(len(paths), len(set(paths)))
+        self.assertTrue(all(not path.startswith("/") for path in paths))
+        self.assertTrue(all("\\" not in path for path in paths))
+        self.assertIn("src/hotspot/share/gc/g1/c2/g1BarrierSetC2.cpp", paths)
+        self.assertIn("test/hotspot/jtreg/compiler/gcbarriers/TestG1BarrierGeneration.java", paths)
+
+    def test_policy_is_inventory_only_and_fail_closed(self) -> None:
+        with (self.ROOT / "MATERIALIZATION_POLICY.tsv").open(
+            encoding="utf-8", newline=""
+        ) as handle:
+            policy = dict(csv.reader(handle, delimiter="\t"))
+
+        expected = {
+            "jep": "475",
+            "classification": "CANDIDATE_HIGH_RISK",
+            "default_java21": "UNDECIDED",
+            "integration_commit": "0b467e902d591ae9feeec1669918d1588987cd1c",
+            "integration_jbs": "8334060",
+            "donor_release": "24",
+            "donor_tag": "jdk-24+36",
+            "integration_denominator_paths": "58",
+            "baseline_tag": "jdk-21+35",
+            "inventory_joiner": "m3/backports/selected_path_inventory.py",
+            "generator": "m3/backports/generate_recipe_crates.py",
+            "crate_size": "1",
+            "include_native": "true",
+            "include_text": "true",
+            "file_atom_scope": "FILE",
+            "feature_scope": "MULTI_MODULE",
+            "materialization": "EPHEMERAL_CI_ONLY",
+            "source_mutation": "NOT_AUTHORIZED",
+            "compatibility": "NOT_PROVEN",
+            "promotion": "NOT_AUTHORIZED",
+        }
+        self.assertEqual(expected, policy)
+
+    def test_packet_plan_requires_dependency_review_before_mutation(self) -> None:
+        with (self.ROOT / "PACKET_PLAN.tsv").open(
+            encoding="utf-8", newline=""
+        ) as handle:
+            rows = list(csv.DictReader(handle, delimiter="\t"))
+
+        self.assertEqual(9, len(rows))
+        self.assertEqual(
+            [
+                "integration-path-inventory",
+                "final-ga-path-classification",
+                "generate-file-recipe-atoms",
+                "dependency-review",
+                "materialize-candidate",
+                "build-g1-c2",
+                "g1-compiler-jtreg",
+                "fixed-point",
+                "promotion",
+            ],
+            [row["atom_id"] for row in rows],
+        )
+        self.assertEqual(
+            ["false", "false", "false", "false"],
+            [row["mutation"] for row in rows[:4]],
+        )
+        self.assertEqual("true", rows[4]["mutation"])
+        self.assertEqual("MULTI_MODULE", rows[4]["scope"])
+        self.assertEqual("LIBRARY_API", rows[-1]["scope"])
+        self.assertEqual("false", rows[-1]["mutation"])
+
+
+if __name__ == "__main__":
+    unittest.main()

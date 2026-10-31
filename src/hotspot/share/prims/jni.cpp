@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1997, 2023, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997, 2025, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012 Red Hat, Inc.
  * Copyright (c) 2021, Azul Systems, Inc. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
@@ -928,6 +928,11 @@ static void jni_invoke_nonstatic(JNIEnv *env, JavaValue* result, jobject receive
       Klass* k = h_recv->klass();
       selected_method = InstanceKlass::cast(k)->method_at_itable(holder, itbl_index, CHECK);
     }
+  }
+
+  if (selected_method->is_abstract()) {
+    ResourceMark rm(THREAD);
+    THROW_MSG(vmSymbols::java_lang_AbstractMethodError(), selected_method->name()->as_C_string());
   }
 
   methodHandle method(THREAD, selected_method);
@@ -2131,6 +2136,34 @@ DEFINE_SETSTATICFIELD(jdouble,  double, Double,  JVM_SIGNATURE_DOUBLE, d
 
 // Unicode Interface
 
+// JNI String constructors first honor the ordinary java.lang.String allocation contract.
+// Once module initialization (and therefore optional MIndex activation) has completed, attach the
+// same canonical MIndex storage that Java constructors use. Bootstrap JNI Strings remain flat.
+static void m3_admit_jni_string(Handle string, TRAPS) {
+  if (string.is_null() || !UseM3StringStorage || !Universe::is_module_initialized()) {
+    return;
+  }
+  InstanceKlass* storage_klass = vmClasses::M3String_klass();
+  if (!storage_klass->is_initialized()) {
+    return;
+  }
+  JavaValue compatibility(T_OBJECT);
+  JavaCalls::call_static(&compatibility,
+                         vmClasses::String_klass(),
+                         vmSymbols::m3AdmitNative_name(),
+                         vmSymbols::string_byte_array_signature(),
+                         string,
+                         CHECK);
+  oop compatible_value = compatibility.get_oop();
+  if (compatible_value != nullptr) {
+    assert(compatible_value->is_typeArray(), "M3 compatibility shadow must be byte[]");
+    typeArrayOop byte_value = (typeArrayOop) compatible_value;
+    assert(TypeArrayKlass::cast(byte_value->klass())->element_type() == T_BYTE,
+           "M3 compatibility shadow must be byte[]");
+    java_lang_String::set_value(string(), byte_value);
+  }
+}
+
 DT_RETURN_MARK_DECL(NewString, jstring
                     , HOTSPOT_JNI_NEWSTRING_RETURN(_ret_ref));
 
@@ -2138,8 +2171,9 @@ JNI_ENTRY(jstring, jni_NewString(JNIEnv *env, const jchar *unicodeChars, jsize l
  HOTSPOT_JNI_NEWSTRING_ENTRY(env, (uint16_t *) unicodeChars, len);
   jstring ret = nullptr;
   DT_RETURN_MARK(NewString, jstring, (const jstring&)ret);
-  oop string=java_lang_String::create_oop_from_unicode((jchar*) unicodeChars, len, CHECK_NULL);
-  ret = (jstring) JNIHandles::make_local(THREAD, string);
+  Handle string = java_lang_String::create_from_unicode(unicodeChars, len, CHECK_NULL);
+  m3_admit_jni_string(string, CHECK_NULL);
+  ret = (jstring) JNIHandles::make_local(THREAD, string());
   return ret;
 JNI_END
 
@@ -2159,28 +2193,17 @@ JNI_ENTRY_NO_PRESERVE(const jchar*, jni_GetStringChars(
  HOTSPOT_JNI_GETSTRINGCHARS_ENTRY(env, string, (uintptr_t *) isCopy);
   jchar* buf = nullptr;
   oop s = JNIHandles::resolve_non_null(string);
-  typeArrayOop s_value = java_lang_String::value(s);
-  if (s_value != nullptr) {
-    int s_len = java_lang_String::length(s, s_value);
-    bool is_latin1 = java_lang_String::is_latin1(s);
-    buf = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
-    /* JNI Specification states return null on OOM */
-    if (buf != nullptr) {
-      if (s_len > 0) {
-        if (!is_latin1) {
-          ArrayAccess<>::arraycopy_to_native(s_value, (size_t) typeArrayOopDesc::element_offset<jchar>(0),
-                                             buf, s_len);
-        } else {
-          for (int i = 0; i < s_len; i++) {
-            buf[i] = ((jchar) s_value->byte_at(i)) & 0xff;
-          }
-        }
-      }
-      buf[s_len] = 0;
-      //%note jni_5
-      if (isCopy != nullptr) {
-        *isCopy = JNI_TRUE;
-      }
+  int s_len = java_lang_String::length(s);
+  buf = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
+  /* JNI Specification states return null on OOM */
+  if (buf != nullptr) {
+    if (s_len > 0) {
+      java_lang_String::copy_chars(s, 0, s_len, buf);
+    }
+    buf[s_len] = 0;
+    //%note jni_5
+    if (isCopy != nullptr) {
+      *isCopy = JNI_TRUE;
     }
   }
   HOTSPOT_JNI_GETSTRINGCHARS_RETURN(buf);
@@ -2207,11 +2230,12 @@ DT_RETURN_MARK_DECL(NewStringUTF, jstring
 
 JNI_ENTRY(jstring, jni_NewStringUTF(JNIEnv *env, const char *bytes))
   HOTSPOT_JNI_NEWSTRINGUTF_ENTRY(env, (char *) bytes);
-  jstring ret;
+  jstring ret = nullptr;
   DT_RETURN_MARK(NewStringUTF, jstring, (const jstring&)ret);
 
-  oop result = java_lang_String::create_oop_from_str((char*) bytes, CHECK_NULL);
-  ret = (jstring) JNIHandles::make_local(THREAD, result);
+  Handle result = java_lang_String::create_from_str(bytes, CHECK_NULL);
+  m3_admit_jni_string(result, CHECK_NULL);
+  ret = (jstring) JNIHandles::make_local(THREAD, result());
   return ret;
 JNI_END
 
@@ -2230,7 +2254,7 @@ JNI_ENTRY(const char*, jni_GetStringUTFChars(JNIEnv *env, jstring string, jboole
   char* result = nullptr;
   oop java_string = JNIHandles::resolve_non_null(string);
   typeArrayOop s_value = java_lang_String::value(java_string);
-  if (s_value != nullptr) {
+  if (s_value != nullptr || java_lang_String::is_m3_joined(java_string)) {
     size_t length = java_lang_String::utf8_length(java_string, s_value);
     /* JNI Specification states return null on OOM */
     result = AllocateHeap(length + 1, mtInternal, AllocFailStrategy::RETURN_NULL);
@@ -2749,22 +2773,11 @@ JNI_ENTRY(void, jni_GetStringRegion(JNIEnv *env, jstring string, jsize start, js
  HOTSPOT_JNI_GETSTRINGREGION_ENTRY(env, string, start, len, buf);
   DT_VOID_RETURN_MARK(GetStringRegion);
   oop s = JNIHandles::resolve_non_null(string);
-  typeArrayOop s_value = java_lang_String::value(s);
-  int s_len = java_lang_String::length(s, s_value);
+  int s_len = java_lang_String::length(s);
   if (start < 0 || len < 0 || start > s_len - len) {
     THROW(vmSymbols::java_lang_StringIndexOutOfBoundsException());
-  } else {
-    if (len > 0) {
-      bool is_latin1 = java_lang_String::is_latin1(s);
-      if (!is_latin1) {
-        ArrayAccess<>::arraycopy_to_native(s_value, typeArrayOopDesc::element_offset<jchar>(start),
-                                           buf, len);
-      } else {
-        for (int i = 0; i < len; i++) {
-          buf[i] = ((jchar) s_value->byte_at(i + start)) & 0xff;
-        }
-      }
-    }
+  } else if (len > 0) {
+    java_lang_String::copy_chars(s, start, len, buf);
   }
 JNI_END
 
@@ -2824,7 +2837,7 @@ JNI_ENTRY(const jchar*, jni_GetStringCritical(JNIEnv *env, jstring string, jbool
   HOTSPOT_JNI_GETSTRINGCRITICAL_ENTRY(env, string, (uintptr_t *) isCopy);
   oop s = JNIHandles::resolve_non_null(string);
   jchar* ret;
-  if (!java_lang_String::is_latin1(s)) {
+  if (!UseM3StringStorage && !java_lang_String::is_latin1(s)) {
     typeArrayHandle s_value(thread, java_lang_String::value(s));
 
     // Pin value array
@@ -2833,15 +2846,14 @@ JNI_ENTRY(const jchar*, jni_GetStringCritical(JNIEnv *env, jstring string, jbool
     ret = (jchar*) s_value->base(T_CHAR);
     if (isCopy != nullptr) *isCopy = JNI_FALSE;
   } else {
-    // Inflate latin1 encoded string to UTF16
+    // Copy segmented content or inflate latin1 to UTF16; never expose leaf arrays.
     typeArrayOop s_value = java_lang_String::value(s);
     int s_len = java_lang_String::length(s, s_value);
     ret = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
     /* JNI Specification states return null on OOM */
     if (ret != nullptr) {
-      for (int i = 0; i < s_len; i++) {
-        ret[i] = ((jchar) s_value->byte_at(i)) & 0xff;
-      }
+      // Reuse the canonical flat/M3 range copier within the existing JNI lifetime.
+      java_lang_String::copy_chars(s, 0, s_len, ret);
       ret[s_len] = 0;
     }
     if (isCopy != nullptr) *isCopy = JNI_TRUE;
@@ -2856,8 +2868,8 @@ JNI_ENTRY(void, jni_ReleaseStringCritical(JNIEnv *env, jstring str, const jchar 
   oop s = JNIHandles::resolve_non_null(str);
   bool is_latin1 = java_lang_String::is_latin1(s);
 
-  if (is_latin1) {
-    // For latin1 string, free jchar array allocated by earlier call to GetStringCritical.
+  if (UseM3StringStorage || is_latin1) {
+    // Latin1 and segmented Strings return a native copy from GetStringCritical.
     // This assumes that ReleaseStringCritical bookends GetStringCritical.
     FREE_C_HEAP_ARRAY(jchar, chars);
   } else {
@@ -2876,7 +2888,7 @@ JNI_ENTRY(jweak, jni_NewWeakGlobalRef(JNIEnv *env, jobject ref))
   HOTSPOT_JNI_NEWWEAKGLOBALREF_ENTRY(env, ref);
   Handle ref_handle(thread, JNIHandles::resolve(ref));
   jweak ret = JNIHandles::make_weak_global(ref_handle, AllocFailStrategy::RETURN_NULL);
-  if (ret == nullptr) {
+  if (ret == nullptr && ref_handle.not_null()) {
     THROW_OOP_(Universe::out_of_memory_error_c_heap(), nullptr);
   }
   HOTSPOT_JNI_NEWWEAKGLOBALREF_RETURN(ret);
@@ -3783,6 +3795,7 @@ static jint attach_current_thread(JavaVM *vm, void **penv, void *_args, bool dae
   MACOS_AARCH64_ONLY(thread->init_wx());
 
   if (!os::create_attached_thread(thread)) {
+    thread->unregister_thread_stack_with_NMT();
     thread->smr_delete();
     return JNI_ERR;
   }
@@ -3827,6 +3840,8 @@ static jint attach_current_thread(JavaVM *vm, void **penv, void *_args, bool dae
   if (attach_failed) {
     // Added missing cleanup
     thread->cleanup_failed_attach_current_thread(daemon);
+    thread->unregister_thread_stack_with_NMT();
+    thread->smr_delete();
     return JNI_ERR;
   }
 
@@ -3922,6 +3937,7 @@ jint JNICALL jni_DetachCurrentThread(JavaVM *vm)  {
   // (platform-dependent) methods where we do alternate stack
   // maintenance work?)
   thread->exit(false, JavaThread::jni_detach);
+  thread->unregister_thread_stack_with_NMT();
   thread->smr_delete();
 
   // Go to the execute mode, the initial state of the thread on creation.

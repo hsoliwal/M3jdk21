@@ -1,0 +1,116 @@
+{
+  "schema": "m3jdk21-apache-predicated-interop-receiver/1",
+  "date": "2026-10-17",
+  "status": "DRAFT_HOLD",
+  "canonical_repo": "hsoliwal/com.synexia",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12122",
+  "canonical_recipe": "com.synexia.m3.Jdk21ApachePredicatedInterop20261017",
+  "canonical_source_base": "892e3f6c51d78bc0948e8a8cf736055b4c70eafa",
+  "target_repo": "hsoliwal/M3jdk21",
+  "target_base": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+  "target_branch": "aix/apache-commons-m3-interop-20261017",
+  "receiver_kind": "SOURCE_PINNED_GITHUB_MATERIALIZATION_NOT_SDK_EXECUTION",
+  "naming": {
+    "jdk": "java.util.* remain JDK-owned",
+    "guava": "com.google.common.collect.* retained",
+    "eclipse": "org.eclipse.collections.* retained",
+    "spring": "org.springframework.util.* retained",
+    "apache": "org.apache.commons.collections4.* as actual nominal interfaces",
+    "m3": "com.m3.collections backing owners"
+  },
+  "api_effects": {
+    "public_jdk_abi_changed": false,
+    "existing_interop_signatures_changed": false,
+    "added_apache_factories": 5,
+    "java_base_dependency_added": false,
+    "native_jni_symbols_added": 0,
+    "automatic_java_predicate_jni_dispatch": false,
+    "receiving_phase_advanced": false
+  },
+  "files": [
+    {
+      "path": "m3/collections/interop/src/main/java/com/m3/collections/interop/M3ApacheCollections.java",
+      "before": "ABSENT",
+      "after_sha256": "1d6ef845706a183a50e3cda79137220fb16a8c17a06cbc271df6f27bf79c2291",
+      "blob": "537b94ea2d7b477bd7538662494dc94159f858a6"
+    },
+    {
+      "path": "m3/collections/interop/src/test/java/com/m3/collections/interop/M3ApacheCollectionsTest.java",
+      "before": "ABSENT",
+      "after_sha256": "ede37d37ca4373ac7888da6542f7447730be822829f789ed82caaaf99dc2ec53",
+      "blob": "9edf50007e098846f0d677204a445b6bc52b7f0d"
+    },
+    {
+      "path": "m3/collections/interop/pom.xml",
+      "before_sha256": "7144e37b9e553d4644ea1e8e997448c3a65dcb627b85cb9b9ae650d6c2500977",
+      "after_sha256": "5f800af127051dae10e3cf1cc722d11041b6f579b5786c31f7a1631d3a0473b1",
+      "blob": "e95979ca4f2e5fb8f744bd70b05da130a35faf94"
+    },
+    {
+      "path": "m3/collections/interop/THIRD_PARTY_NOTICES.md",
+      "before_sha256": "2f0cbaf79ca506d1dc9060ce2431d5a5e647449f252b31e76229ff5c399d883e",
+      "after_sha256": "758a1c85ad63ec2c6d7945d79c4bd53b7269f3804f668f2395c985b43ae042ad",
+      "blob": "3b896b7d540d3c2d72f871c9d70c1fa3a24a62d0"
+    },
+    {
+      "path": "m3/collections/interop/M3_APACHE_CONVERGENCE_20261017.md",
+      "before": "ABSENT",
+      "after_sha256": "06e87ac14762e44fe96edb3a8f7b7749e1a8440976584c88e30816069dcdc53c",
+      "blob": "e8a94e3fadd10ea825f95fb5b8aac803333fdac8"
+    },
+    {
+      "path": "m3/collections/interop/VENDOR_CONTRACT_MAPPING_20261017.tsv",
+      "before": "ABSENT",
+      "after_sha256": "7d3b10a4c902b0591cfcd4b99f64b5d05ebd3523fe725a4e271c056f016b4389",
+      "blob": "e476b361ecbee38d6e329516cf37b84c28a70a8d"
+    },
+    {
+      "path": "m3/collections/interop/APACHE_DONOR_CATALOGUE_20261017.tsv",
+      "before": "ABSENT",
+      "after_sha256": "0460dc3e002637682c9442426e1bfaa7c2dd21aa86739d41637016b7b944ae8d",
+      "blob": "4b453eab8c549f9565fbb4bbdedbc1bd6b60a8f8"
+    }
+  ],
+  "executed": [
+    {
+      "gate": "docs_precede_source_GitHub_commits",
+      "status": "PASSED"
+    },
+    {
+      "gate": "exact_preimage_Git_blobs",
+      "status": "PASSED"
+    },
+    {
+      "gate": "target_vs_recipe_postimage_Git_blob_identity",
+      "status": "PASSED"
+    },
+    {
+      "gate": "isolated_OpenJDK21_javac_release21_Xlint_all_Werror",
+      "status": "PASSED_WITH_TEST_ONLY_SHIMS"
+    },
+    {
+      "gate": "isolated_Java21_runtime_smoke",
+      "status": "PASSED_WITH_TEST_ONLY_SHIMS",
+      "tests": 6
+    }
+  ],
+  "unexecuted": [
+    "Maven_OpenRewrite_SDK_execution",
+    "real_ApacheCommons4_5_0_binary_linkage",
+    "real_M3_core_and_third_party_interop_tests",
+    "full_Java21_Maven_reactor",
+    "target_static_analysis",
+    "hosted_CI",
+    "JDK_jtreg_legacy_API_compatibility",
+    "installed_M3JDK21_image",
+    "native_C17_JNI_runtime_unchanged_kernels",
+    "performance_memory_benchmarks"
+  ],
+  "nonclaims": [
+    "not_exhaustive_library_or_concrete_class_equivalence",
+    "not_universal_best_performance",
+    "not_automatic_atom_simhash_equivalence",
+    "not_whole_JDK_replacement",
+    "not_merge_ready"
+  ]
+}

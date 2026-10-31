@@ -1,0 +1,5 @@
+COST case=admission iterations=16 ns=1996222
+COST case=first-rank iterations=16 ns=5256999
+COST case=warm-rank iterations=20000 ns=8536363
+COST case=warm-select iterations=20000 ns=16326966
+COST case=java-full-count iterations=1000 ns=28741

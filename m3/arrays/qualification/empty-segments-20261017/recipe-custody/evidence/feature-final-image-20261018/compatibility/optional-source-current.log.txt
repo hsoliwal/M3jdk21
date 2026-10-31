@@ -1,0 +1,2 @@
+OptionalAdapter.java:2:38: compiler.err.override.incompatible.ret: (compiler.misc.cant.override: <T>toAdapter(java.lang.Class<T>), OptionalAdapter, <T>toAdapter(java.lang.Class<T>), java.lang.Object), java.util.Optional<T>, T
+1 error

@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/com.synexia",
+    "blob_sha": "b4081310a343cbd067c7deb5e907031598e82536"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "// SPDX-License-Identifier: Apache-2.0\npackage com.synexia.rewrite;\n\nimport java.util.LinkedHashMap;\nimport java.util.Map;\nimport java.util.Objects;\n\n/** Exact compiled-fixture ownership; host dependencies remain parent-delegated, never host fixtures. */\nfinal class M3MasteryClassLoader extends ClassLoader {\n    private final Map<String, byte[]> classes;\n    private final Runnable checkCanceled;\n\n    M3MasteryClassLoader(Map<String, byte[]> classes, ClassLoader parent) {\n        this(classes, parent, () -> {});\n    }\n\n    M3MasteryClassLoader(Map<String, byte[]> classes, ClassLoader parent, Runnable checkCanceled) {\n        super(parent);\n        this.checkCanceled = Objects.requireNonNull(checkCanceled, \"checkCanceled\");\n        Map<String, byte[]> frozen = new LinkedHashMap<>();\n        Objects.requireNonNull(classes, \"classes\").forEach((name, bytes) -> {\n            this.checkCanceled.run();\n            Objects.requireNonNull(name, \"class name\");\n            if (name.isBlank() || name.startsWith(\"java.\")) {\n                throw new IllegalArgumentException(\"invalid fixture class: \" + name);\n            }\n            frozen.put(name, Objects.requireNonNull(bytes, \"class bytes\").clone());\n        });\n        this.classes = Map.copyOf(frozen);\n    }\n\n    @Override\n    protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {\n        checkCanceled.run();\n        synchronized (getClassLoadingLock(name)) {\n            Class<?> loaded = findLoadedClass(name);\n            if (loaded == null) {\n                loaded = classes.containsKey(name) ? findClass(name) : super.loadClass(name, false);\n            }\n            if (resolve) resolveClass(loaded);\n            return loaded;\n        }\n    }\n\n    @Override\n    protected Class<?> findClass(String name) throws ClassNotFoundException {\n        byte[] bytes = classes.get(name);\n        if (bytes == null) throw new ClassNotFoundException(name);\n        return defineClass(name, bytes, 0, bytes.length);\n    }\n\n    /** Reject a probe/contract accidentally resolved from the embedding host or the platform. */\n    static Class<?> requireOwned(ClassLoader loader, String name, boolean initialize)\n            throws ClassNotFoundException {\n        Class<?> type = Class.forName(name, false, loader);\n        if (type.getClassLoader() != loader) {\n            throw new AssertionError(\"fixture class is not owned by compiled image: \" + name);\n        }\n        return initialize ? Class.forName(name, true, loader) : type;\n    }\n}\n"
+    },
+    "isError": false
+  }
+}

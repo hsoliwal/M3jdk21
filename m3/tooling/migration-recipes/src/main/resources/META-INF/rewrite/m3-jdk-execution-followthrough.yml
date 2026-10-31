@@ -1,0 +1,14 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.packs.JdkExecutionFollowthrough
+displayName: Add Java21 developer image and exact password-backport proof
+description: Compose existing source-sealed text and Java adapters for an optional developer image and a fresh-VM product-source proof. Candidate until the complete framework and runtime gates execute.
+tags:
+  - m3
+  - java21
+  - candidate-only
+  - source-sealed
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: jdk21-developer-image-proof-20261004
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk27-password-policy-proof-20261004

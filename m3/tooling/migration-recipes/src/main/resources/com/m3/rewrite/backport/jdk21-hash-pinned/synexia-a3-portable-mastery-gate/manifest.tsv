@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+m3/tooling/a3/src/main/java/com/m3/a3/A3.java	6d9ec887c87898167748ca5f77598f95a6784cfaf14882f4983733c006374b77	0bc3ea255cae1dc8af4bcb5701993da6f4d2446685791f545eebc514df8ab878	00-A3.java.txt
+m3/tooling/a3/src/main/java/com/m3/a3/A3Apply.java	939f5aafa7aa94965ddab063316a01800c025d15b2c4e8552d7a2f672bb366cc	bbafa8effe2a341cf9ec0eaf0ff11fd59aa75b423cee65d1f1a3e9b212428063	01-A3Apply.java.txt
+m3/tooling/a3/src/main/java/com/m3/a3/A3Mastery.java	ABSENT	b0af83bf39bfbefbba9e06c9bb6995653689db685c092677e7ff12a55db0f8ff	02-A3Mastery.java.txt
+m3/tooling/a3/src/main/java/com/m3/a3/A3RecipeHome.java	474411d5b3326a68218336e68c9659625837c9dc34f422799817aa910eab58aa	2adb2630a6e65ad25be8c752e578a0d69e7d58500a5d5dd09cc1377ebcabb39b	03-A3RecipeHome.java.txt
+m3/tooling/a3/src/test/java/com/m3/a3/A3ApplyTest.java	d5e711e485ace2ffd2cea8e3eab8493a197c9eb952f0a53d0c9808ae2410e849	db80249dc75d1bd4e5847fb15c17e421f9b9e3da2a78a98dda9c9c7a8c29c981	04-A3ApplyTest.java.txt
+m3/tooling/a3/src/test/java/com/m3/a3/A3MasteryTest.java	ABSENT	577e49a7118dbaab4ed613af5cac8fef222648907c2341da2f22fb6c5fe54a2a	05-A3MasteryTest.java.txt
+m3/tooling/a3/src/test/java/com/m3/a3/A3RecipeHomeTest.java	7f5c906eb36014ab5a3d2abba0ccd142e943b22c68f70022b5a93f306530be00	b6df255b7609608cf4184f51b3b200200e05d8ad5e8b5e9f0a803ec42a1f37c0	06-A3RecipeHomeTest.java.txt

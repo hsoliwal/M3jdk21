@@ -1,0 +1,37 @@
+{
+  "receiving_commit": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "candidate_tests": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "baseline_tests": {
+    "tests": 21,
+    "failures": 5,
+    "errors": 3,
+    "skipped": 0
+  },
+  "payloads": [
+    {
+      "target": "m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseEquinoxLifecycleTest.java",
+      "before_sha256": "ABSENT",
+      "payload": "payloads/M3EclipseEquinoxLifecycleTest.java.txt",
+      "after_sha256": "a1979168639d7e87d96f63b92d8a741f92449090d10b27cbb0b9785a8595a5ef"
+    },
+    {
+      "target": "m3/eclipse/framework/src/main/java/com/m3/eclipse/framework/M3EclipseRuntimeActivator.java",
+      "before_sha256": "f2ad7045a07c6905d2f540e9863851fc7ae95b04d867a11f8e4927c13f0a71c4",
+      "payload": "payloads/M3EclipseRuntimeActivator.java.txt",
+      "after_sha256": "1c9b9dd3132e06ccb16c8a4a5e976517581d373581bc3c112b58e5f9bed5fbef"
+    },
+    {
+      "target": "m3/eclipse/framework/src/test/java/com/m3/eclipse/framework/M3EclipseRuntimeActivatorTest.java",
+      "before_sha256": "e7026e6b0b56aa71aa6a0e617a29ccf8df603d3656ed6ae6966c9662d3b6167d",
+      "payload": "payloads/M3EclipseRuntimeActivatorTest.java.txt",
+      "after_sha256": "dec1b59d74df3b42663a6d381cee0e0f8aeb4fc1ec0c5a3b261739f6402381eb"
+    }
+  ],
+  "equniox_test_dependency": "org.eclipse.platform:org.eclipse.osgi:3.24.200",
+  "scope": "candidate harness only; receiving tree and canonical recipe not modified; no JNI change; no full Eclipse/M3JDK image admission"
+}

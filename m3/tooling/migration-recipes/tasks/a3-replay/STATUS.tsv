@@ -1,0 +1,10 @@
+gate	status	detail
+inventory	PASS	Full exact current owner/test reads; original blobs match recovered source
+baseline_compilation	FAILED_REPRODUCED	withMarkers loses SourceFile typing before withFileAttributes
+baseline_replay	FAILED_REPRODUCED	Four exact generated ABSENT files rejected as changed after scan
+targeted_junit	PASS	8 actual tests; 0 failures/errors/skips; actual OpenRewrite8.17.1 scheduler
+exact_target_hashes	PASS	Uploaded production/test blobs match executed local inputs
+archive_module_suite	FAIL	124 tests: 3 failures and 2 errors outside repaired A3 owner
+coverage	MEASURED_NOT_ADMITTED	A3 owner 92/101 lines and 48/56 branches; not 99 percent
+current_head_full_reactor	PENDING	Recovered complete archive is an earlier ancestor; exact-current source required
+modified_jdk_runtime	NOT_RUN	Installed Debian JDK21 is not a rebuilt modified M3JDK21

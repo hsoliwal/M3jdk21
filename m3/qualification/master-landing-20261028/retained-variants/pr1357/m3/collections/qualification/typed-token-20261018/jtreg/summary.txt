@@ -1,0 +1,2 @@
+jdk/internal/mindex/M3TokenCompilerLexicalContract.java  Passed. Execution successful
+jdk/internal/mindex/M3TokenRegexPlanContract.java        Passed. Execution successful

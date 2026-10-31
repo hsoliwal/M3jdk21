@@ -1,0 +1,4 @@
+src/main/java/com/m3/indexdb/M3IndexDB.java	27851933a442f798b56b7dba227b4fe1189851af11bb3333d5d0be2106d84956	c0396dc221ab4fe764441ec1694dc2063ce667a256289cdba6ba7bf285a83d86	00-M3IndexDB.java.txt
+src/main/java/com/m3/indexdb/M3IndexDbSemanticCodec.java	2cf21c4bc7b276a2ef741cee4db491c4a9e6c7cf44d53b543904b5acb8a95605	90c999027092ac250b3f1a19556268bde96879761735eb4f142260b17bece72a	01-M3IndexDbSemanticCodec.java.txt
+src/test/java/com/m3/indexdb/DbAtomTest.java	ABSENT	71a86e54aaedc33ed50b7a0e0e1d63bcd3c045df02bb7c7b45d029a867e676d6	02-DbAtomTest.java.txt
+src/test/java/com/m3/indexdb/DbDigest.java	ABSENT	a7cb1678539f74acc00cc4f15dbc2fdcd65286e4152784191e6d635539f6dc18	03-DbDigest.java.txt

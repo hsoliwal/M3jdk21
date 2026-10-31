@@ -1,0 +1,18 @@
+-------------------------------------------------------------------------------
+Test set: com.synexia.rewrite.M3Maven4EffectiveRecipeTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.878 s <<< FAILURE! -- in com.synexia.rewrite.M3Maven4EffectiveRecipeTest
+com.synexia.rewrite.M3Maven4EffectiveRecipeTest.qualifySerialFilePhasesAndPublishNamedRecipeOutput -- Time elapsed: 0.421 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: scheduler failures: [java.lang.IllegalStateException: invalid hash-pinned text manifest row, java.lang.IllegalStateException: invalid hash-pinned text manifest row] ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:42)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:191)
+	at com.synexia.rewrite.M3Maven4EffectiveRecipeTest.accepted(M3Maven4EffectiveRecipeTest.java:272)
+	at com.synexia.rewrite.M3Maven4EffectiveRecipeTest.qualify(M3Maven4EffectiveRecipeTest.java:294)
+	at com.synexia.rewrite.M3Maven4EffectiveRecipeTest.qualifySerialFilePhasesAndPublishNamedRecipeOutput(M3Maven4EffectiveRecipeTest.java:144)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+

@@ -1,0 +1,46 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------< com.synexia.verification:swt-scrollbar-full-range-proof >-------
+[INFO] Building swt-scrollbar-full-range-proof 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ swt-scrollbar-full-range-proof ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ swt-scrollbar-full-range-proof ---
+[INFO] Copying 4 resources from ../../src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ swt-scrollbar-full-range-proof ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 3 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ swt-scrollbar-full-range-proof ---
+[INFO] skip non existing resourceDirectory /tmp/m3-swt-current-owner-candidate-001/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ swt-scrollbar-full-range-proof ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ swt-scrollbar-full-range-proof ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.ScrollbarFullRangeRecipeTest
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+OPENREWRITE_GENERATED_SHA256=df4f8498b1f633f2ffeae310f761ecaa0ea686e392557b8cfe2c684864a7f9b4
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.150 s -- in com.synexia.rewrite.ScrollbarFullRangeRecipeTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.423 s
+[INFO] Finished at: 2026-10-21T03:21:46+01:00
+[INFO] ------------------------------------------------------------------------

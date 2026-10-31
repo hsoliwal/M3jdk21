@@ -1,0 +1,48 @@
+{
+  "JDK_named_modules": 30,
+  "actual_all62_module_jars_equal_qualified_candidate": true,
+  "actual_input_count": 11373,
+  "actual_inputs_unchanged": true,
+  "actual_receiver": "hsoliwal/M3jdk21 source base2779aba3f98f31c324be43f731be7914e1a05935 plus exact emitted two-file successor",
+  "elapsed_seconds": 205.232,
+  "hash_locked_external_pack_modules": 26,
+  "installed_image_probes": {
+    "ModelSourceProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nModelSourceProbe PASS: real token/sentence model train/serialize/reload; immutable source offsets and probability parity",
+    "SourceFactsProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nSourceFactsProbe PASS: 2000 raw UTF-16 digest oracles; snapshot/null contracts",
+    "SourceIntegrationProbe": "Picked up JAVA_TOOL_OPTIONS: -Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData\nOct 21, 2026 3:38:58 AM org.apache.lucene.util.HotspotVMOptions <clinit>\nWARNING: Lucene cannot access JVM internals to optimize algorithms or calculate object sizes, unless the 'jdk.management' Java module is readable [please add 'jdk.management' to modular application either by command line or its module descriptor].\nWARNING: A restricted method in java.lang.foreign.Linker has been called\nWARNING: java.lang.foreign.Linker::downcallHandle has been called by module org.apache.lucene.core\nWARNING: Use --enable-native-access=org.apache.lucene.core to avoid a warning for this module\n\nSourceIntegrationProbe PASS: M3File/M3String/M3AST sharing; 2000 AST span oracles; 300 Unicode token oracles; disk indexing/query/term-vector offsets"
+  },
+  "installed_named_modules_including_JDK": 92,
+  "not_promoted": [
+    "Full original Java25 fork/Gradle/Maven suites",
+    "Global String/JDK/HotSpot/GC/CDS/platform or family promotion",
+    "Optional Faiss native libraries or arbitrary external model corpus",
+    "Performance or memory acceptance",
+    "Exact published-head hosted CI"
+  ],
+  "original_build_driver_unchanged": true,
+  "pack_named_modules": 62,
+  "preserved_counterexamples": [
+    "Original closed source-lock mismatch and unknown-source coverage refusal.",
+    "Original whole-module missing-explicit-ctor compiler warning became an explicit public constructor atom, with unchanged strict flags.",
+    "GVAS sandbox /proc refusal, followed by identical escalated gate success.",
+    "Immutable historical BigString source/test templates contradict their own manifest; current received source is independently pinned and qualified; no extra stream APIs imported."
+  ],
+  "primary_receipt": {
+    "bytes": 5329,
+    "path": "combined-receiver-001-receipts/RESULT.json",
+    "sha256": "38c71b8c4f6fb632f2352873cbd2578be7cf1f1383cdf34d64f4fce9e5c0cee1"
+  },
+  "schema": "M3_NLP_CURRENT_SOURCE_LOCK_ACTUAL_QUALIFICATION_1",
+  "separate_passing_authorities": [
+    "Canonical two-file SDK and guarded receiving-tree application are separately owned/copied receipts; this runtime result consumes their exact emitted bytes.",
+    "Original whole-module rope gate83941checks\u00d74modes and typed catalogue50baseline+50candidate; exact9class API and Builder instruction parity are retained in constructor receipt.",
+    "GVAS original Java/C11JNI gate17530checks\u00d73cooperating processes; BigString original workflow3213checks."
+  ],
+  "source_built_pack_modules": 36,
+  "state": "ACTUAL_EMITTED_RECEIVER_PASS",
+  "strict_closed_source_lock_preserved": true,
+  "warnings": [
+    "The unchanged Lucene launch reports optional jdk.management unreadable for JVM internals/object sizing.",
+    "The unchanged Java21 foreign Linker downcall reports missing --enable-native-access=org.apache.lucene.core."
+  ]
+}

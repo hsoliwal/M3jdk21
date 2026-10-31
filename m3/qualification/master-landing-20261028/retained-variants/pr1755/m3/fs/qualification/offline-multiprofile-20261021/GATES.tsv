@@ -1,0 +1,13 @@
+gate	status	note
+JAVA_SOURCE_PREIMAGE	EXACT_GIT_MATCH	Exact #1724 head source contents before recipe successor
+JAVA_POSTIMAGE	EXACT_GIT_MATCH	All three Java source/test target files match Synexia candidate
+CANONICAL_OPENREWRITE_FIXED_POINT	NOT_RUN	Second named recipe has test definition; Maven SDK execution pending
+COLD_WARM_JUNIT	TEST_UPDATED_NOT_RUN	M3OfflineProjectScanTest accepts context-specific reads
+MULTI_CONTEXT_ISOLATION	TEST_UPDATED_NOT_RUN	Alternating Maven and Gradle don't clobber each other
+NESTED_POM_CLASSIFICATION	TEST_UPDATED_NOT_RUN	module/pom.xml BUILD_INPUT
+SQLITE_RESTART_CAS	NOT_RUN	Requires original native M3FS SQLite and JUnit
+JNI_ABI_EXPORTS	NOT_CHANGED	No C/JNI export changed, but full product parity still pending
+SOURCE_BUILD_JAVA21_HOTSPOT	NOT_RUN	M3JDK21 full native/JMOD image required
+NEWER_MASTER_BUILD_STATE_V2	FORWARD_MERGE_BLOCKER	Do not replace master observed/successful build-state authority
+MAVEN_GRADLE_EFFECTIVE_MODEL	NOT_RUN	No safe plugin task skipping without compiler/ABI evidence
+PERFORMANCE	NOT_MEASURED	Full SHA of all selected bytes, future provider revision fast path

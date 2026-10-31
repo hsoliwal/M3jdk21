@@ -1,0 +1,12 @@
+schema	m3-native-five-core-jpms-workflow-patch-1
+source_authority	hsoliwal/com.synexia:m3/native-five-core-jpms-ci-recipe-20261027
+recipe	com.synexia.rewrite.M3NativeFiveCoreJpmsWorkflowRecipe
+source_target	.github/workflows/m3-native-five-family-no-vendor-runtime-20261027.yml
+old_sha256	5bf403fce5171ca47c0ba5599b0b3953910459dffd45ccfba02ba966de60a665
+new_sha256	c4f4aea3d9d27a4765b198036ecb074275191b076838d978a8ccad131ec15f2f
+target_scope	WORKFLOW_ONLY_NO_JAVA_OR_JNI_CHANGE
+module_runtime	java.base;com.m3.arrays_ONLY
+first_party_arrays	COMPILED_FROM_TARGET_SOURCE
+external_third_party_runtime	REFUSED
+recipe_maven_run	PENDING_EXACT_HEAD
+target_maven_test	PENDING_EXACT_HEAD

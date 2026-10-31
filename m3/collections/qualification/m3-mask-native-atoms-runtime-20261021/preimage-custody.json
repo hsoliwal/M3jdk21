@@ -1,0 +1,33 @@
+{
+  "repository": "hsoliwal/M3jdk21",
+  "base_revision": "7c0d2493edbf93ac5cb726667ce83046d3519e3e",
+  "scope": "Exact selected-source receiver; not a full checkout or installed JDK image",
+  "files": [
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "sha256": "fb907640aa9615ce28c61bb802da39e6cb16030b9f95aad266aa6c68531b4074",
+      "git_blob": "8451188d0ffdb6971af68c0c96504bcd51dde7f2",
+      "bytes": 16979
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "sha256": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
+      "git_blob": "b81b069fb4815f0c78b17119390d7b204f6179d1",
+      "bytes": 18371
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3RequiredExcludedMaskSelectorNativeContract.java",
+      "sha256": "89c35701322381e4d958bf6344e2357988c4ad97ce1a0dd42a9a3f698a205c7f",
+      "git_blob": "312757d9147eeb80e6d291e38d019e3a4931ee49",
+      "bytes": 1830
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskRangeNativeTest.java",
+      "sha256": "01cca6f8506da8120978892182071b2d3be631bebf5011fa112602524c532619",
+      "git_blob": "e614d7fe5c9878f1dd95684375569c5454a07623",
+      "bytes": 6815
+    }
+  ],
+  "absent_target": "m3/collections/src/test/java/com/m3/collections/M3MaskPositionAtomsTest.java",
+  "absence_evidence": "continuation/catalogue/target-inventory-20261021/branch-and-target-status.json"
+}

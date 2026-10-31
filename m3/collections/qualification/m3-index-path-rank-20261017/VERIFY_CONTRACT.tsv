@@ -1,0 +1,9 @@
+order	gate	status	expectation
+1	diff-and-source-identity	PASS	source hashes correspond byte-for-byte to sealed template manifest
+2	lint-Java21	PASS	-Xlint:all -Werror for pure Java snapshot and standalone regression
+3	compile-Java21	PASS	javac --release 21 exact checked source
+4	standalone-differential	PASS	900 randomized paths; 36,476 rank checkpoints, additional dense word boundaries
+5	Maven/OpenRewrite-JUnit	NOT_RUN	CI must execute real class-hook engine, fixed point, drift refusal
+6	JNI-C-compile-and-Xcheck-parity	NOT_RUN	180 native/java/rank paths; existing JNI implementation only
+7	OpenJDK-API-JTREG	NOT_RUN	must independently qualify before any java.util replacement
+8	serial-admission	BLOCKED	STRING phase remains canonical active

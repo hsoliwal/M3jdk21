@@ -1,0 +1,506 @@
+{
+  "schema": "m3-current-map-validation-requirements/1",
+  "commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+  "root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0",
+  "mapping_sha256": "22ce39ac68e6f5efab18e9bbf6d3da45af585067d88848f1eb7ce8a76987df87",
+  "required_target_recipe_paths": [
+    {
+      "path": "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+      "references": [
+        {
+          "record": "m3.prefix-z",
+          "status": "implemented-tested",
+          "role": "target",
+          "expected_sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+          "declared_git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4"
+        }
+      ]
+    },
+    {
+      "path": "m3/migration/recipes/prefix-z-v1.tsv",
+      "references": [
+        {
+          "record": "m3.prefix-z",
+          "status": "implemented-tested",
+          "role": "recipe",
+          "expected_sha256": "54251ed210b9ed280919968a6ea13f0b6ed6e590fbf92090d13b4495f05f4217",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexVmSession",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.counterpart.MIndexVmPrecomputeKey",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.counterpart.MIndexClass",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.counterpart.MIndexClassIndex",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.counterpart.MIndexClassBoundary",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.counterpart.MIndexMember",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.counterpart.MIndexMemberKind",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.counterpart.MIndexMemberFlags",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.counterpart.MIndexClassFlags",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.counterpart.MIndexField",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.counterpart.MIndexMethod",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.counterpart.MIndexConstructor",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.counterpart.MIndexRecordComponent",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "references": [
+        {
+          "record": "synexia.collections.SegmentedAddress28",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.collections.SegmentedIntLane28",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.collections.SegmentedLongLane28",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.collections.SegmentedBitLane28",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.collections.PackedBitAtoms",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexJvmDescriptor",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexRegexTrigramQuery",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "245e252da59d310ea7e4229e5cafa5d25e322fee82d349337b37eab8a1f161a1",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexVersionTable",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
+          "declared_git_blob_sha1": null
+        },
+        {
+          "record": "synexia.counterpart.MIndexLibraryRelease",
+          "status": "implemented-unverified",
+          "role": "recipe",
+          "expected_sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java",
+      "references": [
+        {
+          "record": "synexia.collections.SegmentedAddress28",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa",
+          "declared_git_blob_sha1": "14cdb999f5eab5be443044bff2d273fb4e4113fb"
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
+      "references": [
+        {
+          "record": "synexia.collections.SegmentedBitLane28",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+          "declared_git_blob_sha1": "5942b1f46eedf83ad8c4ef8edee91f75e7424e7a"
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java",
+      "references": [
+        {
+          "record": "synexia.collections.PackedBitAtoms",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab",
+          "declared_git_blob_sha1": "2ad46058a5325483647af4af16858c329ae24665"
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexClassBoundary",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CB.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexVmSession",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CI.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexClassIndex",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Class.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexClass",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexClassFlags",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexConstructor",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexJvmDescriptor",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+          "declared_git_blob_sha1": "92f4d7da32a3b8265675a413311fd304c6dc2dd2"
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Field.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexField",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java",
+      "references": [
+        {
+          "record": "synexia.collections.SegmentedIntLane28",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda",
+          "declared_git_blob_sha1": "513a1e8f5d55c074250d3b2747f041c19a1128e7"
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java",
+      "references": [
+        {
+          "record": "synexia.collections.SegmentedLongLane28",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644",
+          "declared_git_blob_sha1": "325e8e90ace21e71069665b74585c522b2c627b4"
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Member.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexMember",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexMemberFlags",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexMemberKind",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Method.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexMethod",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3PC.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexVmPrecomputeKey",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexRecordComponent",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Release.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexLibraryRelease",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexRegexTrigramQuery",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "6ba1883a307c0c8c4b6254c1a531e98b805c00a6cb943135a6cc13b47522b187",
+          "declared_git_blob_sha1": "565173748382cb3c49c35649785c41b46288a251"
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3VI.java",
+      "references": [
+        {
+          "record": "synexia.counterpart.MIndexVersionTable",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
+          "declared_git_blob_sha1": null
+        }
+      ]
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3BitLane28.c",
+      "references": [
+        {
+          "record": "synexia.collections.SegmentedBitLane28",
+          "status": "implemented-unverified",
+          "role": "target",
+          "expected_sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
+          "declared_git_blob_sha1": "e68e05555efbe2dbf1355e6820cc7795d9c33942"
+        }
+      ]
+    }
+  ],
+  "tested_receipts": [
+    {
+      "path": "m3/migration/evidence/local-20261002-final/receipt.json",
+      "tests": [
+        {
+          "record": "m3.prefix-z",
+          "test_id": "prefix-z-normal"
+        },
+        {
+          "record": "m3.prefix-z",
+          "test_id": "prefix-z-interpreter"
+        }
+      ]
+    }
+  ],
+  "target_recipe_unique_paths": 30,
+  "tested_receipt_unique_paths": 1,
+  "required_receipt_closure_pending": true,
+  "scope": "Only paths read by unchanged migration.validate; receipt expansion limited to matched run inputs/stdout paths."
+}

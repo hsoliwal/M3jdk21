@@ -1,0 +1,102 @@
+/* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
+package com.synexia.rewrite;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import org.junit.jupiter.api.Test;
+import org.openrewrite.InMemoryExecutionContext;
+import org.openrewrite.Parser;
+import org.openrewrite.SourceFile;
+import org.openrewrite.internal.InMemoryLargeSourceSet;
+import org.openrewrite.java.JavaParser;
+
+/** Actual Maven/OpenRewrite AST transform, output source seals and lossless fixed point. */
+final class M3NativeObjectRangeMap20261018RecipeTest {
+    private static final String CRATE = "m3-native-object-range-map-20261018";
+    private static final String ROOT = "/com/synexia/rewrite/hash-pinned-java/" + CRATE + "/";
+    private static final List<String> PATHS = List.of(
+        "m3/collections/src/main/java/com/m3/collections/M3ObjectRangeMap.java",
+        "m3/collections/src/test/java/com/m3/collections/M3ObjectRangeMapNativeProof.java",
+        "m3/collections/src/test/java/com/m3/collections/M3ObjectRangeMapSelfTest.java",
+        "m3/collections/src/test/java/com/m3/collections/M3ObjectRangeMapTest.java");
+    private static final List<String> NAMES = List.of(
+        "M3ObjectRangeMap.java.txt",
+        "M3ObjectRangeMapNativeProof.java.txt",
+        "M3ObjectRangeMapSelfTest.java.txt",
+        "M3ObjectRangeMapTest.java.txt");
+    private static final List<String> DIGESTS = List.of(
+        "8bed87ee1b2b884fa0bbd0934472305698bb7b7561a7bc0c0d6a772977818317",
+        "0ffd19f51b13ff26f14e795d4779c9c656a078699623ef28efc9b36461ce04cc",
+        "f78aff3fdd0dff9d7e8faa685a92f26ba1a41d29c1c9a07d46a1af76b46a6381",
+        "55267424febd8d04b5ecf040582b73d7c0b1e831bdef2581d07ff20f98c1cd2a");
+
+    private static String source(int n) throws Exception {
+        try (var input = M3NativeObjectRangeMap20261018RecipeTest.class
+                .getResourceAsStream(ROOT + NAMES.get(n))) {
+            assertNotNull(input);
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+        }
+    }
+    private static InMemoryExecutionContext context() {
+        return new InMemoryExecutionContext(error -> { throw new AssertionError(error); });
+    }
+    private static Map<String, SourceFile> apply(List<SourceFile> inputs) {
+        var changes = new M3HashPinnedJavaSnapshotRecipe(CRATE)
+                .run(new InMemoryLargeSourceSet(inputs), context(), 1)
+                .getChangeset().getAllResults();
+        var output = new TreeMap<String, SourceFile>();
+        for (var change : changes) {
+            var after = change.getAfter();
+            assertNotNull(after);
+            assertTrue(output.put(after.getSourcePath().toString().replace('\\','/'),after)==null);
+        }
+        return output;
+    }
+    @Test void fourActualGeneratedSourcesMatchCanonicalSHA256AndConverge() throws Exception {
+        assertEquals(PATHS, new M3HashPinnedJavaSnapshotRecipe(CRATE).targetPaths());
+        var actual = apply(List.of());
+        assertEquals(4, actual.size());
+        for (int i = 0; i < PATHS.size(); i++) {
+            String content = source(i);
+            assertEquals(content, actual.get(PATHS.get(i)).printAll());
+            assertEquals(DIGESTS.get(i), HexFormat.of().formatHex(
+                    MessageDigest.getInstance("SHA-256").digest(content.getBytes(StandardCharsets.UTF_8))));
+        }
+        assertTrue(apply(List.copyOf(actual.values())).isEmpty());
+    }
+    @Test void allPartialSourceOrdersConverge() {
+        var all = new ArrayList<>(apply(List.of()).values());
+        assertEquals(4, all.size());
+        for (int mask=0; mask<16; mask++) for (boolean reverse : List.of(false,true)) {
+            var inputs=new ArrayList<SourceFile>();
+            for(int i=0;i<all.size();i++) if((mask & 1<<i)!=0) inputs.add(all.get(i));
+            if(reverse) Collections.reverse(inputs);
+            var missing=apply(inputs);
+            assertEquals(4-Integer.bitCount(mask),missing.size());
+            inputs.addAll(missing.values());
+            assertTrue(apply(inputs).isEmpty());
+        }
+    }
+    @Test void driftedSourceAndDuplicateOwnerRefuse() {
+        var foreign=JavaParser.fromJavaVersion().build().parseInputs(
+            List.of(Parser.Input.fromString(Path.of(PATHS.getFirst()),
+                "package com.m3.collections; public final class M3ObjectRangeMap {}")),
+            null,context()).toList();
+        assertEquals(1,foreign.size());
+        assertThrows(RuntimeException.class,()->apply(foreign));
+        var first=apply(List.of()).values().iterator().next();
+        assertThrows(RuntimeException.class,()->apply(List.of(first,first)));
+    }
+}

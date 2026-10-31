@@ -111,8 +111,13 @@ import sun.util.locale.provider.LocaleServiceProviderPool;
  * <br>
  * @apiNote {@code CollationKey}s from different
  * {@code Collator}s can not be compared. See the class description
- * for {@link CollationKey}
- * for an example using {@code CollationKey}s.
+ * for {@link CollationKey} for an example using {@code CollationKey}s.
+ *
+ * @implNote Significant thread contention may occur during concurrent usage
+ * of the JDK Reference Implementation's {@link RuleBasedCollator}, which is the
+ * subtype returned by the default provider of the {@link #getInstance()} factory
+ * methods. As such, users should consider retrieving a separate instance for
+ * each thread when used in multithreaded environments.
  *
  * @see         RuleBasedCollator
  * @see         CollationKey
@@ -275,7 +280,7 @@ public abstract class Collator
      * may return a {@code Collator} instance with the Swedish traditional sorting, which
      * gives 'v' and 'w' the same sorting order, while the {@code Collator} instance
      * for the Swedish locale without "co" identifier distinguishes 'v' and 'w'.
-     * @spec https://www.unicode.org/reports/tr35/ Unicode Locale Data Markup Language
+     * @spec https://www.unicode.org/reports/tr35 Unicode Locale Data Markup Language
      *     (LDML)
      * @param desiredLocale the desired locale.
      * @return the Collator for the desired locale.

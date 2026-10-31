@@ -1,0 +1,69 @@
+{
+  "schema": "M3JDK21_SPARSE_VIEWPORT_GEOMETRY_RECEIVING_V1",
+  "product_repository": "hsoliwal/M3jdk21",
+  "product_parent": "9dd1df62f3d5406760427cb5e840a36c9e7a59ea",
+  "canonical_workspace": "hsoliwal/com.synexia",
+  "canonical_pr": 12855,
+  "canonical_commit": "7b0a5a072b6c6db16b8861bbc6a1307f40f88840",
+  "canonical_dataset": "vpt-geometry-20261027",
+  "canonical_named_recipe": "com.synexia.m3.ViewportGeometry20261027",
+  "canonical_engine": "M3HashPinnedJavaSnapshotRecipe",
+  "product_owner": "m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java",
+  "source_before_git_blob": "650356bcdffa372328e5a79f4f596a887fe5f447",
+  "source_after_git_blob": "d35282fb564a0a9231f31781e1a699f7e571f8de",
+  "source_before_sha256": "b64ba7c81ca35214a73d188433e04115b4d84e597492eb43596cce6041cf08d1",
+  "source_after_sha256": "98a83a0bef698e128baa0a788e122751e12584d0b8983f4df7443850123afeec",
+  "scope": "One existing private-method overflow guard; original license header, public/protected descriptors and API contracts preserved",
+  "provenance": {
+    "authentic_java21_parser_coordinate": "org.openrewrite:rewrite-java-21:8.17.1",
+    "java_parser_jar_sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+    "java_parser_pom_sha256": "9465d6d13672fc36b517e7c06ad649a081829340b53ee3872bf08349ca9310c7",
+    "result_is": "J.CompilationUnit",
+    "engine_source_git_blob": "98138cb6734ad86e3f77b8722fa5ff459842e841",
+    "original_test_source_git_blob": "e69993797978f800a4d1b01b55093dc8dde16514",
+    "original_receiver_git_blob": "d7f5cda465d8f473f4969d4db15d717af1391745"
+  },
+  "bounded_local_evidence": {
+    "original_maven_junit": {
+      "tests": 10,
+      "failures": 3,
+      "errors": 0,
+      "skips": 0,
+      "interpretation": "expected pre-existing defects"
+    },
+    "candidate_maven_junit": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "real_openrewrite_junit": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "actual_results": 1,
+      "fixed_point_changes": 0
+    },
+    "original_canonical_receiver": {
+      "check_changes": 1,
+      "apply_changes": 1,
+      "replay_changes": 0
+    },
+    "negative_tests": "source drift, duplicate/missing input, wrong Java representation, postscan mutation",
+    "build_metadata_limitation": "Isolated Maven POM and ENGINE_SOURCES.tsv semantically equivalent, not byte-identical to Synexia root",
+    "compilation_and_runtime": "Java21 and independent BigInteger geometry oracle qualified in canonical dataset"
+  },
+  "product_java_github_receiving": "DRAFT_COMMIT",
+  "hosted_current_head_ci": "NOT_YET_EXECUTED",
+  "full_source_built_jdk_hotspot_jtreg": "NOT_RUN",
+  "actual_swt_nebula_gef_rwt_native": "NOT_RUN",
+  "windows_macos_android_ime_accessibility": "NOT_RUN",
+  "measured_fps_rss_gc_latency": "NOT_RUN",
+  "no_new_jni_export": true,
+  "no_new_public_api": true,
+  "no_extra_widget_or_state_owner": true,
+  "no_rebase": true,
+  "no_force_push": true,
+  "no_default_branch_write": true
+}

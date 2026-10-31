@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "scope": "Copied public recipe host portability for fixture-java and fixture-text only",
+  "public_pom": "/workspace/scratch/7846804a0074/M3jdk21-f29/m3/collections/qualification/wrapper-convergence-20261018/recipe-custody/recipe-host/pom.xml",
+  "public_engine_owner_root": "/workspace/scratch/7846804a0074/M3jdk21-f29/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner",
+  "public_copy_manifest_sha256": "2f4a7d5b0770ab7d04d046f443174fc8311330985dd3bccce187f0bd51ac78e5",
+  "copied_source_count": 61,
+  "copied_packet_count": 12,
+  "qualified_fixture_lanes": [
+    "fixture-java",
+    "fixture-text"
+  ],
+  "public_engine_source_count": 4,
+  "orchestration_snapshot_rows": 69,
+  "exact_sdk_binding_rows_per_fixture": 14,
+  "actual_sdk_tests": 10,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "compiled_main_sources_per_fixture": 4,
+  "compiled_test_sources_per_fixture": 1,
+  "compiled_classes_per_fixture": 20,
+  "compiler_source_scope": "All main/test compiler input paths are within M3jdk21-f29; none point to synexia-work",
+  "source_drift": [],
+  "compiled_input_drift": [],
+  "retained_artifacts": 16,
+  "ignored_generated_output_count": 16,
+  "engines": [
+    {
+      "public_path": "M3jdk21-f29/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+      "git_blob_sha1": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40",
+      "declared_owner_url": "https://github.com/hsoliwal/com.synexia/blob/98368e107f4a205d852ef958cd48c1ee633219b1/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+    },
+    {
+      "public_path": "M3jdk21-f29/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
+      "git_blob_sha1": "9d0788d3717e017d58345c5c3e62022c2915a3c8",
+      "declared_owner_url": "https://github.com/hsoliwal/com.synexia/blob/98368e107f4a205d852ef958cd48c1ee633219b1/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
+    },
+    {
+      "public_path": "M3jdk21-f29/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4",
+      "git_blob_sha1": "d24729950508857280ea1b56d4e930f05137ec85",
+      "declared_owner_url": "https://github.com/hsoliwal/com.synexia/blob/98368e107f4a205d852ef958cd48c1ee633219b1/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java"
+    },
+    {
+      "public_path": "M3jdk21-f29/m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "git_blob_sha1": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "declared_owner_url": "https://github.com/hsoliwal/com.synexia/blob/98368e107f4a205d852ef958cd48c1ee633219b1/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java"
+    }
+  ],
+  "receipts": [
+    {
+      "path": "00-source-verification.receipt.json",
+      "sha256": "ddb07f0176b84a9555ac6a007efd46acf617e60923624222dfe8d2a02d248eea",
+      "stage": "00-source-verification",
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "path": "01-fixture-java-lint.receipt.json",
+      "sha256": "e16cae2f6904bb57c8a5c3175212a796b2c0696a222b7a0396c4e13095cd7a64",
+      "stage": "01-fixture-java-lint",
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "path": "02-fixture-java-compile.receipt.json",
+      "sha256": "d6ad036b48c380eb77de04c2c2307a9a03cde57d009ccfac22727894508e5a1c",
+      "stage": "02-fixture-java-compile",
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "path": "03-fixture-java-test.receipt.json",
+      "sha256": "250d9babfcc231af7eac76e94ffbc9a1e3391cfe9bb359103992e329b0d79460",
+      "stage": "03-fixture-java-test",
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "path": "04-fixture-text-lint.receipt.json",
+      "sha256": "dc4cfd5204453018f276961c2f980c01fb1a9d4e74d3b54de8138f779c0a2bb3",
+      "stage": "04-fixture-text-lint",
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "path": "05-fixture-text-compile.receipt.json",
+      "sha256": "fd516016a4d7138e6da10b30bdd82cea37236280b04b1ec806c3578e10d7a881",
+      "stage": "05-fixture-text-compile",
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "path": "06-fixture-text-test.receipt.json",
+      "sha256": "5213b0edf78527ff2388be1af7fe9a870e01d1db43e8625f924827c437c6ef8d",
+      "stage": "06-fixture-text-test",
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    {
+      "path": "07-output-exclusion.receipt.json",
+      "sha256": "d880a6c138464e9fef04b189211f74371bf5ca122e9e17e2c4c2b4006d4f88f8",
+      "stage": "07-output-exclusion.receipt",
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "inputs_sha256": "ccd9def4b2390d6082a185364c0bc1eaddd44dbcd6da312f3cb22bab175d623b",
+  "retained_outputs_manifest_sha256": "e957587141d73ee670cd9103636e534e81536f645150b21c0278a9ee97e56c3e"
+}

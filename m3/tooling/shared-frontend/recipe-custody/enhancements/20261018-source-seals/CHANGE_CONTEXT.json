@@ -1,0 +1,58 @@
+{
+  "schema": "M3_SOURCE_SEAL_CHANGE_CONTEXT_V1",
+  "date": "2026-10-18",
+  "state": "SOURCE_SEAL_LEAF_QUALIFIED",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_baseline": "140c263a90f9803b9c46103c63355a286e0515f0",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "recipe_owner": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+  "recipe_classes": [
+    "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe"
+  ],
+  "scope": [
+    {
+      "path": "src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java",
+      "before_sha256": "845c70bdc5e77a62282417889dc77bf466fd0c0005f72112e86faf27ec616399",
+      "atoms": [
+        "retainSource",
+        "retained",
+        "LiveUnit.source"
+      ],
+      "public_api_change": false
+    },
+    {
+      "path": "test/langtools/tools/javac/m3/M3ASTSourceSealTest.java",
+      "before_sha256": "ABSENT",
+      "purpose": "Focused source-seal contract and failure-publication regression"
+    }
+  ],
+  "verification_order": [
+    "patch",
+    "lint",
+    "compile",
+    "test",
+    "runtime"
+  ],
+  "verification": {
+    "patch_and_lint": "PASS",
+    "actual_openrewrite_sdk_tests": 5,
+    "input_sealing_tests": 8,
+    "receiver_contract_cases": 9,
+    "target_repeat_writes": 0,
+    "source_seal_checks": 117,
+    "digest_cases": 23,
+    "utf16_code_units": 65536,
+    "existing_shared_frontend_checks": 70,
+    "existing_rewrite_adapter_tests": 5,
+    "baseline_partial_image_failure": "REPRODUCED",
+    "historical_observer_preimage": "REFUSED_WITH_ZERO_WRITES",
+    "full_borrow_guard": "PASS_SOURCE_PIN_ONLY_32_FAMILIES",
+    "compiler_image": "compiler-image-01; hybrid classification;65 module hash witnesses"
+  },
+  "native_abi_change": false,
+  "global_receiving_phase_advanced": false,
+  "publication": "NOT_RUN",
+  "follow_up_leaf": "20261018-plugin-selection is an independent additive static query, not part of this source-seal API scope."
+}

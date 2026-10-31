@@ -1,0 +1,7 @@
+Using exact match for CONF=m3-p0 (other matches are possible)
+Building target 'hotspot' in configuration 'm3-p0'
+Compiling up to 1 files for BUILD_TOOLS_HOTSPOT
+Creating hotspot/variant-server/tools/adlc/adlc from 13 file(s)
+Compiling up to 2 files for BUILD_JVMTI_TOOLS
+Creating support/modules_libs/java.base/server/libjvm.so from 1219 file(s)
+Finished building target 'hotspot' in configuration 'm3-p0'

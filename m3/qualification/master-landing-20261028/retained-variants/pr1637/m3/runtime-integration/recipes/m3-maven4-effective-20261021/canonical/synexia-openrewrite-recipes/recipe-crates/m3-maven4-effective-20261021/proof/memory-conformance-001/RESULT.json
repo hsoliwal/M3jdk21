@@ -1,0 +1,51 @@
+{
+  "schema": "M3_MEMORY_PROFILE_CONFORMANCE/1",
+  "status": "PASS",
+  "checks": 129,
+  "control_cases": 32,
+  "profile": "m3-maven4-effective-20261021/1.0",
+  "input_receipt": {
+    "path": "proof/memory-conformance-001/INPUTS_AND_COMMANDS.json",
+    "sha256": "eb0fa219108ef1c14466634e86aca5e95746a45b5b946811c68b61bad6ed34b7"
+  },
+  "commands": [
+    {
+      "label": "compile",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "-d",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/target/classes",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/src/com/synexia/rewrite/memory/M3RecoveryMemory.java",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/src/com/synexia/rewrite/memory/M3RecoveryMemoryTest.java",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/src/com/synexia/rewrite/sealed/SealHash.java"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-conformance-001/compile.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "conformance",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/206049dfb270/synexia/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/memory/tooling/target/classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "com.synexia.rewrite.memory.M3RecoveryMemoryTest"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-conformance-001/conformance.log",
+        "sha256": "df7bf5d67b2a379a3e12675814ef7685e60652dc10e78aed7f6ab77118fb3b17"
+      }
+    }
+  ],
+  "scope": "Separate direct Java21 helper gate; no Maven SDK test-count inflation or runtime admission."
+}

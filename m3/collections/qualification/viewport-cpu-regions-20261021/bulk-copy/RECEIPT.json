@@ -1,0 +1,65 @@
+{
+  "schema": "M3_BULK_COPY_TARGET_CUSTODY_V1",
+  "product_pr": 1759,
+  "product_preimage": "371a0e31ae05d423f8cb53066ad08a640a430334",
+  "canonical_pr": "hsoliwal/com.synexia#12855",
+  "canonical_commit": "5a0e2eaa2f1c5db1106db5068e614e2ff5e9fa2f",
+  "canonical_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/viewport-cpu-regions-20261021",
+  "custody": [
+    {
+      "path": "M3IndexSort.java.txt",
+      "sha256": "3423c2d41106a2689bfa93373ac7ed41c4472e7cc7f3d97c83224e83c43c7667",
+      "git_blob": "2561101df3ba8c8c82825424ac104e7d376073f9"
+    },
+    {
+      "path": "m3maskviewport.c.txt",
+      "sha256": "ed52dbf1b88683a31c1068949596b5dcf50f965791342ff7415695202e6c0ac9",
+      "git_blob": "d92ed58dcd35773b05ed7a7e72e4167a55227e3c"
+    },
+    {
+      "path": "M3IndexSortViewportContract.java.txt",
+      "sha256": "29017f5f626c88233b119cb1b44a7986f0b377f6ca7d2cddfc9b0d532276d923",
+      "git_blob": "d93740de2e4a626bf1ce2171ebf8e3eeedb976ff"
+    }
+  ],
+  "source_targets": [
+    {
+      "path": "m3/collections/src/main/c/m3maskviewport.c",
+      "pre": "53ee3427813810010a5e2eae31fd79e53ed53915d1bda5cdebdfd78225b3cf4d",
+      "post": "ed52dbf1b88683a31c1068949596b5dcf50f965791342ff7415695202e6c0ac9",
+      "blob": "d92ed58dcd35773b05ed7a7e72e4167a55227e3c"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexSort.java",
+      "pre": "6f9da9bbb5d65388bcb8efb1dfc80525c847a4cfbd9286b7baf514a6f2249ad4",
+      "post": "3423c2d41106a2689bfa93373ac7ed41c4472e7cc7f3d97c83224e83c43c7667",
+      "blob": "2561101df3ba8c8c82825424ac104e7d376073f9"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java",
+      "pre": "5af5cb6fed85fa0803384ec4374be4b96659844bd547788be8805bbfe942635f",
+      "post": "3a3c3af8b16a1f66529adbcac74b74afbbe56fd211e23d799f4988af60991123",
+      "blob": "02c2ad689d91adf11be3ea224d02ece1fdcf8f07"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexSortViewportContract.java",
+      "pre": "ABSENT",
+      "post": "29017f5f626c88233b119cb1b44a7986f0b377f6ca7d2cddfc9b0d532276d923",
+      "blob": "d93740de2e4a626bf1ce2171ebf8e3eeedb976ff"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ViewportProjectionContract.java",
+      "pre": "ABSENT",
+      "post": "f6c6e43d5cf805580fe531b007398e4cdf5dc16ca315c9390104df719843d044",
+      "blob": "36f3b42938e232bb672461a97dcc1091510122d8"
+    }
+  ],
+  "host_receipt_git_blob": "ab03bd45115a9b1aede1852e7b8f968d530add5d",
+  "raw_log_manifest_sha256": "92baaef2306789583a3ba60dedc7f6776e4a58fa9c8023f608eda2adea90175f",
+  "host_result": "PASS_BOUNDED_CANDIDATE_CORPUS",
+  "maven_openrewrite_sdk": "NOT_RUN",
+  "product_runtime_receiving": "NOT_RUN",
+  "runtime_sources_changed": false,
+  "source_snapshots_are_inert": true,
+  "completion": false
+}

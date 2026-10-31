@@ -1,0 +1,65 @@
+{
+  "base_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "targets": [
+    {
+      "path": "m3/runtime-integration/integrated-collections/FOSS_REUSE_DECISION.json",
+      "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/m3/runtime-integration/integrated-collections/FOSS_REUSE_DECISION.json",
+      "pre_sha256": null,
+      "post_sha256": "9659689fab63ae642eb4b789814f6402108c9d24a9f1b48bf924207992fd6db1"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/README.md",
+      "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/m3/runtime-integration/integrated-collections/README.md",
+      "pre_sha256": null,
+      "post_sha256": "dc79aace9491a7ab1755d52076fdc08844109388405fe10802ba5cb85cbb5287"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/behavioral-atoms.json",
+      "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/m3/runtime-integration/integrated-collections/behavioral-atoms.json",
+      "pre_sha256": null,
+      "post_sha256": "5e38a593c69884ae4553b4ee40eed774b517c9a48df7a118ef6dbd0514cf4007"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/candidate-receiver.json",
+      "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/m3/runtime-integration/integrated-collections/candidate-receiver.json",
+      "pre_sha256": null,
+      "post_sha256": "0d334e13765b476d851f7b8585f9157dda4e4d3150eb460eec5eb13dcd0d0025"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/counterexamples.json",
+      "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/m3/runtime-integration/integrated-collections/counterexamples.json",
+      "pre_sha256": null,
+      "post_sha256": "b481d09450f49bf14dbc40d5bec89c9d6924a5e1893e614f7216e8ef5959c077"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/public-api.json",
+      "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/m3/runtime-integration/integrated-collections/public-api.json",
+      "pre_sha256": null,
+      "post_sha256": "aa9eaf8e3e92a1211cff849048169f35e88dd9ebca59d7714d54be6e7f61ad19"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/verify.py",
+      "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/m3/runtime-integration/integrated-collections/verify.py",
+      "pre_sha256": null,
+      "post_sha256": "89540bb2b2deff0d3d8a7f371f1874fb65c96ee397478f1e0254a16eea889726"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Collections.java",
+      "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/src/java.base/share/classes/java/util/Collections.java",
+      "pre_sha256": "7dcb1bde18923274518b747ad4e65e3019046ca7742714ead678c615d99499ba",
+      "post_sha256": "4227019cc64ce600908eace9425718d8fe49ec4f4028a638cb70cd17a2f2917a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/M3CollectionViews.java",
+      "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/src/java.base/share/classes/java/util/M3CollectionViews.java",
+      "pre_sha256": null,
+      "post_sha256": "3818e50c23166b20c0516b4a6f9cb3c12ed9fe7f73ca1d55c38f616a5c4ac4f7"
+    },
+    {
+      "path": "test/jdk/java/util/Collections/M3CollectionViewsTest.java",
+      "candidate": "/dev/shm/m3jdk21-work/collection-candidates/postimages/test/jdk/java/util/Collections/M3CollectionViewsTest.java",
+      "pre_sha256": null,
+      "post_sha256": "7a245f98feee1590a6c01cec79b779441c85a72a30838d9bbec949024fed1878"
+    }
+  ]
+}

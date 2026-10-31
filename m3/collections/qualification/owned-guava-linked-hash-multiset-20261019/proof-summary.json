@@ -1,0 +1,13 @@
+{
+  "owner": "com.m3.collections.guava.M3LinkedHashMultiset",
+  "provider_contract": "com.google.common.collect.LinkedHashMultiset (Guava 33.4.8-jre)",
+  "inventory_row": "DONE #1523",
+  "source_sha256": "422fe89e873fb08a95b171ef900a416321a77ba84ade5822fd89fb9cc0a02d36",
+  "scaffold_preimage_sha256": "8f877a2790654e2781afe9a44384ddee8553e2a04d9b3ed2e12b28ed15bbe945",
+  "module_tests": {"tests": 17, "failures": 0, "differential_seeds": 8, "differential_operations": 96000, "differential_checks": 960208},
+  "coverage": {"tool": "JaCoCo 0.8.12", "classes": 10, "line": "353/353", "branch": "256/256", "gate": "CLASS LINE and BRANCH COVEREDRATIO >= 0.99"},
+  "allocation_probe_bytes": 0,
+  "recipe_tests": {"tests": 2, "fixed_point_executions": 8, "refusals": 4},
+  "environment": "local Windows 11, JDK 21.0.9, Maven 3.9.14; hosted CI not run",
+  "not_claimed": ["Guava serialized form", "spliterator split points", "forEachEntry visiting after a structural change", "performance comparison", "JNI path"]
+}

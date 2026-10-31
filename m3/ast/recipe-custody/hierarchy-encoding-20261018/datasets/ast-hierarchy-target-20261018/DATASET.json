@@ -1,0 +1,13 @@
+{
+  "schema": "M3_COLLECTIONS_CONTRACT_REFINEMENT_DATASET_V1",
+  "dataset": "ast-hierarchy-target-20261018",
+  "repository": "hsoliwal/M3JDK21",
+  "baseline_ref": "0d73745d7203123533dce8f8fb264ba2746f6d2d",
+  "crate_name": "m3-collections-contract-refinement-20261017-ast-hierarchy-target-20261018",
+  "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "targets": 3,
+  "java_targets": 3,
+  "text_targets": 0,
+  "product_sources_written": false,
+  "engine_changes_from_origin": []
+}

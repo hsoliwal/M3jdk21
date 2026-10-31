@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "12fa915d4d077fd870900e65d79d2135921977b0"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "{\n  \"schema\": \"m3.sealed-install/1\",\n  \"recipe_id\": \"jcc-handoff-20261005/2\",\n  \"source_commit\": \"0b8dc32b9e8a616b7b7141bbdd88722839dc64bc\",\n  \"target_commit\": \"da958d00d24154c0db87beca0ec80a7df2b43b73\",\n  \"scope\": \"Reviewed tool-plane ledger/documentation outputs only; no product or JCC export admission.\",\n  \"outputs\": [\n    {\n      \"path\": \"m3/docs/jcc-source-handoff.md\",\n      \"before\": null,\n      \"after\": {\n        \"resource\": \"01-jcc-source-handoff.md.txt\",\n        \"sha256\": \"fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337\"\n      }\n    },\n    {\n      \"path\": \"m3/docs/name-mapping.json\",\n      \"before\": {\n        \"resource\": \"before00-name-mapping.json.txt\",\n        \"sha256\": \"67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb\"\n      },\n      \"after\": {\n        \"resource\": \"after00-name-mapping.json.txt\",\n        \"sha256\": \"536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace\"\n      }\n    },\n    {\n      \"path\": \"m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv\",\n      \"before\": null,\n      \"after\": {\n        \"resource\": \"03-root-coverage-obligations.tsv.txt\",\n        \"sha256\": \"cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b\"\n      }\n    },\n    {\n      \"path\": \"m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json\",\n      \"before\": null,\n      \"after\": {\n        \"resource\": \"02-source-destination-bindings.json.txt\",\n        \"sha256\": \"cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126\"\n      }\n    }\n  ],\n  \"guards\": [\n    {\n      \"path\": \"m3/docs/name-mapping.schema.json\",\n      \"sha256\": \"c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b\"\n    },\n    {\n      \"path\": \"m3/migration/migration.py\",\n      \"sha256\": \"fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e\"\n    },\n    {\n      \"path\": \"m3/migration/recipe.py\",\n      \"sha256\": \"453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628\"\n    },\n    {\n      \"path\": \"m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java\",\n      \"sha256\": \"8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6\"\n    },\n    {\n      \"path\": \"m3/tooling/migration-recipes/pom.xml\",\n      \"sha256\": \"8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888\"\n    },\n    {\n      \"path\": \"src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java\",\n      \"sha256\": \"1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67\"\n    },\n    {\n      \"path\": \"m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv\",\n      \"sha256\": \"6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1\"\n    }\n  ],\n  \"plan_sha256\": \"70283e86d30abf8e30a09b10d77be40f99160371a98927dc151d680e3c2e4a87\"\n}\n"
+    },
+    "isError": false
+  }
+}

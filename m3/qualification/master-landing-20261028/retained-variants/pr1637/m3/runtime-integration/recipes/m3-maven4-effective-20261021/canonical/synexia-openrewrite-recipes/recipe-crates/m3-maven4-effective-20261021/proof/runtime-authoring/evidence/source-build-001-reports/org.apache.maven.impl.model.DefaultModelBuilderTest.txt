@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.apache.maven.impl.model.DefaultModelBuilderTest
+-------------------------------------------------------------------------------
+Tests run: 41, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.470 s -- in org.apache.maven.impl.model.DefaultModelBuilderTest

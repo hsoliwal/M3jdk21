@@ -1,0 +1,15 @@
+{
+  "base_commit": "0c957d097841e30471fc2539bebaab6c3a58e636",
+  "patch_sha256": "6c9d1e5aa647dfe00d4d6cf049c00d6bda41c4de99f809eae6ab1301889473b8",
+  "files": {
+    "src/hotspot/share/prims/jni.cpp": {
+      "before": "95f131c664bf993f457d3ea53bdfe0850f842d82c5a42644a979d724580522f4",
+      "after": "d158ac4b4dc8d3e4b1354ffc906b257ec457aca22eb5f6f863128803c724eb69"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java": {
+      "before": "944f12c8b77d19fdb6fc6c7eee1baac0cc91322511c52abca1957fd4120219f5",
+      "after": "77e8af30f84dadc512fb005ccffb73a679722808eb4cfb12c12f7b2c48713338"
+    }
+  },
+  "engine_sha256": "e2941c8efb9f65a886d2e6d70ef0a60efb3b74440a253c8b60da71e02b622eb0"
+}

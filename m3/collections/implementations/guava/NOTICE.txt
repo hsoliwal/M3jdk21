@@ -1,0 +1,77 @@
+M3HashBiMap Android donor relocation
+===================================
+
+Copyright (C) 2007, 2008, 2021 The Guava Authors.
+Modified 2026 Hitesh Soliwal and contributors.
+
+Licensed under the Apache License, Version 2.0. The donor copyright and
+license headers remain in the relocated source and every lifted helper
+section. LICENSE.txt is the exact pinned Guava root LICENSE.
+
+Donor: https://github.com/google/guava
+Commit: f06690fa3e874f65515e8fd338a74d636e2c792f (v33.4.8)
+Source root: android/guava/src/com/google/common/collect/
+
+HashBiMap.java              ad9138c8eca437bda700df63a4afa80e5abe474f
+Hashing.java                1ea3af1c91d843bb7ef2b5d3899c73d918648bb0
+CollectPreconditions.java   98b30c6d5e7bbacc82cad2d4c8dca72b212ab2f8
+ImmutableCollection.java    7cd9d4721f3fc2af891e1c042cd7ec2893ff365f
+AbstractMapEntry.java       6b87b90b1641e5e68ec9ada84b0ec351e7efca28
+NullnessCasts.java          82bcc2dbeaef4f8d602061fa087d8bc277f1f22a
+ParametricNullness.java     d3d67ef6a1860eb4041f546c6eb3a3dbf127262c
+Serialization.java          81035be120a9349f147c903cdcfe651d1be6546f
+Root LICENSE                d645695673349e3947e8e5ae42332d0ac3164cd7
+
+The initial implementation was a deterministic source relocation of the
+Android array/index implementation. Two subsequent M3 refinements repair
+dense-index relocation defects exposed by legal inverse forcePut sequences:
+captured predecessor/successor indexes are rebased before adjacency checks,
+and a captured predecessor is rebased after swap-last deletion. These
+bounded changes preserve the storage form and ordinary valid behavior;
+they intentionally do not reproduce the donor's broken iteration states.
+The package and
+class name change to com.m3.collections.guava.M3HashBiMap. The implementation
+directly implements the public Guava BiMap API and extends JDK AbstractMap;
+views extend JDK AbstractSet. There is no Guava collection implementation
+superclass or delegated collection owner.
+
+Only these bounded support surfaces are lifted into package-private nested
+types: Hashing.smear/smearedHash/closedTableSize and their constants;
+CollectPreconditions.checkNonnegative(int)/checkRemove;
+ImmutableCollection.Builder.expandedCapacity (renamed Capacity);
+the AbstractMapEntry API tuple base; both NullnessCasts methods;
+ParametricNullness; Serialization.readCount/writeMap/populateMap(map,
+stream,size). Their selected method bodies remain donor text.
+
+Hashing's Ints.MAX_POWER_OF_TWO dependency becomes the identical expression
+1 << (Integer.SIZE - 2), verified in the same commit at
+android/guava/src/com/google/common/primitives/Ints.java,
+blob e5a4d7155d3582833d33c6385927d12ad640384f. Hashing's unneeded
+needsResizing method is omitted. Its existing MurmurHash3 public-domain
+attribution remains in the source. No other primitive helper is copied.
+
+The public Guava BiMap API, scalar Preconditions/Objects utilities, Guava
+platform annotations, Error Prone/J2ObjC annotations and JSpecify nullable
+annotations remain compile dependencies. The package-private parametric
+nullness annotation is lifted; it does not become a new public API.
+
+Forward and inverse receive own serialVersionUID 1L for strict compilation.
+Concrete class identity and donor wire identity are not claimed. Except
+for those two contract repairs, this bookkeeping and the mechanical
+relocation/support closure, the Android donor's order, representative
+selection, inherited Map defaults, mutation timing, callbacks, views and
+entry rebinding remain unchanged.
+
+ANDROID IS NOT THE JRE IMPLEMENTATION. The source relocation does not admit
+JRE parity. In particular, inherited replaceAll, forEach dispatch and
+equal-but-distinct representative selection require actual JRE
+discriminators before any separately pinned protocol refinement. The
+initial generated receipt binds prototype custody only. That prototype
+was rejected by the broader invariant test; its receipt and failures are
+preserved. Final scoped execution and the two refinements have separate
+provenance and qualification records.
+
+The before-code FOSS_REUSE_DECISION.tsv, candidate-evaluation.tsv and
+INVENTORY.json are required inputs and are bound into the relocation
+receipt. Actual behavior qualification and source receiving recipes are
+separate executed proof steps; this helper does not replace them.

@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.IllegalStateException: source drift: m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+	at com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireNoFailure(M3GpuToolJoinManifest.java:163)
+	at com.synexia.rewrite.M3GpuToolJoinManifest$Scan.requireAdmissible(M3GpuToolJoinManifest.java:133)
+	at com.synexia.rewrite.SealReplay.main(SealReplay.java:39)

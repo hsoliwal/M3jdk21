@@ -1,0 +1,29 @@
+{
+  "schema": "m3-jcc-ci-repair-iteration/1",
+  "iteration": "v02",
+  "status": "AUTHORED_NOT_EXECUTED",
+  "created_at_utc": "2026-10-06T04:22:29.754884+00:00",
+  "parent_freeze": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/FROZEN_INPUTS.json",
+  "parent_freeze_sha256": "9f12ce757e6267edfc72a3b84c2c155ccc77c57dbd4ab11d9ca62797a61afec9",
+  "preserved_failed_execution": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/05-maven.json",
+  "preserved_failed_execution_sha256": "84b7b4e2ebca426be389cb2b53a579f4519aef02d09b5c4774a53a8d8045f863",
+  "failure": "The new JUnit oracle compared the entire marker collection, but OpenRewrite adds RecipesThatMadeChanges provenance to a changed source.",
+  "correction": "Require exact preservation of all pre-existing markers and marker identity after removing only the engine provenance marker; explicitly require one provenance record naming the exact recipe crate. Add non-empty BuildMetadata to the three positive inputs.",
+  "changed_frozen_files": [
+    "overlay/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccCiRepairTest.java"
+  ],
+  "original_test": {
+    "bytes": 14760,
+    "sha256": "5eb355a57711fcd74ad8f3469227f349c2d2c3eeeab0da3b842bbe69b300ea69",
+    "mode": "0o644"
+  },
+  "corrected_test": {
+    "bytes": 15689,
+    "sha256": "b528e7ca2d303408b8e779383866a1c7e3c81a2e0f2659b82618b9de8be10e3c",
+    "mode": "0o644"
+  },
+  "original_target_test_bodies_and_production_recipe_unchanged": true,
+  "python_installer_evidence_reused_without_reexecution": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/installer/receipt.json",
+  "reason_reuse_is_valid": "All three target resources, plan, installer, dependency guards and six Python test methods are byte-identical. Only the newly authored JUnit metadata oracle changed.",
+  "patch_sha256": "6e00138910b8c942203863ae6ef9e762b2c73c08e7dd36ac3c2a52247dd7ed6d"
+}

@@ -24,6 +24,7 @@
 /*
  * @test
  * @bug      8017191 8182765 8200432 8239804 8250766 8262992 8281944 8307377
+ *           8284315
  * @summary  Javadoc is confused by at-link to imported classes outside of the set of generated packages
  * @library  /tools/lib ../../lib
  * @modules jdk.javadoc/jdk.javadoc.internal.tool
@@ -103,7 +104,12 @@ public class TestSeeTag extends JavadocTester {
                     <dt>See Also:</dt>
                     <dd>
                     <ul class="tag-list-long">
-                    <li><code>Object</code></li>
+                    <li>
+                    <details class="invalid-tag">
+                    <summary>invalid reference</summary>
+                    <pre><code>Object[]</code></pre>
+                    </details>
+                    </li>
                     <li>
                     <details class="invalid-tag">
                     <summary>invalid reference</summary>

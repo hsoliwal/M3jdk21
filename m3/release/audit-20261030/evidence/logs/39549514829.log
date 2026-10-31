@@ -1,0 +1,133 @@
+verify-recipes	UNKNOWN STEP	﻿2026-10-21T13:12:01.0210840Z Current runner version: '2.338.0'
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0229044Z ##[group]Runner Image Provisioner
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0229610Z Hosted Compute Agent
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0229993Z Version: 20261015.610
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0230383Z Commit: 267fdb4e8bbec4ab5ea31367f3a00d5c480c7656
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0230815Z Build Date: 2026-10-14T17:06:54Z
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0231240Z Worker ID: {d0a6f116-ef10-4970-a7b3-92fe70779687}
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0231650Z Region: centralus
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0231972Z Cloud: Azure
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0232325Z ##[endgroup]
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0233088Z ##[group]Operating System
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0233472Z Ubuntu
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0233802Z 22.04.5
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0234101Z LTS
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0234427Z ##[endgroup]
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0234748Z ##[group]Runner Image
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0235229Z Image: ubuntu-22.04
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0235576Z Version: 20261018.327.1
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0236348Z Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20261018.327/images/ubuntu/Ubuntu2204-Readme.md
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0237219Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20261018.327
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0237789Z ##[endgroup]
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0238444Z ##[group]GITHUB_TOKEN Permissions
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0239789Z Contents: read
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0240133Z Metadata: read
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0240468Z ##[endgroup]
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0241800Z Secret source: Actions
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0242337Z Cache mode: write
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0242780Z Prepare workflow directory
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0454755Z Prepare all required actions
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.0488230Z Getting action download info
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.2636639Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.5585329Z Complete job name: verify-recipes
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6026461Z ##[group]Run set -euo pipefail
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6026918Z [36;1mset -euo pipefail[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6027373Z [36;1mtest -n "$HEAD_SHA"[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6027825Z [36;1mcurl --fail --location --retry 3 \[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6028322Z [36;1m  "https://codeload.github.com/${GITHUB_REPOSITORY}/tar.gz/${HEAD_SHA}" \[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6028883Z [36;1m  -o "$RUNNER_TEMP/repo.tar.gz"[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6029251Z [36;1mmkdir -p "$RUNNER_TEMP/repo"[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6029720Z [36;1mtar -xzf "$RUNNER_TEMP/repo.tar.gz" -C "$RUNNER_TEMP/repo" --strip-components=1[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6030257Z [36;1mprintf 'REPO=%s\n' "$RUNNER_TEMP/repo" >> "$GITHUB_ENV"[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6049260Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6049767Z env:
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6050065Z   HEAD_SHA: 52a279e78a2ed05712fdf5b2b87024ca27f56508
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6050418Z ##[endgroup]
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6173124Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6173796Z                                  Dload  Upload   Total   Spent    Left  Speed
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:01.6174083Z 
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:02.5444775Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:03.5657809Z 100 3328k    0 3328k    0     0  3586k      0 --:--:-- --:--:-- --:--:-- 3586k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:04.5750861Z 100 10.0M    0 10.0M    0     0  5260k      0 --:--:--  0:00:01 --:--:-- 5259k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:05.5654024Z 100 17.2M    0 17.2M    0     0  5976k      0 --:--:--  0:00:02 --:--:-- 5976k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:06.5693807Z 100 25.0M    0 25.0M    0     0  6484k      0 --:--:--  0:00:03 --:--:-- 6483k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:07.5540534Z 100 33.2M    0 33.2M    0     0  6875k      0 --:--:--  0:00:04 --:--:-- 6874k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:08.5653615Z 100 41.0M    0 41.0M    0     0  7071k      0 --:--:--  0:00:05 --:--:-- 7717k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:09.5492127Z 100 49.5M    0 49.5M    0     0  7294k      0 --:--:--  0:00:06 --:--:-- 8086k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:10.5459759Z 100 72.0M    0 72.0M    0     0  9294k      0 --:--:--  0:00:07 --:--:-- 11.0M
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:11.5738340Z 100  100M    0  100M    0     0  11.2M      0 --:--:--  0:00:08 --:--:-- 15.0M
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:12.5655550Z 100  114M    0  114M    0     0  11.4M      0 --:--:--  0:00:09 --:--:-- 16.1M
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:13.5512897Z 100  120M    0  120M    0     0  11.0M      0 --:--:--  0:00:10 --:--:-- 15.9M
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:14.5457246Z 100  126M    0  126M    0     0  10.5M      0 --:--:--  0:00:11 --:--:-- 15.3M
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:15.5505382Z 100  132M    0  132M    0     0  10.2M      0 --:--:--  0:00:12 --:--:-- 12.0M
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:16.5718644Z 100  139M    0  139M    0     0   9.9M      0 --:--:--  0:00:13 --:--:-- 7967k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:17.5538526Z 100  146M    0  146M    0     0   9.7M      0 --:--:--  0:00:14 --:--:-- 6630k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:18.5441417Z 100  153M    0  153M    0     0  9849k      0 --:--:--  0:00:15 --:--:-- 6677k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:19.5519928Z 100  160M    0  160M    0     0  9719k      0 --:--:--  0:00:16 --:--:-- 7059k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:20.5657241Z 100  168M    0  168M    0     0  9621k      0 --:--:--  0:00:17 --:--:-- 7415k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:21.5878114Z 100  177M    0  177M    0     0  9565k      0 --:--:--  0:00:18 --:--:-- 7759k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:22.5622467Z 100  184M    0  184M    0     0  9474k      0 --:--:--  0:00:19 --:--:-- 7839k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:23.5800831Z 100  189M    0  189M    0     0  9253k      0 --:--:--  0:00:20 --:--:-- 7356k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:24.5756467Z 100  195M    0  195M    0     0  9103k      0 --:--:--  0:00:21 --:--:-- 7036k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:25.5758416Z 100  203M    0  203M    0     0  9076k      0 --:--:--  0:00:22 --:--:-- 7133k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:26.5437372Z 100  210M    0  210M    0     0  8997k      0 --:--:--  0:00:23 --:--:-- 6850k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:27.5438627Z 100  217M    0  217M    0     0  8920k      0 --:--:--  0:00:24 --:--:-- 6688k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:28.5696137Z 100  223M    0  223M    0     0  8842k      0 --:--:--  0:00:25 --:--:-- 7114k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:29.5479504Z 100  230M    0  230M    0     0  8767k      0 --:--:--  0:00:26 --:--:-- 7286k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:30.5608557Z 100  237M    0  237M    0     0  8716k      0 --:--:--  0:00:27 --:--:-- 7051k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:31.5739057Z 100  244M    0  244M    0     0  8651k      0 --:--:--  0:00:28 --:--:-- 6987k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:32.5454675Z 100  250M    0  250M    0     0  8575k      0 --:--:--  0:00:29 --:--:-- 6865k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:33.5703141Z 100  257M    0  257M    0     0  8534k      0 --:--:--  0:00:30 --:--:-- 6935k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:34.5760652Z 100  263M    0  263M    0     0  8445k      0 --:--:--  0:00:31 --:--:-- 6707k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:35.5509858Z 100  269M    0  269M    0     0  8380k      0 --:--:--  0:00:32 --:--:-- 6517k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:36.5458820Z 100  276M    0  276M    0     0  8336k      0 --:--:--  0:00:33 --:--:-- 6510k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:37.5726591Z 100  283M    0  283M    0     0  8311k      0 --:--:--  0:00:34 --:--:-- 6720k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:38.5567640Z 100  289M    0  289M    0     0  8245k      0 --:--:--  0:00:35 --:--:-- 6470k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:38.6200053Z 100  296M    0  296M    0     0  8219k      0 --:--:--  0:00:36 --:--:-- 6772k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:38.6200580Z 100  297M    0  297M    0     0  8221k      0 --:--:--  0:00:37 --:--:-- 6921k
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9244677Z ##[group]Run set -euo pipefail
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9244927Z [36;1mset -euo pipefail[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9245272Z [36;1mcurl --fail --location --retry 3 \[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9245773Z [36;1m  'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' \[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9246131Z [36;1m  -o "$RUNNER_TEMP/jdk21.tar.gz"[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9246299Z [36;1mprintf '%s  %s\n' \[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9246518Z [36;1m  '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' \[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9246806Z [36;1m  "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9247039Z [36;1mtar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9247293Z [36;1mprintf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9247668Z [36;1mprintf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9263442Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9263642Z env:
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9263776Z   REPO: /home/runner/work/_temp/repo
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9263933Z ##[endgroup]
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9362705Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9363162Z                                  Dload  Upload   Total   Spent    Left  Speed
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:45.9363411Z 
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:46.1158607Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:46.1159104Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:46.5437013Z 
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:46.9118176Z  42  198M   42 84.5M    0     0   139M      0  0:00:01 --:--:--  0:00:01  139M
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:46.9118526Z 100  198M  100  198M    0     0   203M      0 --:--:-- --:--:-- --:--:--  308M
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:47.3223679Z /home/runner/work/_temp/jdk21.tar.gz: OK
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3125603Z ##[group]Run set -euo pipefail
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3125921Z [36;1mset -euo pipefail[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3126272Z [36;1mpython3 "$REPO/m3/compatibility/check_synexia_recipe_ownership.py"[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3126607Z [36;1mpython3 -m unittest discover \[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3126774Z [36;1m  -s "$REPO/m3/compatibility" \[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3126959Z [36;1m  -p 'test_synexia_recipe_home_policy.py' \[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3127132Z [36;1m  -v[0m
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3146891Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3147093Z env:
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3147222Z   REPO: /home/runner/work/_temp/repo
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3147396Z   JAVA_HOME: /home/runner/work/_temp/jdk-21+35
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3147565Z ##[endgroup]
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3682653Z Traceback (most recent call last):
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3683176Z   File "/home/runner/work/_temp/repo/m3/compatibility/check_synexia_recipe_ownership.py", line 264, in <module>
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3683610Z     raise SystemExit(main(sys.argv))
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3684049Z   File "/home/runner/work/_temp/repo/m3/compatibility/check_synexia_recipe_ownership.py", line 248, in main
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3684701Z     rows = load()
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3685215Z   File "/home/runner/work/_temp/repo/m3/compatibility/check_synexia_recipe_ownership.py", line 141, in load
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3685758Z     raise ValueError(f"frozen legacy recipe drift: {row['legacy_path']}")
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3686435Z ValueError: frozen legacy recipe drift: m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/M3SemanticHasher.java
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3771480Z ##[error]Process completed with exit code 1.
+verify-recipes	UNKNOWN STEP	2026-10-21T13:12:49.3852960Z Cleaning up orphan processes

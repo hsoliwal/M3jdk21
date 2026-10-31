@@ -1,0 +1,95 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 original rank JNI intersection-values Java21
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankBatchIntersectionValuesContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3LongRankBatchIntersectionValuesTest.java'
+      - 'm3/collections/qualification/rank-native-intersection-20261025/**'
+      - '.github/workflows/m3-rank-intersection-values-java21.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  original-java-jni-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify original owner Git blobs at exact PR head
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '19dbdde0a25da8484b225cd88b9cec586e0431e2'
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = '7003a9bf043b118f25f2d21428ddb8ec86267e32'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '04d9410518bfae1894be2fd7324d5c952699d1ce'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankBatchIntersectionValuesContract.java)" = '45b9281a36e224499e7a643af020ed515628f36b'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongRankBatchIntersectionValuesTest.java)" = '5620d728f668c477837e2d3605589fbba15b486d'
+      - name: Strict Java 21 compile and original C17 JNI library build
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/rank/classes" "$RUNNER_TEMP/rank/native" "$RUNNER_TEMP/rank/legacy"
+          javac --release 21 -Xlint:all -Werror -d "$RUNNER_TEMP/rank/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/com/m3/collections/M3LongRankBatchIntersectionValuesContract.java
+          cc -std=c17 -Wall -Wextra -Werror -O2 -fsanitize=undefined \
+            -fno-sanitize-recover=undefined -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$RUNNER_TEMP/rank/native/libm3rankbatch.so"
+          nm -D "$RUNNER_TEMP/rank/native/libm3rankbatch.so" \
+            | grep -Fq 'Java_com_m3_collections_M3LongRankBatchNative_intersectionValues0'
+          # A previous library may load without the new additive JNI symbol.
+          printf '%s\n' '#include <jni.h>' \
+            'JNIEXPORT jlong JNICALL Java_com_m3_collections_M3LongRankBatchNative_legacyMarker(JNIEnv* e,jclass c){(void)e;(void)c;return 0;}' \
+            > "$RUNNER_TEMP/rank/legacy.c"
+          cc -std=c17 -Wall -Wextra -Werror -fPIC -shared \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            "$RUNNER_TEMP/rank/legacy.c" \
+            -o "$RUNNER_TEMP/rank/legacy/libm3rankbatch.so"
+      - name: Execute Java, checked JNI, interpreted JNI and old ABI compatibility
+        shell: bash
+        run: |
+          set -euo pipefail
+          classes="$RUNNER_TEMP/rank/classes"
+          native="$RUNNER_TEMP/rank/native"
+          old="$RUNNER_TEMP/rank/legacy"
+          main=com.m3.collections.M3LongRankBatchIntersectionValuesContract
+          java -cp "$classes" "$main" | tee "$RUNNER_TEMP/rank/java.txt"
+          java -Xcheck:jni -Djava.library.path="$native" \
+            -Dm3.collections.rank.native=true \
+            -cp "$classes" "$main" | tee "$RUNNER_TEMP/rank/jni.txt"
+          java -Xint -Xcheck:jni -Djava.library.path="$native" \
+            -Dm3.collections.rank.native=true \
+            -cp "$classes" "$main" | tee "$RUNNER_TEMP/rank/interpreted.txt"
+          java -Xcheck:jni -Djava.library.path="$old" \
+            -Dm3.collections.rank.native=true \
+            -cp "$classes" "$main" | tee "$RUNNER_TEMP/rank/legacy.txt"
+          grep -Fxq 'PASS M3_NATIVE_INTERSECTION_VALUES checks=3106 native=false' "$RUNNER_TEMP/rank/java.txt"
+          grep -Fxq 'PASS M3_NATIVE_INTERSECTION_VALUES checks=6207 native=true' "$RUNNER_TEMP/rank/jni.txt"
+          cmp "$RUNNER_TEMP/rank/jni.txt" "$RUNNER_TEMP/rank/interpreted.txt"
+          grep -Fxq 'PASS M3_NATIVE_INTERSECTION_VALUES checks=3106 native=true' "$RUNNER_TEMP/rank/legacy.txt"
+      - name: Preserve original JNI parity evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-rank-intersection-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/rank/*.txt
+          if-no-files-found: error
+          retention-days: 14

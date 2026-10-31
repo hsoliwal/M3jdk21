@@ -1,0 +1,23 @@
+{
+  "status": "PASS_SELECTED_SOURCE_JAVA21_CANDIDATE",
+  "base": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+  "receiver_state": "FROZEN_PREIMAGE_ONLY",
+  "operations_per_run": 196611,
+  "baseline_values": true,
+  "baseline_capacity_red": true,
+  "candidate_stdout": "PASS M3ZeroSlotCapacityContract checks=656464 operations=196611 physical=true",
+  "commands": 29,
+  "refusals": 10,
+  "mutants_rejected": 6,
+  "repeat_identical_classes": 12,
+  "api_descriptor_parity": 3,
+  "source_changes": 3,
+  "maven": "NOT_RUN",
+  "openrewrite_sdk": "NOT_RUN",
+  "full_reactor": "NOT_RUN",
+  "jni": "UNCHANGED_NOT_QUALIFIED",
+  "jtreg": "NOT_RUN",
+  "hotspot": "NOT_RUN",
+  "whole_heap_measurement": "NOT_RUN",
+  "throughput_benchmark": "NOT_RUN"
+}

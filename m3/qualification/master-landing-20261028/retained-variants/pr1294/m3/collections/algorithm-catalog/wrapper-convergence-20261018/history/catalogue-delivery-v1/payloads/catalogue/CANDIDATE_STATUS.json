@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "dataset": "m3jdk21-wrappers-r2-20261018",
+  "baseline_revision": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "implementation_status": "FINAL28_SOURCE_CANDIDATES_COMPLETE",
+  "candidate_qualification_status": "PASSED_25_SOURCE_BOUND_RECORDS",
+  "source_id": "FINAL28_R2",
+  "source_review": "FINAL_FILE_REVIEW.tsv",
+  "source_review_sha256": "9745087d4ac73028910466c254bd9c5fae04c4b450a218739918b65e91bb6864",
+  "candidate_execution_source_id": "CANDIDATE25_07BA",
+  "candidate_gates": "candidate-proof/GATES.json",
+  "candidate_gates_sha256": "30baab47ad3269c6655bbc3d553cb839a6f095635389b02157559f1d02c54c19",
+  "candidate_inputs": "candidate-proof/SOURCE_INPUTS.json",
+  "candidate_inputs_sha256": "bac74f9e7b829ab41fb6e1d5ccc8b1e35643a38fa182e78aa999b5d6b1a10c0b",
+  "candidate_gate_count": 25,
+  "candidate_compile_inputs": 141,
+  "scope": {
+    "runtime_source_files": 6,
+    "test_source_files": 22,
+    "total_source_files": 28,
+    "java_source_files": 27,
+    "native_source_files": 1,
+    "junit_cases": null
+  },
+  "actual_sdk_qualification": {
+    "status": "PASS_ACTUAL_SDK_AND_RECEIVERS",
+    "receipt": "runtime-proof/SDK_ACCEPTANCE.json",
+    "sha256": "a9e03d0c1b71cad87b7c26c2f6e348850b96ed6349b3d02e8df515852f07fd37"
+  },
+  "receiver_java_jni": {
+    "status": "PASS_SCOPED_2F_ACTUAL_RECEIVER",
+    "receipt": "FINAL_RECEIVING_STATUS.json",
+    "sha256": "9f1bed14431ac454955811a58a443ee74a3e659e3cd1757eae2706a09f032c72"
+  },
+  "canonical_immutable_pin": {
+    "status": "EXTERNALLY_BOUND_AT_PUBLICATION",
+    "path": "m3/collections/verification/wrapper-convergence-20261018/SOURCE_PIN.json",
+    "included_in_core_packet": false,
+    "reason": "The final immutable canonical commit is recorded outside its own content to avoid a self-referential hash."
+  },
+  "interpretation": "The original 28-file/07ba candidate epoch and its 25 gates remain unchanged. Actual SDK and 2f receiver/module/API/JNI receipts, the separate bridge and allocation observation are bound in FINAL_RECEIVING_STATUS.json. Publication pin is external; historical full guard remains unexecuted.",
+  "retained_receiver_oracles": [
+    "m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationContract.java",
+    "m3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationTest.java"
+  ],
+  "gate_logs": [
+    {
+      "gate": "strict-compilation-07ba",
+      "log": "candidate-proof/strict-compilation-07ba.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "gate": "M3NavigationFailureContract",
+      "log": "candidate-proof/M3NavigationFailureContract.log",
+      "sha256": "ac020446e417abf87f137d8dcaf55a7eacb09d493e5759d501ea6b74ae9f36da"
+    },
+    {
+      "gate": "M3BoundedFilteredNavigationContract",
+      "log": "candidate-proof/M3BoundedFilteredNavigationContract.log",
+      "sha256": "67e84f9b418741a613573c1361226626fb54e9824734ab8629b429898b53415f"
+    },
+    {
+      "gate": "M3WrapperConvergenceSelfTest",
+      "log": "candidate-proof/M3WrapperConvergenceSelfTest.log",
+      "sha256": "8e51693da9861371da95af4f364cf9a02e565fc1c6f324b42736f3fba84daf82"
+    },
+    {
+      "gate": "M3ReadOnlyViewBoundarySelfTest",
+      "log": "candidate-proof/M3ReadOnlyViewBoundarySelfTest.log",
+      "sha256": "0b03fa0ae93648fb8124b467f60252f14daf1ee63e2a79d776df13a65ac9d564"
+    },
+    {
+      "gate": "M3DeepReadOnlyCollectionSelfTest",
+      "log": "candidate-proof/M3DeepReadOnlyCollectionSelfTest.log",
+      "sha256": "ccaf4bb0b42636d010c09ccedadc7922fcd0b67148f1a6d3b9b03e74d97fcfd6"
+    },
+    {
+      "gate": "M3FilteredNavigationBoundarySelfTest",
+      "log": "candidate-proof/M3FilteredNavigationBoundarySelfTest.log",
+      "sha256": "f1b8475db0c4c5861b0ab1b6b345e208a5127cf1a900654a0bc8a1af790613f9"
+    },
+    {
+      "gate": "M3IndexPathMasksLongSelfTest-java",
+      "log": "candidate-proof/M3IndexPathMasksLongSelfTest-java.log",
+      "sha256": "a297ae7038ac67db29d10553dea67c41b9a3f7aca557baec6f0cb3b955579ef4"
+    },
+    {
+      "gate": "M3IndexPathMasksLongSelfTest-native",
+      "log": "candidate-proof/M3IndexPathMasksLongSelfTest-native.log",
+      "sha256": "7ccf92395b3e8c6ed883378d49920fb0c73cdcfd7b814bea2af6ad8dde5aa525"
+    },
+    {
+      "gate": "M3IndexPathMaskAliasSelfTest-java",
+      "log": "candidate-proof/M3IndexPathMaskAliasSelfTest-java.log",
+      "sha256": "1a2a623b038230670c3ba9196709612f0558669e585ac73181a57dcea3c4453f"
+    },
+    {
+      "gate": "M3IndexPathMaskAliasSelfTest-native",
+      "log": "candidate-proof/M3IndexPathMaskAliasSelfTest-native.log",
+      "sha256": "ec77b54cf95fdbda5a79b4cb8c5828f023a3a11b708cb50d86fa9f629a760291"
+    },
+    {
+      "gate": "M3IndexPathZeroStagesSelfTest-java",
+      "log": "candidate-proof/M3IndexPathZeroStagesSelfTest-java.log",
+      "sha256": "da26be3053d3f19af3bc84dfccfe26c3e21838a9c80c481042b6f01bffa246e5"
+    },
+    {
+      "gate": "M3IndexPathZeroStagesSelfTest-native",
+      "log": "candidate-proof/M3IndexPathZeroStagesSelfTest-native.log",
+      "sha256": "b922636637080656dbc5c018deac901137937c4e67ec8c4f472177a4b6d6a8f9"
+    },
+    {
+      "gate": "M3IndexPathImpossibleStageSelfTest-java",
+      "log": "candidate-proof/M3IndexPathImpossibleStageSelfTest-java.log",
+      "sha256": "42948289ce443b54694d994d5a029b11782795f48ded391bf53504720b2ebee1"
+    },
+    {
+      "gate": "M3IndexPathImpossibleStageSelfTest-native",
+      "log": "candidate-proof/M3IndexPathImpossibleStageSelfTest-native.log",
+      "sha256": "9f6e5bda388d36dcb5c13dce4d8f6856b9a944ee2e830fd7cfcba997e66f3602"
+    },
+    {
+      "gate": "M3IndexPathZeroWindowSelfTest-java",
+      "log": "candidate-proof/M3IndexPathZeroWindowSelfTest-java.log",
+      "sha256": "a9d84afb25bb7b2b5dd21258ab0c8760bd665567cfd61da410795fee21746cb4"
+    },
+    {
+      "gate": "M3IndexPathZeroWindowSelfTest-native",
+      "log": "candidate-proof/M3IndexPathZeroWindowSelfTest-native.log",
+      "sha256": "c366dcf7c3d5eac87e85127cc4b64add67e9f06ba72cd3b6d48ddf8e1daa51e7"
+    },
+    {
+      "gate": "M3OrderWindowProof",
+      "log": "candidate-proof/M3OrderWindowProof.log",
+      "sha256": "689aa5e634790140a0052575770b469617858bcd1e0111513a2b5893d5f4bffb"
+    },
+    {
+      "gate": "M3ReadOnlyViewBoundarySelfTest-trace",
+      "log": "candidate-proof/M3ReadOnlyViewBoundarySelfTest-trace.log",
+      "sha256": "0014cf664c4d395f43df534318d33a92416011168d9690b08bfd52ba8a7ebfb2"
+    },
+    {
+      "gate": "M3DeepReadOnlyCollectionSelfTest-trace",
+      "log": "candidate-proof/M3DeepReadOnlyCollectionSelfTest-trace.log",
+      "sha256": "7a10a88ba35159ffdefa7de404e5ed70936dee7f3bc7b2c2336811d52c1d351a"
+    },
+    {
+      "gate": "probe-compilation",
+      "log": "candidate-proof/probe-compilation.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "gate": "FilterGapWitness",
+      "log": "candidate-proof/FilterGapWitness.log",
+      "sha256": "a05160f926b530c2fac039e432fb712c4c5518e08c68d3a20c74df1df3a19389"
+    },
+    {
+      "gate": "M3ComparatorFailureProbe",
+      "log": "candidate-proof/M3ComparatorFailureProbe.log",
+      "sha256": "5408289657af586b76932a48e56c35f1bf487f7d123f7141412f9b9ada0146fb"
+    }
+  ],
+  "limitations": [
+    "Exact admitted tree owners and known private M3 chains only for bounded-anchor enhancement",
+    "Opaque owner original range failure behavior retained",
+    "Actual SDK/receiver/public API/native ABI and missing-library configuration require their own receipts",
+    "JNI local Linux runtime parity only; no native comparator/predicate callbacks",
+    "No complete SDK/JDK/global phase promotion or performance speedup claimed"
+  ]
+}

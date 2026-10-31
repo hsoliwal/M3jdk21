@@ -1,0 +1,30 @@
+{
+  "donor_java_compiled": 237,
+  "donor_java_custody": 311,
+  "generated_source_admission": {
+    "all_generated_output_hashes_verified": true,
+    "applied_sdk_output_sha256": "7ef4305110c1325206276550f2e1ee77ba8e3612bcf117b0f8bfb8126213ceb8",
+    "outputs": 356,
+    "payload_summary_sha256": "726fef5d0a6758b412a169d042c7e16a7ed47c92d39080ba9ecb523481e975f5"
+  },
+  "input_files": 389,
+  "prior_evidence_and_frozen_helper_sha256": {
+    "SOURCE_LOCK.final2.tsv": "a9f7ffb047e63620a0c6f45dcce4955bc4e0405bceeb524be699a4b3eaba54ad",
+    "qualification-final2/command-receipt.json": "eb4819b8f71fe82faaa017b424466b97c7dbfcd78a7e210c9c5b46296f0d1386",
+    "qualification-final2/consumer-run.log": "7e88fd68f17bd026978aabae13d1ff8abda5eec149547e9811a9c53c1fcf2f13",
+    "qualification-final2/qualification.json": "608f641ea5a99b3ceaa75c0df3c98eaf1b35e8271e25284ae003aa44f34cfbdf",
+    "receiver/m3/fs/tools/qualify_vfs.py": "07735a71d3466900678c8b4a0f1071724145a6d1a8f83a6c7bad8aa7389a410e",
+    "receiver/m3/fs/tools/vfs_pack_support.py": "410f158fdd7c7a81c98f5b2beb320c8eee23db20dff8db237bdd73722a7811e0",
+    "source-lock-final2.json": "3a44e23bc4f9f707db2708d687ede5040f97838237bc750400ead438cb2386f5"
+  },
+  "receiver_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+  "sealed_utc": "2026-10-20T11:15:17.264288+00:00",
+  "shared_tooling": {
+    "pinned_files_verified": 12,
+    "receipt": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/authored/packaging/shared-tooling-copy-receipt.json",
+    "receipt_sha256": "761e9325ca4f7575f5505aa486013cd231b306fef20cfd04804442709e8d329c"
+  },
+  "source_lock": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.capture.tsv",
+  "source_lock_sha256": "c0de3ce42ee865bef48a037b1734fb606f4bb5acc206154826bb9102b07b9ec1",
+  "vfs_upstream_commit": "685b3b723a83e56034391350ea1a02231411142f"
+}

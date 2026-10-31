@@ -1,0 +1,110 @@
+{
+  "schema": "M3_ORIGINAL_PROVIDER_SOURCE_REVIEW_SUMMARY_V1",
+  "sourceCommit": "5a3339df604fba2ea0cedd80707bc616e41cb596",
+  "assemblyAudit": {
+    "repository": "hsoliwal/com.synexia",
+    "sourcePath": "synexia-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
+    "sourceCommit": "5a3339df604fba2ea0cedd80707bc616e41cb596",
+    "sdkFiles": 72,
+    "sdkBytes": 1919301,
+    "pinnedFiles": 71,
+    "reconstructedSdkTree": "cb7764db204a5e87fca101bbec8bb9944785d589",
+    "pinsGitBlob": "176375972d8a329f7c7c39a5ff1524c5fc7957f7",
+    "pinsSha256": "b3c1ba7f3b85e4c0a11949f5f4b787fc994d888ac8a0c0d97aa6ae04b6276b73",
+    "sourceOnly": true
+  },
+  "sourceReviews": [
+    {
+      "scope": "Existing SDK successor, exact Git identity and71 byte bindings",
+      "result": "CLEAR_SOURCE_ONLY_EXECUTION_PENDING"
+    },
+    {
+      "scope": "Four changed SDK files: migration-relevant metadata and first-party qualification source",
+      "result": "PUBLIC_PROOF_TOOLING_DISCLOSURE_CLEAR_ONLY"
+    }
+  ],
+  "sourcePublication": {
+    "files": 72,
+    "sourceGitPathAndTreeVerified": true,
+    "receiverPublicationReadbacks": "PENDING_NEW_HEAD_READBACK"
+  },
+  "currentRootReadPaths": 50,
+  "currentHashObligations": 80,
+  "receiverBase": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+  "execution": "CURRENT_EXACT_CANDIDATE_NOT_RUN",
+  "fullMigrationComplete": false,
+  "phaseAdvanced": false,
+  "sourcePullRequest": 12431,
+  "previousReceiverSummary": {
+    "schema": "M3_ORIGINAL_PROVIDER_SOURCE_REVIEW_SUMMARY_V1",
+    "sourceCommit": "6e8bfaf8ebc40c0b956eea93e976495a0b1df312",
+    "assemblyAudit": {
+      "repository": "hsoliwal/com.synexia",
+      "gitBlob": "1f78ef1a019a31ab18b8a32b60abf181d2f060b1",
+      "sdkFiles": 72,
+      "sdkBytes": 1873351,
+      "pinnedFiles": 71,
+      "reconstructedSdkTree": "139dd99093d8d0add7f6b7392e9c73b92736d572",
+      "sourceOnly": true
+    },
+    "sourceReviews": [
+      "81a82e636813c97cbf54cebabe2d65d7d4a130ff",
+      "1f78ef1a019a31ab18b8a32b60abf181d2f060b1",
+      "96b34e74763b9818123de7a7fcc81d20d7de523d"
+    ],
+    "sourcePublication": {
+      "files": 84,
+      "correctedPublicationReadbacks": "PENDING_NEW_HEAD_READBACK",
+      "initial83ExactReadbacks": true
+    },
+    "currentRootReadPaths": 50,
+    "currentHashObligations": 80,
+    "receiverSparseInputs": 55,
+    "receiverBase": "4e29dc9d4141261e8763fbe9ffd6a20e017b1aff",
+    "execution": "NOT_RUN",
+    "fullMigrationComplete": false,
+    "phaseAdvanced": false,
+    "supersededIntegrationConclusion": "bf7f674e453ec44fae18392c2b7f876cf4c3a622",
+    "failedAttempt": {
+      "run": 39029940546,
+      "jobs": 0,
+      "steps": 0,
+      "conclusion": "failure",
+      "correction": "workflow-context-correction.json"
+    }
+  },
+  "previousReceiverBinding": {
+    "schema": "M3_ORIGINAL_MAPPING_PROVIDER_RECEIVER_BINDING_V1",
+    "repository": "hsoliwal/com.synexia",
+    "sourceCommit": "525e0c3704f8c4b4d9eef54799d1b4c947e37b5f",
+    "sourcePullRequest": 12245,
+    "sourcePath": "synexia-openrewrite-recipes/recipes/m3-original-mapping-provider-20261017/sdk",
+    "receiverCorePath": "m3/migration/original-provider-20261017/sdk",
+    "moduleGitTree": "638520715ffb00255639cb1e6667494bab729b53",
+    "pinsSha256": "75f37d1093f5fd3d657de32bcab672f725f6391b4c59910aece1c2ff238951d7",
+    "workflowSha256": "faf6a553557508404de8b644ae7ff17ffaf45c74d5b0cb6f3df86c583a0b2bc0",
+    "workflowGitBlob": "f04b6bfc76e5a671968a478f44cf13268c04e5e9",
+    "receiverBase": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+    "originalCanonicalPreimageGitBlob": "4f5911d625090913d85f9cf41b1ead1694dffade",
+    "canonicalRecipePostimageGitBlob": "853607c6fef4b08ba2a3fd6df35121ac0594db30",
+    "runtimeApplied": false,
+    "phaseAdvanced": false
+  },
+  "disclosure": {
+    "mode": "INDEPENDENT_APACHE_MODULE",
+    "canonicalOwner": "hsoliwal/com.synexia",
+    "newRuntimeImplementationBodies": false,
+    "newRuntimeDependency": false,
+    "newWorkflow": false,
+    "credentialsOrPrivateExecutionArtifacts": false
+  },
+  "productOverlay": {
+    "files": 60,
+    "generatedBy": "com.synexia.m3.OriginalMappingProvider20261017",
+    "execution": "NOT_RUN",
+    "applied": false
+  },
+  "runtimeApplied": false,
+  "canonicalProductionMapApplied": false,
+  "receiverSparseInputs": "CURRENT_WORKFLOW_READS_UNCHANGED; NO_NEW_COUNT_ADMITTED"
+}

@@ -1,0 +1,101 @@
+{
+  "schema": "M3_PROGRESS_JOB_BEHAVIOR_PROOF_V1",
+  "result": "FAIL",
+  "product_sources_written": false,
+  "jdk_images_modified": false,
+  "full_image_with_new_api": "NOT_RUN_PATCHED_IMAGE_ONLY",
+  "public_api_admission": "PENDING_FULL_IMAGE_API_REVIEW_AND_ORDERED_PHASE",
+  "Object_universal_compatibility": "HOLD_UNCHANGED",
+  "phase": "STRING_UNCHANGED",
+  "commands": [
+    {
+      "label": "stock-javac-version",
+      "command": [
+        "/tmp/m3jdk21-toolchain-20261020/jdk-21.0.12.1+1/bin/javac",
+        "-version"
+      ],
+      "exit": 0,
+      "expected_success": true,
+      "stdout_sha256": "2df6b9c76e710158266aeaae8f3578eaed8ddd747a2272483506ad9a8a5e644a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "review_sha256": "7b5d7587e72dd8e91be92b1eb2bc9007169fc312c5722272e43c531595f1bf25",
+  "source_sha256": "d2734bcc607b1af8a593387040da53886530a310685a26965a5aa77609aaefc8",
+  "existing_dependencies": [
+    {
+      "path": "src/java.base/share/classes/java/lang/Runnable.java",
+      "sha256": "b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a",
+      "bytes": 2565,
+      "git_blob": "8fb270de68f57fc5463bfecd6ac8418012d16fde",
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+      "disposition": "EXISTING_OWNER_REUSED_UNCHANGED"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",
+      "sha256": "6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f",
+      "bytes": 3165,
+      "git_blob": "7cd9b5d7d538b4dffe426cacc9a03651f635e005",
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+      "disposition": "EXISTING_OWNER_REUSED_UNCHANGED"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+      "sha256": "77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733",
+      "bytes": 1534,
+      "git_blob": "6e08ac638e7500945cdabb77beec0ad434b2cfe1",
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+      "disposition": "EXISTING_OWNER_REUSED_UNCHANGED"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "sha256": "368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93",
+      "bytes": 3394,
+      "git_blob": "58172366681470702282607e58f542f47079993a",
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+      "disposition": "EXISTING_OWNER_REUSED_UNCHANGED"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "sha256": "48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc",
+      "bytes": 10395,
+      "git_blob": "38637beaea7a7adf7375dc36dbcf95c87183d1a0",
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+      "disposition": "EXISTING_OWNER_REUSED_UNCHANGED"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Executor.java",
+      "sha256": "e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa",
+      "bytes": 6052,
+      "git_blob": "4fd7398351048045a6b77c57393b52ed492730fe",
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+      "disposition": "EXISTING_OWNER_REUSED_UNCHANGED"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "sha256": "9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d",
+      "bytes": 20247,
+      "git_blob": "fa608ebcf4bcf49f55475471aea8ad31b1328490",
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+      "disposition": "EXISTING_OWNER_REUSED_UNCHANGED"
+    }
+  ],
+  "external_eclipse_jars": [
+    {
+      "path": "org.eclipse.equinox.common-3.21.0.jar",
+      "sha256": "2545ed27d408f19882695703097e5998bf25652bd0dac76a8e6d1391ec228ab7"
+    },
+    {
+      "path": "org.eclipse.osgi-3.24.300.jar",
+      "sha256": "4a770aa4a78df653af871073c8b4ddd56884895f5fc71d10c40b4289ac7c8b9f"
+    }
+  ],
+  "failure": "[Errno 2] No such file or directory: '/workspace/scratch/53bcd62c244c/work-progress-runtime-20261020/UNAVAILABLE-M3JDK21-image/bin/javac'"
+}

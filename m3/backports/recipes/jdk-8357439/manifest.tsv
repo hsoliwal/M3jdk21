@@ -1,0 +1,3 @@
+path	preimage	upstream_commit	upstream_git_blob	role
+make/modules/jdk.jcmd/Copy.gmk	ABSENT	8549d1896054dd230ba3038c83bce23b10dcda22	f3240f9f61db734f6dbd248ed4052e642b059874	build-copy-rule
+src/jdk.jcmd/share/conf/bash-completion/jcmd	ABSENT	8549d1896054dd230ba3038c83bce23b10dcda22	c1aca269e721d422a8809fbf1691d11548fcac2d	bash-completion

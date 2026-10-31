@@ -1,0 +1,64 @@
+{
+  "source_commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+  "destination_preimage_commit": "df06cdee5a8526f573b3ad89622824d0b49e2f25",
+  "plan_sha256": "af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e",
+  "map_after_sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3",
+  "four_operational_files_still_E2": true,
+  "source_artifacts": 17,
+  "source_production_changes": 9,
+  "records": 46,
+  "unchanged_records": 44,
+  "gates": 20,
+  "source_export_admitted": false,
+  "source_receipt_refs": {
+    "source_fields": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_FIELDS_AND_PROOFS.json",
+      "bytes": 64185,
+      "sha256": "b0a1ff2a675017bc4eda2620a031bb963d038c21e10ddacb8f57b1fc51f6188a",
+      "git_blob_sha1": "33670d4c3f8d5e9cc1be49f2125c95228abf4a06"
+    },
+    "source_review": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_REVIEW.md",
+      "bytes": 12537,
+      "sha256": "7f5f0c54cbac2b8d8201bb386678a03284f99cacdf9295eb4cac3ae9689b85d0",
+      "git_blob_sha1": "7ff0f759dcaa03c662b656ad09f86995fad0df36"
+    },
+    "root_accounting": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/ROOT_ACCOUNTING.json",
+      "bytes": 114933,
+      "sha256": "cfe76d41dda4220937086d951a126bf04dec0d282ba088b6de2a6bff33b6e14d",
+      "git_blob_sha1": "828eca9458cc37ba159984538b0f2e309df592f4"
+    },
+    "publication_readback": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json",
+      "bytes": 370323,
+      "sha256": "03ba5aa231929079fda7772dc6a798a687ba7486fa81ceacc0723407330f956a",
+      "git_blob_sha1": "adb6d06c45d636c29612fe6442374b429a8cba60"
+    },
+    "production_body_readback": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_PRODUCTION_BODY_READBACK.json",
+      "bytes": 3206,
+      "sha256": "0abd6ddcbe96eac76da9a708a2ffc9350c546c1c63382686c600dad3f7fc20df",
+      "git_blob_sha1": "a33428c6607f9ff928748e6d25fe90cee2f9d336"
+    },
+    "pr_observation": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/PR_STATE_AFTER_SOURCE_PUBLICATION.json",
+      "bytes": 814,
+      "sha256": "c23d1948cb21f8b3a5e294d3fb0c6c14527a9bed646e082a4dc94ae98832ceb5",
+      "git_blob_sha1": "dc87ed373e521d39ea72bddd81aeabb8dbdb1b99"
+    },
+    "source_ci_observation": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_INITIAL_CI_OBSERVATION.json",
+      "bytes": 683,
+      "sha256": "6268a6944bf4f5a17f7783daaee5e462f68f2e1cb0853121dba9dc9049a077e9",
+      "git_blob_sha1": "8c66af2495565eea86d01fbe3af09313ccc35a15"
+    },
+    "master_preimage_observation": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/M3_CURRENT_MASTER_PREIMAGES.json",
+      "bytes": 1137,
+      "sha256": "6e3d2c9760ee93a10b0da660e84a77d002ea2312954b42d3459803c867b57475",
+      "git_blob_sha1": "ea4fb9e885a4e393b48faa479af8b1c1663e8edd"
+    }
+  },
+  "recipe_execution": "PENDING_AFTER_FREEZE"
+}

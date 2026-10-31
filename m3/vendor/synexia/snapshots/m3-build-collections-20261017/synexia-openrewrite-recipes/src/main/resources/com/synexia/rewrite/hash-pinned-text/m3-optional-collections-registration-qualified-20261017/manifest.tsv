@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	template
+m3/docs/name-mapping.json	fa9832d48ec7dc0334fcb3a02e1b665612ca3a9f3dfe13cd104ff3f2c42871ac	73b99f1ae8f320af63604591e593c4451716e8c22edfdef2a18b42bd5656524d	template-01.txt
+m3/tooling/module-packs/pom.xml	3f09ef2205f1d22b2fd82e84c21697a506813d379dfe61f393d7b1a3ee2989bb	3d7ad6eaa3c6fd8553eedfda273e691d2494507ab635091e815c502deb7f0fb9	template-00.txt

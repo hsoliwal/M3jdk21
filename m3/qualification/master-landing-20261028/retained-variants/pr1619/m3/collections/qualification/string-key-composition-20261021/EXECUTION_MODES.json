@@ -1,0 +1,49 @@
+{
+  "status": "SEALED_FRESH_INSTALLED_SDK_HANDOFF",
+  "qualification_sha256": "c707036c38bf4c8c56be9abd2caa1af7524115c12983ce952d8f3a92b67f8a75",
+  "source_ready_receipt_sha256": "071326988c9b2a18c42d792c2ed92172c0e4adb4ee774d1e5ac3793fd419ac01",
+  "harness_sources": {
+    "CONTRACT.md": "a0583f98189a4e189e162f25f1204744279fba6f24ed7a3fa6c057a28c138164",
+    "common.py": "1193be663d50aee34ebfdaad9b43d567647af65df4bbd290afb4cb2cc7d948ab",
+    "prepare.py": "f6b82396895c6705d8286d7f3657edfb3cf21ba7accc6754dda8b34f6f760b21",
+    "qualify.py": "1b168ef15c8a9964c80b668996630fea7e3fcb66bef4b91546bba2a453c79a4d",
+    "LinkedM3SdkOwnership.java": "86d78762e0f73e50fbc4097d947ce061721264272536a4b43531f80c9fca8131",
+    "LinkedM3VmConfiguration.java": "3bce66fc6480057acbe15d6a0536c19ae661b93a6cd3ea8c14cc277736d3a7ad"
+  },
+  "packaging_owner_sources": {
+    "m3/tooling/jmod-recipes/tools/jmod_pack.py": "8acdc46eaa0cac0861384d6caf252d1a2f763c80d09b68932177e1dac598bfaf",
+    "m3/tooling/jmod-recipes/tools/jmod_image.py": "407622e9a4db86f1b9abae2e451638713b151f14256190c0e28fe7d0739eb7cf"
+  },
+  "vm_configuration_sha256": "1a7e2c500590f1ae7db3485648d214e8aec0f2178f8a0408f1c3692072307783",
+  "full_junit_reported_vm_info": [
+    "mixed mode"
+  ],
+  "full_junit_vm_configuration": {
+    "String.M3_JOINED_STRINGS": false,
+    "UseCompiler": true,
+    "CompactStrings": true,
+    "UseM3StringStorage_option": "not explicitly enabled; experimental option is not exposed through the diagnostic MXBean while locked",
+    "required_collection_jni": true,
+    "rank_native_opt_in": true,
+    "signal_native_opt_in": true
+  },
+  "dedicated_tree_vm_configuration": {
+    "UseM3StringStorage": true,
+    "UseCompiler": false,
+    "vm_mode": "-Xint interpreted",
+    "CompactStrings_modes": [
+      true,
+      false
+    ]
+  },
+  "origin_checks": {
+    "probe_classes": 9,
+    "observed_production_collection_classes": 370,
+    "all_observed_production_origins": "jrt:/com.m3.collections",
+    "installed_native_libraries": 10,
+    "all_native_origins": "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib",
+    "all_sdk_jni_exports": 21
+  },
+  "configuration_probe_attempt1": "Preserved read-only MXBean limitation; no production or test failure. Final probe uses the actual injected String field when experimental option is locked.",
+  "publication_boundary": "No image binaries, caches, raw surefire XML or bulk system-property dump in the essential manifest."
+}

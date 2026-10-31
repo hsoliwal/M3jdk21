@@ -1,0 +1,17 @@
+kind	ops	commons_linked	m3_bidimap	m3_dual_linked	commons_hash
+entryAfterRemoval	2007	2007	961	968	1702
+entryRemove	2134	2134	2134	2134	1704
+entrySetValue	1999	1999	1999	1999	1583
+inversePut	2004	2004	2004	2004	1171
+keyIteratorRemove	2054	2054	2054	2054	1736
+keySetRemove	2016	2016	2016	2016	1692
+mapIteratorSetValue	1967	1967	1967	1967	1589
+put	1890	1890	1890	1890	1093
+putAll	1957	1957	1957	1957	1259
+rawArrayEntrySetValue	1986	1986	1986	1986	1605
+remove	1960	1960	1960	1960	1653
+removeValue	2027	2027	2027	2027	1676
+serializationRoundTrip	1929	1929	0	1929	1534
+staleValuesIteratorRemove	1992	1992	1992	1992	1608
+valuesContainsAll	2030	2030	2030	2030	1630
+valuesRemove	2048	2048	2048	2048	1694

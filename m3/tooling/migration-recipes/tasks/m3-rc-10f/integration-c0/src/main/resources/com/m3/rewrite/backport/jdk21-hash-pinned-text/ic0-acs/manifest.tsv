@@ -1,0 +1,3 @@
+m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java	677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298	c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55	target-1.txt
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after	677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298	c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55	target-2.txt
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv	b901f0b1aae122711792a66dc9750b9ba4608d59613641e74f378218757cbb4d	0bff4ddf1d6a002510903127bc56c7a2921bfa5851ac8217007eb3699b9febac	target-3.txt

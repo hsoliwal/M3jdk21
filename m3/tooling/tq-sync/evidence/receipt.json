@@ -1,0 +1,136 @@
+{
+  "schema": "m3.tq-sync-receipt/1",
+  "date": "2026-10-06",
+  "target_parent": "1c389e31805fb4faf5d9fe256c8dc6797a2eadff",
+  "runtime_owner": "hsoliwal/M3jdk21",
+  "convergence_workspace": "hsoliwal/com.synexia",
+  "plan_sha256": "31b03129fe81d5e0681185763ad0d2059c16bcd7b93e7dc4b8290880c5317096",
+  "exact_recipe_outputs": 24,
+  "qualification": "focused-patch-runtime-and-recipe-pass; complete-image-admission-pending",
+  "toolchain": {
+    "java": "21.0.8+9",
+    "maven": "3.9.9",
+    "execution": "Linux x86_64, offline Maven, stock Java patch-module with exact three product sources"
+  },
+  "retained_kernel": {
+    "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+    "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155"
+  },
+  "tests": {
+    "successor_junit": 3,
+    "tq_release_junit": 13,
+    "tq_ubsan_junit": 13,
+    "lane28_clean_junit": 20,
+    "lane28_python_within_junit": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "tq_runtime": {
+    "modes": [
+      "interpreter",
+      "mixed",
+      "c1",
+      "c2"
+    ],
+    "checks_per_mode": 308649,
+    "containment_fact_sets": 449,
+    "containment_pairs_per_mode": 201601,
+    "native_calls_per_mode": 4458,
+    "warm_payload_reads": 0,
+    "c1_c2_containsAll_nmethods": "required and observed",
+    "mutants_rejected": [
+      "always-true containment",
+      "8-bit native truncation",
+      "missing seam keys"
+    ]
+  },
+  "mapping": {
+    "records": 52,
+    "other_records_unchanged": 51,
+    "gates_unchanged": 20,
+    "completion": "INCOMPLETE",
+    "tq_status": "implemented-unverified",
+    "no_status_promotion": true
+  },
+  "sealed_checks": [
+    "exact generated outputs",
+    "apply",
+    "fixed point",
+    "rollback",
+    "destination drift refusal",
+    "mixed-state refusal",
+    "dependency drift refusal",
+    "no writes on refusal"
+  ],
+  "not_qualified": [
+    "current fastdebug image",
+    "image-local JNI",
+    "jtreg",
+    "full recipe reactor",
+    "cross-platform/workloads",
+    "general regex integration beyond retained literal consumers",
+    "universal performance gain"
+  ],
+  "evidence": {
+    "evidence/baseline-failure.log": "9f70b2f15afe253a97b1d46c442e6ebee30bf596212b3b11e8b28e20f70de045",
+    "evidence/com.m3.lane28.Lane28Test.txt": "ccc435381ab758e85362940101210dd3a1b6735744d0a66029c3f776c5463313",
+    "evidence/com.m3.lane28.SparseFillTest.txt": "6d5ea903f0a2d6cee772827bc3874f448c5fe90b2eb36d9274624916b3834ebb",
+    "evidence/com.m3.tq.TQSyncTest.txt": "e4d68bc6a448c877cdeb4ef0bfea315b8c873e41725ed6a406fceaa7df2064ae",
+    "evidence/com.m3.tq.TQTest.txt": "8b004256ad6c7f4b0ef6900e6af24fe14a51b3b3c96b4079afe06a25c330bfaa",
+    "evidence/compiler-evidence.json": "0fcb7de75495b2f3b8953f40538c75279bd38a446dcf34640fea09bc2c3e4729",
+    "evidence/lane28-custody.json": "e42a8cf1c0df8480f29b0c5a4c7886aa686161b9d249d7a50a7539103e32a916",
+    "evidence/lane28-maven.log": "e358f00f70f2c3bc8cbe84bac55beae9a565b817d2a70fb6da2ba888540cea03",
+    "evidence/release/c1.log": "3bc7e102ad599f74e129a78515e43312d2a6ee690d0258265bcd5ff0570ebf15",
+    "evidence/release/c2.log": "3bc7e102ad599f74e129a78515e43312d2a6ee690d0258265bcd5ff0570ebf15",
+    "evidence/release/com.m3.tq.TQTest.txt": "8b004256ad6c7f4b0ef6900e6af24fe14a51b3b3c96b4079afe06a25c330bfaa",
+    "evidence/release/interpreter.log": "55695bb123fd489212c094f5cda1b5b442de93f6c2eb9791b57c638fcbf29df6",
+    "evidence/release/maven.log": "b07de80239954c8699b32ab5a7fe8374364ecc79e6ffb3d188a43cb006999cd5",
+    "evidence/release/mixed.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/target-rebase.json": "b11255b6f82a2f5e324790d134965b70665afa6261784d8d3abfdde40cc6c347",
+    "evidence/tq-custody.json": "22c74808a5433930af683f809bf08c7582ffeb79cf3e3d054b794c48cc9be001",
+    "evidence/tq-rebased-maven.log": "b07de80239954c8699b32ab5a7fe8374364ecc79e6ffb3d188a43cb006999cd5",
+    "evidence/tq-sync-custody.json": "d58b41b86ef98407c88f0392959185049742666516d19f1d48c90eede0b81737",
+    "evidence/tq-sync-maven.log": "e0a5291e721d5f27cbc2a554c86499b19fd04b5b64cb34b2eb97c3629a9e1b5e",
+    "evidence/tq-ubsan-c1.log": "3bc7e102ad599f74e129a78515e43312d2a6ee690d0258265bcd5ff0570ebf15",
+    "evidence/tq-ubsan-c2.log": "3bc7e102ad599f74e129a78515e43312d2a6ee690d0258265bcd5ff0570ebf15",
+    "evidence/tq-ubsan-containment-mutant.log": "7f0c04664c781d698bc64035a099fd8c2e567d58c05f3f77ed439df099bafb32",
+    "evidence/tq-ubsan-interpreter.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/tq-ubsan-jdeps.log": "340c89d6b34a8001f98fe9905e786ee8b711c0804a62e3b74efea017754cd6a3",
+    "evidence/tq-ubsan-maven.log": "625e162b069f44a675fa81725ea272da3ceca6c75d06dc6e775ec7ee2eadc8c0",
+    "evidence/tq-ubsan-mixed.log": "55695bb123fd489212c094f5cda1b5b442de93f6c2eb9791b57c638fcbf29df6",
+    "evidence/tq-ubsan-native-mutant.log": "984f6dc4ad57799abaea78d6afb4a329f3104c64e71f97e4afa68fdfa8342de0",
+    "evidence/tq-ubsan-seam-mutant.log": "289986e5963a660ed1f13895c78e6a2e63d976a8fa9550bcf983741fbb985bf9"
+  },
+  "outputs": {
+    ".github/workflows/m3-lane28.yml": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb",
+    ".github/workflows/m3-tq.yml": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894",
+    "m3/docs/m3-porting.md": "ac399d376bf624d81a0fd3ed39005f0a71807afe3164fc611c346dcf0463e47a",
+    "m3/docs/name-mapping.json": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da",
+    "m3/tooling/lane28/plan.json": "592477414957af5b2780b5c9e4ce09391e6f3dc60d11e3ceff5cd0683338796b",
+    "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/manifest.tsv": "a90b5a4571363d6a34bacf94daa0671cd447196b2938fa62545aed5e39a1458b",
+    "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da",
+    "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60",
+    "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/workflow.yml.txt": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb",
+    "m3/tooling/tq/inputs.tsv": "d764241cfc52f875c7c2b1b20f27b46d5bdce17d39e05cd32b3e409061ebe17e",
+    "m3/tooling/tq/pins.json": "a7c4ba68ec1c51febf7a75d3539b857713b4efb2101f6cdea90ddb724e0f841f",
+    "m3/tooling/tq/plan.json": "8e6db1b290e9ee55bc028ce51e4aae85773cb8be167b7193ee721b031f46be4b",
+    "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/manifest.tsv": "61f9431a2426d37e910d64fdf337d604d3cc5af31bb25bb546acdc0d07a1fd38",
+    "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60",
+    "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before": "bc6f8d7d7562d067d916a4987749019c5085e88665592ac533b49ef9a4856132",
+    "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/verify-image.sh.txt": "fddf22592f0461fa91bd25753d8d41aa444ac1406fa74a9d04351f2b8585803d",
+    "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/workflow.yml.txt": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894",
+    "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQ.java.txt": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+    "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQTest.java.txt": "f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f",
+    "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
+    "m3/tooling/tq/src/test/java/com/m3/tq/TQTest.java": "584ea5dd53862f1519b7a8c4fc2c41454a0e61c29cff8da8a759011a8572e24d",
+    "m3/tooling/tq/verify-image.sh": "fddf22592f0461fa91bd25753d8d41aa444ac1406fa74a9d04351f2b8585803d",
+    "m3/tooling/tq/verify-plan.py": "ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978",
+    "test/jdk/java/lang/String/M3TQTest.java": "f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f"
+  },
+  "hosted_ci_observation": {
+    "commit": "842df1c4af944cab3c9d21fd8fc12417b82a276a",
+    "status": "seven workflows queued when inspected; no pass claim"
+  },
+  "scope_reconciliation": "244 of 245 scoped preimage/dependency blobs unchanged at current master; only current M3String top-level mappings advanced. All are preserved."
+}

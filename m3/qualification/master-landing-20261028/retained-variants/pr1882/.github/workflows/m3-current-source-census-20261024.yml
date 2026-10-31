@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 collection current-source inventory (non-admission)
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/qualification/current-source-census-20261024/**'
+      - '.github/workflows/m3-current-source-census-20261024.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  read-only-inventory:
+    name: Original source census only - never promotion
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Require the exact current PR head
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+      - name: Strict read-only source-census oracles
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover \
+            -s m3/collections/qualification/current-source-census-20261024 \
+            -p 'test_audit.py' -v
+      - name: Report every current source hash without altering historical seals
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/collections/qualification/current-source-census-20261024/audit.py \
+            "$PWD" --expected-head "$EXPECTED_HEAD" \
+            --output "$RUNNER_TEMP/m3-collection-source-census.json"
+          echo '::warning::This census is inventory evidence only; full source/admission gates remain HOLD.'
+      - name: Retain exact-head census evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-current-source-census-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-collection-source-census.json
+          if-no-files-found: warn
+          retention-days: 14

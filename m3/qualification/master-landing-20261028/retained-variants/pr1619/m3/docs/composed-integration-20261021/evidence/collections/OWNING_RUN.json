@@ -1,0 +1,39 @@
+{
+  "command": [
+    "python3",
+    "m3/collections/qualification/full-java-jni-20261018/verify.py"
+  ],
+  "returncode": 0,
+  "seconds": 200.0424246170005,
+  "utcStarted": "2026-10-21T02:43:05.155191+00:00",
+  "log": "full-owning-002.log",
+  "javaHome": "${JAVA_HOME}",
+  "mavenCache": "${M2_REPO}",
+  "mavenOffline": true,
+  "recipeStage": "combine-views-final21",
+  "sourceCheck": {
+    "status": "PASS",
+    "utc": "2026-10-21T02:42:55.743172+00:00",
+    "packets": [
+      {
+        "packet": "collections",
+        "manifestSha256": "bad67ae7608340cd8c254ee932be748a9503d66e179289bd285d10889106fd8f",
+        "files": 13,
+        "allPostimagesMatch": true
+      },
+      {
+        "packet": "views1636",
+        "manifestSha256": "2d00d5e0fc05c8f150596e2ffba4bfe863ebba1a737d11db56865326aabbb248",
+        "files": 13,
+        "allPostimagesMatch": true
+      }
+    ],
+    "recipeStage": "combine-views-final21",
+    "applicationReceiptSha256": "700126c0cd98693ffca9dbbd3452db9dfdfce737241e4586799e7bc619db586c"
+  },
+  "javaVendor": "Eclipse Temurin 21.0.12.1+1",
+  "compiler": "GCC 13.3; strict C17, generated JNI headers, fatal UBSan",
+  "proofSha256": "4fbc24a40e0a78ec10deeacfddf5a42a40fe067f726fb83d7e15f0c9d9b1deaa",
+  "rawLogSha256": "156dfe4ecb1e05998b5b21c8d227e6605f211c2fe8bd723b613717c8e37216ee",
+  "normalization": "Commands retain argument order and flags; private absolute paths are replaced with the README variables."
+}

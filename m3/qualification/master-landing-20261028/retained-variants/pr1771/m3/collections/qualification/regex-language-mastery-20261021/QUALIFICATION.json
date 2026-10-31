@@ -1,0 +1,4106 @@
+{
+  "api_and_jni": {
+    "all_generated_headers_byte_identical": false,
+    "collection_public_protected_and_private_layout_equal": true,
+    "direct_jni_scope": "Unchanged actual test main/native helper, both compact settings in each image. This direct runner does not invoke jtreg and is not a native Unicode matcher qualification.",
+    "direct_modified_utf8_jni_runs": [
+      {
+        "assertions": 242452,
+        "cases": 16122,
+        "mode": "compact",
+        "phase": "baseline"
+      },
+      {
+        "assertions": 242452,
+        "cases": 16122,
+        "mode": "wide",
+        "phase": "baseline"
+      },
+      {
+        "assertions": 242452,
+        "cases": 16122,
+        "mode": "compact",
+        "phase": "candidate"
+      },
+      {
+        "assertions": 242452,
+        "cases": 16122,
+        "mode": "wide",
+        "phase": "candidate"
+      }
+    ],
+    "facts_dp_contract_owners": [
+      "java.lang.M3StringFacts",
+      "java.lang.M3StringRegexDp"
+    ],
+    "facts_dp_public_protected_descriptors_equal": true,
+    "generated_frozen_ascii_test_helper_header_equal": true,
+    "generated_production_header_count": 13,
+    "jni_entry_signature_count": 26,
+    "jni_entry_signatures_equal": true,
+    "production_contract_evidence": "jni_contract_comparison",
+    "runtime_query_token_pattern_matcher_public_protected_views_equal": true,
+    "runtime_view_count": 7,
+    "sole_header_change": "M3StringRegexDp NEGATED_CLASS private constant macro, value 32768; no JNI entry signature changes."
+  },
+  "canonical_mastery_lab": {
+    "actual_openrewrite_maven_verify": "PASS",
+    "engine_source_revision": "1f9707f5d73bb462c1f73bc9f0b2399034344bd4",
+    "errors": 0,
+    "existing_crate": "synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass",
+    "failures": 0,
+    "full_canonical_wrapper": {
+      "actual_maven_compile_attempt": true,
+      "evidence": "full_wrapper_attempt",
+      "reason": "Selected standalone closure is incomplete; no stubs, gate weakening or unrelated architecture repair.",
+      "sources": 271,
+      "status": "NOT_RUN"
+    },
+    "log_evidence": "lab_134_log",
+    "scope": "Existing bounded canonical multipass crate, actual OpenRewrite execution and language/native bridge fixtures. This is not a universal language frontend or whole-wrapper qualification.",
+    "skipped": 0,
+    "suites": [
+      {
+        "errors": 0,
+        "evidence": "lab_com.synexia.m3.recipe.M3RegexPrecomputeMasteryTest",
+        "failures": 0,
+        "skipped": 0,
+        "suite": "com.synexia.m3.recipe.M3RegexPrecomputeMasteryTest",
+        "tests": 5
+      },
+      {
+        "errors": 0,
+        "evidence": "lab_com.synexia.m3.recipe.NativeRecipeBridgeTest",
+        "failures": 0,
+        "skipped": 0,
+        "suite": "com.synexia.m3.recipe.NativeRecipeBridgeTest",
+        "tests": 6
+      },
+      {
+        "errors": 0,
+        "evidence": "lab_com.synexia.rewrite.ApmPatternPrefixTest",
+        "failures": 0,
+        "skipped": 0,
+        "suite": "com.synexia.rewrite.ApmPatternPrefixTest",
+        "tests": 3
+      },
+      {
+        "errors": 0,
+        "evidence": "lab_com.synexia.rewrite.ApmRecipeTest",
+        "failures": 0,
+        "skipped": 0,
+        "suite": "com.synexia.rewrite.ApmRecipeTest",
+        "tests": 6
+      },
+      {
+        "errors": 0,
+        "evidence": "lab_com.synexia.rewrite.ApmRegexBoundaryTest",
+        "failures": 0,
+        "skipped": 0,
+        "suite": "com.synexia.rewrite.ApmRegexBoundaryTest",
+        "tests": 2
+      },
+      {
+        "errors": 0,
+        "evidence": "lab_com.synexia.rewrite.ApmRegexLanguageMasteryTest",
+        "failures": 0,
+        "skipped": 0,
+        "suite": "com.synexia.rewrite.ApmRegexLanguageMasteryTest",
+        "tests": 5
+      },
+      {
+        "errors": 0,
+        "evidence": "lab_com.synexia.rewrite.ApmRuntimeTest",
+        "failures": 0,
+        "skipped": 0,
+        "suite": "com.synexia.rewrite.ApmRuntimeTest",
+        "tests": 11
+      },
+      {
+        "errors": 0,
+        "evidence": "lab_com.synexia.rewrite.SbcRecipeTest",
+        "failures": 0,
+        "skipped": 0,
+        "suite": "com.synexia.rewrite.SbcRecipeTest",
+        "tests": 96
+      }
+    ],
+    "tests": 134
+  },
+  "canonical_recipe_stages": [
+    {
+      "actual_maven_verify": "PASS",
+      "dataset": "baseline-doclint-final",
+      "descriptor_path": "synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/baseline-doclint-final/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-baseline-doclint-final.yml",
+      "descriptor_sha256": "73879bf8533cd72cde3153b8294a2947df8c33537c33b30a149df6a41ec35923",
+      "log_evidence": "baseline-doclint-final_sdk_log",
+      "manifest_evidence": "baseline-doclint-final_manifest",
+      "receiver_contract_cases": 9,
+      "receiver_contract_evidence": "baseline-doclint-final_receiver_contract",
+      "recipe_id": "com.synexia.m3jdk.RegexLanguageMastery20261021",
+      "sdk_cases": 5,
+      "sdk_inputs_evidence": "baseline-doclint-final_sdk_inputs",
+      "sdk_results_evidence": "baseline-doclint-final_sdk_results",
+      "sealing_cases": 8,
+      "target_count": 1,
+      "targets": [
+        "src/java.base/share/classes/java/util/ChangeJournal.java"
+      ]
+    },
+    {
+      "actual_maven_verify": "PASS",
+      "dataset": "combined-c831",
+      "descriptor_path": "synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/combined-c831/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-combined-c831.yml",
+      "descriptor_sha256": "527af1e3de1c62d5d5e72b927a8cd57d2d1463cc4b3f1043dc8a272be1485a90",
+      "log_evidence": "combined-c831_sdk_log",
+      "manifest_evidence": "combined-c831_manifest",
+      "receiver_contract_cases": 9,
+      "receiver_contract_evidence": "combined-c831_receiver_contract",
+      "recipe_id": "com.synexia.m3jdk.RegexLanguageMastery20261021",
+      "sdk_cases": 5,
+      "sdk_inputs_evidence": "combined-c831_sdk_inputs",
+      "sdk_results_evidence": "combined-c831_sdk_results",
+      "sealing_cases": 8,
+      "target_count": 11,
+      "targets": [
+        "src/java.base/share/classes/java/lang/M3StringFacts.java",
+        "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+        "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+        "src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java",
+        "test/jdk/java/lang/String/M3CommonRegexFactsHostTest.java",
+        "test/jdk/java/lang/String/M3CommonRegexPreparedClasses.java",
+        "test/jdk/java/lang/String/M3CommonRegexProductTest.java",
+        "test/jdk/java/util/regex/M3PatternAsciiFrontierTest.java",
+        "test/jdk/java/util/regex/M3PatternStateMaskTest.java",
+        "test/jdk/java/util/regex/M3PatternUnicodeTest.java",
+        "test/jdk/jdk/internal/mindex/M3TokenPredicateCacheReuseTest.java"
+      ]
+    },
+    {
+      "actual_maven_verify": "PASS",
+      "dataset": "collections-c831",
+      "descriptor_path": "synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/collections-c831/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-collections-c831.yml",
+      "descriptor_sha256": "e7f5780f5353de451ad82c58558c1bc746d05c993ebacf2cde8732bf2d5cc378",
+      "log_evidence": "collections-c831_sdk_log",
+      "manifest_evidence": "collections-c831_manifest",
+      "receiver_contract_cases": 9,
+      "receiver_contract_evidence": "collections-c831_receiver_contract",
+      "recipe_id": "com.synexia.m3jdk.RegexLanguageMastery20261021",
+      "sdk_cases": 5,
+      "sdk_inputs_evidence": "collections-c831_sdk_inputs",
+      "sdk_results_evidence": "collections-c831_sdk_results",
+      "sealing_cases": 8,
+      "target_count": 4,
+      "targets": [
+        "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+        "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthAgent.java",
+        "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFailureTest.java",
+        "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFault.java"
+      ]
+    },
+    {
+      "actual_maven_verify": "PASS",
+      "dataset": "unicode-prefix-c831",
+      "descriptor_path": "synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/unicode-prefix-c831/resources/META-INF/rewrite/m3-regex-language-mastery-20261021-unicode-prefix-c831.yml",
+      "descriptor_sha256": "78b73b1a84bd73b642cd3f2f0ca4e8f919459616b8c608e581de4439726d63c0",
+      "log_evidence": "unicode-prefix-c831_sdk_log",
+      "manifest_evidence": "unicode-prefix-c831_manifest",
+      "receiver_contract_cases": 9,
+      "receiver_contract_evidence": "unicode-prefix-c831_receiver_contract",
+      "recipe_id": "com.synexia.m3jdk.RegexLanguageMastery20261021",
+      "sdk_cases": 5,
+      "sdk_inputs_evidence": "unicode-prefix-c831_sdk_inputs",
+      "sdk_results_evidence": "unicode-prefix-c831_sdk_results",
+      "sealing_cases": 8,
+      "target_count": 2,
+      "targets": [
+        "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+        "test/jdk/java/util/regex/M3PatternNullablePrefixTest.java"
+      ]
+    }
+  ],
+  "collections": {
+    "contracts": {
+      "all_source_image_fixture_and_build_inputs_stable_during_each_run": true,
+      "common_source_dependencies_identical": true,
+      "frozen_test_sources_and_classes_identical": true,
+      "private_layout_identical": true,
+      "public_protected_api_identical": true
+    },
+    "fault_injection": {
+      "all_other_instructions_unchanged": true,
+      "baseline_checks_per_mode": 4206,
+      "baseline_expected_failures_per_mode": 18,
+      "candidate_checks_per_mode": 4914,
+      "candidate_failures_per_mode": 0,
+      "cases_per_mode": 21,
+      "modes": [
+        "-Xint",
+        "-Xmixed"
+      ],
+      "original_matches_installed_module": true,
+      "pre_copy_hooks": 7,
+      "real_allocator_exhaustion": false
+    },
+    "final_actual_product_jtreg_pass_count": 5,
+    "final_actual_product_jtreg_results": [
+      {
+        "bytes": 28960,
+        "path": "regex-mastery-20261021/collections/evidence/final-image-metadata-1/jtreg-work/jdk/internal/m3/M3IndexedArrayGrowthFailureTest.jtr",
+        "sha256": "13c5a5e2780e968f8a6220cabb8d86ed5b943e8038dea37e37968c41f97872a2"
+      },
+      {
+        "bytes": 8633,
+        "path": "regex-mastery-20261021/collections/evidence/final-image-metadata-1/jtreg-work/jdk/internal/m3/M3IndexedArrayTest.jtr",
+        "sha256": "99f1e4c30e10dfc430118d68c26594159ac26bbf95852ae5482329f9cfe82455"
+      },
+      {
+        "bytes": 12319,
+        "path": "regex-mastery-20261021/collections/evidence/final-image-metadata-1/jtreg-work/jdk/internal/m3/M3IndexedViewEpochTest.jtr",
+        "sha256": "fdf000f5ef2bbf8c97c1370753ce4f049f3ab4e5fc5f291b80e1d6799089d494"
+      },
+      {
+        "bytes": 12533,
+        "path": "regex-mastery-20261021/collections/evidence/final-image-metadata-1/jtreg-work/jdk/internal/m3/M3StateMaskedIndexedViewTest.jtr",
+        "sha256": "bec0691040e79c64201daceb97bd1c7caf13eba973644859eaf231cf4cd29fcb"
+      },
+      {
+        "bytes": 9555,
+        "path": "regex-mastery-20261021/collections/evidence/final-image-metadata-1/jtreg-work/jdk/internal/mindex/M3TokenPredicateCacheReuseTest.jtr",
+        "sha256": "910b2e22a95c63bbe8e105ee1faf145fe86e36ad12ccb03cc0dc7414febf601c"
+      }
+    ],
+    "final_collection_owner_class_bytes": 10739,
+    "final_collection_owner_class_sha256": "1c16946b3cc046206338ad31a6378d29dd06243189035ea4b9b066e842aed666",
+    "final_image_evidence": "collection_final_image",
+    "final_whole_image_resources_remeasured": false,
+    "original_installed_jtreg": {
+      "baseline_existing_pass": 3,
+      "candidate_existing_pass": 3,
+      "candidate_new_fault_fixture_pass": 1
+    },
+    "paired_installed_evidence": "collection_installed_pair",
+    "resources_from_original_installed_pair": {
+      "final_retained_owner_and_plane_shape_identical": true,
+      "footprints": [
+        {
+          "capacity": 8,
+          "derived_atomic_peak_bytes": 784,
+          "derived_sequential_peak_bytes": 496,
+          "derived_transient_increase_bytes": 288,
+          "kind": "FOOTPRINT",
+          "new_capacity": 12,
+          "new_plane_bytes": 448,
+          "new_planes": "[64,64,64,64,64,64,64]",
+          "old_plane_bytes": 336,
+          "old_planes": "[48,48,48,48,48,48,48]",
+          "owner_bytes": 72,
+          "plane_count": 7,
+          "reference_mode": "compressed",
+          "vm_options": {
+            "CompactStrings": "true",
+            "ObjectAlignmentInBytes": "8",
+            "UseCompressedClassPointers": "true",
+            "UseCompressedOops": "true",
+            "UseM3StringStorage": "false"
+          }
+        },
+        {
+          "capacity": 27,
+          "derived_atomic_peak_bytes": 2128,
+          "derived_sequential_peak_bytes": 1360,
+          "derived_transient_increase_bytes": 768,
+          "kind": "FOOTPRINT",
+          "new_capacity": 40,
+          "new_plane_bytes": 1232,
+          "new_planes": "[176,176,176,176,176,176,176]",
+          "old_plane_bytes": 896,
+          "old_planes": "[128,128,128,128,128,128,128]",
+          "owner_bytes": 72,
+          "plane_count": 7,
+          "reference_mode": "compressed",
+          "vm_options": {
+            "CompactStrings": "true",
+            "ObjectAlignmentInBytes": "8",
+            "UseCompressedClassPointers": "true",
+            "UseCompressedOops": "true",
+            "UseM3StringStorage": "false"
+          }
+        },
+        {
+          "capacity": 681,
+          "derived_atomic_peak_bytes": 47936,
+          "derived_sequential_peak_bytes": 31472,
+          "derived_transient_increase_bytes": 16464,
+          "kind": "FOOTPRINT",
+          "new_capacity": 1021,
+          "new_plane_bytes": 28728,
+          "new_planes": "[4104,4104,4104,4104,4104,4104,4104]",
+          "old_plane_bytes": 19208,
+          "old_planes": "[2744,2744,2744,2744,2744,2744,2744]",
+          "owner_bytes": 72,
+          "plane_count": 7,
+          "reference_mode": "compressed",
+          "vm_options": {
+            "CompactStrings": "true",
+            "ObjectAlignmentInBytes": "8",
+            "UseCompressedClassPointers": "true",
+            "UseCompressedOops": "true",
+            "UseM3StringStorage": "false"
+          }
+        },
+        {
+          "capacity": 8,
+          "derived_atomic_peak_bytes": 864,
+          "derived_sequential_peak_bytes": 544,
+          "derived_transient_increase_bytes": 320,
+          "kind": "FOOTPRINT",
+          "new_capacity": 12,
+          "new_plane_bytes": 496,
+          "new_planes": "[112,64,64,64,64,64,64]",
+          "old_plane_bytes": 368,
+          "old_planes": "[80,48,48,48,48,48,48]",
+          "owner_bytes": 96,
+          "plane_count": 7,
+          "reference_mode": "uncompressed",
+          "vm_options": {
+            "CompactStrings": "true",
+            "ObjectAlignmentInBytes": "8",
+            "UseCompressedClassPointers": "true",
+            "UseCompressedOops": "false",
+            "UseM3StringStorage": "false"
+          }
+        },
+        {
+          "capacity": 27,
+          "derived_atomic_peak_bytes": 2392,
+          "derived_sequential_peak_bytes": 1520,
+          "derived_transient_increase_bytes": 872,
+          "kind": "FOOTPRINT",
+          "new_capacity": 40,
+          "new_plane_bytes": 1392,
+          "new_planes": "[336,176,176,176,176,176,176]",
+          "old_plane_bytes": 1000,
+          "old_planes": "[232,128,128,128,128,128,128]",
+          "owner_bytes": 96,
+          "plane_count": 7,
+          "reference_mode": "uncompressed",
+          "vm_options": {
+            "CompactStrings": "true",
+            "ObjectAlignmentInBytes": "8",
+            "UseCompressedClassPointers": "true",
+            "UseCompressedOops": "false",
+            "UseM3StringStorage": "false"
+          }
+        },
+        {
+          "capacity": 681,
+          "derived_atomic_peak_bytes": 54736,
+          "derived_sequential_peak_bytes": 35552,
+          "derived_transient_increase_bytes": 19184,
+          "kind": "FOOTPRINT",
+          "new_capacity": 1021,
+          "new_plane_bytes": 32808,
+          "new_planes": "[8184,4104,4104,4104,4104,4104,4104]",
+          "old_plane_bytes": 21928,
+          "old_planes": "[5464,2744,2744,2744,2744,2744,2744]",
+          "owner_bytes": 96,
+          "plane_count": 7,
+          "reference_mode": "uncompressed",
+          "vm_options": {
+            "CompactStrings": "true",
+            "ObjectAlignmentInBytes": "8",
+            "UseCompressedClassPointers": "true",
+            "UseCompressedOops": "false",
+            "UseM3StringStorage": "false"
+          }
+        }
+      ],
+      "limits": [
+        "Measured shallow array sizes; publication-order peaks are derived, not sampled heap high-water marks.",
+        "All old planes remain reachable until the final replacement allocation succeeds. This increases transient live storage.",
+        "Shared payload objects, view metadata and VM/native memory are excluded from the array sums.",
+        "CPU samples include regressions. Bounded interpreter samples on a shared machine are not a speed admission.",
+        "The resource agent installs no transformer; fault injection is used only by separate correctness processes."
+      ],
+      "observations": [
+        {
+          "baseline": {
+            "allocated_bytes_per_call": 448.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 1244.07421875,
+            "median_wall_ns_per_call": 1238.00390625,
+            "samples": 3
+          },
+          "candidate": {
+            "allocated_bytes_per_call": 448.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 1814.13671875,
+            "median_wall_ns_per_call": 1808.24609375,
+            "samples": 3
+          },
+          "capacity": 8,
+          "operation": "growth",
+          "reference_mode": "compressed"
+        },
+        {
+          "baseline": {
+            "allocated_bytes_per_call": 0.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 151.0078125,
+            "median_wall_ns_per_call": 141.15234375,
+            "samples": 3
+          },
+          "candidate": {
+            "allocated_bytes_per_call": 0.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 185.27734375,
+            "median_wall_ns_per_call": 177.10546875,
+            "samples": 3
+          },
+          "capacity": 8,
+          "operation": "warm_free_slot",
+          "reference_mode": "compressed"
+        },
+        {
+          "baseline": {
+            "allocated_bytes_per_call": 1232.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 1807.01953125,
+            "median_wall_ns_per_call": 1796.55078125,
+            "samples": 3
+          },
+          "candidate": {
+            "allocated_bytes_per_call": 1232.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 2201.04296875,
+            "median_wall_ns_per_call": 2192.3046875,
+            "samples": 3
+          },
+          "capacity": 27,
+          "operation": "growth",
+          "reference_mode": "compressed"
+        },
+        {
+          "baseline": {
+            "allocated_bytes_per_call": 0.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 203.07421875,
+            "median_wall_ns_per_call": 192.3203125,
+            "samples": 3
+          },
+          "candidate": {
+            "allocated_bytes_per_call": 0.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 224.35546875,
+            "median_wall_ns_per_call": 216.96875,
+            "samples": 3
+          },
+          "capacity": 27,
+          "operation": "warm_free_slot",
+          "reference_mode": "compressed"
+        },
+        {
+          "baseline": {
+            "allocated_bytes_per_call": 28728.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 8823.375,
+            "median_wall_ns_per_call": 8767.33203125,
+            "samples": 3
+          },
+          "candidate": {
+            "allocated_bytes_per_call": 28728.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 6149.484375,
+            "median_wall_ns_per_call": 5965.90625,
+            "samples": 3
+          },
+          "capacity": 681,
+          "operation": "growth",
+          "reference_mode": "compressed"
+        },
+        {
+          "baseline": {
+            "allocated_bytes_per_call": 0.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 919.4140625,
+            "median_wall_ns_per_call": 900.42578125,
+            "samples": 3
+          },
+          "candidate": {
+            "allocated_bytes_per_call": 0.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 925.984375,
+            "median_wall_ns_per_call": 910.71484375,
+            "samples": 3
+          },
+          "capacity": 681,
+          "operation": "warm_free_slot",
+          "reference_mode": "compressed"
+        },
+        {
+          "baseline": {
+            "allocated_bytes_per_call": 496.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 1820.5546875,
+            "median_wall_ns_per_call": 1812.4296875,
+            "samples": 3
+          },
+          "candidate": {
+            "allocated_bytes_per_call": 496.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 1851.1875,
+            "median_wall_ns_per_call": 1852.84375,
+            "samples": 3
+          },
+          "capacity": 8,
+          "operation": "growth",
+          "reference_mode": "uncompressed"
+        },
+        {
+          "baseline": {
+            "allocated_bytes_per_call": 0.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 213.98828125,
+            "median_wall_ns_per_call": 206.56640625,
+            "samples": 3
+          },
+          "candidate": {
+            "allocated_bytes_per_call": 0.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 192.47265625,
+            "median_wall_ns_per_call": 187.62890625,
+            "samples": 3
+          },
+          "capacity": 8,
+          "operation": "warm_free_slot",
+          "reference_mode": "uncompressed"
+        },
+        {
+          "baseline": {
+            "allocated_bytes_per_call": 1392.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 2568.8125,
+            "median_wall_ns_per_call": 2548.30859375,
+            "samples": 3
+          },
+          "candidate": {
+            "allocated_bytes_per_call": 1392.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 2313.19921875,
+            "median_wall_ns_per_call": 2302.3125,
+            "samples": 3
+          },
+          "capacity": 27,
+          "operation": "growth",
+          "reference_mode": "uncompressed"
+        },
+        {
+          "baseline": {
+            "allocated_bytes_per_call": 0.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 399.6171875,
+            "median_wall_ns_per_call": 380.26171875,
+            "samples": 3
+          },
+          "candidate": {
+            "allocated_bytes_per_call": 0.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 250.83984375,
+            "median_wall_ns_per_call": 244.31640625,
+            "samples": 3
+          },
+          "capacity": 27,
+          "operation": "warm_free_slot",
+          "reference_mode": "uncompressed"
+        },
+        {
+          "baseline": {
+            "allocated_bytes_per_call": 32808.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 9160.1640625,
+            "median_wall_ns_per_call": 10717.86328125,
+            "samples": 3
+          },
+          "candidate": {
+            "allocated_bytes_per_call": 32808.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 7408.0703125,
+            "median_wall_ns_per_call": 8712.0703125,
+            "samples": 3
+          },
+          "capacity": 681,
+          "operation": "growth",
+          "reference_mode": "uncompressed"
+        },
+        {
+          "baseline": {
+            "allocated_bytes_per_call": 0.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 726.703125,
+            "median_wall_ns_per_call": 716.4375,
+            "samples": 3
+          },
+          "candidate": {
+            "allocated_bytes_per_call": 0.0,
+            "calls_per_sample": 256,
+            "median_cpu_ns_per_call": 717.82421875,
+            "median_wall_ns_per_call": 704.81640625,
+            "samples": 3
+          },
+          "capacity": 681,
+          "operation": "warm_free_slot",
+          "reference_mode": "uncompressed"
+        }
+      ],
+      "paired_allocation_bytes_identical": true,
+      "replacement_array_count": 7
+    },
+    "same_exact_class_as_qualified_installed_candidate": true,
+    "scope": "Failure consistency under the existing synchronized owner. Deterministic test-only pre-copy hooks at seven copy sites; not real allocator exhaustion and not new lock-free or whole-object concurrent publication. Final-image source annotations run four collection entries and one token entry without production-owner overlay. Derived plane reachability peaks use measured shallow sizes and lifetimes, not heap high-water sampling."
+  },
+  "common14": {
+    "actual_owner_facts_oracle": {
+      "checks_each_compact_setting": 1246849,
+      "fixture": "test/jdk/java/lang/String/M3CommonRegexFactsHostTest.java",
+      "mask_inputs": 67664,
+      "observed_primitive_fields": 25,
+      "primitive_field_checks": 53125,
+      "regex_checks": 1051894,
+      "scope": "Test-only java.base harness patch exercises actual owner facts and native-backed atoms, with Pattern on StringBuilder as oracle. The fixture labels productImage=false and does not establish public String.matches dispatch; that is the separate acceptance gate."
+    },
+    "evidence": "regression_comparison",
+    "fallback": "Cold and unsupported expressions continue through the existing matching paths, with Pattern fallback preserving validation and exceptions.",
+    "popularity_ranking_claim": false,
+    "public_string_matches_acceptance": {
+      "concurrency_refusals": "A prepared owner may be evicted; UNKNOWN is permitted and must fall through the existing path. Observed admitted/refused pairs are 574/2 and 572/4, each totaling 576.",
+      "fixture": "test/jdk/java/lang/String/M3CommonRegexPreparedClasses.java",
+      "observed_runs": [
+        {
+          "checks": 3949,
+          "concurrent_decisions": 574,
+          "concurrent_refusals": 2,
+          "mode": "candidate",
+          "oracle_evaluations": 128,
+          "public_matches_checks": 672,
+          "task": "acceptance"
+        },
+        {
+          "checks": 3939,
+          "concurrent_decisions": 572,
+          "concurrent_refusals": 4,
+          "mode": "candidate",
+          "oracle_evaluations": 128,
+          "public_matches_checks": 672,
+          "task": "acceptance"
+        }
+      ],
+      "product_entry_path": "Public String.strip preparation and String.matches; no compiled production-owner replacement.",
+      "storage_modes_in_output_order": [
+        "m3-compact",
+        "m3-wide"
+      ]
+    },
+    "resource_scope": "This current-image report does not repeat the historical common14 CPU/retained-memory study; no earlier image timing or retained-byte result is relabeled as a current c831 measurement.",
+    "supported_predicate_count": 14
+  },
+  "evidence": {
+    "baseline-doclint-final_manifest": {
+      "bytes": 215,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/baseline-doclint-final/resources/com/synexia/rewrite/hash-pinned-java/m3-regex-language-mastery-20261021-baseline-doclint-final/manifest.tsv",
+      "sha256": "37f836ff0d5adf9774a2a0edd969c5ce53d324d9ba346d5973040c02ca6a9a78"
+    },
+    "baseline-doclint-final_receiver_contract": {
+      "bytes": 1622,
+      "custody_relative_path": "regex-mastery-20261021/doclint-final-contract/evidence/RECEIVER_RECEIPT.json",
+      "sha256": "e4c8035af8dcbf1d7732a7cd57a1b5eadc31b53ebfe31114b8326792ab8bb8b6"
+    },
+    "baseline-doclint-final_sdk_inputs": {
+      "bytes": 2471,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/baseline-doclint-final/candidate/SDK_INPUTS.tsv",
+      "sha256": "ad8b4983b0e5d055ad1322540c4f5902c066faaa05cccad8bb37a4349ce081fb"
+    },
+    "baseline-doclint-final_sdk_log": {
+      "bytes": 3062,
+      "custody_relative_path": "regex-mastery-20261021/lab-evidence/doclint-final-sdk.log",
+      "sha256": "bed7a0f2802bb996dd3e9e06a849111ab107fafd61b37f5585755bf574605b08"
+    },
+    "baseline-doclint-final_sdk_results": {
+      "bytes": 247,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/baseline-doclint-final/candidate/SDK_RESULTS.tsv",
+      "sha256": "540150f201ddb4207737326004ff46d412839225673f2b2977274e0c2cd3d780"
+    },
+    "baseline_build": {
+      "bytes": 2491,
+      "custody_relative_path": "regex-mastery-20261021/build/current-baseline-repaired.json",
+      "sha256": "e992ab99a2f2180299054b2fa34fedcb502744376066fe603babf1a338f9429b"
+    },
+    "baseline_build_log": {
+      "bytes": 13269,
+      "custody_relative_path": "regex-mastery-20261021/build/current-baseline-repaired.log",
+      "sha256": "9b72f3e4c6107c7ccae746876fd339771de324647fb25ffe172913088407d141"
+    },
+    "baseline_doclint_build": {
+      "bytes": 2394,
+      "custody_relative_path": "regex-mastery-20261021/build/current-baseline.json",
+      "sha256": "304569ecd2dabb66c492a1fa68c691aab782c8b561ceb7c9b506bc0657db6687"
+    },
+    "baseline_image_identity": {
+      "bytes": 81226,
+      "custody_relative_path": "regex-mastery-20261021/build/current-baseline-image-identity.json",
+      "sha256": "8db556a6b214949ad0b0261d52af9c48ea49c703f33c74e623ddd8fbceeb41b5"
+    },
+    "baseline_jni_compact": {
+      "bytes": 69,
+      "custody_relative_path": "continuation-build/mastery-current-baseline-jni/compact.log",
+      "sha256": "9024887ac0909ecb40a046d08aea71d3916f6f99b2ea0094fd284ac9210f3883"
+    },
+    "baseline_jni_java-compile": {
+      "bytes": 0,
+      "custody_relative_path": "continuation-build/mastery-current-baseline-jni/java-compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "baseline_jni_native-compile": {
+      "bytes": 0,
+      "custody_relative_path": "continuation-build/mastery-current-baseline-jni/native-compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "baseline_jni_wide": {
+      "bytes": 69,
+      "custody_relative_path": "continuation-build/mastery-current-baseline-jni/wide.log",
+      "sha256": "9024887ac0909ecb40a046d08aea71d3916f6f99b2ea0094fd284ac9210f3883"
+    },
+    "baseline_utf8_jni": {
+      "bytes": 4887,
+      "custody_relative_path": "continuation-build/mastery-current-baseline-jni/receipt.json",
+      "sha256": "ab3ea5471682a3acefae576a8c5b5338e334c04e7dce1596aaabb12a9ac6a16c"
+    },
+    "candidate_build": {
+      "bytes": 4633,
+      "custody_relative_path": "regex-mastery-20261021/build/current-candidate-final.json",
+      "sha256": "5b6b81efd74c96fa54d750d9d2286b81648843f600779afb396868dd9942c0db"
+    },
+    "candidate_build_log": {
+      "bytes": 3815,
+      "custody_relative_path": "regex-mastery-20261021/build/current-candidate-final.log",
+      "sha256": "b02c40b6f5aab014be20b4f07c0093938e91b7215bba3daba5daa6c1f8afe382"
+    },
+    "candidate_image_identity": {
+      "bytes": 81189,
+      "custody_relative_path": "regex-mastery-20261021/build/current-final-image-identity.json",
+      "sha256": "3796858fd396b20a2fd395bece94f8aa542f161dafaa68cab04452cf22defb95"
+    },
+    "candidate_jni_compact": {
+      "bytes": 69,
+      "custody_relative_path": "continuation-build/mastery-current-final-jni/compact.log",
+      "sha256": "9024887ac0909ecb40a046d08aea71d3916f6f99b2ea0094fd284ac9210f3883"
+    },
+    "candidate_jni_java-compile": {
+      "bytes": 0,
+      "custody_relative_path": "continuation-build/mastery-current-final-jni/java-compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidate_jni_native-compile": {
+      "bytes": 0,
+      "custody_relative_path": "continuation-build/mastery-current-final-jni/native-compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "candidate_jni_wide": {
+      "bytes": 69,
+      "custody_relative_path": "continuation-build/mastery-current-final-jni/wide.log",
+      "sha256": "9024887ac0909ecb40a046d08aea71d3916f6f99b2ea0094fd284ac9210f3883"
+    },
+    "candidate_utf8_jni": {
+      "bytes": 4818,
+      "custody_relative_path": "continuation-build/mastery-current-final-jni/receipt.json",
+      "sha256": "4c16814ef53066d1dc8d0264bee98a4df97b886471f98296addb9eea6b780cab"
+    },
+    "collection_final_image": {
+      "bytes": 14183,
+      "custody_relative_path": "regex-mastery-20261021/collections/evidence/final-image-metadata-1/receipt.json",
+      "sha256": "5ff4ae4ec2254523132d866a83c26c35231af823e92331b62d9f00f84bd936cf"
+    },
+    "collection_installed_pair": {
+      "bytes": 16062,
+      "custody_relative_path": "regex-mastery-20261021/collections/INSTALLED_IMAGE_PROOF.json",
+      "sha256": "707ae98b51f0ab1633a887f9bac7a7c53fd75269ce5258947517796decdad351"
+    },
+    "collections-c831_manifest": {
+      "bytes": 739,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/collections-c831/resources/com/synexia/rewrite/hash-pinned-java/m3-regex-language-mastery-20261021-collections-c831/manifest.tsv",
+      "sha256": "adce7d23e9dfd1a42517b7d35e7c59d36934962912abffcd7a02f64175427a14"
+    },
+    "collections-c831_receiver_contract": {
+      "bytes": 1614,
+      "custody_relative_path": "regex-mastery-20261021/collections-c831-contract/evidence/RECEIVER_RECEIPT.json",
+      "sha256": "0596f5f322c3c7a87e0e0094b7c0fca19320d0a2af21d7247a63c995e03ca527"
+    },
+    "collections-c831_sdk_inputs": {
+      "bytes": 3121,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/collections-c831/candidate/SDK_INPUTS.tsv",
+      "sha256": "3371282541a9b70f89067839dff54e11648944a99a476518a5ce68d38cc3741b"
+    },
+    "collections-c831_sdk_log": {
+      "bytes": 3032,
+      "custody_relative_path": "regex-mastery-20261021/lab-evidence/collections-c831-sdk.log",
+      "sha256": "95d24f0401643032ed26b1e98f4c0864547e8b17985db921499e8b0b8b73384d"
+    },
+    "collections-c831_sdk_results": {
+      "bytes": 644,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/collections-c831/candidate/SDK_RESULTS.tsv",
+      "sha256": "8e40ed5f529a542499a763001b5d8a450048d18ec3bcd57b5927f439f39332af"
+    },
+    "combined-c831_manifest": {
+      "bytes": 2199,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/combined-c831/resources/com/synexia/rewrite/hash-pinned-java/m3-regex-language-mastery-20261021-combined-c831/manifest.tsv",
+      "sha256": "0a23b6a3e3b87824b1fca502095b8ca4a2d6746d44e14eb7ace32cd1541b2a22"
+    },
+    "combined-c831_receiver_contract": {
+      "bytes": 1630,
+      "custody_relative_path": "regex-mastery-20261021/combined-c831-contract/evidence/RECEIVER_RECEIPT.json",
+      "sha256": "2e9ca0ebc69b58b332d92d6a299efc50a35f631db1ca95443863fea6a423a0a7"
+    },
+    "combined-c831_sdk_inputs": {
+      "bytes": 5791,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/combined-c831/candidate/SDK_INPUTS.tsv",
+      "sha256": "07be40725df9304b880678bf7c852ba94a5d8e093068feba14149413c28a4736"
+    },
+    "combined-c831_sdk_log": {
+      "bytes": 3020,
+      "custody_relative_path": "regex-mastery-20261021/lab-evidence/combined-c831-sdk.log",
+      "sha256": "7beda8de22e8cac14a68210b6d8f8a0852bcb78b72b1307a25d0d3b8f17f391f"
+    },
+    "combined-c831_sdk_results": {
+      "bytes": 1855,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/combined-c831/candidate/SDK_RESULTS.tsv",
+      "sha256": "90e89df940d1336874bc6ead5f126ce2c04c997b13c4bf78591c57a4d2743510"
+    },
+    "common_M3CommonRegexFactsHostTest": {
+      "bytes": 17941,
+      "custody_relative_path": "continuation-build/mastery-current-final-jtreg/candidate-facts-oracle/work/java/lang/String/M3CommonRegexFactsHostTest.jtr",
+      "sha256": "f42678e6f61c952179e957d0e628198912c147956900d890c9da958f27e7a713"
+    },
+    "common_M3CommonRegexPreparedClasses": {
+      "bytes": 17304,
+      "custody_relative_path": "continuation-build/mastery-current-final-jtreg/new-product-fixture/work/java/lang/String/M3CommonRegexPreparedClasses.jtr",
+      "sha256": "d4d4e9f491006896a6a55360357edd1df913c8ea684f1b83a84aa3fab9a6152b"
+    },
+    "doclint_current_replay": {
+      "bytes": 5188,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/doclint-current-replay.json",
+      "sha256": "8765684a0ed4c7e0344400df10b293cc606537edf75b4f7fed730b810097f7a1"
+    },
+    "final_collection_token_jtreg_0": {
+      "bytes": 28960,
+      "custody_relative_path": "regex-mastery-20261021/collections/evidence/final-image-metadata-1/jtreg-work/jdk/internal/m3/M3IndexedArrayGrowthFailureTest.jtr",
+      "sha256": "13c5a5e2780e968f8a6220cabb8d86ed5b943e8038dea37e37968c41f97872a2"
+    },
+    "final_collection_token_jtreg_1": {
+      "bytes": 8633,
+      "custody_relative_path": "regex-mastery-20261021/collections/evidence/final-image-metadata-1/jtreg-work/jdk/internal/m3/M3IndexedArrayTest.jtr",
+      "sha256": "99f1e4c30e10dfc430118d68c26594159ac26bbf95852ae5482329f9cfe82455"
+    },
+    "final_collection_token_jtreg_2": {
+      "bytes": 12319,
+      "custody_relative_path": "regex-mastery-20261021/collections/evidence/final-image-metadata-1/jtreg-work/jdk/internal/m3/M3IndexedViewEpochTest.jtr",
+      "sha256": "fdf000f5ef2bbf8c97c1370753ce4f049f3ab4e5fc5f291b80e1d6799089d494"
+    },
+    "final_collection_token_jtreg_3": {
+      "bytes": 12533,
+      "custody_relative_path": "regex-mastery-20261021/collections/evidence/final-image-metadata-1/jtreg-work/jdk/internal/m3/M3StateMaskedIndexedViewTest.jtr",
+      "sha256": "bec0691040e79c64201daceb97bd1c7caf13eba973644859eaf231cf4cd29fcb"
+    },
+    "final_collection_token_jtreg_4": {
+      "bytes": 9555,
+      "custody_relative_path": "regex-mastery-20261021/collections/evidence/final-image-metadata-1/jtreg-work/jdk/internal/mindex/M3TokenPredicateCacheReuseTest.jtr",
+      "sha256": "910b2e22a95c63bbe8e105ee1faf145fe86e36ad12ccb03cc0dc7414febf601c"
+    },
+    "fresh_interim_recovery": {
+      "bytes": 576,
+      "custody_relative_path": "regex-mastery-20261021/build/fresh-interim-recovery.json",
+      "sha256": "770ffda91d2e84ce17523401a9535b37d5ecc74a527b75659242bc15b3270223"
+    },
+    "full_wrapper_attempt": {
+      "bytes": 24004,
+      "custody_relative_path": "regex-mastery-20261021/full-wrapper/attempt-1/receipt.json",
+      "sha256": "4415909a16ee61c6618e5a1b3bf9bfaa7f342200558e1ceb9ec93620a802b2ed"
+    },
+    "image_comparison": {
+      "bytes": 1765,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/IMAGE_COMPARISON.json",
+      "sha256": "f1418be93895bd812f185b8b506d0e25e6943429a401ca0d2277af7224cfb636"
+    },
+    "jni_contract_comparison": {
+      "bytes": 1194,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/JNI_CONTRACT_COMPARISON.json",
+      "sha256": "3c9efeeb9ce3681cf2c22f8b3cdd141578d62889a607a1a02e6ac24f9da47226"
+    },
+    "lab_134_log": {
+      "bytes": 5142,
+      "custody_relative_path": "regex-mastery-20261021/lab-evidence/apm-language-native-6.log",
+      "sha256": "7face8fe83e1750c28db1b7263b6b536084a08d4ba72cb19fc370066e0363869"
+    },
+    "lab_com.synexia.m3.recipe.M3RegexPrecomputeMasteryTest": {
+      "bytes": 17904,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.m3.recipe.M3RegexPrecomputeMasteryTest.xml",
+      "sha256": "8f4ba43c085363a946738fa993b6d11919290df6af335bab53b1608f12d6d5b9"
+    },
+    "lab_com.synexia.m3.recipe.NativeRecipeBridgeTest": {
+      "bytes": 17968,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.m3.recipe.NativeRecipeBridgeTest.xml",
+      "sha256": "08b4676f5e40c38f99b84e84728452342e2deaba3dce71e6d2bcdcf3c59841da"
+    },
+    "lab_com.synexia.rewrite.ApmPatternPrefixTest": {
+      "bytes": 17573,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.rewrite.ApmPatternPrefixTest.xml",
+      "sha256": "13171d020bb43c23b916a9523c7935d5dc8bc3cf71d45775715a61901b5fe36d"
+    },
+    "lab_com.synexia.rewrite.ApmRecipeTest": {
+      "bytes": 18829,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.rewrite.ApmRecipeTest.xml",
+      "sha256": "1e2c9590f836aca3657f7764c1ed52569e5e50a6c0a266c51bf484a6e6b40c3d"
+    },
+    "lab_com.synexia.rewrite.ApmRegexBoundaryTest": {
+      "bytes": 17403,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.rewrite.ApmRegexBoundaryTest.xml",
+      "sha256": "03e52d3dd7375ac2f27254e761066da23033a3ed6dc506ff1138fb4f6466aa89"
+    },
+    "lab_com.synexia.rewrite.ApmRegexLanguageMasteryTest": {
+      "bytes": 18183,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.rewrite.ApmRegexLanguageMasteryTest.xml",
+      "sha256": "6e98e4ad834703ca6e3241e7577044fdcecb6a688d92df36cfa0bc21f7e787c1"
+    },
+    "lab_com.synexia.rewrite.ApmRuntimeTest": {
+      "bytes": 18586,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.rewrite.ApmRuntimeTest.xml",
+      "sha256": "017b5171d09f3eaf0a7b38c58f62a69b2fc58ea716e7226237a9296a6596601e"
+    },
+    "lab_com.synexia.rewrite.SbcRecipeTest": {
+      "bytes": 28325,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/crates/m3-atom-pattern-multipass/target/surefire-reports/TEST-com.synexia.rewrite.SbcRecipeTest.xml",
+      "sha256": "f939268eb7d08c51af3357c3c2c58b92848aaf9329bd81b9ad92f656abe28df3"
+    },
+    "latest_naming_documented_cli": {
+      "bytes": 586,
+      "custody_relative_path": "regex-mastery-20261021/catalogue/naming-audit-7b1/documented-cli.json",
+      "sha256": "24351a682614ae1d20d17059affc320ab395e4dbf188f32fcb56a16d73063e90"
+    },
+    "latest_naming_policy_review": {
+      "bytes": 4191,
+      "custody_relative_path": "regex-mastery-20261021/catalogue/naming-audit-7b1/POLICY_DELTA.json",
+      "sha256": "3cdf7fa89d74542f4fcad153f41e66aa142054e6c8bdafe79870d0542ebc26d6"
+    },
+    "mastery_evidence_refusal_3": {
+      "bytes": 163280,
+      "custody_relative_path": "regex-mastery-20261021/lab-evidence/apm-language-native-3.log",
+      "sha256": "ea6b74ded83b6f62d66016b493c2d0f8d4517befe3d0baf49b94ae31079f9041"
+    },
+    "mastery_evidence_refusal_4": {
+      "bytes": 164944,
+      "custody_relative_path": "regex-mastery-20261021/lab-evidence/apm-language-native-4.log",
+      "sha256": "a324929bc0ac8cced9c881ac9842ad33de967474af25b8d6bf301185bc8d7510"
+    },
+    "mastery_evidence_refusal_5": {
+      "bytes": 165036,
+      "custody_relative_path": "regex-mastery-20261021/lab-evidence/apm-language-native-5.log",
+      "sha256": "cc93b53c9d4e7323a8070fad056edf9834e0dbb86e9bae2c62770407aaa29b98"
+    },
+    "mastery_missing_dag_1": {
+      "bytes": 2969,
+      "custody_relative_path": "regex-mastery-20261021/lab-evidence/apm-language-native-1.log",
+      "sha256": "d0a3bd43e6434b5f0a8b78ca73f79c4808231c33d7a4aaadc9cdca9ac1d69f69"
+    },
+    "mastery_missing_dag_2": {
+      "bytes": 2969,
+      "custody_relative_path": "regex-mastery-20261021/lab-evidence/apm-language-native-2.log",
+      "sha256": "6d4f27d4fabb688ab9a7d898d82102f923f3eefdf670172362a408a868af931e"
+    },
+    "matched_baseline_M3PatternStateMaskTest": {
+      "bytes": 11013,
+      "custody_relative_path": "continuation-build/mastery-current-baseline-jtreg-2/all-regex/work/java/util/regex/M3PatternStateMaskTest.jtr",
+      "sha256": "7b8c7c2153167fd9ac07aed697f6e11f495796122c58b594c107c0842ddf09c4"
+    },
+    "matched_baseline_M3StringFactsCompositionTest": {
+      "bytes": 12055,
+      "custody_relative_path": "continuation-build/mastery-current-baseline-jtreg-2/declared-regressions/work/java/lang/String/M3StringFactsCompositionTest.jtr",
+      "sha256": "ba52df78a6c16a13e3cf06254f889d1277afda1f7eace877b8322fbb586eb5c3"
+    },
+    "matched_baseline_M3StringRegexDpTest": {
+      "bytes": 11605,
+      "custody_relative_path": "continuation-build/mastery-current-baseline-jtreg-2/declared-regressions/work/java/lang/String/M3StringRegexDpTest.jtr",
+      "sha256": "8a0a6f441f92188dc3c08eb9857eec173d5e7b9c70ae24d8b604ffdfb2e05e27"
+    },
+    "matched_candidate_M3PatternStateMaskTest": {
+      "bytes": 10747,
+      "custody_relative_path": "continuation-build/mastery-current-final-jtreg/all-regex/work/java/util/regex/M3PatternStateMaskTest.jtr",
+      "sha256": "405ab34d0fd19b4d627d05d61d77a6295a0d662591cd82069dbc1fdca2c2094a"
+    },
+    "matched_candidate_M3StringFactsCompositionTest": {
+      "bytes": 11791,
+      "custody_relative_path": "continuation-build/mastery-current-final-jtreg/declared-regressions/work/java/lang/String/M3StringFactsCompositionTest.jtr",
+      "sha256": "8a7bfa38a09554645082b7d51d111f75fde4982587f9db45171a44200ddeb134"
+    },
+    "matched_candidate_M3StringRegexDpTest": {
+      "bytes": 11339,
+      "custody_relative_path": "continuation-build/mastery-current-final-jtreg/declared-regressions/work/java/lang/String/M3StringRegexDpTest.jtr",
+      "sha256": "7e6bbcb1b4830eb131a59fe22bde977b8196dcc03af9194072cf15f69325de14"
+    },
+    "missing_effective_engine_seal": {
+      "bytes": 8352,
+      "custody_relative_path": "regex-mastery-20261021/lab-evidence/lab-sdk-2.log",
+      "sha256": "5c3e25c448eaef25893e65b21552ec239874a3cf8df616860bf3fb9b5d3902fb"
+    },
+    "missing_engine_source_seal": {
+      "bytes": 4713,
+      "custody_relative_path": "regex-mastery-20261021/lab-evidence/lab-sdk.log",
+      "sha256": "206a9e412ddb3e880223a56624bb9e2bd88d631b4a6d1dd25091ace5a1e08050"
+    },
+    "new_M3PatternNullablePrefixTest": {
+      "bytes": 11123,
+      "custody_relative_path": "continuation-build/mastery-current-final-jtreg/all-regex/work/java/util/regex/M3PatternNullablePrefixTest.jtr",
+      "sha256": "40d6a899a9524f38da9e827d318a505835fd658de9195463ea2ddc2c765aa574"
+    },
+    "new_M3PatternUnicodeTest": {
+      "bytes": 10452,
+      "custody_relative_path": "continuation-build/mastery-current-final-jtreg/all-regex/work/java/util/regex/M3PatternUnicodeTest.jtr",
+      "sha256": "52caf9f5b88adc9b9bcbd97a13b80d51ffce68ff7fefd5d38fa311667dbfb3cf"
+    },
+    "policy_log_0": {
+      "bytes": 83,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/policy-preflight/0.log",
+      "sha256": "5d17886ed59810444d899548b3c10f421b11215e59d25aeaaf848c359c1630e8"
+    },
+    "policy_log_1": {
+      "bytes": 167,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/policy-preflight/1.log",
+      "sha256": "02df070a912819249498351a9cc39a11d4a48043c6f469c2cfc00ec6791b278e"
+    },
+    "policy_log_2": {
+      "bytes": 281,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/policy-preflight/2.log",
+      "sha256": "69354cd1ab04227bdf9f5a5a912361e57b90b1d8315146d447827e2636a259e5"
+    },
+    "policy_log_3": {
+      "bytes": 261,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/policy-preflight/3.log",
+      "sha256": "0e29679a3695f4a2921a65d32fc3d1b973068b9e7fc613c4adbd3626e23e762f"
+    },
+    "policy_log_4": {
+      "bytes": 618,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/policy-preflight/4.log",
+      "sha256": "c3afadb8e8d5e83b6bc5471b305faab8abeb3df2991647bef5bee32227ae1402"
+    },
+    "policy_preflight": {
+      "bytes": 2385,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/policy-preflight/receipt.json",
+      "sha256": "419f134923cf628ea3b2c336e916ac56637541844e5a2cde660a8705e7c84823"
+    },
+    "refined_interim_output_refusal": {
+      "bytes": 3505,
+      "custody_relative_path": "regex-mastery-20261021/build/current-candidate-refined.json",
+      "sha256": "9e73e424815f7bbe5c55d235c732025fe3061244fe5508704872583b037ddab0"
+    },
+    "regression_comparison": {
+      "bytes": 26771,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/REGRESSION_COMPARISON.json",
+      "sha256": "53a3d07e315661192f3ad8d5cc233df271f8fb52182b5c9d927486bf71fbdc9f"
+    },
+    "runtime_final": {
+      "bytes": 5107,
+      "custody_relative_path": "regex-mastery-20261021/unicode/prefix-reuse/evidence/installed-runtime-1/paired-runtime.json",
+      "sha256": "7d84e2eeeec2a69b9647315ec4967dc793b4bbe8eb0581cc73c951984348d138"
+    },
+    "runtime_final_driver": {
+      "bytes": 1924,
+      "custody_relative_path": "regex-mastery-20261021/unicode/prefix-reuse/evidence/installed-runtime-1/driver-receipt.json",
+      "sha256": "082577a635f807ec88f85deef7f941b231b64cfb385695588e64394c37f19134"
+    },
+    "runtime_independent_review": {
+      "bytes": 7415,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/FINAL_RUNTIME_REVIEW.md",
+      "sha256": "9465be4ee07f072611823951f19f9392b8ba4cc4afbc2798afbc1197250895fd"
+    },
+    "runtime_receive": {
+      "bytes": 7598,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/runtime-receive.json",
+      "sha256": "585200e3c68720a8090cce003a4cda9be4283df3b1dd4fb08029a79594c78110"
+    },
+    "string_phase_blocker": {
+      "bytes": 566,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/preexisting-string-phase-blocker.json",
+      "sha256": "71c55685a658e87100aea8c21ba1d761044e22de8c96a813620a1459fbcadf96"
+    },
+    "unicode-prefix-c831_manifest": {
+      "bytes": 395,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/datasets/unicode-prefix-c831/resources/com/synexia/rewrite/hash-pinned-java/m3-regex-language-mastery-20261021-unicode-prefix-c831/manifest.tsv",
+      "sha256": "6ce3a59ff5c905209a544fded98027c52947dd9d674fb23bfc544f0704843464"
+    },
+    "unicode-prefix-c831_receiver_contract": {
+      "bytes": 1621,
+      "custody_relative_path": "regex-mastery-20261021/unicode-prefix-c831-contract/evidence/RECEIVER_RECEIPT.json",
+      "sha256": "3bbae9e16b37082bcaa0db429dfbc944add7e6bf3a74e25967f608f053dc0a85"
+    },
+    "unicode-prefix-c831_sdk_inputs": {
+      "bytes": 2684,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/unicode-prefix-c831/candidate/SDK_INPUTS.tsv",
+      "sha256": "f111bb6cc478da37c0fc735730625ff3c1649ba1732f1bd35ee589c36d1ef84d"
+    },
+    "unicode-prefix-c831_sdk_log": {
+      "bytes": 3047,
+      "custody_relative_path": "regex-mastery-20261021/lab-evidence/unicode-prefix-c831-sdk.log",
+      "sha256": "eefb39cb766a5757040e01724f2f1213bd3e5081883957e7d1a75cb0ced94e86"
+    },
+    "unicode-prefix-c831_sdk_results": {
+      "bytes": 384,
+      "custody_relative_path": "regex-mastery-20261021/repo/synexia-openrewrite-recipes/recipe-crates/m3-regex-language-mastery-20261021/recipe-host/target/unicode-prefix-c831/candidate/SDK_RESULTS.tsv",
+      "sha256": "d08b61b54800ed3b3bf35f0d0c961f104f6fdd9116cf95f73808a4f08e45e53f"
+    },
+    "unicode_expected_red": {
+      "bytes": 1953,
+      "custody_relative_path": "regex-mastery-20261021/unicode/prefix-reuse/evidence/red-1/receipt.json",
+      "sha256": "743d825e8253b4d975ebd9a45b03c5660516510f99ffa99d3eca9df298aa4f32"
+    },
+    "unicode_final": {
+      "bytes": 1085885,
+      "custody_relative_path": "regex-mastery-20261021/unicode/prefix-reuse/INSTALLED_PROOF.json",
+      "sha256": "b216e3f33a4dc48c3ec96f085e028a03da17fcb922b1d0c37e9a00e228e9c50e"
+    },
+    "unicode_final_freeze": {
+      "bytes": 15083,
+      "custody_relative_path": "regex-mastery-20261021/unicode/prefix-reuse/FREEZE.json",
+      "sha256": "8d8984d73a1cf7f35f6dafd58ef4244c3362467f0df77b4a9df4ecbe46ac9aa6"
+    },
+    "unicode_final_scope": {
+      "bytes": 11856,
+      "custody_relative_path": "regex-mastery-20261021/unicode/prefix-reuse/README.md",
+      "sha256": "1612031d61d5e42c7958642c1ae935987686ad90b1793c5e0e1b9ad578f88c22"
+    },
+    "unicode_peer_review": {
+      "bytes": 5213,
+      "custody_relative_path": "regex-mastery-20261021/unicode/prefix-reuse/PEER_REVIEW.md",
+      "sha256": "612436711933277babb76c041607076629a3ad93d692e3e16bc2ada942edd3db"
+    },
+    "unicode_prefix_receive": {
+      "bytes": 1482,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/unicode-prefix-receive.json",
+      "sha256": "ac056fd2c5bf2d1f9f31ae5e43fe16b1f6011d6f637c5578393b90278162c5bd"
+    },
+    "unicode_resource_baseline": {
+      "bytes": 257873,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/unicode-resources/evidence/baseline-1/receipt.json",
+      "sha256": "a5cd4172566e467afe14b5bd86a01a0c4fc317ef6888c0b57a135800d6d42683"
+    },
+    "unicode_resource_refined": {
+      "bytes": 265175,
+      "custody_relative_path": "regex-mastery-20261021/unicode/prefix-reuse/evidence/installed-final-1/receipt.json",
+      "sha256": "eebd8221bda94093668b2ef70e4d3746550fc3e80bfcf64c272458fda47d6453"
+    },
+    "unicode_resource_slowCandidate": {
+      "bytes": 260027,
+      "custody_relative_path": "regex-mastery-20261021/current-proof/unicode-resources/evidence/candidate-1/receipt.json",
+      "sha256": "93f179426bbd0bef51434c385d14db8678442b8b78cac0f169ace6ea118f3012"
+    }
+  },
+  "evidence_convention": {
+    "custody_paths_are_relative_identifiers": true,
+    "description": "Evidence identifiers below bind exact retained bytes by SHA-256. custody_relative_path is relative to the retained task/session evidence root, not a public-repository file link. The private canonical companion preserves raw receipts and its own custody manifest. This public file contains first-party summaries and identities, no private implementation bodies or raw donor mirrors.",
+    "public_product_tests": "All source_inventory test paths are product-repository relative and provide the executable product fixtures.",
+    "raw_receipts_are_not_public_payload": true,
+    "summary_is_public": true
+  },
+  "images": {
+    "changed_image_paths": [
+      "jmods/java.base.jmod",
+      "jmods/jdk.jlink.jmod",
+      "lib/classlist",
+      "lib/modules",
+      "lib/server/classes.jsa",
+      "lib/server/classes_nocoops.jsa",
+      "lib/src.zip"
+    ],
+    "changed_owner_paths": [
+      "src/java.base/share/classes/java/lang/M3StringFacts.java",
+      "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+      "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+      "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+      "src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java"
+    ],
+    "evidence": "image_comparison",
+    "identities": {
+      "baseline": {
+        "build_evidence": "baseline_build",
+        "build_log_evidence": "baseline_build_log",
+        "file_count": 532,
+        "identity_evidence": "baseline_image_identity",
+        "selected_image_files": [
+          {
+            "path": "bin/java",
+            "sha256": "cfd0a4ba4e47a92157c91a592b84e4379c4e339e1a32ebc7dc523475bffaa9bf",
+            "size": 16320
+          },
+          {
+            "path": "jmods/java.base.jmod",
+            "sha256": "3d3b8fe63f0e1832547dd26e2641ea1e4a05e1f199715cbc7e760e8746619e53",
+            "size": 25455119
+          },
+          {
+            "path": "lib/libjava.so",
+            "sha256": "77b7f3a11fe6abb09131467bcc1a71ecbd2983080f24823f970a408e4f9004ce",
+            "size": 215800
+          },
+          {
+            "path": "lib/modules",
+            "sha256": "7923ab2a13a9f6b28d085f1b258b137aaa90fe29568d636eb47e31e42e8e45fb",
+            "size": 143528948
+          },
+          {
+            "path": "lib/server/libjvm.so",
+            "sha256": "92bd342f56479b6cfa761a22b2f0c1bbaf54cb94d38f9f2f95ec4719322b6da6",
+            "size": 26473136
+          }
+        ],
+        "source_hashes": {
+          "src/java.base/share/classes/java/lang/M3String.java": "b16c1d8478f24f3e10b7249ea3d9264dca8b90fb93e3e77c3800d42fda69615f",
+          "src/java.base/share/classes/java/lang/M3StringFacts.java": "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a",
+          "src/java.base/share/classes/java/lang/M3StringRegexDp.java": "69ebbcbd716f673af9fe282b8ab72f7b7de7961d7c43d69f534267c31a04a39f",
+          "src/java.base/share/classes/java/lang/String.java": "5d4319de5a49b553f1b54b6c9ca65197c39cd6395e94acba413c75bfd34bfc57",
+          "src/java.base/share/classes/java/util/ChangeJournal.java": "2fd9384a9df26ed038bd6663e083586425228815dc7b4d43205af769d3c2544e",
+          "src/java.base/share/classes/java/util/regex/M3PatternQuery.java": "b471add6421a394fb59a15b2fe9a7cac21a9c4c438d754996f961f43bb811531",
+          "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61",
+          "src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java": "0ed768ba1672780790c55b4e64ac28b9c702740ba5a03484805e68b4d8725a10"
+        },
+        "startup_modes_pass": [
+          "default",
+          "m3-compact",
+          "m3-wide"
+        ]
+      },
+      "candidate": {
+        "build_evidence": "candidate_build",
+        "build_log_evidence": "candidate_build_log",
+        "file_count": 532,
+        "identity_evidence": "candidate_image_identity",
+        "selected_image_files": [
+          {
+            "path": "bin/java",
+            "sha256": "cfd0a4ba4e47a92157c91a592b84e4379c4e339e1a32ebc7dc523475bffaa9bf",
+            "size": 16320
+          },
+          {
+            "path": "jmods/java.base.jmod",
+            "sha256": "b53db8854389f0095c0403d08f237f78f2d4bf3fface3da39ab4858fc8754505",
+            "size": 25460018
+          },
+          {
+            "path": "lib/libjava.so",
+            "sha256": "77b7f3a11fe6abb09131467bcc1a71ecbd2983080f24823f970a408e4f9004ce",
+            "size": 215800
+          },
+          {
+            "path": "lib/modules",
+            "sha256": "791952afd090eae52bdff504147897ceedb96b7c33c612ced429e72b1631df32",
+            "size": 143537967
+          },
+          {
+            "path": "lib/server/libjvm.so",
+            "sha256": "92bd342f56479b6cfa761a22b2f0c1bbaf54cb94d38f9f2f95ec4719322b6da6",
+            "size": 26473136
+          }
+        ],
+        "source_hashes": {
+          "src/java.base/share/classes/java/lang/M3String.java": "b16c1d8478f24f3e10b7249ea3d9264dca8b90fb93e3e77c3800d42fda69615f",
+          "src/java.base/share/classes/java/lang/M3StringFacts.java": "0cc1b4726cb2637b184184a60c75964180d58790530101fcf46900f74f1dc72a",
+          "src/java.base/share/classes/java/lang/M3StringRegexDp.java": "faa373f77eef1d2dd3457bfe8c5d65d2dff819bb606e00f7c269e7b08a37cf25",
+          "src/java.base/share/classes/java/lang/String.java": "5d4319de5a49b553f1b54b6c9ca65197c39cd6395e94acba413c75bfd34bfc57",
+          "src/java.base/share/classes/java/util/ChangeJournal.java": "2fd9384a9df26ed038bd6663e083586425228815dc7b4d43205af769d3c2544e",
+          "src/java.base/share/classes/java/util/regex/M3PatternQuery.java": "190d541c497c344ba5015f38edadf6d6fb359e10010afbb88729905e04b1c1d7",
+          "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java": "e5b9b0cafa6edb66697783250271fa165c9ccee7ccbf661b7b23843e7e1d7a43",
+          "src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java": "1aa4e472110c2ca9432efc68cf7bea09c22ade8af670017fa4fe473bebfade88"
+        },
+        "startup_modes_pass": [
+          "default",
+          "m3-compact",
+          "m3-wide"
+        ]
+      }
+    },
+    "m3_execution_scope": "Existing M3 storage mode forces interpreter execution, disables CDS and rejects JFR; no M3 JIT/CDS/JFR qualification.",
+    "native_launcher_files_compared": 71,
+    "native_launcher_mismatches": 0,
+    "native_parity_scope": "Exact file equality in the two Linux x86-64 images, not cross-platform execution."
+  },
+  "preserved_failed_attempts": [
+    {
+      "evidence": "missing_engine_source_seal",
+      "id": "missing_engine_source_seal",
+      "observation": "Actual SDK run failed because ENGINE_SOURCES.tsv was absent; original log retained."
+    },
+    {
+      "evidence": "missing_effective_engine_seal",
+      "id": "missing_effective_engine_seal",
+      "observation": "Five SDK cases passed, then the receiver contract refused missing ENGINE_EFFECTIVE.tsv; not an overall pass."
+    },
+    {
+      "evidence": "mastery_missing_dag_1",
+      "id": "mastery_missing_dag_1",
+      "observation": "Standalone selected crate closure lacked RecipeDag; compile failed."
+    },
+    {
+      "evidence": "mastery_missing_dag_2",
+      "id": "mastery_missing_dag_2",
+      "observation": "Repeated selected-closure compile failure retained before canonical dependency receiving."
+    },
+    {
+      "evidence": "mastery_evidence_refusal_3",
+      "id": "mastery_evidence_refusal_3",
+      "observation": "Earlier mastery execution includes owner/root setup and NEW_EVIDENCE_DIRECTORY_REQUIRED refusals."
+    },
+    {
+      "evidence": "mastery_evidence_refusal_4",
+      "id": "mastery_evidence_refusal_4",
+      "observation": "Existing-evidence-directory refusals retained; no gate weakening."
+    },
+    {
+      "evidence": "mastery_evidence_refusal_5",
+      "id": "mastery_evidence_refusal_5",
+      "observation": "Existing-evidence-directory refusals retained before the separate successful sixth run."
+    },
+    {
+      "evidence": "baseline_doclint_build",
+      "id": "baseline_doclint_build",
+      "observation": "Original c831 image build failed with ChangeJournal documentation warnings under unchanged -Werror; comment-only repair separately received and stacked."
+    },
+    {
+      "evidence": "refined_interim_output_refusal",
+      "id": "refined_interim_output_refusal",
+      "observation": "jlink refused a reused interim-image directory; later build uses fresh interim and final packaging paths without source or compiler-flag weakening."
+    },
+    {
+      "evidence": "fresh_interim_recovery",
+      "id": "fresh_interim_recovery",
+      "observation": "Preserved recovery record; the failed build is not overwritten or relabeled as success."
+    },
+    {
+      "evidence": "full_wrapper_attempt",
+      "id": "full_wrapper_incomplete_closure",
+      "observation": "Actual standalone Maven compilation of 271 exact current sources failed with incomplete module/parser/Lombok closure; 100 diagnostics may be truncated. Full canonical wrapper test did not run. This is not a demonstrated upstream semantic compiler defect.",
+      "status": "NOT_RUN"
+    },
+    {
+      "evidence": "unicode_resource_slowCandidate",
+      "id": "unicode_slow_candidate",
+      "observation": "The prior 06aadfc5 candidate had a concrete 256-star/sixteen-pair CPU and allocation regression. Its observations remain in the three-stage comparison."
+    },
+    {
+      "evidence": "unicode_expected_red",
+      "id": "nullable_prefix_expected_red",
+      "observation": "934 focused semantic checks passed before the expected allocation witness failed: 1024 BMP calls allocated 344064 bytes, supplementary calls 630784 bytes. Final focused allocation is 344064 bytes for each."
+    }
+  ],
+  "provenance": {
+    "category_limit": "Problem categories are discovery aids. Wildcards, counts, first/all matches, weighted multi-pattern occurrences and general Java Pattern semantics have different contracts.",
+    "challenge_code_copied": false,
+    "donor_implementation_imported": false,
+    "private_implementation_exported": false,
+    "product_notices": "Existing Facts/DP/Query/IndexedArray GPLv2 with Classpath exception and TokenPredicateCache Apache-2.0 component notices retained; test notices stay with their source files.",
+    "public_catalogue": "m3/collections/algorithm-catalog/regex-language-mastery-20261021/CATALOGUE.json",
+    "reference_order": [
+      "LeetCode",
+      "HackerRank",
+      "GeeksforGeeks"
+    ],
+    "reviewed_reference_revisions": [
+      {
+        "disposition": "Reference only; no implementation copied.",
+        "license": "MIT",
+        "repository": "TheAlgorithms/Java",
+        "revision": "d9b86d1992b8bd4cadbd832822c792628117e69d"
+      },
+      {
+        "disposition": "Refused as a Java Pattern replacement or oracle; reference only.",
+        "license": "BSD-3-Clause",
+        "repository": "google/re2j",
+        "revision": "951a6159fdc0a4931593c70442926f86031edf40"
+      },
+      {
+        "disposition": "Licence inspected; no challenge solution/editorial imported.",
+        "license": "CC-BY-SA-4.0",
+        "repository": "doocs/leetcode",
+        "revision": "5f6429aec9a7fc90b29c984246b617aad7394b2a"
+      }
+    ]
+  },
+  "receive": {
+    "doclint_current_replay_calls": 4,
+    "doclint_current_replay_changes_each": 0,
+    "doclint_current_replay_evidence": "doclint_current_replay",
+    "doclint_original_apply_receipt": "NOT_SEPARATELY_PERSISTED",
+    "doclint_scope": "Fresh unchanged receiver check and zero-change apply on both actual baseline and candidate source trees after the builds; not a retroactive original-apply receipt. SDK receiver-contract apply/fixed-point evidence is separate.",
+    "exact_observed_runs": [
+      {
+        "actual_sdk_results": true,
+        "changes": 11,
+        "dataset": "combined-c831",
+        "mode": "apply",
+        "targets": 11
+      },
+      {
+        "actual_sdk_results": true,
+        "changes": 0,
+        "dataset": "combined-c831",
+        "mode": "check",
+        "targets": 11
+      },
+      {
+        "actual_sdk_results": true,
+        "changes": 4,
+        "dataset": "collections-c831",
+        "mode": "apply",
+        "targets": 4
+      },
+      {
+        "actual_sdk_results": true,
+        "changes": 0,
+        "dataset": "collections-c831",
+        "mode": "check",
+        "targets": 4
+      },
+      {
+        "actual_sdk_results": true,
+        "changes": 2,
+        "dataset": "unicode-prefix-c831",
+        "mode": "apply",
+        "targets": 2
+      },
+      {
+        "actual_sdk_results": true,
+        "changes": 0,
+        "dataset": "unicode-prefix-c831",
+        "mode": "check",
+        "targets": 2
+      }
+    ],
+    "prefix_order": [
+      "combined-c831",
+      "unicode-prefix-c831"
+    ],
+    "prefix_stage_preimage_is_prior_candidate": true
+  },
+  "regression": {
+    "all_tests_pass": false,
+    "clean_distinct_test_paths": 23,
+    "clean_existing_batch_test_results": 28,
+    "counting_scope": "Counts identify batch/test results; overlapping batches are not additional distinct tests. Unchanged legacy failures remain failures.",
+    "evidence": "regression_comparison",
+    "matched_baseline_failure_results": [
+      {
+        "baseline": {
+          "jtr": "continuation-build/mastery-current-baseline-jtreg-2/declared-regressions/work/java/lang/String/M3StringFactsCompositionTest.jtr",
+          "sha256": "ba52df78a6c16a13e3cf06254f889d1277afda1f7eace877b8322fbb586eb5c3",
+          "status": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: pair flat oracle is not a scalar atom: class java.lang.M3StringImmediate"
+        },
+        "batch": "declared-regressions",
+        "candidate": {
+          "jtr": "continuation-build/mastery-current-final-jtreg/declared-regressions/work/java/lang/String/M3StringFactsCompositionTest.jtr",
+          "sha256": "8a7bfa38a09554645082b7d51d111f75fde4982587f9db45171a44200ddeb134",
+          "status": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: pair flat oracle is not a scalar atom: class java.lang.M3StringImmediate"
+        },
+        "test": "java/lang/String/M3StringFactsCompositionTest.jtr"
+      },
+      {
+        "baseline": {
+          "jtr": "continuation-build/mastery-current-baseline-jtreg-2/declared-regressions/work/java/lang/String/M3StringRegexDpTest.jtr",
+          "sha256": "8a0a6f441f92188dc3c08eb9857eec173d5e7b9c70ae24d8b604ffdfb2e05e27",
+          "status": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: expected canonical M3 storage: cc"
+        },
+        "batch": "declared-regressions",
+        "candidate": {
+          "jtr": "continuation-build/mastery-current-final-jtreg/declared-regressions/work/java/lang/String/M3StringRegexDpTest.jtr",
+          "sha256": "7e6bbcb1b4830eb131a59fe22bde977b8196dcc03af9194072cf15f69325de14",
+          "status": "Failed. Execution failed: `main' threw exception: java.lang.AssertionError: expected canonical M3 storage: cc"
+        },
+        "test": "java/lang/String/M3StringRegexDpTest.jtr"
+      },
+      {
+        "baseline": {
+          "jtr": "continuation-build/mastery-current-baseline-jtreg-2/all-regex/work/java/util/regex/M3PatternStateMaskTest.jtr",
+          "sha256": "7b8c7c2153167fd9ac07aed697f6e11f495796122c58b594c107c0842ddf09c4",
+          "status": "Failed. Execution failed: `main' threw exception: java.lang.NoSuchFieldException: wordPlan"
+        },
+        "batch": "all-regex",
+        "candidate": {
+          "jtr": "continuation-build/mastery-current-final-jtreg/all-regex/work/java/util/regex/M3PatternStateMaskTest.jtr",
+          "sha256": "405ab34d0fd19b4d627d05d61d77a6295a0d662591cd82069dbc1fdca2c2094a",
+          "status": "Failed. Execution failed: `main' threw exception: java.lang.NoSuchFieldException: wordPlan"
+        },
+        "test": "java/util/regex/M3PatternStateMaskTest.jtr"
+      }
+    ],
+    "new_or_changed_failures": [],
+    "scoped_comparison_pass": true,
+    "shared_distinct_test_paths": 25,
+    "two_added_regex_results": [
+      {
+        "batch": "all-regex",
+        "jtr": "continuation-build/mastery-current-final-jtreg/all-regex/work/java/util/regex/M3PatternNullablePrefixTest.jtr",
+        "sha256": "40d6a899a9524f38da9e827d318a505835fd658de9195463ea2ddc2c765aa574",
+        "status": "Passed. Execution successful",
+        "test": "java/util/regex/M3PatternNullablePrefixTest.jtr"
+      },
+      {
+        "batch": "all-regex",
+        "jtr": "continuation-build/mastery-current-final-jtreg/all-regex/work/java/util/regex/M3PatternUnicodeTest.jtr",
+        "sha256": "52caf9f5b88adc9b9bcbd97a13b80d51ffce68ff7fefd5d38fa311667dbfb3cf",
+        "status": "Passed. Execution successful",
+        "test": "java/util/regex/M3PatternUnicodeTest.jtr"
+      }
+    ],
+    "two_existing_regex_test_sources_intentionally_adapted": [
+      "test/jdk/java/util/regex/M3PatternAsciiFrontierTest.java",
+      "test/jdk/java/util/regex/M3PatternStateMaskTest.java"
+    ],
+    "unexpected_selection_changes": []
+  },
+  "remaining_gates": {
+    "full_wrapper": "NOT_RUN",
+    "global_string_phase": {
+      "baseline_exit": 1,
+      "candidate_exit": 1,
+      "command": "python3 m3/synexia-import/current-full-borrow/check_string_phase.py",
+      "error": "target owner drift: src/java.base/share/classes/java/lang/M3String.java expected=35ed998540e044eed8cb7596e2e2c019ae369bd3 actual=8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e",
+      "phase_closure_open_gates": 12,
+      "pin_or_gate_modified": false,
+      "promotion": "BLOCKED",
+      "source_base": "c831c4a77f0e3e10aac94178217efda882ba4be5",
+      "unchanged_owner_sha256": "b16c1d8478f24f3e10b7249ea3d9264dca8b90fb93e3e77c3800d42fda69615f"
+    },
+    "merge_result_ci": "NOT_RUN",
+    "metadata_sdk_receive_replay": "NOT_RUN_AT_AUTHORING",
+    "policy_preflight": {
+      "command_exits": [
+        {
+          "command": [
+            "python3",
+            "m3/compatibility/check_synexia_public_target.py"
+          ],
+          "exit_code": 0
+        },
+        {
+          "command": [
+            "python3",
+            "m3/compatibility/check_synexia_full_family.py"
+          ],
+          "exit_code": 0
+        },
+        {
+          "command": [
+            "python3",
+            "m3/compatibility/check_synexia_full_borrow_receiver.py"
+          ],
+          "exit_code": 0
+        },
+        {
+          "command": [
+            "python3",
+            "m3/synexia-import/current-full-borrow/check_string_phase_closure.py"
+          ],
+          "exit_code": 0
+        },
+        {
+          "command": [
+            "python3",
+            "m3/synexia-import/current-full-borrow/check_string_phase.py"
+          ],
+          "exit_code": 1
+        }
+      ],
+      "evidence": "policy_preflight",
+      "scope": "Closure checker exit 0 reports a valid incomplete state; twelve closure items remain open. These preflight results do not qualify the later metadata payload."
+    },
+    "unqualified_scope": [
+      "Later upstream runtime changes",
+      "M3 JIT/CDS/JFR",
+      "all-language frontends",
+      "arbitrary Java regex equivalence",
+      "native Unicode matcher",
+      "general speed or whole-memory improvement",
+      "family or repository completion"
+    ],
+    "upstream_strict_naming_audit": {
+      "cause": "The documented repository-relative invocation is refused by a literal whole-argv comparison before map reading; helper tests do not cover that CLI.",
+      "checker_modified": false,
+      "documented_cli_exit": 2,
+      "evidence": "latest_naming_policy_review",
+      "head": "7b1b7af779683418be9a2a5bf8ed203a0e316422",
+      "nine_helper_tests_pass": true,
+      "status": "PENDING_UPSTREAM_CLI_CORRECTION_AND_MERGE_RESULT_RERUN"
+    },
+    "whole_jdk_suite": "NOT_RUN"
+  },
+  "resources": {
+    "all_public_medians": [
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 261.3984375,
+          "medianWallNsPerCall": 254.9921875
+        },
+        "input": "empty",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 217.90625,
+          "medianWallNsPerCall": 213.7578125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 257.7265625,
+          "medianWallNsPerCall": 251.0078125
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 10894.6171875,
+          "medianWallNsPerCall": 10880.765625
+        },
+        "input": "ascii",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 8024.7265625,
+          "medianWallNsPerCall": 8013.375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 10652.3828125,
+          "medianWallNsPerCall": 10637.1953125
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 1188.796875,
+          "medianWallNsPerCall": 1180.5390625
+        },
+        "input": "bmp",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 900.9453125,
+          "medianWallNsPerCall": 896.046875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 1194.5078125,
+          "medianWallNsPerCall": 1184.9140625
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 240.0,
+          "medianThreadCpuNsPerCall": 4079.03125,
+          "medianWallNsPerCall": 4065.375
+        },
+        "input": "lone_high",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 1259.9921875,
+          "medianWallNsPerCall": 1252.359375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 1545.109375,
+          "medianWallNsPerCall": 1537.40625
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 240.0,
+          "medianThreadCpuNsPerCall": 3440.96875,
+          "medianWallNsPerCall": 3433.2421875
+        },
+        "input": "pair_one",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 1570.6171875,
+          "medianWallNsPerCall": 1562.2109375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 48.0,
+          "medianThreadCpuNsPerCall": 2392.1484375,
+          "medianWallNsPerCall": 2384.625
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 240.0,
+          "medianThreadCpuNsPerCall": 14091.46875,
+          "medianWallNsPerCall": 14080.375
+        },
+        "input": "pair_many",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 12649.09375,
+          "medianWallNsPerCall": 13060.625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 48.0,
+          "medianThreadCpuNsPerCall": 18360.78125,
+          "medianWallNsPerCall": 18340.4140625
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 240.0,
+          "medianThreadCpuNsPerCall": 6201.7109375,
+          "medianWallNsPerCall": 6188.7421875
+        },
+        "input": "ascii_pair_seam",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 2840.3125,
+          "medianWallNsPerCall": 2834.4453125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 48.0,
+          "medianThreadCpuNsPerCall": 3180.34375,
+          "medianWallNsPerCall": 3169.40625
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 213.2890625,
+          "medianWallNsPerCall": 209.6171875
+        },
+        "input": "empty",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 216.1796875,
+          "medianWallNsPerCall": 212.1171875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 218.53125,
+          "medianWallNsPerCall": 214.4609375
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 8533.21875,
+          "medianWallNsPerCall": 8522.90625
+        },
+        "input": "ascii",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 9447.390625,
+          "medianWallNsPerCall": 9434.59375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 8003.296875,
+          "medianWallNsPerCall": 7991.46875
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 5448.484375,
+          "medianWallNsPerCall": 5436.8203125
+        },
+        "input": "bmp",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 2723.0234375,
+          "medianWallNsPerCall": 2710.8203125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 5116.7421875,
+          "medianWallNsPerCall": 5108.59375
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 296.0,
+          "medianThreadCpuNsPerCall": 8195.296875,
+          "medianWallNsPerCall": 8186.21875
+        },
+        "input": "lone_high",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 2958.140625,
+          "medianWallNsPerCall": 2949.0703125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 5220.875,
+          "medianWallNsPerCall": 5211.640625
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 296.0,
+          "medianThreadCpuNsPerCall": 9094.7578125,
+          "medianWallNsPerCall": 9083.203125
+        },
+        "input": "pair_one",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 3544.640625,
+          "medianWallNsPerCall": 3528.0703125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 160.0,
+          "medianThreadCpuNsPerCall": 10271.65625,
+          "medianWallNsPerCall": 10257.6328125
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 296.0,
+          "medianThreadCpuNsPerCall": 19649.9609375,
+          "medianWallNsPerCall": 19633.15625
+        },
+        "input": "pair_many",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 15053.6796875,
+          "medianWallNsPerCall": 15030.40625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 160.0,
+          "medianThreadCpuNsPerCall": 118062.828125,
+          "medianWallNsPerCall": 117968.9453125
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 296.0,
+          "medianThreadCpuNsPerCall": 12234.1796875,
+          "medianWallNsPerCall": 12219.1953125
+        },
+        "input": "ascii_pair_seam",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 4311.0859375,
+          "medianWallNsPerCall": 4302.21875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 160.0,
+          "medianThreadCpuNsPerCall": 14793.84375,
+          "medianWallNsPerCall": 14776.578125
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 334.2421875,
+          "medianWallNsPerCall": 329.40625
+        },
+        "input": "empty",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 330.9609375,
+          "medianWallNsPerCall": 326.4375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 319.2265625,
+          "medianWallNsPerCall": 314.9296875
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 18647.5390625,
+          "medianWallNsPerCall": 18626.2421875
+        },
+        "input": "ascii",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 17783.9921875,
+          "medianWallNsPerCall": 17766.65625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 17956.1171875,
+          "medianWallNsPerCall": 17943.1796875
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 6038.2578125,
+          "medianWallNsPerCall": 6024.3515625
+        },
+        "input": "bmp",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 3485.6484375,
+          "medianWallNsPerCall": 3473.1484375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 5431.734375,
+          "medianWallNsPerCall": 5417.96875
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 8621.5546875,
+          "medianWallNsPerCall": 8612.1796875
+        },
+        "input": "lone_high",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 3394.8125,
+          "medianWallNsPerCall": 3382.7734375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 6170.5703125,
+          "medianWallNsPerCall": 6414.3984375
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 11003.0546875,
+          "medianWallNsPerCall": 10982.5625
+        },
+        "input": "pair_one",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 3802.4453125,
+          "medianWallNsPerCall": 3789.484375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 208.0,
+          "medianThreadCpuNsPerCall": 11069.71875,
+          "medianWallNsPerCall": 11051.4921875
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 19185.6796875,
+          "medianWallNsPerCall": 19173.5546875
+        },
+        "input": "pair_many",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 15795.5703125,
+          "medianWallNsPerCall": 15807.9921875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 208.0,
+          "medianThreadCpuNsPerCall": 125000.546875,
+          "medianWallNsPerCall": 124952.328125
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 13010.3359375,
+          "medianWallNsPerCall": 12993.3359375
+        },
+        "input": "ascii_pair_seam",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 5820.5234375,
+          "medianWallNsPerCall": 5811.609375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 208.0,
+          "medianThreadCpuNsPerCall": 19597.8515625,
+          "medianWallNsPerCall": 19568.0546875
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 318.1328125,
+          "medianWallNsPerCall": 312.7421875
+        },
+        "input": "empty",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 493.078125,
+          "medianWallNsPerCall": 485.109375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 342.4609375,
+          "medianWallNsPerCall": 337.234375
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 31063.1640625,
+          "medianWallNsPerCall": 31048.3984375
+        },
+        "input": "ascii",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 35937.2734375,
+          "medianWallNsPerCall": 35901.6875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 29768.109375,
+          "medianWallNsPerCall": 29746.5078125
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 18374.0859375,
+          "medianWallNsPerCall": 18364.28125
+        },
+        "input": "bmp",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 12447.859375,
+          "medianWallNsPerCall": 12881.84375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 19406.625,
+          "medianWallNsPerCall": 19389.65625
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 24048.921875,
+          "medianWallNsPerCall": 24034.578125
+        },
+        "input": "lone_high",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 12251.703125,
+          "medianWallNsPerCall": 12225.6875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 19260.2421875,
+          "medianWallNsPerCall": 19247.4921875
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 23991.8828125,
+          "medianWallNsPerCall": 23976.7578125
+        },
+        "input": "pair_one",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 9864.5703125,
+          "medianWallNsPerCall": 9852.2578125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 616.0,
+          "medianThreadCpuNsPerCall": 36166.4453125,
+          "medianWallNsPerCall": 36146.2734375
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 35421.5078125,
+          "medianWallNsPerCall": 35399.6015625
+        },
+        "input": "pair_many",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 24739.2421875,
+          "medianWallNsPerCall": 24710.1328125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 616.0,
+          "medianThreadCpuNsPerCall": 379327.1328125,
+          "medianWallNsPerCall": 379234.859375
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 29922.953125,
+          "medianWallNsPerCall": 29901.984375
+        },
+        "input": "ascii_pair_seam",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 15639.2421875,
+          "medianWallNsPerCall": 15619.1875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 616.0,
+          "medianThreadCpuNsPerCall": 49143.2890625,
+          "medianWallNsPerCall": 49118.796875
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 225.1015625,
+          "medianWallNsPerCall": 216.421875
+        },
+        "input": "empty",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 278.4609375,
+          "medianWallNsPerCall": 266.96875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 220.171875,
+          "medianWallNsPerCall": 210.7890625
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 9546.359375,
+          "medianWallNsPerCall": 9533.8828125
+        },
+        "input": "ascii",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 12190.765625,
+          "medianWallNsPerCall": 12165.6015625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 9950.171875,
+          "medianWallNsPerCall": 9934.9609375
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 908.3828125,
+          "medianWallNsPerCall": 899.484375
+        },
+        "input": "bmp",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 1001.6484375,
+          "medianWallNsPerCall": 993.453125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 908.9296875,
+          "medianWallNsPerCall": 899.8046875
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 240.0,
+          "medianThreadCpuNsPerCall": 2978.09375,
+          "medianWallNsPerCall": 2963.546875
+        },
+        "input": "lone_high",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 1215.3984375,
+          "medianWallNsPerCall": 1207.84375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 1154.6796875,
+          "medianWallNsPerCall": 1146.1953125
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 240.0,
+          "medianThreadCpuNsPerCall": 3293.25,
+          "medianWallNsPerCall": 3276.90625
+        },
+        "input": "pair_one",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 1525.0,
+          "medianWallNsPerCall": 1517.84375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 48.0,
+          "medianThreadCpuNsPerCall": 1741.1796875,
+          "medianWallNsPerCall": 1733.09375
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 240.0,
+          "medianThreadCpuNsPerCall": 17376.1171875,
+          "medianWallNsPerCall": 17359.2421875
+        },
+        "input": "pair_many",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 16421.890625,
+          "medianWallNsPerCall": 16411.328125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 48.0,
+          "medianThreadCpuNsPerCall": 24635.4921875,
+          "medianWallNsPerCall": 24617.8046875
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 240.0,
+          "medianThreadCpuNsPerCall": 7566.3125,
+          "medianWallNsPerCall": 7551.0390625
+        },
+        "input": "ascii_pair_seam",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 3105.3984375,
+          "medianWallNsPerCall": 3097.8125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 48.0,
+          "medianThreadCpuNsPerCall": 3356.78125,
+          "medianWallNsPerCall": 3346.15625
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 245.3671875,
+          "medianWallNsPerCall": 236.453125
+        },
+        "input": "empty",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 216.0234375,
+          "medianWallNsPerCall": 209.453125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 226.1171875,
+          "medianWallNsPerCall": 219.3203125
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 11848.6171875,
+          "medianWallNsPerCall": 11834.390625
+        },
+        "input": "ascii",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 9206.484375,
+          "medianWallNsPerCall": 9196.265625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 9844.6171875,
+          "medianWallNsPerCall": 9822.921875
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 6297.796875,
+          "medianWallNsPerCall": 6275.828125
+        },
+        "input": "bmp",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 2807.3671875,
+          "medianWallNsPerCall": 2797.59375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 6126.90625,
+          "medianWallNsPerCall": 6110.265625
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 296.0,
+          "medianThreadCpuNsPerCall": 9491.515625,
+          "medianWallNsPerCall": 9473.796875
+        },
+        "input": "lone_high",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 3077.8515625,
+          "medianWallNsPerCall": 3068.859375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 5385.8125,
+          "medianWallNsPerCall": 5369.375
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 296.0,
+          "medianThreadCpuNsPerCall": 9869.65625,
+          "medianWallNsPerCall": 9854.5234375
+        },
+        "input": "pair_one",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 3376.890625,
+          "medianWallNsPerCall": 3370.734375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 160.0,
+          "medianThreadCpuNsPerCall": 11945.828125,
+          "medianWallNsPerCall": 11913.078125
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 296.0,
+          "medianThreadCpuNsPerCall": 30706.2265625,
+          "medianWallNsPerCall": 30686.6796875
+        },
+        "input": "pair_many",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 28913.171875,
+          "medianWallNsPerCall": 28883.8828125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 160.0,
+          "medianThreadCpuNsPerCall": 119268.671875,
+          "medianWallNsPerCall": 119188.4453125
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 296.0,
+          "medianThreadCpuNsPerCall": 10897.7421875,
+          "medianWallNsPerCall": 10885.6171875
+        },
+        "input": "ascii_pair_seam",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 6851.3515625,
+          "medianWallNsPerCall": 6829.2421875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 160.0,
+          "medianThreadCpuNsPerCall": 13208.59375,
+          "medianWallNsPerCall": 13191.6796875
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 325.25,
+          "medianWallNsPerCall": 317.1171875
+        },
+        "input": "empty",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 468.3515625,
+          "medianWallNsPerCall": 457.1015625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 337.84375,
+          "medianWallNsPerCall": 327.6796875
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 17961.4453125,
+          "medianWallNsPerCall": 17937.859375
+        },
+        "input": "ascii",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 23728.4375,
+          "medianWallNsPerCall": 23695.7890625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 16133.09375,
+          "medianWallNsPerCall": 16119.8671875
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 6869.0234375,
+          "medianWallNsPerCall": 6849.6640625
+        },
+        "input": "bmp",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 4443.0,
+          "medianWallNsPerCall": 4427.71875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 6682.34375,
+          "medianWallNsPerCall": 6665.71875
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 9237.0,
+          "medianWallNsPerCall": 9219.03125
+        },
+        "input": "lone_high",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 4960.1796875,
+          "medianWallNsPerCall": 4939.828125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 7830.375,
+          "medianWallNsPerCall": 7809.796875
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 10281.4375,
+          "medianWallNsPerCall": 10260.0625
+        },
+        "input": "pair_one",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 5451.0625,
+          "medianWallNsPerCall": 5434.9453125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 208.0,
+          "medianThreadCpuNsPerCall": 10779.8359375,
+          "medianWallNsPerCall": 10760.8203125
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 32160.8046875,
+          "medianWallNsPerCall": 32119.7109375
+        },
+        "input": "pair_many",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 30284.5,
+          "medianWallNsPerCall": 30250.0078125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 208.0,
+          "medianThreadCpuNsPerCall": 122280.6484375,
+          "medianWallNsPerCall": 122230.625
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 15212.984375,
+          "medianWallNsPerCall": 15195.03125
+        },
+        "input": "ascii_pair_seam",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 6577.734375,
+          "medianWallNsPerCall": 6569.0078125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 208.0,
+          "medianThreadCpuNsPerCall": 16788.9140625,
+          "medianWallNsPerCall": 16768.8984375
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 441.671875,
+          "medianWallNsPerCall": 432.21875
+        },
+        "input": "empty",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 464.359375,
+          "medianWallNsPerCall": 451.6953125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 355.6015625,
+          "medianWallNsPerCall": 348.8125
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 39083.5078125,
+          "medianWallNsPerCall": 39050.90625
+        },
+        "input": "ascii",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 38626.1875,
+          "medianWallNsPerCall": 38581.7578125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 36042.3515625,
+          "medianWallNsPerCall": 36014.515625
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 24492.15625,
+          "medianWallNsPerCall": 24459.046875
+        },
+        "input": "bmp",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 13628.5234375,
+          "medianWallNsPerCall": 13599.8828125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 21653.171875,
+          "medianWallNsPerCall": 21633.453125
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 29659.984375,
+          "medianWallNsPerCall": 29635.875
+        },
+        "input": "lone_high",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 13862.1484375,
+          "medianWallNsPerCall": 13836.796875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 21312.0390625,
+          "medianWallNsPerCall": 21287.453125
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 30239.5078125,
+          "medianWallNsPerCall": 30197.109375
+        },
+        "input": "pair_one",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 13714.03125,
+          "medianWallNsPerCall": 13690.484375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 616.0,
+          "medianThreadCpuNsPerCall": 36463.4453125,
+          "medianWallNsPerCall": 36478.6484375
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 51433.484375,
+          "medianWallNsPerCall": 51402.890625
+        },
+        "input": "pair_many",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 39678.84375,
+          "medianWallNsPerCall": 39683.0390625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 616.0,
+          "medianThreadCpuNsPerCall": 374243.5625,
+          "medianWallNsPerCall": 374115.703125
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 37354.140625,
+          "medianWallNsPerCall": 37328.453125
+        },
+        "input": "ascii_pair_seam",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 19959.71875,
+          "medianWallNsPerCall": 19925.7109375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 616.0,
+          "medianThreadCpuNsPerCall": 49640.4375,
+          "medianWallNsPerCall": 49577.1484375
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 232.0625,
+          "medianWallNsPerCall": 223.6171875
+        },
+        "input": "empty",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 216.7265625,
+          "medianWallNsPerCall": 208.203125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 230.109375,
+          "medianWallNsPerCall": 219.703125
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 10328.2265625,
+          "medianWallNsPerCall": 11190.609375
+        },
+        "input": "ascii",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 9523.671875,
+          "medianWallNsPerCall": 9513.3828125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 10349.3515625,
+          "medianWallNsPerCall": 10329.6953125
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 948.28125,
+          "medianWallNsPerCall": 940.015625
+        },
+        "input": "bmp",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 1022.6953125,
+          "medianWallNsPerCall": 1011.21875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 947.265625,
+          "medianWallNsPerCall": 938.2109375
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 240.0,
+          "medianThreadCpuNsPerCall": 2512.015625,
+          "medianWallNsPerCall": 2504.34375
+        },
+        "input": "lone_high",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 1192.625,
+          "medianWallNsPerCall": 1184.375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 1051.0078125,
+          "medianWallNsPerCall": 1041.1875
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 240.0,
+          "medianThreadCpuNsPerCall": 3894.9296875,
+          "medianWallNsPerCall": 3879.625
+        },
+        "input": "pair_one",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 1357.171875,
+          "medianWallNsPerCall": 1349.703125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 48.0,
+          "medianThreadCpuNsPerCall": 1581.9609375,
+          "medianWallNsPerCall": 1574.0234375
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 240.0,
+          "medianThreadCpuNsPerCall": 16767.1640625,
+          "medianWallNsPerCall": 16746.3671875
+        },
+        "input": "pair_many",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 17641.8203125,
+          "medianWallNsPerCall": 17622.21875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 48.0,
+          "medianThreadCpuNsPerCall": 23376.28125,
+          "medianWallNsPerCall": 23348.546875
+        }
+      },
+      {
+        "atoms": 1,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 240.0,
+          "medianThreadCpuNsPerCall": 5140.5234375,
+          "medianWallNsPerCall": 5130.265625
+        },
+        "input": "ascii_pair_seam",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 24.0,
+          "medianThreadCpuNsPerCall": 2921.2109375,
+          "medianWallNsPerCall": 2908.15625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 48.0,
+          "medianThreadCpuNsPerCall": 2970.8125,
+          "medianWallNsPerCall": 2961.4375
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 232.609375,
+          "medianWallNsPerCall": 225.4140625
+        },
+        "input": "empty",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 212.1953125,
+          "medianWallNsPerCall": 203.359375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 233.15625,
+          "medianWallNsPerCall": 224.0859375
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 13664.6640625,
+          "medianWallNsPerCall": 13634.390625
+        },
+        "input": "ascii",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 10284.1015625,
+          "medianWallNsPerCall": 10268.1171875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 0.0,
+          "medianThreadCpuNsPerCall": 9445.7421875,
+          "medianWallNsPerCall": 9433.96875
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 5914.875,
+          "medianWallNsPerCall": 5901.359375
+        },
+        "input": "bmp",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 3253.8984375,
+          "medianWallNsPerCall": 3241.0
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 5293.015625,
+          "medianWallNsPerCall": 5277.6015625
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 296.0,
+          "medianThreadCpuNsPerCall": 7816.453125,
+          "medianWallNsPerCall": 7786.7109375
+        },
+        "input": "lone_high",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 2916.6015625,
+          "medianWallNsPerCall": 2908.6953125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 5455.8359375,
+          "medianWallNsPerCall": 5440.734375
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 296.0,
+          "medianThreadCpuNsPerCall": 7874.9765625,
+          "medianWallNsPerCall": 7863.078125
+        },
+        "input": "pair_one",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 2983.1796875,
+          "medianWallNsPerCall": 2973.71875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 160.0,
+          "medianThreadCpuNsPerCall": 9549.1796875,
+          "medianWallNsPerCall": 9530.3671875
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 296.0,
+          "medianThreadCpuNsPerCall": 22957.2890625,
+          "medianWallNsPerCall": 22642.9453125
+        },
+        "input": "pair_many",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 19646.9921875,
+          "medianWallNsPerCall": 19624.546875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 160.0,
+          "medianThreadCpuNsPerCall": 118523.2734375,
+          "medianWallNsPerCall": 118432.5390625
+        }
+      },
+      {
+        "atoms": 63,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 296.0,
+          "medianThreadCpuNsPerCall": 12637.28125,
+          "medianWallNsPerCall": 12617.84375
+        },
+        "input": "ascii_pair_seam",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 80.0,
+          "medianThreadCpuNsPerCall": 5481.1015625,
+          "medianWallNsPerCall": 5461.0
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 160.0,
+          "medianThreadCpuNsPerCall": 14260.703125,
+          "medianWallNsPerCall": 14231.5390625
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 417.734375,
+          "medianWallNsPerCall": 408.5078125
+        },
+        "input": "empty",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 339.015625,
+          "medianWallNsPerCall": 330.8125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 333.15625,
+          "medianWallNsPerCall": 322.203125
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 21935.6171875,
+          "medianWallNsPerCall": 21906.203125
+        },
+        "input": "ascii",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 19397.2421875,
+          "medianWallNsPerCall": 19370.9609375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 32.0,
+          "medianThreadCpuNsPerCall": 17375.796875,
+          "medianWallNsPerCall": 17350.953125
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 7075.1953125,
+          "medianWallNsPerCall": 7059.359375
+        },
+        "input": "bmp",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 3523.046875,
+          "medianWallNsPerCall": 3508.671875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 5942.1796875,
+          "medianWallNsPerCall": 5928.96875
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 10129.0234375,
+          "medianWallNsPerCall": 10113.125
+        },
+        "input": "lone_high",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 3631.5703125,
+          "medianWallNsPerCall": 3618.84375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 6001.0234375,
+          "medianWallNsPerCall": 5987.578125
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 10353.578125,
+          "medianWallNsPerCall": 10340.0234375
+        },
+        "input": "pair_one",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 3786.796875,
+          "medianWallNsPerCall": 3773.2890625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 208.0,
+          "medianThreadCpuNsPerCall": 10127.2265625,
+          "medianWallNsPerCall": 10115.3125
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 31488.875,
+          "medianWallNsPerCall": 31468.5703125
+        },
+        "input": "pair_many",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 20241.3125,
+          "medianWallNsPerCall": 20220.140625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 208.0,
+          "medianThreadCpuNsPerCall": 132501.453125,
+          "medianWallNsPerCall": 132421.5234375
+        }
+      },
+      {
+        "atoms": 64,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 14652.3046875,
+          "medianWallNsPerCall": 14636.765625
+        },
+        "input": "ascii_pair_seam",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 120.0,
+          "medianThreadCpuNsPerCall": 6604.96875,
+          "medianWallNsPerCall": 6590.7578125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 208.0,
+          "medianThreadCpuNsPerCall": 17629.859375,
+          "medianWallNsPerCall": 17607.8984375
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 353.4921875,
+          "medianWallNsPerCall": 345.6015625
+        },
+        "input": "empty",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 350.1328125,
+          "medianWallNsPerCall": 339.6484375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 440.96875,
+          "medianWallNsPerCall": 432.140625
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 35212.4453125,
+          "medianWallNsPerCall": 35196.4765625
+        },
+        "input": "ascii",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 40954.6484375,
+          "medianWallNsPerCall": 40917.7265625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 56.0,
+          "medianThreadCpuNsPerCall": 41727.9765625,
+          "medianWallNsPerCall": 41700.2265625
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 18910.1953125,
+          "medianWallNsPerCall": 18899.703125
+        },
+        "input": "bmp",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 11959.015625,
+          "medianWallNsPerCall": 11942.0546875
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 20123.875,
+          "medianWallNsPerCall": 20117.0859375
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 23865.8359375,
+          "medianWallNsPerCall": 23843.125
+        },
+        "input": "lone_high",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 12666.859375,
+          "medianWallNsPerCall": 12641.484375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 20193.8984375,
+          "medianWallNsPerCall": 20181.0859375
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 23982.875,
+          "medianWallNsPerCall": 23973.546875
+        },
+        "input": "pair_one",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 10422.6640625,
+          "medianWallNsPerCall": 10404.890625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 616.0,
+          "medianThreadCpuNsPerCall": 31646.2890625,
+          "medianWallNsPerCall": 31627.0078125
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 46530.8203125,
+          "medianWallNsPerCall": 46427.8515625
+        },
+        "input": "pair_many",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 37041.8046875,
+          "medianWallNsPerCall": 37006.09375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 616.0,
+          "medianThreadCpuNsPerCall": 325943.40625,
+          "medianWallNsPerCall": 325827.140625
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 33166.671875,
+          "medianWallNsPerCall": 33140.3984375
+        },
+        "input": "ascii_pair_seam",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 15427.046875,
+          "medianWallNsPerCall": 15411.5390625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 616.0,
+          "medianThreadCpuNsPerCall": 42900.4296875,
+          "medianWallNsPerCall": 42881.6171875
+        }
+      }
+    ],
+    "calls_per_sample": 128,
+    "controls": "Zero allocation medians; first empty control sample retains startup bytes 12976/15512/15872 for default/M3 compact/M3 wide. Samples are preserved, not silently subtracted.",
+    "limitations": [
+      "All earlier slow-stage resource evidence is retained; the refinement changes no admission or owner fields.",
+      "Three samples of 128 calls per operation in interpreter mode. Thread CPU and wall values are observations, without timing thresholds or general speed admission.",
+      "Held-plan byte sums exclude Pattern objects and predicate/node graphs; these are not dominator-retained or whole-heap measurements.",
+      "Counter controls remain included; their medians are zero but the first empty control can include startup allocation.",
+      "The selected all-star DOTALL workload isolates the exact nullable-prefix reuse. Other patterns retain the original recurrence and may have different performance.",
+      "Canonical receiving, full-image build, native binary comparisons and broader jtreg gates remain separate evidence.",
+      "Shared machine; root-owned JNI/jtreg work could overlap the final resource interval. Three same-process interpreter samples are descriptive, not a statistical or general speed experiment.",
+      "Plan graph sums count held owner objects and unique direct arrays, excluding Pattern objects, compiled-node/predicate graphs, class state, native memory and dominator retention.",
+      "No whole-process RSS/NMT or whole-heap claim is made by this final summary."
+    ],
+    "public_case_count": 84,
+    "public_cases_with_higher_final_cpu_median": 13,
+    "representative_256_star_16_pair_rows": [
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 35421.5078125,
+          "medianWallNsPerCall": 35399.6015625
+        },
+        "input": "pair_many",
+        "mode": "default",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 24739.2421875,
+          "medianWallNsPerCall": 24710.1328125
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 616.0,
+          "medianThreadCpuNsPerCall": 379327.1328125,
+          "medianWallNsPerCall": 379234.859375
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 51433.484375,
+          "medianWallNsPerCall": 51402.890625
+        },
+        "input": "pair_many",
+        "mode": "m3-compact",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 39678.84375,
+          "medianWallNsPerCall": 39683.0390625
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 616.0,
+          "medianThreadCpuNsPerCall": 374243.5625,
+          "medianWallNsPerCall": 374115.703125
+        }
+      },
+      {
+        "atoms": 256,
+        "baseline": {
+          "medianAllocatedBytesPerCall": 552.0,
+          "medianThreadCpuNsPerCall": 46530.8203125,
+          "medianWallNsPerCall": 46427.8515625
+        },
+        "input": "pair_many",
+        "mode": "m3-wide",
+        "refined": {
+          "medianAllocatedBytesPerCall": 336.0,
+          "medianThreadCpuNsPerCall": 37041.8046875,
+          "medianWallNsPerCall": 37006.09375
+        },
+        "slowCandidate": {
+          "medianAllocatedBytesPerCall": 616.0,
+          "medianThreadCpuNsPerCall": 325943.40625,
+          "medianWallNsPerCall": 325827.140625
+        }
+      }
+    ],
+    "samples_per_operation": 3,
+    "selected_plan_shallow_graphs": [
+      {
+        "added_width_array_bytes_each": 24,
+        "atoms": 1,
+        "baseline_selected_shallow_bytes_per_plan": 1216,
+        "final_selected_shallow_bytes_per_plan": 1240,
+        "held_plan_instances": 16,
+        "mode": "default",
+        "owner_shallow_bytes_each": 40,
+        "vm_options": {
+          "CompactStrings": "true",
+          "ObjectAlignmentInBytes": 8,
+          "UseCompressedClassPointers": "true",
+          "UseCompressedOops": "true",
+          "UseM3StringStorage": "false"
+        }
+      },
+      {
+        "added_width_array_bytes_each": 80,
+        "atoms": 63,
+        "baseline_selected_shallow_bytes_per_plan": 1576,
+        "final_selected_shallow_bytes_per_plan": 1656,
+        "held_plan_instances": 16,
+        "mode": "default",
+        "owner_shallow_bytes_each": 40,
+        "vm_options": {
+          "CompactStrings": "true",
+          "ObjectAlignmentInBytes": 8,
+          "UseCompressedClassPointers": "true",
+          "UseCompressedOops": "true",
+          "UseM3StringStorage": "false"
+        }
+      },
+      {
+        "added_width_array_bytes_each": 80,
+        "atoms": 64,
+        "baseline_selected_shallow_bytes_per_plan": 2688,
+        "final_selected_shallow_bytes_per_plan": 2768,
+        "held_plan_instances": 16,
+        "mode": "default",
+        "owner_shallow_bytes_each": 40,
+        "vm_options": {
+          "CompactStrings": "true",
+          "ObjectAlignmentInBytes": 8,
+          "UseCompressedClassPointers": "true",
+          "UseCompressedOops": "true",
+          "UseM3StringStorage": "false"
+        }
+      },
+      {
+        "added_width_array_bytes_each": 272,
+        "atoms": 256,
+        "baseline_selected_shallow_bytes_per_plan": 7128,
+        "final_selected_shallow_bytes_per_plan": 7400,
+        "held_plan_instances": 16,
+        "mode": "default",
+        "owner_shallow_bytes_each": 40,
+        "vm_options": {
+          "CompactStrings": "true",
+          "ObjectAlignmentInBytes": 8,
+          "UseCompressedClassPointers": "true",
+          "UseCompressedOops": "true",
+          "UseM3StringStorage": "false"
+        }
+      },
+      {
+        "added_width_array_bytes_each": 24,
+        "atoms": 1,
+        "baseline_selected_shallow_bytes_per_plan": 1216,
+        "final_selected_shallow_bytes_per_plan": 1240,
+        "held_plan_instances": 16,
+        "mode": "m3-compact",
+        "owner_shallow_bytes_each": 40,
+        "vm_options": {
+          "CompactStrings": "true",
+          "ObjectAlignmentInBytes": 8,
+          "UseCompressedClassPointers": "true",
+          "UseCompressedOops": "true",
+          "UseM3StringStorage": "true"
+        }
+      },
+      {
+        "added_width_array_bytes_each": 80,
+        "atoms": 63,
+        "baseline_selected_shallow_bytes_per_plan": 1576,
+        "final_selected_shallow_bytes_per_plan": 1656,
+        "held_plan_instances": 16,
+        "mode": "m3-compact",
+        "owner_shallow_bytes_each": 40,
+        "vm_options": {
+          "CompactStrings": "true",
+          "ObjectAlignmentInBytes": 8,
+          "UseCompressedClassPointers": "true",
+          "UseCompressedOops": "true",
+          "UseM3StringStorage": "true"
+        }
+      },
+      {
+        "added_width_array_bytes_each": 80,
+        "atoms": 64,
+        "baseline_selected_shallow_bytes_per_plan": 2688,
+        "final_selected_shallow_bytes_per_plan": 2768,
+        "held_plan_instances": 16,
+        "mode": "m3-compact",
+        "owner_shallow_bytes_each": 40,
+        "vm_options": {
+          "CompactStrings": "true",
+          "ObjectAlignmentInBytes": 8,
+          "UseCompressedClassPointers": "true",
+          "UseCompressedOops": "true",
+          "UseM3StringStorage": "true"
+        }
+      },
+      {
+        "added_width_array_bytes_each": 272,
+        "atoms": 256,
+        "baseline_selected_shallow_bytes_per_plan": 7128,
+        "final_selected_shallow_bytes_per_plan": 7400,
+        "held_plan_instances": 16,
+        "mode": "m3-compact",
+        "owner_shallow_bytes_each": 40,
+        "vm_options": {
+          "CompactStrings": "true",
+          "ObjectAlignmentInBytes": 8,
+          "UseCompressedClassPointers": "true",
+          "UseCompressedOops": "true",
+          "UseM3StringStorage": "true"
+        }
+      },
+      {
+        "added_width_array_bytes_each": 24,
+        "atoms": 1,
+        "baseline_selected_shallow_bytes_per_plan": 1216,
+        "final_selected_shallow_bytes_per_plan": 1240,
+        "held_plan_instances": 16,
+        "mode": "m3-wide",
+        "owner_shallow_bytes_each": 40,
+        "vm_options": {
+          "CompactStrings": "false",
+          "ObjectAlignmentInBytes": 8,
+          "UseCompressedClassPointers": "true",
+          "UseCompressedOops": "true",
+          "UseM3StringStorage": "true"
+        }
+      },
+      {
+        "added_width_array_bytes_each": 80,
+        "atoms": 63,
+        "baseline_selected_shallow_bytes_per_plan": 1576,
+        "final_selected_shallow_bytes_per_plan": 1656,
+        "held_plan_instances": 16,
+        "mode": "m3-wide",
+        "owner_shallow_bytes_each": 40,
+        "vm_options": {
+          "CompactStrings": "false",
+          "ObjectAlignmentInBytes": 8,
+          "UseCompressedClassPointers": "true",
+          "UseCompressedOops": "true",
+          "UseM3StringStorage": "true"
+        }
+      },
+      {
+        "added_width_array_bytes_each": 80,
+        "atoms": 64,
+        "baseline_selected_shallow_bytes_per_plan": 2688,
+        "final_selected_shallow_bytes_per_plan": 2768,
+        "held_plan_instances": 16,
+        "mode": "m3-wide",
+        "owner_shallow_bytes_each": 40,
+        "vm_options": {
+          "CompactStrings": "false",
+          "ObjectAlignmentInBytes": 8,
+          "UseCompressedClassPointers": "true",
+          "UseCompressedOops": "true",
+          "UseM3StringStorage": "true"
+        }
+      },
+      {
+        "added_width_array_bytes_each": 272,
+        "atoms": 256,
+        "baseline_selected_shallow_bytes_per_plan": 7128,
+        "final_selected_shallow_bytes_per_plan": 7400,
+        "held_plan_instances": 16,
+        "mode": "m3-wide",
+        "owner_shallow_bytes_each": 40,
+        "vm_options": {
+          "CompactStrings": "false",
+          "ObjectAlignmentInBytes": 8,
+          "UseCompressedClassPointers": "true",
+          "UseCompressedOops": "true",
+          "UseM3StringStorage": "true"
+        }
+      }
+    ],
+    "timing_admission": false,
+    "unicode_evidence": "unicode_final"
+  },
+  "schema": "M3_PUBLIC_REGEX_OWNER_QUALIFICATION_V1",
+  "scope": {
+    "all_global_gates_pass": false,
+    "all_tests_pass": false,
+    "baseline_includes_identical_comment_repair": true,
+    "behavioral_capabilities": 4,
+    "behavioral_owner_files": 5,
+    "doclint_companion_pr": "https://github.com/hsoliwal/M3JDK21/pull/1756",
+    "exact_source_test_docfix_union": 17,
+    "family_completion": false,
+    "feature_excludes_docfix_in_stacked_diff": true,
+    "feature_stacked_source_test_diff_paths": 16,
+    "metadata_recipe_sdk_receive_replay": "NOT_RUN_AT_AUTHORING",
+    "new_migration_record_status": "pending",
+    "phase": "STRING_QUALIFICATION",
+    "platform": "Linux x86-64",
+    "published_or_merged_by_this_record": false,
+    "repository_completion": false,
+    "separate_documentation_companion_files": 1,
+    "test_source_files": 11,
+    "tested_product_base": "c831c4a77f0e3e10aac94178217efda882ba4be5"
+  },
+  "source_inventory": [
+    {
+      "baseline_git_blob_sha1": "14fc79e035ac7c8fe610b0fc9191ba428b683133",
+      "baseline_sha256": "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 25584,
+      "final_git_blob_sha1": "bd4d7878ceb9d3c74f8f012c05cac4aff392a128",
+      "final_sha256": "0cc1b4726cb2637b184184a60c75964180d58790530101fcf46900f74f1dc72a",
+      "path": "src/java.base/share/classes/java/lang/M3StringFacts.java",
+      "role": "runtime_owner",
+      "stages": [
+        {
+          "dataset": "combined-c831",
+          "postimage_sha256": "0cc1b4726cb2637b184184a60c75964180d58790530101fcf46900f74f1dc72a",
+          "preimage_sha256": "e2d6056aecffae091ea8b84d21e2d899a8959d142c9da3ed24915753c413c92a"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": "acdf089b702410188b220dcb6f08b9666b539ddf",
+      "baseline_sha256": "69ebbcbd716f673af9fe282b8ab72f7b7de7961d7c43d69f534267c31a04a39f",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 24052,
+      "final_git_blob_sha1": "9bfcdd972e704ef88ef5fdfe3112576aba99f3cd",
+      "final_sha256": "faa373f77eef1d2dd3457bfe8c5d65d2dff819bb606e00f7c269e7b08a37cf25",
+      "path": "src/java.base/share/classes/java/lang/M3StringRegexDp.java",
+      "role": "runtime_owner",
+      "stages": [
+        {
+          "dataset": "combined-c831",
+          "postimage_sha256": "faa373f77eef1d2dd3457bfe8c5d65d2dff819bb606e00f7c269e7b08a37cf25",
+          "preimage_sha256": "69ebbcbd716f673af9fe282b8ab72f7b7de7961d7c43d69f534267c31a04a39f"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": "323387b99c4e36e1066e6ee11d5ddd68e4b89b26",
+      "baseline_sha256": "33bf591763210e137025d5962b94d918911366bf51617a7ebcdea7f39abbe607",
+      "feature_stacked_diff_includes_path": false,
+      "final_bytes": 9426,
+      "final_git_blob_sha1": "382e76061737743792885c4cadad5db15e474b2e",
+      "final_sha256": "2fd9384a9df26ed038bd6663e083586425228815dc7b4d43205af769d3c2544e",
+      "path": "src/java.base/share/classes/java/util/ChangeJournal.java",
+      "role": "documentation_companion",
+      "stages": [
+        {
+          "dataset": "baseline-doclint-final",
+          "postimage_sha256": "2fd9384a9df26ed038bd6663e083586425228815dc7b4d43205af769d3c2544e",
+          "preimage_sha256": "33bf591763210e137025d5962b94d918911366bf51617a7ebcdea7f39abbe607"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": "2eb4ca854b6ef35d57d7a2599c97c3024ff81296",
+      "baseline_sha256": "b471add6421a394fb59a15b2fe9a7cac21a9c4c438d754996f961f43bb811531",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 23942,
+      "final_git_blob_sha1": "33eeccc2ecdffa2b7ffdf7c11533caa232c2672b",
+      "final_sha256": "190d541c497c344ba5015f38edadf6d6fb359e10010afbb88729905e04b1c1d7",
+      "path": "src/java.base/share/classes/java/util/regex/M3PatternQuery.java",
+      "role": "runtime_owner",
+      "stages": [
+        {
+          "dataset": "combined-c831",
+          "postimage_sha256": "06aadfc5d57fc57f7bbad70a6737694963852e5985e6cb2cf8d3b951980e1d3d",
+          "preimage_sha256": "b471add6421a394fb59a15b2fe9a7cac21a9c4c438d754996f961f43bb811531"
+        },
+        {
+          "dataset": "unicode-prefix-c831",
+          "postimage_sha256": "190d541c497c344ba5015f38edadf6d6fb359e10010afbb88729905e04b1c1d7",
+          "preimage_sha256": "06aadfc5d57fc57f7bbad70a6737694963852e5985e6cb2cf8d3b951980e1d3d"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": "2ce544751b8783f76d66aaab9e9fecbde01fb6ed",
+      "baseline_sha256": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 13882,
+      "final_git_blob_sha1": "93b8e8513f9e28c3493df58a685ca25014439886",
+      "final_sha256": "e5b9b0cafa6edb66697783250271fa165c9ccee7ccbf661b7b23843e7e1d7a43",
+      "path": "src/java.base/share/classes/jdk/internal/m3/M3IndexedArray.java",
+      "role": "runtime_owner",
+      "stages": [
+        {
+          "dataset": "collections-c831",
+          "postimage_sha256": "e5b9b0cafa6edb66697783250271fa165c9ccee7ccbf661b7b23843e7e1d7a43",
+          "preimage_sha256": "d43e7096433b24372c4ced54143d321554d6db234e86224d6d6d29946d94cb61"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": "325cb8d5c133a3b66d710c9e09cfff7802d9b66b",
+      "baseline_sha256": "0ed768ba1672780790c55b4e64ac28b9c702740ba5a03484805e68b4d8725a10",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 16818,
+      "final_git_blob_sha1": "ddd25bf0b749934b7173b7c6ebb3b93378261ce6",
+      "final_sha256": "1aa4e472110c2ca9432efc68cf7bea09c22ade8af670017fa4fe473bebfade88",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TokenPredicateCache.java",
+      "role": "runtime_owner",
+      "stages": [
+        {
+          "dataset": "combined-c831",
+          "postimage_sha256": "1aa4e472110c2ca9432efc68cf7bea09c22ade8af670017fa4fe473bebfade88",
+          "preimage_sha256": "0ed768ba1672780790c55b4e64ac28b9c702740ba5a03484805e68b4d8725a10"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": null,
+      "baseline_sha256": "ABSENT",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 22473,
+      "final_git_blob_sha1": "1970890ead29529c377854548b2abaea491971ac",
+      "final_sha256": "683b84ace57ad7fb606de36946cd5b242821601ebf540387de321bf22534f2a5",
+      "path": "test/jdk/java/lang/String/M3CommonRegexFactsHostTest.java",
+      "role": "test_source",
+      "stages": [
+        {
+          "dataset": "combined-c831",
+          "postimage_sha256": "683b84ace57ad7fb606de36946cd5b242821601ebf540387de321bf22534f2a5",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": null,
+      "baseline_sha256": "ABSENT",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 632,
+      "final_git_blob_sha1": "af6cfb2f56de93ec1c5a77b26dd92a748cb9df4c",
+      "final_sha256": "cb3672f43cf4625e19759424df94158f95882bdb7e753d33ce2ffa3503a36738",
+      "path": "test/jdk/java/lang/String/M3CommonRegexPreparedClasses.java",
+      "role": "test_source",
+      "stages": [
+        {
+          "dataset": "combined-c831",
+          "postimage_sha256": "cb3672f43cf4625e19759424df94158f95882bdb7e753d33ce2ffa3503a36738",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": null,
+      "baseline_sha256": "ABSENT",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 28663,
+      "final_git_blob_sha1": "0d9b52208d2d79e9c25f44e29856d9828e02014b",
+      "final_sha256": "9dbe0440cd9255370defe2a9b4a53e89bbbb7778d3a25260af08fcd4afac1619",
+      "path": "test/jdk/java/lang/String/M3CommonRegexProductTest.java",
+      "role": "test_source",
+      "stages": [
+        {
+          "dataset": "combined-c831",
+          "postimage_sha256": "9dbe0440cd9255370defe2a9b4a53e89bbbb7778d3a25260af08fcd4afac1619",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": "af50b74953870e3d94d6ec319c3fc4f59e56ceb3",
+      "baseline_sha256": "cf6a14457f69669d1b83bdd6722a4211fba918970e1b9e9a8bc7b1c2a5f28325",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 20529,
+      "final_git_blob_sha1": "12363ab467459d54bae19020a7633a4ffb6b2b62",
+      "final_sha256": "412e170cd69eb774407d978ae25531e19b38a83e7739517723941b15118a821b",
+      "path": "test/jdk/java/util/regex/M3PatternAsciiFrontierTest.java",
+      "role": "test_source",
+      "stages": [
+        {
+          "dataset": "combined-c831",
+          "postimage_sha256": "412e170cd69eb774407d978ae25531e19b38a83e7739517723941b15118a821b",
+          "preimage_sha256": "cf6a14457f69669d1b83bdd6722a4211fba918970e1b9e9a8bc7b1c2a5f28325"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": null,
+      "baseline_sha256": "ABSENT",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 9014,
+      "final_git_blob_sha1": "24bb13ba3d8b419e4b1fa615577e354e70e9a7e2",
+      "final_sha256": "780df049c5d8439cde75ef1dbdc5844ea09475b65a3027418d5a9ac75c482486",
+      "path": "test/jdk/java/util/regex/M3PatternNullablePrefixTest.java",
+      "role": "test_source",
+      "stages": [
+        {
+          "dataset": "unicode-prefix-c831",
+          "postimage_sha256": "780df049c5d8439cde75ef1dbdc5844ea09475b65a3027418d5a9ac75c482486",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": "ebaf8c4b91dd8e65ddc525864e2c92e69bad9f42",
+      "baseline_sha256": "6b152fbca636d4e7cd17b6f5838175308460af98f8eaffb74da962ae8adbe3d3",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 6763,
+      "final_git_blob_sha1": "d3de5a921e85c31360e2f987febfd19093517ac2",
+      "final_sha256": "96a7869db39e2776fadd28b3acdc5c16861b18c64d0207b25506d57be1bc0331",
+      "path": "test/jdk/java/util/regex/M3PatternStateMaskTest.java",
+      "role": "test_source",
+      "stages": [
+        {
+          "dataset": "combined-c831",
+          "postimage_sha256": "96a7869db39e2776fadd28b3acdc5c16861b18c64d0207b25506d57be1bc0331",
+          "preimage_sha256": "6b152fbca636d4e7cd17b6f5838175308460af98f8eaffb74da962ae8adbe3d3"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": null,
+      "baseline_sha256": "ABSENT",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 24935,
+      "final_git_blob_sha1": "423e683868e5b479f3b4d4a9451b8ce43ee5733d",
+      "final_sha256": "7484c3036874f78e23c06e2032906578db987df6f9a8127f189b37af451dbc27",
+      "path": "test/jdk/java/util/regex/M3PatternUnicodeTest.java",
+      "role": "test_source",
+      "stages": [
+        {
+          "dataset": "combined-c831",
+          "postimage_sha256": "7484c3036874f78e23c06e2032906578db987df6f9a8127f189b37af451dbc27",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": null,
+      "baseline_sha256": "ABSENT",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 5211,
+      "final_git_blob_sha1": "effb29bbd6400092ea3c2b4eeff28bdc9d1f6e0f",
+      "final_sha256": "0a1957ea4c6db007f13ab9d1ef669e2334eb2dc7121fcc4c0d16602e843aead3",
+      "path": "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthAgent.java",
+      "role": "test_source",
+      "stages": [
+        {
+          "dataset": "collections-c831",
+          "postimage_sha256": "0a1957ea4c6db007f13ab9d1ef669e2334eb2dc7121fcc4c0d16602e843aead3",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": null,
+      "baseline_sha256": "ABSENT",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 12316,
+      "final_git_blob_sha1": "f8331731bb239ea6e1729993e02ab3f84b2840a7",
+      "final_sha256": "3cffeb6f2352e20cbdfa7843b29d6372181d78aff6eed305939c3497315aa750",
+      "path": "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFailureTest.java",
+      "role": "test_source",
+      "stages": [
+        {
+          "dataset": "collections-c831",
+          "postimage_sha256": "3cffeb6f2352e20cbdfa7843b29d6372181d78aff6eed305939c3497315aa750",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": null,
+      "baseline_sha256": "ABSENT",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 1011,
+      "final_git_blob_sha1": "006a0893c300f833f6b4df2226b0d9f1d763e9bb",
+      "final_sha256": "f4f28798f4ef81eb8f49fefb972b90d9daa15b7ff5255515efe6e0ceaf8541a0",
+      "path": "test/jdk/jdk/internal/m3/M3IndexedArrayGrowthFault.java",
+      "role": "test_source",
+      "stages": [
+        {
+          "dataset": "collections-c831",
+          "postimage_sha256": "f4f28798f4ef81eb8f49fefb972b90d9daa15b7ff5255515efe6e0ceaf8541a0",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    },
+    {
+      "baseline_git_blob_sha1": null,
+      "baseline_sha256": "ABSENT",
+      "feature_stacked_diff_includes_path": true,
+      "final_bytes": 18798,
+      "final_git_blob_sha1": "03583914429b634b3de243c60931c47d41a7ae0c",
+      "final_sha256": "f89e9acb7065dd6666e60ebcffb0b870e2a162f6528447d793a94a2dde547115",
+      "path": "test/jdk/jdk/internal/mindex/M3TokenPredicateCacheReuseTest.java",
+      "role": "test_source",
+      "stages": [
+        {
+          "dataset": "combined-c831",
+          "postimage_sha256": "f89e9acb7065dd6666e60ebcffb0b870e2a162f6528447d793a94a2dde547115",
+          "preimage_sha256": "ABSENT"
+        }
+      ]
+    }
+  ],
+  "status": "BOUNDED_RUNTIME_EVIDENCE_BOUND_METADATA_STAGE_PENDING",
+  "token": {
+    "class_patch_used": false,
+    "evidence": "runtime_final",
+    "modes": [
+      "default",
+      "m3-compact",
+      "m3-wide"
+    ],
+    "repeated_occurrence_allocation": [
+      {
+        "callsEach": 20000,
+        "frozenLimitEach": 161024,
+        "mode": "default",
+        "negativeBytes": 4800000,
+        "phase": "baseline",
+        "positiveBytes": 4800000
+      },
+      {
+        "callsEach": 20000,
+        "frozenLimitEach": 161024,
+        "mode": "m3-compact",
+        "negativeBytes": 4800000,
+        "phase": "baseline",
+        "positiveBytes": 4800000
+      },
+      {
+        "callsEach": 20000,
+        "frozenLimitEach": 161024,
+        "mode": "m3-wide",
+        "negativeBytes": 4800000,
+        "phase": "baseline",
+        "positiveBytes": 4800000
+      },
+      {
+        "callsEach": 20000,
+        "frozenLimitEach": 161024,
+        "mode": "default",
+        "negativeBytes": 0,
+        "phase": "candidate",
+        "positiveBytes": 0
+      },
+      {
+        "callsEach": 20000,
+        "frozenLimitEach": 161024,
+        "mode": "m3-compact",
+        "negativeBytes": 0,
+        "phase": "candidate",
+        "positiveBytes": 0
+      },
+      {
+        "callsEach": 20000,
+        "frozenLimitEach": 161024,
+        "mode": "m3-wide",
+        "negativeBytes": 0,
+        "phase": "candidate",
+        "positiveBytes": 0
+      }
+    ],
+    "retention_shape": "One volatile primitive recent word plus lazy at-most-256-entry long[] table; exact owner/row/token identity on every hit. Only final String plus immutable defensive token index admitted; mutable and vocabulary-backed regex paths remain uncached.",
+    "scope": "Interpreter-mode positive/negative repeated-occurrence witness and private shape checks; no throughput, whole-heap or retained-byte claim.",
+    "semantics_checks_each_mode": 55199
+  },
+  "unicode": {
+    "baseline_and_final_counts": [
+      {
+        "checks": 976674,
+        "decisions": 289131,
+        "flagCombinations": 512,
+        "mode": "default",
+        "pairs": 551959,
+        "phase": "baseline",
+        "refusals": 82453,
+        "semanticDigest": "bbd23bd97fa4b68b1cb20a8c4289454ecd184f22913d853970a868fd9a773d13"
+      },
+      {
+        "checks": 976674,
+        "decisions": 289131,
+        "flagCombinations": 512,
+        "mode": "m3-compact",
+        "pairs": 551959,
+        "phase": "baseline",
+        "refusals": 82453,
+        "semanticDigest": "bbd23bd97fa4b68b1cb20a8c4289454ecd184f22913d853970a868fd9a773d13"
+      },
+      {
+        "checks": 976674,
+        "decisions": 289131,
+        "flagCombinations": 512,
+        "mode": "m3-wide",
+        "pairs": 551959,
+        "phase": "baseline",
+        "refusals": 82453,
+        "semanticDigest": "bbd23bd97fa4b68b1cb20a8c4289454ecd184f22913d853970a868fd9a773d13"
+      },
+      {
+        "checks": 976677,
+        "decisions": 371584,
+        "flagCombinations": 512,
+        "mode": "default",
+        "pairs": 551959,
+        "phase": "candidate",
+        "refusals": 0,
+        "semanticDigest": "bbd23bd97fa4b68b1cb20a8c4289454ecd184f22913d853970a868fd9a773d13"
+      },
+      {
+        "checks": 976677,
+        "decisions": 371584,
+        "flagCombinations": 512,
+        "mode": "m3-compact",
+        "pairs": 551959,
+        "phase": "candidate",
+        "refusals": 0,
+        "semanticDigest": "bbd23bd97fa4b68b1cb20a8c4289454ecd184f22913d853970a868fd9a773d13"
+      },
+      {
+        "checks": 976677,
+        "decisions": 371584,
+        "flagCombinations": 512,
+        "mode": "m3-wide",
+        "pairs": 551959,
+        "phase": "candidate",
+        "refusals": 0,
+        "semanticDigest": "bbd23bd97fa4b68b1cb20a8c4289454ecd184f22913d853970a868fd9a773d13"
+      }
+    ],
+    "class_patch_used_in_final_installed_gate": false,
+    "evidence": "unicode_final",
+    "final_per_mode": [
+      {
+        "checks": 976677,
+        "concurrentComparisons": 4096,
+        "decisions": 371584,
+        "flagCombinations": 512,
+        "mode": "default",
+        "pairs": 551959,
+        "refusals": 0,
+        "semanticDigest": "bbd23bd97fa4b68b1cb20a8c4289454ecd184f22913d853970a868fd9a773d13"
+      },
+      {
+        "checks": 976677,
+        "concurrentComparisons": 4096,
+        "decisions": 371584,
+        "flagCombinations": 512,
+        "mode": "m3-compact",
+        "pairs": 551959,
+        "refusals": 0,
+        "semanticDigest": "bbd23bd97fa4b68b1cb20a8c4289454ecd184f22913d853970a868fd9a773d13"
+      },
+      {
+        "checks": 976677,
+        "concurrentComparisons": 4096,
+        "decisions": 371584,
+        "flagCombinations": 512,
+        "mode": "m3-wide",
+        "pairs": 551959,
+        "refusals": 0,
+        "semanticDigest": "bbd23bd97fa4b68b1cb20a8c4289454ecd184f22913d853970a868fd9a773d13"
+      }
+    ],
+    "focused_per_mode": [
+      {
+        "bmpBytes": 344064,
+        "calls": 1024,
+        "checks": 940,
+        "mode": "default",
+        "pairBytes": 344064,
+        "tolerance": 1024
+      },
+      {
+        "bmpBytes": 344064,
+        "calls": 1024,
+        "checks": 940,
+        "mode": "m3-compact",
+        "pairBytes": 344064,
+        "tolerance": 1024
+      },
+      {
+        "bmpBytes": 344064,
+        "calls": 1024,
+        "checks": 940,
+        "mode": "m3-wide",
+        "pairBytes": 344064,
+        "tolerance": 1024
+      }
+    ],
+    "grammar": "Existing compiled straight-line character/slice/greedy-star chain with at most 256 atoms; actual BMP/code-point node widths and both frontiers. Unsupported shapes/flags defer, original Matcher state/captures/coordinates remain authoritative; native ASCII oracle refuses non-ASCII.",
+    "oracle": "Ordinary Matcher on separate StringBuilder input; finite corpus, 164 scripts and 512 flag combinations. Repeated runs are not additional distinct coverage.",
+    "refinement": "Exact nullable-prefix frontier reuse, no new field, retained metadata, parser, cutoff, native method or admission limit."
+  }
+}

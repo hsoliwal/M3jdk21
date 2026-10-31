@@ -1,0 +1,151 @@
+{
+  "schema": 1,
+  "status": "PASS_EXPANDED_RECIPE_WITH_ROOT_CPU_REVIEW_SCOPE_ASSESSMENT",
+  "proof": {
+    "path": "PROOF.json",
+    "sha256": "a14670b53b161d6fa2b19194d52876ab670ab7a1768e7a9c6996f1f29f6e1a22"
+  },
+  "completeTemplates": "templates",
+  "priorProofUnchanged": {
+    "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\PROOF.json",
+    "sha256": "60d21ed0f15f4b91a00f5e13f9075ce4d9277e1f09dbdee0b991b2367e706bd0"
+  },
+  "files": [
+    {
+      "path": "AUTOREVIEW_SCOPE_ASSESSMENT.json",
+      "sha256": "c01defc6a1dd03a6e69d382dfc00f3359ba04b2afd59419a4b47f5a602a99cce",
+      "bytes": 2291
+    },
+    {
+      "path": "COMMANDS.json",
+      "sha256": "c66f13f16f5e1fa057e5a0aad64d1d4fb9cc0c91bbc2c86a88d052ef3b0faf32",
+      "bytes": 4864
+    },
+    {
+      "path": "drift-receiver/m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaImportPlan.java",
+      "sha256": "27996c430d055bdf5b5ba32c2664b3cc683731a0dd1edf51aca067d876859b82",
+      "bytes": 24014
+    },
+    {
+      "path": "drift-receiver/m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java",
+      "sha256": "d6fa9ecc183eec645bbd1fcc9a8aeff0377e13c165984acd0181fc1ce7bfff75",
+      "bytes": 10582
+    },
+    {
+      "path": "drift-receiver/m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java",
+      "sha256": "8f0925601dd8308282727acd3a9fbcf1a654fbc0a3af48b9640a11d84755c2e0",
+      "bytes": 23442
+    },
+    {
+      "path": "drift-receiver/unrelated.txt",
+      "sha256": "31490716e2514240dfe86a595c3ddadcb61de21bc8c59fdb2d5749e46169f893",
+      "bytes": 43
+    },
+    {
+      "path": "FOSS_REUSE_DECISION.tsv",
+      "sha256": "f0c42b11496496bf3fb26c2c14a84b334693e5f992815dab116d7b70527200d8",
+      "bytes": 685
+    },
+    {
+      "path": "IMPORTER_FIX_RECIPE_V3.diff",
+      "sha256": "1631ebdeb3b6aa78782c9a8abda60595517edc2eba74d8e7ada3ddce6043b811",
+      "bytes": 2570
+    },
+    {
+      "path": "INPUT_CUSTODY.json",
+      "sha256": "da6b040008ad14137d6f1b6a8a7f2e99e768d223b9c639d1e512aa2173ff85bc",
+      "bytes": 3412
+    },
+    {
+      "path": "LIVE_COMMAND.json",
+      "sha256": "fff2d1ebd4aeb80abbc9d77b72d7275c3f2b883f48c47dbce5c8ce04e91f551d",
+      "bytes": 884
+    },
+    {
+      "path": "logs/apply-three-targets.log",
+      "sha256": "8f3158e04afeb6f7e65f94a33034704fcd166a0e350681c57c9db514285ef9a2",
+      "bytes": 1526
+    },
+    {
+      "path": "logs/fixed-point-three-targets.log",
+      "sha256": "205c176a949e79f500b626e423d7a4fd1b9d1519885702851e458b984b90f139",
+      "bytes": 891
+    },
+    {
+      "path": "logs/input-drift-refusal-three-targets.log",
+      "sha256": "4c82e30a59668414dc938e3f1234f3432a9df0f1cffcb9e33c33895670ffd0d0",
+      "bytes": 4510
+    },
+    {
+      "path": "logs/second-apply-three-targets.log",
+      "sha256": "ab21d23105211f1e74a45567062875c12af0ecee24ceeb24480cfa6250fb894f",
+      "bytes": 890
+    },
+    {
+      "path": "PROOF.json",
+      "sha256": "a14670b53b161d6fa2b19194d52876ab670ab7a1768e7a9c6996f1f29f6e1a22",
+      "bytes": 2709
+    },
+    {
+      "path": "README.md",
+      "sha256": "25bf1e7e19b221fb4b7462b56b243648ef199ff394cf8e9120c27e9c8a0ef8c8",
+      "bytes": 1391
+    },
+    {
+      "path": "receiver/m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaImportPlan.java",
+      "sha256": "cb8822f92db1c65c695d724013c47225d37b75ed766b2c9d197c562004b4add6",
+      "bytes": 24032
+    },
+    {
+      "path": "receiver/m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java",
+      "sha256": "22442dc8d8fce2b032c6da1261a53bbdbc945afdbcfdf97d940c1da5f4c18ae0",
+      "bytes": 10607
+    },
+    {
+      "path": "receiver/m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java",
+      "sha256": "a85d673f3a98b22a3a1514f905503037391c4b7686533869c792dcf8faa73e1a",
+      "bytes": 23493
+    },
+    {
+      "path": "receiver/unrelated.txt",
+      "sha256": "31490716e2514240dfe86a595c3ddadcb61de21bc8c59fdb2d5749e46169f893",
+      "bytes": 43
+    },
+    {
+      "path": "SNAPSHOTS.json",
+      "sha256": "21a7f1db0bd5e6853dea7f6df2ec39495933aeee0b9e18525c62637c60199465",
+      "bytes": 5972
+    },
+    {
+      "path": "templates/base-revision.txt",
+      "sha256": "4dac46c0c41e0b2e8b5bf097312becadc31910ca914e14fe790544858b199be5",
+      "bytes": 41
+    },
+    {
+      "path": "templates/m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaImportPlan.java.txt",
+      "sha256": "cb8822f92db1c65c695d724013c47225d37b75ed766b2c9d197c562004b4add6",
+      "bytes": 24032
+    },
+    {
+      "path": "templates/m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java.txt",
+      "sha256": "22442dc8d8fce2b032c6da1261a53bbdbc945afdbcfdf97d940c1da5f4c18ae0",
+      "bytes": 10607
+    },
+    {
+      "path": "templates/m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java.txt",
+      "sha256": "a85d673f3a98b22a3a1514f905503037391c4b7686533869c792dcf8faa73e1a",
+      "bytes": 23493
+    },
+    {
+      "path": "templates/manifest.tsv",
+      "sha256": "681b23ce93303e8e78dadecd9c9c528fb46c004f328e36c776bf83d08a34ef0a",
+      "bytes": 888
+    },
+    {
+      "path": "TERMINAL_STATE.json",
+      "sha256": "d5f4b271c989135e68927b2891d3b59d89fcb29472a54c56eb2648a757ff9b92",
+      "bytes": 614
+    }
+  ],
+  "jvmLaneReleased": true
+}

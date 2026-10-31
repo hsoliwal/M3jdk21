@@ -1,0 +1,14 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.M3ArraySubstrate
+displayName: Materialize M3 immutable array substrate
+description: >-
+  Target-specific M3JDK21 receiver for the qualified Synexia array/value slice.
+  Java owners are replayed by the canonical Synexia hash-pinned Java snapshot
+  recipe; native, Maven and documentation owners use the M3JDK21 text snapshot.
+  The recipe grants no java.base or public Java-array replacement authority.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-array-substrate-v1
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-array-substrate-v1

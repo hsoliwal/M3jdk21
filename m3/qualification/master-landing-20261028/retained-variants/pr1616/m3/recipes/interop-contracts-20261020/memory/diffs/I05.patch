@@ -1,0 +1,110 @@
+--- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java
++++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java
+@@ -14,7 +14,6 @@
+ import java.util.List;
+ import java.util.Map;
+ import java.util.Random;
+-import java.util.function.Supplier;
+ import org.junit.jupiter.api.Test;
+ import org.springframework.util.MultiValueMap;
+ import org.springframework.util.MultiValueMapAdapter;
+@@ -81,20 +80,39 @@
+         for (int step = 0; step < 4500; step++) {
+             Integer key = random.nextInt(7) == 0 ? null : random.nextInt(32);
+             Integer value = random.nextInt(8) == 0 ? null : random.nextInt(50);
+-            int operation = random.nextInt(13);
+-            List<Integer> actualInput = null;
+-            List<Integer> expectedInput = null;
+-            if (operation == 5 && random.nextInt(6) != 0) {
+-                actualInput = new ArrayList<>(Arrays.asList(value));
+-                expectedInput = new ArrayList<>(actualInput);
++            switch (random.nextInt(13)) {
++                case 0 -> assertSameFailure(() -> expected.add(key, value), () -> actual.add(key, value));
++                case 1 -> { actual.set(key, value); expected.set(key, value); }
++                case 2 -> assertSameFailure(() -> expected.addIfAbsent(key, value), () -> actual.addIfAbsent(key, value));
++                case 3 -> assertEquals(expected.remove(key), actual.remove(key));
++                case 4 -> {
++                    List<Integer> input = Arrays.asList(value, value);
++                    assertSameFailure(() -> expected.addAll(key, input), () -> actual.addAll(key, input));
++                }
++                case 5 -> {
++                    List<Integer> a = random.nextInt(6) == 0 ? null : new ArrayList<>(Arrays.asList(value));
++                    List<Integer> b = a == null ? null : new ArrayList<>(a);
++                    assertEquals(expected.put(key, b), actual.put(key, a));
++                }
++                case 6 -> assertEquals(expected.asSingleValueMap().put(key, value),
++                        actual.asSingleValueMap().put(key, value));
++                case 7 -> assertEquals(expected.asSingleValueMap().remove(key),
++                        actual.asSingleValueMap().remove(key));
++                case 8 -> assertEquals(expected.putIfAbsent(key, Arrays.asList(value)),
++                        actual.putIfAbsent(key, Arrays.asList(value)));
++                case 9 -> { actual.setAll(Map.of(5, 9)); expected.setAll(Map.of(5, 9)); }
++                case 10 -> assertEquals(expected.containsKey(key), actual.containsKey(key));
++                case 11 -> {
++                    if (step % 47 == 0) { actual.clear(); expected.clear(); }
++                }
++                case 12 -> {
++                    Map<Integer, List<Integer>> copy = new LinkedHashMap<>();
++                    copy.put(key, Arrays.asList(value));
++                    actual.putAll(copy);
++                    expected.putAll(copy);
++                }
++                default -> throw new AssertionError();
+             }
+-            final List<Integer> a = actualInput, b = expectedInput;
+-            final boolean clear = step % 47 == 0;
+-            // Borrowed fixed-size lists deliberately refuse structural writes.
+-            // Run both providers even when one throws, then compare state below.
+-            var expectedOutcome = outcome(() -> apply(expected, operation, key, value, b, clear));
+-            var actualOutcome = outcome(() -> apply(actual, operation, key, value, a, clear));
+-            assertEquals(expectedOutcome, actualOutcome, "operation step " + step);
+             assertEquals(expected, actual, "step " + step);
+             assertEquals(expected.size(), actual.size(), "size step " + step);
+             assertEquals(expected.getFirst(key), actual.getFirst(key), "first step " + step);
+@@ -105,38 +123,17 @@
+         }
+     }
+ 
+-    private record Outcome(Object value, Class<? extends RuntimeException> failure) { }
++    /** Both owners may refuse structural changes to a caller-owned fixed-size list. */
++    private static void assertSameFailure(Runnable expected, Runnable actual) {
++        assertEquals(failureOf(expected), failureOf(actual));
++    }
+ 
+-    private static Outcome outcome(Supplier<Object> operation) {
++    private static Class<? extends RuntimeException> failureOf(Runnable operation) {
+         try {
+-            return new Outcome(operation.get(), null);
++            operation.run();
++            return null;
+         } catch (RuntimeException failure) {
+-            return new Outcome(null, failure.getClass());
++            return failure.getClass();
+         }
+     }
+-
+-    private static Object apply(MultiValueMap<Integer, Integer> map, int operation,
+-            Integer key, Integer value, List<Integer> input, boolean clear) {
+-        return switch (operation) {
+-            case 0 -> { map.add(key, value); yield null; }
+-            case 1 -> { map.set(key, value); yield null; }
+-            case 2 -> { map.addIfAbsent(key, value); yield null; }
+-            case 3 -> map.remove(key);
+-            case 4 -> { map.addAll(key, Arrays.asList(value, value)); yield null; }
+-            case 5 -> map.put(key, input);
+-            case 6 -> map.asSingleValueMap().put(key, value);
+-            case 7 -> map.asSingleValueMap().remove(key);
+-            case 8 -> map.putIfAbsent(key, Arrays.asList(value));
+-            case 9 -> { map.setAll(Map.of(5, 9)); yield null; }
+-            case 10 -> map.containsKey(key);
+-            case 11 -> { if (clear) map.clear(); yield null; }
+-            case 12 -> {
+-                Map<Integer, List<Integer>> copy = new LinkedHashMap<>();
+-                copy.put(key, Arrays.asList(value));
+-                map.putAll(copy);
+-                yield null;
+-            }
+-            default -> throw new AssertionError(operation);
+-        };
+-    }
+ }

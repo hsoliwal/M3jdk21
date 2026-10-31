@@ -1,0 +1,8 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.SynexiaHandoffV2Integrity
+displayName: Harden Synexia V2 handoff byte integrity
+description: Verifies exact V2 payload hashes, manifests, accounting, property schema, alias order and receiver lanes while preserving V1 compatibility.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: synexia-handoff-v2-integrity

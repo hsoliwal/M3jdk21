@@ -1,0 +1,75 @@
+{
+  "schema": "M3JDK21_COLLECTION_ADJACENT_RECEIPT_V1",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "metadata_license": "Apache-2.0; existing source retains its own headers",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "4a4b980ac27e6856d2811c022f22f3d4ae95f0e4",
+  "canonical_evidence_path": "synexia-openrewrite-recipes/recipes/m3jdk21-collection-convergence-20261024/CATALOGUE_SEARCH_EVIDENCE.json",
+  "canonical_evidence_sha256": "63e3889328b9802812849c350ee4b73ebcfd916b332e0ca9b463ea5bada8c215",
+  "canonical_recipe_id": "m3-collection-catalogue-search-20261024",
+  "canonical_refinement": "Existing private CollectionKernelCatalog.find: lazy normalized text and primitive row offsets, unchanged public contract",
+  "target_parent": "18a16274f0ea63419cb0970d2008a63afcf7b60d",
+  "target_source_changes": [],
+  "prior_twenty_one_postimages_verified_unchanged": true,
+  "prior_receipt": "m3/qualification/collection-convergence-20261024/NATIVE_IMAGE_RECEIPT.json",
+  "execution": {
+    "maven_sdk": {
+      "host": {
+        "tests": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "image": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "adjacent_installed_image_jtreg": {
+      "passed": 34,
+      "failed": 0,
+      "errors": 1,
+      "not_matching_keywords": 1,
+      "exit_code": 3,
+      "green": false,
+      "error": "Unchanged upstream AbstractList/CheckForComodification.java @ignore, bug 4992226; body not executed",
+      "excluded": "ArrayList/Bug8146568.java @run main/manual/othervm -Xmx17g; -automatic excludes manual tests",
+      "policy": "No ignored test enabled or removed; no test source, product source or warning policy changed in this pass"
+    }
+  },
+  "image_file_seals": {
+    "release": {
+      "sha256": "f3821c0a33fa71b44c9daf78e4838708f90115f7efd1125d1dc6f35b992bd1ec",
+      "bytes": 1224
+    },
+    "bin/java": {
+      "sha256": "f1ae83e16d626564eb6dedf0cda40484c2396f5ed3d391a13805e72aead409ba",
+      "bytes": 16320
+    },
+    "lib/modules": {
+      "sha256": "fce7f5656d68ad989110d1bcaf56fffe3ae6de272655821d9e8d8c8af63f3b17",
+      "bytes": 143547480
+    },
+    "lib/libjava.so": {
+      "sha256": "18c57c074047b2fccdeed23f5f59f745fc7d6cef15ad0e49876dc86e233c2b57",
+      "bytes": 215880
+    },
+    "lib/server/libjvm.so": {
+      "sha256": "1ad30700d33b892ed83ef37b1ed18981e217e8d44e097c59ae29fba82cf45979",
+      "bytes": 26473136
+    }
+  },
+  "remaining_release_gates": [
+    "Full jtreg/JCK and affected full vendor contract families",
+    "Cross-platform JNI/GC/CDS/JIT qualification beyond selected tests",
+    "Comparative CPU, heap and native-memory qualification",
+    "Existing Apache-licensed core material product license acceptance",
+    "Global naming/phase admission gates",
+    "Full historical canonical provenance-ledger set check; scoped new-file checker only",
+    "Remote CI completion; draft review and owner approval"
+  ],
+  "release_qualified": false,
+  "merged": false
+}

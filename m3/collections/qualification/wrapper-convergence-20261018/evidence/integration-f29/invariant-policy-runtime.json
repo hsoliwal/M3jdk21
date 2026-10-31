@@ -1,0 +1,13 @@
+{
+  "stage": "RUNTIME",
+  "command": [
+    "python",
+    "-B",
+    "/workspace/scratch/7846804a0074/M3jdk21-f29/m3/compatibility/check_synexia_full_borrow_receiver.py"
+  ],
+  "exit": 0,
+  "original_bytes_preserved": 30964,
+  "canonical_body_byte_identical": true,
+  "postimage": "6cd1bd243f216a3210433525e3742c0fc1ab02cbf02bbc40225c40c5be80a01f",
+  "source_pin_and_global_phase_preserved": true
+}

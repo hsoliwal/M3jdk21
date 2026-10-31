@@ -1,0 +1,13 @@
+test_empty_and_invalid_text_refuse (__main__.PrepareContract.test_empty_and_invalid_text_refuse) ... ok
+test_overlapping_ownership_refuses_without_replacing_seal (__main__.PrepareContract.test_overlapping_ownership_refuses_without_replacing_seal) ... ok
+test_resealing_is_reproducible (__main__.PrepareContract.test_resealing_is_reproducible) ... ok
+test_sorted_lanes_crlf_bytes_and_absent_admission (__main__.PrepareContract.test_sorted_lanes_crlf_bytes_and_absent_admission) ... ok
+test_symlink_baseline_source_refuses (__main__.PrepareContract.test_symlink_baseline_source_refuses) ... ok
+test_symlink_candidate_file_refuses (__main__.PrepareContract.test_symlink_candidate_file_refuses) ... ok
+test_symlink_candidate_parent_refuses (__main__.PrepareContract.test_symlink_candidate_parent_refuses) ... ok
+test_unsafe_repository_paths_refuse (__main__.PrepareContract.test_unsafe_repository_paths_refuse) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.019s
+
+OK

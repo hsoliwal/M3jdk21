@@ -1,0 +1,80 @@
+{
+  "schema": "M3_STRING_TOKEN_PROJECTION_LAYOUT_SOURCE_RECEIPT_V1",
+  "status": "QUALIFIED_SOURCE_GATE_RECIPE_OUTPUTS_RUNTIME_NOT_ACCEPTED",
+  "canonical": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "297ee8b0b4b493f0f953b0ee33077d598193b779",
+    "recipe": "com.synexia.rewrite.M3Jdk21StringTokenProjectionLayout20261028",
+    "path": "synexia-openrewrite-recipes/recipes/m3jdk21-string-token-projection-layout-20261028",
+    "descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-string-token-projection-layout-20261028.yml"
+  },
+  "receiverBase": "0220010ce5d6b87ee3c2a9121cc79cd6ca382a02",
+  "outputs": [
+    {
+      "path": "m3/runtime-integration/src/test/java/M3StringLayoutTest.java",
+      "representation": "org.openrewrite.java.tree.J.CompilationUnit",
+      "before": {
+        "repository_full_name": "hsoliwal/M3jdk21",
+        "git_blob": "f70d0fe29bc0f78dc258b1bc37cf52f1d2fb1f2a",
+        "utf8_bytes": 5228,
+        "sha256": "218028137efc353e2a6b5ef488e8bfaf33a9e898dc220c8c2e7adf1e70c17226"
+      },
+      "after": {
+        "git_blob": "4d6cfe7bcfd67bae7d0f22fe6e09dacc9a049214",
+        "utf8_bytes": 6463,
+        "sha256": "211b8ec0de5dbf3d0bc1363bc0145496d3afab68797772b632abd684150656b3"
+      }
+    },
+    {
+      "path": "m3/runtime-integration/check-m3string-invariants.py",
+      "representation": "org.openrewrite.text.PlainText",
+      "before": {
+        "repository_full_name": "hsoliwal/M3jdk21",
+        "git_blob": "f95fb9d91044a9ee0946935da2261702aa728add",
+        "utf8_bytes": 108624,
+        "sha256": "5ae66e43164c7e962c6d8ba73456b9f652431187cc103bc27387a51dd9302594"
+      },
+      "after": {
+        "git_blob": "75b10f957f8004bb780a9befa4f1910a372524e5",
+        "utf8_bytes": 108757,
+        "sha256": "16d78a045be8fea93dfd665568fe747db35e3dbc43264192b4446ccaf97ed688"
+      }
+    }
+  ],
+  "reason": "The compiler-parsed direct-member gate owns the M3String shape check. Static nested TokenSnapshot arrays are excluded from the coarse whole-file regex; four other owner/fact rows and the compiler gate remain unchanged.",
+  "focusedQualification": {
+    "upstreamProviderProof": "8ac41beaf26ae2fe981d156e8ac2cc95d99ec346",
+    "topicProviderProof": "41f3ac3e783ab07beb351830d0f8dd85a729d58d",
+    "eachEpoch": {
+      "SDKPassed": 2,
+      "SDKFailed": 0,
+      "exactOutputs": 2,
+      "zeroChangeReplays": 2,
+      "exactSameCauseFullPathRefusals": 4
+    },
+    "layoutProof": "81df4ad18cc2ef7e0c374d0a79a99a2f63113b99",
+    "currentSourceRAMLayoutAccepted": "8a57ca4f085e4e8f1f1d9f2ec0fdb2fc5888597e",
+    "corpus": {
+      "originalAccepted": 55,
+      "originalRefused": 38,
+      "newNestedStaticAccepted": 1,
+      "newDirectRetainedFieldsRefused": 5,
+      "actualMainPhysicalFixture": "9a6686646e85fac86cbeb6f8263a72bd89d196d2",
+      "currentSourcePhysicalMain": "NOT_RUN"
+    },
+    "strictCompilerDiagnostics": []
+  },
+  "limits": {
+    "wholePythonInvariantMain": "NOT_RUN_LOCALLY",
+    "MavenWholeModule": "NOT_RUN",
+    "newGuavaSupportBranch": "NOT_RUN",
+    "JNI": "NOT_RUN",
+    "installedJDK": "NOT_RUN",
+    "runtimeAcceptance": "NOT_ACCEPTED",
+    "performanceComparison": "NOT_RUN",
+    "formalAutoreview": "NOT_RUN_ROUTING_HOLD",
+    "completeMigration": "INCOMPLETE"
+  },
+  "storagePolicy": "M3-COLLECTION-JNI-ARRAY-STORAGE-1",
+  "exportRole": "Only the two generated source-gate outputs and this passive receipt; executable recipes and their qualification remain canonical."
+}

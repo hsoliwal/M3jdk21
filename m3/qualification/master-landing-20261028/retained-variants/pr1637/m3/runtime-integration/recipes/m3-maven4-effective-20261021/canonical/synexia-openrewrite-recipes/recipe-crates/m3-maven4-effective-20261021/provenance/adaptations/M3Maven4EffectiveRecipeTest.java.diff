@@ -1,0 +1,51 @@
+--- qualified-sdk003/src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java
++++ maven4-packet/src/test/java/com/synexia/rewrite/M3Maven4EffectiveRecipeTest.java
+@@ -54,13 +54,15 @@
+  * removing only its unrelated dataset/native-composition adaptations. All receipts
+  * are generated afresh. Adapted 2026-10-21 from PR12605 at
+  * b6c35b9a1f528dd9e5a3d9f6f4c51ca360db43d7 for this distinct packet.
+- * Dependency probes are source-sealed and limited to this packet; no old
+- * 53-path or seven-event evidence is recovered. Product compiler, behavioral and native runtime gates
+- * remain separate authorities.</p>
++ * Adapted again 2026-10-21 from the qualified integrated SDK003 task for
++ * the separate Maven4 effective-model packet, retaining all scheduler gates.
++ * Dependency probes bind this packet's actual parser/Maven/JDT owners. No
++ * integrated-task runtime results or correction-memory events are inherited.
++ * Product compiler and behavioral gates remain separate authorities.</p>
+  */
+-final class M3IntegratedRefinementRecipeTest {
+-    private static final String ID = "m3-integrated-refinement-20261021";
+-    private static final String NAMED = "com.synexia.m3.IntegratedRefinement20261021";
++final class M3Maven4EffectiveRecipeTest {
++    private static final String ID = "m3-maven4-effective-20261021";
++    private static final String NAMED = "com.synexia.m3.Maven4Effective20261021";
+     private static final String PARSER_CLASSPATH =
+             "com.synexia.rewrite.hashPinnedJavaSnapshotRecipe.parserClasspath";
+     private static final Path CRATE = Path.of(Objects.requireNonNull(System.getProperty("crate"), "crate"))
+@@ -192,7 +194,7 @@
+ 
+     private static String resource(Phase phase, String name) throws Exception {
+         String location = "/com/synexia/rewrite/hash-pinned-" + phase.kind() + "/" + phase.id() + "/" + name;
+-        try (var input = M3IntegratedRefinementRecipeTest.class.getResourceAsStream(location)) {
++        try (var input = M3Maven4EffectiveRecipeTest.class.getResourceAsStream(location)) {
+             return new String(Objects.requireNonNull(input, location).readAllBytes(), StandardCharsets.UTF_8);
+         }
+     }
+@@ -404,7 +406,7 @@
+         StringBuilder yaml = new StringBuilder("# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project\n"
+                 + "# SPDX-License-Identifier: Apache-2.0\n"
+                 + "type: specs.openrewrite.org/v1beta/recipe\nname: " + NAMED
+-                + "\ndisplayName: M3 integrated refinement recovery 20261021\n"
++                + "\ndisplayName: M3 Maven4 effective model projection 20261021\n"
+                 + "description: Apply independently qualified hash-pinned file phases.\nrecipeList:\n");
+         for (Phase phase : phases) {
+             yaml.append("  - com.synexia.rewrite.M3HashPinned")
+@@ -475,7 +477,7 @@
+         custody.put("phases.tsv", sha(Files.readAllBytes(CRATE.resolve("phases.tsv"))));
+         custody.put("pom.xml", sha(Files.readAllBytes(CRATE.resolve("pom.xml"))));
+         custody.put("test.java", sha(Files.readAllBytes(CRATE.resolve(
+-                "src/test/java/com/synexia/rewrite/M3IntegratedRefinementRecipeTest.java"))));
++                "src/test/java/com/synexia/rewrite/M3Maven4EffectiveRecipeTest.java"))));
+         custody.put("dependency_probe_sha256", sha(Files.readAllBytes(
+                 CRATE.resolve("attribution/DependencyCustody.java"))));
+         custody.put("dependency_expectations_sha256", sha(Files.readAllBytes(

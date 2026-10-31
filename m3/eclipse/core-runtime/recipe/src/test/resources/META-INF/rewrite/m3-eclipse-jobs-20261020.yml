@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3EclipseJobs20261020
+displayName: Receive native M3JDK21 monitored Eclipse tasks
+description: >-
+  Generate a bounded Java 21 ExecutorService/FutureTask execution atom and
+  contractual tests. Reuses the existing M3 progress owner and borrowed Eclipse
+  monitor; does not replace JobManager scheduling rules or execute callbacks in JNI.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: eclipse-m3-jobs-20261020

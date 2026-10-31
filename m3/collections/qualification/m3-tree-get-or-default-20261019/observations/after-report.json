@@ -1,0 +1,22 @@
+{
+  "stage": "after",
+  "cases": 640,
+  "exactMatches": 640,
+  "frozenJdkOriginalMatches": true,
+  "differences": [],
+  "fixedCases": [
+    "NATURAL/NONEMPTY/ROOT/COUNTING/getOrDefault",
+    "NATURAL/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+    "NATURAL/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+    "NATURAL/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+    "COMPARATOR/NONEMPTY/ROOT/COUNTING/getOrDefault",
+    "COMPARATOR/NONEMPTY/ROOT/SELF_THROW/getOrDefault",
+    "COMPARATOR/NONEMPTY/ROOT/NULL/getOrDefault",
+    "COMPARATOR/NONEMPTY/DESCENDING/COUNTING/getOrDefault",
+    "COMPARATOR/NONEMPTY/DESCENDING/SELF_THROW/getOrDefault",
+    "COMPARATOR/NONEMPTY/DESCENDING/NULL/getOrDefault"
+  ],
+  "introducedDifferences": [],
+  "preservedEmptyCases": 144,
+  "status": "PASS_640_EXACT_CASES"
+}

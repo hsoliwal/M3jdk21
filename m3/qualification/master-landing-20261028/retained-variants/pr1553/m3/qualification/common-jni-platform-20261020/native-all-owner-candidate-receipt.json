@@ -1,0 +1,1718 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "cc",
+        "--version"
+      ],
+      "exit_code": 0,
+      "label": "cc-version"
+    },
+    {
+      "argv": [
+        "c++",
+        "--version"
+      ],
+      "exit_code": 0,
+      "label": "cxx-version"
+    },
+    {
+      "argv": [
+        "$JDK/bin/java",
+        "-version"
+      ],
+      "exit_code": 0,
+      "label": "java-version"
+    },
+    {
+      "argv": [
+        "$JDK/bin/javac",
+        "--patch-module",
+        "java.base=$OUT/work/candidate/abi-source",
+        "-h",
+        "$OUT/work/candidate/headers",
+        "-d",
+        "$OUT/work/candidate/abi-classes",
+        "$OUT/work/candidate/abi-source/java/lang/M3StringPool.java",
+        "$OUT/work/candidate/abi-source/java/lang/M3StringRegexDp.java",
+        "$OUT/work/candidate/abi-source/jdk/internal/mindex/M3RegexDpPlan.java",
+        "$OUT/work/candidate/abi-source/jdk/internal/mindex/M3RX7.java",
+        "$OUT/work/candidate/abi-source/jdk/internal/mindex/M3BitLane28.java",
+        "$OUT/work/candidate/abi-source/jdk/internal/mindex/M3StateRelation.java",
+        "$OUT/work/candidate/abi-source/com/m3/collections/M3IndexMaskWindow.java",
+        "$OUT/work/candidate/abi-source/com/m3/collections/M3IndexPathMasks.java",
+        "$OUT/work/candidate/abi-source/com/m3/collections/M3LongIndexPathMasksJNI.java",
+        "$OUT/work/candidate/abi-source/com/m3/collections/M3StateMaskHistogram.java",
+        "$OUT/work/candidate/abi-source/com/m3/collections/M3IndexMaskCompactor.java",
+        "$OUT/work/candidate/abi-source/com/m3/collections/M3BitLane28.java",
+        "$OUT/work/candidate/abi-source/com/m3/collections/M3ResidencyStateMaskIndex.java"
+      ],
+      "exit_code": 0,
+      "label": "generate-headers-candidate"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/candidate/headers/java_lang_M3StringPool.h",
+        "-c",
+        "$CANDIDATE/src/java.base/share/native/libjava/M3StringPool.c",
+        "-o",
+        "$OUT/work/candidate/objects/M3StringPool.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-candidate-M3StringPool"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/candidate/headers/java_lang_M3StringRegexDp.h",
+        "-c",
+        "$CANDIDATE/src/java.base/share/native/libjava/M3StringRegexDp.c",
+        "-o",
+        "$OUT/work/candidate/objects/M3StringRegexDp.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-candidate-M3StringRegexDp"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/candidate/headers/jdk_internal_mindex_M3RegexDpPlan.h",
+        "-c",
+        "$CANDIDATE/src/java.base/share/native/libjava/M3RegexDpPlan.c",
+        "-o",
+        "$OUT/work/candidate/objects/M3RegexDpPlan.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-candidate-M3RegexDpPlan"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/candidate/headers/jdk_internal_mindex_M3RX7.h",
+        "-c",
+        "$CANDIDATE/src/java.base/share/native/libjava/M3RX7.c",
+        "-o",
+        "$OUT/work/candidate/objects/M3RX7.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-candidate-M3RX7"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/candidate/headers/jdk_internal_mindex_M3BitLane28.h",
+        "-c",
+        "$CANDIDATE/src/java.base/share/native/libjava/M3BitLane28.c",
+        "-o",
+        "$OUT/work/candidate/objects/M3BitLane28.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-candidate-M3BitLane28"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/candidate/headers/jdk_internal_mindex_M3StateRelation.h",
+        "-c",
+        "$CANDIDATE/src/java.base/share/native/libjava/M3StateRelation.c",
+        "-o",
+        "$OUT/work/candidate/objects/M3StateRelation.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-candidate-M3StateRelation"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/candidate/headers/com_m3_collections_M3IndexMaskWindow.h",
+        "-c",
+        "$CANDIDATE/m3/collections/src/main/native/collections/m3_index_mask_window.c",
+        "-o",
+        "$OUT/work/candidate/objects/m3_index_mask_window.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-candidate-m3_index_mask_window"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/candidate/headers/com_m3_collections_M3IndexPathMasks.h",
+        "-c",
+        "$CANDIDATE/m3/collections/src/main/native/collections/m3_index_path_masks.c",
+        "-o",
+        "$OUT/work/candidate/objects/m3_index_path_masks.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-candidate-m3_index_path_masks"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/candidate/headers/com_m3_collections_M3LongIndexPathMasksJNI.h",
+        "-c",
+        "$CANDIDATE/m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c",
+        "-o",
+        "$OUT/work/candidate/objects/m3_long_index_path_masks_jni.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-candidate-m3_long_index_path_masks_jni"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/candidate/headers/com_m3_collections_M3StateMaskHistogram.h",
+        "-c",
+        "$CANDIDATE/m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
+        "-o",
+        "$OUT/work/candidate/objects/m3_state_mask_histogram.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-candidate-m3_state_mask_histogram"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/candidate/headers/com_m3_collections_M3IndexMaskCompactor.h",
+        "-c",
+        "$CANDIDATE/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "-o",
+        "$OUT/work/candidate/objects/m3_index_mask_compactor.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-candidate-m3_index_mask_compactor"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/candidate/headers/com_m3_collections_M3BitLane28.h",
+        "-c",
+        "$CANDIDATE/m3/collections/src/main/native/collections/segmented_bit_lane.c",
+        "-o",
+        "$OUT/work/candidate/objects/segmented_bit_lane.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-candidate-segmented_bit_lane"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/candidate/headers/com_m3_collections_M3ResidencyStateMaskIndex.h",
+        "-c",
+        "$CANDIDATE/m3/collections/src/main/native/collections/m3_residency_state_mask.c",
+        "-o",
+        "$OUT/work/candidate/objects/m3_residency_state_mask.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-candidate-m3_residency_state_mask"
+    },
+    {
+      "argv": [
+        "$JDK/bin/javac",
+        "--patch-module",
+        "java.base=$OUT/work/baseline/abi-source",
+        "-h",
+        "$OUT/work/baseline/headers",
+        "-d",
+        "$OUT/work/baseline/abi-classes",
+        "$OUT/work/baseline/abi-source/java/lang/M3StringPool.java",
+        "$OUT/work/baseline/abi-source/java/lang/M3StringRegexDp.java",
+        "$OUT/work/baseline/abi-source/jdk/internal/mindex/M3RegexDpPlan.java",
+        "$OUT/work/baseline/abi-source/jdk/internal/mindex/M3RX7.java",
+        "$OUT/work/baseline/abi-source/jdk/internal/mindex/M3BitLane28.java",
+        "$OUT/work/baseline/abi-source/jdk/internal/mindex/M3StateRelation.java",
+        "$OUT/work/baseline/abi-source/com/m3/collections/M3IndexMaskWindow.java",
+        "$OUT/work/baseline/abi-source/com/m3/collections/M3IndexPathMasks.java",
+        "$OUT/work/baseline/abi-source/com/m3/collections/M3LongIndexPathMasksJNI.java",
+        "$OUT/work/baseline/abi-source/com/m3/collections/M3StateMaskHistogram.java",
+        "$OUT/work/baseline/abi-source/com/m3/collections/M3IndexMaskCompactor.java",
+        "$OUT/work/baseline/abi-source/com/m3/collections/M3BitLane28.java",
+        "$OUT/work/baseline/abi-source/com/m3/collections/M3ResidencyStateMaskIndex.java"
+      ],
+      "exit_code": 0,
+      "label": "generate-headers-baseline"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/baseline/headers/java_lang_M3StringPool.h",
+        "-c",
+        "$BASELINE/src/java.base/share/native/libjava/M3StringPool.c",
+        "-o",
+        "$OUT/work/baseline/objects/M3StringPool.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-baseline-M3StringPool"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/baseline/headers/java_lang_M3StringRegexDp.h",
+        "-c",
+        "$BASELINE/src/java.base/share/native/libjava/M3StringRegexDp.c",
+        "-o",
+        "$OUT/work/baseline/objects/M3StringRegexDp.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-baseline-M3StringRegexDp"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/baseline/headers/jdk_internal_mindex_M3RegexDpPlan.h",
+        "-c",
+        "$BASELINE/src/java.base/share/native/libjava/M3RegexDpPlan.c",
+        "-o",
+        "$OUT/work/baseline/objects/M3RegexDpPlan.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-baseline-M3RegexDpPlan"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/baseline/headers/jdk_internal_mindex_M3RX7.h",
+        "-c",
+        "$BASELINE/src/java.base/share/native/libjava/M3RX7.c",
+        "-o",
+        "$OUT/work/baseline/objects/M3RX7.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-baseline-M3RX7"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/baseline/headers/jdk_internal_mindex_M3BitLane28.h",
+        "-c",
+        "$BASELINE/src/java.base/share/native/libjava/M3BitLane28.c",
+        "-o",
+        "$OUT/work/baseline/objects/M3BitLane28.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-baseline-M3BitLane28"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/baseline/headers/jdk_internal_mindex_M3StateRelation.h",
+        "-c",
+        "$BASELINE/src/java.base/share/native/libjava/M3StateRelation.c",
+        "-o",
+        "$OUT/work/baseline/objects/M3StateRelation.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-baseline-M3StateRelation"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/baseline/headers/com_m3_collections_M3IndexMaskWindow.h",
+        "-c",
+        "$BASELINE/m3/collections/src/main/native/collections/m3_index_mask_window.c",
+        "-o",
+        "$OUT/work/baseline/objects/m3_index_mask_window.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-baseline-m3_index_mask_window"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/baseline/headers/com_m3_collections_M3IndexPathMasks.h",
+        "-c",
+        "$BASELINE/m3/collections/src/main/native/collections/m3_index_path_masks.c",
+        "-o",
+        "$OUT/work/baseline/objects/m3_index_path_masks.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-baseline-m3_index_path_masks"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/baseline/headers/com_m3_collections_M3LongIndexPathMasksJNI.h",
+        "-c",
+        "$BASELINE/m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c",
+        "-o",
+        "$OUT/work/baseline/objects/m3_long_index_path_masks_jni.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-baseline-m3_long_index_path_masks_jni"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/baseline/headers/com_m3_collections_M3StateMaskHistogram.h",
+        "-c",
+        "$BASELINE/m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
+        "-o",
+        "$OUT/work/baseline/objects/m3_state_mask_histogram.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-baseline-m3_state_mask_histogram"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/baseline/headers/com_m3_collections_M3IndexMaskCompactor.h",
+        "-c",
+        "$BASELINE/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+        "-o",
+        "$OUT/work/baseline/objects/m3_index_mask_compactor.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-baseline-m3_index_mask_compactor"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/baseline/headers/com_m3_collections_M3BitLane28.h",
+        "-c",
+        "$BASELINE/m3/collections/src/main/native/collections/segmented_bit_lane.c",
+        "-o",
+        "$OUT/work/baseline/objects/segmented_bit_lane.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-baseline-segmented_bit_lane"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-include",
+        "$OUT/work/baseline/headers/com_m3_collections_M3ResidencyStateMaskIndex.h",
+        "-c",
+        "$BASELINE/m3/collections/src/main/native/collections/m3_residency_state_mask.c",
+        "-o",
+        "$OUT/work/baseline/objects/m3_residency_state_mask.o"
+      ],
+      "exit_code": 0,
+      "label": "compile-owner-baseline-m3_residency_state_mask"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-DM3_POOL_SOURCE=\"$BASELINE/src/java.base/share/native/libjava/M3StringPool.c\"",
+        "$FIXTURES/m3_string_pool_model.c",
+        "-o",
+        "$OUT/work/baseline-linux"
+      ],
+      "exit_code": 0,
+      "label": "compile-baseline-linux"
+    },
+    {
+      "argv": [
+        "$OUT/work/baseline-linux"
+      ],
+      "exit_code": 0,
+      "label": "run-baseline-linux"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-DM3_POOL_SOURCE=\"$CANDIDATE/src/java.base/share/native/libjava/M3StringPool.c\"",
+        "$FIXTURES/m3_string_pool_model.c",
+        "-o",
+        "$OUT/work/candidate-linux"
+      ],
+      "exit_code": 0,
+      "label": "compile-candidate-linux"
+    },
+    {
+      "argv": [
+        "$OUT/work/candidate-linux"
+      ],
+      "exit_code": 0,
+      "label": "run-candidate-linux"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-DM3_POOL_SOURCE=\"$CANDIDATE/src/java.base/share/native/libjava/M3StringPool.c\"",
+        "-DM3_MODEL_NO_NOREPLACE=1",
+        "$FIXTURES/m3_string_pool_model.c",
+        "-o",
+        "$OUT/work/candidate-linux-hint-model"
+      ],
+      "exit_code": 0,
+      "label": "compile-candidate-linux-hint-model"
+    },
+    {
+      "argv": [
+        "$OUT/work/candidate-linux-hint-model"
+      ],
+      "exit_code": 0,
+      "label": "run-candidate-linux-hint-model"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-DM3_POOL_SOURCE=\"$CANDIDATE/src/java.base/share/native/libjava/M3StringPool.c\"",
+        "-DM3_MODEL_APPLE=1",
+        "$FIXTURES/m3_string_pool_model.c",
+        "-o",
+        "$OUT/work/candidate-apple-model"
+      ],
+      "exit_code": 0,
+      "label": "compile-candidate-apple-model"
+    },
+    {
+      "argv": [
+        "$OUT/work/candidate-apple-model"
+      ],
+      "exit_code": 0,
+      "label": "run-candidate-apple-model"
+    },
+    {
+      "argv": [
+        "cc",
+        "-x",
+        "c",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "$FIXTURES/m3_jni_util_contract.c",
+        "-o",
+        "$OUT/work/helper-c"
+      ],
+      "exit_code": 0,
+      "label": "compile-helper-c"
+    },
+    {
+      "argv": [
+        "$OUT/work/helper-c"
+      ],
+      "exit_code": 0,
+      "label": "run-helper-c"
+    },
+    {
+      "argv": [
+        "c++",
+        "-x",
+        "c++",
+        "-std=c++20",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "$FIXTURES/m3_jni_util_contract.c",
+        "-o",
+        "$OUT/work/helper-cpp"
+      ],
+      "exit_code": 0,
+      "label": "compile-helper-cpp"
+    },
+    {
+      "argv": [
+        "$OUT/work/helper-cpp"
+      ],
+      "exit_code": 0,
+      "label": "run-helper-cpp"
+    },
+    {
+      "argv": [
+        "cc",
+        "-x",
+        "c",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-D_MSC_VER=1930",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "$FIXTURES/m3_jni_util_contract.c",
+        "-E",
+        "-P"
+      ],
+      "exit_code": 0,
+      "label": "preprocess-MSVC_KEYWORD_MODEL"
+    },
+    {
+      "argv": [
+        "cc",
+        "-x",
+        "c",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-D_MSC_VER=1930",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "$FIXTURES/m3_jni_util_contract.c",
+        "-o",
+        "$OUT/work/MSVC_KEYWORD_MODEL"
+      ],
+      "exit_code": 0,
+      "label": "compile-MSVC_KEYWORD_MODEL"
+    },
+    {
+      "argv": [
+        "$OUT/work/MSVC_KEYWORD_MODEL"
+      ],
+      "exit_code": 0,
+      "label": "run-MSVC_KEYWORD_MODEL"
+    },
+    {
+      "argv": [
+        "$JDK/bin/javac",
+        "-d",
+        "$OUT/work/jvm-classes",
+        "$FIXTURES/M3StringPoolNativeTest.java"
+      ],
+      "exit_code": 0,
+      "label": "compile-jvm-fixture"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-shared",
+        "-I$OUT/work/candidate/headers",
+        "-I$CANDIDATE/src/java.base/share/native/libjava",
+        "-DM3_POOL_SOURCE=\"$CANDIDATE/src/java.base/share/native/libjava/M3StringPool.c\"",
+        "$FIXTURES/m3_string_pool_jni_smoke.c",
+        "-o",
+        "$OUT/work/libm3_pool_test_candidate.so"
+      ],
+      "exit_code": 0,
+      "label": "compile-jvm-candidate"
+    },
+    {
+      "argv": [
+        "$JDK/bin/java",
+        "-Xcheck:jni",
+        "-Dm3.test.library=$OUT/work/libm3_pool_test_candidate.so",
+        "-cp",
+        "$OUT/work/jvm-classes",
+        "M3StringPoolNativeTest"
+      ],
+      "exit_code": 0,
+      "label": "jvm-candidate"
+    },
+    {
+      "argv": [
+        "cc",
+        "-std=c17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I$JDK/include",
+        "-I$JDK/include/linux",
+        "-ffile-prefix-map=$CANDIDATE=$CANDIDATE",
+        "-ffile-prefix-map=$BASELINE=$BASELINE",
+        "-ffile-prefix-map=$FIXTURES=$FIXTURES",
+        "-ffile-prefix-map=$OUT=$OUT",
+        "-ffile-prefix-map=$JDK=$JDK",
+        "-fPIC",
+        "-shared",
+        "-I$OUT/work/baseline/headers",
+        "-I$BASELINE/src/java.base/share/native/libjava",
+        "-DM3_POOL_SOURCE=\"$BASELINE/src/java.base/share/native/libjava/M3StringPool.c\"",
+        "$FIXTURES/m3_string_pool_jni_smoke.c",
+        "-o",
+        "$OUT/work/libm3_pool_test_baseline.so"
+      ],
+      "exit_code": 0,
+      "label": "compile-jvm-baseline"
+    },
+    {
+      "argv": [
+        "$JDK/bin/java",
+        "-Xcheck:jni",
+        "-Dm3.test.library=$OUT/work/libm3_pool_test_baseline.so",
+        "-cp",
+        "$OUT/work/jvm-classes",
+        "M3StringPoolNativeTest"
+      ],
+      "exit_code": 0,
+      "label": "jvm-baseline"
+    }
+  ],
+  "generated_outputs": {
+    "logs/cc-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/cc-version.stdout": "e412d6c932acaaea35c743bc158d4ba2400ca0e3df66df406a872b2ce0f8601b",
+    "logs/compile-MSVC_KEYWORD_MODEL.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-MSVC_KEYWORD_MODEL.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-baseline-linux.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-baseline-linux.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-candidate-apple-model.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-candidate-apple-model.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-candidate-linux-hint-model.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-candidate-linux-hint-model.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-candidate-linux.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-candidate-linux.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-helper-c.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-helper-c.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-helper-cpp.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-helper-cpp.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-jvm-baseline.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-jvm-baseline.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-jvm-candidate.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-jvm-candidate.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-jvm-fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-jvm-fixture.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-M3BitLane28.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-M3BitLane28.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-M3RX7.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-M3RX7.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-M3RegexDpPlan.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-M3RegexDpPlan.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-M3StateRelation.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-M3StateRelation.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-M3StringPool.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-M3StringPool.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-M3StringRegexDp.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-M3StringRegexDp.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-m3_index_mask_compactor.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-m3_index_mask_compactor.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-m3_index_mask_window.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-m3_index_mask_window.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-m3_index_path_masks.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-m3_index_path_masks.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-m3_long_index_path_masks_jni.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-m3_long_index_path_masks_jni.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-m3_residency_state_mask.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-m3_residency_state_mask.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-m3_state_mask_histogram.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-m3_state_mask_histogram.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-segmented_bit_lane.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-baseline-segmented_bit_lane.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-M3BitLane28.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-M3BitLane28.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-M3RX7.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-M3RX7.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-M3RegexDpPlan.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-M3RegexDpPlan.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-M3StateRelation.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-M3StateRelation.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-M3StringPool.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-M3StringPool.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-M3StringRegexDp.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-M3StringRegexDp.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-m3_index_mask_compactor.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-m3_index_mask_compactor.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-m3_index_mask_window.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-m3_index_mask_window.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-m3_index_path_masks.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-m3_index_path_masks.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-m3_long_index_path_masks_jni.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-m3_long_index_path_masks_jni.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-m3_residency_state_mask.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-m3_residency_state_mask.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-m3_state_mask_histogram.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-m3_state_mask_histogram.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-segmented_bit_lane.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/compile-owner-candidate-segmented_bit_lane.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/cxx-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/cxx-version.stdout": "d1587c99dacaf2619bba832ebf1d927d92d493f29fbef197f0636922de4ee952",
+    "logs/generate-headers-baseline.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/generate-headers-baseline.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/generate-headers-candidate.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/generate-headers-candidate.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/java-version.stderr": "e9e2a79127a26808ba36f71c0989fa421ce730d6f2cc0e5b034c1352f835f690",
+    "logs/java-version.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/jvm-baseline.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/jvm-baseline.stdout": "97efe176383378217b120067bfa73ab7bbff4dbe1363e0b6b4ff5d85c98a3c8c",
+    "logs/jvm-candidate.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/jvm-candidate.stdout": "97efe176383378217b120067bfa73ab7bbff4dbe1363e0b6b4ff5d85c98a3c8c",
+    "logs/preprocess-MSVC_KEYWORD_MODEL.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/preprocess-MSVC_KEYWORD_MODEL.stdout": "2f7a9694386db58fabc448991b30739186a9217c40575d4f290be4d9ff2987d2",
+    "logs/run-MSVC_KEYWORD_MODEL.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/run-MSVC_KEYWORD_MODEL.stdout": "be27b4a169db6a8e33e1981ca5f19c0ba792ae183b3b212235d70433afe21b03",
+    "logs/run-baseline-linux.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/run-baseline-linux.stdout": "0539ea60f8cf6cb4283cc5402dc73c82bc04c8d64ca3af2cad1a835803e500a9",
+    "logs/run-candidate-apple-model.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/run-candidate-apple-model.stdout": "0539ea60f8cf6cb4283cc5402dc73c82bc04c8d64ca3af2cad1a835803e500a9",
+    "logs/run-candidate-linux-hint-model.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/run-candidate-linux-hint-model.stdout": "0539ea60f8cf6cb4283cc5402dc73c82bc04c8d64ca3af2cad1a835803e500a9",
+    "logs/run-candidate-linux.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/run-candidate-linux.stdout": "0539ea60f8cf6cb4283cc5402dc73c82bc04c8d64ca3af2cad1a835803e500a9",
+    "logs/run-helper-c.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/run-helper-c.stdout": "be27b4a169db6a8e33e1981ca5f19c0ba792ae183b3b212235d70433afe21b03",
+    "logs/run-helper-cpp.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/run-helper-cpp.stdout": "be27b4a169db6a8e33e1981ca5f19c0ba792ae183b3b212235d70433afe21b03",
+    "work/MSVC_KEYWORD_MODEL": "1b25bce2342422a50d92a647b60131e7d309767f7a91fd3a5d211f837e7f6c50",
+    "work/baseline-linux": "e0695a4d0643e41f1850f119eece1407140bef869ce978dd6489189380f51868",
+    "work/baseline/abi-classes/com/m3/collections/M3BitLane28.class": "ba2f176cb0c80a63fd832d174110c8abca5eb1c9b5c4292fdc3037fb6598eb85",
+    "work/baseline/abi-classes/com/m3/collections/M3IndexMaskCompactor.class": "9cb9f74cc234ec0de2b64a441aec3b8476b9c360e3bc470eac3c23dd85073540",
+    "work/baseline/abi-classes/com/m3/collections/M3IndexMaskWindow.class": "c0f715684a56cd469a758ccc96110d4f3d9384acef471109cb5ca5589c60745d",
+    "work/baseline/abi-classes/com/m3/collections/M3IndexPathMasks.class": "74e34472ffb8ed79bc1af7e00ea78c8528888b6983e041ca65e91ee4bff00eac",
+    "work/baseline/abi-classes/com/m3/collections/M3LongIndexPathMasksJNI.class": "83a7d7f8ffbfa193f4242479daa2ac499a1a5333038e678c72af7114f3394c85",
+    "work/baseline/abi-classes/com/m3/collections/M3ResidencyStateMaskIndex.class": "03efb5fb3b4408e0b441119bbdba0f21a0beee54e89603087f280b508574c590",
+    "work/baseline/abi-classes/com/m3/collections/M3StateMaskHistogram.class": "98611deb400f496c0a061c92ac1e5f90340768ee49d4619bd9197f15de6e2869",
+    "work/baseline/abi-classes/java/lang/M3StringPool.class": "4273b934143a818866cb3fe1efed224fe4a4b266d959a5c16c6f9c397eb486c6",
+    "work/baseline/abi-classes/java/lang/M3StringRegexDp.class": "52e49210e61af91abe3d96109ab10eb03ec5e3562429e5b32fcd9419905bd623",
+    "work/baseline/abi-classes/jdk/internal/mindex/M3BitLane28.class": "43c9cc8122824c2bda7dbb93e6f30c7da37e64ce20f4330d97d3dab9473dec31",
+    "work/baseline/abi-classes/jdk/internal/mindex/M3RX7.class": "11256dfdfa2e9fe2f0aebc13199f840152a743dd9ff9ea53e903118513feab06",
+    "work/baseline/abi-classes/jdk/internal/mindex/M3RegexDpPlan.class": "466f889f3fc98944a44cfd3cd92306b7b115deafcbf46701afd8e35f32e5ef59",
+    "work/baseline/abi-classes/jdk/internal/mindex/M3StateRelation.class": "202d455145abca384af102c28549bbdaa32f65f53d1e9a8c4956e14ece8c43b8",
+    "work/baseline/abi-source/com/m3/collections/M3BitLane28.java": "ab34b773de7b805adb80a6f0e6f61765c242d6e495aade00cc043ee74d43f789",
+    "work/baseline/abi-source/com/m3/collections/M3IndexMaskCompactor.java": "016b09302df8a29d9269d1e509ee55be8001df6112af1708bb70d0a19920b3bc",
+    "work/baseline/abi-source/com/m3/collections/M3IndexMaskWindow.java": "32e58da8e62a2abc170bc7adc4e65dd09a7c2b02f9f7d9dbed9822b45dbbc0a4",
+    "work/baseline/abi-source/com/m3/collections/M3IndexPathMasks.java": "4e84f4fa01a9493ce406fdff4636e3286621f5d4f7df3e7ad7a75c11b1eda3ca",
+    "work/baseline/abi-source/com/m3/collections/M3LongIndexPathMasksJNI.java": "569d8215620d93bfc070cdf1183e84050b98ad7d2278966c2ba67bccc3c438f6",
+    "work/baseline/abi-source/com/m3/collections/M3ResidencyStateMaskIndex.java": "6519f0ca523998141958c39d85e75aace33f3230b0e0a8830f880b0f4bbe8b96",
+    "work/baseline/abi-source/com/m3/collections/M3StateMaskHistogram.java": "1f0d0f897078b807ea179564ceebb7860d2c2d9bb7997150a093155695c33fd0",
+    "work/baseline/abi-source/java/lang/M3StringPool.java": "41b5fb11308b75fa7e4ca9a09ce900db76e43af08b23ef647e61d37c24b17a47",
+    "work/baseline/abi-source/java/lang/M3StringRegexDp.java": "e378c534f45ae3023fb14a0c3a8f6a938734d68a48cb20074f52fc1c871d0864",
+    "work/baseline/abi-source/jdk/internal/mindex/M3BitLane28.java": "06ca3ea24f979f4aacba7789685f751d3849f9eb6a824cb90a70c6ff1b2375a6",
+    "work/baseline/abi-source/jdk/internal/mindex/M3RX7.java": "1554fc8b42c5b788798c54c8867f241b2c6a19a5ef67814c8f524f4c7dbd88ed",
+    "work/baseline/abi-source/jdk/internal/mindex/M3RegexDpPlan.java": "c6341abbfae6818044ccf9899cf5de832e110693cf83a4371a27985c93956875",
+    "work/baseline/abi-source/jdk/internal/mindex/M3StateRelation.java": "c2d1b23ef94922f95b8da65ff47cdb6e86641ec34542b7854758c77f8a1817d9",
+    "work/baseline/headers/com_m3_collections_M3BitLane28.h": "9100fb4d366f16641b244df49c3f284c72f618a8a0b925f6038a87c089d903e1",
+    "work/baseline/headers/com_m3_collections_M3IndexMaskCompactor.h": "b07276a58182cdff0c94551df8b26ba18f7e38651b3c2000a68b5a6d48a9d281",
+    "work/baseline/headers/com_m3_collections_M3IndexMaskWindow.h": "7bed983927895d9d333bd6f512e83a5552ae2d3712998821069d1a0bec4a0b5c",
+    "work/baseline/headers/com_m3_collections_M3IndexPathMasks.h": "2534990942a4f598a149ef2b39d0ce7baff816f4c1687848dac72f4505e79b9e",
+    "work/baseline/headers/com_m3_collections_M3LongIndexPathMasksJNI.h": "b533ded1386695392c7311bc987ee689ae5af7ca130bb859ade2c9c8b3a9f774",
+    "work/baseline/headers/com_m3_collections_M3ResidencyStateMaskIndex.h": "f29cf38398b9d0972f57cea34d8fc7ecce822c484e8c02e8175c11dfe684e0ff",
+    "work/baseline/headers/com_m3_collections_M3StateMaskHistogram.h": "b50fc7cd4b6458c580a8a971b5808beca5c73180d451c3c54be42ddeb9305b54",
+    "work/baseline/headers/java_lang_M3StringPool.h": "394931ad63d6b42bb98e22a33d556e86ff7d32ef5d59190604e3a843becc7d48",
+    "work/baseline/headers/java_lang_M3StringRegexDp.h": "ca88d6b87329382dafab96e89d9a885d5c9e49935e7e3e770e91019736d7b88d",
+    "work/baseline/headers/jdk_internal_mindex_M3BitLane28.h": "d63ac932e619d1b55d1c2c09af0c64932440b239c19a6df39eab8cf4b7ea7364",
+    "work/baseline/headers/jdk_internal_mindex_M3RX7.h": "32d9ea6f95e65248017509bfc01ab60bcd1d50caf0adaa51488169677c0a4bec",
+    "work/baseline/headers/jdk_internal_mindex_M3RegexDpPlan.h": "4d11efa3e729ebc228ce5d3e89fe8556502505c1072b8edb69039eb2ebba6c65",
+    "work/baseline/headers/jdk_internal_mindex_M3StateRelation.h": "f3a3964a88d2281fdeed1dba3e2d4bb0668cb9245f7375e1004119e722a46d68",
+    "work/baseline/objects/M3BitLane28.o": "ddaabe198d9510b36052efd8c47689767942750a79a6df33bdbb60ea4204a1f0",
+    "work/baseline/objects/M3RX7.o": "4024ef16bf27f8925002926a16508936dc920512ab55f5852e86dca03b974623",
+    "work/baseline/objects/M3RegexDpPlan.o": "660a31c871e5f16483744602ffa8de903061a089d2a31fcc55323c889a94ac97",
+    "work/baseline/objects/M3StateRelation.o": "16c5993a9fe24e63290ce2309a56781738e567f3570b6dcb3db15da50e0c261f",
+    "work/baseline/objects/M3StringPool.o": "aa57e41daae5276591f98ff7550f22c4ad10fabd67dc4312c9ca6814cc741afd",
+    "work/baseline/objects/M3StringRegexDp.o": "dfc2e11340ad3bbc5dbba1384a22d7df9acc4a6909b6622c9d94b47441cd4e63",
+    "work/baseline/objects/m3_index_mask_compactor.o": "386970c17b0f2fafc845699af7d89fc6851e35ece9e977b03025dc8ff12fae8d",
+    "work/baseline/objects/m3_index_mask_window.o": "a6f90ec659da421fa0d12fbdf1460f727fe84eef74a22ed414e9e106ba2d39c2",
+    "work/baseline/objects/m3_index_path_masks.o": "2c3f2aa8cca84d621d81aa84a2fc0661d6d96a3d6c7aa0678120ee1c25806a00",
+    "work/baseline/objects/m3_long_index_path_masks_jni.o": "dbb457a750e9397fe2286f8b0fa7c3656f0b0a41fce10b2cd46e7e1ad9b4166e",
+    "work/baseline/objects/m3_residency_state_mask.o": "22879be94c0bbd441d8f231a40d66f7746463348ac85e9147f1fac696e5b1557",
+    "work/baseline/objects/m3_state_mask_histogram.o": "183d7463d1c6ca110f45214188ef8a82d45510b9e0d90bffc5ee5617af0b36ea",
+    "work/baseline/objects/segmented_bit_lane.o": "d4788475afd3e8c9109768877cb061fa257867b2f58017d4d81d91616882c026",
+    "work/candidate-apple-model": "30607116849c332cbd4755c6f07459f0c281f1b152b01c3755d7f2ac49edebd7",
+    "work/candidate-linux": "b68516e94368b576a20ed049d4aadfd66dbc57957adb036f2f38f1454d377a85",
+    "work/candidate-linux-hint-model": "30607116849c332cbd4755c6f07459f0c281f1b152b01c3755d7f2ac49edebd7",
+    "work/candidate/abi-classes/com/m3/collections/M3BitLane28.class": "ba2f176cb0c80a63fd832d174110c8abca5eb1c9b5c4292fdc3037fb6598eb85",
+    "work/candidate/abi-classes/com/m3/collections/M3IndexMaskCompactor.class": "9cb9f74cc234ec0de2b64a441aec3b8476b9c360e3bc470eac3c23dd85073540",
+    "work/candidate/abi-classes/com/m3/collections/M3IndexMaskWindow.class": "c0f715684a56cd469a758ccc96110d4f3d9384acef471109cb5ca5589c60745d",
+    "work/candidate/abi-classes/com/m3/collections/M3IndexPathMasks.class": "74e34472ffb8ed79bc1af7e00ea78c8528888b6983e041ca65e91ee4bff00eac",
+    "work/candidate/abi-classes/com/m3/collections/M3LongIndexPathMasksJNI.class": "83a7d7f8ffbfa193f4242479daa2ac499a1a5333038e678c72af7114f3394c85",
+    "work/candidate/abi-classes/com/m3/collections/M3ResidencyStateMaskIndex.class": "03efb5fb3b4408e0b441119bbdba0f21a0beee54e89603087f280b508574c590",
+    "work/candidate/abi-classes/com/m3/collections/M3StateMaskHistogram.class": "98611deb400f496c0a061c92ac1e5f90340768ee49d4619bd9197f15de6e2869",
+    "work/candidate/abi-classes/java/lang/M3StringPool.class": "4273b934143a818866cb3fe1efed224fe4a4b266d959a5c16c6f9c397eb486c6",
+    "work/candidate/abi-classes/java/lang/M3StringRegexDp.class": "52e49210e61af91abe3d96109ab10eb03ec5e3562429e5b32fcd9419905bd623",
+    "work/candidate/abi-classes/jdk/internal/mindex/M3BitLane28.class": "43c9cc8122824c2bda7dbb93e6f30c7da37e64ce20f4330d97d3dab9473dec31",
+    "work/candidate/abi-classes/jdk/internal/mindex/M3RX7.class": "11256dfdfa2e9fe2f0aebc13199f840152a743dd9ff9ea53e903118513feab06",
+    "work/candidate/abi-classes/jdk/internal/mindex/M3RegexDpPlan.class": "466f889f3fc98944a44cfd3cd92306b7b115deafcbf46701afd8e35f32e5ef59",
+    "work/candidate/abi-classes/jdk/internal/mindex/M3StateRelation.class": "202d455145abca384af102c28549bbdaa32f65f53d1e9a8c4956e14ece8c43b8",
+    "work/candidate/abi-source/com/m3/collections/M3BitLane28.java": "ab34b773de7b805adb80a6f0e6f61765c242d6e495aade00cc043ee74d43f789",
+    "work/candidate/abi-source/com/m3/collections/M3IndexMaskCompactor.java": "016b09302df8a29d9269d1e509ee55be8001df6112af1708bb70d0a19920b3bc",
+    "work/candidate/abi-source/com/m3/collections/M3IndexMaskWindow.java": "32e58da8e62a2abc170bc7adc4e65dd09a7c2b02f9f7d9dbed9822b45dbbc0a4",
+    "work/candidate/abi-source/com/m3/collections/M3IndexPathMasks.java": "4e84f4fa01a9493ce406fdff4636e3286621f5d4f7df3e7ad7a75c11b1eda3ca",
+    "work/candidate/abi-source/com/m3/collections/M3LongIndexPathMasksJNI.java": "569d8215620d93bfc070cdf1183e84050b98ad7d2278966c2ba67bccc3c438f6",
+    "work/candidate/abi-source/com/m3/collections/M3ResidencyStateMaskIndex.java": "6519f0ca523998141958c39d85e75aace33f3230b0e0a8830f880b0f4bbe8b96",
+    "work/candidate/abi-source/com/m3/collections/M3StateMaskHistogram.java": "1f0d0f897078b807ea179564ceebb7860d2c2d9bb7997150a093155695c33fd0",
+    "work/candidate/abi-source/java/lang/M3StringPool.java": "41b5fb11308b75fa7e4ca9a09ce900db76e43af08b23ef647e61d37c24b17a47",
+    "work/candidate/abi-source/java/lang/M3StringRegexDp.java": "e378c534f45ae3023fb14a0c3a8f6a938734d68a48cb20074f52fc1c871d0864",
+    "work/candidate/abi-source/jdk/internal/mindex/M3BitLane28.java": "06ca3ea24f979f4aacba7789685f751d3849f9eb6a824cb90a70c6ff1b2375a6",
+    "work/candidate/abi-source/jdk/internal/mindex/M3RX7.java": "1554fc8b42c5b788798c54c8867f241b2c6a19a5ef67814c8f524f4c7dbd88ed",
+    "work/candidate/abi-source/jdk/internal/mindex/M3RegexDpPlan.java": "c6341abbfae6818044ccf9899cf5de832e110693cf83a4371a27985c93956875",
+    "work/candidate/abi-source/jdk/internal/mindex/M3StateRelation.java": "c2d1b23ef94922f95b8da65ff47cdb6e86641ec34542b7854758c77f8a1817d9",
+    "work/candidate/headers/com_m3_collections_M3BitLane28.h": "9100fb4d366f16641b244df49c3f284c72f618a8a0b925f6038a87c089d903e1",
+    "work/candidate/headers/com_m3_collections_M3IndexMaskCompactor.h": "b07276a58182cdff0c94551df8b26ba18f7e38651b3c2000a68b5a6d48a9d281",
+    "work/candidate/headers/com_m3_collections_M3IndexMaskWindow.h": "7bed983927895d9d333bd6f512e83a5552ae2d3712998821069d1a0bec4a0b5c",
+    "work/candidate/headers/com_m3_collections_M3IndexPathMasks.h": "2534990942a4f598a149ef2b39d0ce7baff816f4c1687848dac72f4505e79b9e",
+    "work/candidate/headers/com_m3_collections_M3LongIndexPathMasksJNI.h": "b533ded1386695392c7311bc987ee689ae5af7ca130bb859ade2c9c8b3a9f774",
+    "work/candidate/headers/com_m3_collections_M3ResidencyStateMaskIndex.h": "f29cf38398b9d0972f57cea34d8fc7ecce822c484e8c02e8175c11dfe684e0ff",
+    "work/candidate/headers/com_m3_collections_M3StateMaskHistogram.h": "b50fc7cd4b6458c580a8a971b5808beca5c73180d451c3c54be42ddeb9305b54",
+    "work/candidate/headers/java_lang_M3StringPool.h": "394931ad63d6b42bb98e22a33d556e86ff7d32ef5d59190604e3a843becc7d48",
+    "work/candidate/headers/java_lang_M3StringRegexDp.h": "ca88d6b87329382dafab96e89d9a885d5c9e49935e7e3e770e91019736d7b88d",
+    "work/candidate/headers/jdk_internal_mindex_M3BitLane28.h": "d63ac932e619d1b55d1c2c09af0c64932440b239c19a6df39eab8cf4b7ea7364",
+    "work/candidate/headers/jdk_internal_mindex_M3RX7.h": "32d9ea6f95e65248017509bfc01ab60bcd1d50caf0adaa51488169677c0a4bec",
+    "work/candidate/headers/jdk_internal_mindex_M3RegexDpPlan.h": "4d11efa3e729ebc228ce5d3e89fe8556502505c1072b8edb69039eb2ebba6c65",
+    "work/candidate/headers/jdk_internal_mindex_M3StateRelation.h": "f3a3964a88d2281fdeed1dba3e2d4bb0668cb9245f7375e1004119e722a46d68",
+    "work/candidate/objects/M3BitLane28.o": "0a9a90dca744453b67185f779af44e7de5eb0f8a27f95cbc2bccdeb1ded3e500",
+    "work/candidate/objects/M3RX7.o": "e50fb72bf55b1ff8816cc47e3d7d46165ec426542704d76caa819ddc6e34b2b9",
+    "work/candidate/objects/M3RegexDpPlan.o": "d62e743f81366379a9aca893f0868e260383f08d1848c444b2f79420e559a52d",
+    "work/candidate/objects/M3StateRelation.o": "99c2952a90e4e2db39b28ebdc4bd2673ab2d0c4d684e95a54d53988a64bad2d9",
+    "work/candidate/objects/M3StringPool.o": "1db7cc744a9e50327e8ad19f1611bddecf5c9f8d9d7c39724efb6f87f24e0693",
+    "work/candidate/objects/M3StringRegexDp.o": "187b4f73c440f2f0fa8ff383aad49b5d632a82ad5e29fe635a8a01452f3ee8b5",
+    "work/candidate/objects/m3_index_mask_compactor.o": "9362bde9306fb4b0ef9bf29a9d2851ae58662e2a4868f84abc7607aa36939770",
+    "work/candidate/objects/m3_index_mask_window.o": "484a140a39312056ac089ce06a01f3e5d6e582a248c3d21673d7d33086322ee1",
+    "work/candidate/objects/m3_index_path_masks.o": "d38d14c1e2be3762a7b5fec4b027b6b6c1b2e98226eed0bdca9d966957146caa",
+    "work/candidate/objects/m3_long_index_path_masks_jni.o": "b9c1d7511f5f8eedde34695fee5f03b85b5e8ee40497c9680ca0eb54d8edfbc0",
+    "work/candidate/objects/m3_residency_state_mask.o": "3b50dc4cc815cb397a9503962b4dc8215de2264583f2637ff22bc7cc657eef18",
+    "work/candidate/objects/m3_state_mask_histogram.o": "5967877268bf0ceeb195a25fdf150bdcd3616a41510ea80b34eca11135296ccc",
+    "work/candidate/objects/segmented_bit_lane.o": "fceb4978c06f10be7267e380fcd75f14ccf80d228003b57e2ce8603c0701f7d7",
+    "work/helper-c": "1b25bce2342422a50d92a647b60131e7d309767f7a91fd3a5d211f837e7f6c50",
+    "work/helper-cpp": "5cd82de6616f4359196276d1daf1572d382d3e1a7d72df4c7d749bfc1c31a4a1",
+    "work/jvm-classes/M3StringPoolNativeTest$IOAction.class": "a23915fba1c6b1ba3b7278ab5b61025688d6f0f86ca8a1ef16864313c5ac4f81",
+    "work/jvm-classes/M3StringPoolNativeTest.class": "7c6be05df21b40478d61c3a1ccac0cd6551068b6502669e30f5022346814a11c",
+    "work/libm3_pool_test_baseline.so": "7afc38524c79261a66440e964351938183d7378151ab6e1d19fdb3d4568ba122",
+    "work/libm3_pool_test_candidate.so": "b1663e84006b177ad268d13e808a1cc46556a21fe42c937b5628e5a7c3e6ab97"
+  },
+  "host": {
+    "machine": "x86_64",
+    "system": "Linux"
+  },
+  "inputs": {
+    "baseline/m3/collections/src/main/java/com/m3/collections/M3BitLane28.java": "86f1f600aac3583925b26eb857811255e2a997f8415d6edd65841cb61554c3b6",
+    "baseline/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
+    "baseline/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java": "9853795729a821c6d9c113ff169ebff5705a53affb6fbab5caefffc13104d6b1",
+    "baseline/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577",
+    "baseline/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasksJNI.java": "6170e9899132ef746a88c140cebc78cbaf511aea1c797549fab3e2238d4c5a06",
+    "baseline/m3/collections/src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java": "fcb1575f5366bba814870456acdf38379325f631cde86a18ae9541588e500dfc",
+    "baseline/m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java": "965a098c4f8b0103b5a497ef7e7897e0e0cb740f6f38da96fa6d4e277f859a42",
+    "baseline/m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "d1c300832aa9bf44cd7b7199cff593beb2a9464fbb52c9c8448da7773eaf0aef",
+    "baseline/m3/collections/src/main/native/collections/m3_index_mask_window.c": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
+    "baseline/m3/collections/src/main/native/collections/m3_index_path_masks.c": "3f5a760e633762469fad5a9dcd531cb39c33d11752d79ad241e506800b26e7cb",
+    "baseline/m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c": "c5971bd4bb6ee01a5385cc9ae22a2d7bc2bedd2163a1e39dd24cf76ec5f5e512",
+    "baseline/m3/collections/src/main/native/collections/m3_residency_state_mask.c": "07076627c4cdca856ead90d400c467d7259b65a7970dfbea114ffd66a9bb54e4",
+    "baseline/m3/collections/src/main/native/collections/m3_state_mask_histogram.c": "21ff3a8dade438a819d411fba96a6cb4ee8ddbd4c568409686137c42524e41bf",
+    "baseline/m3/collections/src/main/native/collections/segmented_bit_lane.c": "4ff7fb4557c58cc59de7fbb24498f3df2a197083a5cd467670dc24b9441f1210",
+    "baseline/src/java.base/share/classes/java/lang/M3StringPool.java": "09916fd6c69828d5703113ed79e684245a4684a801b573ff2e4f7b973fa75185",
+    "baseline/src/java.base/share/classes/java/lang/M3StringRegexDp.java": "69ebbcbd716f673af9fe282b8ab72f7b7de7961d7c43d69f534267c31a04a39f",
+    "baseline/src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java": "f4ddda4db918b03450eb46d2c610d3bc1c7b65dc2ab0c4e00e42407e4026546b",
+    "baseline/src/java.base/share/classes/jdk/internal/mindex/M3RX7.java": "5b80470da2c54afff2e9222ea77edcf4b0a7d494cfdfab2fa9012992db92dd5b",
+    "baseline/src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java": "ee74718496b22d89c4714dcde0bb0ff12f48cb5179f91a1c2042e27cfecb9578",
+    "baseline/src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa",
+    "baseline/src/java.base/share/native/libjava/M3BitLane28.c": "615b37ffa3781dae9739213db43299bfb2025e98b9960f35dc25c5b0325cc216",
+    "baseline/src/java.base/share/native/libjava/M3RX7.c": "441c6de3577b56d15134f8048c1eeaab3baa982517309ca8d3e7fc9c65006d1a",
+    "baseline/src/java.base/share/native/libjava/M3RegexDpPlan.c": "77f58524b0ae73671b6f33cdf1a5dcc9e546deef7f7350b0df2f661f693f75e7",
+    "baseline/src/java.base/share/native/libjava/M3StateRelation.c": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+    "baseline/src/java.base/share/native/libjava/M3StringPool.c": "1d1f2de2aa47769d058ef5ca889742f674ef0f40556e282dec5ddf69258ac5ce",
+    "baseline/src/java.base/share/native/libjava/M3StringRegexDp.c": "81440eb281b6401777d02a3ae28787f9d87b12ae10af426a7c78f58a5c9a723c",
+    "baseline/src/java.base/share/native/libjava/m3_state_relation.h": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
+    "candidate/m3/collections/src/main/java/com/m3/collections/M3BitLane28.java": "86f1f600aac3583925b26eb857811255e2a997f8415d6edd65841cb61554c3b6",
+    "candidate/m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java": "ed76ad01f7b89f064846d0dc35a1a705f461abe17772694c1be8223dbed2156c",
+    "candidate/m3/collections/src/main/java/com/m3/collections/M3IndexMaskWindow.java": "9853795729a821c6d9c113ff169ebff5705a53affb6fbab5caefffc13104d6b1",
+    "candidate/m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577",
+    "candidate/m3/collections/src/main/java/com/m3/collections/M3LongIndexPathMasksJNI.java": "6170e9899132ef746a88c140cebc78cbaf511aea1c797549fab3e2238d4c5a06",
+    "candidate/m3/collections/src/main/java/com/m3/collections/M3ResidencyStateMaskIndex.java": "fcb1575f5366bba814870456acdf38379325f631cde86a18ae9541588e500dfc",
+    "candidate/m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java": "965a098c4f8b0103b5a497ef7e7897e0e0cb740f6f38da96fa6d4e277f859a42",
+    "candidate/m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "3fea7150a748804b47384f75b98a21f86b3db1def6249887c7508d4c749a165d",
+    "candidate/m3/collections/src/main/native/collections/m3_index_mask_window.c": "3f3c222275ebd45b8a40846c758f8333e86f68b118707acb9f1a088fe3ae6ba6",
+    "candidate/m3/collections/src/main/native/collections/m3_index_path_masks.c": "5a5f4d260f0368a5a3f08c6b04ceb432e670b713230118162e7d62ae595a402f",
+    "candidate/m3/collections/src/main/native/collections/m3_long_index_path_masks_jni.c": "c75732ddf8c2d562b917bf015d58d1b726bb7e3cabd481cd4dfd1ae7b60e9cfa",
+    "candidate/m3/collections/src/main/native/collections/m3_residency_state_mask.c": "f893e18b9ca2dff10aa07a1217e925c0e282ab01d6d485ade94a3eb5098acc41",
+    "candidate/m3/collections/src/main/native/collections/m3_state_mask_histogram.c": "4ab0d28d827916c7aae1852ef2d961f8bbfffde8b216ce52f6a7d9301fbd351d",
+    "candidate/m3/collections/src/main/native/collections/segmented_bit_lane.c": "1246ffa52b1867fb1a41f4c70689dc661a808c4b1790bd4a09cd6cd9fa2e8aa2",
+    "candidate/src/java.base/share/classes/java/lang/M3StringPool.java": "09916fd6c69828d5703113ed79e684245a4684a801b573ff2e4f7b973fa75185",
+    "candidate/src/java.base/share/classes/java/lang/M3StringRegexDp.java": "69ebbcbd716f673af9fe282b8ab72f7b7de7961d7c43d69f534267c31a04a39f",
+    "candidate/src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java": "f4ddda4db918b03450eb46d2c610d3bc1c7b65dc2ab0c4e00e42407e4026546b",
+    "candidate/src/java.base/share/classes/jdk/internal/mindex/M3RX7.java": "5b80470da2c54afff2e9222ea77edcf4b0a7d494cfdfab2fa9012992db92dd5b",
+    "candidate/src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java": "ee74718496b22d89c4714dcde0bb0ff12f48cb5179f91a1c2042e27cfecb9578",
+    "candidate/src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa",
+    "candidate/src/java.base/share/native/libjava/M3BitLane28.c": "49d203bbead58a29117590286d45883a476614afce2fb3f116cc9a6d843f43f1",
+    "candidate/src/java.base/share/native/libjava/M3RX7.c": "63f42202be6ce83f72e70854051dffd261125d686ee52ffe6de97540c3957524",
+    "candidate/src/java.base/share/native/libjava/M3RegexDpPlan.c": "943e7921e10ec95bc90cdc1f6dea173b821898749a4e4079fae4710b9785713a",
+    "candidate/src/java.base/share/native/libjava/M3StateRelation.c": "42ce45bf2d2584b3dd22799389b2fa43971e2355608c744e59eabb039434444c",
+    "candidate/src/java.base/share/native/libjava/M3StringPool.c": "fb7bab27b68ecfbffc8c98743e8ab3dc06abcc61555e777001b376441b747c1d",
+    "candidate/src/java.base/share/native/libjava/M3StringRegexDp.c": "076e61b8fa19620935f02868ddb8ab5b568ba721fa958ecfa3e1df99db058ed8",
+    "candidate/src/java.base/share/native/libjava/m3_jni_util.h": "5e3661478ca9e7082e5bea27cfaa5267110793093845c82ca986850a2fb19ac6",
+    "candidate/src/java.base/share/native/libjava/m3_state_relation.h": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
+    "fixtures/M3StringPoolNativeTest.java": "c39cc6b8b46dfe0f403fea4c1fd971cf1f21822861a169499805a0fdb6f94f9e",
+    "fixtures/m3_jni_util_contract.c": "fdb5e509182be808c1a06902a210a99cc2e5b98301785fa322d8e8ac41bc1a29",
+    "fixtures/m3_string_pool_jni_smoke.c": "9fbf1158b5f1893fcda4febcbae84300d87f7180e19b79d87f436910b8dd78ea",
+    "fixtures/m3_string_pool_model.c": "3b38c76622c9d3a272ca636b99cb9ee0407775b6de477476c5e558ddbd321c43",
+    "fixtures/run_native_tests.py": "eb50b17e945e5f5fd60023f1e176042f9d6c3c720174923df0a26f95c55e4588",
+    "toolchain/include/jni.h": "99e64ebbe749e6df284f852f11b3c73f6ea97baf15120428f40f887fe0616e61",
+    "toolchain/include/linux/jni_md.h": "88cb5c33e306900dd35a78d5a439087123b8e91b0986bb5acb42cc9bd2fcc42e"
+  },
+  "limitations": [
+    "Apple source branching uses host Linux headers and modeled syscalls; no Apple SDK or kernel is executed.",
+    "Missing-NOREPLACE modeling is not execution on an old Linux/Android kernel.",
+    "MSVC_KEYWORD_MODEL forces _MSC_VER on the Linux host compiler; no MSVC compiler, Windows SDK or Windows runtime is executed.",
+    "A stock checked JVM registers actual product C functions to a fixture class; this is not an installed source-built M3JDK21 image.",
+    "Windows, Android and iOS execution and whole-runtime qualification remain separate gates."
+  ],
+  "mode": "baseline-differential",
+  "results": {
+    "MSVC_KEYWORD_MODEL": {
+      "checks": 3,
+      "kind": "MSVC_KEYWORD_MODEL",
+      "selected_declaration": "static __inline void",
+      "windows_build_or_runtime_proof": false
+    },
+    "baseline-jni-abi": {
+      "c_symbols": {
+        "com.m3.collections.M3BitLane28": [
+          "JNIEXPORT jint JNICALL Java_com_m3_collections_M3BitLane28_cardinality0( JNIEnv *env, jclass type, jobjectArray regions, jint from, jint to)"
+        ],
+        "com.m3.collections.M3IndexMaskCompactor": [
+          "JNIEXPORT jint JNICALL Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative(JNIEnv *env, jclass owner)",
+          "JNIEXPORT jint JNICALL Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative( JNIEnv *env, jclass owner)",
+          "JNIEXPORT jint JNICALL Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative(JNIEnv *env, jclass owner)",
+          "JNIEXPORT jlongArray JNICALL Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative( JNIEnv *env, jclass owner, jlongArray rows, jint row_offset, jbyteArray states, jint state_offset, jint length, jint mask)",
+          "JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexMaskCompactor_selectNative( JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint required_mask)",
+          "JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative( JNIEnv *env, jclass owner, jbyteArray states, jint required, jint excluded)",
+          "JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative( JNIEnv *env, jclass owner, jbyteArray states, jint mask)",
+          "JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative( JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first, jint length, jint required_mask)",
+          "JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative( JNIEnv *env, jclass owner, jintArray rows, jint row_offset, jbyteArray states, jint state_offset, jint length, jint mask)"
+        ],
+        "com.m3.collections.M3IndexMaskWindow": [
+          "JNIEXPORT jlong JNICALL Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative( JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first, jint end, jint required, jint excluded, jintArray output, jint output_offset, jint limit)",
+          "JNIEXPORT jlong JNICALL Java_com_m3_collections_M3IndexMaskWindow_scanNative( JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first, jint required, jint excluded, jintArray output, jint output_offset, jint limit)"
+        ],
+        "com.m3.collections.M3IndexPathMasks": [
+          "JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexPathMasks_selectNative( JNIEnv *env, jclass owner, jintArray rows, jintArray offsets, jobjectArray planes, jintArray required, jintArray forbidden, jint first, jint count, jint stride)"
+        ],
+        "com.m3.collections.M3LongIndexPathMasksJNI": [
+          "JNIEXPORT jlong JNICALL Java_com_m3_collections_M3LongIndexPathMasksJNI_scanWindowNative( JNIEnv *env, jclass owner, jlongArray rows, jintArray offsets, jobjectArray planes, jintArray needs, jintArray denies, jint first, jint count, jint stride, jint next, jlongArray output, jint output_offset, jint limit)",
+          "JNIEXPORT jlongArray JNICALL Java_com_m3_collections_M3LongIndexPathMasksJNI_selectNative( JNIEnv *env, jclass owner, jlongArray rows, jintArray offsets, jobjectArray planes, jintArray needs, jintArray denies, jint first, jint count, jint stride)"
+        ],
+        "com.m3.collections.M3ResidencyStateMaskIndex": [
+          "JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3ResidencyStateMaskIndex_select0( JNIEnv *env, jclass owner, jintArray coordinates, jlongArray words, jbyteArray lifecycle, jlong required, jlong forbidden, jint allowed_states)"
+        ],
+        "com.m3.collections.M3StateMaskHistogram": [
+          "JNIEXPORT void JNICALL Java_com_m3_collections_M3StateMaskHistogram_tallyNative( JNIEnv *env, jclass owner, jbyteArray source, jint first, jint count, jint stride, jintArray result)"
+        ],
+        "java.lang.M3StringPool": [
+          "JNIEXPORT jobject JNICALL Java_java_lang_M3StringPool_mapLexicon0(JNIEnv *env, jclass ignored, jint descriptor, jlong handle, jlong address, jlong length)",
+          "JNIEXPORT jboolean JNICALL Java_java_lang_M3StringPool_unmapLexicon0(JNIEnv *env, jclass ignored, jlong address, jlong length)"
+        ],
+        "java.lang.M3StringRegexDp": [
+          "JNIEXPORT jlong JNICALL Java_java_lang_M3StringRegexDp_advance0( JNIEnv *env, jclass ignored, jlong address, jint capacity, jint start, jint length, jint width, jboolean big_endian, jlong incoming, jintArray atom_array, jlongArray closure_array)"
+        ],
+        "jdk.internal.mindex.M3BitLane28": [
+          "JNIEXPORT jint JNICALL Java_jdk_internal_mindex_M3BitLane28_cardinality0( JNIEnv *env, jclass type, jobjectArray regions, jint from, jint to)"
+        ],
+        "jdk.internal.mindex.M3RX7": [
+          "JNIEXPORT void JNICALL Java_jdk_internal_mindex_M3RX7_buildPacked0( JNIEnv *env, jclass ignored, jshortArray dfaArray, jbyteArray packedArray, jintArray startArray, jintArray lengthArray, jshortArray outArray)"
+        ],
+        "jdk.internal.mindex.M3RegexDpPlan": [
+          "JNIEXPORT jlongArray JNICALL Java_jdk_internal_mindex_M3RegexDpPlan_compose0( JNIEnv *env, jclass cls, jlongArray left, jlongArray right)",
+          "JNIEXPORT jlongArray JNICALL Java_jdk_internal_mindex_M3RegexDpPlan_composeStructured0( JNIEnv *env, jclass cls, jlongArray left, jlongArray right)",
+          "JNIEXPORT jlongArray JNICALL Java_jdk_internal_mindex_M3RegexDpPlan_repeat0( JNIEnv *env, jclass cls, jlongArray rows, jlong count, jboolean structured)"
+        ],
+        "jdk.internal.mindex.M3StateRelation": [
+          "JNIEXPORT jlongArray JNICALL Java_jdk_internal_mindex_M3StateRelation_composeNative( JNIEnv *env, jclass owner, jlongArray left, jlongArray right)",
+          "JNIEXPORT jlongArray JNICALL Java_jdk_internal_mindex_M3StateRelation_repeatNative( JNIEnv *env, jclass owner, jlongArray rows, jlong count)"
+        ]
+      },
+      "generated_from_actual_java_declarations": true,
+      "java_declarations": {
+        "com.m3.collections.M3BitLane28": [
+          "private static native int cardinality0(long[][][] regions, int from, int to);"
+        ],
+        "com.m3.collections.M3IndexMaskCompactor": [
+          "private static native int positionsAbiNative();",
+          "private static native int positionsMasksAbiNative();",
+          "private static native int rangeAbiNative();",
+          "private static native long[] selectLongWindowNative(long[] rows, int rowOffset, byte[] states, int stateOffset, int length, int mask);",
+          "private static native int[] selectNative(int[] orderedRows, byte[] rowStates, int requiredMask);",
+          "private static native int[] selectPositionsMasksNative( byte[] rowStates, int requiredMask, int excludedMask);",
+          "private static native int[] selectPositionsNative(byte[] rowStates, int requiredMask);",
+          "private static native int[] selectRangeNative(int[] orderedRows, byte[] rowStates, int first, int length, int requiredMask);",
+          "private static native int[] selectWindowNative(int[] rows, int rowOffset, byte[] states, int stateOffset, int length, int mask);"
+        ],
+        "com.m3.collections.M3IndexMaskWindow": [
+          "private static native long scanBoundedNative(int[] rows, byte[] states, int first, int end, int required, int excluded, int[] output, int outputOffset, int limit);",
+          "private static native long scanNative(int[] rows, byte[] states, int first, int required, int excluded, int[] output, int outputOffset, int limit);"
+        ],
+        "com.m3.collections.M3IndexPathMasks": [
+          "private static native int[] selectNative(int[] orderedRows, int[] physicalOffsets, int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks, int first, int count, int stride);"
+        ],
+        "com.m3.collections.M3LongIndexPathMasksJNI": [
+          "private static native long scanWindowNative(long[] rows, int[] physicalOffsets, int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks, int first, int count, int stride, int nextOrdinal, long[] output, int outputOffset, int limit);",
+          "private static native long[] selectNative(long[] rows, int[] physicalOffsets, int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks, int first, int count, int stride);"
+        ],
+        "com.m3.collections.M3ResidencyStateMaskIndex": [
+          "private static native int[] select0(int[] coordinates, long[] words, byte[] lifecycle, long required, long forbidden, int allowedStates);"
+        ],
+        "com.m3.collections.M3StateMaskHistogram": [
+          "private static native void tallyNative(byte[] stateBytes, int first, int count, int stride, int[] buckets);"
+        ],
+        "java.lang.M3StringPool": [
+          "private static native ByteBuffer mapLexicon0( int descriptor, long handle, long address, long length) throws IOException;",
+          "private static native boolean unmapLexicon0(long address, long length);"
+        ],
+        "java.lang.M3StringRegexDp": [
+          "private static native long advance0(long address, int capacity, int start, int length, int width, boolean bigEndian, long incoming, int[] atoms, long[] closure);"
+        ],
+        "jdk.internal.mindex.M3BitLane28": [
+          "private static native int cardinality0(long[][][] regions, int from, int to);"
+        ],
+        "jdk.internal.mindex.M3RX7": [
+          "private static native void buildPacked0(short[] dfa, byte[] packed, int[] offsets, int[] lengths, short[] rows);"
+        ],
+        "jdk.internal.mindex.M3RegexDpPlan": [
+          "static native long[] compose0(long[] left, long[] right);",
+          "static native long[] composeStructured0(long[] left, long[] right);",
+          "static native long[] repeat0(long[] rows, long count, boolean structured);"
+        ],
+        "jdk.internal.mindex.M3StateRelation": [
+          "static native long[] composeNative(long[] left, long[] right);",
+          "static native long[] repeatNative(long[] rows, long count);"
+        ]
+      },
+      "native_owners": 13
+    },
+    "baseline-linux": {
+      "checks": 24,
+      "kind": "deterministic-model"
+    },
+    "before-after-differential": "IDENTICAL 24-case Linux transcript",
+    "candidate-apple-model": {
+      "checks": 24,
+      "kind": "deterministic-model"
+    },
+    "candidate-jni-abi": {
+      "c_symbols": {
+        "com.m3.collections.M3BitLane28": [
+          "JNIEXPORT jint JNICALL Java_com_m3_collections_M3BitLane28_cardinality0( JNIEnv *env, jclass type, jobjectArray regions, jint from, jint to)"
+        ],
+        "com.m3.collections.M3IndexMaskCompactor": [
+          "JNIEXPORT jint JNICALL Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative(JNIEnv *env, jclass owner)",
+          "JNIEXPORT jint JNICALL Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative( JNIEnv *env, jclass owner)",
+          "JNIEXPORT jint JNICALL Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative(JNIEnv *env, jclass owner)",
+          "JNIEXPORT jlongArray JNICALL Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative( JNIEnv *env, jclass owner, jlongArray rows, jint row_offset, jbyteArray states, jint state_offset, jint length, jint mask)",
+          "JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexMaskCompactor_selectNative( JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint required_mask)",
+          "JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative( JNIEnv *env, jclass owner, jbyteArray states, jint required, jint excluded)",
+          "JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative( JNIEnv *env, jclass owner, jbyteArray states, jint mask)",
+          "JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative( JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first, jint length, jint required_mask)",
+          "JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative( JNIEnv *env, jclass owner, jintArray rows, jint row_offset, jbyteArray states, jint state_offset, jint length, jint mask)"
+        ],
+        "com.m3.collections.M3IndexMaskWindow": [
+          "JNIEXPORT jlong JNICALL Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative( JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first, jint end, jint required, jint excluded, jintArray output, jint output_offset, jint limit)",
+          "JNIEXPORT jlong JNICALL Java_com_m3_collections_M3IndexMaskWindow_scanNative( JNIEnv *env, jclass owner, jintArray rows, jbyteArray states, jint first, jint required, jint excluded, jintArray output, jint output_offset, jint limit)"
+        ],
+        "com.m3.collections.M3IndexPathMasks": [
+          "JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexPathMasks_selectNative( JNIEnv *env, jclass owner, jintArray rows, jintArray offsets, jobjectArray planes, jintArray required, jintArray forbidden, jint first, jint count, jint stride)"
+        ],
+        "com.m3.collections.M3LongIndexPathMasksJNI": [
+          "JNIEXPORT jlong JNICALL Java_com_m3_collections_M3LongIndexPathMasksJNI_scanWindowNative( JNIEnv *env, jclass owner, jlongArray rows, jintArray offsets, jobjectArray planes, jintArray needs, jintArray denies, jint first, jint count, jint stride, jint next, jlongArray output, jint output_offset, jint limit)",
+          "JNIEXPORT jlongArray JNICALL Java_com_m3_collections_M3LongIndexPathMasksJNI_selectNative( JNIEnv *env, jclass owner, jlongArray rows, jintArray offsets, jobjectArray planes, jintArray needs, jintArray denies, jint first, jint count, jint stride)"
+        ],
+        "com.m3.collections.M3ResidencyStateMaskIndex": [
+          "JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3ResidencyStateMaskIndex_select0( JNIEnv *env, jclass owner, jintArray coordinates, jlongArray words, jbyteArray lifecycle, jlong required, jlong forbidden, jint allowed_states)"
+        ],
+        "com.m3.collections.M3StateMaskHistogram": [
+          "JNIEXPORT void JNICALL Java_com_m3_collections_M3StateMaskHistogram_tallyNative( JNIEnv *env, jclass owner, jbyteArray source, jint first, jint count, jint stride, jintArray result)"
+        ],
+        "java.lang.M3StringPool": [
+          "JNIEXPORT jobject JNICALL Java_java_lang_M3StringPool_mapLexicon0(JNIEnv *env, jclass ignored, jint descriptor, jlong handle, jlong address, jlong length)",
+          "JNIEXPORT jboolean JNICALL Java_java_lang_M3StringPool_unmapLexicon0(JNIEnv *env, jclass ignored, jlong address, jlong length)"
+        ],
+        "java.lang.M3StringRegexDp": [
+          "JNIEXPORT jlong JNICALL Java_java_lang_M3StringRegexDp_advance0( JNIEnv *env, jclass ignored, jlong address, jint capacity, jint start, jint length, jint width, jboolean big_endian, jlong incoming, jintArray atom_array, jlongArray closure_array)"
+        ],
+        "jdk.internal.mindex.M3BitLane28": [
+          "JNIEXPORT jint JNICALL Java_jdk_internal_mindex_M3BitLane28_cardinality0( JNIEnv *env, jclass type, jobjectArray regions, jint from, jint to)"
+        ],
+        "jdk.internal.mindex.M3RX7": [
+          "JNIEXPORT void JNICALL Java_jdk_internal_mindex_M3RX7_buildPacked0( JNIEnv *env, jclass ignored, jshortArray dfaArray, jbyteArray packedArray, jintArray startArray, jintArray lengthArray, jshortArray outArray)"
+        ],
+        "jdk.internal.mindex.M3RegexDpPlan": [
+          "JNIEXPORT jlongArray JNICALL Java_jdk_internal_mindex_M3RegexDpPlan_compose0( JNIEnv *env, jclass cls, jlongArray left, jlongArray right)",
+          "JNIEXPORT jlongArray JNICALL Java_jdk_internal_mindex_M3RegexDpPlan_composeStructured0( JNIEnv *env, jclass cls, jlongArray left, jlongArray right)",
+          "JNIEXPORT jlongArray JNICALL Java_jdk_internal_mindex_M3RegexDpPlan_repeat0( JNIEnv *env, jclass cls, jlongArray rows, jlong count, jboolean structured)"
+        ],
+        "jdk.internal.mindex.M3StateRelation": [
+          "JNIEXPORT jlongArray JNICALL Java_jdk_internal_mindex_M3StateRelation_composeNative( JNIEnv *env, jclass owner, jlongArray left, jlongArray right)",
+          "JNIEXPORT jlongArray JNICALL Java_jdk_internal_mindex_M3StateRelation_repeatNative( JNIEnv *env, jclass owner, jlongArray rows, jlong count)"
+        ]
+      },
+      "generated_from_actual_java_declarations": true,
+      "java_declarations": {
+        "com.m3.collections.M3BitLane28": [
+          "private static native int cardinality0(long[][][] regions, int from, int to);"
+        ],
+        "com.m3.collections.M3IndexMaskCompactor": [
+          "private static native int positionsAbiNative();",
+          "private static native int positionsMasksAbiNative();",
+          "private static native int rangeAbiNative();",
+          "private static native long[] selectLongWindowNative(long[] rows, int rowOffset, byte[] states, int stateOffset, int length, int mask);",
+          "private static native int[] selectNative(int[] orderedRows, byte[] rowStates, int requiredMask);",
+          "private static native int[] selectPositionsMasksNative( byte[] rowStates, int requiredMask, int excludedMask);",
+          "private static native int[] selectPositionsNative(byte[] rowStates, int requiredMask);",
+          "private static native int[] selectRangeNative(int[] orderedRows, byte[] rowStates, int first, int length, int requiredMask);",
+          "private static native int[] selectWindowNative(int[] rows, int rowOffset, byte[] states, int stateOffset, int length, int mask);"
+        ],
+        "com.m3.collections.M3IndexMaskWindow": [
+          "private static native long scanBoundedNative(int[] rows, byte[] states, int first, int end, int required, int excluded, int[] output, int outputOffset, int limit);",
+          "private static native long scanNative(int[] rows, byte[] states, int first, int required, int excluded, int[] output, int outputOffset, int limit);"
+        ],
+        "com.m3.collections.M3IndexPathMasks": [
+          "private static native int[] selectNative(int[] orderedRows, int[] physicalOffsets, int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks, int first, int count, int stride);"
+        ],
+        "com.m3.collections.M3LongIndexPathMasksJNI": [
+          "private static native long scanWindowNative(long[] rows, int[] physicalOffsets, int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks, int first, int count, int stride, int nextOrdinal, long[] output, int outputOffset, int limit);",
+          "private static native long[] selectNative(long[] rows, int[] physicalOffsets, int[][] statePlanes, int[] requiredMasks, int[] forbiddenMasks, int first, int count, int stride);"
+        ],
+        "com.m3.collections.M3ResidencyStateMaskIndex": [
+          "private static native int[] select0(int[] coordinates, long[] words, byte[] lifecycle, long required, long forbidden, int allowedStates);"
+        ],
+        "com.m3.collections.M3StateMaskHistogram": [
+          "private static native void tallyNative(byte[] stateBytes, int first, int count, int stride, int[] buckets);"
+        ],
+        "java.lang.M3StringPool": [
+          "private static native ByteBuffer mapLexicon0( int descriptor, long handle, long address, long length) throws IOException;",
+          "private static native boolean unmapLexicon0(long address, long length);"
+        ],
+        "java.lang.M3StringRegexDp": [
+          "private static native long advance0(long address, int capacity, int start, int length, int width, boolean bigEndian, long incoming, int[] atoms, long[] closure);"
+        ],
+        "jdk.internal.mindex.M3BitLane28": [
+          "private static native int cardinality0(long[][][] regions, int from, int to);"
+        ],
+        "jdk.internal.mindex.M3RX7": [
+          "private static native void buildPacked0(short[] dfa, byte[] packed, int[] offsets, int[] lengths, short[] rows);"
+        ],
+        "jdk.internal.mindex.M3RegexDpPlan": [
+          "static native long[] compose0(long[] left, long[] right);",
+          "static native long[] composeStructured0(long[] left, long[] right);",
+          "static native long[] repeat0(long[] rows, long count, boolean structured);"
+        ],
+        "jdk.internal.mindex.M3StateRelation": [
+          "static native long[] composeNative(long[] left, long[] right);",
+          "static native long[] repeatNative(long[] rows, long count);"
+        ]
+      },
+      "native_owners": 13
+    },
+    "candidate-linux": {
+      "checks": 24,
+      "kind": "deterministic-model"
+    },
+    "candidate-linux-hint-model": {
+      "checks": 24,
+      "kind": "deterministic-model"
+    },
+    "helper-c": {
+      "checks": 3,
+      "kind": "JNI-table-contract-model"
+    },
+    "helper-cpp": {
+      "checks": 3,
+      "kind": "JNI-table-contract-model"
+    },
+    "jvm-linux-baseline": {
+      "checks": 8,
+      "jni_checking": true,
+      "kind": "actual-production-C-real-JVM-and-Linux-mmap"
+    },
+    "jvm-linux-candidate": {
+      "checks": 8,
+      "jni_checking": true,
+      "kind": "actual-production-C-real-JVM-and-Linux-mmap"
+    },
+    "native-owner-before-after-abi": "IDENTICAL"
+  },
+  "schema": "m3-common-jni-qualification-v1",
+  "status": "PASS"
+}

@@ -1,0 +1,427 @@
+{
+  "schema": "SYNEXIA_REGEX_NESTED_SLICE_INTAKE_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_commit": "c41b6adb6b64f6f0432a0599e09a6c6dae99c93e",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/10441",
+  "canonical_recipe": "com.synexia.m3.RegexV7NestedSlice20261011",
+  "canonical_task_path": "synexia-openrewrite-recipes/tasks/regex-v7-cold-free-projection-20261007/nested-slice-20261011",
+  "artifact_root": "9fbdafd2c1b8382216d5e72076f1cb438e247d66742dd3b5f4e16e9aca5605bb",
+  "receiver_parent": "461b77e7cadaf68832849da76bfd68c7b31b502f",
+  "owner": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgramImageCodec.java",
+  "before_sha256": "c7f17a7b60b8e90c5bc8730c6a5c222dd3598474ea126377ecdf89cb0bcc6d8e",
+  "after_sha256": "f7ad944462b279135d82c93e5490d3d6a88bf0e4dfb1de9bbb232990b9c6dc44",
+  "materialization": "EXACT_OPENREWRITE_SDK_POSTIMAGE",
+  "source_proof": {
+    "scope": "BOUNDED_COMPLETE_FILE_MATCHER_CLOSURE",
+    "source_revision": "1f79dd7620db73559e60362efd9be2b85cb33577",
+    "source_files": 577,
+    "recipe": "com.synexia.m3.RegexV7NestedSlice20261011",
+    "sdk": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "runtime": {
+      "baseline": {
+        "tests": 33,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "candidate": {
+        "tests": 33,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "jdk_matrix": {
+      "expressions": 16,
+      "samples": 139,
+      "restored_variants": 8,
+      "receiver_kinds": 4,
+      "warm_passes": 2,
+      "jdk_comparisons": 427008
+    },
+    "jni": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "jni_scope": "existing search kernel, forced minimumRows=1, Linux x86_64, -Xcheck:jni; default-threshold refusal retained",
+    "public_codec_api": "EXACT_EQUAL",
+    "negative_control": "EXPECTED_ASSERTION_FAILURE",
+    "allocation": "SEPARATE_MEASUREMENTS; see allocation trials",
+    "annotation_processing": "DISABLED: exact MIT Slf4j declaration; unused generated logger is not qualified",
+    "not_run": [
+      "full MIndexRegexProgramTest ContextOS closure",
+      "canonical serial catalogue/full reactor review",
+      "java.base complete closure and matched JDK/jtreg",
+      "GPU and other OS/architecture backends"
+    ],
+    "promotion": "NOT_ADMITTED"
+  },
+  "source_allocation": {
+    "scope": "DIAGNOSTIC_COMPLETE_IMAGE_DECODE",
+    "trials": 5,
+    "summary": [
+      {
+        "literal_units": 16,
+        "family": 0,
+        "transport": 0,
+        "baseline": {
+          "allocated_bytes_per_op": 2397900,
+          "ns_per_op": 1270260
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 2397452,
+          "ns_per_op": 1260973
+        },
+        "allocation_reduction": 448
+      },
+      {
+        "literal_units": 16,
+        "family": 0,
+        "transport": 1,
+        "baseline": {
+          "allocated_bytes_per_op": 1601064,
+          "ns_per_op": 1034192
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 1600616,
+          "ns_per_op": 1063489
+        },
+        "allocation_reduction": 448
+      },
+      {
+        "literal_units": 16,
+        "family": 0,
+        "transport": 2,
+        "baseline": {
+          "allocated_bytes_per_op": 1601879,
+          "ns_per_op": 1287916
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 1601479,
+          "ns_per_op": 1110912
+        },
+        "allocation_reduction": 400
+      },
+      {
+        "literal_units": 16,
+        "family": 0,
+        "transport": 3,
+        "baseline": {
+          "allocated_bytes_per_op": 1601064,
+          "ns_per_op": 1045513
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 1600616,
+          "ns_per_op": 1045516
+        },
+        "allocation_reduction": 448
+      },
+      {
+        "literal_units": 16,
+        "family": 1,
+        "transport": 0,
+        "baseline": {
+          "allocated_bytes_per_op": 2414504,
+          "ns_per_op": 1914899
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 2414056,
+          "ns_per_op": 1693037
+        },
+        "allocation_reduction": 448
+      },
+      {
+        "literal_units": 16,
+        "family": 1,
+        "transport": 1,
+        "baseline": {
+          "allocated_bytes_per_op": 1617056,
+          "ns_per_op": 1677415
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 1616626,
+          "ns_per_op": 1680317
+        },
+        "allocation_reduction": 430
+      },
+      {
+        "literal_units": 16,
+        "family": 1,
+        "transport": 2,
+        "baseline": {
+          "allocated_bytes_per_op": 1617136,
+          "ns_per_op": 1407616
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 1616736,
+          "ns_per_op": 1303177
+        },
+        "allocation_reduction": 400
+      },
+      {
+        "literal_units": 16,
+        "family": 1,
+        "transport": 3,
+        "baseline": {
+          "allocated_bytes_per_op": 1616875,
+          "ns_per_op": 1442395
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 1616463,
+          "ns_per_op": 1183012
+        },
+        "allocation_reduction": 412
+      },
+      {
+        "literal_units": 16,
+        "family": 2,
+        "transport": 0,
+        "baseline": {
+          "allocated_bytes_per_op": 2403103,
+          "ns_per_op": 1324858
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 2402757,
+          "ns_per_op": 1331555
+        },
+        "allocation_reduction": 346
+      },
+      {
+        "literal_units": 16,
+        "family": 2,
+        "transport": 1,
+        "baseline": {
+          "allocated_bytes_per_op": 1606352,
+          "ns_per_op": 1194835
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 1605904,
+          "ns_per_op": 1208263
+        },
+        "allocation_reduction": 448
+      },
+      {
+        "literal_units": 16,
+        "family": 2,
+        "transport": 2,
+        "baseline": {
+          "allocated_bytes_per_op": 1606416,
+          "ns_per_op": 1344442
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 1606016,
+          "ns_per_op": 1553952
+        },
+        "allocation_reduction": 400
+      },
+      {
+        "literal_units": 16,
+        "family": 2,
+        "transport": 3,
+        "baseline": {
+          "allocated_bytes_per_op": 1606352,
+          "ns_per_op": 1152218
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 1605904,
+          "ns_per_op": 1127153
+        },
+        "allocation_reduction": 448
+      },
+      {
+        "literal_units": 128,
+        "family": 0,
+        "transport": 0,
+        "baseline": {
+          "allocated_bytes_per_op": 5093208,
+          "ns_per_op": 1839639
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 5091192,
+          "ns_per_op": 1969768
+        },
+        "allocation_reduction": 2016
+      },
+      {
+        "literal_units": 128,
+        "family": 0,
+        "transport": 1,
+        "baseline": {
+          "allocated_bytes_per_op": 3399144,
+          "ns_per_op": 1698398
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 3397128,
+          "ns_per_op": 1530755
+        },
+        "allocation_reduction": 2016
+      },
+      {
+        "literal_units": 128,
+        "family": 0,
+        "transport": 2,
+        "baseline": {
+          "allocated_bytes_per_op": 3399223,
+          "ns_per_op": 1718464
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 3397255,
+          "ns_per_op": 1705966
+        },
+        "allocation_reduction": 1968
+      },
+      {
+        "literal_units": 128,
+        "family": 0,
+        "transport": 3,
+        "baseline": {
+          "allocated_bytes_per_op": 3399152,
+          "ns_per_op": 1630646
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 3397128,
+          "ns_per_op": 1543257
+        },
+        "allocation_reduction": 2024
+      },
+      {
+        "literal_units": 128,
+        "family": 1,
+        "transport": 0,
+        "baseline": {
+          "allocated_bytes_per_op": 5171016,
+          "ns_per_op": 2941153
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 5169008,
+          "ns_per_op": 2789612
+        },
+        "allocation_reduction": 2008
+      },
+      {
+        "literal_units": 128,
+        "family": 1,
+        "transport": 1,
+        "baseline": {
+          "allocated_bytes_per_op": 3475312,
+          "ns_per_op": 2567781
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 3473296,
+          "ns_per_op": 2556005
+        },
+        "allocation_reduction": 2016
+      },
+      {
+        "literal_units": 128,
+        "family": 1,
+        "transport": 2,
+        "baseline": {
+          "allocated_bytes_per_op": 3475392,
+          "ns_per_op": 2636403
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 3473424,
+          "ns_per_op": 2653373
+        },
+        "allocation_reduction": 1968
+      },
+      {
+        "literal_units": 128,
+        "family": 1,
+        "transport": 3,
+        "baseline": {
+          "allocated_bytes_per_op": 3475312,
+          "ns_per_op": 2585651
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 3473296,
+          "ns_per_op": 2706132
+        },
+        "allocation_reduction": 2016
+      },
+      {
+        "literal_units": 128,
+        "family": 2,
+        "transport": 0,
+        "baseline": {
+          "allocated_bytes_per_op": 5098424,
+          "ns_per_op": 2699074
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 5096408,
+          "ns_per_op": 2960257
+        },
+        "allocation_reduction": 2016
+      },
+      {
+        "literal_units": 128,
+        "family": 2,
+        "transport": 1,
+        "baseline": {
+          "allocated_bytes_per_op": 3404288,
+          "ns_per_op": 2423930
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 3402272,
+          "ns_per_op": 2753628
+        },
+        "allocation_reduction": 2016
+      },
+      {
+        "literal_units": 128,
+        "family": 2,
+        "transport": 2,
+        "baseline": {
+          "allocated_bytes_per_op": 3404352,
+          "ns_per_op": 2599095
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 3402384,
+          "ns_per_op": 2594842
+        },
+        "allocation_reduction": 1968
+      },
+      {
+        "literal_units": 128,
+        "family": 2,
+        "transport": 3,
+        "baseline": {
+          "allocated_bytes_per_op": 3404321,
+          "ns_per_op": 2511466
+        },
+        "candidate": {
+          "allocated_bytes_per_op": 3402305,
+          "ns_per_op": 2543860
+        },
+        "allocation_reduction": 2016
+      }
+    ],
+    "all_median_allocations_lower": true,
+    "time_scope": "Elapsed decode loop, 8 warmups and 16 measured operations per case; not JMH or a throughput guarantee",
+    "memory_scope": "Thread-allocated bytes; process peak RSS and whole-JVM NMT summary retained separately. These do not isolate retained-image or native-kernel memory.",
+    "retained_heap": "NOT_MEASURED; mutation-after-decode tests prove detached ownership, not a heap-size result",
+    "promotion": "NOT_ADMITTED"
+  },
+  "receiver_qualification": "EXACT_PINNED_CODEC_PREIMAGE_AND_SDK_POSTIMAGE; COMPLETE_RECEIVING_PROGRAM_AND_JDK_NOT_RUN",
+  "full_borrow_gate": "BLOCKED: bounded file checkout has no Git ancestry; actual checker refusal retained in canonical packet",
+  "mapping": {
+    "authority": "m3/docs/name-mapping.json",
+    "authority_git_blob": "a092c8a68009f615039978eba0c927203799ab8b",
+    "existing_source": "com.synexia.indexstring regex/search precompute families",
+    "existing_target": "java.util.regex/internal M3 candidate-plan lanes where justified",
+    "status": "PENDING_RUNTIME_PORT; VENDOR_CUSTODY_ONLY",
+    "public_name_change": false
+  },
+  "retained_heap": "NOT_MEASURED",
+  "promotion": "NOT_ADMITTED",
+  "license": "Apache-2.0 first-party; preserve all OpenJDK and third-party rights",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors"
+}

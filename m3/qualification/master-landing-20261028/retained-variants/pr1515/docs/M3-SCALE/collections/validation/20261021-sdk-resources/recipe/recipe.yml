@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.DataSdkResources20261021
+displayName: Preserve provenance and include the existing SDK resource
+description: Exact reviewed POM snapshot for the bound M3 collections module.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: data-sdk-resources-20261021

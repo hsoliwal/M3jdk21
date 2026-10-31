@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/8cbeab1c181e/tooling/rx7/receiver-donor/isolated-a556gqag/late-drift/crate/receive.py", line 195, in <module>
+    main()
+  File "/workspace/scratch/8cbeab1c181e/tooling/rx7/receiver-donor/isolated-a556gqag/late-drift/crate/receive.py", line 190, in main
+    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/8cbeab1c181e/tooling/rx7/receiver-donor/isolated-a556gqag/late-drift/crate/receive.py", line 154, in receive
+    raise ValueError("target source drift: " + relative)
+ValueError: target source drift: test/jdk/jdk/internal/mindex/M3RX7TokenIndexContract.java

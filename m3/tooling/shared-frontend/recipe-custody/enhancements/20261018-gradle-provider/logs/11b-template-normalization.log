@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/normalize_service_template.py", line 18, in <module>
+    assert row[3] == old and not (lane / new).exists()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

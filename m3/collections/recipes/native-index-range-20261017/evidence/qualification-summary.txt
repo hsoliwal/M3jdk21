@@ -1,0 +1,27 @@
+NativeIndexRangeReplay checks=784 generated=9 fixedPointOrderings=32
+M3NativeIndexRangeSelfTest mode=legacy checks=638432 seededCases=2048
+Negative witness detected: sharing
+Allocation sample=0 rows=65500 operations=100 nativeFilterBytes=26206400 repeatedSortBytes=52406400
+Allocation sample=1 rows=65500 operations=100 nativeFilterBytes=26206400 repeatedSortBytes=52406400
+Allocation sample=2 rows=65500 operations=100 nativeFilterBytes=26206400 repeatedSortBytes=52406400
+M3NativeIndexRangeSelfTest mode=legacy checks=638432 seededCases=2048
+Serial file pass 1 m3/collections/src/main/native/collections/m3_index_mask_compactor.c
+M3NativeIndexRangeSelfTest mode=range checks=638447 seededCases=2048
+Serial file pass 2 m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java
+M3NativeIndexRangeSelfTest mode=range checks=638454 seededCases=2048
+Serial file pass 3 m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java
+M3NativeIndexRangeSelfTest mode=range checks=638454 seededCases=2048
+M3NativeIndexRangeSelfTest mode=range checks=638454 seededCases=2048
+M3NativeIndexRangeSelfTest mode=range checks=638454 seededCases=2048
+M3NativeIndexRangeSelfTest mode=none checks=529306 seededCases=2048
+M3NativeIndexRangeSelfTest mode=legacy checks=638439 seededCases=2048
+physical=[2, 3] values=[10, 30]
+physical=[2, 3] values=[10, 30]
+LegacyNativeDispatchWitness PASS checks=2
+Negative witness detected: range
+Negative witness detected: range
+Allocation sample=0 rows=65500 operations=100 nativeFilterBytes=4800 repeatedSortBytes=3200
+Allocation sample=1 rows=65500 operations=100 nativeFilterBytes=4800 repeatedSortBytes=3200
+Allocation sample=2 rows=65500 operations=100 nativeFilterBytes=4800 repeatedSortBytes=3200
+NativeIndexRangeReplay checks=784 generated=9 fixedPointOrderings=32
+PASS: actual Java/JNI, legacy native compatibility, missing-native refusal, 3 serial file passes, public ABI, 2 compiled mutants, exact recipe replay.

@@ -1,0 +1,98 @@
+# SPDX-License-Identifier: Apache-2.0
+# Direct product verification: M3JDK21 is the JDK, not a library atop the JDK.
+name: Collection views contracts
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/util/CollectionViews.java'
+      - 'test/jdk/java/util/CollectionViews/**'
+      - '.github/workflows/collection-views-convergence.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  actual-java-base-classes:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            src/java.base/share/classes/java/util/CollectionViews.java
+            test/jdk/java/util/CollectionViews
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Compile actual modified java.base source using Java 21 module patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          PATCH_SOURCE="${RUNNER_TEMP}/m3-java-base-source"
+          PATCH_CLASSES="${RUNNER_TEMP}/m3-java-base-classes"
+          TEST_CLASSES="${RUNNER_TEMP}/m3-test-classes"
+          mkdir -p "$PATCH_SOURCE/java/util" "$PATCH_CLASSES" "$TEST_CLASSES"
+          cp src/java.base/share/classes/java/util/CollectionViews.java "$PATCH_SOURCE/java/util/CollectionViews.java"
+          javac -version
+          javac -Xlint:all -Werror \
+            --patch-module "java.base=$PATCH_SOURCE" \
+            -d "$PATCH_CLASSES" "$PATCH_SOURCE/java/util/CollectionViews.java"
+          test -s "$PATCH_CLASSES/java/util/CollectionViews.class"
+          printf '%s\n' "$PATCH_CLASSES" > "$RUNNER_TEMP/m3-patch-path.txt"
+          printf '%s\n' "$TEST_CLASSES" > "$RUNNER_TEMP/m3-test-path.txt"
+      - name: Compile targeted JDK API and regression tests (without substitute runtime)
+        shell: bash
+        run: |
+          set -euo pipefail
+          PATCH_CLASSES="$(cat "$RUNNER_TEMP/m3-patch-path.txt")"
+          TEST_CLASSES="$(cat "$RUNNER_TEMP/m3-test-path.txt")"
+          P=test/jdk/java/util/CollectionViews
+          javac --add-modules jdk.management \
+            --patch-module "java.base=$PATCH_CLASSES" \
+            -d "$TEST_CLASSES" \
+            "$P/BootstrapViewsTest.java" \
+            "$P/CollectionViewsContract.java" \
+            "$P/RunSearchJni.java" \
+            "$P/FilteredSpliteratorReentrantTest.java" \
+            "$P/FilteredRepresentativeContractTest.java" \
+            "$P/FilteredSortedSpliteratorMetadataTest.java" \
+            "$P/FilteredCopyOnWriteBulkTest.java" \
+            "$P/FilteredIsEmptyDirectTest.java" \
+            "$P/FilteredOwnerMembershipTest.java" \
+            "$P/StoredRepresentativeOracle.java" \
+            "$P/FilteredListRemoveContractTest.java" \
+            "$P/FilteredBulkMutationContractTest.java"
+      - name: Run original java.base API and all collection regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          PATCH_CLASSES="$(cat "$RUNNER_TEMP/m3-patch-path.txt")"
+          TEST_CLASSES="$(cat "$RUNNER_TEMP/m3-test-path.txt")"
+          JDK=(java --patch-module "java.base=$PATCH_CLASSES" --add-modules jdk.management
+               --add-opens java.base/java.util=ALL-UNNAMED -cp "$TEST_CLASSES")
+          "${JDK[@]}" BootstrapViewsTest
+          "${JDK[@]}" -Xss256k CollectionViewsContract
+          "${JDK[@]}" FilteredSpliteratorReentrantTest
+          "${JDK[@]}" FilteredRepresentativeContractTest
+          "${JDK[@]}" FilteredSortedSpliteratorMetadataTest
+          "${JDK[@]}" FilteredCopyOnWriteBulkTest
+          "${JDK[@]}" FilteredIsEmptyDirectTest
+          "${JDK[@]}" FilteredOwnerMembershipTest
+          "${JDK[@]}" StoredRepresentativeOracle
+          "${JDK[@]}" FilteredListRemoveContractTest
+          "${JDK[@]}" FilteredBulkMutationContractTest
+          for klass in StoredRepresentativeOracle FilteredListRemoveContractTest FilteredBulkMutationContractTest; do
+            java -Xint --patch-module "java.base=$PATCH_CLASSES" -cp "$TEST_CLASSES" "$klass"
+            java -XX:TieredStopAtLevel=1 --patch-module "java.base=$PATCH_CLASSES" -cp "$TEST_CLASSES" "$klass"
+            java -XX:-TieredCompilation -Xbatch --patch-module "java.base=$PATCH_CLASSES" -cp "$TEST_CLASSES" "$klass"
+          done
+      - name: Confirm first-party in-place JDK ownership
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(grep -c 'package java.util;' src/java.base/share/classes/java/util/CollectionViews.java)" -eq 1
+          ! grep -q 'com.m3.collections' src/java.base/share/classes/java/util/CollectionViews.java
+          sha256sum src/java.base/share/classes/java/util/CollectionViews.java

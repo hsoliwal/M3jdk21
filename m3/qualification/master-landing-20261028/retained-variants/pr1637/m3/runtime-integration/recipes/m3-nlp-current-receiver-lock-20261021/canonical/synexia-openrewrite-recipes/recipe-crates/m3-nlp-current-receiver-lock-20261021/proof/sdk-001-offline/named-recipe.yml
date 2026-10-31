@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.NlpCurrentReceiverLock20261021
+displayName: M3 current NLP receiver source lock 20261021
+description: Apply independently qualified hash-pinned file phases.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-nlp-current-receiver-lock-20261021-001
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-nlp-current-receiver-lock-20261021-002

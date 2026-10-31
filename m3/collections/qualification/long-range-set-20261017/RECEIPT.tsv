@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+key	value
+schema	M3_LONG_RANGE_SET_RECEIVER_V1
+canonical_repository	hsoliwal/com.synexia
+canonical_PR	12159
+canonical_head	b353a2d74552334e3ff323853af9d1b41be0827c
+canonical_recipe	com.synexia.m3.Jdk21LongRangeArrays20261017
+product_repository	hsoliwal/M3jdk21
+product_base	e913ab89056657eca4009678cfe9a657c020e79b
+generator	M3HashPinnedJavaSnapshotRecipe (unchanged)
+new_java_files	3
+modified_existing_java_files	0
+modified_existing_native_files	0
+native_peer	M3IndexPathMasks and libm3_collections_pathmask (existing)
+donor_local_oracle	411913 finite checks (test-only native stand-in; NOT JNI proof)
+product_real_java_jni	NOT_YET_QUALIFIED
+source_built_JDK	NOT_RUN
+catalogue_scope	long ranges and mask selection; no public Guava RangeSet equivalence
+release_state	DRAFT_WAITING_FOR_STRING

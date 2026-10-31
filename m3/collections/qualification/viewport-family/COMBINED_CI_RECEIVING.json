@@ -1,0 +1,34 @@
+{
+  "schema": "M3_VIEWPORT_FAMILY_COMPOSED_WORKFLOW_RECEIVING_V1",
+  "canonical_recipe_repo": "hsoliwal/com.synexia",
+  "canonical_recipe_commit": "f6c9111f2699cfc675511800795044b2aa7ea341",
+  "canonical_recipe": "com.synexia.m3.ViewportFamilyComposed20261027",
+  "existing_engine_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+  "integrated_original_source_commit": "9fb3ba01c8a20bf42d6a98c634ef2e8d92c63d6a",
+  "sdk_execution": {
+    "actual_maven_java21_openrewrite_tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "real_sdk_results": 2,
+    "fixed_point_replay_changes": 0
+  },
+  "product_files": {
+    ".github/workflows/m3-mask-viewport-jni.yml": {
+      "before": "9be7524363c50bacfd46d3c6fcc4d0dc7a978660",
+      "after": "02e1c26c2fc441c7c08e06fcf7d7c1506dcf2cde"
+    },
+    ".github/workflows/m3-viewport-family-composed.yml": {
+      "before": "ABSENT",
+      "after": "46aaae839ed91bc65fc4fa3c2af0554a0d94f8b5"
+    }
+  },
+  "qualifying_source_ledger": "Synexia proofs/viewport-family-integration-20261027/SOURCE_LEDGER.tsv (27 donor rows)",
+  "status": "CANDIDATE_RECEIVED_NO_COMBINED_HOSTED_PASS_YET",
+  "full_original_jdk_hotspot_jtreg": "NOT_RUN",
+  "combined_original_owner_runtime": "PENDING_HOSTED_WORKFLOW",
+  "same_3072_frame_java_jni": "INDEPENDENT_GATE_NOT_COUNTED",
+  "native_swt_nebula_gef_rwt": "NOT_RUN",
+  "platform_accessibility_performance": "NOT_RUN",
+  "product_java_c_sources_changed": false
+}

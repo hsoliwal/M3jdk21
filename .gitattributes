@@ -1,1 +1,3 @@
 *	-text
+# Unified-diff blank context lines are a single space by format; they are not whitespace errors.
+m3/runtime-integration/recipe/*.patch	-whitespace

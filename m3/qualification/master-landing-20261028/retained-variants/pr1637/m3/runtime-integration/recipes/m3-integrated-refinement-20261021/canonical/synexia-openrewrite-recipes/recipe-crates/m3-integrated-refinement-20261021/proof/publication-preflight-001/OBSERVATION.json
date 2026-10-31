@@ -1,0 +1,27 @@
+{
+  "schema": "M3_PUBLICATION_PREFLIGHT_CORRECTION_OBSERVATION/1",
+  "status": "RECORDED_PENDING_CORRECTED_EXECUTION",
+  "actual_command": [
+    "python3",
+    "canonical-work/seal_publication.py"
+  ],
+  "cwd": "/workspace/scratch/206049dfb270",
+  "exit_code": 1,
+  "custody": "Execution output and failed validator receipt retained; command transcribed exactly from the session tool call.",
+  "failure": "NONCOMMENTABLE_FIRST_PARTY: ACTIONS_POLICY_READBACKS.json requires FIRST_PARTY_NO_HEADER; embedded SPDX content is not a JSON file header.",
+  "cause": "The authoring helper classified embedded source text before checking whether the container file type is commentable.",
+  "correction": "Require the existing checker.is_commentable predicate before assigning FIRST_PARTY from embedded SPDX text. Otherwise preserve ordinary metadata or generated-evidence classification. No checker relaxation.",
+  "unchanged_owners": [
+    "scripts/legal/check_m3_provenance.py",
+    "all recipe engines",
+    "all qualified runtime source",
+    "all remote registry and ledger preimages"
+  ],
+  "before_helper_sha256": "3a8d212841e6e3e904030fa2c712a2379fc4d009a56941f846ece4abcd4c2d9e",
+  "after_helper_sha256": "3285ebf1f3799ced242429387a616fd996fb859b5e34efc715139dccc80d6681",
+  "failed_check_sha256": "0689b2d3acf4a467e9ab9f089d912ce23aca3fecda7f0049f055a27eda443620",
+  "failed_registry_sha256": "77bd4273e7a6088974b762307d63f502185628f8f9907e3ff0bb6d931c252fc6",
+  "failed_ledger_sha256": "2b86bf997bf8e52d8a8b891e5f9abe6d52fa7b1a30d299faa62f074134714c7e",
+  "current_scope": "Local unpublished append snapshots only; guarded successor will replace only those exact task-owned derived owner bytes.",
+  "publication": "No commit or PR exists for this failed snapshot."
+}

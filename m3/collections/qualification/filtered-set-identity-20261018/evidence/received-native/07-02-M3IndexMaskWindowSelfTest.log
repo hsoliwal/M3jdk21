@@ -1,0 +1,3 @@
+PASS M3_INDEX_MASK_WINDOW checks=30596 native=true
+
+EXIT=0

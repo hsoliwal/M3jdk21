@@ -1,0 +1,10 @@
+public final class java.util.concurrent.ProgressMonitors {
+  public static java.util.concurrent.ProgressMonitor system();
+  public static java.util.function.Supplier<? extends java.util.concurrent.ProgressMonitor> setSystem(java.util.function.Supplier<? extends java.util.concurrent.ProgressMonitor>);
+  public static void resetSystem();
+  public static java.util.concurrent.ProgressMonitor current();
+  public static java.util.concurrent.ProgressMonitors$Scope bind(java.util.concurrent.ProgressMonitor);
+  public static void run(java.lang.Runnable, java.util.concurrent.ProgressMonitor);
+  public static <T> T call(java.util.concurrent.Callable<T>, java.util.concurrent.ProgressMonitor) throws java.lang.Exception;
+  public static java.util.concurrent.ProgressMonitor child(java.util.concurrent.ProgressMonitor, java.lang.String, long, long);
+}

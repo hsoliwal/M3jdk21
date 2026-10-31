@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3ReadOnlyFilteredMapDefaults20261017
+displayName: Preserve strict read-only Map defaults in M3 filtered sorted and navigable views
+description: >-
+  SHA-256-preconditioned existing-owner Java 21 refinement. Reuse JDK
+  unmodifiableSortedMap/unmodifiableNavigableMap for default and derived-view
+  mutation refusal without changing filtering, backing order or JDK signatures.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-readonly-filtered-map-defaults-20261017

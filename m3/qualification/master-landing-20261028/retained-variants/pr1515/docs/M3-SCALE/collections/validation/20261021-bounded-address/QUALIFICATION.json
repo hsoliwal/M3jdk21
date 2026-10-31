@@ -1,0 +1,92 @@
+{
+  "schema": "synexia.data.address.public-qualification.v1",
+  "status": "PASS_SOURCE_BOUND_STANDALONE_WINDOWS_JAVA_JNI",
+  "source_ref": "087e9bca5bd38a3606ac2ce1ced73bfb38916564",
+  "native_library": "m3_collections_address",
+  "JNI_symbol": "Java_com_m3_collections_M3LongAddressKernel_gatherNative",
+  "JNI_descriptor": "([J[III[JI)V",
+  "source_contract": "Public gatherInto guard order, no aliasing, no required-native fallback, and valid-prefix writes before a physical-address error remain unchanged.",
+  "existing_test": "m3/collections/src/test/java/com/m3/collections/M3LongAddressBoundedSelfTest.java",
+  "existing_main": "com.m3.collections.M3LongAddressBoundedSelfTest",
+  "coverage": [
+    "11 lengths:0,1,2,255,256,257,511,512,513,4097,65537; four affine/reverse/duplicate/scattered shapes",
+    "addressFrom3/outputFrom5; invalid out-of-window values ignored; input arrays unchanged and detached output",
+    "invalid physical index at0,1,254,255,256,257,511,512,last for -1,payload.length,INT_MAX,INT_MIN; exact valid prefix writes",
+    "exact JAVA ArrayIndexOutOfBoundsException versus native IndexOutOfBoundsException plus native message",
+    "seven range/overflow cases preserve output; output/payload alias even length0 and four null guards",
+    "sorted ascending/descending/encounter nested-slice projections,256 masks,selected identity/order,detached materialization",
+    "65536 state/required pairs for matches unsigned8-bit mask behavior"
+  ],
+  "coverage_interpretation": "Native-enabled main already runs both backends; projection filtering is explicitly JAVA and does not exercise mask JNI. Java-only main skips native backend and checks missing required library via existing gather overload.",
+  "JAVA": {
+    "checks": 11020139,
+    "fingerprint": "-9036386136120340114",
+    "native_available": false,
+    "exitcode": 0
+  },
+  "NATIVE_REQUIRED": {
+    "checks": 21975732,
+    "fingerprint": "-8730037866241443045",
+    "native_available": true,
+    "exitcode": 0,
+    "fresh_DLL": {
+      "bytes": 41010,
+      "sha256": "3a931a52c2ca097f1fa9a690b40178d3de3aac57299bf9ba5f14250b7b81453f"
+    },
+    "actual_exact_DLL_loads": 1,
+    "gather_export_resolved": true
+  },
+  "MISSING_REQUIRED": {
+    "exitcode": 1,
+    "exact_pre_corpus_assertion": true,
+    "fallback_pass": false
+  },
+  "strict_compile": {
+    "Java": "--release21 -Xlint:all -Werror; 4 unchanged sources; 11 classes major65; 2 JNI headers",
+    "C": "C17 -Wall -Wextra -Werror -Wconversion -Wshadow -pedantic; exact generated prototype force-included",
+    "diagnostics_empty": true
+  },
+  "checked_JNI_diagnostics": 0,
+  "public_interfaces_changed": false,
+  "source_implementation_changed": false,
+  "historical_error": {
+    "original_result": "FAILED_OR_HOLD",
+    "cause": "Expected8classes but unchanged source declares11, including NativePositions/NativePositionMasks/NativeRange.",
+    "original_result_sha256": "e1fee8bf2602cd5540bf234997163f9d4ec7127dcd88428751cbad021a60c878",
+    "original_failure_preserved": true,
+    "strict_javac_succeeded": true,
+    "completed_javac_replayed": false
+  },
+  "evidence": {
+    "stdout_files": [
+      "evidence/java_only.log",
+      "evidence/native_required.log",
+      "evidence/missing_required.log"
+    ],
+    "process_receipts": "evidence/NATIVE_RECEIPTS.json",
+    "native_observations": "evidence/NATIVE_OBSERVATIONS.json",
+    "compile_outputs": "COMPILE_OUTPUTS.json",
+    "independent_review": "INDEPENDENT_REVIEW.json",
+    "observed_argument_arrays": "EXECUTION_ARGV_PROJECTION.json"
+  },
+  "not_run": [
+    "separate21-literal/40-profile prospective corpus",
+    "all combined-invalid validation-order discriminators",
+    "Windows UBSan",
+    "full module Maven",
+    "full JDK/jtreg/JCK",
+    "all collectors/platforms",
+    "live filtered/sorted wrappers",
+    "UI integration",
+    "performance benchmarks"
+  ],
+  "not_observed": [
+    "whole OS DLL closure",
+    "each child loaded image and cwd",
+    "VM-internal copy sizes and GC latency"
+  ],
+  "static_tool_graph_only": true,
+  "global_phase_advance": false,
+  "storage_protection": "ACTIVE",
+  "invocation_projection": "One already completed javac claim plus five completed continuation claims, with only fixed roots tokenized. No executor registration, process execution, new source/test, or scope expansion is implied."
+}

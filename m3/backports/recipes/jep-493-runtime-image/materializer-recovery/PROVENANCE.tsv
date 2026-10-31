@@ -1,0 +1,7 @@
+kind	reference	use
+current_base	b71ee5bf88398fb80961c13db03e8c675fb445ce	current-master recovery baseline
+source_pr	hsoliwal/M3jdk21#144@63502fa69cda832c98d10fc752beef32da30a5b7	exact executor/test/policy/receipt/README/workflow source
+upstream_feature	OpenJDK JEP493	feature authority
+implementation_commit	2ec358082f0896480bdbfcb289b4ba2bff0dd828	47-path implementation denominator
+donor_tag	jdk-24+36	final donor state for generated postimages
+configure_evidence	PR105 openjdk-proof log	libxrandr-dev prerequisite evidence for this runner family

@@ -1,0 +1,108 @@
+{
+  "schema": "M3_PROBLEM_CATEGORY_CATALOGUE_V1",
+  "scope": "original-migration-provider-and-existing-canonical-custody",
+  "categories": [
+    {
+      "category": "dependency-closure/provider-isolation",
+      "chosen": "Six whole, unmodified published wheels in an owned CPython3.12 venv",
+      "candidateEvidence": "provider-inventory.json and 12 pre-implementation FOSS rows",
+      "alternatives": [
+        {
+          "candidate": "Original one-line requirements without a transitive hash lock",
+          "decision": "Retain original file unchanged; add a separate complete wheel lock because original file is not a reproducible provider closure."
+        },
+        {
+          "candidate": "Handwritten JSON Schema shim, Java schema substitute or resolver",
+          "decision": "Rejected: would replace the original Draft202012 authority or maintained packaging implementation."
+        }
+      ],
+      "complexity": "O(total admitted wheel and installed payload bytes) verification; released compressed payload642142B",
+      "correctness": "Genuine2020-12/local-ref/native discriminator and original26 tests are required; NOT_RUN",
+      "performance": "No throughput/allocation/native/retention improvement claimed",
+      "licenses": "Exact upstream source licenses and wheel hashes retained."
+    },
+    {
+      "category": "canonical-name-mapping/three-way-convergence",
+      "chosen": "Existing hash-pinned text recipe; exact current migration-value equals oldA before oldD replay",
+      "evaluation": "Preserve all bytes outside migration and all56 current top-level rows; retain stable IDs, frozen contracts and explicit lineage;50 original CLI read paths/80 hashes verified against actual receiver",
+      "alternatives": [
+        {
+          "candidate": "Restore historical wholeD file",
+          "decision": "Rejected: loses the new current top-level mapping row."
+        },
+        {
+          "candidate": "Blindly rehash targets or remove broken records/tests",
+          "decision": "Rejected: would conceal source drift and erase the contract/lineage evidence."
+        }
+      ],
+      "runtimeProof": "Current PRE must genuinely fail; recipe POST must genuinely validate while complete remains INCOMPLETE158; NOT_RUN"
+    },
+    {
+      "category": "build-classpath/transitive-api-annotations",
+      "chosen": "Restore existing same-owner donor SDK annotations24.1.0 provided declaration",
+      "donorBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "license": "Apache-2.0",
+      "baselineEvidence": "annotations-classpath-20261017/execution-evidence.json",
+      "evaluation": "Actual Java21 strict compilation disproves the historical source-only unused-dependency assumption; core OpenRewrite APIs expose Language annotation metadata.",
+      "alternatives": [
+        {
+          "candidate": "Suppress warnings or remove Werror",
+          "decision": "REJECT; hides missing compile classpath and weakens current gate."
+        },
+        {
+          "candidate": "Replace recipe engine, validator or provider",
+          "decision": "REJECT; unrelated architecture; existing donor dependency covers the exact gap."
+        },
+        {
+          "candidate": "Add a POM-text mirror unit test",
+          "decision": "REJECT; actual strict compile and existing9genuineSDK tests are meaningful discriminators."
+        }
+      ],
+      "correctness": "Exact POM/pins byte inverses source-reviewed; actual corrected Maven verify remains pending.",
+      "performance": "No runtime speed or memory improvement claim; dependency is build/proof tooling provided scope."
+    },
+    {
+      "category": "canonical-name-mapping/current-receiver-value-refresh",
+      "chosen": "Reuse exact existing A56toD60 migration-only value splice",
+      "evidence": "annotations-classpath-20261017/current-mapping-evidence.json",
+      "scopeAmendment": "c3f75f26d69ad2fc2d287a15579423adb4601960",
+      "guard": "Current migration value raw/semantically equals oldA; preserve every current byte outside it.",
+      "preserved": "59top mappings, optional_module_mappings and every other root field;54records exact,2explicit lineage changes,4already-reviewed additions,no removals",
+      "alternatives": [
+        {
+          "candidate": "Historical whole-document snapshot replay",
+          "decision": "REJECT; loses3currentmapping rows and optionalmodule fields."
+        },
+        {
+          "candidate": "Refresh preimage hash without refining output/test",
+          "decision": "REJECT; would conceal loss of current data."
+        },
+        {
+          "candidate": "New JSON merge engine or rewritten validator",
+          "decision": "REJECT; canonical existing exact snapshot recipe plus bounded source resource refinement suffices."
+        }
+      ],
+      "qualification": "New10th actual-result preservation test authored; original9methods/64states×2orders/22controls and workflow remain intact. All corrected execution pending."
+    },
+    {
+      "category": "dependency-lock/exact-raw-core-metadata",
+      "chosen": "Use exact released Requires-Dist strings; retain unchanged strict comparison",
+      "source": "Hash-verified jsonschema4.26.0 and referencing0.37.0 wheels and core metadata",
+      "evaluation": "17 jsonschema marker quote differences and one referencing marker quote difference explain executed refusal; payloads and published metadata pins all match",
+      "alternatives": [
+        {
+          "candidate": "Normalize quotes or filter inactive extras in admission",
+          "decision": "REJECT; weakens exact donor metadata pin and hides source inventory error"
+        },
+        {
+          "candidate": "Replace schema/native provider or alter original CLI",
+          "decision": "REJECT; original maintained dependency closure fits"
+        }
+      ],
+      "proof": "wheel-metadata-20261018/execution-evidence.json",
+      "performance": "No runtime performance claim; six wheel payloads unchanged",
+      "remaining": "Maven, filesystem boundary suite, real installation, native import and original CLI must execute on corrected candidate"
+    }
+  ],
+  "algorithmPortScope": "This phase reuses packaging/validation/custody mechanisms. Regex, String algorithms, Java/JNI, RoutesA/B/C and full source inventory remain separate active work; no competitive-programming solution is copied."
+}

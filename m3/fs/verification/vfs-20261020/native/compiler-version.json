@@ -1,0 +1,8 @@
+{
+  "command": [
+    "/usr/bin/cc",
+    "--version"
+  ],
+  "exit_code": 0,
+  "log": "compiler-version.log"
+}

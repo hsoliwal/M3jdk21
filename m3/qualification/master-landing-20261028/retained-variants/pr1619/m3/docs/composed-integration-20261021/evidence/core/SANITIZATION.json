@@ -1,0 +1,49 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "method": "Selective section export, exact byte hashes of original inputs, normalized public output hashes. Original inputs are never edited.",
+  "path_tokens": {
+    "<M3JDK21>": "target checkout root",
+    "<WORK>": "task work root",
+    "<WORKSPACE>": "workspace root",
+    "<TOOLS>": "ephemeral installed tool root",
+    "<USER_HOME>": "build user home"
+  },
+  "removed": [
+    "JTR environment/configuration/rerun sections",
+    "hostname and user.name properties",
+    "process and agent identifiers in action messages",
+    "script_messages including builder identity"
+  ],
+  "normalized": [
+    "absolute task and tool paths",
+    "ad-hoc build username",
+    "native addresses and thread/process identifiers in timeout diagnostics"
+  ],
+  "preserved": [
+    "every test status",
+    "all 158 build/compile/main action statuses and commands",
+    "all 63 separately captured stdout/stderr pairs",
+    "assertion and exception text",
+    "check counts",
+    "original timeout diagnostic and separate stack sample",
+    "original command flags",
+    "recorded elapsed times"
+  ],
+  "section_counts": {
+    "script_messages": 28,
+    "build": 65,
+    "compile": 30,
+    "main": 63
+  },
+  "input_block_counts": {
+    "messages": 158,
+    "configuration": 93,
+    "rerun": 93,
+    "System.out": 63,
+    "System.err": 63
+  },
+  "test_count": 28,
+  "action_count": 158,
+  "source_hash_inventory_scope": "All 49 E1 changed files, every executed test source, and selected native/runtime/support owners. The named immutable source commit binds other unchanged JDK dependencies; this TSV is not a complete source-tree listing."
+}

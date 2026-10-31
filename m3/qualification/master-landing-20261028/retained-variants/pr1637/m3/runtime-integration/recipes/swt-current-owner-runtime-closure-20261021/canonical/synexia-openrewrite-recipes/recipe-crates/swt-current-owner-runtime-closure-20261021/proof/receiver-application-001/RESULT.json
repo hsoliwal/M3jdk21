@@ -1,0 +1,28 @@
+{
+  "schema": "SWT_GENERATED_RECEIVER_APPLICATION/1",
+  "status": "GENERATED_SWT_POM_APPLIED",
+  "steps": [
+    {
+      "name": "preflight",
+      "files": 1,
+      "writes": 1,
+      "exit": 0
+    },
+    {
+      "name": "apply",
+      "files": 1,
+      "writes": 1,
+      "exit": 0
+    },
+    {
+      "name": "replay",
+      "files": 1,
+      "writes": 0,
+      "exit": 0
+    }
+  ],
+  "source_seals_sha256": "8fbab5e40413771d432d5016964f5bd71d95bf4043805bac828d82bd92200bb0",
+  "sdk_receipt_sha256": "a950522f8342e90af73568ae052eca44f776d377a57e4a392477ec5ea95a5098",
+  "receiving_base": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+  "canonical_owner": "synexia-openrewrite-recipes/recipe-crates/swt-current-owner-runtime-closure-20261021"
+}

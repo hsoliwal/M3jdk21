@@ -1,0 +1,45 @@
+{
+  "schema": "M3_SPARSE_VIEWPORT_CONTRACT_PRESERVING_RECEIVING_V2",
+  "original_product_master": "92962fbba10cbf13799253a307dc90f4de94b179",
+  "accepted_stage": "sparse-viewport-bounds-20261028",
+  "source_pre_git_blob": "d35282fb564a0a9231f31781e1a699f7e571f8de",
+  "source_post_git_blob": "9c7cc7e265e4aee0dca030957c8d0ac04abfccbb",
+  "accepted_source_sha256": "391e8b5d81ca5c19cc9e325c5e49f28356c713dbbf1fd5530c6f3d5bd91f6e04",
+  "accepted_test_git_blob": "045c89bb5a8cf869e332c73dd557a2193aa93b7f",
+  "source_provenance": "Exact existing canonical Synexia M3HashPinnedJavaSnapshotRecipe and M3TaskRecipeTest Git blobs; authentic pinned OpenRewrite Java21 parser artifact #12733140239, jar SHA256 7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+  "actual_local_sdk": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "source_results": 2,
+    "receiver_changes": 2,
+    "receiver_replay_changes": 0,
+    "parser_real": true
+  },
+  "actual_received_source_junit": {
+    "negative_viewport_tests": 3,
+    "historical_geometry_tests": 10,
+    "mixed_total": 13,
+    "mixed_failures": 0,
+    "interpreted_total": 13,
+    "interpreted_failures": 0
+  },
+  "historical_existing_geometry_fixture_sha256": "75e960d7db157ab38f9597317589be1480eadca5eaf5f3fd048f98a540c3fc58",
+  "historical_partial_write_contract": {
+    "one_slot_nonempty": "out[0] receives first row then ArrayIndexOutOfBoundsException",
+    "one_slot_empty": "out[0] receives zero then ArrayIndexOutOfBoundsException",
+    "preserved": true
+  },
+  "rejected_successor": {
+    "dataset": "sparse-viewport-pair-20261028",
+    "candidate_git_blob": "a4b8b052f7005e96aaf9dab89410f3383b2ca20d",
+    "reason": "Changes deliberately asserted historical partial-write semantics. Original M3ViewportGeometryTest invalidArgumentsKeepExceptionAndPartialWriteOrder fails. Combined 18 tests, 1 failure. Product candidate withdrawn.",
+    "product_applied": false
+  },
+  "local_pom_custody": "Reduced offline Maven POM uses available slf4j-api:2.0.9; engine and test Java source blobs exact, canonical repository POM NOT byte-identical.",
+  "jdk_ci": "PENDING",
+  "hotspot_jtreg": "NOT_RUN",
+  "swt_nebula_gef_rwt": "NOT_RUN",
+  "performance_claim": false,
+  "merge": "DRAFT_REVIEW_ONLY"
+}

@@ -1,0 +1,416 @@
+{
+  "artifact": "lucene-sandbox",
+  "automatic_module_name": "",
+  "build": "commands",
+  "build_reason": "MODULE_DESCRIPTOR_OR_MULTI_RELEASE",
+  "consumers": "transitive compile input of lucene-queryparser 9.10.0 (org.apache.lucene.sandbox.queries.FuzzyLikeThisQuery)",
+  "coordinate": "org.apache.lucene:lucene-sandbox:9.10.0-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [
+    {
+      "artifact": "lucene-core",
+      "form": "source module",
+      "group": "org.apache.lucene",
+      "optional": false,
+      "scope": "compile",
+      "version": "9.10.0-m3-source-1"
+    },
+    {
+      "artifact": "lucene-queries",
+      "form": "source module",
+      "group": "org.apache.lucene",
+      "optional": false,
+      "scope": "compile",
+      "version": "9.10.0-m3-source-1"
+    }
+  ],
+  "donor": "lucene-sandbox-9.10.0",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/resources/META-INF/LICENSE.txt",
+      "sha256": "a2521407b3209df7dcebfc12cd6d732b24bfa2fe44982ef613e269666482521d",
+      "upstream": "META-INF/LICENSE.txt"
+    },
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/lucene-sandbox/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "9f849f37b7b5e15f7099743f81f570750288e45d8ca572944bdd872e855eece6",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/resources/META-INF/NOTICE.txt",
+      "sha256": "a0f11b6937bd82f7527932a2754a100b7b9ae85ed285ce5c19dddc23dbe97d09",
+      "upstream": "META-INF/NOTICE.txt"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/module-info.java",
+      "sha256": "922d5fbf219f50d6a7abb17bef0c07b23441723d999d58edc0f1936c060a7438",
+      "upstream": "module-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/payloads/PayloadSpanCollector.java",
+      "sha256": "639ecb7a43f9e73b6a72d9e8494e8b12ab73db1a0c104a1185d6d6df8d6107e7",
+      "upstream": "org/apache/lucene/payloads/PayloadSpanCollector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/payloads/PayloadSpanUtil.java",
+      "sha256": "0e81c454272c923b1869fc06210d31bb9193bd6f60e1d6f3263f1c6c4e2d3cfb",
+      "upstream": "org/apache/lucene/payloads/PayloadSpanUtil.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/payloads/package-info.java",
+      "sha256": "c56fd8bce0da4d0eb29213859b6341ca55bb1b2d1f6d88a829c4bdd2ddfaca2e",
+      "upstream": "org/apache/lucene/payloads/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/codecs/idversion/IDVersionPostingsFormat.java",
+      "sha256": "a6f5bb8ebcf7b3a11a14c3081d57ddaa10eed696d71a79cf7c0fd7cfc5e5a9eb",
+      "upstream": "org/apache/lucene/sandbox/codecs/idversion/IDVersionPostingsFormat.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/codecs/idversion/IDVersionPostingsReader.java",
+      "sha256": "49d9c29461fa2cfecd42489185561c09d08f84b43f7dc007c87cbf56480a079e",
+      "upstream": "org/apache/lucene/sandbox/codecs/idversion/IDVersionPostingsReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/codecs/idversion/IDVersionPostingsWriter.java",
+      "sha256": "de905912665f81cb93476bea505e22ddeb920b78bc0fe0f0a0ae96f29c66b09b",
+      "upstream": "org/apache/lucene/sandbox/codecs/idversion/IDVersionPostingsWriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/codecs/idversion/IDVersionSegmentTermsEnum.java",
+      "sha256": "373233804c00c4083c2623ef5e5aed8bd53ea80ad5076aa11d3ec9bd7ac4b813",
+      "upstream": "org/apache/lucene/sandbox/codecs/idversion/IDVersionSegmentTermsEnum.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/codecs/idversion/IDVersionSegmentTermsEnumFrame.java",
+      "sha256": "0b125852e6343aadfeec1275df75b4f28a38d603d1f0e9d07b4c2f22c1fd90b4",
+      "upstream": "org/apache/lucene/sandbox/codecs/idversion/IDVersionSegmentTermsEnumFrame.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/codecs/idversion/IDVersionTermState.java",
+      "sha256": "7d871fb37cea821d57c72dc2091aebcf010c12b222eee62592ca22f8e88e364c",
+      "upstream": "org/apache/lucene/sandbox/codecs/idversion/IDVersionTermState.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/codecs/idversion/SingleDocsEnum.java",
+      "sha256": "6a6d2fb2740f5153a1b871258dc6fe9c140c156948e05695b715bcc077527851",
+      "upstream": "org/apache/lucene/sandbox/codecs/idversion/SingleDocsEnum.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/codecs/idversion/SinglePostingsEnum.java",
+      "sha256": "b34db1d5ad1ff4cb322c3a76ad0d20b2884847e1b806c80e03cf57a891738ea2",
+      "upstream": "org/apache/lucene/sandbox/codecs/idversion/SinglePostingsEnum.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/codecs/idversion/VersionBlockTreeTermsReader.java",
+      "sha256": "864bc75d2060b78ed15797f0b85895cb26b52cd49699eba7c9e3b10b18d2582d",
+      "upstream": "org/apache/lucene/sandbox/codecs/idversion/VersionBlockTreeTermsReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/codecs/idversion/VersionBlockTreeTermsWriter.java",
+      "sha256": "b9be9d12077bf81bfaee58b606af6a30fefcc9b6b8a36c2e3d43b09f9762ddb6",
+      "upstream": "org/apache/lucene/sandbox/codecs/idversion/VersionBlockTreeTermsWriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/codecs/idversion/VersionFieldReader.java",
+      "sha256": "c3221b6f462e2be5c74847907b9238a765cf2c0bdde1d5dc343723aded7b60c7",
+      "upstream": "org/apache/lucene/sandbox/codecs/idversion/VersionFieldReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/codecs/idversion/package-info.java",
+      "sha256": "df9212db6318fb67f52d4e66e6824c7c75738b31a2ba887d1d9671376f45b0b0",
+      "upstream": "org/apache/lucene/sandbox/codecs/idversion/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/document/BigIntegerPoint.java",
+      "sha256": "a98e2260639c7960338583b6945b41260b3a1a6a718dab4bceea26b94f8d28a3",
+      "upstream": "org/apache/lucene/sandbox/document/BigIntegerPoint.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/document/DoublePointMultiRangeBuilder.java",
+      "sha256": "137a5d3928071cb9d10b377dafacd16b41eb26075e12208b6ab0b6e445b4987a",
+      "upstream": "org/apache/lucene/sandbox/document/DoublePointMultiRangeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/document/FloatPointMultiRangeBuilder.java",
+      "sha256": "60aed6cdeb3d046baf78f55106f0d28a9f2638b8fa80ccf0dfbcffc669d4c89c",
+      "upstream": "org/apache/lucene/sandbox/document/FloatPointMultiRangeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/document/FloatPointNearestNeighbor.java",
+      "sha256": "547275af8bd86ee720b98b99d4fe8d0a3365c7ec68837d94ef757071e35a0b4c",
+      "upstream": "org/apache/lucene/sandbox/document/FloatPointNearestNeighbor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/document/HalfFloatPoint.java",
+      "sha256": "ba869f000b5e6ca87269cab2f5d90fffe61e7eadc4d5e44d46677be850870027",
+      "upstream": "org/apache/lucene/sandbox/document/HalfFloatPoint.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/document/IntPointMultiRangeBuilder.java",
+      "sha256": "95887b86fb74b9757a9e688815fe9c17a3cbf517f3c23d13ea4d19cb0e96752d",
+      "upstream": "org/apache/lucene/sandbox/document/IntPointMultiRangeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/document/LatLonBoundingBox.java",
+      "sha256": "0a15ab6614a47927f04468a3dbcc887419fd28a053caa0bc9b3b654a418b2fe8",
+      "upstream": "org/apache/lucene/sandbox/document/LatLonBoundingBox.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/document/LongPointMultiRangeBuilder.java",
+      "sha256": "30194701a580019b0e3b4fb51d41c415745b38e4d8d3c126071409d60468347c",
+      "upstream": "org/apache/lucene/sandbox/document/LongPointMultiRangeBuilder.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/document/package-info.java",
+      "sha256": "c2f2d58f433127db059d5924d2bba369f962edad6e2d12fe70ce1d8fd2b6b897",
+      "upstream": "org/apache/lucene/sandbox/document/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/index/MergeOnFlushMergePolicy.java",
+      "sha256": "ab2279581165235e1ef6fb090645e590058177bcd8627f454775ad09af9d470d",
+      "upstream": "org/apache/lucene/sandbox/index/MergeOnFlushMergePolicy.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/index/package-info.java",
+      "sha256": "8b8b9aedbf082897e0c22a289a431ed530000f3e9b448fece44d1cebfdd700e9",
+      "upstream": "org/apache/lucene/sandbox/index/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/queries/FuzzyLikeThisQuery.java",
+      "sha256": "d30f8810c0a4f967415aeed0a79b197d8096c1a94f58a0ef4ec51698246a1fc7",
+      "upstream": "org/apache/lucene/sandbox/queries/FuzzyLikeThisQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/queries/package-info.java",
+      "sha256": "11c40ae01af56bb790700423366c2449fb98c992e67d69a29fd40c2ba4fa74f3",
+      "upstream": "org/apache/lucene/sandbox/queries/package-info.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/CombinedFieldQuery.java",
+      "sha256": "096bbfc21a555e22fae1fca1011e63a37d38704eacd3ce391d4102ff290c083c",
+      "upstream": "org/apache/lucene/sandbox/search/CombinedFieldQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/CoveringQuery.java",
+      "sha256": "201cb08db5460d5ec746d9f3da14ac49152d2fe819235ea3cd4871d9bce215c6",
+      "upstream": "org/apache/lucene/sandbox/search/CoveringQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/CoveringScorer.java",
+      "sha256": "a5c232edbc4ce1391b868faf350226c796e80fba65f1e5d2397f2fa9b924c100",
+      "upstream": "org/apache/lucene/sandbox/search/CoveringScorer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/LargeNumHitsTopDocsCollector.java",
+      "sha256": "cc1152247aaef397f4d5890694704f08048de099379b9bb0937f3945d2c095ba",
+      "upstream": "org/apache/lucene/sandbox/search/LargeNumHitsTopDocsCollector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/LatLonPointPrototypeQueries.java",
+      "sha256": "f33b1765cff2bf42424b070301c8332affabb727d6f6c94503781862c016c1ad",
+      "upstream": "org/apache/lucene/sandbox/search/LatLonPointPrototypeQueries.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/MultiNormsLeafSimScorer.java",
+      "sha256": "961e433b1fb6f269b8aa4a05d688d87d0d54cad943e48c7462b1f914dcea1391",
+      "upstream": "org/apache/lucene/sandbox/search/MultiNormsLeafSimScorer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/MultiRangeQuery.java",
+      "sha256": "69ebb42b2a01cd3d834228e9432c3b43211c2189680e684f7fe507bf677e091b",
+      "upstream": "org/apache/lucene/sandbox/search/MultiRangeQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/NearestNeighbor.java",
+      "sha256": "681f4cc6f1ec1bcd0c199f1a7429fa559dbbda0c10c906f746cdbd0592d49073",
+      "upstream": "org/apache/lucene/sandbox/search/NearestNeighbor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/PhraseWildcardQuery.java",
+      "sha256": "5a09731a994a67c4d50262da246df7144de82d7cda838dfcbd48fc519c2fad1d",
+      "upstream": "org/apache/lucene/sandbox/search/PhraseWildcardQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/ProfilerCollector.java",
+      "sha256": "fb07b505c1b4b54f04e6e52a78462581d2d46b812440363f868fe31a4acc5897",
+      "upstream": "org/apache/lucene/sandbox/search/ProfilerCollector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/ProfilerCollectorResult.java",
+      "sha256": "5a92df59737665c13c77abd2164555912e0b39ddcc278fcd585cf24454293aa5",
+      "upstream": "org/apache/lucene/sandbox/search/ProfilerCollectorResult.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/ProfilerCollectorWrapper.java",
+      "sha256": "547354fd05d38e07da4c47d9cf658a0eda1b80a77d023d4ce5ace28f2da260c0",
+      "upstream": "org/apache/lucene/sandbox/search/ProfilerCollectorWrapper.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/QueryProfilerBreakdown.java",
+      "sha256": "7aeefdff308aca82924cac5b4eae6589d37602c53276def800d1b1ee0fbdfd86",
+      "upstream": "org/apache/lucene/sandbox/search/QueryProfilerBreakdown.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/QueryProfilerIndexSearcher.java",
+      "sha256": "f9161d8855bfc8ce1615ba66cb4a076b9443d1d42928f90d6e615e91f1311d74",
+      "upstream": "org/apache/lucene/sandbox/search/QueryProfilerIndexSearcher.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/QueryProfilerResult.java",
+      "sha256": "fd0f0191cf7cc5761d1a99d83c468c0e7a8c6080515ab3cefbeecd83c742131f",
+      "upstream": "org/apache/lucene/sandbox/search/QueryProfilerResult.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/QueryProfilerScorer.java",
+      "sha256": "e1d77abe3360bdce99cbc47151c5243311940240f9d5500d517e29c98da37054",
+      "upstream": "org/apache/lucene/sandbox/search/QueryProfilerScorer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/QueryProfilerTimer.java",
+      "sha256": "63a32c4abb2fd0cb7683a7b7a74dadc173e4f4fbd879df3403ed16b9bc59642a",
+      "upstream": "org/apache/lucene/sandbox/search/QueryProfilerTimer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/QueryProfilerTimingType.java",
+      "sha256": "1d89cebc9893225edebc73d176075743934ac560e458fe754248ef84a9375026",
+      "upstream": "org/apache/lucene/sandbox/search/QueryProfilerTimingType.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/QueryProfilerTree.java",
+      "sha256": "337b8e31a1d4537f2f7e53ebc95c692cf74ff98cb93d23eddd0d58ab8024d221",
+      "upstream": "org/apache/lucene/sandbox/search/QueryProfilerTree.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/QueryProfilerWeight.java",
+      "sha256": "69a0d5e7e2fc27e387619439776b4fd8f985ce63ab6d00ed12b191a1c3d4bd61",
+      "upstream": "org/apache/lucene/sandbox/search/QueryProfilerWeight.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/TermAutomatonQuery.java",
+      "sha256": "5dfb038c40342aa307996afcb57830536e259cc40aa7a599ffdda81c0a7e5cd0",
+      "upstream": "org/apache/lucene/sandbox/search/TermAutomatonQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/TermAutomatonScorer.java",
+      "sha256": "2eb45f5c5501d5f3d3a77847ef49705adf56afeeb2868f8844481922f5b72fc4",
+      "upstream": "org/apache/lucene/sandbox/search/TermAutomatonScorer.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/TokenStreamToTermAutomatonQuery.java",
+      "sha256": "bc172e6bcf9f5e9442b7a573a41a4bd78330806f89e00a56b9302d24321c6b88",
+      "upstream": "org/apache/lucene/sandbox/search/TokenStreamToTermAutomatonQuery.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/java/org/apache/lucene/sandbox/search/package-info.java",
+      "sha256": "34fa2a5c4bbbe9206ef7f6bd52ede896070673cc1a2027e9f91fb38cba1cf48c",
+      "upstream": "org/apache/lucene/sandbox/search/package-info.java"
+    },
+    {
+      "kind": "upstream-resource-from-published-jar",
+      "published_jar": "org.apache.lucene:lucene-sandbox:9.10.0 (sha256 fd574f4e685e0ad382ef075460d2e0e21169f1faff81579a32a59fdc82319795)",
+      "repository": "m3/vendor/third_party/lucene-sandbox/src/main/resources/META-INF/services/org.apache.lucene.codecs.PostingsFormat",
+      "sha256": "8a38a633747cdb347c1a5a633df90ed041a9f7cecf712b5de09de58602b3ed4d",
+      "upstream": "META-INF/services/org.apache.lucene.codecs.PostingsFormat"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/lucene-sandbox/SOURCES_MANIFEST.tsv",
+      "sha256": "42c9cf2bb41d7106b8689aaaf3e07c6089d32efe68d713cf92a308a447ada003",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/lucene-sandbox/LICENSE",
+      "sha256": "a2521407b3209df7dcebfc12cd6d732b24bfa2fe44982ef613e269666482521d",
+      "upstream": "META-INF/LICENSE.txt"
+    }
+  ],
+  "group": "org.apache.lucene",
+  "kind": "MODULE",
+  "license": "Apache 2",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "::",
+  "pom": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-sandbox/9.10.0/lucene-sandbox-9.10.0.pom",
+  "receipt": {
+    "buildRoot": "a33e10327440441cbb1cbc6516cb2c207f07e150b927db595a7bc02f720024ad",
+    "distributionSha256": "3a1a225d9da37a783753a147013dbc56a46dce7a4648bf6fe1218f51cfa9da77",
+    "lock": "63d173713e70f5d3728fbfbfbb4b426604ccfbd1a82bd20f51298e1955a068c0",
+    "message": "",
+    "sourceRoot": "6678e2aa153ec0deae1a5f4a06dca9af20d51c360eb9c7f9c52c632c3d715f41",
+    "status": "PASS"
+  },
+  "resources_completed": 1,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/apache/lucene/lucene-sandbox/9.10.0/lucene-sandbox-9.10.0-sources.jar",
+  "sources_jar_sha1": "0c76b90f41051e9f27578144edee6f8252d40e09",
+  "sources_jar_sha256": "e195175ec01f1bccc4b8cd3d3ebad0f5a136da89b3a87c3646882bb35d8e2be1",
+  "status": "PASS",
+  "upstream": "https://gitbox.apache.org/repos/asf?p=lucene.git",
+  "version": "9.10.0"
+}

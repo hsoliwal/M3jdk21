@@ -1,0 +1,31 @@
+{
+  "gcc": {
+    "path": "/usr/bin/x86_64-linux-gnu-gcc-13",
+    "sha256": "6117c52522997d2aaccb2b52b3c6bf42c0a6c5edb1d718431fed6b2fc5fec234"
+  },
+  "java": {
+    "path": "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/java",
+    "sha256": "2a207f5e7d075afa01d97f8048389a64432a44c4a5af0f5e77d6e286ec5f401d"
+  },
+  "javac": {
+    "path": "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+    "sha256": "55859b80e7a9c4c4736be19ad3addeb35112ca6d17a30c4e0e116afc0a499bdb"
+  },
+  "javap": {
+    "path": "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javap",
+    "sha256": "bd8fe7ac7eb91e0167766b6c37350fa96c4b601a5f086de8fa96d9f8f6a7b0dd"
+  },
+  "jdk_inputs": {
+    "include/jni.h": "99e64ebbe749e6df284f852f11b3c73f6ea97baf15120428f40f887fe0616e61",
+    "include/linux/jni_md.h": "88cb5c33e306900dd35a78d5a439087123b8e91b0986bb5acb42cc9bd2fcc42e",
+    "release": "ebbd70bf00bab6d39addf51969c5ff244030b86b29de400b9fb10612ebd3ceec"
+  },
+  "maven": {
+    "path": "/tmp/m3-toolchain/apache-maven-3.9.11/bin/mvn",
+    "sha256": "f9381d0cb98abaaf9592dae421eddc497e84ed9bfb723b84c111d1350863c3a2"
+  },
+  "nm": {
+    "path": "/usr/bin/x86_64-linux-gnu-nm",
+    "sha256": "096b96ed1dbeee61397773d3f5858cca10da7004792213569a78237356c15e98"
+  }
+}

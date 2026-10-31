@@ -1,0 +1,34 @@
+{
+  "schema": "jcc-e4-actual-execution-review/1",
+  "disposition": "FOCUSED_RECEIVING_EXECUTION_PASSED_COMPLETION_BLOCKED",
+  "findings": [],
+  "receipt_sha256": "1f4ac9825d975520a04b7dc5ac1b282d96be32601c7abe2b0cfb676b0ff2df09",
+  "plan_seal": "0aa1f4a3e080c36d233066f0a6e1dc8e1047e6f0592dba60829b8cca3177df64",
+  "actual_stages": 10,
+  "java_tests": 12,
+  "python_tests": 6,
+  "refusal_conditions": 44,
+  "refusal_checks": 132,
+  "frozen_inputs_checked": 1008,
+  "fixed_inputs": 391,
+  "external_inputs": 617,
+  "materialized_outputs_exact": 4,
+  "checks": {
+    "bytes": 22695,
+    "sha256": "d809e826859a441050650e6c4dbb879e6029f68088fc225e9329dd1c39384fd7",
+    "git_blob_sha1": "abe3b92e03a19ade93a8667959a5bb3a60e7044c"
+  },
+  "report": {
+    "bytes": 8615,
+    "sha256": "1fa3be68d87d495a6458b778061d9bd670db574cc702e3f0ad9f00f64f392361",
+    "git_blob_sha1": "3c93078f43cd28c9fff6f9d28728ea629e441024"
+  },
+  "source_qualification_status": "BLOCKED",
+  "source_export_admitted": false,
+  "destination_capability_accepted": false,
+  "reference_audit_admitted": false,
+  "postrun107_evidence_files_admitted": false,
+  "publication_admitted": false,
+  "reviewer_reran_candidate_or_gate": false,
+  "remote_actions": false
+}

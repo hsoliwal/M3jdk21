@@ -1,0 +1,23 @@
+{
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/authored/facade/verification/FacadeTestLauncher.java": "69f7bf5cd343daeac5f3d14d919f8d3a12c4d870a6a7d3a05de00e879ba8c647",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FSNativeTest.java": "4889a392e7a12ff5b81eb757bc406ffacd336d4af591c48564af8b4a96661dfd",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FSScrubTest.java": "b3b5b8dee9212cd81ac9f7634934e7dd95767f2d25b4d47d2a25e0c81e348608",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsCheckedInodeIoTest.java": "ef23a1678b007a02bd4c9ab4d22cd042979e8990128f111ee779447d48cb9982",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsFeatureTest.java": "921b286100db221a5e13d8612b8ad720b87efba55b4cfbe7ea8631b8adc3aeee",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsHotPathSelfTest.java": "84c56a764f31e8752cb88170646f5c8685a1b699a6f76cc264ddf3512e1d5bed",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsHotPathTest.java": "1c99266d33d2e0a20f7a872170c592effd6966126a1c0efef763a42eddd49566",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsImageBindingTest.java": "8343698b8445ca8e4d9435c7b2c87340638eb2669e0412d83945b52afa7d2b1f",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsIndexedSelfTest.java": "5030c07fae6aba23cf708841112149b4bf5c6179e3e2aff5dbe27ca662f9ab14",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsIndexedTest.java": "8562b2f4b3621cf16dae2c883f5b9ca3655f938b86246a102e19e2a8bcfeb489",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsNativeSemanticTest.java": "1b1286b7e1d83fe5af8a0f894fcb040efe981b3c50465e0b188f3d7485c7d759",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsReadSnapshotSelfTest.java": "1f2645e8bc0094463e99326c5dfbf9b4ce9dff711455584396202caaff3e6bac",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsRegexFallbackTest.java": "f1056df5e03e0298a008d2c5dc93d343012dd3ab509a2c28d45e19552dc41703",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsSnapshotViewSelfTest.java": "ed69961443f632e49f4bcc0ca471de2a52d56d1a487b39d9bae575189e8ea9e0",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsSnapshotViewTest.java": "4eee10ca7e191eba43de6c3a2085dab564e856ea293055adff279cec0f91d02b",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3FsSparseFeatureTest.java": "70fdf32fc513a107336148959fadeb72d4908f8189d17d15af041fe94c875d6b",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3MappedStorageChecks.java": "eaafc79f35001d5ed150e94989bca332704dbb64aa469d432059fd5c6a368a6b",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3MappedStorageTest.java": "1cc6fa6ee0825c0cbbfbb2b6e12f2530c8242e507273d700d7a86ed415aaa5e3",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3NativeContentPositionChecks.java": "e8ad33db7fe343b6053ea6059d803c1b82bfbcf121915543ba9fd891d636f7c2",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3NativeContentPositionTest.java": "f5d92b1f4f1801109960683387257199ab5ad501048497b1a9f4ef50abdbd08a",
+  "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/M3TestRegexImages.java": "d66996b98ae84e0f14b2e7131ff48dfa92c6231363634a9af27f60259dcf3924"
+}

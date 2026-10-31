@@ -1,0 +1,13 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.search.FindDeprecatedClasses"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 104
+- name: "Knut Wannheden"
+  email: "knut@moderne.io"
+  lineCount: 11
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 2

@@ -1,0 +1,9 @@
+category	provider	original_api	selected_M3_owner	candidate_and_reason	status	license
+BIDI_MAP	Apache Commons Collections	org.apache.commons.collections4.BidiMap	com.m3.collections.interop.M3ApacheBidiMap	Reuse first-party exact #1199 source rather than duplicate; original Apache AbstractDualBidiMap keeps provider semantics	REUSE	Apache-2.0 including ASF header
+BIDI_MAP	Guava	com.google.common.collect.BiMap	com.m3.collections.interop.M3GuavaBiMap	Already in exact latest master; do not overwrite or reimplement	KEEP	Guava Apache-2.0 dependency
+MAP	JDK	java.util.Map	com.m3.collections.M3LinkedHashMap	Reuse indexed-key storage and preserve JDK Map behavior	KEEP	OpenJDK unchanged
+RICH_MAP	Eclipse Collections	org.eclipse.collections.api.map.MutableMap	M3LibraryCollections.eclipseMap	Reuse existing Eclipse adapter with correct lifecycle/results	KEEP	EPL-1.0 and EDL-1.0 dependency
+MULTIVALUE_MAP	Spring	org.springframework.util.MultiValueMap	M3SpringArrayMultiValueMap	Separate map-of-lists/key-count contract; preserve existing source	KEEP	Spring Apache-2.0 dependency
+HASH_INDEX	LeetCode	Hash Table problem category	M3LinkedHashMap	Problem taxonomy/reference only, no copied code	REFERENCE_ONLY	no code copied
+BIT_FLAGS	HackerRank	Bit Manipulation problem category	Existing C17 M3 mask compactor	Pure primitive state/index only; no Java object JNI	REFERENCE_ONLY	no code copied
+ARRAY_INDEX	GeeksforGeeks	Array indexing category	Existing M3 parallel arrays and offset owners	No new engine or retained entry objects	REFERENCE_ONLY	no code copied

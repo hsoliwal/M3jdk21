@@ -1,0 +1,749 @@
+{
+  "schema": "M3_INITIAL_PUBLISHED_HOSTED_CI_OBSERVATION_V1",
+  "observations": [
+    {
+      "repository": "hsoliwal/com.synexia",
+      "observed_head": "c4177ac29eceeceb60961e9ebf59205507c330bc",
+      "runs": [
+        {
+          "id": 39129503774,
+          "name": "M3 OpenRewrite recipe reactor qualification",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 851,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503774/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503774/logs",
+          "workflow_id": 386351962
+        },
+        {
+          "id": 39129503781,
+          "name": "Everything Discussed Current Head",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 2229,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503781/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503781/logs",
+          "workflow_id": 363288096
+        },
+        {
+          "id": 39129503798,
+          "name": "M3 Unified Recipe-First Serial Gate",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 10874,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503798/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503798/logs",
+          "workflow_id": 370839897
+        },
+        {
+          "id": 39129503822,
+          "name": "M3 TornadoVM 7.2 swizzle",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 2193,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503822/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503822/logs",
+          "workflow_id": 384008967
+        },
+        {
+          "id": 39129503786,
+          "name": "Workflow structure guard",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 3481,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503786/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503786/logs",
+          "workflow_id": 377102035
+        },
+        {
+          "id": 39129503799,
+          "name": "Multi-Repository Additive Superset Java21",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 533,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503799/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503799/logs",
+          "workflow_id": 387560217
+        },
+        {
+          "id": 39129503784,
+          "name": "M3 Provenance Gate",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 4731,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503784/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503784/logs",
+          "workflow_id": 381277875
+        },
+        {
+          "id": 39129503811,
+          "name": "M3 Strict LLM Repository Gate",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 10528,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503811/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503811/logs",
+          "workflow_id": 373619406
+        },
+        {
+          "id": 39129503823,
+          "name": "M3 text recipe qualification",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 708,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503823/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503823/logs",
+          "workflow_id": 384509252
+        },
+        {
+          "id": 39129503866,
+          "name": "M3 Module Fanout",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 17282,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503866/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/39129503866/logs",
+          "workflow_id": 368345198
+        }
+      ]
+    },
+    {
+      "repository": "hsoliwal/M3JDK21",
+      "observed_head": "0d24944a633e9b5ce226c287b333124993b4c477",
+      "runs": [
+        {
+          "id": 39130175891,
+          "name": "M3 long-path bounded-input Java21 JNI proof",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 3,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175891/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175891/logs",
+          "workflow_id": 388262191
+        },
+        {
+          "id": 39130175905,
+          "name": "M3 Synexia Canonical Collection Installer Receiver 20261018",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 122,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175905/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175905/logs",
+          "workflow_id": 388163230
+        },
+        {
+          "id": 39130175933,
+          "name": "M3JDK String owner-coordinate runtime",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 1559,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175933/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175933/logs",
+          "workflow_id": 372714515
+        },
+        {
+          "id": 39130175934,
+          "name": "M3 JDK21 verbatim oracle",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 1032,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175934/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175934/logs",
+          "workflow_id": 372985574
+        },
+        {
+          "id": 39130175909,
+          "name": "M3JDK21 Backport Recipe DAG",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 1472,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175909/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175909/logs",
+          "workflow_id": 373879016
+        },
+        {
+          "id": 39130175939,
+          "name": "M3 A3 SourceFile type and custody",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 8,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175939/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175939/logs",
+          "workflow_id": 384982510
+        },
+        {
+          "id": 39130175926,
+          "name": "M3 CI probe",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 3420,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175926/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175926/logs",
+          "workflow_id": 372923013
+        },
+        {
+          "id": 39130175911,
+          "name": "M3 collection contracts",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 1154,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175911/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175911/logs",
+          "workflow_id": 377505738
+        },
+        {
+          "id": 39130176017,
+          "name": "M3 SDK bulk capture source-sealed Java21",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 13,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176017/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176017/logs",
+          "workflow_id": 387651098
+        },
+        {
+          "id": 39130175986,
+          "name": "Owned M3 Guava evicting queue contracts",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 105,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175986/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175986/logs",
+          "workflow_id": 388162528
+        },
+        {
+          "id": 39130175947,
+          "name": "M3 Synexia Apache import proof",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 592,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175947/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175947/logs",
+          "workflow_id": 376087153
+        },
+        {
+          "id": 39130176054,
+          "name": "m3-object-filtered-deques-java21",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 267,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176054/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176054/logs",
+          "workflow_id": 387704060
+        },
+        {
+          "id": 39130176007,
+          "name": "M3 Bulk Registration Live Recovery",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 49,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176007/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176007/logs",
+          "workflow_id": 382025106
+        },
+        {
+          "id": 39130176040,
+          "name": "M3 long direct address kernel",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 251,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176040/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176040/logs",
+          "workflow_id": 387591081
+        },
+        {
+          "id": 39130176031,
+          "name": "M3 JEP 467 Markdown doc-comment inventory",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 1243,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176031/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176031/logs",
+          "workflow_id": 374306143
+        },
+        {
+          "id": 39130175977,
+          "name": "M3 Synexia intake policy",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 1822,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175977/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175977/logs",
+          "workflow_id": 376083636
+        },
+        {
+          "id": 39130175976,
+          "name": "M3 JEP 497 ML-DSA inventory",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 574,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175976/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175976/logs",
+          "workflow_id": 377057585
+        },
+        {
+          "id": 39130175965,
+          "name": "M3 foundation contracts",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 4661,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175965/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175965/logs",
+          "workflow_id": 372120711
+        },
+        {
+          "id": 39130176061,
+          "name": "M3 OpenRewrite recipe proof",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 4051,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176061/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176061/logs",
+          "workflow_id": 372884816
+        },
+        {
+          "id": 39130176059,
+          "name": "M3 Lane28 counterparts",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 1073,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176059/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176059/logs",
+          "workflow_id": 375383569
+        },
+        {
+          "id": 39130175992,
+          "name": "M3 JEP 423 G1 region-pinning inventory",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 797,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175992/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175992/logs",
+          "workflow_id": 376004150
+        },
+        {
+          "id": 39130176075,
+          "name": "M3 indexed long projection direct offset-mask filtering",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 16,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176075/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176075/logs",
+          "workflow_id": 387580844
+        },
+        {
+          "id": 39130175937,
+          "name": "M3 JDK proof kit",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 1170,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175937/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175937/logs",
+          "workflow_id": 374393279
+        },
+        {
+          "id": 39130175998,
+          "name": "M3 long path JNI Java21 C17 differential",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 3,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175998/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175998/logs",
+          "workflow_id": 388206642
+        },
+        {
+          "id": 39130176099,
+          "name": "M3 long index path masks Java21",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 6,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176099/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176099/logs",
+          "workflow_id": 388186387
+        },
+        {
+          "id": 39130176048,
+          "name": "M3 Public Fork Wave2 Java21 Recipe Proof",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 94,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176048/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176048/logs",
+          "workflow_id": 388196574
+        },
+        {
+          "id": 39130176063,
+          "name": "M3 indexed 32-bit mask paths Java21 and JNI",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 21,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176063/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176063/logs",
+          "workflow_id": 387560203
+        },
+        {
+          "id": 39130176009,
+          "name": "M3 filtered shared owner Java21 and family catalogue",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 16,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176009/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176009/logs",
+          "workflow_id": 387659832
+        },
+        {
+          "id": 39130176104,
+          "name": "M3 Synexia canonical recipe consumer",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 195,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176104/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176104/logs",
+          "workflow_id": 376104090
+        },
+        {
+          "id": 39130176100,
+          "name": "M3 JEP 485 Stream Gatherers admission",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 802,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176100/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176100/logs",
+          "workflow_id": 374289286
+        },
+        {
+          "id": 39130176129,
+          "name": "M3 String replacement guard proof",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 137,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176129/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176129/logs",
+          "workflow_id": 381735075
+        },
+        {
+          "id": 39130176001,
+          "name": "M3 owned Spring MultiValueMap",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 115,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176001/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176001/logs",
+          "workflow_id": 387745377
+        },
+        {
+          "id": 39130176078,
+          "name": "M3 four-library receiver admission",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_number": 260,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176078/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176078/logs",
+          "workflow_id": 385704288
+        },
+        {
+          "id": 39130175971,
+          "name": "M3 native index-range qualification",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_number": 18,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175971/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175971/logs",
+          "workflow_id": 387604622
+        },
+        {
+          "id": 39130175915,
+          "name": "M3 JDK-8340327 current product proof",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_number": 600,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175915/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175915/logs",
+          "workflow_id": 376308989
+        },
+        {
+          "id": 39130176010,
+          "name": "M3 Synexia pure-int public custody",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 93,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176010/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176010/logs",
+          "workflow_id": 378302255
+        },
+        {
+          "id": 39130175948,
+          "name": "M3 JEP 497 ML-DSA candidate",
+          "status": "in_progress",
+          "conclusion": null,
+          "run_number": 573,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175948/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175948/logs",
+          "workflow_id": 377085206
+        },
+        {
+          "id": 39130175920,
+          "name": "M3 TQ counterpart",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_number": 1502,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175920/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175920/logs",
+          "workflow_id": 375358643
+        },
+        {
+          "id": 39130176053,
+          "name": "M3 JEP 496 ML-KEM candidate",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_number": 1088,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176053/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130176053/logs",
+          "workflow_id": 377065901
+        },
+        {
+          "id": 39130175569,
+          "name": "M3 A3 scope history and full custody JUnit",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 4,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175569/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175569/logs",
+          "workflow_id": 384993042
+        },
+        {
+          "id": 39130175539,
+          "name": "m3-primitive-filtered-sequences-java21",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 267,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175539/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175539/logs",
+          "workflow_id": 387710460
+        },
+        {
+          "id": 39130175597,
+          "name": "M3 filtered Map default-method receiver Java21",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 17,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175597/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175597/logs",
+          "workflow_id": 387659975
+        },
+        {
+          "id": 39130175604,
+          "name": "M3 indexed path mask bounded windows Java JNI",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 11,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175604/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175604/logs",
+          "workflow_id": 387612296
+        },
+        {
+          "id": 39130175549,
+          "name": "M3 bounded filtered current-master receiver",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 15,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175549/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175549/logs",
+          "workflow_id": 388181814
+        },
+        {
+          "id": 39130175673,
+          "name": "M3 long index projection (recipe + JNI)",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 18,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175673/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175673/logs",
+          "workflow_id": 387553177
+        },
+        {
+          "id": 39130175618,
+          "name": "M3 Synexia full delivery A3",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 422,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175618/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175618/logs",
+          "workflow_id": 376111548
+        },
+        {
+          "id": 39130175653,
+          "name": "M3 JEP 493 runtime-image file-atom inventory",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 1216,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175653/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175653/logs",
+          "workflow_id": 374297494
+        },
+        {
+          "id": 39130175623,
+          "name": "M3 JEP 496 ML-KEM inventory",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 574,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175623/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175623/logs",
+          "workflow_id": 377055185
+        },
+        {
+          "id": 39130175783,
+          "name": "M3 JEP 493 generated-crate materialization",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 657,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175783/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175783/logs",
+          "workflow_id": 375363006
+        },
+        {
+          "id": 39130175824,
+          "name": "M3 ClassVer actual framework proof",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 1190,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175824/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175824/logs",
+          "workflow_id": 374490467
+        },
+        {
+          "id": 39130175806,
+          "name": "M3 retained capability audit",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 3672,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175806/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175806/logs",
+          "workflow_id": 374990272
+        },
+        {
+          "id": 39130175804,
+          "name": "M3JDK21 filtered stored representative receiver Java21",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 47,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175804/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175804/logs",
+          "workflow_id": 387478128
+        },
+        {
+          "id": 39130175856,
+          "name": "M3 first release admission",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 2298,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175856/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175856/logs",
+          "workflow_id": 377262855
+        },
+        {
+          "id": 39130175814,
+          "name": "Owned M3 Apache multivalue contracts",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 154,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175814/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175814/logs",
+          "workflow_id": 388083357
+        },
+        {
+          "id": 39130175875,
+          "name": "M3 Eclipse framework indexed forward receiver",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 96,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175875/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175875/logs",
+          "workflow_id": 387662888
+        },
+        {
+          "id": 39130175872,
+          "name": "M3 A3 absorption proof",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 3209,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175872/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175872/logs",
+          "workflow_id": 374370010
+        },
+        {
+          "id": 39130175892,
+          "name": "M3 Eclipse progress forward receiver (Java 21)",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 138,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175892/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175892/logs",
+          "workflow_id": 387641975
+        },
+        {
+          "id": 39130175848,
+          "name": "M3 released JEP authority repair",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 866,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175848/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175848/logs",
+          "workflow_id": 376052029
+        },
+        {
+          "id": 39130175877,
+          "name": "M3 JEP 458 current-master admission",
+          "status": "queued",
+          "conclusion": null,
+          "run_number": 1284,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175877/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175877/logs",
+          "workflow_id": 374282106
+        },
+        {
+          "id": 39130175603,
+          "name": "M3 filtered navigable consolidation",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_number": 26,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175603/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175603/logs",
+          "workflow_id": 387604962
+        },
+        {
+          "id": 39130175559,
+          "name": "M3 owned Apache BidiMap",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 117,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175559/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175559/logs",
+          "workflow_id": 387720704
+        },
+        {
+          "id": 39130175799,
+          "name": "M3 source-built launcher closure",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_number": 3,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175799/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175799/logs",
+          "workflow_id": 382882104
+        },
+        {
+          "id": 39130175836,
+          "name": "M3 original mapping provider and reconciliation",
+          "status": "completed",
+          "conclusion": "failure",
+          "run_number": 35,
+          "jobs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175836/jobs",
+          "logs_url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/39130175836/logs",
+          "workflow_id": 387594385
+        }
+      ]
+    }
+  ],
+  "all_checks_green": false,
+  "source_epoch": "first published commits; later source fixes and receipts are independent"
+}

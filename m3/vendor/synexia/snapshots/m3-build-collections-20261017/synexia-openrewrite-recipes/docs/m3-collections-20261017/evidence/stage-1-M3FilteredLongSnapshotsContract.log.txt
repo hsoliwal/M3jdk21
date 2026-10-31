@@ -1,0 +1,4 @@
+$ ["/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/jdk-21.0.2+13/bin/java", "-cp", "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/stage-1-classes", "com.synexia.common.collections.M3FilteredLongSnapshotsContract"]
+PASS M3_FILTERED_SNAPSHOTS backend=JAVA fixtures=3004
+
+EXIT 0

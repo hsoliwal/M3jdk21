@@ -1,0 +1,410 @@
+{
+  "schema": "synexia.public-fork-source-audit.v1",
+  "date": "2026-10-19",
+  "scope": "Three assigned public collection-related forks under hsoliwal. Root owns the complete account repository inventory.",
+  "mode": "read-only source donor audit; candidate-only reuse decisions",
+  "architecture_admitted": false,
+  "source_bytes_included": false,
+  "remote_reads": {
+    "total": 18,
+    "budget": 18,
+    "branch_searches": 3,
+    "branch_ref_reads": 3,
+    "license_reads": 3,
+    "recursive_tree_reads": 2,
+    "targeted_source_reads": 7,
+    "further_reads": 0
+  },
+  "repositories": [
+    {
+      "repository": "hsoliwal/swift-collections",
+      "branch": "main",
+      "commit": "b905c889ff75059b8ef0bde480fe55948147b1e6",
+      "tree": "07ab4ac6b0af48dba1632f42f7a62d044ac00993",
+      "source_tree_inventory": {
+        "entries": 1028,
+        "truncated": false
+      },
+      "license": {
+        "path": "LICENSE.txt",
+        "git_blob": "61b0c78195f2d00acaf658000eeca6ad406a3a29",
+        "designation": "Apache-2.0 WITH Swift-exception",
+        "source_headers_checked": true,
+        "boundary": "Retain source attribution and exception text. Do not assume compiler runtime-embedding relief applies to a Java source port."
+      }
+    },
+    {
+      "repository": "hsoliwal/jackson-datatypes-collections",
+      "branch": "3.x",
+      "commit": "5631f637e626c033319a1e5ac11ecde8db5d319e",
+      "tree": "76047f9e196878367a595407c607049d0f6100c4",
+      "source_tree_inventory": {
+        "entries": 3854,
+        "truncated": false
+      },
+      "modules_in_tree": [
+        "eclipse-collections",
+        "guava",
+        "hppc",
+        "pcollections",
+        "primitive-collections-base"
+      ],
+      "license": {
+        "path": "LICENSE",
+        "git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+        "designation": "Apache-2.0",
+        "boundary": "Preserve applicable license and attribution; inspect relevant notices and generated-source provenance before adaptation."
+      }
+    },
+    {
+      "repository": "hsoliwal/lucene",
+      "branch": "main",
+      "commit": "ec6ecef838e3c1f93ce19d1c353f1e942efab7b4",
+      "tree": "9c1812f0790849fad77b0e78c0f37bc20aad5065",
+      "source_tree_inventory": {
+        "mode": "two targeted source files; no whole recursive tree read"
+      },
+      "license": {
+        "path": "LICENSE.txt",
+        "git_blob": "4e3bf8b08f99a836ba8c5e7dc92fd4eee6ab59ca",
+        "designation": "Apache-2.0 for inspected Java headers; repository license also includes component-specific terms",
+        "source_headers_checked": true,
+        "boundary": "Read applicable NOTICE and retain relevant source and component notices before importing code. Repository-wide license cannot be reduced to a blanket claim for all components."
+      }
+    }
+  ],
+  "source_facts": [
+    {
+      "id": "swift-bitmap-rank",
+      "repository": "hsoliwal/swift-collections",
+      "branch": "main",
+      "commit": "b905c889ff75059b8ef0bde480fe55948147b1e6",
+      "tree": "07ab4ac6b0af48dba1632f42f7a62d044ac00993",
+      "path": "Sources/HashTreeCollections/HashNode/_Bitmap.swift",
+      "git_blob": "bd80daf5c0d366cc76b4d9d8627e52b118ea0d8d",
+      "inspection": "source read at exact commit; not compiled or executed",
+      "category": [
+        "bitmap occupancy",
+        "packed slot addressing",
+        "rank/select"
+      ],
+      "observed": [
+        "32-bit UInt32 occupancy representation for buckets.",
+        "Population count, trailing-zero first-member lookup, and clear-lowest-bit iteration.",
+        "Maps sparse bucket positions to packed slots through rank and supplies inverse bucket selection."
+      ],
+      "proposed_classification": "PORT",
+      "m3_fit": "Candidate primitive metadata atom for packed indexed storage.",
+      "limits": [
+        "Swift unsigned-width and wrapping-shift semantics require Java/JNI edge qualification.",
+        "Internal rank/select dependencies were identified but not executed."
+      ],
+      "dependencies": [
+        "InternalCollectionsUtilities",
+        "_Bucket",
+        "_HashSlot"
+      ],
+      "proof_status": "NOT_RUN"
+    },
+    {
+      "id": "swift-deque-offsets",
+      "repository": "hsoliwal/swift-collections",
+      "branch": "main",
+      "commit": "b905c889ff75059b8ef0bde480fe55948147b1e6",
+      "tree": "07ab4ac6b0af48dba1632f42f7a62d044ac00993",
+      "path": "Sources/DequeModule/_UnsafeDequeHandle.swift",
+      "git_blob": "707298183a02d5abfbba9ec255a34e2a39fdf8bd",
+      "inspection": "source read at exact commit; not compiled or executed",
+      "category": [
+        "ring buffer",
+        "offset-to-slot mapping",
+        "segmented array copies"
+      ],
+      "observed": [
+        "Separates physical buffer, starting slot, count and capacity.",
+        "Maps offsets using addition and conditional wraparound.",
+        "Exposes contiguous segments before and after the buffer boundary."
+      ],
+      "proposed_classification": "PORT",
+      "m3_fit": "Candidate array-offset and wrapped-copy patterns for Java/JNI deques.",
+      "limits": [
+        "Arbitrary capacity is supported; replacing conditional wrap with a bit mask requires a separately proven power-of-two invariant.",
+        "Swift ownership, pointer access, wrapping arithmetic and element lifecycle need an actual port.",
+        "Swift source performance comments are not M3 benchmark evidence."
+      ],
+      "dependencies": [
+        "InternalCollectionsUtilities",
+        "SpanPreview",
+        "_DequeSlot",
+        "unsafe Swift buffer facilities"
+      ],
+      "proof_status": "NOT_RUN"
+    },
+    {
+      "id": "swift-hash-node-storage",
+      "repository": "hsoliwal/swift-collections",
+      "branch": "main",
+      "commit": "b905c889ff75059b8ef0bde480fe55948147b1e6",
+      "tree": "07ab4ac6b0af48dba1632f42f7a62d044ac00993",
+      "path": "Sources/HashTreeCollections/HashNode/_HashNode+Storage.swift",
+      "git_blob": "da933b7b1a71831942a51704728c3495f583cf15",
+      "inspection": "source read at exact commit; not compiled or executed",
+      "category": [
+        "sparse hash trie",
+        "bitmap-addressed storage",
+        "allocation sizing"
+      ],
+      "observed": [
+        "ManagedBuffer-backed Storage instances represent individual hash-tree nodes.",
+        "Separate item and child occupancy bitmaps determine packed item and child counts.",
+        "Allocates aligned storage with power-of-two allocation units; items and child references occupy separate buffer regions."
+      ],
+      "proposed_classification": "PORT",
+      "m3_fit": "Algorithm and layout donor requiring flattening into owned array lanes and integer links.",
+      "limits": [
+        "Unchanged donor retains node objects; direct import does not satisfy the requested flattened indexed representation.",
+        "Key/value items are Swift inline tuples; Java object/array layout is materially different.",
+        "No claim of complete HAMT implementation or behavior equivalence."
+      ],
+      "dependencies": [
+        "InternalCollectionsUtilities",
+        "ManagedBuffer",
+        "_HashNodeHeader",
+        "_RawHashNode",
+        "_HashNode.UnsafeHandle"
+      ],
+      "proof_status": "NOT_RUN"
+    },
+    {
+      "id": "lucene-char-array-map",
+      "repository": "hsoliwal/lucene",
+      "branch": "main",
+      "commit": "ec6ecef838e3c1f93ce19d1c353f1e942efab7b4",
+      "tree": "9c1812f0790849fad77b0e78c0f37bc20aad5065",
+      "path": "lucene/core/src/java/org/apache/lucene/analysis/CharArrayMap.java",
+      "git_blob": "cdc1301a299fafbf59e62e332a325da3f505fdf0",
+      "inspection": "source read at exact commit; not compiled or executed",
+      "category": [
+        "open-addressed hash map",
+        "parallel arrays",
+        "character-slice lookup"
+      ],
+      "observed": [
+        "Stores keys and values in parallel char[][] and V[] arrays without stored Map.Entry nodes.",
+        "Uses power-of-two capacities, capacity masks and odd-step collision probes.",
+        "Provides char-array offset/length lookup and CharSequence lookup.",
+        "Iterator.next() creates a transient API MapEntry containing a slot index.",
+        "Rehash redistributes parallel key/value lanes."
+      ],
+      "proposed_classification": "ADAPT",
+      "m3_fit": "Strong Java donor for a specialized char-slice map and matching set storage.",
+      "limits": [
+        "Specialized contract excludes individual removal and shrinking.",
+        "put(char[]) retains the caller array and lowercases it in place when ignoreCase is enabled.",
+        "Not a drop-in general-purpose Map replacement.",
+        "Dependencies and exact modern source compatibility remain unqualified."
+      ],
+      "dependencies": [
+        "java.util collections and arrays",
+        "org.apache.lucene.util.CharsRef",
+        "CharacterUtils",
+        "CharArraySet"
+      ],
+      "proof_status": "NOT_RUN"
+    },
+    {
+      "id": "lucene-fixed-bitset",
+      "repository": "hsoliwal/lucene",
+      "branch": "main",
+      "commit": "ec6ecef838e3c1f93ce19d1c353f1e942efab7b4",
+      "tree": "9c1812f0790849fad77b0e78c0f37bc20aad5065",
+      "path": "lucene/core/src/java/org/apache/lucene/util/FixedBitSet.java",
+      "git_blob": "071098edf03afeb2676d585c36cfe8985fc80418",
+      "inspection": "source read at exact commit; not compiled or executed",
+      "category": [
+        "packed state masks",
+        "word-range operations",
+        "bit scans"
+      ],
+      "observed": [
+        "Stores fixed logical bit length in long[] with an explicit used-word count.",
+        "Uses word offsets, masks, population counts and trailing-zero scans.",
+        "orMask handles masks crossing a 64-bit word boundary.",
+        "Contains readNBits, orRange, andRange, intersection and union count operations."
+      ],
+      "proposed_classification": "ADAPT",
+      "m3_fit": "Strong Java donor for packed collection state and bulk bit-range atoms; JNI requires a separate port.",
+      "limits": [
+        "Mask significant-bit limits, index ranges, unused tail bits, empty ranges and boundary crossings must remain explicit contracts.",
+        "Not dependency-free; inherit or isolate the required helper behavior.",
+        "No speedup, SIMD code generation, JNI equivalence or peak-performance claim was measured."
+      ],
+      "dependencies": [
+        "org.apache.lucene.util.BitSet",
+        "org.apache.lucene.search.DocIdSetIterator",
+        "RamUsageEstimator",
+        "java.util.Arrays",
+        "java.util.Objects"
+      ],
+      "proof_status": "NOT_RUN"
+    },
+    {
+      "id": "jackson-eclipse-module",
+      "repository": "hsoliwal/jackson-datatypes-collections",
+      "branch": "3.x",
+      "commit": "5631f637e626c033319a1e5ac11ecde8db5d319e",
+      "tree": "76047f9e196878367a595407c607049d0f6100c4",
+      "path": "eclipse-collections/src/main/java/tools/jackson/datatype/eclipsecollections/EclipseCollectionsModule.java",
+      "git_blob": "741cd9a4325e6ed2c3a302dcc639a01048ff5f30",
+      "inspection": "source read at exact commit; not compiled or executed",
+      "category": [
+        "JSON serialization integration",
+        "module registration",
+        "tuple construction"
+      ],
+      "observed": [
+        "Registers Eclipse serializers, deserializers, value instantiators and type modification.",
+        "Registers pair/triple construction support and mixins."
+      ],
+      "proposed_classification": "ADAPT",
+      "m3_fit": "Candidate serialization integration for M3-owned Eclipse-compatible implementations.",
+      "limits": [
+        "This is integration code, not an underlying collection storage kernel.",
+        "Branch is Jackson 3 with tools.jackson.* packages; it is not a Jackson 2 drop-in.",
+        "M3 type registration and compatibility require separately executed round-trip and configuration proofs."
+      ],
+      "dependencies": [
+        "tools.jackson.core",
+        "tools.jackson.databind",
+        "org.eclipse.collections.api.tuple",
+        "module-specific serializers/deserializers and instantiators"
+      ],
+      "proof_status": "NOT_RUN"
+    },
+    {
+      "id": "jackson-guava-multimap-parser",
+      "repository": "hsoliwal/jackson-datatypes-collections",
+      "branch": "3.x",
+      "commit": "5631f637e626c033319a1e5ac11ecde8db5d319e",
+      "tree": "76047f9e196878367a595407c607049d0f6100c4",
+      "path": "guava/src/main/java/tools/jackson/datatype/guava/deser/multimap/GuavaMultimapDeserializer.java",
+      "git_blob": "b80aeb8cb2850cdc710110c8d3093934b79f4037",
+      "inspection": "source read at exact commit; not compiled or executed",
+      "category": [
+        "JSON multimap parsing",
+        "contextual deserialization",
+        "null policy"
+      ],
+      "observed": [
+        "Creates a backing multimap through createMultimap and inserts decoded values through multimap.put.",
+        "Supports contextual key/value deserializers and value type deserialization.",
+        "Contains array and optional single-value paths, null skipping/rejection policy, and final conversion to the target type."
+      ],
+      "proposed_classification": "ADAPT",
+      "m3_fit": "Candidate parser and serialization-contract donor after a real M3 multimap implementation exists.",
+      "limits": [
+        "Underlying Guava Multimap storage is delegated to, not implemented by, this source.",
+        "Jackson 3 tools.jackson.* and Guava dependencies must be reconciled explicitly.",
+        "No parser behavior, error-path, aliasing or round-trip tests were run."
+      ],
+      "dependencies": [
+        "tools.jackson.core",
+        "tools.jackson.databind",
+        "com.fasterxml.jackson.annotation.JsonFormat",
+        "com.google.common.collect.Multimap and immutable/tree variants",
+        "NullElementHelper"
+      ],
+      "proof_status": "NOT_RUN"
+    }
+  ],
+  "test_paths": [
+    {
+      "repository": "hsoliwal/swift-collections",
+      "branch": "main",
+      "commit": "b905c889ff75059b8ef0bde480fe55948147b1e6",
+      "tree": "07ab4ac6b0af48dba1632f42f7a62d044ac00993",
+      "paths": [
+        {
+          "path": "Tests/DequeTests/DequeAllocationTests.swift",
+          "git_blob": "30823ca128e8ddbd19e7c726b76ac2fa74855f81",
+          "status": "PATH_INVENTORIED_NOT_READ_OR_RUN"
+        },
+        {
+          "path": "Tests/DequeTests/DequeTests.swift",
+          "git_blob": "7dbce18eeb567d7893f4841f69a48d47f12ec860",
+          "status": "PATH_INVENTORIED_NOT_READ_OR_RUN"
+        },
+        {
+          "path": "Tests/DequeTests/RangeReplaceableCollectionTests.swift",
+          "git_blob": "94840e5fce00b6b2d33fc359a3b0be70580c8834",
+          "status": "PATH_INVENTORIED_NOT_READ_OR_RUN"
+        },
+        {
+          "path": "Tests/DequeTests/RigidDequeTests.swift",
+          "git_blob": "2a4018bc218b5308c6e21895875f73fcd4248c2a",
+          "status": "PATH_INVENTORIED_NOT_READ_OR_RUN"
+        },
+        {
+          "path": "Tests/DequeTests/UniqueDequeTests.swift",
+          "git_blob": "0b3a3ad1450d45642b4ff7f8da3985ae677e5f35",
+          "status": "PATH_INVENTORIED_NOT_READ_OR_RUN"
+        },
+        {
+          "path": "Tests/HashTreeCollectionsTests/TreeDictionary Tests.swift",
+          "git_blob": "529a1d41e98c471e59c3dab463a481398618c385",
+          "status": "PATH_INVENTORIED_NOT_READ_OR_RUN"
+        },
+        {
+          "path": "Tests/HashTreeCollectionsTests/TreeDictionary Smoke Tests.swift",
+          "git_blob": "612cb68e4e40644cc166ec742660bc6886633e52",
+          "status": "PATH_INVENTORIED_NOT_READ_OR_RUN"
+        }
+      ]
+    },
+    {
+      "repository": "hsoliwal/jackson-datatypes-collections",
+      "branch": "3.x",
+      "commit": "5631f637e626c033319a1e5ac11ecde8db5d319e",
+      "tree": "76047f9e196878367a595407c607049d0f6100c4",
+      "paths": [
+        {
+          "path": "eclipse-collections/src/test/java/tools/jackson/datatype/eclipsecollections/SerializerTest.java",
+          "git_blob": "73414010a896ec3304b6dc5071532c4318fa3561",
+          "status": "PATH_INVENTORIED_NOT_READ_OR_RUN"
+        },
+        {
+          "path": "eclipse-collections/src/test/java/tools/jackson/datatype/eclipsecollections/DeserializerTest.java",
+          "git_blob": "b404297f76f61c7dfc288859c58663cc590f3a9a",
+          "status": "PATH_INVENTORIED_NOT_READ_OR_RUN"
+        },
+        {
+          "path": "guava/src/test/java/tools/jackson/datatype/guava/MultimapsTest.java",
+          "git_blob": "2d8d380b0102c296dc515f1cb45b4efdb36eed63",
+          "status": "PATH_INVENTORIED_NOT_READ_OR_RUN"
+        },
+        {
+          "path": "guava/src/test/java/tools/jackson/datatype/guava/MultimapTableNullsTest.java",
+          "git_blob": "198d5a71a39aadc746b3b4452c7c45132aab7f48",
+          "status": "PATH_INVENTORIED_NOT_READ_OR_RUN"
+        },
+        {
+          "path": "guava/src/test/java/tools/jackson/datatype/guava/MultimapAcceptSingle211Test.java",
+          "git_blob": "8dcffd808721fba13d8382d18c68a82027d7f533",
+          "status": "PATH_INVENTORIED_NOT_READ_OR_RUN"
+        }
+      ]
+    }
+  ],
+  "priority": [
+    "Inspect and qualify isolated Lucene CharArrayMap character-slice and FixedBitSet range atoms against current M3 operations.",
+    "Port Swift bitmap and ring-offset atoms only where catalogue comparison identifies an uncovered advantage.",
+    "Use Jackson code for JSON integration after underlying M3 collection contracts exist."
+  ],
+  "qualification_limits": [
+    "No clones, downloads, JVM runs, tests, benchmarks, generated implementations, new architecture or GitHub mutations occurred.",
+    "Read branch searches are observations, not an exhaustive branch inventory: Lucene returned a first page of 20 branch names.",
+    "Only the seven named source files were behaviorally inspected; complete recursive tree inventory is not full source review.",
+    "No donor is admitted as contract-equivalent, fastest, peak optimized, JNI-qualified or a completed five-library superset.",
+    "Candidate classifications must pass fit, attribution, differential behavior and appropriate performance gates before implementation."
+  ]
+}

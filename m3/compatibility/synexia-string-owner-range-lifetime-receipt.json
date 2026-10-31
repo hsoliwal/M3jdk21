@@ -1,0 +1,28 @@
+{
+  "schema": "M3JDK21_STRING_OWNER_RANGE_LIFETIME_RECEIPT_V1",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalPullRequest": 9907,
+  "canonicalRecipe": "com.synexia.rewrite.M3Jdk21StringOwnerRangeLifetime",
+  "canonicalRecipeHead": "f27b38cf6c26fed3590261056c846d80ba761352",
+  "targets": [
+    {
+      "path": "test/jdk/java/lang/String/M3StringOwnerRangeLifetimeTest.java",
+      "sha256": "8712748bcacd7a748cbcd06ec9bfdf8853b8841669bab0f97c616b6d78495701"
+    }
+  ],
+  "gates": {
+    "sourceRecipeJUnit": "PENDING_CI",
+    "jtregCompactStrings": "PENDING_CI",
+    "jtregNoCompactStrings": "PENDING_CI",
+    "promotion": "BLOCKED"
+  },
+  "claims": {
+    "ownerCoordinateShapeProved": "PENDING_JTREG",
+    "secondaryJavaSpellingPayloadAbsent": "PENDING_JTREG",
+    "weakLocalNativeLifetimeProved": "PENDING_JTREG",
+    "javaBaseSourceChanged": false,
+    "hotspotSourceChanged": false,
+    "jniSourceChanged": false,
+    "runtimePromotionAuthorized": false
+  }
+}

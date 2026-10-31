@@ -1,0 +1,4 @@
+4bc029012e2b43dc4f0e92e1c6bba1749ea5b323b952b3c554e8bf3a8004e1bd  m3/collections/src/main/java/com/m3/collections/M3DisjointIndex.java
+0b60739829b8905397f433f9608fd64f792185400fcf516822cf9b4dfa8d42fc  m3/collections/src/main/native/collections/m3_disjoint_index.c
+aa0e9b01f27c4bdc77d071367a0f8b70f43b75ca6cc6b8f908bc0c1af8c3bc83  m3/collections/src/test/java/com/m3/collections/M3DisjointIndexSelfTest.java
+9c56798637b0395a03c6e8fc572abde2b3bd50d05af1d745dc8b5934105b9756  m3/collections/src/test/java/com/m3/collections/M3DisjointIndexTest.java

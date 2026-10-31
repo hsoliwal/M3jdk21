@@ -1,0 +1,5 @@
+Exception in thread "main" java.lang.AssertionError: spare-capacity interleaving: keys lane was not reused
+	at LongLongSortedBatchOracle.check(LongLongSortedBatchOracle.java:526)
+	at LongLongSortedBatchOracle.batch(LongLongSortedBatchOracle.java:134)
+	at LongLongSortedBatchOracle.fixedBatches(LongLongSortedBatchOracle.java:161)
+	at LongLongSortedBatchOracle.main(LongLongSortedBatchOracle.java:65)

@@ -1,0 +1,11 @@
+test_actual_existing_input_check_apply_fixed_point_rollback_and_replay (__main__.JccSourceRecoveryHandoffPacketTests.test_actual_existing_input_check_apply_fixed_point_rollback_and_replay) ... ok
+test_all_four_output_mixed_before_after_subsets_refuse_atomically (__main__.JccSourceRecoveryHandoffPacketTests.test_all_four_output_mixed_before_after_subsets_refuse_atomically) ... ok
+test_each_foreign_postimage_edit_refuses_rollback_and_replay_atomically (__main__.JccSourceRecoveryHandoffPacketTests.test_each_foreign_postimage_edit_refuses_rollback_and_replay_atomically) ... ok
+test_each_missing_existing_postimage_refuses_rollback_and_replay_atomically (__main__.JccSourceRecoveryHandoffPacketTests.test_each_missing_existing_postimage_refuses_rollback_and_replay_atomically) ... ok
+test_each_of_four_required_preimages_missing_or_drifted_refuses_atomically (__main__.JccSourceRecoveryHandoffPacketTests.test_each_of_four_required_preimages_missing_or_drifted_refuses_atomically) ... ok
+test_each_unchanged_guard_missing_or_drifted_refuses_atomically (__main__.JccSourceRecoveryHandoffPacketTests.test_each_unchanged_guard_missing_or_drifted_refuses_atomically) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 1.176s
+
+OK

@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "e322acedc29a26c1291e55a773a4e22c1d548eb7"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "m3/docs/jcc-source-handoff.md\t59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0\td5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d\tafter01-jcc-source-handoff.md.txt\nm3/docs/name-mapping.json\te4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3\teb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e\tafter00-name-mapping.json.txt\nm3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv\t59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12\t1c4eedbf3f155bac469693da312c577d26999e7776ca1f85870f6cce125f1e35\tafter03-root-coverage-obligations.tsv.txt\nm3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json\t049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef\tf8b27e3582eb494af2c8dd47225976f974be6edc2f6c26313975064d48739497\tafter02-source-destination-bindings.json.txt\n"
+    },
+    "isError": false
+  }
+}

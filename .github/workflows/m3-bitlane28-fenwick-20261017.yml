@@ -1,0 +1,87 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 BitLane28 Fenwick source and contract
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-bitlane28-fenwick-20261017.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3BitLane28.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3BitLane28FenwickSelfTest.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3BitLane28FenwickTest.java'
+      - 'm3/collections/qualification/bitlane28-fenwick-20261017/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: m3-bitlane28-fenwick-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-source-java21:
+    name: Exact SHA-256 and strict Java 21 TreeSet differential
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify the three canonical Synexia postimage SHA-256 values
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s  %s\n' \
+            '011c7f61b442fb07bbc937cade8fa283175a574539ffdcf8c3d52ac4cb673626' \
+            'm3/collections/src/main/java/com/m3/collections/M3BitLane28.java' \
+            'a82291d6dfc65546369804db2ad31b773c0d35bddb46ae998f98e586fefb54c3' \
+            'm3/collections/src/test/java/com/m3/collections/M3BitLane28FenwickSelfTest.java' \
+            'b221c981c9cabacadeea694a311fd7a76025a161a5e3cb01860b311b35311e3c' \
+            'm3/collections/src/test/java/com/m3/collections/M3BitLane28FenwickTest.java' \
+            | sha256sum --check -
+      - name: Compile the installed Java 21 bitmap owner and standalone oracle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-bitlane28-classes"
+          javac --release 21 -proc:none -Xlint:all -Werror \
+            -d "$RUNNER_TEMP/m3-bitlane28-classes" \
+            m3/collections/src/main/java/com/m3/collections/M3Address28.java \
+            m3/collections/src/main/java/com/m3/collections/M3BitLane28.java \
+            m3/collections/src/test/java/com/m3/collections/M3BitLane28FenwickSelfTest.java
+      - name: Execute exact-source randomized differential test, tiered and interpreter
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -cp "$RUNNER_TEMP/m3-bitlane28-classes" \
+            com.m3.collections.M3BitLane28FenwickSelfTest
+          java -Xint -cp "$RUNNER_TEMP/m3-bitlane28-classes" \
+            com.m3.collections.M3BitLane28FenwickSelfTest
+
+  owning-module-junit:
+    name: Owning Maven module JUnit (separate from focused oracle)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Execute the actual Maven/JUnit test, without suppressing missing dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/collections/pom.xml \
+            -Dtest=M3BitLane28FenwickTest \
+            -Dsurefire.failIfNoSpecifiedTests=false test
+      - name: Retain actual test results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-bitlane28-fenwick-junit-${{ github.sha }}
+          path: m3/collections/target/surefire-reports/
+          if-no-files-found: warn

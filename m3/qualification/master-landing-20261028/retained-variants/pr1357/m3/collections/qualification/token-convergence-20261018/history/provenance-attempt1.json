@@ -1,0 +1,512 @@
+{
+  "status": "FAIL",
+  "paths": 143,
+  "scope": "explicit continuation paths; bounded canonical assembly, not full git diff/reactor",
+  "violations": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/CATALOGUE.tsv",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/INPUTS.tsv",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/PROVENANCE_GATE.json",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/VERIFICATION.json",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/jtreg/M3RX7BoundaryContract.jtr",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/jtreg/M3RX7TokenIndexContract.jtr",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/jtreg/summary.txt",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/00-history-fetch.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/00-lineage.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/01-sdk-donor.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/02-sealing.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/03-receiver-donor.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/04-sdk-mask.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/05-receiver-mask.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/06-donor-compile.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/07-donor-original.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/08-donor-boundary.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/09-component.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/10-component.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/11-jtreg.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/12-fixedpoint.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/13-jtreg-checkout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/14-jtreg.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/15-jtreg-properties-checkout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/16-jtreg-final.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/17-sdk-mask-final.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/18-sdk-mask-final.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/19-component-final.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/20-receiver-final.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/logs/21-final-replay.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/01-java-lint-compile.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/02-test-lint-compile.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/03-native-lint.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/04-native-link.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/05-native-symbols.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/06-donor-contract.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/07-java-boundaries.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/08-native-boundaries.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/09-native-interpreter.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/COMMANDS.json",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/INPUTS.json",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/api-M3RX7-TokenIndex.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/api-M3RX7.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/baseline-api-M3RX7-TokenIndex.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/baseline-api-M3RX7.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/jdk_internal_mindex_M3RX7.h.txt",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/resource-candidate-0.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/resource-candidate-1.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/resource-candidate-2.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/resource-donor-0.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/resource-donor-1.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/runtime/resource-donor-2.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/SDK_INPUTS.tsv",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/SDK_RESULTS.tsv",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/java.patch",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/RECEIVER_RECEIPT.json",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/apply-exact-sdk.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/apply-exact-sdk.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/check-no-write.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/check-no-write.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/failed-sdk-test-refusal.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/failed-sdk-test-refusal.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/fixed-point-no-write.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/fixed-point-no-write.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/late-drift-no-partial-write.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/late-drift-no-partial-write.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/mixed-pre-postimages.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/mixed-pre-postimages.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/qualified-input-tamper.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/qualified-input-tamper.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/sdk-result-tamper.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/sdk-result-tamper.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/symlink-target.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/receiver/symlink-target.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/surefire-reports/com.synexia.rewrite.M3TaskRecipeTest.txt",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-donor-20261018/text.patch",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/SDK_INPUTS.tsv",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/SDK_RESULTS.tsv",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/java.patch",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/RECEIVER_RECEIPT.json",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/apply-exact-sdk.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/apply-exact-sdk.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/check-no-write.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/check-no-write.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/failed-sdk-test-refusal.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/failed-sdk-test-refusal.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/fixed-point-no-write.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/fixed-point-no-write.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/late-drift-no-partial-write.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/late-drift-no-partial-write.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/mixed-pre-postimages.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/mixed-pre-postimages.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/qualified-input-tamper.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/qualified-input-tamper.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/sdk-result-tamper.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/sdk-result-tamper.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/symlink-target.stderr.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/receiver/symlink-target.stdout.log",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/token-convergence-20261018/sdk/token-mask-final-20261018/surefire-reports/com.synexia.rewrite.M3TaskRecipeTest.txt",
+      "code": "FIRST_PARTY_DISPOSITION",
+      "message": "first-party no-header row must declare FIRST_PARTY_NO_HEADER or FIRST_PARTY_METADATA"
+    }
+  ]
+}

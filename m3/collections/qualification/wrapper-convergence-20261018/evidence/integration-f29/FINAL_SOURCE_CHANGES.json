@@ -1,0 +1,52 @@
+{
+  "base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "production_atoms": 3,
+  "verification_files": 6,
+  "changes": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "before": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d",
+      "after": "032bffd456e67c7568b028489ceec85f24510469b3a0e00571ab36cd17ae3b75"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "before": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "after": "7bf939ea374ce6c0b13c403f5e154c0f8d376f9cddb8e623cf00ef299183a77e"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "before": "a5cefed03d9db9429048a218945a8af71b5b7acc862e089f6cc8a451a172e212",
+      "after": "d731f12916ee7f6e935624e7dd9f108c8de99bba02e1a81f6cc96c8cd21a5b84"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowContract.java",
+      "before": "ABSENT",
+      "after": "7c1c055ec9a58a9c807fc05be3ec4a83b0a411729f41c259e3180d1e45262b94"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowResourceProbe.java",
+      "before": "ABSENT",
+      "after": "d711aa55378fe89dc263a2de6fe90449ab690e9759d27906a9389f9a0434fdba"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3IndexOrderWindowTest.java",
+      "before": "ABSENT",
+      "after": "75f32c3f515783fff233992a3144f867fa9bc767d481ba1d2db05b996895ad40"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java",
+      "before": "ABSENT",
+      "after": "2913aeae2f20b80c669398e5727ad9bc000eccf3bb225d85bdd672c17d4fb847"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java",
+      "before": "ABSENT",
+      "after": "fe071ef7e801a9bb1d57501512f0dd606f0c08652e100e6132dc7c4e4a8f6327"
+    },
+    {
+      "path": "m3/collections/src/test/native/m3_mask_window_regions.c",
+      "before": "ac09456844268b592475d9da1e6eee6f154e741c893167cf21d675010580deab",
+      "after": "64f0b8605f8dfbe18ff9dd9905b925c4feac3571715e99bc20b28db2a23db41c"
+    }
+  ]
+}

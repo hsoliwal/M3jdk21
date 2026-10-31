@@ -1,0 +1,10 @@
+[
+  "/tmp/m3jdk21-toolchain-20261020/apache-maven-3.9.9/bin/mvn",
+  "-o",
+  "-B",
+  "-ntp",
+  "-Dmaven.repo.local=/tmp/m3jdk21-toolchain-20261020/m2",
+  "-DargLine=-ea -Xcheck:jni -Djava.library.path=/workspace/scratch/53bcd62c244c/M3JDK21/m3/collections/target/full-java-jni/native",
+  "clean",
+  "verify"
+]

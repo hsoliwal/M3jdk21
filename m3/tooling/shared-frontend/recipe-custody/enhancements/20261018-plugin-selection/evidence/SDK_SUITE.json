@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "dataset": "m3jdk21-plugin-selection",
+  "tests": 5,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "xml_sha256": "eafd9f8e7f91fcd90c94d17fd43dccf960457ccead46cfba382bad42c964a7ad",
+  "prepare_contract_tests": 8,
+  "receiver_contract_tests": 9
+}

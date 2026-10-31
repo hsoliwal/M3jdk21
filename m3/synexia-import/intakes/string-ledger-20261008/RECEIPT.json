@@ -1,0 +1,136 @@
+{
+  "schema": "m3.string-ledger-receiver/1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_revision": "98583c36b57b945950e432ab303b04e02084ef49",
+  "source_pr": 9820,
+  "canonical_recipe_path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger",
+  "engine": "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+  "crate": "m3jdk21-string-ledger-20261008",
+  "license": "Apache-2.0 for eligible first-party tooling; upstream/OpenJDK scopes unchanged",
+  "target_preimage_revision": "439b767c7c92e2751f7f6a47c012f96472420905",
+  "execution_kind": "SDK_EXECUTION",
+  "first_run_changes": 3,
+  "fixed_point_changes": 0,
+  "junit": {
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "python": {
+    "tests": 9,
+    "negative_mutations": 69,
+    "status": "PASSED"
+  },
+  "current_source_audit": "FAILED: pre-existing field regex counts nested spliterator fields as M3String fields",
+  "runtime_image_jtreg_native": "NOT_RUN",
+  "runtime_admission": false,
+  "migration_status_promotion": false,
+  "source_packet_files": [
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/README.md",
+      "git_blob": "edc291b57abcfb5fe8f7fff3510f0c1b4580ef9d"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/evidence/01-incomplete-status-domain.log",
+      "git_blob": "57cc92f095789212cd06972fc5cf67ec85cb1980"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/evidence/02-earlier-refusal.log",
+      "git_blob": "420792e8b74bac4b5977a7c85141b918139c5392"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/evidence/junit.txt",
+      "git_blob": "0f5463d1125095b12d410bf36023088bd24b4ffd"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/evidence/maven-verify.log",
+      "git_blob": "9c90cd58573a49e6dc359dec42dbc2a1a412b427"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/evidence/next-source-gate.log",
+      "git_blob": "81ee277d2526b938ad2b80ee15a7f9bcca12c02e"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/evidence/proof.json",
+      "git_blob": "339b170e3afe89a0a3488109d622525486f9c192"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/evidence/python-ledger-tests.log",
+      "git_blob": "894521bbddbd66f38ade5e4e29c148e5454de1c7"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/evidence/receiving-ledger-tests.log",
+      "git_blob": "4dd65455d3d27b2c0ddffdcb200860c9a27615ad"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/inputs.tsv",
+      "git_blob": "fe679e932c8d72375a80a78eafaab49ba6845fd4"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/pins.json",
+      "git_blob": "0458ed6fdf74f8cdfdfd90d3ae2d771d7e06fe64"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/pom.xml",
+      "git_blob": "68837ee39c62baf62237a932f6e930c9f97d06a6"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/provenance/M3-LICENSE.txt",
+      "git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/provenance/M3-NOTICE.txt",
+      "git_blob": "d0c4c8bb5e7544fd7a679f4250c53b1767792e04"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-ledger-20261008/00-mindex-string-backing.yml.txt",
+      "git_blob": "5245432734e81cdb5e91b73e2a8d568024817831"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-ledger-20261008/01-check-m3string-invariants.py.txt",
+      "git_blob": "d9affbd46e3d9f937f16ebee2560f7eed16ba151"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-ledger-20261008/02-test_string_completeness.py.txt",
+      "git_blob": "80c819516806bcd356f7a04a43666fd08686ef5e"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-ledger-20261008/manifest.tsv",
+      "git_blob": "0b118d9aab2b31ea3aa9903690a4f9f75902b822"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/src/test/java/com/synexia/handoff/StringLedgerTest.java",
+      "git_blob": "49dde13e617d2c4dd485e63d3b85733e76bed024"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/src/test/resources/before/.github/workflows/mindex-string-backing.yml",
+      "git_blob": "812f151aa61a8fe772a2f0918430e8fa33b29f7a"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/src/test/resources/before/m3/runtime-integration/check-m3string-invariants.py",
+      "git_blob": "61056270e53fec97fe7e1e4dacc0f15a289da4f0"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-ledger/src/test/resources/oracle/m3/docs/string-precompute-completeness.tsv",
+      "git_blob": "bce30fb841ffd0d403953ed9b1e93d597f645299"
+    }
+  ],
+  "outputs": [
+    {
+      "path": ".github/workflows/mindex-string-backing.yml",
+      "before": "72d99612078dfcbc4cd173db8b8c391ffbb92c95e0d0f33a8e1eac30fd4e1798",
+      "after": "8f49f646b0b8b56b6dc70212f22366bb16112df91f8a6e7f0e86f41d545f655e"
+    },
+    {
+      "path": "m3/runtime-integration/check-m3string-invariants.py",
+      "before": "4e39c1800980db32fc0e8c2ec9d2f70dc4a2d5be2cfe6b89aa6291bd598a886e",
+      "after": "0c15318fe636a884f7e4ea5bde34e2cae320c816d8603dfb4dcaf53738ead98d"
+    },
+    {
+      "path": "m3/runtime-integration/test_string_completeness.py",
+      "before": "ABSENT",
+      "after": "083e7b57a1ddec9b517668e742a69d8291b11de61450542165380f923cd19358"
+    }
+  ]
+}

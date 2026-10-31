@@ -1,0 +1,31 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.yaml.MergeYaml"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 51
+- name: "Jon Brisbin"
+  email: "jon@jbrisbin.com"
+  lineCount: 44
+- name: "Knut Wannheden"
+  email: "knut@moderne.io"
+  lineCount: 31
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 27
+- name: "Dmitry Belyaev"
+  email: "47196712+dmbelyaev@users.noreply.github.com"
+  lineCount: 16
+- name: "Aaron Gershman"
+  email: "5619476+aegershman@users.noreply.github.com"
+  lineCount: 2
+- name: "Mike Solomon"
+  email: "mike@moderne.io"
+  lineCount: 1
+- name: "Jonathan Leitschuh"
+  email: "jonathan.leitschuh@gmail.com"
+  lineCount: 1
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 1

@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "java.lang.invoke.StringConcatFactory.generateM3Concat (master c9b07049c5: insertArguments + asCollector(Object[]) + asType)",
+      "source_commit": "c9b07049c5",
+      "target": "java.lang.invoke.StringConcatFactory.generateM3Concat + m3Stringifier (typed gateways, String[] collector)",
+      "status": "implemented-locally-verified (G7; flag-off proof on the patched module); flag-on invocation PENDING_LINUX",
+      "target_rule": "ADAPT; no boxing of primitives; JLS 15.18.1 rules through String.valueOf/stringOf; call-site contract unchanged"
+    },
+    {
+      "source": "java.lang.StringConcatHelper.m3Concat(String[], Object[]) (master c9b07049c5)",
+      "source_commit": "c9b07049c5",
+      "target": "java.lang.StringConcatHelper.m3Concat(String[], String[])",
+      "status": "behaviour preserved for stringified pieces",
+      "target_rule": "pieces arrive stringified; constants folded as before"
+    }
+  ]
+}

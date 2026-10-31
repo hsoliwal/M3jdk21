@@ -1,0 +1,22 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3A3DeclarativeRecipeLayer
+displayName: Seal A3 declarative recipe layer
+description: >-
+  Installs the reviewed managed-Environment activation owner, official RewriteTest proof
+  and distributed declarative Java-21 convergence recipe from exact source images.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: a3-declarative-convergence
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: a3-declarative-yaml
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.M3A3DeclarativeActivation
+displayName: Switch A3 FILE application to declarative convergence
+description: >-
+  Replays the exact A3Apply and A3ApplyTest postimages that activate the named
+  declarative convergence DAG while preserving NRW and FILE-local fixed-point behavior.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: a3-declarative-activation

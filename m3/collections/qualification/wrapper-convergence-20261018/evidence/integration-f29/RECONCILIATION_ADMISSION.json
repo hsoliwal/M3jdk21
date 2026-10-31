@@ -1,0 +1,34 @@
+{
+  "old_baseline": "0d73745d7203123533dce8f8fb264ba2746f6d2d",
+  "integration_baseline": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "scope": "same qualified one-file inputs; new owning module compiled and baseline-tested separately",
+  "admissions": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d",
+      "old_new_preimages_identical": true
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "old_new_preimages_identical": true
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "sha256": "a5cefed03d9db9429048a218945a8af71b5b7acc862e089f6cc8a451a172e212",
+      "old_new_preimages_identical": true
+    },
+    {
+      "path": "m3/collections/src/test/native/m3_mask_window_regions.c",
+      "sha256": "ac09456844268b592475d9da1e6eee6f154e741c893167cf21d675010580deab",
+      "old_new_preimages_identical": true
+    }
+  ],
+  "baseline_tests": {
+    "tests": 231,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "wrapper_comparator_regression": "retained separately; original readonly aggregate reaches comparator after guard; v2 readonly-policy isolates admitted guard/read effects without removing other modes"
+}

@@ -1,0 +1,6 @@
+2026-10-20T14:43:43.4886304Z [36;1mENGINE=m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java[0m
+2026-10-20T14:43:43.4886940Z [36;1mtest "$(git hash-object "$ENGINE")" = d58ca50dfaeb60f581b64f43545e688aca5c6530[0m
+2026-10-20T14:43:46.4823075Z + ENGINE=m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
+2026-10-20T14:43:46.4825542Z ++ git hash-object m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java
+2026-10-20T14:43:46.4839178Z + test 34bebff98306f1e9b002ae166598fd21e8fd62ba = d58ca50dfaeb60f581b64f43545e688aca5c6530
+2026-10-20T14:43:46.4849343Z ##[error]Process completed with exit code 1.

@@ -1,0 +1,20 @@
+{
+  "schema": "M3_FILE_AST_NATIVE_SOURCE_PIN_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "f1c6d87b99a5e0e9ef82632d31ee4aa050935840",
+  "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12609",
+  "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3-runtime-progress-facade-20261018",
+  "dataset": "file-ast-final-20261021",
+  "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "target_baseline": "2879a91f48c184b90e7d1577ff581bd8793ae634",
+  "source_seals": {
+    "datasets/file-ast-final-20261021/DATASET.json": "c9393bdc4215c428468fb1d91a47cc7bd65fd5f288fb7463a4d62fa01f6847e6",
+    "tasks/file-observation-20261021/evidence/sdk/file-ast-final-20261021/SDK_INPUTS.tsv": "20ef3e3b70ac10243fb3acdf0dac0c949ffc5977eb83c9ca45e692b3e26c5c92",
+    "tasks/file-observation-20261021/evidence/sdk/file-ast-final-20261021/SDK_RESULTS.tsv": "051abab1d8195470e8247ee87f73c46172a7c7fdbbbd82180bb3d8f234ae4efc",
+    "tasks/file-observation-20261021/CATALOGUE.tsv": "81c91fdac30fcda0faca0d6004e9f292a091ea16fa3ee2f20a0b85fb200d778c",
+    "tasks/stream-shadow-20261020/memory/HEAD.json": "26e83a972a79ffdb9cb4cb83cce61d63ef004ba571852d5280caf68f62c2db95"
+  },
+  "product_receipt": "file-ast-native-qualification-20261021.json",
+  "attribution": "Copyright 2026 Hitesh Soliwal and contributors; Apache-2.0 recipe and metadata expression; original product/payload rights unchanged",
+  "phase_advanced": false
+}

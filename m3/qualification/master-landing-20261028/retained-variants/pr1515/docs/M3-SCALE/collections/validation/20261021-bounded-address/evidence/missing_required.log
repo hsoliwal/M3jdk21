@@ -1,0 +1,3 @@
+Exception in thread "main" java.lang.AssertionError: JNI required; fallback cannot qualify this test
+	at com.m3.collections.M3LongAddressBoundedSelfTest.run(M3LongAddressBoundedSelfTest.java:21)
+	at com.m3.collections.M3LongAddressBoundedSelfTest.main(M3LongAddressBoundedSelfTest.java:14)

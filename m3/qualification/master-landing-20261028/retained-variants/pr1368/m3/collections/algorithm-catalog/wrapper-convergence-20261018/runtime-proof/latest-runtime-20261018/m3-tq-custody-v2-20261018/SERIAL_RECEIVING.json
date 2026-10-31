@@ -1,0 +1,27 @@
+{
+  "dataset": "m3-tq-custody-v2-20261018",
+  "input_head": "2e9508c90952b8d66d6c3ee4855e1e4d8fd856fe",
+  "qualified_crate": "/dev/shm/m3-tq-successor-f8287/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "check": {
+    "dataset": "m3-tq-custody-v2-20261018",
+    "targets": 14,
+    "changes": 14,
+    "mode": "check",
+    "actual_sdk_results": true
+  },
+  "apply": {
+    "dataset": "m3-tq-custody-v2-20261018",
+    "targets": 14,
+    "changes": 14,
+    "mode": "apply",
+    "actual_sdk_results": true
+  },
+  "replay": {
+    "dataset": "m3-tq-custody-v2-20261018",
+    "targets": 14,
+    "changes": 0,
+    "mode": "apply",
+    "actual_sdk_results": true
+  },
+  "output_head": "5c9229c23b1ac9abdfebff3bc4b8e6449f59deae"
+}

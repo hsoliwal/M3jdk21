@@ -1,0 +1,13 @@
+com.m3pack.diagnostics
+com.m3tooling.modulepack
+java.base@21.0.11
+java.compiler@21.0.11
+java.management@21.0.11
+jdk.attach@21.0.11
+jdk.compiler@21.0.11
+jdk.internal.jvmstat@21.0.11
+jdk.internal.opt@21.0.11
+jdk.jcmd@21.0.11
+jdk.jdeps@21.0.11
+jdk.jfr@21.0.11
+jdk.zipfs@21.0.11

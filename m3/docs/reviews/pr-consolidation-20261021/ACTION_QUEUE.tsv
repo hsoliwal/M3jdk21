@@ -1,0 +1,11 @@
+creation_order	repository	pr	disposition	reason
+1	hsoliwal/commons-collections	7	DO_NOT_REMERGE_CHECK_RECEIVER	Already merged by another execution; target-tree integration still needs exact source reconciliation
+2	hsoliwal/eclipse-collections	6	DO_NOT_REMERGE_CHECK_RECEIVER	Already merged by another execution; target-tree integration still needs exact source reconciliation
+3	hsoliwal/com.synexia	12340	HOLD	GitHub reports mergeable=false; no exposed authenticated write/merge executor in this session
+4	hsoliwal/guava	8	DO_NOT_REMERGE_CHECK_RECEIVER	Already merged by another execution; target-tree integration still needs exact source reconciliation
+5	hsoliwal/com.synexia	12427	HOLD	GitHub reports mergeable=false; no exposed authenticated write/merge executor in this session
+6	hsoliwal/commons-collections	9	DO_NOT_REMERGE_CHECK_RECEIVER	Already merged by another execution; target-tree integration still needs exact source reconciliation
+7	hsoliwal/guava	10	DO_NOT_REMERGE_CHECK_RECEIVER	Already merged by another execution; target-tree integration still needs exact source reconciliation
+8	hsoliwal/eclipse-collections	8	DO_NOT_REMERGE_CHECK_RECEIVER	Already merged by another execution; target-tree integration still needs exact source reconciliation
+9	hsoliwal/com.synexia	12522	DO_NOT_REMERGE_CHECK_RECEIVER	Already merged by another execution; target-tree integration still needs exact source reconciliation
+10	hsoliwal/M3jdk21	1614	HOLD	GitHub reports mergeable=false; no exposed authenticated write/merge executor in this session

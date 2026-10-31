@@ -1,0 +1,8 @@
+item	status	evidence
+recipe_dag	CANDIDATE	PR #36 exact branch
+diff_gate	PASS	master...m3/openrewrite-convergence-dag-java21-20261002 is bounded to M3 tooling/docs/workflows
+local_maven	NOT_EXECUTED	local execution image has no mvn and outbound DNS cannot resolve github.com
+ci_probe	BLOCKED_PRE_JOB	workflow run 36984186301 completed failure with 0 jobs
+ci_openrewrite	BLOCKED_PRE_JOB	workflow run 36984186332 completed failure with 0 jobs
+ci_foundation	BLOCKED_PRE_JOB	workflow run 36984186288 completed failure with 0 jobs
+repository_wide_apply	BLOCKED	requires green Java21 OpenRewrite/JUnit/JaCoCo proof first

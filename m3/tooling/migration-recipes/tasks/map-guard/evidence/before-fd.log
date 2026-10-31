@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.AssertionError: failed outer header must close its channel
+	at MapGuardTest.check(MapGuardTest.java:312)
+	at MapGuardTest.channels(MapGuardTest.java:182)
+	at MapGuardTest.main(MapGuardTest.java:62)

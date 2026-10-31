@@ -1,0 +1,4 @@
+m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java	0644
+m3/arrays/src/main/native/tests/m3_arrays_checks.c	0644
+m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsSelfTest.java	0644
+m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsTest.java	0644

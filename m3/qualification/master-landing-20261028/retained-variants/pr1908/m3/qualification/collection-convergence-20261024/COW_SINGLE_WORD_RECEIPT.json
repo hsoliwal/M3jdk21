@@ -1,0 +1,128 @@
+{
+  "schema": "M3_COW_SINGLE_WORD_RECEIVER_V1",
+  "status": "ALLOCATION_FOCUSED_DRAFT",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_revision": "8f17eb5fdf7b7abbf93c29bb2ea4fd8173381b07",
+  "canonical_pr": 13301,
+  "canonical_task": "synexia-openrewrite-recipes/recipes/m3-cow-single-word-20261025",
+  "recipe_id": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "dataset_id": "m3-cow-single-word-20261025",
+  "target_parent": "41f147996af03854ff3be1dd79429eba15214731",
+  "target_pr": 1908,
+  "executed_postimages": [
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/CopyOnWriteArrayList.java",
+      "before_sha256": "8bdcba4d3436c967f796b058edfd7aa0671d75f1e87022253ddd177122706357",
+      "after_sha256": "8a68f8a3a662fb3d5d80c41848041e81dfeeb2c659a3a26f8d3742717a8c861d",
+      "mode": "100644"
+    },
+    {
+      "path": "test/jdk/java/util/concurrent/CopyOnWriteArrayList/M3CopyOnWriteWordMaskTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "47a8bc3f85d389eedbc8fa839ed3c91cf907622bda24d5d099103ae9649b8a1f",
+      "mode": "100644"
+    }
+  ],
+  "unchanged_callers": [
+    {
+      "path": "src/java.base/share/classes/java/util/CollectionViews.java",
+      "sha256": "e09db07fb113233e52a67960411608d8b18dc0eedfc5a7f861cdaecc7c1cc1e6"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/CopyOnWriteArraySet.java",
+      "sha256": "70fd48e94142d8e30496b58e21c9de0fe76fa159ebe44e8dfef9be81f504dbeb"
+    }
+  ],
+  "runtime_owner": "java.util.concurrent.CopyOnWriteArrayList in actual java.base",
+  "behavior": "Local long rejection plan for end-firstDeletion<=64, original larger-window algorithm retained; callbacks, snapshots, lock and fresh-array publication preserved",
+  "sdk_execution": {
+    "id": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "dataset": "m3-cow-single-word-20261025",
+    "SDK_EXECUTION": "PASS",
+    "tests": 6,
+    "fixed_point": "PASS",
+    "mixed_states_both_orders": 8,
+    "drift_missing_duplicate_refusal": "PASS",
+    "exact_export_seals": "SOURCE_MANIFEST.json",
+    "log": "evidence/sdk.log"
+  },
+  "source_image": {
+    "strict_build": "PASS",
+    "jtreg_selected_passed": 30,
+    "actual_jni": "NATIVE_REQUIRED under -Xcheck:jni",
+    "api": "3 public/protected outputs and serial UIDs byte-equal",
+    "compiler_gc": "default/interpreter/C1/C2/SerialGC/defaultG1/ZGC checks pass",
+    "new_oracle_checks_each": 21091312,
+    "upstream_jsr166_test_executions": 440,
+    "native_symbols_changed": 0
+  },
+  "resources": {
+    "status": "BOUNDED_ALLOCATION_REDUCTION_WITH_MIXED_TIMING",
+    "cohorts": 168,
+    "eligible_cohorts_saving_24_bytes": 105,
+    "unchanged_control_cohorts": 63,
+    "matched_process_pairs": 3,
+    "aggregation": "Median9pooled observations percohort/variant from3independentprocesses; not9processpairs",
+    "full_matrix_reference": "synexia-openrewrite-recipes/recipes/m3-cow-single-word-20261025/evidence/image-resources-summary.json",
+    "focused_reference": "synexia-openrewrite-recipes/recipes/m3-cow-single-word-20261025/evidence/focused/summary.json",
+    "timing": "Mixed; no general CPU/latency improvement claimed; focused large-window root65all CPU1.189x/wall0.992x and root8all CPU0.996x/wall1.361x retained as counterevidence",
+    "retained_graph_deltas": [
+      {
+        "pair": 1,
+        "allocated_bytes": -98304,
+        "retained_heap_used": 160,
+        "nmt_committed_bytes": -94716,
+        "max_rss_kib": -960
+      },
+      {
+        "pair": 2,
+        "allocated_bytes": -98304,
+        "retained_heap_used": -1432488,
+        "nmt_committed_bytes": -94564,
+        "max_rss_kib": -932
+      }
+    ],
+    "memory_scope": "24bytes is measured VM layout, not portable guarantee. No retained-heap reduction claimed; process NMT/RSS is not per-owner memory. Onehost diagnostics; sustained resource gates open"
+  },
+  "review": {
+    "reviewer": "independent review_cow_single_word_pass7",
+    "status": "NO_CRITICAL_OR_IMPORTANT_FINDINGS",
+    "assessment": "Suitable for allocation-focused draft publication only; costs block performance promotion or merge readiness",
+    "verified": [
+      "original-owner callback/CME/snapshot/publication contracts",
+      "recipe scanner atomicity and exact export seals",
+      "retained SDK/jtreg/JSR166/API and source-image evidence",
+      "fresh reviewer oracle runs on baseline/candidate each21091312checks under-Xcheck:jni",
+      "name gate and narrow existing-owner exclusion",
+      "donor pattern-only rights and resource counterevidence"
+    ],
+    "limits": [
+      "finite tests do not certify complete concurrency/JMM/cross-platform/JCK/provider-family qualification",
+      "mixed timing and no retained-heap benefit claim"
+    ],
+    "files_changed": false,
+    "metadata_followup": "PASS after correcting deterministic shard order; original15pin objects preserved; full loader passes index validation and stops at missing historical M3_FILE_PROVENANCE.tsv; no fullhistorical pass",
+    "attestation": "evidence/independent-review.json",
+    "correction": "Provenance-order blocker repaired and independently rechecked before publication"
+  },
+  "rights": {
+    "owner": "Existing OpenJDK GPL-2.0-only WITH Classpath-exception-2.0; Doug Lea/JSR166 and historical copyright preserved",
+    "target_test": "GPL-2.0-only",
+    "donor": "Synexia PR13222 revision4aabb82d1ab2c3fa9da61769ac0687c5c8299265 pattern-only; no donor body installed"
+  },
+  "naming_exclusion": {
+    "status": "EXPLICIT_REVIEWED_EXCLUSION",
+    "reason": "Existing JDK owner private-method refinement; no new type, public alias, module, name migration or mapping record. Public JDK signatures and existing queue/map unchanged.",
+    "gate": "M3JDK21_NAME_RECEIVER_PASS; no naming/backend/phase promotion"
+  },
+  "remaining_gates": [
+    "GitHub CI after publication",
+    "sustained workload-specific CPU/latency qualification",
+    "full JCK/jtreg and reactor",
+    "cross-platform/JIT/GC and provider-family qualification",
+    "complete historical provenance ledger",
+    "ordered String -> arrays -> collections release admission"
+  ],
+  "receiving_phase": "String remains active; no phase promotion",
+  "boundary": "Data-only receiving evidence; recipes, fixtures, catalogue and improvement memory exclusively in Synexia; no new runtime dependency."
+}

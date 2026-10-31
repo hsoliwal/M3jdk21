@@ -1,0 +1,25 @@
+{
+  "kind": "ACTUAL_CANONICAL_SDK_EXECUTION",
+  "crate": "m3jdk-collection-current-owners-java-07-20261017",
+  "exit": 0,
+  "seconds": 6.107,
+  "command": [
+    "/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/m2",
+    "-f",
+    "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/sdk-work/synexia-openrewrite-recipes/verification/m3-build-shared-ast-20261017/pom.xml",
+    "-Dm3.crate=m3jdk-collection-current-owners-java-07-20261017",
+    "-Dm3.kind=java",
+    "-Dm3.input=/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/current-base/M3jdk21",
+    "-Dm3.output=/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/livebase-generated/m3jdk-collection-current-owners-java-07-20261017",
+    "verify"
+  ],
+  "manifestSha256": "250beda6d7703c8c8b110784db3c1a7f22cfec95696dc6ccfd03f203ce9c1d10",
+  "logSha256": "af115b6ed4e0ffa2668a2bc90968f7b6588b4104351b3adf23816412bd1e5d29",
+  "proofModified": false,
+  "engineModified": false,
+  "output": "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/livebase-generated/m3jdk-collection-current-owners-java-07-20261017"
+}

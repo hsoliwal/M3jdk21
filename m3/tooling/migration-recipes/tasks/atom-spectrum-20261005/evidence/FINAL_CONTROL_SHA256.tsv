@@ -1,0 +1,15 @@
+path	sha256
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-comment-custody/after.java.txt	cec34964f679c67e38cf946c2b1f7b6fb0dddc1f4ecadd963e7dd998e7ff68ba
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-comment-custody/before.java.txt	8384244946df1f840406aaf71438b4f0dba311dfd7eba7b421a064d63c31bf3b
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-comment-custody/manifest.tsv	51d6ff438165fd05e6702364c8f131820efd9742e687a88a949d5fa182f46322
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/after-atom.java.txt	4f6c17a035e64106f172b488fded9b565d1af48d6a8ecbd4700b3ff0cc2cd1e1
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/after-pattern.java.txt	b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/before-atom.java.txt	8384244946df1f840406aaf71438b4f0dba311dfd7eba7b421a064d63c31bf3b
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/before-pattern.java.txt	2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/manifest.tsv	1fc319641c44bfcf7428c09c10015f0e9619d09b56a8bcfbed9da310f74f0a49
+m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv	38ed8c01c6982fa4a52ea155c2e9652dfe45f317d8ae994c17fba01c7309fbda
+m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/SOURCE_PINS.tsv	93bbb83b9ac9f0ae952e39ad95649367a452c2449fec20a8c051926420a3d58e
+m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/checkstyle.xml	e8838f6b765b92ada1e24636c0ed003c2eb4869bd57e796e6368d472ad601f16
+m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/pom.xml	2c74118271736d55096f2e613753d269a3a5b41dc4d7332ba9a15593b95edbe6
+m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/verify-runtime.py	c9232197ec05646f050c62ab25c8a1f0c6f131e9150643e4239d43b0ade3c42b
+m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/verify-static.py	1f2d36d60ca7b780d8c68b21adfba679e8c9153c94d425fbcbe378f02b32c4da

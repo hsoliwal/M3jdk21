@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0 -->
+<?eclipse version="3.4"?>
+<plugin>
+  <extension point="org.eclipse.core.filesystem.filesystems">
+    <filesystem scheme="m3fs">
+      <run class="com.m3.eclipse.filesystem.M3EclipseFileSystem"/>
+    </filesystem>
+  </extension>
+</plugin>

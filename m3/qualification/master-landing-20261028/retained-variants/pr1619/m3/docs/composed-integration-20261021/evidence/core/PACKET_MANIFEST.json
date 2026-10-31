@@ -1,0 +1,788 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "status": "E1_AGGREGATE_FAILED_E2_PENDING",
+  "source_epoch": {
+    "name": "E1",
+    "target_repository": "hsoliwal/M3jdk21",
+    "target_commit": "f35342202149b98465bb4e9e6be807eb0cf3f762",
+    "target_tree": "1f86f1244e4d2c218a3dc29bc101cfbdf89339fc",
+    "target_pr": "https://github.com/hsoliwal/M3jdk21/pull/1657",
+    "target_parent": "a115db5d8d9a53c20bf6f6880286a967a80a8dda",
+    "target_changed_files": 49,
+    "canonical_repository": "hsoliwal/com.synexia",
+    "canonical_commit": "0ee3e62241cb1252f2d018a33969f64e66c2b2fe",
+    "canonical_tree": "aa4434b052ef8541275cabad86eaf298cd27532c",
+    "canonical_pr": "https://github.com/hsoliwal/com.synexia/pull/12680",
+    "binding": "E1 source-built image was built from the frozen 49-file target postimages over the named parent; publication commit names that exact source tree. Receiving patches below are separate experiments and are not part of this E1 image."
+  },
+  "counts": {
+    "tests": 28,
+    "passed": 23,
+    "failed": 4,
+    "timeout_errors": 1,
+    "actions": 158,
+    "main_actions": 63,
+    "source_inventory_rows": 84
+  },
+  "files": [
+    {
+      "path": "DIAGNOSTICS.json",
+      "sha256": "ceceff7313107f8a338a46f1f715359657467a165e616dc5570743a07062ae56",
+      "bytes": 15677
+    },
+    {
+      "path": "JTREG_ARGUMENTS.txt",
+      "sha256": "8516f91a8802bac663dbe0dc3b307289d6912896e83763b2c0943a6bccc0261c",
+      "bytes": 1575
+    },
+    {
+      "path": "JTREG_E1.json",
+      "sha256": "60102cf98af48bb649b69aab72e80370603a18b662709ac3155c179d2b7f99ee",
+      "bytes": 159268
+    },
+    {
+      "path": "JTREG_E1_SUMMARY.log",
+      "sha256": "c8808798d3a6c2cc96f63731116e2bce8eef13ef34e24a7f24464ee4fac782a1",
+      "bytes": 3073
+    },
+    {
+      "path": "M3StringNullableConcatProbe.java",
+      "sha256": "4ebc9766db609be395291e5c083d9b8e1c2fd7ed5d1c27938cd134c034076588",
+      "bytes": 4190
+    },
+    {
+      "path": "RECEIVING_PROOFS.json",
+      "sha256": "a465cce54fad10b04e22c774956a6d84e98e19fe867e0471d19e20bea3bfb3c3",
+      "bytes": 54379
+    },
+    {
+      "path": "SANITIZATION.json",
+      "sha256": "5b11aba3372939423f7fede5edb249af59a63651c3ae8b0a418a449a0881e80e",
+      "bytes": 1723
+    },
+    {
+      "path": "SCOPE.md",
+      "sha256": "e0873615d35cc9ffba9147da4770fd4c88e21d89cb2faa786f03dabdd570fdd5",
+      "bytes": 4887
+    },
+    {
+      "path": "SOURCE_BUILD.json",
+      "sha256": "89b47918754e22db0f8a9882387e68c389ad8c0e7deebcfb55ecf4cf164c2c8c",
+      "bytes": 10312
+    },
+    {
+      "path": "SOURCE_HASHES.tsv",
+      "sha256": "8a59f4e3ed4e2ee845834bc7d5c756efe9d60711e06d5e347114070362987e66",
+      "bytes": 17229
+    },
+    {
+      "path": "build/images-direct.log",
+      "sha256": "e951fce51edaa6051b70a005256de11b90b0ef203b4decdef11a5abec712d6bd",
+      "bytes": 12738
+    },
+    {
+      "path": "build/images-final.log",
+      "sha256": "ae5939461b9f2288afb14d925efe93cb6e33999be611e3a0214cb5752a452ed8",
+      "bytes": 595
+    }
+  ],
+  "raw_inputs": [
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/algorithm-catalog/abseil-convergence-20261021.tsv",
+      "sha256": "92e92f83463cde1341d30f7dcf8c2d454e0e3495323e540196f62ef6f5eb4736",
+      "bytes": 19944
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/algorithm-catalog/eclipse-structures-20261021.tsv",
+      "sha256": "aff8cbc734d5723f825c9fb4af172283f8942fe8c0cab5a693be30efd4dc8f30",
+      "bytes": 6107
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "sha256": "c8e9361f50f503ee0fb45c322cbd2e1f1701b84dd57f3948c210178b29bebfb4",
+      "bytes": 32116
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/com/m3/collections/M3FilteredDeques.java",
+      "sha256": "b6aec5a921f9eaba6feb14461bf6dca7e67cee26bb84fee3ee3143f873df5121",
+      "bytes": 14945
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "sha256": "d2c8962a596c81103f543b3b4b5cd2b55233d44d00238527711b0f38c363acc5",
+      "bytes": 32314
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java",
+      "sha256": "86e277ee069f3f077e44f5cd93b7f75cf07d357c613250d96a8e1e494969572c",
+      "bytes": 15942
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "sha256": "cb1c0ab9eccd76078ec2e4b8e30dc9fb1bde945979326c3a2466392b33d66257",
+      "bytes": 14467
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java",
+      "sha256": "d6b88f4579c798b8715dbe7da1a41d33e0bd1329a2d518b23a20981f70b344a5",
+      "bytes": 25756
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/java/com/m3/collections/M3SignalOrder.java",
+      "sha256": "3b117a531afd39f071fda04796684084812371982295a508270e58bfb70a2430",
+      "bytes": 9084
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "sha256": "fedca631c2f0f0f73a27dde5e87395e95ac00fde07fc1d7006735c2ef18a579a",
+      "bytes": 17258
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/main/native/collections/m3_signal_order_jni.c",
+      "sha256": "8dc63771408057e56610719e6d562454bece9769a5727c7614c104e659dc8a22",
+      "bytes": 3295
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementContract.java",
+      "sha256": "661279db0cf532a67a0bf8ee5483cd91f79b49936add8e96fde08b1130f55174",
+      "bytes": 10685
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementTest.java",
+      "sha256": "9f932bdf49aff3acf020bf36a2f5cead295a7ff6fb87fe55c9fde3c3a656cf93",
+      "bytes": 637
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionContract.java",
+      "sha256": "558bcb65249fba80faa5ddb00d138566132c13acfd3c6e67763c78fa1acd5fd8",
+      "bytes": 13570
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3FilteredCursorExceptionTest.java",
+      "sha256": "5ff4d5d15263310027c66eac8d595c62161fdc20623b42b4f5265a77dab4cedb",
+      "bytes": 333
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3FilteredDequeContract.java",
+      "sha256": "83115c8518a132029ea7b4f6818df74c9f628909a6dd8328c9aaf7a85cd2c7ea",
+      "bytes": 12720
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3PackedSelectionAllocationProbe.java",
+      "sha256": "bbb4abeb2f9dbc512d6236173b68e8404ac5b11729640e1747aac6f002b933a7",
+      "bytes": 1558
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformBench.java",
+      "sha256": "8b026711262170986520d92fe782913d6a138f66bb9c795b6de748b11aa3dbe4",
+      "bytes": 3279
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformContract.java",
+      "sha256": "dd85a7c4b19364cc9b91ecf581abb33bf613435aec0873319f7082649dbdfbac",
+      "bytes": 8115
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/java/com/m3/collections/M3SignalRadixUniformTest.java",
+      "sha256": "482d0d75e1b926b2da7013f8f572b9559738f18e8831ab0b398dcb06825071d8",
+      "bytes": 311
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/collections/src/test/native/m3_mask_compactor_empty_regions.c",
+      "sha256": "48631b556931bd113464bfabca7876615261f2a4bbb17b54be6fa2fa801e96c7",
+      "bytes": 6428
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/docs/abseil-convergence-20261021/DONOR_SOURCES.json",
+      "sha256": "adbabc8aca5913c9bb1b9cc67a01786f2186aaedaf35e877b54cbd47d510528f",
+      "bytes": 2289
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/docs/abseil-convergence-20261021/FILE_PASSES.tsv",
+      "sha256": "a9d157c33f80ed12b2d2118f70235fa4e34d101aa917e760cdf700bb6b024bee",
+      "bytes": 4890
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/docs/abseil-convergence-20261021/PLAN.md",
+      "sha256": "766860e2b071be0de19910f9696d2afa8c11030b0e32e4fd3bf96588cda4ff68",
+      "bytes": 1804
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/docs/abseil-convergence-20261021/README.md",
+      "sha256": "ec305c19c9ae9dc2b375c19eda8df781994037b9a6eb20f2073a0d59b679901b",
+      "bytes": 4941
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/docs/abseil-convergence-20261021/SOURCE_RECEIPT.json",
+      "sha256": "ce3b0dcdb4b452f744a5dc7b37eacb98c5b47b31e3fa9716f73d1c4689b36fac",
+      "bytes": 32818
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/docs/name-mapping.d/eclipse-collections-20261021.json",
+      "sha256": "2201aae2f7a422829c62bbbe3f6fd4bd1545c60611a5806b2faee9cd1b0f5224",
+      "bytes": 2642
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/docs/name-mapping.json",
+      "sha256": "6e017ad8c780434a8681a6fb506d72975d064859b205164973f60ec9c20d8ad6",
+      "bytes": 456929
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/runtime-integration/string-comparison-cursor-20261021/README.md",
+      "sha256": "ec843d4e9811b66c03349554a439c62f5d0e9e83f9dca688fc94f2e595abded4",
+      "bytes": 6329
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/m3/runtime-integration/string-native-ownership-20261021/README.md",
+      "sha256": "4b92321708185b95fa86493c818dee5c6c877040328bdaf4868820eebc5cc6f3",
+      "bytes": 7222
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/src/java.base/share/classes/java/lang/M3String.java",
+      "sha256": "36d994c458aeb959beec4581d1b8df52bdbed90b84028cfe106522f3b6cc54ea",
+      "bytes": 57793
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/src/java.base/share/classes/java/lang/M3StringAtom.java",
+      "sha256": "a1226c8ac637fc22b3eba2d95ee65524d12d5f3875cba35cf3c849dcb18c310a",
+      "bytes": 21366
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/src/java.base/share/classes/java/lang/M3StringImmediate.java",
+      "sha256": "0bf8cf838c1c4d6cdb7c78c319d125cd1fe09ddb5bf9fe37ca31bc1e6d39bf21",
+      "bytes": 11688
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/src/java.base/share/classes/java/lang/M3StringPool.java",
+      "sha256": "d220d44887baf1054fece7d75e7e10b2ea8b787ea32e3280a06bd43f4758b675",
+      "bytes": 76810
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/src/java.base/share/classes/java/lang/M3StringPrecomputeBridge.java",
+      "sha256": "112699ac1f136f295efda67d54a1a7bc96db0f639ea3855c3925a5ca890952bf",
+      "bytes": 8775
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/src/java.base/share/classes/java/lang/String.java",
+      "sha256": "029586cb367a7f3c79edd4039ec05a2a668bb79a84f7db3b7de76a61039d73ef",
+      "bytes": 227892
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/src/java.base/share/classes/java/util/CollectionViews.java",
+      "sha256": "d7f484dd010d8d57383da419a1d6291283efc9aece94e8451c6755049683a48f",
+      "bytes": 36681
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/src/java.base/share/classes/java/util/Collections.java",
+      "sha256": "9ff54af7397feb3f5619ec0f803619c698b403150827a6417bd4dbee7139b1ef",
+      "bytes": 241906
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/src/java.base/share/classes/java/util/IdentityHashMap.java",
+      "sha256": "9abd2b9914c474ad1c9702a541dec0f1a1e2d3b02cfe34934177fd8b4a721400",
+      "bytes": 66686
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/test/jdk/java/lang/String/M3StringCodePointBoundsTest.java",
+      "sha256": "4c6936ded44cae6f209e9c93660f334fb2d3f44f3822ff03a9806dbfe1f55c4e",
+      "bytes": 7359
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/test/jdk/java/lang/String/M3StringCompositeComparisonTest.java",
+      "sha256": "35da6dbc7cb4e355b787f1b556aecafcfabc8326cea0adb868f865190143c97f",
+      "bytes": 12707
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/test/jdk/java/lang/String/M3StringCompositePrefixCursorTest.java",
+      "sha256": "df5be156775200b0883dbfa390ee61eb281724863ea95563948aefb51ce232c6",
+      "bytes": 7886
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/test/jdk/java/lang/String/M3StringCriticalBulkTest.java",
+      "sha256": "97c1372bb36098af26777651c7048207ec1216070aea5ca2128b608baddf382b",
+      "bytes": 13866
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/test/jdk/java/lang/String/M3StringNativePublicationFailureTest.java",
+      "sha256": "264666f587d4b5cd99a0d17da66f7833df40b49e4f52aafb4112fcbfc4b16ed1",
+      "bytes": 10184
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/test/jdk/java/lang/String/M3StringPathCursorTest.java",
+      "sha256": "8989a34dd9295a11f9af8c14f4c47062bb1f5cd1573ec0a86c6cce82714420bc",
+      "bytes": 24177
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/test/jdk/java/lang/String/M3StringRegexNativeBridgeTest.c",
+      "sha256": "3549fc5d0ab78d3af0355a65597a367adedf208529b8eb9824c741550537eef8",
+      "bytes": 2368
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/test/jdk/java/lang/String/M3StringTuplePublicationFailureTest.java",
+      "sha256": "36c36637b50dd14c45666125bd2b371ed9ac6cd56649a9aa4a616e46b36045f8",
+      "bytes": 9686
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/test/jdk/java/util/CollectionViews/CollectionViewsIdentityContract.java",
+      "sha256": "e332147bc9f559f63fa4d5f0909c58e5416f3a20e4992da8ab13d6fba100fd7f",
+      "bytes": 28758
+    },
+    {
+      "path": "work/candidates/composed21/qualified-post/test/jdk/java/util/CollectionViews/CollectionViewsRefinement.java",
+      "sha256": "16b8cbd6f1fe1287435284e3680a6c2b603f3fdabb17806cc61ea409d03425a7",
+      "bytes": 7770
+    },
+    {
+      "path": "work/candidates/installed-diagnostics/poolbounds/M3StringPoolBoundsTest.java",
+      "sha256": "43f4f669e5fe1efc11f785f530501cf6381e9d5f0fa797db8455110463dde7b2",
+      "bytes": 24047
+    },
+    {
+      "path": "work/candidates/native-budget-fixture/manifest.json",
+      "sha256": "f49ece7a06f58accaa0946df9bb49b763415b4e5c826ea7937caa908e7a2da59",
+      "bytes": 251
+    },
+    {
+      "path": "work/candidates/pool-fixtures/post/test/jdk/java/lang/String/M3StringPoolBoundsTest.java",
+      "sha256": "6f88de32daf828a3b3705d6527eafcb121946a7d6d592873f7ef50b711fb18b9",
+      "bytes": 24192
+    },
+    {
+      "path": "work/candidates/string/CHARARRAY_FIXTURE_LINEAGE.md",
+      "sha256": "c5daf60a4f3aa9c2fd5e64fba7f2300b206ddba8cf12093c1dd7f2b550273c21",
+      "bytes": 2041
+    },
+    {
+      "path": "work/candidates/string/concat-gate-pins.json",
+      "sha256": "48b9fa74c23ae0244ac01979eaa9ccdeb7210ba1d8270c45b3fd4a1294f96e76",
+      "bytes": 251
+    },
+    {
+      "path": "work/candidates/string/concat-gate-proof/baseline.log",
+      "sha256": "08fc84d4e5c9ac22466e4d8c20111cc16b2c701b71717a4b449aaa09f2ade1d5",
+      "bytes": 68
+    },
+    {
+      "path": "work/candidates/string/concat-gate-proof/candidate.log",
+      "sha256": "3ba4380bca0c24aef2002ead0c359fc8d5858b927e6d7b3f99490399f0f393fd",
+      "bytes": 128
+    },
+    {
+      "path": "work/candidates/string/concat-gate-proof/evidence.json",
+      "sha256": "7d706126105c585d56ae24239a9331d976089b48b7a06757bc9508b7d4220063",
+      "bytes": 2481
+    },
+    {
+      "path": "work/candidates/string/concat-gate-proof/mutant-helper-argument.log",
+      "sha256": "bc1b1a55acd9d1088e370a379583cb31527c47f221fc7a13ef68273d6f33c99e",
+      "bytes": 95
+    },
+    {
+      "path": "work/candidates/string/concat-gate-proof/mutant-primitive-gateway.log",
+      "sha256": "2cd561848c3e443435a6324af321f4cb0987eec9a8c7cc71b7b1b5ea05b56d6d",
+      "bytes": 71
+    },
+    {
+      "path": "work/candidates/string/concat-manifest-pins.json",
+      "sha256": "64f343a4ec6559c31de73b7077d648e36daeea694ba57291515d1814e4a9aea9",
+      "bytes": 367
+    },
+    {
+      "path": "work/candidates/string/concat-manifest-proof.json",
+      "sha256": "8a2e01844643e26dddc08a9f0b39d76860f31b2b2def03e773aa23638f280969",
+      "bytes": 290
+    },
+    {
+      "path": "work/candidates/string/concat-proof/fixtures/M3StringNullableConcatProbe.java",
+      "sha256": "4ebc9766db609be395291e5c083d9b8e1c2fd7ed5d1c27938cd134c034076588",
+      "bytes": 4190
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/baseline-dag-compact.log",
+      "sha256": "9fb077a4cde126f1acdde0b383813a62551f48b421119c833595f7bc5f90955c",
+      "bytes": 240
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/baseline-dag-utf16.log",
+      "sha256": "9fb077a4cde126f1acdde0b383813a62551f48b421119c833595f7bc5f90955c",
+      "bytes": 240
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/baseline-nullable-admitted-compact.log",
+      "sha256": "9de6262f402e25f0e0c9eeb0638baf83560c8913960fe4c2dc33f8536aa41eb0",
+      "bytes": 360
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/baseline-nullable-admitted-utf16.log",
+      "sha256": "9de6262f402e25f0e0c9eeb0638baf83560c8913960fe4c2dc33f8536aa41eb0",
+      "bytes": 360
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/baseline-nullable-disabled-compact.log",
+      "sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+      "bytes": 47
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/baseline-nullable-disabled-utf16.log",
+      "sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+      "bytes": 47
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/baseline-nullable-refused-compact.log",
+      "sha256": "43585d01a09ce25e835693fb14dd64aae53d806f8c6a9044eb68002475b1f85a",
+      "bytes": 505
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/baseline-nullable-refused-utf16.log",
+      "sha256": "43585d01a09ce25e835693fb14dd64aae53d806f8c6a9044eb68002475b1f85a",
+      "bytes": 505
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/candidate-dag-compact.log",
+      "sha256": "e452b0f644518ec88fe769c00247c7bf1b087b3fb23ff2ec44d74588eda10df6",
+      "bytes": 56
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/candidate-dag-utf16.log",
+      "sha256": "e452b0f644518ec88fe769c00247c7bf1b087b3fb23ff2ec44d74588eda10df6",
+      "bytes": 56
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/candidate-nullable-admitted-compact.log",
+      "sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+      "bytes": 47
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/candidate-nullable-admitted-utf16.log",
+      "sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+      "bytes": 47
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/candidate-nullable-disabled-compact.log",
+      "sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+      "bytes": 47
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/candidate-nullable-disabled-utf16.log",
+      "sha256": "31d985cd6e89653a6d1ce571e9ec6fbd92deaadd4fbc1f2656dcdda45e660489",
+      "bytes": 47
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/candidate-nullable-refused-compact.log",
+      "sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+      "bytes": 47
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/candidate-nullable-refused-utf16.log",
+      "sha256": "c3f85aa701efd90f09df91f1ead4da5d25c74ef0b2cd573285a1d16c7d38d845",
+      "bytes": 47
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/compile-candidate-factory.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/compile-candidate-tests.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "work/candidates/string/concat-proof/out/evidence.json",
+      "sha256": "30d03003cdb723c61f3b8aece5b45134c97d59fabfc9b545d5ec3507f7231928",
+      "bytes": 18270
+    },
+    {
+      "path": "work/candidates/tuple-coordinate/fixture-proof/baseline-compact.log",
+      "sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+      "bytes": 49
+    },
+    {
+      "path": "work/candidates/tuple-coordinate/fixture-proof/baseline-utf16.log",
+      "sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+      "bytes": 49
+    },
+    {
+      "path": "work/candidates/tuple-coordinate/fixture-proof/candidate-compact.log",
+      "sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+      "bytes": 49
+    },
+    {
+      "path": "work/candidates/tuple-coordinate/fixture-proof/candidate-utf16.log",
+      "sha256": "f1d1c418f94262d178928568a3a4fdea73016962894ddd9c64278c2c2af73879",
+      "bytes": 49
+    },
+    {
+      "path": "work/candidates/tuple-coordinate/fixture-proof/compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "work/candidates/tuple-coordinate/fixture-proof/evidence.json",
+      "sha256": "14fbbc601fa45214e35ac3cdfe08382d12c51b55e8040aa918f1dbf6694ba89f",
+      "bytes": 4507
+    },
+    {
+      "path": "work/candidates/tuple-coordinate/fixture-source-pins.json",
+      "sha256": "c644e646feff3349eeb2863d84d373293b081d77437904dd072cb8ae367844e7",
+      "bytes": 231
+    },
+    {
+      "path": "work/candidates/tuple-coordinate/manifest.json",
+      "sha256": "418ed8f6caa38dcfd3fb9157379a03563eb2eae78f03634eedd66221e2eb334b",
+      "bytes": 245
+    },
+    {
+      "path": "work/evidence/concat-overflow-thread-dump.log",
+      "sha256": "cfc76b5a3bcb4934643e067cf71492969cecb9629d2b89591bbfda362d293997",
+      "bytes": 7411
+    },
+    {
+      "path": "work/evidence/configure-direct.log",
+      "sha256": "5db9214475de2b0b0ee4fdf98c4f23c6e777b4b8d8ef7907c97932e5876d6a0c",
+      "bytes": 20746
+    },
+    {
+      "path": "work/evidence/guards/baseline-string-phase.log",
+      "sha256": "67f59b55303523b98f130f76cd3dd293241923da0a512ab5c8f5fdac6800d194",
+      "bytes": 789
+    },
+    {
+      "path": "work/evidence/guards/baseline/m3/synexia-import/current-full-borrow/check_string_phase.py",
+      "sha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3",
+      "bytes": 24427
+    },
+    {
+      "path": "work/evidence/images-direct.log",
+      "sha256": "e951fce51edaa6051b70a005256de11b90b0ef203b4decdef11a5abec712d6bd",
+      "bytes": 12738
+    },
+    {
+      "path": "work/evidence/images-final.log",
+      "sha256": "ae5939461b9f2288afb14d925efe93cb6e33999be611e3a0214cb5752a452ed8",
+      "bytes": 595
+    },
+    {
+      "path": "work/evidence/images-permitted.log",
+      "sha256": "33a8c9e80e5bc5b39571f6e937c1bae94bedbc168e50bc7c5d0f5fe1e417a5a6",
+      "bytes": 11783
+    },
+    {
+      "path": "work/evidence/images-views.log",
+      "sha256": "55009f89a73c7d438678b55e511e28ae32f4ef0348294588113107bb05cedaee",
+      "bytes": 7721
+    },
+    {
+      "path": "work/evidence/images.log",
+      "sha256": "fd98cbca2f8c7369bc2f5a3c62be0f88e2658ffa438e222a8da548ae44299445",
+      "bytes": 5920
+    },
+    {
+      "path": "work/evidence/jtreg-integrated.log",
+      "sha256": "ff764ed09809dde610c9d25f86f3ba309c7572c2b648e0a6b3220824fd3b7b20",
+      "bytes": 2155
+    },
+    {
+      "path": "work/evidence/jtreg-report/text/cmdArgs.txt",
+      "sha256": "f5bac5305cdc29aeaddd61054e58ec1b6e092b8bfc65ee17cfb0c5a18fda1b34",
+      "bytes": 1700
+    },
+    {
+      "path": "work/evidence/jtreg-report/text/stats.txt",
+      "sha256": "bee3f30b43b8f573699f1dad6072069891e2746266e81e169eeb7fa8007c5234",
+      "bytes": 46
+    },
+    {
+      "path": "work/evidence/jtreg-report/text/summary.txt",
+      "sha256": "df586ac7dd6a40007acfb680784c8e8207aec2e3005fd5712a23f945b50dcdba",
+      "bytes": 3108
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/io/StringReader/M3NativeStringIoTest.jtr",
+      "sha256": "43f8baf9a8e951fe8e09666cabfb59e36ec819d9b61e98a98f95dab49a49cb26",
+      "bytes": 23237
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringCanonicalDagTest.jtr",
+      "sha256": "422161f5e2b16c42c362964663024fe7ce4cd2eb0705ea5f9031f4b7ab1c7cea",
+      "bytes": 9287
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringCharArrayCompositionTest.jtr",
+      "sha256": "2bec610fd119381a4227bb9ead4c00d30cb66277546e861fddb3e2ce67ae9a8f",
+      "bytes": 10574
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringCodePointBoundsTest.jtr",
+      "sha256": "4e72d576397c726220f9999a062e31be07bf0dce0165db29fac1c9e5f11eaa19",
+      "bytes": 23113
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringCompositeComparisonTest.jtr",
+      "sha256": "8399268d826006881430db10a0ce1ed1bedaefd4386fe894e8139d741c6f6174",
+      "bytes": 17419
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringCompositePrefixCursorTest.jtr",
+      "sha256": "026b273ba3389bc09bc2c07b6896272382f6eede8e6fbbef04db895ee74f6bc6",
+      "bytes": 13544
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringConcatLengthOverflowTest.jtr",
+      "sha256": "bf8614713604210d9750843d65f229b07a928d9dfbd5098d4130577dc43cbdb6",
+      "bytes": 17669
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringConcatReferenceDagTest.jtr",
+      "sha256": "49f00beb59d36d862fe24c3a326a95cad19812c7c92e96792df376680229d60f",
+      "bytes": 10319
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringCriticalBulkTest.jtr",
+      "sha256": "5f3bc3ecdddd78629646557188ffd679ddb0977fc24c5c4132e203d717068a17",
+      "bytes": 27583
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringJniShadowLifetimeTest.jtr",
+      "sha256": "3e4c64d4d38e977112be5e56b084be06028b74669896b80b10b6577a541653b7",
+      "bytes": 13410
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringLeafCursorCanonicalTest.jtr",
+      "sha256": "267af2127772859dac99aba19b1aa998b0fc61d725e65ed3009ecc341c899666",
+      "bytes": 9531
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringModifiedUtf8DpTest.jtr",
+      "sha256": "59ddf388376fd57575d4790ea2dc1a05d93a9ebe7f3f2583debc186889b14762",
+      "bytes": 9522
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringNativePublicationFailureTest.jtr",
+      "sha256": "d790b2d05cbf0b0fece51c8089a9a81f6c65c6b50dbc27e1743d6770a8e26cb2",
+      "bytes": 14200
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringOwnerRangeLifetimeTest.jtr",
+      "sha256": "f395e90ff85428265e7c10f2a96fd28112bc0e211ea2852c1e2b2087e5606898",
+      "bytes": 39966
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringPathCursorTest.jtr",
+      "sha256": "5bb8cecc9ca4b7bbbf6dc2e08dba3b835a35c9d193776f5865da45ce119ae048",
+      "bytes": 15128
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringPoolBoundsTest.jtr",
+      "sha256": "11e63fc5601dbdcf983de59c072a3f2f5aba9531a2981cb9a0683a327b99f656",
+      "bytes": 15960
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringPoolMetadataBoundsTest.jtr",
+      "sha256": "da77e1c383c46855d288d0208a3e2213070430903b80b3f0274d733413d2480c",
+      "bytes": 11229
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringRegexNativeBridgeTest.jtr",
+      "sha256": "9e6104ce755a7e14841bfe8cf35c960b5293500b009e724b4f16572bc6c9907a",
+      "bytes": 16437
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringTuplePublicationFailureTest.jtr",
+      "sha256": "2e5e0bbe8c737c329eb065a4027830a98fc9b48068ced06bcb8e9da5c4d664f0",
+      "bytes": 22864
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/lang/String/M3StringUtf16DifferentialTest.jtr",
+      "sha256": "5799b2921e94bf0658e87c844026d17cf77a81fd27714d17085a7c8ecf770e25",
+      "bytes": 17335
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/util/CollectionViews/BootstrapViewsTest.jtr",
+      "sha256": "4c6438dea0a0225b1a408b1bac9d877568dccf418c2930660e578520721fce2f",
+      "bytes": 9644
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/util/CollectionViews/CollectionViewsCoreContract.jtr",
+      "sha256": "5eba9322875778e849bae2419f9b9d4550432024949c4ca195582a2d3fdde7eb",
+      "bytes": 9993
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/util/CollectionViews/CollectionViewsCowBulkTest.jtr",
+      "sha256": "32d05fe0b576c371b4c85ec10497b74da1f45a468c09487bf34d8b8fec4a9982",
+      "bytes": 9847
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/util/CollectionViews/CollectionViewsIdentityContract.jtr",
+      "sha256": "394601cf4c11d3d268b75ead4887b6101d81e667c43854d49b3d758d8aa9731f",
+      "bytes": 10008
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/util/CollectionViews/CollectionViewsIdentityTest.jtr",
+      "sha256": "a9fecec7c484060c9d8f32c597651305647e916e565743186ddb81aa76d439e9",
+      "bytes": 9878
+    },
+    {
+      "path": "work/evidence/jtreg-work/java/util/CollectionViews/CollectionViewsRefinement.jtr",
+      "sha256": "c51da27a8908a0580af55dc6b3e47bc20dcee9bbffdfe833ea3468d401d8291f",
+      "bytes": 13300
+    },
+    {
+      "path": "work/evidence/jtreg-work/jdk/internal/m3/M3IndexMaskWindowIntegrationTest.jtr",
+      "sha256": "71e05da760a337b59c914fb9c0ddce0909275ea94f213770b98599e7cc510b47",
+      "bytes": 18511
+    },
+    {
+      "path": "work/evidence/jtreg-work/jdk/internal/m3/M3IndexMaskWindowJniTest.jtr",
+      "sha256": "323c51f99caba33494060648f7227bb99bf6ee5baba9ee218a9bed278d32c9a9",
+      "bytes": 20797
+    },
+    {
+      "path": "work/evidence/native-budget-fixture-default.log",
+      "sha256": "c47025af21e3c08c6bcb21143071be54b956b1a6e2dad8a14a51767c7dca09b8",
+      "bytes": 43
+    },
+    {
+      "path": "work/evidence/native-budget-fixture-disabled.log",
+      "sha256": "c47025af21e3c08c6bcb21143071be54b956b1a6e2dad8a14a51767c7dca09b8",
+      "bytes": 43
+    },
+    {
+      "path": "work/evidence/native-budget-fixture-noncompact.log",
+      "sha256": "c47025af21e3c08c6bcb21143071be54b956b1a6e2dad8a14a51767c7dca09b8",
+      "bytes": 43
+    },
+    {
+      "path": "work/evidence/poolbounds-diagnostic.log",
+      "sha256": "ba14e709a96003560a5393cd062d19783500e5c2cfbec5a1948ab121a7264786",
+      "bytes": 374
+    },
+    {
+      "path": "work/evidence/poolbounds-fixture-candidate.log",
+      "sha256": "dcddbff4f8b32d67212896b4ade039b9bdfb9d45841559ebecb511b0ed817f53",
+      "bytes": 363
+    },
+    {
+      "path": "work/evidence/receiving-concat-source-gate.log",
+      "sha256": "3ba4380bca0c24aef2002ead0c359fc8d5858b927e6d7b3f99490399f0f393fd",
+      "bytes": 128
+    },
+    {
+      "path": "work/evidence<USER_HOME>-receiving-executions.json",
+      "sha256": "41db40c5fe4ad032b523e20e6ee494b7f4c2a2520f25420c46b9d5927064fc8c",
+      "bytes": 4220
+    },
+    {
+      "path": "work/evidence/target-implementation-e1-manifest.json",
+      "sha256": "4ead92e33c91ba4894623f196f78af42c26779014bbc40870fc953ca6f060d9e",
+      "bytes": 14177
+    },
+    {
+      "path": "work/evidence/tuple-coordinate-overflow-candidate.log",
+      "sha256": "60313c3da01903d89bb94afc9b832da81bc7a311cd8939c2e9049800da948371",
+      "bytes": 49
+    }
+  ],
+  "self_hash": "Manifest does not hash itself; its exact hash is supplied in handoff."
+}

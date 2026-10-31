@@ -1,0 +1,529 @@
+["/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java", "-Xmx512m", "-XX:ActiveProcessorCount=2", "-Duser.home=/workspace/scratch/206049dfb270/maven-work/probes-001/baseline/user", "-Dmaven.home=/workspace/scratch/206049dfb270/maven-work/probes-001/baseline/maven-home", "-cp", "/workspace/scratch/206049dfb270/maven-work/baseline-classes:/workspace/scratch/206049dfb270/maven-work/probe-classes:/workspace/scratch/206049dfb270/maven-work/fork/impl/maven-impl/target/maven-impl-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-core/target/maven-api-core-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-plugin/target/maven-api-plugin-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-spi/target/maven-api-spi-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-metadata/target/maven-api-metadata-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-xml/target/maven-api-xml-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-toolchain/target/maven-api-toolchain-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-di/target/maven-api-di-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-annotations/target/maven-api-annotations-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-model/target/maven-api-model-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/maven-work/fork/api/maven-api-settings/target/maven-api-settings-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/maven-work/fork/impl/maven-di/target/maven-di-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/maven-work/fork/impl/maven-support/target/maven-support-4.1.0-SNAPSHOT.jar:/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-api/2.0.24/maven-resolver-api-2.0.24.jar:/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-spi/2.0.24/maven-resolver-spi-2.0.24.jar:/tmp/m3-build-m2/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-util/2.0.24/maven-resolver-util-2.0.24.jar:/workspace/scratch/206049dfb270/maven-work/fork/impl/maven-xml/target/maven-xml-4.1.0-SNAPSHOT.jar:/tmp/m3-build-m2/com/fasterxml/woodstox/woodstox-core/7.3.0/woodstox-core-7.3.0.jar:/tmp/m3-build-m2/org/codehaus/woodstox/stax2-api/4.3.2/stax2-api-4.3.2.jar:/tmp/m3-build-m2/org/slf4j/slf4j-api/2.0.20/slf4j-api-2.0.20.jar:/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-impl/2.0.24/maven-resolver-impl-2.0.24.jar:/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-named-locks/2.0.24/maven-resolver-named-locks-2.0.24.jar:/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-connector-basic/2.0.24/maven-resolver-connector-basic-2.0.24.jar:/tmp/m3-build-m2/org/codehaus/plexus/plexus-sec-dispatcher/4.2.0/plexus-sec-dispatcher-4.2.0.jar:/tmp/m3-build-m2/org/junit/jupiter/junit-jupiter-api/6.1.3/junit-jupiter-api-6.1.3.jar:/tmp/m3-build-m2/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/tmp/m3-build-m2/org/junit/platform/junit-platform-commons/6.1.3/junit-platform-commons-6.1.3.jar:/tmp/m3-build-m2/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/tmp/m3-build-m2/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/tmp/m3-build-m2/org/junit/jupiter/junit-jupiter-params/6.1.3/junit-jupiter-params-6.1.3.jar:/workspace/scratch/206049dfb270/maven-work/fork/impl/maven-logging/target/maven-logging-4.1.0-SNAPSHOT.jar:/workspace/scratch/206049dfb270/maven-work/fork/impl/maven-jline/target/maven-jline-4.1.0-SNAPSHOT.jar:/tmp/m3-build-m2/org/jline/jline-reader/4.4.8/jline-reader-4.4.8.jar:/tmp/m3-build-m2/org/jline/jline-style/4.4.8/jline-style-4.4.8.jar:/tmp/m3-build-m2/org/jline/jline-builtins/4.4.8/jline-builtins-4.4.8.jar:/tmp/m3-build-m2/org/jline/jline-console/4.4.8/jline-console-4.4.8.jar:/tmp/m3-build-m2/org/jline/jline-shell/4.4.8/jline-shell-4.4.8.jar:/tmp/m3-build-m2/org/jline/jline-console-ui/4.4.8/jline-console-ui-4.4.8.jar:/tmp/m3-build-m2/org/jline/jline-terminal/4.4.8/jline-terminal-4.4.8.jar:/tmp/m3-build-m2/org/jline/jline-native/4.4.8/jline-native-4.4.8.jar:/tmp/m3-build-m2/org/jline/jline-terminal-jni/4.4.8/jline-terminal-jni-4.4.8.jar:/tmp/m3-build-m2/org/jline/jansi-core/4.4.8/jansi-core-4.4.8.jar:/tmp/m3-build-m2/org/mockito/mockito-core/5.24.0/mockito-core-5.24.0.jar:/tmp/m3-build-m2/net/bytebuddy/byte-buddy/1.18.14/byte-buddy-1.18.14.jar:/tmp/m3-build-m2/net/bytebuddy/byte-buddy-agent/1.17.7/byte-buddy-agent-1.17.7.jar:/tmp/m3-build-m2/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/tmp/m3-build-m2/org/mockito/mockito-junit-jupiter/5.24.0/mockito-junit-jupiter-5.24.0.jar:/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-transport-file/2.0.24/maven-resolver-transport-file-2.0.24.jar:/tmp/m3-build-m2/org/apache/maven/resolver/maven-resolver-transport-apache/2.0.24/maven-resolver-transport-apache-2.0.24.jar:/tmp/m3-build-m2/org/apache/httpcomponents/httpclient/4.5.14/httpclient-4.5.14.jar:/tmp/m3-build-m2/org/apache/httpcomponents/httpcore/4.4.16/httpcore-4.4.16.jar:/tmp/m3-build-m2/commons-codec/commons-codec/1.22.1/commons-codec-1.22.1.jar:/tmp/m3-build-m2/org/slf4j/jcl-over-slf4j/2.0.19/jcl-over-slf4j-2.0.19.jar:/tmp/m3-build-m2/com/google/jimfs/jimfs/1.3.2/jimfs-1.3.2.jar:/tmp/m3-build-m2/com/google/guava/guava/33.7.2-jre/guava-33.7.2-jre.jar:/tmp/m3-build-m2/com/google/guava/failureaccess/1.0.3/failureaccess-1.0.3.jar:/tmp/m3-build-m2/org/openjdk/jmh/jmh-core/1.37/jmh-core-1.37.jar:/tmp/m3-build-m2/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar:/tmp/m3-build-m2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar:/tmp/m3-build-m2/org/openjdk/jmh/jmh-generator-annprocess/1.37/jmh-generator-annprocess-1.37.jar:/tmp/m3-build-m2/org/xmlunit/xmlunit-core/2.14.0/xmlunit-core-2.14.0.jar:/tmp/m3-build-m2/org/apache/maven/maven-model-builder/3.9.11/maven-model-builder-3.9.11.jar:/tmp/m3-build-m2/org/codehaus/plexus/plexus-interpolation/1.28/plexus-interpolation-1.28.jar:/tmp/m3-build-m2/javax/inject/javax.inject/1/javax.inject-1.jar:/tmp/m3-build-m2/org/apache/maven/maven-model/3.9.11/maven-model-3.9.11.jar:/tmp/m3-build-m2/org/codehaus/plexus/plexus-utils/3.6.0/plexus-utils-3.6.0.jar:/tmp/m3-build-m2/org/apache/maven/maven-artifact/3.9.11/maven-artifact-3.9.11.jar:/tmp/m3-build-m2/org/apache/maven/maven-builder-support/3.9.11/maven-builder-support-3.9.11.jar:/tmp/m3-build-m2/org/eclipse/sisu/org.eclipse.sisu.inject/0.9.0.M4/org.eclipse.sisu.inject-0.9.0.M4.jar:/tmp/m3-build-m2/org/ow2/asm/asm/9.8/asm-9.8.jar:/tmp/m3-build-m2/org/eclipse/jdt/org.eclipse.jdt.core/3.40.0/org.eclipse.jdt.core-3.40.0.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.resources/3.22.0/org.eclipse.core.resources-3.22.0.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.expressions/3.9.400/org.eclipse.core.expressions-3.9.400.jar:/tmp/m3-build-m2/net/java/dev/jna/jna/5.15.0/jna-5.15.0.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.osgi/3.22.0/org.eclipse.osgi-3.22.0.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.runtime/3.32.0/org.eclipse.core.runtime-3.32.0.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.common/3.19.200/org.eclipse.equinox.common-3.19.200.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.jobs/3.15.400/org.eclipse.core.jobs-3.15.400.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.registry/3.12.200/org.eclipse.equinox.registry-3.12.200.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.preferences/3.11.200/org.eclipse.equinox.preferences-3.11.200.jar:/tmp/m3-build-m2/org/osgi/org.osgi.service.prefs/1.1.2/org.osgi.service.prefs-1.1.2.jar:/tmp/m3-build-m2/org/osgi/osgi.annotation/8.0.1/osgi.annotation-8.0.1.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.contenttype/3.9.600/org.eclipse.core.contenttype-3.9.600.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.equinox.app/1.7.200/org.eclipse.equinox.app-1.7.200.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.filesystem/1.11.100/org.eclipse.core.filesystem-1.11.100.jar:/tmp/m3-build-m2/net/java/dev/jna/jna-platform/5.15.0/jna-platform-5.15.0.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.text/3.14.200/org.eclipse.text-3.14.200.jar:/tmp/m3-build-m2/org/eclipse/platform/org.eclipse.core.commands/3.12.200/org.eclipse.core.commands-3.12.200.jar:/tmp/m3-build-m2/org/eclipse/jdt/ecj/3.40.0/ecj-3.40.0.jar", "jdk.m3.parser.tests.M3Maven4ProviderContract", "baseline", "/workspace/scratch/206049dfb270/maven-work/probes-001/baseline/fixture"]
+Exception in thread "main" org.apache.maven.di.impl.DIException: Failed to call method static org.apache.maven.api.Session org.apache.maven.impl.standalone.ApiRunner.newSession(org.eclipse.aether.RepositorySystem,org.apache.maven.api.services.Lookup,org.apache.maven.impl.standalone.ApiRunner$LocalRepoProvider)
+	at org.apache.maven.di.impl.ReflectionUtils.lambda$bindingFromMethod$6(ReflectionUtils.java:326)
+	at org.apache.maven.di.impl.Binding$BindingToConstructor.lambda$compile$0(Binding.java:253)
+	at org.apache.maven.di.impl.InjectorImpl.lambda$getCompiledBinding$7(InjectorImpl.java:244)
+	at org.apache.maven.di.impl.InjectorImpl.getInstance(InjectorImpl.java:81)
+	at org.apache.maven.di.impl.InjectorImpl.getInstance(InjectorImpl.java:75)
+	at org.apache.maven.impl.standalone.ApiRunner.createSession(ApiRunner.java:220)
+	at jdk.m3.parser.tests.M3Maven4ProviderContract.main(M3Maven4ProviderContract.java:206)
+Caused by: org.apache.maven.api.services.MavenException: Unable to locate instance of type interface org.apache.maven.api.services.SettingsBuilder
+	at org.apache.maven.impl.standalone.ApiRunner$1.lookup(ApiRunner.java:419)
+	at org.apache.maven.impl.AbstractSession.lookup(AbstractSession.java:459)
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1708)
+	at org.apache.maven.impl.AbstractSession.getService(AbstractSession.java:429)
+	at org.apache.maven.impl.standalone.ApiRunner.newSession(ApiRunner.java:579)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.apache.maven.di.impl.ReflectionUtils.lambda$bindingFromMethod$6(ReflectionUtils.java:317)
+	... 6 more
+Caused by: org.apache.maven.di.impl.DIException: Error while initializing binding BindingToConstructor[@Named DefaultSettingsBuilder, public org.apache.maven.impl.DefaultSettingsBuilder(org.apache.maven.api.services.xml.SettingsXmlFactory,org.apache.maven.api.services.Interpolator,java.util.Map,java.util.Map)][Dependency[key=SettingsXmlFactory, optional=false], Dependency[key=Interpolator, optional=false], Dependency[key=Map<String, Dispatcher>, optional=false], Dependency[key=Map<String, SettingsParser>, optional=true]]
+	at org.apache.maven.di.impl.Binding$1.lambda$compile$0(Binding.java:134)
+	at org.apache.maven.di.impl.InjectorImpl.lambda$getCompiledBinding$7(InjectorImpl.java:244)
+	at org.apache.maven.di.impl.InjectorImpl.getInstance(InjectorImpl.java:81)
+	at org.apache.maven.di.impl.InjectorImpl.getInstance(InjectorImpl.java:75)
+	at org.apache.maven.impl.standalone.ApiRunner$1.lookup(ApiRunner.java:417)
+	... 13 more
+Caused by: org.apache.maven.di.impl.DIException: No binding to construct an instance for key Map<String, Dispatcher>.  Existing bindings:
+ - @Named ArtifactCoordinatesFactory
+ - @Named ArtifactDeployer
+ - @Named ArtifactDescriptorReader
+ - @Named ArtifactFactory
+ - @Named ArtifactInstaller
+ - @Named ArtifactResolver
+ - @Named ChecksumAlgorithmService
+ - @Named DefaultArtifactCoordinatesFactory
+ - @Named DefaultArtifactDeployer
+ - @Named DefaultArtifactDescriptorReader
+ - @Named DefaultArtifactFactory
+ - @Named DefaultArtifactInstaller
+ - @Named DefaultArtifactResolver
+ - @Named DefaultChecksumAlgorithmService
+ - @Named DefaultDependencyCoordinatesFactory
+ - @Named DefaultDependencyManagementImporter
+ - @Named DefaultDependencyManagementInjector
+ - @Named DefaultDependencyResolver
+ - @Named DefaultExtensibleEnumRegistry
+ - @Named DefaultExtensibleEnumRegistry<Language, LanguageProvider>
+ - @Named DefaultExtensibleEnumRegistry<PathScope, PathScopeProvider>
+ - @Named DefaultExtensibleEnumRegistry<ProjectScope, ProjectScopeProvider>
+ - @Named DefaultInheritanceAssembler
+ - @Named DefaultInterpolator
+ - @Named DefaultLanguageRegistry
+ - @Named DefaultLifecycleBindingsInjector
+ - @Named DefaultLocalRepositoryManager
+ - @Named DefaultMessageBuilderFactory
+ - @Named DefaultModelBuilder
+ - @Named DefaultModelInterpolator
+ - @Named DefaultModelNormalizer
+ - @Named DefaultModelPathTranslator
+ - @Named DefaultModelProcessor
+ - @Named DefaultModelResolver
+ - @Named DefaultModelUrlNormalizer
+ - @Named DefaultModelValidator
+ - @Named DefaultModelVersionParser
+ - @Named DefaultModelXmlFactory
+ - @Named DefaultOsService
+ - @Named DefaultPathMatcherFactory
+ - @Named DefaultPathScopeRegistry
+ - @Named DefaultPluginConfigurationExpander
+ - @Named DefaultPluginManagementInjector
+ - @Named DefaultPluginXmlFactory
+ - @Named DefaultProfileInjector
+ - @Named DefaultProfileSelector
+ - @Named DefaultProjectScopeRegistry
+ - @Named DefaultPrompter
+ - @Named DefaultRepositoryFactory
+ - @Named DefaultRequestCacheFactory
+ - @Named DefaultRootLocator
+ - @Named DefaultSettingsBuilder
+ - @Named DefaultSettingsXmlFactory
+ - @Named DefaultSuperPomProvider
+ - @Named DefaultToolchainManager
+ - @Named DefaultToolchainsBuilder
+ - @Named DefaultToolchainsXmlFactory
+ - @Named DefaultTransportProvider
+ - @Named DefaultTypeProvider
+ - @Named DefaultVersionParser
+ - @Named DefaultVersionRangeResolver
+ - @Named DefaultVersionResolver
+ - @Named DependencyCoordinatesFactory
+ - @Named DependencyManagementImporter
+ - @Named DependencyManagementInjector
+ - @Named DependencyResolver
+ - @Named DotMvnRootDetector
+ - @Named ExtensibleEnumProvider<Type>
+ - @Named ExtensibleEnumRegistry<Language>
+ - @Named ExtensibleEnumRegistry<PathScope>
+ - @Named ExtensibleEnumRegistry<ProjectScope>
+ - @Named InheritanceAssembler
+ - @Named Interpolator
+ - @Named JLineMessageBuilderFactory
+ - @Named LanguageRegistry
+ - @Named LifecycleBindingsInjector
+ - @Named LocalRepositoryManager
+ - @Named MavenValidatorFactory
+ - @Named MavenVersionScheme
+ - @Named MessageBuilderFactory
+ - @Named ModelBuilder
+ - @Named ModelInterpolator
+ - @Named ModelNormalizer
+ - @Named ModelPathTranslator
+ - @Named ModelProcessor
+ - @Named ModelResolver
+ - @Named ModelUrlNormalizer
+ - @Named ModelValidator
+ - @Named ModelVersionParser
+ - @Named ModelXmlFactory
+ - @Named Object
+ - @Named OsService
+ - @Named PathMatcherFactory
+ - @Named PathScopeRegistry
+ - @Named PluginConfigurationExpander
+ - @Named PluginManagementInjector
+ - @Named PluginXmlFactory
+ - @Named PomXmlRootDetector
+ - @Named ProfileInjector
+ - @Named ProfileSelector
+ - @Named ProjectScopeRegistry
+ - @Named Prompter
+ - @Named RepositoryFactory
+ - @Named RequestCacheFactory
+ - @Named RootDetector
+ - @Named RootLocator
+ - @Named Service
+ - @Named SettingsBuilder
+ - @Named SettingsXmlFactory
+ - @Named SpiService
+ - @Named SuperPomProvider
+ - @Named ToolchainManager
+ - @Named ToolchainsBuilder
+ - @Named ToolchainsXmlFactory
+ - @Named TransportProvider
+ - @Named TypeProvider
+ - @Named ValidatorFactory
+ - @Named VersionParser
+ - @Named VersionRangeResolver
+ - @Named VersionResolver
+ - @Named VersionScheme
+ - @Named XmlFactory<Model>
+ - @Named XmlFactory<PersistedToolchains>
+ - @Named XmlFactory<PluginDescriptor>
+ - @Named XmlFactory<Settings>
+ - @Named("MD5") ChecksumAlgorithmFactory
+ - @Named("MD5") ChecksumAlgorithmFactorySupport
+ - @Named("MD5") Md5ChecksumAlgorithmFactory
+ - @Named("MD5") MessageDigestChecksumAlgorithmFactorySupport
+ - @Named("MD5") Object
+ - @Named("SHA-1") ChecksumAlgorithmFactory
+ - @Named("SHA-1") ChecksumAlgorithmFactorySupport
+ - @Named("SHA-1") MessageDigestChecksumAlgorithmFactorySupport
+ - @Named("SHA-1") Object
+ - @Named("SHA-1") Sha1ChecksumAlgorithmFactory
+ - @Named("SHA-256") ChecksumAlgorithmFactory
+ - @Named("SHA-256") ChecksumAlgorithmFactorySupport
+ - @Named("SHA-256") MessageDigestChecksumAlgorithmFactorySupport
+ - @Named("SHA-256") Object
+ - @Named("SHA-256") Sha256ChecksumAlgorithmFactory
+ - @Named("SHA-512") ChecksumAlgorithmFactory
+ - @Named("SHA-512") ChecksumAlgorithmFactorySupport
+ - @Named("SHA-512") MessageDigestChecksumAlgorithmFactorySupport
+ - @Named("SHA-512") Object
+ - @Named("SHA-512") Sha512ChecksumAlgorithmFactory
+ - @Named("basic") BasicRepositoryConnectorFactory
+ - @Named("basic") Object
+ - @Named("basic") RepositoryConnectorFactory
+ - @Named("bf") BfDependencyCollector
+ - @Named("bf") DependencyCollector
+ - @Named("bf") DependencyCollectorDelegate
+ - @Named("bf") Object
+ - @Named("condition") ConditionProfileActivator
+ - @Named("condition") Object
+ - @Named("condition") ProfileActivator
+ - @Named("df") DependencyCollector
+ - @Named("df") DependencyCollectorDelegate
+ - @Named("df") DfDependencyCollector
+ - @Named("df") Object
+ - @Named("discriminating") NameMapper
+ - @Named("distributionManagement") DistributionManagementArtifactRelocationSource
+ - @Named("distributionManagement") MavenArtifactRelocationSource
+ - @Named("distributionManagement") Object
+ - @Named("enhanced") EnhancedLocalRepositoryManagerFactory
+ - @Named("enhanced") LocalRepositoryManagerFactory
+ - @Named("enhanced") Object
+ - @Named("file") FileProfileActivator
+ - @Named("file") Object
+ - @Named("file") ProfileActivator
+ - @Named("file-gaecv") NameMapper
+ - @Named("file-gav") NameMapper
+ - @Named("file-hgaecv") NameMapper
+ - @Named("file-hgav") NameMapper
+ - @Named("file-lock") FileLockNamedLockFactory
+ - @Named("file-lock") NamedLockFactory
+ - @Named("file-lock") NamedLockFactorySupport
+ - @Named("file-lock") Object
+ - @Named("gaecv") NameMapper
+ - @Named("gav") NameMapper
+ - @Named("groupId") ArtifactResolverPostProcessor
+ - @Named("groupId") GroupIdRemoteRepositoryFilterSource
+ - @Named("groupId") Object
+ - @Named("groupId") RemoteRepositoryFilterSource
+ - @Named("groupId") RemoteRepositoryFilterSourceSupport
+ - @Named("jdk") DefaultJavaToolchainFactory
+ - @Named("jdk") Object
+ - @Named("jdk") ToolchainFactory
+ - @Named("jdk-version") JdkVersionProfileActivator
+ - @Named("jdk-version") Object
+ - @Named("jdk-version") ProfileActivator
+ - @Named("maven2") Maven2RepositoryLayoutFactory
+ - @Named("maven2") Object
+ - @Named("maven2") RepositoryLayoutFactory
+ - @Named("noop") NamedLockFactory
+ - @Named("noop") NamedLockFactorySupport
+ - @Named("noop") NoopNamedLockFactory
+ - @Named("noop") Object
+ - @Named("nx2") ChecksumExtractorStrategy
+ - @Named("nx2") Nx2ChecksumExtractor
+ - @Named("nx2") Object
+ - @Named("offline") Object
+ - @Named("offline") OfflinePipelineRepositoryConnectorFactory
+ - @Named("offline") PipelineRepositoryConnectorFactory
+ - @Named("os") Object
+ - @Named("os") OperatingSystemProfileActivator
+ - @Named("os") ProfileActivator
+ - @Named("packaging") Object
+ - @Named("packaging") PackagingProfileActivator
+ - @Named("packaging") ProfileActivator
+ - @Named("plugins") MetadataGeneratorFactory
+ - @Named("plugins") Object
+ - @Named("plugins") PluginsMetadataGeneratorFactory
+ - @Named("prefixes") LockingInhibitorFactory
+ - @Named("prefixes") Object
+ - @Named("prefixes") PrefixesRemoteRepositoryFilterSource
+ - @Named("prefixes") RemoteRepositoryFilterSource
+ - @Named("prefixes") RemoteRepositoryFilterSourceSupport
+ - @Named("property") Object
+ - @Named("property") ProfileActivator
+ - @Named("property") PropertyProfileActivator
+ - @Named("rrf") FilteringPipelineRepositoryConnectorFactory
+ - @Named("rrf") Object
+ - @Named("rrf") PipelineRepositoryConnectorFactory
+ - @Named("rwlock-local") LocalReadWriteLockNamedLockFactory
+ - @Named("rwlock-local") NamedLockFactory
+ - @Named("rwlock-local") NamedLockFactorySupport
+ - @Named("rwlock-local") Object
+ - @Named("semaphore-local") LocalSemaphoreNamedLockFactory
+ - @Named("semaphore-local") NamedLockFactory
+ - @Named("semaphore-local") NamedLockFactorySupport
+ - @Named("semaphore-local") Object
+ - @Named("simple") LocalRepositoryManagerFactory
+ - @Named("simple") Object
+ - @Named("simple") SimpleLocalRepositoryManagerFactory
+ - @Named("snapshot") MetadataGeneratorFactory
+ - @Named("snapshot") Object
+ - @Named("snapshot") SnapshotMetadataGeneratorFactory
+ - @Named("sparseDirectory") FileTrustedChecksumsSourceSupport
+ - @Named("sparseDirectory") Object
+ - @Named("sparseDirectory") SparseDirectoryTrustedChecksumsSource
+ - @Named("sparseDirectory") TrustedChecksumsSource
+ - @Named("static") NameMapper
+ - @Named("summaryFile") FileTrustedChecksumsSourceSupport
+ - @Named("summaryFile") Object
+ - @Named("summaryFile") SummaryFileTrustedChecksumsSource
+ - @Named("summaryFile") TrustedChecksumsSource
+ - @Named("trusted2provided") Object
+ - @Named("trusted2provided") ProvidedChecksumsSource
+ - @Named("trusted2provided") TrustedToProvidedChecksumsSourceAdapter
+ - @Named("userProperties") MavenArtifactRelocationSource
+ - @Named("userProperties") Object
+ - @Named("userProperties") UserPropertiesArtifactRelocationSource
+ - @Named("versions") MetadataGeneratorFactory
+ - @Named("versions") Object
+ - @Named("versions") VersionsMetadataGeneratorFactory
+ - @Named("xChecksum") ChecksumExtractorStrategy
+ - @Named("xChecksum") Object
+ - @Named("xChecksum") XChecksumExtractor
+ - ApiRunner
+ - ArtifactCoordinatesFactory
+ - ArtifactDeployer
+ - ArtifactDescriptorReader
+ - ArtifactFactory
+ - ArtifactInstaller
+ - ArtifactManager
+ - ArtifactPredicateFactory
+ - ArtifactResolver
+ - ArtifactResolverPostProcessor
+ - AutoCloseable
+ - BasicRepositoryConnectorFactory
+ - BfDependencyCollector
+ - ChecksumAlgorithmFactory
+ - ChecksumAlgorithmFactorySelector
+ - ChecksumAlgorithmFactorySupport
+ - ChecksumAlgorithmService
+ - ChecksumExtractor
+ - ChecksumExtractorStrategy
+ - ChecksumPolicyProvider
+ - ChecksumProcessor
+ - Closeable
+ - ConditionProfileActivator
+ - DefaultArtifactCoordinatesFactory
+ - DefaultArtifactDeployer
+ - DefaultArtifactDescriptorReader
+ - DefaultArtifactFactory
+ - DefaultArtifactInstaller
+ - DefaultArtifactResolver
+ - DefaultChecksumAlgorithmService
+ - DefaultDependencyCoordinatesFactory
+ - DefaultDependencyManagementImporter
+ - DefaultDependencyManagementInjector
+ - DefaultDependencyResolver
+ - DefaultExtensibleEnumRegistry
+ - DefaultExtensibleEnumRegistry<Language, LanguageProvider>
+ - DefaultExtensibleEnumRegistry<PathScope, PathScopeProvider>
+ - DefaultExtensibleEnumRegistry<ProjectScope, ProjectScopeProvider>
+ - DefaultInheritanceAssembler
+ - DefaultInterpolator
+ - DefaultJavaToolchainFactory
+ - DefaultLanguageRegistry
+ - DefaultLifecycleBindingsInjector
+ - DefaultLocalRepositoryManager
+ - DefaultMessageBuilderFactory
+ - DefaultModelBuilder
+ - DefaultModelInterpolator
+ - DefaultModelNormalizer
+ - DefaultModelPathTranslator
+ - DefaultModelProcessor
+ - DefaultModelResolver
+ - DefaultModelUrlNormalizer
+ - DefaultModelValidator
+ - DefaultModelVersionParser
+ - DefaultModelXmlFactory
+ - DefaultOsService
+ - DefaultPathMatcherFactory
+ - DefaultPathScopeRegistry
+ - DefaultPluginConfigurationExpander
+ - DefaultPluginManagementInjector
+ - DefaultPluginXmlFactory
+ - DefaultProfileInjector
+ - DefaultProfileSelector
+ - DefaultProjectScopeRegistry
+ - DefaultPrompter
+ - DefaultRepositoryFactory
+ - DefaultRequestCacheFactory
+ - DefaultRootLocator
+ - DefaultSettingsBuilder
+ - DefaultSettingsXmlFactory
+ - DefaultSuperPomProvider
+ - DefaultToolchainManager
+ - DefaultToolchainsBuilder
+ - DefaultToolchainsXmlFactory
+ - DefaultTransportProvider
+ - DefaultTypeProvider
+ - DefaultVersionParser
+ - DefaultVersionRangeResolver
+ - DefaultVersionResolver
+ - DependencyCollector
+ - DependencyCollectorDelegate
+ - DependencyCoordinatesFactory
+ - DependencyManagementImporter
+ - DependencyManagementInjector
+ - DependencyResolver
+ - Deployer
+ - DfDependencyCollector
+ - DistributionManagementArtifactRelocationSource
+ - DotMvnRootDetector
+ - EnhancedLocalRepositoryManagerFactory
+ - ExtensibleEnumProvider<Type>
+ - ExtensibleEnumRegistry<Language>
+ - ExtensibleEnumRegistry<Lifecycle>
+ - ExtensibleEnumRegistry<Packaging>
+ - ExtensibleEnumRegistry<PathScope>
+ - ExtensibleEnumRegistry<ProjectScope>
+ - ExtensibleEnumRegistry<Type>
+ - FileLockNamedLockFactory
+ - FileProfileActivator
+ - FileTrustedChecksumsSourceSupport
+ - FilteringPipelineRepositoryConnectorFactory
+ - GroupIdRemoteRepositoryFilterSource
+ - InheritanceAssembler
+ - Injector
+ - Installer
+ - Interpolator
+ - Iterable<Lifecycle>
+ - JLineMessageBuilderFactory
+ - JdkVersionProfileActivator
+ - LanguageRegistry
+ - LifecycleBindingsInjector
+ - LifecycleRegistry
+ - LocalPathComposer
+ - LocalPathPrefixComposerFactory
+ - LocalReadWriteLockNamedLockFactory
+ - LocalRepoProvider
+ - LocalRepositoryManager
+ - LocalRepositoryManagerFactory
+ - LocalRepositoryProvider
+ - LocalSemaphoreNamedLockFactory
+ - LockingInhibitorFactory
+ - Lookup
+ - Map<String, ValidatorFactory>
+ - Maven2RepositoryLayoutFactory
+ - MavenArtifactRelocationSource
+ - MavenValidatorFactory
+ - MavenVersionScheme
+ - Md5ChecksumAlgorithmFactory
+ - MessageBuilderFactory
+ - MessageDigestChecksumAlgorithmFactorySupport
+ - MetadataGeneratorFactory
+ - MetadataResolver
+ - ModelBuilder
+ - ModelInterpolator
+ - ModelNormalizer
+ - ModelPathTranslator
+ - ModelProcessor
+ - ModelResolver
+ - ModelUrlNormalizer
+ - ModelValidator
+ - ModelVersionParser
+ - ModelXmlFactory
+ - NameMapper
+ - NamedLockFactory
+ - NamedLockFactoryAdapterFactory
+ - NamedLockFactorySelector
+ - NamedLockFactorySupport
+ - NoopNamedLockFactory
+ - Nx2ChecksumExtractor
+ - Object
+ - OfflineController
+ - OfflinePipelineRepositoryConnectorFactory
+ - OperatingSystemProfileActivator
+ - OsService
+ - PackagingProfileActivator
+ - PackagingRegistry
+ - PathMatcherFactory
+ - PathProcessor
+ - PathScopeRegistry
+ - PipelineRepositoryConnectorFactory
+ - PluginConfigurationExpander
+ - PluginManagementInjector
+ - PluginXmlFactory
+ - PluginsMetadataGeneratorFactory
+ - PomXmlRootDetector
+ - PrefixesRemoteRepositoryFilterSource
+ - ProfileActivator
+ - ProfileInjector
+ - ProfileSelector
+ - ProjectScopeRegistry
+ - Prompter
+ - PropertyProfileActivator
+ - ProtoSession
+ - ProvidedChecksumsSource
+ - RemoteRepositoryFilterManager
+ - RemoteRepositoryFilterSource
+ - RemoteRepositoryFilterSourceSupport
+ - RemoteRepositoryManager
+ - RepositoryConnectorFactory
+ - RepositoryConnectorProvider
+ - RepositoryEventDispatcher
+ - RepositoryFactory
+ - RepositoryKeyFunctionFactory
+ - RepositoryLayoutFactory
+ - RepositoryLayoutProvider
+ - RepositorySystem
+ - RepositorySystemLifecycle
+ - RepositorySystemSupplier
+ - RepositorySystemValidator
+ - RequestCacheFactory
+ - RootDetector
+ - RootLocator
+ - Service
+ - Session
+ - SettingsBuilder
+ - SettingsXmlFactory
+ - Sha1ChecksumAlgorithmFactory
+ - Sha256ChecksumAlgorithmFactory
+ - Sha512ChecksumAlgorithmFactory
+ - SimpleLocalRepositoryManagerFactory
+ - SnapshotMetadataGeneratorFactory
+ - SparseDirectoryTrustedChecksumsSource
+ - SpiService
+ - SummaryFileTrustedChecksumsSource
+ - SuperPomProvider
+ - SyncContextFactory
+ - ToolchainFactory
+ - ToolchainManager
+ - ToolchainsBuilder
+ - ToolchainsXmlFactory
+ - TrackingFileManager
+ - TransportProvider
+ - TransporterProvider
+ - TrustedChecksumsSource
+ - TrustedToProvidedChecksumsSourceAdapter
+ - TypeProvider
+ - TypeRegistry
+ - UpdateCheckManager
+ - UpdatePolicyAnalyzer
+ - UserPropertiesArtifactRelocationSource
+ - ValidatorFactory
+ - VersionParser
+ - VersionRangeResolver
+ - VersionResolver
+ - VersionScheme
+ - VersionsMetadataGeneratorFactory
+ - XChecksumExtractor
+ - XmlFactory<Model>
+ - XmlFactory<PersistedToolchains>
+ - XmlFactory<PluginDescriptor>
+ - XmlFactory<Settings>
+	at org.apache.maven.di.impl.InjectorImpl.doGetCompiledBinding(InjectorImpl.java:314)
+	at org.apache.maven.di.impl.InjectorImpl.getCompiledBinding(InjectorImpl.java:240)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1024)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:575)
+	at java.base/java.util.stream.AbstractPipeline.evaluateToArrayNode(AbstractPipeline.java:260)
+	at java.base/java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:616)
+	at java.base/java.util.stream.ReferencePipeline.toArray(ReferencePipeline.java:622)
+	at org.apache.maven.di.impl.Binding$BindingToConstructor.lambda$compile$0(Binding.java:252)
+	at org.apache.maven.di.impl.Binding$1.lambda$compile$0(Binding.java:130)
+	... 17 more

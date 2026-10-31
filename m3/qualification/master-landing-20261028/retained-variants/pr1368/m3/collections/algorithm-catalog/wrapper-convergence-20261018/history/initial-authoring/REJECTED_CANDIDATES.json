@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "id": "WRAPPER_FALLBACK_IAE_20261018",
+  "status": "INITIAL_CANDIDATE_REJECTED_CORRECTION_PENDING",
+  "input": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+  "frozen_initial_sha256": "d5b841ff61d7269454fe136e7a1bf10ace25d9d6a3a516137e48a779c6c63201",
+  "frozen_initial_git_blob_sha1": "bd5dcda2789022e89b121efccdda98d6c293a0f4",
+  "reported_failure": "Catching every IllegalArgumentException around range construction retries comparator demand or swallows an opaque owner range-override exception. Those exceptions are not proof of an out-of-range endpoint.",
+  "correction_contract": [
+    "Preserve the original opaque-owner range entry path and its exact exception object/demand",
+    "Preserve the original read-only set direct-navigation path where required",
+    "Use explicit owner/contract evidence instead of treating arbitrary IllegalArgumentException as a bounds signal",
+    "Freeze the new adversarial probe independently, fix canonical candidate/recipe and rerun exact source-bound tests"
+  ],
+  "evidence_source": "Exact protected probe source and baseline/initial-candidate logs read from root qualification directory and preserved byte-for-byte",
+  "probe_path": "counterexamples/M3ComparatorFailureProbe.java.txt",
+  "probe_sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+  "execution_receipt": null,
+  "note": "These captured logs establish the recorded behavioral counterexample; the full command/toolchain execution receipt and corrected source proof remain root-owned and pending here.",
+  "initial_recipe_report": "Root reports initial 26-target SDK 5 tests, 8 sealing and 9 receiver cases passed. Recipe integrity does not establish behavior; the later counterexample keeps corrected runtime admission pending.",
+  "local_evidence": [
+    {
+      "path": "counterexamples/M3ComparatorFailureProbe.java.txt",
+      "sha256": "4cd4c00c565ea75f26b83ca237330063275c661df5017d06963aeb1a76bdfe55",
+      "bytes": 1989,
+      "evidence_kind": "PROTECTED_PROBE_SOURCE_AS_TEXT"
+    },
+    {
+      "path": "counterexamples/comparator-exception-baseline.log",
+      "sha256": "5408289657af586b76932a48e56c35f1bf487f7d123f7141412f9b9ada0146fb",
+      "bytes": 381,
+      "evidence_kind": "BASELINE_OBSERVATION"
+    },
+    {
+      "path": "counterexamples/comparator-exception-candidate.log",
+      "sha256": "7e5de942403a256ce83c150a87eb38cc580c89f86dd8e7ae521ef0946ce66e6b",
+      "bytes": 375,
+      "evidence_kind": "REJECTED_INITIAL_CANDIDATE_OBSERVATION"
+    }
+  ],
+  "observed_baseline": [
+    "readSet.lower(rejected) ERROR=IllegalArgumentException SAME_SENTINEL=true CALLS=[99:2]",
+    "mutableSet.lower(rejected) ERROR=IllegalArgumentException SAME_SENTINEL=true CALLS=[99:99]",
+    "readMap.lowerEntry(rejected) ERROR=IllegalArgumentException SAME_SENTINEL=true CALLS=[99:99]",
+    "mutableSet.lower(opaque_range_failure) ERROR=IllegalArgumentException SAME_SENTINEL=true CALLS=[head:2:false]"
+  ],
+  "observed_rejected_candidate": [
+    "readSet.lower(rejected) ERROR=IllegalArgumentException SAME_SENTINEL=true CALLS=[99:99, 99:99]",
+    "mutableSet.lower(rejected) ERROR=IllegalArgumentException SAME_SENTINEL=true CALLS=[99:99, 99:99]",
+    "readMap.lowerEntry(rejected) ERROR=IllegalArgumentException SAME_SENTINEL=true CALLS=[99:99, 99:99]",
+    "mutableSet.lower(opaque_range_failure) RESULT=1 CALLS=[head:2:false, head:1:true]"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "scope": "receiving orchestration evidence only; no target, SDK engine, candidate or test change",
+  "finding": "a later zero-write replay refreshed the earlier source-state inventory after the next additive file had been received",
+  "preserved_later_inventory": "index-resource-probe-fixedpoint-source-state.json",
+  "reconstructed_prior_inventory": "index-resource-probe-source-state.json",
+  "reconstruction": "previous index-contract source snapshot plus exact index-resource-probe postimage, canonical sorted JSON",
+  "exact_existing_compile_receipt_sha256_match": "1a3ab2e6395ddb2737c6400baee00d7a53ae4b4d84eeb36364f6376fabfcc5d9",
+  "correction": "future fixed-point state inventories use a dedicated filename and do not replace the changed-pass inventory"
+}

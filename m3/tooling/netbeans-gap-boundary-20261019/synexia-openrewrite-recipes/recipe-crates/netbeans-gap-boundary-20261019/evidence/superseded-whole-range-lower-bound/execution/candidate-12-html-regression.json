@@ -1,0 +1,17 @@
+{
+  "command": [
+    "java",
+    "-Xmx512m",
+    "-Djava.awt.headless=true",
+    "--patch-module",
+    "java.desktop=/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/candidate/classes:/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/candidate/test-classes",
+    "-cp",
+    "/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-03/candidate/external",
+    "bug4496801"
+  ],
+  "exit": 0,
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "user_seconds": 0.279261,
+  "system_seconds": 0.047941,
+  "max_rss_kib_linux": 44680
+}

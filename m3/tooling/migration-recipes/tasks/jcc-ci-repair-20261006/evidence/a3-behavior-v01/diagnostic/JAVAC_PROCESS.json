@@ -1,0 +1,34 @@
+{
+  "argv": [
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/jdk-21+35/bin/javac",
+    "--release",
+    "21",
+    "-proc:none",
+    "-encoding",
+    "UTF-8",
+    "-d",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/diagnostic/classes",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/diagnostic/A3RegexMatrix.java"
+  ],
+  "start_utc": "2026-10-06T05:17:07.412537+00:00",
+  "finish_utc": "2026-10-06T05:17:07.815741+00:00",
+  "exit_code": 1,
+  "exact_template": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/workspace/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+    "bytes": 7514,
+    "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404",
+    "git_blob": "bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33"
+  },
+  "compiled_copy": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/diagnostic/A3RegexMatrix.java",
+    "bytes": 7514,
+    "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404",
+    "git_blob": "bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33"
+  },
+  "output": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/diagnostic/javac.log",
+    "bytes": 719,
+    "sha256": "3b2470f841cc1042ccc41e7ad5b1c6fbc2bed3a73feea3acc0ff8b8854b57c6d",
+    "git_blob": "bcdacee04e650b3357ce8289f6374ffd1257c82a"
+  }
+}

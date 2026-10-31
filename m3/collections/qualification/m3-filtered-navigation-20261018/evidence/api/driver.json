@@ -1,0 +1,25 @@
+{
+  "command": [
+    "python3",
+    "/workspace/scratch/6b6041146177/native-validation/compare_received_api.py",
+    "--java-home",
+    "/tmp/jdk-21.0.12.1+1",
+    "--baseline-sources",
+    "/workspace/scratch/6b6041146177/native-validation/api-baseline-src",
+    "--received-sources",
+    "/workspace/scratch/6b6041146177/M3JDK21/m3/collections/src/main/java",
+    "--baseline-classes",
+    "/workspace/scratch/6b6041146177/verification/baseline-classes",
+    "--candidate",
+    "java=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/java/classes",
+    "--candidate",
+    "native=/workspace/scratch/6b6041146177/verification/received-runtime-20261018/native/classes",
+    "--output",
+    "/workspace/scratch/6b6041146177/native-validation/received-api-20261018"
+  ],
+  "elapsed_seconds": 152.01245824500074,
+  "exit_code": 1,
+  "helper_sha256": "dcadc705e99b6727e209fd09d036c766e61638d9573e26ff81a320395f92b30c",
+  "log_sha256": "0e0c98b11ac9b37753f7e91be34c503fc3b37121fa06540156b1e2a161226076",
+  "results_sha256": "d8051d2d47a6b9af878cdd4b2321816c30bbfd0331930c3408efb03c763f08d6"
+}

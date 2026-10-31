@@ -1,0 +1,7 @@
+order	gate	result
+1	diff	PASS
+2	limited static syntax	PASS; full linters unexecuted
+3	actual subset strict compile	PASS
+4	actual kernel main tests	PASS; JUnit and jtreg harness unexecuted
+5	4 JVM modes	PASS; not matching product image
+6	framework coverage product acceptance	BLOCKED

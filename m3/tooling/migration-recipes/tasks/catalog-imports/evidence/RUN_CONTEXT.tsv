@@ -1,0 +1,10 @@
+field	value
+repository	hsoliwal/M3jdk21
+baseline	7ead93addf4a7b9614d4ad34c8dd02f4b93b9c36
+date	2026-10-04
+source_scope	Two existing migration-recipes Java owners
+workers	1
+rewrite	Existing pinned 8.17.1 dependency
+java	Installed Debian OpenJDK 21.0.11
+checkout	Selected-source local verification; publication uses original repository ancestry
+canonical_writes	false

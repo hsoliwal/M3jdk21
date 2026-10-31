@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "status": "PASS_VENDOR_CUSTODY_STRICT_COMPILER_AND_21_ORIGINAL_UNIT_ORACLES",
+  "scope": "Existing Apache receiver import tool; v7 vendor byte custody. No canonical regex runtime port or source-complete dependency closure admission.",
+  "packetCompilerProof": {
+    "path": "PACKET_AND_COMPILER_PROOF.json",
+    "sha256": "ca682bf148fee99cc6c09e6b2034265e2f7e0ec84ea7c1ecaddb34bf07fb994e",
+    "sourceOwners": 6,
+    "emittedClasses": 14,
+    "entries": 24,
+    "sourceAdditions": 22,
+    "preservedLicenseNotice": true,
+    "fixedPointAndRefusalGatesPassed": true
+  },
+  "unitProof": {
+    "path": "FINAL_JUNIT_PROOF.json",
+    "sha256": "315b3b737d2e22d84983b6e8440de58f7cc62d7272704b1910507594588f9eee",
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "selectorUnchanged": true,
+    "assertionsUnchanged": true,
+    "fixtureCorrectionsExplicit": true,
+    "exitCode": 0,
+    "pid": 31860,
+    "terminal": true
+  },
+  "expandedRecipe": {
+    "path": "importer-fix-recipe-v3/templates/manifest.tsv",
+    "sha256": "681b23ce93303e8e78dadecd9c9c528fb46c004f328e36c776bf83d08a34ef0a",
+    "sourceRevision": "80b8534ad1e45002185fb3eeab233f98d3a7c0bd",
+    "targetCount": 3,
+    "targets": [
+      {
+        "path": "m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaImportPlan.java",
+        "preimageSha256": "27996c430d055bdf5b5ba32c2664b3cc683731a0dd1edf51aca067d876859b82",
+        "postimageSha256": "cb8822f92db1c65c695d724013c47225d37b75ed766b2c9d197c562004b4add6",
+        "template": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\importer-fix-recipe-v3\\templates\\m3\\synexia-import\\src\\main\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlan.java.txt"
+      },
+      {
+        "path": "m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java",
+        "preimageSha256": "8f0925601dd8308282727acd3a9fbcf1a654fbc0a3af48b9640a11d84755c2e0",
+        "postimageSha256": "a85d673f3a98b22a3a1514f905503037391c4b7686533869c792dcf8faa73e1a",
+        "template": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\importer-fix-recipe-v3\\templates\\m3\\synexia-import\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlanTest.java.txt"
+      },
+      {
+        "path": "m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java",
+        "preimageSha256": "6acd2f31448739fd21d54b7df7503a796bc96801a5e5ff9a5720286a959fdf1a",
+        "postimageSha256": "22442dc8d8fce2b032c6da1261a53bbdbc945afdbcfdf97d940c1da5f4c18ae0",
+        "template": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\importer-fix-recipe-v3\\templates\\m3\\synexia-import\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaImporterTest.java.txt"
+      }
+    ],
+    "replayStatus": "NOT_RUN_EXPANDED_THREE_TARGET_RECIPE",
+    "priorOneTargetReplayStatus": "PASS"
+  },
+  "exactCurrentTestAndTableCustody": {
+    "path": "current-test-custody/CAPTURE.json",
+    "sha256": "0203eb13eb62e3e5c9cc641617f4b7435aeb3b3a614feefc2841da24628cfad7"
+  },
+  "fileSeals": {
+    "path": "FINAL_FILE_SEALS.json",
+    "sha256": "93181249f04d29a05b91db9f6c317bdd48c610973169a0962187c83c6d7d229a",
+    "count": 86
+  },
+  "initialFailuresRetained": [
+    "logs/compile.log",
+    "logs/original-junit.log",
+    "logs/corrected-fixture-junit.log",
+    "unit-first-executable-reports"
+  ],
+  "apiOrAlgorithmChanges": false,
+  "publicFailureOrderChanged": false,
+  "productionDelta": "Only static helper call qualification; no donor owner edits",
+  "excludedOrUnexecuted": [
+    "SynexiaSeedSnapshotTest full repository seed fixture not supplied",
+    "Maven verify/Jacoco 99% line and branch threshold",
+    "Expanded three-target Replay",
+    "Regex runtime dependency closure",
+    "java.base runtime integration",
+    "Native provider/platform qualification",
+    "Performance"
+  ],
+  "jvmLaneReleased": true
+}

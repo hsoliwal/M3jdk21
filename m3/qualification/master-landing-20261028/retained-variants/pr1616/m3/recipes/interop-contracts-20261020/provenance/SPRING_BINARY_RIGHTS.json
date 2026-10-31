@@ -1,0 +1,22 @@
+{
+  "schema": "m3-donor-binary-rights-v1",
+  "repository": "spring-projects/spring-framework",
+  "release": "v6.2.0",
+  "commit": "5024bb72279188f1d0dcfe19e8abdd4bdb9887c8",
+  "binary_coordinate": "org.springframework:spring-core:6.2.0",
+  "jar_sha256": "3b82629da38717dd616a70ec1055f9a8e208d58132071a6314a32159f8bce162",
+  "license": "Apache-2.0",
+  "files": [
+    {
+      "path": "licenses/Spring-6.2.0-LICENSE.txt",
+      "jar_member": "META-INF/license.txt",
+      "sha256": "c302a5330465bd377a359a07984a766e12c5b4ec943f12fcfcb80b1b3ce0cb3e"
+    },
+    {
+      "path": "licenses/Spring-6.2.0-NOTICE.txt",
+      "jar_member": "META-INF/notice.txt",
+      "sha256": "141d4305646d8e4268468641b3ace0aef3e0b8f73e0319056e12f601079e634e"
+    }
+  ],
+  "disassembly_use": "Retained diagnostic javap output is donor-derived; its exact provenance path is separately classified. No donor binary or source implementation is received into runtime."
+}

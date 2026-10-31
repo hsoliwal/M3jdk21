@@ -1,0 +1,8 @@
+["/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java", "-cp", "/workspace/scratch/206049dfb270/collections-work/baseline/classes:/workspace/scratch/206049dfb270/collections-work/baseline/contracts", "com.m3.collections.M3FilteredEndpointRestorationContract", "facade"]
+Exception in thread "main" java.util.NoSuchElementException
+	at java.base/java.util.NavigableSet.removeFirst(NavigableSet.java:337)
+	at com.m3.collections.M3FilteredEndpointRestorationContract.refuse(M3FilteredEndpointRestorationContract.java:43)
+	at com.m3.collections.M3FilteredEndpointRestorationContract.strictEndpoints(M3FilteredEndpointRestorationContract.java:88)
+	at com.m3.collections.M3FilteredEndpointRestorationContract.main(M3FilteredEndpointRestorationContract.java:125)
+
+EXIT 1

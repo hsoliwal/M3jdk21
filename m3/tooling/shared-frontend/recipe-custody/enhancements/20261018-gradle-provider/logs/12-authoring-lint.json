@@ -1,0 +1,15 @@
+{
+  "label": "12-authoring-lint",
+  "command": [
+    "python3",
+    "lint_sources.py",
+    "proposal"
+  ],
+  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work",
+  "jdk": "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1",
+  "previous": "11c-template-normalization",
+  "started_utc": "2026-10-18T13:00:19.633804+00:00",
+  "finished_utc": "2026-10-18T13:00:19.676011+00:00",
+  "exit_code": 0,
+  "log_sha256": "b199e48386e579d2e566c029b811fb8280c854be9350c298855ec8d9ffaf15c1"
+}

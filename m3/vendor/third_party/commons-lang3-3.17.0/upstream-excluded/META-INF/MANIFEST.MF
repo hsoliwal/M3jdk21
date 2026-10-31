@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: Maven Source Plugin 3.2.1
+Specification-Title: Apache Commons Lang
+Specification-Version: 3.17
+Specification-Vendor: The Apache Software Foundation
+Implementation-Title: Apache Commons Lang
+Implementation-Version: 3.17.0
+Implementation-Vendor: The Apache Software Foundation
+

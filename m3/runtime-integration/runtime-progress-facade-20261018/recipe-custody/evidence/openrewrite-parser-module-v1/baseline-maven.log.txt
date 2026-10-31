@@ -1,0 +1,71 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------< com.synexia.sourcebuilt.openrewrite:rewrite-java-21 >---------
+[INFO] Building OpenRewrite Java21 parser :: Synexia source-built Javadoc repair 8.17.1-m3-javadoc-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- antrun:3.1.0:run (stage-original-parser-source-and-config) @ rewrite-java-21 ---
+[INFO] Executing tasks
+[INFO]      [copy] Copying 9 files to /workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v1/baseline/rewrite-java-21/target/source/src/main/java
+[INFO]      [copy] Copying 1 file to /workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v1/baseline/rewrite-java-21/target/source
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ rewrite-java-21 ---
+[INFO] Copying 1 resource from  to target/classes/META-INF
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ rewrite-java-21 ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 9 source files with javac [debug target 21] to target/classes
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] -------------------------------------------------------------
+[WARNING] COMPILATION WARNING : 
+[INFO] -------------------------------------------------------------
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language': class file for org.intellij.lang.annotations.Language not found
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language'
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language'
+[WARNING] No processor claimed any of these annotations: /org.openrewrite.internal.lang.Nullable,/org.openrewrite.internal.lang.NonNullFields,/org.openrewrite.internal.lang.NonNullApi
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language': class file for org.intellij.lang.annotations.Language not found
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language'
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language'
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language': class file for org.intellij.lang.annotations.Language not found
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language'
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language'
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language': class file for org.intellij.lang.annotations.Language not found
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language'
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language'
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language': class file for org.intellij.lang.annotations.Language not found
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language'
+[WARNING] Cannot find annotation method 'value()' in type 'org.intellij.lang.annotations.Language'
+[WARNING] /workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v1/baseline/rewrite-java-21/target/source/src/main/java/org/openrewrite/java/isolated/ReloadableJava21ParserVisitor.java:[1453,20] unchecked cast
+  required: T
+  found:    org.openrewrite.java.tree.Expression
+[INFO] 17 warnings 
+[INFO] -------------------------------------------------------------
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v1/baseline/rewrite-java-21/target/source/src/main/java/org/openrewrite/java/isolated/ReloadableJava21Parser.java:[127,34] package org.slf4j does not exist
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.342 s
+[INFO] Finished at: 2026-10-18T11:53:07+09:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project rewrite-java-21: Compilation failure
+[ERROR] /workspace/scratch/2b4d1cb957a7/collection-refinement/proof/openrewrite-parser-module-v1/baseline/rewrite-java-21/target/source/src/main/java/org/openrewrite/java/isolated/ReloadableJava21Parser.java:[127,34] package org.slf4j does not exist
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

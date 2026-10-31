@@ -1,0 +1,12 @@
+{
+  "createdUtc": "2026-10-07T06:40:32.185509+00:00",
+  "decisionSha256": "d39f4aae975f67e9e22fdd69b89b7badb14aa3faa37ece20f631424806933c26",
+  "donorSourceHashes": {
+    "SynexiaImportManifest.java": "d497f52ebe91e6b97efb3708ff579356f05b65f1641a975c2b18215707ce3d98",
+    "SynexiaImporter.java": "df34e659a8acd1dd926ad0e28aa33903231128b73f74658b1b296aca455e0b9a",
+    "SynexiaImportCli.java": "5faebe932a52d45ba0ac5b1db134f4f90b2890f2b38691c4db657b62a7c19d3b",
+    "SynexiaCanonicalFamilyPolicy.java": "c1762968dfe62a18706f2b6092f0a02341fafcc904fa6bec96643ef8cc480e5d"
+  },
+  "newImporter": false,
+  "newTestFramework": false
+}

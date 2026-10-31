@@ -1,0 +1,3482 @@
+{
+  "schema": 1,
+  "status": "ACTUAL_M3_RECEIVER_MAVEN_FIVE_EXPECTED_OUTCOMES_PASS",
+  "actualStages": [
+    {
+      "name": "applyTwoTargets",
+      "rootObservation": {
+        "chunk_id": "6244ce",
+        "wall_time_seconds": 1.9030991,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "rootObservationCustody": {
+        "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_RECEIVER_NATIVE03_ROOT_APPLY_PASS_CHECK_RESOURCE_REFUSAL_01.json",
+        "bytes": 3907,
+        "sha256": "696ed8f16df68ab7f48f9fd9c75ef7dab88bee1de3e8772860adf430a1c83427",
+        "gitBlob": "9de411f778d7558de21168d45a9de324d4041b95"
+      },
+      "expectedExit": 0,
+      "actualExit": 0,
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "--enable-native-access=ALL-UNNAMED",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=128m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+        "-Djansi.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+        "-Duser.home=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\home",
+        "-Dfile.encoding=UTF-8",
+        "-classpath",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\boot\\plexus-classworlds-2.9.0.jar",
+        "-Dclassworlds.conf=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\m2.conf",
+        "-Dmaven.home=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14",
+        "-Dlibrary.jansi.path=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\jansi-native",
+        "-Dmaven.multiModuleProjectDirectory=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007",
+        "org.codehaus.plexus.classworlds.launcher.Launcher",
+        "-o",
+        "-B",
+        "-ntp",
+        "-e",
+        "-N",
+        "-s",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+        "-gs",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+        "-Dmaven.repo.local=K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache",
+        "-Dstyle.color=never",
+        "-f",
+        "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\pom.xml",
+        "-Dm3.mode=--apply",
+        "-Dm3.target.repo=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21",
+        "-Dm3.templates=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\preparation-01\\payload\\M3jdk21\\m3\\synexia-import\\intakes\\regex-precompute-v7-20261007\\successors\\adjacent-finite-runs-20261007\\recipe\\templates",
+        "org.codehaus.mojo:exec-maven-plugin:3.5.0:java@replay-exact-regex-adjacent-finite-runs"
+      ],
+      "nativeWrapper": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_applyTwoTargets.cmd",
+        "bytes": 4141,
+        "sha256": "fc3ef721ff0466a4ee25255ee9a3e2db90ee9629105c16bc41934020081edb8d",
+        "gitBlob": "7aa70674812250d58249d4fd0f1879582d999f65"
+      },
+      "preflight": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_applyTwoTargets.preflight.json",
+        "bytes": 1163,
+        "sha256": "2caee40a135dfd86df3b30a241736fe1cdc41fd1c079df53af43476c14b8a91d",
+        "gitBlob": "8f85da68a8a56c2b6bd626b1c8dbb710f0cdb091"
+      },
+      "preflightRecord": {
+        "schema": 1,
+        "stage": "applyTwoTargets",
+        "atUtc": "2026-10-07T16:03:03.589462+00:00",
+        "jvmInvocations": 0,
+        "mavenInvocations": 0,
+        "rootLane": "SOLE_SERIAL_JVM_LANE",
+        "status": "PASS_CPU_PREFLIGHT",
+        "nativeBindingSHA256": "b5a9f8b1cb10c5c6ee7451564b02e2c5adac47189fe8406c5df0f2131bf65f4e",
+        "immutableInputs": 441,
+        "qualifiedReplayClasses": 8,
+        "receivingTargets": [
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
+            "sha256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131"
+          },
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
+            "sha256": "ABSENT"
+          }
+        ],
+        "availableCommitBytes": 4219793408,
+        "minimumCommitBytes": 2147483648,
+        "freeKBytes": 37007781888,
+        "taskBytes": 2012686,
+        "projectedReceivingGrowthBytes": 15730
+      },
+      "preflightLog": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_applyTwoTargets.preflight.log",
+        "bytes": 311,
+        "sha256": "6808ddf2b5a0d054285862d8e7016b28f7c05ddd99218e54e0efb219301b83b9",
+        "gitBlob": "1199c1de6802f03e89727f44c90396af5f101da1"
+      },
+      "log": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_applyTwoTargets.log",
+        "bytes": 1384,
+        "sha256": "1a70fb8b13eba15d65349b79786382cffaa817f646bba5ffe4102627f0f25213",
+        "gitBlob": "3bf1bd1d741f9d8ddb7f26dc2d9a5a195deef6c4"
+      },
+      "exitReceipt": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_applyTwoTargets.exit.txt",
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "gitBlob": "18748286e5b8b4de5db905f87cdfed1a7d48fe60"
+      },
+      "originalBindingSHA256": "b5a9f8b1cb10c5c6ee7451564b02e2c5adac47189fe8406c5df0f2131bf65f4e",
+      "negativeInspector": null
+    },
+    {
+      "name": "defaultCheckFixedpoint",
+      "rootObservation": {
+        "chunk_id": "da21ef",
+        "wall_time_seconds": 1.296863,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "rootObservationCustody": {
+        "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_NATIVE06_ROOT_ACTUAL_CHECK_01.json",
+        "bytes": 123,
+        "sha256": "ffcafd2db18837296e44a83763bf46273cb863b4e58f893cab69e77ffb7c9863",
+        "gitBlob": "c5a903db8e736c2512cc35a02643d7c37897a29c"
+      },
+      "expectedExit": 0,
+      "actualExit": 0,
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "--enable-native-access=ALL-UNNAMED",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=128m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+        "-Djansi.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+        "-Duser.home=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\home",
+        "-Dfile.encoding=UTF-8",
+        "-classpath",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\boot\\plexus-classworlds-2.9.0.jar",
+        "-Dclassworlds.conf=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\m2.conf",
+        "-Dmaven.home=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14",
+        "-Dlibrary.jansi.path=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\jansi-native",
+        "-Dmaven.multiModuleProjectDirectory=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007",
+        "org.codehaus.plexus.classworlds.launcher.Launcher",
+        "-o",
+        "-B",
+        "-ntp",
+        "-e",
+        "-N",
+        "-s",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+        "-gs",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+        "-Dmaven.repo.local=K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache",
+        "-Dstyle.color=never",
+        "-f",
+        "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\pom.xml",
+        "-Dm3.mode=--check",
+        "-Dm3.target.repo=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21",
+        "-Dm3.templates=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\preparation-01\\payload\\M3jdk21\\m3\\synexia-import\\intakes\\regex-precompute-v7-20261007\\successors\\adjacent-finite-runs-20261007\\recipe\\templates",
+        "org.codehaus.mojo:exec-maven-plugin:3.5.0:java@replay-exact-regex-adjacent-finite-runs"
+      ],
+      "nativeWrapper": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_defaultCheckFixedpoint.cmd",
+        "bytes": 4197,
+        "sha256": "21784b6b8cc816e34116406b7cdcf28353286a7d355a936626b4d790c3846f2b",
+        "gitBlob": "de61ec153c350521180f2bb87003dafa0a51937c"
+      },
+      "preflight": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_defaultCheckFixedpoint.preflight.json",
+        "bytes": 1224,
+        "sha256": "39a93cb1b6a82477a403622fea5757d5d8b7cb9a91c97afec53d50f85e9bac07",
+        "gitBlob": "ae1f16395c97c89e73de11e9933505e83de8be7e"
+      },
+      "preflightRecord": {
+        "schema": 1,
+        "stage": "defaultCheckFixedpoint",
+        "atUtc": "2026-10-07T23:48:46.963435+00:00",
+        "jvmInvocations": 0,
+        "mavenInvocations": 0,
+        "rootLane": "SOLE_SERIAL_JVM_LANE",
+        "status": "PASS_CPU_PREFLIGHT",
+        "nativeBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+        "immutableInputs": 441,
+        "qualifiedReplayClasses": 8,
+        "receivingTargets": [
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
+            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+          },
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
+            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+          }
+        ],
+        "availableCommitBytes": 2236559360,
+        "minimumCommitBytes": 2147483648,
+        "freeKBytes": 36888735744,
+        "taskBytes": 3284456,
+        "projectedReceivingGrowthBytes": 0
+      },
+      "preflightLog": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_defaultCheckFixedpoint.preflight.log",
+        "bytes": 318,
+        "sha256": "901845409681c718367ffacda3f9675d8b92a86d41a4a7748b0181a0179fb1a3",
+        "gitBlob": "9448fa56ff3483fd5ab98eba87cf1bd84c18753d"
+      },
+      "log": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_defaultCheckFixedpoint.log",
+        "bytes": 976,
+        "sha256": "8226b9994c7cb4cc32a61495428faefcf61a72d6020d043b0e88944489add602",
+        "gitBlob": "c0c83565b11e8122c4aa7a5cace9f69a108dbe24"
+      },
+      "exitReceipt": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_defaultCheckFixedpoint.exit.txt",
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "gitBlob": "18748286e5b8b4de5db905f87cdfed1a7d48fe60"
+      },
+      "originalBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+      "negativeInspector": null
+    },
+    {
+      "name": "secondApplyFixedpoint",
+      "rootObservation": {
+        "chunk_id": "690406",
+        "wall_time_seconds": 1.4122241,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "rootObservationCustody": {
+        "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_NATIVE06_ROOT_ACTUAL_SECOND_APPLY_01.json",
+        "bytes": 124,
+        "sha256": "0859f3f1bd36bf661f6cefb90dc515ca4c4861d4119e3c8d6be0e439254839f6",
+        "gitBlob": "94d9842eab354c3f21d33fe2abfc5ea662f78ca8"
+      },
+      "expectedExit": 0,
+      "actualExit": 0,
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "--enable-native-access=ALL-UNNAMED",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=128m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+        "-Djansi.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+        "-Duser.home=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\home",
+        "-Dfile.encoding=UTF-8",
+        "-classpath",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\boot\\plexus-classworlds-2.9.0.jar",
+        "-Dclassworlds.conf=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\m2.conf",
+        "-Dmaven.home=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14",
+        "-Dlibrary.jansi.path=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\jansi-native",
+        "-Dmaven.multiModuleProjectDirectory=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007",
+        "org.codehaus.plexus.classworlds.launcher.Launcher",
+        "-o",
+        "-B",
+        "-ntp",
+        "-e",
+        "-N",
+        "-s",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+        "-gs",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+        "-Dmaven.repo.local=K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache",
+        "-Dstyle.color=never",
+        "-f",
+        "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\pom.xml",
+        "-Dm3.mode=--apply",
+        "-Dm3.target.repo=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21",
+        "-Dm3.templates=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\preparation-01\\payload\\M3jdk21\\m3\\synexia-import\\intakes\\regex-precompute-v7-20261007\\successors\\adjacent-finite-runs-20261007\\recipe\\templates",
+        "org.codehaus.mojo:exec-maven-plugin:3.5.0:java@replay-exact-regex-adjacent-finite-runs"
+      ],
+      "nativeWrapper": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_secondApplyFixedpoint.cmd",
+        "bytes": 4189,
+        "sha256": "3745bf1ce826c83d50e5708b248bb8d5081911823a18449d7219edcd8844c409",
+        "gitBlob": "c70c057e7c5fed3042188cbd89153b64bfb54b01"
+      },
+      "preflight": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_secondApplyFixedpoint.preflight.json",
+        "bytes": 1223,
+        "sha256": "922360bceb6f8b8833ad546e2edad19841f9bc2db3987dc278a6de2edfebd5d8",
+        "gitBlob": "728dc14ed4bc31acb8cfa70c6beac292a2def8c8"
+      },
+      "preflightRecord": {
+        "schema": 1,
+        "stage": "secondApplyFixedpoint",
+        "atUtc": "2026-10-07T23:48:51.916775+00:00",
+        "jvmInvocations": 0,
+        "mavenInvocations": 0,
+        "rootLane": "SOLE_SERIAL_JVM_LANE",
+        "status": "PASS_CPU_PREFLIGHT",
+        "nativeBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+        "immutableInputs": 441,
+        "qualifiedReplayClasses": 8,
+        "receivingTargets": [
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
+            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+          },
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
+            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+          }
+        ],
+        "availableCommitBytes": 2557087744,
+        "minimumCommitBytes": 2147483648,
+        "freeKBytes": 36955680768,
+        "taskBytes": 3286977,
+        "projectedReceivingGrowthBytes": 0
+      },
+      "preflightLog": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_secondApplyFixedpoint.preflight.log",
+        "bytes": 317,
+        "sha256": "f431efdc1ac1dd01f4ec4ed1905b79b86ba37f9b73523da9ada279bbeb9060d7",
+        "gitBlob": "24d0193b9a282e7b6dba07a23b1eaed664f46076"
+      },
+      "log": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_secondApplyFixedpoint.log",
+        "bytes": 975,
+        "sha256": "aba6dba4c42d5b204aba61a3e68ce1322d487751c559270b5bf360b251ab6893",
+        "gitBlob": "63008343a3c8e920bcf828e9d02530cee0a814f2"
+      },
+      "exitReceipt": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_secondApplyFixedpoint.exit.txt",
+        "bytes": 3,
+        "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "gitBlob": "18748286e5b8b4de5db905f87cdfed1a7d48fe60"
+      },
+      "originalBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+      "negativeInspector": null
+    },
+    {
+      "name": "driftProgram",
+      "rootObservation": {
+        "chunk_id": "89e05b",
+        "wall_time_seconds": 1.3250132,
+        "exit_code": 1,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "rootObservationCustody": {
+        "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_NATIVE06_ROOT_ACTUAL_PROGRAM_DRIFT_01.json",
+        "bytes": 124,
+        "sha256": "9f0dce632328fb1750a7dadcdd999e73bef6a6fda5d224153953593a5ebf66bb",
+        "gitBlob": "5973eb6ce42e362a545a6a101f2010b4a2a2ca29"
+      },
+      "expectedExit": 1,
+      "actualExit": 1,
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "--enable-native-access=ALL-UNNAMED",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=128m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+        "-Djansi.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+        "-Duser.home=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\home",
+        "-Dfile.encoding=UTF-8",
+        "-classpath",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\boot\\plexus-classworlds-2.9.0.jar",
+        "-Dclassworlds.conf=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\m2.conf",
+        "-Dmaven.home=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14",
+        "-Dlibrary.jansi.path=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\jansi-native",
+        "-Dmaven.multiModuleProjectDirectory=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007",
+        "org.codehaus.plexus.classworlds.launcher.Launcher",
+        "-o",
+        "-B",
+        "-ntp",
+        "-e",
+        "-N",
+        "-s",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+        "-gs",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+        "-Dmaven.repo.local=K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache",
+        "-Dstyle.color=never",
+        "-f",
+        "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\pom.xml",
+        "-Dm3.mode=--apply",
+        "-Dm3.target.repo=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21",
+        "-Dm3.templates=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\preparation-01\\payload\\M3jdk21\\m3\\synexia-import\\intakes\\regex-precompute-v7-20261007\\successors\\adjacent-finite-runs-20261007\\recipe\\templates",
+        "org.codehaus.mojo:exec-maven-plugin:3.5.0:java@replay-exact-regex-adjacent-finite-runs"
+      ],
+      "nativeWrapper": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_driftProgram.cmd",
+        "bytes": 4117,
+        "sha256": "e0347e30c19d717351aaffe12192e294d216c0f527261120a0afcd9e6cb303a3",
+        "gitBlob": "f41100742c275b01b1924a569281b8e3c5ac55b5"
+      },
+      "preflight": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_driftProgram.preflight.json",
+        "bytes": 1214,
+        "sha256": "d3999a54b1f10af506f643bbf89c7c49d257e7b9b3b842ea96400886e55eae8e",
+        "gitBlob": "ef926a28cebb3d676fb0b0fa6e4741257227dc2c"
+      },
+      "preflightRecord": {
+        "schema": 1,
+        "stage": "driftProgram",
+        "atUtc": "2026-10-07T23:49:01.473403+00:00",
+        "jvmInvocations": 0,
+        "mavenInvocations": 0,
+        "rootLane": "SOLE_SERIAL_JVM_LANE",
+        "status": "PASS_CPU_PREFLIGHT",
+        "nativeBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+        "immutableInputs": 441,
+        "qualifiedReplayClasses": 8,
+        "receivingTargets": [
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
+            "sha256": "165aa1c03b188d44a3a1700756b7253990b37194c363dffcc72f7809d75973e9"
+          },
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
+            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+          }
+        ],
+        "availableCommitBytes": 2212773888,
+        "minimumCommitBytes": 2147483648,
+        "freeKBytes": 36955668480,
+        "taskBytes": 3290642,
+        "projectedReceivingGrowthBytes": 0
+      },
+      "preflightLog": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_driftProgram.preflight.log",
+        "bytes": 308,
+        "sha256": "d7ffbf080740de3fe3cb7ef15f52bf0ae26d9d1c9ee6270380e4d636422a3eb7",
+        "gitBlob": "dd62e9921925841f854f2d5cc468ea4efcc1a512"
+      },
+      "log": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_driftProgram.log",
+        "bytes": 8008,
+        "sha256": "52a71971e552d78d60a06fcaab5cce453a275a2a3e41ae0a0722593c33012024",
+        "gitBlob": "0badd3b1396a7666139b91ab2c714dffaa0c45d1"
+      },
+      "exitReceipt": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_driftProgram.exit.txt",
+        "bytes": 3,
+        "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+        "gitBlob": "f33dfa25aa16a97ca941fe1d9cabdc3689179f3f"
+      },
+      "originalBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+      "negativeInspector": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_DRIFT_1_VERIFIED.json",
+        "bytes": 907,
+        "sha256": "2f8e486007470208240421eafc22437991c4a9caea3a1f220d50b005e1bde271",
+        "gitBlob": "b3eacdfc1a1ae67a43f6431e3b81e34e92dca2a9"
+      }
+    },
+    {
+      "name": "driftQuery",
+      "rootObservation": {
+        "chunk_id": "600d9c",
+        "wall_time_seconds": 1.3140264,
+        "exit_code": 1,
+        "original_token_count": 0,
+        "output": ""
+      },
+      "rootObservationCustody": {
+        "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_NATIVE06_ROOT_ACTUAL_QUERY_DRIFT_01.json",
+        "bytes": 124,
+        "sha256": "10bd74cabe061a51e8b098a70df7ea919b2a2d3b321aa47d5a019acdb46ca659",
+        "gitBlob": "d708610500f79550ff4a04f3ad8c56c8299a1cc2"
+      },
+      "expectedExit": 1,
+      "actualExit": 1,
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "--enable-native-access=ALL-UNNAMED",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:MaxMetaspaceSize=128m",
+        "-XX:ReservedCodeCacheSize=32m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+        "-Djansi.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+        "-Duser.home=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\home",
+        "-Dfile.encoding=UTF-8",
+        "-classpath",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\boot\\plexus-classworlds-2.9.0.jar",
+        "-Dclassworlds.conf=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\m2.conf",
+        "-Dmaven.home=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14",
+        "-Dlibrary.jansi.path=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\jansi-native",
+        "-Dmaven.multiModuleProjectDirectory=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007",
+        "org.codehaus.plexus.classworlds.launcher.Launcher",
+        "-o",
+        "-B",
+        "-ntp",
+        "-e",
+        "-N",
+        "-s",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+        "-gs",
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+        "-Dmaven.repo.local=K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache",
+        "-Dstyle.color=never",
+        "-f",
+        "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\pom.xml",
+        "-Dm3.mode=--apply",
+        "-Dm3.target.repo=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21",
+        "-Dm3.templates=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\preparation-01\\payload\\M3jdk21\\m3\\synexia-import\\intakes\\regex-precompute-v7-20261007\\successors\\adjacent-finite-runs-20261007\\recipe\\templates",
+        "org.codehaus.mojo:exec-maven-plugin:3.5.0:java@replay-exact-regex-adjacent-finite-runs"
+      ],
+      "nativeWrapper": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_driftQuery.cmd",
+        "bytes": 4101,
+        "sha256": "4c197c0826e74f20df8ac0e491d3587ad7d3ec636e1244a33a9d143ab7629a47",
+        "gitBlob": "3443a64da7553400891ede45a66b1f726e6346b7"
+      },
+      "preflight": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_driftQuery.preflight.json",
+        "bytes": 1212,
+        "sha256": "c382bc0891f79798b3848054afa8360f144bd39cac6208e2b3305dd2e4d25984",
+        "gitBlob": "59e45d61296acb6288156ee0dea50116d980772f"
+      },
+      "preflightRecord": {
+        "schema": 1,
+        "stage": "driftQuery",
+        "atUtc": "2026-10-07T23:49:16.300274+00:00",
+        "jvmInvocations": 0,
+        "mavenInvocations": 0,
+        "rootLane": "SOLE_SERIAL_JVM_LANE",
+        "status": "PASS_CPU_PREFLIGHT",
+        "nativeBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+        "immutableInputs": 441,
+        "qualifiedReplayClasses": 8,
+        "receivingTargets": [
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
+            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+          },
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
+            "sha256": "862ef6f729eee24a03a8badef166f2364b5aa6309aab95a732f774c1892f0607"
+          }
+        ],
+        "availableCommitBytes": 2783305728,
+        "minimumCommitBytes": 2147483648,
+        "freeKBytes": 36955643904,
+        "taskBytes": 3302204,
+        "projectedReceivingGrowthBytes": 0
+      },
+      "preflightLog": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_driftQuery.preflight.log",
+        "bytes": 306,
+        "sha256": "c7dad1d85d1d2437d319e44c36cbbed67561a40aa5bc8b52e0711bfa760f27a5",
+        "gitBlob": "ac989a6ffd6c7c6b34c993f599994c779aeb6be8"
+      },
+      "log": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_driftQuery.log",
+        "bytes": 8033,
+        "sha256": "3997d960abef0ffad4fcccf3a8ee84aae78dbda83c3945f81f5e1290b4e86bcf",
+        "gitBlob": "27a5f6c9fd62c39ccee7e6723030f20e0055f394"
+      },
+      "exitReceipt": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_driftQuery.exit.txt",
+        "bytes": 3,
+        "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+        "gitBlob": "f33dfa25aa16a97ca941fe1d9cabdc3689179f3f"
+      },
+      "originalBindingSHA256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+      "negativeInspector": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_06_DRIFT_2_VERIFIED.json",
+        "bytes": 910,
+        "sha256": "e241f9e8c83254da3a3838ef3b1a588f8ad5f800531e9de80a060a1fb4295071",
+        "gitBlob": "2979576c7fb63a53f47ac7f5746c1758bc98df25"
+      }
+    }
+  ],
+  "nativeMavenJVMInvocations": 5,
+  "sealingJVMInvocations": 0,
+  "sealingReviewerInvocations": 0,
+  "GitHubMutations": 0,
+  "duplicateSuccessfulApplyInvocations": 0,
+  "retainedNative03ApplyAndFourExplicitNative06SuccessorStages": true,
+  "original441ImmutableInputs": [
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\DIRECT_CANONICAL_ACTUAL_TERMINAL.json",
+      "bytes": 20029,
+      "sha256": "61b2e9b97601e1539fface6041132447219aa406fca8e71f18a72b906cc3c405"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\DIRECT_CANONICAL_ACTUAL_TERMINAL.json",
+      "bytes": 20029,
+      "sha256": "61b2e9b97601e1539fface6041132447219aa406fca8e71f18a72b906cc3c405"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\DIRECT_CANONICAL_INDEPENDENT_CPU_AUDIT.json",
+      "bytes": 42572,
+      "sha256": "4257fbc48e0b4f0682c8cabd322af5549ba0d269461cdd4aa563dd4bd2e3ec40"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\DIRECT_CANONICAL_INDEPENDENT_CPU_AUDIT.json",
+      "bytes": 42572,
+      "sha256": "4257fbc48e0b4f0682c8cabd322af5549ba0d269461cdd4aa563dd4bd2e3ec40"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\EXACT_CURRENT_SOURCE_CUSTODY.json",
+      "bytes": 8587,
+      "sha256": "53fbc04085e5db9a1ff3b2fbf34be73c53c852e15454d73d4293e8dd5356f61e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\EXACT_CURRENT_SOURCE_CUSTODY.json",
+      "bytes": 8587,
+      "sha256": "53fbc04085e5db9a1ff3b2fbf34be73c53c852e15454d73d4293e8dd5356f61e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\EXEC_PLUGIN_POM_LICENSE_OBSERVATION.json",
+      "bytes": 581,
+      "sha256": "cf55844190dc78ba6d881c76ceb01d2ae36fc15c31cfc06799479032a67f0edf"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\EXEC_PLUGIN_POM_LICENSE_OBSERVATION.json",
+      "bytes": 581,
+      "sha256": "cf55844190dc78ba6d881c76ceb01d2ae36fc15c31cfc06799479032a67f0edf"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\EXISTING_INPROCESS_PLUGIN_INVENTORY.json",
+      "bytes": 4668,
+      "sha256": "e792a0398afd97c897db7196fe3e5a2e2b91d4d13f8ebdc6954c0503676a9d87"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\EXISTING_INPROCESS_PLUGIN_INVENTORY.json",
+      "bytes": 4668,
+      "sha256": "e792a0398afd97c897db7196fe3e5a2e2b91d4d13f8ebdc6954c0503676a9d87"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\INPROCESS_DONOR_INVENTORY_BEFORE_ADAPTATION.json",
+      "bytes": 1332,
+      "sha256": "6aca85d51c42092d038921704e39aaf0d11df75c4f160cf8ad009e6be2054d1e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\INPROCESS_DONOR_INVENTORY_BEFORE_ADAPTATION.json",
+      "bytes": 1332,
+      "sha256": "6aca85d51c42092d038921704e39aaf0d11df75c4f160cf8ad009e6be2054d1e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\ORIGINAL_DONOR_POM_UNCHANGED.xml",
+      "bytes": 1905,
+      "sha256": "67d06e79535fdcf5fc1419446cdf94a0859ba8f557d27f16adc1a9ce47766871"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\ORIGINAL_DONOR_POM_UNCHANGED.xml",
+      "bytes": 1905,
+      "sha256": "67d06e79535fdcf5fc1419446cdf94a0859ba8f557d27f16adc1a9ce47766871"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\ORIGINAL_POSTIMAGE_CPU_PROOF.json",
+      "bytes": 7396,
+      "sha256": "46849eca65998f6394de3eed9badf6a8b4efab694fd9bda3505f44a388ef60af"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\ORIGINAL_POSTIMAGE_CPU_PROOF.json",
+      "bytes": 7396,
+      "sha256": "46849eca65998f6394de3eed9badf6a8b4efab694fd9bda3505f44a388ef60af"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\QUALIFICATION_SCOPE.json",
+      "bytes": 5059,
+      "sha256": "972082d93c633106836d8aecdd1b8f9c91f2e6625403442cf638a1efa1c0bb85"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\evidence\\QUALIFICATION_SCOPE.json",
+      "bytes": 5059,
+      "sha256": "972082d93c633106836d8aecdd1b8f9c91f2e6625403442cf638a1efa1c0bb85"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-03\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\FOSS_REUSE_DECISION.tsv",
+      "bytes": 3588,
+      "sha256": "50da5691358088b1d1bcd0dbddddb8a7484520012683d0379b7f27d5b869e842"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\FOSS_REUSE_DECISION.tsv",
+      "bytes": 3588,
+      "sha256": "50da5691358088b1d1bcd0dbddddb8a7484520012683d0379b7f27d5b869e842"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\HISTORICAL_NOTICE",
+      "bytes": 3348,
+      "sha256": "c8156087b769a1bbd52e41c346d561a384af37b7931b82ac1e111270d1776dd7"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\HISTORICAL_NOTICE",
+      "bytes": 3348,
+      "sha256": "c8156087b769a1bbd52e41c346d561a384af37b7931b82ac1e111270d1776dd7"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\LICENSE",
+      "bytes": 11558,
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\LICENSE",
+      "bytes": 11558,
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\NOTICE",
+      "bytes": 14991,
+      "sha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\NOTICE",
+      "bytes": 14991,
+      "sha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\pom.xml",
+      "bytes": 2713,
+      "sha256": "1ba95b36deac45a8f343eb479b012dd4ac17e81f95581c885fcf0f6110b664fe"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\pom.xml",
+      "bytes": 2713,
+      "sha256": "1ba95b36deac45a8f343eb479b012dd4ac17e81f95581c885fcf0f6110b664fe"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-03\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\PROVENANCE.md",
+      "bytes": 3856,
+      "sha256": "4dff48f16e64834942dbb543b6ca9bfcf840cf948cf93d783c31ba34890b1dbe"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\PROVENANCE.md",
+      "bytes": 3856,
+      "sha256": "4dff48f16e64834942dbb543b6ca9bfcf840cf948cf93d783c31ba34890b1dbe"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\README.md",
+      "bytes": 2602,
+      "sha256": "6ae6c70df8d494ee23608af5de33b887565150e5812a156a278ef81050140dde"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\README.md",
+      "bytes": 2602,
+      "sha256": "6ae6c70df8d494ee23608af5de33b887565150e5812a156a278ef81050140dde"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\templates\\manifest.tsv",
+      "bytes": 884,
+      "sha256": "799df593a3760af7f6b3541bf01ea3d4d3252889196544d11c847434929b3f18"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\templates\\manifest.tsv",
+      "bytes": 884,
+      "sha256": "799df593a3760af7f6b3541bf01ea3d4d3252889196544d11c847434929b3f18"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\templates\\synexia-indexstring\\src\\test\\java\\com\\synexia\\indexstring\\MappedIndexDictionaryTest.java.txt",
+      "bytes": 18016,
+      "sha256": "8e2f1cc029a3886598d17cb1a058ea054b5a4fc25356428a24d75aa37571335d"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\templates\\synexia-indexstring\\src\\test\\java\\com\\synexia\\indexstring\\MappedIndexDictionaryTest.java.txt",
+      "bytes": 18016,
+      "sha256": "8e2f1cc029a3886598d17cb1a058ea054b5a4fc25356428a24d75aa37571335d"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\templates\\synexia-indexstring\\src\\test\\resources\\com\\synexia\\indexstring\\authentic-format78\\adaptive-v8.sidx.base64.txt",
+      "bytes": 797440,
+      "sha256": "bbb8e5a4204a05a68c366e9d13bed63201751243ca790aa7f233ce7898d7a8ee"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\templates\\synexia-indexstring\\src\\test\\resources\\com\\synexia\\indexstring\\authentic-format78\\adaptive-v8.sidx.base64.txt",
+      "bytes": 797440,
+      "sha256": "bbb8e5a4204a05a68c366e9d13bed63201751243ca790aa7f233ce7898d7a8ee"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\templates\\synexia-indexstring\\src\\test\\resources\\com\\synexia\\indexstring\\authentic-format78\\inline-v7.sidx.base64.txt",
+      "bytes": 724004,
+      "sha256": "37d92f5306a80fef9316973ea347cb2d1d88a3d706cc967e3100cd9ec25f7590"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\templates\\synexia-indexstring\\src\\test\\resources\\com\\synexia\\indexstring\\authentic-format78\\inline-v7.sidx.base64.txt",
+      "bytes": 724004,
+      "sha256": "37d92f5306a80fef9316973ea347cb2d1d88a3d706cc967e3100cd9ec25f7590"
+    },
+    {
+      "path": "K:\\codex-work\\m3-dictionary-format78-canonical-fixture-recipe-p0-20261007\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\templates\\base-revision.txt",
+      "bytes": 41,
+      "sha256": "0711e10ef3e4a80e9da204d114a581d45b79ac58b080e387756d1b9837492668"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-format78-canonical-fixture-20261007\\templates\\base-revision.txt",
+      "bytes": 41,
+      "sha256": "0711e10ef3e4a80e9da204d114a581d45b79ac58b080e387756d1b9837492668"
+    },
+    {
+      "path": "K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\donor-sources\\Replay.java",
+      "bytes": 10190,
+      "sha256": "fab78282a3e137b5c917a1351f97ec120ef0aab0d4f0615c4c3cd37c97665b2f"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\Replay.java",
+      "bytes": 10190,
+      "sha256": "fab78282a3e137b5c917a1351f97ec120ef0aab0d4f0615c4c3cd37c97665b2f"
+    },
+    {
+      "path": "K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\donor-sources\\M3GpuToolJoinManifest.java",
+      "bytes": 10964,
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\M3GpuToolJoinManifest.java",
+      "bytes": 10964,
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\plugins\\maven-compiler-plugin\\3.15.0\\maven-compiler-plugin-3.15.0.jar",
+      "bytes": 83823,
+      "sha256": "6ea0ca0558ccf248c514aa94908d1f895a92e9b4e4604c1bb29f7a4ab1b833f0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\plugins\\maven-compiler-plugin\\3.15.0\\maven-compiler-plugin-3.15.0.jar",
+      "bytes": 83823,
+      "sha256": "6ea0ca0558ccf248c514aa94908d1f895a92e9b4e4604c1bb29f7a4ab1b833f0"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\plugins\\maven-compiler-plugin\\3.15.0\\maven-compiler-plugin-3.15.0.pom",
+      "bytes": 9549,
+      "sha256": "2d2f7a7073c1def3b1473fbedad7dbfc559ed6fb0dc5a94edc347fd4905e7651"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\plugins\\maven-compiler-plugin\\3.15.0\\maven-compiler-plugin-3.15.0.pom",
+      "bytes": 9549,
+      "sha256": "2d2f7a7073c1def3b1473fbedad7dbfc559ed6fb0dc5a94edc347fd4905e7651"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\plugins\\maven-plugins\\47\\maven-plugins-47.pom",
+      "bytes": 7204,
+      "sha256": "58ddbb8e429cb5e9054c2f5f7b7cdfeb7adbcdfda21d92b67f67fa2b94edf982"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\plugins\\maven-plugins\\47\\maven-plugins-47.pom",
+      "bytes": 7204,
+      "sha256": "58ddbb8e429cb5e9054c2f5f7b7cdfeb7adbcdfda21d92b67f67fa2b94edf982"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\maven-parent\\47\\maven-parent-47.pom",
+      "bytes": 53612,
+      "sha256": "82d0112ba1907ff5fd13a2485829c97df66c6a81e075359a561a422f7d1582d3"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\maven-parent\\47\\maven-parent-47.pom",
+      "bytes": 53612,
+      "sha256": "82d0112ba1907ff5fd13a2485829c97df66c6a81e075359a561a422f7d1582d3"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\apache\\37\\apache-37.pom",
+      "bytes": 25620,
+      "sha256": "524ec4787aff73af6b3a9fafa154c7f1881b648299b663fdbfcadda1286f2353"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\apache\\37\\apache-37.pom",
+      "bytes": 25620,
+      "sha256": "524ec4787aff73af6b3a9fafa154c7f1881b648299b663fdbfcadda1286f2353"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\junit-bom\\5.14.2\\junit-bom-5.14.2.pom",
+      "bytes": 5669,
+      "sha256": "ed2dcc7855bd460bccc93a1bf0c962e63b566ff7d8f1ded0f1f2593ba8183aaf"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\junit\\junit-bom\\5.14.2\\junit-bom-5.14.2.pom",
+      "bytes": 5669,
+      "sha256": "ed2dcc7855bd460bccc93a1bf0c962e63b566ff7d8f1ded0f1f2593ba8183aaf"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\javax\\inject\\javax.inject\\1\\javax.inject-1.jar",
+      "bytes": 2497,
+      "sha256": "91c77044a50c481636c32d916fd89c9118a72195390452c81065080f957de7ff"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\javax\\inject\\javax.inject\\1\\javax.inject-1.jar",
+      "bytes": 2497,
+      "sha256": "91c77044a50c481636c32d916fd89c9118a72195390452c81065080f957de7ff"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\javax\\inject\\javax.inject\\1\\javax.inject-1.pom",
+      "bytes": 612,
+      "sha256": "943e12b100627804638fa285805a0ab788a680266531e650921ebfe4621a8bfa"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\javax\\inject\\javax.inject\\1\\javax.inject-1.pom",
+      "bytes": 612,
+      "sha256": "943e12b100627804638fa285805a0ab788a680266531e650921ebfe4621a8bfa"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\1.7.36\\slf4j-api-1.7.36.jar",
+      "bytes": 41125,
+      "sha256": "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\slf4j\\slf4j-api\\1.7.36\\slf4j-api-1.7.36.jar",
+      "bytes": 41125,
+      "sha256": "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\1.7.36\\slf4j-api-1.7.36.pom",
+      "bytes": 2743,
+      "sha256": "fb046a9c229437928bb11c2d27c8b5d773eb8a25e60cbd253d985210dedc2684"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\slf4j\\slf4j-api\\1.7.36\\slf4j-api-1.7.36.pom",
+      "bytes": 2743,
+      "sha256": "fb046a9c229437928bb11c2d27c8b5d773eb8a25e60cbd253d985210dedc2684"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-parent\\1.7.36\\slf4j-parent-1.7.36.pom",
+      "bytes": 14093,
+      "sha256": "bb388d37fbcdd3cde64c3cede21838693218dc451f04040c5df360a78ed7e812"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\slf4j\\slf4j-parent\\1.7.36\\slf4j-parent-1.7.36.pom",
+      "bytes": 14093,
+      "sha256": "bb388d37fbcdd3cde64c3cede21838693218dc451f04040c5df360a78ed7e812"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.9.1\\asm-9.9.1.jar",
+      "bytes": 126252,
+      "sha256": "6f3828a215c920059a5efa2fb55c233d6c54ec5cadca99ce1b1bdd10077c7ddd"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm\\9.9.1\\asm-9.9.1.jar",
+      "bytes": 126252,
+      "sha256": "6f3828a215c920059a5efa2fb55c233d6c54ec5cadca99ce1b1bdd10077c7ddd"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.9.1\\asm-9.9.1.pom",
+      "bytes": 2372,
+      "sha256": "aca68dee9ba2f6cd90ffde728efdc7e3ebfcf59f3f41fbfe248d2d01d5b866af"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm\\9.9.1\\asm-9.9.1.pom",
+      "bytes": 2372,
+      "sha256": "aca68dee9ba2f6cd90ffde728efdc7e3ebfcf59f3f41fbfe248d2d01d5b866af"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\ow2\\1.5.1\\ow2-1.5.1.pom",
+      "bytes": 11290,
+      "sha256": "321ddbb7ee6fe4f53dea6b4cd6db74154d6bfa42391c1f763b361b9f485acf05"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\ow2\\1.5.1\\ow2-1.5.1.pom",
+      "bytes": 11290,
+      "sha256": "321ddbb7ee6fe4f53dea6b4cd6db74154d6bfa42391c1f763b361b9f485acf05"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\shared\\maven-shared-utils\\3.4.2\\maven-shared-utils-3.4.2.jar",
+      "bytes": 151103,
+      "sha256": "b613357e1bad4dfc1dead801691c9460f9585fe7c6b466bc25186212d7d18487"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\shared\\maven-shared-utils\\3.4.2\\maven-shared-utils-3.4.2.jar",
+      "bytes": 151103,
+      "sha256": "b613357e1bad4dfc1dead801691c9460f9585fe7c6b466bc25186212d7d18487"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\shared\\maven-shared-utils\\3.4.2\\maven-shared-utils-3.4.2.pom",
+      "bytes": 5899,
+      "sha256": "a941745d7faeb8dc9a75edc2c330c994b7440b9a44d21142716b6053967a41c1"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\shared\\maven-shared-utils\\3.4.2\\maven-shared-utils-3.4.2.pom",
+      "bytes": 5899,
+      "sha256": "a941745d7faeb8dc9a75edc2c330c994b7440b9a44d21142716b6053967a41c1"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\shared\\maven-shared-components\\39\\maven-shared-components-39.pom",
+      "bytes": 3220,
+      "sha256": "17e81388d88ba61c4055450ec90a32ee30acd07f46dc6e31e096b8e53735f4b2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\shared\\maven-shared-components\\39\\maven-shared-components-39.pom",
+      "bytes": 3220,
+      "sha256": "17e81388d88ba61c4055450ec90a32ee30acd07f46dc6e31e096b8e53735f4b2"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\maven-parent\\39\\maven-parent-39.pom",
+      "bytes": 47971,
+      "sha256": "cfe4820aa1d96ae51d1dc5b0e2a9dc582c42478c24c95ca8238f547e60bef721"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\maven-parent\\39\\maven-parent-39.pom",
+      "bytes": 47971,
+      "sha256": "cfe4820aa1d96ae51d1dc5b0e2a9dc582c42478c24c95ca8238f547e60bef721"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\apache\\29\\apache-29.pom",
+      "bytes": 20721,
+      "sha256": "3e49037174820bbd0df63420a977255886398954c2a06291fa61f727ac35b377"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\apache\\29\\apache-29.pom",
+      "bytes": 20721,
+      "sha256": "3e49037174820bbd0df63420a977255886398954c2a06291fa61f727ac35b377"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.11.0\\commons-io-2.11.0.jar",
+      "bytes": 327135,
+      "sha256": "961b2f6d87dbacc5d54abf45ab7a6e2495f89b75598962d8c723cea9bc210908"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\commons-io\\commons-io\\2.11.0\\commons-io-2.11.0.jar",
+      "bytes": 327135,
+      "sha256": "961b2f6d87dbacc5d54abf45ab7a6e2495f89b75598962d8c723cea9bc210908"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.11.0\\commons-io-2.11.0.pom",
+      "bytes": 19729,
+      "sha256": "2e016fd7e3244b5f2c20acad834d93aa4790486ee1e4564641361a3e831eef59"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\commons-io\\commons-io\\2.11.0\\commons-io-2.11.0.pom",
+      "bytes": 19729,
+      "sha256": "2e016fd7e3244b5f2c20acad834d93aa4790486ee1e4564641361a3e831eef59"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-parent\\52\\commons-parent-52.pom",
+      "bytes": 79273,
+      "sha256": "75dbe8f34e98e4c3ff42daae4a2f9eb4cbcd3b5f1047d54460ace906dbb4502e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\commons\\commons-parent\\52\\commons-parent-52.pom",
+      "bytes": 79273,
+      "sha256": "75dbe8f34e98e4c3ff42daae4a2f9eb4cbcd3b5f1047d54460ace906dbb4502e"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\apache\\23\\apache-23.pom",
+      "bytes": 18422,
+      "sha256": "bc10624e0623f36577fac5639ca2936d3240ed152fb6d8d533ab4d270543491c"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\apache\\23\\apache-23.pom",
+      "bytes": 18422,
+      "sha256": "bc10624e0623f36577fac5639ca2936d3240ed152fb6d8d533ab4d270543491c"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\junit-bom\\5.7.2\\junit-bom-5.7.2.pom",
+      "bytes": 5098,
+      "sha256": "cd14aaa869991f82021c585d570d31ff342bcba58bb44233b70193771b96487b"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\junit\\junit-bom\\5.7.2\\junit-bom-5.7.2.pom",
+      "bytes": 5098,
+      "sha256": "cd14aaa869991f82021c585d570d31ff342bcba58bb44233b70193771b96487b"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\shared\\maven-shared-incremental\\1.1\\maven-shared-incremental-1.1.jar",
+      "bytes": 13538,
+      "sha256": "61988e54486a5dc38f06c70fdae5b108556c63bd433697b9f4305fcdb30fa40e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\shared\\maven-shared-incremental\\1.1\\maven-shared-incremental-1.1.jar",
+      "bytes": 13538,
+      "sha256": "61988e54486a5dc38f06c70fdae5b108556c63bd433697b9f4305fcdb30fa40e"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\shared\\maven-shared-incremental\\1.1\\maven-shared-incremental-1.1.pom",
+      "bytes": 4742,
+      "sha256": "f21d19eb49b4a66cd85354a9ee7335439ea92a368173760a202766008cc19924"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\shared\\maven-shared-incremental\\1.1\\maven-shared-incremental-1.1.pom",
+      "bytes": 4742,
+      "sha256": "f21d19eb49b4a66cd85354a9ee7335439ea92a368173760a202766008cc19924"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\shared\\maven-shared-components\\19\\maven-shared-components-19.pom",
+      "bytes": 6359,
+      "sha256": "d82408269aada2eb1521ee8ff17f7c67333684f8ed2a09a9e35badd2e7575957"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\shared\\maven-shared-components\\19\\maven-shared-components-19.pom",
+      "bytes": 6359,
+      "sha256": "d82408269aada2eb1521ee8ff17f7c67333684f8ed2a09a9e35badd2e7575957"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\maven-parent\\23\\maven-parent-23.pom",
+      "bytes": 32586,
+      "sha256": "5425501edd9e0bd7b01eca53cc92e06836d24851151304f9c6759e1713541685"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\maven-parent\\23\\maven-parent-23.pom",
+      "bytes": 32586,
+      "sha256": "5425501edd9e0bd7b01eca53cc92e06836d24851151304f9c6759e1713541685"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\apache\\13\\apache-13.pom",
+      "bytes": 13974,
+      "sha256": "ff513db0361fd41237bef4784968bc15aae478d4ec0a9496f811072ccaf3841d"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\apache\\13\\apache-13.pom",
+      "bytes": 13974,
+      "sha256": "ff513db0361fd41237bef4784968bc15aae478d4ec0a9496f811072ccaf3841d"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-java\\1.5.2\\plexus-java-1.5.2.jar",
+      "bytes": 57355,
+      "sha256": "1e6a4298e145c1e23af430b04ac53d76dc11077e0f3d36ef9c027ce790d96505"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-java\\1.5.2\\plexus-java-1.5.2.jar",
+      "bytes": 57355,
+      "sha256": "1e6a4298e145c1e23af430b04ac53d76dc11077e0f3d36ef9c027ce790d96505"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-java\\1.5.2\\plexus-java-1.5.2.pom",
+      "bytes": 4083,
+      "sha256": "9617b619010dbb95c237e35bff7ee1d336cbcfd9ff5c229a935a9e3587ff0c37"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-java\\1.5.2\\plexus-java-1.5.2.pom",
+      "bytes": 4083,
+      "sha256": "9617b619010dbb95c237e35bff7ee1d336cbcfd9ff5c229a935a9e3587ff0c37"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-languages\\1.5.2\\plexus-languages-1.5.2.pom",
+      "bytes": 3858,
+      "sha256": "9e7d29fc65089d69e75b559efaa5db8117dab3c579d0ef19759776d5643a492b"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-languages\\1.5.2\\plexus-languages-1.5.2.pom",
+      "bytes": 3858,
+      "sha256": "9e7d29fc65089d69e75b559efaa5db8117dab3c579d0ef19759776d5643a492b"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus\\24\\plexus-24.pom",
+      "bytes": 31377,
+      "sha256": "89a1bc79e46c35ab108b7e215bb2c5c215ff8f3af1ae3cfef82d9a2b33b06c51"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus\\24\\plexus-24.pom",
+      "bytes": 31377,
+      "sha256": "89a1bc79e46c35ab108b7e215bb2c5c215ff8f3af1ae3cfef82d9a2b33b06c51"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\junit-bom\\5.13.4\\junit-bom-5.13.4.pom",
+      "bytes": 5669,
+      "sha256": "d7a08a99b2502f0bb68cd4e1f984f0bf69324aaa208bd0f73366c03fc3548a42"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\junit\\junit-bom\\5.13.4\\junit-bom-5.13.4.pom",
+      "bytes": 5669,
+      "sha256": "d7a08a99b2502f0bb68cd4e1f984f0bf69324aaa208bd0f73366c03fc3548a42"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\com\\thoughtworks\\qdox\\qdox\\2.2.0\\qdox-2.2.0.jar",
+      "bytes": 353020,
+      "sha256": "c260c3230b2340af97d54bf01f7f67ebc57c901922736c881bb11cb981302be2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\com\\thoughtworks\\qdox\\qdox\\2.2.0\\qdox-2.2.0.jar",
+      "bytes": 353020,
+      "sha256": "c260c3230b2340af97d54bf01f7f67ebc57c901922736c881bb11cb981302be2"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\com\\thoughtworks\\qdox\\qdox\\2.2.0\\qdox-2.2.0.pom",
+      "bytes": 17651,
+      "sha256": "c850fbad0b05eada85ca1bce22409a75f758aea0ca1e47a828c6a505ad361fab"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\com\\thoughtworks\\qdox\\qdox\\2.2.0\\qdox-2.2.0.pom",
+      "bytes": 17651,
+      "sha256": "c850fbad0b05eada85ca1bce22409a75f758aea0ca1e47a828c6a505ad361fab"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\sonatype\\oss\\oss-parent\\9\\oss-parent-9.pom",
+      "bytes": 6569,
+      "sha256": "fb40265f982548212ff82e362e59732b2187ec6f0d80182885c14ef1f982827a"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\sonatype\\oss\\oss-parent\\9\\oss-parent-9.pom",
+      "bytes": 6569,
+      "sha256": "fb40265f982548212ff82e362e59732b2187ec6f0d80182885c14ef1f982827a"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-compiler-api\\2.16.2\\plexus-compiler-api-2.16.2.jar",
+      "bytes": 29079,
+      "sha256": "db34d13c8d688063a946922f4de448c909ba43fec355ea15514495f33072b031"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler-api\\2.16.2\\plexus-compiler-api-2.16.2.jar",
+      "bytes": 29079,
+      "sha256": "db34d13c8d688063a946922f4de448c909ba43fec355ea15514495f33072b031"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-compiler-api\\2.16.2\\plexus-compiler-api-2.16.2.pom",
+      "bytes": 1362,
+      "sha256": "ae7ca19e5a3bafdf92a403edf8af5876c746024424059c719b1544de48384ff8"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler-api\\2.16.2\\plexus-compiler-api-2.16.2.pom",
+      "bytes": 1362,
+      "sha256": "ae7ca19e5a3bafdf92a403edf8af5876c746024424059c719b1544de48384ff8"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-compiler\\2.16.2\\plexus-compiler-2.16.2.pom",
+      "bytes": 7547,
+      "sha256": "53124330e5e1b45d1ef6eff5e41c4d4defe04403e5c894795b44269515b6611e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler\\2.16.2\\plexus-compiler-2.16.2.pom",
+      "bytes": 7547,
+      "sha256": "53124330e5e1b45d1ef6eff5e41c4d4defe04403e5c894795b44269515b6611e"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus\\25\\plexus-25.pom",
+      "bytes": 31378,
+      "sha256": "faa7947c2020967ad0c92b259ee9fa361d05e90cd036d17c37098bb1edaea3a3"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus\\25\\plexus-25.pom",
+      "bytes": 31378,
+      "sha256": "faa7947c2020967ad0c92b259ee9fa361d05e90cd036d17c37098bb1edaea3a3"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\junit-bom\\5.14.1\\junit-bom-5.14.1.pom",
+      "bytes": 5669,
+      "sha256": "01b01dfa366550b40ac5760548a7d728b6109d17c451e83864d1e5e0ce862c94"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\junit\\junit-bom\\5.14.1\\junit-bom-5.14.1.pom",
+      "bytes": 5669,
+      "sha256": "01b01dfa366550b40ac5760548a7d728b6109d17c451e83864d1e5e0ce862c94"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-compiler-manager\\2.16.2\\plexus-compiler-manager-2.16.2.jar",
+      "bytes": 5237,
+      "sha256": "99630ac196571a2754baa143a12723795b13020631902a6dff18dfb997e59b0e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler-manager\\2.16.2\\plexus-compiler-manager-2.16.2.jar",
+      "bytes": 5237,
+      "sha256": "99630ac196571a2754baa143a12723795b13020631902a6dff18dfb997e59b0e"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-compiler-manager\\2.16.2\\plexus-compiler-manager-2.16.2.pom",
+      "bytes": 1348,
+      "sha256": "ba8d233dd73fc97c10f84bf23ef8f632cd19ced0f85dc335be2bdcb8e28e7bd0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler-manager\\2.16.2\\plexus-compiler-manager-2.16.2.pom",
+      "bytes": 1348,
+      "sha256": "ba8d233dd73fc97c10f84bf23ef8f632cd19ced0f85dc335be2bdcb8e28e7bd0"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-compiler-javac\\2.16.2\\plexus-compiler-javac-2.16.2.jar",
+      "bytes": 29899,
+      "sha256": "e48141c146d6cb96619aafb07b2e10e1ac08f339e96ae4067ddd9c2d0f626672"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler-javac\\2.16.2\\plexus-compiler-javac-2.16.2.jar",
+      "bytes": 29899,
+      "sha256": "e48141c146d6cb96619aafb07b2e10e1ac08f339e96ae4067ddd9c2d0f626672"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-compiler-javac\\2.16.2\\plexus-compiler-javac-2.16.2.pom",
+      "bytes": 1291,
+      "sha256": "b648754e6d99b381f7fc40328849c6f24d454263c03cf89c737d7c29831eb208"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler-javac\\2.16.2\\plexus-compiler-javac-2.16.2.pom",
+      "bytes": 1291,
+      "sha256": "b648754e6d99b381f7fc40328849c6f24d454263c03cf89c737d7c29831eb208"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-compilers\\2.16.2\\plexus-compilers-2.16.2.pom",
+      "bytes": 1567,
+      "sha256": "835e6a3f53ed9f39d14a0fd2b367a47fde78698115464eddba4b5c5d9fd1250f"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compilers\\2.16.2\\plexus-compilers-2.16.2.pom",
+      "bytes": 1567,
+      "sha256": "835e6a3f53ed9f39d14a0fd2b367a47fde78698115464eddba4b5c5d9fd1250f"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-utils\\4.0.2\\plexus-utils-4.0.2.jar",
+      "bytes": 192537,
+      "sha256": "8957274e75fe2c278b1428dd16a0daeee1dd38152cb6eff816177ac28fccb697"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-utils\\4.0.2\\plexus-utils-4.0.2.jar",
+      "bytes": 192537,
+      "sha256": "8957274e75fe2c278b1428dd16a0daeee1dd38152cb6eff816177ac28fccb697"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-utils\\4.0.2\\plexus-utils-4.0.2.pom",
+      "bytes": 12810,
+      "sha256": "5151c13bdd7cc3a5569583a7f4267392f013ffd3115eab8db5f86de420a366af"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-utils\\4.0.2\\plexus-utils-4.0.2.pom",
+      "bytes": 12810,
+      "sha256": "5151c13bdd7cc3a5569583a7f4267392f013ffd3115eab8db5f86de420a366af"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\mojo\\exec-maven-plugin\\3.5.0\\exec-maven-plugin-3.5.0.jar",
+      "bytes": 86958,
+      "sha256": "f3cc922574c6dfe64f82b564f468d94c6477e4ceb45bf5cfebbb66ba1858048e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\mojo\\exec-maven-plugin\\3.5.0\\exec-maven-plugin-3.5.0.jar",
+      "bytes": 86958,
+      "sha256": "f3cc922574c6dfe64f82b564f468d94c6477e4ceb45bf5cfebbb66ba1858048e"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\mojo\\exec-maven-plugin\\3.5.0\\exec-maven-plugin-3.5.0.pom",
+      "bytes": 13880,
+      "sha256": "0b510b2d771931d181e2690f0ed612a535d4ae931aab00bcb7e5b853147a1dab"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\mojo\\exec-maven-plugin\\3.5.0\\exec-maven-plugin-3.5.0.pom",
+      "bytes": 13880,
+      "sha256": "0b510b2d771931d181e2690f0ed612a535d4ae931aab00bcb7e5b853147a1dab"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\mojo\\mojo-parent\\86\\mojo-parent-86.pom",
+      "bytes": 36963,
+      "sha256": "94e9ddc8f28d9d72f6ca8e191941ec20d4874bf8bd0db0fa4f051a16ce09734c"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\mojo\\mojo-parent\\86\\mojo-parent-86.pom",
+      "bytes": 36963,
+      "sha256": "94e9ddc8f28d9d72f6ca8e191941ec20d4874bf8bd0db0fa4f051a16ce09734c"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\junit-bom\\5.11.0\\junit-bom-5.11.0.pom",
+      "bytes": 5649,
+      "sha256": "e67459d4882424ac6374f40db1c8f4a2e88946b340ba072c80be932a2be4644d"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\junit\\junit-bom\\5.11.0\\junit-bom-5.11.0.pom",
+      "bytes": 5649,
+      "sha256": "e67459d4882424ac6374f40db1c8f4a2e88946b340ba072c80be932a2be4644d"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\resolver\\maven-resolver-api\\1.4.1\\maven-resolver-api-1.4.1.jar",
+      "bytes": 148983,
+      "sha256": "33dc67306cc95da14e5444e8b494d967924abf1d01bae1894676164cbd3f6112"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\resolver\\maven-resolver-api\\1.4.1\\maven-resolver-api-1.4.1.jar",
+      "bytes": 148983,
+      "sha256": "33dc67306cc95da14e5444e8b494d967924abf1d01bae1894676164cbd3f6112"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\resolver\\maven-resolver-api\\1.4.1\\maven-resolver-api-1.4.1.pom",
+      "bytes": 2626,
+      "sha256": "335513ce1dd2cf4c7d1dbfa1b8aa14656d9be5f9f3f0d0875ac528893c9f0f06"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\resolver\\maven-resolver-api\\1.4.1\\maven-resolver-api-1.4.1.pom",
+      "bytes": 2626,
+      "sha256": "335513ce1dd2cf4c7d1dbfa1b8aa14656d9be5f9f3f0d0875ac528893c9f0f06"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\resolver\\maven-resolver\\1.4.1\\maven-resolver-1.4.1.pom",
+      "bytes": 18177,
+      "sha256": "831c3849751101226495acfe9119582feb734a4539b070e0fbd9e85b03b501ce"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\resolver\\maven-resolver\\1.4.1\\maven-resolver-1.4.1.pom",
+      "bytes": 18177,
+      "sha256": "831c3849751101226495acfe9119582feb734a4539b070e0fbd9e85b03b501ce"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\maven-parent\\33\\maven-parent-33.pom",
+      "bytes": 44155,
+      "sha256": "3856e3fcd169502d5f12fe2452604ebf6c7c025f15656bfa558ea99ed29d73ea"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\maven-parent\\33\\maven-parent-33.pom",
+      "bytes": 44155,
+      "sha256": "3856e3fcd169502d5f12fe2452604ebf6c7c025f15656bfa558ea99ed29d73ea"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\apache\\21\\apache-21.pom",
+      "bytes": 17107,
+      "sha256": "af10c108da014f17cafac7b52b2b4b5a3a1c18265fa2af97a325d9143537b380"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\apache\\21\\apache-21.pom",
+      "bytes": 17107,
+      "sha256": "af10c108da014f17cafac7b52b2b4b5a3a1c18265fa2af97a325d9143537b380"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\resolver\\maven-resolver-util\\1.4.1\\maven-resolver-util-1.4.1.jar",
+      "bytes": 167529,
+      "sha256": "6b2184872fa7cc2ef5a90481b56af9711c15b371e69ab52f0f31bf24e910dd82"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\resolver\\maven-resolver-util\\1.4.1\\maven-resolver-util-1.4.1.jar",
+      "bytes": 167529,
+      "sha256": "6b2184872fa7cc2ef5a90481b56af9711c15b371e69ab52f0f31bf24e910dd82"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\resolver\\maven-resolver-util\\1.4.1\\maven-resolver-util-1.4.1.pom",
+      "bytes": 2805,
+      "sha256": "a58c932e967e85e7bcb8d4adaedd14a5221a1750a1d089c5086c4d73df505155"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\resolver\\maven-resolver-util\\1.4.1\\maven-resolver-util-1.4.1.pom",
+      "bytes": 2805,
+      "sha256": "a58c932e967e85e7bcb8d4adaedd14a5221a1750a1d089c5086c4d73df505155"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-xml\\3.0.1\\plexus-xml-3.0.1.jar",
+      "bytes": 94331,
+      "sha256": "c1a510a87a62bd2d74ac1472dd31c3f9e9b0b8b8568f37d77c0f135415bebd05"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-xml\\3.0.1\\plexus-xml-3.0.1.jar",
+      "bytes": 94331,
+      "sha256": "c1a510a87a62bd2d74ac1472dd31c3f9e9b0b8b8568f37d77c0f135415bebd05"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-xml\\3.0.1\\plexus-xml-3.0.1.pom",
+      "bytes": 3694,
+      "sha256": "3242ddc20873f71b381c333b22afb9cf3596d6a63b6683036a16bd51bc8721a4"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-xml\\3.0.1\\plexus-xml-3.0.1.pom",
+      "bytes": 3694,
+      "sha256": "3242ddc20873f71b381c333b22afb9cf3596d6a63b6683036a16bd51bc8721a4"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus\\18\\plexus-18.pom",
+      "bytes": 29238,
+      "sha256": "b43ee89c8890b9e5bc48d079fcb4c44f082b5139253356dc455806a33c3dd8fd"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus\\18\\plexus-18.pom",
+      "bytes": 29238,
+      "sha256": "b43ee89c8890b9e5bc48d079fcb4c44f082b5139253356dc455806a33c3dd8fd"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\junit-bom\\5.10.2\\junit-bom-5.10.2.pom",
+      "bytes": 5649,
+      "sha256": "169dd904a4b0f6520cffe658cc62292bfe9f3c14a989fa92120724cde43a9968"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\junit\\junit-bom\\5.10.2\\junit-bom-5.10.2.pom",
+      "bytes": 5649,
+      "sha256": "169dd904a4b0f6520cffe658cc62292bfe9f3c14a989fa92120724cde43a9968"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-exec\\1.4.0\\commons-exec-1.4.0.jar",
+      "bytes": 65863,
+      "sha256": "f51cf8bee467efe2be76e46fc08078d96afa280a794283364291beda892a67ef"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\commons\\commons-exec\\1.4.0\\commons-exec-1.4.0.jar",
+      "bytes": 65863,
+      "sha256": "f51cf8bee467efe2be76e46fc08078d96afa280a794283364291beda892a67ef"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-exec\\1.4.0\\commons-exec-1.4.0.pom",
+      "bytes": 9524,
+      "sha256": "bba2cc54192f16fa12f678550e4ef2f6c5650181c2b496376a4bb441751510ce"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\commons\\commons-exec\\1.4.0\\commons-exec-1.4.0.pom",
+      "bytes": 9524,
+      "sha256": "bba2cc54192f16fa12f678550e4ef2f6c5650181c2b496376a4bb441751510ce"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-parent\\65\\commons-parent-65.pom",
+      "bytes": 77926,
+      "sha256": "6cf3495fc2e6ac913a2b7f2e03fb5908fb3f229fb06d3358dc45678d5af3e36e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\commons\\commons-parent\\65\\commons-parent-65.pom",
+      "bytes": 77926,
+      "sha256": "6cf3495fc2e6ac913a2b7f2e03fb5908fb3f229fb06d3358dc45678d5af3e36e"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\apache\\31\\apache-31.pom",
+      "bytes": 23531,
+      "sha256": "555d0c9eaa69c042aff924927b9381e8f8174136d355eead445224452e6291cc"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\apache\\31\\apache-31.pom",
+      "bytes": 23531,
+      "sha256": "555d0c9eaa69c042aff924927b9381e8f8174136d355eead445224452e6291cc"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\junit-bom\\5.10.1\\junit-bom-5.10.1.pom",
+      "bytes": 5649,
+      "sha256": "21c4b0286f4b20069577ff4b20978a85c100ac8a46b6f1c8672fbaab337bc3f2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\junit\\junit-bom\\5.10.1\\junit-bom-5.10.1.pom",
+      "bytes": 5649,
+      "sha256": "21c4b0286f4b20069577ff4b20978a85c100ac8a46b6f1c8672fbaab337bc3f2"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.7.1\\asm-9.7.1.jar",
+      "bytes": 126093,
+      "sha256": "8cadd43ac5eb6d09de05faecca38b917a040bb9139c7edeb4cc81c740b713281"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm\\9.7.1\\asm-9.7.1.jar",
+      "bytes": 126093,
+      "sha256": "8cadd43ac5eb6d09de05faecca38b917a040bb9139c7edeb4cc81c740b713281"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.7.1\\asm-9.7.1.pom",
+      "bytes": 2372,
+      "sha256": "7229b03b30a73ee91008072d9e4569a51d8547fae8c50f527841aef4c1b0baa8"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm\\9.7.1\\asm-9.7.1.pom",
+      "bytes": 2372,
+      "sha256": "7229b03b30a73ee91008072d9e4569a51d8547fae8c50f527841aef4c1b0baa8"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-commons\\9.7.1\\asm-commons-9.7.1.jar",
+      "bytes": 73459,
+      "sha256": "9a579b54d292ad9be171d4313fd4739c635592c2b5ac3a459bbd1049cddec6a0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm-commons\\9.7.1\\asm-commons-9.7.1.jar",
+      "bytes": 73459,
+      "sha256": "9a579b54d292ad9be171d4313fd4739c635592c2b5ac3a459bbd1049cddec6a0"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-commons\\9.7.1\\asm-commons-9.7.1.pom",
+      "bytes": 2794,
+      "sha256": "0bf1d31da0c9f9d8edc2f27dbbfdbbf73f1a715b72cd2fa28f3f195994d74ad1"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm-commons\\9.7.1\\asm-commons-9.7.1.pom",
+      "bytes": 2794,
+      "sha256": "0bf1d31da0c9f9d8edc2f27dbbfdbbf73f1a715b72cd2fa28f3f195994d74ad1"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.7.1\\asm-tree-9.7.1.jar",
+      "bytes": 51939,
+      "sha256": "9929881f59eb6b840e86d54570c77b59ce721d104e6dfd7a40978991c2d3b41f"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm-tree\\9.7.1\\asm-tree-9.7.1.jar",
+      "bytes": 51939,
+      "sha256": "9929881f59eb6b840e86d54570c77b59ce721d104e6dfd7a40978991c2d3b41f"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.7.1\\asm-tree-9.7.1.pom",
+      "bytes": 2596,
+      "sha256": "13b905f65e7fd43ca7674f40cdaa37679ba4858c6c9d9fb8f17a7afd9baabc9e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm-tree\\9.7.1\\asm-tree-9.7.1.pom",
+      "bytes": 2596,
+      "sha256": "13b905f65e7fd43ca7674f40cdaa37679ba4858c6c9d9fb8f17a7afd9baabc9e"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\plugins\\maven-compiler-plugin\\3.15.0\\_remote.repositories",
+      "bytes": 228,
+      "sha256": "027477faf25e13c104bbe1a5e7ba0b72f33e3febda98caf0422587324a3f4721"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\plugins\\maven-compiler-plugin\\3.15.0\\_remote.repositories",
+      "bytes": 228,
+      "sha256": "027477faf25e13c104bbe1a5e7ba0b72f33e3febda98caf0422587324a3f4721"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\plugins\\maven-plugins\\47\\_remote.repositories",
+      "bytes": 173,
+      "sha256": "5bcbd790f1b4bc1a620ac684115ed810fb31edb9e49c870462f479c17af36e8a"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\plugins\\maven-plugins\\47\\_remote.repositories",
+      "bytes": 173,
+      "sha256": "5bcbd790f1b4bc1a620ac684115ed810fb31edb9e49c870462f479c17af36e8a"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\maven-parent\\47\\_remote.repositories",
+      "bytes": 172,
+      "sha256": "a23ede83b267dbe5c6b20f14651d425dacaa7a1ab8b3588e30c09807957a58aa"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\maven-parent\\47\\_remote.repositories",
+      "bytes": 172,
+      "sha256": "a23ede83b267dbe5c6b20f14651d425dacaa7a1ab8b3588e30c09807957a58aa"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\apache\\37\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "bf737fbd11c66030c2ae9b567937c449b1f795a6bce4679bd60366b2bf88af0d"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\apache\\37\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "bf737fbd11c66030c2ae9b567937c449b1f795a6bce4679bd60366b2bf88af0d"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\junit-bom\\5.14.2\\_remote.repositories",
+      "bytes": 173,
+      "sha256": "e4a9f1c4087a7301bffb56cdd66a0e00d1a791940a005bb280af74840b8b5d90"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\junit\\junit-bom\\5.14.2\\_remote.repositories",
+      "bytes": 173,
+      "sha256": "e4a9f1c4087a7301bffb56cdd66a0e00d1a791940a005bb280af74840b8b5d90"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\javax\\inject\\javax.inject\\1\\_remote.repositories",
+      "bytes": 200,
+      "sha256": "02d1a1ae7d039cc3b85b228f02c3731fd5526da6f9a3335f23771dc074ec5c9b"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\javax\\inject\\javax.inject\\1\\_remote.repositories",
+      "bytes": 200,
+      "sha256": "02d1a1ae7d039cc3b85b228f02c3731fd5526da6f9a3335f23771dc074ec5c9b"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-api\\1.7.36\\_remote.repositories",
+      "bytes": 204,
+      "sha256": "932bfdcce7aad024c09ebe68f543bd6917eaab505bede86aeb915e857b3382cf"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\slf4j\\slf4j-api\\1.7.36\\_remote.repositories",
+      "bytes": 204,
+      "sha256": "932bfdcce7aad024c09ebe68f543bd6917eaab505bede86aeb915e857b3382cf"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\slf4j\\slf4j-parent\\1.7.36\\_remote.repositories",
+      "bytes": 176,
+      "sha256": "a75bf6c306b6e91ab26fa3174b3c3ef296714589bbe282647606d37913d28076"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\slf4j\\slf4j-parent\\1.7.36\\_remote.repositories",
+      "bytes": 176,
+      "sha256": "a75bf6c306b6e91ab26fa3174b3c3ef296714589bbe282647606d37913d28076"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.9.1\\_remote.repositories",
+      "bytes": 190,
+      "sha256": "e45cb13a4d37dae4dd3c7eb1e6d4420bc21983a4c2926a7bddf3464762e228e9"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm\\9.9.1\\_remote.repositories",
+      "bytes": 190,
+      "sha256": "e45cb13a4d37dae4dd3c7eb1e6d4420bc21983a4c2926a7bddf3464762e228e9"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\ow2\\1.5.1\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "b210e8f09790cc363195c50864d2405a5eb7499d79fb0ae4673f6fe089c543cb"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\ow2\\1.5.1\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "b210e8f09790cc363195c50864d2405a5eb7499d79fb0ae4673f6fe089c543cb"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\shared\\maven-shared-utils\\3.4.2\\_remote.repositories",
+      "bytes": 220,
+      "sha256": "6114cf15d9c17c48884c33066ed3153a9073ca8e19f3cfa8c56bbf3724a67e5a"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\shared\\maven-shared-utils\\3.4.2\\_remote.repositories",
+      "bytes": 220,
+      "sha256": "6114cf15d9c17c48884c33066ed3153a9073ca8e19f3cfa8c56bbf3724a67e5a"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\shared\\maven-shared-components\\39\\_remote.repositories",
+      "bytes": 183,
+      "sha256": "43f865c26e5f8638358ce10c25a2bddf05785839508d8fe029a949bf86621ba3"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\shared\\maven-shared-components\\39\\_remote.repositories",
+      "bytes": 183,
+      "sha256": "43f865c26e5f8638358ce10c25a2bddf05785839508d8fe029a949bf86621ba3"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\maven-parent\\39\\_remote.repositories",
+      "bytes": 172,
+      "sha256": "ff70923389ab85ee1ea15e8ebd50aa3d726ad3900c20f560c3592d9608583885"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\maven-parent\\39\\_remote.repositories",
+      "bytes": 172,
+      "sha256": "ff70923389ab85ee1ea15e8ebd50aa3d726ad3900c20f560c3592d9608583885"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\apache\\29\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "fb9c7df7f2f06bfaafddcd6f247ec7819511a815bea574b7e3f44cd3ee6edd64"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\apache\\29\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "fb9c7df7f2f06bfaafddcd6f247ec7819511a815bea574b7e3f44cd3ee6edd64"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\commons-io\\commons-io\\2.11.0\\_remote.repositories",
+      "bytes": 246,
+      "sha256": "7ece6a2ce07b22a17f3977bd21ad5e1dd031d47afe9cd96f111b2e688a1f710f"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\commons-io\\commons-io\\2.11.0\\_remote.repositories",
+      "bytes": 246,
+      "sha256": "7ece6a2ce07b22a17f3977bd21ad5e1dd031d47afe9cd96f111b2e688a1f710f"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-parent\\52\\_remote.repositories",
+      "bytes": 174,
+      "sha256": "229c00e2a89f395521f08a02d1de2ed804bd880fd44fc5eeba44053a0f096ba1"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\commons\\commons-parent\\52\\_remote.repositories",
+      "bytes": 174,
+      "sha256": "229c00e2a89f395521f08a02d1de2ed804bd880fd44fc5eeba44053a0f096ba1"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\apache\\23\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "1f3a1fc6203378bba12b7c119260e72a10ccc789beb8dd6e0cafd3490a5e66b2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\apache\\23\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "1f3a1fc6203378bba12b7c119260e72a10ccc789beb8dd6e0cafd3490a5e66b2"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\junit-bom\\5.7.2\\_remote.repositories",
+      "bytes": 172,
+      "sha256": "c7175c3eba6642dcbbfb0b7dc11585d795b84d98463a7c5aea70a2c93b0668a1"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\junit\\junit-bom\\5.7.2\\_remote.repositories",
+      "bytes": 172,
+      "sha256": "c7175c3eba6642dcbbfb0b7dc11585d795b84d98463a7c5aea70a2c93b0668a1"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\shared\\maven-shared-incremental\\1.1\\_remote.repositories",
+      "bytes": 228,
+      "sha256": "1d47445ecb43a4168f185651f69835d9c413e36b1f0450f55013e9a2de0233da"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\shared\\maven-shared-incremental\\1.1\\_remote.repositories",
+      "bytes": 228,
+      "sha256": "1d47445ecb43a4168f185651f69835d9c413e36b1f0450f55013e9a2de0233da"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\shared\\maven-shared-components\\19\\_remote.repositories",
+      "bytes": 183,
+      "sha256": "0d9930fdeb1933bd66f71be8ba515a1797492fcaf2733a89390eeb8a0aeb40b9"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\shared\\maven-shared-components\\19\\_remote.repositories",
+      "bytes": 183,
+      "sha256": "0d9930fdeb1933bd66f71be8ba515a1797492fcaf2733a89390eeb8a0aeb40b9"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\maven-parent\\23\\_remote.repositories",
+      "bytes": 172,
+      "sha256": "1f5317e58149c7577b8fc1c0258248054a20df5d134fd15b19b5b673f01acfe5"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\maven-parent\\23\\_remote.repositories",
+      "bytes": 172,
+      "sha256": "1f5317e58149c7577b8fc1c0258248054a20df5d134fd15b19b5b673f01acfe5"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\apache\\13\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "26783932326e22fc23662672c35c3cdc56e468fbc21675b54d5938affe11ed1b"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\apache\\13\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "26783932326e22fc23662672c35c3cdc56e468fbc21675b54d5938affe11ed1b"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-java\\1.5.2\\_remote.repositories",
+      "bytes": 206,
+      "sha256": "37bf00acdf11212e2258e1df2d4fb68fdb5f2596a8653853fc7c0a2f0ba4acd4"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-java\\1.5.2\\_remote.repositories",
+      "bytes": 206,
+      "sha256": "37bf00acdf11212e2258e1df2d4fb68fdb5f2596a8653853fc7c0a2f0ba4acd4"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-languages\\1.5.2\\_remote.repositories",
+      "bytes": 179,
+      "sha256": "0c74cbd929b99ef56ff7ce27f4b59bbfc86d19b50c85e510c3feead53d88fbbf"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-languages\\1.5.2\\_remote.repositories",
+      "bytes": 179,
+      "sha256": "0c74cbd929b99ef56ff7ce27f4b59bbfc86d19b50c85e510c3feead53d88fbbf"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus\\24\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "12d9120ef4cc4190d9086922fa572624185cb042fbb8c4cbe6a2e9a9baf08e36"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus\\24\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "12d9120ef4cc4190d9086922fa572624185cb042fbb8c4cbe6a2e9a9baf08e36"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\junit-bom\\5.13.4\\_remote.repositories",
+      "bytes": 173,
+      "sha256": "1c80e125b2a67f79d41af4dbaae54f3ab564b794e78e7a338ca8a7da244aebf4"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\junit\\junit-bom\\5.13.4\\_remote.repositories",
+      "bytes": 173,
+      "sha256": "1c80e125b2a67f79d41af4dbaae54f3ab564b794e78e7a338ca8a7da244aebf4"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\com\\thoughtworks\\qdox\\qdox\\2.2.0\\_remote.repositories",
+      "bytes": 192,
+      "sha256": "f80dc67a3f57fe75450d803841db4b59cec52771b35aa7896b5fbb18b69c7e4b"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\com\\thoughtworks\\qdox\\qdox\\2.2.0\\_remote.repositories",
+      "bytes": 192,
+      "sha256": "f80dc67a3f57fe75450d803841db4b59cec52771b35aa7896b5fbb18b69c7e4b"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\sonatype\\oss\\oss-parent\\9\\_remote.repositories",
+      "bytes": 169,
+      "sha256": "2e2f5fe9e1224fe5ade98b0414cd00c7824da50b703632229adb3181b26a462a"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\sonatype\\oss\\oss-parent\\9\\_remote.repositories",
+      "bytes": 169,
+      "sha256": "2e2f5fe9e1224fe5ade98b0414cd00c7824da50b703632229adb3181b26a462a"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-compiler-api\\2.16.2\\_remote.repositories",
+      "bytes": 224,
+      "sha256": "f82e01c90dd58236773ea76a95c94ee0558e08e2928e9a18c60464ca7fb7b726"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler-api\\2.16.2\\_remote.repositories",
+      "bytes": 224,
+      "sha256": "f82e01c90dd58236773ea76a95c94ee0558e08e2928e9a18c60464ca7fb7b726"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-compiler\\2.16.2\\_remote.repositories",
+      "bytes": 179,
+      "sha256": "5f4e237cf4b9a421cd6965f7b85d864980a8c5e565f2c2a69ad4741dc9ff2d70"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler\\2.16.2\\_remote.repositories",
+      "bytes": 179,
+      "sha256": "5f4e237cf4b9a421cd6965f7b85d864980a8c5e565f2c2a69ad4741dc9ff2d70"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus\\25\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "e93a41fbcf67b8f5a32ee14891f33fe3a9f090435c7e0f4919bb606de09a0ad2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus\\25\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "e93a41fbcf67b8f5a32ee14891f33fe3a9f090435c7e0f4919bb606de09a0ad2"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\junit-bom\\5.14.1\\_remote.repositories",
+      "bytes": 173,
+      "sha256": "0dd5216400cd58e2c0ed45cd78856044d8f4ce54cdb51fdf0231dc1c645f4749"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\junit\\junit-bom\\5.14.1\\_remote.repositories",
+      "bytes": 173,
+      "sha256": "0dd5216400cd58e2c0ed45cd78856044d8f4ce54cdb51fdf0231dc1c645f4749"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-compiler-manager\\2.16.2\\_remote.repositories",
+      "bytes": 232,
+      "sha256": "8e1b1f28ae0601ee1c82d874f52cb0e559d12f334a45799f882310bf9613bbb3"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler-manager\\2.16.2\\_remote.repositories",
+      "bytes": 232,
+      "sha256": "8e1b1f28ae0601ee1c82d874f52cb0e559d12f334a45799f882310bf9613bbb3"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-compiler-javac\\2.16.2\\_remote.repositories",
+      "bytes": 228,
+      "sha256": "723decb91bedbab3f8bb6e959ce2c353f93866bd2fbd22068a2d8e463d978edc"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler-javac\\2.16.2\\_remote.repositories",
+      "bytes": 228,
+      "sha256": "723decb91bedbab3f8bb6e959ce2c353f93866bd2fbd22068a2d8e463d978edc"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-compilers\\2.16.2\\_remote.repositories",
+      "bytes": 180,
+      "sha256": "5930fc100d6d583d263d1ea4bca9e2ebbe4e02c1c9b809ae75015691115c3aba"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compilers\\2.16.2\\_remote.repositories",
+      "bytes": 180,
+      "sha256": "5930fc100d6d583d263d1ea4bca9e2ebbe4e02c1c9b809ae75015691115c3aba"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-utils\\4.0.2\\_remote.repositories",
+      "bytes": 208,
+      "sha256": "0419dd3d44c9f1c457622298f4de6552b774f06fb8ce2571871044eaf68e98dd"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-utils\\4.0.2\\_remote.repositories",
+      "bytes": 208,
+      "sha256": "0419dd3d44c9f1c457622298f4de6552b774f06fb8ce2571871044eaf68e98dd"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\mojo\\exec-maven-plugin\\3.5.0\\_remote.repositories",
+      "bytes": 218,
+      "sha256": "e20a6572c0bb448fa459f63c536502856b9cb7d1e31f7d8697e36b6dff680914"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\mojo\\exec-maven-plugin\\3.5.0\\_remote.repositories",
+      "bytes": 218,
+      "sha256": "e20a6572c0bb448fa459f63c536502856b9cb7d1e31f7d8697e36b6dff680914"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\mojo\\mojo-parent\\86\\_remote.repositories",
+      "bytes": 171,
+      "sha256": "d064006bc0724df3c0f71a487e52e04cc33df15107f3b5f3a55c1e105bad7008"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\mojo\\mojo-parent\\86\\_remote.repositories",
+      "bytes": 171,
+      "sha256": "d064006bc0724df3c0f71a487e52e04cc33df15107f3b5f3a55c1e105bad7008"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\junit-bom\\5.11.0\\_remote.repositories",
+      "bytes": 173,
+      "sha256": "0fd5e04183c7a8bd99457506c0523b3c75e253f8edbe28fb5503fb14aa5081b6"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\junit\\junit-bom\\5.11.0\\_remote.repositories",
+      "bytes": 173,
+      "sha256": "0fd5e04183c7a8bd99457506c0523b3c75e253f8edbe28fb5503fb14aa5081b6"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\resolver\\maven-resolver-api\\1.4.1\\_remote.repositories",
+      "bytes": 220,
+      "sha256": "8059b9010e110dc59717dd372a64afd89757d2b257247f7274f7777789eee8fa"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\resolver\\maven-resolver-api\\1.4.1\\_remote.repositories",
+      "bytes": 220,
+      "sha256": "8059b9010e110dc59717dd372a64afd89757d2b257247f7274f7777789eee8fa"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\resolver\\maven-resolver\\1.4.1\\_remote.repositories",
+      "bytes": 177,
+      "sha256": "65a54bb3251551dbee83e7359509e07686a1965da06007a020bb5887e3a7c745"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\resolver\\maven-resolver\\1.4.1\\_remote.repositories",
+      "bytes": 177,
+      "sha256": "65a54bb3251551dbee83e7359509e07686a1965da06007a020bb5887e3a7c745"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\maven-parent\\33\\_remote.repositories",
+      "bytes": 172,
+      "sha256": "d803135b035bafc4dc1e68e283d2b20059c416afd300313cae8916e149c56c11"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\maven-parent\\33\\_remote.repositories",
+      "bytes": 172,
+      "sha256": "d803135b035bafc4dc1e68e283d2b20059c416afd300313cae8916e149c56c11"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\apache\\21\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "b831085f82796e3db4accf293c2112effe1b40d3b37c02af837e01f500fce447"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\apache\\21\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "b831085f82796e3db4accf293c2112effe1b40d3b37c02af837e01f500fce447"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\resolver\\maven-resolver-util\\1.4.1\\_remote.repositories",
+      "bytes": 222,
+      "sha256": "1c7959ae8e4363e65efca8261d83e849be249ce8d5c0b8267609fabc8e19642c"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\resolver\\maven-resolver-util\\1.4.1\\_remote.repositories",
+      "bytes": 222,
+      "sha256": "1c7959ae8e4363e65efca8261d83e849be249ce8d5c0b8267609fabc8e19642c"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus-xml\\3.0.1\\_remote.repositories",
+      "bytes": 204,
+      "sha256": "4d13c77608aecebe2ec20e626a556c3a7959f43f2d15bb4ceffa3de210aea388"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-xml\\3.0.1\\_remote.repositories",
+      "bytes": 204,
+      "sha256": "4d13c77608aecebe2ec20e626a556c3a7959f43f2d15bb4ceffa3de210aea388"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\codehaus\\plexus\\plexus\\18\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "3ded484a8cdfd2c3142730a266de2a59661f18a6642c8e19310ebcdb0f2834f8"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus\\18\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "3ded484a8cdfd2c3142730a266de2a59661f18a6642c8e19310ebcdb0f2834f8"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\junit-bom\\5.10.2\\_remote.repositories",
+      "bytes": 173,
+      "sha256": "9edc09d0fccddc73169caf2e76cb46dd4bb153ead480165b9aae82522163e23d"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\junit\\junit-bom\\5.10.2\\_remote.repositories",
+      "bytes": 173,
+      "sha256": "9edc09d0fccddc73169caf2e76cb46dd4bb153ead480165b9aae82522163e23d"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-exec\\1.4.0\\_remote.repositories",
+      "bytes": 208,
+      "sha256": "5e4b44b6cc865d6caba003394ccfe00ae1c49776f4644a1a06bf8a75d9ab5ae9"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\commons\\commons-exec\\1.4.0\\_remote.repositories",
+      "bytes": 208,
+      "sha256": "5e4b44b6cc865d6caba003394ccfe00ae1c49776f4644a1a06bf8a75d9ab5ae9"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\commons\\commons-parent\\65\\_remote.repositories",
+      "bytes": 174,
+      "sha256": "c1516b1ff117fe2f25c5e0bfea0ac865dc09ba246aeb597467f918296374d391"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\commons\\commons-parent\\65\\_remote.repositories",
+      "bytes": 174,
+      "sha256": "c1516b1ff117fe2f25c5e0bfea0ac865dc09ba246aeb597467f918296374d391"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\apache\\31\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "5c141e7f63b206573db8022b95cb7d2d7825e8c22b5ce1e8f9e8f737968f3e0f"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\apache\\31\\_remote.repositories",
+      "bytes": 166,
+      "sha256": "5c141e7f63b206573db8022b95cb7d2d7825e8c22b5ce1e8f9e8f737968f3e0f"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\junit-bom\\5.10.1\\_remote.repositories",
+      "bytes": 173,
+      "sha256": "ea434a0f94b7888439fe3a6fa9828f43d9c4ebbca5eebaad02f61c1b8c3eafb4"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\junit\\junit-bom\\5.10.1\\_remote.repositories",
+      "bytes": 173,
+      "sha256": "ea434a0f94b7888439fe3a6fa9828f43d9c4ebbca5eebaad02f61c1b8c3eafb4"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm\\9.7.1\\_remote.repositories",
+      "bytes": 190,
+      "sha256": "62136a27497ef7e83e289021af817020552e3f8bcc9dea5e520f526f52ef81e6"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm\\9.7.1\\_remote.repositories",
+      "bytes": 190,
+      "sha256": "62136a27497ef7e83e289021af817020552e3f8bcc9dea5e520f526f52ef81e6"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-commons\\9.7.1\\_remote.repositories",
+      "bytes": 206,
+      "sha256": "87f99e1472be3f345e3bb6fd8440ce70519df17a0050970cd076ad79c9fd7cf1"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm-commons\\9.7.1\\_remote.repositories",
+      "bytes": 206,
+      "sha256": "87f99e1472be3f345e3bb6fd8440ce70519df17a0050970cd076ad79c9fd7cf1"
+    },
+    {
+      "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\ow2\\asm\\asm-tree\\9.7.1\\_remote.repositories",
+      "bytes": 200,
+      "sha256": "d3144f357b29298cf858f43fb21313e04026638112fc6bdab146f9c89db4d113"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm-tree\\9.7.1\\_remote.repositories",
+      "bytes": 200,
+      "sha256": "d3144f357b29298cf858f43fb21313e04026638112fc6bdab146f9c89db4d113"
+    },
+    {
+      "path": "C:\\Program Files\\Java\\jdk-21\\release",
+      "bytes": 1282,
+      "sha256": "8387c31dfd5b853ec8b58a0c3b08b2ad6abed2d40d1aba46d125f8a2420d1c14"
+    },
+    {
+      "path": "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+      "bytes": 54440,
+      "sha256": "d27c1a75edf380963c430232e93340eab4bd3694044976cff85421bf163b876c"
+    },
+    {
+      "path": "C:\\Program Files\\Java\\jdk-21\\bin\\javac.exe",
+      "bytes": 23720,
+      "sha256": "8a1d32f529ba4d01940194e3b06d14aff828e5d47f5f374ec88c81902fc3456f"
+    },
+    {
+      "path": "C:\\Program Files\\Java\\jdk-21\\bin\\server\\jvm.dll",
+      "bytes": 13374632,
+      "sha256": "d7111507268cba181af4d25565a664d54c5b53cff47f73e483744f706d9505ee"
+    },
+    {
+      "path": "C:\\Program Files\\Java\\jdk-21\\lib\\modules",
+      "bytes": 138252462,
+      "sha256": "3f407b6247e6025c69b1668f7358f163ad2c29c282d80bde2199527fb5b0bb6d"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+      "bytes": 6995,
+      "sha256": "5f9b8eac523030cd9818daa0eb337635e06137d0da95a66a0a5425d668050e12"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\m2.conf",
+      "bytes": 327,
+      "sha256": "e336769bf93a902baa7a3e827ba55e4cef7de4af2ed1a9541a4261094d748ba9"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\boot\\plexus-classworlds-2.9.0.jar",
+      "bytes": 54086,
+      "sha256": "1ad3292cd563381e3fd632f3fded1988f9e9b2be7a9f3db63ff4c4cedba13fa5"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+      "bytes": 10528,
+      "sha256": "2f552325aedd9a9c9268df520be22cfe3aa86260b76a0f830d2796d2f0e22bd4"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\logging\\simplelogger.properties",
+      "bytes": 1338,
+      "sha256": "42140f6ec135827bec255a2ebdfa11211387402d13296792ff40e56a96ceddf8"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\LICENSE",
+      "bytes": 8383,
+      "sha256": "a5c34f6be3cd2b97f532f3dc2aeceb03ace86c94d9ab76767a1359ec57042e4f"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\NOTICE",
+      "bytes": 4854,
+      "sha256": "9739dd84556b9458e60c049a24f4c78f3146b0d57cddaf5b4fbfb2f71da259eb"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\aopalliance-1.0.jar",
+      "bytes": 4467,
+      "sha256": "0addec670fedcd3f113c5c8091d783280d23f75e3acb841b61a9cdb079376a08"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\asm-9.9.1.jar",
+      "bytes": 126252,
+      "sha256": "6f3828a215c920059a5efa2fb55c233d6c54ec5cadca99ce1b1bdd10077c7ddd"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\commons-cli-1.11.0.jar",
+      "bytes": 110167,
+      "sha256": "8f7f8605d68e15bf32db61ec94eac6fdafc51b1bdbe1e0e0802b57d23f387792"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\commons-codec-1.21.0.jar",
+      "bytes": 402494,
+      "sha256": "4da851cb6abfb98bfe9eb77c5e5fc47f5414fa28b94e21b7fd9a646705dc167f"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\error_prone_annotations-2.41.0.jar",
+      "bytes": 20389,
+      "sha256": "a56e782b5b50811ac204073a355a21d915a2107fce13ec711331ad036f660fcc"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\failureaccess-1.0.3.jar",
+      "bytes": 10763,
+      "sha256": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\gson-2.13.2.jar",
+      "bytes": 289901,
+      "sha256": "dd0ce1b55a3ed2080cb70f9c655850cda86c206862310009dcb5e5c95265a5e0"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\guava-33.5.0-jre.jar",
+      "bytes": 3017283,
+      "sha256": "1e301f0c52ac248b0b14fdc3d12283c77252d4d6f48521d572e7d8c4c2cc4ac7"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\guice-5.1.0-classes.jar",
+      "bytes": 656919,
+      "sha256": "142ad4475e19524d2fe3ac995b3f7cbc962fc726f2edb9dbdccc61feab9b2bf9"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\httpclient-4.5.14.jar",
+      "bytes": 785639,
+      "sha256": "c8bc7e1c51a6d4ce72f40d2ebbabf1c4b68bfe76e732104b04381b493478e9d6"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\httpcore-4.4.16.jar",
+      "bytes": 327891,
+      "sha256": "6c9b3dd142a09dc468e23ad39aad6f75a0f2b85125104469f026e52a474e464f"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\jansi-2.4.2.jar",
+      "bytes": 256537,
+      "sha256": "0b7b8b003a90ea491579b62f5118828e45112914c65589b00faa49d6ec785839"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\javax.annotation-api-1.3.2.jar",
+      "bytes": 26586,
+      "sha256": "e04ba5195bcd555dc95650f7cc614d151e4bcd52d29a10b8aa2197f3ab89ab9b"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\javax.inject-1.jar",
+      "bytes": 2497,
+      "sha256": "91c77044a50c481636c32d916fd89c9118a72195390452c81065080f957de7ff"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\jcl-over-slf4j-1.7.36.jar",
+      "bytes": 16555,
+      "sha256": "ab57ca8fd223772c17365d121f59e94ecbf0ae59d08c03a3cb5b81071c019195"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\jspecify-1.0.0.jar",
+      "bytes": 3819,
+      "sha256": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-artifact-3.9.14.jar",
+      "bytes": 58864,
+      "sha256": "1effa70eacbf0aa4d94ad9c7b225be031ce4317fa07da59e23b02b3e4e1231a3"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-builder-support-3.9.14.jar",
+      "bytes": 14420,
+      "sha256": "2109ff808046e4f8b356b1064060a3f224b0b0aad07ecceaf7696c3bdc0b2296"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-compat-3.9.14.jar",
+      "bytes": 286661,
+      "sha256": "76887c2993185e368c0a67c628a0bdfbca8cf2100cda2bc9a8255f23db0c37bd"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-core-3.9.14.jar",
+      "bytes": 721427,
+      "sha256": "db009d57b90a714efe86c81c7a518febb276d01ba3daf2f301e382f6560e8a58"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-embedder-3.9.14.jar",
+      "bytes": 117421,
+      "sha256": "2e2f517d9835a7c57d6da98537f51983a2b016bfe4b0570074470f4ea32372c1"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-model-3.9.14.jar",
+      "bytes": 217984,
+      "sha256": "684f573b1b37933c5d62c1c21d5da4335b049fb8b3d9754281597a38dbbc4044"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-model-builder-3.9.14.jar",
+      "bytes": 208679,
+      "sha256": "9a6f4deb11bd6fe3f8b11036ed46f34cded3b00fc638f242327537bfb53c9d3f"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-plugin-api-3.9.14.jar",
+      "bytes": 47625,
+      "sha256": "062445ef3ae988e245cca68ccec915de64703ec615badf2d9d61da9ee6f1a245"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-repository-metadata-3.9.14.jar",
+      "bytes": 28558,
+      "sha256": "307e4920b17a8fdd764b556a7569de9bdd384d6b5f3f6a63dfb2ef186f02da2a"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-resolver-api-1.9.27.jar",
+      "bytes": 158204,
+      "sha256": "a895d222283666a7320ddc76615e2e93a41fabd93ce9a6bf9ddee39272bb87b4"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-resolver-connector-basic-1.9.27.jar",
+      "bytes": 40363,
+      "sha256": "3bd98e3a426f9adcae39e3786db229e2be77e08a743ecd9be15c5ed77be3a625"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-resolver-impl-1.9.27.jar",
+      "bytes": 327414,
+      "sha256": "295d48ea2a8bb3aef51888967f105fb6251997d111f13c32d28919fd9b1c951e"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-resolver-named-locks-1.9.27.jar",
+      "bytes": 37944,
+      "sha256": "b39ecd4da98fdac5068e6f5d16910a71f4e4d48e95e17d107f6603e18f2b3fdf"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-resolver-provider-3.9.14.jar",
+      "bytes": 79040,
+      "sha256": "a5bc340ffe35325c55a01762feee374abb2a9e2b14191ea39c1ef646c2754f65"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-resolver-spi-1.9.27.jar",
+      "bytes": 51660,
+      "sha256": "1cab02f45bc58d5f4d8e084eaf032f13ea1a5fc9021d8bd74f8360ebb6593e5a"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-resolver-transport-file-1.9.27.jar",
+      "bytes": 16222,
+      "sha256": "3988261bd31e2e79eda802b3971992fce44756b0029557a05c7b871d3c3ddef7"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-resolver-transport-http-1.9.27.jar",
+      "bytes": 60215,
+      "sha256": "723f3d9d717a693d0aac589e266b995f76e9c63edd48ecc8a0cf9e86a77e459c"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-resolver-transport-wagon-1.9.27.jar",
+      "bytes": 32464,
+      "sha256": "ddf1c8744f7ef50d8ab78526611b690ab1da0e9ad8d99f72d9dbe1b259aa9a8b"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-resolver-util-1.9.27.jar",
+      "bytes": 197365,
+      "sha256": "74a12548f0d6aad13c728666288c1e81201c24bd05bb4e4ec8c1558517b379a7"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-settings-3.9.14.jar",
+      "bytes": 44680,
+      "sha256": "0e5492e07136565b1ef72a981e99797999183e54f589e00aa608cbadc4cb9bda"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-settings-builder-3.9.14.jar",
+      "bytes": 42397,
+      "sha256": "1d3cf59f9dc6af77f7a1052aea598535b4f59926a9fe92cecce3ecfb5b91ff1f"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-shared-utils-3.4.2.jar",
+      "bytes": 151103,
+      "sha256": "b613357e1bad4dfc1dead801691c9460f9585fe7c6b466bc25186212d7d18487"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-slf4j-provider-3.9.14.jar",
+      "bytes": 23728,
+      "sha256": "10b647e02f84454c150b067811b57b5beae60a2bf72ac764009aff57db1b95cb"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\org.eclipse.sisu.inject-1.0.0.jar",
+      "bytes": 304229,
+      "sha256": "3ab8d7bfe68f3b6ec95c1a0a47e628edbc9d76e90634cb0a0ba121fbb11b8e42"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\org.eclipse.sisu.plexus-1.0.0.jar",
+      "bytes": 215733,
+      "sha256": "865b5300034fc08c790215d7d97f141914c932191bef9338a7dcef589f7536e9"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\plexus-cipher-2.0.jar",
+      "bytes": 13003,
+      "sha256": "9a7f1b5c5a9effd61eadfd8731452a2f76a8e79111fac391ef75ea801bea203a"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\plexus-component-annotations-2.2.0.jar",
+      "bytes": 4151,
+      "sha256": "50edb93c73786e62822b4fe1336e22880fdf147191373cf5c911370e16748fcf"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\plexus-interpolation-1.29.jar",
+      "bytes": 88118,
+      "sha256": "088d444dbcedfb384630d8686697ece3c401d6f33c8f8b3aa7259ea1c6996878"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\plexus-sec-dispatcher-2.0.jar",
+      "bytes": 23604,
+      "sha256": "873139960c4c780176dda580b003a2c4bf82188bdce5bb99234e224ef7acfceb"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\plexus-utils-3.6.0.jar",
+      "bytes": 271773,
+      "sha256": "27ef130e32c236090e408fb5498d94cb9ea26d14070fb1c8985d607b62d098d1"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\slf4j-api-1.7.36.jar",
+      "bytes": 41125,
+      "sha256": "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\wagon-file-3.5.3.jar",
+      "bytes": 11350,
+      "sha256": "afc9216fa97b78dad227b4a8d4d67b9897bf113a57f80598d62993841113e103"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\wagon-http-3.5.3.jar",
+      "bytes": 9405,
+      "sha256": "d2b6e48c9fcbe579e1858c622d14464011ff265fa6e28e794004a6882154a509"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\wagon-http-shared-3.5.3.jar",
+      "bytes": 40832,
+      "sha256": "8e7da766f55164fde8779aaaa125832506c2848cab4876b5305138873e28037f"
+    },
+    {
+      "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\wagon-provider-api-3.5.3.jar",
+      "bytes": 55101,
+      "sha256": "5e72000338945ed3e96f8e4f578d1d0672e1af7e19c0e9014197ae5b31af3ef4"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\EXACT_PUBLISHED_LAYOUT_CUSTODY.json",
+      "bytes": 27240,
+      "sha256": "a4a34b9127f8b808e8dcd4c1c34acc1368ff695fcb42584f22a571d2ae89b57e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\OFFLINE_PLUGIN_AND_INSTALLED_TOOL_INVENTORY.json",
+      "bytes": 185425,
+      "sha256": "36d120d7795fee98e601b2972f982fa9b0c9446003a96c2e35201c500c76c2d1"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\BOUNDED_OFFLINE_CACHE_CUSTODY.json",
+      "bytes": 81907,
+      "sha256": "68d872ca2cbcc82d9dae604274dbd96b64789d4af38d04da5afb9d0c95b9365a"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\FOSS_REUSE_DECISION.tsv",
+      "bytes": 1983,
+      "sha256": "2699f145f9e6174840e81c9dd992a18c6fcb197f613ebaec8cb52957eb27e610"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\DONOR_INVENTORY_BEFORE_ADAPTATION.json",
+      "bytes": 2196,
+      "sha256": "2bbb1ddecdfe4e6302fa8a66c04c97969d74b0bdd222bf524bb8c349d892f0dd"
+    },
+    {
+      "path": "K:\\codex-work\\m3-v7-ast-publication-20261007\\FIXTURE21_COMMIT_AUTHORITATIVE_READBACK_01.json",
+      "bytes": 1991,
+      "sha256": "bb358c47794ed61b0c366b71e662ef994a4a06b44d3a4a8d18831cfe1b4ef5b8"
+    },
+    {
+      "path": "K:\\codex-work\\m3-v7-ast-publication-20261007\\FIXTURE21_BRANCH_AUTHORITATIVE_READBACK_01.json",
+      "bytes": 516,
+      "sha256": "4874776dd1deb0c0825698c0b0a1429155993f9d897d0698066912ad6452a26d"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
+      "bytes": 141730,
+      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-indexstring\\src\\test\\java\\com\\synexia\\indexstring\\MIndexRegexProgramTest.java",
+      "bytes": 39322,
+      "sha256": "5c185acb76ef6de2a79eebec30a6b156fa982c7283cb0f4d0ef96840ce1a9dd6"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-indexstring\\src\\test\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQueryTest.java",
+      "bytes": 11007,
+      "sha256": "bae0950fd49e10eaada3d8e9e61a9b99dd251357f3952bbd867e134f77ef2225"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\ACTUAL_DONOR_MAVEN_COMPILE_PLAN.json",
+      "bytes": 9576,
+      "sha256": "bda8550b7329f58fde7808d41212406f8342b3b51661222bce2e0a22f3196d6d"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\CORRECTION01_ORIGINAL_FAILURE_TERMINAL.json",
+      "bytes": 29115,
+      "sha256": "67ba190d24bddc889a128a1533db1506e7b048759180d0ab7d8bc59757de90fb"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\DIRECT_ORIGINAL40_ACTUAL_TERMINAL.json",
+      "bytes": 90172,
+      "sha256": "eb947757b621f964cf7195df482030bb73a40800615bf21670949c67dc64f6c8"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\DIRECT_REPLAY_ACTUAL_TERMINAL.json",
+      "bytes": 11210,
+      "sha256": "91113eb3bff24a1868ae6603daf778c82e62f7240d632d2c6dbd1aa577ce7669"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\ORIGINAL_PROGRAM3_BASELINE_FAILURE.json",
+      "bytes": 17989,
+      "sha256": "7f49c0f21ef7b8b7e94a5d32c597aaee964b74606e2a1efae8d4f882d7b9f186"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\ORIGINAL_TRIGRAM_BASELINE_FAILURE.json",
+      "bytes": 15279,
+      "sha256": "5ee95a773f6cc28f1c25bd836f6b8283a923eacbb3aa6508406287f504b9be81"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\PRIOR_PRODUCTION_FORMAL_REVIEW_RESULT.json",
+      "bytes": 569,
+      "sha256": "2dc90ec11577f189b4641366cfa3ac222e4563cb34c178dfb478cdbb87acaa52"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\PROGRAM_TEST_CONTRACT_CORRECTIONS.diff",
+      "bytes": 2071,
+      "sha256": "1533f0938546e7438c17d3928941b7d2a07258fb65c598c6170b9369eb3acd13"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\QUALIFICATION_SCOPE.json",
+      "bytes": 9453,
+      "sha256": "f15cfc00287b66c403356b19ba6656d160f0b02fdb207c7ed4e52e8416167311"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\RECEIVER_PROGRAM_TEST_AUTHORITY.json",
+      "bytes": 1544,
+      "sha256": "fd161f5e70e6953796e58f433a4415264df507d096b7954b5584a3abe9126ece"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\ROOT_CPU_TEST_REVIEW_DISPOSITION.json",
+      "bytes": 2688,
+      "sha256": "b9b72da1cb5f4c1110161cd1787d89ca0e3e4a5e80d06440212a1a55aa1844ae"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\SHARED_ENGINE_SOURCE_PINS.json",
+      "bytes": 813,
+      "sha256": "b10be42509e5236274f0e86e7bb1dbd08138ba2678022613ada4825b5b4ec4c4"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\STRICT_TEST_CLASS_ARTIFACTS.json",
+      "bytes": 16134,
+      "sha256": "e266184e472f4d301bec397e3b5c412d688e4c2fbb5f400ee019fb677a65c7c5"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\TRIGRAM_EXISTENCE_CORRECTION.diff",
+      "bytes": 953,
+      "sha256": "8e9242e581e223fe5ac3d8d5ef9b3a9c6018b04eaa39ad21046b5281de577832"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\FOSS_REUSE_DECISION.tsv",
+      "bytes": 1453,
+      "sha256": "c2d0b5d08016d58712eb660a7988e1d6444c36a9eb025d2258a6179e05c3efe8"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\NOTICE",
+      "bytes": 475,
+      "sha256": "14d0f257fef90f61db76401f4570b2ceefd85d8d4d323b8f4f724c0594db5cbf"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\pom.xml",
+      "bytes": 2720,
+      "sha256": "50ff56284ee7a008835865ede3eb313d2bc3be59f86b97efbf1ebb6708e37eb2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\PROVENANCE.md",
+      "bytes": 3244,
+      "sha256": "38e7e05a66878c02b812247691d70c4b90d772d4bc778a02057098e3b043cd9c"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-02\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\README.md",
+      "bytes": 3433,
+      "sha256": "6f0da0f305e66f6186ac2eb0399f52857c01f9cc76d7c0945ae4f0e5885f302f"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\templates\\base-revision.txt",
+      "bytes": 42,
+      "sha256": "9f15b57d9720c9591aa1725d397bc366f5b7319c56a818220eb751d76657d403"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\templates\\manifest.tsv",
+      "bytes": 920,
+      "sha256": "b216c0da004d17de55196d12c6b8b7f5de79bb386a3a96f1b68c47d607bef871"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\templates\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java.txt",
+      "bytes": 141730,
+      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\templates\\synexia-indexstring\\src\\test\\java\\com\\synexia\\indexstring\\MIndexRegexProgramTest.java.txt",
+      "bytes": 39322,
+      "sha256": "5c185acb76ef6de2a79eebec30a6b156fa982c7283cb0f4d0ef96840ce1a9dd6"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\templates\\synexia-indexstring\\src\\test\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQueryTest.java.txt",
+      "bytes": 11007,
+      "sha256": "bae0950fd49e10eaada3d8e9e61a9b99dd251357f3952bbd867e134f77ef2225"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-01\\payload\\com.synexia\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\THIRD_PARTY_NOTICES.md",
+      "bytes": 998,
+      "sha256": "51384adff46311fc62814dab8039a1b60cd134e8d1af25224444b01d2f101991"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\ACTUAL_DONOR_MAVEN_COMPILE_PLAN.json",
+      "bytes": 9576,
+      "sha256": "bda8550b7329f58fde7808d41212406f8342b3b51661222bce2e0a22f3196d6d"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\CORRECTION01_ORIGINAL_FAILURE_TERMINAL.json",
+      "bytes": 29115,
+      "sha256": "67ba190d24bddc889a128a1533db1506e7b048759180d0ab7d8bc59757de90fb"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\DIRECT_ORIGINAL40_ACTUAL_TERMINAL.json",
+      "bytes": 90172,
+      "sha256": "eb947757b621f964cf7195df482030bb73a40800615bf21670949c67dc64f6c8"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\DIRECT_REPLAY_ACTUAL_TERMINAL.json",
+      "bytes": 11210,
+      "sha256": "91113eb3bff24a1868ae6603daf778c82e62f7240d632d2c6dbd1aa577ce7669"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\ORIGINAL_PROGRAM3_BASELINE_FAILURE.json",
+      "bytes": 17989,
+      "sha256": "7f49c0f21ef7b8b7e94a5d32c597aaee964b74606e2a1efae8d4f882d7b9f186"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\ORIGINAL_TRIGRAM_BASELINE_FAILURE.json",
+      "bytes": 15279,
+      "sha256": "5ee95a773f6cc28f1c25bd836f6b8283a923eacbb3aa6508406287f504b9be81"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\PRIOR_PRODUCTION_FORMAL_REVIEW_RESULT.json",
+      "bytes": 569,
+      "sha256": "2dc90ec11577f189b4641366cfa3ac222e4563cb34c178dfb478cdbb87acaa52"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\PROGRAM_TEST_CONTRACT_CORRECTIONS.diff",
+      "bytes": 2071,
+      "sha256": "1533f0938546e7438c17d3928941b7d2a07258fb65c598c6170b9369eb3acd13"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\QUALIFICATION_SCOPE.json",
+      "bytes": 9453,
+      "sha256": "f15cfc00287b66c403356b19ba6656d160f0b02fdb207c7ed4e52e8416167311"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\RECEIVER_PROGRAM_TEST_AUTHORITY.json",
+      "bytes": 1544,
+      "sha256": "fd161f5e70e6953796e58f433a4415264df507d096b7954b5584a3abe9126ece"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\ROOT_CPU_TEST_REVIEW_DISPOSITION.json",
+      "bytes": 2688,
+      "sha256": "b9b72da1cb5f4c1110161cd1787d89ca0e3e4a5e80d06440212a1a55aa1844ae"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\SHARED_ENGINE_SOURCE_PINS.json",
+      "bytes": 813,
+      "sha256": "b10be42509e5236274f0e86e7bb1dbd08138ba2678022613ada4825b5b4ec4c4"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\STRICT_TEST_CLASS_ARTIFACTS.json",
+      "bytes": 16134,
+      "sha256": "e266184e472f4d301bec397e3b5c412d688e4c2fbb5f400ee019fb677a65c7c5"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\evidence\\TRIGRAM_EXISTENCE_CORRECTION.diff",
+      "bytes": 953,
+      "sha256": "8e9242e581e223fe5ac3d8d5ef9b3a9c6018b04eaa39ad21046b5281de577832"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\FOSS_REUSE_DECISION.tsv",
+      "bytes": 1453,
+      "sha256": "c2d0b5d08016d58712eb660a7988e1d6444c36a9eb025d2258a6179e05c3efe8"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\NOTICE",
+      "bytes": 475,
+      "sha256": "14d0f257fef90f61db76401f4570b2ceefd85d8d4d323b8f4f724c0594db5cbf"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\pom.xml",
+      "bytes": 2720,
+      "sha256": "50ff56284ee7a008835865ede3eb313d2bc3be59f86b97efbf1ebb6708e37eb2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\PROVENANCE.md",
+      "bytes": 3244,
+      "sha256": "38e7e05a66878c02b812247691d70c4b90d772d4bc778a02057098e3b043cd9c"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\README.md",
+      "bytes": 3433,
+      "sha256": "6f0da0f305e66f6186ac2eb0399f52857c01f9cc76d7c0945ae4f0e5885f302f"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\templates\\base-revision.txt",
+      "bytes": 42,
+      "sha256": "9f15b57d9720c9591aa1725d397bc366f5b7319c56a818220eb751d76657d403"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\templates\\manifest.tsv",
+      "bytes": 920,
+      "sha256": "b216c0da004d17de55196d12c6b8b7f5de79bb386a3a96f1b68c47d607bef871"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\templates\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java.txt",
+      "bytes": 141730,
+      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\templates\\synexia-indexstring\\src\\test\\java\\com\\synexia\\indexstring\\MIndexRegexProgramTest.java.txt",
+      "bytes": 39322,
+      "sha256": "5c185acb76ef6de2a79eebec30a6b156fa982c7283cb0f4d0ef96840ce1a9dd6"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\templates\\synexia-indexstring\\src\\test\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQueryTest.java.txt",
+      "bytes": 11007,
+      "sha256": "bae0950fd49e10eaada3d8e9e61a9b99dd251357f3952bbd867e134f77ef2225"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\THIRD_PARTY_NOTICES.md",
+      "bytes": 998,
+      "sha256": "51384adff46311fc62814dab8039a1b60cd134e8d1af25224444b01d2f101991"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\Replay.java",
+      "bytes": 10190,
+      "sha256": "fab78282a3e137b5c917a1351f97ec120ef0aab0d4f0615c4c3cd37c97665b2f"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\M3GpuToolJoinManifest.java",
+      "bytes": 10964,
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\source\\MIndexRegexProgram.java",
+      "bytes": 141093,
+      "sha256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\RECEIVER_BASE_FFB78_TrigramTest.java",
+      "bytes": 6097,
+      "sha256": "3da2c36b9e90c9abafd7786dcce96cd0865e807f44468ecc0894e7481d9c53c2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\RECEIVER_BASE_FFB78_ProgramTest.java",
+      "bytes": 38736,
+      "sha256": "8035418d2855b191594921c5fa6bdf701bfb051379cdf54d67e399218657c01a"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-02\\PUBLICATION_MAP.json",
+      "bytes": 32111,
+      "sha256": "9f8d4ee7726bff2c4118245361aeb06494a34f918c172f1e8d5b04aff2c3b986"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-02\\PUBLICATION_PREPARATION_SEAL.json",
+      "bytes": 22645,
+      "sha256": "352e76053dedeefc5662ab15baecc9d35486ab0ba1cf2e7375677330cb372a71"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-trigram-failure-diagnosis-p0-20261007\\owning-recipe-correction-02\\publication-preparation-02\\review-preparation-01\\REGEX_CRATE_ACTUAL_REVIEW_TERMINAL_01.json",
+      "bytes": 48550,
+      "sha256": "7950ab980017b0821ae55050595ef9a3a15f56afd9a6aeef6ed4ffa6d91dacba"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\FOSS_REUSE_DECISION.tsv",
+      "bytes": 1192,
+      "sha256": "727927cea79ba30d95324f9270442e755dd5247dc49c8e2e55a897e5a08008ac"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\DONOR_INVENTORY_BEFORE_LAYOUT_ADAPTATION.json",
+      "bytes": 3490,
+      "sha256": "5cebd2e289d33e739e1275dee5817959c0527117fb1a5149c71fd7c31b1fd237"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\EXACT_REVIEWED_P2_LAYOUT_AND_SHARED_CACHE_CUSTODY_01.json",
+      "bytes": 28072,
+      "sha256": "323b1ef0ba77accc0da3640e8ce4c91278c24bbab7be04e252661e08095925b7"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\ACTUAL_STANDALONE_MAVEN_EIGHT_STAGE_TERMINAL_02.json",
+      "bytes": 25388,
+      "sha256": "0765b7290233009ab7d0d2f173f3f0cd3ca51fcb8af57167cce2bd92dfb791b3"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\MAVEN_REPLAY_CLASS_ARTIFACTS_01.json",
+      "bytes": 19800,
+      "sha256": "53a367cf234ef8f57cdcf2f3bed888e3a94e3dd1ff5bf3360430ef7c489ed17f"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\PUBLISHED_NEIGHBOR_SOURCE_AUTHORITY_CPU_PROOF_01.json",
+      "bytes": 2308,
+      "sha256": "026830d887cb96be69b2f08ca1a4ab6baaf97cc6c59863b5a9833d05e97c074f"
+    }
+  ],
+  "immutableInputCount": 441,
+  "qualifiedReplayClasses": [
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest$Payload.class",
+      "bytes": 1854,
+      "sha256": "840e06113d9f7c37e6a4e5491177e8f95ac1d596f10260fa5732f0aaee75c1d2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest$Resources.class",
+      "bytes": 443,
+      "sha256": "7d7599b108861f66170896cdc47c20585537d90c69bb16587dd0e1e6a0cd41a7"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest$Scan.class",
+      "bytes": 3814,
+      "sha256": "405b572cf789c0dcace16f11071f64993ae30b5cdbd2f0d81e90c5baab6e7a7a"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest$Target.class",
+      "bytes": 2209,
+      "sha256": "59b9ff1352c13e2ca14eeb4640f6bfb2c7bc824a8e16e7e8ff5f7201a8c1eca0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest.class",
+      "bytes": 10963,
+      "sha256": "510d6124146fa1e57f0f61a523ff348d69e07b99263b2c604b95dae461f4a6f8"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\Replay$Change.class",
+      "bytes": 1760,
+      "sha256": "8e08f3c19b384a0fc8bd41bb8c0d55acd8e0b85501811f4f6fb7cb8735b77bd2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\Replay$Report.class",
+      "bytes": 2489,
+      "sha256": "13f441e9c1f64631b09d230430a3355dd00d25a19a3c281ee41600eaa98b2b81"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\Replay.class",
+      "bytes": 13663,
+      "sha256": "a7e946f8ac541c32c7d74f102378574d21901d86911aff5e2267c80d86f66b0b"
+    }
+  ],
+  "qualifiedClassReceipt": {
+    "path": "K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/REGEX_MAVEN_REPLAY_CLASS_ARTIFACTS_01.json",
+    "bytes": 20435,
+    "sha256": "2bed042d281f60c0277b0342562eedd1910476b207d291c5d06a9861c0b178ae",
+    "gitBlob": "0143a8dc23f8f3aa1baa30a11a8e3739a0ad1ee8"
+  },
+  "qualifiedMajorVersion": 65,
+  "sharedOfflineCache": {
+    "custody": {
+      "path": "K:/codex-work/m3-format78-standalone-maven-activation-p0-20261007/BOUNDED_OFFLINE_CACHE_CUSTODY.json",
+      "bytes": 81907,
+      "sha256": "68d872ca2cbcc82d9dae604274dbd96b64789d4af38d04da5afb9d0c95b9365a",
+      "gitBlob": "7f1baa45aec968f385cfe8a1d9654ca23b7acde4"
+    },
+    "files": 129,
+    "exactMembershipReverified": true
+  },
+  "originalSources": [
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\Replay.java",
+      "bytes": 10190,
+      "sha256": "fab78282a3e137b5c917a1351f97ec120ef0aab0d4f0615c4c3cd37c97665b2f"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\M3GpuToolJoinManifest.java",
+      "bytes": 10964,
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+    }
+  ],
+  "unrelatedOriginalSynexiaPostimages": [
+    {
+      "path": "K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/layout/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/target/com.synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+      "bytes": 141730,
+      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
+      "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/layout/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/target/com.synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexTrigramQueryTest.java",
+      "bytes": 11007,
+      "sha256": "bae0950fd49e10eaada3d8e9e61a9b99dd251357f3952bbd867e134f77ef2225",
+      "gitBlob": "601a424ef6f477e675c64cdaa0643b0247c5476a"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/layout/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/target/com.synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexProgramTest.java",
+      "bytes": 39322,
+      "sha256": "5c185acb76ef6de2a79eebec30a6b156fa982c7283cb0f4d0ef96840ce1a9dd6",
+      "gitBlob": "13ec38e57bd6d4f8317566821f8d6e2dad153961"
+    }
+  ],
+  "receivingPostimagesRestored": [
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+      "bytes": 141730,
+      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
+      "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+      "bytes": 15093,
+      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+      "gitBlob": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea"
+    }
+  ],
+  "binding": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_BINDING_01.json",
+    "bytes": 34445,
+    "sha256": "6199e7c6cedded723c810b40657f195afc5db82e45082a487d7588c1bca8d88d",
+    "gitBlob": "b5d45b30ed9e0aa4b27507ce4be2ffb151fb272a"
+  },
+  "nativeManifest": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/M3_REGEX_MAVEN_NATIVE_COMMANDS_01.json",
+    "bytes": 29039,
+    "sha256": "21c4986facf0f91b6e8060052c6e86d81e168f41dee3624b0f51d091fb0bf6fc",
+    "gitBlob": "7c6d09919320d007ac519b4207dbfbfdb31b0a3b"
+  },
+  "resourceRefusalsNative01Through05": [
+    {
+      "custody": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-02/NATIVE01_ACTUAL_RESOURCE_REFUSAL_01.json",
+        "bytes": 2260,
+        "sha256": "90dd3cc78d412db4e9cf40c3f606a3c9dba3a43adc8e20264c60bf581a1acc2a",
+        "gitBlob": "c00ebdb4a5bb62309c8fc5738e81d31c3fef0459"
+      },
+      "record": {
+        "schema": 1,
+        "status": "ACTUAL_ROOT_NATIVE01_RESOURCE_REFUSAL_BEFORE_MAVEN_JVM",
+        "rootActualTerminal": {
+          "chunk": "80091f",
+          "exitCode": 1,
+          "elapsedSeconds": 0.4637978
+        },
+        "preflight": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-01/M3_REGEX_MAVEN_01_applyTwoTargets.preflight.json",
+          "bytes": 1171,
+          "sha256": "01fd752cfe6581bb618a7dd64b78da9cadb2bd8f147f30bec8b66bea66cbe69a",
+          "gitBlob": "c5e7d9b353da1e4c5f073476c3de50e49d6622b0"
+        },
+        "preflightLog": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-01/M3_REGEX_MAVEN_01_applyTwoTargets.preflight.log",
+          "bytes": 319,
+          "sha256": "a9e45b77c725dcc0791ae49d568934cbcb47a343e18ec1b2aa7a85cd55ad0ecb",
+          "gitBlob": "9a249a698677e41593b9c34cf3f0ecf2ae590855"
+        },
+        "native01Readiness": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-01/NATIVE_READINESS_SEAL_01.json",
+          "bytes": 5946,
+          "sha256": "7f2638745c28f1739c3f2d30d6f19f8976bcfa8c86851c07bdb0b4b6afe61264",
+          "gitBlob": "3634f7c3b36f2b1355db4545229ea2e65d8335d5"
+        },
+        "native01Binding": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-01/M3_REGEX_MAVEN_BINDING_01.json",
+          "bytes": 28037,
+          "sha256": "8c7e4ec845a5ef681b51b7073e76ffb8dda2513cb25b62303ff1125b69de78fe",
+          "gitBlob": "fe7f0d3569fecf387124910be2e0f6461e422421"
+        },
+        "immutableInputsPassed": 441,
+        "qualifiedMavenReplayClassesPassed": 8,
+        "receiverSourcesUnchanged": [
+          {
+            "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+            "sha256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131"
+          },
+          {
+            "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+            "sha256": "ABSENT"
+          }
+        ],
+        "MavenLog": "ABSENT",
+        "MavenExitReceipt": "ABSENT",
+        "laterFourStages": "NOT_LAUNCHED",
+        "negativeCasesPrepared": false,
+        "JVMInvocations": 0,
+        "MavenInvocations": 0,
+        "reviewerInvocations": 0,
+        "implicitRetry": false
+      },
+      "preflightRecord": {
+        "schema": 1,
+        "stage": "applyTwoTargets",
+        "atUtc": "2026-10-07T15:57:32.469834+00:00",
+        "jvmInvocations": 0,
+        "mavenInvocations": 0,
+        "rootLane": "SOLE_SERIAL_JVM_LANE",
+        "status": "REFUSED_RESOURCE_BEFORE_JVM",
+        "nativeBindingSHA256": "8c7e4ec845a5ef681b51b7073e76ffb8dda2513cb25b62303ff1125b69de78fe",
+        "immutableInputs": 441,
+        "qualifiedReplayClasses": 8,
+        "receivingTargets": [
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
+            "sha256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131"
+          },
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
+            "sha256": "ABSENT"
+          }
+        ],
+        "availableCommitBytes": 968114176,
+        "minimumCommitBytes": 2147483648,
+        "freeKBytes": 37009252352,
+        "taskBytes": 1764391,
+        "projectedReceivingGrowthBytes": 15730
+      }
+    },
+    {
+      "custody": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/NATIVE02_ACTUAL_RESOURCE_REFUSAL_01.json",
+        "bytes": 2260,
+        "sha256": "777b51491cc457a9338ed78c4f31c7893c00655dbd021f62a9938ad34eeb0d9f",
+        "gitBlob": "db8c7a738cdd5b287385349719a75d78be74db38"
+      },
+      "record": {
+        "schema": 1,
+        "status": "ACTUAL_ROOT_NATIVE02_RESOURCE_REFUSAL_BEFORE_MAVEN_JVM",
+        "rootActualTerminal": {
+          "chunk": "b66374",
+          "exitCode": 1,
+          "elapsedSeconds": 0.1343066
+        },
+        "preflight": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-02/M3_REGEX_MAVEN_02_applyTwoTargets.preflight.json",
+          "bytes": 1172,
+          "sha256": "159b170f3b731b94129520dcb92e8c9b98c653cc0fefc2c5e7e8288e748f40f2",
+          "gitBlob": "c9f3496795fc187b8a765b7b8ca1ae48713adcb0"
+        },
+        "preflightLog": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-02/M3_REGEX_MAVEN_02_applyTwoTargets.preflight.log",
+          "bytes": 320,
+          "sha256": "a9c08f62856c0e2aeb708f8ff81f0344da19eab11d0d7d26f42b89a171177a04",
+          "gitBlob": "0667802bb6b70b9cc8f0f16cd461d8f29ed58ee5"
+        },
+        "native02Readiness": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-02/NATIVE_READINESS_SEAL_02.json",
+          "bytes": 6153,
+          "sha256": "d8ad6820691d0a153872de885e1a76567e469a42252a7372d8df2190970523f9",
+          "gitBlob": "223aaed0545efe33328a52b85e157d5d4f1340da"
+        },
+        "native02Binding": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-02/M3_REGEX_MAVEN_BINDING_01.json",
+          "bytes": 29366,
+          "sha256": "39e6ea9692410c9c92447d7c2fffff997265dab2905fe3d3185cc72d5ecc9373",
+          "gitBlob": "6128d22d72d7615931831021c6f1329c9ac56eb7"
+        },
+        "immutableInputsPassed": 441,
+        "qualifiedMavenReplayClassesPassed": 8,
+        "receiverSourcesUnchanged": [
+          {
+            "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+            "sha256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131"
+          },
+          {
+            "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+            "sha256": "ABSENT"
+          }
+        ],
+        "MavenLog": "ABSENT",
+        "MavenExitReceipt": "ABSENT",
+        "laterFourStages": "NOT_LAUNCHED",
+        "negativeCasesPrepared": false,
+        "JVMInvocations": 0,
+        "MavenInvocations": 0,
+        "reviewerInvocations": 0,
+        "implicitRetry": false
+      },
+      "preflightRecord": {
+        "schema": 1,
+        "stage": "applyTwoTargets",
+        "atUtc": "2026-10-07T16:00:02.057840+00:00",
+        "jvmInvocations": 0,
+        "mavenInvocations": 0,
+        "rootLane": "SOLE_SERIAL_JVM_LANE",
+        "status": "REFUSED_RESOURCE_BEFORE_JVM",
+        "nativeBindingSHA256": "39e6ea9692410c9c92447d7c2fffff997265dab2905fe3d3185cc72d5ecc9373",
+        "immutableInputs": 441,
+        "qualifiedReplayClasses": 8,
+        "receivingTargets": [
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
+            "sha256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131"
+          },
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
+            "sha256": "ABSENT"
+          }
+        ],
+        "availableCommitBytes": 1344475136,
+        "minimumCommitBytes": 2147483648,
+        "freeKBytes": 37008666624,
+        "taskBytes": 1884884,
+        "projectedReceivingGrowthBytes": 15730
+      }
+    },
+    {
+      "custody": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-04/NATIVE03_ACTUAL_PARTIAL_RESOURCE_REFUSAL_01.json",
+        "bytes": 4225,
+        "sha256": "719078e68259b337e97ec7abb08a514e7626e1b155dc15dd2f8145f75b585292",
+        "gitBlob": "b720b0da84ca529e3e6f19f5d18db91824868848"
+      },
+      "record": {
+        "schema": 1,
+        "status": "ACTUAL_NATIVE03_APPLY2_PASS_THEN_CHECK_PRE_JVM_RESOURCE_REFUSAL",
+        "applyActualTerminal": {
+          "chunk": "6244ce",
+          "exitCode": 0,
+          "elapsedSeconds": 1.9030991
+        },
+        "applyArtifacts": {
+          "wrapper": {
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_applyTwoTargets.cmd",
+            "bytes": 4141,
+            "sha256": "fc3ef721ff0466a4ee25255ee9a3e2db90ee9629105c16bc41934020081edb8d",
+            "gitBlob": "7aa70674812250d58249d4fd0f1879582d999f65"
+          },
+          "log": {
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_applyTwoTargets.log",
+            "bytes": 1384,
+            "sha256": "1a70fb8b13eba15d65349b79786382cffaa817f646bba5ffe4102627f0f25213",
+            "gitBlob": "3bf1bd1d741f9d8ddb7f26dc2d9a5a195deef6c4"
+          },
+          "exitFile": {
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_applyTwoTargets.exit.txt",
+            "bytes": 3,
+            "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+            "gitBlob": "18748286e5b8b4de5db905f87cdfed1a7d48fe60"
+          },
+          "preflight": {
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_applyTwoTargets.preflight.json",
+            "bytes": 1163,
+            "sha256": "2caee40a135dfd86df3b30a241736fe1cdc41fd1c079df53af43476c14b8a91d",
+            "gitBlob": "8f85da68a8a56c2b6bd626b1c8dbb710f0cdb091"
+          },
+          "preflightLog": {
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_applyTwoTargets.preflight.log",
+            "bytes": 311,
+            "sha256": "6808ddf2b5a0d054285862d8e7016b28f7c05ddd99218e54e0efb219301b83b9",
+            "gitBlob": "1199c1de6802f03e89727f44c90396af5f101da1"
+          }
+        },
+        "checkActualTerminal": {
+          "chunk": "f059d3",
+          "exitCode": 1,
+          "elapsedSeconds": 0.7824835
+        },
+        "checkResourceRefusal": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_defaultCheckFixedpoint.preflight.json",
+          "bytes": 1232,
+          "sha256": "1490c85008e13cc169dd772a71f2758b2ad62229a5e50c7a31b49d915e143b37",
+          "gitBlob": "d389f8c6edcb218e325bc3a4454b82d9823b4c1d"
+        },
+        "checkPreflightLog": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/M3_REGEX_MAVEN_03_defaultCheckFixedpoint.preflight.log",
+          "bytes": 326,
+          "sha256": "77f02af3545fdd1bb1bcbe8e743be91b7633d3776074d76ae4c91ffb210911cb",
+          "gitBlob": "2a4f9a54871ea4e8357faef9cac597ff1bc40d35"
+        },
+        "checkMavenLog": "ABSENT",
+        "checkMavenExitReceipt": "ABSENT",
+        "laterThreeGates": "NOT_LAUNCHED",
+        "sourcePostimages": [
+          {
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+            "bytes": 141730,
+            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
+            "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27"
+          },
+          {
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+            "bytes": 15093,
+            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+            "gitBlob": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea"
+          }
+        ],
+        "restorationRequired": false,
+        "duplicateApplyAuthorized": false,
+        "MavenInvocations": 1,
+        "JVMInvocations": 1,
+        "M3ProductCompilation": "NOT_RUN",
+        "M3RuntimeAdmission": "OPEN",
+        "retainedNative03Readiness": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/NATIVE_READINESS_SEAL_03.json",
+          "bytes": 6488,
+          "sha256": "0f1e2e80c4cbd8d5fea87246da83d54bd90b278a9c420425dca6184b902ded38",
+          "gitBlob": "88bdeae35b53f2d3c63aa85e71778bd7641890ee"
+        }
+      },
+      "preflightRecord": {
+        "schema": 1,
+        "stage": "defaultCheckFixedpoint",
+        "atUtc": "2026-10-07T16:03:14.175508+00:00",
+        "jvmInvocations": 0,
+        "mavenInvocations": 0,
+        "rootLane": "SOLE_SERIAL_JVM_LANE",
+        "status": "REFUSED_RESOURCE_BEFORE_JVM",
+        "nativeBindingSHA256": "b5a9f8b1cb10c5c6ee7451564b02e2c5adac47189fe8406c5df0f2131bf65f4e",
+        "immutableInputs": 441,
+        "qualifiedReplayClasses": 8,
+        "receivingTargets": [
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
+            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+          },
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
+            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+          }
+        ],
+        "availableCommitBytes": 477376512,
+        "minimumCommitBytes": 2147483648,
+        "freeKBytes": 37007740928,
+        "taskBytes": 2031277,
+        "projectedReceivingGrowthBytes": 0
+      }
+    },
+    {
+      "custody": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-05/NATIVE04_ACTUAL_RESOURCE_REFUSAL_01.json",
+        "bytes": 3665,
+        "sha256": "a6bba3a6daa8bdab7c53c781736b969022c795eb0d3d77e16484a70e229c823f",
+        "gitBlob": "56eaafd5e3b04c9c6af52d101f731bc87df27aa7"
+      },
+      "record": {
+        "schema": 1,
+        "status": "ACTUAL_NATIVE04_CHECK_REFUSED_RESOURCE_BEFORE_JVM",
+        "actualRootTerminal": {
+          "chunk_id": "945094",
+          "wall_time_seconds": 0.4805333,
+          "exit_code": 1,
+          "original_token_count": 0,
+          "output": ""
+        },
+        "rootTerminalSeal": {
+          "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_NATIVE04_ROOT_ACTUAL_CHECK_01.json",
+          "bytes": 124,
+          "sha256": "b3896143d9bbd1603c62969faf8db64a1cbf52c27038c69c566b80443c4bb3a4",
+          "gitBlob": "ebcdaf7f864cbe4c2ac874192746c84c985fd027"
+        },
+        "preflight": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-04/M3_REGEX_MAVEN_04_defaultCheckFixedpoint.preflight.json",
+          "bytes": 1232,
+          "sha256": "b44b60a99e30ea048fed10bdcf93c7fb31cb48e5c547278cefd8c40a67fdb32e",
+          "gitBlob": "79859629f61984b3fdaf85d00dedcd46fbfae3f1"
+        },
+        "preflightLog": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-04/M3_REGEX_MAVEN_04_defaultCheckFixedpoint.preflight.log",
+          "bytes": 326,
+          "sha256": "416b55bfbefab2a0c00cbba1cbd4e449b38a9ecf78fcffb30c4b6db7f05dedc4",
+          "gitBlob": "ec427a3a87bc693906b3b8aae44051fb15da7967"
+        },
+        "nativeWrapper": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-04/M3_REGEX_MAVEN_04_defaultCheckFixedpoint.cmd",
+          "bytes": 4197,
+          "sha256": "f4530e7c47f609a55aed744802d7be0245aeb8259bdb692cbdc6ae8533e7e6ba",
+          "gitBlob": "efb82e19f379ce6de30b1376af713698f4c9011b"
+        },
+        "native04Binding": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-04/M3_REGEX_MAVEN_BINDING_01.json",
+          "bytes": 32489,
+          "sha256": "6d8fdee47a0d3cece297e52a3188aa7e9bcc666c7b2e4b117cdca0111c43fa03",
+          "gitBlob": "049d8b5a4a4834568ca905dac122bac3d1c12e67"
+        },
+        "native04Readiness": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-04/NATIVE_READINESS_SEAL_04.json",
+          "bytes": 6287,
+          "sha256": "9f75bd9518e8333d25a8133cafa4a2eac28e82b8d9df36e66476c6ada22cd6c7",
+          "gitBlob": "0813fdd5b046130f93c62b08406d989206142cca"
+        },
+        "MavenLog": "ABSENT",
+        "MavenExitReceipt": "ABSENT",
+        "remainingFourGates": "NOT_RUN",
+        "completedApply": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-04/NATIVE03_ACTUAL_PARTIAL_RESOURCE_REFUSAL_01.json",
+          "bytes": 4225,
+          "sha256": "719078e68259b337e97ec7abb08a514e7626e1b155dc15dd2f8145f75b585292",
+          "gitBlob": "b720b0da84ca529e3e6f19f5d18db91824868848"
+        },
+        "postimages": [
+          {
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+            "bytes": 141730,
+            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
+            "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27"
+          },
+          {
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+            "bytes": 15093,
+            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+            "gitBlob": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea"
+          }
+        ],
+        "restorationRequired": false,
+        "duplicateApplyAuthorized": false,
+        "JVMInvocations": 0,
+        "MavenInvocations": 0,
+        "reviewerInvocations": 0,
+        "M3RuntimeAdmission": "OPEN"
+      },
+      "preflightRecord": {
+        "schema": 1,
+        "stage": "defaultCheckFixedpoint",
+        "atUtc": "2026-10-07T16:15:16.678730+00:00",
+        "jvmInvocations": 0,
+        "mavenInvocations": 0,
+        "rootLane": "SOLE_SERIAL_JVM_LANE",
+        "status": "REFUSED_RESOURCE_BEFORE_JVM",
+        "nativeBindingSHA256": "6d8fdee47a0d3cece297e52a3188aa7e9bcc666c7b2e4b117cdca0111c43fa03",
+        "immutableInputs": 441,
+        "qualifiedReplayClasses": 8,
+        "receivingTargets": [
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
+            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+          },
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
+            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+          }
+        ],
+        "availableCommitBytes": 983240704,
+        "minimumCommitBytes": 2147483648,
+        "freeKBytes": 37000364032,
+        "taskBytes": 2393583,
+        "projectedReceivingGrowthBytes": 0
+      }
+    },
+    {
+      "custody": {
+        "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/NATIVE05_ACTUAL_RESOURCE_REFUSAL_01.json",
+        "bytes": 3665,
+        "sha256": "63468c635c8d82834cfd1ed32031e79bb4892acf0b07a1c85efb4c165bff089d",
+        "gitBlob": "05b7acfd9400ec7bdd8c9c5cbab91776ce497de4"
+      },
+      "record": {
+        "schema": 1,
+        "status": "ACTUAL_NATIVE05_CHECK_REFUSED_RESOURCE_BEFORE_JVM",
+        "actualRootTerminal": {
+          "chunk_id": "18898c",
+          "wall_time_seconds": 0.1426402,
+          "exit_code": 1,
+          "original_token_count": 0,
+          "output": ""
+        },
+        "rootTerminalSeal": {
+          "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_NATIVE05_ROOT_ACTUAL_CHECK_01.json",
+          "bytes": 124,
+          "sha256": "7f73952e8b498a71a29c73d82943424d691df0c9f589ff684fdf810a93244de3",
+          "gitBlob": "dccece6d5d956df743432561255f60a8a1b6fc09"
+        },
+        "preflight": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-05/M3_REGEX_MAVEN_05_defaultCheckFixedpoint.preflight.json",
+          "bytes": 1233,
+          "sha256": "bb5bfbd34aa807e3157e97f4dd734087812df11099a2825577e7d490f5c9671c",
+          "gitBlob": "a1549ae57aad67be59a838334a3b80073375e6bb"
+        },
+        "preflightLog": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-05/M3_REGEX_MAVEN_05_defaultCheckFixedpoint.preflight.log",
+          "bytes": 327,
+          "sha256": "a2bcd8869a4d49fed37a98e28cbb9d11d3f19abe7c4e535c5e88e4c5966d52de",
+          "gitBlob": "1a3169aac587a236c42534c62bec195a227652d1"
+        },
+        "nativeWrapper": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-05/M3_REGEX_MAVEN_05_defaultCheckFixedpoint.cmd",
+          "bytes": 4197,
+          "sha256": "226749ddbaa7597aa7c2d27371a807dc893d6635bc6dba9e3f526197d10c35b5",
+          "gitBlob": "d6da4be5621a7ea8d3e6fbcbdac0bb0b4c9a72f1"
+        },
+        "native05Binding": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-05/M3_REGEX_MAVEN_BINDING_01.json",
+          "bytes": 33467,
+          "sha256": "4c5c6a91c74fb71c03724062e0474a57f8c4f8daa0c7a3c9b2dc1ca5b02ed416",
+          "gitBlob": "0612cf9d55503bb6b829ce33083c6216e2ff4ab0"
+        },
+        "native05Readiness": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-05/NATIVE_READINESS_SEAL_05.json",
+          "bytes": 6912,
+          "sha256": "59d511085ad7f24b788b447143c1e20505b3b779a7466d473e776f0bb6e71b98",
+          "gitBlob": "08afeec58bd1b28721d42e979bf52ad8b79a73a1"
+        },
+        "MavenLog": "ABSENT",
+        "MavenExitReceipt": "ABSENT",
+        "remainingFourGates": "NOT_RUN",
+        "completedApply": {
+          "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-04/NATIVE03_ACTUAL_PARTIAL_RESOURCE_REFUSAL_01.json",
+          "bytes": 4225,
+          "sha256": "719078e68259b337e97ec7abb08a514e7626e1b155dc15dd2f8145f75b585292",
+          "gitBlob": "b720b0da84ca529e3e6f19f5d18db91824868848"
+        },
+        "postimages": [
+          {
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+            "bytes": 141730,
+            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
+            "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27"
+          },
+          {
+            "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/target/receiving-M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+            "bytes": 15093,
+            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+            "gitBlob": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea"
+          }
+        ],
+        "restorationRequired": false,
+        "duplicateApplyAuthorized": false,
+        "JVMInvocations": 0,
+        "MavenInvocations": 0,
+        "reviewerInvocations": 0,
+        "M3RuntimeAdmission": "OPEN"
+      },
+      "preflightRecord": {
+        "schema": 1,
+        "stage": "defaultCheckFixedpoint",
+        "atUtc": "2026-10-07T23:42:50.748935+00:00",
+        "jvmInvocations": 0,
+        "mavenInvocations": 0,
+        "rootLane": "SOLE_SERIAL_JVM_LANE",
+        "status": "REFUSED_RESOURCE_BEFORE_JVM",
+        "nativeBindingSHA256": "4c5c6a91c74fb71c03724062e0474a57f8c4f8daa0c7a3c9b2dc1ca5b02ed416",
+        "immutableInputs": 441,
+        "qualifiedReplayClasses": 8,
+        "receivingTargets": [
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexProgram.java",
+            "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+          },
+          {
+            "path": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21\\m3\\vendor\\synexia\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexRegexTrigramQuery.java",
+            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+          }
+        ],
+        "availableCommitBytes": 1634082816,
+        "minimumCommitBytes": 2147483648,
+        "freeKBytes": 36981727232,
+        "taskBytes": 2540221,
+        "projectedReceivingGrowthBytes": 0
+      }
+    }
+  ],
+  "native06PartialProjectedBudgetRefusalAndExplicitFinisher": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/NATIVE_READINESS_SEAL_06.json",
+    "bytes": 7241,
+    "sha256": "b725a4c51d79fa7f83147a0403c2534afe90aac1bed2522d0d5a7f7f99d10f3a",
+    "gitBlob": "6f1e350cae5b7f48d4c805e0083d91e2ed75c880"
+  },
+  "metadataReview": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/review-preparation-02/M3_REGEX_RECEIVER_ACTUAL_REVIEW_TERMINAL_02.json",
+    "bytes": 40763,
+    "sha256": "4d04176cfeaa7f9d3c7c1778976b6f0065e289e41ed3db6c36d5057dda9b9941",
+    "gitBlob": "bfb979b9326d07286947caf75791385ac4a560ea"
+  },
+  "metadataReviewFiles": 7,
+  "completeFrozenPublicationFiles": 21,
+  "supersedesReviewedPreparationSnapshotOnlyForActualReceiverMavenAndReviewOutcomes": true,
+  "runtimeScope": "Same-VM shared Replay/Manifest engine, isolated M3 vendor source recipe; no product or M3 runtime compilation in these five stages.",
+  "fullSourceModuleClosureCanonicalM3RuntimeNativeJniJtregPerformance": "OPEN_NOT_RUN",
+  "P0": "OPEN",
+  "performanceOrExhaustiveConvergenceClaim": false,
+  "fossDecision": {
+    "path": "K:/codex-work/m3-regex-carryback-publication-p0-20261008/FOSS_REUSE_DECISION.tsv",
+    "bytes": 841,
+    "sha256": "3e05f6111757ebda0aa2868e8f6a0c5fc64eb0ed22839d92e072174bfff0e376",
+    "gitBlob": "612a2dada16155a66e32b9d205df6fe93a8ed1ac"
+  },
+  "priorCpuMetadataSchemaFailure": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/SEALER01_CPU_METADATA_SCHEMA_FAILURE_01.json",
+    "bytes": 772,
+    "sha256": "156b1a7b5e0ef34c5c693a5e795f09ede0ca08219734622e2e23d3a788a85872",
+    "gitBlob": "f86de0f6404b48952c76a8c107bd167891c628e0"
+  },
+  "originalSealerAdapter": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/seal_receiver_maven05_actual_cpu.py",
+    "bytes": 10077,
+    "sha256": "4a41d0de5a7b2316cca2c10f01ee279e11503f17b3834e76ab0683df72ec599a",
+    "gitBlob": "48764bb8d516a9e524e623134693db81a1dc8e33"
+  },
+  "sealingAdapter": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/seal_receiver_maven05_actual02_cpu.py",
+    "bytes": 1885,
+    "sha256": "f23f461d14258bf087d75bcaceb60b3750e7189820573fce80d1d741dbb08222",
+    "gitBlob": "c6b503f21c7f9b1436f16dcfd4bdcc99645abb97"
+  }
+}

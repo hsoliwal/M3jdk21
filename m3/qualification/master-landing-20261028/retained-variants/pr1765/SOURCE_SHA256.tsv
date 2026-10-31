@@ -1,0 +1,8 @@
+path	sha256	git_blob	mode	pr	note
+.github/workflows/m3-mask-viewport-page-20261021.yml	5081c4087980d5511a0299a91a9ad935628c739807d2108f0903531f89afb642	63308640f2174e05a5a105190dad488a75d68ae6	100644	1765	PR version, not live
+m3/collections/qualification/mask-viewport-native-page-20261021/CATALOGUE.tsv	aa73eeedeb06aa022d6bde01f5e8904a97732392ce096908d4a2e4d33c383106	14b10986453fe683baeca51ab9cc57f70cde84f6	100644	1765	PR version, not live
+m3/collections/qualification/mask-viewport-native-page-20261021/README.md	f0189c6a0d882324f2f076ba48d32b93bc05de4fb9d077471d144701551711e7	0be138b0edfb484db1a446864c364ec56108573b	100644	1765	PR version, not live
+m3/collections/qualification/mask-viewport-native-page-20261021/SOURCE_MANIFEST.tsv	e54fefb7c0155e70029fc5993eabdfdab05a4a2997905ed02df6c3c4f9aa36e8	973d84089bdc3fb4cc0b0bc5a93d310fd2126568	100644	1765	PR version, not live
+m3/collections/src/main/c/m3maskviewport.c	088f551e2777a1b9cf116041f41ec954bd8d7ddf77d7b042da0e2bcba5325269	a11b155d5caa41ecdf97a460cd431110716545b1	100644	1765	PR version, not live
+m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java	819fd3853a6348cf085421e798a1eeb08275015dfb4a6f72d52e2f30aece8bc1	5abfd398748763ba3feb51c4133fe7f01e01893c	100644	1765	PR version, not live
+m3/collections/src/test/java/com/m3/collections/M3MaskViewportPageContract.java	1c9db5c0184948e36480f67ebc495e7c21131eb698d05da25291c791d3dc58f5	6aff7f69204ebb8efe562467e4045afaa0962163	100644	1765	PR version, not live

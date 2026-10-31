@@ -1,0 +1,27 @@
+name: M3JDK21 shadow stream progress qualification
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - '.github/workflows/m3-shadow-stream-progress-20261020.yml'
+  push:
+    branches: ['m3/shadow-stream-progress-fix-20261020']
+permissions:
+  contents: read
+jobs:
+  source-shadow-progress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Run the original M3File module tests with strict Java 21 compilation
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/file/pom.xml -Dtest=M3FileShadowTest test
+      - name: Run the complete owning module suite
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/file/pom.xml test

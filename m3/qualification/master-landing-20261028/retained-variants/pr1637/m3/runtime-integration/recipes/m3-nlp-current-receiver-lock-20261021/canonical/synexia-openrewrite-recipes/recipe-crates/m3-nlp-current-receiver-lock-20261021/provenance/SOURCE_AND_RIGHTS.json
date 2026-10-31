@@ -1,0 +1,53 @@
+{
+  "schema": "M3_NLP_CURRENT_OWNER_SOURCE_AND_RIGHTS/1",
+  "task": "m3-nlp-current-receiver-lock-20261021",
+  "receiving_repository": "hsoliwal/M3jdk21",
+  "receiving_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "target_files": [
+    {
+      "path": "m3/core/src/com/m3/text/SharedLexiconPrecomputeCatalog.java",
+      "before_sha256": "8e6156376ea9548971b78bb876dc3968195266f04c17c5b061d7f5e4b52f367d",
+      "after_sha256": "92fd76c3f0d3c10c90ea4cb52485d2dbceda513fa3d794d22ec67fd153fd62ed",
+      "license": "Apache-2.0",
+      "disposition": "EXISTING_FIRST_PARTY_DECLARATION_OR_SOURCE_LOCK_MAINTENANCE"
+    },
+    {
+      "path": "m3/tooling/module-packs/nlp-search/current-source-lock.json",
+      "before_sha256": "054029431fbd8063c1e0397c43f3538f319984e252c92f08538881dc0a2eaff5",
+      "after_sha256": "7f591c98c603ba8128c97747fe38fd1ccfe8adb5f2cd712b98b2697fff935acb",
+      "license": "Apache-2.0",
+      "disposition": "EXISTING_FIRST_PARTY_DECLARATION_OR_SOURCE_LOCK_MAINTENANCE"
+    }
+  ],
+  "first_party_author": "Hitesh Soliwal and Contributors to the Synexia Project",
+  "canonical_recipe_lineage": {
+    "path": "provenance/RECIPE_LINEAGE.json",
+    "sha256": "c28291e446504369b98a8a8732a62fc22bc561da0bb9bbf5f97aec460653390b"
+  },
+  "memory_helper_lineage": {
+    "path": "memory/HELPER_LINEAGE.json",
+    "sha256": "172a9897495c0c885f7c6269bcb64b49daeca78f95d45235fe6e5e9fd8820f35"
+  },
+  "exact_received_source_custody": {
+    "path": "proof/owner-candidate-001/LINEAGE_REVIEW.json",
+    "sha256": "d95239b5849c3518072e289a23f659ac5e5ce9905e111fd3853a8c3fec36d89a"
+  },
+  "historical_received_commits": {
+    "path": "proof/owner-candidate-001/RECEIVING_COMMIT_READBACK.json",
+    "sha256": "5802b3bc727a4d9f608c786ae174676dedf198c6f80fd08858ce38b546bfc22e"
+  },
+  "license_and_notice_files": [
+    {
+      "path": "licenses/Synexia-LICENSE",
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6"
+    },
+    {
+      "path": "licenses/Synexia-NOTICE",
+      "sha256": "816e983c97925d4342c370520dfd072fc4dfe493f050bf244e34ecb5c75ccbb1"
+    }
+  ],
+  "preserved_source_headers": "Exact original M3 text/C/JNI/test/workflow fixtures retain their source notices. The two task outputs change only the existing first-party constructor declaration and closed file/hash entries. No third-party algorithm bodies are imported.",
+  "historical_template_boundary": "Differing immutable BigString templates remain separately preserved evidence; no source/manifest normalization or historical regeneration is claimed.",
+  "fork_build_boundary": "Existing pinned OpenNLP/Lucene bodies and locked archives are consumed by their original build owners. This canonical task retains finite text evidence and hashes, not binary payloads. Their original rights are retained in the companion current-owner evidence stage.",
+  "authorization": "User-authorized implementation and PRs for M3JDK21 with Synexia reuse; routine existing-owner maintenance. No patent status, priority or legal admission is claimed."
+}

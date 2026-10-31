@@ -1,0 +1,93 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3 parser JMOD source and compiler overlay qualification
+
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/parser/**'
+      - 'm3/tooling/module-packs/build-tools/delta/**'
+      - 'm3/file/**'
+      - 'm3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3FileSourceFacts.java'
+      - 'm3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3FileSourceFactsDeltaContract.java'
+      - 'm3/docs/name-mapping.d/m3-file-build-delta-20261020.json'
+      - 'm3/tooling/jmod-recipes/tools/jmod_pack.py'
+      - 'm3/tooling/jmod-recipes/tools/jmod_image.py'
+      - 'm3/docs/name-mapping.d/m3-parser-jmod-20261018.json'
+      - 'src/jdk.compiler/share/classes/com/sun/source/util/M3AST.java'
+      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/m3/**'
+      - 'src/jdk.compiler/share/classes/com/sun/tools/javac/main/JavaCompiler.java'
+      - '.github/workflows/m3-parser-jmod-20261018.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  parser-jmod:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Preserve unchanged intake and ordered-family policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/compatibility/check_synexia_full_family.py
+          python3 m3/compatibility/check_synexia_full_borrow_receiver.py
+          python3 m3/runtime-integration/verify-synexia-intake.py
+      - name: Lint source structure and seal inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/tooling/module-packs/parser/build.py --repo-root "$PWD" --jdk-home "$JAVA_HOME" --out "$RUNNER_TEMP/m3-parser-proof" --phase lint
+      - name: Compile actual compiler owners, parser and all consumers
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/tooling/module-packs/parser/build.py --repo-root "$PWD" --jdk-home "$JAVA_HOME" --out "$RUNNER_TEMP/m3-parser-proof" --phase compile
+      - name: Execute source, grammar and direct M3AST contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/tooling/module-packs/parser/build.py --repo-root "$PWD" --jdk-home "$JAVA_HOME" --out "$RUNNER_TEMP/m3-parser-proof" --phase test
+      - name: Package JMOD and execute precompiled linked-image consumers
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/tooling/module-packs/parser/build.py --repo-root "$PWD" --jdk-home "$JAVA_HOME" --out "$RUNNER_TEMP/m3-parser-proof" --phase runtime
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-parser-jmod-proof
+          path: ${{ runner.temp }}/m3-parser-proof
+          if-no-files-found: warn
+
+  file-build-delta:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Qualify file, source and context deltas against actual javac outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/tooling/module-packs/build-tools/delta/verify.py --repo-root "$PWD" --jdk-home "$JAVA_HOME" --baseline-ref d6d76b563050fc13c4fa79bc494edf29f1614b37 --out "$RUNNER_TEMP/m3-file-build-delta-proof"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: m3-file-build-delta-proof
+          path: ${{ runner.temp }}/m3-file-build-delta-proof
+          if-no-files-found: warn

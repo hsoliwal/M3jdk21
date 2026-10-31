@@ -1,0 +1,20 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "com.synexia.common.collections.PackedLongList / LongSequence / LongStack / LongSequenceSpliterator",
+      "source_commit": "ca595f7b74342708f98a372a17ba8b0989d5e069 (Synexia PR #9779 crate)",
+      "target": "com.m3.collections.M3LongArrayList (union owner) / M3LongList / M3LongStack / M3LongListSpliterator",
+      "status": "implemented-locally-verified; union of JDK-shaped v1 (Synexia #9775) and PackedLongList lineage; runtime PENDING_LINUX",
+      "target_rule": "one semantic owner per contract; JDK shape wins on conflicts; insert/removeValue kept as defaulted aliases"
+    },
+    {
+      "source": "hsoliwal/M3jdk21 PR #386 and PR #387 M3LongArrayList/M3LongSequence claims",
+      "source_commit": "7fad958f07 (zero-file superset ancestry merge)",
+      "target": "superseded by the union owner",
+      "status": "MERGED_ANCESTRY_ONLY",
+      "target_rule": "a merged PR is not proof its implementation is present"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+M3 source-closed Eclipse Collections 11.1.0 functional callbacks
+Copyright 2026 Hitesh Soliwal and contributors (first-party M3 Java adapter)
+SPDX-License-Identifier: Apache-2.0
+
+Includes UNMODIFIED source files from eclipse-collections/eclipse-collections
+tag 11.1.0, module eclipse-collections-api, Copyright (c) 2021 Goldman Sachs.
+All rights reserved. Original code and notices remain under Eclipse Public
+License v1.0 and Eclipse Distribution License v1.0 as declared by each file.
+These third-party source files are NOT relicensed as Apache-2.0 by Synexia:
+org.eclipse.collections.api.block.function.Function
+org.eclipse.collections.api.block.function.Function2
+org.eclipse.collections.api.block.predicate.Predicate
+org.eclipse.collections.api.block.predicate.Predicate2
+org.eclipse.collections.api.block.procedure.Procedure
+
+The separate com.m3.collections.eclipse.M3EclipseFunctionalAdapters is
+first-party original Apache-2.0 code implementing Java21 default-operation
+bridges to those interfaces, with no copied Eclipse implementation engine.
+Only java.base is required at runtime. There is no Eclipse Collections JAR
+dependency, native JNI dependency, or package-imported implementation class.

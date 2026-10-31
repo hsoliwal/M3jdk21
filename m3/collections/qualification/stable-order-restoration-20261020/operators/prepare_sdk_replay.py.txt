@@ -1,0 +1,171 @@
+"""Rebind the exact published serial proof host to the current canonical owners."""
+from pathlib import Path
+import hashlib
+import json
+import shutil
+import subprocess
+import xml.etree.ElementTree as ET
+
+C2 = Path(__file__).resolve().parent
+B = C2.parent / 'm3fs-vfs-20261020'
+CANON = B / 'canonical'
+NAME = 'm3-collections-refinement-20261020'
+TASK = CANON / 'synexia-openrewrite-recipes/recipe-crates' / NAME
+HOST = TASK / 'recipe-host'
+OLD_TASK = C2 / 'custody/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018'
+OLD = OLD_TASK / 'recipe-host'
+PASSES = ('stable-order-groups', 'index-contract', 'index-resource-probe', 'index-junit')
+BASE = 'f04fbac91a7891e64b77c7b24cef1ab75ec88144'
+DONOR = '528aaf79cfae79c5dbfe7c307340329d320e8c44'
+REPOSITORY = Path('/workspace/scratch/53bcd62c244c/M3JDK21')
+TREE = '985d672bf250aa090b2399d626f0e3e1b541135d'
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def blob(data):
+    return hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+
+
+def write(path, text):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text)
+
+
+copied = {}
+for rel in ('pom.xml', 'DEPENDENCIES.md', 'src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java'):
+    source = OLD / rel
+    destination = HOST / rel
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(source, destination)
+    copied[rel] = {'sha256': sha(source.read_bytes()), 'git_blob': blob(source.read_bytes()),
+                   'source': f'https://github.com/hsoliwal/com.synexia/blob/{DONOR}/'
+                             'synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/' + rel}
+
+targets = {}
+for selected in PASSES:
+    source = OLD / 'passes' / selected
+    shutil.copytree(source, HOST / 'passes' / selected, dirs_exist_ok=True)
+    for path in source.rglob('*'):
+        if path.is_file():
+            rel = path.relative_to(OLD).as_posix()
+            copied[rel] = {'sha256': sha(path.read_bytes()), 'git_blob': blob(path.read_bytes()),
+                           'source': f'https://github.com/hsoliwal/com.synexia/blob/{DONOR}/'
+                                     'synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/' + rel}
+    crate = HOST / 'passes' / selected / 'resources/com/synexia/rewrite/hash-pinned-java' / ('m3-wrapper-' + selected)
+    lines = [line for line in (crate / 'manifest.tsv').read_text().splitlines()
+             if line and not line.startswith('#')]
+    assert len(lines) == 1
+    target, before, after, template = lines[0].split('\t')
+    assert sha((crate / template).read_bytes()) == after
+    target_rel = target.removeprefix('m3/collections/')
+    current = subprocess.run(['git', '-C', str(REPOSITORY), 'show', TREE + ':' + target_rel],
+                             capture_output=True, check=False)
+    if before == 'ABSENT':
+        assert current.returncode != 0 and b'does not exist' in current.stderr, current.stderr
+    else:
+        assert current.returncode == 0 and sha(current.stdout) == before
+        assert (crate / 'pre' / template).read_bytes() == current.stdout
+    targets[target] = {'pass': selected, 'before_sha256': before, 'after_sha256': after}
+
+engine_lines = ['# canonical_base=' + BASE,
+                '# Java owner includes the separately qualified two-descriptor M3FS extension in this proposal.',
+                '# source_path\tgit_blob_sha1\tsha256\tlicense\texact_source_reference']
+engines = {}
+for name in ('M3HashPinnedJavaSnapshotRecipe.java', 'M3HashPinnedTextSnapshotRecipe.java',
+             'M3ScopeInference.java', 'M3EditScope.java'):
+    rel = 'synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/' + name
+    data = (CANON / rel).read_bytes()
+    reference = ('urn:sha256:' + sha(data) if name == 'M3HashPinnedJavaSnapshotRecipe.java'
+                 else f'https://github.com/hsoliwal/com.synexia/blob/{BASE}/' + rel)
+    engine_lines.append('\t'.join((rel, blob(data), sha(data), 'Apache-2.0', reference)))
+    engines[rel] = {'sha256': sha(data), 'git_blob': blob(data), 'reference': reference}
+write(HOST / 'ENGINE_SOURCES.tsv', '\n'.join(engine_lines) + '\n')
+write(HOST / 'HARNESS_LINEAGE.json', json.dumps({
+    'schema': 'M3_SERIAL_REPLAY_HOST_LINEAGE_V1', 'canonical_base': BASE,
+    'published_donor_commit': DONOR, 'donor_current_base_presence': 'ABSENT_404_RECORDED',
+    'copied_exact': copied, 'engine_bindings': engines,
+    'adaptation': ['Fresh task directory and explicit bounded contract',
+                   'Rebind the existing host engine seal file to the current canonical owners',
+                   'No test logic, POM, selected template, algorithm or public contract change'],
+    'source_custody_inventory': 'evidence/SOURCE_INVENTORY.json',
+    'gate_status': 'PREPARED; execution evidence is recorded separately',
+}, indent=2, sort_keys=True) + '\n')
+write(HOST / 'README.md', '''<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# Replay of the existing stable-order atom
+
+This host reuses the exact published Synexia POM, M3TaskRecipeTest and four
+one-file pass packets from commit 528aaf79cfae79c5dbfe7c307340329d320e8c44.
+It runs the existing canonical hash-pinned owners. ENGINE_SOURCES.tsv binds the
+current proposal's actual owner bytes; HARNESS_LINEAGE.json records every copied
+file and the narrow host rebinding. The original crate is absent at current
+develop f04fbac91a7891e64b77c7b24cef1ab75ec88144; its historical publication and
+exact target custody remain the source of these packets.
+
+Select stable-order-groups, index-contract, index-resource-probe or index-junit
+with -Dm3.pass. Each pass admits exactly one target and uses the existing named
+recipe com.synexia.m3.WrapperConvergence20261018. There is no new rewrite engine.
+Run test-compile with -DskipTests only after manifest/source lint, then execute
+surefire:test only after that compilation succeeds. The POM accepts an explicit
+real parser dependency classpath through -Dm3.parser.classpath.
+
+The five ordered SDK tests cover exact replay, unchanged decoys, fixed point,
+input order, mixed state, missing/drift/duplicate/wrong-representation refusals,
+post-scan mutation and named descriptor composition. The last test retains actual
+SDK Result output under target/candidate/<pass>, guarded by the four earlier
+proof groups. Different existing output and symlink paths refuse publication.
+
+The parent CONTRACT.md governs this task. Current product API/JNI behavior,
+resource measurements and source-built M3JDK21 acceptance remain distinct gates.
+Evidence records what actually ran; the historical PASS.md files are retained
+unchanged as donor provenance, not as claims about this fresh execution.
+''')
+write(TASK / 'CONTRACT.md', '''<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# Stable-order restoration: bounded receiving contract
+
+The product is M3JDK21. Synexia owns reusable recipes and convergence evidence;
+this task restores one already-public implementation atom into the existing
+m3/collections owner. Target source is 95d0266ff15ae1f11876cce7360b155ef33a1862,
+collections tree 985d672bf250aa090b2399d626f0e3e1b541135d. String remains the active
+global receiving phase. This pass does not advance it or establish complete
+JDK/Guava/Eclipse Collections/Apache Commons/Spring compatibility.
+
+Only M3LongIndexProjection's private known-opposite-sort path changes. Use the
+exact published stable-order-groups preimage and postimage. Reverse value-group
+order while copying physical occurrence IDs forward inside each equal group.
+Retain encounter-order stable merge sorting, current address-kernel loads,
+all offset/mask filtering paths, shared payload ownership, duplicate stability,
+validation and public/protected signatures. No native ABI or source changes.
+
+The current stronger native first-to-last admitted-span window and current
+read-only mutation guard remain. Do not replay their older whole-file candidates.
+Callback demand, exception identity, retries, null/comparator behavior and view
+liveness are observable contracts; a superficially faster wrapper is insufficient.
+
+Three exact published verification files are admitted at their ABSENT source
+paths: M3IndexOrderWindowContract, M3IndexOrderWindowResourceProbe and the JUnit
+entrypoint M3IndexOrderWindowTest. They test the actual current owner closure.
+All four target files must come from freshly qualified SDK output. Template
+copies in diagnostic workspaces are not receiving admission.
+
+Execute serially per file: source/template lint, host compile, actual SDK tests,
+admission, then target compile/behavior/API and actual JNI checks. Retain input
+and output seals, negative refusals and exact public descriptors. Timings are
+finite workload observations; requested-GC heap/RSS are not retained-storage
+guarantees. No provider interface renaming or alternative retained node store.
+
+The canonical recipe postimage is licensed Apache-2.0 and already publicly
+published. Preserve all source attribution and donor notices. Challenge sites
+are taxonomy/counterexample references, not source licenses. Catalogue and
+recipe-owned memory record selection, retained stronger atoms and exclusions.
+''')
+ET.parse(HOST / 'pom.xml')
+report = {'status': 'PASS', 'check': 'exact manifest/preimage/current absence/XML lint',
+          'host': str(HOST), 'targets': targets, 'copied_files': len(copied),
+          'engine_bindings': engines}
+write(C2 / 'verification/sdk-preparation.json', json.dumps(report, indent=2, sort_keys=True) + '\n')
+print(json.dumps({'status': 'PASS', 'host': str(HOST), 'passes': list(PASSES), 'targets': len(targets)}))

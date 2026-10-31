@@ -1,0 +1,26 @@
+{
+  "label": "21-seal-effective-selection",
+  "command": [
+    "python3",
+    "prepare.py",
+    "--dataset",
+    "gradle-provider-20261018",
+    "--repository",
+    "hsoliwal/M3jdk21",
+    "--baseline",
+    "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21",
+    "--baseline-ref",
+    "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "--candidates",
+    "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/proposal",
+    "--recipe-owner",
+    "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes"
+  ],
+  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+  "jdk": "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1",
+  "previous": null,
+  "started_utc": "2026-10-18T13:09:43.560344+00:00",
+  "finished_utc": "2026-10-18T13:09:43.601859+00:00",
+  "exit_code": 0,
+  "log_sha256": "a01c27eb80b757fa52934aa089c6706c13628198ffe3ac1d9f01da67bd9cdb05"
+}

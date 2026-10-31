@@ -1,0 +1,5 @@
+path	sha256	git_blob	mode	pr	note
+m3/file/qualification/contract-oracle-closure-20261023/RECEIVING.md	38af90ab13b0caa428ff77a7fcf385da4afbfed381986cd34025211eb1287a3a	583035cf94e2bb5bdaae2abe71e83590152dd92f	100644	1887	PR version, not live
+m3/file/qualification/contract-oracle-closure-20261023/SOURCE_RECEIPT.tsv	906d06a7970fcfbbf18dfbbb42b70979ad33c1b4a2ffc273834a6911ded20f27	2fa8a2cbb881de4983f398fd10737a10966b9bb6	100644	1887	PR version, not live
+m3/file/src/test/java/com/m3/file/M3FileObservationContract.java	eea934797b1bcb54c55c6bea2366b3da0b51d2ae3775c44a4536706dd356b855	a5044ca5cdfca1f879de81cb5d6ee9b722d872ba	100644	1887	PR version, not live
+m3/file/verify.py	603867d300e35acd9b58fbef59be0d7235ffd067431c8317e78c72d40cc8b7d3	7ecc6ed025178e59582f928ff69e69c8e1d12972	100644	1887	PR version, not live

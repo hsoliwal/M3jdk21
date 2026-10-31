@@ -1,0 +1,147 @@
+{
+  "schema": "M3_CURRENT_FORK_OWNERS_PUBLICATION_PREIMAGES/1",
+  "repository": "hsoliwal/com.synexia",
+  "base_commit": "3f4c3e1c97ca12b7f0d3efbbc387f40f942fa399",
+  "base_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+  "base_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12657",
+  "method": "Exact immutable Git-tree walks, all traversed parents complete and truncated=false.",
+  "paths": [
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof/current-fork-owners-20261021",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "a3457691f45b28040e25f13ac78949c79666643f",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates",
+          "git_tree": "a379010455ebceb276d5e0ff8e03d6c5da6dc764",
+          "entry_count": 298,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+          "git_tree": "075132723aa75a9cfbcba9df0b69bd9786e4e57e",
+          "entry_count": 17,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/proof",
+          "git_tree": "b9427efd4619cbd738b073f11bf6f746391b8df3",
+          "entry_count": 28,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/catalogue/current-fork-owner-decisions-20261021.tsv",
+      "status": "ABSENT",
+      "missing_component": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/catalogue",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "a3457691f45b28040e25f13ac78949c79666643f",
+          "entry_count": 130,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates",
+          "git_tree": "a379010455ebceb276d5e0ff8e03d6c5da6dc764",
+          "entry_count": 298,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+          "git_tree": "075132723aa75a9cfbcba9df0b69bd9786e4e57e",
+          "entry_count": 17,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "docs/M3-SCALE/provenance/M3_FILE_PROVENANCE.tsv",
+      "status": "PRESENT",
+      "git_blob": "90ef9a1e55d4c20126fed770aeb9286719f6c901",
+      "mode": "100644",
+      "type": "blob",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "docs",
+          "git_tree": "dcd272f208e0480b22f91067b71d032c1eaa610f",
+          "entry_count": 425,
+          "truncated": false
+        },
+        {
+          "path": "docs/M3-SCALE",
+          "git_tree": "315f48f26051e17d0152bdae138781ea7449f04a",
+          "entry_count": 278,
+          "truncated": false
+        },
+        {
+          "path": "docs/M3-SCALE/provenance",
+          "git_tree": "65c24566888597cb5d4beee02d850b86f8026928",
+          "entry_count": 3,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv",
+      "status": "PRESENT",
+      "git_blob": "72cde3e3aac244c0bbe4a7eb9e7f05c066936f20",
+      "mode": "100644",
+      "type": "blob",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+          "entry_count": 360,
+          "truncated": false
+        },
+        {
+          "path": "synexia-openrewrite-recipes",
+          "git_tree": "a3457691f45b28040e25f13ac78949c79666643f",
+          "entry_count": 130,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "status": "PRESENT",
+      "git_blob": "c8b6b51817844627bfc9203f31e4f306ad2bb0c7",
+      "mode": "100644",
+      "type": "blob",
+      "complete_parent_trees": [
+        {
+          "path": ".",
+          "git_tree": "219eebe67fab908a3a4991a35c3c4f77c2907133",
+          "entry_count": 360,
+          "truncated": false
+        }
+      ]
+    }
+  ]
+}

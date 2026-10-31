@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "sourceRepository": "hsoliwal/com.synexia",
+  "sourceRevision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+  "receiverRepository": "hsoliwal/M3jdk21",
+  "receiverBaseForPreimagePlan": "80b8534ad1e45002185fb3eeab233f98d3a7c0bd",
+  "manifestProtocol": "M3_DELIVERY_EXPORT_V1",
+  "nonlicensePayloads": 22,
+  "licenseNoticeCoalescedWithoutWrites": true,
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "firstPartyLicense": "Apache-2.0",
+  "existingThirdPartyAndOpenJdkNoticesPreserved": true,
+  "sourceBodyEdits": 0,
+  "qualification": "SOURCE_CUSTODY_AND_PUBLICATION_PLAN_ONLY_ROOT_EXECUTION_PROOFS_ADDED_SEPARATELY",
+  "inputs": [
+    {
+      "name": "export.tsv",
+      "bytes": 8547,
+      "sha256": "ae72faedec7913ee25e74f4592b06bc9b6e31e80800587df1629619f91b20c9e",
+      "gitBlob": "7bc78e7c6f65ccd1f56cf6f06907512a5a50fa36"
+    },
+    {
+      "name": "SOURCE_CUSTODY.json",
+      "bytes": 29478,
+      "sha256": "97df0a295c9bb3c32ff71a3df6380c5beceb21e4528c218baa12cd4c39df0fb4",
+      "gitBlob": "dc3b25ff91f9f32c66e9a9989992acf0d6bc9721"
+    },
+    {
+      "name": "FOSS_REUSE_DECISION.tsv",
+      "bytes": 676,
+      "sha256": "ec656e0e39406d866c21914a7087a3485d9265a61a43b1eddf57c3c50106fe59",
+      "gitBlob": "a36956a7ec71c3162feeaaf4b893caa19ddac662"
+    },
+    {
+      "name": "README.md",
+      "bytes": 1599,
+      "sha256": "4e744dcbf3b4f6ba0a03cb3df8199372591b66566291f252c07ece70f56e7c84",
+      "gitBlob": "5797bfe48b2109b76d3719c70926ea55fe944092"
+    }
+  ]
+}

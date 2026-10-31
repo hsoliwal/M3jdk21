@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.Closure
+displayName: Repair the reviewed Java21 recipe closure
+description: Replays exact public A3 donor and registry repairs without admitting other target changes.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-recipe-closure

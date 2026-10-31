@@ -1,0 +1,5 @@
+dependency_id	kind	commit	reason	authority
+JEP-496	SHARED_OWNER_LINEAGE	13987b4244614d594dc8f94c288eddb6239a066f	ML-KEM shares NamedParameterSpec KnownOIDs and provider regression ownership	EVIDENCE_ONLY
+JDK-8345057	FOLLOWUP	8c2b4f62714f26ab3bc4808c734502af632a1eef	Reconciles ML-KEM named-parameter constants after ML-DSA integration	EVIDENCE_ONLY
+JDK-8345533	FOLLOWUP	fb95a5394413dba7352a7ad2ebd39a3da42308a6	Switches ML-DSA implementation to FIPS 204 final	EVIDENCE_ONLY
+JDK24-GA	RELEASED_STATE	6705a9255d28f351950e7fbca9d05e73942a4e27	Authoritative cumulative released source state for FILE atom materialization	DONOR_STATE

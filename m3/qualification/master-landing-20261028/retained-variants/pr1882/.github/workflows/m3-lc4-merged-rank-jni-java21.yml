@@ -1,0 +1,88 @@
+# SPDX-License-Identifier: Apache-2.0
+# Source/CI candidate: Synexia convergence recipe -> original M3JDK21 JNI owner.
+name: M3 LC4 merged rank selection Java21 JNI
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-lc4-merged-rank-jni-java21.yml'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3MergedSelectContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3MergedSelectTest.java'
+      - 'm3/collections/qualification/lc4-merged-select-jni-20261026/**'
+
+permissions:
+  contents: read
+
+jobs:
+  rank-select-original-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Bind original product SHA and exact five source blobs
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java | grep -Fx 'a82c7b93a0919cdfe92de32e636399b429f8cca1'
+          git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java | grep -Fx 'b3d88e4b28aab8cbda451c87184c4540549352db'
+          git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c | grep -Fx '09551a86c7f9a4ce3b0ed1a26cbbd2b89b7f6b5a'
+          git hash-object m3/collections/src/test/java/com/m3/collections/M3MergedSelectContract.java | grep -Fx '115fd28026985612746701105ccdbc331e059637'
+          git hash-object m3/collections/src/test/java/com/m3/collections/M3MergedSelectTest.java | grep -Fx 'bb59937e9e290bed20373470c2b720825f9f395c'
+      - name: Strict Java21 compile and original JNI header generation
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-lc4/classes" "$RUNNER_TEMP/m3-lc4/headers" "$RUNNER_TEMP/m3-lc4/native"
+          javac --release 21 -Xlint:all -Werror -h "$RUNNER_TEMP/m3-lc4/headers" -d "$RUNNER_TEMP/m3-lc4/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/com/m3/collections/M3MergedSelectContract.java
+          grep -Fq 'selectMergedInto0' "$RUNNER_TEMP/m3-lc4/headers/com_m3_collections_M3LongRankBatchNative.h"
+      - name: Compile complete original JNI library with strict C17 UBSan
+        shell: bash
+        run: |
+          set -euo pipefail
+          gcc -std=c17 -Wall -Wextra -Werror -O2 -fPIC -shared \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -include "$RUNNER_TEMP/m3-lc4/headers/com_m3_collections_M3LongRankBatchNative.h" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$RUNNER_TEMP/m3-lc4/native/libm3rankbatch.so"
+      - name: Execute Java fallback and explicit original JNI normal and interpreter
+        shell: bash
+        run: |
+          set -euo pipefail
+          for mode in java native interpreter; do
+            opts=(-Xcheck:jni)
+            if test "$mode" = native || test "$mode" = interpreter; then
+              opts+=("-Dm3.collections.rank.native=true")
+            fi
+            if test "$mode" = interpreter; then opts+=(-Xint); fi
+            java "${opts[@]}" -Djava.library.path="$RUNNER_TEMP/m3-lc4/native" \
+              -cp "$RUNNER_TEMP/m3-lc4/classes" \
+              com.m3.collections.M3MergedSelectContract \
+              | tee "$RUNNER_TEMP/m3-lc4/$mode.txt"
+          done
+          grep -Fq 'PASS M3_MERGED_SELECT_JNI checks=172254 native=false' "$RUNNER_TEMP/m3-lc4/java.txt"
+          grep -Fq 'PASS M3_MERGED_SELECT_JNI checks=237179 native=true' "$RUNNER_TEMP/m3-lc4/native.txt"
+          cmp "$RUNNER_TEMP/m3-lc4/native.txt" "$RUNNER_TEMP/m3-lc4/interpreter.txt"
+      - name: Archive exact-head source JNI and runtime proof
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-lc4-merged-jni-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3-lc4/*.txt
+          if-no-files-found: warn
+          retention-days: 14

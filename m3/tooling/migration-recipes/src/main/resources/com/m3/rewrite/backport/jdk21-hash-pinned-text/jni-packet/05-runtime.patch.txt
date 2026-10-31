@@ -1,0 +1,37 @@
+--- a/src/hotspot/share/prims/jni.cpp
++++ b/src/hotspot/share/prims/jni.cpp
+@@ -2166,8 +2166,7 @@
+  HOTSPOT_JNI_NEWSTRING_ENTRY(env, (uint16_t *) unicodeChars, len);
+   jstring ret = nullptr;
+   DT_RETURN_MARK(NewString, jstring, (const jstring&)ret);
+-  Handle string(THREAD,
+-                java_lang_String::create_oop_from_unicode((jchar*) unicodeChars, len, CHECK_NULL));
++  Handle string = java_lang_String::create_from_unicode(unicodeChars, len, CHECK_NULL);
+   m3_admit_jni_string(string, CHECK_NULL);
+   ret = (jstring) JNIHandles::make_local(THREAD, string());
+   return ret;
+@@ -2229,7 +2228,7 @@
+   jstring ret;
+   DT_RETURN_MARK(NewStringUTF, jstring, (const jstring&)ret);
+ 
+-  Handle result(THREAD, java_lang_String::create_oop_from_str((char*) bytes, CHECK_NULL));
++  Handle result = java_lang_String::create_from_str(bytes, CHECK_NULL);
+   m3_admit_jni_string(result, CHECK_NULL);
+   ret = (jstring) JNIHandles::make_local(THREAD, result());
+   return ret;
+--- a/src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java
++++ b/src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java
+@@ -36,6 +36,13 @@
+  * java.lang.String semantics.</p>
+  */
+ public interface MIndexStringBacking extends AutoCloseable {
++    /**
++     * Release the backing's owned resources without a checked interruption contract.
++     * The mapped implementation reports I/O failure as UncheckedIOException.
++     */
++    @Override
++    void close();
++
+     int length(long id);
+ 
+     int utf8Length(long id);

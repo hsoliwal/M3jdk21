@@ -1,0 +1,3 @@
+module	jar	disposition
+org.xerial.sqlitejdbc	/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/test-dependencies/org/xerial/sqlite-jdbc/3.45.1.0/sqlite-jdbc-3.45.1.0.jar	MODULAR_JAR
+org.slf4j	/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/2.0.13/slf4j-api-2.0.13.jar	MODULAR_JAR

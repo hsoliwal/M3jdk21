@@ -1,0 +1,17 @@
+schema	m3-eclipse-functional-api-receiver-1
+canonical	hsoliwal/com.synexia:m3/inline-eclipse-functionals-recipe-20261027
+recipe	com.synexia.m3.InlineEclipseFunctionalApi20261027
+donor	eclipse-collections/eclipse-collections:11.1.0/eclipse-collections-api
+source_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-inline-eclipse-functionals-20261027/manifest.tsv
+source_copyright	Goldman Sachs 2021
+original_licenses	EPL-1.0_AND_EDL-1.0
+first_party_adapter	com.m3.collections.eclipse.M3EclipseFunctionalAdapters
+first_party_license	Apache-2.0
+source_api_count	5
+adapter_source_count	1
+test_source_count	1
+external_provider_runtime	NONE
+compiled_java_modules	java.base_ONLY_PENDING_EXACT_HEAD
+full_eclipse_multimap_API	NOT_QUALIFIED
+classloader_split_package	NOT_QUALIFIED
+receiving_stage	NOT_ADVANCED

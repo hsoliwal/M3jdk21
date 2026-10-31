@@ -1,0 +1,9 @@
+{
+  "source_lock": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.final2.tsv",
+  "source_lock_sha256": "a9f7ffb047e63620a0c6f45dcce4955bc4e0405bceeb524be699a4b3eaba54ad",
+  "input_files": 386,
+  "donor_java_custody": 311,
+  "donor_java_compiled": 237,
+  "receiver_base": "73f59218dc4ef1a3ef79aad990e77273db2a2d60",
+  "vfs_upstream_commit": "685b3b723a83e56034391350ea1a02231411142f"
+}

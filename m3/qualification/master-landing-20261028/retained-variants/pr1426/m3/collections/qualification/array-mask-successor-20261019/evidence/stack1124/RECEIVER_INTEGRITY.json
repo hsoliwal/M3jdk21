@@ -1,0 +1,167 @@
+{
+  "schema": "M3_AST_BUILD_RECEIVER_CONTRACT_V1",
+  "status": "PASS",
+  "dataset": "array-mask-successor",
+  "targets": 9,
+  "cases": [
+    {
+      "case": "check-no-write",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "apply-exact-sdk",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "fixed-point-no-write",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "late-drift-no-partial-write",
+      "exit_code": 1,
+      "expected_refusal": "target source drift: m3/collections/recipe/state-mask-histogram-20261017/verify.sh"
+    },
+    {
+      "case": "qualified-input-tamper",
+      "exit_code": 1,
+      "expected_refusal": "recipe changed after SDK qualification:"
+    },
+    {
+      "case": "sdk-result-tamper",
+      "exit_code": 1,
+      "expected_refusal": "SDK result changed after qualification: m3/collections/recipe/state-mask-histogram-20261017/verify.sh"
+    },
+    {
+      "case": "symlink-target",
+      "exit_code": 1,
+      "expected_refusal": "symlink target or parent is not admitted:"
+    },
+    {
+      "case": "mixed-pre-postimages",
+      "exit_code": 0,
+      "expected_refusal": null
+    },
+    {
+      "case": "failed-sdk-test-refusal",
+      "exit_code": 1,
+      "expected_refusal": "all actual SDK qualification tests must execute successfully"
+    }
+  ],
+  "actual_sdk_results": true,
+  "product_files_written": false,
+  "sdk_inputs_sha256": "9c51524a0cd78c47f3b9f1e97b7d70852530575c4371a924a5b388eda2c3b35d",
+  "sdk_results_sha256": "e7215c4480fa480c10f0a2d795b426f4f14c7598552abb6104e4662ffbcfe65b",
+  "logs": [
+    {
+      "path": "apply-exact-sdk.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "apply-exact-sdk.stdout.log",
+      "sha256": "dbf60be07ca37552ab6ae187712e7c4f22f64ef0d62cce795ed9fbf004cfe4b1",
+      "bytes": 138,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 9, \"dataset\": \"array-mask-successor\", \"mode\": \"apply\", \"targets\": 9}\n"
+    },
+    {
+      "path": "check-no-write.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "check-no-write.stdout.log",
+      "sha256": "1bdc41aacb144628151f1d26ad3d6ecd06d0900d13c00e5ed5d966a0409f3786",
+      "bytes": 138,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 9, \"dataset\": \"array-mask-successor\", \"mode\": \"check\", \"targets\": 9}\n"
+    },
+    {
+      "path": "failed-sdk-test-refusal.stderr.log",
+      "sha256": "27a5fd4ffb7761cc26acddd50274e7eb33ba632a05610510a6f9286668ec1704",
+      "bytes": 1401,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/failed-tests/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/failed-tests/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/failed-tests/crate/receive.py\", line 147, in receive\n    qualified = qualification(crate, dataset, owner)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/failed-tests/crate/receive.py\", line 71, in qualification\n    raise ValueError(\"all actual SDK qualification tests must execute successfully\")\nValueError: all actual SDK qualification tests must execute successfully\n"
+    },
+    {
+      "path": "failed-sdk-test-refusal.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "fixed-point-no-write.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "fixed-point-no-write.stdout.log",
+      "sha256": "f863b8e13c16c31f8b17286a3c398ff451b7026ec06235208d471a8ad5c97f4b",
+      "bytes": 138,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 0, \"dataset\": \"array-mask-successor\", \"mode\": \"apply\", \"targets\": 9}\n"
+    },
+    {
+      "path": "late-drift-no-partial-write.stderr.log",
+      "sha256": "57272c7687d0f64058eea60474037f7dbdd04d7d6824e600112db155b1ec3f04",
+      "bytes": 1054,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/late-drift/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/late-drift/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/late-drift/crate/receive.py\", line 154, in receive\n    raise ValueError(\"target source drift: \" + relative)\nValueError: target source drift: m3/collections/recipe/state-mask-histogram-20261017/verify.sh\n"
+    },
+    {
+      "path": "late-drift-no-partial-write.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "mixed-pre-postimages.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "mixed-pre-postimages.stdout.log",
+      "sha256": "5a24253868f6423d5678fb5a846843b8d86fb8c232fea41595aec2a5092f1ebc",
+      "bytes": 138,
+      "utf8": "M3_COLLECTIONS_RECEIVER_PASS {\"actual_sdk_results\": true, \"changes\": 4, \"dataset\": \"array-mask-successor\", \"mode\": \"apply\", \"targets\": 9}\n"
+    },
+    {
+      "path": "qualified-input-tamper.stderr.log",
+      "sha256": "98ac09b871b69d7242de5caa25e669ad97370cfd71476804aa5d1691d5f5edac",
+      "bytes": 1413,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/input-tamper/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/input-tamper/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/input-tamper/crate/receive.py\", line 147, in receive\n    qualified = qualification(crate, dataset, owner)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/input-tamper/crate/receive.py\", line 91, in qualification\n    raise ValueError(\"recipe changed after SDK qualification: \" + path)\nValueError: recipe changed after SDK qualification: crate/datasets/array-mask-successor/MODES.tsv\n"
+    },
+    {
+      "path": "qualified-input-tamper.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "sdk-result-tamper.stderr.log",
+      "sha256": "fc1e0bcaea9d980996557c273b96ed4b3a71806421fa2edbfcda80bee509c792",
+      "bytes": 1434,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/result-tamper/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/result-tamper/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/result-tamper/crate/receive.py\", line 147, in receive\n    qualified = qualification(crate, dataset, owner)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/result-tamper/crate/receive.py\", line 137, in qualification\n    raise ValueError(\"SDK result changed after qualification: \" + path)\nValueError: SDK result changed after qualification: m3/collections/recipe/state-mask-histogram-20261017/verify.sh\n"
+    },
+    {
+      "path": "sdk-result-tamper.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    },
+    {
+      "path": "symlink-target.stderr.log",
+      "sha256": "b36f10dcbf294ad040c67045175729b8383080c0b90ad148f949a535217ae22e",
+      "bytes": 1385,
+      "utf8": "Traceback (most recent call last):\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/symlink/crate/receive.py\", line 195, in <module>\n    main()\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/symlink/crate/receive.py\", line 190, in main\n    result = receive(crate, args.dataset, owner.absolute(), args.target.absolute(), args.check)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/symlink/crate/receive.py\", line 150, in receive\n    path = contained(target, relative)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/qualification/receive1124-02/receiver-integrity/isolated-8iq_4r6c/symlink/crate/receive.py\", line 50, in contained\n    raise ValueError(\"symlink target or parent is not admitted: \" + relative)\nValueError: symlink target or parent is not admitted: m3/collections/recipe/state-mask-histogram-20261017/verify.sh\n"
+    },
+    {
+      "path": "symlink-target.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "utf8": ""
+    }
+  ]
+}

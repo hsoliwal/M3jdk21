@@ -1,0 +1,5 @@
+# case	diagnostic-sha256	diagnostic
+duplicate-source	4e58cc65c1a2d73c215a00219fb24a73e8ef2f7be03a8d346ce6e3662e68306f	java.lang.IllegalStateException: duplicate target: m3/collections/JDK_FAMILY_MAP.tsv\n
+missing-source	80464c102eaafc931b853c215a07b513332bdb91787a8ff91c2b52e0ec37ec60	java.lang.IllegalStateException: required source missing: m3/collections/JDK_FAMILY_MAP.tsv\n
+post-scan-drift	0f97a748bfcbda607c81f9d534828457cb8c548e64bd6d138ff298eb23ee4da1	org.openrewrite.internal.RecipeRunException: java.lang.IllegalStateException: target changed after scan: m3/collections/JDK_FAMILY_MAP.tsv\njava.lang.IllegalStateException: target changed after scan: m3/collections/JDK_FAMILY_MAP.tsv\n
+source-drift	0de3930f06082c86bb88ce5639f7b3ccc4976d0418fb26f79a084922ff515dc8	java.lang.IllegalStateException: source drift: m3/collections/JDK_FAMILY_MAP.tsv\n

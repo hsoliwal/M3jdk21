@@ -1,0 +1,40 @@
+{
+  "status": "FINAL_CORE_COMPARISON_PASS",
+  "manifest_sha256": "ed0798ddef0c7d052cafb776a42098086d69d67466c47b97f8bb6c46fe46dae2",
+  "command_count": 16,
+  "zero_exit_and_log_seals_verified": true,
+  "baseline_previous_final_equal_tapes": {
+    "core-M3IndexedArrayTest.log": "2eea652756db8916176dc0914092be8a920f190c45d94679352a9529ed3f0396",
+    "core-M3IndexedViewEpochTest.log": "63211c8629aa4e7c067c67143b87498866b4073a2385c7fe89ecbe66f3d3a881",
+    "core-M3StateMaskedIndexedViewTest.log": "dee76c8d658b9ffdf15890f13087de39ebb411d177e4b87bff3c78a5fb56c3e4",
+    "core-M3IntAlgorithmsTest.log": "42b0efdc8889153345880d9e71732d55ec8d3c0010014f1675e3263686a4ab98",
+    "core-M3IndexMaskWindowJniTest.log": "a79976c2fc186d9933d9045dee051e1e9174baa32c9acb2bd8c86b5ce69075a2",
+    "core-BootstrapViewsTest.log": "aecd4f60a44c234c58ad13d76cf8d4b3ea5f318d2cb1ba1d15d0f975b4bca5e1",
+    "core-CollectionViewsContract.log": "59f4f0c2956044620a233c360c025a7a4471b8ffac202d417cabd863b7eda2c7",
+    "core-M3IndexAtomContract.log": "2e3b1ca5f2e91f51ff9d6903266b7abb6bae4f74db0a30e6fa991ea25e6d607a",
+    "core-Xint-M3IndexedViewEpochTest.log": "63211c8629aa4e7c067c67143b87498866b4073a2385c7fe89ecbe66f3d3a881",
+    "core-Xint-M3StateMaskedIndexedViewTest.log": "dee76c8d658b9ffdf15890f13087de39ebb411d177e4b87bff3c78a5fb56c3e4",
+    "core-Xint-M3IndexAtomContract.log": "2e3b1ca5f2e91f51ff9d6903266b7abb6bae4f74db0a30e6fa991ea25e6d607a",
+    "core-api.log": "474b8ce0c3cc6b65f85434ff62f6219322d4d08725844bd8a8dca8062e791d90"
+  },
+  "final_patch_classes_equal_prior_qualified_candidate": true,
+  "patch_class_count": 18,
+  "original_protected_sources_unchanged": [
+    "test/jdk/jdk/internal/m3/M3IndexMaskWindowJniTest.java",
+    "test/jdk/jdk/internal/m3/M3IntAlgorithmsTest.java",
+    "test/jdk/jdk/internal/m3/M3IndexedViewEpochTest.java",
+    "test/jdk/jdk/internal/m3/M3StateMaskedIndexedViewTest.java",
+    "test/jdk/jdk/internal/m3/M3IndexedArrayTest.java",
+    "test/jdk/java/util/CollectionViews/BootstrapViewsTest.java",
+    "test/jdk/java/util/CollectionViews/run_search_jni.c",
+    "test/jdk/java/util/CollectionViews/RunSearchJni.java",
+    "test/jdk/java/util/CollectionViews/CollectionViewsContract.java"
+  ],
+  "resource_probe": "Generated v2/v3 probe was strictly compiled in final component and identical-probe CPU cohort; earlier source preserved",
+  "remaining_core_native_image_hold": {
+    "status": "NOT_RUN",
+    "reason": "Historical source-built image lacks M3IndexMaskWindow JNI exports",
+    "scope": "unchanged core mask-window owner; full matching current-source image remains HOLD",
+    "sdk_native_compactor": "separate actual-JNI qualification"
+  }
+}

@@ -1,0 +1,523 @@
+{
+  "schema": "M3_EXISTING_PUBLIC_RECIPE_HANDOFF_V1",
+  "label": "collection-oracles-20261018",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_engine_baseline": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
+  "canonical_successor_publication": "Recorded by the later pinned publication receipt; this staging record makes no publication claim.",
+  "public_baseline": "0efc1719ca5766aead09f4f7c49f5067975bd946",
+  "public_host": "m3/arrays/qualification/empty-segments-20261017/recipe-custody",
+  "public_recipe_owner_override": "sdk-owner",
+  "runtime_dependency_added": false,
+  "existing_host_controls": [
+    {
+      "path": "prepare.py",
+      "sha256": "9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c"
+    },
+    {
+      "path": "receive.py",
+      "sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712"
+    },
+    {
+      "path": "ENGINE_SOURCES.tsv",
+      "sha256": "ae731c5780c73a98f6fc81079b5f863613fddea50d2a6c893c6dfd2aa2030b5c"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
+    },
+    {
+      "path": "contract/test_prepare.py",
+      "sha256": "f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856"
+    },
+    {
+      "path": "contract/verify_receiver.py",
+      "sha256": "a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d"
+    }
+  ],
+  "existing_engine_sources": [
+    {
+      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625"
+    },
+    {
+      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
+    },
+    {
+      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
+    },
+    {
+      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
+    }
+  ],
+  "pom_before_sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
+  "pom_after_sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
+  "qualified_datasets": [
+    {
+      "dataset": "m3jdk21-collection-oracles",
+      "targets": 6,
+      "actual_sdk_tests": 5,
+      "sdk_bindings_checked": true,
+      "evidence": {
+        "SDK_INPUTS.tsv": {
+          "path": "evidence/collection-oracles-20261018/recipe/SDK_INPUTS.tsv",
+          "sha256": "cc088a0eb1665c481ac221cf55ac8ccf85bd7e12faafb73cb19e0d7f9924e221"
+        },
+        "SDK_RESULTS.tsv": {
+          "path": "evidence/collection-oracles-20261018/recipe/SDK_RESULTS.tsv",
+          "sha256": "47b9fed8ef0992b851c646398b8030ea37ab6e83211d1874e23ec050d2782ca0"
+        },
+        "SDK_TESTS.xml": {
+          "path": "evidence/collection-oracles-20261018/recipe/SDK_TESTS.xml",
+          "sha256": "7cd6957b7be66bf005e17b899ca7d7b3dce0efc87f4879acd858b3d4acad24a1"
+        }
+      }
+    }
+  ],
+  "historical_evidence": "Existing OWNER_CUSTODY.json, SOURCE.json and earlier reports describe their pinned predecessor. The capped POM has fresh qualification; predecessor reports are not new current-host runs.",
+  "mirrored_files": [
+    {
+      "path": "authoring/build_public_recipe_handoff.py",
+      "sha256": "b7b0281d38e989bfa909190481c72cd203ff7b03411dd28ee521e569d1e6964a",
+      "bytes": 12062,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/authoring/build_public_recipe_handoff.py"
+      ]
+    },
+    {
+      "path": "authoring/collection-oracles-20261018/CollectionOracleWitness.java",
+      "sha256": "d870c4819d2354bfbc2bc129329375780adaab0629e27c02bdf6039dccad8fd8",
+      "bytes": 3812,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collection-oracles-20261018/CollectionOracleWitness.java"
+      ]
+    },
+    {
+      "path": "authoring/collection-oracles-20261018/prepare_collection_oracles.py",
+      "sha256": "e9f098e2761f1d62c103739e429a36605404cbf5fbbd860adf70693fe53ac28b",
+      "bytes": 15810,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/authoring/collection-oracles-20261018/prepare_collection_oracles.py"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-collection-oracles/DATASET.json",
+      "sha256": "94f93fd9d23b1d8fc7e0d5f2f9a6eb2171846ff53602e11da1c33aba88a56195",
+      "bytes": 501,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/DATASET.json"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-collection-oracles/ENGINE_EFFECTIVE.tsv",
+      "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
+      "bytes": 747,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/ENGINE_EFFECTIVE.tsv"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-collection-oracles/MODES.tsv",
+      "sha256": "22844d6fb02a47a87136e1f32c9faf3eb5b84263955e9f3cd3a27d97bbf2b960",
+      "bytes": 480,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/MODES.tsv"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-collection-oracles/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles.yml",
+      "sha256": "59d0a89e8feebd7d032fd0208fddda81a8629cc5319b6c39b4122d00ea41a7f0",
+      "bytes": 546,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles.yml"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0004-CollectionOracleWitness.java.txt",
+      "sha256": "d870c4819d2354bfbc2bc129329375780adaab0629e27c02bdf6039dccad8fd8",
+      "bytes": 3812,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0004-CollectionOracleWitness.java.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0005-M3LongTreeSetTest.java.txt",
+      "sha256": "088e41d28929b3916e5c6da9a12a2ebbae258116d11508235d44771a6c1b2471",
+      "bytes": 16432,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0005-M3LongTreeSetTest.java.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0006-M3StoredRepresentativeContract.java.txt",
+      "sha256": "821b8ae1ec22516dceef16f5951ab66fe3f6db799f26732c620202bab862754b",
+      "bytes": 13563,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0006-M3StoredRepresentativeContract.java.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv",
+      "sha256": "b1ae58dc8d7e7981c56390f3f417c14d292705b1ca318c4b07e7926aa4360df4",
+      "bytes": 697,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/pre/0005-M3LongTreeSetTest.java.txt",
+      "sha256": "57289895f6bf2307cf3890faa803ff8b81ec128a56e11f84df613fe65068c4cf",
+      "bytes": 15877,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/pre/0005-M3LongTreeSetTest.java.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/pre/0006-M3StoredRepresentativeContract.java.txt",
+      "sha256": "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016",
+      "bytes": 13048,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/pre/0006-M3StoredRepresentativeContract.java.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0001-collection-oracle-repair-20261018.tsv.txt",
+      "sha256": "b5d321f46ab46a0774f2c953cea97224e610862f104b8d2ea5be42d01d21093b",
+      "bytes": 1257,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0001-collection-oracle-repair-20261018.tsv.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0002-CATALOGUE.json.txt",
+      "sha256": "1e20212f107d27de891ecc959a42fabe2511f7956ae03f6c871f0cd5aa01121c",
+      "bytes": 6972,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0002-CATALOGUE.json.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0003-README.md.txt",
+      "sha256": "730cac0481249e5a662e7d26a95ba9d91f4be65c09733e6abbea87955f8caaad",
+      "bytes": 2296,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/0003-README.md.txt"
+      ]
+    },
+    {
+      "path": "datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv",
+      "sha256": "69b1272bbd3b461b40df4e9685bb893a41c1f3de16c6c963d0c22725af2ae0ce",
+      "bytes": 506,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-collection-oracles/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-collection-oracles/manifest.tsv"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/baseline-failures/SOURCE_RECEIPT.json",
+      "sha256": "09b423cf299ad39c8ffc09db425e97a13f6c369f9933403b08a92826de893514",
+      "bytes": 2836,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/SOURCE_RECEIPT.json"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/baseline-failures/maven.log.txt",
+      "sha256": "981e637f4818c6bf4565db2f50c78b83a022e39ab442d4827b5129db02d0a5fb",
+      "bytes": 22978,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/maven.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/baseline-failures/module-receipt.json",
+      "sha256": "206aae4a4174909e897c445a7b4cdb5347cc5e9dfb04c2c6698efaf9364305bc",
+      "bytes": 446,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/module-receipt.json"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/baseline-failures/original-tests/M3LongTreeSetTest.java.txt",
+      "sha256": "57289895f6bf2307cf3890faa803ff8b81ec128a56e11f84df613fe65068c4cf",
+      "bytes": 15877,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/original-tests/M3LongTreeSetTest.java.txt"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/baseline-failures/original-tests/M3StoredRepresentativeContract.java.txt",
+      "sha256": "9686f4d820c5872665d6273faa0de0b327b9689b12696af7827269cb8774e016",
+      "bytes": 13048,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/original-tests/M3StoredRepresentativeContract.java.txt"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/baseline-failures/resources.txt",
+      "sha256": "6473a286dfd06815ee493752f9af87a514194a6e72347c585b973ee5622562a7",
+      "bytes": 937,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/resources.txt"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/baseline-failures/surefire/TEST-com.m3.collections.M3LongTreeSetTest.xml",
+      "sha256": "5fe72faf4164a01a618f34666c1f628c2d741ce899400d66a10df9e16f4dd2b1",
+      "bytes": 10347,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/surefire/TEST-com.m3.collections.M3LongTreeSetTest.xml"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/baseline-failures/surefire/TEST-com.m3.collections.M3StoredRepresentativeTest.xml",
+      "sha256": "96baf482ca0539073e4ecd4d5d32393c0b4df095f044e48f0737b65d44c52ffb",
+      "bytes": 7538,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/surefire/TEST-com.m3.collections.M3StoredRepresentativeTest.xml"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/baseline-failures/surefire/com.m3.collections.M3LongTreeSetTest.txt",
+      "sha256": "d29d865fb452d57b6ff23283d4cd4788da5ff97826ee457915d6875cb8e3fc42",
+      "bytes": 3279,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/surefire/com.m3.collections.M3LongTreeSetTest.txt"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/baseline-failures/surefire/com.m3.collections.M3StoredRepresentativeTest.txt",
+      "sha256": "04d52360768871ebde6982762145348a7c085487109f7217519f5cdcfa9482d4",
+      "bytes": 1282,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracles-baseline/surefire/com.m3.collections.M3StoredRepresentativeTest.txt"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/independent-witness/compile.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracle-witness/compile.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/independent-witness/receipt.json",
+      "sha256": "44846f0397778801b5746fbd2369655a4157da3e14f24b770c2a09c8f339e70e",
+      "bytes": 1079,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracle-witness/receipt.json"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/independent-witness/run.log.txt",
+      "sha256": "1f482b733fecc6ee4f0095f314fd1903b14bc20bb1cd62df4f0a94f523e2977a",
+      "bytes": 267,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/collection-oracle-witness/run.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/SDK_INPUTS.tsv",
+      "sha256": "cc088a0eb1665c481ac221cf55ac8ccf85bd7e12faafb73cb19e0d7f9924e221",
+      "bytes": 4369,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-collection-oracles/candidate/SDK_INPUTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/SDK_RESULTS.tsv",
+      "sha256": "47b9fed8ef0992b851c646398b8030ea37ab6e83211d1874e23ec050d2782ca0",
+      "bytes": 1058,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-collection-oracles/candidate/SDK_RESULTS.tsv"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/SDK_TESTS.xml",
+      "sha256": "7cd6957b7be66bf005e17b899ca7d7b3dce0efc87f4879acd858b3d4acad24a1",
+      "bytes": 14879,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-collection-oracles/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/maven.log.txt",
+      "sha256": "3c9a1e2b50b5bc98a0d805fd069f4c2e5b4a15cc1f6afd864d5200a589e7a1dd",
+      "bytes": 3183,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/maven.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receipt.json",
+      "sha256": "a6c83ba0692dd0204895924e6277628855b3454908e2db693956b8bbe126e7b9",
+      "bytes": 1093,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receipt.json"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/RECEIVER_RECEIPT.json",
+      "sha256": "f436e7d000c90d2354ce18632ff5f3dec5966006bff25cb6377947bd75105588",
+      "bytes": 1680,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/RECEIVER_RECEIPT.json"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/apply-exact-sdk.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/apply-exact-sdk.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/apply-exact-sdk.stdout.log.txt",
+      "sha256": "4a64282b54d263600241b2c42b38919ac6b77e6bb31814a10bb5444573ee7cad",
+      "bytes": 144,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/apply-exact-sdk.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/check-no-write.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/check-no-write.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/check-no-write.stdout.log.txt",
+      "sha256": "b1f5d8f47a31fa83e6d92ee6f2c9ace4b79ce0f99a7c69ddd2f4e13ade375edc",
+      "bytes": 144,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/check-no-write.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/failed-sdk-test-refusal.stderr.log.txt",
+      "sha256": "1047ba59e449c6d49d9b845f1ffc847a52d457fad1be4e7b651ea29a4e815474",
+      "bytes": 1237,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/failed-sdk-test-refusal.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/failed-sdk-test-refusal.stdout.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/failed-sdk-test-refusal.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/fixed-point-no-write.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/fixed-point-no-write.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/fixed-point-no-write.stdout.log.txt",
+      "sha256": "100bc5c0c96419409ee28b0f7fea64b1693d3fd998035861f68a8b615d15f988",
+      "bytes": 144,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/fixed-point-no-write.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/late-drift-no-partial-write.stderr.log.txt",
+      "sha256": "d17eaa3abe399f4062db6543d863551dc301948d8780680053a6ccd4fdbc745b",
+      "bytes": 953,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/late-drift-no-partial-write.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/late-drift-no-partial-write.stdout.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/late-drift-no-partial-write.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/mixed-pre-postimages.stderr.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/mixed-pre-postimages.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/mixed-pre-postimages.stdout.log.txt",
+      "sha256": "5a43fd1b304d3d2c813590921b515df0052d6b5be1952aaad2115c955fdffa92",
+      "bytes": 144,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/mixed-pre-postimages.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/qualified-input-tamper.stderr.log.txt",
+      "sha256": "5e49e3277fe27fdf5bc769ff58539e2c76c6a16d8c00904d6750d76f8fb5bbee",
+      "bytes": 1255,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/qualified-input-tamper.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/qualified-input-tamper.stdout.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/qualified-input-tamper.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/sdk-result-tamper.stderr.log.txt",
+      "sha256": "13d4048c968c5239ab9cd3ed64d4c67300d8464ce5c8ba81bad7e6f74fb77599",
+      "bytes": 1292,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/sdk-result-tamper.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/sdk-result-tamper.stdout.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/sdk-result-tamper.stdout.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/symlink-target.stderr.log.txt",
+      "sha256": "2d5671319e6448cf111044c2b683f3852f2f5d5065d5b7932c771fae8b6b089f",
+      "bytes": 1243,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/symlink-target.stderr.log"
+      ]
+    },
+    {
+      "path": "evidence/collection-oracles-20261018/recipe/receiver/symlink-target.stdout.log.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/recipe-collection-oracles-v1/receiver-proof/evidence/symlink-target.stdout.log"
+      ]
+    },
+    {
+      "path": "pom.xml",
+      "sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
+      "bytes": 5855,
+      "source_paths": [
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml"
+      ]
+    }
+  ]
+}

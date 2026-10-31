@@ -1,0 +1,42 @@
+{
+  "public_repository": "hsoliwal/M3jdk21",
+  "revision": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "files": [
+    {
+      "engine": "M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "already_public_exact_paths": [
+        "m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+        "m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/com/synexia/rewrite/M3EditScope.java",
+        "m3/tooling/shared-frontend/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3EditScope.java"
+      ]
+    },
+    {
+      "engine": "M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+      "already_public_exact_paths": [
+        "m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "m3/tooling/shared-frontend/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+      ]
+    },
+    {
+      "engine": "M3HashPinnedTextSnapshotRecipe.java",
+      "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
+      "already_public_exact_paths": [
+        "m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+        "m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+        "m3/tooling/shared-frontend/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java"
+      ]
+    },
+    {
+      "engine": "M3ScopeInference.java",
+      "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4",
+      "already_public_exact_paths": [
+        "m3/arrays/qualification/empty-segments-20261017/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+        "m3/tooling/sort-recipes/m3-java-util-sorts-20261018/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+        "m3/tooling/shared-frontend/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java"
+      ]
+    }
+  ]
+}

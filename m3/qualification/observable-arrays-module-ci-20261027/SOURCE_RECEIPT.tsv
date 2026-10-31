@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+# Source inventory for original Java21 M3 observable module-graph repair; no production source changed.
+path	git_blob_sha1	role
+m3/arrays/src/main/java/module-info.java	e33652a77a4710ea1cb470ba1ae4a8ae01ad61af	ORIGINAL_REQUIRED_MODULE
+m3/collections/src/main/java/module-info.java	fa30073475f0edefb79c9e873160c8fcb53390bf	UNCHANGED_DECLARED_REQUIRES
+m3/collections/src/main/java/com/m3/collections/M3ObservableList.java	d995df89a333e126929496f33c783b8a7643b49c	UNCHANGED_ARRAY_BACKED_OWNER
+m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java	fbaa5cd8b1603c1fbc75e2a6dc4e484bd4c43f0f	UNCHANGED_INDEXED_VIEW
+m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java	9060424b921bac10dc382ba277a3aa840ea59529	UNCHANGED_JNI_OPTION
+m3/collections/src/test/java/com/m3/collections/M3ObservableListContract.java	032bd1def71f1976253344717a9ad866c0a16e85	UNCHANGED_STANDALONE_CONTRACT
+m3/collections/src/test/java/com/m3/collections/M3ObservableIndexedViewsContract.java	74b80c5d014ba75586629cfc455f87e51f3564b3	UNCHANGED_INDEXED_DIFFERENTIAL
+test_scope	NA	JAVA21_COMPILER_MODULE_GRAPH_AND_TWO_EXISTING_CONTRACTS
+actual_run	NA	MAVEN_OPENREWRITE_AND_HOSTED_JDK_CI_PENDING

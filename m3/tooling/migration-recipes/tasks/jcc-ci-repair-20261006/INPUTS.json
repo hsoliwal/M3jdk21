@@ -1,0 +1,95 @@
+{
+  "schema": "m3-jcc-ci-repair-inputs/1",
+  "status": "AUTHORED_NOT_EXECUTED",
+  "base_commit": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
+  "outputs": [
+    {
+      "path": ".github/workflows/m3-foundation.yml",
+      "before": {
+        "resource": "before-00-m3-foundation.yml.txt",
+        "sha256": "2a81b9ebfa5d477977dba4632a0e7c89f2ebb89606eb46491197536335d63fee"
+      },
+      "after": {
+        "resource": "after-00-m3-foundation.yml.txt",
+        "sha256": "76f3b96be528f33556fde14d811e3df9462f828353967237eed1a46ccc6ce91f"
+      },
+      "before_git_blob": "6ad9af43935d1cc7b5e471c1e7d21f8eb1538bb9",
+      "after_git_blob": "68dec98e3e0bc855a1af319855f4031025ece9bf",
+      "before_bytes": 2205,
+      "after_bytes": 2411,
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+      "before": {
+        "resource": "before-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
+        "sha256": "58d01008f3dc6e79d988e855d76ba90eb0a13d39a76e7eb4027d75442389ec94"
+      },
+      "after": {
+        "resource": "after-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
+        "sha256": "f34470a701cf71b4b4abbe1fa9a5091392a930426ec84d700f13e53edd244629"
+      },
+      "before_git_blob": "63344ac5b73c30def736f560bd9aa9348df3b97f",
+      "after_git_blob": "e349a7c727592731681759ba26df5fdeb775342e",
+      "before_bytes": 5379,
+      "after_bytes": 5380,
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+      "before": {
+        "resource": "before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
+        "sha256": "69882638771a411cf0866f789a7b3ef7e7e7040cde38a1c40ef4a743d37168e2"
+      },
+      "after": {
+        "resource": "after-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
+        "sha256": "3f3ab065d9e87e9f6095629a56b052642ec9d0883a466430e90a4a4355edd05b"
+      },
+      "before_git_blob": "c1865602253b72c9d5109a6b096146e847fd86aa",
+      "after_git_blob": "8e7d6c748c2d8a9b89eb2a24de929a535a310136",
+      "before_bytes": 4974,
+      "after_bytes": 4975,
+      "mode": "100644"
+    }
+  ],
+  "guards": [
+    {
+      "path": ".github/workflows/m3-tooling-recipes.yml",
+      "sha256": "252165fedc2e2962143cbd71d0ca68d553800ba7cf9c85df164edeb4713566a1"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java",
+      "sha256": "eca941688f9449f54c16386c581ce162df608858526d4660473e250ed3d0f267"
+    }
+  ],
+  "retained_text_recipe_sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+  "retained_installer_sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
+  "scope_already_repaired": {
+    "key": "scope",
+    "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java",
+    "ref": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
+    "sha256": "eca941688f9449f54c16386c581ce162df608858526d4660473e250ed3d0f267",
+    "git_blob": "c1c9be4f9036f1335bf020498c850a0f30bd8fad",
+    "bytes": 6292,
+    "capture": "calls/scope.json",
+    "local": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/current-master-applicability/files/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java"
+  },
+  "gcc_pin_disposition": "UNCHANGED; exact package retrieval/admission remains a separate obligation",
+  "test_methods_preserved": {
+    "M3A3RegexMemoryLabDeliveryRecipeTest": 2,
+    "M3A3RegexMemoryWorkflowRecipeTest": 2
+  },
+  "plan_sha256": "c096db7ea053cbfc2885714dd3abfdc521d703fa688cf2abe3b100aabb75700c"
+}

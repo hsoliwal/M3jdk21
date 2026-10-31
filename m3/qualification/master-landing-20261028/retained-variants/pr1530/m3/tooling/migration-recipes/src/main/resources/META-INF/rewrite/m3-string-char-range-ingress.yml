@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3StringCharRangeIngress
+displayName: Compose selected UTF-16 array ranges into canonical M3 String tuples
+description: >-
+  Applies the exact reviewed internal range-ingress adapter. It snapshots and validates
+  descriptor lanes before admission, interns source ranges through the existing M3StringPool,
+  and composes the existing M3StringTuple owner; JNI materialization remains a boundary.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-string-char-range-ingress-v1
+      lst: false

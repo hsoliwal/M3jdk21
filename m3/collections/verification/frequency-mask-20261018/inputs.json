@@ -1,0 +1,34 @@
+[
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+    "sha256": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3IntIntConsumer.java",
+    "sha256": "d7673d25fc4bb59e6b66336b2bfc86da00415100e213b7b26aea61fb4a00f484"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3IntIntHashMap.java",
+    "sha256": "abb33ce6836e4c0dcf226d4ce75f6c827d07c325ea8ec26a64eb4208ed5bde4f"
+  },
+  {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3IntIterator.java",
+    "sha256": "a7b8772e974a793eef8212281340a38cec651edc983e6cad47f725c43d022e63"
+  },
+  {
+    "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+    "sha256": "294edbd47de881eed1987c2d9603a9cd35518d14746879c927d2ae9879d7b874"
+  },
+  {
+    "path": "m3/collections/verification/frequency-mask-20261018/M3FrequencyMaskChecks.java",
+    "sha256": "83646955cd51020bdeb8cc93318aebd3992ec5b216f4d51325b2737700bd565a"
+  },
+  {
+    "path": "m3/collections/verification/frequency-mask-20261018/donor/com/synexia/primitives/DenseHash.java",
+    "sha256": "10d4a854d77f6a137782a5db69af84a6fb1d4e03fc5afa25da5180e5eac920c3"
+  },
+  {
+    "path": "m3/collections/verification/frequency-mask-20261018/donor/com/synexia/primitives/IntIntHashMap.java",
+    "sha256": "5e417a279c0b56a0eb0ab430d933e11cc6326d7a4fc2104a241b2ed9ddbc5354"
+  }
+]

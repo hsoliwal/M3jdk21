@@ -1,0 +1,17 @@
+{
+  "scope": "Explicit Maven proxy configuration reached TLS validation; compilation was not reached",
+  "artifacts": [
+    {
+      "path": "proof/bootstrap-003/runner.py",
+      "sha256": "5f666604d20071d941583f8dd7b4506aaedef86ce89eec82374695b3e6e59f02"
+    },
+    {
+      "path": "proof/bootstrap-environment/maven-proxy-settings.xml",
+      "sha256": "ed786afd8b3c7e5844ffec65e522ff93437d67832f5276e524927125d29b50a3"
+    },
+    {
+      "path": "proof/bootstrap-environment/pom.xml",
+      "sha256": "934fb8b8fdad025d77f41166306de9f1148fd786a81db811da85b301c6af0bd1"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+schema	core_class	physical_storage	index_and_state	JNI_owner	classification
+GENERIC_OBJECT_RANGE_MAP_V1	M3ObjectRangeMap<K,V>	Object[] starts/ends/values + int[] states	IndexView int[] ordinals; from/to; mutation revision	M3IndexPathMasks unchanged C17	NATIVE_GENERIC_REFERENCE_COLLECTION
+GENERIC_OBJECT_RANGE_MAP_V1	M3SlotArrays	Object[] capacity growth	zero-length shared arrays	N/A	REUSE_EXISTING_M3
+GENERIC_OBJECT_RANGE_MAP_V1	Guava/Eclipse/Apache/Spring family interfaces	N/A	N/A	N/A	NO_ADAPTER_NO_VENDOR_CLASS_IDENTITY_CLAIM

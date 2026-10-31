@@ -1,0 +1,11 @@
+CPublicKey.java	compiler.err.cant.apply.symbol: kindname.constructor, CKey, java.lang.String,sun.security.mscapi.CKey.NativeHandles,int,boolean, java.lang.String,sun.security.mscapi.CKey.NativeHandles,int, kindname.class, sun.security.mscapi.CKey, (compiler.misc.arg.length.mismatch)
+JavaCompiler.java	compiler.err.doesnt.exist: com.sun.tools.javac.m3
+System.java	compiler.err.cant.resolve.location.args: kindname.method, m3, , , (compiler.misc.location.1: kindname.variable, checked, java.lang.String)
+System.java	compiler.err.cant.resolve.location.args: kindname.method, m3, , , (compiler.misc.location.1: kindname.variable, text, java.lang.String)
+System.java	compiler.err.cant.resolve.location.args: kindname.method, m3JoinedStringsEnabled, , , (compiler.misc.location: kindname.class, java.lang.String, null)
+System.java	compiler.err.cant.resolve.location.args: kindname.method, m3StorageRequested, , , (compiler.misc.location: kindname.class, java.lang.String, null)
+System.java	compiler.err.cant.resolve.location: kindname.variable, M3String, , , (compiler.misc.location: kindname.class, java.lang.System, null)
+System.java	compiler.err.cant.resolve: kindname.class, M3String, , 
+System.java	compiler.err.cant.resolve: kindname.variable, M3StringLeafRanges, , 
+System.java	compiler.err.cant.resolve: kindname.variable, M3StringPrecomputeBridge, , 
+System.java	compiler.err.doesnt.exist: M3String

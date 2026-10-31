@@ -1,0 +1,34 @@
+{
+  "schema": "m3-eclipse-collections-namespace-recipe-selection-v1",
+  "categories": [
+    {
+      "problem": "qualified-namespace-ownership",
+      "selected": "Fork-side recursive relocation org.eclipse.collections -> com.m3.collections.eclipse by the canonical owner M3CollectionsPackageRenameRecipe, sealed in m3/package-import-rename-20261018 of the fork",
+      "rejected": "Re-running a relocation or text substitution in M3jdk21",
+      "evidence": "All 3,360 upstream paths pair with a received path under the relocation fold key: 2,805 relocated, 391 edited in place, 164 unchanged",
+      "remaining": "Serialized and reflection identities change; compatibility with the original namespace is not claimed"
+    },
+    {
+      "problem": "source-custody-transport",
+      "selected": "Byte export of the prep tree with git cat-file, git hash-object --no-filters check, exact-blob staging with git update-index --index-info",
+      "rejected": "git add under the received tree's own .gitattributes (text=auto), or a regenerated tree",
+      "evidence": "3,480 of 3,480 blobs equal; received subtree id 97cd9b660586845b0015e4882d28af6834ed5527 equals the fork tree id",
+      "remaining": "None for transport"
+    },
+    {
+      "problem": "first-party-attribution",
+      "selected": "Fork-first prep commit: canonical Synexia header on 21 first-party .java files, contributor line on 5 edited upstream files, so the M3jdk21 copy stays byte-identical to a fork commit",
+      "rejected": "Header edits inside M3jdk21 after the receive",
+      "evidence": "Suffix gate 26/26: bytes from the package line to the end unchanged; generated-source manifest unchanged",
+      "remaining": "M3 prefix for four first-party classes (naming item C3 #9) undecided"
+    },
+    {
+      "problem": "generated-primitive-sources",
+      "selected": "Run the fork's StringTemplate generator offline at check time; generated sources are not committed",
+      "evidence": "1,354 api and 1,478 impl .java files; manifest SHA-256 51d698ada49d7658deb50b341432d00e13c9e489cec15f59798414ff6535a7f3, equal to the fork-master output",
+      "remaining": "Target-owned build that runs the generator"
+    }
+  ],
+  "invariant": "Donor-first custody: receive the fork tree unchanged, keep every donor notice, record each path binding; namespace completion admits no storage or JNI algorithm.",
+  "performance": "No throughput, allocation or speedup claim"
+}

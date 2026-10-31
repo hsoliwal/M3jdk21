@@ -1,0 +1,2 @@
+$ /workspace/scratch/abdb4b1178cf/toolchain/zulu21.48.17-ca-jdk21.0.10-linux_x64/bin/java -Xmx512m -Xcheck:jni -Djava.library.path=/workspace/scratch/abdb4b1178cf/acquisition/rank-select-continuation/reproduction-03/native -cp /workspace/scratch/abdb4b1178cf/m3-repo/m3/collections/target/classes:/workspace/scratch/abdb4b1178cf/m3-repo/m3/collections/target/test-classes com.m3.collections.M3IndexPathRankNativeSelfTest
+PASS M3IndexPathRank JNI parity: 180 deterministic Java/rank/native paths

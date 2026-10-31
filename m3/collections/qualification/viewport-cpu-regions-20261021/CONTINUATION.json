@@ -1,0 +1,88 @@
+{
+  "schema": "M3_VIEWPORT_CONTINUATION_RECEIPT_V1",
+  "canonical_pr": "hsoliwal/com.synexia#12855",
+  "canonical_branch": "m3/viewport-cpu-regions-20261021",
+  "canonical_head": "53bf44fa867492fc05694dc20cb7a7a26386d8b0",
+  "product_pr": "hsoliwal/M3jdk21#1759",
+  "product_source_baseline": "482369aa1313ee85e32ff6b5bedd74dc557ca67f",
+  "new_implementation_in_this_pass": "focused exact-engine Maven/OpenRewrite and original-receiver qualification workflow",
+  "workflow_git_blob": "7a1e94b11169bb3e43b2892a2cf4fde1a3df9dc6",
+  "workflow_sha256": "bf60b441ac804bb27f05faf1c96a0909c7661b0fe588e55a3bba1a01d5873729",
+  "workflow_local_checks": [
+    "YAML structure",
+    "read-only permissions",
+    "embedded Bash syntax",
+    "embedded Python syntax",
+    "remote Git blob readback identity"
+  ],
+  "candidate_java_and_jni_changed_in_this_pass": false,
+  "local_host_replay": "PASS_AFTER_EXPLICIT_RESUME",
+  "java_version": "OpenJDK 21.0.12.1",
+  "source_hygiene_and_strict_compilation": "PASS",
+  "descriptor_header_export_parity": "PASS",
+  "cases": [
+    {
+      "owner": "baseline",
+      "mode": "mixed",
+      "java_checks": 72591,
+      "java_digest": "6c8c89cc84cae62c",
+      "jni_checks": 108891,
+      "jni_digest": "b02020cc25dc5c63"
+    },
+    {
+      "owner": "baseline",
+      "mode": "interpreter",
+      "java_checks": 72591,
+      "java_digest": "6c8c89cc84cae62c",
+      "jni_checks": 108891,
+      "jni_digest": "b02020cc25dc5c63"
+    },
+    {
+      "owner": "candidate",
+      "mode": "mixed",
+      "java_checks": 72591,
+      "java_digest": "6c8c89cc84cae62c",
+      "jni_checks": 108891,
+      "jni_digest": "b02020cc25dc5c63"
+    },
+    {
+      "owner": "candidate",
+      "mode": "interpreter",
+      "java_checks": 72591,
+      "java_digest": "6c8c89cc84cae62c",
+      "jni_checks": 108891,
+      "jni_digest": "b02020cc25dc5c63"
+    }
+  ],
+  "native_checks": [
+    "-Xcheck:jni",
+    "fatal UBSan",
+    "-Xmx64m",
+    "SerialGC",
+    "empty runtime stderr"
+  ],
+  "interruption": "initial host driver timed out during candidate interpreted Java test; interrupted log retained; resumed only that test and subsequent native runs",
+  "host_manifest_sha256": "368ceb71aec5b6e576dbef8250a157c226ec5a6eb99c1943cb6de9182e30af9e",
+  "maven_openrewrite_sdk_execution": "NOT_EXECUTED",
+  "actual_sdk_product_receiving": "NOT_EXECUTED",
+  "hosted_workflow_outcome": "NO_RUN_OBSERVED",
+  "runtime_sources_applied": false,
+  "default_branches_changed": false,
+  "merge_or_rebase_performed": false,
+  "filtered_sorted_donor": {
+    "product_pr": 1734,
+    "product_head": "8e246d7b449ce0db3da29cfebb5798eb85566180",
+    "canonical_recipe_pr": 12818,
+    "disposition": "EXISTING_OWNER_IDENTIFIED_NOT_RECEIVED"
+  },
+  "pending": [
+    "canonical Maven/OpenRewrite execution and receiver proof",
+    "original full collection-module suite",
+    "filtered/sorted provider contracts",
+    "source-built JDK/HotSpot image and jtreg",
+    "SWT/Nebula/GEF/RWT runtime integration",
+    "GPU/theme/language/IME/accessibility wiring",
+    "cross-platform concurrency and memory/performance qualification"
+  ],
+  "completion": false
+}

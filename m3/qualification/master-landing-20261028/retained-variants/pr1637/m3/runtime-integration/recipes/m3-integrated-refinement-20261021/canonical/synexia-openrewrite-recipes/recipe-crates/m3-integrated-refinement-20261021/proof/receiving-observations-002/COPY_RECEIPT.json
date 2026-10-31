@@ -1,0 +1,62 @@
+{
+  "schema": "M3_RECEIVING_OBSERVATION_COPY/1",
+  "files": [
+    {
+      "path": "COLLECTIONS_INVOCATION.json",
+      "sha256": "dea184e926c4fda84ff15d546f5e97bdd8f0c0a7d5628509bdd131f84262743f"
+    },
+    {
+      "path": "COLLECTIONS_PROOF.json",
+      "sha256": "d15db837534c48df5089da737b5026ff254de2c30ab2aebecaf6bd786c212358"
+    },
+    {
+      "path": "COLLECTIONS_RECEIPT.json",
+      "sha256": "faea562e6044c0b2c329518f137112307b2ec96050b22f209abd75aaf11693ca"
+    },
+    {
+      "path": "COLLECTIONS_RUN.log",
+      "sha256": "e67d8d6f6307cc05091c8eefb0998f93002fb01b068adc04e10207f0ddfaa1ff"
+    },
+    {
+      "path": "PR_REVIEW_NOTES_INDEX.json",
+      "sha256": "a9d6ae173c6c20e7013fdb83fe4eba48ce536579352d6525fd88010296997e48"
+    },
+    {
+      "path": "TARGET_PR_SCHEDULING_REVIEW_NOTES.md",
+      "sha256": "6d72872b984bfdcd880f5bde8d97952aa168255ed1924538e15af7a7274e7af4"
+    },
+    {
+      "path": "workflow-application/RESULT.json",
+      "sha256": "46dcaaef6003eb6361b3d7fdc67d96279e8a9d89dff1662fbddcdf3c33223993"
+    },
+    {
+      "path": "workflow-application/apply.json",
+      "sha256": "a7454fbc420df7b559aaecbda0b1fb7281d0192049a0681e11ec16a57f988690"
+    },
+    {
+      "path": "workflow-application/apply.log",
+      "sha256": "614fcd6379a8e6e1b9bb489aa234636981401c4cffc94fce93278038c2977dcb"
+    },
+    {
+      "path": "workflow-application/preflight.json",
+      "sha256": "45cb98bfa8d67eabb6053ce6bc23389bde1ba29afe692f583c4cfcc42ad83b3f"
+    },
+    {
+      "path": "workflow-application/preflight.log",
+      "sha256": "381ff022f95e7aaa9c152cb7e103bda39124996666bb28cc34621f82a6c0261d"
+    },
+    {
+      "path": "workflow-application/replay.json",
+      "sha256": "d41085b1a983bbc8b03508289c7c32c23649cd41189ceb097a528f49e0525c4b"
+    },
+    {
+      "path": "workflow-application/replay.log",
+      "sha256": "e8df032eb83752fb4385e347070f4bd559840435751e643c94d9859a484d76da"
+    },
+    {
+      "path": "workflow-application/source-seals.log",
+      "sha256": "d86c6a4758d25e62f2abf7cfea395dcdf3d81229caa0e05114bcb7b2f54b411b"
+    }
+  ],
+  "scope": "Exact copies of separately executed receiving gates. Prior runtime proofs bind unchanged runtime bytes; SDK003 and its application prove the workflow successor only."
+}

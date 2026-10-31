@@ -1,0 +1,34 @@
+{
+  "image": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture/image",
+  "input_hash_receipt": "inputs.json",
+  "linked_jni": {
+    "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture/image/lib/libm3fs.so",
+    "sha256": "856c1d9bb8ea084970f73b811c3a7a91f2d89921538080ef01e7dfad0111a7a6"
+  },
+  "linked_sqlite": {
+    "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture/image/lib/libsqlite3.so.0",
+    "sha256": "eac351cf84d688d1f9235e6165bd57555b31a491cd2f65e0dca67daa69036370"
+  },
+  "native_hash_note": "jlink --strip-debug can change copied native bytes; input and image hashes are distinct observations.",
+  "probe": {
+    "M3FS_FEATURE_BITS": "2097151",
+    "M3FS_MODULE_RESOURCE": "jrt:/jdk.m3fs/com/m3/fs/M3FS.class",
+    "M3FS_NATIVE_ORIGIN": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture/image/lib/libm3fs.so",
+    "M3FS_RUNTIME_PROBE": "PASS",
+    "M3FS_SQLITE_ORIGIN": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-native-capture/image/lib/libsqlite3.so.0"
+  },
+  "provider_legal": {
+    "all_dependency_original_license_and_notice_resources_retained": true,
+    "jmod_and_image_legal_entries_checked": 132,
+    "modules": [
+      "jdk.m3fs",
+      "commons.logging",
+      "org.apache.commons.codec",
+      "org.apache.commons.compress",
+      "org.apache.commons.io",
+      "org.apache.commons.lang3"
+    ]
+  },
+  "scope": "Linked-image packaging and native probe on the supplied prebuilt JDK 21. This wrapper does not build or qualify the full modified OpenJDK/M3JDK21 tree.",
+  "status": "PASS"
+}

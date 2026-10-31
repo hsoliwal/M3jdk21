@@ -1,0 +1,501 @@
+{
+  "schema": "M3_MAVEN4_EVIDENCE_INTAKE/1",
+  "scope": "Preserved authoring/source-build/recipe/copier evidence; no actual receiver runtime promotion",
+  "files": [
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/CANONICAL_CSV_CORRECTION.json",
+      "crate_path": "proof/runtime-authoring/evidence/CANONICAL_CSV_CORRECTION.json",
+      "bytes": 52819,
+      "sha256": "50f0528ffdbdeb264409438a5b737c61933a5bc182f94b630fb46d3d3841edd7"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/CORRECTION_OBSERVATIONS.json",
+      "crate_path": "proof/runtime-authoring/evidence/CORRECTION_OBSERVATIONS.json",
+      "bytes": 1731,
+      "sha256": "d2956de9a05a40534b49270113b9d2e023c316715eb2d8ca3090edc50f2a15ab"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/HANDOFF_PROVENANCE.json",
+      "crate_path": "proof/runtime-authoring/evidence/HANDOFF_PROVENANCE.json",
+      "bytes": 2534,
+      "sha256": "173f3f85547acd49a2984ac325077a81fa78336a08b7a2b457d5e53653a22db7"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/HANDOFF_SUCCESSOR_002.json",
+      "crate_path": "proof/runtime-authoring/evidence/HANDOFF_SUCCESSOR_002.json",
+      "bytes": 2174,
+      "sha256": "9bbb4bbd2bad9c40a0eadd6837e510d114201744c3ac4d500db7ddc4f21fcbe9"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/INCUMBENT_PROVIDER_CLASSPATH.txt",
+      "crate_path": "proof/runtime-authoring/evidence/INCUMBENT_PROVIDER_CLASSPATH.txt",
+      "bytes": 2612,
+      "sha256": "0e59234508b81d6197a8f057b2edeb234ad00d7a68584ace3a63cc2e8bea500d"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/INCUMBENT_PROVIDER_RESOLUTION.log",
+      "crate_path": "proof/runtime-authoring/evidence/INCUMBENT_PROVIDER_RESOLUTION.log",
+      "bytes": 843,
+      "sha256": "43c9420931bca0421b51fef9b816b2ceceb6dc161b970115b3f66614f3a7cc55"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/MODEL_BUILDER_TEST_RESULT.json",
+      "crate_path": "proof/runtime-authoring/evidence/MODEL_BUILDER_TEST_RESULT.json",
+      "bytes": 597,
+      "sha256": "72ec26527cc517a7c8eaaf96a012bf6946f0295439c38de448440142aad10077"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/PROVIDER_ARTIFACTS.json",
+      "crate_path": "proof/runtime-authoring/evidence/PROVIDER_ARTIFACTS.json",
+      "bytes": 24281,
+      "sha256": "f32f06a5b92d05c65f69e49b0b901e1b5a4fb570505108eb35bf5af1c1bc6c75"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/PROVIDER_CLASSPATH.txt",
+      "crate_path": "proof/runtime-authoring/evidence/PROVIDER_CLASSPATH.txt",
+      "bytes": 8121,
+      "sha256": "814e8e538fd9139f7b7614854141bdfe8295eff0e0b31763bc12196b308f52fd"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/QUALIFIER_CANDIDATE_001.log",
+      "crate_path": "proof/runtime-authoring/evidence/QUALIFIER_CANDIDATE_001.log",
+      "bytes": 750,
+      "sha256": "63aab1f4dd4c044e2ef9f66c7f150ddf24111015bdd25e2c4ceefb5260fb8e62"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/QUALIFIER_CANDIDATE_002.log",
+      "crate_path": "proof/runtime-authoring/evidence/QUALIFIER_CANDIDATE_002.log",
+      "bytes": 289,
+      "sha256": "0bd3ff7b6df39689f2c522065b7bbd12839f5dd25ac408a232899028a3af6f46"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/REAL_PROVIDER_001.json",
+      "crate_path": "proof/runtime-authoring/evidence/REAL_PROVIDER_001.json",
+      "bytes": 136,
+      "sha256": "bf26efc1f2e01b19e6bd605f59a28570fbb2bb7219e258acfd5aa58c333f074a"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/REAL_PROVIDER_002.json",
+      "crate_path": "proof/runtime-authoring/evidence/REAL_PROVIDER_002.json",
+      "bytes": 98,
+      "sha256": "2e6068156795944fd4f7ecdbb86dde050a75e9c1e881f1e63d32a1e988923155"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/REAL_PROVIDER_003.json",
+      "crate_path": "proof/runtime-authoring/evidence/REAL_PROVIDER_003.json",
+      "bytes": 270,
+      "sha256": "5dcfbbd691aed2125b148d941bd11f53c43c3d9884b93b9d1591d01195e84ee0"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/REAL_PROVIDER_003_COMPARISON.json",
+      "crate_path": "proof/runtime-authoring/evidence/REAL_PROVIDER_003_COMPARISON.json",
+      "bytes": 984,
+      "sha256": "d185f8df5d844e57ce8bba7a0089f225870b28b711efd30ce8f3adf0ebba1ec5"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/SOURCE_BUILD_001.log",
+      "crate_path": "proof/runtime-authoring/evidence/SOURCE_BUILD_001.log",
+      "bytes": 135604,
+      "sha256": "9be2ba67c828f730efea1912ee4c0851148d5c4fbdcab401f8d507066b152457"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/SOURCE_BUILD_001_INVOCATION.json",
+      "crate_path": "proof/runtime-authoring/evidence/SOURCE_BUILD_001_INVOCATION.json",
+      "bytes": 632,
+      "sha256": "886954c5272b7943a21251b99f2b554f085af758983c1a52489ae621d060da84"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/SOURCE_BUILD_001_RESULT.json",
+      "crate_path": "proof/runtime-authoring/evidence/SOURCE_BUILD_001_RESULT.json",
+      "bytes": 100,
+      "sha256": "d7f815d3a73965c6d024480314d5f8c29d3d33dd5f5b0dbf7bac4ea726291a4b"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/SOURCE_FETCH.log",
+      "crate_path": "proof/runtime-authoring/evidence/SOURCE_FETCH.log",
+      "bytes": 1311,
+      "sha256": "614fb92d0b2d1cf9e673457f49ff74047873fe1c4f2d08b004781dec6e44e9d1"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/SOURCE_RUNTIME_CLASSPATH.txt",
+      "crate_path": "proof/runtime-authoring/evidence/SOURCE_RUNTIME_CLASSPATH.txt",
+      "bytes": 5570,
+      "sha256": "be41eef01a4a27549d82f6a6695b5a9ae413883937abb3a30cecccb886d61472"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/WORKFLOW_STRUCTURE.json",
+      "crate_path": "proof/runtime-authoring/evidence/WORKFLOW_STRUCTURE.json",
+      "bytes": 503,
+      "sha256": "fc3af7d87127fc5738fad051e02fd6bb019eab73849d5ee61fbe3b58d3285c30"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/baseline-compile.log",
+      "crate_path": "proof/runtime-authoring/evidence/baseline-compile.log",
+      "bytes": 681,
+      "sha256": "b45f7ce0179828ae30680d5b4db87a32c3d6958db863d40a036f7853698ef54f"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/baseline-real-provider-001.log",
+      "crate_path": "proof/runtime-authoring/evidence/baseline-real-provider-001.log",
+      "bytes": 28749,
+      "sha256": "5bb026256538d647e8333679cbfae8705def9ea42f86503fbe85164ce476ce4f"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/baseline-real-provider-002.log",
+      "crate_path": "proof/runtime-authoring/evidence/baseline-real-provider-002.log",
+      "bytes": 9477,
+      "sha256": "a26a45de3073426d594eb27fb74380b9afb86b6807d11afde4b8061c4a112345"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/baseline-real-provider-003.log",
+      "crate_path": "proof/runtime-authoring/evidence/baseline-real-provider-003.log",
+      "bytes": 9477,
+      "sha256": "b99448d1fb3556da543b89c0a85403691b4d548921ebe83a3e9f51ae6eac896e"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/candidate-compile.log",
+      "crate_path": "proof/runtime-authoring/evidence/candidate-compile.log",
+      "bytes": 684,
+      "sha256": "fe6716aeec8042ac4d4cf2f7216b5d8a01bde14c86043147c972e5a1130f72ea"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/candidate-real-provider-002.log",
+      "crate_path": "proof/runtime-authoring/evidence/candidate-real-provider-002.log",
+      "bytes": 10336,
+      "sha256": "fb3bc78e12f5b4708fbe5d88fddeea62f304dad323ac1579119da6454cebf6b3"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/candidate-real-provider-003.log",
+      "crate_path": "proof/runtime-authoring/evidence/candidate-real-provider-003.log",
+      "bytes": 9489,
+      "sha256": "b17029d02b440a635dd78127ca9685a7196f1f923117dc394ba8b05330c2f9c3"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/probe-compile-002.log",
+      "crate_path": "proof/runtime-authoring/evidence/probe-compile-002.log",
+      "bytes": 8544,
+      "sha256": "a9f1ae6888bd51cc26b18dac69fc8ffcfeac9d3925d0b069d01dfa6119c20d7b"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/probe-compile-003.log",
+      "crate_path": "proof/runtime-authoring/evidence/probe-compile-003.log",
+      "bytes": 8544,
+      "sha256": "1398af31636852580d53b0a4aa896a59878297c4eb5a32a19430fc1af049912b"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/probe-compile.log",
+      "crate_path": "proof/runtime-authoring/evidence/probe-compile.log",
+      "bytes": 8540,
+      "sha256": "6c6289307bec72a63c4aedf9769f9337758873e3dbdf900126f3672b90e12c02"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-001/COMMANDS.json",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-001/COMMANDS.json",
+      "bytes": 646,
+      "sha256": "1ae2c21ae9e9ab6249790e92beac07c7dd56b5e0d3fdaaff07a44505c305ac8a"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-001/INPUTS.json",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-001/INPUTS.json",
+      "bytes": 1769183,
+      "sha256": "a2b8391aefa987b4339f6545bc92087b2ed54d3b554d192a170270711bb91b51"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-001/source-offline.log",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-001/source-offline.log",
+      "bytes": 70139,
+      "sha256": "943e3b82bbcceead6f7985b3bd3dd7f50536e4f5ac8bd283b53448c6ae91c280"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/COMMANDS.json",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/COMMANDS.json",
+      "bytes": 31777,
+      "sha256": "96a997717305ad373f9a941b4646eea36923a5454d6b765829dad92c9505b55d"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/INPUTS.json",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/INPUTS.json",
+      "bytes": 1769183,
+      "sha256": "a2b8391aefa987b4339f6545bc92087b2ed54d3b554d192a170270711bb91b51"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/PROOF.json",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/PROOF.json",
+      "bytes": 1647,
+      "sha256": "8a65e3bb65b4fc1401cd57f8af308f46ac580a085e05b51a8e2678fd84310fb3"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/PROVIDER_ARTIFACTS.json",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/PROVIDER_ARTIFACTS.json",
+      "bytes": 23451,
+      "sha256": "08d73ec9ff2e4949d4da0c8a3673b3fb72294e79d7e375ef13a84e30a08789f7"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/TEST-org.apache.maven.impl.model.DefaultModelBuilderTest.xml",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/TEST-org.apache.maven.impl.model.DefaultModelBuilderTest.xml",
+      "bytes": 21690,
+      "sha256": "e89772557b677d851bf9d532e073fa6bc9126f406360856aeada75db6273eb67"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/baseline-api.log",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/baseline-api.log",
+      "bytes": 1897,
+      "sha256": "810647f8c04537a26ee736b6825844ea7a78834d5e55bce83db279cab37c88d6"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/baseline-compile.log",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/baseline-compile.log",
+      "bytes": 749,
+      "sha256": "9ea0536ec8d0b8b7b0e7dcfb20cf2912a045d48cb8163b8a8c0c006e449d3d81"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/baseline-provider.log",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/baseline-provider.log",
+      "bytes": 9585,
+      "sha256": "4ff2b45db119e0ab3844481f5e377bb546518ab12cd358fc75472730c7edeff0"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/candidate-api.log",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/candidate-api.log",
+      "bytes": 2152,
+      "sha256": "2a3591cc105e8d2ecd9aa14f328768cb731b33c42211634d42bcd1f62bbb0097"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/candidate-compile.log",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/candidate-compile.log",
+      "bytes": 774,
+      "sha256": "2c61bd1f76547f1fd999b072cd8a385fddb374f31a0f590a1a140c1ba4ce073b"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/candidate-provider.log",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/candidate-provider.log",
+      "bytes": 9597,
+      "sha256": "ad6c36489772a0a59ab92a31b02405991e9e53fbcd5bb994d6faea30da5b65da"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/fixture-compile.log",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/fixture-compile.log",
+      "bytes": 8602,
+      "sha256": "ea68fd0df5111bedf393c78b51ff448e5fa000510b20f47bd68163e313ebc849"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/incumbent-classpath.txt",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/incumbent-classpath.txt",
+      "bytes": 2612,
+      "sha256": "0e59234508b81d6197a8f057b2edeb234ad00d7a68584ace3a63cc2e8bea500d"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/incumbent-offline.log",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/incumbent-offline.log",
+      "bytes": 1363,
+      "sha256": "d7194e34206956278ad690431ed88b951280c04149ad5c511f58a9247d089aff"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/provider-classpath.txt",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/provider-classpath.txt",
+      "bytes": 8121,
+      "sha256": "814e8e538fd9139f7b7614854141bdfe8295eff0e0b31763bc12196b308f52fd"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/qualified-candidate-002/source-offline.log",
+      "crate_path": "proof/runtime-authoring/qualified-candidate-002/source-offline.log",
+      "bytes": 65180,
+      "sha256": "9038bfaf189e6633339cb2553696472bfef88b94c466b968f194cf29c0d67518"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/source-build-001-reports/TEST-org.apache.maven.impl.model.DefaultModelBuilderTest.xml",
+      "crate_path": "proof/runtime-authoring/evidence/source-build-001-reports/TEST-org.apache.maven.impl.model.DefaultModelBuilderTest.xml",
+      "bytes": 23381,
+      "sha256": "bca4cac85bd6a54b8af67f706f72fd9e038756080d3304691b651b5e9b978e07"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/source-build-001-reports/org.apache.maven.impl.model.DefaultModelBuilderTest-output.txt",
+      "crate_path": "proof/runtime-authoring/evidence/source-build-001-reports/org.apache.maven.impl.model.DefaultModelBuilderTest-output.txt",
+      "bytes": 1532,
+      "sha256": "4c7d1d87992b24736d474d7a9b7bc2564599735422e055f1444e57f97635af81"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/evidence/source-build-001-reports/org.apache.maven.impl.model.DefaultModelBuilderTest.txt",
+      "crate_path": "proof/runtime-authoring/evidence/source-build-001-reports/org.apache.maven.impl.model.DefaultModelBuilderTest.txt",
+      "bytes": 353,
+      "sha256": "4907bc240414d7b4f3ee49f54f91cb5ac93bdef736d00dd4928b898fa1fd9043"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/01-preflight.json",
+      "crate_path": "proof/receiver-qualification-002/01-preflight.json",
+      "bytes": 2259,
+      "sha256": "4847ae6a8ad9c8433348bf193c24dc776aeba9f917c15927d6ff9b39980d2913"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/01-preflight.log",
+      "crate_path": "proof/receiver-qualification-002/01-preflight.log",
+      "bytes": 61,
+      "sha256": "96d6dabf9a1577625dbd7670da827a0ff58d8036fce20140ebdf9dbf1c668c93"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/02-first-apply.json",
+      "crate_path": "proof/receiver-qualification-002/02-first-apply.json",
+      "bytes": 2259,
+      "sha256": "f9376d8b5ad572e41d4e35754040585b7f7e7b9684d3900bdbcb9710708625ac"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/02-first-apply.log",
+      "crate_path": "proof/receiver-qualification-002/02-first-apply.log",
+      "bytes": 61,
+      "sha256": "1cbe601b356eabae85ba1c4a362f96a916d0c7338cff62d8d51c198e95ae04db"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/03-fixed-point.json",
+      "crate_path": "proof/receiver-qualification-002/03-fixed-point.json",
+      "bytes": 2561,
+      "sha256": "1dcb8ede98487393e2be2889f87b323cf7fb2c71384fea84a16fa4a2d6237e91"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/03-fixed-point.log",
+      "crate_path": "proof/receiver-qualification-002/03-fixed-point.log",
+      "bytes": 61,
+      "sha256": "54385b94ffb37b578f44629cdceaeb1fe593c25f8f2e6f786d2307e56bdb0419"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/04-product-drift.json",
+      "crate_path": "proof/receiver-qualification-002/04-product-drift.json",
+      "bytes": 126,
+      "sha256": "77951014b2e646c63242c8b3f93ad13a3d34ffeacc0fa3311556c2343a33d787"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/04-product-drift.log",
+      "crate_path": "proof/receiver-qualification-002/04-product-drift.log",
+      "bytes": 611,
+      "sha256": "a2af09b01e40768aa955ea2c959458dad080a31d2164928072364de6ed78587b"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/05-symbolic-destination.json",
+      "crate_path": "proof/receiver-qualification-002/05-symbolic-destination.json",
+      "bytes": 184,
+      "sha256": "350a88d04ee4bbdf7dbe1d541f2cd05de04df3b6a4769ca49b2499208fe6fe2f"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/05-symbolic-destination.log",
+      "crate_path": "proof/receiver-qualification-002/05-symbolic-destination.log",
+      "bytes": 956,
+      "sha256": "f23150bf6d6eb134f66736cae7f898d3f3aa3331f07587c7bdbb94638de2b28b"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/06-emitted-drift.json",
+      "crate_path": "proof/receiver-qualification-002/06-emitted-drift.json",
+      "bytes": 126,
+      "sha256": "2942751404f146b4117617e6706c217ee345b5c8f317aa3b306b86faa90a5748"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/06-emitted-drift.log",
+      "crate_path": "proof/receiver-qualification-002/06-emitted-drift.log",
+      "bytes": 610,
+      "sha256": "ba4f2db632009b6a9e7b6af62353a81af392260ee6e1f53f2e58fbda9153fda0"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/07-owner-drift.json",
+      "crate_path": "proof/receiver-qualification-002/07-owner-drift.json",
+      "bytes": 95,
+      "sha256": "2bd989d319c9efd45406107075f891e7dfca2ab8c3b9cb8c8956b596ea6dceee"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/07-owner-drift.log",
+      "crate_path": "proof/receiver-qualification-002/07-owner-drift.log",
+      "bytes": 583,
+      "sha256": "0238aa10992b626b2dbd276172cf6251325f247fc6c2450269c8c7c562a1d21a"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/RESULT.json",
+      "crate_path": "proof/receiver-qualification-002/RESULT.json",
+      "bytes": 14989,
+      "sha256": "6d4f4c35bb52fb413530779d1c6d18bd2b9865417c432133c6b09be46afc45ca"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/RESULT.json",
+      "crate_path": "proof/parser-custody-001/RESULT.json",
+      "bytes": 42944,
+      "sha256": "210af28316c581852453568f2890d6c2fc3bece0de32b0bc757fc43b0772212f"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-dependencies-001/PARSER_CLASSPATH.txt",
+      "crate_path": "proof/parser-custody-001/PARSER_CLASSPATH.txt",
+      "bytes": 10712,
+      "sha256": "2b9f41ad6c00d010f0a88366148c99fec7b83361184320f10a8b5e1ca86a2c1c"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/author-scaffold-001.log",
+      "crate_path": "proof/authoring-commands/author-scaffold-001.log",
+      "bytes": 208,
+      "sha256": "b1e8c3a19f62151253a4dde94f5c0a2059616125127ffe65d675f44dbc4d1fbb"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/parser-snapshot-001.log",
+      "crate_path": "proof/authoring-commands/parser-snapshot-001.log",
+      "bytes": 149,
+      "sha256": "cd05061ae5c555b1e04972df4935900db4ac25fc5e39ab704d52d4c1ce446572"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/prepare-001.log",
+      "crate_path": "proof/authoring-commands/prepare-001.log",
+      "bytes": 177,
+      "sha256": "4ab0b1efef8e20b845b50311a573d442d408ca68790f03bbf7ca59a4de63f93c"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/qualify-sdk-001.log",
+      "crate_path": "proof/authoring-commands/qualify-sdk-001.log",
+      "bytes": 303,
+      "sha256": "57c865c90845f84e62bb09c4d287c5e031cbfc6f49cc0caa454bb537496618a3"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/select-successor-002.log",
+      "crate_path": "proof/authoring-commands/select-successor-002.log",
+      "bytes": 1331,
+      "sha256": "0fde0b33dbcbae2dd6d4e2dab9db0412bb8eb03de4a6e113c54b736e3b1fe17b"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/qualify-sdk-002.log",
+      "crate_path": "proof/authoring-commands/qualify-sdk-002.log",
+      "bytes": 304,
+      "sha256": "32cb8d9eff0db381fa567cf19a4fd395b7055b24cc516ccb196078c730d15209"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/qualify-receiver-002.log",
+      "crate_path": "proof/authoring-commands/qualify-receiver-002.log",
+      "bytes": 92,
+      "sha256": "4185103d895d1d2a39b71830c907ede1849510120870d9c165a8d4a33bd7304f"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/author_packet.py",
+      "crate_path": "provenance/qualification-tools/author_packet.py",
+      "bytes": 7816,
+      "sha256": "617fb86371176469400b25efbdb28c08b249325b5ed6f398b9e9fbfcf74c568b"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/snapshot_parser_dependencies.py",
+      "crate_path": "provenance/qualification-tools/snapshot_parser_dependencies.py",
+      "bytes": 4230,
+      "sha256": "1635210e4b30a760548ac0f9fdce4ba2c574c6ceaa64cc6e5b505dbf2dcc5ec4"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/curate_evidence.py",
+      "crate_path": "provenance/qualification-tools/curate_evidence.py",
+      "bytes": 6282,
+      "sha256": "a05cb30bc1dacba8eb5549e134d7e0f9c901bf7db8a71270055428107d33ce7d"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/fork/LICENSE",
+      "crate_path": "licenses/Maven-Fork-LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "source_path": "/workspace/scratch/206049dfb270/maven-work/fork/NOTICE",
+      "crate_path": "licenses/Maven-Fork-NOTICE",
+      "bytes": 167,
+      "sha256": "633cdd68388defe137dd4b6a02bc9656cefae3b33c64b371e31b104aad40adac"
+    }
+  ],
+  "count": 82,
+  "compiled_payloads_copied": false,
+  "all_source_and_destination_readbacks_match": true
+}

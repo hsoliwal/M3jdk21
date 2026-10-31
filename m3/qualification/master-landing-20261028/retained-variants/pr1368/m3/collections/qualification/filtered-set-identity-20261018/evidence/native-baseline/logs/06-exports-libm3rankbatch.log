@@ -1,0 +1,4 @@
+$ ["nm", "-D", "--defined-only", "/workspace/scratch/f8287c652798/proof/native-collections/lib/libm3rankbatch.so"]
+0000000000001180 T Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0
+
+EXIT=0

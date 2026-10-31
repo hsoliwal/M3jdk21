@@ -1,0 +1,5 @@
+# path	before_sha256	after_sha256	resource
+m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java	b2429000908aed794d3cac63172b81e757824e8b3bc4c56c33c39431e2d0cf0a	42cbfad68941221a81efc34d33356334a7c9625eb7031aeaee387e2583fa832d	00-M3LongArrayDeque.java.txt
+m3/collections/src/main/java/com/m3/collections/M3LongDeque.java	ABSENT	ffe2c4c488bef6dba327b5dcfb6ac7c2f82deddca454a52b45a1181041fe4272	01-M3LongDeque.java.txt
+m3/collections/src/main/java/com/m3/collections/M3LongQueue.java	ABSENT	50bc94d1dfb4950b0156c307bc4db192979b7b82c5eb4666eb05b3e5462754f8	02-M3LongQueue.java.txt
+m3/collections/src/test/java/com/m3/collections/M3LongArrayDequeTest.java	ABSENT	5cd23d6177bf98fde595d722512bf1be7b48d9ac1e3536a66a066062be8cd19e	03-M3LongArrayDequeTest.java.txt

@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
+source_module	disposition	problem_category	rationale
+com.synexia.m3.model.distill	SEPARATE_QUALIFICATION_PENDING	CPU_MODEL_MATH	CPU-first provider requires a separate Java and JNI parity proof
+com.synexia.m3.compute.webgpu	SEPARATE_QUALIFICATION_PENDING	OPTIONAL_GPU_NATIVE	Never require GPU or load unapproved Dawn JNI libraries

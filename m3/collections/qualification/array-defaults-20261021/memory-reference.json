@@ -1,0 +1,10 @@
+{
+  "authority": "hsoliwal/com.synexia",
+  "canonical_commit": "cac5116e3408d6ff306d95654e9f4db6b59a27c1",
+  "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12705",
+  "canonical_task": "synexia-openrewrite-recipes/recipe-crates/m3-array-defaults-20261021",
+  "event_path": "memory/events/44d42a2ad1c82b94ffbf2a135d8425dc7afa5853bea9ca827157b5796a953795.json",
+  "event_sha256": "44d42a2ad1c82b94ffbf2a135d8425dc7afa5853bea9ca827157b5796a953795",
+  "profile": "MOP-RCM/1.0",
+  "scope": "bounded correction; no runtime admission"
+}

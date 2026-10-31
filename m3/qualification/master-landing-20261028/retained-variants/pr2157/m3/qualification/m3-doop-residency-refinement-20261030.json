@@ -1,0 +1,192 @@
+{
+  "schema": "M3_RESIDENCY_REFINEMENT_PASSIVE_RECEIPT_V1",
+  "canonical_repository": "https://github.com/hsoliwal/com.synexia",
+  "canonical_revision": "0074acbbd70862be08e2d85dc72c3135e7a614de",
+  "canonical_path_root": "synexia-openrewrite-recipes/recipe-crates/m3-doop-reuse-20261030/refinement-20261030/",
+  "reference_rule": "Evidence and recipe references are relative to canonical_path_root at canonical_revision; target paths are repository-relative.",
+  "target_repository": "hsoliwal/M3jdk21",
+  "receipt_role": "PASSIVE_COMPONENT_EVIDENCE_ONLY",
+  "spdx_license_identifier": "Apache-2.0",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "maven": {
+    "path": "pom.xml",
+    "sha256": "86c4e465d71611cf912b61942a00f007f40721966542fe2456a3514fd2baf5e9",
+    "git_blob_sha1": "ae62790884c08a0d8262c63c4555030bd60387e7"
+  },
+  "descriptor": {
+    "path": "src/main/resources/META-INF/rewrite/m3-doop-refinement-20261030.yml",
+    "sha256": "b72e03e15152e971d13023ec7defb305d9589737666bc9b34fd2b510770af11a",
+    "git_blob_sha1": "53645c97411c0cb65fb4b0c535dff2612ba8c018"
+  },
+  "sdk_execution": {
+    "qualification": {
+      "path": "evidence/qualification-summary.json",
+      "sha256": "815edc4f5af48fc6bc49b00c9d62ff0fceaa50bd166e817e74a06a6832ef13c2",
+      "git_blob_sha1": "96b61fa323e2f6b144bd3990b58f92db0fed40b8"
+    },
+    "maven_log": {
+      "path": "evidence/registration-sdk.log",
+      "sha256": "f3cd1501a99981a4daf4406f447c70a1ecf8c5020aa0164e9537ca733c6a4463",
+      "git_blob_sha1": "215d69cbc6796d5a59f6f94a4373265722447bc0"
+    },
+    "tests": 24,
+    "executed_recipe_definitions": 14,
+    "executed_output_transitions": 21,
+    "scope": "Actual Java/text SDK product and naming emissions, fixed point and missing/drift/occupied/duplicate refusals. This passive publication record is not an additional recipe execution."
+  },
+  "target_preimage_revision": "4e229782bf1405cdbfb7ca003dbacdb821564d8c",
+  "manifests": [
+    {
+      "crate": "m3-doop-reentrant-eviction-20261030",
+      "recipe": "com.synexia.m3.DoopReentrantEviction20261030",
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-doop-reentrant-eviction-20261030/manifest.tsv",
+      "sha256": "0b183474cf3c1896af224eaf2edde3739e0f92ea5602a51daf69ae6fcaef9c72",
+      "git_blob_sha1": "94a754a7e3ef7082b9a0df6d58a96532a8d54610"
+    },
+    {
+      "crate": "m3-doop-callback-error-20261030",
+      "recipe": "com.synexia.m3.DoopCallbackError20261030",
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-doop-callback-error-20261030/manifest.tsv",
+      "sha256": "02181ba50c08e9f981d5f889cdf3eacc4fe0206418969d775ddd24bf09e38916",
+      "git_blob_sha1": "38a54372fcb53d9ab56e0b00033510e11f513547"
+    },
+    {
+      "crate": "m3-doop-publication-budget-20261030",
+      "recipe": "com.synexia.m3.DoopPublicationBudget20261030",
+      "path": "src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-doop-publication-budget-20261030/manifest.tsv",
+      "sha256": "58c43b1d99a034813b630d66a37f4d5a33e1db928f66dcaccc53e26e962a69ed",
+      "git_blob_sha1": "dd4be0b10471c6965e45382eb8482ef41fc4bca4"
+    }
+  ],
+  "ordered_source_transitions": [
+    {
+      "crate": "m3-doop-reentrant-eviction-20261030",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java",
+      "before": {
+        "sha256": "b96dab2d42101105c1cdbff31a0d68303340eed439c4972d109075cc99818284",
+        "git_blob_sha1": "e8347cd7780dbeb5a95759ef734a6dbf942d9edd"
+      },
+      "after": {
+        "sha256": "7bee4095b7383350ebbfaf12e531307e0b0bda9a9ba9050f6a76b01738fd7b4b",
+        "git_blob_sha1": "0f7bf56e5aa867806dc0a772e1b7839609a7c970"
+      }
+    },
+    {
+      "crate": "m3-doop-reentrant-eviction-20261030",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyReuseTest.java",
+      "before": {
+        "sha256": "a7c88a45f4b88789b17ad08844fe048c2a92db2cf55b7437f5605e79c7959287",
+        "git_blob_sha1": "5b075d5de8320099b734e6cd0a8e6294d79491fd"
+      },
+      "after": {
+        "sha256": "d7aaff72ba6fe2b56d8c7aba79c1bd8dc0e5c544b6ba25e57abb1c862f7e0cbd",
+        "git_blob_sha1": "ea005b6c87a33b8e7c2f221ae78b2634a127de86"
+      }
+    },
+    {
+      "crate": "m3-doop-callback-error-20261030",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java",
+      "before": {
+        "sha256": "7bee4095b7383350ebbfaf12e531307e0b0bda9a9ba9050f6a76b01738fd7b4b",
+        "git_blob_sha1": "0f7bf56e5aa867806dc0a772e1b7839609a7c970"
+      },
+      "after": {
+        "sha256": "e774f80a63919f1ab6f10f01a63a17fed4c0ecdcb57ad0f5499f8c692130d948",
+        "git_blob_sha1": "45caaf707b47636b565311a960bff90c60450895"
+      }
+    },
+    {
+      "crate": "m3-doop-callback-error-20261030",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyReuseTest.java",
+      "before": {
+        "sha256": "d7aaff72ba6fe2b56d8c7aba79c1bd8dc0e5c544b6ba25e57abb1c862f7e0cbd",
+        "git_blob_sha1": "ea005b6c87a33b8e7c2f221ae78b2634a127de86"
+      },
+      "after": {
+        "sha256": "2aa307dfe6c6dde0eee3f95df67b12e0cbb073ced2a96b1d49b0f353b3206d69",
+        "git_blob_sha1": "3fd3588809c22942487e9f504c625be838581cac"
+      }
+    },
+    {
+      "crate": "m3-doop-publication-budget-20261030",
+      "path": "m3/collections/src/main/java/com/m3/collections/M3ObjectResidency.java",
+      "before": {
+        "sha256": "e774f80a63919f1ab6f10f01a63a17fed4c0ecdcb57ad0f5499f8c692130d948",
+        "git_blob_sha1": "45caaf707b47636b565311a960bff90c60450895"
+      },
+      "after": {
+        "sha256": "96f42de9189cea7325471ba3da22114a12375e384fc3f0e376f7d350bda90f97",
+        "git_blob_sha1": "8966285b99e21840bed497e9e3d6434cb327ab68"
+      }
+    },
+    {
+      "crate": "m3-doop-publication-budget-20261030",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ObjectResidencyReuseTest.java",
+      "before": {
+        "sha256": "2aa307dfe6c6dde0eee3f95df67b12e0cbb073ced2a96b1d49b0f353b3206d69",
+        "git_blob_sha1": "3fd3588809c22942487e9f504c625be838581cac"
+      },
+      "after": {
+        "sha256": "521242e1044165f11492ddf42608ab9443bdbbef490851164cad817812f3a796",
+        "git_blob_sha1": "0d3aee2044b8923c67b873278d65234e2a51a19d"
+      }
+    }
+  ],
+  "runtime_evidence": [
+    {
+      "path": "evidence/runtime/residency/qualification.json",
+      "sha256": "0da3cb24e98f6c5c1e473e7aba936b599ec10c0bcc13fae989871f444cdd13c5",
+      "git_blob_sha1": "5ad58d6776b0d57e53b20d79dd2f7c241e4bc180"
+    },
+    {
+      "path": "evidence/runtime/residency-successors/qualification.json",
+      "sha256": "bc7e7b23830c6910b8e3415352ff9f4dd3f196c28195ee9b704e6ce0ac0cdb01",
+      "git_blob_sha1": "8793a59a42b1282f4e487cc486bcab896457d182"
+    }
+  ],
+  "component_author_readback": {
+    "verified_files": 715,
+    "mismatches": 0
+  },
+  "receipt_generation": {
+    "kind": "DETERMINISTIC_PASSIVE_PUBLICATION_RECORD",
+    "source": "Verified GitHub author tree and already executed SDK/runtime receipts",
+    "additional_sdk_execution_claimed": false,
+    "execution_environment": "Became unavailable after product and recipe qualification; no product changes or additional test results are inferred."
+  },
+  "qualification": {
+    "status": "PASS_SCOPED_COMPONENT_OUTPUTS_WITH_HOLD",
+    "public_api": "Public/protected descriptors unchanged.",
+    "mode": "Actual emitted Java21 owner closure; not a source-built modified JDK.",
+    "source_built_jdk_jtreg": "NOT_RUN",
+    "jni": "UNCHANGED_NOT_EXERCISED_BY_THESE_JDK_JAVA_ATOMS",
+    "serial_atoms": [
+      "requested-slot admission claim and RESIDENT victim eligibility",
+      "precommit callback Error rollback",
+      "captured-target factory/read/decode publication budget before spill deletion"
+    ],
+    "jvm_profiles": [
+      "normal",
+      "-Xint"
+    ],
+    "tests_per_stage_per_profile": [
+      45,
+      51,
+      60
+    ],
+    "exact_predecessor_failure_counts": [
+      6,
+      3
+    ],
+    "performance": "NOT_MEASURED_FOR_CORRECTNESS_ATOMS",
+    "residual": "SpillStore.delete callback can reenter after the new budget check; exact witness remains RED/HOLD. No general transactional-storage or all-callback budget guarantee."
+  },
+  "remaining_gates": [
+    "SOURCE_BUILT_M3JDK21_IMAGE_JTREG_NOT_RUN",
+    "FULL_TARGET_RUNTIME_ACCEPTANCE_OPEN",
+    "FULL_INHERITED_PROVENANCE_LEDGER_UNAVAILABLE",
+    "REMOTE_CI_AND_RELEASE_ACCEPTANCE_SEPARATE",
+    "DELETE_CALLBACK_REENTRY_REQUIRES_SEPARATE_TRANSACTIONAL_OR_RESERVATION_CONTRACT"
+  ],
+  "promotion": false
+}

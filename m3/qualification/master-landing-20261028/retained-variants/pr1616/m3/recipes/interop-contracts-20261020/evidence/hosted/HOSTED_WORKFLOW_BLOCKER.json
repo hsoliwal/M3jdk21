@@ -1,0 +1,18 @@
+{
+  "status": "HOSTED_EXISTING_GATE_REFUSED_PREEXISTING_SOURCE_PIN",
+  "repository": "hsoliwal/M3jdk21",
+  "pr": 1616,
+  "run_url": "https://github.com/hsoliwal/M3jdk21/actions/runs/39441310580",
+  "job_id": 118691580460,
+  "head": "d1b9aa9f35cf6f8cf7af1fb581471c2551bd7e97",
+  "workflow_path": ".github/workflows/m3-collections-interop-receiving.yml",
+  "failed_step": "Identify exact head and verify admitted production postimages",
+  "expected_engine_blob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+  "actual_engine_blob": "34bebff98306f1e9b002ae166598fd21e8fd62ba",
+  "target_parent": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "same_engine_and_workflow_blobs_at_parent": true,
+  "parent_workflow_blob": "8f57b8a77361aa1ba9dfa2313a04dcb5bc1cb17f",
+  "failure_before_recipe_and_runtime_tests": true,
+  "captured_log_excerpt_sha256": "ca596d82ca1908c657ea9f55f60eaef569fc26055eb9c9af6779c997dcc9092a",
+  "disposition": "Historical source-sealed admission workflow requires its own qualified successor for current upstream source/expanded module. No pin replacement, test-count editing, skip or gate bypass is made in this packet. Actual canonicalSDK and Java/JNI receiving receipts remain separate from hosted status."
+}

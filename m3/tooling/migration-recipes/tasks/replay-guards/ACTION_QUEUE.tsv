@@ -1,0 +1,6 @@
+id	state	exit
+EXACT_HEAD	PENDING	Existing proof-kit must execute and preserve current source/cache
+FULL_REACTOR	PENDING	All real failures repaired, not skipped
+STRING_JNI	FAIL_OBSERVED	Fix retained parser/type attribution failures with actual JDK sources
+ATOM_LAB	NEXT	User requested in-memory permutation/combination and behavioral convergence tests
+WHOLE_JDK	OPEN	Retain tasks/map-utf/TODO.tsv and all original backport/module/runtime obligations

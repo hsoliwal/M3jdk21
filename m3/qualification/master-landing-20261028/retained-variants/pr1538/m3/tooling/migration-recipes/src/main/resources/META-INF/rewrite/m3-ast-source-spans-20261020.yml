@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.m3jdk.AstStringSourceSpans20261020
+displayName: M3JDK21 AST source geometry from canonical M3String coordinate
+description: Create reviewed source-span primitive planes from exact absent preimages; refuse drift and converge to fixed point.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-ast-source-spans-20261020

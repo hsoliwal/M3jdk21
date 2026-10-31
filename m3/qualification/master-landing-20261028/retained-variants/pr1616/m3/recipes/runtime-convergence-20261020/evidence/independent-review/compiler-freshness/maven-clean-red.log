@@ -1,0 +1,194 @@
+['/tmp/m3jdk21-toolchain-20261020/apache-maven-3.9.9/bin/mvn', '-o', '-B', '-f', '/tmp/m3-verifier-review-20261020/progress-cache/pom.xml', '-Dmaven.repo.local=/tmp/m3jdk21-toolchain-20261020/m2', '-Downer.source=/tmp/m3-verifier-review-20261020/progress-cache/candidate/m3/eclipse/core-runtime/src/main/java', '-Dproof.target=/tmp/m3-verifier-review-20261020/progress-cache/target', 'clean', 'test']
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------< com.m3.qualification:eclipse-progress-reentrancy >----------
+[INFO] Building eclipse-progress-reentrancy 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ eclipse-progress-reentrancy ---
+[INFO] Deleting /tmp/m3-verifier-review-20261020/progress-cache/target
+[INFO] 
+[INFO] --- build-helper:3.6.0:add-source (original-owner-spi) @ eclipse-progress-reentrancy ---
+[INFO] Source directory: /tmp/m3-verifier-review-20261020/progress-cache/owner-spi added.
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ eclipse-progress-reentrancy ---
+[INFO] skip non existing resourceDirectory /tmp/m3-verifier-review-20261020/progress-cache/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ eclipse-progress-reentrancy ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 5 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ eclipse-progress-reentrancy ---
+[INFO] skip non existing resourceDirectory /tmp/m3-verifier-review-20261020/progress-cache/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ eclipse-progress-reentrancy ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ eclipse-progress-reentrancy ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.eclipse.runtime.M3EclipseProgressMonitorTest
+[ERROR] Tests run: 16, Failures: 8, Errors: 2, Skipped: 0, Time elapsed: 0.149 s <<< FAILURE! -- in com.m3.eclipse.runtime.M3EclipseProgressMonitorTest
+[ERROR] com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.ignoresNonFiniteAndNegativeWorkAndKeepsUnknownTotal -- Time elapsed: 0.025 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <101>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:166)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:161)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:632)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.ignoresNonFiniteAndNegativeWorkAndKeepsUnknownTotal(M3EclipseProgressMonitorTest.java:322)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.publishesFractionalRemainderBeforeReentrantWork -- Time elapsed: 0.002 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 1.75 total input credits one whole unit ==> expected: <1> but was: <101>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:166)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:664)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.publishesFractionalRemainderBeforeReentrantWork(M3EclipseProgressMonitorTest.java:57)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.reentrantWorkFailureDoesNotDiscardNestedFraction -- Time elapsed: 0.004 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: nested updates survive the outer callback failure ==> expected: <1> but was: <101>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:166)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:664)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.reentrantWorkFailureDoesNotDiscardNestedFraction(M3EclipseProgressMonitorTest.java:111)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.preservesM3LongOverflowSaturationAndSingleOwner -- Time elapsed: 0.001 s <<< ERROR!
+java.lang.IllegalArgumentException: work must be non-negative
+	at com.m3.collections.M3DefaultProgressMonitor.worked(M3DefaultProgressMonitor.java:42)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitor.forwardWork(M3EclipseProgressMonitor.java:106)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitor.internalWorked(M3EclipseProgressMonitor.java:93)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.preservesM3LongOverflowSaturationAndSingleOwner(M3EclipseProgressMonitorTest.java:341)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.borrowedModeDoesNotChangeParentLifecycle -- Time elapsed: 0.002 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <3> but was: <103>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:166)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:161)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:632)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.borrowedModeDoesNotChangeParentLifecycle(M3EclipseProgressMonitorTest.java:301)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.saturatedDeliveryPublishesItsResetBeforeNestedFractions -- Time elapsed: 0.008 s <<< ERROR!
+java.lang.IllegalArgumentException: work must be non-negative
+	at com.m3.collections.M3DefaultProgressMonitor.worked(M3DefaultProgressMonitor.java:42)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitorTest$CallbackOwner.worked(M3EclipseProgressMonitorTest.java:255)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitor.forwardWork(M3EclipseProgressMonitor.java:106)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitor.internalWorked(M3EclipseProgressMonitor.java:93)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.saturatedDeliveryPublishesItsResetBeforeNestedFractions(M3EclipseProgressMonitorTest.java:137)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.ordinaryWorkFailureRestoresFractionForRetry -- Time elapsed: 0.003 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: failed delivery retains the original fraction ==> expected: <1> but was: <101>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:166)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:664)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.ordinaryWorkFailureRestoresFractionForRetry(M3EclipseProgressMonitorTest.java:94)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.fullyFailedNestedDeliveryRestoresOuterFractionForRetry -- Time elapsed: 0.002 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: both failed updates restore the original fraction ==> expected: <1> but was: <101>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:166)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:664)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.fullyFailedNestedDeliveryRestoresOuterFractionForRetry(M3EclipseProgressMonitorTest.java:128)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.ownedModePreservesEclipseLifecycleAndFractionalProgress -- Time elapsed: 0.002 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <3> but was: <103>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:166)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:161)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:632)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.ownedModePreservesEclipseLifecycleAndFractionalProgress(M3EclipseProgressMonitorTest.java:275)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.workErrorPropagatesUnchangedAndRestoresOrdinaryFraction -- Time elapsed: 0.002 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <101>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:166)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:161)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:632)
+	at com.m3.eclipse.runtime.M3EclipseProgressMonitorTest.workErrorPropagatesUnchangedAndRestoresOrdinaryFraction(M3EclipseProgressMonitorTest.java:154)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   M3EclipseProgressMonitorTest.borrowedModeDoesNotChangeParentLifecycle:301 expected: <3> but was: <103>
+[ERROR]   M3EclipseProgressMonitorTest.fullyFailedNestedDeliveryRestoresOuterFractionForRetry:128 both failed updates restore the original fraction ==> expected: <1> but was: <101>
+[ERROR]   M3EclipseProgressMonitorTest.ignoresNonFiniteAndNegativeWorkAndKeepsUnknownTotal:322 expected: <1> but was: <101>
+[ERROR]   M3EclipseProgressMonitorTest.ordinaryWorkFailureRestoresFractionForRetry:94 failed delivery retains the original fraction ==> expected: <1> but was: <101>
+[ERROR]   M3EclipseProgressMonitorTest.ownedModePreservesEclipseLifecycleAndFractionalProgress:275 expected: <3> but was: <103>
+[ERROR]   M3EclipseProgressMonitorTest.publishesFractionalRemainderBeforeReentrantWork:57 1.75 total input credits one whole unit ==> expected: <1> but was: <101>
+[ERROR]   M3EclipseProgressMonitorTest.reentrantWorkFailureDoesNotDiscardNestedFraction:111 nested updates survive the outer callback failure ==> expected: <1> but was: <101>
+[ERROR]   M3EclipseProgressMonitorTest.workErrorPropagatesUnchangedAndRestoresOrdinaryFraction:154 expected: <1> but was: <101>
+[ERROR] Errors: 
+[ERROR]   M3EclipseProgressMonitorTest.preservesM3LongOverflowSaturationAndSingleOwner:341 » IllegalArgument work must be non-negative
+[ERROR]   M3EclipseProgressMonitorTest.saturatedDeliveryPublishesItsResetBeforeNestedFractions:137 » IllegalArgument work must be non-negative
+[INFO] 
+[ERROR] Tests run: 16, Failures: 8, Errors: 2, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.622 s
+[INFO] Finished at: 2026-10-20T08:48:08+01:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project eclipse-progress-reentrancy: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /tmp/m3-verifier-review-20261020/progress-cache/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+
+EXIT=1

@@ -1,0 +1,10 @@
+{
+  "command": [
+    "nm",
+    "-D",
+    "--defined-only",
+    "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/native-capture/libm3fs.so"
+  ],
+  "exit_code": 0,
+  "log": "jni-exports.log"
+}

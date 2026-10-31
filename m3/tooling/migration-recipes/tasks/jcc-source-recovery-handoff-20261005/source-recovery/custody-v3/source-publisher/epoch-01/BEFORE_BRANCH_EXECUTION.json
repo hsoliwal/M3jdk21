@@ -1,0 +1,11 @@
+{
+  "schema": "jcc-source-before-branch-execution/1",
+  "verifier_sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
+  "result": {
+    "chunk_id": "bdb49c",
+    "wall_time_seconds": 1.707130322,
+    "exit_code": 0,
+    "original_token_count": 63,
+    "output": "{\"status\": \"FINAL_COMMIT_CUSTODY_VERIFIED_BEFORE_BRANCH\", \"commit\": \"0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\", \"tree\": \"0361e4a07b77a01df170523033fef01c4052ddc5\", \"receipt_sha256\": \"266c17d435d47c58129349e721eec1eee849ceaa28dd5c302eb6030cc02e978e\"}\n"
+  }
+}

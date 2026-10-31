@@ -1,0 +1,6 @@
+{
+  "source_path": "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/qualify_receiver.py",
+  "source_sha256": "3a21138b68b7befc5d29cfbaefd59ef510217ef2f5785c6ceb026693ccf7114a",
+  "after_sha256": "80eab858911f37af08f15ef9145413cf4ab850ad4f83f3df36513e474c6a1716",
+  "adaptation": "New task paths and root docs instead of .github for symbolic-refusal fixture; no inactive CSV requirement in this independent packet; same7trials/4refusals"
+}

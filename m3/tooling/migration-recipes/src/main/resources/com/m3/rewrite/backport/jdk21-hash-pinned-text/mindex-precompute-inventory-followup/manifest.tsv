@@ -1,0 +1,4 @@
+# path	before	after	template
+m3/docs/name-mapping.json	335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da	93de9a76b37f3d820d8d03298f9045ddd3a98bf4d0bd85713681a7b7991e4aeb	00-name-mapping.json.txt
+m3/docs/synexia-mindex-precompute-inventory.tsv	ABSENT	f7391b3075be4a66b2d73880b94f3eb484c6cc7db6e2945fb50f647ad506e02d	01-precompute-inventory.tsv.txt
+m3/runtime-integration/check-m3string-invariants.py	c9eb51298f2a6a7a1798051c24074cd7f23a8e0805ed6d50420ff3bcd12cacb4	46ae8bb47c0b91beff00614d529a523e3e1c0587b34e34537ba135ca2127d1c2	02-invariants.py.txt

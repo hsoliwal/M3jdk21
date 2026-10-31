@@ -1,0 +1,142 @@
+{
+  "status": "PASS_EXPLICIT_INSTALLED_VM_CONFIGURATION",
+  "probe_source_sha256": "3bce66fc6480057acbe15d6a0536c19ae661b93a6cd3ea8c14cc277736d3a7ad",
+  "original_execution_commands_sha256": "6efaa938873d2758464b5c6a1f892ddb20f97780d21c0e3b6a03eb17fcaa49f1",
+  "qualification_sha256": "c707036c38bf4c8c56be9abd2caa1af7524115c12983ce952d8f3a92b67f8a75",
+  "configuration_witnesses": {
+    "linked-junit": {
+      "UseM3StringStorage": "not-exposed-while-experimental-options-locked",
+      "String.M3_JOINED_STRINGS": "false",
+      "UseCompiler": "true",
+      "CompactStrings": "true",
+      "java.vm.info": "mixed mode",
+      "java.home": "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image"
+    },
+    "tree-composed-compact": {
+      "UseM3StringStorage": "true",
+      "String.M3_JOINED_STRINGS": "true",
+      "UseCompiler": "false",
+      "CompactStrings": "true",
+      "java.vm.info": "interpreted mode",
+      "java.home": "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image"
+    },
+    "tree-composed-wide": {
+      "UseM3StringStorage": "true",
+      "String.M3_JOINED_STRINGS": "true",
+      "UseCompiler": "false",
+      "CompactStrings": "false",
+      "java.vm.info": "interpreted mode",
+      "java.home": "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image"
+    }
+  },
+  "commands": [
+    {
+      "label": "compile-vm-configuration-002",
+      "command": [
+        "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "--add-modules",
+        "jdk.management",
+        "-d",
+        "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/configuration-probe",
+        "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/LinkedM3VmConfiguration.java"
+      ],
+      "exit": 0,
+      "log": "logs/compile-vm-configuration-002.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "vm-config-linked-junit-002",
+      "command": [
+        "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "--add-opens=com.m3.collections/com.m3.collections=ALL-UNNAMED",
+        "--add-opens=java.base/java.lang=com.m3.collections,ALL-UNNAMED",
+        "-Djava.library.path=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "-Dm3.mask.spans.native.required=true",
+        "-Dm3.collections.all.native.required=true",
+        "-cp",
+        "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/configuration-probe",
+        "LinkedM3VmConfiguration"
+      ],
+      "exit": 0,
+      "log": "logs/vm-config-linked-junit-002.log",
+      "sha256": "4b81dedd982e4e3250373bd4130018b6e92e043cf0477a4fd7e1e9adf2dbb3dd"
+    },
+    {
+      "label": "vm-config-tree-composed-compact-002",
+      "command": [
+        "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "--add-opens=com.m3.collections/com.m3.collections=ALL-UNNAMED",
+        "--add-opens=java.base/java.lang=com.m3.collections,ALL-UNNAMED",
+        "-Djava.library.path=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "-Dm3.mask.spans.native.required=true",
+        "-Dm3.collections.all.native.required=true",
+        "-Xint",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "-cp",
+        "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/configuration-probe",
+        "LinkedM3VmConfiguration"
+      ],
+      "exit": 0,
+      "log": "logs/vm-config-tree-composed-compact-002.log",
+      "sha256": "b3bc7e09f315263c99fd381c868a5a6bee0a280b60851b99578d1e81bc98bf3b"
+    },
+    {
+      "label": "vm-config-tree-composed-wide-002",
+      "command": [
+        "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/bin/java",
+        "-ea",
+        "-Xmx768m",
+        "-XX:ActiveProcessorCount=2",
+        "-Xcheck:jni",
+        "-Xshare:off",
+        "--add-modules=com.m3.collections,jdk.management",
+        "--patch-module=com.m3.collections=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/inputs/test-classes",
+        "--add-reads=com.m3.collections=ALL-UNNAMED,java.management,jdk.management",
+        "--add-opens=com.m3.collections/com.m3.collections=ALL-UNNAMED",
+        "--add-opens=java.base/java.lang=com.m3.collections,ALL-UNNAMED",
+        "-Djava.library.path=/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image/lib",
+        "-Dm3.collections.rank.native=true",
+        "-Dm3.collections.signal.native=true",
+        "-Dm3.mask.spans.native.required=true",
+        "-Dm3.collections.all.native.required=true",
+        "-Xint",
+        "-XX:+UnlockExperimentalVMOptions",
+        "-XX:+UseM3StringStorage",
+        "-XX:-CompactStrings",
+        "-cp",
+        "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/configuration-probe",
+        "LinkedM3VmConfiguration"
+      ],
+      "exit": 0,
+      "log": "logs/vm-config-tree-composed-wide-002.log",
+      "sha256": "463af2761e6e7325cbefc478ce0c1c78a76f9b783e244efdb6badc9e0201c8cb"
+    }
+  ],
+  "preserved_first_attempt_sha256": "3461002662e075adca73515f90685954d0bdaa7c2ac885697131a96a9e9094f3",
+  "scope": "Read-only probes replay the corresponding execution VM options, replacing only the test main and removing log-destination options to preserve original evidence. The exact full suite JVM report also retains its java.vm.info property; raw report system properties remain local."
+}

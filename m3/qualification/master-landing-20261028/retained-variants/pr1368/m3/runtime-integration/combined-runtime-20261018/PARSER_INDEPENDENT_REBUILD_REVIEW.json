@@ -1,0 +1,18 @@
+{
+  "fresh_rebuild_sha256": "00d452ccb86a5658498b26cda1526cbaa11ba0b7f7a5a0d697aa1c418d9d2711",
+  "six_dependencies_pinned": 6,
+  "rebuild_exit": 0,
+  "occupied_artifact_exit": 1,
+  "occupied_bytes_preserved": true,
+  "packet_modified": false,
+  "fresh_build_command": [
+    "python3",
+    "/dev/shm/m3-parser-reuse-f8287/final/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/contract/provider-corrections/java21-8.17.1/build_provider.py",
+    "--jdk",
+    "/workspace/scratch/beeb6792462c/toolchain/jdk-21.0.12.1+1",
+    "--maven-repository",
+    "/dev/shm/m3-parser-independent-review/m2",
+    "--output-directory",
+    "/dev/shm/m3-parser-independent-review/fresh-build"
+  ]
+}

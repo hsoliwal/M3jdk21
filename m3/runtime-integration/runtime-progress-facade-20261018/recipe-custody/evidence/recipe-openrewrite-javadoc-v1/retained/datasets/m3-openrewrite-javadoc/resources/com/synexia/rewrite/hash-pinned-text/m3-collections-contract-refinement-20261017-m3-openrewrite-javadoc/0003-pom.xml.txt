@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+SPDX-License-Identifier: Apache-2.0
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.sourcebuilt.openrewrite</groupId>
+  <artifactId>rewrite-java-21</artifactId>
+  <version>8.17.1-m3-javadoc-1</version>
+  <name>OpenRewrite Java21 parser :: Synexia source-built Javadoc repair</name>
+  <description>Original OpenRewrite 8.17.1 parser with qualified spec-tag and local-fragment Javadoc atoms.</description>
+  <url>https://github.com/openrewrite/rewrite</url>
+  <licenses><license><name>Apache License, Version 2.0</name><url>https://www.apache.org/licenses/LICENSE-2.0</url></license></licenses>
+  <properties>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.outputTimestamp>2026-10-18T00:00:00Z</project.build.outputTimestamp>
+  </properties>
+  <dependencies>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>8.17.1</version></dependency>
+    <dependency><groupId>org.projectlombok</groupId><artifactId>lombok</artifactId><version>1.18.30</version><scope>provided</scope></dependency>
+    <dependency><groupId>com.google.code.findbugs</groupId><artifactId>jsr305</artifactId><version>3.0.2</version><scope>provided</scope></dependency>
+    <dependency><groupId>org.ow2.asm</groupId><artifactId>asm</artifactId><version>9.6</version></dependency>
+    <dependency><groupId>io.micrometer</groupId><artifactId>micrometer-core</artifactId><version>1.9.17</version><scope>runtime</scope></dependency>
+    <dependency><groupId>io.github.classgraph</groupId><artifactId>classgraph</artifactId><version>4.8.165</version><scope>runtime</scope></dependency>
+    <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId><version>24.1.0</version><scope>runtime</scope></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-simple</artifactId><version>2.0.13</version><scope>test</scope></dependency>
+  </dependencies>
+  <build>
+    <sourceDirectory>${project.build.directory}/source/src/main/java</sourceDirectory>
+    <resources>
+      <resource><directory>${project.basedir}</directory><includes><include>LICENSE.txt</include></includes><targetPath>META-INF</targetPath></resource>
+    </resources>
+    <plugins>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-antrun-plugin</artifactId><version>3.1.0</version>
+      <executions><execution><id>stage-original-parser-source-and-config</id><phase>generate-sources</phase><goals><goal>run</goal></goals>
+        <configuration><target>
+          <copy todir="${project.build.directory}/source/src/main/java"><fileset dir="${project.basedir}/src/main/java"/></copy>
+          <copy file="${project.basedir}/lombok.config.txt" tofile="${project.build.directory}/source/lombok.config"/>
+        </target></configuration>
+      </execution></executions>
+    </plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+      <configuration><compilerArgs>
+        <arg>-Xlint:all</arg>
+        <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg>
+        <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
+        <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>
+        <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED</arg>
+        <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
+        <arg>--add-exports</arg><arg>jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
+      </compilerArgs></configuration>
+      <executions><execution><id>default-testCompile</id><configuration>
+        <compilerArgs combine.children="append"><arg>-Werror</arg></compilerArgs>
+      </configuration></execution></executions>
+    </plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
+      <configuration><argLine>-Xmx768m</argLine><failIfNoTests>true</failIfNoTests></configuration>
+    </plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.4.1</version></plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-install-plugin</artifactId><version>3.1.2</version></plugin>
+  </plugins></build>
+</project>

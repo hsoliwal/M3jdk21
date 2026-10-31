@@ -1,0 +1,13 @@
+# merge_pr	path	check	expected_sha_or_regex
+1772	.github/workflows/m3-file-move-candidates-20261021.yml	PRESENT	-
+1790	.github/workflows/m3-observable-indexed-views-20261021.yml	PRESENT	-
+1790	m3/collections/algorithm-catalogue/observable-indexed-views-20261021.tsv	PRESENT	-
+1790	m3/collections/qualification/observable-indexed-views-20261021/README.md	PRESENT	-
+1790	m3/collections/src/main/java/com/m3/collections/M3ObservableList.java	REGEX	public\s+M3IndexedLiveView<E>\s+filteredSortedView\s*\(
+1790	m3/collections/src/test/java/com/m3/collections/M3ObservableIndexedViewsContract.java	REGEX	M3_OBSERVABLE_INDEXED_VIEWS_PASS
+0	m3/docs/synexia-m3jdk21-eclipse-recipe-handoff-20261022.tsv	PRESENT	-
+1772	m3/file/algorithm-catalogue/move-candidates-20261021.md	PRESENT	-
+1772	m3/file/src/main/java/com/m3/file/M3FileMoveCandidates.java	REGEX	public\s+final\s+class\s+M3FileMoveCandidates\b
+0	m3/file/src/main/java/com/m3/file/M3ResourceLocks.java	REGEX	public\s+M3ResourceLocks\s*\(\s*\)
+1772	m3/file/src/test/java/com/m3/file/M3FileMoveCandidatesContract.java	REGEX	M3_FILE_MOVES_PASS
+0	m3/file/verify.py	REGEX	M3FileMoveCandidatesContract

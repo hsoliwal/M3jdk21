@@ -1,0 +1,16 @@
+gate	status	evidence_or_required_command
+SIX_JAVA_SOURCE_READBACK	PASS	All six original source/test blobs match canonical Synexia output templates
+ORIGINAL_PYTHON_VERIFIER_READBACK	PASS	verify.py equals canonical hash-pinned text postimage
+ORIGINAL_PREIMAGE_DRIFT	PASS	Four changed existing originals matched exact source templates before mutation
+TEST_SOURCE_CENSUS	PASS_STATIC	13 actual m3/file test sources, 13 exact verifier names, no missing/extra
+CAPTURE_SHARED_SCRATCH	PRESERVED_SOURCE	Existing M3File captureBytes and borrowed scratch overload unchanged
+M3FS_NATIVE_SQLITE	PRESERVED_SOURCE	Original M3FS native WAL/JNI and m3db provider unchanged
+JAVA21_RANGE_DONOR	HISTORICAL_SCOPED_NOT_RERUN	Original #1815 equivalent 1200 trials, 22168 assertions
+DIRECTORY_SORT_DONOR	HISTORICAL_SCOPED_NOT_RERUN	Original #1793 equivalent 520 trials, 3134 assertions and standalone C11 row wire
+CANONICAL_MAVEN_OPENREWRITE	NOT_RUN	Maven SDK Recipe.run, fixed point and source drift refusal required
+ORIGINAL_M3FILE_VERIFIER	NOT_RUN	python3 m3/file/verify.py, host + linked image
+ORIGINAL_M3FS_JUNIT	NOT_RUN	mvn -B -ntp -f m3/fs/pom.xml verify with native SQLite JNI
+SOURCE_BUILT_M3JDK21	NOT_RUN	HotSpot/JMOD/libjava and jtreg/JCK/GC
+JAVA_JNI_ABI_PARITY	NOT_RUN	Original native symbol, pin lifetimes and installed JDK image
+PROVIDER_PLATFORM	NOT_RUN	Linux/Windows/macOS/Android/ZIP/JRT/network sources
+RESOURCE_PERFORMANCE	NOT_MEASURED	CPU, I/O bytes, allocation, retained heap and native memory

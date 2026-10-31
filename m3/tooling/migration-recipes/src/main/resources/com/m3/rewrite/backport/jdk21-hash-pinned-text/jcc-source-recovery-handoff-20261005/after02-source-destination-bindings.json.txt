@@ -1,0 +1,2625 @@
+{
+  "schema": "m3.jcc-receiving-review/1",
+  "authority": "m3/docs/name-mapping.json",
+  "purpose": "Referenced review/evidence receipt, not a second mapping authority or an export-admission receipt.",
+  "source_commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+  "source_root_tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
+  "destination_commit": "0994ecd65e86600f417f4d8702838d8c2663af61",
+  "destination_root_tree": "7e8f39ac999174f8d5b6028d638a68d8c317b070",
+  "canonical_map_preimage_sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3",
+  "source_acquisition_receipt_sha256": "7b5e197da5e2645efb87345e2abf92dcd8071993ff308c8fa0bca0511d00c52e",
+  "source_acquisition_scope": "Actual recovery publication bindings plus separately retained complete be92 current-input context. Source execution, artifact publication and source-qualified export remain separate.",
+  "source_root_receipt_sha256": "55610f52b7b1e01ee15999969cc385616ff2e43f734e589ff61c750c5ab3c845",
+  "source_root_accounting": {
+    "root_entries": 343,
+    "root_trees": 255,
+    "root_blobs": 87,
+    "root_gitlinks": 1,
+    "root_pom_module_declarations": 201,
+    "distinct_module_paths": 201,
+    "direct_root_modules": 190,
+    "nested_module_paths": 11,
+    "root_trees_with_nested_modules": 8,
+    "nested_containers_also_direct_modules": 4,
+    "distinct_root_trees_referenced": 194,
+    "root_pom_sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab",
+    "root_pom_git_blob": "98889a040aad5cc3c82f782bb4b173d118207988",
+    "whole_repository_file_count": null,
+    "semantic_dependency_closure_complete": false,
+    "coverage_receipt_path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+    "coverage_receipt_sha256": "1c4eedbf3f155bac469693da312c577d26999e7776ca1f85870f6cce125f1e35"
+  },
+  "new_capability_records": [
+    "synexia.jcc-recipe-laboratory",
+    "synexia.jcc-java-jni-regression"
+  ],
+  "source_artifacts": [
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+      "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
+      "signatures": [],
+      "sha256": "f6d5ce57ca487bb56d412c0da39bd5ac8956c64aafb056231e67e331d22caeae",
+      "git_blob_sha1": "0623297a95e17528b62129b207661b4962752393",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+      "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
+      "signatures": [],
+      "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
+      "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "symbol": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+      "signatures": [],
+      "sha256": "adee46f08cd93edb1f97c30be904d0b686cc6426f56c1fae0ee6d670693526df",
+      "git_blob_sha1": "dad21d3e762dabdfeb71f2d8815c25b401079994",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+      "symbol": "com.synexia.rewrite.M3OpenRewriteRuntimeRecipeInventoryRecipe",
+      "signatures": [],
+      "sha256": "f498b969bb9e5a79f66bb87d8232d0045144145d0167751dc342ba85b0ff4d15",
+      "git_blob_sha1": "3351a83e4429c4ac172f5af09998777c6b69c645",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+      "symbol": "com.synexia.rewrite.M3OpenRewriteTranspiler",
+      "signatures": [],
+      "sha256": "e86f43f32599de822191a233f1e3802e4f8120cd415ee2c90bcf67a56d4e6951",
+      "git_blob_sha1": "d1c3303969a0eae68d571aa12157ae23010e36af",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+      "symbol": "com.synexia.rewrite.M3RecipeCrateSerialAtomReview",
+      "signatures": [],
+      "sha256": "ead5c49ad51cf5325c5725595bf058ca73daceef092621d671aef7108f9409cc",
+      "git_blob_sha1": "7d5535a3b8deb1ad0c9f604f1f94b62194ac3e11",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+      "symbol": "com.synexia.rewrite.M3SemanticCodeInventoryRecipe",
+      "signatures": [],
+      "sha256": "3a475b5a1ea098b0ce07368e4ef1080f8c888d7166ceefe85716a12d735b21cc",
+      "git_blob_sha1": "d02f33fe0be66066efb5148d0694763cfaea2392",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+      "symbol": "com.synexia.rewrite.M3TranspilePass",
+      "signatures": [],
+      "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
+      "git_blob_sha1": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+      "symbol": "com.synexia.rewrite.M3TranspilePassResult",
+      "signatures": [],
+      "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f",
+      "git_blob_sha1": "977b8f683dd2ab76ca2256533989f12a2814f044",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+      "symbol": "com.synexia.rewrite.M3TranspilePlan",
+      "signatures": [],
+      "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a",
+      "git_blob_sha1": "290b11dc5be769119cdb202262f0336ee3612313",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+      "symbol": "com.synexia.rewrite.M3TranspileRun",
+      "signatures": [],
+      "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485",
+      "git_blob_sha1": "14284e82051ac5936dd82d93881228a914906c84",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryClassLoader.java",
+      "symbol": "com.synexia.rewrite.M3MasteryClassLoader",
+      "signatures": [],
+      "sha256": "e2fee64f28c2fd71db1d0f2fba8a9bf3bd4c3d210119d4e12823b7d01a98ec0a",
+      "git_blob_sha1": "b4081310a343cbd067c7deb5e907031598e82536",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+      "symbol": "com.synexia.rewrite.M3MasteryContractSurface",
+      "signatures": [],
+      "sha256": "d825d59df9ca7839ad06af2fd5c6ae386ce373f24eecc9184d23d1fe3261d8b1",
+      "git_blob_sha1": "0d3aed858efcc450cf24822567f4ee605e84a18d",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+      "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
+      "signatures": [],
+      "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
+      "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+      "symbol": "com.synexia.rewrite.M3CodeSignalChain",
+      "signatures": [],
+      "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
+      "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "m3-fast-search",
+      "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "symbol": "com.synexia.m3.search.CompetitiveProblemReview",
+      "signatures": [],
+      "sha256": "83dad41fa4ce50b70f1e2e6800241b69b5136807902fd2fc6a6d024024894ac4",
+      "git_blob_sha1": "baa84c13b7fd330eab6b1832dab1b4b523bfd8ce",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-algo",
+      "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+      "symbol": "com.synexia.algorithms.corpus.ChallengeDonorPassLedger",
+      "signatures": [],
+      "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
+      "git_blob_sha1": "074dd60249893e4c606e68823fdebf191f98f269",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-algo",
+      "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+      "symbol": "com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndex",
+      "signatures": [],
+      "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
+      "git_blob_sha1": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "module": "synexia-donor-inventory",
+      "path": "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+      "symbol": "com.synexia.donor.DonorMechanicalShapeCatalog",
+      "signatures": [],
+      "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326",
+      "git_blob_sha1": "108514ff8960adc20c9fd88d4fd01ba55cc2f3c8",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+    }
+  ],
+  "existing_destination_reuse_artifacts": [
+    {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+      "module": "m3/tooling/migration-recipes",
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
+      "symbol": "com.m3.rewrite.M3Java21ConvergenceRecipe",
+      "signatures": [
+        "java.util.List<org.openrewrite.Recipe> getRecipeList()"
+      ],
+      "sha256": "15e44e92ba509b405ed2e12ddc4c6bf2a427f59cdca95d7e8e960357732266e9",
+      "git_blob_sha1": "2f59c7f0756e5618343a88161040201ccb1af39d",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/master"
+    },
+    {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+      "module": "m3/tooling/migration-recipes",
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
+      "symbol": "com.m3.rewrite.atom.M3PureIntConvergenceRecipe",
+      "signatures": [
+        "java.util.List<org.openrewrite.Recipe> getRecipeList()"
+      ],
+      "sha256": "ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534",
+      "git_blob_sha1": "a1a745a4ea8617937d8ecbb61eb17973dac0948f",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/master"
+    },
+    {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+      "module": "m3/tooling/migration-recipes",
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+      "symbol": "com.m3.rewrite.atom.M3PureIntAtomEligibility",
+      "signatures": [
+        "package-private static boolean eligible(J.MethodDeclaration)",
+        "package-private static boolean atomized(J.MethodDeclaration)"
+      ],
+      "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
+      "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/master"
+    },
+    {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+      "module": "m3/tooling/migration-recipes",
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
+      "symbol": "com.m3.rewrite.atom.MemJava",
+      "signatures": [
+        "package-private static java.lang.ClassLoader compile(java.util.Map<String,String>)"
+      ],
+      "sha256": "c2a204144a4ff7fe2f4abfa151a744e7114961b83b7f006e019e595f4569e238",
+      "git_blob_sha1": "341b55a500964906d15c88ccef9f3e05f2a1c025",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/master"
+    },
+    {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+      "module": "m3/tooling/migration-recipes",
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java",
+      "symbol": "com.m3.rewrite.atom.M3IntRecipeProjectTest",
+      "signatures": [
+        "package-private JUnit proof owner; no product API"
+      ],
+      "sha256": "004de5f30e2a3c54d439b36493e8733dc73fdae8a288ba18238423ded5afcbed",
+      "git_blob_sha1": "d3cd2a28b3635340c9035b6287650bdf44f975ac",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/master"
+    }
+  ],
+  "acceptance_scope": "Source-qualified JCC capability export/materialization and destination product acceptance; the independently authored tooling fixture and ledger replay have separate finite local proofs.",
+  "acceptance": {
+    "source_export_admitted": false,
+    "destination_materialized": false,
+    "destination_gates_passed": false,
+    "remote_read_back_delivered": false
+  },
+  "source_verification_gate_order": [
+    "DIFF",
+    "POLICY_LINT",
+    "COMPILE",
+    "STATIC_ANALYSIS",
+    "UNIT_TEST",
+    "INTEGRATION_TEST",
+    "API_CONTRACT",
+    "FULL_BUILD",
+    "RUNTIME",
+    "REPLAY",
+    "SOURCE_HASH_PRESERVATION"
+  ],
+  "source_gate_context": "Existing RepositorySupersetBundle/RepositorySupersetVerificationProgram source owner order; no gate execution is asserted by this receipt.",
+  "destination_gate_records_preserved": [
+    "source-inventory",
+    "ownership-naming",
+    "scoped-prefix-and-tool-tests",
+    "source-owner-differential",
+    "maven-recipe-lifecycle",
+    "route-a-canonical-storage",
+    "route-b-lowering",
+    "route-c-complete-image",
+    "runtime-flag-off",
+    "runtime-enabled",
+    "jit-intrinsics",
+    "gc-intern-jni-jvmti",
+    "cds-serialization-serviceability",
+    "string-unicode-regex",
+    "shared-generation-cross-process",
+    "windows-native",
+    "performance-memory",
+    "independent-audit",
+    "future-port-full-closure",
+    "target-baseline-drift"
+  ],
+  "descriptor_reconciliation": {
+    "id": "synexia.counterpart.MIndexJvmDescriptor",
+    "previous_record": {
+      "id": "synexia.counterpart.MIndexJvmDescriptor",
+      "kind": "adapter",
+      "status": "implemented-unverified",
+      "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
+      "sources": [
+        {
+          "repo": "hsoliwal/com.synexia",
+          "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
+          "module": "synexia-mindex",
+          "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexJvmDescriptor.java",
+          "symbol": "com.synexia.mindex.classindex.MIndexJvmDescriptor",
+          "signatures": [
+            "com.synexia.mindex.classindex.MIndexJvmDescriptor"
+          ],
+          "sha256": "0e0ddfc53acaeb28137319fd20ee5005f9d7231949ebd3106193c287f13be9b8",
+          "git_blob_sha1": "d0eb96ae49c0456c8d31f1e714882b525b4c9a97",
+          "fingerprint": null,
+          "revision_role": "pinned",
+          "tracking_ref": "refs/heads/develop"
+        }
+      ],
+      "targets": [
+        {
+          "repo": "hsoliwal/M3jdk21",
+          "commit": null,
+          "module": "java.base",
+          "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+          "symbol": "jdk.internal.mindex.M3Descriptor",
+          "signatures": [
+            "jdk.internal.mindex.M3Descriptor"
+          ],
+          "sha256": "df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9",
+          "git_blob_sha1": null,
+          "fingerprint": null,
+          "revision_role": "candidate",
+          "tracking_ref": null
+        }
+      ],
+      "owner": "jdk.internal.mindex.M3Descriptor",
+      "identity": {
+        "namespace": "Preserve defining owner, exact raw spelling and loader identity; no global class identity.",
+        "generation": "Implementation/context revision is distinct from release label, class-file version and epoch."
+      },
+      "contract": {
+        "differences": [
+          "JDK String references and M3VI.Progress boundary; no application artifact dependency.",
+          "Snapshot-local primitive symbol IDs; fingerprint includes exact UTF-16 spellings.",
+          "Declared releases are provenance, not verified byte identity or compilation admission."
+        ],
+        "compatibility_obligations": [
+          "Public JDK types and behavior remain unchanged.",
+          "No blanket prefix rename or class-loading-by-name."
+        ],
+        "public_surface": [
+          "Internal non-exported API only; no java.base exports added."
+        ]
+      },
+      "format": {
+        "schema": null,
+        "abi": null,
+        "bootstrap": "java.base internal only; no automatic Class/ClassLoader hook."
+      },
+      "dependencies": [
+        {
+          "id": "java.base",
+          "resolution": "resolved",
+          "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
+        },
+        {
+          "id": "synexia.counterpart.MIndexVersionTable",
+          "resolution": "resolved",
+          "reason": "Retained exact M3VI Progress boundary."
+        },
+        {
+          "id": "synexia.counterpart.MIndexLibraryRelease",
+          "resolution": "resolved",
+          "reason": "Retained exact M3Release value."
+        }
+      ],
+      "materialization": {
+        "admission": "Budgeted caller-owned reflection snapshot; lifecycle owner must invalidate before definition/access changes.",
+        "joins": "References existing immutable JDK Strings; no payload copy/interner or retained collection Entry per row.",
+        "outputs": "On-demand owner/row class and member views; weak runtime resolution can become unavailable.",
+        "cached_facts": "Primitive class/member/CSR lanes; caller-scoped declarations and precompute context; no persistent or cross-VM cache."
+      },
+      "recipe": {
+        "id": "m3-cb",
+        "version": "1",
+        "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+        "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+        "preconditions": [
+          "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
+        ],
+        "rollback": "Retained sealed installer restores exact matching preimages; integration packet rolled back before source packet."
+      },
+      "tests": [
+        {
+          "id": "cb-module-runtime",
+          "receipt": "m3/tooling/cb/evidence/receipt.json"
+        }
+      ],
+      "provenance": {
+        "license": "Apache-2.0 for copied Synexia code; original per-file donor obligations retained.",
+        "publication": "User explicitly requested inlining relevant Synexia code under Apache-2.0 into M3jdk21.",
+        "copied_code": true
+      },
+      "sync": {
+        "source_revision": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
+        "target_revision": "3ec445df10a3e8fc74aa983181f0700ac7bfbcad",
+        "direction": "source-to-target",
+        "target_adaptations": [
+          "Concise JDK counterpart names",
+          "Weak defining-loader identity",
+          "Counterpart-row effective declared release",
+          "Exact VM-local precompute context",
+          "No application dependency"
+        ],
+        "pending": [
+          "Automatic Class/ClassLoader consumer and lifecycle hooks, module/agent/CDS/JNI/JIT admission",
+          "Full family and non-prefix dependency inventory",
+          "AST/compiler consumers and performance measurements"
+        ],
+        "conflicts": []
+      },
+      "lineage": {
+        "previous_sources": [],
+        "previous_targets": [],
+        "supersedes": []
+      },
+      "source_state": "experimental",
+      "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+    },
+    "observed_historical_target": {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "f74592e363466a59b391fbbe47500c7985c9a691",
+      "module": "java.base",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "symbol": "jdk.internal.mindex.M3Descriptor",
+      "signatures": [
+        "jdk.internal.mindex.M3Descriptor"
+      ],
+      "sha256": "df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9",
+      "git_blob_sha1": "f4b4144f104eb4816cb80a44c136fa90b8114dc4",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/master"
+    },
+    "observed_current_target": {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+      "module": "java.base",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "symbol": "jdk.internal.mindex.M3Descriptor",
+      "signatures": [
+        "public static java.lang.String type(java.lang.Class<?>)",
+        "public static java.lang.String field(java.lang.reflect.Field)",
+        "public static java.lang.String method(java.lang.reflect.Method)",
+        "public static java.lang.String constructor(java.lang.reflect.Constructor<?>)",
+        "public static java.lang.String recordComponent(java.lang.reflect.RecordComponent)"
+      ],
+      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+      "git_blob_sha1": "92f4d7da32a3b8265675a413311fd304c6dc2dd2",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/master"
+    },
+    "change_commit": "39702564163c017f9dc0350a305b032b06274857",
+    "previous_sync_target_path_observation": {
+      "commit": "3ec445df10a3e8fc74aa983181f0700ac7bfbcad",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "http_status": 404
+    },
+    "source_before_commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
+    "source_current_commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+    "source_sha256": "0e0ddfc53acaeb28137319fd20ee5005f9d7231949ebd3106193c287f13be9b8",
+    "source_git_blob_sha1": "d0eb96ae49c0456c8d31f1e714882b525b4c9a97",
+    "source_bytes_unchanged": true,
+    "target_contract_change": "Class.descriptorString corrects hidden-class spelling; source retains the older getName substitution algorithm. Public method signatures are unchanged by the retained fix.",
+    "historical_cb_receipt": {
+      "path": "m3/tooling/cb/evidence/receipt.json",
+      "sha256": "bc6ef0854d4e6e191259ea35187d7f47c9d3c8b2802eb10fefbdd9371da8c044",
+      "qualification": "Historical source7b5d/target-base3ec scoped packet; not a current descriptor or whole-image rerun."
+    },
+    "historical_descriptor_receipts": [
+      "m3/tooling/migration-recipes/tasks/recipe-closure/FINAL_REPORT.md",
+      "m3/tooling/migration-recipes/tasks/recipe-closure/JUNIT.tsv",
+      "m3/tooling/migration-recipes/tasks/recipe-closure/SOURCE_SEALS.tsv"
+    ],
+    "qualification": "Target/recipe identity and lineage reconciliation only. implemented-unverified retained; no Java mutation or new behavior/image pass."
+  },
+  "independent_receiving_fixture": {
+    "classification": "Original destination tooling test with exact existing artifact read-back at df06cdee; no source implementation or source PASS receipt imported.",
+    "materialized_locally": true,
+    "source_export_or_jdk_acceptance": false,
+    "candidate_artifact": {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "df06cdee5a8526f573b3ad89622824d0b49e2f25",
+      "module": "m3/tooling/migration-recipes",
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java",
+      "symbol": "com.m3.rewrite.atom.JccReceivingFixtureTest",
+      "signatures": [
+        "void eachScheduleCompilesAndMatchesFrozenOraclesAtEveryIntermediate() throws java.lang.Exception",
+        "void actualCanonicalCompositeAgreesWithItsDeclaredChildrenAndFreshReplay() throws java.lang.Exception",
+        "void opaqueStringObserversAndIndependentClassStateRemainIntact() throws java.lang.Exception",
+        "void compilerAndBothObservationOraclesRejectCuratedMutants() throws java.lang.Exception"
+      ],
+      "sha256": "b034673ea218515cc12ab0b4173eabf06732f29e8a456be45b5ba0d00489ab39",
+      "git_blob_sha1": "3332012bbd7f3842279f40fdf0f1eaf123392957",
+      "fingerprint": null,
+      "revision_role": "pinned"
+    },
+    "verification_pom": {
+      "path": "m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml",
+      "sha256": "fda1ac1823bf912f10d975659dc1bfe7f89573d1581af3a7bfa7e45d99a70ba2",
+      "bytes": 3152
+    },
+    "destination_owner_pin": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+    "retained_owner_inputs": [
+      {
+        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+        "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
+        "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
+        "bytes": 7151
+      },
+      {
+        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+        "sha256": "8384244946df1f840406aaf71438b4f0dba311dfd7eba7b421a064d63c31bf3b",
+        "git_blob_sha1": "94ff41d9a298b671749a69bd8bc7b32005ebf877",
+        "bytes": 3058
+      },
+      {
+        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+        "sha256": "2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69",
+        "git_blob_sha1": "6b3b8a126cca230526c66adba36f53f5f9f49f5b",
+        "bytes": 2700
+      },
+      {
+        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java",
+        "sha256": "496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c",
+        "git_blob_sha1": "4954825bdb4b5193c59f24ec66f95d2bd3fc8658",
+        "bytes": 3073
+      },
+      {
+        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
+        "sha256": "ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534",
+        "git_blob_sha1": "a1a745a4ea8617937d8ecbb61eb17973dac0948f",
+        "bytes": 1341
+      },
+      {
+        "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
+        "sha256": "c2a204144a4ff7fe2f4abfa151a744e7114961b83b7f006e019e595f4569e238",
+        "git_blob_sha1": "341b55a500964906d15c88ccef9f3e05f2a1c025",
+        "bytes": 4517
+      }
+    ],
+    "contracts": [
+      "Four private scalar-int leaves; 113 deterministic input pairs.",
+      "A, P, AP, PA with every intermediate and fresh quiet sweep compiled by retained MemJava.",
+      "AP and PA final sources agree; A-only and P-only outcomes remain distinct.",
+      "Explicit ascending and descending project orders both execute and preserve the final result.",
+      "Frozen and independent arithmetic oracles; exact opaque/null/string-null/Unicode observations.",
+      "Source/member preservation, isolated loader state and malformed/numeric/string negative controls."
+    ],
+    "corpus_contract": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/CORPUS_CONTRACT.md",
+      "sha256": "40cec6db1b58dd19a0eaaaaf51396202db496188b755233883ec871f909d1a84",
+      "bytes": 6920
+    },
+    "input_receipt": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/STAGING_RECEIPT.json",
+      "sha256": "19ca333464debc4e70547660374b554308fae7ade7c0e7639e6397f59b801f86",
+      "bytes": 6235
+    },
+    "verification_receipt": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/VERIFICATION_RECEIPT.json",
+      "sha256": "18fcb5f370c4df28e8f70fdfaf64afb09bbc128f1ae6c8562762f862e67fcb77",
+      "bytes": 1974
+    },
+    "maven_log": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/maven-verify.log",
+      "sha256": "673e9e8687b9bccbea5ed768a9ed97954fc208edd2a781338d80d574ad517cfc",
+      "bytes": 3020
+    },
+    "surefire_xml": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/JccReceivingFixtureTest.xml",
+      "sha256": "98164bd35fccdb340016502bb6e3caa0fa9a3a6f9760d00054c1c817b7bff279",
+      "bytes": 18766
+    },
+    "result": {
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "5.937"
+    },
+    "whole_module_gate": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/owning-module-frontier/REVIEW.json",
+      "sha256": "0b02d235e80404a23fc2567788449fe8882d0d5ea14480b12aa2356ec21fcd07",
+      "bytes": 4807
+    },
+    "qualification": "The original finite four-test proof and all its inputs/receipts remain unchanged. Its artifact is published and read back; no behavior rerun was needed for this metadata-only repin. Capability tests[] stay empty and source/full-module/JDK acceptance remains blocked."
+  },
+  "prior_handoff": {
+    "commit": "0994ecd65e86600f417f4d8702838d8c2663af61",
+    "root_tree": "7e8f39ac999174f8d5b6028d638a68d8c317b070",
+    "pull_request": "https://github.com/hsoliwal/M3jdk21/pull/147",
+    "old_source_commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+    "old_source_root": "6f9b6a48f8cefa7a643f222c7aa1f621497725e7",
+    "preserved_crate": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005",
+    "old_binding_resource": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after02-source-destination-bindings.json.txt",
+    "old_binding_sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef",
+    "scope": "The complete preserved E3 binding retains original0b/d1 proof scope and its earlier E2 handoff. This reference grants no qualification transfer."
+  },
+  "source_publication": {
+    "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+    "root_tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
+    "parent": "be92c62ece9023b5c33676716a1076d00e26120a",
+    "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005",
+    "pull_request": {
+      "base": "develop",
+      "draft": true,
+      "number": 9362,
+      "url": "https://github.com/hsoliwal/com.synexia/pull/9362"
+    },
+    "source_gate_or_export_authority_granted": false,
+    "publication_status": "PUBLISHED_CUSTODY_VERIFIED",
+    "custody": {
+      "status": "PUBLISHED_CUSTODY_VERIFIED",
+      "protocol": "EXACT_CREATE_AND_TREE_IDENTITY_FOR_TWO_INVALID_UTF8_FIXTURES",
+      "required_blob_bodies_compared_byte_for_byte": 6,
+      "required_blob_identities_verified_without_body_readback": 2,
+      "production_blob_bodies_compared_byte_for_byte": 4,
+      "nul_fixture_bodies_compared_byte_for_byte": 2,
+      "observed_direct_body_readbacks": 21,
+      "malformed_utf8_body_readback": false,
+      "all_required_blob_bodies_read_back": false,
+      "blob_body_readbacks": [
+        {
+          "bytes": 42415,
+          "git_blob": "0623297a95e17528b62129b207661b4962752393",
+          "sha256": "f6d5ce57ca487bb56d412c0da39bd5ac8956c64aafb056231e67e331d22caeae"
+        },
+        {
+          "bytes": 10021,
+          "git_blob": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
+          "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb"
+        },
+        {
+          "bytes": 23211,
+          "git_blob": "dad21d3e762dabdfeb71f2d8815c25b401079994",
+          "sha256": "adee46f08cd93edb1f97c30be904d0b686cc6426f56c1fae0ee6d670693526df"
+        },
+        {
+          "bytes": 6188,
+          "git_blob": "3351a83e4429c4ac172f5af09998777c6b69c645",
+          "sha256": "f498b969bb9e5a79f66bb87d8232d0045144145d0167751dc342ba85b0ff4d15"
+        },
+        {
+          "bytes": 27278,
+          "git_blob": "d1c3303969a0eae68d571aa12157ae23010e36af",
+          "sha256": "e86f43f32599de822191a233f1e3802e4f8120cd415ee2c90bcf67a56d4e6951"
+        },
+        {
+          "bytes": 23936,
+          "git_blob": "7d5535a3b8deb1ad0c9f604f1f94b62194ac3e11",
+          "sha256": "ead5c49ad51cf5325c5725595bf058ca73daceef092621d671aef7108f9409cc"
+        },
+        {
+          "bytes": 36683,
+          "git_blob": "d02f33fe0be66066efb5148d0694763cfaea2392",
+          "sha256": "3a475b5a1ea098b0ce07368e4ef1080f8c888d7166ceefe85716a12d735b21cc"
+        },
+        {
+          "bytes": 528,
+          "git_blob": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
+          "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6"
+        },
+        {
+          "bytes": 1441,
+          "git_blob": "977b8f683dd2ab76ca2256533989f12a2814f044",
+          "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f"
+        },
+        {
+          "bytes": 3759,
+          "git_blob": "290b11dc5be769119cdb202262f0336ee3612313",
+          "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a"
+        },
+        {
+          "bytes": 3256,
+          "git_blob": "14284e82051ac5936dd82d93881228a914906c84",
+          "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485"
+        },
+        {
+          "bytes": 2538,
+          "git_blob": "b4081310a343cbd067c7deb5e907031598e82536",
+          "sha256": "e2fee64f28c2fd71db1d0f2fba8a9bf3bd4c3d210119d4e12823b7d01a98ec0a"
+        },
+        {
+          "bytes": 8493,
+          "git_blob": "0d3aed858efcc450cf24822567f4ee605e84a18d",
+          "sha256": "d825d59df9ca7839ad06af2fd5c6ae386ce373f24eecc9184d23d1fe3261d8b1"
+        },
+        {
+          "bytes": 72231,
+          "git_blob": "09df87a872817787fc8607bf11805cfa26c53aed",
+          "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98"
+        },
+        {
+          "bytes": 30230,
+          "git_blob": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
+          "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa"
+        },
+        {
+          "bytes": 48120,
+          "git_blob": "baa84c13b7fd330eab6b1832dab1b4b523bfd8ce",
+          "sha256": "83dad41fa4ce50b70f1e2e6800241b69b5136807902fd2fc6a6d024024894ac4"
+        },
+        {
+          "bytes": 33076,
+          "git_blob": "074dd60249893e4c606e68823fdebf191f98f269",
+          "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346"
+        },
+        {
+          "bytes": 17440,
+          "git_blob": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
+          "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa"
+        },
+        {
+          "bytes": 20208,
+          "git_blob": "108514ff8960adc20c9fd88d4fd01ba55cc2f3c8",
+          "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326"
+        },
+        {
+          "bytes": 126,
+          "git_blob": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d",
+          "sha256": "88b78c08bf896f77b97603f99bad089c19330ca2816edb1c240a84799cb8bfa0"
+        },
+        {
+          "bytes": 110,
+          "git_blob": "fb1c29bba17633d2de5d53d924ec210965374c37",
+          "sha256": "ba285f4d77b3be32b02839f15a09246410cba23120d8f36a244992fcf03510a6"
+        }
+      ],
+      "raw_fixture_custody": {
+        "assumption": "Authentic GitHub object identifiers and ordinary Git content addressing bind the exact uploaded bytes; the two malformed UTF-8 remote byte arrays and their SHA-256 values were not recovered.",
+        "blob_identity_custody": [
+          {
+            "bytes": 4,
+            "creation_response_git_sha": "59b4ec83f687499a54f15695b9b246599f9579d7",
+            "failed_final_read": {
+              "git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
+              "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+              "raw_body_readback": false,
+              "read_attempt": "FAILED_UTF8_REENCODING",
+              "remote_sha256_observed": false,
+              "returned_encoded_body_bytes": 6,
+              "returned_encoded_body_sha256": "ab8fcdea4db1c99df632d5e63c8ab9a490708cb86e924b088e16394daf96a7dd"
+            },
+            "failed_probe_read": {
+              "git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
+              "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+              "raw_body_readback": false,
+              "read_attempt": "FAILED_UTF8_REENCODING",
+              "remote_sha256_observed": false,
+              "returned_encoded_body_bytes": 6,
+              "returned_encoded_body_sha256": "ab8fcdea4db1c99df632d5e63c8ab9a490708cb86e924b088e16394daf96a7dd"
+            },
+            "final_tree_size": 4,
+            "git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
+            "method": "BASE64_CREATE_AND_REMOTE_GIT_TREE_IDENTITY",
+            "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+            "raw_body_readback": false,
+            "remote_sha256_observed": false,
+            "sha256_local_uploaded_bytes": "823a8864668594f33fd21b51f42c08643d90be2f0d903653175047f5d0298e6c",
+            "verification_tree_size": 4
+          },
+          {
+            "bytes": 22,
+            "creation_response_git_sha": "24cdc62e634934527d551324c2449bcf951b5589",
+            "failed_final_read": {
+              "git_blob": "24cdc62e634934527d551324c2449bcf951b5589",
+              "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+              "raw_body_readback": false,
+              "read_attempt": "FAILED_UTF8_REENCODING",
+              "remote_sha256_observed": false,
+              "returned_encoded_body_bytes": 24,
+              "returned_encoded_body_sha256": "827ab3d1098463b89d95de61ba5b35caf7c837e6b69f7f3a3a28607d4c8a783f"
+            },
+            "failed_probe_read": {
+              "git_blob": "24cdc62e634934527d551324c2449bcf951b5589",
+              "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+              "raw_body_readback": false,
+              "read_attempt": "FAILED_UTF8_REENCODING",
+              "remote_sha256_observed": false,
+              "returned_encoded_body_bytes": 24,
+              "returned_encoded_body_sha256": "827ab3d1098463b89d95de61ba5b35caf7c837e6b69f7f3a3a28607d4c8a783f"
+            },
+            "final_tree_size": 22,
+            "git_blob": "24cdc62e634934527d551324c2449bcf951b5589",
+            "method": "BASE64_CREATE_AND_REMOTE_GIT_TREE_IDENTITY",
+            "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+            "raw_body_readback": false,
+            "remote_sha256_observed": false,
+            "sha256_local_uploaded_bytes": "7eb80c376a9681170665f5c0d8b86214e9b44aa6f1d08690a83b26aeba536f3c",
+            "verification_tree_size": 22
+          }
+        ],
+        "failed_readback_observation": {
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/RAW_READBACK_FAILURE_OBSERVATION.json",
+          "sha256": "224b3baa99e71c846cc96319c0a829eec3521d75f68731332ac2fa59fa214112"
+        },
+        "final_direct_raw_body_reads": 2,
+        "final_failed_utf8_body_reads": 2,
+        "identity_only_allowlist": [
+          "24cdc62e634934527d551324c2449bcf951b5589",
+          "59b4ec83f687499a54f15695b9b246599f9579d7"
+        ],
+        "probe_direct_body_reads": 2,
+        "probe_failed_utf8_body_reads": 2,
+        "protocol": "EXACT_CREATE_AND_TREE_IDENTITY_FOR_TWO_INVALID_UTF8_FIXTURES",
+        "publication_qualification": "Custody only; no source test or receiving acceptance promotion.",
+        "raw_create_requests_and_responses_verified": 4,
+        "verification_commit": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+        "verification_tree": "bf2b8fe43cda47f0c6363c8d376f61419e647e4d",
+        "verification_trees_verified": 17
+      },
+      "raw_fixture_custody_input": {
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/CUSTODY_INPUT.json",
+        "sha256": "22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df"
+      },
+      "verification_script_sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
+      "reviewed_raw_custody_helper_sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
+      "qualification": "Publication custody only; source execution and receiving acceptance require their separately scoped receipts.",
+      "scope": "Verified source publication custody; six mandatory direct body comparisons, separately recorded additional designated-owner reads, and exactly two explicit invalid-UTF-8 Git-identity obligations. This is not universal remote raw-byte or remote SHA256 readback."
+    },
+    "scope": "Publication Git custody with six mandatory direct body reads and two explicit invalid-UTF8 identity-only fixtures is separate from source execution qualification.",
+    "receipts": {
+      "PUBLICATION_CUSTODY.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/PUBLICATION_CUSTODY.json",
+        "bytes": 1099619,
+        "sha256": "95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8",
+        "git_blob_sha1": "0f084555dbbea3ba4c9302386ced30e1e1503dda"
+      },
+      "SOURCE_FIELDS_AND_PROOFS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/SOURCE_FIELDS_AND_PROOFS.json",
+        "bytes": 419637,
+        "sha256": "7b5e197da5e2645efb87345e2abf92dcd8071993ff308c8fa0bca0511d00c52e",
+        "git_blob_sha1": "97e1e5438249e64577f9b9c17dd391678b65d712"
+      },
+      "ROOT_ACCOUNTING.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/ROOT_ACCOUNTING.json",
+        "bytes": 70709,
+        "sha256": "55610f52b7b1e01ee15999969cc385616ff2e43f734e589ff61c750c5ab3c845",
+        "git_blob_sha1": "ad19c72cb925afa662e93898df2cc8a2839a7a67"
+      },
+      "custody-v3/source-publisher/BASE_TREE_MODEL.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/BASE_TREE_MODEL.json",
+        "bytes": 1372743,
+        "sha256": "877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80",
+        "git_blob_sha1": "6ee3c1bfd76dc5c0abdba031f163a3d38294f5e9"
+      },
+      "custody-v3/source-publisher/RAW_READBACK_FAILURE_OBSERVATION.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/RAW_READBACK_FAILURE_OBSERVATION.json",
+        "bytes": 6519,
+        "sha256": "224b3baa99e71c846cc96319c0a829eec3521d75f68731332ac2fa59fa214112",
+        "git_blob_sha1": "3f6b147b1ec5e1576b20f5a57c694dd305e31823"
+      },
+      "custody-v3/source-publisher/RAW_VERIFICATION_TREE_PLAN.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/RAW_VERIFICATION_TREE_PLAN.json",
+        "bytes": 95189,
+        "sha256": "00fa5b9e4e99621ed6b5aac3c0da4c6506f82e921a3da42fdd4645285653e319",
+        "git_blob_sha1": "27c92ae8d02f1fc6fc3f19a74a5982601d142179"
+      },
+      "custody-v3/source-publisher/audit_base.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/audit_base.py",
+        "bytes": 8839,
+        "sha256": "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b",
+        "git_blob_sha1": "f5ef1f4e6d01276e151fd81b98851e3c4759f25b"
+      },
+      "custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_CUSTODY.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_CUSTODY.json",
+        "bytes": 6403,
+        "sha256": "266c17d435d47c58129349e721eec1eee849ceaa28dd5c302eb6030cc02e978e",
+        "git_blob_sha1": "bf253346d4bbba4776f03d5f40f1907eb9365158"
+      },
+      "custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_EXECUTION.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_EXECUTION.json",
+        "bytes": 563,
+        "sha256": "caf3292d305a0f4e8dcae60d9b2bc9e6690bc25f32830f3be505db07ff04a281",
+        "git_blob_sha1": "b9ad7eaa3e580f8e52bdbda740778870d25a59b4"
+      },
+      "custody-v3/source-publisher/epoch-01/BRANCH_ABSENCE_BEFORE_CREATE.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_ABSENCE_BEFORE_CREATE.json",
+        "bytes": 970,
+        "sha256": "c9c175ba2a06b500d0345f720e94ac52279bb15dd7311a09b27c6c1bf1750e35",
+        "git_blob_sha1": "110050593a4a875dc8f09f2efd03705e7eb84125"
+      },
+      "custody-v3/source-publisher/epoch-01/BRANCH_CREATION.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_CREATION.json",
+        "bytes": 453,
+        "sha256": "ec92b5c20f52f6572332c6b3af3b8d1c7c3395a0493d5aaf0021382d0d47039f",
+        "git_blob_sha1": "b9d004bd130554ee593ab6f8e8fdb79ef6000350"
+      },
+      "custody-v3/source-publisher/epoch-01/BRANCH_GET.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_GET.json",
+        "bytes": 1907,
+        "sha256": "a65c5524109c673f1046d9f1729d7905f1539919f8f0a2fd91631a5feb28b6c8",
+        "git_blob_sha1": "9ee96365cf3dbb3df50aceb241d97d56e5c9b279"
+      },
+      "custody-v3/source-publisher/epoch-01/COMPLETED_TRANSPORT.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/COMPLETED_TRANSPORT.json",
+        "bytes": 23957,
+        "sha256": "396f77ed23bbe356626bfcc90f6e6ac4232202f63e38f61a33251096dd8586e8",
+        "git_blob_sha1": "924551c7ee1d3e4218888180c2e9a9e5b8e6bd1a"
+      },
+      "custody-v3/source-publisher/epoch-01/FILE_READBACKS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FILE_READBACKS.json",
+        "bytes": 1164286,
+        "sha256": "c670df37826a24b0dda62a73ec3795e85c14a99fc44d68cdc470212dbbae4e98",
+        "git_blob_sha1": "ea5f1bce7b2fb42a30e813a9126baa7f0c920407"
+      },
+      "custody-v3/source-publisher/epoch-01/FINAL_COMMIT_CREATION.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_COMMIT_CREATION.json",
+        "bytes": 881,
+        "sha256": "cf5ff5e9b52fd172c334d48c3d961c8d2a14015fc38bb780fda56fcfd55abea1",
+        "git_blob_sha1": "ee6d5b79150192fbddf1c940948ed26e2ac15db1"
+      },
+      "custody-v3/source-publisher/epoch-01/FINAL_COMMIT_GET.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_COMMIT_GET.json",
+        "bytes": 4099,
+        "sha256": "a10dc4a210e14dbf9028b3f3fb4f36ad72eb1e1db50851e7a8b47db9685791c6",
+        "git_blob_sha1": "d8b34e27578902ef40a9d2b945029f446360eea7"
+      },
+      "custody-v3/source-publisher/epoch-01/FINAL_PUBLICATION_EXECUTION.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_PUBLICATION_EXECUTION.json",
+        "bytes": 541,
+        "sha256": "cdeabfd468399b28d8dbba993f1b56bbfb6d63150eff52029dfd7eeae504a307",
+        "git_blob_sha1": "d4b55c38cf8b9f92785e885ba84a8680a284b876"
+      },
+      "custody-v3/source-publisher/epoch-01/FINAL_READBACK.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_READBACK.json",
+        "bytes": 3447648,
+        "sha256": "8391f552328dedb2777a9ca9e793dc2dea867554abe646dbbb338388ce961c2a",
+        "git_blob_sha1": "13fcb514b91562724004ba752cc019b6498efa07"
+      },
+      "custody-v3/source-publisher/epoch-01/PREFLIGHT.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PREFLIGHT.json",
+        "bytes": 4201003,
+        "sha256": "13e56b17314e89370fb8ce3f8417b405b89b34db8a1868d968589550975db84f",
+        "git_blob_sha1": "0365b81ad1f8b3cef95993f23a84488c87f1c2ab"
+      },
+      "custody-v3/source-publisher/epoch-01/PR_CREATION.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PR_CREATION.json",
+        "bytes": 20086,
+        "sha256": "148643747e3c13b10377eb35740a3832611485a04432fcd4e6970f4962f27cc0",
+        "git_blob_sha1": "ef76e8d61f019a9f1c0264e1606e189b882dedbe"
+      },
+      "custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json",
+        "bytes": 1099619,
+        "sha256": "95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8",
+        "git_blob_sha1": "0f084555dbbea3ba4c9302386ced30e1e1503dda"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-00.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-00.json",
+        "bytes": 59299,
+        "sha256": "5f9e682afec61bf2c2cd8883ba2533927c5317dc2409fc43fd85e3b112b00f08",
+        "git_blob_sha1": "d55b6ebb698182d37e384dfafc7e788fe7462059"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-01.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-01.json",
+        "bytes": 14703,
+        "sha256": "e2f25989522f89098bc62bf552938de6f9e97385fee166907e5b053cc311d474",
+        "git_blob_sha1": "c90b283fcdc8b8ad47a9967fc3a713e13673c230"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-02.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-02.json",
+        "bytes": 32873,
+        "sha256": "651dd383a98b0b6587f214aa8041257e41b1b01c4bf93018a0de4cae6054979f",
+        "git_blob_sha1": "fb79558e088476b9cfc64bea47249e30c8c65dda"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-03.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-03.json",
+        "bytes": 9454,
+        "sha256": "6b4d2e9f1e02b5ab466a898724df1f4bde2e8b2495f8198c8d3aac36dd2836ba",
+        "git_blob_sha1": "ee9333be3798433dcfbcee14c7cadfec3e050e60"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-04.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-04.json",
+        "bytes": 38458,
+        "sha256": "b0fe9bc72bc8c63f5394d068395612478301c1c34ab3440e0a516782676847e2",
+        "git_blob_sha1": "b28ba9938f4333d3ca6ccf07623a1e336509ac68"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-05.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-05.json",
+        "bytes": 33870,
+        "sha256": "9c8ca761372671f98263d9dc341cf6eb83c870c2894849ad096522af955412cb",
+        "git_blob_sha1": "ac243452ac65c890dd212c55e2caa13b5de70841"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-06.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-06.json",
+        "bytes": 51434,
+        "sha256": "b5fb7d882960f20a2bfa0517d9b9d908761cf3fcf241b6dde31c8485c92e9440",
+        "git_blob_sha1": "8dfca328ca7a73b5fe3e379b1da909f8aedf52ec"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-07.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-07.json",
+        "bytes": 1576,
+        "sha256": "d59b1e109ce61bd49881ffa232de3689dbedb2329f62b63675445bb31f822511",
+        "git_blob_sha1": "2f3c00a66f5533ea8230cf5e895be775a5503b4b"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-08.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-08.json",
+        "bytes": 2856,
+        "sha256": "431ed2a5df0f5101a590fba5279cb1a06661cebac99150884d714d01c0534e60",
+        "git_blob_sha1": "9c79c7cc4784b63410a6f68a9670bbab8fa3ab67"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-09.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-09.json",
+        "bytes": 6028,
+        "sha256": "f42c51a6383836cffb05e723743dd06545d0917696742670e70c393975f144cb",
+        "git_blob_sha1": "21d84335fd0b256eeddc27938581b3be738c8ca9"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-10.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-10.json",
+        "bytes": 5335,
+        "sha256": "ba773cfa1b16a5079c70c5e79f9663b529f568e7c3599a97b66addf8a8414130",
+        "git_blob_sha1": "66f77c3efc8e51b78e7ae4cf8a9b8d721d44ad37"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-11.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-11.json",
+        "bytes": 4361,
+        "sha256": "8053df3ad2ec58b19a0ac2c86585ab922e93a873db3fc800972b4d497d5c1941",
+        "git_blob_sha1": "46b4d799d6d02822c87cf6c2b3345fa8296d41ab"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-12.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-12.json",
+        "bytes": 12577,
+        "sha256": "38dcbd14e3307d0e4fe6e99e72fb01ca13606eb4b2667cb9639bafa05d1a4292",
+        "git_blob_sha1": "a0bc5d23fb5468406ee5cca9068b2f32fabb4bd4"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-13.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-13.json",
+        "bytes": 100413,
+        "sha256": "a05bda83bcf3a7d8f59a5e3dc794a9ba03483af9a2475a630c819a2fc1d4be6d",
+        "git_blob_sha1": "16cf3b4209fce925710537b24a714ab8fce6bfe2"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-14.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-14.json",
+        "bytes": 42506,
+        "sha256": "06aca18820078bedfed28d2ff8aafa034fb6ff75c11a3397bf86fb8f0338e154",
+        "git_blob_sha1": "996dc73fb4671f3f63a93cafb7c8d86286fb2c0d"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-15.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-15.json",
+        "bytes": 67153,
+        "sha256": "9351543516c7a3a190420731b804380ecee3c12e547e45747c3551dd2536a0d8",
+        "git_blob_sha1": "1580b38f72083ae5df15620f3550b73ba6aa4df0"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-16.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-16.json",
+        "bytes": 46441,
+        "sha256": "ec6ff31e12a7c478f8cbf47bb21c4e33add7340bbbec7a55d235e903fe88defc",
+        "git_blob_sha1": "53fa40290492500a76f6eb9adbdb71d6c6f0a133"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-17.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-17.json",
+        "bytes": 24915,
+        "sha256": "d7fe5f167d72b2b4ae340f142410e114db79b58cd10e10190775a838f4864cb5",
+        "git_blob_sha1": "9690c9bd2ce37feadce62d5402cab4e9a26e4b30"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-18.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-18.json",
+        "bytes": 28716,
+        "sha256": "8b4c874062ffb16b7c1aed6a9083805442cb78bb88eaccba2def92e5708c1580",
+        "git_blob_sha1": "dabfcc7a35f90a00d620c531097dff229138690f"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-19.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-19.json",
+        "bytes": 1239,
+        "sha256": "7da6c3d541b2cb97717996d12b13a4ddbfa355ce8dc87c545e3aa480c57f6e17",
+        "git_blob_sha1": "a46217db3494b7fb4560bb8c849c3ff436777bb9"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-20.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-20.json",
+        "bytes": 1077,
+        "sha256": "91ada336fd5462edc80519398132f663450a1da3820472bd4f49ecc13d838749",
+        "git_blob_sha1": "955243589d6a94d96c31359a582410621472d49b"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-21.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-21.json",
+        "bytes": 1189,
+        "sha256": "9c7a7a546385f054b1039b535f19b14ab1701e0cc1d3d736baaa2a938ab32801",
+        "git_blob_sha1": "2d7fcc5f4c958280d82ef07492fa0aff7f121bc4"
+      },
+      "custody-v3/source-publisher/epoch-01/final-file-calls/call-22.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-22.json",
+        "bytes": 1071,
+        "sha256": "97183d3d4517cdbb7472afe1291a8c503d864159ef6cf1aabd70cd15a66eca18",
+        "git_blob_sha1": "9b0d97579e80e55a370d20fea4d3112dc612ab38"
+      },
+      "custody-v3/source-publisher/epoch-01/final-publication-calls/commit.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/commit.json",
+        "bytes": 4185,
+        "sha256": "1ed2dbd664e8a3cf508c87dc7e2ca871e2d347d431d17b9c243a52400241ca35",
+        "git_blob_sha1": "0060b655880f823930904b1a7a6dcf5dd64d5856"
+      },
+      "custody-v3/source-publisher/epoch-01/final-publication-calls/pull_request.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/pull_request.json",
+        "bytes": 53111,
+        "sha256": "e891628db522796a21a5930c75455dcbd057cf2d6d55ea14f13c375adec23466",
+        "git_blob_sha1": "08231555d3e7837ec538d40a3597faa2297b3219"
+      },
+      "custody-v3/source-publisher/epoch-01/final-publication-calls/ref.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/ref.json",
+        "bytes": 1993,
+        "sha256": "4b7ac816b0b9f78f3e48ff85cb60eba8ba9714b1295f1ef0df247c5300197542",
+        "git_blob_sha1": "2d7cf6a36ab5004f26c5afb9fca22bd7d2c0bded"
+      },
+      "custody-v3/source-publisher/epoch-01/transport/INDEX.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/transport/INDEX.json",
+        "bytes": 35655,
+        "sha256": "dce1e97079aeb3ad9edbdf9f814b3ccaeebfd0053c9d2b4b79ff841632c0736d",
+        "git_blob_sha1": "99c698756eedc88f650d4495f56827639cfb01f0"
+      },
+      "custody-v3/source-publisher/prepare_publication.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/prepare_publication.py",
+        "bytes": 15683,
+        "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
+        "git_blob_sha1": "6b32bbff9f9221ddf8c5c4f3eb10ee27bed7d70a"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json",
+        "bytes": 14641,
+        "sha256": "22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df",
+        "git_blob_sha1": "aab1f868d992a08d865918b3cef7a99fdf299173"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
+        "bytes": 1542,
+        "sha256": "074e9dcec6275f05bc8ac93d6d92e36b5adaeaa4c6503ace2dbf047b49916705",
+        "git_blob_sha1": "98e64dd614928ae710eb03e66d0dacce1be8b132"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json",
+        "bytes": 670,
+        "sha256": "90c9f648768fde6d74bc416d5a52076c7b29581a5df42e21f80da62e983a9be6",
+        "git_blob_sha1": "7fa37f2114d172ad33e0f43e5c0b46af6c7ec099"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/PROTOCOL.md": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROTOCOL.md",
+        "bytes": 4406,
+        "sha256": "cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5",
+        "git_blob_sha1": "0cf763bcef6fc836cb345360893c1874f5781eb9"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/create-call-0.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-0.json",
+        "bytes": 748,
+        "sha256": "b8a32d3afbab09a54e0783bcd9c30784f52c2f354df1963ce0fdabeb1977b366",
+        "git_blob_sha1": "2d14689c274dc122940b3f890da15d2c842453e8"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/create-call-1.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-1.json",
+        "bytes": 586,
+        "sha256": "5b7ac8ba077d2b3ee8c3cf6853ade48ea8e568f97d8f98d4f18d46ff7835423b",
+        "git_blob_sha1": "601f586d75d0980d283de686bc2f8a48b39dc02f"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/create-call-2.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-2.json",
+        "bytes": 728,
+        "sha256": "cfe40a28577457759a7bd1ba588d069c4a7a8c7e2f8edff631e48598f8f6c64d",
+        "git_blob_sha1": "885d1e60d4cc571839679cabcf43fbc68629f641"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/create-call-3.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-3.json",
+        "bytes": 611,
+        "sha256": "354b7b50af7d013a23870acbd24603e32c9f248bd4ca2ba86c4ea7e489064b79",
+        "git_blob_sha1": "de4a4eeff25c14055515986c6627961603271e6e"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/draft-T01/raw_custody_v3.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/raw_custody_v3.py",
+        "bytes": 12671,
+        "sha256": "a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b",
+        "git_blob_sha1": "ccdbb23cf2bddffc543517e4662bd7b069a2876a"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/draft-T01/verify_publication_v3.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/verify_publication_v3.py",
+        "bytes": 13831,
+        "sha256": "7138709c360728c17c701391f303a02e21e6e1334b29bc3f67f6c9702f7440f4",
+        "git_blob_sha1": "4ad5c54d4d6109067c40ca82c2d5031df31e99d6"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json",
+        "bytes": 1893,
+        "sha256": "d6a876dffdb48da7271d85966ac7d9cd684e4b89ecc3548e79a5dc8ef55be637",
+        "git_blob_sha1": "c4da2406762041b4822bd147b0788e2697a16b42"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json",
+        "bytes": 6735,
+        "sha256": "e60253446c2741c41d127b379f3b9f56506442a0476ea377ab9de43f4ef98701",
+        "git_blob_sha1": "7ada47a165dfbc77a522ae63aed44997e15cfcde"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json",
+        "bytes": 1941,
+        "sha256": "bf6ecda1e1cd2d3a0fe726b39e1b1fb924fb9dd9e6bff7fb311cec53a69da76b",
+        "git_blob_sha1": "e9ba220b40280b21d05ca7af17dbe66d41ff095a"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json",
+        "bytes": 37747,
+        "sha256": "87897d5da6389eb5421cf083436ea9dba28921fc7c46fcec185c336677476023",
+        "git_blob_sha1": "6cff29e51e8136b30913643aceabcc558b115704"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json",
+        "bytes": 1947,
+        "sha256": "bc4a2014f1bde8d775d57d3a3f3e31f441e933a1dec4116df3a1fd92a64ed1bb",
+        "git_blob_sha1": "73ab6ba3e52f55ea66d321aa5c5144003aec3681"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json",
+        "bytes": 3351,
+        "sha256": "bbbbe2668c25e80d6e53d7c59a4a020fac5ee12f41daed2c665d52c7de1211ac",
+        "git_blob_sha1": "8009e93f4947f9cf30153efc916fdb8f84d224cb"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json",
+        "bytes": 1893,
+        "sha256": "400fa13aa4dce4c38c9af8c98d252c1fab164119e26d623e18d01f9e36d6a127",
+        "git_blob_sha1": "2de74dd7e10ad63136226488b4943d7620a85a46"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json",
+        "bytes": 1943,
+        "sha256": "878c3f9a33326df4d91935336962565b2d644e694e51b2aca9f7a47010044324",
+        "git_blob_sha1": "890aee4ab25bf18cedf01c20e4d4876ecfefa0f7"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json",
+        "bytes": 4779,
+        "sha256": "cc07ab6028915303903199aa027d19e27aa96d1d60d16231bf04ea24eb74ec6f",
+        "git_blob_sha1": "9f18b295f501b724ef22555e9ddced2f215217b5"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json",
+        "bytes": 1951,
+        "sha256": "7f438bf36e2a306ffd396d10d6c1e23164f4456ce85b0d06a23b020183682bd1",
+        "git_blob_sha1": "c7ce23a1c241b337cbf935d55ae51b5fa7af2a67"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json",
+        "bytes": 1897,
+        "sha256": "05a12fcdcba2cbb33d7f26c823c1ec77e712b206b0513ad69971affda5dc24f6",
+        "git_blob_sha1": "e42dcd7434d48dc88cb2181847e43623b3b2f647"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
+        "bytes": 167271,
+        "sha256": "f6852b552a509cd63b6f3622a21124215fb4c584d9b0b35fb4fd66dc6631f5d3",
+        "git_blob_sha1": "4a6439ecc558aa0fb82f410f7f1aeffe30d5a4ae"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json",
+        "bytes": 1911,
+        "sha256": "0e3ba46f0ff549937802d41bcd60f36e7a1d2221744d7fed2bac7c3b14a290ba",
+        "git_blob_sha1": "2575e4b9cc0ccbea2975e0b968cc021802ab2d26"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json",
+        "bytes": 1885,
+        "sha256": "4371692b6dc8fafe9355b12f4dd9a7ef3dbda4f38d4a4b262fc7d7e536ebedd2",
+        "git_blob_sha1": "acfe765a53a420a5b8384677622f354f4d4a4060"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json",
+        "bytes": 17675,
+        "sha256": "31f6229cce694b49b0e30cb34791f0b4df696b933965637241dd5b053f751b04",
+        "git_blob_sha1": "c3ab72cb6bba321b6dd99f2fd741a04cf087a211"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json",
+        "bytes": 1885,
+        "sha256": "4df921e09958f15fd17261bfbb5f9b948b4382afed7890b4568be4444594c7d3",
+        "git_blob_sha1": "b135e69a8207ea1523591995a68ed4f03f4d849e"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json",
+        "bytes": 1891,
+        "sha256": "6f3742c4822492686a14cf87ba0697e05fa3082cecbe958772e2b97200c60225",
+        "git_blob_sha1": "aaf510fa17d33ae025302b34ecc5975c20a302f9"
+      },
+      "custody-v3/source-publisher/raw-custody-v3/verification-file-reads.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/verification-file-reads.json",
+        "bytes": 5076,
+        "sha256": "5f992ea5fa2a618093909b3ba7b063a8972de84f2af4b00ed44b323597538a87",
+        "git_blob_sha1": "805234c233d3bb741a35ced6c80d15f13da35a6c"
+      },
+      "custody-v3/source-publisher/raw_custody_v3.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw_custody_v3.py",
+        "bytes": 12912,
+        "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
+        "git_blob_sha1": "25a836990c02625c79f44492eb43b7ffca13b07f"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json",
+        "bytes": 2857,
+        "sha256": "e5d6703bbeaebb2f6718c7b7f9cefd7dfd723f1b3cead9c50e397ce96e26b791",
+        "git_blob_sha1": "6ff36dbc6f5a3b2b2682ca89917411a65755ff14"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json",
+        "bytes": 4661,
+        "sha256": "da5f48a847613be5599132af53755f677cc579da75d302bfea66d36da643232d",
+        "git_blob_sha1": "f7ac549808395cdfc6d4bec1705f38ada86e1077"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/INPUT_SEALS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/INPUT_SEALS.json",
+        "bytes": 11329,
+        "sha256": "52d1f09a46c14b1aed8d181e11bc7b0df9f0346eaa453676b8f6ba64e5ce6ace",
+        "git_blob_sha1": "430e04850aee8d3c1ac1cabe70b55e0992628c8e"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.json",
+        "bytes": 15643,
+        "sha256": "e8ff8e7928611d4cdbe34c9dfd58340e3aa282205bfd405a2bf56d57393d78b0",
+        "git_blob_sha1": "18cd2c7e0d2d224d4a1f30355000bc70e0b68a05"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md",
+        "bytes": 10550,
+        "sha256": "6578850848d5e69f454b06c55c898da3811c9607f395c485aafe586178cfa8ee",
+        "git_blob_sha1": "d68306dd759322baab6f4154a8856e4d5ec87406"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/audit_base.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/audit_base.py",
+        "bytes": 8839,
+        "sha256": "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b",
+        "git_blob_sha1": "f5ef1f4e6d01276e151fd81b98851e3c4759f25b"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/prepare_publication.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/prepare_publication.py",
+        "bytes": 15683,
+        "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
+        "git_blob_sha1": "6b32bbff9f9221ddf8c5c4f3eb10ee27bed7d70a"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/PROTOCOL.md": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/PROTOCOL.md",
+        "bytes": 4406,
+        "sha256": "cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5",
+        "git_blob_sha1": "0cf763bcef6fc836cb345360893c1874f5781eb9"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py",
+        "bytes": 12671,
+        "sha256": "a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b",
+        "git_blob_sha1": "ccdbb23cf2bddffc543517e4662bd7b069a2876a"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py",
+        "bytes": 13831,
+        "sha256": "7138709c360728c17c701391f303a02e21e6e1334b29bc3f67f6c9702f7440f4",
+        "git_blob_sha1": "4ad5c54d4d6109067c40ca82c2d5031df31e99d6"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw_custody_v3.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw_custody_v3.py",
+        "bytes": 12912,
+        "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
+        "git_blob_sha1": "25a836990c02625c79f44492eb43b7ffca13b07f"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication.py",
+        "bytes": 9623,
+        "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
+        "git_blob_sha1": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication_v3.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication_v3.py",
+        "bytes": 13831,
+        "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
+        "git_blob_sha1": "c5efacc8212e97a74770db0c70bcbd80d24ec232"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py",
+        "bytes": 14398,
+        "sha256": "ef55ea26a4df72e09416ffcec9eff75798a4c126378149cf2c667071446f27d2",
+        "git_blob_sha1": "0e0635f7a7fb4c1c0f2443d7040cc811056e699e"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/raw_custody_v3.py.T01-T02.diff": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/raw_custody_v3.py.T01-T02.diff",
+        "bytes": 1186,
+        "sha256": "e234102abc927fda207e5766aa06bd949c56478566ab2fa990666f882e8ceca7",
+        "git_blob_sha1": "9e62da11151b4d61956ad3d47e8686f0dfed6189"
+      },
+      "custody-v3/source-publisher/readback-static-review/custody-v3/verify_publication_v3.py.T01-T02.diff": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/verify_publication_v3.py.T01-T02.diff",
+        "bytes": 829,
+        "sha256": "2905e58d2d063a419abc99cb52bcb46db1dae3c3655a135497630cb2218154d6",
+        "git_blob_sha1": "694c31083f1029eaf98e895213c1e0d6be7914a9"
+      },
+      "custody-v3/source-publisher/readback-static-review/raw-readback-failure/FILE_SEALS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/FILE_SEALS.json",
+        "bytes": 1587,
+        "sha256": "30556460d63d575f1b18b098fcbd2019239e4634c6067ab319b348c40d39f581",
+        "git_blob_sha1": "7906eaaf1e5cecc3d034c67018956b535418720b"
+      },
+      "custody-v3/source-publisher/readback-static-review/raw-readback-failure/INPUT_SEALS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/INPUT_SEALS.json",
+        "bytes": 3869,
+        "sha256": "97680e799c6b21d29f86b7f2249e22dacc5e1c761d1e7f2ade704eba729a481f",
+        "git_blob_sha1": "9579b24598fd074879255d939a1a4aebe317eb40"
+      },
+      "custody-v3/source-publisher/readback-static-review/raw-readback-failure/READ_CAPABILITIES.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/READ_CAPABILITIES.json",
+        "bytes": 5925,
+        "sha256": "1356f767136ebe7d2bbc59bd61904691b82a88161d776d8039fc9ab97510ca60",
+        "git_blob_sha1": "e3b9c0419a9afab6b8438b4a15a3932ff5dabb72"
+      },
+      "custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.json",
+        "bytes": 4051,
+        "sha256": "be0f51039422ac6e111a0f5d3a0ba96a74730555d5663c2483fb1ac94a1d96f0",
+        "git_blob_sha1": "01721c3ae6b5fdd238668b12c0676a43dd047f38"
+      },
+      "custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.md": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.md",
+        "bytes": 7352,
+        "sha256": "52621f38ee8dbd408012219a4a5bd5cef08c046da3ada5cecf923398d637e769",
+        "git_blob_sha1": "89d5f7adbbb529c8ffd1f27c23e2353e80800c68"
+      },
+      "custody-v3/source-publisher/readback-static-review/raw-readback-failure/inspect.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/inspect.py",
+        "bytes": 7385,
+        "sha256": "67dba07d875c0f9a9bc9e18522bed9fc71b1aeb16787e869fbc75ee9650b8640",
+        "git_blob_sha1": "c5c060782a26968a79608c2124c47cdd6c606b2a"
+      },
+      "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FETCH_FILE_CAPABILITY.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FETCH_FILE_CAPABILITY.json",
+        "bytes": 1155,
+        "sha256": "0b52650547b4d4ae69a1e462c38ef2077cddb0dfd2c7915e327fcd041dca1709",
+        "git_blob_sha1": "31b92d1d550fb1edf5470c59628dc0e6c6020924"
+      },
+      "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FILE_SEALS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FILE_SEALS.json",
+        "bytes": 1600,
+        "sha256": "2102f85bd93143fd60431fd26a8069bdff2a5e4a2e6616deb6d6f934dc5191f8",
+        "git_blob_sha1": "c740b48213371899e883453a4484cfb69ed84f16"
+      },
+      "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/INPUT_SEALS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/INPUT_SEALS.json",
+        "bytes": 5975,
+        "sha256": "4e5b2bce37562177cbfb2485a082c33df5a97aa238fac42dacfde355f41ff444",
+        "git_blob_sha1": "b487d1b98b4008965c074b5b7297e9d22330cf64"
+      },
+      "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.json",
+        "bytes": 3822,
+        "sha256": "1e879a75f8b6d08fba9628406fffa7a7fa20d471fceb0cb8da5bbf47c0f2a5df",
+        "git_blob_sha1": "7b32297dc0d362b1e0a1a02548f1985228cdb159"
+      },
+      "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.md": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.md",
+        "bytes": 7280,
+        "sha256": "03f15a70c1ac11b52005af86f2bc193599709427f39ae250234fbf9bfbf8b626",
+        "git_blob_sha1": "80241c4f951f7f19cda306219c066088e9c53e8e"
+      },
+      "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/inspect.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/inspect.py",
+        "bytes": 10963,
+        "sha256": "c80763ab3a3796d4f7dc8a22596dc96c060bef801b9a8fa845109ce044d36d97",
+        "git_blob_sha1": "a97614be485737c0c7abb0c754e838e4dfc2b312"
+      },
+      "custody-v3/source-publisher/readback-static-review/v2/FILE_SEALS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/FILE_SEALS.json",
+        "bytes": 986,
+        "sha256": "efbdfa191409f225d814662a744003070f3bf4ce2bd7a4e331cb022abd607696",
+        "git_blob_sha1": "ffcfc63bdc314201c7bb982c6b6cffea1d45924a"
+      },
+      "custody-v3/source-publisher/readback-static-review/v2/INPUT_SEALS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/INPUT_SEALS.json",
+        "bytes": 1321,
+        "sha256": "5a26d9913a9b18f97b68aa8bf3eac6855d954f5d4e1c7c7805a16f1589f0a881",
+        "git_blob_sha1": "8d796747695178148b77cabcd485be1ee3d825c5"
+      },
+      "custody-v3/source-publisher/readback-static-review/v2/REVIEW.md": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/REVIEW.md",
+        "bytes": 4985,
+        "sha256": "f84ae9ee896eaadd79ae00c3c1747decd0f928872baecbec56166f363f675b59",
+        "git_blob_sha1": "160fd1d62c645aeb201cf5eee2dfe555079474a6"
+      },
+      "custody-v3/source-publisher/readback-static-review/v2/audit_base.py.txt": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/audit_base.py.txt",
+        "bytes": 8839,
+        "sha256": "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b",
+        "git_blob_sha1": "f5ef1f4e6d01276e151fd81b98851e3c4759f25b"
+      },
+      "custody-v3/source-publisher/readback-static-review/v2/prepare_publication.py.txt": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/prepare_publication.py.txt",
+        "bytes": 15683,
+        "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
+        "git_blob_sha1": "6b32bbff9f9221ddf8c5c4f3eb10ee27bed7d70a"
+      },
+      "custody-v3/source-publisher/readback-static-review/v2/v1-v2.diff": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/v1-v2.diff",
+        "bytes": 4471,
+        "sha256": "dcb1f09d1b221eb10837874bf62e82093813eb102229567ac19ed4a9c56831d9",
+        "git_blob_sha1": "7453be80777b2306476a407d7406f146c6d5a7d7"
+      },
+      "custody-v3/source-publisher/readback-static-review/v2/verify_publication.py.txt": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/verify_publication.py.txt",
+        "bytes": 9623,
+        "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
+        "git_blob_sha1": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3"
+      },
+      "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json",
+        "bytes": 1028,
+        "sha256": "2322e736246e2fd11d94bc4c9c5d1a5717e0bd5be6179f7e4509a9242606d43c",
+        "git_blob_sha1": "0b8a0cd492e07e48cb396d54827ffcc7f1f75fcd"
+      },
+      "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json",
+        "bytes": 1442,
+        "sha256": "793b5cfb897b0e0b7471f5f0c85adf3d6520b11c2077d669bbb8a1b48f647120",
+        "git_blob_sha1": "b5f13db8c6c74e053f57ea470c5802dd1cfc438c"
+      },
+      "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md",
+        "bytes": 6622,
+        "sha256": "9fba35c03ee7d13a7ace7ef8f760f48186c0a8caf73e5dd5cd5d227815f1d693",
+        "git_blob_sha1": "f7bbb6cda696cb686270c7d7f3d7f17f77cae2a8"
+      },
+      "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json",
+        "bytes": 1060,
+        "sha256": "05242c715b5d63567d13c26c801e9a2c96ca4e27f14434e3a96020cdcd374a97",
+        "git_blob_sha1": "100e5d3cdd839136fd94346074337a0ab7866d9f"
+      },
+      "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json",
+        "bytes": 1763,
+        "sha256": "beb5b6f452c2f1f6356136b5ae236bfd23fb2c7313228765357a3f46e50f3f4b",
+        "git_blob_sha1": "0c4a7a328cc621884baf4b61a12d68e773c0a6e2"
+      },
+      "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md",
+        "bytes": 2881,
+        "sha256": "c7c575b882732681c3b5f1435f70063a765435f9e6137e10151fb2f8fa2ef2df",
+        "git_blob_sha1": "9b470e7720fce97aad75e811e34291df25617902"
+      },
+      "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff",
+        "bytes": 2015,
+        "sha256": "5f5c5f9c2b9d82607b8e3e30e9027ee8032f4d9fde812c2617343cb934049745",
+        "git_blob_sha1": "577a92ee28f87b5ec157750521b768e91ea021f6"
+      },
+      "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/V2_V3.diff": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/V2_V3.diff",
+        "bytes": 7930,
+        "sha256": "e487f83f318b61c01515549e588b66a384d0d281a0bc5d3a4ace5f1ca6cd8803",
+        "git_blob_sha1": "36995c07b0a120a99e603b62fac2e4055e29597d"
+      },
+      "custody-v3/source-publisher/verify_publication.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication.py",
+        "bytes": 9623,
+        "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
+        "git_blob_sha1": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3"
+      },
+      "custody-v3/source-publisher/verify_publication_v3.py": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication_v3.py",
+        "bytes": 13831,
+        "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
+        "git_blob_sha1": "c5efacc8212e97a74770db0c70bcbd80d24ec232"
+      },
+      "source-manifest/FINAL_MANIFEST.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-manifest/FINAL_MANIFEST.json",
+        "bytes": 2651088,
+        "sha256": "9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328",
+        "git_blob_sha1": "8b87e4320079b69393a01387f11ccda15a273509"
+      },
+      "custody-v3/CUSTODY_EVIDENCE_INDEX.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/CUSTODY_EVIDENCE_INDEX.json",
+        "bytes": 260154,
+        "sha256": "8e478debeac87c46d01d57cf1038b2195005f9f6af249b25d97f1074ef26b38b",
+        "git_blob_sha1": "8d97bf818a71fd3d8bd63441d45e2de8b6666a6a"
+      },
+      "custody-v3/CUSTODY_CARRY_PROSE.md": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/CUSTODY_CARRY_PROSE.md",
+        "bytes": 2233,
+        "sha256": "0aeba88cf1e5545ff4e973f96e9c7231c5442544393d2ef5c5304f9ebab5570b",
+        "git_blob_sha1": "fc139915c9dbe1809b941074945c53cc3855504a"
+      },
+      "source-results/RECOVERY_RESULT.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_RESULT.json",
+        "bytes": 456423,
+        "sha256": "086f4ef835a0939b212bcb7595e75513ecbd46ce6bbf764a8d1f5aca1e418954",
+        "git_blob_sha1": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1"
+      },
+      "source-results/E4_EXECUTION_INPUT.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/E4_EXECUTION_INPUT.json",
+        "bytes": 12601,
+        "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
+        "git_blob_sha1": "428422fc77c5335a43b9c978515445f056d0d2c6"
+      },
+      "source-results/RECOVERY_REPORT.md": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_REPORT.md",
+        "bytes": 16279,
+        "sha256": "b21708f3c4537237db3608f8c12ba54ee1940817eb7d5594c1fea5bdeab29259",
+        "git_blob_sha1": "c019f5e4cf5014915d0686aeeeeb4cc306264907"
+      },
+      "source-results/DESIGNATED_SOURCE_OUTPUTS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/DESIGNATED_SOURCE_OUTPUTS.json",
+        "bytes": 15261,
+        "sha256": "296d5b9eb4f41b51a85d44bb4f05c76e8c5b6453fb55881691b9823055062510",
+        "git_blob_sha1": "59e4ba6f35c37c1a00da2678ed88b9f034d885e1"
+      },
+      "source-results/FINAL_T03_REVIEW.md": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/FINAL_T03_REVIEW.md",
+        "bytes": 12253,
+        "sha256": "d6109ae253343f5c157d867732f3eea954cc4e57438968154b476407a21e86b2",
+        "git_blob_sha1": "966b2ec295da85f5d4399ea7c717eeaf0d4d06d3"
+      },
+      "source-results/ROOT_POM.xml": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM.xml",
+        "bytes": 119981,
+        "sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab",
+        "git_blob_sha1": "98889a040aad5cc3c82f782bb4b173d118207988"
+      },
+      "source-results/ROOT_POM_RESTORATION.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM_RESTORATION.json",
+        "bytes": 922,
+        "sha256": "34a6cf995296ed929c2209d34480245473150601f8a556945aa1d8c2947fda6d",
+        "git_blob_sha1": "56764ea7b60d04d7050310f7355280fe2ee9eed6"
+      },
+      "source-results/ROOT_POM_RECOVERY_CALL.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM_RECOVERY_CALL.json",
+        "bytes": 165921,
+        "sha256": "f647efbec6809523678b640b0dfbdf495f494bfc5c3e84a8a5e6e8a473e89d41",
+        "git_blob_sha1": "ed2dd05bc146884c7fbe88357966ba8b5a5e9236"
+      }
+    }
+  },
+  "source_execution": {
+    "input_remote_revision": "be92c62ece9023b5c33676716a1076d00e26120a",
+    "input_remote_root_tree": "3c4f32b66633a251ba2c117090830252a7e2da03",
+    "published_output_revision": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+    "source_export_admitted": false,
+    "destination_gates_passed": false,
+    "proofs": [
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/RECOVERY_REPORT.md",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 16279,
+        "sha256": "b21708f3c4537237db3608f8c12ba54ee1940817eb7d5594c1fea5bdeab29259",
+        "git_blob_sha1": "c019f5e4cf5014915d0686aeeeeb4cc306264907",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/RECOVERY_REPORT.md"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/RECOVERY_RESULT.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 456423,
+        "sha256": "086f4ef835a0939b212bcb7595e75513ecbd46ce6bbf764a8d1f5aca1e418954",
+        "git_blob_sha1": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/RECOVERY_RESULT.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/E4_EXECUTION_INPUT.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 12601,
+        "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
+        "git_blob_sha1": "428422fc77c5335a43b9c978515445f056d0d2c6",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/E4_EXECUTION_INPUT.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/SAFE_ADDITIONS_STAGED.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 1516300,
+        "sha256": "a3c4741cad08018ff12f21288fa1483ffd55b2c878ab65f5c3c0ce82a10e3e91",
+        "git_blob_sha1": "baa75b9225caf3c8f41946443d7327290c6e174c",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/SAFE_ADDITIONS_STAGED.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/CURRENT_PROJECTION.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 596276,
+        "sha256": "18c5fea0f72fe21aa78df1aa6c319eb4276fc15aa481952539c221ce651e6f49",
+        "git_blob_sha1": "d20138ab763408bbbd793c1ff27778d866b29009",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/CURRENT_PROJECTION.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/DESIGNATED_SOURCE_OUTPUTS.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 15261,
+        "sha256": "296d5b9eb4f41b51a85d44bb4f05c76e8c5b6453fb55881691b9823055062510",
+        "git_blob_sha1": "59e4ba6f35c37c1a00da2678ed88b9f034d885e1",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/DESIGNATED_SOURCE_OUTPUTS.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-framing-review/REVIEW.md",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 7269,
+        "sha256": "76822940bd1cc9234a5ac5486bb63b73743f6e1d30e8cfcbfc6f5000c787007c",
+        "git_blob_sha1": "4b3ade8280c0a3264974df477e7332e1c1485abb",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-framing-review/REVIEW.md"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-units-epoch02-review/REVIEW.md",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 7425,
+        "sha256": "890439836c59488cef7b5a83959f504efe14ac17023e33baa9c9fde53449ce6c",
+        "git_blob_sha1": "14990c6803c4ac74bd3dafa60907eb448e4b17ae",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-units-epoch02-review/REVIEW.md"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/RESULT.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 2586,
+        "sha256": "066c4fa046adf063f2bffb02ac8d6be949e5f85d55de489dd081d56bddcd93dd",
+        "git_blob_sha1": "1a55550a8fe316b98743f3fa3f63bb8719a3b360",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/RESULT.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-units-epoch02/RESULT.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 20809,
+        "sha256": "a7a92fc26c62ce0938464a75dff13ea1785822f787bf17e03ebf6dd0cc45296f",
+        "git_blob_sha1": "864b64878c8f06c45b9b6dad6d89c3284aaed612",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-units-epoch02/RESULT.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/RESULT.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 17990,
+        "sha256": "041ba5fa63b335839675d773c36588d6207c11d0933ad303fa3378a5922000d4",
+        "git_blob_sha1": "d6f19056296663d3da760957937a8f3edec64535",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/RESULT.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/upstream-regression-epoch02/RESULT.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 14193,
+        "sha256": "c6a3b0125bae6af2b9f704784b4b114eb988da44cfb56696287134d309629609",
+        "git_blob_sha1": "2527bcf3a09ba0051880b06fd1e402a1fcfb5e36",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/upstream-regression-epoch02/RESULT.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/RESULT.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 11617,
+        "sha256": "206f4380105bfe863704b92bba17f8ce2df7bbb82d0fbe986751c1dc4d721796",
+        "git_blob_sha1": "0b22050eb54dab0e05cdb1f7b34e411abd092f53",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/RESULT.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 883,
+        "sha256": "b7262f5ce0c1868e8b4741b2bd46c09fd26c16bc5a044179988c42ce80642c3e",
+        "git_blob_sha1": "e9a31d082ced46a6f57b0874a25b10df61634753",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/UPSTREAM_CLASSIFICATION_EPOCH_02.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/REVIEW.md",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 12253,
+        "sha256": "d6109ae253343f5c157d867732f3eea954cc4e57438968154b476407a21e86b2",
+        "git_blob_sha1": "966b2ec295da85f5d4399ea7c717eeaf0d4d06d3",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/REVIEW.md"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-applicability-review/REVIEW.md",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 6678,
+        "sha256": "9d290b484f5d5c6ddb3c2c37842f2edd43555b29e0933ba5c7c92796c8326b8f",
+        "git_blob_sha1": "f1116725ed4da13d222f070cd92d43a3ade6a80a",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-applicability-review/REVIEW.md"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-provider-execution-review/REVIEW.md",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 7777,
+        "sha256": "47779ed5f43d7a512c5a372650569fa1442d8099ce544fe3c6b59196c955471a",
+        "git_blob_sha1": "7e9560159cbda808d45f26afe26a3c36aad2e910",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/current-owner-upstream-review/t03-provider-execution-review/REVIEW.md"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/REVIEW.md",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 9790,
+        "sha256": "f29f2a7394019d1e882c61f2e7527afe90bbffde0f840c56703f3eb82399a281",
+        "git_blob_sha1": "792b277c3a23a2c82aee57d5adc1d00b25303f14",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/REVIEW.md"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-runtime-admission/CURRENT_RUNTIME_ADMISSION.md",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 13254,
+        "sha256": "5227dbd72cd7e24ada181695f51da97819af29640a3f712a50a1463cd14fc75f",
+        "git_blob_sha1": "90da6d0729226f3025474589967f0b3a7fe68ad1",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-runtime-admission/CURRENT_RUNTIME_ADMISSION.md"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/runtime-availability-epoch02/AVAILABILITY.md",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 10374,
+        "sha256": "0b5a82147a0d36894b6eca57b51d73886b94574b4bacf674f302461505af701f",
+        "git_blob_sha1": "91cd73e4ad8efa3eb27284c8962503c4f46914dc",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/runtime-availability-epoch02/AVAILABILITY.md"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/T03_REPLAY_SCOPE.md",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 4990,
+        "sha256": "726902d1072bdad532aa891c1a855282e702a51ca422a5ee341358e4965b87e3",
+        "git_blob_sha1": "748884fc81dfa87ee3a09f2b0f255481ff23b689",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/T03_REPLAY_SCOPE.md"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/verify.sh",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 30326,
+        "sha256": "a46e4877d5fd07afa65283652cc1b7407584291425a88740ba8d5dd3411e9441",
+        "git_blob_sha1": "2aa03ddf92e0bea905103a26396f4f8341711220",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/verify.sh"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/provider-v2.py",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 11627,
+        "sha256": "da9311e1f014a36801aff09060696aafd54c79fe28c5ec6ea3b8ca7036b13558",
+        "git_blob_sha1": "b98e9ad56452bc9db9a65e085413a5e1f4379457",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/provider-v2.py"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence-applicability.py",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 7338,
+        "sha256": "7ac61a5b7a91fea2023a4e28e7d93f2a69a570694a66e0e7f5c091c2e2538893",
+        "git_blob_sha1": "58ac97001ccc441b5d01eeac272ba908b33edb68",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence-applicability.py"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/LAUNCH.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 1128,
+        "sha256": "206c1664179770263006a3108e72421cf06725b0df3c57bf75664a60cd2c233e",
+        "git_blob_sha1": "96b73cf6f1e6ea7a14ddbf2bc9506c12a09ecc26",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/LAUNCH.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/SEED.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 693595,
+        "sha256": "d33cf9575e511976bc042f5e9c91f3c3d9154a169567d462b4db9d4c027d9204",
+        "git_blob_sha1": "71e46ff5dff4a91405449c1be2df9bc520381505",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/SEED.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/parser-t02-candidate-epoch01/RESULT.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 14247,
+        "sha256": "039b7d54e6de11a865874ef8f2820f3071e61700bf06224d94afdd0315ed63a6",
+        "git_blob_sha1": "a5d44068a5e01ec4c09612b2b145476d7c0268cc",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/parser-t02-candidate-epoch01/RESULT.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/CAMPAIGN_RESULT.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 599,
+        "sha256": "622c75ca29de15c17344089df368255fa13dd35f340c708cd80d8476a1966a28",
+        "git_blob_sha1": "c0882c9cb45ebead41fc3889aebb02b40622de9d",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/CAMPAIGN_RESULT.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/PARITY.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 1394,
+        "sha256": "b1d375e04deb8078e47e261238308de2d4312d6b0ed55a400725031884cfb0a6",
+        "git_blob_sha1": "74a05b892b158f2473e102c541be20274d636e44",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/PARITY.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/REVIEW.md",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 2865,
+        "sha256": "eb6ddcfbba9e9f6d0fc675c4c58f9b279cd7c96cbd8acb9749e41591497f6c30",
+        "git_blob_sha1": "00284ac27872ad911924d3491b4277fb30247a22",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/REVIEW.md"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/FILE_SEALS.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 2062,
+        "sha256": "b928cc49ef7897f3c7c76fc057a56af86b5b8eb1c7576d65eeb094eec70694e2",
+        "git_blob_sha1": "c7a17d84ace6fde9f3efc5ed6ffa3b0f338c39c5",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/t03-execution-review/FILE_SEALS.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-parser.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 550,
+        "sha256": "9a2b2e07a6b54330b6d7457e9df4ed631617e11351daa9670ff51e00e8263d66",
+        "git_blob_sha1": "aa13035f107b82f230e82ffeee01243dccaeb2be",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-parser.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-parser/receipts/materialization.tsv",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 19818,
+        "sha256": "865c1ed23e83694fdcb00011a615448615bfbf661baf6c99bd4486aa829b9bec",
+        "git_blob_sha1": "22dcb8986dbda5251ea9c04e446880c64417fe5f",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-parser/receipts/materialization.tsv"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-contract.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 554,
+        "sha256": "c72fd6137847627eeffbe5d92c8c14537ef7912c99742ebddf2cf197669f0389",
+        "git_blob_sha1": "0625973c7794161b2e7d1888b5d94ca88ca7d040",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-contract.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-contract/receipts/materialization.tsv",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 19766,
+        "sha256": "2fe8c1f9eb21ea008a12c1deb304c8cb2ee417d84407db78ce67ef7cd00620ec",
+        "git_blob_sha1": "7ddfef5cc2224d35f507f611bc27f00de29a86e0",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-contract/receipts/materialization.tsv"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-convergence.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 560,
+        "sha256": "9732bdf683770abb602127ce7cd663b0db448683de8a0a30633abafbf4d69ea6",
+        "git_blob_sha1": "507484ee82dedbd0ec0ead3701a9475399fe77a5",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-convergence.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-convergence/receipts/materialization.tsv",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 35476,
+        "sha256": "9efc02ffe63e045d16284b8283a722f5974702f7a83510e0a115335d68f0389e",
+        "git_blob_sha1": "16558854fd261ca1262000296e1465ae7e0aa0bf",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-convergence/receipts/materialization.tsv"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-observation-imports.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 576,
+        "sha256": "ab92660e01e24283f56ac18c15f853cd6033eb5b5deeecc23949c269f1a7e557",
+        "git_blob_sha1": "c02ef4fd7a1172ee3925905a8513944c69bb5d77",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-observation-imports.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-observation-imports/receipts/materialization.tsv",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 20416,
+        "sha256": "41b33c4ddf348357ae78015b2b4380a49b85a24e9af9be1e5df4644d49971dc6",
+        "git_blob_sha1": "8ca3c1425b1493c6bbe557c6a6bc18427fcf99e4",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-observation-imports/receipts/materialization.tsv"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-upstream-imports.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 570,
+        "sha256": "f1c18ebb2c88a8cc00d518ff1cb615b34ab55e494a5cf5811dd0032b5f9849dd",
+        "git_blob_sha1": "aee158a0b3db79dfe880ed5a68ea36147410357d",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization-jcc-be92-upstream-imports.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-upstream-imports/receipts/materialization.tsv",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 20827,
+        "sha256": "6f9a81a6337c3f12348db495590436457094c9bbb71874e22a525b3e4df45256",
+        "git_blob_sha1": "b2f8c8e9454ba3160dd3df628540de8bcf26f9e0",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/materialization/jcc-be92-upstream-imports/receipts/materialization.tsv"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-parser.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 554,
+        "sha256": "6dd4d88cc1c6101add61ad2003a1eedc1569c392c20e67f4152059c9d20e6289",
+        "git_blob_sha1": "5b42410ca62ac0a1c231cec8bc45780deda60005",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-parser.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-parser/receipts/materialization.tsv",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 19316,
+        "sha256": "85380910bcbe353610b4c7bdf7923a5d915ca191f05f6d25ca73ccc4bc602655",
+        "git_blob_sha1": "01e035ffb3515315e463ae3d539b4b77de1a672e",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-parser/receipts/materialization.tsv"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-contract.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 558,
+        "sha256": "9710c4147eeff9787b7f611ddc085ac49709a8e0f24849559286cc61e8c27e41",
+        "git_blob_sha1": "92503dd9bc5751613f72da452157538a8e257573",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-contract.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-contract/receipts/materialization.tsv",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 19282,
+        "sha256": "0f21875027bcc7dc9cfa68e1e965225e7ce1f03802a60fe22d5f1800d5afae0c",
+        "git_blob_sha1": "cfbe75bf8bbf7043125a7628b60b212c637fa483",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-contract/receipts/materialization.tsv"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-convergence.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 564,
+        "sha256": "35602ad28d2a0fcd92ca7a69a71fcec99a20a82673023139bcae912bbc9640b2",
+        "git_blob_sha1": "02f359082dd7b2d0084f49eacaaa59f8967d2a5b",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-convergence.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-convergence/receipts/materialization.tsv",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 34556,
+        "sha256": "a87f0ecf67b05914872f58d3cd6afe3494285ff74b3935b95f35181416775883",
+        "git_blob_sha1": "ba103fcf5e81819018c11b95a00ebac2905551e7",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-convergence/receipts/materialization.tsv"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-observation-imports.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 580,
+        "sha256": "268e3c473143016e256e69360ea3909c403da1cd41c5f264f957e1af7ad6042a",
+        "git_blob_sha1": "4cf378780c7ef9fc80ea8ac16c8210f53e1f02ac",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-observation-imports.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-observation-imports/receipts/materialization.tsv",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 19719,
+        "sha256": "208992e13de48a1740b2e0b6075fc756f935d797a3e3080b8a9fe8564ec455c6",
+        "git_blob_sha1": "f94af1af0d6bb82cd007c0f47b2376365c90d4fa",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-observation-imports/receipts/materialization.tsv"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-upstream-imports.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 574,
+        "sha256": "93d8bbe6b54f3a473dae75c0809a7c465c7c29d6c0534598e1d26b013c75e8c9",
+        "git_blob_sha1": "337049e4cb8104042a82a405d9f4e3b568ec640b",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay-jcc-be92-upstream-imports.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-upstream-imports/receipts/materialization.tsv",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 19992,
+        "sha256": "23ce3c33b1154fffd08a367140e3ceeac7bcc78185940dfb3ccd13ca8b933419",
+        "git_blob_sha1": "65842208bc32f5df8d06951f52dc1770a00b2818",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/disk-replay/jcc-be92-upstream-imports/receipts/materialization.tsv"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/source-packets/32-final-source-packet.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 215015,
+        "sha256": "acd4a586753334a9cee8d81d2ac9745cf87160fe7a10e0a1ac6a041d059d050d",
+        "git_blob_sha1": "5e32b23f0265d2bc25dc9671023fea0620823a04",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/source-packets/32-final-source-packet.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/status.tsv",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 3859,
+        "sha256": "896a92c9ba590d7b3a1955422b83781aff0b7695bc96897d3ed30227eb21215a",
+        "git_blob_sha1": "4eb2f20a69e351bd7a499a76d48782bfcf9d1853",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/status.tsv"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/FILE_SEALS.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 17549,
+        "sha256": "0fcc8c3808d4ada7d55c7ab3055539f81c651d08da5d794ec8aeae263e18c232",
+        "git_blob_sha1": "fe63deffae7984cb42dfd7c5e73a526c3f20619e",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/FILE_SEALS.json"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/FILE_SEALS.json",
+        "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+        "bytes": 2146,
+        "sha256": "2fe867381a466d94a9c42c8e71f5ddf0dcea5601b432fcfed03bc70f95462d37",
+        "git_blob_sha1": "11ab0b138fa25b15bb07ca2d3e6e50acf516c675",
+        "repo": "hsoliwal/com.synexia",
+        "url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/execution-static-review/native-lane-epoch02-review/FILE_SEALS.json"
+      }
+    ],
+    "qualification_status": "BLOCKED",
+    "selected_input_files": 527,
+    "unchanged_selected_inputs": 523,
+    "changed_production_files": 4,
+    "compiled_main_sources": 446,
+    "emitted_main_class_files": 1446,
+    "current_parent_context_paths": 109,
+    "designated_receiving_sources": 19,
+    "current_phases": [
+      {
+        "id": "parser-t02-candidate-epoch01",
+        "status": "PASS",
+        "execution_classification": "EXECUTED_PASSED",
+        "counts": {
+          "tests": 43,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "T03_execution": "NOT_RERUN",
+        "result": {
+          "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/parser-t02-candidate-epoch01/RESULT.json",
+          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/parser-t02-candidate-epoch01/RESULT.json",
+          "bytes": 14247,
+          "sha256": "039b7d54e6de11a865874ef8f2820f3071e61700bf06224d94afdd0315ed63a6",
+          "git_blob": "a5d44068a5e01ec4c09612b2b145476d7c0268cc"
+        }
+      },
+      {
+        "id": "current-units-epoch02",
+        "status": "PASS",
+        "execution_classification": "EXECUTED_PASSED",
+        "counts": {
+          "tests": 119,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "T03_execution": "NOT_RERUN",
+        "result": {
+          "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-units-epoch02/RESULT.json",
+          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-units-epoch02/RESULT.json",
+          "bytes": 20809,
+          "sha256": "a7a92fc26c62ce0938464a75dff13ea1785822f787bf17e03ebf6dd0cc45296f",
+          "git_blob": "864b64878c8f06c45b9b6dad6d89c3284aaed612"
+        }
+      },
+      {
+        "id": "observation-regression-epoch02",
+        "status": "PASS",
+        "execution_classification": "EXECUTED_PASSED",
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "T03_execution": "NOT_RERUN",
+        "result": {
+          "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/observation-regression-epoch02/RESULT.json",
+          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/RESULT.json",
+          "bytes": 17990,
+          "sha256": "041ba5fa63b335839675d773c36588d6207c11d0933ad303fa3378a5922000d4",
+          "git_blob": "d6f19056296663d3da760957937a8f3edec64535"
+        }
+      },
+      {
+        "id": "upstream-regression-epoch02",
+        "status": "FAIL",
+        "execution_classification": "EXECUTED_FAILED",
+        "counts": {
+          "tests": 67,
+          "failures": 0,
+          "errors": 1,
+          "skipped": 0
+        },
+        "T03_execution": "NOT_RERUN",
+        "result": {
+          "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/upstream-regression-epoch02/RESULT.json",
+          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/upstream-regression-epoch02/RESULT.json",
+          "bytes": 14193,
+          "sha256": "c6a3b0125bae6af2b9f704784b4b114eb988da44cfb56696287134d309629609",
+          "git_blob": "2527bcf3a09ba0051880b06fd1e402a1fcfb5e36"
+        }
+      },
+      {
+        "id": "native-lane-epoch02",
+        "status": "PASS",
+        "execution_classification": "EXECUTED_PASSED",
+        "counts": {
+          "tests": 19,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "T03_execution": "NOT_RERUN",
+        "result": {
+          "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/native-lane-epoch02/RESULT.json",
+          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/RESULT.json",
+          "bytes": 11617,
+          "sha256": "206f4380105bfe863704b92bba17f8ce2df7bbb82d0fbe986751c1dc4d721796",
+          "git_blob": "0b22050eb54dab0e05cdb1f7b34e411abd092f53"
+        }
+      }
+    ],
+    "unit_phase_counts": {
+      "04-contract-growth": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "05-current-mastery": {
+        "tests": 15,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "06-core-java": {
+        "tests": 91,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "08-parent-java": {
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "observation_campaign": {
+      "status": "PASS",
+      "cases": 19,
+      "current_root": "ef73c54a20835369ae541b95bdb7b56ba42c3a4366607b00157a09f7572cc2e7",
+      "reported_pair_compilations": 76,
+      "compiler_count_limit": "The campaign reports76 paired-case compilations; two additional loader-control compilations are not included in that printed count.",
+      "result": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/observation-regression-epoch02/CAMPAIGN_RESULT.json",
+        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/CAMPAIGN_RESULT.json",
+        "bytes": 599,
+        "sha256": "622c75ca29de15c17344089df368255fa13dd35f340c708cd80d8476a1966a28",
+        "git_blob": "c0882c9cb45ebead41fc3889aebb02b40622de9d"
+      }
+    },
+    "upstream": {
+      "classification": "EXECUTED_FAILED",
+      "tests": 67,
+      "passed": 66,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "error": "Required static-analysis anchor AtomicPrimitiveEqualsUsesGet is unavailable (ClassNotFoundException).",
+      "test": "M3OpenRewriteTranspilerTest.runsConcernSeparatedMechanicalPassesAndChainsReceipts",
+      "classification_correction": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
+        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
+        "bytes": 883,
+        "sha256": "b7262f5ce0c1868e8b4741b2bd46c09fd26c16bc5a044179988c42ce80642c3e",
+        "git_blob": "e9a31d082ced46a6f57b0874a25b10df61634753"
+      },
+      "original_oracle_unchanged": true
+    },
+    "independent_native": {
+      "status": "PASS",
+      "tests": 19,
+      "donor_tests": 7,
+      "current_parent_tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "RXL_parity_cases": 72,
+      "RXM_compiler_parity_rows": 6,
+      "parity": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/native-lane-epoch02/PARITY.json",
+        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/PARITY.json",
+        "bytes": 1394,
+        "sha256": "b1d375e04deb8078e47e261238308de2d4312d6b0ed55a400725031884cfb0a6",
+        "git_blob": "74a05b892b158f2473e102c541be20274d636e44"
+      },
+      "aggregate_promoted": false
+    },
+    "mechanical_replay": {
+      "status": "PASS",
+      "completed_stages": 70,
+      "failed_stages": 0,
+      "unrun_stages": 0,
+      "recipe_crates": 5,
+      "actual_production_writes": 4,
+      "actual_copied_fixture_writes": 2,
+      "separate_disk_replay_results": 0,
+      "separate_disk_replay_writes": 0,
+      "fresh_main_sources": 446,
+      "equal_class_files": 1446,
+      "equal_resources": 34,
+      "behavioral_suites_rerun": false,
+      "result": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/RESULT.json",
+        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/RESULT.json",
+        "bytes": 2586,
+        "sha256": "066c4fa046adf063f2bffb02ac8d6be949e5f85d55de489dd081d56bddcd93dd",
+        "git_blob": "1a55550a8fe316b98743f3fa3f63bb8719a3b360"
+      }
+    },
+    "public_api": {
+      "status": "PASS",
+      "three_changed_public_owner_families": 3,
+      "family_owned_class_files": 31,
+      "outward_public_protected_types": 24,
+      "public_protected_members": 277,
+      "fourth_package_private_helper_outward_types": 0,
+      "scope": "Baseline and candidate compiled signatures are equal; helper package signatures remain equal and a private valueFrame method is added. This does not assert equal composite contract fingerprints.",
+      "report": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/contract-api-epoch02/REVIEW.md",
+        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/REVIEW.md",
+        "bytes": 2865,
+        "sha256": "eb6ddcfbba9e9f6d0fc675c4c58f9b279cd7c96cbd8acb9749e41591497f6c30",
+        "git_blob": "00284ac27872ad911924d3491b4277fb30247a22"
+      }
+    },
+    "scope_limits": [
+      "The 527 selected current inputs and 446 explicit main compiler sources are a bounded projection, not whole-repository or whole-reactor qualification.",
+      "Current parent evidence covers both declared classes (9 convergence and 3 RXM tests), with 88 first-party plus 19 vendor sources; retained vendor warnings are separate from first-party -Xlint:all -Werror.",
+      "Composition uses four frozen two-source fixtures and explicit options: 16 unique schedules/32 including replay. Structured receipts retain source hashes, not every complete intermediate source map.",
+      "Nested contract framing is linear in the observed value tree at the retained depth bound. This does not add a global allocation budget for compressed branching annotation defaults; composite annotation/array fingerprints deliberately change to v3.",
+      "Parser43 is the previously executed T02 candidate profile, not rerun in T03. Earlier cache/runtime applicability uses observational bracketing in the trusted offline/no-install workflow and archive custody, not JVM-loaded-byte attestation.",
+      "All34 main resources are checked directly in T03. Of the earlier source-resource identities,26 were directly execution-frozen and8 rely on later source/output/prior-copy equality; that historical distinction remains.",
+      "The independent Linux/GCC13/JDK21 native lane passes19 invocations and exact Java/native receipt parity. Java regex transitions remain Java; required library presence does not prove a JNI regex implementation, and API checks are not native-entry counts.",
+      "The whole selected upstream67 packet actually failed with one unavailable static-analysis recipe. Independent native and mechanical replay do not promote that gate or the blocked aggregate, source export or destination acceptance."
+    ]
+  },
+  "source_current_context": {
+    "input_commit": "be92c62ece9023b5c33676716a1076d00e26120a",
+    "input_root_tree": "3c4f32b66633a251ba2c117090830252a7e2da03",
+    "designated_binding_count": 19,
+    "original_source_packet_count": 503,
+    "current_context_count": 527,
+    "current_main_explicit_count": 446,
+    "current_parent_count": 109,
+    "current_parent_main": 88,
+    "current_parent_release8_vendor": 19,
+    "current_parent_test_classes": 2,
+    "receipts": {
+      "CURRENT_SOURCE_MANIFEST.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_SOURCE_MANIFEST.json",
+        "bytes": 1891080,
+        "sha256": "20fd857cb00711e02c34cd27445bd2c057db8f57a0cafb8ed9a455b453f3b37c",
+        "git_blob_sha1": "f1892501332d65721bfd6164597d93f3a298a10a",
+        "origin_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/CURRENT_SOURCE_MANIFEST.json",
+        "scope": "Recorded current-input body/context availability; not output qualification"
+      },
+      "PARENT_BUILD_CONTEXT.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/PARENT_BUILD_CONTEXT.json",
+        "bytes": 112397,
+        "sha256": "4f8fbf09070e4d45e42c7ac29c94401d70058fea04d98e44b3526a24c77912fc",
+        "git_blob_sha1": "665dac597b1b33414e152c9224c840e7e01127d5",
+        "origin_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/PARENT_BUILD_CONTEXT.json",
+        "scope": "Recorded current-input body/context availability; not output qualification"
+      },
+      "CURRENT_PROJECTION.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_PROJECTION.json",
+        "bytes": 596276,
+        "sha256": "18c5fea0f72fe21aa78df1aa6c319eb4276fc15aa481952539c221ce651e6f49",
+        "git_blob_sha1": "d20138ab763408bbbd793c1ff27778d866b29009",
+        "origin_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/CURRENT_PROJECTION.json",
+        "scope": "Recorded current-input body/context availability; not output qualification"
+      },
+      "CURRENT_CONTEXT_MANIFEST.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_CONTEXT_MANIFEST.json",
+        "bytes": 70459,
+        "sha256": "936730925c534f0744d5a3ed5831812c221c3ac919b889c1be5ebdfe294396ce",
+        "git_blob_sha1": "56f05d9af349f29cbfda8f12b158702606517fba",
+        "origin_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/CURRENT_CONTEXT_MANIFEST.json",
+        "scope": "Recorded current-input body/context availability; not output qualification"
+      },
+      "BUILD_ROLE_MAP.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/BUILD_ROLE_MAP.json",
+        "bytes": 63816,
+        "sha256": "cabf31b005b28c18053c107936134356986f55770368cb982800900380ee8689",
+        "git_blob_sha1": "eed55a4d5b77d6bfe61746576409ae68d46f8a84",
+        "origin_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/BUILD_ROLE_MAP.json",
+        "scope": "Recorded current-input body/context availability; not output qualification"
+      },
+      "INVENTORY_REVIEW.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_REVIEW.json",
+        "bytes": 14727,
+        "sha256": "41178470be98b342b83f58c43afa4a603d72c115584956c4fdbc96ce6a45d039",
+        "git_blob_sha1": "e3e43e60d7ed5247cadab7e58c5515e6e7e07136",
+        "origin_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/INVENTORY_REVIEW.json",
+        "scope": "Recorded current-input body/context availability; not output qualification"
+      },
+      "AMENDMENT.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/AMENDMENT.json",
+        "bytes": 1177,
+        "sha256": "e20b0de4dfa51c79e6e16d035c6c55a5d368a9641b175239cb6f41f916bd74a6",
+        "git_blob_sha1": "5009d7d338eaaca207129c277acc8513351939cc",
+        "origin_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/AMENDMENT.json",
+        "scope": "Recorded current-input body/context availability; not output qualification"
+      },
+      "INVENTORY_REVIEW.md": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_REVIEW.md",
+        "bytes": 13344,
+        "sha256": "17af04df1ca7db7329bbff3f2cfa840b39ab69d93ef3a61caa988b71bb221400",
+        "git_blob_sha1": "2f4e377117ec1355537aac0e9a1de8fa141f5ea2",
+        "origin_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/REVIEW.md",
+        "scope": "Recorded current-input body/context availability; not output qualification"
+      },
+      "INVENTORY_FILE_SEALS.json": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_FILE_SEALS.json",
+        "bytes": 183376,
+        "sha256": "02b0e8700b6d46a1c84730f8810ca510824af1da46655c5d59660b5902bb4b0c",
+        "git_blob_sha1": "3c068f6e10cc156cee9769a94997f5b7fbb3c4d9",
+        "origin_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/FILE_SEALS.json",
+        "scope": "Recorded current-input body/context availability; not output qualification"
+      },
+      "RECOVERY_SOURCE_INCLUDES.txt": {
+        "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/RECOVERY_SOURCE_INCLUDES.txt",
+        "bytes": 39132,
+        "sha256": "739ef583031ef3b940cbd141386ca91501fb7d505ce3ed78e2c55d2a98c70407",
+        "git_blob_sha1": "d64110d838a6a2632f8483c88ba0b2b94901e70d",
+        "origin_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-repo-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/source-includes.txt",
+        "scope": "Explicit current candidate compiler membership snapshot; no publication/execution claim from copying it"
+      }
+    },
+    "explicit_context_artifacts": [
+      {
+        "path": "synexia-mindex/native-jni/include/synexia_mindex.h",
+        "repo": "hsoliwal/com.synexia",
+        "commit": "be92c62ece9023b5c33676716a1076d00e26120a",
+        "bytes": 13313,
+        "sha256": "6ae696d7e43b6c583f04f951c33ac8cea4464f119ecea5ab90e31fc2327914ad",
+        "git_blob_sha1": "4e6d08f6927f066830799790a34aa143e0c14756",
+        "mode": "100644",
+        "roles": [
+          "original503-current-body"
+        ],
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-baseline-be92/synexia-mindex/native-jni/include/synexia_mindex.h",
+        "qualification": "CURRENT_INPUT_AVAILABILITY_ONLY"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/PSource.java",
+        "repo": "hsoliwal/com.synexia",
+        "commit": "be92c62ece9023b5c33676716a1076d00e26120a",
+        "bytes": 39733,
+        "sha256": "108456808afd62664bc8c85822afbc294ac1374da6404efad8412e2225c99dbe",
+        "git_blob_sha1": "50a3ae3345b6bcc5077ac38c9c8de7e9a128eb40",
+        "mode": "100644",
+        "roles": [
+          "current-main-supplement"
+        ],
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-baseline-be92/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/PSource.java",
+        "qualification": "CURRENT_INPUT_AVAILABILITY_ONLY"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/pom.xml",
+        "repo": "hsoliwal/com.synexia",
+        "commit": "be92c62ece9023b5c33676716a1076d00e26120a",
+        "bytes": 16380,
+        "sha256": "2f2763afa6bb183889b416013dae95761458442313c79753fabb081f8beb63ff",
+        "git_blob_sha1": "003b0c646fcc697e0d951411d32248689c1a89c2",
+        "mode": "100644",
+        "roles": [
+          "original503-current-body"
+        ],
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-baseline-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/pom.xml",
+        "qualification": "CURRENT_INPUT_AVAILABILITY_ONLY"
+      }
+    ],
+    "scope": "Complete selected current context and declaration availability, not all-repository closure or execution authority;19 designated artifacts are not the complete compiler graph."
+  }
+}

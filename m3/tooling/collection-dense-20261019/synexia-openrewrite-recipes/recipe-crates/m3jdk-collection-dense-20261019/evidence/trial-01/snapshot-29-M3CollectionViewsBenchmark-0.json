@@ -1,0 +1,20 @@
+{
+  "command": [
+    "java",
+    "-Xms256m",
+    "-Xmx256m",
+    "--add-modules",
+    "java.management,jdk.management",
+    "--add-reads",
+    "java.base=java.management",
+    "--add-reads",
+    "java.base=jdk.management",
+    "--patch-module",
+    "java.base=/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-01/snapshot/classes:/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-01/snapshot/bench-classes",
+    "-Dtest.m3.masks.native.library=/workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/trial-01/snapshot/libM3MasksCost.so",
+    "java.util.M3CollectionViewsBenchmark",
+    "integrated"
+  ],
+  "exit": 0,
+  "log_sha256": "4ed6df9e3ea84bfa06707ae18b41f52f77d42aeebf656fcd7e758b09dfb7fd2e"
+}

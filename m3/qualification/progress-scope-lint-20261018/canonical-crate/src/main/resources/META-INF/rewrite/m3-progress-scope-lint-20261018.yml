@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3jdk.ProgressScopeLint20261018
+displayName: M3 borrowed progress scope source lint prerequisites
+description: Adds exactly five method-local source-retained try-warning annotations to four sealed owners after public documentation qualification.
+recipeList:
+  - com.synexia.rewrite.M3ProgressScopeLintRecipe

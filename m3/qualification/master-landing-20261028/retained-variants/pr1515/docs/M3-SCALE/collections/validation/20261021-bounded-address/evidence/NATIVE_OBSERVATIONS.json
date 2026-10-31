@@ -1,0 +1,63 @@
+{
+  "schema": "synexia.data.address.public-native-observations.v1",
+  "DLL": {
+    "name": "m3_collections_address.dll",
+    "bytes": 41010,
+    "sha256": "3a931a52c2ca097f1fa9a690b40178d3de3aac57299bf9ba5f14250b7b81453f"
+  },
+  "export_format": "pei-x86-64",
+  "JNI_exports": [
+    "Java_com_m3_collections_M3LongAddressKernel_gatherNative"
+  ],
+  "import_names": [
+    "KERNEL32.dll",
+    "api-ms-win-crt-heap-l1-1-0.dll",
+    "api-ms-win-crt-private-l1-1-0.dll",
+    "api-ms-win-crt-runtime-l1-1-0.dll",
+    "api-ms-win-crt-stdio-l1-1-0.dll",
+    "api-ms-win-crt-string-l1-1-0.dll"
+  ],
+  "library_profiles": [
+    {
+      "profile": "missing_required",
+      "raw_trace_sha256": "d026e8610c60d01f5aa33adf944aedbe2ef83851c33b1e48071d127ccfcef41f",
+      "exact_fixture_DLL_loads": 0,
+      "gather_symbol_resolved": false,
+      "selector_mask_DLL_observed": false
+    },
+    {
+      "profile": "java_only",
+      "raw_trace_sha256": "f4dc526ffff06ad72ff4f0a2aabecabc580a00589d60f17f18a2aa8899e36685",
+      "exact_fixture_DLL_loads": 0,
+      "gather_symbol_resolved": false,
+      "selector_mask_DLL_observed": false
+    },
+    {
+      "profile": "native_required",
+      "raw_trace_sha256": "cc9bc3eeb66e0e5b0a118c9e4b53bc2708e682d5c6731d320a07400896b55910",
+      "exact_fixture_DLL_loads": 1,
+      "gather_symbol_resolved": true,
+      "selector_mask_DLL_observed": false
+    }
+  ],
+  "exact_fixture_load_path_verified_locally": true,
+  "checked_JNI": true,
+  "checked_JNI_diagnostics": 0,
+  "stdout_projection": "Published stdout logs normalize CRLF to LF; raw-byte identities are recorded below.",
+  "raw_stdout": {
+    "java_only": {
+      "bytes": 86,
+      "sha256": "f306cd4701b9e32c9ae0197a5d64eb35487c8a58cc6ede8d6b98f5017f29e136"
+    },
+    "native_required": {
+      "bytes": 85,
+      "sha256": "b638ace0d1d3ec30db776e5f30b40d212cee8a8e628e07fec711233f0683346d"
+    },
+    "missing_required": {
+      "bytes": 293,
+      "sha256": "b4059142093baa147b576b69e52265a8fc09294d775115c72c16a894858c9cb9"
+    }
+  },
+  "projection_note": "Raw export/trace logs stay local. Absolute fixture paths are omitted; their raw SHA256 and observed DLL/symbol facts are retained.",
+  "raw_exports_sha256": "d4d045246f0ca9d03073f9d4d54289715941ad934d9e4b076c159ef46c741704"
+}

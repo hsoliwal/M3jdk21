@@ -1,0 +1,42 @@
+[
+  {
+    "name": "lucene",
+    "fork_path": "nlp-work/forks/lucene/.m3/current-jmods/build.py",
+    "git_blob_sha1": "69a746857c9f0a0498a4720269679f77ac693b9f",
+    "sha256": "584342e4696b57872419feb12551b6f755084a2a4d21d3c7b11a0261f6885b3c",
+    "bytes": 21511,
+    "source_url": "https://github.com/hsoliwal/lucene/blob/873b6167603c69101d626ddffd8d733340300fea/.m3/current-jmods/build.py"
+  },
+  {
+    "name": "opennlp",
+    "fork_path": "nlp-work/forks/opennlp/dev/m3-jmod/build.py",
+    "git_blob_sha1": "ec2ae960d3f974cdd841f0a38c0c5c275375754f",
+    "sha256": "3a86e1b1d4c13d4beea48bd4df9491557c382bddd661a1cb7b94eac4259b9a46",
+    "bytes": 14886,
+    "source_url": "https://github.com/hsoliwal/opennlp/blob/8b647d1d389736952e43fb46865c874747f7acde/dev/m3-jmod/build.py"
+  },
+  {
+    "name": "lucene-dependencies",
+    "fork_path": "nlp-work/forks/lucene/.m3/current-jmods/dependency-lock.json",
+    "git_blob_sha1": "ae904f33e5e80d2b5b880f422269db4f00fa8bd2",
+    "sha256": "6e65c358662c9cf2b79ce6c948909d7b29ddb89282627a6ddffe933f587218be",
+    "bytes": 9858,
+    "source_url": "https://github.com/hsoliwal/lucene/blob/873b6167603c69101d626ddffd8d733340300fea/.m3/current-jmods/dependency-lock.json"
+  },
+  {
+    "name": "opennlp-dependencies",
+    "fork_path": "nlp-work/forks/opennlp/dev/m3-jmod/dependency-lock.json",
+    "git_blob_sha1": "ad80ac6170cd12c6316d4f5c4ca46b4aea02dd83",
+    "sha256": "bd56b7e43cf8190793c828ddb067e8b292bf226456b2de13fcf64449aeab8c66",
+    "bytes": 2582,
+    "source_url": "https://github.com/hsoliwal/opennlp/blob/8b647d1d389736952e43fb46865c874747f7acde/dev/m3-jmod/dependency-lock.json"
+  },
+  {
+    "name": "opennlp-verify",
+    "fork_path": "nlp-work/forks/opennlp/dev/m3-jmod/tests/verify.py",
+    "git_blob_sha1": "025c5e693646a5fcf2470f238129e93ab9212422",
+    "sha256": "87b670194552fbcdc0213d8b01c06770489d6829b516bc07ca098dfc4c9417cc",
+    "bytes": 5018,
+    "source_url": "https://github.com/hsoliwal/opennlp/blob/8b647d1d389736952e43fb46865c874747f7acde/dev/m3-jmod/tests/verify.py"
+  }
+]

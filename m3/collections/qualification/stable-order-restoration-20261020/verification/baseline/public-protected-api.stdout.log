@@ -1,0 +1,129 @@
+Compiled from "M3LongIndexProjection.java"
+public final class com.m3.collections.M3LongIndexProjection {
+  public static com.m3.collections.M3LongIndexProjection snapshot(long[]);
+    descriptor: ([J)Lcom/m3/collections/M3LongIndexProjection;
+
+  public int size();
+    descriptor: ()I
+
+  public boolean isEmpty();
+    descriptor: ()Z
+
+  public com.m3.collections.M3LongIndexProjection$Order order();
+    descriptor: ()Lcom/m3/collections/M3LongIndexProjection$Order;
+
+  public int physicalIndex(int);
+    descriptor: (I)I
+
+  public long get(int);
+    descriptor: (I)J
+
+  public com.m3.collections.M3LongIndexProjection slice(int, int);
+    descriptor: (II)Lcom/m3/collections/M3LongIndexProjection;
+
+  public int[] physicalIndices();
+    descriptor: ()[I
+
+  public long[] toArray();
+    descriptor: ()[J
+
+  public com.m3.collections.M3LongIndexProjection filtered(byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([BILcom/m3/collections/M3IndexMaskCompactor$Backend;)Lcom/m3/collections/M3LongIndexProjection;
+
+  public com.m3.collections.M3LongIndexProjection sortedAscending();
+    descriptor: ()Lcom/m3/collections/M3LongIndexProjection;
+
+  public com.m3.collections.M3LongIndexProjection sortedDescending();
+    descriptor: ()Lcom/m3/collections/M3LongIndexProjection;
+}
+Compiled from "M3LongAddressKernel.java"
+public final class com.m3.collections.M3LongAddressKernel {
+  public static int physicalIndex(int[], int);
+    descriptor: ([II)I
+
+  public static long get(long[], int[], int);
+    descriptor: ([J[II)J
+
+  public static boolean matches(byte[], int, int, int);
+    descriptor: ([BIII)Z
+
+  public static boolean nativeAvailable();
+    descriptor: ()Z
+
+  public static long[] gather(long[], int[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([J[IIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[J
+
+  public static void gatherInto(long[], int[], int, int, long[], int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([J[III[JILcom/m3/collections/M3IndexMaskCompactor$Backend;)V
+}
+Compiled from "M3IndexMaskCompactor.java"
+public final class com.m3.collections.M3IndexMaskCompactor {
+  public static boolean nativeAvailable();
+    descriptor: ()Z
+
+  public static int[] select(int[], byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([I[BILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I
+
+  public static int[] selectPositions(byte[], int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([BILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I
+
+  public static int[] selectPositions(byte[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([BIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I
+
+  public static int selectedCount(byte[], int);
+    descriptor: ([BI)I
+
+  public static int selectedCount(byte[], int, int);
+    descriptor: ([BII)I
+
+  public static long[] selectLong(long[], byte[], int);
+    descriptor: ([J[BI)[J
+
+  public static int[] selectWindow(int[], int, byte[], int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([II[BIIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[I
+
+  public static long[] selectLongWindow(long[], int, byte[], int, int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([JI[BIIILcom/m3/collections/M3IndexMaskCompactor$Backend;)[J
+}
+Compiled from "M3IndexMaskWindow.java"
+public final class com.m3.collections.M3IndexMaskWindow {
+  public static final int MAX_WINDOW;
+    descriptor: I
+  public static int nextIndex(long);
+    descriptor: (J)I
+
+  public static int written(long);
+    descriptor: (J)I
+
+  public static long scan(int[], byte[], int, int, int, int[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([I[BIII[IIILcom/m3/collections/M3IndexMaskCompactor$Backend;)J
+
+  public static long scanBounded(int[], byte[], int, int, int, int, int[], int, int, com.m3.collections.M3IndexMaskCompactor$Backend);
+    descriptor: ([I[BIIII[IIILcom/m3/collections/M3IndexMaskCompactor$Backend;)J
+}
+Compiled from "M3LongIndexProjection.java"
+public final class com.m3.collections.M3LongIndexProjection$Order extends java.lang.Enum<com.m3.collections.M3LongIndexProjection$Order> {
+  public static final com.m3.collections.M3LongIndexProjection$Order ENCOUNTER;
+    descriptor: Lcom/m3/collections/M3LongIndexProjection$Order;
+  public static final com.m3.collections.M3LongIndexProjection$Order ASCENDING;
+    descriptor: Lcom/m3/collections/M3LongIndexProjection$Order;
+  public static final com.m3.collections.M3LongIndexProjection$Order DESCENDING;
+    descriptor: Lcom/m3/collections/M3LongIndexProjection$Order;
+  public static com.m3.collections.M3LongIndexProjection$Order[] values();
+    descriptor: ()[Lcom/m3/collections/M3LongIndexProjection$Order;
+
+  public static com.m3.collections.M3LongIndexProjection$Order valueOf(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lcom/m3/collections/M3LongIndexProjection$Order;
+}
+Compiled from "M3IndexMaskCompactor.java"
+public final class com.m3.collections.M3IndexMaskCompactor$Backend extends java.lang.Enum<com.m3.collections.M3IndexMaskCompactor$Backend> {
+  public static final com.m3.collections.M3IndexMaskCompactor$Backend JAVA;
+    descriptor: Lcom/m3/collections/M3IndexMaskCompactor$Backend;
+  public static final com.m3.collections.M3IndexMaskCompactor$Backend NATIVE_REQUIRED;
+    descriptor: Lcom/m3/collections/M3IndexMaskCompactor$Backend;
+  public static com.m3.collections.M3IndexMaskCompactor$Backend[] values();
+    descriptor: ()[Lcom/m3/collections/M3IndexMaskCompactor$Backend;
+
+  public static com.m3.collections.M3IndexMaskCompactor$Backend valueOf(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lcom/m3/collections/M3IndexMaskCompactor$Backend;
+}

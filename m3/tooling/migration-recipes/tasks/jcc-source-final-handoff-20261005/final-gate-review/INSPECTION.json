@@ -1,0 +1,232 @@
+{
+  "all_reviewed_inputs_stable": true,
+  "bounded_diagnostic_scan": {
+    "categories": [
+      "token-prefix",
+      "private-key-header",
+      "environment-secret-key",
+      "bearer-token"
+    ],
+    "files": 34,
+    "matches": []
+  },
+  "destination_preimage_commit": "df06cdee5a8526f573b3ad89622824d0b49e2f25",
+  "frozen_input_stability": {
+    "external": 63,
+    "fixed": 166,
+    "sha256_git_blob_length_mode_match": true,
+    "unchanged": 229
+  },
+  "installer_results": [
+    {
+      "files": 4,
+      "plan_sha256": "af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e",
+      "recipe": "jcc-source-final-handoff-20261005/1",
+      "state": "before",
+      "step": "01-check-E2-preimages",
+      "writes": 0
+    },
+    {
+      "files": 4,
+      "plan_sha256": "af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e",
+      "recipe": "jcc-source-final-handoff-20261005/1",
+      "state": "after",
+      "step": "04-apply",
+      "writes": 4
+    },
+    {
+      "files": 4,
+      "plan_sha256": "af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e",
+      "recipe": "jcc-source-final-handoff-20261005/1",
+      "state": "after",
+      "step": "05-apply-fixed-point",
+      "writes": 0
+    },
+    {
+      "files": 4,
+      "plan_sha256": "af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e",
+      "recipe": "jcc-source-final-handoff-20261005/1",
+      "state": "before",
+      "step": "06-rollback",
+      "writes": 4
+    },
+    {
+      "files": 4,
+      "plan_sha256": "af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e",
+      "recipe": "jcc-source-final-handoff-20261005/1",
+      "state": "after",
+      "step": "07-replay",
+      "writes": 4
+    },
+    {
+      "files": 4,
+      "plan_sha256": "af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e",
+      "recipe": "jcc-source-final-handoff-20261005/1",
+      "state": "after",
+      "step": "08-check-final",
+      "writes": 0
+    }
+  ],
+  "java": {
+    "actual_compiled_owner_sources": 1,
+    "actual_compiled_test_sources": 1,
+    "copied_xml_matches_actual_build_bytes": true,
+    "errors": 0,
+    "failures": 0,
+    "loaded_resource_copies_byte_equal": 11,
+    "methods": [
+      "namedEntryPointAndSerializedRetainedOwnerReplayAllFourExistingInputs",
+      "allFourUpdatesPreserveIdentityAndFreshSecondPassIsUnchanged",
+      "fortyFourOtherRecordsAllIdsOrderGlobalsAndTwentyGatesStayExact",
+      "exactPreviousSourceEpochObjectsAndExistingHistoryAreRetained",
+      "receiverRepinPreservesItsExactCandidateAndDoesNotAlterOtherTargets",
+      "historicalDescriptorAndExecutedReceiverEvidenceRemainExact",
+      "finalSourceIdentityNeverPromotesBlockedCapabilityOrTransfersProof",
+      "everyDriftedExistingTargetRefusesWithoutPartialResults",
+      "everyDuplicateExistingTargetRefusesEvenWithValidPostimageBytes",
+      "everyMissingExistingPreimageRefusesTheWholeTextPass",
+      "everyMutationBetweenCompleteScanAndVisitRefuses"
+    ],
+    "skipped": 0,
+    "testcase_count": 11,
+    "tests": 11
+  },
+  "operational_outputs": [
+    {
+      "actual_equals_complete_after_bytes": true,
+      "after_sha256": "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0",
+      "before_sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+      "original_mode_preserved": true,
+      "path": "m3/docs/jcc-source-handoff.md"
+    },
+    {
+      "actual_equals_complete_after_bytes": true,
+      "after_sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3",
+      "before_sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace",
+      "original_mode_preserved": true,
+      "path": "m3/docs/name-mapping.json"
+    },
+    {
+      "actual_equals_complete_after_bytes": true,
+      "after_sha256": "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12",
+      "before_sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+      "original_mode_preserved": true,
+      "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv"
+    },
+    {
+      "actual_equals_complete_after_bytes": true,
+      "after_sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef",
+      "before_sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+      "original_mode_preserved": true,
+      "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json"
+    }
+  ],
+  "plan_sha256": "af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e",
+  "python": {
+    "count_basis": "8 preimage +14 guard +14 proper mixed +4 edited postimage +4 missing postimage conditions; full six-test PASS confirms loops with check/apply/rollback",
+    "methods": [
+      "test_actual_existing_input_check_apply_fixed_point_rollback_and_replay",
+      "test_each_of_four_required_preimages_missing_or_drifted_refuses_atomically",
+      "test_each_unchanged_guard_missing_or_drifted_refuses_atomically",
+      "test_all_four_output_mixed_before_after_subsets_refuse_atomically",
+      "test_each_foreign_postimage_edit_refuses_rollback_and_replay_atomically",
+      "test_each_missing_existing_postimage_refuses_rollback_and_replay_atomically"
+    ],
+    "modes_per_negative_condition": 3,
+    "negative_workspace_conditions": 44,
+    "passed": 6,
+    "refused_operation_calls": 132,
+    "tests": 6
+  },
+  "review_time_utc": "2026-10-05T12:10:56.735699+00:00",
+  "schema": "m3.independent-e03-executed-evidence-review.v1",
+  "scope": "Read-only evidence inspection; no project code, recipe, build or test rerun",
+  "scope_limits": {
+    "full_owning_module_gate_executed": false,
+    "jdk_acceptance": false,
+    "new_JNI_execution": false,
+    "receiver_behavior_rerun": false,
+    "remote_publication_reviewed_here": false,
+    "source_export_admitted": false,
+    "source_failure_still_required": "67 upstream tests:66 passed/1 error; later source JNI gates unrun"
+  },
+  "source_commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+  "status": "PASS_METADATA_PROOF_WITH_CAPABILITY_COMPLETION_BLOCKED",
+  "steps": [
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "id": "01-check-E2-preimages"
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "id": "02-actual-text-recipe-maven"
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "id": "03-actual-packet-contract"
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "id": "04-apply"
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "id": "05-apply-fixed-point"
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "id": "06-rollback"
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "id": "07-replay"
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "id": "08-check-final"
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "id": "09-whole-map-validate"
+    },
+    {
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "id": "10-completion-remains-blocked"
+    }
+  ],
+  "validation": {
+    "blocked_record_tests_empty": true,
+    "blocked_records": 2,
+    "completion": "INCOMPLETE",
+    "completion_exit": 2,
+    "completion_refusal_expected": true,
+    "explicit_reference_review": {
+      "all_referenced_local_file_identities_rechecked": true,
+      "destination_distinct_paths": 34,
+      "destination_reference_occurrences": 45,
+      "e2_payload_files_full_byte_equal": 56,
+      "failed_checker_has_written_note_not_raw_command_trace": true,
+      "initial_checker_separator_failure_preserved": true,
+      "output_guard_adjustment_preserves_prior_failed_artifacts": true,
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/reference-audit/REFERENCE_AUDIT.json",
+      "result": "PASS",
+      "sha256": "a4af3c44bc1afa6f83881c17ced55f418940dbd792bfd687cbb3a717c44887cd",
+      "source_proof_reference_occurrences": 46,
+      "source_reference_occurrences": 17,
+      "uses_existing_remote_readbacks_not_new_remote_requests": true
+    },
+    "mapping_records": 46,
+    "normal_validator_checks_blocked_target_recipe_evidence_hashes": false,
+    "normal_validator_exit": 0
+  }
+}

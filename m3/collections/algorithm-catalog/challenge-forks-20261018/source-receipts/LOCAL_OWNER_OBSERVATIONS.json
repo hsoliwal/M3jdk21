@@ -1,0 +1,45 @@
+{
+  "observations": [
+    {
+      "bytes": 8421,
+      "local_head": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "mutated": false,
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "read_scope": "WHOLE_FILE_STATIC_REVIEW",
+      "repository": "hsoliwal/M3JDK21",
+      "source_sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "target_validation_executed_by_this_agent": false
+    },
+    {
+      "bytes": 9637,
+      "local_head": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "mutated": false,
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongSortedSnapshot.java",
+      "read_scope": "WHOLE_FILE_STATIC_REVIEW",
+      "repository": "hsoliwal/M3JDK21",
+      "source_sha256": "37ce5651596e7b44bb2512d2bdc6ee8bba40bf95320c5c377162077032c69975",
+      "target_validation_executed_by_this_agent": false
+    },
+    {
+      "bytes": 8458,
+      "local_head": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "mutated": false,
+      "path": "m3/collections/src/main/java/com/m3/collections/M3StateMaskHistogram.java",
+      "read_scope": "WHOLE_FILE_STATIC_REVIEW",
+      "repository": "hsoliwal/M3JDK21",
+      "source_sha256": "965a098c4f8b0103b5a497ef7e7897e0e0cb740f6f38da96fa6d4e277f859a42",
+      "target_validation_executed_by_this_agent": false
+    },
+    {
+      "bytes": 9008,
+      "local_head": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "mutated": false,
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java",
+      "read_scope": "WHOLE_FILE_STATIC_REVIEW",
+      "repository": "hsoliwal/M3JDK21",
+      "source_sha256": "f865b006888f1d4554b51cf69e7f4d6bac67458982f957f9151af0b4f09eaec8",
+      "target_validation_executed_by_this_agent": false
+    }
+  ],
+  "schema": "m3-donor-research-owner-observations-v1"
+}

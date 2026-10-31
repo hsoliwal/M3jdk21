@@ -1,0 +1,190 @@
+{
+  "scope": "Actual outputs of passing original OpenNLP donor gate; all17 named JAR/JMODs and linked-image identity",
+  "artifacts": [
+    {
+      "path": "opennlp-owner-001/jars/hppc.jar",
+      "bytes": 1670747,
+      "sha256": "4ba40f5707bcd57330ebade06e7f8c12f0534de1d548bb6aed0a40567a7295cf"
+    },
+    {
+      "path": "opennlp-owner-001/jars/io.github.classgraph.jar",
+      "bytes": 635068,
+      "sha256": "cd3d03540bb9def8cc73464ac17c4d2609f1ca192ce2b2b6b4b4b4b9a6b2fa9f"
+    },
+    {
+      "path": "opennlp-owner-001/jars/jcommander.jar",
+      "bytes": 85277,
+      "sha256": "b574c7129aa3c20ad6a41661b5b01edce133df99e83cc786cec3e1cc73bdd1ba"
+    },
+    {
+      "path": "opennlp-owner-001/jars/libsvm.jar",
+      "bytes": 41587,
+      "sha256": "a9289a65b236adab54c6f0dd96bc7c3ce394108cf72ecc4cd249151ca3a5da6b"
+    },
+    {
+      "path": "opennlp-owner-001/jars/org.apache.commons.xml.secure.jar",
+      "bytes": 76196,
+      "sha256": "f99636716db8483d72b82441e70e275019f5a120e2af2722c66decdd272169eb"
+    },
+    {
+      "path": "opennlp-owner-001/jars/org.apache.opennlp.morfologik.jar",
+      "bytes": 18670,
+      "sha256": "784f8ad3f434134553f528ca42929e523a919f318186a0502be0a41e18af1eeb"
+    },
+    {
+      "path": "opennlp-owner-001/jars/org.apache.opennlp.spellcheck.jar",
+      "bytes": 56854,
+      "sha256": "d792b9cff10c99691cacb0aeef7cd3b474edafdaf3cbb28ccc71428568f02225"
+    },
+    {
+      "path": "opennlp-owner-001/jars/org.apache.opennlp.tools.jar",
+      "bytes": 2049317,
+      "sha256": "a1d929ba987cb1a07192a298cfd0e58ee0d29b0fdd90804d55c3996b3c28df5a"
+    },
+    {
+      "path": "opennlp-owner-001/jars/org.apache.opennlp.uima.jar",
+      "bytes": 59761,
+      "sha256": "acb7e6f5279e71811a4eff991c88b1e4f2e89213cbdffbdb5e200ea064cce38b"
+    },
+    {
+      "path": "opennlp-owner-001/jars/org.carrot2.morfologik.fsa.jar",
+      "bytes": 19032,
+      "sha256": "eeef1d800cd0d5ff0262941ab84e969ab65019370df6b130ef691406e265bd98"
+    },
+    {
+      "path": "opennlp-owner-001/jars/org.carrot2.morfologik.fsa_builders.jar",
+      "bytes": 31411,
+      "sha256": "149f22e9891ec825cbce3b5e08bc1beb2e811aedf9f8d0b730c7a8a85168ee7f"
+    },
+    {
+      "path": "opennlp-owner-001/jars/org.carrot2.morfologik.stemming.jar",
+      "bytes": 53930,
+      "sha256": "191ab39d86775180742cdcf8eb5fe15e83e63510bd0563ae30df86c34dfbec3a"
+    },
+    {
+      "path": "opennlp-owner-001/jars/org.carrot2.morfologik.tools.jar",
+      "bytes": 37062,
+      "sha256": "3646d588efd1d8a52e0696154ccb360d97fded4a71ff1fdfb2b3f27c55b80022"
+    },
+    {
+      "path": "opennlp-owner-001/jars/org.slf4j.jar",
+      "bytes": 69479,
+      "sha256": "2c58b034909bf9f53015b28931daa56dfa0867707e8f428c52b0681577fe9554"
+    },
+    {
+      "path": "opennlp-owner-001/jars/org.slf4j.simple.jar",
+      "bytes": 14902,
+      "sha256": "e2857b339302155ccf441ba34ca53733f09eac6faaf04a78ea632718e00045ba"
+    },
+    {
+      "path": "opennlp-owner-001/jars/uimaj.core.jar",
+      "bytes": 1938578,
+      "sha256": "6b03337c59e1521a768c03540cc9c4b25bc19325087b70e57150b1828f89f837"
+    },
+    {
+      "path": "opennlp-owner-001/jars/zlibsvm.core.jar",
+      "bytes": 40782,
+      "sha256": "e2a8fb431ae68d4259f51de23c64f80f6dd4b758afc1ef3bb56b6ee2e7ccb7e2"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/hppc.jmod",
+      "bytes": 1713844,
+      "sha256": "8b6f35eae85fb2593f01e3cc671adbd65ff02a66eed1b0fc1437c72f26ae47b7"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/io.github.classgraph.jmod",
+      "bytes": 659747,
+      "sha256": "ed3e41d076720f5072674a8eb1780cda8e75b9baeacfeb77c2d452bd5fda0bf5"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/jcommander.jmod",
+      "bytes": 108648,
+      "sha256": "36306de623b33d17326262e09d48a8d93acbed41c9bb43337e78d933a5d9b9ad"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/libsvm.jmod",
+      "bytes": 64584,
+      "sha256": "e875fae0b972aaf7d5fc4e0deb306c8090eaa6bcf09ec9463eb9c2b9f37d2fa0"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/org.apache.commons.xml.secure.jmod",
+      "bytes": 99125,
+      "sha256": "d138625ce8105e67ee058c9d9d9eb90ae05a43c5bd8734c0992d40d165f4341e"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/org.apache.opennlp.morfologik.jmod",
+      "bytes": 41007,
+      "sha256": "d8da191ecfafed092c7dce1f67ad412add2800af3abb153acc260137fd3751da"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/org.apache.opennlp.spellcheck.jmod",
+      "bytes": 79529,
+      "sha256": "dad23b7bed43d5e2b4d282c5a7f52aa3a9514ae333b05c1ab25a488f63ef47c1"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/org.apache.opennlp.tools.jmod",
+      "bytes": 2080372,
+      "sha256": "122008d197179c250986084b402c0d5ca2091ffe456f0da5e209852f41b875a0"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/org.apache.opennlp.uima.jmod",
+      "bytes": 82292,
+      "sha256": "a2eb430cb021e65d004134395c433591866075cc124f6378367d00286b1c7a68"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/org.carrot2.morfologik.fsa.jmod",
+      "bytes": 42151,
+      "sha256": "987dd35e3a98fe5552727cb9e212af526edb0c265b03a68e0f5088bdec00f1b5"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/org.carrot2.morfologik.fsa_builders.jmod",
+      "bytes": 54502,
+      "sha256": "5f8e8dfcd439f0cee775b2939d1c6110b5fefc917d99908aa11534ac11c7932f"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/org.carrot2.morfologik.stemming.jmod",
+      "bytes": 77471,
+      "sha256": "8224d72ab31a04f62a956101f2a31c4e0d6af18e9bc4929f17d449b2dcbdd3ee"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/org.carrot2.morfologik.tools.jmod",
+      "bytes": 60401,
+      "sha256": "b4dcdfd910595bacd8581de32390851b6d2b4df5d6b78966def1888c6cc965aa"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/org.slf4j.jmod",
+      "bytes": 92672,
+      "sha256": "6d15d1bd3dc00d265a98d7104eca5e599fe767848f5306d440c192f64ed2559a"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/org.slf4j.simple.jmod",
+      "bytes": 37423,
+      "sha256": "0052137392ff8b1efb35b2e9fdb1c5117ae5c8832ca5dcfae885fdd5f560d06c"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/uimaj.core.jmod",
+      "bytes": 1970961,
+      "sha256": "b77b133e8fc1a3c582bc4efb38abda7033841acbd047d2c63fd74ba658cad7f0"
+    },
+    {
+      "path": "opennlp-owner-001/pack/jmods/zlibsvm.core.jmod",
+      "bytes": 62375,
+      "sha256": "c41bdc4d1806207ab3962d58648045dcdcd629bba88106ade3ca52a1b9bf8b9c"
+    },
+    {
+      "path": "opennlp-owner-001/pack/image/release",
+      "bytes": 778,
+      "sha256": "bd5f736136d20101cb029d8a32b209b27d69b6ddce2719e2d2ac234c68c38173"
+    },
+    {
+      "path": "opennlp-owner-001/pack/image/bin/java",
+      "bytes": 12328,
+      "sha256": "3282b9858bee1ffd212a1a640236699494235d106e3b8bccbf726f9ac02cb0aa"
+    },
+    {
+      "path": "opennlp-owner-001/pack/image/lib/modules",
+      "bytes": 86118309,
+      "sha256": "e94b8c9e225ccf28148d49ff46f86d42eeff586bedee81275bc7b83924f3b76c"
+    }
+  ]
+}

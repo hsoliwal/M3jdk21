@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 Hitesh Soliwal and contributors
+m3/collections/src/main/java/com/m3/collections/M3TreeMap.java	0fdc824473fbdc40fa4a4dbefec0ffa429999f0ee362b9b5eb5af9798b3037f9	652e0178506867fbc0417d8f2b1304deca1f3c52179f78f1aa408efba80475ee	M3TreeMap.java.txt
+m3/collections/src/test/java/com/m3/collections/M3FootprintContractTest.java	e369e66b2f95179383ef1e1b2a9cef28f439f762fcd3478e6df2113e3d1f8957	d7ce007320cc1593125dc686cddf4a1c2abdb70ac0cd6be5728081ac856d4084	M3FootprintContractTest.java.txt
+m3/collections/src/test/java/com/m3/collections/M3TreeMapGetOrDefaultTest.java	ABSENT	e9781753cdcf4727a97a13e9ecb5046c7f45ed3cc0086baa7ddd6bcb6a5b994f	M3TreeMapGetOrDefaultTest.java.txt

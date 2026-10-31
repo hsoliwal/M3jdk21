@@ -1,0 +1,117 @@
+{
+  "status": "PASS",
+  "scope": "Exact current Java21 staged Lucene donor source, real recipe and module-path/installed-image gates; combined M3 receiver remains separate",
+  "fork_commit": "873b6167603c69101d626ddffd8d733340300fea",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "/workspace/scratch/206049dfb270/nlp-work/forks/lucene/.m3/current-jmods/build.py",
+    "--source",
+    "/workspace/scratch/206049dfb270/nlp-work/forks/lucene",
+    "--jdk-home",
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "--packager",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/jmod-recipes/tools/jmod_pack.py",
+    "--dependency-dir",
+    "/workspace/scratch/206049dfb270/nlp-work/dependencies/lucene",
+    "--out",
+    "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001",
+    "--recipe-runner",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py",
+    "--recipe-resources",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/src/main/resources",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/hppc.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/io.github.classgraph.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/jcommander.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/libsvm.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.apache.commons.xml.secure.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.apache.opennlp.morfologik.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.apache.opennlp.spellcheck.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.apache.opennlp.tools.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.apache.opennlp.uima.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.carrot2.morfologik.fsa.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.carrot2.morfologik.fsa_builders.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.carrot2.morfologik.stemming.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.carrot2.morfologik.tools.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.slf4j.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.slf4j.simple.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/uimaj.core.jar",
+    "--opennlp-module",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/zlibsvm.core.jar"
+  ],
+  "environment": {
+    "JAVA_HOME": "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "JAVA_TOOL_OPTIONS": "-Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData"
+  },
+  "exit_code": 0,
+  "seconds": 118.148,
+  "source_and_dependencies_unchanged": true,
+  "fork_tracked_clean": true,
+  "inputs_sha256": "9490dddc38c2b81beab49bc6a5690e8666fb210497f5f01e1ee0cd6f39e50fd2",
+  "readback_sha256": "9490dddc38c2b81beab49bc6a5690e8666fb210497f5f01e1ee0cd6f39e50fd2",
+  "log_sha256": "7319155f1f24801fc21b17ef2111086fc359db10382475cca65452d9b968df86",
+  "external_dependencies": "16 separately SHA-locked artifacts plus17 previously qualified OpenNLP named modules; external archives are not source-built",
+  "runtime_dependency_resolution": "--dependency-dir selects existing locked archives; staging and runtime invoke no Maven/download step",
+  "combined_receiver": "REFUSED existing source lock drift; see CURRENT_RECEIVER_001.json",
+  "limits": [
+    "Not the original Gradle25 randomized full suite",
+    "Java21 preview is explicitly enabled",
+    "Faiss native library and optional external models remain separate",
+    "No full M3JDK/String/HotSpot or performance promotion"
+  ],
+  "build_report_sha256": "928d1eada8e945e65a6f8f1ed8c78a7b6ef8e2cf31e629ace456eb71d391c365",
+  "production_modules": 29,
+  "java_sources": 3626,
+  "named_modules": 59,
+  "source_recipe_changes": 176,
+  "source_recipe_fixed_point_changes": 0,
+  "descriptor_recipe_fixed_point_changes": 0,
+  "runtime_checks": [
+    {
+      "runtime": "module-path",
+      "test": "Jdk21ProviderCheck",
+      "result": "PASS"
+    },
+    {
+      "runtime": "module-path",
+      "test": "Jdk21ExpressionsCheck",
+      "result": "PASS"
+    },
+    {
+      "runtime": "module-path",
+      "test": "M3LuceneJmodCheck",
+      "result": "PASS"
+    },
+    {
+      "runtime": "linked-image",
+      "test": "Jdk21ProviderCheck",
+      "result": "PASS"
+    },
+    {
+      "runtime": "linked-image",
+      "test": "Jdk21ExpressionsCheck",
+      "result": "PASS"
+    },
+    {
+      "runtime": "linked-image",
+      "test": "M3LuceneJmodCheck",
+      "result": "PASS"
+    }
+  ]
+}

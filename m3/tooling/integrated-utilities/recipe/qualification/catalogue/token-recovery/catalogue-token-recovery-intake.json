@@ -1,0 +1,57 @@
+{
+  "schema": "M3_INTEGRATED_CATALOGUE_SERIAL_INTAKE_V1",
+  "parent_canonical_source_commit": "4de06d536308121b64bbe714096f7cad6bc0b908",
+  "target_baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "intake_kind": "NEW_SERIAL_PASS_FROM_DURABLE_CORE_CHECKPOINT",
+  "historical_inventory2_bytes": "UNRECOVERED_NOT_RECREATED",
+  "token_manifest_sha256": "eb2065224e9fa6fe734a4086f3dd8401da8ba7e0eed910df341a5a010bf9778c",
+  "target_files": [
+    {
+      "path": "m3/docs/name-mapping.json",
+      "candidate_file": "/workspace/scratch/0125adabf4e6/m3jdk21-work/catalogue-token-recovery-candidates/m3/docs/name-mapping.json",
+      "before_sha256": "2bb378d4e2af9c0bf62482182acdf53f1919abe16e6146195d38d9bcfc6ab9d7",
+      "after_sha256": "80094396bd12f77bf90741cd61d9b190b2fbe613ab4a07960669e9652fe9d7fc",
+      "before_source": "CANONICAL_CORE_RECIPE_TEMPLATE_AT_4de06d536308121b64bbe714096f7cad6bc0b908"
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
+      "candidate_file": "/workspace/scratch/0125adabf4e6/m3jdk21-work/catalogue-token-recovery-candidates/m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
+      "before_sha256": "0271ca2761cb871091fb22c5d7989ff11822ff2deb65d67d2c58080878948ff5",
+      "after_sha256": "1e5c8b03586ff87d1ae1d81a97e667cbcc22710fc7fc3540c25bce11a5c9c159",
+      "before_source": "CANONICAL_CORE_RECIPE_TEMPLATE_AT_4de06d536308121b64bbe714096f7cad6bc0b908"
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
+      "candidate_file": "/workspace/scratch/0125adabf4e6/m3jdk21-work/catalogue-token-recovery-candidates/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
+      "before_sha256": "f123ae356ffdd5df1523205dc5f1f48e6daf461b8a6f908a9870e348e80f5e7f",
+      "after_sha256": "2aec0ce2f08dccaf2405ba5950e5ce1378de0f44546f000b85a07c675ab0e0ae",
+      "before_source": "CANONICAL_CORE_RECIPE_TEMPLATE_AT_4de06d536308121b64bbe714096f7cad6bc0b908"
+    },
+    {
+      "path": "m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md",
+      "candidate_file": "/workspace/scratch/0125adabf4e6/m3jdk21-work/catalogue-token-recovery-candidates/m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md",
+      "before_sha256": "301320272695a993769df1164709d2c5fbe469e45543139ecbbece8bf824fbf2",
+      "after_sha256": "dc8213d2136ec4a33c5f66e1e5ea4089f894df18cad07a1ba153811e17fc5db3",
+      "before_source": "CANONICAL_CORE_RECIPE_TEMPLATE_AT_4de06d536308121b64bbe714096f7cad6bc0b908"
+    },
+    {
+      "path": "m3/compatibility/check_integrated_utility_coverage.py",
+      "candidate_file": "/workspace/scratch/0125adabf4e6/m3jdk21-work/catalogue-token-recovery-candidates/m3/compatibility/check_integrated_utility_coverage.py",
+      "before_sha256": "75a089b2ef4bce9beb75f88869c4f613c530df528c872af33df9e8440914d9c1",
+      "after_sha256": "56bf749b02a394a5981fc80a5b8fc9cee52d7dbf637b3ac4b5244f69b347c483",
+      "before_source": "CANONICAL_CORE_RECIPE_TEMPLATE_AT_4de06d536308121b64bbe714096f7cad6bc0b908"
+    },
+    {
+      "path": "m3/compatibility/test_integrated_utility_coverage.py",
+      "candidate_file": "/workspace/scratch/0125adabf4e6/m3jdk21-work/catalogue-token-recovery-candidates/m3/compatibility/test_integrated_utility_coverage.py",
+      "before_sha256": "e783a54fcd7430755874e55dd2af19530d217084a76d61d845ab14f3c1069f5f",
+      "after_sha256": "8184270534252daf426b4878795018712fad00a0883c974e9712e50ef5342f3c",
+      "before_source": "CANONICAL_CORE_RECIPE_TEMPLATE_AT_4de06d536308121b64bbe714096f7cad6bc0b908"
+    }
+  ],
+  "unchanged_existing_catalogue_target": "m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json",
+  "all_prior_mapping_rows_and_phase_states_preserved": true,
+  "runtime_qualification": "SEPARATE_FRESH_SOURCE_BOUND_TOKEN_RECEIPTS",
+  "verifier_execution": "PENDING_RESULT_INSPECTION",
+  "receiving_input_commit": "2717d156ad2aba73dfdfcfc6a58b59a82371798e"
+}

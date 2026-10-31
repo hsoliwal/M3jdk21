@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3IndexPathMaskClassification20261021
+displayName: M3JDK21 indexed full-width mask terminal classification
+description: Exact hash-pinned Java LST transformation of the existing index-path owner, preserving ABI and contracts.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-index-pathmask-classification-20261021
+      lst: true

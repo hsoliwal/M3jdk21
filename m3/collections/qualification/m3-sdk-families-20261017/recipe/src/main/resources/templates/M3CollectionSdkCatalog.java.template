@@ -1,0 +1,90 @@
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ * GENERATED from the canonical Synexia M3 collection SDK family catalogue.
+ */
+package com.m3.collections;
+
+import java.util.AbstractList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
+/**
+ * Stable, fully qualified SDK family vocabulary. This catalog preserves external
+ * provider API names rather than relabeling Guava, Eclipse, Apache, Spring or
+ * JDK interfaces as if M3 already implemented them.
+ *
+ * <p>Storage is parallel immutable metadata arrays; a Family record is created
+ * only for an actual query, never per collection element. Existing M3 owners
+ * are separate proving-ground components unless an exact provider API adapter
+ * has independently passed its behavioral contract. Candidate names are
+ * planning metadata, <em>not Java classes</em> and never load a dependency.</p>
+ */
+public final class M3CollectionSdkCatalog {
+    public enum Vendor { APACHE, ECLIPSE, GUAVA, JDK, SPRING }
+    public enum Disposition {
+        /** Actual JDK owner remains in charge; no M3 substitution is claimed. */
+        JDK_RETAINED,
+        /** An M3 component exists but provider API substitutability is not proven. */
+        M3_BACKEND_ONLY,
+        /** An M3 JDK-shaped view exists; full external-library parity is not claimed. */
+        M3_VIEW_ONLY,
+        /** Real adapter in optional M3 interop artifact; third-party dependencies required. */
+        OPTIONAL_ADAPTER,
+        /** Only the proposed capability/name has been catalogued, not installed. */
+        PENDING
+    }
+    /** A resolved SDK name; candidate roles are never advertised as installed classes. */
+    public record Family(String upstreamName, Vendor vendor, String existingM3Owner,
+                         String candidateRole, Disposition disposition, String semanticContract) {
+        public Family {
+            Objects.requireNonNull(upstreamName);
+            Objects.requireNonNull(vendor);
+            Objects.requireNonNull(existingM3Owner);
+            Objects.requireNonNull(candidateRole);
+            Objects.requireNonNull(disposition);
+            Objects.requireNonNull(semanticContract);
+        }
+        public boolean hasExistingM3Owner() { return !existingM3Owner.isEmpty(); }
+    }
+
+    // DATA GENERATED FROM catalog/FAMILY_CATALOG.tsv — do not hand-edit this class.
+    // BEGIN GENERATED PARALLEL ARRAYS
+/* @M3_FAMILY_ARRAYS@ */
+    // END GENERATED PARALLEL ARRAYS
+
+    private static final List<Family> FAMILIES = java.util.Collections.unmodifiableList(
+            new AbstractList<>() {
+                @Override public Family get(int index) {
+                    Objects.checkIndex(index, NAMES.length);
+                    return row(index);
+                }
+                @Override public int size() { return NAMES.length; }
+            });
+
+    private M3CollectionSdkCatalog() { }
+    private static Family row(int i) {
+        return new Family(NAMES[i], VENDORS[i], OWNERS[i], CANDIDATES[i], STATES[i], CONTRACTS[i]);
+    }
+    /** Count of external, fully qualified catalogued provider interfaces/classes. */
+    public static int size() { return NAMES.length; }
+    /** Immutable indexed view; no record objects are kept for each registered family. */
+    public static List<Family> families() { return FAMILIES; }
+    /** Exact case-sensitive fully qualified lookup, O(log N). Provider aliases never collide. */
+    public static Optional<Family> find(String upstreamName) {
+        Objects.requireNonNull(upstreamName, "upstreamName");
+        int index = Arrays.binarySearch(NAMES, upstreamName);
+        return index < 0 ? Optional.empty() : Optional.of(row(index));
+    }
+    public static Family require(String upstreamName) {
+        return find(upstreamName).orElseThrow(() ->
+                new IllegalArgumentException("unregistered collection SDK name: " + upstreamName));
+    }
+    /** Deterministic vendor filter over the indexed catalogue; source array order retained. */
+    public static List<Family> byVendor(Vendor vendor) {
+        Objects.requireNonNull(vendor, "vendor");
+        return FAMILIES.stream().filter(family -> family.vendor() == vendor).toList();
+    }
+}

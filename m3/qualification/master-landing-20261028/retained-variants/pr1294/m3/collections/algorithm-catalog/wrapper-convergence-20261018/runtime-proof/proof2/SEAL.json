@@ -1,0 +1,29 @@
+{
+  "gate": "seal",
+  "command": [
+    "python3",
+    "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/prepare.py",
+    "--crate",
+    "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+    "--dataset",
+    "m3jdk21-wrapper-proof2-20261018",
+    "--repository",
+    "hsoliwal/M3jdk21",
+    "--baseline",
+    "/workspace/scratch/8762dba320ce/audit/collections-latest-baseline",
+    "--candidates",
+    "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/candidates",
+    "--baseline-ref",
+    "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+    "--recipe-owner",
+    "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes"
+  ],
+  "cwd": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "JAVA_HOME": "/tmp/m3-toolchain/jdk-21.0.12.1+1",
+  "started_at_utc": "2026-10-18T05:54:43.456704+00:00",
+  "exit_code": 0,
+  "seconds": 0.064,
+  "log": "/workspace/scratch/8762dba320ce/com.synexia/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-verification-20261018/r2/proof/seal.log",
+  "sha256": "b1e7003350bdf7eecb565b7a7da8e07602ed27aa4659ba1d25d5dde55f03e8c6",
+  "dataset": "m3jdk21-wrapper-proof2-20261018"
+}

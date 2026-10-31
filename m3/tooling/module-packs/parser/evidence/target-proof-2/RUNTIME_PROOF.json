@@ -1,0 +1,23 @@
+{
+  "build_javac_after_test": false,
+  "compiler_patch": "EXPLICIT_EXTERNAL_SOURCE_COMPILED_PATCH",
+  "compiler_source_files": [
+    "com/sun/source/util/M3AST.java",
+    "com/sun/tools/javac/m3/M3ASTPC.java",
+    "com/sun/tools/javac/m3/M3PrimitiveImageCompiler.java",
+    "com/sun/tools/javac/main/JavaCompiler.java"
+  ],
+  "jar_sha256": "22f2ccf032add6fa4f1124fdd1eb8d67758d18efdcebfabcbd59fc75b5266dc6",
+  "jmod_sha256": "c777266f0cbe71ec9828f1565ecf06320b194bb12eb830e5c5f22ac17abc96cd",
+  "linked_modules_sha256": "28573f29ca92bf542b48ae3cad5f70dc009b03c090b8d899cb2e1d7f37a61a0b",
+  "module": "jdk.m3.parser",
+  "pending": [
+    "full M3JDK/HotSpot source build and jtreg",
+    "M3AST plugin/service discovery in rebuilt compiler descriptor",
+    "other platform and performance qualification"
+  ],
+  "replay_stdout_sha256": "df8c5ff7e53750d37d5de36351d0fd6b6ec81d0e48eb67841cfae8db5e9fda61",
+  "schema": "M3_PARSER_RUNTIME_PROOF_V1",
+  "scope": "Optional JMOD and linked image; existing compiler sources supplied by explicit external --patch-module.",
+  "status": "PASS"
+}

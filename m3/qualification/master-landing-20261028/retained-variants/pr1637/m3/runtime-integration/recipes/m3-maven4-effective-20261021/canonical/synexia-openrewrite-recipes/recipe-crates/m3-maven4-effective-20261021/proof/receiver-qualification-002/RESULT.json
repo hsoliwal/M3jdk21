@@ -1,0 +1,199 @@
+{
+  "schema": "M3_MAVEN4_COPIER_QUALIFICATION/1",
+  "status": "PASS",
+  "scope": "isolated exact product-source fixtures; no target repository writes",
+  "sdk_receipt_sha256": "beca41e77882f29e9d389cbc858ea1b86358ea754395686bbb1697c0a7c5e794",
+  "script_sha256": "3a21138b68b7befc5d29cfbaefd59ef510217ef2f5785c6ceb026693ccf7114a",
+  "source_seals_sha256": "fb401eeb0467c16ffa4d95d8de2a6c539775f096db81a7a7ac4fc717ad6e74b9",
+  "target_paths": 7,
+  "first_writes": 7,
+  "replay_writes": 0,
+  "refusals": 4,
+  "historical_catalogue_unchanged_sha256": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+  "steps": [
+    {
+      "name": "01-preflight",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/canonical/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/receiving"
+      ],
+      "exit_code": 0,
+      "log_sha256": "96d6dabf9a1577625dbd7670da827a0ff58d8036fce20140ebdf9dbf1c668c93",
+      "receipt_sha256": "4847ae6a8ad9c8433348bf193c24dc776aeba9f917c15927d6ff9b39980d2913",
+      "before": {
+        ".github/workflows/m3-ast-real-providers-20261019.yml": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
+        "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+        "m3/tooling/module-packs/parser/real-providers/README.md": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+        "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3"
+      },
+      "after": {
+        ".github/workflows/m3-ast-real-providers-20261019.yml": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
+        "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+        "m3/tooling/module-packs/parser/real-providers/README.md": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+        "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3"
+      }
+    },
+    {
+      "name": "02-first-apply",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/canonical/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/receiving",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "log_sha256": "1cbe601b356eabae85ba1c4a362f96a916d0c7338cff62d8d51c198e95ae04db",
+      "receipt_sha256": "f9376d8b5ad572e41d4e35754040585b7f7e7b9684d3900bdbcb9710708625ac",
+      "before": {
+        ".github/workflows/m3-ast-real-providers-20261019.yml": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
+        "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+        "m3/tooling/module-packs/parser/real-providers/README.md": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+        "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3"
+      },
+      "after": {
+        ".github/workflows/m3-ast-real-providers-20261019.yml": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
+        "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+        "m3/tooling/module-packs/parser/real-providers/README.md": "6fc9cb143dcc9b7f475b8b0a67bbc3dd06c9cc8911910af7ad4d10521e0b0fd5",
+        "m3/tooling/module-packs/parser/real-providers/maven4/README.md": "2ca516f609e270927621a1e17f808673bd70cf9620347fdc1a8e86e7b33a08cd",
+        "m3/tooling/module-packs/parser/real-providers/maven4/pom.xml": "4676935b501344ce535b3c49af87a2ba06ca413c0bd23bc20f3cf9fdbd95ad14",
+        "m3/tooling/module-packs/parser/real-providers/maven4/verify.py": "9f1d5601bf227bacb431e94cfcce2efa9484fec9fdc64c656875276ca56c6cff",
+        "m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3Maven4ProviderContract.java": "0d0e529cb57618d7a790764f2fed1089c3c18865bf8169ae6f6859e8046e5191",
+        "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java": "2814f6f292978b421cec2914cc48a96384cc3e926377b138559e287a005854c3"
+      }
+    },
+    {
+      "name": "03-fixed-point",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/canonical/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/receiving",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "log_sha256": "54385b94ffb37b578f44629cdceaeb1fe593c25f8f2e6f786d2307e56bdb0419",
+      "receipt_sha256": "1dcb8ede98487393e2be2889f87b323cf7fb2c71384fea84a16fa4a2d6237e91",
+      "before": {
+        ".github/workflows/m3-ast-real-providers-20261019.yml": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
+        "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+        "m3/tooling/module-packs/parser/real-providers/README.md": "6fc9cb143dcc9b7f475b8b0a67bbc3dd06c9cc8911910af7ad4d10521e0b0fd5",
+        "m3/tooling/module-packs/parser/real-providers/maven4/README.md": "2ca516f609e270927621a1e17f808673bd70cf9620347fdc1a8e86e7b33a08cd",
+        "m3/tooling/module-packs/parser/real-providers/maven4/pom.xml": "4676935b501344ce535b3c49af87a2ba06ca413c0bd23bc20f3cf9fdbd95ad14",
+        "m3/tooling/module-packs/parser/real-providers/maven4/verify.py": "9f1d5601bf227bacb431e94cfcce2efa9484fec9fdc64c656875276ca56c6cff",
+        "m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3Maven4ProviderContract.java": "0d0e529cb57618d7a790764f2fed1089c3c18865bf8169ae6f6859e8046e5191",
+        "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java": "2814f6f292978b421cec2914cc48a96384cc3e926377b138559e287a005854c3"
+      },
+      "after": {
+        ".github/workflows/m3-ast-real-providers-20261019.yml": "fa803e9cba2a7882f8f7f3fe90071734d6ec660aa162929ee873f20a0f7ebcb0",
+        "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+        "m3/tooling/module-packs/parser/real-providers/README.md": "6fc9cb143dcc9b7f475b8b0a67bbc3dd06c9cc8911910af7ad4d10521e0b0fd5",
+        "m3/tooling/module-packs/parser/real-providers/maven4/README.md": "2ca516f609e270927621a1e17f808673bd70cf9620347fdc1a8e86e7b33a08cd",
+        "m3/tooling/module-packs/parser/real-providers/maven4/pom.xml": "4676935b501344ce535b3c49af87a2ba06ca413c0bd23bc20f3cf9fdbd95ad14",
+        "m3/tooling/module-packs/parser/real-providers/maven4/verify.py": "9f1d5601bf227bacb431e94cfcce2efa9484fec9fdc64c656875276ca56c6cff",
+        "m3/tooling/module-packs/parser/real-providers/src/test/java/jdk/m3/parser/tests/M3Maven4ProviderContract.java": "0d0e529cb57618d7a790764f2fed1089c3c18865bf8169ae6f6859e8046e5191",
+        "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java": "2814f6f292978b421cec2914cc48a96384cc3e926377b138559e287a005854c3"
+      }
+    },
+    {
+      "name": "04-product-drift",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/canonical/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/receiving-drift",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "a2af09b01e40768aa955ea2c959458dad080a31d2164928072364de6ed78587b",
+      "receipt_sha256": "77951014b2e646c63242c8b3f93ad13a3d34ffeacc0fa3311556c2343a33d787",
+      "before": {
+        ".github/workflows/m3-ast-real-providers-20261019.yml": "42307eb87eeb15b2be9e2449b2f3bda82fbf36ae91888f3e4570a41721c4d27d",
+        "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+        "m3/tooling/module-packs/parser/real-providers/README.md": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+        "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3"
+      },
+      "after": {
+        ".github/workflows/m3-ast-real-providers-20261019.yml": "42307eb87eeb15b2be9e2449b2f3bda82fbf36ae91888f3e4570a41721c4d27d",
+        "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+        "m3/tooling/module-packs/parser/real-providers/README.md": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+        "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3"
+      }
+    },
+    {
+      "name": "05-symbolic-destination",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/canonical/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/receiving-symbolic",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "f23150bf6d6eb134f66736cae7f898d3f3aa3331f07587c7bdbb94638de2b28b",
+      "receipt_sha256": "350a88d04ee4bbdf7dbe1d541f2cd05de04df3b6a4769ca49b2499208fe6fe2f",
+      "before": {
+        "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+        "m3/tooling/module-packs/parser/real-providers/README.md": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+        "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3"
+      },
+      "after": {
+        "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+        "m3/tooling/module-packs/parser/real-providers/README.md": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+        "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3"
+      }
+    },
+    {
+      "name": "06-emitted-drift",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/canonical/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/receiving-emitted-drift",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "ba4f2db632009b6a9e7b6af62353a81af392260ee6e1f53f2e58fbda9153fda0",
+      "receipt_sha256": "2942751404f146b4117617e6706c217ee345b5c8f317aa3b306b86faa90a5748",
+      "before": {
+        ".github/workflows/m3-ast-real-providers-20261019.yml": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
+        "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+        "m3/tooling/module-packs/parser/real-providers/README.md": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+        "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3"
+      },
+      "after": {
+        ".github/workflows/m3-ast-real-providers-20261019.yml": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
+        "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+        "m3/tooling/module-packs/parser/real-providers/README.md": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+        "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3"
+      }
+    },
+    {
+      "name": "07-owner-drift",
+      "command": [
+        "python3",
+        "-B",
+        "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/canonical/synexia-openrewrite-recipes/recipe-crates/m3-maven4-effective-20261021/apply_receiver.py",
+        "/workspace/scratch/206049dfb270/jobs-work/maven4-recipe/receiver-qualification-002/receiving-owner-drift",
+        "--apply"
+      ],
+      "exit_code": 1,
+      "log_sha256": "0238aa10992b626b2dbd276172cf6251325f247fc6c2450269c8c7c562a1d21a",
+      "receipt_sha256": "2bd989d319c9efd45406107075f891e7dfca2ab8c3b9cb8c8956b596ea6dceee",
+      "before": {
+        ".github/workflows/m3-ast-real-providers-20261019.yml": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
+        "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+        "m3/tooling/module-packs/parser/real-providers/README.md": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+        "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3"
+      },
+      "after": {
+        ".github/workflows/m3-ast-real-providers-20261019.yml": "29154a6605ad4bd1ecac65a980a0f70bb9f88d61805295ad698ec965c9ac6d57",
+        "m3/tooling/module-packs/parser/real-providers/CATALOGUE.csv": "6c3f7c2015abfde1e07006ae4175b4494da941ea10c20df25fb0cf32fbcf49e1",
+        "m3/tooling/module-packs/parser/real-providers/README.md": "a8a65167b5b1c0d7cd6ae53cee772185d3eb3b457dd2e5ed5c49848b3be46da6",
+        "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTAuthoritativeModels.java": "8fe4828ed449335d3ec4975b16f708ff26fa6739dad82523379cd2f7bfb6bef3"
+      }
+    }
+  ]
+}

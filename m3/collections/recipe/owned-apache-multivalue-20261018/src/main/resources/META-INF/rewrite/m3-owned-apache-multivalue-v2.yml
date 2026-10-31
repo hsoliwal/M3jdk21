@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.OwnedApacheMultiValueV220261018
+displayName: Owned M3 Apache multivalue V2 source custody
+description: Preferred exact32-source installer after later independent null-bulk validation. Source custody only; actual Java21 compiler/runtime proofs remain separate.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: owned-apache-multivalue-v2
+      lst: false

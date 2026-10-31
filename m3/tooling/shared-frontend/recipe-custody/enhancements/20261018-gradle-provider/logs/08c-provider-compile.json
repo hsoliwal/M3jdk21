@@ -1,0 +1,20 @@
+{
+  "label": "08c-provider-compile",
+  "command": [
+    "/tmp/m3-array-refinement-20261018-recovery/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/maven-cache",
+    "-Dm3.gradle.worker.jar=/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/proof-inputs/gradle-exact-spi-419a77cf.jar",
+    "-Dm3.compiler.patch=/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/proof-inputs/compiler-module/classes",
+    "process-test-classes"
+  ],
+  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/generated/m3/tooling/module-packs/build-support/gradle-provider",
+  "jdk": "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1",
+  "previous": "08b-exact-spi-artifact",
+  "started_utc": "2026-10-18T12:56:02.788660+00:00",
+  "finished_utc": "2026-10-18T12:56:05.092788+00:00",
+  "exit_code": 1,
+  "log_sha256": "46e7010039d40e15fe477882f5562bc5530b28a9441f9d0d4c484aad02a1309d"
+}

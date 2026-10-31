@@ -1,0 +1,5 @@
+ProgressMonitors.java:90:20: compiler.warn.try.resource.not.referenced: ignored
+ProgressMonitors.java:111:20: compiler.warn.try.resource.not.referenced: ignored
+- compiler.err.warnings.and.werror
+1 error
+2 warnings

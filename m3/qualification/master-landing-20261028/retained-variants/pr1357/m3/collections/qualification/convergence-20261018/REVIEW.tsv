@@ -1,0 +1,54 @@
+path	donor_pr	decision
+m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java	1291	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/main/java/com/m3/collections/M3FilteredNavigableSet.java	1303	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	1314	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java	1314	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	1260	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java	1303	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/main/java/com/m3/collections/M3LongCompositeViews.java	1284	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java	1303	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java	1260	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java	1303	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/main/native/collections/m3_index_mask_window.c	1303	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3DequeSpanCopyTest.java	1303	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationContract.java	1314	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3FilteredNavigationReconciliationTest.java	1314	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullContract.java	1328	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3FilteredSetNullTest.java	1328	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3FilteredSplitContract.java	1303	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3FilteredSplitsMaskSpansTest.java	1303	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3IndexPathMasksAliasContract.java	1314	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopProof.java	1260	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3IndexedReadOnlyNoopTest.java	1260	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekProof.java	1284	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3IndexedSetAlgebraSeekTest.java	1284	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3MaskSpansContract.java	1303	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasContract.java	1328	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3PathMaskAliasTest.java	1328	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3SignalDimensionsContract.java	1303	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3StoredRepresentativeContract.java	1345	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceContract.java	1291	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java	1291	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/test/native/m3_mask_window_spans.c	1303	selected; owning Java/JNI suite PASS; see VERIFICATION.md for standalone limits
+m3/collections/src/main/java/com/m3/collections/M3BagRankIndex.java	1260	retain newer master owner
+m3/collections/src/test/java/com/m3/collections/M3BagRankIndexSelfTest.java	1260	retain newer master owner
+m3/collections/src/test/java/com/m3/collections/M3BagRankIndexTest.java	1260	retain newer master owner
+m3/collections/src/main/java/com/m3/collections/M3BagRankIndex.java	1291	retain newer master owner
+m3/collections/src/test/java/com/m3/collections/M3BagRankIndexSelfTest.java	1291	retain newer master owner
+m3/collections/src/test/java/com/m3/collections/M3BagRankIndexTest.java	1291	retain newer master owner
+m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	1303	merge sorted spliterator atom into 1314 template
+m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	1328	equivalent atom already selected from 1314
+m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java	1328	equivalent atom already selected from 1314
+m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java	1345	equivalent atom already selected from 1314
+m3/vendor/third_party/apiguardian-api/PROVENANCE.json	1303	selected build/provenance fix; unchanged donor Java sources
+m3/vendor/third_party/apiguardian-api/pom.xml	1303	selected build/provenance fix; unchanged donor Java sources
+m3/vendor/third_party/apiguardian-api/verify_source.py	1303	selected build/provenance fix; unchanged donor Java sources
+m3/vendor/third_party/junit-jupiter-5.10.2/verify_source.py	1303	selected build/provenance fix; unchanged donor Java sources
+m3/vendor/third_party/junit-jupiter-api-5.10.2/verify_source.py	1303	selected build/provenance fix; unchanged donor Java sources
+m3/vendor/third_party/junit-jupiter-engine-5.10.2/verify_source.py	1303	selected build/provenance fix; unchanged donor Java sources
+m3/vendor/third_party/junit-jupiter-params-5.10.2/verify_source.py	1303	selected build/provenance fix; unchanged donor Java sources
+m3/vendor/third_party/junit-platform-commons-1.10.2/verify_source.py	1303	selected build/provenance fix; unchanged donor Java sources
+m3/vendor/third_party/junit-platform-engine-1.10.2/verify_source.py	1303	selected build/provenance fix; unchanged donor Java sources
+m3/vendor/third_party/opentest4j/verify_source.py	1303	selected build/provenance fix; unchanged donor Java sources
+m3/vendor/third_party/univocity-parsers/verify_source.py	1303	selected build/provenance fix; unchanged donor Java sources
+m3/vendor/third_party/junit-platform-launcher-1.10.2/verify_source.py	1303-derived	same source-verifier correction; launcher built from unchanged donor sources

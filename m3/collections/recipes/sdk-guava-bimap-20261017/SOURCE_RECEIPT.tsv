@@ -1,0 +1,8 @@
+role	owner	path	git_blob_sha1	license	intake
+M3_RECEIVER_BASE	hsoliwal/M3jdk21	master	e913ab89056657eca4009678cfe9a657c020e79b	OpenJDK/M3 per-file	BASE_READ_ONLY
+CORE_DEPENDENCY	hsoliwal/M3jdk21	m3/collections/src/main/java/com/m3/collections/M3LinkedHashMap.java	ade59880b8c9b2bee1b32ae67ca9d29b7382d998	Apache-2.0	KEEP
+JAVA_NATIVE_BOUNDARY	hsoliwal/M3jdk21	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	073d16f32c268b67b2b21a8d4152494654df8d56	Apache-2.0	KEEP
+GUAVA_API	google/guava	guava/src/com/google/common/collect/BiMap.java at v33.4.8	9adbff493fad52a1d4b195ed5ad0b830c6b2542a	Apache-2.0	API_REFERENCE_ONLY
+GENERATED_BIMAP	hsoliwal/com.synexia	M3GuavaBiMap.java template	50ed7fb7d179ce46d3849de107d0081bdf9d8be2	Apache-2.0	SOURCE_SEALED
+GENERATED_STANDALONE_ORACLE	hsoliwal/com.synexia	M3GuavaBiMapSelfTest.java template	238ba78fafe131147dc7c0f079feb95a19441230	Apache-2.0	SOURCE_SEALED
+GENERATED_GUAVA_TEST	hsoliwal/com.synexia	M3GuavaBiMapContractTest.java template	02ff2add2e75121c255452bd05ccf4ca9e771a3d	Apache-2.0	SOURCE_SEALED

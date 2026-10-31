@@ -1,0 +1,2 @@
+m3/ast/src/main/java/com/m3/ast/M3ASTHierarchy.java	068cb795d6617d77ca5297adf96419fadd97f1f40e6b0a63b36f43b222c6c36a	42de0c10be151e05c9d8edc3def9db28377ec5b289a5373f338c6dc052855eac	0001-M3ASTHierarchy.java.txt
+m3/ast/src/test/java/com/m3/ast/M3ASTHierarchyContract.java	5086649c5e87cfa418247a175f232c273db121d56ea1afff646de0f615d932c1	fe026c02f4b029c6de04cddf69783f9df7ca32c5abca3e02076f010adf2b6773	0002-M3ASTHierarchyContract.java.txt

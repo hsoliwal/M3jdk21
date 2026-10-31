@@ -1,0 +1,417 @@
+diff --git a/.github/workflows/m3-filtered-bounded-current-20261018.yml b/.github/workflows/m3-filtered-bounded-current-20261018.yml
+index 56d3675..09a5e60 100644
+--- a/.github/workflows/m3-filtered-bounded-current-20261018.yml
++++ b/.github/workflows/m3-filtered-bounded-current-20261018.yml
+@@ -1,46 +1,83 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ # SPDX-License-Identifier: Apache-2.0
++# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ name: M3 bounded filtered current-master receiver
+ on:
+   pull_request:
+     paths:
+       - 'm3/collections/qualification/m3-filtered-bounded-current-20261018/**'
++      - 'm3/collections/qualification/m3-filtered-navigation-20261018/**'
+       - 'm3/collections/src/main/java/com/m3/collections/M3FilteredViews.java'
+       - 'm3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java'
+-      - 'm3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationContract.java'
+-      - 'm3/collections/src/test/java/com/m3/collections/M3BoundedFilteredNavigationTest.java'
++      - 'm3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java'
++      - 'm3/collections/src/main/native/collections/m3_index_path_masks.c'
++      - 'm3/collections/src/main/native/collections/m3_index_mask_compactor.c'
++      - 'm3/collections/src/main/native/collections/m3_index_mask_window.c'
++      - 'm3/collections/src/test/java/com/m3/collections/**'
+       - '.github/workflows/m3-filtered-bounded-current-20261018.yml'
+   workflow_dispatch:
++permissions:
++  contents: read
++concurrency:
++  group: m3-filtered-current-${{ github.workflow }}-${{ github.ref }}
++  cancel-in-progress: true
+ jobs:
+   sealed-receiver-contract:
+     runs-on: ubuntu-latest
++    timeout-minutes: 25
+     steps:
+       - uses: actions/checkout@v4
++        with:
++          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+       - uses: actions/setup-java@v4
+         with:
+           distribution: temurin
+           java-version: '21'
+-      - name: Check real Java source/test hashes against canonical Synexia output seals
++      - name: Replay real OpenRewrite SDK and all input/receiver contracts
+         run: |
+           set -eu
+-          awk -F '\t' '{print $3 "  " $1}' \
+-            m3/collections/qualification/m3-filtered-bounded-current-20261018/recipe/manifest.tsv | sha256sum -c -
+-      - name: Independently check mirrored recipe resource hashes
++          Q=m3/collections/qualification/m3-filtered-navigation-20261018
++          mvn -B -ntp -f "$Q/recipe/pom.xml" \
++            -Dm3.dataset=filtered-navigation-20261018 \
++            -Drecipe.owner.root="$PWD/$Q/recipe/sdk-owner" -Pcontract verify
++          python3 "$Q/recipe/receive.py" --dataset filtered-navigation-20261018 --target "$PWD" --check
++          awk -F '\t' '!/^#/ && NF == 3 {print $3 "  " $1}' \
++            "$Q/recipe/target/filtered-navigation-20261018/candidate/SDK_RESULTS.tsv" | sha256sum -c -
++      - name: Preserve historical receipt and unchanged predecessor outputs
+         run: |
+           set -eu
+           Q=m3/collections/qualification/m3-filtered-bounded-current-20261018/recipe
+           awk -F '\t' -v q="$Q" '{print $3 "  " q "/" $4}' "$Q/manifest.tsv" | sha256sum -c -
+-          cmp "$Q/M3FilteredViews.java.txt" m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java
+-          cmp "$Q/M3MutableFilteredViews.java.txt" m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java
+-      - name: Actual strict Java21 source compile and JDK NavigableSet Map differential
++          awk -F '\t' '$1 != "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java" {print $3 "  " $1}' \
++            "$Q/manifest.tsv" | sha256sum -c -
++      - name: Current full core and focused Java/JNI runtime closure
++        run: python3 m3/collections/qualification/m3-filtered-navigation-20261018/runtime/verify.py
++      - uses: actions/upload-artifact@v4
++        if: always()
++        with:
++          name: m3-filtered-current-${{ github.event.pull_request.head.sha || github.sha }}
++          path: |
++            m3/collections/qualification/m3-filtered-navigation-20261018/runtime/target/*.log
++            m3/collections/qualification/m3-filtered-navigation-20261018/runtime/target/*.json
++            m3/collections/qualification/m3-filtered-navigation-20261018/runtime/target/*.tsv
++            m3/collections/qualification/m3-filtered-navigation-20261018/runtime/target/*/surefire-reports/*.xml
++            m3/collections/qualification/m3-filtered-navigation-20261018/recipe/target/filtered-navigation-20261018/surefire-reports/*
++            m3/collections/qualification/m3-filtered-navigation-20261018/recipe/target/filtered-navigation-20261018/candidate/SDK_*.tsv
++  owning-maven-contract:
++    needs: sealed-receiver-contract
++    runs-on: ubuntu-latest
++    timeout-minutes: 20
++    steps:
++      - uses: actions/checkout@v4
++        with:
++          ref: ${{ github.event.pull_request.head.sha || github.sha }}
++      - uses: actions/setup-java@v4
++        with:
++          distribution: temurin
++          java-version: '21'
++      - name: Build genuine source-owned JUnit prerequisite
+         run: |
+-          set -eu
+-          PKG=m3/collections/src/main/java/com/m3/collections
+-          TST=m3/collections/src/test/java/com/m3/collections
+-          OUT="$RUNNER_TEMP/m3-bounded/classes"
+-          mkdir -p "$OUT"
+-          javac --release 21 -proc:none -Xlint:all,-serial -Werror -d "$OUT" \
+-            "$PKG/M3FilteredViews.java" "$PKG/M3MutableFilteredViews.java" \
+-            "$TST/M3BoundedFilteredNavigationContract.java"
+-          java -cp "$OUT" com.m3.collections.M3BoundedFilteredNavigationContract
+-      - name: Owning Maven JUnit contract (must be green before promotion)
+-        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3BoundedFilteredNavigationTest test
++          mvn -B -ntp -f m3/vendor/third_party/pom.xml \
++            -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2 \
++            -am -DskipTests install
++      - name: Original owning Maven JUnit gate (must be green before promotion)
++        run: mvn -B -ntp -f m3/collections/pom.xml -Dtest=M3BoundedFilteredNavigationTest,M3FilteredNavigationReconciliationTest test
+diff --git a/m3/collections/qualification/m3-filtered-navigation-20261018/README.md b/m3/collections/qualification/m3-filtered-navigation-20261018/README.md
+new file mode 100644
+index 0000000..4ec0fae
+--- /dev/null
++++ b/m3/collections/qualification/m3-filtered-navigation-20261018/README.md
+@@ -0,0 +1,49 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
++<!-- SPDX-License-Identifier: Apache-2.0 -->
++# M3JDK filtered wrapper and mask reconciliation
++
++This is a finite continuation of the existing Synexia collection refinement, based on M3JDK21 commit `2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49`. The canonical authoring owner is `hsoliwal/com.synexia`, under `synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017`, dataset `filtered-navigation-20261018`. `SOURCE_RECEIPT.json` identifies the published source checkpoint. The `recipe` directory is a pinned verification and receiving mirror, with the unchanged canonical engine sources under `sdk-owner`; it is not a runtime dependency.
++
++## Synexia M3 invariant
++
++Maintain reusable, validated transformation recipes; apply their actual Maven/OpenRewrite results through serial, contract-preserving per-file transformations; and continuously improve algorithm selection through problem-category catalogues and donor evaluation. Decompose a source into meaningful replaceable behavioral atoms when this improves reuse or verification. Preserve public callable interfaces, representation contracts and established valid-path behavior. Record contract defects explicitly instead of presenting their correction as equivalence to the defective behavior.
++
++## Selected operations
++
++| Existing owner | Reused operation and correction | Admission boundary |
++| --- | --- | --- |
++| `M3FilteredViews` | Resolve a legal null navigational candidate using a stored opposite boundary, including custom comparators that place null in the middle. | Live owner and comparator semantics remain authoritative; no fabricated null search key or retained membership cache. |
++| `M3FilteredViews` | Use comparator membership and the existing stored-key atom for sorted-map entry membership. | Predicates receive stored representatives. Corrected comparator aliases are a disclosed contract repair. |
++| `M3FilteredViews` | Restore strict read-only guards for sequenced endpoints and reversed sorted views. | Empty mutations also refuse; original backing views remain live. |
++| `M3FilteredViews` | Replace known private filter decorator recursion with an ordered, depth-sized dynamic array of predicates or membership continuations. | No payload copy. Preserve inner-to-outer callback order and repeated representative scans; generic membership can still demand quadratic callbacks. Foreign wrappers and sorted membership remain opaque. |
++| `M3IndexPathMasks` | Extend existing output/input identity preflight to required and forbidden mask vectors before either backend runs. | Empty and zero-limit windows also reject destructive aliases. Existing input/input sharing stays legal. Java and actual JNI use the same public validation. |
++
++The wrapper atoms recover suitable first-party implementations from the earlier merged reconciliation, including M3JDK21 PR #1204, with current bounded-navigation behavior retained. The mask fix reuses the existing validation atom and actual C selectors. Native production sources, JNI descriptors and public callable APIs are unchanged. The catalogue retains GitHub donor pins and license decisions; LeetCode, HackerRank and GeeksforGeeks supply problem taxonomy and adversarial shapes, with no challenge or editorial code copied.
++
++The unchanged ordinary read trace excludes the two repaired paths: comparator-based entry membership has corrected predicate/getter demand, and ambiguous null navigation can perform one added comparison against a real stored boundary. Strict endpoint recovery is limited to the Set factories and their derived views. The current Map factories retain their outer JDK unmodifiable facades, including `NoSuchElementException` for empty endpoints of some sequenced key/value/entry views. The stronger historical strict-map guarantee remains unreconciled; restoring it requires a separate admission covering concrete wrapper types, marker interfaces and delegation behavior.
++
++## Reproduce the transformations
++
++From the repository root with Java 21, Python 3 and Maven:
++
++```sh
++Q=m3/collections/qualification/m3-filtered-navigation-20261018
++mvn -B -ntp -f "$Q/recipe/pom.xml" \
++  -Dm3.dataset=filtered-navigation-20261018 \
++  -Drecipe.owner.root="$PWD/$Q/recipe/sdk-owner" -Pcontract verify
++python3 "$Q/recipe/receive.py" --dataset filtered-navigation-20261018 --target "$PWD" --check
++```
++
++The existing shared task requires five real OpenRewrite SDK tests, eight input-sealing tests and nine receiving refusal/fixed-point cases. The receiver admits every exact preimage or postimage before writing files serially; drift refuses. It receives retained SDK results, never handwritten output substitutes. A second application changes zero files. On the submitted tree, every target must already equal its qualified postimage; the focused workflow checks those fingerprints explicitly.
++
++## Reproduce runtime qualification
++
++On Linux with Java 21 in `JAVA_HOME`, GCC, Python 3 and Maven:
++
++```sh
++python3 m3/collections/qualification/m3-filtered-navigation-20261018/runtime/verify.py
++```
++
++The focused runtime POM compiles every current collection production Java source and the declared 61-source test closure with warnings as errors. It uses the genuine public JUnit 5.10.2 artifact explicitly for this isolated proof. Separate fresh Java-only and actual JNI runs execute the JUnit closure, existing array/offset/mask tests, explicit native-required checks, missing-library refusal and the 65,536-layer small-stack wrapper regression. The script compiles the actual three C source files with C17 warnings as errors and runs Java with `-Xcheck:jni`; inputs are fingerprinted and checked for concurrent change.
++
++This focused POM does not replace the owning collection POM or its source-qualified JUnit coordinate. The original owning Maven gate remains in the existing workflow and must pass before promotion. Its prerequisite builds the genuine checked-in JUnit source closure with `mvn -f m3/vendor/third_party/pom.xml -pl junit-jupiter-5.10.2,junit-platform-launcher-1.10.2 -am -DskipTests install`, following `m3/docs/a3-vendored-build-prerequisite-20261015.md`; it does not relabel public binaries as source-derived artifacts. Full JDK builds, JTreg, non-Linux native platforms, specialized deep sorted membership/range construction and performance acceptance remain separate gates. No throughput or allocation benchmark improvement is claimed. The source inventory marks unreviewed operations as pending; these repairs do not advance the global String, arrays, collections, AST receiving order.
+diff --git a/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml b/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml
+new file mode 100644
+index 0000000..7d7cde2
+--- /dev/null
++++ b/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/pom.xml
+@@ -0,0 +1,110 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++<?xml version="1.0" encoding="UTF-8"?>
++<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
++<!-- SPDX-License-Identifier: Apache-2.0 -->
++<project xmlns="http://maven.apache.org/POM/4.0.0">
++  <modelVersion>4.0.0</modelVersion>
++  <groupId>com.m3.qualification</groupId>
++  <artifactId>filtered-navigation-runtime-20261018</artifactId>
++  <version>1.0-SNAPSHOT</version>
++  <name>M3JDK filtered navigation focused runtime proof</name>
++  <description>Real current core and declared test closure; the owning module gate remains independent.</description>
++  <properties>
++    <maven.compiler.release>21</maven.compiler.release>
++    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
++    <m3.target>${project.basedir}/../../../../..</m3.target>
++    <m3.runtime.output>${project.basedir}/target/runtime</m3.runtime.output>
++    <m3.native.path>${project.build.directory}/empty-lib</m3.native.path>
++  </properties>
++  <dependencies>
++    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId>
++      <version>5.10.2</version><scope>test</scope></dependency>
++  </dependencies>
++  <build>
++    <directory>${m3.runtime.output}</directory>
++    <sourceDirectory>${m3.target}/m3/collections/src/main/java</sourceDirectory>
++    <testSourceDirectory>${m3.target}/m3/collections/src/test/java</testSourceDirectory>
++    <plugins>
++      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
++      <plugin>
++        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
++        <configuration>
++          <proc>none</proc>
++          <compilerArgs><arg>-Xlint:all,-module</arg><arg>-Werror</arg></compilerArgs>
++          <testIncludes>
++              <testInclude>com/m3/collections/FilteredBatchContracts.java</testInclude>
++              <testInclude>com/m3/collections/M3BoundedFilteredNavigationContract.java</testInclude>
++              <testInclude>com/m3/collections/M3BoundedFilteredNavigationTest.java</testInclude>
++              <testInclude>com/m3/collections/M3BudgetedMaskWindowContract.java</testInclude>
++              <testInclude>com/m3/collections/M3CollectionSdkSortedFactorySelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredDequeContract.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredDequesTest.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredListsContract.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredListsDeepCompositionProof.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredListsDeepCompositionTest.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredListsEdges.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredListsMaskBridgeProof.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredListsReadonlyDepthProof.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredListsReadonlyDepthTest.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredListsSortedInteropTest.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredListsTest.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredListsWorkProof.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredNavigableFacadeSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredNavigableSetRangeContract.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredNavigableSetRangeTest.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredNavigableSetTest.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredNavigationReconciliationContract.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredNavigationReconciliationTest.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredTerminalProof.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredViewsContract.java</testInclude>
++              <testInclude>com/m3/collections/M3FilteredViewsTest.java</testInclude>
++              <testInclude>com/m3/collections/M3IndexMaskCompactorSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3IndexMaskCompactorTest.java</testInclude>
++              <testInclude>com/m3/collections/M3IndexMaskWindowRecoverySelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3IndexMaskWindowRecoveryTest.java</testInclude>
++              <testInclude>com/m3/collections/M3IndexMaskWindowSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3IndexMaskWindowTest.java</testInclude>
++              <testInclude>com/m3/collections/M3IndexPathMaskWindowSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3IndexPathMasksAliasContract.java</testInclude>
++              <testInclude>com/m3/collections/M3IndexPathMasksSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3IndexPathMasksTest.java</testInclude>
++              <testInclude>com/m3/collections/M3IndexPathRankNativeSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3IndexPathRankSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3IndexPathRankTest.java</testInclude>
++              <testInclude>com/m3/collections/M3LazyTreeMapSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3LazyTreeMapTest.java</testInclude>
++              <testInclude>com/m3/collections/M3LazyValueStateSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3LongFilteredViewContractTest.java</testInclude>
++              <testInclude>com/m3/collections/M3LongIndexPathMasksSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3LongSortedAlgebraSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3LongSortedAlgebraTest.java</testInclude>
++              <testInclude>com/m3/collections/M3LongSortedLateBindingSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3LongSortedSnapshotSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3LongTreeSetTest.java</testInclude>
++              <testInclude>com/m3/collections/M3MaskDenseSelectionProof.java</testInclude>
++              <testInclude>com/m3/collections/M3MaskNativeParityProof.java</testInclude>
++              <testInclude>com/m3/collections/M3MaskWindowSparseContract.java</testInclude>
++              <testInclude>com/m3/collections/M3MutableFilteredViewsContract.java</testInclude>
++              <testInclude>com/m3/collections/M3MutableFilteredViewsTest.java</testInclude>
++              <testInclude>com/m3/collections/M3NativeIndexRangeSelfTest.java</testInclude>
++              <testInclude>com/m3/collections/M3NativeIndexRangeTest.java</testInclude>
++              <testInclude>com/m3/collections/M3PrimitiveFilteredSequencesRuntimeContract.java</testInclude>
++              <testInclude>com/m3/collections/M3PrimitiveFilteredSequencesTest.java</testInclude>
++              <testInclude>com/m3/collections/M3ZeroMaskArrayFastPathProof.java</testInclude>
++              <testInclude>com/m3/collections/M3ZeroMaskArrayFastPathTest.java</testInclude>
++          </testIncludes>
++        </configuration>
++        <executions><execution><id>default-testCompile</id>
++          <configuration><useModulePath>false</useModulePath></configuration>
++        </execution></executions>
++      </plugin>
++      <plugin>
++        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
++        <configuration>
++          <useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests>
++          <argLine>-Xcheck:jni -Djava.library.path=${m3.native.path}</argLine>
++        </configuration>
++      </plugin>
++    </plugins>
++  </build>
++</project>
+diff --git a/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/verify.py b/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/verify.py
+new file mode 100644
+index 0000000..5cdd3b3
+--- /dev/null
++++ b/m3/collections/qualification/m3-filtered-navigation-20261018/runtime/verify.py
+@@ -0,0 +1,132 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++#!/usr/bin/env python3
++# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++# SPDX-License-Identifier: Apache-2.0
++"""Run the current collection core and the declared regression closure with real Java/JNI."""
++
++import argparse
++import hashlib
++import json
++import os
++from pathlib import Path
++import shlex
++import subprocess
++import time
++import xml.etree.ElementTree as ET
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--repository", type=Path, default=Path(__file__).resolve().parents[5])
++    parser.add_argument("--output", type=Path)
++    parser.add_argument("--maven", default="mvn")
++    parser.add_argument("--maven-repository", type=Path)
++    parser.add_argument("--offline", action="store_true")
++    args = parser.parse_args()
++    root = args.repository.resolve()
++    here = Path(__file__).resolve().parent
++    output = (args.output or here / "target").resolve()
++    if output.exists() and (not output.is_dir() or any(output.iterdir())):
++        raise SystemExit("Use a fresh empty output directory; earlier classes or reports must not be reused.")
++    output.mkdir(parents=True, exist_ok=True)
++    java_home = Path(os.environ["JAVA_HOME"])
++    java = str(java_home / "bin/java")
++    native = output / "native-lib"
++    missing = output / "empty-lib"
++    native.mkdir(exist_ok=True)
++    missing.mkdir(exist_ok=True)
++    if any(missing.iterdir()):
++        raise SystemExit("The missing-library directory must be empty.")
++    records = []
++
++    def run(name, command):
++        log = output / (name + ".log")
++        started = time.monotonic()
++        with log.open("w", encoding="utf-8") as stream:
++            stream.write(shlex.join(command) + "\n")
++            stream.flush()
++            completed = subprocess.run(command, cwd=root, stdout=stream, stderr=subprocess.STDOUT)
++        records.append({"name": name, "command": command, "exit_code": completed.returncode,
++                        "seconds": round(time.monotonic() - started, 3), "log": log.name})
++        print(name + ": " + ("PASS" if completed.returncode == 0 else "FAIL"), flush=True)
++        if completed.returncode:
++            print(log.read_text(encoding="utf-8")[-12000:], flush=True)
++            raise SystemExit(completed.returncode)
++
++    namespace = {"m": "http://maven.apache.org/POM/4.0.0"}
++    pom = ET.parse(here / "pom.xml").getroot()
++    test_paths = [root / "m3/collections/src/test/java" / item.text
++                  for item in pom.findall(".//m:testInclude", namespace)]
++    main_paths = sorted((root / "m3/collections/src/main/java").rglob("*.java"))
++    c_root = root / "m3/collections/src/main/native/collections"
++    c_paths = [c_root / name for name in ("m3_index_path_masks.c", "m3_index_mask_compactor.c",
++                                        "m3_index_mask_window.c")]
++    inputs = main_paths + test_paths + c_paths + [here / "pom.xml", Path(__file__).resolve()]
++
++    def seals():
++        return {str(path.relative_to(root)): hashlib.sha256(path.read_bytes()).hexdigest()
++                for path in sorted(inputs)}
++
++    before = seals()
++    (output / "INPUTS.tsv").write_text("".join(path + "\t" + digest + "\n"
++                                             for path, digest in before.items()), encoding="utf-8")
++    run("java-version", [java, "-version"])
++    common_c = [os.environ.get("CC", "gcc"), "-std=c17", "-Wall", "-Wextra", "-Werror",
++                "-pedantic", "-O2", "-fPIC", "-shared", "-I" + str(java_home / "include"),
++                "-I" + str(java_home / "include/linux")]
++    run("compile-pathmask", common_c + ["-o", str(native / "libm3_collections_pathmask.so"), str(c_paths[0])])
++    run("compile-mask", common_c + ["-o", str(native / "libm3_collections_mask.so"),
++                                   str(c_paths[1]), str(c_paths[2])])
++    totals = {}
++    for mode, library in (("java", missing), ("native", native)):
++        build = output / mode
++        command = [args.maven, "-B", "-ntp", "-f", str(here / "pom.xml"),
++                   "-Dm3.target=" + str(root), "-Dm3.runtime.output=" + str(build),
++                   "-Dm3.native.path=" + str(library)]
++        if args.offline:
++            command.append("-o")
++        if args.maven_repository:
++            command.append("-Dmaven.repo.local=" + str(args.maven_repository.resolve()))
++        run(mode + "-junit", command + ["test"])
++        suites = [ET.parse(path).getroot() for path in (build / "surefire-reports").glob("TEST-*.xml")]
++        totals[mode] = {key: sum(int(suite.attrib.get(key, "0")) for suite in suites)
++                        for key in ("tests", "failures", "errors", "skipped")}
++        if not suites or totals[mode]["tests"] < 45 or any(totals[mode][key] for key in ("failures", "errors", "skipped")):
++            raise SystemExit("The complete declared JUnit closure must execute without failures or skips.")
++        classpath = os.pathsep.join(str(build / item) for item in ("classes", "test-classes"))
++        launcher = [java, "-ea", "-Xcheck:jni", "-Xmx512m", "-Djava.library.path=" + str(library),
++                    "-cp", classpath]
++        suite_args = [
++            ("M3IndexMaskCompactorSelfTest", ["--native"] if mode == "native" else []),
++            ("M3IndexMaskWindowSelfTest", ["--native"] if mode == "native" else []),
++            ("M3IndexMaskWindowRecoverySelfTest", ["--native"] if mode == "native" else []),
++            ("M3IndexPathMasksSelfTest", ["--native"] if mode == "native" else []),
++            ("M3IndexPathMaskWindowSelfTest", ["--native"] if mode == "native" else []),
++            ("M3BudgetedMaskWindowContract", ["--native"] if mode == "native" else []),
++            ("M3MaskWindowSparseContract", ["native"] if mode == "native" else ["missing"]),
++            ("M3NativeIndexRangeSelfTest", ["native"] if mode == "native" else ["none"]),
++            ("M3ZeroMaskArrayFastPathProof", []),
++            ("M3IndexPathMasksAliasContract", ["--native"] if mode == "native" else []),
++        ]
++        if mode == "native":
++            suite_args += [("M3IndexPathRankNativeSelfTest", []), ("M3MaskNativeParityProof", []),
++                           ("M3MaskDenseSelectionProof", [])]
++        else:
++            suite_args += [("M3IndexPathRankSelfTest", []), ("M3LongIndexPathMasksSelfTest", []),
++                           ("M3BudgetedMaskWindowContract", ["--missing"])]
++        for ordinal, (name, arguments) in enumerate(suite_args):
++            run(mode + "-" + str(ordinal) + "-" + name, launcher + ["com.m3.collections." + name] + arguments)
++        if mode == "java":
++            run("small-stack-wrapper-depth", launcher[:1] + ["-Xss256k"] + launcher[1:]
++                + ["com.m3.collections.M3FilteredNavigationReconciliationContract", "depth"])
++    if seals() != before:
++        raise SystemExit("An input changed during runtime qualification.")
++    result = {"scope": "focused_runtime_closure; independent owning-module and whole-JDK gates remain",
++              "production_java_units": len(main_paths), "test_source_units": len(test_paths),
++              "compiled_native_sources": len(c_paths), "junit": totals, "runs": records,
++              "inputs_unchanged": True, "native_required_executed": True}
++    (output / "RESULTS.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
++    print("M3_FILTERED_NAVIGATION_RUNTIME_PASS " + json.dumps({"junit": totals, "inputs_unchanged": True}), flush=True)
++
++
++if __name__ == "__main__":
++    main()

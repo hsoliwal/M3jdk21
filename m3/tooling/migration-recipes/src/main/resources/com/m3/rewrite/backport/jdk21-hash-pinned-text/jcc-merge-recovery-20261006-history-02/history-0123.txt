@@ -1,0 +1,77 @@
+--- author_e04.py
++++ author_e04_v3.py
+@@ -1,11 +1,12 @@
+ """Work-only E4 resource generator, fail closed until real source publication.
+ 
+ Uses canonical map/recipe owners; never edits the four operational target files.
+-FINAL_SOURCE_INPUTS.json is a reviewed local handoff input, not a registry.
++FINAL_SOURCE_INPUTS_V3.json is a reviewed local handoff input, not a registry.
+ """
+ from __future__ import annotations
+ import copy,csv,hashlib,io,json,re
+ from pathlib import Path
++from publication_custody_v3 import admit_publication_custody
+ B=Path(__file__).resolve().parent;R=B/'overlay';P=B.parent/'successor-e04-prep'
+ NAME='jcc-source-recovery-handoff-20261005';PREFIX=Path('m3/tooling/migration-recipes');TASK=PREFIX/'tasks'/NAME
+ C=R/PREFIX/'src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text'/NAME
+@@ -33,13 +34,14 @@
+  return {k:copy.deepcopy(row[k]) for k in ('repo','commit','module','path','symbol','signatures','sha256','git_blob_sha1','fingerprint','revision_role','tracking_ref')}
+ 
+ def admit_receipt_targets(f,require_absent=True):
+- reserved={'PUBLICATION_READBACK.json':f['publication_receipt'],'SOURCE_FIELDS_AND_PROOFS.json':f['source_inventory'],'ROOT_ACCOUNTING.json':f['root_accounting']}
++ reserved={'PUBLICATION_CUSTODY.json':f['publication_receipt'],'SOURCE_FIELDS_AND_PROOFS.json':f['source_inventory'],'ROOT_ACCOUNTING.json':f['root_accounting']}
+  extras=f['additional_receipts'];assert isinstance(extras,dict)
+  for name in extras:
+   assert isinstance(name,str) and name not in ('','.','..') and '\\' not in name
+   relative=Path(name)
+   assert not relative.is_absolute() and relative.as_posix()==name
+   assert all(part not in ('','.','..') for part in relative.parts)
++ assert 'PUBLICATION_READBACK.json' not in extras,'V3 custody must not be labeled universal raw readback'
+  assert not set(reserved)&set(extras),'Additional receipt replaces a reserved name'
+  receipts={**reserved,**extras};destinations=[]
+  for name in receipts:
+@@ -62,13 +64,15 @@
+ def validate_inputs(f,receipts_absent=False):
+  if not __debug__:raise RuntimeError('Optimized Python disables required E4 input admission assertions')
+  # No writes precede complete admission of real published identity and local proofs.
+- assert f['state']=='PUBLISHED_READBACK_VERIFIED','Recovery publication has not been bound'
++ assert f['state']=='PUBLISHED_CUSTODY_VERIFIED','Recovery publication has not been bound'
+  source=f['source_commit'];root=f['source_root_tree'];ref=f['source_ref']
+  assert isinstance(source,str) and re.fullmatch('[0-9a-f]{40}',source) and source not in (BASELINE,D1,'0'*40)
+  assert isinstance(root,str) and re.fullmatch('[0-9a-f]{40}',root)
+  assert isinstance(ref,str) and ref.startswith('refs/heads/') and ref!='refs/heads/develop'
+  publication=read(checked_ref(f['publication_receipt']))
+- assert publication['schema']=='jcc-source-recovery-publication/1' and publication['status']=='PUBLISHED_READBACK_VERIFIED'
++ assert publication['schema']=='jcc-source-recovery-publication/1' and publication['status']=='PUBLISHED_CUSTODY_VERIFIED'
++ custody=admit_publication_custody(publication)
++ assert f['source_publication_custody']==custody
+  assert publication['repository']=='hsoliwal/com.synexia' and publication['parent']==BASELINE
+  assert publication['branch']=='aix/jcc-source-merge-recovery-20261005' and ref=='refs/heads/'+publication['branch']
+  assert publication['pull_request']['url']==f['source_pr']
+@@ -76,6 +80,7 @@
+  assert any(publication.get(k) is True for k in ('commit_parent_tree_and_ref_verified','branch_commit_parent_tree_pr_verified')),'Actual publication readback verification required'
+  inventory=read(checked_ref(f['source_inventory']))
+  assert inventory['source_commit']==source and inventory['source_root_tree']==root
++ assert inventory['source_publication']['custody']==custody and inventory['source_publication']['publication_status']==publication['status']
+  sources=inventory['sources'];assert len(sources)==19
+  context_path=B/'current-context/CONTEXT_REFERENCES.json'
+  assert ident(context_path)['sha256']=='fbc460874aeb04a688ad0ed9b47ad8e3f3b37f88af09d0f32ecfeedc2827fbed'
+@@ -109,8 +114,8 @@
+  return source,root,ref,inventory,rootacct,baseline
+ 
+ def main():
+- f=read(B/'FINAL_SOURCE_INPUTS.json');source,root,ref,inventory,roots,context=validate_inputs(f,receipts_absent=True)
+- assert not (C/'plan.json').exists() and not (B/'AUTHORING_RESULT.json').exists(),'Use a new explicit epoch for any revised afterimages'
++ f=read(B/'FINAL_SOURCE_INPUTS_V3.json');source,root,ref,inventory,roots,context=validate_inputs(f,receipts_absent=True)
++ assert not (C/'plan.json').exists() and not (B/'AUTHORING_RESULT_V3.json').exists(),'Use a new explicit epoch for any revised afterimages'
+  oldplan=read(OLD/'plan.json');assert oldplan['plan_sha256']=='af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e'
+  for guard in oldplan['guards']:assert ident(R/guard['path'])['sha256']==guard['sha256']
+  oldmap=read(C/'before00-name-mapping.json.txt');mapping=copy.deepcopy(oldmap)
+@@ -179,6 +184,6 @@
+  java.write_text(text)
+  for name,refobj in evidence_inputs.items():
+   p=checked_ref(refobj);rel=TASK/'source-recovery'/name;dest=R/rel;dest.parent.mkdir(parents=True,exist_ok=True);assert not dest.exists();dest.write_bytes(p.read_bytes());evidence[name]={'path':str(rel),**ident(dest)}
+- (B/'AUTHORING_RESULT.json').write_bytes(enc({'state':'BOUND_RESOURCES_PENDING_EXECUTION','source_commit':source,'source_root_tree':root,'destination_preimage_commit':DEST,'plan_sha256':plan['plan_sha256'],'map_after_sha256':sha(outputs[MAP][2]),'source_artifacts':19,'current_context_count':527,'operational_outputs_unchanged':True,'source_inventory':f['source_inventory'],'evidence':evidence,'source_export_admitted':False,'recipe_execution':'NOT_EXECUTED'}))
++ (B/'AUTHORING_RESULT_V3.json').write_bytes(enc({'state':'BOUND_RESOURCES_PENDING_EXECUTION','source_commit':source,'source_root_tree':root,'destination_preimage_commit':DEST,'plan_sha256':plan['plan_sha256'],'map_after_sha256':sha(outputs[MAP][2]),'source_artifacts':19,'current_context_count':527,'operational_outputs_unchanged':True,'source_inventory':f['source_inventory'],'evidence':evidence,'source_export_admitted':False,'recipe_execution':'NOT_EXECUTED'}))
+  print(json.dumps({'state':'BOUND_RESOURCES_PENDING_EXECUTION','plan_sha256':plan['plan_sha256'],'source_commit':source,'operational_outputs_unchanged':True}))
+ if __name__=='__main__':main()

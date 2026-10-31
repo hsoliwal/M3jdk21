@@ -1,0 +1,85 @@
+{
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_revision": "2717d156ad2aba73dfdfcfc6a58b59a82371798e",
+  "target_parent_pr": 1435,
+  "source_revision": "47981356df68c2e12c658d2d6fe3969b695aa2fe",
+  "files": [
+    {
+      "path": "src/java.base/share/classes/java/util/M3CollectionViews.java",
+      "before": "3818e50c23166b20c0516b4a6f9cb3c12ed9fe7f73ca1d55c38f616a5c4ac4f7",
+      "after": "9a5e1cf30b4d60381c30d43e1e3398143b380206d0303cd14af2175e4712fa47",
+      "before_git_blob": "1efe84f4057101631dbe94c530146b72cb3a1590"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/M3CollectionMasks.java",
+      "before": "1337bb1e4c03c974bd4e335f7201c19186ab345548479ba29cebe639310c4017",
+      "after": "e3b37e1d8b317d3251c3281b26a0a91eb88dad8a3522c617ac29390b8d49e034",
+      "before_git_blob": "7cbfaecef4f2e1356146c2b5f7bd4a76ad836c76"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3CollectionMasks.c",
+      "before": "7ecac17c362d2bce127b08c930b4beb263d06bd79439fcffcdcc5801ca7718a7",
+      "after": "e65c7488d0f0821175a63373e6efbe0ad5476ba9e26fa52b584b88af4800ab02",
+      "before_git_blob": "b20e21bdc35a9e5f9512945a959874e758f24310"
+    },
+    {
+      "path": "test/jdk/java/util/Collections/M3CollectionDenseTest.java",
+      "before": "ABSENT",
+      "after": "04ab3604c204d7aef09a9c9e82adc941fc77924e28af7df4137fb5b625c17a5e",
+      "before_git_blob": null
+    }
+  ],
+  "frozen_inputs": [
+    {
+      "path": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
+      "git_blob": "ca048a00bad895ea79495f54cdd5a39b2751adac",
+      "sha256": "f123ae356ffdd5df1523205dc5f1f48e6daf461b8a6f908a9870e348e80f5e7f"
+    },
+    {
+      "path": "m3/runtime-integration/integrated-collections/verify.py",
+      "git_blob": "e36d5d8461b1d28ffe021e0a51734583945aad6f",
+      "sha256": "89540bb2b2deff0d3d8a7f371f1874fb65c96ee397478f1e0254a16eea889726"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Collections.java",
+      "git_blob": "607feb1bcc1065224858d65fe475590154f78fc1",
+      "sha256": "4227019cc64ce600908eace9425718d8fe49ec4f4028a638cb70cd17a2f2917a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/M3CollectionMasks.java",
+      "git_blob": "7cbfaecef4f2e1356146c2b5f7bd4a76ad836c76",
+      "sha256": "1337bb1e4c03c974bd4e335f7201c19186ab345548479ba29cebe639310c4017"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/M3CollectionViews.java",
+      "git_blob": "1efe84f4057101631dbe94c530146b72cb3a1590",
+      "sha256": "3818e50c23166b20c0516b4a6f9cb3c12ed9fe7f73ca1d55c38f616a5c4ac4f7"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3CollectionMasks.c",
+      "git_blob": "b20e21bdc35a9e5f9512945a959874e758f24310",
+      "sha256": "7ecac17c362d2bce127b08c930b4beb263d06bd79439fcffcdcc5801ca7718a7"
+    },
+    {
+      "path": "test/jdk/java/util/Collections/M3CollectionMasksBenchmark.java",
+      "git_blob": "5a65355a7931f4115fa01533aa698d3cfda97d21",
+      "sha256": "6e1a76800b296c96a9dd342998d76ae7c014389be394effc8a059302e6811e92"
+    },
+    {
+      "path": "test/jdk/java/util/Collections/M3CollectionMasksTest.java",
+      "git_blob": "82b2d2575b7f154c917af5517540cb3e3ee57e36",
+      "sha256": "09283aa9f8e6f184f9f2e50f2967be6fc47654b591d3de0908751d84d622ce17"
+    },
+    {
+      "path": "test/jdk/java/util/Collections/M3CollectionViewsBenchmark.java",
+      "git_blob": "1d65c32596940cfa13b3d52b92f4048496d90b29",
+      "sha256": "1ac002cd6862ffbdd1574ec7afc2270c0298e20bf47916ffe3a54e2d53bb742a"
+    },
+    {
+      "path": "test/jdk/java/util/Collections/M3CollectionViewsTest.java",
+      "git_blob": "c7367d43f5d36f24abee1ec644932c16f4150eaa",
+      "sha256": "7a245f98feee1590a6c01cec79b779441c85a72a30838d9bbec949024fed1878"
+    }
+  ],
+  "source_branch_base": "a2965b644e53badcf78d87784b70f71ca5b0e0ad"
+}

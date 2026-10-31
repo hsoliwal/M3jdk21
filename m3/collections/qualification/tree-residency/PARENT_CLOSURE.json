@@ -1,0 +1,84 @@
+{
+  "schema": "M3JDK21_TREE_PARENT_CLOSURE_RECEIVING_V1",
+  "canonical_repo": "hsoliwal/com.synexia",
+  "canonical_commit": "97cb92f40023785853b701f8abcd2f63d8e3621e",
+  "java_recipe": "com.synexia.m3.ViewportTreeParentClosure20261026",
+  "text_pin_recipe": "com.synexia.m3.ViewportTreeParentPin20261027",
+  "master_preimage_commit": "9dd1df62f3d5406760427cb5e840a36c9e7a59ea",
+  "targets": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3TreeWindowPlan.java",
+      "before_blob": "9725e48f7850b107b8b968527827eb5fde5b1fe6",
+      "after_blob": "81816c58eb280820984162d6050d25a0c8e96932",
+      "before_sha256": "be77b8dd08c7a498355bc8793932039a00a0f523e206e47f116b7a6b10635082",
+      "after_sha256": "1e719d48bbaa9fa4c8065b16848c6bd770d13f661d2e823d192e212da65b2478"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3ParentHandleClosureProof.java",
+      "before_blob": "ABSENT",
+      "after_blob": "1140abde95743dd90e9e33a8a85ff0f034ef9321",
+      "after_sha256": "2d891a6bd14007f003dc34b53dd548bcae55341839c26db400fca5e7c3da29b0"
+    },
+    {
+      "path": ".github/workflows/m3-tree-shift-20261021.yml",
+      "before_blob": "21c6901be77ce236e1ae90daaccfac3bd86f3f98",
+      "after_blob": "16dfd38533baa0a5c2da9ce82b9d772ac3e11bef",
+      "before_sha256": "9aabe0d84f94de625c296af612ce120418c66f5df418305d915beb49a8d95234",
+      "after_sha256": "91973ce14df37bb961d104b7e753ccfe8d68605393b5826ed606f1e3a5dcde10"
+    }
+  ],
+  "authentic_openrewrite_parser": {
+    "version": "8.17.1",
+    "jar_sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+    "pom_sha256": "9465d6d13672fc36b517e7c06ad649a081829340b53ee3872bf08349ca9310c7"
+  },
+  "executed_focused_sdk": {
+    "source_engine_git_blobs": [
+      "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "98138cb6734ad86e3f77b8722fa5ff459842e841",
+      "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+      "9174dd681f0d75b5086fc19904a71524a03972dc"
+    ],
+    "unchanged_test_class_git_blob": "e69993797978f800a4d1b01b55093dc8dde16514",
+    "java_recipe_junit": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "actual_results": 2,
+      "fixed_point_changes": 0
+    },
+    "workflow_text_recipe_junit": {
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "actual_results": 1,
+      "fixed_point_changes": 0
+    },
+    "caveat": "Focused offline Maven POM substitutes slf4j-api 2.0.9 for unavailable test slf4j-simple 2.0.13; local prepare.py and receive.py are placeholders and were NOT executed; full byte-identical canonical Maven reactor and authenticated receive.py remain NOT_RUN."
+  },
+  "baseline_counterexample": "FAIL as expected at check 2",
+  "candidate_regression": {
+    "normal_checks": 206547,
+    "interpreted_checks": 206547,
+    "digest": "e4635cc5d317d586"
+  },
+  "existing_shift_regression": {
+    "checks_per_mode": 2591930,
+    "modes": [
+      "default",
+      "interpreter",
+      "C1",
+      "non-tiered"
+    ],
+    "candidate_and_baseline": "PASS"
+  },
+  "public_java_descriptors": "UNCHANGED",
+  "JNI_this_pass": "NOT_RUN",
+  "current_product_build_ci": "PENDING",
+  "native_SWT_Nebula_GEF_RWT": "NOT_RUN",
+  "JDK_HotSpot_jtreg": "NOT_RUN",
+  "performance_claim": false,
+  "merge_authority": false
+}

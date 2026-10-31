@@ -1,0 +1,39 @@
+{
+  "scope": "FRESH_CURRENT_BASELINE_SEAM_CHECK_ONLY",
+  "target_base": "4b24824c3aa09d802121447f8970d442a855f064",
+  "commands": [
+    {
+      "label": "compile",
+      "command": [
+        "/tmp/m3-toolchain/jdk-21.0.12.1+1/bin/javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/workspace/scratch/2b4d1cb957a7/collection-refinement/proof/baseline-seams/classes",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3ByteArrayView.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3IntArrayView.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3LongArrayView.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3Utf16ArrayView.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/com/m3/arrays/M3Utf16Facts.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/main/java/module-info.java",
+        "/workspace/scratch/2b4d1cb957a7/M3jdk21/m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsSelfTest.java"
+      ],
+      "exit": 1
+    }
+  ],
+  "source_sha256": {
+    "m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java": "54e15c58f4467d2e27155b521e49e1bfe81d0bce1459e2c804c38ade5fcd4eec",
+    "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java": "8d6afc24c677adb7ba612071d34453c8a7d8b9e1a81ac27fb06bc3f62c673edd",
+    "m3/arrays/src/main/java/com/m3/arrays/M3ByteArrayView.java": "4e5d750bf138e744a2d7ff31e7b79edd1044d66372a13c4fbededfb28adcbb2b",
+    "m3/arrays/src/main/java/com/m3/arrays/M3IntArrayView.java": "60b056f30ff6e6b19a4197401b8b0faa2fce57208eb4b6744f9340ae0082e6eb",
+    "m3/arrays/src/main/java/com/m3/arrays/M3LongArrayView.java": "065da79db609116600f90e7fa650ca589abfa5fd8b988c9b865898f1633efd84",
+    "m3/arrays/src/main/java/com/m3/arrays/M3Utf16ArrayView.java": "69076f0cbd6744bc2a0d0dedb55ae6ad94bdef8faccb42a241efc579fddfbe62",
+    "m3/arrays/src/main/java/com/m3/arrays/M3Utf16Facts.java": "d1716b27289912f6d75ab2538aa9431f19324d6bb510f5c196c9cd5dab3176a8",
+    "m3/arrays/src/main/java/module-info.java": "fcdc79c97c36428da6e359f6b0310140550b0eb5d8c8b2b3c04b8d55d94e0ca5",
+    "m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsSelfTest.java": "632ee4cfa058f1f80536d4387e41b9d0fff41f64307d1c21f4cf2cbed94d20b1"
+  }
+}

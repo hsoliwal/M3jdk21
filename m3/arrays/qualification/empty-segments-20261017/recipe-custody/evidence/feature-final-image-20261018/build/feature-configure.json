@@ -1,0 +1,27 @@
+{
+  "schema": "M3_FEATURE_CONFIGURE_V1",
+  "command": [
+    "bash",
+    "configure",
+    "--with-conf-name=m3-feature-fastdebug",
+    "--with-boot-jdk=/tmp/m3-toolchain/jdk-21.0.12.1+1",
+    "--with-jtreg=/tmp/m3-toolchain/jtreg",
+    "--with-debug-level=fastdebug",
+    "--with-jvm-variants=server",
+    "--enable-headless-only",
+    "--with-freetype=bundled",
+    "--enable-warnings-as-errors",
+    "--disable-javac-server",
+    "--with-native-debug-symbols=none",
+    "--with-memory-size=4096",
+    "--with-jobs=4",
+    "--with-test-jobs=2"
+  ],
+  "cwd": "/workspace/scratch/2b4d1cb957a7/M3jdk21-features",
+  "started_at": 1792299417.6041713,
+  "baseline": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+  "exit_code": 0,
+  "finished_at": 1792299429.3135114,
+  "log_sha256": "57bce711b3908ce1dc2b76e8880be83803d6c34b587a42145fca5968ced24dae",
+  "resources_sha256": "d8f027c0f93097423229cd6c9da61232540766530baebfcdafb1d3592b1b1dfd"
+}

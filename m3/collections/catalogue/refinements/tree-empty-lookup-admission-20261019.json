@@ -1,0 +1,50 @@
+{
+  "schema": "m3-algorithm-evaluation/v1",
+  "category": "ordered-map/empty-key-admission",
+  "operation": [
+    "get",
+    "getOrDefault",
+    "containsKey",
+    "remove",
+    "key/entry view queries"
+  ],
+  "sourceCommit": "a6a68ad408eeaac6917fdbae814e6c157641ef7f",
+  "file": "m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
+  "selection": "ADAPT existing array AVL findSlot atom",
+  "alternatives": [
+    {
+      "candidate": "old natural self-comparison",
+      "classification": "REJECT",
+      "reason": "144 empty-natural observable differences;96 unexpected marker exceptions"
+    },
+    {
+      "candidate": "drop all validation",
+      "classification": "REJECT",
+      "reason": "null and nonComparable rejection must remain"
+    },
+    {
+      "candidate": "type/null admission without comparison",
+      "classification": "ADMIT_SCOPED",
+      "reason": "all 144 corrected, no introduced differences, current APIs and raw array layout preserved"
+    },
+    {
+      "candidate": "OpenJDK getEntry source",
+      "classification": "NO_SOURCE_IMPORT",
+      "license": "GPL-2.0 WITH Classpath-exception-2.0",
+      "reason": "reference and runtime oracle only"
+    }
+  ],
+  "complexity": "O(1) valid empty lookup with no comparison or per-entry allocation; nonempty O(log n) unchanged",
+  "performanceMeasured": false,
+  "fullCorpusExact": false,
+  "candidateExactRecords": 630,
+  "caseCount": 640,
+  "unchangedInheritedDifferences": 10,
+  "strictControlClause4": "FAIL",
+  "publicApiRowsUnchanged": 88,
+  "storedEntryNodesAdded": 0,
+  "sourceSha256": "0fdc824473fbdc40fa4a4dbefec0ffa429999f0ee362b9b5eb5af9798b3037f9",
+  "recipeProof": "RECIPE_EXECUTION_V1.json",
+  "validation": "qualification/tree-empty-lookup-admission-20261019/observations",
+  "futurePass": "retained EC cursor lifecycle requires general identity/topology ownership, not singleton-only removal shim"
+}

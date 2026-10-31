@@ -1,0 +1,15 @@
+schema	m3-guava-multiset-api-inline-1
+recipe	com.synexia.m3.InlineGuavaMultisetApi20261027
+canonical	hsoliwal/com.synexia:m3/inline-guava-multiset-api-recipe-20261027
+original_source	google/guava:v33.4.8/guava/src/com/google/common/collect/Multiset.java
+original_license	Apache-2.0_GuavaAuthors
+api_sha256	1cf974b8e73c72e0885872a0746e34e187bc020a7e19a4e5074e73ac05d4e973
+test_sha256	15f5c810429b33a04838739da469632929e99cbfff95f9c9eedd01e0d286dad3
+m3_owner	com.m3.collections.guava.M3HashMultiset
+m3_primitive_payload	Object[]_elements;int[]_counts_hashes_gens_index
+guava_dependency	TEST_ONLY
+module_runtime_dependencies	JAVA_BASE_ONLY_PENDING_CI
+interface_default_spliterator	JDK_BASED_DIFFERENCE_HOLD
+JSpecify_and_GWT_metadata	OMITTED_HOLD
+binary_duplicate_FQCN	REQUIRES_PACKAGING_ISOLATION
+full_guava_coverage	NOT_CLAIMED

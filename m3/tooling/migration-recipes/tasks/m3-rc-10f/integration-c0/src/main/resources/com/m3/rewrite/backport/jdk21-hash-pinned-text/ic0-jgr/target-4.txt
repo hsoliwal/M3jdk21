@@ -1,0 +1,944 @@
+#!/usr/bin/env python3
+# Copyright (c) 2026 Hitesh Soliwal.
+# SPDX-License-Identifier: Apache-2.0
+
+from __future__ import annotations
+
+import copy
+import csv
+import hashlib
+import importlib.util
+import json
+import subprocess
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+
+def load_module():
+    path = Path(__file__).with_name("generate_recipe_crates.py")
+    spec = importlib.util.spec_from_file_location("m3_generate_recipe_crates", path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f"cannot load {path}")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+class GenerateRecipeCratesTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.mod = load_module()
+
+    @staticmethod
+    def git(repo: Path, *args: str) -> None:
+        subprocess.run(
+            ("git", "-C", str(repo), *args),
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+
+    @staticmethod
+    def write(repo: Path, path: str, text: str) -> None:
+        target = repo / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(text, encoding="utf-8")
+
+    def test_verbatim_pairs_generate_hash_pinned_openrewrite_crate(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            repo = root / "repo"
+            out = root / "out"
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+
+            modified = "src/java.base/share/classes/java/lang/A.java"
+            added = "src/java.base/share/classes/java/lang/B.java"
+            removed = "src/java.base/share/classes/java/lang/Removed.java"
+
+            self.write(repo, modified, "package java.lang; final class A { int x() { return 21; } }\n")
+            self.write(repo, removed, "package java.lang; final class Removed {}\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk21")
+            self.git(repo, "tag", "jdk-21+35")
+
+            self.write(repo, modified, "package java.lang; final class A { int x() { return 22; } }\n")
+            self.write(repo, added, "package java.lang; final class B {}\n")
+            (repo / removed).unlink()
+            self.git(repo, "add", "-A")
+            self.git(repo, "commit", "-q", "-m", "jdk22")
+            self.git(repo, "tag", "jdk-22+36")
+
+            candidates, exclusions = self.mod.candidates(
+                repo, 22, selected=None, all_candidates=True
+            )
+            self.assertEqual(sorted([added, modified]), [row.path for row in candidates])
+            self.assertEqual(
+                [(removed, "TYPED_EXCLUSION_AUTOMATIC_REMOVAL")],
+                exclusions,
+            )
+
+            crates = self.mod.materialize(out, 22, candidates, exclusions)
+            self.assertEqual(["jdk22-0001"], crates)
+
+            crate = (
+                out
+                / self.mod.RESOURCE_ROOT
+                / "jdk22-0001"
+            )
+            with (crate / "manifest.tsv").open(
+                "r", encoding="utf-8", newline=""
+            ) as handle:
+                rows = list(csv.reader(handle, delimiter="\t"))
+
+            self.assertEqual(2, len(rows))
+            self.assertEqual(modified, rows[0][0])
+            self.assertEqual(64, len(rows[0][1]))
+            self.assertEqual(added, rows[1][0])
+            self.assertEqual("ABSENT", rows[1][1])
+            self.assertEqual(64, len(rows[0][2]))
+            self.assertEqual(64, len(rows[1][2]))
+            self.assertTrue((crate / rows[0][3]).is_file())
+            self.assertTrue((crate / rows[1][3]).is_file())
+
+            yaml = (
+                out
+                / self.mod.YAML_ROOT
+                / "m3-jdk22-candidate-backports.yml"
+            ).read_text(encoding="utf-8")
+            self.assertIn(
+                "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
+                yaml,
+            )
+            self.assertIn("crateName: jdk22-0001", yaml)
+            self.assertIn(
+                "name: com.m3.generated.jdk22.CandidateBackports",
+                yaml,
+            )
+
+            exclusions_text = (out / "EXCLUSIONS.tsv").read_text(encoding="utf-8")
+            self.assertIn("TYPED_EXCLUSION_AUTOMATIC_REMOVAL", exclusions_text)
+
+    def test_requires_explicit_selection_or_all_candidates(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp)
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+            self.write(repo, "src/java.base/share/classes/A.java", "final class A {}\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "base")
+            self.git(repo, "tag", "jdk-21+35")
+            self.git(repo, "tag", "jdk-22+36")
+
+            with self.assertRaises(ValueError):
+                self.mod.candidates(
+                    repo, 22, selected=None, all_candidates=False
+                )
+
+
+    def test_crate_size_one_emits_true_file_atomic_crates(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp) / "out"
+            first_text = "final class A {}\n"
+            second_text = "final class B {}\n"
+            candidates = [
+                self.mod.Candidate(
+                    path="src/java.base/share/classes/p/A.java",
+                    status="MODIFIED",
+                    before_sha256=self.mod._sha256_text("final class A { int x; }\n"),
+                    after_sha256=self.mod._sha256_text(first_text),
+                    after_text=first_text,
+                ),
+                self.mod.Candidate(
+                    path="src/java.base/share/classes/p/B.java",
+                    status="ADDED",
+                    before_sha256="ABSENT",
+                    after_sha256=self.mod._sha256_text(second_text),
+                    after_text=second_text,
+                ),
+            ]
+
+            crates = self.mod.materialize(
+                out,
+                22,
+                candidates,
+                exclusions=[],
+                crate_size=1,
+            )
+
+            self.assertEqual(["jdk22-0001", "jdk22-0002"], crates)
+            for ordinal, expected_path in enumerate(
+                [candidate.path for candidate in candidates], 1
+            ):
+                crate = out / self.mod.RESOURCE_ROOT / f"jdk22-{ordinal:04d}"
+                with (crate / "manifest.tsv").open(
+                    "r", encoding="utf-8", newline=""
+                ) as handle:
+                    rows = list(csv.reader(handle, delimiter="\t"))
+                self.assertEqual(1, len(rows))
+                self.assertEqual(expected_path, rows[0][0])
+
+            yaml = (
+                out
+                / self.mod.YAML_ROOT
+                / "m3-jdk22-candidate-backports.yml"
+            ).read_text(encoding="utf-8")
+            self.assertIn("com.m3.generated.jdk22_0001", yaml)
+            self.assertIn("com.m3.generated.jdk22_0002", yaml)
+
+    def test_include_text_emits_separate_java_and_plain_text_crates(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            repo = root / "repo"
+            out = root / "out"
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+
+            java_path = "src/jdk.jlink/share/classes/p/A.java"
+            text_path = "make/Images.gmk"
+            properties_path = "src/jdk.jlink/share/classes/p/messages.properties"
+
+            self.write(repo, java_path, "package p; final class A { int x() { return 21; } }\n")
+            self.write(repo, text_path, "BASE=21\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk21")
+            self.git(repo, "tag", "jdk-21+35")
+
+            self.write(repo, java_path, "package p; final class A { int x() { return 24; } }\n")
+            self.write(repo, text_path, "BASE=24\n")
+            self.write(repo, properties_path, "key=value\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk24")
+            self.git(repo, "tag", "jdk-24+36")
+
+            candidates, exclusions = self.mod.candidates(
+                repo,
+                24,
+                selected=None,
+                all_candidates=True,
+                include_text=True,
+            )
+            self.assertEqual([], exclusions)
+            self.assertEqual(
+                [text_path, java_path, properties_path],
+                [candidate.path for candidate in candidates],
+            )
+            self.assertEqual(
+                ["TEXT", "JAVA", "TEXT"],
+                [candidate.kind for candidate in candidates],
+            )
+
+            crates = self.mod.materialize(
+                out,
+                24,
+                candidates,
+                exclusions,
+                crate_size=1,
+            )
+            self.assertEqual(
+                ["jdk24-java-0001", "jdk24-text-0001", "jdk24-text-0002"],
+                crates,
+            )
+
+            java_crate = out / self.mod.RESOURCE_ROOT / "jdk24-java-0001"
+            text_root = out / self.mod.TEXT_RESOURCE_ROOT
+            self.assertTrue((java_crate / "0001.java.txt").is_file())
+            self.assertTrue((text_root / "jdk24-text-0001" / "0001.txt").is_file())
+            self.assertTrue((text_root / "jdk24-text-0002" / "0001.txt").is_file())
+
+            yaml = (
+                out
+                / self.mod.YAML_ROOT
+                / "m3-jdk24-candidate-backports.yml"
+            ).read_text(encoding="utf-8")
+            self.assertIn(
+                "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
+                yaml,
+            )
+            self.assertIn(
+                "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
+                yaml,
+            )
+            self.assertIn("crateName: jdk24-java-0001", yaml)
+            self.assertIn("crateName: jdk24-text-0001", yaml)
+
+    def test_native_jni_candidates_have_first_class_source_sealed_lane(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            repo = root / "repo"
+            out = root / "out"
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+
+            cpp_path = "src/hotspot/share/runtime/a3.cpp"
+            header_path = "src/java.base/share/native/libjava/a3.h"
+            self.write(repo, cpp_path, "int a3() { return 21; }\n")
+            self.write(repo, header_path, "#define A3 21\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk21")
+            self.git(repo, "tag", "jdk-21+35")
+
+            self.write(repo, cpp_path, "int a3() { return 24; }\n")
+            self.write(repo, header_path, "#define A3 24\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk24")
+            self.git(repo, "tag", "jdk-24+36")
+
+            candidates, exclusions = self.mod.candidates(
+                repo,
+                24,
+                selected=None,
+                all_candidates=True,
+                include_native=True,
+            )
+            self.assertEqual([], exclusions)
+            self.assertEqual([cpp_path, header_path], [row.path for row in candidates])
+            self.assertEqual(["NATIVE", "NATIVE"], [row.kind for row in candidates])
+
+            crates = self.mod.materialize(
+                out,
+                24,
+                candidates,
+                exclusions,
+                crate_size=1,
+            )
+            self.assertEqual(
+                ["jdk24-native-0001", "jdk24-native-0002"],
+                crates,
+            )
+            native_root = out / self.mod.TEXT_RESOURCE_ROOT
+            for ordinal, expected_path in enumerate([cpp_path, header_path], 1):
+                crate = native_root / f"jdk24-native-{ordinal:04d}"
+                with (crate / "manifest.tsv").open(
+                    "r", encoding="utf-8", newline=""
+                ) as handle:
+                    rows = list(csv.reader(handle, delimiter="\t"))
+                self.assertEqual(1, len(rows))
+                self.assertEqual(expected_path, rows[0][0])
+                self.assertTrue((crate / "0001.txt").is_file())
+
+            yaml = (
+                out
+                / self.mod.YAML_ROOT
+                / "m3-jdk24-candidate-backports.yml"
+            ).read_text(encoding="utf-8")
+            self.assertIn(
+                "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
+                yaml,
+            )
+            self.assertIn("crateName: jdk24-native-0001", yaml)
+            self.assertIn("crateName: jdk24-native-0002", yaml)
+
+            legacy, legacy_exclusions = self.mod.candidates(
+                repo,
+                24,
+                selected=None,
+                all_candidates=True,
+                include_text=True,
+            )
+            self.assertEqual([], legacy_exclusions)
+            self.assertEqual(["TEXT", "TEXT"], [row.kind for row in legacy])
+
+    def test_text_candidates_remain_opt_in_for_backward_compatibility(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            repo = root / "repo"
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+
+            path = "make/Images.gmk"
+            self.write(repo, path, "BASE=21\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk21")
+            self.git(repo, "tag", "jdk-21+35")
+            self.write(repo, path, "BASE=22\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk22")
+            self.git(repo, "tag", "jdk-22+36")
+
+            candidates, exclusions = self.mod.candidates(
+                repo,
+                22,
+                selected=None,
+                all_candidates=True,
+            )
+            self.assertEqual([], candidates)
+            self.assertEqual([], exclusions)
+
+            candidates, exclusions = self.mod.candidates(
+                repo,
+                22,
+                selected=None,
+                all_candidates=True,
+                include_text=True,
+            )
+            self.assertEqual([path], [candidate.path for candidate in candidates])
+            self.assertEqual("TEXT", candidates[0].kind)
+            self.assertEqual([], exclusions)
+
+    def test_text_mode_and_encoding_fail_into_typed_exclusions(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            repo = root / "repo"
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+
+            executable = "make/tool.sh"
+            binary = "make/blob.dat"
+            self.write(repo, executable, "#!/bin/sh\necho 21\n")
+            self.write(repo, binary, "text\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk21")
+            self.git(repo, "tag", "jdk-21+35")
+
+            self.write(repo, executable, "#!/bin/sh\necho 22\n")
+            (repo / executable).chmod(0o755)
+            (repo / binary).write_bytes(b"\xff\xfe\xfd")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk22")
+            self.git(repo, "tag", "jdk-22+36")
+
+            candidates, exclusions = self.mod.candidates(
+                repo,
+                22,
+                selected=None,
+                all_candidates=True,
+                include_text=True,
+            )
+            self.assertEqual([], candidates)
+            reasons = dict(exclusions)
+            self.assertTrue(reasons[executable].startswith("TYPED_EXCLUSION_FILE_MODE:"))
+            self.assertTrue(reasons[binary].startswith("TYPED_EXCLUSION_ENCODING:"))
+
+    @staticmethod
+    def _ga_git_text(repo: Path, *args: str) -> str:
+        return subprocess.run(
+            ("git", "-C", str(repo), *args),
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        ).stdout.strip()
+
+    @staticmethod
+    def _ga_store_manifest(fixture, manifest) -> None:
+        fixture["reconciliation_file"].write_text(
+            json.dumps(manifest, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+
+    def _ga_fixture(self, root: Path):
+        repo = root / "repo"
+        subprocess.run(("git", "init", "-q", str(repo)), check=True)
+        self.git(repo, "config", "user.email", "fixture@example.invalid")
+        self.git(repo, "config", "user.name", "Fixture")
+        self.git(repo, "config", "core.fileMode", "true")
+        paths = {
+            "old": "test/jdk/example/OldName.java",
+            "new": "test/jdk/example/NewName.java",
+            "transient": "src/jdk.jlink/share/classes/example/Transient.java",
+            "modified": "src/jdk.jlink/share/classes/example/Changed.java",
+            "same": "src/jdk.jlink/share/classes/example/Same.java",
+            "excluded": "make/ga-helper.sh",
+        }
+        rename_text = "final class RenameFixture { int value() { return 1; } }\n"
+        transient_text = "final class Transient { int value() { return 2; } }\n"
+        same_text = "final class Same { int value() { return 21; } }\n"
+        ga_text = "final class Changed { int value() { return 2400; } }\n"
+
+        def commit(message):
+            self.git(repo, "add", "-A")
+            self.git(repo, "commit", "-q", "-m", message)
+            return self._ga_git_text(repo, "rev-parse", "HEAD")
+
+        self.write(repo, paths["modified"], "final class Changed { int value() { return 21; } }\n")
+        self.write(repo, paths["same"], same_text)
+        self.write(repo, paths["excluded"], "#!/bin/sh\necho 21\n")
+        baseline = commit("baseline")
+        self.git(repo, "tag", "jdk-21+35")
+
+        self.write(repo, paths["old"], rename_text)
+        self.write(repo, paths["same"], "final class Same { int value() { return 22; } }\n")
+        implementation_parent = commit("preimplementation")
+
+        self.git(repo, "mv", paths["old"], paths["new"])
+        self.write(repo, paths["transient"], transient_text)
+        self.write(repo, paths["modified"], "final class Changed { int value() { return 24; } }\n")
+        self.write(repo, paths["same"], same_text)
+        self.write(repo, paths["excluded"], "#!/bin/sh\necho 24\n")
+        (repo / paths["excluded"]).chmod(0o755)
+        implementation = commit("implementation rename and transient addition")
+
+        (repo / paths["transient"]).unlink()
+        deletion = commit("remove transient before GA")
+        self.write(repo, paths["modified"], ga_text)
+        donor = commit("GA includes cumulative followup")
+        self.git(repo, "tag", "jdk-24+36")
+
+        def blob(commit_sha, path):
+            return self._ga_git_text(repo, "rev-parse", f"{commit_sha}:{path}")
+
+        paths_file = root / "PATHS.txt"
+        paths_file.write_text("".join(path + "\n" for path in sorted(paths.values())), encoding="utf-8")
+        manifest = {
+            "schema": "m3.ga-path-reconciliation/1",
+            "release": 24,
+            "catalogue_sha256": hashlib.sha256(paths_file.read_bytes()).hexdigest(),
+            "declared_paths": len(paths),
+            "baseline_ref": "jdk-21+35",
+            "baseline_commit": baseline,
+            "donor_ref": "jdk-24+36",
+            "donor_commit": donor,
+            "implementation_commit": implementation,
+            "implementation_parent": implementation_parent,
+            "entries": [
+                {
+                    "path": paths["old"],
+                    "disposition": "RENAMED_PREIMAGE_ALREADY_SELECTED",
+                    "transition_commit": implementation,
+                    "transition_parent": implementation_parent,
+                    "before_blob": blob(implementation_parent, paths["old"]),
+                    "before_mode": "100644",
+                    "replacement_path": paths["new"],
+                    "transition_after_blob": blob(implementation, paths["new"]),
+                    "ga_blob": blob(donor, paths["new"]),
+                    "after_mode": "100644",
+                },
+                {
+                    "path": paths["transient"],
+                    "disposition": "TRANSIENT_DELETED_BEFORE_GA",
+                    "transition_commit": deletion,
+                    "transition_parent": implementation,
+                    "before_blob": blob(implementation, paths["transient"]),
+                    "before_mode": "100644",
+                    "implementation_blob": blob(implementation, paths["transient"]),
+                },
+            ],
+        }
+        fixture = {
+            "repo": repo,
+            "paths": paths,
+            "paths_file": paths_file,
+            "reconciliation_file": root / "GA_RECONCILIATION.json",
+            "manifest": manifest,
+            "ga_text": ga_text,
+            "rename_text": rename_text,
+            "transient_text": transient_text,
+        }
+        self._ga_store_manifest(fixture, manifest)
+        return fixture
+
+    def _ga_select(self, fixture):
+        return self.mod._ga_candidates(
+            fixture["repo"],
+            24,
+            fixture["paths_file"],
+            fixture["reconciliation_file"],
+            include_text=True,
+            include_native=False,
+        )
+
+    def _ga_reseal_catalogue(self, fixture, selected):
+        fixture["paths_file"].write_text(
+            "".join(path + "\n" for path in sorted(selected)), encoding="utf-8"
+        )
+        manifest = copy.deepcopy(fixture["manifest"])
+        manifest["catalogue_sha256"] = hashlib.sha256(
+            fixture["paths_file"].read_bytes()
+        ).hexdigest()
+        manifest["declared_paths"] = len(selected)
+        return manifest
+
+    def test_ga_reconciliation_is_opt_in_and_default_still_refuses_missing(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = self._ga_fixture(Path(temp))
+            with self.assertRaises(ValueError):
+                self.mod.candidates(
+                    fixture["repo"], 24,
+                    selected=set(fixture["paths"].values()),
+                    all_candidates=False, include_text=True,
+                )
+
+    def test_ga_reconciliation_accounts_for_both_histories_and_all_outcomes(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = self._ga_fixture(Path(temp))
+            paths, manifest = fixture["paths"], fixture["manifest"]
+            candidates, exclusions, receipt = self._ga_select(fixture)
+            self.assertEqual(
+                sorted([paths["new"], paths["modified"]]),
+                [candidate.path for candidate in candidates],
+            )
+            by_candidate = {candidate.path: candidate for candidate in candidates}
+            self.assertEqual("ADDED", by_candidate[paths["new"]].status)
+            self.assertEqual("ABSENT", by_candidate[paths["new"]].before_sha256)
+            self.assertEqual(fixture["rename_text"], by_candidate[paths["new"]].after_text)
+            self.assertEqual(fixture["ga_text"], by_candidate[paths["modified"]].after_text)
+            self.assertEqual(
+                hashlib.sha256(fixture["ga_text"].encode("utf-8")).hexdigest(),
+                by_candidate[paths["modified"]].after_sha256,
+            )
+            self.assertEqual(3, len(exclusions))
+            reasons = dict(exclusions)
+            self.assertEqual(
+                "TYPED_EXCLUSION_GA_RENAMED_PREIMAGE_ALREADY_SELECTED", reasons[paths["old"]]
+            )
+            self.assertEqual(
+                "TYPED_EXCLUSION_GA_TRANSIENT_DELETED_BEFORE_GA", reasons[paths["transient"]]
+            )
+            self.assertTrue(reasons[paths["excluded"]].startswith("TYPED_EXCLUSION_FILE_MODE:"))
+            self.assertEqual(sorted(paths.values()), [row["path"] for row in receipt])
+            by_receipt = {row["path"]: row for row in receipt}
+            expected = {
+                paths["old"]: "HISTORY_ONLY", paths["transient"]: "HISTORY_ONLY",
+                paths["new"]: "GENERATED", paths["modified"]: "GENERATED",
+                paths["same"]: "SAME", paths["excluded"]: "EXCLUDED",
+            }
+            self.assertEqual(expected, {path: row["outcome"] for path, row in by_receipt.items()})
+            self.assertEqual(paths["new"], by_receipt[paths["old"]]["related_path"])
+            self.assertEqual("", by_receipt[paths["transient"]]["related_path"])
+            receipt_keys = {
+                "path", "outcome", "reason", "related_path", "baseline_commit", "donor_commit",
+                "implementation_commit", "transition_commit", "manifest_sha256", "catalogue_sha256",
+            }
+            manifest_sha = hashlib.sha256(fixture["reconciliation_file"].read_bytes()).hexdigest()
+            history = {entry["path"]: entry for entry in manifest["entries"]}
+            for row in receipt:
+                with self.subTest(path=row["path"]):
+                    self.assertEqual(receipt_keys, set(row))
+                    for key in ("baseline_commit", "donor_commit", "implementation_commit", "catalogue_sha256"):
+                        self.assertEqual(manifest[key], row[key])
+                    self.assertEqual(manifest_sha, row["manifest_sha256"])
+                    if row["path"] in history:
+                        self.assertEqual(history[row["path"]]["transition_commit"], row["transition_commit"])
+                        self.assertEqual(reasons[row["path"]], row["reason"])
+                    else:
+                        self.assertEqual("", row["transition_commit"])
+                        self.assertEqual("", row["related_path"])
+            generated = set(by_candidate)
+            excluded = set(reasons)
+            same = {path for path, row in by_receipt.items() if row["outcome"] == "SAME"}
+            self.assertFalse(generated & excluded or generated & same or excluded & same)
+            self.assertEqual(set(paths.values()), generated | excluded | same)
+
+    def test_ga_alias_deduplicates_and_transient_emits_no_delete_or_after_file(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            fixture = self._ga_fixture(root)
+            candidates, exclusions, _ = self._ga_select(fixture)
+            self.assertEqual(1, sum(candidate.path == fixture["paths"]["new"] for candidate in candidates))
+            self.assertTrue(all(candidate.status in {"ADDED", "MODIFIED"} for candidate in candidates))
+            out = root / "atoms"
+            crates = self.mod.materialize(out, 24, candidates, exclusions, crate_size=1)
+            targets = []
+            for crate in crates:
+                manifest_path = out / self.mod.RESOURCE_ROOT / crate / "manifest.tsv"
+                with manifest_path.open(encoding="utf-8", newline="") as handle:
+                    rows = list(csv.reader(handle, delimiter="\t"))
+                self.assertEqual(1, len(rows))
+                targets.append(rows[0][0])
+                self.assertTrue((manifest_path.parent / rows[0][3]).is_file())
+            self.assertEqual(sorted([fixture["paths"]["new"], fixture["paths"]["modified"]]), sorted(targets))
+            self.assertNotIn(fixture["paths"]["old"], targets)
+            self.assertNotIn(fixture["paths"]["transient"], targets)
+
+    def test_ga_reconciliation_rejects_top_level_contract_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = self._ga_fixture(Path(temp))
+            original = fixture["manifest"]
+            cases = [
+                ("schema", "m3.ga-path-reconciliation/2"),
+                ("release", 23),
+                ("declared_paths", len(fixture["paths"]) - 1),
+                ("catalogue_sha256", "0" * 64),
+                ("baseline_ref", "jdk-22+36"),
+                ("donor_ref", "jdk-23+37"),
+                ("baseline_commit", original["implementation_commit"]),
+                ("donor_commit", original["implementation_commit"]),
+                ("implementation_commit", original["entries"][1]["transition_commit"]),
+                ("implementation_parent", original["baseline_commit"]),
+                ("unknown_option", "must not become executable input"),
+            ]
+            for key, value in cases:
+                with self.subTest(field=key):
+                    manifest = copy.deepcopy(original)
+                    manifest[key] = value
+                    self._ga_store_manifest(fixture, manifest)
+                    with self.assertRaises(ValueError):
+                        self._ga_select(fixture)
+
+    def test_ga_reconciliation_rejects_entry_proof_drift(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = self._ga_fixture(Path(temp))
+            original = fixture["manifest"]
+            rename, transient = original["entries"]
+            cases = [
+                (0, "transition_commit", original["donor_commit"]),
+                (0, "transition_parent", original["baseline_commit"]),
+                (0, "before_blob", transient["before_blob"]),
+                (0, "before_mode", "100755"),
+                (0, "replacement_path", fixture["paths"]["modified"]),
+                (0, "transition_after_blob", transient["before_blob"]),
+                (0, "ga_blob", transient["before_blob"]),
+                (0, "after_mode", "100755"),
+                (0, "disposition", "IGNORE_MISSING"),
+                (0, "unknown_field", "invalid"),
+                (1, "transition_commit", original["donor_commit"]),
+                (1, "transition_parent", original["baseline_commit"]),
+                (1, "before_blob", rename["before_blob"]),
+                (1, "before_mode", "100755"),
+                (1, "implementation_blob", rename["before_blob"]),
+                (1, "replacement_path", fixture["paths"]["new"]),
+            ]
+            for ordinal, key, value in cases:
+                with self.subTest(entry=ordinal, field=key):
+                    manifest = copy.deepcopy(original)
+                    manifest["entries"][ordinal][key] = value
+                    self._ga_store_manifest(fixture, manifest)
+                    with self.assertRaises(ValueError):
+                        self._ga_select(fixture)
+
+    def test_ga_reconciliation_rejects_missing_required_keys(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = self._ga_fixture(Path(temp))
+            original = fixture["manifest"]
+            for key in original:
+                with self.subTest(top_key=key):
+                    manifest = copy.deepcopy(original)
+                    del manifest[key]
+                    self._ga_store_manifest(fixture, manifest)
+                    with self.assertRaises(ValueError):
+                        self._ga_select(fixture)
+            for ordinal, entry in enumerate(original["entries"]):
+                for key in entry:
+                    with self.subTest(entry=ordinal, missing_key=key):
+                        manifest = copy.deepcopy(original)
+                        del manifest["entries"][ordinal][key]
+                        self._ga_store_manifest(fixture, manifest)
+                        with self.assertRaises(ValueError):
+                            self._ga_select(fixture)
+
+    def test_ga_reconciliation_requires_exact_closed_missing_path_set(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = self._ga_fixture(Path(temp))
+            original = fixture["manifest"]
+            entries = original["entries"]
+            extra = copy.deepcopy(entries[1])
+            extra["path"] = "src/jdk.jlink/share/classes/example/Unselected.java"
+            ordinary = copy.deepcopy(entries[1])
+            ordinary["path"] = fixture["paths"]["modified"]
+            cases = [
+                ("duplicate", entries + [entries[0]]),
+                ("omitted", entries[:1]),
+                ("extraneous", entries + [extra]),
+                ("ordinary path", entries + [ordinary]),
+                ("balanced unknown substitution", [entries[0], extra]),
+            ]
+            for label, replacement_entries in cases:
+                with self.subTest(case=label):
+                    manifest = copy.deepcopy(original)
+                    manifest["entries"] = copy.deepcopy(replacement_entries)
+                    self._ga_store_manifest(fixture, manifest)
+                    with self.assertRaises(ValueError):
+                        self._ga_select(fixture)
+
+    def test_ga_reconciliation_rejects_unsealed_catalogue_changes(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = self._ga_fixture(Path(temp))
+            fixture["paths_file"].write_bytes(fixture["paths_file"].read_bytes() + b"# changed body\n")
+            with self.assertRaises(ValueError):
+                self._ga_select(fixture)
+
+    def test_ga_reconciliation_rejects_undeclared_missing_path_after_reseal(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = self._ga_fixture(Path(temp))
+            original = set(fixture["paths"].values())
+            unknown = {"test/jdk/example/Typo.java"}
+            selections = [
+                ("additional missing", original | unknown),
+                ("balanced substitution", (original - {fixture["paths"]["modified"]}) | unknown),
+            ]
+            for label, selected in selections:
+                with self.subTest(case=label):
+                    manifest = self._ga_reseal_catalogue(fixture, selected)
+                    self._ga_store_manifest(fixture, manifest)
+                    with self.assertRaises(ValueError):
+                        self._ga_select(fixture)
+
+    def test_ga_reconciliation_rejects_rename_target_not_selected(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = self._ga_fixture(Path(temp))
+            selected = set(fixture["paths"].values()) - {fixture["paths"]["new"]}
+            manifest = self._ga_reseal_catalogue(fixture, selected)
+            self._ga_store_manifest(fixture, manifest)
+            with self.assertRaises(ValueError):
+                self._ga_select(fixture)
+
+    def test_ga_reconciliation_rejects_pinned_history_when_path_reappears_at_endpoint(self) -> None:
+        for endpoint in ("baseline", "donor"):
+            with self.subTest(endpoint=endpoint), tempfile.TemporaryDirectory() as temp:
+                fixture = self._ga_fixture(Path(temp))
+                repo = fixture["repo"]
+                manifest = copy.deepcopy(fixture["manifest"])
+                if endpoint == "baseline":
+                    self.git(repo, "tag", "-f", "jdk-21+35", manifest["implementation_parent"])
+                    manifest["baseline_commit"] = manifest["implementation_parent"]
+                else:
+                    self.write(repo, fixture["paths"]["transient"], fixture["transient_text"])
+                    self.git(repo, "add", "-A")
+                    self.git(repo, "commit", "-q", "-m", "later donor restores transient")
+                    self.git(repo, "tag", "-f", "jdk-24+36")
+                    manifest["donor_commit"] = self._ga_git_text(repo, "rev-parse", "HEAD")
+                self._ga_store_manifest(fixture, manifest)
+                with self.assertRaises(ValueError):
+                    self._ga_select(fixture)
+
+    def test_ga_reconciliation_rejects_nonancestor_transition_with_valid_preimage(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = self._ga_fixture(Path(temp))
+            repo = fixture["repo"]
+            manifest = copy.deepcopy(fixture["manifest"])
+            self.git(repo, "checkout", "-q", "--detach", manifest["implementation_commit"])
+            (repo / fixture["paths"]["transient"]).unlink()
+            self.git(repo, "add", "-A")
+            self.git(repo, "commit", "-q", "-m", "side branch removal is not GA ancestry")
+            manifest["entries"][1]["transition_commit"] = self._ga_git_text(repo, "rev-parse", "HEAD")
+            self.git(repo, "checkout", "-q", "--detach", manifest["donor_commit"])
+            self._ga_store_manifest(fixture, manifest)
+            with self.assertRaises(ValueError):
+                self._ga_select(fixture)
+
+    def test_ga_reconciliation_receipt_is_stable_and_entries_are_order_independent(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            fixture = self._ga_fixture(Path(temp))
+            first = self._ga_select(fixture)
+            second = self._ga_select(fixture)
+            self.assertEqual(first, second)
+            manifest = copy.deepcopy(fixture["manifest"])
+            manifest["entries"].reverse()
+            self._ga_store_manifest(fixture, manifest)
+            reordered = self._ga_select(fixture)
+            self.assertEqual(first[:2], reordered[:2])
+            def without_manifest_seal(receipt):
+                return [{key: value for key, value in row.items() if key != "manifest_sha256"} for row in receipt]
+            self.assertEqual(without_manifest_seal(first[2]), without_manifest_seal(reordered[2]))
+            expected_seal = hashlib.sha256(fixture["reconciliation_file"].read_bytes()).hexdigest()
+            self.assertTrue(all(row["manifest_sha256"] == expected_seal for row in reordered[2]))
+
+    def test_ga_accounting_checks_paths_and_pins_not_only_balanced_counts(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            fixture = self._ga_fixture(root)
+            candidates, exclusions, receipt = self._ga_select(fixture)
+            out = root / "atoms"
+            self.mod.materialize(out, 24, candidates, exclusions, crate_size=1)
+            self.mod._write_ga_receipt(out, receipt)
+            self.assertEqual(
+                {"generated": 2, "exclusions": 3, "same": 1, "history_only": 2, "selected": 6},
+                self.mod._verify_ga_accounting(
+                    out, fixture["paths_file"], fixture["reconciliation_file"]
+                ),
+            )
+            crates_file = out / "CRATES.tsv"
+            with crates_file.open(encoding="utf-8", newline="") as handle:
+                reader = csv.DictReader(handle, delimiter="\t")
+                fieldnames = reader.fieldnames
+                original_rows = list(reader)
+            self.assertIsNotNone(fieldnames)
+            mutations = [
+                ("balanced unknown path", {
+                    "first_path": "test/jdk/example/Unknown.java",
+                    "last_path": "test/jdk/example/Unknown.java",
+                }),
+                ("wrong release", {"release": "23"}),
+                ("wrong baseline ref", {"baseline_ref": "jdk-22+36"}),
+                ("wrong donor ref", {"donor_ref": "jdk-23+37"}),
+                ("false acceptance", {"status": "VERIFIED"}),
+            ]
+            for label, changed_fields in mutations:
+                with self.subTest(case=label):
+                    rows = copy.deepcopy(original_rows)
+                    rows[0].update(changed_fields)
+                    self.assertEqual(
+                        sum(int(row["target_count"]) for row in original_rows),
+                        sum(int(row["target_count"]) for row in rows),
+                    )
+                    with crates_file.open("w", encoding="utf-8", newline="") as handle:
+                        writer = csv.DictWriter(handle, fieldnames=fieldnames, delimiter="\t", lineterminator="\n")
+                        writer.writeheader()
+                        writer.writerows(rows)
+                    with self.assertRaises(ValueError):
+                        self.mod._verify_ga_accounting(
+                            out, fixture["paths_file"], fixture["reconciliation_file"]
+                        )
+
+    def test_ga_cli_opt_in_writes_accounted_outputs_and_invalid_modes_write_nothing(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            fixture = self._ga_fixture(root)
+            common = [
+                "--repo", str(fixture["repo"]), "--release", "24",
+                "--crate-size", "1", "--include-text",
+            ]
+            selected = ["--paths-file", str(fixture["paths_file"])]
+            opted_in = ["--ga-reconciliation", str(fixture["reconciliation_file"])]
+            out = root / "cli-atoms"
+            self.assertEqual(
+                0, self.mod.main(common + selected + opted_in + ["--out", str(out)])
+            )
+            self.assertTrue((out / "GA_RECONCILIATION.tsv").is_file())
+            with (out / "CRATES.tsv").open(encoding="utf-8", newline="") as handle:
+                crates = list(csv.DictReader(handle, delimiter="\t"))
+            self.assertEqual(2, len(crates))
+            self.assertTrue(all(row["target_count"] == "1" for row in crates))
+            self.assertEqual(
+                {"generated": 2, "exclusions": 3, "same": 1, "history_only": 2, "selected": 6},
+                self.mod._verify_ga_accounting(
+                    out, fixture["paths_file"], fixture["reconciliation_file"]
+                ),
+            )
+            invalid_modes = [
+                ("ga-with-all-candidates", selected + opted_in + ["--all-candidates"]),
+                ("ga-without-paths-file", opted_in),
+                ("default-missing-catalogue", selected),
+            ]
+            for label, flags in invalid_modes:
+                with self.subTest(mode=label):
+                    refused_out = root / label
+                    with self.assertRaises(ValueError):
+                        self.mod.main(common + flags + ["--out", str(refused_out)])
+                    self.assertFalse(refused_out.exists())
+
+    def test_crate_size_rejects_zero_and_above_budget(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp) / "out"
+            candidate = self.mod.Candidate(
+                path="src/java.base/share/classes/p/A.java",
+                status="ADDED",
+                before_sha256="ABSENT",
+                after_sha256=self.mod._sha256_text("final class A {}\n"),
+                after_text="final class A {}\n",
+            )
+            with self.assertRaises(ValueError):
+                self.mod.materialize(out, 22, [candidate], [], crate_size=0)
+            with self.assertRaises(ValueError):
+                self.mod.materialize(
+                    out,
+                    22,
+                    [candidate],
+                    [],
+                    crate_size=self.mod.CRATE_LIMIT + 1,
+                )
+
+
+
+if __name__ == "__main__":
+    unittest.main()

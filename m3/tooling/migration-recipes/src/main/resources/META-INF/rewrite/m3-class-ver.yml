@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.packs.ClassVer
+displayName: Repair Java 21 non-preview class-header admission
+description: Replay the reviewed inspector conformance repair and shared behavioral tests. Execute with module-packs/kernel as source root; this is not a full JDK or bytecode-verification certificate.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-class-ver

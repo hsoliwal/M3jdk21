@@ -1,0 +1,28 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.ChangeMethodName"
+contributors:
+- name: "Jonathan Schnéider"
+  email: "jkschneider@gmail.com"
+  lineCount: 76
+- name: "Greg Adams"
+  email: "greg@moderne.io"
+  lineCount: 14
+- name: "Sam Snyder"
+  email: "sam@moderne.io"
+  lineCount: 11
+- name: "Knut Wannheden"
+  email: "knut@moderne.io"
+  lineCount: 7
+- name: "Tyler Van Gorder"
+  email: "tkvangorder@users.noreply.github.com"
+  lineCount: 4
+- name: "Tim te Beek"
+  email: "tim@moderne.io"
+  lineCount: 3
+- name: "traceyyoshima"
+  email: "tracey.yoshima@gmail.com"
+  lineCount: 2
+- name: "Aaron Gershman"
+  email: "aegershman@gmail.com"
+  lineCount: 1

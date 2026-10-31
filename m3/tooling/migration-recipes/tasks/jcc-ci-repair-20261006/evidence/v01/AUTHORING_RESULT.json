@@ -1,0 +1,55 @@
+{
+  "schema": "m3-jcc-ci-repair-authoring/1",
+  "status": "AUTHORED_NOT_EXECUTED",
+  "outputs": [
+    {
+      "path": ".github/workflows/m3-foundation.yml",
+      "before": {
+        "resource": "before-00-m3-foundation.yml.txt",
+        "sha256": "2a81b9ebfa5d477977dba4632a0e7c89f2ebb89606eb46491197536335d63fee"
+      },
+      "after": {
+        "resource": "after-00-m3-foundation.yml.txt",
+        "sha256": "76f3b96be528f33556fde14d811e3df9462f828353967237eed1a46ccc6ce91f"
+      },
+      "before_git_blob": "6ad9af43935d1cc7b5e471c1e7d21f8eb1538bb9",
+      "after_git_blob": "68dec98e3e0bc855a1af319855f4031025ece9bf",
+      "before_bytes": 2205,
+      "after_bytes": 2411,
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+      "before": {
+        "resource": "before-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
+        "sha256": "58d01008f3dc6e79d988e855d76ba90eb0a13d39a76e7eb4027d75442389ec94"
+      },
+      "after": {
+        "resource": "after-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
+        "sha256": "f34470a701cf71b4b4abbe1fa9a5091392a930426ec84d700f13e53edd244629"
+      },
+      "before_git_blob": "63344ac5b73c30def736f560bd9aa9348df3b97f",
+      "after_git_blob": "e349a7c727592731681759ba26df5fdeb775342e",
+      "before_bytes": 5379,
+      "after_bytes": 5380,
+      "mode": "100644"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+      "before": {
+        "resource": "before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
+        "sha256": "69882638771a411cf0866f789a7b3ef7e7e7040cde38a1c40ef4a743d37168e2"
+      },
+      "after": {
+        "resource": "after-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
+        "sha256": "3f3ab065d9e87e9f6095629a56b052642ec9d0883a466430e90a4a4355edd05b"
+      },
+      "before_git_blob": "c1865602253b72c9d5109a6b096146e847fd86aa",
+      "after_git_blob": "8e7d6c748c2d8a9b89eb2a24de929a535a310136",
+      "before_bytes": 4974,
+      "after_bytes": 4975,
+      "mode": "100644"
+    }
+  ],
+  "plan_sha256": "c096db7ea053cbfc2885714dd3abfdc521d703fa688cf2abe3b100aabb75700c"
+}

@@ -1,0 +1,133 @@
+{
+  "schema": "M3_CURRENT_RUNTIME_EXECUTION_20261024_V1",
+  "SPDX-License-Identifier": "Apache-2.0",
+  "copyright": "2026 Hitesh Soliwal and contributors",
+  "source_epoch": "22c70a28966e2470352af34abf914d6917d941d5",
+  "github_source_commit": "eb49a2035cae469ae597c25b6f9209ae1436128c",
+  "github_source_tree": "fc5eed63418b203de11074b6ca8b489360ba1093",
+  "qualification_owner_pin": "bb58cf0090e1bfbe5cafcde44c6db980945d1b59",
+  "source_stages": 6,
+  "source_target_applications": 16,
+  "unique_product_files": 15,
+  "source_sdk_tests": 30,
+  "source_sealing_tests": 48,
+  "source_receiver_cases": 54,
+  "each_immediate_replay_changes": 0,
+  "integrated_image": {
+    "build": "PASS",
+    "strict_warnings": true,
+    "modules_sha256": "d360a54b1d1256bd6d205bcfd9a9013d835676549c2da39487e2790e56a2291a",
+    "owner_runs": 34,
+    "owner_runs_failed": 0,
+    "jtreg_executed": false,
+    "mode_boundary": "M3 storage runs interpreted; explicit M3 with CDS-on remains unsupported and refuses."
+  },
+  "collections": {
+    "unchanged_Maven_POM_Surefire": {
+      "tests": 286,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "all_native_generated_JNI_symbols": 20,
+    "native_libraries": 10,
+    "final_image_default": {
+      "found": 286,
+      "skipped": 0,
+      "started": 286,
+      "aborted": 0,
+      "successful": 286,
+      "failed": 0
+    },
+    "final_image_M3_enabled_shards": {
+      "observed_JUnit_counts": {
+        "tests": 286,
+        "skipped": 0,
+        "failures": 0,
+        "errors": 0
+      },
+      "junit_terminal_report_status": "PASS",
+      "process_qualification_status": "HOLD_RAW_VM_RC_UNRECORDED",
+      "raw_vm_exit_codes": {
+        "1": 0,
+        "2": null,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0
+      },
+      "sole_ID_successor": "A separate exact one-case execution recaptures its missing process status; this receipt remains historical."
+    },
+    "native_mask_pack_exports": 9,
+    "mask_C_and_Java_owners_unchanged": true
+  },
+  "evidence": [
+    {
+      "path": "image-build-evidence/epochs/epoch-22c70a28966e/IMAGE_PROOF.json",
+      "sha256": "ceea8ca59f6bf8c92fef33641b7696e78f56ac3d0043b0a25d6c29fb4ea7747c"
+    },
+    {
+      "path": "image-build-evidence/epochs/epoch-22c70a28966e/owner/receipt.json",
+      "sha256": "48c08b4b9c9e713831a0bb05c66ed30a9022d40436e9a9e8c852db9196024741"
+    },
+    {
+      "path": "image-build-evidence/epochs/epoch-22c70a28966e/combined/default/PROOF.json",
+      "sha256": "532f185ab1c9b8a2177c823e5ab8b8921ab18b633baa2d8100d6e55d87c61b54"
+    },
+    {
+      "path": "image-build-evidence/epochs/epoch-22c70a28966e/combined/m3-enabled-sharded/PROOF.json",
+      "sha256": "161d11f406e7fe4097c1ba0c0ad4639c27dd89371943eb797dc4ca5eee41e16a"
+    },
+    {
+      "path": "all-native-validation/PROOF.json",
+      "sha256": "6a71479104cd08ca128d32fbdba5e48efe0781b4dc65b66ed567f6509dec5624"
+    },
+    {
+      "path": "maven-source-validation/PROOF.json",
+      "sha256": "f9121d7e35891fe01673af88bbc30f05d615e67b7deb9b6b447277631aa9e649"
+    },
+    {
+      "path": "regex-independent-review/REVIEW_EVIDENCE.json",
+      "sha256": "1465353d93ef43f1b4df2be0484595b66210fed08601202e1ec66da40627130f"
+    },
+    {
+      "path": "independent-review/REVIEW_EVIDENCE.json",
+      "sha256": "7ca05dbd7b2e6ee4a02ef814f27b6832b8bfca0c7e90b38071423be14d1f104a"
+    },
+    {
+      "path": "publication/RUNTIME_PREPARED_COMMITS.json",
+      "sha256": "d5d727c5e636bbbd4ea228514683518adc13633c1abeb914ba9cf68c59c73056"
+    }
+  ],
+  "historical_observations_retained": {
+    "old_image_source": "489fded3392081a8a467e454ca5d22fc92939caf",
+    "old_owner_runs": {
+      "passed": 22,
+      "failed": 3
+    },
+    "old_single_VM_M3_collection_timeout_seconds": 900,
+    "old_default286_raw_wrapper": "Checkout test tree changed during execution; all consumed inputs/image stayed identical. Raw FAIL retained with separate classification.",
+    "historical_metadata_python": {
+      "tests": 15,
+      "failures": 3,
+      "source_guards_preserved": true
+    }
+  },
+  "review": {
+    "Critical": 0,
+    "Important": 0,
+    "Minor_deferred": [
+      "Two callback tapes have exact external before/after proof but no durable content assertion.",
+      "The production hierarchy routing witness remains archived evidence outside the installed jtreg test."
+    ]
+  },
+  "pending": [
+    "M3-enabled process qualification is held: one JVM exit code was not serialized after a duration-parser failure, despite all286 JUnit success reports. A sole-ID successor is running.",
+    "Complete hosted build/test workflows and canonical full-root provenance gate at published head.",
+    "Full current jtreg, all JDK families, non-Linux platforms, GC/backend and compiler acceptance.",
+    "Retained-heap, CPU and native/process-memory acceptance; no broad performance or allocation claim.",
+    "Existing filtered-spliterator reflection gate and historical metadata source guards remain held."
+  ],
+  "phase": "STRING_ACTIVE_NO_FAMILY_PROMOTION",
+  "metadata_receipt": "Qualified separately in the canonical task, preserving this tested source epoch."
+}

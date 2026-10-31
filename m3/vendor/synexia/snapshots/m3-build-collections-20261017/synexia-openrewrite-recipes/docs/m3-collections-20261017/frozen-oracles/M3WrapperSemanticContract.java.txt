@@ -1,0 +1,469 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package com.synexia.common.collections;
+
+import com.synexia.common.collections.jdk.FilteredViews;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
+import java.util.AbstractCollection;
+import java.util.AbstractSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.NavigableMap;
+import java.util.NavigableSet;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.function.BiPredicate;
+import java.util.function.LongPredicate;
+import java.util.function.Predicate;
+
+/** Frozen independent behavior and boundary-event oracle for private wrapper atoms. */
+public final class M3WrapperSemanticContract {
+    private static int assertions;
+
+    private M3WrapperSemanticContract() { }
+
+    private static void equal(Object expected, Object actual, String label) {
+        assertions++;
+        if (!Objects.equals(expected, actual)) {
+            throw new AssertionError(label + ": expected=" + expected + ", actual=" + actual);
+        }
+    }
+
+    private static void same(Object expected, Object actual, String label) {
+        assertions++;
+        if (expected != actual) throw new AssertionError(label + ": reference identity changed");
+    }
+
+    private static void fails(Class<? extends Throwable> expected, Runnable action, String label) {
+        assertions++;
+        try {
+            action.run();
+        } catch (Throwable failure) {
+            if (failure.getClass() == expected) return;
+            throw new AssertionError(label + ": unexpected " + failure, failure);
+        }
+        throw new AssertionError(label + ": missing " + expected.getSimpleName());
+    }
+
+    private static void collectionContracts() {
+        String first = new String("visible");
+        String hidden = new String("hidden");
+        List<String> source = new ArrayList<>(Arrays.asList(first, null, hidden, first));
+        for (boolean legacy : new boolean[] {false, true}) {
+            List<String> calls = new ArrayList<>();
+            Predicate<String> predicate = value -> {
+                calls.add(value);
+                return value == null || value.startsWith("v");
+            };
+            Collection<String> view = legacy ? FilteredViews.collection(source, predicate)
+                    : M3FilteredViews.filter((Collection<String>) source, predicate);
+            equal(List.of(), calls, "construction is lazy");
+            Iterator<String> cursor = view.iterator();
+            equal(List.of(), calls, "iterator construction is lazy");
+            equal(true, cursor.hasNext(), "first lookahead");
+            equal(true, cursor.hasNext(), "repeated lookahead");
+            equal(List.of(first), calls, "lookahead evaluates once");
+            same(first, cursor.next(), "collection identity");
+            equal(null, cursor.next(), "visible null");
+            same(first, cursor.next(), "duplicate identity");
+            equal(false, cursor.hasNext(), "exhaustion");
+            equal(false, cursor.hasNext(), "stable exhaustion");
+            equal(source, calls, "source-order predicate trace");
+            fails(NoSuchElementException.class, cursor::next, "exhausted next");
+            fails(UnsupportedOperationException.class, cursor::remove, "read-only iterator");
+            String later = new String("visible-later");
+            source.add(later);
+            same(later, new ArrayList<>(view).get(3), "live backing change");
+            source.remove(source.size() - 1);
+            fails(UnsupportedOperationException.class, () -> view.remove("missing"), "missing remove refusal");
+            fails(UnsupportedOperationException.class, () -> view.add("visible-new"), "add refusal");
+            fails(legacy ? NullPointerException.class : UnsupportedOperationException.class,
+                    () -> view.addAll(null), "family null/addAll order");
+            fails(legacy ? NullPointerException.class : UnsupportedOperationException.class,
+                    () -> view.removeIf(null), "family null/removeIf order");
+        }
+        Collection<String> permitsAnyContains = new AbstractCollection<>() {
+            @Override public Iterator<String> iterator() { return List.<String>of().iterator(); }
+            @Override public int size() { return 0; }
+            @Override public boolean contains(Object value) { return true; }
+        };
+        Predicate<String> typed = value -> value.startsWith("v");
+        fails(ClassCastException.class,
+                () -> M3FilteredViews.filter(permitsAnyContains, typed).contains(7), "M3 predicate cast propagation");
+        equal(false, FilteredViews.collection(permitsAnyContains, typed).contains(7),
+                "legacy predicate cast suppression");
+    }
+
+    private static void sortedSetContracts() {
+        for (boolean reverse : new boolean[] {false, true}) {
+            Comparator<Integer> order = reverse ? Comparator.reverseOrder() : Comparator.naturalOrder();
+            for (int mode = 0; mode < 5; mode++) {
+                int selected = mode;
+                Predicate<Integer> predicate = value -> selected == 0
+                        || selected != 1 && Math.floorMod(value, selected) == 0;
+                NavigableSet<Integer> source = new TreeSet<>(order);
+                for (int i = -9; i <= 9; i++) source.add(i);
+                NavigableSet<Integer> expected = new TreeSet<>(order);
+                for (Integer value : source) if (predicate.test(value)) expected.add(value);
+                List<SortedSet<Integer>> views = List.of(
+                        M3FilteredViews.filter((SortedSet<Integer>) source, predicate),
+                        M3FilteredViews.filter(source, predicate),
+                        FilteredViews.sortedSet(source, predicate),
+                        FilteredViews.navigableSet(source, predicate));
+                for (SortedSet<Integer> view : views) {
+                    equal(new ArrayList<>(expected), new ArrayList<>(view), "sorted projection");
+                    same(order, view.comparator(), "source comparator identity");
+                    equal(expected.size(), view.size(), "sorted size");
+                    equal(expected.isEmpty(), view.isEmpty(), "sorted empty");
+                    equal(expected.hashCode(), view.hashCode(), "set hashCode");
+                    equal(true, expected.equals(view) && view.equals(expected), "set equality symmetry");
+                    if (expected.isEmpty()) {
+                        fails(NoSuchElementException.class, view::first, "empty first");
+                        fails(NoSuchElementException.class, view::last, "empty last");
+                    } else {
+                        equal(expected.first(), view.first(), "sorted first");
+                        equal(expected.last(), view.last(), "sorted last");
+                    }
+                    int from = reverse ? 5 : -5;
+                    int to = reverse ? -5 : 5;
+                    equal(new ArrayList<>(expected.subSet(from, to)),
+                            new ArrayList<>(view.subSet(from, to)), "sorted range");
+                    fails(IllegalArgumentException.class, () -> view.subSet(to, from), "range rejection");
+                    if (view instanceof NavigableSet<Integer> nav) {
+                        for (int probe = -11; probe <= 11; probe++) {
+                            equal(expected.lower(probe), nav.lower(probe), "lower");
+                            equal(expected.floor(probe), nav.floor(probe), "floor");
+                            equal(expected.ceiling(probe), nav.ceiling(probe), "ceiling");
+                            equal(expected.higher(probe), nav.higher(probe), "higher");
+                        }
+                        equal(new ArrayList<>(expected.descendingSet()), drain(nav.descendingIterator()),
+                                "descending cursor");
+                        equal(new ArrayList<>(expected), new ArrayList<>(nav.descendingSet().descendingSet()),
+                                "double descending");
+                        fails(UnsupportedOperationException.class, nav::pollFirst, "read-only poll");
+                    }
+                }
+                Set<Integer> setView = M3FilteredViews.filter((Set<Integer>) source, predicate);
+                equal(expected, setView, "plain set overload");
+                equal(expected, FilteredViews.set(source, predicate), "legacy set factory");
+            }
+        }
+        NavigableSet<Integer> nullable = new TreeSet<>(Comparator.nullsFirst(Integer::compare));
+        nullable.addAll(Arrays.asList(null, 1, 2));
+        for (NavigableSet<Integer> view : List.of(M3FilteredViews.filter(nullable, value -> true),
+                FilteredViews.navigableSet(nullable, value -> true))) {
+            equal(Arrays.asList(null, 1, 2), new ArrayList<>(view), "nullable iteration");
+            equal(null, view.first(), "nullable first");
+            equal(2, view.last(), "nullable last");
+        }
+    }
+
+    private static <E> List<E> drain(Iterator<E> cursor) {
+        List<E> result = new ArrayList<>();
+        while (cursor.hasNext()) result.add(cursor.next());
+        return result;
+    }
+
+    private static void mapContracts() {
+        for (boolean reverse : new boolean[] {false, true}) {
+            Comparator<Integer> order = reverse ? Comparator.reverseOrder() : Comparator.naturalOrder();
+            NavigableMap<Integer, String> source = new TreeMap<>(order);
+            for (int i = -7; i <= 7; i++) source.put(i, i % 3 == 0 ? null : new String("v" + i));
+            BiPredicate<Integer, String> predicate = (key, value) -> key % 2 == 0;
+            NavigableMap<Integer, String> expected = new TreeMap<>(order);
+            source.forEach((key, value) -> { if (predicate.test(key, value)) expected.put(key, value); });
+            for (SortedMap<Integer, String> view : List.of(
+                    M3FilteredViews.filterEntries((SortedMap<Integer, String>) source, predicate),
+                    M3FilteredViews.filterEntries(source, predicate))) {
+                equal(expected, view, "map projection");
+                equal(expected.size(), view.size(), "map size");
+                equal(false, view.isEmpty(), "map nonempty");
+                same(order, view.comparator(), "map comparator identity");
+                equal(expected.firstKey(), view.firstKey(), "map first");
+                equal(expected.lastKey(), view.lastKey(), "map last");
+                Iterator<Map.Entry<Integer, String>> cursor = view.entrySet().iterator();
+                Map.Entry<Integer, String> first = cursor.next();
+                same(source.get(first.getKey()), first.getValue(), "entry value identity");
+                fails(UnsupportedOperationException.class, () -> first.setValue("changed"), "entry immutable");
+                fails(UnsupportedOperationException.class, cursor::remove, "entry iterator immutable");
+                int from = reverse ? 4 : -4;
+                int to = reverse ? -4 : 4;
+                equal(expected.subMap(from, to), view.subMap(from, to), "sorted map range");
+                if (view instanceof NavigableMap<Integer, String> nav) {
+                    for (int key = -9; key <= 9; key++) {
+                        equal(expected.lowerEntry(key), nav.lowerEntry(key), "map lower");
+                        equal(expected.floorEntry(key), nav.floorEntry(key), "map floor");
+                        equal(expected.ceilingEntry(key), nav.ceilingEntry(key), "map ceiling");
+                        equal(expected.higherEntry(key), nav.higherEntry(key), "map higher");
+                    }
+                    equal(false, nav.firstEntry() == nav.firstEntry(), "fresh navigation entry");
+                    equal(expected.descendingMap(), nav.descendingMap(), "map descending");
+                    equal(new ArrayList<>(expected.descendingKeySet()),
+                            new ArrayList<>(nav.descendingKeySet()), "descending keys");
+                }
+            }
+            equal(true, M3FilteredViews.filterEntries(source, (key, value) -> false).isEmpty(), "all hidden map");
+            source.clear();
+            equal(true, M3FilteredViews.filterEntries(source, predicate).isEmpty(), "empty map");
+        }
+    }
+
+    private static void mutableContracts() {
+        NavigableSet<Integer> source = new TreeSet<>(List.of(1, 2, 3, 4, 5, 6));
+        NavigableSet<Integer> view = M3MutableFilteredViews.filter(source, value -> value % 2 == 0);
+        Iterator<Integer> cursor = view.iterator();
+        fails(IllegalStateException.class, cursor::remove, "mutable remove before next");
+        equal(2, cursor.next(), "mutable first");
+        equal(true, cursor.hasNext(), "mutable lookahead");
+        equal(true, cursor.hasNext(), "mutable repeated lookahead");
+        cursor.remove();
+        equal(false, source.contains(2), "removes returned value");
+        equal(true, source.contains(4), "retains looked-ahead value");
+        fails(IllegalStateException.class, cursor::remove, "double removal");
+        equal(4, cursor.next(), "resumed cursor");
+        fails(IllegalArgumentException.class, () -> view.addAll(List.of(8, 9)), "batch preflight");
+        equal(false, source.contains(8), "rejected batch unchanged");
+        view.descendingSet().headSet(4, true).clear();
+        equal(List.of(1, 3, 5), new ArrayList<>(source), "range mutation only visible");
+
+        NavigableMap<Integer, String> owner = new TreeMap<>();
+        owner.put(1, "hidden"); owner.put(2, null); owner.put(4, "visible");
+        NavigableMap<Integer, String> map = M3MutableFilteredViews.filterEntries(owner,
+                (key, value) -> key % 2 == 0 && (value == null || value.startsWith("v")));
+        Iterator<Map.Entry<Integer, String>> entries = map.entrySet().iterator();
+        Map.Entry<Integer, String> first = entries.next();
+        equal(null, first.setValue("valid"), "mutable entry returns old null");
+        equal("valid", owner.get(2), "mutable entry is backed");
+        equal(true, entries.hasNext(), "map lookahead");
+        entries.remove();
+        equal(false, owner.containsKey(2), "map iterator removes returned key");
+        equal(4, entries.next().getKey(), "map cursor resumes");
+        fails(UnsupportedOperationException.class, () -> map.navigableKeySet().add(6), "keyset addition");
+        fails(UnsupportedOperationException.class, () -> map.descendingKeySet().addAll(List.of()), "empty keyset addition");
+        fails(UnsupportedOperationException.class, () -> map.tailMap(2, true).navigableKeySet().add(6), "ranged keyset addition");
+        Map.Entry<Integer, String> live = map.entrySet().iterator().next();
+        owner.put(4, "hidden");
+        fails(IllegalStateException.class, () -> live.setValue("valid-again"), "hidden mapping cannot be replaced through stale entry");
+        equal("hidden", owner.get(4), "hidden owner preserved");
+    }
+
+    private static void primitiveContracts() {
+        long[] values = {Long.MIN_VALUE, -3, -2, 0, 1, 2, Long.MAX_VALUE};
+        LongFixture owner = new LongFixture(values);
+        LongPredicate predicate = value -> (value & 1) == 0;
+        LongFilteredSortedSetView view = new LongFilteredSortedSetView(owner, predicate);
+        equal(Arrays.toString(new long[] {Long.MIN_VALUE, -2, 0, 2}), Arrays.toString(view.toArray()), "primitive projection");
+        equal(Long.MIN_VALUE, view.first(), "primitive MIN value");
+        equal(2L, view.last(), "primitive last");
+        equal(Long.MIN_VALUE, view.floor(Long.MIN_VALUE, 99), "MIN is not absence");
+        equal(99L, view.lower(Long.MIN_VALUE, 99), "MIN exclusive absence");
+        equal(99L, view.higher(Long.MAX_VALUE, 99), "MAX exclusive absence");
+        equal(2L, view.lower(Long.MAX_VALUE, 99), "skip rejected MAX");
+        List<Long> calls = new ArrayList<>();
+        long[] frozen = M3FilteredLongSnapshots.filterSorted(values, value -> {
+            calls.add(value); return predicate.test(value);
+        });
+        equal(Arrays.toString(view.toArray()), Arrays.toString(frozen), "Java snapshot parity");
+        equal(Arrays.toString(values), calls.toString(), "snapshot evaluates exactly in order");
+        owner.add(4);
+        equal(4L, view.last(), "primitive view remains live");
+        equal(2L, frozen[frozen.length - 1], "snapshot stays frozen");
+        List<Long> rejectedCalls = new ArrayList<>();
+        fails(IllegalArgumentException.class,
+                () -> M3FilteredLongSnapshots.filterSorted(new long[] {2, 1}, value -> {
+                    rejectedCalls.add(value); return true;
+                }), "unsorted input refusal");
+        equal(List.of(), rejectedCalls, "sort validation before predicate");
+    }
+
+    private static final class LongFixture implements LongSortedSet {
+        private final NavigableSet<Long> values = new TreeSet<>();
+        LongFixture(long[] input) { for (long value : input) values.add(value); }
+        @Override public int size() { return values.size(); }
+        @Override public boolean contains(long value) { return values.contains(value); }
+        @Override public void clear() { values.clear(); }
+        @Override public boolean add(long value) { return values.add(value); }
+        @Override public boolean remove(long value) { return values.remove(value); }
+        @Override public long first() { return values.first(); }
+        @Override public long last() { return values.last(); }
+        private long or(Long value, long fallback) { return value == null ? fallback : value; }
+        @Override public long lower(long value, long fallback) { return or(values.lower(value), fallback); }
+        @Override public long floor(long value, long fallback) { return or(values.floor(value), fallback); }
+        @Override public long ceiling(long value, long fallback) { return or(values.ceiling(value), fallback); }
+        @Override public long higher(long value, long fallback) { return or(values.higher(value), fallback); }
+        @Override public int filterInPlace(LongPredicate predicate) {
+            int before = values.size(); values.removeIf(value -> !predicate.test(value));
+            return before - values.size();
+        }
+        @Override public long[] toArray() { return values.stream().mapToLong(Long::longValue).toArray(); }
+        @Override public LongIterator iterator() {
+            Iterator<Long> cursor = values.iterator();
+            return new LongIterator() {
+                @Override public boolean hasNext() { return cursor.hasNext(); }
+                @Override public long nextLong() { return cursor.next(); }
+            };
+        }
+    }
+
+    private static final class InjectedFailure extends RuntimeException {
+        private static final long serialVersionUID = 1L;
+        InjectedFailure() { super("frozen boundary failure"); }
+    }
+
+    private static final class Trace {
+        private final List<String> events = new ArrayList<>();
+        private final int failAt;
+        private final InjectedFailure failure = new InjectedFailure();
+        Trace(int failAt) { this.failAt = failAt; }
+        void event(String text) {
+            events.add(text);
+            if (events.size() == failAt) throw failure;
+        }
+    }
+
+    private static <E> Iterator<E> traced(Iterator<E> cursor, Trace trace) {
+        return new Iterator<>() {
+            @Override public boolean hasNext() { trace.event("iterator.hasNext"); return cursor.hasNext(); }
+            @Override public E next() { trace.event("iterator.next"); return cursor.next(); }
+            @Override public void remove() { trace.event("iterator.remove"); cursor.remove(); }
+        };
+    }
+
+    @SuppressWarnings("unchecked")
+    private static NavigableSet<Integer> tracedSet(NavigableSet<Integer> source, Trace trace) {
+        return (NavigableSet<Integer>) Proxy.newProxyInstance(M3WrapperSemanticContract.class.getClassLoader(),
+                new Class<?>[] {NavigableSet.class}, (proxy, method, arguments) -> {
+                    trace.event("set." + method.getName());
+                    Object result;
+                    try { result = method.invoke(source, arguments); }
+                    catch (InvocationTargetException failure) { throw failure.getCause(); }
+                    if (result instanceof NavigableSet<?>) return tracedSet((NavigableSet<Integer>) result, trace);
+                    if (result instanceof Iterator<?>) return traced((Iterator<Integer>) result, trace);
+                    return result;
+                });
+    }
+
+    @SuppressWarnings("unchecked")
+    private static SortedMap<Integer, String> tracedMap(SortedMap<Integer, String> source, Trace trace) {
+        return (SortedMap<Integer, String>) Proxy.newProxyInstance(M3WrapperSemanticContract.class.getClassLoader(),
+                new Class<?>[] {SortedMap.class}, (proxy, method, arguments) -> {
+                    trace.event("map." + method.getName());
+                    Object result;
+                    try { result = method.invoke(source, arguments); }
+                    catch (InvocationTargetException failure) { throw failure.getCause(); }
+                    if (!method.getName().equals("entrySet")) return result;
+                    Set<Map.Entry<Integer, String>> entries = (Set<Map.Entry<Integer, String>>) result;
+                    return new AbstractSet<Map.Entry<Integer, String>>() {
+                        @Override public int size() { trace.event("entries.size"); return entries.size(); }
+                        @Override public Iterator<Map.Entry<Integer, String>> iterator() {
+                            trace.event("entries.iterator");
+                            Iterator<Map.Entry<Integer, String>> cursor = traced(entries.iterator(), trace);
+                            return new Iterator<>() {
+                                @Override public boolean hasNext() { return cursor.hasNext(); }
+                                @Override public Map.Entry<Integer, String> next() {
+                                    Map.Entry<Integer, String> entry = cursor.next();
+                                    return new Map.Entry<>() {
+                                        @Override public Integer getKey() {
+                                            trace.event("entry.key:" + entry.getKey()); return entry.getKey();
+                                        }
+                                        @Override public String getValue() {
+                                            trace.event("entry.value:" + entry.getValue()); return entry.getValue();
+                                        }
+                                        @Override public String setValue(String value) {
+                                            trace.event("entry.setValue"); return entry.setValue(value);
+                                        }
+                                    };
+                                }
+                            };
+                        }
+                    };
+                });
+    }
+
+    private static void descendingTrace(Trace trace) {
+        NavigableSet<Integer> owner = tracedSet(new TreeSet<>(List.of(1, 2, 3, 4)), trace);
+        Iterator<Integer> cursor = M3FilteredViews.filter(owner, value -> {
+            trace.event("predicate:" + value); return value % 2 == 0;
+        }).descendingIterator();
+        fails(UnsupportedOperationException.class, cursor::remove, "trace remove does not enter backing");
+        equal(true, cursor.hasNext(), "trace first lookahead");
+        equal(true, cursor.hasNext(), "trace repeated lookahead");
+        equal(4, cursor.next(), "trace first result");
+        equal(true, cursor.hasNext(), "trace second lookahead");
+        equal(2, cursor.next(), "trace second result");
+        equal(false, cursor.hasNext(), "trace exhausted");
+        equal(false, cursor.hasNext(), "trace repeat exhaustion");
+        fails(NoSuchElementException.class, cursor::next, "trace exhausted next");
+    }
+
+    private static void emptyMapTrace(Trace trace, int accept) {
+        SortedMap<Integer, String> source = new TreeMap<>();
+        source.put(1, "one"); source.put(2, null); source.put(3, "three");
+        SortedMap<Integer, String> owner = tracedMap(source, trace);
+        boolean empty = M3FilteredViews.filterEntries(owner, (key, value) -> {
+            trace.event("predicate:" + key + ":" + value); return key == accept;
+        }).isEmpty();
+        equal(accept == 0, empty, "map emptiness result");
+    }
+
+    private static void replayTrace(List<String> expected, java.util.function.Consumer<Trace> operation) {
+        Trace normal = new Trace(0);
+        operation.accept(normal);
+        equal(expected, normal.events, "independent boundary sequence");
+        for (int index = 1; index <= expected.size(); index++) {
+            Trace trace = new Trace(index);
+            try {
+                operation.accept(trace);
+                throw new AssertionError("missing injected failure at " + index);
+            } catch (InjectedFailure failure) {
+                same(trace.failure, failure, "injected exception identity");
+                equal(expected.subList(0, index), trace.events, "exception prefix/order");
+            }
+        }
+    }
+
+    private static void boundaryContracts() {
+        List<String> descending = new ArrayList<>(List.of("set.descendingSet", "set.iterator"));
+        for (int value = 4; value >= 1; value--) {
+            descending.add("iterator.hasNext"); descending.add("iterator.next");
+            descending.add("predicate:" + value);
+        }
+        descending.add("iterator.hasNext");
+        replayTrace(descending, M3WrapperSemanticContract::descendingTrace);
+        for (int accepted : new int[] {0, 1, 2, 3}) {
+            List<String> expected = new ArrayList<>(List.of("map.entrySet", "entries.iterator"));
+            for (int key = 1; key <= (accepted == 0 ? 3 : accepted); key++) {
+                String value = key == 1 ? "one" : key == 2 ? "null" : "three";
+                expected.add("iterator.hasNext"); expected.add("iterator.next");
+                expected.add("entry.key:" + key); expected.add("entry.value:" + value);
+                expected.add("predicate:" + key + ":" + value);
+            }
+            if (accepted == 0) expected.add("iterator.hasNext");
+            replayTrace(expected, trace -> emptyMapTrace(trace, accepted));
+        }
+    }
+
+    public static void main(String[] arguments) {
+        assertions = 0;
+        collectionContracts();
+        sortedSetContracts();
+        mapContracts();
+        mutableContracts();
+        primitiveContracts();
+        boundaryContracts();
+        System.out.println("M3WrapperSemanticContract PASS assertions=" + assertions);
+    }
+}

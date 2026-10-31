@@ -1,0 +1,1297 @@
+{
+  "schema": "m3-catalogue-text-delivery-paths/v1",
+  "scope": "Delivery filenames only; immutable receipt payloads keep original execution paths",
+  "rename_rule": "unsupported metadata suffix -> original filename + .txt",
+  "records": [
+    {
+      "original_catalogue_path": "candidate-proof/FilterGapWitness.log",
+      "delivered_catalogue_path": "candidate-proof/FilterGapWitness.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/FilterGapWitness.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/FilterGapWitness.log.txt",
+      "payload_sha256": "a05160f926b530c2fac039e432fb712c4c5518e08c68d3a20c74df1df3a19389",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3BoundedFilteredNavigationContract.log",
+      "delivered_catalogue_path": "candidate-proof/M3BoundedFilteredNavigationContract.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3BoundedFilteredNavigationContract.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3BoundedFilteredNavigationContract.log.txt",
+      "payload_sha256": "67e84f9b418741a613573c1361226626fb54e9824734ab8629b429898b53415f",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3ComparatorFailureProbe.log",
+      "delivered_catalogue_path": "candidate-proof/M3ComparatorFailureProbe.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3ComparatorFailureProbe.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3ComparatorFailureProbe.log.txt",
+      "payload_sha256": "5408289657af586b76932a48e56c35f1bf487f7d123f7141412f9b9ada0146fb",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3DeepReadOnlyCollectionSelfTest-trace.log",
+      "delivered_catalogue_path": "candidate-proof/M3DeepReadOnlyCollectionSelfTest-trace.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3DeepReadOnlyCollectionSelfTest-trace.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3DeepReadOnlyCollectionSelfTest-trace.log.txt",
+      "payload_sha256": "7a10a88ba35159ffdefa7de404e5ed70936dee7f3bc7b2c2336811d52c1d351a",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3DeepReadOnlyCollectionSelfTest.log",
+      "delivered_catalogue_path": "candidate-proof/M3DeepReadOnlyCollectionSelfTest.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3DeepReadOnlyCollectionSelfTest.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3DeepReadOnlyCollectionSelfTest.log.txt",
+      "payload_sha256": "ccaf4bb0b42636d010c09ccedadc7922fcd0b67148f1a6d3b9b03e74d97fcfd6",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3FilteredNavigationBoundarySelfTest.log",
+      "delivered_catalogue_path": "candidate-proof/M3FilteredNavigationBoundarySelfTest.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3FilteredNavigationBoundarySelfTest.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3FilteredNavigationBoundarySelfTest.log.txt",
+      "payload_sha256": "f1b8475db0c4c5861b0ab1b6b345e208a5127cf1a900654a0bc8a1af790613f9",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3IndexPathImpossibleStageSelfTest-java.log",
+      "delivered_catalogue_path": "candidate-proof/M3IndexPathImpossibleStageSelfTest-java.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathImpossibleStageSelfTest-java.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathImpossibleStageSelfTest-java.log.txt",
+      "payload_sha256": "42948289ce443b54694d994d5a029b11782795f48ded391bf53504720b2ebee1",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3IndexPathImpossibleStageSelfTest-native.log",
+      "delivered_catalogue_path": "candidate-proof/M3IndexPathImpossibleStageSelfTest-native.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathImpossibleStageSelfTest-native.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathImpossibleStageSelfTest-native.log.txt",
+      "payload_sha256": "9f6e5bda388d36dcb5c13dce4d8f6856b9a944ee2e830fd7cfcba997e66f3602",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3IndexPathMaskAliasSelfTest-java.log",
+      "delivered_catalogue_path": "candidate-proof/M3IndexPathMaskAliasSelfTest-java.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathMaskAliasSelfTest-java.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathMaskAliasSelfTest-java.log.txt",
+      "payload_sha256": "1a2a623b038230670c3ba9196709612f0558669e585ac73181a57dcea3c4453f",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3IndexPathMaskAliasSelfTest-native.log",
+      "delivered_catalogue_path": "candidate-proof/M3IndexPathMaskAliasSelfTest-native.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathMaskAliasSelfTest-native.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathMaskAliasSelfTest-native.log.txt",
+      "payload_sha256": "ec77b54cf95fdbda5a79b4cb8c5828f023a3a11b708cb50d86fa9f629a760291",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3IndexPathMasksLongSelfTest-java.log",
+      "delivered_catalogue_path": "candidate-proof/M3IndexPathMasksLongSelfTest-java.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathMasksLongSelfTest-java.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathMasksLongSelfTest-java.log.txt",
+      "payload_sha256": "a297ae7038ac67db29d10553dea67c41b9a3f7aca557baec6f0cb3b955579ef4",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3IndexPathMasksLongSelfTest-native.log",
+      "delivered_catalogue_path": "candidate-proof/M3IndexPathMasksLongSelfTest-native.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathMasksLongSelfTest-native.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathMasksLongSelfTest-native.log.txt",
+      "payload_sha256": "7ccf92395b3e8c6ed883378d49920fb0c73cdcfd7b814bea2af6ad8dde5aa525",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3IndexPathZeroStagesSelfTest-java.log",
+      "delivered_catalogue_path": "candidate-proof/M3IndexPathZeroStagesSelfTest-java.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathZeroStagesSelfTest-java.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathZeroStagesSelfTest-java.log.txt",
+      "payload_sha256": "da26be3053d3f19af3bc84dfccfe26c3e21838a9c80c481042b6f01bffa246e5",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3IndexPathZeroStagesSelfTest-native.log",
+      "delivered_catalogue_path": "candidate-proof/M3IndexPathZeroStagesSelfTest-native.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathZeroStagesSelfTest-native.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathZeroStagesSelfTest-native.log.txt",
+      "payload_sha256": "b922636637080656dbc5c018deac901137937c4e67ec8c4f472177a4b6d6a8f9",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3IndexPathZeroWindowSelfTest-java.log",
+      "delivered_catalogue_path": "candidate-proof/M3IndexPathZeroWindowSelfTest-java.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathZeroWindowSelfTest-java.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathZeroWindowSelfTest-java.log.txt",
+      "payload_sha256": "a9d84afb25bb7b2b5dd21258ab0c8760bd665567cfd61da410795fee21746cb4",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3IndexPathZeroWindowSelfTest-native.log",
+      "delivered_catalogue_path": "candidate-proof/M3IndexPathZeroWindowSelfTest-native.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathZeroWindowSelfTest-native.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3IndexPathZeroWindowSelfTest-native.log.txt",
+      "payload_sha256": "c366dcf7c3d5eac87e85127cc4b64add67e9f06ba72cd3b6d48ddf8e1daa51e7",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3NavigationFailureContract.log",
+      "delivered_catalogue_path": "candidate-proof/M3NavigationFailureContract.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3NavigationFailureContract.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3NavigationFailureContract.log.txt",
+      "payload_sha256": "ac020446e417abf87f137d8dcaf55a7eacb09d493e5759d501ea6b74ae9f36da",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3OrderWindowProof.log",
+      "delivered_catalogue_path": "candidate-proof/M3OrderWindowProof.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3OrderWindowProof.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3OrderWindowProof.log.txt",
+      "payload_sha256": "689aa5e634790140a0052575770b469617858bcd1e0111513a2b5893d5f4bffb",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3ReadOnlyViewBoundarySelfTest-trace.log",
+      "delivered_catalogue_path": "candidate-proof/M3ReadOnlyViewBoundarySelfTest-trace.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3ReadOnlyViewBoundarySelfTest-trace.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3ReadOnlyViewBoundarySelfTest-trace.log.txt",
+      "payload_sha256": "0014cf664c4d395f43df534318d33a92416011168d9690b08bfd52ba8a7ebfb2",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3ReadOnlyViewBoundarySelfTest.log",
+      "delivered_catalogue_path": "candidate-proof/M3ReadOnlyViewBoundarySelfTest.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3ReadOnlyViewBoundarySelfTest.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3ReadOnlyViewBoundarySelfTest.log.txt",
+      "payload_sha256": "0b03fa0ae93648fb8124b467f60252f14daf1ee63e2a79d776df13a65ac9d564",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/M3WrapperConvergenceSelfTest.log",
+      "delivered_catalogue_path": "candidate-proof/M3WrapperConvergenceSelfTest.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3WrapperConvergenceSelfTest.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/M3WrapperConvergenceSelfTest.log.txt",
+      "payload_sha256": "8e51693da9861371da95af4f364cf9a02e565fc1c6f324b42736f3fba84daf82",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/baseline/M3DeepReadOnlyCollectionSelfTest-trace.log",
+      "delivered_catalogue_path": "candidate-proof/baseline/M3DeepReadOnlyCollectionSelfTest-trace.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/baseline/M3DeepReadOnlyCollectionSelfTest-trace.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/baseline/M3DeepReadOnlyCollectionSelfTest-trace.log.txt",
+      "payload_sha256": "7a10a88ba35159ffdefa7de404e5ed70936dee7f3bc7b2c2336811d52c1d351a",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/baseline/M3ReadOnlyViewBoundarySelfTest-trace.log",
+      "delivered_catalogue_path": "candidate-proof/baseline/M3ReadOnlyViewBoundarySelfTest-trace.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/baseline/M3ReadOnlyViewBoundarySelfTest-trace.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/baseline/M3ReadOnlyViewBoundarySelfTest-trace.log.txt",
+      "payload_sha256": "0014cf664c4d395f43df534318d33a92416011168d9690b08bfd52ba8a7ebfb2",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/native-compile.log",
+      "delivered_catalogue_path": "candidate-proof/native-compile.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/native-compile.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/native-compile.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/probe-compilation.log",
+      "delivered_catalogue_path": "candidate-proof/probe-compilation.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/probe-compilation.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/probe-compilation.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "candidate-proof/strict-compilation-07ba.log",
+      "delivered_catalogue_path": "candidate-proof/strict-compilation-07ba.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/strict-compilation-07ba.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/candidate-proof/strict-compilation-07ba.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "counterexamples/comparator-exception-baseline.log",
+      "delivered_catalogue_path": "counterexamples/comparator-exception-baseline.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/counterexamples/comparator-exception-baseline.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/counterexamples/comparator-exception-baseline.log.txt",
+      "payload_sha256": "5408289657af586b76932a48e56c35f1bf487f7d123f7141412f9b9ada0146fb",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "counterexamples/comparator-exception-candidate.log",
+      "delivered_catalogue_path": "counterexamples/comparator-exception-candidate.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/counterexamples/comparator-exception-candidate.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/counterexamples/comparator-exception-candidate.log.txt",
+      "payload_sha256": "7e5de942403a256ce83c150a87eb38cc580c89f86dd8e7ae521ef0946ce66e6b",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/FilterGapWitness.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/FilterGapWitness.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/FilterGapWitness.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/FilterGapWitness.log.txt",
+      "payload_sha256": "a05160f926b530c2fac039e432fb712c4c5518e08c68d3a20c74df1df3a19389",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3BoundedFilteredNavigationContract.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3BoundedFilteredNavigationContract.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3BoundedFilteredNavigationContract.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3BoundedFilteredNavigationContract.log.txt",
+      "payload_sha256": "67e84f9b418741a613573c1361226626fb54e9824734ab8629b429898b53415f",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3ComparatorFailureProbe.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3ComparatorFailureProbe.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3ComparatorFailureProbe.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3ComparatorFailureProbe.log.txt",
+      "payload_sha256": "5408289657af586b76932a48e56c35f1bf487f7d123f7141412f9b9ada0146fb",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3DeepReadOnlyCollectionSelfTest-trace.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3DeepReadOnlyCollectionSelfTest-trace.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3DeepReadOnlyCollectionSelfTest-trace.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3DeepReadOnlyCollectionSelfTest-trace.log.txt",
+      "payload_sha256": "7a10a88ba35159ffdefa7de404e5ed70936dee7f3bc7b2c2336811d52c1d351a",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3DeepReadOnlyCollectionSelfTest.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3DeepReadOnlyCollectionSelfTest.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3DeepReadOnlyCollectionSelfTest.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3DeepReadOnlyCollectionSelfTest.log.txt",
+      "payload_sha256": "ccaf4bb0b42636d010c09ccedadc7922fcd0b67148f1a6d3b9b03e74d97fcfd6",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3FilteredNavigationBoundarySelfTest.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3FilteredNavigationBoundarySelfTest.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3FilteredNavigationBoundarySelfTest.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3FilteredNavigationBoundarySelfTest.log.txt",
+      "payload_sha256": "f1b8475db0c4c5861b0ab1b6b345e208a5127cf1a900654a0bc8a1af790613f9",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathImpossibleStageSelfTest-java.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathImpossibleStageSelfTest-java.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathImpossibleStageSelfTest-java.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathImpossibleStageSelfTest-java.log.txt",
+      "payload_sha256": "42948289ce443b54694d994d5a029b11782795f48ded391bf53504720b2ebee1",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathImpossibleStageSelfTest-native.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathImpossibleStageSelfTest-native.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathImpossibleStageSelfTest-native.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathImpossibleStageSelfTest-native.log.txt",
+      "payload_sha256": "9f6e5bda388d36dcb5c13dce4d8f6856b9a944ee2e830fd7cfcba997e66f3602",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMaskAliasSelfTest-java.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMaskAliasSelfTest-java.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMaskAliasSelfTest-java.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMaskAliasSelfTest-java.log.txt",
+      "payload_sha256": "1a2a623b038230670c3ba9196709612f0558669e585ac73181a57dcea3c4453f",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMaskAliasSelfTest-native.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMaskAliasSelfTest-native.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMaskAliasSelfTest-native.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMaskAliasSelfTest-native.log.txt",
+      "payload_sha256": "ec77b54cf95fdbda5a79b4cb8c5828f023a3a11b708cb50d86fa9f629a760291",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMasksLongSelfTest-java.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMasksLongSelfTest-java.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMasksLongSelfTest-java.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMasksLongSelfTest-java.log.txt",
+      "payload_sha256": "a297ae7038ac67db29d10553dea67c41b9a3f7aca557baec6f0cb3b955579ef4",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMasksLongSelfTest-native.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMasksLongSelfTest-native.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMasksLongSelfTest-native.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathMasksLongSelfTest-native.log.txt",
+      "payload_sha256": "7ccf92395b3e8c6ed883378d49920fb0c73cdcfd7b814bea2af6ad8dde5aa525",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroStagesSelfTest-java.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroStagesSelfTest-java.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroStagesSelfTest-java.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroStagesSelfTest-java.log.txt",
+      "payload_sha256": "da26be3053d3f19af3bc84dfccfe26c3e21838a9c80c481042b6f01bffa246e5",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroStagesSelfTest-native.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroStagesSelfTest-native.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroStagesSelfTest-native.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroStagesSelfTest-native.log.txt",
+      "payload_sha256": "b922636637080656dbc5c018deac901137937c4e67ec8c4f472177a4b6d6a8f9",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroWindowSelfTest-java.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroWindowSelfTest-java.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroWindowSelfTest-java.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroWindowSelfTest-java.log.txt",
+      "payload_sha256": "a9d84afb25bb7b2b5dd21258ab0c8760bd665567cfd61da410795fee21746cb4",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroWindowSelfTest-native.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroWindowSelfTest-native.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroWindowSelfTest-native.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3IndexPathZeroWindowSelfTest-native.log.txt",
+      "payload_sha256": "c366dcf7c3d5eac87e85127cc4b64add67e9f06ba72cd3b6d48ddf8e1daa51e7",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3NavigationFailureContract.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3NavigationFailureContract.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3NavigationFailureContract.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3NavigationFailureContract.log.txt",
+      "payload_sha256": "ac020446e417abf87f137d8dcaf55a7eacb09d493e5759d501ea6b74ae9f36da",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3OrderWindowProof.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3OrderWindowProof.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3OrderWindowProof.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3OrderWindowProof.log.txt",
+      "payload_sha256": "689aa5e634790140a0052575770b469617858bcd1e0111513a2b5893d5f4bffb",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3ReadOnlyViewBoundarySelfTest-trace.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3ReadOnlyViewBoundarySelfTest-trace.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3ReadOnlyViewBoundarySelfTest-trace.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3ReadOnlyViewBoundarySelfTest-trace.log.txt",
+      "payload_sha256": "0014cf664c4d395f43df534318d33a92416011168d9690b08bfd52ba8a7ebfb2",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3ReadOnlyViewBoundarySelfTest.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3ReadOnlyViewBoundarySelfTest.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3ReadOnlyViewBoundarySelfTest.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3ReadOnlyViewBoundarySelfTest.log.txt",
+      "payload_sha256": "0b03fa0ae93648fb8124b467f60252f14daf1ee63e2a79d776df13a65ac9d564",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3WrapperConvergenceSelfTest.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/M3WrapperConvergenceSelfTest.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3WrapperConvergenceSelfTest.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/M3WrapperConvergenceSelfTest.log.txt",
+      "payload_sha256": "8e51693da9861371da95af4f364cf9a02e565fc1c6f324b42736f3fba84daf82",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/baseline/M3DeepReadOnlyCollectionSelfTest-trace.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/baseline/M3DeepReadOnlyCollectionSelfTest-trace.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/baseline/M3DeepReadOnlyCollectionSelfTest-trace.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/baseline/M3DeepReadOnlyCollectionSelfTest-trace.log.txt",
+      "payload_sha256": "7a10a88ba35159ffdefa7de404e5ed70936dee7f3bc7b2c2336811d52c1d351a",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/baseline/M3ReadOnlyViewBoundarySelfTest-trace.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/baseline/M3ReadOnlyViewBoundarySelfTest-trace.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/baseline/M3ReadOnlyViewBoundarySelfTest-trace.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/baseline/M3ReadOnlyViewBoundarySelfTest-trace.log.txt",
+      "payload_sha256": "0014cf664c4d395f43df534318d33a92416011168d9690b08bfd52ba8a7ebfb2",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/native-compile.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/native-compile.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/native-compile.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/native-compile.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/probe-compilation.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/probe-compilation.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/probe-compilation.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/probe-compilation.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/strict-compilation-07ba.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/candidate-proof/strict-compilation-07ba.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/strict-compilation-07ba.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/candidate-proof/strict-compilation-07ba.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/counterexamples/comparator-exception-baseline.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/counterexamples/comparator-exception-baseline.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/counterexamples/comparator-exception-baseline.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/counterexamples/comparator-exception-baseline.log.txt",
+      "payload_sha256": "5408289657af586b76932a48e56c35f1bf487f7d123f7141412f9b9ada0146fb",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "history/candidate-56-20261018/files/catalogue/counterexamples/comparator-exception-candidate.log",
+      "delivered_catalogue_path": "history/candidate-56-20261018/files/catalogue/counterexamples/comparator-exception-candidate.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/counterexamples/comparator-exception-candidate.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/history/candidate-56-20261018/files/catalogue/counterexamples/comparator-exception-candidate.log.txt",
+      "payload_sha256": "7e5de942403a256ce83c150a87eb38cc580c89f86dd8e7ae521ef0946ce66e6b",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/baseline-behavior.log",
+      "delivered_catalogue_path": "runtime-proof/long-bridge/proof/baseline-behavior.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/baseline-behavior.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/baseline-behavior.log.txt",
+      "payload_sha256": "d23825aed62d05aef89e36566919e971ac1084d29cb33802f51995b27fe32548",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/baseline-compile.log",
+      "delivered_catalogue_path": "runtime-proof/long-bridge/proof/baseline-compile.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/baseline-compile.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/baseline-compile.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/baseline-existing-self-test.log",
+      "delivered_catalogue_path": "runtime-proof/long-bridge/proof/baseline-existing-self-test.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/baseline-existing-self-test.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/baseline-existing-self-test.log.txt",
+      "payload_sha256": "22ed0714ae1e45ad173a9b8b997a3098cc36908ff11619171ee1cb430915c623",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/baseline-public-api.log",
+      "delivered_catalogue_path": "runtime-proof/long-bridge/proof/baseline-public-api.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/baseline-public-api.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/baseline-public-api.log.txt",
+      "payload_sha256": "66d799b1daedbd2e4444733bb75821fbdf5c9a989aa7f966ed9d1efaed458f1e",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/candidate-behavior.log",
+      "delivered_catalogue_path": "runtime-proof/long-bridge/proof/candidate-behavior.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/candidate-behavior.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/candidate-behavior.log.txt",
+      "payload_sha256": "d23825aed62d05aef89e36566919e971ac1084d29cb33802f51995b27fe32548",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/candidate-compile.log",
+      "delivered_catalogue_path": "runtime-proof/long-bridge/proof/candidate-compile.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/candidate-compile.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/candidate-compile.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/candidate-existing-self-test.log",
+      "delivered_catalogue_path": "runtime-proof/long-bridge/proof/candidate-existing-self-test.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/candidate-existing-self-test.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/candidate-existing-self-test.log.txt",
+      "payload_sha256": "22ed0714ae1e45ad173a9b8b997a3098cc36908ff11619171ee1cb430915c623",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/candidate-public-api.log",
+      "delivered_catalogue_path": "runtime-proof/long-bridge/proof/candidate-public-api.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/candidate-public-api.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/candidate-public-api.log.txt",
+      "payload_sha256": "66d799b1daedbd2e4444733bb75821fbdf5c9a989aa7f966ed9d1efaed458f1e",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/long-bridge/proof/sdk-maven.log",
+      "delivered_catalogue_path": "runtime-proof/long-bridge/proof/sdk-maven.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/sdk-maven.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-bridge/proof/sdk-maven.log.txt",
+      "payload_sha256": "a96cf9ff9f5bbfe6b2680343030cde79e8ccb1f54770a9462b5bddff8c3f2d9c",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/long-selftest/actual-long-selftest.log",
+      "delivered_catalogue_path": "runtime-proof/long-selftest/actual-long-selftest.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-selftest/actual-long-selftest.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/long-selftest/actual-long-selftest.log.txt",
+      "payload_sha256": "22ed0714ae1e45ad173a9b8b997a3098cc36908ff11619171ee1cb430915c623",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/proof2/helpers/stderr.log",
+      "delivered_catalogue_path": "runtime-proof/proof2/helpers/stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/proof2/helpers/stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/proof2/helpers/stderr.log.txt",
+      "payload_sha256": "7a43162d78428232335fc83924ae977ae787a9132a820a3b00c245cf5876acf8",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/proof2/helpers/stdout.log",
+      "delivered_catalogue_path": "runtime-proof/proof2/helpers/stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/proof2/helpers/stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/proof2/helpers/stdout.log.txt",
+      "payload_sha256": "1313c7ff140ba00eaf45d06682fc06dc494681adf06d0a37a597373acf7e6887",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/001-java-version.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/001-java-version.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/001-java-version.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/001-java-version.stderr.log.txt",
+      "payload_sha256": "5b4412738541184e84f6b2d7520d4f4a7c2a455f60650491464c61adcbbbdeb0",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/001-java-version.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/001-java-version.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/001-java-version.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/001-java-version.stdout.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/002-javac-version.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/002-javac-version.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/002-javac-version.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/002-javac-version.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/002-javac-version.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/002-javac-version.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/002-javac-version.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/002-javac-version.stdout.log.txt",
+      "payload_sha256": "2df6b9c76e710158266aeaae8f3578eaed8ddd747a2272483506ad9a8a5e644a",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/003-javap-version.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/003-javap-version.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/003-javap-version.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/003-javap-version.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/003-javap-version.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/003-javap-version.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/003-javap-version.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/003-javap-version.stdout.log.txt",
+      "payload_sha256": "a0b0b94f878fc94e451aec6fd10ce835b9cd419172f2da4f994dc7220a64d225",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/004-maven-version.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/004-maven-version.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/004-maven-version.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/004-maven-version.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/004-maven-version.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/004-maven-version.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/004-maven-version.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/004-maven-version.stdout.log.txt",
+      "payload_sha256": "e6e4d70b5ac7e8e9ded7c6c0d0edc50b1f74379dbd151ba4e0025b3a8649c636",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/005-gcc-version.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/005-gcc-version.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/005-gcc-version.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/005-gcc-version.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/005-gcc-version.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/005-gcc-version.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/005-gcc-version.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/005-gcc-version.stdout.log.txt",
+      "payload_sha256": "cc08f972264fd3ba58abb3ebc6337013b225be267c91d2df9f29f066284fe2b6",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/006-nm-version.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/006-nm-version.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/006-nm-version.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/006-nm-version.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/006-nm-version.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/006-nm-version.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/006-nm-version.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/006-nm-version.stdout.log.txt",
+      "payload_sha256": "cdd2926db3359fc64e866ce795b6ac786975191007611989da83d5c58e6821ca",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/007-after-strict-java21.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/007-after-strict-java21.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/007-after-strict-java21.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/007-after-strict-java21.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/007-after-strict-java21.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/007-after-strict-java21.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/007-after-strict-java21.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/007-after-strict-java21.stdout.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/008-after-javap.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/008-after-javap.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/008-after-javap.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/008-after-javap.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/008-after-javap.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/008-after-javap.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/008-after-javap.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/008-after-javap.stdout.log.txt",
+      "payload_sha256": "afa2f65076d4f0ea115a52ee5833eaa0089846568ecffc8e977b8e2a493809a3",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/009-before-strict-java21.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/009-before-strict-java21.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/009-before-strict-java21.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/009-before-strict-java21.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/009-before-strict-java21.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/009-before-strict-java21.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/009-before-strict-java21.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/009-before-strict-java21.stdout.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/010-before-javap.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/010-before-javap.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/010-before-javap.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/010-before-javap.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/010-before-javap.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/010-before-javap.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/010-before-javap.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/010-before-javap.stdout.log.txt",
+      "payload_sha256": "9d8f00fd44089521d1b536b13ba6b6a814a427fd68c23aa5a6c0a23a433b3a37",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/011-libm3_collections_pathmask.so-gcc-c17-ubsan.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/011-libm3_collections_pathmask.so-gcc-c17-ubsan.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/011-libm3_collections_pathmask.so-gcc-c17-ubsan.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/011-libm3_collections_pathmask.so-gcc-c17-ubsan.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/011-libm3_collections_pathmask.so-gcc-c17-ubsan.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/011-libm3_collections_pathmask.so-gcc-c17-ubsan.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/011-libm3_collections_pathmask.so-gcc-c17-ubsan.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/011-libm3_collections_pathmask.so-gcc-c17-ubsan.stdout.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/012-libm3_collections_pathmask.so-nm.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/012-libm3_collections_pathmask.so-nm.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/012-libm3_collections_pathmask.so-nm.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/012-libm3_collections_pathmask.so-nm.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/012-libm3_collections_pathmask.so-nm.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/012-libm3_collections_pathmask.so-nm.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/012-libm3_collections_pathmask.so-nm.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/012-libm3_collections_pathmask.so-nm.stdout.log.txt",
+      "payload_sha256": "38e0de51a27f136ea92ad29808d81a6a89cbc126cfc9c02488ec4d360af0770c",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/013-libm3_collections_mask.so-gcc-c17-ubsan.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/013-libm3_collections_mask.so-gcc-c17-ubsan.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/013-libm3_collections_mask.so-gcc-c17-ubsan.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/013-libm3_collections_mask.so-gcc-c17-ubsan.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/013-libm3_collections_mask.so-gcc-c17-ubsan.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/013-libm3_collections_mask.so-gcc-c17-ubsan.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/013-libm3_collections_mask.so-gcc-c17-ubsan.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/013-libm3_collections_mask.so-gcc-c17-ubsan.stdout.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/014-libm3_collections_mask.so-nm.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/014-libm3_collections_mask.so-nm.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/014-libm3_collections_mask.so-nm.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/014-libm3_collections_mask.so-nm.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/014-libm3_collections_mask.so-nm.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/014-libm3_collections_mask.so-nm.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/014-libm3_collections_mask.so-nm.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/014-libm3_collections_mask.so-nm.stdout.log.txt",
+      "payload_sha256": "0d01eb1a3601fa21e12202403cbbe5b0395c78537d90032cf22802f0506f798e",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/015-collections-full-module-tests.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/015-collections-full-module-tests.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/015-collections-full-module-tests.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/015-collections-full-module-tests.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/015-collections-full-module-tests.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/015-collections-full-module-tests.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/015-collections-full-module-tests.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/015-collections-full-module-tests.stdout.log.txt",
+      "payload_sha256": "275b4f9b7d018bb387dc9679db2074d73db004c4f33b24fb3638151e54a5fe56",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/016-M3IndexPathMasksSelfTest-java.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/016-M3IndexPathMasksSelfTest-java.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/016-M3IndexPathMasksSelfTest-java.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/016-M3IndexPathMasksSelfTest-java.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/016-M3IndexPathMasksSelfTest-java.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/016-M3IndexPathMasksSelfTest-java.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/016-M3IndexPathMasksSelfTest-java.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/016-M3IndexPathMasksSelfTest-java.stdout.log.txt",
+      "payload_sha256": "4974a1ec1002fcb19d423cb0563e8243094c1b9dfb1c634af5f250b95942a2ae",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/017-M3IndexPathMasksLongSelfTest-java.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/017-M3IndexPathMasksLongSelfTest-java.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/017-M3IndexPathMasksLongSelfTest-java.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/017-M3IndexPathMasksLongSelfTest-java.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/017-M3IndexPathMasksLongSelfTest-java.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/017-M3IndexPathMasksLongSelfTest-java.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/017-M3IndexPathMasksLongSelfTest-java.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/017-M3IndexPathMasksLongSelfTest-java.stdout.log.txt",
+      "payload_sha256": "a297ae7038ac67db29d10553dea67c41b9a3f7aca557baec6f0cb3b955579ef4",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/018-M3IndexPathMaskAliasSelfTest-java.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/018-M3IndexPathMaskAliasSelfTest-java.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/018-M3IndexPathMaskAliasSelfTest-java.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/018-M3IndexPathMaskAliasSelfTest-java.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/018-M3IndexPathMaskAliasSelfTest-java.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/018-M3IndexPathMaskAliasSelfTest-java.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/018-M3IndexPathMaskAliasSelfTest-java.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/018-M3IndexPathMaskAliasSelfTest-java.stdout.log.txt",
+      "payload_sha256": "1a2a623b038230670c3ba9196709612f0558669e585ac73181a57dcea3c4453f",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/019-M3IndexPathImpossibleStageSelfTest-java.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/019-M3IndexPathImpossibleStageSelfTest-java.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/019-M3IndexPathImpossibleStageSelfTest-java.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/019-M3IndexPathImpossibleStageSelfTest-java.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/019-M3IndexPathImpossibleStageSelfTest-java.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/019-M3IndexPathImpossibleStageSelfTest-java.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/019-M3IndexPathImpossibleStageSelfTest-java.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/019-M3IndexPathImpossibleStageSelfTest-java.stdout.log.txt",
+      "payload_sha256": "04a0a55e25ab63aa924cf3ff46b44184243e561d290b00c6a4faf90928a1ad94",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/020-M3IndexPathZeroStagesSelfTest-java.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/020-M3IndexPathZeroStagesSelfTest-java.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/020-M3IndexPathZeroStagesSelfTest-java.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/020-M3IndexPathZeroStagesSelfTest-java.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/020-M3IndexPathZeroStagesSelfTest-java.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/020-M3IndexPathZeroStagesSelfTest-java.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/020-M3IndexPathZeroStagesSelfTest-java.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/020-M3IndexPathZeroStagesSelfTest-java.stdout.log.txt",
+      "payload_sha256": "5e5cc17798c56aded58b75ccf423a29970c274f0d0370d6e74f0be94ced21ecc",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/021-M3IndexPathZeroWindowSelfTest-java.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/021-M3IndexPathZeroWindowSelfTest-java.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/021-M3IndexPathZeroWindowSelfTest-java.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/021-M3IndexPathZeroWindowSelfTest-java.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/021-M3IndexPathZeroWindowSelfTest-java.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/021-M3IndexPathZeroWindowSelfTest-java.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/021-M3IndexPathZeroWindowSelfTest-java.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/021-M3IndexPathZeroWindowSelfTest-java.stdout.log.txt",
+      "payload_sha256": "b4d923e42cac29b5d8a1ff1deff52a7b003dd643d663a57d28b9b556954bc7c6",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/022-M3IndexPathMaskWindowSelfTest-java.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/022-M3IndexPathMaskWindowSelfTest-java.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/022-M3IndexPathMaskWindowSelfTest-java.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/022-M3IndexPathMaskWindowSelfTest-java.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/022-M3IndexPathMaskWindowSelfTest-java.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/022-M3IndexPathMaskWindowSelfTest-java.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/022-M3IndexPathMaskWindowSelfTest-java.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/022-M3IndexPathMaskWindowSelfTest-java.stdout.log.txt",
+      "payload_sha256": "3ed6972df7d9084924aed9797a828b7fb7efee77478c5921a143dfd01f80b192",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/023-M3IndexMaskWindowSelfTest-java.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/023-M3IndexMaskWindowSelfTest-java.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/023-M3IndexMaskWindowSelfTest-java.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/023-M3IndexMaskWindowSelfTest-java.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/023-M3IndexMaskWindowSelfTest-java.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/023-M3IndexMaskWindowSelfTest-java.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/023-M3IndexMaskWindowSelfTest-java.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/023-M3IndexMaskWindowSelfTest-java.stdout.log.txt",
+      "payload_sha256": "8c19e73f16f7872f3bd9bb799349fca1d8b3592550d4eed0cc8a4f2fbd3172ad",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/024-M3OrderWindowProof-java-common.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/024-M3OrderWindowProof-java-common.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/024-M3OrderWindowProof-java-common.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/024-M3OrderWindowProof-java-common.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/024-M3OrderWindowProof-java-common.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/024-M3OrderWindowProof-java-common.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/024-M3OrderWindowProof-java-common.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/024-M3OrderWindowProof-java-common.stdout.log.txt",
+      "payload_sha256": "689aa5e634790140a0052575770b469617858bcd1e0111513a2b5893d5f4bffb",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/025-M3IndexPathMasksSelfTest-native---native.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/025-M3IndexPathMasksSelfTest-native---native.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/025-M3IndexPathMasksSelfTest-native---native.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/025-M3IndexPathMasksSelfTest-native---native.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/025-M3IndexPathMasksSelfTest-native---native.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/025-M3IndexPathMasksSelfTest-native---native.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/025-M3IndexPathMasksSelfTest-native---native.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/025-M3IndexPathMasksSelfTest-native---native.stdout.log.txt",
+      "payload_sha256": "9b4cc3f2dc97cb3c99aceabf3491549af7b08def00f24cf27ccdb6310887d019",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/026-M3IndexPathMasksLongSelfTest-native---native.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/026-M3IndexPathMasksLongSelfTest-native---native.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/026-M3IndexPathMasksLongSelfTest-native---native.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/026-M3IndexPathMasksLongSelfTest-native---native.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/026-M3IndexPathMasksLongSelfTest-native---native.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/026-M3IndexPathMasksLongSelfTest-native---native.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/026-M3IndexPathMasksLongSelfTest-native---native.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/026-M3IndexPathMasksLongSelfTest-native---native.stdout.log.txt",
+      "payload_sha256": "7ccf92395b3e8c6ed883378d49920fb0c73cdcfd7b814bea2af6ad8dde5aa525",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/027-M3IndexPathMaskAliasSelfTest-native---native.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/027-M3IndexPathMaskAliasSelfTest-native---native.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/027-M3IndexPathMaskAliasSelfTest-native---native.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/027-M3IndexPathMaskAliasSelfTest-native---native.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/027-M3IndexPathMaskAliasSelfTest-native---native.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/027-M3IndexPathMaskAliasSelfTest-native---native.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/027-M3IndexPathMaskAliasSelfTest-native---native.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/027-M3IndexPathMaskAliasSelfTest-native---native.stdout.log.txt",
+      "payload_sha256": "ec77b54cf95fdbda5a79b4cb8c5828f023a3a11b708cb50d86fa9f629a760291",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/028-M3IndexPathImpossibleStageSelfTest-native---native.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/028-M3IndexPathImpossibleStageSelfTest-native---native.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/028-M3IndexPathImpossibleStageSelfTest-native---native.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/028-M3IndexPathImpossibleStageSelfTest-native---native.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/028-M3IndexPathImpossibleStageSelfTest-native---native.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/028-M3IndexPathImpossibleStageSelfTest-native---native.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/028-M3IndexPathImpossibleStageSelfTest-native---native.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/028-M3IndexPathImpossibleStageSelfTest-native---native.stdout.log.txt",
+      "payload_sha256": "9f6e5bda388d36dcb5c13dce4d8f6856b9a944ee2e830fd7cfcba997e66f3602",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/029-M3IndexPathZeroStagesSelfTest-native---native.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/029-M3IndexPathZeroStagesSelfTest-native---native.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/029-M3IndexPathZeroStagesSelfTest-native---native.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/029-M3IndexPathZeroStagesSelfTest-native---native.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/029-M3IndexPathZeroStagesSelfTest-native---native.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/029-M3IndexPathZeroStagesSelfTest-native---native.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/029-M3IndexPathZeroStagesSelfTest-native---native.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/029-M3IndexPathZeroStagesSelfTest-native---native.stdout.log.txt",
+      "payload_sha256": "b922636637080656dbc5c018deac901137937c4e67ec8c4f472177a4b6d6a8f9",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/030-M3IndexPathZeroWindowSelfTest-native---native.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/030-M3IndexPathZeroWindowSelfTest-native---native.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/030-M3IndexPathZeroWindowSelfTest-native---native.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/030-M3IndexPathZeroWindowSelfTest-native---native.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/030-M3IndexPathZeroWindowSelfTest-native---native.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/030-M3IndexPathZeroWindowSelfTest-native---native.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/030-M3IndexPathZeroWindowSelfTest-native---native.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/030-M3IndexPathZeroWindowSelfTest-native---native.stdout.log.txt",
+      "payload_sha256": "c366dcf7c3d5eac87e85127cc4b64add67e9f06ba72cd3b6d48ddf8e1daa51e7",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/031-M3IndexPathMaskWindowSelfTest-native---native.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/031-M3IndexPathMaskWindowSelfTest-native---native.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/031-M3IndexPathMaskWindowSelfTest-native---native.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/031-M3IndexPathMaskWindowSelfTest-native---native.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/031-M3IndexPathMaskWindowSelfTest-native---native.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/031-M3IndexPathMaskWindowSelfTest-native---native.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/031-M3IndexPathMaskWindowSelfTest-native---native.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/031-M3IndexPathMaskWindowSelfTest-native---native.stdout.log.txt",
+      "payload_sha256": "3020972973e12e9eb78b183a49bebfce34999a2de4eac8909107b7f9484b6b6c",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/032-M3IndexMaskWindowSelfTest-native---native.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/032-M3IndexMaskWindowSelfTest-native---native.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/032-M3IndexMaskWindowSelfTest-native---native.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/032-M3IndexMaskWindowSelfTest-native---native.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/032-M3IndexMaskWindowSelfTest-native---native.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/032-M3IndexMaskWindowSelfTest-native---native.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/032-M3IndexMaskWindowSelfTest-native---native.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/032-M3IndexMaskWindowSelfTest-native---native.stdout.log.txt",
+      "payload_sha256": "2ab2a482cf8643ef49edd4db62293a3cdff9b6c6246956d44dcda32536230fd7",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/033-M3OrderWindowProof-native-common-jni.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/033-M3OrderWindowProof-native-common-jni.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/033-M3OrderWindowProof-native-common-jni.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/033-M3OrderWindowProof-native-common-jni.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/033-M3OrderWindowProof-native-common-jni.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/033-M3OrderWindowProof-native-common-jni.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/033-M3OrderWindowProof-native-common-jni.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/033-M3OrderWindowProof-native-common-jni.stdout.log.txt",
+      "payload_sha256": "771fd10200cc8b72bfaa66d95f99b3b824253f518dad9e1a2fcfc82877d6b197",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/034-M3IndexPathMaskAliasSelfTest-java---missing.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/034-M3IndexPathMaskAliasSelfTest-java---missing.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/034-M3IndexPathMaskAliasSelfTest-java---missing.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/034-M3IndexPathMaskAliasSelfTest-java---missing.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/034-M3IndexPathMaskAliasSelfTest-java---missing.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/034-M3IndexPathMaskAliasSelfTest-java---missing.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/034-M3IndexPathMaskAliasSelfTest-java---missing.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/034-M3IndexPathMaskAliasSelfTest-java---missing.stdout.log.txt",
+      "payload_sha256": "a603fb72f08a1c5f381b02c1b3ffc3f8b30ccb9cedae11fdd090b3e9b1ed3702",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/035-M3FilteredNavigationBoundarySelfTest-java.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/035-M3FilteredNavigationBoundarySelfTest-java.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/035-M3FilteredNavigationBoundarySelfTest-java.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/035-M3FilteredNavigationBoundarySelfTest-java.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/035-M3FilteredNavigationBoundarySelfTest-java.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/035-M3FilteredNavigationBoundarySelfTest-java.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/035-M3FilteredNavigationBoundarySelfTest-java.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/035-M3FilteredNavigationBoundarySelfTest-java.stdout.log.txt",
+      "payload_sha256": "f1b8475db0c4c5861b0ab1b6b345e208a5127cf1a900654a0bc8a1af790613f9",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/036-M3ReadOnlyViewBoundarySelfTest-java.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/036-M3ReadOnlyViewBoundarySelfTest-java.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/036-M3ReadOnlyViewBoundarySelfTest-java.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/036-M3ReadOnlyViewBoundarySelfTest-java.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/036-M3ReadOnlyViewBoundarySelfTest-java.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/036-M3ReadOnlyViewBoundarySelfTest-java.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/036-M3ReadOnlyViewBoundarySelfTest-java.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/036-M3ReadOnlyViewBoundarySelfTest-java.stdout.log.txt",
+      "payload_sha256": "0b03fa0ae93648fb8124b467f60252f14daf1ee63e2a79d776df13a65ac9d564",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/037-M3WrapperConvergenceSelfTest-java.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/037-M3WrapperConvergenceSelfTest-java.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/037-M3WrapperConvergenceSelfTest-java.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/037-M3WrapperConvergenceSelfTest-java.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/037-M3WrapperConvergenceSelfTest-java.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/037-M3WrapperConvergenceSelfTest-java.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/037-M3WrapperConvergenceSelfTest-java.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/037-M3WrapperConvergenceSelfTest-java.stdout.log.txt",
+      "payload_sha256": "8e51693da9861371da95af4f364cf9a02e565fc1c6f324b42736f3fba84daf82",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/038-M3DeepReadOnlyCollectionSelfTest-java.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/038-M3DeepReadOnlyCollectionSelfTest-java.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/038-M3DeepReadOnlyCollectionSelfTest-java.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/038-M3DeepReadOnlyCollectionSelfTest-java.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/038-M3DeepReadOnlyCollectionSelfTest-java.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/038-M3DeepReadOnlyCollectionSelfTest-java.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/038-M3DeepReadOnlyCollectionSelfTest-java.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/038-M3DeepReadOnlyCollectionSelfTest-java.stdout.log.txt",
+      "payload_sha256": "ccaf4bb0b42636d010c09ccedadc7922fcd0b67148f1a6d3b9b03e74d97fcfd6",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/039-M3NavigationFailureContract-java.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/039-M3NavigationFailureContract-java.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/039-M3NavigationFailureContract-java.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/039-M3NavigationFailureContract-java.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/039-M3NavigationFailureContract-java.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/039-M3NavigationFailureContract-java.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/039-M3NavigationFailureContract-java.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/039-M3NavigationFailureContract-java.stdout.log.txt",
+      "payload_sha256": "ac020446e417abf87f137d8dcaf55a7eacb09d493e5759d501ea6b74ae9f36da",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/040-M3BoundedFilteredNavigationContract-java.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/040-M3BoundedFilteredNavigationContract-java.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/040-M3BoundedFilteredNavigationContract-java.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/040-M3BoundedFilteredNavigationContract-java.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/040-M3BoundedFilteredNavigationContract-java.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/040-M3BoundedFilteredNavigationContract-java.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/040-M3BoundedFilteredNavigationContract-java.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/040-M3BoundedFilteredNavigationContract-java.stdout.log.txt",
+      "payload_sha256": "67e84f9b418741a613573c1361226626fb54e9824734ab8629b429898b53415f",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/041-M3OrderWindowProof-java-nullable.stderr.log",
+      "delivered_catalogue_path": "runtime-proof/received/041-M3OrderWindowProof-java-nullable.stderr.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/041-M3OrderWindowProof-java-nullable.stderr.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/041-M3OrderWindowProof-java-nullable.stderr.log.txt",
+      "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/041-M3OrderWindowProof-java-nullable.stdout.log",
+      "delivered_catalogue_path": "runtime-proof/received/041-M3OrderWindowProof-java-nullable.stdout.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/041-M3OrderWindowProof-java-nullable.stdout.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/041-M3OrderWindowProof-java-nullable.stdout.log.txt",
+      "payload_sha256": "a34475547d3de646748dfc05dc90e454440a7a70d18f597ff9202aaf642a73bb",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/after-javac.args",
+      "delivered_catalogue_path": "runtime-proof/received/after-javac.args.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-javac.args",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-javac.args.txt",
+      "payload_sha256": "37ef75efe8340615f7564d599e89e8a94d320070edcad24b985a1bda15d6743d",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskCompactor.h",
+      "delivered_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskCompactor.h.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskCompactor.h",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskCompactor.h.txt",
+      "payload_sha256": "1f67a3bca5682e3d4b392bb04d6f27479a16fdaccb935463a9dbf026f13faf8c",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskWindow.h",
+      "delivered_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskWindow.h.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskWindow.h",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexMaskWindow.h.txt",
+      "payload_sha256": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexPathMasks.h",
+      "delivered_catalogue_path": "runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexPathMasks.h.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexPathMasks.h",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/after-jni-headers/com_m3_collections_M3IndexPathMasks.h.txt",
+      "payload_sha256": "d73bb0e2e17c41ce6cd653732a8c7bc0dce71f2464c3dd536bbf544655936e95",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/before-javac.args",
+      "delivered_catalogue_path": "runtime-proof/received/before-javac.args.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-javac.args",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-javac.args.txt",
+      "payload_sha256": "29dc7e541be91530e49f7efcb2b49cf0b9577a10c1d50846a6baa45108930852",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskCompactor.h",
+      "delivered_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskCompactor.h.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskCompactor.h",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskCompactor.h.txt",
+      "payload_sha256": "1f67a3bca5682e3d4b392bb04d6f27479a16fdaccb935463a9dbf026f13faf8c",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskWindow.h",
+      "delivered_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskWindow.h.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskWindow.h",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexMaskWindow.h.txt",
+      "payload_sha256": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexPathMasks.h",
+      "delivered_catalogue_path": "runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexPathMasks.h.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexPathMasks.h",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/received/before-jni-headers/com_m3_collections_M3IndexPathMasks.h.txt",
+      "payload_sha256": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/sdk/long-bridge/SDK_MAVEN.log",
+      "delivered_catalogue_path": "runtime-proof/sdk/long-bridge/SDK_MAVEN.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/long-bridge/SDK_MAVEN.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/long-bridge/SDK_MAVEN.log.txt",
+      "payload_sha256": "a96cf9ff9f5bbfe6b2680343030cde79e8ccb1f54770a9462b5bddff8c3f2d9c",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/sdk/proof2/SDK_MAVEN.log",
+      "delivered_catalogue_path": "runtime-proof/sdk/proof2/SDK_MAVEN.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/proof2/SDK_MAVEN.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/proof2/SDK_MAVEN.log.txt",
+      "payload_sha256": "abfec6aec893693511ec6228ac43625f8b62a848cdad3180f5c0b1f1c00fece2",
+      "payload_bytes_unchanged": true
+    },
+    {
+      "original_catalogue_path": "runtime-proof/sdk/r2/SDK_MAVEN.log",
+      "delivered_catalogue_path": "runtime-proof/sdk/r2/SDK_MAVEN.log.txt",
+      "original_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/r2/SDK_MAVEN.log",
+      "delivered_target_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/runtime-proof/sdk/r2/SDK_MAVEN.log.txt",
+      "payload_sha256": "0dc9bf993e0ade345f22927c27cc3c3294987af395b38d71dfe8b05ba9bd9c46",
+      "payload_bytes_unchanged": true
+    }
+  ],
+  "all_original_payloads_unchanged": true,
+  "receipt_resolution": "For a preserved receipt or historical inventory path, resolve its original catalogue-relative location through this mapping. Original execution paths remain historical facts, not new delivery filenames."
+}

@@ -1,0 +1,342 @@
+[
+  {
+    "stage": "01-baseline-compile",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javac",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/baseline",
+      "-h",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/baseline-headers",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-token/src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 85232,
+    "user_seconds": 1.332166,
+    "system_seconds": 0.122179
+  },
+  {
+    "stage": "02-candidate-compile",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javac",
+      "-Xlint:all",
+      "-Werror",
+      "-d",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes",
+      "-h",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/headers",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/src/java.base/share/classes/jdk/internal/mindex/M3TokenRegexPlan.java"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 100508,
+    "user_seconds": 1.717414,
+    "system_seconds": 0.118755
+  },
+  {
+    "stage": "03-tests-compile",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javac",
+      "-Xlint:all",
+      "-Werror",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+      "-d",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/tests",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex/M3TokenRegexPlanContract.java",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex/M3TokenCompilerLexicalContract.java",
+      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/java/M3CharacterPlanPreservation.java",
+      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/java/M3TokenResourceProbe.java"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 125444,
+    "user_seconds": 2.41743,
+    "system_seconds": 0.169173
+  },
+  {
+    "stage": "04-native-lint",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/headers",
+      "-I",
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include",
+      "-I",
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux",
+      "-fsyntax-only",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/src/java.base/share/native/libjava/M3RegexDpPlan.c",
+      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/native/libM3TokenPlanProof.c"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 11392,
+    "user_seconds": 0.026341,
+    "system_seconds": 0.004477
+  },
+  {
+    "stage": "05-native-link",
+    "argv": [
+      "gcc",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/headers",
+      "-I",
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include",
+      "-I",
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/include/linux",
+      "-O2",
+      "-fPIC",
+      "-shared",
+      "-fsanitize=undefined",
+      "-fno-sanitize-recover=undefined",
+      "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/src/java.base/share/native/libjava/M3RegexDpPlan.c",
+      "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/native/libM3TokenPlanProof.c",
+      "-o",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/libM3TokenPlanProof.so"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 22380,
+    "user_seconds": 0.180226,
+    "system_seconds": 0.032923
+  },
+  {
+    "stage": "06-symbols",
+    "argv": [
+      "nm",
+      "-D",
+      "--defined-only",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/libM3TokenPlanProof.so"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 11520,
+    "user_seconds": 0.001864,
+    "system_seconds": 0.0
+  },
+  {
+    "stage": "07-baseline-character",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/baseline",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/tests",
+      "M3CharacterPlanPreservation"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 56720,
+    "user_seconds": 0.34256899999999996,
+    "system_seconds": 0.046923
+  },
+  {
+    "stage": "08-candidate-character",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/tests",
+      "M3CharacterPlanPreservation"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 58156,
+    "user_seconds": 0.329281,
+    "system_seconds": 0.051669
+  },
+  {
+    "stage": "09-java-token",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/tests",
+      "M3TokenRegexPlanContract"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 87264,
+    "user_seconds": 0.645439,
+    "system_seconds": 0.047674
+  },
+  {
+    "stage": "10-javac-lexical",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/tests",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+      "--add-exports",
+      "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED",
+      "M3TokenCompilerLexicalContract"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 45008,
+    "user_seconds": 0.23999099999999998,
+    "system_seconds": 0.036678999999999996
+  },
+  {
+    "stage": "11-native-token",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/tests",
+      "-Xcheck:jni",
+      "M3TokenRegexPlanContract",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/libM3TokenPlanProof.so"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 88712,
+    "user_seconds": 0.629929,
+    "system_seconds": 0.061982999999999996
+  },
+  {
+    "stage": "12-native-interpreter",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/tests",
+      "-Xcheck:jni",
+      "-Xint",
+      "M3TokenRegexPlanContract",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/libM3TokenPlanProof.so"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 74976,
+    "user_seconds": 4.862802,
+    "system_seconds": 0.049235
+  },
+  {
+    "stage": "api-old-M3RegexDpPlan",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javap",
+      "-public",
+      "-s",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/baseline/jdk/internal/mindex/M3RegexDpPlan.class"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 59420,
+    "user_seconds": 0.3976,
+    "system_seconds": 0.019389999999999998
+  },
+  {
+    "stage": "api-new-M3RegexDpPlan",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javap",
+      "-public",
+      "-s",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes/jdk/internal/mindex/M3RegexDpPlan.class"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 58900,
+    "user_seconds": 0.379253,
+    "system_seconds": 0.046689999999999995
+  },
+  {
+    "stage": "api-old-M3RegexDpPlan-Effect",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javap",
+      "-public",
+      "-s",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/baseline/jdk/internal/mindex/M3RegexDpPlan$Effect.class"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 58964,
+    "user_seconds": 0.36081599999999997,
+    "system_seconds": 0.046249
+  },
+  {
+    "stage": "api-new-M3RegexDpPlan-Effect",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/javap",
+      "-public",
+      "-s",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes/jdk/internal/mindex/M3RegexDpPlan$Effect.class"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 58816,
+    "user_seconds": 0.379374,
+    "system_seconds": 0.046112
+  },
+  {
+    "stage": "resource-0",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/tests",
+      "M3TokenResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 41172,
+    "user_seconds": 0.42197999999999997,
+    "system_seconds": 0.020954
+  },
+  {
+    "stage": "resource-1",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/tests",
+      "M3TokenResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 40816,
+    "user_seconds": 0.45859999999999995,
+    "system_seconds": 0.025616
+  },
+  {
+    "stage": "resource-2",
+    "argv": [
+      "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1/bin/java",
+      "--patch-module",
+      "java.base=/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/classes",
+      "--add-exports",
+      "java.base/jdk.internal.mindex=ALL-UNNAMED",
+      "-cp",
+      "/workspace/scratch/8cbeab1c181e/tooling/typed-token/qualification/tests",
+      "M3TokenResourceProbe"
+    ],
+    "exit_code": 0,
+    "max_rss_kib": 39700,
+    "user_seconds": 0.44524199999999997,
+    "system_seconds": 0.024485
+  }
+]

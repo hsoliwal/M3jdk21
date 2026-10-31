@@ -1,0 +1,13 @@
+{
+  "schema": "M3_AST_BUILD_REVERSE_DATASET_V1",
+  "dataset": "m3-convergence-20261020",
+  "repository": "hsoliwal/M3JDK21",
+  "baseline_ref": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+  "crate_name": "m3-ast-build-reverse-20261017-m3-convergence-20261020",
+  "recipe_name": "com.synexia.m3jdk.AstBuildReverse20261017",
+  "targets": 5,
+  "java_targets": 0,
+  "text_targets": 5,
+  "product_sources_written": false,
+  "engine_changes_from_origin": []
+}

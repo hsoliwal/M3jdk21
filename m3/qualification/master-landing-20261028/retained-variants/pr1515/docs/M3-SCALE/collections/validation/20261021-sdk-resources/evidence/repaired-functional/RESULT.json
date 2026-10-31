@@ -1,0 +1,1051 @@
+{
+  "schema": "synexia.data.recipe-repaired-resource-sdk-proof.v1",
+  "status": "PASS_RECIPE_REPAIRED_RESOURCES_DEFAULT_TEST_AND_SDK_MAIN_JAVA_ONLY",
+  "plan_sha256": "7332b0ef72cd3487659681942ecf3bda60211f885cafa1f761ee9ac62224ff3f",
+  "storage_protection": "ACTIVE",
+  "policy_id": "M3-COLLECTION-JNI-ARRAY-STORAGE-1",
+  "native_outcomes": [
+    {
+      "pid": 45624,
+      "creation_FILETIME": "134370226352638031",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 43196,
+      "creation_FILETIME": "134370226420940074",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 5,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    },
+    {
+      "pid": 22832,
+      "creation_FILETIME": "134370227441080050",
+      "assigned_to_job": true,
+      "resumed": true,
+      "termination_requested": false,
+      "terminal": true,
+      "cleanup_errors": [],
+      "thread_handle_closed": true,
+      "same_handle_wait": 0,
+      "exitcode": 0,
+      "job_active_processes": 0,
+      "job_total_processes": 2,
+      "process_handle_closed": true,
+      "job_handle_closed": true,
+      "all_owned_native_handles_closed": true,
+      "supervisor_error": null
+    }
+  ],
+  "own_jvm_lock_released": true,
+  "source_files": 553,
+  "source_bytes": 3870608,
+  "Maven_or_SDK_edited_staged_source": false,
+  "recipe_POM_delta_applied_to_fresh_fixture": true,
+  "tests_excluded_filtered_or_disabled_by_adapter": false,
+  "fixture495_admission_reused": false,
+  "global_family_or_live_merge_admission": false,
+  "historical_jobs_replayed": 0,
+  "test_discovery_and_runtime_acceptance": "OBSERVED_139_XML_465_EXECUTED_2_SOURCE_AUTHORED_JNI_ASSUMPTIONS",
+  "SDK_main_acceptance": "OBSERVED_EXISTING_MAIN_EXIT0_AND_CONTRACT_PASS",
+  "native_search_preflight": {
+    "properties": {
+      "sun.boot.library.path": [
+        "C:\\Program Files\\Java\\jdk-21\\bin"
+      ],
+      "java.library.path": [
+        "C:\\Program Files\\Java\\jdk-21\\bin",
+        "C:\\WINDOWS\\Sun\\Java\\bin",
+        "C:\\WINDOWS\\system32",
+        "C:\\WINDOWS",
+        "C:/Program Files/Java/jdk-21/bin",
+        "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin",
+        "C:/Windows/System32",
+        "C:/Windows",
+        "."
+      ]
+    },
+    "actual_search_directories": [
+      "C:\\Program Files\\Java\\jdk-21\\bin",
+      "C:\\WINDOWS\\Sun\\Java\\bin",
+      "C:\\Windows\\System32",
+      "C:\\Windows",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin",
+      "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-proof-k-v1\\module"
+    ],
+    "named_libraries": [
+      "m3_collections_mask",
+      "m3_collections_pathmask",
+      "m3_collections_address",
+      "m3_collections_long_path_masks",
+      "m3rankbatch",
+      "m3_residency_state_mask",
+      "m3signalorder",
+      "m3_collections_span",
+      "m3_collections_statehist",
+      "m3bitlane"
+    ],
+    "properties_log_sha256": "875fb43a48d295334f078a09d43d46d54321e6d4d772d4aa5d98ce42b3b66a05",
+    "properties_log_bytes": 3213,
+    "default_library_path_overridden": false,
+    "named_library_candidates_absent": true,
+    "scope": "CURRENT_EXPLICIT_ENVIRONMENT_AND_CWD_ONLY_NOT_WHOLE_OS_NATIVE_ABSENCE"
+  },
+  "raw_Maven_exitcode": 0,
+  "log_sha256": "579b7df90d1ea26a467cbae7329b62a6e7360c9c84d5ffeea4f9391232c1cd5d",
+  "log_bytes": 317107,
+  "all_bound_inputs_and_sources_unchanged": true,
+  "actual": {
+    "project_graph_lines": [
+      "[DEBUG] com.m3:m3-collections:jar:0.1.0-SNAPSHOT",
+      "[DEBUG]    org.junit.jupiter:junit-jupiter:jar:5.10.2-m3-source-1:test",
+      "[DEBUG]       org.junit.jupiter:junit-jupiter-api:jar:5.10.2-m3-source-1:test",
+      "[DEBUG]          org.apiguardian:apiguardian-api:jar:1.1.2-m3-source-1:test",
+      "[DEBUG]          org.junit.platform:junit-platform-commons:jar:1.10.2-m3-source-1:test",
+      "[DEBUG]          org.opentest4j:opentest4j:jar:1.3.0-m3-source-1:test",
+      "[DEBUG]       org.junit.jupiter:junit-jupiter-engine:jar:5.10.2-m3-source-1:test",
+      "[DEBUG]          org.junit.platform:junit-platform-engine:jar:1.10.2-m3-source-1:test",
+      "[DEBUG]       org.junit.jupiter:junit-jupiter-params:jar:5.10.2-m3-source-1:test"
+    ],
+    "project_graph_sha256": "9454713dab5a7ef06029b3e46952b71ddca84dc490322adaa7ff534bd123eb0e",
+    "actual_plugin_realms": {
+      "org.apache.maven.plugins:maven-resources-plugin:3.3.1": [
+        "org.apache.maven.plugins:maven-resources-plugin:jar:3.3.1",
+        "org.codehaus.plexus:plexus-interpolation:jar:1.26",
+        "org.codehaus.plexus:plexus-utils:jar:3.5.1",
+        "org.apache.maven.shared:maven-filtering:jar:3.3.1",
+        "org.sonatype.plexus:plexus-build-api:jar:0.0.7",
+        "commons-io:commons-io:jar:2.11.0",
+        "org.apache.commons:commons-lang3:jar:3.12.0"
+      ],
+      "org.apache.maven.plugins:maven-compiler-plugin:3.13.0": [
+        "org.apache.maven.plugins:maven-compiler-plugin:jar:3.13.0",
+        "org.apache.maven.shared:maven-shared-utils:jar:3.4.2",
+        "commons-io:commons-io:jar:2.11.0",
+        "org.apache.maven.shared:maven-shared-incremental:jar:1.1",
+        "org.codehaus.plexus:plexus-java:jar:1.2.0",
+        "org.ow2.asm:asm:jar:9.6",
+        "com.thoughtworks.qdox:qdox:jar:2.0.3",
+        "org.codehaus.plexus:plexus-compiler-api:jar:2.15.0",
+        "org.codehaus.plexus:plexus-compiler-manager:jar:2.15.0",
+        "org.codehaus.plexus:plexus-xml:jar:3.0.0",
+        "org.codehaus.plexus:plexus-compiler-javac:jar:2.15.0",
+        "org.codehaus.plexus:plexus-utils:jar:4.0.0"
+      ],
+      "org.apache.maven.plugins:maven-surefire-plugin:3.2.5": [
+        "org.apache.maven.plugins:maven-surefire-plugin:jar:3.2.5",
+        "org.apache.maven.surefire:maven-surefire-common:jar:3.2.5",
+        "org.apache.maven.surefire:surefire-api:jar:3.2.5",
+        "org.apache.maven.surefire:surefire-logger-api:jar:3.2.5",
+        "org.apache.maven.surefire:surefire-extensions-api:jar:3.2.5",
+        "org.apache.maven.surefire:surefire-booter:jar:3.2.5",
+        "org.apache.maven.surefire:surefire-extensions-spi:jar:3.2.5",
+        "org.apache.maven.shared:maven-common-artifact-filters:jar:3.1.1",
+        "commons-io:commons-io:jar:2.15.1",
+        "org.codehaus.plexus:plexus-java:jar:1.2.0",
+        "org.ow2.asm:asm:jar:9.6",
+        "com.thoughtworks.qdox:qdox:jar:2.0.3",
+        "org.apache.maven.surefire:surefire-shared-utils:jar:3.2.5"
+      ]
+    },
+    "provider_line": "[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider",
+    "actual_classpath_lines": [
+      "[DEBUG] test classpath:  K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-proof-k-v1\\module\\target\\test-classes  K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-proof-k-v1\\module\\target\\classes  C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2-m3-source-1\\junit-jupiter-5.10.2-m3-source-1.jar  C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2-m3-source-1\\junit-jupiter-api-5.10.2-m3-source-1.jar  C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2-m3-source-1\\apiguardian-api-1.1.2-m3-source-1.jar  C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2-m3-source-1\\junit-platform-commons-1.10.2-m3-source-1.jar  C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0-m3-source-1\\opentest4j-1.3.0-m3-source-1.jar  C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2-m3-source-1\\junit-jupiter-engine-5.10.2-m3-source-1.jar  C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2-m3-source-1\\junit-platform-engine-1.10.2-m3-source-1.jar  C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2-m3-source-1\\junit-jupiter-params-5.10.2-m3-source-1.jar",
+      "[DEBUG] provider classpath:  C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-junit-platform\\3.2.5\\surefire-junit-platform-3.2.5.jar  C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-api\\3.2.5\\surefire-api-3.2.5.jar  C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-logger-api\\3.2.5\\surefire-logger-api-3.2.5.jar  C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-shared-utils\\3.2.5\\surefire-shared-utils-3.2.5.jar  C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\surefire\\common-java5\\3.2.5\\common-java5-3.2.5.jar  C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2-m3-source-1\\junit-platform-launcher-1.10.2-m3-source-1.jar"
+    ],
+    "actual_classpath_entries": {
+      "test": [
+        "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-proof-k-v1\\module\\target\\test-classes",
+        "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-proof-k-v1\\module\\target\\classes",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2-m3-source-1\\junit-jupiter-5.10.2-m3-source-1.jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2-m3-source-1\\junit-jupiter-api-5.10.2-m3-source-1.jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2-m3-source-1\\apiguardian-api-1.1.2-m3-source-1.jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2-m3-source-1\\junit-platform-commons-1.10.2-m3-source-1.jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0-m3-source-1\\opentest4j-1.3.0-m3-source-1.jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2-m3-source-1\\junit-jupiter-engine-5.10.2-m3-source-1.jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2-m3-source-1\\junit-platform-engine-1.10.2-m3-source-1.jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2-m3-source-1\\junit-jupiter-params-5.10.2-m3-source-1.jar"
+      ],
+      "provider": [
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-junit-platform\\3.2.5\\surefire-junit-platform-3.2.5.jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-api\\3.2.5\\surefire-api-3.2.5.jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-logger-api\\3.2.5\\surefire-logger-api-3.2.5.jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-shared-utils\\3.2.5\\surefire-shared-utils-3.2.5.jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apache\\maven\\surefire\\common-java5\\3.2.5\\common-java5-3.2.5.jar",
+        "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-launcher\\1.10.2-m3-source-1\\junit-platform-launcher-1.10.2-m3-source-1.jar"
+      ]
+    },
+    "fork_command_lines": [
+      "[DEBUG] Forking command line: cmd.exe /X /C \"\"C:\\Program Files\\Java\\jdk-21\\bin\\java.exe\" -Xms32m -Xmx512m -XX:+UseSerialGC -XX:MaxMetaspaceSize=256m -XX:ReservedCodeCacheSize=64m -XX:ActiveProcessorCount=2 -XX:-UsePerfData -XX:+DisableAttachMechanism -XX:-HeapDumpOnOutOfMemoryError -XX:-CreateCoredumpOnCrash -Dfile.encoding=UTF-8 -Djava.io.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/data-resource-repaired-proof-k-v1/tmp/fork -Djna.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/data-resource-repaired-proof-k-v1/tmp/fork -Djansi.tmpdir=K:/codex-work/m3jdk21-recipe-pass-20261020/data-resource-repaired-proof-k-v1/tmp/fork -Dorg.xerial.snappy.tempdir=K:/codex-work/m3jdk21-recipe-pass-20261020/data-resource-repaired-proof-k-v1/tmp/fork -Dio.netty.native.workdir=K:/codex-work/m3jdk21-recipe-pass-20261020/data-resource-repaired-proof-k-v1/tmp/fork -Duser.home=K:/codex-work/m3jdk21-recipe-pass-20261020/data-resource-repaired-proof-k-v1/home -Duser.dir=K:/codex-work/m3jdk21-recipe-pass-20261020/data-resource-repaired-proof-k-v1/module -Djava.util.prefs.userRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/data-resource-repaired-proof-k-v1/prefs/user -Djava.util.prefs.systemRoot=K:/codex-work/m3jdk21-recipe-pass-20261020/data-resource-repaired-proof-k-v1/prefs/system -XX:ErrorFile=K:/codex-work/m3jdk21-recipe-pass-20261020/data-resource-repaired-proof-k-v1/dumps/fork_hs_err_pid%p.log -jar K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-proof-k-v1\\tmp\\surefire15927809038242986725\\surefirebooter-20261021074734585_3.jar K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-proof-k-v1\\tmp\\surefire15927809038242986725 2026-10-21T07-47-34_476-jvmRun1 surefire-20261021074734585_1tmp surefire_0-20261021074734585_2tmp\""
+    ],
+    "report_files": 139,
+    "tests": {
+      "tests": 467,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "executed": 465
+    },
+    "skipped_reasons": [
+      {
+        "reason_sha256": "2c28e2b62e5d5a005374c7fb75b1fcae891b3691d0f8bd78d14e1f4ae168c7d4",
+        "reason": "{\"attributes\": {\"type\": \"org.opentest4j.TestAbortedException\"}, \"text\": \"org.opentest4j.TestAbortedException: Assumption failed: all-native qualification is an explicit, isolated lane\\n\\tat org.junit.jupiter.api.Assumptions.throwAssumptionFailed(Assumptions.java:316)\\n\\tat org.junit.jupiter.api.Assumptions.assumeTrue(Assumptions.java:115)\\n\\tat com.m3.collections.M3FilteredSplitsMaskSpansTest.allNativeBackendsAreRequiredByTheFullLane(M3FilteredSplitsMaskSpansTest.java:15)\\n\\tat java.base/java.lang.reflect.M",
+        "count": 1,
+        "full_reason_retained_in_reports": true
+      },
+      {
+        "reason_sha256": "47bff068b017b4080e2a4f9cd97f3c3cbe9fa9bee6958b6e4304b02d5b9d39bc",
+        "reason": "{\"attributes\": {\"type\": \"org.opentest4j.TestAbortedException\"}, \"text\": \"org.opentest4j.TestAbortedException: Assumption failed: native proof requires the explicit checked-JNI runner\\n\\tat org.junit.jupiter.api.Assumptions.throwAssumptionFailed(Assumptions.java:316)\\n\\tat org.junit.jupiter.api.Assumptions.assumeTrue(Assumptions.java:115)\\n\\tat com.m3.collections.M3FilteredSplitsMaskSpansTest.maskSpanCheckedJniOracle(M3FilteredSplitsMaskSpansTest.java:10)\\n\\tat java.base/java.lang.reflect.Method.invoke(Metho",
+        "count": 1,
+        "full_reason_retained_in_reports": true
+      }
+    ],
+    "report_pin_columns": [
+      "path",
+      "bytes",
+      "sha256"
+    ],
+    "report_pins": [
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3AdaptiveEnumLongMapTest.xml",
+        10954,
+        "45f64a54596a5806c4098d44cfc0dc78af6f889b2b9345cd4594e5749315a4a7"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ArrayListRemoveIfTest.xml",
+        10764,
+        "d06529821b58f884e0689bbc8d2bc9d00d3114a57516a8258037501dde793ae1"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3BagRankIndexTest.xml",
+        10548,
+        "ae281b5087418b501b3f6cb588ca9f0394d04e55c49d939b3aae42c46552a582"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3BitLane28FenwickTest.xml",
+        10675,
+        "720a3a13dea6eb0f9d776a30f897bbd0c17913fc070096a74fc2b9229fdc7c84"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3BitLanesTest.xml",
+        11975,
+        "f131e785032159af2c6507d5b734f71ca31d79c67587e81a5075cde8ed9f095c"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3BlockCacheTest.xml",
+        10998,
+        "4c9eac9970878f2d6df4d8357230c109dd1a7bd0d3967f28a0d2a85b8a7caba6"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3BoundedFilteredNavigationTest.xml",
+        10410,
+        "44e210f34d720b314b42a18849953a4068fe49a00fc373a458233940d476d27f"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ColumnarLanesTest.xml",
+        10646,
+        "7cb76980f385fd1ed6eeadfd693dc5aaedda24d5d0ed6d8adcb6e1b7e94c1b43"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ConcurrentBitSetClaimTest.xml",
+        10405,
+        "126cc5c5c734d2dea776ac7e6f723dc8681e89efe8bfe6ca3011bf4623c44352"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ConcurrentContractTest.xml",
+        11796,
+        "1dc672c8622683332a780f27bd19c730b37d81db0b1e230ffedadae8b6b222d1"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ConcurrentLaneContractTest.xml",
+        11015,
+        "8c7366acfed04f4137289848e329bc10d5abfc4928e4b6b399bc25ccfdee783e"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3CountedBagTest.xml",
+        10480,
+        "72e5154e9810efc34d4fa64358ba6ee667bd0c0603a30a25f3dadb8566894892"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3DequeSpanCopyTest.xml",
+        10547,
+        "253f4134f7295eef9913c2e939a9fb90a96c3bac432ca9320b37397db1b31081"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3EntryFacadeCacheTest.xml",
+        11113,
+        "1a04903f67b04a986214079a9e7a29ee67e52a3f7c57518e6836fc2a54b361a6"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3EnumLongMapTest.xml",
+        10758,
+        "8f2177f8801988dd9c20908f81cae967205903f637f0b8d4d4dea0e2bc715445"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3EnumSetTest.xml",
+        10744,
+        "6f6f704aaf0470fbf99d98b19ea123636ca6a0447c983cc4dec1f62a9a18341f"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FactoryContractTest.xml",
+        10506,
+        "e3be7e73ef433fe2b7845787d3311a04d902d1334cc925dde15412477bcee663"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FilteredDequeDispatchTest.xml",
+        10419,
+        "78aa61625f318119c3751caf6cb0719afd9cfb0fe7d6355ac153ab54a72bd4b5"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FilteredDequesTest.xml",
+        10595,
+        "53bbc8a5d00e798f62827aa64732398b39ec4c7f5ec56482717b472d1dbf1b4e"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FilteredListMutationTest.xml",
+        10495,
+        "2ed5bc1e5b13f758395add6ad9c068d45adff7638c607f1ef548e7d0fa8d2261"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FilteredListsDeepCompositionTest.xml",
+        10528,
+        "732d56055059dd5d85c452f76da141a4e60948332de08dff8cbc001d0bcd1766"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FilteredListsReadonlyDepthTest.xml",
+        10525,
+        "1fa69df9824415bd430bc2b1169284f4259d8b596bd0659b2fe45139f7d570cf"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FilteredListsSortedInteropTest.xml",
+        10567,
+        "37de5bb6bdfe877ea379e67ebd1325dab78639fc6d97de15c0ba498adeea48dc"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FilteredListsTest.xml",
+        10931,
+        "d143e7c5585d7cb6499adc2d137acc9c05c73b3226d4f7cd493b2170969ca3f8"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FilteredMergedSequencedTest.xml",
+        10522,
+        "fe51fddba9121ac3f20f818bbdaedf923d97c6f24474e7689169ba58b4fd9081"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FilteredNavigableSetRangeTest.xml",
+        10538,
+        "7f55b3ae51d7720648303f2fed7a569a4abd1059dc6be85fbce4c2fdf5392063"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FilteredNavigableSetTest.xml",
+        10858,
+        "9c841622e3131117aed803f252a75c8a54494019cc29ced3bfdd9ec7fb5d3836"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FilteredNavigationReconciliationTest.xml",
+        10935,
+        "735f64a806e234ce0d7f049eeff05ff8990d443f7a092588d60f5083274f436c"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FilteredSetIdentityTest.xml",
+        10524,
+        "d36a6ad35e0ecddb2d94aec357e004552e58d44497a22cd5d363e1cd5fcf353d"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FilteredSplitsMaskSpansTest.xml",
+        12308,
+        "f8b9994d863fef053aaf0f01e3a1fd13cc5e4b2388259d664da0dbbe3202aeee"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FilteredViewsTest.xml",
+        10676,
+        "80daec4e16cd9cc5eea06c1cf84fd84956156168861c50c72ea6b4c8982fcc8c"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3FootprintContractTest.xml",
+        11249,
+        "97f71eebb3a7f0636374fb6c4bd8b9e77df3fe9521d750a3e0a9b3aa62ef4ee1"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3GenericArrayListTest.xml",
+        10512,
+        "8c031a89eabf1e27f654000f05f22bb771bfa4178fd6852ebf4205dd115937cd"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3GenericReferenceOwnersTest.xml",
+        10523,
+        "a28e4d87b30a05b0cde83ba53f3c0f1464cff6ad5ce042651c0c9de8c5725f37"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3GridSelectionsTest.xml",
+        10634,
+        "4eb116ce22b92391112da5dd16c7e418a61a6b87c47083e117f52fa9fff4bfee"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IndexedFilterSortFusionTest.xml",
+        10517,
+        "adc1244d086b972ffe0b185340dd4a837def17e87574a436659affce752d70db"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IndexedMultiValueOccurrenceTest.xml",
+        10524,
+        "e72752aa298e3fee9f6a75c42b91a10fb772adcde690c29d9321068635119b90"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IndexedReadOnlyNoopTest.xml",
+        10496,
+        "6a5091d8d4d3725d8eeafe04defa6b0f584c2935a9a27b1eb8cc7004f5c0a455"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IndexedSetAlgebraSeekTest.xml",
+        10506,
+        "748d47a78b64a33b8e9dfb016c66d014bcb1be6ad70276cc6bbfeb09a7fe564f"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IndexedSnapshotPositionTest.xml",
+        10524,
+        "5945818ba5b69d00171330ec46c61e5271a988584a246d2186e49846dbe5eb1d"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IndexedTableReentrantSortTest.xml",
+        10532,
+        "aae820c3724a698efe071fd0f5908f28233bfeacc83bd72395025b7f0140a4c7"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IndexedTableTest.xml",
+        10513,
+        "8e9f6304c0155a33c1d3118bb716352572382e8638b53a548cc2f57b8cac3207"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IndexMaskCompactorTest.xml",
+        10507,
+        "77ac8b6aa3c5d3e58807d2c5525174e1bb22145dc5244670430a52db5b23de7a"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IndexMaskWindowRecoveryTest.xml",
+        10502,
+        "a3357870bbfa5b99f35af1e6b126598fdd09ea1b05daa38e9adecae98e64378d"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IndexMaskWindowTest.xml",
+        10502,
+        "33eeca5abc0a8102f9585819cadd081c4dcfbbe3746f6fc8941d77b4b847df18"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IndexOrderWindowTest.xml",
+        10615,
+        "048692e970bb08eb58083a2a64a367ab8d97166c0bbcd0a9ae34a1552bd6d41f"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IndexPathMasksTest.xml",
+        10514,
+        "0e253906184c611f400034f0190340460e9864d88e425dbecd524a94051c6e81"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IndexPathRankTest.xml",
+        10661,
+        "5d939f28f79100b4ce6086e2a89d273d441b56466d47a3e8560dfd92b16248fb"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IntLanesTest.xml",
+        10990,
+        "2f7e7125b2870a23cc451885b3c62c8c64bb9c48a891259acf252bb0af959716"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3IntLongHashMapTest.xml",
+        10523,
+        "49fee3196f9e770e7646d1b56ac06990f4269bdd754a115e6c8cbf7272706f15"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3JdkCollectionDifferentialTest.xml",
+        11766,
+        "be26db59a7346d0ea6f050ed33985dee3f9c7c18ef4a33b8072c05d1dd4d0edf"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3JdkShapedPrimitiveCollectionsTest.xml",
+        11338,
+        "f2914c82eeee599606a016f85b19ba48dd05d34f99ad30dc8951ce3996583a7a"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3KeyedOrderRingTest.xml",
+        10499,
+        "67e955226b84736f7df734e5633bd9cdd94db159824c3b4d5d6addba78dbcb0e"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3KeyedParallelismAdmissionTest.xml",
+        10528,
+        "07124891d06d9abc893a17d1d5076cb6480526f962679b584d9ad6e2aab6d873"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LazyObserverRegressionTest.xml",
+        11019,
+        "8a3f865315a4757102959dc9464a667d7bcf2f8423f83325b97e3ca98b63ca37"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LazyTreeMapTest.xml",
+        10635,
+        "661b326bb9c596802a4a99e313e8b0701adc954da73dc9cc21b2176c714d53b9"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LinkedIndexSplitTest.xml",
+        10493,
+        "de5c3d8386626ebc04c590c506c0c737c64ec731153da3f7a561269ba06d46f4"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ListDiffTest.xml",
+        10458,
+        "f52a13ddd4cbe2efb91671f3e03c3c329fecb57c571a2001b09ffd60ac51fa79"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ListModelLazyTest.xml",
+        10710,
+        "0030d0287435d98863bc69b2438cec364f3595871bd68d45b381b30826bfda84"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ListModelTest.xml",
+        11039,
+        "13149079a85610934e6c705b24f6c1bfdbc9149df620015a3a04cdbdb4afb901"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ListWidthTest.xml",
+        10734,
+        "f115a7bcd5ca4739979a332496d8feefefa722720eb4103033ebd4fa72ff0429"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongAddressBoundedTest.xml",
+        10557,
+        "def7199fd1cb2322865dd3ebc623cde53de2647e0802f6d0b03dfa6a8ec4bbe6"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongAddressKernelTest.xml",
+        10509,
+        "b97d6486a0a4db19571b909b1678737e0bb6d2d116ba07e31bfae6b917bd4305"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongArrayDequeTest.xml",
+        10694,
+        "b448a652f333822d2d9c514f9ed056de0859121f1bf0f5468f636b7fb600582c"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongArrayListTest.xml",
+        11181,
+        "e5279d2c30577a3559ccfcf681288d5e4bb1394df7543faae62c7c9f953b2226"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongCompositeLateBindTest.xml",
+        10519,
+        "d19275dc0c29f3ab57eff5fbc6af5625227d63c679e79f404aa2a8497e1456eb"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongDagJUnitTest.xml",
+        10487,
+        "702e817b4d9307a0594cb9a57fa60c2977cc123c9ff443880aed1900e427dc17"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongFilteredViewContractTest.xml",
+        10895,
+        "0c53a74b9982210c87db097a7ff22d13f978529f543aa6af3ad13fd1db6e6181"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongIndexProjectionMaskOffsetTest.xml",
+        10559,
+        "7e484d7d0c88f9b83d48ea3db733e0e232df6baf51b2fc85ae341ab039030edc"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongLinkedHashSetTest.xml",
+        10656,
+        "0da267e3aa80ff268f4d68b9707c357cb3d2ed5febe455780d8e110a4b9ba43a"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongLongLinkedHashMapTest.xml",
+        10671,
+        "7c503fa0604653e480f7606a61457e0d574dfa92f44c5a29f72be01da7ad1e2f"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongLongTreeMapTest.xml",
+        10660,
+        "0df6ee0bb58546a866b7f5a5d50b8c2fda99331f10f537b0f252f5c0162dcfdb"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongRangeSetTest.xml",
+        10492,
+        "e5e981548b6373af025594e12774b644aaeb1fc08426c00b0e7448cf2f8d6b95"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongRankIndexTest.xml",
+        10758,
+        "462ee11653412076e43a896de016f8e2ef620c7c164d46a596f9b3f8bcf96f49"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongSortedAlgebraTest.xml",
+        10511,
+        "d3aedf603cb7b8b9338683c7b49769ab2b1603d233978c02cc33d45f223b4dff"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongStateArrayTest.xml",
+        11086,
+        "47d1b2f5edcb9b6fccb1683671895391c06d7f5de6a0238711fe9526023abcf0"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3LongTreeSetTest.xml",
+        11156,
+        "004c56277296348846727dd5b7f179a68ee07abeabc27d4bdeb2851d7bda1322"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3MapContractTest.xml",
+        12544,
+        "8b0c0cde25ab6877d60f11a450d8a0da16bbf8c3141f58688bb61fefef9d3088"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3MaskAllSelectionReceiverTest.xml",
+        10536,
+        "3cbf920ccfd2e161ef744461eba2599071929a2b599761baed7ba2347691486b"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3MutableFilteredViewsTest.xml",
+        10506,
+        "e1a02293155270b4ad5ac4e04666dc2f8ecf0721344d289ef2a70db2f6434ec1"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3NativeIndexRangeTest.xml",
+        10505,
+        "41ea2567c6f10d689938a3911f9fd7be726846d6077c27c3e8182d18940c3829"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3NetBeansGatherSpansTest.xml",
+        10543,
+        "8331b89865998a7d92be363901c4aa60b7de3379ab6176e99dd623d0b4b3c3ce"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3NoRetainedStructuralEntryTest.xml",
+        10764,
+        "7f68d88efaeb0755c04ae2abfc4822353e524052373468e820d858b5663833de"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ObjectCountsTest.xml",
+        11131,
+        "0b3d6869c1f9ea8ac1cdbd785108aed9cc448b20f423d8e8cc01ad99db52a3ce"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ObjectIdentityTest.xml",
+        10777,
+        "357c6d24cca6f35b008751ec3efe45fdfde64428e2d130863e5149a19c33109e"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ObjectPhysicalMaskTest.xml",
+        10485,
+        "952e2e8a4a1cc07fc66f6a158ef36e096879edc67a1868fa3e609d0763518e0c"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ObjectRangeMapTest.xml",
+        10522,
+        "01db99a2b611d70f61e7fad4a466062ccae07730c793477264cd60e8b491195b"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ObjectResidencyBorrowTest.xml",
+        10842,
+        "ebefde2525a54cc0d8ae9100fa6652e55f7931f9044e47982569c14abb135068"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ObjectResidencyRuntimePressureTest.xml",
+        10421,
+        "79042a89d7ff31c5cb5bab5c0f57eeba48eee52be3813bde6c2e1e7949a2b50a"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ObjectResidencyTest.xml",
+        11869,
+        "0ae639959ff0cc37f3cf55a160ec36c91fc9b24e0e0cb49fe6731b562736f7bb"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ObjectSlotIndexTest.xml",
+        10463,
+        "3f306e6b4d095175c3dfcada9a7f7f88218972b707650ca68bd71af3fc2137dd"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ObjectStreamContractTest.xml",
+        10521,
+        "551a9e3780c9efd92aaa04d1cd9d0159f1261cf883d0090e4bfb0608fa9444e1"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ObjectStreamTerminalContractTest.xml",
+        10547,
+        "f7e6daa250d477e62be3c8f545de3867f79ceec7f9b7b8b680349f7e5ab1efbc"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3PhysicalStateSnapshotTest.xml",
+        10631,
+        "029f1c1a4427ecdc7bf2de7ceb4ad60b5619c8b0834bb2ab7049d6064a9d5c13"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3PlaneGeometryTest.xml",
+        10969,
+        "038bf90de810990e7ab9ad5ceab29e3dfa3883612013d19a17a8e3aa7a5067bc"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3PrimitiveCollectionDifferentialTest.xml",
+        10772,
+        "7ec70dfc43974be1ebaf6f9838aa31d5cb5c09272c2f049d7f4b95dd4465f624"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3PrimitiveFilteredSequencesTest.xml",
+        10496,
+        "94b7fad22e1c262748148dd130c0b62b7c41ef4583959267a167eee4a94b65c7"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ProgressAdaptersPercentageTest.xml",
+        10579,
+        "0437bd8cf87cbd499701141247b027c484d3416cffc11d1fadbad5f26157f1c5"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ReadOnlyMapDefaultsTest.xml",
+        10503,
+        "3725a7f75799d6a87d318b6795714e76529fbd0e6d2ec1423ddcb37e1d324bd4"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ReceivingRecoveryTest.xml",
+        10717,
+        "9856090970ede8b82402194ec248db0bbd00dfc4662d47e6cf5d96e61015f5f4"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3RequiredExcludedMaskSelectorTest.xml",
+        10546,
+        "9653fe5e261cb78f02c590f6e67f4c931b33efb3a695c5018ab7db57e0bdffc5"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ResidencyStateMaskTest.xml",
+        10558,
+        "d8c7bdb6ceb70769e5e65217bbb0c7975325f8416b9c07cb0d5db0b4d7782cf0"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3RowTreeTest.xml",
+        10580,
+        "63994910e8d678ddbfe593e8afbc677a4852f114b3a9de12ecade95f69dc5611"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ScrollGeometryTest.xml",
+        10903,
+        "5525e05cdaf22a4812427fe49eee90cf079c230261d52b154de5605b25a0ff96"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3SdkOwnerFactoryTest.xml",
+        10493,
+        "a4c8b384fb54572635b3c9b9ad4a86b46fb9498042f7ad5e8a8db0c2bedbb176"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3SdkRecoveryTest.xml",
+        10487,
+        "13d22b66e971f130e984ebcb94e787c86276414f5251cf0dd68f93219748256a"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3SelectionEnumerationTest.xml",
+        11080,
+        "350050833f686aa21d9d71ecb183bedd65f708feb571af2e8211e460a0a2956c"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3SelectionShiftsTest.xml",
+        10651,
+        "3250f9821c2e90019c3feac758779c8a0a083475e2bdaef05af5cefabab14607"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3SequenceContractTest.xml",
+        11001,
+        "2adcc040e02ce909b83b770eb682e6dc5ded5d9f6ab77bf6e82f76faa316bf33"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3SignalDimensionsTest.xml",
+        10476,
+        "de2b0f40a175c2ccaf4da17fd3c2aace698b345ac18624fedef29efcc9d47319"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3SignalMask32Test.xml",
+        10500,
+        "2d675fa1107f1c1139ae6ecc39311bcafd745bde76cfcdc64390f0af162774cd"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3SignalOrderJUnitTest.xml",
+        10524,
+        "07cd3288ab733a005837c081401478f36dd98e931d651b34a05d69d3bd24f3eb"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3SlotArraysGrowTest.xml",
+        10887,
+        "99f4a36206d5e5fcf58f627312d01f657ede1d800068e76f0ebf06b815f6b724"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3SpanIndexTest.xml",
+        10507,
+        "a31739bf514c1e541e607ab4aa5a46e5a9d9b76ce5d1a9d4f15b75f0b5cb9a43"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3SparseExtentsTest.xml",
+        11077,
+        "931d62fe8d9c5e25359f53a3bf0b483e0cc2ab76cf083ffae3e4683359d7f3ca"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3SparseItemStoreTest.xml",
+        10833,
+        "87f4aef54f583720e6087c7fbf1b1dfd4c428b94a74c3bf15e20065b82c6be79"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3StateMaskHistogramTest.xml",
+        10511,
+        "2c52508f178ab31687d34efbb480fd4cf7bd8bf5bef6c6b7915ab1c4ae9f9a30"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3StoredRepresentativeTest.xml",
+        10527,
+        "614511f05478199944a964db11f62c693dd5bd6bddc77231107a5d8b6b41bbe7"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3StrictFilteredSequencedTest.xml",
+        10521,
+        "914a4ad87a9b9aeb12ccf5aecc840b36f94b78c9705635a20a0bb4ec2eb52ff1"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3TombstoneReuseTest.xml",
+        10574,
+        "681291277ecbe5b8c4860e2dd494237b45ff140a9ae222e90ef3d466caeab9ab"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3TreeCoverageTest.xml",
+        12501,
+        "2e735988963203671596d9cc85432786fb18e17d306c81f8a9c7db14933ce5e9"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3TreeOrderStatisticTest.xml",
+        10557,
+        "8fa8227e59f58df626445fba524a98aec250fe5df0ccf360611a1627251b2c18"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3TreeResidencyTest.xml",
+        11385,
+        "d6279eef53b0da7344d8527fdae727b468b01ac2aa2bfc632af517b96ac1b730"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3TreeTopologyTest.xml",
+        11479,
+        "850857ad1ea1e6d2559ced4ed6c39509738e83e97c5febbe3ca8dfe79124b05d"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3TreeWindowPlanTest.xml",
+        11320,
+        "de0b65d1d34d14877479e296d504bfd573472e06eca8951d5aff58344b1a7fba"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3TreeWindowScenarioTest.xml",
+        11687,
+        "1b5854271ac82fa8f7393673f6a6285a40244d6350d772fcb329cb2559b78d73"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3TreeWindowTest.xml",
+        11699,
+        "00b264149f4c220789074be19cc4f28354964b5106ee47ac5a7d440e4349f833"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ViewportCollectionsTest.xml",
+        11061,
+        "4dbd07b3e129b9b52691b73a24b0cc8dddc7893662af93b6914cfcaf9410a127"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ViewportReceivingTest.xml",
+        10707,
+        "5fab681e687dc5a7ac6a7b217d941cebe1db3074d16de03ba38f41f8a0686dad"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3WindowEdgesTest.xml",
+        11114,
+        "57ddd5768fa9026233def9471b97a6f020096b72689ad23f91e4cd74f416f2be"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3WindowPlannerTest.xml",
+        11021,
+        "f62cdc4f7b554f18e96cfa401cca6ec6cce6e6c15e340deee872e2237a5e17ec"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3WindowPlanTest.xml",
+        10626,
+        "4ac2c91c4992c87d7cbfe316472fe09d1e161799dd1c6b82db404a07f6d8e7fe"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3WindowRuntimeRowWindowTest.xml",
+        11684,
+        "91ecf31d9ddae674a2c43ef59f0911be5980aa134241dbe488a682fdd1a986b1"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3WindowRuntimeTest.xml",
+        10806,
+        "1cbdb5dc1aeae176249531523ddcd6749dee00cb78d214732ce8fc1952b65dbb"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3WrapperConvergenceTest.xml",
+        10543,
+        "9bbf58dcdade103b779720bed838ee25ec70b57d941ae376e7f6885b31e3c61d"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ZeroMaskArrayFastPathTest.xml",
+        10533,
+        "fb8c31d7e9b25d7e870131d06ab47c609f88876970f3e4c781c6181d9cfd355f"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.M3ZeroSlotCapacityTest.xml",
+        10529,
+        "a37da37ab2efff664f30ed9e3bd8e6f148525ef2ac975cff9b692e65f75fef8c"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.SegmentedLaneBulkContractTest.xml",
+        11121,
+        "c86e65dff16832d1f072980abf8f98892646514489b1473f6c88afb62a09c743"
+      ],
+      [
+        "target/surefire-reports/TEST-com.m3.collections.SegmentedPrimitiveStorageTest.xml",
+        11256,
+        "2fb5c80ec045c8040002a1d9de4932386333a84e9168a562ba2b50c3c6c30434"
+      ]
+    ],
+    "skipped_cases_are_pending_coverage": true,
+    "classification": "ACTUAL_RUN_CLASSIFIED_AGAINST_PREBOUND_FINITE_CANDIDATES_NOT_A_RESOLVER"
+  },
+  "all553_fresh_source_bytes_unchanged": true,
+  "finite_Apache_module_only": true,
+  "JDK_JNI_runtime_or_all_platform_acceptance": false,
+  "whole_C_or_OS_write_audit": false,
+  "per_child_loaded_image_and_CWD": "NOT_OBSERVED",
+  "final_capacity": {
+    "k_free_bytes": 9374605312,
+    "fixture_logical_bytes": 13150619,
+    "physical_free_bytes": 7360380928,
+    "commit_free_bytes": 30518239232,
+    "aggregate_logical_bytes": 81324757,
+    "build_logical_bytes": 13150619,
+    "proof_logical_bytes": 566100
+  },
+  "resources_copied_by_default_Maven_phase": [
+    {
+      "source_relative": "LICENSE",
+      "target_relative": "target/classes/META-INF/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "source_relative": "NOTICE",
+      "target_relative": "target/classes/META-INF/NOTICE",
+      "bytes": 423,
+      "sha256": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb"
+    },
+    {
+      "source_relative": "provenance.json",
+      "target_relative": "target/classes/META-INF/provenance.json",
+      "bytes": 15745,
+      "sha256": "f9cca1ebfcd08a85e1099d536b59bf917ff5b95080daecf441eb9f14a5f38936"
+    },
+    {
+      "source_relative": "synexia-donation.json",
+      "target_relative": "target/classes/META-INF/synexia-donation.json",
+      "bytes": 65725,
+      "sha256": "50df53dec7be6b25b0f84c1635fa3abbe1391dc8a9c28c4ad0c993b0aa5ed964"
+    },
+    {
+      "source_relative": "name-mapping.json",
+      "target_relative": "target/classes/META-INF/name-mapping.json",
+      "bytes": 62659,
+      "sha256": "da59070b84c0603e48ac2f2538b8b94ed64b1738e9e6a5f41647839e3fe66985"
+    },
+    {
+      "source_relative": "SYNEXIA-DONATION-NOTICE.txt",
+      "target_relative": "target/classes/META-INF/SYNEXIA-DONATION-NOTICE.txt",
+      "bytes": 1831,
+      "sha256": "8b99e55314dface1175cf4c9a0f5d23d699920877b838b54e657c65dd8f25556"
+    },
+    {
+      "source_relative": "NETBEANS-NOTICE.txt",
+      "target_relative": "target/classes/META-INF/NETBEANS-NOTICE.txt",
+      "bytes": 1028,
+      "sha256": "88b6f1f16df90583111f75cb4cda5e3431b8797e59f09d2dd299e0ee1de9fa54"
+    },
+    {
+      "source_relative": "src/main/resources/com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv",
+      "target_relative": "target/classes/com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv",
+      "bytes": 11184,
+      "sha256": "e986838120c2558a145c6b16942475c8f5ff885b166526d635ef9c10360d8313"
+    }
+  ],
+  "new_target_before_main": {
+    "files": 1181,
+    "bytes": 8713911,
+    "classes": 888,
+    "rows_sha256": "113ec7f05e173392494e49601669285be032abacde056c32d8bda76de09c8276"
+  },
+  "raw_SDK_main_exitcode": 0,
+  "SDK_main_log_bytes": 3386,
+  "SDK_main_log_sha256": "27a974b9624ff9e743e5e973df39b37b33b8b087672f2e67234e1c5d7fc1630b",
+  "actual_native_search_directories": [
+    "C:\\Program Files\\Java\\jdk-21\\bin",
+    "C:\\WINDOWS\\Sun\\Java\\bin",
+    "C:\\Windows\\System32",
+    "C:\\Windows",
+    "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin",
+    "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-proof-k-v1\\module"
+  ],
+  "actual_properties": {
+    "sun.boot.library.path": [
+      "C:\\Program Files\\Java\\jdk-21\\bin"
+    ],
+    "java.library.path": [
+      "C:\\Program Files\\Java\\jdk-21\\bin",
+      "C:\\WINDOWS\\Sun\\Java\\bin",
+      "C:\\WINDOWS\\system32",
+      "C:\\WINDOWS",
+      "C:/Program Files/Java/jdk-21/bin",
+      "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin",
+      "C:/Windows/System32",
+      "C:/Windows",
+      "."
+    ],
+    "java.class.path": [
+      "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-proof-k-v1\\module\\target\\test-classes",
+      "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-resource-repaired-proof-k-v1\\module\\target\\classes"
+    ],
+    "java.io.tmpdir": [
+      "K:/codex-work/m3jdk21-recipe-pass-20261020/data-resource-repaired-proof-k-v1/tmp/fork"
+    ],
+    "user.home": [
+      "K:/codex-work/m3jdk21-recipe-pass-20261020/data-resource-repaired-proof-k-v1/home"
+    ],
+    "user.dir": [
+      "K:/codex-work/m3jdk21-recipe-pass-20261020/data-resource-repaired-proof-k-v1/module"
+    ],
+    "java.home": [
+      "C:\\Program Files\\Java\\jdk-21"
+    ],
+    "path.separator": [
+      ";"
+    ]
+  },
+  "SDK_main_checks": 42897,
+  "actual_JNI": false,
+  "all_new_target_bytes_unchanged_during_main": true,
+  "owned_processes_physically_terminal": true
+}

@@ -1,0 +1,94 @@
+{
+  "build_receipt": {
+    "mode": "0o644",
+    "sha256": "4195b08a5a5ebde1ef0325c6d9eb49abfaacc4674160f999aab3926461d61827",
+    "size": 15705,
+    "type": "file"
+  },
+  "classification": "hybrid qualification image: stock Java 21 modules/native payload with four source-compiled M3 compiler owners, actual target descriptor and supported java.base module-hash regeneration; not a full source-built M3 JDK",
+  "commands": [
+    {
+      "argv": [
+        "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/candidate/image/bin/java",
+        "--describe-module",
+        "jdk.compiler"
+      ],
+      "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/validation",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-18T13:24:44.088974+00:00",
+      "label": "candidate-describe-compiler",
+      "log": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/validation/logs/01-candidate-describe-compiler.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "53b1f44f06a6eb29897133dd27a3394ecf411bee0ee6ace1aad8eba630e6a694",
+        "size": 1993,
+        "type": "file"
+      },
+      "started": "2026-10-18T13:24:43.992245+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/candidate/image/bin/java",
+        "-Djava.io.tmpdir=/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/validation/tmp/candidate",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "--add-opens=jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/test-classes",
+        "M3ASTSharedFrontendTest"
+      ],
+      "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/validation",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-18T13:24:45.012475+00:00",
+      "label": "candidate-shared-frontend",
+      "log": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/validation/logs/02-candidate-shared-frontend.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "ad33e48fae9af4643aaed9bc3f38d61247d818d9148ab0971992b375e4bb32d6",
+        "size": 425,
+        "type": "file"
+      },
+      "started": "2026-10-18T13:24:44.089423+00:00"
+    },
+    {
+      "argv": [
+        "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/candidate/image/bin/java",
+        "-Djava.io.tmpdir=/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/validation/tmp/candidate",
+        "--add-exports=jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "--add-opens=jdk.compiler/com.sun.tools.javac.m3=ALL-UNNAMED",
+        "-cp",
+        "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/test-classes",
+        "M3ASTSourceSealTest"
+      ],
+      "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/validation",
+      "exit_code": 0,
+      "expect_failure": false,
+      "finished": "2026-10-18T13:24:45.667750+00:00",
+      "label": "candidate-source-seal",
+      "log": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/descriptor-qualification-02/validation/logs/03-candidate-source-seal.log",
+      "log_record": {
+        "mode": "0o644",
+        "sha256": "c7ff363b68db0a047f3abe402dd1d313870bb23a9cfafb163110df9ed9eee10f",
+        "size": 61,
+        "type": "file"
+      },
+      "started": "2026-10-18T13:24:45.012856+00:00"
+    }
+  ],
+  "finished": "2026-10-18T13:24:46.869392+00:00",
+  "outputs_manifest": {
+    "mode": "0o644",
+    "sha256": "cf0662fd229e559d643067b7d300d58718da8fe45e70d7ec1ee102200023220b",
+    "size": 6732,
+    "type": "file"
+  },
+  "removed_environment_variable_names": [],
+  "results": [
+    {
+      "lane": "candidate",
+      "status": "SHARING_AND_SOURCE_SEAL_PASS"
+    }
+  ],
+  "status": "VALIDATION_PASS"
+}

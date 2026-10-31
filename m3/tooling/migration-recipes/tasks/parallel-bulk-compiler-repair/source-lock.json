@@ -1,0 +1,15 @@
+{
+  "schema": "M3JDK21_PARALLEL_BULK_COMPILER_REPAIR_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_pr": 10789,
+  "canonical_recipe": "com.synexia.rewrite.M3Jdk21ParallelBulkCompilerRecipe",
+  "canonical_recipe_head": "d3354da749e5a97064592c2e114ae31be503d19a",
+  "canonical_source_manifest_blob": "6d8811b400b8f6b81ecde94c460334f992751bf6",
+  "target_path": "m3/ports/parallel-bulk/pom.xml",
+  "before_sha256": "8f19f518de32e47a1fa60c8348041ba5713094176b0584d6eb9552784e160873",
+  "after_sha256": "c66a71c9f279d7ea20b49a15f096660c09558fdbdacd02c13d30c444d85cce13",
+  "intake_mode": "EXTERNAL_RECIPE_TOOL",
+  "production_source_mutation": false,
+  "target_proof": "PENDING_ACTUAL_MAVEN_JUNIT",
+  "promotion_authority": false
+}

@@ -1,0 +1,126 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.tooling.dag;
+
+import com.m3.rewrite.scope.M3EditScope;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * Composes concrete backport atoms into the canonical M3 lifecycle DAG.
+ *
+ * <p>The generic canonical {@code recipe-crate} node is replaced by immutable recipe atoms. Roots
+ * depend on {@code file-delta}; declared dependencies are preserved; all global terminal atoms
+ * rejoin at {@code recipe-junit}. Every later canonical verification and the single serial
+ * promotion node are preserved for both individual packets and bounded packet collections.
+ */
+public final class M3PacketDagComposer {
+    private static final String GENERIC_RECIPE = "recipe-crate";
+    private static final String FILE_DELTA = "file-delta";
+    private static final String RECIPE_JUNIT = "recipe-junit";
+
+    private M3PacketDagComposer() {}
+
+    public static M3RecipeDag compose(M3BackportPacket packet) {
+        return compose(M3RecipeDag.canonical(), packet);
+    }
+
+    /**
+     * Composes only after every packet atom has complete contract/documentation/pattern/IOP/JUnit
+     * evidence and an explicit fixed-point requirement.
+     */
+    public static M3RecipeDag compose(
+            M3BackportPacket packet,
+            M3BackportPacketEvidence evidence) {
+        M3BackportPacket checkedPacket = Objects.requireNonNull(packet, "packet");
+        Objects.requireNonNull(evidence, "evidence").requireComplete(checkedPacket);
+        return compose(checkedPacket);
+    }
+
+    /** All collection partitions and joins share one verification tail and promotion node. */
+    public static M3RecipeDag composeCollection(M3BackportPacketCollection collection) {
+        M3BackportPacketCollection checked = Objects.requireNonNull(collection, "collection");
+        return compose(
+                M3RecipeDag.canonical(), checked.atoms(), checked.terminalAtoms(), checked.maximumScope());
+    }
+
+    static M3RecipeDag compose(M3RecipeDag canonical, M3BackportPacket packet) {
+        M3RecipeDag checkedDag = Objects.requireNonNull(canonical, "canonical");
+        M3BackportPacket checkedPacket = Objects.requireNonNull(packet, "packet");
+        return compose(
+                checkedDag, checkedPacket.atoms(), checkedPacket.terminalAtoms(), checkedPacket.maximumScope());
+    }
+
+    private static M3RecipeDag compose(
+            M3RecipeDag checkedDag,
+            List<M3RecipeAtom> atoms,
+            List<M3RecipeAtom> terminals,
+            M3EditScope maximumScope) {
+        checkedDag.require(GENERIC_RECIPE);
+        checkedDag.require(FILE_DELTA);
+        checkedDag.require(RECIPE_JUNIT);
+
+        ArrayList<M3DagNode> nodes = new ArrayList<>();
+        for (M3DagNode node : checkedDag.topologicalOrder()) {
+            if (GENERIC_RECIPE.equals(node.id())) {
+                continue;
+            }
+            if (RECIPE_JUNIT.equals(node.id())) {
+                nodes.add(
+                        new M3DagNode(
+                                node.id(),
+                                node.kind(),
+                                node.scope(),
+                                node.mutating(),
+                                node.serialPromotion(),
+                                node.scopePromotionApproved(),
+                                node.workRef(),
+                                terminals.stream()
+                                        .map(M3PacketDagComposer::nodeId)
+                                        .toList()));
+                continue;
+            }
+            if ("promote".equals(node.id())) {
+                nodes.add(
+                        new M3DagNode(
+                                node.id(),
+                                node.kind(),
+                                maximumScope,
+                                node.mutating(),
+                                node.serialPromotion(),
+                                node.scopePromotionApproved(),
+                                node.workRef(),
+                                node.dependsOn()));
+                continue;
+            }
+            nodes.add(node);
+        }
+
+        for (M3RecipeAtom atom : atoms) {
+            nodes.add(
+                    new M3DagNode(
+                            nodeId(atom),
+                            M3DagKind.RECIPE,
+                            atom.scope(),
+                            true,
+                            false,
+                            atom.scopePromotionApproved(),
+                            atom.workRef(),
+                            atom.dependsOn().isEmpty()
+                                    ? List.of(FILE_DELTA)
+                                    : atom.dependsOn().stream()
+                                            .map(M3PacketDagComposer::nodeId)
+                                            .toList()));
+        }
+
+        return new M3RecipeDag(nodes);
+    }
+
+    public static String nodeId(M3RecipeAtom atom) {
+        return nodeId(Objects.requireNonNull(atom, "atom").id());
+    }
+
+    private static String nodeId(String atomId) {
+        return "packet-" + atomId;
+    }
+}

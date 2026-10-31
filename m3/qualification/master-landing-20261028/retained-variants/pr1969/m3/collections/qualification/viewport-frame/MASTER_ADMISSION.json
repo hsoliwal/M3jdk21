@@ -1,0 +1,56 @@
+{
+  "schema": "M3_VIEWPORT_CURRENT_MASTER_CONVERGENCE_V1",
+  "source_repository": "hsoliwal/M3jdk21",
+  "base_master": "175c7ed1056005e5a686e3189f601c8ed4f406bb",
+  "base_master_tree": "6219f5edac36e53f1d379944d6b1e37ede94d7ff",
+  "previous_feature_head": "bec5322eb47240d88c3c08fc97c1eeacebc4f060",
+  "merge_parent_order": [
+    "bec5322eb47240d88c3c08fc97c1eeacebc4f060",
+    "175c7ed1056005e5a686e3189f601c8ed4f406bb"
+  ],
+  "target": "feature branch only; NEVER default-branch write",
+  "strategy": "two-parent merge of current master into existing focused feature; master tree plus exact six qualified viewport paths; original feature branch ancestry retained",
+  "admission": [
+    {
+      "path": "m3/collections/src/main/c/m3maskviewport.c",
+      "master_blob": "205f93c2fad9fe234fc87980ba89ef1a45cef0a8",
+      "received_feature_blob": "f29d081e28ba8ccc4516bd28c09e738b7a408a76",
+      "operation": "modify"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3MaskViewportNative.java",
+      "master_blob": "760f572442bbd4145a1e24daadae267bffae56df",
+      "received_feature_blob": "9cdfab35cf719ccf26f61ee61e1ae10fa98eb9ad",
+      "operation": "modify"
+    },
+    {
+      "path": "m3/collections/viewport-proof/verify.py",
+      "master_blob": "1f55d3d2292ebf03d2fc6cf5bda77cd455e58aa9",
+      "received_feature_blob": "9614892a7257c9948716c2b49d80732183fce772",
+      "operation": "modify"
+    },
+    {
+      "path": "m3/collections/viewport-proof/fixtures/M3FrameRegionContract.txt",
+      "master_blob": "ABSENT",
+      "received_feature_blob": "3e7fc02f1935fcf91981d37d2e734ab564cdfa1a",
+      "operation": "add"
+    },
+    {
+      "path": "m3/collections/viewport-proof/fixtures/M3NativePageDirectContract.txt",
+      "master_blob": "ABSENT",
+      "received_feature_blob": "fc61136966adfc5c8d839854230296ede6992db6",
+      "operation": "add"
+    },
+    {
+      "path": "m3/collections/qualification/viewport-frame/RECEIVING.json",
+      "master_blob": "ABSENT",
+      "received_feature_blob": "71af8dc5dc39ec5551567c4c27a6cf1c1bea93ac",
+      "operation": "add"
+    }
+  ],
+  "other_master_paths": "identical to pinned master Git tree by construction",
+  "qualification": "historical passing focused Java/JNI, public naming, merged atom; current-base tests NOT_YET_RUN",
+  "status": "CURRENT_MASTER_CANDIDATE_HOLD",
+  "independent_jdk_hotspot_jtreg": "NOT_RUN",
+  "native_toolkit_runtime": "NOT_RUN"
+}

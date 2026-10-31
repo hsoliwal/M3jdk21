@@ -1,0 +1,17 @@
+{
+  "schema": "M3_EXISTING_COLLECTION_OWNER_REFINEMENT_V1",
+  "target": "com.m3.collections.M3CollectionViews",
+  "target_path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+  "disposition": "EXISTING_TARGET_OWNER_INTERNAL_ATOM_CORRECTION",
+  "new_type_or_naming_migration": false,
+  "reviewed_exclusion": "No naming migration: current public target owner and signatures remain unchanged; this packet records the existing owner refinement rather than introducing another name.",
+  "canonical_recipe_owner": "hsoliwal/com.synexia",
+  "canonical_recipe_path": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/filtered-set-identity-20261018",
+  "engine_revision": "140c263a90f9803b9c46103c63355a286e0515f0",
+  "scope": "SEPARATE_APACHE_MODULE_NOT_JDK_BACKEND_PROMOTION",
+  "receiving_stage_advance": false,
+  "runtime_synexia_dependency": false,
+  "public_api_changed": false,
+  "preimage_sha256": "c1ae229f00911e0881de9cae102f2c65f0f7f9f8eb4da1abd364a816dd84ee0d",
+  "postimage_sha256": "511800d4d79c7d8838ddb497f031e13827decd44c9c2790093f89ea01cdaa349"
+}

@@ -1,0 +1,139 @@
+{
+  "schema": "M3_NETBEANS_CONVERGENCE_SOURCE_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_qualification_baseline": "df532e779056dbec203dde20030657c3d144f5b5",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_qualification_baseline": "44d2a82489568d9dfb560ae1255583c131329f68",
+  "canonical_path": "synexia-openrewrite-recipes/recipes/netbeans-convergence-20261020",
+  "canonical_commit_pin": "See receiving PR description; commit is external to its own hashed payload",
+  "recipe": "com.synexia.rewrite.M3NetBeansRecipe",
+  "default_pass": "convergence",
+  "source_sealed_installer": true,
+  "typed_semantic_equivalence_verifier": false,
+  "existing_engine_blobs": {
+    "M3GpuToolJoinManifest.java": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+    "M3GpuToolJoinRecipe.java": "1c1b1b568d369f688f6953161636bf36b484bf5a"
+  },
+  "existing_synexia_lineage": [
+    {
+      "pr": 12514,
+      "commit": "bf28d16edd4106be7961aefdb895e3e9f3ad30f7"
+    },
+    {
+      "pr": 12474,
+      "commit": "10f781ae3e525b7630ed0661b3bb99a41f092fb4"
+    }
+  ],
+  "existing_public_target_successors": [
+    {
+      "pr": 1514,
+      "commit": "472c6edf6083bdf7c157b15a943f519d2ab0624a"
+    },
+    {
+      "pr": 1515,
+      "commit": "a7b83b8dff260cf415016fd7ed5617cc01f028cb"
+    },
+    {
+      "pr": 1521,
+      "commit": "abf7599060fd81cfe76f9f016fcd6bb47999aa5d"
+    }
+  ],
+  "netbeans_repository": "apache/netbeans",
+  "netbeans_commit": "f26ca8d8025ff820b8ffe751b6db6c1cc67baa97",
+  "netbeans_license": "Apache-2.0",
+  "netbeans_usage": "algorithm/contract reference; no donor body copied; no NetBeans build/test execution claimed",
+  "netbeans_primary_source_pins": "DONOR_DECISIONS.tsv",
+  "netbeans_companion_source_pins": [
+    {
+      "path": "ide/editor.util/src/org/netbeans/lib/editor/util/ArrayUtilities.java",
+      "git_blob": "903d77f6e06bd3c705d5e177bf2e4bc28efc02f7"
+    },
+    {
+      "path": "ide/parsing.api/src/org/netbeans/modules/parsing/api/Embedding.java",
+      "git_blob": "f4f61ff9580723ca98c38686601660a11ff10290"
+    },
+    {
+      "path": "java/java.source.base/src/org/netbeans/api/java/source/ModificationResult.java",
+      "git_blob": "79776bce6857b982d19cd910f8098982628c25c8"
+    },
+    {
+      "path": "platform/masterfs/src/org/netbeans/modules/masterfs/providers/Notifier.java",
+      "git_blob": "a788f3167e3b416e448add33d67ef815b396d9a2"
+    },
+    {
+      "path": "java/java.hints.declarative/src/org/netbeans/modules/java/hints/declarative/DeclarativeHintRegistry.java",
+      "git_blob": "24dbdc8311bcc2065ca1af346c68cf610429fecb"
+    },
+    {
+      "path": "java/maven.model/src/org/netbeans/modules/maven/model/ModelOperation.java",
+      "git_blob": "29cc23e1d310fae2848577b7896e069671cd2045"
+    },
+    {
+      "path": "extide/gradle/src/org/netbeans/modules/gradle/api/GradleBaseProject.java",
+      "git_blob": "36d6c6227f043e90a1f4a066eb33e7cf2374fa68"
+    }
+  ],
+  "challenge_references": [
+    {
+      "url": "https://leetcode.com/problems/remove-element/",
+      "usage": "Problem reference only; no solution/editorial body copied or license inferred"
+    },
+    {
+      "url": "https://www.hackerrank.com/challenges/dynamic-array/problem",
+      "usage": "Problem reference only; no solution/editorial body copied or license inferred"
+    },
+    {
+      "url": "https://www.geeksforgeeks.org/dsa/naive-partition-algorithm/",
+      "usage": "Explanation reference only; no solution/editorial body copied or license inferred"
+    }
+  ],
+  "ordered_implementation_passes": [
+    {
+      "pass": "collections",
+      "canonical_path": "collections/manifest.tsv",
+      "sha256": "02e091d573a9473eb87993ad6aa6a4bdebf3efa134909f73f68e20731f8c0898"
+    },
+    {
+      "pass": "storage",
+      "canonical_path": "storage/manifest.tsv",
+      "sha256": "62a346dfb49f35285ccec0a269339fcdc844ef35c19059c86b25a6f134a3a2ba"
+    },
+    {
+      "pass": "current-owners",
+      "canonical_path": "parsing/current-owners/manifest.tsv",
+      "sha256": "62269e62162478c4bc39979edd7bdf057f9cb303b73ef76c3f7b72ab282dc5ef"
+    },
+    {
+      "pass": "lexer-policy",
+      "canonical_path": "parsing/lexer-policy/manifest.tsv",
+      "sha256": "b29dae7ae844a513f071f87041c0dda183563f675292d8ca17f4f04fb8abd3ba"
+    },
+    {
+      "pass": "buildmodels",
+      "canonical_path": "buildmodels/manifest.tsv",
+      "sha256": "6b579310a39314a8365aa32ce3886346214d886a7e0e1f8cc86033f8da8a20f3"
+    },
+    {
+      "pass": "nativecompactor",
+      "canonical_path": "nativecompactor/manifest.tsv",
+      "sha256": "8aa5ba49974bbf44e92f16a8a118602126fac3837bd5039e66ecd4d2db0971df"
+    },
+    {
+      "pass": "qualification-closure",
+      "canonical_path": "qualification-closure/manifest.tsv",
+      "sha256": "04fb831c9954f1de201d03a9f9211316f6ab99fac70f30f140558c54ab31599f"
+    },
+    {
+      "pass": "launcher-provenance",
+      "canonical_path": "launcher-provenance/manifest.tsv",
+      "sha256": "ac338eb820955db8705b2c95099c04642f0469461b7dc63bc33f1e40b9f58eeb"
+    }
+  ],
+  "source_transform_rows": 45,
+  "distinct_source_and_qualification_paths": 42,
+  "metadata_disposition": "Additive handoff/catalogue records; previous catalogue byte prefixes preserved",
+  "public_protected_api_changes": false,
+  "new_product_jni_symbols": [],
+  "receiving_phase_advanced": false,
+  "rights": "Per-file Apache-2.0/JDK GPL-Classpath and donor notices retained; already-public target source is the reusable receiving lineage"
+}

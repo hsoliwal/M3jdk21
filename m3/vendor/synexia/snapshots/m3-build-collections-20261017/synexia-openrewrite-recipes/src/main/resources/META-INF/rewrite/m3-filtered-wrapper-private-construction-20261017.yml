@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.M3FilteredWrapperPrivateConstruction20261017
+displayName: Reduce private M3 filtered wrapper construction
+description: >-
+  Apply two independently qualified private construction atoms to the existing
+  M3FilteredViews owner through one exact baseline-to-final snapshot. The final
+  postimage is an unchanged fixed point. Intermediate per-atom crates remain
+  qualification evidence and are not composed into the delivery recipe.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: filtered-wrapper-private-construction-20261017

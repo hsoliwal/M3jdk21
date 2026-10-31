@@ -1,0 +1,78 @@
+{
+  "schema": "M3_ARRAY_TEMPLATE_QUALIFICATION_V1",
+  "status": "PASS",
+  "baseline": "e913ab89056657eca4009678cfe9a657c020e79b",
+  "jdk": "/tmp/m3-ast-product-build/images/jdk",
+  "scope": "ACTUAL_SOURCE_TEMPLATE_FIXTURE_NOT_RECIPE_RECEIVER",
+  "product_source_files_changed": 1,
+  "production_jni_source_unchanged": true,
+  "public_api_unchanged": true,
+  "candidate_files": [
+    {
+      "path": "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
+      "bytes": 17309,
+      "sha256": "8d6afc24c677adb7ba612071d34453c8a7d8b9e1a81ac27fb06bc3f62c673edd",
+      "git_blob_sha1": "bce79ff1c8f1bbb7dcb5a76c7e355b12f408c996"
+    },
+    {
+      "path": "m3/arrays/src/main/native/tests/m3_arrays_checks.c",
+      "bytes": 1376,
+      "sha256": "eeccc76a11969a9f235c73fb4e71a64c211af4dc8abe29759bffb161dbf947ab",
+      "git_blob_sha1": "6bd29fe6815d07167ff7a3c7b941a9b27dc18589"
+    },
+    {
+      "path": "m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsSelfTest.java",
+      "bytes": 16423,
+      "sha256": "632ee4cfa058f1f80536d4387e41b9d0fff41f64307d1c21f4cf2cbed94d20b1",
+      "git_blob_sha1": "2a80d1d57545c8dd09d3a4303d08419ad2e3a0bb"
+    },
+    {
+      "path": "m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsTest.java",
+      "bytes": 526,
+      "sha256": "2cf43719b99622cb8cca399179e0a1004b06e7ab49542aafe434cf8bcca3597d",
+      "git_blob_sha1": "bce5bf6ae8a0fdd65dc6279a4ac48cedfa0bcdbf"
+    }
+  ],
+  "baseline_findings": [
+    "missing ByteSnapshot/CharSnapshot segmentCount implementations",
+    "Release native tests remove assert uses then fail -Werror",
+    "all four valid reads fail after only snapshot compile repair"
+  ],
+  "java_result": "M3_ARRAY_EMPTY_SEGMENTS_PASS checks=417595 cases=912 native=false",
+  "native_result": "M3_ARRAY_EMPTY_SEGMENTS_PASS checks=417595 cases=912 native=true",
+  "native_assertion_fault_refused": true,
+  "pending": [
+    "qualified Maven/OpenRewrite target reception",
+    "hosted CI",
+    "non-Linux native platforms",
+    "whole-JDK/JCK suite and array-family promotion",
+    "no throughput speedup claim"
+  ],
+  "maven_tests": [
+    {
+      "name": "com.m3.arrays.M3ArrayEmptySegmentsTest",
+      "tests": "1",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "name": "com.m3.arrays.M3ArrayNativeTest",
+      "tests": "2",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    },
+    {
+      "name": "com.m3.arrays.M3ArraysTest",
+      "tests": "6",
+      "errors": "0",
+      "skipped": "0",
+      "failures": "0"
+    }
+  ],
+  "jdk_sha256": {
+    "release": "5a3d73c8957e7fcb0da466afc0be260adeaddbf8bb04ad82ebb562710c2989de",
+    "lib/modules": "e7a2827ebfcb2f1fb474db3a8e4e4bc058ffe5f5dea5f9701803669101b28b8b"
+  }
+}

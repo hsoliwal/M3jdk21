@@ -1,0 +1,168 @@
+# FS-common-libraries: Common libraries provide shared Native Image utilities and metadata workflows
+
+Native Build Tools must help users supply the configuration that Native Image needs for resources,
+reflection, dynamic access, and third-party reachability metadata. The `common/` modules own the
+build-tool-neutral behavior that Gradle and Maven adapt into tasks, goals, and configuration
+models. This supports [§root/FS-plugin-common](../../docs/spec/functional/plugin-common.md#fs-plugin-common-gradle-and-maven-expose-aligned-native-image-plugin-behavior) and realizes
+[§root/GOAL-plugin-parity](../../docs/spec/goals.md#goal-plugin-parity-shared-native-image-behavior-remains-consistent-across-gradle-and-maven) through [§GOAL-shared-native-image](goals.md#goal-shared-native-image-shared-native-image-semantics-live-once-in-common-libraries) and
+[§REQ-stable-semantics](requirements.md#req-stable-semantics-shared-behavior-changes-preserve-plugin-parity).
+
+## At a Glance
+
+| Shared capability | What common code owns | Plugin adaptation |
+| --- | --- | --- |
+| Argument handling | escaping, argument-file conversion, version parsing, constants | Gradle tasks and Maven goals decide which options are present |
+| Resource configuration | classpath/JAR scanning and `resource-config.json` shape | plugins wire generated output into binary/goal config directories |
+| Tracing agent | standard, conditional, direct, disabled modes and merge/copy primitives | plugins attach the agent to Gradle or Maven execution APIs |
+| Reachability metadata | repository parsing, version selection, query result classification | plugins download/unpack/copy selected metadata for native-image |
+| Missing metadata reports | dependency classification and report shape | plugins expose task/goal entry points and optional issue creation |
+| Schema validation | schema lookup and Native Image major-version compatibility | plugins decide when validation runs before native-image invocation |
+
+Common code answers Native Image questions. Gradle and Maven code answer build-tool questions such
+as task inputs, scopes, provider wiring, lifecycle bindings, and diagnostics. This boundary is
+required by [§REQ-no-buildtool-apis](requirements.md#req-no-buildtool-apis-common-runtime-libraries-do-not-depend-on-gradle-or-maven-apis).
+
+## 1. Shared Native Image utilities
+
+Common utilities keep Gradle and Maven command-line handling consistent. They must preserve
+whitespace, quotes, backslashes, and platform paths when escaping arguments; write Native Image
+argument files and return the corresponding `@...` argument ([§root/GLOSS-argument-file](../../docs/spec/glossary.md#gloss-argument-file-native-image-argument-file)); distinguish the GraalVM release from the JDK version in Native Image version output well enough to
+choose version-specific behavior, using the first dotted release on a runtime-environment line
+regardless of its vendor label and retaining compatibility behavior when that release cannot be
+identified; and centralize Native Image configuration file names and metadata directory names used
+by plugins and tests.
+
+Layer creation uses an immutable, build-tool-neutral artifact selection containing an `all`
+selection, ordered module names, ordered package names, and ordered resolved paths. The shared
+renderer owns the complete `-H:LayerCreate` grammar: `all` renders as an unqualified layer-create
+argument whose contents come from the plugin-supplied classpath, while narrower selections render
+`module=`, `package=`, and `path=` selectors. It rejects blank names and selector values, rejects
+names outside `[A-Za-z0-9._-]+`, and preserves selector order. `all` may be combined with module or
+package selectors; the plugin-supplied classpath still represents the complete dependency graph.
+Native Image version detection recognizes vendor suffixes when applying layer-consumption gates.
+Gradle and Maven must
+resolve their dependency models to paths before calling it.
+[§REQ-no-buildtool-apis](requirements.md#req-no-buildtool-apis-common-runtime-libraries-do-not-depend-on-gradle-or-maven-apis).
+
+## 2. Resource configuration
+
+Resource detection helps users include non-classpath resources without hand-written
+`resource-config.json` for common project shapes. The analyzer must inspect classpath directories
+and JARs, normalize paths with portable separators, respect existing
+`META-INF/native-image/.../resource-config.json` files unless the caller asks to ignore them, and
+write Native Image resource configuration into the directory passed by the Gradle task or Maven
+goal.
+
+Product-specific task and goal entry points are specified by [§gradle/FS-resources-and-metadata.1](../../native-gradle-plugin/docs/functional/resources-and-metadata.md#1-resource-autodetection),
+[§gradle/FS-resources-and-metadata.2](../../native-gradle-plugin/docs/functional/resources-and-metadata.md#2-generated-resource-configuration), and [§maven/FS-resources-and-metadata.1](../../native-maven-plugin/docs/functional/resources-and-metadata.md#1-resource-configuration-goals).
+
+## 3. Native Image tracing agent
+
+Agent behavior is shared because Gradle and Maven need the same mode semantics even though they
+attach the agent to different execution APIs. The agent is defined in [§root/GLOSS-tracing-agent](../../docs/spec/glossary.md#gloss-tracing-agent-native-image-tracing-agent).
+
+### 3.1 Agent modes
+
+The shared model must cover standard collection, conditional metadata with user-code and extra
+filters, direct user-supplied agent options, and disabled instrumentation. Direct mode may
+substitute well-known placeholders such as `{output_dir}`, but must otherwise preserve the user's
+option list. Advanced options such as caller filters, access filters, predefined classes, unsafe
+allocation tracing, and reflection metadata tracking must be represented once so both plugins
+expose the same mode semantics.
+
+#### 3.1.1 Access-filter precedence
+
+The shared agent model must emit its built-in default access filter before every user-provided
+access-filter file, including filters supplied as raw direct-mode options, so that user
+configuration takes precedence over the built-in defaults.
+`native-image-agent` evaluates access filters in order and lets later rules override earlier ones,
+so ordering the built-in filter first leaves it as a baseline that user rules override.
+
+A disabled agent configuration must emit no agent command-line options.
+
+Constructing the agent command line must not create the built-in filter. The shared model describes
+the filter's path, while each build-tool adapter must materialize the file at a lifecycle-safe point.
+
+### 3.2 Plugin invocation and output
+
+Plugin-specific enablement, instrumentation hooks, and output locations are specified by
+[§gradle/FS-tracing-agent](../../native-gradle-plugin/docs/functional/tracing-agent.md#fs-tracing-agent-gradle-tasks-attach-and-post-process-native-image-tracing-agent-metadata) and [§maven/FS-tracing-agent](../../native-maven-plugin/docs/functional/tracing-agent.md#fs-tracing-agent-maven-goals-attach-and-post-process-native-image-tracing-agent-metadata). Both plugins may adapt the exact task or
+process hook, but they must feed the same shared mode model into `native-image-agent`.
+
+## 4. Agent metadata post-processing
+
+Collected agent output must be usable without manual Native Image helper calls. Common merge
+behavior accepts one or more input and output directories, preserves Native Image metadata file
+names, and locates `native-image-configure` from the same Native Image installation used for the
+build when possible. Copy behavior must either replace destination metadata or merge with it,
+depending on user configuration.
+
+Plugin-specific merge and copy entry points are specified by [§gradle/FS-tracing-agent.5](../../native-gradle-plugin/docs/functional/tracing-agent.md#5-metadata-copy) and
+[§maven/FS-tracing-agent.4](../../native-maven-plugin/docs/functional/tracing-agent.md#4-merge-and-copy).
+
+## 5. Reachability metadata repository
+
+Reachability metadata repository support lets both product plugins consume the GraalVM
+Reachability Metadata Repository without build-tool-specific lookup logic. The repository is
+defined in [§root/GLOSS-reachability-metadata-repository](../../docs/spec/glossary.md#gloss-reachability-metadata-repository-graalvm-reachability-metadata-repository). Product defaults that choose which
+official repository release to fetch are governed by [§root/GOAL-fresh-metadata](../../docs/spec/goals.md#goal-fresh-metadata-users-can-fetch-the-latest-graalvm-reachability-metadata).
+
+### 5.1 Repository lookup
+
+The common repository layer must support configured URIs and local directories, parse module and
+artifact indexes, honor entries marked as not applicable to Native Image, and select the best
+metadata directory using index data, module-to-config-version overrides, default mappings, and
+exclusions. Queries must classify dependencies as supported, excluded, not-for-Native-Image, or
+missing so plugin diagnostics and reports do not duplicate repository rules.
+
+The artifacts submitted in one query form the eligible resolved dependency graph for single-level
+`requires` expansion. Every selected configuration retains the group and artifact identity of the
+module whose repository directory owns it. If a required module is present in the submitted graph,
+only that module's direct query selects its metadata, using its resolved version, exclusion, and
+module-to-config-version override. If it is absent, the requiring module may select it once from the
+required module's directory using the requiring module's resolved version and normal exact-version
+then latest/default fallback behavior. An indirect required selection counts as repository coverage
+for the requiring query, but it does not recursively expand the required module's own `requires`.
+
+### 5.2 Plugin entry points and outputs
+
+Product-specific repository resolution entry points are specified by [§gradle/FS-resources-and-metadata.3](../../native-gradle-plugin/docs/functional/resources-and-metadata.md#3-reachability-metadata-collection)
+and [§maven/FS-resources-and-metadata.2](../../native-maven-plugin/docs/functional/resources-and-metadata.md#2-reachability-metadata). In every adaptation, resolved metadata must be exposed through a
+generated build directory that the plugin can pass to Native Image as a configuration file
+directory.
+
+## 6. Missing metadata reporting
+
+Missing metadata reporting must identify libraries where users are likely to need additional
+reachability metadata. Reports should focus on direct runtime dependencies by default, include
+enough coordinate and repository-status information for users or automation to decide whether to
+request support, and format issue requests against the configured GitHub repository and API URL
+when issue creation is enabled. Product plugins supply credentials and project identity.
+
+When a direct runtime dependency is not covered by the configured metadata repository, reporting
+must distinguish between dependencies that are truly uncovered and dependencies that are already
+covered by a newer official metadata repository release. Coverage in a newer official release is
+still actionable for the user because the current build cannot consume it yet, but it must be
+reported separately from truly missing libraries and must advise the user to update either the
+configured metadata repository version or Native Build Tools. Issue creation must only target
+dependencies that remain uncovered after checking the newer official release. This refinement
+builds on the repository coverage semantics in [§FS-common-libraries.5.1](functional-spec.md#51-repository-lookup).
+
+Product-specific report entry points are specified by [§gradle/FS-resources-and-metadata.4](../../native-gradle-plugin/docs/functional/resources-and-metadata.md#4-missing-metadata-reports) and
+[§maven/FS-resources-and-metadata.3](../../native-maven-plugin/docs/functional/resources-and-metadata.md#3-missing-metadata-reports).
+
+## 7. Schema validation
+
+Metadata-oriented JSON must be validated when the repository owns a schema for the file type and
+the build has enough Native Image version information to choose the correct schema. Invalid
+metadata that would be passed to Native Image must fail early with a validation error rather than
+produce a later, less actionable native-image failure.
+[§REQ-version-schema-compat](requirements.md#req-version-schema-compat-common-metadata-and-schema-behavior-tracks-supported-native-image-versions).
+
+## 8. Verification surface
+
+Common utility and reachability metadata modules must have unit tests for argument conversion,
+layer selection and rendering, resource scanning, agent mode command lines, repository index
+parsing, metadata lookup, missing metadata support, schema validation, and Native Image version
+behavior. Product plugin functional tests cover these shared behaviors through Gradle and Maven sample projects as part of
+[§root/FS-plugin-common.2](../../docs/spec/functional/plugin-common.md#2-verification-surface) and [§E2E-common-tests](e2e.md#e2e-common-tests-common-library-tests-exercise-shared-native-image-support-behavior).

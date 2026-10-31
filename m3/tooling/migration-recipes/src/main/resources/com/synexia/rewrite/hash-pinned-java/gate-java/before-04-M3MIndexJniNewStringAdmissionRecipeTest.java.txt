@@ -1,0 +1,54 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.rewrite;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import org.junit.jupiter.api.Test;
+import org.openrewrite.test.RewriteTest;
+import org.openrewrite.test.SourceSpecs;
+
+import static org.openrewrite.java.Assertions.java;
+
+/** Exact current java.lang.String owner -> reviewed JNI MIndex admission hook. */
+class M3MIndexJniNewStringAdmissionRecipeTest implements RewriteTest {
+    private static final String ROOT =
+            "/com/synexia/rewrite/hash-pinned-java/mindex-jni-newstring-admission/";
+    private static final String PATH = "src/java.base/share/classes/java/lang/String.java";
+
+    private static String read(String name) {
+        try (InputStream input =
+                M3MIndexJniNewStringAdmissionRecipeTest.class.getResourceAsStream(ROOT + name)) {
+            if (input == null) throw new IllegalStateException("missing recipe resource: " + name);
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException failure) {
+            throw new IllegalStateException(failure);
+        }
+    }
+
+    private static SourceSpecs owner(boolean applied) {
+        String source = read(applied ? "String.java.txt" : "String.java.before.txt");
+        return applied
+                ? java(source, spec -> spec.path(PATH))
+                : java(source, read("String.java.txt"), spec -> spec.path(PATH));
+    }
+
+    @Test
+    void appliesExactStringOwnerAndReachesFixedPoint() {
+        rewriteRun(
+                spec -> spec
+                        .recipe(new M3HashPinnedJavaSnapshotRecipe(
+                                "mindex-jni-newstring-admission"))
+                        .cycles(2)
+                        .expectedCyclesThatMakeChanges(1),
+                owner(false));
+    }
+
+    @Test
+    void reviewedPostimageIsAlreadyFixedPoint() {
+        rewriteRun(
+                spec -> spec.recipe(new M3HashPinnedJavaSnapshotRecipe(
+                        "mindex-jni-newstring-admission")),
+                owner(true));
+    }
+}

@@ -1,0 +1,63 @@
+family	module	upstream_api	current_owner_path	status	required_gate
+M3AST	jdk.compiler	com.sun.source.tree	-	MAPPED_PENDING	compiler AST ownership and rewrite parity
+M3Annotations	java.base	java.lang.annotation	-	MAPPED_PENDING	retention inheritance reflection semantics
+M3Arrays	java.base	java.lang.reflect.Array;java.util.Arrays	m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java	QUALIFIED_ISOLATED	array mutability covariance and JNI contract
+M3Atomics	java.base	java.util.concurrent.atomic	-	MAPPED_PENDING	linearization JMM ABA and progress
+M3Bits	java.base	java.util.BitSet	src/java.base/share/classes/jdk/internal/mindex/M3Bits.java	EXISTING_INTERNAL_KERNEL	bit rank select bounds and concurrency
+M3Buffers	java.base	java.nio.Buffer;java.nio.ByteBuffer	-	MAPPED_PENDING	positions limits direct memory and byte order
+M3Bytecode	java.base	jdk.internal.classfile	-	MAPPED_PENDING	classfile verifier version and attributes
+M3Channels	java.base	java.nio.channels	-	MAPPED_PENDING	partial I/O interrupts async file channel
+M3Charsets	java.base	java.nio.charset	-	MAPPED_PENDING	malformed replacement incremental decoder parity
+M3ClassLoaders	java.base	java.lang.ClassLoader	-	MAPPED_PENDING	loader identity unloading and access
+M3Classes	java.base	java.lang.Class	-	MAPPED_PENDING	class mirror identity modules hidden classes
+M3Collections	java.base	java.util.Collection;java.util.Map	m3/collections/src/main/java/com/m3/collections/M3Collections.java	QUALIFIED_ISOLATED	views iteration equality serialization and JMM
+M3Compiler	jdk.compiler	javax.tools;com.sun.tools.javac	-	MAPPED_PENDING	source-to-binary parity compiler plugin ABI
+M3Concurrent	java.base	java.util.concurrent	-	MAPPED_PENDING	happens-before and forward-progress contracts
+M3Configuration	java.base	java.util.Properties	-	MAPPED_PENDING	configuration parsing and system policy
+M3Crypto	java.base	javax.crypto;java.security	-	MAPPED_PENDING	provider algorithm side-channel and FIPS constraints
+M3DAG	jdk.compiler	com.sun.source.tree	-	MAPPED_PENDING	immutable AST/DAG sharing and invalidation
+M3Diagnostics	java.management	java.lang.management	-	MAPPED_PENDING	management safety lifecycle and permission
+M3Executors	java.base	java.util.concurrent.Executors	-	MAPPED_PENDING	scheduling rejection and lifecycle
+M3Files	java.base	java.nio.file.Files;java.nio.file.Path	-	MAPPED_PENDING	filesystem permissions atomicity symlinks
+M3Foreign	java.base	java.lang.foreign;JNI	-	MAPPED_PENDING	FFM arena lifetime and native ABI
+M3Format	java.base	java.util.Formatter	-	MAPPED_PENDING	locale formatting and exceptions
+M3Functions	java.base	java.util.function	-	MAPPED_PENDING	lambda evaluation order and exception parity
+M3Futures	java.base	java.util.concurrent.CompletableFuture	-	MAPPED_PENDING	completion ordering cancellation and happens-before
+M3GC	java.base	java.lang.ref	-	MAPPED_PENDING	GC safety reachable references and barriers
+M3HTTP	java.net.http	java.net.http	-	MAPPED_PENDING	HTTP versions cancellation and flow control
+M3IO	java.base	java.io.InputStream;java.io.OutputStream	src/java.base/share/classes/jdk/internal/m3/io/M3IO.java	IMPLEMENTED_INTERNAL	borrowed arrays projection masks and EOF parity
+M3Instrumentation	java.instrument	java.lang.instrument	-	MAPPED_PENDING	agent transform redefinition module semantics
+M3JFR	jdk.jfr	jdk.jfr	-	MAPPED_PENDING	recording event temporal accuracy
+M3JNI	java.base	java.lang;native JNI boundary	-	MAPPED_PENDING	JNI references exception checks GC critical regions
+M3Locale	java.base	java.util.Locale	-	MAPPED_PENDING	Unicode CLDR and locale provider compatibility
+M3Locks	java.base	java.util.concurrent.locks	-	MAPPED_PENDING	fairness conditions interrupts and JMM
+M3Logging	java.logging	java.util.logging	-	MAPPED_PENDING	ordering handlers and retention
+M3Math	java.base	java.lang.Math;java.lang.StrictMath	-	MAPPED_PENDING	rounding NaN signed zero and intrinsics
+M3Memory	java.base	java.nio.ByteBuffer;java.lang.ref	-	MAPPED_PENDING	ownership aliasing GC and offheap lifetime
+M3MethodHandles	java.base	java.lang.invoke.MethodHandles	-	MAPPED_PENDING	lookup authority and invocation conversions
+M3Modules	java.base	java.lang.Module	-	MAPPED_PENDING	module readability exports layers
+M3Native	java.base	jdk.internal.misc.Unsafe	-	MAPPED_PENDING	native address lifetime alignment and fallback
+M3Network	java.base	java.net	-	MAPPED_PENDING	protocol timeouts TLS and sockets
+M3Numbers	java.base	java.lang.Number;java.math	-	MAPPED_PENDING	overflow precision and decimal semantics
+M3Objects	java.base	java.util.Objects	-	MAPPED_PENDING	equals hash identity and null semantics
+M3Processes	java.base	java.lang.Process;java.lang.ProcessHandle	-	MAPPED_PENDING	handles pipes exit and platform semantics
+M3Random	java.base	java.util.random	-	MAPPED_PENDING	seed reproducibility and algorithm contracts
+M3References	java.base	java.lang.ref	-	MAPPED_PENDING	weak soft phantom and reference queues
+M3Reflection	java.base	java.lang.reflect	-	MAPPED_PENDING	module access classloader caches and redefinition
+M3Regex	java.base	java.util.regex.Pattern;java.util.regex.Matcher	-	MAPPED_PENDING	capture lookbehind backref UTF16 and precompute
+M3Resources	java.base	java.util.ResourceBundle	-	MAPPED_PENDING	resource loader scope and locale fallback
+M3Runtime	java.base	java.lang.Runtime	-	MAPPED_PENDING	shutdown memory pressure and native effects
+M3SQL	java.sql	java.sql	-	MAPPED_PENDING	JDBC transaction isolation and resource lifecycle
+M3Security	java.base	java.security	-	MAPPED_PENDING	provider and permission semantics
+M3Serialization	java.base	java.io.ObjectInputStream;java.io.ObjectOutputStream	-	MAPPED_PENDING	serialized forms object identity security
+M3ServiceLoader	java.base	java.util.ServiceLoader	-	MAPPED_PENDING	providers module layers and discovery
+M3Streams	java.base	java.util.stream;java.util.Spliterator	-	MAPPED_PENDING	ordering lazy evaluation parallel reduction
+M3Strings	java.base	java.lang.String	-	MAPPED_PENDING	M3 String composite identity and JDK UTF16 behavior
+M3System	java.base	java.lang.System	-	MAPPED_PENDING	system properties I/O GC and VM hooks
+M3Threads	java.base	java.lang.Thread	-	MAPPED_PENDING	interrupts structured concurrency and lifecycle
+M3Time	java.base	java.time	-	MAPPED_PENDING	zone rules time scales formatting and DST
+M3Unicode	java.base	java.lang.Character	-	MAPPED_PENDING	codepoints normalization surrogate handling
+M3Unsafe	jdk.unsupported	sun.misc.Unsafe	-	MAPPED_PENDING	access authorization atomic and layout behavior
+M3VarHandles	java.base	java.lang.invoke.VarHandle	-	MAPPED_PENDING	access modes alignment fences and JMM
+M3XML	java.xml	javax.xml	-	MAPPED_PENDING	parsing validation encoding security and namespaces
+M3Zip	java.base	java.util.zip;java.util.jar	-	MAPPED_PENDING	stream CRC compression zip traversal safety

@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors
+# SPDX-License-Identifier: Apache-2.0
+key	value
+schema	M3_JDK_MAIN_WORKFLOW_QUOTE_V1
+canonical_repository	hsoliwal/com.synexia
+canonical_recipe	com.synexia.m3.JdkMainWorkflowQuote20261027
+canonical_commit	2c2cd1981c67e190b3a57cf44f7e481910f99880
+canonical_pr	https://github.com/hsoliwal/com.synexia/pull/13705
+workflow	.github/workflows/main.yml
+before_git	c818ddbf7d226db761c126e993df1b3a1ccfb332
+before_sha256	13f63f4c372aae143a1d4a3f79ddb2d945497c14cb7c8ba70dd32b0509ae1ff6
+after_sha256	077630022be354c322f5c0be3d3f18b2f0d61f15f045195402803d220d34e4a7
+changed_line	359
+scope	display_name_single_quote_escape_only
+other_workflow_bytes	UNCHANGED
+actual_memory_java_junit_tests	5_PASS_0_FAILURE_0_SKIP_0_ABORT
+actual_named_recipe_outputs	1_EXACT
+zero_change_replays	2
+typed_refusal_tests	4
+yaml_preimage	ParserError_LINE359
+yaml_after	PARSES
+maven	NOT_RUN
+actionlint	NOT_RUN_NOT_LOCATED_IN_BOUNDED_RECORDS
+structured_review	PENDING
+hosted_workflow	NOT_RUN_AT_PUBLICATION
+production_Java_JNI_changed	FALSE
+full_M3_runtime_performance_admission	NOT_QUALIFIED

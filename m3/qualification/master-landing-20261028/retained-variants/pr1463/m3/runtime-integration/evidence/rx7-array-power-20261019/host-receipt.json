@@ -1,0 +1,60 @@
+{
+  "schema": "SYNEXIA_M3_RX7_ARRAY_POWER_HOST_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "0dfaa7e1987c49e4610b97eef03c7e4f96e75ecc",
+  "canonical_pr": 12413,
+  "canonical_task": "synexia-openrewrite-recipes/recipes/m3jdk21-rx7-array-power-20261019",
+  "receiver_parent": "70c30bcffa49c391d362944141c41ffe4f3cd940",
+  "proof_lane": "OFFLINE_EXACT_SOURCE_JAVA_REPLAY_AND_HOST_JNI",
+  "source_targets": [
+    {
+      "path": "m3/runtime-integration/check-m3rx7-v7-image-codec.sh",
+      "before_sha256": "019f99675b0fb423d724d0d4de69b436102e492ea9aaa10c82cde4fd50ea33c8",
+      "after_sha256": "1a861f26abc00a363552b305c6096e87c4bbd6e02105849ce8c91703e5c06326"
+    },
+    {
+      "path": "m3/runtime-integration/check-m3rx7-v7-receiver.sh",
+      "before_sha256": "016a6015e1e3093f4bbe6264ae6411e90c36c72a945514aba82efad609ca634b",
+      "after_sha256": "70d6e2ca2ca70b96547672616b77e3323f90c8701f80a54950c4589e6e3fd8f4"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3RX7.java",
+      "before_sha256": "3005574994ae3ea854f15469a40d68057b0eae709323a042285e463c2871ad98",
+      "after_sha256": "fa5ecdb1a0c28813397343ee62d4ef5924d57f2738bb786e6e3af6aa99289821"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3RX7Transitions.java",
+      "before_sha256": "0b513cce6893fb697e7784d2556a9081b5b391abf20008493f1ba35de7a0ff9e",
+      "after_sha256": "4242a99703fc40e351030603a8faffebe03fb5509ae615c63744ed1c88693018"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3RX7.c",
+      "before_sha256": "f2e92b0be3af9f97bc427620f5740a28431629a8e3c8f19fc5356dbaa03261b9",
+      "after_sha256": "7a4967472aad46ac83d2862a53a5a8ee463be6750eb7a0b4ebcff3be0c4db9c1"
+    }
+  ],
+  "component_test_sha256": "0c7732f3836b65060763b12c7671063f1f32337ed98545e4449a444ce70f2af8",
+  "offline_recipe_assertions": 214,
+  "source_changes_first_replay": 5,
+  "source_changes_second_replay": 0,
+  "baseline_native_assertions": 632868,
+  "intermediate_pass_assertions": [632868, 632868],
+  "candidate_native_assertions": 632868,
+  "candidate_java_assertions": 329862,
+  "candidate_xint_assertions": 329862,
+  "native_trace": "5107111528486731443",
+  "java_trace": "13618217112312079042",
+  "trace_is_correctness_authority": false,
+  "unchanged_callable_descriptors": true,
+  "unchanged_jni_symbols": true,
+  "java_release": "21.0.12.1+1-1-deb13u1-Debian",
+  "c_compiler": "GCC 14.2.0",
+  "host": "Linux x86_64",
+  "maven_openrewrite_junit": "NOT_RUN",
+  "source_built_sdk_reactor": "NOT_RUN",
+  "source_built_m3jdk21": "NOT_RUN",
+  "jtreg_production_libjava": "NOT_RUN",
+  "jit_gc_cds_platform_pressure": "NOT_RUN",
+  "collection_wrapper_requalification": "NOT_RUN",
+  "jdk_performance_claim": false
+}

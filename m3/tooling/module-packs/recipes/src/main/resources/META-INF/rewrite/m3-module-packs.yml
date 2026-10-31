@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.packs.RegisterModulePacks
+displayName: Register M3 optional module-pack tooling
+description: Exact source-bound MULTI_MODULE reactor registration; does not admit any runtime pack.
+recipeList:
+  - com.m3.rewrite.packs.M3RegisterModulePacksRecipe

@@ -1,0 +1,10 @@
+---
+type: "specs.openrewrite.org/v1beta/attribution"
+recipeName: "org.openrewrite.java.RecipeMarkupDemonstration"
+contributors:
+- name: "Jonathan Schneider"
+  email: "jkschneider@gmail.com"
+  lineCount: 43
+- name: "Patrick"
+  email: "patway99@gmail.com"
+  lineCount: 1

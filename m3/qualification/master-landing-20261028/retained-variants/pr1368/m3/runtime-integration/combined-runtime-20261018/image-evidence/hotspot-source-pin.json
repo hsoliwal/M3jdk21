@@ -1,0 +1,13 @@
+{
+  "schema": "M3_HOTSPOT_INCREMENTAL_CACHE_SOURCE_PIN_V1",
+  "status": "CONFIGURED_HOTSPOT_BUILD_RUNNING_NOT_IMAGE_PROOF",
+  "source_head": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "hotspot_git_tree": "afaa42082ed148944e52591d8ab43960890c8d39",
+  "source_root": "/workspace/scratch/f8287c652798/combine/runtime",
+  "build_root": "/dev/shm/m3-combined-image-f8287/build",
+  "created_utc": "2026-10-18T12:23:23Z",
+  "phase": "HOTSPOT_ONLY_CACHE_PREPARATION",
+  "final_java_base_and_image": "NOT_STARTED_WAITING_FOR_COMBINED_SOURCE",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0"
+}

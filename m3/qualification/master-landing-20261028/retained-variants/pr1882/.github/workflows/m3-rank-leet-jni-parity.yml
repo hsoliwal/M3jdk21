@@ -1,0 +1,63 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 rank JNI LeetCode 34 35 350 native parity
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3RankBatchLeetNativeContract.java'
+      - '.github/workflows/m3-rank-leet-jni-parity.yml'
+permissions:
+  contents: read
+jobs:
+  java-and-required-jni:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact owner sources and test candidate
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3RankBatchLeetNativeContract.java)" = 'f9779493ec50e8d396522b88026c9832e19f302a'
+      - name: Strict source compile and JNI generated headers
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/rank/classes" "$RUNNER_TEMP/rank/headers" "$RUNNER_TEMP/rank/native"
+          javac --release 21 -Xlint:all -Werror -h "$RUNNER_TEMP/rank/headers" -d "$RUNNER_TEMP/rank/classes" \
+            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/com/m3/collections/M3RankBatchLeetNativeContract.java
+          cc -std=c17 -O2 -Wall -Wextra -Werror -fPIC -shared -fsanitize=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
+            -o "$RUNNER_TEMP/rank/native/libm3rankbatch.so"
+      - name: Execute Java and real native-required JNI parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -Xcheck:jni -cp "$RUNNER_TEMP/rank/classes" \
+            com.m3.collections.M3RankBatchLeetNativeContract | tee "$RUNNER_TEMP/rank/java.txt"
+          java -Xcheck:jni -Djava.library.path="$RUNNER_TEMP/rank/native" \
+            -Dm3.collections.rank.native=true -Dm3.test.native.required=true \
+            -cp "$RUNNER_TEMP/rank/classes" \
+            com.m3.collections.M3RankBatchLeetNativeContract | tee "$RUNNER_TEMP/rank/jni.txt"
+          grep -q '^PASS M3_RANK_LEET_JNI checks=' "$RUNNER_TEMP/rank/java.txt"
+          grep -q '^PASS M3_RANK_LEET_JNI checks=' "$RUNNER_TEMP/rank/jni.txt"
+      - name: Preserve parity proof
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-rank-leet-jni-${{ github.run_id }}
+          path: ${{ runner.temp }}/rank/*.txt
+          if-no-files-found: warn

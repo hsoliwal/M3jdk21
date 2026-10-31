@@ -1,0 +1,640 @@
+{
+  "trial-01": [
+    {
+      "backend": "integrated",
+      "size": 65,
+      "stride_or_density": "all",
+      "baseline_cpu_ns_median": 2075.968,
+      "candidate_cpu_ns_median": 2636.381,
+      "candidate_over_baseline": 1.2699526196935598,
+      "baseline_allocation": 1200.0,
+      "candidate_allocation": 640.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 65,
+      "stride_or_density": "dense",
+      "baseline_cpu_ns_median": 1792.65,
+      "candidate_cpu_ns_median": 2113.066,
+      "candidate_over_baseline": 1.1787387387387385,
+      "baseline_allocation": 1040.0,
+      "candidate_allocation": 1040.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 65,
+      "stride_or_density": "sparse",
+      "baseline_cpu_ns_median": 348.593,
+      "candidate_cpu_ns_median": 621.499,
+      "candidate_over_baseline": 1.7828786005456219,
+      "baseline_allocation": 448.0,
+      "candidate_allocation": 448.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 1024,
+      "stride_or_density": "all",
+      "baseline_cpu_ns_median": 62929.338,
+      "candidate_cpu_ns_median": 51003.448,
+      "candidate_over_baseline": 0.810487598010327,
+      "baseline_allocation": 15800.0,
+      "candidate_allocation": 7576.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 1024,
+      "stride_or_density": "dense",
+      "baseline_cpu_ns_median": 37697.207,
+      "candidate_cpu_ns_median": 46227.297,
+      "candidate_over_baseline": 1.2262790980774783,
+      "baseline_allocation": 13240.0,
+      "candidate_allocation": 13240.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 1024,
+      "stride_or_density": "sparse",
+      "baseline_cpu_ns_median": 7900.066,
+      "candidate_cpu_ns_median": 8259.081,
+      "candidate_over_baseline": 1.045444557045473,
+      "baseline_allocation": 5128.0,
+      "candidate_allocation": 5128.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 65536,
+      "stride_or_density": "all",
+      "baseline_cpu_ns_median": 5019355.045,
+      "candidate_cpu_ns_median": 5668541.091,
+      "candidate_over_baseline": 1.1293365462653777,
+      "baseline_allocation": 1056264.0,
+      "candidate_allocation": 531944.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 65536,
+      "stride_or_density": "dense",
+      "baseline_cpu_ns_median": 4203038.045,
+      "candidate_cpu_ns_median": 4254263.273,
+      "candidate_over_baseline": 1.012187666980778,
+      "baseline_allocation": 892424.0,
+      "candidate_allocation": 892424.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 65536,
+      "stride_or_density": "sparse",
+      "baseline_cpu_ns_median": 508514.364,
+      "candidate_cpu_ns_median": 647269.818,
+      "candidate_over_baseline": 1.272864374780965,
+      "baseline_allocation": 318920.0,
+      "candidate_allocation": 318920.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 64,
+      "stride_or_density": 1,
+      "baseline_cpu_ns_median": 88.959,
+      "candidate_cpu_ns_median": 104.183,
+      "candidate_over_baseline": 1.17113501725514,
+      "baseline_allocation": 264.0,
+      "candidate_allocation": 264.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 64,
+      "stride_or_density": 2,
+      "baseline_cpu_ns_median": 80.015,
+      "candidate_cpu_ns_median": 85.699,
+      "candidate_over_baseline": 1.0710366806223832,
+      "baseline_allocation": 144.0,
+      "candidate_allocation": 144.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 64,
+      "stride_or_density": 64,
+      "baseline_cpu_ns_median": 22.459,
+      "candidate_cpu_ns_median": 30.427,
+      "candidate_over_baseline": 1.3547798210071686,
+      "baseline_allocation": 16.0,
+      "candidate_allocation": 16.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 4096,
+      "stride_or_density": 1,
+      "baseline_cpu_ns_median": 4273.582,
+      "candidate_cpu_ns_median": 2748.166,
+      "candidate_over_baseline": 0.6430591480402155,
+      "baseline_allocation": 16144.0,
+      "candidate_allocation": 16144.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 4096,
+      "stride_or_density": 2,
+      "baseline_cpu_ns_median": 2154.362,
+      "candidate_cpu_ns_median": 2862.436,
+      "candidate_over_baseline": 1.3286699264097677,
+      "baseline_allocation": 8080.0,
+      "candidate_allocation": 8080.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 4096,
+      "stride_or_density": 64,
+      "baseline_cpu_ns_median": 219.793,
+      "candidate_cpu_ns_median": 283.74,
+      "candidate_over_baseline": 1.2909419317266702,
+      "baseline_allocation": 272.0,
+      "candidate_allocation": 272.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 262144,
+      "stride_or_density": 1,
+      "baseline_cpu_ns_median": 284356.95,
+      "candidate_cpu_ns_median": 162552.838,
+      "candidate_over_baseline": 0.5716506594968049,
+      "baseline_allocation": 1048336.0,
+      "candidate_allocation": 1048336.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 262144,
+      "stride_or_density": 2,
+      "baseline_cpu_ns_median": 173808.5,
+      "candidate_cpu_ns_median": 162277.05,
+      "candidate_over_baseline": 0.933654280429323,
+      "baseline_allocation": 524176.0,
+      "candidate_allocation": 524176.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 262144,
+      "stride_or_density": 64,
+      "baseline_cpu_ns_median": 17057.263,
+      "candidate_cpu_ns_median": 18859.425,
+      "candidate_over_baseline": 1.105653644432873,
+      "baseline_allocation": 16400.0,
+      "candidate_allocation": 16400.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 64,
+      "stride_or_density": 1,
+      "baseline_cpu_ns_median": 277.054,
+      "candidate_cpu_ns_median": 283.286,
+      "candidate_over_baseline": 1.022493809871,
+      "baseline_allocation": 264.0,
+      "candidate_allocation": 264.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 64,
+      "stride_or_density": 2,
+      "baseline_cpu_ns_median": 182.9,
+      "candidate_cpu_ns_median": 210.618,
+      "candidate_over_baseline": 1.1515472936030617,
+      "baseline_allocation": 144.0,
+      "candidate_allocation": 144.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 64,
+      "stride_or_density": 64,
+      "baseline_cpu_ns_median": 120.349,
+      "candidate_cpu_ns_median": 148.363,
+      "candidate_over_baseline": 1.2327730184712793,
+      "baseline_allocation": 16.0,
+      "candidate_allocation": 16.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 4096,
+      "stride_or_density": 1,
+      "baseline_cpu_ns_median": 7244.266,
+      "candidate_cpu_ns_median": 3883.438,
+      "candidate_over_baseline": 0.5360705970763636,
+      "baseline_allocation": 16144.0,
+      "candidate_allocation": 16144.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 4096,
+      "stride_or_density": 2,
+      "baseline_cpu_ns_median": 3558.321,
+      "candidate_cpu_ns_median": 3547.812,
+      "candidate_over_baseline": 0.9970466408173967,
+      "baseline_allocation": 8080.0,
+      "candidate_allocation": 8080.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 4096,
+      "stride_or_density": 64,
+      "baseline_cpu_ns_median": 520.712,
+      "candidate_cpu_ns_median": 605.085,
+      "candidate_over_baseline": 1.1620339074190724,
+      "baseline_allocation": 272.0,
+      "candidate_allocation": 272.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 262144,
+      "stride_or_density": 1,
+      "baseline_cpu_ns_median": 422474.95,
+      "candidate_cpu_ns_median": 217993.288,
+      "candidate_over_baseline": 0.5159910380485281,
+      "baseline_allocation": 1048336.0,
+      "candidate_allocation": 1048336.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 262144,
+      "stride_or_density": 2,
+      "baseline_cpu_ns_median": 232329.15,
+      "candidate_cpu_ns_median": 215570.713,
+      "candidate_over_baseline": 0.9278676954656787,
+      "baseline_allocation": 524176.0,
+      "candidate_allocation": 524176.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 262144,
+      "stride_or_density": 64,
+      "baseline_cpu_ns_median": 31889.6,
+      "candidate_cpu_ns_median": 31455.7,
+      "candidate_over_baseline": 0.9863936832070644,
+      "baseline_allocation": 16400.0,
+      "candidate_allocation": 16400.0,
+      "samples_each": 15
+    }
+  ],
+  "trial-02": [
+    {
+      "backend": "integrated",
+      "size": 65,
+      "stride_or_density": "all",
+      "baseline_cpu_ns_median": 2187.878,
+      "candidate_cpu_ns_median": 1782.917,
+      "candidate_over_baseline": 0.8149069555066598,
+      "baseline_allocation": 1200.0,
+      "candidate_allocation": 640.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 65,
+      "stride_or_density": "dense",
+      "baseline_cpu_ns_median": 1604.389,
+      "candidate_cpu_ns_median": 1953.116,
+      "candidate_over_baseline": 1.2173581344673892,
+      "baseline_allocation": 1040.0,
+      "candidate_allocation": 1040.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 65,
+      "stride_or_density": "sparse",
+      "baseline_cpu_ns_median": 318.566,
+      "candidate_cpu_ns_median": 258.055,
+      "candidate_over_baseline": 0.8100519201672496,
+      "baseline_allocation": 448.0,
+      "candidate_allocation": 448.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 1024,
+      "stride_or_density": "all",
+      "baseline_cpu_ns_median": 69488.187,
+      "candidate_cpu_ns_median": 60331.598,
+      "candidate_over_baseline": 0.8682281205581028,
+      "baseline_allocation": 15800.0,
+      "candidate_allocation": 7576.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 1024,
+      "stride_or_density": "dense",
+      "baseline_cpu_ns_median": 39828.036,
+      "candidate_cpu_ns_median": 42292.437,
+      "candidate_over_baseline": 1.0618760362675177,
+      "baseline_allocation": 13240.0,
+      "candidate_allocation": 13240.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 1024,
+      "stride_or_density": "sparse",
+      "baseline_cpu_ns_median": 8025.477,
+      "candidate_cpu_ns_median": 6129.568,
+      "candidate_over_baseline": 0.7637636990299767,
+      "baseline_allocation": 5128.0,
+      "candidate_allocation": 5128.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 65536,
+      "stride_or_density": "all",
+      "baseline_cpu_ns_median": 5510940.455,
+      "candidate_cpu_ns_median": 5779307.364,
+      "candidate_over_baseline": 1.0486971164343672,
+      "baseline_allocation": 1056264.0,
+      "candidate_allocation": 531944.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 65536,
+      "stride_or_density": "dense",
+      "baseline_cpu_ns_median": 4311673.818,
+      "candidate_cpu_ns_median": 4309794.955,
+      "candidate_over_baseline": 0.9995642381406135,
+      "baseline_allocation": 892424.0,
+      "candidate_allocation": 892424.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "integrated",
+      "size": 65536,
+      "stride_or_density": "sparse",
+      "baseline_cpu_ns_median": 618807.227,
+      "candidate_cpu_ns_median": 658132.273,
+      "candidate_over_baseline": 1.0635497523043635,
+      "baseline_allocation": 318920.0,
+      "candidate_allocation": 318920.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 64,
+      "stride_or_density": 1,
+      "baseline_cpu_ns_median": 114.908,
+      "candidate_cpu_ns_median": 109.253,
+      "candidate_over_baseline": 0.9507867163295854,
+      "baseline_allocation": 264.0,
+      "candidate_allocation": 264.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 64,
+      "stride_or_density": 2,
+      "baseline_cpu_ns_median": 82.03,
+      "candidate_cpu_ns_median": 95.211,
+      "candidate_over_baseline": 1.1606851152017554,
+      "baseline_allocation": 144.0,
+      "candidate_allocation": 144.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 64,
+      "stride_or_density": 64,
+      "baseline_cpu_ns_median": 22.224,
+      "candidate_cpu_ns_median": 25.04,
+      "candidate_over_baseline": 1.1267098632109431,
+      "baseline_allocation": 16.0,
+      "candidate_allocation": 16.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 4096,
+      "stride_or_density": 1,
+      "baseline_cpu_ns_median": 4740.983,
+      "candidate_cpu_ns_median": 2080.334,
+      "candidate_over_baseline": 0.4387980298600522,
+      "baseline_allocation": 16144.0,
+      "candidate_allocation": 16144.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 4096,
+      "stride_or_density": 2,
+      "baseline_cpu_ns_median": 1948.465,
+      "candidate_cpu_ns_median": 2162.748,
+      "candidate_over_baseline": 1.109975288239717,
+      "baseline_allocation": 8080.0,
+      "candidate_allocation": 8080.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 4096,
+      "stride_or_density": 64,
+      "baseline_cpu_ns_median": 264.031,
+      "candidate_cpu_ns_median": 243.527,
+      "candidate_over_baseline": 0.9223424522120508,
+      "baseline_allocation": 272.0,
+      "candidate_allocation": 272.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 262144,
+      "stride_or_density": 1,
+      "baseline_cpu_ns_median": 275249.2,
+      "candidate_cpu_ns_median": 147363.463,
+      "candidate_over_baseline": 0.5353819847614452,
+      "baseline_allocation": 1048336.0,
+      "candidate_allocation": 1048336.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 262144,
+      "stride_or_density": 2,
+      "baseline_cpu_ns_median": 157151.338,
+      "candidate_cpu_ns_median": 153547.863,
+      "candidate_over_baseline": 0.9770700329640211,
+      "baseline_allocation": 524176.0,
+      "candidate_allocation": 524176.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "java",
+      "size": 262144,
+      "stride_or_density": 64,
+      "baseline_cpu_ns_median": 18079.013,
+      "candidate_cpu_ns_median": 14714.788,
+      "candidate_over_baseline": 0.8139154499197495,
+      "baseline_allocation": 16400.0,
+      "candidate_allocation": 16400.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 64,
+      "stride_or_density": 1,
+      "baseline_cpu_ns_median": 241.594,
+      "candidate_cpu_ns_median": 215.619,
+      "candidate_over_baseline": 0.8924849127047857,
+      "baseline_allocation": 264.0,
+      "candidate_allocation": 264.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 64,
+      "stride_or_density": 2,
+      "baseline_cpu_ns_median": 185.254,
+      "candidate_cpu_ns_median": 183.547,
+      "candidate_over_baseline": 0.9907856240620986,
+      "baseline_allocation": 144.0,
+      "candidate_allocation": 144.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 64,
+      "stride_or_density": 64,
+      "baseline_cpu_ns_median": 126.709,
+      "candidate_cpu_ns_median": 142.963,
+      "candidate_over_baseline": 1.1282781807132878,
+      "baseline_allocation": 16.0,
+      "candidate_allocation": 16.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 4096,
+      "stride_or_density": 1,
+      "baseline_cpu_ns_median": 6249.35,
+      "candidate_cpu_ns_median": 2734.354,
+      "candidate_over_baseline": 0.43754214438301575,
+      "baseline_allocation": 16144.0,
+      "candidate_allocation": 16144.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 4096,
+      "stride_or_density": 2,
+      "baseline_cpu_ns_median": 2902.42,
+      "candidate_cpu_ns_median": 3234.023,
+      "candidate_over_baseline": 1.1142505219782113,
+      "baseline_allocation": 8080.0,
+      "candidate_allocation": 8080.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 4096,
+      "stride_or_density": 64,
+      "baseline_cpu_ns_median": 475.585,
+      "candidate_cpu_ns_median": 587.781,
+      "candidate_over_baseline": 1.2359115615505114,
+      "baseline_allocation": 272.0,
+      "candidate_allocation": 272.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 262144,
+      "stride_or_density": 1,
+      "baseline_cpu_ns_median": 408576.338,
+      "candidate_cpu_ns_median": 187692.013,
+      "candidate_over_baseline": 0.4593805258492478,
+      "baseline_allocation": 1048336.0,
+      "candidate_allocation": 1048336.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 262144,
+      "stride_or_density": 2,
+      "baseline_cpu_ns_median": 232288.9,
+      "candidate_cpu_ns_median": 241655.838,
+      "candidate_over_baseline": 1.0403245183045768,
+      "baseline_allocation": 524176.0,
+      "candidate_allocation": 524176.0,
+      "samples_each": 15
+    },
+    {
+      "backend": "native",
+      "size": 262144,
+      "stride_or_density": 64,
+      "baseline_cpu_ns_median": 32369.925,
+      "candidate_cpu_ns_median": 30677.425,
+      "candidate_over_baseline": 0.9477138115086766,
+      "baseline_allocation": 16400.0,
+      "candidate_allocation": 16400.0,
+      "samples_each": 15
+    }
+  ],
+  "focused": [
+    {
+      "size": 65,
+      "density": "dense",
+      "values": {
+        "baseline": {
+          "cpu_ns_median": 1485.57,
+          "cpu_ns_min": 802.818,
+          "cpu_ns_max": 4384.959,
+          "samples": 15
+        },
+        "snapshot": {
+          "cpu_ns_median": 1229.188,
+          "cpu_ns_min": 906.817,
+          "cpu_ns_max": 3535.747,
+          "samples": 15
+        }
+      },
+      "candidate_over_baseline": 0.8274184319823369
+    },
+    {
+      "size": 65536,
+      "density": "all",
+      "values": {
+        "baseline": {
+          "cpu_ns_median": 3858030.182,
+          "cpu_ns_min": 2938171.636,
+          "cpu_ns_max": 5534714.409,
+          "samples": 15
+        },
+        "snapshot": {
+          "cpu_ns_median": 3901972.455,
+          "cpu_ns_min": 3530169.636,
+          "cpu_ns_max": 8378184.727,
+          "samples": 15
+        }
+      },
+      "candidate_over_baseline": 1.0113898209518983
+    }
+  ]
+}

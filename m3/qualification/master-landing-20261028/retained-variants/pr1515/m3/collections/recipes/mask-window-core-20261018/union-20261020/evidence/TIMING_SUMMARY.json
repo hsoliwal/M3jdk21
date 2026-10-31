@@ -1,0 +1,42 @@
+{
+  "fixture": "262144 prepared ints; 32 warmups; 2 forks/variant, 5 samples of20 calls/fork; SerialGC128MiB; reverse order fork2",
+  "sameResults": true,
+  "rows": [
+    {
+      "density": "singleton",
+      "baselineMedianCpuNs20Calls": 10210247.5,
+      "candidateMedianCpuNs20Calls": 8346393.5,
+      "ratio": 1.2233125001834624,
+      "samplesEach": 10
+    },
+    {
+      "density": "sparse",
+      "baselineMedianCpuNs20Calls": 11775579.0,
+      "candidateMedianCpuNs20Calls": 10202816.5,
+      "ratio": 1.1541498369592358,
+      "samplesEach": 10
+    },
+    {
+      "density": "half",
+      "baselineMedianCpuNs20Calls": 14921459.5,
+      "candidateMedianCpuNs20Calls": 17427316.0,
+      "ratio": 0.8562109908376023,
+      "samplesEach": 10
+    },
+    {
+      "density": "all",
+      "baselineMedianCpuNs20Calls": 19056207.5,
+      "candidateMedianCpuNs20Calls": 14291125.0,
+      "ratio": 1.3334294885812,
+      "samplesEach": 10
+    },
+    {
+      "density": "zero",
+      "baselineMedianCpuNs20Calls": 2739367.5,
+      "candidateMedianCpuNs20Calls": 2765386.5,
+      "ratio": 0.9905911886096211,
+      "samplesEach": 10
+    }
+  ],
+  "caution": "local fixture, not JMH or universal speedup; raw cold/GC/host effects not isolated"
+}

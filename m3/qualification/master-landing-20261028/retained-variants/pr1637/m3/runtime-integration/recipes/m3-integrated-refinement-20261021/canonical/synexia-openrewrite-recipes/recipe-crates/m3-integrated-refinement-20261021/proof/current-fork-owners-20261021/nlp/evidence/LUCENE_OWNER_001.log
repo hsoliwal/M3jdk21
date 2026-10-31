@@ -1,0 +1,37 @@
+["/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3", "-B", "/workspace/scratch/206049dfb270/nlp-work/forks/lucene/.m3/current-jmods/build.py", "--source", "/workspace/scratch/206049dfb270/nlp-work/forks/lucene", "--jdk-home", "/tmp/m3-build-tools/jdk-21.0.12.1+1", "--packager", "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/jmod-recipes/tools/jmod_pack.py", "--dependency-dir", "/workspace/scratch/206049dfb270/nlp-work/dependencies/lucene", "--out", "/workspace/scratch/206049dfb270/nlp-work/lucene-owner-001", "--recipe-runner", "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/crates/m3-nlp-search/current-forks-20261018/run_recipe.py", "--recipe-resources", "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/vendor/synexia/synexia-openrewrite-recipes/src/main/resources", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/hppc.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/io.github.classgraph.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/jcommander.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/libsvm.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.apache.commons.xml.secure.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.apache.opennlp.morfologik.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.apache.opennlp.spellcheck.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.apache.opennlp.tools.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.apache.opennlp.uima.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.carrot2.morfologik.fsa.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.carrot2.morfologik.fsa_builders.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.carrot2.morfologik.stemming.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.carrot2.morfologik.tools.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.slf4j.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/org.slf4j.simple.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/uimaj.core.jar", "--opennlp-module", "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001/jars/zlibsvm.core.jar"]
+COMPILED org.apache.lucene.core 1234 sources
+COMPILED org.apache.lucene.analysis.common 582 sources
+COMPILED org.apache.lucene.backward_codecs 129 sources
+COMPILED org.apache.lucene.codecs 95 sources
+COMPILED org.apache.lucene.facet 101 sources
+COMPILED org.apache.lucene.join 33 sources
+COMPILED org.apache.lucene.memory 3 sources
+COMPILED org.apache.lucene.misc 42 sources
+COMPILED org.apache.lucene.queries 165 sources
+COMPILED org.apache.lucene.replicator 13 sources
+COMPILED org.apache.lucene.spatial3d 106 sources
+COMPILED org.apache.lucene.analysis.icu 26 sources
+COMPILED org.apache.lucene.analysis.kuromoji 59 sources
+COMPILED org.apache.lucene.analysis.morfologik 9 sources
+COMPILED org.apache.lucene.analysis.nori 42 sources
+COMPILED org.apache.lucene.analysis.opennlp 20 sources
+COMPILED org.apache.lucene.analysis.phonetic 10 sources
+COMPILED org.apache.lucene.analysis.smartcn 21 sources
+COMPILED org.apache.lucene.analysis.stempel 22 sources
+COMPILED org.apache.lucene.expressions 20 sources
+COMPILED org.apache.lucene.grouping 32 sources
+COMPILED org.apache.lucene.highlighter 95 sources
+COMPILED org.apache.lucene.monitor 41 sources
+COMPILED org.apache.lucene.sandbox 138 sources
+COMPILED org.apache.lucene.spatial_extras 76 sources
+COMPILED org.apache.lucene.suggest 80 sources
+COMPILED org.apache.lucene.classification 19 sources
+COMPILED org.apache.lucene.queryparser 250 sources
+COMPILED org.apache.lucene.luke 163 sources
+PASS module-path Jdk21ProviderCheck
+PASS module-path Jdk21ExpressionsCheck
+PASS module-path M3LuceneJmodCheck
+PASS linked-image Jdk21ProviderCheck
+PASS linked-image Jdk21ExpressionsCheck
+PASS linked-image M3LuceneJmodCheck
+PASS 29 Lucene modules; 59 named modules; /workspace/scratch/206049dfb270/nlp-work/lucene-owner-001/JMOD_IMAGE.tsv

@@ -1,0 +1,86 @@
+{
+  "schema": "M3_NATIVE_PRODUCT_RECEIVING_20261022_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "880d6cca109a9c4bb8f9eb0204138915763aba78",
+  "canonical_dataset": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/datasets/viewport-native-receive-20261022",
+  "recipe": "com.synexia.m3jdk.ViewportNativeReceive20261022",
+  "engine_git_blob": "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+  "product_parent": "7a8a502105715eb2b9d33703634f373b08a69419",
+  "target": "m3/collections/src/main/c/m3maskviewport.c",
+  "before_sha256": "53ee3427813810010a5e2eae31fd79e53ed53915d1bda5cdebdfd78225b3cf4d",
+  "after_sha256": "9a6c1f305ad3cb00068f846bdd0d85e8c1201bde75db2a77ad3b12a1900350e1",
+  "after_git_blob": "737fc9cd45a6bffcf80b101dc4053c232f531dc8",
+  "sdk": {
+    "tests": 7,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "names": [
+      "exactSourceAndEngineSeals",
+      "namedReplayOrderAndFixedPoint",
+      "driftMissingDuplicateRefuse",
+      "postScanMutationRefuses",
+      "corruptTemplateRefusesThenRecovers",
+      "retainActualSdkResult",
+      "receiveExactProductPreimageAndFixedPoint"
+    ],
+    "receiving_changes": 1,
+    "fixed_point_changes": 0,
+    "received_result_compiled_and_run": true
+  },
+  "execution": {
+    "canonical_input_transport": "matched published Git blob identities; one failed local reconstruction preserved before verification",
+    "initial_qualifier": "interrupted by outer 180-second timeout during baseline interpreted Java test",
+    "resume": "only incomplete test and remaining ordered commands; initial logs retained",
+    "resumed_host": "PASS",
+    "separate_actual_product_owner_check_exit": 0,
+    "source_input_files_unchanged": 106,
+    "admission_refusal_cases": 4,
+    "complete_uninterrupted_qualifier_exit_claimed": false
+  },
+  "observations": {
+    "product_java": "M3_MASK_VIEWPORT_PAGE_PASS checks=121831 existingJni=false",
+    "product_jni": "M3_MASK_VIEWPORT_PAGE_PASS checks=163640 existingJni=true",
+    "page_java": "M3_NATIVE_PAGE_JAVA checks=14514 digest=52b77c772971ea98",
+    "page_jni": "M3_NATIVE_PAGE_JNI checks=29027 digest=d4a2bd4306d04227",
+    "viewport_java": "M3_VIEWPORT_PROJECTION_PASS checks=72591 native=false digest=6c8c89cc84cae62c",
+    "viewport_jni": "M3_VIEWPORT_PROJECTION_PASS checks=108891 native=true digest=b02020cc25dc5c63",
+    "sort_java": "M3_INDEX_SORT_VIEWPORT_JAVA checks=36424 digest=942cc04fc49a2249",
+    "sort_jni": "M3_INDEX_SORT_VIEWPORT_JNI checks=37384 digest=39a505907985bcf3",
+    "allocator": "PAGE_BUDGET_PASS checks=2391272 cases=7983",
+    "legacy": "M3_NATIVE_PAGE_LEGACY_ABI_PASS checks=8"
+  },
+  "modes": [
+    "mixed",
+    "interpreter"
+  ],
+  "controls": [
+    "Java21 Xlint/Werror",
+    "GCC and Clang C17 syntax diagnostics",
+    "real JVM Xcheck:jni",
+    "fatal UBSan",
+    "ASan/UBSan allocator fixture with leak detection",
+    "64MiB SerialGC"
+  ],
+  "runtime_java_changed": false,
+  "original_product_java_blobs": {
+    "M3MaskViewportKernel.java": "5966bffacc730b3ef7102d615a2331a42ae4a22b",
+    "M3MaskViewportNative.java": "ba569ea957d3f02a41e1d4a6ff700737ad7d791c",
+    "M3MaskViewportPageContract.java": "bff901c3674649d1ad6eacfb8bd5ba1ecc76816d"
+  },
+  "native_project_callable_from_original_java": true,
+  "native_page_wired_into_product_java": false,
+  "raw_execution_log_entries": 133,
+  "raw_execution_logs_sha256": "d210a4e8f8ac6556ec5b68eff3916047e345dccb3fc8ad7ae90e9ebba8daa29b",
+  "raw_execution_logs_location": "RAW_EXECUTION_LOGS.json in accompanying evidence archive",
+  "historical_receipts_preserved": true,
+  "pending": [
+    "full nine-target Java LST and receiver (Java21 parser absent from offline cache)",
+    "complete collection and provider suites",
+    "source-built installed JDK/HotSpot/jtreg",
+    "SWT/Nebula/GEF/RWT and GPU/theme/language/IME/accessibility",
+    "cross-platform, concurrency, throughput, retained-heap and native/process resources"
+  ],
+  "coverage_note": "finite repeated corpora overlap; no additive independent coverage or unrestricted equivalence",
+  "full_program_complete": false
+}

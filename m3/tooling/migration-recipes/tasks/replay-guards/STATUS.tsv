@@ -1,0 +1,9 @@
+gate	status	detail
+baseline_path_guard	FAIL_REPRODUCED	Original test admitted ../escape.java
+pair_junit	PASS	5 actual tests; 0 failures/errors/skips
+kit_recipe_junit	PASS	3 actual tests; exact before/after and no-op second run
+parent_a3_junit	PASS	8 actual tests; combined selected run total 16
+workflow_materialization	PASS	Actual named OpenRewrite recipe; fixed point; original remained unchanged
+hosted_workflow	PENDING	Trigger wiring is not execution proof
+full_current_reactor	PENDING	Archive ancestor is not complete master
+whole_jdk	OPEN	Remaining String/JNI, fork and compatible-backport obligations retained

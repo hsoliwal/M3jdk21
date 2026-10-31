@@ -1,0 +1,110 @@
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package com.synexia.rewrite;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import org.junit.jupiter.api.Test;
+import org.openrewrite.InMemoryExecutionContext;
+import org.openrewrite.Parser;
+import org.openrewrite.SourceFile;
+import org.openrewrite.internal.InMemoryLargeSourceSet;
+import org.openrewrite.java.JavaParser;
+
+/** Real OpenRewrite SDK application, byte-exact sources, fixed point and drift refusals. */
+final class M3NativeBagRankIndex20261018RecipeTest {
+    private static final String CRATE = "m3-native-bag-rank-index-20261018";
+    private static final String RESOURCE = "/com/synexia/rewrite/hash-pinned-java/" + CRATE + "/";
+    private static final List<String> PATHS = List.of(
+            "m3/collections/src/main/java/com/m3/collections/M3BagRankIndex.java",
+            "m3/collections/src/test/java/com/m3/collections/M3BagRankIndexSelfTest.java",
+            "m3/collections/src/test/java/com/m3/collections/M3BagRankIndexTest.java");
+    private static final List<String> NAMES = List.of(
+            "M3BagRankIndex.java.txt",
+            "M3BagRankIndexSelfTest.java.txt",
+            "M3BagRankIndexTest.java.txt");
+
+    private static String text(String name) throws Exception {
+        try (var input = M3NativeBagRankIndex20261018RecipeTest.class
+                .getResourceAsStream(RESOURCE + name)) {
+            assertNotNull(input, name);
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+        }
+    }
+    private static InMemoryExecutionContext context() {
+        return new InMemoryExecutionContext(error -> { throw new AssertionError(error); });
+    }
+    private static Map<String, SourceFile> apply(List<SourceFile> sources) {
+        var changes = new M3HashPinnedJavaSnapshotRecipe(CRATE)
+                .run(new InMemoryLargeSourceSet(sources), context(), 1)
+                .getChangeset().getAllResults();
+        var result = new TreeMap<String, SourceFile>();
+        for (var change : changes) {
+            var after = change.getAfter();
+            assertNotNull(after);
+            assertTrue(result.put(after.getSourcePath().toString().replace('\\', '/'), after) == null);
+        }
+        return result;
+    }
+    @Test void threeReviewedJavaSourcesAreEmittedExactly() throws Exception {
+        var recipe = new M3HashPinnedJavaSnapshotRecipe(CRATE);
+        assertEquals(PATHS, recipe.targetPaths());
+        var generated = apply(List.of());
+        assertEquals(3, generated.size());
+        for (int i = 0; i < PATHS.size(); i++) {
+            var unit = generated.get(PATHS.get(i));
+            assertNotNull(unit);
+            String expected = text(NAMES.get(i));
+            assertEquals(expected, unit.printAll());
+            // Exact source digest is the same source seal consumed by the recipe.
+            String digest = HexFormat.of().formatHex(
+                    MessageDigest.getInstance("SHA-256")
+                            .digest(expected.getBytes(StandardCharsets.UTF_8)));
+            assertEquals(List.of(
+                    "a8686254c2439bcdd1472bdddbefd5bfa7c4b2efce24aa89b6c1453e208515a5",
+                    "9f79cf7605c30bd1766878312af6ac2e880d2faf03f790c579146aee951704ec",
+                    "58709c47d26fb7819d314fd2793caf85bd24edf84242f7db27a774b058abe827"
+            ).get(i), digest);
+        }
+        assertTrue(apply(List.copyOf(generated.values())).isEmpty());
+    }
+    @Test void everyPartialOrderReachesFixedPoint() {
+        var all = new ArrayList<>(apply(List.of()).values());
+        assertEquals(3, all.size());
+        for (int mask = 0; mask < 8; mask++) for (boolean reverse : List.of(false, true)) {
+            var input = new ArrayList<SourceFile>();
+            for (int i = 0; i < all.size(); i++) if ((mask & (1 << i)) != 0) input.add(all.get(i));
+            if (reverse) Collections.reverse(input);
+            var emitted = apply(input);
+            assertEquals(3 - Integer.bitCount(mask), emitted.size());
+            input.addAll(emitted.values());
+            assertTrue(apply(input).isEmpty());
+        }
+    }
+    @Test void foreignExistingImplementationRefuses() {
+        var parsed = JavaParser.fromJavaVersion().build().parseInputs(
+                List.of(Parser.Input.fromString(Path.of(PATHS.getFirst()),
+                        "package com.m3.collections; public final class M3BagRankIndex {}")),
+                null, context()).toList();
+        assertEquals(1, parsed.size());
+        assertThrows(RuntimeException.class, () -> apply(parsed));
+    }
+    @Test void duplicateOwnershipRefuses() {
+        var first = apply(List.of()).values().iterator().next();
+        assertThrows(RuntimeException.class, () -> apply(List.of(first, first)));
+    }
+}

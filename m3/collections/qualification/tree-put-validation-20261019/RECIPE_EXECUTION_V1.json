@@ -1,0 +1,19 @@
+{
+  "schema": "m3-exact-file-recipe-proof/v1",
+  "status": "PASS",
+  "preimageSha256": "21dc9a2eed607c55b1ff4d49ffef5e19b3bac43b591b62e13191791cabbc3b41",
+  "postimageSha256": "9c767668c925581799dc97f20e63fce0be19e8fec4c4ec59b1ce257a6c969f4e",
+  "applyExact": true,
+  "fixedPoint": true,
+  "inversion": true,
+  "refusedMutatedPreimages": [
+    "d0d2543342d198abeaee00c804448b40de36ea48f9bc197d45b5296bff45e08c",
+    "0b90efa3a1058b3dea4f332dd327aed1b1a93bdb7511f74e062ad17302e0f3a2",
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  ],
+  "sourceFileCount": 1,
+  "sourceUnchangedByProof": true,
+  "controllerSha256": "d9d6e3c41eb21f1cfa8e90f326f7a571eb5ecf70986cf382a6284543572c9946",
+  "donorController": "prove_tree_lookup_recipe_v1.py",
+  "implementationReplacementsActuallyExecuted": true
+}

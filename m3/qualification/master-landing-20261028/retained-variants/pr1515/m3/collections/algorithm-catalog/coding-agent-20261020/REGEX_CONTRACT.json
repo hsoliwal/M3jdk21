@@ -1,0 +1,53 @@
+{
+  "schema": "synexia.coding-agent.regex-contract.v1",
+  "engine": "Java java.util.regex.Pattern and Matcher from pinned existing Recipe",
+  "bindings": [
+    "org.openrewrite.text.Find",
+    "org.openrewrite.text.FindAndReplace",
+    "org.openrewrite.java.search.FindComments"
+  ],
+  "options_source": "RECIPE_BINDINGS.json",
+  "replacement": "Regex uses Matcher.replaceAll capture syntax. Escape dollars/backslashes as required; literal mode does not prove arbitrary replacement quoting.",
+  "required_discriminators": [
+    "no match",
+    "one and repeated matches",
+    "begin/end anchors",
+    "CRLF and LF",
+    "empty input",
+    "zero-length matches",
+    "capture/named groups",
+    "literal dollars and backslashes",
+    "non-ASCII and surrogate boundaries",
+    "invalid pattern",
+    "adversarial backtracking under owned deadline",
+    "unrelated paths",
+    "fresh-parse fixed point"
+  ],
+  "scope": "Resolve exact file/folder source paths; no unrestricted default. filePattern semicolon OR is specific to these text recipes.",
+  "ordering": "Text Find and FindAndReplace convert matching source to PlainText; separate AST editing and text phases with an independently checked reparse.",
+  "known_hold": "FindMultiselect regexOptions lowercases then compares mixed-case tokens; no admitted use until corrected and proved.",
+  "performance": "No intrinsic regex timeout in the source; outer owned job deadline and resource caps remain required.",
+  "required_explicit_choices_by_binding": {
+    "org.openrewrite.text.Find": [
+      "find",
+      "regex",
+      "caseSensitive",
+      "multiline",
+      "dotAll",
+      "filePattern"
+    ],
+    "org.openrewrite.text.FindAndReplace": [
+      "find",
+      "replace",
+      "regex",
+      "caseSensitive",
+      "multiline",
+      "dotAll",
+      "filePattern"
+    ],
+    "org.openrewrite.java.search.FindComments": [
+      "patterns:List<String>"
+    ]
+  },
+  "FindComments_scope": "Only patterns is an actual option. Use a qualified outer ordinary edit-visitor file precondition; no filePattern or boolean flags are accepted by FindComments."
+}

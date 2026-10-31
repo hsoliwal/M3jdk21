@@ -1,0 +1,6 @@
+module	jar	disposition
+jdk.m3fs	/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/fs/m3-fs-0.1.0-SNAPSHOT.jar	MODULAR_JAR
+org.apache.commons.codec	/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/commons-codec/commons-codec/1.19.0/commons-codec-1.19.0.jar	MODULAR_JAR
+org.apache.commons.compress	/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apache/commons/commons-compress/1.28.0/commons-compress-1.28.0.jar	MODULAR_JAR
+org.apache.commons.io	/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/commons-io/commons-io/2.21.0/commons-io-2.21.0.jar	MODULAR_JAR
+org.apache.commons.lang3	/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/apache/commons/commons-lang3/3.18.0/commons-lang3-3.18.0.jar	MODULAR_JAR

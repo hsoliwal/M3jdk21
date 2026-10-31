@@ -1,0 +1,60 @@
+{
+  "schema": "M3_OPTIONAL_MODULE_MAPPING_V1",
+  "product": "M3JDK21 one integrated Java21 / HotSpot / JNI SDK",
+  "module": "com.m3.collections",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "canonical_recipe": "com.synexia.m3.M3IndexedHistogramNative20261021",
+  "recipe_repository": "hsoliwal/com.synexia",
+  "recipe_branch": "chatgpt/m3jdk21-indexed-histogram-native-20261021",
+  "canonical_recipe_revision": "05ac14e4b8e1037d4d2423538cdbcd05577d2f62",
+  "recipe_pr": 12702,
+  "target_base": "master",
+  "receiving_sequence_advanced": false,
+  "mappings": [
+    {
+      "source": "existing parent-owned int[] offsets and byte[] state masks",
+      "target": "com.m3.collections.M3StateMaskHistogram#indexed",
+      "role": "preserve public Java API; prefer capability-verified direct JNI index gather",
+      "status": "SOURCE_RECEIVED_PENDING_IMAGE"
+    },
+    {
+      "source": "existing m3_collections_statehist native library",
+      "target": "m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
+      "role": "additive fixed-stack direct indexed gather, no JNI critical heap pin",
+      "status": "SOURCE_RECEIVED_PENDING_NATIVE"
+    },
+    {
+      "source": "old tallyNative byte[] aligned JNI ABI",
+      "target": "M3StateMaskHistogram.tallyNative",
+      "role": "retained exact Java/JNI signature and older-library fallback",
+      "status": "PRESERVED"
+    },
+    {
+      "source": "LeetCode/HackerRank/GeeksforGeeks algorithm categories",
+      "target": "Synexia ALGORITHM_CATALOGUE.tsv",
+      "role": "comparison taxonomy only, no copied contest implementation",
+      "status": "REVIEWED_REFERENCE_ONLY"
+    },
+    {
+      "source": "JDK/Guava/Eclipse Collections/Apache Commons/Spring filtered and sorted wrappers",
+      "target": null,
+      "role": "unchanged by this atom; preserve owner-specific public/null/order/concurrency/backed-view contracts",
+      "status": "SEPARATE_CONTRACT_GATES"
+    }
+  ],
+  "proof": {
+    "source_preimages_match": true,
+    "source_postimages_match": "readback required",
+    "isolated_java21_c17_jni": {
+      "status": "PASS",
+      "cases": 5003,
+      "environment": "Java21 + gcc C17 + -Xcheck:jni, API-shaped class"
+    },
+    "canonical_maven_openrewrite": "PENDING",
+    "production_java21_junit": "PENDING",
+    "production_native_jni_generated_headers": "PENDING",
+    "full_openjdk_hotspot_jtreg": "PENDING",
+    "cross_platform_android": "PENDING",
+    "resource_benchmarks": "PENDING"
+  }
+}

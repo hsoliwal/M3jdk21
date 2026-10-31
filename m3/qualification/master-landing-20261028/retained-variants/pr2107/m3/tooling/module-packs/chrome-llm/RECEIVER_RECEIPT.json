@@ -1,0 +1,333 @@
+{
+  "schema": "M3_CHROME_SUMMARY_RECEIVER_V1",
+  "module": "jdk.m3.llm",
+  "source_ref": "SOURCE_REF.json",
+  "recipe_execution": {
+    "path": "synexia-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029/qualification/SDK_RESULTS.tsv",
+    "sha256": "421d2564576fcff4841c35b7f0b96fc85f9e225b0021c1bda77a871303b63a9c",
+    "files": 63,
+    "inputs_path": "synexia-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029/qualification/SDK_INPUTS.tsv",
+    "inputs_sha256": "703ae259a33094f14583760e39e1b6688faa7a10a63e2082920d14637fa33f0b"
+  },
+  "target_base": "4bd7f5b2b1414d1f607ceab28a498e3889020701",
+  "publication": "SOURCE_DRAFT_PUBLISHED_TARGET_DRAFT_PENDING",
+  "remote_branches_created": true,
+  "remote_pull_requests_created": true,
+  "code_and_build_files": 63,
+  "java_files": 43,
+  "runtime_java_owners": 34,
+  "gates": {
+    "canonical_openrewrite_sdk": "PASS_6_TESTS_NO_SKIPS",
+    "exact_generated_bytes": "PASS_63_FILES",
+    "strict_java21_lint_compile": "PASS",
+    "summary_python_oracle": "PASS_28_CASES_1553_CHECKS",
+    "document": "PASS_107_CHECKS",
+    "progress_facade": "PASS_150_CHECKS",
+    "chrome_summary": "PASS_142_CHECKS",
+    "java_browser_protocol": "PASS_180_CHECKS",
+    "java_javascript_actual_wire_fixture": "PASS_183_CHECKS",
+    "browser_resource_mocks": "PASS_86_TESTS_ZERO_SKIPS",
+    "facets_java": "PASS_60056_CHECKS",
+    "facets_exact_java": "PASS_804_CHECKS",
+    "facets_jni": "PASS_60057_CHECKS",
+    "facets_exact_jni": "PASS_804_CHECKS",
+    "jni_symbols": "PASS_2_EXACT_SYMBOLS",
+    "linked_image_installed_jni": "PASS_WITH_INSTALLED_IMAGE_SHA256",
+    "mapped_public_surface": "PASS_76_TYPES_552_MEMBERS_43_CONSTRUCTORS",
+    "naming_queue": "PASS_4_PREEXISTING_ENTRIES",
+    "local_named_module_jar_jmod_jlink": "PASS",
+    "full_m3jdk_product_build_jtreg": "NOT_RUN",
+    "real_chrome_model_inference": "NOT_RUN",
+    "cross_platform_native": "NOT_RUN",
+    "performance_comparison": "NOT_RUN_NO_SPEEDUP_CLAIM",
+    "synexia_full_provenance": "BLOCKED_BY_PINNED_BASELINE_LEDGER_DEFECTS"
+  },
+  "image_qualification": {
+    "mode": "PATCHED_STOCK_FIXTURE",
+    "progress_fixture": "Exact pinned M3 ProgressMonitor and ProgressMonitors compiled as test-only external java.base patch; never installed into linked image.",
+    "jdk_release_sha256": "97b8b1dd371b52855704fea5875a78cf3289d06b7f51c2155c43acadb9ff6f6c",
+    "jar_sha256": "ee8933776c48f93144c06ac3ba8fcbec1d4f8979a0437ede3d2ba139008d50db",
+    "jmod_sha256": "64d1855c352a5dfc3b53aae4015344bbd724cb1daf41dc27fd6e36c862f77eb5",
+    "receipt_path": "synexia-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029/qualification/current-image/RECEIPT.json",
+    "receipt_sha256": "d466c29417ff29599b8eac64d8db6527723c4e4b5169fa3f5c1402df1783af73",
+    "extra_runtime_receipt_path": "synexia-openrewrite-recipes/recipe-crates/m3-chrome-summary-20261029/qualification/current-image/EXTRA_IMAGE_TESTS.json",
+    "extra_runtime_receipt_sha256": "4f1664d1ae1fce2ac3aca2e4643af43ae917150b90e89b0431e0febe83aec5d4"
+  },
+  "native_library": {
+    "input_sha256": "d2cb5e8e3a26b5d1d22be9602785a32b02e53989c1cefe2f603a71b10c88ce77",
+    "installed_sha256": "1a38afcdd8c734a62a63a379ff4ed46958e6b3bea1b6917f7be256ddf47197e1",
+    "reason_distinct": "jlink --strip-debug transforms the installed native binary; loader pins the measured installed image hash."
+  },
+  "runtime_dependencies": [
+    "java.base"
+  ],
+  "exports": [
+    "jdk.m3.llm.chrome",
+    "jdk.m3.llm.summary",
+    "jdk.m3.llm.facets",
+    "jdk.m3.llm.document"
+  ],
+  "candidate_authority": "MODEL_CANDIDATE_ONLY_UNADMITTED",
+  "global_receiving_sequence_advanced": false,
+  "core_postimages": [
+    {
+      "path": "m3/docs/name-mapping.d/m3-chrome-summary-20261029.json",
+      "sha256": "cbea5486b0b51a5241c905a7ba6d5482ca78be54759aede57a36992571ef8d07"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "sha256": "372beeabcf42048aa0a15b08f331ef41afabe47e79155d8d88bfc112748019f4"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/README.md",
+      "sha256": "8dab7364d4f28b78f763c4966615673fb6cca63cbeb9a5d7894a21c2878a15fe"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/build.py",
+      "sha256": "cb814e6d5f6b884191d6659e803f97d7906929f067cbc0a75bc2f405e883cc1b"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/legal/LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/legal/NOTICE.txt",
+      "sha256": "6f8f4f8793cecbf934c39e9c1304ca21ad7bb5219b73859b2ee7192ba7fa85b7"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/legal/UNICODE_LICENSE.txt",
+      "sha256": "bfb121a2aaa8fa3d77f3429ae2aaed879cc53cacad6fbe42a2513043b80fcb9a"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/pom.xml",
+      "sha256": "46612426224225525f020228c22f8952182ca2684123a21bf1091d589c2e4ce5"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/CheckpointRepository.java",
+      "sha256": "b07f6656e9813ca051f1ee71ee2fb2be900aa207441a5103f7618f3e9cb0005e"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/ChromeBrowserPort.java",
+      "sha256": "f5da9b385044c4207a91cf1092778276ce6bce2198ddd134132fea1a216e511b"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/ChromeProtocol.java",
+      "sha256": "ca61037ba80bb3cf3d2e269a124bbb3f5d0adfc0e0b4acef573adf8fb85da3f0"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/ChromeSummarizerPort.java",
+      "sha256": "11f71942ba0b794eddf2081ae00d63c2f152e7681088ce8e13822dfd14896993"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/DeterministicChromeSummarizerPort.java",
+      "sha256": "841a84255ed930d84953893266e7a8dc8feca1c71b213c68957fbdf7ed4063a6"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/EntropyTrajectory.java",
+      "sha256": "0f1d7255af2a4d2a11256aec05932550a9176cab84ec91d8484dfa62e617ebd7"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/EvidencePattern.java",
+      "sha256": "99841b28253217c2f025e7e90727ab5455ab3010eb94cb0cc76f2d17b9e3a442"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/FileCheckpointRepository.java",
+      "sha256": "e42dc7a255df90839c966a3ecbdc306a32889889ef8bf4c49f098862ae3248b7"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/Hashing.java",
+      "sha256": "5f2f7c5742acdbbd69763009cc7dea2360cc5cb9d42961e042984b774e515bdb"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/JavaChromeAiMechanicalPipeline.java",
+      "sha256": "a45c0d770a60f93d43bb792bc8c963e62ca6b02f5975b95a9891a5449f93658e"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/MechanicalModel.java",
+      "sha256": "9e46b0009138f0de02c729fc299b480946d761d8512d16a1c2bff6132dd573be"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/MechanicalPatternCatalog.java",
+      "sha256": "fc5cd503f0c72e0c619d179a2071539b2e0891af1dd07675ebd74003bb240dbe"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/MechanicalSupersetConsolidator.java",
+      "sha256": "4b2de97604459d2a4840031aa732a7f7dca09831aa040f97ce7e4b9d272de91c"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/OmissionRepair.java",
+      "sha256": "fa87b938aba586d0f2afa660b04769a62aaa31247f8c7fc2fa85140b8f91d592"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/StructuredPromptPort.java",
+      "sha256": "d24d56cde0e5547075de5b763a301f411b6ef00e2221cfc97a5d3ff1cb927f88"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/SummaryTreeExecutor.java",
+      "sha256": "23717c8ced8af604cb85512f48dae155cd3e28bf4b11cca9266ac742eabc9d9c"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/chrome/SummaryTreePlanner.java",
+      "sha256": "a2f7f913a271628602a0cd77e895edb2f9479c04371e17dcfbf39a612c77ccab"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/document/Desm.java",
+      "sha256": "c5746790c8c2e0016b4945c77cf3a9d621653792cfc47e2950f92aacff15b45d"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/document/Hashes.java",
+      "sha256": "3930d980649743c03ed7c86183ecec9ee07ccadbd69c7f93245d27a79fab1b7a"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/document/Lexical.java",
+      "sha256": "3caaf578787c5e11b153f40928e5e8e2571b6c7ebdc79bbd2e4c0a3a92d32ff1"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/document/TreeNode.java",
+      "sha256": "71d00050e4a77abe1c273c8922560653eaadec9996ab36aa77371e53dd20e5c0"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetCorpus.java",
+      "sha256": "1b4740a316806062590b201bde908c3f825a677549a347a0100f0fbab4eca77a"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetExactCoverage.java",
+      "sha256": "f72fcf6ea45d462bb4aff7d9c2bf2331b3a7de191148101d4418037cea928d4e"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetKernels.java",
+      "sha256": "7ebdadf6ef08dfcfe4086f7d8719346cca33c790297165b4f053a1a554cf6e16"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetNode.java",
+      "sha256": "9c8c335fc5698751b41e571fbd8220c7d65c23301f9d3d192ed430fabc4ec202"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetProjection.java",
+      "sha256": "7a102d8b630f62d9601e255a84627133e7d639cc5ee209b569c5716759e7640d"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/FacetSnapshot.java",
+      "sha256": "da467f36b74c9e4b9a38f65993e330aed0df7760fa23bbc8cff0ffbc88536ca1"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/facets/LegacySummaryFacets.java",
+      "sha256": "5e2b4f022ad4da9791b0160fc05a3ea1c0b4fc3a6015faf7f6e502ba594f8b98"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/internal/Json.java",
+      "sha256": "dbbc1000479e2f5e9f60df97b43ef21b10f8f3c3af653913b76d95e654033699"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/internal/Py.java",
+      "sha256": "d99deb02479a3988a8b4933534b7ea7be38a5d079e31e7c98a4e854770a986f7"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/internal/StringOps.java",
+      "sha256": "2c9e94e7e6454063d1e3328d150eea89093852b38977d0d80d4054da134e8763"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/summary/Data.java",
+      "sha256": "16196ebab0c170f6940ff621e04d390a146c12eb5aa002d166bde0c77b491c4a"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/summary/Summaries.java",
+      "sha256": "3b2470efb599603ca632fe5ea45c08c32d4fa394cd67d2e4de1890d43e596e61"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/jdk/m3/llm/summary/Summary.java",
+      "sha256": "141129b455158c126184fd6f22608978ca88bfd873672bd3e1ed4aeecd45f01b"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/java/module-info.java",
+      "sha256": "19648a93d58fb944b1f025cd120bfa15ad0f1c6c1ccab292e4b6897e8bfd0413"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/native/facet_jni.c",
+      "sha256": "e06e9b6a40867036649d4ad58abeb801b2bc576d64485dc63a23db3badca732c"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/resources/jdk/m3/llm/browser/chrome-ai-api.mjs",
+      "sha256": "f7fa588fd357345715c3f2da5291726af5cabdc33bbc42d0dbc8693759e75942"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/resources/jdk/m3/llm/browser/chrome-native-summarizer.mjs",
+      "sha256": "7eec4d9bf25027b03dca394a88dbb641050f417de7e86e47f0d869640b2dcaeb"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/resources/jdk/m3/llm/browser/chrome-protocol-bridge.mjs",
+      "sha256": "53cbfc405c463e5dde938f3c0118a91317e7b6a4ea838a89d9d6b1303c5ad10e"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/resources/jdk/m3/llm/browser/native-ai-session.mjs",
+      "sha256": "fb97970559d4e1af6bbf643f4df27123f856a3e3b5b4d8b60469e42870e1979e"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/main/resources/jdk/m3/llm/summary/casefold.tsv",
+      "sha256": "2a5f07bd6105db70144830e7454f949390d66e1deeff947012a1579607d81690"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/test/java/DocumentChecks.java",
+      "sha256": "11eb49daaeb212a34875e7a45bdd47c4d97d912634b93857db97a35d745d8515"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/test/java/ModuleSmoke.java",
+      "sha256": "58571b1304a8265d1c84f3b59a70e4ed657949b35d0d5fa42659b39e14152245"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/test/java/SummariesChecks.java",
+      "sha256": "c80b582013d594d110da6341209e2657df589bc2145f214772c94161a97c7c61"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/test/java/SummaryChecks.java",
+      "sha256": "f07458d101d4bafb9dde9bfcddbf8a424fc36c907b747027a5724f3d76049bcc"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/test/java/jdk/m3/llm/facets/FacetChecks.java",
+      "sha256": "d75619e14f2b900b586ca968f79eca0a8bac097bf56a9644ac5b6483185f8eaa"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/test/java/jdk/m3/llm/facets/FacetExactCoverageChecks.java",
+      "sha256": "b35a25fa3ba86bc75082d3204bd12de00f32865bbaf8b9cd7a59b60acc2121ee"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/test/java/jdk/m3/llm/test/ChromeBrowserPortTest.java",
+      "sha256": "da6e1199abc6963a3ff7942f8fec42eb1e6ff5898c049a95e82ca10015a8400d"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/test/java/jdk/m3/llm/test/ChromeSummaryTest.java",
+      "sha256": "193958ec8bcd6c9d563867b516b34f78c0e2936f4261bad02fd0fa85d21277fa"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/test/resources/jdk/m3/llm/browser/chrome-ai-api.test.mjs",
+      "sha256": "5bca4e5121ebcb76cbd0e4ce3f38fa8d70f5c9d68e0a37a4c15e06e21d2c93f4"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/test/resources/jdk/m3/llm/browser/chrome-native-summarizer.test.mjs",
+      "sha256": "2016c3224b6bc2f535ce02ce42cc8de318cbdf857f52c60fbb67207264805af8"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/test/resources/jdk/m3/llm/browser/chrome-protocol-bridge.test.mjs",
+      "sha256": "cbe82216cdc1568349c0d79a7b2a5d24197e07e1eebae1ffbbd6331aed2cb703"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/test/resources/jdk/m3/llm/browser/native-ai-session.test.mjs",
+      "sha256": "927bc328083703c30ad5d3e96db02b07385ccfddd6b8a5dae05a708b4f65d0d5"
+    },
+    {
+      "path": "m3/tooling/module-packs/chrome-llm/src/test/resources/jdk/m3/llm/summary/summary-fixtures.json",
+      "sha256": "d4d17f2c33f8071d561125e521671d7de26aa1081476261dd9d1099a52cbbfd6"
+    },
+    {
+      "path": "m3/tooling/name-contract/name-plan.json",
+      "sha256": "52b56965a99e112098451b0c607e17887c771a381e13d96763b19754b1fd7d4c"
+    }
+  ],
+  "publication_scope": {
+    "source_draft": "https://github.com/hsoliwal/com.synexia/pull/13968",
+    "source_core_commit": "b30eb72a8165f81a17c9d22e3711370d00d0f9aa",
+    "source_merged_into_develop": false,
+    "target_draft": "PENDING",
+    "target_publication_base": "669a949d192345acefcfc5e9bb0b3724174d270c"
+  }
+}

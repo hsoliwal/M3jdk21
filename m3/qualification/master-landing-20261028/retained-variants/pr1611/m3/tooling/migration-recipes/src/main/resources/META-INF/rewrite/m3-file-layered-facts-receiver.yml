@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.M3FileLayeredFactsReceiver
+displayName: Receive M3File layered precompute facts
+description: >-
+  Applies exact hash-pinned M3JDK21 postimages for one-pass source hashing, parser/index fact
+  observers, sorted fixed-width receipts and downstream fact deltas.
+recipeList:
+  - com.m3.rewrite.file.M3FileLayeredFactsReceiverRecipe

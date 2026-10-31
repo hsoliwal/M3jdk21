@@ -1,0 +1,68 @@
+{
+  "id": "SYNEXIA-LLM-RECIPE-FIRST-2",
+  "status": "NON_NEGOTIABLE",
+  "severity": "ERROR",
+  "missingEvidence": "HOLD",
+  "canonicalDocument": "docs/M3-SCALE/invariants/SYNEXIA-LLM-RECIPE-FIRST-2.md",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalModule": "synexia-openrewrite-recipes",
+  "policyRecipe": "com.synexia.rewrite.M3RecipeCustody",
+  "policyCrate": "synexia-openrewrite-recipes/verification/recipe-custody-20261006",
+  "requires": [
+    "INVENTORY_EXACT_TREE_AND_HISTORY",
+    "REUSE_CANONICAL_OWNER",
+    "MAVEN_RECIPE_BEFORE_SOURCE",
+    "ACTUAL_RECIPE_EXECUTION_RECORD",
+    "EXACT_PREIMAGE_POSTIMAGE",
+    "PRESERVE_EVOLVED_SOURCE",
+    "RETAIN_RECIPE_TEMPLATES_FIXTURES_PROVENANCE",
+    "PER_STAGE_COMPILER_BEHAVIOR_API_ORACLE_NATIVE_GATES",
+    "EVERY_STAGE_UNCHANGED_FIXED_POINT",
+    "DRIFT_REFUSAL",
+    "PINNED_LICENSED_DONOR_REVIEW",
+    "CONTEXT_BOUND_PRECOMPUTE",
+    "PROGRESS_CANCELLATION",
+    "SERIAL_PROOF_GATED_PROMOTION",
+    "NO_REBASE_DEVELOP"
+  ],
+  "applicationStates": [
+    "EXACT_PRESENT",
+    "EVOLVED_PRESERVED",
+    "MISSING",
+    "BLOCKED"
+  ],
+  "executionEvidenceKinds": [
+    "KERNEL_REPLAY",
+    "SDK_EXECUTION"
+  ],
+  "kernelReplayImpliesSdkExecution": false,
+  "mergedImpliesSourceApplied": false,
+  "finiteTestsImplyUniversalProof": false,
+  "policyRecordGrantsPromotionAuthority": false,
+  "rootAgentPolicy": "AGENTS.md",
+  "moduleAgentPointer": "synexia-openrewrite-recipes/AGENTS.md",
+  "externalProductBoundary": "Preserve docs/M3JDK21_DONOR_BOUNDARY.md; explicit target owns runtime and promotion.",
+  "enforcementBoundary": "Existing host admission remains authoritative. Source-seal tests verify custody/replay/refusal, not global runtime enforcement or evidence authenticity.",
+  "serialReviewPolicyRecipe": "com.synexia.m3.SerialReviewInvariant20261019",
+  "serialReviewPolicyCrate": "synexia-openrewrite-recipes/verification/parser-collections-sdk-20261019",
+  "serialRefinementRequirements": [
+    "STANDING_REQUIREMENT_FOR_FUTURE_CODING_TASKS",
+    "ACTUAL_OWNER_AND_SMALLEST_USEFUL_ATOM",
+    "SERIAL_PER_FILE_PER_REFINEMENT_INTEGRATION",
+    "PROTECTED_OBSERVATIONS_AND_ORDERED_STAGE_EVIDENCE",
+    "CARRY_FORWARD_PASSING_EVOLVED_OWNER",
+    "RETAIN_FAILED_INTERMEDIATE_WITNESSES",
+    "EVERY_LEAF_AND_WHOLE_SCHEDULE_UNCHANGED_REPLAY",
+    "CUMULATIVE_SEARCHABLE_CATEGORY_DECISIONS",
+    "CORRECTNESS_COMPATIBILITY_COMPLEXITY_PERFORMANCE_RIGHTS_COMPARISON",
+    "EXPLICIT_NOT_MEASURED_AND_DEFERRED_STATES"
+  ],
+  "reviewCatalogue": {
+    "owner": "tools/short-flag-query/reviews/*.tsv",
+    "columns": ["category", "candidate", "source", "revision_or_reference", "rights", "complexity", "contract_comparison", "decision", "qualification"],
+    "search": "python synexia-openrewrite-recipes/verification/materialization-leases-20261015/verify.py --category <category>",
+    "updateRule": "Append observations or explicit supersession; retain earlier accepted, rejected, failed, deferred and unmeasured alternatives.",
+    "comparisonAxes": ["correctness_and_assumptions", "null_exception_effect_ownership_api_jni_abi_compatibility", "time_space_allocation_complexity", "measured_resources_or_NOT_MEASURED", "license_notice_provenance_adaptation_rights"],
+    "newTransformationAuthority": false
+  }
+}

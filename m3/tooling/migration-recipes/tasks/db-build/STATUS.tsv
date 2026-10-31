@@ -1,0 +1,9 @@
+item	state	evidence
+metadata_copy	CANDIDATE	Six sequential SourceFile assignments; copy order and guards unchanged
+original_compile	FAILED_OBSERVED	Run37184634302/job111383897788; Tree.withSourcePath missing
+recipe_and_tests	AUTHORED	Existing DbBuild engine;9 DbRecipeTest cases including6 retained
+static_checks	PASS	Exact pre/post hashes, two ordered manifests, JSON/POM checks
+new_Maven_JUnit	PENDING	Must execute actual pinned-dependency workflow
+DB_JUnit_271f	PASS_51	Run37184634302; zero failures/errors/skips
+DB_coverage_271f	REJECTED	663/681 lines;235/241 branches;0.99 gates unchanged
+whole_programme	NOT_COMPLETE	No modified-JDK/jtreg/JNI acceptance

@@ -1,0 +1,13 @@
+{
+  "owner": "com.m3.collections.apache.M3DualLinkedHashBidiMap",
+  "provider_contract": "org.apache.commons.collections4.bidimap.DualLinkedHashBidiMap (Commons Collections 4.5.0)",
+  "inventory_row": "DONE #1468",
+  "source_sha256": "b476fb9fdde94a6fa0e28cb0a81d0cef1662dd60e83aab02aa58b259f66c059e",
+  "scaffold_preimage_sha256": "9f7a911be9d9c0bbb3f2112574802e6cea9ea3e26ad922f0d68e8c6e441a23b1",
+  "module_tests": {"tests": 20, "failures": 0, "differential_seeds": 8, "differential_operations": 96000, "differential_checks": 960117},
+  "coverage": {"tool": "JaCoCo 0.8.12", "classes": 12, "line": "469/469", "branch": "258/258", "gate": "CLASS LINE and BRANCH COVEREDRATIO >= 0.99"},
+  "allocation_probe_bytes": 0,
+  "recipe_tests": {"tests": 2, "fixed_point_executions": 8, "refusals": 4},
+  "environment": "local Windows 11, JDK 21, Maven 3.9.14; hosted CI not run",
+  "not_claimed": ["Commons serialized form", "performance comparison", "JNI path"]
+}

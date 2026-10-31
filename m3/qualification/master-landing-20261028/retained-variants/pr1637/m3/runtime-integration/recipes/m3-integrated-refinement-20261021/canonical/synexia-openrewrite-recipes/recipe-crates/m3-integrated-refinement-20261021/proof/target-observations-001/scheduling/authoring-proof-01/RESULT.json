@@ -1,0 +1,404 @@
+{
+  "schema": "M3_SCHEDULED_PROGRESS_RECEIVER_V1",
+  "status": "FAIL",
+  "scope": "ISOLATED_AUTHORING_CANDIDATE",
+  "root": "/workspace/scratch/206049dfb270/M3jdk21",
+  "candidate": "/workspace/scratch/206049dfb270/jobs-work/postimages",
+  "baseline_root": "/workspace/scratch/206049dfb270/jobs-work/baseline",
+  "commands": [
+    {
+      "label": "compiler-version",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javac",
+        "-version"
+      ],
+      "expected_exit": 0,
+      "exit": 0,
+      "stdout_sha256": "2df6b9c76e710158266aeaae8f3578eaed8ddd747a2272483506ad9a8a5e644a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "runtime-version",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-version"
+      ],
+      "expected_exit": 0,
+      "exit": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "5701a552cbd46ea0a0e39c6ace218dc386a0782e51100efbcf3ca15628bca475"
+    },
+    {
+      "label": "baseline-strict-api",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javac",
+        "-g:none",
+        "-proc:none",
+        "-Xlint:all",
+        "-Xlint:-this-escape",
+        "-Werror",
+        "-Xdoclint:all/protected",
+        "-Xdoclint/package:java.*,javax.*",
+        "--patch-module",
+        "java.base=/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/source/src/java.base/share/classes",
+        "-d",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/classes",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/source/src/java.base/share/classes/java/lang/Runnable.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/source/src/java.base/share/classes/java/util/concurrent/Callable.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/source/src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/source/src/java.base/share/classes/java/util/concurrent/Executor.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/source/src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/source/src/java.base/share/classes/java/util/concurrent/ProgressJob.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/source/src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java"
+      ],
+      "expected_exit": 0,
+      "exit": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "candidate-strict-api",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javac",
+        "-g:none",
+        "-proc:none",
+        "-Xlint:all",
+        "-Xlint:-this-escape",
+        "-Werror",
+        "-Xdoclint:all/protected",
+        "-Xdoclint/package:java.*,javax.*",
+        "--patch-module",
+        "java.base=/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/source/src/java.base/share/classes",
+        "-d",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/classes",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/source/src/java.base/share/classes/java/lang/Runnable.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/source/src/java.base/share/classes/java/util/concurrent/Callable.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/source/src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/source/src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/source/src/java.base/share/classes/java/util/concurrent/Executor.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/source/src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/source/src/java.base/share/classes/java/util/concurrent/ProgressJob.java",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/source/src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java"
+      ],
+      "expected_exit": 0,
+      "exit": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "baseline-public-descriptors",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javap",
+        "-public",
+        "-s",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/classes/java/util/concurrent/ScheduledExecutorService.class"
+      ],
+      "expected_exit": 0,
+      "exit": 0,
+      "stdout_sha256": "d5eb010d1173726d5d95df09d27fa0009927c1905a336916e91cc00cb40be409",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "candidate-public-descriptors",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javap",
+        "-public",
+        "-s",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/classes/java/util/concurrent/ScheduledExecutorService.class"
+      ],
+      "expected_exit": 0,
+      "exit": 0,
+      "stdout_sha256": "4d621266a7f7ab61a1b9d404b2d0ebe3db7242b59d58090a1aeaceec5f19036b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "compile-existing-and-new-contracts",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javac",
+        "-g:none",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "--patch-module",
+        "java.base=/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/classes",
+        "-d",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/contract-clients",
+        "/workspace/scratch/206049dfb270/M3jdk21/test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java",
+        "/workspace/scratch/206049dfb270/jobs-work/postimages/test/jdk/java/util/concurrent/ProgressJob/M3ScheduledProgress.java"
+      ],
+      "expected_exit": 0,
+      "exit": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "compile-stock-client-once",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javac",
+        "-g:none",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/stock-compiled-client",
+        "/workspace/scratch/206049dfb270/jobs-work/postimages/m3/runtime-integration/scheduled-progress-20261021/src/test/java/LegacyScheduledClient.java"
+      ],
+      "expected_exit": 0,
+      "exit": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "baseline-missing-requested-api",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javac",
+        "-g:none",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "--patch-module",
+        "java.base=/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/classes",
+        "-d",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/missing-api",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/RequestedApiMissing.java"
+      ],
+      "expected_exit": 1,
+      "exit": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "69faba59ed9405c3f6c75f4c01c49a258a59f589b273135ab5c8a4fbd651150d"
+    },
+    {
+      "label": "mixed-stock-old-binary",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/stock-compiled-client",
+        "LegacyScheduledClient"
+      ],
+      "expected_exit": 0,
+      "exit": 0,
+      "stdout_sha256": "6372d09e8939df09d18d8d14d8a7f80cfa8afed3cf7ad659d2a8c33c9dc2cca4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "mixed-baseline-M3ProgressJob",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "--patch-module",
+        "java.base=/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/classes",
+        "-cp",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/contract-clients",
+        "M3ProgressJob"
+      ],
+      "expected_exit": 0,
+      "exit": 0,
+      "stdout_sha256": "202d13ceff7f76f4e527b9cf0b0f792deff8025b8d0809be7f01377be35044f0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "mixed-baseline-M3ScheduledProgress",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "--patch-module",
+        "java.base=/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/classes",
+        "-cp",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/contract-clients",
+        "M3ScheduledProgress",
+        "baseline"
+      ],
+      "expected_exit": 0,
+      "exit": 0,
+      "stdout_sha256": "f7c16424b11709eb295acb65cbb51d009befb6a321302b978701814509f251fd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "mixed-baseline-old-binary",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "--patch-module",
+        "java.base=/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/baseline/classes",
+        "-cp",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/stock-compiled-client",
+        "LegacyScheduledClient"
+      ],
+      "expected_exit": 0,
+      "exit": 0,
+      "stdout_sha256": "6372d09e8939df09d18d8d14d8a7f80cfa8afed3cf7ad659d2a8c33c9dc2cca4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "mixed-candidate-M3ProgressJob",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "--patch-module",
+        "java.base=/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/classes",
+        "-cp",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/contract-clients",
+        "M3ProgressJob"
+      ],
+      "expected_exit": 0,
+      "exit": 0,
+      "stdout_sha256": "202d13ceff7f76f4e527b9cf0b0f792deff8025b8d0809be7f01377be35044f0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "mixed-candidate-M3ScheduledProgress",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "--patch-module",
+        "java.base=/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/candidate/classes",
+        "-cp",
+        "/workspace/scratch/206049dfb270/jobs-work/authoring-proof-01/contract-clients",
+        "M3ScheduledProgress",
+        "candidate"
+      ],
+      "expected_exit": 0,
+      "exit": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "c226aa78ff1aebf46cee12ae71a55ab7b829535c85bd37d57dbdf2291ddf39b6"
+    }
+  ],
+  "product_or_jdk_images_written": false,
+  "full_source_built_image": "NOT_RUN_BOUNDED_JAVA_BASE_SOURCE_PATCH",
+  "jtreg_harness": "NOT_RUN_TEST_MAINS_EXECUTED_DIRECTLY",
+  "performance": "NOT_MEASURED_NO_SPEEDUP_CLAIM",
+  "receiving_phase": "STRING_UNCHANGED",
+  "eclipse_job_manager": "NOT_EXERCISED_BY_THIS_GATE",
+  "source_pin_sha256": "079670f5017f803f0dcfa92f711df310be53503ed09a87cc55b34b59527e8596",
+  "receiving_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
+  "inputs": {
+    "owner": {
+      "path": "src/java.base/share/classes/java/util/concurrent/ScheduledExecutorService.java",
+      "before_sha256": "3a914503908cd93c321c356f215eb3e022a064c1c124331d0dd2edb429bdd7a5",
+      "after_sha256": "97ada5bb138bcf47b5ac8b168c36a5ff17936acf64e83c4e7f3a7151b279cd3d",
+      "before_git_blob": "4d63ffae4bb44f60e446cbcc77a898ab9bd1e7ce",
+      "after_git_blob": "7548675c9b35bc0bb9a8f9d2d4153e5b156464ca"
+    },
+    "dependencies": [
+      {
+        "path": "src/java.base/share/classes/java/lang/Runnable.java",
+        "bytes": 2565,
+        "sha256": "b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a",
+        "git_blob": "8fb270de68f57fc5463bfecd6ac8418012d16fde"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",
+        "bytes": 3165,
+        "sha256": "6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f",
+        "git_blob": "7cd9b5d7d538b4dffe426cacc9a03651f635e005"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+        "bytes": 1534,
+        "sha256": "77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733",
+        "git_blob": "6e08ac638e7500945cdabb77beec0ad434b2cfe1"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+        "bytes": 3394,
+        "sha256": "368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93",
+        "git_blob": "58172366681470702282607e58f542f47079993a"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+        "bytes": 10395,
+        "sha256": "48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc",
+        "git_blob": "38637beaea7a7adf7375dc36dbcf95c87183d1a0"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/concurrent/Executor.java",
+        "bytes": 6052,
+        "sha256": "e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa",
+        "git_blob": "4fd7398351048045a6b77c57393b52ed492730fe"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+        "bytes": 20247,
+        "sha256": "9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d",
+        "git_blob": "fa608ebcf4bcf49f55475471aea8ad31b1328490"
+      },
+      {
+        "path": "src/java.base/share/classes/java/util/concurrent/ProgressJob.java",
+        "bytes": 4169,
+        "sha256": "d2734bcc607b1af8a593387040da53886530a310685a26965a5aa77609aaefc8",
+        "git_blob": "ea5d302f454e094b5b1ed346104987c7c037b7f8"
+      }
+    ],
+    "tests": [
+      {
+        "path": "test/jdk/java/util/concurrent/ProgressJob/M3ProgressJob.java",
+        "bytes": 17041,
+        "sha256": "c8a20e2143ab2a1ab4ca3437ca2bf79c1ab486596247e0aecd6c1cde3b0dd609",
+        "git_blob": "9d8ae731f8b69e7217349a6981ad84ae8c89f863"
+      },
+      {
+        "path": "test/jdk/java/util/concurrent/ProgressJob/M3ScheduledProgress.java",
+        "bytes": 24441,
+        "sha256": "a57df3b673802259ae630eb083dcd1f3feb3e6c32d832afadcda4cb8370f2dd2",
+        "git_blob": "92347373eda93ecfc9318588fdf4265d33c572ff"
+      },
+      {
+        "path": "m3/runtime-integration/scheduled-progress-20261021/src/test/java/LegacyScheduledClient.java",
+        "bytes": 6118,
+        "sha256": "32881654d117127b11be68a2511a0d5860a3032f0e7ca1ada0332c7f648e0c90",
+        "git_blob": "421e23a0ee6fe3154feb3f6bcfde32d5e5b74c45"
+      }
+    ]
+  },
+  "toolchain": {
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java": "3282b9858bee1ffd212a1a640236699494235d106e3b8bccbf726f9ac02cb0aa",
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javac": "167e2252877477bb0e0a103bffe117899e058e1a3c27cf2ac2ef58e6118f43ea",
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/javap": "16b6ee058e5f3592318d0a8063fed4d6687ea72be469d322f5b29f201110082a"
+  },
+  "baseline_classes": {
+    "java/lang/Runnable.class": "a3c47d0dbc99da8ff74b8734ee0c0dd1d677ff572fff0dd74c3159d196f5edb6",
+    "java/util/concurrent/Callable.class": "5ac1e87b943f3d3045e0e6ece11994485933f0ca33661deb6418983041a28ebd",
+    "java/util/concurrent/Executor.class": "ee7296da0cb8603f093c4827ecbbb418b7f692c85ddf329825b8403a55cbf57d",
+    "java/util/concurrent/ExecutorService.class": "c504116b00af515cc2c2871be67983a0f6d0d28426e85c44c373af705a0f4c09",
+    "java/util/concurrent/MonitoredCallable.class": "3a7ff2956aba374ddd427588a80092bddcb50d95171a894aadc3a74adb1a88e3",
+    "java/util/concurrent/ProgressJob.class": "30dc89da72ea1469c5c6871bcfb8b888829a5cef5de3f14d19508880a296c655",
+    "java/util/concurrent/ProgressMonitor$1.class": "3edef0c3e30502fd7c8b55abbc47724403e6d93ddb7b70a350c7fca7bf8a83bf",
+    "java/util/concurrent/ProgressMonitor.class": "7785729a2d0d46e2f8e24a963c100c9d88860687e89d19c8c5f7917df63e9864",
+    "java/util/concurrent/ProgressMonitors$Scope.class": "171b77e3be613e89818cdd483fb1ca1c3c5228103405d616ba1ab3764520b884",
+    "java/util/concurrent/ProgressMonitors$WeightedChild.class": "70a54463e757bc69559a0b3a63f48cfce186019648d36953b6323a4ca48b66cf",
+    "java/util/concurrent/ProgressMonitors.class": "fbec0395fe48c01f73a62234d5f7f4dd9b9a521eae9ee629bdaaafe7609ba5fd",
+    "java/util/concurrent/ScheduledExecutorService.class": "ad7ae3ee085e1a9ade14accb6511f0728267400a90145ba34ee4a164ace37a7c"
+  },
+  "candidate_classes": {
+    "java/lang/Runnable.class": "a3c47d0dbc99da8ff74b8734ee0c0dd1d677ff572fff0dd74c3159d196f5edb6",
+    "java/util/concurrent/Callable.class": "5ac1e87b943f3d3045e0e6ece11994485933f0ca33661deb6418983041a28ebd",
+    "java/util/concurrent/Executor.class": "ee7296da0cb8603f093c4827ecbbb418b7f692c85ddf329825b8403a55cbf57d",
+    "java/util/concurrent/ExecutorService.class": "c504116b00af515cc2c2871be67983a0f6d0d28426e85c44c373af705a0f4c09",
+    "java/util/concurrent/MonitoredCallable.class": "3a7ff2956aba374ddd427588a80092bddcb50d95171a894aadc3a74adb1a88e3",
+    "java/util/concurrent/ProgressJob.class": "30dc89da72ea1469c5c6871bcfb8b888829a5cef5de3f14d19508880a296c655",
+    "java/util/concurrent/ProgressMonitor$1.class": "3edef0c3e30502fd7c8b55abbc47724403e6d93ddb7b70a350c7fca7bf8a83bf",
+    "java/util/concurrent/ProgressMonitor.class": "7785729a2d0d46e2f8e24a963c100c9d88860687e89d19c8c5f7917df63e9864",
+    "java/util/concurrent/ProgressMonitors$Scope.class": "171b77e3be613e89818cdd483fb1ca1c3c5228103405d616ba1ab3764520b884",
+    "java/util/concurrent/ProgressMonitors$WeightedChild.class": "70a54463e757bc69559a0b3a63f48cfce186019648d36953b6323a4ca48b66cf",
+    "java/util/concurrent/ProgressMonitors.class": "fbec0395fe48c01f73a62234d5f7f4dd9b9a521eae9ee629bdaaafe7609ba5fd",
+    "java/util/concurrent/ScheduledExecutorService.class": "071982836bc3e4718478e3bcee2f726a4a26adc373619b37912b45a8ab4c8e53"
+  },
+  "api": {
+    "original": {
+      "schedule(Ljava/lang/Runnable;JLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;": "public abstract java.util.concurrent.ScheduledFuture<?> schedule(java.lang.Runnable, long, java.util.concurrent.TimeUnit);",
+      "schedule(Ljava/util/concurrent/Callable;JLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;": "public abstract <V> java.util.concurrent.ScheduledFuture<V> schedule(java.util.concurrent.Callable<V>, long, java.util.concurrent.TimeUnit);",
+      "scheduleAtFixedRate(Ljava/lang/Runnable;JJLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;": "public abstract java.util.concurrent.ScheduledFuture<?> scheduleAtFixedRate(java.lang.Runnable, long, long, java.util.concurrent.TimeUnit);",
+      "scheduleWithFixedDelay(Ljava/lang/Runnable;JJLjava/util/concurrent/TimeUnit;)Ljava/util/concurrent/ScheduledFuture;": "public abstract java.util.concurrent.ScheduledFuture<?> scheduleWithFixedDelay(java.lang.Runnable, long, long, java.util.concurrent.TimeUnit);"
+    },
+    "added": {
+      "scheduleMonitored(Ljava/lang/Runnable;JLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/ProgressMonitor;)Ljava/util/concurrent/ScheduledFuture;": "public default java.util.concurrent.ScheduledFuture<?> scheduleMonitored(java.lang.Runnable, long, java.util.concurrent.TimeUnit, java.util.concurrent.ProgressMonitor);",
+      "scheduleMonitored(Ljava/util/concurrent/Callable;JLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/ProgressMonitor;)Ljava/util/concurrent/ScheduledFuture;": "public default <V> java.util.concurrent.ScheduledFuture<V> scheduleMonitored(java.util.concurrent.Callable<V>, long, java.util.concurrent.TimeUnit, java.util.concurrent.ProgressMonitor);",
+      "scheduleAtFixedRateMonitored(Ljava/lang/Runnable;JJLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/ProgressMonitor;)Ljava/util/concurrent/ScheduledFuture;": "public default java.util.concurrent.ScheduledFuture<?> scheduleAtFixedRateMonitored(java.lang.Runnable, long, long, java.util.concurrent.TimeUnit, java.util.concurrent.ProgressMonitor);",
+      "scheduleWithFixedDelayMonitored(Ljava/lang/Runnable;JJLjava/util/concurrent/TimeUnit;Ljava/util/concurrent/ProgressMonitor;)Ljava/util/concurrent/ScheduledFuture;": "public default java.util.concurrent.ScheduledFuture<?> scheduleWithFixedDelayMonitored(java.lang.Runnable, long, long, java.util.concurrent.TimeUnit, java.util.concurrent.ProgressMonitor);"
+    },
+    "classification": "FOUR_REQUESTED_ADDITIVE_DEFAULTS_EXISTING_DESCRIPTORS_UNCHANGED"
+  },
+  "frozen_stock_client_classes": {
+    "LegacyScheduledClient$FrozenScheduler.class": "9656ecfee3676bc7d2415ff2b26ee504c5ac2de6825209285f983c4766d09b42",
+    "LegacyScheduledClient.class": "032d55b5128d62903b500ae804aa074ca44c1360d724c50c918208ed9ff47e19"
+  },
+  "failure": "Traceback (most recent call last):\n  File \"/workspace/scratch/206049dfb270/jobs-work/postimages/m3/runtime-integration/scheduled-progress-20261021/verify.py\", line 198, in main\n    stdout, _ = run(mode + \"-\" + label + \"-\" + main_class,\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/206049dfb270/jobs-work/postimages/m3/runtime-integration/scheduled-progress-20261021/verify.py\", line 96, in run\n    require((result.returncode == 0) == (expected == 0),\n  File \"/workspace/scratch/206049dfb270/jobs-work/postimages/m3/runtime-integration/scheduled-progress-20261021/verify.py\", line 37, in require\n    raise ValueError(message)\nValueError: mixed-candidate-M3ScheduledProgress unexpected exit 1\nException in thread \"main\" java.lang.AssertionError: original declaration changed\n\tat M3ScheduledProgress.apiShape(Unknown Source)\n\tat M3ScheduledProgress.main(Unknown Source)\n\n"
+}

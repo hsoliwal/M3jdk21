@@ -1,0 +1,5 @@
+Exception in thread "main" java.lang.AssertionError: result at cell 1
+	at M3RegexReuseTest.check(M3RegexReuseTest.java:210)
+	at M3RegexReuseTest.same(M3RegexReuseTest.java:101)
+	at M3RegexReuseTest.semantic(M3RegexReuseTest.java:86)
+	at M3RegexReuseTest.main(M3RegexReuseTest.java:31)

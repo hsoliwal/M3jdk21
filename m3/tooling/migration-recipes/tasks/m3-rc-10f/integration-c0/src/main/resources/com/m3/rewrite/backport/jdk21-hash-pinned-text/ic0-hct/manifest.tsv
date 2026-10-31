@@ -1,0 +1,5 @@
+m3/migration/migration.py	fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e	4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787	target-1.txt
+m3/migration/test/test_jcc_handoff_packet.py	3cfe511098ff3b6caafb1f1e04f94b448e02e25f160fe98427531fc8c77a1555	fde72eb9f2b682f50004defbc70e6d886a3f646abb0d89c0aec5de8ab0dbd30d	target-2.txt
+m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-752-ci.json	ABSENT	e4ea964db1a6f9527122ff0dad1c969a43dc50a0f80c771c86b70bcd6da6dcaf	target-3.txt
+m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-8131.json	ABSENT	8034d77f1124584888dce10760bd2f5dae55eeb93497f7a0db1d09a3a197ec5f	target-4.txt
+m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml	ABSENT	8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888	target-5.txt

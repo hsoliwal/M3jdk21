@@ -1,0 +1,24 @@
+test_bad_count_and_duplicate_are_refused (__main__.SdkReceiverTests.test_bad_count_and_duplicate_are_refused) ... ok
+test_exact_custody_proves_two_distinct_file_families (__main__.SdkReceiverTests.test_exact_custody_proves_two_distinct_file_families) ... ok
+test_exact_qualified_successors_and_drift_refusal (__main__.SdkReceiverTests.test_exact_qualified_successors_and_drift_refusal) ... 
+  test_exact_qualified_successors_and_drift_refusal (__main__.SdkReceiverTests.test_exact_qualified_successors_and_drift_refusal) (path='m3/tooling/jmod-recipes/tools/jmod_pack.py') ... FAIL
+test_git_blob_hash_uses_nul_framed_git_object (__main__.SdkReceiverTests.test_git_blob_hash_uses_nul_framed_git_object) ... ok
+test_missing_file_refused (__main__.SdkReceiverTests.test_missing_file_refused) ... ok
+test_one_mutated_byte_refused (__main__.SdkReceiverTests.test_one_mutated_byte_refused) ... ok
+test_path_escape_and_foreign_origin_are_refused (__main__.SdkReceiverTests.test_path_escape_and_foreign_origin_are_refused) ... ok
+
+======================================================================
+FAIL: test_exact_qualified_successors_and_drift_refusal (__main__.SdkReceiverTests.test_exact_qualified_successors_and_drift_refusal) (path='m3/tooling/jmod-recipes/tools/jmod_pack.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/f4826e049195/M3jdk21/m3/tooling/jmod-recipes/tools/test_verify_sdk_receiver.py", line 82, in test_exact_qualified_successors_and_drift_refusal
+    self.assertEqual(successor, git_blob_sha1(payload))
+AssertionError: '83b1483c6c5e6a39c519f82af603382914eed3e5' != '86b62fddc148b372145e807438dd7cd018acca0f'
+- 83b1483c6c5e6a39c519f82af603382914eed3e5
++ 86b62fddc148b372145e807438dd7cd018acca0f
+
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.024s
+
+FAILED (failures=1)

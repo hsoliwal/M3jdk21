@@ -1,0 +1,430 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.collections;
+
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+
+/**
+ * Live, stable-order, index-preserving filtered List views without retained per-element nodes.
+ *
+ * <p>Reuses the existing Synexia M3CollectionViews backing/predicate ownership scheme.
+ * Each view retains only the backing List and predicate; it owns neither a copy of values
+ * nor a primitive ID-domain store. The backing List owns element references and JDK
+ * list-iterator fail-fast behavior. Nested filters compose against the same owner.
+ *
+ * <p>Selected indexes are logical. Insertion at a visible index writes immediately before
+ * that physical selected element; append writes at the backing end. Hidden elements are
+ * never removed or reordered by view removals. Accepted writes are checked by predicate
+ * before backing mutation; addAll preflights a single detached input reference sequence.
+ * Iterator lookahead is reversibly probed so remove/set always target the last DELIVERED
+ * element, not a prefetched element. A failed predicate/iterator probe poisons only that
+ * iterator. Stateful/reentrant predicates and concurrent backing mutations are unsupported.
+ *
+ * <p>subList maps selected boundaries into an ordinary physical backing subList at the
+ * moment it is created. Thus it retains a live predicate over that physical span and has
+ * normal JDK subList behavior when the underlying parent is structurally changed outside
+ * that span. List.reversed() is supplied by JDK21 and remains backed/write-through.
+ *
+ * <p>Sequential traversal is O(backing length), indexed lookup/insert O(backing length),
+ * and no O(1) random access or independent parallel-split guarantee is claimed. This is
+ * distinct from M3IndexListView's detached, primitive-ID sorted snapshots; user predicates
+ * and comparators are Java callbacks and never invoked through JNI. No new storage, interner,
+ * native symbol, concurrency contract, serialization or memory-pressure guarantee is added.
+ */
+public final class M3FilteredLists {
+    private M3FilteredLists() { }
+
+    /** Return an editable, live, encounter-order filtered List view. */
+    public static <E> List<E> filtered(List<E> source, Predicate<? super E> predicate) {
+        return new View<>(source, predicate);
+    }
+
+    /** Return a live List view which explicitly refuses all mutation methods. */
+    public static <E> List<E> readOnlyFiltered(List<E> source, Predicate<? super E> predicate) {
+        // Fuse only this utility's read-only wrapper, keeping its original source
+        // predicate order. Never unwrap inside filtered(): writable views over a
+        // protected source must continue to reject mutations.
+        if (source instanceof StrictReadOnlyList<?> readOnly
+                && readOnly.delegate instanceof View<?> nested) {
+            @SuppressWarnings("unchecked")
+            View<E> previous = (View<E>) nested;
+            return new StrictReadOnlyList<>(filtered(previous, predicate));
+        }
+        return new StrictReadOnlyList<>(filtered(source, predicate));
+    }
+
+    /**
+     * Reused from the existing Synexia-origin M3 CollectionViews predicate plan.
+     * O(1) nested composition, O(depth) lazy preparation, constant-stack evaluation;
+     * caches predicate references only, never values or predicate results.
+     */
+    private static final class FilterChain<E> implements Predicate<E> {
+        private final FilterTerm<E> tail;
+        private final int depth;
+        private volatile Predicate<? super E>[] plan;
+
+        @SuppressWarnings("unchecked")
+        private FilterChain(Predicate<? super E> existing, Predicate<? super E> added) {
+            if (existing instanceof FilterChain<?> nested) {
+                FilterChain<E> previous = (FilterChain<E>) nested;
+                this.depth = Math.addExact(previous.depth, 1);
+                this.tail = new FilterTerm<>(previous.tail, added);
+            } else {
+                this.depth = 2;
+                this.tail = new FilterTerm<>(new FilterTerm<>(null, existing), added);
+            }
+        }
+
+        @Override
+        public boolean test(E element) {
+            Predicate<? super E>[] steps = plan;
+            if (steps == null) steps = prepare();
+            for (Predicate<? super E> step : steps) {
+                if (!step.test(element)) return false;
+            }
+            return true;
+        }
+
+        /** User callbacks run outside the publication monitor, in original order. */
+        @SuppressWarnings("unchecked")
+        private synchronized Predicate<? super E>[] prepare() {
+            Predicate<? super E>[] steps = plan;
+            if (steps == null) {
+                steps = (Predicate<? super E>[]) new Predicate<?>[depth];
+                FilterTerm<E> current = tail;
+                for (int i = depth - 1; i >= 0; i--) {
+                    steps[i] = current.predicate;
+                    current = current.previous;
+                }
+                plan = steps;
+            }
+            return steps;
+        }
+    }
+
+    /** Prefix sharing does not retain compiled plans of intermediate wrappers. */
+    private static final class FilterTerm<E> {
+        private final FilterTerm<E> previous;
+        private final Predicate<? super E> predicate;
+
+        private FilterTerm(FilterTerm<E> previous, Predicate<? super E> predicate) {
+            this.previous = previous;
+            this.predicate = predicate;
+        }
+    }
+
+    /** JDK21 List default endpoints can throw NoSuchElementException on empty views.
+     * An explicit read-only boundary must refuse writes even for empty/no-op calls.
+     */
+    private static final class StrictReadOnlyList<E> extends AbstractList<E> {
+        private final List<E> delegate;
+        StrictReadOnlyList(List<E> delegate) { this.delegate = Objects.requireNonNull(delegate); }
+        @Override public int size() { return delegate.size(); }
+        @Override public E get(int index) { return delegate.get(index); }
+        // Keep the inherited indexed read path and its callback demand unchanged.
+        // Only removal is guarded, including calls before next or after exhaustion.
+        @Override public Iterator<E> iterator() {
+            Iterator<E> cursor = super.iterator();
+            return new Iterator<>() {
+                @Override public boolean hasNext() { return cursor.hasNext(); }
+                @Override public E next() { return cursor.next(); }
+                @Override public void forEachRemaining(Consumer<? super E> action) {
+                    cursor.forEachRemaining(action);
+                }
+                @Override public void remove() { throw new UnsupportedOperationException(); }
+            };
+        }
+        @Override public ListIterator<E> listIterator(int index) {
+            return Collections.unmodifiableList(delegate).listIterator(index);
+        }
+        @Override public List<E> subList(int from, int to) {
+            return new StrictReadOnlyList<>(delegate.subList(from, to));
+        }
+        @Override public List<E> reversed() { return new StrictReadOnlyList<>(delegate.reversed()); }
+        @Override public Spliterator<E> spliterator() { return delegate.spliterator(); }
+        @Override public E set(int index, E element) { throw new UnsupportedOperationException(); }
+        @Override public void add(int index, E element) { throw new UnsupportedOperationException(); }
+        @Override public boolean add(E element) { throw new UnsupportedOperationException(); }
+        @Override public boolean addAll(Collection<? extends E> input) { throw new UnsupportedOperationException(); }
+        @Override public boolean addAll(int index, Collection<? extends E> input) { throw new UnsupportedOperationException(); }
+        @Override public E remove(int index) { throw new UnsupportedOperationException(); }
+        @Override public boolean remove(Object element) { throw new UnsupportedOperationException(); }
+        @Override public boolean removeAll(Collection<?> elements) { throw new UnsupportedOperationException(); }
+        @Override public boolean retainAll(Collection<?> elements) { throw new UnsupportedOperationException(); }
+        @Override public boolean removeIf(Predicate<? super E> test) { throw new UnsupportedOperationException(); }
+        @Override public void replaceAll(java.util.function.UnaryOperator<E> action) { throw new UnsupportedOperationException(); }
+        @Override public void sort(Comparator<? super E> comparator) { throw new UnsupportedOperationException(); }
+        @Override public void clear() { throw new UnsupportedOperationException(); }
+        @Override protected void removeRange(int from, int to) { throw new UnsupportedOperationException(); }
+        @Override public void addFirst(E item) { throw new UnsupportedOperationException(); }
+        @Override public void addLast(E item) { throw new UnsupportedOperationException(); }
+        @Override public E removeFirst() { throw new UnsupportedOperationException(); }
+        @Override public E removeLast() { throw new UnsupportedOperationException(); }
+    }
+
+    private static final class View<E> extends AbstractList<E> {
+        private final List<E> backing;
+        private final Predicate<? super E> predicate;
+
+        @SuppressWarnings("unchecked")
+        View(List<E> source, Predicate<? super E> filter) {
+            Objects.requireNonNull(source, "source");
+            Objects.requireNonNull(filter, "predicate");
+            if (source instanceof View<?> nested) {
+                View<E> previous = (View<E>) nested;
+                this.backing = previous.backing;
+                // Share immutable predicate terms; evaluate them iteratively, in original order.
+                this.predicate = new FilterChain<>(previous.predicate, filter);
+            } else {
+                this.backing = source;
+                this.predicate = filter;
+            }
+        }
+
+        /** Source-physical boundary of the specified visible index, optionally the end. */
+        private int physical(int visible, boolean allowEnd) {
+            if (visible < 0) throw new IndexOutOfBoundsException("negative visible index");
+            int seen = 0;
+            ListIterator<E> iterator = backing.listIterator();
+            while (iterator.hasNext()) {
+                E item = iterator.next();
+                if (predicate.test(item) && seen++ == visible) return iterator.previousIndex();
+            }
+            if (allowEnd && seen == visible) return backing.size();
+            throw new IndexOutOfBoundsException("visible index " + visible + " out of " + seen);
+        }
+
+        private void requireAccepted(E value) {
+            if (!predicate.test(value)) throw new IllegalArgumentException("element rejected by filter predicate");
+        }
+
+        @Override public int size() {
+            int count = 0;
+            for (E value : backing) if (predicate.test(value)) count++;
+            return count;
+        }
+
+        @Override public E get(int index) { return backing.get(physical(index, false)); }
+
+        @Override public E set(int index, E value) {
+            int sourceIndex = physical(index, false);
+            requireAccepted(value);
+            return backing.set(sourceIndex, value);
+        }
+
+        @Override public void add(int index, E value) {
+            int sourceIndex = physical(index, true);
+            requireAccepted(value);
+            backing.add(sourceIndex, value);
+            modCount++;
+        }
+
+        @Override public boolean addAll(int index, Collection<? extends E> elements) {
+            Objects.requireNonNull(elements, "elements");
+            int sourceIndex = physical(index, true);
+            ArrayList<E> input = new ArrayList<>(elements);
+            for (E element : input) requireAccepted(element);
+            if (input.isEmpty()) return false;
+            boolean changed = backing.addAll(sourceIndex, input);
+            if (changed) modCount++;
+            return changed;
+        }
+
+        @Override public boolean addAll(Collection<? extends E> elements) {
+            return addAll(size(), elements);
+        }
+
+        @Override public E remove(int index) {
+            E old = backing.remove(physical(index, false));
+            modCount++;
+            return old;
+        }
+
+        @Override public Iterator<E> iterator() { return listIterator(); }
+        @Override public ListIterator<E> listIterator(int index) {
+            return new Cursor(index, physical(index, true));
+        }
+
+        @Override public List<E> subList(int fromIndex, int toIndex) {
+            Objects.checkFromToIndex(fromIndex, toIndex, size());
+            int begin = physical(fromIndex, true);
+            int end = physical(toIndex, true);
+            return new View<>(backing.subList(begin, end), predicate);
+        }
+
+        /** An unknown-size sequential cursor: no false SIZED/SORTED/DISTINCT claims. */
+        @Override public Spliterator<E> spliterator() {
+            return new Spliterator<>() {
+                // Bind on first traversal, not stream/spliterator construction. This preserves
+                // source mutations before binding without capturing a stale fail-fast iterator.
+                private Iterator<E> iterator;
+                @Override public boolean tryAdvance(Consumer<? super E> action) {
+                    Objects.requireNonNull(action, "action");
+                    if (iterator == null) iterator = View.this.iterator();
+                    if (!iterator.hasNext()) return false;
+                    action.accept(iterator.next());
+                    return true;
+                }
+                @Override public Spliterator<E> trySplit() { return null; }
+                @Override public long estimateSize() { return Long.MAX_VALUE; }
+                @Override public int characteristics() { return Spliterator.ORDERED; }
+            };
+        }
+
+        private final class Cursor implements ListIterator<E> {
+            private ListIterator<E> iterator;
+            private int logical;
+            private int lastPhysical = -1;
+            private boolean lastWasNext;
+            private boolean failed;
+            private boolean nextPrepared, previousPrepared;
+            private int nextSteps, previousSteps;
+            private E nextValue, previousValue;
+
+            Cursor(int visibleIndex, int physicalIndex) {
+                this.logical = visibleIndex;
+                this.iterator = backing.listIterator(physicalIndex);
+            }
+
+            private void live() {
+                if (failed) throw new IllegalStateException("filtered List iterator failed");
+            }
+
+            private void discardProbes() {
+                nextPrepared = previousPrepared = false;
+                nextValue = previousValue = null;
+                nextSteps = previousSteps = 0;
+            }
+
+            /** Probe and restore underlying cursor; callers never expose the probe's last-returned. */
+            private int probe(boolean forward) {
+                live();
+                if (forward && nextPrepared) return nextSteps;
+                if (!forward && previousPrepared) return previousSteps;
+                int walked = 0, match = 0;
+                E accepted = null;
+                try {
+                    while (forward ? iterator.hasNext() : iterator.hasPrevious()) {
+                        E item = forward ? iterator.next() : iterator.previous();
+                        walked++;
+                        if (predicate.test(item)) { match = walked; accepted = item; break; }
+                    }
+                } catch (RuntimeException | Error exception) {
+                    failed = true;
+                    throw exception;
+                } finally {
+                    // Predicate or transport failures leave the iterator terminally failed.
+                    try {
+                        for (int i = 0; i < walked; i++) {
+                            if (forward) iterator.previous(); else iterator.next();
+                        }
+                    } catch (RuntimeException | Error failure) {
+                        failed = true;
+                        throw failure;
+                    }
+                }
+                if (forward) {
+                    nextPrepared = true; nextSteps = match; nextValue = accepted;
+                } else {
+                    previousPrepared = true; previousSteps = match; previousValue = accepted;
+                }
+                return match;
+            }
+
+            @Override public boolean hasNext() { return probe(true) != 0; }
+            @Override public boolean hasPrevious() { return probe(false) != 0; }
+            @Override public E next() {
+                if (!hasNext()) throw new NoSuchElementException();
+                E result = nextValue;
+                try { for (int i = 0; i < nextSteps; i++) iterator.next(); }
+                catch (RuntimeException | Error exception) { failed = true; throw exception; }
+                lastPhysical = iterator.previousIndex();
+                lastWasNext = true;
+                logical++;
+                discardProbes();
+                return result;
+            }
+            @Override public E previous() {
+                if (!hasPrevious()) throw new NoSuchElementException();
+                E result = previousValue;
+                try { for (int i = 0; i < previousSteps; i++) iterator.previous(); }
+                catch (RuntimeException | Error exception) { failed = true; throw exception; }
+                lastPhysical = iterator.nextIndex();
+                lastWasNext = false;
+                logical--;
+                discardProbes();
+                return result;
+            }
+            @Override public int nextIndex() { live(); return logical; }
+            @Override public int previousIndex() { live(); return logical - 1; }
+
+            /** Validate the original cursor without changing its physical position.
+             * Keep writes on the backing List: a writable list may expose an
+             * unmodifiable/snapshot iterator. next() also checks an exhausted
+             * fail-fast cursor; hasNext() alone need not detect invalidation.
+             */
+            private void checkForComodification() {
+                try {
+                    try {
+                        iterator.next();
+                    } catch (NoSuchElementException exhausted) {
+                        return;
+                    }
+                    iterator.previous();
+                } catch (RuntimeException | Error failure) {
+                    failed = true;
+                    throw failure;
+                }
+            }
+
+            @Override public void remove() {
+                live();
+                if (lastPhysical < 0) throw new IllegalStateException("remove without delivered element");
+                checkForComodification();
+                int target = lastPhysical;
+                int position = iterator.nextIndex();
+                backing.remove(target);
+                if (target < position) position--;
+                iterator = backing.listIterator(position);
+                if (lastWasNext) logical--;
+                lastPhysical = -1;
+                modCount++;
+                discardProbes();
+            }
+
+            @Override public void set(E value) {
+                live();
+                if (lastPhysical < 0) throw new IllegalStateException("set without delivered element");
+                requireAccepted(value);
+                checkForComodification();
+                backing.set(lastPhysical, value);
+                discardProbes();
+            }
+
+            @Override public void add(E value) {
+                live();
+                requireAccepted(value);
+                checkForComodification();
+                int position = iterator.nextIndex();
+                backing.add(position, value);
+                iterator = backing.listIterator(position + 1);
+                logical++;
+                lastPhysical = -1;
+                modCount++;
+                discardProbes();
+            }
+        }
+    }
+}

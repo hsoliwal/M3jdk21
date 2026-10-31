@@ -1,0 +1,132 @@
+{
+  "receiver_ref": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+  "entries": [
+    {
+      "owner": "apiguardian-api",
+      "files": 6,
+      "provenance_sha256": "c03045650d5e792b926dc56c738e52946fb44ff1cc212fbb8c2e61e223802429",
+      "artifact_sha256": "7fd4e65409358391c5c2be2c0515b3a15661e1b03745e382e5a28338d16601d8",
+      "artifact": "/workspace/scratch/4f99f40718f0/m3-implementation/packs/source/m3-vendor/m3/vendor/third_party/apiguardian-api/target/apiguardian-api-1.1.2-m3-source-1.jar",
+      "verified_legal_resources": [
+        "META-INF/LICENSE"
+      ],
+      "helper_root_license_exists": false,
+      "upstream_tests": "not present in published source inclusion; existing POM skips them"
+    },
+    {
+      "owner": "opentest4j",
+      "files": 16,
+      "provenance_sha256": "80f1b151283659911db971c9de37bb262c5107014ab5527178288a9ba59d101c",
+      "artifact_sha256": "db6df55fc792c1e2c7ccead661e2469042cede0f8fd08eaaf545024d64d6a4aa",
+      "artifact": "/workspace/scratch/4f99f40718f0/m3-implementation/packs/source/m3-vendor/m3/vendor/third_party/opentest4j/target/opentest4j-1.3.0-m3-source-1.jar",
+      "verified_legal_resources": [
+        "META-INF/LICENSE"
+      ],
+      "helper_root_license_exists": true,
+      "upstream_tests": "not present in published source inclusion; existing POM skips them"
+    },
+    {
+      "owner": "junit-platform-commons-1.10.2",
+      "files": 50,
+      "provenance_sha256": "122eb73e35664bd56635ea2f5fb81bea474a9537ff7453d3ae0703a15e62698a",
+      "artifact_sha256": "15f4f2bdb65933b85c684ba5a06a63bdb9e7c14898f77b561e97fc97bb68cffb",
+      "artifact": "/workspace/scratch/4f99f40718f0/m3-implementation/packs/source/m3-vendor/m3/vendor/third_party/junit-platform-commons-1.10.2/target/junit-platform-commons-1.10.2-m3-source-1.jar",
+      "verified_legal_resources": [
+        "META-INF/LICENSE.md",
+        "META-INF/LICENSE-notice.md"
+      ],
+      "helper_root_license_exists": true,
+      "upstream_tests": "not present in published source inclusion; existing POM skips them"
+    },
+    {
+      "owner": "junit-platform-engine-1.10.2",
+      "files": 104,
+      "provenance_sha256": "93c618264cefd8b473973a6a4bc87baa2a83b55adeca2555c47a94989096ae1f",
+      "artifact_sha256": "324459c3b6a04a1839cb06cb6c6a1a556187e02ead7f2f8c1ecd8c10df371680",
+      "artifact": "/workspace/scratch/4f99f40718f0/m3-implementation/packs/source/m3-vendor/m3/vendor/third_party/junit-platform-engine-1.10.2/target/junit-platform-engine-1.10.2-m3-source-1.jar",
+      "verified_legal_resources": [
+        "META-INF/LICENSE.md",
+        "META-INF/LICENSE-notice.md"
+      ],
+      "helper_root_license_exists": true,
+      "upstream_tests": "not present in published source inclusion; existing POM skips them"
+    },
+    {
+      "owner": "junit-platform-launcher-1.10.2",
+      "files": 88,
+      "provenance_sha256": "551b8eb8c91d63adea89157d18c34eb0bb14375066e0c245b09ccfd664fce244",
+      "artifact_sha256": "7eeb9cc022a1de21dd1231fe4474317f7812cb3aecdb3cfb90850792f1cf5c33",
+      "artifact": "/workspace/scratch/4f99f40718f0/m3-implementation/packs/source/m3-vendor/m3/vendor/third_party/junit-platform-launcher-1.10.2/target/junit-platform-launcher-1.10.2-m3-source-1.jar",
+      "verified_legal_resources": [
+        "META-INF/LICENSE.md",
+        "META-INF/LICENSE-notice.md"
+      ],
+      "helper_root_license_exists": true,
+      "upstream_tests": "not present in published source inclusion; existing POM skips them"
+    },
+    {
+      "owner": "junit-jupiter-api-5.10.2",
+      "files": 157,
+      "provenance_sha256": "ec5564e4cdace0c8a0fe173f3502eef24ed8e4989dd49db8086b7c9295a301e4",
+      "artifact_sha256": "ef79f7b724b33f8c259aeff7ced6de40652355ed43738b8922aee78513aaebbc",
+      "artifact": "/workspace/scratch/4f99f40718f0/m3-implementation/packs/source/m3-vendor/m3/vendor/third_party/junit-jupiter-api-5.10.2/target/junit-jupiter-api-5.10.2-m3-source-1.jar",
+      "verified_legal_resources": [
+        "META-INF/LICENSE.md",
+        "META-INF/LICENSE-notice.md"
+      ],
+      "helper_root_license_exists": true,
+      "upstream_tests": "not present in published source inclusion; existing POM skips them"
+    },
+    {
+      "owner": "junit-jupiter-engine-5.10.2",
+      "files": 108,
+      "provenance_sha256": "fefbe8ed4151302e6a98da3b154a6c7ec58c29206466ddae1cb848e6744a18fb",
+      "artifact_sha256": "4a7cd48e4468bc25e8b2644631c47bc9504519e9f1b4da6242a4cf8bb79cee5b",
+      "artifact": "/workspace/scratch/4f99f40718f0/m3-implementation/packs/source/m3-vendor/m3/vendor/third_party/junit-jupiter-engine-5.10.2/target/junit-jupiter-engine-5.10.2-m3-source-1.jar",
+      "verified_legal_resources": [
+        "META-INF/LICENSE.md",
+        "META-INF/LICENSE-notice.md"
+      ],
+      "helper_root_license_exists": true,
+      "upstream_tests": "not present in published source inclusion; existing POM skips them"
+    },
+    {
+      "owner": "junit-jupiter-params-5.10.2",
+      "files": 70,
+      "provenance_sha256": "038f44693e10fb9267e130284a4c257418a24277f2d1c14f8dbacf0681f072f0",
+      "artifact_sha256": "5466399391bd0f7c68b5be834f76c26a151c4b02162d1b7c86389a121ed3c2f9",
+      "artifact": "/workspace/scratch/4f99f40718f0/m3-implementation/packs/source/m3-vendor/m3/vendor/third_party/junit-jupiter-params-5.10.2/target/junit-jupiter-params-5.10.2-m3-source-1.jar",
+      "verified_legal_resources": [
+        "META-INF/LICENSE.md",
+        "META-INF/LICENSE-univocity-parsers.md",
+        "META-INF/LICENSE-notice.md"
+      ],
+      "helper_root_license_exists": true,
+      "upstream_tests": "not present in published source inclusion; existing POM skips them"
+    },
+    {
+      "owner": "junit-jupiter-5.10.2",
+      "files": 6,
+      "provenance_sha256": "8ccf4180e433160d923d076ff63fb9f6440d71ff3a522422ea338b0d979714ba",
+      "artifact_sha256": "fbc9e4a24653e9260971e95db7b9f198e724cd304e3fc8b5f981a5e8151e9d96",
+      "artifact": "/workspace/scratch/4f99f40718f0/m3-implementation/packs/source/m3-vendor/m3/vendor/third_party/junit-jupiter-5.10.2/target/junit-jupiter-5.10.2-m3-source-1.jar",
+      "verified_legal_resources": [
+        "META-INF/LICENSE.md",
+        "META-INF/LICENSE-notice.md"
+      ],
+      "helper_root_license_exists": true,
+      "upstream_tests": "not present in published source inclusion; existing POM skips them"
+    },
+    {
+      "owner": "univocity-parsers",
+      "files": 221,
+      "provenance_sha256": "44e70f89c7a241a65c05f8d5956e1d1301e48292de18b7b32fdb01699c4dd6f7",
+      "artifact_sha256": "52ac045e1f38d47be2691ba767a7c5ed7c80c6cfc222df04245776a9e75cffa9",
+      "artifact": "/workspace/scratch/4f99f40718f0/m3-implementation/packs/source/m3-vendor/m3/vendor/third_party/univocity-parsers/target/univocity-parsers-2.9.1-m3-source-1.jar",
+      "verified_legal_resources": [],
+      "helper_root_license_exists": true,
+      "upstream_tests": "not present in published source inclusion; existing POM skips them"
+    }
+  ],
+  "status": "SOURCE_BUILD_AND_ACTUAL_LEGAL_RESOURCE_BYTES_PASS; kernel consumer tests separate"
+}

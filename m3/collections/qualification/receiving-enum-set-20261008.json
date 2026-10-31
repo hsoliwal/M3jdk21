@@ -1,0 +1,109 @@
+{
+  "schema": "M3_COLLECTION_ENUM_SET_INVENTORY_SUCCESSOR_QUALIFICATION_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "modification_notice": "2026: qualify the existing concurrent EnumSet owner and test without runtime edits; retain historical88-source evidence unchanged.",
+  "scope": "SEPARATELY_BUILT_COLLECTION_MODULE_EXACT_90_SOURCE_SUCCESSOR",
+  "target_baseline": "eda1ae0733952394851c3580f8efb7624563b98c",
+  "target_tree": "bb39f9b79a8f60811f5d5b431f2ad9ef9aa345ef",
+  "canonical_recipe": "com.synexia.m3.M3CollectionsEnumSetInventorySuccessor20261008",
+  "canonical_path": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008/metadata-proof/enum-set-source-set-successor",
+  "source_engine_baseline": "1074559415050bcda1110ca5c485870b3e7513a7",
+  "source_engine_sha256": "d91d816a8f40e7501690e4e3601b1b4e627329a3fc6ef225dbb0a343ebcdb90b",
+  "new_packet_publication": "PUBLISHED_CANONICAL_SOURCE",
+  "canonical_enum_set_source": {
+    "commit": "234b50350dc3b20e0928b893ca009ac0fc78cea2",
+    "pull_request": 9817,
+    "descriptor": "com.synexia.m3.EnumSet",
+    "source_and_target_templates": "BYTE_EXACT",
+    "central_home_staging_row": "PENDING_COMMIT_NOT_REASSERTED_AS_FINAL"
+  },
+  "product_qualification": {
+    "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+    "license": "Apache-2.0",
+    "schema": "M3_COLLECTION_RECEIVING_QUALIFICATION_V1",
+    "scope": "SEPARATELY_BUILT_COLLECTION_MODULE",
+    "installed_source_manifest_sha256": "6627c851e6a879e28c0434b41f988669c118649e04a4d89bcf30102aa9e767ed",
+    "java_sources": 66,
+    "test_sources": 24,
+    "junit": {
+      "tests": 117,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "main_self_tests": [
+      "M3LazyTreeMapSelfTest:PASS",
+      "M3LazyValueStateSelfTest:PASS"
+    ],
+    "java_compile": "--release 21 -Xlint:all,-module -Werror",
+    "runtime_requires": [
+      "java.base"
+    ],
+    "native_standard": "c17",
+    "undefined_behavior_sanitizer": "PASS",
+    "checked_jni": "PASS",
+    "prepared_lane_allocation": "PASS",
+    "packaged_license_provenance": "PASS",
+    "cost_probe": "NOT_RUN",
+    "full_reactor": "NOT_RUN",
+    "openjdk_jtreg_hotspot": "NOT_RUN",
+    "universal_performance_claim": false,
+    "phase_advance": false,
+    "active_phase": "STRING",
+    "target_baseline": "eda1ae0733952394851c3580f8efb7624563b98c"
+  },
+  "maven_verify": {
+    "tests": 117,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_enum_tests": [
+    {
+      "class": "com.m3.collections.M3EnumSetTest",
+      "method": "wideEnumMatchesJdkAcrossMutationsAndBulkOperations"
+    },
+    {
+      "class": "com.m3.collections.M3EnumSetTest",
+      "method": "foreignEnumConstantsAreRejectedLikeJdk"
+    },
+    {
+      "class": "com.m3.collections.M3EnumSetTest",
+      "method": "retainsOnlyPresenceWordsAndTheSharedUniverse"
+    },
+    {
+      "class": "com.m3.collections.M3EnumSetTest",
+      "method": "narrowEnumEdgeContractsMatchJdk"
+    }
+  ],
+  "java_bytes_changed_during_qualification": 0,
+  "installed_rows": 95,
+  "module_java_sources": 90,
+  "standalone_java_probes": 2,
+  "non_java_inputs": 3,
+  "independent_qualification": {
+    "path": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008/metadata-proof/enum-set-source-set-successor/evidence/product/qualification.json",
+    "sha256": "669b75e276186d1b7b1f3f306c4572b05b293421c99426f23b467e2193d90ffd",
+    "status": "PASS"
+  },
+  "diagnostic_cost_probe": {
+    "path": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008/metadata-proof/enum-set-source-set-successor/evidence/product/diagnostic-cost-probe.json",
+    "sha256": "e80a22c1a745774c9f75d6dfa5778db40f45fb3fb7bfec7efc9dc0d9ab9c600c",
+    "scope": "STANDALONE_EXISTING_PROBE_AFTER_VERIFIER; RAW_VERIFIER_COST_NOT_RUN_PRESERVED",
+    "performance_change_by_this_successor": false,
+    "universal_performance_claim": false
+  },
+  "historical_88_source_receipts": "UNCHANGED; original93-row installed inventory, receiving-repair qualification and original application receipt retain their original scope.",
+  "full_reactor": "NOT_RUN",
+  "openjdk_jtreg_hotspot": "NOT_RUN",
+  "unrelated_apache_a3": "OUT_OF_SCOPE",
+  "active_phase": "STRING",
+  "phase_advance": false,
+  "canonical_source_revision": "ea441c53361caf7222eb064b24640be7f7927672",
+  "canonical_source_tree": "21ba9919ac6c5a6f41019f8af05528915d7b0e60",
+  "canonical_source_artifact_root_sha256": "2b4f251c5730672f86566ab82543adc6c8169602f03e49f9635df6d845b1f568",
+  "canonical_source_artifact_files": 57,
+  "canonical_source_artifact_format": "SHA256 of UTF8 sorted path<TAB>mode<TAB>git_blob<TAB>sha256<LF>; excludes live central home and the external manifest",
+  "publication_binding_notice": "Modified 2026: bind the qualified current cohort to its exact published canonical packet; all runtime and historical qualification facts remain unchanged."
+}

@@ -1,0 +1,128 @@
+{
+  "kind": "finite warm-JVM ThreadMXBean observation; not JMH/retained heap/RSS/universal performance",
+  "samples_per_case": 5,
+  "iterations_per_sample": 1000,
+  "warmup_calls": 2000,
+  "rows": [
+    {
+      "operation": "rotation",
+      "size": 32,
+      "baseline": {
+        "allocated_bytes_per_call": 144.0,
+        "cpu_ns_per_call": 226.317
+      },
+      "candidate": {
+        "allocated_bytes_per_call": 144.0,
+        "cpu_ns_per_call": 121.571
+      }
+    },
+    {
+      "operation": "native_selection_step_1",
+      "size": 32,
+      "baseline": {
+        "allocated_bytes_per_call": 336.0,
+        "cpu_ns_per_call": 689.076
+      },
+      "candidate": {
+        "allocated_bytes_per_call": 192.0,
+        "cpu_ns_per_call": 573.905
+      }
+    },
+    {
+      "operation": "native_selection_step_2",
+      "size": 32,
+      "baseline": {
+        "allocated_bytes_per_call": 208.0,
+        "cpu_ns_per_call": 558.462
+      },
+      "candidate": {
+        "allocated_bytes_per_call": 128.0,
+        "cpu_ns_per_call": 399.615
+      }
+    },
+    {
+      "operation": "native_selection_step_64",
+      "size": 32,
+      "baseline": {
+        "allocated_bytes_per_call": 96.0,
+        "cpu_ns_per_call": 306.006
+      },
+      "candidate": {
+        "allocated_bytes_per_call": 72.0,
+        "cpu_ns_per_call": 443.651
+      }
+    },
+    {
+      "operation": "merge_single_tail",
+      "size": 32,
+      "baseline": {
+        "allocated_bytes_per_call": 144.0,
+        "cpu_ns_per_call": 367.297
+      },
+      "candidate": {
+        "allocated_bytes_per_call": 144.0,
+        "cpu_ns_per_call": 304.113
+      }
+    },
+    {
+      "operation": "rotation",
+      "size": 4096,
+      "baseline": {
+        "allocated_bytes_per_call": 16400.0,
+        "cpu_ns_per_call": 5278.751
+      },
+      "candidate": {
+        "allocated_bytes_per_call": 16400.0,
+        "cpu_ns_per_call": 1411.852
+      }
+    },
+    {
+      "operation": "native_selection_step_1",
+      "size": 4096,
+      "baseline": {
+        "allocated_bytes_per_call": 36912.0,
+        "cpu_ns_per_call": 22272.849
+      },
+      "candidate": {
+        "allocated_bytes_per_call": 20512.0,
+        "cpu_ns_per_call": 22470.955
+      }
+    },
+    {
+      "operation": "native_selection_step_2",
+      "size": 4096,
+      "baseline": {
+        "allocated_bytes_per_call": 20528.0,
+        "cpu_ns_per_call": 15515.686
+      },
+      "candidate": {
+        "allocated_bytes_per_call": 12320.0,
+        "cpu_ns_per_call": 17551.969
+      }
+    },
+    {
+      "operation": "native_selection_step_64",
+      "size": 4096,
+      "baseline": {
+        "allocated_bytes_per_call": 4656.0,
+        "cpu_ns_per_call": 10076.126
+      },
+      "candidate": {
+        "allocated_bytes_per_call": 4384.0,
+        "cpu_ns_per_call": 10935.926
+      }
+    },
+    {
+      "operation": "merge_single_tail",
+      "size": 4096,
+      "baseline": {
+        "allocated_bytes_per_call": 16400.0,
+        "cpu_ns_per_call": 2414.185
+      },
+      "candidate": {
+        "allocated_bytes_per_call": 16400.0,
+        "cpu_ns_per_call": 2415.317
+      }
+    }
+  ]
+}

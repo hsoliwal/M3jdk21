@@ -1,0 +1,365 @@
+{
+  "commit": "d1c1049b78fe70d81c4391caabc629185c00e5b5",
+  "files": [
+    {
+      "path": ".github/workflows/m3-parser-filter-refinement-20261019.yml",
+      "expected": "7cfc42a655d4107bdb59dabe830ae1ea341b4413",
+      "actual": "7cfc42a655d4107bdb59dabe830ae1ea341b4413",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv",
+      "expected": "48cba1ed5c00fee45df648e044764b61ffc0e946",
+      "actual": "48cba1ed5c00fee45df648e044764b61ffc0e946",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/ALGORITHMS.tsv",
+      "expected": "c79a423ee83e95dc86770c365813e3b1a6f91636",
+      "actual": "c79a423ee83e95dc86770c365813e3b1a6f91636",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/CONTRACT.md",
+      "expected": "0ca04ce9b8978c94b4b4456fd32fc3c4410e1b8c",
+      "actual": "0ca04ce9b8978c94b4b4456fd32fc3c4410e1b8c",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/COVERAGE.tsv",
+      "expected": "aeb103db54ad481d23b95a704ead6d5fde5aee16",
+      "actual": "aeb103db54ad481d23b95a704ead6d5fde5aee16",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/FILE_PASSES.tsv",
+      "expected": "1e81f9f90a2ce34500e7ce1acba917f93aa7d671",
+      "actual": "1e81f9f90a2ce34500e7ce1acba917f93aa7d671",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/README.md",
+      "expected": "e60970150507791a7d5eb5efe77712d2f60b0139",
+      "actual": "e60970150507791a7d5eb5efe77712d2f60b0139",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/evidence/engine-identity.json",
+      "expected": "75b47926364d3e2c71cdde72fb88b3791fc824b5",
+      "actual": "75b47926364d3e2c71cdde72fb88b3791fc824b5",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/evidence/jdt-runtime.log",
+      "expected": "90ff399f3cb72c2fa794bc441de3402c2a356d90",
+      "actual": "90ff399f3cb72c2fa794bc441de3402c2a356d90",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/evidence/jni-runtime.log",
+      "expected": "ee777b5010c952e463ad92f934da753527a146f6",
+      "actual": "ee777b5010c952e463ad92f934da753527a146f6",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/evidence/jni-symbols.json",
+      "expected": "1516bc83015d46e43416dd6bddf7370608b8e778",
+      "actual": "1516bc83015d46e43416dd6bddf7370608b8e778",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/evidence/sdk-receipt.json",
+      "expected": "d7793ee5bbef56f9c7945654be9c48cda57e3604",
+      "actual": "d7793ee5bbef56f9c7945654be9c48cda57e3604",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/evidence/sdk.log",
+      "expected": "eb6724f2e0bc196486c42431bb8a8d85fb6eac94",
+      "actual": "eb6724f2e0bc196486c42431bb8a8d85fb6eac94",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/evidence/trace-parity.json",
+      "expected": "53001d21af038c66e20aa116e369f3bf8892a636",
+      "actual": "53001d21af038c66e20aa116e369f3bf8892a636",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/evidence/tree-report.json",
+      "expected": "ee40724f887f11dceae3f1b4cfd025733a048968",
+      "actual": "ee40724f887f11dceae3f1b4cfd025733a048968",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/evidence/workspace-failed.log",
+      "expected": "01775f53e91cc75e67d3c05f2338b7defb61c4aa",
+      "actual": "01775f53e91cc75e67d3c05f2338b7defb61c4aa",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/inputs/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "expected": "ad4ebf2f6ccce79b3d8f3fe1f3a513f5ade4d378",
+      "actual": "ad4ebf2f6ccce79b3d8f3fe1f3a513f5ade4d378",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/inputs/m3/collections/src/main/java/com/m3/collections/M3SlotMap.java",
+      "expected": "e4bcf701a32bbcf0cc201030ebb2cff216bc9115",
+      "actual": "e4bcf701a32bbcf0cc201030ebb2cff216bc9115",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/inputs/m3/collections/src/main/java/com/m3/collections/M3TreeMap.java",
+      "expected": "bcb9c73bc8a4244695db627a483b99a671d60df8",
+      "actual": "bcb9c73bc8a4244695db627a483b99a671d60df8",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/inputs/m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "expected": "795a55d3b8646940fea5748c39bbcddc68e2122f",
+      "actual": "795a55d3b8646940fea5748c39bbcddc68e2122f",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/inputs/m3/collections/src/test/java/com/m3/collections/M3FilteredTerminalTrace.java",
+      "expected": "37c430377ca8e6552cade749b6d3738bad5ea851",
+      "actual": "37c430377ca8e6552cade749b6d3738bad5ea851",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/inputs/m3/collections/src/test/java/com/m3/collections/M3SparseMaskReadContract.java",
+      "expected": "57a23e8d744d10f760d9930a8b33c716e4585bc6",
+      "actual": "57a23e8d744d10f760d9930a8b33c716e4585bc6",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/inputs/m3/collections/src/test/java/com/m3/collections/M3TreeMapEmptyLookupTest.java",
+      "expected": "95aee590ff9732f38f4064be626188a088c518e6",
+      "actual": "95aee590ff9732f38f4064be626188a088c518e6",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/inputs/m3/collections/src/test/java/com/m3/collections/M3TreeMapGetOrDefaultTest.java",
+      "expected": "73183c6420cb782fdddcfbdb4fdd3196f8298227",
+      "actual": "73183c6420cb782fdddcfbdb4fdd3196f8298227",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/inputs/m3/collections/src/test/native/m3_sparse_mask_reads.c",
+      "expected": "1888952af54008e62d88518fd370290284e347a4",
+      "actual": "1888952af54008e62d88518fd370290284e347a4",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/inputs/m3/tooling/module-packs/parser/src/integration/java/jdk/m3/parser/test/M3JdtEquinoxContract.java",
+      "expected": "9420f878fc86a47bf0ec157ea4e6b9769a42d58f",
+      "actual": "9420f878fc86a47bf0ec157ea4e6b9769a42d58f",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/inputs/m3/tooling/module-packs/parser/src/integration/java/jdk/m3/parser/test/M3JdtSemanticContract.java",
+      "expected": "9afbe80178de390736382058ff5cb996d6615ebd",
+      "actual": "9afbe80178de390736382058ff5cb996d6615ebd",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/inputs/m3/tooling/module-packs/parser/src/integration/java/jdk/m3/parser/test/M3JdtWorkspaceProbe.java",
+      "expected": "0a988411d880886e74e59c7ec533d543a366724b",
+      "actual": "0a988411d880886e74e59c7ec533d543a366724b",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/inputs/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIndex.java",
+      "expected": "9446e8734164cd6d8dcfd1904013e064f27f7069",
+      "actual": "9446e8734164cd6d8dcfd1904013e064f27f7069",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/inputs/m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3ASTIngress.java",
+      "expected": "986291be1b4b41e150cff8c68299afff8d138b88",
+      "actual": "986291be1b4b41e150cff8c68299afff8d138b88",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/jdt-dependencies.json",
+      "expected": "1db6c5c2ba76dbc01f83b94a82a2c3816c63d43f",
+      "actual": "1db6c5c2ba76dbc01f83b94a82a2c3816c63d43f",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/oracle/CanonicalPutAllCalibration3.java",
+      "expected": "b25329eb1be8b4a286300c1d73441193ad4f0dee",
+      "actual": "b25329eb1be8b4a286300c1d73441193ad4f0dee",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/oracle/EmptyRootLookupOracle.java",
+      "expected": "bd9d4d844091ee8121cdbfe285aa5dc77ae223b6",
+      "actual": "bd9d4d844091ee8121cdbfe285aa5dc77ae223b6",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/oracle/jdk-original.jsonl",
+      "expected": "d139796b77bc12b4722ede12e500ccb71534b550",
+      "actual": "d139796b77bc12b4722ede12e500ccb71534b550",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/recipes/m3-parser-filter-refinement-20261019/qualify.py",
+      "expected": "684f16eede0e309a2e5587a876ee4671b910e71b",
+      "actual": "684f16eede0e309a2e5587a876ee4671b910e71b",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-parser-filter-refinement-20261019.yml",
+      "expected": "30658da64f40b5d3b41ae97e3972082d36c13b51",
+      "actual": "30658da64f40b5d3b41ae97e3972082d36c13b51",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3ASTIndex.java.before.txt",
+      "expected": "b6e0a709586b171d1db75f4e049355cb45ff0147",
+      "actual": "b6e0a709586b171d1db75f4e049355cb45ff0147",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3ASTIndex.java.txt",
+      "expected": "9446e8734164cd6d8dcfd1904013e064f27f7069",
+      "actual": "9446e8734164cd6d8dcfd1904013e064f27f7069",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3ASTIngress.java.before.txt",
+      "expected": "7bf56729ce63f4e345a27f94f30feacae288afbf",
+      "actual": "7bf56729ce63f4e345a27f94f30feacae288afbf",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3ASTIngress.java.txt",
+      "expected": "986291be1b4b41e150cff8c68299afff8d138b88",
+      "actual": "986291be1b4b41e150cff8c68299afff8d138b88",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3FilteredTerminalTrace.java.txt",
+      "expected": "37c430377ca8e6552cade749b6d3738bad5ea851",
+      "actual": "37c430377ca8e6552cade749b6d3738bad5ea851",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3FilteredViews.java.before.txt",
+      "expected": "6ba9717eb5d4070b3f53cf705acf843471973ee9",
+      "actual": "6ba9717eb5d4070b3f53cf705acf843471973ee9",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3FilteredViews.java.txt",
+      "expected": "ad4ebf2f6ccce79b3d8f3fe1f3a513f5ade4d378",
+      "actual": "ad4ebf2f6ccce79b3d8f3fe1f3a513f5ade4d378",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3JdtEquinoxContract.java.txt",
+      "expected": "9420f878fc86a47bf0ec157ea4e6b9769a42d58f",
+      "actual": "9420f878fc86a47bf0ec157ea4e6b9769a42d58f",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3JdtSemanticContract.java.txt",
+      "expected": "9afbe80178de390736382058ff5cb996d6615ebd",
+      "actual": "9afbe80178de390736382058ff5cb996d6615ebd",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3JdtWorkspaceProbe.java.txt",
+      "expected": "0a988411d880886e74e59c7ec533d543a366724b",
+      "actual": "0a988411d880886e74e59c7ec533d543a366724b",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3SlotMap.java.before.txt",
+      "expected": "894e273ee0744be8590bac08a791790cc7c66b6f",
+      "actual": "894e273ee0744be8590bac08a791790cc7c66b6f",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3SlotMap.java.txt",
+      "expected": "e4bcf701a32bbcf0cc201030ebb2cff216bc9115",
+      "actual": "e4bcf701a32bbcf0cc201030ebb2cff216bc9115",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3SparseMaskReadContract.java.txt",
+      "expected": "57a23e8d744d10f760d9930a8b33c716e4585bc6",
+      "actual": "57a23e8d744d10f760d9930a8b33c716e4585bc6",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3TreeMap.java.before.txt",
+      "expected": "5ec10b08a07473c334e192f8d3750c2b96ddfffd",
+      "actual": "5ec10b08a07473c334e192f8d3750c2b96ddfffd",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3TreeMap.java.txt",
+      "expected": "bcb9c73bc8a4244695db627a483b99a671d60df8",
+      "actual": "bcb9c73bc8a4244695db627a483b99a671d60df8",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3TreeMapEmptyLookupTest.java.txt",
+      "expected": "95aee590ff9732f38f4064be626188a088c518e6",
+      "actual": "95aee590ff9732f38f4064be626188a088c518e6",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/M3TreeMapGetOrDefaultTest.java.txt",
+      "expected": "73183c6420cb782fdddcfbdb4fdd3196f8298227",
+      "actual": "73183c6420cb782fdddcfbdb4fdd3196f8298227",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-parser-filter-refinement-20261019/manifest.tsv",
+      "expected": "a839a34a817617e9d2a4ccd1a68e78b9910b998c",
+      "actual": "a839a34a817617e9d2a4ccd1a68e78b9910b998c",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-parser-filter-refinement-20261019/m3_index_mask_compactor.c.before.txt",
+      "expected": "15024c40ba9b92fd50fb7823ecfa9543aba22be1",
+      "actual": "15024c40ba9b92fd50fb7823ecfa9543aba22be1",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-parser-filter-refinement-20261019/m3_index_mask_compactor.c.txt",
+      "expected": "795a55d3b8646940fea5748c39bbcddc68e2122f",
+      "actual": "795a55d3b8646940fea5748c39bbcddc68e2122f",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-parser-filter-refinement-20261019/m3_sparse_mask_reads.c.txt",
+      "expected": "1888952af54008e62d88518fd370290284e347a4",
+      "actual": "1888952af54008e62d88518fd370290284e347a4",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-parser-filter-refinement-20261019/manifest.tsv",
+      "expected": "98e1dffd66a7f3810fffaba9d85279ba53a7827a",
+      "actual": "98e1dffd66a7f3810fffaba9d85279ba53a7827a",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3ParserFilterRefinementRecipeTest.java",
+      "expected": "3c39d145cd5df3920efccd2192d09ff4e19dfd42",
+      "actual": "3c39d145cd5df3920efccd2192d09ff4e19dfd42",
+      "ok": true
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/m3-parser-filter-refinement-20261019/pom.xml",
+      "expected": "8afe5c16f64bdce8ff999d4038f69e7b2b3f58a2",
+      "actual": "8afe5c16f64bdce8ff999d4038f69e7b2b3f58a2",
+      "ok": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.BackportContractCurrentOwner
+displayName: Prepare current backport contract test fixtures
+description: Exact reviewed source replay; actual Python and full reactor proofs remain separate.
+recipeList:
+  - com.synexia.rewrite.M3BackportContractCurrentOwnerRecipe
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.BackportContractCurrentOwnerInverse
+displayName: Recover exact original backport contract test fixtures
+description: Exact rollback data only; historical failures are not promoted into a current contract.
+recipeList:
+  - com.synexia.rewrite.M3BackportContractCurrentOwnerInverseRecipe

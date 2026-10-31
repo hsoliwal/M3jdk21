@@ -1,0 +1,116 @@
+{
+  "schema": "M3JDK21_SELECTED_SUPERSET_RECEIVER_V1",
+  "product": "M3JDK21 integrated Java21/JDK/HotSpot/JNI SDK; not M3 plus JDK",
+  "target": "hsoliwal/M3jdk21",
+  "target_branch": "chatgpt/m3jdk21-superset-file-jni-filtered-20261021",
+  "parent_pr": 1653,
+  "parent_sha": "1a0d32bde2aa0dab48486a7a5dc0259920dd946b",
+  "parents": [
+    {
+      "number": 1624,
+      "sha": "d7b9e65241b717a387b25234df4cf21531f07d9f"
+    },
+    {
+      "number": 1653,
+      "sha": "1a0d32bde2aa0dab48486a7a5dc0259920dd946b"
+    }
+  ],
+  "canonical_recipe_authority": "hsoliwal/com.synexia",
+  "recipes": [
+    {
+      "pr": 12711,
+      "purpose": "forward-source-qualified first-visible private atoms"
+    },
+    {
+      "pr": 12702,
+      "purpose": "indexed JNI state-mask gather"
+    },
+    {
+      "pr": 12688,
+      "purpose": "one-read paragraph grammar and metadata"
+    },
+    {
+      "pr": 12671,
+      "purpose": "compiler-owned packed javac facts"
+    },
+    {
+      "pr": 12641,
+      "purpose": "already-merged Deque asymmetric equality"
+    },
+    {
+      "pr": 12656,
+      "purpose": "JDK wrapper contract baseline"
+    },
+    {
+      "pr": 12676,
+      "purpose": "existing file stream subprogress parent"
+    }
+  ],
+  "original_donors": [
+    {
+      "pr": 1669,
+      "kind": "original Java/C/JNI metadata + tests"
+    },
+    {
+      "pr": 1643,
+      "kind": "first-visible direct scan + oracle, forward via recipe"
+    },
+    {
+      "pr": 1649,
+      "kind": "additive original compiler fact image"
+    },
+    {
+      "pr": 1640,
+      "kind": "JDK21 wrapper jtreg baseline"
+    },
+    {
+      "pr": 1633,
+      "kind": "already merged source/test exact master blobs"
+    },
+    {
+      "pr": 1661,
+      "kind": "grammar/paragraph-only original source, not task scheduler"
+    }
+  ],
+  "received_file_count_before_ledger": 20,
+  "checked_original_javac_tree_sha": "f6d057bf34f3893eaae245de49766330f7207e52",
+  "existing_m3file_source_preserved": true,
+  "original_array_offset_mask_ownership_preserved": true,
+  "original_public_descriptors_unmodified": true,
+  "existing_jni_symbols_preserved": true,
+  "jni_additions": [
+    "indexedAbiNative()I",
+    "tallyIndexedNative([I[BIII[I)V"
+  ],
+  "held": [
+    {
+      "pr": 1661,
+      "scope": "ThreadPerTaskExecutor and bounded worker-failure scheduler"
+    },
+    {
+      "pr": 1659,
+      "scope": "filtered/sorted stored representative comparator semantics"
+    },
+    {
+      "pr": 1608,
+      "scope": "detached source/file snapshot and provider change adapters"
+    },
+    {
+      "pr": 1641,
+      "scope": "Maven 4 effective model ingress ABI gates"
+    },
+    {
+      "scope": "latest-master-forward"
+    }
+  ],
+  "gates": {
+    "github_postimage_source_readback": "PASS",
+    "canonical_recipe_execution": "NOT_RUN",
+    "combined_maven_junit": "NOT_RUN",
+    "jni_native_c17_headers": "NOT_RUN",
+    "full_jdk21_hotspot_image": "NOT_RUN",
+    "jtreg": "NOT_RUN",
+    "cross_platform": "NOT_RUN",
+    "benchmarks": "NOT_RUN"
+  }
+}

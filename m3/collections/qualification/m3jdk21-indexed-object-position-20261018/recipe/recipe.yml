@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Jdk21IndexedObjectPosition20261018
+displayName: Fuse M3 filtered object snapshots through JNI logical positions
+description: Source-sealed current owner refinement with Java21/JNI list contract oracles.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3jdk21-indexed-object-position-20261018

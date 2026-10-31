@@ -1,0 +1,279 @@
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/AllFileSelector.java:52: warning: [deprecation] traverseDescendents(FileSelectInfo) in FileSelector has been deprecated
+    public boolean traverseDescendents(final FileSelectInfo fileInfo) throws Exception {
+                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/FileSystemOptions.java:202: warning: [unchecked] unchecked cast
+        final T value = (T) options.getOrDefault(new FileSystemOptionKey(fileSystemClass, name), defaultValue);
+                                                ^
+  required: T
+  found:    Object
+  where T is a type-variable:
+    T extends Object declared in method <T>getOptionOrDefault(Class<? extends FileSystem>,String,T)
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/FileDepthSelector.java:78: warning: [deprecation] traverseDescendents(FileSelectInfo) in FileSelector has been deprecated
+    public boolean traverseDescendents(final FileSelectInfo fileInfo) throws Exception {
+                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/FileDepthSelector.java:57: warning: [deprecation] <T>between(T,T) in Range has been deprecated
+        range = Range.between(minDepth, maxDepth);
+                     ^
+  where T is a type-variable:
+    T extends Comparable<? super T> declared in method <T>between(T,T)
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/FileExtensionSelector.java:86: warning: [deprecation] traverseDescendents(FileSelectInfo) in FileSelector has been deprecated
+    public boolean traverseDescendents(final FileSelectInfo fileInfo) throws Exception {
+                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/FileTypeSelector.java:58: warning: [deprecation] traverseDescendents(FileSelectInfo) in FileSelector has been deprecated
+    public boolean traverseDescendents(final FileSelectInfo fileInfo) throws Exception {
+                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/InvertIncludeFileSelector.java:54: warning: [deprecation] traverseDescendents(FileSelectInfo) in FileSelector has been deprecated
+    public boolean traverseDescendents(final FileSelectInfo fileInfo) throws Exception {
+                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/M3VFS.java:64: warning: [unchecked] unchecked cast
+            final Class<FileSystemManager> clazz = (Class<FileSystemManager>) Class.forName(managerClassName);
+                                                                                           ^
+  required: Class<FileSystemManager>
+  found:    Class<CAP#1>
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Object from capture of ?
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/PatternFileSelector.java:112: warning: [deprecation] traverseDescendents(FileSelectInfo) in FileSelector has been deprecated
+    public boolean traverseDescendents(final FileSelectInfo fileInfo) throws Exception {
+                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/cache/SoftRefFilesCache.java:263: warning: [deprecation] getId() in Thread has been deprecated
+            + (releaseThread == null ? "" : "(ID " + releaseThread.getId() + " is " + releaseThread.getState() + ")")
+                                                                  ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/filter/AndFileFilter.java:49: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final List<FileFilter> fileFilters;
+                                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/filter/IOCase.java:72: warning: [serial] serialization-related field serialVersionUID is not effective in an enum class
+    private static final long serialVersionUID = -6343169151696340687L;
+                              ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/filter/IOCase.java:242: warning: [serial] serialization-related method readResolve is not effective in an enum class
+    private Object readResolve() {
+                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/filter/NameFileFilter.java:58: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final List<String> names;
+                               ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/filter/NotFileFilter.java:40: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final FileFilter filter;
+                             ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/filter/OrFileFilter.java:48: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final List<FileFilter> fileFilters;
+                                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/filter/PrefixFileFilter.java:58: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final List<String> prefixes;
+                               ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/filter/SizeRangeFileFilter.java:41: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final FileFilter fileFilter;
+                             ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/filter/SuffixFileFilter.java:59: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final List<String> suffixes;
+                               ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/filter/WildcardFileFilter.java:211: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final List<String> wildcards;
+                               ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/DefaultFileMonitor.java:270: warning: [deprecation] Builder() in Builder has been deprecated
+    private static final ThreadFactory THREAD_FACTORY = new BasicThreadFactory.Builder().daemon(true).priority(Thread.MIN_PRIORITY).build();
+                                                        ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/DefaultFileReplicator.java:175: warning: [deprecation] getString(String,Object) in Messages has been deprecated
+            final String message = Messages.getString("vfs.impl/delete-temp.warn", file.getName());
+                                           ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/DefaultFileReplicator.java:203: warning: [deprecation] getString(String,Object) in Messages has been deprecated
+            final String message = Messages.getString("vfs.impl/temp-dir.debug", tempDir);
+                                           ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/DefaultFileSystemManager.java:105: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+    private final DefaultVfsComponentContext context = new DefaultVfsComponentContext(this);
+                                                                                      ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/PrivilegedFileReplicator.java:117: warning: [removal] AccessController in java.security has been deprecated and marked for removal
+            AccessController.doPrivileged(new CloseAction());
+            ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/PrivilegedFileReplicator.java:130: warning: [removal] AccessController in java.security has been deprecated and marked for removal
+                AccessController.doPrivileged(new InitAction());
+                ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/PrivilegedFileReplicator.java:149: warning: [removal] AccessController in java.security has been deprecated and marked for removal
+            return AccessController.doPrivileged(action);
+                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/StandardFileSystemManager.java:429: warning: [deprecation] URL(String) in URL has been deprecated
+            setConfiguration(new URL(configUri));
+                             ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/URLStreamHandlerProxy.java:35: warning: [deprecation] URL(String) in URL has been deprecated
+        return new URL(url.toExternalForm()).openConnection();
+               ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/URLStreamHandlerProxy.java:41: warning: [deprecation] URL(URL,String) in URL has been deprecated
+            final URL url = new URL(u, spec);
+                            ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/VFSClassLoader.java:151: warning: [deprecation] getPackage(String) in ClassLoader has been deprecated
+            final Package pkg = getPackage(pkgName);
+                                ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileSystem.java:261: warning: [deprecation] getString(String,Object) in Messages has been deprecated
+                    final String message = Messages.getString("vfs.provider/notify-listener.warn", fileObject);
+                                                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/VirtualFileSystem.java:99: warning: [rawtypes] found raw type: DelegateFileObject
+            final DelegateFileObject junctionFile = (DelegateFileObject) getFileFromCache(junctionName);
+                  ^
+  missing type arguments for generic class DelegateFileObject<AFS>
+  where AFS is a type-variable:
+    AFS extends AbstractFileSystem declared in class DelegateFileObject
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/VirtualFileSystem.java:110: warning: [rawtypes] found raw type: DelegateFileObject
+                DelegateFileObject file = (DelegateFileObject) getFileFromCache(parentName);
+                ^
+  missing type arguments for generic class DelegateFileObject<AFS>
+  where AFS is a type-variable:
+    AFS extends AbstractFileSystem declared in class DelegateFileObject
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/VirtualFileSystem.java:112: warning: [rawtypes] found raw type: DelegateFileObject
+                    file = new DelegateFileObject(parentName, this, null);
+                               ^
+  missing type arguments for generic class DelegateFileObject<AFS>
+  where AFS is a type-variable:
+    AFS extends AbstractFileSystem declared in class DelegateFileObject
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/VirtualFileSystem.java:112: warning: [unchecked] unchecked call to DelegateFileObject(AbstractFileName,AFS,FileObject) as a member of the raw type DelegateFileObject
+                    file = new DelegateFileObject(parentName, this, null);
+                           ^
+  where AFS is a type-variable:
+    AFS extends AbstractFileSystem declared in class DelegateFileObject
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/VirtualFileSystem.java:152: warning: [rawtypes] found raw type: DelegateFileObject
+        return new DelegateFileObject(name, this, file);
+                   ^
+  missing type arguments for generic class DelegateFileObject<AFS>
+  where AFS is a type-variable:
+    AFS extends AbstractFileSystem declared in class DelegateFileObject
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/impl/VirtualFileSystem.java:152: warning: [unchecked] unchecked call to DelegateFileObject(AbstractFileName,AFS,FileObject) as a member of the raw type DelegateFileObject
+        return new DelegateFileObject(name, this, file);
+               ^
+  where AFS is a type-variable:
+    AFS extends AbstractFileSystem declared in class DelegateFileObject
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileObject.java:420: warning: [rawtypes] found raw type: AbstractFileObject
+            final AbstractFileObject file = FileObjectUtils.getAbstractFileObject(fileObject);
+                  ^
+  missing type arguments for generic class AbstractFileObject<AFS>
+  where AFS is a type-variable:
+    AFS extends AbstractFileSystem declared in class AbstractFileObject
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileObject.java:982: warning: [removal] finalize() in Object has been deprecated and marked for removal
+    protected void finalize() throws Throwable {
+                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileObject.java:985: warning: [removal] finalize() in Object has been deprecated and marked for removal
+        super.finalize();
+             ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileObject.java:1409: warning: [deprecation] URL(String,String,int,String,URLStreamHandler) in URL has been deprecated
+                return new URL(scheme, "", -1, buf.toString(),
+                       ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileObject.java:1406: warning: [removal] AccessController in java.security has been deprecated and marked for removal
+            return AccessController.doPrivileged((PrivilegedExceptionAction<URL>) () -> {
+                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileObject.java:329: warning: [try] auto-closeable resource ignored is never referenced in body of corresponding try statement
+                            try (OutputStream ignored = content.getOutputStream()) {
+                                              ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractFileObject.java:151: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        fileSystem.fileObjectHanded(this);
+                                    ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/AbstractLayeredFileProvider.java:37: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setFileNameParser(LayeredFileNameParser.getInstance());
+                         ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/DefaultFileContent.java:247: warning: [rawtypes] found raw type: AbstractFileObject
+    public DefaultFileContent(final AbstractFileObject fileObject, final FileContentInfoFactory fileContentInfoFactory) {
+                                    ^
+  missing type arguments for generic class AbstractFileObject<AFS>
+  where AFS is a type-variable:
+    AFS extends AbstractFileSystem declared in class AbstractFileObject
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/DelegateFileObject.java:71: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            WeakRefFileListener.installListener(fileObject, this);
+                                                            ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/jar/JarFileObject.java:66: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            getAttributes(); // early get the attributes as the zip file might be closed
+                         ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/zip/ZipFileObject.java:54: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setZipEntry(entry);
+                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/jar/JarFileSystem.java:140: warning: [deprecation] EXTENSION_INSTALLATION in Name has been deprecated
+        if (Name.EXTENSION_INSTALLATION.toString().equals(attrName)) {
+                ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/jar/JarFileSystem.java:141: warning: [deprecation] EXTENSION_INSTALLATION in Name has been deprecated
+            return Name.EXTENSION_INSTALLATION;
+                       ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/jar/JarFileSystem.java:152: warning: [deprecation] IMPLEMENTATION_URL in Name has been deprecated
+        if (Name.IMPLEMENTATION_URL.toString().equals(attrName)) {
+                ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/jar/JarFileSystem.java:153: warning: [deprecation] IMPLEMENTATION_URL in Name has been deprecated
+            return Name.IMPLEMENTATION_URL;
+                       ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/jar/JarFileSystem.java:158: warning: [deprecation] IMPLEMENTATION_VENDOR_ID in Name has been deprecated
+        if (Name.IMPLEMENTATION_VENDOR_ID.toString().equals(attrName)) {
+                ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/jar/JarFileSystem.java:159: warning: [deprecation] IMPLEMENTATION_VENDOR_ID in Name has been deprecated
+            return Name.IMPLEMENTATION_VENDOR_ID;
+                       ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/jar/JarURLConnectionImpl.java:60: warning: [deprecation] URL(String) in URL has been deprecated
+        super(new URL(HACK_URL));
+              ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/local/DefaultLocalFileProvider.java:56: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+            setFileNameParser(new WindowsFileNameParser());
+                             ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/local/GenericFileNameParser.java:68: warning: [deprecation] startsWith(CharSequence,CharSequence) in StringUtils has been deprecated
+        if (!StringUtils.startsWith(name, prefix)) {
+                        ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/local/LocalFileSystem.java:79: warning: [removal] SecurityManager in java.lang has been deprecated and marked for removal
+        final SecurityManager sm = System.getSecurityManager();
+              ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/local/LocalFileSystem.java:79: warning: [removal] getSecurityManager() in System has been deprecated and marked for removal
+        final SecurityManager sm = System.getSecurityManager();
+                                         ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/ram/RamFileData.java:45: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private FileName name;
+                     ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/ram/RamFileData.java:65: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final Collection<RamFileData> children;
+                                          ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/ram/RamFileObject.java:57: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        getAbstractFileSystem().attach(this);
+                             ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/ram/RamFileSystem.java:54: warning: [serial] non-transient instance field of a serializable class declared with a non-serializable type
+    private final Map<FileName, RamFileData> cache;
+                                             ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/res/ResourceFileProvider.java:49: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setFileNameParser(ResourceFileNameParser.getInstance());
+                         ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/tar/TarFileObject.java:55: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setTarEntry(entry);
+                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/tar/TarFileSystem.java:206: warning: [deprecation] getNextTarEntry() in TarArchiveInputStream has been deprecated
+            while ((entry = getTarFile().getNextTarEntry()) != null) {
+                                        ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/url/UrlFileObject.java:71: warning: [deprecation] URL(String) in URL has been deprecated
+            return new URL(urlName.getURIEncoded(null));
+                   ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/url/UrlFileObject.java:73: warning: [deprecation] URL(String) in URL has been deprecated
+        return new URL(getName().getURI());
+               ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/url/UrlFileObject.java:94: warning: [try] auto-closeable resource unused is never referenced in body of corresponding try statement
+        try (InputStream unused = conn.getInputStream()) {
+                         ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/url/UrlFileObject.java:113: warning: [try] auto-closeable resource unused is never referenced in body of corresponding try statement
+        try (InputStream unused = conn.getInputStream()) {
+                         ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/url/UrlFileObject.java:126: warning: [try] auto-closeable resource unused is never referenced in body of corresponding try statement
+            try (InputStream unused = conn.getInputStream()) {
+                             ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/provider/url/UrlFileProvider.java:49: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        setFileNameParser(new UrlFileNameParser());
+                         ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/util/CombinedResources.java:52: warning: [this-escape] possible 'this' escape before subclass is fully initialized
+        init();
+            ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/util/DelegatingFileSystemOptionsBuilder.java:75: warning: [rawtypes] found raw type: Class
+    private static final Class<String>[] STRING_PARAM = new Class[] {String.class};
+                                                            ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/util/DelegatingFileSystemOptionsBuilder.java:134: warning: [deprecation] getString(String,Object) in Messages has been deprecated
+                log.warn(Messages.getString("vfs.provider/config-unexpected-primitive.error", type.getName()));
+                                 ^
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/util/DelegatingFileSystemOptionsBuilder.java:298: warning: [rawtypes] found raw type: Class
+        setConfigClasses(fso, scheme, name, new Class[] {className});
+                                                ^
+  missing type arguments for generic class Class<T>
+  where T is a type-variable:
+    T extends Object declared in class Class
+/workspace/scratch/e736b6177c79/m3-one-pass-20261020/receiver/m3/fs/src/main/java/com/m3/fs/vfs/util/FileObjectUtils.java:58: warning: [rawtypes] found raw type: AbstractFileObject
+    public static AbstractFileObject getAbstractFileObject(final FileObject fileObject) throws FileSystemException {
+                  ^
+  missing type arguments for generic class AbstractFileObject<AFS>
+  where AFS is a type-variable:
+    AFS extends AbstractFileSystem declared in class AbstractFileObject
+79 warnings

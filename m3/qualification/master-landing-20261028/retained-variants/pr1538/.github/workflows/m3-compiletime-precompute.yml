@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Compile-time String Precompute
+
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/compiletime/**'
+      - 'm3/arrays/src/main/**'
+      - 'm3/docs/m3-compiletime-precompute.md'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-compiletime-regex-precompute.yml'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/m3-compiletime-regex-precompute/**'
+      - '.github/workflows/m3-compiletime-precompute.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Custody (CPU only, refusal on drift)
+        run: |
+          set -euo pipefail
+          git diff --check
+          python3 m3/ports/compiletime/verify_compiletime_precompute.py
+
+      - name: Install the dependency-free precompute port
+        run: |
+          set -euo pipefail
+          out=target/m3-precompute-classes
+          mkdir -p "$out"
+          javac --release 21 -d "$out" $(find m3/ports/precompute/src/main/java -name '*.java')
+          jar --create --file target/m3-precompute.jar -C "$out" .
+          mvn -B -ntp install:install-file -Dfile=target/m3-precompute.jar \
+            -DgroupId=com.m3 -DartifactId=m3-precompute -Dversion=0.1.0-SNAPSHOT -Dpackaging=jar
+
+      - name: Unit tests (upstream ASM/JUnit coordinates)
+        run: |
+          mvn -B -ntp -f m3/ports/compiletime/pom.xml \
+            -Dasm.version=9.6 -Djunit.artifact.version=5.10.2 test
+
+      - name: Harvest the CI JDK and prove the gate against stock java.util.regex
+        run: |
+          set -euo pipefail
+          pom=m3/ports/compiletime/pom.xml
+          mvn -B -ntp -q -f "$pom" -Dasm.version=9.6 -Djunit.artifact.version=5.10.2 \
+            dependency:build-classpath -Dmdep.outputFile=target/ct-cp.txt
+          cp="m3/ports/compiletime/target/classes:$(cat target/ct-cp.txt)"
+          opens="--add-opens java.base/java.util.regex=ALL-UNNAMED"
+          java -Xmx1g $opens -cp "$cp" com.m3.compiletime.M3ConstantRegexHarvester \
+            --out target/ci-harvest --jdk --rounds 5
+          java -Xmx1g $opens -cp "$cp" com.m3.compiletime.M3ConstantRegexDifferential \
+            --harvest target/ci-harvest --rounds 3 --reps 1
+          cat target/ci-harvest/HARVEST_RECEIPT.tsv target/ci-harvest/DIFFERENTIAL_RECEIPT.tsv
+
+      - name: OpenRewrite crate fixed point
+        run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+            -Dtest=M3CompileTimeRegexPrecomputeRecipeTest test
+
+  source-facts-and-native-snapshots:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Original compiler, authenticated source facts and context refusal
+        run: |
+          set -euo pipefail
+          M3_PROOF_JAVA_HOME="$JAVA_HOME" bash m3/ports/compiletime/qualification/source-facts-reuse-20261020/run-proof.sh
+      - name: Required JNI arrays into immutable compiler source
+        run: bash m3/ports/compiletime/qualification/source-facts-reuse-20261020/verify-native.sh
+      - name: Donor-derived JNI failure-path contract
+        run: bash m3/ports/compiletime/qualification/source-facts-reuse-20261020/verify-jni-failures.sh

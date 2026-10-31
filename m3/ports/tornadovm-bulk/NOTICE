@@ -1,0 +1,28 @@
+M3JDK21 Tornado RV32IM provider
+Copyright 2026 Hitesh Soliwal and contributors
+Licensed under the Apache License, Version 2.0.
+
+The ten implementation files and five original tests under the historical
+com.synexia.m3.cpugpu package were received unchanged from:
+  https://github.com/hsoliwal/synexia-tornadovm
+  revision cc79842887028af98b468efaf7f22be129dc055c
+  source path m3/cpu-gpu/src/
+  source tree eb6c71f11b8e5518ec8b581934ce3ed38dc0b451
+
+That provider source tree is identical at the earlier target CI pin:
+  d7b4615ccaa286a1a11a60bc079969f24cc7f197
+
+The original files retain their Apache-2.0 SPDX notices. The original design
+references Vogtinator/risky-v and OpenDGPS/simulacore as architectural evidence
+only and explicitly states that no source from either project was copied.
+
+M3JDK21 modifications: in-tree receiving, named-module declaration, target build
+dependency, source seals, documentation and installed-image probe. Original
+provider and existing adapter bodies are unchanged. The historical package is
+retained to preserve public compatibility and accepted Rv32iBatch class identity;
+it is compiled in this M3JDK21 module without an external Synexia runtime/service.
+
+TornadoVM API, runtime, compiler and drivers are separately attributed and
+licensed in the product's pinned source distribution. This module's Apache-2.0
+license does not relicense TornadoVM, OpenJDK, native drivers or other dependencies.
+The existing jdk.internal.vm.parallel sources retain their GPLv2/Classpath terms.

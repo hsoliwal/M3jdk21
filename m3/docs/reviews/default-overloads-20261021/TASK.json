@@ -1,0 +1,64 @@
+{
+  "task_packet": "active",
+  "source_doc": "CONTRACT.md",
+  "invariant_id": "M3JDK21_DEFAULT_OVERLOAD_CONVERGENCE",
+  "run": {
+    "mode": "dry-run",
+    "profile": "full",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "targets": {
+    "repositories": [
+      "hsoliwal/com.synexia",
+      "hsoliwal/M3jdk21"
+    ],
+    "scope": "All actual M3JDK21 source modules; exact enumeration pending"
+  },
+  "invariant_locks": {
+    "EXISTING_PUBLIC_API": "LOCKED",
+    "EXISTING_EXTERNAL_BEHAVIOR": "LOCKED",
+    "M3_INTERNALS": "CONCEALED",
+    "DISABLED_PATHS": "FORBIDDEN",
+    "EXCLUDED_PATHS": "FORBIDDEN",
+    "BUILD_SCRIPTS": "LOCKED"
+  },
+  "allowed_delta": [
+    "Document and inventory default/overload families",
+    "Prepare compatibility-gated additive member proposals",
+    "Enhance existing canonical inventory recipe after exact source and fixture qualification"
+  ],
+  "forbidden": [
+    "Blind abstract-to-default conversion",
+    "Legacy dispatch replacement without proof",
+    "Source-presence treated as verification",
+    "Defaulting every parameter combination",
+    "Public M3 internals",
+    "History rewrite"
+  ],
+  "verify_order": [
+    "diff",
+    "lint",
+    "compile",
+    "tests",
+    "runtime"
+  ],
+  "output_contract": [
+    "STATUS.tsv",
+    "FINAL_REPORT.md",
+    "RUN_CONTEXT.tsv",
+    "PROVENANCE.tsv",
+    "VERIFY_CONTRACT.tsv",
+    "OUTPUT_CONTRACT.tsv"
+  ],
+  "stop_conditions": [
+    "Unresolved attribution",
+    "Ambiguous/changed existing overload resolution",
+    "Default or erasure clash",
+    "Changed legacy callback/exception/ownership behavior",
+    "Failed required verification"
+  ],
+  "observed_target_commit": "5eeb841168ed420085223806fefcfca8d1b6b3ca",
+  "implementation_status": "NOT_APPLIED"
+}

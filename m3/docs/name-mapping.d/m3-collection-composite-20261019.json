@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "target_repository": "hsoliwal/M3jdk21",
+  "parent_pr": 1447,
+  "target_preimage_revision": "ffc08348874ffcf3037d1c0dcf02f7685945daea",
+  "canonical_recipe": "com.synexia.m3.CollectionComposite20261019",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "canonical_revision": "5e972536d98ac7f4aab37fb66333ed4696584bdd",
+  "canonical_path": "synexia-openrewrite-recipes/recipe-crates/m3jdk21-collection-composite-20261019",
+  "source_handoff": "m3/runtime-integration/collection-composite-20261019/SYNEXIA_HANDOFF.json",
+  "runtime_dependency": false,
+  "new_public_api": false,
+  "receiving_sequence_advanced": false,
+  "status": "SOURCE_RECEIVED_UNQUALIFIED",
+  "owners": [
+    {
+      "owner": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "public_api": "EXISTING_CONTRACT_RETAINED_NO_NEW_NAMES",
+      "source_blob": "a5f22ba8a49c0bf570f2da7c25d86be2bed5dc36"
+    },
+    {
+      "owner": "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+      "public_api": "EXISTING_CONTRACT_RETAINED_NO_NEW_NAMES",
+      "source_blob": "f82ffe51ababbdd9b663ceb2b113d7efc9e121e0"
+    },
+    {
+      "owner": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "public_api": "EXISTING_CONTRACT_RETAINED_NO_NEW_NAMES",
+      "source_blob": "4191858c5aa6e0c1961376e2724fccef0a1d6bcb"
+    },
+    {
+      "owner": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "public_api": "EXISTING_CONTRACT_RETAINED_NO_NEW_NAMES",
+      "source_blob": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e"
+    },
+    {
+      "owner": "m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
+      "public_api": "EXISTING_CONTRACT_RETAINED_NO_NEW_NAMES",
+      "source_blob": "f7099d5e06db8c76fe5d6549f8d167f965569c35"
+    },
+    {
+      "owner": "src/java.base/share/classes/java/util/ReverseOrderSortedSetView.java",
+      "public_api": "EXISTING_CONTRACT_RETAINED_NO_NEW_NAMES",
+      "source_blob": "01d38f18b25227da791a656c70b6bb5bf5fac173"
+    },
+    {
+      "owner": "src/java.base/share/classes/java/util/SortedSet.java",
+      "public_api": "EXISTING_CONTRACT_RETAINED_NO_NEW_NAMES",
+      "source_blob": "ad3ee89d40de8c0ca344863bb6fc4469cec97a09"
+    }
+  ],
+  "tooling_license": "Apache-2.0",
+  "runtime_license": "UNCHANGED_PER_FILE_OPENJDK_OR_APACHE_2_0",
+  "pending": [
+    "composite SDK replay/refusal/fixed point",
+    "Java21 compile and behavior per pass",
+    "checked JNI and ABI",
+    "CPU heap native/process memory",
+    "full installed M3JDK21 image and jtreg",
+    "full requested file/family scope"
+  ]
+}

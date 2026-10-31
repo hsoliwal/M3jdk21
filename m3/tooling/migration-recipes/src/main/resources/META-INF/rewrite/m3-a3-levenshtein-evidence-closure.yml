@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.LevenshteinEvidenceClosure
+displayName: Close A3 Levenshtein tri-platform evidence
+description: >-
+  Source-sealed catalogue/documentation update that completes LeetCode/HackerRank/GeeksforGeeks
+  evidence for the edit-distance family while retaining REFERENCE_ONLY and hold-contract status.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: a3-levenshtein-evidence-closure

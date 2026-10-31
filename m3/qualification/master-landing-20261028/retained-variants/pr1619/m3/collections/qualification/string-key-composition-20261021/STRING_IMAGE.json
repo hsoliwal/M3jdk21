@@ -1,0 +1,34 @@
+{
+  "image": "/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk",
+  "resolved": "/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk",
+  "baseline": "18213fe70c66567fdfc6ba6f669909e7e9251663",
+  "root_build_completion_explicitly_confirmed": true,
+  "production_patch_module": false,
+  "prior_image_classes": false,
+  "artifacts": [
+    {
+      "path": "bin/java",
+      "sha256": "c769b14c621116f0aa73d9a56a4983b97586c0abfca029ff02fcc07ae9ffdda0"
+    },
+    {
+      "path": "bin/javac",
+      "sha256": "17df2cbab249823f79f962793dfcd2596ed271d7c996cadbf9a715b4060c5b58"
+    },
+    {
+      "path": "release",
+      "sha256": "b3942bd09d34924bcf807804098c8044ec2fe6b19988438076de8edbeff5d829"
+    },
+    {
+      "path": "lib/modules",
+      "sha256": "85a9fb910b1afdad42666d4856275f677f0be0f34a5292059b5228671bb92de7"
+    },
+    {
+      "path": "lib/server/libjvm.so",
+      "sha256": "94ac420a0bc67d936988c73594541b881a1c8a8eff9e24aa4ce78724bfa46ef7"
+    },
+    {
+      "path": "lib/libjava.so",
+      "sha256": "568af1d6ed5be41532ff5adfbed9604bdb3238e620182de120bc77f0091856b4"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "stage": "TEST",
+  "command": [
+    "/workspace/scratch/7846804a0074/toolchain/apache-maven-3.10.0/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-s",
+    "/workspace/scratch/7846804a0074/toolchain/m3-settings.xml",
+    "-f",
+    "/workspace/scratch/7846804a0074/M3jdk21-f29/m3/collections/pom.xml",
+    "-Dmaven.repo.local=/workspace/scratch/7846804a0074/toolchain/m2-repository",
+    "-DargLine=-Xcheck:jni -Djava.library.path=/workspace/scratch/7846804a0074/work-m3-wrappers-20261018/integration-f29/candidate-native",
+    "surefire:test"
+  ],
+  "exit": 0,
+  "elapsed_seconds": 20.02265004199944,
+  "source_state_sha256": "7786b891d0fc2d2b7f19613538d9ba275b215d6dc2833c83dd44b8c3f7b8984e",
+  "stdout": "invariant-policy-native-test.stdout.log",
+  "stderr": "invariant-policy-native-test.stderr.log",
+  "junit": {
+    "tests": 233,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suite_count": 79
+}

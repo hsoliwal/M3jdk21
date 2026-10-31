@@ -1,0 +1,12 @@
+// Copyright 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+// Opt in with --init-script <image>/conf/m3-tools/gradle-m3ast.init.gradle.
+// The selected compiler/toolchain must supply M3AST; processors and fork settings
+// retain their ordinary Gradle configuration and worker process boundaries.
+allprojects {
+    tasks.withType(org.gradle.api.tasks.compile.JavaCompile).configureEach {
+        if (!options.compilerArgs.any { it == '-Xplugin:M3AST' || it.startsWith('-Xplugin:M3AST ') }) {
+            options.compilerArgs.add('-Xplugin:M3AST')
+        }
+    }
+}

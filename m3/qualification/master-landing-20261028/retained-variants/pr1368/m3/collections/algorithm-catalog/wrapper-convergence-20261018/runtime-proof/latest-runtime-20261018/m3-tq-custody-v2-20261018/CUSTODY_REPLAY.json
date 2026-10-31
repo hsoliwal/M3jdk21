@@ -1,0 +1,118 @@
+{
+  "schema": "M3_TQ_CURRENT_CUSTODY_REPLAY_OBSERVATION_V1",
+  "roles": "isolated composite replay fixtures; not installed-tree upgrade",
+  "live_mapping": "HOLD_UNCHANGED",
+  "verifier_sha256": "ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978",
+  "fixtures": [
+    {
+      "role": "historical_source_archive",
+      "plan_sha256": "de8e16eb949612ca27ca03401fd5d415472e58cb486d8527ce71d9e76997fa4c",
+      "outputs": 8,
+      "events": [
+        {
+          "mode": "check",
+          "recipe": "tq-1",
+          "plan_sha256": "de8e16eb949612ca27ca03401fd5d415472e58cb486d8527ce71d9e76997fa4c",
+          "state": "before",
+          "files": 8,
+          "writes": 0
+        },
+        {
+          "mode": "apply",
+          "recipe": "tq-1",
+          "plan_sha256": "de8e16eb949612ca27ca03401fd5d415472e58cb486d8527ce71d9e76997fa4c",
+          "state": "after",
+          "files": 8,
+          "writes": 8
+        },
+        {
+          "mode": "apply",
+          "recipe": "tq-1",
+          "plan_sha256": "de8e16eb949612ca27ca03401fd5d415472e58cb486d8527ce71d9e76997fa4c",
+          "state": "after",
+          "files": 8,
+          "writes": 0
+        },
+        {
+          "mode": "check",
+          "recipe": "tq-1",
+          "plan_sha256": "de8e16eb949612ca27ca03401fd5d415472e58cb486d8527ce71d9e76997fa4c",
+          "state": "after",
+          "files": 8,
+          "writes": 0
+        },
+        {
+          "mode": "rollback",
+          "recipe": "tq-1",
+          "plan_sha256": "de8e16eb949612ca27ca03401fd5d415472e58cb486d8527ce71d9e76997fa4c",
+          "state": "before",
+          "files": 8,
+          "writes": 8
+        },
+        {
+          "mode": "rollback",
+          "recipe": "tq-1",
+          "plan_sha256": "de8e16eb949612ca27ca03401fd5d415472e58cb486d8527ce71d9e76997fa4c",
+          "state": "before",
+          "files": 8,
+          "writes": 0
+        }
+      ]
+    },
+    {
+      "role": "current_composite_fixture",
+      "plan_sha256": "c83efa33790e8960a4f8c16ceba5ac6ac0d31c9cb48bc7fdfca1a6fff651b752",
+      "outputs": 8,
+      "events": [
+        {
+          "mode": "check",
+          "recipe": "tq-current-custody-20261018",
+          "plan_sha256": "c83efa33790e8960a4f8c16ceba5ac6ac0d31c9cb48bc7fdfca1a6fff651b752",
+          "state": "before",
+          "files": 8,
+          "writes": 0
+        },
+        {
+          "mode": "apply",
+          "recipe": "tq-current-custody-20261018",
+          "plan_sha256": "c83efa33790e8960a4f8c16ceba5ac6ac0d31c9cb48bc7fdfca1a6fff651b752",
+          "state": "after",
+          "files": 8,
+          "writes": 8
+        },
+        {
+          "mode": "apply",
+          "recipe": "tq-current-custody-20261018",
+          "plan_sha256": "c83efa33790e8960a4f8c16ceba5ac6ac0d31c9cb48bc7fdfca1a6fff651b752",
+          "state": "after",
+          "files": 8,
+          "writes": 0
+        },
+        {
+          "mode": "check",
+          "recipe": "tq-current-custody-20261018",
+          "plan_sha256": "c83efa33790e8960a4f8c16ceba5ac6ac0d31c9cb48bc7fdfca1a6fff651b752",
+          "state": "after",
+          "files": 8,
+          "writes": 0
+        },
+        {
+          "mode": "rollback",
+          "recipe": "tq-current-custody-20261018",
+          "plan_sha256": "c83efa33790e8960a4f8c16ceba5ac6ac0d31c9cb48bc7fdfca1a6fff651b752",
+          "state": "before",
+          "files": 8,
+          "writes": 8
+        },
+        {
+          "mode": "rollback",
+          "recipe": "tq-current-custody-20261018",
+          "plan_sha256": "c83efa33790e8960a4f8c16ceba5ac6ac0d31c9cb48bc7fdfca1a6fff651b752",
+          "state": "before",
+          "files": 8,
+          "writes": 0
+        }
+      ]
+    }
+  ]
+}

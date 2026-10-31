@@ -1,0 +1,107 @@
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+# Modified 2026-10-21: preserve historical recipes and qualify current sealed resource/JNI owners.
+name: M3 Eclipse framework indexed forward receiver
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'm3/eclipse/framework/**'
+      - 'm3/collections/src/main/**'
+      - 'm3/runtime-integration/recipes/m3-integrated-refinement-20261021/**'
+      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - '.github/workflows/m3-eclipse-framework-forward-20261017.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  eclipse-framework-forward:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            .github/workflows
+            m3/eclipse/framework
+            m3/collections
+            m3/tooling/migration-recipes
+            m3/runtime-integration/recipes/m3-integrated-refinement-20261021
+            m3/runtime-integration/scheduled-progress-20261021
+            m3/eclipse/core-runtime
+            m3/tooling/module-packs/collections
+            m3/vendor/third_party/junit-platform-launcher-1.10.2
+            src/java.base/share/classes/java/util/concurrent
+            src/java.base/share/classes/java/lang
+            test/jdk/java/util/concurrent/ProgressJob
+            test/jdk/java/util/concurrent/ProgressMonitor
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Bind historical templates and current recipe source closure
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p proof
+          git rev-parse HEAD > proof/head.txt
+          test "$(cat proof/head.txt)" = '${{ github.event.pull_request.head.sha || github.sha }}'
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          import json
+          import subprocess
+          historical = Path('m3/eclipse/framework/recipe/src/main/resources/com/synexia/rewrite/hash-pinned-java/eclipse-framework-m3-index-forward')
+          rows = [r.split('\t') for r in (historical/'manifest.tsv').read_text().splitlines() if r and not r.startswith('#')]
+          assert len(rows) == 8
+          assert [r[0] for r in rows] == sorted(r[0] for r in rows)
+          for path, before, wanted, source in rows:
+              assert before == 'ABSENT'
+              template = historical / source
+              assert template.is_file() and not template.is_symlink(), template
+              assert hashlib.sha256(template.read_bytes()).hexdigest() == wanted, template
+          crate = Path('m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021')
+          pins = json.loads((crate/'SOURCE_SEALS.json').read_text())
+          sealed = {r['target_path'] for r in pins['files'] if r['target_path'].startswith('m3/eclipse/framework/src/')}
+          tracked = set(subprocess.check_output(['git', 'ls-files', 'm3/eclipse/framework/src'], text=True).splitlines())
+          assert sealed == tracked, sealed ^ tracked
+          subprocess.run(['python3', str(crate/'verify_sources.py'), '.'], check=True)
+          print('HISTORICAL_EIGHT_TEMPLATES_AND_CURRENT_SOURCE_CLOSURE')
+          PY
+      - name: Execute historical source-sealed OpenRewrite recipe tests
+        run: |
+          set -euxo pipefail
+          mvn -B -ntp -f m3/eclipse/framework/recipe/pom.xml test 2>&1 | tee proof/historical-recipe.txt
+      - name: Qualify current resource owner and existing Linux JNI
+        run: |
+          set -euxo pipefail
+          python3 m3/eclipse/framework/qualification/resource-change-20261021/verify.py --out proof/resource-owner
+      - name: Execute current canonical SDK refusal and fixed-point gates
+        run: |
+          set -euxo pipefail
+          crate=m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021
+          parser_cp="$GITHUB_WORKSPACE/proof/resource-owner/classes:$GITHUB_WORKSPACE/m3/eclipse/framework/target/classes:$(cat proof/resource-owner/classpath.txt)"
+          mvn -B -ntp -f "$crate/pom.xml" "-Dparser.classpath=$parser_cp" test 2>&1 | tee proof/current-recipe.txt
+      - name: Check OSGi packaging and unchanged receiving sources
+        run: |
+          set -euxo pipefail
+          jar --create --file proof/m3-collections-osgi.jar --manifest m3/eclipse/framework/osgi/m3-collections.MF -C proof/resource-owner/classes .
+          jar --describe-module --file proof/m3-collections-osgi.jar > proof/core-module-describe.txt
+          unzip -p m3/eclipse/framework/target/m3-eclipse-framework-forward-0.1.0-SNAPSHOT.jar META-INF/MANIFEST.MF > proof/eclipse-bundle-manifest.txt
+          grep -q 'Bundle-Activator: com.m3.eclipse.framework.M3EclipseRuntimeActivator' proof/eclipse-bundle-manifest.txt
+          unzip -p proof/m3-collections-osgi.jar META-INF/MANIFEST.MF > proof/collections-bundle-manifest.txt
+          grep -q 'Export-Package: com.m3.collections' proof/collections-bundle-manifest.txt
+          git diff --exit-code -- m3/eclipse/framework/src m3/collections/src/main
+      - name: Retain exact-head evidence including failures
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: eclipse-m3-framework-${{ github.event.pull_request.head.sha || github.sha }}
+          retention-days: 30
+          path: |
+            proof/
+            m3/eclipse/framework/recipe/target/surefire-reports/
+            m3/eclipse/framework/target/surefire-reports/
+            m3/runtime-integration/recipes/m3-integrated-refinement-20261021/canonical/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/surefire-reports/

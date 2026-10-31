@@ -1,0 +1,105 @@
+{
+  "schema": "jcc-raw-readback-failure-observation/1",
+  "verification_commit": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+  "verification_tree_response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "sha": "bf2b8fe43cda47f0c6363c8d376f61419e647e4d"
+    },
+    "isError": false
+  },
+  "verification_commit_creation": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "sha": "9dab34bd9e34e4d661004482248b5b02d94e0816"
+    },
+    "isError": false
+  },
+  "verification_commit_readback": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "{\"sha\":\"9dab34bd9e34e4d661004482248b5b02d94e0816\",\"node_id\":\"C_kwDOQ2icstoAKDlkYWIzNGJkOWUzNGU0ZDY2MTAwNDQ4MjI0OGI1YjAyZDk0ZTA4MTY\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/commits/9dab34bd9e34e4d661004482248b5b02d94e0816\",\"html_url\":\"https://github.com/hsoliwal/com.synexia/commit/9dab34bd9e34e4d661004482248b5b02d94e0816\",\"author\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-05T16:19:10Z\"},\"committer\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-05T16:19:10Z\"},\"tree\":{\"sha\":\"bf2b8fe43cda47f0c6363c8d376f61419e647e4d\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d\"},\"message\":\"Verify exact raw JCC fixture transport (unreferenced custody object)\",\"parents\":[{\"sha\":\"be92c62ece9023b5c33676716a1076d00e26120a\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/commits/be92c62ece9023b5c33676716a1076d00e26120a\",\"html_url\":\"https://github.com/hsoliwal/com.synexia/commit/be92c62ece9023b5c33676716a1076d00e26120a\"}],\"verification\":{\"verified\":false,\"reason\":\"unsigned\",\"signature\":null,\"payload\":null,\"verified_at\":null}}",
+      "title": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+      "modified_date": null,
+      "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/9dab34bd9e34e4d661004482248b5b02d94e0816",
+      "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/9dab34bd9e34e4d661004482248b5b02d94e0816",
+      "display_title": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+      "structuredContent": {
+        "title": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+        "content": "{\"sha\":\"9dab34bd9e34e4d661004482248b5b02d94e0816\",\"node_id\":\"C_kwDOQ2icstoAKDlkYWIzNGJkOWUzNGU0ZDY2MTAwNDQ4MjI0OGI1YjAyZDk0ZTA4MTY\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/commits/9dab34bd9e34e4d661004482248b5b02d94e0816\",\"html_url\":\"https://github.com/hsoliwal/com.synexia/commit/9dab34bd9e34e4d661004482248b5b02d94e0816\",\"author\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-05T16:19:10Z\"},\"committer\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-05T16:19:10Z\"},\"tree\":{\"sha\":\"bf2b8fe43cda47f0c6363c8d376f61419e647e4d\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d\"},\"message\":\"Verify exact raw JCC fixture transport (unreferenced custody object)\",\"parents\":[{\"sha\":\"be92c62ece9023b5c33676716a1076d00e26120a\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/commits/be92c62ece9023b5c33676716a1076d00e26120a\",\"html_url\":\"https://github.com/hsoliwal/com.synexia/commit/be92c62ece9023b5c33676716a1076d00e26120a\"}],\"verification\":{\"verified\":false,\"reason\":\"unsigned\",\"signature\":null,\"payload\":null,\"verified_at\":null}}",
+        "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/9dab34bd9e34e4d661004482248b5b02d94e0816"
+      }
+    },
+    "isError": false
+  },
+  "requests": [
+    {
+      "repository_full_name": "hsoliwal/com.synexia",
+      "ref": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+      "encoding": "base64",
+      "row_index": 0,
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "content": "c3JjL21haW4vamF2YS9maXh0dXJlL0RlcGVuZGVuY3kuamF2YQljYjFhY2U5\nZmNhODhkZWM5NzM2YWY5NWM5NmFkZGRjM2YwMWNjYjg0OTA0ZWQ3ZDJjZjdj\nZmRjZDI4OTBiYzYzCURlcGVuZGVuY3kuamF2YS50eHQKIwAK\n",
+          "encoding": "base64",
+          "sha": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d",
+          "display_url": "https://github.com/hsoliwal/com.synexia/blob/9dab34bd9e34e4d661004482248b5b02d94e0816/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
+          "display_title": "parser-dependencies.tsv"
+        },
+        "isError": false
+      }
+    },
+    {
+      "repository_full_name": "hsoliwal/com.synexia",
+      "ref": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+      "encoding": "base64",
+      "row_index": 1,
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "content": "I++/vSgK\n",
+          "encoding": "base64",
+          "sha": "59b4ec83f687499a54f15695b9b246599f9579d7",
+          "display_url": "https://github.com/hsoliwal/com.synexia/blob/9dab34bd9e34e4d661004482248b5b02d94e0816/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+          "display_title": "parser-dependencies.tsv"
+        },
+        "isError": false
+      }
+    }
+  ],
+  "invalid_utf8_example": {
+    "expected_git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
+    "expected_base64": "I8MoCg==",
+    "actual_response_base64": "I++/vSgK\n",
+    "expected_bytes": 4,
+    "result": "FAIL_INVALID_UTF8_REENCODED"
+  },
+  "limit": "Only original file responses 0 and 1 retained after the four awaited calls; do not fabricate responses 2 and 3. No final source payload tree batches, final source commit, branch, or PR at this observation.",
+  "previous_adapter_status": "Conditional source-level admission retained; actual required raw byte gate failed."
+}

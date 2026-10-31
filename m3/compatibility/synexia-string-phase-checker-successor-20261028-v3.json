@@ -1,0 +1,40 @@
+{
+  "schema": "M3JDK21_STRING_PHASE_CHECKER_SUCCESSOR_V3",
+  "scope": "TOOLING_ONLY_NO_RUNTIME_PROMOTION",
+  "predecessor": {
+    "receiptPath": "m3/compatibility/synexia-string-phase-checker-successor-20261015-v2.json",
+    "receiptGitBlob": "52cacd20c406f57027734d2e78b405c8b6176e9f",
+    "receiptSha256": "e47b404b87e9748f323cfbca53f07fcde3c3d1a5b14f221e14df6a92613cb1b2",
+    "targetAfterGitBlob": "274753ece4a5cfd11dc2e98feca50f2601540b8d",
+    "targetAfterSha256": "bad0fe420fc677a977079e0aa557ff733e2858939781786bc37d0c9f38d96ff3"
+  },
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "pullRequest": 13719,
+    "headAtCapture": "842be10c3989ca74b51f43c17bc3e1c0f3728e19",
+    "stateAtCapture": "OPEN_DRAFT",
+    "recipe": "com.synexia.rewrite.M3Jdk21StringAdditionalOwnerSuccessors20261027",
+    "manifestPath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-additional-owner-successors-20261027/manifest.tsv",
+    "manifestGitBlob": "42d80eb260aa972654053eb79bd58e58f885eff4",
+    "manifestSha256": "29a06353c8f603f522ab3048cca155c0d74be5b1bf316be687772c25dff43efd",
+    "sourceResourcePath": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-additional-owner-successors-20261027/check_string_phase.py.after.txt",
+    "sourceResourceGitBlob": "02a0276a37f7e44fb520b82e79a5b0e2553d9a5b",
+    "sourceResourceSha256": "492b862c07eb39809c8dd3ac7dddcba5cbf9ad73b82a9cf52740d0df53441dda"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "observedHead": "8ce34942adce886e402a395f015760be200e31ed",
+    "path": "m3/synexia-import/current-full-borrow/check_string_phase.py",
+    "afterGitBlob": "02a0276a37f7e44fb520b82e79a5b0e2553d9a5b",
+    "afterSha256": "492b862c07eb39809c8dd3ac7dddcba5cbf9ad73b82a9cf52740d0df53441dda"
+  },
+  "change": {
+    "relation": "QUALIFIED_CANONICAL_CURRENT_SOURCE_RECEIPT",
+    "v1AndV2HistoryPreserved": true,
+    "earlierV2ToRecipeEpochHistory": "SOURCE_EPOCH_OBSERVED_NOT_SEMANTICALLY_RECONSTRUCTED",
+    "runtimeProductFilesChanged": false,
+    "runtimePromotionAuthorized": false,
+    "runtimeAcceptance": "NOT_ACCEPTED",
+    "performanceEvidence": "NOT_MEASURED"
+  }
+}

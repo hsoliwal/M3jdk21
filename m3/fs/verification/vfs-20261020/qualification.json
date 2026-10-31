@@ -1,0 +1,42 @@
+{
+  "compiled_m3fs_java_sources": 62,
+  "compiled_vfs_java_sources": 237,
+  "consumer": {
+    "COMPOSED_CONTENT_CAPTURE": "PASS",
+    "CONSUMER_MODULE": "m3fs.vfs.consumer",
+    "GENERIC_URL_NAMES": "PASS",
+    "M3FS_VFS_IMAGE_PROBE": "PASS",
+    "MODULE": "jdk.m3fs",
+    "MONITORED_CONTENT": "PASS",
+    "NATIVE_SQLITE_PROBE": "NOT_RUN",
+    "OBSERVATION_DELTA": "PASS",
+    "SELECTED_ARCHIVE_LAYER": "PASS",
+    "SOURCE_BUILT_M3JDK21": "NOT_RUN"
+  },
+  "image": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/pack/image",
+  "jar": {
+    "path": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/qualification-capture/m3-fs-0.1.0-SNAPSHOT.jar",
+    "sha256": "05d5387d1b64d6075f9a0317b7bd3f598fbfad581b63793157926d3b3ccb1d9f"
+  },
+  "legal": {
+    "all_dependency_original_license_and_notice_resources_retained": true,
+    "jmod_and_image_legal_entries_checked": 102,
+    "modules": [
+      "jdk.m3fs",
+      "commons.logging",
+      "org.apache.commons.codec",
+      "org.apache.commons.compress",
+      "org.apache.commons.io",
+      "org.apache.commons.lang3"
+    ]
+  },
+  "m3fs_lint_policy": "-Xlint:all -Werror; existing strict gate retained",
+  "maven_lifecycle": "NOT_RUN_BY_THIS_HELPER",
+  "module_descriptor_lint_exception": "requires-automatic and requires-transitive-automatic only, for the unchanged Maven-input Commons Logging 1.2 JAR; JMOD descriptor is explicit",
+  "native_sqlite_probe": "NOT_RUN",
+  "omitted_remote_providers": "SOURCE_CUSTODY_ONLY",
+  "provider_lint_policy": "-Xlint:all; upstream warnings recorded, not errors",
+  "scope": "Complete existing M3FS Java sources plus the 237-source attributed VFS core, JAR/JMOD assembly through the existing shared packer, and named-consumer execution on an image linked from the supplied prebuilt JDK 21. Maven lifecycle, JNI/SQLite runtime verification, and source-built OpenJDK/M3JDK21 qualification remain separate gates.",
+  "source_built_m3jdk21": "NOT_RUN",
+  "status": "PASS"
+}

@@ -1,0 +1,303 @@
+{
+  "artifact": "asm",
+  "automatic_module_name": "",
+  "build": "commands",
+  "build_reason": "LEGACY_SOURCE_LEVEL",
+  "consumers": "synexia-mindex (asm.version)",
+  "coordinate": "org.ow2.asm:asm:9.10.1-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "asm-9.10.1",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/asm-9.10.1/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "566ad1a80220026d05099562645ce968ff0e7c36cde22634332605bb34cc3eff",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/AnnotationVisitor.java",
+      "sha256": "832f9959de57820f80d63e4678da82872f0599157be9364d7e352f220e4164f3",
+      "upstream": "org/objectweb/asm/AnnotationVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/AnnotationWriter.java",
+      "sha256": "62386bb5863c64dbbc9371084a2e9bdaf27debf8bf2757788b95298a59319d64",
+      "upstream": "org/objectweb/asm/AnnotationWriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/Attribute.java",
+      "sha256": "e0c6d7549929980742d89d5da7c56cc2b266af643dff2263fcbfc2b9398a406b",
+      "upstream": "org/objectweb/asm/Attribute.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/ByteVector.java",
+      "sha256": "b78d21db65e87269ea6ccbebf76611b09237a2cb723bec7f72b5cdf5e089d983",
+      "upstream": "org/objectweb/asm/ByteVector.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/ClassReader.java",
+      "sha256": "83efae861c616683637bf2b0e3b7b48f00efd81b8965011ec7c9bf1b8c0a0331",
+      "upstream": "org/objectweb/asm/ClassReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/ClassTooLargeException.java",
+      "sha256": "e26f90742c466fd5cf0a78b23a9034ca9333c9d66f29c771db4667cea1062b47",
+      "upstream": "org/objectweb/asm/ClassTooLargeException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/ClassVisitor.java",
+      "sha256": "4c1578a6e5277a6d07596ab3ccfbdf148201797e568012c25deb1a49e0157448",
+      "upstream": "org/objectweb/asm/ClassVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/ClassWriter.java",
+      "sha256": "5fad25f00d687d1e5042fd7dc2d8d5f38b72d78a0b59eccfb27f469b1aa3d3b8",
+      "upstream": "org/objectweb/asm/ClassWriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/ConstantDynamic.java",
+      "sha256": "6edb2ceeccf43423557b330999a7f8bf05c72c955dea41b4514abfea2dd4b8d5",
+      "upstream": "org/objectweb/asm/ConstantDynamic.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/Constants.java",
+      "sha256": "aa27422ccf28592c461fc833d1af041cb7c22034ce204895962ea3d178834bac",
+      "upstream": "org/objectweb/asm/Constants.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/Context.java",
+      "sha256": "8e22d1f73bc7f79cd3ed0dd8aa48c7f483fd81e2b389788997faf7cb00297002",
+      "upstream": "org/objectweb/asm/Context.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/CurrentFrame.java",
+      "sha256": "7ce65374b9b381e1c17f28614951de571d732d936366f78c1cc46e69e70d1a7c",
+      "upstream": "org/objectweb/asm/CurrentFrame.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/Edge.java",
+      "sha256": "01a4fbc653188c5ca84d0df5a170653f98088bc551e708b9727406022df7cf46",
+      "upstream": "org/objectweb/asm/Edge.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/FieldVisitor.java",
+      "sha256": "47bb1d40681fc61d8d6002f4a1201ca4187d8d51eb72a8a77ac680c94c0fdfbd",
+      "upstream": "org/objectweb/asm/FieldVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/FieldWriter.java",
+      "sha256": "bc4fc93ed15ebf7cab06922bfc696c600677184cf747d90e6306ef7061451e45",
+      "upstream": "org/objectweb/asm/FieldWriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/Frame.java",
+      "sha256": "95981c1af38ea5e569c8d8c1446675614c607e01c843bbac0cd58d16cda1435d",
+      "upstream": "org/objectweb/asm/Frame.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/Handle.java",
+      "sha256": "446ff86bb634021073a0f06ded668e368ffd163adc9d74018ea135ac43e921ab",
+      "upstream": "org/objectweb/asm/Handle.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/Handler.java",
+      "sha256": "cc99cad23ed452da86ed9fc386bbf9cf5a8cb2c0d877a965b342cdd09c998663",
+      "upstream": "org/objectweb/asm/Handler.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/Label.java",
+      "sha256": "8dec314944c57e428c6b67a4115e969f939c15645948be82da95bf945fc55bf4",
+      "upstream": "org/objectweb/asm/Label.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/MethodTooLargeException.java",
+      "sha256": "3532ef3daab5f3c48809c4aa6f537454440a9f1c2bb8f5152243ba6cae0bf461",
+      "upstream": "org/objectweb/asm/MethodTooLargeException.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/MethodVisitor.java",
+      "sha256": "0cdeec44b6b5a9b962c5b953c73c668da344865c3bb1fa0c4dbf273d3fd27f87",
+      "upstream": "org/objectweb/asm/MethodVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/MethodWriter.java",
+      "sha256": "b4d415e148fc7bc41985cb88568289fc92d391a9d7e511998a127668de8027a1",
+      "upstream": "org/objectweb/asm/MethodWriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/ModuleVisitor.java",
+      "sha256": "15859301bd8b2e31d8cfef578ab7bd463bde93f4b5bddf4aef61a697b36c5bb5",
+      "upstream": "org/objectweb/asm/ModuleVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/ModuleWriter.java",
+      "sha256": "a4a3a447dbc4905d532bdc2fe9440bdf41fc11c81caee7649005fadcdc6d7a11",
+      "upstream": "org/objectweb/asm/ModuleWriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/Opcodes.java",
+      "sha256": "251b02ba8630d4153f138e2b343444cb7fa85f8872d8f69b1d910ce97a748beb",
+      "upstream": "org/objectweb/asm/Opcodes.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/RecordComponentVisitor.java",
+      "sha256": "5eff30f3f0f2ecf90207dbf2c62d4eae0557dc25b9762ffd942f44c98d7e3360",
+      "upstream": "org/objectweb/asm/RecordComponentVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/RecordComponentWriter.java",
+      "sha256": "4845684db0716fcaa46ad22447aee064d3f7721fdc2e1380e9df653d21ecab37",
+      "upstream": "org/objectweb/asm/RecordComponentWriter.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/Symbol.java",
+      "sha256": "bde8bd46893114c21c8964746111ac9377a2fbe925339d4f132945e83d5b2943",
+      "upstream": "org/objectweb/asm/Symbol.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/SymbolTable.java",
+      "sha256": "7055244d852a94a8f8d0dd7dbb70e6a788ce28d950a36931d76f435f32847b49",
+      "upstream": "org/objectweb/asm/SymbolTable.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/Type.java",
+      "sha256": "755a7a11ba3fafb0d5e0bd2e1055844c7c603259d77e27d548a59366bb2b04aa",
+      "upstream": "org/objectweb/asm/Type.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/TypePath.java",
+      "sha256": "0ed866977415ca9d5d60a1b34e193332459ef9373ffe7f82a4e0af829cbc4f75",
+      "upstream": "org/objectweb/asm/TypePath.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/TypeReference.java",
+      "sha256": "2d70af6350abb5b1d17667f9e6518a77c0c8d49cd75c299b1d21dbacc650e40f",
+      "upstream": "org/objectweb/asm/TypeReference.java"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/asm-9.10.1/upstream-source-only/org/objectweb/asm/package.html",
+      "sha256": "9df8b952fb4a6434d607828e04581840268677939daf228553187d641caffb3c",
+      "upstream": "org/objectweb/asm/package.html"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/signature/SignatureReader.java",
+      "sha256": "14c54790453492da2a872852b44734c13d5f8ed6818aad13c023c2977ec0aecc",
+      "upstream": "org/objectweb/asm/signature/SignatureReader.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/signature/SignatureVisitor.java",
+      "sha256": "5f659e0da2b46153c069a2283371b2cb416077706bbdcf2bc8e7d4de4a0f3666",
+      "upstream": "org/objectweb/asm/signature/SignatureVisitor.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/java/org/objectweb/asm/signature/SignatureWriter.java",
+      "sha256": "695f78b0e5119c77dc7aa8cad122c1c9640e19c77ee8a8406263413791b3e672",
+      "upstream": "org/objectweb/asm/signature/SignatureWriter.java"
+    },
+    {
+      "kind": "unmodified-source-only-not-packaged-upstream",
+      "repository": "m3/vendor/third_party/asm-9.10.1/upstream-source-only/org/objectweb/asm/signature/package.html",
+      "sha256": "12d2d3c52371618d9261d7cb05e95b1a5885248352a539b6bbf700a434638f5d",
+      "upstream": "org/objectweb/asm/signature/package.html"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/asm-9.10.1/UPSTREAM_LICENSE.json",
+      "sha256": "78dbdef381e746015c1ac8742a8f373496537dd7d8654c089d27b1e1f05a023d",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/asm-9.10.1/UPSTREAM_LICENSE.txt",
+      "sha256": "293b6af371eee28b0ff16f0334ea19e20a3d5522143faa4b95b346855507879a",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/asm-9.10.1/SOURCES_MANIFEST.tsv",
+      "sha256": "de2b1f19ee82ddc8f54aac5457b0bdc4be1b477ccf19c6a97cf2b156bb1f7bdc",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/asm-9.10.1/LICENSE",
+      "sha256": "293b6af371eee28b0ff16f0334ea19e20a3d5522143faa4b95b346855507879a",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    },
+    {
+      "kind": "descriptor-from-published-jar",
+      "published_jar": "org.ow2.asm:asm:9.10.1 (sha256 ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb)",
+      "repository": "m3/vendor/third_party/asm-9.10.1/src/main/descriptor/root/module-info.java",
+      "sha256": "285cd76a1286b109a57e834bda9e743b2bf5834b0465110cfb00f294bb28d496",
+      "upstream": "module-info.class"
+    }
+  ],
+  "group": "org.ow2.asm",
+  "kind": "MODULE",
+  "license": "BSD-3-Clause",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "org.ow2:ow2:1.5.1",
+  "pom": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.10.1/asm-9.10.1.pom",
+  "receipt": {
+    "buildRoot": "d1b63745af0762dfe9b2f536719e748eaaa56fccf172b27d43e3a5033d48dad1",
+    "distributionSha256": "5a94946749f6092d2c15cf03bc6d76921b60688ae4bdf27fea3ec4c6d7c6f29e",
+    "lock": "1a5d341c0745d61ddd6606d5dffa3d2c8af11a81e0e86ab2e2a1b9d7a747b35b",
+    "message": "",
+    "sourceRoot": "f1f95fb1b53fe0088885e59ae661bf16b909cb9e1ad0090df1c3c5fc0c55cdc6",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.10.1/asm-9.10.1-sources.jar",
+  "sources_jar_sha1": "9f9a96aa17fd1113b218fa2dd6c4dc075192aa2e",
+  "sources_jar_sha256": "cb29bf42b4008972c566944d377192aa1b2d90275b9cfa9a7fa86de669fde11c",
+  "status": "PASS",
+  "upstream": "https://gitlab.ow2.org/asm/asm/",
+  "version": "9.10.1"
+}

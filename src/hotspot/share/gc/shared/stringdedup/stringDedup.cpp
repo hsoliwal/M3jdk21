@@ -118,6 +118,11 @@ void StringDedup::notify_intern(oop java_string) {
   // string to the pending requests.  Triggering request processing is left
   // to the next GC.
   forbid_deduplication(java_string);
+  if (java_lang_String::is_m3_joined(java_string)) {
+    // The canonical content is the immutable segment graph, not String.value.
+    // Never enqueue the empty compatibility sentinel for byte-array deduplication.
+    return;
+  }
   StorageUse* requests = Processor::storage_for_requests();
   oop* ref = requests->storage()->allocate();
   if (ref != nullptr) {
@@ -170,6 +175,7 @@ bool StringDedup::Requests::refill_buffer() {
 
 void StringDedup::Requests::add(oop java_string) {
   assert(is_enabled(), "StringDedup not enabled");
+  if (java_lang_String::is_m3_joined(java_string)) return;
   if ((_index == 0) && !refill_buffer()) return;
   // Store the string in the next pre-allocated storage entry.
   oop* ref = _buffer[--_index];

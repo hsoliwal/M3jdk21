@@ -1,0 +1,10 @@
+category	candidate	reuse_and_complexity	contract_decision	license_provenance
+SORTED_ROW_TABLE	M3GuavaRowSortedTable implements Guava RowSortedTable	M3TreeMap outer rows O(log r) indexed keys; M3LinkedHashMap or M3TreeMap inner rows	ADMIT bounded public Guava API, not TreeBasedTable class identity	first-party Apache-2.0 and Guava 33.4.8-jre Apache-2.0
+SORTED_ROW_MAP	SortedRowMap over M3 TreeMap.subMap/headMap/tailMap	Bounds O(log r); live iterator/removal and unsupported put	PRESERVE Guava rowMap removal/put semantics	original Guava behavior as real JAR oracle
+CELL_PAYLOAD	GUAVA Tables.newCustomTable(M3 outer, M3 rows)	existing M3 parallel slot arrays; no stored per-cell M3 Entry/Node	REUSE exact provider cell/table/column behavior	Guava Apache-2.0 binary unmodified
+COLUMN_ORDER	TreeBasedTable comparator-based columns	M3TreeMap per row with optional second comparator	OPTIONAL; RowSortedTable alone does not guarantee columnKeySet sorted	Guava 33.4.8-jre API
+PROVIDER_DISTINCTION	Spring MultiValueMap / Apache ListValuedMap / Eclipse BagMultimap	existing M3LibraryCollections/interop implementations	UNCHANGED not equivalent to Guava RowSortedTable	original licenses retained
+JNI	M3IndexMaskCompactor Java/C17 JNI	precomputed primitive-mask batches only	UNCHANGED; Java object/Comparator never crosses JNI	M3 Apache-2.0
+LEETCODE_INDEX	LeetCode 34 Find First and Last Position	sorted index/category comparison	CATEGORY_ONLY no copied implementation	LeetCode problem statement
+HACKERRANK	Map/hash data structure categories	key/column lookup taxonomy	CATEGORY_ONLY no copied submissions	HackerRank problem taxonomy
+GFG_TABLE	GeeksforGeeks tabular sorting/key map examples	taxonomy reference	CATEGORY_ONLY no copied article	GfG public problem category

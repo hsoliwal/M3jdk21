@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "scope": "Authoring receipt for catalogue-only second stacked PR artifacts.",
+  "created_date": "2026-10-05",
+  "destination": "work/donors-final",
+  "pre_creation_inventory": {
+    "destination_existed": false,
+    "recorded_before_first_write": true
+  },
+  "repository_files_modified": false,
+  "tests_modified": false,
+  "tests_executed": false,
+  "published": false,
+  "observed_test_logs": [
+    {
+      "path": "logs/35-final-main-tests.log",
+      "bytes": 3800,
+      "sha256": "53fa678fd69a16d2350d63bddb0a2a83fe2163b551e61dd50ddb70d3d3fb58d3"
+    },
+    {
+      "path": "logs/37-required-jni-donors.log",
+      "bytes": 3305,
+      "sha256": "6b2360fb3c16138ce34bad981e558ecda477c1c342b639c76c3783741a13f186"
+    }
+  ],
+  "input_snapshots": [
+    {
+      "path": "work/donors/DONOR_CATALOGUE.md",
+      "bytes": 22332,
+      "sha256": "f00e9f525dac775bc0de39c76c241457461e4c0e463b0b954abb2349dc3136a6"
+    },
+    {
+      "path": "work/donors/donor_catalogue.json",
+      "bytes": 27700,
+      "sha256": "0aa8b7550722cfac871542efb2706fde23a9675b200d81296177646c9af0b836"
+    },
+    {
+      "path": "work/donors/FINITE_FIXTURE_MATRIX.md",
+      "bytes": 16163,
+      "sha256": "06b95b5a5f5e826fca88bf921902ced013a14aee80c1e84df1e43678378e137a"
+    },
+    {
+      "path": "work/donors/finite_fixture_matrix.json",
+      "bytes": 16352,
+      "sha256": "2f44217ef051e60241bac35e536f52c8c48f5399464e4d737134b8fc1c8a5e90"
+    },
+    {
+      "path": "logs/35-final-main-tests.log",
+      "bytes": 3800,
+      "sha256": "53fa678fd69a16d2350d63bddb0a2a83fe2163b551e61dd50ddb70d3d3fb58d3"
+    },
+    {
+      "path": "logs/37-required-jni-donors.log",
+      "bytes": 3305,
+      "sha256": "6b2360fb3c16138ce34bad981e558ecda477c1c342b639c76c3783741a13f186"
+    },
+    {
+      "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/pom.xml",
+      "bytes": 16270,
+      "sha256": "feb6d0d9b6058016caaed29c00ca9f6dac23d60ec13216c31822bf294ba1cc28"
+    },
+    {
+      "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+      "bytes": 13294,
+      "sha256": "ddce76a22c1c4e08725c36595d5f5c232c59c7babb54b96a3d7113e442b59ddc"
+    },
+    {
+      "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+      "bytes": 9854,
+      "sha256": "3c89f1cf945db9a05626cdf96016517f7903687cdfa2348a2d0bad6013727925"
+    }
+  ],
+  "creation_events": [
+    {
+      "path": "work/donors-final/DONOR_CATALOGUE.md",
+      "sha256_before": null,
+      "sha256_after": "f12b6c4986ab5d283205ecbdddce46a461bb579db2d3c83513cddaed23b722a7",
+      "bytes_after": 12750
+    },
+    {
+      "path": "work/donors-final/donor_catalogue.json",
+      "sha256_before": null,
+      "sha256_after": "b9c144d5eb9be716fd749b6d7cda456e0d40aae6ae423c794ad2ace1a4fe1322",
+      "bytes_after": 51757
+    },
+    {
+      "path": "work/donors-final/EXECUTED_TEST_MAPPING.md",
+      "sha256_before": null,
+      "sha256_after": "6e39cc123a018f72d3cdb02c178326f757b44159c75bd7332435ae5916ca19f9",
+      "bytes_after": 8533
+    }
+  ],
+  "receipt_self_hash_location": "Reported in the parent handoff; omitted here to avoid a self-referential hash."
+}

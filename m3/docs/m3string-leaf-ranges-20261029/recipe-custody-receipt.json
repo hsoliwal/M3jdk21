@@ -1,0 +1,24 @@
+{
+  "schema": "M3_PASSIVE_RECIPE_CUSTODY_RECEIPT_V1",
+  "public_source_path": "m3/docs/m3string-leaf-ranges-20261029/RECIPE_MEMORY.tsv",
+  "public_source_commit": "3569c790d5cc3f9bc871ab0ecd025dab0fd5cafc",
+  "source_git_blob": "412efbe7499f506b94fc095b63b96e32ed05d7ba",
+  "source_sha256": "73cbc4dca614fdce8c553449acded52e9d1cac1bb27ed6716d6fb0ac69d2f4af",
+  "source_bytes": 5413,
+  "source_event_rows": 9,
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "dcb281239d56a7046eb658436bcd46f485e53768",
+  "canonical_archive_path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/sources/hsoliwal/M3jdk21/m3/docs/m3string-leaf-ranges-20261029/RECIPE_MEMORY.tsv",
+  "canonical_qualification_path": "synexia-openrewrite-recipes/recipe-crates/public-fork-recipe-custody-20261017/receipts/public-memory-cleanup-20261029/QUALIFICATION.json",
+  "custody_recipe": "com.synexia.rewrite.M3PublicRecipeCustodyRecipe",
+  "removal_recipe": "com.synexia.rewrite.M3PublicRecipeMemoryRemovalRecipe",
+  "qualification": {
+    "owner_tests": 18,
+    "sdk_tests_per_successor": 5,
+    "receiver_cases_per_successor": 9,
+    "actual_null_after_result": true,
+    "zero_change_fixed_point": true
+  },
+  "receipt_contains_recipe_memory_events": false,
+  "runtime_qualification_advanced": false
+}

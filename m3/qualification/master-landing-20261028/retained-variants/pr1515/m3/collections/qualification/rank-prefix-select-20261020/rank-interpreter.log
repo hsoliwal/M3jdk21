@@ -1,0 +1,2 @@
+$ /workspace/scratch/abdb4b1178cf/toolchain/zulu21.48.17-ca-jdk21.0.10-linux_x64/bin/java -Xmx512m -Xcheck:jni -Djava.library.path=/workspace/scratch/abdb4b1178cf/acquisition/rank-select-continuation/reproduction-03/native -cp /workspace/scratch/abdb4b1178cf/m3-repo/m3/collections/target/classes:/workspace/scratch/abdb4b1178cf/m3-repo/m3/collections/target/test-classes -Xint com.m3.collections.M3IndexPathRankSelfTest
+PASS M3IndexPathRank Java21 deterministic differential: 36476 rank checks; 900 randomized paths

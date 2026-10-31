@@ -1,0 +1,677 @@
+{
+  "c05_default_resolution": {
+    "cause": "The initial new module resolved automatically and hid an existing same-package classpath class.",
+    "corrected_image_same_precompiled_witness": "PASS",
+    "correction": "The existing JMOD packer forwards native --do-not-resolve-by-default only when explicitly selected; both published and generated descriptor lanes retain their old default behavior and --d date alias.",
+    "initial_image_classpath_witness": "FAIL_RETAINED",
+    "installed_runtime_evidence": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/default-resolution-regression/OBSERVATION.json",
+    "installed_runtime_evidence_sha256": "82a047c9288e9090645be0594e9cbce2fe81750950079860eb68551d66f66ff5",
+    "jmod_entries_equivalent_except_module_info": true,
+    "jmod_entry_equivalence_sha256": "8cffec219e6e6f01a46380eb01ce276eb9e5baa75c4438c2093df527fccfc074",
+    "permanent_real_jdk_regressions": 4,
+    "regression_evidence": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/c05-jmod-resolution/FINAL_RESULTS.json",
+    "regression_evidence_sha256": "c9ce8b51d9df5512f18c7c545b4e23a1c32779e4f8db869d47aba1bca2cea580",
+    "source_image_witness": "PASS",
+    "status": "PASS"
+  },
+  "compatibility": {
+    "baseline_and_new_source_core_trees_equal": true,
+    "java_se_primitive_and_array_layouts": "UNCHANGED",
+    "legacy_client_bytecode_sha256": "211d33da47f2bea459383ad145e15e59c422a69e8c0c8406168030910a515bb4",
+    "legacy_client_checks": 104,
+    "legacy_client_origin": "jrt:/com.m3.arrays",
+    "new_native_exports": 6,
+    "old_api_classes_retained": 32,
+    "old_native_exports_retained": 6
+  },
+  "global_receiving_stage_advanced": false,
+  "implementation_source_anchor": {
+    "commit": "08d257942d1f30ee30aa66146f96a673e75bdb36",
+    "recipe": "com.synexia.rewrite.M3JdkPackedIntegersRecipe",
+    "repository": "hsoliwal/com.synexia",
+    "role": "Exact compiled Java/native product source lineage. C05 packaging is pinned separately by content; the final receiving recipe execution and source commit are bound independently."
+  },
+  "implementation_source_sha256": {
+    "m3/arrays/pom.xml": "5f4b36566bfdb6aac752719395c235dc9e54ff36e549dea6b134f9bf66b1bb34",
+    "m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java": "45c7b7f4ea8417e501f7ad9de26f8c9fe441b27b8b59722525c24542048a6021",
+    "m3/arrays/src/main/java/com/m3/arrays/packed/Int40Array.java": "fbfe5504a8b9c568bfbc299767beaca2ef45dbfdd7cf6deea5b029e11c4e8668",
+    "m3/arrays/src/main/java/com/m3/arrays/packed/Int48Array.java": "04506f12c9577dcb8fc0491ead5b0c17132255d61dd44942c5723f9c30ce7b27",
+    "m3/arrays/src/main/java/com/m3/arrays/packed/Int56Array.java": "7320ded0275ad0b13c29097213e73844e199333cbcb5f9cda807a4285fc0d1f3",
+    "m3/arrays/src/main/java/com/m3/arrays/packed/PackedCodec.java": "43be90c12c6528b71b0779801f8934202e1a5f7a94cdd64ebfd646afd0d162f2",
+    "m3/arrays/src/main/java/com/m3/arrays/packed/PackedIntArray.java": "47b9e131f9f030898e37e6a57371a8e08412d31bf7115dd0177f13a1b194854a",
+    "m3/arrays/src/main/java/com/m3/arrays/packed/VInt.java": "e973bb78db7294b13da972702eed54653ade3bfb998b0799ec60952b5854a4ac",
+    "m3/arrays/src/main/java/com/m3/arrays/packed/package-info.java": "753e9972c112b22b2c7bb990efdd822299c710714ecb1cbf8659ac6619ef502e",
+    "m3/arrays/src/main/java/module-info.java": "c3aa194f4bcc2b3e42537910e72f6794ff6027c9ea7c0335f403e3b7987e78cb",
+    "m3/arrays/src/main/native/CMakeLists.txt": "646a9231233121add22d473b1d196ff24930930591fe94373ce28396390a69c0",
+    "m3/arrays/src/main/native/include/m3_packed_codec.h": "f51764d3a21e7c5e713b2be8cba710ce7c9de1131a3a7e0af57a909b1c2fc3fe",
+    "m3/arrays/src/main/native/m3_packed_codec.c": "a5443846d7f60ce596f69489196bd96ade82112856339986fce32f5927f323d8",
+    "m3/arrays/src/main/native/m3_packed_codec_jni.c": "5c9f84130e32bb77dcd413405f967cdfba7fa40d93351bb92c66183b31ad2d31",
+    "m3/arrays/src/main/native/tests/m3_packed_codec_checks.c": "2dbfff24d49243132268625614fb7043624e4aaa95eb764a050eca22331b3e20",
+    "m3/arrays/src/main/native/tests/m3_packed_codec_jni_fault_test.c": "c1bd363d151545f4bcae04cd578da0c94f37139e28fdc47c4882a32e9ea56b34",
+    "m3/arrays/src/main/native/tests/m3_packed_null_fixture.c": "1a9885e0a69ef295ad21eb3a1164a8ee7cf628734b6b257a0bc54576054e5943",
+    "m3/tooling/module-packs/build_pack.py": "dc5c587e15d88f4519c4e9154ac8bde061c1d253ac69a8e76438666dbf15af7f"
+  },
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "java_jni": {
+    "checked_jni": true,
+    "ctest_failures": 0,
+    "ctest_tests": 3,
+    "execution_scope": "Maven component tests on the matched source-built JDK; installed-module API, legacy, load/failure, CPU/RSS and memory probes execute separately on the composed SDK.",
+    "junit_errors": 0,
+    "junit_failures": 0,
+    "junit_skips": 0,
+    "junit_tests": 34,
+    "null_result_failure_cases": 6,
+    "required_native_limit_items_and_bytes": 4096,
+    "test_null_library_packaged": false
+  },
+  "jdk_regressions": {
+    "all_prior_artifacts_unchanged": true,
+    "all_tests_passed": false,
+    "allowed_command_differences": [
+      "-jdk image path",
+      "-w work directory",
+      "-r report directory",
+      "process working directory"
+    ],
+    "baseline_image_manifest_sha256": "efcc9c2cc2b7036fb30579fcdd77adbf28167f483a7e4f96dbd3cfda32475415",
+    "baseline_outcome_counts": {
+      "Failed": 1,
+      "Passed": 5
+    },
+    "baseline_summary_sha256": "642299bd607de54be46ccf749c0b2e68a9739e515e1acbff2d852d7bc78eb49b",
+    "corrected_candidate_image_manifest_sha256": "8517fd13ce2de1fc6d48794e5c597882db30f58c1e1084b227bf7f3c2c1d108c",
+    "corrected_candidate_outcome_counts": {
+      "Failed": 1,
+      "Passed": 5
+    },
+    "corrected_candidate_sdk_receipt_sha256": "0bfe0685bb2d65a90629bcea7ba47d7dc63d4345dfea919afd82f3ef5aa8642c",
+    "corrected_candidate_summary_sha256": "5c3e8e47e0b65414fbca6a4e42fa093fbbba1ac8e0022f6c530cb137c012d738",
+    "failure_diagnostic": "java.lang.AssertionError: exported JDK package exposes M3 class: java.lang.M3Object",
+    "failure_location": "M3CanonicalApiBoundaryTest.auditExportedJavaPackages line161, main line99",
+    "failure_stderr_byte_identical": true,
+    "failure_stderr_bytes": 839,
+    "failure_stderr_sha256": "e0a5d283a084b88d95551751b4ddc7c906d9c8758892bd89bcdde95bd5ce0033",
+    "initial_candidate_comparison_retained_sha256": "79957005ee76d503ed21b10caedcc5e2c8186a267d1f7bab5958ab8a013bc8ee",
+    "jtreg_exit_codes": {
+      "baseline": 2,
+      "corrected_candidate": 2
+    },
+    "m3jdk21_product_acceptance": false,
+    "prior_artifact_count_retained": 298,
+    "randomness_limit": "Both BitTwiddle tests use jdk.test.lib.RandomFactory and -Dseed. CopyMethods retains original unseeded new Random(); identical random payload vectors cannot be claimed. The other three selected programs use their original deterministic or literal inputs.",
+    "recorded_at": "2026-10-29T16:08:13.984018+00:00",
+    "same_environment_overrides": true,
+    "same_runtime_action_types_and_results": true,
+    "same_test_sources_harness_and_options": true,
+    "scope_limit": "Five selected tests pass and the pre-existing sixth-test diagnostic is unchanged. This finite comparison does not establish full JDK compatibility or advance any global M3 receiving phase. C05 classpath compatibility is independently tested by the packaging regression and installed-image witness.",
+    "status": "NO_NEW_FAILURE_OBSERVED_IN_SIX_SELECTED_TESTS",
+    "tests": [
+      {
+        "baseline_jtr_sha256": "45badd249fbf40e927d5181e5c25050b2941a2ec6190b963baf1c13d1751fbea",
+        "baseline_outcome": "Passed",
+        "corrected_candidate_jtr_sha256": "b2791a6c00e6b7e62e51588f66f64dd58417a88b3ca886c3a408dee3b6104cee",
+        "corrected_candidate_outcome": "Passed",
+        "disposition": "PASSES_BOTH_IMAGES",
+        "failure_stderr_byte_identical": null,
+        "same_action_types_and_results": true,
+        "same_exec_status": true,
+        "test": "java/lang/Integer/BitTwiddle.java"
+      },
+      {
+        "baseline_jtr_sha256": "008e6b2e23e972da099cf20015899e81efc7aabc06a7d98e2cb9ac2556592e03",
+        "baseline_outcome": "Passed",
+        "corrected_candidate_jtr_sha256": "2bc0516444965a2a0dc64e2751202a0abff9d8472fb62b40d34efcbb94c0fb84",
+        "corrected_candidate_outcome": "Passed",
+        "disposition": "PASSES_BOTH_IMAGES",
+        "failure_stderr_byte_identical": null,
+        "same_action_types_and_results": true,
+        "same_exec_status": true,
+        "test": "java/lang/Integer/Unsigned.java"
+      },
+      {
+        "baseline_jtr_sha256": "291efd7264471d3f11fa7baf22b66eacecc87c318d13c150e337e9910081b031",
+        "baseline_outcome": "Passed",
+        "corrected_candidate_jtr_sha256": "d8035fb068c5b08780ee330b25b6e0cb96ce577dbe2b083c31804f9af5413a17",
+        "corrected_candidate_outcome": "Passed",
+        "disposition": "PASSES_BOTH_IMAGES",
+        "failure_stderr_byte_identical": null,
+        "same_action_types_and_results": true,
+        "same_exec_status": true,
+        "test": "java/lang/Long/BitTwiddle.java"
+      },
+      {
+        "baseline_jtr_sha256": "6fef00c5b1b88820a2ff6fed8ffc43b0be9fa4fa04606950be77ca9c113241e5",
+        "baseline_outcome": "Passed",
+        "corrected_candidate_jtr_sha256": "22f2bf2bb57c851f6e05029f33272a64bf3ec4a4e4c1684061b9a08ca936425c",
+        "corrected_candidate_outcome": "Passed",
+        "disposition": "PASSES_BOTH_IMAGES",
+        "failure_stderr_byte_identical": null,
+        "same_action_types_and_results": true,
+        "same_exec_status": true,
+        "test": "java/lang/Long/Unsigned.java"
+      },
+      {
+        "baseline_jtr_sha256": "7e84314cd017c9050424a2b7f8b49f6cd1d4d1a32f607cbb4532bc61a71a77d8",
+        "baseline_outcome": "Failed",
+        "corrected_candidate_jtr_sha256": "828fe151a309add190c8abcb0c82eac8d3b71420623fee8c47130a0358d7f9b3",
+        "corrected_candidate_outcome": "Failed",
+        "disposition": "PREEXISTING_API_BOUNDARY_FAILURE_RETAINED_UNRESOLVED",
+        "failure_stderr_byte_identical": true,
+        "same_action_types_and_results": true,
+        "same_exec_status": true,
+        "test": "java/lang/String/M3CanonicalApiBoundaryTest.java"
+      },
+      {
+        "baseline_jtr_sha256": "321d8797357a495d6735cbefe03fbf40a00dc1e5792e8ac970772b074e432ba1",
+        "baseline_outcome": "Passed",
+        "corrected_candidate_jtr_sha256": "e818ab622c0755e8c41fff896c4aa34c22232c10f8b1d07e611f8d13f06d458d",
+        "corrected_candidate_outcome": "Passed",
+        "disposition": "PASSES_BOTH_IMAGES",
+        "failure_stderr_byte_identical": null,
+        "same_action_types_and_results": true,
+        "same_exec_status": true,
+        "test": "java/util/Arrays/CopyMethods.java"
+      }
+    ],
+    "unresolved_gate": "M3CanonicalApiBoundaryTest remains FAILED on both images. Later assertions after its failure are not claimed to have run or passed."
+  },
+  "limits": [
+    "Finite Linux x86_64 component evidence; no whole-JDK/JCK or other-platform acceptance.",
+    "M3CanonicalApiBoundaryTest fails identically before and after due to exported java.lang.M3Object; remaining assertions after that failure are not claimed.",
+    "Naming records remain implemented-unverified; no global String/arrays/collections phase is promoted.",
+    "Instrumentation estimates include the packed wrapper and owned byte array; timing observations do not establish universal native acceleration."
+  ],
+  "m3jdk21_product_acceptance": false,
+  "memory": {
+    "architecture": "amd64",
+    "baseline_estimated_instance_bytes": 80000016,
+    "baseline_payload_bytes": 80000000,
+    "byte_order": "little-endian",
+    "checksum_algorithm": "seed 6a09e667f3bcc909; rotate-left 7, xor value, add 9e3779b97f4a7c15 modulo 2^64",
+    "dataset": "boundary sentinels followed by a deterministic modular sequence",
+    "element_count": 10000000,
+    "estimate_method": "Instrumentation.getObjectSize",
+    "estimate_scope": "packed wrapper plus owned byte array; baseline long array only",
+    "jvm_build": "21-internal-adhoc.root.M3jdk21-review",
+    "jvm_name": "OpenJDK 64-Bit Server VM",
+    "jvm_vendor": "N/A",
+    "jvm_version": "21-internal",
+    "schema_version": 1,
+    "signed": true,
+    "total_verified_values": 30000000,
+    "verification": "passed",
+    "widths": [
+      {
+        "all_values_verified": true,
+        "bits_per_value": 40,
+        "bytes_per_value": 5,
+        "checksum_unsigned_decimal": "16257344976176324791",
+        "estimated_backing_array_bytes": 50000016,
+        "estimated_instance_bytes": 50000040,
+        "estimated_instance_saving_bytes": 29999976,
+        "estimated_wrapper_bytes": 24,
+        "payload_bytes": 50000000,
+        "payload_saving_percent": 37.5,
+        "representation": "int40",
+        "saved_payload_bytes": 30000000,
+        "verified_values": 10000000
+      },
+      {
+        "all_values_verified": true,
+        "bits_per_value": 48,
+        "bytes_per_value": 6,
+        "checksum_unsigned_decimal": "1788137278403014512",
+        "estimated_backing_array_bytes": 60000016,
+        "estimated_instance_bytes": 60000040,
+        "estimated_instance_saving_bytes": 19999976,
+        "estimated_wrapper_bytes": 24,
+        "payload_bytes": 60000000,
+        "payload_saving_percent": 25.0,
+        "representation": "int48",
+        "saved_payload_bytes": 20000000,
+        "verified_values": 10000000
+      },
+      {
+        "all_values_verified": true,
+        "bits_per_value": 56,
+        "bytes_per_value": 7,
+        "checksum_unsigned_decimal": "29733902689483549",
+        "estimated_backing_array_bytes": 70000016,
+        "estimated_instance_bytes": 70000040,
+        "estimated_instance_saving_bytes": 9999976,
+        "estimated_wrapper_bytes": 24,
+        "payload_bytes": 70000000,
+        "payload_saving_percent": 12.5,
+        "representation": "int56",
+        "saved_payload_bytes": 10000000,
+        "verified_values": 10000000
+      }
+    ]
+  },
+  "packaging_source_sha256": {
+    "m3/tooling/jmod-recipes/tools/jmod_pack.py": "9ebc4a17e46fa0c3d6d995bf1a22e72b722d17efb1d87889ac8a7a47f89d2bd0",
+    "m3/tooling/jmod-recipes/tools/test_jmod_resolution.py": "cde8b6560b784f967a713f5a35cbe33a9c8d4fc29532c7a5d22ab3cdabb05d97",
+    "m3/tooling/module-packs/build_pack.py": "dc5c587e15d88f4519c4e9154ac8bde061c1d253ac69a8e76438666dbf15af7f"
+  },
+  "platform": {
+    "arch": "x86_64",
+    "configuration": "server fastdebug headless-only bundled FreeType",
+    "os": "Linux",
+    "runtime": "21-internal-adhoc.root.M3jdk21-review"
+  },
+  "receiving_base": "0ab28ea86ccb2b7c1997e662d1555ece229c05de",
+  "resource_observations": {
+    "batch_values": 400,
+    "calls_per_sample": 8,
+    "first_calls_share_process_and_jit": true,
+    "routines": 20,
+    "rss_scope": "entire process including JVM, fixtures, compilation and probe",
+    "sample_count_per_routine": 101,
+    "stdout_sha256": "3583b66e930502b88f71fba2377871cdd268fb6592687130070367f896e22e18",
+    "universal_speedup_claim": false,
+    "verified_calls": 17460
+  },
+  "runs": [
+    {
+      "command": [
+        "/tmp/m3jdk21-build-recovery-20261029/tools/apache-maven-3.9.16/bin/mvn",
+        "-B",
+        "-o",
+        "-ntp",
+        "-s",
+        "/tmp/m3jdk-root-recovery-20261029/settings.xml",
+        "-Dmaven.repo.local=/tmp/m3jdk-root-recovery-20261029/maven-cache",
+        "-f",
+        "/tmp/m3jdk-target-recovered-20261029/m3/arrays/pom.xml",
+        "-Pnative-linux",
+        "-DargLine=-Xcheck:jni",
+        "clean",
+        "verify"
+      ],
+      "exit_code": 0,
+      "id": "packed-signed-contract",
+      "inputs": {
+        "m3/arrays/src/test/java/com/m3/arrays/packed/PackedIntArrayTest.java": "fea7b0e43b369d163b0a2aefee73197f38d32e00913cf5404ce27badd42a0177",
+        "source_image_manifest": "efcc9c2cc2b7036fb30579fcdd77adbf28167f483a7e4f96dbd3cfda32475415"
+      },
+      "source": "m3/arrays/src/test/java/com/m3/arrays/packed/PackedIntArrayTest.java",
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/clean-source-sdk-native-03.log",
+      "stdout_sha256": "f23349aa8799c24e95b5f24b05c2c8f087cba30d321aba5eeb7adfb982fe93ea"
+    },
+    {
+      "command": [
+        "/tmp/m3-packed-sdk-optin-20261029/sdk/image/bin/java",
+        "-Xcheck:jni",
+        "-Xms256m",
+        "-Xmx512m",
+        "--add-modules",
+        "com.m3.arrays,java.instrument",
+        "--add-reads",
+        "com.m3.arrays=java.instrument",
+        "--patch-module",
+        "com.m3.arrays=/tmp/m3-packed-sdk-optin-20261029/memory/classpath-compiled-test-helpers",
+        "-javaagent:/tmp/m3-packed-sdk-optin-20261029/memory/agent.jar",
+        "-m",
+        "com.m3.arrays/com.m3.arrays.packed.MemoryProbe",
+        "10000000",
+        "/tmp/m3-packed-sdk-optin-20261029/memory/memory-report.json"
+      ],
+      "exit_code": 0,
+      "id": "packed-resource-observations",
+      "inputs": {
+        "installed_image_manifest": "8517fd13ce2de1fc6d48794e5c597882db30f58c1e1084b227bf7f3c2c1d108c",
+        "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc",
+        "m3/arrays/src/test/java/com/m3/arrays/packed/MemoryProbe.java": "c5907db0d1df0b707ceca8d19ba55ffff55573edaf8ca0efa92e2763e3fd71c9",
+        "source_image_manifest": "efcc9c2cc2b7036fb30579fcdd77adbf28167f483a7e4f96dbd3cfda32475415"
+      },
+      "source": "m3/arrays/src/test/java/com/m3/arrays/packed/MemoryProbe.java",
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/memory/run.log",
+      "stdout_sha256": "801aa71790b791ec534ac7d49ef0ee98dc746bc1a470c03f66a8bf491b61139b"
+    },
+    {
+      "command": [
+        "/tmp/m3jdk21-build-recovery-20261029/tools/apache-maven-3.9.16/bin/mvn",
+        "-B",
+        "-o",
+        "-ntp",
+        "-s",
+        "/tmp/m3jdk-root-recovery-20261029/settings.xml",
+        "-Dmaven.repo.local=/tmp/m3jdk-root-recovery-20261029/maven-cache",
+        "-f",
+        "/tmp/m3jdk-target-recovered-20261029/m3/arrays/pom.xml",
+        "-Pnative-linux",
+        "-DargLine=-Xcheck:jni",
+        "clean",
+        "verify"
+      ],
+      "exit_code": 0,
+      "id": "vint64-contract",
+      "inputs": {
+        "m3/arrays/src/test/java/com/m3/arrays/packed/VIntTest.java": "fbff0299359de0d0c193bb3f1d81b6c07d52d3ac2cd6de69148df738709436f5",
+        "source_image_manifest": "efcc9c2cc2b7036fb30579fcdd77adbf28167f483a7e4f96dbd3cfda32475415"
+      },
+      "source": "m3/arrays/src/test/java/com/m3/arrays/packed/VIntTest.java",
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/clean-source-sdk-native-03.log",
+      "stdout_sha256": "f23349aa8799c24e95b5f24b05c2c8f087cba30d321aba5eeb7adfb982fe93ea"
+    },
+    {
+      "command": [
+        "/tmp/m3jdk21-build-recovery-20261029/tools/apache-maven-3.9.16/bin/mvn",
+        "-B",
+        "-o",
+        "-ntp",
+        "-s",
+        "/tmp/m3jdk-root-recovery-20261029/settings.xml",
+        "-Dmaven.repo.local=/tmp/m3jdk-root-recovery-20261029/maven-cache",
+        "-f",
+        "/tmp/m3jdk-target-recovered-20261029/m3/arrays/pom.xml",
+        "-Pnative-linux",
+        "-DargLine=-Xcheck:jni",
+        "clean",
+        "verify"
+      ],
+      "exit_code": 0,
+      "id": "packed-native-parity",
+      "inputs": {
+        "m3/arrays/src/test/java/com/m3/arrays/M3PackedNativeTest.java": "6010c3d7cc7025ae0f3cbe624888133feb4f2b809912717c2b74fb090eac7dee",
+        "source_image_manifest": "efcc9c2cc2b7036fb30579fcdd77adbf28167f483a7e4f96dbd3cfda32475415"
+      },
+      "source": "m3/arrays/src/test/java/com/m3/arrays/M3PackedNativeTest.java",
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/clean-source-sdk-native-03.log",
+      "stdout_sha256": "f23349aa8799c24e95b5f24b05c2c8f087cba30d321aba5eeb7adfb982fe93ea"
+    },
+    {
+      "command": [
+        "ctest",
+        "--test-dir",
+        "/tmp/m3jdk-target-recovered-20261029/m3/arrays/target/native",
+        "--output-on-failure",
+        "-C",
+        "Release"
+      ],
+      "exit_code": 0,
+      "id": "packed-native-kernels",
+      "inputs": {
+        "m3/arrays/src/main/native/tests/m3_packed_codec_checks.c": "2dbfff24d49243132268625614fb7043624e4aaa95eb764a050eca22331b3e20",
+        "source_image_manifest": "efcc9c2cc2b7036fb30579fcdd77adbf28167f483a7e4f96dbd3cfda32475415"
+      },
+      "source": "m3/arrays/src/main/native/tests/m3_packed_codec_checks.c",
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/LastTest.log",
+      "stdout_sha256": "2313b4fa601d841038c720744b98ecf92bfc28ac8d8ca3446838e86643b244e6"
+    },
+    {
+      "command": [
+        "ctest",
+        "--test-dir",
+        "/tmp/m3jdk-target-recovered-20261029/m3/arrays/target/native",
+        "--output-on-failure",
+        "-C",
+        "Release"
+      ],
+      "exit_code": 0,
+      "id": "packed-jni-failures",
+      "inputs": {
+        "m3/arrays/src/main/native/tests/m3_packed_codec_jni_fault_test.c": "c1bd363d151545f4bcae04cd578da0c94f37139e28fdc47c4882a32e9ea56b34",
+        "source_image_manifest": "efcc9c2cc2b7036fb30579fcdd77adbf28167f483a7e4f96dbd3cfda32475415"
+      },
+      "source": "m3/arrays/src/main/native/tests/m3_packed_codec_jni_fault_test.c",
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/current-source-native/LastTest.log",
+      "stdout_sha256": "2313b4fa601d841038c720744b98ecf92bfc28ac8d8ca3446838e86643b244e6"
+    },
+    {
+      "command": [
+        "/tmp/m3-packed-sdk-optin-20261029/sdk/image/bin/java",
+        "-Xcheck:jni",
+        "-Xms128m",
+        "-Xmx512m",
+        "--add-modules",
+        "com.m3.arrays,java.management",
+        "-cp",
+        "/tmp/m3-packed-sdk-optin-20261029/installed-acceptance/classes",
+        "com.m3.arrays.acceptance.InstalledPackedProbe"
+      ],
+      "exit_code": 0,
+      "id": "installed-installed",
+      "inputs": {
+        "installed_image_manifest": "8517fd13ce2de1fc6d48794e5c597882db30f58c1e1084b227bf7f3c2c1d108c",
+        "installed_native_library": "cd9d709c07ddf083fc55ce2d07637da2d26de7e1c3137c4ef58b370fed7e1170",
+        "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc"
+      },
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/installed.log",
+      "stdout_sha256": "bebadb6e2f68b9dd2d8d41f74f3ade6f653c6e2774fd01861a2bddddc19e073d"
+    },
+    {
+      "command": [
+        "/tmp/m3-packed-sdk-optin-20261029/sdk/image/bin/java",
+        "-Xcheck:jni",
+        "-Xms128m",
+        "-Xmx512m",
+        "--add-modules",
+        "com.m3.arrays,java.management",
+        "-cp",
+        "/tmp/m3jdk-root-recovery-20261029/baseline/legacy-client",
+        "com.m3.arrays.acceptance.LegacyArraysClient",
+        "/tmp/m3-packed-sdk-optin-20261029/sdk/image/lib/libm3_arrays.so"
+      ],
+      "exit_code": 0,
+      "id": "installed-legacy",
+      "inputs": {
+        "installed_image_manifest": "8517fd13ce2de1fc6d48794e5c597882db30f58c1e1084b227bf7f3c2c1d108c",
+        "installed_native_library": "cd9d709c07ddf083fc55ce2d07637da2d26de7e1c3137c4ef58b370fed7e1170",
+        "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc"
+      },
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/legacy.log",
+      "stdout_sha256": "cfda59abc63eadab0b0d95f84c1a25c6dedb6286c492d124ec21b89e9c3161dd"
+    },
+    {
+      "command": [
+        "/tmp/m3-packed-sdk-optin-20261029/sdk/image/bin/java",
+        "-Xcheck:jni",
+        "-Xms128m",
+        "-Xmx512m",
+        "--add-modules",
+        "com.m3.arrays,java.management",
+        "-cp",
+        "/tmp/m3-packed-sdk-optin-20261029/installed-acceptance/classes",
+        "com.m3.arrays.acceptance.PackedResourceProbe",
+        "/tmp/m3-packed-sdk-optin-20261029/sdk/image/lib/libm3_arrays.so"
+      ],
+      "exit_code": 0,
+      "id": "installed-resource",
+      "inputs": {
+        "installed_image_manifest": "8517fd13ce2de1fc6d48794e5c597882db30f58c1e1084b227bf7f3c2c1d108c",
+        "installed_native_library": "cd9d709c07ddf083fc55ce2d07637da2d26de7e1c3137c4ef58b370fed7e1170",
+        "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc"
+      },
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/resource.log",
+      "stdout_sha256": "3583b66e930502b88f71fba2377871cdd268fb6592687130070367f896e22e18"
+    },
+    {
+      "command": [
+        "/tmp/m3-packed-sdk-optin-20261029/sdk/image/bin/java",
+        "-Xcheck:jni",
+        "--add-modules",
+        "com.m3.arrays",
+        "-cp",
+        "/tmp/m3jdk-target-recovered-20261029/m3/arrays/target/test-classes",
+        "com.m3.arrays.acceptance.PackedLoadContractProbe"
+      ],
+      "exit_code": 0,
+      "id": "installed-missing-native",
+      "inputs": {
+        "installed_image_manifest": "8517fd13ce2de1fc6d48794e5c597882db30f58c1e1084b227bf7f3c2c1d108c",
+        "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc"
+      },
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/missing-native.log",
+      "stdout_sha256": "30aed137b2b9dd83fd47a62edc6ba073b866a1fe348482aee86124cb4416edc3"
+    },
+    {
+      "command": [
+        "/tmp/m3-packed-sdk-optin-20261029/sdk/image/bin/java",
+        "-Xcheck:jni",
+        "--add-modules",
+        "com.m3.arrays",
+        "-cp",
+        "/tmp/m3jdk-target-recovered-20261029/m3/arrays/target/test-classes",
+        "com.m3.arrays.acceptance.PackedLoadContractProbe",
+        "/tmp/m3jdk-root-recovery-20261029/baseline/libm3_arrays.so"
+      ],
+      "exit_code": 0,
+      "id": "installed-old-native",
+      "inputs": {
+        "installed_image_manifest": "8517fd13ce2de1fc6d48794e5c597882db30f58c1e1084b227bf7f3c2c1d108c",
+        "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc",
+        "selected_old_native_library": "e9a8b2b5e9e28ca12b47c4c5cd9b34a7b2b849d6d1a7258b86a40b690c80aa3c"
+      },
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/old-native.log",
+      "stdout_sha256": "bbf9ddb7911e9e5846da87332ab3ffcdbeb999c1440703b0c3cfdcfb523a9176"
+    },
+    {
+      "command": [
+        "/tmp/m3-packed-sdk-optin-20261029/sdk/image/bin/java",
+        "-Xcheck:jni",
+        "--add-modules",
+        "com.m3.arrays",
+        "-cp",
+        "/tmp/m3jdk-target-recovered-20261029/m3/arrays/target/test-classes",
+        "com.m3.arrays.acceptance.PackedNullResultProbe",
+        "/tmp/m3jdk-target-recovered-20261029/m3/arrays/target/native/libm3_packed_null_fixture.so"
+      ],
+      "exit_code": 0,
+      "id": "installed-null-native-fixture",
+      "inputs": {
+        "installed_image_manifest": "8517fd13ce2de1fc6d48794e5c597882db30f58c1e1084b227bf7f3c2c1d108c",
+        "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc",
+        "selected_null_result_fixture_library": "7d97c766fcfb2eeab41b9de39d07bd580960bb9a8d38b35b672819be277fdb76"
+      },
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/installed-acceptance/null-native-fixture.log",
+      "stdout_sha256": "1c36359cae6e4a6cef2cd5712b203d40e7bd8ef7b1781f6fdb799460361a0cf2"
+    },
+    {
+      "command": [
+        "/tmp/m3-packed-sdk-optin-20261029/sdk/image/bin/java",
+        "-cp",
+        "/tmp/m3-packed-sdk-20261029/default-resolution-regression/classes",
+        "com.m3.arrays.ClasspathCompatibilityProbe"
+      ],
+      "exit_code": 0,
+      "id": "installed-confirmed-classpath",
+      "inputs": {
+        "installed_image_manifest": "8517fd13ce2de1fc6d48794e5c597882db30f58c1e1084b227bf7f3c2c1d108c",
+        "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc",
+        "original_classpath_witness": "6ffab6596d99cb3dc5672fbb8593841b7dd9008530ed76527265da4c9eb76ad2"
+      },
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/default-resolution-regression/confirmed-classpath.stdout",
+      "stdout_sha256": "899873b87462ff8ac70409250c5a151f710c52bb17e8fa9db49c7715208520c3"
+    },
+    {
+      "command": [
+        "/tmp/m3-packed-sdk-optin-20261029/sdk/image/bin/java",
+        "--show-module-resolution",
+        "-version"
+      ],
+      "exit_code": 0,
+      "id": "installed-confirmed-default-resolution",
+      "inputs": {
+        "installed_image_manifest": "8517fd13ce2de1fc6d48794e5c597882db30f58c1e1084b227bf7f3c2c1d108c",
+        "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc",
+        "original_classpath_witness": "6ffab6596d99cb3dc5672fbb8593841b7dd9008530ed76527265da4c9eb76ad2"
+      },
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/default-resolution-regression/confirmed-default-resolution.stdout",
+      "stdout_sha256": "2f91deebdf4731a2515262edd7d61578f9fa0c88a11ea9a0624fb5b46fd60c63"
+    },
+    {
+      "command": [
+        "/tmp/m3-packed-sdk-optin-20261029/sdk/image/bin/javap",
+        "-v",
+        "/tmp/m3-packed-sdk-optin-20261029/memory/installed-jmod/classes/module-info.class"
+      ],
+      "exit_code": 0,
+      "id": "installed-installed-module-resolution-attribute",
+      "inputs": {
+        "installed_image_manifest": "8517fd13ce2de1fc6d48794e5c597882db30f58c1e1084b227bf7f3c2c1d108c",
+        "installed_product_jmod": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc",
+        "original_classpath_witness": "6ffab6596d99cb3dc5672fbb8593841b7dd9008530ed76527265da4c9eb76ad2"
+      },
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/installed-sdk-optin/default-resolution-regression/installed-module-resolution-attribute.stdout",
+      "stdout_sha256": "a6e52637a4c1c4a3f8cd476f50d80ead18612a6aff2c58ffa0f8e77f12f95ffe"
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "m3/tooling/jmod-recipes/tools",
+        "-p",
+        "test_jmod_resolution.py",
+        "-v"
+      ],
+      "environment": {
+        "JAVA_HOME21": "/tmp/m3jdk21-native-packaging-1d203c91-20261029/images/jdk",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "exit_code": 0,
+      "id": "jmod-default-resolution-contract",
+      "inputs": {
+        "/tmp/m3jdk-packed-final-20261029/m3/tooling/jmod-recipes/tools/jmod_image.py": "407622e9a4db86f1b9abae2e451638713b151f14256190c0e28fe7d0739eb7cf",
+        "/tmp/m3jdk-packed-final-20261029/m3/tooling/jmod-recipes/tools/jmod_pack.py": "9ebc4a17e46fa0c3d6d995bf1a22e72b722d17efb1d87889ac8a7a47f89d2bd0",
+        "/tmp/m3jdk-packed-final-20261029/m3/tooling/jmod-recipes/tools/test_jmod_resolution.py": "cde8b6560b784f967a713f5a35cbe33a9c8d4fc29532c7a5d22ab3cdabb05d97",
+        "/tmp/m3jdk21-native-packaging-1d203c91-20261029/images/jdk/bin/jar": "90b7dbc74866c8b1b067b0baf74073d283c4fc650f2052d111a8aa1f98b27a1a",
+        "/tmp/m3jdk21-native-packaging-1d203c91-20261029/images/jdk/bin/java": "4e702abe9ccb5ec1cdcd36b1310b59f945e813782db7c86d0188aecf27b367a3",
+        "/tmp/m3jdk21-native-packaging-1d203c91-20261029/images/jdk/bin/javac": "ea5549d55babfd67e245120165eb5ebb8ac1661703edd56af417bc771399881a",
+        "/tmp/m3jdk21-native-packaging-1d203c91-20261029/images/jdk/bin/jlink": "2803585a50df23d0fd44bbbbae5ec9320769f88bfc38b8d1dd9f407ca350c2f1",
+        "/tmp/m3jdk21-native-packaging-1d203c91-20261029/images/jdk/bin/jmod": "5a69345997e3e470fece132785e157b6b7e29312079ad94d8f12cf110041b046",
+        "/tmp/m3jdk21-native-packaging-1d203c91-20261029/images/jdk/jmods/java.base.jmod": "d06df5e1553968222f67579cd1993890d6b25d2220b76caa132d9bf41dc254db",
+        "/tmp/m3jdk21-native-packaging-1d203c91-20261029/images/jdk/release": "8c3003c4fe0b77486ceaf785c0160fd5755db18ad198d5a636e3cb82f85a2631"
+      },
+      "status": "PASS",
+      "stdout_path": "synexia-openrewrite-recipes/verification/m3jdk-packed-integers-20261029/evidence/c05-jmod-resolution/real-jdk-regression.log",
+      "stdout_sha256": "6a4204ec7ecd8f20b23bcaac0a5e03c9ae3e8642f63f87fb0eeb5cd9657d3c96",
+      "working_directory": "/tmp/m3jdk-packed-final-20261029"
+    }
+  ],
+  "schema": "M3_PACKED_ACCEPTANCE_V1",
+  "sdk": {
+    "all_source_assets_accounted": true,
+    "builder_receipt_sha256": "0bfe0685bb2d65a90629bcea7ba47d7dc63d4345dfea919afd82f3ef5aa8642c",
+    "cds_archives_regenerated_and_verified": 2,
+    "composed_image_manifest_sha256": "8517fd13ce2de1fc6d48794e5c597882db30f58c1e1084b227bf7f3c2c1d108c",
+    "debug_symbols_source_zip_headers_manpages_retained": true,
+    "developer_tool_and_native_app_image_proof": "PASS",
+    "explicit_activation": [
+      "--add-modules com.m3.arrays",
+      "requires com.m3.arrays;"
+    ],
+    "image_file_content_entries_including_internal_symlink_targets": 603,
+    "installed_modules": 70,
+    "module_resolution": "DO_NOT_RESOLVE_BY_DEFAULT",
+    "native_library_sha256": "cd9d709c07ddf083fc55ce2d07637da2d26de7e1c3137c4ef58b370fed7e1170",
+    "original_jmods_preserved": 69,
+    "product_jmod_sha256": "4144428e7b9b2224d67542ead1073325ac4a94757fa9c3dc8f70d20f7535a5dc",
+    "release_change": "MODULES_VALUE_ONLY",
+    "source_image_manifest_sha256": "efcc9c2cc2b7036fb30579fcdd77adbf28167f483a7e4f96dbd3cfda32475415",
+    "source_modules": 69,
+    "typed_image_assets": 721
+  },
+  "status": "BOUNDED_COMPONENT_PASS_WITH_PREEXISTING_JDK_FAILURE",
+  "target_repository": "hsoliwal/M3jdk21"
+}

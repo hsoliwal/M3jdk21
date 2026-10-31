@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Jdk21IntegratedUtilities20261018
+displayName: Receive integrated M3JDK21 utilities and collection views
+description: Receive exact source-sealed target postimages while preserving existing JDK owners and contracts.
+recipeList:
+  - com.synexia.rewrite.M3IntegratedUtilitiesRecipe

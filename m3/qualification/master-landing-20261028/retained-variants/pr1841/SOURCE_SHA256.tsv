@@ -1,0 +1,9 @@
+path	sha256	git_blob	mode	pr	note
+m3/fs/qualification/manager-bulk-20261021/DONORS.tsv	65e3580912613b695d7050cfd81b1bdae96d3d3601ab91deddde3ab8f1a23328	ef34379c8951c5c57b25c02ee0864a8c84ac076c	100644	1841	PR version, not live
+m3/fs/qualification/manager-bulk-20261021/RECEIPT.md	2efeaa2ae2065d98d321b7aea6044f8364d213bd3ea2c5dc5991ad8f2c892140	6969d77bec3c37084679fc9b4d492afc50636be4	100644	1841	PR version, not live
+m3/fs/src/main/java/com/m3/fs/M3FsManagerBulk.java	46ab530ca32c9ee97c3b5d83e04cb58e8e26fc321f78cad5d417dc45208b42b7	84614eaee227c3e8436e7dd21855c0512a2906f5	100644	1841	PR version, not live
+m3/fs/src/main/java/com/m3/fs/vfs/FileSystemManager.java	58f117166de0933b0172796f6afb447527bfc918a8fe1ddab2a7efa059724ff2	166604c4f3dca6695b0fb7efc0b6f3b1f58033b8	100644	1841	PR version, not live
+m3/fs/src/test/java/com/m3/fs/M3FsManagerBulkTest.java	a3ec4ed73f40b21dde25c4871bc81af08d94144fcf461ec170431c1f2ba9927a	c91e7de32023f729d26cc256edccf73075ebf681	100644	1841	PR version, not live
+m3/qualification/m3fs-manager-bulk-20261022/GATES.tsv	ff0a625bb594b7b514f6bd09901f8a8ec5815c31b987f401f94cceb1ed8fa193	ba5b2e69b4ebb00956623be0bd6412cc19913a99	100644	1841	PR version, not live
+m3/qualification/m3fs-manager-bulk-20261022/README.md	2add9c82de42601ae8b3624ef709a3c1beef7a7dce7157c575f961c23283762f	d7ab1e2bff95994997d8b589bbd283cf4f5f71e5	100644	1841	PR version, not live
+m3/qualification/m3fs-manager-bulk-20261022/RECEIVED_DONORS.tsv	9fa699419675dd57539218574af0ef41e5b979c4f3be0bb29583c3b0c73c181a	c57ec77c28cf7e8d03ad21b87f4ffd1196669045	100644	1841	PR version, not live

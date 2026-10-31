@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.FiveProviderCountRecovery20261018
+displayName: Restore five-provider indexed count/flag compatibility with original M3 owners
+description: Source-hash-pinned seven-file M3 collections recipe; existing Maven OpenRewrite ScanningRecipe.
+recipeList:
+  - com.synexia.rewrite.M3FiveProviderCountsRecipe

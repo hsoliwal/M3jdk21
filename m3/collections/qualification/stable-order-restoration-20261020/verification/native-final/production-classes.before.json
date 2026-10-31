@@ -1,0 +1,13 @@
+{
+  "com/m3/collections/M3IndexMaskCompactor$Backend.class": "ba88b56db816f917e5d868c8b609c99726013335832bfd513f36e196f689c3e2",
+  "com/m3/collections/M3IndexMaskCompactor$NativeLibrary.class": "74cdffe45a9e312bbad6508070a0e190dc0a861b39986cede40119b440736691",
+  "com/m3/collections/M3IndexMaskCompactor$NativePositionMasks.class": "45af34df0ff8a4630912c44d9a2d44e9132fcd26a341c444f0bab38526df68d1",
+  "com/m3/collections/M3IndexMaskCompactor$NativePositions.class": "caff4e3777b9f13e904484e13621a72e825b674bcb63693816fe33f24d6db952",
+  "com/m3/collections/M3IndexMaskCompactor$NativeRange.class": "8b852aec3c752f52fae573e5811700d2b477c531f746ec0acaaa23330003cef0",
+  "com/m3/collections/M3IndexMaskCompactor.class": "b575827c4a385f992bc245f553ef44d307f564b8b04f0922ba94d833bb97ce9f",
+  "com/m3/collections/M3IndexMaskWindow.class": "ceb8f12005ad76b3fb62ddf78201c9753200d2b5028716d81b179a26da1de3a1",
+  "com/m3/collections/M3LongAddressKernel$NativeLibrary.class": "8dc0c05604e4dda2618c052bc1eab6e9119d41031211f53434dd3eb71436bda0",
+  "com/m3/collections/M3LongAddressKernel.class": "0b85f982c282841386254065acea5144b2360957bc56410c24f4c9f8af49b4d4",
+  "com/m3/collections/M3LongIndexProjection$Order.class": "f8f3b34203b2564928f67d41490c7c73c5c90f371bc0d58bf615efbff5fc1ce6",
+  "com/m3/collections/M3LongIndexProjection.class": "56fd3d4144807231c5d351478cc4d09b0e96cfbcf5fb9e27bee3af72bbfa10af"
+}

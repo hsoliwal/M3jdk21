@@ -145,13 +145,70 @@ public class OopUtilities {
 
   public static String stringOopToString(Oop stringOop) {
     InstanceKlass k = (InstanceKlass) stringOop.getKlass();
+    OopField m3Field = (OopField) k.findField("m3", "Ljava/lang/M3String;");
+    if (m3Field != null) {
+      Oop storage = m3Field.getValue(stringOop);
+      if (storage != null) {
+        return m3StringToString(storage);
+      }
+    }
     coderField  = (ByteField) k.findField("coder", "B");
     valueField  = (OopField) k.findField("value",  "[B");
     if (Assert.ASSERTS_ENABLED) {
-       Assert.that(coderField != null, "Field \'coder\' of java.lang.String not found");
-       Assert.that(valueField != null, "Field \'value\' of java.lang.String not found");
+       Assert.that(coderField != null, "Field 'coder' of java.lang.String not found");
+       Assert.that(valueField != null, "Field 'value' of java.lang.String not found");
     }
     return byteArrayToString((TypeArray) valueField.getValue(stringOop), coderField.getValue(stringOop));
+  }
+
+  /**
+   * Decodes a java.lang.M3String value: an owner node plus a packed coordinate whose high 32 bits
+   * are the start offset and whose low 32 bits are the UTF-16 length. Text is read from the owner
+   * exactly as java.lang.M3StringOwner.charAt does; no Java code is executed in the target VM.
+   */
+  private static String m3StringToString(Oop m3String) {
+    InstanceKlass k = (InstanceKlass) m3String.getKlass();
+    Oop owner = ((OopField) k.findField("owner", "Ljava/lang/M3StringOwner;")).getValue(m3String);
+    long coordinate = ((LongField) k.findField("value", "J")).getValue(m3String);
+    int start = (int) (coordinate >>> 32);
+    int length = (int) (coordinate & 0xffffffffL);
+    StringBuilder result = new StringBuilder(length);
+    for (int i = 0; i < length; i++) result.append(m3OwnerCharAt(owner, start + i));
+    return result.toString();
+  }
+
+  private static char m3StringCharAt(Oop m3String, int index) {
+    InstanceKlass k = (InstanceKlass) m3String.getKlass();
+    Oop owner = ((OopField) k.findField("owner", "Ljava/lang/M3StringOwner;")).getValue(m3String);
+    long coordinate = ((LongField) k.findField("value", "J")).getValue(m3String);
+    return m3OwnerCharAt(owner, (int) (coordinate >>> 32) + index);
+  }
+
+  private static char m3OwnerCharAt(Oop owner, int index) {
+    InstanceKlass k = (InstanceKlass) owner.getKlass();
+    byte kind = ((ByteField) k.findField("kind", "B")).getValue(owner);
+    if (kind == 1) {
+      // java.lang.M3StringAtom: canonical native/mapped payload addressed by 'address'.
+      long raw = ((LongField) k.findField("address", "J")).getValue(owner);
+      byte width = ((ByteField) k.findField("storageWidth", "B")).getValue(owner);
+      boolean bigEndian = ((BooleanField) k.findField("bigEndian", "Z")).getValue(owner);
+      Address address = VM.getVM().getDebugger().newAddress(raw);
+      if (width == 1) return (char)(address.getJByteAt(index) & 255);
+      int first = address.getJByteAt((long)index * 2) & 255;
+      int second = address.getJByteAt((long)index * 2 + 1) & 255;
+      return bigEndian ? (char)((first << 8) | second) : (char)(first | (second << 8));
+    }
+    if (kind == 2) {
+      // java.lang.M3StringTuple: persistent composition of two M3String children.
+      Oop left = ((OopField) k.findField("left", "Ljava/lang/M3String;")).getValue(owner);
+      InstanceKlass leftKlass = (InstanceKlass) left.getKlass();
+      long leftCoordinate = ((LongField) leftKlass.findField("value", "J")).getValue(left);
+      int leftLength = (int) (leftCoordinate & 0xffffffffL);
+      if (index < leftLength) return m3StringCharAt(left, index);
+      Oop right = ((OopField) k.findField("right", "Ljava/lang/M3String;")).getValue(owner);
+      return m3StringCharAt(right, index - leftLength);
+    }
+    throw new IllegalStateException("invalid M3String owner kind " + kind);
   }
 
   public static String stringOopToEscapedString(Oop stringOop) {

@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.jdk21.ReleaseJepAuthorityRepair
+displayName: Repair released JEP catalogue on current M3JDK21
+description: >-
+  Replays the exact hash-pinned current-master released-JEP catalogue and status repair.
+recipeList:
+  - com.m3.rewrite.backport.M3ReleaseJepAuthorityRepairRecipe

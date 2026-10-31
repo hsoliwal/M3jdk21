@@ -1,0 +1,140 @@
+{
+  "wrapper_api": {
+    "original_receipt_sha256": "a44c81d3710b859bcf5ff88f8a2e73d303840adcd9d56f36c60b9949b8820146",
+    "evidence": {
+      "reference": "current source with four duplicate declarations removed; ReadOnlySortedSet source.spliterator retained",
+      "comparison": "all declared fields and public/protected/private method descriptors, javap -p -s -constants",
+      "types": [
+        {
+          "type": "M3FilteredViews",
+          "equal": true
+        },
+        {
+          "type": "M3FilteredViews$1",
+          "equal": true
+        },
+        {
+          "type": "M3FilteredViews$CollectionView",
+          "equal": true
+        },
+        {
+          "type": "M3FilteredViews$NavigableMapView",
+          "equal": true
+        },
+        {
+          "type": "M3FilteredViews$NavigableSetView",
+          "equal": true
+        },
+        {
+          "type": "M3FilteredViews$ReadOnlySortedSet",
+          "equal": true
+        },
+        {
+          "type": "M3FilteredViews$SetView",
+          "equal": true
+        },
+        {
+          "type": "M3FilteredViews$SortedMapView",
+          "equal": true
+        },
+        {
+          "type": "M3FilteredViews$SortedMapView$1",
+          "equal": true
+        },
+        {
+          "type": "M3FilteredViews$SortedMapView$1$1",
+          "equal": true
+        },
+        {
+          "type": "M3FilteredViews$SortedSetView",
+          "equal": true
+        }
+      ],
+      "equal": true
+    }
+  },
+  "entry_api": {
+    "original_receipt_sha256": "b1a658ddc685334ab8e320fde80d5bb1eb918fc699d8a0097a204705b8743c5f",
+    "evidence": {
+      "comparison": "All compiled owning-module public/protected type, field, and method descriptors; javap -protected -s -constants",
+      "compile_exit_code": 0,
+      "type_count": 505,
+      "signature_sha256": [
+        "fe05ffa6026142dd2bf9973f402df0d04a7375b00c7b6de774fcda6ca46554c2",
+        "fe05ffa6026142dd2bf9973f402df0d04a7375b00c7b6de774fcda6ca46554c2"
+      ],
+      "equal": true,
+      "elapsed_seconds": 3.562,
+      "intentional_private_storage_removal": [
+        "M3SlotMap.ENTRY_FACADE_CACHE_CAPACITY",
+        "M3SlotMap.entryFacades"
+      ],
+      "generic_lfu_owner_unchanged_sha256": "afd60b853a623137245ae7ef4e4c56170c6de94d1edc58ef62a5b9ca3f174166",
+      "public_behavior_repair": "Fresh caller-owned Entry identity restored; contradictory cache reuse is refused by the canonical invariant.",
+      "performance_tradeoff": "Each explicit live Entry API projection allocates one caller-owned LiveEntry as required by the existing identity contract; no owner-held Entry cache remains. No throughput improvement is claimed."
+    }
+  },
+  "jni_headers": {
+    "original_receipt_sha256": "864b82ece29e59c4d6e5634b6a92fa9163b2d53a831ae4a5363da69e7b4513b9",
+    "evidence": {
+      "reference_compile_exit": 0,
+      "reference_header_sha256": {
+        "com_m3_collections_M3LongIndexPathMasksJNI.h": "68dd32b3203baa60ac10eed61030f7c770664eec42ac3689666b042c11f48758",
+        "com_m3_collections_M3LongRankBatchNative.h": "d1b1b66ab80343d0ac9674334c2facf4c6e371200f463db2100ae6b73c7bc641",
+        "com_m3_collections_M3IndexMaskCompactor.h": "2c9ee704fe1128ca05a7ff38b6844ad178fd79c03fef0aa24fe9605778f46c81",
+        "com_m3_collections_M3IndexMaskWindow.h": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
+        "com_m3_collections_M3IndexPathMasks.h": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50",
+        "com_m3_collections_M3SignalOrderNative.h": "9aa514761c1a67d298c0cf463db64cbfde1f380951eadf30c8d664b3a1a15c96",
+        "com_m3_collections_M3SpanIndex.h": "97f7008debc3cb89057b4ca7be9f4fcbc9af8a5e823bc97e2c008cb243ad73cf",
+        "com_m3_collections_M3ResidencyStateMaskIndex.h": "f29cf38398b9d0972f57cea34d8fc7ecce822c484e8c02e8175c11dfe684e0ff",
+        "com_m3_collections_M3StateMaskHistogram.h": "7a7d83d5f7cebfb88857a2bc331570b4902ed71acb994f978eb05c3a8f5a51f4",
+        "com_m3_collections_M3MaskViewportNative.h": "790520041126b8e8ecd678c6dbb5fe6ca1c389cf7e0b89480b375402d25ce91e",
+        "com_m3_collections_M3BitLane28.h": "9100fb4d366f16641b244df49c3f284c72f618a8a0b925f6038a87c089d903e1",
+        "com_m3_collections_M3LongAddressKernel.h": "dffaa88fa278c69424c6879ddbe2b6d741e37dd48e123e97ebb86043b6b59df7"
+      },
+      "candidate_header_sha256": {
+        "com_m3_collections_M3LongIndexPathMasksJNI.h": "68dd32b3203baa60ac10eed61030f7c770664eec42ac3689666b042c11f48758",
+        "com_m3_collections_M3LongRankBatchNative.h": "d1b1b66ab80343d0ac9674334c2facf4c6e371200f463db2100ae6b73c7bc641",
+        "com_m3_collections_M3IndexMaskCompactor.h": "2c9ee704fe1128ca05a7ff38b6844ad178fd79c03fef0aa24fe9605778f46c81",
+        "com_m3_collections_M3IndexMaskWindow.h": "26d6f1302b888bbebde68d4d911f7b74d91c1fe5f90871928af0220829dc9866",
+        "com_m3_collections_M3IndexPathMasks.h": "5781e35d4a9a16a037e1e80a8e45f7ee53283822691ed863a7476e5defa9fe50",
+        "com_m3_collections_M3SignalOrderNative.h": "9aa514761c1a67d298c0cf463db64cbfde1f380951eadf30c8d664b3a1a15c96",
+        "com_m3_collections_M3SpanIndex.h": "97f7008debc3cb89057b4ca7be9f4fcbc9af8a5e823bc97e2c008cb243ad73cf",
+        "com_m3_collections_M3ResidencyStateMaskIndex.h": "f29cf38398b9d0972f57cea34d8fc7ecce822c484e8c02e8175c11dfe684e0ff",
+        "com_m3_collections_M3StateMaskHistogram.h": "7a7d83d5f7cebfb88857a2bc331570b4902ed71acb994f978eb05c3a8f5a51f4",
+        "com_m3_collections_M3MaskViewportNative.h": "790520041126b8e8ecd678c6dbb5fe6ca1c389cf7e0b89480b375402d25ce91e",
+        "com_m3_collections_M3BitLane28.h": "9100fb4d366f16641b244df49c3f284c72f618a8a0b925f6038a87c089d903e1",
+        "com_m3_collections_M3LongAddressKernel.h": "dffaa88fa278c69424c6879ddbe2b6d741e37dd48e123e97ebb86043b6b59df7"
+      },
+      "equal": true
+    }
+  },
+  "baseline_failures": [
+    {
+      "gate": "javac268production",
+      "status": "FAIL",
+      "reason": "four duplicate methods in merged M3FilteredViews; exact compiler witness retained in canonical recipe"
+    },
+    {
+      "gate": "owning Maven testCompile",
+      "status": "FAIL",
+      "reason": "String key passed to Integer-key M3IndexedMultiValueMap reserved-LIVE test"
+    },
+    {
+      "gate": "owning Maven first executable suite",
+      "tests": 448,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 2,
+      "reason": "two retained-entry identity conflicts and unsigned mask expected-row omission"
+    }
+  ],
+  "wrapper_contracts": {
+    "merged_regression_checks": 2517,
+    "strict_sequenced_checks": 126,
+    "prior_split_checks": 6324,
+    "navigation_reconciliation_checks": 154239,
+    "callback_tape_sha256": "0a279ab0c033308d4ec3777b2d1328f4ff9dd4909e6a79e447418ad800f283ac",
+    "source_comparison": "compilable predecessor choices and duplicate-only reference; broken merged preimage is not represented as a behavioral baseline"
+  }
+}

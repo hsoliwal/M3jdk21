@@ -1,0 +1,159 @@
+{
+  "schema": "M3_JAVA_UTIL_SORTS_RECIPE_QUALIFICATION_V1",
+  "license": "Apache-2.0",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "recorded_utc": "2026-10-18T11:20:59.619568+00:00",
+  "scope": "SOURCE_APPLICATION_AND_RECIPE_MACHINERY_ONLY",
+  "status": "PASS",
+  "java_runtime": "21.0.12.1+1-LTS",
+  "java_vendor": "Eclipse Adoptium",
+  "maven_version": "3.9.11",
+  "openrewrite_version": "8.90.4",
+  "java_compile_flags": [
+    "--release",
+    "21",
+    "-proc:none",
+    "-Xlint:all",
+    "-Werror"
+  ],
+  "maven_command": "mvn -B -ntp -o -Dmaven.repo.local=<cached-repository> -f <crate>/pom.xml verify",
+  "maven_exit_code": 0,
+  "test_count": 20,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "class": "com.synexia.rewrite.sorts.M3JavaUtilSortsPacketTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 105.468,
+      "surefire_xml_sha256": "fdb5bddae7ff0226b540e41fd44582d70b14e88f25c60a2d9414a203c3eb69f3",
+      "cases": [
+        {
+          "name": "aPartialExactReceiverCompletesTheSameSealedTree",
+          "seconds": 20.606
+        },
+        {
+          "name": "realNamedRecipeCreatesExactPacketAndReplaysToZeroChanges",
+          "seconds": 7.39
+        },
+        {
+          "name": "reusedCanonicalEnginesRemainExactPinnedSourceCopies",
+          "seconds": 0.013
+        },
+        {
+          "name": "targetSymlinkParentsRefuseBeforeAnyFilesystemMutation",
+          "seconds": 0.011
+        },
+        {
+          "name": "aForeignOccupantRefusesBeforeAnyProductFileIsWritten",
+          "seconds": 0.017
+        },
+        {
+          "name": "dryRunDoesNotCreateAnyTargetAndApplyReadbackIsAnExactFixedPoint",
+          "seconds": 45.667
+        },
+        {
+          "name": "checkModeAcceptsPublishedHeadAndRecordsItWhileApplyKeepsTheOriginalBase",
+          "seconds": 31.749
+        }
+      ]
+    },
+    {
+      "class": "com.synexia.rewrite.sorts.M3RecipeReplayTest",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 70.967,
+      "surefire_xml_sha256": "5f2c4a287a8d68e0c36013b5310ceb013de2ca2b4fac93fd560549b73448cb39",
+      "cases": [
+        {
+          "name": "commentsStringsRegexesAndTextBlocksRemainByteExactAndCompile",
+          "seconds": 5.055
+        },
+        {
+          "name": "sealedTemplateHashMalformedJavaAndNonCanonicalOrderAllRefuse",
+          "seconds": 0.621
+        },
+        {
+          "name": "missingRequiredPreimageIsNotMistakenForAbsentAdmission",
+          "seconds": 0.006
+        },
+        {
+          "name": "everyPartialPostimageSubsetAndInputOrderConvergesExactly",
+          "seconds": 40.636
+        },
+        {
+          "name": "textLaneKeepsCodeLookingDataOpaqueAndHasItsOwnFixedPointAndRefusal",
+          "seconds": 0.036
+        },
+        {
+          "name": "anExpectedByteSequenceInPlainTextIsNotJavaParserAdmission",
+          "seconds": 0.002
+        },
+        {
+          "name": "disjointJavaAndTextRecipeOrdersPreserveTheSameExactOutput",
+          "seconds": 3.657
+        },
+        {
+          "name": "frozenBehaviorAndPublicContractSurviveEachAdmittedReplacementPass",
+          "seconds": 2.441
+        },
+        {
+          "name": "absentOnlyRunCreatesEveryFileAndSecondRunHasNoChanges",
+          "seconds": 1.932
+        },
+        {
+          "name": "interleavedEditAfterScanStillRefusesInsteadOfOverwritingTheNewOwner",
+          "seconds": 1.033
+        },
+        {
+          "name": "foreignJavaOccupantRefusesBeforeAnyAbsentFileIsCreated",
+          "seconds": 0.152
+        },
+        {
+          "name": "oneAndTwoWorkerPermutationsHaveTheSameSerialReplayRoot",
+          "seconds": 15.222
+        },
+        {
+          "name": "duplicatePhysicalJavaTargetsRefuseInActualRun",
+          "seconds": 0.12
+        }
+      ]
+    }
+  ],
+  "recipe_input_count": 51,
+  "recipe_inputs_sha256": "a2ea44634f61b748d5d4d4e8b2bbb2f5956bc9752ff8ff444d2b8e7d0ecc239c",
+  "target_base": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "checked_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "engine_base": "140c263a90f9803b9c46103c63355a286e0515f0",
+  "java_manifest_sha256": "d8ebd90bce3c617b9598670f34b76ccda1a1fb4dba85075492ad0bc239ae2c8d",
+  "text_manifest_sha256": "f68d13347b8b2e0298e33109200e35d685659883c3313922c7743e933caad69f",
+  "target_tree_sha256": "2558322dea284d16fedfe332450c1d7d32abfac3a843b153495bce6d61d69c23",
+  "application": {
+    "status": "PASS",
+    "targets": 14,
+    "new_files": 14,
+    "fixed_point_changes": 0,
+    "receipt": "verification/source-application.tsv",
+    "receipt_sha256": "ebc75466123cba23016e09b9d3ddf7878fbfd0b6494c9b335097c2663980c1ee"
+  },
+  "independent_check": {
+    "status": "PASS",
+    "targets": 14,
+    "changes": 0,
+    "receipt": "verification/source-check.tsv",
+    "receipt_sha256": "513976db6c136ed598870110a22f26c3995a141f9c6da9529ade9eb4f2979278"
+  },
+  "prior_counterexample": "verification/recipe-failures/symlink-refusal-classification.json",
+  "separate_gates": [
+    "Actual receiving JDK compile and contract execution are recorded by the target verifier in separate receiver-qualification evidence.",
+    "Independent comparison-kernel fixtures are recorded in comparison-kernel-audit and do not prove the production API.",
+    "A rebuilt whole JDK image, the full platform jtreg suite, hosted CI, other operating systems and performance admission are not established by this recipe receipt."
+  ],
+  "promotion": "CANDIDATE_SOURCE_ONLY; existing ordered runtime stage unchanged"
+}

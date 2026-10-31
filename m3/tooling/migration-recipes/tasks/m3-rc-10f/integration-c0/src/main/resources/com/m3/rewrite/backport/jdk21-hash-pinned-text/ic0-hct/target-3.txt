@@ -1,0 +1,75 @@
+{
+  "guards": [
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"
+    },
+    {
+      "path": "m3/migration/migration.py",
+      "sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "sha256": "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1"
+    }
+  ],
+  "outputs": [
+    {
+      "after": {
+        "resource": "01-jcc-source-handoff.md.txt",
+        "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337"
+      },
+      "before": null,
+      "path": "m3/docs/jcc-source-handoff.md"
+    },
+    {
+      "after": {
+        "resource": "after00-name-mapping.json.txt",
+        "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace"
+      },
+      "before": {
+        "resource": "before00-name-mapping.json.txt",
+        "sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb"
+      },
+      "path": "m3/docs/name-mapping.json"
+    },
+    {
+      "after": {
+        "resource": "03-root-coverage-obligations.tsv.txt",
+        "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b"
+      },
+      "before": null,
+      "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv"
+    },
+    {
+      "after": {
+        "resource": "02-source-destination-bindings.json.txt",
+        "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126"
+      },
+      "before": null,
+      "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json"
+    }
+  ],
+  "plan_sha256": "6e8d48067e814566e0c63db14db405c360c8ff3ab4948d352170b6ca20293594",
+  "recipe_id": "jcc-handoff-20261005/2-intake-752-ci",
+  "schema": "m3.sealed-install/1",
+  "scope": "Reviewed tool-plane ledger/documentation outputs only; no product or JCC export admission.",
+  "source_commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+  "target_commit": "da958d00d24154c0db87beca0ec80a7df2b43b73"
+}

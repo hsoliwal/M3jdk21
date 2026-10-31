@@ -1,0 +1,103 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 masked physical gather Java21 JNI
+
+on:
+  pull_request:
+    paths:
+      - 'm3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java'
+      - 'm3/collections/src/main/native/collections/m3_long_address_kernel.c'
+      - 'm3/collections/src/test/java/com/m3/collections/M3MaskedGatherContract.java'
+      - 'm3/collections/src/test/java/com/m3/collections/M3MaskedGatherTest.java'
+      - '.github/workflows/m3-masked-gather-java21-jni.yml'
+      - 'm3/collections/qualification/masked-gather-20261026/**'
+
+permissions:
+  contents: read
+
+jobs:
+  original-source-jni-parity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify exact original source and PR head
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongAddressKernel.java)" = 'a106baf182c47088dfb6dbfc6c249592f2a0c71b'
+          test "$(git hash-object m3/collections/src/main/native/collections/m3_long_address_kernel.c)" = '123e40c56995574979e999e6233a218b3dc2e4cb'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3MaskedGatherContract.java)" = 'd4271622eabfab82f7329d8817b0b35d0307391f'
+          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3MaskedGatherTest.java)" = '88ce86d76bfd740dfdab47761e9f38e9d0af1e5e'
+      - name: Build original Java named modules and generated JNI headers
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3masked"
+          mkdir -p "$out/arrays" "$out/collections" "$out/tests" "$out/headers" "$out/native" "$out/missing"
+          find m3/arrays/src/main/java -type f -name '*.java' | LC_ALL=C sort > "$out/arrays.args"
+          find m3/collections/src/main/java -type f -name '*.java' | LC_ALL=C sort > "$out/collections.args"
+          test -s "$out/arrays.args"
+          test -s "$out/collections.args"
+          javac --release 21 -Xlint:all,-module -Werror -d "$out/arrays" @"$out/arrays.args"
+          javac --release 21 -Xlint:all,-module -Werror --module-path "$out/arrays" \
+            -h "$out/headers" -d "$out/collections" @"$out/collections.args"
+          javac --release 21 -Xlint:all,-module -Werror \
+            --module-path "$out/arrays:$out/collections" \
+            --patch-module com.m3.collections=m3/collections/src/test/java \
+            -d "$out/tests" m3/collections/src/test/java/com/m3/collections/M3MaskedGatherContract.java
+          test -f "$out/headers/com_m3_collections_M3LongAddressKernel.h"
+      - name: Compile checked original C17 JNI owner and preserve existing exports
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3masked"
+          gcc -std=c17 -Wall -Wextra -Werror -O2 -shared -fPIC \
+            -fsanitize=undefined -fno-sanitize-recover=undefined \
+            -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
+            -include "$out/headers/com_m3_collections_M3LongAddressKernel.h" \
+            m3/collections/src/main/native/collections/m3_long_address_kernel.c \
+            -o "$out/native/libm3_collections_address.so"
+          nm -D "$out/native/libm3_collections_address.so" | grep -Fq Java_com_m3_collections_M3LongAddressKernel_gatherNative
+          nm -D "$out/native/libm3_collections_address.so" | grep -Fq Java_com_m3_collections_M3LongAddressKernel_gatherSelectedNative
+      - name: Prove original JVM and native bitmask gather parity, including -Xint
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/m3masked"
+          for mode in normal interpreter; do
+            flags=()
+            if [ "$mode" = interpreter ]; then flags=(-Xint); fi
+            java ${flags[@]} -Xmx512m -Djava.library.path="$out/missing" \
+              --module-path "$out/arrays:$out/collections" \
+              --patch-module "com.m3.collections=$out/tests" \
+              -m com.m3.collections/com.m3.collections.M3MaskedGatherContract \
+              | tee "$out/java-$mode.txt"
+            java ${flags[@]} -Xmx512m -Xcheck:jni -Dm3.test.native.required=true \
+              -Djava.library.path="$out/native" \
+              --module-path "$out/arrays:$out/collections" \
+              --patch-module "com.m3.collections=$out/tests" \
+              -m com.m3.collections/com.m3.collections.M3MaskedGatherContract \
+              | tee "$out/native-$mode.txt"
+          done
+          grep -Fxq 'PASS M3_MASKED_GATHER checks=976328 native=false' "$out/java-normal.txt"
+          grep -Fxq 'PASS M3_MASKED_GATHER checks=1950158 native=true' "$out/native-normal.txt"
+          cmp "$out/java-normal.txt" "$out/java-interpreter.txt"
+          cmp "$out/native-normal.txt" "$out/native-interpreter.txt"
+      - name: Retain actual native and Java receipts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3masked-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/m3masked/*.txt
+          if-no-files-found: warn
+          retention-days: 14

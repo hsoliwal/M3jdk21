@@ -1,0 +1,3 @@
+$ /workspace/scratch/6a76dfb8b5f4/toolchains/jdk21/bin/javac --release 21 -Xlint:all -Werror -d /workspace/scratch/6a76dfb8b5f4/candidates/collections/evidence/wrapper-boundary-classes /workspace/scratch/6a76dfb8b5f4/M3jdk21/m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java /workspace/scratch/6a76dfb8b5f4/M3jdk21/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java /workspace/scratch/6a76dfb8b5f4/M3jdk21/m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java /workspace/scratch/6a76dfb8b5f4/candidates/collections/m3/collections/algorithm-catalog/string-collection-consumers-20261021/diagnostics/M3WrapperReadBoundaryProof.java
+
+EXIT=0

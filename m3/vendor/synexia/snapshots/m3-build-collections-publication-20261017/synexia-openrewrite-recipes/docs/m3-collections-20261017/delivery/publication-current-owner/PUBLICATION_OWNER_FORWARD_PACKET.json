@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "recipe": "com.synexia.m3.M3JdkCollectionPublicationOwners20261017",
+  "baseCommit": "b42ab7605b862a5157997f1787c5032db2831f46",
+  "candidate": "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/publication-forward-candidate",
+  "resources": "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/publication-forward-recipe-payload/synexia-openrewrite-recipes/src/main/resources",
+  "input": "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/publication-current-base/M3jdk21",
+  "beforeSha256": "fd880291f6119899e530e19b1dc622bb4f1ea51c6c136ab1c510d507c303c761",
+  "afterSha256": "2f8b58f63b16aa7751a331d24561caf550fd6977692fb0b8ac2c518a20a13a67",
+  "canonicalCurrentSourceSha256": "4cf5d18fc6076193ce85c16df4ad431a37939aec81bacc64d22af6a3ee4f145a",
+  "packageOnlyBytesExact": true,
+  "crates": [
+    {
+      "crate": "m3jdk-collection-publication-owner-java-20261017",
+      "kind": "java",
+      "target": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "manifestSha256": "8bfa4e4bcf5249687a75f0e0169858fddd963f321f695ce17c8339af7b28e7d4"
+    },
+    {
+      "crate": "m3jdk-collection-publication-assets-20261017",
+      "kind": "text",
+      "targets": 10,
+      "manifestSha256": "5e06d54decf304d4f0fdf4d559ab4406f881d25a29b4dbd1d20a93e76b6aa6bd"
+    }
+  ],
+  "unchangedJavaCrates": [
+    "m3jdk-collection-current-owners-java-01-20261017",
+    "m3jdk-collection-current-owners-java-02-20261017",
+    "m3jdk-collection-current-owners-java-03-20261017",
+    "m3jdk-collection-current-owners-java-04-20261017",
+    "m3jdk-collection-current-owners-java-05-20261017",
+    "m3jdk-collection-current-owners-java-06-20261017",
+    "m3jdk-collection-current-owners-java-07-20261017",
+    "m3jdk-collection-current-owners-java-08-20261017",
+    "m3jdk-collection-current-owners-java-09-20261017"
+  ],
+  "assets": [
+    {
+      "path": "m3/docs/name-mapping.d/m3-filtered-collection-pack-20261017.json",
+      "sha256": "6a575515c17f7861b8cb9d49815184bb06e909f79321a7076ad98d2e94fed85e",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "sha256": "cf24809fbb97547247613ed5264499468b7e8f791b428a2e545303c513249be7",
+      "before": "03434d125f8d758a5da24f55adfdc399f6cc828f8fa5b214f1cfe8777d635283"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/PROJECTION_SOURCE_IDENTITY.json",
+      "sha256": "f980e8f11d183a2f8a202deac9148d468f748862c7914a799df9845c268f917d",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/README.md",
+      "sha256": "b275c2f37284133ee12bdd99fc6e1b23f630a2f79a75027b575d75c1dc069290",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/build.py",
+      "sha256": "115bbc8d7bf48b25c81228797efb36ad0463fc535a8ff5be134c61ecb38c0934",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/legal/LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/legal/M3_COLLECTIONS_NOTICE.txt",
+      "sha256": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/legal/NOTICE.txt",
+      "sha256": "314d833a4fbf6a5f71b971f38e336faee520a6097cc7b251028a3e24470ad144",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/module-packs/collections/pom.xml",
+      "sha256": "4862d5fd5d3ac389c0dc7605d526876424e6a1b598a293738059b57d8d6f562d",
+      "before": "ABSENT"
+    },
+    {
+      "path": "m3/tooling/module-packs/pom.xml",
+      "sha256": "1d80848a982b48c4f257c82cf44f49c6226539ffd04e28a015998fec33bb41f6",
+      "before": "3f09ef2205f1d22b2fd82e84c21697a506813d379dfe61f393d7b1a3ee2989bb"
+    }
+  ],
+  "priorImageProofNotRelabeled": true,
+  "historicEngineMutation": false
+}

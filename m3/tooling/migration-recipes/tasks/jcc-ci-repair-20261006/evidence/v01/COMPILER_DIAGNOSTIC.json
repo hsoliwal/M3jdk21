@@ -1,0 +1,53 @@
+{
+  "schema": "m3-jcc-ci-compiler-diagnostic/1",
+  "argv": [
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/cache-v01",
+    "-f",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/compiler-diagnostic-workspace/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/verification/pom.xml",
+    "test-compile"
+  ],
+  "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/compiler-diagnostic-workspace",
+  "inputs": {
+    "frozen_files_unchanged": 33,
+    "prepared_copies_unchanged": 31,
+    "frozen_inputs": {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/FROZEN_INPUTS.json",
+      "bytes": 8695,
+      "sha256": "9f12ce757e6267edfc72a3b84c2c155ccc77c57dbd4ab11d9ca62797a61afec9",
+      "git_blob": "3014b8f15a75b5a01e40eec329d7096f6f3a2620"
+    },
+    "prepared_inputs": {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/02-maven-inputs.json",
+      "bytes": 12307,
+      "sha256": "d8f83a834d8af3695e65c63ad713e6adba67a887e918df8a11e28dce85f20f1a",
+      "git_blob": "44454ffbc890d5ed60e940fee414c5bf0d104597"
+    }
+  },
+  "cache_receipt_sha256": "65ed11f8a898b4f1bda7f7ac6e4b75309cba1a27a3f610b7a3930ef01df2edcb",
+  "start_utc": "2026-10-06T04:17:19.302093+00:00",
+  "scope": "Finite offline compiler diagnostic only; no JUnit execution, production materialization, broad admission or native source closure claim.",
+  "exit_code": 0,
+  "finish_utc": "2026-10-06T04:17:21.681073+00:00",
+  "log_sha256": "bd61aa17681895c210e7d54fab10bbf41f9ceb05aba58b4174e88366c6691fd4",
+  "frozen_inputs_after": {
+    "frozen_files_unchanged": 33,
+    "prepared_copies_unchanged": 31,
+    "frozen_inputs": {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/FROZEN_INPUTS.json",
+      "bytes": 8695,
+      "sha256": "9f12ce757e6267edfc72a3b84c2c155ccc77c57dbd4ab11d9ca62797a61afec9",
+      "git_blob": "3014b8f15a75b5a01e40eec329d7096f6f3a2620"
+    },
+    "prepared_inputs": {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/02-maven-inputs.json",
+      "bytes": 12307,
+      "sha256": "d8f83a834d8af3695e65c63ad713e6adba67a887e918df8a11e28dce85f20f1a",
+      "git_blob": "44454ffbc890d5ed60e940fee414c5bf0d104597"
+    }
+  },
+  "status": "TEST_COMPILE_PASS"
+}

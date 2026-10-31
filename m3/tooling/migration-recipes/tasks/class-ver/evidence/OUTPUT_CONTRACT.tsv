@@ -1,0 +1,9 @@
+artifact	purpose
+STATUS.tsv	Measured states and unexecuted gates
+FINAL_REPORT.md	Scope and execution limits
+RUN_CONTEXT.tsv	Pinned parent and runtime context
+PROVENANCE.tsv	Reused source and engine identities
+VERIFY_CONTRACT.tsv	Mandatory promotion order
+OUTPUT_CONTRACT.tsv	Artifact index
+ACTION_QUEUE.tsv	Remaining programme obligations
+RAW_RESULTS.log	Selected actual local outputs

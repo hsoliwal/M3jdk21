@@ -1,0 +1,12 @@
+{
+  "changes": [
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccMergeRecoveryTest.java",
+      "before_sha256": "932f6109b83803428adf30a400a6d96d608eddefd34a26c4eb4ecb983f39b764",
+      "after_sha256": "8e860233439dd985fbab3058ac7e80514b643319f13ff46db0586cbbe9ef7a39"
+    }
+  ],
+  "unchanged_tests": 6,
+  "production_and_resource_changes": 0,
+  "reason": "Rewrite scheduler provenance is additive and verified explicitly; refusal may throw during generation or arrive via context, with no partial results and unchanged caller inputs. Original failing v02 suite and harness preserved."
+}

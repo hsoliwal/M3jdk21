@@ -1,0 +1,20 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "parent_sha": "946fd922c1d878e3f32309c83d132057a7ef8451",
+    "tree_sha": "bf39341e1e2fe6f8c7c8b3908fcb37b89bb220da",
+    "message": "fix(m3): materialize verified Java 21 CI repair through pinned recipe\n\nSelect the already-pinned JDK for foundation Maven and repair the two exact A3 Java literals. Preserve eight-test OpenRewrite results, fixed-point and refusal checks, whole-class javac output, Python installer evidence and the initial failed metadata oracle. Retain the historical restoration and all unrelated entries. Native, full-module and rebuilt-JDK gates remain open."
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "sha": "293961a4cbf86c1f5afd5466e97ccb15a847186f"
+    },
+    "isError": false
+  }
+}

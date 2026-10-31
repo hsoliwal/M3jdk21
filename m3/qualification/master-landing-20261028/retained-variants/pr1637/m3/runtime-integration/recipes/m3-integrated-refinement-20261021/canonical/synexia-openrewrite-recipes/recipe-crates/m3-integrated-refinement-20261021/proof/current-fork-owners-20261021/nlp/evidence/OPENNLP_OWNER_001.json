@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "scope": "Exact current Java21 staged OpenNLP donor source and installed-image gate; combined M3 receiver remains separate",
+  "fork_commit": "8b647d1d389736952e43fb46865c874747f7acde",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp/dev/m3-jmod/build.py",
+    "--source-root",
+    "/workspace/scratch/206049dfb270/nlp-work/forks/opennlp",
+    "--jdk-home",
+    "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "--packager",
+    "/workspace/scratch/206049dfb270/nlp-work/receiver-source/m3/tooling/jmod-recipes/tools/jmod_pack.py",
+    "--dependency-dir",
+    "/workspace/scratch/206049dfb270/nlp-work/dependencies/opennlp",
+    "--out",
+    "/workspace/scratch/206049dfb270/nlp-work/opennlp-owner-001"
+  ],
+  "environment": {
+    "JAVA_HOME": "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "JAVA_TOOL_OPTIONS": "-Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData"
+  },
+  "exit_code": 0,
+  "seconds": 31.711,
+  "source_and_dependencies_unchanged": true,
+  "fork_tracked_clean": true,
+  "inputs_sha256": "13fcac60acbf95b6f43ac40f2b602524ad2d6aa359437d1a5cce72b89c380378",
+  "readback_sha256": "13fcac60acbf95b6f43ac40f2b602524ad2d6aa359437d1a5cce72b89c380378",
+  "log_sha256": "ddfea326285a6d879cf4397681946dbae46a6fa3687f415b268b066d3b2ff15b",
+  "external_dependencies": "14 separately SHA-locked artifacts; not claimed source-built",
+  "runtime_dependency_resolution": "--dependency-dir selects existing locked archives; source gate invokes no Maven/download step",
+  "combined_receiver": "REFUSED existing source lock drift; see CURRENT_RECEIVER_001.json",
+  "limits": [
+    "Not the original Maven full reactor suite",
+    "No original Java25 Lucene lane",
+    "No complete M3JDK or String/HotSpot phase promotion",
+    "DL/GPU and optional external models remain separate"
+  ],
+  "build_receipt_sha256": "e8b0b44892254fa9fdd5051a9de63dd7020684dccb1809460f4d643faa13b642",
+  "core_sources": 923,
+  "built_sources": 1000,
+  "named_modules": 17
+}

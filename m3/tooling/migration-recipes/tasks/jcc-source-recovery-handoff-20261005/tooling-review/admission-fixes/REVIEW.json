@@ -1,0 +1,25 @@
+{
+  "schema": "jcc-e04-derivation-static-review/2",
+  "epoch": "T02",
+  "status": "NO_SOURCE_LEVEL_BLOCKER_IN_REVIEWED_CORRECTIONS",
+  "prior_review": "../REVIEW.json",
+  "resolved_findings": [
+    {
+      "id": "E4-DER-01",
+      "status": "RESOLVED_AT_SOURCE_LEVEL",
+      "mechanism": "Declared 527 context bodies and ten receipt identities checked before verification directory/output creation; same-read identities frozen."
+    },
+    {
+      "id": "E4-DER-02",
+      "status": "RESOLVED_AT_SOURCE_LEVEL",
+      "mechanism": "Canonical receipt destinations, reserved names, duplicates, ancestors, symlinks and existing paths admitted before authoring writes; verification compares existing authored copies to originals."
+    }
+  ],
+  "new_findings": [],
+  "static_checks": "STATIC_CHECKS.json",
+  "actual_bound_inputs_reviewed": false,
+  "actual_state": "UNBOUND",
+  "candidate_code_imported_or_executed": false,
+  "generation_builds_tests_remote_calls": false,
+  "final_input_and_execution_review_pending": true
+}

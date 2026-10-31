@@ -1,0 +1,101 @@
+{
+  "canonical_baseline_receipt": {
+    "path": "current-map-validation-v04/execution/baseline-v01/receipt.json",
+    "sha256": "c2aef34309c1211064b76e343437dafce03ed0235f223deb29c7eb9f290c91e1",
+    "status": "PASS"
+  },
+  "compile_only_status": "PASS",
+  "crate": "jcc-merge-recovery-20261006-mapping-v04",
+  "destination_commit": "09075810b55229662329a158923287e8a7118f86",
+  "destination_root_tree": "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52",
+  "excluded_from_delivery": [
+    "compile-check-v01/src/**",
+    "compile-check-v01/classes/**",
+    "__pycache__/**"
+  ],
+  "files": [
+    {
+      "bytes": 53636,
+      "path": "JccMergeMappingRecoveryV04Test.java.in",
+      "sha256": "6e0bce1d101e3cfb6bbe23958178572b60a62599ed87f27c6d0fbaf4ac87ae39"
+    },
+    {
+      "bytes": 3441,
+      "path": "pom.xml",
+      "sha256": "258c1e3682df5f7f6c08c3f2c9a823bd5e132579c9af8e9264661fd6e7cac626"
+    },
+    {
+      "bytes": 626,
+      "path": "m3-jcc-merge-mapping-recovery-v04.yml",
+      "sha256": "782d73a8c6e257f224376f1fee3e8f150dbfe3ba110b9312f13209e2ad81235a"
+    },
+    {
+      "bytes": 14710,
+      "path": "render_template.py",
+      "sha256": "10e4fa1da6533492776c22d5dcf6433497fbccfd7750779b6234669e377957fd"
+    },
+    {
+      "bytes": 3967,
+      "path": "README.md",
+      "sha256": "ca1699cc3e48e67314cacf62b1aae33b1ee03bad31c4355a222c01768f300208"
+    },
+    {
+      "bytes": 6239,
+      "path": "compile-check-v01/receipt.json",
+      "sha256": "e457aa22b26f9a518a2e740675fa46cb68e3f72a82fda7775bf37cf37399f697"
+    },
+    {
+      "bytes": 0,
+      "path": "compile-check-v01/javac.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "compile-check-v01/javac.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 3601,
+      "path": "self-review-v01/receipt.json",
+      "sha256": "ccd191a803a7d93b24ede466c80756f977590708e7d436b7764f667a0e000bfd"
+    },
+    {
+      "bytes": 0,
+      "path": "self-review-v01/renderer-refusal.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1031,
+      "path": "self-review-v01/renderer-refusal.stderr.log",
+      "sha256": "1dec679f3a7bc06671b458e14f49017d8702cc9f753963b7fe0d3dd264f9b348"
+    }
+  ],
+  "input_epoch": {
+    "gates": 20,
+    "non_jcc_records": 53,
+    "ordered_records": 55,
+    "top_level_mappings": 34
+  },
+  "input_epoch_sha256": "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70",
+  "junit_methods_authored": 13,
+  "junit_methods_executed": 0,
+  "materialized_result_property": "m3.mapping.materialized",
+  "named_recipe": "com.m3.rewrite.backport.JccMergeMappingRecoveryV04",
+  "previous_qualified_publication_manifest_sha256": "2f816b0f0606257ca0c1746a0a30d54b96562a4b28ba0351429c006c6baf4d92",
+  "previous_template_packet": {
+    "path": "candidate/mapping-v03/java-template/TEMPLATE_PACKET.json",
+    "sealed_files_verified_unchanged": 31,
+    "sha256": "bdb03b20006830eb767595c9d3b38f222e5df44e1b66cc345a25c0f5ded0344d"
+  },
+  "schema": "m3-jcc-mapping-java-template-packet/4",
+  "scope": "Same13controls;exact090current55/53/34/20 andnewglobalnodes preserved;V03actualqualification retained as history. Compile-only and fixture-refusal checks passed. Actualsource binding/JUnit execution performed separately; no acceptance promotion.",
+  "separate_source_build_components": 1,
+  "source_commit": "__UNRESOLVED_ACTUAL_SOURCE_COMMIT__",
+  "source_java_owners": 20,
+  "source_jni_owners": 6,
+  "source_laboratory_owners": 14,
+  "source_root_tree": "__UNRESOLVED_ACTUAL_SOURCE_ROOT_TREE__",
+  "status": "FROZEN_TEMPLATE_ACTUAL_SOURCE_RENDER_REQUIRED",
+  "test_class": "com.m3.rewrite.backport.JccMergeMappingRecoveryV04Test",
+  "version": 4
+}

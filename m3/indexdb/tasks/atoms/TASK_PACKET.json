@@ -1,0 +1,22 @@
+{
+  "task_packet": "active",
+  "source_doc": "m3/indexdb/tasks/atoms/DESIGN.md",
+  "invariant_id": "DB_ATOM_FAULT_CONTRACTS",
+  "base_commit": "89373b64356a8b7d045ce721fc59907e522e6f9e",
+  "run": {"mode": "apply", "profile": "bounded", "workers": 1, "shard_count": 1, "shard_index": 0},
+  "targets": {
+    "files": [
+      "m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDB.java",
+      "m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticCodec.java",
+      "m3/indexdb/src/test/java/com/m3/indexdb/DbAtomTest.java",
+      "m3/indexdb/src/test/java/com/m3/indexdb/DbDigest.java"
+    ],
+    "modules": ["m3/tooling/migration-recipes"]
+  },
+  "invariant_locks": {"PUBLIC_API": "LOCKED", "WIRE_FORMAT": "LOCKED", "GUARDS": "LOCKED", "EXISTING_TESTS": "PRESERVE", "POMS_WORKFLOWS_THRESHOLDS": "LOCKED", "MASTER_DEVELOP": "READ_ONLY"},
+  "allowed_delta": ["private cohesive extraction", "additive atom/fault tests", "existing-engine snapshots and proof", "task-local documentation"],
+  "forbidden": ["new public API", "new dependency", "test exclusion", "coverage dilution", "security-provider mutation in parent JVM", "canonical promotion"],
+  "verify_order": ["diff", "static checks", "compile", "JUnit", "runtime"],
+  "output_contract": ["STATUS.tsv", "FINAL_REPORT.md", "RUN_CONTEXT.tsv", "PROVENANCE.tsv", "VERIFY_CONTRACT.tsv", "OUTPUT_CONTRACT.tsv"],
+  "stop_conditions": ["preimage drift", "unreviewed delta", "compiler or JUnit failure"]
+}

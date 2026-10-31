@@ -1,0 +1,119 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-merge-recovery-20261006-retention",
+  "version": 1,
+  "source_commit": "87590cb96fb0e2dc0f88fae8e01957f7179cd255",
+  "destination_base": "87590cb96fb0e2dc0f88fae8e01957f7179cd255",
+  "scope": "Six exact-current updates: reviewed immutable-baseline extension of the existing retention owner, its test/POM/workflow/docs, and catalogue preservation plus 443 explicit historical obligations. No JDK/runtime acceptance.",
+  "outputs": [
+    {
+      "path": ".github/workflows/m3-retained-capability-audit.yml",
+      "before": {
+        "resource": "before-00.txt",
+        "sha256": "517a8bb2f5e8e7ec0652ff33606155835084bd9669e936e7ecdc80984a857940"
+      },
+      "after": {
+        "resource": "after-00.txt",
+        "sha256": "f60cd12f2a0b1530f022c4aa9f98d48647a136328be7b67dd117cd08d1081300"
+      }
+    },
+    {
+      "path": "m3/history/README.md",
+      "before": {
+        "resource": "before-01.txt",
+        "sha256": "ef145204809b2ab1b3fa79b75ce740dfddb1d536f98f65b14ba50eea057fc4fc"
+      },
+      "after": {
+        "resource": "after-01.txt",
+        "sha256": "8918e530b22f7960db1a3918a5685978fd9fc14ed35338faefb224d935d7f5c0"
+      }
+    },
+    {
+      "path": "m3/history/RETAINED_CAPABILITIES.tsv",
+      "before": {
+        "resource": "before-02.txt",
+        "sha256": "f25f982c294aa0ec17911a54e4245072923f7b1f73f2422997b567c67e7f20e5"
+      },
+      "after": {
+        "resource": "after-02.txt",
+        "sha256": "3c9fa3ab96110d58d83caa75f806b8677379a5d086976245f2f74efec9c7e7d8"
+      }
+    },
+    {
+      "path": "m3/history/retention-pom.xml",
+      "before": {
+        "resource": "before-03.txt",
+        "sha256": "14c29126da786a7456a55ce400f5a800dfe53693e6c329e7342bf2fabb087e11"
+      },
+      "after": {
+        "resource": "after-03.txt",
+        "sha256": "b4f00263594158b47e76ccb34000095f46bc3f66a69151304fe7b544dad6ca15"
+      }
+    },
+    {
+      "path": "m3/history/retention.py",
+      "before": {
+        "resource": "before-04.txt",
+        "sha256": "06c713d051ce0411b9c8a4faeafeaa3245b75ff4350e8f9afd94f15dd86451e4"
+      },
+      "after": {
+        "resource": "after-04.txt",
+        "sha256": "ccd63d4e05f51e816548ad9da4e5a0ce880a9cf90b1fd0dfe80b04f30f7d8a14"
+      }
+    },
+    {
+      "path": "m3/history/test_retention.py",
+      "before": {
+        "resource": "before-05.txt",
+        "sha256": "68ae3ae0be2f45f9746c9573bf949698221a99696715065a14a293729c022a0c"
+      },
+      "after": {
+        "resource": "after-05.txt",
+        "sha256": "6d11c5ff5d429daca053775a7b8eae9cbe89c3498c3b33c4f0f576c36b2b91c3"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"
+    },
+    {
+      "path": "m3/migration/migration.py",
+      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv",
+      "sha256": "858bd7ce63f6904757507e6417df700fd7d0f319d421401cd48403d142c3418a"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv",
+      "sha256": "6a6b11543829324bcafa49e72a764c24fb44e398c6bcb7a76c34dcab1d094896"
+    },
+    {
+      "path": "m3/history/git_graph.py",
+      "sha256": "842d5f66297bfb0081a053dabf24ff9d6ca5f6a7823d0639a19cda1a23bc4881"
+    }
+  ],
+  "plan_sha256": "45023d28f18af7639eb071845be094b63aa72f28c647ae0796334297c0e1e0a4"
+}

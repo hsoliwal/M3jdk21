@@ -1,0 +1,298 @@
+source-class-delta	UNKNOWN STEP	﻿2026-10-21T11:31:15.8373808Z Current runner version: '2.338.0'
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8394469Z ##[group]Runner Image Provisioner
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8395202Z Hosted Compute Agent
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8395672Z Version: 20261012.601
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8396269Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8396870Z Build Date: 2026-10-12T17:48:21Z
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8397541Z Worker ID: {d1cf19a6-d9a7-4889-84df-60d891c6acd5}
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8398124Z Region: westcentralus
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8398586Z Cloud: Azure
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8399100Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8400108Z ##[group]Operating System
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8400687Z Ubuntu
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8401283Z 24.04.5
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8401725Z LTS
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8402207Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8402671Z ##[group]Runner Image
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8403254Z Image: ubuntu-24.04
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8403744Z Version: 20261012.334.1
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8405147Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8406412Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8407275Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8408234Z ##[group]GITHUB_TOKEN Permissions
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8409801Z Contents: read
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8410315Z Metadata: read
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8410814Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8412871Z Secret source: Actions
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8413691Z Cache mode: write
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8414329Z Prepare workflow directory
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8678508Z Prepare all required actions
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:15.8716089Z Getting action download info
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:16.1457151Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:16.2500547Z Download action repository 'actions/setup-java@v4' (SHA:cf277c60eb25467037889841efdb72551f06f6c3)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.1712782Z Complete job name: source-class-delta
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2317721Z ##[group]Run actions/checkout@v4
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2318451Z with:
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2318833Z   repository: hsoliwal/M3jdk21
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2322177Z   token: ***
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2322556Z   ssh-strict: true
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2322953Z   ssh-user: git
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2323339Z   persist-credentials: true
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2323755Z   clean: true
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2324139Z   sparse-checkout-cone-mode: true
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2324580Z   fetch-depth: 1
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2324946Z   fetch-tags: false
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2325327Z   show-progress: true
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2325743Z   lfs: false
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2326111Z   submodules: false
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2326515Z   set-safe-directory: true
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2326942Z   allow-unsafe-pr-checkout: false
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.2327559Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3114985Z Syncing repository: hsoliwal/M3jdk21
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3117100Z ##[group]Getting Git version info
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3118155Z Working directory is '/home/runner/work/M3jdk21/M3jdk21'
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3119579Z [command]/usr/bin/git version
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3165528Z git version 2.55.0
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3180756Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3192234Z Temporarily overriding HOME='/home/runner/work/_temp/3bc183e6-ee5b-43b4-9663-10fc4742c072' before making global git config changes
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3194253Z Adding repository directory to the temporary git global config as a safe directory
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3195852Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/M3jdk21/M3jdk21
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3243469Z Deleting the contents of '/home/runner/work/M3jdk21/M3jdk21'
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3249982Z ##[group]Initializing the repository
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3250959Z [command]/usr/bin/git init /home/runner/work/M3jdk21/M3jdk21
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3352924Z hint: Using 'master' as the name for the initial branch. This default branch name
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3354358Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3355939Z hint: to use in all of your new repositories, which will suppress this warning,
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3357238Z hint: call:
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3357785Z hint:
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3358511Z hint: 	git config --global init.defaultBranch <name>
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3359378Z hint:
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3360162Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3361681Z hint: 'development'. The just-created branch can be renamed via this command:
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3362727Z hint:
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3363331Z hint: 	git branch -m <name>
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3364020Z hint:
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3364918Z hint: Disable this message with "git config set advice.defaultBranchName false"
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3366352Z Initialized empty Git repository in /home/runner/work/M3jdk21/M3jdk21/.git/
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3371153Z [command]/usr/bin/git remote add origin https://github.com/hsoliwal/M3jdk21
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3414093Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3414968Z ##[group]Disabling automatic garbage collection
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3417787Z [command]/usr/bin/git config --local gc.auto 0
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3454859Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3455950Z ##[group]Setting up auth
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3456945Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3482926Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3815196Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.3847182Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.4067390Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.4098434Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.4286673Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.4321728Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.4322529Z ##[group]Fetching the repository
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:17.4328307Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +a7be4ace03800a754ca42c3749157f81f54549e7:refs/remotes/origin/master
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:50.3420946Z From https://github.com/hsoliwal/M3jdk21
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:50.3421659Z  * [new ref]             a7be4ace03800a754ca42c3749157f81f54549e7 -> origin/master
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:50.3423841Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:50.3424348Z ##[group]Determining the checkout info
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:50.3425694Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:50.3430890Z [command]/usr/bin/git sparse-checkout disable
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:50.3481393Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:50.3508657Z ##[group]Checking out the ref
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:50.3512929Z [command]/usr/bin/git checkout --progress --force -B master refs/remotes/origin/master
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:51.4979397Z Updating files:  13% (16599/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:51.5689396Z Updating files:  14% (17105/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:51.6893747Z Updating files:  15% (18326/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:51.8930378Z Updating files:  16% (19548/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:51.9584998Z Updating files:  17% (20770/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:52.2745842Z Updating files:  18% (21992/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:52.3512746Z Updating files:  19% (23213/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:52.4370446Z Updating files:  20% (24435/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:52.4610461Z Updating files:  21% (25657/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:52.5057745Z Updating files:  21% (26066/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:52.5695284Z Updating files:  22% (26879/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:52.6388177Z Updating files:  23% (28100/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:52.6870146Z Updating files:  24% (29322/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:52.7433543Z Updating files:  25% (30544/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:52.7976286Z Updating files:  26% (31765/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:52.8661955Z Updating files:  27% (32987/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:52.9053840Z Updating files:  28% (34209/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:52.9437161Z Updating files:  29% (35431/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:52.9857497Z Updating files:  30% (36652/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:53.0389081Z Updating files:  31% (37874/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:53.0776956Z Updating files:  32% (39096/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:53.1233390Z Updating files:  33% (40318/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:53.1927290Z Updating files:  34% (41539/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:53.2490970Z Updating files:  35% (42761/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:53.3435296Z Updating files:  36% (43983/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:53.9474184Z Updating files:  37% (45205/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:53.9963325Z Updating files:  37% (45310/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:54.0612357Z Updating files:  38% (46426/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:54.1205945Z Updating files:  39% (47648/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:54.1795655Z Updating files:  40% (48870/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:54.2452075Z Updating files:  41% (50091/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:54.3016721Z Updating files:  42% (51313/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:54.4628350Z Updating files:  43% (52535/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:54.6005807Z Updating files:  43% (53382/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:54.7362136Z Updating files:  44% (53757/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:54.8513614Z Updating files:  45% (54978/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:54.9409517Z Updating files:  46% (56200/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:55.0165907Z Updating files:  47% (57422/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:55.0780052Z Updating files:  48% (58644/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:55.1789230Z Updating files:  49% (59865/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:55.2683791Z Updating files:  50% (61087/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:55.3432718Z Updating files:  51% (62309/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:55.4366314Z Updating files:  52% (63530/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:55.4610356Z Updating files:  53% (64752/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:55.5141593Z Updating files:  53% (65156/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:55.5877734Z Updating files:  54% (65974/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:55.6731473Z Updating files:  55% (67196/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:55.7588107Z Updating files:  56% (68417/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:55.8352427Z Updating files:  57% (69639/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:55.9046182Z Updating files:  58% (70861/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:56.4379281Z Updating files:  59% (72083/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:56.4609784Z Updating files:  60% (73304/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:56.5259209Z Updating files:  60% (73639/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:56.5814841Z Updating files:  61% (74526/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:56.6756942Z Updating files:  62% (75748/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:56.7417135Z Updating files:  63% (76969/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:56.8068271Z Updating files:  64% (78191/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:56.8680454Z Updating files:  65% (79413/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:56.9248881Z Updating files:  66% (80635/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:56.9776516Z Updating files:  67% (81856/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:57.0339879Z Updating files:  68% (83078/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:57.0893326Z Updating files:  69% (84300/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:57.1572277Z Updating files:  70% (85522/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:57.7335790Z Updating files:  71% (86743/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:57.7468748Z Updating files:  71% (87704/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:57.8078679Z Updating files:  72% (87965/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:57.8621692Z Updating files:  73% (89187/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:57.9147732Z Updating files:  74% (90409/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:57.9704681Z Updating files:  75% (91630/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:58.0264943Z Updating files:  76% (92852/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:58.6413545Z Updating files:  77% (94074/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:58.6558634Z Updating files:  77% (95050/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:58.7209944Z Updating files:  78% (95295/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:58.7801481Z Updating files:  79% (96517/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:58.8465899Z Updating files:  80% (97739/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:58.9113528Z Updating files:  81% (98961/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:59.4612127Z Updating files:  82% (100182/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:59.4963964Z Updating files:  82% (100692/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:59.5553332Z Updating files:  83% (101404/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:59.6233953Z Updating files:  84% (102626/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:59.6868610Z Updating files:  85% (103848/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:59.7449524Z Updating files:  86% (105069/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:59.8033737Z Updating files:  87% (106291/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:59.8749167Z Updating files:  88% (107513/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:31:59.9336250Z Updating files:  89% (108734/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:00.0673541Z Updating files:  90% (109956/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:00.1348876Z Updating files:  91% (111178/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:00.5300092Z Updating files:  92% (112400/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:00.5595182Z Updating files:  92% (113005/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:00.6139379Z Updating files:  93% (113621/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:00.6608733Z Updating files:  94% (114843/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:00.7115181Z Updating files:  95% (116065/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:00.7581965Z Updating files:  96% (117287/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:00.8044848Z Updating files:  97% (118508/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:00.8524772Z Updating files:  98% (119730/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.1962920Z Updating files:  99% (120952/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.1963406Z Updating files: 100% (122173/122173)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.1963915Z Updating files: 100% (122173/122173), done.
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.3283099Z Reset branch 'master'
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.3284082Z branch 'master' set up to track 'origin/master'.
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.3401702Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.3441825Z [command]/usr/bin/git log -1 --format=%H
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.3465640Z a7be4ace03800a754ca42c3749157f81f54549e7
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.4515941Z ##[group]Run actions/setup-java@v4
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.4516168Z with:
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.4516338Z   distribution: temurin
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.4516525Z   java-version: 21
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.4516714Z   java-package: jdk
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.4516886Z   check-latest: false
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.4517061Z   server-id: github
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.4517237Z   server-username: GITHUB_ACTOR
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.4517442Z   server-password: GITHUB_TOKEN
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.4517641Z   overwrite-settings: true
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.4517827Z   job-status: success
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.4519840Z   token: ***
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.4520011Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5776359Z ##[warning]setup-java v4 is deprecated and will no longer receive updates. Please migrate to actions/setup-java@v5.
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5783111Z ##[group]Installed distributions
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5808656Z Resolved Java 21.0.12+1 from tool-cache
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5809040Z Setting Java 21.0.12+1 as the default
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5817140Z (node:2172) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5817995Z (Use `node --trace-deprecation ...` to show where the warning was created)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5819317Z Creating toolchains.xml for JDK version 21 from temurin
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5875932Z Writing to /home/runner/.m2/toolchains.xml
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5876219Z 
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5876355Z Java configuration:
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5876614Z   Distribution: temurin
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5876883Z   Version: 21.0.12+1
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5877260Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5877585Z 
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5881478Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5895458Z Creating settings.xml with server-id: github
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.5895876Z Writing to /home/runner/.m2/settings.xml
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.6491837Z ##[group]Run set -euo pipefail
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.6492141Z [36;1mset -euo pipefail[0m
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.6492384Z [36;1mmkdir -p build/m3file-delta-classes[0m
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.6493369Z [36;1mjavac --release 21 -Xlint:all,-module -Werror             -d build/m3file-delta-classes             m3/file/src/main/java/module-info.java             m3/file/src/main/java/com/m3/file/M3File.java             m3/file/src/main/java/com/m3/file/M3FileDeltaLedger.java             m3/file/src/test/java/com/m3/file/M3FileDeltaLedgerContract.java[0m
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.6494676Z [36;1mjava --module-path build/m3file-delta-classes             -m com.m3.file/com.m3.file.M3FileDeltaLedgerContract[0m
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.7057035Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.7057333Z env:
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.7057603Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.7058053Z   JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-1/x64
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:01.7058352Z ##[endgroup]
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4874660Z m3/file/src/main/java/com/m3/file/M3File.java:69: error: cannot find symbol
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4878652Z     public InputStream openInputStream(M3StreamProgress progress) throws IOException {
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4879459Z                                        ^
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4879950Z   symbol:   class M3StreamProgress
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4880393Z   location: class M3File
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4880985Z m3/file/src/main/java/com/m3/file/M3File.java:80: error: cannot find symbol
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4881928Z             int maxRetainedBytes, M3StreamProgress progress) throws IOException {
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4882529Z                                   ^
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4882943Z   symbol:   class M3StreamProgress
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.4883367Z   location: class M3File
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.5064368Z m3/file/src/main/java/com/m3/file/M3File.java:79: error: package M3ShadowStreams does not exist
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.5065137Z     public M3ShadowStreams.SharedInput openShadowInputStream(
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.5065582Z                           ^
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6492351Z m3/file/src/main/java/com/m3/file/M3File.java:70: error: cannot find symbol
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6493593Z         M3StreamProgress.require(progress);
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6494214Z         ^
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6494657Z   symbol:   variable M3StreamProgress
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6495210Z   location: class M3File
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6495857Z m3/file/src/main/java/com/m3/file/M3File.java:71: error: cannot find symbol
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6496709Z         return M3ShadowStreams.monitoredInput(openInputStream(), progress);
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6497421Z                ^
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6497881Z   symbol:   variable M3ShadowStreams
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6498388Z   location: class M3File
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6538473Z m3/file/src/main/java/com/m3/file/M3File.java:82: error: cannot find symbol
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6540650Z         M3StreamProgress.require(progress);
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6541456Z         ^
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6541833Z   symbol:   variable M3StreamProgress
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6545701Z   location: class M3File
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6546361Z m3/file/src/main/java/com/m3/file/M3File.java:83: error: cannot find symbol
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6547223Z         return M3ShadowStreams.input(openInputStream(), maxRetainedBytes, progress);
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6562586Z                ^
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6563080Z   symbol:   variable M3ShadowStreams
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.6563593Z   location: class M3File
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.8622079Z 7 errors
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.8887125Z ##[error]Process completed with exit code 1.
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:02.8986188Z Post job cleanup.
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.0007803Z (node:2211) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.0008411Z (Use `node --trace-deprecation ...` to show where the warning was created)
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.0198631Z Post job cleanup.
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.0931656Z [command]/usr/bin/git version
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.0968647Z git version 2.55.0
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.1002482Z Temporarily overriding HOME='/home/runner/work/_temp/668049cc-d444-4acf-bbd5-756a08d691f9' before making global git config changes
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.1003667Z Adding repository directory to the temporary git global config as a safe directory
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.1005748Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/M3jdk21/M3jdk21
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.1053013Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.1103008Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.1518576Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.1552565Z http.https://github.com/.extraheader
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.1564612Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.1605573Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.1978556Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.2015895Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.2469027Z Cleaning up orphan processes
+source-class-delta	UNKNOWN STEP	2026-10-21T11:32:03.2710062Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

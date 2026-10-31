@@ -1,0 +1,29 @@
+test_conflicting_resources_refused (__main__.ArchiveFixtures.test_conflicting_resources_refused) ... ok
+test_different_notices_remain_exact_per_owner (__main__.ArchiveFixtures.test_different_notices_remain_exact_per_owner) ... ok
+test_duplicate_entries_and_file_directory_collision_refused (__main__.ArchiveFixtures.test_duplicate_entries_and_file_directory_collision_refused) ... ok
+test_equal_resources_coalesce_after_exact_comparison (__main__.ArchiveFixtures.test_equal_resources_coalesce_after_exact_comparison) ... ok
+test_foreign_version_classifiers_and_native_inputs_refused (__main__.ArchiveFixtures.test_foreign_version_classifiers_and_native_inputs_refused) ... ok
+test_missing_provider_class_refused (__main__.ArchiveFixtures.test_missing_provider_class_refused) ... ok
+test_services_preserve_first_occurrence_and_original_bytes (__main__.ArchiveFixtures.test_services_preserve_first_occurrence_and_original_bytes) ... ok
+test_signed_and_sealed_archives_refused (__main__.ArchiveFixtures.test_signed_and_sealed_archives_refused) ... ok
+test_stored_jar_is_deterministic_and_preserves_bytes (__main__.ArchiveFixtures.test_stored_jar_is_deterministic_and_preserves_bytes) ... ok
+test_unsafe_paths_refused (__main__.ArchiveFixtures.test_unsafe_paths_refused) ... ok
+test_input_drift_does_not_publish_success_manifest (__main__.PrepareFixtures.test_input_drift_does_not_publish_success_manifest) ... ok
+test_missing_owner_and_source_output_refused (__main__.PrepareFixtures.test_missing_owner_and_source_output_refused) ... ok
+test_prepare_replay_and_fresh_output (__main__.PrepareFixtures.test_prepare_replay_and_fresh_output) ... ok
+test_prepare_seals_declared_checkout_without_normalizing_source_hashes (__main__.PrepareFixtures.test_prepare_seals_declared_checkout_without_normalizing_source_hashes) ... ok
+test_source_drift_does_not_publish_success_manifest (__main__.PrepareFixtures.test_source_drift_does_not_publish_success_manifest) ... ok
+test_wrong_head_and_staged_drift_refused (__main__.PrepareFixtures.test_wrong_head_and_staged_drift_refused) ... ok
+test_auto_text_filter_and_encoding_attributes_refused (__main__.SourceCheckoutFixtures.test_auto_text_filter_and_encoding_attributes_refused) ... ok
+test_core_autocrlf_only_cannot_authorize_conversion (__main__.SourceCheckoutFixtures.test_core_autocrlf_only_cannot_authorize_conversion) ... ok
+test_declared_crlf_retains_raw_hash_and_committed_provenance (__main__.SourceCheckoutFixtures.test_declared_crlf_retains_raw_hash_and_committed_provenance) ... ok
+test_global_attributes_cannot_authorize_conversion (__main__.SourceCheckoutFixtures.test_global_attributes_cannot_authorize_conversion) ... ok
+test_info_attributes_refused_for_conversion_but_raw_match_unchanged (__main__.SourceCheckoutFixtures.test_info_attributes_refused_for_conversion_but_raw_match_unchanged) ... ok
+test_info_comments_allowed_but_info_symlink_refused (__main__.SourceCheckoutFixtures.test_info_comments_allowed_but_info_symlink_refused) ... ok
+test_mixed_endings_bare_cr_and_hidden_byte_drift_refused (__main__.SourceCheckoutFixtures.test_mixed_endings_bare_cr_and_hidden_byte_drift_refused) ... ok
+test_undeclared_crlf_refused_when_index_hides_change (__main__.SourceCheckoutFixtures.test_undeclared_crlf_refused_when_index_hides_change) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.734s
+
+OK

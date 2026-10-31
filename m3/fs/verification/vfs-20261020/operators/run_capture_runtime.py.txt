@@ -1,0 +1,276 @@
+#!/usr/bin/env python3
+# Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
+"""Record generated-only facade, streams, and observation runtime qualification.
+
+Run only after qualification-capture/classes has been completely compiled.
+Existing helper outputs are archived, never reused as test or production inputs.
+"""
+from datetime import datetime, timezone
+from pathlib import Path
+import hashlib
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import time
+
+
+B = Path(__file__).resolve().parent
+R = B / "receiver/m3/fs"
+Q = B / "qualification-capture/classes"
+O = B / "runtime-capture"
+J = B / "toolchain/jdk21"
+LAUNCHER = B / "authored/facade/verification/FacadeTestLauncher.java"
+COORDINATES = (
+    ("org/junit/jupiter/junit-jupiter-api", "5.10.2"),
+    ("org/junit/jupiter/junit-jupiter-engine", "5.10.2"),
+    ("org/junit/platform/junit-platform-commons", "1.10.2"),
+    ("org/junit/platform/junit-platform-engine", "1.10.2"),
+    ("org/junit/platform/junit-platform-launcher", "1.10.2"),
+    ("org/opentest4j/opentest4j", "1.3.0"),
+    ("org/apiguardian/apiguardian-api", "1.1.2"),
+)
+
+# This records actual subprocess commands without changing the existing helpers.
+# Environment values are deliberately excluded from the receipt.
+AUDIT_SOURCE = '''import json, os, sys
+def audit(event, arguments):
+    if event == "subprocess.Popen":
+        executable, args, cwd, environment = arguments
+        row = {"executable": os.fspath(executable), "command": args,
+               "cwd": os.fspath(cwd) if cwd is not None else os.getcwd()}
+        with open(os.environ["M3FS_RUNTIME_AUDIT"], "a", encoding="utf-8") as target:
+            target.write(json.dumps(row) + "\\n")
+sys.addaudithook(audit)
+'''
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def write_json(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
+
+
+def require(condition, message):
+    if not condition:
+        raise RuntimeError(message)
+
+
+def class_inventory(directory):
+    require(directory.is_dir(), f"Missing class directory: {directory}")
+    require(not directory.is_symlink(), f"Class directory must not be a symlink: {directory}")
+    result = {}
+    for path in sorted(directory.rglob("*.class")):
+        require(not path.is_symlink(), f"Class file must not be a symlink: {path}")
+        result[str(path.relative_to(directory))] = sha(path)
+    require(bool(result), f"No compiled classes under {directory}")
+    return result
+
+
+def compare_test_sources():
+    pairs = []
+    for owner in ("facade", "streams", "facts"):
+        root = B / "authored" / owner / "m3/fs"
+        for authored in sorted((root / "src/test/java").rglob("*.java")):
+            relative = authored.relative_to(root)
+            generated = R / relative
+            require(generated.is_file(), f"Generated test missing: {generated}")
+            authored_hash, generated_hash = sha(authored), sha(generated)
+            require(authored_hash == generated_hash, f"Generated/authored test mismatch: {relative}")
+            pairs.append({"authored": str(authored), "generated": str(generated),
+                          "sha256": authored_hash, "matches": True})
+    require(len(pairs) == 6, f"Expected six generated test sources, found {len(pairs)}")
+    return pairs
+
+
+def junit_counts(output, expected):
+    counts = {}
+    for label in ("found", "skipped", "started", "aborted", "successful", "failed"):
+        matches = re.findall(r"\[\s*(\d+)\s+tests " + label + r"\s*\]", output)
+        require(len(matches) == 1, f"Expected one JUnit '{label}' count, found {len(matches)}")
+        counts[label] = int(matches[0])
+    require(counts == {"found": expected, "skipped": 0, "started": expected,
+                       "aborted": 0, "successful": expected, "failed": 0},
+            f"Unexpected JUnit result: {counts}; expected {expected} successful tests")
+    return counts
+
+
+def archive(path, preserved, label):
+    if path.exists():
+        require(not path.is_symlink(), f"Refusing to archive a symlink: {path}")
+        destination = O / "preserved" / label
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        path.rename(destination)
+        preserved.append({"original": str(path), "preserved": str(destination)})
+
+
+def check_command(row, suite, allowed_classpath):
+    command = row["command"]
+    require(isinstance(command, list) and bool(command), "Missing audited subprocess argument list")
+    executable = Path(command[0]).resolve()
+    require(executable in {(J / "bin/java").resolve(), (J / "bin/javac").resolve()},
+            f"Unexpected subprocess executable: {command[0]}")
+    require(command.count("-cp") == 1, "Expected exactly one explicit classpath")
+    entries = [str(Path(value).resolve()) for value in command[command.index("-cp") + 1].split(os.pathsep)]
+    require(str(Q.resolve()) in entries, "Generated production directory is absent from classpath")
+    require(set(entries) <= allowed_classpath | {str(suite["output"].resolve())},
+            f"Unapproved classpath entry: {set(entries) - allowed_classpath}")
+    require(not any(option in command for option in ("--patch-module", "--module-path", "-p")),
+            "Unexpected module override in runtime verification")
+    if executable.name == "javac":
+        require(command[1:5] == ["--release", "21", "-Xlint:all", "-Werror"],
+                "Expected strict Java 21 test compilation")
+        require(command.count("-d") == 1 and Path(command[command.index("-d") + 1]).resolve() == suite["output"].resolve(),
+                "Compiler output is not the suite's fresh test directory")
+        source_files = {str(Path(value).resolve()) for value in command if value.endswith(".java")}
+        require(source_files == {str(path.resolve()) for path in suite["sources"]},
+                f"Compiler sources differ from test fixtures: {source_files}")
+    else:
+        main_index = command.index("-cp") + 2
+        require(command[main_index:] in suite["java_mains"], "Unexpected Java main class or arguments")
+    return {**row, "generated_production_classes": str(Q), "production_overlays": False}
+
+
+def check_test_classes(suite, product_classes):
+    inventory = class_inventory(suite["output"])
+    top_levels = {"FacadeTestLauncher", *["com/m3/fs/" + name for name in suite["fixtures"]]}
+    for name in inventory:
+        stem = name[:-len(".class")]
+        require(any(stem == prefix or stem.startswith(prefix + "$") for prefix in top_levels),
+                f"Non-test class in {suite['name']} output: {name}")
+        require(name not in product_classes, f"Test output overlays generated production class: {name}")
+    require(all(name + ".class" in inventory for name in top_levels), "Missing compiled test fixture")
+    shutil.copytree(suite["output"], O / "test-classes" / suite["name"])
+    return inventory
+
+
+def main():
+    old_receipt = None
+    if O.exists():
+        old_receipt = O.with_name("runtime-capture.previous-" + datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ"))
+        require(not O.is_symlink(), "Runtime receipt directory must not be a symlink")
+        O.rename(old_receipt)
+    O.mkdir(parents=True)
+    report = {"status": "RUNNING", "production_classes": str(Q), "production_overlays": None,
+              "junit_tests": 0, "observation_assertions": 0, "commands": [], "results": [],
+              "preserved_outputs": [], "previous_runtime_receipt": str(old_receipt) if old_receipt else None}
+    try:
+        require((Q / "com/m3/fs/MFileCapture.class").is_file(), "Generated capture classes are not ready")
+        require((Q / "com/m3/fs/MFileContentView.class").is_file(), "Generated content-view classes are not ready")
+        require((J / "bin/javac").is_file(), "Selected Java 21 compiler is unavailable")
+        report["test_sources"] = compare_test_sources()
+        write_json(O / "test-source-hashes.json", report["test_sources"])
+        original_product = class_inventory(Q)
+        write_json(O / "production-classes.before.json", original_product)
+        report["production_class_count"] = len(original_product)
+        junit_jars = [B / "m2" / path / version / f"{Path(path).name}-{version}.jar"
+                      for path, version in COORDINATES]
+        lock_path = R / "tools/vfs-dependencies.lock.json"
+        runtime_jars = []
+        for row in json.loads(lock_path.read_text())["dependencies"]:
+            path = B / "m2" / row["repository_path"]
+            require(sha(path) == row["sha256"], f"Runtime dependency hash mismatch: {path}")
+            runtime_jars.append(path)
+        report["dependency_hashes"] = {str(path): sha(path) for path in junit_jars + runtime_jars}
+        report["dependency_lock_sha256"] = sha(lock_path)
+        report["java_home"] = str(J)
+        report["java_release"] = (J / "release").read_text()
+        allowed_classpath = {str(path.resolve()) for path in [Q, R / "src/main/resources", *junit_jars, *runtime_jars]}
+
+        suites = [
+            {"name": "facade", "helper": B / "authored/facade/verification/run_behavior.py",
+             "arguments": ["--classes", str(Q), "--java-home", str(J)], "expected": 69,
+             "output": B / "authored/facade/verification/current-classes",
+             "logs": [B / "authored/facade/verification/current-behavior.log"],
+             "fixtures": ["MFilesBehaviorTest", "MFilesProviderTest", "MFileCaptureTest"],
+             "source_root": B / "authored/facade/m3/fs/src/test/java/com/m3/fs",
+             "java_mains": [["FacadeTestLauncher", "com.m3.fs.MFilesBehaviorTest", "com.m3.fs.MFilesProviderTest", "com.m3.fs.MFileCaptureTest"]]},
+            {"name": "streams", "helper": B / "authored/streams/verification/run_stream_tests.py",
+             "arguments": ["--classes", str(Q)], "expected": 35,
+             "output": B / "authored/streams/verification/generated-classes",
+             "logs": [B / "authored/streams/verification/generated.log"],
+             "fixtures": ["MFileStreamsTest"],
+             "source_root": B / "authored/streams/m3/fs/src/test/java/com/m3/fs",
+             "java_mains": [["FacadeTestLauncher", "com.m3.fs.MFileStreamsTest"]]},
+            {"name": "facts", "helper": B / "run_generated_facts.py",
+             "arguments": ["--classes", str(Q), "--out", str(B / "facts-capture"), "--java-home", str(J)], "expected": 1,
+             "output": B / "facts-capture/tests", "archive_parent": B / "facts-capture",
+             "logs": [B / "facts-capture" / name for name in ("compile.log", "junit.log", "consumer.log", "result.json")],
+             "fixtures": ["MFileObservationSelfTest", "MFileObservationTest"],
+             "source_root": R / "src/test/java/com/m3/fs",
+             "java_mains": [["FacadeTestLauncher", "com.m3.fs.MFileObservationTest"], ["com.m3.fs.MFileObservationSelfTest"]]},
+        ]
+        audit_directory = O / "audit"
+        audit_directory.mkdir()
+        (audit_directory / "sitecustomize.py").write_text(AUDIT_SOURCE)
+        environment = os.environ.copy()
+        removed = []
+        for name in ("CLASSPATH", "JAVA_TOOL_OPTIONS", "JDK_JAVA_OPTIONS", "_JAVA_OPTIONS"):
+            if name in environment:
+                removed.append(name)
+                del environment[name]
+        environment["PYTHONPATH"] = str(audit_directory)
+        environment["M3FS_JAVA_HOME"] = str(J)
+        report["environment"] = {"M3FS_JAVA_HOME": str(J), "PYTHONPATH": str(audit_directory), "removed_variable_names": removed}
+        report["launcher_sha256"] = sha(LAUNCHER)
+        for suite in suites:
+            suite["sources"] = [suite["source_root"] / (name + ".java") for name in suite["fixtures"]] + [LAUNCHER]
+            archive(suite.get("archive_parent", suite["output"]), report["preserved_outputs"], suite["name"] + "-previous-output")
+            for log in suite["logs"]:
+                archive(log, report["preserved_outputs"], suite["name"] + "-previous-" + log.name)
+            require(not suite["output"].exists(), "A test class directory was not cleaned before execution")
+            command = [sys.executable, str(suite["helper"]), *suite["arguments"]]
+            command_receipt = {"suite": suite["name"], "command": command, "cwd": str(B), "helper_sha256": sha(suite["helper"])}
+            report["commands"].append(command_receipt)
+            trace = O / (suite["name"] + "-commands.jsonl")
+            environment["M3FS_RUNTIME_AUDIT"] = str(trace)
+            started = time.monotonic()
+            result = subprocess.run(command, cwd=B, env=environment, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            command_receipt.update(exit_code=result.returncode, elapsed_seconds=round(time.monotonic() - started, 3))
+            (O / (suite["name"] + ".log")).write_text(result.stdout)
+            for log in suite["logs"]:
+                if log.is_file():
+                    shutil.copy2(log, O / (suite["name"] + "-" + log.name))
+            require(result.returncode == 0, f"{suite['name']} helper failed with exit code {result.returncode}")
+            require(sha(suite["helper"]) == command_receipt["helper_sha256"], "Helper changed during execution")
+            counts = junit_counts(result.stdout, suite["expected"])
+            require(trace.is_file(), f"Missing actual subprocess audit for {suite['name']}")
+            actual = [json.loads(line) for line in trace.read_text().splitlines() if line]
+            require(len(actual) == (3 if suite["name"] == "facts" else 2), "Unexpected subprocess count")
+            verified_commands = [check_command(row, suite, allowed_classpath) for row in actual]
+            inventory = check_test_classes(suite, original_product)
+            write_json(O / (suite["name"] + "-commands.json"), verified_commands)
+            write_json(O / (suite["name"] + "-test-classes.json"), inventory)
+            report["results"].append({"suite": suite["name"], "status": "PASS", "junit": counts,
+                                      "test_class_count": len(inventory), "fresh_test_fixtures_only": True,
+                                      "production_overlays": False, "commands": verified_commands})
+            report["junit_tests"] += counts["successful"]
+            if suite["name"] == "facts":
+                matches = re.findall(r"MFILE_OBSERVATION_CHECKS=(\d+)", result.stdout)
+                require(matches == ["106"], f"Unexpected observation assertion count: {matches}")
+                report["observation_assertions"] = 106
+            print(f"{suite['name']}: {counts['successful']} JUnit tests PASS", flush=True)
+
+        require(compare_test_sources() == report["test_sources"], "Test sources changed during execution")
+        require(sha(LAUNCHER) == report["launcher_sha256"], "Launcher changed during execution")
+        final_product = class_inventory(Q)
+        write_json(O / "production-classes.after.json", final_product)
+        require(final_product == original_product, "Generated production classes changed during runtime verification")
+        require(report["junit_tests"] == 105 and report["observation_assertions"] == 106, "Incomplete runtime suite")
+        report.update(status="PASS", production_overlays=False, production_classes_unchanged=True,
+                      authored_tests_match_generated=True, fresh_test_fixtures_only=True)
+        print("PASS: 105 JUnit tests and 106 observation assertions; generated production classes only.", flush=True)
+    except BaseException as failure:
+        report.update(status="FAIL", error=f"{type(failure).__name__}: {failure}")
+        raise
+    finally:
+        write_json(O / "results.json", report)
+
+
+if __name__ == "__main__":
+    main()

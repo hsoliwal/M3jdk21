@@ -1,0 +1,23 @@
+{
+  "archiveBytes": 10225314,
+  "archiveParts": 11,
+  "boundary": "This is exact review/reconstruction evidence, not a hermetic toolchain image. Maven, JDK, Python and other dependency caches, compiled binaries, settings and credential material are omitted. Their sealed identities remain in the original manifests where recorded. OS, dynamic-library, shell and standard-library limits in the original tooling/results remain applicable. Packaging executes no proof gate and does not turn a focused or failed result into repository-wide admission.",
+  "bundle": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/bundle",
+  "indexBytes": 123241,
+  "indexSHA256": "af4f16e7c63ea8adb004de897bb3cfb1b089bac346c9360e438ae2969e36039e",
+  "proofGatesExecuted": false,
+  "schema": "synexia.evidence.package-result/1",
+  "status": "PACKAGED_REVIEW_EVIDENCE",
+  "summary": {
+    "omissionsByReason": {},
+    "omittedDirectories": 0,
+    "omittedFileBytes": 0,
+    "omittedFileRecords": 0,
+    "referencesByRetention": {},
+    "retainedPathBytes": 74190773,
+    "retainedPaths": 810,
+    "sealedInputReferences": 0,
+    "uniqueChunkBytes": 59571756,
+    "uniqueChunks": 611
+  }
+}

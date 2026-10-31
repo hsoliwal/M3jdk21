@@ -1,0 +1,65 @@
+{
+  "schema": "M3_MASK_WINDOW_PUBLICATION_RECEIPT_V1",
+  "target_base": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e",
+  "source_recipe_tree": "ad5061671db2cf41ed6349b826751cfb28d639fd",
+  "status": "PASS_SELECTED_DIRECT_GATES",
+  "ordered_command_count": 105,
+  "java_assertions_per_corpus": 18744,
+  "checked_jni_assertions_per_corpus": 20549,
+  "missing_library_assertions": 25,
+  "public_api": "BYTE_IDENTICAL_JAVAP",
+  "jni_exports": [
+    "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+    "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative"
+  ],
+  "source_stages": {
+    "before": {
+      "java": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031",
+      "native": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7"
+    },
+    "java": {
+      "java": "1030f87e825faacb4780435d087bf0441e6aca7d69e3d92a405dd7b8337244cc",
+      "native": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7"
+    },
+    "native": {
+      "java": "1030f87e825faacb4780435d087bf0441e6aca7d69e3d92a405dd7b8337244cc",
+      "native": "32184502c039deda9fff49c0ea4df6905b29133a442568c2afedbdaef7cd746b"
+    },
+    "test": {
+      "java": "1030f87e825faacb4780435d087bf0441e6aca7d69e3d92a405dd7b8337244cc",
+      "native": "32184502c039deda9fff49c0ea4df6905b29133a442568c2afedbdaef7cd746b"
+    }
+  },
+  "binary_matrix": [
+    "old-java-new-native",
+    "new-java-old-native",
+    "new-java-pre-positions-native"
+  ],
+  "partial_states": 8,
+  "prewrite_refusals": 7,
+  "detected_mutants": 2,
+  "fixed_point": "NO_WRITES",
+  "all_raw_logs_archived": {
+    "filename": "qualification.json.gz",
+    "sha256": "fb73cfd4e09bddccec6d93da8d7880a19a8a0d287e807cc2d749396eb733de5f",
+    "bytes": 10874,
+    "location": "downloadable delivery bundle; full commands, raw stdout, event and authoring history"
+  },
+  "java_trace": "M3_MASK_WINDOW_PASS checks=18744 trace=1c6611ecf874e43ecc53e4d746badcb9bb3ad854da3b57a109c949987b61dd87",
+  "jni_trace": "M3_MASK_WINDOW_PASS checks=20549 trace=2c45448e20add12d774974ad7ab9ea38274e93b589c1e72bde25873fcb36944a",
+  "pending": [
+    "Maven lifecycle: unavailable; archive download DNS failure",
+    "OpenRewrite SDK: not used; exact-source Java/Maven replay, no attributed rewrite claim",
+    "Full owning module and historical source-seal successor admission",
+    "Full source-built JDK/jtreg/JCK",
+    "Cross-platform JNI",
+    "Representative time, heap and process-memory benchmarks"
+  ],
+  "phase_advanced": false,
+  "complete_chat": false
+}

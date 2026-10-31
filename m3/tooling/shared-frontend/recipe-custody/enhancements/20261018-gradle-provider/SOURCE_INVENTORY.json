@@ -1,0 +1,100 @@
+[
+  {
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/m3/tooling/shared-frontend/recipe-custody/pom.xml",
+    "destination": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/pom.xml",
+    "preimage": "ABSENT",
+    "sha256": "56567ab0175c47dbbada68bec8fe0fd9bbe027d6174c5cefef695a0b7283d448",
+    "git_blob": "332b6ca5fae4dec7980d953e8a6f01f5dd8a5419"
+  },
+  {
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/m3/tooling/shared-frontend/recipe-custody/prepare.py",
+    "destination": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/prepare.py",
+    "preimage": "ABSENT",
+    "sha256": "4a585b670e5d9defab8e7d63d6fc80508321d0b0e750a15b667cbe6ee14eefc4",
+    "git_blob": "4cded298907075cd772e4edec608585acd7b0eab"
+  },
+  {
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/m3/tooling/shared-frontend/recipe-custody/receive.py",
+    "destination": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/receive.py",
+    "preimage": "ABSENT",
+    "sha256": "5d9df3c2623c21c43ade4cbfcbe459026af3983e1d2b21018397dc12e775898a",
+    "git_blob": "d7f5cda465d8f473f4969d4db15d717af1391745"
+  },
+  {
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/m3/tooling/shared-frontend/recipe-custody/ENGINE_SOURCES.tsv",
+    "destination": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/ENGINE_SOURCES.tsv",
+    "preimage": "ABSENT",
+    "sha256": "b2e990a09f2c4b7c355b48cc33a72405829fd009f76d1866153aa07225e6684e",
+    "git_blob": "6d03a0153c494253d73f4d1eb79f78f98dde2187"
+  },
+  {
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/m3/tooling/shared-frontend/recipe-custody/LICENSE.txt",
+    "destination": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/LICENSE.txt",
+    "preimage": "ABSENT",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7"
+  },
+  {
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/m3/tooling/shared-frontend/recipe-custody/NOTICE.md",
+    "destination": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/NOTICE.md",
+    "preimage": "ABSENT",
+    "sha256": "bf0c2580643656f4fb3dec05e4f40dd2041a2a18bedac10857c886b56f95f0b4",
+    "git_blob": "b25920ab343d5f817bc2056770b425b78850e9d1"
+  },
+  {
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/m3/tooling/shared-frontend/recipe-custody/contract/test_prepare.py",
+    "destination": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/contract/test_prepare.py",
+    "preimage": "ABSENT",
+    "sha256": "b91f3081c778cf2ced5a2957709acb0c58f7e4078f2fbf4536bd0b626d8f5973",
+    "git_blob": "4a15e11a1a4e4ae3ebeac46bb8ac81d874f70dd5"
+  },
+  {
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/m3/tooling/shared-frontend/recipe-custody/contract/verify_receiver.py",
+    "destination": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/contract/verify_receiver.py",
+    "preimage": "ABSENT",
+    "sha256": "039ab25b1c45220c6e660a1c99c72bc9e003b2d5040d7a5eefd7afeeb2326516",
+    "git_blob": "774cdc2648c4a1cb6d129fe0085f4021153abd79"
+  },
+  {
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/m3/tooling/shared-frontend/recipe-custody/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+    "destination": "canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
+    "preimage": "ABSENT",
+    "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43",
+    "git_blob": "e69993797978f800a4d1b01b55093dc8dde16514"
+  },
+  {
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/m3/tooling/shared-frontend/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "destination": "canonical/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "preimage": "ABSENT",
+    "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625",
+    "git_blob": "3bdeeaea9a212fe0c7d1f544510f87c4cd49eb40"
+  },
+  {
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/m3/tooling/shared-frontend/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+    "destination": "canonical/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+    "preimage": "ABSENT",
+    "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef",
+    "git_blob": "9d0788d3717e017d58345c5c3e62022c2915a3c8"
+  },
+  {
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/m3/tooling/shared-frontend/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+    "destination": "canonical/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+    "preimage": "ABSENT",
+    "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4",
+    "git_blob": "d24729950508857280ea1b56d4e930f05137ec85"
+  },
+  {
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/m3/tooling/shared-frontend/recipe-custody/sdk-owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+    "destination": "canonical/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+    "preimage": "ABSENT",
+    "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+    "git_blob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db"
+  },
+  {
+    "source": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/M3jdk21/m3/tooling/shared-frontend/recipe-custody/LICENSE.txt",
+    "destination": "proposal/m3/tooling/module-packs/build-support/gradle-provider/LICENSE.txt",
+    "preimage": "ABSENT",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "git_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7"
+  }
+]

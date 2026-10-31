@@ -1,0 +1,180 @@
+{
+  "arrays": {
+    "ctest_passed": 1,
+    "exact36input_equality_supported_reuse": true,
+    "junit_passed": 13
+  },
+  "canonical_evidence_commit": "6c0b31b126c050c1c5b48e7ec51630ef8adef3df",
+  "canonical_evidence_path": "synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027",
+  "canonical_evidence_url": "https://github.com/hsoliwal/com.synexia/tree/6c0b31b126c050c1c5b48e7ec51630ef8adef3df/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017/proofs/viewport-frame-tree-receiving-20261027/assembled",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_source_commit": "7e57e961d4ae02d1aa99199362475c10c7230b82",
+  "decision": "REVIEWABLE_DRAFT_SCOPED_LOCAL_GATES_PASS",
+  "evidence_manifest_sha256": "be001477761e209d3847da6e6361898449b5ffecc71c7d3eb698ba6d11ed3d25",
+  "full_jdk_image": false,
+  "hosted_current_head_ci": "NOT_CLAIMED_BY_LOCAL_EVIDENCE",
+  "jtreg": false,
+  "native_widget_integration": false,
+  "owning_collections": {
+    "checked_jni": true,
+    "frame_fallback_combined_with_tree": false,
+    "kernel_sha256": "5af5cb6fed85fa0803384ec4374be4b96659844bd547788be8805bbfe942635f",
+    "native_arrays_required": true,
+    "receipt_sha256": "51649b1581f711664dd9e00bd6d25c8e6ffb3566d9ac5f97f0cf0cd560cc0ef7",
+    "reports_zip_sha256": "cdc8b5b487b07f17d0d1c97ef5a7279c4cd80fe98d461ee26eb43e4b00b07af6",
+    "results": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 618,
+      "skipped": 2,
+      "suites": 201,
+      "tests": 620
+    },
+    "runtime_sha256": "cb13ffd5cb2023cefc678a63067559b03574e6fee0e5033fab978603d624c5cc",
+    "skipped": [
+      {
+        "class": "com.m3.collections.M3FilteredSplitsMaskSpansTest",
+        "reason": "all-native qualification is an explicit, isolated lane",
+        "test": "allNativeBackendsAreRequiredByTheFullLane"
+      },
+      {
+        "class": "com.m3.collections.M3FilteredSplitsMaskSpansTest",
+        "reason": "native proof requires the explicit checked-JNI runner",
+        "test": "maskSpanCheckedJniOracle"
+      }
+    ],
+    "source_input_count": 735,
+    "source_seal": "db33c0881e2578183dbbed8bb2cfed3f9585b9121ab1ea37c2bb1455f67b1559",
+    "unchanged_after_naming": true
+  },
+  "performance_measured": false,
+  "product_parent": "ca609d9e56df7f9f91a2e01e89a4fd4e6780b4ae",
+  "product_repository": "hsoliwal/M3jdk21",
+  "raw_failure_captures_preserved_in_canonical_evidence": true,
+  "received_outputs": [
+    {
+      "git_blob": "cf168081206b5d98e97999d25b07a7f9c22e778b",
+      "path": ".github/workflows/m3-tree-shift-20261021.yml",
+      "sha256": "ddf5e2cdc8f991bf4d4af32a95ffa42d27cc2d3167b7ac9e95c1ee787eb631d1"
+    },
+    {
+      "git_blob": "80c2e67e3bb06569e1531f92fe05f254613a475e",
+      "path": ".github/workflows/m3-viewport-tree-parent.yml",
+      "sha256": "0ec4ef2c435704de9be8cf641d15ee0e38ce207634059aeb6e03db52b6578df7"
+    },
+    {
+      "git_blob": "eb5f1111a6f3b328bb2fa93f448039a95cafe6f3",
+      "path": ".github/workflows/m3jdk21-tree-plan-commit-identity.yml",
+      "sha256": "5dc65fd77f8ca43e16cb386fe9a01d684cf13bb12de76dcec1b0f3d0674d97dd"
+    },
+    {
+      "git_blob": "5ec57a4effca64b541114aa9375fc78d5c415bdb",
+      "path": "m3/collections/qualification/tree-plan-commit-identity/RECEIVER_RECEIPT.json",
+      "sha256": "f1d550e3192c1c31132ffa0222daae8dc7e5f5a6b5e289ceaa80c2b3b829e92e"
+    },
+    {
+      "git_blob": "b5a5ad87fa2c2a5789fbc46295d4d40f835b2f78",
+      "path": "m3/collections/qualification/tree-plan-commit-identity/test_verify_receipt.py",
+      "sha256": "1074c5923c623d4087ff5099120cd42525c335d2dac9b83b0041d663898c2953"
+    },
+    {
+      "git_blob": "e9c95bcc426c7267dc4f72bb7a2158c46c219196",
+      "path": "m3/collections/qualification/tree-plan-commit-identity/verify_receipt.py",
+      "sha256": "8030b1d76df86319a81bc6252f6d13d947e729143efb0e6709042c7e2a493ffd"
+    },
+    {
+      "git_blob": "ca5bc74d0ae6dcd42f3a319b4c33bef76a4d4d4a",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeCoverageTest.java",
+      "sha256": "68581fef4f8b6a6c240c66decbc57bbc097c188ce04cf90bf56cba52170a4b13"
+    },
+    {
+      "git_blob": "1bf770fee2929533a7ac9478b7c44e8dd3841ad3",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeNativeLifecycleOracle.java",
+      "sha256": "b33d545658ba594703813dd26e83b1e94b403271ad80e1a750245542962c6871"
+    },
+    {
+      "git_blob": "64751e4e64732604d9ff7dc81e489999a5d233f2",
+      "path": "m3/collections/src/test/java/com/m3/collections/M3TreeResidencyTest.java",
+      "sha256": "979d8c1a817979e063b8501049d9d5f921221258384ed1d18f46aacc00d5bbbf"
+    }
+  ],
+  "retirements": [
+    {
+      "old_git_blob": "049dfa7c25899486c55838e3148dd91af62ebe3f",
+      "path": ".github/workflows/m3jdk21-tree-plan-commit-identity-20261027.yml"
+    },
+    {
+      "old_git_blob": "6f088b752df3c085cc2563ef05ecff803c67515d",
+      "path": "m3/collections/algorithm-catalog/tree-plan-commit-identity-20261027.tsv"
+    },
+    {
+      "old_git_blob": "7661bc68afa4d0517875e21cd13bdf5070febc23",
+      "path": "m3/collections/qualification/tree-plan-commit-identity-20261027/RECEIVER_RECEIPT.json"
+    },
+    {
+      "old_git_blob": "5b2273073c01ef7b55501401690fcd709ac227fb",
+      "path": "m3/collections/qualification/tree-plan-commit-identity-20261027/test_verify_receipt.py"
+    },
+    {
+      "old_git_blob": "38fed15ba43617b05e79ab423ed735a1f2c5da7b",
+      "path": "m3/collections/qualification/tree-plan-commit-identity-20261027/verify_receipt.py"
+    }
+  ],
+  "runtime_release_qualified": false,
+  "schema": "M3_TREE_PLAN_EXECUTION_V1",
+  "source_receiving": {
+    "catalogue_content_in_product": false,
+    "datasets": {
+      "vpt-tree-hash-gates-20261027": [
+        2,
+        2,
+        0
+      ],
+      "vpt-tree-legacy-20261027": [
+        1,
+        1,
+        0
+      ],
+      "vpt-tree-naming-20261027": [
+        4,
+        4,
+        0
+      ],
+      "vpt-tree-native-oracle-20261027": [
+        1,
+        1,
+        0
+      ],
+      "vpt-tree-preorder-20261027": [
+        1,
+        1,
+        0
+      ]
+    },
+    "engine": "Original Maven/OpenRewrite engines and original receive.py; actual saved SDK Results only",
+    "new_recipe_or_runtime_owner": false,
+    "retired_exact_historical_paths": 5
+  },
+  "stable_naming": {
+    "baseline": "05e947be6fe9a25d3ca0b4803777beebfb52876a",
+    "checked_paths": 11,
+    "local_proof_commit": "e3d90f72bb07e6e4cb85f4002b193311f1852cb1",
+    "original_public_checker": "m3/compatibility/check_public_names.py",
+    "original_target_verifier_tests_passed": 9,
+    "violations": 0
+  },
+  "tree_focused": {
+    "independent_admission_checks_each": 189,
+    "modes": [
+      "mixed",
+      "Xint"
+    ],
+    "parent_closure_checks_each": 206547,
+    "receipt_sha256": "9d7a843d55b2b8e3b921a578f0639e2d02f984d3ff2876a599b20cafe3021033",
+    "retained_commit_checks_each": 9820,
+    "sibling_shift_checks_each": 2591930,
+    "synthetic_lifecycle_checks_each": 8741899,
+    "synthetic_lifecycle_digest": "5c0e20e9135861ed",
+    "synthetic_lifecycle_frames_each": 6000
+  }
+}

@@ -1,0 +1,11 @@
+priority	owner	state	exit
+P0	migration-recipes gate candidate	IMPLEMENTED_NOT_EXECUTED	Actual compiler/JUnit/OpenRewrite results; resolve every failure
+P0	DB marker oracle correction	RETAINED_PENDING_RUN	All11 DbRecipeTest cases executed
+P0	JEP458 candidate	RECIPE_PROOF_PENDING	All26 outputs and actual modified-JDK product build/jtreg
+P0	entire compatible JEP/non-JEP/tooling catalogue	OPEN	Every accepted change implemented or proven equivalent with dependency closure and tests
+P1	MIndex/M3 String and JNI integration	OPEN	Contract/lifetime/GC/JIT/JNI/CDS and performance proof; no wrapper-only completion
+P1	donor normalization and semantic parser cache	OPEN	Real existing recipe passes, immutable original, full build context and typed residue
+P1	optional JMOD/JavaFX packs	OPEN	Reviewed real artifacts, actual native/image/platform proof
+P1	Synexia Spring-style framework and DB integrations	SEPARATE_OWNER	OrdinaryJava21 applications/templates verified; do not require modified runtime
+P1	whole reactor and99percent coverage	OPEN	Original gates and accurate measured denominators; no exclusions added
+P1	canonical promotion	NOT_PERFORMED	Reviewed serial merge only; no history rewrite

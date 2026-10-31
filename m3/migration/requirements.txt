@@ -1,0 +1,2 @@
+# Tooling only; never a java.base/runtime dependency.
+jsonschema==4.26.0

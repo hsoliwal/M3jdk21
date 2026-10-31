@@ -1,0 +1,155 @@
+{
+  "schema": "M3_JOINED_FRESH_OWNED_RANGE_FUTURE_QUALIFICATION_PLAN_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "license": "Apache-2.0",
+  "state": "SOURCE_ONLY_RUNTIME_INTEGRATION_PENDING",
+  "admissionCommit": "80253b14a14191ad826a5c7c7594100c7c3c588a",
+  "cohorts": [
+    {
+      "name": "original-product",
+      "gitBlob": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+      "bytes": 2634,
+      "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+      "source": "public32152976 actual original58-input closure"
+    },
+    {
+      "name": "qualified-range",
+      "gitBlob": "3edc23c22362b08af00f7332ddc445a0274a6dd4",
+      "bytes": 2919,
+      "sha256": "10ddd082c142420c29985a85d8b2f77507fdbcde2552b8bfc154e658f3b2a9e3",
+      "source": "actual prior Maven emission; this new SDK before/inverse"
+    },
+    {
+      "name": "fresh-owned",
+      "gitBlob": "4f88f794266375ad8174fa56e952c30d32689877",
+      "bytes": 3377,
+      "sha256": "d69ef5cc0e4bd5d95808978b4a0d73982322230a623d897074840b58fab1993e",
+      "source": "New source proposal; not yet Java/Maven/runtime qualified"
+    }
+  ],
+  "sdkFixture": {
+    "semanticCohorts": [
+      "qualified-range",
+      "fresh-owned"
+    ],
+    "compileVariants": 4,
+    "compiledThenRejectedMutants": [
+      "full-return-this",
+      "absolute-prefix-ends"
+    ],
+    "productOriginalBaseline": "not silently relabelled as qualified-range"
+  },
+  "frozenOriginals": {
+    "buildInputs": {
+      "path": "verification/ORIGINAL_BUILD_INPUTS.json",
+      "gitBlob": "921d708e2a0f1f1c43e95989ea9e37e02e22790a",
+      "sourceEntries": 58,
+      "originalJoinedGit": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597"
+    },
+    "proof": {
+      "path": "verification/M3JoinedRangeProof.java",
+      "gitBlob": "833b13b220110b6942277c2b8b8a4fd78ce9e285",
+      "directories": 118,
+      "cases": 4026,
+      "backingUnits": 7424,
+      "jvmModes": [
+        "jit",
+        "int",
+        "nocompact",
+        "c2"
+      ]
+    },
+    "qualifier": {
+      "path": "verification/frozen/qualify.py.txt",
+      "gitBlob": "214017285242d75cb78b7fb5392243fb2d5b018e",
+      "disposition": "Frozen reference only. It assumes original cc3c in its58-input closure and must not be repinned or run as if3edc were that original."
+    }
+  },
+  "requiredBeforeRuntime": [
+    "Root source review and exact new receiving/source binding admission",
+    "Original58-input closure remains literal and immutable; each non-original cohort overlay must be explicit and only Joined source differs",
+    "Build original83-class core and original16 programs on all admitted cohorts, in all four JVM modes",
+    "Run unchanged original118-directory/4026-case/7424-backing-unit proof before timing; equality includes invalid exception messages and backing coordinates",
+    "Validate actual new Maven emissions, ownership proof and both compiled behavioral mutant refusals"
+  ],
+  "measurements": {
+    "originalCombinedWorkload": "Run exact frozen M3JoinedRangeProof benchmark without removing endpoint/sink work or any guard; preserve every15-case raw row.",
+    "diagnostics": {
+      "path": "verification/M3JoinedFreshRangeWorkload.java",
+      "modes": [
+        "construction",
+        "endpoints"
+      ],
+      "fullLeafCounts": [
+        1024,
+        8192
+      ],
+      "iterations": 1024,
+      "warmup": 128,
+      "interpretation": "Diagnostic decomposition only; construction times subSequence+volatile publication, endpoints times3 length/two charAt+volatile publication of a prebuilt view. Outside-loop correctness remains required."
+    },
+    "counterbalancedForkBlocks": [
+      [
+        "original-product",
+        "qualified-range",
+        "fresh-owned"
+      ],
+      [
+        "fresh-owned",
+        "qualified-range",
+        "original-product"
+      ],
+      [
+        "qualified-range",
+        "fresh-owned",
+        "original-product"
+      ],
+      [
+        "original-product",
+        "fresh-owned",
+        "qualified-range"
+      ],
+      [
+        "fresh-owned",
+        "original-product",
+        "qualified-range"
+      ],
+      [
+        "qualified-range",
+        "original-product",
+        "fresh-owned"
+      ]
+    ],
+    "forkMeaning": "Six fresh counterbalanced triplets give six matched pairs for each contrast; original product is an explicit third reference. Diagnostic mode/size isolated per fork; original combined harness remains unchanged and full-last.",
+    "hypotheses": [
+      "Touched range construction currently repeats snapshot/count/fill work; fresh private arrays may remove redundant reference arrays and passes.",
+      "Timing cause/JIT/inlining/GC attribution is unmeasured; raw full-range regressions are real observations with noisy ranges, not erased by an allocation result."
+    ],
+    "reporting": [
+      "Keep raw samples, all ratios and paired ratios distinct",
+      "Record JVM mode/options and compilation/GC observations if available under measured output budget",
+      "Repeat or broaden only for an unresolved concern; no adaptive passing-threshold retries",
+      "Report unchanged payload retained by touched owners separately from directory allocation",
+      "No claim of speedup, full-JDK qualification or default promotion without actual admitted execution"
+    ]
+  },
+  "limits": {
+    "noNewWorkflow": true,
+    "noRunDispatched": true,
+    "noPublicBranchUpdate": true,
+    "noProductOwnerApplication": true,
+    "noLocalWrites": true,
+    "plannedOutputBudgetBytes": 536870912,
+    "minimumDestinationFreeAfterPlannedOutputBytes": 8589934592,
+    "existingStorageProtection": "ACTIVE"
+  },
+  "execution": {
+    "python": "NOT_RUN",
+    "maven": "NOT_RUN",
+    "java": "NOT_RUN",
+    "requiredAutoreviewHelper": "NOT_RUN_LOCAL_BULK_HOLD",
+    "performanceRetentionQualified": false,
+    "fullJdkQualified": false,
+    "defaultPromotion": false
+  }
+}

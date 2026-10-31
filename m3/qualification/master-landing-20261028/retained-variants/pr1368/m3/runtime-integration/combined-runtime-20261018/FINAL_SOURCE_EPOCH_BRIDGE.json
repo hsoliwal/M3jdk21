@@ -1,0 +1,15 @@
+{
+  "schema": "M3_FINAL_SOURCE_EPOCH_BRIDGE_V1",
+  "observed_local_head": "e7257347bc3d473bd9fcab7f5003489e7fec38c5",
+  "image_source_epoch": "c857a9ecf07270e9cd0b199221fd9d1d8d8aa744",
+  "image_src_tree": "90475252a619e7fc5cb70a27e81f185da3b0077d",
+  "image_make_tree": "8189902841959a63cde88a04f33f61cc16f1ae68",
+  "qualified_sparse_test_epoch": "225c488f9b39d4534fe19cd2d72be1130875fb10",
+  "test_tree": "6057fcef0c0648c8279cdadbeda501dc44b7c8a9",
+  "collection_production_tree": "bec5ce0b37f2828d116b589d17714d1cd8e6ce2c",
+  "production_image_src_make_equal": true,
+  "tests_equal_sparse_epoch": true,
+  "all148_current_mapping_tested_paths_match": true,
+  "mapping_closure_sha256": "7536a446621d9c6c9ef5423d9cf0d8f690eeb12d2227a7e0af1dc8f88aabccac",
+  "source_closure_rows": 60
+}

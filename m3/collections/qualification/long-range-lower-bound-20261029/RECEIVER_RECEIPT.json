@@ -1,0 +1,75 @@
+{
+  "schema": "M3_COLLECTION_RESULT_RECEIPT_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "source_input_anchor": "238629e4c65339986f6f792f7f0a364fd45336eb",
+  "target_repository": "hsoliwal/M3jdk21",
+  "source_recipe_identity": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "source_dataset": "m3jdk21-long-range-add-lower-bound-20261029",
+  "receipt_recipe_identity": "com.synexia.m3.LongRangeLowerBoundReceipt20261029",
+  "execution_lane": "MAVEN_OPENREWRITE_SDK",
+  "receiving_status": "DRAFT_UNMERGED",
+  "release_ready": false,
+  "outputs": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java",
+      "before_sha256": "8aa30b4b23c638b53f5fe9e6f895bb3205a51af1df0bf2afdefb38d4c21ab090",
+      "after_sha256": "5f27cf511fc15614be6cb9776c632688fb270e1a6acdf99cd1360791244500dd",
+      "kind": "GENERATED_SOURCE"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongRangeSetInsertionContractTest.java",
+      "before_sha256": "ABSENT",
+      "after_sha256": "8cf7d3e258dde75780f7bda881f694cbbc6b84b48f01980df3141cfc15ee6b36",
+      "kind": "GENERATED_TEST"
+    }
+  ],
+  "qualification": {
+    "source_sdk_tests_passed": 9,
+    "target_junit_tests_passed": 9,
+    "public_protected_descriptors": "EQUAL",
+    "source_fixed_point": "PASS",
+    "source_drift_refusal": "PASS",
+    "scope": "bounded exact-owner qualification; counts are unique test methods, not repeated mode runs",
+    "component_evidence": {
+      "path": "synexia-openrewrite-recipes/crates/m3jdk21-long-range-add-lower-bound-20261029/qualification/20261029-executed/RESULTS.json",
+      "sha256": "d767c762d2e2bc66bd168ae7863627210714aa34bfc934238049a7eb2a9228cb"
+    },
+    "combined_receiver": {
+      "scope": "COMBINED independent range and frozen outputs; not a claim that either receiver alone ran the composed proof",
+      "evidence": "synexia-openrewrite-recipes/crates/m3jdk21-long-range-add-lower-bound-20261029/qualification/combined-receiver-20261029/EXACT_RESULTS.json",
+      "evidence_sha256": "a7e7bb2416efd82be83eb293ca83b5082af69c07fc0177a656fb98a0326179d5",
+      "target_base": "052ebcf7a26352c0285251eb671ee6c3640fd3ff",
+      "main_compilation_units": 319,
+      "unique_jupiter_tests": 15,
+      "modes": [
+        "normal",
+        "-Xint"
+      ],
+      "range_oracle_operations": 64000,
+      "range_oracle_assertions": 861432,
+      "post_run_main_source_identity_check": "317_PASS",
+      "main_compiler_flags": [
+        "--release",
+        "21",
+        "-proc:none",
+        "-Xlint:all,-module",
+        "-Werror"
+      ],
+      "full_module_suite": "PENDING"
+    },
+    "target_jupiter_baseline_passed": 9,
+    "target_jupiter_candidate_passed": 9
+  },
+  "naming": {
+    "public_names": "UNCHANGED",
+    "mapping_promotion": "DEFERRED",
+    "jdk_class_promotion": "NONE"
+  },
+  "remaining_gates": {
+    "full_sdk_and_jtreg": "PENDING",
+    "full_provenance_aggregate": "PENDING",
+    "native_platform_matrix": "PENDING",
+    "hosted_ci": "PENDING",
+    "representative_performance_acceptance": "HOLD"
+  }
+}

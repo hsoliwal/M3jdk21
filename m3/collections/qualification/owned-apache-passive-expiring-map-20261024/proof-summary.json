@@ -1,0 +1,12 @@
+{
+  "owner": "com.m3.collections.apache.M3PassiveExpiringMap",
+  "provider_contract": "org.apache.commons.collections4.map.PassiveExpiringMap (Commons Collections 4.5.0)",
+  "inventory_row": "DONE #1913",
+  "source_sha256": "600b4921d7189f347829734b1604804bcf46b7e7123ebbc400869b55cbd46278",
+  "index_source_sha256": "f44daa1bd856b555228e703ad243d148c0a61acc983875c4721e0e1eab387aea",
+  "scaffold_preimage_sha256": "0d0ee9db03ca3a54d3a99bfd89050148bdb07bbcee6231db475f16139580b056",
+  "module_tests": {"tests": 51, "failures": 0, "differential_operations": 100000, "differential_checks": 1100220, "serialization_round_trips": 2201, "ring_steps": 83892, "heap_steps": 16108},
+  "coverage": {"tool": "JaCoCo 0.8.12", "classes": 11, "line": "689/689", "branch": "328/328", "gate": "CLASS LINE and BRANCH COVEREDRATIO >= 0.99"},
+  "environment": "local Windows 11, JDK 21.0.9, Maven offline; hosted CI not run",
+  "not_claimed": ["Commons serialized form compatibility", "performance comparison (JMH sources only)", "thread safety", "JNI path"]
+}

@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "canonical_destination": "hsoliwal/com.synexia:synexia-openrewrite-recipes/recipes/m3jdk21-integrated-utilities-20261018",
+  "target_proof_mirror": "m3/tooling/integrated-utilities/recipe",
+  "runtime_dependency": false,
+  "engines": [
+    {
+      "name": "M3GpuToolJoinManifest.java",
+      "source_repository": "hsoliwal/M3jdk21",
+      "source_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "source_path": "m3/collections/recipes/sdk-family-names-20261017/src/main/java/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "source_git_blob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+      "action": "EXACT_UNCHANGED_EXISTING_SYNEXIA_ENGINE_MIRROR",
+      "license": "Apache-2.0",
+      "lineage_limit": "This pin authenticates the existing target proof mirror; no uninspected original canonical revision is invented."
+    },
+    {
+      "name": "M3GpuToolJoinRecipe.java",
+      "source_repository": "hsoliwal/M3jdk21",
+      "source_revision": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+      "source_path": "m3/collections/recipes/sdk-family-names-20261017/src/main/java/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "source_git_blob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+      "action": "EXACT_UNCHANGED_EXISTING_SYNEXIA_ENGINE_MIRROR",
+      "license": "Apache-2.0",
+      "lineage_limit": "This pin authenticates the existing target proof mirror; no uninspected original canonical revision is invented."
+    }
+  ]
+}

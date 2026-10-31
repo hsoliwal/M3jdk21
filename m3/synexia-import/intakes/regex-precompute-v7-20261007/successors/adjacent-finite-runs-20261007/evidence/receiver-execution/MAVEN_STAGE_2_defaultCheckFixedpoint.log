@@ -1,0 +1,16 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----< com.synexia.recipes:synexia-m3jdk-regex-adjacent-finite-runs >----
+[INFO] Building synexia-m3jdk-regex-adjacent-finite-runs 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- exec:3.5.0:java (replay-exact-regex-adjacent-finite-runs) @ synexia-m3jdk-regex-adjacent-finite-runs ---
+RECIPE base=d6d03f3ac3fa0f2831db463715dc7a7ac3a88dae manifest=c460929619e876fb0c96a90fbe62383157ccc872d9ef5d9947e5cd74e5937b9c changes=0 applied=false promotionAuthority=false
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.265 s
+[INFO] Finished at: 2026-10-08T05:18:48+05:30
+[INFO] ------------------------------------------------------------------------

@@ -1,0 +1,79 @@
+{
+  "schema": "M3_RECIPE_FIXED_POINT_REPAIR_V1",
+  "source_repository": "hsoliwal/M3jdk21",
+  "source_pull_request": 1626,
+  "source_head": "a1625a116e025fad667eac51be42cd613ef867f1",
+  "recipe": "com.m3.rewrite.backport.M3FileByteEventFactRecipe",
+  "recipe_before_git_blob": "d4763cf1db02b9572a2237af0aae67dd577c6e54",
+  "recipe_before_sha256": "b5200cf3f29560df5262008b030a2791d3ac5151185fa019b29e52c5af5e8780",
+  "recipe_after_git_blob": "01abe6b04ae25152aaf90c3f99db92f5d0774bef",
+  "recipe_after_sha256": "008d3b6a9a9008368a19b710568cec67a2e07b7b7b77082eeb93d9f2c1856e6b",
+  "regression_test": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3FileByteEventFactRecipeTest.java",
+  "regression_test_sha256": "0e83aefa3f81f3ba866ab1b26e4ea090bddc87a51bc0757d7b52850ddcee9cdd",
+  "atom": "Classify each observed target as exact BEFORE, exact AFTER, or unknown.",
+  "pattern": "Transform BEFORE, retain the original SourceFile for AFTER, refuse unknown source.",
+  "observed_failure": "Original fixed-point test failed with IllegalStateException preimage drift on exact AFTER source.",
+  "correction": "Admit only the existing pinned AFTER hash in addition to BEFORE and return already-transformed SourceFile unchanged.",
+  "proof": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "product_postimages": "All existing resources and product hashes unchanged.",
+  "ownership": "JDK_TARGET_SPECIFIC_EXISTING_OWNER",
+  "delivery_pull_request": "https://github.com/hsoliwal/M3jdk21/pull/1625",
+  "delivery_preimage_readback": {
+    "branch": "m3/m3string-leaf-cursor-convergence-20261021",
+    "head": "60c173bed56b91e38bd730b6cf2355fc47a5f84a",
+    "rows": [
+      {
+        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3StringLeafCursorConvergenceRecipe.java",
+        "expected_sha": "5b06cfb0683d07ee937b7a3cff88ab09ae89bf8f",
+        "actual_sha": "5b06cfb0683d07ee937b7a3cff88ab09ae89bf8f",
+        "status": "EXACT_PREIMAGE_CURRENT"
+      },
+      {
+        "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3StringLeafCursorConvergenceRecipeTest.java",
+        "expected_sha": "308dc85dae1861882bf0454543310439f14243bb",
+        "actual_sha": "308dc85dae1861882bf0454543310439f14243bb",
+        "status": "EXACT_PREIMAGE_CURRENT"
+      },
+      {
+        "path": "m3/tooling/migration-recipes/tasks/m3string-leaf-cursor-20261021/RECIPE_MEMORY.tsv",
+        "expected_sha": "79d72e466f43680333a345cacc446c95b3255606",
+        "actual_sha": "79d72e466f43680333a345cacc446c95b3255606",
+        "status": "EXACT_PREIMAGE_CURRENT"
+      },
+      {
+        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3FileByteEventFactRecipe.java",
+        "expected_sha": "d4763cf1db02b9572a2237af0aae67dd577c6e54",
+        "actual_sha": "d4763cf1db02b9572a2237af0aae67dd577c6e54",
+        "status": "EXACT_PREIMAGE_CURRENT"
+      },
+      {
+        "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3FileByteEventFactRecipeTest.java",
+        "expected_sha": "6fe7dc06f66a48c87a6db6e30e6df86d7b1897af",
+        "actual_sha": "6fe7dc06f66a48c87a6db6e30e6df86d7b1897af",
+        "status": "EXACT_PREIMAGE_CURRENT"
+      },
+      {
+        "path": "m3/tooling/migration-recipes/tasks/m3file-byte-event-fact-20261021/RECIPE_MEMORY.tsv",
+        "expected_sha": "3556d941faf93ed8bf2853a8849e7f9732f39940",
+        "actual_sha": "3556d941faf93ed8bf2853a8849e7f9732f39940",
+        "status": "EXACT_PREIMAGE_CURRENT"
+      }
+    ]
+  },
+  "evidence": {
+    "original-sdk-tests.log": "768fb45180188a2cde74ee1af0a2c9556bc85128fec51718ce3143b0b1dfc9f2",
+    "qualified-sdk-tests.log": "aee79b7686ee1c81dbc0cbef8b04e4b2a713b9b573a01e3e6d5e3450bc3c1793"
+  },
+  "limitations": [
+    "Full JDK build",
+    "jtreg",
+    "JNI/runtime",
+    "Full migration recipe reactor"
+  ],
+  "scope": "Existing recipe state classification only; no claim of new full-JDK or runtime qualification."
+}

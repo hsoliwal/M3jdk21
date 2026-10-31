@@ -1,0 +1,10 @@
+path	sha256	git_blob	mode	pr	note
+m3/docs/name-mapping.d/m3fs-directory-name-prefix-20261022.json	65d7337073fa1d62a63a45e326e23dbd2d15619a3e43c4f02eef8bc731ff1019	9ce4382a841599806cc14a2df2fcadcc0e632ba0	100644	1836	PR version, not live
+m3/fs/qualification/name-prefix-index-20261022/GATES.tsv	4b672b4ae02b477c0911ecc4df079f00f94d30bd0d4238024d306315cb2ef700	76cd75f43c6eb1172481996ea8aca56b7dbd17c2	100644	1836	PR version, not live
+m3/fs/qualification/name-prefix-index-20261022/README.md	b8c090b392ea44fcf2f0ab9c804da54e973d75d1042e9a1806a67cb296368cec	3029f34bb62013da66ccd0cc8db53e38e247f896	100644	1836	PR version, not live
+m3/fs/qualification/name-prefix-index-20261022/RECEIVED_DONORS.tsv	97034e9820ad21dbc32631bdce2205c1e07014bdf2d96bad82b074519f545d46	8e34a66d485f8b057077aa3f126154a8693f0354	100644	1836	PR version, not live
+m3/fs/qualification/name-prefix-index-20261022/USE_CASES.tsv	7e6db9fc1f0585c7c6fef38af42597d32281ec5214a7cae00441505a1454d70f	d12f1a34a1ceeea536c85f98e5f49332b6deae42	100644	1836	PR version, not live
+m3/fs/qualification/name-prefix-index-20261022/verify_received_blobs.py	717c1b3fe651f0e9e6c87f3e75661388426b6e3c1030814e4ada1c7837a7c5a6	ea95c8c0acba26d40ff56ecbac3a18e3f0db5210	100644	1836	PR version, not live
+m3/fs/src/main/java/com/m3/fs/M3DirectoryTable.java	15c1f23b201f76afa6e29e29583ac3c67060042f35154c2794c55c92e9620201	088584cc379c7ddb2c4b0ac86a7742b19b6a44bc	100644	1836	PR version, not live
+m3/fs/src/test/java/com/m3/fs/M3DirectoryNameIndexContract.java	6a254131a49f76700520f471cde0f82d35c058b1bdda3a7128920fc6aea1bfdb	e14622f52ce0ad42ef10518965db43baa67ee281	100644	1836	PR version, not live
+m3/fs/src/test/java/com/m3/fs/M3DirectoryNameIndexTest.java	2635d9c5557f45be87cc287007c7e946f92d27eb5938c201ce33c7b6c7cb90d3	21b6bcf5468da8dd5e4adf434633c1105c7a573d	100644	1836	PR version, not live

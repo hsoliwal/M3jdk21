@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.SpringSingleValueViewWiden20261019
+displayName: Widen the owned M3 Spring single-value view target to any list-valued map
+description: Replaces the exact master M3SingleValueMapView preimage (target typed M3MultiValueMap) with the exact widened postimage (target typed Map<K, List<V>>), or accepts the postimage unchanged. PlainText execution establishes source custody; view behavior is qualified by the Spring owner self-test and the widening discriminator.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: spring-single-value-view-widen
+      lst: false

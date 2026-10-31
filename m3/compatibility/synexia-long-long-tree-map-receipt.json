@@ -1,0 +1,102 @@
+{
+  "schema": "M3JDK21_SYNEXIA_LONG_LONG_TREE_MAP_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-long-long-tree-map-20261017",
+    "pullRequest": 12328,
+    "commit": "5a749d03ece3e70004013f4890c95feace15c78a",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.LongLongTreeMap",
+    "crate": "m3-long-long-tree-map",
+    "fossReuseDecisionRow": "collections.long-long-tree-map-20261017",
+    "donors": [
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongLongSortedMap.java",
+        "blob": "c37609d444f6a3200c018604719e2246cadc65a0",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3LongLongTreeMap",
+        "mechanics": "sorted parallel long[] key/value lanes, binary search + arraycopy single updates, one-pass sorted batch merge (last value wins), navigation with caller default, explicit trimToSize"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/LongLongSortedMap.java",
+        "blob": "d74093988b4610b7130414c527b309494de98689",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3LongLongSortedMap",
+        "mechanics": "sorted primitive long-to-long map contract; filterInPlace(LongLongPredicate) not ported"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/LongLongConsumer.java",
+        "blob": "cd7ed4a37e0e2122a7a39713ec78865f1ad3c46c",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3LongLongConsumer",
+        "mechanics": "already present in master; reused as the forEach and range consumer"
+      },
+      {
+        "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedSupport.java",
+        "blob": "a7135d8123a41a949b15e5f969e78a1053c3e4c8",
+        "developCommit": "11c94feb18155a53cc213708c353791132edc4a7",
+        "target": "com.m3.collections.M3LongLongTreeMap",
+        "mechanics": "growArrayCapacity only: 1.5x growth, floor eight, Integer.MAX_VALUE - 8 ceiling"
+      }
+    ],
+    "notInlined": [
+      "synexia-common/src/main/java/com/synexia/common/collections/PackedSortedPageRebalanceAtoms.java (552978ba0c1dc11871f0ee90bc77042014c857f8, Abseil-derived page rebalance atoms): the donor map does not delegate to it",
+      "synexia-common/src/main/java/com/synexia/common/collections/PackedLongSortUtil.java (79bc5978afcc6ddb2ee3790c6223daa15f135eb1): the donor map does not delegate to it",
+      "PackedLongPairs range holder and LongLongPredicate/filterInPlace: range is a fail-fast forEachInRange walk; no M3 two-long predicate exists in master"
+    ],
+    "license": "Apache-2.0 first-party",
+    "disposition": "ADAPT: M3 naming; M3LongLongSortedMap contract interface named after the master sibling M3LongSortedSet; fail-fast modCount on walks and key iterator; pollFirstKey/pollLastKey and forEachInRange added; eight-slot capacity floor; the sorted-lane algorithm is the donor's and no new tree was introduced; donors import only java.*"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "owners": [
+      "com.m3.collections.M3LongLongSortedMap",
+      "com.m3.collections.M3LongLongTreeMap"
+    ],
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongSortedMap.java",
+      "before": "ABSENT",
+      "after": "71adb1aa511062e14fcfa29dad6b05a37c56cba8ac908c28330235110e953232",
+      "resource": "00-M3LongLongSortedMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongTreeMap.java",
+      "before": "ABSENT",
+      "after": "2673330335f4ea415b49a295d9cde4988c27280b990ab33984a195ca032d5791",
+      "resource": "01-M3LongLongTreeMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3LongLongTreeMapTest.java",
+      "before": "ABSENT",
+      "after": "b6badf452b5e0d25d1996972255143b3a1a8e2aba68a24a6d6ad46feefb42b5e",
+      "resource": "02-M3LongLongTreeMapTest.java.txt"
+    }
+  ],
+  "gates": {
+    "m3CollectionsModuleCompile": "PASS_WINDOWS mvn -o -B -ntp -f m3/collections/pom.xml (-Xlint:all,-module -Werror via pom; 85 sources)",
+    "m3CollectionsModuleTests": "PASS_WINDOWS 159/159 (M3LongLongTreeMapTest 3: 50,000-operation differential vs TreeMap<Long, Long> as NavigableMap incl. navigation, polls, sorted batches, order snapshots, walks vs subMap, growth and compaction; mvn log sha256 f4182f2f5763b38c3939fb675c3f188907830c5efb033e721f906fb7ab72ecee)",
+    "recipeFixedPointAndRefusal": "PASS_WINDOWS Synexia crate test M3LongLongTreeMapRecipeTest 2/2 (generate 3 ABSENT targets, fixed point, foreign-occupant refusal; mvn log sha256 7ac08a9ef2357ba2b28634d81761583a6efe8f6931a1332b6e34a713d9e8aa20; attempts 1-2 BLOCKED_MEMORY by host commit charge)",
+    "gitDiffCheck": "PASS_WINDOWS (git diff --cached --check before each commit)",
+    "offlineCompatibilityCheckers": "PASS: check_synexia_m3_collection_port_recipe.py -> SYNEXIA_M3_COLLECTION_PORT_RECIPE_PIN_PASS (log sha256 6f8c67f4a944b398db527863ca91c871c37d77641044f6da23ddf1eec758417f); check_synexia_m3_family_naming.py -> SYNEXIA_M3_FAMILY_NAMING_RECEIVER_PASS families=9 (log sha256 465cdd77f589f143a798264907efc1074dd06b005c7ec976f169b4a7f969e546)",
+    "atomizePatternize": "J1 lane (Java-only CPU projection); Python atomize_patternize.py NOT_RUN by user rule",
+    "jdkBuildJtregRuntime": "PENDING_LINUX",
+    "ci": "PENDING_QUEUE; m3/collections/verify_donation.py refuses with 'Java source set changed; qualify a successor packet' until a successor installed-source manifest is qualified through synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008"
+  },
+  "semanticDecisions": [
+    "every long is a legal key and a legal value (sorted lane membership, no sentinel); no per-entry node; two parallel long[] lanes only",
+    "put replaces the value of a present key without a structural change; a new key shifts both lanes by arraycopy; putAllSorted refuses unsorted keys or mismatched lengths before any change, collapses duplicate keys (last value wins) and merges in one pass",
+    "floorKey/ceilingKey/lowerKey/higherKey return the caller default when java.util.NavigableMap would return null; firstKey/lastKey/pollFirstKey/pollLastKey throw NoSuchElementException on an empty map; getOrThrow keeps the donor's IllegalArgumentException",
+    "growth is 1.5x with a floor of eight slots; compaction is the explicit trimToSize (order unchanged); clear keeps capacity",
+    "forEach, forEachInRange and the key iterator are fail-fast on structural modification",
+    "the contract interface is named M3LongLongSortedMap after the master sibling M3LongSortedSet (donor LongLongSortedMap); JDK_FAMILY_MAP keeps M3LongLongTreeMap as the TreeMap backend owner",
+    "not a java.util.Map: primitive M3LongLongSortedMap surface only"
+  ]
+}

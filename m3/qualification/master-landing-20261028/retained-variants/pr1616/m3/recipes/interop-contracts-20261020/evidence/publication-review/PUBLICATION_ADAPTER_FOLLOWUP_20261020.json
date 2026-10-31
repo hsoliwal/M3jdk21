@@ -1,0 +1,120 @@
+{
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "created_utc": "2026-10-20T15:07:43.217997+00:00",
+  "reviewer": "/root/correction_memory/interop_semantics",
+  "result": "PASS_NARROW_SOURCE_REVIEW_NO_CONCRETE_ISSUE_FOUND",
+  "scope": "Only latest adapter donor/copy/inherited origin branches and associated finite map custody; no adapter or test execution.",
+  "adapter_sha256": "7bba9ed3f8551a933ffc047c7dc97f0b771cac0028c765b92e8832ecb57a3be2",
+  "origin_map_sha256": "e7ecb0584835a0df0e2cd8b05bf120b7cc3716f838fa9b0f003a808d239f7c2b",
+  "inherited_map_sha256": "4466293bf68e40f9ebff09258f38687ba3cdf0346d7211f025737f221ad0c2fd",
+  "owners": [
+    {
+      "path": "evidence/interop-correction/apache-review/M3ApacheBag.java",
+      "checked_location": "memory_staging_not_yet_canonical",
+      "sha256": "5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f",
+      "classification": "PRESERVED_HISTORY",
+      "source_origin_matches_map": true
+    },
+    {
+      "path": "evidence/interop-correction/independent/M3SpringArrayMultiValueMap.java",
+      "checked_location": "memory_staging_not_yet_canonical",
+      "sha256": "8062247a92ee9dc90d313b715ba9158e47c53b3e7848508a5fdd54ddaaaecb96",
+      "classification": "PRESERVED_HISTORY",
+      "source_origin_matches_map": true
+    },
+    {
+      "path": "evidence/interop-correction/owner-sources/M3ApacheBag.java.txt",
+      "checked_location": "memory_staging_not_yet_canonical",
+      "sha256": "5ff51272c4fd48ef11a09b9138ac2329392bb2a70e2a4fe43fab2889909d224f",
+      "classification": "PRESERVED_HISTORY",
+      "source_origin_matches_map": true
+    },
+    {
+      "path": "evidence/interop-correction/owner-sources/M3ArrayifiedIndexOps.java.txt",
+      "checked_location": "memory_staging_not_yet_canonical",
+      "sha256": "42b3d760c9dfcf30eba72da193159e0ac6bd7ee06a3de292b132f49bd955ea77",
+      "classification": "PRESERVED_HISTORY",
+      "source_origin_matches_map": true
+    },
+    {
+      "path": "evidence/interop-correction/owner-sources/M3FiveLibraryIndexViews.java.txt",
+      "checked_location": "memory_staging_not_yet_canonical",
+      "sha256": "06b7a8ee9064eea7c25254d6b604962e9753f265dd18575fdd219110fc6eca84",
+      "classification": "PRESERVED_HISTORY",
+      "source_origin_matches_map": true
+    },
+    {
+      "path": "evidence/interop-correction/owner-sources/M3IndexMaskCompactor.java.txt",
+      "checked_location": "memory_staging_not_yet_canonical",
+      "sha256": "13cf1e5c20a184869de3044f83cbb87e9f5e0e1ac60eaf28d01623be544fd924",
+      "classification": "PRESERVED_HISTORY",
+      "source_origin_matches_map": true
+    },
+    {
+      "path": "evidence/interop-correction/owner-sources/M3IndexPathMasks.java.txt",
+      "checked_location": "memory_staging_not_yet_canonical",
+      "sha256": "33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577",
+      "classification": "PRESERVED_HISTORY",
+      "source_origin_matches_map": true
+    },
+    {
+      "path": "evidence/interop-correction/owner-sources/M3LibraryBindings.java.txt",
+      "checked_location": "memory_staging_not_yet_canonical",
+      "sha256": "46e13c91b108ccb886fa14c6df4a363488f12a35d4fef55c78fee51ac789edcd",
+      "classification": "PRESERVED_HISTORY",
+      "source_origin_matches_map": true
+    },
+    {
+      "path": "evidence/interop-correction/owner-sources/M3LibraryCollections.java.txt",
+      "checked_location": "memory_staging_not_yet_canonical",
+      "sha256": "bdd58a73f64875bc7f523901f72be318d1c9a63bab1a98f01d07d38597733b02",
+      "classification": "PRESERVED_HISTORY",
+      "source_origin_matches_map": true
+    },
+    {
+      "path": "evidence/interop-correction/owner-sources/M3SpringArrayMultiValueMap.java.txt",
+      "checked_location": "memory_staging_not_yet_canonical",
+      "sha256": "8062247a92ee9dc90d313b715ba9158e47c53b3e7848508a5fdd54ddaaaecb96",
+      "classification": "PRESERVED_HISTORY",
+      "source_origin_matches_map": true
+    }
+  ],
+  "inherited": [
+    {
+      "path": "upstream-host/NOTICE.md",
+      "sha256": "bab2ebb9b20d46d60ed367472e4610085c2151f0fa644f9cdc71879232c9884b",
+      "matches_main_canonical_source": true,
+      "classification": "PRESERVED_HISTORY"
+    },
+    {
+      "path": "provenance/inherited/PUBLIC_ENGINE_PREEXISTENCE.json",
+      "sha256": "112a5be772cf92c9b5b219e6a6f5aa211ee57dcf217590bdcaaf1adb674f8cf1",
+      "matches_main_canonical_source": true,
+      "classification": "PRESERVED_HISTORY"
+    },
+    {
+      "path": "catalogue/inherited/PROBLEMS_20261020.tsv",
+      "sha256": "08fd0118e0a3f1225846e52ac07d1c0ef1bce99704806af791f8dc165d020ea9",
+      "matches_main_canonical_source": true,
+      "classification": "PRESERVED_HISTORY"
+    },
+    {
+      "path": "catalogue/inherited/INHERITED_LOOKUP_PROVENANCE.tsv",
+      "sha256": "e50ed945f9d64519744945895af73b0df57039d3079d603d59f4929c963997cf",
+      "matches_main_canonical_source": true,
+      "classification": "PRESERVED_HISTORY"
+    }
+  ],
+  "findings_resolution": {
+    "IPR-1": "Resolved by the retained exact Spring donor disassembly and LICENSE/NOTICE branches.",
+    "IPR-2": "Resolved: exact ten-path map hash and uniqueness/presence guards precede generic evidence; every copied owner is hash checked and retains its exact target origin, including received d1b9 M3IndexMaskCompactor.",
+    "inherited_four": "Resolved: the four existing canonical source copies enter the explicit preserved-history branch before generic metadata. Blob/SHA/repository/revision are checked; canonical source path is retained. All four currently match main canonical bytes.",
+    "profile_header": "Canonical header observed in staging"
+  },
+  "limits": [
+    "No publication adapter, Maven, SDK, receiver or unchanged-checker projection executed.",
+    "Publication remains subject to final packet freeze and its owning gates."
+  ],
+  "prior_review": "PUBLICATION_ADAPTER_REVIEW_20261020.json"
+}

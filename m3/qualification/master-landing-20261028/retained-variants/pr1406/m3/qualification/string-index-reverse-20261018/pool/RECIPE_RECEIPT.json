@@ -1,0 +1,27 @@
+{
+  "schema": "M3_CANONICAL_RECEIVER_PUBLICATION_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_commit": "1124f5b72744b306884beedebafd8558d49d4c4c",
+  "canonical_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12403",
+  "recipe": "com.synexia.m3.StringPoolIndex20261018",
+  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-string-pool-index-20261018",
+  "source_seals_sha256": "4970105c342cf9eb5fc06ffe2aaaeb8327c29c937cdb847a5a779ef607fc4d3e",
+  "received_target_count": 8,
+  "canonical_sdk_tests_passed": 5,
+  "receiver_readback": "f6e5ef047be62c8e5f8459fb3e9b31545894229d4e0b8a038404f6c4c3db83d4",
+  "code_bytes_match_final_receiver": true,
+  "qualification_status": "BASELINE_BLOCKED_PENDING_SEPARATE_GATE_REPAIR",
+  "evidence": {
+    "canonical_crate": "https://github.com/hsoliwal/com.synexia/tree/1124f5b72744b306884beedebafd8558d49d4c4c/synexia-openrewrite-recipes/recipe-crates/m3-string-pool-index-20261018",
+    "catalogue": "https://github.com/hsoliwal/com.synexia/blob/1124f5b72744b306884beedebafd8558d49d4c4c/synexia-openrewrite-recipes/catalogs/m3-string-index-reverse-20261018.md",
+    "primary": "https://github.com/hsoliwal/com.synexia/blob/1124f5b72744b306884beedebafd8558d49d4c4c/synexia-openrewrite-recipes/recipe-crates/m3-string-index-reverse-20261018/evidence/pool/baseline-gate-assessment/ASSESSMENT.md"
+  },
+  "notes": [
+    "Strict compilation of 15 actual M3String owners and two new jtreg fixtures passed.",
+    "Complete source gate reproduces pre-existing baseline drift; matched image and candidate jtreg runtime were not run.",
+    "Candidate-level preparation accepted pristine code and rejected 29 source mutations; later received runtime stages stopped at the complete gate."
+  ],
+  "receipt_role": "Generated publication custody metadata. This file is not a transformation engine, runtime input, or admission/phase-advancement authority."
+}

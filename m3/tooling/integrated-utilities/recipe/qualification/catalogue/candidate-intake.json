@@ -1,0 +1,2346 @@
+{
+  "baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "supersedes": "/dev/shm/m3jdk21-work/catalogue-intake.json",
+  "candidate_root": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates",
+  "target_files": [
+    {
+      "path": "m3/docs/name-mapping.json",
+      "candidate_file": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates/m3/docs/name-mapping.json",
+      "before_sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+      "after_sha256": "2bb378d4e2af9c0bf62482182acdf53f1919abe16e6146195d38d9bcfc6ab9d7",
+      "bytes": 405195
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
+      "candidate_file": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates/m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json",
+      "before_sha256": "ABSENT",
+      "after_sha256": "0271ca2761cb871091fb22c5d7989ff11822ff2deb65d67d2c58080878948ff5",
+      "bytes": 105339
+    },
+    {
+      "path": "m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md",
+      "candidate_file": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates/m3/docs/INTEGRATED_UTILITY_COVERAGE_20261018.md",
+      "before_sha256": "ABSENT",
+      "after_sha256": "301320272695a993769df1164709d2c5fbe469e45543139ecbbece8bf824fbf2",
+      "bytes": 22982
+    },
+    {
+      "path": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
+      "candidate_file": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
+      "before_sha256": "ABSENT",
+      "after_sha256": "f123ae356ffdd5df1523205dc5f1f48e6daf461b8a6f908a9870e348e80f5e7f",
+      "bytes": 17852
+    },
+    {
+      "path": "m3/compatibility/check_integrated_utility_coverage.py",
+      "candidate_file": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates/m3/compatibility/check_integrated_utility_coverage.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "75a089b2ef4bce9beb75f88869c4f613c530df528c872af33df9e8440914d9c1",
+      "bytes": 28889
+    },
+    {
+      "path": "m3/compatibility/test_integrated_utility_coverage.py",
+      "candidate_file": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates/m3/compatibility/test_integrated_utility_coverage.py",
+      "before_sha256": "ABSENT",
+      "after_sha256": "e783a54fcd7430755874e55dd2af19530d217084a76d61d845ab14f3c1069f5f",
+      "bytes": 10084
+    },
+    {
+      "path": "m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json",
+      "candidate_file": "/dev/shm/m3jdk21-work/catalogue-expanded-candidates/m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json",
+      "before_sha256": "ABSENT",
+      "after_sha256": "7ec04178398539f8f27459d0d754a294af275f5469fcfa51db6ce58d872d47b1",
+      "bytes": 347799
+    }
+  ],
+  "baseline_atoms": [
+    {
+      "path": "m3/collections/algorithm-catalog/sdk-family-names-20261017.tsv",
+      "git_blob": "3bdbe421e0954db6f75b019b8c2196f74305c2d2",
+      "sha256": "e316251a7daf20a6b22db9f18e733c733386385b75f61377d8a8b0ca8be75a08"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
+      "git_blob": "af9a82214a62eff0f9194d6a95179829b6f57b4e",
+      "sha256": "c1ae229f00911e0881de9cae102f2c65f0f7f9f8eb4da1abd364a816dd84ee0d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
+      "git_blob": "e094fdde4a153eab2d1a125785bc55c68187bbd1",
+      "sha256": "b2dc49d3a9ec43b6e6bd34cf5c6dac53057cf90f42cc9ed506d54822a760fc2d"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "git_blob": "6ec7a88dafeca87760faee0c808dbd9a93ba1424",
+      "sha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+      "git_blob": "134fb98f8a39969c43fd75338ecb233c5fe49446",
+      "sha256": "477135e13481942fef3b95b96a08d39c9c86dd92a649959c6d035b19b5784031"
+    },
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
+      "git_blob": "aaa74686949de59b44b363741ef1c414fe3e95d0",
+      "sha256": "8610e9fcedcc8eb698acbf3161bca8ea7d16194e61c66915f9e25fe47aae27f7"
+    },
+    {
+      "path": "make/modules/java.base/gensrc/GensrcBuffer.gmk",
+      "git_blob": "ce22230a8e18444ccd597555c71c4a3225f44f75",
+      "sha256": "4832abc991fcf34672dda8c670c0de8f01178c8ca32bafea05a04204d88961a4"
+    },
+    {
+      "path": "make/modules/java.base/gensrc/GensrcCharsetCoder.gmk",
+      "git_blob": "2940ba4231931a797d68972fdd92daeda42c9993",
+      "sha256": "14e59aff235fd58bbb577d6ef2c5dddece4a67456099bcbc811b92cf10224599"
+    },
+    {
+      "path": "src/java.base/share/classes/java/io/InputStream.java",
+      "git_blob": "736b6ebd90435cdbaada40b8982e1f53b14281f1",
+      "sha256": "3f2a8698a8e1dd61500508ecd1c6fec873744699aa2d447bb33ec00ce0f26d1d"
+    },
+    {
+      "path": "src/java.base/share/classes/java/io/ObjectInputFilter.java",
+      "git_blob": "e40a24072060de1807d17fc1cd6bf9d37075c436",
+      "sha256": "15d3d8c1178eab5f5d0db9e37b2469ae11344ef246a8e5651b0bb7f94ef23475"
+    },
+    {
+      "path": "src/java.base/share/classes/java/io/ObjectStreamClass.java",
+      "git_blob": "58841e55afb6661b3901d311fcba6d1f6c896266",
+      "sha256": "7a2d375dbfd1efa6748cfe4ae858cd5e8b6be04f014df812bde3291dbbb2ae81"
+    },
+    {
+      "path": "src/java.base/share/classes/java/io/OutputStream.java",
+      "git_blob": "71c62013c08519e9ea86673e46ea1c209b493c97",
+      "sha256": "a929163b54781939b622e7c6f111f24bea541aa2f6d68be38d3ea2b0048a90d1"
+    },
+    {
+      "path": "src/java.base/share/classes/java/io/Reader.java",
+      "git_blob": "b29a8c05f970bfc7d7455b8f079aeda440f4a908",
+      "sha256": "bf7281a2a05e67bad28b9d3e536cf165a3127efd4ddf50d5963b138dbe6b8df9"
+    },
+    {
+      "path": "src/java.base/share/classes/java/io/Writer.java",
+      "git_blob": "4ec95d84a7682d369df6bd2163d19256d4244766",
+      "sha256": "bfd7e7c4c9443823a23cc53094832ca1b694076778c84dbc2773b67aaabe979e"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/AutoCloseable.java",
+      "git_blob": "afb52f124c60e96e055e87c3ece6c43ba2425265",
+      "sha256": "c3b4b865234a0dfb3c974c0001f706d6e05a4d4987063a795a610c9886147b81"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Class.java",
+      "git_blob": "ddc5a55f0b2f51809d00e7b9985668a53740e006",
+      "sha256": "ddf752a34f5a1cb15ffd0e288afa5eef3499c97e0406cb14e4365de69e66bd4a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ClassLoader.java",
+      "git_blob": "079a40accdeb6935ab2d4ec1d63d034a723305b1",
+      "sha256": "d88839317ca579b3c09de71338b07291e881ef5bb354cf2243aa4bc558299fd7"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ClassValue.java",
+      "git_blob": "1ce1c4be0aab2218779ddccee2027c4344b53e73",
+      "sha256": "df341f99d6a8b6ecc53710d3b3565495a6a53f3d5e805547c3d9f43db228c5f9"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Double.java",
+      "git_blob": "01a0fadaad1f901b23c6ede74fe3cab68f125598",
+      "sha256": "67b1cc47b33b99eab0d2f41da98b2d84ebc5e727cac4c09badca043bb5ea2a39"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Float.java",
+      "git_blob": "7eb7cc58771ba0a77e2eb0c085c12ac1e2a8fe5b",
+      "sha256": "cb82e6f79de34e09e62e9be3dfd8c8e180319fce76d34f7769f8689d4920fd24"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Integer.java",
+      "git_blob": "1e136cdde0cae015de1b4d44285fcc2d1f7319df",
+      "sha256": "92a6457c0a88e90a2c6589f6be556639d7a1c32b24bc41f0c6e49ae70f79d6ea"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Long.java",
+      "git_blob": "6db8f8a96c1d7cef9623190845d490df446dd4db",
+      "sha256": "3a3985f52ff781faafe4fe81ba587d9fc05d02d4b7ce3068eda41f7150724fd8"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Math.java",
+      "git_blob": "fd5c8bb0491e6bfd894e3517e73c96f4661b5c06",
+      "sha256": "1264b299cbffe5611764dc9a626f9beb2a02728a1651f3f3fee1e0b767924151"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Module.java",
+      "git_blob": "84da07638c76320f1e3c3016a5ba1e7813a9f50b",
+      "sha256": "c420e6421c44756f2355d6614c31bfda404533a0c1f4f170f439cd43df424f1e"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ModuleLayer.java",
+      "git_blob": "444f8cdeb82f4efef049955454f7c2bc66615837",
+      "sha256": "eff4ab3b69985ec9cccfca39a9c7c6ba3d4944141fd419e632d59cbdf06a6e9a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Process.java",
+      "git_blob": "5b926e35729487d593d4a775f581cf914f39980a",
+      "sha256": "a11aeac21e10ada8b344ad0fdc5486358a008f89390882bcc1822b1799b2f3ac"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ProcessBuilder.java",
+      "git_blob": "e7d5d9debef69484c3bff52c2769a85a2133e324",
+      "sha256": "84c50304cc5ee736def545448b1c31dd5ba4552e04310b40810676f081d21f2c"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ProcessHandle.java",
+      "git_blob": "1704a6da37a509465cd6671c4f8713a93c26e34f",
+      "sha256": "0a54016f3f6ab2735a5c06eec975a6f791e2ab51909ee2f2c2b90e1c0e4e9e95"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/StrictMath.java",
+      "git_blob": "741aa5865982a476027b7ddea80ca341efe467a4",
+      "sha256": "6be0b4ef1629d664134fd9d2972e8454e8cdbfc7331038b7ab601082a8004f88"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/String.java",
+      "git_blob": "db3fd603765644fffe9edd92511624b944914068",
+      "sha256": "abd9604058045fd77cb5985a14f56487726b823f468990d5dc4277d6391de0cd"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Thread.java",
+      "git_blob": "97a7d2df1b6404d46131b7fc01c601501864535c",
+      "sha256": "23a38e9d8deba442c845137d46d6fd8fa74c507e364a697934827b0c783da85e"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/annotation/Annotation.java",
+      "git_blob": "07549913831383a8e979c7612bb7a442f41c6396",
+      "sha256": "8fe3fdabb97848987fe0ca1e1720e1b8d571e0b0d61bf7a17411aa49fe5c6b09"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/constant/ConstantDescs.java",
+      "git_blob": "82f56b7cbd4872f808789cad354c2d27640c1fa5",
+      "sha256": "2ecf80f698499af80cb466dd69594b147b19e1757b41795630e8ecf2b04ad4d0"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/constant/MethodHandleDesc.java",
+      "git_blob": "9e8633d26e031968da66e26cc6fd36aa616fe751",
+      "sha256": "e6468d5061945b8ca0cc3e4ec0037619f22b7eb44dc964919b1bd80253c08377"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/foreign/Arena.java",
+      "git_blob": "1f3c1adc16dead069f2e672ba66b435033ef3b1c",
+      "sha256": "164218320e7609e43996cd8bfc757c8caafd9ce65c51f03cb572435a3871fc18"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/foreign/Linker.java",
+      "git_blob": "3af21dd56c231f0b03663d007df4800300aa1884",
+      "sha256": "4b95bd9979925882d402ac4dde211f9cb3cb3b5d10c45108611fbfb0bc05d84d"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/foreign/MemoryLayout.java",
+      "git_blob": "41093a1cc3268159218c1648ae603627dde4e0bb",
+      "sha256": "8f97842802a711dfa32c31eb7c14ccb733822f2eb20c94c7903014809cd4b5a9"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/foreign/MemorySegment.java",
+      "git_blob": "2c2332018f04df3e2c28299b247e9fbfb90ae4e2",
+      "sha256": "e5bcb0d649e52336a7dc758b59e567eaa64c4a5feaa7f699d070b6ba5b7955ed"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/foreign/SymbolLookup.java",
+      "git_blob": "7db7302b28d27e2697f241b06662b7a98834de1c",
+      "sha256": "04471e12a3e1a228043431af29c25c14dcef241eae7675d980c7c0216def2a48"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/foreign/ValueLayout.java",
+      "git_blob": "24f5b641991ee3b1da956a5dc66bc5637cff2071",
+      "sha256": "12f9d5f3dfbf12354c5303368abae21d79431e62366879302501b81d6aad8fe0"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/invoke/MethodHandle.java",
+      "git_blob": "3dfd9c061bfd63bbe649f40769926a862a6fa3ca",
+      "sha256": "a25deb1980a84a918222a780d30911044ecfd24819b6d95a18023275532b7d98"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/invoke/MethodHandles.java",
+      "git_blob": "65da1cc9e744bff088a4e80731e5eb80af5d4c1d",
+      "sha256": "3cd6f1229de979b3da578acc4bc49af394dd930e411862255de977d2252b1a0f"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/invoke/MethodType.java",
+      "git_blob": "951d209b69f81489a5f669d213c798f41cc9c5b9",
+      "sha256": "4dd95d9a1f71ed1bdc9c4fef9f2d475dff36df05f757687da35a0839e34045e8"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/invoke/VarHandle.java",
+      "git_blob": "2ffa75cf12bed4902e507a1cb41944bea0218b71",
+      "sha256": "66e4ccafe0851e3544793765e4b32f09e3e20d03f7b8583a18fd81503e30f69d"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/module/Configuration.java",
+      "git_blob": "6cbcd41278e6347937ebd9a6c697792bc6ff4a16",
+      "sha256": "4a24dcf2a0da50b833c2e8800bd18586c81e84b749fdf3f7ca883c92f1b8c7ec"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/module/ModuleDescriptor.java",
+      "git_blob": "3972084eca2b8f55e9386e57d9c817088b0586d6",
+      "sha256": "68894193a1dee1dc31b85135f1e45421b43b295f429b10a7a6ca0db9f3014d49"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/module/ModuleFinder.java",
+      "git_blob": "049486774932b703120cdbfb63dbf9e6a18c46dc",
+      "sha256": "c33839f959c4d597e5d61b89400fee1528cb985ed644d8a177822fb06cb3299f"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ref/Cleaner.java",
+      "git_blob": "a4769e112b6e689118408c71f3399de400601b47",
+      "sha256": "25fc86b29476a9a415c4c5e663c7e60ffa2146f824fe35d9f39fed35af1997c2"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/ref/Reference.java",
+      "git_blob": "ef4fd1ef20fc5bc36b8de1c13622bcabe9bcebb9",
+      "sha256": "cff5aaf74a5b62ffddcf03d60aa35b48fbb4ef0d54dc8a15972f5d04495f95db"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/AccessibleObject.java",
+      "git_blob": "8c0f74a29c5a6755457debdf64373dd05d8c8630",
+      "sha256": "df2e58f887aca1bd7830c8e409d017f90842d982c9b53b4deea76758fb05c108"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Array.java",
+      "git_blob": "16f5477af255906a6793c6cb22b165f194969547",
+      "sha256": "def5b1cf6d5c364afa80b5b9a603eff745dd0b9c7096546af4bdf80b2da5677a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Constructor.java",
+      "git_blob": "50695304082559e9259c3f3a2b8f2e3cfba353b9",
+      "sha256": "9101d8623b2f58584b122e110ccc792c3fc3be73204a8d38613220ea52f17b69"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Field.java",
+      "git_blob": "3e9d02d55095c4af15396d747c073e72ec1dcda3",
+      "sha256": "d096997b0a053109de2ba8579723f89a9959f11d12a7a8f888f1c84a208d73c9"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Method.java",
+      "git_blob": "028577c229cf4f43b6666455622a12f7e70ab57b",
+      "sha256": "2261e2d25ff86f17e254e7fe67da691585108eefeba39f0426479e43c62ab941"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Modifier.java",
+      "git_blob": "e0f60d5851104e47b750be47d86c090ae0c8b984",
+      "sha256": "b5c15391094f3ce007f769264e1852e49740098810f849701e341f20789c12a1"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/reflect/Proxy.java",
+      "git_blob": "858d3b3968113ce539d6ca541e439f80ed07b263",
+      "sha256": "e51fa79b5f5c9658d0f066e2eee1956d315e82cab60df6c821191f03e9996931"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/runtime/ObjectMethods.java",
+      "git_blob": "6cfd7f9bb44fefafa29df74cf1107b99faf57e23",
+      "sha256": "c2cabf5ce476a3dff34caf7480145a80859457c999750ef13e6c509d273a2493"
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/runtime/SwitchBootstraps.java",
+      "git_blob": "4743b00997030426ad017f8d1c6d0fcdd135bd57",
+      "sha256": "a395d5d87fad72fdcfc4f6bdb96097f76c1d9eadb1ecea4bff5a9f5c5efc836c"
+    },
+    {
+      "path": "src/java.base/share/classes/java/math/BigDecimal.java",
+      "git_blob": "094c48bc02fbed4d5b7e371aaade9cd9b3ea0fd7",
+      "sha256": "07e291cee99673721f286190c3a365448a5e0ce332189127a925846eddcf80dd"
+    },
+    {
+      "path": "src/java.base/share/classes/java/math/BigInteger.java",
+      "git_blob": "d678a0f76a618cc21e3b69c64e8afce4f9c6def5",
+      "sha256": "331393aa99183dcee4123366d9f717001da15250a108a84e82af78c3cdd9192a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/net/InetAddress.java",
+      "git_blob": "fcc2e27002692600b561478fcefe1b3d57a98546",
+      "sha256": "b8917aa066571118e465f87e01957728e8accaf1bdef76fa91efd4225695f2a5"
+    },
+    {
+      "path": "src/java.base/share/classes/java/net/URI.java",
+      "git_blob": "2e01b0cf32b7ae32cbbb721d3ae9513c279a6c8d",
+      "sha256": "509145f2c522b0395dc3a88952b6549188dc80b3b6e54a4b32c39b867550c056"
+    },
+    {
+      "path": "src/java.base/share/classes/java/net/URL.java",
+      "git_blob": "833eef7ef228b86cbcea9644d8c61df288be95d7",
+      "sha256": "f37c5f5993cda0cf6de811776fa981fd8cb23c53898402efa92503039d194be4"
+    },
+    {
+      "path": "src/java.base/share/classes/java/net/URLDecoder.java",
+      "git_blob": "fc7f1d51ef0f415b1f292d640628ec095da826b7",
+      "sha256": "59509b8b234e5fccb3364c6581c30224044c5eb541a02a0b007edb2af0b16f01"
+    },
+    {
+      "path": "src/java.base/share/classes/java/net/URLEncoder.java",
+      "git_blob": "1b5ff1cae26d2d265daa762ea7b90cf2440c047a",
+      "sha256": "60330c74a190bc1c25f181def0c5f38da4fb93212e9acb05c980bc6b225113c9"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/Buffer.java",
+      "git_blob": "7bfcbea9639d7a510d1b74626d015a04a872c71f",
+      "sha256": "99840c098eeb9f828a22d7d162f35aa33fb3ce7cb831fe8934dbeb0a04bdd45c"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/X-Buffer.java.template",
+      "git_blob": "0120ed421c5df8dd4d58a5d155bbbb465ceb748a",
+      "sha256": "33daabbb3773baf1fef00b8a2cdb5f9727e0f0e46e107493bc55688d973e8e61"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/channels/AsynchronousFileChannel.java",
+      "git_blob": "a84d655ace9e10a246f40cbf13857d1e1c05fbaf",
+      "sha256": "074430fb691629ba83ee183704526bdbbd390ce504371b09a82863d095bae977"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/channels/Channels.java",
+      "git_blob": "df8d2d45eecad0bf64604af5338ca44aa3523d05",
+      "sha256": "db94265a27d5d1a89376b801837a6db81307a0606d7af9d70cb319089a3d40f5"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/channels/FileChannel.java",
+      "git_blob": "bdc392c59a8954ed2cb3be444f3e389f21398b98",
+      "sha256": "ee6cdf14fc0ac3af2d39c1a70070dd1c32ed8119c7d31780a072022e4259728d"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/channels/Selector.java",
+      "git_blob": "d8c0dc261bd6a9835fcd848b2a0a588a06d2dca1",
+      "sha256": "6a99a4833a4a469a6a1f68048705a865c44cdee64bfa06e3e7d2e61776d93f9f"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/charset/Charset-X-Coder.java.template",
+      "git_blob": "d3d0f0e17c9f08c5dbbc892ce190c8683a3bbfd0",
+      "sha256": "72a089cd644c6a502877a91d035d20cdfcf78ebe168d496c7447a8f72f6c3b45"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/charset/Charset.java",
+      "git_blob": "b87dfc1643679f3e45f9ee646562fe7d50c7840a",
+      "sha256": "d95a4e5322cac971e735b08fc55feaa63a689381490c1fb985ea51ff9343f44b"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/charset/StandardCharsets.java",
+      "git_blob": "31bc454dbe6a47223adce9c38d39e2b22e28264c",
+      "sha256": "8622b79dc3fde4e6c9608178cea92983d6395e43a11fdf5adcfe27b7c746a1c8"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/charset/spi/CharsetProvider.java",
+      "git_blob": "87ff0d07854efba5ea146e9085894227f66e64e9",
+      "sha256": "b6ff8e8f3002c7269c069ca98688d40870f5de19d2123af418dacd686507d216"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/FileSystems.java",
+      "git_blob": "6a691502551470bd1df879dc8979369e8248f243",
+      "sha256": "88d38041bcdfed28e35c7e1178da50824354e20c172bbf9dc58a2e79352bb506"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/Files.java",
+      "git_blob": "2ff8819af1010139b00edc21944a1483eaffd145",
+      "sha256": "f99322d047cf07c49bc08845a170c86142a8d3aee1766f327c5198b3ff324de5"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/Path.java",
+      "git_blob": "d121f438a4ffb4f20d88f03a56405a987771a20a",
+      "sha256": "cdaadcfd731405dcdbffe91ebf1b4dec6eae9db5eab6197a925a6e4a7b806ff7"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/Paths.java",
+      "git_blob": "216fef4ae99038768872c5352f6b0e14613d6507",
+      "sha256": "e6ae0cb1d81d99b7e2bdf2713ec72d35184ea7d9617eb6f4d135220f8ee1313e"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/attribute/AclEntry.java",
+      "git_blob": "9c00313591b17d5ea0d8553d8ac349c0a3f59a41",
+      "sha256": "1a0e09bc9c52a1f87800038ebe56b899b2bdb5ade5be815c589ba01bfa05d482"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/attribute/FileTime.java",
+      "git_blob": "7cb3a3ea8030374dc616d4fb29af82d5270bb351",
+      "sha256": "ec539f34207ab89f400c050d11eec04bdaae116b8907fdbb5f9b4d827d8042e8"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/attribute/PosixFilePermissions.java",
+      "git_blob": "1f9a8de64c7c49cf8584b9a73357297d07e01bc3",
+      "sha256": "9690cd41b8c01d5cd838d67a860eb63f0a075bd3ce1f5f5a924f93712cac4f5f"
+    },
+    {
+      "path": "src/java.base/share/classes/java/nio/file/spi/FileSystemProvider.java",
+      "git_blob": "17caff30b03a76e8fa6f4926563644c821e9d902",
+      "sha256": "0601f97ecae23fbd2f43409e4f02a72dc94f9ff0250e0777321a4377f8c0d200"
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/AlgorithmParameters.java",
+      "git_blob": "1fdb47077cf64b9d2582c55f4971f27491277964",
+      "sha256": "ece3ae904820f66e53204839d56a78c7289ce04129f43e1c9dbfd378cbda9f03"
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/KeyFactory.java",
+      "git_blob": "6cb68e2ac0eb382f34cc721b9faf2c9888851826",
+      "sha256": "93be51d8a56c124441b359f311a27f8ed22c97e5ed4717f3e6d0b865b46bca33"
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/KeyPairGenerator.java",
+      "git_blob": "6902541a0177e7993dcb9ce9c3de266ac3fea0eb",
+      "sha256": "d008515e6bf61cf834cadad3193dffc67c4b1d5bd9c5aa25fe4ababfc49b9a68"
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/KeyStore.java",
+      "git_blob": "84c38fa331ce88d72eabf26608c067c286e3e7cb",
+      "sha256": "ecc6fef6147ba3dbfdf3db57e0d361a48a36cda8cbf6718beeecc7899bb572a4"
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/MessageDigest.java",
+      "git_blob": "36c92df556e072d922e0e635964f71132bc1f0b3",
+      "sha256": "c0ce7245b95a8d716f526eb30715e0d1ee84ed12811d378516fbb4f4b361ef40"
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/Provider.java",
+      "git_blob": "7246285b349a54bad420dfdff172123269d716b5",
+      "sha256": "969321d4372cf2cbf5c7e52f61c5c1217f0f29bdd4a8bba6915524659db6f02f"
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/SecureRandom.java",
+      "git_blob": "6a1683e993c96a2d6d8cc10b300e9fa4dcb33295",
+      "sha256": "150ab0eb814f71696c3bce63add83795deec506fe407dd170c0f0d7b5c860d6f"
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/Security.java",
+      "git_blob": "ded4109bf764ce5c3478121eafa4f72ab0cd3cbb",
+      "sha256": "0bc30e8aee9bb87d051c5670efc2093f5b2d373b1ead4fb09d02fbdb3e149962"
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/Signature.java",
+      "git_blob": "769a9ce813bfb0526872ce4ce54229265a19a0f3",
+      "sha256": "f91cfd3f9d9ab85459a60259f84cc50bbdb3e62b186c563ac9966b8f6220ca2d"
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/cert/CertPathBuilder.java",
+      "git_blob": "a89d42642348d62cdc6440edf85095daa6da5d6c",
+      "sha256": "6bb2623ba5cf49656e416ebe4de896c3755d5d6b6cc9f15dd6dbe0e7efa18693"
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/cert/CertPathValidator.java",
+      "git_blob": "69918826dfb8216765ddb7023e671934d2ff14bb",
+      "sha256": "592a9d6437c999daf974ee4cbbe6bd919312dd15f4854ac9bb31c7a3b6014529"
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/cert/CertStore.java",
+      "git_blob": "0b8c5bfefd919c18544821288b4b9a400e8209a0",
+      "sha256": "49cdd31bd1b1449b6958224671ed3e3e616645370f21b1a56fa27f52e29a59bb"
+    },
+    {
+      "path": "src/java.base/share/classes/java/security/cert/CertificateFactory.java",
+      "git_blob": "fb47ca29af165652d95c304b5204ec554b06c06a",
+      "sha256": "4de20a7f9887edb35f8e186c4aaa4ad609ccb3c0327330eb0e58903419afaa69"
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/AttributedString.java",
+      "git_blob": "48044b0ea5d1abed88ade230df1d80b6bbca4e6f",
+      "sha256": "c7ce89ad8efd5bee9f21ffe77bf4bce467379724bb70738087ca87d93bc91a1d"
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/BreakIterator.java",
+      "git_blob": "965d9a4e2c16394d1e4230aa1fee8bf37313fd33",
+      "sha256": "47e41ee427597739e2dbdae7d451b0446891df67a67e692f2800310e14c22707"
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/ChoiceFormat.java",
+      "git_blob": "cf87f4452cfc26b06ef8e0b4091c9b08609d303b",
+      "sha256": "8d88cf035356b25fefa8f107675cbbf9b0e7869ff600aac545e5b2a4631b5dd5"
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/Collator.java",
+      "git_blob": "be158d034c447f1ab17372d1b463efcdba898643",
+      "sha256": "d7aa55e1619d2dc79eb6b13799711300252024f3fc0cc88404640a60c442ecc5"
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/DateFormat.java",
+      "git_blob": "ed6356e3fd819bcfc58dc5f7847b57fb5ea41e88",
+      "sha256": "edd812f4cb961cd7b0c3b3ae4c571a815bf4009a94b9892def9bcdf002d7662e"
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/MessageFormat.java",
+      "git_blob": "28d1474ad71bfe1619fe8ca270033dba4aeb1daf",
+      "sha256": "acb5cef237f331790ace18688848ff019dfadf1c4e6c3a0ae96d40eeed5fa6ba"
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/Normalizer.java",
+      "git_blob": "5265fefc67106d53ac8ec2aa168a051cfa1419ae",
+      "sha256": "4aa05db90e28d6f26a13bce4c85bee57cb98896634316efbee2437a4f1256610"
+    },
+    {
+      "path": "src/java.base/share/classes/java/text/NumberFormat.java",
+      "git_blob": "6d893bc4ec76720b963fdfa5a8c395cb31af047f",
+      "sha256": "8ecfab357e57ba593406a7ab181b862116a0c2275db5ebdba9526638921b5810"
+    },
+    {
+      "path": "src/java.base/share/classes/java/time/Clock.java",
+      "git_blob": "df9dd709ea6f05a8bb201ea312ad74bd215e4605",
+      "sha256": "d0057da8ab53bfd41450c1504b28f98c0646b5997d977f6cc416f6bf7fd809a4"
+    },
+    {
+      "path": "src/java.base/share/classes/java/time/Duration.java",
+      "git_blob": "c1894e2db5a7c15641004579d807fc899025ff23",
+      "sha256": "6ea3d94e38d6866500b3548f54f526f3d88bd144411c36481da548017c5f643b"
+    },
+    {
+      "path": "src/java.base/share/classes/java/time/Instant.java",
+      "git_blob": "37dd9f8d2ace0d6e7d0e7d36d4adb72de27274a6",
+      "sha256": "f29b1c41dedf5e52f3bb00252d0fd896a1a1e2a8ca47d57cb300f901ca2d5d4b"
+    },
+    {
+      "path": "src/java.base/share/classes/java/time/LocalDate.java",
+      "git_blob": "2649c098a5b434a5e8a85dcdda2002a6870f326c",
+      "sha256": "af2ff647d3a2e8523a3e2474509a0b7ff7d9a2f0a799e7fd72a40c31fab76296"
+    },
+    {
+      "path": "src/java.base/share/classes/java/time/format/DateTimeFormatter.java",
+      "git_blob": "3346de707edb2354bd4f3adaaf9631acf120703d",
+      "sha256": "cb76d41cfbdf06fa67a3284199a9770a9e1c676d423a7da06bc947e822af0e2c"
+    },
+    {
+      "path": "src/java.base/share/classes/java/time/temporal/TemporalAdjusters.java",
+      "git_blob": "5da2569ee1ccb710ca913eeb9fc0086106a06c74",
+      "sha256": "35868923ea4af3bf3c1c19b6fa665eb932ff42294f1bd2337e483c65223e5438"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/AbstractMap.java",
+      "git_blob": "7a5d92bda52ffc29235c4c6941fb643b4b38d7ab",
+      "sha256": "e253d9c1774d5a05b28caaa49378959b0777a9cd621ed0c4be9f466cecf9ee88"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/AbstractSet.java",
+      "git_blob": "80d4c5e91d267b3e6d31c08f3198f63941d1b311",
+      "sha256": "2feaeffe82d5f34bd4a9e4b0ac8a21bd6807b6c04ece228c9c039a30637f3aa4"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/ArrayList.java",
+      "git_blob": "d136f7affce3632866d5b1b46a88d1e2803530af",
+      "sha256": "c7db659273f9130e08b0d4508c34ff655e157b9ed48cdc7f5f5a2146ebb1c137"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Arrays.java",
+      "git_blob": "9d1034e6fef6c8ecf9fe4b5b4032fbd2622fc79b",
+      "sha256": "fb63f716ddcf750357d2c5747896336b45ad343eb4d3c2de329f3212c6bf49ec"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/BitSet.java",
+      "git_blob": "e0dc042bce69ca41af4b47dd256c9f9cc6d741fa",
+      "sha256": "c5640ef08deab2582948e4cdbd0c1deb7cd83a3e404645ba91835bced5287cfc"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Collection.java",
+      "git_blob": "0f63f0b26a46b6a9e309818241ac7663aad52f1f",
+      "sha256": "de833f449dd331f125692ae3dd0ff06d7ab62d9be47d7edb56907ce2dd7988e4"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Collections.java",
+      "git_blob": "874a056d6d1c24f4fbc0f564ba564519c9db71e7",
+      "sha256": "7dcb1bde18923274518b747ad4e65e3019046ca7742714ead678c615d99499ba"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Enumeration.java",
+      "git_blob": "23b4648d90d088fe251e885dbe14f17fe2c6e30e",
+      "sha256": "205a0dbd43d32dbd0907507b11ca6568210430ac301d8327df7bc9c91978c42f"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/IdentityHashMap.java",
+      "git_blob": "77f06fb94100bd43d16ad9ba418a716c4e43778e",
+      "sha256": "e877ef70202fac6014d28dbb6b4f45a4eb0a4725a1e39782a5e52d777e9f0c18"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Iterator.java",
+      "git_blob": "aaf6a0497f458a6f8527a5d8a3974240f28af60a",
+      "sha256": "28f0ab0de8727ee357bd00792b6e490103219d177331e262f257ff0098994a7c"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/LinkedHashMap.java",
+      "git_blob": "90ddd94153bc9180644e5c7818e850788e3516ea",
+      "sha256": "93b36f97d195663c236ed00733a7ca09d0f491bf6ebcd818dbd7bac288805577"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/List.java",
+      "git_blob": "17cf635aa7ac02459f6985e43cf7de76b4750bdc",
+      "sha256": "bc5d882564a59adcadbe39615ba8213f4c33ad88222b8a3c4e7cdf50c62316b6"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/ListIterator.java",
+      "git_blob": "2cebebf685fc67729ef66b61dc4adcef3d03500c",
+      "sha256": "5e74ad36f05f09d1f2a4fc37531cab335cea83cf8b2473b0841c88fd7845b348"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Locale.java",
+      "git_blob": "8fac36fb84fbcb7d26b9e7d19e504f907c3dbf00",
+      "sha256": "6a2fa40e9dbc624061ef4a513b4ba042db15a700df382bf4ba522e294443cbce"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Map.java",
+      "git_blob": "a36b818710666b092b0bf60eda706294f8b42409",
+      "sha256": "c2cb6eebb59d81a35a82827d7ad09b633317e5aa9c640b47c3fd5ebd9204c0a6"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/NavigableMap.java",
+      "git_blob": "92abc278dd8beaba253e59633bea3ff0ed328be9",
+      "sha256": "47758c70e91ba72f7cba7139fe939c27a6ef07a2df085feb8310fcc9d052a8ce"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/NavigableSet.java",
+      "git_blob": "8d7da4eddd32e426e517b741f3b360304d5a7ce8",
+      "sha256": "c283dfe278a3afd8970100c3486ac8ab15981f678ada127bad8df1f18beca75c"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Objects.java",
+      "git_blob": "066c20d6551850efe91adb278298e2b25e46faf8",
+      "sha256": "e23039ed9dce3bd70565b94657a4e316eb72ff79345c13a4ed58bc0931d34ce5"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/PrimitiveIterator.java",
+      "git_blob": "b0e07ef6e5acc0e15ef8988a2d52420566ffa838",
+      "sha256": "02ba4be245ced47049a679e6cf50229abce50fada7fd8b56874acc2fe29a72ff"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Random.java",
+      "git_blob": "e663efc2a57763f97e371312c579f2a8150eebda",
+      "sha256": "cc476abf6c1935983d36a55fba301c526db1debd2b9221f9e65cc1bda54d60be"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/ResourceBundle.java",
+      "git_blob": "b9a2dca88d56429ddee212ffa9bca103857d7875",
+      "sha256": "4bd1220f91c3f859c92f67c3017c1bb9d4f0261247fd89676bbceade6fdda5b3"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/ReverseOrderListView.java",
+      "git_blob": "42b57e2d8b9fde251a4b2dc3a824c870e8458194",
+      "sha256": "83fa94edbe1ef82f88cfe5aba432e3f3144adfaeb222f9743e29263a7ef5ecb7"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/ServiceLoader.java",
+      "git_blob": "531ffa3f09c785a5b6a8bef9fa1f8f3c14a2f99b",
+      "sha256": "37cd04376da849588f095081f85aa6bbf1a3f18027cb5856febf62c9cf953148"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Set.java",
+      "git_blob": "5ce3bf04c7c48c1cdad1f60fba260c3b2048524d",
+      "sha256": "59fde85e92d7c167fe6573a25043c3fbe29eabaefdf84891d32101932f0a0f90"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Spliterator.java",
+      "git_blob": "517d71c191b784af8e75c109431234b3f9e45b91",
+      "sha256": "70d75491a8ca51fe30a1a6935467763b5bdc3753b8624bec055edd4967383596"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Spliterators.java",
+      "git_blob": "c047d96ab49072caefdc9c949e5c75d8b92d4fba",
+      "sha256": "7363a624984c81e6a8c0a7ac72e43e360c86f6c92f3ccc9a55c87d43ca987066"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/SplittableRandom.java",
+      "git_blob": "4242322d68757c1963787e7f4647d2b9b6db883a",
+      "sha256": "ba2c7b2862725beb52bb9236d8c731a55acec6addb855374ceff7b02f97c7948"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "git_blob": "d4f0687c2145b94de67d29012cea5edf1f47badd",
+      "sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/TimSort.java",
+      "git_blob": "7cce1cc450cb2894506f6f56140f4bdc938b703b",
+      "sha256": "f147bfc6470b811546384b17b7fd3ed278586db806f445d66151a34f617c0d19"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/TreeMap.java",
+      "git_blob": "a91a56a5900c8acb8d268eac16744abf7cad1134",
+      "sha256": "d5ab07e7f2438eae6d0a6a969790a7d4d9d07a20265e797a4a20a1e3bcda913c"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/TreeSet.java",
+      "git_blob": "a68c157283eba3699104c3e05234caebca243279",
+      "sha256": "e40f028679f474ed2399425474b5c68cbef96db851d1e8c0c8865108f3f5af75"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/CompletableFuture.java",
+      "git_blob": "a664365fe29dc9a2db2090b398e576405e0491a3",
+      "sha256": "3d350ceb3bc6b5d22edd71065693d742480f01a5640a681d8413cc7c82185db4"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Executors.java",
+      "git_blob": "24aa3f0a08c6e171eef17e512b34a5d767d01526",
+      "sha256": "6937e22e90f3e676948db58d00e0f55de4bb0ff12ac7f0d858e211d72ec74127"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/TimeUnit.java",
+      "git_blob": "f02aa9f5931921a976c932507c807a6f6ef918bb",
+      "sha256": "045808c4c1111a261f461d9b7997074ec22c08e53ec83546564121fc8926b604"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/locks/LockSupport.java",
+      "git_blob": "28fe0d4dca3d67ae83242624306bbb89fb614297",
+      "sha256": "c97f8ca3d6ee2f835e4410502fe2ec1eadebc6e67c91eddcb64ef9536e6c39c8"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/BiFunction.java",
+      "git_blob": "ef75901fb3461e0556e1ddaa45ffc52b05a5233f",
+      "sha256": "4cc8916f3529f2d308cd9d04a2debc9bfa823d71f7249ba5ef98d25b8d3f47b2"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Consumer.java",
+      "git_blob": "3df6f12a3a442c3a9f0d47ed5fc8aa725e634ccb",
+      "sha256": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Function.java",
+      "git_blob": "76a20ef10fa1fbb701adb544ff6b7eb152f4303c",
+      "sha256": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Predicate.java",
+      "git_blob": "b34febbd61364df25da00ccae925c55a5184fac5",
+      "sha256": "a5f4ddfaa690778a992661d9546b85b87290a7135e1feac1be45aced1beb1970"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Supplier.java",
+      "git_blob": "ae9a9fd8a0158cb396d36304a607709cd875903c",
+      "sha256": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/jar/JarFile.java",
+      "git_blob": "c8fcac4bda0cee2edd7474c2ac9d215f628e7cae",
+      "sha256": "f4b2b3e7573d957189fe62257845cce64b0e579f433c6ad3e9ade80433a6f32e"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/jar/JarOutputStream.java",
+      "git_blob": "57cd3dd4bbf3b5fa5a7997b8a57074f12a8ea02c",
+      "sha256": "b8c3c4a3aee26d83194a7defa05a334087e2d50a05e2a4fb94e8f09677e79239"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/random/RandomGenerator.java",
+      "git_blob": "a7c6bcec33957d4c6f5969ba7d2a2bcb9c90376e",
+      "sha256": "3c1f26fba2c7563e26b965dc48101361fe60e0382e25a6db42f80f9ff7237c23"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/random/RandomGeneratorFactory.java",
+      "git_blob": "7b7339e2772a8fa552547bafb50e93c370f5e6bc",
+      "sha256": "71143251b9bd04d427794b11bac25f4c1a20c5c846d048954a3871ecd036f2fb"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+      "git_blob": "b31fde7511bbdd3a139b330d85b66cae9a739224",
+      "sha256": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/regex/Pattern.java",
+      "git_blob": "252e46fb57e824f30688eac3600bae9480511fc8",
+      "sha256": "b6dbec25d39bb18f08e66625b4063cb6848bf34c33fd43b1392ccaff8d35937a"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/spi/ToolProvider.java",
+      "git_blob": "1a3a710e0be6b925f8ddd6dbf52ef5efc4e205f6",
+      "sha256": "3d6fe7fa421c5c7399d7f20039ae35d8e9150a53daf75190fdb08f93e0cbaaaa"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/Collector.java",
+      "git_blob": "9ef656790833362a78f5e2ece909925ba4610822",
+      "sha256": "2c40775adef5c2a04bd0b8c319cd25579743a9bf0aea4cbb964225978edd362c"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/Collectors.java",
+      "git_blob": "54d1d4acd732d3cdda59fec9edfdcecff998c27c",
+      "sha256": "0d0221d083f9c5f1c29fa39c1a4c7fb9faf003f014b38a4a2f2f574a9110b989"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/DoubleStream.java",
+      "git_blob": "fde242cd383dd0fe356c1b9ad75d1f401728f273",
+      "sha256": "7cd71556890144560e65eab1b34f116481d5f4b3f15fdd03c1d722f8adf899da"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/IntStream.java",
+      "git_blob": "74c4814558991217710f2113bfcb010b691507f7",
+      "sha256": "620c46ace2477bfbaa30309bdb0cf15e4a027c15737f10f16be15b66469a4051"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/LongStream.java",
+      "git_blob": "8e20326db45bd2b19d6a3d4fd91154c1486673c1",
+      "sha256": "c67a6ccaf743642865390785642e7c2b4a8bea9b86f49b5068c4ab1e4633c545"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/Stream.java",
+      "git_blob": "a04e52cdc3598a0f371baba936b4b6d27748bbb1",
+      "sha256": "688ef137efe90856360c35f86a000b0ec49d12c66294f7bd0f6cceb2022bab0f"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/StreamSupport.java",
+      "git_blob": "9a1820cca281106b0be68efb42f40024e89c4a31",
+      "sha256": "5460d4c1f98d9c576c398336f0295cd88fd30f6a23ce6fa48cc9cfe64a714b79"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/stream/Streams.java",
+      "git_blob": "1b2d7e5c98cd7db229b00cdd80e5a43f078e93e2",
+      "sha256": "8b385ad8883b73423c90a2c3132700f3669dfe145916a8c38a4a93702ff379de"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/zip/ZipFile.java",
+      "git_blob": "52d975005e05f564fac97fd9b51f5b0e274febf5",
+      "sha256": "7ee5939bce88edf5310bd211cdb3115b480b7bd4de4a9e3e9b8b8bd59fc992e2"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/zip/ZipInputStream.java",
+      "git_blob": "9e265fd668edc6223be70815517dbbec94176221",
+      "sha256": "425986290b8b2ccc23a28785047e31ec31f1d35a70a59ac486ddfac7a68891ad"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/zip/ZipOutputStream.java",
+      "git_blob": "84174ea3380b1ea38ca381e55ada91efeca4a706",
+      "sha256": "bc5d9624c7181c3a18f3d8c35c41890deeac61afb909a6ef521de6e854cb4397"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/crypto/Cipher.java",
+      "git_blob": "3e692b37b79e40424538879181b8aaff51112b9c",
+      "sha256": "f313e3e918ec46bcff0027eb5056eef0f0e4836d06477aca9720fc5dc0260a34"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/crypto/KeyAgreement.java",
+      "git_blob": "3f28403b9339ae7498b5aaf993cbd105de5e302b",
+      "sha256": "13e1fc615595712ff267b0fbb9c5a3591d6127b3cf08735810cc75ec0dd64b8f"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/crypto/KeyGenerator.java",
+      "git_blob": "0b040a42a1a8ea87572bf5ef30737996b7a3a830",
+      "sha256": "d7f75b4508778d1f5af81f4ac56de6f45d3fcefb2a49890bc384ad94ae2f729b"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/crypto/Mac.java",
+      "git_blob": "a8ab43177c11d0d64e760ac0ccc8830c784e8691",
+      "sha256": "06edc836543381b9f7955c6782ac77b1f3ef62be908593c3005fa16971adec69"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/crypto/SecretKeyFactory.java",
+      "git_blob": "a86f9a53c792dde7e5c81ad029a27518d546d16e",
+      "sha256": "326d059f51de6106d818898bb57ff9715fd120c75ea350f9d64c005c9a7a73c4"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/net/ServerSocketFactory.java",
+      "git_blob": "6fd276b66d95c835bdcecd16155208744f4ecc18",
+      "sha256": "78a338db49dd6d06a86d8946093fadf3277e58db087c8ef8fe71df2f26d02225"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/net/SocketFactory.java",
+      "git_blob": "dd351e9275881e328f75e5a78cfbee9ae15ca53b",
+      "sha256": "140f92bd3663f199e0f8ad6068499cd76b656835f7323829ccadf19d9a0553c3"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/net/ssl/HttpsURLConnection.java",
+      "git_blob": "89f24d159235d681eda878d8e27a224d6c48c2e3",
+      "sha256": "d74d10e58cca4e942ef74d113b0bd1a170f718804abedfdb8d09439482ec25ed"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/net/ssl/KeyManagerFactory.java",
+      "git_blob": "5f7c7135fa800437cb3ff07acdeb5e038f782355",
+      "sha256": "4ae1d5748b0837c61da2c1e572dc522a38b2d8b80268fe61d73e851bd1371e83"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/net/ssl/SSLContext.java",
+      "git_blob": "f9acc28dee8acf31f05515b3e8d2a337cb114575",
+      "sha256": "ed04445d7c82312a2f6bce3225fa2aa8bfe0aa6878b131113086d10c6a48e273"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/net/ssl/TrustManagerFactory.java",
+      "git_blob": "429800ab1699a9f333c669dc6860f64affb53410",
+      "sha256": "79dddaaf633eb1619a70e41c99d0ca5318fc8f4a5fe259b5092fcff129bf2066"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/security/auth/Subject.java",
+      "git_blob": "9d304a1da444a227a71fa4a9706132ffffadf79a",
+      "sha256": "2b0590c629d6a77ddcdda1dbc38f30e97bb15c0fc98dca822d1c9f1fd2f02f6e"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/security/auth/login/Configuration.java",
+      "git_blob": "595c797fa11f5f77ebd99b2f3edf8ea620e7b891",
+      "sha256": "2d4c24d09fd70d5719daa7a8f540c7a165e9165c8ff20bcda71863d424883629"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/security/auth/login/LoginContext.java",
+      "git_blob": "da559017c7921e5032cd5401a8b5767b69a89dd7",
+      "sha256": "9556c301893298f8e3da225fd33890125e18f59569b86c98d070ce272d55ebc1"
+    },
+    {
+      "path": "src/java.base/share/classes/javax/security/auth/x500/X500Principal.java",
+      "git_blob": "e2c8795a2e21ade62ddc18a5f60c042d1d5f6159",
+      "sha256": "8ff8df2cd8da3e56f251aadcd833222f5072db522bc694c0146949be0d1104f6"
+    },
+    {
+      "path": "src/java.base/share/classes/module-info.java",
+      "git_blob": "5488cfd8ba37d96ffef7be0b313b4e91a0cb063d",
+      "sha256": "7fd7f4b25571bf13fc3e2048b87d730e8346e29102fd4a4159c0144699df55a8"
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/annotation/processing/AbstractProcessor.java",
+      "git_blob": "3950e7055004886b119e1a7e12ffc546ecf0c302",
+      "sha256": "5277fbb7385fef3a09f4a10af898d0615d9184ea7a3ad6e7e9b209e30fc8df85"
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/annotation/processing/Processor.java",
+      "git_blob": "01de039d2c2c8bd88c05a579c4ca26cdf9c10d3e",
+      "sha256": "cc5f0f0c0eda8d74afce0277d637a6ca6e3b0d8cdf7b33565fefcde2601c0c94"
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/lang/model/SourceVersion.java",
+      "git_blob": "2c4aed5525bccd5022996cff2dec8c0ae43994b2",
+      "sha256": "e692875b5cb20697dd3a458506dc06a68c1ea51a90440af52394de6be2ec8ab3"
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/lang/model/util/ElementFilter.java",
+      "git_blob": "0dfd86caf1a9fdf36b38bb048b5adab3a33ef25a",
+      "sha256": "2701ca5d259b23815c2ae1e7a9a467f9d69feb4368bbdd080fbf5d578ab2d081"
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/lang/model/util/Elements.java",
+      "git_blob": "a4c4be0dcb05cfe1e83a2f91f4bd5d34d9a5d3c5",
+      "sha256": "493c8a3f4a9feb1cd31e9778177a5c13427cced5d89ddca8cddbdf4d2657a548"
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/lang/model/util/Types.java",
+      "git_blob": "8c3cc7ba5d98a91bdaacdf5b94da645da32b8e0f",
+      "sha256": "a4e685eb8de0ca0ec8ab31fc4ee77944c18e45d39a01dd4b611e1c1a8da9eeaf"
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/tools/DocumentationTool.java",
+      "git_blob": "4fc5e8db505858522ad590724c61eee8f6f51d48",
+      "sha256": "5d3c3e2033b22f7989387aa77bbcf032c971f734f544ec11015bdba3e19c899f"
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/tools/JavaCompiler.java",
+      "git_blob": "70753e88367e2d28ab144e3889e522459218cf21",
+      "sha256": "869b3969905c0d620fd5d5a395c5d56d2a3b00bf93a121a412703be169066ff0"
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/tools/StandardJavaFileManager.java",
+      "git_blob": "769856535acee7aaf6b8a21ee99926864db0a01f",
+      "sha256": "a9a4384b2a094c0a204d46a77c4f1b77e43cc76dfe473989cf368cad8f167880"
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/tools/Tool.java",
+      "git_blob": "62c7fdb06c969a01c73741ed5e28328a243f5be8",
+      "sha256": "2083e71344c76ed0cea76c0636f906a7ea6ae20ffd0bb8423bf2632728ffb90b"
+    },
+    {
+      "path": "src/java.compiler/share/classes/javax/tools/ToolProvider.java",
+      "git_blob": "d05b65b0ffe94c7b0e756cc5bc8edd84d5e2a9e0",
+      "sha256": "712fdeccf7fb16fdd50a4e98d22eade3c559ce2e18ca8553c98b0e4f685899a3"
+    },
+    {
+      "path": "src/java.compiler/share/classes/module-info.java",
+      "git_blob": "0793855d1dc6efb9846d77c5219be91b8a25ce84",
+      "sha256": "2000aabb2636a0cb894ee269a53ef6d3cce80326ef890504af92a6266686ceb6"
+    },
+    {
+      "path": "src/java.datatransfer/share/classes/java/awt/datatransfer/Clipboard.java",
+      "git_blob": "bc3ed00a0300ad14f0b45ec30c1f7c7b792a66e9",
+      "sha256": "02890c687dd882a99ebe55f8e03204e55e0cf20e8082d58abc852af83f4ef382"
+    },
+    {
+      "path": "src/java.datatransfer/share/classes/java/awt/datatransfer/DataFlavor.java",
+      "git_blob": "757c4f99f45087ff64cab8ead738c0b7b57d254e",
+      "sha256": "499d61fcf983e61c8b6d9b3fa7f2699dd7d12ce0a68ffdba943d1207e28d0c14"
+    },
+    {
+      "path": "src/java.datatransfer/share/classes/java/awt/datatransfer/StringSelection.java",
+      "git_blob": "17ed9cfa940e25c39bb98651d811afaf55215247",
+      "sha256": "e4ea174eced1b48fd56b6e9fbf1a799eb386eadadd6458e32d94a6a5c925aa0b"
+    },
+    {
+      "path": "src/java.datatransfer/share/classes/java/awt/datatransfer/SystemFlavorMap.java",
+      "git_blob": "d481465138b470d80f57ac165c4693a8fb3d086a",
+      "sha256": "312ada51c58388daca1998b7ed5c2fc6547597b721f1a05223cabd1526167732"
+    },
+    {
+      "path": "src/java.datatransfer/share/classes/module-info.java",
+      "git_blob": "67d982b596a208edd5418b4ef3175829bec1bf23",
+      "sha256": "f75d752048a62762ed33f5a3567829ec7ef738f92b107c6bb1bea3b7f6dadad2"
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/Desktop.java",
+      "git_blob": "e1dbb095ef6cbfec0f88e6983047aa6156cdd248",
+      "sha256": "c30c1f0079c395e0330ea05a049480bd8e2f6c9351a50dcaec8c8e1591e332f5"
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/EventQueue.java",
+      "git_blob": "4dce257f7278f47a563748d12dc14ab683457a74",
+      "sha256": "7abc2cc893e92610aa03b901473216eb6793f7746f5183a1b6706060a2f61953"
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/Graphics2D.java",
+      "git_blob": "93d4fe2c9bca3223debab0639c5eb32b0a525a4f",
+      "sha256": "aa92e88792fdebea8d48553622c023277ed00259169a2c89ec7911b02dd01f6f"
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/GraphicsEnvironment.java",
+      "git_blob": "0265142aee3e9a349bfdf9d366f21e174c78829c",
+      "sha256": "b9240aea0952ee7b691de9b2cdafe07a5460d6fbe4e9188d9a954a41fc974f7f"
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/Robot.java",
+      "git_blob": "2054954fee3d17d83bd241cd6f39eab05d998b59",
+      "sha256": "db5743e1dce454245f45180d1b63b02524aa8424eaf0562a77f5f2123e841549"
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/Toolkit.java",
+      "git_blob": "54053fdc2e179e76faa4d03c1d1c772c750b6609",
+      "sha256": "5109cf43ae3888c2969e825b54baa75c0a8902052048b2837866e7476f1e3086"
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/color/ColorSpace.java",
+      "git_blob": "09b1ff908de2c3c195b79afd9c9eb5262e19795e",
+      "sha256": "5f23c7cd50ef8c8c55834b7f69833254bac1e584554d67e1a3adbb924fa21119"
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/font/FontRenderContext.java",
+      "git_blob": "e6cac8fe4a900ad89c948a6c9d8b1a1383a11106",
+      "sha256": "88c953478fd4d3b2670347fbbb2c0f02ddc95ed5bd570b7c22d8a9f46a97956d"
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/geom/AffineTransform.java",
+      "git_blob": "fde67ba06a4fb6766bc06882273715fb2c8a55e9",
+      "sha256": "8944a08d51888586d1204b0f8d00027e9de06fdec584bae5b6dc43182908dd89"
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/image/BufferedImage.java",
+      "git_blob": "8aea20d8166f3c362a5ea562d6a13c5ad5caaf2d",
+      "sha256": "a43353e3abe264b18e4734ae31a62357f8e1561d631ca042ddb8e74d44ce11fa"
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/awt/print/PrinterJob.java",
+      "git_blob": "ddf565f3ce3b1b0cbe0c6d0c35c143a47d31fe36",
+      "sha256": "2e40997a145be04e6cb784d1ccbf2f9d53d34be753f1dfd1589ebd100b27c0a8"
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/beans/Beans.java",
+      "git_blob": "6dd1aa9f39c1acc69cc0b003e3c7f1dec907703f",
+      "sha256": "b3e6f44d42c2280c8198ebac941e9bc384d906c66a7edd713983b1a19f77c943"
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/beans/Introspector.java",
+      "git_blob": "e5046baed78ba1b5b6eff98e8c36455c6f586a0e",
+      "sha256": "fc874765f00f73e12588f2acc412352441c184a405750d8361b090f90d0e35da"
+    },
+    {
+      "path": "src/java.desktop/share/classes/java/beans/PropertyChangeSupport.java",
+      "git_blob": "edad65444eeef69cf24fa56b48a648f42cdb28e7",
+      "sha256": "ffe028dd59d9bd36ea58922bd8ef2177aea74ace728479844cb6c44a72267625"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/accessibility/AccessibilityProvider.java",
+      "git_blob": "3842340449b1c6b66aee697dfacf60b576e6c462",
+      "sha256": "4cd5fe6b7a2a8419f6dc661cb2a36b53fcf5e2bdda783edc5edb17087beb4546"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/imageio/ImageIO.java",
+      "git_blob": "b40b48b2af3fb170db2bbbdc7cd8b51032a76d8a",
+      "sha256": "fde1566ad8c6a0a37be442a320950cfd251ffbb265a23a7bd38decf317dac850"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/imageio/ImageReader.java",
+      "git_blob": "97092ec7de9c6cca08155c1a3b0bcef78a71ac26",
+      "sha256": "bfebbae14a550bd9268e97779fcbd44597f65c0873672385ffce2dc4cf9be5e6"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/imageio/ImageWriter.java",
+      "git_blob": "a688d9aea911bf4af262051e7afa87547a3ec173",
+      "sha256": "9ab10ca5312834e56b3c89125a5c1786716029bb3db56498014aaca635d61c20"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/imageio/metadata/IIOMetadata.java",
+      "git_blob": "3954f886f47f7ecab728e54c6ad4575dbd4483b6",
+      "sha256": "92f586bd66d6a1e20639c3a8923d0f1ff836fea35eb7dac1be7c23281d692887"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/imageio/spi/IIORegistry.java",
+      "git_blob": "b80e6370293d899b3ffb936125ded21338c8a1b0",
+      "sha256": "3f93086ef5a8503e027195812efdda6800e6dea28f7a81864da3230d64a7fddb"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/print/PrintServiceLookup.java",
+      "git_blob": "c44b986ee9d9283395b84dbf5b5fd856752a14d2",
+      "sha256": "06eb21d8b7c54a7079d1f30ad37d3fe559f63b6cd4212860a12410e4e0cbeed7"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/print/StreamPrintServiceFactory.java",
+      "git_blob": "29033cb7147c44392fe3766c605854e0cb6a9a97",
+      "sha256": "6e6d3e1759c25d5caf6149e1c26ea8eadcc79ba5c398fc6513901a102f78dd4e"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/sound/midi/MidiSystem.java",
+      "git_blob": "a0987e3a6a9f539b70a7f4205c45cc81b17e64a8",
+      "sha256": "83beef97701362381b0fadff22e55843b5233ecfcee7175f5cf753faa7f723aa"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/sound/sampled/AudioSystem.java",
+      "git_blob": "21cb21a61623b73fb8be138686f5386b5a69a1d1",
+      "sha256": "8d45fb36e8f6aa08f4909f0f1d9fcb8ec6ed6dd18413f20757d05eb17822c7b1"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/BorderFactory.java",
+      "git_blob": "2e4b18848a2e65ccac85d54699e704fd56f7f269",
+      "sha256": "cad40c26b1745ac68633c14b3cf03c718b63ddadf43dab52175e43d17a0744f8"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/JOptionPane.java",
+      "git_blob": "930acc90b35c3b7def5e1e44e83ad2527cdab447",
+      "sha256": "117b01c9d7bbcc1f9fe6b9b5a771fe81d384c4ac9f8290ab29f52240932d07e0"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/SwingUtilities.java",
+      "git_blob": "4097062295678539e23b9e89cd43baacef7a195f",
+      "sha256": "3566a0e837bb579df5adc60f2f1d520dcbca1c280bf8ca09e50288b9bbeb7d61"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/UIManager.java",
+      "git_blob": "fe23e1d21e0fe566773b1ebf01606dbeeff9cf55",
+      "sha256": "48e2d79fb7b5e05ca3906c6941403660bd658604ae029dfc7e13af0be50a01b3"
+    },
+    {
+      "path": "src/java.desktop/share/classes/javax/swing/text/Utilities.java",
+      "git_blob": "a9d51d6d9f63e00eee92a4b689dea0a5ba39c313",
+      "sha256": "234489c24b321112da19a6258def931ae034cda51b0743e8f1a2e3e388fa1e84"
+    },
+    {
+      "path": "src/java.desktop/share/classes/module-info.java",
+      "git_blob": "897647ee3689a5f54827803c780c81ec22fb70d1",
+      "sha256": "826ee060770beb42bcf762ac84d570f35a4a20c1b3645d0b83e766c8b2667a44"
+    },
+    {
+      "path": "src/java.instrument/share/classes/java/lang/instrument/ClassFileTransformer.java",
+      "git_blob": "6df7a2ae69750edf6d37e579c4180f9fcba22ca3",
+      "sha256": "521cb1352fc76a6767eda99a98ddd6ad357c8c24e18a29736761d6f6d6e5bf90"
+    },
+    {
+      "path": "src/java.instrument/share/classes/java/lang/instrument/Instrumentation.java",
+      "git_blob": "e16ea972345ee5f3dffc34f89b1f25145f26f0f4",
+      "sha256": "afbeac228887ed016a5ef0794146af659c5e44df3d80b9d8733bd06316d754b2"
+    },
+    {
+      "path": "src/java.instrument/share/classes/module-info.java",
+      "git_blob": "526aed6bd4209516d62bbdef7ed41fcb6faf7212",
+      "sha256": "696f166120130feaf901ebfe7ece3f80144e2569b4822c1a4ab18066959009a6"
+    },
+    {
+      "path": "src/java.logging/share/classes/java/util/logging/Level.java",
+      "git_blob": "4a0f876d86d777c2e22470fdf4dcbba6ae1405b3",
+      "sha256": "6387ce3377e1300bd8f4efdbea46e6338fb9e58ef55e69404256551cba61e85d"
+    },
+    {
+      "path": "src/java.logging/share/classes/java/util/logging/LogManager.java",
+      "git_blob": "a757f909d29040d3cdcbeddff4e387d00eb5feb0",
+      "sha256": "16ae42fe7982de3f4f1c01011491b61a110d0df0dff01e2b5b502344f0cb765e"
+    },
+    {
+      "path": "src/java.logging/share/classes/java/util/logging/Logger.java",
+      "git_blob": "04d1c1a9c339bbf85d0374652e6f113d1d3d31df",
+      "sha256": "adec0da6de3b96103e6b174fbb7a6defb50a82d59181e2706d9441aff44fc10c"
+    },
+    {
+      "path": "src/java.logging/share/classes/module-info.java",
+      "git_blob": "272d561291a30ba5bea7d7460e0eb3f0d4209ead",
+      "sha256": "84881e743f4235aa6f9774c5f80512c16367b806ef170ef7f2b1611042f56f1b"
+    },
+    {
+      "path": "src/java.management.rmi/share/classes/javax/management/remote/rmi/RMIConnector.java",
+      "git_blob": "626c921f2da72c92182e530a43d2265b459969ed",
+      "sha256": "6f2297921149ac38a0b60bd4d00c9ca148895fc345f2177553e9feb6958ce105"
+    },
+    {
+      "path": "src/java.management.rmi/share/classes/javax/management/remote/rmi/RMIConnectorServer.java",
+      "git_blob": "139b7653424c84b360c35580e5a88fa2913cd94c",
+      "sha256": "05f42499cf461d4c73889da508269ec2d35b3f33d8ab7b47e2640dde9b7bd9e7"
+    },
+    {
+      "path": "src/java.management.rmi/share/classes/module-info.java",
+      "git_blob": "f6d652a22c46aa1504155c04f67c5c33e19087ff",
+      "sha256": "5dc10550c5f5d8afbd40e1c5b3380708c8ff88e8381957cf8d1f6bbf3feba173"
+    },
+    {
+      "path": "src/java.management/share/classes/java/lang/management/ManagementFactory.java",
+      "git_blob": "8e290f373b72b687aa9e5070abb32aad79e8c0a8",
+      "sha256": "347aec96a5efd95cea25f992abf9531a97f79843c1f53bb6333ddb525a0681c8"
+    },
+    {
+      "path": "src/java.management/share/classes/java/lang/management/MemoryMXBean.java",
+      "git_blob": "f17e5e8077a86c5c947ab6d55458701e6c938d00",
+      "sha256": "0ce64f3fd12bab0551f00ec1b1683857a133ffb41ca4ab0607c8ecfdfccae372"
+    },
+    {
+      "path": "src/java.management/share/classes/javax/management/JMX.java",
+      "git_blob": "f1dba270579d5262b558eac4fa0812b6810f0b08",
+      "sha256": "0b1fc03c6251a297d7eef1fc6e08cd355af806fb01c3b745703d536da3b8481f"
+    },
+    {
+      "path": "src/java.management/share/classes/javax/management/MBeanServerFactory.java",
+      "git_blob": "e25a927e88386fc0df129b8a3f9cf7f13e811834",
+      "sha256": "5f22d80a22fcdadadb6072462906737d26b8948bd3417d312cb6580a1a1f8d91"
+    },
+    {
+      "path": "src/java.management/share/classes/javax/management/MBeanServerInvocationHandler.java",
+      "git_blob": "18acd8e37a893560d73d8bae50b5664ac73b2677",
+      "sha256": "7a055943fef39444df123cb7c8e5bbce43ba1b322022a456d02b0b764648b2b6"
+    },
+    {
+      "path": "src/java.management/share/classes/javax/management/ObjectName.java",
+      "git_blob": "00d5cc6930d60f6cfb5949fb6a7cd19a13d4919e",
+      "sha256": "a2b2391de17ff1445160474395191abcb28d145c98aec4bc1813739fae9422ab"
+    },
+    {
+      "path": "src/java.management/share/classes/javax/management/openmbean/CompositeDataSupport.java",
+      "git_blob": "0dcae50c2edd7d024d59686271e0b207d018aaef",
+      "sha256": "58a71e2b36e56974456662a28e6bb2b798f0ae44a8bb2dfac2bede353c7b68ac"
+    },
+    {
+      "path": "src/java.management/share/classes/javax/management/remote/JMXConnectorFactory.java",
+      "git_blob": "e5c0907a7b461c5cfb0bd45f86bae9bce3a9a6f8",
+      "sha256": "10b430a99ec9347e72844e4fe0946a7709870412754fc8188a1749e48086fdc5"
+    },
+    {
+      "path": "src/java.management/share/classes/javax/management/remote/JMXConnectorServerFactory.java",
+      "git_blob": "eadc47bc76789362a324bcf65b158cba59f3560c",
+      "sha256": "a35db5c590f46c4dceb0181fcfba4c540b5053efd39818f021c54feb698512ee"
+    },
+    {
+      "path": "src/java.management/share/classes/module-info.java",
+      "git_blob": "8544d858ac57b5fc7f35ce39ccdc0c4ebca38339",
+      "sha256": "efdee16def3b209b98d067604d4b58e00e4c661f3cbd5b7c3baa77b9fc92d1b7"
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/InitialContext.java",
+      "git_blob": "f2ab1676f4e5b4b2b8c8d3f4cec8837e60bddab7",
+      "sha256": "964acfbdefeab7e0592725f726ba49cc0a94b87623bc794873c7620c2e6e5f7a"
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/NameParser.java",
+      "git_blob": "c3823227fe740da2f702756b02f464de84427d3d",
+      "sha256": "58200cd9d158d809911e1c78639ea31cbf6b7247660d460c15fa4f85de935ad6"
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/directory/InitialDirContext.java",
+      "git_blob": "db76f6f2b528b103f60ffc1094d80fd4170e35d7",
+      "sha256": "795ab6abab7e61974be59be485f5aad8ffc4b226fdce934e029fe54db5134d2d"
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/ldap/InitialLdapContext.java",
+      "git_blob": "fb3c612325e19970ff955aec7e7a33525d291003",
+      "sha256": "9b04e0004782eaccdcbcde58692610ee3fad123564440ddabd6c4a8549250f1c"
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/ldap/LdapName.java",
+      "git_blob": "773f3b534b45dd0d0f8b071a873c75d369da3a97",
+      "sha256": "2fee0ace129c6fa7ea0877831d07f9f24e05d7d5a7a3f10e24182d34dedf24b4"
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/spi/DirectoryManager.java",
+      "git_blob": "0e74028f1b6c8ab608ae353204c4d294b4278c49",
+      "sha256": "ce9741e2d9d5a7011cf0e319b8769aa7e8d3ed8166d1e06073bd07c9b1180d3d"
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/spi/InitialContextFactory.java",
+      "git_blob": "192f81aa3cee324633e4f23d67e5fba594de561c",
+      "sha256": "acc8861c08000279f45e724d386440f784d5340b68a5402b8bee34a21fcf0803"
+    },
+    {
+      "path": "src/java.naming/share/classes/javax/naming/spi/NamingManager.java",
+      "git_blob": "c995372536550b17f0012eb49dee13a25b3727e9",
+      "sha256": "200bebb88ec338e30973d93313f8e29dda22d4620e1a73ad047f6d1dd5ae9f7f"
+    },
+    {
+      "path": "src/java.naming/share/classes/module-info.java",
+      "git_blob": "c4c7a606c6ca5e8904903313dad7ab64e4228a90",
+      "sha256": "7e46da3ff0db86423f4fb1f74c859863e564c8154bd6ea51914de84e27d6dcb6"
+    },
+    {
+      "path": "src/java.net.http/share/classes/java/net/http/HttpClient.java",
+      "git_blob": "44d9a41c80381284b27c2a6134d46f8fb0d71fab",
+      "sha256": "20bc65f631965c5e15902805e0625143f6756225255ec272141ab354f4cfc38a"
+    },
+    {
+      "path": "src/java.net.http/share/classes/module-info.java",
+      "git_blob": "cf9d07bdf328f77f9760381dca55f794ea0f3a52",
+      "sha256": "0c066f764c771cbbe2db32c1cf7c21bf29bce10f4eaf3d0360851c69d744976c"
+    },
+    {
+      "path": "src/java.prefs/share/classes/java/util/prefs/Preferences.java",
+      "git_blob": "662a340710fd71241537c295247028c0902cae5f",
+      "sha256": "206c482648808a5cb4d1c2349bf3a2863899b40f63748aaf86d8667be40840ed"
+    },
+    {
+      "path": "src/java.prefs/share/classes/java/util/prefs/PreferencesFactory.java",
+      "git_blob": "f660c26ff7be71143354a03de7a8bc6fd2579b75",
+      "sha256": "c8c0dc70455047d9443fb82233c8d864b21c7d26be4a4d22a56dabebd20919ec"
+    },
+    {
+      "path": "src/java.prefs/share/classes/module-info.java",
+      "git_blob": "170317902cff6d8c8e204922c1eebd8abe919cff",
+      "sha256": "895e2a5105586c3aa09e5d34f4737e58d916da526aaff81d8536394a28c59bb1"
+    },
+    {
+      "path": "src/java.rmi/share/classes/java/rmi/Naming.java",
+      "git_blob": "c4677991770026e73342d1edbf682a3ca79aac06",
+      "sha256": "ef0106c66bddded745126485165af7ebcb3478fa5ddcf4e940233a88329eeccd"
+    },
+    {
+      "path": "src/java.rmi/share/classes/java/rmi/Remote.java",
+      "git_blob": "2dedfe66f8622250602d16062a600f471af8d3e2",
+      "sha256": "87f189dea0567da24715101cf76e60230a55ad8006dd07a410501b497893e977"
+    },
+    {
+      "path": "src/java.rmi/share/classes/java/rmi/registry/LocateRegistry.java",
+      "git_blob": "79f1baf5e34ae0b69494cee21dc1dc931fbf4012",
+      "sha256": "1b7e720eabe85e7526be3ed4760fe2bd3077c6379c204b92f1b4905245342817"
+    },
+    {
+      "path": "src/java.rmi/share/classes/java/rmi/server/UnicastRemoteObject.java",
+      "git_blob": "e0a7e136924a811f6d4eaf66636f7ca0ca397b26",
+      "sha256": "2bc708edb6104de17c8c490d7bcd18c4c67756d3f38a0618dccc17e4db7993ce"
+    },
+    {
+      "path": "src/java.rmi/share/classes/javax/rmi/ssl/SslRMIClientSocketFactory.java",
+      "git_blob": "ab6664b9d8fdfe8fd6c716c2618db0d24c34816c",
+      "sha256": "c110c7e8dc428f2d2323a71be49bca1cbe1047f6752dd211c8e62376dbdeadd4"
+    },
+    {
+      "path": "src/java.rmi/share/classes/module-info.java",
+      "git_blob": "96b61a172ff05f030eb8afb507e3dabdc5aee3b3",
+      "sha256": "a587d29b528b3cf600ea8e0167c9540ad4c201cdce6b6d2192eb7dd744fd589d"
+    },
+    {
+      "path": "src/java.scripting/share/classes/javax/script/ScriptEngine.java",
+      "git_blob": "c090b308d4c36185e6175f6712c3bcfea256deec",
+      "sha256": "db1eab57963d65daf5980a3902087458ac4dc1183f812e7f7538f8e06f1e82ae"
+    },
+    {
+      "path": "src/java.scripting/share/classes/javax/script/ScriptEngineFactory.java",
+      "git_blob": "3e0b92d1c6b2c636e4e65b71a89bcbff17239750",
+      "sha256": "429d8e66d40e573a69cda4f02310eccec26256f2fd6b68898c06fbeac8bdfe7e"
+    },
+    {
+      "path": "src/java.scripting/share/classes/javax/script/ScriptEngineManager.java",
+      "git_blob": "88f70fc5131951e5bfac0508442a29661e8c8670",
+      "sha256": "f88c51e514de0b8d24f039954526beef8356b50f18e3ca992b4f08c8bdfa901a"
+    },
+    {
+      "path": "src/java.scripting/share/classes/javax/script/SimpleBindings.java",
+      "git_blob": "7379cb24486fdc3fb3d0dfed77a24d646084b671",
+      "sha256": "586664c919e03a6ac740b050687713f00fc825eb9080cd7cffb258b3a8c691ed"
+    },
+    {
+      "path": "src/java.scripting/share/classes/module-info.java",
+      "git_blob": "4367a55a5a1e16bb7bee4dd604b027d0f3a8be5c",
+      "sha256": "eed9f6333f2c99e670fe800777260b11070fd96e2e2ab8f37063713fdf757da4"
+    },
+    {
+      "path": "src/java.se/share/classes/module-info.java",
+      "git_blob": "81b1bd3cb8aa9977ff9a66ed9c8ffeba6eb14472",
+      "sha256": "ff4d7cda5f994f56ee063f0b227c4409c9f9bbfe8b779b7a4b2a08bff8a58629"
+    },
+    {
+      "path": "src/java.security.jgss/share/classes/javax/security/auth/kerberos/KerberosPrincipal.java",
+      "git_blob": "a42d6625ee34519219f124e7eff5c90846ea0ada",
+      "sha256": "0d4379536aac848464c5b5b5f6297266aa351c7d5c4791484a1719c08ee9dc1b"
+    },
+    {
+      "path": "src/java.security.jgss/share/classes/javax/security/auth/kerberos/KerberosTicket.java",
+      "git_blob": "8bf7fd167ba123238d3ca7198191a387dbb90308",
+      "sha256": "282f95763c367c4a6cea80372d109774b9ff31fa98c945c7cf13d91143385cae"
+    },
+    {
+      "path": "src/java.security.jgss/share/classes/module-info.java",
+      "git_blob": "d9ad7ad4919ed8b21e6809366603116868ed2ba3",
+      "sha256": "452f6e992a6ddf0c79d99b45bb774df59fd8050bc57ada8b6b04b94a61314316"
+    },
+    {
+      "path": "src/java.security.jgss/share/classes/org/ietf/jgss/GSSContext.java",
+      "git_blob": "d229635820ac38573d97dd367a738a2aebb4fb55",
+      "sha256": "0d2c7d25798a8a8bdb89ad6b3118a54e3bd991a5131e602fd55a3f90e3c7032f"
+    },
+    {
+      "path": "src/java.security.jgss/share/classes/org/ietf/jgss/GSSManager.java",
+      "git_blob": "8294cdb84e434c4c6b80efb654c5c5c1ed491ab4",
+      "sha256": "e94fc365fea0c65828084afdfb32d873199433e36fa7cad7156756382ce5d4e4"
+    },
+    {
+      "path": "src/java.security.sasl/share/classes/javax/security/sasl/Sasl.java",
+      "git_blob": "aa6bec486ceaaa03d71acba1d64b71e3814005df",
+      "sha256": "f799852eb6e6b87698c54940ac76a80d2978c3d0740cebda6621eefa33160cf7"
+    },
+    {
+      "path": "src/java.security.sasl/share/classes/javax/security/sasl/SaslClient.java",
+      "git_blob": "e50d024d72bc45c70563fcd12f1a5bd0930f5bcb",
+      "sha256": "1611027626f53514ef806d0c7b5e2176a2efcf3284f7b6311abf27eaf17bbd8e"
+    },
+    {
+      "path": "src/java.security.sasl/share/classes/javax/security/sasl/SaslServer.java",
+      "git_blob": "1e2d08aa8a1481e8c4f4a1a1f6b74fbcf3a03b18",
+      "sha256": "68e1ae16cd98c86edb3e0e5925b1e1f57f17e4d9145215a4bbb6341586f5ab2d"
+    },
+    {
+      "path": "src/java.security.sasl/share/classes/module-info.java",
+      "git_blob": "8671c20af913a1ee34e85383f1772462d965bb16",
+      "sha256": "2edbffe1adbc15c439210415fdb5318703f8ab3825e5d45e3dc7d72dbe6444fe"
+    },
+    {
+      "path": "src/java.smartcardio/share/classes/javax/smartcardio/CardTerminal.java",
+      "git_blob": "eb5f305ffcd449ef91c22b7580cea63e4bbf56e2",
+      "sha256": "24e54ff443cbb5a29f99673a901d0c4ebe4675e417a37af692cb2113bb3420c9"
+    },
+    {
+      "path": "src/java.smartcardio/share/classes/javax/smartcardio/CommandAPDU.java",
+      "git_blob": "9f538913215dd49b0b6e87348271ebeff4f95959",
+      "sha256": "ccbe1f75b6a38a3ef1472d8fa7c47e463e1c5bf2e9ab19207ff2bfa11d531460"
+    },
+    {
+      "path": "src/java.smartcardio/share/classes/javax/smartcardio/ResponseAPDU.java",
+      "git_blob": "4c2a3091cf4739dd57b8bcc0c3f3bfe4f3122f04",
+      "sha256": "7558eaee29a706975a56be2b0028ea5e8c03a14e7de1b1dc3cc293d6d1b45e7e"
+    },
+    {
+      "path": "src/java.smartcardio/share/classes/javax/smartcardio/TerminalFactory.java",
+      "git_blob": "a2be0caa7ea57dc551aaf42d6d1b37c5d0c656aa",
+      "sha256": "dea692c8c091a2f114516688c27eb206caa7f92fdff94a27a8487eff6e057458"
+    },
+    {
+      "path": "src/java.smartcardio/share/classes/module-info.java",
+      "git_blob": "60ac96c2b42de5212dcad452423b0fe60bf7c788",
+      "sha256": "175418d52ba35baac6648ebb8dc5e26bfc922fc2387c45a03b20001234daa9f6"
+    },
+    {
+      "path": "src/java.sql.rowset/share/classes/javax/sql/rowset/RowSetProvider.java",
+      "git_blob": "f69ece6e469d395d4c899d214fad445727010013",
+      "sha256": "04cbbf426dddca7ec2c23c04fe65cb732107a6697d0fc9f9e717cce3d889647e"
+    },
+    {
+      "path": "src/java.sql.rowset/share/classes/module-info.java",
+      "git_blob": "6c09c98cca52f259050024b5308c76ada3ffd0a1",
+      "sha256": "93a2557f6a661ddc4bbb4883253edc277bc0fb4be86192c03b30cef726635b3b"
+    },
+    {
+      "path": "src/java.sql/share/classes/java/sql/Connection.java",
+      "git_blob": "f2d1d48f6d3cfca77a396ed3b7a2095a1d709b7d",
+      "sha256": "667a8188b928a266109fd95b0f79e251d4d4a567e50ddfdcf28b4b198f393cf4"
+    },
+    {
+      "path": "src/java.sql/share/classes/java/sql/DriverManager.java",
+      "git_blob": "7b171b2e52ca83963df585e7561b77dab5a2785b",
+      "sha256": "ed7367de864cbf8a5bf7ed025bcfe91582b47eb263ec031d3caf53ad049e0a8a"
+    },
+    {
+      "path": "src/java.sql/share/classes/java/sql/ResultSet.java",
+      "git_blob": "46ea73c19512107022fc10bd60b58240e855bbf3",
+      "sha256": "9d37235852d9ce6b60157d77c65268ec1a3cb2550735eb61d8235e965842724b"
+    },
+    {
+      "path": "src/java.sql/share/classes/java/sql/Statement.java",
+      "git_blob": "bb5a5cfd64d963379652b1f03dff3f5d143639c9",
+      "sha256": "a39ef7455400ad8ef34cb6343c4a8ec2ae8332992cd825c5ed6580e85c07fc0d"
+    },
+    {
+      "path": "src/java.sql/share/classes/module-info.java",
+      "git_blob": "0ae1131297c373f197e675d5a679f441e9ae6f70",
+      "sha256": "61aae53c2fce8a2fdcd2d8a0ca74b27297535c9c2e57edf84ecf31a2f2749ee0"
+    },
+    {
+      "path": "src/java.transaction.xa/share/classes/javax/transaction/xa/XAException.java",
+      "git_blob": "5d153cad4a00d981098abc7d2cafdd8279bfaaa5",
+      "sha256": "3d909d832170f5da26cc905684e0ba96c8016bd194dc2a0e5925b2ca423f52d2"
+    },
+    {
+      "path": "src/java.transaction.xa/share/classes/javax/transaction/xa/XAResource.java",
+      "git_blob": "a5f1c5c08a775b87b73fb314c342e06e0d4e5452",
+      "sha256": "2748acec898c07a100bf68cf5d37ee607249792febf0fb524710e138a632ebfa"
+    },
+    {
+      "path": "src/java.transaction.xa/share/classes/javax/transaction/xa/Xid.java",
+      "git_blob": "4b9e331c94b6a16f0323efaf434e3a99dc57ba38",
+      "sha256": "994e082a24bac07a801756c8f34a5570ea73ffa93ff58a79189e1f1dde3dea3f"
+    },
+    {
+      "path": "src/java.transaction.xa/share/classes/module-info.java",
+      "git_blob": "f3a3072e84fa81ab79fdd160cc463a4177559bad",
+      "sha256": "69b78361528699b3947d083ad286b6fa3016cdbb06b818b368140db0947c7aa9"
+    },
+    {
+      "path": "src/java.xml.crypto/share/classes/javax/xml/crypto/KeySelector.java",
+      "git_blob": "26f79794876c9e953607e8b06e9ad7a6b52518d8",
+      "sha256": "c54790d76340c33845bc06c855f9de4ef720bceaa0fdc66d01ebe6dc521dffc9"
+    },
+    {
+      "path": "src/java.xml.crypto/share/classes/javax/xml/crypto/dsig/TransformService.java",
+      "git_blob": "bf5486f4d32adb010b91ead35552f80a4a9d4641",
+      "sha256": "17db30c1231fe087d598d2c7bc7b5b08f586beda1ca4de7a322beb688e5bb19c"
+    },
+    {
+      "path": "src/java.xml.crypto/share/classes/javax/xml/crypto/dsig/XMLSignatureFactory.java",
+      "git_blob": "07fb9a271f287dbe0c660533651aa5d4f41c7416",
+      "sha256": "9c8fb4652e91a565ae1453f152342eff87de226750ae2700bbb0037fdaf073fc"
+    },
+    {
+      "path": "src/java.xml.crypto/share/classes/javax/xml/crypto/dsig/keyinfo/KeyInfoFactory.java",
+      "git_blob": "be5e4cef3675b8fbc0217f1cf4f5144b313e4087",
+      "sha256": "c8c959deee698a94787cdb10dd72fca458ec98f8972e5e44a5d6baacff9e6305"
+    },
+    {
+      "path": "src/java.xml.crypto/share/classes/module-info.java",
+      "git_blob": "e6c0bb6aa37f955b5254402be9689a77d895b64c",
+      "sha256": "a80ea6f850e78f4fc0e848f67d76ebaf6fb91f8b54c97e9c870d1688ec8a35db"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/XMLConstants.java",
+      "git_blob": "d9851d88972ac3e8d39fd7e9e52e3ed6bd31894e",
+      "sha256": "f59714563fe5b78f150f25e55cc2e81ee50f925a4b0163529995d8a8fadbef27"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/catalog/CatalogFeatures.java",
+      "git_blob": "5d4c9c58215409b00c540662b5f996347a2a5ca7",
+      "sha256": "e210b48160aa6a094ace9b5af8d3a2a25ad1a6af93db16b8d4570ebe935b104d"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/catalog/CatalogManager.java",
+      "git_blob": "f8ce697b266d139eb0c10448d79019291663b1fa",
+      "sha256": "e0d6cb62db5be25bb223d7e652809ac3b9fb9c728a8f617a97be7b8eebacb4f1"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/datatype/DatatypeFactory.java",
+      "git_blob": "a75ad6a43570cb77a39f0efa329ed84839123af0",
+      "sha256": "3ce3d33505b34cda136acefcd37a740bc6ba851388837a3a1b4ffa7b757959fe"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/namespace/QName.java",
+      "git_blob": "94121d0d334d5841dd9df184386c77de210a16a8",
+      "sha256": "3cc3949e4bb3c5d0b404e392c2c81d9f91ae2bb77992b07f63e89fc530c7604f"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/parsers/DocumentBuilderFactory.java",
+      "git_blob": "051f892a77c77550f3ca3b36b7ccd61549091619",
+      "sha256": "4c3fe2e9380df8305cf839418cd0508ed85a158ebd72a155d5a2fb36a06dc67f"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/parsers/SAXParserFactory.java",
+      "git_blob": "9c5b1c0f5a90416d6fd07dfdc8952b9fd166b0d6",
+      "sha256": "d205cbae96ccbee92800e44ca38d8624e27c77caf9a47e5712840e76460ec336"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/stream/XMLEventFactory.java",
+      "git_blob": "5c8713f614d463ef833d9be684565d50a60fe14e",
+      "sha256": "23b9e5133143f0264684ccb1a24cf51eae04969bf45fd43612d740af2486a847"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/stream/XMLInputFactory.java",
+      "git_blob": "1d6c1bfac5326154bd9c2e34fa28c259c88da88f",
+      "sha256": "ac6f224df47d59fd7f10381942e7ae008a755e932b106c3a46bb0fb7bbd36778"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/stream/XMLOutputFactory.java",
+      "git_blob": "7b70e2ba6cb12785b6583bf061f6ae29e2e7d0c2",
+      "sha256": "fe890adccdbc35f894a2e823dd2e27162e790de41b79c0029d5294764efefd50"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/transform/Transformer.java",
+      "git_blob": "5f6bd11eafca4a02c2ff2e691e0c4a566112b432",
+      "sha256": "0f2a0fa20b9959e3d2386053744ec635485f02504720de57df090cbe6a1d189c"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/transform/TransformerFactory.java",
+      "git_blob": "20470fa4ad84b7900aef90ffd5dec751333b3d0f",
+      "sha256": "a30cb1ae0e0715b8bbbe7a6b02ba6dda4c5b4c2807058e22a54e00e02bac7092"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/transform/stream/StreamSource.java",
+      "git_blob": "dfb1a3be0d8cabaa94dc8ce511a1c6dab2db0140",
+      "sha256": "79872271e1e2ea9d6808edc55e3b35d30b73efc5924af8fd5d8153968a4e5ea2"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/validation/SchemaFactory.java",
+      "git_blob": "260ffa652fefcc88c34f174edcb1304b344a8747",
+      "sha256": "a0ac1446595599cea9450b63620eab193851247e99f4bed858e7b8919fbeb754"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/xpath/XPath.java",
+      "git_blob": "afdc667040fc112b52bf4127e90d2c9c85b6f67c",
+      "sha256": "e055e2473aeeb31ebff612e9d9c98b2db84fbe6e9ea15c74de110519596e013d"
+    },
+    {
+      "path": "src/java.xml/share/classes/javax/xml/xpath/XPathFactory.java",
+      "git_blob": "90004e3169184739185765a3d2c9dbc6a15c70eb",
+      "sha256": "41bcf32842a4121e88091c1b6084ca5a629ae0c237da4acacfbaaf06ad568de7"
+    },
+    {
+      "path": "src/java.xml/share/classes/module-info.java",
+      "git_blob": "a39b490a9cb8467fd0f1bdfec7b3433ad4549d07",
+      "sha256": "0a0aef409327731fc53c1fe3cad510bd9ef07714dd036eedb5f40d97f68ab096"
+    },
+    {
+      "path": "src/java.xml/share/classes/org/w3c/dom/bootstrap/DOMImplementationRegistry.java",
+      "git_blob": "0be2e91224626776949a5ebdeab28d8f4e1e9c49",
+      "sha256": "e014fd52fe240f83ed6076e9e92a2688cbaccc919c851adbdc9c56cef5729449"
+    },
+    {
+      "path": "src/java.xml/share/classes/org/xml/sax/helpers/AttributesImpl.java",
+      "git_blob": "3e4a1bc8e032a8cc2e5ef26bde971774250e6d67",
+      "sha256": "e537868d815b0f7912c4271da3d914f31de4afe7ef98c34dbd1339532991dbf9"
+    },
+    {
+      "path": "src/java.xml/share/classes/org/xml/sax/helpers/XMLReaderFactory.java",
+      "git_blob": "a3f3faea8f137ab326fbb43cca2c2deb80b07cf8",
+      "sha256": "a2d7c2f3eeae16515d4f25a0e069c4b7c73b1407778bc3c22b6ad38a0ab237d0"
+    },
+    {
+      "path": "src/jdk.accessibility/share/classes/com/sun/java/accessibility/util/AWTEventMonitor.java",
+      "git_blob": "b1b93d795e4a5ae1b5c837446a5e1c6a07572d50",
+      "sha256": "0588459ad73b8032870c8bab459557218e59e9422fbb7a37848334eeee8bd62d"
+    },
+    {
+      "path": "src/jdk.accessibility/share/classes/com/sun/java/accessibility/util/AccessibilityEventMonitor.java",
+      "git_blob": "a2ebac01279c4d83a82a52f28b9c9cf5789d0d10",
+      "sha256": "1ebbb53d608931535c8b2df25092aec7609d1de4a6759ac95f5f208c4094e902"
+    },
+    {
+      "path": "src/jdk.accessibility/share/classes/com/sun/java/accessibility/util/EventQueueMonitor.java",
+      "git_blob": "cb630223c49b720c71aa15b691e7de7ea45581fb",
+      "sha256": "3be31aaeccc2602bcaf7667ff7bbcd4727015f8c3c2ce782efa1cc63a53d655a"
+    },
+    {
+      "path": "src/jdk.accessibility/share/classes/module-info.java",
+      "git_blob": "46baa7d7feefe04304769834899d5ffda1b0bc18",
+      "sha256": "eb018ccec9d791fea93094d54093adea4ed9d50be845fafcb8c7e867e97d5cda"
+    },
+    {
+      "path": "src/jdk.attach/share/classes/com/sun/tools/attach/VirtualMachine.java",
+      "git_blob": "3136e5f407ba969ca9117323ee3e7936241fcd21",
+      "sha256": "4ac29c42a2ba7bcf07a2ab2003eb5e04180944aaedff1a6571254142da7cc214"
+    },
+    {
+      "path": "src/jdk.attach/share/classes/com/sun/tools/attach/VirtualMachineDescriptor.java",
+      "git_blob": "1f868c13a8dbd26399691963b825793712c885e2",
+      "sha256": "78b6c790abebaf40c834f480152a3f765b8e3bdcd19f04657c45b9021c3ca3ef"
+    },
+    {
+      "path": "src/jdk.attach/share/classes/com/sun/tools/attach/spi/AttachProvider.java",
+      "git_blob": "7920b2d0f0198745d919d9cf8a063b7afff630d5",
+      "sha256": "76bc7bfeb220a5706dac98b30df1a1643611ba68961ea6783fefec5a4d402da3"
+    },
+    {
+      "path": "src/jdk.attach/share/classes/module-info.java",
+      "git_blob": "0410fd99d03373974cb9f3e84db94b0e21f791e2",
+      "sha256": "2232cb13bab0512d770e4896bd675fb1f0ffdd7ce4c04a276ee5db2f8d7055f8"
+    },
+    {
+      "path": "src/jdk.charsets/share/classes/module-info.java",
+      "git_blob": "95b11dc76aba2b3e1a0ac91b193646c0d3c89403",
+      "sha256": "07511506c16acf2ad8dc5170bbf2344d121532acee38888d1d33dd2023bee668"
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/com/sun/source/tree/Tree.java",
+      "git_blob": "cf3853035db79071f3ecbbf2cde1b7b0b3d672d1",
+      "sha256": "0d7d045e93711f241ebe9bd4553a805c6afffbd556c15b7416dabc109acbd567"
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/com/sun/source/util/DocTrees.java",
+      "git_blob": "a04c6a9876a6bc99a45f686122320c588c26708c",
+      "sha256": "a1dffad1d4190f275165b3337dbe2192b53a0f59e702c8531603f53229c0ebe8"
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/com/sun/source/util/JavacTask.java",
+      "git_blob": "af47f9073f9ac4c535b102d8b3d0abe0de935d66",
+      "sha256": "ab2a145864b4dec37b043e55d272f63516ecb2435ca3fe8bf9057e84351eb69a"
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/com/sun/source/util/TaskListener.java",
+      "git_blob": "eef9389685c4392d7a9752ebe92a1e95d85a5185",
+      "sha256": "25f2346ae8eb466f55c14421d3496049886cd432f7e3e894e28ee82ab6d2a328"
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/com/sun/source/util/Trees.java",
+      "git_blob": "e4228d37bd5a7772eb393aeacb480365a7af4b08",
+      "sha256": "a6970e444ff8e51e8dec36b91d1ef72655793e8621d5807c1bb740945a15242e"
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/com/sun/tools/javac/Main.java",
+      "git_blob": "07cae101a64a74b90df68aa9caf8735a829eeaaf",
+      "sha256": "22295bbde40617d1322c9c717775714317afc730ca772d9f4f2573d39e7fff78"
+    },
+    {
+      "path": "src/jdk.compiler/share/classes/module-info.java",
+      "git_blob": "13ebbaf1db2e8ba997e48c317f4b64bf8f0cfb1d",
+      "sha256": "ae52d1734570fee7404aeb68b65ef86ea23ad322b72ff0b137c9039c71aafb09"
+    },
+    {
+      "path": "src/jdk.crypto.cryptoki/share/classes/module-info.java",
+      "git_blob": "3c90b6dfe6c374bdb6674b352c97291388511cb7",
+      "sha256": "ccf625cd3befa640bb06a9127e18b33e6756dc2512317fb1faf15731f2f9d9f3"
+    },
+    {
+      "path": "src/jdk.crypto.ec/share/classes/module-info.java",
+      "git_blob": "9ba6e6195e3d70a647d3d5915f7c2f482f9ca61c",
+      "sha256": "794d8a873ea45b4da3e27f4ec34cbc65602930823be4c593dd959ae447b0b810"
+    },
+    {
+      "path": "src/jdk.crypto.mscapi/windows/classes/module-info.java",
+      "git_blob": "6bbad56ca09e1dd07adbf909f78e01dcc394d3b0",
+      "sha256": "1ca6fe2577d7c327b3a316b1feacc23b3a8fa638ab895e862abc3bda0fa5ca45"
+    },
+    {
+      "path": "src/jdk.dynalink/share/classes/jdk/dynalink/DynamicLinker.java",
+      "git_blob": "eb7de0aba75a10f0b323c73cdafaedd71c4ecfa4",
+      "sha256": "ebf371f22ea4a15d08cccb188d3656ccc03f54d8084fb0f10a0118c5a0c5c327"
+    },
+    {
+      "path": "src/jdk.dynalink/share/classes/jdk/dynalink/DynamicLinkerFactory.java",
+      "git_blob": "a34cff5ba12fea3bcd876a181b631de2a03554e5",
+      "sha256": "b9b1d4048381e9eb30aa1be292beb6f04a5aa30b9e416263e0073ae23f50684b"
+    },
+    {
+      "path": "src/jdk.dynalink/share/classes/jdk/dynalink/beans/BeansLinker.java",
+      "git_blob": "386f386216ca8d542c2bb78ec65e53a98b6ebf25",
+      "sha256": "5ae9a99f8c284da8238183537a8c06165b597cc3887ee27507f0cf3a88d3ec25"
+    },
+    {
+      "path": "src/jdk.dynalink/share/classes/jdk/dynalink/linker/support/Lookup.java",
+      "git_blob": "ecf66e7d458a6097c6b286ff0b78f42404fd80b4",
+      "sha256": "6d17e1c516618e58fe30eca0bc7a0fcf2838662e417867624efc638af35dd2d1"
+    },
+    {
+      "path": "src/jdk.dynalink/share/classes/module-info.java",
+      "git_blob": "3a79c4b8e603442be8eecf49291cf8d41fc90de4",
+      "sha256": "aa99277ff4851b96da2617fd4c05d99e343a0457e913e56be034eb1f0f3999b7"
+    },
+    {
+      "path": "src/jdk.editpad/share/classes/module-info.java",
+      "git_blob": "073443b89482a23231a89a7d861ef9c2c77002ed",
+      "sha256": "0353846e5d8e21b52b5e18125406cd1f10012f7a198c3aed190fccff8afdde25"
+    },
+    {
+      "path": "src/jdk.hotspot.agent/share/classes/module-info.java",
+      "git_blob": "8015105d8df8be040ba1802be7f8d23aea3515e7",
+      "sha256": "5eea2e8bb32d2ec689e367c03f9dfbf4913edf5192e5ebbfe61cc3fba731cf14"
+    },
+    {
+      "path": "src/jdk.httpserver/share/classes/com/sun/net/httpserver/Headers.java",
+      "git_blob": "84535027eb41941daa24be2202bdbf8e0c9fe167",
+      "sha256": "ca49b195b27aa62c38f934e92cdc9bf4360227d6a4cf7a2f2ce453d10bcf0a1b"
+    },
+    {
+      "path": "src/jdk.httpserver/share/classes/com/sun/net/httpserver/HttpServer.java",
+      "git_blob": "8ed0172690f8740ed4a5173582f03f9781ccdc15",
+      "sha256": "395bae720146f77f5dfeb1485144357f80ce9c8e4707a04a4284de7f7142dbc9"
+    },
+    {
+      "path": "src/jdk.httpserver/share/classes/com/sun/net/httpserver/HttpsServer.java",
+      "git_blob": "7b3dafd55822ddf115537327405ef1de6abea21e",
+      "sha256": "13d1779a81c014c5f9db798c85cfa996fd78c1e434da903d2ffeb9f0110987c3"
+    },
+    {
+      "path": "src/jdk.httpserver/share/classes/com/sun/net/httpserver/SimpleFileServer.java",
+      "git_blob": "7b9331b86b83e95674157d1c9888f5e3f5afcdaf",
+      "sha256": "b47a2b00f277bc1660a7d66aca7d3d0d1842cbe329e810669eeda84d3e97bd90"
+    },
+    {
+      "path": "src/jdk.httpserver/share/classes/module-info.java",
+      "git_blob": "46dbb6ea64f6843ee3aba111313f283913ce5444",
+      "sha256": "16d5115c2cf09b065540027ddf7c99c4baab0c5005c4e5367506acb95741fdbb"
+    },
+    {
+      "path": "src/jdk.incubator.vector/share/classes/jdk/incubator/vector/FloatVector.java",
+      "git_blob": "2095da4328c41863a61ca8b131b1d151c0914aef",
+      "sha256": "e660cf10e6356e1b43f649fda84c04803dfd513442468829a0ee1b2b95f193f7"
+    },
+    {
+      "path": "src/jdk.incubator.vector/share/classes/jdk/incubator/vector/IntVector.java",
+      "git_blob": "66f6bed91fd357c219fa5cc3d4f41134d412f0bc",
+      "sha256": "bdcc700c8572dbd0cd5aad4901ae63736442f25bf548562c598ae357b6b2e01b"
+    },
+    {
+      "path": "src/jdk.incubator.vector/share/classes/jdk/incubator/vector/VectorMask.java",
+      "git_blob": "40d20835534e6a2963b497da430bf6f8f7c93fc1",
+      "sha256": "218876f07d814f53b2348f0465642d8b5f970336563968bc3aa49b81ed14475f"
+    },
+    {
+      "path": "src/jdk.incubator.vector/share/classes/jdk/incubator/vector/VectorOperators.java",
+      "git_blob": "ece08e22872550ef69d259def8550a8a73448895",
+      "sha256": "14e160488c413437bf98ff26316059a96f5a64a8279b27ed4273beac06e3d187"
+    },
+    {
+      "path": "src/jdk.incubator.vector/share/classes/jdk/incubator/vector/VectorShuffle.java",
+      "git_blob": "b046874c390528f1e38d00f7c6ac5f9260e9358d",
+      "sha256": "1e00b3439354289d0d2c73eebd51222311bee432018f9dc1d02d068d76eeffde"
+    },
+    {
+      "path": "src/jdk.incubator.vector/share/classes/jdk/incubator/vector/VectorSpecies.java",
+      "git_blob": "6cfe5f6d9d93ea1917fce7994f7211ae6db27345",
+      "sha256": "5299ef8647422679ec5196a6e835e6c1afcb65d939c51622e15c2db7a19529a5"
+    },
+    {
+      "path": "src/jdk.incubator.vector/share/classes/module-info.java",
+      "git_blob": "eda1f10b26bf21f47ddb64b65d388bb1d81440ee",
+      "sha256": "9fe050d348698f7846e5c112a6c8d0459189b9eb6d4eb727c65bd5a5b4ebe187"
+    },
+    {
+      "path": "src/jdk.internal.ed/share/classes/module-info.java",
+      "git_blob": "e1169a50534a3efcb230a530ebf90c5374f4ad20",
+      "sha256": "b77d4f96cb4cb33667bddf0f4181d90f2db03f2e9e8849897ee45ac767971e1a"
+    },
+    {
+      "path": "src/jdk.internal.jvmstat/share/classes/module-info.java",
+      "git_blob": "9e12c98b0168f2b57070877d43657971645eb663",
+      "sha256": "cf393dab2ee9eb8c25623cfeeb6564f16d032c12ab2120a495a52987ef1b02f7"
+    },
+    {
+      "path": "src/jdk.internal.le/share/classes/module-info.java",
+      "git_blob": "fdc973d36ca23f90fdd9e2e83ee04cd631b84fa1",
+      "sha256": "b224350f0e41236f76a8d148f7f170dbe8560fd83d429caaa11008873016c587"
+    },
+    {
+      "path": "src/jdk.internal.opt/share/classes/module-info.java",
+      "git_blob": "67ed1410560dff79bd013be8115fde35c0a80139",
+      "sha256": "8fc2dd0dd6bb80293aa8bb8eb5d9c9f85612fb37e557c9860d0fec1f418c406a"
+    },
+    {
+      "path": "src/jdk.internal.vm.ci/share/classes/module-info.java",
+      "git_blob": "b4b93f6a747124147bd42d51d914ad88f3c14c7c",
+      "sha256": "62bf87398d5ac34a36100de524c60d4108c06294f05463ce756b3d5ff557fe6e"
+    },
+    {
+      "path": "src/jdk.internal.vm.compiler.management/share/classes/module-info.java",
+      "git_blob": "88a5d933fca67c9bdb7ae554be159359f39a36c3",
+      "sha256": "abb7d40cbfe11cb568b5801a3812dedbb62957d5a1ebdda205a7a3ba11d68fab"
+    },
+    {
+      "path": "src/jdk.internal.vm.compiler/share/classes/module-info.java",
+      "git_blob": "7284f2f225d3bf0b6659aacae508710d295179d6",
+      "sha256": "e6db78d4b15026600d2eab86ebc3d5770d20417c583fca2649ca64e38734ca9a"
+    },
+    {
+      "path": "src/jdk.jartool/share/classes/jdk/security/jarsigner/JarSigner.java",
+      "git_blob": "4f85adb752837d72223772bb41027ce3a2109832",
+      "sha256": "335825fc88bdd0d13e8a4a94df49f3a0d2e1efec51858948e4097e53748e5b49"
+    },
+    {
+      "path": "src/jdk.jartool/share/classes/module-info.java",
+      "git_blob": "ce7f1d0ba373d847862afd04cdbd6162ffaa64e4",
+      "sha256": "ec3a786f2d5b854715fff9910ed8a617da70bfd930a063c874eae0fad1601920"
+    },
+    {
+      "path": "src/jdk.javadoc/share/classes/jdk/javadoc/doclet/Doclet.java",
+      "git_blob": "757cf1b533690ac160215d5f204f26a2a44c77c7",
+      "sha256": "3f4d99d5301c67e87cc46ffdae82db32828a8eb86fb8ee7f13424a9bd918d9b7"
+    },
+    {
+      "path": "src/jdk.javadoc/share/classes/jdk/javadoc/doclet/DocletEnvironment.java",
+      "git_blob": "7ae401e66bf3c79938a5e1426f962ffb8c4cfc2a",
+      "sha256": "0c74c5123a7a2f2c52dd2cb9eafbf1d474a89c3d3416c72c8405cd73d5af42a7"
+    },
+    {
+      "path": "src/jdk.javadoc/share/classes/jdk/javadoc/doclet/Reporter.java",
+      "git_blob": "804b621f19c64ae930b220be282aff1d78c82098",
+      "sha256": "bbb5cbac4969b4deb4d254c8f6fad1675ca1f6bf1b845930d15a1486e1530e22"
+    },
+    {
+      "path": "src/jdk.javadoc/share/classes/jdk/javadoc/doclet/StandardDoclet.java",
+      "git_blob": "dff6f3e34bd606e38131508621e65f1fe87717b0",
+      "sha256": "34fe302012804a6492f67037f7f73b40cf58b2c4efa75083a49d91bd2953031a"
+    },
+    {
+      "path": "src/jdk.javadoc/share/classes/module-info.java",
+      "git_blob": "ee84482204a2b04b693a235fca3bf199fb587d99",
+      "sha256": "b5ce470a8720ee499d867b2af31c57d1e5660f5cc126324e4321869b175ad87d"
+    },
+    {
+      "path": "src/jdk.jcmd/share/classes/module-info.java",
+      "git_blob": "a26565b53967005815d111a37d8813584e5f7e5e",
+      "sha256": "785ea2ad63f305c524b439e2fe7b8a905a66e4fec2e303fa9b524e4430113f74"
+    },
+    {
+      "path": "src/jdk.jconsole/share/classes/com/sun/tools/jconsole/JConsoleContext.java",
+      "git_blob": "e324109f05d691f61589bb9db52a65e237e3c430",
+      "sha256": "b63b734f9cb16b885ea38a37508453deeea2c7aa346dfb8250190cb00374cfbc"
+    },
+    {
+      "path": "src/jdk.jconsole/share/classes/com/sun/tools/jconsole/JConsolePlugin.java",
+      "git_blob": "3e61ea9e438721094f39ad1ba38925ad577798cb",
+      "sha256": "4586c2b32dc2b886afdc9ef2d6adf2b8fb7002c45f4a650679d6c1f7eec9e432"
+    },
+    {
+      "path": "src/jdk.jconsole/share/classes/module-info.java",
+      "git_blob": "d12d7391c7b9be2aa7112b4d4d7e2279b34ad2c6",
+      "sha256": "2ca125bba155f1a3e474b87560f8e9f95933e3fb0dae9f459ff4809400463642"
+    },
+    {
+      "path": "src/jdk.jdeps/share/classes/module-info.java",
+      "git_blob": "a3f47954842ab429e00b48a48034bc288e3c1345",
+      "sha256": "2ca440125289bc476a1e60264d0a35168c0a860590bfb626eb0c6075424be217"
+    },
+    {
+      "path": "src/jdk.jdi/share/classes/com/sun/jdi/Bootstrap.java",
+      "git_blob": "a173bcf4fc03464904d647e5acb205694838bb5a",
+      "sha256": "fe1af30ca272b9c1c0ae40ffa39895946a8f7cecde4d5c145bc74f265df6719c"
+    },
+    {
+      "path": "src/jdk.jdi/share/classes/com/sun/jdi/VirtualMachine.java",
+      "git_blob": "0c7d064422959e7d2d3cc0776f29b443f307c8e2",
+      "sha256": "a285f717545bc1e6de1f5a4f81916bb779057843800fde82a6903fff884fe032"
+    },
+    {
+      "path": "src/jdk.jdi/share/classes/com/sun/jdi/VirtualMachineManager.java",
+      "git_blob": "6f3cf2456a467f17862cf29bb92c53b6230bd9be",
+      "sha256": "0481b60e7b1330c53291a390834a238b44b012c4a54af3a8863419d735f475c1"
+    },
+    {
+      "path": "src/jdk.jdi/share/classes/module-info.java",
+      "git_blob": "3bd2f7fc294b5579373a5c6c1146e8b5df9fb71a",
+      "sha256": "f35207a92da2dc463f357e34ad010697bc5bd33f4d48d24c717fe0eb2229c4da"
+    },
+    {
+      "path": "src/jdk.jdwp.agent/share/classes/module-info.java",
+      "git_blob": "0d7e888e7e963a9c160c20e29a0fa146f5a09a56",
+      "sha256": "e5ab64cae54ba04ece210a9ad2ec85569eed4f06251ae42276944b12c8386200"
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/Configuration.java",
+      "git_blob": "8be9d2ee23dbdb660c1bd0c9ca2096a3ea6f3b73",
+      "sha256": "491f6ded7c887a0126ff3e463d430ca9a68a164889e44e417ac444e10b1f72b5"
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/Event.java",
+      "git_blob": "c33d7749b5c0ead0efe1e486956123c7712624ab",
+      "sha256": "7af9f7f313a866a7c5af7be4ba8515f583437c92002651cd9bb361e20c3dd55a"
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/FlightRecorder.java",
+      "git_blob": "00ef0c5fa213378ff695db3b8e7143fa57a35b18",
+      "sha256": "6c4993d9e5f0cf8127ac3e143cc2b5ae218dda7f733f755c11390f2132d294c5"
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/Recording.java",
+      "git_blob": "4409f51f45de53b346760afe60ef71cf8c5844a3",
+      "sha256": "32103137c58e5ef4cc664ee5cbdb53e356f417d2e33f52ab632906e3cf354577"
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/consumer/EventStream.java",
+      "git_blob": "06f25dd6f619030e42f20f427975cfc33d4b228e",
+      "sha256": "22d3688ee1336de79344aa86d44828e485263d75453f92b2eea756591bb32535"
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/consumer/RecordingFile.java",
+      "git_blob": "4c9baaf5309ffa4018ce67bc6639d038a87b5ab5",
+      "sha256": "5601aebd7978d4d54ed86bacab0da240f85f46dc1ea7564bbf9f063b4ec4a035"
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/jdk/jfr/consumer/RecordingStream.java",
+      "git_blob": "cba39f0cd4f2c12db2e7c919d2c01c2bdb1549da",
+      "sha256": "8416f59b9fd5425a6f3111f8f4c56f88b250aedb59d595ebb005d90b3426655c"
+    },
+    {
+      "path": "src/jdk.jfr/share/classes/module-info.java",
+      "git_blob": "aab58c319537c91f62298c2db84c1f2949372d2a",
+      "sha256": "6264c976f8a3e2aca53f5828f7468bf712b5d1c5d205702f5f0c9d5d5227d438"
+    },
+    {
+      "path": "src/jdk.jlink/share/classes/module-info.java",
+      "git_blob": "a7bb8bce18744cada731e40c9ff7c85c6f8a72bb",
+      "sha256": "667139571b87df496519418c7d93aec67d085b83617476ea1159a5297ce46333"
+    },
+    {
+      "path": "src/jdk.jpackage/share/classes/module-info.java",
+      "git_blob": "ea41abd75d8325451c7603048fdab93b843fed13",
+      "sha256": "20be00567c78c206f88e34cc2ea3c6976750122fb18678831aae08cd2b2b4258"
+    },
+    {
+      "path": "src/jdk.jshell/share/classes/jdk/jshell/JShell.java",
+      "git_blob": "ffa46cf8be4e1973d27a0d945bdde7d3f8491a6a",
+      "sha256": "d2feb19bf67b155b7017cfba0c616ed8d480bb64601fdd5e84661ef0b59885f0"
+    },
+    {
+      "path": "src/jdk.jshell/share/classes/jdk/jshell/SourceCodeAnalysis.java",
+      "git_blob": "7a78c04f5a860d19f2571e90e08279f5acf305e9",
+      "sha256": "5cd3d18774eb79d75a7c2e96d87a20682552d872b6f689e9acb6692430f82022"
+    },
+    {
+      "path": "src/jdk.jshell/share/classes/jdk/jshell/execution/Util.java",
+      "git_blob": "2475a959fdfeaecc0b5685f98ef7df25b2c4f5e8",
+      "sha256": "8a6295b88e2d2bafec2a17ea587044f950988a93c53782a564a651bb487fb5fc"
+    },
+    {
+      "path": "src/jdk.jshell/share/classes/jdk/jshell/tool/JavaShellToolBuilder.java",
+      "git_blob": "c4b4bf66b336ac282b27b8a7fcee356461e52d95",
+      "sha256": "f2ad4cc33c106d071b5d451ebcfd0ab126b0ee59eb280873ded42a12d45c957b"
+    },
+    {
+      "path": "src/jdk.jshell/share/classes/module-info.java",
+      "git_blob": "ba3c99b63fa99c49c8d919e42062484a7c1d63cd",
+      "sha256": "4f18715810a4b07efdbf97162aa40aa00faec5beac8fbb0ba6176749786989b5"
+    },
+    {
+      "path": "src/jdk.jsobject/share/classes/module-info.java",
+      "git_blob": "7903dbb2c2433a70af620279f9685c685bf600d0",
+      "sha256": "882fe42a2a2b1693b10c806fde00dbc1951bb79b3dc6abb796b409dadcb48e2b"
+    },
+    {
+      "path": "src/jdk.jsobject/share/classes/netscape/javascript/JSObject.java",
+      "git_blob": "b72a65ad107505ab3e0234a7bee386ef73435026",
+      "sha256": "8ecda70b5adc6a395795123fb1221d8368a3bd3b81e04810944389f5267d8a0b"
+    },
+    {
+      "path": "src/jdk.jstatd/share/classes/module-info.java",
+      "git_blob": "ade59da4248cd1fd54db47bcd18e5d12e14da7bd",
+      "sha256": "9ad3a2e4980c8e6fed8fee4b8e6baddc7581b0d228f7b1e12538a09afb505b01"
+    },
+    {
+      "path": "src/jdk.localedata/share/classes/module-info.java",
+      "git_blob": "fadb091a92f99f876de43944b2e78f6fcd468313",
+      "sha256": "7d3f09a3784b19d638f889a62ba17b78c81188eabfef93dfb5a557fc66f308da"
+    },
+    {
+      "path": "src/jdk.management.agent/share/classes/module-info.java",
+      "git_blob": "9688e22b9f9740eb4b3df2e38381a03edfc156cb",
+      "sha256": "e8b33890e701ff70e7c823611aa470450c790aef0e91652e5f654579fa426237"
+    },
+    {
+      "path": "src/jdk.management.jfr/share/classes/jdk/management/jfr/FlightRecorderMXBean.java",
+      "git_blob": "4f83786709fc7250abef050b7711903673ad3e49",
+      "sha256": "6af5b2114e5cbef9bd5c8c6d7119ecc02164d1347869e83af478c5a1dd6ca973"
+    },
+    {
+      "path": "src/jdk.management.jfr/share/classes/module-info.java",
+      "git_blob": "341d29d9cfe2f20842f4ef5ac65f25510a3f97e1",
+      "sha256": "3f0553f5c52a062ee868043057f9c22e31de0f72c7eeebd616cf29930f7dc440"
+    },
+    {
+      "path": "src/jdk.management/share/classes/com/sun/management/HotSpotDiagnosticMXBean.java",
+      "git_blob": "b1d86a743a5c3c24de2170238743d1ca6fadf256",
+      "sha256": "39321eb90d8bd065c619f8b1d99fde9156591d1a694d26217384c879a3fd69be"
+    },
+    {
+      "path": "src/jdk.management/share/classes/com/sun/management/OperatingSystemMXBean.java",
+      "git_blob": "04497ed980755ab9d4f5ecf1da5d0d9f6bfde010",
+      "sha256": "6e7e162ad25540991602c0e524413884e865b08a4b58abcb7cd7bc5c3398158c"
+    },
+    {
+      "path": "src/jdk.management/share/classes/module-info.java",
+      "git_blob": "092480de9e5797b52f39bbd1368a04c1fa97d5e6",
+      "sha256": "daacd33bf892311e014d5a006f7486c762db5990ebd0c5bd4c9fac94bf39681f"
+    },
+    {
+      "path": "src/jdk.naming.dns/share/classes/module-info.java",
+      "git_blob": "5665080e699d565726278412c2cd1d57ed9d377a",
+      "sha256": "10956023381d2ae7d2c735e02ffe7993ba2bafb3d5e313a0f72aa1247c21c814"
+    },
+    {
+      "path": "src/jdk.naming.rmi/share/classes/module-info.java",
+      "git_blob": "6afa13aa84dd820bebfdb3da4ce333ca4c021cbe",
+      "sha256": "174daff8942a0b17536cd7aeecaf07f7370f3cd75b25fca35463ea871a1a5925"
+    },
+    {
+      "path": "src/jdk.net/share/classes/jdk/net/ExtendedSocketOptions.java",
+      "git_blob": "fc06d7c4349e944c16c57f3d87b3417999afe8aa",
+      "sha256": "b4edd3aa54fe13e3bd66c6fda10ffe3f502e5fa586e275686b9ce09b6fcb31ef"
+    },
+    {
+      "path": "src/jdk.net/share/classes/jdk/net/NetworkPermission.java",
+      "git_blob": "2a1f3465890219fcbf72faa56c90b54733337fe7",
+      "sha256": "21358b8d2d65669512f355ea69eed835164dd09cf4f368cc0cf72c2d030da977"
+    },
+    {
+      "path": "src/jdk.net/share/classes/jdk/net/UnixDomainPrincipal.java",
+      "git_blob": "f3b1c94c9a31128a93588797b41d733e190d9c75",
+      "sha256": "8c801913d2e7a72012f47221bb26ffea292bf1fecd083bbb8c73a46259254ca5"
+    },
+    {
+      "path": "src/jdk.net/share/classes/jdk/nio/Channels.java",
+      "git_blob": "e59acdbc654e033200cf74bd6d53c4fe2d2a6d35",
+      "sha256": "c6562dc483a1ccbeb2177918c3f9d3a84c37ba7b37868fa3e01af3da37bb653e"
+    },
+    {
+      "path": "src/jdk.net/share/classes/module-info.java",
+      "git_blob": "b141aa7f42d8e69529c35f4866b8b4c87b0bccfa",
+      "sha256": "8e955054515b7a5694f78a4f3a9ea341da8a9b00ae5710b197135735320473e7"
+    },
+    {
+      "path": "src/jdk.nio.mapmode/share/classes/jdk/nio/mapmode/ExtendedMapMode.java",
+      "git_blob": "4c2d02d78cc99e64013c8b6b287eb0c4b1b35cef",
+      "sha256": "a324596d7c0ed60fc0d2ffe7d8f9e702cfdf991fefb9cb82da106c0fbe772487"
+    },
+    {
+      "path": "src/jdk.nio.mapmode/share/classes/module-info.java",
+      "git_blob": "26b9c8489da12ab97889b89c8fbfa7bf2b7031cf",
+      "sha256": "16a083e41433c882bd7e7e3073f35ef46abb078f202d0d2a0010cfe327a55e20"
+    },
+    {
+      "path": "src/jdk.random/share/classes/module-info.java",
+      "git_blob": "3d82090f313345e6e59b7fa23689a930591c28ba",
+      "sha256": "d878557975670ada9c84775f4c2322d2e46f1280e5c84c1130d64029e3e786d6"
+    },
+    {
+      "path": "src/jdk.sctp/share/classes/com/sun/nio/sctp/SctpChannel.java",
+      "git_blob": "55e2afb79e9d5fe0a69e5243846bbbe67dbad5c8",
+      "sha256": "012b1c4f668387432f041a5b9d4330eb1bb2ca7f47a8a1d72e4eab851bb0b420"
+    },
+    {
+      "path": "src/jdk.sctp/share/classes/com/sun/nio/sctp/SctpMultiChannel.java",
+      "git_blob": "b90691739385222a9a09f2b08704417e58c5cd05",
+      "sha256": "687ac970877821c8d1dbf9d0bc4c6850b9d1cae1fdf9691d64feb1c26789badf"
+    },
+    {
+      "path": "src/jdk.sctp/share/classes/com/sun/nio/sctp/SctpServerChannel.java",
+      "git_blob": "212e111a930030be7ddf4dfc156d6e2f7c5cd1a8",
+      "sha256": "a6a796632d0f75e27924dd29da6fc2621aa55bb6233764b1bd4fa25c01261212"
+    },
+    {
+      "path": "src/jdk.sctp/share/classes/com/sun/nio/sctp/SctpStandardSocketOptions.java",
+      "git_blob": "1f1a464f9bedebed1abcd5be81dfb4d817434eab",
+      "sha256": "3010d426a198d033b66a8309ac019bc9e3cc29400932a6096beb102cc2624661"
+    },
+    {
+      "path": "src/jdk.sctp/share/classes/module-info.java",
+      "git_blob": "f150ed25fc610a70395c0cd5157d6724aebfb8e9",
+      "sha256": "1b35fe2ea51889bca15cf88a201ae4c49bcb3c83999316afda0c9ac4682d3ea2"
+    },
+    {
+      "path": "src/jdk.security.auth/share/classes/com/sun/security/auth/UnixNumericUserPrincipal.java",
+      "git_blob": "30a1e9ca81d56e89f892d59d9193c46c10549b57",
+      "sha256": "c761a0644ffa21548b6eeb6c25f66408b1e099083cb0993060371c0649a6237a"
+    },
+    {
+      "path": "src/jdk.security.auth/share/classes/com/sun/security/auth/callback/TextCallbackHandler.java",
+      "git_blob": "ba078bab99fba34f0c2610007e53b2bb2108172b",
+      "sha256": "7df003c64c045ec7120eaf8f520714da1b0ec4702b8a8e31434753451c3d6b88"
+    },
+    {
+      "path": "src/jdk.security.auth/share/classes/com/sun/security/auth/module/Krb5LoginModule.java",
+      "git_blob": "8147fa76a370f541a946a5c353e7c88feb2dcfa5",
+      "sha256": "0f0b3aae99f7a4f0baae18482650cae5a6cb396eac2c5765d5e5fba277eef550"
+    },
+    {
+      "path": "src/jdk.security.auth/share/classes/module-info.java",
+      "git_blob": "50791d55c6b03933f53d58aa7297aeae03ad8b6f",
+      "sha256": "a18064c71cc154c8444e386a4e57248c20669b47809d581765ff4d928eec6eea"
+    },
+    {
+      "path": "src/jdk.security.jgss/share/classes/com/sun/security/jgss/ExtendedGSSContext.java",
+      "git_blob": "7011f5d8dc00beafe07036acf6ba2148c4dfcc9a",
+      "sha256": "903a80ae7e9b7a3a6b7330ca01bb6af9863c1ea9cd4bac1efd63bf7efbab9caa"
+    },
+    {
+      "path": "src/jdk.security.jgss/share/classes/com/sun/security/jgss/ExtendedGSSCredential.java",
+      "git_blob": "7b2351e2da7cfd591711bbe635595b9ad993532a",
+      "sha256": "af94e917aea767059bb0325e2646f6866aaf9e9a85481e3147b286d4efeb9843"
+    },
+    {
+      "path": "src/jdk.security.jgss/share/classes/com/sun/security/jgss/InquireType.java",
+      "git_blob": "6240f0d3ddfec8870a9751e3e8da55328153e3b4",
+      "sha256": "9425c3b7a3adee97fbf5edf8c7f879336f41dc6aa49461c8a9ce4051651c79c4"
+    },
+    {
+      "path": "src/jdk.security.jgss/share/classes/module-info.java",
+      "git_blob": "d8c0473660afe2d50f53d57af985654987b1127e",
+      "sha256": "590f251357b16be85e4845427dd7e6edffcee2457bf8240a442b71b3792036b3"
+    },
+    {
+      "path": "src/jdk.unsupported.desktop/share/classes/jdk/swing/interop/LightweightContentWrapper.java",
+      "git_blob": "b6662830801fd64cfcb39122dc98b56f6646d757",
+      "sha256": "5802c86563fa4c57aae12e8e11f16ad98c4575db09aab60e16276a2e4656642b"
+    },
+    {
+      "path": "src/jdk.unsupported.desktop/share/classes/jdk/swing/interop/LightweightFrameWrapper.java",
+      "git_blob": "fa1a7ff4764858143be0cf28b9d048fb57835a33",
+      "sha256": "49c926ae9ec5f50900795cebbb4924e7ff3e55fde7ec2fe7c9c3a14da0632185"
+    },
+    {
+      "path": "src/jdk.unsupported.desktop/share/classes/jdk/swing/interop/SwingInterOpUtils.java",
+      "git_blob": "589744641e4d95e3911cd4fc2d0fd0dea625abe6",
+      "sha256": "8a40c3d23b1ad8621ec0e99126a501a06f2f43a89d56e51344a1bf4a4dc22d12"
+    },
+    {
+      "path": "src/jdk.unsupported.desktop/share/classes/module-info.java",
+      "git_blob": "d307f95a0842bd4ed41b8d6e167bf7891bf819d2",
+      "sha256": "e4b636c69b45d023ee20fe00d22774422187e89ab92e536d8940d95fa15f28c3"
+    },
+    {
+      "path": "src/jdk.unsupported/share/classes/com/sun/nio/file/ExtendedCopyOption.java",
+      "git_blob": "3f3c9e1681eb2e1a703eadd8728af7ab4dc5e104",
+      "sha256": "9eaa3aede0927d2c9a94e5b0f59686ca95752b0e0deee75539992fd7d73afb9d"
+    },
+    {
+      "path": "src/jdk.unsupported/share/classes/module-info.java",
+      "git_blob": "7ec44647dd4afa2af5fd5e66225db32e42bd9bfa",
+      "sha256": "22b01e1b41f6b900bf3a8502d104a747fb3a38dae9eccc10817b11476e9e1d15"
+    },
+    {
+      "path": "src/jdk.unsupported/share/classes/sun/misc/Signal.java",
+      "git_blob": "3e6de4a27367a4511151deacba85a5fd2a1a7e9b",
+      "sha256": "a5368f1cb519a39109edc9e13ed8d48e4a05c279c9be50b15acb09359c69499a"
+    },
+    {
+      "path": "src/jdk.unsupported/share/classes/sun/misc/Unsafe.java",
+      "git_blob": "2f8d397c6c99baba3aef8341a694491c0517303b",
+      "sha256": "91abb420ce45169c78f4d66ea7e5c85e24a52308172c0797a5c3ce407ba1a06c"
+    },
+    {
+      "path": "src/jdk.unsupported/share/classes/sun/reflect/ReflectionFactory.java",
+      "git_blob": "f6f9b3976fc0de3fd87d8778b827cf5547938bf7",
+      "sha256": "874ff488c899c0a701f16ae1a06a233fdad5cae72896ab32c1c684d3127c715d"
+    },
+    {
+      "path": "src/jdk.xml.dom/share/classes/module-info.java",
+      "git_blob": "d033c2a76a60d4dde3814f422e13c3bfa9e11138",
+      "sha256": "58fbbdc75c865e4341add36a8ff05199ce6025a6332132c9e11972c1ecca59d6"
+    },
+    {
+      "path": "src/jdk.xml.dom/share/classes/org/w3c/dom/css/CSSStyleDeclaration.java",
+      "git_blob": "c6bd17f9b2d072a42a48c4996245a6d7add13836",
+      "sha256": "19e0d081c7dbbc33d49a8e3a1697c951acaae71544db32a2c940fd3b8e9e6707"
+    },
+    {
+      "path": "src/jdk.xml.dom/share/classes/org/w3c/dom/html/HTMLDocument.java",
+      "git_blob": "06e6eb7c6ae6294d2f3e2242d499c704701670f3",
+      "sha256": "f7c5d78dd256585d1f5ccbf78e511d76229bee1675c1ff5b0a6c56ee1588d365"
+    },
+    {
+      "path": "src/jdk.xml.dom/share/classes/org/w3c/dom/html/HTMLElement.java",
+      "git_blob": "cc0727ee570c5a0eb7c59523cfb261b7f24048b1",
+      "sha256": "ac57f49565d9cc56e629b56061062919c8fd33b506208a6f1122c9ddc7bf7c57"
+    },
+    {
+      "path": "src/jdk.xml.dom/share/classes/org/w3c/dom/stylesheets/StyleSheet.java",
+      "git_blob": "40df308881865f20e4d8279b8e82f7396b67af5f",
+      "sha256": "f31ee53bc8c53a89f369a4f938736e3845bba2c52f526f0497f3cc3410ea611f"
+    },
+    {
+      "path": "src/jdk.xml.dom/share/classes/org/w3c/dom/xpath/XPathEvaluator.java",
+      "git_blob": "734a3c55febc5c7fb0674c263e18b9339da26dfa",
+      "sha256": "5e654ce13fab050cb8892fcc8b76fde95514ad159283faa430e79ca22a7b426b"
+    },
+    {
+      "path": "src/jdk.zipfs/share/classes/module-info.java",
+      "git_blob": "b996006b4fe7b25056147ae67bea2bac7c9b6511",
+      "sha256": "b59b2c03942c4b98bc138d37234e9b1789551f2303033dc1a651b38ca523682f"
+    }
+  ],
+  "atom_manifest_policy": "Index source evidence is authenticated by the verifier against immutable Git blobs. For complete source-deck admission, use all atoms as KEEP except changed target paths, which must appear once as exact pre/post transitions. A sparse source checkout may need its atom inputs materialized from the pinned Git revision before a full KEEP deck can run.",
+  "source_evidence": {
+    "modules": 70,
+    "unqualified_exported_packages": 227,
+    "representative_public_types": 366,
+    "core_families": 31,
+    "additional_aspect_groups": 19,
+    "catalogue_decisions": 22,
+    "exact_source_paths_including_name_map": 454
+  },
+  "reusable_refusal_tests": {
+    "tests": 26,
+    "failures": 0,
+    "errors": 0,
+    "log": "/dev/shm/m3jdk21-work/catalogue-expanded-source-tests.log"
+  },
+  "source_verifier_report": "/dev/shm/m3jdk21-work/catalogue-expanded-source-verification.json",
+  "new_token_slot": "PENDING_DONOR_RIGHTS_OWNER_AND_CONTRACT_SELECTION_NO_PUBLIC_NAME_OR_SIGNATURE_INVENTED",
+  "runtime_qualified": false,
+  "performance_qualified": false,
+  "receiving_sequence_advanced": false,
+  "snapshot_selection": "REUSE_EXISTING_ARRAYS_SORT_ON_CAPTURED_VISIBLE_OBJECT_ARRAY",
+  "snapshot_rejected_source_sha256": "a5f4f146cd60cb726628673dded32d076f70b8d4ad32d0d0cb25ad4dfa308199"
+}

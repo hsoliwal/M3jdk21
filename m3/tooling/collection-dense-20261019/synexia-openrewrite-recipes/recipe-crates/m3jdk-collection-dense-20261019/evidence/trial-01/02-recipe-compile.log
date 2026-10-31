@@ -1,0 +1,26 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------< com.synexia.m3:m3jdk-collection-dense-proof >-------------
+[INFO] Building m3jdk-collection-dense-proof 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ m3jdk-collection-dense-proof ---
+[INFO] Copying 10 resources from resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ m3jdk-collection-dense-proof ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 4 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ m3jdk-collection-dense-proof ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/48c1329dbda8/m3jdk-collections-20261019/canonical/synexia-openrewrite-recipes/recipe-crates/m3jdk-collection-dense-20261019/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ m3jdk-collection-dense-proof ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.665 s
+[INFO] Finished at: 2026-10-19T06:34:26+01:00
+[INFO] ------------------------------------------------------------------------

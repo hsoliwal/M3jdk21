@@ -1,0 +1,9 @@
+{
+  "stage": "performance-process-launch",
+  "status": "BLOCKED_ENVIRONMENT",
+  "command": "/usr/bin/time",
+  "error": "FileNotFoundError: /usr/bin/time does not exist",
+  "product_or_contract_failure": false,
+  "last_verified_stage": "baseline and snapshot memory/native qualification",
+  "correction": "use Python os.wait4 child resource receipts; do not change runtime outputs"
+}

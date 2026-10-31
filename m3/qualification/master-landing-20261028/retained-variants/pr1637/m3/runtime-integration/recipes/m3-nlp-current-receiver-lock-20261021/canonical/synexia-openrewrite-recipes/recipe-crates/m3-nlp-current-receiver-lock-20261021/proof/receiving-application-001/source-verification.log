@@ -1,0 +1,1 @@
+{"status": "EXACT_RECIPE_POSTIMAGES", "target_paths": 2, "unchanged_engines": 4, "source_seals_sha256": "6cc232bd392dd188b227a0a7c304d0a6e6d25ed91dd3641fefb335afdfc8574e", "scope": "source readback only; runtime and source-built JDK gates are separate"}

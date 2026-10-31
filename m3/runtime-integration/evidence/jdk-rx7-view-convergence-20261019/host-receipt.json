@@ -1,0 +1,60 @@
+{
+  "schema": "M3_RX7_VIEW_CONVERGENCE_HOST_V1",
+  "receiver_parent": "46b35b58e142099020822d7189b1f18c129729eb",
+  "canonical_parent": "0dfaa7e1987c49e4610b97eef03c7e4f96e75ecc",
+  "source_changes": 3,
+  "second_replay_changes": 0,
+  "proof_lane": "OFFLINE_CANONICAL_JAVA_REPLAY_AND_HOST_COMPONENTS",
+  "checks": {
+    "predecessor_recipe": 214,
+    "new_recipe": 133,
+    "jdk_sorted_splits": 1031319,
+    "filtered_integration": 337790,
+    "filtered_navigation_baseline_and_candidate": 337780,
+    "rx7_find_baseline_candidate_and_xint": 251558,
+    "mask_jni_baseline_and_candidate": 270606,
+    "missing_native": 3,
+    "inherited_rx7_native": 632868
+  },
+  "counts_are_assertions_not_independent_tests": true,
+  "maven_openrewrite_junit": "NOT_RUN",
+  "source_built_jdk_jtreg": "NOT_RUN",
+  "full_sdk_reactor": "NOT_RUN",
+  "whole_collection_family": "NOT_RUN",
+  "platform_gc_cds_pressure": "NOT_RUN",
+  "production_changes": [
+    {
+      "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
+      "before": "a5cefed03d9db9429048a218945a8af71b5b7acc862e089f6cc8a451a172e212",
+      "after": "8107ba8ba5f9d7519563eba9d20e76932dd077b2359f056b05ccd0a2d7d62e18",
+      "kind": "TEXT"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/ReverseOrderSortedSetView.java",
+      "before": "f1520fe61b7609fe7741b8728443c81f2cadcb9782bdf73fd45e1cc4a663ca51",
+      "after": "8acf1a3ff90f8cf47dd96183c66e2fe8f5469dc565b9156fd560176a4b82c9da",
+      "kind": "JAVA"
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/SortedSet.java",
+      "before": "9e7c747ca013801ae2261f77cd3b5e98ac7debe33dfb71882515f6ef7f558def",
+      "after": "cad903e966ac81eae0763973d9bbfdc37f50233c5a60e82beeb8e064028febe4",
+      "kind": "JAVA"
+    }
+  ],
+  "runtime_public_descriptors": "UNCHANGED",
+  "mask_jni_symbols": "UNCHANGED",
+  "host_java": "21.0.12.1+1-1-deb13u1-Debian",
+  "host_gcc": "14.2.0",
+  "native_checks": [
+    "-Xcheck:jni",
+    "-fsanitize=undefined",
+    "-fno-sanitize-recover=all"
+  ],
+  "performance": "EXPLORATORY_SHARED_HOST_ONLY_MIXED_COSTS",
+  "rx7_early_completion": "HOLD_NOT_APPLIED",
+  "selected_rx7_sha256": "fa5ecdb1a0c28813397343ee62d4ef5924d57f2738bb786e6e3af6aa99289821",
+  "enclosing_runner_timeout": "Inherited corpus rerun separately, passed; original timed invocation not a pass.",
+  "packaged_combined_host_script": "PASS",
+  "packaged_log": "evidence/packaged-host-proof.log"
+}

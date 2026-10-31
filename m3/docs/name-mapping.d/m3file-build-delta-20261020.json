@@ -1,0 +1,23 @@
+{
+  "schema": "M3JDK21_EXISTING_OWNER_EXTENSION_V1",
+  "capability": "raw source and class content observations",
+  "target_module": "com.m3.file",
+  "target_owner": "com.m3.file.M3File",
+  "target_path": "m3/file/src/main/java/com/m3/file/M3File.java",
+  "existing_donor_lineage": "synexia-mindex/resource/src/main/java/com/synexia/mindex/resource/MIndexResourceAccess.java",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "public_jdk_api_changes": false,
+  "new_runtime_dependency": false,
+  "fingerprint": "raw-byte count and four big-endian SHA-256 words; no retained payload",
+  "not_interchangeable_with": ["UTF-16 source digest", "framed source-fact digest", "class ABI", "compilation context"],
+  "canonical_recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "canonical_dataset": "file-content-delta-20261020",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "verification": "m3/file/verify.py",
+  "build_contract": "m3/docs/build-delta-invariant.md",
+  "fork_planner_receivers": "PENDING",
+  "full_product_qualification": "PENDING",
+  "receiving_sequence_advanced": false,
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0"
+}

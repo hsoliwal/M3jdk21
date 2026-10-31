@@ -1,0 +1,44 @@
+SLF4J(W): No SLF4J providers were found.
+SLF4J(W): Defaulting to no-operation (NOP) logger implementation
+SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+INSTALLED_CLASS org.openrewrite.Recipe /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/openrewrite/lib/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar
+INSTALLED_CLASS org.openrewrite.config.Environment /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/openrewrite/lib/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar
+INSTALLED_CLASS org.openrewrite.java.JavaParser /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/openrewrite/lib/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.jar
+INSTALLED_CLASS org.openrewrite.json.JsonParser /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/openrewrite/lib/org/openrewrite/rewrite-json/8.17.1/rewrite-json-8.17.1.jar
+INSTALLED_CLASS org.openrewrite.yaml.YamlParser /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/openrewrite/lib/org/openrewrite/rewrite-yaml/8.17.1/rewrite-yaml-8.17.1.jar
+INSTALLED_CLASS org.openrewrite.xml.XmlParser /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/openrewrite/lib/org/openrewrite/rewrite-xml/8.17.1/rewrite-xml-8.17.1.jar
+INSTALLED_CLASS org.openrewrite.properties.PropertiesParser /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/openrewrite/lib/org/openrewrite/rewrite-properties/8.17.1/rewrite-properties-8.17.1.jar
+INSTALLED_CLASS org.openrewrite.hcl.HclParser /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/openrewrite/lib/org/openrewrite/rewrite-hcl/8.17.1/rewrite-hcl-8.17.1.jar
+INSTALLED_CLASS org.openrewrite.protobuf.ProtoParser /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/openrewrite/lib/org/openrewrite/rewrite-protobuf/8.17.1/rewrite-protobuf-8.17.1.jar
+INSTALLED_CLASS org.openrewrite.groovy.GroovyParser /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/openrewrite/lib/org/openrewrite/rewrite-groovy/8.17.1/rewrite-groovy-8.17.1.jar
+INSTALLED_CLASS org.openrewrite.gradle.GradleParser /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/openrewrite/lib/org/openrewrite/rewrite-gradle/8.17.1/rewrite-gradle-8.17.1.jar
+INSTALLED_CLASS org.openrewrite.maven.MavenParser /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/openrewrite/lib/org/openrewrite/rewrite-maven/8.17.1/rewrite-maven-8.17.1.jar
+INSTALLED_CLASS org.m3jdk.tooling.rewrite.M3RewriteTool /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/openrewrite/lib/org/m3jdk/tooling/m3-openrewrite-tool/1.0-SNAPSHOT/m3-openrewrite-tool-1.0-SNAPSHOT.jar
+INSTALLED_CLASS org.m3jdk.tooling.rewrite.M3RewriteFrontend /tmp/m3-selected-tools-final-v3-20261017/relocated image with spaces/lib/m3-tools/openrewrite/lib/org/m3jdk/tooling/m3-shared-openrewrite-frontend/1.0-SNAPSHOT/m3-shared-openrewrite-frontend-1.0-SNAPSHOT.jar
+FRAMEWORK_TEST realFrameworkDiscoveryFindsRecipesAcrossBuildAndDataLanguages() SUCCESSFUL
+FRAMEWORK_TEST json retains its actual upstream parser and lossless source SUCCESSFUL
+FRAMEWORK_TEST yaml retains its actual upstream parser and lossless source SUCCESSFUL
+FRAMEWORK_TEST xml retains its actual upstream parser and lossless source SUCCESSFUL
+FRAMEWORK_TEST properties retains its actual upstream parser and lossless source SUCCESSFUL
+FRAMEWORK_TEST hcl retains its actual upstream parser and lossless source SUCCESSFUL
+FRAMEWORK_TEST protobuf retains its actual upstream parser and lossless source SUCCESSFUL
+FRAMEWORK_TEST groovy retains its actual upstream parser and lossless source SUCCESSFUL
+FRAMEWORK_TEST gradle retains its actual upstream parser and lossless source SUCCESSFUL
+FRAMEWORK_TEST maven retains its actual upstream parser and lossless source SUCCESSFUL
+FRAMEWORK_TEST nonJavaFrameworkRecipeExecutesOnItsActualLanguageTree() SUCCESSFUL
+
+Test run finished after 10004 ms
+[         3 containers found      ]
+[         0 containers skipped    ]
+[         3 containers started    ]
+[         0 containers aborted    ]
+[         3 containers successful ]
+[         0 containers failed     ]
+[        11 tests found           ]
+[         0 tests skipped         ]
+[        11 tests started         ]
+[         0 tests aborted         ]
+[        11 tests successful      ]
+[         0 tests failed          ]
+
+M3_SELECTED_RUNTIME_TESTS found=11 succeeded=11 failed=0 aborted=0 skipped=0

@@ -1,0 +1,13 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Ph0Forward
+displayName: Ph0 Forward declared replay
+description: Explicit named replay of the sole Phc family; no distinct-permutation or receiving qualification claim.
+recipeList:
+  - com.synexia.m3.Ph0Phc
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Ph0Reverse
+displayName: Ph0 Reverse declared replay
+description: Explicit named replay of the sole Phc family; no distinct-permutation or receiving qualification claim.
+recipeList:
+  - com.synexia.m3.Ph0Phc

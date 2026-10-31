@@ -1,0 +1,79 @@
+[
+  {
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/evidence/attempt-03-fixture-fixes-native.log",
+    "mtime_utc": "2026-10-20T14:19:27.943619+00:00",
+    "mtime_ns": 1792505967943618804,
+    "size": 14116,
+    "sha256": "c7103c48fe5f1e5914fd41e02a2be18ef7571fe71d821e42156f6b1b022c1dc9"
+  },
+  {
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java",
+    "mtime_utc": "2026-10-20T14:17:41.700308+00:00",
+    "mtime_ns": 1792505861700308179,
+    "size": 6451,
+    "sha256": "2144a65349ce395a48f6a3bad490ee7a6827f358fbf2e152d5898f999c5e7674"
+  },
+  {
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/target/test-classes/com/m3/collections/interop/M3FiveLibraryArrayificationTest.class",
+    "mtime_utc": "2026-10-20T14:14:13.831650+00:00",
+    "mtime_ns": 1792505653831650252,
+    "size": 11091,
+    "sha256": "e9c7070e2387fb7e78c533b2432f4d02d397552cbd6ada669033743e03bcdf83"
+  },
+  {
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java",
+    "mtime_utc": "2026-10-20T14:17:41.701664+00:00",
+    "mtime_ns": 1792505861701664318,
+    "size": 9194,
+    "sha256": "59afee8356d265bb72ac13d2bd07226f2e595b93921410e4c0081c91115ae627"
+  },
+  {
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/target/test-classes/com/m3/collections/interop/M3GuavaListMultimapContract.class",
+    "mtime_utc": "2026-10-20T14:14:14.323667+00:00",
+    "mtime_ns": 1792505654323667147,
+    "size": 13546,
+    "sha256": "f76465531fc2295f3a9602a2ef76d075c1264dcb505093818481d16f41a1966c"
+  },
+  {
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringArrayContractTest.java",
+    "mtime_utc": "2026-10-20T14:19:14.801178+00:00",
+    "mtime_ns": 1792505954801177849,
+    "size": 6929,
+    "sha256": "74afae4b24ff025d75ff7400c0f1dd4d2be7fad25f31fa1a3ef946b84e3d0afa"
+  },
+  {
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/target/test-classes/com/m3/collections/interop/M3SpringArrayContractTest.class",
+    "mtime_utc": "2026-10-20T14:19:21.771466+00:00",
+    "mtime_ns": 1792505961771466288,
+    "size": 9391,
+    "sha256": "4de262c00a81a437a93a199bf8373b653f72ac470cca83ddd8f1380f008e3d07"
+  },
+  {
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java",
+    "mtime_utc": "2026-10-20T14:17:41.701432+00:00",
+    "mtime_ns": 1792505861701432137,
+    "size": 15954,
+    "sha256": "29691e36f212ae79c31a06a597a58e76c7e51280787c46db6d7264b30fd567e0"
+  },
+  {
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/target/test-classes/com/m3/collections/interop/M3LibraryClosureTest.class",
+    "mtime_utc": "2026-10-20T14:19:21.523460+00:00",
+    "mtime_ns": 1792505961523459872,
+    "size": 29364,
+    "sha256": "c003974f96f39d3d435340b0e3e7fb121c6ba3c85006eb80b702760a5d8e7b53"
+  },
+  {
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst",
+    "mtime_utc": "2026-10-20T14:19:19.823416+00:00",
+    "mtime_ns": 1792505959823415889,
+    "size": 7230,
+    "sha256": "d3ca2a239f341069211cd4978ac1ccd7d062ba59e367bd7052d0616720d91dd4"
+  },
+  {
+    "path": "/workspace/scratch/53bcd62c244c/work-interop-fix-20261020/isolated/m3/collections/interop/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst",
+    "mtime_utc": "2026-10-20T14:19:21.799467+00:00",
+    "mtime_ns": 1792505961799467013,
+    "size": 3187,
+    "sha256": "30e9bf241f388e8b75c3ad9b018872836a64842e219ce1d92b11f9da2771b1d4"
+  }
+]

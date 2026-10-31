@@ -1,0 +1,25 @@
+{
+  "schema": "m3-runtime-dated-catalogue-custody-v1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0 first-party metadata; referenced source rights unchanged",
+  "sources": [
+    {
+      "local_path": "catalogue/INHERITED_DONOR_CATALOGUE.tsv",
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+      "source_path": "m3/collections/algorithm-catalog/wrapper-convergence-20261018/index-candidates/CATALOGUE.tsv",
+      "sha256": "c4ca2ef4ec48bcfd4745b337962ee121e635def9b455cfc4779d98d3c221f763",
+      "git_blob": "76246f2d6379b3b4a1f6a105f14c38f0c6fa5516",
+      "disposition": "EXACT_UNCHANGED_INHERITED_ROWS_NEW_DECISIONS_SEPARATE"
+    },
+    {
+      "local_path": "catalogue/INHERITED_LOOKUP_PROVENANCE.tsv",
+      "repository": "hsoliwal/M3jdk21",
+      "revision": "d6d76b563050fc13c4fa79bc494edf29f1614b37",
+      "source_path": "m3/collections/algorithm-catalog/collection-catalogue-input-provenance-20261017.tsv",
+      "sha256": "e50ed945f9d64519744945895af73b0df57039d3079d603d59f4929c963997cf",
+      "git_blob": "517250be217a44040c9f7a7638a1b17657088f09",
+      "disposition": "EXACT_UNCHANGED_INHERITED_ROWS_NEW_DECISIONS_SEPARATE"
+    }
+  ]
+}

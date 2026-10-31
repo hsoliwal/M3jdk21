@@ -1,0 +1,74 @@
+{
+  "schema": "M3_ARRAY_RECIPE_RECEIVED_STANDALONE_V1",
+  "status": "PASS",
+  "receiving_root": "/workspace/scratch/13309be96b09/collections-work/received",
+  "candidate_files_verified": [
+    {
+      "path": "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java",
+      "bytes": 17309,
+      "sha256": "8d6afc24c677adb7ba612071d34453c8a7d8b9e1a81ac27fb06bc3f62c673edd",
+      "git_blob_sha1": "bce79ff1c8f1bbb7dcb5a76c7e355b12f408c996"
+    },
+    {
+      "path": "m3/arrays/src/main/native/tests/m3_arrays_checks.c",
+      "bytes": 1376,
+      "sha256": "eeccc76a11969a9f235c73fb4e71a64c211af4dc8abe29759bffb161dbf947ab",
+      "git_blob_sha1": "6bd29fe6815d07167ff7a3c7b941a9b27dc18589"
+    },
+    {
+      "path": "m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsSelfTest.java",
+      "bytes": 16423,
+      "sha256": "632ee4cfa058f1f80536d4387e41b9d0fff41f64307d1c21f4cf2cbed94d20b1",
+      "git_blob_sha1": "2a80d1d57545c8dd09d3a4303d08419ad2e3a0bb"
+    },
+    {
+      "path": "m3/arrays/src/test/java/com/m3/arrays/M3ArrayEmptySegmentsTest.java",
+      "bytes": 526,
+      "sha256": "2cf43719b99622cb8cca399179e0a1004b06e7ab49542aafe434cf8bcca3597d",
+      "git_blob_sha1": "bce5bf6ae8a0fdd65dc6279a4ac48cedfa0bcdbf"
+    }
+  ],
+  "runs": [
+    {
+      "name": "java",
+      "argv": [
+        "/tmp/m3-ast-product-build/images/jdk/bin/java",
+        "-cp",
+        "/workspace/scratch/13309be96b09/collections-work/arrays/received-classes",
+        "com.m3.arrays.M3ArrayEmptySegmentsSelfTest"
+      ],
+      "exit_code": 0,
+      "output": "M3_ARRAY_EMPTY_SEGMENTS_PASS checks=417595 cases=912 native=false"
+    },
+    {
+      "name": "jni",
+      "argv": [
+        "/tmp/m3-ast-product-build/images/jdk/bin/java",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/13309be96b09/collections-work/arrays/received-classes",
+        "com.m3.arrays.M3ArrayEmptySegmentsSelfTest",
+        "/workspace/scratch/13309be96b09/collections-work/received/m3/arrays/target/native/libm3_arrays.so"
+      ],
+      "exit_code": 0,
+      "output": "M3_ARRAY_EMPTY_SEGMENTS_PASS checks=417595 cases=912 native=true"
+    },
+    {
+      "name": "interpreter-jni",
+      "argv": [
+        "/tmp/m3-ast-product-build/images/jdk/bin/java",
+        "-Xint",
+        "-Xcheck:jni",
+        "-cp",
+        "/workspace/scratch/13309be96b09/collections-work/arrays/received-classes",
+        "com.m3.arrays.M3ArrayEmptySegmentsSelfTest",
+        "/workspace/scratch/13309be96b09/collections-work/received/m3/arrays/target/native/libm3_arrays.so"
+      ],
+      "exit_code": 0,
+      "output": "M3_ARRAY_EMPTY_SEGMENTS_PASS checks=417595 cases=912 native=true"
+    }
+  ],
+  "jni_library_sha256": "a5aa95de35aa599acacb102415312953b26dfaf987cfdae561f156b2b2cf6eab",
+  "resource_receipt": "RESOURCE_RECEIPT.json",
+  "maven_gate": "Parent separately ran the original native-linux module verify against this same receiver."
+}

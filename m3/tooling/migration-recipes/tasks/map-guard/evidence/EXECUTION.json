@@ -1,0 +1,62 @@
+{
+  "base_commit": "7ead93addf4a7b9614d4ad34c8dd02f4b93b9c36",
+  "host_runtime": "Debian OpenJDK 21.0.11",
+  "heap": "32m",
+  "method": "actual JDK-internal backing classes; narrow package patch",
+  "source": {
+    "src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java": "b038fff642ab35aa2cf749d3ac81c3559ff8f6fc59a723fd2a5212654f4ba651",
+    "test/jdk/java/lang/String/MapGuardTest.java": "620e1ccd61d9f8675a18ce74eb307b5a02f75fad6c535e17e42661ef3409185a"
+  },
+  "pristine_reference": {
+    "src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java": "5e870466f7a4005b7f8798fa918b0318a2a42889af8efbac7ff3f4436e6db33e",
+    "src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java": "880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f",
+    "test/jdk/java/lang/String/MIndexMappedStringBackingTest.java": "95916a7687bf3dcf2bb39a7d0859a023d0796b58a3ac25318e6a813595f531b0",
+    ".github/workflows/mindex-string-backing.yml": "ed41a4a628adf1f7767ae00578e1f75944ea54a72434b2beef04df0031be92b2"
+  },
+  "runs": [
+    {
+      "case": "original_format",
+      "exit": 0,
+      "log": "before-existing-test.log"
+    },
+    {
+      "case": "original_text_invalid_count",
+      "exit": 1,
+      "failure": "OutOfMemoryError",
+      "log": "before-text.log"
+    },
+    {
+      "case": "original_byte_invalid_count",
+      "exit": 1,
+      "failure": "OutOfMemoryError",
+      "log": "before-byte.log"
+    },
+    {
+      "case": "original_fd_cleanup",
+      "exit": 1,
+      "failure": "AssertionError",
+      "log": "before-fd.log"
+    },
+    {
+      "case": "patched_default",
+      "exit": 0,
+      "checks": 78,
+      "log": "after-test.log"
+    },
+    {
+      "case": "patched_interpreter",
+      "exit": 0,
+      "checks": 78,
+      "log": "after-interpreter.log"
+    },
+    {
+      "case": "reproduction_script",
+      "exit": 0,
+      "log": "reproduction.log"
+    }
+  ],
+  "recipe_JUnit": "AUTHORED_5_NOT_EXECUTED",
+  "jtreg_harness": "NOT_RUN",
+  "full_JDK_build": "NOT_RUN",
+  "coverage": "NOT_MEASURED"
+}

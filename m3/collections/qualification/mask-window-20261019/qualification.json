@@ -1,0 +1,44 @@
+{
+  "schema": "M3_MASK_VIEWPORT_VERIFICATION_V1",
+  "status": "PASS",
+  "sources": {
+    "src/main/java/com/m3/collections/M3MaskViewportKernel.java": "7b751b7477f8141f2c8f2f5b892ff6e26bb5426a74f5c56f7900942ccbbec6b0",
+    "src/main/java/com/m3/collections/M3MaskViewportNative.java": "36158dcb03adc764bddfab16172cb864d926518a304704fcea390040a7cf4069",
+    "src/test/java/com/m3/collections/M3MaskViewportKernelContract.java": "a6abf38a1d3905c7c43aeed98fb16b3f06ea73b4af20e6e76477497bfc72310c",
+    "src/test/java/com/m3/collections/M3MaskViewportWindowContract.java": "c60699d5d97294f40c0cae20a7065b969108d2259214d088caa4d909f58d4aae",
+    "src/main/c/m3maskviewport.c": "ba071ec942188d354e25dbd42bc7fa17fde36ef7e24fdf209d64ea1e801c8412",
+    "src/test/native/m3_mask_viewport_regions.c": "4525d67279b3fc3ff41640e6b8c919e21b1324f1b9cf76963db9d10abf378c19"
+  },
+  "jdk_modules_sha256": "70c5465dabf8e1bec2860631ea3ffd342f0ec23a5e2efd3a389d2abe32448f98",
+  "native_library_sha256": "a0d4bf3d558b0ad34211b0f51d09c312f68410d03ba679bdf16004d3136dc399",
+  "scope": "Finite Java/JNI contracts on the supplied JDK; not full product-image qualification",
+  "performance_claim": "NONE",
+  "wrapper_reconciliation": {
+    "baseline_compile": "FAIL: four duplicate method declarations",
+    "historical_source_commit": "d11f07d78d1705d325272e2dfd5b87e72ab100ab",
+    "candidate_source_sha256": "687b0399d959cbeee2f9e29be3b9b2912f38dfb1b4c4e9bfb683b1adb71e3ce1",
+    "existing_suites": 8,
+    "checks": 1653638,
+    "additional_comparator_split_checks": 6324,
+    "historical_and_candidate_suites": "PASS",
+    "stable_read_trace_sha256": "0a279ab0c033308d4ec3777b2d1328f4ff9dd4909e6a79e447418ad800f283ac",
+    "public_outer_class_api": "UNCHANGED",
+    "comparator_split_enhancement": "PRESERVED"
+  },
+  "mask_checks": {
+    "original_contract": 144449,
+    "window_alias_contract": 7610,
+    "baseline_and_candidate": "PASS",
+    "mandatory_jni": true,
+    "ubsan": "PASS",
+    "instrumented_regions": "PASS: input transfers <= 1024 ints; no result allocation for disjoint windows; one snapshot for overlap; late invalid offset writes zero",
+    "jni_exported_symbols": "UNCHANGED"
+  },
+  "recipe_datasets": [
+    "mask-native-owner-20261019",
+    "mask-window-20261019",
+    "mask-window-docs-20261019",
+    "filtered-reconcile-20261019"
+  ],
+  "product_baseline": "677437be295b23f7ccf7409be287008944d0e8b0"
+}

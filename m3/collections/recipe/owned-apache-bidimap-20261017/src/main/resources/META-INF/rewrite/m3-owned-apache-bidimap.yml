@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.OwnedApacheBidiMap20261017
+displayName: Receive the owned M3 Apache BidiMap and its qualified provider oracle
+description: Installs two exact reviewed Java sources from absent targets or their fixed-point postimages using the canonical Java snapshot engine.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: owned-apache-bidimap
+      lst: false

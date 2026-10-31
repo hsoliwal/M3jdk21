@@ -1,0 +1,25 @@
+{
+  "schema": "SWT_CURRENT_OWNER_RUNTIME_CLOSURE_SOURCE_SEALS/1",
+  "task": "swt-current-owner-runtime-closure-20261021",
+  "recipe": "com.synexia.swt.CurrentOwnerRuntimeClosure20261021",
+  "canonical_source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+  "receiving_repository": "hsoliwal/eclipse.platform.swt",
+  "receiving_revision": "c0ffa6d76338ed1b06cfe0158b0e04d8930df546",
+  "files": [
+    {
+      "target_path": "docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+      "before_sha256": "7539cf81d2d7a7b30bff97ce2812a7e67f4e3593463a898aa38c8e6b0240dfa0",
+      "after_sha256": "6553565c8dd14a857e796f741f3f8f8e7cbf3edda11df58b8dcd8a53e78e5600",
+      "kind": "text",
+      "phase": "swt-current-owner-runtime-closure-20261021-001",
+      "resource": "postimage.txt"
+    }
+  ],
+  "input_handoffs": [
+    {
+      "name": "HANDOFF.json",
+      "sha256": "ab70e96a8a4700165ca30bb0b49699ceee775d946c34a750973b852b32639d58"
+    }
+  ],
+  "qualification": "NOT_RUN; source custody is not recipe or runtime proof"
+}

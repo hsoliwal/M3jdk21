@@ -1,0 +1,42 @@
+{
+  "dataset": "combine-views-final21",
+  "checks": [
+    {
+      "dataset": "combine-views-final21",
+      "targets": 13,
+      "changes": 13,
+      "mode": "check",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "combine-views-final21",
+      "targets": 13,
+      "changes": 13,
+      "mode": "apply",
+      "actual_sdk_results": true
+    },
+    {
+      "dataset": "combine-views-final21",
+      "targets": 13,
+      "changes": 0,
+      "mode": "apply",
+      "actual_sdk_results": true
+    }
+  ],
+  "replay_preserved_bytes_and_mtime": true,
+  "postimages": {
+    "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java": "c8e9361f50f503ee0fb45c322cbd2e1f1701b84dd57f3948c210178b29bebfb4",
+    "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java": "86e277ee069f3f077e44f5cd93b7f75cf07d357c613250d96a8e1e494969572c",
+    "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java": "cb1c0ab9eccd76078ec2e4b8e30dc9fb1bde945979326c3a2466392b33d66257",
+    "m3/collections/src/main/native/collections/m3_index_mask_compactor.c": "fedca631c2f0f0f73a27dde5e87395e95ac00fde07fc1d7006735c2ef18a579a",
+    "m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementContract.java": "661279db0cf532a67a0bf8ee5483cd91f79b49936add8e96fde08b1130f55174",
+    "m3/collections/src/test/java/com/m3/collections/M3CatalogueRefinementTest.java": "9f932bdf49aff3acf020bf36a2f5cead295a7ff6fb87fe55c9fde3c3a656cf93",
+    "m3/collections/src/test/java/com/m3/collections/M3PackedSelectionAllocationProbe.java": "bbb4abeb2f9dbc512d6236173b68e8404ac5b11729640e1747aac6f002b933a7",
+    "m3/collections/src/test/native/m3_mask_compactor_empty_regions.c": "48631b556931bd113464bfabca7876615261f2a4bbb17b54be6fa2fa801e96c7",
+    "src/java.base/share/classes/java/util/CollectionViews.java": "d7f484dd010d8d57383da419a1d6291283efc9aece94e8451c6755049683a48f",
+    "src/java.base/share/classes/java/util/Collections.java": "9ff54af7397feb3f5619ec0f803619c698b403150827a6417bd4dbee7139b1ef",
+    "src/java.base/share/classes/java/util/IdentityHashMap.java": "9abd2b9914c474ad1c9702a541dec0f1a1e2d3b02cfe34934177fd8b4a721400",
+    "test/jdk/java/util/CollectionViews/CollectionViewsIdentityContract.java": "e332147bc9f559f63fa4d5f0909c58e5416f3a20e4992da8ab13d6fba100fd7f",
+    "test/jdk/java/util/CollectionViews/CollectionViewsRefinement.java": "16b8cbd6f1fe1287435284e3680a6c2b603f3fdabb17806cc61ea409d03425a7"
+  }
+}

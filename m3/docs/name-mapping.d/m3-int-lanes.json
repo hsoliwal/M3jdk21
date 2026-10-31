@@ -1,0 +1,34 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; name-mapping.json untouched by this leaf.",
+  "mappings": [
+    {
+      "source": "com.synexia.primitives.IntHashSet (7ad80e21)",
+      "source_commit": "857c4cc0dde (develop) / headers b1b66529904 (#9796)",
+      "target": "com.m3.collections.M3IntHashSet",
+      "status": "implemented-locally-verified; proving ground; runtime PENDING_LINUX",
+      "target_rule": "ADAPT; JDK-shaped set API; fail-fast"
+    },
+    {
+      "source": "com.synexia.primitives.IntIntHashMap (c5ec1b82)",
+      "source_commit": "857c4cc0dde",
+      "target": "com.m3.collections.M3IntIntHashMap",
+      "status": "implemented-locally-verified",
+      "target_rule": "ADAPT; shape of M3LongLongHashMap"
+    },
+    {
+      "source": "com.synexia.primitives.IntMinHeap (cc6c819e)",
+      "source_commit": "857c4cc0dde",
+      "target": "com.m3.collections.M3IntPriorityQueue",
+      "status": "implemented-locally-verified",
+      "target_rule": "ADAPT; shape of M3LongPriorityQueue"
+    },
+    {
+      "source": "com.m3.collections.M3LongCollection / M3LongIterator / M3LongLongConsumer (master)",
+      "source_commit": "ed5f4ed177",
+      "target": "M3IntCollection / M3IntIterator / M3IntIntConsumer",
+      "status": "int mirrors",
+      "target_rule": "same contract per lane"
+    }
+  ]
+}

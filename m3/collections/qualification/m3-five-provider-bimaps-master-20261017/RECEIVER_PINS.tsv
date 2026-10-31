@@ -1,0 +1,7 @@
+role	path	git_object_sha
+target_base	master	4598bfc398d3024e7ea67e42034e857a53a1b378
+canonical_synexia_recipe	synexia-openrewrite-recipes/recipe-crates/m3-five-provider-bimaps-master-20261017	ce1851de0eada31700a6cdbda9bcec4f886950df
+original_guava	m3/collections/interop/src/main/java/com/m3/collections/interop/M3GuavaBiMap.java	50ed7fb7d179ce46d3849de107d0081bdf9d8be2
+original_factory	m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java	f05d0949cadb14bfad90287444addf6501c21992
+original_bindings	m3/collections/interop/sdk-family-bindings.tsv	96abef29845c8ff3d9b8fd7a8458519590757da7
+reused_Apache_source	M3JDK21_PR_1199	 e3c3714fdd73c24d3e8ecdcca72f3cd0a20bf6eb

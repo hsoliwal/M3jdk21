@@ -1,0 +1,714 @@
+--- /workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/main/java/com/m3/fs/MFiles.java
+
++++ /workspace/scratch/e736b6177c79/m3-one-pass-20261020/verification/parallel-independent-review/MFiles.reviewed.java
+
+@@ -13,6 +13,7 @@
+
+ import java.util.Collections;
+ import java.util.Deque;
+ import java.util.IdentityHashMap;
++import java.util.Iterator;
+ import java.util.LinkedHashMap;
+ import java.util.List;
+ import java.util.Map;
+@@ -21,6 +22,10 @@
+
+ import java.util.Set;
+ import java.util.Spliterator;
+ import java.util.Spliterators;
++import java.util.concurrent.CancellationException;
++import java.util.concurrent.ExecutorService;
++import java.util.concurrent.FutureTask;
++import java.util.concurrent.RejectedExecutionException;
+ import java.util.function.Consumer;
+ import java.util.function.Function;
+ import java.util.function.Predicate;
+@@ -115,6 +120,71 @@
+
+     }
+ 
+     /**
++     * Computes a detached result while the selected entry's provider session is
++     * owned by the current worker. A task may open content explicitly; this
++     * interface does not require one read or full consumption. Close content
++     * wrappers inside the callback so their completion observers run there.
++     * Do not retain live entries, content streams, or provider objects for use
++     * on another thread. Captured task and plan callback state must support
++     * concurrent calls from independent sessions.
++     *
++     * @param <R> the detached result type, which may include null values
++     */
++    @FunctionalInterface
++    public interface FileTask<R> {
++        /** Computes one selected entry's result on its owning worker. */
++        R apply(MFile file) throws IOException;
++    }
++
++    /**
++     * Lazily maps selected entries using a borrowed executor and completion-order
++     * results. No roots are iterated or providers opened until result demand.
++     * The returned stream is sequential and does not split. Always close it,
++     * including after short-circuit operations; closing never shuts down the
++     * executor. Inline/caller-runs execution is rejected because it can block
++     * the only result consumer.
++     *
++     * <p>At most {@code maxInFlight} work units are admitted, and at most that
++     * many callbacks plus unconsumed results hold result credits. Each unit
++     * opens and closes its own provider session on one worker. Local Path
++     * subtrees may be reopened as independent units without sharing live VFS
++     * objects. Archive layers and provider-address roots remain single-owner
++     * regions; distinct roots can overlap. Provider factories are serialized
++     * within this operation and must supply fresh instances. Provider child
++     * arrays, archive indexes/caches/spooling, and task-owned memory are outside
++     * the operation's O(maxInFlight) admission/result storage bound. Providers
++     * may physically reread a container when opening archive entries.</p>
++     *
++     * <p>Checked provider/task failures become {@link UncheckedIOException};
++     * runtime failures retain their identity. Failure and close interrupt active
++     * workers, cancel queued units, and wait for actual worker cleanup. Tasks
++     * and providers must cooperate with cancellation for this wait to finish.
++     * Successful terminal exhaustion also waits for all sessions to close.
++     * Individual results can precede a later session-close failure; commit a
++     * complete generation only after exhaustion and successful stream close.
++     * Closing or consuming this result stream from its own task is unsupported.
++     *</p>
++     *
++     * <p>No thread-local progress scope is captured. Create a borrowed per-file
++     * child on its worker and adapt it through {@link M3FsProgress#of}; use a
++     * parent supporting concurrent callbacks or serialize those callbacks.
++     * The task owns child completion. Plan encounter order governs each owned
++     * region's enumeration, but global results follow callback completion,
++     * including successful callback-content cleanup.</p>
++     */
++    public static <R> Stream<R> mapParallel(Iterable<? extends Plan> roots,
++            ExecutorService executor, int maxInFlight, FileTask<? extends R> task) {
++        Objects.requireNonNull(roots, "roots");
++        Objects.requireNonNull(executor, "executor");
++        Objects.requireNonNull(task, "task");
++        if (maxInFlight < 1) {
++            throw new IllegalArgumentException("maxInFlight must be positive");
++        }
++        Parallel<R> parallel = new Parallel<>(roots, executor, maxInFlight, task);
++        return StreamSupport.stream(parallel, false).onClose(parallel::close);
++    }
++
++    /**
+      * An immutable reusable traversal description. Its methods perform no provider
+      * I/O. Every {@link #stream()} invocation owns a new manager and new provider
+      * session. Captured predicates and provider suppliers are caller-owned objects;
+@@ -262,7 +332,7 @@
+
+ 
+         /**
+          * Registers an additional VFS provider factory for each new session.
+-         * The supplier is invoked only by {@link #stream()}, once per open, and
++         * The supplier is invoked when a sequential or parallel session opens and
+          * must return a fresh provider instance owned by that session. Built-in
+          * scheme collisions are reported when the manager is opened. Replacing
+          * a registration already present on this plan is rejected immediately.
+@@ -284,6 +354,12 @@
+
+             updated.put(scheme, providerFactory);
+             return new Plan(path, address, include, includeName, descend, maxDepth,
+                     order, enterArchive, maxArchiveLayers, updated);
++        }
++
++        /** Maps this plan with the bounded ownership contract of {@link MFiles#mapParallel}. */
++        public <R> Stream<R> mapParallel(ExecutorService executor, int maxInFlight,
++                FileTask<? extends R> task) {
++            return MFiles.mapParallel(List.of(this), executor, maxInFlight, task);
+         }
+ 
+         /**
+@@ -350,6 +426,11 @@
+
+     private record Archive(Node node, EntryMetadata metadata, MFile projected) implements Task {
+     }
+ 
++    @FunctionalInterface
++    private interface Fork {
++        boolean offer(Node node);
++    }
++
+     /** One provider child array and one index; it never allocates pending nodes for all children. */
+     private static final class ChildCursor implements Task {
+         private final FileObject directory;
+@@ -389,13 +470,27 @@
+
+     private static final class Traversal extends Spliterators.AbstractSpliterator<MFile> {
+         private final Session session;
+         private final Plan plan;
++        private final Node initial;
++        private final Fork fork;
++        private final Runnable checkpoint;
++        private final Consumer<Throwable> failureObserver;
+         private final Deque<Task> tasks = new ArrayDeque<>();
+ 
+         Traversal(Session session, Plan plan, FileObject root, EntryMetadata rootMetadata) {
++            this(session, plan, new Node(root, 0, true, new Layer(root.getName(), "", 0), rootMetadata),
++                    null, null, null);
++        }
++
++        Traversal(Session session, Plan plan, Node initial, Fork fork, Runnable checkpoint,
++                Consumer<Throwable> failureObserver) {
+             super(Long.MAX_VALUE, Spliterator.ORDERED | Spliterator.NONNULL);
+             this.session = session;
+             this.plan = plan;
+-            tasks.addFirst(new Node(root, 0, true, new Layer(root.getName(), "", 0), rootMetadata));
++            this.initial = initial;
++            this.fork = fork;
++            this.checkpoint = checkpoint;
++            this.failureObserver = failureObserver;
++            tasks.addFirst(initial);
+         }
+ 
+         @Override
+@@ -433,6 +528,9 @@
+
+             try {
+                 session.requireTraversalOpen();
+                 while (!tasks.isEmpty()) {
++                    if (checkpoint != null) {
++                        checkpoint.run();
++                    }
+                     Task task = tasks.removeFirst();
+                     if (task instanceof ChildCursor cursor) {
+                         FileObject child = cursor.next();
+@@ -449,6 +547,9 @@
+
+                         continue;
+                     }
+                     Node node = (Node) task;
++                    if (fork != null && node != initial && node.layer().mounts() == 0 && fork.offer(node)) {
++                        continue;
++                    }
+                     EntryMetadata metadata = node.metadata() == null ? session.inspect(node.file()) : node.metadata();
+                     boolean outputCandidate = !(node.root() && metadata.directory())
+                             && plan.includeName.test(metadata.name());
+@@ -476,10 +577,17 @@
+
+                 return false;
+             } catch (IOException failure) {
+                 tasks.clear();
++                UncheckedIOException reported = new UncheckedIOException("MFiles provider traversal failed", failure);
++                if (failureObserver != null) {
++                    failureObserver.accept(reported);
++                }
+                 session.closeAfterFailure(failure);
+-                throw new UncheckedIOException("MFiles provider traversal failed", failure);
++                throw reported;
+             } catch (RuntimeException | Error failure) {
+                 tasks.clear();
++                if (failureObserver != null) {
++                    failureObserver.accept(failure);
++                }
+                 session.closeAfterFailure(failure);
+                 throw failure;
+             }
+@@ -488,6 +596,505 @@
+
+         private void close() {
+             tasks.clear();
+             session.closeUnchecked();
++        }
++    }
++
++    /** Only detached coordinates cross workers; each worker resolves its own VFS objects. */
++    private record Location(String address, String relativeRootAddress, String prefix,
++            int mounts, int depth, boolean root) {
++        static Location of(Node node) {
++            return new Location(node.file().getName().getURI(), node.layer().rootName().getURI(),
++                    node.layer().prefix(), node.layer().mounts(), node.depth(), node.root());
++        }
++    }
++
++    private static final class Parallel<R> extends Spliterators.AbstractSpliterator<R> {
++        private final Iterable<? extends Plan> roots;
++        private final ExecutorService executor;
++        private final FileTask<? extends R> task;
++        private final Object[] workers;
++        private final Object[] results;
++        private final Object factoryLock = new Object();
++        private final Set<FileProvider> activeProviders = Collections.newSetFromMap(new IdentityHashMap<>());
++        private Iterator<? extends Plan> rootIterator;
++        private int active;
++        private int credits;
++        private int resultCount;
++        private int head;
++        private int tail;
++        private boolean rootsExhausted;
++        private boolean stopped;
++        private boolean closed;
++        private boolean failureReported;
++        private Throwable failure;
++
++        Parallel(Iterable<? extends Plan> roots, ExecutorService executor, int maximum,
++                FileTask<? extends R> task) {
++            super(Long.MAX_VALUE, Spliterator.ORDERED);
++            this.roots = roots;
++            this.executor = executor;
++            this.task = task;
++            workers = new Object[maximum];
++            results = new Object[maximum];
++        }
++
++        @Override
++        public Spliterator<R> trySplit() {
++            return null;
++        }
++
++        @SuppressWarnings("unchecked")
++        private Work worker(Object value) {
++            return (Work) value;
++        }
++
++        private synchronized void requireRunning() {
++            if (stopped || Thread.currentThread().isInterrupted()) {
++                throw new CancellationException("MFiles parallel operation was cancelled");
++            }
++        }
++
++        private synchronized void requireConsumer() {
++            for (Object value : workers) {
++                if (value != null && worker(value).owner == Thread.currentThread()) {
++                    throw new IllegalStateException("An MFiles task cannot consume or close its own result stream");
++                }
++            }
++        }
++
++        private synchronized Work reserve(Plan plan, Location location) {
++            if (stopped || active == workers.length) {
++                return null;
++            }
++            for (int index = 0; index < workers.length; index++) {
++                if (workers[index] == null) {
++                    Work work = new Work(index, plan, location);
++                    workers[index] = work;
++                    active++;
++                    return work;
++                }
++            }
++            throw new IllegalStateException("MFiles parallel admission accounting failed");
++        }
++
++        private void dispatch(Work work) {
++            work.submitter = Thread.currentThread();
++            work.submitting = true;
++            try {
++                executor.execute(work);
++            } catch (RuntimeException | Error rejected) {
++                stop(rejected);
++                throw rejected;
++            } finally {
++                work.submitting = false;
++            }
++        }
++
++        /** The consumer alone advances roots, reserving a bounded batch before dispatch. */
++        private void fillRoots() {
++            synchronized (this) {
++                if (stopped || rootsExhausted || active == workers.length) {
++                    return;
++                }
++            }
++            if (rootIterator == null) {
++                rootIterator = Objects.requireNonNull(roots.iterator(), "roots.iterator()");
++            }
++            List<Work> admitted = new ArrayList<>();
++            while (true) {
++                synchronized (this) {
++                    if (stopped || rootsExhausted || active == workers.length) {
++                        break;
++                    }
++                }
++                if (!rootIterator.hasNext()) {
++                    synchronized (this) {
++                        rootsExhausted = true;
++                        notifyAll();
++                    }
++                    break;
++                }
++                Plan plan = Objects.requireNonNull(rootIterator.next(), "root plan");
++                Work work = reserve(plan, null);
++                if (work == null) {
++                    break;
++                }
++                admitted.add(work);
++            }
++            for (Work work : admitted) {
++                dispatch(work);
++            }
++        }
++
++        private boolean fork(Plan plan, Node node) {
++            Work work;
++            synchronized (this) {
++                // Explicit roots get admission priority; no unbounded pending subtree queue.
++                if (!rootsExhausted || stopped || active == workers.length) {
++                    return false;
++                }
++                work = reserve(plan, Location.of(node));
++            }
++            if (work == null) {
++                return false;
++            }
++            dispatch(work);
++            return true;
++        }
++
++        private synchronized void reserveResult() {
++            while (credits == results.length && !stopped) {
++                waitForChange();
++            }
++            requireRunning();
++            credits++;
++        }
++
++        private synchronized void releaseResult() {
++            credits--;
++            notifyAll();
++        }
++
++        private synchronized void publish(R result) {
++            requireRunning();
++            results[tail] = result;
++            tail = (tail + 1) % results.length;
++            resultCount++;
++            notifyAll();
++        }
++
++        private void apply(Session session, MFile file) {
++            reserveResult();
++            boolean published = false;
++            try {
++                R result = task.apply(file);
++                closeCallbackContent(session);
++                publish(result);
++                published = true;
++            } catch (IOException checked) {
++                throw new UncheckedIOException("MFiles parallel task failed", checked);
++            } finally {
++                if (!published) {
++                    releaseResult();
++                }
++            }
++        }
++
++        /** Close forgotten raw content on its owning worker before exposing a result. */
++        private static void closeCallbackContent(Session session) throws IOException {
++            List<Closeable> outstanding;
++            synchronized (session) {
++                outstanding = new ArrayList<>(session.content);
++                session.content.clear();
++            }
++            Throwable problem = null;
++            for (Closeable stream : outstanding) {
++                try {
++                    stream.close();
++                } catch (IOException | RuntimeException | Error cleanup) {
++                    problem = Session.accumulate(problem, cleanup);
++                }
++            }
++            if (problem instanceof IOException checked) {
++                throw checked;
++            }
++            if (problem != null) {
++                throw unchecked(problem);
++            }
++        }
++
++        /** Caller holds this monitor. Interruption remains visible after cleanup. */
++        private void waitForChange() {
++            try {
++                wait();
++            } catch (InterruptedException interrupted) {
++                Thread.currentThread().interrupt();
++                CancellationException cancelled = new CancellationException("MFiles parallel wait was interrupted");
++                cancelled.initCause(interrupted);
++                throw cancelled;
++            }
++        }
++
++        @Override
++        public boolean tryAdvance(Consumer<? super R> action) {
++            Objects.requireNonNull(action, "action");
++            synchronized (this) {
++                if (closed) {
++                    throw new IllegalStateException("The MFiles parallel result stream is closed");
++                }
++            }
++            boolean deliveringFailure = false;
++            try {
++                requireConsumer();
++                while (true) {
++                    fillRoots();
++                    R result;
++                    synchronized (this) {
++                        while (resultCount == 0 && failure == null && !stopped && active != 0) {
++                            if (!rootsExhausted && active < workers.length) {
++                                break;
++                            }
++                            waitForChange();
++                        }
++                        if (failure != null) {
++                            deliveringFailure = true;
++                            throw unchecked(failure);
++                        }
++                        if (stopped) {
++                            throw new CancellationException("MFiles parallel result stream was closed");
++                        }
++                        if (resultCount == 0) {
++                            if (rootsExhausted && active == 0) {
++                                return false;
++                            }
++                            continue;
++                        }
++                        @SuppressWarnings("unchecked")
++                        R value = (R) results[head];
++                        result = value;
++                        results[head] = null;
++                        head = (head + 1) % results.length;
++                        resultCount--;
++                        credits--;
++                        notifyAll();
++                    }
++                    action.accept(result);
++                    return true;
++                }
++            } catch (RuntimeException | Error problem) {
++                // An already recorded failure may acquire an unchecked delivery wrapper.
++                stop(deliveringFailure ? null : problem);
++                awaitWorkers();
++                synchronized (this) {
++                    if (failure != null) {
++                        failureReported = true;
++                        throw unchecked(failure);
++                    }
++                }
++                throw problem;
++            }
++        }
++
++        private static RuntimeException unchecked(Throwable problem) {
++            if (problem instanceof IOException checked) {
++                return new UncheckedIOException("MFiles parallel provider failed", checked);
++            }
++            if (problem instanceof RuntimeException unchecked) {
++                return unchecked;
++            }
++            if (problem instanceof Error error) {
++                throw error;
++            }
++            return new IllegalStateException("Unexpected MFiles parallel failure", problem);
++        }
++
++        private void stop(Throwable problem) {
++            Object[] outstanding;
++            synchronized (this) {
++                if (problem != null) {
++                    if (stopped && problem instanceof CancellationException) {
++                        // The stop signal is expected; real cleanup failures attached to it are not.
++                        for (Throwable cleanup : problem.getSuppressed()) {
++                            recordFailure(cleanup);
++                        }
++                    } else {
++                        recordFailure(problem);
++                    }
++                }
++                stopped = true;
++                for (int index = 0; index < results.length; index++) {
++                    results[index] = null;
++                }
++                credits -= resultCount;
++                resultCount = 0;
++                head = 0;
++                tail = 0;
++                outstanding = workers.clone();
++                notifyAll();
++            }
++            for (Object value : outstanding) {
++                if (value != null) {
++                    worker(value).cancel();
++                }
++            }
++        }
++
++        /** Caller holds this monitor. Repeated reporting must not duplicate cleanup evidence. */
++        private void recordFailure(Throwable problem) {
++            if (failure == null) {
++                failure = problem;
++            } else if (problem != failure) {
++                // Causal relation is not identity; distinct cleanup errors retain their evidence.
++                for (Throwable recorded : failure.getSuppressed()) {
++                    if (recorded == problem) {
++                        return;
++                    }
++                }
++                failure.addSuppressed(problem);
++            }
++        }
++
++        private void awaitWorkers() {
++            boolean interrupted = false;
++            synchronized (this) {
++                requireConsumer();
++                while (active != 0) {
++                    try {
++                        wait();
++                    } catch (InterruptedException interruption) {
++                        interrupted = true;
++                    }
++                }
++            }
++            if (interrupted) {
++                Thread.currentThread().interrupt();
++            }
++        }
++
++        private void close() {
++            synchronized (this) {
++                closed = true;
++            }
++            stop(null);
++            awaitWorkers();
++            synchronized (this) {
++                if (failure != null && !failureReported) {
++                    failureReported = true;
++                    throw unchecked(failure);
++                }
++            }
++        }
++
++        /** Future cancellation is only a signal; state 2 is actual cleanup completion. */
++        private final class Work implements Runnable {
++            private final int slot;
++            private final Plan plan;
++            private final Location location;
++            private final FutureTask<Void> future;
++            private final List<FileProvider> claimedProviders = new ArrayList<>();
++            private Thread submitter;
++            private boolean submitting;
++            private Thread owner;
++            private int state;
++
++            Work(int slot, Plan plan, Location location) {
++                this.slot = slot;
++                this.plan = plan;
++                this.location = location;
++                future = new FutureTask<>(this::execute, null);
++            }
++
++            @Override
++            public void run() {
++                synchronized (Parallel.this) {
++                    if (state != 0) {
++                        return;
++                    }
++                    state = 1;
++                    owner = Thread.currentThread();
++                }
++                try {
++                    if (owner == submitter && submitting) {
++                        stop(new RejectedExecutionException("MFiles parallel tasks require asynchronous execution"));
++                    } else {
++                        future.run();
++                    }
++                } finally {
++                    synchronized (Parallel.this) {
++                        state = 2;
++                        owner = null;
++                        workers[slot] = null;
++                        active--;
++                        Parallel.this.notifyAll();
++                    }
++                }
++            }
++
++            void cancel() {
++                Thread executing;
++                synchronized (Parallel.this) {
++                    if (state == 2) {
++                        return;
++                    }
++                    executing = owner;
++                    if (state == 0) {
++                        state = 2;
++                        workers[slot] = null;
++                        active--;
++                        Parallel.this.notifyAll();
++                    }
++                }
++                future.cancel(executing != null && executing != Thread.currentThread());
++            }
++
++            private void providers(Session session) throws IOException {
++                session.manager.init();
++                for (Map.Entry<String, Supplier<? extends FileProvider>> registration : plan.providers.entrySet()) {
++                    requireRunning();
++                    if (session.manager.hasProvider(registration.getKey())) {
++                        throw new IOException("Provider scheme is already registered: " + registration.getKey());
++                    }
++                    FileProvider provider;
++                    synchronized (factoryLock) {
++                        requireRunning();
++                        provider = Objects.requireNonNull(registration.getValue().get(), "providerFactory result");
++                        if (!activeProviders.add(provider)) {
++                            throw new IOException("Provider factory must return a fresh provider for each session");
++                        }
++                        claimedProviders.add(provider);
++                    }
++                    session.manager.addProvider(registration.getKey(), provider);
++                }
++            }
++
++            private void execute() {
++                Session session = null;
++                Throwable problem = null;
++                try {
++                    requireRunning();
++                    session = new Session(new StandardFileSystemManager());
++                    providers(session);
++                    requireRunning();
++                    FileObject root = location != null ? session.manager.resolveFile(location.address())
++                            : plan.path == null ? session.manager.resolveFile(plan.address)
++                            : session.manager.toFileObject(plan.path.toAbsolutePath().toFile());
++                    EntryMetadata metadata = session.inspect(root);
++                    if (!metadata.file() && !metadata.directory() && !metadata.link()) {
++                        throw new IOException("MFiles parallel root does not exist or has no supported type");
++                    }
++                    Layer layer = location == null ? new Layer(root.getName(), "", 0)
++                            : new Layer(session.manager.resolveFile(location.relativeRootAddress()).getName(),
++                                    location.prefix(), location.mounts());
++                    Node initial = new Node(root, location == null ? 0 : location.depth(),
++                            location == null || location.root(), layer, metadata);
++                    Session owned = session;
++                    Traversal traversal = new Traversal(session, plan, initial,
++                            plan.path == null ? null : node -> fork(plan, node),
++                            Parallel.this::requireRunning, Parallel.this::stop);
++                    while (traversal.tryAdvance(file -> apply(owned, file))) {
++                        requireRunning();
++                    }
++                } catch (IOException | RuntimeException | Error body) {
++                    problem = body;
++                    stop(body);
++                } finally {
++                    if (session != null) {
++                        try {
++                            session.close();
++                        } catch (IOException | RuntimeException | Error cleanup) {
++                            problem = Session.accumulate(problem, cleanup);
++                        }
++                    }
++                    synchronized (factoryLock) {
++                        for (FileProvider provider : claimedProviders) {
++                            activeProviders.remove(provider);
++                        }
++                    }
++                }
++                if (problem != null) {
++                    stop(problem);
++                }
++            }
+         }
+     }
+ 

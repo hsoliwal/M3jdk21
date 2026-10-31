@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.GuavaSetMultimap20261018
+displayName: M3 five-provider SDK — direct Guava SetMultimap owner
+description: Source-sealed additive Guava SetMultimap backed by the existing M3 indexed collection owners.
+recipeList:
+  - com.synexia.rewrite.M3GuavaSetMultimapRecipe

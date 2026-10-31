@@ -1,0 +1,13 @@
+{
+  "schema": "M3_COLLECTIONS_CONTRACT_REFINEMENT_DATASET_V1",
+  "dataset": "token-donor-20261018",
+  "repository": "hsoliwal/M3jdk21",
+  "baseline_ref": "c71bc6e93bcec6c470665cba487ab64e507ebdd9",
+  "crate_name": "m3-collections-contract-refinement-20261017-token-donor-20261018",
+  "recipe_name": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "targets": 3,
+  "java_targets": 2,
+  "text_targets": 1,
+  "product_sources_written": false,
+  "engine_changes_from_origin": []
+}

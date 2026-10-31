@@ -1,0 +1,50 @@
+{
+  "schema": "m3-jcc-mapping-test-render/1",
+  "status": "ACTUAL_SOURCE_BOUND_TEST_INPUTS_NOT_EXECUTED",
+  "fixture": false,
+  "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+  "source_root_tree": "a72565e0e67f330f12c712dcc7a3fcbe1d80d24e",
+  "source_input_sha256": "b6753688fcacb6f1255c607072ea10823c29f8c574f049dc96cee8c5a7ad5613",
+  "summary_sha256": "3aec11c6e63a7da8e848f3a715a15782c08e0286f731b6d4323d174c8ae759be",
+  "receiving_input_epoch_sha256": "027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee",
+  "receiving_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "receiving_root_tree": "491bbd80a51483d0710fc12c1bad3a037b385ba0",
+  "manifest_sha256": "4057582f517eee3b9190965d8fef9126fd7edfd9b59fa7a3fd5a2fdeb9914cfc",
+  "plan_sha256": "ec52694868c4a8090afd556b5c985fe06c152bccdb3ee19d1d113bd86cf31862",
+  "files": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-merge-mapping-recovery-v03.yml",
+      "bytes": 626,
+      "sha256": "7ef86264b8742dfa06ce5bc83ea2bed6be19b24059f479c4e7f0ed61d58b84bc",
+      "git_blob_sha1": "eba283c412c143f8f639aac727714607c99a10e8"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccMergeMappingRecoveryV03Test.java",
+      "bytes": 52685,
+      "sha256": "ff4ee4c34da2dd633ca4bcaee737e4b62ca422157b02f8fcaa312ce9a785c669",
+      "git_blob_sha1": "5561dca80c09c93f6994f06c7d48eca76159c702"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jcc-merge-recovery-20261006-mapping-v03/publication-input-summary.json",
+      "bytes": 138214,
+      "sha256": "3aec11c6e63a7da8e848f3a715a15782c08e0286f731b6d4323d174c8ae759be",
+      "git_blob_sha1": "cccda14d43c76be9209130ebc96007883bc7de9d"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-verification-v03/pom.xml",
+      "bytes": 3441,
+      "sha256": "6808747ea5d7c7f19fdde1cff69e504734c2f23455841fae1d2aded08f4fdcf0",
+      "git_blob_sha1": "68e72a7ad8227ba7e5a58789ad82840f3f8cd485"
+    }
+  ],
+  "template_inputs": {
+    "JccMergeMappingRecoveryV03Test.java.in": "d30fb1e55a59014dc6b4df8cd79a2086a2db4c7e460c13140668d7715175c71d",
+    "pom.xml": "6808747ea5d7c7f19fdde1cff69e504734c2f23455841fae1d2aded08f4fdcf0",
+    "m3-jcc-merge-mapping-recovery-v03.yml": "7ef86264b8742dfa06ce5bc83ea2bed6be19b24059f479c4e7f0ed61d58b84bc",
+    "render_template.py": "44814edd234cdb8b39e11f526b21fd31b43361ab1250b6c58289848c637c454c"
+  },
+  "binder_sha256": "a0d3c129789ae96f014513d6671da7cb9b3e0c1f8b3e011d8a951b4591ebc432",
+  "source_export_admitted": false,
+  "destination_gates_passed": false,
+  "scope": "Only test/configuration inputs staged. No JUnit execution, recipe output, or publication is asserted."
+}

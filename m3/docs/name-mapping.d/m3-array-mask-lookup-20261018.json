@@ -1,0 +1,34 @@
+{
+  "schema": "M3_SOURCE_REFINEMENT_MAPPING_V1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
+  "recipe": "com.synexia.m3.ArrayMaskLookup20261018",
+  "recipe_crate": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018",
+  "canonical_recipe_repository": "hsoliwal/com.synexia",
+  "canonical_recipe_base": "289e32f130c9c8e4a1cf0edc1066327d699393bf",
+  "disposition": "EXISTING_OWNER_PRIVATE_ATOM_REFINEMENT",
+  "targets": [
+    "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+    "m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
+    "m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java",
+    "m3/collections/src/test/java/com/m3/collections/M3StateMaskHistogramSelfTest.java"
+  ],
+  "proof": "m3/qualification/string-index-reverse-20261018/collections",
+  "receiving_sequence_advanced": false,
+  "family_completion": false,
+  "repository_completion": false,
+  "intake_mode": "EXISTING_APACHE_MODULE_PRIVATE_ATOMS",
+  "source_role": "existing M3 primitive array owners; category-guided binary search and JNI region batching",
+  "contracts": [
+    "unchanged public/protected descriptors and native exported ABI",
+    "same signed-long membership including duplicates/extrema",
+    "same immutable projection order and encounter-order scan",
+    "same checked stride geometry and output publication",
+    "same live-wrapper callback contracts; no live-wrapper replacement"
+  ],
+  "pending": [
+    "representative JNI small/unbatchable workload performance qualification",
+    "later collection-phase receiving admission",
+    "cross-platform JNI execution"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "jcc-e04-v3-custody-static-review/2",
+  "epoch": "T02",
+  "status": "NO_SOURCE_LEVEL_BLOCKER_IN_REVIEWED_CORRECTION",
+  "finding": "E4-V3-01",
+  "resolution": "RESOLVED_AT_SOURCE_LEVEL",
+  "runner_sha256": "496e1877914e15f4342111c37020a2d58790038516b62872680427e585b21f50",
+  "readiness_sha256": "d8a816935713d91745e7b341e0e2d58ae98e6aed36ee9bafba4567117771c406",
+  "two_fixture_declared_identities_admitted_before_output": true,
+  "same_read_identities_frozen_and_checked_after_run": true,
+  "actual_published_package_reviewed": false,
+  "bound_inputs_review_pending": true,
+  "candidate_import_or_execution": false,
+  "builds_tests_remote_calls": false,
+  "report": "REVIEW.md",
+  "static_checks": "STATIC_CHECKS.json"
+}

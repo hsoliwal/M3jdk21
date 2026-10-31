@@ -1,0 +1,10 @@
+releases: 9
+
+org.slf4j@2.0.13 jar:file:///workspace/scratch/e736b6177c79/m3fs-vfs-20261020/m2/org/slf4j/slf4j-api/2.0.13/slf4j-api-2.0.13.jar!/META-INF/versions/9/module-info.class
+exports org.slf4j
+exports org.slf4j.event
+exports org.slf4j.helpers
+exports org.slf4j.spi
+requires java.base
+uses org.slf4j.spi.SLF4JServiceProvider
+

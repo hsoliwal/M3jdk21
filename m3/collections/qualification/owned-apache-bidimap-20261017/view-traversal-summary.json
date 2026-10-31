@@ -1,0 +1,9 @@
+{
+  "summary": "BIDI_VIEW_TRAVERSAL_OBSERVATIONS",
+  "cases": 66,
+  "equivalent": 66,
+  "different": 0,
+  "scope": "observable source-pinned provider differential, not admission",
+  "entryClassAndExceptionMessage": "metadata; concrete class identity and message text excluded from comparison",
+  "parallelOrdering": "observed order only; spliterator flags record whether ORDERED is promised"
+}

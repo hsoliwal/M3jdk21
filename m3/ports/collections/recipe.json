@@ -1,0 +1,15 @@
+{
+  "schema": "M3JDK_COLLECTION_PORT_WAVE1_V1",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_source_commit": "8513abf8eb0d911873c9127a138007a42dd4ab60",
+  "canonical_source_pr": 9778,
+  "source_selection_recipe": "com.synexia.rewrite.M3CollectionFacadeWave1",
+  "target_materialization_recipe": "com.synexia.rewrite.M3JdkCollectionPortWave1",
+  "target_repository": "hsoliwal/M3jdk21",
+  "mode": "ISOLATED_PORT_ONLY",
+  "first_party_license": "Apache-2.0",
+  "runtime_synexia_dependency": false,
+  "java_base_promotion": false,
+  "public_jdk_api_change": false,
+  "global_fastest_claim": false
+}

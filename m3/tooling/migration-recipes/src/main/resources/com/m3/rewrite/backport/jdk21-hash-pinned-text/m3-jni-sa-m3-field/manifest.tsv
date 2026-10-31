@@ -1,0 +1,2 @@
+# path	before	after	template
+src/java.base/share/native/libjava/jni_util.c	f19521f723ecf9a4cdf639a04b93c0dece27e37f5877d756f007adbdc16d6a16	4669c033c1b820ee90eb7fbe9f0c3ead9681312853e5675d360bb8db81e697f7	00-jni_util.c.txt

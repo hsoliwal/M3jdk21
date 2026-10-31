@@ -1,0 +1,137 @@
+{
+  "canonicalOutputPublication": false,
+  "custodyBoundary": "Absolute receipt paths identify original observations. Downloadable reconstruction uses PROJECT-READY.json and SOURCE-CLOSURE.json. External final manifests cover this envelope without a self-reference.",
+  "latestHeadIntegrationClaimed": false,
+  "mode": "TASK_AND_EVIDENCE_ONLY",
+  "package": {
+    "archiveIndex": {
+      "bytes": 123241,
+      "path": "bundle/BUNDLE.json",
+      "sha256": "af4f16e7c63ea8adb004de897bb3cfb1b089bac346c9360e438ae2969e36039e"
+    },
+    "archiveOnlyProjectFiles": 0,
+    "execution": {
+      "bytes": 1797,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/RESULT.json",
+      "sha256": "892345dd1a120e86f3a11d6a62ed3a9c4fdba1734fa83917783f3dce4cfb8b2c"
+    },
+    "flatMirrorMavenReady": true,
+    "flatProjectFiles": 20,
+    "hermetic": false,
+    "logicalProjectFiles": 20,
+    "projectReady": {
+      "bytes": 14331,
+      "path": "PROJECT-READY.json",
+      "sha256": "0d4e7b4726d4f1c598a8ccdb75357418e21ebbf67d6be6607089f7c9004d8062"
+    },
+    "readback": {
+      "bytes": 384272,
+      "path": "READBACK.json",
+      "sha256": "3f1a568c9846f6b2b627aa6cfe287693e2be26c13cd2ba2052afea9443a0e0f1"
+    },
+    "selectedLogicalBodies": 810,
+    "status": "PASS_SELECT_PACK_VERIFY_EXTRACT_FINISH"
+  },
+  "parentCheckpoint": "PARENT-CHECKPOINT.json",
+  "physicalSelection": {
+    "executionCohort": 21,
+    "explanatoryEnvelopes": [
+      "CURRENT-DELIVERY.json",
+      "CURRENT-DELIVERY.md",
+      "PARENT-CHECKPOINT.json"
+    ],
+    "originalSupplierDictionariesPreserved": true,
+    "packageCohort": 48,
+    "totalNewRows": 72
+  },
+  "preservedPairedFiles": 435,
+  "producer": {
+    "additions": 0,
+    "canonicalProductionApplied": false,
+    "families": 1,
+    "junit": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 7
+    },
+    "orderedSuccessfulGates": 4,
+    "output": {
+      "bytes": 10215,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/evidence/producer-v1/generated-candidate/OUTPUT.json",
+      "sha256": "3e9df04fcc1e555dc3ea245cb4dd0a9a1fc6d59635412796c5cfa2e0afd704ac"
+    },
+    "replacements": 5,
+    "result": {
+      "bytes": 7899,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/evidence/producer-v1/RESULT.json",
+      "sha256": "93a0a751404f26418165bcd9287b90287214d8c8f3213ce1baf1c975ccaa3fd6"
+    },
+    "resultArchiveLogicalPath": "sc0/trials/producer-v1/RESULT.json",
+    "status": "PASS_FOCUSED_PRODUCER",
+    "targets": 5
+  },
+  "proofSourceCommit": "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c",
+  "proofTargetCommit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "receiving": {
+    "bridgeAndCliGroups": "NOT_EXECUTED",
+    "consumerQualified": false,
+    "counts": {
+      "errors": 1,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 260
+    },
+    "errorMessage": "target is not a Java compilation unit: src/java.base/share/classes/java/util/regex/Pattern.java",
+    "erroredMethods": [
+      "com.m3.rewrite.backport.M3StringHistoryConvergenceRecipeTest.javaPostimagesAreFixedPointAndMissingOrWrongTreeRefuse"
+    ],
+    "fullOpenJdkBuildQualified": false,
+    "hostedWorkflowExecuted": false,
+    "laterPrimaryCommands": "NOT_EXECUTED",
+    "result": {
+      "bytes": 33725,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/primary-observation-v1/RESULT.json",
+      "sha256": "6f8d824c7b58f801a3563869d1a34605b36f160a1a04ea4dc6d9dc5455e5e6e8"
+    },
+    "resultArchiveLogicalPath": "sources/receiver-current-c0-string/primary-observation-v1/RESULT.json",
+    "status": "PRIMARY_ONLY_STOP"
+  },
+  "schema": "m3.sc0.current-delivery/1",
+  "semantic": {
+    "completedCommands": [
+      "compile-fixture",
+      "compiler-typed-literal-contract",
+      "metadata-preservation-controls"
+    ],
+    "fullReceiverQualified": false,
+    "prerequisite": {
+      "controller": {
+        "bytes": 27576,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/semantic-authoring/spc_semantic_capture_v2.py",
+        "sha256": "e5af8e5b84691328d05a4177881b18dae2c7596d19f6c743ebea0a7c804bc823"
+      },
+      "plan": {
+        "bytes": 23197,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/semantic-authoring/SEMANTIC-PLAN-v2.json",
+        "sha256": "946d2ce1d5d6b948c6ed8794c776904a07a886b980027092f2104f47dd18f85e"
+      },
+      "result": {
+        "bytes": 11281,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/RESULT.json",
+        "sha256": "072c8c827e49f7822f780a17e9c1a2fcc80b1ce5744fbbd90f197901b61a41de"
+      }
+    },
+    "productMainExecuted": false,
+    "productionPromotion": false,
+    "result": {
+      "bytes": 11281,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/RESULT.json",
+      "sha256": "072c8c827e49f7822f780a17e9c1a2fcc80b1ce5744fbbd90f197901b61a41de"
+    },
+    "resultArchiveLogicalPath": "sources/receiver-current-c0-string/spc-semantic-v1/RESULT.json",
+    "runtimeFixQualified": false,
+    "spcSemanticQualified": true,
+    "status": "PASS_SPC_SEMANTICS_PRIMARY_PENDING"
+  }
+}

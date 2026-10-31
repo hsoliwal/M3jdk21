@@ -1,0 +1,9 @@
+{
+  "path": "src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+  "preimageSha256": "04c5281944444e9a9c4bee49748b2a80f7661f44897003f87619403e709e2ddb",
+  "postimageSha256": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30",
+  "materializer": "EXACT_NAMED_OPENREWRITE_SDK_RESULTS",
+  "recipe": "com.synexia.m3jdk.FixedArenaGnuSource20261018",
+  "strictNativeOwner": "PASS",
+  "imageBuild": "PENDING"
+}

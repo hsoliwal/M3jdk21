@@ -1,0 +1,234 @@
+{
+  "schema": "M3_OPENJDK_BUILD_SOURCE_IDENTITY_V1",
+  "scopes": [
+    "src",
+    "make",
+    "configure",
+    "Makefile"
+  ],
+  "built_repository": "/workspace/scratch/2b4d1cb957a7/M3jdk21-features",
+  "built_baseline": "86528a90079b89a50b51ef13da08e7e70d468cb4",
+  "receiving_repository": "/workspace/scratch/2b4d1cb957a7/M3jdk21-feature-current",
+  "receiving_baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "built_files": 25341,
+  "receiving_files": 25341,
+  "built_bytes": 398067787,
+  "receiving_bytes": 398050509,
+  "built_inventory_sha256": "7f7ead74c77e4e26e4d188a8ee3810e2a939112c9190bac09bd492020099346b",
+  "receiving_inventory_sha256": "3c48e4e11266f512bc479c5a27a3a1da0132b06304525381dafc6cc3978363cd",
+  "byte_comparison_after_matching_hashes": true,
+  "differences": [
+    {
+      "path": "src/hotspot/share/classfile/classLoader.cpp",
+      "built": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 63464,
+        "sha256": "d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2"
+      },
+      "receiving": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 63485,
+        "sha256": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d"
+      }
+    },
+    {
+      "path": "src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
+      "built": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 3170,
+        "sha256": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30"
+      },
+      "receiving": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 3143,
+        "sha256": "04c5281944444e9a9c4bee49748b2a80f7661f44897003f87619403e709e2ddb"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/java/lang/Runnable.java",
+      "built": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 2565,
+        "sha256": "b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a"
+      },
+      "receiving": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 2211,
+        "sha256": "bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/Strings.java",
+      "built": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 17999,
+        "sha256": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087"
+      },
+      "receiving": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 10897,
+        "sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",
+      "built": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 3165,
+        "sha256": "6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f"
+      },
+      "receiving": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 2727,
+        "sha256": "a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/Executor.java",
+      "built": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 6052,
+        "sha256": "e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa"
+      },
+      "receiving": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 5506,
+        "sha256": "63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
+      "built": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 20247,
+        "sha256": "9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d"
+      },
+      "receiving": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 19302,
+        "sha256": "ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
+      "built": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 1534,
+        "sha256": "77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733"
+      },
+      "receiving": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 975,
+        "sha256": "a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
+      "built": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 1172,
+        "sha256": "2670d2b928981c1068c2299dc1458c2b9dc7dc372d2e8d2527005d695c77f06e"
+      },
+      "receiving": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 908,
+        "sha256": "8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
+      "built": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 3394,
+        "sha256": "368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93"
+      },
+      "receiving": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 1285,
+        "sha256": "58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
+      "built": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 10395,
+        "sha256": "48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc"
+      },
+      "receiving": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 6695,
+        "sha256": "5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Consumer.java",
+      "built": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 3571,
+        "sha256": "52773610a8cd4d4e0808c2895e504b09ce9c0c05a0273e81cc533bad19ab6226"
+      },
+      "receiving": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 3159,
+        "sha256": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Function.java",
+      "built": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 4834,
+        "sha256": "73877c7a547bb812a6901cae0af4866645de978b867e055204cd53f6dffb6476"
+      },
+      "receiving": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 4389,
+        "sha256": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/java/util/function/Supplier.java",
+      "built": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 2640,
+        "sha256": "84170e0863237433f20c3fdc4617eea990731fa7a1e5b0aeaf6b03f89e55c096"
+      },
+      "receiving": {
+        "kind": "file",
+        "executable": false,
+        "bytes": 2242,
+        "sha256": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6"
+      }
+    }
+  ],
+  "status": "DIFFERENT",
+  "limits": "Source identity for the named OpenJDK build scopes. The build configuration, external tools, original build workspace, native image identity and executed tests retain their separate receipts. No separately built m3 module, hosted CI or phase-promotion claim."
+}

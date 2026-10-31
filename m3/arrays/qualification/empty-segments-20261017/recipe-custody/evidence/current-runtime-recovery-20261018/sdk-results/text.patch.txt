@@ -1,0 +1,1672 @@
+diff --git a/m3/backports/ALGORITHM_CATALOGUE.tsv b/m3/backports/ALGORITHM_CATALOGUE.tsv
+index fb595d3..68f0b37 100644
+--- a/m3/backports/ALGORITHM_CATALOGUE.tsv
++++ b/m3/backports/ALGORITHM_CATALOGUE.tsv
+@@ -7,3 +7,8 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ ALG-LEV	FUZZY_SEARCH	LEVENSHTEIN_AUTOMATON	hold-contract	MODULE	NONE	https://leetcode.com/problems/edit-distance/	https://www.hackerrank.com/challenges/basic-spell-checker/problem	https://www.geeksforgeeks.org/dsa/edit-distance-dp-5/	https://github.com/apache/lucene	Apache-2.0	REFERENCE_ONLY	inventory a real JDK owner and fuzzy/string contract before any adaptation
+ ALG-FIB	SEARCH	FIBONACCI_SEARCH	hold-evidence	FILE	NONE	NONE	NONE	https://www.geeksforgeeks.org/dsa/fibonacci-search-in-python/	NONE	NONE	REFERENCE_ONLY	complete LeetCode and HackerRank category evidence before implementation
+ ALG-NUMERIC-COPY-RUNS	ARRAYS	IMMUTABLE_NUMERIC_RANGE_COPY	candidate-adapted	FILE	m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java	https://leetcode.com/problems/range-sum-query-immutable/	https://www.hackerrank.com/challenges/array-left-rotation/problem	https://www.geeksforgeeks.org/dsa/understanding-prefix-sums/	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java	Apache-2.0	ADAPT_FIRST_PARTY_AND_JDK_API	require matching Maven SDK, range/callback, API, allocation and original Java/JNI receipts; see m3/arrays/qualification/numeric-copy-20261018/CATALOGUE.json
++M3-RUNTIME-VTABLE-COUNT	RUNTIME_BOOTSTRAP	update matched constant to 6	BOUNDED_REPAIR	FILE	ClassLoader::compute_Object_vtable	NOT_APPLICABLE	NOT_APPLICABLE	NOT_APPLICABLE	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/src/hotspot/share/classfile/classLoader.cpp	GPL-2.0-only	EXISTING_OWNER_OR_FIRST_PARTY	m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
++M3-PROGRESS-JAVADOC	PUBLIC_API_DOCUMENTATION	Javadoc-only exact snapshots	DOCUMENTATION_ONLY	FILE	8 Runnable/concurrent plus 3 functional progress owners	NOT_APPLICABLE	NOT_APPLICABLE	NOT_APPLICABLE	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/make/modules/java.base/Java.gmk	GPL-2.0-only WITH Classpath-exception-2.0	EXISTING_OWNER_OR_FIRST_PARTY	m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
++M3-PROGRESS-SCOPE-LINT	BORROWED_SCOPE_LIFETIME	five method-local SuppressWarnings(try) annotations	SOURCE_ONLY_ANNOTATIONS	FILE	ProgressMonitors.run/call; Consumer.accept; Function.apply; Supplier.get	NOT_APPLICABLE	NOT_APPLICABLE	NOT_APPLICABLE	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/src/java.base/share/classes/java/io/FileDescriptor.java	GPL-2.0-only WITH Classpath-exception-2.0	EXISTING_OWNER_OR_FIRST_PARTY	m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
++M3-PROGRESS-MANIFEST-SUCCESSION	SOURCE_IDENTITY_CUSTODY	five byte-pinned manifests with explicit overlap sets	EXPLICIT_SUCCESSOR	FILE	14 current original/template receiver owners	NOT_APPLICABLE	NOT_APPLICABLE	NOT_APPLICABLE	https://github.com/hsoliwal/com.synexia/tree/8f8200375d8d403b58e855ee5db02f2e8fac33a8/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017	Apache-2.0 recipe; target licenses retained	EXISTING_OWNER_OR_FIRST_PARTY	m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
++M3-OBJECT-LEGACY-DISPATCH	API_COMPATIBILITY	frozen Java21 binaries plus candidate compiler witnesses	COMPATIBILITY_HOLD	FILE	Object.toAdapter and existing interface defaults	NOT_APPLICABLE	NOT_APPLICABLE	NOT_APPLICABLE	https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.4.1.2	Reference only	EXISTING_OWNER_OR_FIRST_PARTY	m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
+diff --git a/m3/compatibility/check_object_adapter_progress_receiver_20261017.py b/m3/compatibility/check_object_adapter_progress_receiver_20261017.py
+index 23384a1..8261a45 100644
+--- a/m3/compatibility/check_object_adapter_progress_receiver_20261017.py
++++ b/m3/compatibility/check_object_adapter_progress_receiver_20261017.py
+@@ -1,35 +1,180 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ #!/usr/bin/env python3
+-"""Read-only exact candidate hash verification; not an OpenRewrite execution receipt."""
++# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++# SPDX-License-Identifier: Apache-2.0
++"""Read-only current receiver custody; recipe/runtime qualification remains separate."""
+ from __future__ import annotations
++
+ import hashlib
+-from pathlib import Path
++from pathlib import Path, PurePosixPath
++import re
+ 
+ ROOT = Path(__file__).resolve().parents[2]
+-MANIFEST = ROOT / "m3/compatibility/m3-object-adapter-progress-20261017.tsv"
++BASE_MANIFEST = "m3/compatibility/m3-object-adapter-progress-20261017.tsv"
++NEXT_MANIFEST = "m3/compatibility/m3-default-template-source-seal.tsv"
++BASE_MANIFEST_SHA256 = "2f581a791adc7ecf7f217a6276f0da8af424c1e3e49385ca6ae44704d3319c82"
++NEXT_MANIFEST_SHA256 = "c431bf732eb91a289b4bcd0b886db71d43da7d7bb17074cd6116db6b37e73ad6"
++DOCS_MANIFEST = "m3/compatibility/m3-progress-doclint-20261018.tsv"
++DOCS_MANIFEST_SHA256 = "7246c16a0e8ec742eba98dac97e24b7fc3947250ad5d2a22f72ac32dcddf0219"
++FUNCTIONAL_MANIFEST = "m3/compatibility/m3-functional-progress-doclint-20261018.tsv"
++FUNCTIONAL_MANIFEST_SHA256 = "3b62981be6a617b903c559cc31904eca2bffb2b200380f1be57e07a8f634d969"
++SCOPE_MANIFEST = "m3/compatibility/m3-progress-scope-lint-20261018.tsv"
++SCOPE_MANIFEST_SHA256 = "1a45edfa747a03b3491063648a455083633e7de836e4c46241de104d689eebee"
++SCOPED = frozenset((
++    "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
++    "src/java.base/share/classes/java/util/function/Consumer.java",
++    "src/java.base/share/classes/java/util/function/Function.java",
++    "src/java.base/share/classes/java/util/function/Supplier.java",
++))
++FUNCTIONAL = frozenset((
++    "src/java.base/share/classes/java/util/function/Consumer.java",
++    "src/java.base/share/classes/java/util/function/Function.java",
++    "src/java.base/share/classes/java/util/function/Supplier.java",
++))
++DOCUMENTED = frozenset((
++    "src/java.base/share/classes/java/lang/Runnable.java",
++    "src/java.base/share/classes/java/util/concurrent/Callable.java",
++    "src/java.base/share/classes/java/util/concurrent/Executor.java",
++    "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
++    "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
++    "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
++    "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
++    "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
++))
++REPLACED = frozenset((
++    "src/java.base/share/classes/java/util/concurrent/Callable.java",
++    "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
++))
++ADDED = frozenset((
++    "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
++    "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
++    "test/jdk/java/lang/Object/M3MonitoredTemplateTest.java",
++))
+ 
+-def verify() -> int:
+-    lines = MANIFEST.read_text(encoding="utf-8").splitlines()
+-    seen: set[str] = set()
+-    count = 0
+-    for row in lines:
+-        if not row or row.startswith("#"):
++
++def contained_file(root: Path, relative: str) -> Path:
++    """Admit a regular file beneath the caller's receiving root, without symlinks."""
++    part = PurePosixPath(relative)
++    if (not relative or str(part) != relative or part.is_absolute()
++            or ".." in part.parts or ".git" in part.parts or "\\" in relative
++            or any(c in relative for c in "\t\r\n\0")):
++        raise RuntimeError("unsafe receiver path: " + repr(relative))
++    root = root.absolute()
++    if root.is_symlink() or not root.is_dir():
++        raise RuntimeError("receiver root must be a real directory")
++    path = root.joinpath(*part.parts)
++    cursor = path
++    while cursor != root:
++        if cursor.is_symlink():
++            raise RuntimeError("symlink receiver: " + relative)
++        cursor = cursor.parent
++    if not path.is_file() or not path.resolve().is_relative_to(root.resolve()):
++        raise RuntimeError("missing or non-regular receiver: " + relative)
++    return path
++
++
++def read_manifest(root: Path, relative: str, expected: str, count: int):
++    """Keep each historical manifest byte-exact before interpreting its source transitions."""
++    data = contained_file(root, relative).read_bytes()
++    if hashlib.sha256(data).hexdigest() != expected:
++        raise RuntimeError("historical manifest custody drift: " + relative)
++    rows = {}
++    for line in data.decode("utf-8").splitlines():
++        if not line or line.startswith("#"):
+             continue
+-        path, before, after, template = row.split("\t")
+-        assert path.startswith(("src/java.base/share/classes/", "test/jdk/")), path
+-        assert path not in seen, path
+-        assert len(after) == 64 and (before == "ABSENT" or len(before) == 64)
+-        seen.add(path)
+-        file = ROOT / path
+-        if not file.is_file():
+-            raise RuntimeError(f"missing receiver: {path}")
+-        actual = hashlib.sha256(file.read_bytes()).hexdigest()
++        cells = line.split("\t")
++        if len(cells) != 4:
++            raise RuntimeError("invalid manifest row: " + relative)
++        path, before, after, template = cells
++        part = PurePosixPath(path)
++        if (not path.startswith(("src/java.base/share/classes/", "test/jdk/"))
++                or str(part) != path or ".." in part.parts or "\\" in path
++                or path in rows or not re.fullmatch(r"[0-9a-f]{64}", after)
++                or (before != "ABSENT" and not re.fullmatch(r"[0-9a-f]{64}", before))
++                or not template or PurePosixPath(template).name != template):
++            raise RuntimeError("invalid or duplicate manifest target: " + path)
++        rows[path] = (before, after, template)
++    if len(rows) != count:
++        raise RuntimeError("manifest coverage differs: " + relative)
++    return rows
++
++
++def compose_targets(original, successor):
++    """Compose the one published successor; never admit arbitrary old/new mixtures."""
++    if len(original) != 11 or set(successor) != REPLACED | ADDED:
++        raise RuntimeError("unexpected receiver successor closure")
++    if set(original) & set(successor) != REPLACED or set(original) & ADDED:
++        raise RuntimeError("unexpected receiver overlap")
++    current = {path: row[1] for path, row in original.items()}
++    for path in sorted(successor):
++        before, after, _ = successor[path]
++        if path in REPLACED:
++            if before != current[path]:
++                raise RuntimeError("broken historical transition: " + path)
++        elif before != "ABSENT":
++            raise RuntimeError("successor addition was not absent: " + path)
++        current[path] = after
++    if len(current) != 14:
++        raise RuntimeError("current receiver coverage differs")
++    return current
++
++
++def compose_documentation(current, documentation):
++    """Apply only the eight explicitly sealed documentation postimages."""
++    if set(documentation) != DOCUMENTED or not DOCUMENTED.issubset(current):
++        raise RuntimeError("unexpected documentation successor closure")
++    expected = dict(current)
++    for path, (before, after, _) in sorted(documentation.items()):
++        if before != current[path]:
++            raise RuntimeError("broken documentation transition: " + path)
++        expected[path] = after
++    return expected
++
++
++def compose_functional(current, documentation):
++    """Apply only the three explicitly sealed functional Javadoc postimages."""
++    if set(documentation) != FUNCTIONAL or not FUNCTIONAL.issubset(current):
++        raise RuntimeError("unexpected functional successor closure")
++    expected = dict(current)
++    for path, (before, after, _) in sorted(documentation.items()):
++        if before != current[path]:
++            raise RuntimeError("broken functional transition: " + path)
++        expected[path] = after
++    return expected
++
++
++def compose_scope_annotations(current, annotations):
++    """Apply only the four owners of the five method-local try annotations."""
++    if set(annotations) != SCOPED or not SCOPED.issubset(current):
++        raise RuntimeError("unexpected scope-annotation successor closure")
++    expected = dict(current)
++    for path, (before, after, _) in sorted(annotations.items()):
++        if before != current[path]:
++            raise RuntimeError("broken scope-annotation transition: " + path)
++        expected[path] = after
++    return expected
++
++
++def current_targets(root: Path):
++    original = read_manifest(root, BASE_MANIFEST, BASE_MANIFEST_SHA256, 11)
++    successor = read_manifest(root, NEXT_MANIFEST, NEXT_MANIFEST_SHA256, 5)
++    documentation = read_manifest(root, DOCS_MANIFEST, DOCS_MANIFEST_SHA256, 8)
++    functional = read_manifest(root, FUNCTIONAL_MANIFEST, FUNCTIONAL_MANIFEST_SHA256, 3)
++    annotations = read_manifest(root, SCOPE_MANIFEST, SCOPE_MANIFEST_SHA256, 4)
++    return compose_scope_annotations(
++            compose_functional(compose_documentation(compose_targets(original, successor), documentation), functional), annotations)
++
++
++def verify(root: Path | None = None) -> int:
++    root = ROOT if root is None else Path(root)
++    expected = current_targets(root)
++    for path, after in sorted(expected.items()):
++        actual = hashlib.sha256(contained_file(root, path).read_bytes()).hexdigest()
+         if actual != after:
+             raise RuntimeError(f"source drift: {path}: {actual} != {after}")
+-        count += 1
+-    if count != 11:
+-        raise RuntimeError(f"receiver coverage {count} != 11")
+-    print(f"PASS exact 11-file receiver identity: {count}")
+-    return count
++    print("PASS exact 14-file current receiver identity; historical manifests preserved; "
++          "Object compatibility and runtime admission remain HOLD")
++    return len(expected)
++
+ 
+ if __name__ == "__main__":
+     verify()
+diff --git a/m3/compatibility/m3-functional-progress-doclint-20261018.tsv b/m3/compatibility/m3-functional-progress-doclint-20261018.tsv
+new file mode 100644
+index 0000000..c031eda
+--- /dev/null
++++ b/m3/compatibility/m3-functional-progress-doclint-20261018.tsv
+@@ -0,0 +1,4 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++# Exact functional progress Javadoc successor after M3jdk21 #1082.
++src/java.base/share/classes/java/util/function/Consumer.java	4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc	025c5fa47f9505eccea26c540bc3e320762346c464ecca37ec1994297285a073	Consumer.java.txt
++src/java.base/share/classes/java/util/function/Function.java	7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744	e116c9989d314cb6ffdaef60e8f665205afccdd28ee3674af2c6eedc008da588	Function.java.txt
++src/java.base/share/classes/java/util/function/Supplier.java	49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6	2d5f23125e22f4d20d80d7734e883c45fd179207f0ab508fdd0c9e8616156766	Supplier.java.txt
+diff --git a/m3/compatibility/m3-progress-doclint-20261018.tsv b/m3/compatibility/m3-progress-doclint-20261018.tsv
+new file mode 100644
+index 0000000..aaf15ce
+--- /dev/null
++++ b/m3/compatibility/m3-progress-doclint-20261018.tsv
+@@ -0,0 +1,10 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++# Exact documentation successor after M3jdk21 #1082 and #1091.
++# path\tbefore_sha256\tafter_sha256\ttemplate
++src/java.base/share/classes/java/lang/Runnable.java	bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534	b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a	Runnable.java.txt
++src/java.base/share/classes/java/util/concurrent/Callable.java	a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261	6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f	Callable.java.txt
++src/java.base/share/classes/java/util/concurrent/Executor.java	63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4	e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa	Executor.java.txt
++src/java.base/share/classes/java/util/concurrent/ExecutorService.java	ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868	9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d	ExecutorService.java.txt
++src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java	a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7	77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733	MonitoredCallable.java.txt
++src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java	8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b	2670d2b928981c1068c2299dc1458c2b9dc7dc372d2e8d2527005d695c77f06e	MonitoredRunnable.java.txt
++src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java	58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3	368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93	ProgressMonitor.java.txt
++src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359	d1fc14e9b59c305d6f71df76afb86d9e7d9e4cabd0899105e5d001380ce4c736	ProgressMonitors.java.txt
+diff --git a/m3/compatibility/m3-progress-scope-lint-20261018.tsv b/m3/compatibility/m3-progress-scope-lint-20261018.tsv
+new file mode 100644
+index 0000000..87a267b
+--- /dev/null
++++ b/m3/compatibility/m3-progress-scope-lint-20261018.tsv
+@@ -0,0 +1,5 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++# Method-local try-resource annotations after the exact progress/functional Javadoc successors.
++src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	d1fc14e9b59c305d6f71df76afb86d9e7d9e4cabd0899105e5d001380ce4c736	48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc	ProgressMonitors.java.txt
++src/java.base/share/classes/java/util/function/Consumer.java	025c5fa47f9505eccea26c540bc3e320762346c464ecca37ec1994297285a073	52773610a8cd4d4e0808c2895e504b09ce9c0c05a0273e81cc533bad19ab6226	Consumer.java.txt
++src/java.base/share/classes/java/util/function/Function.java	e116c9989d314cb6ffdaef60e8f665205afccdd28ee3674af2c6eedc008da588	73877c7a547bb812a6901cae0af4866645de978b867e055204cd53f6dffb6476	Function.java.txt
++src/java.base/share/classes/java/util/function/Supplier.java	2d5f23125e22f4d20d80d7734e883c45fd179207f0ab508fdd0c9e8616156766	84170e0863237433f20c3fdc4617eea990731fa7a1e5b0aeaf6b03f89e55c096	Supplier.java.txt
+diff --git a/m3/compatibility/test_object_adapter_progress_receiver_20261018.py b/m3/compatibility/test_object_adapter_progress_receiver_20261018.py
+new file mode 100644
+index 0000000..b9b39d1
+--- /dev/null
++++ b/m3/compatibility/test_object_adapter_progress_receiver_20261018.py
+@@ -0,0 +1,296 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++#!/usr/bin/env python3
++# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++# SPDX-License-Identifier: Apache-2.0
++"""Current-source and negative custody tests for the original receiver's explicit successor."""
++from __future__ import annotations
++
++import contextlib
++import hashlib
++import importlib.util
++import io
++from pathlib import Path
++import shutil
++import sys
++import tempfile
++import unittest
++
++sys.dont_write_bytecode = True
++REPOSITORY = Path(__file__).resolve().parents[2]
++SPEC = importlib.util.spec_from_file_location("object_progress_receiver",
++        Path(__file__).with_name("check_object_adapter_progress_receiver_20261017.py"))
++CHECKER = importlib.util.module_from_spec(SPEC)
++SPEC.loader.exec_module(CHECKER)
++TEMPLATE_SPEC = importlib.util.spec_from_file_location("default_template_receiver",
++        Path(__file__).with_name("verify_m3_default_template_20261017.py"))
++TEMPLATE = importlib.util.module_from_spec(TEMPLATE_SPEC)
++TEMPLATE_SPEC.loader.exec_module(TEMPLATE)
++
++
++class ReceiverSuccessorTest(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory(prefix="m3-receiver-successor-")
++        self.root = Path(self.temp.name) / "receiver"
++        self.root.mkdir()
++        self.original = CHECKER.read_manifest(REPOSITORY, CHECKER.BASE_MANIFEST,
++                                               CHECKER.BASE_MANIFEST_SHA256, 11)
++        self.successor = CHECKER.read_manifest(REPOSITORY, CHECKER.NEXT_MANIFEST,
++                                                CHECKER.NEXT_MANIFEST_SHA256, 5)
++        self.documentation = CHECKER.read_manifest(REPOSITORY, CHECKER.DOCS_MANIFEST,
++                                                   CHECKER.DOCS_MANIFEST_SHA256, 8)
++        self.functional = CHECKER.read_manifest(REPOSITORY, CHECKER.FUNCTIONAL_MANIFEST,
++                                                CHECKER.FUNCTIONAL_MANIFEST_SHA256, 3)
++        self.annotations = CHECKER.read_manifest(REPOSITORY, CHECKER.SCOPE_MANIFEST,
++                                                 CHECKER.SCOPE_MANIFEST_SHA256, 4)
++        paths = set(CHECKER.current_targets(REPOSITORY))
++        paths.update((CHECKER.BASE_MANIFEST, CHECKER.NEXT_MANIFEST, CHECKER.DOCS_MANIFEST, CHECKER.FUNCTIONAL_MANIFEST, CHECKER.SCOPE_MANIFEST))
++        for relative in paths:
++            destination = self.root / relative
++            destination.parent.mkdir(parents=True, exist_ok=True)
++            shutil.copyfile(REPOSITORY / relative, destination)
++
++    def tearDown(self):
++        self.temp.cleanup()
++
++    def run_check(self):
++        with contextlib.redirect_stdout(io.StringIO()) as output:
++            count = CHECKER.verify(self.root)
++        return count, output.getvalue()
++
++    def test_complete_current_receiver_passes(self):
++        count, output = self.run_check()
++        self.assertEqual(14, count)
++        self.assertIn("Object compatibility and runtime admission remain HOLD", output)
++
++    def test_verifier_does_not_write_sources_or_manifests(self):
++        before = {p.relative_to(self.root): (p.read_bytes(), p.stat().st_mtime_ns)
++                  for p in self.root.rglob("*") if p.is_file()}
++        self.run_check()
++        self.assertEqual(before, {p.relative_to(self.root): (p.read_bytes(), p.stat().st_mtime_ns)
++                                 for p in self.root.rglob("*") if p.is_file()})
++
++    def test_both_replaced_owners_reject_arbitrary_drift(self):
++        for relative in sorted(CHECKER.REPLACED):
++            with self.subTest(path=relative):
++                path = self.root / relative
++                before = path.read_bytes()
++                path.write_bytes(before + b"\n// unexpected source\n")
++                with self.assertRaisesRegex(RuntimeError, "source drift"):
++                    self.run_check()
++                path.write_bytes(before)
++
++    def test_unchanged_original_owner_still_required(self):
++        (self.root / "src/java.base/share/classes/java/lang/Object.java").write_text("class Object {}\n")
++        with self.assertRaisesRegex(RuntimeError, "source drift"):
++            self.run_check()
++
++    def test_every_successor_addition_is_required(self):
++        for relative in sorted(CHECKER.ADDED):
++            with self.subTest(path=relative):
++                path = self.root / relative
++                before = path.read_bytes()
++                path.unlink()
++                with self.assertRaisesRegex(RuntimeError, "missing"):
++                    self.run_check()
++                path.write_bytes(before)
++
++    def test_historical_manifests_cannot_be_resealed_silently(self):
++        for relative in (CHECKER.BASE_MANIFEST, CHECKER.NEXT_MANIFEST, CHECKER.DOCS_MANIFEST, CHECKER.FUNCTIONAL_MANIFEST, CHECKER.SCOPE_MANIFEST):
++            with self.subTest(path=relative):
++                path = self.root / relative
++                before = path.read_bytes()
++                path.write_bytes(before + b"# rewritten history\n")
++                with self.assertRaisesRegex(RuntimeError, "historical manifest custody drift"):
++                    self.run_check()
++                path.write_bytes(before)
++
++    def test_missing_successor_manifest_refuses(self):
++        (self.root / CHECKER.NEXT_MANIFEST).unlink()
++        with self.assertRaisesRegex(RuntimeError, "missing"):
++            self.run_check()
++
++    def test_exact_content_symlink_is_not_admitted(self):
++        path = self.root / "src/java.base/share/classes/java/lang/Object.java"
++        outside = Path(self.temp.name) / "Object.java"
++        outside.write_bytes(path.read_bytes())
++        path.unlink()
++        path.symlink_to(outside)
++        with self.assertRaisesRegex(RuntimeError, "symlink"):
++            self.run_check()
++
++    def test_symlink_parent_is_not_admitted(self):
++        directory = self.root / "src/java.base/share/classes/java/lang"
++        outside = Path(self.temp.name) / "lang"
++        directory.rename(outside)
++        directory.symlink_to(outside, target_is_directory=True)
++        with self.assertRaisesRegex(RuntimeError, "symlink"):
++            self.run_check()
++
++    def test_unrelated_repository_files_do_not_widen_scope(self):
++        (self.root / "unrelated.txt").write_text("not a receiver owner\n")
++        self.assertEqual(14, self.run_check()[0])
++
++    def fixture_manifest(self, lines, count):
++        path = self.root / "fixture.tsv"
++        data = ("\n".join(lines) + "\n").encode()
++        path.write_bytes(data)
++        return CHECKER.read_manifest(self.root, "fixture.tsv", hashlib.sha256(data).hexdigest(), count)
++
++    def test_manifest_duplicate_and_unsafe_paths_refuse(self):
++        row = "src/java.base/share/classes/A.java\tABSENT\t" + "a" * 64 + "\ta.txt"
++        with self.assertRaisesRegex(RuntimeError, "duplicate"):
++            self.fixture_manifest([row, row], 2)
++        for path in ("src/java.base/share/classes/../A.java", "test/jdk/../A.java", "/A.java"):
++            with self.subTest(path=path), self.assertRaisesRegex(RuntimeError, "invalid"):
++                self.fixture_manifest([path + "\tABSENT\t" + "a" * 64 + "\ta.txt"], 1)
++
++    def test_manifest_shape_hash_and_coverage_refuse(self):
++        for line in ("only\ttwo", "test/jdk/A.java\tBAD\t" + "a" * 64 + "\ta.txt",
++                     "test/jdk/A.java\tABSENT\tbad\ta.txt",
++                     "test/jdk/A.java\tABSENT\t" + "a" * 64 + "\t../a.txt"):
++            with self.subTest(line=line), self.assertRaisesRegex(RuntimeError, "invalid"):
++                self.fixture_manifest([line], 1)
++        with self.assertRaisesRegex(RuntimeError, "coverage"):
++            self.fixture_manifest(["test/jdk/A.java\tABSENT\t" + "a" * 64 + "\ta.txt"], 2)
++
++    def test_successor_must_start_at_the_published_postimage(self):
++        next_rows = dict(self.successor)
++        path = sorted(CHECKER.REPLACED)[0]
++        _, after, template = next_rows[path]
++        next_rows[path] = ("f" * 64, after, template)
++        with self.assertRaisesRegex(RuntimeError, "broken historical transition"):
++            CHECKER.compose_targets(self.original, next_rows)
++
++    def test_additions_must_be_explicitly_absent_before(self):
++        next_rows = dict(self.successor)
++        path = sorted(CHECKER.ADDED)[0]
++        _, after, template = next_rows[path]
++        next_rows[path] = ("f" * 64, after, template)
++        with self.assertRaisesRegex(RuntimeError, "not absent"):
++            CHECKER.compose_targets(self.original, next_rows)
++
++    def test_unknown_successor_owner_refuses(self):
++        next_rows = dict(self.successor)
++        next_rows["test/jdk/Unknown.java"] = ("ABSENT", "a" * 64, "unknown.txt")
++        with self.assertRaisesRegex(RuntimeError, "successor closure"):
++            CHECKER.compose_targets(self.original, next_rows)
++
++    def test_missing_original_overlap_refuses(self):
++        original = dict(self.original)
++        original["test/jdk/Unexpected.java"] = original.pop(sorted(CHECKER.REPLACED)[0])
++        with self.assertRaisesRegex(RuntimeError, "overlap"):
++            CHECKER.compose_targets(original, self.successor)
++
++    def test_documentation_must_follow_the_current_published_source(self):
++        rows = dict(self.documentation)
++        path = sorted(CHECKER.DOCUMENTED)[0]
++        _, after, template = rows[path]
++        rows[path] = ("f" * 64, after, template)
++        with self.assertRaisesRegex(RuntimeError, "broken documentation transition"):
++            CHECKER.compose_documentation(CHECKER.compose_targets(self.original, self.successor), rows)
++
++    def test_documentation_cannot_add_an_arbitrary_owner(self):
++        rows = dict(self.documentation)
++        rows["test/jdk/Unexpected.java"] = rows.pop(sorted(rows)[0])
++        with self.assertRaisesRegex(RuntimeError, "documentation successor closure"):
++            CHECKER.compose_documentation(CHECKER.compose_targets(self.original, self.successor), rows)
++
++    def test_each_documented_owner_rejects_source_drift(self):
++        for relative in sorted(CHECKER.DOCUMENTED):
++            with self.subTest(path=relative):
++                path = self.root / relative
++                before = path.read_bytes()
++                path.write_bytes(before + b"\n// unqualified documentation change\n")
++                with self.assertRaisesRegex(RuntimeError, "source drift"):
++                    self.run_check()
++                path.write_bytes(before)
++
++    def test_default_template_checker_accepts_the_exact_successor(self):
++        with contextlib.redirect_stdout(io.StringIO()) as output:
++            self.assertEqual(5, TEMPLATE.run(self.root))
++        self.assertIn("PASS 5 exact current M3 Java/template receiver digests", output.getvalue())
++        self.assertIn("remain HOLD", output.getvalue())
++
++    def test_default_template_checker_rejects_each_owner_drift(self):
++        for relative in sorted(CHECKER.REPLACED | CHECKER.ADDED):
++            with self.subTest(path=relative):
++                path = self.root / relative
++                before = path.read_bytes()
++                path.write_bytes(before + b"\n// drift\n")
++                with self.assertRaisesRegex(RuntimeError, "source drift"):
++                    TEMPLATE.run(self.root)
++                path.write_bytes(before)
++
++    def test_default_template_checker_requires_documentation_manifest(self):
++        (self.root / CHECKER.DOCS_MANIFEST).unlink()
++        with self.assertRaisesRegex(RuntimeError, "missing"):
++            TEMPLATE.run(self.root)
++
++    def test_default_template_checker_preserves_original_manifest_custody(self):
++        path = self.root / CHECKER.NEXT_MANIFEST
++        path.write_bytes(path.read_bytes() + b"# unqualified amendment\n")
++        with self.assertRaisesRegex(RuntimeError, "historical manifest custody drift"):
++            TEMPLATE.run(self.root)
++
++    def test_functional_documentation_must_follow_the_exact_current_source(self):
++        rows = dict(self.functional)
++        path = sorted(CHECKER.FUNCTIONAL)[0]
++        _, after, template = rows[path]
++        rows[path] = ("f" * 64, after, template)
++        with self.assertRaisesRegex(RuntimeError, "broken functional transition"):
++            CHECKER.compose_functional(CHECKER.current_targets(REPOSITORY), rows)
++
++    def test_functional_documentation_cannot_add_an_arbitrary_owner(self):
++        rows = dict(self.functional)
++        rows["test/jdk/Unexpected.java"] = rows.pop(sorted(rows)[0])
++        with self.assertRaisesRegex(RuntimeError, "functional successor closure"):
++            CHECKER.compose_functional(CHECKER.current_targets(REPOSITORY), rows)
++
++    def test_each_functional_owner_rejects_source_drift(self):
++        for relative in sorted(CHECKER.FUNCTIONAL):
++            with self.subTest(path=relative):
++                path = self.root / relative
++                before = path.read_bytes()
++                path.write_bytes(before + b"\n// unqualified functional change\n")
++                with self.assertRaisesRegex(RuntimeError, "source drift"):
++                    self.run_check()
++                path.write_bytes(before)
++
++    def test_default_template_checker_requires_functional_manifest(self):
++        (self.root / CHECKER.FUNCTIONAL_MANIFEST).unlink()
++        with self.assertRaisesRegex(RuntimeError, "missing"):
++            TEMPLATE.run(self.root)
++
++    def test_scope_annotations_must_follow_the_exact_documented_source(self):
++        rows = dict(self.annotations)
++        path = sorted(CHECKER.SCOPED)[0]
++        _, after, template = rows[path]
++        rows[path] = ("f" * 64, after, template)
++        with self.assertRaisesRegex(RuntimeError, "broken scope-annotation transition"):
++            CHECKER.compose_scope_annotations(CHECKER.current_targets(REPOSITORY), rows)
++
++    def test_scope_annotations_cannot_add_an_arbitrary_owner(self):
++        rows = dict(self.annotations)
++        rows["test/jdk/Unexpected.java"] = rows.pop(sorted(rows)[0])
++        with self.assertRaisesRegex(RuntimeError, "scope-annotation successor closure"):
++            CHECKER.compose_scope_annotations(CHECKER.current_targets(REPOSITORY), rows)
++
++    def test_older_qualified_scope_preimages_are_not_current(self):
++        for relative in sorted(CHECKER.SCOPED):
++            with self.subTest(path=relative):
++                path = self.root / relative
++                after = path.read_bytes()
++                before = after.replace(b'    @SuppressWarnings("try")\n', b'')
++                self.assertEqual(self.annotations[relative][0], hashlib.sha256(before).hexdigest())
++                path.write_bytes(before)
++                with self.assertRaisesRegex(RuntimeError, "source drift"):
++                    self.run_check()
++                path.write_bytes(after)
++
++    def test_default_template_checker_requires_scope_annotation_manifest(self):
++        (self.root / CHECKER.SCOPE_MANIFEST).unlink()
++        with self.assertRaisesRegex(RuntimeError, "missing"):
++            TEMPLATE.run(self.root)
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/m3/compatibility/verify_m3_default_template_20261017.py b/m3/compatibility/verify_m3_default_template_20261017.py
+index 94340b0..a81b2ae 100644
+--- a/m3/compatibility/verify_m3_default_template_20261017.py
++++ b/m3/compatibility/verify_m3_default_template_20261017.py
+@@ -1,28 +1,29 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ #!/usr/bin/env python3
+-"""Fail-closed exact M3 source receiver digest check. Does not run OpenRewrite or jtreg."""
+-import hashlib
++# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++# SPDX-License-Identifier: Apache-2.0
++"""Read-only default-template custody composed with the sealed documentation successor."""
++import importlib.util
+ from pathlib import Path
++import sys
+ 
++sys.dont_write_bytecode = True
+ ROOT = Path(__file__).resolve().parents[2]
+ MANIFEST = ROOT / "m3/compatibility/m3-default-template-source-seal.tsv"
++SPEC = importlib.util.spec_from_file_location("m3_progress_receiver_custody",
++        Path(__file__).with_name("check_object_adapter_progress_receiver_20261017.py"))
++CHECKER = importlib.util.module_from_spec(SPEC)
++SPEC.loader.exec_module(CHECKER)
+ 
+-def run():
+-    seen = set()
+-    for raw in MANIFEST.read_text(encoding="utf-8").splitlines():
+-        if not raw or raw.startswith("#"):
+-            continue
+-        path, before, after, template = raw.split("\t")
+-        if path in seen or not path.startswith(("src/java.base/share/classes/", "test/jdk/")):
+-            raise ValueError("unexpected/duplicate source: " + path)
+-        if len(after) != 64 or (before != "ABSENT" and len(before) != 64):
+-            raise ValueError("unsealed source: " + path)
+-        expected = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
+-        if expected != after:
+-            raise AssertionError(path + ": " + expected + " != " + after)
+-        seen.add(path)
+-    if len(seen) != 5:
+-        raise AssertionError("expected five source-sealed Java files")
+-    print("PASS 5 exact M3 Java/template receiver digests")
++
++def run(root=None):
++    """Retain the five template owners within the exact 14-file current closure."""
++    receiver = ROOT if root is None else Path(root)
++    CHECKER.verify(receiver)
++    # The shared verifier pins the original five-row manifest and proves each
++    # before-to-after transition before checking the current source bytes.
++    print("PASS 5 exact current M3 Java/template receiver digests")
++    return 5
++
+ 
+ if __name__ == "__main__":
+     run()
+diff --git a/m3/docs/name-mapping.json b/m3/docs/name-mapping.json
+index 4f5911d..beb622b 100644
+--- a/m3/docs/name-mapping.json
++++ b/m3/docs/name-mapping.json
+@@ -613,6 +613,118 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+       "receiver_test": "test/jdk/java/util/HashMap/M3HashMapBulkCopyTest.java",
+       "status": "candidate backport installed on draft branch; java.base patch testing and target runtime/jtreg gates pending; String-first receiving priority unchanged",
+       "target_rule": "Preserve public Map contracts and fallback for nonexact HashMap source types; no Synexia runtime dependency, no new M3 payload owner or native ABI."
++    },
++    {
++      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
++      "recipe_datasets": [
++        "m3jdk21-object-vtable",
++        "m3jdk21-progress-doclint",
++        "m3jdk21-functional-doclint",
++        "m3jdk21-progress-scope-lint",
++        "m3jdk21-runtime-control"
++      ],
++      "canonical_recipe_repository": "hsoliwal/com.synexia",
++      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
++      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
++      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
++      "source": "Published M3jdk21 #1082 Object self-adaptation; existing Synexia convergence pattern",
++      "source_revision": "c8596a624ff7b15b3fe58cbf857eda0852b84402",
++      "target": "java.lang.Object.toAdapter(java.lang.Class)",
++      "target_path": "src/java.base/share/classes/java/lang/Object.java",
++      "receiver_test": "test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java",
++      "status": "HOLD: no universal source/binary/dispatch compatibility claim; explicit negative witnesses retained",
++      "target_rule": "Keep the current published self-if-assignable result, null mismatch, and null-class rejection; this repair changes no Object declarations or bodies."
++    },
++    {
++      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
++      "recipe_datasets": [
++        "m3jdk21-object-vtable",
++        "m3jdk21-progress-doclint",
++        "m3jdk21-functional-doclint",
++        "m3jdk21-progress-scope-lint",
++        "m3jdk21-runtime-control"
++      ],
++      "canonical_recipe_repository": "hsoliwal/com.synexia",
++      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
++      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
++      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
++      "source": "Published M3jdk21 #1082 progress SPI and #1091 weighted-child cancellation successor",
++      "source_revision": "a5be05424262a3c7cd3ffb65e9de531be8921d98",
++      "target": "java.util.concurrent.ProgressMonitors",
++      "target_path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
++      "public_spi": "java.util.concurrent.ProgressMonitor",
++      "receiver_test": "test/jdk/java/lang/Object/M3MonitoredTemplateTest.java",
++      "status": "Existing target-owned API; documentation successor preserves executable bytecode; current-source custody checked through all five manifests",
++      "target_rule": "Borrowed monitor lifetime, thread-local binding, atomic supplier publication and local child cancellation stay unchanged. Eclipse bridge com.m3.collections.M3ProgressMonitor remains a separate published SPI."
++    },
++    {
++      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
++      "recipe_datasets": [
++        "m3jdk21-object-vtable",
++        "m3jdk21-progress-doclint",
++        "m3jdk21-functional-doclint",
++        "m3jdk21-progress-scope-lint",
++        "m3jdk21-runtime-control"
++      ],
++      "canonical_recipe_repository": "hsoliwal/com.synexia",
++      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
++      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
++      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
++      "source": "Published M3jdk21 #1091 monitored default-template tasks, using existing JDK executors",
++      "source_revision": "a5be05424262a3c7cd3ffb65e9de531be8921d98",
++      "target": "java.util.concurrent.MonitoredRunnable and MonitoredCallable",
++      "target_path": "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
++      "related_target_path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
++      "receiver_test": "test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java",
++      "status": "Existing public names retained; ordinary dual Runnable/Callable source and frozen binary behavior have dedicated witnesses",
++      "target_rule": "Runnable.run remains void and Callable.call retains its result/checked-exception contract. No TaskStatus recast, duplicate Callable.progressMonitor default, new scheduler or mandatory client base class."
++    },
++    {
++      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
++      "recipe_datasets": [
++        "m3jdk21-object-vtable",
++        "m3jdk21-progress-doclint",
++        "m3jdk21-functional-doclint",
++        "m3jdk21-progress-scope-lint",
++        "m3jdk21-runtime-control"
++      ],
++      "canonical_recipe_repository": "hsoliwal/com.synexia",
++      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
++      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
++      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
++      "source": "Published M3jdk21 #1082 monitored function overloads under their existing JDK names",
++      "source_revision": "c8596a624ff7b15b3fe58cbf857eda0852b84402",
++      "target": "java.util.function.Consumer, Function and Supplier",
++      "target_path": "src/java.base/share/classes/java/util/function/Consumer.java",
++      "related_target_paths": [
++        "src/java.base/share/classes/java/util/function/Function.java",
++        "src/java.base/share/classes/java/util/function/Supplier.java"
++      ],
++      "receiver_test": "test/jdk/java/lang/Object/M3AdapterProgress.java",
++      "status": "Existing progress overloads receive Javadoc only; their original single abstract methods and executable bytecode are preserved",
++      "target_rule": "No client base class or SAM replacement; monitored overloads borrow their explicit monitor and restore the prior lexical binding."
++    },
++    {
++      "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
++      "recipe_datasets": [
++        "m3jdk21-object-vtable",
++        "m3jdk21-progress-doclint",
++        "m3jdk21-functional-doclint",
++        "m3jdk21-progress-scope-lint",
++        "m3jdk21-runtime-control"
++      ],
++      "canonical_recipe_repository": "hsoliwal/com.synexia",
++      "catalogue": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
++      "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
++      "phase_rule": "STRING phase unchanged; maintenance of already-published owners only",
++      "source": "Existing OpenJDK HotSpot bootstrap vtable count; matched current published Object source",
++      "source_revision": "4b24824c3aa09d802121447f8970d442a855f064",
++      "source_git_blob": "ab29ec3524d40ff58d6ff3e6fe2c1123b3abc1dd",
++      "target": "ClassLoader::compute_Object_vtable",
++      "target_path": "src/hotspot/share/classfile/classLoader.cpp",
++      "source_license": "GPL-2.0-only",
++      "status": "Exact count repaired from five to six with the existing vtable consistency guard retained; full fastdebug image is a separate gate",
++      "target_rule": "No JNI symbol, object layout, native ownership or guard weakening. Bootstrap consistency does not establish Object API compatibility."
+     }
+   ],
+   "imported_donor_sources": [],
+diff --git a/m3/runtime-integration/merged-repair-recovery-20261018/ADMISSION.json b/m3/runtime-integration/merged-repair-recovery-20261018/ADMISSION.json
+new file mode 100644
+index 0000000..641e397
+--- /dev/null
++++ b/m3/runtime-integration/merged-repair-recovery-20261018/ADMISSION.json
+@@ -0,0 +1,628 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++{
++  "schema": "M3_CURRENT_RUNTIME_DELIVERY_ADMISSION_V1",
++  "status": "SOURCE_ADMISSION_ONLY",
++  "repository": "hsoliwal/M3jdk21",
++  "baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
++  "earlier_delivery": "86528a90079b89a50b51ef13da08e7e70d468cb4",
++  "earlier_delivery_is_ancestor": true,
++  "ancestry_is_not_source_delivery": true,
++  "original_target_count": 27,
++  "exact_original_preimages": 26,
++  "preserved_current_catalogue_rows": [
++    "ALG-NUMERIC-COPY-RUNS"
++  ],
++  "original_recipe_manifests": [
++    {
++      "path": "datasets/m3jdk21-object-vtable/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-object-vtable/manifest.tsv",
++      "sha256": "2a4a846c550f46b3706b5ad6ab41284ff3b7364273a5c66853a435e268cb9e1c"
++    },
++    {
++      "path": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
++      "sha256": "8c0e19e8fc7313972a3be729f7426675ca83f9eee2672e8a500d16a0b6ba9f69"
++    },
++    {
++      "path": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
++      "sha256": "5d6927f1f955ddf25b83684a52b252dd549d01e984b51ec64cae8fc5077159e9"
++    },
++    {
++      "path": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
++      "sha256": "ced34475778273e4471aa984eb3df78701590611f0a60b78150e7c5ca56f53ac"
++    },
++    {
++      "path": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
++      "sha256": "0a1487e54f02814e8263d7e9945eb0475b39cd68b07c1b4eb0402f5750fa9316"
++    },
++    {
++      "path": "datasets/m3jdk21-strings-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-strings-doclint/manifest.tsv",
++      "sha256": "a83d10bf4f9eb85ab73be27c3cf0e0dff6a2a715361e2f0e295d978e9ac74f86"
++    },
++    {
++      "path": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
++      "sha256": "0f55fb75b49c743fbbc43127d9a2e791eff59dd067956a0094bb7d5f353a88e8"
++    },
++    {
++      "path": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
++      "sha256": "4a0302444667f6fb59983e06609cd40dbcd8d2ab16df772a65f00bc916a3d57d"
++    },
++    {
++      "path": "datasets/m3jdk21-native-feature-guard/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-native-feature-guard/manifest.tsv",
++      "sha256": "5cc1de2df9bf395a7eb33bd7ed4b5f700ce8ffd7700431657021d6d2eeeb7f0d"
++    },
++    {
++      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
++      "sha256": "d3e5f9373fbdcf10c555b084b75f25f644beea01d1a052ae159e2bf049ffd6ef"
++    },
++    {
++      "path": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
++      "sha256": "152abb3f955b1be8a9d2fe02c649b6e5de4bf61b66eb1ead1d0822457752fc02"
++    }
++  ],
++  "targets": [
++    {
++      "path": "m3/backports/ALGORITHM_CATALOGUE.tsv",
++      "current_sha256": "50e6381eed8e06fe9c073298b8a4cf20ad853df096887c6c8510a40bedce6569",
++      "current_git_blob": "fb595d386d48a38d511d29778d15608d864ada56",
++      "original_preimage_sha256": "1aad547fe2f419cf2f265a8f1d7c492779c1bbc86ef685bfafd47516a98a276e",
++      "delivered_sha256": "6e129506e8e1bb6c8e728ed82ddae11822129da00b708959dc65deb40d2d0e0c",
++      "delivered_git_blob": "f0b9cf0c109bcdd8fe075732b75f97f781a80353",
++      "candidate_sha256": "bea7b397c823b5849159fcc0dd89e599b83f694f4caf84d6a05dfbe0ad8892f6",
++      "disposition": "PRESERVE_CURRENT_PREFIX_APPEND_FIVE_EXACT_REPAIR_ROWS",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-runtime-control",
++          "before": "1aad547fe2f419cf2f265a8f1d7c492779c1bbc86ef685bfafd47516a98a276e",
++          "after": "6e129506e8e1bb6c8e728ed82ddae11822129da00b708959dc65deb40d2d0e0c",
++          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
++          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0001-ALGORITHM_CATALOGUE.tsv.txt"
++        }
++      ]
++    },
++    {
++      "path": "m3/compatibility/check_object_adapter_progress_receiver_20261017.py",
++      "current_sha256": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443",
++      "current_git_blob": "23384a1f7e7317024b56a2b5c8e8b8c2b650bf89",
++      "original_preimage_sha256": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443",
++      "delivered_sha256": "e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404",
++      "delivered_git_blob": "8261a45b7d9ea5000fcbc2ee7ce117a0eb03991d",
++      "candidate_sha256": "e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-runtime-control",
++          "before": "5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443",
++          "after": "e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404",
++          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
++          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0002-check_object_adapter_progress_receiver_20261017.py.txt"
++        }
++      ]
++    },
++    {
++      "path": "m3/compatibility/m3-functional-progress-doclint-20261018.tsv",
++      "current_sha256": "ABSENT",
++      "current_git_blob": null,
++      "original_preimage_sha256": "ABSENT",
++      "delivered_sha256": "3b62981be6a617b903c559cc31904eca2bffb2b200380f1be57e07a8f634d969",
++      "delivered_git_blob": "c031eda22f7d171c6da0801e1ede4e412e9ceacb",
++      "candidate_sha256": "3b62981be6a617b903c559cc31904eca2bffb2b200380f1be57e07a8f634d969",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-functional-doclint",
++          "before": "ABSENT",
++          "after": "3b62981be6a617b903c559cc31904eca2bffb2b200380f1be57e07a8f634d969",
++          "manifest": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
++          "template": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/0001-m3-functional-progress-doclint-20261018.tsv.txt"
++        }
++      ]
++    },
++    {
++      "path": "m3/compatibility/m3-progress-doclint-20261018.tsv",
++      "current_sha256": "ABSENT",
++      "current_git_blob": null,
++      "original_preimage_sha256": "ABSENT",
++      "delivered_sha256": "7246c16a0e8ec742eba98dac97e24b7fc3947250ad5d2a22f72ac32dcddf0219",
++      "delivered_git_blob": "aaf15ce58604609d9573bcafdb0fdf2e1d4b98ad",
++      "candidate_sha256": "7246c16a0e8ec742eba98dac97e24b7fc3947250ad5d2a22f72ac32dcddf0219",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-progress-doclint",
++          "before": "ABSENT",
++          "after": "7246c16a0e8ec742eba98dac97e24b7fc3947250ad5d2a22f72ac32dcddf0219",
++          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
++          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0001-m3-progress-doclint-20261018.tsv.txt"
++        }
++      ]
++    },
++    {
++      "path": "m3/compatibility/m3-progress-scope-lint-20261018.tsv",
++      "current_sha256": "ABSENT",
++      "current_git_blob": null,
++      "original_preimage_sha256": "ABSENT",
++      "delivered_sha256": "1a45edfa747a03b3491063648a455083633e7de836e4c46241de104d689eebee",
++      "delivered_git_blob": "87a267bcf32909bd6ccd1b18965fae2a999e4fe8",
++      "candidate_sha256": "1a45edfa747a03b3491063648a455083633e7de836e4c46241de104d689eebee",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-progress-scope-lint",
++          "before": "ABSENT",
++          "after": "1a45edfa747a03b3491063648a455083633e7de836e4c46241de104d689eebee",
++          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
++          "template": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0001-m3-progress-scope-lint-20261018.tsv.txt"
++        }
++      ]
++    },
++    {
++      "path": "m3/compatibility/test_object_adapter_progress_receiver_20261018.py",
++      "current_sha256": "ABSENT",
++      "current_git_blob": null,
++      "original_preimage_sha256": "ABSENT",
++      "delivered_sha256": "e84be3f274caf1543ce7a2eb10aced6670fa488ad5478719be5b3227dc48a611",
++      "delivered_git_blob": "b9b39d12b4cf1c78bedf27d9c0b2f86600cbf228",
++      "candidate_sha256": "e84be3f274caf1543ce7a2eb10aced6670fa488ad5478719be5b3227dc48a611",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-runtime-control",
++          "before": "ABSENT",
++          "after": "e84be3f274caf1543ce7a2eb10aced6670fa488ad5478719be5b3227dc48a611",
++          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
++          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0003-test_object_adapter_progress_receiver_20261018.py.txt"
++        }
++      ]
++    },
++    {
++      "path": "m3/compatibility/verify_m3_default_template_20261017.py",
++      "current_sha256": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da",
++      "current_git_blob": "94340b0e9c118d8b821e5dc02f99ae966815630e",
++      "original_preimage_sha256": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da",
++      "delivered_sha256": "234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc",
++      "delivered_git_blob": "a81b2aeeb25721dd937726320b48d817aae35b93",
++      "candidate_sha256": "234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-runtime-control",
++          "before": "856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da",
++          "after": "234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc",
++          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
++          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0004-verify_m3_default_template_20261017.py.txt"
++        }
++      ]
++    },
++    {
++      "path": "m3/docs/name-mapping.json",
++      "current_sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
++      "current_git_blob": "4f5911d625090913d85f9cf41b1ead1694dffade",
++      "original_preimage_sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
++      "delivered_sha256": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
++      "delivered_git_blob": "beb622bdb79ad2b6192ff5bcb3f2de59050effdd",
++      "candidate_sha256": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-runtime-control",
++          "before": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
++          "after": "d63db548f89f25622399329148872225a438e9121cb3436d967bccd3bdff0c02",
++          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
++          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0005-name-mapping.json.txt"
++        }
++      ]
++    },
++    {
++      "path": "m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv",
++      "current_sha256": "ABSENT",
++      "current_git_blob": null,
++      "original_preimage_sha256": "ABSENT",
++      "delivered_sha256": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4",
++      "delivered_git_blob": "aeaed84a0972f7fe84d13bfe561205179629b8e6",
++      "candidate_sha256": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-runtime-control",
++          "before": "ABSENT",
++          "after": "3f88e143299a558a1a4f20c86d012b0823dc9f9ee4d519ce28cd16bc9cf35ff4",
++          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
++          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0006-CATALOGUE.tsv.txt"
++        }
++      ]
++    },
++    {
++      "path": "m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json",
++      "current_sha256": "ABSENT",
++      "current_git_blob": null,
++      "original_preimage_sha256": "ABSENT",
++      "delivered_sha256": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364",
++      "delivered_git_blob": "9b134df4e8d8889cd11ede497a0cbc949bbc7f7b",
++      "candidate_sha256": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-runtime-control",
++          "before": "ABSENT",
++          "after": "6c6e6dca85d5bf211ec04d8164d357918950348c4c3a9413be453c2bb11de364",
++          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
++          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0007-CURRENT_OWNERS.json.txt"
++        }
++      ]
++    },
++    {
++      "path": "m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv",
++      "current_sha256": "ABSENT",
++      "current_git_blob": null,
++      "original_preimage_sha256": "ABSENT",
++      "delivered_sha256": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377",
++      "delivered_git_blob": "9719263ae18432059257bbd120dd8e973af73a4b",
++      "candidate_sha256": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-runtime-control",
++          "before": "ABSENT",
++          "after": "1c5b958b528e94183f710dea0f4b7ce9319750407062ca51285bd66286b4d377",
++          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
++          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0008-FILE_REVIEW.tsv.txt"
++        }
++      ]
++    },
++    {
++      "path": "m3/runtime-integration/runtime-repair-20261018/README.md",
++      "current_sha256": "ABSENT",
++      "current_git_blob": null,
++      "original_preimage_sha256": "ABSENT",
++      "delivered_sha256": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a",
++      "delivered_git_blob": "a35cc3688defef3b50d68453d7d5dffad85760ec",
++      "candidate_sha256": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-runtime-control",
++          "before": "ABSENT",
++          "after": "04e8ff5ea3b57b861ce4381c120e56584478c1f8004c2397829fb8c59e8dd49a",
++          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
++          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0009-README.md.txt"
++        }
++      ]
++    },
++    {
++      "path": "src/hotspot/share/classfile/classLoader.cpp",
++      "current_sha256": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d",
++      "current_git_blob": "ab29ec3524d40ff58d6ff3e6fe2c1123b3abc1dd",
++      "original_preimage_sha256": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d",
++      "delivered_sha256": "d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2",
++      "delivered_git_blob": "b8e06295560c269980f13e1af51cd46827a9025a",
++      "candidate_sha256": "d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-object-vtable",
++          "before": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d",
++          "after": "d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2",
++          "manifest": "datasets/m3jdk21-object-vtable/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-object-vtable/manifest.tsv",
++          "template": "datasets/m3jdk21-object-vtable/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-object-vtable/0001-classLoader.cpp.txt"
++        }
++      ]
++    },
++    {
++      "path": "src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
++      "current_sha256": "04c5281944444e9a9c4bee49748b2a80f7661f44897003f87619403e709e2ddb",
++      "current_git_blob": "15354f8cef8ae6f5a051ec2ad490cce1ac9023f1",
++      "original_preimage_sha256": "04c5281944444e9a9c4bee49748b2a80f7661f44897003f87619403e709e2ddb",
++      "delivered_sha256": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30",
++      "delivered_git_blob": "c6d722c1b650b3434682170a72f9012c829629ed",
++      "candidate_sha256": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-native-feature-guard",
++          "before": "04c5281944444e9a9c4bee49748b2a80f7661f44897003f87619403e709e2ddb",
++          "after": "bcc1693812f4e81ae490ed9ca03c38d6411a7ba81eb2108c1436d693991e0e30",
++          "manifest": "datasets/m3jdk21-native-feature-guard/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-native-feature-guard/manifest.tsv",
++          "template": "datasets/m3jdk21-native-feature-guard/resources/com/synexia/rewrite/hash-pinned-text/m3-collections-contract-refinement-20261017-m3jdk21-native-feature-guard/0001-M3PrimitiveFixedArena.c.txt"
++        }
++      ]
++    },
++    {
++      "path": "src/java.base/share/classes/java/lang/Runnable.java",
++      "current_sha256": "bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534",
++      "current_git_blob": "1d8275948a6e638bfe814f41f0afac82663ff2ca",
++      "original_preimage_sha256": "bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534",
++      "delivered_sha256": "b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a",
++      "delivered_git_blob": "8fb270de68f57fc5463bfecd6ac8418012d16fde",
++      "candidate_sha256": "b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-progress-doclint",
++          "before": "bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534",
++          "after": "b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a",
++          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
++          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0002-Runnable.java.txt"
++        }
++      ]
++    },
++    {
++      "path": "src/java.base/share/classes/java/util/Strings.java",
++      "current_sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
++      "current_git_blob": "d4f0687c2145b94de67d29012cea5edf1f47badd",
++      "original_preimage_sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
++      "delivered_sha256": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
++      "delivered_git_blob": "82ab932c10d8452f951c09cc1beaf79df77a53c4",
++      "candidate_sha256": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-strings-doclint",
++          "before": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
++          "after": "20071ef19a84a81f9bccd9a4260df58225442810aef2cbe0b1ec4980c8251087",
++          "manifest": "datasets/m3jdk21-strings-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-strings-doclint/manifest.tsv",
++          "template": "datasets/m3jdk21-strings-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-strings-doclint/0001-Strings.java.txt"
++        }
++      ]
++    },
++    {
++      "path": "src/java.base/share/classes/java/util/concurrent/Callable.java",
++      "current_sha256": "a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261",
++      "current_git_blob": "8210cfb6a6fdf942b9553e80c303a4b8c9f2671f",
++      "original_preimage_sha256": "a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261",
++      "delivered_sha256": "6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f",
++      "delivered_git_blob": "7cd9b5d7d538b4dffe426cacc9a03651f635e005",
++      "candidate_sha256": "6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-progress-doclint",
++          "before": "a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261",
++          "after": "6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f",
++          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
++          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0003-Callable.java.txt"
++        }
++      ]
++    },
++    {
++      "path": "src/java.base/share/classes/java/util/concurrent/Executor.java",
++      "current_sha256": "63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4",
++      "current_git_blob": "802c00832d217a77bb1245c1ba473479df4c3096",
++      "original_preimage_sha256": "63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4",
++      "delivered_sha256": "e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa",
++      "delivered_git_blob": "4fd7398351048045a6b77c57393b52ed492730fe",
++      "candidate_sha256": "e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-progress-doclint",
++          "before": "63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4",
++          "after": "e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa",
++          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
++          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0004-Executor.java.txt"
++        }
++      ]
++    },
++    {
++      "path": "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
++      "current_sha256": "ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868",
++      "current_git_blob": "a599ad8915eda2ace1454d59cc64c739ffc9cf66",
++      "original_preimage_sha256": "ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868",
++      "delivered_sha256": "9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d",
++      "delivered_git_blob": "fa608ebcf4bcf49f55475471aea8ad31b1328490",
++      "candidate_sha256": "9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-progress-doclint",
++          "before": "ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868",
++          "after": "9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d",
++          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
++          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0005-ExecutorService.java.txt"
++        }
++      ]
++    },
++    {
++      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
++      "current_sha256": "a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7",
++      "current_git_blob": "157cce905a828a8cc34fc977f0fa42dc8362aa03",
++      "original_preimage_sha256": "a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7",
++      "delivered_sha256": "77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733",
++      "delivered_git_blob": "6e08ac638e7500945cdabb77beec0ad434b2cfe1",
++      "candidate_sha256": "77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-progress-doclint",
++          "before": "a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7",
++          "after": "77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733",
++          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
++          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0006-MonitoredCallable.java.txt"
++        }
++      ]
++    },
++    {
++      "path": "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
++      "current_sha256": "8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b",
++      "current_git_blob": "1a8d02bf7ea449018cae69aae5b784a65a172e66",
++      "original_preimage_sha256": "8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b",
++      "delivered_sha256": "2670d2b928981c1068c2299dc1458c2b9dc7dc372d2e8d2527005d695c77f06e",
++      "delivered_git_blob": "b81a48be7f45379192a97f9650e4e27db6d6a352",
++      "candidate_sha256": "2670d2b928981c1068c2299dc1458c2b9dc7dc372d2e8d2527005d695c77f06e",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-progress-doclint",
++          "before": "8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b",
++          "after": "2670d2b928981c1068c2299dc1458c2b9dc7dc372d2e8d2527005d695c77f06e",
++          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
++          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0007-MonitoredRunnable.java.txt"
++        }
++      ]
++    },
++    {
++      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
++      "current_sha256": "58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3",
++      "current_git_blob": "2c90932ecb19c138a62f9860232162002f87c012",
++      "original_preimage_sha256": "58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3",
++      "delivered_sha256": "368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93",
++      "delivered_git_blob": "58172366681470702282607e58f542f47079993a",
++      "candidate_sha256": "368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-progress-doclint",
++          "before": "58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3",
++          "after": "368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93",
++          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
++          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0008-ProgressMonitor.java.txt"
++        }
++      ]
++    },
++    {
++      "path": "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
++      "current_sha256": "5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359",
++      "current_git_blob": "a634db13a764d22fc55ad75ae35cc4952d3b20f6",
++      "original_preimage_sha256": "5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359",
++      "delivered_sha256": "48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc",
++      "delivered_git_blob": "38637beaea7a7adf7375dc36dbcf95c87183d1a0",
++      "candidate_sha256": "48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-progress-doclint",
++          "before": "5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359",
++          "after": "d1fc14e9b59c305d6f71df76afb86d9e7d9e4cabd0899105e5d001380ce4c736",
++          "manifest": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/manifest.tsv",
++          "template": "datasets/m3jdk21-progress-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-doclint/0009-ProgressMonitors.java.txt"
++        },
++        {
++          "dataset": "m3jdk21-progress-scope-lint",
++          "before": "d1fc14e9b59c305d6f71df76afb86d9e7d9e4cabd0899105e5d001380ce4c736",
++          "after": "48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc",
++          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
++          "template": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0002-ProgressMonitors.java.txt"
++        }
++      ]
++    },
++    {
++      "path": "src/java.base/share/classes/java/util/function/Consumer.java",
++      "current_sha256": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc",
++      "current_git_blob": "3df6f12a3a442c3a9f0d47ed5fc8aa725e634ccb",
++      "original_preimage_sha256": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc",
++      "delivered_sha256": "52773610a8cd4d4e0808c2895e504b09ce9c0c05a0273e81cc533bad19ab6226",
++      "delivered_git_blob": "e3b80f13827ec7bd3a4085678a2cb47470babd96",
++      "candidate_sha256": "52773610a8cd4d4e0808c2895e504b09ce9c0c05a0273e81cc533bad19ab6226",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-functional-doclint",
++          "before": "4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc",
++          "after": "025c5fa47f9505eccea26c540bc3e320762346c464ecca37ec1994297285a073",
++          "manifest": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
++          "template": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/0002-Consumer.java.txt"
++        },
++        {
++          "dataset": "m3jdk21-progress-scope-lint",
++          "before": "025c5fa47f9505eccea26c540bc3e320762346c464ecca37ec1994297285a073",
++          "after": "52773610a8cd4d4e0808c2895e504b09ce9c0c05a0273e81cc533bad19ab6226",
++          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
++          "template": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0003-Consumer.java.txt"
++        }
++      ]
++    },
++    {
++      "path": "src/java.base/share/classes/java/util/function/Function.java",
++      "current_sha256": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744",
++      "current_git_blob": "76a20ef10fa1fbb701adb544ff6b7eb152f4303c",
++      "original_preimage_sha256": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744",
++      "delivered_sha256": "73877c7a547bb812a6901cae0af4866645de978b867e055204cd53f6dffb6476",
++      "delivered_git_blob": "5735f4d3534a0a7543a48a127c16d9a1d36b90dc",
++      "candidate_sha256": "73877c7a547bb812a6901cae0af4866645de978b867e055204cd53f6dffb6476",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-functional-doclint",
++          "before": "7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744",
++          "after": "e116c9989d314cb6ffdaef60e8f665205afccdd28ee3674af2c6eedc008da588",
++          "manifest": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
++          "template": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/0003-Function.java.txt"
++        },
++        {
++          "dataset": "m3jdk21-progress-scope-lint",
++          "before": "e116c9989d314cb6ffdaef60e8f665205afccdd28ee3674af2c6eedc008da588",
++          "after": "73877c7a547bb812a6901cae0af4866645de978b867e055204cd53f6dffb6476",
++          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
++          "template": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0004-Function.java.txt"
++        }
++      ]
++    },
++    {
++      "path": "src/java.base/share/classes/java/util/function/Supplier.java",
++      "current_sha256": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6",
++      "current_git_blob": "ae9a9fd8a0158cb396d36304a607709cd875903c",
++      "original_preimage_sha256": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6",
++      "delivered_sha256": "84170e0863237433f20c3fdc4617eea990731fa7a1e5b0aeaf6b03f89e55c096",
++      "delivered_git_blob": "f560debd528618781e388f49d6e0cdfe62825578",
++      "candidate_sha256": "84170e0863237433f20c3fdc4617eea990731fa7a1e5b0aeaf6b03f89e55c096",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-functional-doclint",
++          "before": "49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6",
++          "after": "2d5f23125e22f4d20d80d7734e883c45fd179207f0ab508fdd0c9e8616156766",
++          "manifest": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/manifest.tsv",
++          "template": "datasets/m3jdk21-functional-doclint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-functional-doclint/0004-Supplier.java.txt"
++        },
++        {
++          "dataset": "m3jdk21-progress-scope-lint",
++          "before": "2d5f23125e22f4d20d80d7734e883c45fd179207f0ab508fdd0c9e8616156766",
++          "after": "84170e0863237433f20c3fdc4617eea990731fa7a1e5b0aeaf6b03f89e55c096",
++          "manifest": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/manifest.tsv",
++          "template": "datasets/m3jdk21-progress-scope-lint/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-scope-lint/0005-Supplier.java.txt"
++        }
++      ]
++    },
++    {
++      "path": "test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java",
++      "current_sha256": "ABSENT",
++      "current_git_blob": null,
++      "original_preimage_sha256": "ABSENT",
++      "delivered_sha256": "9faf22addfe520efd30ef8181fa1b89bb4e130f65acb35d2ac9e8b58a3ce38aa",
++      "delivered_git_blob": "ad70550b7430a797e541984b3068ac4898b39d25",
++      "candidate_sha256": "9faf22addfe520efd30ef8181fa1b89bb4e130f65acb35d2ac9e8b58a3ce38aa",
++      "disposition": "RESTORE_EXACT_ORIGINAL_PREIMAGE_TO_DELIVERED_POSTIMAGE",
++      "recipe_chain": [
++        {
++          "dataset": "m3jdk21-runtime-control",
++          "before": "ABSENT",
++          "after": "9faf22addfe520efd30ef8181fa1b89bb4e130f65acb35d2ac9e8b58a3ce38aa",
++          "manifest": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/manifest.tsv",
++          "template": "datasets/m3jdk21-runtime-control/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-runtime-control/0010-M3RuntimeCompatibilityHold.java.txt"
++        }
++      ]
++    }
++  ],
++  "OpenJDK_build_input_diff": [
++    "src/hotspot/share/classfile/classLoader.cpp",
++    "src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c",
++    "src/java.base/share/classes/java/lang/Runnable.java",
++    "src/java.base/share/classes/java/util/Strings.java",
++    "src/java.base/share/classes/java/util/concurrent/Callable.java",
++    "src/java.base/share/classes/java/util/concurrent/Executor.java",
++    "src/java.base/share/classes/java/util/concurrent/ExecutorService.java",
++    "src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java",
++    "src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java",
++    "src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java",
++    "src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java",
++    "src/java.base/share/classes/java/util/function/Consumer.java",
++    "src/java.base/share/classes/java/util/function/Function.java",
++    "src/java.base/share/classes/java/util/function/Supplier.java"
++  ],
++  "Object": {
++    "path": "src/java.base/share/classes/java/lang/Object.java",
++    "sha256": "829fb37093cf3e8d11b3c1e3d42f898f0c86f3b697e7a66cefe09934be3bb259",
++    "changed": false,
++    "universal_no_break": "HOLD_UNCHANGED"
++  },
++  "phase": "STRING_UNCHANGED",
++  "public_interfaces": "NO_NEW_INTERFACE_CHANGE_IN_THIS_RESTORATION",
++  "execution": "NEW_MAVEN_RECEIVING_AND_BUILD_GATES_REQUIRED; EARLIER_EVIDENCE_REMAINS_BOUND_TO_EARLIER_BYTES"
++}
+diff --git a/m3/runtime-integration/merged-repair-recovery-20261018/CATALOGUE.tsv b/m3/runtime-integration/merged-repair-recovery-20261018/CATALOGUE.tsv
+new file mode 100644
+index 0000000..c32af51
+--- /dev/null
++++ b/m3/runtime-integration/merged-repair-recovery-20261018/CATALOGUE.tsv
+@@ -0,0 +1,8 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++# SPDX-License-Identifier: Apache-2.0
++problem_category	candidate	decision	correctness_and_compatibility	complexity	donor	qualification
++SOURCE_DELIVERY_IDENTITY	Git ancestry as delivery	REJECT	A merged ancestor does not establish current file bytes	O(1) assertion is insufficient	Current and earlier pinned Git trees	27 actual target comparisons required
++SOURCE_DELIVERY_IDENTITY	exact original recipe postimages	SELECT	26 exact old preimages restore the same delivered bytes; four per-file chains are composed without changing owners	O(total admitted bytes) hashing and comparison	Seven existing canonical datasets; preserved per-file licenses	Original Maven/OpenRewrite SDK and receiver gates
++CATALOGUE_UNION	whole-file historical replacement	REJECT	Would remove the current ALG-NUMERIC-COPY-RUNS row	O(file bytes)	Current catalogue	Explicit prefix-preservation witness
++CATALOGUE_UNION	append five missing exact rows	SELECT	Preserve every current byte, compare row identities, refuse conflicting owners	O(current and original row bytes)	Existing original runtime catalogue delta	Prefix, collision, and exact-row checks
++DISCOVERY_APPLICABILITY	LeetCode HackerRank GeeksforGeeks	NOT_APPLICABLE	This pass restores reviewed source identity and metadata; it introduces no new search or collection algorithm	NOT_APPLICABLE	Prior algorithm choices and donor reviews remain retained	No new performance or algorithm superiority claim
+diff --git a/m3/runtime-integration/merged-repair-recovery-20261018/README.md b/m3/runtime-integration/merged-repair-recovery-20261018/README.md
+new file mode 100644
+index 0000000..f032f5b
+--- /dev/null
++++ b/m3/runtime-integration/merged-repair-recovery-20261018/README.md
+@@ -0,0 +1,40 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++<!--
++SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
++SPDX-License-Identifier: Apache-2.0
++-->
++# Restore bounded runtime repairs on the current receiving tree
++
++Current commit `07ba6e383343d32c83cfdaf641387bbe72bf325d` has lost the
++delivered bytes from `86528a90079b89a50b51ef13da08e7e70d468cb4`. The admission
++record compares actual Git blobs and original recipe manifests. A merge or an
++ancestor relationship is not evidence that a source change remains delivered.
++
++Of the 27 targets controlled by the seven original runtime recipes, 26 are
++exact original preimages, including absent additions. This pass reuses their
++exact qualified postimage atoms. The current global algorithm catalogue has
++one later numeric-copy row; every current byte is retained and the five missing
++runtime rows are appended. The old name map is itself an exact original
++preimage, so its restored postimage preserves all current entries.
++
++The fourteen production source files after restoration are byte-identical to
++the earlier delivered files: HotSpot's matching Object vtable count, the JNI
++feature-macro guard, and the progress/function/Strings strict-build repairs.
++There are no changes to allocator error handling, public signatures, or global
++build gates. Object itself remains unchanged and its universal compatibility
++claim remains HOLD. The ordered STRING phase is unchanged. Runtime facade and
++ProgressJob API additions are separate feature datasets and reviews.
++
++The source authorer prepares inputs and invokes the original Maven sealer.
++The transformation is `com.synexia.m3jdk.CollectionsContractRefinement20261017`
++with dataset `m3jdk21-runtime-restore-07ba`. The original Java and text owners,
++five SDK tests, eight sealing cases, nine receiver cases, and capped POM are
++reused. No target is copied into a receiving tree before actual SDK
++qualification. Current receiving and fixed-point receipts must bind these
++inputs; arbitrary source drift is refused.
++
++Earlier build/test receipts retain their earlier source identity. They are not
++relabeled as a build of this current commit. A later verification may establish
++that the complete current OpenJDK build input set equals the exact earlier
++feature-build input set; such a receipt must identify both source sets and the
++actual image build workspace. Otherwise a new image build is required. This
++preparation record alone claims neither outcome.
+diff --git a/m3/runtime-integration/merged-repair-recovery-20261018/RECEIVING-MAP.json b/m3/runtime-integration/merged-repair-recovery-20261018/RECEIVING-MAP.json
+new file mode 100644
+index 0000000..b5a5943
+--- /dev/null
++++ b/m3/runtime-integration/merged-repair-recovery-20261018/RECEIVING-MAP.json
+@@ -0,0 +1,16 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++{
++  "schema": "M3_CURRENT_RUNTIME_DELIVERY_MAP_V1",
++  "dataset": "m3jdk21-runtime-restore-07ba",
++  "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
++  "baseline": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
++  "restored_delivery": "86528a90079b89a50b51ef13da08e7e70d468cb4",
++  "scope": "27 original runtime repair targets; four separate current-delivery metadata files",
++  "owner": "Existing JDK/HotSpot/JNI owners and seven original canonical datasets",
++  "admission": "m3/runtime-integration/merged-repair-recovery-20261018/ADMISSION.json",
++  "catalogue": "m3/runtime-integration/merged-repair-recovery-20261018/CATALOGUE.tsv",
++  "current_catalogue_prefix_preserved": true,
++  "names_and_public_signatures": "UNCHANGED_BY_RESTORATION",
++  "Object_no_break": "HOLD_UNCHANGED",
++  "phase": "STRING_UNCHANGED",
++  "status": "PENDING_CURRENT_RECEIVING_AND_BUILD_SOURCE_IDENTITY"
++}
+diff --git a/m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv b/m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
+new file mode 100644
+index 0000000..aeaed84
+--- /dev/null
++++ b/m3/runtime-integration/runtime-repair-20261018/CATALOGUE.tsv
+@@ -0,0 +1,6 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++atom_id	problem_category	target_owner	observed_input	candidates	selection	correctness	contract_boundary	time_complexity	space_complexity	performance_result	selection_rationale	primary_reference	license	challenge_discovery	license_action	validation	evidence_scope	status
++M3-RUNTIME-VTABLE-COUNT	RUNTIME_BOOTSTRAP	ClassLoader::compute_Object_vtable	5 legacy entries versus 6 current non-final Object methods	update matched constant; duplicate parser; weaken guard	update matched constant to 6	matches exact published Object bytes; existing klassVtable guard remains	No JNI or Object API change; universal compatibility remains HOLD	O(1)	O(1)	No performance claim	Smallest target-owned correction; duplicating class parsing or relaxing guard would widen the change	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/src/hotspot/share/classfile/classLoader.cpp	GPL-2.0-only	Not a challenge-array/search problem; no donor code copied	Preserve OpenJDK source header and license	Full fastdebug images plus actual VM witnesses	Native text recipe qualified; VM behavior requires fresh image	BOUNDED_REPAIR
++M3-PROGRESS-JAVADOC	PUBLIC_API_DOCUMENTATION	8 Runnable/concurrent plus 3 functional progress owners	42 concurrent plus 7 functional original public/protected doclint warnings	complete comments; disable Werror; alter anonymous implementation	Javadoc-only exact snapshots	14 -g:none class files in the full 11-source closure are byte-identical; original all/protected doclint has zero warnings	Public signatures and executable tokens unchanged	Unchanged	Unchanged	No runtime performance claim	Restore original build gate without suppressions or representation changes	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/make/modules/java.base/Java.gmk	GPL-2.0-only WITH Classpath-exception-2.0	Not a challenge algorithm; no external code copied	Preserve every original source header	verify_progress_doclint.py; original JDK doclint flags	Strict all-visibility private/anonymous warnings remain separately retained	DOCUMENTATION_ONLY
++M3-PROGRESS-SCOPE-LINT	BORROWED_SCOPE_LIFETIME	ProgressMonitors.run/call; Consumer.accept; Function.apply; Supplier.get	Five original unused try-resource warnings in the 11-source closure	method-local SOURCE annotation; change try-with-resources to finally; disable build warnings	five method-local SuppressWarnings(try) annotations	14 compiled classes remain byte-identical under the exact full JDK lint/doclint flags	No changes to scope closing, exception suppression, task return values or monitor ownership	Unchanged	Unchanged	No runtime performance claim	Preserve the existing resource-closing semantics and global Werror gate; reuse established JDK annotation pattern	https://github.com/hsoliwal/M3jdk21/blob/4b24824c3aa09d802121447f8970d442a855f064/src/java.base/share/classes/java/io/FileDescriptor.java	GPL-2.0-only WITH Classpath-exception-2.0	Scope lifetime and compiler warning policy are not challenge-array algorithms	Existing target source headers preserved	verify_progress_scope_lint.py; full fastdebug images	Narrow source-only annotations; original failure retained	SOURCE_ONLY_ANNOTATIONS
++M3-PROGRESS-MANIFEST-SUCCESSION	SOURCE_IDENTITY_CUSTODY	14 current original/template receiver owners	Original #1082 checker rejected exact published #1091 Callable	fixed successor chain; accept either hash; replace old manifest; general dependency graph	five byte-pinned manifests with explicit overlap sets	Each successor starts at preceding postimage; all 14 current sources and manifests are required	No arbitrary old/new mixtures and no rewriting #1082/#1091 history	O(total bytes hashed + path count)	O(path count)	No benchmark claim; bounded 11+5+8+3+4 manifest rows	Reuse exact hash-pinned source custody and linear transition composition	https://github.com/hsoliwal/com.synexia/tree/8f8200375d8d403b58e855ee5db02f2e8fac33a8/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017	Apache-2.0 recipe; target licenses retained	Challenge-platform array/graph templates do not justify generic machinery for this fixed transition	Original manifests retained byte-exact; new checker is first-party	python3 m3/compatibility/test_object_adapter_progress_receiver_20261018.py	SDK and Python regressions qualify current bytes only	EXPLICIT_SUCCESSOR
++M3-OBJECT-LEGACY-DISPATCH	API_COMPATIBILITY	Object.toAdapter and existing interface defaults	Published Object adds a public non-final instance method	assert additive compatibility; frozen binary and source counterexamples	frozen Java21 binaries plus candidate compiler witnesses	Check invokeinterface dispatch separately from source collision and Optional-return binary compatibility	A passing test records universal_no_break=FAIL_COUNTEREXAMPLES_OBSERVED	Test only	Test only	No performance claim	JLS source/default rules and observable frozen dispatch must both be tested	https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.4.1.2	Reference only	Challenge algorithms cannot establish language or VM compatibility	Original witness implementation; no external code copied	M3RuntimeCompatibilityHold with candidate image and stock Java21	Fresh current-image execution required; lost prior evidence not reused	COMPATIBILITY_HOLD
+diff --git a/m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json b/m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json
+new file mode 100644
+index 0000000..9b134df
+--- /dev/null
++++ b/m3/runtime-integration/runtime-repair-20261018/CURRENT_OWNERS.json
+@@ -0,0 +1,33 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++{
++  "schema": "M3_RUNTIME_CURRENT_OWNER_CUSTODY_V1",
++  "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
++  "canonical_recipe_baseline": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
++  "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
++  "datasets": [
++    "m3jdk21-object-vtable",
++    "m3jdk21-progress-doclint",
++    "m3jdk21-functional-doclint",
++    "m3jdk21-progress-scope-lint",
++    "m3jdk21-runtime-control"
++  ],
++  "recipe_runtime_dependency": false,
++  "historical_manifests": {
++    "m3/compatibility/m3-object-adapter-progress-20261017.tsv": "2f581a791adc7ecf7f217a6276f0da8af424c1e3e49385ca6ae44704d3319c82",
++    "m3/compatibility/m3-default-template-source-seal.tsv": "c431bf732eb91a289b4bcd0b886db71d43da7d7bb17074cd6116db6b37e73ad6"
++  },
++  "documentation_successor": {
++    "m3/compatibility/m3-progress-doclint-20261018.tsv": "7246c16a0e8ec742eba98dac97e24b7fc3947250ad5d2a22f72ac32dcddf0219",
++    "m3/compatibility/m3-functional-progress-doclint-20261018.tsv": "3b62981be6a617b903c559cc31904eca2bffb2b200380f1be57e07a8f634d969"
++  },
++  "scope_annotation_successor": {
++    "m3/compatibility/m3-progress-scope-lint-20261018.tsv": "1a45edfa747a03b3491063648a455083633e7de836e4c46241de104d689eebee"
++  },
++  "current_object_sha256": "829fb37093cf3e8d11b3c1e3d42f898f0c86f3b697e7a66cefe09934be3bb259",
++  "native_before_sha256": "665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d",
++  "native_after_sha256": "d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2",
++  "historical_evidence": "Lost unpublished runtime44/jtreg evidence is not recovered or applied to these bytes",
++  "compatibility_policy": "HOLD: Object source and interface-default dispatch counterexamples must remain visible",
++  "phase_policy": "STRING unchanged; no broad SDK/JNI admission",
++  "baseline_binding": "Inputs exported from immutable Git objects; a prior working-tree catalogue mismatch was refused before receiving writes",
++  "full_image_evidence": "A separate fresh gate recorded by the receiving PR"
++}
+diff --git a/m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv b/m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv
+new file mode 100644
+index 0000000..9719263
+--- /dev/null
++++ b/m3/runtime-integration/runtime-repair-20261018/FILE_REVIEW.tsv
+@@ -0,0 +1,21 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++pass	path	before_sha256	after_sha256	category	catalogue_atom	decision	validation_scope
++1	src/hotspot/share/classfile/classLoader.cpp	665bb788428c8d3837d052ac4f69a2756bb1823918726b41a7a7008eadfafd8d	d6283c23f650714e85b9a910f6cda656146552ae95950a04b02af861b636dca2	RUNTIME_BOOTSTRAP	M3-RUNTIME-VTABLE-COUNT	6 matched Object virtual methods; unchanged guard	Exact native text dataset; full image separately gated
++2	src/java.base/share/classes/java/lang/Runnable.java	bad73b8ae0b17e2160845c41058ebdda55fb755affecad51ef37fbc8e0d25534	b549cf18db454b6cff5d4a8181b54fdae1e26659ecc2d7f205e4d2ea6da9f93a	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++3	src/java.base/share/classes/java/util/concurrent/Callable.java	a9d2d8cc73583297fb6c07dee24765473aaaeeaae2651a0b54eb411ed2d46261	6b1ecf702a9e59b171efcaa28dd18fb72265d2bedbfeb2b8bc9d831a74d4892f	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++4	src/java.base/share/classes/java/util/concurrent/Executor.java	63f808755d552e372f9669c47041b2aeb52f5e34d0f92428aa5899273e4515d4	e887630e8a6fe2cb3b24f890fe02118abb06b9a340f8d79f47344840b9b2b6aa	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++5	src/java.base/share/classes/java/util/concurrent/ExecutorService.java	ca9342b2227960f32bde645c6df74dcd993d23deafad1429fac6521816daa868	9196858f2b800cc32671801563da29b14f881bbf37477419664aa6abd795ce2d	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++6	src/java.base/share/classes/java/util/concurrent/MonitoredCallable.java	a402533489745504fa3e9b8ca667be9b0d9cc3a370bbe2092c70f20051afb2f7	77436155c7936ab04698de243fc91b8a9c53a500e63247c364de591c45c1d733	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++7	src/java.base/share/classes/java/util/concurrent/MonitoredRunnable.java	8c975815e833bca4c214313efde24acf776a1ef676140701f9a5293ef4b5415b	2670d2b928981c1068c2299dc1458c2b9dc7dc372d2e8d2527005d695c77f06e	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++8	src/java.base/share/classes/java/util/concurrent/ProgressMonitor.java	58d084535f0e1c76adc102cffd1eff2cadae5c80877812908281699a55ce88b3	368f6b70ca1639ed193c477d1523a1707cf9ec65d056275552e8ca42f500ae93	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++9	src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	5073890ccf101b597e656b2516be70b83f0b77f9accdc157d75fc8d6f525a359	d1fc14e9b59c305d6f71df76afb86d9e7d9e4cabd0899105e5d001380ce4c736	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++10	src/java.base/share/classes/java/util/function/Consumer.java	4de2f5ed281ed6f56b872bd4ae9cc832ffb11b6c78e84a0774d7d6058a4a31fc	025c5fa47f9505eccea26c540bc3e320762346c464ecca37ec1994297285a073	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++11	src/java.base/share/classes/java/util/function/Function.java	7943afca3f9a3816e8f75a62b9c6104c31b883a1a1e614fb795a8fc85333c744	e116c9989d314cb6ffdaef60e8f665205afccdd28ee3674af2c6eedc008da588	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++12	src/java.base/share/classes/java/util/function/Supplier.java	49c58acaea3e70e81ec7187b47551d1e0cf6906443bcf3d71e8c9cbba4d032c6	2d5f23125e22f4d20d80d7734e883c45fd179207f0ab508fdd0c9e8616156766	PUBLIC_API_DOCUMENTATION	M3-PROGRESS-JAVADOC	Public lifecycle/parameters/results/errors documented; code preserved	JavaLST recipe plus zero build-scope doclint and 14 identical classes in the full 11-source closure
++13	src/java.base/share/classes/java/util/concurrent/ProgressMonitors.java	d1fc14e9b59c305d6f71df76afb86d9e7d9e4cabd0899105e5d001380ce4c736	48b06f44b71fd22a2bafc4e8a99d7542d280830043d929ce1d26ae338f3b4efc	BORROWED_SCOPE_LIFETIME	M3-PROGRESS-SCOPE-LINT	Method-local source annotations; try-with-resources code unchanged	Exact full-lint gate and 14 identical class files
++14	src/java.base/share/classes/java/util/function/Consumer.java	025c5fa47f9505eccea26c540bc3e320762346c464ecca37ec1994297285a073	52773610a8cd4d4e0808c2895e504b09ce9c0c05a0273e81cc533bad19ab6226	BORROWED_SCOPE_LIFETIME	M3-PROGRESS-SCOPE-LINT	Method-local source annotations; try-with-resources code unchanged	Exact full-lint gate and 14 identical class files
++15	src/java.base/share/classes/java/util/function/Function.java	e116c9989d314cb6ffdaef60e8f665205afccdd28ee3674af2c6eedc008da588	73877c7a547bb812a6901cae0af4866645de978b867e055204cd53f6dffb6476	BORROWED_SCOPE_LIFETIME	M3-PROGRESS-SCOPE-LINT	Method-local source annotations; try-with-resources code unchanged	Exact full-lint gate and 14 identical class files
++16	src/java.base/share/classes/java/util/function/Supplier.java	2d5f23125e22f4d20d80d7734e883c45fd179207f0ab508fdd0c9e8616156766	84170e0863237433f20c3fdc4617eea990731fa7a1e5b0aeaf6b03f89e55c096	BORROWED_SCOPE_LIFETIME	M3-PROGRESS-SCOPE-LINT	Method-local source annotations; try-with-resources code unchanged	Exact full-lint gate and 14 identical class files
++17	m3/compatibility/check_object_adapter_progress_receiver_20261017.py	5e44ba190257db7d9715d80e7870d6a1b69f8c76cc3c285182193e80fc0da443	e2c0e81911a8ea4e6d0d6b77eacc36fa4a4aca2c792536b9c32cbcdd40be0404	SOURCE_IDENTITY_CUSTODY	M3-PROGRESS-MANIFEST-SUCCESSION	Explicit bounded successor or compatibility witness	Fresh qualified recipe output; targeted regression/image evidence
++18	m3/compatibility/test_object_adapter_progress_receiver_20261018.py	ABSENT	e84be3f274caf1543ce7a2eb10aced6670fa488ad5478719be5b3227dc48a611	SOURCE_IDENTITY_CUSTODY	M3-PROGRESS-MANIFEST-SUCCESSION	Explicit bounded successor or compatibility witness	Fresh qualified recipe output; targeted regression/image evidence
++19	m3/compatibility/verify_m3_default_template_20261017.py	856910b716021260d387c0e3230c774223d7afc6ba62eab8e0c35668ffc8f2da	234293306f44acc4f756816564b9dea6146962b13ac2529397e25f062cce49bc	SOURCE_IDENTITY_CUSTODY	M3-PROGRESS-MANIFEST-SUCCESSION	Explicit bounded successor or compatibility witness	Fresh qualified recipe output; targeted regression/image evidence
++20	test/jdk/java/lang/Object/M3RuntimeCompatibilityHold.java	ABSENT	9faf22addfe520efd30ef8181fa1b89bb4e130f65acb35d2ac9e8b58a3ce38aa	API_COMPATIBILITY	M3-OBJECT-LEGACY-DISPATCH	Explicit bounded successor or compatibility witness	Fresh qualified recipe output; targeted regression/image evidence
+diff --git a/m3/runtime-integration/runtime-repair-20261018/README.md b/m3/runtime-integration/runtime-repair-20261018/README.md
+new file mode 100644
+index 0000000..a35cc36
+--- /dev/null
++++ b/m3/runtime-integration/runtime-repair-20261018/README.md
+@@ -0,0 +1,102 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
++<!--
++SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
++SPDX-License-Identifier: Apache-2.0
++-->
++# Bounded runtime repair and compatibility hold
++
++The current receiving baseline is `4b24824c3aa09d802121447f8970d442a855f064`.
++Inputs are exported from immutable Git objects. A prior shared-working-tree
++catalogue differed from this commit; the receiver refused that candidate before
++writing anything. Its source-binding failure is retained separately.
++This maintenance pass uses the existing Synexia Maven/OpenRewrite snapshot host
++and four unmodified pinned engines. Native, documentation and control changes
++are distinct datasets of `com.synexia.m3jdk.CollectionsContractRefinement20261017`.
++There is no Synexia or OpenRewrite runtime dependency.
++
++## Product changes and owner mapping
++
++`ClassLoader::compute_Object_vtable` changes its matching count from five to six
++for the already-published non-final `Object.toAdapter` method. The existing
++`klassVtable` mismatch guard is retained. There is no new JNI symbol, object
++layout or native ownership. `Object` itself is unchanged by this repair.
++
++Eight published Runnable/progress API owners and three functional overload owners receive Javadoc only. Strict Java
++21 compilation uses the repository's existing `-Xdoclint:all/protected -Werror`
++visibility scope. The eleven emitted sources produce fourteen byte-identical class files
++against the original sources when debug metadata is omitted. All-visibility
++private/anonymous-constructor documentation failures are retained separately;
++this pass does not claim that wider documentation scope is qualified.
++
++The full compiler gate additionally detects five intentional unused scope
++resources. Five method-local `@SuppressWarnings("try")` annotations in four
++owners preserve the try-with-resources bodies and their exception-suppression
++semantics. The exact `-Xlint:all -Xlint:-this-escape -Werror` build flags and
++public/protected doclint then pass with fourteen unchanged class files. The
++existing JDK `FileDescriptor` uses the same local annotation pattern; global
++warning policy is unchanged.
++
++The owner map appends Object adaptation, the progress SPI, monitored templates
++the functional progress overloads, and the matched native vtable owner. The existing Eclipse forwarder uses the
++separate `com.m3.collections.M3ProgressMonitor` SPI; this pass does not conflate
++that SPI with `java.util.concurrent.ProgressMonitor`.
++
++## Immutable source succession
++
++The original #1082 eleven-row manifest and #1091 five-row manifest remain
++byte-exact. The documentation successors are new eight-row and three-row manifests.
++The receiver checker composes only those manifests and a four-row source-annotation successor: two original
++owners are replaced and three template owners are added by #1091, followed by
++eight concurrent and three functional documentation replacements, then four exact annotation-source replacements. It requires the resulting fourteen
++current sources, rejects arbitrary drift or old/new mixtures, validates path
++containment and symlinks, and performs no receiving writes. The default-template
++checker shares that current-closure verification while retaining its five owners.
++
++Run both receiving checks and the isolated negative regressions:
++
++```sh
++python3 m3/compatibility/check_object_adapter_progress_receiver_20261017.py
++python3 m3/compatibility/verify_m3_default_template_20261017.py
++python3 m3/compatibility/test_object_adapter_progress_receiver_20261018.py
++```
++
++## Object compatibility remains on hold
++
++Adding this public Object method cannot be described as universally compatible.
++The `M3RuntimeCompatibilityHold` jtreg driver deliberately distinguishes a
++passing witness from a compatibility pass. It checks current self-adaptation,
++then compiles legacy fixtures using an unmodified Java 21 compiler, records the
++class hashes and `invokeinterface` bytecode, and runs those frozen classes on
++both stock and candidate images. It separately records changed interface-default
++dispatch, source collision diagnostics, Optional-return binary behavior, and
++ordinary dual Runnable/Callable results and checked-exception identity.
++
++Supply a genuine stock Java 21 toolchain using `-Dm3.stock.jdk`. Compile and run
++the driver with the actual rebuilt candidate image. When invoking jtreg, pass
++that system property through the test VM options. The driver uses a new evidence
++directory, bounds each subprocess and keeps individual compiler/VM logs.
++A successful witness writes `universal_no_break=FAIL_COUNTEREXAMPLES_OBSERVED`.
++The candidate-source probes intentionally omit `--release`, so they see the
++candidate Object API instead of historical `ct.sym` symbols.
++
++The relevant language boundaries are documented in [JLS 9.4.1.2](https://docs.oracle.com/javase/specs/jls/se21/html/jls-9.html#jls-9.4.1.2)
++and [JLS 13.4.6](https://docs.oracle.com/javase/specs/jls/se21/html/jls-13.html#jls-13.4.6).
++Neither source identity checks nor recipe passes replace VM execution, JNI,
++JCK or full SDK qualification. Lost unpublished runtime proof is not reused.
++
++## Catalogue and reusable verification
++
++`CATALOGUE.tsv` records problem categories, evaluated candidates, complexity,
++license and selection rationale. `FILE_REVIEW.tsv` binds the serial native and
++Java source pass to exact before/after identities. The central algorithm
++catalogue indexes this packet. Challenge-platform algorithms are marked
++inapplicable for these runtime, documentation and source-custody problems;
++no unrelated code or performance claims are imported.
++
++Qualify each dataset with the canonical capped Maven host, its five actual SDK
++tests and its input-sealing and receiver integrity profile. Apply only its
++qualified retained SDK results using the unchanged `receive.py`, first with
++`--check`, then apply, then repeat to prove a fixed point. Documentation requires
++the additional exact-bytecode/doclint comparison; runtime witnesses and the
++full fastdebug image build remain separate receiving gates. The receiving PR
++must retain the fresh results and earlier failed attempts with their sources.
++STRING phase and all wider compatibility/admission holds remain unchanged.
+diff --git a/src/hotspot/share/classfile/classLoader.cpp b/src/hotspot/share/classfile/classLoader.cpp
+index ab29ec3..b8e0629 100644
+--- a/src/hotspot/share/classfile/classLoader.cpp
++++ b/src/hotspot/share/classfile/classLoader.cpp
+@@ -1491,11 +1491,10 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+ }
+ 
+ int ClassLoader::compute_Object_vtable() {
+-  // hardwired for JDK1.2 -- would need to duplicate class file parsing
+-  // code to determine actual value from file
+-  // Would be value '11' if finals were in vtable
+-  int JDK_1_2_Object_vtable_size = 5;
+-  return JDK_1_2_Object_vtable_size * vtableEntry::size();
++  // Object declares five legacy virtual methods and M3's non-final toAdapter.
++  // This count must match java.lang.Object before array klasses are created.
++  const int Object_vtable_size = 6;
++  return Object_vtable_size * vtableEntry::size();
+ }
+ 
+ 
+diff --git a/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c b/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c
+index 15354f8..c6d722c 100644
+--- a/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c
++++ b/src/java.base/linux/native/libjava/M3PrimitiveFixedArena.c
+@@ -8,7 +8,9 @@ com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe
+  * particular file as subject to the "Classpath" exception as provided
+  * by Oracle in the LICENSE file that accompanied this code.
+  */
++#ifndef _GNU_SOURCE
+ #define _GNU_SOURCE
++#endif
+ #include <jni.h>
+ #include <errno.h>
+ #include <fcntl.h>

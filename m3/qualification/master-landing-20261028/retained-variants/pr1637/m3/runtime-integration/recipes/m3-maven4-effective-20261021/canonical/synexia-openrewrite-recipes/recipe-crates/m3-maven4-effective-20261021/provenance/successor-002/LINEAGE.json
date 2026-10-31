@@ -1,0 +1,40 @@
+{
+  "schema": "M3_MAVEN4_EFFECTIVE_SUCCESSOR_LINEAGE/1",
+  "initial_lineage_path": "provenance/RECIPE_LINEAGE.json",
+  "initial_lineage_sha256": "007ea310216c1762eaf60f1e8a7145d664e796e8ff4d950f88d50d6d68590816",
+  "selection_receipt": "provenance/successor-002/SELECTION.json",
+  "selection_sha256": "f288c199f97156d1fe92c70827c789fe1ead7044713751795f0f72c0a36e6a31",
+  "adaptations": [
+    {
+      "path": "qualify.py",
+      "before_sha256": "521844a8a5ee3cfab206cdfdb3bd12736a3f60f1d7e61fa8ffa0b360acbf1082",
+      "after_sha256": "e9327fe50cc7abf4d213cce26831af9872a1eec7df9bbe2e4b1c858475f2f392",
+      "diff": "provenance/successor-002/qualify.py.diff",
+      "diff_sha256": "90dd3b73cee474f49ecded3babb4557165d6bf1805575517629008ac21046b37"
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/M3Maven4EffectiveRecipeTest.java",
+      "before_sha256": "a6a53bafef02ea8f8b5547036ea9f6177861352fbe15cc8d77a85e877b1d4c5e",
+      "after_sha256": "6513ecf7b36c320b22c474c0381646703e1e03a729ff78765765d407585066af",
+      "diff": "provenance/successor-002/M3Maven4EffectiveRecipeTest.java.diff",
+      "diff_sha256": "6757fbda6273968a83219d633444f22f7bf370bbb2f3d9d530b980fee0cf1a73"
+    }
+  ],
+  "new_selection_tool": {
+    "path": "select_supported_successor.py",
+    "sha256": "94274bb4ea292e3aec5fbb7032eb2bfcf727c808481c409e9cf2e2a5d86d8801"
+  },
+  "algorithm_change": "Retain all existing gates; add exact inactive CSV admission-refusal regression and seal successor-selection tool in SDK source inputs.",
+  "shared_engine_changes": false,
+  "active_target_candidate_changes": false,
+  "sdk001": {
+    "path": "proof/sdk-001-offline/RESULT.json",
+    "status": "FAIL",
+    "sha256": "9aaef3787c1fa569dfef8c0c9d2691a1d32f3b139774491f2e25d2cfa7c01f92"
+  },
+  "sdk002": {
+    "path": "proof/sdk-002-offline/RESULT.json",
+    "status": "PASS",
+    "sha256": "beca41e77882f29e9d389cbc858ea1b86358ea754395686bbb1697c0a7c5e794"
+  }
+}

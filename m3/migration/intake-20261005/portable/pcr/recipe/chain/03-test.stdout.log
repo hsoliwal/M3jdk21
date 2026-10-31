@@ -1,0 +1,38 @@
+{"stage": "test", "commandIndex": 1, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin/mvn"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------< com.synexia.verification:mre-pcr-current-992-20261005 >--------
+[INFO] Building M3 pcr current992 exact-source qualification 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-cli) @ mre-pcr-current-992-20261005 ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.PcrTest
+PCR_SCAN_VERIFIED postScanRefusals=111
+PCR_TEST_VERIFIED targets=20 changes=18 refusals=297 outputSeal=7be22020b757ad60872454c61f7c02e633f7768a532520488f8dd1bd8487f4b8
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 54.38 s -- in com.synexia.rewrite.PcrTest
+[INFO] Running com.synexia.rewrite.M3ProviderCallbackSupersetRecipeTest
+PROVIDER_CALLBACK_SUPERSET_VERIFIED targets=14 changes=14 refusals=92 candidateFiles=0 outputSeal=85edb14ca5f238a63bc4733598cb68a64b84336aa8520b062775d3d5f07a92b5
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.49 s -- in com.synexia.rewrite.M3ProviderCallbackSupersetRecipeTest
+[INFO] Running com.synexia.rewrite.PcsTest
+PCS_TEST_VERIFIED targets=20 changes=20 refusals=212 outputSeal=8cbcb2db73e23c3003aed7e14802347f7b1e4001e38cd3e3bfb50c7b3b5023cc
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 35.98 s -- in com.synexia.rewrite.PcsTest
+[INFO] Running com.synexia.rewrite.M3VersionedProviderSyntaxRepairRecipeTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.257 s -- in com.synexia.rewrite.M3VersionedProviderSyntaxRepairRecipeTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 21, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:49 min
+[INFO] Finished at: 2026-10-05T11:23:18+02:00
+[INFO] ------------------------------------------------------------------------
+{"status": "ACTUAL_SUREFIRE_REPORTS", "totals": {"tests": 21, "failures": 0, "errors": 0, "skipped": 0}, "suites": {"com.synexia.rewrite.M3ProviderCallbackSupersetRecipeTest": {"counts": {"tests": 2, "failures": 0, "errors": 0, "skipped": 0}, "report": "TEST-com.synexia.rewrite.M3ProviderCallbackSupersetRecipeTest.xml", "sha256": "aafb48dba65272856b7eb9c9036b581ec77561b49182f60bb8efab3f31f78c32"}, "com.synexia.rewrite.M3VersionedProviderSyntaxRepairRecipeTest": {"counts": {"tests": 13, "failures": 0, "errors": 0, "skipped": 0}, "report": "TEST-com.synexia.rewrite.M3VersionedProviderSyntaxRepairRecipeTest.xml", "sha256": "7dfc2c5ad3695af4ebcaddbed4ce7e1195cf9735e9691ace7335f16cd1dafcf9"}, "com.synexia.rewrite.PcrTest": {"counts": {"tests": 3, "failures": 0, "errors": 0, "skipped": 0}, "report": "TEST-com.synexia.rewrite.PcrTest.xml", "sha256": "2bdaf31f09c23d676a6e1ac288730a83b78a09902d7e4f07c4f917c1afb0955f"}, "com.synexia.rewrite.PcsTest": {"counts": {"tests": 3, "failures": 0, "errors": 0, "skipped": 0}, "report": "TEST-com.synexia.rewrite.PcsTest.xml", "sha256": "13f386d2d11d29a1e7875df4808ab18c3e9c3f8aa0102656f97e914566336366"}}}

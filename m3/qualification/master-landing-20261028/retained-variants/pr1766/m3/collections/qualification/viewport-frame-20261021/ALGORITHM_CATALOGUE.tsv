@@ -1,0 +1,7 @@
+category	selected	alternative	donor	decision
+VIEWPORT	parallel int arrays + state masks	per-row widgets	M3MaskViewportKernel existing	REUSE original owner
+INDEXING	stable source ordinal	object entry identity	M3IndexMaskWindow existing	SELECT
+RANGE	rank-before-copy	whole-view copy	M3MaskViewportPageContract existing	SELECT
+FENWICK	M3SparseExtents reuse	new Fenwick tree	GeeksforGeeks https://www.geeksforgeeks.org/dsa/binary-indexed-tree-or-fenwick-tree-2/	REUSE existing
+MONOTONIC_QUEUE	no selection	LeetCode 239 deque https://leetcode.com/problems/sliding-window-maximum/	challenge pattern only	DEFER
+RANGE_UPDATE	no selection	HackerRank Array Manipulation https://www.hackerrank.com/challenges/crush/problem	challenge pattern only	DEFER

@@ -1,0 +1,5 @@
+# OpenRewrite SDK Results; no template-copy materialization
+src/jdk.compiler/share/classes/com/sun/tools/javac/m3/M3ASTPC.java	845c70bdc5e77a62282417889dc77bf466fd0c0005f72112e86faf27ec616399	8b426b59796942253765c0fe45725d4b3e0f3640a3dffe4ec3d8c44413109bb3
+test/langtools/tools/javac/m3/M3ASTSourceSealTest.java	ABSENT	1b3423999ac2644f17ba6bc743f3873f4130846acc4e346518e16958606e5e1a
+m3/docs/name-mapping.d/m3-ast-source-seals-20261018.json	ABSENT	8df2d2933a7a94b0aef18862e2400f7e0c253e1e8998f5e7a2f17ae0978a2982
+m3/tooling/shared-frontend/source-seals/README.md	ABSENT	827688855a01850800930c45f2efa71fb5493b58628627c65ee9f9bb3fdbc946

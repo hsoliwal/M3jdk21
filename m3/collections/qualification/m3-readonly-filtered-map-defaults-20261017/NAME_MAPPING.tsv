@@ -1,0 +1,5 @@
+schema	donor_name	capability	target_owner	disposition
+M3_READONLY_MAP_DEFAULTS_V1	com.synexia.rewrite.M3ReadOnlyFilteredMapDefaults20261017	Reusable OpenRewrite hash-pinned LST Java source gate	M3FilteredViews.java	EXACT_SOURCE_RECEIVER
+M3_READONLY_MAP_DEFAULTS_V1	java.util.Collections.unmodifiableSortedMap	Unconditional sorted-map default/derived mutation refusal	M3FilteredViews.filterEntries(SortedMap,BiPredicate)	REUSE_JDK_EXISTING
+M3_READONLY_MAP_DEFAULTS_V1	java.util.Collections.unmodifiableNavigableMap	Unconditional navigable-map default/derived mutation refusal	M3FilteredViews.filterEntries(NavigableMap,BiPredicate)	REUSE_JDK_EXISTING
+M3_READONLY_MAP_DEFAULTS_V1	com.m3.collections.M3IndexMaskCompactor / M3IndexPathMasks	Precomputed JNI state/mask movement existing owner	NONE	NO_NATIVE_CHANGE

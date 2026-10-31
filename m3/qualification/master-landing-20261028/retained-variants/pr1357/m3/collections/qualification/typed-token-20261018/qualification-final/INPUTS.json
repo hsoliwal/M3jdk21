@@ -1,0 +1,11 @@
+{
+  "/workspace/scratch/8cbeab1c181e/M3jdk21-token/src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java": "ee74718496b22d89c4714dcde0bb0ff12f48cb5179f91a1c2042e27cfecb9578",
+  "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/src/java.base/share/classes/jdk/internal/mindex/M3RegexDpPlan.java": "4433952266934990b6f063c03a712544ce494addc1db09c0f90d09431c2da960",
+  "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/src/java.base/share/classes/jdk/internal/mindex/M3TokenRegexPlan.java": "793e75ade8c70beaf8edf5b145e375056e76236be68613c9a4d1a01148af6103",
+  "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/src/java.base/share/native/libjava/M3RegexDpPlan.c": "77f58524b0ae73671b6f33cdf1a5dcc9e546deef7f7350b0df2f661f693f75e7",
+  "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex/M3TokenRegexPlanContract.java": "727380f9e871c1cad71ffefa3898bb444244ecff93c4bca4b9d183f51c820b30",
+  "/workspace/scratch/8cbeab1c181e/M3jdk21-typed/test/jdk/jdk/internal/mindex/M3TokenCompilerLexicalContract.java": "3477dee9bb0acea3dd322ee8e6f8656b5ec1242fe37c95a186717771c34c52be",
+  "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/java/M3CharacterPlanPreservation.java": "84638ae6d32d0792a290c151b366c2f7a7914f1717f7dc9440c9a77e7c1f1ded",
+  "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/java/M3TokenResourceProbe.java": "1cd2798bc3b5e896ccb82e501a802d1ce17bd75b7c11725d468081b05c459048",
+  "/workspace/scratch/8cbeab1c181e/Synexia/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/typed-token-20261018/src/test/native/libM3TokenPlanProof.c": "33c3c79000df4cb75df323007e4a093e32b6ca3d64a62458da33863c64d779f9"
+}

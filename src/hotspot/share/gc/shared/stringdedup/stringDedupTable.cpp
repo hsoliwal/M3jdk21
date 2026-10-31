@@ -609,6 +609,11 @@ bool StringDedup::Table::deduplicate_if_permitted(oop java_string,
 
 void StringDedup::Table::deduplicate(oop java_string) {
   assert(java_lang_String::is_instance(java_string), "precondition");
+  if (java_lang_String::is_m3_joined(java_string)) {
+    // M3String already canonicalizes text by owner/coordinate. String.value is only the
+    // empty VM-layout sentinel and must never participate in byte-array deduplication.
+    return;
+  }
   _cur_stat.inc_inspected();
   if ((StringTable::shared_entry_count() > 0) &&
       try_deduplicate_shared(java_string)) {

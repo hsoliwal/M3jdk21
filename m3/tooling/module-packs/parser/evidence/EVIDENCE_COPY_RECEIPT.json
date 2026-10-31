@@ -1,0 +1,221 @@
+{
+  "schema": "M3_PARSER_EVIDENCE_COPY_V1",
+  "status": "PASS",
+  "files": [
+    {
+      "path": "target-proof-2/EMPTY_DESCRIPTOR_MANIFEST.tsv",
+      "sha256": "815c13462921dbb3a75d638c701c85a5422591176e0cf0380e264b81ce7ee41b",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/EMPTY_DESCRIPTOR_MANIFEST.tsv"
+    },
+    {
+      "path": "target-proof-2/EVENTS.jsonl",
+      "sha256": "387307bccd7a1f05d9119422b2f79eff790944bf640037b2e4b5ff283b6aa1ad",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/EVENTS.jsonl"
+    },
+    {
+      "path": "target-proof-2/INPUTS.json",
+      "sha256": "035363df4749eed73447dc8d8aed3a38ed25b147a22bf6e3fcc35e2c944817af",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/INPUTS.json"
+    },
+    {
+      "path": "target-proof-2/INPUT_JMOD_IMAGE.tsv",
+      "sha256": "d6415dba12c268acf09852c7c621b408a84b5ebac5d0a272ef9ae753df3f8ece",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/INPUT_JMOD_IMAGE.tsv"
+    },
+    {
+      "path": "target-proof-2/RUNTIME_PROOF.json",
+      "sha256": "6c051e609e154d90348a0419d789be470b7b5ab699e0e924f8c2f08521e3f2a5",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/RUNTIME_PROOF.json"
+    },
+    {
+      "path": "target-proof-2/STATE.json",
+      "sha256": "48f85ee4d3be49b51d7c8d25a5729350d60a00f9b976dcf949bacfe22be5138f",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/STATE.json"
+    },
+    {
+      "path": "target-proof-2/compile-all-consumers.log",
+      "sha256": "411265042476ffa48e608bfbe16be3fe3bfb70c3b2fdaf4b8f5949e873ca35b8",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/compile-all-consumers.log"
+    },
+    {
+      "path": "target-proof-2/compile-commands.json",
+      "sha256": "22d60bf2e3ce6b197542ad8ac18dab0de5cfd9fbf168ff1aab0a9464ac5b86f8",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/compile-commands.json"
+    },
+    {
+      "path": "target-proof-2/compile-compiler-patch.log",
+      "sha256": "675313f4c660a7c55c9b4ed88850d6b44401969c4707fdbd911df7f468c0ee18",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/compile-compiler-patch.log"
+    },
+    {
+      "path": "target-proof-2/compile-parser-module.log",
+      "sha256": "73254998461969c536a4725b1a14858d8b38e38954be723ab2fb72ee1e579ac9",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/compile-parser-module.log"
+    },
+    {
+      "path": "target-proof-2/compile-receipt.json",
+      "sha256": "f6b6432e580fd97981b486d899765f17878640066eb65acb0d741ed230fe923d",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/compile-receipt.json"
+    },
+    {
+      "path": "target-proof-2/lint-commands.json",
+      "sha256": "0624e6fb497d5b52296ac0e8e69649de6ff69845e88fcd7f6b7347e8ae146fe3",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/lint-commands.json"
+    },
+    {
+      "path": "target-proof-2/lint-full-borrow-receiver.log",
+      "sha256": "6cdcf86abfdf2b42a7444f89cb4e9e3d8b4f5134b0410bb2fa2379e3a64e77f7",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/lint-full-borrow-receiver.log"
+    },
+    {
+      "path": "target-proof-2/lint-receipt.json",
+      "sha256": "c3ff923ad56ca0daf4374687fe74479f0a28b7681b52699cb64436f7bb8173bc",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/lint-receipt.json"
+    },
+    {
+      "path": "target-proof-2/lint-structure.log",
+      "sha256": "05d1a145e510919dc2e6263fbce81ac8848e6d64024e2a7d9f37268051fdb231",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/lint-structure.log"
+    },
+    {
+      "path": "target-proof-2/runtime-commands.json",
+      "sha256": "73069a40ec5c93e116326d87e5dd3c33e0ab4a8159fca543abd56e7020a046ba",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/runtime-commands.json"
+    },
+    {
+      "path": "target-proof-2/runtime-image-M3JavacParserContract.log",
+      "sha256": "7145cdc377af1223d9e43c86797ac93fa0f45ac61618e77fd422e94208d73210",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/runtime-image-M3JavacParserContract.log"
+    },
+    {
+      "path": "target-proof-2/runtime-image-M3ParserFrameworkContract.log",
+      "sha256": "5525c7cd56c4347d4d18b04b1934d1f1bb40cc6b2a58f5df5ce82668b89baed5",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/runtime-image-M3ParserFrameworkContract.log"
+    },
+    {
+      "path": "target-proof-2/runtime-image-modules.log",
+      "sha256": "c9bca31ea2227f58a20f829eedb45cfa0eed166984ce0ca1619d422683ade2ef",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/runtime-image-modules.log"
+    },
+    {
+      "path": "target-proof-2/runtime-image-smoke-1.log",
+      "sha256": "27e69f1ac43fded9eae69688b337f3c8abf7473134a3ea926cfc163c4314896d",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/runtime-image-smoke-1.log"
+    },
+    {
+      "path": "target-proof-2/runtime-image-smoke-2.log",
+      "sha256": "b128a79968ea967121921615cb5b4546f091173dccaaf53dae96d8d828b5ed58",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/runtime-image-smoke-2.log"
+    },
+    {
+      "path": "target-proof-2/runtime-jar-descriptor.log",
+      "sha256": "6fa08297198babe26d52475adcb033c41739fa52212d2c2877188db41eb2a245",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/runtime-jar-descriptor.log"
+    },
+    {
+      "path": "target-proof-2/runtime-jar.log",
+      "sha256": "80fd5b22c1a5b741c0fe2fc10fbda1eacec4a802baf3e68f45ebc98651b285f4",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/runtime-jar.log"
+    },
+    {
+      "path": "target-proof-2/runtime-jmod-contents.log",
+      "sha256": "536ca19665b28425100ef71844e642e17e8b96d80c479292cd9bba10c88710f4",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/runtime-jmod-contents.log"
+    },
+    {
+      "path": "target-proof-2/runtime-jmod-descriptor.log",
+      "sha256": "09148586a6bbc1be2e9943380b101427580762d1731caa7e72a64e7a05a16b7b",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/runtime-jmod-descriptor.log"
+    },
+    {
+      "path": "target-proof-2/runtime-jmod-pack.log",
+      "sha256": "03ec929a3df753719129d5da470b408b9fa9650bc9af0064cd2a7bbb74666b3c",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/runtime-jmod-pack.log"
+    },
+    {
+      "path": "target-proof-2/runtime-receipt.json",
+      "sha256": "d31e6084429ed76b19182a4f3a7a94fa5cfd92f6dfac3330033fbd949278abf9",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/runtime-receipt.json"
+    },
+    {
+      "path": "target-proof-2/test-M3JavacParserContract.log",
+      "sha256": "5963f935bdf0d8284e93e66ff0bcaf074ad17009c61641907287157594f0e575",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/test-M3JavacParserContract.log"
+    },
+    {
+      "path": "target-proof-2/test-M3ParserFrameworkContract.log",
+      "sha256": "f26636d7d084a27270d1f8f9c2a54e3311d91a4f92f12d1d710cb9be7f22265b",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/test-M3ParserFrameworkContract.log"
+    },
+    {
+      "path": "target-proof-2/test-commands.json",
+      "sha256": "7508bfb0053b0b88352bbe4e7ecf4b4f28e00fd0f3fbeffac6082a861325ac09",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/test-commands.json"
+    },
+    {
+      "path": "target-proof-2/test-consumer-smoke.log",
+      "sha256": "fa6a9b63d8720af70d4922d538b1c0019e2191e44aee7ac671b70118b2165c73",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/test-consumer-smoke.log"
+    },
+    {
+      "path": "target-proof-2/test-receipt.json",
+      "sha256": "b386e5ac318d93aefdafb1c24dbbf7d6a3ea520685a2b32b8afb197b226d73bc",
+      "origin": "/workspace/scratch/a0f19f379302/parser-target-proof-2/test-receipt.json"
+    },
+    {
+      "path": "session/MATERIALIZATION_RECEIPT.json",
+      "sha256": "cd3875cf89f6facda2069fc1a4ec017b7137eef5159492256daa3fd6ff6f3419",
+      "origin": "/workspace/scratch/a0f19f379302/parser-session/MATERIALIZATION_RECEIPT.json"
+    },
+    {
+      "path": "session/ROOT_DOCUMENT_EVENTS.jsonl",
+      "sha256": "6d6158e61d4a105439c132e62194ffae8588a9a457843d3ef73b51dd8fc2771a",
+      "origin": "/workspace/scratch/a0f19f379302/parser-session/ROOT_DOCUMENT_EVENTS.jsonl"
+    },
+    {
+      "path": "session/ROOT_DOCUMENT_PREIMAGES.json",
+      "sha256": "4656c7e580d083851c53bee4c4afc601083c6eb8053e7dc786d3c1190b742099",
+      "origin": "/workspace/scratch/a0f19f379302/parser-session/ROOT_DOCUMENT_PREIMAGES.json"
+    },
+    {
+      "path": "session/TARGET_MATERIALIZATION.jsonl",
+      "sha256": "ddefb605a8cb1176b56ef20a1dd22befc3bbd29714a4214f197798709efc1a3e",
+      "origin": "/workspace/scratch/a0f19f379302/parser-session/TARGET_MATERIALIZATION.jsonl"
+    },
+    {
+      "path": "session/TARGET_MATERIALIZATION_2.jsonl",
+      "sha256": "01400d3914bf0a7daa6c3d9d14e64b807bdc65d559822f9013acfe183cce997d",
+      "origin": "/workspace/scratch/a0f19f379302/parser-session/TARGET_MATERIALIZATION_2.jsonl"
+    },
+    {
+      "path": "session/TARGET_MAVEN_COMMAND_1.json",
+      "sha256": "e53182d6ef08d3c733237c7961f97f0c08ec6aa8011a7571cd2b1fc49b3cac56",
+      "origin": "/workspace/scratch/a0f19f379302/parser-session/TARGET_MAVEN_COMMAND_1.json"
+    },
+    {
+      "path": "session/TARGET_MAVEN_COMMAND_2.json",
+      "sha256": "8a8c1442e2f3c0b8a3eb808882271af332fcc40f8dc3ec49478b092814ca73e1",
+      "origin": "/workspace/scratch/a0f19f379302/parser-session/TARGET_MAVEN_COMMAND_2.json"
+    },
+    {
+      "path": "session/TOOLCHAIN.json",
+      "sha256": "c37065f064a6ab9d6db1242daf0bf06008f84d1b2e739a2fa703cb72faf3e21f",
+      "origin": "/workspace/scratch/a0f19f379302/parser-session/TOOLCHAIN.json"
+    },
+    {
+      "path": "session/target-maven-proof-1.log",
+      "sha256": "3d4b4b719f12d5890e864ed66cef4fcde3313b6fd8eaf761f2f96b23f44176bc",
+      "origin": "/workspace/scratch/a0f19f379302/parser-session/target-maven-proof-1.log"
+    },
+    {
+      "path": "session/target-maven-proof-2.log",
+      "sha256": "a0da6aad96bd41a4cf49bd228a83679addd5d929995339c33a83dfcc39189ae0",
+      "origin": "/workspace/scratch/a0f19f379302/parser-session/target-maven-proof-2.log"
+    },
+    {
+      "path": "APPLICATION_MANIFEST.tsv",
+      "sha256": "e07b30000b3d593d4dbe616590b4a436e93f7758cda1b30b4757c2b592edca83",
+      "origin": "/workspace/scratch/a0f19f379302/parser-recipe-proof-5/received/APPLICATION_MANIFEST.tsv"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.rewrite;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import org.junit.jupiter.api.Test;
+import org.openrewrite.InMemoryExecutionContext;
+import org.openrewrite.Parser;
+import org.openrewrite.SourceFile;
+import org.openrewrite.internal.InMemoryLargeSourceSet;
+import org.openrewrite.java.JavaParser;
+
+/** Exact source preimage -> postimage, contract-preserving AST owner repair. */
+final class M3ASTScopedFileIdentity20261017RecipeTest {
+    private static final String ROOT = "/com/synexia/rewrite/hash-pinned-java/";
+    private record Case(String crate, String source, String oracle,
+            String sourceName, String oracleName) { }
+
+    private static final List<Case> CASES = List.of(
+            new Case("m3-ast-scoped-file-identity-synexia-20261017",
+                    "synexia-mindex/runtime/src/main/java/com/synexia/mindex/ast/MIndexASTLeafIndex.java",
+                    "synexia-mindex/runtime/src/test/java/com/synexia/mindex/ast/MIndexASTLeafIndexSelfTest.java",
+                    "MIndexASTLeafIndex.java", "MIndexASTLeafIndexSelfTest.java"),
+            new Case("m3-ast-scoped-file-identity-jdk21-20261017",
+                    "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java",
+                    "m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java",
+                    "M3ASTLeafIndex.java", "M3ASTLeafIndexSelfTest.java"));
+
+    private static String resource(Case entry, String name, boolean before) {
+        String part = before ? "pre/" : "";
+        try (var input = M3ASTScopedFileIdentity20261017RecipeTest.class
+                .getResourceAsStream(ROOT + entry.crate() + "/" + part + name + ".txt")) {
+            assertNotNull(input, entry.crate() + "/" + name);
+            return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException error) {
+            throw new IllegalStateException(error);
+        }
+    }
+
+    private static InMemoryExecutionContext context() {
+        return new InMemoryExecutionContext(error -> { throw new AssertionError(error); });
+    }
+
+    private static List<SourceFile> parse(Case entry, String main, String oracle) {
+        var inputs = List.of(
+                Parser.Input.fromString(Path.of(entry.source()), main),
+                Parser.Input.fromString(Path.of(entry.oracle()), oracle));
+        List<SourceFile> units = JavaParser.fromJavaVersion().build()
+                .parseInputs(inputs, null, context()).toList();
+        assertEquals(2, units.size(), "both AST product targets must parse");
+        return units;
+    }
+
+    @Test void bothSourceOwnersGenerateExactlyAndConverge() {
+        for (Case entry : CASES) {
+            var recipe = new M3HashPinnedJavaSnapshotRecipe(entry.crate());
+            assertEquals(2, recipe.targetPaths().size());
+            List<SourceFile> inputs = parse(entry,
+                    resource(entry, entry.sourceName(), true),
+                    resource(entry, entry.oracleName(), true));
+            var run = recipe.run(new InMemoryLargeSourceSet(inputs), context(), 1);
+            assertEquals(2, run.getChangeset().getAllResults().size());
+            Map<String, SourceFile> outputs = new TreeMap<>();
+            for (var change : run.getChangeset().getAllResults()) {
+                var result = change.getAfter();
+                assertNotNull(result);
+                outputs.put(result.getSourcePath().toString().replace('\\', '/'), result);
+            }
+            assertEquals(resource(entry, entry.sourceName(), false),
+                    outputs.get(entry.source()).printAll());
+            assertEquals(resource(entry, entry.oracleName(), false),
+                    outputs.get(entry.oracle()).printAll());
+            assertTrue(outputs.get(entry.source()).printAll()
+                    .contains("frame(f.project) + frame(f.module) + frame(f.path)"));
+            assertTrue(outputs.get(entry.oracle()).printAll()
+                    .contains("multiModuleRelativePaths()"));
+            var again = recipe.run(new InMemoryLargeSourceSet(
+                    new ArrayList<>(outputs.values())), context(), 1);
+            assertTrue(again.getChangeset().getAllResults().isEmpty(),
+                    "second application must be a fixed point");
+        }
+    }
+
+    @Test void sourceDriftOrMissingOwnerRefusesBeforeGenerating() {
+        for (Case entry : CASES) {
+            var recipe = new M3HashPinnedJavaSnapshotRecipe(entry.crate());
+            String original = resource(entry, entry.sourceName(), true);
+            String drift = original.replace("TreeSet<String> seen = new TreeSet<>();",
+                    "TreeSet<String> seen = new TreeSet<>(); // drift");
+            assertTrue(!drift.equals(original));
+            assertThrows(RuntimeException.class, () -> recipe.run(
+                    new InMemoryLargeSourceSet(parse(entry, drift,
+                            resource(entry, entry.oracleName(), true))), context(), 1));
+            var one = JavaParser.fromJavaVersion().build().parseInputs(
+                    List.of(Parser.Input.fromString(Path.of(entry.source()), original)),
+                    null, context()).toList();
+            assertEquals(1, one.size());
+            assertThrows(RuntimeException.class, () -> recipe.run(
+                    new InMemoryLargeSourceSet(one), context(), 1));
+        }
+    }
+}

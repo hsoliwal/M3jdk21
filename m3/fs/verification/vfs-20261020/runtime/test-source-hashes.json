@@ -1,0 +1,38 @@
+[
+  {
+    "authored": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/authored/facade/m3/fs/src/test/java/com/m3/fs/MFileCaptureTest.java",
+    "generated": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/MFileCaptureTest.java",
+    "sha256": "7c3f92d718cd469249a609040080b32c6488511523685598c0cd284b9bf70577",
+    "matches": true
+  },
+  {
+    "authored": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/authored/facade/m3/fs/src/test/java/com/m3/fs/MFilesBehaviorTest.java",
+    "generated": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/MFilesBehaviorTest.java",
+    "sha256": "65b089922668c996bdc5b748d3775dff73b7b9ed7662d89dd9562f4c9ffeb476",
+    "matches": true
+  },
+  {
+    "authored": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/authored/facade/m3/fs/src/test/java/com/m3/fs/MFilesProviderTest.java",
+    "generated": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/MFilesProviderTest.java",
+    "sha256": "d0b221aa87213a0cec02460fc92a3c2a2bdfc27c0aabaf862a7bef9c801ea6b0",
+    "matches": true
+  },
+  {
+    "authored": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/authored/streams/m3/fs/src/test/java/com/m3/fs/MFileStreamsTest.java",
+    "generated": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/MFileStreamsTest.java",
+    "sha256": "f8422928c525dc7defa8a7c1f2524dad523c8633372303d9a5d133286d1265f8",
+    "matches": true
+  },
+  {
+    "authored": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/authored/facts/m3/fs/src/test/java/com/m3/fs/MFileObservationSelfTest.java",
+    "generated": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/MFileObservationSelfTest.java",
+    "sha256": "c987def47f0e5ac81b23a5cd40033745aba2a0b7358433bad307111ed409778f",
+    "matches": true
+  },
+  {
+    "authored": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/authored/facts/m3/fs/src/test/java/com/m3/fs/MFileObservationTest.java",
+    "generated": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/receiver/m3/fs/src/test/java/com/m3/fs/MFileObservationTest.java",
+    "sha256": "e66903b0e1a594d7ba966c5e842cdfa2e6462742adbab84bd48e0a4957d3081b",
+    "matches": true
+  }
+]

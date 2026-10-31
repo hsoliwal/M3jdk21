@@ -1,0 +1,14 @@
+{
+  "fork": "2993571eedbe96e06a737eaa8ae47cf112b255de",
+  "suite": {
+    "name": "org.apache.maven.impl.model.DefaultModelBuilderTest",
+    "tests": "41",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "1.47"
+  },
+  "report_path": "maven-work/fork/impl/maven-impl/target/surefire-reports/TEST-org.apache.maven.impl.model.DefaultModelBuilderTest.xml",
+  "report_sha256": "bca4cac85bd6a54b8af67f706f72fd9e038756080d3304691b651b5e9b978e07",
+  "frozen_report_path": "maven-work/evidence/source-build-001-reports/TEST-org.apache.maven.impl.model.DefaultModelBuilderTest.xml"
+}

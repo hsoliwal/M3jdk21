@@ -1,0 +1,76 @@
+# Copyright 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3File source and class content deltas
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - 'm3/docs/build-delta-invariant.md'
+      - 'm3/docs/name-mapping.d/m3file-build-delta-20261020.json'
+      - '.github/workflows/m3-file-content-delta.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  file-delta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify module and linked-image source/class contract
+        run: mvn -B -ntp -f m3/file/pom.xml verify
+      - name: Require executed JUnit and original host/linked image proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          import xml.etree.ElementTree as ET
+
+          report = Path("m3/file/target/surefire-reports/TEST-com.m3.file.M3FileDeltaTest.xml")
+          if not report.is_file() or not report.stat().st_size:
+              raise SystemExit("missing actual JUnit file-delta report")
+          suite = ET.parse(report).getroot()
+          if (suite.tag != "testsuite" or int(suite.get("tests", "0")) < 1
+                  or any(int(suite.get(name, "0")) for name in ("errors", "failures", "skipped"))
+                  or not any(test.get("name") == "fullSourceClassAndCliContract"
+                             for test in suite.iter("testcase"))):
+              raise SystemExit("file-delta JUnit did not execute and pass its actual test")
+          receipt = Path("m3/file/target/delta-check/receipt.json")
+          if not receipt.is_file():
+              raise SystemExit("missing file module host/image receipt")
+          result = json.loads(receipt.read_text(encoding="utf-8"))
+          inventory = result.get("contract_inventory", {})
+          host = result.get("host_module_contracts", {})
+          image = result.get("image_module_contracts", {})
+          if (result.get("state") != "PASSED"
+                  or inventory.get("source_count") != 19
+                  or inventory.get("host_javac_only") != ["M3FileDeltaSelfTest"]
+                  or inventory.get("maven_junit_separate_gate") != ["M3FileDeltaTest"]
+                  or len(host) != 18 or len(image) != 17
+                  or "M3FILE_DELTA_SELFTEST_PASS" not in host.get("M3FileDeltaSelfTest", "")
+                  or "M3FileDeltaSelfTest" in image
+                  or "M3FILE_DELTA_CONTRACT_PASS" not in image.get("M3FileDeltaContractSelfTest", "")):
+              raise SystemExit("incomplete file module host/image/JUnit source qualification")
+          print("M3_FILE_DELTA_JUNIT_AND_IMAGE_PROOF_PASS tests=1 host=18 image=17 sources=19")
+          PY
+      - name: Retain actual commands and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-file-content-delta-${{ github.event.pull_request.head.sha || github.sha }}
+          path: |
+            m3/file/target/delta-check/*.log
+            m3/file/target/delta-check/*.json
+          if-no-files-found: error

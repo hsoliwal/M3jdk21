@@ -1,0 +1,1777 @@
+{
+  "limits": [
+    "Additional source owner availability is not compilation or semantic qualification.",
+    "Inventory-only direct dependencies are not automatically included in the recovery proof build.",
+    "Absence from original503 is not proof of absence from the complete old repository."
+  ],
+  "outside_original503": true,
+  "role_counts": {
+    "canonical_upstream_fixture": 1,
+    "current_jcc_task_pom": 1,
+    "current_mastery_direct_dependency": 2,
+    "current_parent_pom_declared_context": 11,
+    "current_selected_owner_direct_dependency": 4,
+    "preexisting_outside_packet_dependency": 1,
+    "protected_fixture_copy": 1
+  },
+  "rows": [
+    {
+      "build_roles": [],
+      "current": {
+        "complete_parent_tree": "624a72567d3f615d54134a95206f2253a9eb4892",
+        "missing_component": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/upstream",
+        "status": "ABSENT_IN_COMPLETE_TREE"
+      },
+      "original": {
+        "bytes": 5637,
+        "git_blob": "3354b97e964b170b88df1ff8964e863d728ce9af",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/preimages/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/upstream/java/synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3DocumentationAttributionExecutionTest.java",
+        "sha256": "dbc50c7a436b4bee61fffbfec3104b981850d15f8d052f7517b3b0945476e8d2"
+      },
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/upstream/java/synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3DocumentationAttributionExecutionTest.java",
+      "path_chain": [
+        {
+          "child": "synexia-openrewrite-recipes",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "recipes",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes",
+          "tree": "4e96428a487b132f24d3155eb724e18fdd05c529"
+        },
+        {
+          "child": "atom-pattern-mastery-20261005",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes",
+          "tree": "d96135b03c9c71d6da41058817efdd1bdaa1b4a3"
+        },
+        {
+          "child": "jcc",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005",
+          "tree": "cb7da7b163c68a4c20902ff289c890b1a9fca3fa"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc",
+          "tree": "c6034df151c4989777b1351d765e77bdab2dde26"
+        },
+        {
+          "child": "upstream",
+          "found": false,
+          "prefix": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src",
+          "tree": "624a72567d3f615d54134a95206f2253a9eb4892"
+        }
+      ],
+      "published": {
+        "bytes": 6070,
+        "git_blob": "81e294bc46ecfd3eac552b61e84bf9eff05233d5",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/upstream/java/synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3DocumentationAttributionExecutionTest.java",
+        "sha256": "529b535c292b29d850c48429c32d8b289f77169bf54fa75e981c5ecabbfe67e7"
+      },
+      "role": "protected_fixture_copy"
+    },
+    {
+      "build_roles": [],
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "M3DocumentationAttributionExecutionTest.java",
+          "sha": "3354b97e964b170b88df1ff8964e863d728ce9af",
+          "size": 5637,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/3354b97e964b170b88df1ff8964e863d728ce9af"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "bytes": 5637,
+        "git_blob": "3354b97e964b170b88df1ff8964e863d728ce9af",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/preimages/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/upstream/java/synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3DocumentationAttributionExecutionTest.java",
+        "origin": "reused_existing_body_matching_current_git_blob",
+        "sha256": "dbc50c7a436b4bee61fffbfec3104b981850d15f8d052f7517b3b0945476e8d2"
+      },
+      "current_bytes_equal_original": true,
+      "original": {
+        "bytes": 5637,
+        "git_blob": "3354b97e964b170b88df1ff8964e863d728ce9af",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/preimages/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/upstream/java/synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3DocumentationAttributionExecutionTest.java",
+        "sha256": "dbc50c7a436b4bee61fffbfec3104b981850d15f8d052f7517b3b0945476e8d2"
+      },
+      "path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3DocumentationAttributionExecutionTest.java",
+      "path_chain": [
+        {
+          "child": "synexia-openrewrite-recipes",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes",
+          "tree": "4e96428a487b132f24d3155eb724e18fdd05c529"
+        },
+        {
+          "child": "test",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src",
+          "tree": "c3d3a10f90df0ed5de221cc433c0efa3864add0b"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/test",
+          "tree": "a93a8958fccf55519a5802ada23154b9329b87cd"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/test/java",
+          "tree": "5a9e550d3b539e237a72e46a0e207763da60471f"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/test/java/com",
+          "tree": "932a6c35c38356e0449f8f845bb4c419e618dc3a"
+        },
+        {
+          "child": "rewrite",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/test/java/com/synexia",
+          "tree": "f997dc19b6a2a16e9e5f0f97fd4901db388ce2b2"
+        },
+        {
+          "child": "M3DocumentationAttributionExecutionTest.java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite",
+          "tree": "00e3f8d78b9d3335c9001540e7d3ea1a044b5f58"
+        }
+      ],
+      "role": "canonical_upstream_fixture"
+    },
+    {
+      "build_roles": [],
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "M3MasteryClassLoader.java",
+          "sha": "b4081310a343cbd067c7deb5e907031598e82536",
+          "size": 2538,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b4081310a343cbd067c7deb5e907031598e82536"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 6534,
+          "git_blob": "09da89f33f1eccaa6e8f8e67c3370389f33ab7d6",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/b4081310a343cbd067c7deb5e907031598e82536.json",
+          "sha256": "f4d5a3c2c2e6a075ce3d7a1efa1fab4c68f4d39de6c123de2a94c445455a749c"
+        },
+        "bytes": 2538,
+        "git_blob": "b4081310a343cbd067c7deb5e907031598e82536",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryClassLoader.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "e2fee64f28c2fd71db1d0f2fba8a9bf3bd4c3d210119d4e12823b7d01a98ec0a"
+      },
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryClassLoader.java",
+      "path_chain": [
+        {
+          "child": "synexia-openrewrite-recipes",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes",
+          "tree": "4e96428a487b132f24d3155eb724e18fdd05c529"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src",
+          "tree": "c3d3a10f90df0ed5de221cc433c0efa3864add0b"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main",
+          "tree": "7bbbc6de7b94e1ed67fb2d934be158ece4200c2c"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java",
+          "tree": "6a6c7bb5b4b7315c3b7615cde1c652de4efda7cf"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com",
+          "tree": "15d01ab39a421879d4789db11c6bb252db08f0ae"
+        },
+        {
+          "child": "rewrite",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com/synexia",
+          "tree": "e5014d1d7ce84527d9183cbb1c0d57f4d4767eaa"
+        },
+        {
+          "child": "M3MasteryClassLoader.java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite",
+          "tree": "5ef92049f62f1b2ed35bdd91a926f302a64fabb6"
+        }
+      ],
+      "role": "current_mastery_direct_dependency"
+    },
+    {
+      "build_roles": [],
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "M3MasteryContractSurface.java",
+          "sha": "7a31cc620465c33d978a5b70ffca0f3e221f1c01",
+          "size": 8270,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/7a31cc620465c33d978a5b70ffca0f3e221f1c01"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 18340,
+          "git_blob": "2b4fe12b5287d15604c4f591f13e8355cebbbcec",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/7a31cc620465c33d978a5b70ffca0f3e221f1c01.json",
+          "sha256": "c9d556a5e02c6f09c1d75db93ea4259aa1496dbddcd3fb52931d5269c22974d7"
+        },
+        "bytes": 8270,
+        "git_blob": "7a31cc620465c33d978a5b70ffca0f3e221f1c01",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "870deda207b85f081da2f7a2953082a91098ea46757c4586b4b91d490685749e"
+      },
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+      "path_chain": [
+        {
+          "child": "synexia-openrewrite-recipes",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes",
+          "tree": "4e96428a487b132f24d3155eb724e18fdd05c529"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src",
+          "tree": "c3d3a10f90df0ed5de221cc433c0efa3864add0b"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main",
+          "tree": "7bbbc6de7b94e1ed67fb2d934be158ece4200c2c"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java",
+          "tree": "6a6c7bb5b4b7315c3b7615cde1c652de4efda7cf"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com",
+          "tree": "15d01ab39a421879d4789db11c6bb252db08f0ae"
+        },
+        {
+          "child": "rewrite",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com/synexia",
+          "tree": "e5014d1d7ce84527d9183cbb1c0d57f4d4767eaa"
+        },
+        {
+          "child": "M3MasteryContractSurface.java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite",
+          "tree": "5ef92049f62f1b2ed35bdd91a926f302a64fabb6"
+        }
+      ],
+      "role": "current_mastery_direct_dependency"
+    },
+    {
+      "build_roles": [
+        "current_parent_main"
+      ],
+      "context_from": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/pom.xml",
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "MIndexDictionaryGramIndex.java",
+          "sha": "897714786289519ea8cb3da9cdeb2334231d4897",
+          "size": 10001,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/897714786289519ea8cb3da9cdeb2334231d4897"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 21912,
+          "git_blob": "a23e62739f88175407d2056c2bd08dfecc0d71c3",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/897714786289519ea8cb3da9cdeb2334231d4897.json",
+          "sha256": "d9b592b20ecf510e7ebd486592db17556f429c1889a0ab0ae8173c7581611b5b"
+        },
+        "bytes": 10001,
+        "git_blob": "897714786289519ea8cb3da9cdeb2334231d4897",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDictionaryGramIndex.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "454856ea97080ec088e2f66b04092da0608bce4f8d41dcb76f4539786df7184a"
+      },
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDictionaryGramIndex.java",
+      "path_chain": [
+        {
+          "child": "synexia-mindex",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "runtime",
+          "found": true,
+          "prefix": "synexia-mindex",
+          "tree": "041a317f87daf727c661acc7c7206398b50f5b4a"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-mindex/runtime",
+          "tree": "b4bd811444a2f35af4dbe8acc137001e856ff11f"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src",
+          "tree": "34faf82566a4188c92f7294fae4dd3b5e737b8f1"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main",
+          "tree": "eb07263d981d7cc1e5baa21c17496ec76a584151"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java",
+          "tree": "91982598a319b49ec5cc55ceb413d87752a6f566"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com",
+          "tree": "101883179e84fcd90600609700e3243cff07499d"
+        },
+        {
+          "child": "mindex",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia",
+          "tree": "627e84eda75b834069ee2c736af9efbc075f776f"
+        },
+        {
+          "child": "MIndexDictionaryGramIndex.java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia/mindex",
+          "tree": "4272316579a281333d3670ef1f9b7521576cc746"
+        }
+      ],
+      "role": "current_parent_pom_declared_context"
+    },
+    {
+      "build_roles": [
+        "current_parent_main"
+      ],
+      "context_from": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/pom.xml",
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "MIndexRegexDictionaryPlan.java",
+          "sha": "e1e0418a422db24f0f477a89b6ce15cdeee1bee1",
+          "size": 3277,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/e1e0418a422db24f0f477a89b6ce15cdeee1bee1"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 8131,
+          "git_blob": "37d886a154fd22dd56b0556236ec2af9d4a8e52e",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/e1e0418a422db24f0f477a89b6ce15cdeee1bee1.json",
+          "sha256": "76f782067cd63d476c8ef469b8be4fb30c4cc46f2c00713a8edfc461f745a747"
+        },
+        "bytes": 3277,
+        "git_blob": "e1e0418a422db24f0f477a89b6ce15cdeee1bee1",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegexDictionaryPlan.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "7bbf143dfa90c7c282f45fb87342ad2a2432429194f397eb2e978af9a3d6aeeb"
+      },
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegexDictionaryPlan.java",
+      "path_chain": [
+        {
+          "child": "synexia-mindex",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "runtime",
+          "found": true,
+          "prefix": "synexia-mindex",
+          "tree": "041a317f87daf727c661acc7c7206398b50f5b4a"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-mindex/runtime",
+          "tree": "b4bd811444a2f35af4dbe8acc137001e856ff11f"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src",
+          "tree": "34faf82566a4188c92f7294fae4dd3b5e737b8f1"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main",
+          "tree": "eb07263d981d7cc1e5baa21c17496ec76a584151"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java",
+          "tree": "91982598a319b49ec5cc55ceb413d87752a6f566"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com",
+          "tree": "101883179e84fcd90600609700e3243cff07499d"
+        },
+        {
+          "child": "mindex",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia",
+          "tree": "627e84eda75b834069ee2c736af9efbc075f776f"
+        },
+        {
+          "child": "MIndexRegexDictionaryPlan.java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia/mindex",
+          "tree": "4272316579a281333d3670ef1f9b7521576cc746"
+        }
+      ],
+      "role": "current_parent_pom_declared_context"
+    },
+    {
+      "build_roles": [
+        "current_parent_main"
+      ],
+      "context_from": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/pom.xml",
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "MIndexRegexGrammar.java",
+          "sha": "c69d5f50c3e527bbb85e759a663a02987c9174d1",
+          "size": 23848,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c69d5f50c3e527bbb85e759a663a02987c9174d1"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 50315,
+          "git_blob": "2aa96c4fccae585153ec2c18b1d0930ea967bd94",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/c69d5f50c3e527bbb85e759a663a02987c9174d1.json",
+          "sha256": "14b88192dac66d77d18e2436fb7886513c04fa6f47b0a109d1743a73b9f8bc5f"
+        },
+        "bytes": 23848,
+        "git_blob": "c69d5f50c3e527bbb85e759a663a02987c9174d1",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegexGrammar.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "de54266762643748cf706c3a8bc485daf1923e18fb0d8ece66472b5bae53b6ae"
+      },
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegexGrammar.java",
+      "path_chain": [
+        {
+          "child": "synexia-mindex",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "runtime",
+          "found": true,
+          "prefix": "synexia-mindex",
+          "tree": "041a317f87daf727c661acc7c7206398b50f5b4a"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-mindex/runtime",
+          "tree": "b4bd811444a2f35af4dbe8acc137001e856ff11f"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src",
+          "tree": "34faf82566a4188c92f7294fae4dd3b5e737b8f1"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main",
+          "tree": "eb07263d981d7cc1e5baa21c17496ec76a584151"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java",
+          "tree": "91982598a319b49ec5cc55ceb413d87752a6f566"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com",
+          "tree": "101883179e84fcd90600609700e3243cff07499d"
+        },
+        {
+          "child": "mindex",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia",
+          "tree": "627e84eda75b834069ee2c736af9efbc075f776f"
+        },
+        {
+          "child": "MIndexRegexGrammar.java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia/mindex",
+          "tree": "4272316579a281333d3670ef1f9b7521576cc746"
+        }
+      ],
+      "role": "current_parent_pom_declared_context"
+    },
+    {
+      "build_roles": [
+        "current_parent_main"
+      ],
+      "context_from": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/pom.xml",
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "MIndexRegexSearch.java",
+          "sha": "ea154f28926a19ba411027897c806ff3873abcd8",
+          "size": 15928,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ea154f28926a19ba411027897c806ff3873abcd8"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 34008,
+          "git_blob": "de88dd91e51fd3f8f0e7cb605c4d931b8f373a15",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/ea154f28926a19ba411027897c806ff3873abcd8.json",
+          "sha256": "b13526d7f82222470326ca745c71fc74d244a8e1d425a93e74264df50c2002ba"
+        },
+        "bytes": 15928,
+        "git_blob": "ea154f28926a19ba411027897c806ff3873abcd8",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegexSearch.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "9a4053c382e5f4bc04562410bf32fd10013295350699e95c7caa5c92077acce5"
+      },
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegexSearch.java",
+      "path_chain": [
+        {
+          "child": "synexia-mindex",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "runtime",
+          "found": true,
+          "prefix": "synexia-mindex",
+          "tree": "041a317f87daf727c661acc7c7206398b50f5b4a"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-mindex/runtime",
+          "tree": "b4bd811444a2f35af4dbe8acc137001e856ff11f"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src",
+          "tree": "34faf82566a4188c92f7294fae4dd3b5e737b8f1"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main",
+          "tree": "eb07263d981d7cc1e5baa21c17496ec76a584151"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java",
+          "tree": "91982598a319b49ec5cc55ceb413d87752a6f566"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com",
+          "tree": "101883179e84fcd90600609700e3243cff07499d"
+        },
+        {
+          "child": "mindex",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia",
+          "tree": "627e84eda75b834069ee2c736af9efbc075f776f"
+        },
+        {
+          "child": "MIndexRegexSearch.java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia/mindex",
+          "tree": "4272316579a281333d3670ef1f9b7521576cc746"
+        }
+      ],
+      "role": "current_parent_pom_declared_context"
+    },
+    {
+      "build_roles": [
+        "current_parent_main"
+      ],
+      "context_from": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/pom.xml",
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "MIndexTextSubstringIndex.java",
+          "sha": "1f8e6d1945be6919d0070576632cb0384d5495ac",
+          "size": 12682,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/1f8e6d1945be6919d0070576632cb0384d5495ac"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 27431,
+          "git_blob": "9e4e1612195255842e00610c13dc4ba6c748f127",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/1f8e6d1945be6919d0070576632cb0384d5495ac.json",
+          "sha256": "b8659dd31bac845d9ed1ca0df1d6de875a06986be7ad5de54915560eb5c0736f"
+        },
+        "bytes": 12682,
+        "git_blob": "1f8e6d1945be6919d0070576632cb0384d5495ac",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTextSubstringIndex.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "995e5436922838b61c4eaf03edeef2907d58892d63fd82e7dd0daf51abb63550"
+      },
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTextSubstringIndex.java",
+      "path_chain": [
+        {
+          "child": "synexia-mindex",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "runtime",
+          "found": true,
+          "prefix": "synexia-mindex",
+          "tree": "041a317f87daf727c661acc7c7206398b50f5b4a"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-mindex/runtime",
+          "tree": "b4bd811444a2f35af4dbe8acc137001e856ff11f"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src",
+          "tree": "34faf82566a4188c92f7294fae4dd3b5e737b8f1"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main",
+          "tree": "eb07263d981d7cc1e5baa21c17496ec76a584151"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java",
+          "tree": "91982598a319b49ec5cc55ceb413d87752a6f566"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com",
+          "tree": "101883179e84fcd90600609700e3243cff07499d"
+        },
+        {
+          "child": "mindex",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia",
+          "tree": "627e84eda75b834069ee2c736af9efbc075f776f"
+        },
+        {
+          "child": "MIndexTextSubstringIndex.java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia/mindex",
+          "tree": "4272316579a281333d3670ef1f9b7521576cc746"
+        }
+      ],
+      "role": "current_parent_pom_declared_context"
+    },
+    {
+      "build_roles": [
+        "current_parent_main"
+      ],
+      "context_from": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/pom.xml",
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "MIndexUtf16TransitionIndex.java",
+          "sha": "6999647741cd7b643d20710f52da37e3ae3f669a",
+          "size": 1523,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/6999647741cd7b643d20710f52da37e3ae3f669a"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 4494,
+          "git_blob": "9222cb00968b25f6a410ac678ef28fac1af5ed26",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/6999647741cd7b643d20710f52da37e3ae3f669a.json",
+          "sha256": "35053a13b77e064fbcd9dac44dff5b719366a9f5323f21daf1b1b3cb0659278b"
+        },
+        "bytes": 1523,
+        "git_blob": "6999647741cd7b643d20710f52da37e3ae3f669a",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexUtf16TransitionIndex.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "b2b312f7a844f177e6c243a8408dc4bd81b0705ab012a39c8d9475edc2ef26c8"
+      },
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexUtf16TransitionIndex.java",
+      "path_chain": [
+        {
+          "child": "synexia-mindex",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "runtime",
+          "found": true,
+          "prefix": "synexia-mindex",
+          "tree": "041a317f87daf727c661acc7c7206398b50f5b4a"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-mindex/runtime",
+          "tree": "b4bd811444a2f35af4dbe8acc137001e856ff11f"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src",
+          "tree": "34faf82566a4188c92f7294fae4dd3b5e737b8f1"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main",
+          "tree": "eb07263d981d7cc1e5baa21c17496ec76a584151"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java",
+          "tree": "91982598a319b49ec5cc55ceb413d87752a6f566"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com",
+          "tree": "101883179e84fcd90600609700e3243cff07499d"
+        },
+        {
+          "child": "mindex",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia",
+          "tree": "627e84eda75b834069ee2c736af9efbc075f776f"
+        },
+        {
+          "child": "MIndexUtf16TransitionIndex.java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia/mindex",
+          "tree": "4272316579a281333d3670ef1f9b7521576cc746"
+        }
+      ],
+      "role": "current_parent_pom_declared_context"
+    },
+    {
+      "build_roles": [
+        "current_parent_main"
+      ],
+      "context_from": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/pom.xml",
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "MIndexCompositeRegexIndex.java",
+          "sha": "20c22c81316b48314c1c7c3d6e173e688f3b787d",
+          "size": 10936,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/20c22c81316b48314c1c7c3d6e173e688f3b787d"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 23782,
+          "git_blob": "c99dbcc1a99f81cc019937b2a822db36f1b078f4",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/20c22c81316b48314c1c7c3d6e173e688f3b787d.json",
+          "sha256": "777f48eb0eb5eb7f105d6eb703c2c7b4e0880625df73339bc75baa9931837746"
+        },
+        "bytes": 10936,
+        "git_blob": "20c22c81316b48314c1c7c3d6e173e688f3b787d",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex/MIndexCompositeRegexIndex.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "2e4da7b5b4519c4b4dc8231231dcc9b2b2e408e2524ae6ca142b1cd56622ae6c"
+      },
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex/MIndexCompositeRegexIndex.java",
+      "path_chain": [
+        {
+          "child": "synexia-mindex",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "runtime",
+          "found": true,
+          "prefix": "synexia-mindex",
+          "tree": "041a317f87daf727c661acc7c7206398b50f5b4a"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-mindex/runtime",
+          "tree": "b4bd811444a2f35af4dbe8acc137001e856ff11f"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src",
+          "tree": "34faf82566a4188c92f7294fae4dd3b5e737b8f1"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main",
+          "tree": "eb07263d981d7cc1e5baa21c17496ec76a584151"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java",
+          "tree": "91982598a319b49ec5cc55ceb413d87752a6f566"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com",
+          "tree": "101883179e84fcd90600609700e3243cff07499d"
+        },
+        {
+          "child": "mindex",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia",
+          "tree": "627e84eda75b834069ee2c736af9efbc075f776f"
+        },
+        {
+          "child": "regex",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia/mindex",
+          "tree": "4272316579a281333d3670ef1f9b7521576cc746"
+        },
+        {
+          "child": "MIndexCompositeRegexIndex.java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex",
+          "tree": "57fb75aef32f86ddb42f0366726caf6c3641c231"
+        }
+      ],
+      "role": "current_parent_pom_declared_context"
+    },
+    {
+      "build_roles": [
+        "current_parent_main"
+      ],
+      "context_from": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/pom.xml",
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "MIndexRegex.java",
+          "sha": "f27ea055dc7bac355f8c5c145b727f0309c73b80",
+          "size": 9804,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/f27ea055dc7bac355f8c5c145b727f0309c73b80"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 21367,
+          "git_blob": "ab5faa8c09543311a5a10fdfe75c151058e865d4",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/f27ea055dc7bac355f8c5c145b727f0309c73b80.json",
+          "sha256": "fe0b232555f213b052a8d46635237a05a307fb0eb6d6202336895eca96693661"
+        },
+        "bytes": 9804,
+        "git_blob": "f27ea055dc7bac355f8c5c145b727f0309c73b80",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex/MIndexRegex.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "0442c5be444b841b03d3bfb24989a7bc0a8bc5d1c68065729848bd7fa6878165"
+      },
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex/MIndexRegex.java",
+      "path_chain": [
+        {
+          "child": "synexia-mindex",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "runtime",
+          "found": true,
+          "prefix": "synexia-mindex",
+          "tree": "041a317f87daf727c661acc7c7206398b50f5b4a"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-mindex/runtime",
+          "tree": "b4bd811444a2f35af4dbe8acc137001e856ff11f"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src",
+          "tree": "34faf82566a4188c92f7294fae4dd3b5e737b8f1"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main",
+          "tree": "eb07263d981d7cc1e5baa21c17496ec76a584151"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java",
+          "tree": "91982598a319b49ec5cc55ceb413d87752a6f566"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com",
+          "tree": "101883179e84fcd90600609700e3243cff07499d"
+        },
+        {
+          "child": "mindex",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia",
+          "tree": "627e84eda75b834069ee2c736af9efbc075f776f"
+        },
+        {
+          "child": "regex",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia/mindex",
+          "tree": "4272316579a281333d3670ef1f9b7521576cc746"
+        },
+        {
+          "child": "MIndexRegex.java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex",
+          "tree": "57fb75aef32f86ddb42f0366726caf6c3641c231"
+        }
+      ],
+      "role": "current_parent_pom_declared_context"
+    },
+    {
+      "build_roles": [
+        "current_parent_main"
+      ],
+      "context_from": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/pom.xml",
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "MIndexRegexInputView.java",
+          "sha": "c3bd20071c22a044c00660578c1038a0a3a69d6e",
+          "size": 1483,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c3bd20071c22a044c00660578c1038a0a3a69d6e"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 4388,
+          "git_blob": "6cbe7ef9c2942d658ee98505c7dfa47954ab31ef",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/c3bd20071c22a044c00660578c1038a0a3a69d6e.json",
+          "sha256": "33d1972b233ab801fe4a98e404784b8b84de2868003b635634f924bffdfb504b"
+        },
+        "bytes": 1483,
+        "git_blob": "c3bd20071c22a044c00660578c1038a0a3a69d6e",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex/MIndexRegexInputView.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "461b6531c995f6757355e042958fd2235770c9c0ce156842de74e3aeffc70190"
+      },
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex/MIndexRegexInputView.java",
+      "path_chain": [
+        {
+          "child": "synexia-mindex",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "runtime",
+          "found": true,
+          "prefix": "synexia-mindex",
+          "tree": "041a317f87daf727c661acc7c7206398b50f5b4a"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-mindex/runtime",
+          "tree": "b4bd811444a2f35af4dbe8acc137001e856ff11f"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src",
+          "tree": "34faf82566a4188c92f7294fae4dd3b5e737b8f1"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main",
+          "tree": "eb07263d981d7cc1e5baa21c17496ec76a584151"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java",
+          "tree": "91982598a319b49ec5cc55ceb413d87752a6f566"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com",
+          "tree": "101883179e84fcd90600609700e3243cff07499d"
+        },
+        {
+          "child": "mindex",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia",
+          "tree": "627e84eda75b834069ee2c736af9efbc075f776f"
+        },
+        {
+          "child": "regex",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia/mindex",
+          "tree": "4272316579a281333d3670ef1f9b7521576cc746"
+        },
+        {
+          "child": "MIndexRegexInputView.java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex",
+          "tree": "57fb75aef32f86ddb42f0366726caf6c3641c231"
+        }
+      ],
+      "role": "current_parent_pom_declared_context"
+    },
+    {
+      "build_roles": [
+        "current_parent_main"
+      ],
+      "context_from": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/pom.xml",
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "MIndexRegexMatcher.java",
+          "sha": "4e48418d2cc96e2b8cd39204a8d26f83f46d3739",
+          "size": 5496,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/4e48418d2cc96e2b8cd39204a8d26f83f46d3739"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 12586,
+          "git_blob": "23b81dbea82611e823296b2b0347da4a2e8815e9",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/4e48418d2cc96e2b8cd39204a8d26f83f46d3739.json",
+          "sha256": "2b860ea03849d495100f59d4a24a27ad908365ceb68e34af79005ed2115ac219"
+        },
+        "bytes": 5496,
+        "git_blob": "4e48418d2cc96e2b8cd39204a8d26f83f46d3739",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex/MIndexRegexMatcher.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "2c199d71769d4f9232855723233914a3c201c4b851f162290afb387477ec1141"
+      },
+      "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex/MIndexRegexMatcher.java",
+      "path_chain": [
+        {
+          "child": "synexia-mindex",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "runtime",
+          "found": true,
+          "prefix": "synexia-mindex",
+          "tree": "041a317f87daf727c661acc7c7206398b50f5b4a"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-mindex/runtime",
+          "tree": "b4bd811444a2f35af4dbe8acc137001e856ff11f"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src",
+          "tree": "34faf82566a4188c92f7294fae4dd3b5e737b8f1"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main",
+          "tree": "eb07263d981d7cc1e5baa21c17496ec76a584151"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java",
+          "tree": "91982598a319b49ec5cc55ceb413d87752a6f566"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com",
+          "tree": "101883179e84fcd90600609700e3243cff07499d"
+        },
+        {
+          "child": "mindex",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia",
+          "tree": "627e84eda75b834069ee2c736af9efbc075f776f"
+        },
+        {
+          "child": "regex",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia/mindex",
+          "tree": "4272316579a281333d3670ef1f9b7521576cc746"
+        },
+        {
+          "child": "MIndexRegexMatcher.java",
+          "found": true,
+          "prefix": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex",
+          "tree": "57fb75aef32f86ddb42f0366726caf6c3641c231"
+        }
+      ],
+      "role": "current_parent_pom_declared_context"
+    },
+    {
+      "build_roles": [],
+      "context_from": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/pom.xml",
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "RXMTest.java",
+          "sha": "4b9a426858e8f67960bb1dfb331ab2ae423b77dd",
+          "size": 18492,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/4b9a426858e8f67960bb1dfb331ab2ae423b77dd"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 39972,
+          "git_blob": "bf491dda61d0b84378a2ab831d7e456ffa7b470b",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/4b9a426858e8f67960bb1dfb331ab2ae423b77dd.json",
+          "sha256": "a1317675bb3e59ef6495769e21af530f918a4e5ae44ffb5c48360dbb8d5d02ff"
+        },
+        "bytes": 18492,
+        "git_blob": "4b9a426858e8f67960bb1dfb331ab2ae423b77dd",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/src/test/java/com/synexia/mindex/regex/RXMTest.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "34c1142320828df5047c004c56df157a37c193dbbb671db3835dd18cbaa9d1f2"
+      },
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/src/test/java/com/synexia/mindex/regex/RXMTest.java",
+      "path_chain": [
+        {
+          "child": "synexia-openrewrite-recipes",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "recipes",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes",
+          "tree": "4e96428a487b132f24d3155eb724e18fdd05c529"
+        },
+        {
+          "child": "atom-pattern-mastery-20261005",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes",
+          "tree": "d96135b03c9c71d6da41058817efdd1bdaa1b4a3"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005",
+          "tree": "cb7da7b163c68a4c20902ff289c890b1a9fca3fa"
+        },
+        {
+          "child": "test",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/src",
+          "tree": "f9cfe83c146ee813873410deafb5cc2ee53f4810"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/src/test",
+          "tree": "f75586b34d59db0090f400dc8927c3e2659a539e"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/src/test/java",
+          "tree": "65d28176f027c7c5c02d2edceb3f8f6a5be84e58"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/src/test/java/com",
+          "tree": "5edfedf64dca264e69f05c3e212986425f869876"
+        },
+        {
+          "child": "mindex",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/src/test/java/com/synexia",
+          "tree": "32976b86584051b539a546c9ea9b2a5ff79e2768"
+        },
+        {
+          "child": "regex",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/src/test/java/com/synexia/mindex",
+          "tree": "c1c4acfa35312ffe76efba6fe13b5a7f81cf37e3"
+        },
+        {
+          "child": "RXMTest.java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/src/test/java/com/synexia/mindex/regex",
+          "tree": "a0057b9edd2ec17182cd8ab2aa823953adbd67cc"
+        }
+      ],
+      "role": "current_parent_pom_declared_context"
+    },
+    {
+      "build_roles": [],
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "Lfs.java",
+          "sha": "af5c69e357e57f2b2fc7e1b54fbfb3f8de27cdaf",
+          "size": 13221,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/af5c69e357e57f2b2fc7e1b54fbfb3f8de27cdaf"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 28575,
+          "git_blob": "4e2870fc5e578bddce8f40a52654b39160effb53",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/af5c69e357e57f2b2fc7e1b54fbfb3f8de27cdaf.json",
+          "sha256": "cd851d5c255f0f2e3fef247ad290749470348a0c29e7a7be646371203e92aa80"
+        },
+        "bytes": 13221,
+        "git_blob": "af5c69e357e57f2b2fc7e1b54fbfb3f8de27cdaf",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Lfs.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "6fcc1c2e5149b7706eeb28f53ef9cc873d033d09aa7f1f5edab5ccbc4fac9c85"
+      },
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Lfs.java",
+      "path_chain": [
+        {
+          "child": "synexia-openrewrite-recipes",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes",
+          "tree": "4e96428a487b132f24d3155eb724e18fdd05c529"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src",
+          "tree": "c3d3a10f90df0ed5de221cc433c0efa3864add0b"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main",
+          "tree": "7bbbc6de7b94e1ed67fb2d934be158ece4200c2c"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java",
+          "tree": "6a6c7bb5b4b7315c3b7615cde1c652de4efda7cf"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com",
+          "tree": "15d01ab39a421879d4789db11c6bb252db08f0ae"
+        },
+        {
+          "child": "rewrite",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com/synexia",
+          "tree": "e5014d1d7ce84527d9183cbb1c0d57f4d4767eaa"
+        },
+        {
+          "child": "Lfs.java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite",
+          "tree": "5ef92049f62f1b2ed35bdd91a926f302a64fabb6"
+        }
+      ],
+      "referenced_by": "M3RecipeLaboratoryFixtures",
+      "role": "current_selected_owner_direct_dependency"
+    },
+    {
+      "build_roles": [],
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "PJSeal.java",
+          "sha": "436538cec7e9a35356ce05f32a177ad65ef8b564",
+          "size": 6470,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/436538cec7e9a35356ce05f32a177ad65ef8b564"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 14573,
+          "git_blob": "48df42a66960835c7e32e3f8d3c7decb37fd8218",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/436538cec7e9a35356ce05f32a177ad65ef8b564.json",
+          "sha256": "fea42c57603448149ab5569f2aa3d45992c75e9d5e378deaf1dbac2474f2c139"
+        },
+        "bytes": 6470,
+        "git_blob": "436538cec7e9a35356ce05f32a177ad65ef8b564",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/PJSeal.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "72b5d45e1c544218c839a861016031d5638baabacf339d58e149972c472321e5"
+      },
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/PJSeal.java",
+      "path_chain": [
+        {
+          "child": "synexia-openrewrite-recipes",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes",
+          "tree": "4e96428a487b132f24d3155eb724e18fdd05c529"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src",
+          "tree": "c3d3a10f90df0ed5de221cc433c0efa3864add0b"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main",
+          "tree": "7bbbc6de7b94e1ed67fb2d934be158ece4200c2c"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java",
+          "tree": "6a6c7bb5b4b7315c3b7615cde1c652de4efda7cf"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com",
+          "tree": "15d01ab39a421879d4789db11c6bb252db08f0ae"
+        },
+        {
+          "child": "rewrite",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com/synexia",
+          "tree": "e5014d1d7ce84527d9183cbb1c0d57f4d4767eaa"
+        },
+        {
+          "child": "PJSeal.java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite",
+          "tree": "5ef92049f62f1b2ed35bdd91a926f302a64fabb6"
+        }
+      ],
+      "referenced_by": "M3RecipeLaboratoryFixtures",
+      "role": "current_selected_owner_direct_dependency"
+    },
+    {
+      "build_roles": [],
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "M3RecipeProjectLab.java",
+          "sha": "92639b89d7791f71ef9fa175259f5d5803fb773e",
+          "size": 54435,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/92639b89d7791f71ef9fa175259f5d5803fb773e"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 113382,
+          "git_blob": "6fec369200b97aa1d18ae734262c1076bd5a42ad",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/92639b89d7791f71ef9fa175259f5d5803fb773e.json",
+          "sha256": "dd55586c46280ca653b11bc9246f43b0e6d8763da5e0f50b0d963f01c00fe9a4"
+        },
+        "bytes": 54435,
+        "git_blob": "92639b89d7791f71ef9fa175259f5d5803fb773e",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeProjectLab.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "964cec1b2ef2734d13c19cfaa5d53f9835f3dc45ba37b1caa68f091bd21b3610"
+      },
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeProjectLab.java",
+      "path_chain": [
+        {
+          "child": "synexia-openrewrite-recipes",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes",
+          "tree": "4e96428a487b132f24d3155eb724e18fdd05c529"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src",
+          "tree": "c3d3a10f90df0ed5de221cc433c0efa3864add0b"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main",
+          "tree": "7bbbc6de7b94e1ed67fb2d934be158ece4200c2c"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java",
+          "tree": "6a6c7bb5b4b7315c3b7615cde1c652de4efda7cf"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com",
+          "tree": "15d01ab39a421879d4789db11c6bb252db08f0ae"
+        },
+        {
+          "child": "rewrite",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com/synexia",
+          "tree": "e5014d1d7ce84527d9183cbb1c0d57f4d4767eaa"
+        },
+        {
+          "child": "M3RecipeProjectLab.java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite",
+          "tree": "5ef92049f62f1b2ed35bdd91a926f302a64fabb6"
+        }
+      ],
+      "referenced_by": "M3RecipeLaboratoryFixtures",
+      "role": "current_selected_owner_direct_dependency"
+    },
+    {
+      "build_roles": [],
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "PSource.java",
+          "sha": "50a3ae3345b6bcc5077ac38c9c8de7e9a128eb40",
+          "size": 39733,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/50a3ae3345b6bcc5077ac38c9c8de7e9a128eb40"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 83083,
+          "git_blob": "d5e2f6041de44ef7db66dff73bd0fcc2f21e612e",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/50a3ae3345b6bcc5077ac38c9c8de7e9a128eb40.json",
+          "sha256": "dda7953d9401e48dc0bb4546a0fdb11100f0c144807958e68c6fb670539b472c"
+        },
+        "bytes": 39733,
+        "git_blob": "50a3ae3345b6bcc5077ac38c9c8de7e9a128eb40",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/PSource.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "108456808afd62664bc8c85822afbc294ac1374da6404efad8412e2225c99dbe"
+      },
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/PSource.java",
+      "path_chain": [
+        {
+          "child": "synexia-openrewrite-recipes",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes",
+          "tree": "4e96428a487b132f24d3155eb724e18fdd05c529"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src",
+          "tree": "c3d3a10f90df0ed5de221cc433c0efa3864add0b"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main",
+          "tree": "7bbbc6de7b94e1ed67fb2d934be158ece4200c2c"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java",
+          "tree": "6a6c7bb5b4b7315c3b7615cde1c652de4efda7cf"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com",
+          "tree": "15d01ab39a421879d4789db11c6bb252db08f0ae"
+        },
+        {
+          "child": "rewrite",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com/synexia",
+          "tree": "e5014d1d7ce84527d9183cbb1c0d57f4d4767eaa"
+        },
+        {
+          "child": "PSource.java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite",
+          "tree": "5ef92049f62f1b2ed35bdd91a926f302a64fabb6"
+        }
+      ],
+      "referenced_by": "M3RepositorySemanticGraphRecipe",
+      "role": "current_selected_owner_direct_dependency"
+    },
+    {
+      "build_roles": [],
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "M3RecipeLaboratory.java",
+          "sha": "8f8341f0e212f33fe38a8f9868d8732e1ec240c8",
+          "size": 37351,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/8f8341f0e212f33fe38a8f9868d8732e1ec240c8"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "acquisition_receipt": {
+          "bytes": 78245,
+          "git_blob": "2c55a1c701b05cd8fa332aadc413f1f14c5ad412",
+          "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/acquisition/8f8341f0e212f33fe38a8f9868d8732e1ec240c8.json",
+          "sha256": "96835f76f60883691021300006dd02265d29a65ca3550e91165438febb8b0d69"
+        },
+        "bytes": 37351,
+        "git_blob": "8f8341f0e212f33fe38a8f9868d8732e1ec240c8",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeLaboratory.java",
+        "origin": "fresh_current_contents_acquisition",
+        "sha256": "de3fce91fdd1c9ff6c768a7574cb937e41aabba1d34bd0fe2326b5cc90c0e76e"
+      },
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeLaboratory.java",
+      "path_chain": [
+        {
+          "child": "synexia-openrewrite-recipes",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "src",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes",
+          "tree": "4e96428a487b132f24d3155eb724e18fdd05c529"
+        },
+        {
+          "child": "main",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src",
+          "tree": "c3d3a10f90df0ed5de221cc433c0efa3864add0b"
+        },
+        {
+          "child": "java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main",
+          "tree": "7bbbc6de7b94e1ed67fb2d934be158ece4200c2c"
+        },
+        {
+          "child": "com",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java",
+          "tree": "6a6c7bb5b4b7315c3b7615cde1c652de4efda7cf"
+        },
+        {
+          "child": "synexia",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com",
+          "tree": "15d01ab39a421879d4789db11c6bb252db08f0ae"
+        },
+        {
+          "child": "rewrite",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com/synexia",
+          "tree": "e5014d1d7ce84527d9183cbb1c0d57f4d4767eaa"
+        },
+        {
+          "child": "M3RecipeLaboratory.java",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite",
+          "tree": "5ef92049f62f1b2ed35bdd91a926f302a64fabb6"
+        }
+      ],
+      "referenced_by": "M3RecipeLaboratoryFixtures",
+      "role": "preexisting_outside_packet_dependency"
+    },
+    {
+      "build_roles": [],
+      "current": {
+        "entry": {
+          "mode": "100644",
+          "path": "pom.xml",
+          "sha": "5140d803e73a336aef851887a04572d446845312",
+          "size": 16616,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/5140d803e73a336aef851887a04572d446845312"
+        },
+        "status": "PRESENT"
+      },
+      "current_body": {
+        "bytes": 16616,
+        "git_blob": "5140d803e73a336aef851887a04572d446845312",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/merged-sources/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/pom.xml",
+        "origin": "shared_exact_current_contents_acquisition",
+        "sha256": "4664beca9c5e9e377cf29621d22dda5bf0eacb92957e8ebe8a1a6124f13e1ab4"
+      },
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/pom.xml",
+      "path_chain": [
+        {
+          "child": "synexia-openrewrite-recipes",
+          "found": true,
+          "prefix": "",
+          "tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+        },
+        {
+          "child": "recipes",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes",
+          "tree": "4e96428a487b132f24d3155eb724e18fdd05c529"
+        },
+        {
+          "child": "atom-pattern-mastery-20261005",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes",
+          "tree": "d96135b03c9c71d6da41058817efdd1bdaa1b4a3"
+        },
+        {
+          "child": "jcc",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005",
+          "tree": "cb7da7b163c68a4c20902ff289c890b1a9fca3fa"
+        },
+        {
+          "child": "pom.xml",
+          "found": true,
+          "prefix": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc",
+          "tree": "c6034df151c4989777b1351d765e77bdab2dde26"
+        }
+      ],
+      "role": "current_jcc_task_pom"
+    }
+  ],
+  "schema": "SYNEXIA_CURRENT_CONTEXT/1",
+  "source_commit": "be92c62ece9023b5c33676716a1076d00e26120a",
+  "source_tree": "3c4f32b66633a251ba2c117090830252a7e2da03"
+}

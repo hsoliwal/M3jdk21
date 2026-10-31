@@ -1,0 +1,57 @@
+{
+  "schema": "M3JDK21_VIEWPORT_GEOMETRY_RECEIVING_V1",
+  "canonical_repo": "hsoliwal/com.synexia",
+  "canonical_pr": 12855,
+  "canonical_commit": "7b0a5a072b6c6db16b8861bbc6a1307f40f88840",
+  "dataset": "vpt-geometry-20261027",
+  "recipe": "com.synexia.m3.ViewportGeometry20261027",
+  "original_owner": "m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java",
+  "product_base_commit": "9dd1df62f3d5406760427cb5e840a36c9e7a59ea",
+  "original_git_blob": "650356bcdffa372328e5a79f4f596a887fe5f447",
+  "sdk_result_git_blob": "d35282fb564a0a9231f31781e1a699f7e571f8de",
+  "original_sha256": "b64ba7c81ca35214a73d188433e04115b4d84e597492eb43596cce6041cf08d1",
+  "result_sha256": "98a83a0bef698e128baa0a788e122751e12584d0b8983f4df7443850123afeec",
+  "authentic_openrewrite_java21_parser": {
+    "artifact": "org.openrewrite:rewrite-java-21:8.17.1",
+    "jar_sha256": "7e654435905cf6afb9e659185773de0b75e4282c8e30c916ad15fd16b0fba9f4",
+    "pom_sha256": "9465d6d13672fc36b517e7c06ad649a081829340b53ee3872bf08349ca9310c7"
+  },
+  "local_geometry_junit": {
+    "baseline_tests": 10,
+    "baseline_expected_failures": 3,
+    "candidate_tests": 10,
+    "candidate_failures": 0,
+    "independent_BigInteger_oracle": true
+  },
+  "local_actual_canonical_java_recipe": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "real_JCompilationUnit_result": true,
+    "SDK_results": 1,
+    "source_refusal_tests": "PASS",
+    "original_canonical_engine_blobs": [
+      "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "98138cb6734ad86e3f77b8722fa5ff459842e841",
+      "14c383724cd3e9dda80d9311e298cc4ed4cf46c7",
+      "9174dd681f0d75b5086fc19904a71524a03972dc"
+    ]
+  },
+  "original_synexia_receiver": {
+    "check_changes": 1,
+    "apply_changes": 1,
+    "replay_changes": 0,
+    "source_bytes_equal_SDK_result": true
+  },
+  "caveat": "Local isolated Maven POM and ENGINE_SOURCES.tsv are semantically equivalent, not byte-identical to canonical Synexia root; canonical Java recipe engine, test, receiver and exact source fixtures match.",
+  "public_java_API_changed": false,
+  "JNI_exports_changed": false,
+  "license_header_preserved": true,
+  "product_java_source_changed": true,
+  "source_built_JDK_HotSpot_jtreg": "NOT_RUN",
+  "SWT_Nebula_GEF_RWT_native_renderer": "NOT_RUN",
+  "cross_platform_resource_latency": "NOT_RUN",
+  "hosted_product_CI": "NOT_RUN_AT_PUBLICATION",
+  "status": "DRAFT_REVIEW_ONLY"
+}

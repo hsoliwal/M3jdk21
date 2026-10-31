@@ -1,0 +1,5119 @@
+{
+  "status": "PASS_WITH_EXISTING_SKIPS_BY_FULL_RUN_AND_FOCUSED_TEST_RECONCILIATION",
+  "singleGreenFullRunClaimed": false,
+  "freshFullRun": {
+    "tests": 473,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 2
+  },
+  "focusedFootprintRun": {
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "reconciledCoverage": {
+    "tests": 473,
+    "passed": 471,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2
+  },
+  "baselineTests": 464,
+  "removedBaselineCoverage": [],
+  "renamedAndStrengthenedTest": {
+    "before": "com.m3.collections.M3FootprintContractTest#treeEmptyChecksStillInvokeComparatorAndRejectNull",
+    "after": "com.m3.collections.M3FootprintContractTest#treeEmptyLookupSkipsComparatorAndStillRejectsNaturalNull",
+    "reason": "JDK21 empty comparator lookup performs zero comparisons; actual java.util.TreeMap reference plus explicit zero; first-put exception, recovery, natural-null and storage assertions retained."
+  },
+  "addedTestCases": [
+    "com.m3.collections.M3TreeMapEmptyLookupTest#emptyComparatorLookupDoesNotAdmitThroughNaturalOrdering",
+    "com.m3.collections.M3TreeMapEmptyLookupTest#emptyNaturalLookupsDoNotCompareEvenWhenComparisonThrows",
+    "com.m3.collections.M3TreeMapEmptyLookupTest#emptyNaturalLookupsStillRejectNullAndNonComparable",
+    "com.m3.collections.M3TreeMapEmptyLookupTest#populatedNaturalLookupStillInvokesComparison",
+    "com.m3.collections.M3TreeMapGetOrDefaultTest#eagerCallbacksAndResultsMatchJdkForAbsentNullAndNonnullValues",
+    "com.m3.collections.M3TreeMapGetOrDefaultTest#exceptionFromTheSecondSearchIsPropagatedWithIdentity",
+    "com.m3.collections.M3TreeMapGetOrDefaultTest#lazyAndKeyOnlyExtensionsRetainTheirExistingSingleSearchBehavior",
+    "com.m3.collections.M3TreeMapGetOrDefaultTest#nonnullValueDoesNotTriggerASecondComparison",
+    "com.m3.collections.M3TreeMapGetOrDefaultTest#ordinaryGetDoesNotDispatchThroughTheTwoSearchDefaultOperation"
+  ],
+  "fixedFailures": [
+    "com.m3.collections.M3FilteredMergedSequencedTest#mergedReadOnlyReverseAndSplitContractsCompose",
+    "com.m3.collections.M3FilteredNavigationReconciliationTest#filteredSortedContracts",
+    "com.m3.collections.M3StrictFilteredSequencedTest#strictSortedAndNavigableReversedViews"
+  ],
+  "runtimeSourceChangesBetweenRuns": 0,
+  "testSourceChangesBetweenRuns": [
+    "m3/collections/src/test/java/com/m3/collections/M3FootprintContractTest.java"
+  ],
+  "freshFullRunSuites": [
+    {
+      "suite": "com.m3.collections.M3AdaptiveEnumLongMapTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3AdaptiveEnumLongMapTest#modeTransitionsAndOrdinalOrderInSparseMode",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3AdaptiveEnumLongMapTest#narrowEnumIsDenseFromTheStartAndEdgeContracts",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3AdaptiveEnumLongMapTest#foreignEnumKeysAreRejectedLikeJdkInBothModes",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3AdaptiveEnumLongMapTest#wideEnumMatchesJdkAcrossMutationsAndModes",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3AdaptiveEnumLongMapTest#retainsOnlyTheActiveBackingAndNoKeyReferences",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ArrayListRemoveIfTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ArrayListRemoveIfTest#frozenBaselineAndJdkContract",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3BagRankIndexTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3BagRankIndexTest#rankSelectRangesStableTiesAndNativeMasks",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3BitLane28FenwickTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3BitLane28FenwickTest#indexedRankSelectMatchesIndependentOrderedSetOracle",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3BitLane28FenwickTest#repeatedWriteNoopAndInvalidBoundsPreserveBitsAndCounts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3BitLanesTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3BitLanesTest#test_selection10MillionRowsTimingsAndCutover",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3BitLanesTest#test_blockCacheReservesEvictsLeastRecentAndProtectsCurrentFrame",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3BitLanesTest#test_randomDifferentialAgainstBooleanRows",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3BitLanesTest#test_hybridSelectionDifferentialAcrossRepresentationSwitches",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3BitLanesTest#test_untouchedLaneAllocatesNothing",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3BitLanesTest#test_checkAll10MillionRowsIsWordWise",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3BlockCacheTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3BlockCacheTest#findUsesLastHitAndSkipsEmpty",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3BlockCacheTest#lanesAndBounds",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3BlockCacheTest#evictionPrefersOldestStamp",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3BlockCacheTest#constructionAndShape",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3BlockCacheTest#clockRebaseKeepsOrder",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3BlockCacheTest#invalidateByParentAndAll",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3BlockCacheTest#evictionByFrameAndEvictor",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3BoundedFilteredNavigationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3BoundedFilteredNavigationTest#boundedSetAndMapDifferential",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ColumnarLanesTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ColumnarLanesTest#lanesExistOnlyForValuesThatAreNotTheDefault",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ColumnarLanesTest#seededScriptsAnswerLikeAMapOfCells",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ColumnarLanesTest#boundsAnswerDefaultsAndWritesAreRefused",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ConcurrentBitSetClaimTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ConcurrentBitSetClaimTest#atomicClaimAndTailWordContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ConcurrentContractTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ConcurrentContractTest#mpmcRendezvousHasNoLossOrDuplicates",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentContractTest#mpmcTransferHasNoLossOrDuplicates",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentContractTest#atomicHashAndTreeCompute",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentContractTest#blockingWakeupTimeoutAndInterrupt",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentContractTest#concurrentStreamsUseSnapshotSizeAndSelfToStringTerminates",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentContractTest#mpmcBlockingDequeHasNoLossOrDuplicates",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentContractTest#drainFailureRetainsUndeliveredElement",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentContractTest#synchronousQueueHasNoCollectionCapacity",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentContractTest#blockingDequeDifferential",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentContractTest#transferBufferedDifferentialAndIteratorRecycling",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentContractTest#lockedRangeAndSetViews",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentContractTest#transferWaitersCancellationAndTimeout",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ConcurrentLaneContractTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ConcurrentLaneContractTest#racingPublicationAndAtomicAddsLoseNoUpdates",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentLaneContractTest#parallelStreamsSplitFixedRangesWithoutLosingOrDuplicatingSlots",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentLaneContractTest#intAtomicBoundaryAndSparsePreparation",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentLaneContractTest#concurrentCollectionStreamsPreserveCapturedSnapshotsAndIndexOrder",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ConcurrentLaneContractTest#atomicValuesWrapAndZeroWritesKeepPublicationLocations",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3CountedBagTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3CountedBagTest#sourceSealedDifferentialContract",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3DequeSpanCopyTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3DequeSpanCopyTest#growsAtEitherEndFromEveryHeadAndPreservesIteratorEpochs",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3DequeSpanCopyTest#exportsEveryHeadAndSizeWithoutMutationOrAliasing",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3EntryFacadeCacheTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3EntryFacadeCacheTest#weakKeyMapHasFreshProjectionsWithoutStrongOwnerRetention",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3EntryFacadeCacheTest#strongMapEntryFacadesAreFreshLiveCallerProjections",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3EntryFacadeCacheTest#lfuPrefersHotEntriesAndBreaksTiesByRecency",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3EntryFacadeCacheTest#identityKeyingAllowsNullAndEqualButDistinctKeys",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3EntryFacadeCacheTest#compatibilityHookKeepsCallbackDemandAndExceptionIdentity",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3EntryFacadeCacheTest#treeMapKeepsFreshLiveFacadesAndDetachedImmutableSnapshots",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3EnumLongMapTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3EnumLongMapTest#foreignEnumKeysAreRejectedLikeJdk",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3EnumLongMapTest#wideEnumMatchesJdkAcrossMutationsAndOrdinalOrder",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3EnumLongMapTest#retainsOnlyPrimitiveLanesAndTheSharedUniverse",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3EnumLongMapTest#narrowEnumAndEdgeContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3EnumSetTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3EnumSetTest#wideEnumMatchesJdkAcrossMutationsAndBulkOperations",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3EnumSetTest#foreignEnumConstantsAreRejectedLikeJdk",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3EnumSetTest#retainsOnlyPresenceWordsAndTheSharedUniverse",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3EnumSetTest#narrowEnumEdgeContractsMatchJdk",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FactoryContractTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FactoryContractTest#immutableAndJdkUtilityWrappers",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FactoryContractTest#allFactoryFamiliesAreUsable",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FilteredDequeDispatchTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FilteredDequeDispatchTest#insertionDispatchAdmissionAndLiveArrayEffects",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FilteredDequesTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FilteredDequesTest#existingPackedM3LinkedListIsTheOnlyPayloadOwner",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FilteredDequesTest#liveFilteredDequeContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FilteredListsDeepCompositionTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FilteredListsDeepCompositionTest#deepChainShortCircuitAndSortedListInterop",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FilteredListsReadonlyDepthTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FilteredListsReadonlyDepthTest#nestedReadOnlyNeverRecursesOrLeaksWriteAccess",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FilteredListsSortedInteropTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FilteredListsSortedInteropTest#readonlyEmptyAndNestedReversedMutatorsRefuse",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FilteredListsSortedInteropTest#sourceDefinedReverseOrderAndLiveVisibility",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FilteredListsTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FilteredListsTest#mutationAndNullEdges",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FilteredListsTest#oracleHistories",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FilteredListsTest#linearTraversalEvidence",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FilteredMergedSequencedTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FilteredMergedSequencedTest#mergedReadOnlyReverseAndSplitContractsCompose",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FilteredNavigableSetRangeTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FilteredNavigableSetRangeTest#comparatorNullableBackingAndBoundedNavigation",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FilteredNavigableSetTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FilteredNavigableSetTest#preservesOrderingRangeSemanticsAndLiveBackingChanges",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FilteredNavigableSetTest#comparatorEquivalentDifferentObjectsRemainMembers",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FilteredNavigableSetTest#reversedComparatorAndEmptyResultsKeepNavigableContracts",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FilteredNavigableSetTest#readOnlyViewsRejectAllMutatorsIncludingIteratorRemove",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FilteredNavigationReconciliationTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FilteredNavigationReconciliationTest#maskAliasesRefuseBeforeEitherBackendWrites",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FilteredNavigationReconciliationTest#filteredSortedContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FilteredSetIdentityTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FilteredSetIdentityTest#preservesBackingOwnedIdentityForContainsAndRemoval",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FilteredSplitsMaskSpansTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 2,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FilteredSplitsMaskSpansTest#maskSpanJavaOracle",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FilteredSplitsMaskSpansTest#allNativeBackendsAreRequiredByTheFullLane",
+          "status": "skip"
+        },
+        {
+          "id": "com.m3.collections.M3FilteredSplitsMaskSpansTest#maskSpanCheckedJniOracle",
+          "status": "skip"
+        },
+        {
+          "id": "com.m3.collections.M3FilteredSplitsMaskSpansTest#filteredRecursiveSplits",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FilteredViewsTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FilteredViewsTest#navigableMap",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FilteredViewsTest#navigableSet",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FilteredViewsTest#randomizedDivergence",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FilteredViewsTest#collectionAndSet",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3FootprintContractTest",
+      "tests": 7,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FootprintContractTest#treeEmptyChecksStillInvokeComparatorAndRejectNull",
+          "status": "fail"
+        },
+        {
+          "id": "com.m3.collections.M3FootprintContractTest#weakSecondHashFailureLeavesAnUsableEmptyOwner",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FootprintContractTest#emptyHashLookupsStillEvaluateCallbacksAndFirstInsertRecovers",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FootprintContractTest#mapViewsCreatedWhileEmptyRemainBackedAndFailFast",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FootprintContractTest#representableAvlHeightFitsSignedByteEvenDuringInsertion",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FootprintContractTest#separateEmptyOwnersNeverShareWritableSlots",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FootprintContractTest#listAndSetViewsWorkAcrossFirstInsertionClearAndReuse",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3GenericArrayListTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3GenericArrayListTest#objectArrayListAndIndexedSnapshot",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3GenericReferenceOwnersTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3GenericReferenceOwnersTest#jdk21ReferenceOwnerDifferential",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3GridSelectionsTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3GridSelectionsTest#positionMarkedSelectionEdges",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3GridSelectionsTest#cellSelectionCountsMatchArrayList",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3GridSelectionsTest#positionMarkedSelectionMatchesArrayList",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3IndexMaskCompactorTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3IndexMaskCompactorTest#stableMaskSelectionContract",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3IndexMaskWindowRecoveryTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3IndexMaskWindowRecoveryTest#contract",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3IndexMaskWindowTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3IndexMaskWindowTest#sortedAndFilteredWindowContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3IndexPathMasksTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3IndexPathMasksTest#maskedIndexPathsPreserveDetachedOrderAndBounds",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3IndexPathRankTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3IndexPathRankTest#boundedDeterministicDifferential",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3IndexPathRankTest#agreesWithOriginalJavaMaskSelector",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3IndexedFilterSortFusionTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3IndexedFilterSortFusionTest#fusedMaskAndIndexOrder",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3IndexedMultiValueOccurrenceTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3IndexedMultiValueOccurrenceTest#differential",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3IndexedReadOnlyNoopTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3IndexedReadOnlyNoopTest#strictlyReadOnlySnapshots",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3IndexedSetAlgebraSeekTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3IndexedSetAlgebraSeekTest#boundedNativeOwnerNavigation",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3IndexedSnapshotPositionTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3IndexedSnapshotPositionTest#javaAndOptionalNativePositions",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3IndexedTableReentrantSortTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3IndexedTableReentrantSortTest#comparatorCannotPublishStalePhysicalIndexes",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3IndexedTableTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3IndexedTableTest#arraySlotRowColumnMasksAndState",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3IntLanesTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3IntLanesTest#intLanesRetainOnlyPrimitiveFields",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3IntLanesTest#priorityQueueMatchesJdkHeadContentsAndRemoval",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3IntLanesTest#intIntMapMatchesJdkAcrossChurnIncludingZeroKey",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3IntLanesTest#hashSetMatchesJdkAcrossChurnIncludingZeroAndRehash",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3IntLanesTest#hashSetEdgeContractsAndFailFast",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3IntLanesTest#intIntMapEdgeContractsAndFailFast",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3IntLongHashMapTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3IntLongHashMapTest#matchesJdkAcrossChurnIncludingZeroKeyAndRehash",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3IntLongHashMapTest#edgeContractsFailFastAndSizing",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3JdkCollectionDifferentialTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3JdkCollectionDifferentialTest#zeroCapacityRendezvousPreservesSynchronousQueueContract",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkCollectionDifferentialTest#transferAcknowledgementTimeoutAndCancellationMatchJdk",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkCollectionDifferentialTest#reversedSublistAndDefaultListMutationsMatchLinkedList",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkCollectionDifferentialTest#lateBindingTraversalsFollowListSetAndMapViews",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkCollectionDifferentialTest#blockedProducerInterruptionLeavesNoPhantomElement",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkCollectionDifferentialTest#comparatorEquivalentKeysAndNestedBoundsMatchTreeMap",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkCollectionDifferentialTest#boundedDequeWrapDrainAndTimedOperationsMatchJdk",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkCollectionDifferentialTest#lockedMapAtomicCallbacksLoseNoUpdates",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkCollectionDifferentialTest#everySortedSplitRetainsCustomComparatorAndEncounterOrder",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkCollectionDifferentialTest#sequencedNullAndAccessOrderOperationsMatchLinkedHashMap",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#priorityQueueMatchesJdkHeadContentsAndRemoval",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#arrayListMatchesJdkAcrossDeterministicMutationSequence",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#iteratorsAreFailFastOnStructuralMutation",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#arrayDequeMatchesJdkOrderAndOccurrenceRemoval",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#duplicateSetAddAndMapValueReplacementAreNonStructural",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#hashSetMatchesJdkAcrossCollisionsDeletionAndRehash",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#hashMapMatchesJdkAcrossReplacementDeletionAndRehash",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3KeyedParallelismAdmissionTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3KeyedParallelismAdmissionTest#failedFullLaneStillDeliversItsFailureAndCancelsQueuedWork",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LazyObserverRegressionTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LazyObserverRegressionTest#deferredKeysPreserveNullFailureCancellationAndViewOrder",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LazyObserverRegressionTest#rangeAndCachedValueObserversShareMutationGuard",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LazyObserverRegressionTest#beforeTouchObserverCannotRetargetRecycledSlot",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LazyObserverRegressionTest#successfulValueRemainsCoherentWhenCompletionObserverThrows",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LazyObserverRegressionTest#failureObserversCannotReplaceProviderExceptionOrPoisonRetry",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LazyTreeMapTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LazyTreeMapTest#actualPackedTreeProviderContract",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LinkedIndexSplitTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LinkedIndexSplitTest#indexedLinksWithoutElementBuffers",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ListDiffTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ListDiffTest#runsAndTargets",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ListDiffTest#randomSnapshots",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ListModelLazyTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ListModelLazyTest#eagerModelRejectsLazyOperations",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ListModelLazyTest#prefetchEpochExhaustion",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ListModelLazyTest#searchAndSelectionBounds",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ListModelLazyTest#lazySlotsAndWidths",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ListModelTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ListModelTest#randomOperationsAgreeWithNaiveOracle",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ListModelTest#replacingTheMaximumWithEqualWidthKeepsTheIndexFresh",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ListModelTest#widestIndexRebuildsOnlyWhenTheLastMaximumLeavesAndNeverRemeasures",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ListModelTest#largeListKeepsItemsSelectionAndWidthConsistent",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ListModelTest#topIndexStaysInsideTheScrollableRange",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ListModelTest#invalidArgumentsAreRejectedWithoutChangingState",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ListWidthTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ListWidthTest#seededScriptsAnswerLikeAPlainList",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ListWidthTest#removingTheWidestMarksTheIndexStale",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ListWidthTest#aUniformLaneMeasuresOneSlotWithoutMaterializing",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ListWidthTest#invalidArgumentsAreRefused",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongAddressBoundedTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongAddressBoundedTest#preservesOffsetsDuplicatesMasksAndPartialFailure",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongAddressKernelTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongAddressKernelTest#directAddressAndBatchParity",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongArrayDequeTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongArrayDequeTest#primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongArrayDequeTest#callbackFailurePreservesThrowingValueAndUnreadSuffixAcrossRingWrap",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongArrayDequeTest#queueAndIndexedViewsAreJdkShapedAliases",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongArrayListTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongArrayListTest#boundsOwnershipAndStackExceptions",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongArrayListTest#directStreamsRetainOwnerAcrossStorageRelocation",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongArrayListTest#mixedOperationsMatchJdkValueOrder",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongArrayListTest#callbackFailurePreservesThrowingValueAndUnreadSuffix",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongArrayListTest#primitiveStorageAndCapacityChecksStayBounded",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongArrayListTest#structuralMutationsFailFastAndStackIsJdkShapedRemoval",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongArrayListTest#sortDedupAndSearchPreserveSignedLongSemantics",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongCompositeLateBindTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongCompositeLateBindTest#compositeSpliteratorsBindOnFirstTraversal",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongDagJUnitTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongDagJUnitTest#primitiveDAGAndVirtualCollectorContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongFilteredViewContractTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongFilteredViewContractTest#differentialSeeded",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongFilteredViewContractTest#lateBindingStreamsAndNoSizeScan",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongFilteredViewContractTest#composableAndReadOnly",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongFilteredViewContractTest#fusedNestedPredicatesKeepEvaluationOrder",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongFilteredViewContractTest#exceptionBoundaries",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongIndexProjectionMaskOffsetTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongIndexProjectionMaskOffsetTest#composableOffsetSortedAndNativeMaskContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongLinkedHashSetTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongLinkedHashSetTest#matchesJdkSequencedSetAcrossChurnIncludingMovesAndRehash",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongLinkedHashSetTest#edgeContractsFailFastAndSizing",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongLinkedHashSetTest#retainsOnlyPrimitiveLanes",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongLongLinkedHashMapTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongLongLinkedHashMapTest#matchesJdkSequencedMapAcrossChurnIncludingMovesAndRehash",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongLongLinkedHashMapTest#edgeContractsFailFastAndSizing",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongLongLinkedHashMapTest#retainsOnlyPrimitiveLanes",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongLongTreeMapTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongLongTreeMapTest#edgeContractsFailFastGrowthAndCompaction",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongLongTreeMapTest#matchesJdkNavigableMapAcrossChurnIncludingBatchesAndPolls",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongLongTreeMapTest#retainsOnlyPrimitiveLanes",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongRangeSetTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongRangeSetTest#arrayRangeOperationsDifferential",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongRankIndexTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongRankIndexTest#randomizedBoundsAndOptionalBatchParity",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongRankIndexTest#freezesLiveFilteredInputWithoutMutatingSource",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongRankIndexTest#rejectsInvalidRangesAndDoesNotExposeRetainedArray",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongSortedAlgebraTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongSortedAlgebraTest#seededSortedSetAlgebraAndFilterComposition",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongStateArrayTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongStateArrayTest#sortedAndFilteredViewsPreserveDuplicateOccurrences",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongStateArrayTest#stateMaskCompactionUsesOneMutationEpochAndPreservesAlignment",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongStateArrayTest#validationAndGenerationAreNonmutatingOnRefusal",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongStateArrayTest#randomizedMutationsKeepStateFlagsAligned",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongStateArrayTest#fullWordMasksAndExistingNativeSelectorStayInParity",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongStateArrayTest#onlyOneValueOwnerAndOneAlignedMetadataLaneAreRetained",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3LongTreeSetTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3LongTreeSetTest#filterInPlaceCommitsPriorRejectionsAndKeepsTheThrowingSuffix",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongTreeSetTest#matchesJdkNavigableSetWithTinyPages",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongTreeSetTest#growthSplitsPagesAndRemovalMergesAndTrimsThem",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongTreeSetTest#sortedViewsAndUnionsWorkOverTheOwnerAsBackingSet",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongTreeSetTest#edgeContractsFailFastAndSizing",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongTreeSetTest#retainsOnlyPrimitiveLanes",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3LongTreeSetTest#matchesJdkNavigableSetAcrossChurnIncludingViewsAndFilters",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3MapContractTest",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3MapContractTest#sequencedAndReversedHashViews",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#iteratorDeletionPreservesAllTreeSuccessors",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#collisionChainsRecyclingAndNull",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#weakCleanupIsDeterministicAndDoesNotDeleteReusedKeys",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#differential(String, Supplier, Supplier)[1]",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#differential(String, Supplier, Supplier)[2]",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#differential(String, Supplier, Supplier)[3]",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#differential(String, Supplier, Supplier)[4]",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#comparatorNullKeysAndEquality",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#backedViewsAndCallbacks(String, Supplier, Supplier)[1]",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#backedViewsAndCallbacks(String, Supplier, Supplier)[2]",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#backedViewsAndCallbacks(String, Supplier, Supplier)[3]",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#backedViewsAndCallbacks(String, Supplier, Supplier)[4]",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#nestedRangeExceptionContractsMatchTreeMap",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#treeRangesNavigationAndMutation",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#sequencedEndpointsUseLiveAndDetachedEntriesCorrectly",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#treeRotationsAndEveryDeletionOrder",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3MapContractTest#entryAndKeyViewsRemoveNullValuedMappings",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3MaskAllSelectionReceiverTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3MaskAllSelectionReceiverTest#everyMaskAndDefensiveResultIsCorrect",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3MutableFilteredViewsTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3MutableFilteredViewsTest#liveMutableNavigableContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3NativeIndexRangeTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3NativeIndexRangeTest#snapshotContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3NetBeansGatherSpansTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3NetBeansGatherSpansTest#invalidAddressesPublishOnlyTheValidPrefix",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3NetBeansGatherSpansTest#oneTwoAndManySpansPreserveOrderAndOffsets",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3NoRetainedStructuralEntryTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3NoRetainedStructuralEntryTest#storageRootsAndNestedOwnersHaveNoRetainedEntryNodeBucketOrCellFields",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3NoRetainedStructuralEntryTest#returnedMapEntriesAreFreshAndNeverRetainedByPackedMapStorage",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3NoRetainedStructuralEntryTest#onlySlotMapDefinesTheExplicitMapEntryCompatibilityProjection",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ObjectCountsTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ObjectCountsTest#countOverflowAndInvalidInputLeaveCountsFlagsAndOrderUnchanged",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectCountsTest#callbacksAndCancellationRetainExceptionIdentityAndRefuseReentrancy",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectCountsTest#primitiveColumnsShareKeySlotsWithoutCountBoxesOrRetainedEntries",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectCountsTest#flagWindowsAgreeWithScalarOracleForAllBitsOffsetsAndBothDirections",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectCountsTest#differentialCountsNullCollisionsAndSlotReuse",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectCountsTest#distinctIteratorRemovalClearsFlagsAndRecycledSlots",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ObjectIdentityTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ObjectIdentityTest#identityMapEdgeContractsRehashAndFailFast",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectIdentityTest#identityOwnersRetainOnlyFlatLanes",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectIdentityTest#identityMapMatchesJdkAcrossChurnWithNullKeyAndValues",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectIdentityTest#identitySetMatchesJdkAcrossChurn",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ObjectPhysicalMaskTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ObjectPhysicalMaskTest#contracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ObjectRangeMapTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ObjectRangeMapTest#referenceRangesAndFullWidthMasks",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ObjectResidencyBorrowTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ObjectResidencyBorrowTest#callbackExceptionAndReentrantReleasePreserveCount",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectResidencyBorrowTest#ExternalAndUnprovenOwnersNeverFastRetire",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectResidencyBorrowTest#independentBorrowersPreventEarlyReclamationAndStaleReuse",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectResidencyBorrowTest#asynchronousBorrowKeepsEventOwnerUntilAck",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ObjectResidencyRuntimePressureTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ObjectResidencyRuntimePressureTest#targetUsesTheActualRunningJvmHeap",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ObjectResidencyTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ObjectResidencyTest#lazyCreateAndStableIntegerSlot",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectResidencyTest#strictScopeRejectsReturningTheProjection",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectResidencyTest#failedSwapLeavesOriginalProjectionResident",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectResidencyTest#exposedProjectionIsPinnedAndNeverSilentlyReplaced",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectResidencyTest#parentBitsRemainCanonicalAcrossProjectionRecreation",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectResidencyTest#rejectsUnknownFlagsAndIncompleteSwapConfiguration",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectResidencyTest#neverEvictsActiveSlotAndReportsUnrecoverableBudget",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectResidencyTest#lruDoesNotSpinWhenNoEvictionStrategyIsConfigured",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectResidencyTest#swapsToSecondaryAndRestoresWithoutChangingLogicalValue",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectResidencyTest#recreatesOnlyFromCanonicalParentState",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectResidencyTest#residencyAnnotationIsClassRetainedAndExplicit",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ObjectResidencyTest#exposedInstallIsPinnedFromTheMomentItEntersTheArena",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ObjectSlotIndexTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ObjectSlotIndexTest#contracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ObjectStreamContractTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ObjectStreamContractTest#allOperatorFamiliesPreserveTheirPublishedContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ObjectStreamTerminalContractTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ObjectStreamTerminalContractTest#standardTerminalsRemainOrderedBoundedAndLifecycleSafe",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3PhysicalStateSnapshotTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3PhysicalStateSnapshotTest#optionalNativeParity",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3PhysicalStateSnapshotTest#stateMaskSortedJavaOracle",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3PlaneGeometryTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3PlaneGeometryTest#theBandCoversTheVisiblePartAndKeepsItsBase",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3PlaneGeometryTest#theNativeRangeIsTheMeasuredOne",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3PlaneGeometryTest#childrenOfAPlaneAreRelativeToItsBase",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3PlaneGeometryTest#anInvisiblePlaneIsClampedOutOfSight",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3PlaneGeometryTest#aControlInsideTheBandHasNoBase",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3PlaneGeometryTest#rebasesAreRare",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3PrimitiveCollectionDifferentialTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3PrimitiveCollectionDifferentialTest#primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3PrimitiveCollectionDifferentialTest#primitiveListMatchesJdkAcrossGrowthCompactionSortingAndStreams",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3PrimitiveCollectionDifferentialTest#primitiveListSnapshotFilterFailureAndOwnerBoundStream",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3PrimitiveFilteredSequencesTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3PrimitiveFilteredSequencesTest#fullPrimitiveFilteredSequenceContract",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ProgressAdaptersPercentageTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ProgressAdaptersPercentageTest#exactLongPercentageAndCallbackContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ReadOnlyMapDefaultsTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ReadOnlyMapDefaultsTest#defaultMethodsAndDerivedRanges",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ReceivingRecoveryTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ReceivingRecoveryTest#restoredSequenceAndCurrentListAreOneOwnerThroughTheFactory",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ReceivingRecoveryTest#restoredDequeFactoryKeepsCurrentCallbackFailureAndNoOpSemantics",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ReceivingRecoveryTest#restoredFactoryKeepsCurrentSmallListSortInvalidation",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3RequiredExcludedMaskSelectorTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3RequiredExcludedMaskSelectorTest#exactRequiredExcludedSelectionAndSignalReuse",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ResidencyStateMaskTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ResidencyStateMaskTest#deterministicJavaStateMaskAndIndexContract",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3RowTreeTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3RowTreeTest#randomEditsMatchThePlainList",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3RowTreeTest#warmHeapGrowthAndSampler",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3RowTreeTest#lookupsRowsOfAndIteration",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ScrollGeometryTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ScrollGeometryTest#hitParts",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ScrollGeometryTest#scrollMetricsGiantModel",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ScrollGeometryTest#scrollMetricsSmallModel",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ScrollGeometryTest#scrollLayoutAdapter",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ScrollGeometryTest#mulDivRoundsHalfAwayFromZero",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ScrollGeometryTest#thumbGeometry",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3SdkOwnerFactoryTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3SdkOwnerFactoryTest#ownerFactoriesAndSortedViewContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3SdkRecoveryTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3SdkRecoveryTest#exactSdkRecoveryContract",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3SelectionEnumerationTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3SelectionEnumerationTest#everySmallSelectionInBothRepresentations",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SelectionEnumerationTest#seededMutationSequencesMatchIndependentList",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SelectionEnumerationTest#maximumLogicalCountWithTinyComplementOutput",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SelectionEnumerationTest#invalidMutationsDoNotChangeSelection",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SelectionEnumerationTest#adjacentExclusionsAndEmptyRangesKeepEndpoints",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SelectionEnumerationTest#alternatingHolesProduceSortedFreshOutput",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3SelectionShiftsTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3SelectionShiftsTest#test_deletedGapMergesAndInsertSplits",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SelectionShiftsTest#test_insertRemoveAgainstDenseOracle",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SelectionShiftsTest#test_overflowLeavesStateAndStorageIsReleased",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3SequenceContractTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3SequenceContractTest#linkedListAndDequeDifferential",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SequenceContractTest#listIteratorAlternatingMutations",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SequenceContractTest#treeSetViewsAndPolls",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SequenceContractTest#sublistAndReverseShareStructuralVersion",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SequenceContractTest#streamsRetainEncounterOrderAndSortedComparator",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SequenceContractTest#orderedSetSequenceOperations",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3SignalDimensionsTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3SignalDimensionsTest#compoundSignalContract",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3SignalMask32Test",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3SignalMask32Test#fullWidthMasksPreserveCompoundOrder",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3SignalOrderJUnitTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3SignalOrderJUnitTest#stableFilteredSignalOrderPreservesExactJavaSemantics",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3SlotArraysGrowTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3SlotArraysGrowTest#largeCapacitiesDoNotWrapAround",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SlotArraysGrowTest#sizingLoopTerminatesForTheLargestRequirement",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SlotArraysGrowTest#indexDoublingStopsAtTheLargestPowerOfTwo",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SlotArraysGrowTest#growthIsStrictlyIncreasingUpToTheCap",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SlotArraysGrowTest#smallCapacitiesFollowTheGeometricPolicy",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3SpanIndexTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3SpanIndexTest#compareAgainstSparseWidgetSpanOracle",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3SparseExtentsTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3SparseExtentsTest#measurementReplacesTheEstimateAndAnchoringFollowsTheDonorRules",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SparseExtentsTest#largeListStaysConsistentWithBinarySearchOnPrefixSums",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SparseExtentsTest#alignmentChoosesTheSmallestMoveForAuto",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SparseExtentsTest#randomOperationsAgreeWithLinearScanOracle",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SparseExtentsTest#oversizedRowsAndSmartAlignmentFollowTheDonorRules",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SparseExtentsTest#invalidArgumentsAreRejectedWithoutChangingState",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3SparseItemStoreTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3SparseItemStoreTest#stateMasksAndIdentity",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SparseItemStoreTest#putGetAndGrowth",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SparseItemStoreTest#insertAndRemoveShift",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SparseItemStoreTest#rangesTruncateClearAndIteration",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3SparseItemStoreTest#releaseOutsideKeepsWindowAndPinned",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3StateMaskHistogramTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3StateMaskHistogramTest#differentialAndMaskAlgebra",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3StoredRepresentativeTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3StoredRepresentativeTest#storedRepresentativeAndBulkComparatorAliases",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3StrictFilteredSequencedTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3StrictFilteredSequencedTest#strictSortedAndNavigableReversedViews",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3TombstoneReuseTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3TombstoneReuseTest#tombstoneReusePreservesPrimitiveSetMapContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3TreeCoverageTest",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#defensiveTopologyChecksHoldOutsideTheirCallers",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#aCorruptedSiblingChainIsDetected",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#bindRejectsInvalidIdsParentsAndCycles",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#subtreeRemovalRenumbersTheSurvivingParents",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#commitsValidateTheirHandles",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#wholesaleStateWritesTrackExpansionAndPresentation",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#aResidencyBufferPlansAndCommitsConveniently",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#expandedUnknownCountsContributeNoRows",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#projectionGuardsItsArguments",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#planValidatesItsWindowArrays",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#projectionOverflowGuardsHoldOutsideTheirCallers",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#insertsIntoUnknownCountsLeaveThemUnknown",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#coordinatesBeyondTheirParentCountStayInvisible",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#siblingShiftsRewriteOnlyMatchingKeys",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#coordinateRemovalValidatesItsRange",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#rebindingMovesAnExpandedSubtreeWithItsVisibleRows",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#viewportBudgetGuardsHoldOutsideTheirCallers",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeCoverageTest#unknownCountsAndAbsentParentsAnswerTheirContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3TreeMapEmptyLookupTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3TreeMapEmptyLookupTest#emptyComparatorLookupDoesNotAdmitThroughNaturalOrdering",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeMapEmptyLookupTest#emptyNaturalLookupsStillRejectNullAndNonComparable",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeMapEmptyLookupTest#populatedNaturalLookupStillInvokesComparison",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeMapEmptyLookupTest#emptyNaturalLookupsDoNotCompareEvenWhenComparisonThrows",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3TreeMapGetOrDefaultTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3TreeMapGetOrDefaultTest#nonnullValueDoesNotTriggerASecondComparison",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeMapGetOrDefaultTest#exceptionFromTheSecondSearchIsPropagatedWithIdentity",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeMapGetOrDefaultTest#lazyAndKeyOnlyExtensionsRetainTheirExistingSingleSearchBehavior",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeMapGetOrDefaultTest#ordinaryGetDoesNotDispatchThroughTheTwoSearchDefaultOperation",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeMapGetOrDefaultTest#eagerCallbacksAndResultsMatchJdkForAbsentNullAndNonnullValues",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3TreeOrderStatisticTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3TreeOrderStatisticTest#randomScriptsAtRandomDepthsMatchTheLinearWalk",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeOrderStatisticTest#hundredThousandMaterializedSiblingsMatchTheLinearWalk",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3TreeResidencyTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3TreeResidencyTest#expanderHintsGiveCollapsedParentsOneNonPaintChild",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeResidencyTest#entryAndOffsetBoundsAreEnforced",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeResidencyTest#entriesAreFoundByIdCoordinateAndPhysicalPlace",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeResidencyTest#theNativeSnapshotCarriesTheFourLanes",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeResidencyTest#physicalPathsRoundTrip",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeResidencyTest#inconsistentDirectAppendsAreRejected",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeResidencyTest#facadesBindToColdRowsButNeverToHints",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeResidencyTest#aReusedBufferForgetsThePreviousWindow",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeResidencyTest#theWindowIsTheAncestorClosurePlusThePaintRowsInPreorder",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3TreeTopologyTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3TreeTopologyTest#deepReleaseShiftsOnlySurvivingSiblingCoordinates",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeTopologyTest#boundedRemovalPermutationsMatchIndependentModelAndNativeSnapshot",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeTopologyTest#seededSiblingInsertRemovePreservesBranchesAndNativeColumns",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeTopologyTest#deepFlagQueryStopsAtSubtreeBoundary",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeTopologyTest#maximumCoordinateReleaseRetainsExistingBoundaryBehavior",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeTopologyTest#deepForgetPreservesLogicalCoordinateAndOtherBranch",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeTopologyTest#shiftGenerationAndUnknownParentFailureAreStable",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeTopologyTest#siblingOverflowRetainsIdOrderedPartialUpdates",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeTopologyTest#deepPruneRetainsParentAndRefreshesVisibleWeights",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3TreeWindowPlanTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3TreeWindowPlanTest#ancestorPathSurvivesWhileItsChildWindowSlides",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowPlanTest#seededWindowMovesOverARandomForestMatchTheNextWindowExactly",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowPlanTest#firstWindowInsertsEveryRowAndRetiresNothing",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowPlanTest#scrollingKeepsOverlapAndRetiresOnlyTheLeavingRows",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowPlanTest#removingAResidentRowKeepsTheOthers",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowPlanTest#removingAResidentParentRemovesItsSubtreeFromThePlan",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowPlanTest#insertBeforeResidentRowsReusesEveryRowItKeeps",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowPlanTest#retiringAParentDeletesOnlyTheParent",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3TreeWindowScenarioTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3TreeWindowScenarioTest#oversizedGeometryIsRejectedBeforeMutatingTreeWindow",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowScenarioTest#frozenSparseForestPermutationsMatchIndependentPreorder",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowScenarioTest#nativeOverscanPressureOraclePreservesVisibleAndCapacity",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowScenarioTest#hugeNativeScrollSelectionUsesActualLongRowOwner",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowScenarioTest#coldGapsAndLongOffsetsNeverMaterializeLogicalSiblings",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowScenarioTest#windowsAreFreshAfterExpansionRebindAndPruning",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowScenarioTest#deepWindowUnwindsWithoutRecursiveStackOrSiblingExpansion",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowScenarioTest#nativeTreeGeometryAutomaticallyAdmitsBoundedOverscan",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowScenarioTest#logicalGrowthCannotInvalidatePaintBudgetAfterLayout",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowScenarioTest#emptyUnknownAndInvalidWindowContractsSurvive",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3TreeWindowTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3TreeWindowTest#overscanPolicyKeepsAHeapReserve",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowTest#emptyModelsAndEmptyBodiesHaveNoVisibleRows",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowTest#materializedTopRowsFollowTheProjection",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowTest#rowsPastTheIntegerRangeUseAScaledBar",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowTest#ensureVisibleScrollsTheRowJustIntoView",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowTest#logicalRangeChangesClampTheTopRow",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowTest#paintWindowIsTheVisibleRowsAndTheOverscan",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowTest#constructionRejectsAMissingProjectionAndNegativeOverscan",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowTest#scrollBarProjectsTheLogicalRows",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowTest#invalidGeometryIsRejectedBeforeAnyChange",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowTest#topRowMovesOnlyWhenItChanges",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3TreeWindowTest#geometryChangesCountAsGenerations",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ViewportCollectionsTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ViewportCollectionsTest#siblingForest",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ViewportCollectionsTest#bitLanesInsertRemoveShift",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ViewportCollectionsTest#bitLanesRangesAndScans",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ViewportCollectionsTest#growthRules",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ViewportCollectionsTest#bitLanesFullIntRange",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ViewportCollectionsTest#sparseExtentsArguments",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ViewportCollectionsTest#bitLanesArgumentsAndEmptyLanes",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ViewportReceivingTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ViewportReceivingTest#rowGeometryAndProjection",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3ViewportReceivingTest#residentWindowBounds",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3WindowEdgesTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3WindowEdgesTest#complementConvertsToBits",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowEdgesTest#remainingDecisionEdges",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowEdgesTest#planeGeometryBands",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowEdgesTest#rowWindowPlanEdges",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowEdgesTest#rangesOnlyPolicyNeverSwitches",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowEdgesTest#eagerPolicyBitsForm",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowEdgesTest#projectionRowAndResidentKeys",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowEdgesTest#topologyClearAndOverflow",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3WindowPlanTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3WindowPlanTest#logicalInsertsAndRemovesKeepTheWindowAligned",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowPlanTest#movesTouchOnlyTheRowsThatEnterOrLeave",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowPlanTest#randomMovesKeepTheWindowExact",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3WindowPlannerTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3WindowPlannerTest#uniformGeometryAndRepaintLock",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowPlannerTest#plannerWindowAndGenerations",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowPlannerTest#ensureColumnVisibleAndRelayout",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowPlannerTest#leftToRightWindow",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowPlannerTest#emptyAndInvalidWindows",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowPlannerTest#columnDirectory",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowPlannerTest#rightToLeftWindow",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3WindowRuntimeRowWindowTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#collapseAndReopenRestoreAnchorAndOrdinaryOverscan",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#defaultViewportDoesNotPaintBeforeLayout",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#nonemptyWindowsMatchIndependentClippedIntervalOracle",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#navigationAndModelEditsStayEmptyWhileCollapsed",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#emptyViewportSuppressesOverscanAtStartMiddleAndTail",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#flatPlannerRetainsBoundedNonemptyWindow",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#flatPlannerUsesEmptySharedWindowForZeroHeightGeometry",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#emptyModelRefillRetainsRequestedVisibleCapacity",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#queriesAndRejectedUpdatesPreserveWindowState",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#collapsedLongExtremaRemainEmptyWithoutOverflow",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3WindowRuntimeTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3WindowRuntimeTest#solvePixelsPoliciesAndFixedPoint",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowRuntimeTest#solveRowsPoliciesAndEdges",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowRuntimeTest#rowWindowEdges",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowRuntimeTest#originAndDirtyPlanes",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3WindowRuntimeTest#selectionEdges",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3WrapperConvergenceTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3WrapperConvergenceTest#strictReadOnlyListIterationAndRetainedFailureContracts",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ZeroMaskArrayFastPathTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ZeroMaskArrayFastPathTest#noOpWindowAndPrimitiveMaskCompactionStayContractIdentical",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.M3ZeroSlotCapacityTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3ZeroSlotCapacityTest#primitiveZeroKeyIsNotAProbeSlot",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.SegmentedLaneBulkContractTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.SegmentedLaneBulkContractTest#intCopiesAndImportsMatchFlatArrays",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.SegmentedLaneBulkContractTest#longCopiesMatchArraycopyAcrossBothOverlapDirections",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.SegmentedLaneBulkContractTest#sparseRowsRetainAscendingSlotAndGenerationSemantics",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.SegmentedLaneBulkContractTest#invalidRangesAreRejectedBeforeWriting",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.SegmentedLaneBulkContractTest#sparseZeroPropagationAndExtremeEndpointsDoNotGrowHoles",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.SegmentedLaneBulkContractTest#bitmapRankSelectAndTraversalMatchBitSet",
+          "status": "pass"
+        }
+      ]
+    },
+    {
+      "suite": "com.m3.collections.SegmentedPrimitiveStorageTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.SegmentedPrimitiveStorageTest#addressRoundTripsAllBoundaries",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.SegmentedPrimitiveStorageTest#multiLaneStoreDoesNotMoveOtherHandlesOnRemoval",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.SegmentedPrimitiveStorageTest#linkedListKeepsOrderAcrossStableSlotReuse",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.SegmentedPrimitiveStorageTest#leanFactoryExposesStorageWithoutChoosingSemantics",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.SegmentedPrimitiveStorageTest#longIntAndBitLanesAllocateOnlyTouchedPaths",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.SegmentedPrimitiveStorageTest#allocatorRejectsStaleHandlesAfterReuse",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.SegmentedPrimitiveStorageTest#segmentedArenaCrossesLeafBoundaryWithoutCopyingExistingOffsets",
+          "status": "pass"
+        }
+      ]
+    }
+  ],
+  "focusedRunSuites": [
+    {
+      "suite": "com.m3.collections.M3FootprintContractTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "id": "com.m3.collections.M3FootprintContractTest#weakSecondHashFailureLeavesAnUsableEmptyOwner",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FootprintContractTest#emptyHashLookupsStillEvaluateCallbacksAndFirstInsertRecovers",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FootprintContractTest#mapViewsCreatedWhileEmptyRemainBackedAndFailFast",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FootprintContractTest#representableAvlHeightFitsSignedByteEvenDuringInsertion",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FootprintContractTest#treeEmptyLookupSkipsComparatorAndStillRejectsNaturalNull",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FootprintContractTest#separateEmptyOwnersNeverShareWritableSlots",
+          "status": "pass"
+        },
+        {
+          "id": "com.m3.collections.M3FootprintContractTest#listAndSetViewsWorkAcrossFirstInsertionClearAndReuse",
+          "status": "pass"
+        }
+      ]
+    }
+  ],
+  "reconciledCases": [
+    {
+      "id": "com.m3.collections.M3AdaptiveEnumLongMapTest#foreignEnumKeysAreRejectedLikeJdkInBothModes",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3AdaptiveEnumLongMapTest#modeTransitionsAndOrdinalOrderInSparseMode",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3AdaptiveEnumLongMapTest#narrowEnumIsDenseFromTheStartAndEdgeContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3AdaptiveEnumLongMapTest#retainsOnlyTheActiveBackingAndNoKeyReferences",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3AdaptiveEnumLongMapTest#wideEnumMatchesJdkAcrossMutationsAndModes",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ArrayListRemoveIfTest#frozenBaselineAndJdkContract",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BagRankIndexTest#rankSelectRangesStableTiesAndNativeMasks",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BitLane28FenwickTest#indexedRankSelectMatchesIndependentOrderedSetOracle",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BitLane28FenwickTest#repeatedWriteNoopAndInvalidBoundsPreserveBitsAndCounts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BitLanesTest#test_blockCacheReservesEvictsLeastRecentAndProtectsCurrentFrame",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BitLanesTest#test_checkAll10MillionRowsIsWordWise",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BitLanesTest#test_hybridSelectionDifferentialAcrossRepresentationSwitches",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BitLanesTest#test_randomDifferentialAgainstBooleanRows",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BitLanesTest#test_selection10MillionRowsTimingsAndCutover",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BitLanesTest#test_untouchedLaneAllocatesNothing",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BlockCacheTest#clockRebaseKeepsOrder",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BlockCacheTest#constructionAndShape",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BlockCacheTest#evictionByFrameAndEvictor",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BlockCacheTest#evictionPrefersOldestStamp",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BlockCacheTest#findUsesLastHitAndSkipsEmpty",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BlockCacheTest#invalidateByParentAndAll",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BlockCacheTest#lanesAndBounds",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3BoundedFilteredNavigationTest#boundedSetAndMapDifferential",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ColumnarLanesTest#boundsAnswerDefaultsAndWritesAreRefused",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ColumnarLanesTest#lanesExistOnlyForValuesThatAreNotTheDefault",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ColumnarLanesTest#seededScriptsAnswerLikeAMapOfCells",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentBitSetClaimTest#atomicClaimAndTailWordContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentContractTest#atomicHashAndTreeCompute",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentContractTest#blockingDequeDifferential",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentContractTest#blockingWakeupTimeoutAndInterrupt",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentContractTest#concurrentStreamsUseSnapshotSizeAndSelfToStringTerminates",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentContractTest#drainFailureRetainsUndeliveredElement",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentContractTest#lockedRangeAndSetViews",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentContractTest#mpmcBlockingDequeHasNoLossOrDuplicates",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentContractTest#mpmcRendezvousHasNoLossOrDuplicates",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentContractTest#mpmcTransferHasNoLossOrDuplicates",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentContractTest#synchronousQueueHasNoCollectionCapacity",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentContractTest#transferBufferedDifferentialAndIteratorRecycling",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentContractTest#transferWaitersCancellationAndTimeout",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentLaneContractTest#atomicValuesWrapAndZeroWritesKeepPublicationLocations",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentLaneContractTest#concurrentCollectionStreamsPreserveCapturedSnapshotsAndIndexOrder",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentLaneContractTest#intAtomicBoundaryAndSparsePreparation",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentLaneContractTest#parallelStreamsSplitFixedRangesWithoutLosingOrDuplicatingSlots",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ConcurrentLaneContractTest#racingPublicationAndAtomicAddsLoseNoUpdates",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3CountedBagTest#sourceSealedDifferentialContract",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3DequeSpanCopyTest#exportsEveryHeadAndSizeWithoutMutationOrAliasing",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3DequeSpanCopyTest#growsAtEitherEndFromEveryHeadAndPreservesIteratorEpochs",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3EntryFacadeCacheTest#compatibilityHookKeepsCallbackDemandAndExceptionIdentity",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3EntryFacadeCacheTest#identityKeyingAllowsNullAndEqualButDistinctKeys",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3EntryFacadeCacheTest#lfuPrefersHotEntriesAndBreaksTiesByRecency",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3EntryFacadeCacheTest#strongMapEntryFacadesAreFreshLiveCallerProjections",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3EntryFacadeCacheTest#treeMapKeepsFreshLiveFacadesAndDetachedImmutableSnapshots",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3EntryFacadeCacheTest#weakKeyMapHasFreshProjectionsWithoutStrongOwnerRetention",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3EnumLongMapTest#foreignEnumKeysAreRejectedLikeJdk",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3EnumLongMapTest#narrowEnumAndEdgeContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3EnumLongMapTest#retainsOnlyPrimitiveLanesAndTheSharedUniverse",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3EnumLongMapTest#wideEnumMatchesJdkAcrossMutationsAndOrdinalOrder",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3EnumSetTest#foreignEnumConstantsAreRejectedLikeJdk",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3EnumSetTest#narrowEnumEdgeContractsMatchJdk",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3EnumSetTest#retainsOnlyPresenceWordsAndTheSharedUniverse",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3EnumSetTest#wideEnumMatchesJdkAcrossMutationsAndBulkOperations",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FactoryContractTest#allFactoryFamiliesAreUsable",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FactoryContractTest#immutableAndJdkUtilityWrappers",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredDequeDispatchTest#insertionDispatchAdmissionAndLiveArrayEffects",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredDequesTest#existingPackedM3LinkedListIsTheOnlyPayloadOwner",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredDequesTest#liveFilteredDequeContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredListsDeepCompositionTest#deepChainShortCircuitAndSortedListInterop",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredListsReadonlyDepthTest#nestedReadOnlyNeverRecursesOrLeaksWriteAccess",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredListsSortedInteropTest#readonlyEmptyAndNestedReversedMutatorsRefuse",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredListsSortedInteropTest#sourceDefinedReverseOrderAndLiveVisibility",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredListsTest#linearTraversalEvidence",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredListsTest#mutationAndNullEdges",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredListsTest#oracleHistories",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredMergedSequencedTest#mergedReadOnlyReverseAndSplitContractsCompose",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredNavigableSetRangeTest#comparatorNullableBackingAndBoundedNavigation",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredNavigableSetTest#comparatorEquivalentDifferentObjectsRemainMembers",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredNavigableSetTest#preservesOrderingRangeSemanticsAndLiveBackingChanges",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredNavigableSetTest#readOnlyViewsRejectAllMutatorsIncludingIteratorRemove",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredNavigableSetTest#reversedComparatorAndEmptyResultsKeepNavigableContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredNavigationReconciliationTest#filteredSortedContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredNavigationReconciliationTest#maskAliasesRefuseBeforeEitherBackendWrites",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredSetIdentityTest#preservesBackingOwnedIdentityForContainsAndRemoval",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredSplitsMaskSpansTest#allNativeBackendsAreRequiredByTheFullLane",
+      "status": "skip"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredSplitsMaskSpansTest#filteredRecursiveSplits",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredSplitsMaskSpansTest#maskSpanCheckedJniOracle",
+      "status": "skip"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredSplitsMaskSpansTest#maskSpanJavaOracle",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredViewsTest#collectionAndSet",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredViewsTest#navigableMap",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredViewsTest#navigableSet",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FilteredViewsTest#randomizedDivergence",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FootprintContractTest#emptyHashLookupsStillEvaluateCallbacksAndFirstInsertRecovers",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FootprintContractTest#listAndSetViewsWorkAcrossFirstInsertionClearAndReuse",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FootprintContractTest#mapViewsCreatedWhileEmptyRemainBackedAndFailFast",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FootprintContractTest#representableAvlHeightFitsSignedByteEvenDuringInsertion",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FootprintContractTest#separateEmptyOwnersNeverShareWritableSlots",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FootprintContractTest#treeEmptyLookupSkipsComparatorAndStillRejectsNaturalNull",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3FootprintContractTest#weakSecondHashFailureLeavesAnUsableEmptyOwner",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3GenericArrayListTest#objectArrayListAndIndexedSnapshot",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3GenericReferenceOwnersTest#jdk21ReferenceOwnerDifferential",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3GridSelectionsTest#cellSelectionCountsMatchArrayList",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3GridSelectionsTest#positionMarkedSelectionEdges",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3GridSelectionsTest#positionMarkedSelectionMatchesArrayList",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IndexMaskCompactorTest#stableMaskSelectionContract",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IndexMaskWindowRecoveryTest#contract",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IndexMaskWindowTest#sortedAndFilteredWindowContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IndexPathMasksTest#maskedIndexPathsPreserveDetachedOrderAndBounds",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IndexPathRankTest#agreesWithOriginalJavaMaskSelector",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IndexPathRankTest#boundedDeterministicDifferential",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IndexedFilterSortFusionTest#fusedMaskAndIndexOrder",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IndexedMultiValueOccurrenceTest#differential",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IndexedReadOnlyNoopTest#strictlyReadOnlySnapshots",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IndexedSetAlgebraSeekTest#boundedNativeOwnerNavigation",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IndexedSnapshotPositionTest#javaAndOptionalNativePositions",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IndexedTableReentrantSortTest#comparatorCannotPublishStalePhysicalIndexes",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IndexedTableTest#arraySlotRowColumnMasksAndState",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IntLanesTest#hashSetEdgeContractsAndFailFast",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IntLanesTest#hashSetMatchesJdkAcrossChurnIncludingZeroAndRehash",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IntLanesTest#intIntMapEdgeContractsAndFailFast",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IntLanesTest#intIntMapMatchesJdkAcrossChurnIncludingZeroKey",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IntLanesTest#intLanesRetainOnlyPrimitiveFields",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IntLanesTest#priorityQueueMatchesJdkHeadContentsAndRemoval",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IntLongHashMapTest#edgeContractsFailFastAndSizing",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3IntLongHashMapTest#matchesJdkAcrossChurnIncludingZeroKeyAndRehash",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkCollectionDifferentialTest#blockedProducerInterruptionLeavesNoPhantomElement",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkCollectionDifferentialTest#boundedDequeWrapDrainAndTimedOperationsMatchJdk",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkCollectionDifferentialTest#comparatorEquivalentKeysAndNestedBoundsMatchTreeMap",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkCollectionDifferentialTest#everySortedSplitRetainsCustomComparatorAndEncounterOrder",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkCollectionDifferentialTest#lateBindingTraversalsFollowListSetAndMapViews",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkCollectionDifferentialTest#lockedMapAtomicCallbacksLoseNoUpdates",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkCollectionDifferentialTest#reversedSublistAndDefaultListMutationsMatchLinkedList",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkCollectionDifferentialTest#sequencedNullAndAccessOrderOperationsMatchLinkedHashMap",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkCollectionDifferentialTest#transferAcknowledgementTimeoutAndCancellationMatchJdk",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkCollectionDifferentialTest#zeroCapacityRendezvousPreservesSynchronousQueueContract",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#arrayDequeMatchesJdkOrderAndOccurrenceRemoval",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#arrayListMatchesJdkAcrossDeterministicMutationSequence",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#duplicateSetAddAndMapValueReplacementAreNonStructural",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#hashMapMatchesJdkAcrossReplacementDeletionAndRehash",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#hashSetMatchesJdkAcrossCollisionsDeletionAndRehash",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#iteratorsAreFailFastOnStructuralMutation",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3JdkShapedPrimitiveCollectionsTest#priorityQueueMatchesJdkHeadContentsAndRemoval",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3KeyedParallelismAdmissionTest#failedFullLaneStillDeliversItsFailureAndCancelsQueuedWork",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LazyObserverRegressionTest#beforeTouchObserverCannotRetargetRecycledSlot",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LazyObserverRegressionTest#deferredKeysPreserveNullFailureCancellationAndViewOrder",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LazyObserverRegressionTest#failureObserversCannotReplaceProviderExceptionOrPoisonRetry",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LazyObserverRegressionTest#rangeAndCachedValueObserversShareMutationGuard",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LazyObserverRegressionTest#successfulValueRemainsCoherentWhenCompletionObserverThrows",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LazyTreeMapTest#actualPackedTreeProviderContract",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LinkedIndexSplitTest#indexedLinksWithoutElementBuffers",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListDiffTest#randomSnapshots",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListDiffTest#runsAndTargets",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListModelLazyTest#eagerModelRejectsLazyOperations",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListModelLazyTest#lazySlotsAndWidths",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListModelLazyTest#prefetchEpochExhaustion",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListModelLazyTest#searchAndSelectionBounds",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListModelTest#invalidArgumentsAreRejectedWithoutChangingState",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListModelTest#largeListKeepsItemsSelectionAndWidthConsistent",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListModelTest#randomOperationsAgreeWithNaiveOracle",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListModelTest#replacingTheMaximumWithEqualWidthKeepsTheIndexFresh",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListModelTest#topIndexStaysInsideTheScrollableRange",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListModelTest#widestIndexRebuildsOnlyWhenTheLastMaximumLeavesAndNeverRemeasures",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListWidthTest#aUniformLaneMeasuresOneSlotWithoutMaterializing",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListWidthTest#invalidArgumentsAreRefused",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListWidthTest#removingTheWidestMarksTheIndexStale",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ListWidthTest#seededScriptsAnswerLikeAPlainList",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongAddressBoundedTest#preservesOffsetsDuplicatesMasksAndPartialFailure",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongAddressKernelTest#directAddressAndBatchParity",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongArrayDequeTest#callbackFailurePreservesThrowingValueAndUnreadSuffixAcrossRingWrap",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongArrayDequeTest#primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongArrayDequeTest#queueAndIndexedViewsAreJdkShapedAliases",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongArrayListTest#boundsOwnershipAndStackExceptions",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongArrayListTest#callbackFailurePreservesThrowingValueAndUnreadSuffix",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongArrayListTest#directStreamsRetainOwnerAcrossStorageRelocation",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongArrayListTest#mixedOperationsMatchJdkValueOrder",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongArrayListTest#primitiveStorageAndCapacityChecksStayBounded",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongArrayListTest#sortDedupAndSearchPreserveSignedLongSemantics",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongArrayListTest#structuralMutationsFailFastAndStackIsJdkShapedRemoval",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongCompositeLateBindTest#compositeSpliteratorsBindOnFirstTraversal",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongDagJUnitTest#primitiveDAGAndVirtualCollectorContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongFilteredViewContractTest#composableAndReadOnly",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongFilteredViewContractTest#differentialSeeded",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongFilteredViewContractTest#exceptionBoundaries",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongFilteredViewContractTest#fusedNestedPredicatesKeepEvaluationOrder",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongFilteredViewContractTest#lateBindingStreamsAndNoSizeScan",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongIndexProjectionMaskOffsetTest#composableOffsetSortedAndNativeMaskContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongLinkedHashSetTest#edgeContractsFailFastAndSizing",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongLinkedHashSetTest#matchesJdkSequencedSetAcrossChurnIncludingMovesAndRehash",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongLinkedHashSetTest#retainsOnlyPrimitiveLanes",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongLongLinkedHashMapTest#edgeContractsFailFastAndSizing",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongLongLinkedHashMapTest#matchesJdkSequencedMapAcrossChurnIncludingMovesAndRehash",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongLongLinkedHashMapTest#retainsOnlyPrimitiveLanes",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongLongTreeMapTest#edgeContractsFailFastGrowthAndCompaction",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongLongTreeMapTest#matchesJdkNavigableMapAcrossChurnIncludingBatchesAndPolls",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongLongTreeMapTest#retainsOnlyPrimitiveLanes",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongRangeSetTest#arrayRangeOperationsDifferential",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongRankIndexTest#freezesLiveFilteredInputWithoutMutatingSource",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongRankIndexTest#randomizedBoundsAndOptionalBatchParity",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongRankIndexTest#rejectsInvalidRangesAndDoesNotExposeRetainedArray",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongSortedAlgebraTest#seededSortedSetAlgebraAndFilterComposition",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongStateArrayTest#fullWordMasksAndExistingNativeSelectorStayInParity",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongStateArrayTest#onlyOneValueOwnerAndOneAlignedMetadataLaneAreRetained",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongStateArrayTest#randomizedMutationsKeepStateFlagsAligned",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongStateArrayTest#sortedAndFilteredViewsPreserveDuplicateOccurrences",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongStateArrayTest#stateMaskCompactionUsesOneMutationEpochAndPreservesAlignment",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongStateArrayTest#validationAndGenerationAreNonmutatingOnRefusal",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongTreeSetTest#edgeContractsFailFastAndSizing",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongTreeSetTest#filterInPlaceCommitsPriorRejectionsAndKeepsTheThrowingSuffix",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongTreeSetTest#growthSplitsPagesAndRemovalMergesAndTrimsThem",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongTreeSetTest#matchesJdkNavigableSetAcrossChurnIncludingViewsAndFilters",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongTreeSetTest#matchesJdkNavigableSetWithTinyPages",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongTreeSetTest#retainsOnlyPrimitiveLanes",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3LongTreeSetTest#sortedViewsAndUnionsWorkOverTheOwnerAsBackingSet",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#backedViewsAndCallbacks(String, Supplier, Supplier)[1]",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#backedViewsAndCallbacks(String, Supplier, Supplier)[2]",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#backedViewsAndCallbacks(String, Supplier, Supplier)[3]",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#backedViewsAndCallbacks(String, Supplier, Supplier)[4]",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#collisionChainsRecyclingAndNull",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#comparatorNullKeysAndEquality",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#differential(String, Supplier, Supplier)[1]",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#differential(String, Supplier, Supplier)[2]",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#differential(String, Supplier, Supplier)[3]",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#differential(String, Supplier, Supplier)[4]",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#entryAndKeyViewsRemoveNullValuedMappings",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#iteratorDeletionPreservesAllTreeSuccessors",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#nestedRangeExceptionContractsMatchTreeMap",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#sequencedAndReversedHashViews",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#sequencedEndpointsUseLiveAndDetachedEntriesCorrectly",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#treeRangesNavigationAndMutation",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#treeRotationsAndEveryDeletionOrder",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MapContractTest#weakCleanupIsDeterministicAndDoesNotDeleteReusedKeys",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MaskAllSelectionReceiverTest#everyMaskAndDefensiveResultIsCorrect",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3MutableFilteredViewsTest#liveMutableNavigableContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3NativeIndexRangeTest#snapshotContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3NetBeansGatherSpansTest#invalidAddressesPublishOnlyTheValidPrefix",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3NetBeansGatherSpansTest#oneTwoAndManySpansPreserveOrderAndOffsets",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3NoRetainedStructuralEntryTest#onlySlotMapDefinesTheExplicitMapEntryCompatibilityProjection",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3NoRetainedStructuralEntryTest#returnedMapEntriesAreFreshAndNeverRetainedByPackedMapStorage",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3NoRetainedStructuralEntryTest#storageRootsAndNestedOwnersHaveNoRetainedEntryNodeBucketOrCellFields",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectCountsTest#callbacksAndCancellationRetainExceptionIdentityAndRefuseReentrancy",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectCountsTest#countOverflowAndInvalidInputLeaveCountsFlagsAndOrderUnchanged",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectCountsTest#differentialCountsNullCollisionsAndSlotReuse",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectCountsTest#distinctIteratorRemovalClearsFlagsAndRecycledSlots",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectCountsTest#flagWindowsAgreeWithScalarOracleForAllBitsOffsetsAndBothDirections",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectCountsTest#primitiveColumnsShareKeySlotsWithoutCountBoxesOrRetainedEntries",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectIdentityTest#identityMapEdgeContractsRehashAndFailFast",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectIdentityTest#identityMapMatchesJdkAcrossChurnWithNullKeyAndValues",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectIdentityTest#identityOwnersRetainOnlyFlatLanes",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectIdentityTest#identitySetMatchesJdkAcrossChurn",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectPhysicalMaskTest#contracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectRangeMapTest#referenceRangesAndFullWidthMasks",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyBorrowTest#ExternalAndUnprovenOwnersNeverFastRetire",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyBorrowTest#asynchronousBorrowKeepsEventOwnerUntilAck",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyBorrowTest#callbackExceptionAndReentrantReleasePreserveCount",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyBorrowTest#independentBorrowersPreventEarlyReclamationAndStaleReuse",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyRuntimePressureTest#targetUsesTheActualRunningJvmHeap",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyTest#exposedInstallIsPinnedFromTheMomentItEntersTheArena",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyTest#exposedProjectionIsPinnedAndNeverSilentlyReplaced",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyTest#failedSwapLeavesOriginalProjectionResident",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyTest#lazyCreateAndStableIntegerSlot",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyTest#lruDoesNotSpinWhenNoEvictionStrategyIsConfigured",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyTest#neverEvictsActiveSlotAndReportsUnrecoverableBudget",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyTest#parentBitsRemainCanonicalAcrossProjectionRecreation",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyTest#recreatesOnlyFromCanonicalParentState",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyTest#rejectsUnknownFlagsAndIncompleteSwapConfiguration",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyTest#residencyAnnotationIsClassRetainedAndExplicit",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyTest#strictScopeRejectsReturningTheProjection",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectResidencyTest#swapsToSecondaryAndRestoresWithoutChangingLogicalValue",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectSlotIndexTest#contracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectStreamContractTest#allOperatorFamiliesPreserveTheirPublishedContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ObjectStreamTerminalContractTest#standardTerminalsRemainOrderedBoundedAndLifecycleSafe",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3PhysicalStateSnapshotTest#optionalNativeParity",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3PhysicalStateSnapshotTest#stateMaskSortedJavaOracle",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3PlaneGeometryTest#aControlInsideTheBandHasNoBase",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3PlaneGeometryTest#anInvisiblePlaneIsClampedOutOfSight",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3PlaneGeometryTest#childrenOfAPlaneAreRelativeToItsBase",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3PlaneGeometryTest#rebasesAreRare",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3PlaneGeometryTest#theBandCoversTheVisiblePartAndKeepsItsBase",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3PlaneGeometryTest#theNativeRangeIsTheMeasuredOne",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3PrimitiveCollectionDifferentialTest#primitiveDequeMatchesJdkAcrossWrapGrowthReuseAndStreams",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3PrimitiveCollectionDifferentialTest#primitiveListMatchesJdkAcrossGrowthCompactionSortingAndStreams",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3PrimitiveCollectionDifferentialTest#primitiveListSnapshotFilterFailureAndOwnerBoundStream",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3PrimitiveFilteredSequencesTest#fullPrimitiveFilteredSequenceContract",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ProgressAdaptersPercentageTest#exactLongPercentageAndCallbackContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ReadOnlyMapDefaultsTest#defaultMethodsAndDerivedRanges",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ReceivingRecoveryTest#restoredDequeFactoryKeepsCurrentCallbackFailureAndNoOpSemantics",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ReceivingRecoveryTest#restoredFactoryKeepsCurrentSmallListSortInvalidation",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ReceivingRecoveryTest#restoredSequenceAndCurrentListAreOneOwnerThroughTheFactory",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3RequiredExcludedMaskSelectorTest#exactRequiredExcludedSelectionAndSignalReuse",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ResidencyStateMaskTest#deterministicJavaStateMaskAndIndexContract",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3RowTreeTest#lookupsRowsOfAndIteration",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3RowTreeTest#randomEditsMatchThePlainList",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3RowTreeTest#warmHeapGrowthAndSampler",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ScrollGeometryTest#hitParts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ScrollGeometryTest#mulDivRoundsHalfAwayFromZero",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ScrollGeometryTest#scrollLayoutAdapter",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ScrollGeometryTest#scrollMetricsGiantModel",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ScrollGeometryTest#scrollMetricsSmallModel",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ScrollGeometryTest#thumbGeometry",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SdkOwnerFactoryTest#ownerFactoriesAndSortedViewContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SdkRecoveryTest#exactSdkRecoveryContract",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SelectionEnumerationTest#adjacentExclusionsAndEmptyRangesKeepEndpoints",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SelectionEnumerationTest#alternatingHolesProduceSortedFreshOutput",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SelectionEnumerationTest#everySmallSelectionInBothRepresentations",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SelectionEnumerationTest#invalidMutationsDoNotChangeSelection",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SelectionEnumerationTest#maximumLogicalCountWithTinyComplementOutput",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SelectionEnumerationTest#seededMutationSequencesMatchIndependentList",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SelectionShiftsTest#test_deletedGapMergesAndInsertSplits",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SelectionShiftsTest#test_insertRemoveAgainstDenseOracle",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SelectionShiftsTest#test_overflowLeavesStateAndStorageIsReleased",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SequenceContractTest#linkedListAndDequeDifferential",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SequenceContractTest#listIteratorAlternatingMutations",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SequenceContractTest#orderedSetSequenceOperations",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SequenceContractTest#streamsRetainEncounterOrderAndSortedComparator",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SequenceContractTest#sublistAndReverseShareStructuralVersion",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SequenceContractTest#treeSetViewsAndPolls",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SignalDimensionsTest#compoundSignalContract",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SignalMask32Test#fullWidthMasksPreserveCompoundOrder",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SignalOrderJUnitTest#stableFilteredSignalOrderPreservesExactJavaSemantics",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SlotArraysGrowTest#growthIsStrictlyIncreasingUpToTheCap",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SlotArraysGrowTest#indexDoublingStopsAtTheLargestPowerOfTwo",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SlotArraysGrowTest#largeCapacitiesDoNotWrapAround",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SlotArraysGrowTest#sizingLoopTerminatesForTheLargestRequirement",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SlotArraysGrowTest#smallCapacitiesFollowTheGeometricPolicy",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SpanIndexTest#compareAgainstSparseWidgetSpanOracle",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SparseExtentsTest#alignmentChoosesTheSmallestMoveForAuto",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SparseExtentsTest#invalidArgumentsAreRejectedWithoutChangingState",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SparseExtentsTest#largeListStaysConsistentWithBinarySearchOnPrefixSums",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SparseExtentsTest#measurementReplacesTheEstimateAndAnchoringFollowsTheDonorRules",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SparseExtentsTest#oversizedRowsAndSmartAlignmentFollowTheDonorRules",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SparseExtentsTest#randomOperationsAgreeWithLinearScanOracle",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SparseItemStoreTest#insertAndRemoveShift",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SparseItemStoreTest#putGetAndGrowth",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SparseItemStoreTest#rangesTruncateClearAndIteration",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SparseItemStoreTest#releaseOutsideKeepsWindowAndPinned",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3SparseItemStoreTest#stateMasksAndIdentity",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3StateMaskHistogramTest#differentialAndMaskAlgebra",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3StoredRepresentativeTest#storedRepresentativeAndBulkComparatorAliases",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3StrictFilteredSequencedTest#strictSortedAndNavigableReversedViews",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TombstoneReuseTest#tombstoneReusePreservesPrimitiveSetMapContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#aCorruptedSiblingChainIsDetected",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#aResidencyBufferPlansAndCommitsConveniently",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#bindRejectsInvalidIdsParentsAndCycles",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#commitsValidateTheirHandles",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#coordinateRemovalValidatesItsRange",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#coordinatesBeyondTheirParentCountStayInvisible",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#defensiveTopologyChecksHoldOutsideTheirCallers",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#expandedUnknownCountsContributeNoRows",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#insertsIntoUnknownCountsLeaveThemUnknown",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#planValidatesItsWindowArrays",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#projectionGuardsItsArguments",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#projectionOverflowGuardsHoldOutsideTheirCallers",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#rebindingMovesAnExpandedSubtreeWithItsVisibleRows",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#siblingShiftsRewriteOnlyMatchingKeys",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#subtreeRemovalRenumbersTheSurvivingParents",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#unknownCountsAndAbsentParentsAnswerTheirContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#viewportBudgetGuardsHoldOutsideTheirCallers",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeCoverageTest#wholesaleStateWritesTrackExpansionAndPresentation",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeMapEmptyLookupTest#emptyComparatorLookupDoesNotAdmitThroughNaturalOrdering",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeMapEmptyLookupTest#emptyNaturalLookupsDoNotCompareEvenWhenComparisonThrows",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeMapEmptyLookupTest#emptyNaturalLookupsStillRejectNullAndNonComparable",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeMapEmptyLookupTest#populatedNaturalLookupStillInvokesComparison",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeMapGetOrDefaultTest#eagerCallbacksAndResultsMatchJdkForAbsentNullAndNonnullValues",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeMapGetOrDefaultTest#exceptionFromTheSecondSearchIsPropagatedWithIdentity",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeMapGetOrDefaultTest#lazyAndKeyOnlyExtensionsRetainTheirExistingSingleSearchBehavior",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeMapGetOrDefaultTest#nonnullValueDoesNotTriggerASecondComparison",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeMapGetOrDefaultTest#ordinaryGetDoesNotDispatchThroughTheTwoSearchDefaultOperation",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeOrderStatisticTest#hundredThousandMaterializedSiblingsMatchTheLinearWalk",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeOrderStatisticTest#randomScriptsAtRandomDepthsMatchTheLinearWalk",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeResidencyTest#aReusedBufferForgetsThePreviousWindow",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeResidencyTest#entriesAreFoundByIdCoordinateAndPhysicalPlace",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeResidencyTest#entryAndOffsetBoundsAreEnforced",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeResidencyTest#expanderHintsGiveCollapsedParentsOneNonPaintChild",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeResidencyTest#facadesBindToColdRowsButNeverToHints",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeResidencyTest#inconsistentDirectAppendsAreRejected",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeResidencyTest#physicalPathsRoundTrip",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeResidencyTest#theNativeSnapshotCarriesTheFourLanes",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeResidencyTest#theWindowIsTheAncestorClosurePlusThePaintRowsInPreorder",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeTopologyTest#boundedRemovalPermutationsMatchIndependentModelAndNativeSnapshot",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeTopologyTest#deepFlagQueryStopsAtSubtreeBoundary",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeTopologyTest#deepForgetPreservesLogicalCoordinateAndOtherBranch",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeTopologyTest#deepPruneRetainsParentAndRefreshesVisibleWeights",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeTopologyTest#deepReleaseShiftsOnlySurvivingSiblingCoordinates",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeTopologyTest#maximumCoordinateReleaseRetainsExistingBoundaryBehavior",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeTopologyTest#seededSiblingInsertRemovePreservesBranchesAndNativeColumns",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeTopologyTest#shiftGenerationAndUnknownParentFailureAreStable",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeTopologyTest#siblingOverflowRetainsIdOrderedPartialUpdates",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowPlanTest#ancestorPathSurvivesWhileItsChildWindowSlides",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowPlanTest#firstWindowInsertsEveryRowAndRetiresNothing",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowPlanTest#insertBeforeResidentRowsReusesEveryRowItKeeps",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowPlanTest#removingAResidentParentRemovesItsSubtreeFromThePlan",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowPlanTest#removingAResidentRowKeepsTheOthers",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowPlanTest#retiringAParentDeletesOnlyTheParent",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowPlanTest#scrollingKeepsOverlapAndRetiresOnlyTheLeavingRows",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowPlanTest#seededWindowMovesOverARandomForestMatchTheNextWindowExactly",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowScenarioTest#coldGapsAndLongOffsetsNeverMaterializeLogicalSiblings",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowScenarioTest#deepWindowUnwindsWithoutRecursiveStackOrSiblingExpansion",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowScenarioTest#emptyUnknownAndInvalidWindowContractsSurvive",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowScenarioTest#frozenSparseForestPermutationsMatchIndependentPreorder",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowScenarioTest#hugeNativeScrollSelectionUsesActualLongRowOwner",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowScenarioTest#logicalGrowthCannotInvalidatePaintBudgetAfterLayout",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowScenarioTest#nativeOverscanPressureOraclePreservesVisibleAndCapacity",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowScenarioTest#nativeTreeGeometryAutomaticallyAdmitsBoundedOverscan",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowScenarioTest#oversizedGeometryIsRejectedBeforeMutatingTreeWindow",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowScenarioTest#windowsAreFreshAfterExpansionRebindAndPruning",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowTest#constructionRejectsAMissingProjectionAndNegativeOverscan",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowTest#emptyModelsAndEmptyBodiesHaveNoVisibleRows",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowTest#ensureVisibleScrollsTheRowJustIntoView",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowTest#geometryChangesCountAsGenerations",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowTest#invalidGeometryIsRejectedBeforeAnyChange",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowTest#logicalRangeChangesClampTheTopRow",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowTest#materializedTopRowsFollowTheProjection",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowTest#overscanPolicyKeepsAHeapReserve",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowTest#paintWindowIsTheVisibleRowsAndTheOverscan",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowTest#rowsPastTheIntegerRangeUseAScaledBar",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowTest#scrollBarProjectsTheLogicalRows",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3TreeWindowTest#topRowMovesOnlyWhenItChanges",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ViewportCollectionsTest#bitLanesArgumentsAndEmptyLanes",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ViewportCollectionsTest#bitLanesFullIntRange",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ViewportCollectionsTest#bitLanesInsertRemoveShift",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ViewportCollectionsTest#bitLanesRangesAndScans",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ViewportCollectionsTest#growthRules",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ViewportCollectionsTest#siblingForest",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ViewportCollectionsTest#sparseExtentsArguments",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ViewportReceivingTest#residentWindowBounds",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ViewportReceivingTest#rowGeometryAndProjection",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowEdgesTest#complementConvertsToBits",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowEdgesTest#eagerPolicyBitsForm",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowEdgesTest#planeGeometryBands",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowEdgesTest#projectionRowAndResidentKeys",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowEdgesTest#rangesOnlyPolicyNeverSwitches",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowEdgesTest#remainingDecisionEdges",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowEdgesTest#rowWindowPlanEdges",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowEdgesTest#topologyClearAndOverflow",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowPlanTest#logicalInsertsAndRemovesKeepTheWindowAligned",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowPlanTest#movesTouchOnlyTheRowsThatEnterOrLeave",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowPlanTest#randomMovesKeepTheWindowExact",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowPlannerTest#columnDirectory",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowPlannerTest#emptyAndInvalidWindows",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowPlannerTest#ensureColumnVisibleAndRelayout",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowPlannerTest#leftToRightWindow",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowPlannerTest#plannerWindowAndGenerations",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowPlannerTest#rightToLeftWindow",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowPlannerTest#uniformGeometryAndRepaintLock",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#collapseAndReopenRestoreAnchorAndOrdinaryOverscan",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#collapsedLongExtremaRemainEmptyWithoutOverflow",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#defaultViewportDoesNotPaintBeforeLayout",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#emptyModelRefillRetainsRequestedVisibleCapacity",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#emptyViewportSuppressesOverscanAtStartMiddleAndTail",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#flatPlannerRetainsBoundedNonemptyWindow",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#flatPlannerUsesEmptySharedWindowForZeroHeightGeometry",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#navigationAndModelEditsStayEmptyWhileCollapsed",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#nonemptyWindowsMatchIndependentClippedIntervalOracle",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeRowWindowTest#queriesAndRejectedUpdatesPreserveWindowState",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeTest#originAndDirtyPlanes",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeTest#rowWindowEdges",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeTest#selectionEdges",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeTest#solvePixelsPoliciesAndFixedPoint",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WindowRuntimeTest#solveRowsPoliciesAndEdges",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3WrapperConvergenceTest#strictReadOnlyListIterationAndRetainedFailureContracts",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ZeroMaskArrayFastPathTest#noOpWindowAndPrimitiveMaskCompactionStayContractIdentical",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.M3ZeroSlotCapacityTest#primitiveZeroKeyIsNotAProbeSlot",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.SegmentedLaneBulkContractTest#bitmapRankSelectAndTraversalMatchBitSet",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.SegmentedLaneBulkContractTest#intCopiesAndImportsMatchFlatArrays",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.SegmentedLaneBulkContractTest#invalidRangesAreRejectedBeforeWriting",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.SegmentedLaneBulkContractTest#longCopiesMatchArraycopyAcrossBothOverlapDirections",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.SegmentedLaneBulkContractTest#sparseRowsRetainAscendingSlotAndGenerationSemantics",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.SegmentedLaneBulkContractTest#sparseZeroPropagationAndExtremeEndpointsDoNotGrowHoles",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.SegmentedPrimitiveStorageTest#addressRoundTripsAllBoundaries",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.SegmentedPrimitiveStorageTest#allocatorRejectsStaleHandlesAfterReuse",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.SegmentedPrimitiveStorageTest#leanFactoryExposesStorageWithoutChoosingSemantics",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.SegmentedPrimitiveStorageTest#linkedListKeepsOrderAcrossStableSlotReuse",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.SegmentedPrimitiveStorageTest#longIntAndBitLanesAllocateOnlyTouchedPaths",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.SegmentedPrimitiveStorageTest#multiLaneStoreDoesNotMoveOtherHandlesOnRemoval",
+      "status": "pass"
+    },
+    {
+      "id": "com.m3.collections.SegmentedPrimitiveStorageTest#segmentedArenaCrossesLeafBoundaryWithoutCopyingExistingOffsets",
+      "status": "pass"
+    }
+  ]
+}

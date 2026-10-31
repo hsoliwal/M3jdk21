@@ -1,0 +1,5 @@
+$ ["/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/toolchain/jdk21/bin/java","-ea","-Dm3.parser.test.work=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/consumer-work/test-M3ASTIndexProjectionContract","--patch-module","jdk.compiler=/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/compiler-patch","--module-path","/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/modules","--add-modules","jdk.m3.parser","-cp","/workspace/scratch/e736b6177c79/m3-one-pass-20261020/qualification/parser-final/test-classes","jdk.m3.parser.test.M3ASTIndexProjectionContract"]
+M3_AST_INDEX_COST nodes=13 primitive_bytes=416 source_units=81 source_reads=1 projections=1 projection_hits=1
+M3_AST_INDEX_PROJECTION_PASS checks=37 groups=4
+
+EXIT 0

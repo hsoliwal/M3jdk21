@@ -1,0 +1,13 @@
+<!-- SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# Verification pass wrapper-junit-v2
+
+This new packet admits only the absent verification owner `m3/collections/src/test/java/com/m3/collections/M3WrapperConvergenceTest.java` against integration revision `f29b0afe7ad253cc0562bc8dfdd48fc1acec710e`. The exact postimage is `fe071ef7e801a9bb1d57501512f0dd606f0c08652e100e6132dc7c4e4a8f6327`. The original `wrapper-junit` packet remains unchanged and unqualified for this integration scope.
+
+The parent contract already admits frozen JUnit entrypoints under `src/test`. This successor changes the existing test invocation to `run("readonly-policy")` and normalizes its copyright line, as documented in `../../../candidates-v2/CANDIDATE_NOTES.md` and the exact `WRAPPER_V2.diff`. The new mode calls the already frozen iterator refusal and preserved-read-effect methods. `../../../catalogue-review/RECONCILIATION.md` explains the inherited upstream comparator regression; it remains exposed by the unchanged standalone comparator mode and original compound `readonly` mode. No assertion or source oracle method is weakened, and this narrower gate must not be described as full wrapper qualification.
+
+The source passed the parent's strict Java 21 compilation using actual source-owned JUnit dependencies. The parser uses the exact six real entries supplied in `work-m3-wrappers-20261018/integration-f29/WRAPPER_V2_PARSER_CLASSPATH.json`: version 2 compiled wrapper classes, frozen f29b0afe production classes, and the four source-owned JUnit/API dependency jars. No placeholder declaration or relabelled official artifact is introduced.
+
+The existing canonical Java snapshot engine and five unchanged OpenRewrite SDK host tests remain authoritative. The packet uses crate identity `m3-wrapper-wrapper-junit-v2` and descriptor path `META-INF/rewrite/m3-wrapper-wrapper-junit-v2.yml`. This pass follows successful SDK qualification of `wrapper-contract-v2`.
+
+Required order: reviewed packet -> lint -> strict host compile -> five SDK tests -> parent target reception and target gates. The SDK must emit the exact postimage, reach a fixed point, retain unrelated decoys, and refuse drift, duplicate sources, wrong Java representation, and post-scan changes. Missing-source refusal is inapplicable to this absent target. The initial source set contains one decoy, so its reversal is not a distinct multi-input permutation. Host qualification does not write a target file, add a production API, or advance the global receiving phase.

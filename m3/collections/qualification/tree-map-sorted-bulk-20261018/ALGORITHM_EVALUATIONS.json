@@ -1,0 +1,58 @@
+{
+  "schema": "m3-algorithm-evaluations/v1",
+  "problem_category": "sorted-bulk-construction/generic-balanced-search-tree",
+  "operation": "M3TreeMap.putAll compatible sorted input into an empty eager owner",
+  "selected": {
+    "classification": "ADAPT",
+    "donor": "vigna/fastutil",
+    "commit": "e70f36a137c349efa50f346818d16917a9f91986",
+    "blob": "2528ba9cf1c3692c6263241750931d0fc23662e2",
+    "path": "drv/AVLTreeMap.drv",
+    "atom": "readTree lines1851-1896 ordered subtree split",
+    "license": "Apache-2.0",
+    "license_blob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+    "rationale": "Construct the already-ordered binary shape directly; retain M3 Object payload arrays, integer links, height bytes and existing balancing operations.",
+    "work": "O(n) internal structure construction; one read of each source entry; O(log n) recursive stack; caller source iteration/access cost is additional",
+    "key_comparisons": "No destination key comparison during qualified compatible bulk path; source-entry implementations may perform their own work",
+    "throughput_benchmark": "NOT_RUN"
+  },
+  "compared_candidates": [
+    {
+      "candidate": "Existing M3 per-mapping putAll",
+      "classification": "DIRECT_IMPORT retained fallback",
+      "fit": "Correct general insertion path; repeated O(log n) insertion does not provide comparison-free sorted construction",
+      "selection": "Preserve for ordinary/incompatible/nonempty/bounded/descending/lazy/key-only paths"
+    },
+    {
+      "candidate": "Entire fastutil threaded AVL owner",
+      "classification": "NO_FIT",
+      "reason": "Retained Entry/thread node representation conflicts with M3 storage invariant; GNU-derived clone slice excluded"
+    },
+    {
+      "candidate": "M3LongTreeSet",
+      "classification": "NO_FIT",
+      "reason": "Primitive paged sorted tree has a different key/storage contract"
+    },
+    {
+      "candidate": "M3IndexedListSnapshot",
+      "classification": "NO_FIT",
+      "reason": "Sort/index merge pattern does not build generic AVL links"
+    }
+  ],
+  "proof": {
+    "source_blind_fixture": "M3TreeMapSortedBulkProof.java",
+    "scenarios": 113,
+    "assertions": 257312,
+    "invariant_checks": 1873,
+    "largest_boundary_size": 4095,
+    "expected_digest": "4f2e09f686f46224e45ae7a09b252aa942f5e2130b3e36e566e341c2cd6255d8",
+    "oracle_frozen_before_candidate": true,
+    "baseline_missing_capability": "Original M3 fails comparator-gated sorted copy; retained observation",
+    "public_api_rows": 88,
+    "strict_composed_sources": 130,
+    "source_review": "exit0/findings[]",
+    "per_file_recipe": "Exact preimage/fixed point/inversion/refusal PASS; apply SlotMap then TreeMap",
+    "storage_evidence": "Source-reviewed array ownership with executed AVL invariants; no exhaustive heap-allocation claim"
+  },
+  "admission": "Validated sorted bulk-load atom only; complete Eclipse owner, full five-library implementations and JNI CRUD remain OPEN"
+}

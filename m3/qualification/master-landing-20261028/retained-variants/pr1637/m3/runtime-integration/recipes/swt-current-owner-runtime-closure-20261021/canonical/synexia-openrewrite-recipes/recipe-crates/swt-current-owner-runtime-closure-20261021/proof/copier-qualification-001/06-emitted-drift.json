@@ -1,0 +1,4 @@
+{
+  "status": "FAIL",
+  "failure": "ValueError: emitted output drift: docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml"
+}

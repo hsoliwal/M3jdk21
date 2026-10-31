@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3SynexiaImportInventory
+displayName: Inventory pinned Synexia Apache imports
+description: >-
+  Reads the M3JDK21 Synexia delivery manifest and emits exact source revision,
+  source/target path, SHA-256, license and import mode rows without modifying source.
+recipeList:
+  - com.m3.rewrite.synexia.M3SynexiaImportInventoryRecipe

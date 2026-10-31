@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.A3Kit
+displayName: Enable exact-head A3 proof kit
+description: Extend the existing read-only JDK proof kit to changes in its migration and A3 module owners. No promotion or permission change.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: a3-proof-kit

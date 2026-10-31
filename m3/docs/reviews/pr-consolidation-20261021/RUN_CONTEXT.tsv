@@ -1,0 +1,9 @@
+key	value
+observed_utc	2026-10-21T10:09:30.057327+00:00
+source	Latest explicit user authorization plus locked M3Scale v3.0
+mode	READ_ONLY_REMOTE_LOCAL_AUDIT_ARTIFACTS
+target	hsoliwal/M3jdk21
+history_policy	Additive; no rebase/squash/force push
+public_behavior	LOCKED
+writes_this_execution	/mnt/data/m3-pr-consolidation-audit-20261021
+remote_writes	0

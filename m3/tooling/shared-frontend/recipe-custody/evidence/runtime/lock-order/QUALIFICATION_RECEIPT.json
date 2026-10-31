@@ -1,0 +1,21 @@
+{
+  "contract_tests": 19,
+  "contract_tests_log_sha256": "387e170e25265050fabbac743625095a4e45ddda3785d229ddcb5188c9df6604",
+  "dataset": "m3jdk21-lock-order",
+  "distribution": {
+    "file_count": 171,
+    "source_build_acceptance": "NOT_ESTABLISHED_BY_INPUT_INVENTORY",
+    "tree_sha256": "d2c6408eefd6bbfac30148e690bc5906c9e00ba4f4139181a583b272ab8740ec"
+  },
+  "generation_log_sha256": "6006031fe3de31ea8ac336c367ec21103b089c2f5c4529d7cc8da9b3619ec9a8",
+  "generator_sha256": "ec090eda4c5376f387d66e43e0e744e6883f59385008df939757471c6c879b71",
+  "lock": "/workspace/scratch/13309be96b09/build-work/native-maven-sdk-pack-lock.json",
+  "lock_sha256": "13231a58122efbf7269810a1dba934ec8663833adbf738c32f25b36b2e65e03f",
+  "native_core_jar_sha256": "820e08dd87e7533e116b54feddf8e111958744b0b0943152e0df1886b4a11912",
+  "native_source_build_receipt": "/workspace/scratch/13309be96b09/build-work/MAVEN_FINAL_PROOF.json",
+  "receiver_log_sha256": "803139942787d1c6cdb6ea31b25775d287aefe202f187f9e785cf527f3377243",
+  "sdk_received_fixture": "/workspace/scratch/13309be96b09/build-work/lock-order-sdk-received",
+  "status": "ACTUAL_SDK_GENERATED_NATIVE_MAVEN_LOCK_ACCEPTED",
+  "test_source_sha256": "0c2cc1a09f2f298cdf1e43d59a27df568b5914eafe513dfffb0c00365ed7f686",
+  "unchanged_validator_sha256": "24edd66788009d00eddcae9b2ba1bc61fd492b28aefb5f34c1439eff9e6b5acf"
+}

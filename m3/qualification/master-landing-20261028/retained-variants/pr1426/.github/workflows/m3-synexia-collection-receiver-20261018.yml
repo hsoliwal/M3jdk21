@@ -1,0 +1,72 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Synexia Canonical Collection Installer Receiver 20261018
+on:
+  pull_request:
+    paths:
+      - 'm3/compatibility/synexia-m3-collections-receiver-20261018.tsv'
+      - 'm3/docs/synexia-canonical-collections-20261018.md'
+      - '.github/workflows/m3-synexia-collection-receiver-20261018.yml'
+      - 'm3/collections/qualification/**'
+      - 'm3/collections/src/**'
+  push:
+    branches:
+      - 'work/synexia-source-collections-receiver-20261018'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  java21-exact-source-receiving:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Prove anchored source and non-regressing target preimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          git merge-base --is-ancestor 0efc1719ca5766aead09f4f7c49f5067975bd946 HEAD
+          test "$(git hash-object m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/src/main/resources/templates/M3LongBitmapFilteredSnapshot.java)" = a5fe77001be04ca123593908fb68ca008935d543
+          test "$(git hash-object m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/src/main/resources/templates/M3LongBitmapFilteredSnapshotSelfTest.java)" = 246745524719dffdd0396166282a3382f1759bf3
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java)" = 317136e66200db1d8fc72d47ff9f8cf52b4566b5
+          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java)" = 06dc86a44df0e962613273011ff7d653f20d6ea9
+      - name: Compile existing three Maven source installers directly with Java 21
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/m3-source-receiver-classes
+          javac --release 21 -Xlint:all -Werror -d /tmp/m3-source-receiver-classes \
+            m3/collections/qualification/m3-long-index-projection-20261017/recipe/src/main/java/com/synexia/m3/M3LongIndexProjectionRecipe.java \
+            m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/src/main/java/com/synexia/m3/M3LongBitmapFilteredSnapshotRecipe.java \
+            m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/src/main/java/com/synexia/m3/M3StateMaskArraysRecipe.java
+      - name: Execute existing installer selftests and safe materialization checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp="/tmp/m3-source-receiver-classes:m3/collections/qualification/m3-long-index-projection-20261017/recipe/src/main/resources:m3/collections/qualification/m3-long-bitmap-cache-20261017/recipe/src/main/resources:m3/collections/qualification/m3-state-mask-arrays-20261017/recipe/src/main/resources"
+          root="$GITHUB_WORKSPACE"
+          java -cp "$cp" com.synexia.m3.M3LongIndexProjectionRecipe --selftest
+          java -cp "$cp" com.synexia.m3.M3LongBitmapFilteredSnapshotRecipe --selftest
+          java -cp "$cp" com.synexia.m3.M3StateMaskArraysRecipe --selftest
+          python3 m3/collections/qualification/array-mask-successor-20261019/verify_successor.py \
+            --root "$root" --family bitmap --qualify-bitmap "$RUNNER_TEMP/m3-canonical-bitmap-successor"
+          for recipe in M3LongIndexProjectionRecipe M3StateMaskArraysRecipe; do
+            set +e
+            output="$(java -cp "$cp" com.synexia.m3.$recipe --apply "$root" 2>&1)"
+            rc=$?
+            set -e
+            if [[ "$rc" == 0 || "$output" != *REFUSE_DRIFT* ]]; then
+              printf '%s\n' "$output"
+              echo "Unexpected acceptance or refusal reason: $recipe" >&2
+              exit 1
+            fi
+          done
+          git diff --exit-code -- m3/collections

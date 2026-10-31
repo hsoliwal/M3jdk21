@@ -1,0 +1,11 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.M3JniSaM3Field
+displayName: M3 JNI and SA String.m3 field alignment
+description: >-
+  Re-points libjava/jni_util.c InitializeEncoding and the Serviceability Agent string decoder from
+  the removed String.mindex/MIndexString layout to java.lang.String.m3/M3String through the exact
+  m3-jni-sa-m3-field Java and text snapshot crates. Startup correctness only; no String semantics,
+  HotSpot flag or public API change, and no runtime promotion.
+recipeList:
+  - com.m3.rewrite.backport.M3JniSaM3FieldRecipe

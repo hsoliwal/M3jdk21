@@ -1,0 +1,18 @@
+field	value
+packet	J496
+jep	496
+title	Quantum-Resistant Module-Lattice-Based Key Encapsulation Mechanism
+domain	security-library-provider
+disposition	candidate
+scope_floor	LIBRARY_API
+contract_mode	ADDITIVE_SECURITY_PROVIDER_WITH_PUBLIC_API_REVIEW
+security_review	MANDATORY
+dependency_closure	JDK-8340327_THEN_JDK-8298390
+a3_java_preparation	MANDATORY
+product_materialization	NOT_AUTHORIZED
+source21_compile	PENDING
+acvp_fips203	PENDING
+provider_semantics	PENDING
+security_jtreg	PENDING
+whole_image	PENDING
+promotion	NOT_AUTHORIZED

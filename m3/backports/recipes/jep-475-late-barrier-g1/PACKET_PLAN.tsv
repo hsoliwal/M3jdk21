@@ -1,0 +1,10 @@
+ordinal	atom_id	scope	mutation	depends_on	stop_condition
+0	integration-path-inventory	FILE	false		exact JDK-8334060 integration commit accounts for 58 sorted unique paths
+1	final-ga-path-classification	FILE	false	integration-path-inventory	every integration path is classified against jdk-24+36
+2	generate-file-recipe-atoms	FILE	false	final-ga-path-classification	one-file Java/native/text candidate crates are generated with typed exclusions explicit
+3	dependency-review	MULTI_MODULE	false	generate-file-recipe-atoms	C2/G1 shared barrier, ADLC, architecture and IR-framework dependencies are explicitly closed or held
+4	materialize-candidate	MULTI_MODULE	true	dependency-review	exact source-sealed candidate is materialized only after dependency review
+5	build-g1-c2	MULTI_MODULE	false	materialize-candidate	server VM with G1 and C2 compiles on the Java21 target baseline
+6	g1-compiler-jtreg	MULTI_MODULE	false	build-g1-c2	G1 barrier, C2 IR, safepoint and existing G1 regressions pass
+7	fixed-point	MULTI_MODULE	false	g1-compiler-jtreg	complete admitted recipe replay produces no further delta
+8	promotion	LIBRARY_API	false	fixed-point	serial promotion receipt exists; otherwise candidate remains unpromoted

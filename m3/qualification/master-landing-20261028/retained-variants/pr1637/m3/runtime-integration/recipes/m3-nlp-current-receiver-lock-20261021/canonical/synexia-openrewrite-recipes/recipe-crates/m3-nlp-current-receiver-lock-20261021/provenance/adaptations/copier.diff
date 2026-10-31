@@ -1,0 +1,48 @@
+--- published-core/runner.py
++++ nlp-owner/qualify_copier.py
+@@ -1,6 +1,7 @@
+ #!/usr/bin/env python3
+ # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+ # SPDX-License-Identifier: Apache-2.0
++# Adapted 2026-10-21: task paths and existing m3 root for the symbolic fixture.
+ """Exercise the existing proof-checked copier against isolated exact fixtures."""
+ import hashlib
+ import json
+@@ -9,13 +10,13 @@
+ import subprocess
+ 
+ ROOT = Path('/workspace/scratch/206049dfb270')
+-CRATE = ROOT / 'synexia/synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021'
+-SDK = CRATE / 'proof/sdk-001'
+-OUT = ROOT / 'canonical-work/receiver-qualification-001'
++CRATE = ROOT / 'synexia/synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021'
++SDK = CRATE / 'proof/sdk-001-offline'
++OUT = ROOT / 'canonical-work/nlp-receiver-qualification-001'
+ OUT.mkdir(exist_ok=False)
+ SOURCE = OUT / 'canonical'
+ shutil.copytree(SDK / 'inputs', SOURCE)
+-LOCAL = SOURCE / 'synexia-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021'
++LOCAL = SOURCE / 'synexia-openrewrite-recipes/recipe-crates/m3-nlp-current-receiver-lock-20261021'
+ TARGET = LOCAL / 'target'
+ TARGET.mkdir()
+ for name in ('recipe-proof.tsv', 'proof-status.tsv', 'named-recipe.yml'):
+@@ -83,8 +84,8 @@
+ symlinked = baseline('receiving-symbolic')
+ outside = OUT / 'unchanged-symbolic-owner'
+ outside.mkdir()
+-shutil.move(str(symlinked / '.github'), str(outside / '.github'))
+-(symlinked / '.github').symlink_to(outside / '.github', target_is_directory=True)
++shutil.move(str(symlinked / 'm3'), str(outside / 'm3'))
++(symlinked / 'm3').symlink_to(outside / 'm3', target_is_directory=True)
+ external_before = inventory(outside)
+ run('05-symbolic-destination', symlinked, 1, apply=True, signature='symbolic path refused:')
+ assert inventory(outside) == external_before
+@@ -103,7 +104,7 @@
+     signature='qualification input drift: M3EditScope.java')
+ owner.write_bytes(original)
+ 
+-receipt = {'schema': 'M3_INTEGRATED_COPIER_QUALIFICATION/1', 'status': 'PASS',
++receipt = {'schema': 'M3_NLP_CURRENT_OWNER_COPIER_QUALIFICATION/1', 'status': 'PASS',
+            'scope': 'isolated exact product-source fixtures; no target repository writes',
+            'sdk_receipt_sha256': sha(SDK / 'RESULT.json'),
+            'script_sha256': sha(Path(__file__)), 'source_seals_sha256': sha(LOCAL / 'SOURCE_SEALS.json'),

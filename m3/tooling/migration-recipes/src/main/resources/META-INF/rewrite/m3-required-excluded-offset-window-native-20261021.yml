@@ -1,0 +1,13 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.RequiredExcludedOffsetWindowNative20261021
+displayName: Preserve existing M3JDK21 JNI Region compactor and add two-mask window ABI
+description: >-
+  Source-sealed C11 native extension with fixed 256-row stack buffers,
+  no retained primitive pointers or Java callbacks and no old JNI symbol edits.
+  A missing native ABI is explicitly refused, not silently replaced by Java.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-required-excluded-offset-window-native-20261021
+      lst: false

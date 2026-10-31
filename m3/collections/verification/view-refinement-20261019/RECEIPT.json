@@ -1,0 +1,54 @@
+{
+  "schema": "M3_VIEW_ORDER_RECEIVER_V1",
+  "product": "M3JDK21",
+  "base": "a3e88976ee8664d1ef5d0cade96aec1206b2133d",
+  "canonicalRecipe": "com.synexia.m3.ViewOrder20261019",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalCommit": "db329cda4434f40c282285c5879984b515660403",
+  "canonicalPullRequest": 12461,
+  "executionLane": "KERNEL_REPLAY",
+  "outputs": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
+      "beforeSha256": "1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+      "afterSha256": "096ab0ecd3ed61e5f6fe55d532238790f9ec333e1c1577cae710b3ea61727c7f"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java",
+      "beforeSha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+      "afterSha256": "a29b0bc589565924611538c6fabe15a70d3629bc4eb3db0977d19f411ef4eb4e"
+    },
+    {
+      "path": "m3/collections/verification/view-refinement-20261019/M3FilteredNullNavigationProbe.java",
+      "beforeSha256": "ABSENT",
+      "afterSha256": "fb53a688c8e7ad3fa1a1cb21c3248b59ce9c49e1e5a82fe374ea61aa46fa3f54"
+    },
+    {
+      "path": "m3/collections/verification/view-refinement-20261019/M3ProjectionRefinementProbe.java",
+      "beforeSha256": "ABSENT",
+      "afterSha256": "f3c44e00f608aba01171e7ce781a233949686034cb621254ade6af8ebf3bbc54"
+    }
+  ],
+  "localValidation": {
+    "navigationChecks": 3555352,
+    "projectionJavaChecks": 282479,
+    "requiredJniChecks": 287107,
+    "ubsanJniChecks": 287107,
+    "absentLibraryChecks": 4,
+    "baselineNavigationFailures": 5,
+    "newNativeSymbols": 0,
+    "identicalNativeExports": 8,
+    "runtimeDescriptors": "IDENTICAL",
+    "jniHeaders": "IDENTICAL",
+    "sourceFixtureKind": "REAL_CURRENT_OWNER_SOURCES_NO_STUBS"
+  },
+  "pending": [
+    "OpenRewrite SDK/JUnit",
+    "full collections Maven tests",
+    "M3JDK21/HotSpot build and jtreg",
+    "Windows/macOS JNI",
+    "SWT/Nebula/Skija/OpenCV native screen acceptance",
+    "React/RWT/GWT integration"
+  ],
+  "status": "CANDIDATE_HOLD_GLOBAL_PROMOTION"
+}

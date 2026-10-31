@@ -1,0 +1,43 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------< com.m3.qualification:eclipse-progress-reentrancy >----------
+[INFO] Building eclipse-progress-reentrancy 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- build-helper:3.6.0:add-source (original-owner-spi) @ eclipse-progress-reentrancy ---
+[INFO] Source directory: /workspace/scratch/53bcd62c244c/work-progress-20261020/owner-spi added.
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ eclipse-progress-reentrancy ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/53bcd62c244c/work-progress-20261020/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ eclipse-progress-reentrancy ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 5 source files with javac [debug release 21] to target-candidate/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ eclipse-progress-reentrancy ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/53bcd62c244c/work-progress-20261020/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ eclipse-progress-reentrancy ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug release 21] to target-candidate/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ eclipse-progress-reentrancy ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.eclipse.runtime.M3EclipseProgressMonitorTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.181 s -- in com.m3.eclipse.runtime.M3EclipseProgressMonitorTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.635 s
+[INFO] Finished at: 2026-10-20T08:21:34+01:00
+[INFO] ------------------------------------------------------------------------

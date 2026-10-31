@@ -1,0 +1,13 @@
+{
+  "basis": "Frozen for replay after the successful first generated discovery/execution recorded in final report.",
+  "descriptor_text_sha256": "ed3c0646b3736b45fb11f577365166e58db82787d8d3489894b415b3f0971622",
+  "expected_discovered_and_run": 898,
+  "features_file_sha256": "ade2db689d4118a103a372544ea4d7773b267df264f496aab8ea548e986f22ef",
+  "features_frozen_before_first_JVM": true,
+  "final_report_sha256": "3bebc12fc628eca04f4eef43056627ca18ebf751b2c8037a6e6da97dfd210e17",
+  "launcher_optional_final_argument": "898",
+  "required_errors": 0,
+  "required_failed": 0,
+  "schema": "M3_CLASS_INSTANCE_GENERATED_REPLAY_COUNT_V1",
+  "suppressed_tests": []
+}

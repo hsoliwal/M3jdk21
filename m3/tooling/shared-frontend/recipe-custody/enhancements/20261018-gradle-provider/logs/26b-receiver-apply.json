@@ -1,0 +1,20 @@
+{
+  "label": "26b-receiver-apply",
+  "command": [
+    "python3",
+    "receive.py",
+    "--dataset",
+    "gradle-provider-20261018",
+    "--target",
+    "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/generated-final",
+    "--recipe-owner",
+    "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes"
+  ],
+  "cwd": "/workspace/scratch/65626af64474/m3-ast-shared-20261018/gradle-provider-work/canonical/synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-20261017",
+  "jdk": "/tmp/m3-regex-toolchain-20261018/jdk-21.0.12.1+1",
+  "previous": "26a-receiver-check",
+  "started_utc": "2026-10-18T13:11:43.903589+00:00",
+  "finished_utc": "2026-10-18T13:11:43.957110+00:00",
+  "exit_code": 0,
+  "log_sha256": "b24ccd2f1d1d2be95e954a3dc921ac4ed8055b93d70a032fc2c02242ad46c3ca"
+}

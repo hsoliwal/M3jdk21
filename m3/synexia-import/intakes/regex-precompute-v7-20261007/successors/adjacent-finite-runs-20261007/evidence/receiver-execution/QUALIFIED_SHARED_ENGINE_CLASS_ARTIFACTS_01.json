@@ -1,0 +1,300 @@
+{
+  "schema": 1,
+  "status": "ACTUAL_STRICT_MAVEN_COMPILE_EXIT0",
+  "nativeBindingSHA256": "a17b6f71031fefa6de355f2c00ed89dcfc78daa1f62427d2b920feda9ca46a98",
+  "commandName": "compileAndPlan",
+  "sourceSeals": [
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\Replay.java",
+      "bytes": 10190,
+      "sha256": "fab78282a3e137b5c917a1351f97ec120ef0aab0d4f0615c4c3cd37c97665b2f"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\M3GpuToolJoinManifest.java",
+      "bytes": 10964,
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999"
+    }
+  ],
+  "nativeLog": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\REGEX_MAVEN_ACTIVATION_01_compileAndPlan.log",
+    "bytes": 31879,
+    "sha256": "b5d25f6d02058c7e6d32cb3924c529e1c479b4fb93dc5dcbf804d243416d942d"
+  },
+  "nativeExit": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\REGEX_MAVEN_ACTIVATION_01_compileAndPlan.exit.txt",
+    "bytes": 3,
+    "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+  },
+  "nativePreflight": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\REGEX_MAVEN_ACTIVATION_01_compileAndPlan.preflight.json",
+    "bytes": 1822,
+    "sha256": "7e428cfc2539dea47d9699464be2014cf6233eb50dd398c882fdfd1e7897abfb"
+  },
+  "nativePreflightLog": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\REGEX_MAVEN_ACTIVATION_01_compileAndPlan.preflight.log",
+    "bytes": 296,
+    "sha256": "c71d38af9681699297e7affbaeba6dad2dc233e4a2ddf7e6d90d1cd921487a0a"
+  },
+  "nativeWrapper": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\REGEX_MAVEN_ACTIVATION_01_compileAndPlan.cmd",
+    "bytes": 3907,
+    "sha256": "890cb0d7557a04492c6dddfc5fb5b015b5e6c3c2907aaa63bca122b0a2049336"
+  },
+  "nativeCommandReceipt": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\REGEX_MAVEN_ACTIVATION_01_NATIVE_COMMAND.json",
+    "bytes": 5548,
+    "sha256": "504d114478a915e48894377ea98875481a594dbc8cf4d88466d6330adcbcf670"
+  },
+  "actualCompilerOptions": "[DEBUG] -d K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes -classpath K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes; -sourcepath K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\..\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources; -s K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\generated-sources\\annotations -proc:none -g -implicit:none --release 21 -encoding UTF-8 -Xlint:all -Werror -XDuseUnsharedTable=true",
+  "actualCompilerInputFiles": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\maven-status\\maven-compiler-plugin\\compile\\compile-existing-shared-replay\\inputFiles.lst",
+    "bytes": 497,
+    "sha256": "de1b54dc0b153db6e03144a9ebc4acf537b9bdf391099226895a4eda870b4db1"
+  },
+  "actualCompilerCreatedFiles": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\maven-status\\maven-compiler-plugin\\compile\\compile-existing-shared-replay\\createdFiles.lst",
+    "bytes": 383,
+    "sha256": "7087ffb3040adcf3ed44a0753bb29f9b7ffad9fae9807cbfe0c0e78d963053e0"
+  },
+  "actualSourceInputPaths": [
+    "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\..\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\M3GpuToolJoinManifest.java",
+    "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\..\\synexia-m3jdk-full-family-invariant-20261007\\donor-sources\\Replay.java"
+  ],
+  "classFiles": [
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest$Payload.class",
+      "bytes": 1854,
+      "sha256": "840e06113d9f7c37e6a4e5491177e8f95ac1d596f10260fa5732f0aaee75c1d2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest$Resources.class",
+      "bytes": 443,
+      "sha256": "7d7599b108861f66170896cdc47c20585537d90c69bb16587dd0e1e6a0cd41a7"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest$Scan.class",
+      "bytes": 3814,
+      "sha256": "405b572cf789c0dcace16f11071f64993ae30b5cdbd2f0d81e90c5baab6e7a7a"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest$Target.class",
+      "bytes": 2209,
+      "sha256": "59b9ff1352c13e2ca14eeb4640f6bfb2c7bc824a8e16e7e8ff5f7201a8c1eca0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\M3GpuToolJoinManifest.class",
+      "bytes": 10963,
+      "sha256": "510d6124146fa1e57f0f61a523ff348d69e07b99263b2c604b95dae461f4a6f8"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\Replay$Change.class",
+      "bytes": 1760,
+      "sha256": "8e08f3c19b384a0fc8bd41bb8c0d55acd8e0b85501811f4f6fb7cb8735b77bd2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\Replay$Report.class",
+      "bytes": 2489,
+      "sha256": "13f441e9c1f64631b09d230430a3355dd00d25a19a3c281ee41600eaa98b2b81"
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes\\com\\synexia\\rewrite\\Replay.class",
+      "bytes": 13663,
+      "sha256": "a7e946f8ac541c32c7d74f102378574d21901d86911aff5e2267c80d86f66b0b"
+    }
+  ],
+  "majorVersion": 65,
+  "compilerFork": false,
+  "actualRootChunk": "8f5b3c",
+  "actualRootProcessElapsedSeconds": 2.3920595000000002,
+  "actualRootProcessElapsedObservation": "2.3920595000000002 seconds as reported by root; process observation only",
+  "elapsedIsPerformanceEvidence": false,
+  "classloadLog": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\REGEX_MAVEN_ACTIVATION_01.classload.log",
+    "bytes": 836022,
+    "sha256": "617a243d518284de469dc2aebd517eb523574771f34dc5b80b25110fed380d6a"
+  },
+  "actualCodeSources": [
+    {
+      "className": "org.apache.maven.cli.MavenCli",
+      "source": "file:/C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/lib/maven-embedder-3.9.14.jar",
+      "exactClassloadLine": "[0.127s][info][class,load] org.apache.maven.cli.MavenCli source: file:/C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/lib/maven-embedder-3.9.14.jar",
+      "artifact": {
+        "path": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\maven-embedder-3.9.14.jar",
+        "bytes": 117421,
+        "sha256": "2e2f517d9835a7c57d6da98537f51983a2b016bfe4b0570074470f4ea32372c1"
+      }
+    },
+    {
+      "className": "org.apache.maven.plugin.compiler.CompilerMojo",
+      "source": "file:/K:/codex-work/m3-format78-standalone-maven-activation-p0-20261007/offline-cache/org/apache/maven/plugins/maven-compiler-plugin/3.15.0/maven-compiler-plugin-3.15.0.jar",
+      "exactClassloadLine": "[1.247s][info][class,load] org.apache.maven.plugin.compiler.CompilerMojo source: file:/K:/codex-work/m3-format78-standalone-maven-activation-p0-20261007/offline-cache/org/apache/maven/plugins/maven-compiler-plugin/3.15.0/maven-compiler-plugin-3.15.0.jar",
+      "artifact": {
+        "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\plugins\\maven-compiler-plugin\\3.15.0\\maven-compiler-plugin-3.15.0.jar",
+        "bytes": 83823,
+        "sha256": "6ea0ca0558ccf248c514aa94908d1f895a92e9b4e4604c1bb29f7a4ab1b833f0"
+      }
+    },
+    {
+      "className": "org.codehaus.plexus.compiler.javac.JavacCompiler",
+      "source": "file:/K:/codex-work/m3-format78-standalone-maven-activation-p0-20261007/offline-cache/org/codehaus/plexus/plexus-compiler-javac/2.16.2/plexus-compiler-javac-2.16.2.jar",
+      "exactClassloadLine": "[1.264s][info][class,load] org.codehaus.plexus.compiler.javac.JavacCompiler source: file:/K:/codex-work/m3-format78-standalone-maven-activation-p0-20261007/offline-cache/org/codehaus/plexus/plexus-compiler-javac/2.16.2/plexus-compiler-javac-2.16.2.jar",
+      "artifact": {
+        "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler-javac\\2.16.2\\plexus-compiler-javac-2.16.2.jar",
+        "bytes": 29899,
+        "sha256": "e48141c146d6cb96619aafb07b2e10e1ac08f339e96ae4067ddd9c2d0f626672"
+      }
+    },
+    {
+      "className": "com.sun.tools.javac.api.JavacTool",
+      "source": "jrt:/jdk.compiler",
+      "exactClassloadLine": "[1.312s][info][class,load] com.sun.tools.javac.api.JavacTool source: jrt:/jdk.compiler",
+      "jdkModule": "jdk.compiler; exact installed JDK lib/modules pinned by immutable inputs"
+    },
+    {
+      "className": "com.sun.tools.javac.main.JavaCompiler",
+      "source": "jrt:/jdk.compiler",
+      "exactClassloadLine": "[1.476s][info][class,load] com.sun.tools.javac.main.JavaCompiler source: jrt:/jdk.compiler",
+      "jdkModule": "jdk.compiler; exact installed JDK lib/modules pinned by immutable inputs"
+    },
+    {
+      "className": "org.codehaus.mojo.exec.ExecJavaMojo",
+      "source": "file:/K:/codex-work/m3-format78-standalone-maven-activation-p0-20261007/offline-cache/org/codehaus/mojo/exec-maven-plugin/3.5.0/exec-maven-plugin-3.5.0.jar",
+      "exactClassloadLine": "[1.970s][info][class,load] org.codehaus.mojo.exec.ExecJavaMojo source: file:/K:/codex-work/m3-format78-standalone-maven-activation-p0-20261007/offline-cache/org/codehaus/mojo/exec-maven-plugin/3.5.0/exec-maven-plugin-3.5.0.jar",
+      "artifact": {
+        "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\mojo\\exec-maven-plugin\\3.5.0\\exec-maven-plugin-3.5.0.jar",
+        "bytes": 86958,
+        "sha256": "f3cc922574c6dfe64f82b564f468d94c6477e4ceb45bf5cfebbb66ba1858048e"
+      }
+    },
+    {
+      "className": "com.synexia.rewrite.Replay",
+      "source": "file:/K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/layout/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/target/classes/",
+      "exactClassloadLine": "[1.997s][info][class,load] com.synexia.rewrite.Replay source: file:/K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/layout/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/target/classes/",
+      "qualifiedClassOutputRoot": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes"
+    },
+    {
+      "className": "com.synexia.rewrite.M3GpuToolJoinManifest",
+      "source": "file:/K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/layout/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/target/classes/",
+      "exactClassloadLine": "[1.998s][info][class,load] com.synexia.rewrite.M3GpuToolJoinManifest source: file:/K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/layout/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/target/classes/",
+      "qualifiedClassOutputRoot": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes"
+    }
+  ],
+  "actualPluginRealmCoordinates": {
+    "org.apache.maven.plugins:maven-compiler-plugin:3.15.0": [
+      "org.apache.maven.plugins:maven-compiler-plugin:jar:3.15.0",
+      "org.ow2.asm:asm:jar:9.9.1",
+      "org.apache.maven.shared:maven-shared-utils:jar:3.4.2",
+      "commons-io:commons-io:jar:2.11.0",
+      "org.apache.maven.shared:maven-shared-incremental:jar:1.1",
+      "org.codehaus.plexus:plexus-java:jar:1.5.2",
+      "com.thoughtworks.qdox:qdox:jar:2.2.0",
+      "org.codehaus.plexus:plexus-compiler-api:jar:2.16.2",
+      "org.codehaus.plexus:plexus-compiler-manager:jar:2.16.2",
+      "org.codehaus.plexus:plexus-xml:jar:3.0.1",
+      "org.codehaus.plexus:plexus-compiler-javac:jar:2.16.2",
+      "org.codehaus.plexus:plexus-utils:jar:4.0.2"
+    ],
+    "org.codehaus.mojo:exec-maven-plugin:3.5.0": [
+      "org.codehaus.mojo:exec-maven-plugin:jar:3.5.0",
+      "org.codehaus.plexus:plexus-utils:jar:4.0.2",
+      "org.codehaus.plexus:plexus-xml:jar:3.0.1",
+      "org.apache.commons:commons-exec:jar:1.4.0",
+      "org.ow2.asm:asm:jar:9.7.1",
+      "org.ow2.asm:asm-commons:jar:9.7.1",
+      "org.ow2.asm:asm-tree:jar:9.7.1"
+    ]
+  },
+  "actualPluginRealmJars": [
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\plugins\\maven-compiler-plugin\\3.15.0\\maven-compiler-plugin-3.15.0.jar",
+      "bytes": 83823,
+      "sha256": "6ea0ca0558ccf248c514aa94908d1f895a92e9b4e4604c1bb29f7a4ab1b833f0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm\\9.9.1\\asm-9.9.1.jar",
+      "bytes": 126252,
+      "sha256": "6f3828a215c920059a5efa2fb55c233d6c54ec5cadca99ce1b1bdd10077c7ddd"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\shared\\maven-shared-utils\\3.4.2\\maven-shared-utils-3.4.2.jar",
+      "bytes": 151103,
+      "sha256": "b613357e1bad4dfc1dead801691c9460f9585fe7c6b466bc25186212d7d18487"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\commons-io\\commons-io\\2.11.0\\commons-io-2.11.0.jar",
+      "bytes": 327135,
+      "sha256": "961b2f6d87dbacc5d54abf45ab7a6e2495f89b75598962d8c723cea9bc210908"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\maven\\shared\\maven-shared-incremental\\1.1\\maven-shared-incremental-1.1.jar",
+      "bytes": 13538,
+      "sha256": "61988e54486a5dc38f06c70fdae5b108556c63bd433697b9f4305fcdb30fa40e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-java\\1.5.2\\plexus-java-1.5.2.jar",
+      "bytes": 57355,
+      "sha256": "1e6a4298e145c1e23af430b04ac53d76dc11077e0f3d36ef9c027ce790d96505"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\com\\thoughtworks\\qdox\\qdox\\2.2.0\\qdox-2.2.0.jar",
+      "bytes": 353020,
+      "sha256": "c260c3230b2340af97d54bf01f7f67ebc57c901922736c881bb11cb981302be2"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler-api\\2.16.2\\plexus-compiler-api-2.16.2.jar",
+      "bytes": 29079,
+      "sha256": "db34d13c8d688063a946922f4de448c909ba43fec355ea15514495f33072b031"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler-manager\\2.16.2\\plexus-compiler-manager-2.16.2.jar",
+      "bytes": 5237,
+      "sha256": "99630ac196571a2754baa143a12723795b13020631902a6dff18dfb997e59b0e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-xml\\3.0.1\\plexus-xml-3.0.1.jar",
+      "bytes": 94331,
+      "sha256": "c1a510a87a62bd2d74ac1472dd31c3f9e9b0b8b8568f37d77c0f135415bebd05"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-compiler-javac\\2.16.2\\plexus-compiler-javac-2.16.2.jar",
+      "bytes": 29899,
+      "sha256": "e48141c146d6cb96619aafb07b2e10e1ac08f339e96ae4067ddd9c2d0f626672"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\plexus\\plexus-utils\\4.0.2\\plexus-utils-4.0.2.jar",
+      "bytes": 192537,
+      "sha256": "8957274e75fe2c278b1428dd16a0daeee1dd38152cb6eff816177ac28fccb697"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\codehaus\\mojo\\exec-maven-plugin\\3.5.0\\exec-maven-plugin-3.5.0.jar",
+      "bytes": 86958,
+      "sha256": "f3cc922574c6dfe64f82b564f468d94c6477e4ceb45bf5cfebbb66ba1858048e"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\apache\\commons\\commons-exec\\1.4.0\\commons-exec-1.4.0.jar",
+      "bytes": 65863,
+      "sha256": "f51cf8bee467efe2be76e46fc08078d96afa280a794283364291beda892a67ef"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm\\9.7.1\\asm-9.7.1.jar",
+      "bytes": 126093,
+      "sha256": "8cadd43ac5eb6d09de05faecca38b917a040bb9139c7edeb4cc81c740b713281"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm-commons\\9.7.1\\asm-commons-9.7.1.jar",
+      "bytes": 73459,
+      "sha256": "9a579b54d292ad9be171d4313fd4739c635592c2b5ac3a459bbd1049cddec6a0"
+    },
+    {
+      "path": "K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache\\org\\ow2\\asm\\asm-tree\\9.7.1\\asm-tree-9.7.1.jar",
+      "bytes": 51939,
+      "sha256": "9929881f59eb6b840e86d54570c77b59ce721d104e6dfd7a40978991c2d3b41f"
+    }
+  ],
+  "publishedPayloadAuthority": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\REGEX_PR9797_PUBLISHED_PAYLOAD_AUTHORITY_01.json",
+    "bytes": 1181,
+    "sha256": "3b21ec1736747a3e93a673438e62207d28108912b8975d2a7b394c07427d535f"
+  },
+  "JVMInvocationsBySealer": 0
+}

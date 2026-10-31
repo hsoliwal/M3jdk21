@@ -1,0 +1,140 @@
+{
+  "artifact": "j2objc-annotations",
+  "automatic_module_name": "",
+  "build": "java",
+  "build_reason": "",
+  "consumers": "transitive compile input of guava 33.0.0-jre",
+  "coordinate": "com.google.j2objc:j2objc-annotations:2.8-m3-source-1",
+  "decision": "DIRECT_IMPORT",
+  "delomboked": false,
+  "delomboked_files": 0,
+  "dependencies": [],
+  "donor": "j2objc-annotations-2.8",
+  "excluded_from_compilation": [],
+  "files": [
+    {
+      "kind": "unmodified-build-metadata",
+      "repository": "m3/vendor/third_party/j2objc-annotations/upstream-excluded/META-INF/MANIFEST.MF",
+      "sha256": "11dcd439f300c9bf1103c45ab8ff195a7941c625dc9dbe25cd310d8e68cb2a86",
+      "upstream": "META-INF/MANIFEST.MF"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/j2objc-annotations/src/main/java/com/google/j2objc/annotations/AutoreleasePool.java",
+      "sha256": "e4d0a207c7feede58081deb8d0adad6d294e67c5e5db9510fc4cae31c7df7e90",
+      "upstream": "com/google/j2objc/annotations/AutoreleasePool.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/j2objc-annotations/src/main/java/com/google/j2objc/annotations/J2ObjCIncompatible.java",
+      "sha256": "04fbc80abe31dd76860b842ae4f0ec2251f01613dd137aeb49e18f33e9299f50",
+      "upstream": "com/google/j2objc/annotations/J2ObjCIncompatible.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/j2objc-annotations/src/main/java/com/google/j2objc/annotations/LoopTranslation.java",
+      "sha256": "8c269a9cce9bf1f363194091f6407dedf5eb5be95d8bc6ed48aa0712e2364da7",
+      "upstream": "com/google/j2objc/annotations/LoopTranslation.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/j2objc-annotations/src/main/java/com/google/j2objc/annotations/ObjectiveCName.java",
+      "sha256": "495befea8489d4f68187147fa87cdca60b6a32cc0ddb04598ce7597276e36d3d",
+      "upstream": "com/google/j2objc/annotations/ObjectiveCName.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/j2objc-annotations/src/main/java/com/google/j2objc/annotations/OnDealloc.java",
+      "sha256": "879c84070cca32040fc8ade7b92f781ce862fa75e70ab85037315108dc6e246d",
+      "upstream": "com/google/j2objc/annotations/OnDealloc.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/j2objc-annotations/src/main/java/com/google/j2objc/annotations/Property.java",
+      "sha256": "d55e910cfafb8b41e9c4541f82020075a0a6b9007b51d32ff0462b9f913d21ea",
+      "upstream": "com/google/j2objc/annotations/Property.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/j2objc-annotations/src/main/java/com/google/j2objc/annotations/ReflectionSupport.java",
+      "sha256": "6210ca53e21f06094696b4b7a3c8e342b514be90a261211f9a9cd5ebda389f15",
+      "upstream": "com/google/j2objc/annotations/ReflectionSupport.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/j2objc-annotations/src/main/java/com/google/j2objc/annotations/RetainedLocalRef.java",
+      "sha256": "aea44698587d342c2e374b5183fc1f0f324743e95377cdcd12634e77b7014afe",
+      "upstream": "com/google/j2objc/annotations/RetainedLocalRef.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/j2objc-annotations/src/main/java/com/google/j2objc/annotations/RetainedWith.java",
+      "sha256": "6f22ef5627081aaf0099ef1542e92f561d561a4fe7e318bc6a193a09091df3ea",
+      "upstream": "com/google/j2objc/annotations/RetainedWith.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/j2objc-annotations/src/main/java/com/google/j2objc/annotations/Weak.java",
+      "sha256": "7fa439baf67b97115ca4dff83def1ed72d7bc52a7237d76629180b116907efae",
+      "upstream": "com/google/j2objc/annotations/Weak.java"
+    },
+    {
+      "kind": "unmodified-production",
+      "repository": "m3/vendor/third_party/j2objc-annotations/src/main/java/com/google/j2objc/annotations/WeakOuter.java",
+      "sha256": "beddc26a03376f9962657e3215e6b65fde6a6403999ea73bffe5c0c6139e6d04",
+      "upstream": "com/google/j2objc/annotations/WeakOuter.java"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/j2objc-annotations/UPSTREAM_LICENSE.json",
+      "sha256": "a5dd9fb5bd86642beaab5ab1d1e3a0e4489bde9f56afe79851615e97ce4e3d83",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/j2objc-annotations/UPSTREAM_LICENSE.txt",
+      "sha256": "f93fac82dc22bed7ccc04bef47c3313b7db8ea350eadd85f3672acbdae3cfad1",
+      "upstream": "(fetched: see UPSTREAM_LICENSE.json)"
+    },
+    {
+      "kind": "retained-provenance",
+      "repository": "m3/vendor/third_party/j2objc-annotations/SOURCES_MANIFEST.tsv",
+      "sha256": "1bdac417fca860ad563a0131ccae0931fe1eb7a768dc1d557b03c80ddd1404a4",
+      "upstream": "(inventory)"
+    },
+    {
+      "kind": "unmodified-legal-or-build-reference",
+      "repository": "m3/vendor/third_party/j2objc-annotations/LICENSE",
+      "sha256": "f93fac82dc22bed7ccc04bef47c3313b7db8ea350eadd85f3672acbdae3cfad1",
+      "upstream": "UPSTREAM_LICENSE.txt"
+    }
+  ],
+  "group": "com.google.j2objc",
+  "kind": "MODULE",
+  "license": "Apache License, Version 2.0",
+  "license_file": "LICENSE",
+  "modifications": "No upstream source changes; Maven descriptor and provenance files are M3jdk21 composition (Apache-2.0) and do not relicense the donor.",
+  "module_descriptors": [],
+  "multi_release_overlays": {
+    "not_reproduced": [],
+    "releases": []
+  },
+  "native_binaries": 0,
+  "parent": "org.sonatype.oss:oss-parent:9",
+  "pom": "https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8.pom",
+  "receipt": {
+    "buildRoot": "cf1bca72d0b8298dbe45665d212c4741cac112d18e41353070d25c5ce63fc7dc",
+    "distributionSha256": "466d864bacdf2f9de6ff6455fba90e2023828ad95becc85304a397ffbe26e1d2",
+    "lock": "33ab049867c1c736c65dececbbb9f9d42697fd3336cf178946c3c43ba55336ff",
+    "message": "",
+    "sourceRoot": "7c244e7e09f7d3b15ccc23618dbeb0b77c855546a04bd9f8a4240dc978db09c3",
+    "status": "PASS"
+  },
+  "resources_completed": 0,
+  "sources_jar": "https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/2.8/j2objc-annotations-2.8-sources.jar",
+  "sources_jar_sha1": "74fb66e276fc42784d884d51f841e35232bc90de",
+  "sources_jar_sha256": "7413eed41f111453a08837f5ac680edded7faed466cbd35745e402e13f4cc3f5",
+  "status": "PASS",
+  "upstream": "https://github.com/google/j2objc/",
+  "version": "2.8"
+}

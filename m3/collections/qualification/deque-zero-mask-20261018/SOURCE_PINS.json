@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "target": "hsoliwal/M3JDK21",
+  "base_ref": "master",
+  "base_commit": "07ba6e383343d32c83cfdaf641387bbe72bf325d",
+  "recipe": "com.m3.collections.recipe.M3DequeZeroMaskRecipe",
+  "target_file": {
+    "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+    "base_blob_sha1": "cfe73fe987ec59d906807f8a7580bba8d371a946",
+    "changed_blob_sha1": "73d90117f3a3b4f1a5a670fb34f5326765627d2c"
+  },
+  "regression_file": {
+    "path": "m3/collections/src/test/java/com/m3/collections/M3IndexMaskCompactorSelfTest.java",
+    "base_blob_sha1": "245fd4e2e9fcbcf94a9bfed5926fec9be61de98d",
+    "changed_blob_sha1": "7b04a77cc113a81b4a09d6004666cada79c8c088"
+  },
+  "qualification": {
+    "recipe_sdk": "OpenRewrite 8.17.1",
+    "jdk": 21,
+    "status": "NOT_RUN_IN_THIS_SESSION",
+    "required_before_promotion": [
+      "mvn -f m3/collections/qualification/deque-zero-mask-20261018/pom.xml test",
+      "compile and run M3IndexMaskCompactorSelfTest with Java backend",
+      "run the same self-test with actual JNI backend and -Xcheck:jni",
+      "run native selector under C17 warnings-as-errors and UBSan",
+      "verify the recipe fixed point and source-drift refusal against the actual target file"
+    ]
+  }
+}

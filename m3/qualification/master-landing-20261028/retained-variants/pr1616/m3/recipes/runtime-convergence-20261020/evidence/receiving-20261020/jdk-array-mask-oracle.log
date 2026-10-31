@@ -1,0 +1,4 @@
+['/tmp/m3jdk21-toolchain-20261020/jdk-21.0.12.1+1/bin/java', '-Xmx768m', '-ea', '-Xcheck:jni', '--patch-module', 'java.base=/workspace/scratch/53bcd62c244c/canonical-runtime-convergence-20261020/target/contract-proof/jdk-patch', '--add-exports', 'java.base/jdk.internal.mindex=ALL-UNNAMED', '-cp', '/workspace/scratch/53bcd62c244c/canonical-runtime-convergence-20261020/target/contract-proof/jdk-tests', 'M3MaskThresholdContracts']
+M3_MASK_THRESHOLD_CONTRACT_PASS cases=199294
+
+EXIT=0

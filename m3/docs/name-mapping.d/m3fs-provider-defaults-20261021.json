@@ -1,0 +1,56 @@
+{
+  "schema": "M3FS_PROVIDER_DEFAULTS_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0; existing Apache VFS notices retained",
+  "product": "M3JDK21",
+  "module": "jdk.m3fs",
+  "authoritative_mapping": {
+    "path": "m3/docs/name-mapping.json",
+    "record_collection": "migration.records",
+    "capability_id": "m3.fs.provider-defaults"
+  },
+  "mapping_role": "Supporting provider detail for the authoritative capability record; this file is not a parallel naming registry",
+  "target_base": "5eeb841168ed420085223806fefcfca8d1b6b3ca",
+  "canonical_repository": "hsoliwal/com.synexia",
+  "canonical_sdk_base": "072d6dd0e8f5bfa8bc264d0b99455de0725094a6",
+  "canonical_crate": "synexia-openrewrite-recipes/recipes/m3fs-provider-defaults-20261021",
+  "canonical_recipe": "com.synexia.m3.M3FsProviderDefaults20261021",
+  "recipe_owners": [
+    "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe"
+  ],
+  "mappings": [
+    {
+      "source": "Existing com.m3.fs.MFileContent",
+      "target": "Same interface with additive default overloads and private normalized helpers",
+      "category": "OWNED_DEFAULT_OPERATIONS",
+      "contract": "One abstract input hook; optional output and observation; preserve borrowed streams, progress, shadows and capture"
+    },
+    {
+      "source": "Existing installed java.nio.file.FileSystem and Path instances",
+      "target": "com.m3.fs.NioFileProvider and MFiles nondefault Path route",
+      "category": "PROVIDER_ADAPTER",
+      "contract": "Borrow exact filesystem instance; native URI separate from same-JVM instance-bound source address; no implicit remount or close"
+    },
+    {
+      "source": "Existing com.m3.fs.M3FS native SQLite/JNI owner",
+      "target": "com.m3.fs.DatabaseFileProvider, DatabaseFileSystem, DatabaseFileObject and DatabaseFileName",
+      "category": "PROVIDER_TEMPLATE_HOOKS",
+      "contract": "Registered m3db scheme; checked inode streams; existing local databases only; no second store or native ABI"
+    },
+    {
+      "source": "Attributed com.m3.fs.vfs.provider.AbstractFileSystem and AbstractFileObject",
+      "target": "Same unchanged template owners",
+      "category": "DONOR_REUSE",
+      "contract": "Shared lifecycle, common operations and inherited ordered bulk fallback; preserve original Apache license and namespace; atomic requests remain refused without a provider execution hook"
+    }
+  ],
+  "public_java_se_names_changed": false,
+  "new_runtime_modules": [],
+  "new_native_abi": false,
+  "synexia_runtime_dependency": false,
+  "receiving_sequence_advanced": false,
+  "all_remote_providers_qualified": false,
+  "performance_claim": "None; provider arrays, stream buffers and caller materializations remain explicit",
+  "documentation": "m3/fs/vfs/PROVIDER_DEFAULTS.md"
+}

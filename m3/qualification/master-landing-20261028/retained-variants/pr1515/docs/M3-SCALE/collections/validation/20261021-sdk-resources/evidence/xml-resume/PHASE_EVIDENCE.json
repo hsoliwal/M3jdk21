@@ -1,0 +1,49 @@
+[
+  {
+    "phase": "dryrun",
+    "log_bytes": 48497,
+    "log_sha256": "d76bf09d24b47a1da16e5a164e0452e078c8ba19d554389cad3a6bc2c3ef370c",
+    "realm_count": 117,
+    "realm_list_sha256": "c1decf16ca5fad13b6da5b42d494b6418224d7c2a327d19e869aec26e2a340f3",
+    "project_graph_lines": 44,
+    "project_graph_sha256": "fabaffc91993cd8298b5c147a79e29a00139675d22b871e4ee0900d7d0ae0b0d",
+    "source_explained_unconfigured_descriptor_warning": 1,
+    "patch_bytes": 993,
+    "patch_sha256": "9179f829858b30efdbca82379f88c0d8d61cfb56baa114f54f211de8217f6dfb",
+    "exact_one_path_and_declared_changed_lines": true
+  },
+  {
+    "phase": "apply",
+    "log_bytes": 47952,
+    "log_sha256": "33923f8cd35f3c46ea002f21338833998b1b2103f74ce31d610c67b8918213d8",
+    "realm_count": 117,
+    "realm_list_sha256": "c1decf16ca5fad13b6da5b42d494b6418224d7c2a327d19e869aec26e2a340f3",
+    "project_graph_lines": 44,
+    "project_graph_sha256": "fabaffc91993cd8298b5c147a79e29a00139675d22b871e4ee0900d7d0ae0b0d",
+    "source_explained_unconfigured_descriptor_warning": 1
+  },
+  {
+    "phase": "fixedpoint",
+    "log_bytes": 46888,
+    "log_sha256": "98d8e3e42b3ec4d424d5a4fb1cf4776a28f8c8ab3564ff086a4ea7226276cad6",
+    "realm_count": 117,
+    "realm_list_sha256": "c1decf16ca5fad13b6da5b42d494b6418224d7c2a327d19e869aec26e2a340f3",
+    "project_graph_lines": 44,
+    "project_graph_sha256": "fabaffc91993cd8298b5c147a79e29a00139675d22b871e4ee0900d7d0ae0b0d",
+    "source_explained_unconfigured_descriptor_warning": 1,
+    "fresh_process_zero_patch": true
+  },
+  {
+    "phase": "drift",
+    "log_bytes": 55518,
+    "log_sha256": "c04448e60b7419f0c8238a097e61f20de044d41c192d792e07a9f1c9bec80566",
+    "realm_count": 117,
+    "realm_list_sha256": "c1decf16ca5fad13b6da5b42d494b6418224d7c2a327d19e869aec26e2a340f3",
+    "project_graph_lines": 44,
+    "project_graph_sha256": "fabaffc91993cd8298b5c147a79e29a00139675d22b871e4ee0900d7d0ae0b0d",
+    "source_explained_unconfigured_descriptor_warning": 1,
+    "expected_native_exitcode": 1,
+    "exact_intrinsic_source_drift": "source drift: m3/collections/pom.xml",
+    "no_report_or_partial_edit": true
+  }
+]

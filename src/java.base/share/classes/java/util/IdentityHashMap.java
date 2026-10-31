@@ -23,6 +23,12 @@
  * questions.
  */
 
+/*
+ * M3JDK21 direct-index map rendering Copyright 2026 Hitesh Soliwal
+ * and contributors. Original OpenJDK GPLv2 with Classpath Exception
+ * notices and conditions remain in force.
+ */
+
 package java.util;
 
 import java.io.ObjectInputStream;
@@ -672,7 +678,26 @@ public class IdentityHashMap<K,V>
             }
             return true;
         } else if (o instanceof Map<?, ?> m) {
-            return entrySet().equals(m.entrySet());
+            // Preserve virtual entrySet() semantics when a subclass overrides it.
+            if (getClass() != IdentityHashMap.class)
+                return entrySet().equals(m.entrySet());
+            // AbstractSet.equals(entrySet) checks cardinality and then
+            // tests every *foreign* entry through this map's containsMapping.
+            // Perform exactly those identity checks without constructing
+            // our EntrySet, EntryIterator or one Entry per owned slot.
+            Set<?> foreignEntries = m.entrySet();
+            if (foreignEntries == null || foreignEntries.size() != size)
+                return false;
+            try {
+                for (Object candidate : foreignEntries) {
+                    if (!(candidate instanceof Map.Entry<?, ?> e)
+                            || !containsMapping(e.getKey(), e.getValue()))
+                        return false;
+                }
+            } catch (ClassCastException | NullPointerException ignored) {
+                return false;
+            }
+            return true;
         } else {
             return false;  // o is not a Map
         }
@@ -712,6 +737,38 @@ public class IdentityHashMap<K,V>
             }
         }
         return result;
+    }
+
+    /**
+     * Format the canonical alternating key/value array directly. Unlike
+     * AbstractMap's entry-iterator formatter, this path materializes no
+     * intermediate Map.Entry objects. A key offset is occupied iff its
+     * internal reference is non-null; null keys use the existing mask.
+     */
+    @Override
+    public String toString() {
+        if (getClass() != IdentityHashMap.class) return super.toString();
+        final Object[] tab = table;
+        final int expectedModCount = modCount;
+        StringBuilder text = new StringBuilder("{");
+        boolean separator = false;
+        for (int offset = 0; offset < tab.length; offset += 2) {
+            Object masked = tab[offset];
+            if (masked == null)
+                continue;
+            // Mirror the existing fail-fast entry cursor on a subsequent
+            // element after a structural mutation during user toString().
+            if (modCount != expectedModCount)
+                throw new ConcurrentModificationException();
+            if (separator)
+                text.append(", ");
+            separator = true;
+            Object key = unmaskNull(masked);
+            Object value = tab[offset + 1];
+            text.append(key == this ? "(this Map)" : key).append('=')
+                .append(value == this ? "(this Map)" : value);
+        }
+        return text.append('}').toString();
     }
 
     /**

@@ -1,0 +1,342 @@
+{
+  "schema": "M3_BACKPORT_APPLIED_OWNER_AUTHORING_SOURCE_BINDING_V1",
+  "repository": "hsoliwal/com.synexia",
+  "receiverRepository": "hsoliwal/M3jdk21",
+  "sourceCommit": "ad255811262f7b5b17717747cd64fbc669a9db5a",
+  "admissionCommit": "679bece51397656563133a4f7e00063b086c0ee7",
+  "sdkPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/",
+  "sdkFiles": 46,
+  "files": [
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/FOSS_REUSE_DECISION.tsv",
+      "gitBlob": "8f08fd40b13b926b5d2ba1ab4f86a86811e7b0e0",
+      "bytes": 467,
+      "sha256": "32be5a563d0f56b50bc0a7d92b4072a027d88f9890242ef8100f139cee12da27",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/FOSS_REUSE_DECISION.tsv"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/pinned-engine/com/synexia/rewrite/M3BackportAppliedOwnerCustodyInverseRecipe.java",
+      "gitBlob": "19f8ce5c2fa1ceee9ce16c16f2dd7cd033c34ede",
+      "bytes": 861,
+      "sha256": "0d9aaa686018a5abf3b34114c9f3ba53c795ea6467311d620c01a728de4fb43f",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/pinned-engine/com/synexia/rewrite/M3BackportAppliedOwnerCustodyInverseRecipe.java"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/pinned-engine/com/synexia/rewrite/M3BackportAppliedOwnerCustodyRecipe.java",
+      "gitBlob": "5f2d3764697f2350001de0423473208ed7429065",
+      "bytes": 857,
+      "sha256": "c18f4fb402f4b07274c5abfbd3ac8179b9c933dbf822c78575907255f8c33ef0",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/pinned-engine/com/synexia/rewrite/M3BackportAppliedOwnerCustodyRecipe.java"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java",
+      "gitBlob": "38df5f97bbeec8a8a8cfc77091d56bda925c07f2",
+      "bytes": 10964,
+      "sha256": "56bd61be29eae76b3f468519677424450448751d94ca032956b330d7b3dd1999",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinManifest.java"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java",
+      "gitBlob": "1c1b1b568d369f688f6953161636bf36b484bf5a",
+      "bytes": 5187,
+      "sha256": "ee90a2b8689699745553c2f4d2d07121b91777f4e9a671fdb33ba8edea0c14ec",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/pinned-engine/com/synexia/rewrite/M3GpuToolJoinRecipe.java"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/pom.xml",
+      "gitBlob": "d79867bcc09ad6329e12418e15907e54b8ab025f",
+      "bytes": 2678,
+      "sha256": "f0ab99c3dafb38e82f8e5fd4c6d22db07831808c251c4622f292114c83e6673e",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/pom.xml"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/README.md",
+      "gitBlob": "0a6e4777d0be6a174f9fcd45c5ebddcefd259c39",
+      "bytes": 2757,
+      "sha256": "0ea62a0e2dd748ad26e8c4365c0fc89c5b5b9812385ad16e4a344c734fb1504b",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/README.md"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/.github/workflows/m3-backport-contract-current-owner.yml",
+      "gitBlob": "5ab3cba8a55c95095e3db09b8c959938aeab91e1",
+      "bytes": 40399,
+      "sha256": "9bb4d837c3a477bde62834691b2908619a7430f7b4c2831fd542fff191624405",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/.github/workflows/m3-backport-contract-current-owner.yml"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/qualify.py",
+      "gitBlob": "8b2f0dc1b85eb0ba755eaccb2752c14a985b5005",
+      "bytes": 14525,
+      "sha256": "ee1b599c988a4fef74a938214c585b3e1984ef37a4beb5de78b66cd66c8ff423",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/qualify.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/README.md",
+      "gitBlob": "7b5a280796392c828899a98c384f6f543b37d32f",
+      "bytes": 1612,
+      "sha256": "9971725a0132400d8081c957ac4fa96856b4dc367839cb3d9a96f5809f467844",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/README.md"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json",
+      "gitBlob": "3711ff6d7e245a9cbe7fe1b4440c9238ec8c4eef",
+      "bytes": 6754,
+      "sha256": "d29d5248ff9ce54b74ae58a76d60f5c8b85c415656980e3d32e49decfff49162",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/runtime/qualify.py",
+      "gitBlob": "4c64fbf724649bd9527e95b6456bcda842ec8086",
+      "bytes": 33211,
+      "sha256": "7174be28a592e24b330f57494c2fdcfada13f5f84d6de04729db8a5260aaae79",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/runtime/qualify.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/runtime/README.md",
+      "gitBlob": "295c928af7fc5b74181e9ecfce173bab32796678",
+      "bytes": 5689,
+      "sha256": "cf94d2a29e0f6e3dfcb0d08d2cc75541375d97ef08d2fd199c8c238a87454328",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/runtime/README.md"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/sdk/pins.json",
+      "gitBlob": "9f2ddf29ca66b06f5ad8a1c661fdb7429daea642",
+      "bytes": 14116,
+      "sha256": "c8ae16accc3b8927d8cc3e8e0d2d7c009e381e353cac8d58a589ea4f56bfc833",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/sdk/pins.json"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/sdk/verify.py",
+      "gitBlob": "c1b7cd322cbd715017704896fae1cd91749c8970",
+      "bytes": 25355,
+      "sha256": "e38ea432598fa1d0da3489395f7a55d6d03325cb71bd5eb9459d7fe913fb813c",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/before/m3/tooling/backport-contract-current-owner/sdk/verify.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/manifest.tsv",
+      "gitBlob": "87c097d87bcdea897aec2689565e303344efee6b",
+      "bytes": 1888,
+      "sha256": "227fb03f0f33d3a64582b25de2626e6d253fdc958b2b6d64eec58a2cef368eb3",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/manifest.tsv"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/.github/workflows/m3-backport-contract-current-owner.yml",
+      "gitBlob": "b992bdbfb5187f868fbf3388d01edb7d9e9d905c",
+      "bytes": 40769,
+      "sha256": "594e164e1befff52160360c6bdda1872e4821023ff180a7fca725dfc67869eb1",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/.github/workflows/m3-backport-contract-current-owner.yml"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/qualify.py",
+      "gitBlob": "010f29a71026001260842f4acea013e870dd0479",
+      "bytes": 18290,
+      "sha256": "8b23365d71c3af479822f4e1bf5e87109056a2acdca9cf989c3144f3855130fe",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/qualify.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/README.md",
+      "gitBlob": "0be188a28a3575c7af4bb574e7e741a12101d083",
+      "bytes": 2872,
+      "sha256": "e0758be9e298aa038392d9392449334c8dc39b76bc354c4c4dd7dfcdfb96f240",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/README.md"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json",
+      "gitBlob": "d5261c6bb8d2ec79dbeb84f71f488287487cd574",
+      "bytes": 9330,
+      "sha256": "c0f38f8be1ccacd318c6e26bc6a0b25d1f648317998908eb172991ba856c906c",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/runtime/qualify.py",
+      "gitBlob": "e12d631b71fecfbcd2dbaff715e15935e6a4cec1",
+      "bytes": 40785,
+      "sha256": "a71910c81bc0080c75958c47b324ff630263c7c99f15ba4ff854d5ed3007406f",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/runtime/qualify.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/runtime/README.md",
+      "gitBlob": "ea1b43d4872012b2e771315088fc0afb05e40732",
+      "bytes": 7436,
+      "sha256": "3a6e78070fcea23225d92a3ffb61ba8ea079da52b0085bca23f3ddd321b0615d",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/runtime/README.md"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/sdk/pins.json",
+      "gitBlob": "9f2ddf29ca66b06f5ad8a1c661fdb7429daea642",
+      "bytes": 14116,
+      "sha256": "c8ae16accc3b8927d8cc3e8e0d2d7c009e381e353cac8d58a589ea4f56bfc833",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/sdk/pins.json"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/sdk/verify.py",
+      "gitBlob": "c1b7cd322cbd715017704896fae1cd91749c8970",
+      "bytes": 25355,
+      "sha256": "e38ea432598fa1d0da3489395f7a55d6d03325cb71bd5eb9459d7fe913fb813c",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/forward/out/m3/tooling/backport-contract-current-owner/sdk/verify.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/.github/workflows/m3-backport-contract-current-owner.yml",
+      "gitBlob": "b992bdbfb5187f868fbf3388d01edb7d9e9d905c",
+      "bytes": 40769,
+      "sha256": "594e164e1befff52160360c6bdda1872e4821023ff180a7fca725dfc67869eb1",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/.github/workflows/m3-backport-contract-current-owner.yml"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/qualify.py",
+      "gitBlob": "010f29a71026001260842f4acea013e870dd0479",
+      "bytes": 18290,
+      "sha256": "8b23365d71c3af479822f4e1bf5e87109056a2acdca9cf989c3144f3855130fe",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/qualify.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/README.md",
+      "gitBlob": "0be188a28a3575c7af4bb574e7e741a12101d083",
+      "bytes": 2872,
+      "sha256": "e0758be9e298aa038392d9392449334c8dc39b76bc354c4c4dd7dfcdfb96f240",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/README.md"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json",
+      "gitBlob": "d5261c6bb8d2ec79dbeb84f71f488287487cd574",
+      "bytes": 9330,
+      "sha256": "c0f38f8be1ccacd318c6e26bc6a0b25d1f648317998908eb172991ba856c906c",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/runtime/qualify.py",
+      "gitBlob": "e12d631b71fecfbcd2dbaff715e15935e6a4cec1",
+      "bytes": 40785,
+      "sha256": "a71910c81bc0080c75958c47b324ff630263c7c99f15ba4ff854d5ed3007406f",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/runtime/qualify.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/runtime/README.md",
+      "gitBlob": "ea1b43d4872012b2e771315088fc0afb05e40732",
+      "bytes": 7436,
+      "sha256": "3a6e78070fcea23225d92a3ffb61ba8ea079da52b0085bca23f3ddd321b0615d",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/runtime/README.md"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/sdk/pins.json",
+      "gitBlob": "9f2ddf29ca66b06f5ad8a1c661fdb7429daea642",
+      "bytes": 14116,
+      "sha256": "c8ae16accc3b8927d8cc3e8e0d2d7c009e381e353cac8d58a589ea4f56bfc833",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/sdk/pins.json"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/sdk/verify.py",
+      "gitBlob": "c1b7cd322cbd715017704896fae1cd91749c8970",
+      "bytes": 25355,
+      "sha256": "e38ea432598fa1d0da3489395f7a55d6d03325cb71bd5eb9459d7fe913fb813c",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/before/m3/tooling/backport-contract-current-owner/sdk/verify.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/manifest.tsv",
+      "gitBlob": "c5ecfdfdfa708749d8d38bcb092dceeceb93ee07",
+      "bytes": 1888,
+      "sha256": "b85185f0e9f25a6cc6c1fa55a2146a43ef4441abbda02ed962c60f45047d692f",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/manifest.tsv"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/.github/workflows/m3-backport-contract-current-owner.yml",
+      "gitBlob": "5ab3cba8a55c95095e3db09b8c959938aeab91e1",
+      "bytes": 40399,
+      "sha256": "9bb4d837c3a477bde62834691b2908619a7430f7b4c2831fd542fff191624405",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/.github/workflows/m3-backport-contract-current-owner.yml"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/qualify.py",
+      "gitBlob": "8b2f0dc1b85eb0ba755eaccb2752c14a985b5005",
+      "bytes": 14525,
+      "sha256": "ee1b599c988a4fef74a938214c585b3e1984ef37a4beb5de78b66cd66c8ff423",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/qualify.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/README.md",
+      "gitBlob": "7b5a280796392c828899a98c384f6f543b37d32f",
+      "bytes": 1612,
+      "sha256": "9971725a0132400d8081c957ac4fa96856b4dc367839cb3d9a96f5809f467844",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/README.md"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json",
+      "gitBlob": "3711ff6d7e245a9cbe7fe1b4440c9238ec8c4eef",
+      "bytes": 6754,
+      "sha256": "d29d5248ff9ce54b74ae58a76d60f5c8b85c415656980e3d32e49decfff49162",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/runtime/INPUTS.json"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/runtime/qualify.py",
+      "gitBlob": "4c64fbf724649bd9527e95b6456bcda842ec8086",
+      "bytes": 33211,
+      "sha256": "7174be28a592e24b330f57494c2fdcfada13f5f84d6de04729db8a5260aaae79",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/runtime/qualify.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/runtime/README.md",
+      "gitBlob": "295c928af7fc5b74181e9ecfce173bab32796678",
+      "bytes": 5689,
+      "sha256": "cf94d2a29e0f6e3dfcb0d08d2cc75541375d97ef08d2fd199c8c238a87454328",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/runtime/README.md"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/sdk/pins.json",
+      "gitBlob": "9f2ddf29ca66b06f5ad8a1c661fdb7429daea642",
+      "bytes": 14116,
+      "sha256": "c8ae16accc3b8927d8cc3e8e0d2d7c009e381e353cac8d58a589ea4f56bfc833",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/sdk/pins.json"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/sdk/verify.py",
+      "gitBlob": "c1b7cd322cbd715017704896fae1cd91749c8970",
+      "bytes": 25355,
+      "sha256": "e38ea432598fa1d0da3489395f7a55d6d03325cb71bd5eb9459d7fe913fb813c",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/com/synexia/rewrite/backport-applied-owner-custody-20261020/inverse/out/m3/tooling/backport-contract-current-owner/sdk/verify.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/main/resources/META-INF/rewrite/backport-applied-owner-custody-20261020.yml",
+      "gitBlob": "498bdc3567a279ce6c9880705a1423ca516c7d32",
+      "bytes": 772,
+      "sha256": "703a2d9cedb7d42a738677290c209232debfa547ecc646351a7ba1c960f0ebd5",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/main/resources/META-INF/rewrite/backport-applied-owner-custody-20261020.yml"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/src/test/java/com/synexia/rewrite/M3BackportAppliedOwnerCustodyRecipeTest.java",
+      "gitBlob": "23fa8ad3437f57e1948b1dd392f6dbaeefb3febd",
+      "bytes": 16360,
+      "sha256": "1e77ebfcaf38ec3082b66256a0eb313aa8b4ccf763bdc172778bcdf77cee61ec",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/src/test/java/com/synexia/rewrite/M3BackportAppliedOwnerCustodyRecipeTest.java"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/THIRD_PARTY_NOTICES.md",
+      "gitBlob": "9b3acc79e8b1348985333ac29007487fcf685d72",
+      "bytes": 1116,
+      "sha256": "c9aa1f193ea02dd83eb5bc577e4417ddec69d9a5eeb34a746f4b03efd265b7ca",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/THIRD_PARTY_NOTICES.md"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/verify.py",
+      "gitBlob": "3921c8553b718d02ffc2a3a795a010ee24aae94b",
+      "bytes": 31989,
+      "sha256": "23863be057bf4d920e25da73488215c6f84f172493060433fba2bcf5edaef94e",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/verify.py"
+    },
+    {
+      "targetPath": "m3/tooling/backport-contract-current-owner/applied-owner-custody/authoring-sdk/pins.json",
+      "gitBlob": "359446e1d681044d773cb0124880b4caf1a5ce7d",
+      "bytes": 14648,
+      "sha256": "df3f71d83be4ec81df0cc8cd64fc584c34588cee327dd7363f67b093feb20ae3",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/applied-owner-custody/authoring-sdk/pins.json"
+    },
+    {
+      "targetPath": ".github/workflows/m3-backport-contract-current-owner.yml",
+      "gitBlob": "b992bdbfb5187f868fbf3388d01edb7d9e9d905c",
+      "bytes": 40769,
+      "sha256": "594e164e1befff52160360c6bdda1872e4821023ff180a7fca725dfc67869eb1",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/backport-contract-current-owner-20261019/hosted/qualification.yml"
+    }
+  ],
+  "runtimeApplied": false,
+  "phaseAdvanced": false
+}

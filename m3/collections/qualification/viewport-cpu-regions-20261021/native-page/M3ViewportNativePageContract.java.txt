@@ -1,0 +1,219 @@
+/*
+ * Copyright 2026 Hitesh Soliwal and contributors
+ * SPDX-License-Identifier: Apache-2.0
+ */
+package com.m3.collections;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+/** Actual Java/JNI page parity; no fake model, renderer or native implementation. */
+public final class M3ViewportNativePageContract {
+    private static long checks;
+    private static long digest = 1;
+    private static boolean nativeEnabled;
+
+    private M3ViewportNativePageContract() { }
+
+    private static void check(boolean value, String label) {
+        ++checks;
+        if (!value) throw new AssertionError(label + " at " + checks);
+    }
+
+    private static void equal(int[] expected, int[] actual, String label) {
+        check(Arrays.equals(expected, actual), label);
+        digest = digest * 31 + Arrays.hashCode(actual);
+    }
+
+    /** Bit-by-bit oracle does not call either production mask predicate. */
+    private static boolean selected(int state, int required, int forbidden) {
+        for (int bit = 0; bit < Integer.SIZE; ++bit) {
+            int mask = 1 << bit;
+            if ((required & mask) != 0 && (state & mask) == 0) return false;
+            if ((forbidden & mask) != 0 && (state & mask) != 0) return false;
+        }
+        return true;
+    }
+
+    private static int invoke(boolean useNative, int[] ids, int[] flags,
+            int first, int length, int required, int forbidden, int skip,
+            int limit, int[] target, int offset) {
+        return useNative
+                ? M3MaskViewportNative.projectPage(ids, flags, first, length,
+                        required, forbidden, skip, limit, target, offset)
+                : M3MaskViewportKernel.projectPage(ids, flags, first, length,
+                        required, forbidden, skip, limit, target, offset);
+    }
+
+    private static void scenario(int[] originalIds, int[] originalFlags,
+            int first, int length, int required, int forbidden,
+            int skip, int limit, int alias) {
+        for (int backend = 0; backend < (nativeEnabled ? 2 : 1); ++backend) {
+            int[] ids = originalIds.clone();
+            int[] flags = alias == 3 ? ids : originalFlags.clone();
+            int[] originalStates = flags.clone();
+            int[] target = alias == 0 ? new int[Math.min(limit, length) + 4]
+                    : alias == 2 ? flags : ids;
+            if (alias == 0) Arrays.fill(target, -991);
+            int[] admitted = new int[length];
+            int total = 0;
+            for (int i = first; i < first + length; ++i) {
+                if (selected(flags[i], required, forbidden)) admitted[total++] = ids[i];
+            }
+            int from = Math.min(skip, total);
+            int needed = Math.min(total - from, limit);
+            int offset = Math.min(2, target.length - needed);
+            int[] expected = target.clone();
+            System.arraycopy(admitted, from, expected, offset, needed);
+            int actual = invoke(backend == 1, ids, flags, first, length,
+                    required, forbidden, skip, limit, target, offset);
+            check(actual == needed, "page size");
+            equal(expected, target, "page/fences");
+            if (target != ids) equal(originalIds, ids, "offset owner");
+            if (target != flags) equal(originalStates, flags, "state owner");
+        }
+    }
+
+    private static void corpus() {
+        int[] sizes = {0, 1, 2, 3, 7, 31, 127, 128, 129, 255, 256, 257, 1025};
+        int[] required = {0, 1, 2, Integer.MIN_VALUE, -1, Integer.MIN_VALUE | 1};
+        int[] forbidden = {0, 2, 0, 0, 1, 4};
+        for (int trial = 0; trial < 936; ++trial) {
+            int size = sizes[trial % sizes.length];
+            int[] ids = new int[size];
+            int[] flags = new int[size];
+            for (int i = 0; i < size; ++i) {
+                ids[i] = (i * 37 + trial * 11) % 101;
+                flags[i] = switch ((i + trial) % 5) {
+                    case 0 -> -1;
+                    case 1 -> Integer.MIN_VALUE | 1;
+                    case 2 -> 1;
+                    case 3 -> 2;
+                    default -> 0;
+                };
+            }
+            int first = trial % 3 == 0 ? 0 : (trial * 11) % (size + 1);
+            int length = trial % 3 == 0 ? size : (trial * 47) % (size - first + 1);
+            int mask = trial % required.length;
+            int skip = switch (trial % 5) {
+                case 0 -> 0;
+                case 1 -> 1;
+                case 2 -> length / 3;
+                case 3 -> length;
+                default -> Integer.MAX_VALUE;
+            };
+            int limit = switch (trial % 4) {
+                case 0 -> 0;
+                case 1 -> 1;
+                case 2 -> 17;
+                default -> Integer.MAX_VALUE;
+            };
+            for (int alias = 0; alias < 4; ++alias) {
+                scenario(ids, flags, first, length, required[mask], forbidden[mask], skip, limit, alias);
+            }
+        }
+        // Deliberately dense windows and chunk crossings; independently moving rank and page length.
+        for (int size : sizes) {
+            int[] ids = new int[size];
+            int[] flags = new int[size];
+            Arrays.fill(flags, Integer.MIN_VALUE);
+            for (int i = 0; i < size; ++i) ids[i] = size - i;
+            for (int skip : new int[] {0, 1, 127, 128, 129, Integer.MAX_VALUE}) {
+                for (int limit : new int[] {0, 1, 17, 129}) {
+                    for (int alias = 0; alias < 3; ++alias) {
+                        scenario(ids, flags, 0, size, Integer.MIN_VALUE, 0, skip, limit, alias);
+                    }
+                }
+            }
+        }
+    }
+
+    private static void failure(Class<? extends RuntimeException> expected, String message,
+            int[] ids, int[] flags, int first, int length, int required, int forbidden,
+            int skip, int limit, int[] output, int offset) {
+        int[] saved = output == null ? null : output.clone();
+        for (int backend = 0; backend < (nativeEnabled ? 2 : 1); ++backend) {
+            boolean refused = false;
+            try {
+                invoke(backend == 1, ids, flags, first, length, required, forbidden,
+                        skip, limit, output, offset);
+            } catch (RuntimeException problem) {
+                refused = true;
+                check(problem.getClass() == expected, "exception class");
+                check(message.equals(problem.getMessage()), "exception message/order");
+            }
+            check(refused, "required refusal");
+            if (output != null) equal(saved, output, "failure must not publish");
+        }
+    }
+
+    private static void failures() {
+        int[] ids = {1, 2, 3, 4};
+        int[] flags = {-1, -1, -1, -1};
+        int[] out = {71, 72};
+        failure(NullPointerException.class, "logicalOffsets", null, null, -1, -1, 0, 0, -1, -1, null, -1);
+        failure(NullPointerException.class, "states", ids, null, -1, -1, 0, 0, -1, -1, null, -1);
+        failure(NullPointerException.class, "target", ids, new int[0], -1, -1, 0, 0, -1, -1, null, -1);
+        failure(IllegalArgumentException.class, "offset and state array lengths differ",
+                ids, new int[0], -1, -1, 0, 0, -1, -1, out, -1);
+        for (int[] bounds : new int[][] {{-1, 1, 0}, {0, -1, 0}, {4, 1, 0},
+                {Integer.MAX_VALUE, 1, 0}, {0, Integer.MAX_VALUE, 0}, {0, 4, -1}, {0, 0, 3}}) {
+            failure(IndexOutOfBoundsException.class, "invalid array window",
+                    ids, flags, bounds[0], bounds[1], 0, 0, -1, -1, out, bounds[2]);
+        }
+        for (int[] page : new int[][] {{-1, 0}, {0, -1}, {-1, -1}}) {
+            failure(IndexOutOfBoundsException.class, "negative visible page bounds",
+                    ids, flags, 0, 4, 0, 0, page[0], page[1], out, 0);
+        }
+        failure(IndexOutOfBoundsException.class, "destination capacity",
+                ids, flags, 0, 4, 0, 0, 0, 4, out, 0);
+        int[] late = new int[257];
+        late[256] = -1;
+        int[] states = new int[257];
+        for (int[] page : new int[][] {{0, 0}, {0, 1}, {Integer.MAX_VALUE, 0}, {0, Integer.MAX_VALUE}}) {
+            failure(IllegalArgumentException.class, "negative logical offset",
+                    late, states, 0, 257, 0, 0, page[0], page[1], out, 0);
+        }
+        failure(IllegalArgumentException.class, "negative logical offset",
+                late, states, 0, 257, 1, 1, 0, 1, out, 0);
+    }
+
+    private static void sortedComposition() {
+        int[] payload = new int[513];
+        int[] positions = new int[payload.length];
+        int[] flags = new int[payload.length];
+        for (int i = 0; i < payload.length; ++i) {
+            payload[i] = (i * 17) % 23;
+            positions[i] = payload.length - i - 1;
+        }
+        int[] originalPayload = payload.clone();
+        M3IndexSort.stable(positions, i -> payload[i], Comparator.naturalOrder());
+        for (int i = 0; i < flags.length; ++i) flags[i] = payload[positions[i]] % 3 == 0 ? -1 : 0;
+        for (int skip : new int[] {0, 1, 17, 127, 128, 129, 513, Integer.MAX_VALUE}) {
+            for (int alias = 0; alias < 3; ++alias) {
+                scenario(positions, flags, 0, positions.length, Integer.MIN_VALUE, 0, skip, 17, alias);
+            }
+        }
+        equal(originalPayload, payload, "sort/page never mutate payload");
+    }
+
+    private static void millionRows() {
+        int[] ids = new int[1_000_000];
+        int[] flags = new int[ids.length];
+        Arrays.fill(flags, 1);
+        for (int i = 0; i < ids.length; ++i) ids[i] = i;
+        scenario(ids, flags, 0, ids.length, 1, 0, 999_900, 64, 0);
+    }
+
+    public static void main(String[] args) {
+        if (args.length != 1) throw new IllegalArgumentException("--java or absolute native library path required");
+        nativeEnabled = !"--java".equals(args[0]);
+        if (nativeEnabled) System.load(args[0]);
+        corpus();
+        failures();
+        sortedComposition();
+        millionRows();
+        System.out.printf("M3_NATIVE_PAGE_%s checks=%d digest=%016x%n",
+                nativeEnabled ? "JNI" : "JAVA", checks, digest);
+    }
+}

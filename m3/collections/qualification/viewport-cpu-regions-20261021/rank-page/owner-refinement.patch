@@ -1,0 +1,115 @@
+--- a/m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3SparseExtents.java
+@@ -23,8 +23,8 @@
+  * <p>Unmeasured rows are implicit: logical count and estimate allocate no row-sized
+  * backing. Sorted primitive row IDs and measured extents carry only measured rows;
+  * the existing Fenwick algorithm indexes their signed deltas from the estimate.
+- * With m measured rows, offset and repeat measurement are O(log m), row lookup is
+- * O(log squared m), and sequential first measurements append in O(log m). A first
++ * With m measured rows, offset, row lookup and repeat measurement are O(log m),
++ * and sequential first measurements append in O(log m). A first
+  * measurement inserted in the middle, deletion of measurements, or an estimate
+  * change is O(m). This is a sparse-residency tradeoff, not a universal speedup.
+  * No Item/proxy or per-row object is created. Reset drops all measurement backing.
+@@ -185,16 +185,23 @@
+ 		if (count == 0) return -1;
+ 		if (offset <= 0) return 0;
+ 		if (offset >= totalExtent ()) return count - 1;
+-		// Upper bound of measured-row ends; zero-height runs remain half-open.
+-		int low = 0, high = measured;
+-		while (low < high) {
+-			int mid = (low + high) >>> 1;
+-			long end = ((long) rowIds [mid] + 1) * estimate + deltaPrefix (mid + 1);
+-			if (end <= offset) low = mid + 1;
+-			else high = mid;
++		// Descend the existing Fenwick tree once. Signed deltas need not be
++		// monotone: only reconstructed measured-row ends are nondecreasing.
++		// At each step, low is an aligned prefix and tree[next] extends it.
++		int low = 0;
++		long delta = 0;
++		for (int step = Integer.highestOneBit (measured); step != 0; step >>>= 1) {
++			if (step > measured - low) continue;
++			int next = low + step;
++			long nextDelta = delta + tree [next];
++			long end = ((long) rowIds [next - 1] + 1) * estimate + nextDelta;
++			if (end <= offset) {
++				low = next;
++				delta = nextDelta;
++			}
+ 		}
+ 		int first = low == 0 ? 0 : rowIds [low - 1] + 1;
+-		long start = (long) first * estimate + deltaPrefix (low);
++		long start = (long) first * estimate + delta;
+ 		long inGap = first + (offset - start) / estimate;
+ 		int limit = low == measured ? count - 1 : rowIds [low];
+ 		return (int) Math.min (inGap, limit);
+--- a/m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java
++++ b/m3/collections/src/main/java/com/m3/collections/M3MaskViewportKernel.java
+@@ -82,8 +82,9 @@
+      *
+      * <p>The entire input window is preflighted before any output mutation,
+      * including when the page is empty or begins past the last visible row.
+-     * A shared destination/source array uses a page-sized scratch buffer;
+-     * disjoint arrays require no allocation. Callers synchronize concurrent
++     * Contiguous pages use overlap-safe arraycopy. Sparse pages with a shared
++     * destination/source array use page-sized scratch; disjoint arrays require
++     * no allocation. Callers synchronize concurrent
+      * mutations and own any snapshot-generation validation.</p>
+      *
+      * @return number of logical offsets written, at most {@code maxVisible}
+@@ -107,13 +108,17 @@
+         // The renderer needs a page of logical identities, not skipped row payloads.
+         int available = 0;
+         int pageFirst = first + length;
++        int pageEnd = pageFirst;
++        int pageCount = 0;
+         for (int i = first, end = first + length; i < end; i++) {
+             if (logicalOffsets[i] < 0) {
+                 throw new IllegalArgumentException("negative logical offset");
+             }
+             if (matches(states[i], requiredBits, forbiddenBits)) {
+-                if (available == skipVisible) {
+-                    pageFirst = i;
++                if (available >= skipVisible && pageCount < maxVisible) {
++                    if (pageCount == 0) pageFirst = i;
++                    pageEnd = i + 1;
++                    pageCount++;
+                 }
+                 available++;
+             }
+@@ -126,13 +131,19 @@
+         if (needed == 0) {
+             return 0;
+         }
++        // Dense page, not necessarily dense input: arraycopy is overlap-safe.
++        // Full validation above still runs before any destination write.
++        if (pageEnd - pageFirst == needed) {
++            System.arraycopy(logicalOffsets, pageFirst, target, targetOffset, needed);
++            return needed;
++        }
+         if (target == logicalOffsets || target == states) {
+             final int[] scratch = new int[needed];
+-            copyPage(logicalOffsets, states, pageFirst, first + length - pageFirst,
++            copyPage(logicalOffsets, states, pageFirst, pageEnd - pageFirst,
+                     requiredBits, forbiddenBits, 0, needed, scratch, 0);
+             System.arraycopy(scratch, 0, target, targetOffset, needed);
+         } else {
+-            copyPage(logicalOffsets, states, pageFirst, first + length - pageFirst,
++            copyPage(logicalOffsets, states, pageFirst, pageEnd - pageFirst,
+                     requiredBits, forbiddenBits, 0, needed, target, targetOffset);
+         }
+         return needed;
+--- a/m3/collections/src/main/c/m3maskviewport.c
++++ b/m3/collections/src/main/c/m3maskviewport.c
+@@ -214,8 +214,9 @@
+     for (jint begin = pageFirst; begin < pageEnd;) {
+         jint take = pageEnd - begin;
+         if (take > M3_VIEWPORT_CHUNK) take = M3_VIEWPORT_CHUNK;
+-        if (available == length) {
+-            /* Dense windows need only the page's offsets on the second pass. */
++        if (pageEnd - pageFirst == needed) {
++            /* Preflight proves this page is contiguous even in a sparse window.
++             * Only its offsets are needed on the second pass. */
+             (*env)->GetIntArrayRegion(env, offsets, begin, take, scratch + cursor);
+             if ((*env)->ExceptionCheck(env)) {
+                 free(scratch);

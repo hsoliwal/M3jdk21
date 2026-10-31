@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.Kit
+displayName: Preserve exact JDK proof inputs
+description: Reuse the existing text snapshot recipe for one opt-in proof workflow. A saved artifact never grants test success or promotion authority.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: proof-kit

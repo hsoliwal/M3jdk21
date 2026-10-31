@@ -1,0 +1,15 @@
+category	status	boundary
+filtered_primitive_wrapper	IMPLEMENTED_TESTED_CANDIDATE	Existing aggregate atoms only; runtime application HOLD
+sorted_primitive_wrappers	REUSED_AND_DIFFERENTIALLY_TESTED	Existing navigation/range/mutation owners unchanged
+arbitrary_generic_collection_wrappers	NOT_COMPREHENSIVELY_QUALIFIED	No blanket replacement or comparator semantics change
+shallow_size_java_jni	IMPLEMENTED_TESTED_CANDIDATE	JVMTI API adapter; no HotSpot intrinsic claim
+identity_deduplicated_supplied_allocations	IMPLEMENTED_TESTED_CANDIDATE	No graph traversal or native retained-size inference
+zero_mask_java_jni	IMPLEMENTED_TESTED_CANDIDATE	Existing ABI; detached stable-order copy
+cooperative_borrow_counters	EXISTING_REUSE_UNCHANGED	Not VM-wide references; not requalified in this packet
+packed_residency_metadata	NOT_IMPLEMENTED_IN_THIS_PACKET	No counter saturation or hidden state packing
+native_allocation_owner_ledger	NOT_IMPLEMENTED_IN_THIS_PACKET	Shallow size does not account for native storage
+graph_retained_size	NOT_IMPLEMENTED	Requires separately qualified ownership/graph analysis
+vm_wide_reference_counts	NOT_IMPLEMENTED	Collector/root/compiler/ABI proof required
+compact_headers_lilliput	NOT_IMPLEMENTED	Separate JVM backport; no header changes
+catalogue	IMPLEMENTED_TASK_SLICE	Canonical searchable TSV; challenge taxonomy, no editorial copying
+maven_openrewrite	AUTHORED_NOT_EXECUTED	Actual canonical engine fixture remains gate; no direct target edits

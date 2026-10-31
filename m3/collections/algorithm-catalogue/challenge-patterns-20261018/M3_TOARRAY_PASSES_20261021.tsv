@@ -1,0 +1,13 @@
+pass	file_or_owner	original_operation	action_and_rationale	evidence
+1	M3IndexedListSnapshot.java	copyOf(Collection)	toArray then redundant Arrays.copyOf; adopt safe JDK21 returned Object[]	JDK21 Collection.toArray javadoc; exact original Git blob
+2	M3IndexedListSnapshot.java	copyOf(E[])	preserve defensive clone (caller-owned source can change)	Java21 source mutation proof
+3	M3IndexedListSnapshot.java	fromOwned and physical indexes	preserve sole Object[] payload plus primitive int[] coordinates	probe original array identity and physical index permutation
+4	M3IndexedListSnapshot.java	filtered/filteredSorted	preserve original predicate callback order, stable mergesort and JNI masks	256 seeded differential tests
+5	M3CollectionViews.java	FilteredCollection.addAll	unchanged original validated batch staging	previous exact source recipe and JNI parity
+6	M3FilteredViews.java	read-only sorted/navigable/reversed	unchanged live comparator and range view semantics	existing wrapper test gates
+7	M3FilteredLists.java	live index/iterator wrappers	unchanged; caching predicates could change observable callbacks	contract-preserving refusal
+8	M3IndexMaskCompactor.java, M3IndexPathMasks.java	Java/JNI state mask selection	unchanged existing original primitive backend	no JNI pointer/object changes; required-native refusal
+9	OpenRewrite Java-LST	Inline then Atomize	retain original parsed method; recognize exactly safe array-copy sequence	class-backed M3SnapshotToArraySingleOwnerRecipe
+10	OpenRewrite Java-LST	Patternize then Comment	one source-sealed recipe; unchanged public behavior	OpenRewrite JUnit fixed-point and off-target tests
+11	Java21/ABI/JNI	qualification	standalone source identity, randomized, sorted, native refusal tests	installed product CI must pass before merge
+12	GitHub	PR	small product and canonical source review, no destructive merge	source Git blob and SHA receipts

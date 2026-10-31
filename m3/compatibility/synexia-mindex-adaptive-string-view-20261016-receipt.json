@@ -1,0 +1,68 @@
+{
+  "schema": "M3JDK21_SYNEXIA_RECEIPT_ONLY_CLOSURE_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "evidenceOnly": true,
+  "claim": "Receipt is EVIDENCE of pre-existing pinned-master content and its Synexia canonical unit. It receives nothing, changes no source, advances no phase, and asserts no runtime result.",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "develop",
+    "pullRequest": "UNVERIFIED",
+    "commit": "11c94feb18155a53cc213708c353791132edc4a7",
+    "pinRef": "refs/m3run/synexia-develop-20261017",
+    "recipe": "UNVERIFIED",
+    "crate": "mindex-adaptive-string-view-20261016",
+    "unitKind": "RECIPE_DIR_EXT",
+    "unitPath": "synexia-openrewrite-recipes/recipes/mindex-adaptive-string-view-20261016",
+    "unitTreeSha": "dc7ff4139e5eb4a48a98834cf2e9993b1f694333",
+    "mechanics": "MIndexAdaptiveStringView - canonical Synexia implementation (README title)",
+    "donors": [
+      {
+        "path": "synexia-openrewrite-recipes/recipes/mindex-adaptive-string-view-20261016/README.md",
+        "blob": "142648b1f514",
+        "target": "M3StringRepresentationPlan",
+        "mechanics": "unit contract"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/mindex-adaptive-string-view-20261016/manifest.tsv",
+        "blob": "a5d13340f909",
+        "target": "M3StringRepresentationPlan",
+        "mechanics": "pins synexia-indexstring/MIndexAdaptiveStringView.java (blob 4a991e16bfc8, verified at pin), not master content"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/mindex-adaptive-string-view-20261016/pom.xml",
+        "blob": "c3fd368d825a",
+        "target": "M3StringRepresentationPlan",
+        "mechanics": "build+recipe declaration"
+      }
+    ],
+    "license": "Apache-2.0 first-party"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "pinRef": "refs/m3run/m3jdk21-master-20261017",
+    "owners": [
+      "M3StringRepresentationPlan"
+    ]
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringRepresentationPlan.java",
+      "blob": "0358002e01b3",
+      "before": "PREEXISTING",
+      "after": "44837a1badc01a11747a7d1b39f28ab241aa3ea5543ed561951e5645f6d47a7e"
+    }
+  ],
+  "residue": "RE_SEAL_REQUIRED: unit has no hash-pinned manifest covering the pinned-master content of its owner file(s); a successor hash-pinned recipe must seal master content before any phase advance",
+  "unverifiedFields": [
+    "pullRequest",
+    "recipe",
+    "ownerAssociation=TOKEN_MATCH(adaptive)"
+  ],
+  "gates": {
+    "evidenceOnly": "NOT_RUN: no build, no recipe execution, no tests; ls-tree + git show sha256 only (run RCPT-receipt-only-closure 2026-10-18)"
+  }
+}

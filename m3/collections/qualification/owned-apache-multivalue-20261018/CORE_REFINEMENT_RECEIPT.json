@@ -1,0 +1,10 @@
+{
+  "before_git_blob": "5a28be57fda7978231166d402af539e48d297ef3",
+  "before_sha256": "1fb66d3c334f4087bfcd2be7502dad25cfe6b18ae7c3a6d968cb44a4612e41e8",
+  "after_sha256": "258a4940136bce3998d7c2d717a6f5512f1412fd874580f242d2185be129b85a",
+  "before_bytes": 7589,
+  "after_bytes": 7020,
+  "public_signatures_preserved": true,
+  "removed_duplicate_methods": 2,
+  "status": "EXACT_IDENTICAL_BODY_DEDUP__COMPILE_PENDING"
+}

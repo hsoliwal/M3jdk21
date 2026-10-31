@@ -1,0 +1,68 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Optional Apache module integration of the existing source-built Jackson ObjectMapper with M3 decoded-file and compiler APIs. It does not promote the repository-wide receiving sequence.",
+  "source_repo": "hsoliwal/com.synexia",
+  "source_base_commit": "ec0ab00a64070e96ac5dc310cc168e49d9319be7",
+  "target_baseline": "8c274790d5b7cf2741df7baec96d6c5d0e9c72c4",
+  "intake_mode": "INDEPENDENT_APACHE_MODULE",
+  "receiving_sequence_advanced": false,
+  "modules": [
+    "com.fasterxml.jackson.annotation",
+    "com.fasterxml.jackson.core",
+    "com.fasterxml.jackson.databind",
+    "jdk.m3.jackson",
+    "jdk.m3.jackson.compiler"
+  ],
+  "canonical_recipe": "com.synexia.rewrite.M3JacksonJmodFullRecipe",
+  "canonical_recipe_crate": "synexia-openrewrite-recipes/crates/m3-jackson-jmod/pom.xml",
+  "canonical_recipe_packet": "m3-jackson-jmod-full-20261018",
+  "target_owner": "m3/tooling/module-packs/jackson",
+  "mappings": [
+    {
+      "source": "com.fasterxml.jackson.databind.ObjectMapper 2.19.2",
+      "target": "com.fasterxml.jackson.databind.ObjectMapper",
+      "status": "existing-source-built-jmod",
+      "target_rule": "Preserve upstream API, module identity, descriptors and configuration semantics; add M3ObjectMapper as an optional subclass."
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFile",
+      "target": "jdk.m3.jackson.M3File",
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFile.java",
+      "source_blob": "0c30aaa8b9f88a829c87e46ef82a0ea96c0d68a3",
+      "source_sha256": "611b7a1b2426940c323ce21755c3ffb80b035b1d0030b4926960091b5ecf1a40",
+      "status": "decoded-indexed-io-port",
+      "target_rule": "Immutable String atoms, adaptive occurrence handles, UTF-16 offsets and slices, forward Reader, bounded decoded admission, chunked Writer and direct writeTo. Jackson single-value and sequence I/O use these boundaries. Full native/search/postings/persistence file-plane migration remains separate."
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFileTokenStore",
+      "target": "jdk.m3.jackson.M3FileTokenStore",
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenStore.java",
+      "source_blob": "24af695903f1c62d353ce7843ac45267086a6801",
+      "source_sha256": "437df792100e344372b6ecedf79edf1acef253f1e9b838d38e233fce0991045b",
+      "status": "adaptive-storage-body-reused",
+      "target_rule": "Retain unsigned 8/16/32-bit handle boundaries with local package/class adaptation."
+    },
+    {
+      "source": "MIndexString lineage / existing java.lang.M3String storage",
+      "target": "java.lang.String public boundary",
+      "status": "existing-product-storage-boundary",
+      "target_rule": "M3String is package-private. Use ordinary immutable String references so the selected M3VM owns storage. No independent spelling arena, String.intern call, or Synexia runtime dependency."
+    },
+    {
+      "source": "existing compiler-owned M3AST callback and projection API",
+      "target": "jdk.m3.jackson.compiler.M3AstBindings",
+      "status": "actual-compiler-api-consumer",
+      "target_rule": "Capture detached TypeShape metadata through the actual M3AST Unit.project API. Preserve the original top-level projection; add an explicit named-member projection, typed Class/TypeReference/JavaType preparation and declaration-kind/record-signature checks. The actual ObjectMapper owns annotation, visibility and generic binding decisions."
+    }
+  ],
+  "existing_mapping_preserved": "m3/docs/name-mapping.d/m3-shared-frontend.json",
+  "pending_promotion_gates": [
+    "Matched custom M3JDK build and UseM3StringStorage on/off execution",
+    "Applicable full JDK/jtreg matrix",
+    "CPU, retained heap and process/native-memory measurements before performance claims"
+  ],
+  "runtime_dependency_on_synexia": false,
+  "source_license_rule": "Preserve individual upstream licenses and source provenance; adapter Apache-2.0; existing JDK compiler sources retain their own OpenJDK license.",
+  "supersedes": "m3/docs/name-mapping.d/m3-jackson-jmod-20261018.json",
+  "upstream_qualification": "m3/tooling/module-packs/jackson/UPSTREAM_QUALIFICATION.md"
+}

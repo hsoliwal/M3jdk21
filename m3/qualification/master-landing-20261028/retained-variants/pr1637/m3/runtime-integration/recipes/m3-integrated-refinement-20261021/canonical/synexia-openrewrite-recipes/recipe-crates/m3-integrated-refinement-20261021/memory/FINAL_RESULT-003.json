@@ -1,0 +1,46 @@
+{
+  "schema": "M3_INTEGRATED_CORRECTION_MEMORY_FINAL/1",
+  "status": "PASS",
+  "profile": "m3-integrated-refinement-20261021/1.0",
+  "events": [
+    "3e877856e3f14207fece0d3f69c627ef420480da61a94b4210b4504ef5fc7616",
+    "115767aa323e2ea6db2f6de6b13641157abc0f68ef45bbcfeeaeabc7e84698dd",
+    "9f00fe04f180f10e0c2f0ba247d676add86c7afee28a11065a7f0fe69238b01d",
+    "7b087f5faa490efcdc3b783cd86ca790c87e4fd00b6a4580e5754f5cad84ac5b",
+    "d3f3be895c7fa277090fb372a22564b989448ea42b55be0aa3c16f5b7df37086",
+    "c12353186399bbacdc60cedb4b0f33cb0179f8f7c146f1d87bc3b27d2104f36b",
+    "e110bc3de345c14e28b8719a8f8d93d708891c963a19d0b43a4edc25fffbf622"
+  ],
+  "event_count": 7,
+  "conformance_checks": 129,
+  "actual_event_integrity_checks": 7,
+  "unique_event_artifacts_verified": 76,
+  "admission": "PENDING",
+  "predecessor_checkpoint": {
+    "path": "memory/FINAL_RESULT-002.json",
+    "sha256": "50061ce8f2d14c8e7f9799bdba83b4b16ff564d53ab2d1e904f07b2d2469d2ee"
+  },
+  "profile_receipt": {
+    "path": "memory/PROFILE.md",
+    "sha256": "49807fc9611675b89429da43d59af52bf92568aa3bcffd7e97555d3f3cfeea1a"
+  },
+  "retrieval": {
+    "path": "memory/LESSONS-003.md",
+    "sha256": "5ae12b269e9681dd9f65d5c6c0fa1414549f8c9cdeda8e5a68af624725453159"
+  },
+  "index": {
+    "path": "memory/INDEX-003.json",
+    "sha256": "c33c34188af1d2814a1d954abe9e25019c25b20258c288eb4de3670cc1948c1a"
+  },
+  "verification": [
+    {
+      "path": "proof/sdk-003-workflow-successor-offline/RESULT.json",
+      "sha256": "72ea68db76198ff1f8d4e55f7df9bd6c5a40c1cc075abbfb851a7a343ff9e0ff"
+    },
+    {
+      "path": "proof/memory-integrity-003/RESULT.json",
+      "sha256": "02b8d95ed1c61c16d3dd1c570d50a1a6b30a03a004564d9e83c02e90cbf1af7b"
+    }
+  ],
+  "scope": "Seventh actual publication-preflight observation appended; all prior event and checkpoint bytes preserved. Corrected publication helper outcome is separate from this profile/integrity result."
+}

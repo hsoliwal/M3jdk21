@@ -1,0 +1,9 @@
+problem_category	selected_atom	complexity	decision	contract_provenance
+SORTED_BINARY_SET_SEEK	Use exact existing M3LongTreeSet signed long lower/higher/contains for both inputs	O((1+skipped)log n) vs O(n) prefix scan	SELECT_ON_SEALED_OWNERS	Existing final first-party indexed pages, no Entry/Node/object copies; Apache-2.0
+UNTRUSTED_SORTED_SET	Keep original iterator merge for all other M3LongSortedSet inputs	Original O(n)	KEEP	Original invalid ascending-order detection and source callback order remain unchanged
+EXACT_BOUNDS	Strict neighbor uses query itself as miss marker; inclusive checks exact membership	O(1) overhead	SELECT	No Long.MIN_VALUE/MAX_VALUE reserved marker or overflow
+INTERSECTION	Advance lower candidate until equal (signed compare)	O(skipped log n)	REUSE	JDK TreeSet.retainAll semantic oracle only; no JDK source copied
+DIFFERENCE	Advance left while right contains it	O(skipped log n)	REUSE	JDK TreeSet.removeAll semantic oracle only
+SYMMETRIC_DIFFERENCE	Advance both on equality, nearest distinct signed-long key otherwise	O(skipped log n)	REUSE	JDK TreeSet XOR oracle only
+CHALLENGE_DISCOVERY	LeetCode 349/350, HackerRank Sets, GFG sorted-array intersection	Category taxonomy	REFERENCE_ONLY	No challenge submissions/editorials copied
+JNI_MASKED_COLLECTIONS	Existing M3 C17 and Java mask-compactor ABI	Unchanged	REUSE	No native symbol or Java predicate transfer

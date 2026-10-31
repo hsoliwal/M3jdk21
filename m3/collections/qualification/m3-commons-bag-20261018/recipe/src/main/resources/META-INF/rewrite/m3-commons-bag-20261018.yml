@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CommonsBag20261018
+displayName: M3 Apache Commons Bag API receiver
+description: Add the M3-backed Apache Bag and real five-library contract oracle from exact SHA256 sealed templates.
+recipeList:
+  - com.synexia.rewrite.M3CommonsBagRecipe

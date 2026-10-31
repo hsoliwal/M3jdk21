@@ -1,0 +1,7 @@
+{
+  "cases": 18720,
+  "sha256": "877fc075dedf9cab5f586bdfc5d5dfb5ae29cfd2993eb3dd63e937d86a06b512",
+  "exact": true,
+  "before": "trace-before-attempt1.log",
+  "after": "trace-after-attempt1.log"
+}

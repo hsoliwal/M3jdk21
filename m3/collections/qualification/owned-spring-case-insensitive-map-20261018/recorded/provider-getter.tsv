@@ -1,0 +1,9 @@
+contains-found	true	[getKey, getKey, getValue]	{A=1}
+contains-missing	false	[getKey]	{A=1}
+contains-wrong-value	false	[getKey, getKey, getValue]	{A=1}
+contains-missing-throw-value	false	[getKey]	{A=1}
+remove-found	true	[getKey, getValue, getKey]	{}
+remove-missing	false	[getKey, getValue]	{A=1}
+remove-wrong-value	false	[getKey, getValue]	{A=1}
+remove-missing-throw-value	java.lang.IllegalArgumentException:entry-value-fixture	[getKey, getValue]	{A=1}
+remove-found-throw-value	java.lang.IllegalArgumentException:entry-value-fixture	[getKey, getValue]	{A=1}

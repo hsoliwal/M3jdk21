@@ -1,0 +1,8 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+# SPDX-License-Identifier: Apache-2.0
+jdk.m3.parser.M3ASTAuthoritativeModels#maven4Effective
+jdk.m3.parser.M3ASTAuthoritativeModels#mavenEffective
+jdk.m3.parser.M3ASTAuthoritativeModels#eclipseJdt
+org.apache.maven.api.services.ModelBuilderResult#getEffectiveModel
+org.apache.maven.model.building.ModelBuildingResult#getEffectiveModel
+org.eclipse.jdt.core.dom.CompilationUnit#getProblems

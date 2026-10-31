@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "policy": "additive; no blind renames or unverified compatibility claims",
+  "mappings": [
+    {
+      "source": "com.synexia.indexstring.LocalM3StringPiece",
+      "source_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
+      "target": "com.m3.text.LocalM3StringPiece",
+      "status": "separate provisional byte-format prototype; NOT an API-compatible replacement",
+      "canonical_owner_decision": "retain established Synexia owner; adapter/migration deferred"
+    },
+    {
+      "source": "LocalMIndexStringPiece",
+      "target": "com.m3.text.LocalM3StringPiece",
+      "status": "provisional semantic direction only",
+      "source_commit": null,
+      "compatibility_facade": "deferred until original source contract is supplied"
+    },
+    {
+      "source": "MIndex family",
+      "target": "M3 family",
+      "status": "requires per-type source/API/ownership mapping",
+      "source_commit": null
+    },
+    {
+      "source": "MatIndex family",
+      "target": "M3 family",
+      "status": "requires per-type source/API/ownership mapping",
+      "source_commit": null
+    }
+  ],
+  "imported_donor_sources": [],
+  "reviewed_synexia_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
+  "reviewed_contracts": "synexia-reconciliation.md"
+}

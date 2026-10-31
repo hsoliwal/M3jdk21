@@ -1,0 +1,13 @@
+{
+  "command": [
+    "javap",
+    "-p",
+    "-s",
+    "/workspace/scratch/48c1329dbda8/netbeans-gap-20261019/trial-04/candidate/classes/javax/swing/text/GapVector.class"
+  ],
+  "exit": 0,
+  "log_sha256": "9f55e0dd54d092ca833813617f83398cd8a3e2f5b5d3d73b74ec2490fb49dddd",
+  "user_seconds": 0.465675,
+  "system_seconds": 0.056724,
+  "max_rss_kib_linux": 60532
+}

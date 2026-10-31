@@ -1,0 +1,43 @@
+{
+  "properties": {
+    "sun.boot.library.path": [
+      "C:\\Program Files\\Java\\jdk-21\\bin"
+    ],
+    "java.library.path": [
+      "C:\\Program Files\\Java\\jdk-21\\bin",
+      "C:\\WINDOWS\\Sun\\Java\\bin",
+      "C:\\WINDOWS\\system32",
+      "C:\\WINDOWS",
+      "C:/Program Files/Java/jdk-21/bin",
+      "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin",
+      "C:/Windows/System32",
+      "C:/Windows",
+      "."
+    ]
+  },
+  "actual_search_directories": [
+    "C:\\Program Files\\Java\\jdk-21\\bin",
+    "C:\\WINDOWS\\Sun\\Java\\bin",
+    "C:\\Windows\\System32",
+    "C:\\Windows",
+    "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin",
+    "K:\\codex-work\\m3jdk21-recipe-pass-20261020\\data-current-module-materialization-k-v1\\module"
+  ],
+  "named_libraries": [
+    "m3_collections_mask",
+    "m3_collections_pathmask",
+    "m3_collections_address",
+    "m3_collections_long_path_masks",
+    "m3rankbatch",
+    "m3_residency_state_mask",
+    "m3signalorder",
+    "m3_collections_span",
+    "m3_collections_statehist",
+    "m3bitlane"
+  ],
+  "properties_log_sha256": "c6d27e5528de81a4a6b4459031abd2e0618da69439d94afc334365e751e0644c",
+  "properties_log_bytes": 3188,
+  "default_library_path_overridden": false,
+  "named_library_candidates_absent": true,
+  "scope": "CURRENT_EXPLICIT_ENVIRONMENT_AND_CWD_ONLY_NOT_WHOLE_OS_NATIVE_ABSENCE"
+}

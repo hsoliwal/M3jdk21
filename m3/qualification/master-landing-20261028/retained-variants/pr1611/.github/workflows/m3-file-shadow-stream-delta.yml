@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
+# SPDX-License-Identifier: Apache-2.0
+name: M3File shadow stream and delta
+
+on:
+  pull_request:
+    paths:
+      - 'm3/file/**'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/file/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-file-shadow-stream-delta-20261020/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-file-stream-delta-receiver.yml'
+      - '.github/workflows/m3-file-shadow-stream-delta.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  file-contract:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - name: Fetch exact pull-request head
+        shell: bash
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3             "https://codeload.github.com/${GITHUB_REPOSITORY}/tar.gz/${HEAD_SHA}"             -o "$RUNNER_TEMP/repo.tar.gz"
+          mkdir -p "$RUNNER_TEMP/repo"
+          tar -xzf "$RUNNER_TEMP/repo.tar.gz" -C "$RUNNER_TEMP/repo" --strip-components=1
+          printf 'REPO=%s\n' "$RUNNER_TEMP/repo" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Verify recipe postimages, donor decisions, and memory
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "$REPO/m3/file/qualification/shadow-stream-20261020/verify.py"
+
+      - name: Strict Java 21 file-module contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f "$REPO/m3/file/pom.xml" clean test

@@ -1,0 +1,1332 @@
+{
+  "repository": "hsoliwal/com.synexia",
+  "revision": "50f48cbbe11f17fb8dc209bac3812f8940a1e267",
+  "status": "ALL_CANDIDATE_SOURCES_MATCH_JAVA_AND_NATIVE_16_PROBE_RECEIPTS",
+  "java_source_count": 80,
+  "complete_file_family_source_count": 50,
+  "support_and_module_source_count": 30,
+  "native_source_count": 3,
+  "public_source_declaration_count": 709,
+  "probes_per_mode": 16,
+  "qualification_java_sha256": "b80d680a17a7d408c8ef78e0231a6061492eb6566e76e32798f96169ab521047",
+  "qualification_native_sha256": "24b9c341632f51c39b046f8774de908cf8b09170534d4c00e4b820b5101509d8",
+  "sources": [
+    {
+      "target_template": "java/com/m3/file/M3ByteFile.java.txt",
+      "sha256": "5802d8a6d2e141d398bff309f5b4dc3fa1714be202ab0c84ca0bb5e2e2e1a20b",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexByteFile.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexByteFile.java",
+          "git_blob_sha1": "7a7670922663fa0a40097178b3e381a89f57c61d",
+          "sha256": "48845943c13e720186c5efd1d5f1bcd90e4ebf1e183e3c566c540fdcddb8e142",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3ByteFileStreamIndexer.java.txt",
+      "sha256": "d08fa7ac79648c2194a00a30002d2d3c0d7301b27964b6816e3d21b575b703e4",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexByteFileStreamIndexer.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexByteFileStreamIndexer.java",
+          "git_blob_sha1": "3122738126444b269b2a8abac55e8c992c147bfc",
+          "sha256": "b7560461d90a1e8647ab46ca1ee33c5c5910af4bffa7522de535ab014793e8ff",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3CharacterFlags.java.txt",
+      "sha256": "97d4876e230328215484788a6335dcbf1677b8bd4ef8958f553722e305b12af3",
+      "scope": "FULL_SOURCE",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexCharacterFlags.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexCharacterFlags.java",
+          "git_blob_sha1": "3219d69fef5747c12f496b0fd5e5dbf652a101e8",
+          "sha256": "710636738b28164448c72444c1b8362692101811ecf930d9245c67a190371ea6",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3ChildProgressMonitor.java.txt",
+      "sha256": "23b0ffdc4fcde86e6c39d02e3a1cc916310432881b32cb181b3a3d8912cf45c6",
+      "scope": "FULL_JSON_DEPENDENCY_BODY",
+      "source_paths": [
+        "synexia-job/src/main/java/com/synexia/job/ChildProgressMonitor.java"
+      ],
+      "adaptations": [
+        "Complete donor body; explicit owner and package mappings only."
+      ],
+      "source_references": [
+        {
+          "path": "synexia-job/src/main/java/com/synexia/job/ChildProgressMonitor.java",
+          "git_blob_sha1": "ded919cf6e0122b8f4c246fd0f379a23e3bee973",
+          "sha256": "1fdd7db84f80b6e171669a3d60d5e8ec5e4971fde6c105d906b87dbf6fd2a913",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3File.java.txt",
+      "sha256": "dbda0676b4bcaec25b86321094086958c8c055ce38ed60a890b3fcd1a0cca5db",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFile.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFile.java",
+          "git_blob_sha1": "0c30aaa8b9f88a829c87e46ef82a0ea96c0d68a3",
+          "sha256": "611b7a1b2426940c323ce21755c3ffb80b035b1d0030b4926960091b5ecf1a40",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileAttributeOrder.java.txt",
+      "sha256": "6873496979babdaa3bf21f0a49a458088c13f71e61b95c1e5fcdf976d7b5069b",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileAttributeOrder.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileAttributeOrder.java",
+          "git_blob_sha1": "52e6ed110928f53d4f6e417b0d10baf542e99ec1",
+          "sha256": "3b2411da3e0455308c7b1b0f9e6e582a859fe5b20bdcfd9e866032c73a38f79b",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileAttributes.java.txt",
+      "sha256": "ac6016c43ace8760a36d213be2329661ef19e1fb4dbab2b27eacdb975f57214a",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileAttributes.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileAttributes.java",
+          "git_blob_sha1": "0e1336dea872ec447ba1bf991c7659f9be2dd6fb",
+          "sha256": "cf10473cf8e21867230f3c7b4f8302436ace8c3307b7e2fe197e050ba79a901a",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileBuilder.java.txt",
+      "sha256": "ef7146cac4d4bceb7f586f363ac77b32d1ea113520e35197898b597966082366",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileBuilder.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileBuilder.java",
+          "git_blob_sha1": "09582e64046a44b4f4a18478afd8481d48ff89b2",
+          "sha256": "67d4c520c078c765596a5f019a9ee8a560f140e002463428f79b0e6735759fc2",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileByteFacts.java.txt",
+      "sha256": "3d74c4e871861382eaaa5c111e12af944e0358935d62057a1b3e0b2256e05108",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileByteFacts.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileByteFacts.java",
+          "git_blob_sha1": "fd5b1350d13c82dc9a833a6b7a1dc94058977491",
+          "sha256": "925b99a6ae47673a2b9c307738ab0f8a46cbbbb54d71333bdc09b1e436336608",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileByteFactsSnapshot.java.txt",
+      "sha256": "6e3704889b9efbd4eefb4f64f47c7c22d5df61945c2707ac008571585e13dbf2",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileByteFactsSnapshot.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileByteFactsSnapshot.java",
+          "git_blob_sha1": "a2ff8a1c3aeccfb2e386ef9ec75048d7890a57e5",
+          "sha256": "46dbed19f6044bed476d25917b9ea39b9de87c3b943ccccb5acd3724332d1e92",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileCharsetEncoding.java.txt",
+      "sha256": "78b4657bb2e0852e34ef4c126bf6024c30510769bff67c3fe13151bde620e6f5",
+      "scope": "BOUNDED_ENCODING_STATE_WITH_OUTPUT_SINK",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringCharsetEncoding.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringCharsetEncoding.java",
+          "git_blob_sha1": "f003f3fe96ea99b11a7d986f304bbf573db82faf",
+          "sha256": "b97f4d4a46f592a505f5c8a95a87beb82b305b087e85d14e829418d8a195ce0f",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileCoordinates.java.txt",
+      "sha256": "ce2f5f2f11b2ccd431a89a872131e5c4a8c8f7d60fefbdc4b29a4116288184af",
+      "scope": "EXACT_FILE_COORDINATE_ALGORITHM_AND_RESOLVER_CAPABILITY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexCoordinateFingerprint.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexCoordinateFingerprint.java",
+          "git_blob_sha1": "81c2f453c3c2be7494589f9844d45e48933a95dc",
+          "sha256": "9b5c5540a445105e32577cc11a9c1dfb6e9bc225e03627837aae7d99219bb65b",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileDictionary.java.txt",
+      "sha256": "2c4d8af76163520fce7d3086017837fe9aac957439ccedce15c6bff85821396c",
+      "scope": "NEW_METADATA_RESOLVER_OVER_CANONICAL_JAVA_STRING_REFERENCES",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexResolver.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexResolver.java",
+          "git_blob_sha1": "7210e3cf39fb619fead9b95fc7f498b0bef7501b",
+          "sha256": "ca4c9f43b290a00c94dac4bfca9abbfd350e1fdaa2ec437911ed93f89f81dc25",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileEventReader.java.txt",
+      "sha256": "de6dedc02ed5e10dea6f182ad9c8d093064200249e1f449ff7e90c5b131dceb0",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileEventReader.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileEventReader.java",
+          "git_blob_sha1": "f7a1eb756e6000b5232e443f76382ff2a5cf52f6",
+          "sha256": "32202abdf8fc70edfe9a78929adc5cd45b06e8d14d96c4c57dca5c58371e30f2",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileEventSnapshotCollector.java.txt",
+      "sha256": "8f392c8c9415adbb42de2f2721ff9212cacf911bbc8170fbe40c2a72d6214c17",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileEventSnapshotCollector.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileEventSnapshotCollector.java",
+          "git_blob_sha1": "3f579568d2ff154e5018844890f37c4f62d05103",
+          "sha256": "dd96ae1dea10aa9bb8c33c3ae6beae93fe2b6467bc594387842a6aba3d2c33fb",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileEventWriter.java.txt",
+      "sha256": "33001a32c9298631c9fe316be131d9c51702067c53246ca51386f296392ded67",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileEventWriter.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileEventWriter.java",
+          "git_blob_sha1": "40be0dec6670cc2a0e1d6a031d502f72c9440861",
+          "sha256": "a7251f852f89d82ae8fb17067e771414f775a675bf8402ad0df13496fc8da978",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileFrequencyIndex.java.txt",
+      "sha256": "777e5316502c25d46cb2267cfdcb8e770cb5ae8e32c0f595691983767b3677ae",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileFrequencyIndex.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileFrequencyIndex.java",
+          "git_blob_sha1": "68012cd18ea2866c2631f8b9efc70cc3cfebca4e",
+          "sha256": "cb7c0dd3960f76507cb025eba8b2ad2c0bcc399c9da50b6bbb5c08ca81f9b297",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileHash.java.txt",
+      "sha256": "ebe4b1f3d045ef8ce7243a2ce1342ad09638ab026260dfd0cd3f22ebd8eb36e7",
+      "scope": "EXACT_HASH_TEXT_AND_MIX_METHODS_REQUIRED_BY_FILE_IMAGES",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexStringHash.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexStringHash.java",
+          "git_blob_sha1": "2680bad95d1efc8dc55b7f43f7f005b5804e7156",
+          "sha256": "2cc4b7d52c8140b130276dfd0c6a473ec68cc182509454ae9ef6bf9a55a735e9",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileId.java.txt",
+      "sha256": "d4ed91e4a590583f75749c1d8c6db2764e3f77991f936880210d5e119515e553",
+      "scope": "FULL_SOURCE",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexId.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexId.java",
+          "git_blob_sha1": "e1089c45c06c53bedffbd2a5774deabca56dba54",
+          "sha256": "10e906a74f5a3d23dc01352168868e2f63a3b462e5d638a914a17c823ba99727",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileImage.java.txt",
+      "sha256": "cf38a7b795d0f006a382ee8e6344b6ce80b656c1f1760a6fa484337a1f51c350",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileImage.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileImage.java",
+          "git_blob_sha1": "2160cb53eae114606f8bbfc15e763e3f14a168c3",
+          "sha256": "5c5f9a0eefe9e042369ee1f919dfb9f2d985cc57c7e8eee262e4c33f830f7b3f",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileKindIndex.java.txt",
+      "sha256": "7651e0d8e57540b06971e58785e4e551c88b84e619f96b6ec246fbdbefb4fa28",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileKindIndex.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileKindIndex.java",
+          "git_blob_sha1": "f622b727fa6646336837387b2773132f2391f05c",
+          "sha256": "3f807e6573daec79a73e38b37498a0c16e3d8bc10ab46596e2eca822e098a502",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileLexicon.java.txt",
+      "sha256": "90f594ad46ba757152041afaa76146b84b6ceba26444ca48cd4df642a702cbfe",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileLexicon.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileLexicon.java",
+          "git_blob_sha1": "ef13c3e5536f7b25299992986e5cf3e6e10a381e",
+          "sha256": "29ae0ada3526427e0ed9a9730dd21b42b338d443e165364535a235faac528b6a",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileLexiconSnapshot.java.txt",
+      "sha256": "c449cf3b762653121164d2608db878a9484581f8874d7d48c6a01aa05c3b1baa",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileLexiconSnapshot.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileLexiconSnapshot.java",
+          "git_blob_sha1": "67c5671863cd6618936796bd3028969c26806c28",
+          "sha256": "6d868a00cd920aa65f011e60492a1fe66c0622eceaa589ef17efcfc1b8a76b16",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileMultiPattern.java.txt",
+      "sha256": "96ec474d6201650e0c9e03a13ddcaa552cb03bf336f2427eed0830a1780edd56",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileMultiPattern.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileMultiPattern.java",
+          "git_blob_sha1": "cc6eedd9247eef2205c51a7e9aff2e3a4e282561",
+          "sha256": "ae0286eaa5c836cff2be0584a05a927633a3cce793e6ae16157eb34f23b55c09",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileNative.java.txt",
+      "sha256": "75f39895c56665508e3895e34873cda3bcde98339161574be790322f9e2152fd",
+      "scope": "EXACT_MAPPED_FILE_KMP_API_AND_FALLBACK_WITH_TARGET_LIBRARY_LOADER",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/nativebridge/IndexStringNative.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/nativebridge/IndexStringNative.java",
+          "git_blob_sha1": "2e1550186849f6abc0b7cbf4dfcb416d918382b9",
+          "sha256": "40c310b74ee6a2f66d743786d4a5c61906f1c4f9ce89bfe58d111e7b32bc6ded",
+          "directory_pin_verified": false
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FilePattern.java.txt",
+      "sha256": "97e492d33184406af9e7d6c5f00800c94d919cebd85247219275731bb932686b",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFilePattern.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFilePattern.java",
+          "git_blob_sha1": "8c87305639e37f1c77249e798a192eb8d68c8a54",
+          "sha256": "3e6ca36c0fae363813b4fc393f609133ebaea94e7709fe55ae2d22add6219df6",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FilePrimitiveSnapshot.java.txt",
+      "sha256": "ea9a2e4903c054cde989a04a1e665918a5aff343c5147a58f84d2e8c020e57a9",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFilePrimitiveSnapshot.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFilePrimitiveSnapshot.java",
+          "git_blob_sha1": "243333bd9411b9193b68655f6d44d8ab438bfe6d",
+          "sha256": "95337a9a7f8754e969c4e0a03b271728ad7ce31931ccf9c087d1f476bcb5ace3",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileProjection.java.txt",
+      "sha256": "3a352ce013d1870e05c9243bfc1803bbd8cda032fe2800874349f768a59b6227",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileProjection.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileProjection.java",
+          "git_blob_sha1": "41fa1c106c71a241c6071a1cea9551ee259dc482",
+          "sha256": "562e3f9d354632a693ec3300df3cc6c176da5b69601116e67e17e4b97245b5c5",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileProjectionSnapshot.java.txt",
+      "sha256": "b7095dfe70862a1687df6dbed44cf94e6af612402b000195fd4ebf5eca23cffc",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileProjectionSnapshot.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileProjectionSnapshot.java",
+          "git_blob_sha1": "1e7499e0b0fb5fe5107ab4acaac4af66825a0aae",
+          "sha256": "b98a7d93bce05c773076888b96c40b70cfd095d476a77837624384935b54a466",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileRangeFingerprint.java.txt",
+      "sha256": "77413007f75e1e7d5926d5b6a616acabd33441970dfc078888baed5c3d700924",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileRangeFingerprint.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileRangeFingerprint.java",
+          "git_blob_sha1": "827bfc93773f44fb4443656fb82910429c3cfb9c",
+          "sha256": "2036cd91c6b7fc7a7b7d95dd7c9512c037cba3df0c1fff3412425b5dabbaf71f",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileResolver.java.txt",
+      "sha256": "dccf95442e334a581f87a5c25aeb6d8fba025d404900d4eca828090eae18be2a",
+      "scope": "FILE_REQUIRED_RESOLVER_INTERFACE_WITH_IMMUTABLE_GENERATION_CAPABILITY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexResolver.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexResolver.java",
+          "git_blob_sha1": "7210e3cf39fb619fead9b95fc7f498b0bef7501b",
+          "sha256": "ca4c9f43b290a00c94dac4bfca9abbfd350e1fdaa2ec437911ed93f89f81dc25",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileRollingIndex.java.txt",
+      "sha256": "06baaaa7e3d9780ad05fb0360891db4836abe2081ad8a90ff854ab2809bc1762",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileRollingIndex.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileRollingIndex.java",
+          "git_blob_sha1": "2ebb3e2ffd538dc9c59ac72975df0879b58ce13c",
+          "sha256": "5991be4bbf75f34e81f85ec9c5239de9812ba29687e82555d827cab5a676b37d",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileSnapshot.java.txt",
+      "sha256": "d9063ce6e1830c7d4c6af880d96953bd95892a454f51afbebdee15f8f5da50e0",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSnapshot.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSnapshot.java",
+          "git_blob_sha1": "1ba1d47aac1064e8f59cf0c43d7ebb85235adeb3",
+          "sha256": "c6c95871c7e87f2931798c53ae4bc19aa952f8fa45728390bdb84cd41a06014b",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileSnapshotCodec.java.txt",
+      "sha256": "f49015eff03910c7ff53902e34bc85086ee72f7d2c69e0f26d7c17ab05cccbd2",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSnapshotCodec.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSnapshotCodec.java",
+          "git_blob_sha1": "38eedb816b3ea946a550b6826e409543e4d30649",
+          "sha256": "0d9d634a09da0136c7107f6d8b388cc0bbeedc6d3cd13f7474814cec8d690e1a",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileSourceFacts.java.txt",
+      "sha256": "e17b3a07e931bb36d17549e7b462fff877df531d44456e08760216674daa1668",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFacts.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFacts.java",
+          "git_blob_sha1": "8d1fa408ec01496cda7ea17cf4d6aea87e61441a",
+          "sha256": "5436f762b96540f401486e6a969837f7edf8a06b232d95a4322ddbf6b4c1642a",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileSourceFactsImage.java.txt",
+      "sha256": "5a7c08ac201d4f8ba6a931fd50151f3e6bd9258e0288ae03acd832394ad0c19b",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFactsImage.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFactsImage.java",
+          "git_blob_sha1": "e7cbbb02edc731f9b7887c2287a13b5dd30de9ef",
+          "sha256": "230b9bcff210a38df9434b535f46b2ea5689c430608b216897ae77738f636d9b",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileSourceFactsKey.java.txt",
+      "sha256": "30833dade63e4c340dbc5d4bf485d0fe769aaa24591c101c72c85d05157097f6",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFactsKey.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFactsKey.java",
+          "git_blob_sha1": "839ca6e2250f6931c065a95bd294c57b79c57bd6",
+          "sha256": "bd85e95530cefd585bd53f996abd91257a9c4c3ed6d27936802763994a518d51",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileSourceFactsSnapshot.java.txt",
+      "sha256": "0dd3f268b91cc85621affa71796b99699a83d4953207acb7880a7577f0704b1b",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFactsSnapshot.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFactsSnapshot.java",
+          "git_blob_sha1": "6fde4bfe373f79f9d0f0da7dbe929b3fd4b49b6a",
+          "sha256": "ea3307e4fec5c8dd0fabb13e5c223f8b6ff465e8a28167b61656eb44c4aa4eac",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileSourceFactsStore.java.txt",
+      "sha256": "c9c74e942b2ea9bd22dd82b51010ba3a1279120737862387613d0592fe1ce898",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFactsStore.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSourceFactsStore.java",
+          "git_blob_sha1": "d470157c521df1fad75120d6e399506a436348b5",
+          "sha256": "7026aae675557a3694454255c5aab190950c57bedb286fbf85915e4866575b58",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileSpan.java.txt",
+      "sha256": "6b3754cad78cdaf584822a0c49cb08b31edddf5b8da62ce0c4c6ee4e1985798e",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSpan.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSpan.java",
+          "git_blob_sha1": "4dbb3a4ec32776d730a8984e60ec2f40da6214b8",
+          "sha256": "2153baa9ee8155ddc8a5851594708961d0e97af7b5408095a136e49a339ccd38",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileSpanSnapshot.java.txt",
+      "sha256": "9139ed2f528fa5531a2635edb6e786b124e1801828e0cfc0475cb954ec1526b5",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSpanSnapshot.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileSpanSnapshot.java",
+          "git_blob_sha1": "8a327ddd3b7c0ff28480519d567ea055e4648870",
+          "sha256": "a288879049933d61b86a74c9330868224c133bbc1441ba8e216e894052de1def",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileStreamEvents.java.txt",
+      "sha256": "7bbd948c17209a739d7a5077cafcad1eecc0cfc9e13b5d60b3a184f2360704ab",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileStreamEvents.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileStreamEvents.java",
+          "git_blob_sha1": "08199d3703ce7110bdf5dcb6df2ab6742d88c83b",
+          "sha256": "65a510445aac91b99090568da9b5fd6466a5a8abb02c6d89bc087540011e417b",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileStreamIndexer.java.txt",
+      "sha256": "364f0598976b6634d0a4994c8fd243425c3d16599b1362b91b0dbe0446360e79",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileStreamIndexer.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileStreamIndexer.java",
+          "git_blob_sha1": "4e45077d4a92c0e34506377ef12ef396c617d151",
+          "sha256": "2aff40f6b7c8157051884caca17af19ef237def21d82317ddd2a368cdc6bd0d7",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileText.java.txt",
+      "sha256": "49d4baaa759bd9b27eabd47cc0fa999c57146e97c60db931ba52bad4e8f4216d",
+      "scope": "FILE_REQUIRED_IMMUTABLE_ID_DESCRIPTOR_USING_JAVA_STRING_PAYLOAD_OWNERS",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexString.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexString.java",
+          "git_blob_sha1": "2a31dcce114dc7d1f76b5b9156ccb4a6033281ff",
+          "sha256": "eb5e0045e45242e723269e0fa85282a1a4d4dba1d1a29322b50eac5f1dac2fe4",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileTextBuilder.java.txt",
+      "sha256": "7c44526d83dbe53c557859438578a6d41fadc24308c0661d76625f9a5f276659",
+      "scope": "FULL_SOURCE",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringBuilder.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringBuilder.java",
+          "git_blob_sha1": "8f8b0e9e809657f4d05a0566040dfe1001d32f8e",
+          "sha256": "8098744f7eea7fc22f1013b64f2c8d766340c11d26fdb975c2449d3e8932b90c",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileTextPool.java.txt",
+      "sha256": "b46c6dbb235b1e4cf01f5545684ec2d94e65d5aebf6b7838d5539d7ab265fc30",
+      "scope": "FULL_SOURCE",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringPool.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringPool.java",
+          "git_blob_sha1": "062774c3fd169149ae0e65598b2ea16eb09a2549",
+          "sha256": "d77020a0e03963a659d6c3f95731d989526b13b074381ce11f5d234dac45a276",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileTextRef.java.txt",
+      "sha256": "2b1ca23d5f46c82b7f4488f971efe42d6706ce4ee44fe44f301e37ddfea73cbe",
+      "scope": "FULL_SOURCE",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringRef.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringRef.java",
+          "git_blob_sha1": "b3fb1a8c6ab33ed334ea7e1749843439a69c343f",
+          "sha256": "b001588636abc023053e5d40b18ec4fd94057ed796629d436546640d9f6ae942",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileTextTokenizer.java.txt",
+      "sha256": "460fbfe4398a070349656b83c1f368aa51365e9699c99174788bcafe261bd90f",
+      "scope": "EXACT_CHARSEQUENCE_PARTITION_REQUIRED_BY_BUILDER_PRIVATE_DEPENDENCY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexTokenizer.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexTokenizer.java",
+          "git_blob_sha1": "bdd0dec75d2c7980feb163223b852914763e5aae",
+          "sha256": "c0720d0c2611a049cc928a9d1d91dc5d5a3a82318a7a248fe815fe274649b95f",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileTokenKind.java.txt",
+      "sha256": "bf561ee119ffd3397a5d3bd91fad8fae40085413516cc27e457f31df53f36443",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenKind.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenKind.java",
+          "git_blob_sha1": "6364dbfbc82189e8ac2a9188e3db7b2aacff98e6",
+          "sha256": "3d3d1516e94a2063b81bcc6be6fbc13e1873fb2cfd27d80356298788df79803c",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileTokenRange.java.txt",
+      "sha256": "62374896dfd50b702acb0abbcfba1a2ef69d171d85a4938001af88bbf40607f2",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenRange.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenRange.java",
+          "git_blob_sha1": "635b9360927312979c5011e408d77a892b9d3a77",
+          "sha256": "1812b49d167b52e4987799169ecfc97f83880ec6ee3105a7a83ae6cf920ba271",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileTokenRangeSha256.java.txt",
+      "sha256": "58369250a00e5c1b9e34d1d2817de351e9a3a6ce499827685320ee8ac358fa02",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenRangeSha256.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenRangeSha256.java",
+          "git_blob_sha1": "95eb318a5d1edeb665e23a198c745f60ca4d95a2",
+          "sha256": "304055d5f01f7ac3ab2836458a71f0581e802b731ad42039fd4df0a2387d7e80",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileTokenStore.java.txt",
+      "sha256": "ce3759fcd0439318a29b250c3a281839d4cbd4202e1f38981227408ed02cfa74",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenStore.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenStore.java",
+          "git_blob_sha1": "24af695903f1c62d353ce7843ac45267086a6801",
+          "sha256": "437df792100e344372b6ecedf79edf1acef253f1e9b838d38e233fce0991045b",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileTokenizer.java.txt",
+      "sha256": "f028a11bf59a3d47c09be71f4fec7c0b408652b3f97d339583b0d76df1d6b69d",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenizer.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileTokenizer.java",
+          "git_blob_sha1": "01cbee0801c6320aa42bd3bd30bb52f52cf6b795",
+          "sha256": "f9619930d407049a44d4419d2f4290b1aef391ef20d5537eff8a9c1e51fa78ef",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileUniverseEventReader.java.txt",
+      "sha256": "f0d4c372fe31ee6efc4bd02a52f5d11720a64f5154092fb5f3ea109fd10d3ae2",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseEventReader.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseEventReader.java",
+          "git_blob_sha1": "58213bd5ff11c2bd4e1df5abce9ebf3fff647108",
+          "sha256": "963c2e824694a7a636a75938835d11e8749c8388cc12131aba9104078850f54d",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileUniverseEventWriter.java.txt",
+      "sha256": "8da2f7dd9b01fd4eb12629fca0b162c7066cc9cbce5e3c02922231ebc520affc",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseEventWriter.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseEventWriter.java",
+          "git_blob_sha1": "809709e1d9398070f03475c5b375bc2a6ca0d238",
+          "sha256": "d5edd864e61aec8a681f46ee309e77af02e427936f34a76524726f804e674106",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileUniversePlan.java.txt",
+      "sha256": "83cd132c58dfa7f2f137e9f119aee2a4f9b04b29c119ea64d884fa8089cafb84",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniversePlan.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniversePlan.java",
+          "git_blob_sha1": "9fd70f54455c2976695fcf23fbd6c78ead0d8792",
+          "sha256": "1b4055c3c889dde05459e13b9a4d122f609a8ec358ea94fe7cc59c11d9d51bdd",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileUniverseSnapshot.java.txt",
+      "sha256": "994993e2060fdc2f1b877ad3671d461c66f28bf06417535fb35f314c32839215",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseSnapshot.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseSnapshot.java",
+          "git_blob_sha1": "6fe12ccea66622dc77ebda824af930c8468d9083",
+          "sha256": "5f632871d4bae4cea16c5e0b49ce006e3fb8072c4a83eb47e81caba35a2fa589",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileUniverseSnapshotImage.java.txt",
+      "sha256": "ff73466f54d0981a4cab9f2fd90d24636ea96fc4d633f650351b2cbe7ea1ec8d",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseSnapshotImage.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseSnapshotImage.java",
+          "git_blob_sha1": "085541a91a97dbe263b11bf733067bd6807ed91d",
+          "sha256": "55f84729581d4be61ca125a53356673816f037bf1d3fe628431e066fb98df91e",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileUniverseTokenIndex.java.txt",
+      "sha256": "e626f28040f9d36d1beb3d6d66329ee0efac2923b37d30d8993c852716fde58f",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseTokenIndex.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseTokenIndex.java",
+          "git_blob_sha1": "cdbdc3d8fa359720ca569c8a22401f8a72a6da35",
+          "sha256": "5f0ded3f61f0c388ee73f31a7ed0418a724b0f830807d9150fc592293f7d3ee7",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileUniverseTokenIndexImage.java.txt",
+      "sha256": "1fbabc11a8a832678a9332756494aa17c7098f57791b24d4add9d621b83561aa",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseTokenIndexImage.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseTokenIndexImage.java",
+          "git_blob_sha1": "cf4b01f383ba95d10dc8559dd5bf231fd4ca3d9b",
+          "sha256": "858ad2d8beff1181187d7fe9bbdb05c536a62f0466deb82d7e3b1dcc0201b704",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileUniverseTokenRangeSha256.java.txt",
+      "sha256": "ce007cb21172bb0ad20799e1a7e9572ae7508f81e982b44cc3a926b6d2180d56",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseTokenRangeSha256.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseTokenRangeSha256.java",
+          "git_blob_sha1": "57a242838c11c3d660c2c2ce4b126c6ab0dac360",
+          "sha256": "0b0d24bf5ca74fc61556244c594778fcde1d3d4c25986a5244962f790e6f63d1",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3FileUniverseTokenSpan.java.txt",
+      "sha256": "0654c95138e0246cbdd617e967ec6b7d54b32f41a3fdd6b09003dc1c60780125",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseTokenSpan.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MIndexFileUniverseTokenSpan.java",
+          "git_blob_sha1": "5fd99426760d9b0558a6a56bd85bf66801a9ec92",
+          "sha256": "1a4e1882b8435caf32beaaddc2fecff031aab0d0c15ff09c601acf64db04e8b2",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3Hash256.java.txt",
+      "sha256": "14191c32a0e7fe5bda27c00f61fe20e0186366ef3b94f89959245f3f5c34c0ab",
+      "scope": "FULL_SOURCE",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MatHash256.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MatHash256.java",
+          "git_blob_sha1": "c729eb91d6fe35c34d57e04761c790f62701de6d",
+          "sha256": "c6130a7e7547e11adad41bdf66e7d5df268f97434ec73791c553904f75b1cc93",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3JniLibraryLoader.java.txt",
+      "sha256": "613def6113f8101dc31d7b956e73b05b7bbe63b903eadcd385dedeb7e7da9536",
+      "scope": "FULL_JSON_DEPENDENCY_BODY",
+      "source_paths": [
+        "synexia-native-interop/src/main/java/com/synexia/nativeinterop/JniLibraryLoader.java"
+      ],
+      "adaptations": [
+        "Complete donor body; explicit owner and package mappings only."
+      ],
+      "source_references": [
+        {
+          "path": "synexia-native-interop/src/main/java/com/synexia/nativeinterop/JniLibraryLoader.java",
+          "git_blob_sha1": "da5d6391af12d53a71c5f1e0f3736fa125659b64",
+          "sha256": "fa22dcfcc2b442c72ee3dd97e5d97dd5c9ad19ee4eac422641336b7477c63699",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3JsonStructuralNative.java.txt",
+      "sha256": "5510d99a7068b87db686775a401a2f9f95f1abc980392c9fc695d9c1985adf6a",
+      "scope": "FULL_JSON_DEPENDENCY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/nativebridge/MIndexJsonStructuralNative.java"
+      ],
+      "adaptations": [
+        "Complete donor body; explicit owner and package mappings only.",
+        "Map native library properties to m3.file.native.{path,pathFile,name}, default library m3file; shared boolean m3.file.native=false disables optional dispatch.",
+        "For nonempty output, explicitly reject target.isReadOnly() after the existing same-object overlap check. Preserves Java ByteBuffer.put writability and validation precedence before JNI can obtain a raw address; length-zero requests remain allowed. An explicit-module required-JNI probe reproduced the unguarded donor failure before this correction."
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/nativebridge/MIndexJsonStructuralNative.java",
+          "git_blob_sha1": "fc28c55d566a637dbb838dad013aa37795ca677c",
+          "sha256": "c7b1b23c1c2323634d2bd5ef706f65967cd108cd333498ccdf457844410512d6",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3LongLookup.java.txt",
+      "sha256": "c17a20e2d06d2a3e977933cc6573111c897b5aecfb1988ef708873f598a47a02",
+      "scope": "FULL_SOURCE",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexFrozenLongLookup.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexFrozenLongLookup.java",
+          "git_blob_sha1": "de1c256f0199f3fd428a821dd31cfddf1bef7061",
+          "sha256": "0aecd6ecd6e88d07a2986002af677a9c8bebd5e200d3a07e85f8e1eea287225f",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3NativeLibrarySpec.java.txt",
+      "sha256": "9eef35d68d5d79745d7f60f10120f09205699833e0f9fa967e5c9b5fc13e6744",
+      "scope": "FULL_JSON_DEPENDENCY_BODY",
+      "source_paths": [
+        "synexia-native-interop/src/main/java/com/synexia/nativeinterop/NativeLibrarySpec.java"
+      ],
+      "adaptations": [
+        "Complete donor body; explicit owner and package mappings only."
+      ],
+      "source_references": [
+        {
+          "path": "synexia-native-interop/src/main/java/com/synexia/nativeinterop/NativeLibrarySpec.java",
+          "git_blob_sha1": "39b9f04e46411de9bf7b8063608241efb2819aca",
+          "sha256": "fd9bc8f19f629e6131dcb55f264eed524fa17e69bdda31d723b4addfddb8a4f5",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3PageableTree.java.txt",
+      "sha256": "17ae996cffab497f44b9aeb0262a7c5e1e8236420e35c51a0696b5918c75a9ad",
+      "scope": "FULL_JSON_DEPENDENCY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexPageableTree.java"
+      ],
+      "adaptations": [
+        "Complete donor body; explicit owner and package mappings only."
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexPageableTree.java",
+          "git_blob_sha1": "4eb8174f5575702014557b391f83a514db06e644",
+          "sha256": "e61df0bd65c31d220cd2774ff5e8d68488da85eb114a4ea3751ae2d55cef652a",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3PageableTreeCursor.java.txt",
+      "sha256": "60960320a4e37f31f95dadf1d63c5badad4851243e34b8995c214c39c64320f3",
+      "scope": "FULL_JSON_DEPENDENCY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexPageableTreeCursor.java"
+      ],
+      "adaptations": [
+        "Complete donor body; explicit owner and package mappings only."
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexPageableTreeCursor.java",
+          "git_blob_sha1": "8f99855e93b53e805f2dc79ba637e2bfc1971122",
+          "sha256": "bfee8b4825c1b85bcfb9a27651635d11716ce0f15b10bf7868067bc08b52b6f3",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3Progress.java.txt",
+      "sha256": "28818ae132655e930f5347f6aa53433e57d5f57836358e1e9a5370289dea73c6",
+      "scope": "FULL_JSON_DEPENDENCY_BODY",
+      "source_paths": [
+        "synexia-common/src/main/java/com/synexia/common/progress/ProgressMonitor.java"
+      ],
+      "adaptations": [
+        "Complete donor body; explicit owner and package mappings only."
+      ],
+      "source_references": [
+        {
+          "path": "synexia-common/src/main/java/com/synexia/common/progress/ProgressMonitor.java",
+          "git_blob_sha1": "7457acbf97423af4d8405ebd3efabd224f7373fa",
+          "sha256": "a6ea4f264fd771e52bfe575baa35b96de8d06abec723dab7eac712d5843524de",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3ProgressCalculations.java.txt",
+      "sha256": "6df6d1b10eb0c2c9465357155518093bd322a2cd4c1b667d61403a6a599ca354",
+      "scope": "FULL_JSON_DEPENDENCY_BODY",
+      "source_paths": [
+        "synexia-job/src/main/java/com/synexia/job/utils/ProgressCalculationUtils.java"
+      ],
+      "adaptations": [
+        "Complete donor body; explicit owner and package mappings only.",
+        "Remove unused Lombok Slf4j import and annotation only; no logger calls exist, all four public arithmetic methods are preserved."
+      ],
+      "source_references": [
+        {
+          "path": "synexia-job/src/main/java/com/synexia/job/utils/ProgressCalculationUtils.java",
+          "git_blob_sha1": "b0eb1223d9d9513828d5c015db3c3af69659bee7",
+          "sha256": "7a5f950efde91f07e8df46a092bb34408b49532807be361a6c1da19ac3b3bf45",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3ProgressChild.java.txt",
+      "sha256": "28d62e89796e60805e9e46f8dfa7ea5bb038e99579296f586a164567e09bf9ec",
+      "scope": "FULL_JSON_DEPENDENCY_BODY",
+      "source_paths": [
+        "synexia-common/src/main/java/com/synexia/common/progress/ChildProgressMonitor.java"
+      ],
+      "adaptations": [
+        "Complete donor body; explicit owner and package mappings only."
+      ],
+      "source_references": [
+        {
+          "path": "synexia-common/src/main/java/com/synexia/common/progress/ChildProgressMonitor.java",
+          "git_blob_sha1": "3909723ae02d81a27e5a6056fe8cfacd82042840",
+          "sha256": "397bcfc5e8eaa4d516f6fccd1d3c238be4432f6f6a49f77a425ae21fd7d969ff",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3ProgressMonitor.java.txt",
+      "sha256": "9dec6ae3ca9968785d3f8e47a209abe3e09fa5e62798243bfe0fc9708e2087a2",
+      "scope": "FULL_JSON_DEPENDENCY_BODY",
+      "source_paths": [
+        "synexia-job/src/main/java/com/synexia/job/IProgressMonitor.java"
+      ],
+      "adaptations": [
+        "Complete donor body; explicit owner and package mappings only."
+      ],
+      "source_references": [
+        {
+          "path": "synexia-job/src/main/java/com/synexia/job/IProgressMonitor.java",
+          "git_blob_sha1": "40c70d5551a01485a29b36ef7e09822f6b79b267",
+          "sha256": "1dea7f0324c0106d993e6688e221d1f9755c35e6c70d292c2b75eb4fd28cc00e",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3ProgressSnapshot.java.txt",
+      "sha256": "5deca622172f899f1f6484b3bdc831747227d8c80590ef42422158f2722d7710",
+      "scope": "FULL_JSON_DEPENDENCY_BODY",
+      "source_paths": [
+        "synexia-job/src/main/java/com/synexia/job/ProgressSnapshot.java"
+      ],
+      "adaptations": [
+        "Complete donor body; explicit owner and package mappings only."
+      ],
+      "source_references": [
+        {
+          "path": "synexia-job/src/main/java/com/synexia/job/ProgressSnapshot.java",
+          "git_blob_sha1": "4a3ace0e3d8459409af5d9e39b2451605c5d8f7d",
+          "sha256": "9aea76a6dfbf7fb954ffd03081520a11e2e8ef515c0d3e556a735408187f1267",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3ProgressState.java.txt",
+      "sha256": "d529b5f4834a1ac3b0afc7ff0bf4ddd4f39999c9da42049c24c845e4c2d852cb",
+      "scope": "FULL_JSON_DEPENDENCY_BODY",
+      "source_paths": [
+        "synexia-common/src/main/java/com/synexia/common/progress/ProgressState.java"
+      ],
+      "adaptations": [
+        "Complete donor body; explicit owner and package mappings only."
+      ],
+      "source_references": [
+        {
+          "path": "synexia-common/src/main/java/com/synexia/common/progress/ProgressState.java",
+          "git_blob_sha1": "87b14cb9a32f6d6c0f53441aaeedfab9333826cf",
+          "sha256": "29cde61a192e454dd2ffde25e5a142cdc2a25e806ce91f7f01e6d5d7f6bf6960",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3TextFacts.java.txt",
+      "sha256": "b159bfeba6db1c6132537bd60c1c4918d652a3094a076b3edd37ac434bcf6147",
+      "scope": "FULL_CONTENT_ONLY_FACTS_EXCLUDING_UNRELATED_RESOLVER_CAPABILITY_ADAPTERS",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexTextPrecomputedFacts.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexTextPrecomputedFacts.java",
+          "git_blob_sha1": "ab3459257d633f2f072943c883ab729ccc98cab5",
+          "sha256": "1a1c6d3834ce56e4f6a638362281ec7379a96902dcc6d416cd338a3aaed79934",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/M3TextMetrics.java.txt",
+      "sha256": "1b1507dad30f90e6c6ba4822388e57cda52e42e86ce31d7727b94c4d3eb0f81e",
+      "scope": "FULL_SOURCE_WITH_TARGET_NATIVE_LOAD_AND_OPT_IN_PROPERTY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexTextMetrics.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexTextMetrics.java",
+          "git_blob_sha1": "043e68f6265504eb7ea70fd51ecf833299b4e583",
+          "sha256": "c20c82e37c0c080a436fd6e505b452c4f090b986bbcf539ed70146a3252636d2",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/MappedM3File.java.txt",
+      "sha256": "c3b6d79eb17b38a7f22d5a0e1a2451323115f8c396c2d6a96bddd55d4bf0ac6c",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MappedMIndexFile.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/MappedMIndexFile.java",
+          "git_blob_sha1": "13c14c2abd4edb5cbb2280713c8e6f8ccff81a6f",
+          "sha256": "e312cbc8c5b85f3babf8a363199c9f24a43796c555e6fab658da87a24cc2415d",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/com/m3/file/json/M3JsonStructuralIndex.java.txt",
+      "sha256": "387060daf4fe5efb1593563abfb910a6b48e75562a188c210fa012bf8d266cc5",
+      "scope": "COMPLETE_FILE_FAMILY_BODY",
+      "source_paths": [
+        "synexia-indexstring/src/main/java/com/synexia/indexstring/file/json/MIndexJsonStructuralIndex.java"
+      ],
+      "source_references": [
+        {
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/file/json/MIndexJsonStructuralIndex.java",
+          "git_blob_sha1": "d96a3787c580b3e459c54bd8428de6724b9d67cf",
+          "sha256": "2aae8b20d70f6d952711561d998c1120acfd7074576733cfa2814cf1bcbc70ed",
+          "directory_pin_verified": true
+        }
+      ]
+    },
+    {
+      "target_template": "java/module-info.java.txt",
+      "sha256": "666eab9e594255f227064ae1ddaf26b572ed5456e2c4f59dcd9294c3bf5d7690",
+      "scope": "NEW_OPTIONAL_JMOD_DESCRIPTOR",
+      "source_paths": [],
+      "source_references": []
+    }
+  ],
+  "native_sources": {
+    "native/m3_file_jni.c.txt": "07f00a28d052687edbe90165f0090da8cf1ba1011e7f93364c588b2b9322479a",
+    "native/m3_json_signal_jni.c.txt": "5e15872f9ab3c7c7d2ea41e9a67b6fe9c5cfd1dda6387adc3ab6e372d6409697",
+    "native/m3_text_metrics_jni.c.txt": "00e4d58f4af904f9f5087929d66ba417f787a1c505579b3a90efbdd4361d70ce"
+  },
+  "module_boundary": "java.lang.String remains public payload owner; M3FileText and all file-specific structures retain references/IDs/coordinates/facts only outside explicit export/encoding boundaries.",
+  "production_state": "These are verified candidate templates. Root-owned real OpenRewrite materialization, replay and JMOD generation remain separate gates."
+}

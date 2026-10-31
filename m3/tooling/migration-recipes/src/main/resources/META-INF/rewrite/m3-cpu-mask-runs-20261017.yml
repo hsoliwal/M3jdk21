@@ -1,0 +1,8 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.CpuMaskRuns20261017
+displayName: M3 bounded CPU row-mask run compression
+description: Source-sealed Java21 candidates for composed indexed selection and bounded run-length streaming.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-cpu-mask-runs-20261017

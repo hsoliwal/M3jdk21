@@ -1,0 +1,176 @@
+{
+  "status": "PASS_E2_INSTALLED_PACKAGING_AND_OWNERSHIP",
+  "epoch": "E2",
+  "moduleCount": 29,
+  "modules": [
+    "com.m3.collections@0.1.0-SNAPSHOT",
+    "java.base@21-internal",
+    "java.compiler@21-internal",
+    "java.datatransfer@21-internal",
+    "java.desktop@21-internal",
+    "java.instrument@21-internal",
+    "java.logging@21-internal",
+    "java.management@21-internal",
+    "java.management.rmi@21-internal",
+    "java.naming@21-internal",
+    "java.net.http@21-internal",
+    "java.prefs@21-internal",
+    "java.rmi@21-internal",
+    "java.scripting@21-internal",
+    "java.se@21-internal",
+    "java.security.jgss@21-internal",
+    "java.security.sasl@21-internal",
+    "java.sql@21-internal",
+    "java.sql.rowset@21-internal",
+    "java.transaction.xa@21-internal",
+    "java.xml@21-internal",
+    "java.xml.crypto@21-internal",
+    "jdk.compiler@21-internal",
+    "jdk.internal.opt@21-internal",
+    "jdk.jartool@21-internal",
+    "jdk.jdeps@21-internal",
+    "jdk.jlink@21-internal",
+    "jdk.management@21-internal",
+    "jdk.zipfs@21-internal"
+  ],
+  "productionClassFiles": 512,
+  "ordinaryClassBytesUnchanged": 511,
+  "jmodSha256": "94aefb435be9818d2155bef4b0177f06978cdf2ecbcf416b8b213895f2261f16",
+  "jmodIdenticalToE1": true,
+  "imageModuleStoreSha256": "5d32a676e1adc57c0cfd405111b1a35f35d69701f1c3d626d88a8c02ffdb5c3c",
+  "nativeLibraries": [
+    {
+      "library": "m3_collections_address",
+      "releaseSha256": "dfc8810af986e1b7c1310aafedf9601649d10c5b18558e88993d29d7dbfbed79",
+      "imageSha256": "d595c7364d37f67a7aed37ce592c8db352f1d5e64720534c61131c8b049a2d47",
+      "jniExports": [
+        "Java_com_m3_collections_M3LongAddressKernel_gatherNative"
+      ]
+    },
+    {
+      "library": "m3_collections_long_path_masks",
+      "releaseSha256": "bd16e8935eb29d6d165cf5f7788c7566c2cc07b34f7f48b604801bb14b93f024",
+      "imageSha256": "a0ccdadf1cc5fc56b730d37e403be7616ade724e8224ad12737004cd8fb82a93",
+      "jniExports": [
+        "Java_com_m3_collections_M3LongIndexPathMasksJNI_scanWindowNative",
+        "Java_com_m3_collections_M3LongIndexPathMasksJNI_selectNative"
+      ]
+    },
+    {
+      "library": "m3_collections_mask",
+      "releaseSha256": "1c8f2f3036c9959e93a78ec0d943820c1fa21320b55e79cc42fbe6726bb1366d",
+      "imageSha256": "1e5678c8c22a1a88dbae031eeffa306f9a83e0a462dbfd5df2bc63292b8ae44b",
+      "jniExports": [
+        "Java_com_m3_collections_M3IndexMaskCompactor_positionsAbiNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_positionsMasksAbiNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_rangeAbiNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_selectLongWindowNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_selectNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsMasksNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_selectPositionsNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_selectRangeNative",
+        "Java_com_m3_collections_M3IndexMaskCompactor_selectWindowNative",
+        "Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative",
+        "Java_com_m3_collections_M3IndexMaskWindow_scanNative"
+      ]
+    },
+    {
+      "library": "m3_collections_pathmask",
+      "releaseSha256": "a76f6d66d14f331aabd1ea0b5769f7938d7db4e03a58dd8185cebc3401cdcbc9",
+      "imageSha256": "559661faef8b969803e1e5889c04a34d7cf0be15730192ffc5f0793cc610d809",
+      "jniExports": [
+        "Java_com_m3_collections_M3IndexPathMasks_selectNative"
+      ]
+    },
+    {
+      "library": "m3_collections_span",
+      "releaseSha256": "74fddae415c1be87620c9334a78a4a4e5ed0d1f4404eab612826e9737936c891",
+      "imageSha256": "15b472453315a76b06221dff2ece8410ab01c0e4fb754eb62b26d4a3aac735fa",
+      "jniExports": [
+        "Java_com_m3_collections_M3SpanIndex_batchNative"
+      ]
+    },
+    {
+      "library": "m3_collections_statehist",
+      "releaseSha256": "07a176660b6b03f2cfed23e1e8d162d59308b1449d44da49071466d9069fc486",
+      "imageSha256": "e8da101d5daaf4e5524af4a97a6025dd8ae893f89665b4cf0234b1b8402f14ba",
+      "jniExports": [
+        "Java_com_m3_collections_M3StateMaskHistogram_tallyNative"
+      ]
+    },
+    {
+      "library": "m3_residency_state_mask",
+      "releaseSha256": "d8dd732728c3291f229793d4b47e1a5e9de953b4d71b9bb35fc21fbf68cfd2fe",
+      "imageSha256": "7cd1f1afdb07e2e941dcf352126746a58bd6602e574fca7aa240d52a3280eb4e",
+      "jniExports": [
+        "Java_com_m3_collections_M3ResidencyStateMaskIndex_select0"
+      ]
+    },
+    {
+      "library": "m3bitlane",
+      "releaseSha256": "73c1a18eb5a010941f9f45f43f06b63f3a135ec3a4b9fbfaf9996258ac800e49",
+      "imageSha256": "683ca18e9543a57a0c0119fc92edb01fafcdaa761fb5643f7ea6ff70d44b2fc2",
+      "jniExports": [
+        "Java_com_m3_collections_M3BitLane28_cardinality0"
+      ]
+    },
+    {
+      "library": "m3rankbatch",
+      "releaseSha256": "b5755cf98e19a43c140db7195bef0271437f7c620542be9017b68d9a56ccc74e",
+      "imageSha256": "f50692c10cd31e53886e352e5254828a41e24afbbd6aab2f1943fb6359f56c24",
+      "jniExports": [
+        "Java_com_m3_collections_M3LongRankBatchNative_lowerBounds0"
+      ]
+    },
+    {
+      "library": "m3signalorder",
+      "releaseSha256": "4ebac165598835cbcb9683904a82cc772ebb5c889a8229257aeb1f803db0702e",
+      "imageSha256": "34244eb9d77d2ffbb55b65df6a4be1c066d52526ef4f975b8545ab6349471930",
+      "jniExports": [
+        "Java_com_m3_collections_M3SignalOrderNative_sort0"
+      ]
+    }
+  ],
+  "legalNotices": {
+    "legal/com.m3.collections/NOTICE": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
+    "legal/com.m3.collections/SYNEXIA-DONATION-NOTICE.txt": "8b99e55314dface1175cf4c9a0f5d23d699920877b838b54e657c65dd8f25556",
+    "legal/com.m3.collections/LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "legal/com.m3.collections/NETBEANS-NOTICE.txt": "88b6f1f16df90583111f75cb4cda5e3431b8797e59f09d2dd299e0ee1de9fa54"
+  },
+  "metadataResources": [
+    "META-INF/LICENSE",
+    "META-INF/NETBEANS-NOTICE.txt",
+    "META-INF/NOTICE",
+    "META-INF/SYNEXIA-DONATION-NOTICE.txt",
+    "META-INF/maven/com.m3/m3-collections/pom.properties",
+    "META-INF/maven/com.m3/m3-collections/pom.xml",
+    "META-INF/name-mapping.json",
+    "META-INF/provenance.json",
+    "META-INF/synexia-donation.json"
+  ],
+  "externalTestsOnly": true,
+  "ownershipClasses": 7,
+  "sourceInputReceiptSha256": "d7eb5761220869d2eecb192d90d05981745d3cd1fd29c4805cdbcda0bc6ccfc4",
+  "targetedClassOrigins": {
+    "status": "PASS_E2_TARGETED_PRODUCTION_ORIGINS",
+    "observedProductionClassCount": 10,
+    "allObservedProductionOrigins": "jrt:/com.m3.collections",
+    "classes": [
+      "com.m3.collections.M3IndexMaskCompactor",
+      "com.m3.collections.M3IndexMaskCompactor$Backend",
+      "com.m3.collections.M3IndexMaskCompactor$NativeLibrary",
+      "com.m3.collections.M3IndexMaskCompactor$NativePositions",
+      "com.m3.collections.M3IndexMaskCompactor$NativeRange",
+      "com.m3.collections.M3IndexedListSnapshot",
+      "com.m3.collections.M3LongCollection",
+      "com.m3.collections.M3SignalOrder",
+      "com.m3.collections.M3SignalOrder$Backend",
+      "com.m3.collections.M3SignalOrderNative"
+    ],
+    "logSha256": {
+      "logs/M3SignalRadixUniformContract-classes.log": "ee907b37c938dbe60036173f5bd96cbc5e87eeb2cfdfff70aaeb52cf817131a5",
+      "logs/M3CatalogueRefinementContract-classes.log": "a38d6688f5bf0ec139d4d417e435bddeef758d891f4e6083ff93633953dbd056"
+    }
+  },
+  "ownershipProbeOutput": "OWNER java.lang.String jrt:/java.base/java/lang/String.class\nOWNER java.lang.M3String jrt:/java.base/java/lang/M3String.class\nOWNER java.util.CollectionViews jrt:/java.base/java/util/CollectionViews.class\nOWNER com.m3.collections.M3CollectionViews jrt:/com.m3.collections/com/m3/collections/M3CollectionViews.class\nOWNER com.m3.collections.M3IndexedListSnapshot jrt:/com.m3.collections/com/m3/collections/M3IndexedListSnapshot.class\nOWNER com.m3.collections.M3IndexMaskCompactor jrt:/com.m3.collections/com/m3/collections/M3IndexMaskCompactor.class\nOWNER com.m3.collections.M3SignalOrder jrt:/com.m3.collections/com/m3/collections/M3SignalOrder.class\nPASS installed M3JDK21 ownership: 7 classes from the linked jrt image\n"
+}

@@ -33,6 +33,7 @@
 #include "oops/method.hpp"
 #include "oops/oop.inline.hpp"
 #include "oops/oopsHierarchy.hpp"
+#include "oops/objArrayOop.inline.hpp"
 #include "oops/typeArrayOop.inline.hpp"
 
 void java_lang_String::set_coder(oop string, jbyte coder) {
@@ -68,6 +69,32 @@ typeArrayOop java_lang_String::value(oop java_string) {
 typeArrayOop java_lang_String::value_no_keepalive(oop java_string) {
   assert(is_instance(java_string), "must be java_string");
   return (typeArrayOop) java_string->obj_field_access<AS_NO_KEEPALIVE>(_value_offset);
+}
+
+oop java_lang_String::m3_storage(oop java_string) {
+  assert(is_instance(java_string), "must be java_string");
+  return java_string->obj_field_acquire(_m3_offset);
+}
+
+oop java_lang_String::m3_storage_no_keepalive(oop java_string) {
+  assert(is_instance(java_string), "must be java_string");
+  return java_string->obj_field_access<AS_NO_KEEPALIVE | MO_ACQUIRE>(_m3_offset);
+}
+
+bool java_lang_String::is_m3_joined(oop java_string) {
+  return m3_storage_no_keepalive(java_string) != nullptr;
+}
+
+jchar java_lang_String::char_at(oop java_string, int index) {
+  oop storage = m3_storage(java_string);
+  if (storage != nullptr) {
+    return java_lang_M3String::char_at(storage, index);
+  }
+  typeArrayOop string_value = value(java_string);
+  if (is_latin1(java_string)) {
+    return ((jchar)string_value->byte_at(index)) & 0xff;
+  }
+  return string_value->char_at(index);
 }
 
 bool java_lang_String::is_latin1(oop java_string) {
@@ -106,6 +133,10 @@ bool java_lang_String::test_and_set_deduplication_requested(oop java_string) {
 int java_lang_String::length(oop java_string, typeArrayOop value) {
   assert(_initialized, "Must be initialized");
   assert(is_instance(java_string), "must be java_string");
+  oop storage = m3_storage_no_keepalive(java_string);
+  if (storage != nullptr) {
+    return java_lang_M3String::length(storage);
+  }
   assert(value_equals(value, java_lang_String::value(java_string)),
          "value must be equal to java_lang_String::value(java_string)");
   if (value == nullptr) {
@@ -128,6 +159,131 @@ int java_lang_String::length(oop java_string) {
 
 bool java_lang_String::is_instance(oop obj) {
   return obj != nullptr && obj->klass() == vmClasses::String_klass();
+}
+
+// java.lang.M3String accessors
+
+oop java_lang_M3String::owner(oop value) {
+  assert(value != nullptr && value->klass() == vmClasses::M3String_klass(), "must be M3String");
+  return value->obj_field(_owner_offset);
+}
+
+jlong java_lang_M3String::coordinate(oop value) {
+  return value->long_field(_value_offset);
+}
+
+int java_lang_M3String::start(oop value) {
+  const julong packed = (julong)coordinate(value);
+  return (int)(packed >> 32);
+}
+
+int java_lang_M3String::length(oop value) {
+  const julong packed = (julong)coordinate(value);
+  return (int)(packed & (julong)0xffffffffu);
+}
+
+int java_lang_M3String::owner_length(oop value) {
+  return owner(value)->int_field(_owner_length_offset);
+}
+
+jbyte java_lang_M3String::coder(oop value) {
+  return owner(value)->byte_field(_owner_coder_offset);
+}
+
+int java_lang_M3String::utf8_length_if_precomputed(oop value) {
+  oop o = owner(value);
+  if (start(value) != 0 || length(value) != o->int_field(_owner_length_offset)) {
+    return -1;
+  }
+  oop facts = o->obj_field_acquire(_owner_facts_offset);
+  // GetStringUTFLength/GetStringUTFChars require JNI *modified* UTF-8 length.
+  // Standard UTF-8 (utf8Length) is a separate fact and is never suitable here:
+  // NUL=2 bytes, individual surrogate code units=3 bytes.
+  return facts == nullptr ? -1 : facts->int_field(_facts_modifiedUtf8Length_offset);
+}
+
+jint java_lang_M3String::java_hash(oop value) {
+  oop o = owner(value);
+  if (start(value) == 0 && length(value) == o->int_field(_owner_length_offset)) {
+    return o->int_field(_owner_javaHash_offset);
+  }
+  jint hash = 0;
+  static const int chunk_capacity = 256;
+  jchar scratch[chunk_capacity];
+  const int value_length = length(value);
+  for (int copied = 0; copied < value_length; copied += chunk_capacity) {
+    const int chunk = MIN2(chunk_capacity, value_length - copied);
+    copy_chars(value, copied, chunk, scratch);
+    for (int index = 0; index < chunk; index++) {
+      hash = 31 * hash + (jint)scratch[index];
+    }
+  }
+  return hash;
+}
+
+// Mirrors java.lang.M3StringImmediate: the field widths below are the same named constants.
+// LATIN1: unit i at bits 8i..8i+7. IDENT: bijective base-64 over the payload bits,
+// least significant digit first, digit = 1 + index in "0-9 A-Z a-z _ $".
+jchar java_lang_M3String::immediate_char_at(jlong packed, int index) {
+  const int tag_bits = 3;
+  const int tag_shift = BitsPerLong - tag_bits;
+  const julong tag_latin1 = 1;
+  const julong tag_ident = 2;
+  const julong latin1_unit_mask = 0xff;
+  const int digit_bits = 6;
+  const julong digit_mask = (CONST64(1) << digit_bits) - 1;
+  const julong payload_mask = (CONST64(1) << tag_shift) - 1;
+  static const char ident[] =
+      "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_$";
+  const julong bits = (julong)packed;
+  if ((bits >> tag_shift) == tag_latin1) {
+    return (jchar)((bits >> (index * BitsPerByte)) & latin1_unit_mask);
+  }
+  assert((bits >> tag_shift) == tag_ident, "M3 immediate profile");
+  julong digits = bits & payload_mask;
+  for (int skip = 0; skip < index; skip++) {
+    digits = (digits - 1) >> digit_bits;
+  }
+  return (jchar)(unsigned char)ident[(digits - 1) & digit_mask];
+}
+
+jchar java_lang_M3String::char_at(oop value, int index) {
+  const int value_length = length(value);
+  assert(index >= 0 && index < value_length, "M3String index out of bounds");
+  oop o = owner(value);
+  const int logical = start(value) + index;
+
+  if (o->klass() == vmClasses::M3StringAtom_klass()) {
+    const jlong address = o->long_field(_atom_address_offset);
+    const jbyte width = o->byte_field(_atom_storageWidth_offset);
+    if (width == 1) {
+      const uint8_t* bytes = reinterpret_cast<const uint8_t*>((uintptr_t)address);
+      return (jchar)bytes[logical];
+    }
+    assert(width == 2, "M3 atom width");
+    const uint8_t* bytes = reinterpret_cast<const uint8_t*>((uintptr_t)address);
+    const size_t at = (size_t)logical << 1;
+    const uint16_t first = bytes[at];
+    const uint16_t second = bytes[at + 1];
+    return o->bool_field(_atom_bigEndian_offset)
+        ? (jchar)((first << 8) | second)
+        : (jchar)(first | (second << 8));
+  }
+
+  if (o->klass() == vmClasses::M3StringImmediate_klass()) {
+    typeArrayOop words = (typeArrayOop)o->obj_field(_immediate_words_offset);
+    const int slot = o->int_field(_immediate_slot_offset);
+    assert(words != nullptr && slot >= 0 && slot < words->length(), "M3 immediate slot");
+    return immediate_char_at(words->long_at(slot), logical);
+  }
+
+  assert(o->klass() == vmClasses::M3StringTuple_klass(), "M3 owner must be atom, immediate or tuple");
+  oop left = o->obj_field(_tuple_left_offset);
+  oop right = o->obj_field(_tuple_right_offset);
+  const int left_length = length(left);
+  return logical < left_length
+      ? char_at(left, logical)
+      : char_at(right, logical - left_length);
 }
 
 // Accessors
@@ -256,10 +412,6 @@ inline jboolean java_lang_invoke_ConstantCallSite::is_frozen(oop site) {
 }
 
 inline bool java_lang_invoke_ConstantCallSite::is_instance(oop obj) {
-  return obj != nullptr && is_subclass(obj->klass());
-}
-
-inline bool java_lang_invoke_MethodHandleNatives_CallSiteContext::is_instance(oop obj) {
   return obj != nullptr && is_subclass(obj->klass());
 }
 

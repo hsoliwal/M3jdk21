@@ -1,0 +1,67 @@
+{
+  "schema": "M3JDK21_SYNEXIA_RECEIPT_ONLY_CLOSURE_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "evidenceOnly": true,
+  "claim": "Receipt is EVIDENCE of pre-existing pinned-master content and its Synexia canonical unit. It receives nothing, changes no source, advances no phase, and asserts no runtime result.",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "develop",
+    "pullRequest": "UNVERIFIED",
+    "commit": "11c94feb18155a53cc213708c353791132edc4a7",
+    "pinRef": "refs/m3run/synexia-develop-20261017",
+    "recipe": "com.synexia.rewrite.M3RegexMatcherPrecomputeMastery (from source-manifest.sha256)",
+    "crate": "m3-regex-matcher-precompute-20261016",
+    "unitKind": "RECIPE_DIR",
+    "unitPath": "synexia-openrewrite-recipes/recipes/m3-regex-matcher-precompute-20261016",
+    "unitTreeSha": "2399ad6ca45293ede4cd365a61ab3e826d364d18",
+    "mechanics": "M3 Regex Matcher Precompute Mastery - source-sealed recipe crate (README title)",
+    "donors": [
+      {
+        "path": "synexia-openrewrite-recipes/recipes/m3-regex-matcher-precompute-20261016/README.md",
+        "blob": "837b63fee1ea",
+        "target": "M3StringRegexRowPrecompute",
+        "mechanics": "unit contract"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/m3-regex-matcher-precompute-20261016/pom.xml",
+        "blob": "241ba0aada24",
+        "target": "M3StringRegexRowPrecompute",
+        "mechanics": "build+recipe declaration"
+      },
+      {
+        "path": "synexia-openrewrite-recipes/recipes/m3-regex-matcher-precompute-20261016/source-manifest.sha256",
+        "blob": "811a16e8b6bd",
+        "target": "M3StringRegexRowPrecompute",
+        "mechanics": "pins crate-local recipe sources, not master content"
+      }
+    ],
+    "license": "Apache-2.0 first-party"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "970a34350ebdf6a3f1c5ff5acc8445d0f3515f55",
+    "pinRef": "refs/m3run/m3jdk21-master-20261017",
+    "owners": [
+      "M3StringRegexRowPrecompute"
+    ]
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "src/java.base/share/classes/java/lang/M3StringRegexRowPrecompute.java",
+      "blob": "3ea84217c4e1",
+      "before": "PREEXISTING",
+      "after": "97c3e5299c825411f6832697b20a9ec699e1c1f79013b40835488d123417caae"
+    }
+  ],
+  "residue": "RE_SEAL_REQUIRED: unit has no hash-pinned manifest covering the pinned-master content of its owner file(s); a successor hash-pinned recipe must seal master content before any phase advance",
+  "unverifiedFields": [
+    "pullRequest",
+    "ownerAssociation=TOKEN_MATCH(matcher-precompute)"
+  ],
+  "gates": {
+    "evidenceOnly": "NOT_RUN: no build, no recipe execution, no tests; ls-tree + git show sha256 only (run RCPT-receipt-only-closure 2026-10-18)"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "/tmp/m3-build-tools/apache-maven-3.9.9/bin/mvn",
+    "-B",
+    "-ntp",
+    "-s",
+    "/workspace/scratch/206049dfb270/canonical-work/maven-proxy-settings.xml",
+    "-Dmaven.repo.local=/tmp/m3-build-m2",
+    "-f",
+    "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source/docs/m3/scrollbar-full-range-20261020/recipes/swt-scrollbar-full-range-20261020/pom.xml",
+    "clean",
+    "test"
+  ],
+  "cwd": "/workspace/scratch/206049dfb270/jobs-work/swt-receiver-current-001/source",
+  "environment": {
+    "JAVA_HOME": "/tmp/m3-build-tools/jdk-21.0.12.1+1",
+    "MAVEN_OPTS": "-Xmx512m -XX:ActiveProcessorCount=2 -XX:-UsePerfData -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts"
+  }
+}

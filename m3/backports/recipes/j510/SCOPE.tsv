@@ -1,0 +1,13 @@
+field	value
+packet	J510
+jep	510
+title	Key Derivation Function API
+classification	OPT_IN_SE_API_EXTENSION
+default_java21	NO
+scope_floor	LIBRARY_API
+contract_mode	EXPLICIT_CONTRACT_CHANGE
+security_review	MANDATORY
+product_materialization	NOT_AUTHORIZED
+source21_compile	PENDING
+jtreg	PENDING
+whole_image	PENDING

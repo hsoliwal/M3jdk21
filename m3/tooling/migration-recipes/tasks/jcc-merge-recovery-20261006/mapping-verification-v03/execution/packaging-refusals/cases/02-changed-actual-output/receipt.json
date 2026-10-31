@@ -1,0 +1,35 @@
+{
+  "case": "02-changed-actual-output",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-I",
+    "-B",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/package_mapping.py",
+    "--execution",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/02-changed-actual-output/workspace/execution",
+    "--validator",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/02-changed-actual-output/workspace/validator",
+    "--output",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/02-changed-actual-output/forbidden-output"
+  ],
+  "exit_code": 1,
+  "expected_exception": "AssertionError",
+  "expected_guard": "assert sha(body) == row[\"after_sha256\"]",
+  "harness_relocation": {
+    "field": "actual_source_binding.materialized_root",
+    "from": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/materialized",
+    "scope": "Harness-only relocation to the exact isolated actual Result copies",
+    "to": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/02-changed-actual-output/workspace/execution/materialized"
+  },
+  "input_copies_unchanged": true,
+  "intended_exception_observed": true,
+  "intended_guard_observed": true,
+  "mutation": {
+    "kind": "append bytes to isolated actual Result copy",
+    "path": "materialized/m3/docs/name-mapping.json"
+  },
+  "output_created": false,
+  "status": "PASS",
+  "stderr_sha256": "3cc1d5b1d774c598b5d64faf4456447fc1d9af505549bad00d51a29ff03e481f",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

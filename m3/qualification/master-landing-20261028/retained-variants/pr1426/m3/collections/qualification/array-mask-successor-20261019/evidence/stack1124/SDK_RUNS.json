@@ -1,0 +1,44 @@
+{
+  "source_pin": "1124f5b72744b306884beedebafd8558d49d4c4c",
+  "commands": [
+    {
+      "crate": "m3-array-mask-lookup-20261018",
+      "dataset": null,
+      "argv": [
+        "mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-f",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/pom.xml",
+        "-Dmaven.repo.local=/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/maven-repository",
+        "-Duser.home=/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/maven-home",
+        "test"
+      ],
+      "exit": 0,
+      "seconds": 22.079283475875854,
+      "log_sha256": "6a7801d182f17d8e0344f90edc522ebe7d38b1ec97ece978a263c533b5ab53a2",
+      "default_recipe_owner": "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes"
+    },
+    {
+      "crate": "m3-collections-contract-refinement-20261017",
+      "dataset": "array-mask-successor",
+      "argv": [
+        "mvn",
+        "-o",
+        "-B",
+        "-ntp",
+        "-f",
+        "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml",
+        "-Dmaven.repo.local=/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/maven-repository",
+        "-Duser.home=/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/maven-home",
+        "-Dm3.dataset=array-mask-successor",
+        "test"
+      ],
+      "exit": 0,
+      "seconds": 6.985236167907715,
+      "log_sha256": "e1b7bf85f35fe12f53e4c40cd3c84c8edc21a7298cb81c60e517c013e1c50bec",
+      "default_recipe_owner": "/workspace/scratch/308dd41c4be6/m3-convergence-20261019/collections/original-array-mask-20261018/requalification1124/synexia-openrewrite-recipes"
+    }
+  ]
+}

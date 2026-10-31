@@ -1,0 +1,8 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+# Current kernel custody successor
+
+The existing typed Java snapshot owner independently replaces the retained d7c3 kernel with the exact installed 78aa kernel. Both resources retain their Apache-2.0 notice. The retained legacy oracle, bootstrap, seam/containment mutants and JNI header/library remain bound to legacy-generated. The current oracle compiles the new recipe-produced bytes, first checks exact equality with the installed runtime, and keeps all four Java/JNI execution modes, sparse controls and public/protected API comparisons. The successor adds fixed-point, unrelated-source, missing, drift, parser, duplicate and template-tampering controls.
+
+current-20261018-plan.json is byte-identical to active plan.json and has a versioned recipe identity. The eight-output sealed plan is a current custody/replay fixture with composite historical preimages. It is not an executable upgrade from a fully installed legacy tree. The separate typed Java recipe proves the actual d7c3-to-78aa kernel transition. The runtime source is already its postimage; receipt of this packet does not claim a new kernel write.
+
+The existing plan verifiers, mapping images, Java/text snapshot engines, legacy resources, public interfaces and runtime source remain unchanged. Three exact preinstalled resources close the sync plan dependency set; its24 outputs remain unchanged in count. The prior plan and its lossless resource closure remain frozen under history/20261018-pre-current-custody. Mapping authority chronology remains an independent explicit hold; this packet grants no Matcher, matched-image or full-JDK qualification.

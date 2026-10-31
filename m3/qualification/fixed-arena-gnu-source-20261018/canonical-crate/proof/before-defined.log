@@ -1,0 +1,5 @@
+/workspace/scratch/87fb3604f641/m3-implementation/string-lane/synexia/synexia-openrewrite-recipes/recipe-crates/m3jdk21-fixed-arena-gnu-source-20261018/target/native-owner-proof/before-defined/M3PrimitiveFixedArena.c:11: error: "_GNU_SOURCE" redefined [-Werror]
+   11 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+cc1: all warnings being treated as errors

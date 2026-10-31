@@ -1,0 +1,23 @@
+path	sha256	git_blob	mode	pr	note
+.github/workflows/m3-parser-jmod-20261018.yml	7ff6f130f9bdcd961fd521b4f6fe45303a99ae0eefbb2efeefe05f996a681632	1bb74a1d1de7e3dd3a8d64430309bad0c26e4ca4	100644	1573	PR version, not live
+m3/docs/name-mapping.d/m3-file-build-delta-20261020.json	f35869c4c284d1728045a9252ac8595e1b008b2bc50683c4147d794e98b7f73a	bc95d55af0d9d9f2b71ae28900c8b4ea5565f6dd	100644	1573	PR version, not live
+m3/file/CONTRACT.md	37c36e1d1400a02abb895568511929cccc65f038dc3b8458f44132c4596852f9	e89ff435fd0a8956b3e7db851772a96cf4783d4d	100644	1573	PR version, not live
+m3/file/src/main/java/com/m3/file/M3File.java	ccabbc01f4c006dbf7a5575ecc1d353e92e528aa03fda7ff24f2514c71d09efb	b2382aa2c684de88c1eb480bbcebf21ac2c95f10	100644	1573	PR version, not live
+m3/file/src/test/java/com/m3/file/M3FileFingerprintContract.java	23846562b96bf502a32593161886f566b17eb3116918475162d45e240b2ed1ed	be765cf2407e7e7e11ae37cd7528ef08a11a0e13	100644	1573	PR version, not live
+m3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3FileSourceFacts.java	459e3861f41e4fb88b0f005cfb5f44926141abdc163710091afe7afb471832a4	eeb562cf27948cbbbf3a46d0301f42f4e043a10e	100644	1573	PR version, not live
+m3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3FileSourceFactsDeltaContract.java	01adb97ec1bf9026a3f3c79b375648b0dfc836cc2edb2c1ec0de7431494c885c	c3fbfc93444bd0a10e161be0fc01af85a980b9e9	100644	1573	PR version, not live
+m3/ports/compiletime/tests/CONTRACT.md	567c5b57ed44a89488d3449c42a40f922a7f059b95a856e6e5fa8772ac7fdb09	f15d2ef2f0fda116b3b7eb0a715f12046d3ae729	100644	1573	PR version, not live
+m3/tooling/module-packs/build-tools/delta/CATALOGUE.tsv	5123dc3089b223dbfadfc89e0483e9009cfbdfdb598f844168470708d900437e	3b5c60b2bc1d9efef8691635bfb44c9eb2987ab2	100644	1573	PR version, not live
+m3/tooling/module-packs/build-tools/delta/FORKS.tsv	2ef6057ab7ae2584ca9b6265b07955db8f39bcfe12459f39bd53025dfaab6b50	207d243df337a3905ae988d08450f854459d63d2	100644	1573	PR version, not live
+m3/tooling/module-packs/build-tools/delta/README.md	52b1627969bd23bd59d85a211210aa63748e0c809784cecf688f08846be6aecf	9b78d92184e399f43a32bc2f0eeed52948590cb1	100644	1573	PR version, not live
+m3/tooling/module-packs/build-tools/delta/src/test/java/jdk/m3/build/test/M3BuildDeltaContract.java	cdc087330b0ccae88f1f97edab9d69830032a5164d8dd08f75211161846bde1d	7715ba8200b5746b2360e2bd05ca76591d3852f1	100644	1573	PR version, not live
+m3/tooling/module-packs/build-tools/delta/verify.py	a7679ef53e3a587111645cab1a7376802a74bb2ac3eda829f56fda8a8d24378c	b06224e31dc7fc710fa214b210d2e240935e3967	100644	1573	PR version, not live
+m3/tooling/module-packs/parser/DELTA_CONTRACT.md	d47db8810458c11a3a0055471b1f61b9c0e8f9079815f857294d4a8692c565c8	a6a1e67e9db00cc602ad01113184548f5301fce7	100644	1573	PR version, not live
+m3/tooling/module-packs/parser/SHARED_SOURCE_DELTA_CONTRACT.md	a1ee14d64cb0b939d27b7586d655c7ba461f00011ec4ec119a126c45c597a5b7	4bfc340cd645401805f0fe42163e735b6e327478	100644	1573	PR version, not live
+m3/tooling/module-packs/parser/build.py	10178ba7877b6fc79675099320ffc8ef218ab2cad58a8d5022a50c61fae3ee53	c54d5e51e22aecbb45d4ec005a63a5a980aa8e73	100644	1573	PR version, not live
+m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java	f43ce639dae495950f6a0410c65b808f4673f8a4dcfdfa17a25f5c9e7771aa12	6a01e45c6e1dc9d89f0d8c8e9ea3304426fe88e4	100644	1573	PR version, not live
+m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3JavacParser.java	a4d83d4c31772116bf87ada0283434166572f752075354d76718500e331d88fe	60181acd53e2797d4e6e6e9308798ca41705a1d3	100644	1573	PR version, not live
+m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FileDeltaContract.java	3775dc8d555ae769f879e67156a89f311be9f0419c4e028be131be4d286e526d	3e42737faeb917c240b283de5b0997ecde91577d	100644	1573	PR version, not live
+m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3JavacParserContract.java	e2378d457a074c08fde96f35e7e8d9472aef2746b3c9bc277b2c45dd1d9b6ca5	c74878ff4b1b6f0cfe4e6b2c6da7a2bc08eea55e	100644	1573	PR version, not live
+m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3ParserImageSmoke.java	6140fefbc2afb02f8b5a2446ffa27f9dd2cbdd565a9738cfd7d2ac2b94242426	1f82bb8da48263f16e7d2eed1868b4ccc6c93d58	100644	1573	PR version, not live
+m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3SharedSourceDeltaContract.java	ac6df40239bd3eb34d849ff11a1a00eede949410e88d8e6e4239fdb4c68e2851	eec7340056c8394b0748061f95eab6a18f1e9c7c	100644	1573	PR version, not live

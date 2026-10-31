@@ -1,0 +1,752 @@
+{
+  "schema": "M3_LUCENE_CURRENT_FORK_JMOD_1",
+  "status": "PASS",
+  "source": "https://github.com/hsoliwal/lucene",
+  "revision": "d1b7235f1ba1c1eea5b04a5b7e6554595a90719e",
+  "source_lock_sha256": "e97a3ffafcf55ac67efbac1611dcfeb37e8d986ae9fd3151dbacacf043d1d83c",
+  "dependency_lock_sha256": "6e65c358662c9cf2b79ce6c948909d7b29ddb89282627a6ddffe933f587218be",
+  "java_release": 21,
+  "preview_required": true,
+  "jdk": "openjdk 21.0.12.1 2026-08-18 LTS\nOpenJDK Runtime Environment Microsoft-14941483 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Microsoft-14941483 (build 21.0.12.1+1-LTS, mixed mode, sharing)",
+  "production_modules": [
+    {
+      "module": "org.apache.lucene.core",
+      "java_sources": 1234,
+      "resources": 12,
+      "jar_sha256": "e20b4bdc00ea05c83c9000e04b3e389823f492f9eb1e7650f9ffbadc01a9f99e",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "java.logging",
+          "static": false
+        },
+        {
+          "module": "jdk.management",
+          "static": true
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.analysis.common",
+      "java_sources": 582,
+      "resources": 54,
+      "jar_sha256": "afc622d7abfb5c3cf3dc1683ff3a0c48eb63198aa2d3141f87cb69bc8ebac445",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "java.logging",
+          "static": false
+        },
+        {
+          "module": "java.xml",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.backward_codecs",
+      "java_sources": 129,
+      "resources": 13,
+      "jar_sha256": "0aabb29409fb9c9f2e57266aa12fce7c7f1be4846c081c0e63099c7bff13c6f4",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.codecs",
+      "java_sources": 95,
+      "resources": 4,
+      "jar_sha256": "ac6df4ac991de11f0a74ad765f18a14f0aa22c3e78ef291414e987c251570eb6",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.facet",
+      "java_sources": 101,
+      "resources": 1,
+      "jar_sha256": "807bc4715ac094d51620b75f290f1777120aeaced25670ecdaa0de7745abaf7c",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.join",
+      "java_sources": 33,
+      "resources": 1,
+      "jar_sha256": "206a6343da9e37f07740532303ae1a604e14adddc32a8445e190f151787ac3ed",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.memory",
+      "java_sources": 3,
+      "resources": 1,
+      "jar_sha256": "15edf3d2dc39d21fa474f3ae2f54ee5ef87d086e66cc91f3a729f7d6d0f139f7",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.misc",
+      "java_sources": 42,
+      "resources": 5,
+      "jar_sha256": "8a04069d35a5af5bc13ceb379e722063a381059a140a65e1bab3aeb9c587a5fe",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.queries",
+      "java_sources": 165,
+      "resources": 1,
+      "jar_sha256": "2610768653f8996251c44f44344356c35b533b59e5bd8b8100095ad29b697a99",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.replicator",
+      "java_sources": 13,
+      "resources": 1,
+      "jar_sha256": "6c82de8fbf8d505c63f080f54a8d33e6e25cadecfff0f99f87a752f5e7545ea6",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.spatial3d",
+      "java_sources": 106,
+      "resources": 1,
+      "jar_sha256": "ac0094a09ac7a3ef7567f2f336acb34548fcd28e296eb3606627dbfb8e3d8edc",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.analysis.icu",
+      "java_sources": 26,
+      "resources": 7,
+      "jar_sha256": "25c12819da2e3f53e47550c41f84aa612ea08dbcb71e5b29820112030f1d304c",
+      "requires": [
+        {
+          "module": "com.ibm.icu",
+          "static": false
+        },
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.analysis.common",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.analysis.kuromoji",
+      "java_sources": 59,
+      "resources": 16,
+      "jar_sha256": "590dd1d68c3cdc887743c4c6f1f664248e76e1e3821fcd077284e3aa9a92f3af",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.analysis.common",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.analysis.morfologik",
+      "java_sources": 9,
+      "resources": 4,
+      "jar_sha256": "c9f35680e91166837d5a2799fca8d87f783df90b1007c71e7dad1493098118f7",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "morfologik.ukrainian.search",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.analysis.common",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        },
+        {
+          "module": "org.carrot2.morfologik.polish",
+          "static": false
+        },
+        {
+          "module": "org.carrot2.morfologik.stemming",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.analysis.nori",
+      "java_sources": 42,
+      "resources": 13,
+      "jar_sha256": "0009fd781957c5cd63ca6969758cd1646b9eab9f73cec1da253b41ff5bd7b63f",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.analysis.common",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.analysis.opennlp",
+      "java_sources": 20,
+      "resources": 3,
+      "jar_sha256": "cbd6ddf440598723d088651c395361e9a863aa8c8979ca2c046cec656efee45f",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.analysis.common",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        },
+        {
+          "module": "org.apache.opennlp.tools",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.analysis.phonetic",
+      "java_sources": 10,
+      "resources": 2,
+      "jar_sha256": "5dc41c8d2012f790bfd30285e9b5ecfc03032f096af4d666ee9b20d6384c1c33",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.commons.codec",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.analysis.common",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.analysis.smartcn",
+      "java_sources": 21,
+      "resources": 5,
+      "jar_sha256": "15c9b2ce24f370136e6434a2ad810aca183f551144913d37433348168226468f",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.analysis.common",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.analysis.stempel",
+      "java_sources": 22,
+      "resources": 4,
+      "jar_sha256": "3fae74693d5329f9b7f1b2d918c2310adb3c512017fd2cdaacf278c8fb56b4b1",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.analysis.common",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.expressions",
+      "java_sources": 20,
+      "resources": 3,
+      "jar_sha256": "e0826a9af68b99d32ad8480f9113fcd165400685770be04218610116ac3716c4",
+      "requires": [
+        {
+          "module": "io.github.dmlloyd.classfile",
+          "static": false
+        },
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.antlr.antlr4.runtime",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.codecs",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.grouping",
+      "java_sources": 32,
+      "resources": 1,
+      "jar_sha256": "a459507bd1b240cc19a6880cb213a429fd82b6baa97597ba7230b3d55d39aaff",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.queries",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.highlighter",
+      "java_sources": 95,
+      "resources": 1,
+      "jar_sha256": "1a74a39aa83da88ed20e803a862cc48bdc126c2ddd1c2e4687da09cd8fcf057a",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.memory",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.queries",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.monitor",
+      "java_sources": 41,
+      "resources": 1,
+      "jar_sha256": "906a19a35ff2c2e3d0a4629ebea554b00e8e41d61cbe1178f2dac6eebf10f914",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.analysis.common",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.memory",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.sandbox",
+      "java_sources": 138,
+      "resources": 3,
+      "jar_sha256": "7706c697dfaff512383a607b88cb358b28f836741f8c62763e102073e7455b0c",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.facet",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.queries",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.spatial_extras",
+      "java_sources": 76,
+      "resources": 1,
+      "jar_sha256": "813ec8b466f8a112470f418384b708b0407658b71d81e3479a544e835ffdec96",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.spatial3d",
+          "static": false
+        },
+        {
+          "module": "s2.geometry.library.java",
+          "static": false
+        },
+        {
+          "module": "spatial4j",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.suggest",
+      "java_sources": 80,
+      "resources": 3,
+      "jar_sha256": "07187fca8c5b977cdda4f7185416f806f492431ffdee9031fb6f09d1ba41cc4b",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.analysis.common",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.classification",
+      "java_sources": 19,
+      "resources": 1,
+      "jar_sha256": "66a01cdde2e8eccc5d72fe2e33c90201cbe0b4ce02d4cef97eaf0d77c4de4560",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.grouping",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.queries",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.queryparser",
+      "java_sources": 250,
+      "resources": 7,
+      "jar_sha256": "270e83c141fd59e5a443ddb1d4e0671eadbba1f909d3688f9fb94126316f65c9",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "java.xml",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.queries",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.sandbox",
+          "static": false
+        }
+      ]
+    },
+    {
+      "module": "org.apache.lucene.luke",
+      "java_sources": 163,
+      "resources": 6,
+      "jar_sha256": "320dba0cdb85112c6a6c02abc878a4945fe974a5bc785b63b94ebdde05dd7e7c",
+      "requires": [
+        {
+          "module": "java.base",
+          "static": false
+        },
+        {
+          "module": "java.desktop",
+          "static": false
+        },
+        {
+          "module": "java.logging",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.analysis.common",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.core",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.misc",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.queries",
+          "static": false
+        },
+        {
+          "module": "org.apache.lucene.queryparser",
+          "static": false
+        }
+      ]
+    }
+  ],
+  "named_modules": 59,
+  "source_recipe_receipt": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/source-overlay/SDK_RECEIPT.json",
+  "descriptor_recipe_receipt": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/dependency-descriptors/SDK_RECEIPT.json",
+  "source_recipe_changes": 176,
+  "source_recipe_fixed_point_changes": 0,
+  "descriptor_recipe_fixed_point_changes": 0,
+  "tests": [
+    {
+      "runtime": "module-path",
+      "test": "Jdk21ProviderCheck",
+      "result": "PASS"
+    },
+    {
+      "runtime": "module-path",
+      "test": "Jdk21ExpressionsCheck",
+      "result": "PASS"
+    },
+    {
+      "runtime": "module-path",
+      "test": "M3LuceneJmodCheck",
+      "result": "PASS"
+    },
+    {
+      "runtime": "linked-image",
+      "test": "Jdk21ProviderCheck",
+      "result": "PASS"
+    },
+    {
+      "runtime": "linked-image",
+      "test": "Jdk21ExpressionsCheck",
+      "result": "PASS"
+    },
+    {
+      "runtime": "linked-image",
+      "test": "M3LuceneJmodCheck",
+      "result": "PASS"
+    }
+  ],
+  "image_manifest": "/workspace/scratch/206049dfb270/nlp-work/source-lock-correction/combined-receiver-001/lucene/JMOD_IMAGE.tsv",
+  "jar_sha256": {
+    "com.fasterxml.jackson.annotation": "21ddb598807d3a51a876704eb979d9296e1c6a6f47ab1826ff88c6d6a127a2d0",
+    "com.fasterxml.jackson.core": "2d30c375cddea9657a1e1ef97547a2694b663b355facb4de53a097782b312d1a",
+    "com.fasterxml.jackson.databind": "d4cbf8947087f305869826801913abdc50735a1fab2074a1993e7bc67ca974a3",
+    "com.ibm.icu": "99197f2573936b1b6b1e47e2fcd2f536577d7ad6536c8e1e17614397cfa63b2d",
+    "hppc": "f7b6fd630248ffb6304b9720848bc245788d4808c3cd9fe6ad7edeaf0ed0a180",
+    "io.github.classgraph": "5c91fe294d2bd3d04c3fe37b1bab7f1d7074d4c4412063a88126be0f832eec8e",
+    "io.github.dmlloyd.classfile": "2156731c92362678945300ed39b7bf954c8338ecd1f5880995cfbd95d46dbbfe",
+    "jcommander": "e27b0bda3df16765c089a95afaddf9900640979c395ab20b32e9b801e1ca9eda",
+    "libsvm": "a95c6efb1e49a22355610ae3e45c42d70736adc0d30a28b2e7ac93b6031512bf",
+    "morfologik.ukrainian.search": "fdb35aac25453d22c55da0a14a60b06f75c70e29895a9b6b948b54f0a27b014a",
+    "noggit": "dc3384b0c71b004f2df547eaad7a279f28abd3e928e3be56062fa7e6ab2f29f6",
+    "org.antlr.antlr4.runtime": "bdb40194d417b155a019b5c5fa3a523941470b23298d9816eafb413151c39bde",
+    "org.apache.commons.codec": "78a5d732fbd715e2d10bd7150d2f8030bae57267f8aacc5c88f642cb6c2e5d3f",
+    "org.apache.commons.xml.secure": "b42a2e3afdadc409612ce696b8bcd65e577efdd3c96cff3df6daf64504dc57fe",
+    "org.apache.lucene.analysis.common": "afc622d7abfb5c3cf3dc1683ff3a0c48eb63198aa2d3141f87cb69bc8ebac445",
+    "org.apache.lucene.analysis.icu": "25c12819da2e3f53e47550c41f84aa612ea08dbcb71e5b29820112030f1d304c",
+    "org.apache.lucene.analysis.kuromoji": "590dd1d68c3cdc887743c4c6f1f664248e76e1e3821fcd077284e3aa9a92f3af",
+    "org.apache.lucene.analysis.morfologik": "c9f35680e91166837d5a2799fca8d87f783df90b1007c71e7dad1493098118f7",
+    "org.apache.lucene.analysis.nori": "0009fd781957c5cd63ca6969758cd1646b9eab9f73cec1da253b41ff5bd7b63f",
+    "org.apache.lucene.analysis.opennlp": "cbd6ddf440598723d088651c395361e9a863aa8c8979ca2c046cec656efee45f",
+    "org.apache.lucene.analysis.phonetic": "5dc41c8d2012f790bfd30285e9b5ecfc03032f096af4d666ee9b20d6384c1c33",
+    "org.apache.lucene.analysis.smartcn": "15c9b2ce24f370136e6434a2ad810aca183f551144913d37433348168226468f",
+    "org.apache.lucene.analysis.stempel": "3fae74693d5329f9b7f1b2d918c2310adb3c512017fd2cdaacf278c8fb56b4b1",
+    "org.apache.lucene.backward_codecs": "0aabb29409fb9c9f2e57266aa12fce7c7f1be4846c081c0e63099c7bff13c6f4",
+    "org.apache.lucene.classification": "66a01cdde2e8eccc5d72fe2e33c90201cbe0b4ce02d4cef97eaf0d77c4de4560",
+    "org.apache.lucene.codecs": "ac6df4ac991de11f0a74ad765f18a14f0aa22c3e78ef291414e987c251570eb6",
+    "org.apache.lucene.core": "e20b4bdc00ea05c83c9000e04b3e389823f492f9eb1e7650f9ffbadc01a9f99e",
+    "org.apache.lucene.expressions": "e0826a9af68b99d32ad8480f9113fcd165400685770be04218610116ac3716c4",
+    "org.apache.lucene.facet": "807bc4715ac094d51620b75f290f1777120aeaced25670ecdaa0de7745abaf7c",
+    "org.apache.lucene.grouping": "a459507bd1b240cc19a6880cb213a429fd82b6baa97597ba7230b3d55d39aaff",
+    "org.apache.lucene.highlighter": "1a74a39aa83da88ed20e803a862cc48bdc126c2ddd1c2e4687da09cd8fcf057a",
+    "org.apache.lucene.join": "206a6343da9e37f07740532303ae1a604e14adddc32a8445e190f151787ac3ed",
+    "org.apache.lucene.luke": "320dba0cdb85112c6a6c02abc878a4945fe974a5bc785b63b94ebdde05dd7e7c",
+    "org.apache.lucene.memory": "15edf3d2dc39d21fa474f3ae2f54ee5ef87d086e66cc91f3a729f7d6d0f139f7",
+    "org.apache.lucene.misc": "8a04069d35a5af5bc13ceb379e722063a381059a140a65e1bab3aeb9c587a5fe",
+    "org.apache.lucene.monitor": "906a19a35ff2c2e3d0a4629ebea554b00e8e41d61cbe1178f2dac6eebf10f914",
+    "org.apache.lucene.queries": "2610768653f8996251c44f44344356c35b533b59e5bd8b8100095ad29b697a99",
+    "org.apache.lucene.queryparser": "270e83c141fd59e5a443ddb1d4e0671eadbba1f909d3688f9fb94126316f65c9",
+    "org.apache.lucene.replicator": "6c82de8fbf8d505c63f080f54a8d33e6e25cadecfff0f99f87a752f5e7545ea6",
+    "org.apache.lucene.sandbox": "7706c697dfaff512383a607b88cb358b28f836741f8c62763e102073e7455b0c",
+    "org.apache.lucene.spatial3d": "ac0094a09ac7a3ef7567f2f336acb34548fcd28e296eb3606627dbfb8e3d8edc",
+    "org.apache.lucene.spatial_extras": "813ec8b466f8a112470f418384b708b0407658b71d81e3479a544e835ffdec96",
+    "org.apache.lucene.suggest": "07187fca8c5b977cdda4f7185416f806f492431ffdee9031fb6f09d1ba41cc4b",
+    "org.apache.opennlp.morfologik": "964092bbd1ac72d64a00f24adad67ddf85dbea232e48ef624cbf50f7f5dfd793",
+    "org.apache.opennlp.spellcheck": "637adcde78bd30a83c533ac2c106de269ade00e206892b9d4d3308007e4fd6c4",
+    "org.apache.opennlp.tools": "a7d4a446c7d5368a3b7e606e9bafe6a9b42c1aa7296d08f098a40815e8e68b87",
+    "org.apache.opennlp.uima": "4f7c9afe25bcd447a0d5ca1f47258e0dcc6f552936ca8ea0cff0ad939b7b2375",
+    "org.carrot2.morfologik.fsa": "ea569874d7909a62ea65d719392f9188af5e4586e20939073bab35c96cd57f9b",
+    "org.carrot2.morfologik.fsa_builders": "aa8ca70e3c4f017a75ed0a6b4ff426e8717bb0dc98aed2aa7725ac59e359185d",
+    "org.carrot2.morfologik.polish": "9ee5cb53175def6df6b44ed83f584176ed012935fdbb50874d1d4bf3b7d84b76",
+    "org.carrot2.morfologik.stemming": "405381710a7e19c8339c9dff5eb9abd880f4f0823f2157fa5671c5d4f021f178",
+    "org.carrot2.morfologik.tools": "f28c70ae1b9674c2ef1f48cc20d8053613d320fd422dda25bc3e952ff2e8552d",
+    "org.locationtech.jts": "a77d983e9b9f110726843589501197c2f535bbda15e27e2fb4c91d699c0d1579",
+    "org.slf4j": "e2038cee67ccfcafcf8e72fa560782a8d5bf46010553314c9a365a48c2cedf08",
+    "org.slf4j.simple": "e78aba9e69bc8c064f7a0659334a3f122ff0228e1a61836c5bac3d16732c79b6",
+    "s2.geometry.library.java": "85d61a4dd6385dfa13021b716a34fb25ead53ea34e4211d0030b0eba5060535a",
+    "spatial4j": "4d81330132df951a83ddf3b45f660819872e738c5f97be4c898b516891b9cb2d",
+    "uimaj.core": "126fdb24335aded7b7c0298800c5f8fbeda3dfb4249b391bce5817ef3c956e9c",
+    "zlibsvm.core": "fc6cffcc239dc8d103d546c3815ad7789d131ed1319a7057be44e275fda934f9"
+  },
+  "qualifications": [
+    "All29 production module base sources compiled; default Gradle25 lane preserved",
+    "Java21 preview FFM is explicit; existing scalar vectors run below25",
+    "Faiss Java binding compiles; optional native Faiss library is not supplied or executed",
+    "Original upstream Gradle25 full randomized suite is a separate donor gate",
+    "JAR timestamps fixed; existing JMOD packager owns JMOD/image timestamps"
+  ]
+}

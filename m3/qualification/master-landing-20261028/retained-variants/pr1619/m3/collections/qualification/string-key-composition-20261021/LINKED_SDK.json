@@ -1,0 +1,43 @@
+{
+  "status": "PASS_FRESH_INSTALLED_STRING_KEY_COLLECTION_SDK",
+  "utc": "2026-10-21T04:39:38.969040+00:00",
+  "image": "/workspace/scratch/122ce7bf56c1/evidence/linked-sdk/pack001/image",
+  "source_sdk": "/workspace/scratch/122ce7bf56c1/m3jdk21/build/m3-string-keys-release/images/jdk",
+  "module_count": 29,
+  "production_class_files": 512,
+  "external_test_classes": 430,
+  "product_native_libraries": 10,
+  "jni_export_count": 21,
+  "metadata_resources_preserved": 9,
+  "legal_notices_preserved": 4,
+  "ownership_classes": 9,
+  "observed_production_classes_from_jrt": 370,
+  "junit": {
+    "tests": 494,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "explicit_named_module_contract_runs": 6,
+  "composed_tree_modes": [
+    "compact",
+    "wide"
+  ],
+  "all_current_input_seals_unchanged": true,
+  "module_jar_sha256": "048af56bfaa577ab31c20f8c22be2caaf4899a93d230e80bd24deda1f98566a3",
+  "jmod_sha256": "caf1fa47cb4c1192b044d049f702aaf9ec022c4d8523f8b40f09b24cbbebbe38",
+  "image_module_store_sha256": "86dd4ab5f7d85211ebbeb9902b1d3bd47431d6db72eaa234cbd432064a04363e",
+  "receipts": {
+    "ROOT_READY.json": "071326988c9b2a18c42d792c2ed92172c0e4adb4ee774d1e5ac3793fd419ac01",
+    "PREPARED.json": "cf5098e697adca431889c7af880107f7ff2cfb127ac8324035801e11751f7a61",
+    "SOURCE_SDK_INPUTS.json": "0e0e2cac90441d5d6492e4897fddbcd42ccaa65625c7d15326f1e17600ce6dcf",
+    "JNI_HEADER_EQUIVALENCE.json": "f1a8e93a0958d5eef3baffd8ae0bbe5068fe438f95312e18de23cf005e33c897",
+    "GENERATED_HEADER_EQUIVALENCE.json": "082ccefc61a0a1c8cd385a53cd34b5e442fd4aa48ac41b3290dd369dc9db41a3",
+    "STATIC_OWNERSHIP.json": "bac1cfb41eb8ec0045f6182c2ff3db3ff8e60d94d1264b6f24d1c192959cb43f",
+    "LINKED_JUNIT.json": "ea881f4931cc1ccb278e6711eca8e68bd08f3cf22cfc515cd445bfe372559b6b",
+    "CLASS_ORIGINS.json": "1c7f096982b9e78c5e53270146ee9854bc0e91f7749e21044d8927df040dfd46",
+    "NATIVE_ORIGINS.json": "7eba5e5b0fa918851003f1d8f20c7d589f5c39b569f86cdf29a96bfc28b531ef",
+    "RUNS.json": "6efaa938873d2758464b5c6a1f892ddb20f97780d21c0e3b6a03eb17fcaa49f1"
+  },
+  "scope": "Fresh Linux installed-module packaging, full current collection JUnit+required JNI, and focused composed-string tree/view/native contracts. No historical pass relabeled; no production patch; no global provider/JIT/JCK/admission phase promotion."
+}

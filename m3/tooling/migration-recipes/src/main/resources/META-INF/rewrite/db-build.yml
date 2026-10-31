@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.DbBuild
+displayName: Repair typed metadata copy
+description: Retain SourceFile target typing through the existing metadata-copy sequence without changing guards, copy order or public APIs.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: db-build

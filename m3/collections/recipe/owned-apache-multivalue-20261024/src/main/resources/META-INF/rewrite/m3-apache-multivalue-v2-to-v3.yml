@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.ApacheMultiValueV2ToV320261024
+displayName: Exact Apache multivalue v2 to v3 (incremental size counters)
+description: Replaces the exact v2 bodies of M3AbstractMultiValuedMap, M3AbstractListValuedMap and M3AbstractSetValuedMap and installs the counter differential test; missing/drifted/duplicate preimages are refused.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: apache-multivalue-v2-to-v3
+      lst: false

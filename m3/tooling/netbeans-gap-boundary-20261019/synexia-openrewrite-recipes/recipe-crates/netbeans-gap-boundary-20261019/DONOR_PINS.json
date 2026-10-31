@@ -1,0 +1,56 @@
+[
+  {
+    "file": "GapContent.java",
+    "repository": "hsoliwal/M3jdk21",
+    "revision": "677437be295b23f7ccf7409be287008944d0e8b0",
+    "source_path": "src/java.desktop/share/classes/javax/swing/text/GapContent.java",
+    "git_blob": "bff876ed8cc23cdca416226b3218a63579cec10a",
+    "sha256": "b27db80a09aeaa134937789652d742932e71cd98351fe16afefae115352ac0c2",
+    "disposition": "EXACT_UNMODIFIED_PROOF_INPUT"
+  },
+  {
+    "file": "GapVector.java",
+    "repository": "hsoliwal/M3jdk21",
+    "revision": "677437be295b23f7ccf7409be287008944d0e8b0",
+    "source_path": "src/java.desktop/share/classes/javax/swing/text/GapVector.java",
+    "git_blob": "2b0a2f76ad9026a56ade76c61ff5e54fb674ab01",
+    "sha256": "f301d3e31656838ebf8628cd980805c6c16bbff698c1cd649fabfa254f543ecc",
+    "disposition": "EXACT_UNMODIFIED_PROOF_INPUT"
+  },
+  {
+    "file": "netbeans/GapList.java",
+    "repository": "apache/netbeans",
+    "revision": "f26ca8d8025ff820b8ffe751b6db6c1cc67baa97",
+    "source_path": "ide/editor.util/src/org/netbeans/lib/editor/util/GapList.java",
+    "git_blob": "5a329a1c56d48a1e4e0e1a50a3998d811cc924cf",
+    "sha256": "e72257eccdb7d9c0b5a61cf0bb2ac93ff7289b4736cf2d3e08bd8017b5800afa",
+    "disposition": "EXACT_UNMODIFIED_PROOF_INPUT"
+  },
+  {
+    "file": "netbeans/OffsetGapList.java",
+    "repository": "apache/netbeans",
+    "revision": "f26ca8d8025ff820b8ffe751b6db6c1cc67baa97",
+    "source_path": "ide/editor.util/src/org/netbeans/lib/editor/util/OffsetGapList.java",
+    "git_blob": "c0fdd1149b8cbf4c76468eef54d636cc92d72fbe",
+    "sha256": "263cc194490bb50c9a28de0ec0376c9b03b4965f74a7f278d05a2f29d5d91796",
+    "disposition": "EXACT_UNMODIFIED_PROOF_INPUT"
+  },
+  {
+    "file": "netbeans/ArrayUtilities.java",
+    "repository": "apache/netbeans",
+    "revision": "f26ca8d8025ff820b8ffe751b6db6c1cc67baa97",
+    "source_path": "ide/editor.util/src/org/netbeans/lib/editor/util/ArrayUtilities.java",
+    "git_blob": "903d77f6e06bd3c705d5e177bf2e4bc28efc02f7",
+    "sha256": "0c603832ccc7ecd85f4ceefcd96700f45237b3f0597626fac0afe74183279713",
+    "disposition": "EXACT_UNMODIFIED_PROOF_INPUT"
+  },
+  {
+    "file": "bug4496801.java",
+    "repository": "hsoliwal/M3jdk21",
+    "revision": "677437be295b23f7ccf7409be287008944d0e8b0",
+    "source_path": "test/jdk/javax/swing/text/GapContent/4496801/bug4496801.java",
+    "git_blob": "d0d425668a1139fa6a07f9c63cbb7b8285fdd551",
+    "sha256": "f94af4731b54bebf55133d5d6a86dd7df54ad8ca2cdb472a981fba4be7943b88",
+    "disposition": "EXACT_UNMODIFIED_PROOF_INPUT"
+  }
+]
