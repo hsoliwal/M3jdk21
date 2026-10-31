@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2026 Hitesh Soliwal and contributors
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3.CompositeBuilder
+name: jdk.internal.m3.CompositeBuilder
 displayName: M3JDK21 composite StringBuilder/StringBuffer lane (first cut)
 description: >-
   AbstractStringBuilder keeps appended M3 Strings (and large M3 ranges) as pieces in the new
@@ -13,7 +13,7 @@ description: >-
   AbstractStringBuilder, StringBuffer and StringBuilder are carried as text because the pinned Java parser cannot convert their
   Javadoc.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-composite-builder
-  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedTextSnapshotRecipe:
       crateName: m3-composite-builder

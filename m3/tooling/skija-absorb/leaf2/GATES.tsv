@@ -1,0 +1,7 @@
+stage	command	result
+descriptor source join	immutable donor/source ledger join in RAM	83 C++ files; 966 JNI symbol headers covered; 17 missing descriptor literals identified; lexical only
+descriptor inventory v2	changed skija_patterns.py CC_REF expression; Python -I -S -B RAM harness	PASS 73 assertions; original51 + descriptor17 = 68; full changed source syntax PASS
+descriptor rename v2	complete gen_rename.py main with isolated RAM filesystem	PASS 220 assertions; 17 old UNMAPPED -> 0; original51 unchanged; TYPE_RENAME/JNI_RENAME/YAML byte-identical; deterministic replay PASS
+classfile declaration join	standard-library reader on exact hashed jar bytes	PASS 966 one-to-one matches; expected undefined5; unexpected missing/extra/ambiguous0; local artifact only
+CPU autoreview	python -I -S -B autoreview --patch-stdin	PASS 0 findings; modified-source syntax NOT_EVALUATED by checker; separate full compile() PASS; runtime semantics NOT_EVALUATED
+native integration	C++ build/link/export/JNI/runtime/rendering	NOT_RUN; storage admission and qualified Skia inputs pending

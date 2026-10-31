@@ -51,7 +51,7 @@ jobs:
           jar --create --file proof/m3-collections.jar -C proof/collections .
           jdeps --print-module-deps --module-path proof/m3-arrays.jar proof/m3-collections.jar \
             > proof/module-closure.txt
-          test "$(cat proof/module-closure.txt)" = com.m3.arrays,java.base
+          test "$(cat proof/module-closure.txt)" = jdk.m3.arrays,java.base
           ARRAYS="$GITHUB_WORKSPACE/proof/m3-arrays.jar"
           (cd "$RUNNER_TEMP" && mvn -B -ntp org.apache.maven.plugins:maven-install-plugin:3.1.3:install-file \
             -Dfile="$ARRAYS" -DpomFile="$GITHUB_WORKSPACE/m3/arrays/pom.xml")
@@ -77,10 +77,10 @@ jobs:
         run: |
           set -euxo pipefail
           LIBRARY="$GITHUB_WORKSPACE/proof/native/libm3_arrays.so"
-          SDK=m3/collections/interop/src/test/java/com/m3/collections/interop/M3SdkFamiliesTest.java
-          SPRING=m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java
-          test "$(git hash-object "$SDK")" = ff4754059d05d2c9a40b93c05867024639b1bf6d
-          test "$(git hash-object "$SPRING")" = 530bbe2f3def29336a71c0d9030c8d541055641e
+          SDK=m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SdkFamiliesTest.java
+          SPRING=m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java
+          test "$(git hash-object "$SDK")" = 4cfdcb18cb8417c607bb582069bfdc07975d9998
+          test "$(git hash-object "$SPRING")" = 4cec6718324f96d96ff5e183087569d8503758ce
           mvn -B -ntp -f m3/collections/interop/pom.xml \
             '-Dtest=M3SdkFamiliesTest,M3SpringCaseInsensitiveSdkFactoryTest' \
             "-DargLine=-Xcheck:jni -Dm3.arrays.native.path=$LIBRARY" \
@@ -92,7 +92,7 @@ jobs:
           expected = {'M3SdkFamiliesTest': 7, 'M3SpringCaseInsensitiveSdkFactoryTest': 2}
           identities = set()
           for name, count in expected.items():
-              paths = list(reports.glob('TEST-com.m3.collections.interop.' + name + '.xml'))
+              paths = list(reports.glob('TEST-jdk.m3.collections.interop.' + name + '.xml'))
               assert len(paths) == 1, ('missing or duplicate original SDK suite', name)
               root = ET.parse(paths[0]).getroot()
               assert int(root.get('tests', '-1')) == count, ('SDK method count', name)

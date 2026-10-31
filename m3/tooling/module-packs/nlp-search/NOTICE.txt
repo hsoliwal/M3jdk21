@@ -18,7 +18,7 @@ The complete MIndexFile family and mapped supporting donors originate in
 hsoliwal/com.synexia revision 50f48cbbe11f17fb8dc209bac3812f8940a1e267.
 FILE_PORT_MAP.json and the source API, native and source-inventory receipts retain
 the precise mappings, original identities and explicit adaptations. The canonical
-integration recipe owner is synexia-openrewrite-recipes/crates/m3-nlp-search in
+integration recipe owner is m3-openrewrite-recipes/crates/m3-nlp-search in
 that repository. The resulting runtime does not require a Synexia service or
 classpath dependency.
 

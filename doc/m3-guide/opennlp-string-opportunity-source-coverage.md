@@ -81,7 +81,7 @@ Paths below resolve in the pinned public fork. Original Apache/embedded rights, 
 | Source | Git blob SHA-1 | Coverage |
 | --- | --- | --- |
 | [m3/docs/name-mapping.json](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/docs/name-mapping.json) | `288f20575d3f9d106571990f21944e7f46b0cf71` | Policy rows 48–72, 307–312, 525–538; not whole-map semantic coverage |
-| [m3/docs/m3jdk21-porting-invariant.md](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/docs/m3jdk21-porting-invariant.md) | `f65cc98e9088377755c51a447ce974356b28f15c` | Policy excerpts on recipe custody, gates, phase order |
+| [m3/docs/m3jdk21-porting-invariant.md](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/docs/m3jdk21-porting-invariant.md) | `d933c7f8a4ba875b318c499214857146724fc4da` | Policy excerpts on recipe custody, gates, phase order |
 | [m3/runtime-integration/README.md](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/runtime-integration/README.md) | `9723ecb01a3b958fd8136f06978bf5056b625b3e` | Activation/support gate, lines 8–11 |
 | [m3/tooling/module-packs/nlp-search/README.md](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/tooling/module-packs/nlp-search/README.md) | `8e32d4e658e999d755101bf74045fe6193ec68d8` | Existing receiver scope and pending gates |
 | [m3/tooling/module-packs/nlp-search/SOURCE_REF.json](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/tooling/module-packs/nlp-search/SOURCE_REF.json) | `e65dc6621efbedc64c76f4eaba8511342ad56f51` | Prior qualification and canonical recipe receipt; not rerun |
@@ -90,7 +90,7 @@ Paths below resolve in the pinned public fork. Original Apache/embedded rights, 
 | [m3/vendor/third_party/opennlp-tools/PROVENANCE.json](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/m3/vendor/third_party/opennlp-tools/PROVENANCE.json) | `5e737728a2152da5431656fe337c4386af99bcf3` | Published 2.4 source/resource provenance |
 | [src/java.base/share/classes/java/lang/M3String.java](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/src/java.base/share/classes/java/lang/M3String.java) | `42399d411c1516a56a47dcdb10242960157b4677` | Declaration/owner fields, canonicalize and slice ranges only |
 | [src/java.base/share/classes/java/lang/String.java](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/src/java.base/share/classes/java/lang/String.java) | `1454f1b34faea4f61f835ab054cc751c88c0b3c5` | Substring dispatch range only |
-| [AGENTS.md](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/AGENTS.md) | `2253be71930e69f34420a72df8e8ba278ae61fb5` | Policy discovery and lineage; no required programs executed |
+| [AGENTS.md](https://github.com/hsoliwal/M3jdk21/blob/1de629d26ea82d2729a5993bfc88099f83221923/AGENTS.md) | `f78685ca6efb5191e4e11b0bcfd137ddac7430b9` | Policy discovery and lineage; no required programs executed |
 
 ## Qualification status
 

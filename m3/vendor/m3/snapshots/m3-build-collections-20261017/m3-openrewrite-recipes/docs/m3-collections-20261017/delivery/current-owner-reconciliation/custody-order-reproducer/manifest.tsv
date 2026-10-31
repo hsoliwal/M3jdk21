@@ -1,0 +1,3 @@
+# path	before_sha256	after_sha256	template
+# parse-context-sha256	e1b0cb078f2d2402712270be062e6e6af15dbc2630f4846abdcf17f24e7fc39c
+m3/vendor/m3/snapshots/m3-build-collections-20261017/m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java	ABSENT	15dd2a5afe21ea373c151619bc8652e838f38b88f2fde335638b42a3983fd83e	template-00.txt

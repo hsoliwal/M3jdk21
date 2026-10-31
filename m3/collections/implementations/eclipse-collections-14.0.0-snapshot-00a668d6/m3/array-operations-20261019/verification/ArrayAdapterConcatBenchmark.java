@@ -12,9 +12,9 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-package com.synexia.verification;
+package jdk.internal.m3.verification;
 
-import com.m3.collections.eclipse.impl.list.fixed.ArrayAdapter;
+import jdk.m3.collections.eclipse.impl.list.fixed.ArrayAdapter;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.*;
 

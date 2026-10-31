@@ -3,7 +3,7 @@
   "repository": "hsoliwal/com.synexia",
   "protocol": "EXACT_CREATE_AND_TREE_IDENTITY_FOR_TWO_INVALID_UTF8_FIXTURES",
   "manifest_sha256": "9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328",
-  "preflight_sha256": "13e56b17314e89370fb8ce3f8417b405b89b34db8a1868d968589550975db84f",
+  "preflight_sha256": "4a8e0c7647a9a6549ffc797de28d01a7806aa7757fedb2096bf35ecb0bba62c7",
   "transport_index": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/transport/INDEX.json",
     "sha256": "dce1e97079aeb3ad9edbdf9f814b3ccaeebfd0053c9d2b4b79ff841632c0736d"
@@ -14,11 +14,11 @@
   },
   "verification_plan": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/RAW_VERIFICATION_TREE_PLAN.json",
-    "sha256": "00fa5b9e4e99621ed6b5aac3c0da4c6506f82e921a3da42fdd4645285653e319"
+    "sha256": "7b2b3526fec60ea3fd6d53261ab1f509c7dcf37b9193d044f215e913ee9fbf90"
   },
   "verification_file_reads": {
     "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/verification-file-reads.json",
-    "sha256": "5f992ea5fa2a618093909b3ba7b063a8972de84f2af4b00ed44b323597538a87"
+    "sha256": "89d82f0e4e538ba730afbac23e2daf1c9dc12caa9abdec8eb9df9575fe8d59b0"
   },
   "verification_tree_calls": [
     {
@@ -67,7 +67,7 @@
     },
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
-      "sha256": "f6852b552a509cd63b6f3622a21124215fb4c584d9b0b35fb4fd66dc6631f5d3"
+      "sha256": "7ddfde58c17d7c791af60b93f97606bc0e6437db69fb70a82cb33a8397126d6f"
     },
     {
       "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json",

@@ -1,8 +1,8 @@
 {
   "id": "M3TreeMap-public-JMH1.37-comparison-v1",
   "phase": "PLAN_FROZEN_BEFORE_BENCHMARK_SOURCE; NO_COMPILATION_OR_EXECUTION",
-  "target": "com.m3.collections.M3TreeMap<Integer,Integer>; typed public APIs only; no implementation inspection/reflection fallback",
-  "benchmarkClass": "com.m3.bench.M3TreeMapPublicBench",
+  "target": "jdk.m3.collections.M3TreeMap<Integer,Integer>; typed public APIs only; no implementation inspection/reflection fallback",
+  "benchmarkClass": "jdk.m3.bench.M3TreeMapPublicBench",
   "matrix": {
     "sizes": [
       4096,

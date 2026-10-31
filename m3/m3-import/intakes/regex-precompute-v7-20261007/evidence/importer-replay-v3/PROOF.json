@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "status": "PASS_EXPANDED_THREE_TARGET_RECIPE_APPLY_FIXED_POINT_SECOND_APPLY_AND_INPUT_DRIFT_REFUSAL",
+  "sourceRevision": "80b8534ad1e45002185fb3eeab233f98d3a7c0bd",
+  "recipeManifestSha256": "c7ef63491696cdea7bbb8025b996dd133f0da7ad0eaf0d84e94859e6bdeaf0b1",
+  "targets": [
+    {
+      "path": "m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlan.java",
+      "preimageSha256": "27996c430d055bdf5b5ba32c2664b3cc683731a0dd1edf51aca067d876859b82",
+      "postimageSha256": "cb8822f92db1c65c695d724013c47225d37b75ed766b2c9d197c562004b4add6"
+    },
+    {
+      "path": "m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java",
+      "preimageSha256": "8f0925601dd8308282727acd3a9fbcf1a654fbc0a3af48b9640a11d84755c2e0",
+      "postimageSha256": "a85d673f3a98b22a3a1514f905503037391c4b7686533869c792dcf8faa73e1a"
+    },
+    {
+      "path": "m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java",
+      "preimageSha256": "6acd2f31448739fd21d54b7df7503a796bc96801a5e5ff9a5720286a959fdf1a",
+      "postimageSha256": "8f9b21d5efc7f7407d8f0dafe24c67d7c5f337310ce2ec5b47d54a4fb130071b"
+    }
+  ],
+  "positiveApplyChanges": 3,
+  "fixedPointChanges": 0,
+  "secondApplyChanges": 0,
+  "secondApplyPreservedHashesAndMtimes": true,
+  "driftRefusalExpectedExitCode": 1,
+  "driftRefusalPreservedAllTargetBytesAndMtimes": true,
+  "unrelatedFilePreserved": true,
+  "originalReceiptsAndSourcesUnchanged": true,
+  "newJavaOrTestEngine": false,
+  "newCompilation": false,
+  "unitTestsRerun": false,
+  "priorUnitProof": {
+    "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\FINAL_JUNIT_PROOF.json",
+    "sha256": "011ba9dce48c402b4e51cefdeda5cc4034d93a3b49c7a47026e7666038a8b9d6",
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "commandReceipts": {
+    "path": "COMMANDS.json",
+    "sha256": "a9ee278a068c31276c8c1752666d451c1f3c0fe1f8284e32d13e9aa50b79da9c"
+  },
+  "snapshots": {
+    "path": "SNAPSHOTS.json",
+    "sha256": "87a6f3e3891b5efe92b3f49029b0295858bdf310ecbc7bc2591b12203e75b076"
+  },
+  "inputCustody": {
+    "path": "INPUT_CUSTODY.json",
+    "sha256": "86199f739226ddcd8e70b86eb584648691bab99f160b61559bef0abf52a710db"
+  },
+  "completeTemplates": "K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\templates",
+  "limitations": [
+    "No runtime regex source-closure or java.base integration qualification",
+    "No full repository SeedSnapshot fixture or Jacoco verify threshold qualification",
+    "No model review executed for qualifier/test delta in this receipt"
+  ],
+  "jvmLaneReleased": true
+}

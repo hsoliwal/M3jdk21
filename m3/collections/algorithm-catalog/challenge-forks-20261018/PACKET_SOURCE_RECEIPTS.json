@@ -43,11 +43,11 @@
     {
       "destination": "OWNER_REFINEMENT_PROPOSALS.md",
       "destination_bytes": 4817,
-      "destination_sha256": "c716aa2a99e2b37b32b28e8f6dfd816e15d4862f9331489ea6bfd5eee5e9041d",
+      "destination_sha256": "2b8100c0cfaa52c8fd69bc0104fc389f82699285d711dee2043d3e19bdabd25d",
       "source_bytes": 4817,
       "source_group": "sealed-public-donor-research",
       "source_path": "OWNER_REFINEMENT_PROPOSALS.md",
-      "source_sha256": "c716aa2a99e2b37b32b28e8f6dfd816e15d4862f9331489ea6bfd5eee5e9041d",
+      "source_sha256": "2b8100c0cfaa52c8fd69bc0104fc389f82699285d711dee2043d3e19bdabd25d",
       "transformation": "EXACT_BYTE_COPY"
     },
     {
@@ -83,11 +83,11 @@
     {
       "destination": "source-receipts/LOCAL_OWNER_OBSERVATIONS.json",
       "destination_bytes": 1869,
-      "destination_sha256": "651008a0185aa9706e3a7a18f87c8e111cac5d99a13e327804867b3d15b1e77b",
+      "destination_sha256": "42eb55d9054f9efa2c1420da0e65014f191b4f82ab77868057a6dd651dca9668",
       "source_bytes": 1869,
       "source_group": "sealed-public-donor-research",
       "source_path": "LOCAL_OWNER_OBSERVATIONS.json",
-      "source_sha256": "651008a0185aa9706e3a7a18f87c8e111cac5d99a13e327804867b3d15b1e77b",
+      "source_sha256": "42eb55d9054f9efa2c1420da0e65014f191b4f82ab77868057a6dd651dca9668",
       "transformation": "EXACT_BYTE_COPY"
     },
     {

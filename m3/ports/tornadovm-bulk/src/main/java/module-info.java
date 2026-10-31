@@ -9,8 +9,8 @@
 module jdk.m3.tornado {
     requires transitive tornado.api;
 
-    exports com.m3.tornado;
-    exports com.synexia.m3.cpugpu;
+    exports jdk.m3.tornado;
+    exports jdk.internal.m3.cpugpu;
 
-    opens com.synexia.m3.cpugpu to tornado.runtime;
+    opens jdk.internal.m3.cpugpu to tornado.runtime;
 }

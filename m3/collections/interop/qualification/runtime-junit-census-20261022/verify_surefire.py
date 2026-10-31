@@ -12,8 +12,8 @@ from pathlib import Path
 import re
 import xml.etree.ElementTree as ET
 
-PACKAGE = 'com.m3.collections.interop'
-SOURCE_PREFIX = 'm3/collections/interop/src/test/java/com/m3/collections/interop/'
+PACKAGE = 'jdk.m3.collections.interop'
+SOURCE_PREFIX = 'm3/collections/interop/src/test/java/jdk/m3/collections/interop/'
 SHARDS = tuple(f'expected-{i:02d}.tsv' for i in range(4))
 TEST = re.compile(r'@Test\b\s+(?:(?:public|protected|private|static|final|synchronized)\s+)*'
                   r'[A-Za-z_$][\w$<>\[\]., ?]*\s+([A-Za-z_$][\w$]*)\s*\(')

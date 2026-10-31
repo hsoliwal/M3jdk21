@@ -3,7 +3,7 @@
   "status": "PASS_LOCAL; HOSTED_CI_AND_FULL_PACKET_REVIEW_PENDING",
   "owner": {
     "bytes": 38983,
-    "sha256": "29ffcd071461307e4cc7fc623baeba65eb19079f2dc2536cfa119a821c3b6a96"
+    "sha256": "c8f44e9ca7507c1759da1b4ae497f7dda116d7776a9c5c711b32468176013c00"
   },
   "sourceAwareRootOwnershipReview": {
     "bytes": 4078,
@@ -41,7 +41,7 @@
     "successStates": 8,
     "freshFixedpoints": 8,
     "beforeOutputRefusals": 4,
-    "engineSHA256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
+    "engineSHA256": "9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37",
     "actualReceiptSHA256": "9e8d1c699bac48f0a6ca222e0185d04189c2559ee91be51e52b269934dd01e3c"
   },
   "currentMaskProjection": {
@@ -72,9 +72,9 @@
       "projectionSHA256": "c9221ef44e17b8a3a5510cd3ef840b08824109b3472f298747d325b496f6e22f",
       "scope": "existing current aligned primitive kernel over public queue array/iterator/poll/rebuild snapshots; no native heap CRUD/store or ABI addition"
     },
-    "actualReceiptSHA256": "81fa7bad692b5af77efba651dc201fa0159b5853b21f71bbec2b3cab09b9c1aa",
+    "actualReceiptSHA256": "ae92daa318e3e472642b54cd108c5d8356cce584e8db49fd997cb0409c0599ca",
     "publicReceiptPath": "m3/collections/qualification/owned-guava-minmax-priority-queue-20261018/MASK_PROJECTION_V4.json",
-    "rootCurrentRuntimeReceiptSHA256": "602494cad7e16cbf6c39fa0f1e6ba0a5889e563195b282d05d11572c349abdb5",
+    "rootCurrentRuntimeReceiptSHA256": "4ba523ad8d2e96254d81d5b6d3587ac2118f9fcf196122b64f1afb14dc26cda1",
     "rootCurrentCustodyReceiptSHA256": "fde5fca9b6608d022b6fecac5bfc189d934812f9ff721084b7e568f2c2006b56",
     "historyScope": "Prior V1 snapshot projection retained under historicalMaskProjectionV1; no previous receipt rewritten"
   },
@@ -98,7 +98,7 @@
     "actualDiscriminatorCases": 10,
     "actualProofSHA256": "4fec73e0d2f17d220d7752eb497aab47566facc3e5d20b23f3eb725bb4c4c654",
     "rootDispositionSHA256": "b92e55b5093626f0cdcea00b3a07767f9b2d98f29f572338b5657ebf79778453",
-    "runnerSHA256": "815464a4b2b759a3b7d5e47ca82d6ed6d09fa5eddacb0e24fcf5ee6646796679",
+    "runnerSHA256": "6b92f5ea93886118a809f9a2ea3c95192ed715303fbb845f5dd127b382bfa397",
     "combinedChildLogCapBytes": 33554432,
     "totalOutputCapBytes": 536870912,
     "reserveBytes": 8589934592,
@@ -143,7 +143,7 @@
     "javaSources": 130,
     "nativeSources": 1,
     "classes": 304,
-    "strictRuntimeReceiptSHA256": "602494cad7e16cbf6c39fa0f1e6ba0a5889e563195b282d05d11572c349abdb5",
+    "strictRuntimeReceiptSHA256": "4ba523ad8d2e96254d81d5b6d3587ac2118f9fcf196122b64f1afb14dc26cda1",
     "queueProofScope": "Owner and frozen projection recompiled/executed by root against this exact context; original full protocol proof retains its qualified129 context; no new full protocol/receiving suite claim"
   }
 }

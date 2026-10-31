@@ -2,8 +2,8 @@ name: M3 AST Scoped File Identity Receiver
 on:
   pull_request:
     paths:
-      - 'm3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java'
-      - 'm3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java'
+      - 'm3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java'
+      - 'm3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java'
       - 'm3/ports/compiletime/qualification/ast-scoped-file-identity-20261017/**'
       - '.github/workflows/m3-ast-scoped-file-identity-receiver-20261017.yml'
   workflow_dispatch:
@@ -28,6 +28,6 @@ jobs:
         run: |
           mkdir -p "$RUNNER_TEMP/m3-ast-owner"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$RUNNER_TEMP/m3-ast-owner" \
-            m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ASTLeafIndex.java \
-            m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ASTLeafIndexSelfTest.java
-          java -cp "$RUNNER_TEMP/m3-ast-owner" com.m3.compiletime.M3ASTLeafIndexSelfTest
+            m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ASTLeafIndex.java \
+            m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ASTLeafIndexSelfTest.java
+          java -cp "$RUNNER_TEMP/m3-ast-owner" jdk.m3.compiletime.M3ASTLeafIndexSelfTest

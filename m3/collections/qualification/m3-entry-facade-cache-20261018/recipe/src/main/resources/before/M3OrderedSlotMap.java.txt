@@ -2,7 +2,7 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: late-binding sequenced-view spliterators.
 // SPDX-License-Identifier: Apache-2.0
-package com.m3.collections;
+package jdk.m3.collections;
 
 import java.util.AbstractCollection;
 import java.util.Iterator;

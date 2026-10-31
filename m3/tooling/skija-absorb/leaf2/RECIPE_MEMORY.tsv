@@ -1,0 +1,3 @@
+pattern_id	version	owner	before_sha256	after_sha256	invariant	discriminator	result
+SKIJA_CC_LITERAL_INVENTORY	2	tools/skija_patterns.py	b8148adb9691db62758be07df6ffb0ae31f45588e238a57552ddb765cb53bd15	94170fe4278a603dab3698f5cb5c150e62660d126638a617ad04a40f98e439b7	retain complete C++ Java class/descriptor literal and file/line	17 real descriptors fail old regex, pass new; original51 unchanged	PASS_CPU_73
+SKIJA_CC_LITERAL_RENAME	2	tools/gen_rename.py	d32f9d1ba80096a7a92b5fa19563b044a336f01a917fa0d257bf3d29c9b59318	630acf1c482317daf40e25b39b2bd3276c73b78e1a5a25f944055fc1e5f2309a	replace known object class names only; preserve descriptor grammar/JDK types; unknown=>UNMAPPED	old17 unmapped -> new0; prefix/nested/unknown cases; replay; type/JNI/YAML unchanged	PASS_CPU_220

@@ -12,9 +12,9 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-package com.synexia.proof;
+package jdk.internal.m3.proof;
 
-import com.m3.arrays.M3ArrayNative;
+import jdk.m3.arrays.M3ArrayNative;
 import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.util.Arrays;

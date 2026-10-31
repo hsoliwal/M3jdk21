@@ -20,7 +20,7 @@ benchmark implementation or product-source edit.
 The exact proof source SHA-256 is:
 
 ```text
-633ad8b6e70b211efc1917daea6277b38632359f9442120396fbeb187e663cf0
+c8776759a8ce22f6ec9039d630997d12262ee53f285beb0097ffb48b1f2a30cb
 ```
 
 The baseline is the complete collections module at M3JDK21 commit

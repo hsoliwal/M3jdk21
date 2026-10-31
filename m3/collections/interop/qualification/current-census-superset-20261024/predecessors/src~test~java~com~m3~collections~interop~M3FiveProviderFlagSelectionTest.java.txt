@@ -2,15 +2,15 @@
  * Copyright 2026 Hitesh Soliwal and contributors.
  * SPDX-License-Identifier: Apache-2.0
  */
-package com.m3.collections.interop;
+package jdk.m3.collections.interop;
 
 import static org.junit.jupiter.api.Assertions.*;
 import com.google.common.collect.Multiset;
-import com.m3.collections.M3IndexPathMasks;
-import com.m3.collections.M3LinkedHashMap;
-import com.m3.collections.M3LinkedList;
-import com.m3.collections.M3ObjectCounts;
-import com.m3.collections.M3TreeMap;
+import jdk.m3.collections.M3IndexPathMasks;
+import jdk.m3.collections.M3LinkedHashMap;
+import jdk.m3.collections.M3LinkedList;
+import jdk.m3.collections.M3ObjectCounts;
+import jdk.m3.collections.M3TreeMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;

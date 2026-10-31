@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # M3 vCPU native layer: HAL core + built-in CPU backend (m3vcpu), OpenCL backend (m3vcpu_opencl,
 # OpenCL.dll loaded at run time), JNI glue (m3vcpu_jni), ctest gates.
-# Template: M3jdk21 m3/ports/precompute/src/main/native (C11 core + _jni.c glue, -Werror, path file).
+# Template: M3JDK 21 m3/ports/precompute/src/main/native (C11 core + _jni.c glue, -Werror, path file).
 cmake_minimum_required(VERSION 3.20)
 project(m3vcpu VERSION 0.1.0 LANGUAGES C)
 
@@ -17,7 +17,7 @@ set(M3VCPU_WEBGPU_MIN_MSVCP "1440" CACHE STRING
 set(M3VCPU_WEBGPU_RUNTIME_DLLS "" CACHE STRING
     "Run-time DLLs copied beside the built binaries for tests (dxcompiler.dll;dxil.dll;vulkan-1.dll); never the source tree")
 set(M3VCPU_DONOR_ORACLE_DIR "" CACHE PATH
-    "Optional: cpu-gpu-rv32im src/main/java/com/synexia/m3/cpugpu (Java oracle for the JNI parity test)")
+    "Optional: cpu-gpu-rv32im src/main/java/jdk/internal/m3/cpugpu (Java oracle for the JNI parity test)")
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -244,7 +244,7 @@ if(BUILD_TESTING)
   if(TARGET m3vcpu_jni)
     find_package(Java 21 COMPONENTS Development Runtime)
     if(Java_JAVAC_EXECUTABLE AND Java_JAVA_EXECUTABLE)
-      set(M3VCPU_JAVA_SRC ${CMAKE_CURRENT_SOURCE_DIR}/../src/main/java/com/m3/vcpu/internal/NativeVcpu.java)
+      set(M3VCPU_JAVA_SRC ${CMAKE_CURRENT_SOURCE_DIR}/../src/main/java/jdk/m3/vcpu/internal/NativeVcpu.java)
       add_test(NAME m3vcpu_jni_smoke
                COMMAND ${CMAKE_COMMAND} -DJAVAC=${Java_JAVAC_EXECUTABLE} -DJAVA=${Java_JAVA_EXECUTABLE}
                        -DOUT=${CMAKE_BINARY_DIR}/java-smoke "-DSOURCES=${M3VCPU_JAVA_SRC}|${CMAKE_CURRENT_SOURCE_DIR}/tests/java/NativeVcpuSmoke.java"

@@ -86,9 +86,9 @@ static void JNICALL write_ints(JNIEnv *env, jintArray array, jsize first,
     memcpy((jint *) a->data + first, source, (size_t) count * sizeof(jint));
 }
 
-extern jlong Java_com_m3_collections_M3IndexMaskWindow_scanNative(JNIEnv *, jclass,
+extern jlong Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(JNIEnv *, jclass,
         jintArray, jbyteArray, jint, jint, jint, jintArray, jint, jint);
-extern jlong Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(JNIEnv *, jclass,
+extern jlong Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative(JNIEnv *, jclass,
         jintArray, jbyteArray, jint, jint, jint, jint, jintArray, jint, jint);
 
 static void reset(const char *name, jint *output, jsize size) {
@@ -164,10 +164,10 @@ static void differential(JNIEnv *env) {
             }
         }
         jlong actual = bounded
-          ? Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(env, NULL,
+          ? Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative(env, NULL,
               (jintArray) &r, (jbyteArray) &s, from, end, required, excluded,
               (jintArray) &o, offset, limit)
-          : Java_com_m3_collections_M3IndexMaskWindow_scanNative(env, NULL,
+          : Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(env, NULL,
               (jintArray) &r, (jbyteArray) &s, from, required, excluded,
               (jintArray) &o, offset, limit);
         cursor(actual, next, copied);
@@ -200,7 +200,7 @@ int main(void) {
     fixture_array r = {1024, rows}, s = {1024, states}, o = {64, output};
 
     reset("reject all", output, 64);
-    cursor(Java_com_m3_collections_M3IndexMaskWindow_scanNative(&env, NULL,
+    cursor(Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(&env, NULL,
             (jintArray) &r, (jbyteArray) &s, 0, 128, 0, (jintArray) &o, 2, 32), 1024, 0);
     check(row_calls == 0 && state_calls == 8 && output_calls == 0,
           "mask admission before row transfer");
@@ -209,7 +209,7 @@ int main(void) {
 
     reset("one sparse occurrence", output, 64);
     states[1000] = (jbyte) 128;
-    cursor(Java_com_m3_collections_M3IndexMaskWindow_scanNative(&env, NULL,
+    cursor(Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(&env, NULL,
             (jintArray) &r, (jbyteArray) &s, 0, 128, 0, (jintArray) &o, 2, 32), 1024, 1);
     check(output[2] == rows[1000], "sparse value");
     check(row_calls == 1 && row_elements == 1 && output_elements == 1,
@@ -217,12 +217,12 @@ int main(void) {
     guards(output, 64, 2, 1);
 
     reset("contradictory masks", output, 64);
-    cursor(Java_com_m3_collections_M3IndexMaskWindow_scanNative(&env, NULL,
+    cursor(Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(&env, NULL,
             (jintArray) &r, (jbyteArray) &s, 0, 128, 128, (jintArray) &o, 2, 32), 1024, 0);
     check(row_calls == 0 && state_calls == 0 && output_calls == 0, "constant mask shortcut");
 
     reset("all pass tail", output, 64);
-    cursor(Java_com_m3_collections_M3IndexMaskWindow_scanNative(&env, NULL,
+    cursor(Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(&env, NULL,
             (jintArray) &r, (jbyteArray) &s, 1000, 0, 0, (jintArray) &o, 2, 32), 1024, 24);
     check(row_elements == 24 && state_calls == 0 && output_elements == 24, "bulk tail transfer");
     for (int i = 0; i < 24; ++i) check(output[i + 2] == rows[i + 1000], "bulk order");
@@ -231,7 +231,7 @@ int main(void) {
     memset(states, 0, sizeof(states));
     states[124] = (jbyte) 128;
     reset("bounded rejected prefix", output, 64);
-    cursor(Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(&env, NULL,
+    cursor(Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative(&env, NULL,
             (jintArray) &r, (jbyteArray) &s, 0, 128, 128, 0, (jintArray) &o, 2, 16), 128, 1);
     check(output[2] == rows[124] && row_elements == 1 && state_calls == 1,
           "minimum admitted single row region");
@@ -240,7 +240,7 @@ int main(void) {
     memset(states, 0, sizeof(states));
     states[20] = states[120] = (jbyte) 128;
     reset("two matches one span", output, 64);
-    cursor(Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(&env, NULL,
+    cursor(Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative(&env, NULL,
             (jintArray) &r, (jbyteArray) &s, 0, 128, 128, 0, (jintArray) &o, 2, 16), 128, 2);
     check(output[2] == rows[20] && output[3] == rows[120], "stable sparse values");
     check(row_calls == 1 && row_elements == 101 && state_calls == 1,
@@ -249,7 +249,7 @@ int main(void) {
     memset(states, 0, sizeof(states));
     states[10] = states[20] = states[30] = (jbyte) 128;
     reset("early limit", output, 64);
-    cursor(Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(&env, NULL,
+    cursor(Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative(&env, NULL,
             (jintArray) &r, (jbyteArray) &s, 0, 128, 128, 0, (jintArray) &o, 2, 2), 21, 2);
     check(output[2] == rows[10] && output[3] == rows[20], "early two values");
     check(row_elements == 11 && output_calls == 1 && output_elements == 2,
@@ -258,7 +258,7 @@ int main(void) {
     memset(states, 0, sizeof(states));
     states[7] = states[129] = states[255] = (jbyte) 128;
     reset("two chunks", output, 64);
-    cursor(Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(&env, NULL,
+    cursor(Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative(&env, NULL,
             (jintArray) &r, (jbyteArray) &s, 0, 256, 128, 0, (jintArray) &o, 2, 3), 256, 3);
     check(output[2] == rows[7] && output[3] == rows[129] && output[4] == rows[255],
           "cross-chunk occurrence order");
@@ -266,24 +266,24 @@ int main(void) {
           "two bounded JNI regions with only admitted enclosing spans");
 
     reset("zero limit", output, 64);
-    cursor(Java_com_m3_collections_M3IndexMaskWindow_scanBoundedNative(&env, NULL,
+    cursor(Java_jdk_m3_collections_M3IndexMaskWindow_scanBoundedNative(&env, NULL,
             (jintArray) &r, (jbyteArray) &s, 47, 120, 128, 0, (jintArray) &o, 2, 0), 47, 0);
     check(state_calls == 0 && row_calls == 0 && output_calls == 0, "zero limit no region traffic");
 
     reset("aliased source/output rejected", output, 64);
-    check(Java_com_m3_collections_M3IndexMaskWindow_scanNative(&env, NULL,
+    check(Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(&env, NULL,
             (jintArray) &r, (jbyteArray) &s, 0, 128, 0, (jintArray) &r, 2, 1) == -1,
           "alias refusal code");
     check(thrown == 1 && row_calls == 0 && output_calls == 0, "alias refusal before transfer");
 
     reset("invalid mask rejected", output, 64);
-    check(Java_com_m3_collections_M3IndexMaskWindow_scanNative(&env, NULL,
+    check(Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(&env, NULL,
             (jintArray) &r, (jbyteArray) &s, 0, 256, 0, (jintArray) &o, 2, 1) == -1,
           "unsigned byte admission limit");
     check(thrown == 1 && state_calls == 0 && output_calls == 0, "invalid mask cannot mutate");
 
     reset("invalid output rejected", output, 64);
-    check(Java_com_m3_collections_M3IndexMaskWindow_scanNative(&env, NULL,
+    check(Java_jdk_m3_collections_M3IndexMaskWindow_scanNative(&env, NULL,
             (jintArray) &r, (jbyteArray) &s, 0, 0, 0, (jintArray) &o, 2, 64) == -1,
           "bounded output capacity check");
     check(thrown == 1 && row_calls == 0, "invalid output no transfer");

@@ -1,14 +1,14 @@
 {
   "schema": "eclipse-collections-namespace-identity-exception-v1",
   "sourceNamespace": "org.eclipse.collections",
-  "targetNamespace": "com.m3.collections.eclipse",
+  "targetNamespace": "jdk.m3.collections.eclipse",
   "authorizedScope": "User requested package-first renaming across all collections libraries; owner decision 2026-10-24: receive fork master acefe9c62227 after the fork-first header prep",
   "identitiesChanged": [
     "declared qualified names",
     "reflection names",
     "generator template package paths and generated-source packages",
     "factory fallback class names in ServiceLoaderUtils",
-    "OSGi Bundle-SymbolicName and JPMS module names: com.m3.collections.eclipse.api and com.m3.collections.eclipse.impl (fork bnd; BSN = module name)",
+    "OSGi Bundle-SymbolicName and JPMS module names: jdk.m3.collections.eclipse.api and jdk.m3.collections.eclipse.impl (fork bnd; BSN = module name)",
     "serialized descriptors",
     "explicit qualified-name diagnostics"
   ],

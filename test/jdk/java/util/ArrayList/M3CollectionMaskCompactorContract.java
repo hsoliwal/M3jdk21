@@ -19,7 +19,7 @@
 
 /*
  * @test
- * @summary M3JDK21 stable deletion-mask array compaction preserves references, offsets, and unchanged tail
+ * @summary M3JDK 21 stable deletion-mask array compaction preserves references, offsets, and unchanged tail
  * @modules java.base/jdk.internal.mindex
  * @run main M3CollectionMaskCompactorContract
  */

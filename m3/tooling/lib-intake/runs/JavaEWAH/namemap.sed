@@ -1,0 +1,1 @@
+s/com\.googlecode\.javaewah32([^A-Za-z0-9_$]|$)/com.m3.collections.ewah32\1/g;s#com/googlecode/javaewah32([^A-Za-z0-9_$]|$)#com/m3/collections/ewah32\1#g;s/com\.googlecode\.javaewah([^A-Za-z0-9_$]|$)/com.m3.collections.ewah\1/g;s#com/googlecode/javaewah([^A-Za-z0-9_$]|$)#com/m3/collections/ewah\1#g;

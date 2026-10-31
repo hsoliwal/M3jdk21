@@ -1,0 +1,99 @@
+{
+  "schema": "M3_LIB_INTAKE_NAME_MAPPING_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors (M3 modifications)",
+  "license": "upstream LICENSE in legal_notice (vendored source); original notices retained",
+  "product": "M3JDK21",
+  "intake_mode": "LIB_INTAKE_TO_JMOD_V2",
+  "target_module": "jdk.m3.core",
+  "target_path": "m3/vendor/third_party-m3/relocated/jackson-core-2.19.2",
+  "canonical_recipe": "m3/tooling/lib-intake/lib_intake.sh (pattern LIB_INTAKE_TO_JMOD v2)",
+  "canonical_recipe_owners": [
+    "org.openrewrite.java.ChangePackage (recursive=false, longest first; boundary-checked form of com.synexia M3BoundaryCheckedPackageRenameRecipe)"
+  ],
+  "source_path": "m3/vendor/third_party/jackson-core-2.19.2",
+  "source_coordinate": "com.fasterxml.jackson.core:jackson-core:2.19.2-m3-source-1",
+  "source_version": "2.19.2-m3-source-1",
+  "source_license_origin": "",
+  "source_packages": [
+    "com.fasterxml.jackson.core"
+  ],
+  "runtime_packages": [
+    "com.m3.lib.core"
+  ],
+  "intake_dependencies": "fastdoubleparser-1.0.90",
+  "qualification_receipt": "m3/tooling/lib-intake/runs/jackson-core-2.19.2/STAGES.tsv",
+  "relocation_map": "m3/tooling/lib-intake/runs/jackson-core-2.19.2/RELOCATION_MAP.tsv",
+  "legal_notice": "m3/vendor/third_party-m3/relocated/jackson-core-2.19.2",
+  "mappings": [
+    {
+      "source": "com.fasterxml.jackson.core and subpackages",
+      "target": "com.m3.lib.core and subpackages",
+      "role": "relocated donor API in the optional jdk.m3.core JMOD; type names retained"
+    },
+    {
+      "source": "com.fasterxml.jackson.core.io.schubfach",
+      "target": "com.m3.lib.core.io.schubfach",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.fasterxml.jackson.core.json.async",
+      "target": "com.m3.lib.core.json.async",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.fasterxml.jackson.core.filter",
+      "target": "com.m3.lib.core.filter",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.fasterxml.jackson.core.format",
+      "target": "com.m3.lib.core.format",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.fasterxml.jackson.core.async",
+      "target": "com.m3.lib.core.async",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.fasterxml.jackson.core.base",
+      "target": "com.m3.lib.core.base",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.fasterxml.jackson.core.json",
+      "target": "com.m3.lib.core.json",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.fasterxml.jackson.core.type",
+      "target": "com.m3.lib.core.type",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.fasterxml.jackson.core.util",
+      "target": "com.m3.lib.core.util",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.fasterxml.jackson.core.exc",
+      "target": "com.m3.lib.core.exc",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.fasterxml.jackson.core.sym",
+      "target": "com.m3.lib.core.sym",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.fasterxml.jackson.core.io",
+      "target": "com.m3.lib.core.io",
+      "role": "package (ChangePackage)"
+    },
+    {
+      "source": "com.fasterxml.jackson.core",
+      "target": "com.m3.lib.core",
+      "role": "package (ChangePackage)"
+    }
+  ]
+}

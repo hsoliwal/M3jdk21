@@ -11,23 +11,23 @@ import subprocess
 
 
 OWNERS = (
-    "m3/file/src/main/java/com/m3/file/M3File.java",
-    "m3/ports/compiletime/src/main/java/com/m3/compiletime/ast/M3FileSourceFacts.java",
+    "m3/file/src/main/java/jdk/m3/file/M3File.java",
+    "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/ast/M3FileSourceFacts.java",
     "m3/tooling/module-packs/parser/src/main/java/jdk/m3/parser/M3File.java",
 )
 TESTS = (
-    ("m3/file/src/test/java/com/m3/file/M3FileFingerprintContract.java",
-     "com.m3.file.M3FileFingerprintContract", "M3_FILE_FINGERPRINT_PASS"),
-    ("m3/ports/compiletime/src/test/java/com/m3/compiletime/ast/M3FileSourceFactsDeltaContract.java",
-     "com.m3.compiletime.ast.M3FileSourceFactsDeltaContract", "M3FileSourceFactsDeltaContract PASS"),
+    ("m3/file/src/test/java/jdk/m3/file/M3FileFingerprintContract.java",
+     "jdk.m3.file.M3FileFingerprintContract", "M3_FILE_FINGERPRINT_PASS"),
+    ("m3/ports/compiletime/src/test/java/jdk/m3/compiletime/ast/M3FileSourceFactsDeltaContract.java",
+     "jdk.m3.compiletime.ast.M3FileSourceFactsDeltaContract", "M3FileSourceFactsDeltaContract PASS"),
     ("m3/tooling/module-packs/parser/src/test/java/jdk/m3/parser/test/M3FileDeltaContract.java",
      "jdk.m3.parser.test.M3FileDeltaContract", "M3_FILE_DELTA_PASS"),
     ("m3/tooling/module-packs/build-tools/delta/src/test/java/jdk/m3/build/test/M3BuildDeltaContract.java",
      "jdk.m3.build.test.M3BuildDeltaContract", "M3_BUILD_DELTA_PASS"),
 )
 PUBLIC_TYPES = (
-    "com.m3.file.M3File", "com.m3.file.M3File$Metadata",
-    "com.m3.compiletime.ast.M3FileSourceFacts", "jdk.m3.parser.M3File",
+    "jdk.m3.file.M3File", "jdk.m3.file.M3File$Metadata",
+    "jdk.m3.compiletime.ast.M3FileSourceFacts", "jdk.m3.parser.M3File",
 )
 
 

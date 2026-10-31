@@ -8,8 +8,8 @@
     "/workspace/scratch/53bcd62c244c/canonical-interop-contracts-20261020"
   ],
   "exit_code": 0,
-  "validator_sha256": "0f6854362f2efb9f68694c28c3b97d91a5dcea93c92961544cc51fb147a81665",
-  "log_sha256": "0b51acb60da51f32c72cf45fd183b3fa5b6daba8d3e10552e876afa84e53b80a",
+  "validator_sha256": "4b0e7c19306176d02502a6d6ab5f6d9e5757f155f211a1734d4fb5ef6023cca8",
+  "log_sha256": "1cde0ecd6301d328a43a3e40c4eeac0d1b44383905b163bee00dbdd4d3552d76",
   "observed": {
     "result": "PASS",
     "scope": "Read-only copied packet checksum/schema/digest/parent/trigger/artifact custody; later SDK/receiving observations are separate",
@@ -17,7 +17,7 @@
     "immutable_events": 13,
     "exact_referenced_artifacts": 73,
     "retained_profile_checks": 26,
-    "packet_sha256sums_sha256": "30911ebc70934f3cb0a9a9bf4dd72e1c82233e4e9836c33b92bf0a9220efde22",
+    "packet_sha256sums_sha256": "2de87789c04afb6d9902e6e4f3f7191880a1f41df9dcc74b0f1595cb7be877e1",
     "phase_promotion": false
   },
   "writes_by_validator": false

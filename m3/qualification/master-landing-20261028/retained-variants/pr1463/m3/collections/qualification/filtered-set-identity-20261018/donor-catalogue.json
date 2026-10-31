@@ -13,8 +13,8 @@
       "code_copied_this_pass": false,
       "source_repository": "M3 current owner",
       "source_url": null,
-      "source_path": "M3jdk21/m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
-      "revision": "sha256:1061f6a0c789082c7e86078c7ea3c48b97b804150a7ab96c2ff8e28ff6786369",
+      "source_path": "M3jdk21/m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+      "revision": "sha256:e8a722cec3cdad01ce127936936f7c9928f094658e075aa9d1d89077e6eb7199",
       "git_blob_sha": null,
       "license": "Apache-2.0",
       "license_url": null,
@@ -24,7 +24,7 @@
       "complexity": "Existing visible helper: backing contains cost plus up to two linear traversals; O(1) retained auxiliary state. Target mutation cost depends on backing set.",
       "semantic_mismatch": "M3FilteredViews itself is read-only and remove throws UnsupportedOperationException; reuse its representative-resolution pattern, not its mutation behavior. Testing predicate on an equals-equal probe/alias, or using an equals-only scan for an identity-backed set, can choose the wrong object. Do not claim target integration complete from this research record.",
       "source_line_evidence": "visible at lines 118-136; CollectionView.contains at 154; SetView.contains at 171; remove at 156/174 remains read-only.",
-      "target_owner": "com.m3.collections.M3CollectionViews.FilteredSet",
+      "target_owner": "jdk.m3.collections.M3CollectionViews.FilteredSet",
       "target_operations": [
         "contains(Object)",
         "remove(Object)"
@@ -325,7 +325,7 @@
     "No throughput, memory, JNI or complexity improvement for current M3 target is claimed by catalogue selection."
   ],
   "target_defect": {
-    "owner": "com.m3.collections.M3CollectionViews.FilteredSet",
+    "owner": "jdk.m3.collections.M3CollectionViews.FilteredSet",
     "operation_scope": [
       "contains(Object)",
       "remove(Object)"

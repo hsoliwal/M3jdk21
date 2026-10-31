@@ -1,0 +1,8 @@
+# path	before_sha256	after_sha256	resource
+m3/ports/precompute/src/main/java/jdk/m3/precompute/M3MeasuredRope.java	ABSENT	049e52efdb2ce35cc90090fc5a532042cd23a8fa1657e47d171616f5dd44c75b	00-M3MeasuredRope.java.txt
+m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeArena.java	ABSENT	4f75d51ceab780a7d0c309675b57d524750b8ffd578c54f886a6e0215fa85086	01-M3RopeArena.java.txt
+m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeMeasure.java	ABSENT	27cc459f37e58e11d17ef73e7a20cd1645f63c01a6b1036e64a6b2b09c3f5bc8	02-M3RopeMeasure.java.txt
+m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeMeasures.java	ABSENT	0abf748ed95b8de20945c1287409e036a49a23dc86f52c822e062310a27a486b	03-M3RopeMeasures.java.txt
+m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RopeMetric.java	ABSENT	5e569e1f912aaf7915edb65a6d2b537a74a85274b2faf6226ebaa2635b8ddf30	04-M3RopeMetric.java.txt
+m3/ports/precompute/src/test/java/jdk/m3/precompute/M3MeasuredRopeAppleScenarioTest.java	ABSENT	bc00ed5bb59b348a716d09ea6e47445148ea875e3e0466e3c96b292e63ec57eb	05-M3MeasuredRopeAppleScenarioTest.java.txt
+m3/ports/precompute/src/test/java/jdk/m3/precompute/M3MeasuredRopeTest.java	ABSENT	2a4e3acab2dd06db009ed7de92734a351b3a8a3c6924ee835f7d121646772c35	06-M3MeasuredRopeTest.java.txt

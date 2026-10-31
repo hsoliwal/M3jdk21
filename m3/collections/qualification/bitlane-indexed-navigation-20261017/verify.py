@@ -20,25 +20,25 @@ import tempfile
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 PREFIX = Path("m3/collections/")
-JAVA_OWNER = PREFIX / "src/main/java/com/m3/collections/M3BitLane28.java"
-PROOF_OWNER = PREFIX / "src/test/java/com/m3/collections/M3BitLaneJumpProof.java"
+JAVA_OWNER = PREFIX / "src/main/java/jdk/m3/collections/M3BitLane28.java"
+PROOF_OWNER = PREFIX / "src/test/java/jdk/m3/collections/M3BitLaneJumpProof.java"
 NATIVE_OWNER = PREFIX / "src/test/native/m3_bitlane_jump_jni.c"
-ADDRESS = PREFIX / "src/main/java/com/m3/collections/M3Address28.java"
+ADDRESS = PREFIX / "src/main/java/jdk/m3/collections/M3Address28.java"
 EXPECTED = {
     JAVA_OWNER.as_posix(): (
-        "011c7f61b442fb07bbc937cade8fa283175a574539ffdcf8c3d52ac4cb673626",
-        "86f1f600aac3583925b26eb857811255e2a997f8415d6edd65841cb61554c3b6",
-        "3185f2fd33894797d012bb21e62dac4422275ea1", "PRODUCT_JAVA_OWNER"),
+        "45eb57846a3607ef68855c667e258c5c24b90e61e071becc19c9819cbd06dfcc",
+        "536eb7ae1968ce17f4ee2cab3d0d6ef6df6865599605359c00fb3f0225be84f3",
+        "dbd5574956db770311229d87c043896d52cb9b46", "PRODUCT_JAVA_OWNER"),
     PROOF_OWNER.as_posix(): (
-        "ABSENT", "1a6b291f5c5e079afbfe02adf6faf2dc6de997263e24507e85ee6333365bab24",
-        "ea326cbc0cab9df5c816378fd6772c656931701c", "JAVA21_CONTRACT_ORACLE"),
+        "ABSENT", "dcd1f4d3439f558c6c685d615a24d136f2696cdf41de4a403a48f7cd6b1b578b",
+        "1d7fc1c94a9588830bc2334c7214f6cdd3befebc", "JAVA21_CONTRACT_ORACLE"),
     NATIVE_OWNER.as_posix(): (
-        "ABSENT", "6a81bde570bbef1ad25786e225667fd0918bfdde563356865e38255eaf1aab0c",
-        "029820143651623f8c37dca7d7e82480bfd94d2b", "JNI_TEST_ONLY"),
+        "ABSENT", "a93ff4e0262344f882434764d089949b9b5373d253890ed082e061c062aa77cf",
+        "dad4302f54d8ad58c015050fd0ec06069d743b13", "JNI_TEST_ONLY"),
 }
-BEFORE = ("011c7f61b442fb07bbc937cade8fa283175a574539ffdcf8c3d52ac4cb673626",
-          "1877cf9eea2990ed74b4d10467bf3612e3c470d4")
-ADDRESS_BLOB = "2dda612d7cfdc39d8138c17a85308dc9d084b28b"
+BEFORE = ("45eb57846a3607ef68855c667e258c5c24b90e61e071becc19c9819cbd06dfcc",
+          "06efbf5ebba7481422e9166e1304374c7151fdc8")
+ADDRESS_BLOB = "ae1e43c52351d205ebfc7e57ca5a230a49410399"
 
 def sha256(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
@@ -65,7 +65,7 @@ def receipt(root: Path) -> dict[str, bytes]:
         path = row["path"]
         expected = EXPECTED[path]
         if tuple(row[key] for key in
-                 ("pre_sha256", "post_sha256", "synexia_template_git_blob", "role")) != expected:
+                 ("pre_sha256", "post_sha256", "m3_template_git_blob", "role")) != expected:
             raise ValueError("refused: receipt authority drift")
         value = read_file(root / path)
         assert_image(value, expected[1], expected[2], path)
@@ -100,7 +100,7 @@ def execute(args: list[str]) -> str:
     return result.stdout.strip()
 
 def compile_sources(root: Path, output: Path, original: bool) -> Path:
-    target = output / "source/com/m3/collections"
+    target = output / "source/jdk/m3/collections"
     target.mkdir(parents=True)
     main = target / "M3BitLane28.java"
     main.write_bytes(read_file(HERE / "before/M3BitLane28.java")
@@ -127,12 +127,12 @@ def test_java21(root: Path, native: bool) -> None:
         temp = Path(dirname)
         old = compile_sources(root, temp / "old", True)
         current = compile_sources(root, temp / "new", False)
-        clazz = "com.m3.collections.M3BitLane28"
+        clazz = "jdk.m3.collections.M3BitLane28"
         before_api = execute(["javap", "-public", "-s", "-classpath", str(old), clazz])
         after_api = execute(["javap", "-public", "-s", "-classpath", str(current), clazz])
         if before_api != after_api:
             raise AssertionError("M3BitLane28 public Java API/ABI descriptor drift")
-        main = "com.m3.collections.M3BitLaneJumpProof"
+        main = "jdk.m3.collections.M3BitLaneJumpProof"
         for opts in ([], ["-Xint"]):
             output = execute(["java", "-ea", *opts, "-cp", str(current), main])
             if "M3_BITLANE_JUMP_PASS assertions=68012 native=false" not in output:

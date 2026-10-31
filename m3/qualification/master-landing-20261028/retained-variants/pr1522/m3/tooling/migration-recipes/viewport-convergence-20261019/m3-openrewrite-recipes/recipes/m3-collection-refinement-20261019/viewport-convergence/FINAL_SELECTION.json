@@ -1,0 +1,11 @@
+{
+  "targets": 21,
+  "changes": 8,
+  "manifest_sha256": "c4a690bdf550af84ba7dc69ac1d96b8360fb41748c0928fd09ef2a5d683a4fd8",
+  "selected_production_replacements": 2,
+  "new_test_sources": 5,
+  "catalogue_appends": 21,
+  "rowtree": "EXACT_KEEP; optional guard deferred by fresh resource controls",
+  "prior_manifest_preserved": "evidence/pre-resource-selection/m3-view-convergence-20261019/manifest.tsv",
+  "resource_receipt_sha256": "22991183eaec008293fdd487f1afdf3bcfe1a342a040c65e214f6f04ba3268cc"
+}

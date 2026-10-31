@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import re
 import subprocess
@@ -46,8 +47,8 @@ REQUIRED_GATES = frozenset({
 })
 RECIPE_ROOTS = (
     ".m3/openrewrite-recipes", ".m3/task-crates", "m3/recipes",
-    "m3/tooling/migration-recipes", "m3/tooling/synexia-jdk-a3-recipes",
-    "m3/synexia-import/pure-int-recipe-custody",
+    "m3/tooling/migration-recipes", "m3/tooling/m3jdk-a3-recipes",
+    "m3/m3-import/pure-int-recipe-custody",
     "m3/runtime-integration/recipe",
     "m3/runtime-integration/char-array-copy/recipe",
     "m3/runtime-integration/utf8-cursor-20261014/recipe/canonical",
@@ -344,6 +345,29 @@ def validate(root: Path, release_mode: bool = False,
             passed("legacy_recipe_custody", "no executable candidates in the enumerated legacy roots; not a full-tree ownership proof")
     except (subprocess.CalledProcessError, FileNotFoundError, ValueError, OSError) as exc:
         block("git.inspect", str(exc))
+
+    # Standalone rule (2026-10-31): M3JDK 21 needs no other repository to build, test, gate or release
+    # (check_standalone.py). Development mode is a ratchet against STANDALONE_BASELINE.tsv; release mode refuses any
+    # cross-repository dependency when the contract's standalone.required_for_release is true. A tree without the
+    # baseline, outside an enforced release, is reported without blocking.
+    section = contract.get("standalone")
+    required = isinstance(section, dict) and section.get("required_for_release") is True
+    enforced = release_mode and required
+    try:
+        spec = importlib.util.spec_from_file_location("check_standalone", Path(__file__).with_name("check_standalone.py"))
+        standalone = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(standalone)
+        scanned = standalone.scan(root)
+        baseline = standalone.read_baseline(root)
+        status, detail = standalone.verdict(scanned, baseline, enforced)
+        if status == "PASS":
+            passed("standalone.no_external_repo_dependency", detail)
+        elif baseline is None and not enforced:
+            checks.append({"name": "standalone.no_external_repo_dependency", "status": "INFO", "detail": detail})
+        else:
+            block("standalone.no_external_repo_dependency", detail, policy=status == "BLOCK", status=status)
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError, ValueError, ImportError) as exc:
+        block("standalone.no_external_repo_dependency", str(exc))
 
     manifest_path = Path(evidence_path) if evidence_path is not None else root / DEFAULT_EVIDENCE
     if not manifest_path.is_absolute():

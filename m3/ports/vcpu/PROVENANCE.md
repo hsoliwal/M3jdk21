@@ -51,7 +51,7 @@ Not ported:
 
 `Rv32iGoldenReceiptTest` holds roots produced by the **unmodified donor classes**: `Rv32i`, `Rv32iBatch`, `CpuRv32iEngine`, `Rv32iAssembler`, `Rv32iBulkReceipt` and `Rv32iBulkExecutor`. The only change was that the Tornado-only method `executeVerifiedTornado` was deleted from a scratch copy, so that the copy compiles without `tornado-api`.
 
-The harness compiled that copy with JDK 21 together with this module's `Rv32iCorpus` source, renamed to the donor package; its corpus source had SHA-256 `c4ff7b2100843081cb1c4dda1c1fde5d2865cfc76ed4b5461a189ea1cf8d0ffa`. The harness ran `executeCpu` slice by slice on the following inputs:
+The harness compiled that copy with JDK 21 together with this module's `Rv32iCorpus` source, renamed to the donor package; its corpus source had SHA-256 `d86ffef43f175709a12b83a9f1305ccd001d9ee3f77414577f1e78fb4d1fe35a`. The harness ran `executeCpu` slice by slice on the following inputs:
 
 - the corpus with seed `Rv32iCorpus.SEED`;
 - the donor's 64-core sum-1..100 batch.

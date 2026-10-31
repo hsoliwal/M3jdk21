@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import com.m3.collections.guava.base.CharMatcher;
+import jdk.m3.collections.guava.base.CharMatcher;
 import com.google.errorprone.refaster.annotation.AfterTemplate;
 import com.google.errorprone.refaster.annotation.BeforeTemplate;
 

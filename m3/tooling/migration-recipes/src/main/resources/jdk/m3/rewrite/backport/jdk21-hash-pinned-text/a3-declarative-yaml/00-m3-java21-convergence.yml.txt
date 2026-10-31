@@ -1,0 +1,23 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: jdk.m3.rewrite.M3Java21Convergence
+displayName: M3 Java 21 FILE-local convergence
+description: >-
+  Declaratively composes the admitted Java 21 FILE-local inventory, atomization,
+  pattern/IOP and documentation leaves. Public behavior and contracts remain locked.
+tags:
+  - m3
+  - java21
+  - a3
+  - file-local
+  - atomization
+  - patternization
+  - iop
+  - documentation
+  - behavior-contract-preserving
+causesAnotherCycle: true
+recipeList:
+  - jdk.m3.rewrite.atom.M3InventoryPureIntAtomCandidates
+  - jdk.m3.rewrite.atom.M3AtomizePureIntReturnRecipe
+  - jdk.m3.rewrite.atom.M3PatternizePureIntAtomRecipe
+  - jdk.m3.rewrite.atom.M3DocumentPureIntAtomRecipe

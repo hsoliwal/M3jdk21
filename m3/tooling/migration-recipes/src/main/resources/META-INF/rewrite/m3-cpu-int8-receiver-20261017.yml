@@ -1,6 +1,6 @@
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.m3jdk.CpuInt8QuantizeReceiver20261017
+name: jdk.internal.m3.m3jdk.CpuInt8QuantizeReceiver20261017
 displayName: Install source-sealed CPU signed block INT8 Java/JNI quantizer receiver
 description: >-
   Reuses the existing M3HashPinnedJavaSnapshotRecipe Maven/OpenRewrite
@@ -8,6 +8,6 @@ description: >-
   while retaining the original Synexia signed INT8 public numeric contract.
   JNI symbols and native ABI are separately compiler-proved.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3-cpu-int8-receiver-20261017
       lst: true

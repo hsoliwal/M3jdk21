@@ -1,0 +1,96 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 JDK source naming
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'm3/**/*.java'
+      - 'src/**/*.java'
+      - 'test/**/*.java'
+      - 'm3/compiler/jdk-standard/**'
+      - '.github/workflows/m3jdk-standard.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-names:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /m3/compiler/jdk-standard/**
+            /.github/workflows/m3jdk-standard.yml
+      - name: Materialize Java source scope
+        shell: bash
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          patterns="${RUNNER_TEMP}/m3jdk-standard-sparse.txt"
+          printf '%s\n' \
+            '/m3/compiler/jdk-standard/**' \
+            '/.github/workflows/m3jdk-standard.yml' > "$patterns"
+          if [[ '${{ github.event_name }}' == 'pull_request' ]]; then
+            git diff --name-only --diff-filter=ACMR "$BASE...$HEAD" -- '*.java'
+          else
+            git ls-tree -r --name-only "$HEAD" -- '*.java'
+          fi | sed '/^$/d; s#^#/#' >> "$patterns"
+          sort -u "$patterns" -o .git/info/sparse-checkout
+          git read-tree -mu HEAD
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Standalone compiler and discriminator proof
+        run: bash m3/compiler/jdk-standard/verify.sh
+      - name: Maven module proof
+        run: mvn -B -ntp -f m3/compiler/jdk-standard/pom.xml verify
+      - name: Refuse findings introduced on added source lines
+        if: github.event_name == 'pull_request'
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: >-
+          bash m3/compiler/jdk-standard/check-changed.sh
+          "$BASE" "$HEAD" "${RUNNER_TEMP}/m3jdk-standard-changed.tsv"
+      - name: Repository-wide warning census
+        if: github.event_name == 'workflow_dispatch'
+        run: >-
+          bash m3/compiler/jdk-standard/census.sh
+          "${RUNNER_TEMP}/m3jdk-standard-census.tsv"
+      - name: Summarize naming reports
+        if: always()
+        shell: bash
+        run: |
+          shopt -s nullglob
+          reports=("${RUNNER_TEMP}"/m3jdk-standard-*.tsv)
+          if (( ${#reports[@]} == 0 )); then
+            echo 'No naming report was produced.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          for report in "${reports[@]}"; do
+            findings=$(( $(wc -l < "$report") - 1 ))
+            echo "### $(basename "$report")" >> "$GITHUB_STEP_SUMMARY"
+            echo "Findings: $findings" >> "$GITHUB_STEP_SUMMARY"
+            awk -F '\t' 'NR > 1 { count[$4]++ }
+              END { for (rule in count) print "- " rule ": " count[rule] }' \
+              "$report" | sort >> "$GITHUB_STEP_SUMMARY"
+          done
+      - name: Upload naming reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3jdk-standard-${{ github.run_id }}
+          path: ${{ runner.temp }}/m3jdk-standard-*.tsv
+          if-no-files-found: ignore
+          retention-days: 14

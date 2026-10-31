@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.synexia.common.collections;
+package jdk.internal.m3.common.collections;
 
 /**
  * One lazily allocated primitive-long lane over the 28-bit segmented address space.

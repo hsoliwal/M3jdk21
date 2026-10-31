@@ -41,7 +41,7 @@ static jint run(JNIEnv *env, array *src, array *flags, jint first, jint length,
         array *out, jint target) {
     allocations = reads = writes = pending = 0; allocation_bytes = 0;
     window_first = first; window_end = first + length;
-    return Java_com_m3_collections_M3MaskViewportNative_project(env, NULL,
+    return Java_jdk_m3_collections_M3MaskViewportNative_project(env, NULL,
             (jintArray)src, (jintArray)flags, first, length, 1, 0, (jintArray)out, target);
 }
 int main(void) {

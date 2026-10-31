@@ -1,8 +1,8 @@
 # Copyright 2026 Hitesh Soliwal and contributors; SPDX-License-Identifier: Apache-2.0
 role	path	git_blob	license	disposition
-M3JDK21 original indexed source	m3/collections/interop/src/main/java/com/m3/collections/interop/M3FiveLibraryIndexViews.java	abbb89bc775357cc7fa4686d32d4132d39a0e57b	Apache-2.0	UNCHANGED_RUNTIME_OWNER
-M3JDK21 indexed JNI selector	m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java	134fb98f8a39969c43fd75338ecb233c5fe49446	Apache-2.0	UNCHANGED_JAVA_JNI_OWNER
-M3JDK21 provider factory	m3/collections/interop/src/main/java/com/m3/collections/interop/M3LibraryCollections.java	06b62f4e04a5202f2c515ceba47b8f7d17900edc	Apache-2.0	UNCHANGED_FACTORY_OWNER
-Synexia existing OpenRewrite recipe	M3GpuToolJoinRecipe.java	1c1b1b568d369f688f6953161636bf36b484bf5a	Apache-2.0	REUSE_UNMODIFIED_ENGINE
-Synexia existing OpenRewrite manifest	M3GpuToolJoinManifest.java	38df5f97bbeec8a8a8cfc77091d56bda925c07f2	Apache-2.0	REUSE_UNMODIFIED_ENGINE
+M3JDK21 original indexed source	m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3FiveLibraryIndexViews.java	bb873b8e2a99f1744d296e3043713a30da7c98fa	Apache-2.0	UNCHANGED_RUNTIME_OWNER
+M3JDK21 indexed JNI selector	m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java	2053896cfc74192d7561478f6aca249eae87ca66	Apache-2.0	UNCHANGED_JAVA_JNI_OWNER
+M3JDK21 provider factory	m3/collections/interop/src/main/java/jdk/m3/collections/interop/M3LibraryCollections.java	f446cf301b20b6a6500a85444c8c5575d7012a43	Apache-2.0	UNCHANGED_FACTORY_OWNER
+Synexia existing OpenRewrite recipe	M3GpuToolJoinRecipe.java	2ec479b8609459a28fdfd8a7a7d63cc44e919f00	Apache-2.0	REUSE_UNMODIFIED_ENGINE
+Synexia existing OpenRewrite manifest	M3GpuToolJoinManifest.java	78d5fb68f13872164973a8918cc7886c5f548bca	Apache-2.0	REUSE_UNMODIFIED_ENGINE
 Native C17 selector	m3/collections/src/main/native/collections/m3_index_mask_compactor.c	aaa74686949de59b44b363741ef1c414fe3e95d0	Apache-2.0	UNCHANGED_NATIVE_ABI

@@ -1,6 +1,6 @@
 /*
  * @test
- * @summary M3JDK21 pipeline packed bit-mask and index traversal equals sequential Stream
+ * @summary M3JDK 21 pipeline packed bit-mask and index traversal equals sequential Stream
  * @modules java.base/jdk.internal.util
  * @run main/othervm M3PipelinePlanDifferentialTest
  */

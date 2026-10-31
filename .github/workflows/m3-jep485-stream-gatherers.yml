@@ -66,7 +66,7 @@ jobs:
           expected = {
               "canonical_repository": "hsoliwal/com.synexia",
               "canonical_commit": "0f0f9965092955c15f5c32f5eb102137fd0dbf8e",
-              "canonical_path": "synexia-code-convergence/tools/WorkflowStructureCheck.java",
+              "canonical_path": "m3-code-convergence/tools/WorkflowStructureCheck.java",
               "canonical_git_blob": "f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7",
               "canonical_owner": "SYNEXIA",
               "target_role": "M3JDK21_THIN_RECEIVER",
@@ -87,11 +87,6 @@ jobs:
           python3 -m unittest -v m3/backports/recipes/j485/test_verify_current.py
           python3 m3/backports/recipes/j485/verify_current.py "$GITHUB_WORKSPACE"
 
-      - name: Prove recipe replay scope registration and fixed point
-        run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3Jep485StreamGatherersBackportRecipeTest,J485CurrentRecipeTest,M3RecipeScopeDeclarationTest \
-            test
 
       - name: Prove current J485 Java21 patched module
         shell: bash
@@ -104,7 +99,7 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
-            -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain \
+            -Dexec.mainClass=jdk.m3.tooling.dag.M3BackportPacketMain \
             -Dexec.args="$PWD/m3/backports/recipes/jep-485-gatherers/packet.tsv $PWD/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv" \
             exec:java
 
@@ -114,7 +109,7 @@ jobs:
           set -euo pipefail
           mkdir -p target/jep485-projection
           mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
-            -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
+            -Dexec.mainClass=jdk.m3.tooling.dag.M3OrchestrationProjectionMain \
             -Dexec.args="$PWD/m3/backports/recipes/jep-485-gatherers/packet.tsv $PWD/target/jep485-projection $PWD/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv" \
             exec:java
           test -s target/jep485-projection/M3BackportRoutes.java

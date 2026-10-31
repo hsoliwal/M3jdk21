@@ -1,5 +1,5 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
-package com.m3.fs;
+package jdk.m3.fs;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -33,14 +33,14 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import com.m3.fs.vfs.Capability;
-import com.m3.fs.vfs.FileName;
-import com.m3.fs.vfs.FileObject;
-import com.m3.fs.vfs.FileType;
-import com.m3.fs.vfs.impl.StandardFileSystemManager;
-import com.m3.fs.vfs.provider.FileProvider;
-import com.m3.fs.vfs.provider.UriParser;
-import com.m3.fs.vfs.provider.zip.ZipFileSystem;
+import jdk.m3.fs.vfs.Capability;
+import jdk.m3.fs.vfs.FileName;
+import jdk.m3.fs.vfs.FileObject;
+import jdk.m3.fs.vfs.FileType;
+import jdk.m3.fs.vfs.impl.StandardFileSystemManager;
+import jdk.m3.fs.vfs.provider.FileProvider;
+import jdk.m3.fs.vfs.provider.UriParser;
+import jdk.m3.fs.vfs.provider.zip.ZipFileSystem;
 
 /**
  * Hierarchical metadata streams backed by the M3FS VFS providers.

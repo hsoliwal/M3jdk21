@@ -1,0 +1,35 @@
+{
+  "schema": "M3_CURRENT_OWNER_MEMORY_HELPER_LINEAGE/1",
+  "profile": "swt-current-owner-runtime-closure-20261021/1.0",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+  "source_pull_request": "https://github.com/hsoliwal/com.synexia/pull/12648",
+  "sources": [
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/memory/M3RecoveryMemory.java",
+      "source_sha256": "88696555f28134225ecd731c5c81065dd53912361d46bfe3f79f60d877c62936",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "path": "memory/tooling/src/jdk/internal/m3/rewrite/memory/M3RecoveryMemory.java",
+      "sha256": "4044a5a2669d09d9f1030f03f859ba774e5d120ca1c5dcc224212bd734bf79b7",
+      "modification": "Only profile identity and dated comment"
+    },
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/memory/M3RecoveryMemoryTest.java",
+      "source_sha256": "b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "path": "memory/tooling/src/jdk/internal/m3/rewrite/memory/M3RecoveryMemoryTest.java",
+      "sha256": "b27e96e73af86cb12cf453a0b4f27b49bdae24073aa9e435061b177d02969a78",
+      "modification": "Exact unchanged source"
+    },
+    {
+      "source_path": "m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/src/test/java/jdk/internal/m3/rewrite/sealed/SealHash.java",
+      "source_sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c",
+      "source_revision": "a2b50cfe926c5c5f400c7f659a947a5020fb8d4d",
+      "path": "memory/tooling/src/jdk/internal/m3/rewrite/sealed/SealHash.java",
+      "sha256": "316da9bf8b642f9d8ad9e055328aec0f70ddfe0f63c4649d5dc35d062fd7a11c",
+      "modification": "Exact unchanged source"
+    }
+  ],
+  "inherited_task_events": false,
+  "event_admission": "Closed to RECORDED/PENDING; no validated or product-admitted events."
+}

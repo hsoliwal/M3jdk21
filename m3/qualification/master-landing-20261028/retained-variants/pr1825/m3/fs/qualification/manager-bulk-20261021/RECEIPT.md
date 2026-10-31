@@ -18,10 +18,10 @@
 
 - Java 21 `javac --release 21 -Xlint:all -Werror` source and ten Java behavior oracles: **PASS using minimal API-compatible VFS/JUnit stand-ins**, not the repository's full VFS implementation.
 - Ten isolated tests cover heterogeneous routing and metadata, physical mask/window selection, 63/64/127/128-bit boundaries and defensive mask snapshot, checked failure/fail-fast/progress, direct interface default dispatch and aligned copy/move validation, plus 320 deterministic randomized differential windows against the original linear reference and explicit empty/zero windows.
-- Source SHA-256 (refined Java): `46ab530ca32c9ee97c3b5d83e04cb58e8e26fc321f78cad5d417dc45208b42b7`.
-- Test SHA-256 (refined Java): `a3ec4ed73f40b21dde25c4871bc81af08d94144fcf461ec170431c1f2ba9927a`.
+- Source SHA-256 (refined Java): `5d01dc5c60d23252cb1e98d48458e52900c69c9c0b599dab63676056c93ad84b`.
+- Test SHA-256 (refined Java): `e4fca3c81d59f0d90864f8b026dd4024ce4e30602aed8b63dd9bfa75b0ad5aa8`.
 
-- Original manager interface SHA-256 before: `1ce71e0d467a5f4cada847bb03fffebdb9d4110d13c2cb606788377fa4981e10`; after: `58f117166de0933b0172796f6afb447527bfc918a8fe1ddab2a7efa059724ff2`.
+- Original manager interface SHA-256 before: `1ce71e0d467a5f4cada847bb03fffebdb9d4110d13c2cb606788377fa4981e10`; after: `c1e1c4bf06836f5c7957bc61901be54e22cdd5d552022e2b263811a3431a2f3f`.
 - The new three default-method tests first exposed a false negative in a **local stand-in**: its `M3FsBulk.Builder` omitted real null-target validation. Correcting the stand-in to match the existing product owner restored the expected exception. The source and test fixture retain that adversarial case; this does not establish full real-provider parity.
 
 - Selection algorithm comparison: linear per-position test O(n) versus 64-bit word cursor O(ceil(n/64)+k), with no new JNI crossing. This is a complexity and isolated-correctness claim, not a measured whole-provider performance claim.

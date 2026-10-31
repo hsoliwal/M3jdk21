@@ -1,0 +1,8 @@
+key	value
+lib	commons-text
+source	m3/vendor/third_party/commons-text
+mappings	org.apache.commons.text=com.m3.lib.text
+module	jdk.m3.text
+version	1.11.0-m3-source-1
+layer	m3/vendor/third_party-m3/relocated/commons-text
+intake_deps	commons-lang3-3.17.0

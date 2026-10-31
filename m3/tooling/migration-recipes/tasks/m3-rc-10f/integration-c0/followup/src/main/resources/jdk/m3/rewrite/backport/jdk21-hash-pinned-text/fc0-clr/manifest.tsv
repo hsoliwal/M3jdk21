@@ -1,0 +1,2 @@
+m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/03-M3RecipeScopeDeclarationTest.java.txt	8aa8f45f218999c84841e99b1959efb639e01f568e3a09145c717a52df0296ca	4820e21c56a8ea08094b6a5c03d4c48cb1ecbb4e31c444f0ad534ed9151a796d	target-1.txt
+m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/manifest.tsv	0f79229a093fc3a53158401bb29a627e71f2774292b4d727e6c0911b9f2a47c9	459d00238ea6ef66aa1c3cd0ba466409b41cb523644108dcf1541ec62b94fb79	target-2.txt

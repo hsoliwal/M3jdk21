@@ -1,6 +1,0 @@
-# path	source_sha256	template
-synexia-primitives/src/main/java/com/synexia/primitives/DenseHash.java	10d4a854d77f6a137782a5db69af84a6fb1d4e03fc5afa25da5180e5eac920c3	parse-context-00.txt
-synexia-primitives/src/main/java/com/synexia/primitives/M3RuntimeHeap.java	2ef4461c44215f3f17b0c700f668391ab15c6e2ca33cabedb01fdb953e6f1207	parse-context-01.txt
-synexia-primitives/src/main/java/com/synexia/primitives/M3SortableTopK.java	fd667f665961468fe6e184fa02b81768f0be250e1c10f22385871b928eed6fb0	parse-context-02.txt
-synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveKind.java	bd036309b549312aeac881d2988072803e265bf36a5f1f27bf1fd3b7ed92b8b2	parse-context-03.txt
-synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSoaStore.java	76c2218eced534aa149eea7830482437ff2a9c9b29fbfde862583e3368be6eef	parse-context-04.txt

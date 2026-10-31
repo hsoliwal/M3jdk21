@@ -1,0 +1,8 @@
+old	new	status
+org.antlr.v4.runtime.tree.pattern	com.m3.lib.runtime.tree.pattern	MOVE
+org.antlr.v4.runtime.tree.xpath	com.m3.lib.runtime.tree.xpath	MOVE
+org.antlr.v4.runtime.misc	com.m3.lib.runtime.misc	MOVE
+org.antlr.v4.runtime.tree	com.m3.lib.runtime.tree	MOVE
+org.antlr.v4.runtime.atn	com.m3.lib.runtime.atn	MOVE
+org.antlr.v4.runtime.dfa	com.m3.lib.runtime.dfa	MOVE
+org.antlr.v4.runtime	com.m3.lib.runtime	MOVE

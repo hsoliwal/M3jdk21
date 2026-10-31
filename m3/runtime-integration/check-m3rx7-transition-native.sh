@@ -6,7 +6,7 @@ set -euo pipefail
 # Usage: M3_JAVA_HOME=/absolute/jdk21 bash check-m3rx7-transition-native.sh [source-root]
 # Source root may be a recipe postimages directory before canonical replay.
 # Use a stock Java 21 host without RX7 symbols in libjava for the absence proof;
-# source-built M3JDK21 runs the jtreg native-boundary test directly.
+# source-built M3JDK 21 runs the jtreg native-boundary test directly.
 RX7_SOURCE_ROOT="${1:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)}"
 : "${M3_JAVA_HOME:?set M3_JAVA_HOME to the Java 21 toolchain used for qualification}"
 RX7_CC="${CC:-cc}"

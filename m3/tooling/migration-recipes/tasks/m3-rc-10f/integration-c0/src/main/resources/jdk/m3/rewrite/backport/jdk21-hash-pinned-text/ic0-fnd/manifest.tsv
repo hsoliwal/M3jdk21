@@ -1,0 +1,4 @@
+.github/workflows/m3-foundation.yml	1a1ddd014a5cce76e75b1e4fce5c4cd0c746a3dbf5f18ef3a1bc9dad7d8fbdd1	31c4dbb4bca24c92cadc1de076fd80bd1cefb5b9df16a1fa0bc8077c095f5569	target-1.txt
+m3/tooling/image-gates/current-c0.json	ABSENT	021e4dff92d1fe78e015c7538c5d28e503dac8c62f43d09df3c831bdf3ddccf1	target-2.txt
+m3/tooling/image-gates/src/test/python/test_current_context.py	ABSENT	6bf08c29ff6c5a4345159051de4b7144e922f61763c865bf2305a55799c03886	target-3.txt
+m3/tooling/image-gates/verify-current.py	ABSENT	66040e38b9929442673dcead210a51b997865de25cb106048f7c51cb365fae23	target-4.txt

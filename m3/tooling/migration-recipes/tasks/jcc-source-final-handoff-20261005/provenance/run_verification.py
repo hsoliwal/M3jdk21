@@ -13,7 +13,7 @@ import xml.etree.ElementTree as ET
 BASE = Path(__file__).resolve().parent
 ROOT = BASE / "overlay"
 OUT = BASE / "verification"
-CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005"
+CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005"
 PLAN = CRATE / "plan.json"
 PYTHON = Path(os.environ.get("CODEX_PRIMARY_RUNTIME_PYTHON", "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3"))
 JDK = Path("/workspace/scratch/877d9513c002/toolchains/jdk-21.0.2")
@@ -81,7 +81,7 @@ def main():
     pom = ROOT / "m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml"
     run("02-actual-text-recipe-maven", [MAVEN, "-B", "-ntp", "-o", "-s", settings,
                                        "-Dmaven.repo.local=" + str(M2), "-f", pom, "clean", "verify"])
-    xml_path = pom.parent / "target/surefire-reports/TEST-com.m3.rewrite.backport.JccSourceFinalHandoffTest.xml"
+    xml_path = pom.parent / "target/surefire-reports/TEST-jdk.m3.rewrite.backport.JccSourceFinalHandoffTest.xml"
     suite = ET.fromstring(xml_path.read_bytes())
     assert {key: suite.attrib[key] for key in ("tests", "failures", "errors", "skipped")} == {
         "tests": "11", "failures": "0", "errors": "0", "skipped": "0"}

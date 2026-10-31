@@ -19,7 +19,7 @@ import java.util.NavigableSet;
 import java.util.Random;
 import java.util.TreeSet;
 
-/** Behavioral oracle over the actual M3JDK21 java.base originals; no runtime adapter. */
+/** Behavioral oracle over the actual M3JDK 21 java.base originals; no runtime adapter. */
 public final class M3MaskCollectionViewIntegrationTest {
     private static final int CANARY = 0x5a7a21ff;
     private static long checks;

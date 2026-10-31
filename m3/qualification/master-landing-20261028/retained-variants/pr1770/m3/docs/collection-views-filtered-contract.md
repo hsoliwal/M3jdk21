@@ -11,7 +11,7 @@ private `SelectionSpliterator.tryAdvance` behavioral atom.
 ## Donor inventory and category decision
 
 - Existing M3JDK21 convergence donor:
-  `m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java`
+  `m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java`
   already preserves enclosing consumer and delivered state.
 - Existing integrated receiver:
   `src/java.base/share/classes/java/util/CollectionViews.java`
@@ -58,7 +58,7 @@ The second independent source-file pass receives **four existing first-party
 M3CollectionViews methods** into java.base's original FilteredCollection and
 FilteredSet: stored-representative membership, physical-index removal, and
 identity-sensitive Set contains/remove. The donor is Git blob
-`5719775a20aa06f9873e07fff0d0d6832cfdb662` and the final receiver image is
+`bd14491c9158f144d57088330e8081b3fdb7c840` and the final receiver image is
 `995a35df6926b40c804270622cfc6310e0585b20`. This preserves the
 already-qualified reentrant cursor pass. One contiguous JDK source owner remains
 authoritative; backing ArrayList/Set state is not copied into extra stores.
@@ -110,7 +110,7 @@ The original `java.util.CollectionViews.FilteredCollection.removeMatching` still
 used `Iterator.remove` for every backing type. JDK 21 `CopyOnWriteArrayList`
 and `CopyOnWriteArraySet` snapshot iterators prohibit removal, even though
 the actual owning collections offer `removeIf`. The first-party
-`m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java`
+`m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java`
 already contains the exact owner-sensitive correction. This pass transfers
 only that existing private method atom into `java.base`.
 

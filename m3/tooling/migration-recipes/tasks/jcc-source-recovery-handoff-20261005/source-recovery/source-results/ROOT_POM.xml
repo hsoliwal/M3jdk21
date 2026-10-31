@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.synexia</groupId>
-  <artifactId>synexia-parent</artifactId>
+  <artifactId>m3-parent</artifactId>
   <version>${revision}</version>
   <packaging>pom</packaging>
 
@@ -19,105 +19,105 @@
 
   <modules>
     <module>cognix-parent</module>
-    <module>synexia-bom</module>
+    <module>m3-bom</module>
     <module>third_party/re2j</module>
-    <module>synexia-anop</module>
-    <module>synexia-flldcim</module>
-    <module>synexia-fop</module>
-    <module>synexia-common</module>
-    <module>synexia-interned-language</module>
-    <module>synexia-bitop</module>
-    <module>synexia-mat-value</module>
-    <module>synexia-iop</module>
-    <module>synexia-tmop</module>
-    <module>synexia-cop</module>
-    <module>synexia-top</module>
-    <module>synexia-bop</module>
-    <module>synexia-cop-bop</module>
-    <module>synexia-aop</module>
-    <module>synexia-cmop</module>
-    <module>synexia-dictlang</module>
-    <module>synexia-unicodex</module>
-    <module>synexia-algo</module>
-    <module>synexia-shape-compiler</module>
-    <module>synexia-diffusion</module>
-    <module>synexia-visual-pixel-runtime</module>
-    <module>synexia-ioc</module>
-    <module>synexia-specgrep</module>
-    <module>synexia-format-fabric</module>
-    <module>synexia-fileindex</module>
-    <module>synexia-donor-inventory</module>
-    <module>synexia-donor-superset</module>
-    <module>synexia-archive-mavenizer</module>
-    <module>synexia-api-corpus</module>
-    <module>synexia-m3-api-factory</module>
-    <module>synexia-m3-recipe</module>
-    <module>synexia-fastsearch</module>
+    <module>m3-anop</module>
+    <module>m3-flldcim</module>
+    <module>m3-fop</module>
+    <module>m3-common</module>
+    <module>m3-interned-language</module>
+    <module>m3-bitop</module>
+    <module>m3-mat-value</module>
+    <module>m3-iop</module>
+    <module>m3-tmop</module>
+    <module>m3-cop</module>
+    <module>m3-top</module>
+    <module>m3-bop</module>
+    <module>m3-cop-bop</module>
+    <module>m3-aop</module>
+    <module>m3-cmop</module>
+    <module>m3-dictlang</module>
+    <module>m3-unicodex</module>
+    <module>m3-algo</module>
+    <module>m3-shape-compiler</module>
+    <module>m3-diffusion</module>
+    <module>m3-visual-pixel-runtime</module>
+    <module>m3-ioc</module>
+    <module>m3-specgrep</module>
+    <module>m3-format-fabric</module>
+    <module>m3-fileindex</module>
+    <module>m3-donor-inventory</module>
+    <module>m3-donor-superset</module>
+    <module>m3-archive-mavenizer</module>
+    <module>m3-api-corpus</module>
+    <module>m3-api-factory</module>
+    <module>m3-recipe</module>
+    <module>m3-fastsearch</module>
     <module>m3-fast-search</module>
     <module>m3-java-contracts</module>
     <module>m3-java-inventory</module>
-    <module>synexia-classic-intelligence</module>
-    <module>synexia-retrieval-runtime</module>
-    <module>synexia-runtime</module>
-    <module>synexia-pluginify-api</module>
-    <module>synexia-pluginify-core</module>
-    <module>synexia-pluginify-bridge-eclipse</module>
-    <module>synexia-pluginify-bridge-native</module>
-    <module>synexia-pluginify-headless</module>
-    <module>synexia-pluginify-maven-plugin</module>
-    <module>synexia-dawn-jni</module>
-    <module>synexia-aicore</module>
-    <module>synexia-indexstring</module>
-    <module>synexia-index-precompute</module>
-    <module>synexia-index-precompute-adapters</module>
-    <module>synexia-indexstring/algorithm-bridge</module>
-    <module>synexia-tabletree</module>
-    <module>synexia-tabletree-spring-data</module>
-    <module>synexia-indexstring-compiler</module>
-    <module>synexia-indexstring-maven-plugin</module>
-    <module>synexia-mindex</module>
-    <module>synexia-l2g</module>
-    <module>synexia-l2v</module>
-    <module>synexia-l2c</module>
-    <module>synexia-mindex-indexstring-bridge</module>
-    <module>synexia-m3index</module>
-    <module>synexia-shape-bridge</module>
-    <module>synexia-specialist-ai</module>
-    <module>synexia-flink-spi</module>
-    <module>synexia-etl</module>
-    <module>synexia-dfs</module>
-    <module>synexia-etl-dfs</module>
-    <module>synexia-flink-datastream</module>
-    <module>synexia-ssh</module>
-    <module>synexia-sshd-server</module>
-    <module>synexia-synthesis</module>
-    <module>synexia-cpullm</module>
-    <module>synexia-flink-cpullm</module>
-    <module>synexia-beam-cpullm</module>
-    <module>synexia-beam-etl</module>
-    <module>synexia-code-convergence</module>
-    <module>synexia-code-convergence-jini</module>
-    <module>synexia-indexstring-jini</module>
-    <module>synexia-forge</module>
-    <module>synexia-chromeml-api</module>
+    <module>m3-classic-intelligence</module>
+    <module>m3-retrieval-runtime</module>
+    <module>m3-runtime</module>
+    <module>m3-pluginify-api</module>
+    <module>m3-pluginify-core</module>
+    <module>m3-pluginify-bridge-eclipse</module>
+    <module>m3-pluginify-bridge-native</module>
+    <module>m3-pluginify-headless</module>
+    <module>m3-pluginify-maven-plugin</module>
+    <module>m3-dawn-jni</module>
+    <module>m3-aicore</module>
+    <module>m3-indexstring</module>
+    <module>m3-index-precompute</module>
+    <module>m3-index-precompute-adapters</module>
+    <module>m3-indexstring/algorithm-bridge</module>
+    <module>m3-tabletree</module>
+    <module>m3-tabletree-spring-data</module>
+    <module>m3-indexstring-compiler</module>
+    <module>m3-indexstring-maven-plugin</module>
+    <module>m3-mindex</module>
+    <module>m3-l2g</module>
+    <module>m3-l2v</module>
+    <module>m3-l2c</module>
+    <module>m3-mindex-indexstring-bridge</module>
+    <module>m3-m3index</module>
+    <module>m3-shape-bridge</module>
+    <module>m3-specialist-ai</module>
+    <module>m3-flink-spi</module>
+    <module>m3-etl</module>
+    <module>m3-dfs</module>
+    <module>m3-etl-dfs</module>
+    <module>m3-flink-datastream</module>
+    <module>m3-ssh</module>
+    <module>m3-sshd-server</module>
+    <module>m3-synthesis</module>
+    <module>m3-cpullm</module>
+    <module>m3-flink-cpullm</module>
+    <module>m3-beam-cpullm</module>
+    <module>m3-beam-etl</module>
+    <module>m3-code-convergence</module>
+    <module>m3-code-convergence-jini</module>
+    <module>m3-indexstring-jini</module>
+    <module>m3-forge</module>
+    <module>m3-chromeml-api</module>
     <module>tools/library-ranking</module>
     <module>cognix-ai</module>
     <module>cognix-mcp</module>
     <module>cognix-nlp</module>
-    <module>synexia-mllm</module>
-    <module>synexia-mllm/chrome2api-java</module>
-    <module>synexia-mllm/nanobrowser-java</module>
-    <module>synexia-mllm/nanobrowser-java/model-execution/contexts</module>
-    <module>synexia-translate</module>
+    <module>m3-mllm</module>
+    <module>m3-mllm/chrome2api-java</module>
+    <module>m3-mllm/nanobrowser-java</module>
+    <module>m3-mllm/nanobrowser-java/model-execution/contexts</module>
+    <module>m3-translate</module>
     <module>cognix-agents</module>
     <module>agents/codeact-java</module>
     <module>cognix-flow</module>
     <module>cognix-camel-kie</module>
-    <module>synexia-enterprise-data-plane</module>
-    <module>synexia-sap-compat</module>
-    <module>synexia-sap-migration</module>
-    <module>synexia-camel-dag-bridge</module>
-    <module>synexia-camel-dag-kie</module>
+    <module>m3-enterprise-data-plane</module>
+    <module>m3-sap-compat</module>
+    <module>m3-sap-migration</module>
+    <module>m3-camel-dag-bridge</module>
+    <module>m3-camel-dag-kie</module>
     <module>cognix-process</module>
     <module>cognix-tools</module>
     <module>cognix-donor-inventory</module>
@@ -148,11 +148,11 @@
     <module>cognix-eclipse-visual-ui</module>
     <module>cognix-eclipse-visual-web</module>
     <module>cognix-eclipse-visual-architecture-tests</module>
-    <module>synexia-cpu-camel-fabric</module>
-    <module>synexia-indexstring-tornadovm</module>
-    <module>synexia-neural-renderer-jni</module>
-    <module>synexia-algorithm-runtime</module>
-    <module>synexia-consolidation-runtime</module>
+    <module>m3-cpu-camel-fabric</module>
+    <module>m3-indexstring-tornadovm</module>
+    <module>m3-neural-renderer-jni</module>
+    <module>m3-algorithm-runtime</module>
+    <module>m3-consolidation-runtime</module>
     <module>cpullm-opdag/provider-integrations/java</module>
     <module>cognix-transpiler</module>
     <module>cognix-java-web-runtime</module>
@@ -160,65 +160,65 @@
     <module>cognix-java-web-modules</module>
     <module>cognix-java-web-workers</module>
     <module>cognix-transpiler-teavm</module>
-    <module>synexia-pluginify-bridge-teavm</module>
+    <module>m3-pluginify-bridge-teavm</module>
     <module>cognix-transpiler-skillmd-bridge</module>
     <module>cognix-skills</module>
     <module>cognix-rag</module>
     <module>cognix-demos</module>
-    <module>synexia-mat-value-processor</module>
-    <module>synexia-mat-value-maven-plugin</module>
-    <module>synexia-openrewrite-recipes</module>
-    <module>synexia-repository-java-candidate</module>
-    <module>synexia-upwork-pipeline</module>
-    <module>synexia-maven-plugin</module>
-    <module>synexia-agent</module>
-    <module>synexia-rop</module>
-    <module>synexia-rop-h2</module>
-    <module>synexia-vdp</module>
-    <module>synexia-m3-cloner</module>
-    <module>synexia-ngrok</module>
-    <module>synexia-docker</module>
-    <module>synexia-kubernetes</module>
-    <module>synexia-dashboard-api</module>
-    <module>synexia-tunnel</module>
-    <module>synexia-opsdash</module>
-    <module>synexia-edge-ingress</module>
-    <module>synexia-local-appliance</module>
-    <module>synexia-local-k3s</module>
-    <module>synexia-local-appliance-shell</module>
-    <module>synexia-route-policy</module>
-    <module>synexia-kie-policy</module>
-    <module>synexia-appliance-watchdog</module>
+    <module>m3-mat-value-processor</module>
+    <module>m3-mat-value-maven-plugin</module>
+    <module>m3-openrewrite-recipes</module>
+    <module>m3-repository-java-candidate</module>
+    <module>m3-upwork-pipeline</module>
+    <module>m3-maven-plugin</module>
+    <module>m3-agent</module>
+    <module>m3-rop</module>
+    <module>m3-rop-h2</module>
+    <module>m3-vdp</module>
+    <module>m3-cloner</module>
+    <module>m3-ngrok</module>
+    <module>m3-docker</module>
+    <module>m3-kubernetes</module>
+    <module>m3-dashboard-api</module>
+    <module>m3-tunnel</module>
+    <module>m3-opsdash</module>
+    <module>m3-edge-ingress</module>
+    <module>m3-local-appliance</module>
+    <module>m3-local-k3s</module>
+    <module>m3-local-appliance-shell</module>
+    <module>m3-route-policy</module>
+    <module>m3-kie-policy</module>
+    <module>m3-appliance-watchdog</module>
       <!-- REACTOR-ADDITIVE-SUPERSET-20260925: approved active modules; existing order preserved. -->
     <module>cognix-transpiler-aitrans-bridge</module>
-    <module>synexia-aiop</module>
-    <module>synexia-artifact-intelligence</module>
-    <module>synexia-build-inventory</module>
-    <module>synexia-chat-artifacts</module>
-    <module>synexia-classic-tools</module>
-    <module>synexia-classic-tools-jni</module>
-    <module>synexia-hpcpop</module>
-    <module>synexia-mat-collections</module>
-    <module>synexia-netnet</module>
-    <module>synexia-primitives</module>
+    <module>m3-aiop</module>
+    <module>m3-artifact-intelligence</module>
+    <module>m3-build-inventory</module>
+    <module>m3-chat-artifacts</module>
+    <module>m3-classic-tools</module>
+    <module>m3-classic-tools-jni</module>
+    <module>m3-hpcpop</module>
+    <module>m3-mat-collections</module>
+    <module>m3-netnet</module>
+    <module>m3-primitives</module>
     <!-- REACTOR-ADDITIVE-SUPERSET-20260925-PASS2: reviewed standalone/mixed modules. -->
     <module>cognix-eclipse</module>
     <module>cpullm-java</module>
     <module>cpullm-paroksha-superset</module>
-    <module>synexia-chrome-diffusion</module>
-    <module>synexia-common-cache</module>
-    <module>synexia-common-core</module>
-    <module>synexia-hash-pack-parent</module>
-    <module>synexia-java-web-workbench</module>
-    <module>synexia-neural-rendering</module>
-    <module>synexia-picocli-shell-m3</module>
-    <module>synexia-process</module>
-    <module>synexia-retrieval-fabric</module>
-    <module>synexia-truckmate</module>
-    <module>synexia-truckmate/reference</module>
-    <module>synexia-truckmate/transport</module>
-    <module>synexia-unix4j-m3</module>
-    <module>synexia-watchdog-policy</module>
+    <module>m3-chrome-diffusion</module>
+    <module>m3-common-cache</module>
+    <module>m3-common-core</module>
+    <module>m3-hash-pack-parent</module>
+    <module>m3-java-web-workbench</module>
+    <module>m3-neural-rendering</module>
+    <module>m3-picocli-shell-m3</module>
+    <module>m3-process</module>
+    <module>m3-retrieval-fabric</module>
+    <module>m3-truckmate</module>
+    <module>m3-truckmate/reference</module>
+    <module>m3-truckmate/transport</module>
+    <module>m3-unix4j-m3</module>
+    <module>m3-watchdog-policy</module>
     <module>synexi-protocol</module>
 </modules>
 
@@ -358,7 +358,7 @@
       <plugins>
         <plugin>
           <groupId>com.synexia</groupId>
-          <artifactId>synexia-indexstring-maven-plugin</artifactId>
+          <artifactId>m3-indexstring-maven-plugin</artifactId>
           <version>${revision}</version>
         </plugin>
         <plugin>
@@ -454,7 +454,7 @@
             <skip>${spotless.check.skip}</skip>
             <java>
               <excludes>
-                <!-- Root src/ has restrictive ACLs; these files will move to synexia-agent module -->
+                <!-- Root src/ has restrictive ACLs; these files will move to m3-agent module -->
                 <exclude>src/main/java/**</exclude>
               </excludes>
               <palantirJavaFormat>
@@ -1162,7 +1162,7 @@
 
     <!-- Isolated parse-recovery artifact; dry-run candidates require separate source review. -->
     <profile>
-      <id>synexia-java-parse-recovery-candidate</id>
+      <id>m3-java-parse-recovery-candidate</id>
       <build>
         <plugins>
           <plugin>
@@ -1172,14 +1172,14 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-repository-java-candidate</artifactId>
+                <artifactId>m3-repository-java-candidate</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
-              <configLocation>${maven.multiModuleProjectDirectory}/synexia-repository-java-candidate/rewrite-host.yml</configLocation>
+              <configLocation>${maven.multiModuleProjectDirectory}/m3-repository-java-candidate/rewrite-host.yml</configLocation>
               <activeRecipes combine.self="override">
-                <recipe>com.synexia.RepositoryJavaParseErrorRecovery</recipe>
+                <recipe>jdk.internal.m3.RepositoryJavaParseErrorRecovery</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -1201,7 +1201,7 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
               <dependency>
@@ -1212,7 +1212,7 @@
             </dependencies>
             <configuration>
               <activeRecipes combine.self="override">
-                <recipe>com.synexia.rewrite.M3IopPatternOnlySerialMechanicalJavaRecipe</recipe>
+                <recipe>jdk.internal.m3.rewrite.M3IopPatternOnlySerialMechanicalJavaRecipe</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -1239,13 +1239,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.rewrite.M3PartialAstFrequencyAdmissionRecipe</recipe>
+                <recipe>jdk.internal.m3.rewrite.M3PartialAstFrequencyAdmissionRecipe</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -1273,13 +1273,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.M3DawnCpullmMixedSummary</recipe>
+                <recipe>jdk.internal.m3.M3DawnCpullmMixedSummary</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -1308,13 +1308,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes combine.self="override">
-                <recipe>com.synexia.rewrite.M3InstallTinyModelArchitectureSupersetRecipe</recipe>
+                <recipe>jdk.internal.m3.rewrite.M3InstallTinyModelArchitectureSupersetRecipe</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -1367,7 +1367,7 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
               <dependency>
@@ -1378,8 +1378,8 @@
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.rewrite.M3LlmTaskAdmissionRecipe</recipe>
-                <recipe>com.synexia.M3LlmRecipeFirstIop</recipe>
+                <recipe>jdk.internal.m3.rewrite.M3LlmTaskAdmissionRecipe</recipe>
+                <recipe>jdk.internal.m3.M3LlmRecipeFirstIop</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -1408,13 +1408,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.M3ProblemDonorRepositoryReview</recipe>
+                <recipe>jdk.internal.m3.M3ProblemDonorRepositoryReview</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -1443,13 +1443,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.M3PlatformCategorySerialReview</recipe>
+                <recipe>jdk.internal.m3.M3PlatformCategorySerialReview</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -1478,13 +1478,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.M3CpullmBrowserSummarizerBridge</recipe>
+                <recipe>jdk.internal.m3.M3CpullmBrowserSummarizerBridge</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -1503,7 +1503,7 @@
 
     <!-- Canonical recipe-first Synexia ETL owner/compiler review. -->
     <profile>
-      <id>m3-synexia-etl-review</id>
+      <id>m3-etl-review</id>
       <build>
         <plugins>
           <plugin>
@@ -1513,13 +1513,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.M3SynexiaEtlReview</recipe>
+                <recipe>jdk.internal.m3.M3EtlReview</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -1548,7 +1548,7 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
               <dependency>
@@ -1559,7 +1559,7 @@
             </dependencies>
             <configuration>
               <activeRecipes combine.self="override">
-                <recipe>com.synexia.rewrite.M3IopPatternOnlySerialMechanicalJavaRecipe</recipe>
+                <recipe>jdk.internal.m3.rewrite.M3IopPatternOnlySerialMechanicalJavaRecipe</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -1576,7 +1576,7 @@
     </profile>
     <!-- Explicit whole-reactor Java recipe dry-run; never binds a source-mutating goal. -->
     <profile>
-      <id>synexia-repository-java-candidate</id>
+      <id>m3-repository-java-candidate</id>
       <build>
         <plugins>
           <plugin>
@@ -1586,13 +1586,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.RepositoryJavaCandidate</recipe>
+                <recipe>jdk.internal.m3.RepositoryJavaCandidate</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -1619,7 +1619,7 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
@@ -1632,7 +1632,7 @@
                 <additionalPlainTextMask>**/m3-recipe-catalogue.tsv</additionalPlainTextMask>
               </additionalPlainTextMasks>
               <activeRecipes>
-                <recipe>com.synexia.M3ProblemRecipePlanner</recipe>
+                <recipe>jdk.internal.m3.M3ProblemRecipePlanner</recipe>
               </activeRecipes>
               <exclusions>
                 <exclusion>**/target/**</exclusion>
@@ -1658,7 +1658,7 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
@@ -1667,7 +1667,7 @@
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
               <activeRecipes>
-                <recipe>com.synexia.M3PackedSha256Segments</recipe>
+                <recipe>jdk.internal.m3.M3PackedSha256Segments</recipe>
               </activeRecipes>
               <exclusions>
                 <exclusion>**/target/**</exclusion>
@@ -1693,7 +1693,7 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
@@ -1701,7 +1701,7 @@
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
               <activeRecipes>
-                <recipe>com.synexia.M3GpuPreparedByteRelationImage</recipe>
+                <recipe>jdk.internal.m3.M3GpuPreparedByteRelationImage</recipe>
               </activeRecipes>
               <exclusions>
                 <exclusion>**/target/**</exclusion>
@@ -1727,7 +1727,7 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
@@ -1736,7 +1736,7 @@
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
               <activeRecipes>
-                <recipe>com.synexia.M3AlgorithmCapabilityCandidate</recipe>
+                <recipe>jdk.internal.m3.M3AlgorithmCapabilityCandidate</recipe>
               </activeRecipes>
               <exclusions>
                 <exclusion>**/target/**</exclusion>
@@ -1762,7 +1762,7 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
@@ -1774,7 +1774,7 @@
                 <additionalPlainTextMask>**/m3-problem-recipe-work-orders.tsv</additionalPlainTextMask>
               </additionalPlainTextMasks>
               <activeRecipes>
-                <recipe>com.synexia.M3ProblemRecipeWorkOrders</recipe>
+                <recipe>jdk.internal.m3.M3ProblemRecipeWorkOrders</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -1796,7 +1796,7 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
@@ -1805,7 +1805,7 @@
                 <additionalPlainTextMask>**/m3-problem-recipe-work-orders.tsv</additionalPlainTextMask>
               </additionalPlainTextMasks>
               <activeRecipes>
-                <recipe>com.synexia.M3ProblemRecipeScaffold</recipe>
+                <recipe>jdk.internal.m3.M3ProblemRecipeScaffold</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -1827,7 +1827,7 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
@@ -1836,7 +1836,7 @@
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
               <activeRecipes>
-                <recipe>com.synexia.M3RepositoryCapabilityCandidate</recipe>
+                <recipe>jdk.internal.m3.M3RepositoryCapabilityCandidate</recipe>
               </activeRecipes>
               <exclusions>
                 <exclusion>**/target/**</exclusion>
@@ -1862,7 +1862,7 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
@@ -1871,7 +1871,7 @@
                 <additionalPlainTextMask>**/M3_REPOSITORY_RECIPE_WORK_ORDERS.tsv</additionalPlainTextMask>
               </additionalPlainTextMasks>
               <activeRecipes>
-                <recipe>com.synexia.M3RepositoryRecipeScaffold</recipe>
+                <recipe>jdk.internal.m3.M3RepositoryRecipeScaffold</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -1893,13 +1893,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.M3GpuGrepShaDonorIntegration</recipe>
+                <recipe>jdk.internal.m3.M3GpuGrepShaDonorIntegration</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -1921,7 +1921,7 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
@@ -1930,10 +1930,10 @@
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
               <additionalPlainTextMasks>
-                <additionalPlainTextMask>**/synexia_gpu_sha256.c</additionalPlainTextMask>
+                <additionalPlainTextMask>**/m3_gpu_sha256.c</additionalPlainTextMask>
               </additionalPlainTextMasks>
               <activeRecipes>
-                <recipe>com.synexia.M3PreparedBytePrecomputeReview</recipe>
+                <recipe>jdk.internal.m3.M3PreparedBytePrecomputeReview</recipe>
               </activeRecipes>
             </configuration>
           </plugin>
@@ -1953,13 +1953,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes combine.self="override">
-                <recipe>com.synexia.rewrite.M3IopPatternOnlySerialMechanicalJavaRecipe</recipe>
+                <recipe>jdk.internal.m3.rewrite.M3IopPatternOnlySerialMechanicalJavaRecipe</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -1993,13 +1993,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes combine.self="override">
-                <recipe>com.synexia.rewrite.M3IopPatternOnlySerialMechanicalJavaRecipe</recipe>
+                <recipe>jdk.internal.m3.rewrite.M3IopPatternOnlySerialMechanicalJavaRecipe</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <exclusions>
@@ -2026,9 +2026,9 @@
             <configuration>
               <configLocation>${maven.multiModuleProjectDirectory}/rewrite.yml</configLocation>
               <activeRecipes>
-                <recipe>synexia.Everything</recipe>
-                <recipe>com.synexia.CpullmMechanicalJava</recipe>
-                <recipe>com.synexia.SapPrimitiveMaskHotPath</recipe>
+                <recipe>m3.Everything</recipe>
+                <recipe>jdk.internal.m3.CpullmMechanicalJava</recipe>
+                <recipe>jdk.internal.m3.SapPrimitiveMaskHotPath</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -2064,7 +2064,7 @@
 
     <!-- Synexia M3 invariant: recipe-first, catalogue-first, serial promotion gate. -->
     <profile>
-      <id>m3-synexia-invariant</id>
+      <id>m3-invariant</id>
       <build>
         <plugins>
           <plugin>
@@ -2074,13 +2074,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.M3SynexiaInvariant</recipe>
+                <recipe>jdk.internal.m3.M3Invariant</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -2093,7 +2093,7 @@
             </configuration>
             <executions>
               <execution>
-                <id>m3-synexia-invariant-dry-run</id>
+                <id>m3-invariant-dry-run</id>
                 <phase>validate</phase>
                 <goals><goal>dryRun</goal></goals>
               </execution>
@@ -2300,7 +2300,7 @@
       <id>m3-tornado</id>
       <modules>
         <!-- Core M3/Tornado contract is already a normal reactor module. -->
-        <module>synexia-cpu-camel-fabric/providers/tornadovm</module>
+        <module>m3-cpu-camel-fabric/providers/tornadovm</module>
       </modules>
     </profile>
 
@@ -2349,13 +2349,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.m3.M3AhoTriePrefixView</recipe>
+                <recipe>jdk.internal.m3.M3AhoTriePrefixView</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -2491,14 +2491,14 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.rewrite.M3LlmTaskAdmissionRecipe</recipe>
-                <recipe>com.synexia.rewrite.M3MIndexThreeRouteContractReviewRecipe</recipe>
+                <recipe>jdk.internal.m3.rewrite.M3LlmTaskAdmissionRecipe</recipe>
+                <recipe>jdk.internal.m3.rewrite.M3MIndexThreeRouteContractReviewRecipe</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -2527,13 +2527,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.m3.M3ChallengeCrosswalkShapeAlignment</recipe>
+                <recipe>jdk.internal.m3.M3ChallengeCrosswalkShapeAlignment</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -2556,13 +2556,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.m3.M3HashPinnedAlternateJavaRootEngine</recipe>
+                <recipe>jdk.internal.m3.M3HashPinnedAlternateJavaRootEngine</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -2584,7 +2584,7 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
@@ -2594,7 +2594,7 @@
                 <additionalPlainTextMask>**/challenge_posting_intersection.c</additionalPlainTextMask>
               </additionalPlainTextMasks>
               <activeRecipes>
-                <recipe>com.synexia.m3.M3OrderedRankSearchSuperset</recipe>
+                <recipe>jdk.internal.m3.M3OrderedRankSearchSuperset</recipe>
               </activeRecipes>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
               <failOnDryRunResults>false</failOnDryRunResults>
@@ -2617,13 +2617,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.m3.M3FibonacciSearchKernel</recipe>
+                <recipe>jdk.internal.m3.M3FibonacciSearchKernel</recipe>
               </activeRecipes>
               <additionalPlainTextMasks>
                 <additionalPlainTextMask>**/*.c</additionalPlainTextMask>
@@ -2654,13 +2654,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes>
-                <recipe>com.synexia.m3.M3TernarySearchCurrentSuperset</recipe>
+                <recipe>jdk.internal.m3.M3TernarySearchCurrentSuperset</recipe>
               </activeRecipes>
               <additionalPlainTextMasks>
                 <additionalPlainTextMask>**/*.c</additionalPlainTextMask>
@@ -2689,13 +2689,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes combine.self="override">
-                <recipe>com.synexia.m3.M3RecipeAtomDagCurrentSuperset</recipe>
+                <recipe>jdk.internal.m3.M3RecipeAtomDagCurrentSuperset</recipe>
               </activeRecipes>
               <additionalPlainTextMasks>
                 <additionalPlainTextMask>**/*.md</additionalPlainTextMask>
@@ -2722,14 +2722,14 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes combine.self="override">
                 <!-- Additive superset: source-specific FILE -> PACKAGE -> MODULE -> PROJECT -> REPOSITORY. -->
-                <recipe>com.synexia.M3HierarchicalAtomPatternLattice</recipe>
+                <recipe>jdk.internal.m3.M3HierarchicalAtomPatternLattice</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -2760,13 +2760,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes combine.self="override">
-                <recipe>com.synexia.rewrite.M3EveryModuleAtomPatternInventoryRecipe</recipe>
+                <recipe>jdk.internal.m3.rewrite.M3EveryModuleAtomPatternInventoryRecipe</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
@@ -2797,13 +2797,13 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <artifactId>m3-openrewrite-recipes</artifactId>
                 <version>${revision}</version>
               </dependency>
             </dependencies>
             <configuration>
               <activeRecipes combine.self="override">
-                <recipe>com.synexia.rewrite.M3EveryModuleRecipeFirstTaskRecipe</recipe>
+                <recipe>jdk.internal.m3.rewrite.M3EveryModuleRecipeFirstTaskRecipe</recipe>
               </activeRecipes>
               <exportDatatables>true</exportDatatables>
               <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>

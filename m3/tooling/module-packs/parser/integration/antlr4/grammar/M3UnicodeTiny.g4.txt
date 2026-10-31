@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Original test grammar authored for M3JDK21; no upstream grammar source copied.
+// Original test grammar authored for M3JDK 21; no upstream grammar source copied.
 grammar M3UnicodeTiny;
 
 @header {package jdk.m3.parser.test.antlr;}

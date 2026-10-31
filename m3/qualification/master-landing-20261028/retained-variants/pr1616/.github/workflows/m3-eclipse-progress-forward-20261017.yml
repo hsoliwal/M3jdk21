@@ -6,7 +6,7 @@ on:
       - 'm3/eclipse/core-runtime/**'
       - 'm3/collections/src/main/java/**'
       - 'm3/recipes/runtime-convergence-20261020/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java'
       - '.github/workflows/m3-eclipse-progress-forward-20261017.yml'
   workflow_dispatch:
 permissions:
@@ -34,7 +34,7 @@ jobs:
           from pathlib import Path
           import hashlib
           import subprocess
-          base = Path('m3/recipes/runtime-convergence-20261020/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-runtime-convergence-20261020')
+          base = Path('m3/recipes/runtime-convergence-20261020/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-text/m3-runtime-convergence-20261020')
           seal = Path('m3/eclipse/core-runtime/qualification/runtime-convergence-20261020/SOURCE_SEALS.tsv')
           manifest = [s.split('\t') for s in (base / 'manifest.tsv').read_text().splitlines() if s and not s.startswith('#')]
           bindings = [r for r in manifest if r[0] == seal.as_posix()]
@@ -64,7 +64,7 @@ jobs:
           set -euxo pipefail
           mvn -B -ntp -f m3/recipes/runtime-convergence-20261020/pom.xml \
             -Drecipe.owner.root="$GITHUB_WORKSPACE/m3/recipes/runtime-convergence-20261020/sdk-owner" \
-            -Dm3.recipe.name=com.synexia.m3jdk.RuntimeConvergence20261020 test 2>&1 | tee proof/successor-recipe.txt
+            -Dm3.recipe.name=jdk.internal.m3.m3jdk.RuntimeConvergence20261020 test 2>&1 | tee proof/successor-recipe.txt
       - name: Run hash-pinned Java LST recipe and refusal/fixed-point tests
         shell: bash
         run: |

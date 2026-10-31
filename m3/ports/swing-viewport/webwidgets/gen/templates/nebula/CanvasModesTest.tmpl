@@ -1,0 +1,22 @@
+package @WPKG@;
+
+import @PKG@.M3@FAMILY@Model;
+import @PKG@.M3WebStates;
+import org.eclipse.swt.SWT;
+import org.junit.Test;
+
+/**
+ * Desktop canvas contract of every mode of family @FAM@ (pattern M3P-@FAM@-1) on the hidden test desktop:
+ * the generic canvas over the family model, including modes whose widget Nebula or SWT already ships.
+ */
+public class M3@FAMILY@CanvasModes_Test {
+	@Test
+	public void everyMode() {
+		for (int mode = 0; mode < M3@FAMILY@Model.MODES; mode++) {
+			M3@FAMILY@Model m = new M3@FAMILY@Model("@FAM@-" + mode, 0, mode, M3WebStates.ROUND, 0);
+			M3WebCanvas<M3@FAMILY@Model> c = new M3WebCanvas<>(M3WebCanvasChecks.shell(), SWT.NONE, m);
+			m.load("12~3~L;5~2;8~1");
+			M3WebCanvasChecks.run(c);
+		}
+	}
+}

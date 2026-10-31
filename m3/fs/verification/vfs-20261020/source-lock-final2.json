@@ -1,6 +1,6 @@
 {
   "source_lock": "/workspace/scratch/e736b6177c79/m3fs-vfs-20261020/SOURCE_LOCK.final2.tsv",
-  "source_lock_sha256": "a9f7ffb047e63620a0c6f45dcce4955bc4e0405bceeb524be699a4b3eaba54ad",
+  "source_lock_sha256": "80e54b14decb84e9e04dab403d15703f9288baa1d2ab7bf2d1dfba09a448cd51",
   "input_files": 386,
   "donor_java_custody": 311,
   "donor_java_compiled": 237,

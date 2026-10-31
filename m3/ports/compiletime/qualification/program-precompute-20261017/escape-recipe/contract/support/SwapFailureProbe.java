@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-package com.m3.compiletime;
+package jdk.m3.compiletime;
 
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.FieldInsnNode;
@@ -16,7 +16,7 @@ public final class SwapFailureProbe {
     private SwapFailureProbe() { }
 
     public static void main(String[] args) throws Exception {
-        String fixture = "com/m3/compiletime/fixture/";
+        String fixture = "jdk/m3/compiletime/fixture/";
         MethodNode method = new MethodNode(Opcodes.ACC_PUBLIC | Opcodes.ACC_STATIC,
                 "swap", "(L" + fixture + "FakeTable;)V", null, null);
         method.maxStack = 2;

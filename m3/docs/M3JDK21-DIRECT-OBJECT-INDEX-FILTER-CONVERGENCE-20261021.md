@@ -7,8 +7,8 @@ This source is the **actual M3JDK21 Java21/HotSpot/JNI SDK**, not M3 layered abo
 ## Inventory before receiving
 
 Current product **master** is the baseline for this combined candidate. Each existing Java target must match its independently pinned original master Git blob **before** receiving the canonical candidate, otherwise refuse:
-- `M3LongIndexProjection.java` = `d18055008f6eabbd6603e080ff32f8d5a1da8b60` (primitive sorted-index natural run, source-sealed in Synexia #12700 / product #1667).
-- `M3CollectionViews.java` = `7b777fcabcf7c47ab75ad0df1095663b11dcc31c` (filtered/sorted inherited isEmpty, source-sealed in Synexia #12720 / product #1678).
+- `M3LongIndexProjection.java` = `d98d8a45725f102292a63180a44e6054bf9b57c8` (primitive sorted-index natural run, source-sealed in Synexia #12700 / product #1667).
+- `M3CollectionViews.java` = `a8470a26113a3f55e407a80bef95953146f3ce72` (filtered/sorted inherited isEmpty, source-sealed in Synexia #12720 / product #1678).
 - New JDK `M3ObjectMemory.java`, native `libjava/M3ObjectMemory.c` and jtreg `M3ObjectMemoryTest.java` were absent at inventoried master. Source-sealed in Synexia #12668 / product #1648.
 - No original `java.util`/public Java SE method signatures, `Map.Entry` retained row storage, JNI headers/exports or existing generic predicate contracts are replaced. This is a narrow superset of three **independent** source atoms.
 

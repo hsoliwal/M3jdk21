@@ -3,7 +3,7 @@
   "authorizedScope": "User requested package-first renaming across collection sources",
   "mapping": {
     "source": "java.util and selected subpackages",
-    "target": "com.m3.collections.jdk.util and corresponding subpackages",
+    "target": "jdk.m3.collections.jdk.util and corresponding subpackages",
     "selection": "59 selected implementations;28 retained platform contracts keep original names"
   },
   "inventory": "FULL_SOURCE_BINDINGS.tsv",

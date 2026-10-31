@@ -1,0 +1,14 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< org.apache.maven:standalone-pom >-------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- m3work:0.1.1:relocation-scan (default-cli) @ standalone-pom ---
+[INFO] [RELOCATION] hits=0 {} -> H:\m3-scratch\converge-commons\m3\m3\tooling\lib-intake\runs\fastdoubleparser-1.0.90\relocation
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.285 s
+[INFO] Finished at: 2026-10-31T07:29:50+05:30
+[INFO] ------------------------------------------------------------------------

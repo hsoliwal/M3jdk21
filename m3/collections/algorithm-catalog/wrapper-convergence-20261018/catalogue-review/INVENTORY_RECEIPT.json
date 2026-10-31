@@ -76,7 +76,7 @@
   "pending_wrapper_findings": 5,
   "parent_baseline_modes_imported": 8,
   "candidate_qualification_status": "PENDING_IMPORT_FROM_PARENT_ORDERED_GATES",
-  "source_manifest_sha256": "bbe3f9ac3c320dc168e307c54c8ce4b7e940cacae4d7902467e76c133ac41393",
+  "source_manifest_sha256": "10fa65f0b28921ae9c5c7b0d7265bc1b3aa8f5ebf55159bed6116f800019deec",
   "source_set_sha256_path_tab_hash_lf": "c3050c6945e60c0e54b941988ebdfa11cb9d4efe27e38918100ba2306f0e701b",
   "catalogue_worker_executed_project_lint_compile_tests_runtime": false,
   "target_source_drift_during_metadata_materialization": [],

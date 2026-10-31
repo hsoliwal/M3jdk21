@@ -1,23 +1,23 @@
 {
   "baseline": "2f2beb2eff7a88f1f7c0012fd17a78a6f0a00b49",
-  "resource_root": "/dev/shm/m3jdk21-work/recipe-candidates/src/main/resources/com/synexia/rewrite/m3jdk21-integrated-utilities-20261018",
-  "manifest_sha256": "a7ea777197248e5430680dd599004ca815b881890bf7a746cb156ad79950301d",
+  "resource_root": "/dev/shm/m3jdk21-work/recipe-candidates/src/main/resources/jdk/internal/m3/rewrite/m3jdk21-integrated-utilities-20261018",
+  "manifest_sha256": "22dfc6c19ac95fd88eba0ac9d12845fad84a10f9c01445237264b229c00f2495",
   "source_intakes": [
     {
       "path": "/dev/shm/m3jdk21-work/collection-candidates/candidate-manifest.json",
-      "sha256": "6971793040645fdaae63019a73c247e4a7d8a5873b3b052e6be11cb925893801"
+      "sha256": "183da09418d2cc25f70227330145aab3ff433b7150ff30e07edbb1611637f653"
     },
     {
       "path": "/dev/shm/m3jdk21-work/utility-candidates/candidate-manifest.json",
-      "sha256": "4a9954456edefe502073dadd1b8b2957113909f03eaf1bd6bedeb12bc50cc407"
+      "sha256": "614f5565abeaf1daee2c9a2f7ea958eec6d4f5db1f2ee99f92daf1b3af324ded"
     },
     {
       "path": "/dev/shm/m3jdk21-work/mask-candidates/manifest.json",
-      "sha256": "2e34a333f7abfa0f19f312e4ceb7b3cd2fe6440d9c8d1081a3ac97e364bdf388"
+      "sha256": "78233c42c282324ef4d3aeb392185c18d780f7005cfbef1af869c45286e84ec0"
     },
     {
       "path": "/dev/shm/m3jdk21-work/catalogue-expanded-intake.json",
-      "sha256": "394db1601ddf15ea10494da3938aac3a886bbf8fcf254352802655696d7dd0cb"
+      "sha256": "b4724e4fcc3fd08c8395c6ca95c91961e66c92db978d4328d6db0c22f38c6869"
     }
   ],
   "manifest_targets": 483,
@@ -25,7 +25,7 @@
     {
       "path": "m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv",
       "before_sha256": "ABSENT",
-      "after_sha256": "f123ae356ffdd5df1523205dc5f1f48e6daf461b8a6f908a9870e348e80f5e7f",
+      "after_sha256": "5bf447216af55a51b73c275182af891c1ded5c2b427fa6856139731078d2ef8c",
       "template": "templates/m3/collections/algorithm-catalog/integrated-utility-views-20261018.tsv"
     },
     {
@@ -53,21 +53,21 @@
       "template": "templates/m3/docs/name-mapping.d/m3-integrated-utility-families-20261018.json"
     },
     {
-      "path": "m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json",
+      "path": "m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json",
       "before_sha256": "ABSENT",
       "after_sha256": "7ec04178398539f8f27459d0d754a294af275f5469fcfa51db6ce58d872d47b1",
-      "template": "templates/m3/docs/name-mapping.d/m3-jdk-module-owners-20261018.json"
+      "template": "templates/m3/docs/name-mapping.d/m3jdk-module-owners-20261018.json"
     },
     {
       "path": "m3/docs/name-mapping.json",
-      "before_sha256": "4247c5648cf6a5599f8840a7171f147f5c343bf9b97e7a386eb7f351f978c4f3",
+      "before_sha256": "a28f218198b30d1292d51836c8912d1f69229ef9bef40a4726a2808bcdcb4d46",
       "after_sha256": "2bb378d4e2af9c0bf62482182acdf53f1919abe16e6146195d38d9bcfc6ab9d7",
       "template": "templates/m3/docs/name-mapping.json"
     },
     {
       "path": "m3/runtime-integration/integrated-collections/FOSS_REUSE_DECISION.json",
       "before_sha256": "ABSENT",
-      "after_sha256": "9659689fab63ae642eb4b789814f6402108c9d24a9f1b48bf924207992fd6db1",
+      "after_sha256": "3ee2e50f838470732304b728ee7c37a224611dc42fd56148faf687f3c14b1cad",
       "template": "templates/m3/runtime-integration/integrated-collections/FOSS_REUSE_DECISION.json"
     },
     {
@@ -85,13 +85,13 @@
     {
       "path": "m3/runtime-integration/integrated-collections/candidate-receiver.json",
       "before_sha256": "ABSENT",
-      "after_sha256": "0d334e13765b476d851f7b8585f9157dda4e4d3150eb460eec5eb13dcd0d0025",
+      "after_sha256": "afa5b6c927910d003263726dd83898abb99e80011f408915b1cb1931d867c7c8",
       "template": "templates/m3/runtime-integration/integrated-collections/candidate-receiver.json"
     },
     {
       "path": "m3/runtime-integration/integrated-collections/counterexamples.json",
       "before_sha256": "ABSENT",
-      "after_sha256": "b481d09450f49bf14dbc40d5bec89c9d6924a5e1893e614f7216e8ef5959c077",
+      "after_sha256": "e24f21e0fa610db3038f420bcc05b9f39cb38278548efadf058d3efa3d58aa27",
       "template": "templates/m3/runtime-integration/integrated-collections/counterexamples.json"
     },
     {
@@ -115,13 +115,13 @@
     {
       "path": "m3/runtime-integration/integrated-utilities/behavioral-atoms.json",
       "before_sha256": "ABSENT",
-      "after_sha256": "a3015f30c325ed9e40e73f5416d48616e5411e32db64b0e813796fe5273ae0d8",
+      "after_sha256": "399e736490260446a9562e4b479fb2c61532305125c1b7f2e2debe0044d1d2a3",
       "template": "templates/m3/runtime-integration/integrated-utilities/behavioral-atoms.json"
     },
     {
       "path": "m3/runtime-integration/integrated-utilities/contract-catalogue.json",
       "before_sha256": "ABSENT",
-      "after_sha256": "d36b88fc08ce728285c59f1826211be0a9154df2dbf8aedcd8a9a5875150d4b8",
+      "after_sha256": "ad5b209d0320dd10c5eade3481636b80ef70ac1c706bd63aa46f05c92089720c",
       "template": "templates/m3/runtime-integration/integrated-utilities/contract-catalogue.json"
     },
     {
@@ -162,8 +162,8 @@
     },
     {
       "path": "src/java.base/share/classes/java/util/Strings.java",
-      "before_sha256": "cbadcbce521f89c53fbd92d9644402e7a72bb5e7e56e8943e8c29fbdc0fadb9d",
-      "after_sha256": "b62532d9b0c77bc5edc07ea87daf58706e68ce4084ec228919d5cf0c28847270",
+      "before_sha256": "7147989eba1d6def126049042d8fe4bc7780fbaa972ea932bed411961117b717",
+      "after_sha256": "34286346addedd6bcdc0058df970d159f714e73ce589a8eff86068a51c72a93b",
       "template": "templates/src/java.base/share/classes/java/util/Strings.java"
     },
     {
@@ -199,7 +199,7 @@
     {
       "path": "test/jdk/java/util/Collections/M3CollectionMasksTest.java",
       "before_sha256": "ABSENT",
-      "after_sha256": "09283aa9f8e6f184f9f2e50f2967be6fc47654b591d3de0908751d84d622ce17",
+      "after_sha256": "73433d7592b44c9e7d8268a860532cfc72a13f342698efb3fafea4262ede33f3",
       "template": "templates/test/jdk/java/util/Collections/M3CollectionMasksTest.java"
     },
     {
@@ -223,10 +223,10 @@
   ],
   "keep_targets": [
     "m3/collections/algorithm-catalog/sdk-family-names-20261017.tsv",
-    "m3/collections/src/main/java/com/m3/collections/M3CollectionViews.java",
-    "m3/collections/src/main/java/com/m3/collections/M3FilteredLists.java",
-    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java",
-    "m3/collections/src/main/java/com/m3/collections/M3IndexMaskCompactor.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3CollectionViews.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredLists.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3IndexMaskCompactor.java",
     "m3/collections/src/main/native/collections/m3_index_mask_compactor.c",
     "make/modules/java.base/gensrc/GensrcBuffer.gmk",
     "make/modules/java.base/gensrc/GensrcCharsetCoder.gmk",

@@ -1,9 +1,9 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
  */
-import com.m3.text.M3InstanceIndexPrecompute;
-import com.m3.text.M3InstanceIndexPrecompute.InstanceRecord;
-import com.m3.text.M3InstanceIndexPrecompute.InstanceType;
+import jdk.m3.text.M3InstanceIndexPrecompute;
+import jdk.m3.text.M3InstanceIndexPrecompute.InstanceRecord;
+import jdk.m3.text.M3InstanceIndexPrecompute.InstanceType;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;

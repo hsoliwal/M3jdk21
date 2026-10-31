@@ -11,7 +11,7 @@ import subprocess
 import sys
 
 HERE = Path(__file__).resolve().parent
-OWNER = 'com.m3.collections.spring.M3LinkedCaseInsensitiveMap'
+OWNER = 'jdk.m3.collections.spring.M3LinkedCaseInsensitiveMap'
 PROVIDER = 'org.springframework.util.LinkedCaseInsensitiveMap'
 CAP = 512 * 1024**2
 RESERVE = 8 * 1024**3
@@ -103,7 +103,7 @@ def main():
     response.write_text(''.join('"' + str(path).replace('\\', '/') + '"\n' for path in core), encoding='utf-8')
     strict = ['--release', '21', '-g', '-encoding', 'UTF-8', '-proc:none']
     run('strict-core-compile', [javac, *compiler_vm, *strict, '-Xlint:all,-module', '-Werror', '-d', base, '@' + str(response)])
-    owner_source = root / 'm3/collections/implementations/spring-case-insensitive-map/src/main/java/com/m3/collections/spring/M3LinkedCaseInsensitiveMap.java'
+    owner_source = root / 'm3/collections/implementations/spring-case-insensitive-map/src/main/java/jdk/m3/collections/spring/M3LinkedCaseInsensitiveMap.java'
     run('strict-jdk-only-owner-compile', [javac, *compiler_vm, *strict, '-Xlint:all', '-Werror', '-d', owned, owner_source])
     common = [HERE / name for name in [
         'SpringCaseInsensitiveMapProtocolProof.java', 'SpringCaseInsensitiveMapEntryCompatibilityObserver.java',

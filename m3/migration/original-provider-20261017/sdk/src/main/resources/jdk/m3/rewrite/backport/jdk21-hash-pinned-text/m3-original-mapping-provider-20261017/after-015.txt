@@ -1,0 +1,37 @@
+{
+  "scope": "five actual dependency files; NOT a complete repository checkout",
+  "files": {
+    "m3/core/src/jdk/m3/text/M3StringPiece.java": {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
+      "git_blob_sha1": "62506fb9b3cff0e6f24e856648528db58c45b92b",
+      "sha256": "7ed45335bea7dc1107d4c28ca505ad334c845685f099af0df3e3112c411a7755"
+    },
+    "m3/core/src/jdk/m3/text/JoinedM3StringPiece.java": {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
+      "git_blob_sha1": "5022e9811ce9391671c794446c7772569cfd369f",
+      "sha256": "1655c02a61577f8aebed59b94c92701be835c4c7ebaf80efa3c71271a4bd75d7"
+    },
+    "m3/core/src/jdk/m3/text/LocalM3Arena.java": {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
+      "git_blob_sha1": "025ce8014cba8a36a9e496bb0a56faef57cf0968",
+      "sha256": "e9573e7f04a875eb7bda7d3554a57653ebd655f66ac67be724b366092e76afc4"
+    },
+    "m3/core/src/jdk/m3/text/LocalM3StringPiece.java": {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
+      "git_blob_sha1": "387ae5e0c656177f1df663fd5029d4b31ba2fa00",
+      "sha256": "77fd1cbeae4dc20a4c23497102cb7c44ec14adbdd6bbf328326957515a7858ad"
+    },
+    "m3/core/src/jdk/m3/text/StorageIdentity.java": {
+      "repository": "hsoliwal/M3jdk21",
+      "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
+      "git_blob_sha1": "8cd2ae86bee8f04f0d69709eed12897ff5c6a71c",
+      "sha256": "f6897d5ddd7f39cc0d94bdc1b4db8b695b1946bc65672fb6c0408fa110c1b354"
+    }
+  },
+  "repository": "hsoliwal/M3jdk21",
+  "commit": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f"
+}

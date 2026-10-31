@@ -51,7 +51,7 @@ static int m3_matches(JNIEnv *env, jobjectArray planes,
     return 1;
 }
 
-JNIEXPORT jintArray JNICALL Java_com_m3_collections_M3IndexPathMasks_selectNative(
+JNIEXPORT jintArray JNICALL Java_jdk_m3_collections_M3IndexPathMasks_selectNative(
         JNIEnv *env, jclass owner, jintArray rows, jintArray offsets,
         jobjectArray planes, jintArray required, jintArray forbidden,
         jint first, jint count, jint stride) {

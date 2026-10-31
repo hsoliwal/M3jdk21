@@ -2,7 +2,7 @@
   "schema": "M3_EXISTING_PUBLIC_RECIPE_HANDOFF_V1",
   "label": "progress-percent-20261018",
   "canonical_repository": "hsoliwal/com.synexia",
-  "canonical_crate": "synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
+  "canonical_crate": "m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017",
   "canonical_engine_baseline": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
   "canonical_successor_publication": "Recorded by the later pinned publication receipt; this staging record makes no publication claim.",
   "public_baseline": "0efc1719ca5766aead09f4f7c49f5067975bd946",
@@ -12,44 +12,44 @@
   "existing_host_controls": [
     {
       "path": "prepare.py",
-      "sha256": "9b0b3d93c787c9a56036cddb2b044aef30f6fa8a1fa20fa5a2edae46dfd1e62c"
+      "sha256": "7c2063fa5aa88d0872fff0157413a1d2fdca4f00d01c787f8650969e8b514014"
     },
     {
       "path": "receive.py",
-      "sha256": "db258f16e1841f6f5191c1c969c20314a8d143bfa6558b60f684bea440cc1712"
+      "sha256": "e81744965f37cb890e00f6c1c7e50f4dae44c68eedafdf46565a7e105bab5474"
     },
     {
       "path": "ENGINE_SOURCES.tsv",
       "sha256": "ae731c5780c73a98f6fc81079b5f863613fddea50d2a6c893c6dfd2aa2030b5c"
     },
     {
-      "path": "src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java",
-      "sha256": "74b03a3ac3e445a04b8b15076d3ced667bfae2442bd0968cbe74468e4a499e43"
+      "path": "src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java",
+      "sha256": "fa8a8e63fd445c0fbcd877315044c6e5c36f779db6e8a11797e03ab805e5903f"
     },
     {
       "path": "contract/test_prepare.py",
-      "sha256": "f504f1dcfafb24fd87f8f677643b45eecc74674881e16bf727b76c4e6a4d1856"
+      "sha256": "79c4335d02ca2179301d617d9ae447b778f2f12361e379ff04ad77c0237e7933"
     },
     {
       "path": "contract/verify_receiver.py",
-      "sha256": "a4d82df8b31e707afe7caa5e76524d191f285e2887dbfdfa95cfdc382ae01f7d"
+      "sha256": "a400589821da1c448b3c2354aef91c7a6fd596cf265b2baca097494135126d4c"
     }
   ],
   "existing_engine_sources": [
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "sha256": "67f7b81126e4736c7b61b444fa6545153a61e23c012975ca796fcee623ab6625"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedTextSnapshotRecipe.java",
       "sha256": "fbf1ea9efad784afef5ac201ff7fc324551f77a099ebfe2f79b70c3a17c731ef"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3ScopeInference.java",
       "sha256": "13660b59f60ec2941ec19e9bc8964ffd4b04689cdc33cd19711fba14b8da09a4"
     },
     {
-      "path": "sdk-owner/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "path": "sdk-owner/src/main/java/jdk/internal/m3/rewrite/M3EditScope.java",
       "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab"
     }
   ],
@@ -64,11 +64,11 @@
       "evidence": {
         "SDK_INPUTS.tsv": {
           "path": "evidence/progress-percent-20261018/m3jdk21-progress-percent/SDK_INPUTS.tsv",
-          "sha256": "c5674879abc8faa2b42ef61d4d5e5aec68123563ddb7a9b5d0c4910967ceef78"
+          "sha256": "29b27375b0d7bdd397d03bc3dd62dd69e9c4d3e83523e7c389b827681d385e34"
         },
         "SDK_RESULTS.tsv": {
           "path": "evidence/progress-percent-20261018/m3jdk21-progress-percent/SDK_RESULTS.tsv",
-          "sha256": "c2c72326e4a50c9e6734764cdf77951b6c56545793dde638d5d2182ac27708d3"
+          "sha256": "bc332f047ac68128fcc7ac3978fbfdb26099a11d57c4a2b2cc20dc5c0f0cf178"
         },
         "SDK_TESTS.xml": {
           "path": "evidence/progress-percent-20261018/m3jdk21-progress-percent/SDK_TESTS.xml",
@@ -92,7 +92,7 @@
       "sha256": "2a715ca02becfda7523107868d48246630b6b0bcb8028b931df37a50aee2294e",
       "bytes": 4500,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/PROGRESS_PERCENTAGE_REVIEW.md"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/PROGRESS_PERCENTAGE_REVIEW.md"
       ]
     },
     {
@@ -100,23 +100,23 @@
       "sha256": "470186bc58172ba5417a30f8ef0b261f4f2bdfcc505e5c7c90cae5c699b0b39c",
       "bytes": 3829,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/progress-percentage-foss.tsv"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/progress-percentage-foss.tsv"
       ]
     },
     {
       "path": "catalogue/progress-percentage-public-results.json",
-      "sha256": "93759f709893c0749e8d6f3e5a1225a3aa17109aa5e429a57fe9c3ef4c3e01b3",
+      "sha256": "c51a6c8b72246a0649f141748f34d27ac1ff32f9a50f0d84e5fabc9a77a19d6d",
       "bytes": 13939,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/progress-percentage-public-results.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/catalogue/progress-percentage-public-results.json"
       ]
     },
     {
       "path": "datasets/m3jdk21-progress-percent/DATASET.json",
-      "sha256": "3e00fdc63b4a2bcb319c77b204cb5751774cc3e9d1e9e36f58aa063c885912cf",
+      "sha256": "42b644438856689318883ca5cf63d6215c2aee6d80c854046b3f93598d6b2169",
       "bytes": 497,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/DATASET.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/DATASET.json"
       ]
     },
     {
@@ -124,79 +124,79 @@
       "sha256": "80bf80ee81878cc05393b3c23ef07b2261be1bcb7dcb500b0d4b12cd8e05ec23",
       "bytes": 747,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/ENGINE_EFFECTIVE.tsv"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/ENGINE_EFFECTIVE.tsv"
       ]
     },
     {
       "path": "datasets/m3jdk21-progress-percent/MODES.tsv",
-      "sha256": "47b8a25626b875cb1e07faa0e462a91fe2a369a9a13bea0d97b96500446b78ed",
+      "sha256": "144931eed54a1b07d34967aa0999241df32486302fec28683607b9ac5f99aa3a",
       "bytes": 263,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/MODES.tsv"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/MODES.tsv"
       ]
     },
     {
       "path": "datasets/m3jdk21-progress-percent/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent.yml",
-      "sha256": "e2a850d3665e1712f3707de3f4b3a6a5ca4e45741bbb5946ba5fc8eec65d5c83",
+      "sha256": "8cb3f59ff0adaee2a28d667f481f42c2999b457b738e2647f921455092b75a63",
       "bytes": 400,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent.yml"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/resources/META-INF/rewrite/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent.yml"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-percent/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/0001-M3ProgressAdapters.java.txt",
-      "sha256": "87a4782840b9862cf2252f2cf53191d7eb6fa4a6b96a180f949aa59d05160231",
+      "path": "datasets/m3jdk21-progress-percent/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/0001-M3ProgressAdapters.java.txt",
+      "sha256": "2b74e2f37552ff65c46dbae5793171dd86bd1d60015356af1d6963b6327ad698",
       "bytes": 4197,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/0001-M3ProgressAdapters.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/0001-M3ProgressAdapters.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-percent/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/0002-M3ProgressAdaptersPercentageSelfTest.java.txt",
-      "sha256": "34de1893e04bce2cea90608fe1b6b507375228451573510139fe919a6ae46bb6",
+      "path": "datasets/m3jdk21-progress-percent/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/0002-M3ProgressAdaptersPercentageSelfTest.java.txt",
+      "sha256": "eda7f5d8eac21d45c61c3daaa97511a998ec6ce305d0899fde45b2a8e1a67309",
       "bytes": 9228,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/0002-M3ProgressAdaptersPercentageSelfTest.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/0002-M3ProgressAdaptersPercentageSelfTest.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-percent/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/0003-M3ProgressAdaptersPercentageTest.java.txt",
-      "sha256": "aca7937f27206488236daf3cd06a6e48666ac534d4ac3f396328bcfdd8e09248",
+      "path": "datasets/m3jdk21-progress-percent/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/0003-M3ProgressAdaptersPercentageTest.java.txt",
+      "sha256": "19693cdc294e9f4115192d8608cd0d1cd16c292e51d4cf8a47a52b02064d23d5",
       "bytes": 466,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/0003-M3ProgressAdaptersPercentageTest.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/0003-M3ProgressAdaptersPercentageTest.java.txt"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-percent/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/manifest.tsv",
-      "sha256": "75a465ab4285eed296a310ce245c3ea86b78517a2149a60a508c410b000f0504",
+      "path": "datasets/m3jdk21-progress-percent/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/manifest.tsv",
+      "sha256": "eb2dd4ff66def536635bc3ae0352595182b3220eb0af9841ff501a5aa7114b8a",
       "bytes": 653,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/manifest.tsv"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/manifest.tsv"
       ]
     },
     {
-      "path": "datasets/m3jdk21-progress-percent/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/pre/0001-M3ProgressAdapters.java.txt",
-      "sha256": "6d4637c9b3de4481180d6459f1312aff90141b6ddf46b91aff886bab958339c9",
+      "path": "datasets/m3jdk21-progress-percent/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/pre/0001-M3ProgressAdapters.java.txt",
+      "sha256": "23d6e4159634d5186a088fb8efe05da3381f165f381ad6d6247e03bbb4058a15",
       "bytes": 3722,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/resources/com/synexia/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/pre/0001-M3ProgressAdapters.java.txt"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/datasets/m3jdk21-progress-percent/resources/jdk/internal/m3/rewrite/hash-pinned-java/m3-collections-contract-refinement-20261017-m3jdk21-progress-percent/pre/0001-M3ProgressAdapters.java.txt"
       ]
     },
     {
       "path": "evidence/progress-percent-20261018/m3jdk21-progress-percent/SDK_INPUTS.tsv",
-      "sha256": "c5674879abc8faa2b42ef61d4d5e5aec68123563ddb7a9b5d0c4910967ceef78",
+      "sha256": "29b27375b0d7bdd397d03bc3dd62dd69e9c4d3e83523e7c389b827681d385e34",
       "bytes": 3079,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-percent/candidate/SDK_INPUTS.tsv"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-percent/candidate/SDK_INPUTS.tsv"
       ]
     },
     {
       "path": "evidence/progress-percent-20261018/m3jdk21-progress-percent/SDK_RESULTS.tsv",
-      "sha256": "c2c72326e4a50c9e6734764cdf77951b6c56545793dde638d5d2182ac27708d3",
+      "sha256": "bc332f047ac68128fcc7ac3978fbfdb26099a11d57c4a2b2cc20dc5c0f0cf178",
       "bytes": 582,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-percent/candidate/SDK_RESULTS.tsv"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-percent/candidate/SDK_RESULTS.tsv"
       ]
     },
     {
@@ -204,7 +204,7 @@
       "sha256": "fc1aef3d134f3a63c11ac3ada973d46c252149b6fd01e114f43d5c71f92f4146",
       "bytes": 15049,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-percent/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/target/m3jdk21-progress-percent/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml"
       ]
     },
     {
@@ -212,7 +212,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/baseline/compile.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/baseline/compile.stderr.log"
       ]
     },
     {
@@ -220,15 +220,15 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/baseline/compile.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/baseline/compile.stdout.log"
       ]
     },
     {
       "path": "evidence/progress-percentage-20261018/m3jdk21/baseline/receipt.json",
-      "sha256": "92fadc05e25378187ab9e0a2a2ee635ce3a972d9ec03159a237b7c33c2615965",
+      "sha256": "56d5bc8dec40f2d5f98ca91fdee53e4883d69f7e608679d25b7f1fae6a966514",
       "bytes": 2314,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/baseline/receipt.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/baseline/receipt.json"
       ]
     },
     {
@@ -236,7 +236,7 @@
       "sha256": "fd243844118705f10e2e6a2f76e0ffbef548f6fe3f6a4b037b7c01964baadedb",
       "bytes": 440,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/baseline/witness.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/baseline/witness.stderr.log"
       ]
     },
     {
@@ -244,15 +244,15 @@
       "sha256": "1d55a386efb3690ec72c84c93b1874094af3919f15066a16bbe3436fe81616b0",
       "bytes": 100,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/baseline/witness.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/baseline/witness.stdout.log"
       ]
     },
     {
       "path": "evidence/progress-percentage-20261018/m3jdk21/candidate/RESULT.json",
-      "sha256": "cf232a49a2899d8c33c069b04f207ce9f4570338825ef10865e3df1c50b2d9c0",
+      "sha256": "1db7bf603602026d7fecbf63eba5117045cf4cadb304a3ecc9b9592aef224e82",
       "bytes": 8547,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/RESULT.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/RESULT.json"
       ]
     },
     {
@@ -260,7 +260,7 @@
       "sha256": "3804264aa0436ba60549aab0022613d8a61cb7429bd69c90127ad2290599d9a7",
       "bytes": 833,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/api-after.receipt.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/api-after.receipt.json"
       ]
     },
     {
@@ -268,7 +268,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/api-after.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/api-after.stderr.log"
       ]
     },
     {
@@ -276,7 +276,7 @@
       "sha256": "5271bca827baff7efa83f53e4f31b445d66c746be314fff0fa31e0bf94f8d452",
       "bytes": 12000,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/api-after.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/api-after.stdout.log"
       ]
     },
     {
@@ -284,7 +284,7 @@
       "sha256": "b675ea4659a89435363d727adc7ec25fc1dca835933805b7f411189ec8c48870",
       "bytes": 832,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/api-before.receipt.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/api-before.receipt.json"
       ]
     },
     {
@@ -292,7 +292,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/api-before.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/api-before.stderr.log"
       ]
     },
     {
@@ -300,15 +300,15 @@
       "sha256": "5271bca827baff7efa83f53e4f31b445d66c746be314fff0fa31e0bf94f8d452",
       "bytes": 12000,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/api-before.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/api-before.stdout.log"
       ]
     },
     {
       "path": "evidence/progress-percentage-20261018/m3jdk21/candidate/compile.receipt.json",
-      "sha256": "494c3eead7ebdd64bad2fe042dab5ba1ed07a7e9c902238278af3735f689d2eb",
+      "sha256": "7425a822d30e7f14def70834f6fdd52582f0095a40472da0c6d3fb05a2a2cb1b",
       "bytes": 1803,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/compile.receipt.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/compile.receipt.json"
       ]
     },
     {
@@ -316,7 +316,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/compile.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/compile.stderr.log"
       ]
     },
     {
@@ -324,7 +324,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/compile.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/compile.stdout.log"
       ]
     },
     {
@@ -332,7 +332,7 @@
       "sha256": "7ffebc36cd64e37cf7b32e638687cc5c7c97fd71a46bfe6c175654e36bb73b55",
       "bytes": 308,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/contract.receipt.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/contract.receipt.json"
       ]
     },
     {
@@ -340,7 +340,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/contract.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/contract.stderr.log"
       ]
     },
     {
@@ -348,7 +348,7 @@
       "sha256": "574ff963dd94685469c87e8a4adbc9b2996cf61bb2701217ae72b5acdf8e5f08",
       "bytes": 146,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/contract.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/contract.stdout.log"
       ]
     },
     {
@@ -356,7 +356,7 @@
       "sha256": "93b42db2164bab4b188dd1df3555b4bf134ab8b3b12ccfd9502cd0d199419be0",
       "bytes": 722,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-apply.receipt.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-apply.receipt.json"
       ]
     },
     {
@@ -364,7 +364,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-apply.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-apply.stderr.log"
       ]
     },
     {
@@ -372,7 +372,7 @@
       "sha256": "9b8a3ccaa93c55870f82645825c6751c5bc280b37b3b15bf24f3a129f2191fd7",
       "bytes": 142,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-apply.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-apply.stdout.log"
       ]
     },
     {
@@ -380,7 +380,7 @@
       "sha256": "f419468ac59f8f469fe7a63bae24b06f29fae118821109fd1b429eb7f122c5eb",
       "bytes": 737,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-check.receipt.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-check.receipt.json"
       ]
     },
     {
@@ -388,7 +388,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-check.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-check.stderr.log"
       ]
     },
     {
@@ -396,7 +396,7 @@
       "sha256": "2b09b7203c558e1fdb8aa61f2f25a96835bb106b16771b2aa6d4e92c896b970b",
       "bytes": 142,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-check.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-check.stdout.log"
       ]
     },
     {
@@ -404,7 +404,7 @@
       "sha256": "3a42997586f328a5286ae4faca7b1710022e168a36e913848cb7797486ec520d",
       "bytes": 722,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-fixed-point.receipt.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-fixed-point.receipt.json"
       ]
     },
     {
@@ -412,7 +412,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-fixed-point.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-fixed-point.stderr.log"
       ]
     },
     {
@@ -420,23 +420,23 @@
       "sha256": "2b6e89e29c9a46cf886e672c954986f8b35b527ddc6aebb109ad7bfebcd9c075",
       "bytes": 142,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-fixed-point.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/candidate/receiver-fixed-point.stdout.log"
       ]
     },
     {
       "path": "evidence/progress-percentage-20261018/m3jdk21/recipe/SDK_INPUTS.tsv",
-      "sha256": "c5674879abc8faa2b42ef61d4d5e5aec68123563ddb7a9b5d0c4910967ceef78",
+      "sha256": "29b27375b0d7bdd397d03bc3dd62dd69e9c4d3e83523e7c389b827681d385e34",
       "bytes": 3079,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/SDK_INPUTS.tsv"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/SDK_INPUTS.tsv"
       ]
     },
     {
       "path": "evidence/progress-percentage-20261018/m3jdk21/recipe/SDK_RESULTS.tsv",
-      "sha256": "c2c72326e4a50c9e6734764cdf77951b6c56545793dde638d5d2182ac27708d3",
+      "sha256": "bc332f047ac68128fcc7ac3978fbfdb26099a11d57c4a2b2cc20dc5c0f0cf178",
       "bytes": 582,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/SDK_RESULTS.tsv"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/SDK_RESULTS.tsv"
       ]
     },
     {
@@ -444,15 +444,15 @@
       "sha256": "fc1aef3d134f3a63c11ac3ada973d46c252149b6fd01e114f43d5c71f92f4146",
       "bytes": 15049,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/SDK_TESTS.xml"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/SDK_TESTS.xml"
       ]
     },
     {
       "path": "evidence/progress-percentage-20261018/m3jdk21/recipe/java.patch.txt",
-      "sha256": "b35bcb0924e5cacc7f8a01cedc74f735f56128118498ac6bef34aa7e5626743f",
+      "sha256": "f896b9fffdf0e3b804167fb4d8bbcf7043449b6c2f8d8bd206c03b98718ff0d8",
       "bytes": 12425,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/java.patch"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/java.patch"
       ]
     },
     {
@@ -460,7 +460,7 @@
       "sha256": "f9c235d14a8c5b2dda5c18e1618eed7b0b9c25a612ffb678045f837a8299fd43",
       "bytes": 3206,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/maven.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/maven.log"
       ]
     },
     {
@@ -468,15 +468,15 @@
       "sha256": "3c41ed11aa417938a3971ffa3cf7720e779a5f2cfca060d926fe733b43d9711f",
       "bytes": 964,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receipt.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receipt.json"
       ]
     },
     {
       "path": "evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/RECEIVER_RECEIPT.json",
-      "sha256": "9456f11e8889a16403b90d0ffe4aefd1036f30a7bd344b0ccf46381660af4607",
+      "sha256": "80636ac83a7a9c9517e295a9cb302d88de886c8c054572ce43c816fad5391553",
       "bytes": 1682,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/RECEIVER_RECEIPT.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/RECEIVER_RECEIPT.json"
       ]
     },
     {
@@ -484,7 +484,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/apply-exact-sdk.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/apply-exact-sdk.stderr.log"
       ]
     },
     {
@@ -492,7 +492,7 @@
       "sha256": "9b8a3ccaa93c55870f82645825c6751c5bc280b37b3b15bf24f3a129f2191fd7",
       "bytes": 142,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/apply-exact-sdk.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/apply-exact-sdk.stdout.log"
       ]
     },
     {
@@ -500,7 +500,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/check-no-write.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/check-no-write.stderr.log"
       ]
     },
     {
@@ -508,7 +508,7 @@
       "sha256": "2b09b7203c558e1fdb8aa61f2f25a96835bb106b16771b2aa6d4e92c896b970b",
       "bytes": 142,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/check-no-write.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/check-no-write.stdout.log"
       ]
     },
     {
@@ -516,7 +516,7 @@
       "sha256": "7d3b24b984a8d57b8754dabe110a5fd8cc2f5c42f3e91483d665be32d9523821",
       "bytes": 1249,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/failed-sdk-test-refusal.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/failed-sdk-test-refusal.stderr.log"
       ]
     },
     {
@@ -524,7 +524,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/failed-sdk-test-refusal.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/failed-sdk-test-refusal.stdout.log"
       ]
     },
     {
@@ -532,7 +532,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/fixed-point-no-write.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/fixed-point-no-write.stderr.log"
       ]
     },
     {
@@ -540,15 +540,15 @@
       "sha256": "2b6e89e29c9a46cf886e672c954986f8b35b527ddc6aebb109ad7bfebcd9c075",
       "bytes": 142,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/fixed-point-no-write.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/fixed-point-no-write.stdout.log"
       ]
     },
     {
       "path": "evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/late-drift-no-partial-write.stderr.log.txt",
-      "sha256": "1a6f5d26749ca0e6f94665f51e91024e4e0b56cd3acb4b903ee2b33f706dbde2",
+      "sha256": "3b80be333f317cbdd126b4dbe032ba196a9a954eba02d46cb5f8a13e07bab9a4",
       "bytes": 964,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/late-drift-no-partial-write.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/late-drift-no-partial-write.stderr.log"
       ]
     },
     {
@@ -556,7 +556,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/late-drift-no-partial-write.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/late-drift-no-partial-write.stdout.log"
       ]
     },
     {
@@ -564,7 +564,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/mixed-pre-postimages.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/mixed-pre-postimages.stderr.log"
       ]
     },
     {
@@ -572,7 +572,7 @@
       "sha256": "8cb9b59617a3c4a36293290a0f544f1608a45cc030f9cf4b27f6c02e626309f5",
       "bytes": 142,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/mixed-pre-postimages.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/mixed-pre-postimages.stdout.log"
       ]
     },
     {
@@ -580,7 +580,7 @@
       "sha256": "e3f692f2f78762c3849a5567831b33337e1eab12505694137c93f9a3e21e4698",
       "bytes": 1265,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/qualified-input-tamper.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/qualified-input-tamper.stderr.log"
       ]
     },
     {
@@ -588,15 +588,15 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/qualified-input-tamper.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/qualified-input-tamper.stdout.log"
       ]
     },
     {
       "path": "evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/sdk-result-tamper.stderr.log.txt",
-      "sha256": "9ab0d5adce43cfc0966246c9cb581eb828838a23ff43d7fbb3f4744462de0114",
+      "sha256": "c866d238e986b1640f153331cc4ff44cf8ae80b079901111a83bea7389fdf293",
       "bytes": 1306,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/sdk-result-tamper.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/sdk-result-tamper.stderr.log"
       ]
     },
     {
@@ -604,15 +604,15 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/sdk-result-tamper.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/sdk-result-tamper.stdout.log"
       ]
     },
     {
       "path": "evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/symlink-target.stderr.log.txt",
-      "sha256": "ec129947bb3dd5aae874cfc57512bc1115361e59d1db8021dad5ed0276a1b3da",
+      "sha256": "efcfdb85b8c7ba4b45efb4df2c0867d10475c26cef52e3c197e644f7cf690302",
       "bytes": 1257,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/symlink-target.stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/symlink-target.stderr.log"
       ]
     },
     {
@@ -620,7 +620,7 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/symlink-target.stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/recipe/receiver/symlink-target.stdout.log"
       ]
     },
     {
@@ -628,7 +628,7 @@
       "sha256": "421ea44ef8a18c114584036ab6b0d79e047827d826cd96fe6cbffab8156af507",
       "bytes": 858,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/seal/receipt.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/seal/receipt.json"
       ]
     },
     {
@@ -636,15 +636,15 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/seal/stderr.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/seal/stderr.log"
       ]
     },
     {
       "path": "evidence/progress-percentage-20261018/m3jdk21/seal/stdout.log.txt",
-      "sha256": "1f96e3ff0e775d775221ac3eca8f1698d72eb8f01ca59780f65d2014c5e40b84",
+      "sha256": "556700d11eb12415806e9b782ea5f7ec8cc2c1e594b70e9213208cf55fa1bb36",
       "bytes": 1250,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/seal/stdout.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/m3jdk21/seal/stdout.log"
       ]
     },
     {
@@ -652,7 +652,7 @@
       "sha256": "206aae4a4174909e897c445a7b4cdb5347cc5e9dfb04c2c6698efaf9364305bc",
       "bytes": 446,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/owning-module/baseline-collections-receipt.json"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/owning-module/baseline-collections-receipt.json"
       ]
     },
     {
@@ -660,7 +660,7 @@
       "sha256": "981e637f4818c6bf4565db2f50c78b83a022e39ab442d4827b5129db02d0a5fb",
       "bytes": 22978,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/owning-module/baseline-collections.log"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/evidence/progress-percentage-20261018/owning-module/baseline-collections.log"
       ]
     },
     {
@@ -668,7 +668,7 @@
       "sha256": "4c90faaa9e64aebeeba14fb2196731c6334293781d0fdcafbf190f2f5662eb7d",
       "bytes": 5855,
       "source_paths": [
-        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/synexia-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml"
+        "/workspace/scratch/2b4d1cb957a7/canonical-recovery/progress-refinement/canonical/m3-openrewrite-recipes/recipe-crates/m3-collections-contract-refinement-20261017/pom.xml"
       ]
     }
   ]

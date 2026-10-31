@@ -187,7 +187,7 @@ def main():
         run('strict-selected-core130',[javac,*common,'-cp',cp,'-d',core,*[root/path for path in bindings['coreJavaPaths']]])
         fixtureNames=['GuavaMinMaxProtocolProof','GuavaMinMaxOrderingHookProof','GuavaMinMaxPublicSurfaceProof','GuavaMinMaxResourceProfileProof']
         sources=[root/bindings['ownerPath']]+[qual/(name+'.java') for name in fixtureNames]+[qual/'GuavaMinMaxGenericCompileProof.java',qual/'GuavaMinMaxMaskProjectionProof.java']
-        mirror=out/'generic-mirror';mirror.mkdir();original=(qual/'GuavaMinMaxGenericCompileProof.java').read_text(encoding='utf-8');nominal=original.replace('MinMaxPriorityQueue','M3MinMaxPriorityQueue').replace('com.google.common.collect.M3MinMaxPriorityQueue','com.m3.collections.guava.M3MinMaxPriorityQueue');(mirror/'GuavaMinMaxGenericCompileProof.java').write_text(nominal,encoding='utf-8',newline='\n')
+        mirror=out/'generic-mirror';mirror.mkdir();original=(qual/'GuavaMinMaxGenericCompileProof.java').read_text(encoding='utf-8');nominal=original.replace('MinMaxPriorityQueue','M3MinMaxPriorityQueue').replace('com.google.common.collect.M3MinMaxPriorityQueue','jdk.m3.collections.guava.M3MinMaxPriorityQueue');(mirror/'GuavaMinMaxGenericCompileProof.java').write_text(nominal,encoding='utf-8',newline='\n')
         run('strict-owner-and-frozen-fixtures',[javac,*common,'-cp',str(core)+os.pathsep+cp,'-d',proof,*sources])
         run('strict-owned-generic-mirror',[javac,*common,'-cp',str(proof)+os.pathsep+str(core)+os.pathsep+cp,'-d',out,mirror/'GuavaMinMaxGenericCompileProof.java'])
         runtime=os.pathsep.join(map(str,[proof,core,jars[0]]));results={}
@@ -198,7 +198,7 @@ def main():
             output=run(label,[jvm,*options,'-cp',runtime,name,owner,*([backend] if backend else [])]);lines=output.read_text(encoding='utf-8').splitlines();return json.loads(lines[-1])
         if args.job=='java':
             for name in fixtureNames:
-                provider=execute('provider-'+name,name,'com.google.common.collect.MinMaxPriorityQueue');owned=execute('owned-'+name,name,'com.m3.collections.guava.M3MinMaxPriorityQueue')
+                provider=execute('provider-'+name,name,'com.google.common.collect.MinMaxPriorityQueue');owned=execute('owned-'+name,name,'jdk.m3.collections.guava.M3MinMaxPriorityQueue')
                 if name=='GuavaMinMaxProtocolProof':
                     expected={row['name']:row for row in provider['partitions']};actual={row['name']:row for row in owned['partitions']}
                     for key in ['MANDATORY_LAW','REQUIRED_CONCRETE']:assert expected[key]==actual[key]
@@ -219,7 +219,7 @@ def main():
             native=out/'native';native.mkdir();gcc=shutil.which('gcc');assert gcc
             library=native/('m3_collections_mask.dll' if os.name=='nt' else 'libm3_collections_mask.so');platform='win32' if os.name=='nt' else 'linux'
             run('build-current-selected-mask-kernel',[gcc,'-std=c17','-O2','-Wall','-Wextra','-Werror','-shared',*([] if os.name=='nt' else ['-fPIC']),'-I'+str(Path(os.environ['JAVA_HOME'])/'include'),'-I'+str(Path(os.environ['JAVA_HOME'])/'include'/platform),root/bindings['nativePath'],'-o',library])
-            name='GuavaMinMaxMaskProjectionProof';provider=execute('projection-provider-java',name,'com.google.common.collect.MinMaxPriorityQueue','java');owned=execute('projection-owned-java',name,'com.m3.collections.guava.M3MinMaxPriorityQueue','java');jni=execute('projection-owned-native-required',name,'com.m3.collections.guava.M3MinMaxPriorityQueue','native',native);assert provider==owned==jni
+            name='GuavaMinMaxMaskProjectionProof';provider=execute('projection-provider-java',name,'com.google.common.collect.MinMaxPriorityQueue','java');owned=execute('projection-owned-java',name,'jdk.m3.collections.guava.M3MinMaxPriorityQueue','java');jni=execute('projection-owned-native-required',name,'jdk.m3.collections.guava.M3MinMaxPriorityQueue','native',native);assert provider==owned==jni
             result={'status':'PASS','job':'jni','provider':provider,'ownedJava':owned,'ownedNativeRequired':jni,'nativeQueueCRUDClaim':False}
     result['commands']=records;encoded=(json.dumps(result,indent=2)+'\n').encode('utf-8')
     if len(encoded)>gate():raise RuntimeError('result exceeds remaining output budget')

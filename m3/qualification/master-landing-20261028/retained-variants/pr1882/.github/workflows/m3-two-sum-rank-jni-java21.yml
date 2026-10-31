@@ -6,11 +6,11 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-two-sum-rank-jni-java21.yml'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java'
       - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3SortedTwoSumBatchContract.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3SortedTwoSumBatchTest.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3SortedTwoSumBatchContract.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3SortedTwoSumBatchTest.java'
       - 'm3/collections/qualification/two-sum-jni-20261027/**'
 
 permissions:
@@ -36,11 +36,11 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '8ba40d4b547f53bcf47ec0fb52eda6085a27efc9'
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = '77c6f8b98e39d9e22513a9c1cf5108cf82a0e866'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = '8ba40d4b547f53bcf47ec0fb52eda6085a27efc9'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '77c6f8b98e39d9e22513a9c1cf5108cf82a0e866'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '2afe176456419c5d6f4a29d2bfa2ce8f24eed1c4'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3SortedTwoSumBatchContract.java)" = '7e6cd5cdef950fda1067451181279510d02ba219'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3SortedTwoSumBatchTest.java)" = 'e0a03fadb838eb6bc82f1175134fee445150eabe'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3SortedTwoSumBatchContract.java)" = '81fa89b55d12d3d9d391424602dad690f53ac200'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3SortedTwoSumBatchTest.java)" = 'c20f602faacc12a4eeffb1c79d5e18423c16372c'
       - name: Compile real M3 rank-owner Java 21 and oracle strictly
         shell: bash
         run: |
@@ -48,14 +48,14 @@ jobs:
           mkdir -p "$RUNNER_TEMP/m3-two-sum/classes"
           javac --release 21 -Xlint:all -Werror \
             -d "$RUNNER_TEMP/m3-two-sum/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
-            m3/collections/src/test/java/com/m3/collections/M3SortedTwoSumBatchContract.java
+            m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3SortedTwoSumBatchContract.java
       - name: Execute Java fallback with JNI unavailable
         shell: bash
         run: |
           set -euo pipefail
           java -Xcheck:jni -cp "$RUNNER_TEMP/m3-two-sum/classes" \
-            com.m3.collections.M3SortedTwoSumBatchContract \
+            jdk.m3.collections.M3SortedTwoSumBatchContract \
             | tee "$RUNNER_TEMP/m3-two-sum/java-fallback.txt"
           grep -Eq '^PASS M3_SORTED_TWO_SUM_BATCH checks=[0-9]+ native=false$' \
             "$RUNNER_TEMP/m3-two-sum/java-fallback.txt"
@@ -76,12 +76,12 @@ jobs:
           java -Xcheck:jni -Dm3.collections.rank.native=true \
             -Djava.library.path="$RUNNER_TEMP/m3-two-sum" \
             -cp "$RUNNER_TEMP/m3-two-sum/classes" \
-            com.m3.collections.M3SortedTwoSumBatchContract \
+            jdk.m3.collections.M3SortedTwoSumBatchContract \
             | tee "$RUNNER_TEMP/m3-two-sum/native-normal.txt"
           java -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
             -Djava.library.path="$RUNNER_TEMP/m3-two-sum" \
             -cp "$RUNNER_TEMP/m3-two-sum/classes" \
-            com.m3.collections.M3SortedTwoSumBatchContract \
+            jdk.m3.collections.M3SortedTwoSumBatchContract \
             | tee "$RUNNER_TEMP/m3-two-sum/native-interpreter.txt"
           grep -Eq '^PASS M3_SORTED_TWO_SUM_BATCH checks=[0-9]+ native=true$' \
             "$RUNNER_TEMP/m3-two-sum/native-normal.txt"

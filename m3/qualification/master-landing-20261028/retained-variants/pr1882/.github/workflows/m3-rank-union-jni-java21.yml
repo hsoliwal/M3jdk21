@@ -5,10 +5,10 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-rank-union-jni-java21.yml'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java'
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java'
       - 'm3/collections/src/main/native/collections/m3_long_rank_batch_jni.c'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LongUnion*.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongUnion*.java'
       - 'm3/collections/qualification/m3-rank-union-jni-20261025/**'
 
 permissions:
@@ -34,12 +34,12 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java)" = '201c51afbf5706a146fa0cef9317e08fc4e9a58a'
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3LongRankIndex.java)" = '00aa416af3cf08ebae2db8ef19cac66fe5f8c29a'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java)" = '201c51afbf5706a146fa0cef9317e08fc4e9a58a'
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3LongRankIndex.java)" = '00aa416af3cf08ebae2db8ef19cac66fe5f8c29a'
           test "$(git hash-object m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c)" = '7ea1afda505894b9cc1294bfc1c0a74a58ea0587'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongUnionValuesContract.java)" = '2aa7692d5480f557a976374509e4bc47915ffb0a'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongUnionValuesTest.java)" = '308e29580d9f22c7648b9af0bf01d0755f4ae836'
-          test "$(git hash-object m3/collections/src/test/java/com/m3/collections/M3LongUnionLegacyContract.java)" = '75b2ae741d4991de4d44055c753264ac442b474d'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongUnionValuesContract.java)" = 'c08a55c0ae65356f59e27a3162abd382c0cf6e0a'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongUnionValuesTest.java)" = '71fa656ccc1e8566bc7c64728a07a99115b57584'
+          test "$(git hash-object m3/collections/src/test/java/jdk/m3/collections/M3LongUnionLegacyContract.java)" = '1c7491f76f0e6977229fbf9f8d77716fcdddf069'
       - name: Compile actual Java21 source owner and all old plus new JNI exports
         shell: bash
         run: |
@@ -48,33 +48,33 @@ jobs:
           javac --release 21 -Xlint:all -Werror \
             -h "$RUNNER_TEMP/m3union/headers" \
             -d "$RUNNER_TEMP/m3union/classes" \
-            m3/collections/src/main/java/com/m3/collections/M3LongRankBatchNative.java \
-            m3/collections/src/test/java/com/m3/collections/M3LongUnionValuesContract.java \
-            m3/collections/src/test/java/com/m3/collections/M3LongUnionLegacyContract.java
+            m3/collections/src/main/java/jdk/m3/collections/M3LongRankBatchNative.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3LongUnionValuesContract.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3LongUnionLegacyContract.java
           cc -std=c17 -O2 -Wall -Wextra -Werror \
             -fsanitize=undefined -fno-sanitize-recover=undefined \
             -fPIC -shared \
             -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/linux" \
-            -include "$RUNNER_TEMP/m3union/headers/com_m3_collections_M3LongRankBatchNative.h" \
+            -include "$RUNNER_TEMP/m3union/headers/jdk_m3_collections_M3LongRankBatchNative.h" \
             m3/collections/src/main/native/collections/m3_long_rank_batch_jni.c \
             -o "$RUNNER_TEMP/m3union/native/libm3rankbatch.so"
           nm -D "$RUNNER_TEMP/m3union/native/libm3rankbatch.so" \
-            | grep -q 'Java_com_m3_collections_M3LongRankBatchNative_unionValues0'
+            | grep -q 'Java_jdk_m3_collections_M3LongRankBatchNative_unionValues0'
       - name: Strict Java, checked JNI and interpreter differential
         shell: bash
         run: |
           set -euo pipefail
           cp="$RUNNER_TEMP/m3union/classes"
-          java -cp "$cp" com.m3.collections.M3LongUnionValuesContract java | tee "$RUNNER_TEMP/m3union/java.txt"
-          java -Xint -cp "$cp" com.m3.collections.M3LongUnionValuesContract java | tee "$RUNNER_TEMP/m3union/java-int.txt"
+          java -cp "$cp" jdk.m3.collections.M3LongUnionValuesContract java | tee "$RUNNER_TEMP/m3union/java.txt"
+          java -Xint -cp "$cp" jdk.m3.collections.M3LongUnionValuesContract java | tee "$RUNNER_TEMP/m3union/java-int.txt"
           grep -Fxq 'PASS M3_UNION_VALUES_CONTRACT assertions=7200 native=false' "$RUNNER_TEMP/m3union/java.txt"
           cmp "$RUNNER_TEMP/m3union/java.txt" "$RUNNER_TEMP/m3union/java-int.txt"
           java -Xcheck:jni -Dm3.collections.rank.native=true \
             -Djava.library.path="$RUNNER_TEMP/m3union/native" \
-            -cp "$cp" com.m3.collections.M3LongUnionValuesContract native | tee "$RUNNER_TEMP/m3union/native.txt"
+            -cp "$cp" jdk.m3.collections.M3LongUnionValuesContract native | tee "$RUNNER_TEMP/m3union/native.txt"
           java -Xint -Xcheck:jni -Dm3.collections.rank.native=true \
             -Djava.library.path="$RUNNER_TEMP/m3union/native" \
-            -cp "$cp" com.m3.collections.M3LongUnionValuesContract native | tee "$RUNNER_TEMP/m3union/native-int.txt"
+            -cp "$cp" jdk.m3.collections.M3LongUnionValuesContract native | tee "$RUNNER_TEMP/m3union/native-int.txt"
           grep -Fxq 'PASS M3_UNION_VALUES_CONTRACT assertions=10797 native=true' "$RUNNER_TEMP/m3union/native.txt"
           cmp "$RUNNER_TEMP/m3union/native.txt" "$RUNNER_TEMP/m3union/native-int.txt"
       - name: Reject absent additive symbol but retain old JNI library fallback
@@ -93,7 +93,7 @@ jobs:
           java -Xcheck:jni -Dm3.collections.rank.native=true \
             -Djava.library.path="$RUNNER_TEMP/m3union/legacy" \
             -cp "$RUNNER_TEMP/m3union/classes" \
-            com.m3.collections.M3LongUnionLegacyContract | tee "$RUNNER_TEMP/m3union/legacy.txt"
+            jdk.m3.collections.M3LongUnionLegacyContract | tee "$RUNNER_TEMP/m3union/legacy.txt"
           grep -Fxq 'PASS M3_UNION_LEGACY_ABI_FALLBACK' "$RUNNER_TEMP/m3union/legacy.txt"
       - name: Retain bounded execution receipts
         if: ${{ always() }}

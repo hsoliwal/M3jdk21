@@ -4,7 +4,7 @@ canonical	hsoliwal/com.synexia:m3/inline-guava-multiset-api-recipe-20261027
 original_source	google/guava:v33.4.8/guava/src/com/google/common/collect/Multiset.java
 original_license	Apache-2.0_GuavaAuthors
 api_sha256	1cf974b8e73c72e0885872a0746e34e187bc020a7e19a4e5074e73ac05d4e973
-test_sha256	15f5c810429b33a04838739da469632929e99cbfff95f9c9eedd01e0d286dad3
+test_sha256	099245bbb637d2d2589e5b1ea25fb875f7a0b3c4d096bad83f6648fe251930de
 m3_owner	com.m3.collections.guava.M3HashMultiset
 m3_primitive_payload	Object[]_elements;int[]_counts_hashes_gens_index
 guava_dependency	TEST_ONLY

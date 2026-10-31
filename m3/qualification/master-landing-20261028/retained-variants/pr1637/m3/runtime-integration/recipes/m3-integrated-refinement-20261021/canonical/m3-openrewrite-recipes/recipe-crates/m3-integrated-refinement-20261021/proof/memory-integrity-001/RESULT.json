@@ -1,0 +1,155 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "event": "12db3d3bea4b8a5b958ed799934c0bbe33ea8b416a47f45d803495f1e4b11acf",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/test-classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/12db3d3bea4b8a5b958ed799934c0bbe33ea8b416a47f45d803495f1e4b11acf.json",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-001/event-001.log",
+        "sha256": "f4e36eff5bbb0c3399c71a44ca1c012dfc300451be00ba6d9683f7707ca30256"
+      }
+    },
+    {
+      "event": "c876494cd3b2b01d905bb5a623ad97981e9ff113ebc0740978b0a4206491de2d",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/test-classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/c876494cd3b2b01d905bb5a623ad97981e9ff113ebc0740978b0a4206491de2d.json",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-001/event-002.log",
+        "sha256": "37783e1e7085760ee648c92bea53d980f121d6ab6fca2565eb9a046d38eba922"
+      }
+    },
+    {
+      "event": "f23628de2938b1bb2a2e66ef689a40ab54a4cadca2af9d0c7158a5707f51fbbc",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/test-classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/f23628de2938b1bb2a2e66ef689a40ab54a4cadca2af9d0c7158a5707f51fbbc.json",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-001/event-003.log",
+        "sha256": "076bb50a7c67b3e3ca07bb2f9eacd59721fa2234fd02c73d28eca6d73174180c"
+      }
+    },
+    {
+      "event": "101b737403729e6eac9106693b5ed4e7e5c38f74499bf45221f8bd67712c6ef9",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/test-classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/101b737403729e6eac9106693b5ed4e7e5c38f74499bf45221f8bd67712c6ef9.json",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-001/event-004.log",
+        "sha256": "74245a2b73624936bfa1a6ea7ac67352f9011269fea58fe90f4ee99e625dcb60"
+      }
+    },
+    {
+      "event": "c4be4af96ddd29d4e3d401831a277a76a6057f52696b5e579625eef0bf899eaf",
+      "command": [
+        "/tmp/m3-build-tools/jdk-21.0.12.1+1/bin/java",
+        "-cp",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/target/test-classes:/tmp/m3-build-m2/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+        "jdk.internal.m3.rewrite.memory.M3RecoveryMemory",
+        "check",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events/c4be4af96ddd29d4e3d401831a277a76a6057f52696b5e579625eef0bf899eaf.json",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021",
+        "/workspace/scratch/206049dfb270/m3/m3-openrewrite-recipes/recipe-crates/m3-integrated-refinement-20261021/memory/events"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "proof/memory-integrity-001/event-005.log",
+        "sha256": "764d710744e15e5ba2fb2f96959a17b9c99bf325f6fdfabbe7960781e842f68e"
+      }
+    }
+  ],
+  "unique_event_artifacts_verified": 55,
+  "artifact_hashes": {
+    "proof/bootstrap-003/runner.py": "5460deca84afdb6e44276c8e474c21a5749951db32e4c8b9dfb97c0584296b81",
+    "proof/bootstrap-001/runner.py": "2b0a17522fd58999bc40cd74f0bd3831510ce4ee5d56ba1e85c133653924b9b1",
+    "proof/bootstrap-002/runner.py": "9862fd550e4b03422464e4e21ec35a15a150eb3774477bb097b2836858b8a1ae",
+    "proof/bootstrap-environment/maven-proxy-settings.xml": "ed786afd8b3c7e5844ffec65e522ff93437d67832f5276e524927125d29b50a3",
+    "proof/bootstrap-environment/SOURCE_MANIFEST_PROXY.json": "115abf5214c7a152866f064677cafa6c8c7aec046b8c1584e4c4ff8ab063263d",
+    "proof/bootstrap-environment/SOURCE_MANIFEST_BEFORE.json": "fadc1720578c96c6ba53e8b20c9a7d1ae43796c0766edbfbef7ff9af0ddbed6f",
+    "proof/bootstrap-001/RESULT.json": "3af7830073a52c1764a1a63ee8d609ec9226ec66f40807bcdc1ee31af95ab036",
+    "proof/bootstrap-001/maven.log": "f3ef2d31dfd7ae49e1c86cb0ccc6b473bc896faf5d692c03327a18af33304c77",
+    "proof/bootstrap-002/RESULT.json": "2cc16a3bbec4e26bea392e2e30aff714b75115adc90ed0f3f73d15279e86de4a",
+    "proof/bootstrap-002/maven.log": "e8ef6fb122afa5f9988369bc585fc9a76fdbc944de00f89721eea72fb4f2518a",
+    "proof/bootstrap-003/RESULT.json": "af0aa401326941f773ebf90b1d2762bd0a35309838e7d20fc421a11cc630de59",
+    "proof/bootstrap-003/maven.log": "6945a49efc73cc0151938b48d4dc227088379d88229636b756a8276bd7ee17f5",
+    "proof/bootstrap-004/runner.py": "04f5f26f647e9840ab6ff12b723fe866148196e0569128697983a77b37f51def",
+    "proof/bootstrap-environment/SOURCE_MANIFEST_AFTER.json": "4cfad64c775bd32cb83ffbfd69ba2800bb2e19c80dc61bee1d6c1f40ca209cec",
+    "proof/bootstrap-004/RESULT.json": "3a2b6769265c3809cba8eafbd12f6b0e738404308ee07178ff3c214296529b81",
+    "proof/bootstrap-004/maven.log": "351ab258b2aa410682d9eaee5dfe20570e5ea6c044dd03a580f8bf51a5a5ba51",
+    "proof/sdk-002-offline/inputs/m3-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-integrated-refinement-20261021.yml": "edb738beb0be2adf17bbcb1a68ff380b5783822380303767f5b5dbc9286b7092",
+    "proof/target-observations-001/collections/CORRECTION_OBSERVATIONS.json": "c87b74f783fa373ec1e3d20f095642b9080f1a273596f943c54aa7091233b265",
+    "proof/target-observations-001/collections/evidence/BASELINE_ENDPOINT_PRIVATE.log": "996881961667ddf64daec46c8af81a53aba0b2d5d0b6af9fb0eb64b03f221ff9",
+    "proof/target-observations-001/collections/evidence/BASELINE_ENDPOINT_FACADE.log": "1573f5f40170680a3219157ed0bee411a0d30e2014c9c21ff04fc915041e3b54",
+    "proof/target-observations-001/collections/evidence/BASELINE_MASKED_SORT_JAVA.log": "3ea0517db985a4ba1e863c92ff6863b4a76aadcd2dc3396e1b619aa1aa015582",
+    "proof/target-observations-001/collections/evidence/BASELINE_ALLOCATION_JAVA.log": "95948a932663fafc0a43056ab038de5c93ff70782157d61b2d5f716aa6c67c3c",
+    "proof/target-observations-001/collections/evidence/BASELINE_PACK_HYDRATED.log": "de06f709023c0c8a5cd1534c54e41e57374eee3904f3a6e9009d45f957333f9d",
+    "proof/target-observations-001/collections/baseline/pack/native-symbols.log": "a1d61f611350d03c87b8eb45c40b66170d9de955f6bf84beadaaf6b9f11ab242",
+    "proof/target-observations-001/collections/evidence/CANDIDATE_ABI_REFUSALS.log": "4813f0bdbc5a4864283aec3b8233fd2aeb0e919dfd7e177d97efa84b40e12ca2",
+    "proof/target-observations-001/collections/evidence/initial-missing-source-launcher/BASELINE_OWNING_MAVEN.log": "6e259f013ed936361b128cba47ba56e07dfcc532a2a026624139fb9dc5f1f532",
+    "proof/target-observations-001/collections/evidence/BASELINE_LAUNCHER_SOURCE_REFUSAL.log": "56535ba73ec40a9d55ff1a6298247e5ae45fc802d97bb14ede99ec3318264be0",
+    "proof/target-observations-001/collections/evidence/LAUNCHER_SOURCE_COMPARISON.json": "1e5771655825b63a3b6bf748dc641a8e245317b7cc45fb39985d7d3a5da7fdab",
+    "proof/target-observations-001/collections/evidence/initial-direct-dns-refusal/BUILD_apiguardian-api.log": "b905696c1ff23328bf9b9d656c07bc9f0e1018f82792d1f2c33e7b5830e89d2c",
+    "proof/target-observations-001/collections/evidence/initial-proxy-trust-refusal/BUILD_apiguardian-api.log": "b8e8371390d4b10fcf405ab5c4b46b9bce1beb14e05e5bc12372aff8d98d70a0",
+    "proof/target-observations-001/collections/evidence/SOURCE_DEPENDENCY_BUILD.json": "77009be159fd25e9b927c28682b19655816a81eca7984249025a3af49db4ef17",
+    "proof/sdk-001/RESULT.json": "cc52eb45e978880fc4c7d3ad980e3a0a5076d4f86cf2014863424d06a898fec8",
+    "proof/sdk-002-offline/RESULT.json": "a1abf22e70da8c9ea163546910a24b0d6bd65fa08da6fc51329773f421d1287d",
+    "proof/target-observations-001/SOURCE_AFTER.json": "9c333f7378a52215a6839d11595999b05a5fa6ce59ccc64acaee51512d940f7e",
+    "proof/target-observations-001/SOURCE_BEFORE.json": "d4bad36528189340ab66041703b3276ee696b9d3b712fe631acf72ca4b10b14a",
+    "proof/sdk-002-offline/maven.log": "1aa44bc2cb3e77e792f3109716214127123c4258fc9de4c5aa5676afed3f0d89",
+    "proof/target-observations-001/scheduling/history/authoring-proof-01/test/jdk/java/util/concurrent/ProgressJob/M3ScheduledProgress.java": "a57df3b673802259ae630eb083dcd1f3feb3e6c32d832afadcda4cb8370f2dd2",
+    "proof/target-observations-001/scheduling/history/authoring-proof-01/MEMORY_EVENT.json": "abf58265fa7d9e7efbcf8cf2e994453f4393bebd59c46ebcf140d341cc7e63a5",
+    "proof/sdk-002-offline/receiver/test/jdk/java/util/concurrent/ProgressJob/M3ScheduledProgress.java": "07e0d48234769058b425c01777bfadce3af4bb1633d1ba66e78605fd12d9c480",
+    "proof/target-observations-001/scheduling/authoring-proof-01/RESULT.json": "7d494a0ad27a9491a292bbcde573dd831b5b5a5eb62a50c1ea6b76dd5fb8da92",
+    "proof/target-observations-001/scheduling/authoring-proof-01/mixed-candidate-M3ScheduledProgress.stderr.log": "c226aa78ff1aebf46cee12ae71a55ab7b829535c85bd37d57dbdf2291ddf39b6",
+    "proof/target-observations-001/scheduling/emitted-target-proof-01/RESULT.json": "d3d012bf73991c9b1bd1dfcd5f2227cd02e090dc199b0bfc43b217e108cda1d8",
+    "proof/target-observations-001/scheduling/emitted-target-proof-01/mixed-candidate-M3ScheduledProgress.stdout.log": "f7c16424b11709eb295acb65cbb51d009befb6a321302b978701814509f251fd",
+    "proof/target-observations-001/eclipse/ECLIPSE_DONOR_CORRECTION.diff": "0b7837df5183d97028648a392538a521eb06d63388ed09b064ba921df1a2ed66",
+    "proof/target-observations-001/eclipse/ECLIPSE_API_COMPARISON.json": "6c4f487369b69d1b970aa02a5658cc4bb661065f114f36755169a4814baabaa5",
+    "proof/target-observations-001/eclipse/eclipse-contract-donor-01/RESULT.json": "95787030a492d507f898830f1fbbc4fd8227883751020cd9497d0e30882bbaf7",
+    "proof/target-observations-001/eclipse/eclipse-contract-donor-01/src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobsCompatibilityTest.java": "477ff26a926afec5e678f88814bf0b389198474ce166914259da51b8be6273ab",
+    "proof/target-observations-001/eclipse/eclipse-contract-candidate-02/RESULT.json": "2aa402488bd391f1f6f6eba259d12a67ce1972ec41a133f657bb079b822b570f",
+    "proof/target-observations-001/eclipse/eclipse-current-candidate-03/RESULT.json": "f6fdb273fdd89ada70af7b151b1794e24874d052648226df87780fd39309558f",
+    "proof/target-observations-001/eclipse/eclipse-evaluation/RESULT.json": "23456ec5686ac441b78f3597961bd45313094b0e5c4615b2434e943c37d56a2a",
+    "proof/target-observations-001/eclipse/eclipse-evaluation/maven-original-donor.log": "2954b2e87319baf5e864136157ca178b5c6fa27e6ce2c01b1a6e980ef360c030",
+    "proof/target-observations-001/eclipse/ECLIPSE_EXECUTED_COMMANDS.json": "3aeeb83b2e8c1736160893de3ecae71e826117ce69234ab162209b5a53a544a7",
+    "proof/target-observations-001/eclipse/eclipse-contract-donor-01/maven.log": "1b6e0c8d7ebfde301d6b127a1bc7d66c0c793f07bcb1644c0f02e1e38074f275",
+    "proof/target-observations-001/eclipse/eclipse-contract-candidate-02/maven.log": "f4b07fb672d88529a5ca80ed6ff8f5c1f17d7800ffc06e669e284b49c7596f5b",
+    "proof/target-observations-001/eclipse/eclipse-current-candidate-03/maven.log": "cbeeeae9fca6dc11abb02fb57e88807215985bc1085d720aaebda8769768e184"
+  },
+  "admission": "PENDING",
+  "scope": "actual canonical event bytes, schema, artifact and recursive parent integrity; not product admission"
+}

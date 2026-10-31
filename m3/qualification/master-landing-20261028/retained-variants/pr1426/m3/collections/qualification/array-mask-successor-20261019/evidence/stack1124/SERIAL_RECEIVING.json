@@ -132,10 +132,10 @@
     "m3/collections/qualification/array-mask-successor-20261019/test_verify_successor.py",
     "m3/collections/qualification/array-mask-successor-20261019/verify_successor.py",
     "m3/collections/recipe/state-mask-histogram-20261017/verify.sh",
-    "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java",
     "m3/collections/src/main/native/collections/m3_state_mask_histogram.c",
-    "m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java",
-    "m3/collections/src/test/java/com/m3/collections/M3StateMaskHistogramSelfTest.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java",
+    "m3/collections/src/test/java/jdk/m3/collections/M3StateMaskHistogramSelfTest.java",
     "m3/docs/name-mapping.d/m3-array-mask-lookup-20261018.json",
     "m3/qualification/string-index-reverse-20261018/collections/CONTRACT.md"
   ],
@@ -171,103 +171,103 @@
       "mode": 420,
       "mtime_ns": 1792387385952375757
     },
-    "m3/collections/src/main/java/com/m3/collections/M3TreeMap.java": {
-      "sha256": "99bffce73175a5eeeb2ea5147650f39a57926d58370d0233184e1f3a8d87ac48",
+    "m3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java": {
+      "sha256": "9641eb117b250d19c287d45bc084c0df7f03801cfc13a646c902fd3f4e63bf4c",
       "mode": 420,
       "mtime_ns": 1792387386443224706
     },
-    "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java": {
-      "sha256": "dc39f548eb2c6ccdbbb1d36a3aa66317c437050e762d2babe1f539dba56c9c92",
+    "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java": {
+      "sha256": "3827ba7e8b365e582b70f5ac53d27fe49745cb9e4ae08701084a769b30eb7163",
       "mode": 420,
       "mtime_ns": 1792387385305213352
     },
-    "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": {
-      "sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": {
+      "sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
       "mode": 420,
       "mtime_ns": 1792387383598168349
     },
-    "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java": {
-      "sha256": "ef4e4f4b7a8871cba0e631b96480ad3cf1e43640e5bf84a89cc91806df2d54d9",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java": {
+      "sha256": "4cb21dae105bbd2ca2d2772c7ba097a133e67e6de4fa77ff4deed3a354642d23",
       "mode": 420,
       "mtime_ns": 1792387383599769573
     },
-    "m3/collections/src/main/java/com/m3/collections/M3GenericCollections.java": {
-      "sha256": "0f947c225a25e42b62c7b99cdf14a4e08e90ed86003f501b1e5c3d96bb116a4b",
+    "m3/collections/src/main/java/jdk/m3/collections/M3GenericCollections.java": {
+      "sha256": "fc2750ba43a8a3c5895c807d07e6cf49cd29fbab041d045b1c80c713588a057f",
       "mode": 420,
       "mtime_ns": 1792387385953832627
     },
-    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java": {
-      "sha256": "a61a11bfce25b6c01a66c0cd48bdf7721d35d0f785b0d1247736459b9575c0b0",
+    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java": {
+      "sha256": "2d44b9f958a9526fb95aeca94b51ff2d2e8b4334be8bdefcc67dc56fd8b50ddd",
       "mode": 420,
       "mtime_ns": 1792387384677215722
     },
-    "m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java": {
+    "m3/collections/src/main/java/jdk/m3/collections/M3StateMaskArrays.java": {
       "sha256": "6c21752b4a73bc110a5f6b7aebc808d216e5df157cd67f0542065627cc88cefc",
       "mode": 420,
       "mtime_ns": 1792387383598564073
     },
-    "m3/collections/src/main/java/com/m3/collections/M3LongPredicates.java": {
-      "sha256": "59a20296306197c2c9d5878dc118716f36d94bd0e825fd430aba656f4dfe2667",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongPredicates.java": {
+      "sha256": "7f4531b36c0749a3b9a174f5de88e236492bd054d5c11237d9616eb148cfd6c8",
       "mode": 420,
       "mtime_ns": 1792387385953996850
     },
-    "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java": {
-      "sha256": "f55392f01975586e3a466cc845e7ee782cf260153320c4b11bd13ea6a5aba5ea",
+    "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java": {
+      "sha256": "e2b44bd2346d5729f3b16755c8bc96e4aea8fe9f62abde2e0f415ccc60a81a7e",
       "mode": 420,
       "mtime_ns": 1792387385302468160
     },
     "m3/collections/src/main/native/collections/m3_state_mask_histogram.c": {
-      "sha256": "2a426399b299fac7b21de78ab5938197e2b2e628b54158642c3631ee3a986033",
+      "sha256": "0673b98601d4155ac2ea2d51f972e6f23f89e7d6c3a6105d6efd84b89fce9c1d",
       "mode": 420,
       "mtime_ns": 1792387384086121188
     },
-    "m3/collections/src/test/java/com/m3/collections/M3StateMaskHistogramSelfTest.java": {
-      "sha256": "11dbbb4682fbe085b35f3dbccc11e78039c0700b47794ad0bbc244723ec6473d",
+    "m3/collections/src/test/java/jdk/m3/collections/M3StateMaskHistogramSelfTest.java": {
+      "sha256": "693bd6e7bee9d730b4104e1f15d39a0e5ec2917583f92af85d2eaddf1506b176",
       "mode": 420,
       "mtime_ns": 1792387384086351608
     },
     "m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotTest.java": {
-      "sha256": "2c1140a3537d8bd9e08c810a7d378f5bdab884e0095d3a69bea03ff4358d7f21",
+      "sha256": "5f63a74dad076901696951335d451c29ee0be44097a484ffc4850c8add8f5a75",
       "mode": 420,
       "mtime_ns": 1792387386953618244
     },
     "m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotTest.java": {
-      "sha256": "b3627c0cbac619c8929e418f82d9bb97ca4abd5019f0da20601b96d5fe36f3bb",
+      "sha256": "4dad3d95e0aed26521b8c79cbc94d5913ba456c752ae7b44e645425463cee3ea",
       "mode": 420,
       "mtime_ns": 1792387386953874502
     },
-    "m3/collections/src/test/java/com/m3/collections/M3IndexedFilterSortFusionTest.java": {
-      "sha256": "191c7b1a8ab3f85e44c8b7ee88d7989e6921a3facaab78c14ceeafeb5f0f2e9d",
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexedFilterSortFusionTest.java": {
+      "sha256": "8a79d6b9a4c1dac5beef4567608c3e2dc4b2d5ca34148b80413494900e2fec62",
       "mode": 420,
       "mtime_ns": 1792387386443639899
     },
-    "m3/collections/src/test/java/com/m3/collections/M3IndexedFilterSortFusionSelfTest.java": {
-      "sha256": "ef1b046ab5f724815155e850cbf60d97e67997a7b1039e31fc4f5324ff43efa1",
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexedFilterSortFusionSelfTest.java": {
+      "sha256": "a1ca7edb1acab9c92b5adcd4c38ece314b91439f293aef74ca3a6a36fc00d2be",
       "mode": 420,
       "mtime_ns": 1792387386443518480
     },
     "m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotSelfTest.java": {
-      "sha256": "643ee369086b7d15b60ebb5616443076a1e53e4139dd7e99729309dbe6c95fa1",
+      "sha256": "93a537d491ee3dd514065a0f7246581f194353ccead8b54225b9ba3570dbfc4d",
       "mode": 420,
       "mtime_ns": 1792387386953336038
     },
-    "m3/collections/src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java": {
-      "sha256": "7cb605353030c09dcb048b7cc44c304a24151faea325e2bd1f41f758b5cdc2bf",
+    "m3/collections/src/test/java/jdk/m3/collections/M3LongDeepFilterSelfTest.java": {
+      "sha256": "6c6dae298f7a43f89b2ec5e621dc9ef6960b2f8b848f5e3e6dc65c8fcdf1d61a",
       "mode": 420,
       "mtime_ns": 1792387386443776200
     },
     "m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotSelfTest.java": {
-      "sha256": "e0a546aa9d7116549fe022bbb332aba64c694f18f80d2674e4a08ea91d168049",
+      "sha256": "c041ae3a3308be273aa2a3794fad0437321a8fce38516772cbba6226b3b65ce2",
       "mode": 420,
       "mtime_ns": 1792387386953728807
     },
-    "m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java": {
-      "sha256": "de0be6b6fa43ea9b824db0f79106213976e94f8f7cdf6a84f15378a6c090cc37",
+    "m3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java": {
+      "sha256": "38a4258d2ea52d351140b81fe4da28d348d4be40e893ed4cadc968157316fcb0",
       "mode": 420,
       "mtime_ns": 1792387384085692876
     },
     "m3/collections/recipe/state-mask-histogram-20261017/verify.sh": {
-      "sha256": "80f8b90af15f2ea36f53f0f79aa5ae98dbcac19589b189f18679beb361f70bcb",
+      "sha256": "c78c7ce15465edd5c79a81e592ee1e8b87ff7e25b8fdeefbe8736658a6f4df7d",
       "mode": 420,
       "mtime_ns": 1792387383599635655
     },
@@ -277,7 +277,7 @@
       "mtime_ns": 1792387385953222637
     },
     "m3/collections/qualification/long-predicate-avl-20261019/RECEIPT.md": {
-      "sha256": "3b195727434f5569adc434608db13260c012bd8447188b17de6d14acf96fd388",
+      "sha256": "8e3b831d0ee82462339856705d1bbb2c3f4b10826d0e37ebc7abbe0bc2a12a11",
       "mode": 420,
       "mtime_ns": 1792387385953611841
     },
@@ -307,7 +307,7 @@
       "mtime_ns": 1792387383599266070
     },
     ".github/workflows/m3-doop-indexed-view-contracts-20261019.yml": {
-      "sha256": "02cfb1897e0a023ef25d7404d4dcc97d5d802b1ddf97342720d8dba68bce5952",
+      "sha256": "9f3b5e776c68fe316a3db4f00c39687d4b7debee3b421ed2f955b0822e8d0fef",
       "mode": 420,
       "mtime_ns": 1792387385951010782
     },
@@ -332,7 +332,7 @@
       "mtime_ns": 1792387385951327209
     },
     ".github/workflows/m3-long-filter-balanced-20261017.yml": {
-      "sha256": "c3f7313af5638e4072bc919296a28e0a0461193f365aebf305cfc5c584733c53",
+      "sha256": "7403928be13a07f75beca7d189fd5ad583538a6cd7a91e5b3d053d2a9b1e78fe",
       "mode": 420,
       "mtime_ns": 1792387385951729032
     }
@@ -368,103 +368,103 @@
       "mode": 420,
       "mtime_ns": 1792387385952375757
     },
-    "m3/collections/src/main/java/com/m3/collections/M3TreeMap.java": {
-      "sha256": "99bffce73175a5eeeb2ea5147650f39a57926d58370d0233184e1f3a8d87ac48",
+    "m3/collections/src/main/java/jdk/m3/collections/M3TreeMap.java": {
+      "sha256": "9641eb117b250d19c287d45bc084c0df7f03801cfc13a646c902fd3f4e63bf4c",
       "mode": 420,
       "mtime_ns": 1792387386443224706
     },
-    "m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java": {
-      "sha256": "dc39f548eb2c6ccdbbb1d36a3aa66317c437050e762d2babe1f539dba56c9c92",
+    "m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java": {
+      "sha256": "3827ba7e8b365e582b70f5ac53d27fe49745cb9e4ae08701084a769b30eb7163",
       "mode": 420,
       "mtime_ns": 1792387385305213352
     },
-    "m3/collections/src/main/java/com/m3/collections/M3LongIndexProjection.java": {
-      "sha256": "77ef7d6197ef936f5ae9f62c35accf2f5f3ff690dcc55ca3fd4d8f545a007545",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongIndexProjection.java": {
+      "sha256": "6be07c18dbbbe9ae259ff85821bb3f4ec666fddd820b0950f4115c4256f45deb",
       "mode": 420,
       "mtime_ns": 1792387383598168349
     },
-    "m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java": {
-      "sha256": "9b4b095f7f51b27a76e6a56cda60c6662cbbf60bcb8b55655f82c127b4451af6",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java": {
+      "sha256": "e5eb87e3d8dd3f0e0efcae9159eb4862a9b727d9ce3e498a314b43a2ee07a3ad",
       "mode": 420,
       "mtime_ns": 1792388029364295151
     },
-    "m3/collections/src/main/java/com/m3/collections/M3GenericCollections.java": {
-      "sha256": "0f947c225a25e42b62c7b99cdf14a4e08e90ed86003f501b1e5c3d96bb116a4b",
+    "m3/collections/src/main/java/jdk/m3/collections/M3GenericCollections.java": {
+      "sha256": "fc2750ba43a8a3c5895c807d07e6cf49cd29fbab041d045b1c80c713588a057f",
       "mode": 420,
       "mtime_ns": 1792387385953832627
     },
-    "m3/collections/src/main/java/com/m3/collections/M3FilteredViews.java": {
-      "sha256": "a61a11bfce25b6c01a66c0cd48bdf7721d35d0f785b0d1247736459b9575c0b0",
+    "m3/collections/src/main/java/jdk/m3/collections/M3FilteredViews.java": {
+      "sha256": "2d44b9f958a9526fb95aeca94b51ff2d2e8b4334be8bdefcc67dc56fd8b50ddd",
       "mode": 420,
       "mtime_ns": 1792387384677215722
     },
-    "m3/collections/src/main/java/com/m3/collections/M3StateMaskArrays.java": {
+    "m3/collections/src/main/java/jdk/m3/collections/M3StateMaskArrays.java": {
       "sha256": "6c21752b4a73bc110a5f6b7aebc808d216e5df157cd67f0542065627cc88cefc",
       "mode": 420,
       "mtime_ns": 1792387383598564073
     },
-    "m3/collections/src/main/java/com/m3/collections/M3LongPredicates.java": {
-      "sha256": "59a20296306197c2c9d5878dc118716f36d94bd0e825fd430aba656f4dfe2667",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongPredicates.java": {
+      "sha256": "7f4531b36c0749a3b9a174f5de88e236492bd054d5c11237d9616eb148cfd6c8",
       "mode": 420,
       "mtime_ns": 1792387385953996850
     },
-    "m3/collections/src/main/java/com/m3/collections/M3MutableFilteredViews.java": {
-      "sha256": "f55392f01975586e3a466cc845e7ee782cf260153320c4b11bd13ea6a5aba5ea",
+    "m3/collections/src/main/java/jdk/m3/collections/M3MutableFilteredViews.java": {
+      "sha256": "e2b44bd2346d5729f3b16755c8bc96e4aea8fe9f62abde2e0f415ccc60a81a7e",
       "mode": 420,
       "mtime_ns": 1792387385302468160
     },
     "m3/collections/src/main/native/collections/m3_state_mask_histogram.c": {
-      "sha256": "21ff3a8dade438a819d411fba96a6cb4ee8ddbd4c568409686137c42524e41bf",
+      "sha256": "05b9dd651f4c4b8c6759bd06bb3bf3107199be0d39c6c86daebd5e1e4fd8c111",
       "mode": 420,
       "mtime_ns": 1792388029364718075
     },
-    "m3/collections/src/test/java/com/m3/collections/M3StateMaskHistogramSelfTest.java": {
-      "sha256": "3386e196bccd356dd022a5dfa50e67cda6887aef08ff7b738703230cc37b37b6",
+    "m3/collections/src/test/java/jdk/m3/collections/M3StateMaskHistogramSelfTest.java": {
+      "sha256": "1c35603d42754411a6d5c068ae2b19cad3dde9ae2605ce5b15222d33cc95d2d6",
       "mode": 420,
       "mtime_ns": 1792388029365223972
     },
     "m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotTest.java": {
-      "sha256": "2c1140a3537d8bd9e08c810a7d378f5bdab884e0095d3a69bea03ff4358d7f21",
+      "sha256": "5f63a74dad076901696951335d451c29ee0be44097a484ffc4850c8add8f5a75",
       "mode": 420,
       "mtime_ns": 1792387386953618244
     },
     "m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotTest.java": {
-      "sha256": "b3627c0cbac619c8929e418f82d9bb97ca4abd5019f0da20601b96d5fe36f3bb",
+      "sha256": "4dad3d95e0aed26521b8c79cbc94d5913ba456c752ae7b44e645425463cee3ea",
       "mode": 420,
       "mtime_ns": 1792387386953874502
     },
-    "m3/collections/src/test/java/com/m3/collections/M3IndexedFilterSortFusionTest.java": {
-      "sha256": "191c7b1a8ab3f85e44c8b7ee88d7989e6921a3facaab78c14ceeafeb5f0f2e9d",
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexedFilterSortFusionTest.java": {
+      "sha256": "8a79d6b9a4c1dac5beef4567608c3e2dc4b2d5ca34148b80413494900e2fec62",
       "mode": 420,
       "mtime_ns": 1792387386443639899
     },
-    "m3/collections/src/test/java/com/m3/collections/M3IndexedFilterSortFusionSelfTest.java": {
-      "sha256": "ef1b046ab5f724815155e850cbf60d97e67997a7b1039e31fc4f5324ff43efa1",
+    "m3/collections/src/test/java/jdk/m3/collections/M3IndexedFilterSortFusionSelfTest.java": {
+      "sha256": "a1ca7edb1acab9c92b5adcd4c38ece314b91439f293aef74ca3a6a36fc00d2be",
       "mode": 420,
       "mtime_ns": 1792387386443518480
     },
     "m3/collections/src/test/java/com/m3/collections/M3MutableFilteredSlotSelfTest.java": {
-      "sha256": "643ee369086b7d15b60ebb5616443076a1e53e4139dd7e99729309dbe6c95fa1",
+      "sha256": "93a537d491ee3dd514065a0f7246581f194353ccead8b54225b9ba3570dbfc4d",
       "mode": 420,
       "mtime_ns": 1792387386953336038
     },
-    "m3/collections/src/test/java/com/m3/collections/M3LongDeepFilterSelfTest.java": {
-      "sha256": "7cb605353030c09dcb048b7cc44c304a24151faea325e2bd1f41f758b5cdc2bf",
+    "m3/collections/src/test/java/jdk/m3/collections/M3LongDeepFilterSelfTest.java": {
+      "sha256": "6c6dae298f7a43f89b2ec5e621dc9ef6960b2f8b848f5e3e6dc65c8fcdf1d61a",
       "mode": 420,
       "mtime_ns": 1792387386443776200
     },
     "m3/collections/src/test/java/com/m3/collections/M3ReadonlyFilteredSlotSelfTest.java": {
-      "sha256": "e0a546aa9d7116549fe022bbb332aba64c694f18f80d2674e4a08ea91d168049",
+      "sha256": "c041ae3a3308be273aa2a3794fad0437321a8fce38516772cbba6226b3b65ce2",
       "mode": 420,
       "mtime_ns": 1792387386953728807
     },
-    "m3/collections/src/test/java/com/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java": {
-      "sha256": "57dcca5226299fe29f6c116f83bff76040a1c7483e5671d425c0832a1c016a4a",
+    "m3/collections/src/test/java/jdk/m3/collections/M3LongBitmapFilteredSnapshotSelfTest.java": {
+      "sha256": "5104231f3136b0611935a48438bc86f854686e03fe38787eb35d65efd9d56ff3",
       "mode": 420,
       "mtime_ns": 1792388029364996737
     },
     "m3/collections/recipe/state-mask-histogram-20261017/verify.sh": {
-      "sha256": "7e9da25b442bd32caab1c4f441a64a7f6d06158e3effab549fae545e7de3b3fa",
+      "sha256": "ac361bcad8d89d2a5ba35a568a05e6e1f05695fdc42d8e5f0e741c1900b920f2",
       "mode": 420,
       "mtime_ns": 1792388029613435109
     },
@@ -474,17 +474,17 @@
       "mtime_ns": 1792387385953222637
     },
     "m3/collections/qualification/long-predicate-avl-20261019/RECEIPT.md": {
-      "sha256": "3b195727434f5569adc434608db13260c012bd8447188b17de6d14acf96fd388",
+      "sha256": "8e3b831d0ee82462339856705d1bbb2c3f4b10826d0e37ebc7abbe0bc2a12a11",
       "mode": 420,
       "mtime_ns": 1792387385953611841
     },
     "m3/collections/qualification/array-mask-successor-20261019/CATEGORY_REVIEW.tsv": {
-      "sha256": "0b52dd54299d53a058ba4b80f14e12433b213ec89d1edbe5d31caa1dfc41ee70",
+      "sha256": "ca26fca4eff016266b2669df382a8c3679b73185767dfa61d0896d6cf304d1b3",
       "mode": 420,
       "mtime_ns": 1792388029611502306
     },
     "m3/collections/qualification/array-mask-successor-20261019/SUCCESSOR.tsv": {
-      "sha256": "ad03213f94ae8b591ab06a75b8b1bc6a515d38609392e2de1e31bd2673bfdd49",
+      "sha256": "cce9759e40ab9c513da9c2395b362d03ccb6d6876980d600b4dfd281091b4822",
       "mode": 420,
       "mtime_ns": 1792388029612216090
     },
@@ -494,7 +494,7 @@
       "mtime_ns": 1792388029612586416
     },
     "m3/collections/qualification/array-mask-successor-20261019/verify_successor.py": {
-      "sha256": "fe98891719959e16dee0422fc2a7306b276dc6405672db6395a17d917d733faa",
+      "sha256": "829119e215181e55349c6049e74f3817ce76c7db857b615ced1243b6115d73a0",
       "mode": 420,
       "mtime_ns": 1792388029613004574
     },
@@ -534,17 +534,17 @@
       "mtime_ns": 1792387388529824746
     },
     ".github/workflows/m3-synexia-collection-receiver-20261018.yml": {
-      "sha256": "745988da4cd74b583de3fe7133c1f972471a940681aca248e4b5acc14bc59576",
+      "sha256": "4c6a68eabacfb2436ea8103bde72916cff3c01eda564c5848e7b8a8ed18f7646",
       "mode": 420,
       "mtime_ns": 1792388029610952495
     },
     ".github/workflows/m3-doop-indexed-view-contracts-20261019.yml": {
-      "sha256": "02cfb1897e0a023ef25d7404d4dcc97d5d802b1ddf97342720d8dba68bce5952",
+      "sha256": "9f3b5e776c68fe316a3db4f00c39687d4b7debee3b421ed2f955b0822e8d0fef",
       "mode": 420,
       "mtime_ns": 1792387385951010782
     },
     ".github/workflows/m3-long-bitmap-cache-20261017.yml": {
-      "sha256": "c6c532068ada01d8ff84559a55b62bb5b5650c360c9aaf0905d5e1e16fcf8e35",
+      "sha256": "03c4bcdfb2d2341b5c0d79396e7b9a1add7b9cb6e77bc5e07f688a97d108c375",
       "mode": 420,
       "mtime_ns": 1792388029609933821
     },
@@ -554,7 +554,7 @@
       "mtime_ns": 1792387385951541966
     },
     ".github/workflows/m3-state-mask-histogram-20261017.yml": {
-      "sha256": "82aa36d50393f6b1c1c471ce01189c376c1ba9e3f46a816bc4bb4db7c69b32d9",
+      "sha256": "f674ff7f7b15d20b95abd4e775e105c98129862955513a7a1673f5ea7484c793",
       "mode": 420,
       "mtime_ns": 1792388029610517052
     },
@@ -564,7 +564,7 @@
       "mtime_ns": 1792387385951327209
     },
     ".github/workflows/m3-long-filter-balanced-20261017.yml": {
-      "sha256": "c3f7313af5638e4072bc919296a28e0a0461193f365aebf305cfc5c584733c53",
+      "sha256": "7403928be13a07f75beca7d189fd5ad583538a6cd7a91e5b3d053d2a9b1e78fe",
       "mode": 420,
       "mtime_ns": 1792387385951729032
     }

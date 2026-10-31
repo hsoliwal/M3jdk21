@@ -6,11 +6,11 @@
 [INFO] --------------------------------[ pom ]---------------------------------
 [INFO] 
 [INFO] --- exec:3.5.0:exec (default-cli) @ m3-recipe-qualification ---
-RECIPE base=275b610f26c191cd70420172ac65b634a8a4df49 manifest=82b9e4a820e6608b43b91db305f5cf739b31bc9f79ebb191d6554e4e425a159d changes=4 applied=false promotionAuthority=false
-m3/compatibility/synexia-recipe-home-pin.tsv	ab8e54e22ad813694a7b0299c4c5a758fbe6ef449a89d90801934b344b156e25	6675f11687f8db693b739852937e843a78a7576c1f859383e53423bc851ce07a
-m3/synexia-import/current-recipe-home/README.md	1401189c9b07449edbd8eb971f4a2a7e08cd612e065f3a82735a95e3602a06eb	93602454db211f13f48a9ff0b20023325c3ce7a94e4bf74a751a8d2c6b41ed32
-m3/docs/synexia-public-fork-recipe-intake-20261017.md	fb029fa9d1bc41b91867fde106a4342e8c2514d3c2dc8ebcf85466c8137ed0c1	4dc6f12a66d719fb6b7ca23d8b19d059a611718a5ba663488949bc97da3140bf
-.m3/SYNEXIA_RECIPE_SOURCE_CUSTODY_20261018.json	ABSENT	676b212166927c4d9a4db7c980d194008fe13465c6dccab9054ff352c943341e
+RECIPE base=275b610f26c191cd70420172ac65b634a8a4df49 manifest=9f0f812658032086f1e6aa0c3fcf42c1cbc0073a5418bd53ebc334b80e5519c9 changes=4 applied=false promotionAuthority=false
+m3/compatibility/m3-recipe-home-pin.tsv	fa40ccd547a93da26d1de01a0655fd2daa9384fc09816b363812dd8cdea3aeca	6675f11687f8db693b739852937e843a78a7576c1f859383e53423bc851ce07a
+m3/m3-import/current-recipe-home/README.md	6b1eab2007b7ac5d4bc5a7ae0e110bfe9f26f2eb481ff2aae1be4e43fb2406ef	93602454db211f13f48a9ff0b20023325c3ce7a94e4bf74a751a8d2c6b41ed32
+m3/docs/m3-public-fork-recipe-intake-20261017.md	8b0a102143a144b62604ae09daf4a70d939482b0c085d8a856da72eb706f1d3e	4dc6f12a66d719fb6b7ca23d8b19d059a611718a5ba663488949bc97da3140bf
+.m3/M3_RECIPE_SOURCE_CUSTODY_20261018.json	ABSENT	af474dd9e5f12e0870de7a6a00a57048d2efc5b1e6fb8bab36e718f12df0e4be
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------

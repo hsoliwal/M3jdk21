@@ -3,27 +3,27 @@ Executed 2026-10-20 using Linux OpenJDK 21.0.12.1
 Canonical source: hsoliwal/com.synexia#12598
 Product source: hsoliwal/M3JDK21#1600, four exact source postimages
 M3File SHA-256: 93864fe41040396ffa40775ed7489f8e97ae6ee058538294e0626d046b12915c
-M3StreamProgress SHA-256: e7258d79c6dcfb65c2598ae1480f5d7078a31fde921c4842ea8ab4209754362d
-M3ShadowStreams SHA-256: bcbbb5567fb8afd2a8f32124096d6af97b68a3da2e67e0809343de52a812e3a5
-M3ShadowStreamsContract SHA-256: c38c59dcfc5137cf6685ba25f6e126e971251b66898a976dd1a3f6950c5d1352
+M3StreamProgress SHA-256: d96068e0d00efad66cc71d75791d9e07109f34d0a7322e244b08f1a45cfb3344
+M3ShadowStreams SHA-256: 3abee429e11ede5505e8fa91366a0ddf4e27495450a01d88235a2caf7c13efae
+M3ShadowStreamsContract SHA-256: 5c69b7f9bd8b87639de574158510b50b391b686b08cfef8cb5e2fc69a3e929e7
 
 javac --release 21 -proc:none -Xlint:all,-module -Werror ... module-info.java M3File.java M3StreamProgress.java M3ShadowStreams.java M3ShadowStreamsContract.java
 PASS (zero errors/warnings)
-java --module-path module -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+java --module-path module -m jdk.m3.file/jdk.m3.file.M3ShadowStreamsContract
 M3_SHADOW_STREAM_PASS checks=44
-java -Xint --module-path module -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+java -Xint --module-path module -m jdk.m3.file/jdk.m3.file.M3ShadowStreamsContract
 M3_SHADOW_STREAM_PASS checks=44
 
-jmod create --class-path module pack/com.m3.file.jmod
+jmod create --class-path module pack/jdk.m3.file.jmod
 PASS
-jlink --module-path $JDK/jmods:pack --add-modules com.m3.file --output pack/image --strip-debug --no-man-pages --no-header-files
+jlink --module-path $JDK/jmods:pack --add-modules jdk.m3.file --output pack/image --strip-debug --no-man-pages --no-header-files
 PASS
-pack/image/bin/java -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+pack/image/bin/java -m jdk.m3.file/jdk.m3.file.M3ShadowStreamsContract
 M3_SHADOW_STREAM_PASS checks=44
-pack/image/bin/java -Xint -m com.m3.file/com.m3.file.M3ShadowStreamsContract
+pack/image/bin/java -Xint -m jdk.m3.file/jdk.m3.file.M3ShadowStreamsContract
 M3_SHADOW_STREAM_PASS checks=44
 pack/image/bin/java --list-modules
-com.m3.file
+jdk.m3.file
 java.base@21.0.12.1
 
 SHA-256 proof JMOD: fbc6a1556f79920401ef47639d705a6f2e9d876a9bcc98a47b1c9ffc08525065

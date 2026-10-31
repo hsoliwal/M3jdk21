@@ -1,13 +1,13 @@
 # Exact owned Apache circular FIFO receiving host
 
-This host receives one production source: `m3/collections/implementations/apache-circular-fifo/src/main/java/com/m3/collections/apache/M3CircularFifoQueue.java`.
+This host receives one production source: `m3/collections/implementations/apache-circular-fifo/src/main/java/jdk/m3/collections/apache/M3CircularFifoQueue.java`.
 The manifest permits ABSENT -> the exact12743-byte postimage
-`5ae11bbc515e745783cbf7d1050e95e2e40c7cd0f61044f8ef0a684a418f3663`, or that exact postimage at fixed point.
+`71c4a3a325a99526f67228f6f34429b6f21b27d0bbfa8a5a3e5799442e8e9514`, or that exact postimage at fixed point.
 Fixtures, qualification records and SDK sources are outside the target set.
 
 The unchanged canonical `M3HashPinnedJavaSnapshotRecipe` is copied into `engine-src`:
-Git blob`d58ca50dfaeb60f581b64f43545e688aca5c6530`,
-SHA256`3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599`,13805bytes.
+Git blob`907f176d32b55d78f13e3756a407f6877f25ca7d`,
+SHA256`9dc65793cb1f4fb20866f99f4e5d0043d54734aa03cf0fe297c0cadbba2d1c37`,13805bytes.
 Named YAML activation uses `com.synexia.m3.OwnedApacheCircularFifoQueue20261018`,
 crate`owned-apache-circular-fifo`,`lst:false`. This is PlainText source custody using the existing engine.
 

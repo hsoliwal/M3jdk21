@@ -1,6 +1,6 @@
 # Actual V3 reference audit: invocation and custody subreview
 
-No issue found in the recorded completed invocation or its bounded PASS claim. The output `reference-audit-v3/REFERENCE_AUDIT.json` is 769,381 bytes, SHA-256 `5867bffd36e65f2fd755921d0dbf9981a006bc0e38134b2d0e4e6830030900ea`. It is the actual output bound by the recorded stdout, not a proposed or reconstructed execution result.
+No issue found in the recorded completed invocation or its bounded PASS claim. The output `reference-audit-v3/REFERENCE_AUDIT.json` is 769,381 bytes, SHA-256 `a7c41a897604c0421ca0f770fde83c51404208479f053b404cb98e5e7f2da7f1`. It is the actual output bound by the recorded stdout, not a proposed or reconstructed execution result.
 
 The complete supplied invocation directory contains `EXECUTION.json`, `stdout.log` and `stderr.log`. The recorded command is:
 
@@ -8,7 +8,7 @@ The complete supplied invocation directory contains `EXECUTION.json`, `stdout.lo
 /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python -B /workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/check_references_v3.py
 ```
 
-The cwd is that `successor-e04` directory. The checker bytes match the exact admitted source: 40,725 bytes, SHA-256 `521c18944616fe46a3e347860c25a7283e1b74674c594e40996c787e01e96b81`. The invocation runs the script directly, uses no `-O` option, and the admitted checker itself refuses optimized execution. This subreview does not independently recapture the Python runtime or environment; that is the separate runtime review's scope.
+The cwd is that `successor-e04` directory. The checker bytes match the exact admitted source: 40,725 bytes, SHA-256 `c88b8805881ab3cc299b530d50cbe8d6749a0a4925d7ea5e9ce512bd3a0a3ece`. The invocation runs the script directly, uses no `-O` option, and the admitted checker itself refuses optimized execution. This subreview does not independently recapture the Python runtime or environment; that is the separate runtime review's scope.
 
 The recorded invocation began at `2026-10-05T17:42:54.173327+00:00` and finished at `2026-10-05T17:42:55.864392+00:00`, with exit code 0. The audit's `observed_at_utc` is `2026-10-05T17:42:55.842021+00:00`, within that interval. The stdout is exactly one 244-byte JSON summary; its output hash matches the actual audit bytes. The stderr is empty, with the standard empty SHA-256. Both log lengths and hashes agree with `EXECUTION.json`.
 

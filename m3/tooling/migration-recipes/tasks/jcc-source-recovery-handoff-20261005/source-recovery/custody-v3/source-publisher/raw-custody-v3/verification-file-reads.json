@@ -4,7 +4,7 @@
     {
       "request": {
         "repository_full_name": "hsoliwal/com.synexia",
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
         "ref": "9dab34bd9e34e4d661004482248b5b02d94e0816",
         "encoding": "base64"
       },
@@ -31,7 +31,7 @@
     {
       "request": {
         "repository_full_name": "hsoliwal/com.synexia",
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
         "ref": "9dab34bd9e34e4d661004482248b5b02d94e0816",
         "encoding": "base64"
       },
@@ -58,7 +58,7 @@
     {
       "request": {
         "repository_full_name": "hsoliwal/com.synexia",
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-nul/Dependency.java.txt",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-nul/Dependency.java.txt",
         "ref": "9dab34bd9e34e4d661004482248b5b02d94e0816",
         "encoding": "base64"
       },
@@ -85,7 +85,7 @@
     {
       "request": {
         "repository_full_name": "hsoliwal/com.synexia",
-        "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
+        "path": "m3-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/jdk/internal/m3/rewrite/hash-pinned-java/parser-bad-utf8/Dependency.java.txt",
         "ref": "9dab34bd9e34e4d661004482248b5b02d94e0816",
         "encoding": "base64"
       },

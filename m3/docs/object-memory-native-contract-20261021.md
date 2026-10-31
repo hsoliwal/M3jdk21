@@ -28,9 +28,9 @@ External Java code needs appropriate `--add-exports java.base/jdk.internal.misc=
 
 ## Source provenance and tests
 
-- Java receiver: `src/java.base/share/classes/jdk/internal/misc/M3ObjectMemory.java`, SHA-256 `b64f77925ee6cbeb4fc882b237c8eb504919cbbaf99f3b69e4bcd2c97739449c`.
+- Java receiver: `src/java.base/share/classes/jdk/internal/misc/M3ObjectMemory.java`, SHA-256 `0d3e2d044f8caa26dbcf488992d69e8a29562358330ec4265a65f20fc8dce7b7`.
 - JNI receiver: `src/java.base/share/native/libjava/M3ObjectMemory.c`, SHA-256 `ff317b645e6b497f40b7b517a1f11a16fb10896ab4e61325dfc3601434b63c03`.
-- jtreg receiver: `test/jdk/jdk/internal/misc/M3ObjectMemoryTest.java`, SHA-256 `259b99369196525639d27a1a13e82ac967b69691e3f486ac153fce744a786875`.
+- jtreg receiver: `test/jdk/jdk/internal/misc/M3ObjectMemoryTest.java`, SHA-256 `a484bff774dc11e266ee97513ad78e0ea9588809553f3ec707d8f28bbaaa31eb`.
 
 The same source identities are stored as ABSENT-before, exact after-images under Synexia's existing class-backed `M3HashPinnedJavaSnapshotRecipe` and `M3HashPinnedTextSnapshotRecipe`. Review recipe-first before promoting these exact product copies. Do not modify develop/master, rebase or force-push this evidence branch.
 

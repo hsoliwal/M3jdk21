@@ -1,0 +1,18 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.m3:m3-synexia-import >----------------------
+[INFO] Building M3JDK21 Synexia Apache import verifier 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- exec:3.5.0:exec (default-cli) @ m3-synexia-import ---
+RECIPE base=80b8534ad1e45002185fb3eeab233f98d3a7c0bd manifest=c7ef63491696cdea7bbb8025b996dd133f0da7ad0eaf0d84e94859e6bdeaf0b1 changes=3 applied=true promotionAuthority=false
+m3/m3-import/src/main/java/jdk/m3/importer/M3ImportPlan.java	27996c430d055bdf5b5ba32c2664b3cc683731a0dd1edf51aca067d876859b82	cb8822f92db1c65c695d724013c47225d37b75ed766b2c9d197c562004b4add6
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImportPlanTest.java	8f0925601dd8308282727acd3a9fbcf1a654fbc0a3af48b9640a11d84755c2e0	a85d673f3a98b22a3a1514f905503037391c4b7686533869c792dcf8faa73e1a
+m3/m3-import/src/test/java/jdk/m3/importer/M3ImporterTest.java	6acd2f31448739fd21d54b7df7503a796bc96801a5e5ff9a5720286a959fdf1a	8f9b21d5efc7f7407d8f0dafe24c67d7c5f337310ce2ec5b47d54a4fb130071b
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.476 s
+[INFO] Finished at: 2026-10-07T12:27:16+05:30
+[INFO] ------------------------------------------------------------------------

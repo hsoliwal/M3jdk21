@@ -12,7 +12,7 @@ The recovered Maven runs locally with installed Debian OpenJDK21.0.11. This remo
 
 ## First reproduced failure
 
-The unchanged module-pack Maven test lifecycle reproduces `M3_REACTOR_PREIMAGE_DRIFT` in `M3ModulePackRecipesTest.reactorRegistrationReachesFixedPoint`. The current-parent recipe and test blobs are identical to the recovered owners (`aa89cde2f4cf7195f47b4622627569785ee544e3` and `d6a31147a4c4ee52ab63117c8c5aa52a5e78ad60`). The test harness trims supplied fixture whitespace unless explicitly instructed not to; the production recipe correctly requires its exact reviewed preimage. Repair the test input boundary, not the production refusal boundary. Retain every existing test and exact pre/postimage resource.
+The unchanged module-pack Maven test lifecycle reproduces `M3_REACTOR_PREIMAGE_DRIFT` in `M3ModulePackRecipesTest.reactorRegistrationReachesFixedPoint`. The current-parent recipe and test blobs are identical to the recovered owners (`85240e8bba66ce478ea81698f86b7b8442f88de0` and `d6a31147a4c4ee52ab63117c8c5aa52a5e78ad60`). The test harness trims supplied fixture whitespace unless explicitly instructed not to; the production recipe correctly requires its exact reviewed preimage. Repair the test input boundary, not the production refusal boundary. Retain every existing test and exact pre/postimage resource.
 
 ## Approved bounded delta
 

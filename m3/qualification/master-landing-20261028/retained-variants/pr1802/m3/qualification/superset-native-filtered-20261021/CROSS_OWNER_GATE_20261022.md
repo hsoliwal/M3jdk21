@@ -24,10 +24,10 @@ No external challenge/source body is imported.
 
 The new Java test
 `test/jdk/jdk/internal/m3/M3MaskCollectionViewIntegrationTest.java`
-has Git blob `a5a7d4508513b829d1ac14b9562aa108998a0e3f`.
+has Git blob `56634718dcc1e843ea65bd262a2b95dcfa627110`.
 The new Linux host proof
 `verify-integrated-java-jni.sh` has Git blob
-`5da0a5f54f5830ad6cfd97b4b3d5adb09d6f92a4`.
+`69a4799dc00171fa021566b14c7e0d32bbc8c06e`.
 Both are exact first-party Synexia Maven/OpenRewrite outputs
 with SHA-256-pinned ABSENT-before receipts in
 `com.synexia.m3.M3Jdk21NativeFilteredIntegration20261022`.
@@ -107,10 +107,10 @@ The original `jdk.internal.mindex.M3CollectionMaskCompactor.java` Git blob
 `51ea3a72bb191afc250a58be964363bd5680467c` was checked before applying
 the exact existing postimage `f85e7359010bd25e0a909a145e283007cff25d7c`.
 The source-sealed original jtreg test, including normal and interpreter
-runs, has blob `d720912f0f57bcde9fc07a05f31869a19f3452eb`.
+runs, has blob `6f3113ad8624004dbe617aa52c96b7a04dfc5ce4`.
 The earlier first-party verification script and report were received byte
 identically; its original parent verifier script blob is
-`60f757ba48acfeb77d8ac6c46ce36c94262eddec`.
+`87b796e872730e28d7b82eaf1c2ebf1e2e02a7a3`.
 
 This single private atom avoids reference self-writes before the first
 deleted bit in a physical Object[] window. It keeps the original dynamic array,

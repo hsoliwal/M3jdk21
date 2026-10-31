@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.m3.collections.eclipse.impl;
+package jdk.m3.collections.eclipse.impl;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -21,31 +21,31 @@ public final class M3EclipsePackageRelocationProof {
     }
     private static void interval(long from, long to, long step, long point, int index) {
         eq(failure(() -> org.eclipse.collections.impl.list.IntervalUtils.checkArguments(from, to, step)),
-                failure(() -> com.m3.collections.eclipse.impl.list.IntervalUtils.checkArguments(from, to, step)),
+                failure(() -> jdk.m3.collections.eclipse.impl.list.IntervalUtils.checkArguments(from, to, step)),
                 "step/range contract");
         if (step == 0) return;
         eq(org.eclipse.collections.impl.list.IntervalUtils.intSize(from, to, step),
-                com.m3.collections.eclipse.impl.list.IntervalUtils.intSize(from, to, step), "intSize");
+                jdk.m3.collections.eclipse.impl.list.IntervalUtils.intSize(from, to, step), "intSize");
         eq(org.eclipse.collections.impl.list.IntervalUtils.contains(point, from, to, step),
-                com.m3.collections.eclipse.impl.list.IntervalUtils.contains(point, from, to, step), "contains");
+                jdk.m3.collections.eclipse.impl.list.IntervalUtils.contains(point, from, to, step), "contains");
         eq(org.eclipse.collections.impl.list.IntervalUtils.isWithinBoundaries(point, from, to, step),
-                com.m3.collections.eclipse.impl.list.IntervalUtils.isWithinBoundaries(point, from, to, step),
+                jdk.m3.collections.eclipse.impl.list.IntervalUtils.isWithinBoundaries(point, from, to, step),
                 "within boundaries");
         eq(org.eclipse.collections.impl.list.IntervalUtils.indexOf(point, from, to, step),
-                com.m3.collections.eclipse.impl.list.IntervalUtils.indexOf(point, from, to, step), "logical index");
+                jdk.m3.collections.eclipse.impl.list.IntervalUtils.indexOf(point, from, to, step), "logical index");
         eq(org.eclipse.collections.impl.list.IntervalUtils.valueAtIndex(index, from, to, step),
-                com.m3.collections.eclipse.impl.list.IntervalUtils.valueAtIndex(index, from, to, step),
+                jdk.m3.collections.eclipse.impl.list.IntervalUtils.valueAtIndex(index, from, to, step),
                 "physical value");
         eq(org.eclipse.collections.impl.list.IntervalUtils.binarySearch(point, from, to, step),
-                com.m3.collections.eclipse.impl.list.IntervalUtils.binarySearch(point, from, to, step),
+                jdk.m3.collections.eclipse.impl.list.IntervalUtils.binarySearch(point, from, to, step),
                 "binary search");
         eq(org.eclipse.collections.impl.list.IntervalUtils.calculateAdjustedStep((int)from,(int)to,(int)step),
-                com.m3.collections.eclipse.impl.list.IntervalUtils.calculateAdjustedStep(
+                jdk.m3.collections.eclipse.impl.list.IntervalUtils.calculateAdjustedStep(
                         (int)from,(int)to,(int)step), "direction");
     }
     private static void emptyIterator() {
         var donor = org.eclipse.collections.impl.EmptyIterator.<Integer>getInstance();
-        var moved = com.m3.collections.eclipse.impl.EmptyIterator.<Integer>getInstance();
+        var moved = jdk.m3.collections.eclipse.impl.EmptyIterator.<Integer>getInstance();
         eq(donor.hasNext(), moved.hasNext(), "hasNext");
         eq(donor.hasPrevious(), moved.hasPrevious(), "hasPrevious");
         eq(donor.nextIndex(), moved.nextIndex(), "nextIndex");

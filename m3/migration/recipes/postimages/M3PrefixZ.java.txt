@@ -1,12 +1,12 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0
- * Source lineage: com.synexia.indexstring.MIndexPrefixZ at
+ * Source lineage: jdk.internal.m3.indexstring.MIndexPrefixZ at
  * 73978088621dc70f5021befafa443f7e622b517e (Apache-2.0).
  * See m3/docs/name-mapping.json and m3/migration/docs/RESUME.md.
  */
-package com.m3.algorithm;
+package jdk.m3.algorithm;
 
-import com.m3.text.M3StringPiece;
+import jdk.m3.text.M3StringPiece;
 import java.util.Objects;
 import java.util.concurrent.CancellationException;
 import java.util.function.BooleanSupplier;

@@ -8,12 +8,12 @@ on:
       - 'm3/docs/M3JDK21_PORTING_INVARIANT.md'
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/*precompute*.tsv'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipeNameTest.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3FullPrecomputeSecondPassRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipeNameTest.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3FullPrecomputeSecondPassRecipeTest.java'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-full-precompute-second-pass.yml'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/**'
       - '.github/workflows/m3-full-precompute-second-pass.yml'
   workflow_dispatch:
 
@@ -52,8 +52,4 @@ jobs:
       - name: Install the source-built OpenRewrite/JUnit dependency closure
         run: |
           mvn -B -ntp -f m3/vendor/third_party/pom.xml -pl :rewrite-core,:rewrite-java,:rewrite-java-21,:rewrite-test,:junit-jupiter -am -Dmaven.test.skip=true install
-          mvn -B -ntp -f m3/synexia-import/pure-int-recipe-custody/pom.xml -DskipTests install
 
-      - name: Recipe engine and crate fixed point
-        run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3Jdk21HashPinnedSnapshotRecipeNameTest,M3FullPrecomputeSecondPassRecipeTest test

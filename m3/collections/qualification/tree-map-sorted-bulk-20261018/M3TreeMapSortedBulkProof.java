@@ -23,7 +23,7 @@ import java.util.*;
  */
 public final class M3TreeMapSortedBulkProof {
     static final int[] SIZES = {0,1,2,3,4,7,8,15,16,31,32,255,256,4095};
-    static final String TARGET = "com.m3.collections.M3TreeMap";
+    static final String TARGET = "jdk.m3.collections.M3TreeMap";
     static final MessageDigest DIGEST;
     static int scenarios, checks, invariantCalls, providerLoads;
     static Factory factory;
@@ -69,7 +69,7 @@ public final class M3TreeMapSortedBulkProof {
             for (Constructor<?> c : type.getConstructors()) {
                 Class<?>[] p = c.getParameterTypes();
                 if (p.length == 2 && p[0] == Comparator.class
-                        && p[1].getName().equals("com.m3.collections.M3LazyValueProvider")) {
+                        && p[1].getName().equals("jdk.m3.collections.M3LazyValueProvider")) {
                     found = c;
                 }
             }
@@ -478,7 +478,7 @@ public final class M3TreeMapSortedBulkProof {
     @SuppressWarnings("unchecked")
     static void ancillary(boolean linked, boolean oracle) throws Exception {
         String name = oracle ? (linked ? "java.util.LinkedHashMap" : "java.util.HashMap")
-                : (linked ? "com.m3.collections.M3LinkedHashMap" : "com.m3.collections.M3HashMap");
+                : (linked ? "jdk.m3.collections.M3LinkedHashMap" : "jdk.m3.collections.M3HashMap");
         Class<?> type;
         try { type = Class.forName(name); }
         catch (ClassNotFoundException e) {

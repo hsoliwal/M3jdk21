@@ -1,10 +1,10 @@
 {
   "schema": 1,
   "source": "hsoliwal/com.synexia#11903 / com.synexia.m3.Jdk21LongFilterCompose20261016",
-  "target": "m3/collections/src/main/java/com/m3/collections/M3LongFilteredView.java",
+  "target": "m3/collections/src/main/java/jdk/m3/collections/M3LongFilteredView.java",
   "original_target_git_blob": "f198006c86e7c8c3b7f6fceb8b82b114e3cdce39",
   "target_postimage_sha256": "cf9f15e9712b169768be2611a9eae98d317d47b07b7494b168bf81988e678341",
-  "test_sha256": "3cefdce84f9f78cbd77a8ac42626b6b54a15930dcc4becb0802c87491f725044",
+  "test_sha256": "75b82513f5c8b96c4039597c81034409f8e941de750201cbf61eb5ccb82eed6b",
   "status": "candidate local Java 21 2029 assertions PASS, Maven/OpenRewrite and product runtime NOT_RUN",
   "ownership": "Synexia canonical reusable recipe; M3JDK21 receives target-owned primitive collection API; existing sorted/JNI owners unchanged",
   "copyright": "Copyright 2026 Hitesh Soliwal and contributors",

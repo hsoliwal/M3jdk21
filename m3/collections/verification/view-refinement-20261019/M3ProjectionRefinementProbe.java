@@ -1,12 +1,12 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0 */
-package com.m3.collections;
+package jdk.m3.collections;
 
 import java.lang.management.ManagementFactory;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
-import static com.m3.collections.M3IndexMaskCompactor.Backend.*;
+import static jdk.m3.collections.M3IndexMaskCompactor.Backend.*;
 
 /** Real index/mask/address owners, including explicit required-JNI runs. No substitute implementations. */
 public final class M3ProjectionRefinementProbe {

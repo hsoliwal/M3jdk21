@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 // Copyright 2026 Hitesh Soliwal and contributors.
-// Adapted from com.synexia.indexstring.MIndexStateRelation; numeric atoms only.
+// Adapted from jdk.internal.m3.indexstring.MIndexStateRelation; numeric atoms only.
 package jdk.internal.mindex;
 
 /** Internal numeric receiver. No text, interner, external loader or Synexia runtime dependency. */

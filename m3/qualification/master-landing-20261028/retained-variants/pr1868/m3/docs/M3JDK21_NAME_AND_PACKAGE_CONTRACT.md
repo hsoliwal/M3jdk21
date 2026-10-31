@@ -211,15 +211,15 @@ Provenance of this bounded mapping change:
 ```text
 m3/docs/name-mapping.json
   old Git blob SHA-1: fe77055e75116df42fafb40c433d351fbac139cc
-  new Git blob SHA-1: 28df2b56aec04f00ca82c15d6b3e8c10e0e87aa8
+  new Git blob SHA-1: b8e2fb4d103046013b3787a7a2d7c79d39adcdab
   old SHA-256: 2beaf836d56b50e71f94e1be94d7923198baed7b7355dc4997342ca5257e8116
-  new SHA-256: 3cd37056abe11669f0d1b8c49c07eae4b72a1286583d2a063bb021e71c32fc72
+  new SHA-256: 6cad1dbc120b91ac0369c3b63cc672513d91201bf48d4ea77f53165c64b0f419
 
 m3/tooling/name-contract/name-plan.json
   old Git blob SHA-1: 98d543dbd0c4f8fabbe23c222da837b3e5f558ca
-  new Git blob SHA-1: 67b88d919bee9d22873b6540a570abbf4b689505
+  new Git blob SHA-1: a12bbb4d274db428086ceff431fe3c04dde205c5
   old SHA-256: e28fc37d2a91ea4bd022c393427e32b04dc19a9751a4905f3388632116ef1b99
-  new SHA-256: 73dcc7a4cb044ba810970d71a32a460cd6c02dff34afe99d3b24dc197f324bfc
+  new SHA-256: 4e9d7cb0042a9034d482d1a5970bae6822be016b0ab1d56fa07b80ad710a9d6d
 ```
 
 The full source-tree, exported ABI and native/serialized consumer closure

@@ -1,0 +1,439 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------------< m3.intake:xz >----------------------------
+[INFO] Building xz 1.10-m3-source-1
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- rewrite:5.23.1:runNoFork (default-cli) @ xz ---
+[INFO] Using active recipe(s) [com.synexia.m3.intake.Relocate]
+[INFO] Using active styles(s) []
+[INFO] Validating active recipes...
+[INFO] Project [xz] Resolving Poms...
+[INFO] Project [xz] Parsing source files
+[INFO] Running recipe(s)...
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\ARM64Options.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\ARM64Options.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\ARMOptions.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\ARMOptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\ARMThumbOptions.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\ARMThumbOptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\ArrayCache.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\ArrayCache.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\BasicArrayCache.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\BasicArrayCache.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\BCJCoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\BCJCoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\BCJDecoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\BCJDecoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\BCJEncoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\BCJEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\BCJOptions.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\BCJOptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\BlockInputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\BlockInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.check, newPackageName=com.m3.lib.xz.check, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\BlockOutputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\BlockOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.check, newPackageName=com.m3.lib.xz.check, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\check\Check.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\check\Check.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.check, newPackageName=com.m3.lib.xz.check, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\check\CRC32.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\check\CRC32.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.check, newPackageName=com.m3.lib.xz.check, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\check\CRC64.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\check\CRC64.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.check, newPackageName=com.m3.lib.xz.check, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\check\None.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\check\None.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.check, newPackageName=com.m3.lib.xz.check, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\check\SHA256.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\check\SHA256.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.check, newPackageName=com.m3.lib.xz.check, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\CloseIgnoringInputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\CloseIgnoringInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\common\ByteArrayView.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\common\ByteArrayView.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\common\DecoderUtil.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\common\DecoderUtil.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\common\EncoderUtil.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\common\EncoderUtil.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\common\StreamFlags.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\common\StreamFlags.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\common\Util.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\common\Util.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\CorruptedInputException.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\CorruptedInputException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\CountingInputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\CountingInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\CountingOutputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\CountingOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\delta\DeltaCoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\delta\DeltaCoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.delta, newPackageName=com.m3.lib.xz.delta, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\delta\DeltaDecoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\delta\DeltaDecoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.delta, newPackageName=com.m3.lib.xz.delta, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\delta\DeltaEncoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\delta\DeltaEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.delta, newPackageName=com.m3.lib.xz.delta, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\DeltaCoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\DeltaCoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\DeltaDecoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\DeltaDecoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\DeltaEncoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\DeltaEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\DeltaInputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\DeltaInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.delta, newPackageName=com.m3.lib.xz.delta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\DeltaOptions.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\DeltaOptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\DeltaOutputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\DeltaOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.delta, newPackageName=com.m3.lib.xz.delta, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\FilterCoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\FilterCoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\FilterDecoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\FilterDecoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\FilterEncoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\FilterEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\FilterOptions.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\FilterOptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\FinishableOutputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\FinishableOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\FinishableWrapperOutputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\FinishableWrapperOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\IA64Options.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\IA64Options.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\index\BlockInfo.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\index\BlockInfo.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.index, newPackageName=com.m3.lib.xz.index, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\index\IndexBase.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\index\IndexBase.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.index, newPackageName=com.m3.lib.xz.index, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\index\IndexDecoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\index\IndexDecoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.index, newPackageName=com.m3.lib.xz.index, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\index\IndexEncoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\index\IndexEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.index, newPackageName=com.m3.lib.xz.index, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\index\IndexHash.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\index\IndexHash.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.check, newPackageName=com.m3.lib.xz.check, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.index, newPackageName=com.m3.lib.xz.index, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\index\IndexRecord.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\index\IndexRecord.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.index, newPackageName=com.m3.lib.xz.index, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\IndexIndicatorException.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\IndexIndicatorException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lz\BasicMatchLengthFinder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lz\BasicMatchLengthFinder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lz\BT4.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lz\BT4.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lz\CRC32Hash.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lz\CRC32Hash.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lz\Hash234.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lz\Hash234.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lz\HC4.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lz\HC4.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lz\LZDecoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lz\LZDecoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lz\LZEncoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lz\LZEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lz\Matches.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lz\Matches.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lz\MatchLength.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lz\MatchLength.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lz\MatchLengthFinder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lz\MatchLengthFinder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lz\UnalignedLongLEMatchLengthFinder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lz\UnalignedLongLEMatchLengthFinder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lzma\LZMACoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lzma\LZMACoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lzma, newPackageName=com.m3.lib.xz.lzma, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lzma\LZMADecoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lzma\LZMADecoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lzma, newPackageName=com.m3.lib.xz.lzma, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lzma\LZMAEncoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lzma\LZMAEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lzma, newPackageName=com.m3.lib.xz.lzma, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lzma\LZMAEncoderFast.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lzma\LZMAEncoderFast.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lzma, newPackageName=com.m3.lib.xz.lzma, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lzma\LZMAEncoderNormal.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lzma\LZMAEncoderNormal.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lzma, newPackageName=com.m3.lib.xz.lzma, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lzma\Optimum.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lzma\Optimum.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lzma, newPackageName=com.m3.lib.xz.lzma, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\lzma\State.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\lzma\State.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lzma, newPackageName=com.m3.lib.xz.lzma, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\LZMA2Coder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\LZMA2Coder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\LZMA2Decoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\LZMA2Decoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\LZMA2Encoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\LZMA2Encoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lzma, newPackageName=com.m3.lib.xz.lzma, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\LZMA2InputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\LZMA2InputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lzma, newPackageName=com.m3.lib.xz.lzma, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\LZMA2Options.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\LZMA2Options.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lzma, newPackageName=com.m3.lib.xz.lzma, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\LZMA2OutputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\LZMA2OutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lzma, newPackageName=com.m3.lib.xz.lzma, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\LZMAInputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\LZMAInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lzma, newPackageName=com.m3.lib.xz.lzma, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\LZMAOutputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\LZMAOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lzma, newPackageName=com.m3.lib.xz.lzma, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.lz, newPackageName=com.m3.lib.xz.lz, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\MemoryLimitException.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\MemoryLimitException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\package-info.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\package-info.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\PowerPCOptions.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\PowerPCOptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\rangecoder\RangeCoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\rangecoder\RangeCoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\rangecoder\RangeDecoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\rangecoder\RangeDecoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\rangecoder\RangeDecoderFromBuffer.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\rangecoder\RangeDecoderFromBuffer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\rangecoder\RangeDecoderFromStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\rangecoder\RangeDecoderFromStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\rangecoder\RangeEncoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\rangecoder\RangeEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\rangecoder\RangeEncoderToBuffer.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\rangecoder\RangeEncoderToBuffer.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\rangecoder\RangeEncoderToStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\rangecoder\RangeEncoderToStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.rangecoder, newPackageName=com.m3.lib.xz.rangecoder, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\RawCoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\RawCoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\ResettableArrayCache.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\ResettableArrayCache.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\RISCVOptions.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\RISCVOptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\SeekableFileInputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\SeekableFileInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\SeekableInputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\SeekableInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\SeekableXZInputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\SeekableXZInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.check, newPackageName=com.m3.lib.xz.check, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.index, newPackageName=com.m3.lib.xz.index, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\simple\ARM.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\simple\ARM.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\simple\ARM64.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\simple\ARM64.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\simple\ARMThumb.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\simple\ARMThumb.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\simple\IA64.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\simple\IA64.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\simple\PowerPC.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\simple\PowerPC.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\simple\RISCVDecoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\simple\RISCVDecoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\simple\RISCVEncoder.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\simple\RISCVEncoder.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\simple\SimpleFilter.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\simple\SimpleFilter.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\simple\SPARC.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\simple\SPARC.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\simple\X86.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\simple\X86.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\SimpleInputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\SimpleInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\SimpleOutputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\SimpleOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\SingleXZInputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\SingleXZInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.check, newPackageName=com.m3.lib.xz.check, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.index, newPackageName=com.m3.lib.xz.index, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\SPARCOptions.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\SPARCOptions.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\UncompressedLZMA2OutputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\UncompressedLZMA2OutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\UnsupportedOptionsException.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\UnsupportedOptionsException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\X86Options.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\X86Options.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.simple, newPackageName=com.m3.lib.xz.simple, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\XZ.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\XZ.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\XZFormatException.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\XZFormatException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\XZInputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\XZInputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\XZIOException.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\XZIOException.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] File has been moved from m3-scratch\lib-intake\batch\xz\proj\src\main\java\org\tukaani\xz\XZOutputStream.java to m3-scratch\lib-intake\batch\xz\proj\src\main\java\com\m3\lib\xz\XZOutputStream.java by:
+[WARNING]     com.synexia.m3.intake.Relocate
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.common, newPackageName=com.m3.lib.xz.common, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.check, newPackageName=com.m3.lib.xz.check, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz.index, newPackageName=com.m3.lib.xz.index, recursive=false}
+[WARNING]         org.openrewrite.java.ChangePackage: {oldPackageName=org.tukaani.xz, newPackageName=com.m3.lib.xz, recursive=false}
+[WARNING] Please review and commit the results.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  12.062 s
+[INFO] Finished at: 2026-10-31T06:23:45+05:30
+[INFO] ------------------------------------------------------------------------

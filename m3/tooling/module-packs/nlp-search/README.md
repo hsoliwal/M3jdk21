@@ -165,7 +165,7 @@ m3_image="$PWD/build/m3-nlp-search-proof/pack/image"
 "$m3_image/bin/java" \
   -m org.m3jdk.tools.search/org.m3jdk.tools.search.M3SourceIndex \
   index build/m3-source-index \
-  m3/ports/file/src/main/java/com/m3/file/M3File.java
+  m3/ports/file/src/main/java/jdk/m3/file/M3File.java
 
 "$m3_image/bin/java" \
   -m org.m3jdk.tools.search/org.m3jdk.tools.search.M3SourceIndex \

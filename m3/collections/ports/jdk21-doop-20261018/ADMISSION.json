@@ -1,5 +1,5 @@
 {
-  "schema": "m3-jdk21-doop-port-review-v1",
+  "schema": "m3jdk21-doop-port-review-v1",
   "sourceCustodyPr": 1325,
   "runtimeReviewPr": 1330,
   "target": "M3JDK21",

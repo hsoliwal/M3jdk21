@@ -2,7 +2,7 @@
   "schema": "M3_RUNTIME_CURRENT_OWNER_CUSTODY_V1",
   "receiving_baseline": "4b24824c3aa09d802121447f8970d442a855f064",
   "canonical_recipe_baseline": "8f8200375d8d403b58e855ee5db02f2e8fac33a8",
-  "recipe": "com.synexia.m3jdk.CollectionsContractRefinement20261017",
+  "recipe": "jdk.internal.m3.m3jdk.CollectionsContractRefinement20261017",
   "datasets": [
     "m3jdk21-object-vtable",
     "m3jdk21-progress-doclint",

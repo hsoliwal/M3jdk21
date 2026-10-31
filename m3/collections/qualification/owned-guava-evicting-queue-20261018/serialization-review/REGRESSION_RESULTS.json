@@ -2,7 +2,7 @@
   "status": "ACTUAL_OLD_FAIL_NEW_PASS",
   "fixtureSHA256": "6659b1f7853a5edd8f286b67e42644fe1d6d1df68f5df60fa6d620124c818e5b",
   "oldOwnerSHA256": "34e31faf78923e335d74a249af3c2d419f616d9812e5f5bee0a9a0d4bf1ac04b",
-  "newOwnerSHA256": "8afe356324bdaa51953933f2213b573175b64e2921df4c0df7c4a16161274840",
+  "newOwnerSHA256": "12e10948c33dedf38961027f23c01a3a912889d2585dfe8181f35ecb43426dfb",
   "old": {
     "strictCompileExit": 0,
     "runtimeExit": 1,
@@ -90,7 +90,7 @@
     ],
     "summary": {
       "summary": "OWNED_PRIVATE_SERIALIZATION",
-      "owner": "com.m3.collections.guava.M3EvictingQueue",
+      "owner": "jdk.m3.collections.guava.M3EvictingQueue",
       "cases": 15,
       "checks": 24,
       "failures": 10
@@ -168,7 +168,7 @@
     ],
     "summary": {
       "summary": "OWNED_PRIVATE_SERIALIZATION",
-      "owner": "com.m3.collections.guava.M3EvictingQueue",
+      "owner": "jdk.m3.collections.guava.M3EvictingQueue",
       "cases": 15,
       "checks": 34,
       "failures": 0

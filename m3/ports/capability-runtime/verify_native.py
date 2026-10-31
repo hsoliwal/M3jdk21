@@ -49,9 +49,9 @@ def main():
     expected = {p.relative_to(root).as_posix(): sha(p) for p in tracked}
     run(out, 'javac', [javac, '--release', '21', '-Xlint:all,-module', '-Werror',
                       '-h', headers, '-d', classes, *sources, *tests])
-    main_class = 'com.m3.runtime.capability.CapabilityRuntimeChecks'
+    main_class = 'jdk.m3.runtime.capability.CapabilityRuntimeChecks'
     options = [java, '-Xmx128m', '-Xcheck:jni', '--module-path', classes,
-               '--module', 'com.m3.runtime.capability/' + main_class]
+               '--module', 'jdk.m3.runtime.capability/' + main_class]
     pure = run(out, 'java-oracle', options)
     if not args.java_only:
         cc = shutil.which('cc')
@@ -63,8 +63,8 @@ def main():
         if os.name != 'nt': flags += ['-fsanitize=undefined', '-fno-sanitize-recover=all']
         run(out, 'native-cc', [cc, *flags, '-I' + str(jdk / 'include'),
                               '-I' + str(jdk / 'include' / os_header),
-                              '-include', headers / 'com_m3_runtime_capability_LfCount.h',
-                              '-include', headers / 'com_m3_runtime_capability_BytePatternSearch.h',
+                              '-include', headers / 'jdk_m3_runtime_capability_LfCount.h',
+                              '-include', headers / 'jdk_m3_runtime_capability_BytePatternSearch.h',
                               native, '-o', library])
         accelerated = run(out, 'jni-oracle', [*options, library.resolve(), sha(library)])
         if 'kernel=JNI_DIRECT_C11' not in accelerated:
@@ -75,9 +75,9 @@ def main():
         raise RuntimeError('Java-only proof did not run')
     # Source-preserving line-index proof is independent of the preexisting LF
     # count assertions and executes in both stock-JDK21 and JNI configurations.
-    line_class = 'com.m3.runtime.capability.ByteLineIndexChecks'
+    line_class = 'jdk.m3.runtime.capability.ByteLineIndexChecks'
     line_options = [java, '-Xmx128m', '-Xcheck:jni', '--module-path', classes,
-                    '--module', 'com.m3.runtime.capability/' + line_class]
+                    '--module', 'jdk.m3.runtime.capability/' + line_class]
     java_lines = run(out, 'line-index-java-oracle', line_options)
     if 'M3_BYTE_LINE_INDEX_PASS assertions=' not in java_lines or 'kernel=JAVA_SOURCE_RANGE' not in java_lines:
         raise RuntimeError('line-index Java contract oracle did not execute')
@@ -88,9 +88,9 @@ def main():
         if 'M3_BYTE_LINE_INDEX_PASS assertions=' not in native_lines or 'kernel=JNI_DIRECT_C11' not in native_lines:
             raise RuntimeError('line-index JNI contract oracle did not execute')
 
-    search_class = 'com.m3.runtime.capability.BytePatternSearchChecks'
+    search_class = 'jdk.m3.runtime.capability.BytePatternSearchChecks'
     search_options = [java, '-Xmx128m', '-Xcheck:jni', '--module-path', classes,
-                      '--module', 'com.m3.runtime.capability/' + search_class]
+                      '--module', 'jdk.m3.runtime.capability/' + search_class]
     java_patterns = run(out, 'byte-pattern-java-oracle', search_options)
     if 'M3_BYTE_PATTERN_SEARCH_PASS assertions=' not in java_patterns or 'kernel=JAVA_KMP' not in java_patterns:
         raise RuntimeError('actual source byte-pattern Java oracle not executed')
@@ -101,9 +101,9 @@ def main():
         if 'M3_BYTE_PATTERN_SEARCH_PASS assertions=' not in native_patterns or 'kernel=JNI_DIRECT_C11' not in native_patterns:
             raise RuntimeError('actual source byte-pattern JNI oracle not executed')
 
-    evidence_class = 'com.m3.runtime.capability.ByteEvidenceQueryChecks'
+    evidence_class = 'jdk.m3.runtime.capability.ByteEvidenceQueryChecks'
     evidence_options = [java, '-Xmx128m', '-Xcheck:jni', '--module-path', classes,
-                        '--module', 'com.m3.runtime.capability/' + evidence_class]
+                        '--module', 'jdk.m3.runtime.capability/' + evidence_class]
     java_evidence = run(out, 'byte-evidence-java-oracle', evidence_options)
     if 'M3_BYTE_EVIDENCE_QUERY_PASS assertions=' not in java_evidence or 'kernel=JAVA_SOURCE_PROOF' not in java_evidence:
         raise RuntimeError('source-backed evidence Java oracle not executed')
@@ -126,15 +126,15 @@ def main():
         real_main = sorted((root / 'src/main/java').rglob('*.java'))
         run(out, 'module-javac', [javac, '--release', '21', '-Xlint:all,-module',
                                   '-Werror', '-d', production, *real_main])
-        module_file = modular / 'com.m3.runtime.capability.jmod'
+        module_file = modular / 'jdk.m3.runtime.capability.jmod'
         run(out, 'jmod-create', [jmod, 'create', '--class-path', production,
                                   '--module-version', '0.1.0', module_file])
         description = run(out, 'jmod-describe', [jmod, 'describe', module_file])
-        if not description.startswith('com.m3.runtime.capability@0.1.0\n'):
+        if not description.startswith('jdk.m3.runtime.capability@0.1.0\n'):
             raise AssertionError('JMOD target module name/version drift')
         jdk = Path(os.path.realpath(javac)).parent.parent
         image = out / 'developer-image'
-        dependencies = 'com.m3.runtime.capability,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jpackage,jdk.jdeps'
+        dependencies = 'jdk.m3.runtime.capability,jdk.compiler,jdk.jlink,jdk.jartool,jdk.jpackage,jdk.jdeps'
         run(out, 'jlink-developer', [jlink, '--module-path',
                                     str(jdk / 'jmods') + os.pathsep + str(modular),
                                     '--add-modules', dependencies, '--output', image,
@@ -143,13 +143,13 @@ def main():
         for binary in ('java', 'javac', 'jmod', 'jlink', 'jpackage', 'jdeps'):
             if not (image / 'bin' / (binary + exe)).is_file():
                 raise AssertionError('developer image lacks ' + binary)
-        smoke_source = root / 'src/test/java/com/m3/runtime/proof/CapabilityImageSmoke.java'
+        smoke_source = root / 'src/test/java/jdk/m3/runtime/proof/CapabilityImageSmoke.java'
         run(out, 'image-javac', [image / 'bin' / ('javac' + exe), '--add-modules',
-                                 'com.m3.runtime.capability', '-Xlint:all', '-Werror',
+                                 'jdk.m3.runtime.capability', '-Xlint:all', '-Werror',
                                  '-d', smoke, smoke_source])
         image_proof = run(out, 'image-api', [image / 'bin' / ('java' + exe),
-                            '--add-modules', 'com.m3.runtime.capability',
-                            '-cp', smoke, 'com.m3.runtime.proof.CapabilityImageSmoke'])
+                            '--add-modules', 'jdk.m3.runtime.capability',
+                            '-cp', smoke, 'jdk.m3.runtime.proof.CapabilityImageSmoke'])
         if image_proof != 'M3_CAPABILITY_DEVELOPER_IMAGE_PASS':
             raise AssertionError('developer image API did not execute')
     actual = {p.relative_to(root).as_posix(): sha(p) for p in tracked}

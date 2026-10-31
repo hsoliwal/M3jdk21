@@ -10,20 +10,20 @@
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/SOURCE_SEALS.json",
-      "git_sha": "e007013bed8d8c4861d0e6cc9974be930a193639",
-      "sha256": "6ae7826b3d667534f6514f2d920ce35d7a096e2722708621c7550a8a67287cc3",
+      "git_sha": "28c80e43224453dd743989521e9777abfbd30021",
+      "sha256": "eac14c0a231a7488d14176020ef7868c75c47c4eee66b3bc8bb806f22a655861",
       "bytes": 1862
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/evidence/qualified-sdk/SDK_INPUTS.tsv",
-      "git_sha": "b44603a9e2b4d324f350a39e5f2fec865093bf53",
-      "sha256": "f68af9f27dc07aada8146cfd874f775873ed3b72ca2582024784a86be243a00d",
+      "git_sha": "8d02fda367dc99985a7af9777ad02dad988a6b64",
+      "sha256": "1665acd489dc090865a4b6f4383283c1913883e29893b0c76160a6b624e66c78",
       "bytes": 3811
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/evidence/qualified-sdk/SDK_RESULTS.tsv",
-      "git_sha": "7cc6b64c3c3f3d2960009a9587ce2221ee56dd2e",
-      "sha256": "1a5a3b65e9e8595aac873d70a1b3b5887b43ebf80192b097d4da0919fc82c8ae",
+      "git_sha": "5d11f83d8dd958ad2d3292dd4221015dd541bc65",
+      "sha256": "7024723a2deeac3dd6e8b2e537dcb984917a60bcc0cf594406528b58119ba8de",
       "bytes": 1176
     },
     {
@@ -46,8 +46,8 @@
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/evidence/receiver-01/POSTIMAGE_READBACK.json",
-      "git_sha": "1373b2e3feebdef91eced28640287cd9c59a0297",
-      "sha256": "4f927a74be3441c919d35b1207e4eaf69d415c1911e8886ede616227f7d55baa",
+      "git_sha": "34d43dd782fb50d5130477d1e80d41f1d197984b",
+      "sha256": "5388d3f3cc2516103be696e74c8abd46f979c8447559c8d166a249fc51f8436e",
       "bytes": 1750
     },
     {
@@ -142,20 +142,20 @@
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-array-mask-lookup-20261018/m3__collections__src__main__java__com__m3__collections__M3LongBitmapFilteredSnapshot.java.txt",
-      "git_sha": "f82ffe51ababbdd9b663ceb2b113d7efc9e121e0",
-      "sha256": "9b4b095f7f51b27a76e6a56cda60c6662cbbf60bcb8b55655f82c127b4451af6",
+      "git_sha": "e03522cb007d2c851c29c3c16e5a866c04a6d98e",
+      "sha256": "e5eb87e3d8dd3f0e0efcae9159eb4862a9b727d9ce3e498a314b43a2ee07a3ad",
       "bytes": 13929
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-array-mask-lookup-20261018/m3__collections__src__test__java__com__m3__collections__M3LongBitmapFilteredSnapshotSelfTest.java.txt",
-      "git_sha": "a714930c92090556127fa2559c2d91f58fdae434",
-      "sha256": "57dcca5226299fe29f6c116f83bff76040a1c7483e5671d425c0832a1c016a4a",
+      "git_sha": "bffb615c61bd8077e4037d40993f4f35f9088e8e",
+      "sha256": "5104231f3136b0611935a48438bc86f854686e03fe38787eb35d65efd9d56ff3",
       "bytes": 16419
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-array-mask-lookup-20261018/m3__collections__src__test__java__com__m3__collections__M3StateMaskHistogramSelfTest.java.txt",
-      "git_sha": "78808f3a52ddb2171a60225ce89fca0a5bc6a959",
-      "sha256": "3386e196bccd356dd022a5dfa50e67cda6887aef08ff7b738703230cc37b37b6",
+      "git_sha": "8a176ad12544fb3a58d06748cc2ab88caa42b5ae",
+      "sha256": "1c35603d42754411a6d5c068ae2b19cad3dde9ae2605ce5b15222d33cc95d2d6",
       "bytes": 13239
     },
     {
@@ -166,26 +166,26 @@
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-array-mask-lookup-20261018/pre/m3__collections__src__main__java__com__m3__collections__M3LongBitmapFilteredSnapshot.java.txt",
-      "git_sha": "a5fe77001be04ca123593908fb68ca008935d543",
-      "sha256": "ef4e4f4b7a8871cba0e631b96480ad3cf1e43640e5bf84a89cc91806df2d54d9",
+      "git_sha": "0428338e245926b3884482409ebb0a5ec9d8f90e",
+      "sha256": "4cb21dae105bbd2ca2d2772c7ba097a133e67e6de4fa77ff4deed3a354642d23",
       "bytes": 13163
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-array-mask-lookup-20261018/pre/m3__collections__src__test__java__com__m3__collections__M3LongBitmapFilteredSnapshotSelfTest.java.txt",
-      "git_sha": "246745524719dffdd0396166282a3382f1759bf3",
-      "sha256": "de0be6b6fa43ea9b824db0f79106213976e94f8f7cdf6a84f15378a6c090cc37",
+      "git_sha": "cc7a8a5a6c6176aa0057399c52853f7a04c54cc0",
+      "sha256": "38a4258d2ea52d351140b81fe4da28d348d4be40e893ed4cadc968157316fcb0",
       "bytes": 14241
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-array-mask-lookup-20261018/pre/m3__collections__src__test__java__com__m3__collections__M3StateMaskHistogramSelfTest.java.txt",
-      "git_sha": "e5dc5194c885c5adbf2d243fff70a3a551935c47",
-      "sha256": "11dbbb4682fbe085b35f3dbccc11e78039c0700b47794ad0bbc244723ec6473d",
+      "git_sha": "e5b646179255d5444a5c4184819b5b0ad4faa76a",
+      "sha256": "693bd6e7bee9d730b4104e1f15d39a0e5ec2917583f92af85d2eaddf1506b176",
       "bytes": 8419
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-array-mask-lookup-20261018/m3__collections__src__main__native__collections__m3_state_mask_histogram.c.txt",
-      "git_sha": "f7099d5e06db8c76fe5d6549f8d167f965569c35",
-      "sha256": "21ff3a8dade438a819d411fba96a6cb4ee8ddbd4c568409686137c42524e41bf",
+      "git_sha": "ee5fe3adb1320c7879170028c852498d90ad935c",
+      "sha256": "05b9dd651f4c4b8c6759bd06bb3bf3107199be0d39c6c86daebd5e1e4fd8c111",
       "bytes": 4065
     },
     {
@@ -208,8 +208,8 @@
     },
     {
       "path": "synexia-openrewrite-recipes/recipe-crates/m3-array-mask-lookup-20261018/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-array-mask-lookup-20261018/pre/m3__collections__src__main__native__collections__m3_state_mask_histogram.c.txt",
-      "git_sha": "b49b0ef89dfdd07f51730a7034aef0b84516082a",
-      "sha256": "2a426399b299fac7b21de78ab5938197e2b2e628b54158642c3631ee3a986033",
+      "git_sha": "fb608faed315aded73780821d1ee7fb1b28e346d",
+      "sha256": "0673b98601d4155ac2ea2d51f972e6f23f89e7d6c3a6105d6efd84b89fce9c1d",
       "bytes": 2740
     },
     {

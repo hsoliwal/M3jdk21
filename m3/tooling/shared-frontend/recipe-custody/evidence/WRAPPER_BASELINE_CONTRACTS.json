@@ -40,7 +40,7 @@
   "gates_overlap": "Filtered main and JUnit invoke the same five contract methods; their counts are not independent coverage.",
   "performance_claimed": false,
   "toolchain_setup": "Production module and classpath tests compiled separately, matching the target POM; an initial combined invocation failed JUnit module readability before any runtime test.",
-  "inputs_sha256": "6a6d89c306bc33abfa7f708ca8261e28c334658ed616e522446798847ca691fe",
+  "inputs_sha256": "b55e879e1591f919f551c5563cb942fa24834c676313a9a34a634b911febfb89",
   "logs": {
     "production-javac.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "test-javac.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",

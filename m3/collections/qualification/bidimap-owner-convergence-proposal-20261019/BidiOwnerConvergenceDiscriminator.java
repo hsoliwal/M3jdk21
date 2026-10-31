@@ -12,8 +12,8 @@
  * Contributors:
  *     Hitesh Soliwal (Synexia) - initial API and implementation
  *******************************************************************************/
-import com.m3.collections.apache.M3BidiMap;
-import com.m3.collections.apache.M3DualLinkedHashBidiMap;
+import jdk.m3.collections.apache.M3BidiMap;
+import jdk.m3.collections.apache.M3DualLinkedHashBidiMap;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;

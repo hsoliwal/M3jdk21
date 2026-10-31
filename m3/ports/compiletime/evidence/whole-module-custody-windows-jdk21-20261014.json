@@ -7,253 +7,253 @@
   "current_crate_targets": 29,
   "sources": [
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3BytecodeOffsets.java",
-      "sha": "4cd6f079f22c1800571054aefb6481a478758b36",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3BytecodeOffsets.java",
+      "sha": "b2320826fd113910e0871af43e4db11da8149c50",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3CallSiteCatalog.java",
-      "sha": "b8adfe9ff668b4fbf01f9380cec74c255c530ae0",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3CallSiteCatalog.java",
+      "sha": "7bca56b75f1508f28496bb3b49e9d0c75b6a8e38",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ClassScan.java",
-      "sha": "eca944fa53ed8c084b978ad1a8b0e1b290773bd0",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ClassScan.java",
+      "sha": "515e64b8d05fa6e2e95b2eadd9444d2ed0e11986",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3CompileTimeStringInventory.java",
-      "sha": "e6f85a51ba51e0b64a6079866f875bd109c9f3c6",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3CompileTimeStringInventory.java",
+      "sha": "e8a3bf23421a20a32fafb2a0512cd5821bec1c55",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexDifferential.java",
-      "sha": "60c2a55cf818c809bb5f1dd4a61df2f4e3ffb215",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexDifferential.java",
+      "sha": "cf569162caf181495486bacbb1f2a473ccae81d7",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexGate.java",
-      "sha": "a8d3b1301d51c10aacab1fa4ce6bd9c2c17075ab",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexGate.java",
+      "sha": "4c9c295041e47ea43d66c4d56daca527dcaadd49",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexHarvester.java",
-      "sha": "d2d957060725e06a330fe7097b3b0a477c4e159f",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexHarvester.java",
+      "sha": "82bf34b941573dab31b7850acf9058f97ef8c0e7",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexImage.java",
-      "sha": "0b4a62e543ab2b6ddfe794edd1ec4ee2a83db319",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexImage.java",
+      "sha": "7523bc8e105c5365385c055feb85c0deb9504b2e",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ConstantRegexImageWriter.java",
-      "sha": "c19bd540361a8f4e3e2e7333103791bb6deb910c",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ConstantRegexImageWriter.java",
+      "sha": "ff6a82e42ffb621ee1e49e5e2764b3fef75730c2",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ContentKey.java",
-      "sha": "734e35504bacb787a1e47bc7e39fac7212b1e810",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ContentKey.java",
+      "sha": "9d562196c1de0f57bb52f24f9c3aef788008b050",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3EscapeFlow.java",
-      "sha": "5e4e63059fc6b1a54ab66636aef2c9e0ae1e65cb",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3EscapeFlow.java",
+      "sha": "9eda59508ea15cb6ac72fa4cf9c74a08ed84193d",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3FormatPlan.java",
-      "sha": "1e042908ba6775a1c82e3f842211817b7e451df1",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3FormatPlan.java",
+      "sha": "7f9ce9fc7de1553537243d1e1dd60af9828b45b3",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3InventoryReport.java",
-      "sha": "006ae5a8877788ce4152cca1a1a937e903880a8f",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3InventoryReport.java",
+      "sha": "52ae4a1e23943c39862b7f00fdca3750121ec52b",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3InventoryState.java",
-      "sha": "578f5daf77970ad79a89c80f36f9093eb259b619",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3InventoryState.java",
+      "sha": "4ff81277a954327fd39079ba3d27698140c978c7",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3ItemReferenceScan.java",
-      "sha": "cda993a1cb5654b34e3e339c4306bbb1c28881a4",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3ItemReferenceScan.java",
+      "sha": "d9d94ebf3c1b88a8a09003846526ea77d8d6ae37",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3PatternNodes.java",
-      "sha": "0b640e6355aef525203648919d0da63ed32bdbec",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3PatternNodes.java",
+      "sha": "0b8bc735b876629db73e1ddbbd0cd796bc34e777",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3RegexRequirement.java",
-      "sha": "bc7f55e9ea68d210263ae82bc8dab403ea63ef70",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3RegexRequirement.java",
+      "sha": "6dd3479f9ed3db72e3a498a5bdeea9b08715d50f",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3SiteRecorder.java",
-      "sha": "8cca345da7f6c856d44189ba45d009157f42667f",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3SiteRecorder.java",
+      "sha": "c094bbba5f7775fe84fea258d35e778201776362",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/compiletime/M3Tsv.java",
-      "sha": "db1279c9f70861c6e14a2fe5b3d0573414a3572e",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/compiletime/M3Tsv.java",
+      "sha": "0a12120890dd67d565dcff370ebb3b3b080115f2",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/residency/M3BehaviourOnly.java",
-      "sha": "415620e147bcf00f92592f5c5aec52040e01b5f6",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/residency/M3BehaviourOnly.java",
+      "sha": "ed03b050dd6ccc5d2f6241b7315a6b6ab65adb62",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/residency/M3Retains.java",
-      "sha": "88f862ac2b11413ad4730b12b653ef3db9f648c4",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/residency/M3Retains.java",
+      "sha": "28308e441d81edbf74e5921682d8d287e98b2615",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/main/java/com/m3/residency/M3Transient.java",
-      "sha": "242a22bfb0f63ff1f1ef414a328322dd5bdd096c",
+      "path": "m3/ports/compiletime/src/main/java/jdk/m3/residency/M3Transient.java",
+      "sha": "4bfecd03d45ec7507fbbb5d9a730bc8e6d93b881",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ConstantRegexImageTest.java",
-      "sha": "3bcc014701f731baaf5dab71542423a4d528d466",
+      "path": "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ConstantRegexImageTest.java",
+      "sha": "bfc44f65d30e2baea7a39b08d6ee2ad52cf7e7d0",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/M3FormatPlanTest.java",
-      "sha": "29a6b0ce7d2fc510317b2172c7304f27febaf7f7",
+      "path": "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3FormatPlanTest.java",
+      "sha": "47da324da5242ece21753e1d534aaa603d5536e5",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/M3ItemReferenceScanTest.java",
-      "sha": "f256be8dc7b4494d2db49ab3cd32421c2d756ae4",
+      "path": "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3ItemReferenceScanTest.java",
+      "sha": "28e68785d0f80226cf40ec79751dd261f3af88bc",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/M3RegexRequirementTest.java",
-      "sha": "f627f673c1afcb6063ec02302213a0250dbef0d4",
+      "path": "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/M3RegexRequirementTest.java",
+      "sha": "460d3f6ee813a2965d9b5eaac666f3c6211cb7ef",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/fixture/FakeItem.java",
-      "sha": "e95666a41b31f1e94817ee4c3502070bfcc18657",
+      "path": "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/fixture/FakeItem.java",
+      "sha": "ad53f8a7b81615ad741b6fbe96bbc1998758361f",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/fixture/FakeTable.java",
-      "sha": "76d4eac9d90a1d0c4e50ce5eef45597bc85130d6",
+      "path": "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/fixture/FakeTable.java",
+      "sha": "a3ac4ce8a558ae6304c3bde505db7e83b910f8cd",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/compiletime/src/test/java/com/m3/compiletime/fixture/ItemUsers.java",
-      "sha": "7152c3c150bad6efc084900fdfea9130825f4257",
+      "path": "m3/ports/compiletime/src/test/java/jdk/m3/compiletime/fixture/ItemUsers.java",
+      "sha": "053a0c3066013b7273f7585905bda04472a7a14d",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3CodeTextSignalBatch.java",
-      "sha": "b10bd333c74d9c0ae7ded451831aaab645e1117a",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatch.java",
+      "sha": "e487f603cd39ff285ec5d33c90b104c8db07bdac",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3CodeTextSignalBatchJava.java",
-      "sha": "d72b541f744fa644cd9072096f1ee3c473d0f29c",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatchJava.java",
+      "sha": "bfce5dc66998c3ca24592ec0e4baab0fda78f76d",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3CodeTextSignalBatchNative.java",
-      "sha": "3339dfdf915012ee4091095745cbc3bb1a4b42a1",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignalBatchNative.java",
+      "sha": "0dcd45983cb27db96fd81646e81e6afdc44dcdc3",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3CodeTextSignals.java",
-      "sha": "06cc4d51ddbe305652c164b0002dd85eafec9116",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3CodeTextSignals.java",
+      "sha": "4c1a7042645de54db053e78c519f667940b024f5",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3EditDistancePlan.java",
-      "sha": "84bc435ddfa6a84d5c41dc5ae3ddc2711d609938",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3EditDistancePlan.java",
+      "sha": "0ce6b26740c698480fbfbe81323c1babc0517e6e",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3Histogram.java",
-      "sha": "e8abc6db52f3032f415f5316167a169dec043438",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3Histogram.java",
+      "sha": "ad0c7d46aa933e553a96c4576e9ff6d85a112f93",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3Progress.java",
-      "sha": "028db488d17a3597d060c1d7381f6722c9b202a3",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3Progress.java",
+      "sha": "0f2b071e55f6a092ff3841e13db8b86520339126",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexOracleCorpus.java",
-      "sha": "cbafa1bca87f81f125386cadd97d7cf2c61f53f8",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexOracleCorpus.java",
+      "sha": "8078d12cb34aed3b33d45e92deec262010bb6283",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexOracleHarness.java",
-      "sha": "64dd809ace88e97f91067b64ddcb1b1f422a23b8",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexOracleHarness.java",
+      "sha": "7385c57458a7b3f01857bc94dcee2d19c0638e39",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexShape.java",
-      "sha": "ff989cfa42d1fe29853a4850d474a8c007974718",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexShape.java",
+      "sha": "1b3562aa33f7fe9ae2d6520053007dd0d5748e2d",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexStringSignals.java",
-      "sha": "e2b62034d7ba9de17fefb8c156b185a9c2011f13",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexStringSignals.java",
+      "sha": "06712696f9a9446f66fc1a764a24e5e723ea4bd8",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexStringTrialImage.java",
-      "sha": "ffce8a213e92ed460b0d50074c02dd8eb941aeb9",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexStringTrialImage.java",
+      "sha": "a886d666a11556948d85727571515e058ad0ef17",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3SimilarityBatch.java",
-      "sha": "493f0c02a065ee1c17f473807a45003f5360dbe4",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityBatch.java",
+      "sha": "6065f82f7dc83ae7d4f31f7d9314eda6ea632547",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3SimilarityBatchJava.java",
-      "sha": "42f3d27f56a669bb0d251489d5df15eb52f8118a",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityBatchJava.java",
+      "sha": "20a33545f72a36f5e373b4908c40cb56d4b7f733",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3SimilarityBatchNative.java",
-      "sha": "9489aabb2e04c9ae1c14a347e69b0798c17af3ef",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityBatchNative.java",
+      "sha": "cb147fd0d44277abbfba227e92b26864c55a12f1",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3SimilarityPrecompute.java",
-      "sha": "e1a9564234eb389878a29f1cc73ad8670ec891d7",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3SimilarityPrecompute.java",
+      "sha": "a9ff21b8b19a9433d45d76e13fb5a5d9a2b59b3a",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3TextMetrics.java",
-      "sha": "e67ad2157aacb8b31b293e522294d4c7f657adff",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TextMetrics.java",
+      "sha": "c64044be24be39dcb2f98b73c78f47d0e1bc37b0",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3TextSignals.java",
-      "sha": "631145b68358970e6a7d9a792580e7a100eebb20",
+      "path": "m3/ports/precompute/src/main/java/jdk/m3/precompute/M3TextSignals.java",
+      "sha": "9dae8c89566faf46fe93eb93abce2dbf75af21f9",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java",
-      "sha": "06935b9016a7d79f8f1fe04a77947aa64cf9a9c4",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipe.java",
+      "sha": "d517a60b077eb2adbfbcfe4d6f81951a9c7b4640",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java",
-      "sha": "3c58351234f5f6d91c1bef67a16ecec1e824aebe",
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3CompileTimeRegexPrecomputeRecipeTest.java",
+      "sha": "88727b2eb5929b124d9f4874a61c61f31516cad6",
       "encoding": "utf-8"
     },
     {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-      "sha": "7c11497c0183d04e66baa41ee5391de682175360",
+      "path": "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+      "sha": "40f543e413c245c900d6502a27645d05735a6ebd",
       "encoding": "utf-8"
     }
   ],
@@ -262,7 +262,7 @@
     "failure": "crate targets differ from port sources",
     "current_exit": 0,
     "reseal_fixed_point": true,
-    "manifest_sha256": "70c2156aa935985f480caf4d442a8595b052fb386f8bc80bf729349257f7f2d0",
+    "manifest_sha256": "fff56c5927f0d5fa03dc90f025bf519eb5e6c1c4a059364305835e91f370aae9",
     "receipt_sha256": "0bf5b14e423b4dd6ae3fb67b5423c97f5622bf61283ca29351737adc3fb1743d"
   },
   "owning_maven": {
@@ -324,7 +324,7 @@
       "wrapper grants no semantic or bootstrap authority"
     ],
     "receipt_sha256": "2100b878169b824d0581a6f983b6a5a56c8a6fc061dd105d4b190f1df99d0e56",
-    "generic_owner_blob": "7c11497c0183d04e66baa41ee5391de682175360",
+    "generic_owner_blob": "40f543e413c245c900d6502a27645d05735a6ebd",
     "dependencies": [
       {
         "coordinate": "org.openrewrite:rewrite-java:8.17.1-m3-source-1",

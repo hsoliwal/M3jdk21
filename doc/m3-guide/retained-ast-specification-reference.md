@@ -35,19 +35,19 @@ occurrence navigation, queries and codecs are described in
 occurrences and `Tree.Kind` IDs must not be substituted for formal-tree node IDs,
 production IDs or terminal sign-bit codes.
 
-The public [AST intake](../../m3/synexia-import/intakes/ast-navigation-20261007/README.md)
+The public [AST intake](../../m3/m3-import/intakes/ast-navigation-20261007/README.md)
 attributes these files to donor revision `7d2133f1412a9e7295296c3f86baae577bb3251c`.
 Its exported SHA-256 values match the retained bodies. This is a statement about
 public receiver records and bytes, not independent inspection of donor source.
-Preserve the existing [LICENSE](../../m3/vendor/synexia/LICENSE),
-[NOTICE](../../m3/vendor/synexia/NOTICE) and scoped third-party notices.
+Preserve the existing [LICENSE](../../m3/vendor/m3/LICENSE),
+[NOTICE](../../m3/vendor/m3/NOTICE) and scoped third-party notices.
 
-Repository [delivery policy](../../m3/docs/synexia-delivery.md) keeps reusable
+Repository [delivery policy](../../m3/docs/m3-delivery.md) keeps reusable
 mechanics canonical in Synexia and JDK integration target-owned. The
 [porting invariant](../../m3/docs/m3jdk21-porting-invariant.md) and
 [naming map](../../m3/docs/name-mapping.json) retain String → arrays → collections →
 AST/compiler → remaining families, with String qualification active. The newer
-[current-full-borrow plan](../../m3/synexia-import/current-full-borrow/README.md)
+[current-full-borrow plan](../../m3/m3-import/current-full-borrow/README.md)
 also leaves AST and grammar at source-pin-only and promotion phases planned.
 This documentation changes none of those states or license boundaries. The
 isolated frozen-text fixture, `ports/indexstring` bridge and canonical
@@ -55,19 +55,19 @@ isolated frozen-text fixture, `ports/indexstring` bridge and canonical
 
 ## 2. Java 21 metadata and value rows
 
-[`MIndexLanguageSpec`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexLanguageSpec.java#L17-L87) declares identity,
+[`MIndexLanguageSpec`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexLanguageSpec.java#L17-L87) declares identity,
 language, release, `SourceVersion`, ordinal-addressed rules and five token-table
 families. Its defaults obtain the programming-expression formal spec, compose a
 source `MIndexLang`, obtain the shared AST spec, and delegate plans/dispatch.
 The formal grammar implementation is not retained here. These delegates do not
 establish full Java grammar acceptance or replace javac.
 
-[`MIndexLanguageSpecs`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexLanguageSpecs.java#L5-L16) exposes the singleton
+[`MIndexLanguageSpecs`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexLanguageSpecs.java#L5-L16) exposes the singleton
 `java21()`. `forLanguage(language, release)` accepts case-insensitive `java` and
 exact release 21; other values, including null language, throw
 `IllegalArgumentException`. There is no public registration or replacement method.
 
-The package-private [`MIndexJava21LanguageSpec`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexJava21LanguageSpec.java#L21-L261)
+The package-private [`MIndexJava21LanguageSpec`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexJava21LanguageSpec.java#L21-L261)
 builds one rule per host `Tree.Kind` value at class initialization. It returns
 `java-21`, `java`, 21 and `SourceVersion.RELEASE_21`; the rule count is the host
 `Tree.Kind.values().length`, not a separately fixed numeric constant. A kind must
@@ -88,12 +88,12 @@ Its sorted vocabulary contains:
 caller's `CharSequence` directly without converting it to a `String`. Null tokens
 fail; concurrent changes to a mutable token are not synchronized. `isReservedToken`
 combines keywords and literal tokens only, not contextual keywords.
-The [complete tables and comparison](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexJava21LanguageSpec.java#L24-L120)
-and [helpers](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexJava21LanguageSpec.java#L477-L527) are authoritative.
+The [complete tables and comparison](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexJava21LanguageSpec.java#L24-L120)
+and [helpers](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexJava21LanguageSpec.java#L477-L527) are authoritative.
 
 ### Categories, labels, flags and release metadata
 
-[`MIndexSyntaxCategory`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexSyntaxCategory.java#L5-L25) has fifteen ordinal
+[`MIndexSyntaxCategory`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexSyntaxCategory.java#L5-L25) has fifteen ordinal
 bit categories: compilation, declaration, expression, statement, type, pattern,
 directive, literal, operator, control flow, name, annotation, module, error and
 other. `bit()` is `1L << ordinal()`. Categories overlap: the Java image derives
@@ -101,7 +101,7 @@ expression/statement/pattern/directive bits from `Tree.Kind.asInterface()` and a
 explicit kind-name groups; operators add the operator bit, and only an otherwise
 empty mask becomes `OTHER`.
 
-The [kind-name tables](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexJava21LanguageSpec.java#L263-L427) are metadata,
+The [kind-name tables](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexJava21LanguageSpec.java#L263-L427) are metadata,
 not a validator. Literal names ending `_LITERAL` use `LITERAL_VALUE`; name kinds
 use `IDENTIFIER`; class/interface/enum/annotation/record/method/variable/type-parameter
 kinds use `DECLARATION_NAME`; primitive types and labeled-statement/break/continue
@@ -127,21 +127,21 @@ JLS correctness or preview-support claim.
 
 ### Rule and operator record validation
 
-[`MIndexLanguageRule`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexLanguageRule.java#L13-L42) retains rule index,
+[`MIndexLanguageRule`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexLanguageRule.java#L13-L42) retains rule index,
 kind, category mask, label policy, flag policy, operator, minimum release and
 preview flag. Its compact constructor requires non-null object components,
 `ruleIndex == kind.ordinal()` and positive minimum release. It does not validate
 category-mask bits, release availability or combinations. `is(category)` null-checks
 then tests the mask; `isOperator()` delegates to the operator row.
 
-[`MIndexOperatorRule`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexOperatorRule.java#L12-L36) retains token,
+[`MIndexOperatorRule`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexOperatorRule.java#L12-L36) retains token,
 precedence, associativity, arity, short-circuit and assignment flags. Token and
 associativity are non-null; precedence is nonnegative; arity is 0–3; arity zero
 requires precedence zero. It does not reject positive arity with zero precedence,
 empty tokens or inconsistent flags. `NONE` is empty token, precedence/arity zero,
 `NONE` associativity and false flags; `isOperator` is simply arity nonzero.
 
-The [Java operator table](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexJava21LanguageSpec.java#L429-L475) uses higher
+The [Java operator table](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexJava21LanguageSpec.java#L429-L475) uses higher
 precedence for tighter binding: postfix ++/-- 16 (left); prefix ++/--, unary +/-/~/!
 15 (right); cast 14 (right); multiplicative 13; additive 12; shifts 11; relational
 and instanceof 10; equality 9; bitwise &/xor/or 8/7/6; conditional &&/|| 5/4;
@@ -152,7 +152,7 @@ a token, so token identity alone does not select unary, binary or postfix semant
 
 ## 3. Canonical spec registry and cache lifetime
 
-[`MIndexASTSpecs`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecs.java#L12-L94) owns two static
+[`MIndexASTSpecs`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecs.java#L12-L94) owns two static
 `ConcurrentHashMap<String, …>` caches. `forLang` null-checks the language and uses
 its identity as the `compute` key. The first successful request constructs the
 spec. A later same-identity request returns the existing object only when language
@@ -183,7 +183,7 @@ retained files. No mmap lifecycle guarantee is inferred from the factory name.
 
 ## 4. Formal spec precompute
 
-[`MIndexASTSpecPrecompute`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecPrecompute.java#L24-L272) retains the
+[`MIndexASTSpecPrecompute`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecPrecompute.java#L24-L272) retains the
 language and grammar, optional source rule image, primitive symbol/production lanes,
 compressed postings, operator mappings, plans, dispatch and a 64-bit fingerprint.
 Its package-private constructor is reached by the registry.
@@ -204,7 +204,7 @@ of its LHS is added, and `canEndAfter(lhs)` determines the separate EOF flag.
 Prediction symbols are sorted by numeric symbol ID; reverse uses are filled in
 production order. EOF is not an invented terminal ID.
 
-[Operator mapping](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecPrecompute.java#L245-L267) scans expression
+[Operator mapping](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecPrecompute.java#L245-L267) scans expression
 operators in their external order. Literal grammar symbols whose name exactly
 equals the token receive the first matching operator index; duplicates do not
 replace it. Source rule operators likewise map by first exact token match, ignoring
@@ -212,7 +212,7 @@ arity, precedence and associativity. No match gives `-1`/empty `Optional`. Thus 
 shared token such as `+` can map several Java rule kinds to one expression-operator
 index; the mapping is not overload resolution.
 
-[Queries](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecPrecompute.java#L274-L510) bounds-check symbol,
+[Queries](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecPrecompute.java#L274-L510) bounds-check symbol,
 production and RHS ordinals. FIRST, FOLLOW, prediction and use postings return
 copies. `predictsTerminal` returns false for a valid nonterminal argument.
 `sourceRule` throws `IllegalStateException` when no source rule image exists;
@@ -226,12 +226,12 @@ optional token class and name units. Production hashes mix grammar fingerprint,
 production ID, LHS and ordered RHS. The spec fingerprint mixes the language
 fingerprint, symbol/production hashes, source operator mapping and plan/dispatch
 fingerprints. These hashes are candidate/identity aids, not cryptographic
-attestation or semantic equality. [Hash helpers](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecPrecompute.java#L531-L585)
+attestation or semantic equality. [Hash helpers](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecPrecompute.java#L531-L585)
 and checked offset arithmetic define the exact algorithm.
 
 ## 5. Production construction plans
 
-[`MIndexASTProductionPlans`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTProductionPlans.java#L126-L364)
+[`MIndexASTProductionPlans`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTProductionPlans.java#L126-L364)
 precomputes each RHS slot's symbol and role: nonterminal, token class, operator
 literal, or ordinary literal. It records nullable self, nullable prefix strictly
 before the slot, nullable suffix strictly after it, direct operator flag/index,
@@ -253,7 +253,7 @@ The implementation propagates graph facts through every production without
 filtering on productive/reachable flags. A hit therefore must not be interpreted
 as proof that a complete accepted token sequence exists. `derivesTerminal` returns
 false when the requested target is a valid nonterminal; operator indices are
-bounds-checked against the expression table. [Closure helpers](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTProductionPlans.java#L624-L757)
+bounds-checked against the expression table. [Closure helpers](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTProductionPlans.java#L624-L757)
 keep these mechanics explicit.
 
 `shapeHash64` deliberately omits symbol names/IDs and particular operator tokens;
@@ -262,7 +262,7 @@ combines the production hash, shape and production minimum. Neither proves
 semantic equivalence. The plan fingerprint includes language fingerprint, plan
 hashes and before/after minima.
 
-[Syntax-kind encoding](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTProductionPlans.java#L543-L573) uses nonnegative
+[Syntax-kind encoding](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTProductionPlans.java#L543-L573) uses nonnegative
 production IDs and `Integer.MIN_VALUE | terminalSymbol` for terminals. Encoding
 checks the relevant production/symbol and rejects nonterminal symbols.
 `terminalSyntaxKindCode` tests sign only; decoding a terminal masks the low 31 bits
@@ -272,7 +272,7 @@ validated terminal coordinates.
 
 ## 6. Predictive dispatch, order and ambiguity
 
-[`MIndexASTProductionDispatch`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTProductionDispatch.java#L61-L222)
+[`MIndexASTProductionDispatch`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTProductionDispatch.java#L61-L222)
 builds from either the precompute or the image view through a private `Source`
 adapter. It requires each LHS to have `NON_TERMINAL` kind and rejects predicted
 symbols whose kind is `NON_TERMINAL`, with both coordinates range-checked. It does
@@ -289,7 +289,7 @@ unequal keys. Capacity is a power of two at least `max(2, entries + entries/2 + 
 checked arithmetic and the explicit int-capacity guard can fail construction.
 EOF candidates have their own per-symbol compressed postings.
 
-[Lookup](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTProductionDispatch.java#L224-L326) has these results:
+[Lookup](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTProductionDispatch.java#L224-L326) has these results:
 
 | Cell | Candidate count | Unique production | Ambiguous | Batch flags |
 | --- | --- | --- | --- | --- |
@@ -325,10 +325,10 @@ helper computes the arguments before `writeResult`, but this does not establish
 provider-independent alias safety. No transactional rollback is promised for
 provider/runtime exceptions. The EOF scalar loop requests a candidate array per
 row; the interface's allocation-free comment is not a measured or universal
-zero-allocation guarantee. [Defaults](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecImageView.java#L101-L188)
-and [concrete scalar loops](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTDispatchNative.java#L235-L378) show the distinction.
+zero-allocation guarantee. [Defaults](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecImageView.java#L101-L188)
+and [concrete scalar loops](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTDispatchNative.java#L235-L378) show the distinction.
 
-The package-private [`MIndexASTDispatchNative`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTDispatchNative.java#L14-L233)
+The package-private [`MIndexASTDispatchNative`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTDispatchNative.java#L14-L233)
 uses ABI version 1 and a class-initialized threshold from
 `synexia.indexstring.ast.dispatch.native.threshold`, default 256 and clamped to
 at least 1. Its volatile boxed availability flag is initialized under class
@@ -343,7 +343,7 @@ for a direct buffer. Native status zero means success; `-1` falls back to scalar
 Java without disabling availability; other status codes throw `IllegalStateException`.
 No provider was loaded or run here.
 
-[Mapped helper validation](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTDispatchNative.java#L380-L427) checks
+[Mapped helper validation](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTDispatchNative.java#L380-L427) checks
 nonnegative section bases, entry/candidate counts and EOF symbol count,
 power-of-two slot count at least two, and section ranges against buffer **capacity**,
 not limit. The ordinary mapped helper does not explicitly reject a negative
@@ -358,7 +358,7 @@ source's stated contract, not a native lifetime proof available in this slice.
 
 ## 8. Per-formal-tree geometry and snapshot transfer
 
-[`MIndexASTSpecTreePrecompute`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecTreePrecompute.java#L505-L696)
+[`MIndexASTSpecTreePrecompute`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecTreePrecompute.java#L505-L696)
 builds fresh primitive geometry while retaining the supplied spec and tree.
 The ordinary entry is `spec.precompute(tree)`, which checks grammar fingerprint.
 Build rejects an empty tree, repeated child parentage, a parented root, disconnected
@@ -375,7 +375,7 @@ and literal symbols. All fold ordered child hashes. The logic description is
 identifier/name-insensitive, but the actual exclusions include value placeholders.
 No hash proves equality. Two hashed bits per symbol form a Bloom-like subtree
 signal; `mayContainSymbol` can be a false positive, whereas `containsSymbol`
-uses exact posting counts. [Hash helpers](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecTreePrecompute.java#L966-L1023)
+uses exact posting counts. [Hash helpers](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecTreePrecompute.java#L966-L1023)
 define the UTF-16 and token-class details.
 
 Node postings are filled in ascending node-ID order; separate preorder postings
@@ -386,20 +386,20 @@ zero-distance ancestor is self; a negative distance fails and beyond-root return
 queries check bounds. `childRole` rejects terminals and checks child-count/RHS-length
 agreement; `childGrammarSymbol` rejects terminals but does not repeat that count
 check. `productionShapeHash64` rejects terminals.
-[Queries](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecTreePrecompute.java#L698-L954) return copied posting
+[Queries](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecTreePrecompute.java#L698-L954) return copied posting
 arrays and shared spec/tree references. Static kind decoders only enforce sign;
 unlike the plan's production decoder they have no grammar-specific bounds check.
 
 ### Snapshot validation is a bounded transfer contract
 
-[`snapshot`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecTreePrecompute.java#L104-L271) clones every primitive
+[`snapshot`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecTreePrecompute.java#L104-L271) clones every primitive
 array. The public nested `Snapshot` exposes no public constructor or public lane
 accessors; its package-private constructor stores supplied arrays directly and
 package-private accessors return them. Publicly obtained snapshots are detached
 from the original precompute, not serializations of the grammar or token stream.
 
 `restore(spec, tree, payload)` null-checks, validates, then clones all lanes into a
-new precompute retaining the supplied objects. [Validation](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecTreePrecompute.java#L273-L503)
+new precompute retaining the supplied objects. [Validation](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecTreePrecompute.java#L273-L503)
 limits tree nodes, symbol count and production count to 16,000,000; checks node
 count/root/levels and all array lengths; checks parentage, preorder permutation
 and inverse/root, depths, kind codes, subtree/leaf/hash/signal derivations,
@@ -419,14 +419,14 @@ neither repairs nor executes them.
 
 ## 9. Compiled spec image and serialization effects
 
-[`MIndexASTSpecImageView`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecImageView.java#L15-L197) is a read-only
+[`MIndexASTSpecImageView`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecImageView.java#L15-L197) is a read-only
 query interface for identifiers, fingerprints, symbol/production facts, construction
 plans, derivation, source-rule mapping, dispatch, syntax codes and payload sizing.
 It provides only the batch defaults and private length validators. An interface
 contract does not prove copying, mapping, close semantics or safe publication for
 missing implementations.
 
-[`MIndexASTSpecImage.compile`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecImage.java#L23-L127) wraps a spec in
+[`MIndexASTSpecImage.compile`](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecImage.java#L23-L127) wraps a spec in
 the absent heap implementation and calls `write`. `write` accepts a non-null view
 and path, refuses a mapped legacy-v1 image with a request to rebind through the
 canonical language, reconstructs dispatch from prediction sets, computes counts
@@ -445,7 +445,7 @@ version bytes, then primitive lanes. Its 128-byte header is:
 | 80, 88, 96, 104, 112 | language, grammar, AST-spec, production-plan and content fingerprints (8 bytes each) |
 | 120, 124 | arrays start; dispatch entry count |
 
-The [ordered layout](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecImage.java#L602-L798) allocates without padding:
+The [ordered layout](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecImage.java#L602-L798) allocates without padding:
 
 1. Symbol kind/token-class/literal-case/flags byte lanes, minimum-token ints and
    symbol-hash longs; FIRST, FOLLOW and use offset/value pairs; operator-index and
@@ -467,7 +467,7 @@ that branch is not evidence that a retained reader accepts either version.
 serialization rechecks its entry/candidate/hash-capacity geometry. Terminal matrix
 writing rejects a returned nonterminal and operator matrix writing checks indices.
 
-The [content fingerprint](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecImage.java#L129-L201) mixes identifiers,
+The [content fingerprint](https://github.com/hsoliwal/M3jdk21/blob/363c02caa2e5af1df9460b927ecd78f6a9dbcefb/m3/vendor/m3/m3-indexstring/src/main/java/jdk/internal/m3/indexstring/ast/MIndexASTSpecImage.java#L129-L201) mixes identifiers,
 reported fingerprints/counts, symbol facts/postings, production/plan geometry,
 derivation arrays, source-rule operator mappings and optionally dispatch fingerprint/
 summary counts. It is a 64-bit custom hash; the distinct 32-byte SHA-256 trailer
@@ -508,7 +508,7 @@ widening, so extreme aggregate lengths can overflow before the long multiplicati
 or total. These counters are not guaranteed wide-size bounds or retained-heap/
 process-memory measurements; no overflow case was executed here.
 
-The [historical qualification receipt](../../m3/synexia-import/intakes/ast-navigation-20261007/evidence/QUALIFICATION.json)
+The [historical qualification receipt](../../m3/m3-import/intakes/ast-navigation-20261007/evidence/QUALIFICATION.json)
 reports four original AST-precompute tests and isolated importer cases, while
 explicitly excluding source-complete build, cold-image valid-checksum/wrong-geometry
 refusal, cache/edit/resident lifecycle, native providers, matched JDK/jtreg,

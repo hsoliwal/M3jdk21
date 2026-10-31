@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
-package com.synexia.indexstring;
+package jdk.internal.m3.indexstring;
 
-import com.m3.text.compat.M3Text;
+import jdk.m3.text.compat.M3Text;
 import java.io.ByteArrayInputStream;
 import java.io.CharArrayReader;
 import java.io.IOException;

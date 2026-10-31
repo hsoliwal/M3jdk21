@@ -89,14 +89,14 @@ def admit_recipe(recipe, target, run=None):
     """Delegate source/Result qualification to the existing receiver; additionally require POST."""
     recipe, target = recipe.resolve(strict=True), target.resolve(strict=True)
     candidate = contained(recipe, 'target/candidate', file=False)
-    report = contained(recipe, 'target/surefire-reports/TEST-com.synexia.rewrite.M3TaskRecipeTest.xml')
+    report = contained(recipe, 'target/surefire-reports/TEST-jdk.internal.m3.rewrite.M3TaskRecipeTest.xml')
     inputs = contained(candidate, 'SDK_INPUTS.tsv')
     results = contained(candidate, 'SDK_RESULTS.tsv')
     require_fresh_sdk_report(report, inputs, results)
     command = [sys.executable, contained(recipe, 'receive.py'), '--crate', recipe,
                '--target', target, '--check']
     message = (run or checked_process)(command)
-    seals = list((recipe/'src/main/resources/com/synexia/rewrite').glob('hash-pinned-*/*/manifest.tsv'))
+    seals = list((recipe/'src/main/resources/jdk/internal/m3/rewrite').glob('hash-pinned-*/*/manifest.tsv'))
     identities = {manifest.parent.name for manifest in seals}
     if len(identities) != 1:
         raise ValueError('ambiguous or missing recipe identity')
@@ -264,13 +264,13 @@ def main():
         test_names = ['M3BitLane28FenwickSelfTest', 'M3BitLane28PreparedTraversalSelfTest',
                       'M3ObjectStateSlots28SelfTest', 'M3IndexMaskWindowSelfTest', 'M3MaskProgramSelfTest',
                       'M3LongBitmapFilteredSnapshotSelfTest', 'M3LongIndexProjectionMaskOffsetProof']
-        test_sources = remember([root/'m3/collections/src/test/java/com/m3/collections'/(name+'.java')
+        test_sources = remember([root/'m3/collections/src/test/java/jdk/m3/collections'/(name+'.java')
                                  for name in test_names])
         run('current-test-compile', common+['-cp', classes, '-d', tests, argfile('tests', test_sources)])
         cp = str(classes)+os.pathsep+str(tests)
         for name in test_names:
             extra = ['java'] if name == 'M3MaskProgramSelfTest' else []
-            run('java-'+name, [jdk/'bin/java', '-Xmx512m', '-ea', '-cp', cp, 'com.m3.collections.'+name, *extra])
+            run('java-'+name, [jdk/'bin/java', '-Xmx512m', '-ea', '-cp', cp, 'jdk.m3.collections.'+name, *extra])
         native_root = root/'m3/collections/src/main/native/collections'
         bitlane, window, compactor = remember([native_root/name for name in
               ('segmented_bit_lane.c', 'm3_index_mask_window.c', 'm3_index_mask_compactor.c')])
@@ -278,12 +278,12 @@ def main():
                   '-fsanitize=undefined', '-fno-sanitize-recover=all',
                   '-I'+str(jdk/'include'), '-I'+str(jdk/'include/linux')]
         bitlib = out/'libbitlane.so'
-        run('current-bitlane-native', cflags+['-include', headers/'com_m3_collections_M3BitLane28.h', bitlane, '-o', bitlib])
+        run('current-bitlane-native', cflags+['-include', headers/'jdk_m3_collections_M3BitLane28.h', bitlane, '-o', bitlib])
         run('current-mask-native', cflags+[window, compactor, '-o', out/'libm3_collections_mask.so'])
         run('current-bitlane-checked-jni', [jdk/'bin/java', '-Xcheck:jni', '-Xmx512m', '-ea', '-cp', cp,
-            'com.m3.collections.M3BitLane28PreparedTraversalSelfTest', 'native', bitlib])
+            'jdk.m3.collections.M3BitLane28PreparedTraversalSelfTest', 'native', bitlib])
         run('current-mask-checked-jni', [jdk/'bin/java', '-Xcheck:jni', '-Xmx512m',
-            '-Djava.library.path='+str(out), '-cp', cp, 'com.m3.collections.M3MaskProgramSelfTest', 'native'])
+            '-Djava.library.path='+str(out), '-cp', cp, 'jdk.m3.collections.M3MaskProgramSelfTest', 'native'])
     else:
         asm_sources = []
         for name in ('asm-9.6', 'asm-tree', 'asm-analysis'):
@@ -301,10 +301,10 @@ def main():
         cp = str(classes)+os.pathsep+str(dependencies)
         run('current-port-junit', [jdk/'bin/java', '-Xmx512m', '--add-opens',
             'java.base/java.util.regex=ALL-UNNAMED', '-jar', junit, 'execute', '--disable-banner',
-            '--class-path', cp, '--scan-class-path', '--include-package', 'com.m3.compiletime',
+            '--class-path', cp, '--scan-class-path', '--include-package', 'jdk.m3.compiletime',
             '--fail-if-no-tests', '--reports-dir', out/'junit-reports'])
         run('current-ast-leaf-selftest', [jdk/'bin/java', '-Xmx512m', '-ea', '-cp', cp,
-                                         'com.m3.compiletime.M3ASTLeafIndexSelfTest'])
+                                         'jdk.m3.compiletime.M3ASTLeafIndexSelfTest'])
     for relative, expected in {**sources, **targets}.items():
         if digest(contained(root, relative)) != expected:
             raise ValueError('source changed during integration proof: '+relative)

@@ -90,7 +90,7 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java \
-            -Dexec.mainClass=com.m3.a3.A3 \
+            -Dexec.mainClass=jdk.m3.a3.A3 \
             -Dexec.args="lab --root $REPO --out m3/build/a3/lab"
           LAB="$REPO/m3/build/a3/lab/results.tsv"
           test -s "$LAB"
@@ -112,7 +112,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="inv --root $REPO --out m3/build/a3/inventory.tsv"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="inv --root $REPO --out m3/build/a3/inventory.tsv"
           test -s "$REPO/m3/build/a3/inventory.tsv"
           JAVA_ROWS="$(awk -F '\t' 'NR > 1 && $5 == "JAVA" {n++} END {print n+0}' "$REPO/m3/build/a3/inventory.tsv")"
           NATIVE_ROWS="$(awk -F '\t' 'NR > 1 && $5 == "NATIVE" {n++} END {print n+0}' "$REPO/m3/build/a3/inventory.tsv")"
@@ -124,7 +124,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="alg --root $REPO --out m3/build/a3/algorithms.tsv"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="alg --root $REPO --out m3/build/a3/algorithms.tsv"
           ALG="$REPO/m3/build/a3/algorithms.tsv"
           test -s "$ALG"
           ALG_ROWS="$(awk -F '\t' 'NR > 1 {n++} END {print n+0}' "$ALG")"
@@ -139,7 +139,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="plan --root $REPO --out m3/build/a3/plan.tsv"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="plan --root $REPO --out m3/build/a3/plan.tsv"
           PLAN="$REPO/m3/build/a3/plan.tsv"
           test -s "$PLAN"
           JEP_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "JEP" {n++} END {print n+0}' "$PLAN")"
@@ -164,7 +164,7 @@ jobs:
           TSV
 
           mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java \
-            -Dexec.mainClass=com.m3.a3.A3 \
+            -Dexec.mainClass=jdk.m3.a3.A3 \
             -Dexec.args="work --root $REPO --inventory m3/build/a3/inventory.tsv --queue m3/build/a3/work-queue.tsv --out m3/build/a3/work.tsv"
 
           test -s "$WORK"
@@ -193,7 +193,7 @@ jobs:
           JAVA
           cp "$SRC" "$RUNNER_TEMP/Sample.before"
 
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=jdk.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
 
           cmp "$SRC" "$RUNNER_TEMP/Sample.before"
           CANDIDATE="$FIX/m3/build/a3/apply/candidate/src/java.base/share/classes/example/Sample.java"

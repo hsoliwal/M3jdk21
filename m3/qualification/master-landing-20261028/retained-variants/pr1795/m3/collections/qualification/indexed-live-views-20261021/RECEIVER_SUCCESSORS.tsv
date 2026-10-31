@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
 # Exact historical-recipe SHA-256 -> qualified current successor; never wildcards.
-m3/collections/src/main/java/com/m3/collections/M3IndexedListSnapshot.java	c59c2aaa40ef12712b7a5c3ab8af0173a63ae6b995fd4b71695bd61e312d7bff	a24bd911379f399dacef451e6cb683e825d014034c5f90bb75822a1a8d022951	https://github.com/hsoliwal/M3jdk21/pull/1766
-m3/collections/src/main/java/com/m3/collections/M3IndexedLiveView.java	84e9437c27f59060543cd4728a5222b489fe98f7e39068e66f4431b7ee00867f	5af79b8408cd3f14e300a8f274e74ec539d3f945a0d03655b55ddc03eb351b70	https://github.com/hsoliwal/M3jdk21/pull/1795
-m3/collections/src/test/java/com/m3/collections/M3IndexedLiveViewContract.java	9181b09b92ddf2cea2f45c9d9caff07b3ad55c922a8dbea2997b3f5f9d2a8a21	3cad49e2d2e0c5aa1c8d2b880ddca19392cc072a68c2203872634550deae7b60	https://github.com/hsoliwal/M3jdk21/pull/1764
+m3/collections/src/main/java/jdk/m3/collections/M3IndexedListSnapshot.java	1b0ad329f85786698ecbc37cb15d328f5f3b715f90ba54c50ff63d12fa1892b2	03e1706a4b1f54fa2d8476c835ea02713b25e0b86c3c80f7c2311b65e88aa877	https://github.com/hsoliwal/M3jdk21/pull/1766
+m3/collections/src/main/java/jdk/m3/collections/M3IndexedLiveView.java	c7b8f004d7702874d4353a021eb9297df207899c11556b966f6aa629f5920439	65e5c350adb03ce2db176337ff2034b8253b5d5e258dd383a6500ddef01f2ecd	https://github.com/hsoliwal/M3jdk21/pull/1795
+m3/collections/src/test/java/jdk/m3/collections/M3IndexedLiveViewContract.java	b813a78bbdd7c6b3ea1c8f09e0d89590143b3687bbe458ae4b13876b6df1c5e0	281f673e65e0f90b52dd7780358b5cbac2fe4d91d272d1433dd6d270ed983c1d	https://github.com/hsoliwal/M3jdk21/pull/1764

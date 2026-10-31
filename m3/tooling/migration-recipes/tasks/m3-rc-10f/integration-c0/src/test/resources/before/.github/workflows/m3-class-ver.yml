@@ -39,7 +39,7 @@ jobs:
           python3 - <<'PY'
           import xml.etree.ElementTree as ET
           from pathlib import Path
-          path = Path('m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.ClassVerTest.xml')
+          path = Path('m3/tooling/migration-recipes/target/surefire-reports/TEST-jdk.m3.rewrite.backport.ClassVerTest.xml')
           root = ET.parse(path).getroot()
           assert int(root.attrib['tests']) == 3, root.attrib
           assert all(int(root.attrib.get(key, '0')) == 0 for key in ('failures', 'errors', 'skipped')), root.attrib
@@ -60,8 +60,8 @@ jobs:
         run: |
           set -euo pipefail
           cp='m3/tooling/module-packs/kernel/target/classes:m3/tooling/module-packs/kernel/target/test-classes'
-          java --add-modules jdk.jlink -cp "$cp" com.m3.tools.modulepack.M3ModuleClassVersionChecks "$RUNNER_TEMP/class-ver-jit" 2>&1 | tee m3-class-ver-proof/jit.log
-          java -Xint --add-modules jdk.jlink -cp "$cp" com.m3.tools.modulepack.M3ModuleClassVersionChecks "$RUNNER_TEMP/class-ver-int" 2>&1 | tee m3-class-ver-proof/interpreter.log
+          java --add-modules jdk.jlink -cp "$cp" jdk.m3.tools.modulepack.M3ModuleClassVersionChecks "$RUNNER_TEMP/class-ver-jit" 2>&1 | tee m3-class-ver-proof/jit.log
+          java -Xint --add-modules jdk.jlink -cp "$cp" jdk.m3.tools.modulepack.M3ModuleClassVersionChecks "$RUNNER_TEMP/class-ver-int" 2>&1 | tee m3-class-ver-proof/interpreter.log
           grep -Fx 'M3_CLASS_VERSION_PASS checks=639' m3-class-ver-proof/jit.log
           grep -Fx 'M3_CLASS_VERSION_PASS checks=639' m3-class-ver-proof/interpreter.log
       - name: Rebuild and run existing diagnostics image

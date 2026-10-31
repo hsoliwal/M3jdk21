@@ -7,7 +7,7 @@
   "packageMetadataSources": 1,
   "namespace": {
     "source": "org.springframework.util",
-    "target": "com.m3.collections.spring"
+    "target": "jdk.m3.collections.spring"
   },
   "sourceOnlyTree": "94de7f94d9388a4ac25739d0d3b80e878b4f3503",
   "implementationTree": "e81467780160c2cfa7714aee3a8b970d80fc7972",

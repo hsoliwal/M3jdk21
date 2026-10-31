@@ -40,7 +40,7 @@ class Helpers(unittest.TestCase):
         self.before = self.root / "before"
         self.target.mkdir()
         self.before.mkdir()
-        paths = {V.JAVA + "com/m3/collections/" + n + ".java" for n in V.RUNTIME_OWNERS}
+        paths = {V.JAVA + "jdk/m3/collections/" + n + ".java" for n in V.RUNTIME_OWNERS}
         paths |= {V.NATIVE + n for n in ("m3_index_path_masks.c", "m3_index_mask_compactor.c", "m3_index_mask_window.c")}
         names = set(V.FROZEN_TESTS) | {n for n, _, _ in V.MASK_PROOFS} | {n for n, _ in V.WRAPPER_PROOFS}
         names |= {"M3NavigationFailureTest", "M3BoundedFilteredNavigationTest"}
@@ -62,7 +62,7 @@ class Helpers(unittest.TestCase):
                          "after_sha256": digest(data), "role": "synthetic-helper-fixture"})
         self.manifest = {"schema": V.SCHEMA, "provenance": {"kind": "synthetic helper fixture"}, "files": rows}
         self.path = self.root / "SOURCE_MANIFEST.json"
-        self.source = V.JAVA + "com/m3/collections/M3IndexPathMasks.java"
+        self.source = V.JAVA + "jdk/m3/collections/M3IndexPathMasks.java"
 
     def row(self, relative=None):
         return next(row for row in self.manifest["files"] if row["path"] == (relative or self.source))
@@ -182,10 +182,10 @@ class Helpers(unittest.TestCase):
     def test_22_actual_generated_int_long_jni_header(self):
         path, prototypes = V.jni_prototypes(ARGS.headers, "M3IndexPathMasks")
         self.assertTrue(path.is_file())
-        self.assertEqual(set(prototypes), {"Java_com_m3_collections_M3IndexPathMasks_selectNative",
-                                         "Java_com_m3_collections_M3IndexPathMasks_selectLongNative"})
-        self.assertIn("jintArray", prototypes["Java_com_m3_collections_M3IndexPathMasks_selectNative"])
-        self.assertIn("jlongArray", prototypes["Java_com_m3_collections_M3IndexPathMasks_selectLongNative"])
+        self.assertEqual(set(prototypes), {"Java_jdk_m3_collections_M3IndexPathMasks_selectNative",
+                                         "Java_jdk_m3_collections_M3IndexPathMasks_selectLongNative"})
+        self.assertIn("jintArray", prototypes["Java_jdk_m3_collections_M3IndexPathMasks_selectNative"])
+        self.assertIn("jlongArray", prototypes["Java_jdk_m3_collections_M3IndexPathMasks_selectLongNative"])
 
 
 SUITE = unittest.defaultTestLoader.loadTestsFromTestCase(Helpers)
@@ -196,7 +196,7 @@ RECEIPT = {"schema": "M3_WRAPPER_RUNNER_HELPER_REPLAY_V1", "status": "PASS" if R
            "helper_sha256": digest(Path(__file__).read_bytes()), "tests": RESULT.testsRun,
            "failures": len(RESULT.failures), "errors": len(RESULT.errors), "skipped": len(RESULT.skipped),
            "test_names": NAMES,
-           "jni_header_sha256": digest((ARGS.headers / "com_m3_collections_M3IndexPathMasks.h").read_bytes()),
+           "jni_header_sha256": digest((ARGS.headers / "jdk_m3_collections_M3IndexPathMasks.h").read_bytes()),
            "scope": "Synthetic helper replay captured after proof2 qualification; not a reproduction claim for prior inline checks",
            "product_runtime_tests": "Separate root-owned current-runtime/RECEIPT.json",
            "product_sources_written": False}

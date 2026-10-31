@@ -2,8 +2,8 @@
   "schema": "M3JDK21_M3FS_NAME_INDEX_V1",
   "product": "M3JDK21 one integrated Java21/HotSpot/JNI SDK",
   "base_product_pr": 1824,
-  "original_owner": "com.m3.fs.M3DirectoryTable",
-  "recipe": "com.synexia.m3.M3FsNamePrefixIndex20261022",
+  "original_owner": "jdk.m3.fs.M3DirectoryTable",
+  "recipe": "jdk.internal.m3.M3FsNamePrefixIndex20261022",
   "data_planes": [
     "original char[] names",
     "original int[] offset boundaries",

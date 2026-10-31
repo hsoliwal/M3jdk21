@@ -4,11 +4,11 @@
  */
 package org.m3jdk.tools.search;
 
-import com.m3.file.M3File;
-import com.m3.file.M3FileDictionary;
-import com.m3.file.M3FileResolver;
-import com.m3.file.M3FileStreamIndexer;
-import com.m3.file.M3FileTokenizer;
+import jdk.m3.file.M3File;
+import jdk.m3.file.M3FileDictionary;
+import jdk.m3.file.M3FileResolver;
+import jdk.m3.file.M3FileStreamIndexer;
+import jdk.m3.file.M3FileTokenizer;
 import com.sun.source.tree.ClassTree;
 import com.sun.source.tree.Tree;
 import com.sun.source.util.JavacTask;

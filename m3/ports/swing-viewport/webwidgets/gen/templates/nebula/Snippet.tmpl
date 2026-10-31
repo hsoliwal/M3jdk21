@@ -1,0 +1,31 @@
+package @WPKG@.snippets;
+
+import @PKG@.M3@C@Api;
+import @WPKG@.M3@C@;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+
+/** Example: an M3 @CONCEPT@ with its sample items (family @FAM@). */
+public final class M3@C@Snippet {
+	private M3@C@Snippet() {
+	}
+
+	public static void main(String[] args) {
+		Display display = new Display();
+		Shell shell = new Shell(display);
+		shell.setText("M3 @CONCEPT@");
+		shell.setLayout(new FillLayout());
+		M3@C@ widget = new M3@C@(shell, SWT.NONE);
+		widget.api().load(M3@C@Api.SAMPLE);
+		shell.setSize(480, 320);
+		shell.open();
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+		display.dispose();
+	}
+}

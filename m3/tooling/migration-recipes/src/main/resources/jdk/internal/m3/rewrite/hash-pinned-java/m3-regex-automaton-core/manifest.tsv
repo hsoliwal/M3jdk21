@@ -1,0 +1,9 @@
+# path	before_sha256	after_sha256	resource
+src/java.base/share/classes/jdk/internal/mindex/M3Automaton.java	ABSENT	f4bf2122b39af83d750f802c880bd562d2a4c4f9a0508edda9aa296357981c88	00-M3Automaton.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3AutomatonOps.java	ABSENT	97c3bdbe20111a977c882f72a4f8e25cc13d83df708a2627b599c10fa68bbbf2	01-M3AutomatonOps.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3ChunkCursor.java	ABSENT	9d128c83fbb709701e2f32b9dd55dad7ac70c2c35b20c16004ba0fa31c491c73	02-M3ChunkCursor.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3NotYetReceived.java	ABSENT	2b53cf0eb526ab7af3c2e224f49676d0f3570db3e523b7c98e78715a4410cbff	03-M3NotYetReceived.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3RegExpCompiler.java	ABSENT	d84c11d0cc1e7945920027003dae40721d83636d4e30cd52fbef11285dbb1303	04-M3RegExpCompiler.java.txt
+src/java.base/share/classes/jdk/internal/mindex/M3RunTable.java	ABSENT	a89899d5638b0f8bb548d5b8116b0ec8d38d1e9e3fa22731183021b8a27e4adb	05-M3RunTable.java.txt
+test/jdk/java/util/regex/M3AutomatonDifferentialTest.java	ABSENT	0ca2223a848cb7b4c74a08527b3ce1f34d06ed8e53177ea8dee654ec2113be6a	06-M3AutomatonDifferentialTest.java.txt
+test/jdk/java/util/regex/M3ChunkCursorTest.java	ABSENT	c67c253b47c0485a10f12d5ed4717341caca1277f41d9ab75443a19a8f637799	07-M3ChunkCursorTest.java.txt

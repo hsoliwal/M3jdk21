@@ -16,19 +16,19 @@ PROVENANCE = ROOT / "PROVENANCE.tsv"
 RECIPE = ROOT / "recipe.json"
 
 EXPECTED = {
-    "m3/ports/collections/src/main/java/com/m3/util/M3DenseHash.java":
+    "m3/ports/collections/src/main/java/jdk/m3/util/M3DenseHash.java":
         "0474a80b032eb1e1fae085c886e7b7fe71200bf8",
-    "m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveKind.java":
+    "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveKind.java":
         "4bc7c258073072e0310d1a50c3885ed55c50816b",
-    "m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveArrayList.java":
+    "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveArrayList.java":
         "2b2f7d73fbcdc1d8ea6b65c0520ca526d7306f4d",
-    "m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveArrayDeque.java":
+    "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveArrayDeque.java":
         "7b2bfc81d5fe8fe69b6c5258d66f521d89ae1dec",
-    "m3/ports/collections/src/main/java/com/m3/util/M3IntArrayDeque.java":
+    "m3/ports/collections/src/main/java/jdk/m3/util/M3IntArrayDeque.java":
         "e5a3dcf87e19d38a2fcf07148320919c958d483a",
-    "m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveMinMaxQueue.java":
+    "m3/ports/collections/src/main/java/jdk/m3/util/M3PrimitiveMinMaxQueue.java":
         "d1507aac2d65b16f84559caa6d3a02c908bbf1ef",
-    "m3/ports/collections/src/main/java/com/m3/ds/M3LongFenwickTree.java":
+    "m3/ports/collections/src/main/java/jdk/m3/ds/M3LongFenwickTree.java":
         "b6c820c05dca67fc53a92a4be84f0b0a2c28b411",
 }
 
@@ -77,7 +77,7 @@ def verify_main_sources(rows: dict[str, dict[str, str]]) -> None:
             fail(f"source blob header mismatch: {relative}")
         if "import com.synexia" in text or "package com.synexia" in text:
             fail(f"Synexia runtime package leaked into port: {relative}")
-        expected_package = "package com.m3.ds;" if "/com/m3/ds/" in relative else "package com.m3.util;"
+        expected_package = "package jdk.m3.ds;" if "/jdk/m3/ds/" in relative else "package jdk.m3.util;"
         if expected_package not in text:
             fail(f"target package mismatch: {relative}")
 
@@ -89,11 +89,11 @@ def verify_recipe() -> None:
         "canonical_repository": "hsoliwal/com.synexia",
         "canonical_source_commit": SOURCE_COMMIT,
         "canonical_source_pr": 9778,
-        "source_selection_recipe": "com.synexia.rewrite.M3CollectionFacadeWave1",
+        "source_selection_recipe": "jdk.internal.m3.rewrite.M3CollectionFacadeWave1",
         "target_repository": "hsoliwal/M3jdk21",
         "mode": "ISOLATED_PORT_ONLY",
         "first_party_license": "Apache-2.0",
-        "runtime_synexia_dependency": False,
+        "runtime_m3_dependency": False,
         "java_base_promotion": False,
         "public_jdk_api_change": False,
         "global_fastest_claim": False,
@@ -101,7 +101,7 @@ def verify_recipe() -> None:
     for key, value in expected.items():
         if data.get(key) != value:
             fail(f"recipe drift: {key}")
-    if data.get("target_materialization_recipe") != "com.synexia.rewrite.M3JdkCollectionPortWave1":
+    if data.get("target_materialization_recipe") != "jdk.internal.m3.rewrite.M3JdkCollectionPortWave1":
         fail("target materialization recipe drift")
 
 
@@ -115,7 +115,7 @@ def main(argv: list[str]) -> int:
     print(
         "M3_COLLECTION_PORT_WAVE1_PASS "
         f"source={SOURCE_COMMIT} owners={len(EXPECTED)} "
-        "runtime_synexia_dependency=false java_base_promotion=false"
+        "runtime_m3_dependency=false java_base_promotion=false"
     )
     return 0
 

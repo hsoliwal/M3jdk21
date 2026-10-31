@@ -1,6 +1,6 @@
 /* Copyright 2026 Hitesh Soliwal and contributors. SPDX-License-Identifier: Apache-2.0
  * Recipe-generated SDK provider API name index. It does not implement external APIs. */
-package com.m3.collections;
+package jdk.m3.collections;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,7 +47,7 @@ public final class M3CollectionSdkNames {
         public boolean isProposedOnly() { return disposition == Disposition.PENDING; }
     }
 
-    private static final String RESOURCE = "/com/m3/collections/M3_SDK_FAMILY_CATALOG.tsv";
+    private static final String RESOURCE = "/jdk/m3/collections/M3_SDK_FAMILY_CATALOG.tsv";
     private static final Map<String, Family> FAMILIES = load();
 
     private M3CollectionSdkNames() { }
@@ -96,7 +96,7 @@ public final class M3CollectionSdkNames {
                     case APACHE -> "org.apache.commons.collections4.";
                 };
                 if (!cols[0].startsWith(requiredPrefix)
-                        || (!cols[2].equals("-") && !cols[2].startsWith("com.m3.collections."))
+                        || (!cols[2].equals("-") && !cols[2].startsWith("jdk.m3.collections."))
                         || cols[3].isBlank()) {
                     throw new IOException("SDK API namespace mismatch: " + cols[0]);
                 }

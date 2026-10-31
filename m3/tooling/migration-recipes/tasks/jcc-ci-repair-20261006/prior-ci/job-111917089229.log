@@ -286,10 +286,10 @@
 2026-10-05T18:25:52.8934669Z [INFO] -------------------------------------------------------------
 2026-10-05T18:25:52.8935838Z [ERROR] COMPILATION ERROR : 
 2026-10-05T18:25:52.8936718Z [INFO] -------------------------------------------------------------
-2026-10-05T18:25:52.8938697Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal
-2026-10-05T18:25:52.8941789Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[98,53] ';' expected
-2026-10-05T18:25:52.8944681Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal
-2026-10-05T18:25:52.8947581Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[101,53] ';' expected
+2026-10-05T18:25:52.8938697Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal
+2026-10-05T18:25:52.8941789Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[98,53] ';' expected
+2026-10-05T18:25:52.8944681Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal
+2026-10-05T18:25:52.8947581Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[101,53] ';' expected
 2026-10-05T18:25:52.8950257Z [INFO] 4 errors 
 2026-10-05T18:25:52.8952587Z [INFO] -------------------------------------------------------------
 2026-10-05T18:25:52.8953586Z [INFO] ------------------------------------------------------------------------
@@ -304,10 +304,10 @@
 2026-10-05T18:25:52.8992329Z [INFO] Finished at: 2026-10-05T18:25:52Z
 2026-10-05T18:25:52.9003181Z [INFO] ------------------------------------------------------------------------
 2026-10-05T18:25:52.9006711Z [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project migration-recipes: Compilation failure: Compilation failure: 
-2026-10-05T18:25:52.9009513Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal
-2026-10-05T18:25:52.9011973Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[98,53] ';' expected
-2026-10-05T18:25:52.9013538Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal
-2026-10-05T18:25:52.9015775Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[101,53] ';' expected
+2026-10-05T18:25:52.9009513Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal
+2026-10-05T18:25:52.9011973Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[98,53] ';' expected
+2026-10-05T18:25:52.9013538Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal
+2026-10-05T18:25:52.9015775Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[101,53] ';' expected
 2026-10-05T18:25:52.9017241Z [ERROR] -> [Help 1]
 2026-10-05T18:25:52.9017624Z [ERROR] 
 2026-10-05T18:25:52.9018111Z [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.

@@ -12,8 +12,8 @@ import hashlib
 import json
 
 ROOT = Path(__file__).resolve().parents[2]
-CRATE = 'synexia-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021'
-RESOURCE = 'synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/arrayification-20261018/integrated-wrappers-20261021'
+CRATE = 'm3-openrewrite-recipes/recipe-crates/m3-arrayification-20261018/integrated-wrappers-20261021'
+RESOURCE = 'm3-openrewrite-recipes/src/main/resources/jdk/internal/m3/rewrite/arrayification-20261018/integrated-wrappers-20261021'
 BRANCH = 'aix/integrated-collections-refinement-20261021'
 APACHE = 'Apache-2.0'
 MIXED = 'Apache-2.0 AND (GPL-2.0-only WITH Classpath-exception-2.0)'
@@ -26,7 +26,7 @@ def main():
     assert sha(original.read_bytes()) == 'd8e2d7a938e8084abca8f51223f091c1c544de4f2ed82821cdb202467ef0f931'
     plan = json.loads(original.read_text())
     original_entries = {x['path']: x for x in plan['required_entries']}
-    excluded = {RESOURCE + '/templates/m3/collections/src/main/java/com/m3/collections/M3LongBitmapFilteredSnapshot.java',
+    excluded = {RESOURCE + '/templates/m3/collections/src/main/java/jdk/m3/collections/M3LongBitmapFilteredSnapshot.java',
                 RESOURCE + '/templates/m3/collections/src/main/native/collections/m3_index_mask_compactor.c'}
     allowed_payload_revision = RESOURCE + '/templates/test/jdk/jdk/internal/m3/M3IndexAtomResourceProbe.java'
     entries = []

@@ -6,9 +6,9 @@
   "files": [
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedAddress28.java",
-      "source_sha256": "5844dea8e82d79d4beedaa2254956a3a2bb1db20ee39fc38a6d6df59e39a3c37",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3Address28.java",
-      "target_sha256": "5fa8a82e3655a675aa0d1e21ba456a7dae272776c605eeba4af22a9dbc7eaa56",
+      "source_sha256": "92d4ae1d60e6ce6aab79ef1b91e6de4c076e02bc0a0603a6b2fb22ca21c1d881",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3Address28.java",
+      "target_sha256": "fe5ed12462265b92a5297d54bce5102db9def6d5f53f468b4b1515435bc2e858",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded"
@@ -17,9 +17,9 @@
     },
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedIntLane28.java",
-      "source_sha256": "175f3e0beb5b9e1aca7196491d19a54a95ed2218253951677e898615ba3ed8ac",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3IntLane28.java",
-      "target_sha256": "771b1450d137874e7c3e08d4e9bee405a6cf88aa6695a9fd4c3616be4ae34d18",
+      "source_sha256": "a9be9f532e5c3606fda0ff30599227301133ca70e9d1fcb1f1e2182ef72f5488",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3IntLane28.java",
+      "target_sha256": "6eb5cad968366a4de7283699d36d4a721aa168b565960e57dd1233f1508873ca",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded",
@@ -29,9 +29,9 @@
     },
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedLongLane28.java",
-      "source_sha256": "237289bdec5fe8d6f142dfffab22a72eebc499ea1b54f0a350bbe09c0e801394",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3LongLane28.java",
-      "target_sha256": "5e35c6c646389c582585b684a4e6224bb968cf2f7b669598eb88920ab1538960",
+      "source_sha256": "7fdce7c2cfe529251c69cdf186d4cabc8333c46692df78cbabdae56aa2a023e2",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3LongLane28.java",
+      "target_sha256": "d517d60cf400c1aa3b62256cdd2ccfea4b7c294ac45ef6fc90063f21fd2d8108",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded",
@@ -42,8 +42,8 @@
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedBitLane28.java",
       "source_sha256": "4166218270c59eb14b3e1813bdf20583823d8e38f88e6f32330af20a5a166bca",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3BitLane28.java",
-      "target_sha256": "1964daa513d98b295ad13ad820519a56af6f29916063860c4c8ec8bf7d3baaa2",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3BitLane28.java",
+      "target_sha256": "90fe18474a60bc398252fdb701a45451bb70747436c9747e136335c00f77f8ad",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded",
@@ -54,8 +54,8 @@
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedSlotAllocator28.java",
       "source_sha256": "59d9b09fac25ff224a93701dd0fc547ec65e9af7b38aabdff9df99e19dc2c419",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3SlotAllocator28.java",
-      "target_sha256": "9a7487453e0bd2369b56e7e17dedb79e2eba8919944772ec0407c95833458ae7",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3SlotAllocator28.java",
+      "target_sha256": "a9a47842b82c3c4e9fdc3187ce7d4c0a114fe03617cb52c45c6025aec1541401",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded",
@@ -66,8 +66,8 @@
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedLongLaneStore28.java",
       "source_sha256": "e9d81bafadba73ba79d1a92e4904ae1e5cad4e7413bb118524559169e5bbf4a1",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3LongLaneStore28.java",
-      "target_sha256": "e12261ea8149c9b6cedcfb08915699ec344a57eaed15f68060a9927717eb44a1",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3LongLaneStore28.java",
+      "target_sha256": "06a0d2cea6ba9cefc16dd4204a1637c8747e9fb2f062515d9d7c8e7e6ba8ab85",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded"
@@ -77,8 +77,8 @@
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedLongArena28.java",
       "source_sha256": "bf48ccb78fbe3782986b2e6551f2dfa536fc4eaed302d4a75a35763d84ec025b",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3LongArena28.java",
-      "target_sha256": "f797998ca57b353f7c44ae48f3d65eeaddec6182066cec0f56c8526d71355e60",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3LongArena28.java",
+      "target_sha256": "f388c92670e2988b92a3221f17a5aa4a0e990d3e3a0774d6c9cd43b33b146b77",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded",
@@ -89,8 +89,8 @@
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedLongLinkedList28.java",
       "source_sha256": "78a95869aadf2cefcc8b496ffc71e83ac194039c0bfe8fd072af3fa7ff96d3e3",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3LongLinkedList28.java",
-      "target_sha256": "2db7c6ba3342a58fdce49c3e988ded51ece2de336575d225edb6cca75cd483c2",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3LongLinkedList28.java",
+      "target_sha256": "e06819be417dda54bc35eefe0a4c62d4526102455b7f24c8cad8b6de606ddae8",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded",
@@ -101,8 +101,8 @@
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/LeanSegmentedCollections.java",
       "source_sha256": "c82dcb533915d420d4a16ac1df0bd5dde0527cc8c6df4d106f2a4c241d1e0de3",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3Collections.java",
-      "target_sha256": "529fd9055caa62cc1b4d3d008fef2765572836cc297565d11b1aea1a279a7179",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3Collections.java",
+      "target_sha256": "fe0f797f3b0901f66f9c7114e83213b83cebfee9cd237c142ef5392cbd5b0b69",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded"
@@ -112,8 +112,8 @@
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/M3ConcurrentIntLane28.java",
       "source_sha256": "0c45081a24e14c1e2d50bff9462c3d410cce2c33d4477ce516ab9f382f34ccc2",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentIntLane28.java",
-      "target_sha256": "baaa8de6567da94efba77b1363b5629755e5394a6fe951976dc552622ddd0573",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentIntLane28.java",
+      "target_sha256": "4771cc99e921290e23b4efb9b1a00035388274ddfb8fbf4cdb31df5d1ba9a666",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded",
@@ -124,8 +124,8 @@
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/M3ConcurrentLongLane28.java",
       "source_sha256": "64b60968bb0ae2412176001bb98ffcfffaae39deb129d4c311f7e510dcb67ca0",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongLane28.java",
-      "target_sha256": "727666e9ad92ab6ab1a41e625307baa70ef08c1397954c2aa362282a137c46ea",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentLongLane28.java",
+      "target_sha256": "4885bf5da6010c330ffede6c5c09ef87f341279474a2c49b7866e5afcccdd584",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded",
@@ -136,8 +136,8 @@
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/ConcurrentPackedLongBitSet.java",
       "source_sha256": "5517dabc78fae1b89612b59525cca765dc22d62bf98558d457f1337c148bab68",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentBitSet.java",
-      "target_sha256": "bb1486f22518957d1fa1f951ef78b312364de5a736aff17ae5a543fe1765a4c5",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentBitSet.java",
+      "target_sha256": "3ac7756882304ab5daa793bab936d28617203adb1d107e06c9f0fe88dbf1286c",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded"
@@ -147,8 +147,8 @@
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/ConcurrentPackedLongLongMap.java",
       "source_sha256": "d6e7b476b53955cfef87aef2bb74da04e3d6e092342a07f1dc31bf634a8d733e",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongMap.java",
-      "target_sha256": "00b8882f22b664552ae9dae4c37ab243b7fc1fb8159b80b5b74e180b4dfd7698",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentLongMap.java",
+      "target_sha256": "8f95b164cb3e99369cf4c48f9866ccc28307fd7f5335b58270a7fd0b11a96ebf",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded",
@@ -159,8 +159,8 @@
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/ConcurrentPackedLongSet.java",
       "source_sha256": "078eb6d2f3813ca11583586790275bc2e992d44c33baed80bd9fd79ffe3f84a7",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3ConcurrentLongSet.java",
-      "target_sha256": "7a7e71695a1106f6cefc43e2ba0883eec78abf44f4bf72ead6d094991d6366d6",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3ConcurrentLongSet.java",
+      "target_sha256": "e338dc5cc3e526a8e6fdc8c65e8edd6a2fdd240af5093d822ed97db1518b8f88",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded",
@@ -171,8 +171,8 @@
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/LongCollection.java",
       "source_sha256": "ff0b8dbd31660f768c1e382e05bb41e60bbae70929bf68ec9d427af6db6ebb7b",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3LongCollection.java",
-      "target_sha256": "ea0c1aa0957f7bafd5cf2892cbe483c98d5772192f81cc3c467d53ab5c1c7531",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3LongCollection.java",
+      "target_sha256": "10a4309fb0be8401f2d32a33a777f339b9bd3118f698d5e74eaaf89c087f42f1",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded"
@@ -182,8 +182,8 @@
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/LongIterator.java",
       "source_sha256": "8e912f0302b4082583f731e274a245cf9f98fda1e5e53adfccaef03f5da08cb0",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3LongIterator.java",
-      "target_sha256": "9d10e476f5d1664a1028fe52406ab05421758961c6d3d5cf163241e058a3f201",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3LongIterator.java",
+      "target_sha256": "524ddc82c953ec7e205687fe8b6a1be9c343d41e1a70d221c1d20cba31843402",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded"
@@ -193,8 +193,8 @@
     {
       "source": "synexia-common/src/main/java/com/synexia/common/collections/LongLongConsumer.java",
       "source_sha256": "0454de65168e8935d7add09b9092597b62f4fc38fab6ab4df69a8a02e42d5fa2",
-      "target": "m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java",
-      "target_sha256": "a9be525afc8c71fa191625dc69c60f76273299832744392435a5739006c8d15c",
+      "target": "m3/collections/src/main/java/jdk/m3/collections/M3LongLongConsumer.java",
+      "target_sha256": "ae8db2fe7a79b67fe692e1d7d48221362800c18a68edc331b80e44dd6f4aedb0",
       "changes": [
         "package/type rename",
         "unresolved donor-only Javadoc link expanded"
@@ -203,9 +203,9 @@
     },
     {
       "source": "synexia-common/src/main/native/collections/segmented_bit_lane.c",
-      "source_sha256": "da2266d8ec93478f4fbeb6a5403e14ce8dcd6a6795c43a5d4230b2a97ef8eb0e",
+      "source_sha256": "5a4ba31368df4b8c3f8e71275b4db583fcba0be37e5b39d07de8112db44319d5",
       "target": "m3/collections/src/main/native/collections/segmented_bit_lane.c",
-      "target_sha256": "4ff7fb4557c58cc59de7fbb24498f3df2a197083a5cd467670dc24b9441f1210",
+      "target_sha256": "3567f3eed5ab042b5d88574da8f77cce967c3f35bcaf1b99d2c373af4d4ef674",
       "changes": [
         "JNI symbol/package/type rename"
       ],
@@ -214,8 +214,8 @@
     {
       "source": "synexia-common/src/test/java/com/synexia/common/collections/M3ConcurrentLaneContractTest.java",
       "source_sha256": "1433f512633229d0b378bfa4f9c58719992e04060e50df9d61ef4117e234d5c4",
-      "target": "m3/collections/src/test/java/com/m3/collections/M3ConcurrentLaneContractTest.java",
-      "target_sha256": "4a72dcca1648cbd3cf9f2d9bbec526de13fb50464d6b2ed19b101182541f7e5a",
+      "target": "m3/collections/src/test/java/jdk/m3/collections/M3ConcurrentLaneContractTest.java",
+      "target_sha256": "bad28eb28009dfa021968f576c2899dcd946e62b28bf0d8bfda142b7cd3cdc76",
       "changes": [
         "package/type rename"
       ],
@@ -224,8 +224,8 @@
     {
       "source": "synexia-common/src/test/java/com/synexia/common/collections/SegmentedPrimitiveStorageTest.java",
       "source_sha256": "5fe86a9362a76de97d9fcb8e623af32f0c0990be1a9bc03c172389c4fa3c382c",
-      "target": "m3/collections/src/test/java/com/m3/collections/SegmentedPrimitiveStorageTest.java",
-      "target_sha256": "b202adb68518e47c49ceddc4f21e52c7bb48c387b3f1ee08baceaf8a930eb44c",
+      "target": "m3/collections/src/test/java/jdk/m3/collections/SegmentedPrimitiveStorageTest.java",
+      "target_sha256": "9aa3d7c6b1d6df8b424e2cb33231ce2334c8fc3f4cad2a2ed46d295311b1ece8",
       "changes": [
         "package/type rename"
       ],
@@ -234,8 +234,8 @@
     {
       "source": "synexia-common/src/test/java/com/synexia/common/collections/SegmentedLaneBulkContractTest.java",
       "source_sha256": "0745bd896668f5a4777f0ce27c014feb2455084eb55997384404d75727f9d3a8",
-      "target": "m3/collections/src/test/java/com/m3/collections/SegmentedLaneBulkContractTest.java",
-      "target_sha256": "f2ea51cf92b35489ca0bc3c6555850ff9ceee45a1459eb0af06f19feaff810ce",
+      "target": "m3/collections/src/test/java/jdk/m3/collections/SegmentedLaneBulkContractTest.java",
+      "target_sha256": "f30af6825f0ce241dc73e9856278d674d135cd355e7d43fe12941ff3d13be5ec",
       "changes": [
         "package/type rename",
         "omit PackedLongList/Deque-only stream test because those classes are not part of this port"
@@ -249,15 +249,15 @@
     {
       "source": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "source_sha256": "2afab8874bdc9ca6d03c9e52d036ae8398e537067e477ad91537c6bdc027c2ae",
-      "target": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "target": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
       "target_sha256": "2afab8874bdc9ca6d03c9e52d036ae8398e537067e477ad91537c6bdc027c2ae",
       "changes": []
     },
     {
       "source": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SegmentedLaneNativeRecipe.java",
       "source_sha256": "da3ba922379239758bbc365a563bcfae80f080e563d9b6026d6d670b963ef235",
-      "target": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3SegmentedLaneNativeRecipe.java",
-      "target_sha256": "42073eafcc0bb1e88a866d07dbb8e96e1c824afd2b8c87d8aebbfa7e2e6d21c4",
+      "target": "m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3SegmentedLaneNativeRecipe.java",
+      "target_sha256": "ba2cfbaa3ba736cc1823953d5eefa44ad0c6df1c54b363d4e85fe2dd4f346680",
       "changes": [
         "native postimage SHA updated for renamed JNI symbol"
       ]
@@ -270,7 +270,7 @@
     "canonical_recipe_path": "synexia-openrewrite-recipes/recipes/m3jdk-packed-collections-receiving-repair-20261008",
     "java_manifest_sha256": "31ef71b432356b141588bbc1352638890f1abeae81acb89d97a497f8e0eda513",
     "installed_source_manifest": "m3/collections/qualification/installed-source-receiving-20261008.tsv",
-    "installed_source_manifest_sha256": "063ae7c1857cf683464160408cfab94c9e63503d40eabc4adc630b2e668815e1",
+    "installed_source_manifest_sha256": "3719c9fdc78676a2c23ce1131792608889c377224ca4ceaddcec4945c0fe9042",
     "rights": "Apache-2.0; preserve all original notices and per-file third-party/OpenJDK rights",
     "historical_records": "Existing files/tooling_reuse records describe the original 21-file lane intake and are retained without reinterpretation.",
     "global_map_git_blob": "56a2d439a832920ef28e5e242d799d81d45ff59b",

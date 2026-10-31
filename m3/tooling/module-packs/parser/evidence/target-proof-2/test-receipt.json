@@ -23,7 +23,7 @@
   ],
   "input_sha256": "e279db46a00e6a15a0d44275a40b32c4a1ed1cff9db13658ee971d7251f30ce5",
   "phase": "test",
-  "previous_receipt_sha256": "f6b6432e580fd97981b486d899765f17878640066eb65acb0d741ed230fe923d",
+  "previous_receipt_sha256": "3ef70a64fc70ed3065838857cc0ce22b0a6b004b592512c0e2b456c5edcd64b4",
   "schema": "M3_PARSER_PHASE_RECEIPT_V1",
   "status": "PASS"
 }

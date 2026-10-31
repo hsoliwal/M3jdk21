@@ -5,11 +5,11 @@ import argparse, hashlib, json, shutil, subprocess, tempfile, xml.etree.ElementT
 from pathlib import Path
 TASK=Path(__file__).resolve().parent
 ROOT=TASK.parents[3]
-RES=TASK/'src/main/resources/com/synexia/rewrite/sdk-family-names-20261017'
+RES=TASK/'src/main/resources/jdk/internal/m3/rewrite/sdk-family-names-20261017'
 PRODUCT='m3/collections/interop/'
-SOURCE=PRODUCT+'src/main/java/com/m3/collections/interop/'
-TEST=PRODUCT+'src/test/java/com/m3/collections/interop/'
-CORE='m3/collections/src/main/java/com/m3/collections/'
+SOURCE=PRODUCT+'src/main/java/jdk/m3/collections/interop/'
+TEST=PRODUCT+'src/test/java/jdk/m3/collections/interop/'
+CORE='m3/collections/src/main/java/jdk/m3/collections/'
 LOG=[]
 def run(args,negative=False):
     args=list(map(str,args)); LOG.append('$ '+' '.join(args))
@@ -30,11 +30,11 @@ def main():
     try:
         with tempfile.TemporaryDirectory(prefix='m3-sdk-family-') as directory:
             tmp=Path(directory);engine=tmp/'engine';engine.mkdir()
-            source=TASK/'src/main/java/com/synexia/rewrite'
+            source=TASK/'src/main/java/jdk/internal/m3/rewrite'
             run(['javac','--release','21','-proc:none','-Xlint:all','-Werror','-d',engine,
                  source/'M3GpuToolJoinManifest.java',source/'SdkFamilyReplay.java'])
             candidate=tmp/'candidate'
-            run(['java','-cp',engine,'com.synexia.rewrite.SdkFamilyReplay',ROOT,candidate])
+            run(['java','-cp',engine,'jdk.internal.m3.rewrite.SdkFamilyReplay',ROOT,candidate])
             for path,before,after,template in rows:
                 if template!='KEEP' and sha(candidate/path)!=after:raise AssertionError('emission drift')
             classes=tmp/'classes';classes.mkdir()
@@ -44,7 +44,7 @@ def main():
             resource=classes/'META-INF/m3';resource.mkdir(parents=True)
             shutil.copyfile(candidate/(PRODUCT+'sdk-family-bindings.tsv'),resource/'sdk-family-bindings.tsv')
             for heap in ['32m','128m']:
-                run(['java','-Xmx'+heap,'-cp',classes,'com.m3.collections.interop.M3LibraryBindingsSelfTest',resource/'sdk-family-bindings.tsv'])
+                run(['java','-Xmx'+heap,'-cp',classes,'jdk.m3.collections.interop.M3LibraryBindingsSelfTest',resource/'sdk-family-bindings.tsv'])
             java_sources=[p for p in (candidate/PRODUCT).rglob('*.java')]
             audit=['java','-cp',classes,'SdkSourceAudit',TASK/'before'/(SOURCE+'M3LibraryCollections.java'),
                    candidate/(SOURCE+'M3LibraryCollections.java'),candidate/(PRODUCT+'sdk-family-bindings.tsv')]
@@ -83,7 +83,7 @@ def main():
             for path,before,after,template in rows:
                 if template!='KEEP' and (not (ROOT/path).exists() or sha(ROOT/path)!=after):raise AssertionError('unpublished/drifted output '+path)
             replay=tmp/'replay'
-            run(['java','-cp',engine,'com.synexia.rewrite.SdkFamilyReplay',ROOT,replay])
+            run(['java','-cp',engine,'jdk.internal.m3.rewrite.SdkFamilyReplay',ROOT,replay])
             for path,before,after,template in rows:
                 if template!='KEEP' and (replay/path).read_bytes()!=(candidate/path).read_bytes():raise AssertionError('fixed point mismatch')
             shutil.copyfile(candidate/'GENERATED_SHA256.tsv',evidence/'GENERATED_SHA256.tsv')

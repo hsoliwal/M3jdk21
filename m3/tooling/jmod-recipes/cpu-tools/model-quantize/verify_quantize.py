@@ -10,7 +10,7 @@ import shutil
 import subprocess
 import tempfile
 
-MODULE = "com.m3.tools.model.quantize"
+MODULE = "jdk.m3.tools.model.quantize"
 MAIN = MODULE + ".BlockInt8Quantizer"
 TEST = MODULE + ".tests.BlockInt8QuantizerChecks"
 
@@ -31,9 +31,9 @@ def main():
     args = cli.parse_args()
     root = Path(__file__).resolve().parent
     sources = root / "src/main/java"
-    java = sources / "com/m3/tools/model/quantize/BlockInt8Quantizer.java"
+    java = sources / "jdk/m3/tools/model/quantize/BlockInt8Quantizer.java"
     descriptor = sources / "module-info.java"
-    oracle = root / "src/test/java/com/m3/tools/model/quantize/tests/BlockInt8QuantizerChecks.java"
+    oracle = root / "src/test/java/jdk/m3/tools/model/quantize/tests/BlockInt8QuantizerChecks.java"
     native = root / "native/model_quantize_jni.c"
     legal = root / "legal"
     inputs = [java, descriptor, oracle, native]
@@ -63,12 +63,12 @@ def main():
         headers.mkdir()
         execute([javac, "--release", "21", "-Xlint:all,-module", "-Werror",
                  "-h", str(headers), "-d", str(classes), str(descriptor), str(java)])
-        header = headers / "com_m3_tools_model_quantize_BlockInt8Quantizer.h"
+        header = headers / "jdk_m3_tools_model_quantize_BlockInt8Quantizer.h"
         if not header.is_file():
             raise AssertionError("generated JNI header missing")
         header_text = header.read_text(encoding="utf-8")
-        if "Java_com_m3_tools_model_quantize_BlockInt8Quantizer_nativeAbi" not in header_text \
-                or "Java_com_m3_tools_model_quantize_BlockInt8Quantizer_packNative" not in header_text:
+        if "Java_jdk_m3_tools_model_quantize_BlockInt8Quantizer_nativeAbi" not in header_text \
+                or "Java_jdk_m3_tools_model_quantize_BlockInt8Quantizer_packNative" not in header_text:
             raise AssertionError("JNI symbol contract mismatch")
         execute([javac, "--release", "21", "-Xlint:all", "-Werror",
                  "--module-path", str(classes), "--add-modules", MODULE,

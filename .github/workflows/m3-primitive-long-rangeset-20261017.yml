@@ -4,8 +4,8 @@ on:
     branches: ['m3/primitive-long-rangeset-receiver-20261017']
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LongRangeSet*'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LongRangeSet*'
       - 'm3/collections/algorithm-catalog/long-range-set-20261017/**'
       - '.github/workflows/m3-primitive-long-rangeset-20261017.yml'
 concurrency:
@@ -26,19 +26,19 @@ jobs:
       - name: Source postimage exact SHA256
         shell: bash
         run: |
-          echo 'f865b006888f1d4554b51cf69e7f4d6bac67458982f957f9151af0b4f09eaec8  m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java' | sha256sum -c -
-          echo '3b4ba4e2542ebbc607710f183f231d7c1bbe3e94ef4aa4fe6de49f0f9242ac29  m3/collections/src/test/java/com/m3/collections/M3LongRangeSetSelfTest.java' | sha256sum -c -
-          echo '1768a8be759b46ae24678ce089cdf328ef6c83f335bd3f5582cda813819261a5  m3/collections/src/test/java/com/m3/collections/M3LongRangeSetTest.java' | sha256sum -c -
+          echo '11a1001d54bbd39d25102dab36b9ee7a9125713f8a1496598655f41f9c47652e  m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java' | sha256sum -c -
+          echo '420496cf602f3f08f8aef10a9ff73d1e104d7582a19be18d697f1898025595cb  m3/collections/src/test/java/jdk/m3/collections/M3LongRangeSetSelfTest.java' | sha256sum -c -
+          echo 'b57500ea01b78f1db7c5deb809758116ec27c99f23d108b04431c3fbdadf6b4d  m3/collections/src/test/java/jdk/m3/collections/M3LongRangeSetTest.java' | sha256sum -c -
       - name: Compile actual M3 Java 21 owners and run differential
         shell: bash
         run: |
           mkdir -p /tmp/m3-rangeset-classes
           javac --release 21 -proc:none -Xlint:all -Werror -d /tmp/m3-rangeset-classes \
-            m3/collections/src/main/java/com/m3/collections/M3LongLongConsumer.java \
-            m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java \
-            m3/collections/src/main/java/com/m3/collections/M3LongRangeSet.java \
-            m3/collections/src/test/java/com/m3/collections/M3LongRangeSetSelfTest.java
-          java -ea -Xmx64m -cp /tmp/m3-rangeset-classes com.m3.collections.M3LongRangeSetSelfTest
+            m3/collections/src/main/java/jdk/m3/collections/M3LongLongConsumer.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3LongRangeSet.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3LongRangeSetSelfTest.java
+          java -ea -Xmx64m -cp /tmp/m3-rangeset-classes jdk.m3.collections.M3LongRangeSetSelfTest
       - name: Full m3-collections Maven/JUnit contract proof
         shell: bash
         run: |

@@ -20,7 +20,7 @@ import java.util.Objects;
  * match end, one token further after an empty match. Positions are lossless; with
  * {@code significantOnly} trivia tokens are skipped while matching but never renumbered.
  *
- * <p>Execution (not received yet): capture-free patterns lower to the M3JDK21 owners
+ * <p>Execution (not received yet): capture-free patterns lower to the M3JDK 21 owners
  * (M3RX7.TokenIndex symbol DFA, M3TokenRegexPlan, R6 M3Automaton); captures run a tagged program
  * ported from Synexia MIndexTaggedRegex (register writes composed per token) with a priority
  * Pike VM over primitive thread lanes for non-one-pass patterns. No backtracking, no per-token

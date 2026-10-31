@@ -10,7 +10,7 @@
   },
   "namespaceMapping": {
     "source": "org.springframework.util",
-    "target": "com.m3.collections.spring",
+    "target": "jdk.m3.collections.spring",
     "selection": "27 selected collection/dependency sources; donor JDK interfaces remain java.util"
   },
   "sourceTree": "e81467780160c2cfa7714aee3a8b970d80fc7972",

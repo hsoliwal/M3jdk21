@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Locale;
-import com.m3.text.M3LanguageGrammarSupport;
+import jdk.m3.text.M3LanguageGrammarSupport;
 
 /** Contract proof for the Synexia grammar-support mapping. */
 public final class M3LanguageGrammarSupportTest {
@@ -31,7 +31,7 @@ public final class M3LanguageGrammarSupportTest {
         }
 
         String manifest = Files.readString(
-                Path.of("lexicon/synexia-source-manifest.tsv"), StandardCharsets.UTF_8);
+                Path.of("lexicon/m3-source-manifest.tsv"), StandardCharsets.UTF_8);
         String row = Arrays.stream(manifest.split("\\n", -1))
                 .filter(line -> line.startsWith("translate.rows\t"))
                 .findFirst()

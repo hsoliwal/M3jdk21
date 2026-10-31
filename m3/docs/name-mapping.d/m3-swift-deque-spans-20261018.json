@@ -6,7 +6,7 @@
   "recipe_commit": "f8927855894d35a94b22c73f5b9e0cf33ec186f6",
   "target_baseline": "7c6b3b51094c50c84746b819d79665e5f003bbdf",
   "targets": [
-    "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+    "m3/collections/src/main/java/jdk/m3/collections/M3LongArrayDeque.java",
     "m3/collections/algorithm-catalog/swift-collections-20261018.tsv"
   ],
   "public_names": "unchanged; one private helper and no new JNI symbol",

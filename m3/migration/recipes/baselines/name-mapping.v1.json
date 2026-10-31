@@ -3,15 +3,15 @@
   "policy": "additive; no blind renames or unverified compatibility claims",
   "mappings": [
     {
-      "source": "com.synexia.indexstring.LocalM3StringPiece",
+      "source": "jdk.internal.m3.indexstring.LocalM3StringPiece",
       "source_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
-      "target": "com.m3.text.LocalM3StringPiece",
+      "target": "jdk.m3.text.LocalM3StringPiece",
       "status": "separate provisional byte-format prototype; NOT an API-compatible replacement",
       "canonical_owner_decision": "retain established Synexia owner; adapter/migration deferred"
     },
     {
       "source": "LocalMIndexStringPiece",
-      "target": "com.m3.text.LocalM3StringPiece",
+      "target": "jdk.m3.text.LocalM3StringPiece",
       "status": "provisional semantic direction only",
       "source_commit": null,
       "compatibility_facade": "deferred until original source contract is supplied"
@@ -30,6 +30,6 @@
     }
   ],
   "imported_donor_sources": [],
-  "reviewed_synexia_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
-  "reviewed_contracts": "synexia-reconciliation.md"
+  "reviewed_m3_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
+  "reviewed_contracts": "m3-reconciliation.md"
 }

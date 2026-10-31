@@ -9,7 +9,7 @@ ROOT=HERE.parents[2]
 def digest(data): return hashlib.sha256(data).hexdigest()
 
 # Exact four-owner JNI modified-UTF8 source receipt: Synexia #11288,
-# M3JDK21 commit 56d29d32b128de0d998e933f957e090383e8d2dc.
+# M3JDK 21 commit 56d29d32b128de0d998e933f957e090383e8d2dc.
 # Historical runtime.patch bytes are immutable and cannot replace these owners.
 MUTF8_FANIN = {
     "src/hotspot/share/classfile/javaClasses.cpp": (

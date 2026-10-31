@@ -7,6 +7,6 @@ The original `java.util.CollectionViews` stays the owner; no M3+JDK overlay, no 
 
 The new jtreg reuses the first-party regression from PR #1770: custom sorted owners with metadata-sparse spliterators, normal/reverse comparators, split propagation, Set distinctness and encounter-order differential.
 
-Source preimage Git blob `3252ddc179bcde807785b13ef24dc6b3b6c3ce4a`, SHA-256 `d0713f7a8c949a6b11c89fbe637f1ccebb53d45f164a7c69029c517f5eb3eb2f`; postimage SHA-256 `4fc81eda7a7b1831f36abc20fca52f9ba898fa7a767f2c1b62f8eab872ec056f`; test SHA-256 `e3d8f4208b2f8d3f0b05f512d39e30e276ad4496632f917376f3ebb8e37957ad`.
+Source preimage Git blob `3252ddc179bcde807785b13ef24dc6b3b6c3ce4a`, SHA-256 `d0713f7a8c949a6b11c89fbe637f1ccebb53d45f164a7c69029c517f5eb3eb2f`; postimage SHA-256 `4fc81eda7a7b1831f36abc20fca52f9ba898fa7a767f2c1b62f8eab872ec056f`; test SHA-256 `253432540a994554e635b89ce52059328cbde1d56361bc23d7ce5fcf55b49045`.
 
 This product branch contains only the generated source/test postimages and passive provenance. Run the two Synexia Maven recipes in order, then patched java.base/jtreg and actual installed-image runtime/ABI/JNI/GC/CPU/heap gates before promotion. Until then: DRAFT/HOLD.

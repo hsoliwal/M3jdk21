@@ -54,7 +54,7 @@ qualification lanes, not automatically validated by this change.
 
 The selected source has Git blob
 `e6ca59d8ae7fba700765e670dd5ec7d8dd84bc8d`; the jtreg test source
-has blob `066eb1b6a636b38c56bc007d1a83eeb6793ddf40`.
+has blob `b2f654376f0793318affde9cd7358f971b0782ff`.
 They were independently materialized byte-for-byte and compared to the
 repository Git hashes, then executed using OpenJDK `21.0.12.1`.
 

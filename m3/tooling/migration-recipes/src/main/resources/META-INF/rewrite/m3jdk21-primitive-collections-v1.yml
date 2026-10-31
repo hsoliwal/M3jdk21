@@ -6,5 +6,5 @@ description: >-
   Thin M3JDK21 receiver for exact Apache-2.0 Synexia primitive-collection postimages.
   Synexia owns the reusable recipe; M3JDK21 owns runtime qualification and promotion.
 recipeList:
-  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+  - jdk.internal.m3.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: m3jdk21-primitive-collections-v1

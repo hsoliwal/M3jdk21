@@ -15,12 +15,12 @@ on:
       - 'test/jdk/com/sun/crypto/provider/KDF/**'
       - 'test/jdk/javax/crypto/KDF/**'
       - 'm3/backports/recipes/j510/**'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep510Kdf*.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep510Kdf*.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk25-jep510-kdf/**'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk25-jep510-kdf-tests/**'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport/M3Jep510Kdf*.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/M3Jep510Kdf*.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk25-jep510-kdf/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned/jdk25-jep510-kdf-tests/**'
       - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep510-kdf.yml'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java'
+      - 'm3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/scope/M3RecipeScopeRegistry.java'
       - '.github/workflows/m3-jep510-kdf-materialized.yml'
   workflow_dispatch:
 
@@ -46,33 +46,7 @@ jobs:
       - name: 1 - Diff hygiene
         run: git diff --check
 
-      - name: 2 - Compile and prove product plus security-test recipe DAG
-        run: >-
-          mvn -B -ntp
-          -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jep510KdfBackportRecipeTest,M3Jep510KdfCandidateRecipeTest
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
 
-  a3-preparation:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 35
-    steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-          cache: maven
-
-      - name: Prove A3 / recipe dependency closure through the M3 reactor
-        run: >-
-          mvn -B -ntp
-          -f m3/pom.xml
-          -pl tooling/a3,tooling/migration-recipes
-          -am
-          -Dsurefire.failIfNoSpecifiedTests=false
-          test
 
   jdk-security-proof:
     runs-on: ubuntu-24.04

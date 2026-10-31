@@ -34,8 +34,8 @@
       "donor_path": "synexia-unix4j-m3/src/main/java/com/synexia/unix4jm3/StructuredTextTools.java",
       "donor_git_blob": "cacbefeb2ec01453addcb676fc9d42b48a2d147f",
       "target_path": "m3/tooling/module-packs/text-tools/src/jdk.m3.structured/jdk/m3/structured/StructuredTextTools.java",
-      "target_git_blob": "b4cdbedd1a2dcbfd1c526a1a0a6469cab9fa9e52",
-      "target_sha256": "f613c0dae0c0fb98c8c4db4167d6258a91305994e319b6adaa16693674b24df6",
+      "target_git_blob": "f9896de0b0d6aa9423db75ac627653ea8516f14c",
+      "target_sha256": "c9516aa90e76c89b5db3d8aa15d4570088e0824eb54c75d4786db5976a38741e",
       "transform": "canonical donor expression; exact package/name/import adaptation to target-owned jdk.m3.structured and jdk.m3.text"
     },
     {

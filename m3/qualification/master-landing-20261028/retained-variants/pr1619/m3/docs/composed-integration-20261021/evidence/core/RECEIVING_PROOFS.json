@@ -1079,8 +1079,8 @@
   "nullable_manifest_update": {
     "source_pins": {
       "path": "m3/runtime-integration/recipe/manifest.json",
-      "before_sha256": "b44b3740eefe6780a11f31291b2f3f446231365ea3c441844fe4d9aa5fe0b462",
-      "after_sha256": "416f8c17500afd1d9d2d2e3a7a85e300cf9807fbac7ead514b9c48cf0494e4e5",
+      "before_sha256": "b25b60aa2a2c48f0d5c2ee91428dcb29aaaa76239a14f38b5d14a79b8f3c8ff0",
+      "after_sha256": "44c6af1b7031d480b1d4ecd115fcecd73ab1546e317fb54c61a8110cadc0ea02",
       "retained_file_entries": 66,
       "scope": "only append exact Factory successor; retain all existing entries and source/history pins"
     },

@@ -1,0 +1,26 @@
+package @PKG@;
+
+import org.junit.jupiter.api.Test;
+
+/**
+ * Family @FAM@ model contract per mode: every mode id of the family on a generic sample (modes no member uses
+ * yet included), then the members whose widget this toolkit already ships (their family model still serves the
+ * concept on the shared viewport core): core, family and sweep checks.
+ */
+class M3@FAMILY@ModesTest {
+	private static final String SAMPLE = "12~3~L;5~2;8~1";
+
+	private static M3@FAMILY@Model of(String concept, String role, int mode, int shape, int variant, String sample) {
+		M3@FAMILY@Model m = new M3@FAMILY@Model(concept, M3WebStates.role(role), mode, shape, variant);
+		m.load(sample);
+		return m;
+	}
+
+	@Test
+	void everyMode() {
+		for (int mode = 0; mode < M3@FAMILY@Model.MODES; mode++) {
+			M3WebChecks.core(of("@FAM@-" + mode, "presentation", mode, M3WebStates.ROUND, 0, SAMPLE), SAMPLE, "presentation");
+			M3@FAMILY@Checks.run(of("@FAM@-" + mode, "presentation", mode, M3WebStates.ROUND, 0, SAMPLE));
+		}
+	}
+@CASES@}

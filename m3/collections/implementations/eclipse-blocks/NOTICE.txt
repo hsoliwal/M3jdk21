@@ -13,7 +13,7 @@ org.eclipse.collections.api.block.predicate.Predicate
 org.eclipse.collections.api.block.predicate.Predicate2
 org.eclipse.collections.api.block.procedure.Procedure
 
-The separate com.m3.collections.eclipse.M3EclipseFunctionalAdapters is
+The separate jdk.m3.collections.eclipse.M3EclipseFunctionalAdapters is
 first-party original Apache-2.0 code implementing Java21 default-operation
 bridges to those interfaces, with no copied Eclipse implementation engine.
 Only java.base is required at runtime. There is no Eclipse Collections JAR

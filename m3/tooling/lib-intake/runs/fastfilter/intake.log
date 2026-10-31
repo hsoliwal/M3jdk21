@@ -1,0 +1,11 @@
+LIB_INTAKE fastfilter S0_VIEW PASS java=29 packages=9 resources=0 overlays=none upstream_descriptor=no
+LIB_INTAKE fastfilter S1_RELOCATE PASS map=org.fastfilter=com.m3.lib.fastfilter packages_moved=9 old_dirs_left=0 text_completed_files=0 parse_fallback_files=0 resources_moved=0 meta_mapped=0
+LIB_INTAKE fastfilter S1b_BCP PASS java_equal_after_name_map=29 resources_byte_equal=0 differing=0
+LIB_INTAKE fastfilter S2_RESIDUE PASS residue=0 (every kind) slash_form_files=0
+LIB_INTAKE fastfilter S3_ATOMIZE PASS atoms=460 KNOWN_PATTERN=199 UNPROVEN_LEAF=129 UNKNOWN_PATTERN=132
+LIB_INTAKE fastfilter S4_CONSOLIDATE PASS owner_contract_atoms=18 (proposal queue)
+LIB_INTAKE fastfilter S5_REFACTOR_BASELINE PASS METHOD_15=51 LOOP=79 CONST_HOIST=65 (ratchet: MOP passes may only lower these)
+LIB_INTAKE fastfilter S6_MODULE PASS module=jdk.m3.fastfilter requires=java.base exports=9 javac_warnings=9
+LIB_INTAKE fastfilter S7_JMOD_IMAGE PASS jmod=81507B image_modules=6 smoke='loaded=48 failed=0'
+LIB_INTAKE fastfilter S8_LAYER PASS files=34 layer=m3/vendor/third_party-m3/relocated/fastfilter
+LIB_INTAKE_DONE fastfilter jdk.m3.fastfilter H:/m3-scratch/lib-intake/batch/fastfilter/jmods/jdk.m3.fastfilter.jmod

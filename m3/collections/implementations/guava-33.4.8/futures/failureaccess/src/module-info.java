@@ -13,6 +13,6 @@
  */
 
 /** Guava: {@code Future} Internals. */
-module com.m3.collections.guava.util.concurrent.internal {
-  exports com.m3.collections.guava.util.concurrent.internal;
+module jdk.m3.collections.guava.util.concurrent.internal {
+  exports jdk.m3.collections.guava.util.concurrent.internal;
 }

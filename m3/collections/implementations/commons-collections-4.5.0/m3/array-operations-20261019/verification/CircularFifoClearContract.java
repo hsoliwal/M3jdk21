@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-import com.m3.collections.apache.queue.CircularFifoQueue;
+import jdk.m3.collections.apache.queue.CircularFifoQueue;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.util.*;

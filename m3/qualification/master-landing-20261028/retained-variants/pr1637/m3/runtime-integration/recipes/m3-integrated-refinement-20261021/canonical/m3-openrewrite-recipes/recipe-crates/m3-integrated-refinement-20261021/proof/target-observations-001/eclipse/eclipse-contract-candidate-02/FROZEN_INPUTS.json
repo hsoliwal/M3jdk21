@@ -1,0 +1,72 @@
+{
+  "parent_failed_oracle": "/workspace/scratch/206049dfb270/jobs-work/eclipse-contract-donor-01/RESULT.json",
+  "parent_failed_oracle_sha256": "95787030a492d507f898830f1fbbc4fd8227883751020cd9497d0e30882bbaf7",
+  "frozen_test_is_identical": true,
+  "files": [
+    {
+      "path": "pom.xml",
+      "sha256": "d62076540a93bac5b3bcd57ebaddc0206efc131614af41d9a1a315be452b7ebc",
+      "bytes": 1793
+    },
+    {
+      "path": "src/main/java/jdk/m3/collections/M3ChildProgressMonitor.java",
+      "sha256": "f3ad6ab46cb067b1caf13d23d2d2e2c2e79d1a79aa9f5421c7406090fcd9e1b9",
+      "bytes": 5738
+    },
+    {
+      "path": "src/main/java/jdk/m3/collections/M3DefaultProgressMonitor.java",
+      "sha256": "87eac42a847f506bcb379064f4c8d7c79d46450d728a706571dede6aad497f8c",
+      "bytes": 3629
+    },
+    {
+      "path": "src/main/java/jdk/m3/collections/M3ProgressMonitor.java",
+      "sha256": "ff575e2e9e326e5b268398b268eda34ad8147ccc8a61faf6183a5d41205d18a7",
+      "bytes": 2259
+    },
+    {
+      "path": "src/main/java/jdk/m3/collections/M3ProgressState.java",
+      "sha256": "cbe8c0bc1a473d3845613475e87aeaf4c5fc84fef8e0ceedde1a81993f7c298e",
+      "bytes": 1151
+    },
+    {
+      "path": "src/main/java/jdk/m3/collections/M3ShadowStreams.java",
+      "sha256": "be9f0f79f50a260133cde15c0e62f8ed3ba304a19d92c5e41e5a18627e7997fc",
+      "bytes": 8805
+    },
+    {
+      "path": "src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobScheduler.java",
+      "sha256": "2496bdc6c9f84c59afe0631ef429c8ab5558ff946a0d0b878fa48cb85fb5f60d",
+      "bytes": 4104
+    },
+    {
+      "path": "src/main/java/jdk/m3/eclipse/runtime/M3EclipseJobs.java",
+      "sha256": "0e62436dad1fc1634b2cf9da8882f1e8a4579a0b466f1a40e8a274c33da7dfec",
+      "bytes": 5174
+    },
+    {
+      "path": "src/main/java/jdk/m3/eclipse/runtime/M3EclipseProgressMonitor.java",
+      "sha256": "526edc5c2a9c6640fa9e266b1f46ac747b92ee1662da2b95f9565c54f7966058",
+      "bytes": 3798
+    },
+    {
+      "path": "src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobSchedulerTest.java",
+      "sha256": "a007137e532ba8c75e826e684ab16d78791eb34f54da69af3d4d70a981b7366b",
+      "bytes": 4196
+    },
+    {
+      "path": "src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobsCompatibilityTest.java",
+      "sha256": "477ff26a926afec5e678f88814bf0b389198474ce166914259da51b8be6273ab",
+      "bytes": 6769
+    },
+    {
+      "path": "src/test/java/jdk/m3/eclipse/runtime/M3EclipseJobsTest.java",
+      "sha256": "124bed935425c23286e8dad54048a851b3cfb031b523b140e6bb3bec8e9d27b7",
+      "bytes": 5237
+    },
+    {
+      "path": "src/test/java/jdk/m3/eclipse/runtime/M3EclipseProgressMonitorTest.java",
+      "sha256": "f4b9be7ac510346d18f01ca7cd622a43e70b82396929db1fb6e64407ca8a2571",
+      "bytes": 4042
+    }
+  ]
+}

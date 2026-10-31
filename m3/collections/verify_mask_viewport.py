@@ -23,9 +23,9 @@ def main():
     if out.exists() or out.is_symlink():
         parser.error('--out must be fresh')
     out.mkdir(parents=True)
-    java = [root / 'src/main/java/com/m3/collections' / (name + '.java')
+    java = [root / 'src/main/java/jdk/m3/collections' / (name + '.java')
             for name in ('M3MaskViewportKernel', 'M3MaskViewportNative')]
-    tests = [root / 'src/test/java/com/m3/collections' / (name + '.java')
+    tests = [root / 'src/test/java/jdk/m3/collections' / (name + '.java')
              for name in ('M3MaskViewportKernelContract', 'M3MaskViewportWindowContract')]
     native = root / 'src/main/c/m3maskviewport.c'
     regions = root / 'src/test/native/m3_mask_viewport_regions.c'
@@ -55,7 +55,7 @@ def main():
         raise SystemExit('missing region completion marker')
     for test in tests:
         output = run(test.stem, [jdk / 'bin/java', '-Xcheck:jni', '-Dm3.native.path=' + str(library),
-                                '-cp', out / 'classes', 'com.m3.collections.' + test.stem])
+                                '-cp', out / 'classes', 'jdk.m3.collections.' + test.stem])
         if 'PASS checks=' not in output or 'jni=true' not in output:
             raise SystemExit('missing mandatory JNI completion marker')
     receipt = {'schema': 'M3_MASK_VIEWPORT_VERIFICATION_V1', 'status': 'PASS',

@@ -504,17 +504,17 @@ production Java files are the whole declared package at this snapshot.
 
 | Path below `m3/arrays/` | Git blob SHA |
 | --- | --- |
-| `src/main/java/com/m3/arrays/M3Arrays.java` | `bf3afd670d77775290c1453bfe1a2142d9d1e644` |
-| `src/main/java/com/m3/arrays/M3ByteArrayView.java` | `f60dd956471dc6badad8fea2f5b8627cdefb454d` |
-| `src/main/java/com/m3/arrays/M3Utf16ArrayView.java` | `ddd9cda67033fe7bdb77410de4d9aef366a52499` |
-| `src/main/java/com/m3/arrays/M3IntArrayView.java` | `6f49bd7a781fbf52bfbe5edf9e8f4e7dbd9a4275` |
-| `src/main/java/com/m3/arrays/M3LongArrayView.java` | `0a5e8246e0dc99ffd7601bd93efc15a00f2626ac` |
-| `src/main/java/com/m3/arrays/M3Utf16Facts.java` | `5a45402aa9fb1c43b19536f09e0cdb0cf7a01040` |
-| `src/main/java/com/m3/arrays/M3ArrayNative.java` | `440694e15ba340e0e98d669269beed32f09c31da` |
-| `src/main/java/module-info.java` | `e33652a77a4710ea1cb470ba1ae4a8ae01ad61af` |
-| `src/test/java/com/m3/arrays/M3ArraysTest.java` | `d472b94f50903f17807adda03fdbf01ef0bff986` |
-| `src/test/java/com/m3/arrays/M3ArrayNativeTest.java` | `68ea4b99778ec6fca2ced9da45a3650c5cc32755` |
-| `src/main/native/m3_arrays_jni.c` | `78bb0a19eb8afd0abfd02f30b42063723312cbbf` |
+| `src/main/java/com/m3/arrays/M3Arrays.java` | `87efb25292aa0d6530e30f7e7a45f9bf58baab01` |
+| `src/main/java/com/m3/arrays/M3ByteArrayView.java` | `27d40e1dbf074fe26ccc0b66210c48dac0ca2454` |
+| `src/main/java/com/m3/arrays/M3Utf16ArrayView.java` | `a6187a77d83ad3c68f4ee93e41444d61a3759143` |
+| `src/main/java/com/m3/arrays/M3IntArrayView.java` | `9356983e4c225f026efc47ab5f8b8e254720487c` |
+| `src/main/java/com/m3/arrays/M3LongArrayView.java` | `9152177f5f0a85a97cb7e5630cc9a22e0aa034bd` |
+| `src/main/java/com/m3/arrays/M3Utf16Facts.java` | `b949fb10020966dfe85a45bc1bdebaf3060e0f44` |
+| `src/main/java/com/m3/arrays/M3ArrayNative.java` | `a0d6c3e85e35697b2eb7d3bc2d4d2d411fafdb35` |
+| `src/main/java/module-info.java` | `5dfea791660206e37a83d5e2f516984ff812ba92` |
+| `src/test/java/com/m3/arrays/M3ArraysTest.java` | `792e3aa4d2686cb5e58303713b13dbbece2de228` |
+| `src/test/java/com/m3/arrays/M3ArrayNativeTest.java` | `8fb420306ce6225af258928f610706f2f371bc37` |
+| `src/main/native/m3_arrays_jni.c` | `e2f87dfb68e533ed4934274ac0592aba71cb03c4` |
 | `src/main/native/m3_arrays.c` | `8fce5f1273472b8a2faeb24f43350b006f0356b0` |
 | `src/main/native/include/m3_arrays.h` | `e4f8b49082eb7111b39b48a1d551230187fac3df` |
 | `src/main/native/tests/m3_arrays_checks.c` | `8754edd107b7209210d576d182b38b9a6a47bab8` |
@@ -536,20 +536,20 @@ inventory. Full body review of this bounded package does not complete every
 M3 module, caller, receiver, source-custody family or runtime gate. No private
 Synexia source was needed for this reference.
 
-[factory]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java
-[byte]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/com/m3/arrays/M3ByteArrayView.java
-[chars]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/com/m3/arrays/M3Utf16ArrayView.java
-[ints]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/com/m3/arrays/M3IntArrayView.java
-[longs]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/com/m3/arrays/M3LongArrayView.java
-[facts]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/com/m3/arrays/M3Utf16Facts.java
-[native]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java
-[byte-count]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/com/m3/arrays/M3ByteArrayView.java#L17
-[char-count]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/com/m3/arrays/M3Utf16ArrayView.java#L22
-[byte-snapshot]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java#L83-L99
-[char-snapshot]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java#L162-L182
-[join-check]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java#L65-L69
-[int-join]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java#L282-L294
-[locate]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java#L329-L331
+[factory]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java
+[byte]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/jdk/m3/arrays/M3ByteArrayView.java
+[chars]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/jdk/m3/arrays/M3Utf16ArrayView.java
+[ints]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/jdk/m3/arrays/M3IntArrayView.java
+[longs]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/jdk/m3/arrays/M3LongArrayView.java
+[facts]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/jdk/m3/arrays/M3Utf16Facts.java
+[native]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/jdk/m3/arrays/M3ArrayNative.java
+[byte-count]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/jdk/m3/arrays/M3ByteArrayView.java#L17
+[char-count]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/jdk/m3/arrays/M3Utf16ArrayView.java#L22
+[byte-snapshot]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java#L83-L99
+[char-snapshot]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java#L162-L182
+[join-check]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java#L65-L69
+[int-join]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java#L282-L294
+[locate]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java#L329-L331
 [binary-search]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/src/java.base/share/classes/java/util/Arrays.java#L1702-L1718
 [readme]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/README.md
 [module]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/java/module-info.java
@@ -562,5 +562,5 @@ Synexia source was needed for this reference.
 [jni]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/native/m3_arrays_jni.c
 [native-c]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/native/m3_arrays.c
 [native-checks]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/main/native/tests/m3_arrays_checks.c
-[tests]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/test/java/com/m3/arrays/M3ArraysTest.java
-[native-tests]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/test/java/com/m3/arrays/M3ArrayNativeTest.java
+[tests]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/test/java/jdk/m3/arrays/M3ArraysTest.java
+[native-tests]: https://github.com/hsoliwal/M3jdk21/blob/1eac151fe56bccdc33b24a0155cc1ac5b9959005/m3/arrays/src/test/java/jdk/m3/arrays/M3ArrayNativeTest.java

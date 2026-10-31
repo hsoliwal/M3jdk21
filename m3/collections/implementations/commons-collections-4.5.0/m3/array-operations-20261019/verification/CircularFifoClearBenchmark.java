@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
-package com.synexia.verification;
+package jdk.internal.m3.verification;
 
-import com.m3.collections.apache.queue.CircularFifoQueue;
+import jdk.m3.collections.apache.queue.CircularFifoQueue;
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.*;
 

@@ -7,8 +7,8 @@ import argparse
 import hashlib
 import json
 
-PREIMAGE_SHA256 = "8d6afc24c677adb7ba612071d34453c8a7d8b9e1a81ac27fb06bc3f62c673edd"
-OWNER = "m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java"
+PREIMAGE_SHA256 = "87b3f76e04880c80a5bbf31e2cfe66fc7567d9b96ec5139cdf31536442ba58c7"
+OWNER = "m3/arrays/src/main/java/jdk/m3/arrays/M3Arrays.java"
 
 
 def digest(data):

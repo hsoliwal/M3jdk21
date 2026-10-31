@@ -1,0 +1,25 @@
+{
+  "kind": "ACTUAL_CANONICAL_SDK_EXECUTION",
+  "crate": "m3jdk-collection-current-owners-assets-20261017",
+  "exit": 0,
+  "seconds": 2.95,
+  "command": [
+    "/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/workspace/scratch/4f99f40718f0/m3-implementation/toolchain/m2",
+    "-f",
+    "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/sdk-work/m3-openrewrite-recipes/verification/m3-build-shared-ast-20261017/pom.xml",
+    "-Dm3.crate=m3jdk-collection-current-owners-assets-20261017",
+    "-Dm3.kind=text",
+    "-Dm3.input=/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/current-base/M3jdk21",
+    "-Dm3.output=/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/livebase-generated/m3jdk-collection-current-owners-assets-20261017",
+    "verify"
+  ],
+  "manifestSha256": "04d8bdb1cb0d92c3c1b99d737ece2033431d474d15870db79678afaf185ba143",
+  "logSha256": "adf24499961e260e7355bb9f2ba663393ed37c03b6f5d938545b7c0507a72466",
+  "proofModified": false,
+  "engineModified": false,
+  "output": "/workspace/scratch/4f99f40718f0/m3-implementation/wrappers/delivery/livebase-generated/m3jdk-collection-current-owners-assets-20261017"
+}

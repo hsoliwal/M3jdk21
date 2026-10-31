@@ -1,0 +1,5 @@
+m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/a3-lab.md	ABSENT	d9d39747f40bb5eff6ba8639e1e5d0554f0223cc94c09443fe1b2054aac9c3d6	target-1.txt
+m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/a3-mastery.md	ABSENT	01a428a662ffbdbd22dcd39d1fea7b69084ce34cada0bb5582b8c3686615750d	target-2.txt
+m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/a3.md	ABSENT	9c5177ee233ee5335131c9106b7a6faa0041b1cd09e9385e36909d8c6365cf87	target-3.txt
+m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/pom.xml	ABSENT	55f17db9b3221e44846723ab7a968a64dec744add4a9b298b6608d12622a5b8b	target-4.txt
+m3/tooling/migration-recipes/src/test/resources/jdk/m3/rewrite/a3-mastery-receipt-workflow/before/workflow.yml	ABSENT	844e283c4928e8be0a0bf5ab40c8de4bf9da187292b557319f8e599a7102ab73	target-5.txt

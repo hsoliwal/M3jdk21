@@ -10,10 +10,10 @@ on:
       - 'm3/core/**'
       - 'm3/build.sh'
       - 'm3/lexicon/english-demo.txt'
-      - 'm3/lexicon/synexia-number-target-map.tsv'
-      - 'm3/lexicon/synexia-precompute-field-map.tsv'
-      - 'm3/lexicon/synexia-source-manifest.tsv'
-      - 'm3/lexicon/synexia-word-source-revisions.tsv'
+      - 'm3/lexicon/m3-number-target-map.tsv'
+      - 'm3/lexicon/m3-precompute-field-map.tsv'
+      - 'm3/lexicon/m3-source-manifest.tsv'
+      - 'm3/lexicon/m3-word-source-revisions.tsv'
 permissions:
   contents: read
 concurrency:
@@ -99,10 +99,10 @@ jobs:
             /m3/core/
             /m3/build.sh
             /m3/lexicon/english-demo.txt
-            /m3/lexicon/synexia-number-target-map.tsv
-            /m3/lexicon/synexia-precompute-field-map.tsv
-            /m3/lexicon/synexia-source-manifest.tsv
-            /m3/lexicon/synexia-word-source-revisions.tsv
+            /m3/lexicon/m3-number-target-map.tsv
+            /m3/lexicon/m3-precompute-field-map.tsv
+            /m3/lexicon/m3-source-manifest.tsv
+            /m3/lexicon/m3-word-source-revisions.tsv
       - name: Qualify exact recipe outputs and unchanged original core contracts
         shell: bash
         env:
@@ -424,10 +424,10 @@ jobs:
                   external+=sorted((sdk/"target/surefire-reports").glob("TEST-*.xml"))
                   external+=sorted((sdk/"target/surefire-reports").glob("*.txt"))
                   external+=[sdk/"target/authoring-sdk-receipt.json",sdk/"target/authoring-recipe-test-counters.json",qualifier.parent/"source-binding.json"]
-                  external+=[sdk/"target/emitted/forward/m3/core/src/com/m3/text/JoinedM3StringPiece.java",sdk/"target/emitted/inverse/m3/core/src/com/m3/text/JoinedM3StringPiece.java"]
+                  external+=[sdk/"target/emitted/forward/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java",sdk/"target/emitted/inverse/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java"]
                   runtime=root/"joined-range-runtime"
                   external+=sorted(runtime.glob("*.log"))+sorted(runtime.glob("*.json"))+sorted(runtime.glob("*.jsonl"))
-                  aliases={sdk/"target/emitted/forward/m3/core/src/com/m3/text/JoinedM3StringPiece.java":"emitted-forward-JoinedM3StringPiece.java",sdk/"target/emitted/inverse/m3/core/src/com/m3/text/JoinedM3StringPiece.java":"emitted-inverse-JoinedM3StringPiece.java"}
+                  aliases={sdk/"target/emitted/forward/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java":"emitted-forward-JoinedM3StringPiece.java",sdk/"target/emitted/inverse/m3/core/src/jdk/m3/text/JoinedM3StringPiece.java":"emitted-inverse-JoinedM3StringPiece.java"}
                   selected=present+[p for p in external if p.is_file()]
                   if any(not p.is_file() or any(q.is_symlink() for q in [p,*p.parents]) for p in selected):raise RuntimeError("closed artifact source fence")
                   by_name={}

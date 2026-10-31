@@ -5,12 +5,12 @@
   "source_lineage": [
     {
       "commit": "7a41c084fa80dd60cb0cffdfb9dc3db50b49e71b",
-      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexCodeTextSignalTrialImage.java",
+      "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexCodeTextSignalTrialImage.java",
       "blob": "75cbb4942e96d51d7cf43a13327c0b254a448394"
     },
     {
       "commit": "6f6fafa01ce78b6f6187d50305b3e9c2829a7eca",
-      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RegexStringPrecomputeSignals.java",
+      "path": "m3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/M3RegexStringPrecomputeSignals.java",
       "blob": "7ce69fea2328136f04e5160dfd43ef32cdcf02c5"
     }
   ],

@@ -11,7 +11,7 @@ Dataset: `synexia-openrewrite-recipes/recipe-crates/m3-ast-build-reverse-2026101
 
 Receiving baseline: `3666a7186f297e517261855636cb10e7a236a8ee`.
 
-`owner-candidate.patch` is an **inert review diff**, SHA-256 `bf009c1bded000b485a8bad676c62d12c47e98665d0481b76c3ca5ea612063ac`. It describes only the two existing owner changes. The complete new Java test, original preimages, candidate postimages, category/donor catalogue, recipe memory and independently executed fixture reproduction script remain canonical in that Synexia dataset. `SOURCE_MANIFEST.tsv` binds all three intended target sources.
+`owner-candidate.patch` is an **inert review diff**, SHA-256 `9d767d016686d5b156ff372d4b87cac7547cea21f21d777d54c853610e25dd07`. It describes only the two existing owner changes. The complete new Java test, original preimages, candidate postimages, category/donor catalogue, recipe memory and independently executed fixture reproduction script remain canonical in that Synexia dataset. `SOURCE_MANIFEST.tsv` binds all three intended target sources.
 
 Runtime Java/C sources are deliberately unchanged by this proposal. The exact existing `M3HashPinnedJavaSnapshotRecipe` / `M3HashPinnedTextSnapshotRecipe` Maven execution, fixed-point and refusal gates have not run here. Applying a raw patch or copying the templates would not satisfy those gates. No second recipe engine is added to this target.
 

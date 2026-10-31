@@ -4,11 +4,11 @@ on:
   pull_request:
     paths:
       - '.github/workflows/m3-regex-dfa-effects-port.yml'
-      - 'm3/ports/precompute/src/main/java/com/m3/precompute/M3RegexDfaEffects.java'
-      - 'm3/ports/precompute/src/test/java/com/m3/precompute/M3RegexDfaEffects*.java'
+      - 'm3/ports/precompute/src/main/java/jdk/m3/precompute/M3RegexDfaEffects.java'
+      - 'm3/ports/precompute/src/test/java/jdk/m3/precompute/M3RegexDfaEffects*.java'
       - 'm3/ports/precompute/docs/M3_REGEX_EFFECTS_PORT*'
       - 'm3/docs/name-mapping.d/m3-regex-effects-precompute.json'
-      - 'm3/docs/synexia-string-precompute-port-map.tsv'
+      - 'm3/docs/m3-string-precompute-port-map.tsv'
 permissions:
   contents: read
 concurrency:

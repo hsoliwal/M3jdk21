@@ -1,12 +1,12 @@
 # SPDX-FileCopyrightText: 2026 Hitesh Soliwal and contributors
 # SPDX-License-Identifier: Apache-2.0
-# Synexia recipe: com.synexia.rewrite.M3Jdk21ObjectPhysicalSlotProjection
+# Synexia recipe: jdk.internal.m3.rewrite.M3Jdk21ObjectPhysicalSlotProjection
 name: M3 object physical-slot 32-bit mask Java JNI
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMask*'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3ObjectPhysicalMask*'
       - 'm3/collections/algorithm-catalog/object-physical-state-32bit-20261018.tsv'
       - 'm3/collections/qualification/m3-object-physical-state-20261018/**'
       - '.github/workflows/m3-object-physical-slot-20261018.yml'
@@ -35,22 +35,22 @@ jobs:
           set -euo pipefail
           sha256sum --check <<'DIGESTS'
           # The original recipe postimage SHA-256 is retained in the qualification receipt.
-          1c4880f7772d92ca11150abc7cedcfeefbe0df514a99b9be9ce4d34d0859659d  m3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMaskSelfTest.java
-          29fa893995b94a4ba13738afad016be800e5a6ce27db202e38953b439148f5ed  m3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMaskTest.java
+          4289ddbe82021d8158ed34efe5550d8e4da27a9cb0540f72ce34c37e35f90ff9  m3/collections/src/test/java/jdk/m3/collections/M3ObjectPhysicalMaskSelfTest.java
+          822b461aa5198f235bb402c142bf7a856b7244c369e66ea3e444c855062780d6  m3/collections/src/test/java/jdk/m3/collections/M3ObjectPhysicalMaskTest.java
           DIGESTS
           # Current master evolved independently; refuse silent source drift.
-          test "$(git hash-object m3/collections/src/main/java/com/m3/collections/M3ObjectIndexSnapshot.java)" = "e2cff159750d9b7f45cd438a8d517aff8d5bff43"
+          test "$(git hash-object m3/collections/src/main/java/jdk/m3/collections/M3ObjectIndexSnapshot.java)" = "c32bb82f8348dcfe960794984b93a5ddc6823833"
       - name: Strict Java21 full collection owner compile and Java oracle
         shell: bash
         run: |
           set -euo pipefail
           OUT="$RUNNER_TEMP/m3-object-slot/classes"
           mkdir -p "$OUT"
-          find m3/collections/src/main/java/com/m3/collections -name '*.java' -print | sort > "$RUNNER_TEMP/m3-object-sources.txt"
+          find m3/collections/src/main/java/jdk/m3/collections -name '*.java' -print | sort > "$RUNNER_TEMP/m3-object-sources.txt"
           javac --release 21 -proc:none -Xlint:all -Werror -d "$OUT" @"$RUNNER_TEMP/m3-object-sources.txt"
           javac --release 21 -proc:none -Xlint:all -Werror -cp "$OUT" -d "$OUT" \
-            m3/collections/src/test/java/com/m3/collections/M3ObjectPhysicalMaskSelfTest.java
-          java -Xcheck:jni -cp "$OUT" com.m3.collections.M3ObjectPhysicalMaskSelfTest
+            m3/collections/src/test/java/jdk/m3/collections/M3ObjectPhysicalMaskSelfTest.java
+          java -Xcheck:jni -cp "$OUT" jdk.m3.collections.M3ObjectPhysicalMaskSelfTest
       - name: Build existing C17 JNI selector and require native parity
         shell: bash
         run: |
@@ -63,7 +63,7 @@ jobs:
             m3/collections/src/main/native/collections/m3_index_path_masks.c \
             -o "$BIN/libm3_collections_pathmask.so"
           java -Xcheck:jni -Djava.library.path="$BIN" -cp "$OUT" \
-            com.m3.collections.M3ObjectPhysicalMaskSelfTest --native
+            jdk.m3.collections.M3ObjectPhysicalMaskSelfTest --native
   owner-junit:
     runs-on: ubuntu-24.04
     timeout-minutes: 35

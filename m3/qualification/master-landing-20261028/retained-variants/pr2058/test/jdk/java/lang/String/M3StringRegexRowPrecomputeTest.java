@@ -172,7 +172,7 @@ public class M3StringRegexRowPrecomputeTest {
             }
             for (Future<Integer> task : tasks) check(task.get().equals(tasks.get(0).get()));
         }
-        System.out.println("M3_JDK_REGEX_ROW_PRECOMPUTE_PASS checks=" + checks
+        System.out.println("M3JDK_REGEX_ROW_PRECOMPUTE_PASS checks=" + checks
                 + " regexes=" + (patterns.length * 2 + 10_000) + " rows=" + corpus.length);
     }
 }

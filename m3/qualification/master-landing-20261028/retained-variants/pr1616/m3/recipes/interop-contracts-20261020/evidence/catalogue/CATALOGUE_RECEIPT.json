@@ -1,9 +1,9 @@
 {
   "scope": "Existing unchanged inspection CLI strict compile and catalogue lookup; no new runtime or transformation engine",
-  "source_path": "make/m3/recipes/src/main/java/org/synexia/m3/recipe/M3ProblemCatalogue.java",
+  "source_path": "make/m3/recipes/src/main/java/jdk/internal/m3/recipe/M3ProblemCatalogue.java",
   "source_revision": "2779aba3f98f31c324be43f731be7914e1a05935",
-  "source_sha256": "f422b82a5d020ee35f0e9ca53e82f581df8b944e41068d712c483c724880a929",
-  "catalogue_sha256": "987fb34a5b0b950fc5372e861081af46c48e31f610102fdeb9322d05259701b8",
+  "source_sha256": "dd4608038af446bd08b109dfebe5147e85e627fcbc0630f822d9174ea61df579",
+  "catalogue_sha256": "2e4b3268c7a84eec14216da456cd1276030603f352f03f03c624ca37077dd8a8",
   "executions": [
     {
       "name": "compile",
@@ -18,7 +18,7 @@
         "-Werror",
         "-d",
         "/workspace/scratch/53bcd62c244c/work-final-review-20261020/catalogue-interop-classes",
-        "/workspace/scratch/53bcd62c244c/M3JDK21/make/m3/recipes/src/main/java/org/synexia/m3/recipe/M3ProblemCatalogue.java"
+        "/workspace/scratch/53bcd62c244c/M3JDK21/make/m3/recipes/src/main/java/jdk/internal/m3/recipe/M3ProblemCatalogue.java"
       ],
       "exit_code": 0,
       "started_ns": 1792508223571758308,

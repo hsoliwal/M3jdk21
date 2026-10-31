@@ -5,7 +5,7 @@ from pathlib import Path
 import argparse,hashlib,json,os,stat
 HERE=Path(__file__).resolve().parent;I=HERE.parent;C=I.parents[1]
 OWNER=C/'m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py'
-OWNER_SHA='89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574'
+OWNER_SHA='93a1c116c197854b0167c172581cd768d0f9098067bf0f1296607ca6ba855556'
 def sha(b):return hashlib.sha256(b).hexdigest()
 def blob(b):return hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
 def load(p):return json.loads(p.read_bytes())
@@ -13,7 +13,7 @@ def pin(p):b=p.read_bytes();return {'path':str(p),'sha256':sha(b),'bytes':len(b)
 def write(p,v):
  assert not p.exists(),p;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(v,sort_keys=True,indent=2)+'\n')
 parser=argparse.ArgumentParser();parser.add_argument('--proof',type=Path,required=True);args=parser.parse_args();P=args.proof.resolve()
-result=load(P/'RESULT.json');assert result['schema']=='synexia.ic0.proof-result/1' and result['status']=='PASS_FOCUSED_PRODUCER' and result['failure'] is None
+result=load(P/'RESULT.json');assert result['schema']=='m3.ic0.proof-result/1' and result['status']=='PASS_FOCUSED_PRODUCER' and result['failure'] is None
 assert result['runtime']['output']==pin(P/'generated-candidate/OUTPUT.json')
 owner_bytes=OWNER.read_bytes();assert sha(owner_bytes)==OWNER_SHA
 ns={'__name__':'_unchanged_package_owner','__file__':str(OWNER)};exec(compile(owner_bytes,str(OWNER),'exec'),ns)
@@ -75,10 +75,10 @@ for r in load(P/'inputs.json'):
  else:
   reasons=[e['reason'] for e in excluded if e['inputPath']==r['path'] and e['sha256']==r['sha256'] and e['bytes']==r['bytes']];assert reasons,r['path'];entry.update(disposition='EXCLUDED_IDENTITY_ONLY',reasons=sorted(set(reasons)))
  closure.append(entry)
-record={'schema':'synexia.ic0.package-source-closure/1','producer':{'result':pin(P/'RESULT.json'),'output':pin(P/'generated-candidate/OUTPUT.json')},'bodyMappings':sorted(mappings,key=lambda r:r['logicalPath']),'excludedIdentities':excluded,'sealedInputDispositions':closure,'compiledArtifactBodiesIncluded':False,'toolchainBodiesIncluded':False,'hermetic':False,'historicalMissingProofsRecreated':False,'consumerQualified':False,'archiveOwner':pin(OWNER)}
+record={'schema':'m3.ic0.package-source-closure/1','producer':{'result':pin(P/'RESULT.json'),'output':pin(P/'generated-candidate/OUTPUT.json')},'bodyMappings':sorted(mappings,key=lambda r:r['logicalPath']),'excludedIdentities':excluded,'sealedInputDispositions':closure,'compiledArtifactBodiesIncluded':False,'toolchainBodiesIncluded':False,'hermetic':False,'historicalMissingProofsRecreated':False,'consumerQualified':False,'archiveOwner':pin(OWNER)}
 write(S/'SOURCE-CLOSURE.json',record)
 # Empty LANES is deliberate: actual terminal evidence is explicitly selected and independently hash-closed above.
-plan={'schema':'synexia.evidence.package-plan/1','status':'FINAL_REVIEWED_SELECTION','sourceCommit':result['sourceCommit'],'targetCommit':result['targetCommit'],'packageOwnerSHA256':OWNER_SHA,'resultSHA256':sha((P/'RESULT.json').read_bytes()),'laneSelection':{'required':[],'additional':[],'allowNotExecuted':[],'includeAllExisting':False},'includePaths':sorted([*selected,'SOURCE-CLOSURE.json']),'selectionMode':'EXPLICIT_FINISHED_BODIES_WITH_SOURCE_CLOSURE_AUDIT','noAutomaticLaneQualification':True}
+plan={'schema':'m3.evidence.package-plan/1','status':'FINAL_REVIEWED_SELECTION','sourceCommit':result['sourceCommit'],'targetCommit':result['targetCommit'],'packageOwnerSHA256':OWNER_SHA,'resultSHA256':sha((P/'RESULT.json').read_bytes()),'laneSelection':{'required':[],'additional':[],'allowNotExecuted':[],'includeAllExisting':False},'includePaths':sorted([*selected,'SOURCE-CLOSURE.json']),'selectionMode':'EXPLICIT_FINISHED_BODIES_WITH_SOURCE_CLOSURE_AUDIT','noAutomaticLaneQualification':True}
 write(HERE/'package-plan.json',plan)
 write(HERE/'SOURCE-CLOSURE.json',record)
 print(json.dumps({'plan':pin(HERE/'package-plan.json'),'closure':pin(HERE/'SOURCE-CLOSURE.json'),'bodyCount':len(selected)+1,'projectFiles':292,'actualResult':pin(P/'RESULT.json')}))

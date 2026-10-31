@@ -12,9 +12,9 @@ hierarchy changed.
 
 | Receiver file | Source preimage SHA-256 | Candidate SHA-256 |
 | --- | --- | --- |
-| `M3BitLane28.java` | `1964daa513d98b295ad13ad820519a56af6f29916063860c4c8ec8bf7d3baaa2` | `011c7f61b442fb07bbc937cade8fa283175a574539ffdcf8c3d52ac4cb673626` |
-| `M3BitLane28FenwickSelfTest.java` | ABSENT | `a82291d6dfc65546369804db2ad31b773c0d35bddb46ae998f98e586fefb54c3` |
-| `M3BitLane28FenwickTest.java` | ABSENT | `b221c981c9cabacadeea694a311fd7a76025a161a5e3cb01860b311b35311e3c` |
+| `M3BitLane28.java` | `90fe18474a60bc398252fdb701a45451bb70747436c9747e136335c00f77f8ad` | `45eb57846a3607ef68855c667e258c5c24b90e61e071becc19c9819cbd06dfcc` |
+| `M3BitLane28FenwickSelfTest.java` | ABSENT | `8ce3930aa786cb5f07990b97241504436d6daaba2203f9ab1bccd4c28e064827` |
+| `M3BitLane28FenwickTest.java` | ABSENT | `7b1a41d7ed8fc94525ff6ebd8cf34eb6a8ace8e837aa4c9b55ee3e56125d285a` |
 
 Receiver files are copied **without edits** from the canonical Synexia
 resource images. This is candidate installation, not proof that the SDK emitted
@@ -41,9 +41,9 @@ From a checked-out product repository with JDK 21:
 mkdir -p /tmp/m3-bitlane28-proof
 javac --release 21 -proc:none -Xlint:all -Werror \
   -d /tmp/m3-bitlane28-proof \
-  m3/collections/src/main/java/com/m3/collections/M3Address28.java \
-  m3/collections/src/main/java/com/m3/collections/M3BitLane28.java \
-  m3/collections/src/test/java/com/m3/collections/M3BitLane28FenwickSelfTest.java
+  m3/collections/src/main/java/jdk/m3/collections/M3Address28.java \
+  m3/collections/src/main/java/jdk/m3/collections/M3BitLane28.java \
+  m3/collections/src/test/java/jdk/m3/collections/M3BitLane28FenwickSelfTest.java
 java -cp /tmp/m3-bitlane28-proof com.m3.collections.M3BitLane28FenwickSelfTest
 ```
 

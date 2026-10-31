@@ -34,12 +34,15 @@ TOOL_SUFFIXES = (
     "graph.topology", "graph.paths", "stats.streaming", "constraint.interval",
     "codec.varint", "verify.sha256", "plan.priority",
 )
-CPU_MODULES = tuple("com.m3.tools." + value for value in TOOL_SUFFIXES) + ("com.m3.tools.cpu",)
+CPU_MODULES = tuple("jdk.m3.tools." + value for value in TOOL_SUFFIXES) + ("jdk.m3.tools.cpu",)
 MODULES = tuple(sorted(TEXT_MODULES + CPU_MODULES))
 FIXTURES = ("M3DonorToolsTest", "M3SourceToolsTest", "M3CpuToolsTest", "M3FileCpuFactsTest",
             "M3StructuredAtomsContract", "M3EvidenceMathContract",
             "M3LogicFlowContract", "M3IndexedDataContract",
-            "M3TemporalModelContract", "M3IndexedSystemsContract")
+            "M3TemporalModelContract", "M3IndexedSystemsContract",
+            "M3AutomataPlanningContract", "M3IndexDiffAdmissionContract",
+            "M3MatchingSearchContract", "M3DataflowScheduleContract",
+            "M3WeightedGraphContract", "M3SuffixNumericContract")
 FIXED_JAR_DATE = "2026-01-01T00:00:00Z"
 COMMAND_SECONDS = 115
 CLEANUP_SECONDS = 5
@@ -495,7 +498,7 @@ def qualify(args):
                             "-cp", output / "test-classes", "M3TextSmoke", output / "text-jni-fixture")
         if "M3_TEXT_IMAGE_PASS tools=24" not in smoke:
             raise ValueError("missing existing text/JNI runtime proof")
-        cli = (*java, "-m", "com.m3.tools.cpu/com.m3.tools.cpu.CpuToolsCli")
+        cli = (*java, "-m", "jdk.m3.tools.cpu/jdk.m3.tools.cpu.CpuToolsCli")
         for option, label in (("--list", "catalogue"), ("--self-test", "self-test")):
             first = command.run("image-cli-" + label, *cli, option)
             second = command.run("image-cli-" + label + "-replay", *cli, option)

@@ -36,8 +36,8 @@ Run the local zero-dependency projection smoke test with Java 21:
 
 ```sh
 javac --release 21 -Xlint:all -Werror -d /tmp/m3-flldcim-docs \
-  m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HierarchicalDocumentation.java \
-  m3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3HierarchicalDocumentationSelfTest.java
+  m3/tooling/migration-recipes/src/main/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentation.java \
+  m3/tooling/migration-recipes/src/test/java/jdk/internal/m3/rewrite/M3HierarchicalDocumentationSelfTest.java
 java -cp /tmp/m3-flldcim-docs com.synexia.rewrite.M3HierarchicalDocumentationSelfTest
 ```
 

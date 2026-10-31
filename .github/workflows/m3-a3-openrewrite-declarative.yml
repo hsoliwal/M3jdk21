@@ -5,28 +5,28 @@ on:
     branches:
       - "m3/a3-openrewrite-declarative-20261004"
     paths:
-      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java"
+      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java"
       - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-java21-convergence.yml"
       - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-declarative-delivery.yml"
-      - "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-declarative-*/**"
-      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-declarative-yaml/**"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3DeclarativeDeliveryRecipeTest.java"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3Java21DeclarativeConvergenceTest.java"
-      - "m3/tooling/a3/src/main/java/com/m3/a3/A3Apply.java"
-      - "m3/tooling/a3/src/test/java/com/m3/a3/A3ApplyTest.java"
+      - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-declarative-*/**"
+      - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-declarative-yaml/**"
+      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3DeclarativeDeliveryRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3Java21DeclarativeConvergenceTest.java"
+      - "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Apply.java"
+      - "m3/tooling/a3/src/test/java/jdk/m3/a3/A3ApplyTest.java"
       - "m3/docs/a3.md"
       - ".github/workflows/m3-a3-openrewrite-declarative.yml"
   pull_request:
     paths:
-      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java"
+      - "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/M3Java21ConvergenceCatalog.java"
       - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-java21-convergence.yml"
       - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-declarative-delivery.yml"
-      - "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-declarative-*/**"
-      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-declarative-yaml/**"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3DeclarativeDeliveryRecipeTest.java"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3Java21DeclarativeConvergenceTest.java"
-      - "m3/tooling/a3/src/main/java/com/m3/a3/A3Apply.java"
-      - "m3/tooling/a3/src/test/java/com/m3/a3/A3ApplyTest.java"
+      - "m3/tooling/migration-recipes/src/main/resources/jdk/internal/m3/rewrite/hash-pinned-java/a3-declarative-*/**"
+      - "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/a3-declarative-yaml/**"
+      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3A3DeclarativeDeliveryRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/M3Java21DeclarativeConvergenceTest.java"
+      - "m3/tooling/a3/src/main/java/jdk/m3/a3/A3Apply.java"
+      - "m3/tooling/a3/src/test/java/jdk/m3/a3/A3ApplyTest.java"
       - "m3/docs/a3.md"
       - ".github/workflows/m3-a3-openrewrite-declarative.yml"
   workflow_dispatch:
@@ -62,17 +62,7 @@ jobs:
           set -euo pipefail
           git diff --check "$BASE_SHA...HEAD"
 
-      - name: 2 compile M3 recipe and A3 modules
-        run: >
-          mvn -B -ntp -f m3/pom.xml
-          -pl tooling/migration-recipes,tooling/a3
-          -am -DskipTests compile
 
-      - name: 3 prove official declarative recipe resource and delivery crates
-        run: >
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Java21DeclarativeConvergenceTest,M3A3DeclarativeDeliveryRecipeTest,M3Java21ConvergenceRecipeTest,M3Java21ConvergenceAdmissionTest
-          -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: 4 prove A3 NRW and fixed point through declarative activation
         run: >

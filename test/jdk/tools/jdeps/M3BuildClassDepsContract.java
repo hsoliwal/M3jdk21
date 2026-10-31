@@ -115,7 +115,7 @@ public final class M3BuildClassDepsContract {
                 var same = M3BuildClassDeps.inspect(file, M3BuildClassDeps.Scope.CLASS, 100_000, 1000);
                 check(Arrays.equals(same.targets(), all.targets()), "deterministic indexed collector");
             }
-            System.out.println("M3_JDK_BUILD_DEPS_PASS checks=" + checks);
+            System.out.println("M3JDK_BUILD_DEPS_PASS checks=" + checks);
         } finally {
             // Test fixtures live in system temp, not in source worktree.
         }

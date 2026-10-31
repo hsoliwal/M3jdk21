@@ -2,7 +2,7 @@
   "schema": "M3_TQ_CURRENT_CUSTODY_REPLAY_OBSERVATION_V1",
   "roles": "isolated composite replay fixtures; not installed-tree upgrade",
   "live_mapping": "HOLD_UNCHANGED",
-  "verifier_sha256": "ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978",
+  "verifier_sha256": "269cd10606a9de7629ec0d1f4dccce2866644f979c06958d808e107b6c9188bb",
   "fixtures": [
     {
       "role": "historical_source_archive",

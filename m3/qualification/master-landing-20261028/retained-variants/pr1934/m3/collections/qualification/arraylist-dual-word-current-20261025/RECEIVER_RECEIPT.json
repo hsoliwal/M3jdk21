@@ -20,19 +20,19 @@
       "role": "test_dependency_only"
     },
     {
-      "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayList.java",
+      "path": "m3/collections/src/main/java/jdk/m3/collections/M3ArrayList.java",
       "source_blob_before": "c43ca5578521b8f0a2ab1305f5d4becdeabc772e",
-      "source_blob_after": "b1135dc23d04d4654cedab2e8b62684e1e7d4471",
+      "source_blob_after": "3926a5970d61913304ffa7f24a32ad2740ea1a6b",
       "sha256_before": "884c9078022f64eb3c1f4aa8c306d852521be6089164c7e99b08e17c318d8282",
-      "sha256_after": "2168db105fe700ea1a8022ad362ee41d8f181180deba8404ea87d9c70f46d134",
+      "sha256_after": "9a950e6d94ccac369dff45499d1eb3b7ebcc4412d60034be69dedf1e6623a9e5",
       "role": "unchanged_public_signatures_dual_word_remove_if"
     },
     {
-      "path": "m3/collections/src/test/java/com/m3/collections/M3ArrayListShortWordMaskContract.java",
+      "path": "m3/collections/src/test/java/jdk/m3/collections/M3ArrayListShortWordMaskContract.java",
       "source_blob_before": "3412d8c46d326e8a6bba2b674a8db18fde7a277f",
-      "source_blob_after": "e87326da9e8d59e36cd84fd1413a0f55087200aa",
+      "source_blob_after": "483e35170f7378d39eae4a0c7d47cb3e27d1a87f",
       "sha256_before": "054bcf36dfcc6915a4ced91264bbe005c183df2be4f93bf709ab0f8c42e928a7",
-      "sha256_after": "aadabb968ad9d9483d02aa67a353d9a6fec402d90c9522325342a8ca8d1d07f1",
+      "sha256_after": "1bb84e8f779096092aef0b6f821d45372c5f028648f36ecb8030abaf22ca8bb8",
       "role": "java21_jdk_collection_differential_oracle"
     }
   ],
@@ -48,7 +48,7 @@
   },
   "catalogue": {
     "path": "m3/collections/algorithm-catalog/arraylist-dual-word-mask-20261023.tsv",
-    "git_blob_sha1": "377265a102b5067cc400f25058bce0781ea33a62",
+    "git_blob_sha1": "783a4a24b5e82a7f1b2ab4de40c56a5085345ec5",
     "categories": 10,
     "no_external_solution_body_copied": true
   },
@@ -59,7 +59,7 @@
     },
     {
       "path": "m3/collections/src/main/native/collections/m3_index_mask_window.c",
-      "git_blob_sha1": "bd300c90d54ede9b7f238efe8a18c918d2fcef9e"
+      "git_blob_sha1": "baa23467163a0e9344fe3c1d78dcc87cb707fd56"
     }
   ],
   "evidence": {

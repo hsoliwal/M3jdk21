@@ -10,9 +10,9 @@ C2 = Path(__file__).resolve().parent
 B = C2.parent / 'm3fs-vfs-20261020'
 CANON = B / 'canonical'
 NAME = 'm3-collections-refinement-20261020'
-TASK = CANON / 'synexia-openrewrite-recipes/recipe-crates' / NAME
+TASK = CANON / 'm3-openrewrite-recipes/recipe-crates' / NAME
 HOST = TASK / 'recipe-host'
-OLD_TASK = C2 / 'custody/synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018'
+OLD_TASK = C2 / 'custody/m3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018'
 OLD = OLD_TASK / 'recipe-host'
 PASSES = ('stable-order-groups', 'index-contract', 'index-resource-probe', 'index-junit')
 BASE = 'f04fbac91a7891e64b77c7b24cef1ab75ec88144'
@@ -35,14 +35,14 @@ def write(path, text):
 
 
 copied = {}
-for rel in ('pom.xml', 'DEPENDENCIES.md', 'src/test/java/com/synexia/rewrite/M3TaskRecipeTest.java'):
+for rel in ('pom.xml', 'DEPENDENCIES.md', 'src/test/java/jdk/internal/m3/rewrite/M3TaskRecipeTest.java'):
     source = OLD / rel
     destination = HOST / rel
     destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(source, destination)
     copied[rel] = {'sha256': sha(source.read_bytes()), 'git_blob': blob(source.read_bytes()),
                    'source': f'https://github.com/hsoliwal/com.synexia/blob/{DONOR}/'
-                             'synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/' + rel}
+                             'm3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/' + rel}
 
 targets = {}
 for selected in PASSES:
@@ -53,8 +53,8 @@ for selected in PASSES:
             rel = path.relative_to(OLD).as_posix()
             copied[rel] = {'sha256': sha(path.read_bytes()), 'git_blob': blob(path.read_bytes()),
                            'source': f'https://github.com/hsoliwal/com.synexia/blob/{DONOR}/'
-                                     'synexia-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/' + rel}
-    crate = HOST / 'passes' / selected / 'resources/com/synexia/rewrite/hash-pinned-java' / ('m3-wrapper-' + selected)
+                                     'm3-openrewrite-recipes/recipe-crates/m3-wrapper-convergence-20261018/recipe-host/' + rel}
+    crate = HOST / 'passes' / selected / 'resources/jdk/internal/m3/rewrite/hash-pinned-java' / ('m3-wrapper-' + selected)
     lines = [line for line in (crate / 'manifest.tsv').read_text().splitlines()
              if line and not line.startswith('#')]
     assert len(lines) == 1
@@ -76,7 +76,7 @@ engine_lines = ['# canonical_base=' + BASE,
 engines = {}
 for name in ('M3HashPinnedJavaSnapshotRecipe.java', 'M3HashPinnedTextSnapshotRecipe.java',
              'M3ScopeInference.java', 'M3EditScope.java'):
-    rel = 'synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/' + name
+    rel = 'm3-openrewrite-recipes/src/main/java/jdk/internal/m3/rewrite/' + name
     data = (CANON / rel).read_bytes()
     reference = ('urn:sha256:' + sha(data) if name == 'M3HashPinnedJavaSnapshotRecipe.java'
                  else f'https://github.com/hsoliwal/com.synexia/blob/{BASE}/' + rel)
@@ -107,7 +107,7 @@ exact target custody remain the source of these packets.
 
 Select stable-order-groups, index-contract, index-resource-probe or index-junit
 with -Dm3.pass. Each pass admits exactly one target and uses the existing named
-recipe com.synexia.m3.WrapperConvergence20261018. There is no new rewrite engine.
+recipe jdk.internal.m3.WrapperConvergence20261018. There is no new rewrite engine.
 Run test-compile with -DskipTests only after manifest/source lint, then execute
 surefire:test only after that compilation succeeds. The POM accepts an explicit
 real parser dependency classpath through -Dm3.parser.classpath.

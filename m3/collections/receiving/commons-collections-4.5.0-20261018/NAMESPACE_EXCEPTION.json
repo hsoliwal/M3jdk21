@@ -2,7 +2,7 @@
   "schema": "m3-commons-namespace-identity-exception-v1",
   "authorizedScope": "User requested package-first rename",
   "source": "org.apache.commons.collections4",
-  "target": "com.m3.collections.apache",
+  "target": "jdk.m3.collections.apache",
   "inventory": "FULL_SOURCE_BINDINGS.tsv",
   "identitiesChanged": [
     "declared qualified types",

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="10.18.2">
-<file name="/dev/shm/m3-package-rename-39a960e13a39/checkstyle-probe/source/com/m3/collections/eclipse/impl/M3EclipsePackageRelocationProof.java">
+<file name="/dev/shm/m3-package-rename-39a960e13a39/checkstyle-probe/source/jdk/m3/collections/eclipse/impl/M3EclipsePackageRelocationProof.java">
 <error line="1" severity="error" message="Line does not match expected header line of &apos;^/\*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.header.RegexpHeaderCheck"/>
 <error line="2" column="1" severity="error" message="&apos;package&apos; should be separated from previous line." source="com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyLineSeparatorCheck"/>
 <error line="4" column="8" severity="error" message="Unused import - java.util.NoSuchElementException." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>

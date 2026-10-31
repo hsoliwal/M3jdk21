@@ -2,7 +2,7 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 # M3JDK21 indexed full-int mask input-bounded scan qualification
 
-**Product authority:** M3JDK21 integrated Java21/HotSpot/JNI SDK. Java public module owner `m3/collections/src/main/java/com/m3/collections/M3IndexPathMasks.java`. It remains the one authoritative primitive path/offset/state-mask selection owner. No M3-on-JDK layer, no Synexia runtime jar, no additional retained per-entry storage.
+**Product authority:** M3JDK21 integrated Java21/HotSpot/JNI SDK. Java public module owner `m3/collections/src/main/java/jdk/m3/collections/M3IndexPathMasks.java`. It remains the one authoritative primitive path/offset/state-mask selection owner. No M3-on-JDK layer, no Synexia runtime jar, no additional retained per-entry storage.
 
 **Canonical recipe:** `hsoliwal/com.synexia@0e58045ec79ceb7d64284c5abb3bd5437961ffb4`, `com.synexia.m3.M3IndexPathBudgetedJni20261019` invoking existing class-backed `M3HashPinnedJavaSnapshotRecipe` and exact before/after source fixtures. No hand-edited generated target.
 
@@ -12,7 +12,7 @@
 | Source SHA-256 | `33b894d2b4c9f89a0244023737d49645d54cbcb1b388a0956e475567fdd4a577` |
 | Generated Git blob | `76205637d13cc185f5a46677358fefcf0279245d` |
 | Generated SHA-256 | `b6c37fb98884558d396bd841aa700014b58b305b17ced29f69e3ec5d40a74c8c` |
-| Existing C17/JNI donor | `m3/collections/src/main/native/collections/m3_index_path_masks.c`, blob `086b49293257fd17cc7fbd1ebbb98460aa677e35` |
+| Existing C17/JNI donor | `m3/collections/src/main/native/collections/m3_index_path_masks.c`, blob `69aef883c09997bae30825d7ad8757bc2358bf69` |
 | Java algorithm donor | Existing `M3IndexMaskWindow.scanBounded` for budget shape, existing `M3IndexPathMasks.scanWindow` for exact semantics |
 | Third-party donor code | None copied; challenge sites taxonomy only; tools4j related candidates remain separately catalogued |
 

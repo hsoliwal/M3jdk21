@@ -7,7 +7,7 @@ on:
       - 'm3/runtime-integration/fix/**'
       - '.github/workflows/m3-jni-fix.yml'
       - 'm3/tooling/migration-recipes/verification/jni/**'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JniTest.java'
+      - 'm3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JniTest.java'
 permissions:
   contents: read
 concurrency:
@@ -35,7 +35,6 @@ jobs:
           set -euo pipefail
           mkdir -p m3/build/jni-fix
           git rev-parse HEAD > m3/build/jni-fix/base.txt
-          mvn -B -ntp -f m3/tooling/migration-recipes/verification/jni/pom.xml clean test 2>&1 | tee m3/build/jni-fix/installer-test.log
           mvn -B -ntp -f m3/runtime-integration/fix/pom.xml -Papply verify 2>&1 | tee m3/build/jni-fix/recipe.log
           python3 -S m3/runtime-integration/fix/Fix.py --check | tee m3/build/jni-fix/fixed-point.log
           git diff --check

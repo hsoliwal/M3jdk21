@@ -26,8 +26,8 @@
       "path": "m3/history/README.md"
     },
     {
-      "sha256": "3c9fa3ab96110d58d83caa75f806b8677379a5d086976245f2f74efec9c7e7d8",
-      "git_blob": "75eef39ed983f96ea39bd6c20d64d3c69e22d53f",
+      "sha256": "683b01fc68b8661a44fd1a9fbc72c1aa68145dab9318fb0f5a3e99bc0e102181",
+      "git_blob": "657264483bfbc38c47bb467ac0e0356caeb80add",
       "bytes": 691,
       "role": "current-retention-update",
       "path": "m3/history/RETAINED_CAPABILITIES.tsv"
@@ -54,186 +54,186 @@
       "path": "m3/history/test_retention.py"
     },
     {
-      "sha256": "9703fd06fdb5f3616a721730270b15d02fb7593976ff4b210109e5ee57375c4f",
-      "git_blob": "696ceb92590bcc2548686c6c97b8ba6aa917bb47",
+      "sha256": "cd42ae20ec055c10bb90f17647331e930174cc6926d0cd87de90c2d3feb27638",
+      "git_blob": "78f74d0f43fcdaed3c4a3bbfc5600654cc688b8b",
       "bytes": 16951,
       "role": "already-restored-history-fixed-point",
       "path": "m3/migration/test/test_jcc_source_final_handoff_packet.py"
     },
     {
-      "sha256": "90dc23b1a8db4ec3347048c7f85e688a76893633955e877eab723bdd87d58d19",
-      "git_blob": "e25e8cff096a7d7785b2d61cdbcea64022bc8b9b",
+      "sha256": "b2194b2721b207eb65b0043352599e112018108cc4eb525e30082582410b1195",
+      "git_blob": "94cf0fd6b2e79126bf629feb223cefdc1405eeed",
       "bytes": 17089,
       "role": "already-restored-history-fixed-point",
       "path": "m3/migration/test/test_jcc_source_recovery_handoff_packet.py"
     },
     {
-      "sha256": "4aedf7fb2a3bfab3f831f0c5bdba8764752616e2d92182e66f3962efa8446cd2",
-      "git_blob": "e4f020e48d3134e597e37b215f5c8405ab75bea1",
+      "sha256": "1193dad47eb57c1a2ce5fdc1923c73de1fa6441b17423f9eefcd343f8225522b",
+      "git_blob": "1b2db0a4a6625f7f9a4bcd7a0a0c665d9ca3b7e5",
       "bytes": 632,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-final-handoff.yml"
     },
     {
-      "sha256": "74248526b328662a9a3ee3cff75b16ff0f3c5d346b035fb5f54d707d738c36bf",
-      "git_blob": "a4f8bf20c0794ca1ff74b8f88a663a036872749d",
+      "sha256": "e2236c61188abf2720329cd2dd497457ed2c849e912a4607cf71d31bf6e3f7b5",
+      "git_blob": "1ef133280f67fb85a1111c802de487c3a10546b2",
       "bytes": 638,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-recovery-handoff.yml"
     },
     {
-      "sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3",
-      "git_blob": "d10174dd61016069b9d5b73b7fd581a025855bcc",
+      "sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8",
+      "git_blob": "3a1e902a8284773f0f182d6bd43bf4e27b4e63c0",
       "bytes": 236215,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after00-name-mapping.json.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after00-name-mapping.json.txt"
     },
     {
       "sha256": "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0",
       "git_blob": "69ef3f693b65ec5dc95ab38f35c449c933c1c80b",
       "bytes": 16423,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after01-jcc-source-handoff.md.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after01-jcc-source-handoff.md.txt"
     },
     {
-      "sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef",
-      "git_blob": "b6283a33b9348f4ac6da3adaf5a35edb34a5a0c1",
+      "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
+      "git_blob": "5ecf415c7af4176898328d58b9df2972e18277c4",
       "bytes": 92103,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after02-source-destination-bindings.json.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after02-source-destination-bindings.json.txt"
     },
     {
       "sha256": "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12",
       "git_blob": "b734e19c2dace50691612215e9a7cfb70c014aab",
       "bytes": 107597,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after03-root-coverage-obligations.tsv.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after03-root-coverage-obligations.tsv.txt"
     },
     {
       "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace",
       "git_blob": "895458cdc16a87f915f34747e1bf8684b827f16d",
       "bytes": 220539,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before00-name-mapping.json.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before00-name-mapping.json.txt"
     },
     {
       "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
       "git_blob": "f7991e22d16e01c9d9626add7d6894a1404dc19c",
       "bytes": 17031,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before01-jcc-source-handoff.md.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before01-jcc-source-handoff.md.txt"
     },
     {
       "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
       "git_blob": "375a65a82dd39b5fa278e52472f3a99bdd5c9fdf",
       "bytes": 24139,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before02-source-destination-bindings.json.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before02-source-destination-bindings.json.txt"
     },
     {
       "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
       "git_blob": "5ed0454b97e046042a6ffce38f29a06776016378",
       "bytes": 107504,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before03-root-coverage-obligations.tsv.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before03-root-coverage-obligations.tsv.txt"
     },
     {
-      "sha256": "4e8bd94f8dd29256ca41dee2fb0b5164ba24c387038143d88d5fa958e6ecdad5",
-      "git_blob": "15f10c1fa21138816bda76d42545db9c015ab650",
+      "sha256": "bdf8db3538a4ef434eac10882da56159eb89dc6af344b3062a234c7052f13812",
+      "git_blob": "0db9d41c596d6ccb35b0c495b0e44bf48d75799e",
       "bytes": 876,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/manifest.tsv"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/manifest.tsv"
     },
     {
-      "sha256": "ae42e3db29017106b47f493fc663ca679ead1802558699915d1a3a1fb3454c48",
-      "git_blob": "9b5be4d1bbd8c817b6f29aa42e82326304ac741d",
+      "sha256": "773061ce98ca152ae5015a12b13c08d332d5ffe64f43a913c677f297df4dbc8f",
+      "git_blob": "abaa28a2c5ca013aa967643cb7328781e3ea4a27",
       "bytes": 3414,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json"
     },
     {
-      "sha256": "eb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e",
-      "git_blob": "a28601813e58ae43d4cdddd732a8878c5ea7a79b",
+      "sha256": "abfc59de62d46f6442b95717ac367461ab057cd74ed9dfffc6515d7fb0a1574c",
+      "git_blob": "f350c7c79e265c788d9e3278eb0103733b301327",
       "bytes": 251524,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after00-name-mapping.json.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after00-name-mapping.json.txt"
     },
     {
       "sha256": "d5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d",
       "git_blob": "9d15a9ebf080117a70e4e17cc4c0793d3971d2f7",
       "bytes": 29680,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after01-jcc-source-handoff.md.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after01-jcc-source-handoff.md.txt"
     },
     {
-      "sha256": "f8b27e3582eb494af2c8dd47225976f974be6edc2f6c26313975064d48739497",
-      "git_blob": "03a517fe8076e08c746f38ac452b8f29c6ecd3ec",
+      "sha256": "59b1491a232e3eabfd0530cbf47b01265603e6f493e382aa3c394c629b0516b6",
+      "git_blob": "8fc1846a9d81c1a6cd7e21f66048d9bc4ef2a834",
       "bytes": 167811,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after02-source-destination-bindings.json.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after02-source-destination-bindings.json.txt"
     },
     {
       "sha256": "1c4eedbf3f155bac469693da312c577d26999e7776ca1f85870f6cce125f1e35",
       "git_blob": "d906315e566c4434f2637ffebb58e36e4914cc37",
       "bytes": 107597,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after03-root-coverage-obligations.tsv.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after03-root-coverage-obligations.tsv.txt"
     },
     {
-      "sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3",
-      "git_blob": "d10174dd61016069b9d5b73b7fd581a025855bcc",
+      "sha256": "61818898ef6c092ddad2c1ee4cfe7508199912ff0a1f2d5c2a51ad6695d040c8",
+      "git_blob": "3a1e902a8284773f0f182d6bd43bf4e27b4e63c0",
       "bytes": 236215,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before00-name-mapping.json.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before00-name-mapping.json.txt"
     },
     {
       "sha256": "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0",
       "git_blob": "69ef3f693b65ec5dc95ab38f35c449c933c1c80b",
       "bytes": 16423,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before01-jcc-source-handoff.md.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before01-jcc-source-handoff.md.txt"
     },
     {
-      "sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef",
-      "git_blob": "b6283a33b9348f4ac6da3adaf5a35edb34a5a0c1",
+      "sha256": "8c76c2dd45e775d29f8f47d8daf65842e465c74ad3dec7aacd55df59f9d051a1",
+      "git_blob": "5ecf415c7af4176898328d58b9df2972e18277c4",
       "bytes": 92103,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before02-source-destination-bindings.json.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before02-source-destination-bindings.json.txt"
     },
     {
       "sha256": "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12",
       "git_blob": "b734e19c2dace50691612215e9a7cfb70c014aab",
       "bytes": 107597,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before03-root-coverage-obligations.tsv.txt"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before03-root-coverage-obligations.tsv.txt"
     },
     {
-      "sha256": "944d1531de586740a9e098f4c36f98f8e4c668f35090b8bc68a116b5c8eb0efb",
-      "git_blob": "e322acedc29a26c1291e55a773a4e22c1d548eb7",
+      "sha256": "f9e38d31f89d71ee6fcbb107d2ea0d12636196b16094d951b64b9a4b74bd5c0b",
+      "git_blob": "498da5417b538c49ce52ba13b7ef782ecc2b9e47",
       "bytes": 876,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/manifest.tsv"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/manifest.tsv"
     },
     {
-      "sha256": "272a4b6a2f6d39a0d7baf2d4a104d671125fe471a2a3351cd321315e6be5d499",
-      "git_blob": "64fedb3af5b9930d8ef03d1da062ca1e337b5c7e",
+      "sha256": "68d9e65e8d45d1c6e8eea04de4f9e2ab0326b7d66fef7f3d86f832fb0c8197e2",
+      "git_blob": "c4b6be425ba7a025ce20a4da6dd7317c96fea5ff",
       "bytes": 3390,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/plan.json"
+      "path": "m3/tooling/migration-recipes/src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/plan.json"
     },
     {
-      "sha256": "c08ec9e4ecd9c803c310bdbce32ae3b23cad9c0953db408f36a399d980736309",
-      "git_blob": "97c6851c29af7c8eca66d00d62ecc5cc953a3adf",
+      "sha256": "7bbaffb5c5f16f05119d439ff5a1f979c90b6091a2c3d79623f3e7d5cf538d43",
+      "git_blob": "2dcbc9debd2c3668c37dcc1d5075d5c635c7d1e4",
       "bytes": 24518,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccSourceFinalHandoffTest.java"
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceFinalHandoffTest.java"
     },
     {
-      "sha256": "803c34429b567af7a1802f04c2cbb52701cc580f8e0c58cc58ffde70bab70e2b",
-      "git_blob": "1673f9d635381cbb1f1106f2a39610f54faafe10",
+      "sha256": "5a6efe78569fa76702d85b2d391335423d839b62748275748efc6020ba386de3",
+      "git_blob": "1abc53c1c880686111631234b5df7db191bd0297",
       "bytes": 29963,
       "role": "already-restored-history-fixed-point",
-      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java"
+      "path": "m3/tooling/migration-recipes/src/test/java/jdk/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java"
     },
     {
       "sha256": "75a3f91291331447ef7c2093dab8844d2a8d1636a8ac928ec884d8e039632250",
@@ -243,8 +243,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/REVIEW.md"
     },
     {
-      "sha256": "bdc11d9d7e07444e87b05548ae334d46f975c0ba40821f5bd78a57faa33cb73d",
-      "git_blob": "bf14eb3294ce1a9162d7ab4af40a2efa59e727e8",
+      "sha256": "31e31d4a31c674b238480b373acf632fbdc520cd560512555a25c5da6971f327",
+      "git_blob": "275be048c23ee39b14cf3358f4c3bdd01453a39b",
       "bytes": 1645,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/01-check-E2-preimages.json"
@@ -306,8 +306,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/03-actual-packet-contract.stdout.log"
     },
     {
-      "sha256": "a61de4e8b41058e8caff26fb329cf7e8e5a8c5a99cf77b93939fd9a0a02ebfa2",
-      "git_blob": "71114098cce30fc7af831b897988fa093bab6a4a",
+      "sha256": "47483879dd28940234280f3a57a30cc6da3694ae50cbdcbd7b8d2e57c65be921",
+      "git_blob": "b3ca98985034bae50b349614a7ed748200a02455",
       "bytes": 1606,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/04-apply.json"
@@ -327,8 +327,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/04-apply.stdout.log"
     },
     {
-      "sha256": "ff2344acf152a26c7beb403d4850a86fea79b0ad20979a7e7e4d85d72603de96",
-      "git_blob": "794d02358844fe3c518f16a533ac2d2c7b882c19",
+      "sha256": "929479313a44c17f7d85da036ae8c3b8ae3edf42ecb5cf51f112533c60423390",
+      "git_blob": "f545ca6c393865f1f8031b5e5346451799299940",
       "bytes": 1642,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/05-apply-fixed-point.json"
@@ -348,8 +348,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/05-apply-fixed-point.stdout.log"
     },
     {
-      "sha256": "6b0cf854da053589c409255c4f515405f58a80cafa8f8de29a238c316e65a838",
-      "git_blob": "01b03693e234c0560dcf7b452160b7062fb1fa15",
+      "sha256": "556e0aba208481dc7aa5f4e0bf501c6776d79697649cb01ecf216470a793f68c",
+      "git_blob": "e34f936b1d2fdaf80fce12b2707ebb685ab94644",
       "bytes": 1618,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/06-rollback.json"
@@ -369,8 +369,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/06-rollback.stdout.log"
     },
     {
-      "sha256": "11ac35097f2bfe8e32cf6ca038a4a6c052d1e63a75f924ec5882193f4c612d52",
-      "git_blob": "672b6d39e4929011430db5cdd15fa754eac94a0e",
+      "sha256": "478fa49553e61804073dc3f2942e382b6ca1725eef9aa23b3ca32e51a86943bd",
+      "git_blob": "438fca033cfeefa46c4ce827a273fb629bd862bb",
       "bytes": 1609,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/07-replay.json"
@@ -390,8 +390,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/07-replay.stdout.log"
     },
     {
-      "sha256": "b7968aef706956f3f7831c773d51a96404f60fe137f328898a1d446f00a5e0f5",
-      "git_blob": "ada45a9b3a1eeec9738049632bde4f3c5d9b10c6",
+      "sha256": "a65cf87f2fa92a303057f4316a97e18782eaec10632703b46adeebb7f02b47cd",
+      "git_blob": "43d198c36772a9726e78d3fe35f0cd4a0ba9cbe8",
       "bytes": 1624,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/08-check-final.json"
@@ -411,8 +411,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/08-check-final.stdout.log"
     },
     {
-      "sha256": "df65843d4ea27575ac3064a415510dfecf9b4d4f8b4bf6529b9b0049ad5612b7",
-      "git_blob": "ffe5f61fa8583959f325e4e8ed934b7681cd0484",
+      "sha256": "2188cf56bef4053ac01cde98494c20f0f42889bec6652e633b2e3d6ac68877e5",
+      "git_blob": "5e0ca9027c0b0839cc16d784d9617651e2ac5fb3",
       "bytes": 1661,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/09-whole-map-validate.json"
@@ -432,8 +432,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/09-whole-map-validate.stdout.log"
     },
     {
-      "sha256": "dc466635b8f90f742fe090bc60d5aa23f839fab05f2e77e352f247229b83ae69",
-      "git_blob": "1aa1f4e7c4b4a482e87226cbb1404551299c6cba",
+      "sha256": "18ceadc89cc95c86659bb28ec806f508f5daa5d2127e65fb39daf1811f82ffbc",
+      "git_blob": "388d8e49b0676e7738218a4bf1cc6a1b470abff6",
       "bytes": 1688,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/10-completion-remains-blocked.json"
@@ -453,8 +453,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/10-completion-remains-blocked.stdout.log"
     },
     {
-      "sha256": "e33dd229900b9614a77e9187b9ac04e024f2250c73c74a625dfe53fba093be85",
-      "git_blob": "bb99298fd2c7a1819682f73b0d0ed8d93715de09",
+      "sha256": "053445773c096542fd44835c50ee8e1d5e594c94bbe06e221b00b31e8d169c40",
+      "git_blob": "109a64a3c8c93cc21094b3d955f7d2529f346ec4",
       "bytes": 16129,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/JccSourceFinalHandoffTest.xml"
@@ -467,8 +467,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/empty-maven-settings.xml"
     },
     {
-      "sha256": "da48340c83e26dd478078dc5195e000b99666f54663361c1773827acdbd46416",
-      "git_blob": "7814104de55ea9742edd79e2addfdc16df8c0c17",
+      "sha256": "adb5ad87c3799b50403352fa611d01a106e37e1eebade5e67f7964e2106d06d9",
+      "git_blob": "25d1f766fbaf636e6fd5bb97930002453615ca84",
       "bytes": 95340,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/inputs.json"
@@ -481,22 +481,22 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/receipt.json"
     },
     {
-      "sha256": "41451abbdc2676b9f76d894f82bf08f3406cb76df9015308fb54cdae3e9999e1",
-      "git_blob": "228b1546f1276fa938877844413d461c3147b3fd",
+      "sha256": "2f279f2cabd49c04080b33717195fcd1cc184bf7fab89353810543ff165b6664",
+      "git_blob": "0745375220efa00edddee49f969ba8799f5d14ec",
       "bytes": 841,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/FILE_SEALS.json"
     },
     {
-      "sha256": "d369f629eac19101b1fc80e5cdfeec195ddd26b1555790952b604dbd0e8c045f",
-      "git_blob": "6b054f73d6df8896f615b2692b9f4bf4cc7f3a08",
+      "sha256": "c1db2f58d832d3faeaa6c680ea101eb2a04ac8037e6cdce519b17d6afd47db14",
+      "git_blob": "09ee5f2de21335c9d95b86d12f4d4aac75aa2b1b",
       "bytes": 141137,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INPUT_SEALS.json"
     },
     {
-      "sha256": "e47292537c9e43a1712ad56895a462b13ede3d92efae36752ea2591045918625",
-      "git_blob": "ea530a7b7027bb025eb92dcac87a5e4a2d24a6a0",
+      "sha256": "24cd03c36e25e70c4b3564582b9d318b19f2a506365b8fdc7184f0aa5292e5e4",
+      "git_blob": "e94dac88cb28133b85f6731e6664ab0ed09b14b3",
       "bytes": 8303,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INSPECTION.json"
@@ -516,43 +516,43 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/REVIEW.md"
     },
     {
-      "sha256": "3bc757f8edd4d7965964392c670d30f5499e05c64b8b1b9ce6f37b73dc83324d",
-      "git_blob": "b6a8dcf7640ebf8597f24c961e60324bfeb88954",
+      "sha256": "75cd25f633540c06ebd29fde0512c18c9968e1056ec9b9123f8540e958e6d999",
+      "git_blob": "a9793241503782849d5a25a1e635800077db84fc",
       "bytes": 20397,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/inspect_receiving.py"
     },
     {
-      "sha256": "d91d254762c0c628e46019c2cd53d1b05de1855512eeb5b6efd2e628ae1c3b52",
-      "git_blob": "55e4f38b10c8f41cdba66b2bdce3012f43f259ee",
+      "sha256": "7c783395bcc7f8cecea9da5a17d228bd336332fc1520a53149ef7405fcb91d63",
+      "git_blob": "d7cf21bff753dfb242cfca72a7fe54aac27e1f89",
       "bytes": 962,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/FILE_SEALS.json"
     },
     {
-      "sha256": "d7bc139f4e4af0d7c680c8202adacc3b8d3267761c3865ffcf33f4131fe5e089",
-      "git_blob": "f841199efee5d90a2ff8f17a069b0a63b9b38b37",
+      "sha256": "95a3430d3dfb5c289dffdce992c0789495f963177aee25b29bca2c945d636ad2",
+      "git_blob": "015f80a489aaefefe3d341ad9ef734308219275a",
       "bytes": 7980,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/REVIEW.md"
     },
     {
-      "sha256": "b450bd8051b630dded029063176e6d4cb5ae59f718419d8052aef6ba2ba5723a",
-      "git_blob": "dd4118802af85c75d06356b24b380301a4c31182",
+      "sha256": "da8669a91c85e41c8c804775234a9243fe05428bbcbf1166bae0ae9cb8c4af90",
+      "git_blob": "eb1ea98585a14066861970947cbdd2321b123872",
       "bytes": 15679,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/STRUCTURAL_INSPECTION.json"
     },
     {
-      "sha256": "ece80d9a65fee0cb0468e25b3598933646e02f2a7b18772f993e01bf396463f6",
-      "git_blob": "8d1844a254cc34a361c2b3a4c34b0c45af7092aa",
+      "sha256": "331d9af58fd0be9a4c768e540cb6ca05fcbf73397abeca6af4322a532c28fa1b",
+      "git_blob": "cb5a2131620ceb6f91b33c2b9950abcda83b1fad",
       "bytes": 251,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/FILE_SEALS.json"
     },
     {
-      "sha256": "3287044289e953d694ca8655e89e7fed3c29017477393a4d16534dbafca0e5d9",
-      "git_blob": "4f1c0d07f50c098c12d38c0245b149ec472a54f4",
+      "sha256": "7c2f4a394c3eb147ecb59656977f4c7b114b02ae9fa54bc3d99f1af2fea21fb0",
+      "git_blob": "70b52e216b471133a5f0cb515e83e6ef28f8d9a7",
       "bytes": 5158,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/FINDINGS.json"
@@ -565,8 +565,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/REVIEW.md"
     },
     {
-      "sha256": "88602ece9ae5d8577e732c89173ac258951f8955b6f1a7fc592f0214214228f8",
-      "git_blob": "0c3337d60af7ac1fdd95392dfc4518087688fbc5",
+      "sha256": "e9ac214de25b0aa0f035efe81069ff9d48402576402e832411ac818b9724d9c3",
+      "git_blob": "77b817e2421c416a32e36fd4b2f6a060b1f4e867",
       "bytes": 160597,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/source-proof/OBSERVATIONS.json"
@@ -579,43 +579,43 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/source-proof/REVIEW.md"
     },
     {
-      "sha256": "12d6973deec9aa7735bd794f1659b68b214ee083dd1b573d826f46ab7efe59f4",
-      "git_blob": "2dbcf82f4e6453cdfe028e08693613351c179db5",
+      "sha256": "1488c8b3619bb6585bdd981cd7a35795ca6e6e8b545452c468c5f184972f1d61",
+      "git_blob": "08298c9be9037537508eeaafe3d31e6a1ae45f66",
       "bytes": 3299,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/AUTHORING_RESULT.json"
     },
     {
-      "sha256": "1e56387b23f35b8bf6f1707aac6a11215b8e2999ed65e370820933c95daea161",
-      "git_blob": "3c1c3ea29e2fb3b971f79c9ec12fed9ea77e7c1b",
+      "sha256": "662be00ddbb6b7a24e13060711647056bd89e9d6e3022ee427f90048f74a01da",
+      "git_blob": "ff08e5d5106942b13e7ea495c9a0766121019660",
       "bytes": 21788,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/author_successor.py"
     },
     {
-      "sha256": "0f21d0f5fdf5c0b00c775c6af2f829e301a40de3475bbf08f521a527e82cdd7c",
-      "git_blob": "09ebfe13f21a0ebfad967b53ae2a624123b1f314",
+      "sha256": "e3e164757d00423b21590358c9d569e4905efb82934fecc08505151f4e8b052f",
+      "git_blob": "c5fb4e4659f7dbaf0bc9fdd4c535391d62f5cfd0",
       "bytes": 14136,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/check_references.py"
     },
     {
-      "sha256": "ac7b489278e25f5674fe4804531d0ba6eb732c8376c39b74dcf47a72b4cd9f4a",
-      "git_blob": "9336bfc939e80b21afdd0f26f1ceaf660ace6ea7",
+      "sha256": "79dd3a118197ca82456aedd1ea56439101481ac8526f7153eb75339be54344a1",
+      "git_blob": "be65c3ddb97632e9d6989155694b4eb58f33f117",
       "bytes": 8109,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/run_verification.py"
     },
     {
-      "sha256": "a4af3c44bc1afa6f83881c17ced55f418940dbd792bfd687cbb3a717c44887cd",
-      "git_blob": "3843b99d83f9b98fc4c6dbb655b92fd35c4c4289",
+      "sha256": "f7dcc4fb3843ce83520aacaf8fd36f4347d64000233d92921e81f67154bdfa87",
+      "git_blob": "a019e8c85939374211623a8b3de39988b124ba76",
       "bytes": 178211,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/REFERENCE_AUDIT.json"
     },
     {
-      "sha256": "8870ec7a99c1d3486740dd80fbcc173a046310c12a512e558fdf5b4860fdc32e",
-      "git_blob": "be9f980e08b9e323a9d8040a06b09aed874e5c74",
+      "sha256": "954258e783d0a0cb84325b9f408538db2969b7721c0390f6e71cc82baf7e126c",
+      "git_blob": "17fb1784d5b92bcf4b79ee6e92ae6d1d1e47411f",
       "bytes": 14098,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/attempt01-checker.py"
@@ -628,15 +628,15 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/attempt01.txt"
     },
     {
-      "sha256": "2a64db3e877371d61908cafdd9a86a2681a8d522672c49f7b1749d5e4541d57e",
-      "git_blob": "79e235c75dd91585c8eaf717fa665dcace2f6764",
+      "sha256": "1af446a5dc1f011d8c2f7edbd84914256357b614b0f979aebed4b491f63fbe29",
+      "git_blob": "caac8f802d5ed172b13147613389f866fd2cfd6e",
       "bytes": 399,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/FILE_SEALS.json"
     },
     {
-      "sha256": "3e566919f1c576b36312744c2030db087f94befad10871dfd1e600fb8e120c7e",
-      "git_blob": "4e18a5ec623a22f069b130a4e0f1444fc0348746",
+      "sha256": "81856ad0236be8f3cc94f696ceae92843cc68817dfe69baf20c81b5ce35cb8c6",
+      "git_blob": "e7ed1b521618f3d804e0049e94342dc5f3ac0e69",
       "bytes": 24961,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/INPUT_SEALS.json"
@@ -649,8 +649,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/REVIEW.md"
     },
     {
-      "sha256": "b0a1ff2a675017bc4eda2620a031bb963d038c21e10ddacb8f57b1fc51f6188a",
-      "git_blob": "33670d4c3f8d5e9cc1be49f2125c95228abf4a06",
+      "sha256": "d4fa5704926ea9becfd7fea3b73928183724b5e63ed1814ac9aa0d4521e7136f",
+      "git_blob": "5d23a15a5e29eb2ffeb54d81e4dee76330310add",
       "bytes": 64185,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/SOURCE_FIELDS_AND_PROOFS.json"
@@ -663,15 +663,15 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/donor-owners/REVIEW.md"
     },
     {
-      "sha256": "e9a1af5f9d9bc36507cee743ebfaa560b2ed5a026645791736d22f1f94528bb4",
-      "git_blob": "338d8eb6e0ed34d72c27c3e476717a550b3edeb4",
+      "sha256": "2d2ee7fb0d34bfabdb5579f79e8d3ace76a8d82e542a38d309fe9b9ad7224f98",
+      "git_blob": "e25ac1a6fe0ba225d0b73a0bdb0ab9a74569ab77",
       "bytes": 11874,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/donor-owners/SOURCE_TABLE.json"
     },
     {
-      "sha256": "e912f6cad50f06e0679734efef700c07ff4249d796551bc7cb369b04dd1ad219",
-      "git_blob": "3178a023b8fca9061b32ad2e247d8b02f7233112",
+      "sha256": "b09b17bfc596d4299d958bdb9c4f310e7a2bbf4c97688bdaf635ffdbb55ce0bf",
+      "git_blob": "86e0a220027c1e790865b0bfba3e8f17ac674829",
       "bytes": 525,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/FILE_SEALS.json"
@@ -691,8 +691,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/REVIEW.md"
     },
     {
-      "sha256": "cfe76d41dda4220937086d951a126bf04dec0d282ba088b6de2a6bff33b6e14d",
-      "git_blob": "828eca9458cc37ba159984538b0f2e309df592f4",
+      "sha256": "9d393cb0e1154049b8cf5e53ccc6e49b80e7de802a9604de056e2231b1140b25",
+      "git_blob": "6c9529b5187f647f022ef73876171c600b775ae0",
       "bytes": 114933,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/ROOT_ACCOUNTING.json"
@@ -719,22 +719,22 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/PR_STATE_AFTER_SOURCE_PUBLICATION.json"
     },
     {
-      "sha256": "cfe76d41dda4220937086d951a126bf04dec0d282ba088b6de2a6bff33b6e14d",
-      "git_blob": "828eca9458cc37ba159984538b0f2e309df592f4",
+      "sha256": "9d393cb0e1154049b8cf5e53ccc6e49b80e7de802a9604de056e2231b1140b25",
+      "git_blob": "6c9529b5187f647f022ef73876171c600b775ae0",
       "bytes": 114933,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/ROOT_ACCOUNTING.json"
     },
     {
-      "sha256": "b0a1ff2a675017bc4eda2620a031bb963d038c21e10ddacb8f57b1fc51f6188a",
-      "git_blob": "33670d4c3f8d5e9cc1be49f2125c95228abf4a06",
+      "sha256": "d4fa5704926ea9becfd7fea3b73928183724b5e63ed1814ac9aa0d4521e7136f",
+      "git_blob": "5d23a15a5e29eb2ffeb54d81e4dee76330310add",
       "bytes": 64185,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_FIELDS_AND_PROOFS.json"
     },
     {
-      "sha256": "03ba5aa231929079fda7772dc6a798a687ba7486fa81ceacc0723407330f956a",
-      "git_blob": "adb6d06c45d636c29612fe6442374b429a8cba60",
+      "sha256": "c6500d09f2056e7ea1dad619cfbae3f8763e39ebdeedd4d63440540a2dd46146",
+      "git_blob": "349017b19d5aac98b98ec2c26b55c27671d002e4",
       "bytes": 370323,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json"
@@ -761,15 +761,15 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_REVIEW.md"
     },
     {
-      "sha256": "27de06b75c3b7ef8cb774473073176c5e5d6e1486741206c6336f155718fa71a",
-      "git_blob": "98d555824f5b7866d2ee7447ee99fa3b5dd213bd",
+      "sha256": "d918623244803faacd814be6049f7d712ef23e8646f3cf6df68d451b2f287de9",
+      "git_blob": "526ab3138f3123da8379d9d02a589e155b663b7e",
       "bytes": 17111,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/REVIEW.md"
     },
     {
-      "sha256": "1fcd84420aa008a6635694994606d13e266d04a45bf33e84fc5f5102985158d5",
-      "git_blob": "c614f194515ee58b403175acc73a2e757eccb7e4",
+      "sha256": "5a0e2fd11514f200f08d3297e52c37bdc208dab4c3e97040653f16c931c4787a",
+      "git_blob": "8eca475d38d3133cd7183239266dbabf1cf9cfb0",
       "bytes": 1443,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring-invocation/EXECUTION.json"
@@ -789,92 +789,92 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring-invocation/stdout.log"
     },
     {
-      "sha256": "2880acc74ccba95ce8efe10e8762ebe36275cd44b7de602f07d08f272690ef4b",
-      "git_blob": "39c2af1cb23416d42a34fe74b3c0e55edc3083bc",
+      "sha256": "116fde8857beec30084054b03d2b543ad75e8dc0c534314e5fffde1554f5823f",
+      "git_blob": "63e9ddff20a8ed1732c8337b0dd93f8b693cdb11",
       "bytes": 59614,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/AUTHORING_RESULT_V3.json"
     },
     {
-      "sha256": "e0ae5375e313a8547f5cdb8f607d2fe1c04efe91d3d43c86d1a5878329beaf59",
-      "git_blob": "57f638e23a27f660fb2d3534df9f4d04113ae280",
+      "sha256": "867e7a054af6dcadf81d7a71c6cbe822695f3b5be3fd1fefe5d6df7919cfbb2c",
+      "git_blob": "b4efdc6a9ef0709b2063cb334a041a2f01922d4a",
       "bytes": 5435,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/BOUND_INPUTS_REVIEW_PACKET.json"
     },
     {
-      "sha256": "9024a1180d4f5856130d9e3a7dd1e8f18786ca8825c9569397d37003019aac9a",
-      "git_blob": "36e539e55b7399283d4fe0161fe80d0cfa38f802",
+      "sha256": "225e5a587fb5845929390de32a0b70642d8c24e6345ee42733b2ce8b6a355012",
+      "git_blob": "282ce942d789459f83d9b1b38a6db454ff6aa6dc",
       "bytes": 63330,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/BOUND_RESOURCES_REVIEW_PACKET.json"
     },
     {
-      "sha256": "590e52f2a39fe42e568bb3ae1a78cde05794995333adafc42fcbb570e1371b27",
-      "git_blob": "f9c566553fd09e941201101e2b8778ef3aca66b1",
+      "sha256": "0c0c66bb9f1186f8f5a5aa53398e762d7deb8ed15c576cce23672aa28989bb23",
+      "git_blob": "50b2714ef27ff2b82dfea17a0f765f1936c7c451",
       "bytes": 1842,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/DERIVATION_INVOCATION.json"
     },
     {
-      "sha256": "767002f4216ff25d89ed3a9b44592c831bbdb42b4a7240206d9d987a26c3d585",
-      "git_blob": "72765f803fe494fe798acbb725a4108b4bbb3dce",
+      "sha256": "def3f591f3866e1e1ef825ef5101fd6a19e857b4b64bb3beec42ce9868f41e2d",
+      "git_blob": "90f8ebff8a56915247e20badc58b8f4ca252adf2",
       "bytes": 1121,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/DERIVATION_RESULT.json"
     },
     {
-      "sha256": "f2a02221bf5b1f4b36793429a8743eda01eac19a073f17c4e498d854a2066176",
-      "git_blob": "3d9d298d2ffeb75280ed6269e2366b92e95e970b",
+      "sha256": "81641b602be5d5ca0b34642b859555e98b78bf71913c9ac6d046cf5a29d2504f",
+      "git_blob": "708b6cab94b7ea9bc54ba294f3d89080aea5820b",
       "bytes": 1412,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/COMPANION_BINDING.json"
     },
     {
-      "sha256": "21ce8061417242403fb835f6222f522277f8c87f0a3d5a3ed9ce2f83b549e3e9",
-      "git_blob": "fc8d3a8bbf7d7d3a0a8af186433012afa383a205",
+      "sha256": "b9d56300ef2e7e9219d4790a325eb762c48263dd79311a5ef14852276e59bad1",
+      "git_blob": "eb2a96c88fc5314a33f797ce3b8fbb2deae89205",
       "bytes": 1338,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/FILE_SEALS.json"
     },
     {
-      "sha256": "d386f5fc0130caf03318a301bd61ed74a667afdb9977a344459208532ef09651",
-      "git_blob": "ea9eca95429fd5a1ab758fbefed89f59202a0fce",
+      "sha256": "3d3ea283b65e17ac8bafcf8b7bb3e5a8d08efe3f05d304cfca957e3de9fd81a3",
+      "git_blob": "457f98e7213302c4b8f0c4644f7aab30592cb430",
       "bytes": 10299,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/INPUT_SEALS.json"
     },
     {
-      "sha256": "06d74f24e11624b6f3201f9b51230dc7ab41eda36f62cc5e093da6a2fbc4cb98",
-      "git_blob": "190b9290b5eb89ef44fadcfda600826b9bda4154",
+      "sha256": "4bb195a07653347655c8bb9c2d4ffa2fff4316da506316655dbcb62686f7385e",
+      "git_blob": "05429cadae15604a9b1f8a651741edb68d1a9bf3",
       "bytes": 8324,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/REVIEW.md"
     },
     {
-      "sha256": "6b77c8737ca9858f2cd82127ec6367a846bbda8e96a41b20fa17a99ff50d0744",
-      "git_blob": "362ede7e4f8b8c53f028a2faa3302c989f34535e",
+      "sha256": "2ffe907696a8326206d8bafe8c35b4a50ee4567500282c1fd7b550fa77339625",
+      "git_blob": "ffebe6fcd689accc8460be75b1ebcab2bc9e278b",
       "bytes": 3591,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/STATIC_AUDIT.json"
     },
     {
-      "sha256": "9f0a00ac64a73aeed9ff8b480190c4ec06174a3f8107c47070a492f449f22843",
-      "git_blob": "df6bde5d45bb068fac0b03027535eda5b5be9da4",
+      "sha256": "1c9dfb88fccf794e722b34b49868f83bc6cdb01b957cc9019f262175b44024f7",
+      "git_blob": "8c1428e6d8adb50acb4873521a0fd71d3f325a6d",
       "bytes": 951,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/FILE_SEALS.json"
     },
     {
-      "sha256": "ae513e9a5acbc1fb76bf6741618c7ceb9f30126441332f60c581d7dc922bcecb",
-      "git_blob": "4cd18f38db5d937dd714d823ef172457e22fbc8f",
+      "sha256": "48600a242a92aef6e5e0d68e306cbf6167f36f421504e5931577ccd989c6d027",
+      "git_blob": "689970d6aef0f713f6959e2f1a629f9b197696e0",
       "bytes": 1457,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/INPUT_SEALS.json"
     },
     {
-      "sha256": "50b226e31a609a30ee644790f84e8966234a8a4f163b5a1084f94ce7b7554711",
-      "git_blob": "b245d1688b368c367fac5f955a89a77bc8bcf5c7",
+      "sha256": "f01e78a0ea47be42e08866b26c231d7c68e992f5158527d1a0ef63c473561b0d",
+      "git_blob": "c8a5c895bc7e997afb81c4cd53151122291be879",
       "bytes": 6397,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/REVIEW.md"
@@ -887,15 +887,15 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/WRITE_SURFACE.json"
     },
     {
-      "sha256": "30cc1c07b3aac8f1a6662c494c0cbbc76c22bc6a4fdbcbb04770236fd2384907",
-      "git_blob": "26df20d4c962ae1e0b6ef43f095c70868140dada",
+      "sha256": "082d12dd79e70bb747441fc8b221ab5ddeea5fd8174629b068c137c4682e1b5a",
+      "git_blob": "eaf3b002942e0fcf16aece8a2a4459f3cf9010f3",
       "bytes": 60890,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/custody-packaging/ADDITIONAL_RECEIPTS.json"
     },
     {
-      "sha256": "caa248d052d7def21ef1552b41fe893f877e3989edbd661336aedf6eb7b9b405",
-      "git_blob": "d9400d43d538875bed51cdf41e6c5bad443f0047",
+      "sha256": "59a58bf5ed2487dc3a288a88cfca3cc3815caa3c4cbe0a6ca9171424d4211bc4",
+      "git_blob": "7f8e757fcc953d7a5e5acc12c039e90ed0a83e0c",
       "bytes": 53580,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/custody-packaging/FILE_SEALS.json"
@@ -908,8 +908,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/AUTHORING_RECEIPT.json"
     },
     {
-      "sha256": "f02ed2799bd8b7c200a9b4777f549bb7c733751f873a441531f3eec35d73b617",
-      "git_blob": "14d96b896771e8fe60fe3990fad82a585ea2a15c",
+      "sha256": "5e935bacf7baad6694842b047e95f2d033c24df6150df175640c5bb6b13ef55b",
+      "git_blob": "9e3be9ec51cb2333dee64b51b213953db03fae03",
       "bytes": 22838,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/COMPONENT_BINDING.json"
@@ -936,8 +936,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/INTEGRATION.md"
     },
     {
-      "sha256": "b9c144d5eb9be716fd749b6d7cda456e0d40aae6ae423c794ad2ace1a4fe1322",
-      "git_blob": "d663dc4c8c13968edfffe0258a1b6ccc927434fb",
+      "sha256": "669340dc10d5530eba9095d7d81a26265511732eeb27aa5a11252baad60b4754",
+      "git_blob": "f70a391f176afe61437457d645065005940cd215",
       "bytes": 51757,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/donor_catalogue.json"
@@ -1097,15 +1097,15 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/environment/toolchain-restoration/RESTORATION.json"
     },
     {
-      "sha256": "460131d195eb89da3ab98b3781d580d32f3bf17af2cc13818e999885910c56ae",
-      "git_blob": "74cee6e3301785af70aa2d91d8ac8fd10faff6c1",
+      "sha256": "e7e2f10dfd621007c4d6c7180333ace760cf89ae4475513bb6de51bf6738fb06",
+      "git_blob": "732fad332073d67315a8e8c030562a95a1243683",
       "bytes": 1797,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/execution-invocation/EXECUTION.json"
     },
     {
-      "sha256": "258212f079c0ad840e10a1f4a0c51d60da3eb0ad05d3a96beeb07e8ff27b035c",
-      "git_blob": "8eeb4d5bea0e5a449b36866092bcaa18c9f86223",
+      "sha256": "ae9e079df0ee3f46c5cbf1f9c0be2a58906ae0861182550e39a741b700ec15e4",
+      "git_blob": "d556a4a8fc82561a539e03c6076081fb59468a40",
       "bytes": 1197,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/execution-invocation/STARTED.json"
@@ -1125,127 +1125,127 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/execution-invocation/stdout.log"
     },
     {
-      "sha256": "7cb3b39584bfc2f059b597353a54f45b27e8b7c13e937ca35d0ee61f93b8f345",
-      "git_blob": "53b9fc96c8cc3b07c6a8753c9f85ce339c038479",
+      "sha256": "436d00697cf1a5b883e889dbc1c1ba31e2c3cf4b74945831f7dde42fff414466",
+      "git_blob": "b3f7cac6ad10e0d3a4adcb3dec51938d6774717c",
       "bytes": 3376,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/COMPANION_BINDING.json"
     },
     {
-      "sha256": "3abb92f0aa81cf2e86446b0c74798d60aa99865b97db2b394f4c6e0d2a39d4ad",
-      "git_blob": "e323e77300160a53325a8c99cc51ba3590d4b68b",
+      "sha256": "b29c6cac923102cdbf310614b8a36bb1d338305d5fd86f09b91a407df713a3fe",
+      "git_blob": "7646478dbcd4c4baf20531f870a6772a9430dc8f",
       "bytes": 1377,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/FILE_SEALS.json"
     },
     {
-      "sha256": "bdbd87fa6ffe36d998e0420710b4bf1283fe19ae96acecb64f0a02986f109a4d",
-      "git_blob": "0c9c92fca6066f04f1317bd9bc7719b9641c9bbf",
+      "sha256": "060a7cd38bd912741313a1212dfcdc185da3583ef338c29c14d6e1f6a0ebf467",
+      "git_blob": "441a127c0b2c6ed27029c491406be943f991d17d",
       "bytes": 8862,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/INPUT_SEALS.json"
     },
     {
-      "sha256": "785433ead65a22dc4dbe42915757d09c94245bad00357001f6027aaa7deac3c2",
-      "git_blob": "ce69025536ce14cf2cab586c8423479d6f81b87c",
+      "sha256": "14b68eda05837baf3bdc6961c8e479be6e64607157687290050fb9b6cfc507f7",
+      "git_blob": "d1a3602f71c35e31378638ef9f311aafbe8e76f7",
       "bytes": 2723,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/RECEIPT_RELATIONSHIPS.json"
     },
     {
-      "sha256": "b10fe9dcd7c0b303e1e4d4b624051941326854e2fda02fa3a358898929b5afce",
-      "git_blob": "96c5df914e95c9bc77a8ba51c5263146881c41f6",
+      "sha256": "628417dc2a71fc31a41a97f9b6d6d6f2c7a7c1b1b5a17919fdb37492c402e484",
+      "git_blob": "58fea3e9ba0fbf0df4de3b49950b1a04d77b4633",
       "bytes": 9135,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/REVIEW.md"
     },
     {
-      "sha256": "6016853506668d9796c6bdf0c9754ed9a853905a88e98fca73f87dc52ba2da28",
-      "git_blob": "0c3d0e72f4e8e2a5d5ba2fa07423f05e17b70dc6",
+      "sha256": "f12d5a6a76f7068fdb5ae9a5efc27b6d90af99b66e8dcbae042bbf2cebf5f1b6",
+      "git_blob": "e28198fab74346c71cd7967f99028d785fbb9366",
       "bytes": 665,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/AUDIT.json"
     },
     {
-      "sha256": "8d0ea46d0ae4b21c01e23b4856b0f05fff0e6a8f16e6e9df141f511ba0d07428",
-      "git_blob": "dd58a035261c76b5cf98fe69dcc07a49e327e2a2",
+      "sha256": "815f7574902919e921d476411e06089b131b5ddd402047ef3ce36c81951fa746",
+      "git_blob": "7fef9378914636ebe9afd68a37213fa49495084a",
       "bytes": 964,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/FILE_SEALS.json"
     },
     {
-      "sha256": "6640c7145d293b1970ac16d4b56bfd279d777d75aab81f6436234e7731cfa0df",
-      "git_blob": "2df3c56b9578163197cbe7979e8d33d88f50a7fc",
+      "sha256": "b48735e32189bd678b794275753626dc41ca88dd02d4d23fd92411de9a09aa1f",
+      "git_blob": "fbb39bed165e39cf48e72609b8f6d69ba160f228",
       "bytes": 2547,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/INPUT_SEALS.json"
     },
     {
-      "sha256": "cf7deb5b28cf239bb8d4ebe5975cefc2df7c8bf3612e371ea3ec1ec65f840b15",
-      "git_blob": "c539954093ba7676e9b13d4cca15158ec7ff6459",
+      "sha256": "f45efeeb33612fd3f52b3d952c37f732b6a2b083dc97bfa6b395a415a171a6a8",
+      "git_blob": "cb9b0a3ae01d047e0b558d33a6df3d850a73d2d9",
       "bytes": 4917,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/REVIEW.md"
     },
     {
-      "sha256": "0874be2a1253b6f91d210a88508c62768a9085bf8efb230ae7d747653ded0461",
-      "git_blob": "7a8f58ef3d7b36666f600c46ec3fbb9415b609eb",
+      "sha256": "ac848e10dd044fc68ed42ea55dfd9e1e6f85d06604d9b813c10a0d94db674fad",
+      "git_blob": "83c00f12432a893b2a83d911ce14195f646d9ef9",
       "bytes": 48101,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/DERIVED_INPUT_CHECKS.json"
     },
     {
-      "sha256": "2552e37717af6ade717b605148c3e05321e5dd0613fcc3c16be08a6d04703d3d",
-      "git_blob": "da476d45eb7a26f8b53a5d6f74493ad7fd4e9e9a",
+      "sha256": "1b9afdc841fdda73e9cec72dfe2f3c9d1a7d0850cc0f5e9a585d55739c622192",
+      "git_blob": "98dbeed29856081e88128ffb3f245fa2c3b9b284",
       "bytes": 5503,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/FILE_SEALS.json"
     },
     {
-      "sha256": "6b469859fab2a1168bfbb5d22f7f37f6b8e6349d80fed4d12cb18e7b3ca18652",
-      "git_blob": "a9e9dd788c57c3ae2918bc9ebb7b29c54971b103",
+      "sha256": "6738b42c8826dcd70c429f0059a8f03eca9bbe47c109c3584dd70374e3b245e7",
+      "git_blob": "5ff8b6e90a724fa1f5f2b490145622eb946a0c5b",
       "bytes": 157946,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/PACKAGE_CHECKS.json"
     },
     {
-      "sha256": "f258de18d7b32dded1f7bf34ac8fba229a4f52199ef634bd5a1dffce4b25d033",
-      "git_blob": "7afb1dbf1e7ac9c52cd34a287127357a0aaa7eb9",
+      "sha256": "a923c978884091141cec5fc44c2ccc1cfbafe3d4e182d85878f38c22a2536ac8",
+      "git_blob": "cd855481fa52b6567e49d994cafeb68fb11c808e",
       "bytes": 1567,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/REVIEW.json"
     },
     {
-      "sha256": "dbdaa3d629aa954d7f42bf3cbc02600110c3a883ebb08d023f466d4ebcbf64eb",
-      "git_blob": "cdd189836c379e6459f2c4e82787c74d1aeff63b",
+      "sha256": "7578e356c16a56b6a73995fa7faeab08d7668917ff770ab97cf0a4dd8d8169b1",
+      "git_blob": "d6fc5951b5fb362285eff18daaf787c4690e6d9e",
       "bytes": 9069,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/REVIEW.md"
     },
     {
-      "sha256": "8a7220f37616d250ab645787e48b6f26cb189aa52b425b9d70098b18f5a9c98f",
-      "git_blob": "ea86507dc884c49514d53819a89b21cee1604f71",
+      "sha256": "1e40215492063520fbf07f86897898ba636401c50c95eecf684915eae27df0a7",
+      "git_blob": "46aa6a2e98953a271665561d3b2cc2ae6111d52c",
       "bytes": 9322,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/inspect_bound.py"
     },
     {
-      "sha256": "e9f771fc5203b322b518f4bdaf917833d859c7e92ff829ee371b5ba7dfd459aa",
-      "git_blob": "b0165792f52722d3467bab24bb21929c4a7f0241",
+      "sha256": "259c9feb05f6cb4688486ab0422c8bbcc5c1a7b66293c17c61019076186ac455",
+      "git_blob": "fab82abc6666cb956a07ae28237252a87128eb02",
       "bytes": 12550,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/inspect_package.py"
     },
     {
-      "sha256": "d809e826859a441050650e6c4dbb879e6029f68088fc225e9329dd1c39384fd7",
-      "git_blob": "abe3b92e03a19ade93a8667959a5bb3a60e7044c",
+      "sha256": "a5cc1aab410fbb6f8f155f7d6ed2b0e8dcdd43d1b615c5cde2fd743ac4613d0d",
+      "git_blob": "f14afaf08221a8e30eac7c5f5880dcae9380feb4",
       "bytes": 22695,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/EXECUTION_CHECKS.json"
     },
     {
-      "sha256": "ba38a0fc867672d1fb4b0b6b757c0aef613594768ffcc94b5b71c2a4dd1c0479",
-      "git_blob": "3a42ae81c09c99feab761e96fa9813500b039968",
+      "sha256": "aa28a8483f4890c9f44838c21ee7c776ca2457dc024cfa4df5e81df34474e4eb",
+      "git_blob": "7f2fdaa0c191758c2b324f94fbc693cef5773f3c",
       "bytes": 9916,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/FILE_SEALS.json"
@@ -1258,22 +1258,22 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/POSTRUN_ADDITIONAL_PATHS.json"
     },
     {
-      "sha256": "7d3b8fca8c46276b495818147c35050972a59ff079f55afa979d3b1c119db27a",
-      "git_blob": "c4d925c15c8da3c5b154a4ba687506de76252263",
+      "sha256": "9b38a60e8c43da1f1dfaf859bb6de41a9dd0dba30eeb2169f2384df335d9fde3",
+      "git_blob": "b17d260d4072839a737924e1f353fc8586264eb6",
       "bytes": 1229,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/REVIEW.json"
     },
     {
-      "sha256": "1fa3be68d87d495a6458b778061d9bd670db574cc702e3f0ad9f00f64f392361",
-      "git_blob": "3c93078f43cd28c9fff6f9d28728ea629e441024",
+      "sha256": "676c2ed4548ac2be360b39f389ecdde86e82ad08978d3019dd29d655ddfb31d2",
+      "git_blob": "d3efd43193df0d3695c8b15b4a574e9d93334bf8",
       "bytes": 8615,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/REVIEW.md"
     },
     {
-      "sha256": "b23850ef1f1c67c35d91ae8c336be9e679423badbacee8d1b7c600ab5d999d1d",
-      "git_blob": "81e0d32fa09ef98623fa4010aeadb6f5056ec094",
+      "sha256": "cdb04d7f5a5a22389ec25b4d1054d0c0007476f5f687b66f2c7b62287feae7d2",
+      "git_blob": "45fb859d260cb711029c20a8f0e04504d14e6357",
       "bytes": 1654,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/01-check-E3-preimages.json"
@@ -1335,8 +1335,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/03-actual-packet-contract.stdout.log"
     },
     {
-      "sha256": "e0e7bc2be0cbb90d04ea82e3d00986861e2f2cc12e30cafeaeb38ce859072830",
-      "git_blob": "51c8b6283dcb1eb6e4dab96942e968d6688a5b25",
+      "sha256": "3d06963627e62eb361a9085795d36c51f457ce8f8f4c966e88e26272af1bdba1",
+      "git_blob": "475350aa6b8d47ad601c3d3af2b170d1a3186549",
       "bytes": 1615,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/04-apply.json"
@@ -1356,8 +1356,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/04-apply.stdout.log"
     },
     {
-      "sha256": "610e555d607485e7a96fe9725a87b96c1cae5190e0222bcab2cda0dc7e34aa42",
-      "git_blob": "60eecec50452e351349302579882fd21ecd94c0a",
+      "sha256": "a86bbdd64b7b1f8842919e245f517cb50b906c99a1a833f6efde85e5e16e6773",
+      "git_blob": "20b9b9fa007b580eb1a8da03f26b5abd38f22db1",
       "bytes": 1651,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/05-apply-fixed-point.json"
@@ -1377,8 +1377,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/05-apply-fixed-point.stdout.log"
     },
     {
-      "sha256": "16bd4e3768ed4f1cb5264b5473be6d06e4331bb4175b9752a31bc657793e9d53",
-      "git_blob": "d26b77296ce579e2716cc0f588b9c2a41b1017c8",
+      "sha256": "bcd5ed5ae9b5306ea092b62817916137559e1e3fa72a338a1628ab763acbaacc",
+      "git_blob": "d057fdb8e9d29c238157f9b0556354d856b3f2ab",
       "bytes": 1627,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/06-rollback.json"
@@ -1398,8 +1398,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/06-rollback.stdout.log"
     },
     {
-      "sha256": "80e1d37222b678b47c7522fc4cebfbe311fe095afdd534b74e0b25cf0aab74e9",
-      "git_blob": "011923ee7fc3cb45f50ae6d833b6fb7d69f4c262",
+      "sha256": "3eb02e2a38e168d193f6c142b6d430789f02c3276002f3f9e4b4192796da387c",
+      "git_blob": "3eb70c8b86a59232b805c47c656f059f72da45da",
       "bytes": 1618,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/07-replay.json"
@@ -1419,8 +1419,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/07-replay.stdout.log"
     },
     {
-      "sha256": "1340fbfdf8feaa6d4e330669c2a9eeeb28edbd9abd76ddb5d999bb29134b2171",
-      "git_blob": "f8298a7ce441d1467b27effbc60931a6ceb2d0ed",
+      "sha256": "f41becf06b787f223e448f6b47f121415d68ae878513444be485fde9bacea76b",
+      "git_blob": "fe3b2269b4f50d67971c22bf529de703ea93f158",
       "bytes": 1633,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/08-check-final.json"
@@ -1440,8 +1440,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/08-check-final.stdout.log"
     },
     {
-      "sha256": "8e0a1f21b7b419a230e3bdc2631c58e6abcc4e5d0f133f4e981af4975af0d98c",
-      "git_blob": "cd68ba94a35ba19bc97ad3c8f20133f9f86942c6",
+      "sha256": "734cb0fbcb7a458561b2d3a30512bd8d9551b163430cbf6a93a8b615a4050d1b",
+      "git_blob": "bfbbf04649c87d6db718cda2710aedc0ccba104b",
       "bytes": 1670,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/09-whole-map-validate.json"
@@ -1461,8 +1461,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/09-whole-map-validate.stdout.log"
     },
     {
-      "sha256": "347e716e7e9e871d30f76f832a4de2f2c404407bae4ebb6d5c37b5722894f679",
-      "git_blob": "745cc01f00b7de60cb9446714b1bec160ec7227d",
+      "sha256": "8a2f9e81d94f523efaad2e36d9f13392cc21a7fedebee6bc7aa7528257aaf52c",
+      "git_blob": "83cb09e3fd6776c32d8673299c986dc9567b6b09",
       "bytes": 1697,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/10-completion-remains-blocked.json"
@@ -1482,22 +1482,22 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/10-completion-remains-blocked.stdout.log"
     },
     {
-      "sha256": "460131d195eb89da3ab98b3781d580d32f3bf17af2cc13818e999885910c56ae",
-      "git_blob": "74cee6e3301785af70aa2d91d8ac8fd10faff6c1",
+      "sha256": "e7e2f10dfd621007c4d6c7180333ace760cf89ae4475513bb6de51bf6738fb06",
+      "git_blob": "732fad332073d67315a8e8c030562a95a1243683",
       "bytes": 1797,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/INVOCATION_EXECUTION.json"
     },
     {
-      "sha256": "258212f079c0ad840e10a1f4a0c51d60da3eb0ad05d3a96beeb07e8ff27b035c",
-      "git_blob": "8eeb4d5bea0e5a449b36866092bcaa18c9f86223",
+      "sha256": "ae9e079df0ee3f46c5cbf1f9c0be2a58906ae0861182550e39a741b700ec15e4",
+      "git_blob": "d556a4a8fc82561a539e03c6076081fb59468a40",
       "bytes": 1197,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/INVOCATION_STARTED.json"
     },
     {
-      "sha256": "09d606a9675a7aa17a64945e499c8f8062bd75a42cce2ed53851309aa3efd001",
-      "git_blob": "d000e3ba32f607f5e06f41c038d335a044b414f6",
+      "sha256": "3f1f895d21c58e9d4b100b8e2cffef28126ad7b1b61c65521e622ffa0a896752",
+      "git_blob": "fb538666500a39aecebe24b77862b1fbd51a9e53",
       "bytes": 16374,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/JccSourceRecoveryHandoffTest.xml"
@@ -1510,8 +1510,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/empty-maven-settings.xml"
     },
     {
-      "sha256": "6367c7d343ece1f1547e4db7873180f4dfae6dda83212edadf0564e0a93bc341",
-      "git_blob": "b4510e1b8441ca0c89d78879662f2d96ef4bad34",
+      "sha256": "3747257e4df289cbc09ce34309683cb18c9c66caedab191379d0370a07057902",
+      "git_blob": "0d7c2fab780308c2774707b5e442c776b3950dbd",
       "bytes": 417473,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/inputs.json"
@@ -1538,8 +1538,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/receipt.json"
     },
     {
-      "sha256": "b05b87209b152c873e3be79f701024b0ee7cfb3cea32863a428be8bfc73687be",
-      "git_blob": "8ba67002b3368c1bdfc36aac2500031a5b2deb06",
+      "sha256": "1cbf7e831a571b0e613477d672a4ccd3ac65e107e25fb8fe9b327f4226d19ae8",
+      "git_blob": "2156b9ff024f6059c95341408f6462fdb82ec44d",
       "bytes": 14402,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inspect_execution.py"
@@ -1552,50 +1552,50 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inspector-revisions/V1_DIAGNOSTIC.json"
     },
     {
-      "sha256": "33844e9364ba3c7f2ec60e69d0d9afcab21a9eb485e5ec5edec30856265d02cd",
-      "git_blob": "88590d858fe3e004cf4a81c423d83ce0c00c7339",
+      "sha256": "c8afea12ecb4b3aeb2d9d65fa8c1b717b2cabbd0d94273635a9ad74d405526a3",
+      "git_blob": "5928e79dd9c26ad0da2260594d2e8ad264554ce1",
       "bytes": 13951,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inspector-revisions/inspect_execution_v1.py"
     },
     {
-      "sha256": "6f3019ab143e061f2c501ab7e25e105acbf51ecee87c31dab570099df1302d7f",
-      "git_blob": "6af3da186e95cf71c8be92d0847f04fa555c605d",
+      "sha256": "e557e3a7ec16bbe7aa178a4b6132c7aa292c2a2ec9014779bbe8308484565d86",
+      "git_blob": "3c08e6ae8b67d01b0b8e566307299220efc8b8d7",
       "bytes": 5839,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/FILE_SEALS.json"
     },
     {
-      "sha256": "e4f5700c11dccd1dc13fc43b4078c2ed3cd5ac49d35f30e05b9aabe5b3a8bfe4",
-      "git_blob": "0f9d529cc72084ef969fbc04d855f9b4fd0cb208",
+      "sha256": "cac8c9c803447a910593b0e8594b93cd3b1b5adf149272fae7a8744ab814a429",
+      "git_blob": "38d370d6044fc4c4aa05d7bf0292c6420783aa31",
       "bytes": 13445,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/RESOURCE_CHECKS.json"
     },
     {
-      "sha256": "9fa990d988eff95ba6410d15d1b76975b29389694d6fcacaf6bb89b24a79369a",
-      "git_blob": "e0dcd7cf79ab9e94ddedc141d77b76f6bcb16c2d",
+      "sha256": "9c0b0065cc523d54f8ad6145d8dbf2e64c36c6fef5f8b091724a5edf8237634a",
+      "git_blob": "01223e23c3d75b405d1032579d56d510c46b4a34",
       "bytes": 1141,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/REVIEW.json"
     },
     {
-      "sha256": "df198e3ccda995d5d40fe9e17aca02507b3cb6b5077314c05b3c06b3eeb2cd28",
-      "git_blob": "cac654ad0e40b1e32148c903954bd1f6fd5168f6",
+      "sha256": "7ece8d5be7df1a1080e2b8c6c86663dad44afe874404efe3a772484ad391c0bb",
+      "git_blob": "c3bdb44fa23376733ffea31a8231606494905818",
       "bytes": 9241,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/REVIEW.md"
     },
     {
-      "sha256": "2f245d943610184af096a583bb9d0ff469cde04297f96caab8b80b6f48125c23",
-      "git_blob": "2eab40e557ba3b059eb5f0e88f25c25b1bbd617b",
+      "sha256": "4adb10687dabffae8d1e18fc796dfd4d3ce1cbbb295157cbb204df84bacaf941",
+      "git_blob": "f631cf96a49c0fd34915c1ce5c9410e66e8e7f1b",
       "bytes": 15928,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/inspect_resources.py"
     },
     {
-      "sha256": "a31ca3a37ff8adf991e6845f6329997acf06f216ac0d0e1bc366c42329ab7000",
-      "git_blob": "bf7d032cfbfc70aa9470941c14a83fbd0826c0d3",
+      "sha256": "af823a726f18769d61586fe9be5362ae31743c4523003d292bad9ae536b72803",
+      "git_blob": "421cd40549a93ef8c6317686bf8128f2a36dc73f",
       "bytes": 1530,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit-invocation/EXECUTION.json"
@@ -1608,29 +1608,29 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit-invocation/stderr.log"
     },
     {
-      "sha256": "a86e91566b9c9d94e71679162bba29564651f8f0b565e489777c21cd495481b2",
-      "git_blob": "032da3717a6e7c1d36ea7a8cbafcaf376049a2af",
+      "sha256": "325626fab5a186eecdba03c5eb66ea2a14ab955026f2bebaf591126ad2c80896",
+      "git_blob": "9f940d2e9e029c6abd29681c9eab0b3c748bf391",
       "bytes": 244,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit-invocation/stdout.log"
     },
     {
-      "sha256": "5867bffd36e65f2fd755921d0dbf9981a006bc0e38134b2d0e4e6830030900ea",
-      "git_blob": "8291d8bb82d25086ca9c649b8951c8044e3dc50d",
+      "sha256": "a7c41a897604c0421ca0f770fde83c51404208479f053b404cb98e5e7f2da7f1",
+      "git_blob": "80074f14c84da4a27883e87b16358a90fd2ab031",
       "bytes": 769381,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit/REFERENCE_AUDIT.json"
     },
     {
-      "sha256": "e20b0de4dfa51c79e6e16d035c6c55a5d368a9641b175239cb6f41f916bd74a6",
-      "git_blob": "5009d7d338eaaca207129c277acc8513351939cc",
+      "sha256": "921e421259c9bd68bd70c2412f75cffc187c2a61c725053506c4470c129e7fa3",
+      "git_blob": "fa4cdc735f58059920dc217be6b00819a859eeba",
       "bytes": 1177,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/AMENDMENT.json"
     },
     {
-      "sha256": "cabf31b005b28c18053c107936134356986f55770368cb982800900380ee8689",
-      "git_blob": "eed55a4d5b77d6bfe61746576409ae68d46f8a84",
+      "sha256": "13a191d4ef3e137518df6ebd1eebc9c8858370b7ffeb9af1db7d37fd0d90e3d7",
+      "git_blob": "2bb90dc2511c26ea6181e949b68c1d7013c9b157",
       "bytes": 63816,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/BUILD_ROLE_MAP.json"
@@ -1643,8 +1643,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_CONTEXT_MANIFEST.json"
     },
     {
-      "sha256": "18c5fea0f72fe21aa78df1aa6c319eb4276fc15aa481952539c221ce651e6f49",
-      "git_blob": "d20138ab763408bbbd793c1ff27778d866b29009",
+      "sha256": "8626cc0e739dac6cc3b2e77496d16e7c75025f7de99f30e1b93f42796e6c4799",
+      "git_blob": "3c187aada912a867711f1f3adcf32fe99e99f26e",
       "bytes": 596276,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_PROJECTION.json"
@@ -1657,15 +1657,15 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_SOURCE_MANIFEST.json"
     },
     {
-      "sha256": "02b0e8700b6d46a1c84730f8810ca510824af1da46655c5d59660b5902bb4b0c",
-      "git_blob": "3c068f6e10cc156cee9769a94997f5b7fbb3c4d9",
+      "sha256": "066f885acc4b2fd877a668c746b9efcfe844b9968982269b10371dad9d6853d9",
+      "git_blob": "d3abd93bdb9fd469679539885ee9b672c713695d",
       "bytes": 183376,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_FILE_SEALS.json"
     },
     {
-      "sha256": "41178470be98b342b83f58c43afa4a603d72c115584956c4fdbc96ce6a45d039",
-      "git_blob": "e3e43e60d7ed5247cadab7e58c5515e6e7e07136",
+      "sha256": "cae9bd963f45edd0c766f0f0a4cd6801d3239d888ef2175aea2cf965ca5f8ea6",
+      "git_blob": "b8c254769db1c67a930d4946c491619a56ea8052",
       "bytes": 14727,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_REVIEW.json"
@@ -1678,36 +1678,36 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_REVIEW.md"
     },
     {
-      "sha256": "4f8fbf09070e4d45e42c7ac29c94401d70058fea04d98e44b3526a24c77912fc",
-      "git_blob": "665dac597b1b33414e152c9224c840e7e01127d5",
+      "sha256": "c2ba69331b7d22a467e72369ebf06cebe16e9b09f5b9c3f2900247d540773bfc",
+      "git_blob": "8d43fa29a81040d3572525b3c864841a7a35643b",
       "bytes": 112397,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/PARENT_BUILD_CONTEXT.json"
     },
     {
-      "sha256": "739ef583031ef3b940cbd141386ca91501fb7d505ce3ed78e2c55d2a98c70407",
-      "git_blob": "d64110d838a6a2632f8483c88ba0b2b94901e70d",
+      "sha256": "dfb5dd0243103456154d96398cfa1591265455fd3ae0e512afa0b72361477988",
+      "git_blob": "e91d85faf0dce29a4bc7e13b4bffb9dd250387ac",
       "bytes": 39132,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/RECOVERY_SOURCE_INCLUDES.txt"
     },
     {
-      "sha256": "95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8",
-      "git_blob": "0f084555dbbea3ba4c9302386ced30e1e1503dda",
+      "sha256": "91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35",
+      "git_blob": "6389a4301478fd4df74e146f1ae4b8942f675e20",
       "bytes": 1099619,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/PUBLICATION_CUSTODY.json"
     },
     {
-      "sha256": "55610f52b7b1e01ee15999969cc385616ff2e43f734e589ff61c750c5ab3c845",
-      "git_blob": "ad19c72cb925afa662e93898df2cc8a2839a7a67",
+      "sha256": "30dadc5274823dba2443d663000051a48c0785eb92042ba8e684520bc2ce5942",
+      "git_blob": "ae55363fa985efefc16c80c9eea4587034bc9be2",
       "bytes": 70709,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/ROOT_ACCOUNTING.json"
     },
     {
-      "sha256": "7b5e197da5e2645efb87345e2abf92dcd8071993ff308c8fa0bca0511d00c52e",
-      "git_blob": "97e1e5438249e64577f9b9c17dd391678b65d712",
+      "sha256": "65f10e830243ed927aabedee9d0734daa46eed3b37ae4212e28ab85131fe9e9d",
+      "git_blob": "8d44a30fb11ce988c489a6259e8be117df98ed3a",
       "bytes": 419637,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/SOURCE_FIELDS_AND_PROOFS.json"
@@ -1720,15 +1720,15 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/CUSTODY_CARRY_PROSE.md"
     },
     {
-      "sha256": "8e478debeac87c46d01d57cf1038b2195005f9f6af249b25d97f1074ef26b38b",
-      "git_blob": "8d97bf818a71fd3d8bd63441d45e2de8b6666a6a",
+      "sha256": "7876e0828731f3e4687c67162156788e7bde001406d5d723dd9acd8433fb36ee",
+      "git_blob": "1838dbfdb07e182f193f78916e10cde3adeae7d8",
       "bytes": 260154,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/CUSTODY_EVIDENCE_INDEX.json"
     },
     {
-      "sha256": "877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80",
-      "git_blob": "6ee3c1bfd76dc5c0abdba031f163a3d38294f5e9",
+      "sha256": "5a6c06886a4241745d38b6b463a88ace34236a1b0c557ffae596b05d048e1b82",
+      "git_blob": "97fc934901165fe98f8e2c6c58cf60bc894025fe",
       "bytes": 1372743,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/BASE_TREE_MODEL.json"
@@ -1741,8 +1741,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/RAW_READBACK_FAILURE_OBSERVATION.json"
     },
     {
-      "sha256": "00fa5b9e4e99621ed6b5aac3c0da4c6506f82e921a3da42fdd4645285653e319",
-      "git_blob": "27c92ae8d02f1fc6fc3f19a74a5982601d142179",
+      "sha256": "7b2b3526fec60ea3fd6d53261ab1f509c7dcf37b9193d044f215e913ee9fbf90",
+      "git_blob": "555221e70d2524c095a850cd8e9512b37b10e8aa",
       "bytes": 95189,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/RAW_VERIFICATION_TREE_PLAN.json"
@@ -1755,15 +1755,15 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/audit_base.py"
     },
     {
-      "sha256": "266c17d435d47c58129349e721eec1eee849ceaa28dd5c302eb6030cc02e978e",
-      "git_blob": "bf253346d4bbba4776f03d5f40f1907eb9365158",
+      "sha256": "e347ce74d2e2c9a3252260215f9a4cd3c3a2aa791219095675ae67df8f135f23",
+      "git_blob": "3d29582bd7ae56a38c5e7d15bea3a587be7832c3",
       "bytes": 6403,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_CUSTODY.json"
     },
     {
-      "sha256": "caf3292d305a0f4e8dcae60d9b2bc9e6690bc25f32830f3be505db07ff04a281",
-      "git_blob": "b9ad7eaa3e580f8e52bdbda740778870d25a59b4",
+      "sha256": "a49305f07d6e6f172fcaffb296f5f2d4be23f6798827ceffc201fb1d8de76fc7",
+      "git_blob": "e6785ac00ae6d9deeca65144165986cabca95df5",
       "bytes": 563,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_EXECUTION.json"
@@ -1818,8 +1818,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_COMMIT_GET.json"
     },
     {
-      "sha256": "cdeabfd468399b28d8dbba993f1b56bbfb6d63150eff52029dfd7eeae504a307",
-      "git_blob": "d4b55c38cf8b9f92785e885ba84a8680a284b876",
+      "sha256": "8288a2009cdf92b117ad7ada704da4ebe27f8c67b451b3c779263819374a63f3",
+      "git_blob": "951520a6c91ccf2a1fc5c04f662bac678e65380a",
       "bytes": 541,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_PUBLICATION_EXECUTION.json"
@@ -1832,8 +1832,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_READBACK.json"
     },
     {
-      "sha256": "13e56b17314e89370fb8ce3f8417b405b89b34db8a1868d968589550975db84f",
-      "git_blob": "0365b81ad1f8b3cef95993f23a84488c87f1c2ab",
+      "sha256": "4a8e0c7647a9a6549ffc797de28d01a7806aa7757fedb2096bf35ecb0bba62c7",
+      "git_blob": "2ce90c4b5891e73a43eea7df14886fb15f2ffe59",
       "bytes": 4201003,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PREFLIGHT.json"
@@ -1846,169 +1846,169 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PR_CREATION.json"
     },
     {
-      "sha256": "95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8",
-      "git_blob": "0f084555dbbea3ba4c9302386ced30e1e1503dda",
+      "sha256": "91c8df6ab07e3590fecf20de65e2e65943c4b70aebb9f5133901ae6362506c35",
+      "git_blob": "6389a4301478fd4df74e146f1ae4b8942f675e20",
       "bytes": 1099619,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json"
     },
     {
-      "sha256": "5f9e682afec61bf2c2cd8883ba2533927c5317dc2409fc43fd85e3b112b00f08",
-      "git_blob": "d55b6ebb698182d37e384dfafc7e788fe7462059",
+      "sha256": "fe0a243205dce5a70fddd2533bf438307bed1346dd29167a2776b6bea769302e",
+      "git_blob": "1181f241d0473acac25fe102c1dced930b210c93",
       "bytes": 59299,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-00.json"
     },
     {
-      "sha256": "e2f25989522f89098bc62bf552938de6f9e97385fee166907e5b053cc311d474",
-      "git_blob": "c90b283fcdc8b8ad47a9967fc3a713e13673c230",
+      "sha256": "4762fc0b12cddea21451c352e4a66addb72be131a33cc0e7a79f6b3d2b125eb0",
+      "git_blob": "3674074d2161f2fa7b772ab027dbfe712d028fc4",
       "bytes": 14703,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-01.json"
     },
     {
-      "sha256": "651dd383a98b0b6587f214aa8041257e41b1b01c4bf93018a0de4cae6054979f",
-      "git_blob": "fb79558e088476b9cfc64bea47249e30c8c65dda",
+      "sha256": "aff46dcc7016fcbeff7f2d90d2f2aeca0bec637172ac9905aeab8cf512f55e4c",
+      "git_blob": "6c50fbb3646658b4f30a729def3ab7dfeb2b25e0",
       "bytes": 32873,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-02.json"
     },
     {
-      "sha256": "6b4d2e9f1e02b5ab466a898724df1f4bde2e8b2495f8198c8d3aac36dd2836ba",
-      "git_blob": "ee9333be3798433dcfbcee14c7cadfec3e050e60",
+      "sha256": "f8b8d4be2e598c0b967b450cc30f47139bdedc0cd500893f0ac371933521f949",
+      "git_blob": "ffa7def23cabfb0f98c7d9298943e2f7c41ee5fc",
       "bytes": 9454,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-03.json"
     },
     {
-      "sha256": "b0fe9bc72bc8c63f5394d068395612478301c1c34ab3440e0a516782676847e2",
-      "git_blob": "b28ba9938f4333d3ca6ccf07623a1e336509ac68",
+      "sha256": "ba5e24a071db5ba65af97c4d556fb83e64cee9fd1a0d238bb034a3307a126440",
+      "git_blob": "f8996e4f11c1d656dace1e1303697b28ffc238b6",
       "bytes": 38458,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-04.json"
     },
     {
-      "sha256": "9c8ca761372671f98263d9dc341cf6eb83c870c2894849ad096522af955412cb",
-      "git_blob": "ac243452ac65c890dd212c55e2caa13b5de70841",
+      "sha256": "b954a6ccba75f852ab5c9fbac9eac488e814c696b5aa1b9b9b8ab63bb8f8b32c",
+      "git_blob": "afb5ddde3474188e1937d97f7c87b2f74e5df060",
       "bytes": 33870,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-05.json"
     },
     {
-      "sha256": "b5fb7d882960f20a2bfa0517d9b9d908761cf3fcf241b6dde31c8485c92e9440",
-      "git_blob": "8dfca328ca7a73b5fe3e379b1da909f8aedf52ec",
+      "sha256": "6ff11dc8e1f435ccfede6784c791741a436c0201f929751464529856f6c667d0",
+      "git_blob": "57344ce4ef07b3c6fd50ae5b9e5634734b71f781",
       "bytes": 51434,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-06.json"
     },
     {
-      "sha256": "d59b1e109ce61bd49881ffa232de3689dbedb2329f62b63675445bb31f822511",
-      "git_blob": "2f3c00a66f5533ea8230cf5e895be775a5503b4b",
+      "sha256": "56572ae4327b534f9791aa6eedc87afb9fec4624f803eeffdc956edab2f7a04e",
+      "git_blob": "b758e186c2076cfcd88e664fc2608ab370c015e8",
       "bytes": 1576,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-07.json"
     },
     {
-      "sha256": "431ed2a5df0f5101a590fba5279cb1a06661cebac99150884d714d01c0534e60",
-      "git_blob": "9c79c7cc4784b63410a6f68a9670bbab8fa3ab67",
+      "sha256": "876f6f1515b936c67283d018204f44acd6d34676fcaa14ef814af763033720fb",
+      "git_blob": "6a997bdfda847710221e36e0e6a6d122b89f62f7",
       "bytes": 2856,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-08.json"
     },
     {
-      "sha256": "f42c51a6383836cffb05e723743dd06545d0917696742670e70c393975f144cb",
-      "git_blob": "21d84335fd0b256eeddc27938581b3be738c8ca9",
+      "sha256": "c1fe9bfcff17ade86f09d4e91964b145e7dc718529fba3859bfdfed21ee3af47",
+      "git_blob": "8522efd4688fde5605a4c72917345d9533b7ce8c",
       "bytes": 6028,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-09.json"
     },
     {
-      "sha256": "ba773cfa1b16a5079c70c5e79f9663b529f568e7c3599a97b66addf8a8414130",
-      "git_blob": "66f77c3efc8e51b78e7ae4cf8a9b8d721d44ad37",
+      "sha256": "daf1c54de8b6548a0c9e82d349aaf39f6138d0e512780c814eea773d3021b00c",
+      "git_blob": "60d469695cdafd510b4e1b11bf960c98a1eca477",
       "bytes": 5335,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-10.json"
     },
     {
-      "sha256": "8053df3ad2ec58b19a0ac2c86585ab922e93a873db3fc800972b4d497d5c1941",
-      "git_blob": "46b4d799d6d02822c87cf6c2b3345fa8296d41ab",
+      "sha256": "491b6bbcfecd78053f3b9f7996675e3ca39d11a0aa1e5fe57d1296e1432820ad",
+      "git_blob": "0001c4b4b8bcde83f12df45757d126cbee0187bf",
       "bytes": 4361,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-11.json"
     },
     {
-      "sha256": "38dcbd14e3307d0e4fe6e99e72fb01ca13606eb4b2667cb9639bafa05d1a4292",
-      "git_blob": "a0bc5d23fb5468406ee5cca9068b2f32fabb4bd4",
+      "sha256": "be6e2a17eaf9f45990b7a4a901d656afe0dce0d386d1c7793c6911cf12ab9d9b",
+      "git_blob": "ea0409a54d10ced7a8e972e45668b5b31a6b5ce3",
       "bytes": 12577,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-12.json"
     },
     {
-      "sha256": "a05bda83bcf3a7d8f59a5e3dc794a9ba03483af9a2475a630c819a2fc1d4be6d",
-      "git_blob": "16cf3b4209fce925710537b24a714ab8fce6bfe2",
+      "sha256": "76b766b7233189b45fc9e1cc62bf8c2dc38e0c9f46be91c84befb6cd264d86a6",
+      "git_blob": "a7083d176ef1e24aa0b42c4d401f41df2b375628",
       "bytes": 100413,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-13.json"
     },
     {
-      "sha256": "06aca18820078bedfed28d2ff8aafa034fb6ff75c11a3397bf86fb8f0338e154",
-      "git_blob": "996dc73fb4671f3f63a93cafb7c8d86286fb2c0d",
+      "sha256": "aea9af2113a255355adac8da00cb7e78538d1fa0049f950c2848f73a6cf8a376",
+      "git_blob": "ee5d8642348da1e59b07d4709221b927b5c73379",
       "bytes": 42506,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-14.json"
     },
     {
-      "sha256": "9351543516c7a3a190420731b804380ecee3c12e547e45747c3551dd2536a0d8",
-      "git_blob": "1580b38f72083ae5df15620f3550b73ba6aa4df0",
+      "sha256": "f15d082658950fae5926431bccf39e3abbfec1f379b58c4a48d84d302207a929",
+      "git_blob": "ab72ae1cca9d46c12ebc1418ab72ca8e10f6079d",
       "bytes": 67153,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-15.json"
     },
     {
-      "sha256": "ec6ff31e12a7c478f8cbf47bb21c4e33add7340bbbec7a55d235e903fe88defc",
-      "git_blob": "53fa40290492500a76f6eb9adbdb71d6c6f0a133",
+      "sha256": "87d952642304d9160df8ce7eaaf36069633092a61edcf9d4190159c583c5fefe",
+      "git_blob": "f17ea6d1bac2c55c9145f127a5cf361afc53ac5d",
       "bytes": 46441,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-16.json"
     },
     {
-      "sha256": "d7fe5f167d72b2b4ae340f142410e114db79b58cd10e10190775a838f4864cb5",
-      "git_blob": "9690c9bd2ce37feadce62d5402cab4e9a26e4b30",
+      "sha256": "c6dedbd4859541e174534bdc70ca77d8184ab4d549c899a517e576f476a47f42",
+      "git_blob": "2cd9e1ca24a3ddb0f731952c9510ad2d5cb4f080",
       "bytes": 24915,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-17.json"
     },
     {
-      "sha256": "8b4c874062ffb16b7c1aed6a9083805442cb78bb88eaccba2def92e5708c1580",
-      "git_blob": "dabfcc7a35f90a00d620c531097dff229138690f",
+      "sha256": "cb40a90753c5665a1a644f372d22c2e86bd669aa01f8bbd0044117cec59b0b5f",
+      "git_blob": "4faeafa3ded726ca866428b5fe823f6cb81c9ff2",
       "bytes": 28716,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-18.json"
     },
     {
-      "sha256": "7da6c3d541b2cb97717996d12b13a4ddbfa355ce8dc87c545e3aa480c57f6e17",
-      "git_blob": "a46217db3494b7fb4560bb8c849c3ff436777bb9",
+      "sha256": "888614c7c0c19153dbefd0ab8dd87da6adb42ed99cd5b9fc1a8f1a21d034fa34",
+      "git_blob": "9be483091d9d50da1cc0306644fddc8cdc2137e1",
       "bytes": 1239,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-19.json"
     },
     {
-      "sha256": "91ada336fd5462edc80519398132f663450a1da3820472bd4f49ecc13d838749",
-      "git_blob": "955243589d6a94d96c31359a582410621472d49b",
+      "sha256": "df01f7bd84faa295f6dd8d888fc58c218053a1cb96d95828dfd0c8b9709980aa",
+      "git_blob": "71cf17af27c97030e7ca65aa17166ae4bd543867",
       "bytes": 1077,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-20.json"
     },
     {
-      "sha256": "9c7a7a546385f054b1039b535f19b14ab1701e0cc1d3d736baaa2a938ab32801",
-      "git_blob": "2d7fcc5f4c958280d82ef07492fa0aff7f121bc4",
+      "sha256": "b4d4534344f2c73a00c01c315a87037f44eba99ed87584cb3746ef66023b55d7",
+      "git_blob": "bb7369f95a381d01479fedc36976c58dec983d86",
       "bytes": 1189,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-21.json"
     },
     {
-      "sha256": "97183d3d4517cdbb7472afe1291a8c503d864159ef6cf1aabd70cd15a66eca18",
-      "git_blob": "9b0d97579e80e55a370d20fea4d3112dc612ab38",
+      "sha256": "f99f5427d7c667af63abce029d9f18dfe5a7c3713a1c5f225c960155872a3152",
+      "git_blob": "513160433d36dbcf6b601db94d13f895d1b525b5",
       "bytes": 1071,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-22.json"
@@ -2042,29 +2042,29 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/transport/INDEX.json"
     },
     {
-      "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
-      "git_blob": "6b32bbff9f9221ddf8c5c4f3eb10ee27bed7d70a",
+      "sha256": "9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2",
+      "git_blob": "e8afb39d7900d0ec284a695326a41cd472288d60",
       "bytes": 15683,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/prepare_publication.py"
     },
     {
-      "sha256": "22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df",
-      "git_blob": "aab1f868d992a08d865918b3cef7a99fdf299173",
+      "sha256": "384ce843f2e4545ad1c40d7ee58abbc471b5a6d1cbed89bea82dcff0479ce6a5",
+      "git_blob": "24e1d059396ed8f46f0a146f93cca483261a6d1e",
       "bytes": 14641,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json"
     },
     {
-      "sha256": "074e9dcec6275f05bc8ac93d6d92e36b5adaeaa4c6503ace2dbf047b49916705",
-      "git_blob": "98e64dd614928ae710eb03e66d0dacce1be8b132",
+      "sha256": "3be2658241c3ebb336ae712268cbbd54c3d65969467d729f8a41c88e75bb98a8",
+      "git_blob": "1608150423fee65581d82475283a6f43bbaae311",
       "bytes": 1542,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json"
     },
     {
-      "sha256": "90c9f648768fde6d74bc416d5a52076c7b29581a5df42e21f80da62e983a9be6",
-      "git_blob": "7fa37f2114d172ad33e0f43e5c0b46af6c7ec099",
+      "sha256": "bfe83dd12307c0cddaba605d01c4d97c306201a44b16db6bd9c6cf6a7523979d",
+      "git_blob": "cc84771f49e8ab56b8862bacad1c33014d45d51b",
       "bytes": 670,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json"
@@ -2105,15 +2105,15 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-3.json"
     },
     {
-      "sha256": "a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b",
-      "git_blob": "ccdbb23cf2bddffc543517e4662bd7b069a2876a",
+      "sha256": "80f45f4a1d2e0cd49199e6885c62beff39a326aef5739e8890da5e9d991e2412",
+      "git_blob": "2be2d948daf6ce63c62ed0725efe68c565941c56",
       "bytes": 12671,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/raw_custody_v3.py"
     },
     {
-      "sha256": "7138709c360728c17c701391f303a02e21e6e1334b29bc3f67f6c9702f7440f4",
-      "git_blob": "4ad5c54d4d6109067c40ca82c2d5031df31e99d6",
+      "sha256": "4cc60517ad06d1c3590059e43f353c59ad751cb74601bc65735a7df9259edcbf",
+      "git_blob": "a97eb63ae09d9341a55f901f6a43342896a3fe82",
       "bytes": 13831,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/verify_publication_v3.py"
@@ -2196,8 +2196,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json"
     },
     {
-      "sha256": "f6852b552a509cd63b6f3622a21124215fb4c584d9b0b35fb4fd66dc6631f5d3",
-      "git_blob": "4a6439ecc558aa0fb82f410f7f1aeffe30d5a4ae",
+      "sha256": "7ddfde58c17d7c791af60b93f97606bc0e6437db69fb70a82cb33a8397126d6f",
+      "git_blob": "9702aedd88a4986eb25537f83761fd0cd78a276b",
       "bytes": 167271,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json"
@@ -2238,29 +2238,29 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json"
     },
     {
-      "sha256": "5f992ea5fa2a618093909b3ba7b063a8972de84f2af4b00ed44b323597538a87",
-      "git_blob": "805234c233d3bb741a35ced6c80d15f13da35a6c",
+      "sha256": "89d82f0e4e538ba730afbac23e2daf1c9dc12caa9abdec8eb9df9575fe8d59b0",
+      "git_blob": "f467f0e975099c6269e0e6f916b010b8c0a02723",
       "bytes": 5076,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/verification-file-reads.json"
     },
     {
-      "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
-      "git_blob": "25a836990c02625c79f44492eb43b7ffca13b07f",
+      "sha256": "203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33",
+      "git_blob": "735bd8f585d45b8f0956bd027d9227de12d29302",
       "bytes": 12912,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw_custody_v3.py"
     },
     {
-      "sha256": "e5d6703bbeaebb2f6718c7b7f9cefd7dfd723f1b3cead9c50e397ce96e26b791",
-      "git_blob": "6ff36dbc6f5a3b2b2682ca89917411a65755ff14",
+      "sha256": "5464af87aec22c84a053e7c21d611b4583cb137aaecb27d419f846581c977f0d",
+      "git_blob": "59754a53c7312108ca72c09f5f490f7181cd6a21",
       "bytes": 2857,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json"
     },
     {
-      "sha256": "da5f48a847613be5599132af53755f677cc579da75d302bfea66d36da643232d",
-      "git_blob": "f7ac549808395cdfc6d4bec1705f38ada86e1077",
+      "sha256": "d1315cc7cf474bb4409ffa1423a228a175cbef1eb0a1cae2b70fe025d9c7ec92",
+      "git_blob": "06ea155cedfe75c7bbe4bd8cba71fd976f79c442",
       "bytes": 4661,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json"
@@ -2280,8 +2280,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.json"
     },
     {
-      "sha256": "6578850848d5e69f454b06c55c898da3811c9607f395c485aafe586178cfa8ee",
-      "git_blob": "d68306dd759322baab6f4154a8856e4d5ec87406",
+      "sha256": "b23f8008088a5ae382b10d40560dd57d7fe560838f864603b325f10d7c477fe0",
+      "git_blob": "5f637453062b3d33c445e020f0ae11ba4c4efe05",
       "bytes": 10550,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md"
@@ -2294,8 +2294,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/audit_base.py"
     },
     {
-      "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
-      "git_blob": "6b32bbff9f9221ddf8c5c4f3eb10ee27bed7d70a",
+      "sha256": "9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2",
+      "git_blob": "e8afb39d7900d0ec284a695326a41cd472288d60",
       "bytes": 15683,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/prepare_publication.py"
@@ -2308,43 +2308,43 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/PROTOCOL.md"
     },
     {
-      "sha256": "a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b",
-      "git_blob": "ccdbb23cf2bddffc543517e4662bd7b069a2876a",
+      "sha256": "80f45f4a1d2e0cd49199e6885c62beff39a326aef5739e8890da5e9d991e2412",
+      "git_blob": "2be2d948daf6ce63c62ed0725efe68c565941c56",
       "bytes": 12671,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py"
     },
     {
-      "sha256": "7138709c360728c17c701391f303a02e21e6e1334b29bc3f67f6c9702f7440f4",
-      "git_blob": "4ad5c54d4d6109067c40ca82c2d5031df31e99d6",
+      "sha256": "4cc60517ad06d1c3590059e43f353c59ad751cb74601bc65735a7df9259edcbf",
+      "git_blob": "a97eb63ae09d9341a55f901f6a43342896a3fe82",
       "bytes": 13831,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py"
     },
     {
-      "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
-      "git_blob": "25a836990c02625c79f44492eb43b7ffca13b07f",
+      "sha256": "203f44729f860620949ec9e6aa7c5f2c7d766de2e406548ceb6797797bfdcc33",
+      "git_blob": "735bd8f585d45b8f0956bd027d9227de12d29302",
       "bytes": 12912,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw_custody_v3.py"
     },
     {
-      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
-      "git_blob": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3",
+      "sha256": "fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226",
+      "git_blob": "b1ff5da2bae6e6b7eb391b06370d5f7d0cc41329",
       "bytes": 9623,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication.py"
     },
     {
-      "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
-      "git_blob": "c5efacc8212e97a74770db0c70bcbd80d24ec232",
+      "sha256": "904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93",
+      "git_blob": "8c3bbe7815a13e5da510c080bf9bb1ed0da02a08",
       "bytes": 13831,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication_v3.py"
     },
     {
-      "sha256": "ef55ea26a4df72e09416ffcec9eff75798a4c126378149cf2c667071446f27d2",
-      "git_blob": "0e0635f7a7fb4c1c0f2443d7040cc811056e699e",
+      "sha256": "8f4b7b8b4b3e1886bea907fde673fbd70924a84359e02cd7591c1665945aeef4",
+      "git_blob": "0df30b1828b16d0a3740ca7891a444d18bc68c6e",
       "bytes": 14398,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py"
@@ -2357,15 +2357,15 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/raw_custody_v3.py.T01-T02.diff"
     },
     {
-      "sha256": "2905e58d2d063a419abc99cb52bcb46db1dae3c3655a135497630cb2218154d6",
-      "git_blob": "694c31083f1029eaf98e895213c1e0d6be7914a9",
+      "sha256": "76805bce4e9a37563e0e824b195b57a746985540379edb4755fd8a3adea3b20c",
+      "git_blob": "8100d4ec7e3b9b036dfed96ec9ef6adde788f2eb",
       "bytes": 829,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/verify_publication_v3.py.T01-T02.diff"
     },
     {
-      "sha256": "30556460d63d575f1b18b098fcbd2019239e4634c6067ab319b348c40d39f581",
-      "git_blob": "7906eaaf1e5cecc3d034c67018956b535418720b",
+      "sha256": "1658d2031a4da1dd020cd420ff4e28d5e607830e455842977b172ad5beedd406",
+      "git_blob": "3c67f6ae509144259af6686fed72f12708fe5515",
       "bytes": 1587,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/FILE_SEALS.json"
@@ -2399,8 +2399,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.md"
     },
     {
-      "sha256": "67dba07d875c0f9a9bc9e18522bed9fc71b1aeb16787e869fbc75ee9650b8640",
-      "git_blob": "c5c060782a26968a79608c2124c47cdd6c606b2a",
+      "sha256": "96e49e953ee10ad2f4a583d9008e4669bf5763d588f7a9fc1edb8c9e702fba4e",
+      "git_blob": "d94ccbe403e0c63e498b01c63fc6614498235f30",
       "bytes": 7385,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/inspect.py"
@@ -2413,8 +2413,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FETCH_FILE_CAPABILITY.json"
     },
     {
-      "sha256": "2102f85bd93143fd60431fd26a8069bdff2a5e4a2e6616deb6d6f934dc5191f8",
-      "git_blob": "c740b48213371899e883453a4484cfb69ed84f16",
+      "sha256": "57191a4d26a67022fb1a27d064ca082e0fc7bb5771827edf5e1d2ea3b7aaeda4",
+      "git_blob": "1a6bce3680fb58aa4c9be97de0709948c6044c2e",
       "bytes": 1600,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FILE_SEALS.json"
@@ -2434,36 +2434,36 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.json"
     },
     {
-      "sha256": "03f15a70c1ac11b52005af86f2bc193599709427f39ae250234fbf9bfbf8b626",
-      "git_blob": "80241c4f951f7f19cda306219c066088e9c53e8e",
+      "sha256": "efc6261b3307e553dd2bf0a8fc531f6b727d2e46f624efd10549b8d7d744e184",
+      "git_blob": "2e5791d94ae0067b89e9067ed44e6f5b9bf45662",
       "bytes": 7280,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.md"
     },
     {
-      "sha256": "c80763ab3a3796d4f7dc8a22596dc96c060bef801b9a8fa845109ce044d36d97",
-      "git_blob": "a97614be485737c0c7abb0c754e838e4dfc2b312",
+      "sha256": "535579cb58258353f91986d5e16bcb0e3a0e860d5c9ea30c17f552787a8b32f6",
+      "git_blob": "9dc5990a5a916dae1d23243c1c5d22bde35d4059",
       "bytes": 10963,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/inspect.py"
     },
     {
-      "sha256": "efbdfa191409f225d814662a744003070f3bf4ce2bd7a4e331cb022abd607696",
-      "git_blob": "ffcfc63bdc314201c7bb982c6b6cffea1d45924a",
+      "sha256": "eade73d5622724d9ceda521647c3bf5e91ff47e094ca80a284ad6526401c7c2a",
+      "git_blob": "51c411c67b5c29e6375fc68a2f2d3696ed41ba20",
       "bytes": 986,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/FILE_SEALS.json"
     },
     {
-      "sha256": "5a26d9913a9b18f97b68aa8bf3eac6855d954f5d4e1c7c7805a16f1589f0a881",
-      "git_blob": "8d796747695178148b77cabcd485be1ee3d825c5",
+      "sha256": "ae107674f7b8b1df4f6aa0c6ef78294a24ec750f71ff5cbd258f1dd819b3e5e3",
+      "git_blob": "0f6f3a8eaa763316280962a3df4a9df6eb00f703",
       "bytes": 1321,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/INPUT_SEALS.json"
     },
     {
-      "sha256": "f84ae9ee896eaadd79ae00c3c1747decd0f928872baecbec56166f363f675b59",
-      "git_blob": "160fd1d62c645aeb201cf5eee2dfe555079474a6",
+      "sha256": "8ce0a7b133520776d314b101b8280baa48552e9306a4f6ebd69b9e42bcdc2ae7",
+      "git_blob": "53ef93078572248a97bfbf70bae15eb82a3ddd6e",
       "bytes": 4985,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/REVIEW.md"
@@ -2476,92 +2476,92 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/audit_base.py.txt"
     },
     {
-      "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
-      "git_blob": "6b32bbff9f9221ddf8c5c4f3eb10ee27bed7d70a",
+      "sha256": "9c35afe184b437b5668019f2c8702875d4fed6c3ef2b8232ec845bacc2be2bb2",
+      "git_blob": "e8afb39d7900d0ec284a695326a41cd472288d60",
       "bytes": 15683,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/prepare_publication.py.txt"
     },
     {
-      "sha256": "dcb1f09d1b221eb10837874bf62e82093813eb102229567ac19ed4a9c56831d9",
-      "git_blob": "7453be80777b2306476a407d7406f146c6d5a7d7",
+      "sha256": "bb1aa496541a23e2b8c34e9262fcdab2227688526c458f35638622d47c9fb6db",
+      "git_blob": "e8c206e836b8495aaec2de72341a5ab006e4e8ab",
       "bytes": 4471,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/v1-v2.diff"
     },
     {
-      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
-      "git_blob": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3",
+      "sha256": "fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226",
+      "git_blob": "b1ff5da2bae6e6b7eb391b06370d5f7d0cc41329",
       "bytes": 9623,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/verify_publication.py.txt"
     },
     {
-      "sha256": "2322e736246e2fd11d94bc4c9c5d1a5717e0bd5be6179f7e4509a9242606d43c",
-      "git_blob": "0b8a0cd492e07e48cb396d54827ffcc7f1f75fcd",
+      "sha256": "ca55cfa097bac969aabcda4d410e6e6b2aae563e41dcce17bfcd5a9d61a79006",
+      "git_blob": "6e8951c0021a941a29bc93ea80b925fd4f5864d9",
       "bytes": 1028,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json"
     },
     {
-      "sha256": "793b5cfb897b0e0b7471f5f0c85adf3d6520b11c2077d669bbb8a1b48f647120",
-      "git_blob": "b5f13db8c6c74e053f57ea470c5802dd1cfc438c",
+      "sha256": "71f0be66903961ff974b6cbbbe27db8ab03cc16097c06476f58549db9d02b261",
+      "git_blob": "c7b0756a6e678ea2798261fdb83e9c86bd5bde7f",
       "bytes": 1442,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json"
     },
     {
-      "sha256": "9fba35c03ee7d13a7ace7ef8f760f48186c0a8caf73e5dd5cd5d227815f1d693",
-      "git_blob": "f7bbb6cda696cb686270c7d7f3d7f17f77cae2a8",
+      "sha256": "02e50b35c0a4c749f9fef36d44998e8f6733de61a8e7f4d46c760bf5cb12ae52",
+      "git_blob": "d6c64f2b73f4c48e6f8e6e3cafe176a7e5ab911a",
       "bytes": 6622,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md"
     },
     {
-      "sha256": "05242c715b5d63567d13c26c801e9a2c96ca4e27f14434e3a96020cdcd374a97",
-      "git_blob": "100e5d3cdd839136fd94346074337a0ab7866d9f",
+      "sha256": "df0e4f6c48aee658e68eb93792ec748c6b2a6953241fe8c554a6cebc8df22b6f",
+      "git_blob": "27c96cf2c25533c8dc22462e9778e2d1f411e1ae",
       "bytes": 1060,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json"
     },
     {
-      "sha256": "beb5b6f452c2f1f6356136b5ae236bfd23fb2c7313228765357a3f46e50f3f4b",
-      "git_blob": "0c4a7a328cc621884baf4b61a12d68e773c0a6e2",
+      "sha256": "c84ce157e3c48664121769c2f878824bce2a6a97bdd60b53c38103fa3e33ec26",
+      "git_blob": "c2fdbbe5e8a617571b25ce39920bfdbb36ff22ac",
       "bytes": 1763,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json"
     },
     {
-      "sha256": "c7c575b882732681c3b5f1435f70063a765435f9e6137e10151fb2f8fa2ef2df",
-      "git_blob": "9b470e7720fce97aad75e811e34291df25617902",
+      "sha256": "1ea4731fd6cf1c2c164f32970a646ef86e4750723e787544a10b504219bc0b74",
+      "git_blob": "18703f18dabb562da3ccfc2af7bb1e9be5b20786",
       "bytes": 2881,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md"
     },
     {
-      "sha256": "5f5c5f9c2b9d82607b8e3e30e9027ee8032f4d9fde812c2617343cb934049745",
-      "git_blob": "577a92ee28f87b5ec157750521b768e91ea021f6",
+      "sha256": "96412d20751cc5fe76c1965c0140d4256eea39158e1d81c90174c1e70f7a4414",
+      "git_blob": "c15103cfb4cb0befa796589ca6d9a5711ef3d0d8",
       "bytes": 2015,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff"
     },
     {
-      "sha256": "e487f83f318b61c01515549e588b66a384d0d281a0bc5d3a4ace5f1ca6cd8803",
-      "git_blob": "36995c07b0a120a99e603b62fac2e4055e29597d",
+      "sha256": "6658b586655c0eb9e7d4841c175031aaae87527cac498c8bbedacf8682d46fcd",
+      "git_blob": "6f2662aaab11da16dd2a792c1890a2af742971ed",
       "bytes": 7930,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/V2_V3.diff"
     },
     {
-      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
-      "git_blob": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3",
+      "sha256": "fa327277439825eb5870f67063833dec3495448d03a70f2d9222acc48e4f9226",
+      "git_blob": "b1ff5da2bae6e6b7eb391b06370d5f7d0cc41329",
       "bytes": 9623,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication.py"
     },
     {
-      "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
-      "git_blob": "c5efacc8212e97a74770db0c70bcbd80d24ec232",
+      "sha256": "904a2105f04a12454a2d97c13a5bef6764e18ae28a2fe680e06ca0e6e14a6e93",
+      "git_blob": "8c3bbe7815a13e5da510c080bf9bb1ed0da02a08",
       "bytes": 13831,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication_v3.py"
@@ -2574,15 +2574,15 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-manifest/FINAL_MANIFEST.json"
     },
     {
-      "sha256": "296d5b9eb4f41b51a85d44bb4f05c76e8c5b6453fb55881691b9823055062510",
-      "git_blob": "59e4ba6f35c37c1a00da2678ed88b9f034d885e1",
+      "sha256": "dab78ed3ffa2cab8dad0feb532f493130570b8da35146a78e961b75cd11dd555",
+      "git_blob": "36e48a6a4e5b4e2592ad7d3fa90fd3800f6f5185",
       "bytes": 15261,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/DESIGNATED_SOURCE_OUTPUTS.json"
     },
     {
-      "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
-      "git_blob": "428422fc77c5335a43b9c978515445f056d0d2c6",
+      "sha256": "fd465a0de344227444f723287b0dee9fe6e25284c1767737a38b1d7d8b887c93",
+      "git_blob": "89dab4bdb446bb26d06c4de26ca8d32ea5c32674",
       "bytes": 12601,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/E4_EXECUTION_INPUT.json"
@@ -2602,36 +2602,36 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_REPORT.md"
     },
     {
-      "sha256": "086f4ef835a0939b212bcb7595e75513ecbd46ce6bbf764a8d1f5aca1e418954",
-      "git_blob": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1",
+      "sha256": "823ef3c5f172b34d7c973f5e50424b8f7ab770687f8e2d80e2ecb2bde8dc1b77",
+      "git_blob": "b930bffab5a0e9c9e9ad2b5f65804c236b199e51",
       "bytes": 456423,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_RESULT.json"
     },
     {
-      "sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab",
-      "git_blob": "98889a040aad5cc3c82f782bb4b173d118207988",
+      "sha256": "1af736d1a28af6e5cdf41a2b4fefa8b9f3c5cb7a6c2f6d16537e0a822f086a7d",
+      "git_blob": "a65f71452613662769dda64100c6d64dd90ae5da",
       "bytes": 119981,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM.xml"
     },
     {
-      "sha256": "f647efbec6809523678b640b0dfbdf495f494bfc5c3e84a8a5e6e8a473e89d41",
-      "git_blob": "ed2dd05bc146884c7fbe88357966ba8b5a5e9236",
+      "sha256": "207669143fe8087284323adee24e69f738fe9517eebbb0bbd5da530369ce536b",
+      "git_blob": "e8a59ab5874846398047561c629065834a9dd8c6",
       "bytes": 165921,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM_RECOVERY_CALL.json"
     },
     {
-      "sha256": "34a6cf995296ed929c2209d34480245473150601f8a556945aa1d8c2947fda6d",
-      "git_blob": "56764ea7b60d04d7050310f7355280fe2ee9eed6",
+      "sha256": "eed0f1fcb8ec04e05ae3f402a464ce130fb3e9e3eaaa0278cc49992dc3806845",
+      "git_blob": "5f8950c8e2e33970a8990aaa8652b39e665f7034",
       "bytes": 922,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM_RESTORATION.json"
     },
     {
-      "sha256": "8ec211daffcfe3472c2fe66d7cecd9e49c4362102c5876092da09d4f38d87bab",
-      "git_blob": "0b9db4aac1ca3b8793be5ede0bbe74974f691e4a",
+      "sha256": "39e507a34b7406ceec3adb91352de8cbc3556b04de2ce8138afc5c0feaf56708",
+      "git_blob": "17e6382a79b2a4653e9ca1cf0e05868d30f312ee",
       "bytes": 2301,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/FILE_SEALS.json"
@@ -2651,8 +2651,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/REVIEW.md"
     },
     {
-      "sha256": "679c58b0f1861971864f8a0cc77ea363a62af7b74d8ecb8f7147711822128610",
-      "git_blob": "65309855b10d4cea551ca7048266a1c54f353736",
+      "sha256": "e99022dfb057f497a638ef8adc1e1e9df329b5c3b28c4db8618349b460447769",
+      "git_blob": "bc81ce4f7fec0f6ee6675fa072065ed0f6597c2d",
       "bytes": 3888,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/STATIC_CHECKS.json"
@@ -2672,36 +2672,36 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/admission-fixes/run_verification.py.diff"
     },
     {
-      "sha256": "fc7317936fca35529dd233eb056bb4ffb47df1090ba415642f8ff3ef705e6510",
-      "git_blob": "d80d5f175daf887ff4d9d184d8dc691808a3c518",
+      "sha256": "d8294afe553f2cf75921afda4a27c56cae97b908f9ce14d22cb9f12281d213ee",
+      "git_blob": "e58ea8f84074cf29d1d4e53f7c129159ba4c6aa3",
       "bytes": 14882,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/FILE_SEALS.json"
     },
     {
-      "sha256": "624665aef80b209cc9861ff35de0aee2b3ad139e48763ae2b3e7bc01af697248",
-      "git_blob": "f6fdb6da0f3d024f03dae119cb6141066628d2f0",
+      "sha256": "00cd3c8546cf7a909a5ea34d34dead8b5876601f1811b36be046b769d0f51053",
+      "git_blob": "381e8da82171f93a71b86ae2059e04cc14d2c1f0",
       "bytes": 4990,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/INPUTS.json"
     },
     {
-      "sha256": "77fc1ee0a600577a60f324f8c0cd87b10657aecdacb91290b826bf5cddc228ab",
-      "git_blob": "eb412c21f05a661cdf743498a00d7cb2e1fc267e",
+      "sha256": "c3c21b9451e0b4f33a8d5099eacc82a7d1d3630591c42d2c22ecb82b3c0e1df6",
+      "git_blob": "ca1273afa59e1f91e60f88721a15689dc6344861",
       "bytes": 1238,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/REVIEW.json"
     },
     {
-      "sha256": "0353e7d8d4c4b4e709394ecc271ad662b84604b0e890ab09c65aad5e39c68ad7",
-      "git_blob": "aa2576e1e25542b819ca5b24ca33a4f710fecea3",
+      "sha256": "d3e7592d49536d0fe76765e23eac8cb69616f58f31269269fc5239d20c59733d",
+      "git_blob": "6288747755e045041dcee8d201cc67ef6141176e",
       "bytes": 8128,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/REVIEW.md"
     },
     {
-      "sha256": "979820ef1beafa75891ff0b0518ce5d354cc54661694aa5b30ae00471c2c9558",
-      "git_blob": "7d39caa77aee7dfa012059bc0ae04aff897b921b",
+      "sha256": "39550f84f6f7f71a958fa396c8ebd0d55af27664cec4428c2f60b93f1569a8f4",
+      "git_blob": "69e490b227cb8fc55da51031019fdcbcb1ecce9a",
       "bytes": 18780,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/STATIC_CHECKS.json"
@@ -2728,29 +2728,29 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/custody-v3/run_verification_v3.py.diff"
     },
     {
-      "sha256": "bf6b81d60beef64f05f42fe05673bc0caae6912edd89843dbf9072087a1a581e",
-      "git_blob": "0dfe390d07189e40b987b4ab789748492abcbb56",
+      "sha256": "781a186f95b21168359df9160bfffaeab03b096aec9460f8ea740b2ea4cfb5db",
+      "git_blob": "7c53117bf28203b413d076865022ebd9fa92b645",
       "bytes": 1542,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/FILE_SEALS.json"
     },
     {
-      "sha256": "ef2561dd1fedb08a4f82495f6d377309e7b130ae5c084cff432c5564dbff0783",
-      "git_blob": "a3ea9dbdc1838c2b2ab94a5d15f8c57f7e674327",
+      "sha256": "d96b2d47d1617cea5ee7b693f2405ebab61edfa769e8bef25a1c75fbe02e5641",
+      "git_blob": "47f6539fad27eb64ac4a8fb057f00131852f7c42",
       "bytes": 737,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/REVIEW.json"
     },
     {
-      "sha256": "5f6d0d5502344a92d27dddc0aface389effc92729501d6e767a9b2c63dc0a657",
-      "git_blob": "a158649f82d6b0cb550d8b158d088f9b164d34d1",
+      "sha256": "11c5fc020c3841648a345e9597312ff6b7aa20c0e99df92ddec53e92eeeb1d11",
+      "git_blob": "3ab1954aaa583ffc761dbd93dfb041973121ffce",
       "bytes": 2768,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/REVIEW.md"
     },
     {
-      "sha256": "cc4e176bf91941c0ba23860c0d44737b1736e3c1d0307b45a8b8a121eb3ed561",
-      "git_blob": "c3a3ab82328ae5e56cffade4f6f177fd0840ae6a",
+      "sha256": "c056eba9e56486f641009b942768b3ac5a8e4a1a57464cde5aceeb856a930455",
+      "git_blob": "e2e40e25a5faf3abc218fb73ce5d2230d003cd22",
       "bytes": 841,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/STATIC_CHECKS.json"
@@ -2763,15 +2763,15 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/fixture-freeze/revision.diff"
     },
     {
-      "sha256": "d7358b6c30ea0306248e35f36fc3b1a8aba22b02a95e0d76882c3d1b97eb07aa",
-      "git_blob": "bd56c5b82d28eb43ef343a27679e621eb460d5e7",
+      "sha256": "561775f9a964f28260cc4cd09ba075becd5e2dd3da9fee4e5d90615f10bb8827",
+      "git_blob": "67803e7194684c0ce9eb422976c8dc8963cadab1",
       "bytes": 4988,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/FILE_SEALS.json"
     },
     {
-      "sha256": "195ff814b12c14f80cee26c2d86385315d1a4d9829315996be31a36f6a43cf4d",
-      "git_blob": "82d7f9f343852578adf01ac2647a910e72447318",
+      "sha256": "67657d100042552052fc16829996f22dc01431b5445e1c9687a7951ef90b9b80",
+      "git_blob": "677de5d83fbb9d022db3ad797566e05be58047de",
       "bytes": 7320,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/INPUTS.json"
@@ -2784,22 +2784,22 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/REVIEW.json"
     },
     {
-      "sha256": "3b79302b2797b99bae5013946e1196ca1f4b836c89c69a416cf1db7431684976",
-      "git_blob": "21d55bd3a4f2977e727d91e22831c9d51d1be466",
+      "sha256": "ab76e6fbf03f55eb51e6771ae0d004a1f39b3122d2b1955d7f6f2ae81405cd3f",
+      "git_blob": "2ac93b8e0a370b54e460b57e02ca8622358f857b",
       "bytes": 9055,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/REVIEW.md"
     },
     {
-      "sha256": "fc6e7ae2fa63710e714e189722d0a2aa15b0d6a7944767e767b8ce13471a8014",
-      "git_blob": "7e62fce8651461d0ae4a4a54e2f2f91540ca4917",
+      "sha256": "6c514d7f4586457169168c1d30ec9497b947a525596b770c9651abfc2e55ba3a",
+      "git_blob": "2c3ef21ccda565282ed2e8a7001972ddcac5c95b",
       "bytes": 6923,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/tooling-review/initial/STATIC_INPUT_CHECKS.json"
     },
     {
-      "sha256": "b23850ef1f1c67c35d91ae8c336be9e679423badbacee8d1b7c600ab5d999d1d",
-      "git_blob": "81e0d32fa09ef98623fa4010aeadb6f5056ec094",
+      "sha256": "cdb04d7f5a5a22389ec25b4d1054d0c0007476f5f687b66f2c7b62287feae7d2",
+      "git_blob": "45fb859d260cb711029c20a8f0e04504d14e6357",
       "bytes": 1654,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/01-check-E3-preimages.json"
@@ -2861,8 +2861,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/03-actual-packet-contract.stdout.log"
     },
     {
-      "sha256": "e0e7bc2be0cbb90d04ea82e3d00986861e2f2cc12e30cafeaeb38ce859072830",
-      "git_blob": "51c8b6283dcb1eb6e4dab96942e968d6688a5b25",
+      "sha256": "3d06963627e62eb361a9085795d36c51f457ce8f8f4c966e88e26272af1bdba1",
+      "git_blob": "475350aa6b8d47ad601c3d3af2b170d1a3186549",
       "bytes": 1615,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/04-apply.json"
@@ -2882,8 +2882,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/04-apply.stdout.log"
     },
     {
-      "sha256": "610e555d607485e7a96fe9725a87b96c1cae5190e0222bcab2cda0dc7e34aa42",
-      "git_blob": "60eecec50452e351349302579882fd21ecd94c0a",
+      "sha256": "a86bbdd64b7b1f8842919e245f517cb50b906c99a1a833f6efde85e5e16e6773",
+      "git_blob": "20b9b9fa007b580eb1a8da03f26b5abd38f22db1",
       "bytes": 1651,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/05-apply-fixed-point.json"
@@ -2903,8 +2903,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/05-apply-fixed-point.stdout.log"
     },
     {
-      "sha256": "16bd4e3768ed4f1cb5264b5473be6d06e4331bb4175b9752a31bc657793e9d53",
-      "git_blob": "d26b77296ce579e2716cc0f588b9c2a41b1017c8",
+      "sha256": "bcd5ed5ae9b5306ea092b62817916137559e1e3fa72a338a1628ab763acbaacc",
+      "git_blob": "d057fdb8e9d29c238157f9b0556354d856b3f2ab",
       "bytes": 1627,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/06-rollback.json"
@@ -2924,8 +2924,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/06-rollback.stdout.log"
     },
     {
-      "sha256": "80e1d37222b678b47c7522fc4cebfbe311fe095afdd534b74e0b25cf0aab74e9",
-      "git_blob": "011923ee7fc3cb45f50ae6d833b6fb7d69f4c262",
+      "sha256": "3eb02e2a38e168d193f6c142b6d430789f02c3276002f3f9e4b4192796da387c",
+      "git_blob": "3eb70c8b86a59232b805c47c656f059f72da45da",
       "bytes": 1618,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/07-replay.json"
@@ -2945,8 +2945,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/07-replay.stdout.log"
     },
     {
-      "sha256": "1340fbfdf8feaa6d4e330669c2a9eeeb28edbd9abd76ddb5d999bb29134b2171",
-      "git_blob": "f8298a7ce441d1467b27effbc60931a6ceb2d0ed",
+      "sha256": "f41becf06b787f223e448f6b47f121415d68ae878513444be485fde9bacea76b",
+      "git_blob": "fe3b2269b4f50d67971c22bf529de703ea93f158",
       "bytes": 1633,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/08-check-final.json"
@@ -2966,8 +2966,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/08-check-final.stdout.log"
     },
     {
-      "sha256": "8e0a1f21b7b419a230e3bdc2631c58e6abcc4e5d0f133f4e981af4975af0d98c",
-      "git_blob": "cd68ba94a35ba19bc97ad3c8f20133f9f86942c6",
+      "sha256": "734cb0fbcb7a458561b2d3a30512bd8d9551b163430cbf6a93a8b615a4050d1b",
+      "git_blob": "bfbbf04649c87d6db718cda2710aedc0ccba104b",
       "bytes": 1670,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/09-whole-map-validate.json"
@@ -2987,8 +2987,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/09-whole-map-validate.stdout.log"
     },
     {
-      "sha256": "347e716e7e9e871d30f76f832a4de2f2c404407bae4ebb6d5c37b5722894f679",
-      "git_blob": "745cc01f00b7de60cb9446714b1bec160ec7227d",
+      "sha256": "8a2f9e81d94f523efaad2e36d9f13392cc21a7fedebee6bc7aa7528257aaf52c",
+      "git_blob": "83cb09e3fd6776c32d8673299c986dc9567b6b09",
       "bytes": 1697,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/10-completion-remains-blocked.json"
@@ -3008,8 +3008,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/10-completion-remains-blocked.stdout.log"
     },
     {
-      "sha256": "09d606a9675a7aa17a64945e499c8f8062bd75a42cce2ed53851309aa3efd001",
-      "git_blob": "d000e3ba32f607f5e06f41c038d335a044b414f6",
+      "sha256": "3f1f895d21c58e9d4b100b8e2cffef28126ad7b1b61c65521e622ffa0a896752",
+      "git_blob": "fb538666500a39aecebe24b77862b1fbd51a9e53",
       "bytes": 16374,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/JccSourceRecoveryHandoffTest.xml"
@@ -3022,8 +3022,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/empty-maven-settings.xml"
     },
     {
-      "sha256": "6367c7d343ece1f1547e4db7873180f4dfae6dda83212edadf0564e0a93bc341",
-      "git_blob": "b4510e1b8441ca0c89d78879662f2d96ef4bad34",
+      "sha256": "3747257e4df289cbc09ce34309683cb18c9c66caedab191379d0370a07057902",
+      "git_blob": "0d7c2fab780308c2774707b5e442c776b3950dbd",
       "bytes": 417473,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/inputs.json"
@@ -3036,8 +3036,8 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/verification/receipt.json"
     },
     {
-      "sha256": "0d494e5904854b3529e0fb72079cb8c4c9fab520e20077d0e68e6a1887e11b73",
-      "git_blob": "b31d563044408195765a4731d9e794dd35cd8222",
+      "sha256": "8c6eab25d9adb14d3789799a979924f77a89b2f3824b5f676ea12c322bbf1da7",
+      "git_blob": "b33cb29dc8752f163e7d330797525d5b41244499",
       "bytes": 38439,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/DERIVATION_INPUTS_V3.json"
@@ -3050,43 +3050,43 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/FINAL_SOURCE_INPUTS_V3.json"
     },
     {
-      "sha256": "db47c8ae008021e4a250004ae8631b1a40c9cd731c5c2001f41eacedac129359",
-      "git_blob": "49855f31def0d007aaadab5c263896ea10952a20",
+      "sha256": "b63123a1d1369bc6289d7901f950a6d9ebe5ccd5b82ac146814c7af3305ddb1a",
+      "git_blob": "471660134d949a27f6c5dc672222b1b05fbd06b3",
       "bytes": 18901,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/author_e04_v3.py"
     },
     {
-      "sha256": "521c18944616fe46a3e347860c25a7283e1b74674c594e40996c787e01e96b81",
-      "git_blob": "f29cdc2160abd9b22e6970bb9eef22ced36be5f5",
+      "sha256": "c88b8805881ab3cc299b530d50cbe8d6749a0a4925d7ea5e9ce512bd3a0a3ece",
+      "git_blob": "1773e3f5c40cd886caefe3e0ea7fb7be0e6c2fa8",
       "bytes": 40725,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/check_references_v3.py"
     },
     {
-      "sha256": "fbc460874aeb04a688ad0ed9b47ad8e3f3b37f88af09d0f32ecfeedc2827fbed",
-      "git_blob": "5f4cca8343c48f3c8d3d113222b12c3da4018fb3",
+      "sha256": "ab9828692a1ca02adfabf22ff679e47e1e62a9d755b97f4071c42d5225698bc5",
+      "git_blob": "244ccde33cb6ff34bdd33eeec78eb4f88cf70dff",
       "bytes": 470167,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/current-context/CONTEXT_REFERENCES.json"
     },
     {
-      "sha256": "548b98ef8531b369f4c378bfdebf681e514a5b46da15bcf32db9ab491a7ce8d5",
-      "git_blob": "a58a8352c709f5b6330263fa151dca2a164e77b5",
+      "sha256": "6c9daf2e41937a90d8c884a7918be803315bad3f124cfd0f8c4ea77f34c1746e",
+      "git_blob": "0e7cade2c7bc145bfe7b038ec7a002d3f41db5d3",
       "bytes": 6004,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/LOCAL_EXPECTATIONS.json"
     },
     {
-      "sha256": "69722816b7744af9f4a1a69356b797616d04d54fae7008d438cf08131685b21b",
-      "git_blob": "3be57c938f92a4c9c11dd717fb2b5319a9b547ab",
+      "sha256": "cfcf56cddf3e8c710583a4d60d2ba86e1af1d1d17da9fc136bbb5c27db9e5604",
+      "git_blob": "70bdd5e5175ee08df6ae33669f95070b80721329",
       "bytes": 16575,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/READINESS_T01.json"
     },
     {
-      "sha256": "d8a816935713d91745e7b341e0e2d58ae98e6aed36ee9bafba4567117771c406",
-      "git_blob": "9b3d3223095a9baa93af64683bdd49769e3170b0",
+      "sha256": "6bba7f210e73180b8d91e9a6023e4e846954feec665c74bc73763ec4a9ebb0a3",
+      "git_blob": "e0015290efe3effb83bc3f02c3e475fe3f70f1da",
       "bytes": 7301,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/READINESS_T02.json"
@@ -3099,57 +3099,57 @@
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/custody-v3-proposal/revisions/before-two-fixture-freeze/revision.diff"
     },
     {
-      "sha256": "0086ac594cf4e459b0bf903e8eea95a6aa38198b5d23cb6f140726afcd08f76b",
-      "git_blob": "bf017e4f4ae6a1e31a360f68e5444605c4666671",
+      "sha256": "8b71aaefeee38c8c8bba0d8c4e169df6b0aeb73ad9b4cad35dae7181c1d0246b",
+      "git_blob": "de2595ee839a468de5721559c9c1df1b910301b1",
       "bytes": 12245,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/derive_source_handoff_v3.py"
     },
     {
-      "sha256": "46cf912b0f464caeb9718b08d22f9cdd5b74875e3ab614ccee19c7b0a4dae7b7",
-      "git_blob": "546b1156070b6f117b747fa7ae0be2788476f96f",
+      "sha256": "340e3e1670e457d99ab9e0ae954eed85efacdea4e4e34f2d4b2165421b8c9248",
+      "git_blob": "ab6182b9f208b27d1e9c54e6d6a51fe7a465c344",
       "bytes": 9752,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/publication_custody_v3.py"
     },
     {
-      "sha256": "496e1877914e15f4342111c37020a2d58790038516b62872680427e585b21f50",
-      "git_blob": "f29227b5411053782980a14eb4de29b924e12753",
+      "sha256": "c779f94023b3914bca1558a35d39ab11aaedd00a18cf5b74e2a30bf1205de6b6",
+      "git_blob": "ae10df70d469cd2ecb353e3dc018921af22bff30",
       "bytes": 13664,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/run_verification_v3.py"
     },
     {
-      "sha256": "992ff5d18c611afe1b01d1ce941e07e84c76557ff1f3cab91b4fc25750a1ada7",
-      "git_blob": "b6c646357075cd4e8b8d0a476c683bd336418e44",
+      "sha256": "6490106ef92b0198fe181b7d768ac78ac0131a9fc6942f8768cb230900f8a7c2",
+      "git_blob": "a59361750739b1d838b8a4b496104d6faaa78fc0",
       "bytes": 9944,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/seal_publication_v3.py"
     },
     {
-      "sha256": "39e7fe930028e5e7561414fbf8f75f247c634182c19648f6c0e6b6d0849d055a",
-      "git_blob": "9eda27de6c0949291cf5212915e7ee74af1df8e5",
+      "sha256": "b81e40be63829a2f957308046f9b937dc1ef8d7c0bcbeab63111479d7da8ad00",
+      "git_blob": "bce1ca31de665bd595c1d6b86feb3ed7a2e1d420",
       "bytes": 15782,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/source-prepublication/DESIGNATED_COMPARISON.json"
     },
     {
-      "sha256": "482431a3222b032443b76bb3f57395c097bad1ac161b90280123b3ad5764f650",
-      "git_blob": "47a7478b1a70a6c0ab0802d58ab12923526cabc6",
+      "sha256": "d1c53ae4d5b75c796e8a982bb22020f1f8fd1d69160bffe75095811b5a77dfee",
+      "git_blob": "63c8c6555ae3dbf428282d167943e84fb7e4543d",
       "bytes": 38334,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/work-tooling/source-prepublication/PROOF_SELECTION.json"
     },
     {
-      "sha256": "87410fdc613d15f549f155f676be3ba5ab535eb7e7b73eda45f4409fb6dd095a",
-      "git_blob": "1028c8f92b75c9dba15eab6c40ea9b41012e666d",
+      "sha256": "418df7b4fe1acc3d85967aba149196a552af4d39a894fd52d1915cef39bb5f8d",
+      "git_blob": "4847f07419650bcf22b8cef9a31b03578a7c069d",
       "bytes": 2680,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/verification/jcc-source-final-handoff/pom.xml"
     },
     {
-      "sha256": "6ee0745e1927e2bb60e52e5f50af9b77e01d7f45063a35050e8151af2df81f55",
-      "git_blob": "0755d84f22c3416ae50b62941e411ce050638f9d",
+      "sha256": "1445c85740a4b30728c512956c3cf779e3f9fbd77c44f8aeaa88ec1ab3a5b58a",
+      "git_blob": "6e837a5600b797de6ee862f5faccc09e3a0bdcb5",
       "bytes": 2846,
       "role": "already-restored-history-fixed-point",
       "path": "m3/tooling/migration-recipes/verification/jcc-source-recovery-handoff/pom.xml"

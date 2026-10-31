@@ -1,5 +1,5 @@
---- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java
-+++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3FiveLibraryArrayificationTest.java
+--- before/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java
++++ after/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3FiveLibraryArrayificationTest.java
 @@ -63,7 +63,8 @@
          assertThrows(IllegalArgumentException.class,()->left.mergeSortedByKey(
                  M3FiveLibraryIndexViews.capture(keys,values,new int[]{0},flags),Comparator.naturalOrder()));
@@ -10,8 +10,8 @@
      }
  
      @Test void randomizedArrayificationAgainstJdkReference() {
---- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java
-+++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3GuavaListMultimapContract.java
+--- before/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3GuavaListMultimapContract.java
++++ after/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3GuavaListMultimapContract.java
 @@ -138,8 +138,14 @@
          check(!actual.containsKey(-100),"selection detached from source");
          boolean failed=false;try{actual.selectedByStates(new int[count+1],0,0,M3IndexPathMasks.Backend.JAVA);}catch(IllegalArgumentException ex){failed=true;}
@@ -29,8 +29,8 @@
          equal(Collections.emptyList(),new M3GuavaListMultimap<>().removeAll("absent"),"absent removal");
          System.out.println("PASS M3GuavaListMultimapContract checks="+checks+" steps=6400");
      }
---- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java
-+++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryClosureTest.java
+--- before/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3LibraryClosureTest.java
++++ after/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3LibraryClosureTest.java
 @@ -134,7 +134,7 @@
  
      @Test void springCreatedListsAndFactoryWiring() {
@@ -40,8 +40,8 @@
          actual.add("a", 1); actual.set("b", 2); actual.addAll("c", List.of(3, 4)); actual.addAll("empty", List.of());
          for (List<Integer> values : actual.values()) assertInstanceOf(M3LinkedList.class, values);
          assertTrue(actual.containsKey("empty")); assertEquals(4, actual.size());
---- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryBindingsSelfTest.java
-+++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3LibraryBindingsSelfTest.java
+--- before/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3LibraryBindingsSelfTest.java
++++ after/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3LibraryBindingsSelfTest.java
 @@ -20,12 +20,12 @@
      @FunctionalInterface private interface Action { void run() throws Exception; }
      public static void main(String[] args) throws Exception {
@@ -75,8 +75,8 @@
 +        System.out.println("M3LibraryBindingsSelfTest checks=" + checks + " families=5 bindings=25");
      }
  }
---- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SdkFamiliesTest.java
-+++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SdkFamiliesTest.java
+--- before/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SdkFamiliesTest.java
++++ after/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SdkFamiliesTest.java
 @@ -23,7 +23,7 @@
  /** Actual pinned donors and existing M3 owners are required; no test doubles are permitted here. */
  class M3SdkFamiliesTest {
@@ -86,8 +86,8 @@
      }
      @Test void apacheBackingOwnersAreM3RatherThanRenamedDonorStorage() throws Exception {
          var list = new M3ApacheListValuedMap<String, Integer>();
---- before/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java
-+++ after/m3/collections/interop/src/test/java/com/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java
+--- before/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java
++++ after/m3/collections/interop/src/test/java/jdk/m3/collections/interop/M3SpringCaseInsensitiveSdkFactoryTest.java
 @@ -34,6 +34,6 @@
          assertEquals("java.util.Map", binding.contractType());
          assertEquals("com.m3.collections.interop.M3SpringCaseInsensitiveMap", binding.adapterType());

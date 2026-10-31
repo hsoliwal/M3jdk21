@@ -21,7 +21,7 @@
     "bootstrap": "Internal java.base owners and existing JNI identifiers only; Maven/OpenRewrite remains tool-only.",
     "schema": null
   },
-  "id": "synexia.regex.ordered-relations.adapter",
+  "id": "m3.regex.ordered-relations.adapter",
   "identity": {
     "generation": "Caller keeps borrowed owners stable and reachable for the operation; recomputable metadata does not own or close canonical text.",
     "namespace": "Reuse existing immutable owner, generation and UTF-16 range identities; no new intern namespace or target ABI."
@@ -62,8 +62,8 @@
       "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
       "fingerprint": null,
       "git_blob_sha1": "9b75e3370bcec6de914954490cc355b9573f7505",
-      "module": "synexia-indexstring",
-      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexDotStarRelations.java",
+      "module": "m3-indexstring",
+      "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexDotStarRelations.java",
       "repo": "hsoliwal/com.synexia",
       "revision_role": "pinned",
       "sha256": "1eeaef102a313396a000538f2f8b1c04cd1dbfd5553d7fa81b4d97a131fb1573",
@@ -77,14 +77,14 @@
         "T Access.second(T)",
         "long[] Join.compose(long[],long[])"
       ],
-      "symbol": "com.synexia.indexstring.MIndexDotStarRelations"
+      "symbol": "jdk.internal.m3.indexstring.MIndexDotStarRelations"
     },
     {
       "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
       "fingerprint": null,
       "git_blob_sha1": "bc5eb2bf64eaacb85011c50749f8b02b7608f4f4",
-      "module": "synexia-indexstring",
-      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStateRelation.java",
+      "module": "m3-indexstring",
+      "path": "m3-indexstring/src/main/java/jdk/internal/m3/indexstring/MIndexStateRelation.java",
       "repo": "hsoliwal/com.synexia",
       "revision_role": "pinned",
       "sha256": "b74e54410a6ece719ec38e88fa725271ec2ad0fe6a2a9a3446580e54d6c323d4",
@@ -93,22 +93,22 @@
         "native long[] composeNative(long[],long[])",
         "native long[] repeatNative(long[],long)"
       ],
-      "symbol": "com.synexia.indexstring.MIndexStateRelation"
+      "symbol": "jdk.internal.m3.indexstring.MIndexStateRelation"
     },
     {
       "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
       "fingerprint": null,
       "git_blob_sha1": "37cb952c9d9aea30de6f34e8dd6d5a5a571e46cd",
-      "module": "synexia-indexstring/native",
-      "path": "synexia-indexstring/native/src/mindex_state_relation_jni.c",
+      "module": "m3-indexstring/native",
+      "path": "m3-indexstring/native/src/mindex_state_relation_jni.c",
       "repo": "hsoliwal/com.synexia",
       "revision_role": "pinned",
       "sha256": "7210ecac2b72d411870889233957ce8213ec3cd0028b4f0a034a48b989f6d9f1",
       "signatures": [
         "int mindex_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
         "int mindex_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)",
-        "jlongArray Java_com_synexia_indexstring_MIndexStateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
-        "jlongArray Java_com_synexia_indexstring_MIndexStateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
+        "jlongArray Java_jdk_internal_m3_indexstring_MIndexStateRelation_composeNative(JNIEnv*,jclass,jlongArray,jlongArray)",
+        "jlongArray Java_jdk_internal_m3_indexstring_MIndexStateRelation_repeatNative(JNIEnv*,jclass,jlongArray,jlong)"
       ],
       "symbol": "mindex_state_relation_compose / mindex_state_relation_repeat"
     },
@@ -116,8 +116,8 @@
       "commit": "515f2f2153aa6afbc758da34c495c7223ee7997a",
       "fingerprint": null,
       "git_blob_sha1": "8ceee90e2e3b3665b433b410f81c4057b7e1de72",
-      "module": "synexia-indexstring/native",
-      "path": "synexia-indexstring/native/include/mindex_state_relation.h",
+      "module": "m3-indexstring/native",
+      "path": "m3-indexstring/native/include/mindex_state_relation.h",
       "repo": "hsoliwal/com.synexia",
       "revision_role": "pinned",
       "sha256": "fcf42319350f44cb82b76f0cd4a8b71af87b474d643452e27cb07d3e163d021c",
@@ -148,12 +148,12 @@
     {
       "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
       "fingerprint": null,
-      "git_blob_sha1": "780c7887aaa6b0892a76f4eee1dcb17086a60289",
+      "git_blob_sha1": "d70a152bdedc380ed8b28861ea94ef4c2adbea90",
       "module": "java.base",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3DotStarRelations.java",
       "repo": "hsoliwal/M3jdk21",
       "revision_role": "pinned",
-      "sha256": "bbc2901ebe5b2de9951b672127bd47e9d13c70b5a39482fa0727703d0a2ff757",
+      "sha256": "9d485a1771a30b4229acb5526ca90de5f2df4a03ee5ad8f5388bb128d2c38194",
       "signatures": [
         "<T> Result evaluate(T,Access<T>,int[],int,int,long,Join,Runnable)",
         "Object Access.owner(T)",
@@ -169,12 +169,12 @@
     {
       "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
       "fingerprint": null,
-      "git_blob_sha1": "ea904c0962fb976f43b45575f06f46ad198e29a2",
+      "git_blob_sha1": "30359b57b7b553e78355d3672119c685051ec1da",
       "module": "java.base",
       "path": "src/java.base/share/classes/jdk/internal/mindex/M3StateRelation.java",
       "repo": "hsoliwal/M3jdk21",
       "revision_role": "pinned",
-      "sha256": "3270f7889a8c94fa15c90e88491b7fbe483d5ad3053ab36d7e07a63c4c734caa",
+      "sha256": "ae1de4b652b474c594d5fa6e8ec2d43aae720d166e885497217688c9fabae49d",
       "signatures": [
         "void compose(long[],int,long[],int,long[],int,int)",
         "native long[] composeNative(long[],long[])",
@@ -185,12 +185,12 @@
     {
       "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
       "fingerprint": null,
-      "git_blob_sha1": "610ca8bab47065a49b9b58814d6392a287f4fd8b",
+      "git_blob_sha1": "89b3127f0f262de3e00ba28a01079a659013dce2",
       "module": "java.base",
       "path": "src/java.base/share/native/libjava/M3StateRelation.c",
       "repo": "hsoliwal/M3jdk21",
       "revision_role": "pinned",
-      "sha256": "b1bfd040a1454ac06ab3f96952d97c8c5a6509dcf55dbba9797b6517eea2ef16",
+      "sha256": "0df1989292b23b1f185f222db61ad55d5e38b30d5b758436ca9d62b8de277bbd",
       "signatures": [
         "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
         "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)",
@@ -202,12 +202,12 @@
     {
       "commit": "e28fcedc76831dc7e7d1cbf71ea785dc545b117c",
       "fingerprint": null,
-      "git_blob_sha1": "18a02e228129827da486edc5b316790af6135310",
+      "git_blob_sha1": "0e0c70e60b2cee61c3df31982a26f4251955cb61",
       "module": "java.base",
       "path": "src/java.base/share/native/libjava/m3_state_relation.h",
       "repo": "hsoliwal/M3jdk21",
       "revision_role": "pinned",
-      "sha256": "c948c0ac34180f1f9412a764c3c9fd8c59e11509467aa9e04f8825e903526885",
+      "sha256": "6a453bbe5c443d327228e48cc27c6d5dc356a67586f93796a52de17e69fa12a2",
       "signatures": [
         "int m3_state_relation_compose(const uint64_t*,const uint64_t*,uint64_t*,size_t)",
         "int m3_state_relation_repeat(const uint64_t*,uint64_t*,size_t,uint64_t)"

@@ -1,0 +1,30 @@
+{
+  "schema": "independent-raw-transport-adapter-artifact-seals/v1",
+  "files": [
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/FETCH_FILE_CAPABILITY.json",
+      "bytes": 1155,
+      "sha256": "0b52650547b4d4ae69a1e462c38ef2077cddb0dfd2c7915e327fcd041dca1709"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/INPUT_SEALS.json",
+      "bytes": 5975,
+      "sha256": "4e5b2bce37562177cbfb2485a082c33df5a97aa238fac42dacfde355f41ff444"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/REVIEW.json",
+      "bytes": 3822,
+      "sha256": "1e879a75f8b6d08fba9628406fffa7a7fa20d471fceb0cb8da5bbf47c0f2a5df"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/REVIEW.md",
+      "bytes": 7280,
+      "sha256": "efc6261b3307e553dd2bf0a8fc531f6b727d2e46f624efd10549b8d7d744e184"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/inspect.py",
+      "bytes": 10963,
+      "sha256": "535579cb58258353f91986d5e16bcb0e3a0e860d5c9ea30c17f552787a8b32f6"
+    }
+  ]
+}

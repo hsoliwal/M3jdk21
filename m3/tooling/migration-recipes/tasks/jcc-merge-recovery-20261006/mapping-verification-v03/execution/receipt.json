@@ -1,6 +1,6 @@
 {
   "asm93_addon_receipt_sha256": "c49c23fd5ec3fc02ad0c3332e16fe4b0f8c9ea4bfab296ad013c726bc226823d",
-  "binder_sha256": "a0d3c129789ae96f014513d6671da7cb9b3e0c1f8b3e011d8a951b4591ebc432",
+  "binder_sha256": "7004dfc94aea795a56ea8b1c377bdb83f33fb67b6b5d259391ff5bc985d845ec",
   "cache_origin_sha256": "034d226e546825818559e5517ce62bb00dd855f9ce59760fa607049388280da9",
   "checks": [
     {
@@ -47,7 +47,7 @@
       "exit_code": 0,
       "name": "01-source-binding",
       "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "stdout_sha256": "234c6154e7ef2064c5365a09990a63503af9c5c61daafdc4f1205b701f9c9773"
+      "stdout_sha256": "6f0d1ce8c455d4e609f4d4e5c835230b367c2441ffc9975d78bba0bfef0be292"
     },
     {
       "command": [
@@ -67,7 +67,7 @@
       "exit_code": 0,
       "name": "02-render-tests",
       "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "stdout_sha256": "348dff2530eb8679059bfcf8bdb97b2959a5647f977966e20e12de444521adb5"
+      "stdout_sha256": "b13eda14062c039303d3654e509bfd02d12176c388a772ec6c0543c370a6d7ad"
     },
     {
       "command": [
@@ -116,11 +116,11 @@
   "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
   "source_export_admitted": false,
   "source_input": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/final-source-packet-v01/source-publication-input.json",
-  "source_input_sha256": "b6753688fcacb6f1255c607072ea10823c29f8c574f049dc96cee8c5a7ad5613",
+  "source_input_sha256": "7db913209511a230e36a8da12282b3e4a6f84193399821ce9693042f616fa39d",
   "source_root_tree": "a72565e0e67f330f12c712dcc7a3fcbe1d80d24e",
   "started": "2026-10-06T06:11:35.748855+00:00",
   "status": "PASS",
-  "template_packet_sha256": "bdb03b20006830eb767595c9d3b38f222e5df44e1b66cc345a25c0f5ded0344d",
+  "template_packet_sha256": "9d24eaf99ff3cc614688f3f1193aaafc96be71a290a080d2835d4d62c267ddd5",
   "verified_cache_sha256": "2433184e2416cca1c92761b297406ee8f76cc39f645e6be7f0445e5fbe348255",
   "workspace": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/repository"
 }

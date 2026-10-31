@@ -21,11 +21,11 @@ E2 = "df06cdee5a8526f573b3ad89622824d0b49e2f25"
 E2_TREE = "e3e079ba36553bae517c3e53a5a834b24452a82e"
 CRATE_NAME = "jcc-source-final-handoff-20261005"
 PREFIX = Path("m3/tooling/migration-recipes")
-CRATE = OVERLAY / PREFIX / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text" / CRATE_NAME
+CRATE = OVERLAY / PREFIX / "src/main/resources/jdk/m3/rewrite/backport/jdk21-hash-pinned-text" / CRATE_NAME
 E2_CRATE = CRATE.parent / "jcc-handoff-20261005"
 TASK = PREFIX / "tasks" / CRATE_NAME
-LAB = "synexia.jcc-recipe-laboratory"
-JNI = "synexia.jcc-java-jni-regression"
+LAB = "m3.jcc-recipe-laboratory"
+JNI = "m3.jcc-java-jni-regression"
 IDS = (LAB, JNI)
 MAPPING = "m3/docs/name-mapping.json"
 BINDING = "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json"
@@ -72,15 +72,15 @@ def copy_evidence(source: Path, name: str) -> dict:
 
 def main() -> None:
     inventory_path = BASE / "source-binding-review/SOURCE_FIELDS_AND_PROOFS.json"
-    assert digest(inventory_path.read_bytes()) == "b0a1ff2a675017bc4eda2620a031bb963d038c21e10ddacb8f57b1fc51f6188a"
+    assert digest(inventory_path.read_bytes()) == "d4fa5704926ea9becfd7fea3b73928183724b5e63ed1814ac9aa0d4521e7136f"
     inventory = data(inventory_path)
     root_path = BASE / "source-binding-review/root-accounting/ROOT_ACCOUNTING.json"
-    assert digest(root_path.read_bytes()) == "cfe76d41dda4220937086d951a126bf04dec0d282ba088b6de2a6bff33b6e14d"
+    assert digest(root_path.read_bytes()) == "9d393cb0e1154049b8cf5e53ccc6e49b80e7de802a9604de056e2231b1140b25"
     root = data(root_path)
     assert inventory["source_commit"] == root["final_commit"] == SOURCE
     assert inventory["source_root_tree"] == root["final_root_tree"] == SOURCE_TREE
     publication_path = WORK / "publication-current/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json"
-    assert digest(publication_path.read_bytes()) == "03ba5aa231929079fda7772dc6a798a687ba7486fa81ceacc0723407330f956a"
+    assert digest(publication_path.read_bytes()) == "c6500d09f2056e7ea1dad619cfbae3f8763e39ebdeedd4d63440540a2dd46146"
     publication = data(publication_path)
     assert publication["commit"] == SOURCE and publication["tree"] == SOURCE_TREE
     assert len(publication["tree_entries_verified"]) == 1016 and len(publication["preserved_files_verified"]) == 112
@@ -136,7 +136,7 @@ def main() -> None:
     assert [len(rows[record_id]["sources"]) for record_id in IDS] == [11, 6]
 
     receiver = next(target for target in rows[LAB]["targets"]
-                    if target["symbol"] == "com.m3.rewrite.atom.JccReceivingFixtureTest")
+                    if target["symbol"] == "jdk.m3.rewrite.atom.JccReceivingFixtureTest")
     assert receiver["commit"] is None and receiver["revision_role"] == "candidate"
     rows[LAB]["lineage"]["previous_targets"].append(copy.deepcopy(receiver))
     receiver["commit"] = E2
@@ -154,7 +154,7 @@ def main() -> None:
             "Reconcile source PR 9285 with moving develop separately; observed dirty mergeability does not rewrite the frozen source input or publication pins.",
             "Resolve or reobserve the prior receiving CI failures separately; merging PR 139 is publication history, not gate evidence."
         ]
-        row["recipe"]["id"] = "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/" + CRATE_NAME
+        row["recipe"]["id"] = "jdk.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/" + CRATE_NAME
         row["recipe"]["preconditions"] = [
             "All four existing E2 preimages at " + E2 + "; canonical map SHA256 " + digest((CRATE / "before00-name-mapping.json.txt").read_bytes()) + ".",
             "Use the unchanged retained text transformer and sealed-install/1 owner; preserve the historical E2 crate, seven guards and exact previous source/receiver artifact objects.",

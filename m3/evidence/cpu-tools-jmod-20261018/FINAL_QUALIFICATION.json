@@ -21,7 +21,7 @@
       "actual_receiver": {
         "bytes": 2692,
         "path": "receiver-actual/RECEIVER_ACTUAL.json",
-        "sha256": "dbae1b1939b7c88b8aeb6f374bb416d1748a99f89c18bbc0d46f85741b5ad6a2"
+        "sha256": "998975dab9c546c648aad5dfae33f0e1fa4e187aaa635359b305c0d9d4a5df98"
       },
       "actual_receiver_cases": [
         {
@@ -56,7 +56,7 @@
       "sdk_inputs": {
         "bytes": 14384,
         "path": "sdk-final/SDK_INPUTS.tsv",
-        "sha256": "9dcdddd91e1f63602bb63b2843d6bbfc77c26f8e7e07c160e5ca10e49c1de567"
+        "sha256": "c8a8e3f509f63c7658ecf56499acbae912d173b65d8a02fa2ed916c294a91592"
       },
       "sdk_methods": [
         "driftMissingDuplicateAndWrongRepresentationRefuse",
@@ -68,12 +68,12 @@
       "sdk_qualification": {
         "bytes": 1055,
         "path": "sdk-final/SDK_QUALIFICATION.json",
-        "sha256": "8a82959c90e2a10d41339d142b8c0961a0ac6164d1884efb43bf69a15cace195"
+        "sha256": "7f414fde087f3673ffca539120e8b6bbb8aaff47c3e8783c6a2605682ac2e8b0"
       },
       "sdk_results": {
         "bytes": 9273,
         "path": "sdk-final/SDK_RESULTS.tsv",
-        "sha256": "938c7f6b506e72a15573c9b7cde7a9a01be416cca401ccc0ae8109c889afa046"
+        "sha256": "ee335103d48da65ceec4b8671999b9c3a87d70f57cd4f59ec1f449f630d50a60"
       },
       "sdk_test_counts": {
         "errors": 0,
@@ -89,7 +89,7 @@
       "actual_receiver": {
         "bytes": 2915,
         "path": "receiver-native-link-actual/RECEIVER_ACTUAL.json",
-        "sha256": "81fa7d1b22e453cb43d5c5b5efeb96e7d98d8a745994ebe4abed6485fb24589e"
+        "sha256": "d6457d346914646e6a1c23028120feeaa28a8e1a65101fe4749016dd33978542"
       },
       "actual_receiver_cases": [
         {
@@ -136,7 +136,7 @@
       "sdk_qualification": {
         "bytes": 854,
         "path": "sdk-native-link-final/SDK_QUALIFICATION.json",
-        "sha256": "63d7f79da2769a517345a4fe436a33824e2fe1b665f1af37cba8691dae210856"
+        "sha256": "e334c910820685307314eddb64357344550a48aa76d17df58dd490b8c24bb14e"
       },
       "sdk_results": {
         "bytes": 962,
@@ -228,7 +228,7 @@
     "files": 207,
     "inventory": "FINAL_EVIDENCE_FILES.tsv",
     "inventory_scope": "Selected retained proof files only; excludes this generated aggregate and the inventory itself.",
-    "inventory_sha256": "52e9ce7c803ded0eb29a854f77fa2aa2b68f20edbac7fa7948c680298e13230e"
+    "inventory_sha256": "8bc73e235b40bcc00736bd3520ab2e9a452e444b8ae82a0a3b9e344aa8f6b451"
   },
   "final_pack": {
     "build_contract_result": "OK",
@@ -236,7 +236,7 @@
     "build_receipt": {
       "bytes": 7322,
       "path": "pack-final/BUILD_RECEIPT.json",
-      "sha256": "2b3ce90559a99248f0137cbd8027f71c3c610a9344a198176cc09725389ddec1"
+      "sha256": "615d63d8655d3b5568164019ab486cac3847970d32e85c00507a30e77643a07d"
     },
     "catalogue_output_sha256": "5c10bbe5a1a36c7614e7008d714494438e16250bea84c27e36ceb29fb91399ff",
     "cli_identities": {
@@ -251,7 +251,7 @@
     "commands": {
       "bytes": 50004,
       "path": "pack-final/COMMANDS.json",
-      "sha256": "0a51a9e063fc0b80bcb3c9b5d65f67b3d9007ece20aa6940e6c47ffcc9aaf361"
+      "sha256": "8bf340d6a1063ea1938b64ff14d847738f201502548990edfbab926a00edee6c"
     },
     "controlled_packager_java_tmp_dir": "${OUT}/java-tmp",
     "fixture_results": {
@@ -324,7 +324,7 @@
     "source_inputs": {
       "bytes": 12110,
       "path": "pack-final/SOURCE_INPUTS.tsv",
-      "sha256": "952575fd2712a541a7be504095378604a4ade171edd32f48a021f61deb2f5cc4"
+      "sha256": "25aae2b26d067e8dd58d37657148ac4ba371966959e61890f9419de9995c1ad3"
     },
     "source_jdk_tool_module_collisions": "NONE_IN_RELEASE_OR_JMOD_FILENAMES",
     "status": "PASS",
@@ -346,18 +346,18 @@
     "targets": 61
   },
   "inherited_repository_gate": {
-    "actual_git_blob": "86b62fddc148b372145e807438dd7cd018acca0f",
+    "actual_git_blob": "1b20225a72caf20a7c02f9ef1ca2cb068294bff6",
     "evidence": {
       "bytes": 427,
       "path": "review/existing-sdk-receiver-baseline.json",
-      "sha256": "c50d2cac54b6e72fcb747213f7128751dc4ea957cfb3f4217c8e4dd5a41c52e8"
+      "sha256": "a0102376253b7d46eb767489a12c75cbb213c0e0c12eda46342e842b749e36c1"
     },
     "existing_gate_expected_git_blob": "83b1483c6c5e6a39c519f82af603382914eed3e5",
     "file": "m3/tooling/jmod-recipes/tools/jmod_pack.py",
     "gate_log": {
       "bytes": 1919,
       "path": "review/existing-sdk-receiver.log",
-      "sha256": "b0a6cc83b12122c4fefd6e149cd8c72e384243549cf9d63530b6df266f545e0a"
+      "sha256": "ad3b18c8cfc63a594a1a2779074746f68e8fd4db7ef01c3da37288fc6e894335"
     },
     "resolved_by_this_task": false,
     "same_as_baseline": true,
@@ -398,12 +398,12 @@
     {
       "bytes": 2177,
       "path": "native-link-parent.json",
-      "sha256": "fcb863173a5c61317738a3a9ab14e8868349557934d5c9d6ee8e225f81e587fd"
+      "sha256": "de52301e77cd24685b3d2e7e4a65308d8bba6b6f2c7e1ee4b69c0c7cc4ad6193"
     },
     {
       "bytes": 2175,
       "path": "linker-temp-parent.json",
-      "sha256": "5b14a4bc018fca600b8ea710c60b520f60050280848c6de920d363dcda4ad8de"
+      "sha256": "74cefc6a24ed474952ee4f7d47bcbe5ee865336131584e178cb9c493a93db800"
     }
   ],
   "target_baseline": "f29b0afe7ad253cc0562bc8dfdd48fc1acec710e"

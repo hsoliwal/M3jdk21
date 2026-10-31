@@ -1,7 +1,7 @@
 {
   "request": {
     "repository_full_name": "hsoliwal/com.synexia",
-    "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+    "path": "m3-algo/src/main/java/jdk/internal/m3/algorithms/corpus/ChallengeDonorPassLedger.java",
     "ref": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
     "encoding": "base64"
   },

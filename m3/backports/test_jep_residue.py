@@ -99,7 +99,7 @@ class JepResidueTest(unittest.TestCase):
 
             source = (
                 root
-                / "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport"
+                / "m3/tooling/migration-recipes/src/main/java/jdk/m3/rewrite/backport"
             )
             source.mkdir(parents=True)
             (source / "M3Jep485BackportRecipe.java").write_text(

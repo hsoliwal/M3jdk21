@@ -1,0 +1,52 @@
+H:\m3-scratch\lib-intake\batch\commons-pool2\proj\src\main\java\com\m3\lib\pool2\proxy\CglibProxyHandler.java:23: error: package net.sf.cglib.proxy does not exist
+import net.sf.cglib.proxy.MethodInterceptor;
+                         ^
+H:\m3-scratch\lib-intake\batch\commons-pool2\proj\src\main\java\com\m3\lib\pool2\proxy\CglibProxyHandler.java:24: error: package net.sf.cglib.proxy does not exist
+import net.sf.cglib.proxy.MethodProxy;
+                         ^
+H:\m3-scratch\lib-intake\batch\commons-pool2\proj\src\main\java\com\m3\lib\pool2\proxy\CglibProxyHandler.java:34: error: cannot find symbol
+        implements MethodInterceptor {
+                   ^
+  symbol: class MethodInterceptor
+H:\m3-scratch\lib-intake\batch\commons-pool2\proj\src\main\java\com\m3\lib\pool2\proxy\CglibProxyHandler.java:51: error: cannot find symbol
+            final MethodProxy methodProxy) throws Throwable {
+                  ^
+  symbol:   class MethodProxy
+  location: class CglibProxyHandler<T>
+  where T is a type-variable:
+    T extends Object declared in class CglibProxyHandler
+H:\m3-scratch\lib-intake\batch\commons-pool2\proj\src\main\java\com\m3\lib\pool2\proxy\CglibProxySource.java:21: error: package net.sf.cglib.proxy does not exist
+import net.sf.cglib.proxy.Enhancer;
+                         ^
+H:\m3-scratch\lib-intake\batch\commons-pool2\proj\src\main\java\com\m3\lib\pool2\proxy\CglibProxySource.java:22: error: package net.sf.cglib.proxy does not exist
+import net.sf.cglib.proxy.Factory;
+                         ^
+H:\m3-scratch\lib-intake\batch\commons-pool2\proj\src\main\java\com\m3\lib\pool2\proxy\CglibProxyHandler.java:49: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+H:\m3-scratch\lib-intake\batch\commons-pool2\proj\src\main\java\com\m3\lib\pool2\proxy\CglibProxySource.java:47: error: cannot find symbol
+        final Enhancer enhancer = new Enhancer();
+              ^
+  symbol:   class Enhancer
+  location: class CglibProxySource<T>
+  where T is a type-variable:
+    T extends Object declared in class CglibProxySource
+H:\m3-scratch\lib-intake\batch\commons-pool2\proj\src\main\java\com\m3\lib\pool2\proxy\CglibProxySource.java:47: error: cannot find symbol
+        final Enhancer enhancer = new Enhancer();
+                                      ^
+  symbol:   class Enhancer
+  location: class CglibProxySource<T>
+  where T is a type-variable:
+    T extends Object declared in class CglibProxySource
+H:\m3-scratch\lib-intake\batch\commons-pool2\proj\src\main\java\com\m3\lib\pool2\proxy\CglibProxySource.java:63: error: cannot find symbol
+                (CglibProxyHandler<T>) ((Factory) proxy).getCallback(0);
+                                         ^
+  symbol:   class Factory
+  location: class CglibProxySource<T>
+  where T is a type-variable:
+    T extends Object declared in class CglibProxySource
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use or override a deprecated API that is marked for removal.
+Note: Recompile with -Xlint:removal for details.
+10 errors

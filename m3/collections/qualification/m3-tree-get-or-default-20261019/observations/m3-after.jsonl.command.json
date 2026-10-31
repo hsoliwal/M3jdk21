@@ -8,7 +8,7 @@
     "-cp",
     "/workspace/scratch/a20ebe6f78bb/evidence/fixture-classes:/workspace/scratch/a20ebe6f78bb/M3jdk21/m3/collections/target/classes",
     "EmptyRootLookupOracle",
-    "com.m3.collections.M3TreeMap"
+    "jdk.m3.collections.M3TreeMap"
   ],
   "exitCode": 0,
   "stdoutSha256": "81ae3cefb4f349f9847b3604830c3ec8ddab62b77b356c0e364bd834ff4e7d36",

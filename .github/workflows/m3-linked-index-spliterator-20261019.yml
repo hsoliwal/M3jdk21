@@ -3,8 +3,8 @@ name: M3JDK21 linked-index no-copy spliterator
 on:
   pull_request:
     paths:
-      - 'm3/collections/src/main/java/com/m3/collections/M3LinkedList.java'
-      - 'm3/collections/src/test/java/com/m3/collections/M3LinkedIndexSplit*'
+      - 'm3/collections/src/main/java/jdk/m3/collections/M3LinkedList.java'
+      - 'm3/collections/src/test/java/jdk/m3/collections/M3LinkedIndexSplit*'
       - 'm3/collections/qualification/m3-linked-index-spliterator-20261019/**'
       - '.github/workflows/m3-linked-index-spliterator-20261019.yml'
   workflow_dispatch:
@@ -28,12 +28,12 @@ jobs:
           set -euo pipefail
           mkdir -p /tmp/m3-linked-index-proof
           javac --release 21 -Xlint:all -Werror -d /tmp/m3-linked-index-proof \
-            m3/collections/src/main/java/com/m3/collections/M3SlotArrays.java \
-            m3/collections/src/main/java/com/m3/collections/M3SlotSpliterators.java \
-            m3/collections/src/main/java/com/m3/collections/M3LinkedList.java \
-            m3/collections/src/test/java/com/m3/collections/M3LinkedIndexSplitContract.java
+            m3/collections/src/main/java/jdk/m3/collections/M3SlotArrays.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3SlotSpliterators.java \
+            m3/collections/src/main/java/jdk/m3/collections/M3LinkedList.java \
+            m3/collections/src/test/java/jdk/m3/collections/M3LinkedIndexSplitContract.java
           java -ea -cp /tmp/m3-linked-index-proof \
-            com.m3.collections.M3LinkedIndexSplitContract
+            jdk.m3.collections.M3LinkedIndexSplitContract
 
   owning-maven:
     runs-on: ubuntu-latest
