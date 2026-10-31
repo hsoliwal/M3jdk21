@@ -1,46 +1,21 @@
 package jdk.m3.graphics.impl;
 
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodType;
-import java.util.Objects;
+import java.lang.ref.Cleaner;
 
 public final class M3Cleanable {
-
-    private static final MethodHandle createCleanerHandle;
-    private static final MethodHandle cleanHandle;
-
-    static {
-        try {
-            Class<?> cleanerClass = Class.forName("sun.misc.Cleaner");
-            createCleanerHandle = MethodHandles.publicLookup().findStatic(cleanerClass, "create", MethodType.methodType(cleanerClass, Object.class, Runnable.class));
-            cleanHandle = MethodHandles.publicLookup().findVirtual(cleanerClass, "clean", MethodType.methodType(void.class));
-        } catch (Throwable e) {
-            throw new NoClassDefFoundError("sun.misc.Cleaner");
-        }
-    }
+    private static final Cleaner cleaner = Cleaner.create();
 
     public static M3Cleanable register(Object obj, Runnable action) {
-        Objects.requireNonNull(obj);
-        Objects.requireNonNull(action);
-        try {
-            return new M3Cleanable(createCleanerHandle.invokeWithArguments(obj, action));
-        } catch (Throwable e) {
-            throw new RuntimeException("Unreachable", e);
-        }
+        return new M3Cleanable(cleaner.register(obj, action));
     }
 
-    private final Object cleaner;
+    private final Cleaner.Cleanable cleanable;
 
-    private M3Cleanable(Object cleaner) {
-        this.cleaner = cleaner;
+    private M3Cleanable(Cleaner.Cleanable cleanable) {
+        this.cleanable = cleanable;
     }
 
     public void clean() {
-        try {
-            cleanHandle.invokeWithArguments(cleaner);
-        } catch (Throwable e) {
-            throw new RuntimeException("Unreachable", e);
-        }
+        this.cleanable.clean();
     }
 }

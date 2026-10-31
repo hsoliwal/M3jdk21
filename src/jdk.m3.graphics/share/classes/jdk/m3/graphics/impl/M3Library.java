@@ -46,7 +46,7 @@ public class M3Library {
             // If skija is bundled in JRE, try to load the bundled native library
             // User can disable this behavior by set `skija.loadFromLibraryPath` to false
             if (loadFromLibraryPath == null) {
-                URL theClassFile = M3Library.class.getResource("Library.class");
+                URL theClassFile = M3Library.class.getResource("M3Library.class");
                 if (theClassFile != null && "jrt".equals(theClassFile.getProtocol())) {
                     try {
                         _loadFromLibraryPath();

@@ -1,4 +1,5 @@
 cc_file	line	old	new
+shared/java/impl/Library.java	60	Library.class	M3Library.class
 platform/cc/interop.cc	151	io/github/humbleui/skija/AnimationFrameInfo	jdk/m3/graphics/M3AnimationFrameInfo
 platform/cc/interop.cc	188	io/github/humbleui/skija/Color4f	jdk/m3/graphics/M3Color4f
 platform/cc/interop.cc	204	io/github/humbleui/skija/Drawable	jdk/m3/graphics/M3Drawable
