@@ -16,7 +16,8 @@ import javax.swing.table.TableModel;
  * unchanged; other renderers take the stock path.
  */
 //FLLDCIM: L6 — paint never materializes (OH21)
-public class M3PackedTable extends JTable {
+//FLLDCIM: MRL — final: no subclass can override a method the constructor calls (this-escape)
+public final class M3PackedTable extends JTable {
 	private static final long serialVersionUID = 1L;
 
 	private final M3PackedCellRenderer packed = new M3PackedCellRenderer ();
