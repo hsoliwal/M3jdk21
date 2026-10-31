@@ -19,11 +19,11 @@ import javax.tools.SimpleJavaFileObject;
 import javax.tools.ToolProvider;
 
 /**
- * Real javac runs of {@link M3JdkStandardPlugin} over a clean and a dirty fixture.
+ * Real javac runs over clean, convention-dirty and semantic-name-quality fixtures.
  *
- * <p>The dirty fixture breaks every rule once (whitespace three times) and also declares the
- * parameters {@code arg} and {@code argument}, which must pass: only reflection names of the form
- * {@code arg<digits>} are refused. Error mode must fail the dirty compile and pass the clean one.
+ * <p>The convention-dirty fixture breaks every original rule once (whitespace three times). The
+ * quality fixture independently proves placeholder, promotional, versioned, repeated, overlong
+ * and over-tokenized names. Error mode must fail both dirty fixtures and pass the clean one.
  */
 public final class M3JdkStandardPluginSelfTest {
     private static final System.Logger LOG =
@@ -57,6 +57,24 @@ public final class M3JdkStandardPluginSelfTest {
                     int size = elements.size();
                     return size >= MAX_SIZE;
                 }
+
+                static final class M3UTF16Lane {
+                }
+
+                static final class M3IPv6 {
+                }
+
+                int readUTF16Lane() {
+                    return 0;
+                }
+
+                int readIPv6() {
+                    return 0;
+                }
+
+                int openHyperlink() {
+                    return 0;
+                }
             }
             """;
 
@@ -71,12 +89,65 @@ public final class M3JdkStandardPluginSelfTest {
             + "        String longLine = \"" + "x".repeat(90) + "\";\n"
             + "    }\n}\n";
 
-    private static final Map<String, Integer> DIRTY_RULES = new TreeMap<>(Map.ofEntries(
-            Map.entry("PACKAGE_NAME", 1), Map.entry("WILDCARD_IMPORT", 1),
-            Map.entry("TYPE_NAME", 1), Map.entry("TYPE_PARAMETER_NAME", 1),
-            Map.entry("CONSTANT_NAME", 1), Map.entry("FIELD_NAME", 1),
-            Map.entry("METHOD_NAME", 1), Map.entry("PARAMETER_NAME", 1),
-            Map.entry("LOCAL_NAME", 1), Map.entry("WHITESPACE", 3), Map.entry("LINE_LENGTH", 1)));
+    private static final String QUALITY = """
+            package com.example.quality;
+
+            public final class QualityFixture {
+                static final class Helper {
+                }
+
+                static final class M3PersistentMemoryMappedInferenceWeightRepositoryCoordinator {
+                }
+
+                static final class M3VectorStoreV2 {
+                }
+
+                static final class M3UltraCache {
+                }
+
+                static final class M3SchemaSnapshot20261031 {
+                }
+
+                void doStuff() {
+                }
+
+                void calculateDeterministicSegmentedAddressProjectionForGeneration() {
+                }
+
+                void loadLoad() {
+                }
+
+                void buildMapRunPlanTaskGraphNode() {
+                }
+
+                void optimizedRead() {
+                }
+
+                void loadVersion2() {
+                }
+
+                void snapshot20261031() {
+                }
+            }
+            """;
+
+    private static final String LEGACY_CONTRACT = """
+            package com.example.legacy;
+
+            public interface LegacyContract {
+                void doStuff();
+            }
+            """;
+
+    private static final String LEGACY_OVERRIDE = """
+            package com.example.legacy;
+
+            public final class LegacyImplementation implements LegacyContract {
+                @Override
+                public void doStuff() {
+                }
+            }
+            """;
 
     private static final String LEGACY = """
             package com.synexia.legacy;
@@ -104,6 +175,14 @@ public final class M3JdkStandardPluginSelfTest {
             }
             """;
 
+    private static final Map<String, Integer> DIRTY_RULES = new TreeMap<>(Map.ofEntries(
+            Map.entry("PACKAGE_NAME", 1), Map.entry("WILDCARD_IMPORT", 1),
+            Map.entry("TYPE_NAME", 1), Map.entry("TYPE_PARAMETER_NAME", 1),
+            Map.entry("CONSTANT_NAME", 1), Map.entry("FIELD_NAME", 1),
+            Map.entry("METHOD_NAME", 1), Map.entry("PARAMETER_NAME", 1),
+            Map.entry("LOCAL_NAME", 1), Map.entry("WHITESPACE", 3), Map.entry("LINE_LENGTH", 1)));
+    private static final Map<String, Integer> QUALITY_RULES = Map.of("NAME_QUALITY", 12);
+
     private M3JdkStandardPluginSelfTest() {
     }
 
@@ -115,21 +194,54 @@ public final class M3JdkStandardPluginSelfTest {
      */
     public static void main(String[] args) throws IOException {
         Path work = Files.createTempDirectory("m3-jdk-standard");
-        Path report = work.resolve("report.tsv");
+        Path conventionReport = work.resolve("convention.tsv");
+        Path qualityReport = work.resolve("quality.tsv");
         Map<String, Integer> clean = rules(compile(work, "CleanType", CLEAN, "mode=warning"));
         check(clean.isEmpty(), "clean fixture has findings " + clean);
-        Run dirty = compile(work, "bad_type", DIRTY, "mode=warning", "report=" + report);
+        check(compilePlain(work, "LegacyContract", LEGACY_CONTRACT),
+                "legacy contract did not compile");
+        Run legacyOverride = compile(work, "LegacyImplementation", LEGACY_OVERRIDE,
+                "mode=warning");
+        check(legacyOverride.success() && rules(legacyOverride).isEmpty(),
+                "inherited override was not preserved " + rules(legacyOverride));
+
+        Run dirty = compile(work, "bad_type", DIRTY, "mode=warning",
+                "report=" + conventionReport);
         check(rules(dirty).equals(DIRTY_RULES), "dirty rules " + rules(dirty));
         check(dirty.diagnostics().stream().map(M3JdkStandardPluginSelfTest::message)
                 .noneMatch(m -> m.matches(".*parameter arg(ument)? .*")), "arg/argument refused");
-        long rows = Files.readAllLines(report).size() - 1L;
-        int findings = DIRTY_RULES.values().stream().mapToInt(Integer::intValue).sum();
-        check(rows == findings, "report rows " + rows + ", findings " + findings);
+
+        Run quality = compile(work, "QualityFixture", QUALITY, "mode=warning",
+                "report=" + qualityReport);
+        check(rules(quality).equals(QUALITY_RULES), "quality rules " + rules(quality));
+        requireMessage(quality, "type Helper: is a placeholder");
+        requireMessage(quality, "type M3UltraCache: contains promotional wording");
+        requireMessage(quality, "type M3VectorStoreV2: carries a version/date suffix");
+        requireMessage(quality, "type M3SchemaSnapshot20261031: carries a version/date suffix");
+        requireMessage(quality, "method optimizedRead: contains promotional wording");
+        requireMessage(quality, "method loadVersion2: carries a version/date suffix");
+        requireMessage(quality, "method snapshot20261031: carries a version/date suffix");
+        requireMessage(quality, "method loadLoad: repeats adjacent word Load");
+        requireMessage(quality, "characters; limit 48");
+        requireMessage(quality, "characters; limit 40");
+        requireMessage(quality, "semantic words; limit 6");
+
+        long conventionRows = Files.readAllLines(conventionReport).size() - 1L;
+        long qualityRows = Files.readAllLines(qualityReport).size() - 1L;
+        int conventionFindings = DIRTY_RULES.values().stream().mapToInt(Integer::intValue).sum();
+        int qualityFindings = QUALITY_RULES.values().stream().mapToInt(Integer::intValue).sum();
+        check(conventionRows == conventionFindings,
+                "convention rows " + conventionRows + ", findings " + conventionFindings);
+        check(qualityRows == qualityFindings,
+                "quality rows " + qualityRows + ", findings " + qualityFindings);
         check(!compile(work, "bad_type", DIRTY).success()
-                && compile(work, "CleanType", CLEAN).success(), "error mode must fail only dirty");
+                && !compile(work, "QualityFixture", QUALITY).success()
+                && compile(work, "CleanType", CLEAN).success(),
+                "error mode must fail both dirty fixtures and pass clean");
         schemeChecks(work);
         LOG.log(System.Logger.Level.INFO, "M3_JDK_STANDARD_SELFTEST PASS rules="
-                + DIRTY_RULES.size() + " findings=" + rows);
+                + (DIRTY_RULES.size() + QUALITY_RULES.size()) + " findings="
+                + (conventionRows + qualityRows));
     }
 
     private record Run(boolean success, List<Diagnostic<? extends JavaFileObject>> diagnostics) {
@@ -151,12 +263,18 @@ public final class M3JdkStandardPluginSelfTest {
         JavaCompiler javac = ToolProvider.getSystemJavaCompiler();
         DiagnosticCollector<JavaFileObject> sink = new DiagnosticCollector<>();
         String plugin = ("-Xplugin:M3JdkStandard " + String.join(" ", options)).trim();
-        List<String> flags = List.of("-proc:none", "-d", work.toString(), "-processorpath",
-                System.getProperty("java.class.path"), plugin);
+        List<String> flags = List.of("-proc:none", "-d", work.toString(), "-classpath",
+                work.toString(), "-processorpath", System.getProperty("java.class.path"), plugin);
         List<JavaFileObject> units = List.of(source(name, source));
         boolean ok = javac.getTask(null, null, sink, flags, null, units).call();
         return new Run(ok, sink.getDiagnostics().stream()
                 .filter(d -> message(d).contains("[M3JdkStandard ")).collect(Collectors.toList()));
+    }
+
+    private static boolean compilePlain(Path work, String name, String text) {
+        JavaCompiler javac = ToolProvider.getSystemJavaCompiler();
+        List<String> flags = List.of("-proc:none", "-d", work.toString());
+        return javac.getTask(null, null, null, flags, null, List.of(source(name, text))).call();
     }
 
     private static JavaFileObject source(String name, String text) {
@@ -178,6 +296,11 @@ public final class M3JdkStandardPluginSelfTest {
 
     private static String message(Diagnostic<? extends JavaFileObject> diagnostic) {
         return diagnostic.getMessage(null);
+    }
+
+    private static void requireMessage(Run run, String expected) {
+        check(run.diagnostics().stream().map(M3JdkStandardPluginSelfTest::message)
+                .anyMatch(message -> message.contains(expected)), "missing message " + expected);
     }
 
     private static void check(boolean condition, String failure) {

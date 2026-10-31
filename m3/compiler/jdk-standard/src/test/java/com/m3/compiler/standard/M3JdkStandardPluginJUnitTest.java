@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /** Maven/JUnit entry point invoking the real javac fixture self-test (not mocks). */
 class M3JdkStandardPluginJUnitTest {
     @Test
-    void cleanFixturePassesAndDirtyFixtureBreaksEveryRuleOnce() throws Exception {
+    void verifiesFixtures() throws Exception {
         M3JdkStandardPluginSelfTest.main(new String[0]);
     }
 }
