@@ -1,0 +1,8 @@
+stage	status	evidence
+rule_check	PASS	checks=13 fail=0
+fill	DONE	filled=37 atoms=2134 manual=153
+compile	DONE	javac -Xlint:all -Werror over 37 classes
+jit	PASS	tests=1561 failed=0
+differential	PASS	targets=49 probes=28 mismatches=0
+negative_controls	PASS	controls=16 caught=16
+junit	PASS	tests=3262 failed=0
