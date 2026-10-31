@@ -55,7 +55,7 @@ public final class M3WebDifferential {
 			apply(a, op, f[6]);
 			apply(b, op, f[6]);
 			steps++;
-			if (!Arrays.equals(snapshot(a), snapshot(b)) || paintHash(a, NEB) != paintHash(b, SW)) {
+			if (!Arrays.equals(snapshot(a), snapshot(b)) || paintHash(a, NEB) != paintHash(b, SW) || !Arrays.equals(core(a), core(b))) {
 				mismatches++;
 				first = first < 0 ? op : first;
 			}
@@ -93,6 +93,14 @@ public final class M3WebDifferential {
 		for (int k = 1; k <= 15; k++) {
 			call(m, "key", k, k == 15 ? (int) '3' : 0, 0);
 		}
+	}
+
+	/** Viewport core answers: drained damage box and the scroll bar projection (SWT facades vs Swing port core). */
+	static int[] core(Object m) throws Exception {
+		int[] d = new int[4], t = new int[2];
+		boolean dirty = (boolean) m.getClass().getMethod("takeDamage", int[].class).invoke(m, (Object) d);
+		m.getClass().getMethod("thumb", int.class, int[].class).invoke(m, 200, t);
+		return new int[] { dirty ? 1 : 0, d[0], d[1], d[2], d[3], t[0], t[1] };
 	}
 
 	static int[] snapshot(Object m) throws Exception {

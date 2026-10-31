@@ -1,59 +1,42 @@
 package @PKG@;
 
+import com.m3.swing.viewport.M3ViewportDamage;
+import com.m3.swing.viewport.M3ViewportExtent;
 import com.m3.swing.viewport.M3ViewportIndexWindow;
+import com.m3.swing.viewport.M3ViewportPlanes;
 
 /**
- * M3JDK Swing binding of the web widgets' viewport aspects (pattern M3P-VIEWPORT-1): the resident window is
- * the port core's {@link M3ViewportIndexWindow#project}; the logical extent, scroll bar projection, plane
- * mask and damage union follow the SWT core's public contract (eclipse.platform.swt PR #295) with the same
- * answers. TODO M3P-VIEWPORT-1: promote extent/planes/damage into com.m3.swing.viewport so both are port API.
+ * M3JDK Swing binding of the web widgets' viewport aspects (pattern M3P-VIEWPORT-1): every answer comes from
+ * the port core in {@code com.m3.swing.viewport}: the resident window from {@link M3ViewportIndexWindow},
+ * extents and the scroll bar from {@link M3ViewportExtent}, dirty planes from {@link M3ViewportPlanes},
+ * damage from {@link M3ViewportDamage}. Their contracts equal the SWT fork's public M3 viewport facades.
  */
 final class M3WebViewportCore {
-	static final int BODY = 1, FROZEN = 1 << 1, HEADER = 1 << 2, EDITOR = 1 << 3, SCROLLBAR = 1 << 4, FEEDBACK = 1 << 5;
-	private int x0 = Integer.MAX_VALUE, y0 = Integer.MAX_VALUE, x1 = Integer.MIN_VALUE, y1 = Integer.MIN_VALUE;
-	private long ox, oy;
-	private boolean origin;
+	static final int BODY = M3ViewportPlanes.BODY, HEADER = M3ViewportPlanes.HEADER, SCROLLBAR = M3ViewportPlanes.SCROLLBAR;
+	private final M3ViewportPlanes planes = new M3ViewportPlanes();
+	private final M3ViewportDamage damage = new M3ViewportDamage();
 
 	void project(int count, int first, int visible, int overscan, int[] out) {
 		M3ViewportIndexWindow.project(count, first, visible, overscan, out, 0);
 	}
 
 	long extent(long count, int itemExtent) {
-		return Math.multiplyExact(count, (long) itemExtent);
+		return M3ViewportExtent.contentExtent(count, itemExtent);
 	}
 
 	void thumb(long count, int itemExtent, int view, long scroll, int track, int[] out) {
-		long rows = Math.max(1, count), visible = Math.max(1, Math.min(rows, ((long) Math.max(0, view) + itemExtent - 1) / itemExtent));
-		int maximum = (int) Math.min(Integer.MAX_VALUE, rows), thumb = (int) Math.max(1, Math.min(maximum, visible * maximum / rows));
-		int len = (int) Math.max(Math.min(track, 8), Math.min(track, (long) track * thumb / Math.max(1, maximum)));
-		long maxTop = Math.max(0, rows - visible), top = Math.max(0, Math.min(maxTop, scroll / Math.max(1, itemExtent)));
-		int range = Math.max(1, maximum - thumb), selection = maxTop == 0 ? 0 : (int) (top * range / maxTop);
-		out[0] = (int) ((long) (track - len) * Math.min(selection, range) / range);
-		out[1] = len;
+		M3ViewportExtent.projectThumb(count, itemExtent, Math.max(0, view), scroll / Math.max(1, itemExtent), track, out, 0);
 	}
 
 	int scrolled(long x, long y) {
-		boolean h = origin && x != ox, v = origin && y != oy;
-		origin = true;
-		ox = x;
-		oy = y;
-		return (h ? BODY | HEADER | EDITOR | FEEDBACK | SCROLLBAR : 0) | (v ? BODY | FROZEN | EDITOR | FEEDBACK | SCROLLBAR : 0);
+		return planes.scrollTo(x, y);
 	}
 
 	void damage(int x, int y, int w, int h) {
-		if (w > 0 && h > 0) {
-			x0 = Math.min(x0, x); y0 = Math.min(y0, y);
-			x1 = Math.max(x1, x + w); y1 = Math.max(y1, y + h);
-		}
+		damage.add(x, y, w, h);
 	}
 
 	boolean take(int[] out) {
-		if (x0 > x1) {
-			return false;
-		}
-		out[0] = x0; out[1] = y0; out[2] = x1 - x0; out[3] = y1 - y0;
-		x0 = y0 = Integer.MAX_VALUE;
-		x1 = y1 = Integer.MIN_VALUE;
-		return true;
+		return damage.take(out);
 	}
 }
