@@ -1,0 +1,5 @@
+consumer	before	after	gate	classes_new	errors_vs_old	errors_vs_new	added_by_repoint	verdict
+m3/vendor/third_party/rewrite-java/pom.xml	commons-lang3-3.14.0	commons-lang3-3.17.0	EXTRA_POM (blocks 1, provenance 1; gate: API surface: the one rewrite-java file importing org.apache.commons.lang3.StringUtils calls substringAfterLast and substringBeforeLast, both public in 3.17.0; Lombok module, no plain javac gate)	-	-	-	-	PASS
+commons-compress-1.26.0	commons-lang3-3.14.0	commons-lang3-3.17.0	DIFFERENTIAL	0	12	12	0	PASS
+commons-text	commons-lang3-3.14.0	commons-lang3-3.17.0	PLAIN	149	-	0	0	PASS
+DROP	commons-lang3-3.14.0	-	files=260	-	-	-	proof_mentions=14 proof_blocking=0	PASS
