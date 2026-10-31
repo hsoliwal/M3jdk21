@@ -1,4 +1,6 @@
 stage	status	evidence
-fill	DONE	filled=12 atoms=1992 manual=387
-compile	DONE	javac -Xlint:all -Werror over 12 classes
-differential	PASS	targets=12 mismatches=0
+rule_check	PASS	checks=13 fail=0
+fill	DONE	filled=37 atoms=2134 manual=153
+compile	DONE	javac -Xlint:all -Werror over 37 classes
+differential	PASS	targets=49 probes=28 mismatches=0
+negative_controls	PASS	controls=16 caught=16
