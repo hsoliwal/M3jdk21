@@ -9,7 +9,7 @@
       "path": "m3/vendor/third_party/fastdoubleparser-1.0.90",
       "provenance_sha256": "cfee2e16d3aae17efbc32492a9ca8db63172454f01342c664d296abe72872d76",
       "sources_jar_sha256": "9ef19b07959b456930efdfd4c5690caeb9ac39b07a813e84557ca12957478ce4",
-      "tree_sha256": "d95b2302ce35265fc1c3d44522769592437c3218d28f51ea286fd07b5d9b3afb"
+      "tree_sha256": "a65e8f9c5fb817efebbe8bff17f57f8de1e2e93d5b26e976a39081da2c4b0997"
     },
     "jackson-annotations-2.19.2": {
       "coordinate": "com.fasterxml.jackson.core:jackson-annotations:2.19.2-m3-source-1",
