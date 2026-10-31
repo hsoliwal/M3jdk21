@@ -1,0 +1,13 @@
+mutant	source	test_class	test_method	status	detail
+M01	java/util/M3ComparisonSorts.java	M3ComparisonSortsAtomsTest	insertion	KILLED	exit=1
+M02	java/util/M3ComparisonSorts.java	M3ComparisonSortsAtomsTest	rotateMerge	KILLED	exit=1
+M03	java/util/M3ComparisonSorts.java	M3ComparisonSortsAtomsTest	depthLimit	KILLED	exit=1
+M04	java/util/M3TimSort.java	M3TimSortAtomsTest	minRunLength	KILLED	exit=1
+M05	java/util/M3DistributionSorts.java	M3DistributionSortsAtomsTest	digit	KILLED	exit=1
+M06	java/util/M3SortContext.java	M3SortContextAtomsTest	step	KILLED	exit=1
+M07	jdk/internal/m3/M3IndexedView.java	M3IndexedViewAtomsTest	spliterator_characteristics	KILLED	exit=1
+M08	jdk/internal/m3/M3IndexedView.java	M3IndexedViewAtomsTest	spliterator_trySplit	KILLED	exit=1
+M09	java/lang/M3StringCodePointPrecompute.java	M3StringCodePointPrecomputeAtomsTest	offsetByCodePoints	KILLED	exit=1
+M10	java/lang/M3StringBuilderLane.java	M3StringBuilderLaneAtomsTest	flatCharAt	KILLED	exit=1
+M11	java/lang/M3StringLeafCursor.java	M3StringLeafCursorAtomsTest	next	KILLED	exit=1
+M12	java/util/M3ComparisonSorts.java	M3ComparisonSortsAtomsTest	tournamentWinner	KILLED	exit=1

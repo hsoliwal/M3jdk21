@@ -166,6 +166,15 @@ class M3StringLeafCursorAtomsTest {
         assertEquals(text(source), a + b);
         assertEquals(1 + 1 + 1, raw, "three visible leaf occurrences");
         assertEquals(1 + 1, merged, "two adjacent ranges of one owner coalesce into one leaf");
+        CharSequence whole = (CharSequence) atomA;
+        Object gapped = tupleOf(whole.subSequence(0, PIECE_UNITS), whole.subSequence(2 * PIECE_UNITS, 3 * PIECE_UNITS));
+        Object e = make.invoke(gapped, true);
+        int gappedLeaves = 0;
+        while ((boolean) atom.invoke(e)) {
+            gappedLeaves++;
+            assertEquals(PIECE_UNITS, (int) cursor.method("length", 0).invoke(e), "non-adjacent ranges stay separate");
+        }
+        assertEquals(1 + 1, gappedLeaves, "same owner but a gap: no coalescing");
     }
     /** owner() describes the current leaf: its range text is the next unread slice of the source. */
     @Test

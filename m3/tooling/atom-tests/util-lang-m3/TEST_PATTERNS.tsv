@@ -1,4 +1,19 @@
 owner	atom	pattern	test	oracle
+java.util.M3ComparisonSorts	insertion	PERF_LOOP	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsPerf.java::perf_insertion_small	same checksum as the JDK baseline; interleaved invokeExact timing
+java.util.M3ComparisonSorts	binaryInsertion	PERF_LOOP	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsPerf.java::perf_binaryInsertion_small	same checksum as the JDK baseline; interleaved invokeExact timing
+java.util.M3ComparisonSorts	quick	PERF_LOOP	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsPerf.java::perf_quick_large	same checksum as the JDK baseline; interleaved invokeExact timing
+java.util.M3ComparisonSorts	heap	PERF_LOOP	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsPerf.java::perf_heap_large	same checksum as the JDK baseline; interleaved invokeExact timing
+java.util.M3ComparisonSorts	dualPivotQuick	PERF_LOOP	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsPerf.java::perf_dualPivotQuick_large	same checksum as the JDK baseline; interleaved invokeExact timing
+java.util.M3ComparisonSorts	mergeSort	PERF_LOOP	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsPerf.java::perf_mergeSort_large	same checksum as the JDK baseline; interleaved invokeExact timing
+java.util.M3ComparisonSorts	lowerBound	PERF_LOOP	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsPerf.java::perf_lowerBound	same checksum as the JDK baseline; interleaved invokeExact timing
+java.util.M3TimSort	sort	PERF_LOOP	test/jdk/java/util/M3Atoms/M3TimSortAtomsPerf.java::perf_sort_large	same checksum as the JDK baseline; interleaved invokeExact timing
+java.util.M3TimSort	gallopLeft	PERF_LOOP	test/jdk/java/util/M3Atoms/M3TimSortAtomsPerf.java::perf_gallopLeft	same checksum as the JDK baseline; interleaved invokeExact timing
+java.util.M3DistributionSorts	lsd	PERF_LOOP	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsPerf.java::perf_lsd	same checksum as the JDK baseline; interleaved invokeExact timing
+java.util.M3DistributionSorts	counting	PERF_LOOP	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsPerf.java::perf_counting	same checksum as the JDK baseline; interleaved invokeExact timing
+jdk.internal.m3.M3IndexedView	get	PERF_LOOP	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsPerf.java::perf_get	same checksum as the JDK baseline; interleaved invokeExact timing
+java.lang.M3StringCodePointPrecompute	codePointCount	PERF_LOOP	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsPerf.java::perf_codePointCount	same checksum as the JDK baseline; interleaved invokeExact timing
+java.lang.M3StringCodePointPrecompute	offsetByCodePoints	PERF_LOOP	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsPerf.java::perf_offsetByCodePoints	same checksum as the JDK baseline; interleaved invokeExact timing
+java.lang.M3StringBuilderLane	charAt	PERF_LOOP	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsPerf.java::perf_charAt	same checksum as the JDK baseline; interleaved invokeExact timing
 java.util.M3ComparisonSorts	M3ComparisonSorts	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::M3ComparisonSorts	reflection: one private constructor, no state
 java.util.M3ComparisonSorts	sort	SORT_DISPATCH	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::sort	java.util.Arrays.sort differential (stable object order or primitive key order); IllegalArgumentException for numeric-only algorithms
 java.util.M3ComparisonSorts	quick	SORT_RANGE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::quick	java.util.Arrays.sort differential (stable object order or primitive key order) on [lo,hi), untouched outside
