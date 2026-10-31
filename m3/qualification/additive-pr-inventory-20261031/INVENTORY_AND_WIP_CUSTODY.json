@@ -1,0 +1,2724 @@
+{
+  "schema": "M3JDK21_ADDITIVE_COVERAGE_WIP_AND_QUALIFICATION_INVENTORY/1",
+  "status": "READ_ONLY_METADATA_PREPARATION_NOT_SOURCE_SUPERSET_OR_MERGE_ADMISSION",
+  "repository": "hsoliwal/M3jdk21",
+  "user_directive": "merge all pr superseting additively",
+  "authority": {
+    "source": "root delegated bounded read-only inventory and one reviewed unreferenced evidence blob",
+    "commit_ref_PR_CI_or_source_write_grant": false,
+    "new_model_generation": 0,
+    "native_build_or_target_runtime": 0
+  },
+  "pinned_census": {
+    "source": "complete earlier GitHub open-pulls census; not refreshed by this DAG phase",
+    "search_total": 41,
+    "incomplete_results": false,
+    "page_sizes": [
+      10,
+      10,
+      10,
+      10,
+      1
+    ],
+    "unique_heads": 41,
+    "drafts": 35,
+    "nondrafts": 6,
+    "nondraft_prs": [
+      2172,
+      2177,
+      2184,
+      2191,
+      2192,
+      2201
+    ],
+    "heads": [
+      {
+        "pr": 2168,
+        "head": "f8291a96e1a2cd99a7de8c406aa055cd3d662b25",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": false,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2168",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2168.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2169,
+        "head": "f3dbddbb4d383e447d94c71af85c737df936b440",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2169",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2169.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2170,
+        "head": "cf59127867f84696a6e74d60925211cfb97962d7",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2170",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2170.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2171,
+        "head": "4a951ad5178adeeb2916ec7345e654b27cc34e20",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2171",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2171.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2172,
+        "head": "869aaf6878de875f3712ba9bd9fd424027b47182",
+        "status": "NOT_PROVED_INCLUDED",
+        "selected_head_frontier": [
+          "b248153769565db9d1af9667f30b5c60678968f0"
+        ],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": false,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2172",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2172.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2173,
+        "head": "d0a30c7f740104db3bda281c0626182eabaecd16",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2173",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2173.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2174,
+        "head": "a45b4cbb5b72378b0b225ad3a67553b0ebed0499",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2174",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2174.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2175,
+        "head": "5f15e0836b468be5b19e65e260ea18b92866ad56",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2175",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2175.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2176,
+        "head": "078cc73cea0390d6f1ca7cc6ac3ea26c0ad16f0c",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2176",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2176.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2177,
+        "head": "d03796ed6aafe89ab2196eda70c7d9bb43b37b6c",
+        "status": "NOT_PROVED_INCLUDED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": false,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2177",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2177.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2178,
+        "head": "431faea32a73942411cc48314df74082dd33e6df",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [
+          "5b67211d816f1ea79c023ba9a8bbe6445dd5d5a1"
+        ],
+        "strict_descendant_of_master_bb66": false,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2178",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2178.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2179,
+        "head": "2e880d8ad24a52f98ff3590d8529d68176c8d512",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [
+          "07274415058e5d5cd0e8bb136335954703858952"
+        ],
+        "strict_descendant_of_master_bb66": false,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2179",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2179.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2180,
+        "head": "dc27d2f0955dd720d2391ac64293601b969524c3",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2180",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2180.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2181,
+        "head": "9e9d57e66c9d8053be5b6326eb9a03afb76a4f89",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2181",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2181.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2182,
+        "head": "4aa3b5ffba3b796c42d4324374131d9224895fde",
+        "status": "NOT_PROVED_INCLUDED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2182",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2182.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2183,
+        "head": "c50316c067a7625652393f0100ee77ce73d17e63",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [
+          "eb6e3095a5b877ebe2f7a2c7a80ecdba8431880e"
+        ],
+        "strict_descendant_of_master_bb66": false,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2183",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2183.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2184,
+        "head": "e9ec5e3d8bcff5cfc9a9cd06f25bea26e4b65d98",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": false,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2184",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2184.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2187,
+        "head": "8fd1c42782164d52f1ea05990122277b0cd541f5",
+        "status": "SELF",
+        "selected_head_frontier": [
+          "9a3e86aacb53a1f66c81188bc68339962cf0c02b",
+          "5b67211d816f1ea79c023ba9a8bbe6445dd5d5a1",
+          "07274415058e5d5cd0e8bb136335954703858952",
+          "eb6e3095a5b877ebe2f7a2c7a80ecdba8431880e"
+        ],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2187",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2187.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2188,
+        "head": "5e7f8d5a3be8de9b365f2dcab58f0dc30da0bbc0",
+        "status": "NOT_PROVED_INCLUDED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2188",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2188.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2189,
+        "head": "4cadcd04c0504e7323f09a775c3e83afe2be7442",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2189",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2189.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2190,
+        "head": "a90c4211ec803bc4b1ff6f26df2ff5b5504cdcb7",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2190",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2190.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2191,
+        "head": "9d818cd1a06cb3dd19f032903efb3e286c0aa09f",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": false,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2191",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2191.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2192,
+        "head": "d01a3f96092af602e6d346c10990604b909ea85f",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": false,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2192",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2192.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2193,
+        "head": "b61c8b2c6e0f89b9f8fb484231a6c0ded5fa30b4",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2193",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2193.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2194,
+        "head": "54826c0df9f5f6bdd4deeb9eb201112f30f03682",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2194",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2194.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2195,
+        "head": "514546be9e19816f469b62c37005c9cb7743a3d8",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2195",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2195.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2196,
+        "head": "b97435e693f91174782c5e40af73412ccb838701",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2196",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2196.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2197,
+        "head": "b8da8adb28d71c8fbb6307395876313a782277de",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2197",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2197.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2198,
+        "head": "cb54fbfea0a6fd0a36e27ff96599ce2ed7dde833",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2198",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2198.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2199,
+        "head": "3b1801bd52b4dee4684fd7de799d31b129301fc2",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2199",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2199.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2200,
+        "head": "92e103be730b49c8b1b6d7b8c348ddf85a1d7fb5",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2200",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2200.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2201,
+        "head": "297506ce74a0f50328c86e2aecc8f7379d247b98",
+        "status": "NOT_PROVED_INCLUDED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": false,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2201",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2201.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2202,
+        "head": "631c5986e51e0a1342a254b8c427f82d4eb1d0d6",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2202",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2202.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2203,
+        "head": "0e99bf3c90991830f19a5c9d64824f4138d8c438",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2203",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2203.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2204,
+        "head": "c72e3f0fc33695b0d695e12409910dbcf7cb882a",
+        "status": "NOT_PROVED_INCLUDED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2204",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2204.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2205,
+        "head": "b4a3728b38bb6b19b3e120d52da635db3ddb7fb7",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2205",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2205.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2206,
+        "head": "fdc6c2ff58a1785b3ec4595c68ec1fa156cdc154",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [
+          "9a3e86aacb53a1f66c81188bc68339962cf0c02b"
+        ],
+        "strict_descendant_of_master_bb66": false,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2206",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2206.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2207,
+        "head": "486154327a08f10835cfe1cf31d5f150dedf6810",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2207",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2207.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2208,
+        "head": "da6112257f9bb7e54a53694608b1402062140475",
+        "status": "ANCESTOR_PROVED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2208",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2208.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2209,
+        "head": "e867f7a310f6a1fbbe55a47aa84f73f3d12b8bd9",
+        "status": "NOT_PROVED_INCLUDED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2209",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2209.patch",
+        "patch_fetched": false
+      },
+      {
+        "pr": 2210,
+        "head": "26171150cee002cfdd8c5e853de996aab2c6e2af",
+        "status": "NOT_PROVED_INCLUDED",
+        "selected_head_frontier": [],
+        "strict_descendant_of_master_bb66": true,
+        "state": "OPEN_AT_CENSUS",
+        "draft": true,
+        "pr_url": "https://github.com/hsoliwal/M3jdk21/pull/2210",
+        "patch_url": "https://github.com/hsoliwal/M3jdk21/pull/2210.patch",
+        "patch_fetched": false
+      }
+    ]
+  },
+  "baseline": {
+    "master": "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136",
+    "tree": "aafc34b83f1f904ed25a791fa03e9a48f68baa35",
+    "ordered_parents": [
+      "1a02ed1ff46c72da96295c8903b6e49ff4f133a3",
+      "edbc64b10b21c038d135772fcaa269a99fe3fc22"
+    ],
+    "point_in_time_only": true
+  },
+  "candidate_2187": {
+    "head": "8fd1c42782164d52f1ea05990122277b0cd541f5",
+    "tree": "f501dc8d4baef0a8c1b246fca1a998afe287d7af",
+    "ordered_parents": [
+      "f5165ef3959e5be39bd6aee8af217c2c14ff3adf",
+      "da6112257f9bb7e54a53694608b1402062140475"
+    ],
+    "first_parent_chain_merge_operations": 42,
+    "retain_operations": 1,
+    "unique_MERGED_prs": 33,
+    "repeated_merge_operations": 9,
+    "repeated_pr_merge_counts": {
+      "2169": 3,
+      "2178": 3,
+      "2179": 2,
+      "2188": 3,
+      "2192": 3
+    },
+    "correction": "42 counts merge operations; 33 counts unique MERGED PRs. Prior inference of an unexplained contradiction is withdrawn. The title15 count is stale.",
+    "ancestry_summary": {
+      "nodes": 164,
+      "candidate_reachable_nodes_above_and_at_boundaries": 123,
+      "candidate_frontier": [
+        "07274415058e5d5cd0e8bb136335954703858952",
+        "5b67211d816f1ea79c023ba9a8bbe6445dd5d5a1",
+        "9a3e86aacb53a1f66c81188bc68339962cf0c02b",
+        "eb6e3095a5b877ebe2f7a2c7a80ecdba8431880e"
+      ],
+      "positive": [
+        2168,
+        2169,
+        2170,
+        2171,
+        2173,
+        2174,
+        2175,
+        2176,
+        2178,
+        2179,
+        2180,
+        2181,
+        2183,
+        2184,
+        2189,
+        2190,
+        2191,
+        2192,
+        2193,
+        2194,
+        2195,
+        2196,
+        2197,
+        2198,
+        2199,
+        2200,
+        2202,
+        2203,
+        2205,
+        2206,
+        2207,
+        2208
+      ],
+      "self": [
+        2187
+      ],
+      "unresolved": [
+        {
+          "pr": 2172,
+          "head": "869aaf6878de875f3712ba9bd9fd424027b47182",
+          "status": "NOT_PROVED_INCLUDED",
+          "selected_head_frontier": [
+            "b248153769565db9d1af9667f30b5c60678968f0"
+          ],
+          "strict_descendant_of_master_bb66": true
+        },
+        {
+          "pr": 2177,
+          "head": "d03796ed6aafe89ab2196eda70c7d9bb43b37b6c",
+          "status": "NOT_PROVED_INCLUDED",
+          "selected_head_frontier": [],
+          "strict_descendant_of_master_bb66": true
+        },
+        {
+          "pr": 2182,
+          "head": "4aa3b5ffba3b796c42d4324374131d9224895fde",
+          "status": "NOT_PROVED_INCLUDED",
+          "selected_head_frontier": [],
+          "strict_descendant_of_master_bb66": true
+        },
+        {
+          "pr": 2188,
+          "head": "5e7f8d5a3be8de9b365f2dcab58f0dc30da0bbc0",
+          "status": "NOT_PROVED_INCLUDED",
+          "selected_head_frontier": [],
+          "strict_descendant_of_master_bb66": true
+        },
+        {
+          "pr": 2201,
+          "head": "297506ce74a0f50328c86e2aecc8f7379d247b98",
+          "status": "NOT_PROVED_INCLUDED",
+          "selected_head_frontier": [],
+          "strict_descendant_of_master_bb66": true
+        },
+        {
+          "pr": 2204,
+          "head": "c72e3f0fc33695b0d695e12409910dbcf7cb882a",
+          "status": "NOT_PROVED_INCLUDED",
+          "selected_head_frontier": [],
+          "strict_descendant_of_master_bb66": true
+        },
+        {
+          "pr": 2209,
+          "head": "e867f7a310f6a1fbbe55a47aa84f73f3d12b8bd9",
+          "status": "NOT_PROVED_INCLUDED",
+          "selected_head_frontier": [],
+          "strict_descendant_of_master_bb66": true
+        },
+        {
+          "pr": 2210,
+          "head": "26171150cee002cfdd8c5e853de996aab2c6e2af",
+          "status": "NOT_PROVED_INCLUDED",
+          "selected_head_frontier": [],
+          "strict_descendant_of_master_bb66": true
+        }
+      ],
+      "negative_proved": []
+    },
+    "full_source_survival": "NOT_EVALUATED",
+    "required_check_policy": "UNDETERMINED_403_ADMIN_ACCESS",
+    "mainline_admission": "HOLD"
+  },
+  "graph": {
+    "algorithm_contract": "Parent-DAG reachability only. Boundaries are pinned master bb66 and its parent1a02. A missing node is an unresolved frontier, never a negative. Strict-descendant-of-baseline facts are reported separately. No negative is inferred while candidate side closure remains open.",
+    "nodes": [
+      {
+        "boundary": false,
+        "commit_bytes": 1655,
+        "git": "f8291a96e1a2cd99a7de8c406aa055cd3d662b25",
+        "parents": [
+          "1a02ed1ff46c72da96295c8903b6e49ff4f133a3"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "502af477a00a92687957375b4902913ec1137147bcb6e4b5e9afe25ff1ccffb2",
+        "tree": "89ba34a56950fd8b3ca9f6f9edac4abe7b23e95c"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 618,
+        "git": "cf59127867f84696a6e74d60925211cfb97962d7",
+        "parents": [
+          "0b4264583ec2d75a42f8c69fd8a78d65771d97bd"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "f0c01296885441b2e5b7a1fbd0f0f3e4bf43011f0a1c2f2dd3da2e218e52f40b",
+        "tree": "1f0921cf057d96be3c98dce8dfca2c9406a5be33"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 2576,
+        "git": "4a951ad5178adeeb2916ec7345e654b27cc34e20",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "4624559c253d4d227aa40764fb183eabf771a1d207c8c848114dbf9e60fb0550",
+        "tree": "daf60c28665a13911d5f9082758bb87a904b7e11"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 305,
+        "git": "d0a30c7f740104db3bda281c0626182eabaecd16",
+        "parents": [
+          "08db375f2e230e42144668ec3ef1cb605ce92c35"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "4a055b1388b8489705a2c3c6094679c75ab7e9abba2caee950a550a60ec2d55b",
+        "tree": "35a0c92b6029f5460e0b82d1609041f8f18fe17c"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 481,
+        "git": "a45b4cbb5b72378b0b225ad3a67553b0ebed0499",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "634cbe4db81f6f3870d1afafe79925c8c548841a1bb046bc069491c9f6f2c1d8",
+        "tree": "3750f29dac48b39ad1fc88300b20af04b05b2407"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 302,
+        "git": "5f15e0836b468be5b19e65e260ea18b92866ad56",
+        "parents": [
+          "c8a790ac10d1faa1a4be5a4a92915f1f0f4a7151"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "07e512c081c1e185754c6c0646e7303e36e2d1c98b465ac65d6f90296ff1da4e",
+        "tree": "e8fb839b4bc93f85b154a28bcf4019acba75b478"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 732,
+        "git": "078cc73cea0390d6f1ca7cc6ac3ea26c0ad16f0c",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "5c9daa6f53a2b2d335d905ba35de8806786f98ac7e1910b6a9ede57d4a766d53",
+        "tree": "2173049532d27f1d4ca0239b2ef9acfdd4f3451c"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1201,
+        "git": "d03796ed6aafe89ab2196eda70c7d9bb43b37b6c",
+        "parents": [
+          "fca1660ae52018ba3edb030aa26734537e6bfeec",
+          "078cc73cea0390d6f1ca7cc6ac3ea26c0ad16f0c"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "cd78e95995b3dc7b96d636ed2bf39c689e3133d78df12681619fdd71daf65127",
+        "tree": "bc15a06d09213b152bd88afc7cbe67f4aa8d846b"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 291,
+        "git": "dc27d2f0955dd720d2391ac64293601b969524c3",
+        "parents": [
+          "e2b95b45547d636e7a21bfdcec96be42b7d5bf7d"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "ce80540c389dc796bde337cae0d0cbf081eca1b25a9f0e4cbe40280b8821d5ac",
+        "tree": "01da079b22dc2a007bfd0195189f7d1c3194cc7a"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 284,
+        "git": "9e9d57e66c9d8053be5b6326eb9a03afb76a4f89",
+        "parents": [
+          "5f1ac46f5a66f1d6ed2a5d4e4dbcc27dade07235"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "de495c3cadc9fe2e0bf129b7bdbce1295fe75611ea814a09f15ace67ee7c919b",
+        "tree": "e8d9a7ba8b42084a6d38f7712b2bef349ca18dae"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1171,
+        "git": "4aa3b5ffba3b796c42d4324374131d9224895fde",
+        "parents": [
+          "a5ac6dc556f6c7f3f0627f5bc608b87ec6ffba11",
+          "9e9d57e66c9d8053be5b6326eb9a03afb76a4f89"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "fc60749f3d9e1932b71f07d581d93a9a057767d3b80689565963775bb3bb80e3",
+        "tree": "8b65b5fd1a05221b0f634034000e145982941d82"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 655,
+        "git": "e9ec5e3d8bcff5cfc9a9cd06f25bea26e4b65d98",
+        "parents": [
+          "70c28a8bfadf56423ca8d2ae85064e4385203c94"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "89dd55286d5ab4d263c2d2d1dd9eae18a465dd935e0c61487da405e441a1506c",
+        "tree": "2d517e70072b061e632d281b416bf45e3a0a493d"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 685,
+        "git": "d01a3f96092af602e6d346c10990604b909ea85f",
+        "parents": [
+          "e6bb8f8cbbd905982f5a40daedbc065af57fcf85"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "71a58fd02d79ee70d8c36a625abca1fc5713174c8a2af317f64b6bbeb181c8fc",
+        "tree": "76dc0e9e2409123dfa572aada0f2baa9a2fe0f91"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1663,
+        "git": "297506ce74a0f50328c86e2aecc8f7379d247b98",
+        "parents": [
+          "d01a3f96092af602e6d346c10990604b909ea85f"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "044733a3c94564c075b3999cc2371af420456c20d960a17dca0ab048e206329e",
+        "tree": "6c491007d10e08453bfc497b05209e7bba76fb95"
+      },
+      {
+        "boundary": true,
+        "commit_bytes": 1222,
+        "git": "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136",
+        "parents": [
+          "1a02ed1ff46c72da96295c8903b6e49ff4f133a3",
+          "edbc64b10b21c038d135772fcaa269a99fe3fc22"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "b080cba54d2759a3d8852a81192f3361f27fc17018455e6c60fa3246e4037517",
+        "tree": "aafc34b83f1f904ed25a791fa03e9a48f68baa35"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 542,
+        "git": "c07e40307499f1e9b0c4db0b6c6f3c935b672265",
+        "parents": [
+          "297506ce74a0f50328c86e2aecc8f7379d247b98"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "79877283a091e3d1f135b3713d5e9b7ddd450dcb756ca3d3c1cc97e1473f11c2",
+        "tree": "30700bf076bc19fb3397135efe229cb89352004a"
+      },
+      {
+        "boundary": true,
+        "commit_bytes": 1230,
+        "git": "1a02ed1ff46c72da96295c8903b6e49ff4f133a3",
+        "parents": [
+          "cda404e4a4539d8f4e5cf1a92f20859a522a56b7",
+          "3c46539433171fda1b5a704a85b996a70d736d13"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "4c95fa9747c6e230c73cdd8f770f9894e575a221eda6db6af1be3dbe01deee84",
+        "tree": "442e83b64aae3cbcfc4ad236d521ce69746726f3"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1342,
+        "git": "0b4264583ec2d75a42f8c69fd8a78d65771d97bd",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "79504637d8a1ceeb8ad294ee2adae3f6941942567141a470a6df396f658c7a63",
+        "tree": "ce9bd2b35c8cd9f923e297e7003297ff8a42c6f5"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 290,
+        "git": "08db375f2e230e42144668ec3ef1cb605ce92c35",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "7b46ed5c9440c2a695bc7c77660176308fb13eecbb770c08a80bc5b7e985733c",
+        "tree": "af92adb2a3bc350a4eb0813b4be0abe8dc5dadad"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 298,
+        "git": "c8a790ac10d1faa1a4be5a4a92915f1f0f4a7151",
+        "parents": [
+          "d0a30c7f740104db3bda281c0626182eabaecd16"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "365b3f82097499a6199de7987d5ae84698cc6f2f5a10fa52277970adae3f78a4",
+        "tree": "fb90e8ac7a20c6d2b495d71c8b709fa248808d1c"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1186,
+        "git": "fca1660ae52018ba3edb030aa26734537e6bfeec",
+        "parents": [
+          "03f6678ada429928ba391acc577856877df9c81c",
+          "5f15e0836b468be5b19e65e260ea18b92866ad56"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "a818943cf8fce1bfd513aad4639e9fd891e0f11e550236bf7931b05c45d46f8a",
+        "tree": "592d264ba9326e47949fac5fb88ca38088fc4395"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 291,
+        "git": "e2b95b45547d636e7a21bfdcec96be42b7d5bf7d",
+        "parents": [
+          "db9f2f28dc0c83f914dee97ebcc59846a3a0309c"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "e2621b50e546f857af42a19704d8008f8efdcad4f36babb3c843707b0849c09e",
+        "tree": "8aec843bd9668949262ac3c19fd3d0b3c7272517"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 301,
+        "git": "5f1ac46f5a66f1d6ed2a5d4e4dbcc27dade07235",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "1d531ff1fc1ed07bc94f5f2b9a8358e5a8918a722caf562c9746448584f95516",
+        "tree": "1163fbecf819009a6a77bfb5e0d8b96b025d9be5"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1180,
+        "git": "a5ac6dc556f6c7f3f0627f5bc608b87ec6ffba11",
+        "parents": [
+          "955201ac62ca628d390a843bb17a0ae5873a0fc2",
+          "dc27d2f0955dd720d2391ac64293601b969524c3"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "af9cf19400662b32d548e8c67c51009c829156f3abb32f8057edb1c0a50a72b5",
+        "tree": "b7ce6d99dcb5640835f78a9dc126fae224c94c00"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 728,
+        "git": "70c28a8bfadf56423ca8d2ae85064e4385203c94",
+        "parents": [
+          "61ec50527dec17e1c6baa65e1f4c18f0968e6654"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "10c9d60de40ead6d3ebeefd014d1d5dfd729ac223790c02daf6fdf3c21218c10",
+        "tree": "b94acc75fa1a1cee2b6ac3b009617bc363fe4a61"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 299,
+        "git": "e6bb8f8cbbd905982f5a40daedbc065af57fcf85",
+        "parents": [
+          "37d4d44234bf1f34fa33cd20325d338f30648d2c"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "81fe69bdd62e3c81bd91ff1960700abbdf2c479e8ab1b6c0ea3caae3042b40ef",
+        "tree": "4f5067568bb6cf6534f5cbf8cf3900f582f2ce29"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1182,
+        "git": "03f6678ada429928ba391acc577856877df9c81c",
+        "parents": [
+          "e7f6a37f2b94196448064d20f6607d6c87ea9cc7",
+          "a45b4cbb5b72378b0b225ad3a67553b0ebed0499"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "40498c04c6a6ee5e97a18e47f7dcb35093d51246fa59dabb59400059b18ae07c",
+        "tree": "a6ac86394cff9e27bcf1f261890d276508536b24"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 291,
+        "git": "db9f2f28dc0c83f914dee97ebcc59846a3a0309c",
+        "parents": [
+          "a75a824b11eb9a077ada8e4b5794749fc0af5913"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "f2ad0a76f15d430a109d8c5f16c48e7ac34628bd5db3c5a09b88044b85228999",
+        "tree": "98a12b3850fcab6f6a083d51fc0527aa97266d9a"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1201,
+        "git": "955201ac62ca628d390a843bb17a0ae5873a0fc2",
+        "parents": [
+          "966f759db4c358bbf74003316f17287e9ba90a92",
+          "3b1fbb3d3aa96a914f66c03ebfaa277dce770478"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "9da5b30192b5740ce567e10d8ee3795bf4cca181b5bcfbbc0966baefe30ab991",
+        "tree": "5cb11c6c5c312ceb275d3aa7b63837ac5d67c0c6"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 2037,
+        "git": "61ec50527dec17e1c6baa65e1f4c18f0968e6654",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "1d2879a51e57421fb5c1cb254162aa8d30813e52de14283548abfed905d9cc9a",
+        "tree": "fb91593a4602922e582d9cfc8968fa820c33af0a"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 490,
+        "git": "37d4d44234bf1f34fa33cd20325d338f30648d2c",
+        "parents": [
+          "c82ae5f3113d0f742f18ba1e4f7b4145145edb5e"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "e4b0017bd753f540df7fa8554e55b92e6b2c48d2d5ff84ee432ec425773e54ec",
+        "tree": "5c1f07dc58f8cbcc69d2522643425a980bb997f9"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1189,
+        "git": "e7f6a37f2b94196448064d20f6607d6c87ea9cc7",
+        "parents": [
+          "4e3a4ebe47167afe1dbfa634ae0c0b787f70d369",
+          "d0a30c7f740104db3bda281c0626182eabaecd16"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "d35fc81cac4ed7446426ea58845bdf62a819bf95993942681e13e4babea56952",
+        "tree": "b0f6d94da9c077bc25b463173f313147a85d4de7"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 284,
+        "git": "a75a824b11eb9a077ada8e4b5794749fc0af5913",
+        "parents": [
+          "667ecf0dfb911bb7632960d75997293aabc5f7ca"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "4ef4040769a4465d17bff90a3d1cc41fa65d72056ef5f9ee73872c2119af8c11",
+        "tree": "7e34022bb487ab137e14b2806b85c9fa31adc094"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1188,
+        "git": "966f759db4c358bbf74003316f17287e9ba90a92",
+        "parents": [
+          "984ff4e3ed2907dc1c7838468e41d9d96124be52",
+          "1d0eae0baab28546974e4b48eee52149f2efcdb4"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "46c65265653fb259e48c6b99cff32c0a704c751dff65629acd08b9c10c1ad450",
+        "tree": "bb1c93e4d28fb234e70c4cf885cb80f24189a7d0"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1214,
+        "git": "3b1fbb3d3aa96a914f66c03ebfaa277dce770478",
+        "parents": [
+          "28949675776fa58d7659ed1f338cf267ff6a557f"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "8b5374b65d4aa7a1a15f0c61ee2b8f25532365b701ac8c398c299dbb5f9aa6b4",
+        "tree": "c9d98f7a3b22c7feda556f0ca4884e6ee9c8be1a"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 276,
+        "git": "c82ae5f3113d0f742f18ba1e4f7b4145145edb5e",
+        "parents": [
+          "c2419e1520b8640f178328758ee15feb4e196e3c"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "d36388826f3c14738b3b80edb7a2c2ec4edec202b89146eaa20a7f36ce0f1e33",
+        "tree": "c729a3e40a77699526bcddc709d60c935465aa2e"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1188,
+        "git": "4e3a4ebe47167afe1dbfa634ae0c0b787f70d369",
+        "parents": [
+          "b68df2be71ab7ab38369afffd4aa1792280ebe2a",
+          "4a951ad5178adeeb2916ec7345e654b27cc34e20"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "17568c3176fe415b36099ce207332a812fb013da4e7939f60177861d62615022",
+        "tree": "e46d7bfce60f90d15418ce3f9471127ea048e761"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 272,
+        "git": "667ecf0dfb911bb7632960d75997293aabc5f7ca",
+        "parents": [
+          "2f708ccfd817ebec1508dcbc62cde144b55b2cda"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "a37ebe7904bab48f40b4b7a4bfdd2051753ee806b548d9c2f9c6db23beaa5651",
+        "tree": "a95221e676a3ee914fbb4b248b5574dd01036f9b"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1201,
+        "git": "984ff4e3ed2907dc1c7838468e41d9d96124be52",
+        "parents": [
+          "5a1e32e913c17edcb46b8c982cbdf9b67fe28a1e",
+          "078cc73cea0390d6f1ca7cc6ac3ea26c0ad16f0c"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "ae5718a0f5297fc86edabbcb7da9da9269fb28c2f80d59fab71033847752b112",
+        "tree": "d586959dc6512c7bb9bbae528f84e40e34f95a59"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1238,
+        "git": "1d0eae0baab28546974e4b48eee52149f2efcdb4",
+        "parents": [
+          "2df2fd3ceaa76b1aeec7ca5a155eda9c8d99ae89"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "9fef67adda1f51f810ee8086b02ec65c5134f157def96b83eb1a214a6dbec822",
+        "tree": "0c2ad2c7c224c825e05d345ba29d4c9a1f4b47cc"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 291,
+        "git": "28949675776fa58d7659ed1f338cf267ff6a557f",
+        "parents": [
+          "d924f1ee5fe41b21393bee1af7f8f8023cd470ff"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "f50ab2cfec26f23d87d00b589a0823a4469dba9dc481be9fe65c6902e1156a4d",
+        "tree": "47b63c126a28468f0fe1407c928e9de2651690d4"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 721,
+        "git": "c2419e1520b8640f178328758ee15feb4e196e3c",
+        "parents": [
+          "2c87eaaed7658297b0983e52feeb06134be4ecfc"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "c370109b4305f6cf08ae90cc8749e7e90f2437edff726cdfab8467d03a5ba615",
+        "tree": "c25200272cf42c2320956afb7c1327a1aaf21646"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1191,
+        "git": "b68df2be71ab7ab38369afffd4aa1792280ebe2a",
+        "parents": [
+          "1689b46bea818342e340fc9f3902e4813d7112df",
+          "cf59127867f84696a6e74d60925211cfb97962d7"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "34994c93fcc64a1c553962ce05c6168d6a2223663cbf34c1217b3bb31c1ce1c6",
+        "tree": "29743b954f558abbd2b87bbccf27eb2acd0b2dfb"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 282,
+        "git": "2f708ccfd817ebec1508dcbc62cde144b55b2cda",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "1027d0e0f030071a1ca01478f773a16394e91593274e4628711ddbe4eae6072f",
+        "tree": "65e0f5abf3e04e9d7a533fc498c945fb67d38019"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1186,
+        "git": "5a1e32e913c17edcb46b8c982cbdf9b67fe28a1e",
+        "parents": [
+          "0c3f9727f9cf1e97933dce9b0c219b48ea4065c2",
+          "5f15e0836b468be5b19e65e260ea18b92866ad56"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "4b94e44fbf710dd26b6fbef263663ae87154782316d6a6044abe758df580f4c4",
+        "tree": "ed021cbf1ad42626ced12fad814ae66a219f5dac"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1170,
+        "git": "2df2fd3ceaa76b1aeec7ca5a155eda9c8d99ae89",
+        "parents": [
+          "bc55bbd1caf4228f8a85e8f475842f6e39cba724"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "df29c1dbb7b79f56105ba0713663247c447ea1ff0964a4725457a6b9cf230c1a",
+        "tree": "22fe5404ec51a71bb06d19a4e0752c902f2987ac"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1094,
+        "git": "d924f1ee5fe41b21393bee1af7f8f8023cd470ff",
+        "parents": [
+          "1242cac33dfb2038715a25b81fd01904fe1a5570"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "2321428eb2a4393710b11c477ea8262afae34eac617fcb6eed307a26b7e9158e",
+        "tree": "897c79e0c10d66a0cd6c01b539784ee1a6bd9d74"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 323,
+        "git": "2c87eaaed7658297b0983e52feeb06134be4ecfc",
+        "parents": [
+          "59e7da22844d3ec01bf3e8d361d8fdd8d0701953"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "f84be97d790248b22a25cf8cfca0271efd6623d2f781e8c28212448df854f5d8",
+        "tree": "bc127a4b7d988ebacec63c121b488909bec4646d"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1195,
+        "git": "1689b46bea818342e340fc9f3902e4813d7112df",
+        "parents": [
+          "0c0141a0028e815f1b1537b7176632e9d2700d12",
+          "1242cac33dfb2038715a25b81fd01904fe1a5570"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "ed06c0841526f2f4e1c264ce2684379ebac5cb2649039edfb01844bf56f45c67",
+        "tree": "ce74248204793595c711e14851bffebeac51a539"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1182,
+        "git": "0c3f9727f9cf1e97933dce9b0c219b48ea4065c2",
+        "parents": [
+          "66dcce8f9329f72cfc9ba246b91ada98817c0340",
+          "a45b4cbb5b72378b0b225ad3a67553b0ebed0499"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "efe507695557a338f5332096dec13244ea77bc9343b4fa76c634d20261190bdb",
+        "tree": "dbb7b19b68cefcbeba69bcfda13cce38488c2f8f"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1354,
+        "git": "bc55bbd1caf4228f8a85e8f475842f6e39cba724",
+        "parents": [
+          "44541e818577aa6b12a689d807e483031648251a"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "66a830cdb39990143c0cc9e1b245faade87766b669d516d0f34dc372698dc477",
+        "tree": "22f06e2b802526718bb28625856a579f17d0f392"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 605,
+        "git": "1242cac33dfb2038715a25b81fd01904fe1a5570",
+        "parents": [
+          "6ede40d9915af821666c474ed22bf5947b68af09"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "e7b6ed0675d6cfa648bc93d186a9eb03cfe4f28aa8834a51b9692d478c518086",
+        "tree": "946d37590b4074fae815407be0e2fde572a40c4b"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1002,
+        "git": "59e7da22844d3ec01bf3e8d361d8fdd8d0701953",
+        "parents": [
+          "c2f30d7b37993e6b64911247b50f8b016dea5185"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "b9e55367dbe217d7988f4b1f9952eec13daccb4c9fe24e9c834d96e3297db73e",
+        "tree": "43592763e39bf75a3952ed0edffff85ae1b68906"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1201,
+        "git": "0c0141a0028e815f1b1537b7176632e9d2700d12",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136",
+          "f8291a96e1a2cd99a7de8c406aa055cd3d662b25"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "96e385bb30711f60434e5528f3f2cdfd2af65e7ffb451d74eea566bb428d00a6",
+        "tree": "ba883ef53a96935058533eef3e704672b0ad290a"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1189,
+        "git": "66dcce8f9329f72cfc9ba246b91ada98817c0340",
+        "parents": [
+          "05cd65964d284ce49ecd9d2ef760ec729d94d802",
+          "d0a30c7f740104db3bda281c0626182eabaecd16"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "253c5ed66a90dd20cf604669fae3df2f7c25572d852dca5c5561fcb268e12222",
+        "tree": "681b6c69412e943584b4f0275992de75aa5b504f"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1163,
+        "git": "44541e818577aa6b12a689d807e483031648251a",
+        "parents": [
+          "43db5d405569ec35a43c418db1d543240677416e"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "c9ddad29d12ef339324c66aaa476f31167d6a260aa9cd912a17c61a1c741b177",
+        "tree": "4a12fe8bf9b1c4a0abdc46829e466125ede2eb98"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 416,
+        "git": "6ede40d9915af821666c474ed22bf5947b68af09",
+        "parents": [
+          "5ea2073384e0d84cc04b2ed28eded179b8eccf3e"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "bba4bb65b98f4f6d70c459c6221141621b2b5a2511a5fad8714087b79e6dff81",
+        "tree": "d6577bec47b4a44909d13ef6eb3da2841c1e73f6"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1281,
+        "git": "c2f30d7b37993e6b64911247b50f8b016dea5185",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "b71ed0ce4c6d7d9423b9fe8551e55072d22bc7c67d2323de8b3b9e83be04062a",
+        "tree": "20011ff2915d1b409165342049d837d358bd5f80"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1188,
+        "git": "05cd65964d284ce49ecd9d2ef760ec729d94d802",
+        "parents": [
+          "9fd8212f58f691f6952330ed9b48fd2f3f1ce546",
+          "4a951ad5178adeeb2916ec7345e654b27cc34e20"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "3528b692461b694b8b4a45bc5bd322f39339b3e5ff1fbe9dc9a0bad2bd866cee",
+        "tree": "6c38665c5c0d64240f2c823f59c42bec160bb7a5"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1165,
+        "git": "43db5d405569ec35a43c418db1d543240677416e",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "3017588fb47b853cf11e43f015dd4398d788349189211e5fd9515cf027a41df4",
+        "tree": "a73c9d080656b038af9ed74045a43cd58d40d142"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 281,
+        "git": "5ea2073384e0d84cc04b2ed28eded179b8eccf3e",
+        "parents": [
+          "32741ce741a6916f9efc6b36ad47fedd384d7f20"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "215f041566584570a4920eb3ef36baa01facab0ad8faf4601133015a3c1ae350",
+        "tree": "5b9d3b61fae32a752c6a53a81068347e18fb59a5"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1191,
+        "git": "9fd8212f58f691f6952330ed9b48fd2f3f1ce546",
+        "parents": [
+          "70265038f325ea9dab773e6bafb551c475b18e07",
+          "cf59127867f84696a6e74d60925211cfb97962d7"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "6df0320d024704dcd9fef8779110cccf93d494d4ce6ec849c94a71357755b1ac",
+        "tree": "e293e12003ca245dae8ea7fd5c82c52253ecb97b"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 459,
+        "git": "32741ce741a6916f9efc6b36ad47fedd384d7f20",
+        "parents": [
+          "903ca2321dd00cfe3a73be2f63cc4006bd330515"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "b3bd1926133e3eac5c5d04ae48485684ac2bc56b6bc06a12f16f2903758be60d",
+        "tree": "c15c7c910c20463a3aa9dad2b7fa4974098c039b"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1195,
+        "git": "70265038f325ea9dab773e6bafb551c475b18e07",
+        "parents": [
+          "de7af9ac16b730435bedc19d9317f584916b2608",
+          "e536c9931f2a1840d5effa05f837580b14f46443"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "59b7e41d323fae9c31e41fa217f3680499a58c26ee64e3800b48172083e97e62",
+        "tree": "923593b401b2e01132f5050edf87ca4ff7ffde20"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 289,
+        "git": "903ca2321dd00cfe3a73be2f63cc4006bd330515",
+        "parents": [
+          "b276f847f7807895e9203cf344bf0642bd6f77c0"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "04ff1531fffa440ddcc3c38af3ed0d2b42c2f550c11f6b0298b41290d0a7b628",
+        "tree": "ba06117a10d7274797ac265d5a0478c6b338f701"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 1201,
+        "git": "de7af9ac16b730435bedc19d9317f584916b2608",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136",
+          "f8291a96e1a2cd99a7de8c406aa055cd3d662b25"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "cf55be65715cf9b57c1700fdaa9f50fc917b9b93c0bddd517b7b23a24bb8bc3d",
+        "tree": "ba883ef53a96935058533eef3e704672b0ad290a"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 950,
+        "git": "e536c9931f2a1840d5effa05f837580b14f46443",
+        "parents": [
+          "1242cac33dfb2038715a25b81fd01904fe1a5570"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "8c4ba30c60576320d2cd8de55825334b3cb9302368532e4b9b30089cdd8f31de",
+        "tree": "fd78d07966b447e06bf83a7db47e810f9492541d"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 375,
+        "git": "b276f847f7807895e9203cf344bf0642bd6f77c0",
+        "parents": [
+          "02def0bce0cdfc2552a211704aa5c04ce8880539"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "771f2c85b0f2d2f9b454bb00c803990ce16e3cee1c3efc12ae170f48c9783be7",
+        "tree": "eef29731b2bd257b3c486970840f6705f19d2cba"
+      },
+      {
+        "boundary": false,
+        "commit_bytes": 961,
+        "git": "02def0bce0cdfc2552a211704aa5c04ce8880539",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "read_scope": "commit metadata; messages not exported",
+        "sha256": "cb648e56a55a0c4c9f72c327f305eb64e793fb4857df58be9d949de77dff1eb5",
+        "tree": "4c1f421f861e048ef6f258a566ef14cf3dbf464d"
+      },
+      {
+        "git": "8fd1c42782164d52f1ea05990122277b0cd541f5",
+        "tree": "f501dc8d4baef0a8c1b246fca1a998afe287d7af",
+        "parents": [
+          "f5165ef3959e5be39bd6aee8af217c2c14ff3adf",
+          "da6112257f9bb7e54a53694608b1402062140475"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "f5165ef3959e5be39bd6aee8af217c2c14ff3adf",
+        "tree": "a174f65b745b44fca2d39dfe489e371be0a276b2",
+        "parents": [
+          "7997bba357b77b9eb7f61e2e3006ab2ec8c41990",
+          "486154327a08f10835cfe1cf31d5f150dedf6810"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "7997bba357b77b9eb7f61e2e3006ab2ec8c41990",
+        "tree": "3b1c736b803dadd6bf1db12c912463d6e5c796ce",
+        "parents": [
+          "583804aec02fbe7f6e774e103d823a7034b843d2",
+          "fdc6c2ff58a1785b3ec4595c68ec1fa156cdc154"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "583804aec02fbe7f6e774e103d823a7034b843d2",
+        "tree": "b3fa226945ec3dc6981bbf63d2358976962b3c17",
+        "parents": [
+          "8ba9821e8bd319d54ad4d6966f11dda2f0242235",
+          "b4a3728b38bb6b19b3e120d52da635db3ddb7fb7"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "8ba9821e8bd319d54ad4d6966f11dda2f0242235",
+        "tree": "96341b40ee100997e7a1e06da79545ce22cbe353",
+        "parents": [
+          "cf79f037076ce6b0f4c470b28de5b0404a6d9a56",
+          "9889c0306ec809d21f8f0c5d54f093f4db88a183"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "cf79f037076ce6b0f4c470b28de5b0404a6d9a56",
+        "tree": "5ed27b9572d6192124b182badda17ddc8779acc8",
+        "parents": [
+          "fae14df7e2f0e779f0a5d958c1f2163e07a3b84f",
+          "0e99bf3c90991830f19a5c9d64824f4138d8c438"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "fae14df7e2f0e779f0a5d958c1f2163e07a3b84f",
+        "tree": "0f3a3c39d8ea04c31b86f5a9a08939f07fb55fa7",
+        "parents": [
+          "205c69397cf85581c9b24ab5f890992a3e1a9b6a",
+          "631c5986e51e0a1342a254b8c427f82d4eb1d0d6"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "205c69397cf85581c9b24ab5f890992a3e1a9b6a",
+        "tree": "c1a1b3ad3307cff700bbbf2494fae5839b44836d",
+        "parents": [
+          "b2a35ef8c482cfbc1d18eb17c66cb598a5826d4c",
+          "92e103be730b49c8b1b6d7b8c348ddf85a1d7fb5"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "b2a35ef8c482cfbc1d18eb17c66cb598a5826d4c",
+        "tree": "2baaa1bfc0601d58cfaa3b38067953e07785d084",
+        "parents": [
+          "7ea9faf61c1167f51ac357c431ae4ab6d4792721",
+          "d01a3f96092af602e6d346c10990604b909ea85f"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "7ea9faf61c1167f51ac357c431ae4ab6d4792721",
+        "tree": "2c90ec43bd882feeef9da1b3b2770aeb292ffd0e",
+        "parents": [
+          "09e9a48225385b15d585c964bdb45732148b6931",
+          "13828beeff4d590cbe5c7761252b37fb991f9545"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "09e9a48225385b15d585c964bdb45732148b6931",
+        "tree": "a3c2275914413334ab46e2f890dc10a8b180e265",
+        "parents": [
+          "ed2df2412f7187f2f4c66437b284083413473142",
+          "431faea32a73942411cc48314df74082dd33e6df"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "ed2df2412f7187f2f4c66437b284083413473142",
+        "tree": "0366f623cd192b5208de3dc8a0f148db94467b1b",
+        "parents": [
+          "1b06101356830e6bf4d697cce8999cdd342a2628",
+          "f3dbddbb4d383e447d94c71af85c737df936b440"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "1b06101356830e6bf4d697cce8999cdd342a2628",
+        "tree": "e80a46843ce6499210de5e04b2c50025d6a3f7a8",
+        "parents": [
+          "7b4795f032259c95504471a0fdf62cdcc59a4807",
+          "b8da8adb28d71c8fbb6307395876313a782277de"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "7b4795f032259c95504471a0fdf62cdcc59a4807",
+        "tree": "cdb8e172390a49e82a1b5c54406d562ad3281247",
+        "parents": [
+          "5f004134e3b9a3e549c9327197a43105e03a1287",
+          "3b1801bd52b4dee4684fd7de799d31b129301fc2"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "5f004134e3b9a3e549c9327197a43105e03a1287",
+        "tree": "742e31c42777bcba2e6c17925e4ebe83ae63fa60",
+        "parents": [
+          "7686cf69490f8fc79fa7aa6bffd31058c2ebaa15",
+          "cb54fbfea0a6fd0a36e27ff96599ce2ed7dde833"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "7686cf69490f8fc79fa7aa6bffd31058c2ebaa15",
+        "tree": "9c478bdecd59e514e79b9e04f71f7a517971acf3",
+        "parents": [
+          "e0be5cd4ede62642bf783aba4f17be20d7a8002e",
+          "b97435e693f91174782c5e40af73412ccb838701"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "e0be5cd4ede62642bf783aba4f17be20d7a8002e",
+        "tree": "bf388e7db88be47c3e5f94ae7047c0843a802a5d",
+        "parents": [
+          "8188774b569e7b014630ebcc962cdb29a1d71bf9",
+          "c82ae5f3113d0f742f18ba1e4f7b4145145edb5e"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "8188774b569e7b014630ebcc962cdb29a1d71bf9",
+        "tree": "528c91199c9dddd2af9f77167f96f3b4d47d1df3",
+        "parents": [
+          "97514e9d9d3469b7a733388e9b01c43aa8527f00",
+          "17643a4b6514f1f8ee96933dd48068456c2ce9cc"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "97514e9d9d3469b7a733388e9b01c43aa8527f00",
+        "tree": "e6bb439629912ad3caaba63b8cd9596a7c91ee18",
+        "parents": [
+          "2c8f1704ce7e599cb1a802bdd9150c1332a0fc16",
+          "514546be9e19816f469b62c37005c9cb7743a3d8"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "2c8f1704ce7e599cb1a802bdd9150c1332a0fc16",
+        "tree": "c1da12623ddb6dc62ab0260e00eac16fd417353e",
+        "parents": [
+          "c4e70f408e982c7e6c26da20b28d637f46b67112",
+          "54826c0df9f5f6bdd4deeb9eb201112f30f03682"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "c4e70f408e982c7e6c26da20b28d637f46b67112",
+        "tree": "41f90413f64c87197d296d4fa60af17296321e37",
+        "parents": [
+          "de8c4dffe39d41852d58724796bec2570ad6ceae",
+          "b61c8b2c6e0f89b9f8fb484231a6c0ded5fa30b4"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "de8c4dffe39d41852d58724796bec2570ad6ceae",
+        "tree": "0bda5736f128534625e33bb3a02e0179afb45412",
+        "parents": [
+          "a26e53b31831b5d7ef7a08ad725d7a87ef8bdf79",
+          "c2f30d7b37993e6b64911247b50f8b016dea5185"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "a26e53b31831b5d7ef7a08ad725d7a87ef8bdf79",
+        "tree": "982bed61b398e468cf284a18f31af3a1bd8dbc2f",
+        "parents": [
+          "b2a7512c399a0a8dfd15c02762088650fe2615cd",
+          "9d818cd1a06cb3dd19f032903efb3e286c0aa09f"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "b2a7512c399a0a8dfd15c02762088650fe2615cd",
+        "tree": "14df6235c9602d24b54daca19e064131497e7e4e",
+        "parents": [
+          "85e6bd93162a58f0385439ae22875042ac4e49c8",
+          "827e2bdce769a8ff76a0a62cd4d9b7353c1f66e6"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "85e6bd93162a58f0385439ae22875042ac4e49c8",
+        "tree": "4918ddbb528f3101ad9f4a0abbaea15908aede35",
+        "parents": [
+          "1cdc4ee3c95721b2a4649f40498ad8b2a69dbf05",
+          "c5e7c88a9b34d7e4db2df4272c82f4417c92a966"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "1cdc4ee3c95721b2a4649f40498ad8b2a69dbf05",
+        "tree": "0388ccd8aa73f40a8224d3e0f63e30c294d91500",
+        "parents": [
+          "b26e712643966e3f9ae519702f9409112081a863",
+          "a90c4211ec803bc4b1ff6f26df2ff5b5504cdcb7"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "b26e712643966e3f9ae519702f9409112081a863",
+        "tree": "775e2573c9a18ee1c22c0da2df6b1a8f1f748662",
+        "parents": [
+          "8174dd3d9c1614352dfc7d59dd2704ac991feb7d",
+          "4cadcd04c0504e7323f09a775c3e83afe2be7442"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "8174dd3d9c1614352dfc7d59dd2704ac991feb7d",
+        "tree": "b022433a3308f82fd709f68703bb0177c5ef5e2d",
+        "parents": [
+          "3823d15b03bf01433a24e40187f78f1fac73ed4e",
+          "2e880d8ad24a52f98ff3590d8529d68176c8d512"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "3823d15b03bf01433a24e40187f78f1fac73ed4e",
+        "tree": "6f79c473aace932ac18b29e2635a437e0d52b1f8",
+        "parents": [
+          "033413c9e81bb88ccb0387080fb4d31e6fb4623b",
+          "77723f594b25d97c80b435d7545385e3a26d7fd5"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "033413c9e81bb88ccb0387080fb4d31e6fb4623b",
+        "tree": "084e70c363c96fc3f90fed27812172cad3e7b672",
+        "parents": [
+          "a9218dbd5f7d1b1beb30926dd6d99b7d4ed2db71",
+          "e9ec5e3d8bcff5cfc9a9cd06f25bea26e4b65d98"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "a9218dbd5f7d1b1beb30926dd6d99b7d4ed2db71",
+        "tree": "37e45a7785ec6f5ed09671363f975a97ac08b7ef",
+        "parents": [
+          "60b3bb9fc1721727fab2d6aab68cad5eec6b432b",
+          "c50316c067a7625652393f0100ee77ce73d17e63"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "60b3bb9fc1721727fab2d6aab68cad5eec6b432b",
+        "tree": "124c4171f797d50560295813fdff7d01c3e89c8e",
+        "parents": [
+          "514c7e5c9271c9362bfa084b31e18b6b6367c8cb",
+          "9e9d57e66c9d8053be5b6326eb9a03afb76a4f89"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "514c7e5c9271c9362bfa084b31e18b6b6367c8cb",
+        "tree": "c52b2dad9d25b5283b156c30d198a13ea4fd1927",
+        "parents": [
+          "3086ca9f1753d205f6e28af20e3f982860c4c0c3",
+          "dc27d2f0955dd720d2391ac64293601b969524c3"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "3086ca9f1753d205f6e28af20e3f982860c4c0c3",
+        "tree": "6e0af4cce2793916a91dbdf8b4ee6c255bca64cc",
+        "parents": [
+          "0b02415686565f0401e47f78e418c7b13b1691ce",
+          "e9cd394e7057a87de7562bfd5392f605935df793"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "0b02415686565f0401e47f78e418c7b13b1691ce",
+        "tree": "9071d6f854df65f1a73e29e97a02777f8706143f",
+        "parents": [
+          "789752f2b6f0a9497a20d85e4e4d3aa8d6360941",
+          "3bc4f9174ef222a7b115069f4b9d3c76274a2a63"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "789752f2b6f0a9497a20d85e4e4d3aa8d6360941",
+        "tree": "c95b4486b00a8418b4982782b4cbaed0378eb796",
+        "parents": [
+          "a6073b365807ac7088595cf804be65648b7748b8",
+          "078cc73cea0390d6f1ca7cc6ac3ea26c0ad16f0c"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "a6073b365807ac7088595cf804be65648b7748b8",
+        "tree": "b879f40d4d8baf7568fe5ae43c6286166843e609",
+        "parents": [
+          "366fe946f00f6900682208ee29e848e7c39577c2",
+          "5f15e0836b468be5b19e65e260ea18b92866ad56"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "366fe946f00f6900682208ee29e848e7c39577c2",
+        "tree": "12ccac4339a12d76aa017042d63eb2f114714e4b",
+        "parents": [
+          "01289acb1b4465774f6277642cfbff62eeb7ced6",
+          "a45b4cbb5b72378b0b225ad3a67553b0ebed0499"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "01289acb1b4465774f6277642cfbff62eeb7ced6",
+        "tree": "5e0f2ea31c4fb73e7efd494f551bba75a62eb373",
+        "parents": [
+          "ba7008d1b8a2e57d860f4845ed23b0a225a19f2e",
+          "d0a30c7f740104db3bda281c0626182eabaecd16"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "ba7008d1b8a2e57d860f4845ed23b0a225a19f2e",
+        "tree": "b117112a0e58979f0aeb65a354d9236fad962239",
+        "parents": [
+          "d3e6865e78dfb7d2a8ef9a08e44ed11bd57a78b0",
+          "4a951ad5178adeeb2916ec7345e654b27cc34e20"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "d3e6865e78dfb7d2a8ef9a08e44ed11bd57a78b0",
+        "tree": "60898507a8c7e18c29eeb1a11c482935c4cc0bea",
+        "parents": [
+          "531e5e60e26abee265617d854596d60f6dcb97de",
+          "cf59127867f84696a6e74d60925211cfb97962d7"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "531e5e60e26abee265617d854596d60f6dcb97de",
+        "tree": "191bac4f81cb0da283d031678ae309c007029e10",
+        "parents": [
+          "f08dc9c5f704a2963debcee60854d0631d3b722c",
+          "4581ecd443643222e201ef274535a86c15b87e98"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "f08dc9c5f704a2963debcee60854d0631d3b722c",
+        "tree": "ba883ef53a96935058533eef3e704672b0ad290a",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136",
+          "f8291a96e1a2cd99a7de8c406aa055cd3d662b25"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "c72e3f0fc33695b0d695e12409910dbcf7cb882a",
+        "tree": "a73d2e5c4792719f3405acea59d50b1ea96e8417",
+        "parents": [
+          "9889c0306ec809d21f8f0c5d54f093f4db88a183"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "5e7f8d5a3be8de9b365f2dcab58f0dc30da0bbc0",
+        "tree": "2526d483023c448060e9390116a1d575468b6ed3",
+        "parents": [
+          "41f5939b1d24f9537f35e4084214d06d8129568e"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "b8da8adb28d71c8fbb6307395876313a782277de",
+        "tree": "0106a8138cbc8e5146dc4c8dd223d52eb22383a0",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "9889c0306ec809d21f8f0c5d54f093f4db88a183",
+        "tree": "12d3a44c78cb473ce3aa0caa41143eee59a91119",
+        "parents": [
+          "da067edea4aa050261c1baed918f1291ec0a9ac9"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "41f5939b1d24f9537f35e4084214d06d8129568e",
+        "tree": "a3a860a1cc6ae81d2e442f755b9c3ee72aa1c424",
+        "parents": [
+          "dce8cda4a792b2395ea13528d64d63cb0b27d47a"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "dce8cda4a792b2395ea13528d64d63cb0b27d47a",
+        "tree": "b3995ffc1e301475a3071a9d993fe6523e293f55",
+        "parents": [
+          "13828beeff4d590cbe5c7761252b37fb991f9545"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "da067edea4aa050261c1baed918f1291ec0a9ac9",
+        "tree": "fc206cf2a4139869fb7773fa7014ad25964a26c1",
+        "parents": [
+          "54826c0df9f5f6bdd4deeb9eb201112f30f03682"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "54826c0df9f5f6bdd4deeb9eb201112f30f03682",
+        "tree": "1b103c1e0eba233469afb612068df54b91b38d26",
+        "parents": [
+          "101b48200e5522a7669fb324ee61f5635c93e7c9"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "13828beeff4d590cbe5c7761252b37fb991f9545",
+        "tree": "5fc49603ac5b5c6a21fac56b1ba1812d42ae6a7c",
+        "parents": [
+          "17643a4b6514f1f8ee96933dd48068456c2ce9cc"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "17643a4b6514f1f8ee96933dd48068456c2ce9cc",
+        "tree": "5f3846d4f793f106b2817f56d75d954ec54dae12",
+        "parents": [
+          "77723f594b25d97c80b435d7545385e3a26d7fd5"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "77723f594b25d97c80b435d7545385e3a26d7fd5",
+        "tree": "b88b3265a978d8d423a4f9ac36d997d77d20c7f1",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "fdc6c2ff58a1785b3ec4595c68ec1fa156cdc154",
+        "tree": "eb00219d1a00232a6c7ca80e7d364ab5017a0478",
+        "parents": [
+          "0f3fe201cce86c20ea62e38a0d00bf254beb8e75"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "b4a3728b38bb6b19b3e120d52da635db3ddb7fb7",
+        "tree": "da95a9bbbf91aecc2cb96186e300dfc46c607a16",
+        "parents": [
+          "3b1801bd52b4dee4684fd7de799d31b129301fc2"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "0e99bf3c90991830f19a5c9d64824f4138d8c438",
+        "tree": "15db0c7b3c9e0f111a129d3a8b8d49062180c6ee",
+        "parents": [
+          "631c5986e51e0a1342a254b8c427f82d4eb1d0d6"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "631c5986e51e0a1342a254b8c427f82d4eb1d0d6",
+        "tree": "dc65f7859c2ac1ed37dfe8e2a703fb9d71c2e79b",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "92e103be730b49c8b1b6d7b8c348ddf85a1d7fb5",
+        "tree": "3476560465aa9518d25b6b7f43b35e7a338cb263",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "431faea32a73942411cc48314df74082dd33e6df",
+        "tree": "40b02cc88d2de8d49d5b8a3a695d15f1649ebf67",
+        "parents": [
+          "827e2bdce769a8ff76a0a62cd4d9b7353c1f66e6"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "f3dbddbb4d383e447d94c71af85c737df936b440",
+        "tree": "e27d04c02fd7244420578c5edcc146e345d50ea2",
+        "parents": [
+          "c5e7c88a9b34d7e4db2df4272c82f4417c92a966"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "3b1801bd52b4dee4684fd7de799d31b129301fc2",
+        "tree": "845b04dedf8ce1328bfba1acb80c22a5bb0259f8",
+        "parents": [
+          "b61c8b2c6e0f89b9f8fb484231a6c0ded5fa30b4"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "cb54fbfea0a6fd0a36e27ff96599ce2ed7dde833",
+        "tree": "fa896bdde61227f315166a5fe9079b4e9afd72a3",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "b97435e693f91174782c5e40af73412ccb838701",
+        "tree": "c05785f395bf510557ec3b6f05bb584f67be21e3",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "514546be9e19816f469b62c37005c9cb7743a3d8",
+        "tree": "e927ccaedf4c35d3132348054745bdd35dda93e2",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "b61c8b2c6e0f89b9f8fb484231a6c0ded5fa30b4",
+        "tree": "09ec5242248fd7f79d2e8ccf12ec75f4cd7393dd",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "9d818cd1a06cb3dd19f032903efb3e286c0aa09f",
+        "tree": "7115a90b7aad493c558356b53b086db65d235f7d",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "827e2bdce769a8ff76a0a62cd4d9b7353c1f66e6",
+        "tree": "6b95f13de2536393bc06aba6d4b6f9f4e2cc4d77",
+        "parents": [
+          "3bc4f9174ef222a7b115069f4b9d3c76274a2a63"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "c5e7c88a9b34d7e4db2df4272c82f4417c92a966",
+        "tree": "6641abbad656740ad2c6e4d7f9f7dc31a5182bea",
+        "parents": [
+          "4581ecd443643222e201ef274535a86c15b87e98"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "a90c4211ec803bc4b1ff6f26df2ff5b5504cdcb7",
+        "tree": "e02097be2436a952292c7a0df0fa82e264b0150e",
+        "parents": [
+          "74aa3389e3453ed1ac74125081cc2c207ceb6962"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "4cadcd04c0504e7323f09a775c3e83afe2be7442",
+        "tree": "d5987b9ae3b4a46e0bbe0f60293eab8cf4ba0229",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "2e880d8ad24a52f98ff3590d8529d68176c8d512",
+        "tree": "61bad47cc794a860c423aaa9a644bec3397bcc30",
+        "parents": [
+          "07274415058e5d5cd0e8bb136335954703858952"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "c50316c067a7625652393f0100ee77ce73d17e63",
+        "tree": "8f60d0dc249b75aa55e80c68a45d5e6bee12c11f",
+        "parents": [
+          "eb6e3095a5b877ebe2f7a2c7a80ecdba8431880e"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "e9cd394e7057a87de7562bfd5392f605935df793",
+        "tree": "1a809597cb8714ecb324a219d5fc873ed1167368",
+        "parents": [
+          "3b1fbb3d3aa96a914f66c03ebfaa277dce770478"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "3bc4f9174ef222a7b115069f4b9d3c76274a2a63",
+        "tree": "a7e4c2f715524b50c517901dcafbc3c8db7f53f4",
+        "parents": [
+          "5b67211d816f1ea79c023ba9a8bbe6445dd5d5a1"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "4581ecd443643222e201ef274535a86c15b87e98",
+        "tree": "f4d00eea1cf922da30eca99b268fae03a64f35f4",
+        "parents": [
+          "e536c9931f2a1840d5effa05f837580b14f46443"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "101b48200e5522a7669fb324ee61f5635c93e7c9",
+        "tree": "ab4fdf79a940c02518b68b503ebde270686f8af1",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "0f3fe201cce86c20ea62e38a0d00bf254beb8e75",
+        "tree": "09f1a4f9d532c7d2148dce11cadcdc2a3c390d12",
+        "parents": [
+          "9a3e86aacb53a1f66c81188bc68339962cf0c02b"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "869aaf6878de875f3712ba9bd9fd424027b47182",
+        "tree": "d0e52b6a7fe2cf64328991c125c61c2a616155c3",
+        "parents": [
+          "b248153769565db9d1af9667f30b5c60678968f0",
+          "5f15e0836b468be5b19e65e260ea18b92866ad56"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "74aa3389e3453ed1ac74125081cc2c207ceb6962",
+        "tree": "77bec1109ca6ee51c4756eb22e755c6b7056c815",
+        "parents": [
+          "5f15e0836b468be5b19e65e260ea18b92866ad56"
+        ],
+        "source": "GitHub git/commits GET; raw held by skija_pr_metadata"
+      },
+      {
+        "git": "486154327a08f10835cfe1cf31d5f150dedf6810",
+        "tree": "43a5068daaa98dd4bb1dc4f8dc8cbf18c9a47815",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      },
+      {
+        "git": "da6112257f9bb7e54a53694608b1402062140475",
+        "tree": "c7df019bd3cf546e7b2228f7bc55151a09539a6b",
+        "parents": [
+          "486154327a08f10835cfe1cf31d5f150dedf6810"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      },
+      {
+        "git": "66bcb2fd274af7fd951568ed24c7aa39ad2995d4",
+        "tree": "f0b747462277a791a6a58e563282b187ea21f320",
+        "parents": [
+          "da6112257f9bb7e54a53694608b1402062140475"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      },
+      {
+        "git": "0a3f707053f65be4eb089c773821bf3218ca36e7",
+        "tree": "7bddad0e5875e6260896a8d06646ae6803a3c15f",
+        "parents": [
+          "66bcb2fd274af7fd951568ed24c7aa39ad2995d4"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      },
+      {
+        "git": "685f8afeb1059254308755320a908ffb14cb5d59",
+        "tree": "0b648be345320061b140a31d910067abbb18dd63",
+        "parents": [
+          "0a3f707053f65be4eb089c773821bf3218ca36e7"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      },
+      {
+        "git": "b309047ff6e93f689aa000c67c1738fcb846869a",
+        "tree": "9eb8107288b92494a010ca422bb70deb6107d16b",
+        "parents": [
+          "685f8afeb1059254308755320a908ffb14cb5d59"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      },
+      {
+        "git": "5f7d6d0397e1d56ea70546a9dd74b3a999d2fe51",
+        "tree": "a3102c9813a6089ebed960fbeb81345f8a8027ea",
+        "parents": [
+          "b309047ff6e93f689aa000c67c1738fcb846869a"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      },
+      {
+        "git": "cc1398b289e1e2ffddd8e0a5918e5d176764fc75",
+        "tree": "1bcc6ea5f891c8da4afd9d668791570e991cac36",
+        "parents": [
+          "5f7d6d0397e1d56ea70546a9dd74b3a999d2fe51"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      },
+      {
+        "git": "a9d20ce24b87579a5f95842effce742808918204",
+        "tree": "039b923787b77c159d0a60ca167ae180b9d030ad",
+        "parents": [
+          "cc1398b289e1e2ffddd8e0a5918e5d176764fc75"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      },
+      {
+        "git": "c5fe2ae774afcf92eb7ac21d1b9b8e31b542f094",
+        "tree": "2bb400ec8b29bfe0e53949625e3cb6a31a32c7a2",
+        "parents": [
+          "a9d20ce24b87579a5f95842effce742808918204"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      },
+      {
+        "git": "9f679636c73f15092b3eb4ed81738c3d08457fb4",
+        "tree": "4da8b483ed5d399004046245185d2dd8f5ab3432",
+        "parents": [
+          "c5fe2ae774afcf92eb7ac21d1b9b8e31b542f094"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      },
+      {
+        "git": "5b0e85e7c12b6ac9bcc1d745d3440197dd3def00",
+        "tree": "d23568537dbd61c983210a2cf47948bc4eab0e3f",
+        "parents": [
+          "9f679636c73f15092b3eb4ed81738c3d08457fb4"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      },
+      {
+        "git": "26171150cee002cfdd8c5e853de996aab2c6e2af",
+        "tree": "d1181b7c346c57a111d31639d6128ffdea65aa22",
+        "parents": [
+          "5b0e85e7c12b6ac9bcc1d745d3440197dd3def00"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      },
+      {
+        "git": "c387710a3febc651f914750e3171e867f1574753",
+        "tree": "4483740b700f7be6451b977075b72a901820ba16",
+        "parents": [
+          "bb66a8c16642a4e898dbc5fc7c3af0d5ed572136"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      },
+      {
+        "git": "e867f7a310f6a1fbbe55a47aa84f73f3d12b8bd9",
+        "tree": "a387ae9ed6ddc40b132dbec082ce20b67a155ac1",
+        "parents": [
+          "c387710a3febc651f914750e3171e867f1574753"
+        ],
+        "source": "prior16-GET child session; immutable commit metadata cached"
+      }
+    ],
+    "joined_unique_nodes": 164,
+    "remote_new_unique_commit_GETs": 80,
+    "remote_budget": 80,
+    "remote_duplicates": 0,
+    "remote_errors": 0,
+    "remote_raw_response_custody": {
+      "agent": "/root/large_ledger_recipe_inventory/skija_pr_metadata",
+      "saved_before_interpretation": true,
+      "total_JSON_bytes": 190135,
+      "max_response_bytes": 3570,
+      "prior_session_GETs": 16,
+      "current_child_session_total_GETs": 96
+    },
+    "local_commit_metadata": {
+      "nodes": 69,
+      "raw_commit_bytes": 60880,
+      "each_native_commit_Git_verified": true,
+      "evidence": {
+        "schema": "M3_LOCAL_DAG_EXPORT/1",
+        "body_bytes": 23586,
+        "body_sha256": "ecc90a72d9ea3d5cb34111bba5f1525b154caa2a0289ef8a673c8ff2acd2fb4f",
+        "body_git": "65dd80ea90632178f8772ec54de49ab245b02385",
+        "parts": 2,
+        "nodes": 69,
+        "missing": 0,
+        "pending": 0,
+        "total_commit_bytes": 60880
+      }
+    },
+    "final_missing_local_probe": {
+      "schema": "M3_LOCAL_ANCESTRY_COMMIT_METADATA/1",
+      "missing": [
+        "9a3e86aacb53a1f66c81188bc68339962cf0c02b",
+        "5b67211d816f1ea79c023ba9a8bbe6445dd5d5a1",
+        "07274415058e5d5cd0e8bb136335954703858952",
+        "eb6e3095a5b877ebe2f7a2c7a80ecdba8431880e",
+        "b248153769565db9d1af9667f30b5c60678968f0"
+      ],
+      "evidence": {
+        "schema": "M3_LOCAL_DAG_EXPORT/1",
+        "body_bytes": 599,
+        "body_sha256": "9e23d73f02f3b76998e7ebf03f7affb27f225ac7400103ff4e05d2c6380ed166",
+        "body_git": "ead574f03472cc3916d9f9a7847ea272a52e040a",
+        "parts": 1,
+        "nodes": 0,
+        "missing": 5,
+        "pending": 0,
+        "total_commit_bytes": 0
+      },
+      "session": 81327,
+      "exit_code": 0
+    },
+    "additional_read_lower_bound": 5,
+    "additional_read_caveat": "Four candidate side nodes plus one older2172 side node remain absent locally; their parents could extend the frontier. No further GET is authorized or underway."
+  },
+  "update_atoms": [
+    {
+      "pr": 2204,
+      "current": "c72e3f0fc33695b0d695e12409910dbcf7cb882a",
+      "path_to_aggregate_reached_head": [
+        "c72e3f0fc33695b0d695e12409910dbcf7cb882a",
+        "9889c0306ec809d21f8f0c5d54f093f4db88a183"
+      ],
+      "further_known_path": [
+        "9889c0306ec809d21f8f0c5d54f093f4db88a183",
+        "da067edea4aa050261c1baed918f1291ec0a9ac9",
+        "54826c0df9f5f6bdd4deeb9eb201112f30f03682"
+      ],
+      "subject_scope": "Additional genuine low-heap OOME long-map regression test commit; metadata is not test execution."
+    },
+    {
+      "pr": 2188,
+      "current": "5e7f8d5a3be8de9b365f2dcab58f0dc30da0bbc0",
+      "path_to_aggregate_reached_head": [
+        "5e7f8d5a3be8de9b365f2dcab58f0dc30da0bbc0",
+        "41f5939b1d24f9537f35e4084214d06d8129568e",
+        "dce8cda4a792b2395ea13528d64d63cb0b27d47a",
+        "13828beeff4d590cbe5c7761252b37fb991f9545"
+      ]
+    },
+    {
+      "pr": 2197,
+      "status": "ACTUAL_ANCESTOR_RETAINED_CONTENT_SELECTION_NOT_EVALUATED",
+      "retain_node": "1b06101356830e6bf4d697cce8999cdd342a2628",
+      "ordered_parents": [
+        "7b4795f032259c95504471a0fdf62cdcc59a4807",
+        "b8da8adb28d71c8fbb6307395876313a782277de"
+      ],
+      "tree": "e80a46843ce6499210de5e04b2c50025d6a3f7a8"
+    },
+    {
+      "pr": 2178,
+      "correction": "Current head431fae commit metadata names JUnit5.10.2/Platform1.10.2. The earlier body-based old-runner-family conflict is not established for the current head; no source/runtime verification was performed."
+    },
+    {
+      "pr": 2169,
+      "correction": "Current f3dbdd commit metadata names DECORATOR_FILLv1.4 with22 owned decorators; the older seven-decorator title/body count is stale. Metadata only."
+    }
+  ],
+  "local_worktree": {
+    "path": "H:/m3-scratch/worktrees/m3jdk21-standalone",
+    "Git_dir": "H:/m3-scratch/repos/M3jdk21-release.git/worktrees/m3jdk21-standalone",
+    "common_Git_dir": "H:/m3-scratch/repos/M3jdk21-release.git",
+    "origin": "https://github.com/hsoliwal/M3jdk21.git",
+    "branch": "m3/jdk-naming-apply-20261031",
+    "HEAD": "c07e40307499f1e9b0c4db0b6c6f3c935b672265",
+    "HEAD_tree": "30700bf076bc19fb3397135efe229cb89352004a",
+    "sole_parent": "297506ce74a0f50328c86e2aecc8f7379d247b98",
+    "remote_naming_ref_at_prior_read": "297506ce74a0f50328c86e2aecc8f7379d247b98",
+    "remote_c07_lookup_at_prior_read": "404_NOT_REMOTE_CUSTODY_PROOF",
+    "changed_committed_paths": [
+      {
+        "after_git": "ab700a73774a1bf06441eed7eb30529a2521bbe4",
+        "after_mode": "100644",
+        "before_git": "ebc2ae6a22eddefc58ef9fee9343fe8f738aea44",
+        "before_mode": "100644",
+        "path": "m3/tooling/jdk-naming/jdk_naming.py",
+        "status": "M"
+      },
+      {
+        "after_git": "969cd300885e10ac2b9aeda24c0eb9c84c913346",
+        "after_mode": "100644",
+        "before_git": "674f4716b075e7a3605091bc046ebea122b9ef6d",
+        "before_mode": "100644",
+        "path": "m3/tooling/jdk-naming/test_jdk_naming.py",
+        "status": "M"
+      }
+    ],
+    "untracked_scope": "m3/tooling/jdk-naming only",
+    "untracked_nonignored": [
+      {
+        "bytes": 4119,
+        "category": "configuration_or_documentation",
+        "mtime_ns": 1793436475034206200,
+        "path": "m3/tooling/jdk-naming/NAMING_RULES.tsv",
+        "type": "regular"
+      },
+      {
+        "bytes": 9254,
+        "category": "configuration_or_documentation",
+        "mtime_ns": 1793436436415684400,
+        "path": "m3/tooling/jdk-naming/NAMING_STANDARD.md",
+        "type": "regular"
+      },
+      {
+        "bytes": 6952,
+        "category": "configuration_or_documentation",
+        "mtime_ns": 1793436518068737800,
+        "path": "m3/tooling/jdk-naming/RECIPE_MEMORY.tsv",
+        "type": "regular"
+      },
+      {
+        "bytes": 28489,
+        "category": "generated_cache",
+        "mtime_ns": 1793436438402572500,
+        "path": "m3/tooling/jdk-naming/__pycache__/jdk_naming.cpython-312.pyc",
+        "type": "regular"
+      },
+      {
+        "bytes": 17101,
+        "category": "generated_cache",
+        "mtime_ns": 1793436990005917000,
+        "path": "m3/tooling/jdk-naming/__pycache__/reseal.cpython-312.pyc",
+        "type": "regular"
+      },
+      {
+        "bytes": 2108,
+        "category": "configuration_or_documentation",
+        "mtime_ns": 1793434718535478800,
+        "path": "m3/tooling/jdk-naming/conformance/pom.xml",
+        "type": "regular"
+      },
+      {
+        "bytes": 2875,
+        "category": "production_source",
+        "mtime_ns": 1793437639091820800,
+        "path": "m3/tooling/jdk-naming/conformance/src/main/java/jdk/m3/tooling/naming/BlobReader.java",
+        "type": "regular"
+      },
+      {
+        "bytes": 5413,
+        "category": "production_source",
+        "mtime_ns": 1793434719354193400,
+        "path": "m3/tooling/jdk-naming/conformance/src/main/java/jdk/m3/tooling/naming/NamingRules.java",
+        "type": "regular"
+      },
+      {
+        "bytes": 8268,
+        "category": "production_source",
+        "mtime_ns": 1793437638266799600,
+        "path": "m3/tooling/jdk-naming/conformance/src/main/java/jdk/m3/tooling/naming/NamingScan.java",
+        "type": "regular"
+      },
+      {
+        "bytes": 9048,
+        "category": "test_source",
+        "mtime_ns": 1793436434800375600,
+        "path": "m3/tooling/jdk-naming/conformance/src/test/java/jdk/m3/tooling/naming/JdkNamingConformanceTest.java",
+        "type": "regular"
+      },
+      {
+        "bytes": 9322,
+        "category": "production_source",
+        "mtime_ns": 1793436988883933200,
+        "path": "m3/tooling/jdk-naming/reseal.py",
+        "type": "regular"
+      },
+      {
+        "bytes": 4867,
+        "category": "test_source",
+        "mtime_ns": 1793434332525528600,
+        "path": "m3/tooling/jdk-naming/test_reseal.py",
+        "type": "regular"
+      }
+    ],
+    "untracked_regular_bytes": 107816,
+    "untracked_category_counts": {
+      "configuration_or_documentation": 4,
+      "production_source": 4,
+      "test_source": 2,
+      "generated_cache": 2
+    },
+    "existing_generated_cache_bytes": 45590,
+    "staged_diff_at_prior_read": "EMPTY",
+    "whole_worktree_clean_claim": false,
+    "working_jdk_naming": {
+      "git": "ac650da2b28633b199b322e4108fc7abd828bcca",
+      "bytes": 17453,
+      "sha256": "647d97b1a87d6b2ba412e4c9cad9fe0432b5fd9a04de87f917f969b260a283a9",
+      "index_git": "ab700a73774a1bf06441eed7eb30529a2521bbe4",
+      "state": "MODIFIED_TRACKED_OWNER; raw source export refused by original secret guard; no false-positive verdict",
+      "raw_body_in_this_record": false,
+      "import_or_execution": false
+    },
+    "reseal": {
+      "git_logical_only": "03c3a250204ddc8e40f701dd9b7736024e3e7a26",
+      "bytes": 9322,
+      "sha256": "6513f5b4909abe1c6eaf80ceee752de5a7ff3a2ba733501d2b44a7dd93a1b577",
+      "state": "UNTRACKED_NONIGNORED_EXISTING_SOURCE; NOT_EXECUTED",
+      "contract": "Reference resealer, not additive merge owner. Eight-round bound; ambiguous mappings excluded; composite digests not recomputed; ledger rebuilt; --ref can fast-import a commit/ref. Do not import or execute under this scope.",
+      "raw_body_in_this_record": false
+    },
+    "AGENTS": {
+      "Git": "ff4332c25fc0cd4528db1b331f16001f5c4cd5d0",
+      "bytes": 13043,
+      "sha256": "99ab2fc519aedb1c6d38e739c5c6df07dd1c816e2158cd87b132d1667001a143",
+      "working_path_absent_because": "TRACKED_SKIP_WORKTREE",
+      "source": "offline Git blob read at prior inventory",
+      "user_override": "Later explicit standalone and rename-and-keep contract overrides contradictory old Synexia-exclusive dependency instructions."
+    },
+    "native_metadata_evidence": {
+      "schema": "M3_COVERAGE_METADATA_EXPORT/1",
+      "body_bytes": 7761,
+      "body_sha256": "db724b1f4f96cf4c164095472577285302db5d29ba7c18bd4c2a987cf8caf1e8",
+      "body_git": "70c487b3684b1e930fdf2d52b93eacb3bafefbe5",
+      "parts": 1,
+      "changed_paths": 2,
+      "untracked": 12,
+      "local_commits_present": 16
+    },
+    "preservation": "No worktree/index/ref/cache changes, no filters, no fsmonitor, no lazy fetch; WIP and existing generated caches preserved."
+  },
+  "standalone_contract": {
+    "project_memory": {
+      "path": "C:/Users/hsoliwal/.claude/projects/e--ws2-com-synexia/memory/project-skija-absorb-m3jdk-20261031.md",
+      "bytes": 2435,
+      "sha256": "1d3a13982a6bf0a8916fe83bf6b2612313f009a5f4214d4c05ffac870adbd906"
+    },
+    "user_standalone_memory": {
+      "path": "C:/Users/hsoliwal/.claude/projects/e--ws2-com-synexia/memory/feedback-m3jdk21-standalone.md",
+      "bytes": 3332,
+      "sha256": "97f200916b26c8a7c3cd603f43f412666447540c35250e8761e783e15da64aa6"
+    },
+    "requirements": [
+      "M3jdk21 standalone build/test/CI/release/runtime; no required com.synexia checkout/artifacts/service/credentials.",
+      "Every dependency classified ABSORB, MOVE or RETIRE; retain unique source and775 renamed M3-owned legacy recipe files.",
+      "Closed unmerged2185/2186 remain provenance; do not reopen restore-from-seal dependency design.",
+      "Preserve public JDK APIs and user customJNI segmented arrays/index/order/offset/masks, M3LFU ownership/liveness and both Hunk APIs/fixtures."
+    ],
+    "closed_legacy_prs": [
+      {
+        "pr": 2185,
+        "head": "f4f38a638671c6872976acc14bbef2b663a2df60",
+        "closed_at": "2026-10-31T06:49:07Z",
+        "merged": false
+      },
+      {
+        "pr": 2186,
+        "head": "37e9e6837cbdeda279c0889e11f56025c69ce1d5",
+        "closed_at": "2026-10-31T06:49:04Z",
+        "merged": false
+      }
+    ],
+    "smartbuild2195": "Its inherited external-repository artifact dependency needs an exact ABSORB/MOVE/RETIRE resolution; do not silently discard its unique proposal or reinstall the reverse dependency."
+  },
+  "CI_metadata": {
+    "source": "Root-reported selected PR and CI metadata snapshot labelled09:52; no fresh CI reads in this graph phase",
+    "selected_open_drafts": [
+      2187,
+      2207,
+      2208,
+      2209,
+      2210
+    ],
+    "mergeable_true_but_state_blocked": [
+      2187,
+      2207,
+      2208,
+      2209,
+      2210
+    ],
+    "checks": {
+      "2187": {
+        "first_page_count": 100,
+        "total_reported": 193,
+        "pagination_complete": false,
+        "observed_failure_names": [
+          "jdk-backing",
+          "verify",
+          "recipe",
+          "module",
+          "require-merged-sources"
+        ]
+      },
+      "2207": {
+        "total": 12,
+        "success": 4,
+        "queued": 8
+      },
+      "2208": {
+        "total": 30,
+        "success": 4,
+        "skipped": 15,
+        "cancelled": 1,
+        "queued": 10
+      },
+      "2209": {
+        "total": 19,
+        "success": 3,
+        "skipped": 2,
+        "failure": 8,
+        "queued": 6,
+        "failed_named_categories": [
+          "jdk-backing",
+          "source-custody",
+          "FullM3File",
+          "recipe (two checks)",
+          "route-regressions",
+          "Jackson-source-runtime",
+          "public-names"
+        ]
+      },
+      "2210": {
+        "total": 6,
+        "success": 2,
+        "queued": 4
+      }
+    },
+    "policy": {
+      "master_protected": true,
+      "branch_protection_full_read": "403 Resource not accessible by integration",
+      "available_classic_contexts": [],
+      "available_classic_enforcement_level": "off",
+      "all_required_checks_or_review_rules": "UNDETERMINED",
+      "interpretation": "Observed failures/queued/skipped checks remain actual facts; required versus optional and whole qualification are not established."
+    }
+  },
+  "qualification_gaps": {
+    "historical_leaf1_receipt": {
+      "immutable_path": "m3/tooling/skija-absorb/leaf1/GATES.tsv",
+      "source_head": "da6112257f9bb7e54a53694608b1402062140475",
+      "bytes": 1507,
+      "sha256": "63f0c66ac770dae464bdcdeba9c7d8b1356c4c329d04619d8eee327eb599b218",
+      "git_logical": "746af3228da4aa4aaa22fa50f53617324fd7d012",
+      "recorded": "225 Java sources;0compileerrors; renamed API4622=4622;63module warnings; historical receipt only, not rerun."
+    },
+    "Skija_order": [
+      2207,
+      2208,
+      2210
+    ],
+    "native": "Native library/component/license/NOTICE/linking/export/loader/JNI ABI/GC/render/installed-image qualification remains unproved. Newer2210 body toolchain availability does not itself satisfy it.",
+    "source_superset": "Ancestry does not prove all current source changes are selected or compatible in the aggregate tree.",
+    "local_storage": "Last observed local free capacities all below8GiB reserve; no build/download/extraction/cache/output authorization.",
+    "whole_JDK_release_or_platform_PASS": false
+  },
+  "receiving_candidate_plan": {
+    "status": "SPECIFICATION_ONLY_NO_TREE_CREATED",
+    "start": "Pinned2187 candidate and master; preserve ancestry and cumulative content through explicit receiving comparisons.",
+    "steps": [
+      "Preserve localc07 and all modified/untracked WIP; separate existing generated caches before any future commit scope.",
+      "Close four candidate ancestry frontiers and older2172 frontier before negative/superseded claims.",
+      "Inventory unique tree contributions of older aggregates2172/2177/2182; preserve provenance and never overwrite current contents with a stale aggregate snapshot.",
+      "Include current2188 three-commit update and current2204 one-commit test update with exact receiving preimages and existing owner contracts.",
+      "Reconcile standalone2191/2192 and naming2201+c07, preserving renamed code; reseal only through its actual approved owner/ambiguity/composite contracts.",
+      "Preserve independent2209 two-commit recovery and Skija2207->2208->all11commits of2210; their CI/native holds remain.",
+      "Before mainline landing, prove actual cumulative tree content, exact required CI policy and applicable source/native/runtime contracts. No silent discard based on stale counters or retained labels."
+    ],
+    "runtime_or_generation": "None. Chrome built-in local unavailable means new source generation is held; no alternative provider."
+  },
+  "protection": {
+    "K_capacity_before_native_GetTempPathW": true,
+    "TEMP_TMP": "K:/codex-work/agent-temp",
+    "native_GetTempPathW": "K:\\codex-work\\agent-temp\\",
+    "K_free_bytes_at_new_metadata_sessions": 1369722880,
+    "Python": "-I -S -B",
+    "Git_env": {
+      "GIT_OPTIONAL_LOCKS": "0",
+      "GIT_NO_LAZY_FETCH": "1",
+      "GIT_LFS_SKIP_SMUDGE": "1"
+    },
+    "Git_no_lazy_fetch_flag": true,
+    "external_diff_textconv_filters_fsmonitor": false,
+    "Git_network_calls": 0,
+    "local_outputs": 0,
+    "source_bodies_in_record": 0,
+    "held_jdk_naming_source_exported": false,
+    "private_catalog_or_restricted_receipt_reads": 0,
+    "unrelated_process_stops": 0,
+    "collection_storage_redesign": 0
+  },
+  "scoped_nonclaims": [
+    "No native/build/compiler/JVM/test/recipe execution.",
+    "No source or global semantic approval, release PASS, source-superset PASS or actual PR merge.",
+    "No source/tree/commit/ref/PR/CI/local-file mutation; one unreferenced reviewed metadata blob only.",
+    "No change to separate com.synexia source/runtime/checkpoint work."
+  ],
+  "publication_guard": {
+    "owner": "Existing unchanged autoreview332047 +cpu_review10102",
+    "scope": "One complete added metadata JSON file only",
+    "source_max_bytes": 524288,
+    "patch_max_bytes": 1048576,
+    "receipt": "External frozen native CPU report and full raw blob readback are required before publication is reported."
+  },
+  "preparation_failures": [
+    {
+      "session_id": 11227,
+      "exit_code": 1,
+      "status": "CLOSED_BEFORE_CPU_IMPORT_OR_CHECKER_CALL",
+      "controller_bytes": 7168,
+      "controller_sha256": "a141208a79529d5727e6f2d3c644928e536b166b64383141b1bc8fa4b1ddcfc4",
+      "body_proposed_sha256": "f83ced7808ae6571a77c6861374b1a81603280cf736bd4075c585062df6a105a",
+      "CPU_calls": 0,
+      "source_runtime_or_JVM_calls": 0,
+      "reason": "Caller expected cpu_review SHA literal had65hex characters from duplicated8; not evidence of source drift.",
+      "wrong_literal": "d51b6cf4c03a5e9b7502ad3dc9e9f887b5820b6c1f1e82766702c95c86000e7aa",
+      "correct_source_read_pin": "d51b6cf4c03a5e9b7502ad3dc9e9f87b5820b6c1f1e82766702c95c86000e7aa",
+      "correction_scope": "Only this expected-hash literal; input metadata additionally records this failure before its first CPU review.",
+      "terminal": "Traceback (most recent call last):\r\n  File \"<string>\", line 1, in <module>\r\n  File \"<string>\", line 15, in <module>\r\n  File \"<M3_METADATA_ARTIFACT_GUARD>\", line 26, in <module>\r\nAssertionError: ('PROTECTED_CONTROL_DRIFT', 'C:/Users/hsoliwal/.codex/skills/autoreview/scripts/cpu_review.py')\r\n"
+    }
+  ]
+}
