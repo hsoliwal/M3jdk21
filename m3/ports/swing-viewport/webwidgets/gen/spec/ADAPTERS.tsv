@@ -1,0 +1,101 @@
+concept	toolkit	class	measure	create	style	fill	args
+virtual-list	nebula	org.eclipse.swt.widgets.List	LIST	control	SWT.V_SCROLL	strings	
+focus-trap	nebula	org.eclipse.swt.widgets.Composite	CHILDREN	control	SWT.NONE	tablist	
+search	nebula	org.eclipse.swt.widgets.Text	TEXT	control	SWT.SEARCH	lines	
+context-menu	nebula	org.eclipse.swt.widgets.Menu	PLANE	shell-child	SWT.POP_UP	menu	
+sheet-dialog	nebula	org.eclipse.swt.widgets.Shell	SURFACE	shell	SWT.SHEET	none	
+time-picker	nebula	org.eclipse.swt.widgets.DateTime	SURFACE	control	SWT.TIME	none	
+button	nebula	org.eclipse.swt.widgets.Button	SURFACE	control	SWT.PUSH	none	
+select	nebula	org.eclipse.swt.widgets.Combo	COMBO	control	SWT.DROP_DOWN	strings	
+layout-primitive	nebula	org.eclipse.swt.layout.GridLayout	CHILDREN	layout	SWT.NONE	children	
+progress	nebula	org.eclipse.swt.widgets.ProgressBar	RANGE	control	SWT.HORIZONTAL	range	
+text-input	nebula	org.eclipse.swt.widgets.Text	TEXT	control	SWT.SINGLE	lines	
+panel	nebula	org.eclipse.swt.widgets.Group	CHILDREN	control	SWT.NONE	children	
+slider	nebula	org.eclipse.swt.widgets.Scale	RANGE	control	SWT.HORIZONTAL	range	
+tabs	nebula	org.eclipse.swt.custom.CTabFolder	TABS	control	SWT.TOP	tabs	
+checkbox	nebula	org.eclipse.swt.widgets.Button	SURFACE	control	SWT.CHECK	none	
+dialog	nebula	org.eclipse.swt.widgets.Dialog	PLANE	dialog	SWT.NONE	none	
+list	nebula	org.eclipse.swt.widgets.List	LIST	control	SWT.V_SCROLL	strings	
+menu	nebula	org.eclipse.swt.widgets.Menu	PLANE	shell-child	SWT.POP_UP	menu	
+radio	nebula	org.eclipse.swt.widgets.Button	SURFACE	control	SWT.RADIO	none	
+divider	nebula	org.eclipse.swt.widgets.Label	SURFACE	control	SWT.SEPARATOR | SWT.HORIZONTAL	none	
+tooltip	nebula	org.eclipse.swt.widgets.ToolTip	PLANE	shell-child	SWT.NONE	none	
+accordion	nebula	org.eclipse.swt.widgets.ExpandBar	CHILDREN	control	SWT.V_SCROLL	expand	
+table	nebula	org.eclipse.swt.widgets.Table	TABLE	control	SWT.VIRTUAL | SWT.V_SCROLL	count	
+switch	nebula	org.eclipse.nebula.widgets.opal.switchbutton.SwitchButton	AUTO	reflect	SWT.NONE	none	
+image	nebula	org.eclipse.nebula.widgets.picture.PictureControl	AUTO	reflect	SWT.NONE	none	
+label	nebula	org.eclipse.swt.widgets.Label	SURFACE	control	SWT.NONE	none	
+number-input	nebula	org.eclipse.swt.widgets.Spinner	RANGE	control	SWT.NONE	range	
+text-area	nebula	org.eclipse.swt.widgets.Text	TEXT	control	SWT.MULTI | SWT.V_SCROLL	lines	
+toast	nebula	org.eclipse.nebula.widgets.opal.notifier.Notifier	PLANE	class	SWT.NONE	none	
+link	nebula	org.eclipse.swt.widgets.Link	SURFACE	control	SWT.NONE	none	
+tree	nebula	org.eclipse.swt.widgets.Tree	TREE	control	SWT.VIRTUAL | SWT.V_SCROLL	count	
+badge	nebula	org.eclipse.nebula.widgets.badgedlabel.BadgedLabel	AUTO	reflect	SWT.NONE	none	
+scroll	nebula	org.eclipse.swt.custom.ScrolledComposite	SCROLL	control	SWT.V_SCROLL	scrolled	
+toggle-button	nebula	org.eclipse.swt.widgets.Button	SURFACE	control	SWT.TOGGLE	none	
+chip	nebula	org.eclipse.nebula.widgets.chips.Chips	AUTO	reflect	SWT.NONE	none	
+toolbar	nebula	org.eclipse.swt.widgets.ToolBar	TOOLS	control	SWT.FLAT	tools	
+breadcrumb	nebula	org.eclipse.nebula.widgets.opal.breadcrumb.Breadcrumb	AUTO	reflect	SWT.NONE	none	
+date-picker	nebula	org.eclipse.swt.widgets.DateTime	SURFACE	control	SWT.DATE | SWT.DROP_DOWN	none	
+grid	nebula	org.eclipse.nebula.widgets.grid.Grid	AUTO	reflect	SWT.V_SCROLL	none	
+pagination	nebula	org.eclipse.nebula.widgets.pagination.table.PageableTable	AUTO	reflect	SWT.NONE	none	
+calendar	nebula	org.eclipse.nebula.widgets.datechooser.DateChooser	AUTO	reflect	SWT.NONE	none	
+heading	nebula	org.eclipse.swt.widgets.Label	SURFACE	control	SWT.NONE	none	
+transition-anim	nebula	org.eclipse.nebula.cwt.animation.AnimationRunner	PLANE	class	SWT.NONE	none	
+carousel	nebula	org.eclipse.nebula.widgets.carousel.Carousel	AUTO	reflect	SWT.NONE	none	
+chart	nebula	org.eclipse.nebula.visualization.xygraph.figures.XYGraph	PLANE	class	SWT.NONE	none	
+toggle-group	nebula	org.eclipse.nebula.widgets.radiogroup.RadioGroup	AUTO	reflect	SWT.NONE	none	
+splitter	nebula	org.eclipse.swt.custom.SashForm	CHILDREN	control	SWT.HORIZONTAL	children	
+stepper	nebula	org.eclipse.nebula.widgets.stepbar.Stepbar	AUTO	reflect	SWT.NONE	none	
+color-picker	nebula	org.eclipse.swt.widgets.ColorDialog	PLANE	shell-child	SWT.NONE	none	
+config-provider	nebula	org.eclipse.swt.widgets.Display	PLANE	display	SWT.NONE	none	
+rich-text-editor	nebula	org.eclipse.swt.custom.StyledText	STYLED	control	SWT.MULTI | SWT.V_SCROLL	lines	
+rating	nebula	org.eclipse.nebula.widgets.opal.starrating.StarRating	AUTO	reflect	SWT.NONE	none	
+led-gauge	nebula	org.eclipse.nebula.widgets.led.LED	AUTO	reflect	SWT.NONE	none	
+timeline	nebula	org.eclipse.nebula.widgets.timeline.TimelineComposite	AUTO	reflect	SWT.NONE	none	
+password	nebula	org.eclipse.swt.widgets.Text	TEXT	control	SWT.SINGLE | SWT.PASSWORD	lines	
+tray-status	nebula	org.eclipse.swt.widgets.Tray	PLANE	tray	SWT.NONE	none	
+web-view	nebula	org.eclipse.swt.browser.Browser	SURFACE	control	SWT.NONE	none	
+carousel-tiles	nebula	org.eclipse.nebula.widgets.tiles.Tiles	AUTO	reflect	SWT.NONE	none	
+map	nebula	org.eclipse.nebula.widgets.geomap.GeoMap	AUTO	reflect	SWT.NONE	none	
+split-button	nebula	org.eclipse.nebula.widgets.splitbutton.SplitButton	AUTO	reflect	SWT.NONE	none	
+gallery	nebula	org.eclipse.nebula.widgets.gallery.Gallery	AUTO	reflect	SWT.V_SCROLL	none	
+segmented-bar	nebula	org.eclipse.nebula.widgets.segmentedbar.SegmentedBar	AUTO	reflect	SWT.NONE	none	
+treemap	nebula	org.eclipse.nebula.widgets.treemapper.TreeMapper	AUTO	reflect	SWT.NONE	none	
+gantt	nebula	org.eclipse.nebula.widgets.ganttchart.GanttChart	AUTO	reflect	SWT.NONE	none	
+virtual-list	swing	com.m3.swing.viewport.M3VirtualListModel	LIST	virtual-list	0	none	
+focus-trap	swing	java.awt.FocusTraversalPolicy	CHILDREN	focus-policy	0	children	
+context-menu	swing	javax.swing.JPopupMenu	CHILDREN	component	0	menu	
+button	swing	javax.swing.JButton	SURFACE	component	0	none	
+select	swing	javax.swing.JComboBox	COMBO	component	0	strings	<String>
+layout-primitive	swing	java.awt.GridBagLayout	CHILDREN	layout	0	children	
+progress	swing	javax.swing.JProgressBar	RANGE	component	0	range	
+text-input	swing	javax.swing.JTextField	TEXT	component	0	lines	
+panel	swing	javax.swing.JPanel	CHILDREN	component	0	children	
+slider	swing	javax.swing.JSlider	RANGE	component	0	range	
+tabs	swing	javax.swing.JTabbedPane	TABS	component	0	tabs	
+checkbox	swing	javax.swing.JCheckBox	SURFACE	component	0	none	
+dialog	swing	javax.swing.JDialog	PLANE	root-pane	0	none	
+list	swing	javax.swing.JList	LIST	component	0	strings	<String>
+menu	swing	javax.swing.JMenu	SURFACE	component	0	none	
+radio	swing	javax.swing.JRadioButton	SURFACE	component	0	none	
+divider	swing	javax.swing.JSeparator	SURFACE	component	0	none	
+popover	swing	javax.swing.JPopupMenu	CHILDREN	component	0	menu	
+tooltip	swing	javax.swing.JToolTip	SURFACE	component	0	none	
+table	swing	javax.swing.JTable	TABLE	component	0	count	
+image	swing	javax.swing.JLabel	SURFACE	component	0	none	
+label	swing	javax.swing.JLabel	SURFACE	component	0	none	
+number-input	swing	javax.swing.JSpinner	RANGE	component	0	range	
+text-area	swing	javax.swing.JTextArea	TEXT	component	0	lines	
+tree	swing	javax.swing.JTree	TREE	component	0	count	
+scroll	swing	javax.swing.JScrollPane	SCROLL	component	0	scrolled	
+toggle-button	swing	javax.swing.JToggleButton	SURFACE	component	0	none	
+toolbar	swing	javax.swing.JToolBar	CHILDREN	component	0	children	
+grid	swing	javax.swing.JTable	TABLE	component	0	count	
+heading	swing	javax.swing.JLabel	SURFACE	component	0	none	
+splitter	swing	javax.swing.JSplitPane	CHILDREN	component	0	none	
+color-picker	swing	javax.swing.JColorChooser	CHILDREN	component	0	none	
+config-provider	swing	javax.swing.UIManager	PLANE	host	0	none	
+rich-text-editor	swing	javax.swing.JEditorPane	TEXT	component	0	lines	
+password	swing	javax.swing.JPasswordField	TEXT	component	0	lines	
+tray-status	swing	java.awt.SystemTray	PLANE	host	0	none	

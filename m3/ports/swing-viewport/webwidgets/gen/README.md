@@ -40,9 +40,26 @@ java M3WebGen.java <gen> <CONCEPTS.tsv> <nebula widgets/m3web | -> <M3jdk21 m3/p
 
 See `spec/FAMILIES.tsv` (pattern, aspects, behaviour atom, members, SwingX pattern reference, web kit shapes).
 
+## Viewport adapters of existing widgets (phase A, pattern M3P-ADAPTER-1)
+
+Every widget a toolkit already ships for a concept (`spec/ADAPTERS.tsv`: 64 SWT/Nebula, 36 Swing/AWT rows) gets an
+opt-in `M3ViewportAdapter` on the same shared core as the web widgets (`M3WebViewportCore`: SWT PR #295 facades /
+M3JDK Swing port core). Atoms: measure (`M3ViewportMeasure`, a closed set of kinds in `M3ViewportKind`:
+TABLE TREE LIST TEXT STYLED SCROLL COMBO RANGE TABS TOOLS CHILDREN AUTO SURFACE PLANE, `spec/ADAPTER_KINDS.tsv`),
+resident window (R), logical extent and thumb (G), damage-only redraw of one item (D), plane moves that damage only
+old and new bounds (P). Provided aspects = the family's declared aspects that the kind can provide; the rest are
+`n/a` in `spec/VIEWPORT_MATRIX.tsv`. Off until `attach()`: an unattached or detached adapter installs no listener and
+never redraws (off == stock, checked against a fresh stock instance). Factories: `M3<Family>Viewports.adapt<Concept>`;
+tests: `M3<Concept>Viewport_Test` (Nebula, hidden desktop) and `M3<Concept>ViewportTest` (Swing, headless EDT).
+Nebula widgets of other bundles are created by name; without the bundle on the test class path their test prints
+NOT_RUN and `M3ViewportFactories_Test` binds their factory on stand-in hosts. `tools/viewport_matrix.sh` writes the
+matrix rows from the specs and the test logs.
+
 ## Gates
 
-- Swing: `run-tests.sh compile` (javac --release 21 -Xlint:all -Werror) then the JUnit console on `com.m3.swing.web`.
+- Swing (self-contained: M3jdk21 files and the JDK only): `run-tests.sh test --select-package com.m3.swing.web` (javac
+  --release 21 -Xlint:all -Werror; JUnit Platform/Jupiter compiled from `m3/vendor/third_party`, run by
+  `com.m3.swing.testkit.M3JUnitLauncher`). The generator, its templates and these tools are not part of that build.
 - Nebula: `tools/gate_nebula.sh` (javac --release 21 -Xlint:all -Werror against an SWT jar, JUnit 4 headless model tests).
 - Coverage (target 99% line and branch on the generated code of each side): `tools/coverage_swing.sh` (headless) and
   `tools/coverage_nebula.sh` (model and SWT canvas tests in one JVM on the hidden test desktop through
