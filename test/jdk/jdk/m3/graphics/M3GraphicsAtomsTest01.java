@@ -9,8 +9,9 @@
  *          jdk.m3.graphics atoms against the donor (HumbleUI Skija 0.143.18, Types 0.2.0), one test per
  *          atom, 17 atoms: skija.AnimationDisposalMode .. skija.EncodedOrigin. The oracle jars come from
  *          -Dm3.graphics.oracle=<skija-shared jar><path separator><types jar>; without it the tests abort.
+ *          Identity hashes are pinned (-XX:hashCode=2), so every hashCode compares exactly.
  * @modules jdk.m3.graphics
- * @run junit M3GraphicsAtomsTest01
+ * @run junit/othervm -XX:+UnlockExperimentalVMOptions -XX:hashCode=2 M3GraphicsAtomsTest01
  */
 
 import org.junit.jupiter.api.Test;

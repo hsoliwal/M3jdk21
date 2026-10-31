@@ -4,10 +4,7 @@
  */
 
 import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.Proxy;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,39 +20,32 @@ import java.util.stream.Stream;
 
 /**
  * Structural comparison of an M3 value with the oracle value of the same call. Primitives compare exactly (float and
- * double by their Float.equals/Double.equals bits: -0.0 differs from 0.0, every NaN is one value); enums by name and
- * ordinal; arrays, lists, sets and maps element by element; donor objects by their public fields, their public no-arg
- * getters (get/is/has) and, when the donor declares them, hashCode and toString, recursively to depth
- * {@link #MAX_DEPTH}; other JDK objects by equals when the class declares it, else by toString when declared. Types
- * compare through the rename (M3 class name = renamed donor class name). An M3 string equals the oracle string when
- * it does after removing the rename's {@code M3} prefix before an upper-case identifier (toString carries the class
- * name); such matches are counted ({@link #normalizedAndReset()}) and reported per atom. Two rules keep the
- * comparison independent of the run: a hashCode is compared only when it is reproducible
- * ({@link M3GraphicsAtomsHashes}: an enum or identity-hashed part makes it differ between any two objects), and a URL
- * compares by presence, since it points into the side's own class-loader layout; both are counted per atom.
+ * double by their raw bits: -0.0 differs from 0.0 and NaN payloads count); enums by name and ordinal; arrays, lists,
+ * sets and maps element by element; donor objects as M3GraphicsAtomsObjects describes; other JDK objects by equals
+ * when the class declares it, else by toString when declared; the same object on both sides (a shared JDK argument) is
+ * equal; two test proxies of the same interface are the same receiver. Types compare through the rename (M3 class
+ * name = renamed donor class name). An M3 string equals the oracle string when it does after removing the rename's
+ * {@code M3} prefix before an upper-case identifier (toString carries the class name); such matches are counted
+ * ({@link #normalizedAndReset()}). Throwables compare by class and normalized message along their causes
+ * (M3GraphicsAtomsMessages). A hashCode compares exactly when identity hashes are pinned or the value has no
+ * identity-hashed part (M3GraphicsAtomsHashes), and a URL compares by presence, since it points into the side's own
+ * class-loader layout; both are counted per atom.
  */
 final class M3GraphicsAtomsCompare {
     /** A call result: a value, or the throwable of the call. */
     record Result(Object value, Throwable thrown) {}
 
-    private static final int MAX_DEPTH = 3;
     private static final int MAX_SHOWN = 160;
     private static final Pattern RENAMED = Pattern.compile("(?<![\\w$])M3(?=[A-Z])");
-    private static final Pattern GETTER = Pattern.compile("(get|is|has)[A-Z_].*");
     private static final String EQUALS = "equals";
-    private static final String HASH_CODE = "hashCode";
     private static final String TO_STRING = "toString";
     private static final String EMPTY = "";
-    private static final String DOT = ".";
-    private static final String CALL = "()";
     private static final String OPEN = "[";
     private static final String CLOSE = "]";
     private static final String SIZE = ".size";
-    private static final String KEY = ".key";
     private static final String COLON = ": M3 ";
     private static final String VERSUS = " / oracle ";
     private static final String ELLIPSIS = "...";
-    private static final String MISSING = ": member missing on the M3 side: ";
     private static final Optional<String> SAME = Optional.empty();
     private static final AtomicInteger NORMALIZED = new AtomicInteger();
     private static final AtomicInteger ENVIRONMENT = new AtomicInteger();
@@ -67,18 +57,22 @@ final class M3GraphicsAtomsCompare {
         return diff(m3, oracle, 0, path);
     }
 
-    /** The first difference between two call results (values, or throwables compared by type). */
+    /** The first difference between two call results (values, or throwables by class and message). */
     static Optional<String> outcomes(String path, Result m3, Result oracle) {
         return outcomes(m3, oracle, 0, path);
     }
 
-    /** True when an M3 class is the renamed oracle class (arrays by component; hidden classes match each other). */
+    /** True when an M3 class is the renamed oracle class (arrays by component; hidden classes and proxies by kind). */
     static boolean sameType(Class<?> m3, Class<?> oracle) {
         if (m3.isArray() || oracle.isArray()) {
             return m3.isArray() && oracle.isArray() && sameType(m3.getComponentType(), oracle.getComponentType());
         }
         if (m3.isHidden() || oracle.isHidden()) {
             return m3.isHidden() && oracle.isHidden();
+        }
+        if (Proxy.isProxyClass(m3) || Proxy.isProxyClass(oracle)) {
+            return Proxy.isProxyClass(m3) && Proxy.isProxyClass(oracle) && m3.getInterfaces().length == 1
+                    && oracle.getInterfaces().length == 1 && sameType(m3.getInterfaces()[0], oracle.getInterfaces()[0]);
         }
         String o = oracle.getName();
         return m3.getName().equals(M3GraphicsAtomsOracle.isDonor(o) ? M3GraphicsAtomsOracle.m3Name(o) : o);
@@ -87,6 +81,11 @@ final class M3GraphicsAtomsCompare {
     /** The number of string matches that needed the rename normalization since the last call. */
     static int normalizedAndReset() {
         return NORMALIZED.getAndSet(0);
+    }
+
+    /** The number of comparisons settled by the environment rule (a URL compares by presence) since the last call. */
+    static int environmentAndReset() {
+        return ENVIRONMENT.getAndSet(0);
     }
 
     /** A short printable form of a value for mismatch messages. */
@@ -98,9 +97,13 @@ final class M3GraphicsAtomsCompare {
         return s.length() > MAX_SHOWN ? s.substring(0, MAX_SHOWN) + ELLIPSIS : s;
     }
 
-    private static Optional<String> diff(Object m, Object o, int depth, String path) {
+    /** The first difference at a depth of the structural comparison. */
+    static Optional<String> diff(Object m, Object o, int depth, String path) {
+        if (m == o) {
+            return SAME;
+        }
         if (m == null || o == null) {
-            return m == o ? SAME : differ(path, m, o);
+            return differ(path, m, o);
         }
         if (!sameType(m.getClass(), o.getClass())) {
             return differ(path, m.getClass().getName(), o.getClass().getName());
@@ -110,10 +113,10 @@ final class M3GraphicsAtomsCompare {
 
     private static Optional<String> values(Object m, Object o, int depth, String path) {
         if (m instanceof Float f) {
-            return check(Float.floatToIntBits(f) == Float.floatToIntBits((Float) o), path, m, o);
+            return check(Float.floatToRawIntBits(f) == Float.floatToRawIntBits((Float) o), path, m, o);
         }
         if (m instanceof Double d) {
-            return check(Double.doubleToLongBits(d) == Double.doubleToLongBits((Double) o), path, m, o);
+            return check(Double.doubleToRawLongBits(d) == Double.doubleToRawLongBits((Double) o), path, m, o);
         }
         if (m instanceof String s) {
             return strings(s, (String) o, path);
@@ -123,18 +126,16 @@ final class M3GraphicsAtomsCompare {
             return check(e.name().equals(oe.name()) && e.ordinal() == oe.ordinal(), path, m, o);
         }
         if (M3GraphicsAtomsOracle.isDonor(o.getClass().getName())) {
-            return depth < MAX_DEPTH ? objects(m, o, depth + 1, path) : SAME;
+            return M3GraphicsAtomsObjects.donor(m, o, depth, path);
         }
         if (o instanceof URL) {
             ENVIRONMENT.incrementAndGet();
             return SAME;
         }
+        if (Proxy.isProxyClass(o.getClass())) {
+            return SAME;
+        }
         return collections(m, o, depth, path).orElseGet(() -> jdk(m, o, path));
-    }
-
-    /** The number of comparisons settled by the environment rule (a URL compares by presence) since the last call. */
-    static int environmentAndReset() {
-        return ENVIRONMENT.getAndSet(0);
     }
 
     private static Optional<Optional<String>> collections(Object m, Object o, int depth, String path) {
@@ -177,76 +178,15 @@ final class M3GraphicsAtomsCompare {
                 .flatMap(Optional::stream).findFirst();
     }
 
-    private static Optional<String> objects(Object m, Object o, int depth, String path) {
-        return Stream.<Supplier<Optional<String>>>of(() -> fields(m, o, depth, path), () -> getters(m, o, depth, path),
-                () -> declared(m, o, depth, path)).map(Supplier::get).flatMap(Optional::stream).findFirst();
-    }
-
-    private static Optional<String> fields(Object m, Object o, int depth, String path) {
-        return Arrays.stream(o.getClass().getFields()).filter(f -> !Modifier.isStatic(f.getModifiers()))
-                .sorted(Comparator.comparing(Field::getName))
-                .map(f -> field(m, o, f, depth, path + DOT + f.getName())).flatMap(Optional::stream).findFirst();
-    }
-
-    private static Optional<String> field(Object m, Object o, Field of, int depth, String path) {
-        try {
-            return diff(m.getClass().getField(of.getName()).get(m), of.get(o), depth, path);
-        } catch (ReflectiveOperationException e) {
-            return Optional.of(path + MISSING + e);
-        }
-    }
-
-    private static Optional<String> getters(Object m, Object o, int depth, String path) {
-        return Arrays.stream(o.getClass().getMethods()).filter(M3GraphicsAtomsCompare::isGetter)
-                .map(Method::getName).distinct().sorted()
-                .map(g -> outcomes(call(m, g), call(o, g), depth, path + DOT + g + CALL))
-                .flatMap(Optional::stream).findFirst();
-    }
-
-    private static boolean isGetter(Method g) {
-        return g.getParameterCount() == 0 && !Modifier.isStatic(g.getModifiers()) && g.getReturnType() != void.class
-                && GETTER.matcher(g.getName()).matches()
-                && M3GraphicsAtomsOracle.isDonor(g.getDeclaringClass().getName());
-    }
-
-    private static Optional<String> declared(Object m, Object o, int depth, String path) {
-        boolean hashed = declares(o.getClass(), HASH_CODE);
-        boolean stable = hashed && M3GraphicsAtomsHashes.stable(o);
-        if (hashed && !stable) {
-            M3GraphicsAtomsHashes.skipped();
-        }
-        Optional<String> hash = stable
-                ? outcomes(call(m, HASH_CODE), call(o, HASH_CODE), depth, path + DOT + HASH_CODE + CALL) : SAME;
-        return hash.or(() -> declares(o.getClass(), TO_STRING)
-                ? outcomes(call(m, TO_STRING), call(o, TO_STRING), depth, path + DOT + TO_STRING + CALL) : SAME);
-    }
-
-    private static boolean declares(Class<?> c, String name) {
-        try {
-            return M3GraphicsAtomsOracle.isDonor(c.getMethod(name).getDeclaringClass().getName());
-        } catch (NoSuchMethodException e) {
-            return false;
-        }
-    }
-
-    private static Result call(Object target, String name) {
-        try {
-            return new Result(target.getClass().getMethod(name).invoke(target), null);
-        } catch (InvocationTargetException e) {
-            return new Result(null, e.getCause());
-        } catch (ReflectiveOperationException | RuntimeException e) {
-            return new Result(null, e);
-        }
-    }
-
-    private static Optional<String> outcomes(Result m, Result o, int depth, String path) {
+    /** Call results at a depth: values compare structurally, throwables by class and message. */
+    static Optional<String> outcomes(Result m, Result o, int depth, String path) {
         if (m.thrown() == null && o.thrown() == null) {
             return diff(m.value(), o.value(), depth, path);
         }
-        boolean both = m.thrown() != null && o.thrown() != null;
-        return both && sameType(m.thrown().getClass(), o.thrown().getClass()) ? SAME
-                : differ(path, m.thrown() != null ? m.thrown() : m.value(),
-                        o.thrown() != null ? o.thrown() : o.value());
+        if (m.thrown() != null && o.thrown() != null) {
+            return M3GraphicsAtomsMessages.compare(path, m.thrown(), o.thrown());
+        }
+        return differ(path, m.thrown() != null ? m.thrown() : m.value(), o.thrown() != null ? o.thrown() : o.value());
     }
 
     private static Optional<String> jdk(Object m, Object o, String path) {

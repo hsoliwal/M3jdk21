@@ -9,8 +9,9 @@
  *          jdk.m3.graphics atoms against the donor (HumbleUI Skija 0.143.18, Types 0.2.0), one test per
  *          atom, 22 atoms: skija.FilterBlurMode .. skija.RuntimeEffectUniformFlag. The oracle jars come from
  *          -Dm3.graphics.oracle=<skija-shared jar><path separator><types jar>; without it the tests abort.
+ *          Identity hashes are pinned (-XX:hashCode=2), so every hashCode compares exactly.
  * @modules jdk.m3.graphics
- * @run junit M3GraphicsAtomsTest02
+ * @run junit/othervm -XX:+UnlockExperimentalVMOptions -XX:hashCode=2 M3GraphicsAtomsTest02
  */
 
 import org.junit.jupiter.api.Test;

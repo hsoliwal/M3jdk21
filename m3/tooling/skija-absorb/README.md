@@ -128,28 +128,64 @@ Runtime state: the module compiles and its API is complete, but its natives are 
 the donor's native module, and the JNI symbols in the shipped dll carry the old names, so calls into native code fail
 until leaf 2 builds `libm3graphics` under the new names (`ledgers/JNI_RENAME.tsv`).
 
-## Leaf 1 atom tests: JUnit and perf per atom (2026-10-31)
+## Leaf 1 atom tests: JUnit and perf per atom (2026-10-31, generator v2)
 
-`tools/gen_atom_tests.py <repo> <jdk.m3.graphics classes> <skija-shared-0.143.18.jar><path sep><types-0.2.0.jar>`
-generates the tests from javap facts, template first (CPU only, deterministic; `--check` proves the fixed point):
+`tools/atom_tests.sh <work dir> <oracle jars> <junit console jar>` (oracle jars: skija-shared-0.143.18.jar and
+types-0.2.0.jar joined by the path separator; JUnit: junit-platform-console-standalone 1.11.4) runs the whole recipe
+from the repository root (CPU only, deterministic): module classes, `tools/gen_atom_tests.py`
+and its `--check` fixed point, test compile, JUnit (identity hashes pinned, unpinned, without the oracle),
+`tools/atom_mutants.py`, the perf harness twice, and `tools/atom_ledgers.py`, which writes the execution ledgers.
 
-- `test/jdk/jdk/m3/graphics/M3GraphicsAtomsTest01..15.java`: one JUnit test per runnable atom (jtreg `@run junit`,
-  `@modules jdk.m3.graphics`). Every public constructor, method and field of the atom is called on the M3 type and on
-  the donor type with the same deterministic cases (boundary pools, then seeded random rounds) and the outcomes are
-  compared structurally: result or thrown type, aliasing, receiver and arguments after the call, mutable statics,
+The generator builds the tests from javap facts, template first:
+
+- `test/jdk/jdk/m3/graphics/M3GraphicsAtomsTest01..16.java`: one JUnit test per runnable atom (jtreg
+  `@run junit/othervm -XX:+UnlockExperimentalVMOptions -XX:hashCode=2`, `@modules jdk.m3.graphics`). Every public
+  constructor, method and field of the atom is called on the M3 type and on the donor type with the same deterministic
+  cases (boundary pools, then seeded random rounds) and the outcomes are compared structurally: the result, or the
+  thrown class and message along the cause chain, aliasing, receiver and arguments after the call, mutable statics,
   console output. Enums: `values()`, `valueOf`, every method over every constant.
+- `M3GraphicsAtomsContractTest.java`: plain JUnit contracts of atoms without a donor class (M3SneakyThrow:
+  SNEAKY_THROW, no oracle needed).
+- `M3GraphicsAtomsRecipes.java` (how values and interface proxies are built) and `M3GraphicsAtomsDomains.java` (int
+  parameters used as enum ordinals or switch codes).
 - `M3GraphicsAtomsPerf.java` + `PerfGroup01..05`: one row per tested atom, ns/op M3 vs donor through static final
-  MethodHandles; guard: no atom slower than its donor by more than 1.5x.
-- `leaf1/ATOM_TESTS.tsv` (per atom: pattern, status, reason, counts) and `leaf1/ATOM_MEMBERS.tsv` (per member).
+  MethodHandles, each row flagged SAME or DIFF by its bytecode; guard: no atom slower than its donor by more than 1.5x.
+- `leaf1/ATOM_TESTS.tsv` (per atom) and `leaf1/ATOM_MEMBERS.tsv` (per member, with int domains and the hash mode).
 - The runner is hand-written support in the same directory (`M3GraphicsAtoms*.java`).
+
+v2 answers the review of #2243, one rule per item:
+
+1. Exceptions compare by class and message. Both messages are normalized alike: donor class names become M3 names by
+   the TYPE_RENAME rule (the generator checks all 225 rows against the runner's rule), the `M3` prefix, class-loader
+   text, identity hashes and helpful-NullPointerException local names are masked (`M3GraphicsAtomsMessages`).
+2. Equals and hashCode also run on copies with exactly one field changed (PERTURB rows): built through a public
+   constructor whose bytecode stores each parameter into its own field and does nothing else (null checks and assert
+   blocks allowed). 53 atoms; RRect (fields in its superclass) and SaveLayerRec (delegating constructors) say why not.
+3. A null check is read per parameter slot (Lombok `@NonNull`, `requireNonNull`), not per body: ColorInfo now has a
+   recipe instead of only its DEFAULT instance.
+4. Identity hashes are pinned with `-XX:hashCode=2` (every identity hash is 1 on both sides), so all 55 hashCode
+   members compare exactly; 21 of them mix in an identity hash (an enum field, `hash=PINNED` in ATOM_MEMBERS.tsv).
+   Without the flag those compare by partition: a dropped field is caught, a changed constant is not.
+5. and 6. Perf: warm-up first (at least 12 calls and 40 ms per side), then calibration on the compiled loops, then 11
+   rounds alternating the first side; ns/op is the median round, nothing is re-measured.
+7. Coverage: IHasImageInfo's default methods run on test proxies; `isGammaCloseToSRGB` is tested (a virtual call on a
+   type whose instances need natives does not count as reaching natives: its receiver is always null here);
+   M3SneakyThrow has its contract test; boxed, Supplier, Runnable and URL parameters get values; int ordinals and
+   switch codes get their domain. The gaps left are listed in `leaf1/ATOM_COVERAGE.tsv`.
+
+Minor items: floats compare by raw bits (NaN payloads), the console mask covers ISO-8601 timestamps only, donor
+objects compare to depth 8 with cycle detection, and the three abstract native atoms without members say so.
 
 A member is BLOCKED_NATIVES when its bytecode can reach native code (a native method, `System.load*`, or a class
 initializer that loads the library, transitively); a test fails if an emitted member reaches natives, so the
 classification is checked by execution. The oracle jars come from `-Dm3.graphics.oracle=...` (jtreg:
-`-vmoption:-Dm3.graphics.oracle=...`); without it the tests abort and the harness prints PERF_SKIPPED.
+`-vmoption:-Dm3.graphics.oracle=...`); without it the atom tests abort, the contract test runs, and the harness prints
+PERF_SKIPPED.
 
-Result (`leaf1/ATOM_TEST_GATES.tsv`): 225 atoms, 142 tested (135 full, 7 static-pure), 79 BLOCKED_NATIVES, 4
-NOT_APPLICABLE; 1,388 members, 20,392 cases; 141 of 142 tests pass, 4 of 4 mutants killed; perf 0 outliers. The
-failing test is a real difference (`leaf1/ATOM_FINDINGS.tsv` F1): the donor jar is Multi-Release, and the absorbed
-`Cleanable`, `ReferenceUtil` and `ResourceFinder` are its Java 8 base variants, not the `META-INF/versions/9` ones a
-JDK 9+ runtime loads; `M3Cleanable` fails to initialize on JDK 21 (`sun.misc.Cleaner`).
+Result (`leaf1/ATOM_TEST_GATES.tsv`, after merging #2208's MR_SELECT fix c500a57e): 225 atoms, 144 tested (FULL,
+STATIC_PURE and one CONTRACT), 79 BLOCKED_NATIVES, 2 NOT_APPLICABLE; 1,454 members, 20,938 cases; 144 of 144 tests
+pass, also without pinned identity hashes; 8 of 8 mutants killed (the four of #2243 and the four of its review; REV4,
+ColorInfo.hashCode 43 -> 0, only with pinned identity hashes); perf 0 outliers in both runs. On the 129 rows whose
+code is the same on both sides the ratio has median 1.00 and p10..p90 0.96..1.07, but single rows reach 0.58 and 1.50
+and move by up to 0.49 between runs (`leaf1/ATOM_FINDINGS.tsv` F9): the 1.5x guard has no margin at that extreme.
+F1-F4 of #2243 are closed by c500a57e.

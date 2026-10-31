@@ -66,6 +66,11 @@ final class M3GraphicsAtomsOracle {
         return LOADER.isPresent();
     }
 
+    /** A resource of the oracle jars (for URL arguments that both sides read the same way). */
+    static Optional<URL> oracleResource(String name) {
+        return LOADER.map(l -> l.getResource(name));
+    }
+
     /** The full donor binary name of a short donor name ({@code types.Rect}). */
     static String donorName(String shortName) {
         return DONOR_ROOT + shortName;

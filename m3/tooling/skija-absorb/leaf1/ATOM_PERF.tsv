@@ -1,288 +1,290 @@
-# host: Windows 11 (shared with other sessions), JDK 21.0.9 (Oracle HotSpot); M3 = jdk.m3.graphics classes compiled from 78d226a6 on the class path; oracle = skija-shared-0.143.18.jar + types-0.2.0.jar in their own class loader
-# M3GraphicsAtomsPerf: -XX:-TieredCompilation -Xbatch -XX:CompileCommand=blackhole,M3GraphicsAtomsPerfSupport::consume; static final MethodHandles invoked in each generated loop; passes doubled to 2 ms rounds; warm-up 5, best of 7, sides alternate first
-# ratio = ns/op M3 / ns/op oracle (above 1: M3 slower); guard: OUTLIER above 1.5 after 3 re-measures; DIVERGENT = outcomes differ (see ATOM_FINDINGS F1); ENVIRONMENT = URL lookup in each side's own class loader
-run	atom	pattern	member	calls	ns_per_op_m3	ns_per_op_oracle	ratio	verdict
-1	skija.AnimationDisposalMode	ENUM	valueOf(Ljava/lang/String;)	4	75.39	75.29	1.001	OK
-1	skija.BackendState	ENUM	valueOf(Ljava/lang/String;)	13	4.27	4.33	0.986	OK
-1	skija.BlendMode	ENUM	valueOf(Ljava/lang/String;)	29	8.86	8.84	1.003	OK
-1	skija.ClipMode	ENUM	valueOf(Ljava/lang/String;)	2	3.88	3.86	1.006	OK
-1	skija.ColorAlphaType	ENUM	valueOf(Ljava/lang/String;)	4	332.81	333.59	0.998	OK
-1	skija.ColorChannel	ENUM	valueOf(Ljava/lang/String;)	4	7.62	7.62	1.000	OK
-1	skija.ColorChannelFlag	ENUM	valueOf(Ljava/lang/String;)	9	8.90	8.90	1.000	OK
-1	skija.ColorSpaceNamedPrimaries	ENUM	valueOf(Ljava/lang/String;)	11	9.00	8.98	1.002	OK
-1	skija.ColorSpaceNamedTransferFn	ENUM	valueOf(Ljava/lang/String;)	13	298.08	300.00	0.994	OK
-1	skija.ColorType	ENUM	computeOffset(IIJ)	64	888.28	901.56	0.985	OK
-1	skija.ContentChangeMode	ENUM	valueOf(Ljava/lang/String;)	2	8.25	8.25	1.000	OK
-1	skija.EncodeJPEGAlphaMode	ENUM	valueOf(Ljava/lang/String;)	2	8.25	8.25	1.000	OK
-1	skija.EncodeJPEGDownsampleMode	ENUM	valueOf(Ljava/lang/String;)	3	9.49	9.52	0.997	OK
-1	skija.EncodePNGFilterFlag	ENUM	valueOf(Ljava/lang/String;)	7	8.48	8.48	1.000	OK
-1	skija.EncodeWEBPCompressionMode	ENUM	valueOf(Ljava/lang/String;)	2	8.54	8.52	1.003	OK
-1	skija.EncodedImageFormat	ENUM	valueOf(Ljava/lang/String;)	14	8.18	8.18	1.000	OK
-1	skija.EncodedOrigin	ENUM	toMatrix(II)	32	578.91	604.69	0.957	OK
-1	skija.FilterBlurMode	ENUM	valueOf(Ljava/lang/String;)	4	8.42	8.42	1.000	OK
-1	skija.FilterMode	ENUM	valueOf(Ljava/lang/String;)	2	310.16	313.28	0.990	OK
-1	skija.FilterTileMode	ENUM	valueOf(Ljava/lang/String;)	4	7.64	7.64	1.000	OK
-1	skija.FontEdging	ENUM	valueOf(Ljava/lang/String;)	3	3.74	3.79	0.987	OK
-1	skija.FontHinting	ENUM	valueOf(Ljava/lang/String;)	4	8.40	8.40	1.000	OK
-1	skija.FontSlant	ENUM	valueOf(Ljava/lang/String;)	3	9.42	9.42	1.000	OK
-1	skija.InversionMode	ENUM	valueOf(Ljava/lang/String;)	3	3.63	3.63	1.000	OK
-1	skija.MipmapMode	ENUM	valueOf(Ljava/lang/String;)	3	4.07	4.09	0.996	OK
-1	skija.PaintMode	ENUM	valueOf(Ljava/lang/String;)	3	8.17	8.17	1.000	OK
-1	skija.PaintStrokeCap	ENUM	valueOf(Ljava/lang/String;)	3	3.53	3.53	1.000	OK
-1	skija.PaintStrokeJoin	ENUM	valueOf(Ljava/lang/String;)	3	4.09	4.09	1.000	OK
-1	skija.PathDirection	ENUM	valueOf(Ljava/lang/String;)	2	9.35	9.33	1.003	OK
-1	skija.PathEffect1DStyle	ENUM	valueOf(Ljava/lang/String;)	3	8.77	8.77	1.000	OK
-1	skija.PathEllipseArc	ENUM	valueOf(Ljava/lang/String;)	2	238.28	233.59	1.020	OK
-1	skija.PathFillMode	ENUM	inverse()	4	3.39	3.54	0.959	OK
-1	skija.PathOp	ENUM	valueOf(Ljava/lang/String;)	5	4.04	4.04	1.000	OK
-1	skija.PathSegmentType	ENUM	valueOf(Ljava/lang/String;)	4	7.40	7.40	1.000	OK
-1	skija.PathVerb	ENUM	valueOf(Ljava/lang/String;)	7	3.49	3.52	0.992	OK
-1	skija.PixelGeometry	ENUM	valueOf(Ljava/lang/String;)	5	3.61	3.59	1.005	OK
-1	skija.RegionOp	ENUM	valueOf(Ljava/lang/String;)	6	3.65	3.65	1.000	OK
-1	skija.RuntimeEffectChildType	ENUM	valueOf(Ljava/lang/String;)	3	8.77	8.77	1.000	OK
-1	skija.RuntimeEffectUniformFlag	ENUM	valueOf(Ljava/lang/String;)	5	210.00	208.75	1.006	OK
-1	skija.RuntimeEffectUniformType	ENUM	valueOf(Ljava/lang/String;)	11	3.64	3.66	0.995	OK
-1	skija.SaveLayerRecFlag	ENUM	valueOf(Ljava/lang/String;)	3	8.17	8.17	1.000	OK
-1	skija.ShadowUtilsFlag	ENUM	_collect([Lskija/ShadowUtilsFlag;)	24	4.23	4.23	1.000	OK
-1	skija.SurfaceOrigin	ENUM	valueOf(Ljava/lang/String;)	2	6.20	6.57	0.944	OK
-1	skija.VulkanAllocFlag	ENUM	toBitmask([Lskija/VulkanAllocFlag;)	16	3.76	4.49	0.837	OK
-1	skija.impl.Architecture	ENUM	valueOf(Ljava/lang/String;)	23	8.58	8.58	1.000	OK
-1	skija.impl.OperatingSystem	ENUM	valueOf(Ljava/lang/String;)	4	8.98	8.98	1.000	OK
-1	skija.paragraph.Affinity	ENUM	valueOf(Ljava/lang/String;)	2	8.86	8.84	1.003	OK
-1	skija.paragraph.Alignment	ENUM	valueOf(Ljava/lang/String;)	6	8.71	8.72	0.998	OK
-1	skija.paragraph.BaselineMode	ENUM	valueOf(Ljava/lang/String;)	2	9.64	9.57	1.008	OK
-1	skija.paragraph.DecorationLineStyle	ENUM	valueOf(Ljava/lang/String;)	5	313.75	318.75	0.984	OK
-1	skija.paragraph.Direction	ENUM	valueOf(Ljava/lang/String;)	2	9.69	9.77	0.993	OK
-1	skija.paragraph.HeightMode	ENUM	valueOf(Ljava/lang/String;)	4	8.42	8.45	0.997	OK
-1	skija.paragraph.PlaceholderAlignment	ENUM	valueOf(Ljava/lang/String;)	6	8.72	8.72	1.000	OK
-1	skija.paragraph.RectHeightMode	ENUM	valueOf(Ljava/lang/String;)	6	8.27	8.25	1.002	OK
-1	skija.paragraph.RectWidthMode	ENUM	valueOf(Ljava/lang/String;)	2	7.74	7.74	1.000	OK
-1	skija.paragraph.TextStyleAttribute	ENUM	valueOf(Ljava/lang/String;)	9	9.01	8.81	1.022	OK
-1	skija.skottie.AnimationBuilderFlag	ENUM	_collect([Lskija/skottie/AnimationBuilderFlag;)	8	4.03	4.00	1.006	OK
-1	skija.skottie.LogLevel	ENUM	valueOf(Ljava/lang/String;)	2	318.75	323.44	0.986	OK
-1	skija.skottie.RenderFlag	ENUM	valueOf(Ljava/lang/String;)	2	7.50	7.50	1.000	OK
-1	skija.svg.SVGLengthType	ENUM	valueOf(Ljava/lang/String;)	3	3.73	3.73	1.000	OK
-1	skija.svg.SVGLengthUnit	ENUM	valueOf(Ljava/lang/String;)	11	7.88	7.90	0.998	OK
-1	skija.svg.SVGPreserveAspectRatioAlign	ENUM	valueOf(I)	4	4.35	4.30	1.011	OK
-1	skija.svg.SVGPreserveAspectRatioScale	ENUM	valueOf(Ljava/lang/String;)	2	9.96	9.99	0.998	OK
-1	skija.svg.SVGTag	ENUM	valueOf(Ljava/lang/String;)	45	3.72	3.73	0.995	OK
-1	skija.AnimationFrameInfo	VALUE_DATA	setAlphaType(Lskija/ColorAlphaType;)	24	3.27	3.27	1.000	OK
-1	skija.Color	VALUE_DATA	convertRGBToHSV(III)	24	10.68	10.35	1.031	OK
-1	skija.Color4f	VALUE_DATA	makeLerp(Lskija/Color4f;F)	24	79.95	80.53	0.993	OK
-1	skija.ColorInfo	VALUE_DATA	equals(Ljava/lang/Object;)	24	1.76	1.76	1.000	OK
-1	skija.ColorMatrix	VALUE_DATA	equals(Ljava/lang/Object;)	24	75.39	76.95	0.980	OK
-1	skija.CubicResampler	VALUE_DATA	_pack()	12	7.88	14.06	0.560	OK
-1	skija.EncodeJPEGOptions	VALUE_DATA	equals(Ljava/lang/Object;)	24	3.35	3.22	1.040	OK
-1	skija.EncodePNGOptions	VALUE_DATA	withFlags([Lskija/EncodePNGFilterFlag;)	24	341.67	345.83	0.988	OK
-1	skija.EncodeWEBPOptions	VALUE_DATA	equals(Ljava/lang/Object;)	24	480.21	489.58	0.981	OK
-1	skija.FilterMipmap	VALUE_DATA	_pack()	12	3.89	3.89	1.000	OK
-1	skija.FontArguments	VALUE_DATA	equals(Ljava/lang/Object;)	24	2252.08	2289.58	0.984	OK
-1	skija.FontExtents	VALUE_DATA	equals(Ljava/lang/Object;)	24	5.62	5.49	1.024	OK
-1	skija.FontFamilyName	VALUE_DATA	equals(Ljava/lang/Object;)	24	7.36	7.29	1.009	OK
-1	skija.FontFeature	VALUE_DATA	parse(Ljava/lang/String;)	5	34820.00	26232.50	1.327	OK
-1	skija.FontMetrics	VALUE_DATA	equals(Ljava/lang/Object;)	24	971.88	964.58	1.008	OK
-1	skija.FontPaletteOverride	VALUE_DATA	equals(Ljava/lang/Object;)	24	381.25	371.88	1.025	OK
-1	skija.FontStyle	VALUE_DATA	equals(Ljava/lang/Object;)	24	1.14	1.14	1.000	OK
-1	skija.FontVariation	VALUE_DATA	parse(Ljava/lang/String;)	1	25600.00	25500.00	1.004	OK
-1	skija.FontVariationAxis	VALUE_DATA	equals(Ljava/lang/Object;)	24	1747.92	1340.63	1.304	OK
-1	skija.GLTextureInfo	VALUE_DATA	equals(Ljava/lang/Object;)	24	2.93	2.91	1.006	OK
-1	skija.GradientStyle	VALUE_DATA	_getFlags()	12	1.61	1.61	1.000	OK
-1	skija.ImageInfo	VALUE_DATA	computeByteSize(J)	24	710.42	726.04	0.978	OK
-1	skija.ImageWithFilterResult	VALUE_DATA	<init>(Lskija/Image;Ltypes/IRect;Ltypes/IPoint;)	24	743.03	645.31	1.151	OK_EXCEPTION_PATH
-1	skija.Matrix33	VALUE_DATA	makeConcat(Lskija/Matrix33;)	24	15.85	16.08	0.986	OK
-1	skija.Matrix44	VALUE_DATA	asMatrix33()	3	11.85	12.43	0.953	OK
-1	skija.PathSegment	VALUE_DATA	equals(Ljava/lang/Object;)	24	5.44	5.44	1.000	OK
-1	skija.RSXform	VALUE_DATA	makeFromRadians(FFFFFF)	24	83.85	83.76	1.001	OK
-1	skija.RuntimeEffectChildInfo	VALUE_DATA	equals(Ljava/lang/Object;)	24	4.44	4.33	1.026	OK
-1	skija.RuntimeEffectOptions	VALUE_DATA	equals(Ljava/lang/Object;)	24	4.56	4.52	1.007	OK
-1	skija.RuntimeEffectUniformInfo	VALUE_DATA	equals(Ljava/lang/Object;)	24	5.18	4.87	1.064	OK
-1	skija.SamplingModeAnisotropic	VALUE_DATA	_pack()	12	267.71	276.04	0.970	OK
-1	skija.SaveLayerRec	VALUE_DATA	equals(Ljava/lang/Object;)	24	775.00	772.92	1.003	OK
-1	skija.SurfaceProps	VALUE_DATA	_getFlags()	12	1.64	1.61	1.020	OK
-1	skija.TransferFunction	VALUE_DATA	equals(Ljava/lang/Object;)	24	585.42	581.25	1.007	OK
-1	skija.VkImageInfo	VALUE_DATA	equals(Ljava/lang/Object;)	24	544.79	553.13	0.985	OK
-1	skija.VulkanAlloc	VALUE_DATA	equals(Ljava/lang/Object;)	24	2.96	2.90	1.022	OK
-1	skija.impl.Log	VALUE_DATA	_log(ILjava/lang/String;Ljava/lang/String;)	24	27904.17	26285.42	1.062	OK
-1	skija.paragraph.DecorationStyle	VALUE_DATA	equals(Ljava/lang/Object;)	24	2.96	3.37	0.879	OK
-1	skija.paragraph.LineMetrics	VALUE_DATA	equals(Ljava/lang/Object;)	24	827.08	864.58	0.957	OK
-1	skija.paragraph.PlaceholderStyle	VALUE_DATA	equals(Ljava/lang/Object;)	24	508.33	533.33	0.953	OK
-1	skija.paragraph.PositionWithAffinity	VALUE_DATA	equals(Ljava/lang/Object;)	24	2.75	2.75	1.000	OK
-1	skija.paragraph.Shadow	VALUE_DATA	equals(Ljava/lang/Object;)	24	520.83	561.46	0.928	OK
-1	skija.paragraph.TextBox	VALUE_DATA	equals(Ljava/lang/Object;)	24	13.02	12.60	1.034	OK
-1	skija.shaper.BidiRun	VALUE_DATA	equals(Ljava/lang/Object;)	24	2.73	2.73	1.000	OK
-1	skija.shaper.FontRun	VALUE_DATA	_getFontPtr()	12	1.64	1.64	1.000	OK
-1	skija.shaper.LanguageRun	VALUE_DATA	equals(Ljava/lang/Object;)	24	416.67	417.71	0.998	OK
-1	skija.shaper.RunInfo	VALUE_DATA	setFontPtr(J)	24	1.95	1.71	1.143	OK
-1	skija.shaper.ScriptRun	VALUE_DATA	equals(Ljava/lang/Object;)	24	2.10	2.15	0.977	OK
-1	skija.shaper.ShapingOptions	VALUE_DATA	equals(Ljava/lang/Object;)	24	207.68	230.21	0.902	OK
-1	skija.svg.SVGLength	VALUE_DATA	equals(Ljava/lang/Object;)	24	1.87	1.89	0.991	OK
-1	skija.svg.SVGLengthContext	VALUE_DATA	resolve(Lskija/svg/SVGLength;Lskija/svg/SVGLengthType;)	18	6.21	6.12	1.014	OK
-1	skija.svg.SVGPreserveAspectRatio	VALUE_DATA	equals(Ljava/lang/Object;)	24	3.74	3.63	1.031	OK
-1	types.IPoint	VALUE_DATA	offset(II)	24	5.11	5.37	0.952	OK
-1	types.IRange	VALUE_DATA	_makeFromLong(J)	24	6.36	6.77	0.940	OK
-1	types.IRect	VALUE_DATA	contains(II)	24	3.78	3.55	1.064	OK
-1	types.Point	VALUE_DATA	offset(FF)	24	12.53	12.79	0.980	OK
-1	types.Point3	VALUE_DATA	equals(Ljava/lang/Object;)	24	7.98	6.27	1.273	OK
-1	types.RRect	VALUE_DATA	inflate(F)	24	153.84	172.85	0.890	OK
-1	types.Rect	VALUE_DATA	contains(FF)	24	2.80	2.82	0.994	OK
-1	skija.impl.ReferenceUtil	STATIC_UTIL	reachabilityFence(Ljava/lang/Object;)	24	0.85	0.85	1.010	OK
-1	skija.impl.ResourceFinder	SUBTYPE_PURE	findResource(Ljava/lang/String;)	24	85612.50	10070.83	8.501	ENVIRONMENT
-1	skija.shaper.JavaTextBidiRunIterator	SUBTYPE_PURE	next()	11	86.58	86.01	1.007	OK
-1	skija.shaper.TrivialBidiRunIterator	SUBTYPE_PURE	next()	12	6.02	6.09	0.989	OK
-1	skija.shaper.TrivialFontRunIterator	SUBTYPE_PURE	next()	12	285.42	282.29	1.011	OK
-1	skija.shaper.TrivialLanguageRunIterator	SUBTYPE_PURE	next()	12	5.39	5.50	0.979	OK
-1	skija.shaper.TrivialScriptRunIterator	SUBTYPE_PURE	next()	5	9.38	10.06	0.932	OK
-1	skija.FontWeight	INTERFACE	BLACK()	1	3.66	3.56	1.027	OK
-1	skija.FontWidth	INTERFACE	CONDENSED()	1	1.10	1.10	1.000	OK
-1	skija.FourByteTag	INTERFACE	fromString(Ljava/lang/String;)	17	11.90	11.88	1.002	OK
-1	skija.FramebufferFormat	INTERFACE	GR_GL_ALPHA()	1	3.03	3.13	0.969	OK
-1	skija.SamplingMode	INTERFACE	_pack()	12	10.42	11.98	0.870	OK
-1	skija.EncoderJPEG	NATIVE_STATIC_FACADE	<init>()	1	2.73	2.69	1.018	OK
-1	skija.EncoderPNG	NATIVE_STATIC_FACADE	<init>()	1	4.81	4.79	1.005	OK
-1	skija.EncoderWEBP	NATIVE_STATIC_FACADE	<init>()	1	4.64	4.69	0.990	OK
-1	skija.impl.Cleanable	IMPL_INFRA	register(Ljava/lang/Object;Ljava/lang/Runnable;)	0	NaN	NaN	NaN	DIVERGENT
-1	skija.impl.Library	IMPL_INFRA	readResource(Ljava/net/URL;)	24	4132.55	4616.93	0.895	OK_EXCEPTION_PATH
-1	skija.impl.Native	IMPL_INFRA	getPtr(Lskija/impl/Native;)	24	1.02	1.01	1.008	OK
-1	skija.impl.Stats	IMPL_INFRA	onAllocated(Ljava/lang/String;)	24	1.27	1.27	1.000	OK
-2	skija.AnimationDisposalMode	ENUM	valueOf(Ljava/lang/String;)	4	1236.72	1346.09	0.919	OK
-2	skija.BackendState	ENUM	valueOf(Ljava/lang/String;)	13	72.96	72.48	1.007	OK
-2	skija.BlendMode	ENUM	valueOf(Ljava/lang/String;)	29	3.80	3.80	1.000	OK
-2	skija.ClipMode	ENUM	valueOf(Ljava/lang/String;)	2	8.28	8.30	0.997	OK
-2	skija.ColorAlphaType	ENUM	valueOf(Ljava/lang/String;)	4	335.16	346.88	0.966	OK
-2	skija.ColorChannel	ENUM	valueOf(Ljava/lang/String;)	4	8.40	8.40	1.000	OK
-2	skija.ColorChannelFlag	ENUM	valueOf(Ljava/lang/String;)	9	3.80	3.80	1.000	OK
-2	skija.ColorSpaceNamedPrimaries	ENUM	valueOf(Ljava/lang/String;)	11	8.70	8.72	0.998	OK
-2	skija.ColorSpaceNamedTransferFn	ENUM	valueOf(Ljava/lang/String;)	13	327.88	323.08	1.015	OK
-2	skija.ColorType	ENUM	computeOffset(IIJ)	64	1220.31	1496.88	0.815	OK
-2	skija.ContentChangeMode	ENUM	valueOf(Ljava/lang/String;)	2	7.74	7.74	1.000	OK
-2	skija.EncodeJPEGAlphaMode	ENUM	valueOf(Ljava/lang/String;)	2	8.91	8.89	1.003	OK
-2	skija.EncodeJPEGDownsampleMode	ENUM	valueOf(Ljava/lang/String;)	3	7.94	7.94	1.000	OK
-2	skija.EncodePNGFilterFlag	ENUM	valueOf(Ljava/lang/String;)	7	8.82	8.79	1.003	OK
-2	skija.EncodeWEBPCompressionMode	ENUM	valueOf(Ljava/lang/String;)	2	8.59	8.59	1.000	OK
-2	skija.EncodedImageFormat	ENUM	valueOf(Ljava/lang/String;)	14	8.45	8.45	1.000	OK
-2	skija.EncodedOrigin	ENUM	toMatrix(II)	32	590.63	626.56	0.943	OK
-2	skija.FilterBlurMode	ENUM	valueOf(Ljava/lang/String;)	4	7.64	7.64	1.000	OK
-2	skija.FilterMode	ENUM	valueOf(Ljava/lang/String;)	2	177.34	176.56	1.004	OK
-2	skija.FilterTileMode	ENUM	valueOf(Ljava/lang/String;)	4	8.18	8.18	1.000	OK
-2	skija.FontEdging	ENUM	valueOf(Ljava/lang/String;)	3	306.25	307.29	0.997	OK
-2	skija.FontHinting	ENUM	valueOf(Ljava/lang/String;)	4	8.13	8.11	1.003	OK
-2	skija.FontSlant	ENUM	valueOf(Ljava/lang/String;)	3	7.47	7.45	1.002	OK
-2	skija.InversionMode	ENUM	valueOf(Ljava/lang/String;)	3	4.49	4.49	1.000	OK
-2	skija.MipmapMode	ENUM	valueOf(Ljava/lang/String;)	3	264.58	295.83	0.894	OK
-2	skija.PaintMode	ENUM	valueOf(Ljava/lang/String;)	3	7.98	7.96	1.002	OK
-2	skija.PaintStrokeCap	ENUM	valueOf(Ljava/lang/String;)	3	7.94	7.94	1.000	OK
-2	skija.PaintStrokeJoin	ENUM	valueOf(Ljava/lang/String;)	3	9.49	9.47	1.002	OK
-2	skija.PathDirection	ENUM	valueOf(Ljava/lang/String;)	2	9.03	9.03	1.000	OK
-2	skija.PathEffect1DStyle	ENUM	valueOf(Ljava/lang/String;)	3	6.62	7.50	0.883	OK
-2	skija.PathEllipseArc	ENUM	valueOf(Ljava/lang/String;)	2	307.03	285.16	1.077	OK
-2	skija.PathFillMode	ENUM	inverse()	4	3.71	3.86	0.962	OK
-2	skija.PathOp	ENUM	valueOf(Ljava/lang/String;)	5	7.32	7.34	0.997	OK
-2	skija.PathSegmentType	ENUM	valueOf(Ljava/lang/String;)	4	8.13	8.11	1.003	OK
-2	skija.PathVerb	ENUM	valueOf(Ljava/lang/String;)	7	4.10	4.13	0.993	OK
-2	skija.PixelGeometry	ENUM	valueOf(Ljava/lang/String;)	5	7.64	7.64	1.000	OK
-2	skija.RegionOp	ENUM	valueOf(Ljava/lang/String;)	6	7.75	7.73	1.002	OK
-2	skija.RuntimeEffectChildType	ENUM	valueOf(Ljava/lang/String;)	3	3.73	3.73	1.000	OK
-2	skija.RuntimeEffectUniformFlag	ENUM	valueOf(Ljava/lang/String;)	5	290.00	302.50	0.959	OK
-2	skija.RuntimeEffectUniformType	ENUM	valueOf(Ljava/lang/String;)	11	8.40	8.40	1.000	OK
-2	skija.SaveLayerRecFlag	ENUM	valueOf(Ljava/lang/String;)	3	7.21	7.21	1.000	OK
-2	skija.ShadowUtilsFlag	ENUM	_collect([Lskija/ShadowUtilsFlag;)	24	4.07	4.10	0.992	OK
-2	skija.SurfaceOrigin	ENUM	valueOf(Ljava/lang/String;)	2	8.01	8.01	1.000	OK
-2	skija.VulkanAllocFlag	ENUM	toBitmask([Lskija/VulkanAllocFlag;)	16	4.00	4.00	1.000	OK
-2	skija.impl.Architecture	ENUM	valueOf(Ljava/lang/String;)	23	8.32	8.31	1.002	OK
-2	skija.impl.OperatingSystem	ENUM	valueOf(Ljava/lang/String;)	4	8.20	8.18	1.003	OK
-2	skija.paragraph.Affinity	ENUM	valueOf(Ljava/lang/String;)	2	8.35	8.64	0.966	OK
-2	skija.paragraph.Alignment	ENUM	valueOf(Ljava/lang/String;)	6	3.94	3.94	1.000	OK
-2	skija.paragraph.BaselineMode	ENUM	valueOf(Ljava/lang/String;)	2	9.06	9.03	1.003	OK
-2	skija.paragraph.DecorationLineStyle	ENUM	valueOf(Ljava/lang/String;)	5	341.25	338.75	1.007	OK
-2	skija.paragraph.Direction	ENUM	valueOf(Ljava/lang/String;)	2	4.17	4.03	1.036	OK
-2	skija.paragraph.HeightMode	ENUM	valueOf(Ljava/lang/String;)	4	3.64	3.64	1.000	OK
-2	skija.paragraph.PlaceholderAlignment	ENUM	valueOf(Ljava/lang/String;)	6	7.76	7.75	1.002	OK
-2	skija.paragraph.RectHeightMode	ENUM	valueOf(Ljava/lang/String;)	6	8.61	8.63	0.998	OK
-2	skija.paragraph.RectWidthMode	ENUM	valueOf(Ljava/lang/String;)	2	8.94	8.89	1.005	OK
-2	skija.paragraph.TextStyleAttribute	ENUM	valueOf(Ljava/lang/String;)	9	7.62	7.62	1.000	OK
-2	skija.skottie.AnimationBuilderFlag	ENUM	_collect([Lskija/skottie/AnimationBuilderFlag;)	8	4.08	4.05	1.006	OK
-2	skija.skottie.LogLevel	ENUM	valueOf(Ljava/lang/String;)	2	336.72	342.97	0.982	OK
-2	skija.skottie.RenderFlag	ENUM	valueOf(Ljava/lang/String;)	2	8.01	8.01	1.000	OK
-2	skija.svg.SVGLengthType	ENUM	valueOf(Ljava/lang/String;)	3	3.71	3.71	1.000	OK
-2	skija.svg.SVGLengthUnit	ENUM	valueOf(Ljava/lang/String;)	11	8.47	8.47	1.000	OK
-2	skija.svg.SVGPreserveAspectRatioAlign	ENUM	valueOf(I)	4	3.44	3.47	0.993	OK
-2	skija.svg.SVGPreserveAspectRatioScale	ENUM	valueOf(Ljava/lang/String;)	2	4.30	4.30	1.000	OK
-2	skija.svg.SVGTag	ENUM	valueOf(Ljava/lang/String;)	45	8.91	8.92	0.998	OK
-2	skija.AnimationFrameInfo	VALUE_DATA	setAlphaType(Lskija/ColorAlphaType;)	24	3.52	3.52	1.000	OK
-2	skija.Color	VALUE_DATA	convertRGBToHSV(III)	24	9.18	9.18	1.000	OK
-2	skija.Color4f	VALUE_DATA	makeLerp(Lskija/Color4f;F)	24	27.67	36.20	0.764	OK
-2	skija.ColorInfo	VALUE_DATA	equals(Ljava/lang/Object;)	24	1.50	1.50	1.000	OK
-2	skija.ColorMatrix	VALUE_DATA	equals(Ljava/lang/Object;)	24	82.55	80.34	1.028	OK
-2	skija.CubicResampler	VALUE_DATA	_pack()	12	7.03	12.96	0.543	OK
-2	skija.EncodeJPEGOptions	VALUE_DATA	equals(Ljava/lang/Object;)	24	3.06	4.31	0.709	OK
-2	skija.EncodePNGOptions	VALUE_DATA	withFlags([Lskija/EncodePNGFilterFlag;)	24	411.46	398.96	1.031	OK
-2	skija.EncodeWEBPOptions	VALUE_DATA	equals(Ljava/lang/Object;)	24	345.83	340.63	1.015	OK
-2	skija.FilterMipmap	VALUE_DATA	_pack()	12	3.86	3.89	0.992	OK
-2	skija.FontArguments	VALUE_DATA	equals(Ljava/lang/Object;)	24	3033.33	3187.50	0.952	OK
-2	skija.FontExtents	VALUE_DATA	equals(Ljava/lang/Object;)	24	5.50	5.58	0.985	OK
-2	skija.FontFamilyName	VALUE_DATA	equals(Ljava/lang/Object;)	24	10.09	10.35	0.975	OK
-2	skija.FontFeature	VALUE_DATA	parse(Ljava/lang/String;)	5	35707.50	34665.00	1.030	OK
-2	skija.FontMetrics	VALUE_DATA	equals(Ljava/lang/Object;)	24	707.29	705.21	1.003	OK
-2	skija.FontPaletteOverride	VALUE_DATA	equals(Ljava/lang/Object;)	24	2.39	2.39	1.000	OK
-2	skija.FontStyle	VALUE_DATA	equals(Ljava/lang/Object;)	24	3.04	2.10	1.450	OK
-2	skija.FontVariation	VALUE_DATA	parse(Ljava/lang/String;)	1	27950.00	27500.00	1.016	OK
-2	skija.FontVariationAxis	VALUE_DATA	equals(Ljava/lang/Object;)	24	189.71	187.24	1.013	OK
-2	skija.GLTextureInfo	VALUE_DATA	equals(Ljava/lang/Object;)	24	3.26	3.32	0.980	OK
-2	skija.GradientStyle	VALUE_DATA	_getFlags()	12	1.60	1.58	1.010	OK
-2	skija.ImageInfo	VALUE_DATA	computeByteSize(J)	24	489.58	498.96	0.981	OK
-2	skija.ImageWithFilterResult	VALUE_DATA	<init>(Lskija/Image;Ltypes/IRect;Ltypes/IPoint;)	24	2086.46	1563.93	1.334	OK_EXCEPTION_PATH
-2	skija.Matrix33	VALUE_DATA	makeConcat(Lskija/Matrix33;)	24	20.57	20.77	0.991	OK
-2	skija.Matrix44	VALUE_DATA	asMatrix33()	3	10.77	10.81	0.997	OK
-2	skija.PathSegment	VALUE_DATA	equals(Ljava/lang/Object;)	24	9.47	9.38	1.010	OK
-2	skija.RSXform	VALUE_DATA	makeFromRadians(FFFFFF)	24	83.69	83.46	1.003	OK
-2	skija.RuntimeEffectChildInfo	VALUE_DATA	equals(Ljava/lang/Object;)	24	5.50	5.34	1.030	OK
-2	skija.RuntimeEffectOptions	VALUE_DATA	equals(Ljava/lang/Object;)	24	4.28	4.18	1.023	OK
-2	skija.RuntimeEffectUniformInfo	VALUE_DATA	equals(Ljava/lang/Object;)	24	5.34	5.29	1.009	OK
-2	skija.SamplingModeAnisotropic	VALUE_DATA	_pack()	12	283.33	290.63	0.975	OK
-2	skija.SaveLayerRec	VALUE_DATA	equals(Ljava/lang/Object;)	24	645.83	645.83	1.000	OK
-2	skija.SurfaceProps	VALUE_DATA	_getFlags()	12	1.69	1.68	1.010	OK
-2	skija.TransferFunction	VALUE_DATA	equals(Ljava/lang/Object;)	24	551.04	556.25	0.991	OK
-2	skija.VkImageInfo	VALUE_DATA	equals(Ljava/lang/Object;)	24	811.46	801.04	1.013	OK
-2	skija.VulkanAlloc	VALUE_DATA	equals(Ljava/lang/Object;)	24	3.78	5.31	0.712	OK
-2	skija.impl.Log	VALUE_DATA	_log(ILjava/lang/String;Ljava/lang/String;)	24	25556.25	37968.75	0.673	OK
-2	skija.paragraph.DecorationStyle	VALUE_DATA	equals(Ljava/lang/Object;)	24	4.62	4.39	1.052	OK
-2	skija.paragraph.LineMetrics	VALUE_DATA	equals(Ljava/lang/Object;)	24	594.79	643.75	0.924	OK
-2	skija.paragraph.PlaceholderStyle	VALUE_DATA	equals(Ljava/lang/Object;)	24	318.75	410.42	0.777	OK
-2	skija.paragraph.PositionWithAffinity	VALUE_DATA	equals(Ljava/lang/Object;)	24	1.99	2.10	0.946	OK
-2	skija.paragraph.Shadow	VALUE_DATA	equals(Ljava/lang/Object;)	24	8.14	7.68	1.059	OK
-2	skija.paragraph.TextBox	VALUE_DATA	equals(Ljava/lang/Object;)	24	596.88	597.92	0.998	OK
-2	skija.shaper.BidiRun	VALUE_DATA	equals(Ljava/lang/Object;)	24	2.64	2.64	1.000	OK
-2	skija.shaper.FontRun	VALUE_DATA	_getFontPtr()	12	1.45	1.45	1.000	OK
-2	skija.shaper.LanguageRun	VALUE_DATA	equals(Ljava/lang/Object;)	24	400.00	389.58	1.027	OK
-2	skija.shaper.RunInfo	VALUE_DATA	setFontPtr(J)	24	1.95	1.79	1.091	OK
-2	skija.shaper.ScriptRun	VALUE_DATA	equals(Ljava/lang/Object;)	24	2.65	2.65	1.000	OK
-2	skija.shaper.ShapingOptions	VALUE_DATA	equals(Ljava/lang/Object;)	24	170.05	168.23	1.011	OK
-2	skija.svg.SVGLength	VALUE_DATA	equals(Ljava/lang/Object;)	24	3.35	3.24	1.035	OK
-2	skija.svg.SVGLengthContext	VALUE_DATA	resolve(Lskija/svg/SVGLength;Lskija/svg/SVGLengthType;)	18	75.17	73.70	1.020	OK
-2	skija.svg.SVGPreserveAspectRatio	VALUE_DATA	equals(Ljava/lang/Object;)	24	1.66	1.73	0.962	OK
-2	types.IPoint	VALUE_DATA	offset(II)	24	2.38	2.25	1.058	OK
-2	types.IRange	VALUE_DATA	_makeFromLong(J)	24	3.73	3.53	1.055	OK
-2	types.IRect	VALUE_DATA	contains(II)	24	1.66	1.63	1.020	OK
-2	types.Point	VALUE_DATA	offset(FF)	24	12.63	12.83	0.985	OK
-2	types.Point3	VALUE_DATA	equals(Ljava/lang/Object;)	24	3.76	4.38	0.859	OK
-2	types.RRect	VALUE_DATA	inflate(F)	24	43.62	44.66	0.977	OK
-2	types.Rect	VALUE_DATA	contains(FF)	24	2.73	2.77	0.988	OK
-2	skija.impl.ReferenceUtil	STATIC_UTIL	reachabilityFence(Ljava/lang/Object;)	24	1.00	0.99	1.008	OK
-2	skija.impl.ResourceFinder	SUBTYPE_PURE	findResource(Ljava/lang/String;)	24	101462.50	12733.33	7.968	ENVIRONMENT
-2	skija.shaper.JavaTextBidiRunIterator	SUBTYPE_PURE	next()	11	71.31	70.95	1.005	OK
-2	skija.shaper.TrivialBidiRunIterator	SUBTYPE_PURE	next()	12	5.49	5.35	1.024	OK
-2	skija.shaper.TrivialFontRunIterator	SUBTYPE_PURE	next()	12	280.21	288.54	0.971	OK
-2	skija.shaper.TrivialLanguageRunIterator	SUBTYPE_PURE	next()	12	5.37	5.32	1.009	OK
-2	skija.shaper.TrivialScriptRunIterator	SUBTYPE_PURE	next()	5	5.92	6.41	0.924	OK
-2	skija.FontWeight	INTERFACE	BLACK()	1	3.86	3.81	1.013	OK
-2	skija.FontWidth	INTERFACE	CONDENSED()	1	2.17	2.17	1.000	OK
-2	skija.FourByteTag	INTERFACE	fromString(Ljava/lang/String;)	17	14.09	14.06	1.002	OK
-2	skija.FramebufferFormat	INTERFACE	GR_GL_ALPHA()	1	4.69	4.76	0.985	OK
-2	skija.SamplingMode	INTERFACE	_pack()	12	9.34	9.80	0.953	OK
-2	skija.EncoderJPEG	NATIVE_STATIC_FACADE	<init>()	1	3.66	3.61	1.014	OK
-2	skija.EncoderPNG	NATIVE_STATIC_FACADE	<init>()	1	3.25	3.30	0.985	OK
-2	skija.EncoderWEBP	NATIVE_STATIC_FACADE	<init>()	1	4.30	4.20	1.023	OK
-2	skija.impl.Cleanable	IMPL_INFRA	register(Ljava/lang/Object;Ljava/lang/Runnable;)	0	NaN	NaN	NaN	DIVERGENT
-2	skija.impl.Library	IMPL_INFRA	readResource(Ljava/net/URL;)	24	6525.00	6658.85	0.980	OK_EXCEPTION_PATH
-2	skija.impl.Native	IMPL_INFRA	getPtr(Lskija/impl/Native;)	24	1.14	1.11	1.029	OK
-2	skija.impl.Stats	IMPL_INFRA	onAllocated(Ljava/lang/String;)	24	1.17	1.19	0.986	OK
+# M3GraphicsAtomsPerf v2 (-Xmx512m -XX:-TieredCompilation -Xbatch -XX:+UnlockExperimentalVMOptions -XX:CompileCommand=blackhole,M3GraphicsAtomsPerfSupport::consume), M3 = jdk.m3.graphics classes on the class path, oracle = Skija jars in their own class loader
+# per row: warm-up (>= 12 calls and 40 ms per side), calibration on the compiled loops to 2 ms rounds, 11 rounds alternating the first side; ns/op = median round; no re-measuring
+# ratio = ns/op M3 / ns/op oracle (above 1: M3 slower); spread = IQR of the 11 round ratios / their median; code SAME = same bytecode on both sides (member and module callees, modulo the rename)
+run	atom	pattern	member	code	calls	ns_per_op_m3	ns_per_op_oracle	ratio	spread	verdict
+1	skija.AnimationDisposalMode	ENUM	valueOf(Ljava/lang/String;)	SAME	4	2.20	2.20	1.003	0.020	OK
+1	skija.BackendState	ENUM	valueOf(Ljava/lang/String;)	SAME	13	3.24	3.23	1.003	0.008	OK
+1	skija.BlendMode	ENUM	valueOf(Ljava/lang/String;)	SAME	29	3.01	3.04	0.990	0.022	OK
+1	skija.ClipMode	ENUM	valueOf(Ljava/lang/String;)	SAME	2	2.98	2.98	1.000	0.023	OK
+1	skija.ColorAlphaType	ENUM	valueOf(Ljava/lang/String;)	SAME	4	2.95	2.96	0.998	0.029	OK
+1	skija.ColorChannel	ENUM	valueOf(Ljava/lang/String;)	SAME	4	3.09	3.08	1.000	0.041	OK
+1	skija.ColorChannelFlag	ENUM	valueOf(Ljava/lang/String;)	SAME	9	3.29	3.29	1.001	0.007	OK
+1	skija.ColorSpaceNamedPrimaries	ENUM	valueOf(Ljava/lang/String;)	SAME	11	3.03	3.02	1.004	0.180	OK
+1	skija.ColorSpaceNamedTransferFn	ENUM	valueOf(Ljava/lang/String;)	SAME	13	3.09	3.17	0.974	0.011	OK
+1	skija.ColorType	ENUM	computeOffset(IIJ)	DIFF	64	2.88	4.02	0.717	0.073	OK
+1	skija.ContentChangeMode	ENUM	valueOf(Ljava/lang/String;)	SAME	2	2.99	3.00	0.999	0.018	OK
+1	skija.EncodeJPEGAlphaMode	ENUM	valueOf(Ljava/lang/String;)	SAME	2	3.23	3.22	1.002	0.069	OK
+1	skija.EncodeJPEGDownsampleMode	ENUM	valueOf(Ljava/lang/String;)	SAME	3	3.33	3.36	0.991	0.018	OK
+1	skija.EncodePNGFilterFlag	ENUM	valueOf(Ljava/lang/String;)	SAME	7	3.28	3.28	1.001	0.035	OK
+1	skija.EncodeWEBPCompressionMode	ENUM	valueOf(Ljava/lang/String;)	SAME	2	2.84	2.84	1.000	0.021	OK
+1	skija.EncodedImageFormat	ENUM	valueOf(Ljava/lang/String;)	SAME	14	2.97	2.94	1.011	0.030	OK
+1	skija.EncodedOrigin	ENUM	toMatrix(II)	DIFF	32	5.53	5.58	0.990	0.028	OK
+1	skija.FilterBlurMode	ENUM	valueOf(Ljava/lang/String;)	SAME	4	6.87	6.46	1.064	0.164	OK
+1	skija.FilterMode	ENUM	valueOf(Ljava/lang/String;)	SAME	2	8.47	8.33	1.017	0.021	OK
+1	skija.FilterTileMode	ENUM	valueOf(Ljava/lang/String;)	SAME	4	7.64	7.64	1.000	0.113	OK
+1	skija.FontEdging	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.72	7.78	0.993	0.016	OK
+1	skija.FontHinting	ENUM	valueOf(Ljava/lang/String;)	SAME	4	7.62	7.63	0.999	0.171	OK
+1	skija.FontSlant	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.97	7.96	1.000	0.003	OK
+1	skija.InversionMode	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.22	7.95	0.908	0.015	OK
+1	skija.MipmapMode	ENUM	valueOf(Ljava/lang/String;)	SAME	3	8.56	8.76	0.978	0.210	OK
+1	skija.PaintMode	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.39	6.29	1.174	0.370	OK
+1	skija.PaintStrokeCap	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.97	7.58	1.051	0.098	OK
+1	skija.PaintStrokeJoin	ENUM	valueOf(Ljava/lang/String;)	SAME	3	3.53	3.54	0.997	0.031	OK
+1	skija.PathDirection	ENUM	valueOf(Ljava/lang/String;)	SAME	2	10.20	8.97	1.138	0.429	OK
+1	skija.PathEffect1DStyle	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.72	7.72	1.000	0.014	OK
+1	skija.PathEllipseArc	ENUM	valueOf(Ljava/lang/String;)	SAME	2	4.38	6.84	0.641	0.361	OK
+1	skija.PathFillMode	ENUM	inverse()	DIFF	4	2.97	3.10	0.957	0.010	OK
+1	skija.PathOp	ENUM	valueOf(Ljava/lang/String;)	SAME	5	7.62	7.61	1.001	0.005	OK
+1	skija.PathSegmentType	ENUM	valueOf(Ljava/lang/String;)	SAME	4	3.48	3.68	0.947	0.148	OK
+1	skija.PathVerb	ENUM	valueOf(Ljava/lang/String;)	SAME	7	7.66	7.68	0.998	0.008	OK
+1	skija.PixelGeometry	ENUM	valueOf(Ljava/lang/String;)	SAME	5	7.62	7.62	0.999	0.006	OK
+1	skija.RegionOp	ENUM	valueOf(Ljava/lang/String;)	SAME	6	7.52	7.52	1.000	0.009	OK
+1	skija.RuntimeEffectChildType	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.96	7.95	1.002	0.221	OK
+1	skija.RuntimeEffectUniformFlag	ENUM	valueOf(Ljava/lang/String;)	SAME	5	7.80	7.80	1.000	0.005	OK
+1	skija.RuntimeEffectUniformType	ENUM	valueOf(Ljava/lang/String;)	SAME	11	7.64	7.63	1.002	0.002	OK
+1	skija.SaveLayerRecFlag	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.68	7.68	1.000	0.074	OK
+1	skija.ShadowUtilsFlag	ENUM	_collect([Lskija/ShadowUtilsFlag;)	SAME	24	3.57	3.56	1.003	0.009	OK
+1	skija.SurfaceOrigin	ENUM	valueOf(Ljava/lang/String;)	SAME	2	7.51	9.33	0.804	0.019	OK
+1	skija.VulkanAllocFlag	ENUM	toBitmask([Lskija/VulkanAllocFlag;)	SAME	16	3.91	3.99	0.980	0.005	OK
+1	skija.impl.Architecture	ENUM	valueOf(Ljava/lang/String;)	SAME	23	7.87	7.55	1.043	0.186	OK
+1	skija.impl.OperatingSystem	ENUM	valueOf(Ljava/lang/String;)	SAME	4	7.62	7.62	1.000	0.001	OK
+1	skija.paragraph.Affinity	ENUM	valueOf(Ljava/lang/String;)	SAME	2	7.50	7.52	0.997	0.052	OK
+1	skija.paragraph.Alignment	ENUM	valueOf(Ljava/lang/String;)	SAME	6	7.90	7.90	0.999	0.071	OK
+1	skija.paragraph.BaselineMode	ENUM	valueOf(Ljava/lang/String;)	SAME	2	7.80	7.95	0.982	0.035	OK
+1	skija.paragraph.DecorationLineStyle	ENUM	valueOf(Ljava/lang/String;)	SAME	5	7.87	7.87	1.000	0.004	OK
+1	skija.paragraph.Direction	ENUM	valueOf(Ljava/lang/String;)	SAME	2	8.31	8.22	1.010	0.019	OK
+1	skija.paragraph.HeightMode	ENUM	valueOf(Ljava/lang/String;)	SAME	4	6.53	4.91	1.329	0.101	OK
+1	skija.paragraph.PlaceholderAlignment	ENUM	valueOf(Ljava/lang/String;)	SAME	6	7.80	7.77	1.003	0.023	OK
+1	skija.paragraph.RectHeightMode	ENUM	valueOf(Ljava/lang/String;)	SAME	6	2.88	2.87	1.004	0.080	OK
+1	skija.paragraph.RectWidthMode	ENUM	valueOf(Ljava/lang/String;)	SAME	2	7.98	7.98	1.000	0.031	OK
+1	skija.paragraph.TextStyleAttribute	ENUM	valueOf(Ljava/lang/String;)	SAME	9	7.81	8.50	0.919	0.261	OK
+1	skija.skottie.AnimationBuilderFlag	ENUM	_collect([Lskija/skottie/AnimationBuilderFlag;)	SAME	8	3.83	3.81	1.004	0.012	OK
+1	skija.skottie.LogLevel	ENUM	valueOf(Ljava/lang/String;)	SAME	2	8.00	7.97	1.004	0.037	OK
+1	skija.skottie.RenderFlag	ENUM	valueOf(Ljava/lang/String;)	SAME	2	7.98	8.10	0.985	0.044	OK
+1	skija.svg.SVGLengthType	ENUM	valueOf(Ljava/lang/String;)	SAME	3	8.40	8.34	1.006	0.212	OK
+1	skija.svg.SVGLengthUnit	ENUM	valueOf(Ljava/lang/String;)	SAME	11	7.74	7.77	0.996	0.108	OK
+1	skija.svg.SVGPreserveAspectRatioAlign	ENUM	valueOf(I)	DIFF	35	2.41	2.44	0.989	0.066	OK
+1	skija.svg.SVGPreserveAspectRatioScale	ENUM	valueOf(Ljava/lang/String;)	SAME	2	8.48	8.45	1.003	0.009	OK
+1	skija.svg.SVGTag	ENUM	valueOf(Ljava/lang/String;)	SAME	45	5.49	4.07	1.350	0.522	OK
+1	skija.AnimationFrameInfo	VALUE_DATA	setAlphaType(Lskija/ColorAlphaType;)	SAME	24	2.84	2.85	0.994	0.110	OK
+1	skija.Color	VALUE_DATA	convertRGBToHSV(III)	DIFF	24	6.98	6.87	1.015	0.144	OK
+1	skija.Color4f	VALUE_DATA	makeLerp(Lskija/Color4f;F)	SAME	24	96.67	96.77	0.999	0.017	OK
+1	skija.ColorInfo	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.29	2.92	1.128	0.239	OK
+1	skija.ColorMatrix	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	5.26	5.65	0.931	0.131	OK
+1	skija.CubicResampler	VALUE_DATA	_pack()	SAME	12	4.69	4.52	1.039	0.030	OK
+1	skija.EncodeJPEGOptions	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.08	3.01	1.021	0.018	OK
+1	skija.EncodePNGOptions	VALUE_DATA	withFlags([Lskija/EncodePNGFilterFlag;)	SAME	24	5.52	5.17	1.068	0.105	OK
+1	skija.EncodeWEBPOptions	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.57	3.53	1.010	0.047	OK
+1	skija.FilterMipmap	VALUE_DATA	_pack()	SAME	12	3.69	3.67	1.008	0.083	OK
+1	skija.FontArguments	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	63.95	65.12	0.982	0.079	OK
+1	skija.FontExtents	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	5.77	7.21	0.800	0.157	OK
+1	skija.FontFamilyName	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	6.59	6.54	1.007	0.055	OK
+1	skija.FontFeature	VALUE_DATA	parse(Ljava/lang/String;)	SAME	5	14888.75	17121.25	0.870	0.919	OK
+1	skija.FontMetrics	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	22.43	22.51	0.997	0.018	OK
+1	skija.FontPaletteOverride	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.01	3.01	1.000	0.016	OK
+1	skija.FontStyle	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	0.94	0.88	1.068	0.492	OK
+1	skija.FontVariation	VALUE_DATA	parse(Ljava/lang/String;)	SAME	1	625.68	641.21	0.976	0.078	OK
+1	skija.FontVariationAxis	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	78.08	78.20	0.998	0.023	OK
+1	skija.GLTextureInfo	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.10	3.12	0.993	0.021	OK
+1	skija.GradientStyle	VALUE_DATA	_getFlags()	SAME	12	0.92	0.93	0.988	0.033	OK
+1	skija.ImageInfo	VALUE_DATA	computeByteSize(J)	DIFF	24	6.28	6.68	0.939	0.045	OK
+1	skija.ImageWithFilterResult	VALUE_DATA	<init>(Lskija/Image;Ltypes/IRect;Ltypes/IPoint;)	SAME	24	711.98	714.13	0.997	0.148	OK_EXCEPTION_PATH
+1	skija.Matrix33	VALUE_DATA	makeConcat(Lskija/Matrix33;)	DIFF	24	15.61	16.18	0.965	0.207	OK
+1	skija.Matrix44	VALUE_DATA	asMatrix33()	DIFF	3	10.67	11.06	0.965	0.056	OK
+1	skija.PathSegment	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	8.53	8.64	0.988	0.014	OK
+1	skija.RSXform	VALUE_DATA	makeFromRadians(FFFFFF)	SAME	24	70.91	70.87	1.001	0.016	OK
+1	skija.RuntimeEffectChildInfo	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	4.37	4.30	1.016	0.004	OK
+1	skija.RuntimeEffectOptions	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.48	3.27	1.063	0.275	OK
+1	skija.RuntimeEffectUniformInfo	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	5.01	5.03	0.996	0.008	OK
+1	skija.SamplingModeAnisotropic	VALUE_DATA	_pack()	SAME	12	3.49	3.52	0.991	0.092	OK
+1	skija.SaveLayerRec	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	4.33	4.46	0.973	0.067	OK
+1	skija.SurfaceProps	VALUE_DATA	_getFlags()	SAME	12	0.84	1.20	0.700	0.178	OK
+1	skija.TransferFunction	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	13.20	12.79	1.032	0.017	OK
+1	skija.VkImageInfo	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	6.69	6.74	0.992	0.008	OK
+1	skija.VulkanAlloc	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	1.51	1.56	0.971	0.090	OK
+1	skija.impl.Log	VALUE_DATA	_log(ILjava/lang/String;Ljava/lang/String;)	DIFF	24	25522.92	32075.00	0.796	1.012	OK
+1	skija.paragraph.DecorationStyle	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	4.76	4.50	1.058	0.018	OK
+1	skija.paragraph.LineMetrics	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	14.73	9.82	1.500	0.070	OK
+1	skija.paragraph.PlaceholderStyle	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	8.27	8.14	1.015	0.014	OK
+1	skija.paragraph.PositionWithAffinity	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	2.70	2.49	1.086	0.076	OK
+1	skija.paragraph.Shadow	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	7.27	5.86	1.239	0.050	OK
+1	skija.paragraph.TextBox	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	12.88	12.37	1.042	0.067	OK
+1	skija.shaper.BidiRun	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	2.31	2.31	1.003	0.004	OK
+1	skija.shaper.FontRun	VALUE_DATA	_getFontPtr()	SAME	12	1.43	1.43	1.000	0.008	OK
+1	skija.shaper.LanguageRun	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.67	3.70	0.994	0.011	OK
+1	skija.shaper.RunInfo	VALUE_DATA	setFontPtr(J)	SAME	24	2.03	1.58	1.282	0.116	OK
+1	skija.shaper.ScriptRun	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	2.38	2.31	1.030	0.019	OK
+1	skija.shaper.ShapingOptions	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	70.21	70.57	0.995	0.030	OK
+1	skija.svg.SVGLength	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.20	3.27	0.977	0.131	OK
+1	skija.svg.SVGLengthContext	VALUE_DATA	resolve(Lskija/svg/SVGLength;Lskija/svg/SVGLengthType;)	DIFF	18	5.70	5.64	1.010	0.018	OK
+1	skija.svg.SVGPreserveAspectRatio	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	2.82	2.77	1.016	0.019	OK
+1	types.IPoint	VALUE_DATA	offset(II)	SAME	24	3.90	3.91	0.998	0.016	OK
+1	types.IRange	VALUE_DATA	_makeFromLong(J)	SAME	24	3.46	3.39	1.020	0.055	OK
+1	types.IRect	VALUE_DATA	contains(II)	SAME	24	3.12	2.84	1.101	0.007	OK
+1	types.Point	VALUE_DATA	offset(FF)	SAME	24	11.40	11.46	0.994	0.033	OK
+1	types.Point3	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	7.04	5.51	1.278	0.059	OK
+1	types.RRect	VALUE_DATA	inflate(F)	DIFF	24	92.87	92.90	1.000	0.009	OK
+1	types.Rect	VALUE_DATA	contains(FF)	SAME	24	2.69	2.80	0.963	0.095	OK
+1	skija.impl.ReferenceUtil	STATIC_UTIL	reachabilityFence(Ljava/lang/Object;)	SAME	24	0.73	0.74	0.999	0.001	OK
+1	skija.impl.ResourceFinder	SUBTYPE_PURE	findResource(Ljava/lang/String;)	DIFF	24	68304.17	10045.83	6.799	0.492	ENVIRONMENT
+1	skija.shaper.JavaTextBidiRunIterator	SUBTYPE_PURE	next()	SAME	11	10.74	10.80	0.995	0.021	OK
+1	skija.shaper.TrivialBidiRunIterator	SUBTYPE_PURE	next()	SAME	12	3.45	3.41	1.011	0.045	OK
+1	skija.shaper.TrivialFontRunIterator	SUBTYPE_PURE	next()	SAME	12	3.80	3.74	1.014	0.222	OK
+1	skija.shaper.TrivialLanguageRunIterator	SUBTYPE_PURE	next()	SAME	12	3.51	3.53	0.992	0.107	OK
+1	skija.shaper.TrivialScriptRunIterator	SUBTYPE_PURE	next()	DIFF	5	7.84	7.91	0.991	0.032	OK
+1	skija.FontWeight	INTERFACE	BLACK()	SAME	1	3.26	3.30	0.990	0.021	OK
+1	skija.FontWidth	INTERFACE	CONDENSED()	SAME	1	0.80	1.37	0.583	0.018	OK
+1	skija.FourByteTag	INTERFACE	fromString(Ljava/lang/String;)	DIFF	17	11.13	11.10	1.003	0.009	OK
+1	skija.FramebufferFormat	INTERFACE	GR_GL_ALPHA()	SAME	1	3.25	3.17	1.025	0.131	OK
+1	skija.IHasImageInfo	INTERFACE	getAlphaType()	SAME	12	9031.25	9097.92	0.993	0.033	OK
+1	skija.SamplingMode	INTERFACE	_pack()	SAME	12	8.68	8.69	0.999	0.036	OK
+1	skija.EncoderJPEG	NATIVE_STATIC_FACADE	<init>()	SAME	1	3.22	3.17	1.015	0.061	OK
+1	skija.EncoderPNG	NATIVE_STATIC_FACADE	<init>()	SAME	1	3.25	3.22	1.011	0.171	OK
+1	skija.EncoderWEBP	NATIVE_STATIC_FACADE	<init>()	SAME	1	3.15	3.14	1.003	0.236	OK
+1	skija.impl.Cleanable	IMPL_INFRA	register(Ljava/lang/Object;Ljava/lang/Runnable;)	SAME	21	42.44	42.63	0.996	0.029	OK
+1	skija.impl.Library	IMPL_INFRA	readResource(Ljava/net/URL;)	SAME	21	61938.10	63042.86	0.982	0.036	OK
+1	skija.impl.Native	IMPL_INFRA	getPtr(Lskija/impl/Native;)	SAME	24	1.01	1.00	1.002	0.047	OK
+1	skija.impl.Stats	IMPL_INFRA	onAllocated(Ljava/lang/String;)	SAME	24	1.20	1.19	1.004	0.050	OK
+2	skija.AnimationDisposalMode	ENUM	valueOf(Ljava/lang/String;)	SAME	4	2.10	2.10	1.000	0.026	OK
+2	skija.BackendState	ENUM	valueOf(Ljava/lang/String;)	SAME	13	3.44	3.36	1.024	0.008	OK
+2	skija.BlendMode	ENUM	valueOf(Ljava/lang/String;)	SAME	29	3.82	3.41	1.121	0.032	OK
+2	skija.ClipMode	ENUM	valueOf(Ljava/lang/String;)	SAME	2	3.32	3.33	0.995	0.072	OK
+2	skija.ColorAlphaType	ENUM	valueOf(Ljava/lang/String;)	SAME	4	3.74	3.63	1.029	0.127	OK
+2	skija.ColorChannel	ENUM	valueOf(Ljava/lang/String;)	SAME	4	3.47	3.64	0.954	0.077	OK
+2	skija.ColorChannelFlag	ENUM	valueOf(Ljava/lang/String;)	SAME	9	3.62	3.58	1.010	0.036	OK
+2	skija.ColorSpaceNamedPrimaries	ENUM	valueOf(Ljava/lang/String;)	SAME	11	3.43	3.43	1.002	0.031	OK
+2	skija.ColorSpaceNamedTransferFn	ENUM	valueOf(Ljava/lang/String;)	SAME	13	2.98	2.99	0.996	0.009	OK
+2	skija.ColorType	ENUM	computeOffset(IIJ)	DIFF	64	4.03	4.31	0.935	0.028	OK
+2	skija.ContentChangeMode	ENUM	valueOf(Ljava/lang/String;)	SAME	2	3.06	3.05	1.004	0.016	OK
+2	skija.EncodeJPEGAlphaMode	ENUM	valueOf(Ljava/lang/String;)	SAME	2	3.34	3.32	1.003	0.020	OK
+2	skija.EncodeJPEGDownsampleMode	ENUM	valueOf(Ljava/lang/String;)	SAME	3	3.64	3.64	1.001	0.040	OK
+2	skija.EncodePNGFilterFlag	ENUM	valueOf(Ljava/lang/String;)	SAME	7	3.61	3.63	0.996	0.032	OK
+2	skija.EncodeWEBPCompressionMode	ENUM	valueOf(Ljava/lang/String;)	SAME	2	3.57	3.45	1.035	0.087	OK
+2	skija.EncodedImageFormat	ENUM	valueOf(Ljava/lang/String;)	SAME	14	3.02	3.42	0.883	0.011	OK
+2	skija.EncodedOrigin	ENUM	toMatrix(II)	DIFF	32	10.03	10.04	0.999	0.032	OK
+2	skija.FilterBlurMode	ENUM	valueOf(Ljava/lang/String;)	SAME	4	7.81	7.79	1.003	0.462	OK
+2	skija.FilterMode	ENUM	valueOf(Ljava/lang/String;)	SAME	2	8.38	8.40	0.998	0.019	OK
+2	skija.FilterTileMode	ENUM	valueOf(Ljava/lang/String;)	SAME	4	7.79	7.74	1.006	0.018	OK
+2	skija.FontEdging	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.43	8.15	0.911	0.110	OK
+2	skija.FontHinting	ENUM	valueOf(Ljava/lang/String;)	SAME	4	8.13	8.12	1.001	0.024	OK
+2	skija.FontSlant	ENUM	valueOf(Ljava/lang/String;)	SAME	3	8.15	8.20	0.993	0.035	OK
+2	skija.InversionMode	ENUM	valueOf(Ljava/lang/String;)	SAME	3	8.16	7.58	1.077	0.301	OK
+2	skija.MipmapMode	ENUM	valueOf(Ljava/lang/String;)	SAME	3	3.23	3.61	0.895	0.040	OK
+2	skija.PaintMode	ENUM	valueOf(Ljava/lang/String;)	SAME	3	3.45	3.44	1.005	0.010	OK
+2	skija.PaintStrokeCap	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.72	7.72	1.000	0.015	OK
+2	skija.PaintStrokeJoin	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.74	7.72	1.002	0.005	OK
+2	skija.PathDirection	ENUM	valueOf(Ljava/lang/String;)	SAME	2	8.33	7.88	1.058	0.084	OK
+2	skija.PathEffect1DStyle	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.98	7.96	1.002	0.017	OK
+2	skija.PathEllipseArc	ENUM	valueOf(Ljava/lang/String;)	SAME	2	7.44	7.52	0.989	0.148	OK
+2	skija.PathFillMode	ENUM	inverse()	DIFF	4	2.83	2.97	0.954	0.003	OK
+2	skija.PathOp	ENUM	valueOf(Ljava/lang/String;)	SAME	5	7.20	7.44	0.967	0.033	OK
+2	skija.PathSegmentType	ENUM	valueOf(Ljava/lang/String;)	SAME	4	7.88	7.50	1.049	0.084	OK
+2	skija.PathVerb	ENUM	valueOf(Ljava/lang/String;)	SAME	7	7.24	7.26	0.997	0.024	OK
+2	skija.PixelGeometry	ENUM	valueOf(Ljava/lang/String;)	SAME	5	7.10	7.12	0.998	0.025	OK
+2	skija.RegionOp	ENUM	valueOf(Ljava/lang/String;)	SAME	6	7.51	7.49	1.002	0.024	OK
+2	skija.RuntimeEffectChildType	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.71	7.48	1.032	0.135	OK
+2	skija.RuntimeEffectUniformFlag	ENUM	valueOf(Ljava/lang/String;)	SAME	5	7.18	6.92	1.038	0.124	OK
+2	skija.RuntimeEffectUniformType	ENUM	valueOf(Ljava/lang/String;)	SAME	11	7.87	7.71	1.020	0.006	OK
+2	skija.SaveLayerRecFlag	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.45	7.44	1.000	0.057	OK
+2	skija.ShadowUtilsFlag	ENUM	_collect([Lskija/ShadowUtilsFlag;)	SAME	24	3.55	3.55	1.000	0.025	OK
+2	skija.SurfaceOrigin	ENUM	valueOf(Ljava/lang/String;)	SAME	2	7.50	7.50	1.000	0.024	OK
+2	skija.VulkanAllocFlag	ENUM	toBitmask([Lskija/VulkanAllocFlag;)	SAME	16	3.87	3.87	1.000	0.233	OK
+2	skija.impl.Architecture	ENUM	valueOf(Ljava/lang/String;)	SAME	23	4.03	6.66	0.604	0.232	OK
+2	skija.impl.OperatingSystem	ENUM	valueOf(Ljava/lang/String;)	SAME	4	7.62	7.61	1.001	0.197	OK
+2	skija.paragraph.Affinity	ENUM	valueOf(Ljava/lang/String;)	SAME	2	7.80	7.98	0.977	0.005	OK
+2	skija.paragraph.Alignment	ENUM	valueOf(Ljava/lang/String;)	SAME	6	7.66	7.68	0.998	0.005	OK
+2	skija.paragraph.BaselineMode	ENUM	valueOf(Ljava/lang/String;)	SAME	2	7.14	7.09	1.007	0.027	OK
+2	skija.paragraph.DecorationLineStyle	ENUM	valueOf(Ljava/lang/String;)	SAME	5	7.86	7.96	0.987	0.129	OK
+2	skija.paragraph.Direction	ENUM	valueOf(Ljava/lang/String;)	SAME	2	8.52	8.44	1.009	0.010	OK
+2	skija.paragraph.HeightMode	ENUM	valueOf(Ljava/lang/String;)	SAME	4	6.44	6.44	1.000	0.014	OK
+2	skija.paragraph.PlaceholderAlignment	ENUM	valueOf(Ljava/lang/String;)	SAME	6	8.00	8.01	0.999	0.032	OK
+2	skija.paragraph.RectHeightMode	ENUM	valueOf(Ljava/lang/String;)	SAME	6	7.43	7.38	1.006	0.011	OK
+2	skija.paragraph.RectWidthMode	ENUM	valueOf(Ljava/lang/String;)	SAME	2	5.79	3.88	1.491	0.058	OK
+2	skija.paragraph.TextStyleAttribute	ENUM	valueOf(Ljava/lang/String;)	SAME	9	7.87	7.88	0.999	0.002	OK
+2	skija.skottie.AnimationBuilderFlag	ENUM	_collect([Lskija/skottie/AnimationBuilderFlag;)	SAME	8	3.56	3.57	0.998	0.005	OK
+2	skija.skottie.LogLevel	ENUM	valueOf(Ljava/lang/String;)	SAME	2	7.50	7.50	1.000	0.024	OK
+2	skija.skottie.RenderFlag	ENUM	valueOf(Ljava/lang/String;)	SAME	2	7.73	7.74	0.999	0.115	OK
+2	skija.svg.SVGLengthType	ENUM	valueOf(Ljava/lang/String;)	SAME	3	7.61	7.46	1.020	0.118	OK
+2	skija.svg.SVGLengthUnit	ENUM	valueOf(Ljava/lang/String;)	SAME	11	6.89	7.22	0.955	0.039	OK
+2	skija.svg.SVGPreserveAspectRatioAlign	ENUM	valueOf(I)	DIFF	35	2.25	2.25	0.997	0.056	OK
+2	skija.svg.SVGPreserveAspectRatioScale	ENUM	valueOf(Ljava/lang/String;)	SAME	2	7.24	7.23	1.002	0.014	OK
+2	skija.svg.SVGTag	ENUM	valueOf(Ljava/lang/String;)	SAME	45	7.53	7.53	1.000	0.237	OK
+2	skija.AnimationFrameInfo	VALUE_DATA	setAlphaType(Lskija/ColorAlphaType;)	SAME	24	3.60	3.32	1.087	0.065	OK
+2	skija.Color	VALUE_DATA	convertRGBToHSV(III)	DIFF	24	6.85	6.83	1.003	0.020	OK
+2	skija.Color4f	VALUE_DATA	makeLerp(Lskija/Color4f;F)	SAME	24	25.14	27.60	0.911	0.075	OK
+2	skija.ColorInfo	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.05	2.88	1.057	0.022	OK
+2	skija.ColorMatrix	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	5.86	5.83	1.006	0.010	OK
+2	skija.CubicResampler	VALUE_DATA	_pack()	SAME	12	4.43	4.45	0.997	0.036	OK
+2	skija.EncodeJPEGOptions	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.06	3.03	1.010	0.113	OK
+2	skija.EncodePNGOptions	VALUE_DATA	withFlags([Lskija/EncodePNGFilterFlag;)	SAME	24	5.71	5.26	1.086	0.142	OK
+2	skija.EncodeWEBPOptions	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.43	3.11	1.103	0.067	OK
+2	skija.FilterMipmap	VALUE_DATA	_pack()	SAME	12	3.49	3.53	0.989	0.494	OK
+2	skija.FontArguments	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	64.63	64.73	0.998	0.015	OK
+2	skija.FontExtents	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	7.13	6.19	1.152	0.063	OK
+2	skija.FontFamilyName	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	6.52	7.19	0.907	0.113	OK
+2	skija.FontFeature	VALUE_DATA	parse(Ljava/lang/String;)	SAME	5	15380.00	20197.50	0.761	0.784	OK
+2	skija.FontMetrics	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	22.54	22.39	1.007	0.024	OK
+2	skija.FontPaletteOverride	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	2.68	2.87	0.933	0.018	OK
+2	skija.FontStyle	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	2.31	2.11	1.097	0.183	OK
+2	skija.FontVariation	VALUE_DATA	parse(Ljava/lang/String;)	SAME	1	560.84	543.26	1.032	0.109	OK
+2	skija.FontVariationAxis	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	79.70	78.91	1.010	0.081	OK
+2	skija.GLTextureInfo	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.14	2.99	1.053	0.019	OK
+2	skija.GradientStyle	VALUE_DATA	_getFlags()	SAME	12	1.40	1.40	1.003	0.034	OK
+2	skija.ImageInfo	VALUE_DATA	computeByteSize(J)	DIFF	24	3.38	3.19	1.062	0.043	OK
+2	skija.ImageWithFilterResult	VALUE_DATA	<init>(Lskija/Image;Ltypes/IRect;Ltypes/IPoint;)	SAME	24	418.75	420.31	0.996	0.054	OK_EXCEPTION_PATH
+2	skija.Matrix33	VALUE_DATA	makeConcat(Lskija/Matrix33;)	DIFF	24	16.62	16.17	1.028	0.123	OK
+2	skija.Matrix44	VALUE_DATA	asMatrix33()	DIFF	3	11.44	11.51	0.994	0.117	OK
+2	skija.PathSegment	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	11.14	11.09	1.005	0.021	OK
+2	skija.RSXform	VALUE_DATA	makeFromRadians(FFFFFF)	SAME	24	78.31	77.10	1.016	0.178	OK
+2	skija.RuntimeEffectChildInfo	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	4.61	4.50	1.024	0.021	OK
+2	skija.RuntimeEffectOptions	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	4.34	4.23	1.025	0.029	OK
+2	skija.RuntimeEffectUniformInfo	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	5.10	5.08	1.005	0.067	OK
+2	skija.SamplingModeAnisotropic	VALUE_DATA	_pack()	SAME	12	3.51	3.42	1.025	0.099	OK
+2	skija.SaveLayerRec	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	4.50	4.54	0.992	0.129	OK
+2	skija.SurfaceProps	VALUE_DATA	_getFlags()	SAME	12	0.90	1.56	0.575	0.060	OK
+2	skija.TransferFunction	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	14.41	14.04	1.026	0.018	OK
+2	skija.VkImageInfo	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	6.86	7.17	0.957	0.026	OK
+2	skija.VulkanAlloc	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.47	3.29	1.055	0.050	OK
+2	skija.impl.Log	VALUE_DATA	_log(ILjava/lang/String;Ljava/lang/String;)	DIFF	24	24729.17	36283.33	0.682	1.424	OK
+2	skija.paragraph.DecorationStyle	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	4.65	4.35	1.067	0.001	OK
+2	skija.paragraph.LineMetrics	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	14.50	14.36	1.009	0.100	OK
+2	skija.paragraph.PlaceholderStyle	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.77	3.66	1.030	0.147	OK
+2	skija.paragraph.PositionWithAffinity	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	2.76	2.57	1.074	0.007	OK
+2	skija.paragraph.Shadow	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	6.94	5.71	1.215	0.020	OK
+2	skija.paragraph.TextBox	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	13.28	12.83	1.035	0.100	OK
+2	skija.shaper.BidiRun	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	2.31	2.31	1.003	0.339	OK
+2	skija.shaper.FontRun	VALUE_DATA	_getFontPtr()	SAME	12	1.38	1.38	1.000	0.000	OK
+2	skija.shaper.LanguageRun	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.28	3.17	1.035	0.147	OK
+2	skija.shaper.RunInfo	VALUE_DATA	setFontPtr(J)	SAME	24	2.05	1.63	1.253	0.090	OK
+2	skija.shaper.ScriptRun	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	1.02	0.93	1.096	0.280	OK
+2	skija.shaper.ShapingOptions	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	72.09	67.04	1.075	0.126	OK
+2	skija.svg.SVGLength	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	3.30	3.28	1.007	0.064	OK
+2	skija.svg.SVGLengthContext	VALUE_DATA	resolve(Lskija/svg/SVGLength;Lskija/svg/SVGLengthType;)	DIFF	18	5.73	5.75	0.996	0.058	OK
+2	skija.svg.SVGPreserveAspectRatio	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	2.46	2.56	0.962	0.291	OK
+2	types.IPoint	VALUE_DATA	offset(II)	SAME	24	3.84	3.87	0.992	0.066	OK
+2	types.IRange	VALUE_DATA	_makeFromLong(J)	SAME	24	3.21	3.27	0.982	0.050	OK
+2	types.IRect	VALUE_DATA	contains(II)	SAME	24	3.42	2.65	1.292	0.004	OK
+2	types.Point	VALUE_DATA	offset(FF)	SAME	24	4.21	4.22	0.999	0.261	OK
+2	types.Point3	VALUE_DATA	equals(Ljava/lang/Object;)	SAME	24	6.46	6.78	0.953	0.033	OK
+2	types.RRect	VALUE_DATA	inflate(F)	DIFF	24	12.07	12.24	0.986	0.055	OK
+2	types.Rect	VALUE_DATA	contains(FF)	SAME	24	1.41	1.56	0.902	0.021	OK
+2	skija.impl.ReferenceUtil	STATIC_UTIL	reachabilityFence(Ljava/lang/Object;)	SAME	24	0.73	0.73	1.000	0.017	OK
+2	skija.impl.ResourceFinder	SUBTYPE_PURE	findResource(Ljava/lang/String;)	DIFF	24	65383.33	9043.75	7.230	0.296	ENVIRONMENT
+2	skija.shaper.JavaTextBidiRunIterator	SUBTYPE_PURE	next()	SAME	11	11.67	11.49	1.016	0.089	OK
+2	skija.shaper.TrivialBidiRunIterator	SUBTYPE_PURE	next()	SAME	12	3.44	3.42	1.006	0.070	OK
+2	skija.shaper.TrivialFontRunIterator	SUBTYPE_PURE	next()	SAME	12	2.43	3.07	0.790	0.065	OK
+2	skija.shaper.TrivialLanguageRunIterator	SUBTYPE_PURE	next()	SAME	12	3.30	3.42	0.966	0.032	OK
+2	skija.shaper.TrivialScriptRunIterator	SUBTYPE_PURE	next()	DIFF	5	7.14	7.15	0.998	0.013	OK
+2	skija.FontWeight	INTERFACE	BLACK()	SAME	1	3.10	3.03	1.021	0.048	OK
+2	skija.FontWidth	INTERFACE	CONDENSED()	SAME	1	1.83	1.83	1.000	0.002	OK
+2	skija.FourByteTag	INTERFACE	fromString(Ljava/lang/String;)	DIFF	17	6.52	7.96	0.819	0.168	OK
+2	skija.FramebufferFormat	INTERFACE	GR_GL_ALPHA()	SAME	1	1.35	1.38	0.979	0.027	OK
+2	skija.IHasImageInfo	INTERFACE	getAlphaType()	SAME	12	8403.13	8409.38	0.999	0.039	OK
+2	skija.SamplingMode	INTERFACE	_pack()	SAME	12	8.64	8.48	1.018	0.063	OK
+2	skija.EncoderJPEG	NATIVE_STATIC_FACADE	<init>()	SAME	1	3.04	3.08	0.989	0.078	OK
+2	skija.EncoderPNG	NATIVE_STATIC_FACADE	<init>()	SAME	1	3.02	3.01	1.003	0.389	OK
+2	skija.EncoderWEBP	NATIVE_STATIC_FACADE	<init>()	SAME	1	3.01	3.00	1.004	0.035	OK
+2	skija.impl.Cleanable	IMPL_INFRA	register(Ljava/lang/Object;Ljava/lang/Runnable;)	SAME	21	40.23	40.83	0.985	0.140	OK
+2	skija.impl.Library	IMPL_INFRA	readResource(Ljava/net/URL;)	SAME	21	58157.14	58009.52	1.003	0.067	OK
+2	skija.impl.Native	IMPL_INFRA	getPtr(Lskija/impl/Native;)	SAME	24	0.82	0.82	1.003	0.082	OK
+2	skija.impl.Stats	IMPL_INFRA	onAllocated(Ljava/lang/String;)	SAME	24	1.17	1.16	1.005	0.107	OK

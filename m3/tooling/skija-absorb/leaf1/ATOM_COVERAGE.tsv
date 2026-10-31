@@ -1,0 +1,21 @@
+atom	kind	member	cases	oracle_returned	gap	detail
+skija.ColorInfo	CTOR	<init>(Lskija/ColorType;Lskija/ColorAlphaType;Lskija/ColorSpace;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/ColorSpace;
+skija.ColorInfo	METHOD	withColorSpace(Lskija/ColorSpace;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/ColorSpace;
+skija.ImageInfo	CTOR	<init>(IILskija/ColorType;Lskija/ColorAlphaType;Lskija/ColorSpace;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/ColorSpace;
+skija.ImageInfo	STATIC_METHOD	makeN32(IILskija/ColorAlphaType;Lskija/ColorSpace;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/ColorSpace;
+skija.ImageInfo	STATIC_METHOD	makeN32Premul(IILskija/ColorSpace;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/ColorSpace;
+skija.ImageInfo	METHOD	withColorSpace(Lskija/ColorSpace;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/ColorSpace;
+skija.ImageWithFilterResult	CTOR	<init>(Lskija/Image;Ltypes/IRect;Ltypes/IPoint;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/Image;
+skija.SaveLayerRec	CTOR	<init>(Ltypes/Rect;Lskija/Paint;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/Paint;
+skija.SaveLayerRec	CTOR	<init>(Ltypes/Rect;Lskija/Paint;Lskija/ImageFilter;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/Paint;,Lskija/ImageFilter;
+skija.SaveLayerRec	CTOR	<init>(Ltypes/Rect;Lskija/Paint;Lskija/ImageFilter;Lskija/ColorSpace;[Lskija/SaveLayerRecFlag;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/Paint;,Lskija/ImageFilter;,Lskija/ColorSpace;
+skija.SaveLayerRec	CTOR	<init>(Ltypes/Rect;Lskija/Paint;Lskija/ImageFilter;Lskija/FilterTileMode;Lskija/ColorSpace;[Lskija/SaveLayerRecFlag;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/Paint;,Lskija/ImageFilter;,Lskija/ColorSpace;
+skija.SaveLayerRec	CTOR	<init>(Ltypes/Rect;Lskija/Paint;Lskija/ImageFilter;[Lskija/SaveLayerRecFlag;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/Paint;,Lskija/ImageFilter;
+skija.SaveLayerRec	CTOR	<init>(Ltypes/Rect;Lskija/Paint;[Lskija/SaveLayerRecFlag;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/Paint;
+skija.impl.Native	STATIC_METHOD	getPtr(Lskija/impl/Native;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/impl/Native;
+skija.shaper.FontRun	CTOR	<init>(ILskija/Font;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/Font;
+skija.shaper.ShapingOptions	CTOR	<init>(Lskija/FontMgr;[Lskija/FontFeature;ZZZ)	24	-	NULL_ONLY	always null (no value without natives): Lskija/FontMgr;
+skija.shaper.ShapingOptions	METHOD	withFontMgr(Lskija/FontMgr;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/FontMgr;
+skija.shaper.TrivialFontRunIterator	CTOR	<init>(Ljava/lang/String;Lskija/Font;)	24	-	NULL_ONLY	always null (no value without natives): Lskija/Font;
+skija.ImageWithFilterResult	CTOR	<init>(Lskija/Image;Ltypes/IRect;Ltypes/IPoint;)	24	0	THROWS_ONLY	every oracle case threw java.lang.NullPointerException
+skija.svg.SVGLengthContext	METHOD	resolveRect(Lskija/svg/SVGLength;Lskija/svg/SVGLength;Lskija/svg/SVGLength;Lskija/svg/SVGLength;)	24	0	THROWS_ONLY	every oracle case threw java.lang.IllegalArgumentException
