@@ -1,0 +1,15 @@
+path	git_blob	status	pr	note
+.github/workflows/m3-jdk-naming.yml	c5a89a0adcc4467aadf932b5b68faae27b679dfe	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/NAMING_RULES.tsv	ade1b1853aef0bb8e50a01573a212f5b4e0f8514	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/NAMING_STANDARD.md	9530da996b98e46e34e50b5608421dab11bb502c	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/README.md	45f81717719e511970a17836722482a3127b3e38	modified	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/RECIPE_MEMORY.tsv	58f9661f9043c1b475e7694e264c745616cd1800	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/conformance/pom.xml	2f6e81f4ddd863b26e0c0840fb355600b06ecfd1	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/conformance/src/main/java/jdk/m3/tooling/naming/BlobReader.java	10f7c54ad6cfa4f09c4ebd717e543272c00fe61a	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/conformance/src/main/java/jdk/m3/tooling/naming/NamingRules.java	1de0328e374b6c6b5fa2da5e1f9b912754ff8628	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/conformance/src/main/java/jdk/m3/tooling/naming/NamingScan.java	712cee02f3e5d5163a0ee3f651989e081a01006b	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/conformance/src/test/java/jdk/m3/tooling/naming/JdkNamingConformanceTest.java	8962588eadb3b8d2d71aaf96b4f5f54104329cb6	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/jdk_naming.py	f4a6cb6f61925e3051cb4178f26fd0e4195fe2d8	modified	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/reseal.py	8a3a0124f7cff2389fa361706e4b7ec7f46130b5	added	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/test_jdk_naming.py	29d7723dc494f9a82fa388e006c4c5428bde48e2	modified	2214	PR version, not live; the git blob id is its content address
+m3/tooling/jdk-naming/test_reseal.py	527a84b404047e34e54e3dfd8f1f49c2ade02467	added	2214	PR version, not live; the git blob id is its content address
