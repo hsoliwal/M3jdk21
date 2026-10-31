@@ -1,0 +1,4 @@
+id	date	template	pattern	correction	cause	evidence
+R001	2026-10-31	sorts.java.tmpl	CONTEXT_STEP	step handle arity 1 -> 0	M3SortContext.step() takes no parameters; template copied the compare() arity	junit M3SortContextAtomsTest.step: missing atom step/1
+R002	2026-10-31	strings.java.tmpl	LANE_COPY_FLAT	expected tail underscores derived from the copied length instead of a fixed "__"	oracle arithmetic: dst has len+1 units, the copy writes len-3 at offset 1, leaving 3 untouched	junit M3StringBuilderLaneAtomsTest.copyFlat expected _..__ but was _...___
+R003	2026-10-31	atom_tests.py	(all)	strip trailing whitespace from rendered lines	an empty ${extra_check} parameter left an indentation-only line	git diff --cached --check: M3IndexedViewAtomsTest.java:367 trailing whitespace

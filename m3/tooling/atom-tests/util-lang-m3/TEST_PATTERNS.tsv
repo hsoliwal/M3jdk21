@@ -1,0 +1,170 @@
+owner	atom	pattern	test	oracle
+java.util.M3ComparisonSorts	M3ComparisonSorts	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::M3ComparisonSorts	reflection: one private constructor, no state
+java.util.M3ComparisonSorts	sort	SORT_DISPATCH	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::sort	java.util.Arrays.sort differential (stable object order or primitive key order); IllegalArgumentException for numeric-only algorithms
+java.util.M3ComparisonSorts	quick	SORT_RANGE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::quick	java.util.Arrays.sort differential (stable object order or primitive key order) on [lo,hi), untouched outside
+java.util.M3ComparisonSorts	intro	SORT_RANGE_DEPTH	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::intro	java.util.Arrays.sort differential (stable object order or primitive key order) for depth 0, 1, depthLimit
+java.util.M3ComparisonSorts	dualPivotQuick	SORT_RANGE_DEPTH	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::dualPivotQuick	java.util.Arrays.sort differential (stable object order or primitive key order) for depth 0, 1, depthLimit
+java.util.M3ComparisonSorts	depthLimit	DEPTH_LIMIT	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::depthLimit	BigInteger.bitLength floor log2
+java.util.M3ComparisonSorts	medianPivot	MEDIAN_OF_THREE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::medianPivot	Arrays.sort of the three sampled keys
+java.util.M3ComparisonSorts	partitionThreeWay	PARTITION_THREE_WAY	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::partitionThreeWay	per-index signum against the pivot + permutation
+java.util.M3ComparisonSorts	mergeSort	SORT_BUFFERED_RANGE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::mergeSort	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	bottomUpMerge	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::bottomUpMerge	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	naturalMerge	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::naturalMerge	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	ascendingRun	RUN_ASCENDING	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::ascendingRun	linear run scan + reversal check
+java.util.M3ComparisonSorts	mergeAdjacent	MERGE_RUNS_BUFFERED	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::mergeAdjacent	Arrays.sort stable order of the two runs
+java.util.M3ComparisonSorts	inPlaceMergeSort	SORT_RANGE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::inPlaceMergeSort	java.util.Arrays.sort differential (stable object order or primitive key order) on [lo,hi), untouched outside
+java.util.M3ComparisonSorts	rotateMerge	MERGE_RUNS_IN_PLACE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::rotateMerge	Arrays.sort stable order of the two runs
+java.util.M3ComparisonSorts	lowerBound	BOUND	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::lowerBound	linear scan bound
+java.util.M3ComparisonSorts	upperBound	BOUND	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::upperBound	linear scan bound
+java.util.M3ComparisonSorts	heap	SORT_RANGE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::heap	java.util.Arrays.sort differential (stable object order or primitive key order) on [lo,hi), untouched outside
+java.util.M3ComparisonSorts	siftMaximum	HEAP_SIFT_MAX	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::siftMaximum	max-heap property + permutation
+java.util.M3ComparisonSorts	shell	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::shell	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	insertion	SORT_RANGE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::insertion	java.util.Arrays.sort differential (stable object order or primitive key order) on [lo,hi), untouched outside
+java.util.M3ComparisonSorts	binaryInsertion	SORT_RANGE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::binaryInsertion	java.util.Arrays.sort differential (stable object order or primitive key order) on [lo,hi), untouched outside
+java.util.M3ComparisonSorts	selection	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::selection	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	doubleSelection	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::doubleSelection	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	bubble	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::bubble	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	cocktail	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::cocktail	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	comb	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::comb	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	gnome	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::gnome	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	oddEven	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::oddEven	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	cycle	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::cycle	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	cycleRank	CYCLE_RANK	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::cycleRank	IntStream count of smaller keys
+java.util.M3ComparisonSorts	skipCycleEquals	CYCLE_SKIP_EQUALS	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::skipCycleEquals	fixture + IllegalArgumentException message
+java.util.M3ComparisonSorts	pancake	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::pancake	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	bingo	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::bingo	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	tree	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::tree	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	rebalance	AVL_REBALANCE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::rebalance	in-order sequence + balanced height for LL/LR/RR/RL
+java.util.M3ComparisonSorts	rotateTreeLeft	AVL_ROTATE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::rotateTreeLeft	in-order sequence + recomputed heights
+java.util.M3ComparisonSorts	rotateTreeRight	AVL_ROTATE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::rotateTreeRight	in-order sequence + recomputed heights
+java.util.M3ComparisonSorts	childHeight	AVL_CHILD_HEIGHT	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::childHeight	fixture link table
+java.util.M3ComparisonSorts	updateHeight	AVL_UPDATE_HEIGHT	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::updateHeight	1 + max(child heights)
+java.util.M3ComparisonSorts	tournament	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::tournament	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	winnerAt	TOURNAMENT_WIRE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::winnerAt	fixture wire table + removed bitset
+java.util.M3ComparisonSorts	tournamentWinner	TOURNAMENT_WINNER	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::tournamentWinner	fixture truth table
+java.util.M3ComparisonSorts	patience	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::patience	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	siftPile	PILE_SIFT	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::siftPile	min-heap property + permutation
+java.util.M3ComparisonSorts	comparePiles	PILE_COMPARE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::comparePiles	fixture truth table
+java.util.M3ComparisonSorts	strand	SORT_FULL	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::strand	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	mergeStrand	MERGE_STRAND	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::mergeStrand	Arrays.sort stable order
+java.util.M3ComparisonSorts	bitonicSort	BITONIC_SORT	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::bitonicSort	java.util.Arrays.sort differential (stable object order or primitive key order) in both directions
+java.util.M3ComparisonSorts	bitonicMerge	BITONIC_MERGE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::bitonicMerge	java.util.Arrays.sort differential (stable object order or primitive key order) in both directions
+java.util.M3ComparisonSorts	oddEvenMergeSort	ODD_EVEN_MERGE_SORT	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::oddEvenMergeSort	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	oddEvenNetworkMerge	ODD_EVEN_NETWORK_MERGE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::oddEvenNetworkMerge	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3ComparisonSorts	compareExchange	COMPARE_EXCHANGE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::compareExchange	fixture
+java.util.M3ComparisonSorts	rotate	PERMUTE_ROTATE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::rotate	java.util.Collections.rotate(subList)
+java.util.M3ComparisonSorts	reverse	PERMUTE_REVERSE	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::reverse	java.util.Collections.reverse(subList)
+java.util.M3ComparisonSorts	swap	PERMUTE_SWAP	test/jdk/java/util/M3Atoms/M3ComparisonSortsAtomsTest.java::swap	java.util.Collections.swap
+java.util.M3TimSort	M3TimSort	TIM_CONSTRUCTOR	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::M3TimSort	OpenJDK TimSort tmp and run-stack sizing table
+java.util.M3TimSort	sort	TIM_SORT	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::sort	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3TimSort	binarySort	TIM_BINARY_SORT	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::binarySort	java.util.Arrays.sort differential (stable object order or primitive key order)
+java.util.M3TimSort	countRunAndMakeAscending	RUN_ASCENDING	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::countRunAndMakeAscending	linear run scan + reversal check
+java.util.M3TimSort	reverseRange	PERMUTE_REVERSE	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::reverseRange	java.util.Collections.reverse(subList)
+java.util.M3TimSort	minRunLength	TIM_MIN_RUN	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::minRunLength	listsort.txt top-bits formula
+java.util.M3TimSort	pushRun	TIM_PUSH_RUN	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::pushRun	run-stack fields
+java.util.M3TimSort	mergeCollapse	TIM_MERGE_COLLAPSE	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::mergeCollapse	run-stack invariants + stable runs
+java.util.M3TimSort	mergeForceCollapse	TIM_FORCE_COLLAPSE	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::mergeForceCollapse	Arrays.sort stable order
+java.util.M3TimSort	mergeAt	TIM_MERGE_AT	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::mergeAt	Arrays.sort stable order of the merged runs
+java.util.M3TimSort	gallopLeft	GALLOP	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::gallopLeft	linear scan bound for every hint
+java.util.M3TimSort	gallopRight	GALLOP	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::gallopRight	linear scan bound for every hint
+java.util.M3TimSort	mergeLo	TIM_MERGE_LO_HI	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::mergeLo	Arrays.sort stable order
+java.util.M3TimSort	mergeHi	TIM_MERGE_LO_HI	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::mergeHi	Arrays.sort stable order
+java.util.M3TimSort	ensureCapacity	TIM_ENSURE_CAPACITY	test/jdk/java/util/M3Atoms/M3TimSortAtomsTest.java::ensureCapacity	capacity bounds + identity of tmp
+java.util.M3DistributionSorts	M3DistributionSorts	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::M3DistributionSorts	reflection: one private constructor, no state
+java.util.M3DistributionSorts	sort	DIST_DISPATCH	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::sort	Arrays.sort(Integer[], comparingLong) stable order
+java.util.M3DistributionSorts	minimum	DIST_EXTREMUM	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::minimum	LongStream.min/max + step count
+java.util.M3DistributionSorts	maximum	DIST_EXTREMUM	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::maximum	LongStream.min/max + step count
+java.util.M3DistributionSorts	histogramSpan	DIST_HISTOGRAM_SPAN	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::histogramSpan	Sorts.MAX_HISTOGRAM_SPAN bounds
+java.util.M3DistributionSorts	counting	DIST_KERNEL	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::counting	Arrays.sort(Integer[], comparingLong) stable order
+java.util.M3DistributionSorts	pigeonhole	DIST_KERNEL	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::pigeonhole	Arrays.sort(Integer[], comparingLong) stable order
+java.util.M3DistributionSorts	bucket	DIST_KERNEL	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::bucket	Arrays.sort(Integer[], comparingLong) stable order
+java.util.M3DistributionSorts	digit	DIST_DIGIT	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::digit	BigInteger sign-biased digit + top-digit monotonicity
+java.util.M3DistributionSorts	boundaries	DIST_BOUNDARIES	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::boundaries	running prefix sum
+java.util.M3DistributionSorts	histogram	DIST_HISTOGRAM	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::histogram	BigInteger sign-biased digit counts
+java.util.M3DistributionSorts	lsd	DIST_KERNEL	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::lsd	Arrays.sort(Integer[], comparingLong) stable order
+java.util.M3DistributionSorts	msd	DIST_KERNEL_RANGE_SHIFT	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::msd	Arrays.sort(Integer[], comparingLong) on [from,to)
+java.util.M3DistributionSorts	americanFlag	DIST_KERNEL_RANGE_SHIFT	test/jdk/java/util/M3Atoms/M3DistributionSortsAtomsTest.java::americanFlag	Arrays.sort(Integer[], comparingLong) on [from,to)
+java.util.M3SortContext	M3SortContext	CONTEXT_CONSTRUCTOR	test/jdk/java/util/M3Atoms/M3SortContextAtomsTest.java::M3SortContext	recording ProgressMonitor protocol
+java.util.M3SortContext	compare	CONTEXT_COMPARE	test/jdk/java/util/M3Atoms/M3SortContextAtomsTest.java::compare	comparator value + recording ProgressMonitor
+java.util.M3SortContext	step	CONTEXT_STEP	test/jdk/java/util/M3Atoms/M3SortContextAtomsTest.java::step	recording ProgressMonitor batches + cancellation
+java.util.M3SortContext	finish	CONTEXT_FINISH	test/jdk/java/util/M3Atoms/M3SortContextAtomsTest.java::finish	recording ProgressMonitor partial batch
+java.util.M3SortContext	flush	CONTEXT_FLUSH	test/jdk/java/util/M3Atoms/M3SortContextAtomsTest.java::flush	recording ProgressMonitor report-then-cancel order
+java.lang.M3StringCodePointPrecompute	M3StringCodePointPrecompute	PRIVATE_UTILITY_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::M3StringCodePointPrecompute	reflection: one private constructor, no state
+java.lang.M3StringCodePointPrecompute	prepare	CP_PREPARE	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::prepare	java.lang.String.codePointCount pair count; cache identity; empty/over-budget refusal
+java.lang.M3StringCodePointPrecompute	maximumRetainedPrimitiveBytes	CP_MAX_RETAINED	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::maximumRetainedPrimitiveBytes	SLOTS * MAX_SOURCE_UNITS / 2 * Integer.BYTES
+java.lang.M3StringCodePointPrecompute	slot	CP_SLOT	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::slot	range [0, SLOTS), determinism and the cache slot used by prepare
+java.lang.M3StringCodePointPrecompute	lowerBound	CP_LOWER_BOUND	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::lowerBound	linear count of smaller values
+java.lang.M3StringCodePointPrecompute	Geometry	CP_GEOMETRY_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::Geometry	java.lang.String.codePointCount over every range
+java.lang.M3StringCodePointPrecompute	codePointCount	CP_CODE_POINT_COUNT	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::codePointCount	java.lang.String.codePointCount values and exceptions
+java.lang.M3StringCodePointPrecompute	offsetByCodePoints	CP_OFFSET_BY_CODE_POINTS	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::offsetByCodePoints	java.lang.String.offsetByCodePoints values and exceptions
+java.lang.M3StringCodePointPrecompute	pairedLowCount	CP_PAIRED_LOW_COUNT	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::pairedLowCount	String length minus code point count
+java.lang.M3StringCodePointPrecompute	retainedPrimitiveBytes	CP_RETAINED_BYTES	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::retainedPrimitiveBytes	pairedLowCount * Integer.BYTES
+java.lang.M3StringCodePointPrecompute	Entry	CP_ENTRY_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3StringCodePointPrecomputeAtomsTest.java::Entry	field round trip; weak owner reference
+java.lang.M3StringLeafCursor	M3StringLeafCursor	LEAF_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3StringLeafCursorAtomsTest.java::constructorOne	concatenated leaf ranges reproduce the source text
+java.lang.M3StringLeafCursor	M3StringLeafCursor	LEAF_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3StringLeafCursorAtomsTest.java::constructorTwo	concatenated leaf ranges reproduce the source text
+java.lang.M3StringLeafCursor	M3StringLeafCursor	LEAF_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3StringLeafCursorAtomsTest.java::constructorOwnerRange	concatenated leaf ranges reproduce the source text
+java.lang.M3StringLeafCursor	next	LEAF_NEXT	test/jdk/java/lang/M3Atoms/M3StringLeafCursorAtomsTest.java::next	leaf count of the tuple DAG; coalescing of adjacent ranges of one owner
+java.lang.M3StringLeafCursor	owner	LEAF_ACCESSOR	test/jdk/java/lang/M3Atoms/M3StringLeafCursorAtomsTest.java::owner	leaf range text equals the next unread slice of the source
+java.lang.M3StringLeafCursor	start	LEAF_ACCESSOR	test/jdk/java/lang/M3Atoms/M3StringLeafCursorAtomsTest.java::start	leaf range text equals the next unread slice of the source
+java.lang.M3StringLeafCursor	length	LEAF_ACCESSOR	test/jdk/java/lang/M3Atoms/M3StringLeafCursorAtomsTest.java::length	leaf range text equals the next unread slice of the source
+java.lang.M3StringLeafCursor	push	LEAF_PUSH	test/jdk/java/lang/M3Atoms/M3StringLeafCursorAtomsTest.java::push	pending stack size, doubling growth and range check
+java.lang.M3StringLeafCursor	pullRaw	LEAF_PULL_RAW	test/jdk/java/lang/M3Atoms/M3StringLeafCursorAtomsTest.java::pullRaw	tuple split order: left part before right part
+java.lang.M3StringBuilderLane	M3StringBuilderLane	LANE_CONSTRUCTOR	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::M3StringBuilderLane	empty lane state
+java.lang.M3StringBuilderLane	push	LANE_PUSH	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::push	java.lang.StringBuilder logical content; OOME past Integer.MAX_VALUE
+java.lang.M3StringBuilderLane	grow	LANE_GROW	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::grow	ArraysSupport.newLength doubling with content preserved
+java.lang.M3StringBuilderLane	charAt	LANE_CHAR_AT	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::charAt	java.lang.StringBuilder.charAt at every logical index
+java.lang.M3StringBuilderLane	flatCharAt	LANE_FLAT_CHAR_AT	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::flatCharAt	ISO-8859-1 / native UTF-16 decoding
+java.lang.M3StringBuilderLane	reserve	LANE_RESERVE	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::reserve	StringBuilder.ensureCapacity(flatMinimum + units); OOME on overflow
+java.lang.M3StringBuilderLane	reserveLogical	LANE_RESERVE_LOGICAL	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::reserveLogical	java.lang.StringBuilder.ensureCapacity then capacity()
+java.lang.M3StringBuilderLane	logicalCoder	LANE_LOGICAL_CODER	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::logicalCoder	String coder of the pieces
+java.lang.M3StringBuilderLane	copyOut	LANE_COPY_OUT	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::copyOut	java.lang.StringBuilder logical content, prefix preserved
+java.lang.M3StringBuilderLane	copyFlat	LANE_COPY_FLAT	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::copyFlat	same-coder copy and Latin-1 inflation
+java.lang.M3StringBuilderLane	detached	LANE_DETACHED	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::detached	exact-length copy of the StringBuilder content
+java.lang.M3StringBuilderLane	compose	LANE_COMPOSE	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::compose	admitted flat chunk text; cache identity; null while admission is off
+java.lang.M3StringBuilderLane	pieceCount	LANE_PIECE_COUNT	test/jdk/java/lang/M3Atoms/M3StringBuilderLaneAtomsTest.java::pieceCount	number of push calls, empty pieces included
+jdk.internal.m3.M3IndexedView	M3IndexedView	VIEW_CONSTRUCTOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::constructorValueView	ArrayList model filtered and stably sorted
+jdk.internal.m3.M3IndexedView	M3IndexedView	VIEW_CONSTRUCTOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::constructorStateView	ArrayList model filtered and stably sorted
+jdk.internal.m3.M3IndexedView	size	VIEW_SIZE	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::view_size	ArrayList model size, live after append
+jdk.internal.m3.M3IndexedView	get	VIEW_GET	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::view_get	ArrayList.get values and IndexOutOfBoundsException
+jdk.internal.m3.M3IndexedView	subList	VIEW_SUBLIST	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::view_subList	ArrayList.subList contents and exception classes
+jdk.internal.m3.M3IndexedView	spliterator	VIEW_SPLITERATOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::view_spliterator	ArrayList.spliterator late binding and split shape
+jdk.internal.m3.M3IndexedView	iterator	VIEW_ITERATOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::view_iterator	ArrayList iteration order and ConcurrentModificationException
+jdk.internal.m3.M3IndexedView	listIterator	VIEW_LIST_ITERATOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::view_listIterator	ArrayList.listIterator protocol trace
+jdk.internal.m3.M3IndexedView	iteratorFor	VIEW_ITERATOR_FOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::iteratorFor	ArrayList.subList(origin, origin + count).listIterator(index)
+jdk.internal.m3.M3IndexedView	range	VIEW_RANGE	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range	ArrayList.subList contents; exact range messages
+jdk.internal.m3.M3IndexedView	currentVersion	VIEW_CURRENT_VERSION	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::currentVersion	M3IndexedArray.version / stateVersion epochs
+jdk.internal.m3.M3IndexedView	viewValue	VIEW_VIEW_VALUE	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::viewValue	slot values of the refreshed directory; stale epoch rejected
+jdk.internal.m3.M3IndexedView	checkVersion	VIEW_CHECK_VERSION	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::checkVersion	ConcurrentModificationException message
+jdk.internal.m3.M3IndexedView	refresh	VIEW_REFRESH	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::refresh	lazy directory identity and AbstractList.modCount
+jdk.internal.m3.M3IndexedView	IndexRange	RANGE_CONSTRUCTOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range_constructor	nested ArrayList.subList windows
+jdk.internal.m3.M3IndexedView	size	RANGE_SIZE	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range_size	ArrayList.subList size and ConcurrentModificationException
+jdk.internal.m3.M3IndexedView	get	RANGE_GET	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range_get	ArrayList.subList get values and exception classes
+jdk.internal.m3.M3IndexedView	set	RANGE_READ_ONLY_INDEXED	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range_set	index check first, then UnsupportedOperationException
+jdk.internal.m3.M3IndexedView	add	RANGE_READ_ONLY_INDEXED	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range_add	index check first, then UnsupportedOperationException
+jdk.internal.m3.M3IndexedView	remove	RANGE_READ_ONLY_INDEXED	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range_remove	index check first, then UnsupportedOperationException
+jdk.internal.m3.M3IndexedView	addAll	RANGE_ADD_ALL	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range_addAll	empty batch is a no-op; non-empty batch is read-only
+jdk.internal.m3.M3IndexedView	addAll	RANGE_ADD_ALL	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range_addAllAt	empty batch is a no-op; non-empty batch is read-only
+jdk.internal.m3.M3IndexedView	removeRange	RANGE_REMOVE_RANGE	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range_removeRange	AbstractList.clear contract on a read-only window
+jdk.internal.m3.M3IndexedView	checkAddIndex	RANGE_CHECK_ADD_INDEX	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range_checkAddIndex	exact IndexOutOfBoundsException message
+jdk.internal.m3.M3IndexedView	iterator	RANGE_ITERATOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range_iterator	ArrayList.subList iteration order
+jdk.internal.m3.M3IndexedView	listIterator	RANGE_LIST_ITERATOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range_listIterator	ArrayList.subList listIterator protocol trace
+jdk.internal.m3.M3IndexedView	subList	RANGE_SUBLIST	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range_subList	nested ArrayList.subList and exception classes
+jdk.internal.m3.M3IndexedView	spliterator	RANGE_SPLITERATOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::range_spliterator	ArrayList.subList spliterator split shape; bound epoch
+jdk.internal.m3.M3IndexedView	IndexSpliterator	SPLIT_CONSTRUCTOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::spliterator_lateConstructor	late (end = -1) versus bound (end = origin + count) cursors
+jdk.internal.m3.M3IndexedView	IndexSpliterator	SPLIT_CONSTRUCTOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::spliterator_boundConstructor	late (end = -1) versus bound (end = origin + count) cursors
+jdk.internal.m3.M3IndexedView	bind	SPLIT_BIND	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::spliterator_bind	late binding to the current directory, then epoch check
+jdk.internal.m3.M3IndexedView	trySplit	SPLIT_TRY_SPLIT	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::spliterator_trySplit	ArrayList spliterator split shape
+jdk.internal.m3.M3IndexedView	tryAdvance	SPLIT_TRY_ADVANCE	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::spliterator_tryAdvance	ArrayList spliterator order; NPE; fail-fast after the action
+jdk.internal.m3.M3IndexedView	estimateSize	SPLIT_ESTIMATE_SIZE	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::spliterator_estimateSize	remaining count of the ArrayList spliterator
+jdk.internal.m3.M3IndexedView	characteristics	SPLIT_CHARACTERISTICS	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::spliterator_characteristics	ArrayList spliterator characteristics plus SORTED for sorted views
+jdk.internal.m3.M3IndexedView	getComparator	SPLIT_GET_COMPARATOR	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::spliterator_getComparator	Spliterator.getComparator contract (ISE when unsorted)
+jdk.internal.m3.M3IndexedView	check	ITER_CHECK	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::iterator_check	epoch selection: value epoch for plain, state epoch for state-aware views
+jdk.internal.m3.M3IndexedView	hasNext	ITER_WALK	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::iterator_hasNext	ArrayList.listIterator protocol trace (focused method)
+jdk.internal.m3.M3IndexedView	next	ITER_WALK	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::iterator_next	ArrayList.listIterator protocol trace (focused method)
+jdk.internal.m3.M3IndexedView	hasPrevious	ITER_WALK	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::iterator_hasPrevious	ArrayList.listIterator protocol trace (focused method)
+jdk.internal.m3.M3IndexedView	previous	ITER_WALK	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::iterator_previous	ArrayList.listIterator protocol trace (focused method)
+jdk.internal.m3.M3IndexedView	nextIndex	ITER_WALK	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::iterator_nextIndex	ArrayList.listIterator protocol trace (focused method)
+jdk.internal.m3.M3IndexedView	previousIndex	ITER_WALK	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::iterator_previousIndex	ArrayList.listIterator protocol trace (focused method)
+jdk.internal.m3.M3IndexedView	remove	ITER_READ_ONLY	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::iterator_remove	Collections.unmodifiableList iterator exception class
+jdk.internal.m3.M3IndexedView	set	ITER_READ_ONLY	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::iterator_set	Collections.unmodifiableList iterator exception class
+jdk.internal.m3.M3IndexedView	add	ITER_READ_ONLY	test/jdk/jdk/internal/m3/atoms/M3IndexedViewAtomsTest.java::iterator_add	Collections.unmodifiableList iterator exception class
