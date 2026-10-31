@@ -16,6 +16,14 @@
       <artifactId>rewrite-core</artifactId>
       <version>8.17.1</version>
     </dependency>
+    <!-- Compile-only annotation metadata required by the pinned OpenRewrite API.
+         Preserve -Xlint:all,-module -Werror; do not ship this in the runtime. -->
+    <dependency>
+      <groupId>org.jetbrains</groupId>
+      <artifactId>annotations</artifactId>
+      <version>24.1.0</version>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
