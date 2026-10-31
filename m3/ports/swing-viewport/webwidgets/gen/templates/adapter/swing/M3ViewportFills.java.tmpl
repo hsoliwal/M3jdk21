@@ -1,0 +1,116 @@
+package @WPKG@.adapter;
+
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTree;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.JTextComponent;
+import javax.swing.tree.DefaultMutableTreeNode;
+
+/** Item fills of the adapter tests (spec/ADAPTERS.tsv fill column): rows, lines, values, tabs, menu items, children. */
+public final class M3ViewportFills {
+	private M3ViewportFills() {
+	}
+
+	/** Fills a created component with items of the given kind. */
+	public static <C extends JComponent> C fill(C c, String kind) {
+		switch (kind) {
+		case "count": count(c); break;
+		case "strings": strings(c); break;
+		case "lines": ((JTextComponent) c).setText(lines()); break;
+		case "range": range(c); break;
+		case "tabs": tabs((JTabbedPane) c); break;
+		case "menu": menu((JPopupMenu) c); break;
+		case "scrolled": scrolled((JScrollPane) c); break;
+		case "children": children(c); break;
+		default: break;
+		}
+		return c;
+	}
+
+	private static void count(JComponent c) {
+		if (c instanceof JTable t) {
+			t.setModel(new DefaultTableModel(10_000, 3));
+		} else {
+			DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
+			for (int i = 0; i < 10_000; i++) {
+				root.add(new DefaultMutableTreeNode("node " + i));
+			}
+			((JTree) c).setModel(new javax.swing.tree.DefaultTreeModel(root));
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private static void strings(JComponent c) {
+		String[] items = new String[200];
+		java.util.Arrays.setAll(items, i -> "item " + i);
+		if (c instanceof JList<?> l) {
+			((JList<String>) l).setListData(items);
+		} else {
+			((JComboBox<String>) c).setModel(new DefaultComboBoxModel<>(items));
+		}
+	}
+
+	private static String lines() {
+		StringBuilder b = new StringBuilder();
+		for (int i = 0; i < 200; i++) {
+			b.append("line ").append(i).append('\n');
+		}
+		return b.toString();
+	}
+
+	private static void range(JComponent c) {
+		if (c instanceof JSlider s) {
+			s.setMaximum(1000);
+			s.setValue(500);
+		} else if (c instanceof JProgressBar p) {
+			p.setMaximum(1000);
+			p.setValue(500);
+		} else {
+			((JSpinner) c).setModel(new SpinnerNumberModel(500, 0, 1000, 1));
+		}
+	}
+
+	private static void tabs(JTabbedPane t) {
+		for (int i = 0; i < 30; i++) {
+			t.addTab("tab " + i, new JPanel());
+		}
+	}
+
+	private static void menu(JPopupMenu m) {
+		for (int i = 0; i < 12; i++) {
+			m.add(new JMenuItem("command " + i));
+		}
+	}
+
+	private static void scrolled(JScrollPane s) {
+		JPanel view = new JPanel();
+		view.setPreferredSize(new Dimension(340, 5000));
+		s.setViewportView(view);
+	}
+
+	private static void children(JComponent c) {
+		if (c instanceof JPanel p) {
+			p.setLayout(new GridLayout(0, 1));
+		}
+		for (int i = 0; i < 24; i++) {
+			c.add(new JLabel("child " + i));
+		}
+	}
+}

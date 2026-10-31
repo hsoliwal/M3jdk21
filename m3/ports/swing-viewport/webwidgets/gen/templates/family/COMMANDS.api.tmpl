@@ -1,0 +1,17 @@
+package @PKG@;
+
+/** API of the grouped command buttons (pattern M3P-COMMANDS-1). */
+public interface M3CommandsApi extends M3WebApi {
+	/** Replaces the commands: {@code ;}-separated {@code group~label[~L]} ({@code L} = large), or plain labels. */
+	void load(String sample);
+
+	/** Ribbon group captions, by group id. */
+	void setCaptions(String... names);
+
+	/** Kind of a command: PUSH, TOGGLE, SPLIT_KIND or DROPDOWN of {@link M3CommandsModel}. */
+	void setKind(int item, int kind);
+
+	boolean isMenuOpen();
+
+	void setMenuOpen(boolean open);
+}

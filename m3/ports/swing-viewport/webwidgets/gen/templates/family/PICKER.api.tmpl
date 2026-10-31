@@ -1,0 +1,27 @@
+package @PKG@;
+
+/** API of the field + pop-up pickers (pattern M3P-PICKER-1). */
+public interface M3PickerApi extends M3WebApi {
+	/** Replaces the content: cascade paths {@code a/b/c;...}, a date {@code yyyymmdd}, a range {@code a~b}, or minutes. */
+	void load(String sample);
+
+	/** Range start (epoch day or minute), {@code Integer.MIN_VALUE} when empty. */
+	int rangeStart();
+
+	int rangeEnd();
+
+	void setRange(int start, int end);
+
+	/** Keyboard cursor (epoch day or minute). */
+	int cursor();
+
+	boolean isOpen();
+
+	void setOpen(boolean open);
+
+	/** Picks a day or a minute slot; a range takes two picks. */
+	void pick(int value);
+
+	/** Formatted value (ISO date, range, HH:MM or cascade path). */
+	String valueText();
+}

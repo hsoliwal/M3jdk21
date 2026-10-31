@@ -1,0 +1,83 @@
+package @WPKG@.examples;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+import @PKG@.M3WebPixelProbe;
+import @WPKG@.*;
+
+/**
+ * On-screen pixel probe of one widget per family, Swing side (pattern M3P-CORE-1): the widgets are shown in
+ * a frame (hidden desktop under the UI lock), painted by the real Swing paint cycle, and the pixel that
+ * {@link M3WebPixelProbe} picks is read back from each component's retained body plane (back-buffer read).
+ * Prints one TSV row per widget; exits 0 only when every probe passes.
+ */
+public final class M3WebSwingProbeExample {
+	private M3WebSwingProbeExample() {
+	}
+
+	public static void main(String[] args) throws Exception {
+		M3WebComponent<?>[] widgets = {
+@PROBES@
+		};
+		java.util.Map<String, Integer> families = new java.util.LinkedHashMap<>();
+		int failed = 0;
+		System.out.println("concept	x	y	expected	plane	result");
+		for (int from = 0; from < widgets.length; from += 24) {
+			M3WebComponent<?>[] batch = java.util.Arrays.copyOfRange(widgets, from, Math.min(widgets.length, from + 24));
+			JFrame[] frame = new JFrame[1];
+			SwingUtilities.invokeAndWait(() -> frame[0] = show(batch));
+			Thread.sleep(1200);
+			int[] f = new int[1];
+			SwingUtilities.invokeAndWait(() -> f[0] = report(batch, families));
+			failed += f[0];
+			SwingUtilities.invokeAndWait(frame[0]::dispose);
+		}
+		families.forEach((fam, c) -> System.out.println("FAMILY	" + fam + "	" + (c == 2 ? "FAIL" : c == 1 ? "PASS" : "NO_PROBE")));
+		System.exit(failed == 0 ? 0 : 1);
+	}
+
+	private static M3WebComponent<?> probe(M3WebComponent<?> w, String sample, String family) {
+		w.putClientProperty("m3.family", family);
+		w.getModel().load(sample);
+		if (w.getModel() instanceof @PKG@.M3OverlayModel) {
+			((@PKG@.M3OverlayModel) w.getModel()).open();
+		}
+		return w;
+	}
+
+	private static JFrame show(M3WebComponent<?>[] widgets) {
+		JFrame f = new JFrame("M3 web widgets probe");
+		f.setLayout(null);
+		for (int i = 0; i < widgets.length; i++) {
+			widgets[i].setBounds(4 + (i % 6) * 236, 4 + (i / 6) * 156, 230, 150);
+			f.add(widgets[i]);
+		}
+		f.setSize(1430, 660);
+		f.setVisible(true);
+		return f;
+	}
+
+	private static int report(M3WebComponent<?>[] widgets, java.util.Map<String, Integer> families) {
+		int failed = 0;
+		for (M3WebComponent<?> w : widgets) {
+			int code = row(w);
+			failed += code == 2 ? 1 : 0;
+			families.merge(String.valueOf(w.getClientProperty("m3.family")), code, Math::max);
+		}
+		return failed;
+	}
+
+	private static int row(M3WebComponent<?> w) {
+		int[] p = M3WebPixelProbe.probe(w.getModel(), w.getWidth(), w.getHeight());
+		if (p.length != 4) {
+			System.out.println(w.getModel().concept() + "\t-\t-\t-\t-\tNO_PROBE");
+			return 0;
+		}
+		int actual = w.planePixel(p[0], p[1]);
+		boolean ok = M3WebPixelProbe.close(actual, p[2], p[3]);
+		System.out.println(w.getModel().concept() + "\t" + p[0] + "\t" + p[1] + "\t" + String.format("%06x", p[2]) + "\t"
+				+ String.format("%06x", actual) + "\t" + (ok ? "PASS" : "FAIL"));
+		return ok ? 1 : 2;
+	}
+}
